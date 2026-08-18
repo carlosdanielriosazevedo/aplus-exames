@@ -1,14 +1,10 @@
-import './globals.css'
+import './globals.css';
 
 export const metadata = {
-  title: 'A+ Exames — Matemática A',
-  description: 'Protótipo MVP para preparação adaptativa do Exame Nacional de Matemática A.'
-}
+  title: 'A+ Exames',
+  description: 'Preparação personalizada para o Exame Nacional de Matemática A'
+};
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="pt-PT">
-      <body>{children}</body>
-    </html>
-  )
+  return <html lang="pt"><body>{children}</body></html>;
 }
