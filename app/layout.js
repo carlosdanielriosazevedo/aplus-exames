@@ -1,3 +1,3 @@
 import './globals.css';
-export const metadata={title:'A+ Exames',description:'Motor adaptativo A+'};
+export const metadata={title:'A+ Exames',description:'Motor adaptativo A+ com banco de questões'};
 export default function RootLayout({children}){return <html lang="pt"><body>{children}</body></html>}
