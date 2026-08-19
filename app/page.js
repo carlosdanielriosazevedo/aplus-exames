@@ -1,235 +1,86 @@
 "use client";
 import {useMemo,useState} from "react";
 
-const MICRO = {
-  "PROB-07": {name:"Interpretar probabilidade condicionada", parent:"Probabilidades"},
-  "PROB-08": {name:"Calcular probabilidade condicionada", parent:"Probabilidades"},
-  "PROB-10": {name:"Distinguir independência de incompatibilidade", parent:"Probabilidades"},
-  "PROB-11": {name:"Verificar independência", parent:"Probabilidades"},
-  "PROB-15": {name:"Reconhecer quando a ordem não importa", parent:"Combinatória"},
-  "PROB-16": {name:"Calcular combinações", parent:"Combinatória"},
-  "PROB-17": {name:"Combinar contagem e probabilidade", parent:"Probabilidades"},
+const MC={
+ c:{name:"Probabilidade condicionada",domain:58,conf:43},
+ i:{name:"Independência",domain:64,conf:48},
+ k:{name:"Combinações",domain:68,conf:55}
 };
-
-const Q = {
-  P007:{
-    micro:"PROB-08", level:2,
-    text:"60% dos alunos estudam Matemática e 30% estudam Matemática e Física. Sabendo que um aluno estuda Matemática, qual é a probabilidade de também estudar Física?",
-    opts:["0,18","0,30","0,50","0,90"], answer:2,
-    explain:"P(F|M)=P(F∩M)/P(M)=0,30/0,60=0,50.",
-    wrongHypothesis:"Pode estar a falhar a interpretação da condição."
-  },
-  P018:{
-    micro:"PROB-07", level:1,
-    text:"Numa turma de 20 alunos, 10 estudam Matemática e, desses 10, 4 também estudam Física. Ao calcular P(Física | Matemática), qual é o universo relevante?",
-    opts:["Os 20 alunos","Os 10 que estudam Matemática","Os 4 que estudam ambas","Os que não estudam Matemática"], answer:1,
-    explain:"A condição 'Matemática' restringe o universo aos 10 alunos que estudam Matemática.",
-    wrongHypothesis:"Lacuna conceptual em probabilidade condicionada."
-  },
-  P019:{
-    micro:"PROB-08", level:1,
-    text:"Entre 10 alunos que estudam Matemática, 4 também estudam Física. Quanto vale P(Física | Matemática)?",
-    opts:["2/5","2/10","5/10","1/5"], answer:0,
-    explain:"Dentro do universo condicionado de 10 alunos, 4 são favoráveis: 4/10=2/5.",
-    wrongHypothesis:"A fórmula/execução da probabilidade condicionada ainda não está consolidada."
-  },
-  P010:{
-    micro:"PROB-11", level:2,
-    text:"Se P(A)=0,4, P(B)=0,5 e P(A∩B)=0,2, A e B são independentes?",
-    opts:["Sim","Não, porque P(A)≠P(B)","Não, porque P(A∩B)≠0","Só seriam independentes se fossem incompatíveis"], answer:0,
-    explain:"P(A)P(B)=0,4×0,5=0,2=P(A∩B), portanto são independentes.",
-    wrongHypothesis:"Pode haver confusão entre independência e incompatibilidade."
-  },
-  P020:{
-    micro:"PROB-10", level:1,
-    text:"Dois acontecimentos independentes podem ocorrer simultaneamente?",
-    opts:["Sim","Não","Só se tiverem a mesma probabilidade","Só se forem complementares"], answer:0,
-    explain:"Independência não significa incompatibilidade. Dois acontecimentos independentes podem ocorrer ao mesmo tempo.",
-    wrongHypothesis:"Confusão conceptual entre independência e incompatibilidade."
-  },
-  P015:{
-    micro:"PROB-16", level:2,
-    text:"De um grupo de 5 alunos, quantas equipas diferentes de 2 alunos podem ser formadas?",
-    opts:["10","20","25","5"], answer:0,
-    explain:"Como a ordem não interessa, C(5,2)=10.",
-    wrongHypothesis:"Pode estar a confundir combinação com arranjo."
-  },
-  P014:{
-    micro:"PROB-15", level:1,
-    text:"Ao escolher 2 alunos para formar uma equipa, a ordem da escolha altera a equipa?",
-    opts:["Não","Sim","Só se houver 5 ou mais alunos","Depende da idade"], answer:0,
-    explain:"Escolher Ana e Rui é a mesma equipa que escolher Rui e Ana.",
-    wrongHypothesis:"A noção de seleção sem ordem não está consolidada."
-  },
-  P016:{
-    micro:"PROB-17", level:3,
-    text:"Uma turma tem 6 raparigas e 4 rapazes. Escolhem-se 2 alunos ao acaso. Qual expressão representa a probabilidade de escolher 2 raparigas?",
-    opts:["C(6,2)/C(10,2)","6/10 × 6/10","C(10,2)/C(6,2)","6/10 + 5/9"], answer:0,
-    explain:"Os casos favoráveis são as combinações de 2 raparigas e os possíveis são as combinações de 2 alunos.",
-    wrongHypothesis:"Pode haver falha de integração entre contagem e probabilidade."
-  }
-};
-
-const PATHS = {
-  conditioned:{
-    title:"Probabilidade condicionada",
-    initial:"P007",
-    confirm:"P018",
-    formula:"P019"
-  },
-  independence:{
-    title:"Independência",
-    initial:"P010",
-    confirm:"P020"
-  },
-  combinations:{
-    title:"Combinações",
-    initial:"P015",
-    confirm:"P014"
-  }
+const BANK={
+ c:[
+  {id:"C1",d:2,type:"interpretação",q:"60% dos alunos estudam Matemática e 30% estudam Matemática e Física. Sabendo que um aluno estuda Matemática, qual é a probabilidade de também estudar Física?",o:["0,18","0,30","0,50","0,90"],a:2,sol:"Restringimos o universo aos alunos de Matemática: 0,30 ÷ 0,60 = 0,50.",wrong:"Pode haver dificuldade em interpretar qual é o universo depois de aplicada a condição."},
+  {id:"C2",d:1,type:"conceito",q:"Numa turma de 20 alunos, 10 estudam Matemática e 4 desses 10 também Física. Em P(Física | Matemática), qual é o universo relevante?",o:["20 alunos","10 alunos","4 alunos","16 alunos"],a:1,sol:"A condição é «estuda Matemática», portanto trabalhamos apenas dentro dos 10 alunos que satisfazem essa condição.",wrong:"A condição parece ainda não estar a restringir corretamente o universo."},
+  {id:"C3",d:2,type:"cálculo",q:"Entre 15 pessoas com carta de condução, 6 têm carro elétrico. Quanto vale P(elétrico | carta de condução)?",o:["2/5","6/21","3/5","5/6"],a:0,sol:"Dentro das 15 pessoas condicionadas, 6 são favoráveis: 6/15 = 2/5.",wrong:"A interpretação pode estar correta, mas a execução da probabilidade condicionada precisa de confirmação."},
+  {id:"C4",d:3,type:"contexto",q:"P(B)=0,40 e P(A∩B)=0,12. Qual é P(A|B)?",o:["0,28","0,30","0,48","0,52"],a:1,sol:"P(A|B)=P(A∩B)/P(B)=0,12/0,40=0,30.",wrong:"Esta questão combina interpretação e cálculo num nível superior."},
+  {id:"C5",d:3,type:"inversão",q:"P(A|B)=0,25 e P(B)=0,60. Quanto vale P(A∩B)?",o:["0,15","0,35","0,40","0,85"],a:0,sol:"P(A∩B)=P(A|B)×P(B)=0,25×0,60=0,15.",wrong:"Pode existir dificuldade em reorganizar a relação da probabilidade condicionada."}
+ ],
+ i:[
+  {id:"I1",d:2,type:"aplicação",q:"P(A)=0,4, P(B)=0,5 e P(A∩B)=0,2. A e B são independentes?",o:["Sim","Não","Só se forem incompatíveis","Não há dados"],a:0,sol:"0,4×0,5=0,2=P(A∩B), logo satisfazem o critério de independência.",wrong:"Pode haver confusão entre o critério de independência e incompatibilidade."},
+  {id:"I2",d:1,type:"conceito",q:"Dois acontecimentos independentes podem ocorrer simultaneamente?",o:["Sim","Não","Só se forem equiprováveis","Só se forem complementares"],a:0,sol:"Sim. Independência significa que um não altera a probabilidade do outro; não significa que não possam ocorrer juntos.",wrong:"Há sinais de confusão entre independência e acontecimentos incompatíveis."},
+  {id:"I3",d:2,type:"cálculo",q:"A e B são independentes, P(A)=0,3 e P(B)=0,4. Quanto vale P(A∩B)?",o:["0,12","0,70","0,10","0,34"],a:0,sol:"Sendo independentes, P(A∩B)=P(A)×P(B)=0,3×0,4=0,12.",wrong:"O conceito pode estar presente, mas a aplicação do produto precisa de confirmação."},
+  {id:"I4",d:3,type:"interpretação",q:"Se P(A|B)=P(A) e P(B)>0, qual é a conclusão correta?",o:["A e B são independentes","A e B são incompatíveis","A=B","B é impossível"],a:0,sol:"Se conhecer B não altera P(A), então A e B são independentes.",wrong:"É uma formulação diferente do mesmo conceito; precisamos de mais evidência."}
+ ],
+ k:[
+  {id:"K1",d:2,type:"aplicação",q:"De 5 alunos, quantas equipas diferentes de 2 podem ser formadas?",o:["10","20","25","5"],a:0,sol:"A ordem não interessa: C(5,2)=5!/(2!3!)=10.",wrong:"Pode estar a confundir uma seleção sem ordem com um arranjo."},
+  {id:"K2",d:1,type:"conceito",q:"Ao escolher Ana e Rui para uma equipa, escolher Rui e Ana produz uma equipa diferente?",o:["Não","Sim","Depende da ordem alfabética","Só em grupos grandes"],a:0,sol:"Não. Os elementos são os mesmos; logo a ordem não cria uma nova equipa.",wrong:"A noção de que a ordem não interessa ainda precisa de confirmação."},
+  {id:"K3",d:2,type:"cálculo",q:"Quanto vale C(6,2)?",o:["15","12","30","8"],a:0,sol:"C(6,2)=6×5/(2×1)=15.",wrong:"O conceito de combinação pode estar correto, mas o cálculo precisa de confirmação."},
+  {id:"K4",d:3,type:"contexto",q:"Uma comissão de 3 pessoas é escolhida entre 7. Quantas comissões diferentes existem?",o:["35","210","21","343"],a:0,sol:"Como a ordem dos membros não interessa, C(7,3)=35.",wrong:"Esta questão testa se reconheces e aplicas combinações num contexto diferente."}
+ ]
 };
 
 export default function Page(){
- const [view,setView]=useState("home");
- const [pathKey,setPathKey]=useState(null);
- const [qid,setQid]=useState(null);
- const [selected,setSelected]=useState(null);
- const [feedback,setFeedback]=useState(null);
- const [history,setHistory]=useState([]);
- const [scores,setScores]=useState({
-   "PROB-07":62,"PROB-08":58,"PROB-10":66,"PROB-11":64,"PROB-15":70,"PROB-16":68,"PROB-17":57
- });
- const [lastResult,setLastResult]=useState(null);
+ const [state,setState]=useState(MC),[view,setView]=useState("home"),[key,setKey]=useState(null);
+ const [idx,setIdx]=useState(0),[sel,setSel]=useState(null),[fb,setFb]=useState(null),[ev,setEv]=useState([]);
+ const [start,setStart]=useState(null),[result,setResult]=useState(null);
+ const avg=useMemo(()=>Math.round(Object.values(state).reduce((s,x)=>s+x.domain,0)/3),[state]);
 
- const overall=useMemo(()=>{
-   const vals=Object.values(scores);
-   return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
- },[scores]);
-
- function startPath(key){
-   const p=PATHS[key];
-   setPathKey(key); setQid(p.initial); setSelected(null); setFeedback(null); setHistory([]); setView("question");
+ function begin(k){setKey(k);setIdx(0);setSel(null);setFb(null);setEv([]);setStart({...state[k]});setView("q")}
+ function answer(i){if(fb)return;let q=BANK[key][idx],ok=i===q.a;setSel(i);setFb({ok,msg:ok?q.sol:q.wrong})}
+ function quality(evidence){
+   let correct=evidence.filter(x=>x.ok).length, diverse=new Set(evidence.map(x=>x.type)).size, hard=evidence.filter(x=>x.ok&&x.d>=3).length;
+   return {correct,diverse,hard};
  }
-
- function answer(i){
-   if(feedback) return;
-   const q=Q[qid];
-   setSelected(i);
-   setFeedback({correct:i===q.answer, text:i===q.answer?q.explain:q.wrongHypothesis});
+ function advance(){
+   let q=BANK[key][idx], evidence=[...ev,{ok:sel===q.a,d:q.d,type:q.type,id:q.id}], m=quality(evidence);
+   setEv(evidence);
+   // Adaptive stop: strong consistent evidence; confirmed weakness; otherwise continue up to bank limit.
+   let stop=false, reason="";
+   if(evidence.length>=3 && m.correct===evidence.length && m.diverse>=3){stop=true;reason="Domínio demonstrado em evidências diferentes."}
+   else if(evidence.length>=3 && m.correct<=1){stop=true;reason="Dificuldade confirmada por múltiplas evidências."}
+   else if(evidence.length>=4 && m.correct>=3 && m.diverse>=3){stop=true;reason="Evidência suficiente apesar de uma resposta contraditória."}
+   else if(idx>=BANK[key].length-1){stop=true;reason="Atingido o limite desta Missão piloto."}
+   if(stop){finish(evidence,reason);return}
+   setIdx(idx+1);setSel(null);setFb(null)
  }
-
- function next(){
-   const q=Q[qid];
-   const correct=selected===q.answer;
-   const newHistory=[...history,{qid,correct}];
-   setHistory(newHistory);
-
-   if(pathKey==="conditioned"){
-     if(qid==="P007"){
-       if(correct) return finishMission(newHistory,[
-         {micro:"PROB-08",delta:+4,reason:"Aplicação correta em contexto intermédio."}
-       ],"Condicionada sólida","Amanhã avançamos para problemas de várias etapas.");
-       setQid("P018"); resetQ(); return;
-     }
-     if(qid==="P018"){
-       if(!correct) return finishMission(newHistory,[
-         {micro:"PROB-07",delta:-7,reason:"A dificuldade está na interpretação da condição."}
-       ],"Lacuna conceptual confirmada","A próxima Missão vai trabalhar o significado de P(A|B) antes da fórmula.");
-       setQid("P019"); resetQ(); return;
-     }
-     if(qid==="P019"){
-       if(!correct) return finishMission(newHistory,[
-         {micro:"PROB-08",delta:-6,reason:"Interpretação correta, mas cálculo/fórmula frágil."}
-       ],"Fórmula a consolidar","A próxima Missão será de cálculo de probabilidade condicionada.");
-       return finishMission(newHistory,[
-         {micro:"PROB-07",delta:+2,reason:"Interpretação confirmada."},
-         {micro:"PROB-08",delta:-2,reason:"O erro inicial parece ter sido pontual."}
-       ],"Erro isolado","Não vamos penalizar fortemente esta competência.");
-     }
-   }
-
-   if(pathKey==="independence"){
-     if(qid==="P010"){
-       if(correct) return finishMission(newHistory,[{micro:"PROB-11",delta:+4,reason:"Critério de independência aplicado corretamente."}],"Independência sólida","Podemos subir a complexidade.");
-       setQid("P020"); resetQ(); return;
-     }
-     if(qid==="P020"){
-       if(!correct) return finishMission(newHistory,[{micro:"PROB-10",delta:-7,reason:"Confusão conceptual entre independência e incompatibilidade."}],"Conceito a rever","A próxima Missão será conceptual.");
-       return finishMission(newHistory,[{micro:"PROB-11",delta:-3,reason:"Conceito está presente; a aplicação precisa de treino."}],"Aplicação a consolidar","A próxima Missão terá cálculos curtos de independência.");
-     }
-   }
-
-   if(pathKey==="combinations"){
-     if(qid==="P015"){
-       if(correct) return finishMission(newHistory,[{micro:"PROB-16",delta:+4,reason:"Combinações aplicadas corretamente."}],"Combinações sólidas","Podemos misturar com probabilidade.");
-       setQid("P014"); resetQ(); return;
-     }
-     if(qid==="P014"){
-       if(!correct) return finishMission(newHistory,[{micro:"PROB-15",delta:-7,reason:"A noção de ordem ainda não está consolidada."}],"Ordem vs seleção","A próxima Missão começa por reconhecer quando a ordem importa.");
-       return finishMission(newHistory,[{micro:"PROB-16",delta:-4,reason:"O conceito está correto; falta consolidar o cálculo."}],"Cálculo combinatório","A próxima Missão será de cálculo de combinações.");
-     }
-   }
+ function finish(evidence,reason){
+   let m=quality(evidence), old=state[key], ratio=m.correct/evidence.length;
+   let deltaD= ratio>=.8 ? (m.hard?7:5) : ratio<=.4 ? -7 : ratio>=.6 ? 2 : -2;
+   let diversityBonus=Math.min(18,m.diverse*5), evidenceBonus=Math.min(20,evidence.length*4);
+   let newConf=Math.min(96, Math.max(old.conf, old.conf + diversityBonus + evidenceBonus - (ratio>.4&&ratio<.8?10:0)));
+   let newDomain=Math.max(0,Math.min(100,old.domain+deltaD));
+   let ns={...state,[key]:{...old,domain:newDomain,conf:newConf}};
+   setState(ns);
+   setResult({old,newDomain,newConf,evidence,reason,ratio,m});
+   setView("result")
  }
-
- function resetQ(){ setSelected(null); setFeedback(null); }
-
- function finishMission(hist,changes,title,nextMission){
-   const before={...scores}, after={...scores};
-   changes.forEach(c=>after[c.micro]=Math.max(0,Math.min(100,(after[c.micro]||50)+c.delta)));
-   setScores(after);
-   setLastResult({before,after,changes,title,nextMission,history:hist});
-   setView("result");
- }
-
- if(view==="question") return <Question q={Q[qid]} selected={selected} feedback={feedback} answer={answer} next={next} pathTitle={PATHS[pathKey]?.title}/>;
- if(view==="result") return <Result data={lastResult} overall={overall} home={()=>setView("home")}/>;
- return <Home overall={overall} scores={scores} startPath={startPath}/>;
+ if(view==="q") return <Question q={BANK[key][idx]} n={idx+1} sel={sel} fb={fb} answer={answer} advance={advance} evidence={ev}/>;
+ if(view==="result") return <Result data={result} item={state[key]} home={()=>setView("home")} again={()=>begin(key)}/>;
+ return <Home state={state} avg={avg} begin={begin}/>;
 }
-
 function Logo(){return <div className="logo">A<span>+</span> EXAMES</div>}
-
-function Home({overall,scores,startPath}){
- return <main className="dark"><section className="dash">
-   <header><div><Logo/><small>MATEMÁTICA A · PILOTO ADAPTATIVO</small></div><div className="badge">Probabilidades</div></header>
-   <div className="heroText"><p>Primeiro teste real do motor pedagógico</p><h1>A A+ já tenta descobrir <em>porque erraste.</em></h1><span>Escolhe um dos três percursos abaixo e responde de propósito de maneiras diferentes para veres o motor mudar de caminho.</span></div>
-
-   <div className="pathGrid">
-    <button onClick={()=>startPath("conditioned")}><span>01</span><h3>Probabilidade condicionada</h3><p>Testa interpretação da condição vs aplicação da fórmula.</p><b>Começar →</b></button>
-    <button onClick={()=>startPath("independence")}><span>02</span><h3>Independência</h3><p>Distingue confusão conceptual de erro de aplicação.</p><b>Começar →</b></button>
-    <button onClick={()=>startPath("combinations")}><span>03</span><h3>Combinações</h3><p>Distingue noção de ordem de erro de cálculo.</p><b>Começar →</b></button>
-   </div>
-
-   <section className="card">
-    <div className="cardTitle"><h3>Microcompetências atuais</h3><strong>Índice piloto {overall}/100</strong></div>
-    {Object.entries(scores).map(([id,v])=><div className="scoreRow" key={id}><div><b>{MICRO[id].name}</b><small>{id}</small></div><div className="bar"><i style={{width:v+"%"}}/></div><strong>{v}</strong></div>)}
-   </section>
- </section></main>
-}
-
-function Question({q,selected,feedback,answer,next,pathTitle}){
- return <main className="light"><section className="panel">
-  <header><Logo/><span className="mode">{pathTitle}</span></header>
-  <p className="eyebrow">MISSÃO AVALIATIVA · NÍVEL {q.level}</p>
-  <h1>{q.text}</h1>
-  <div className="opts">{q.opts.map((o,i)=>{
-    let c="opt";
-    if(selected===i)c+=" sel";
-    if(feedback && i===q.answer)c+=" correct";
-    if(feedback && selected===i && i!==q.answer)c+=" wrong";
-    return <button className={c} key={i} onClick={()=>answer(i)}><span>{String.fromCharCode(65+i)}</span>{o}</button>
-  })}</div>
-  {feedback&&<div className={feedback.correct?"feedback good":"feedback bad"}><b>{feedback.correct?"Certo.":"A A+ detetou uma hipótese."}</b><span>{feedback.text}</span></div>}
-  <button className="primary" disabled={selected===null} onClick={feedback?next:()=>{}}>{feedback?"Continuar":"Seleciona uma resposta"}</button>
- </section></main>
-}
-
-function Result({data,overall,home}){
- return <main className="light"><section className="panel result">
-  <Logo/><div className="check">✓</div><p className="eyebrow">MISSÃO CONCLUÍDA</p><h1>{data.title}</h1>
-  <p className="muted">A A+ só alterou a microcompetência para a qual encontrou evidência suficiente.</p>
-  <div className="changes">{data.changes.map(c=><div key={c.micro}><div><b>{MICRO[c.micro].name}</b><small>{c.micro}</small></div><span>{data.before[c.micro]}</span><i>→</i><strong>{data.after[c.micro]}</strong><em className={c.delta>=0?"up":"down"}>{c.delta>=0?"+":""}{c.delta}</em><p>{c.reason}</p></div>)}</div>
-  <div className="next"><span>PRÓXIMA DECISÃO DA A+</span><b>{data.nextMission}</b></div>
-  <div className="overall"><span>Índice piloto atual</span><strong>{overall}/100</strong></div>
-  <button className="primary" onClick={home}>Testar outro percurso</button>
- </section></main>
-}
+function Home({state,avg,begin}){return <main className="dark"><section className="wrap"><header><div><Logo/><small>MOTOR ADAPTATIVO · v0.6</small></div><div className="pill">Índice piloto {avg}/100</div></header>
+<div className="hero"><p>DOMÍNIO + CONFIANÇA + EVIDÊNCIA</p><h1>A Missão já não termina <em>porque acabou o questionário.</em></h1><span>Termina quando a A+ considera que reuniu evidência suficiente — ou quando atinge um limite de segurança.</span></div>
+<div className="cards">{Object.entries(state).map(([k,x])=><button key={k} onClick={()=>begin(k)}><b>{x.name}</b><div className="metric"><span>Domínio</span><strong>{x.domain}</strong></div><div className="meter"><i style={{width:x.domain+"%"}}/></div><div className="metric"><span>Confiança</span><strong>{x.conf}%</strong></div><div className="meter confidence"><i style={{width:x.conf+"%"}}/></div><small>Começar Missão adaptativa →</small></button>)}</div>
+<section className="rule"><b>Regra desta versão</b><span>Acertar uma pergunta nunca confirma domínio. A A+ procura evidências diferentes e aumenta a duração quando os resultados são contraditórios.</span></section>
+</section></main>}
+function Question({q,n,sel,fb,answer,advance,evidence}){return <main className="light"><section className="panel"><header><Logo/><span className="mode">QUESTÃO {n} · D{q.d}</span></header>
+<div className="progress"><i style={{width:Math.min(100,(n/5)*100)+"%"}}/></div><p className="eyebrow">{q.type.toUpperCase()}</p><h1>{q.q}</h1>
+<div className="opts">{q.o.map((x,i)=>{let c="opt";if(sel===i)c+=" sel";if(fb&&i===q.a)c+=" correct";if(fb&&sel===i&&i!==q.a)c+=" wrong";return <button className={c} key={i} onClick={()=>answer(i)}><span>{String.fromCharCode(65+i)}</span>{x}</button>})}</div>
+{fb&&<div className={fb.ok?"feedback good":"feedback bad"}><b>{fb.ok?"✓ Correto":"A A+ detetou uma hipótese."}</b><span>{fb.msg}</span><button>Ver resolução passo a passo</button></div>}
+<div className="tiny">Evidências recolhidas nesta Missão: <b>{evidence.length+(fb?1:0)}</b> · A duração adapta-se às tuas respostas.</div>
+<button className="primary" disabled={!fb} onClick={advance}>Continuar</button></section></main>}
+function Result({data,item,home,again}){let up=data.newDomain-data.old.domain, cu=data.newConf-data.old.conf;return <main className="light"><section className="panel result"><Logo/><div className="check">✓</div><p className="eyebrow">MISSÃO TERMINADA PELA A+</p><h1>{item.name}</h1>
+<div className="why"><b>Porque terminou agora?</b><span>{data.reason}</span></div>
+<div className="compare"><div><span>Domínio</span><b>{data.old.domain} → {data.newDomain}</b><em className={up>=0?"up":"down"}>{up>=0?"+":""}{up}</em></div><div><span>Confiança</span><b>{data.old.conf}% → {data.newConf}%</b><em className={cu>=0?"up":"down"}>{cu>=0?"+":""}{cu}%</em></div><div><span>Evidências</span><b>{data.evidence.length}</b><em>{data.m.diverse} tipos</em></div></div>
+<div className="explain"><b>Porque tomou a A+ esta decisão?</b><span>{data.ratio>=.8?"Demonstraste desempenho consistente em formulações diferentes. A estimativa de domínio subiu e temos agora mais confiança nela.":data.ratio<=.4?"A dificuldade repetiu-se em mais do que uma evidência. A A+ reduziu o domínio estimado em vez de tratar o primeiro erro como um caso isolado.":"As respostas foram parcialmente contraditórias. A alteração de domínio foi pequena; a A+ evita tirar uma conclusão forte enquanto a evidência não for consistente."}</span></div>
+<button className="primary" onClick={home}>Voltar ao painel</button><button className="secondary" onClick={again}>Repetir percurso com outras respostas</button></section></main>}
