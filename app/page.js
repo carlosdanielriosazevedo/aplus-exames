@@ -1,148 +1,35 @@
 "use client";
-import {useEffect,useMemo,useState} from "react";
-import {BANK} from "./bank";
-
-const DEFAULT={
- "PROB-04":{domain:62,conf:44,last:0,errors:0},
- "PROB-05":{domain:58,conf:43,last:0,errors:0},
- "ALG-01":{domain:76,conf:60,last:0,errors:0},
- "REP-01":{domain:73,conf:50,last:0,errors:0},
- "CONT-02":{domain:70,conf:55,last:0,errors:0},
- "CONT-03":{domain:68,conf:52,last:0,errors:0}
-};
-const DAY=86400000;
-
-function priority(id,s,goal){
-  const meta=BANK[id];
-  const weakness=(100-s.domain)/100;
-  const uncertainty=(100-s.conf)/100;
-  const stale=s.last?Math.min(1,(Date.now()-s.last)/(DAY*14)):1;
-  const blocker=Object.values(BANK).filter(x=>(x.prereqs||[]).includes(id)).length*0.08;
-  const goalBoost=goal>=18?0.08:goal>=16?0.04:0;
-  return weakness*.45+uncertainty*.22+stale*.10+(meta.weight||1)*.13+blocker+goalBoost;
+import {useEffect,useState} from "react";
+const initial={goal:17,xp:1240,streak:12,scores:{Probabilidades:[58,43],Funções:[71,61],Contagem:[68,52],"Números complexos":[79,54],Álgebra:[76,70]}};
+const Q=[
+["P(A∩B)=0,18 e P(B)=0,60. Quanto vale P(A|B)?",["0,30","0,108","0,42","0,78"],0,"P(A|B)=0,18/0,60=0,30."],
+["Em P(A|B), qual é o universo relevante?",["O universo original","Apenas B","Apenas A","A∪B"],1,"A condição B restringe o universo relevante."],
+["P(A|B)=0,25 e P(B)=0,60. Quanto vale P(A∩B)?",["0,15","0,35","0,40","0,85"],0,"0,25×0,60=0,15."]
+];
+export default function App(){
+ const [s,setS]=useState(initial),[screen,setScreen]=useState("welcome");
+ useEffect(()=>{try{let x=JSON.parse(localStorage.getItem("a11"));if(x){setS(x);setScreen("home")}}catch{}},[]);
+ useEffect(()=>{try{localStorage.setItem("a11",JSON.stringify(s))}catch{}},[s]);
+ const go=x=>setScreen(x);
+ if(screen==="welcome")return <Welcome go={go}/>;
+ if(screen==="onboard")return <Onboard s={s} setS={setS} go={go}/>;
+ if(screen==="diag")return <Diag go={go}/>;
+ if(screen==="mission")return <Mission s={s} setS={setS} go={go}/>;
+ if(screen==="train")return <Train go={go}/>;
+ if(screen==="progress")return <Progress s={s} go={go}/>;
+ if(screen==="exams")return <Exams go={go}/>;
+ if(screen==="parent")return <Parent go={go}/>;
+ return <Home s={s} go={go} reset={()=>{localStorage.removeItem("a11");setS(initial);go("welcome")}}/>
 }
-function plan(scores,goal){
-  return Object.keys(scores).map(id=>({id,p:priority(id,scores[id],goal)})).sort((a,b)=>b.p-a.p);
-}
-function desiredD(s,goal){
-  if(s.domain<55)return 1;
-  if(s.domain<75)return 2;
-  return goal>=18?3:2;
-}
-function pickQ(id,scores,seen,goal){
-  const pool=BANK[id].questions.filter(q=>!seen.includes(q.id));
-  const source=pool.length?pool:BANK[id].questions;
-  const d=desiredD(scores[id],goal);
-  return [...source].sort((a,b)=>Math.abs(a.d-d)-Math.abs(b.d-d))[0];
-}
-function stopRule(ev){
-  if(ev.length<3)return false;
-  const c=ev.filter(x=>x.correct).length;
-  const sig=new Set(ev.map(x=>x.sig)).size;
-  if(c===ev.length&&sig>=3)return true;
-  if(c<=1&&sig>=2)return true;
-  if(ev.length>=5)return true;
-  return false;
-}
-
-export default function Page(){
- const [scores,setScores]=useState(DEFAULT),[goal,setGoal]=useState(17),[view,setView]=useState("home");
- const [mission,setMission]=useState(null),[current,setCurrent]=useState(null),[selected,setSelected]=useState(null),[feedback,setFeedback]=useState(null);
- const [seen,setSeen]=useState([]),[ev,setEv]=useState([]),[route,setRoute]=useState([]),[result,setResult]=useState(null);
-
- useEffect(()=>{try{const x=JSON.parse(localStorage.getItem("aplus-v10")||"null");if(x?.scores)setScores(x.scores);if(x?.goal)setGoal(x.goal)}catch{}},[]);
- useEffect(()=>{try{localStorage.setItem("aplus-v10",JSON.stringify({scores,goal}))}catch{}},[scores,goal]);
-
- const ranked=useMemo(()=>plan(scores,goal),[scores,goal]);
- const top=ranked[0]?.id;
- const estimated=goal>=18?15:goal>=16?12:10;
-
- function startMission(){
-   const target=top;
-   const q=pickQ(target,scores,[],goal);
-   setMission({target,reason:reasonFor(target),minutes:estimated});
-   setRoute([target]);setSeen([]);setEv([]);setCurrent(q);setSelected(null);setFeedback(null);setView("mission");
- }
- function reasonFor(id){
-   const s=scores[id], meta=BANK[id];
-   const blocks=Object.entries(BANK).filter(([_,x])=>(x.prereqs||[]).includes(id)).map(([_,x])=>x.name);
-   if(s.domain<60)return `${meta.name} é atualmente uma das tuas maiores oportunidades de evolução.`;
-   if(s.conf<50)return `A A+ tem pouca confiança na estimativa de ${meta.name.toLowerCase()} e quer recolher evidência recente.`;
-   if(blocks.length)return `${meta.name} é pré-requisito para competências posteriores e vale a pena consolidá-la agora.`;
-   return `Está na altura de rever ${meta.name.toLowerCase()} para manter o domínio recente.`;
- }
- function answer(i){
-   if(feedback)return;
-   const ok=i===current.a;
-   setSelected(i);
-   setFeedback({ok,text:ok?current.sol:`A A+ detetou uma hipótese: a dificuldade pode estar em ${BANK[mission.target].name.toLowerCase()} ou num dos seus pré-requisitos.`});
- }
- function next(){
-   const ok=selected===current.a;
-   const item={id:current.id,micro:route[route.length-1],correct:ok,sig:current.sig,d:current.d};
-   let nev=[...ev,item],nseen=[...seen,current.id],active=route[route.length-1];
-
-   if(!ok && active===mission.target){
-      const prereq=(BANK[active].prereqs||[]).find(p=>!route.includes(p));
-      if(prereq){
-        const q=pickQ(prereq,scores,nseen,goal);
-        setEv(nev);setSeen(nseen);setRoute([...route,prereq]);setCurrent(q);setSelected(null);setFeedback(null);return;
-      }
-   }
-   if(active!==mission.target){
-      if(!ok){
-        return finishPrereq(active,nev);
-      }else{
-        const q=pickQ(mission.target,scores,nseen,goal);
-        setEv(nev);setSeen(nseen);setRoute([...route,mission.target]);setCurrent(q);setSelected(null);setFeedback(null);return;
-      }
-   }
-   const targetEv=nev.filter(x=>x.micro===mission.target);
-   if(stopRule(targetEv))return finishTarget(targetEv,nev);
-
-   const q=pickQ(mission.target,scores,nseen,goal);
-   setEv(nev);setSeen(nseen);setCurrent(q);setSelected(null);setFeedback(null);
- }
- function finishPrereq(prereq,all){
-   const old=scores[prereq], ns={...scores,[prereq]:{...old,domain:Math.max(0,old.domain-5),conf:Math.min(96,old.conf+12),last:Date.now(),errors:old.errors+1}};
-   setScores(ns);
-   setResult({type:"prereq",changed:prereq,old,new:ns[prereq],all,next:`A próxima Missão vai consolidar ${BANK[prereq].name.toLowerCase()} antes de regressar a ${BANK[mission.target].name.toLowerCase()}.`});
-   setView("result");
- }
- function finishTarget(targetEv,all){
-   const old=scores[mission.target], correct=targetEv.filter(x=>x.correct).length,ratio=correct/targetEv.length;
-   let delta=ratio>=.8?5:ratio<=.4?-6:1;
-   const newConf=Math.min(96,old.conf+targetEv.length*5+new Set(targetEv.map(x=>x.sig)).size*3-(ratio>.4&&ratio<.8?6:0));
-   const ns={...scores,[mission.target]:{...old,domain:Math.max(0,Math.min(100,old.domain+delta)),conf:newConf,last:Date.now(),errors:old.errors+(delta<0?1:0)}};
-   setScores(ns);
-   setResult({type:"target",changed:mission.target,old,new:ns[mission.target],all,next:`Amanhã a A+ volta a calcular a prioridade com base neste resultado e no resto do teu perfil.`});
-   setView("result");
- }
- function reset(){setScores(DEFAULT);try{localStorage.removeItem("aplus-v10")}catch{}}
- if(view==="mission")return <Mission mission={mission} current={current} selected={selected} feedback={feedback} answer={answer} next={next} route={route} ev={ev}/>;
- if(view==="result")return <Result result={result} scores={scores} home={()=>setView("home")}/>;
- return <Home goal={goal} setGoal={setGoal} scores={scores} ranked={ranked} top={top} minutes={estimated} start={startMission} reset={reset}/>;
-}
-function Logo(){return <div className="logo">A<span>+</span> EXAMES</div>}
-function Home({goal,setGoal,scores,ranked,top,minutes,start,reset}){return <main className="dark"><section className="wrap">
-<header><div><Logo/><small>MISSÃO DE HOJE · v1.0</small></div><div className="goal">Objetivo <select value={goal} onChange={e=>setGoal(+e.target.value)}><option>12</option><option>14</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select> valores</div></header>
-<div className="intro"><p>O TEU PLANO DE HOJE</p><h1>A A+ já decidiu onde vale mais a pena investir <em>{minutes} minutos.</em></h1><span>Não escolhe simplesmente a pior percentagem: considera domínio, confiança, recência, pré-requisitos e o teu objetivo.</span></div>
-<section className="missionCard"><div><small>🎯 MISSÃO RECOMENDADA</small><h2>{BANK[top].name}</h2><p>{scores[top].domain<60?`${BANK[top].name} é uma das tuas maiores oportunidades de evolução.`:`A A+ quer consolidar esta competência com evidência recente e diversificada.`}</p><div className="chips"><span>~{minutes} min</span><span>Duração adaptativa</span><span>Domínio {scores[top].domain}</span><span>Confiança {scores[top].conf}%</span></div></div><button onClick={start}>Começar missão →</button></section>
-<div className="grid"><section className="card"><h3>Porque esta prioridade?</h3>{ranked.slice(0,4).map((x,i)=><div className="priority" key={x.id}><b>{i+1}</b><div><strong>{BANK[x.id].name}</strong><small>Domínio {scores[x.id].domain} · Confiança {scores[x.id].conf}%</small></div><em>{Math.round(x.p*100)}</em></div>)}</section>
-<section className="card"><h3>Memória pedagógica</h3><p>A A+ guarda quando cada competência foi avaliada, a confiança atual e erros recorrentes. Uma competência antiga pode voltar ao plano mesmo sem ter o pior score.</p><div className="memory">{Object.entries(scores).slice(0,4).map(([id,s])=><span key={id}><b>{BANK[id].name}</b>{s.last?` avaliada recentemente`:` ainda sem evidência recente`}</span>)}</div></section></div>
-<button className="reset" onClick={reset}>Repor dados do protótipo</button>
-</section></main>}
-function Mission({mission,current,selected,feedback,answer,next,route,ev}){const active=route[route.length-1];const detour=active!==mission.target;return <main className="light"><section className="panel">
-<header><Logo/><span>Missão · {ev.length+1} evidências</span></header>
-<div className={detour?"route detour":"route"}><b>{detour?"A Missão mudou de rumo":"Porque estás a responder a isto?"}</b><span>{detour?`A resposta anterior levantou uma dúvida em ${BANK[active].name.toLowerCase()}. Vamos confirmar o pré-requisito antes de continuar.`:`Esta questão recolhe evidência sobre ${BANK[mission.target].name.toLowerCase()}.`}</span></div>
-<p className="eyebrow">{BANK[active].parent.toUpperCase()} · D{current.d}</p><h1>{current.q}</h1>
-<div className="opts">{current.o.map((x,i)=>{let c="opt";if(selected===i)c+=" sel";if(feedback&&i===current.a)c+=" correct";if(feedback&&selected===i&&i!==current.a)c+=" wrong";return <button key={i} className={c} onClick={()=>answer(i)}><span>{String.fromCharCode(65+i)}</span>{x}</button>})}</div>
-{feedback&&<div className={feedback.ok?"feedback good":"feedback bad"}><b>{feedback.ok?"✓ Correto":"A A+ detetou uma hipótese."}</b><span>{feedback.text}</span><button>Ver resolução passo a passo</button></div>}
-<div className="foot">A Missão termina quando houver evidência suficiente ou quando atingir o limite de duração.</div>
-<button className="primary" disabled={!feedback} onClick={next}>Continuar</button>
-</section></main>}
-function Result({result,scores,home}){const id=result.changed,delta=result.new.domain-result.old.domain,cd=result.new.conf-result.old.conf;return <main className="light"><section className="panel result"><Logo/><div className="check">✓</div><p className="eyebrow">MISSÃO CONCLUÍDA</p><h1>{result.type==="prereq"?"Encontrámos o bloqueio real.":"A tua preparação foi atualizada."}</h1>
-<div className="change"><div><b>{BANK[id].name}</b><small>{BANK[id].parent}</small></div><span>{result.old.domain}</span><i>→</i><strong>{result.new.domain}</strong><em className={delta>=0?"up":"down"}>{delta>=0?"+":""}{delta}</em></div>
-<div className="conf"><span>Confiança</span><b>{result.old.conf}% → {result.new.conf}%</b><em className={cd>=0?"up":"down"}>{cd>=0?"+":""}{cd}%</em></div>
-<div className="why"><b>Porque tomou a A+ esta decisão?</b><span>{result.type==="prereq"?"A dificuldade foi confirmada num pré-requisito. Por isso, a competência principal não foi penalizada diretamente.":"A atualização resulta de várias evidências desta Missão, não de uma única resposta."}</span></div>
-<div className="next"><b>O que acontece a seguir?</b><span>{result.next}</span></div><button className="primary" onClick={home}>Voltar ao plano</button></section></main>}
+const Logo=()=> <div className="logo">A<span>+</span> EXAMES</div>;
+function Welcome({go}){return <main className="dark center"><section className="hero"><Logo/><p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p><h1>A tua melhor nota<br/><em>começa aqui.</em></h1><p>A A+ descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p><button onClick={()=>go("onboard")}>Descobrir o meu nível →</button><div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>📈 Progresso real</span></div></section></main>}
+function Onboard({s,setS,go}){return <Shell><Logo/><p className="eyebrow">O TEU OBJETIVO</p><h1>Que nota queres alcançar?</h1><p className="muted">Isto ajusta a exigência das Missões. Não é uma previsão da tua nota.</p><div className="goals">{[12,14,16,17,18,19,20].map(x=><button className={s.goal===x?"sel":""} onClick={()=>setS({...s,goal:x})}>{x}<small> valores</small></button>)}</div><button className="primary" onClick={()=>go("diag")}>Começar diagnóstico</button></Shell>}
+function Diag({go}){return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO ADAPTATIVO</p><h1>Vamos descobrir onde podes ganhar mais pontos.</h1><div className="notice"><b>Protótipo integrado</b><span>Na versão real, o diagnóstico selecionará questões dinamicamente até existir evidência suficiente por competência.</span></div><div className="fake"><span>✓ Álgebra base</span><span>✓ Funções</span><span>◌ Probabilidades</span><span>◌ Contagem</span></div><button className="primary" onClick={()=>go("home")}>Simular diagnóstico concluído →</button></Shell>}
+function Home({s,go,reset}){let avg=Math.round(Object.values(s.scores).reduce((a,x)=>a+x[0],0)/5);return <main className="dark"><section className="wrap"><header><div><Logo/><small>MATEMÁTICA A · PROTÓTIPO</small></div><div>🔥 {s.streak} dias · <b>{s.xp} XP</b></div></header><div className="hello"><div><p>Boa noite 👋</p><h1>O que vamos conquistar hoje?</h1></div><strong>{avg}<small>/100<br/>preparação</small></strong></div><div className="mission"><div><small>🎯 MISSÃO DE HOJE · ~12 MIN</small><h2>Probabilidade condicionada</h2><p>É uma das tuas maiores oportunidades de evolução. A A+ considerou domínio, confiança, pré-requisitos e o teu objetivo de {s.goal} valores.</p></div><button onClick={()=>go("mission")}>Começar →</button></div><div className="navgrid">{[["🧠","Treinar","Escolhe matéria e nível.","train"],["📝","Exames","Avaliação em contexto de prova.","exams"],["📈","Progresso","Domínio + confiança.","progress"],["👨‍👩‍👧","Área dos pais","Acompanhamento parental.","parent"]].map(x=><button onClick={()=>go(x[3])}><b>{x[0]} {x[1]}</b><span>{x[2]}</span></button>)}</div><div className="card"><h3>Estado atual</h3>{Object.entries(s.scores).map(([k,v])=><div className="skill"><span>{k}</span><div className="bar"><i style={{width:v[0]+"%"}}/></div><b>{v[0]}</b><small>conf. {v[1]}%</small></div>)}</div><button className="reset" onClick={reset}>Recomeçar protótipo</button></section></main>}
+function Mission({s,setS,go}){const [i,setI]=useState(0),[sel,setSel]=useState(null),[fb,setFb]=useState(null),[ok,setOk]=useState(0);let q=Q[i];function answer(n){if(fb)return;setSel(n);let c=n===q[2];if(c)setOk(ok+1);setFb(c?["good","✓ Correto",q[3]]:["bad","A A+ detetou uma hipótese.","A próxima evidência ajuda a distinguir uma falha de conceito de uma falha de cálculo."])}function next(){if(i<2){setI(i+1);setSel(null);setFb(null)}else{let ns=JSON.parse(JSON.stringify(s));let d=ok>=1?5:-4;ns.scores.Probabilidades[0]+=d;ns.scores.Probabilidades[1]=Math.min(96,ns.scores.Probabilidades[1]+14);ns.xp+=110;setS(ns);go("progress")}}return <Shell><Logo/><div className="notice"><b>Porque esta pergunta?</b><span>A A+ está a recolher evidência sobre probabilidade condicionada. Uma resposta isolada nunca decide o teu nível.</span></div><p className="eyebrow">EVIDÊNCIA {i+1}</p><h2>{q[0]}</h2><div className="opts">{q[1].map((x,n)=><button className={(sel===n?"sel ":"")+(fb&&n===q[2]?"correct ":"")+(fb&&sel===n&&n!==q[2]?"wrong":"")} onClick={()=>answer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>{fb&&<div className={"feedback "+fb[0]}><b>{fb[1]}</b><span>{fb[2]}</span><small>Ver resolução passo a passo</small></div>}<button disabled={!fb} className="primary" onClick={next}>Continuar</button></Shell>}
+function Train({go}){return <Shell><Back go={go}/><p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1><p className="muted">Podes escolher livremente. <b>O treino não altera diretamente a avaliação A+.</b> Pode apenas criar uma hipótese a confirmar numa Missão ou Exame.</p><div className="chips">{["Probabilidades","Funções","Contagem","Complexos","Álgebra"].map(x=><button>{x}</button>)}</div><h3>Nível</h3><div className="chips">{["✨ Adaptado","🟢 Básico","🔵 Intermédio","🟣 Avançado","🔥 Desafio"].map(x=><button>{x}</button>)}</div><button className="primary" onClick={()=>go("home")}>Simular treino concluído</button></Shell>}
+function Progress({s,go}){return <Shell><Back go={go}/><p className="eyebrow">PROGRESSO</p><h1>Domínio não é o mesmo que certeza.</h1>{Object.entries(s.scores).map(([k,v])=><div className="prog"><b>{k}</b><span>Domínio {v[0]}</span><div className="bar"><i style={{width:v[0]+"%"}}/></div><span>Confiança {v[1]}%</span><div className="bar green"><i style={{width:v[1]+"%"}}/></div></div>)}<div className="notice"><b>Porque mostramos os dois?</b><span>Um domínio alto baseado em pouca evidência deve ser tratado de forma diferente de um domínio confirmado em vários formatos e momentos.</span></div></Shell>}
+function Exams({go}){return <Shell><Back go={go}/><p className="eyebrow">EXAMES</p><h1>Avaliação em contexto de prova.</h1><div className="exam"><b>⚡ Mini-exame</b><span>15–25 min · várias competências</span></div><div className="exam"><b>📝 Exame de treino A+</b><span>Prova completa criada para o teu nível</span></div><div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div><div className="notice"><b>Mais tarde</b><span>Respostas desenvolvidas em papel, fotografia e correção assistida por IA exigem uma camada própria de controlo de qualidade. Não vou fingir que isto está resolvido na primeira beta.</span></div></Shell>}
+function Parent({go}){return <Shell><Back go={go}/><p className="eyebrow">ÁREA DOS PAIS · PRÉ-VISUALIZAÇÃO</p><h1>Acompanhar progresso, não vigiar respostas.</h1><div className="parent"><div><b>Aluno ligado</b><span>Matemática A</span></div><strong>68<small>/100</small></strong></div><div className="metrics"><div><b>🔥 12</b><span>dias</span></div><div><b>4/5</b><span>missões</span></div><div><b>+6</b><span>evolução</span></div></div><div className="notice"><b>Ligação segura</b><span>O aluno envia um convite. Não haverá pesquisa pública de utilizadores. Os pais recebem progresso, simulados, tempo de estudo e evolução.</span></div></Shell>}
+function Back({go}){return <button className="back" onClick={()=>go("home")}>← Voltar</button>}
+function Shell({children}){return <main className="light"><section className="panel">{children}</section></main>}
