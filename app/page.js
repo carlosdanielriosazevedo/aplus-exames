@@ -1,267 +1,148 @@
 "use client";
-import {useMemo,useState} from "react";
-import {BANK,MICRO} from "./bank";
+import {useEffect,useMemo,useState} from "react";
+import {BANK} from "./bank";
 
-const INITIAL = {
-  "PROB-04":{domain:62,conf:44},
-  "PROB-05":{domain:58,conf:43},
-  "PROB-06":{domain:66,conf:48},
-  "PROB-07":{domain:64,conf:46},
-  "CONT-01":{domain:74,conf:56},
-  "CONT-02":{domain:70,conf:55},
-  "CONT-03":{domain:68,conf:52},
-  "PROB-03":{domain:72,conf:54},
-  "PROB-08":{domain:57,conf:39},
-  "ALG-01":{domain:76,conf:60},
-  "REP-01":{domain:73,conf:50},
+const DEFAULT={
+ "PROB-04":{domain:62,conf:44,last:0,errors:0},
+ "PROB-05":{domain:58,conf:43,last:0,errors:0},
+ "ALG-01":{domain:76,conf:60,last:0,errors:0},
+ "REP-01":{domain:73,conf:50,last:0,errors:0},
+ "CONT-02":{domain:70,conf:55,last:0,errors:0},
+ "CONT-03":{domain:68,conf:52,last:0,errors:0}
 };
+const DAY=86400000;
 
-const TARGETS=["PROB-05","PROB-07","CONT-03","PROB-08"];
-
-function byMicro(id){return BANK.filter(q=>q.micro===id)}
-
-function evidenceStats(list){
-  return {
-    n:list.length,
-    correct:list.filter(x=>x.correct).length,
-    signatures:new Set(list.map(x=>x.signature)).size,
-    cognitive:new Set(list.map(x=>x.cognitive)).size,
-    hard:list.filter(x=>x.correct&&x.difficulty>=3).length
-  };
+function priority(id,s,goal){
+  const meta=BANK[id];
+  const weakness=(100-s.domain)/100;
+  const uncertainty=(100-s.conf)/100;
+  const stale=s.last?Math.min(1,(Date.now()-s.last)/(DAY*14)):1;
+  const blocker=Object.values(BANK).filter(x=>(x.prereqs||[]).includes(id)).length*0.08;
+  const goalBoost=goal>=18?0.08:goal>=16?0.04:0;
+  return weakness*.45+uncertainty*.22+stale*.10+(meta.weight||1)*.13+blocker+goalBoost;
 }
-
-function desiredDifficulty(score, goal=17){
-  if(score.domain<55) return 1;
-  if(score.domain<72) return 2;
+function plan(scores,goal){
+  return Object.keys(scores).map(id=>({id,p:priority(id,scores[id],goal)})).sort((a,b)=>b.p-a.p);
+}
+function desiredD(s,goal){
+  if(s.domain<55)return 1;
+  if(s.domain<75)return 2;
   return goal>=18?3:2;
 }
-
-function chooseQuestion({target,scores,seen,evidence,pendingPrereq}){
-  let micro = pendingPrereq || target;
-  let pool = byMicro(micro).filter(q=>!seen.includes(q.id));
-  if(!pool.length) pool=byMicro(micro);
-
-  const wanted=desiredDifficulty(scores[micro]||{domain:50},17);
-  const seenSigs=new Set(evidence.map(e=>e.signature));
-  const seenCog=new Set(evidence.map(e=>e.cognitive));
-
-  pool = [...pool].sort((a,b)=>{
-    const sa =
-      Math.abs(a.difficulty-wanted)*5 +
-      (seenSigs.has(a.signature)?12:0) +
-      (seenCog.has(a.cognitive)?3:0);
-    const sb =
-      Math.abs(b.difficulty-wanted)*5 +
-      (seenSigs.has(b.signature)?12:0) +
-      (seenCog.has(b.cognitive)?3:0);
-    return sa-sb;
-  });
-  const q=pool[0];
-
-  let why="";
-  if(pendingPrereq){
-    why=`A resposta anterior deixou uma dúvida sobre um pré-requisito. Esta questão testa ${MICRO[micro]?.name?.toLowerCase() || micro} antes de mexermos no teu nível principal.`;
-  }else if(evidence.length===0){
-    why=`Começamos perto do teu nível atual em ${MICRO[target].name.toLowerCase()}.`;
-  }else if(!seenSigs.has(q.signature)){
-    why="Escolhemos uma estrutura diferente das anteriores para evitar confundir memorização com domínio.";
-  }else{
-    why="Esta questão ajuda a completar a evidência que ainda falta nesta competência.";
-  }
-  return {q,why,micro};
+function pickQ(id,scores,seen,goal){
+  const pool=BANK[id].questions.filter(q=>!seen.includes(q.id));
+  const source=pool.length?pool:BANK[id].questions;
+  const d=desiredD(scores[id],goal);
+  return [...source].sort((a,b)=>Math.abs(a.d-d)-Math.abs(b.d-d))[0];
 }
-
-function shouldStop(evidence){
-  const s=evidenceStats(evidence);
-  if(s.n<3) return {stop:false};
-  if(s.correct===s.n && s.signatures>=3 && s.cognitive>=2) return {stop:true,reason:"Demonstraste domínio consistente em diferentes estruturas de questão."};
-  if(s.n>=3 && s.correct<=1 && s.signatures>=2) return {stop:true,reason:"A dificuldade repetiu-se em evidências suficientemente diferentes."};
-  if(s.n>=4 && s.correct>=3 && s.signatures>=3) return {stop:true,reason:"Já temos evidência diversificada suficiente, apesar de uma resposta contraditória."};
-  if(s.n>=6) return {stop:true,reason:"Atingimos o limite de duração desta Missão sem forçar uma conclusão excessiva."};
-  return {stop:false};
-}
-
-function updateScore(old,evidence){
-  const s=evidenceStats(evidence), ratio=s.correct/s.n;
-  let d=0;
-  if(ratio>=.85) d=s.hard?7:5;
-  else if(ratio>=.65) d=2;
-  else if(ratio<=.35) d=-7;
-  else d=-2;
-
-  const diversity=Math.min(18,s.signatures*4+s.cognitive*2);
-  const volume=Math.min(18,s.n*3);
-  const contradiction=(ratio>.35&&ratio<.8)?8:0;
-  return {
-    domain:Math.max(0,Math.min(100,old.domain+d)),
-    conf:Math.max(old.conf,Math.min(96,old.conf+diversity+volume-contradiction)),
-    delta:d
-  };
+function stopRule(ev){
+  if(ev.length<3)return false;
+  const c=ev.filter(x=>x.correct).length;
+  const sig=new Set(ev.map(x=>x.sig)).size;
+  if(c===ev.length&&sig>=3)return true;
+  if(c<=1&&sig>=2)return true;
+  if(ev.length>=5)return true;
+  return false;
 }
 
 export default function Page(){
-  const [scores,setScores]=useState(INITIAL);
-  const [view,setView]=useState("home");
-  const [target,setTarget]=useState(null);
-  const [current,setCurrent]=useState(null);
-  const [why,setWhy]=useState("");
-  const [selected,setSelected]=useState(null);
-  const [typed,setTyped]=useState("");
-  const [feedback,setFeedback]=useState(null);
-  const [evidence,setEvidence]=useState([]);
-  const [seen,setSeen]=useState([]);
-  const [pendingPrereq,setPendingPrereq]=useState(null);
-  const [result,setResult]=useState(null);
+ const [scores,setScores]=useState(DEFAULT),[goal,setGoal]=useState(17),[view,setView]=useState("home");
+ const [mission,setMission]=useState(null),[current,setCurrent]=useState(null),[selected,setSelected]=useState(null),[feedback,setFeedback]=useState(null);
+ const [seen,setSeen]=useState([]),[ev,setEv]=useState([]),[route,setRoute]=useState([]),[result,setResult]=useState(null);
 
-  const overall=useMemo(()=>{
-    const vals=TARGETS.map(k=>scores[k].domain);
-    return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
-  },[scores]);
+ useEffect(()=>{try{const x=JSON.parse(localStorage.getItem("aplus-v10")||"null");if(x?.scores)setScores(x.scores);if(x?.goal)setGoal(x.goal)}catch{}},[]);
+ useEffect(()=>{try{localStorage.setItem("aplus-v10",JSON.stringify({scores,goal}))}catch{}},[scores,goal]);
 
-  function start(k){
-    const choice=chooseQuestion({target:k,scores,seen:[],evidence:[],pendingPrereq:null});
-    setTarget(k);setEvidence([]);setSeen([]);setPendingPrereq(null);
-    setCurrent(choice.q);setWhy(choice.why);setSelected(null);setTyped("");setFeedback(null);setView("question");
-  }
+ const ranked=useMemo(()=>plan(scores,goal),[scores,goal]);
+ const top=ranked[0]?.id;
+ const estimated=goal>=18?15:goal>=16?12:10;
 
-  function isCorrect(){
-    if(current.format==="Curta"){
-      const norm=x=>String(x).trim().replace(",",".").replace(/\s/g,"");
-      return norm(typed)===norm(current.correct);
-    }
-    const letters=["A","B","C","D"];
-    return letters[selected]===current.correct;
-  }
+ function startMission(){
+   const target=top;
+   const q=pickQ(target,scores,[],goal);
+   setMission({target,reason:reasonFor(target),minutes:estimated});
+   setRoute([target]);setSeen([]);setEv([]);setCurrent(q);setSelected(null);setFeedback(null);setView("mission");
+ }
+ function reasonFor(id){
+   const s=scores[id], meta=BANK[id];
+   const blocks=Object.entries(BANK).filter(([_,x])=>(x.prereqs||[]).includes(id)).map(([_,x])=>x.name);
+   if(s.domain<60)return `${meta.name} é atualmente uma das tuas maiores oportunidades de evolução.`;
+   if(s.conf<50)return `A A+ tem pouca confiança na estimativa de ${meta.name.toLowerCase()} e quer recolher evidência recente.`;
+   if(blocks.length)return `${meta.name} é pré-requisito para competências posteriores e vale a pena consolidá-la agora.`;
+   return `Está na altura de rever ${meta.name.toLowerCase()} para manter o domínio recente.`;
+ }
+ function answer(i){
+   if(feedback)return;
+   const ok=i===current.a;
+   setSelected(i);
+   setFeedback({ok,text:ok?current.sol:`A A+ detetou uma hipótese: a dificuldade pode estar em ${BANK[mission.target].name.toLowerCase()} ou num dos seus pré-requisitos.`});
+ }
+ function next(){
+   const ok=selected===current.a;
+   const item={id:current.id,micro:route[route.length-1],correct:ok,sig:current.sig,d:current.d};
+   let nev=[...ev,item],nseen=[...seen,current.id],active=route[route.length-1];
 
-  function submit(){
-    if(feedback) return;
-    const ok=isCorrect();
-    setFeedback({
-      ok,
-      text:ok?current.solution:current.hypothesis
-    });
-  }
-
-  function next(){
-    const ok=isCorrect();
-    const ev={
-      id:current.id,micro:current.micro,correct:ok,signature:current.signature,
-      cognitive:current.cognitive,difficulty:current.difficulty
-    };
-    const all=[...evidence,ev];
-    const allSeen=[...seen,current.id];
-
-    // If wrong on main target and there is a prerequisite, test one before changing the target score.
-    let prereq=null;
-    if(!ok && current.micro===target){
-      const candidates=MICRO[target]?.prereqs||[];
-      prereq=candidates.find(p=>byMicro(p).length>0 && !all.some(e=>e.micro===p)) || null;
-    }
-
-    if(prereq){
-      const choice=chooseQuestion({target,scores,seen:allSeen,evidence:all,pendingPrereq:prereq});
-      setEvidence(all);setSeen(allSeen);setPendingPrereq(prereq);
-      setCurrent(choice.q);setWhy(choice.why);setSelected(null);setTyped("");setFeedback(null);
-      return;
-    }
-
-    // A prerequisite question is diagnostic. If passed, return to target. If failed, update prerequisite only.
-    if(current.micro!==target){
-      if(!ok){
-        const old=scores[current.micro]||{domain:50,conf:30};
-        const change={domain:Math.max(0,old.domain-5),conf:Math.min(96,old.conf+12)};
-        const ns={...scores,[current.micro]:change};
-        setScores(ns);
-        setResult({
-          target:current.micro,
-          old,
-          updated:change,
-          reason:`A A+ confirmou uma dificuldade no pré-requisito «${MICRO[current.micro]?.name}». O nível de ${MICRO[target]?.name} não foi penalizado diretamente.`,
-          evidence:all
-        });
-        setView("result");return;
-      }else{
-        const choice=chooseQuestion({target,scores,seen:allSeen,evidence:all.filter(e=>e.micro===target),pendingPrereq:null});
-        setEvidence(all);setSeen(allSeen);setPendingPrereq(null);
-        setCurrent(choice.q);setWhy("O pré-requisito foi confirmado. Voltamos agora à competência original com uma questão diferente.");
-        setSelected(null);setTyped("");setFeedback(null);return;
+   if(!ok && active===mission.target){
+      const prereq=(BANK[active].prereqs||[]).find(p=>!route.includes(p));
+      if(prereq){
+        const q=pickQ(prereq,scores,nseen,goal);
+        setEv(nev);setSeen(nseen);setRoute([...route,prereq]);setCurrent(q);setSelected(null);setFeedback(null);return;
       }
-    }
+   }
+   if(active!==mission.target){
+      if(!ok){
+        return finishPrereq(active,nev);
+      }else{
+        const q=pickQ(mission.target,scores,nseen,goal);
+        setEv(nev);setSeen(nseen);setRoute([...route,mission.target]);setCurrent(q);setSelected(null);setFeedback(null);return;
+      }
+   }
+   const targetEv=nev.filter(x=>x.micro===mission.target);
+   if(stopRule(targetEv))return finishTarget(targetEv,nev);
 
-    const targetEvidence=all.filter(e=>e.micro===target);
-    const stop=shouldStop(targetEvidence);
-    if(stop.stop){
-      const old=scores[target];
-      const updated=updateScore(old,targetEvidence);
-      const ns={...scores,[target]:{domain:updated.domain,conf:updated.conf}};
-      setScores(ns);
-      setResult({target,old,updated,reason:stop.reason,evidence:targetEvidence});
-      setView("result");return;
-    }
-
-    const choice=chooseQuestion({target,scores,seen:allSeen,evidence:targetEvidence,pendingPrereq:null});
-    setEvidence(all);setSeen(allSeen);setPendingPrereq(null);
-    setCurrent(choice.q);setWhy(choice.why);setSelected(null);setTyped("");setFeedback(null);
-  }
-
-  if(view==="question") return <Question q={current} why={why} selected={selected} setSelected={setSelected} typed={typed} setTyped={setTyped} feedback={feedback} submit={submit} next={next} count={evidence.length+1}/>;
-  if(view==="result") return <Result data={result} scores={scores} home={()=>setView("home")} />;
-  return <Home scores={scores} overall={overall} start={start}/>;
+   const q=pickQ(mission.target,scores,nseen,goal);
+   setEv(nev);setSeen(nseen);setCurrent(q);setSelected(null);setFeedback(null);
+ }
+ function finishPrereq(prereq,all){
+   const old=scores[prereq], ns={...scores,[prereq]:{...old,domain:Math.max(0,old.domain-5),conf:Math.min(96,old.conf+12),last:Date.now(),errors:old.errors+1}};
+   setScores(ns);
+   setResult({type:"prereq",changed:prereq,old,new:ns[prereq],all,next:`A próxima Missão vai consolidar ${BANK[prereq].name.toLowerCase()} antes de regressar a ${BANK[mission.target].name.toLowerCase()}.`});
+   setView("result");
+ }
+ function finishTarget(targetEv,all){
+   const old=scores[mission.target], correct=targetEv.filter(x=>x.correct).length,ratio=correct/targetEv.length;
+   let delta=ratio>=.8?5:ratio<=.4?-6:1;
+   const newConf=Math.min(96,old.conf+targetEv.length*5+new Set(targetEv.map(x=>x.sig)).size*3-(ratio>.4&&ratio<.8?6:0));
+   const ns={...scores,[mission.target]:{...old,domain:Math.max(0,Math.min(100,old.domain+delta)),conf:newConf,last:Date.now(),errors:old.errors+(delta<0?1:0)}};
+   setScores(ns);
+   setResult({type:"target",changed:mission.target,old,new:ns[mission.target],all,next:`Amanhã a A+ volta a calcular a prioridade com base neste resultado e no resto do teu perfil.`});
+   setView("result");
+ }
+ function reset(){setScores(DEFAULT);try{localStorage.removeItem("aplus-v10")}catch{}}
+ if(view==="mission")return <Mission mission={mission} current={current} selected={selected} feedback={feedback} answer={answer} next={next} route={route} ev={ev}/>;
+ if(view==="result")return <Result result={result} scores={scores} home={()=>setView("home")}/>;
+ return <Home goal={goal} setGoal={setGoal} scores={scores} ranked={ranked} top={top} minutes={estimated} start={startMission} reset={reset}/>;
 }
-
 function Logo(){return <div className="logo">A<span>+</span> EXAMES</div>}
-
-function Home({scores,overall,start}){
-  return <main className="dark"><section className="wrap">
-    <header><div><Logo/><small>BANCO + MOTOR · v0.9</small></div><div className="pill">Índice piloto {overall}/100</div></header>
-    <div className="hero"><p>SELETOR DINÂMICO DE QUESTÕES</p><h1>Agora o motor pede uma questão ao banco — <em>não sabe qual vem a seguir.</em></h1>
-      <span>Escolhe uma competência e responde de formas diferentes. A A+ procura variar estrutura, dificuldade e tipo cognitivo e pode recuar a um pré-requisito se o erro for ambíguo.</span></div>
-    <div className="cards">
-      {TARGETS.map(k=><button key={k} onClick={()=>start(k)}>
-        <b>{MICRO[k].name}</b><small>{MICRO[k].parent}</small>
-        <div className="metric"><span>Domínio</span><strong>{scores[k].domain}</strong></div><div className="bar"><i style={{width:scores[k].domain+"%"}}/></div>
-        <div className="metric"><span>Confiança</span><strong>{scores[k].conf}%</strong></div><div className="bar green"><i style={{width:scores[k].conf+"%"}}/></div>
-        <em>Começar Missão →</em>
-      </button>)}
-    </div>
-    <div className="architecture"><b>O que mudou nesta versão</b><span>50 questões estão fora do código do percurso, num banco com metadados. O seletor escolhe por microcompetência, dificuldade e assinatura semântica e evita reutilizar estruturas recentes.</span></div>
-  </section></main>
-}
-
-function Question({q,why,selected,setSelected,typed,setTyped,feedback,submit,next,count}){
-  return <main className="light"><section className="panel">
-    <header><Logo/><span className="mode">EVIDÊNCIA {count} · D{q.difficulty}</span></header>
-    <div className="whyQ"><b>Porque escolheste esta pergunta?</b><span>{why}</span></div>
-    <p className="eyebrow">{q.cognitive.toUpperCase()} · {q.micro}</p><h1>{q.text}</h1>
-    {q.format==="Curta"?
-      <input className="answerInput" value={typed} onChange={e=>setTyped(e.target.value)} placeholder="Escreve a tua resposta" disabled={!!feedback}/>:
-      <div className="opts">{q.options.map((x,i)=>{
-        let c="opt"; if(selected===i)c+=" sel";
-        const letter=["A","B","C","D"][i];
-        if(feedback && letter===q.correct)c+=" correct";
-        if(feedback && selected===i && letter!==q.correct)c+=" wrong";
-        return <button key={i} className={c} onClick={()=>!feedback&&setSelected(i)}><span>{letter}</span>{x}</button>
-      })}</div>}
-    {feedback&&<div className={feedback.ok?"feedback good":"feedback bad"}><b>{feedback.ok?"✓ Correto":"A A+ detetou uma hipótese."}</b><span>{feedback.text}</span><button>Ver resolução passo a passo</button></div>}
-    <div className="details"><span>Assinatura: {q.signature}</span><span>{q.format}</span><span>~{q.time}s</span></div>
-    {!feedback?<button className="primary" disabled={q.format==="Curta"?!typed:selected===null} onClick={submit}>Confirmar resposta</button>:
-      <button className="primary" onClick={next}>Continuar</button>}
-  </section></main>
-}
-
-function Result({data,scores,home}){
-  const name=MICRO[data.target]?.name||data.target;
-  const delta=data.updated.domain-data.old.domain;
-  const cdelta=data.updated.conf-data.old.conf;
-  return <main className="light"><section className="panel result">
-    <Logo/><div className="check">✓</div><p className="eyebrow">MISSÃO CONCLUÍDA</p><h1>{name}</h1>
-    <div className="reason"><b>Porque terminou?</b><span>{data.reason}</span></div>
-    <div className="compare">
-      <div><span>Domínio</span><b>{data.old.domain} → {data.updated.domain}</b><em className={delta>=0?"up":"down"}>{delta>=0?"+":""}{delta}</em></div>
-      <div><span>Confiança</span><b>{data.old.conf}% → {data.updated.conf}%</b><em className={cdelta>=0?"up":"down"}>{cdelta>=0?"+":""}{cdelta}%</em></div>
-      <div><span>Evidências</span><b>{data.evidence.length}</b><em>{new Set(data.evidence.map(e=>e.signature)).size} estruturas</em></div>
-    </div>
-    <div className="reason"><b>Porque tomou a A+ esta decisão?</b><span>A alteração usa apenas evidências relevantes para a microcompetência confirmada. Perguntas de pré-requisito servem para localizar a causa e não penalizam automaticamente a competência original.</span></div>
-    <button className="primary" onClick={home}>Voltar ao painel</button>
-  </section></main>
-}
+function Home({goal,setGoal,scores,ranked,top,minutes,start,reset}){return <main className="dark"><section className="wrap">
+<header><div><Logo/><small>MISSÃO DE HOJE · v1.0</small></div><div className="goal">Objetivo <select value={goal} onChange={e=>setGoal(+e.target.value)}><option>12</option><option>14</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select> valores</div></header>
+<div className="intro"><p>O TEU PLANO DE HOJE</p><h1>A A+ já decidiu onde vale mais a pena investir <em>{minutes} minutos.</em></h1><span>Não escolhe simplesmente a pior percentagem: considera domínio, confiança, recência, pré-requisitos e o teu objetivo.</span></div>
+<section className="missionCard"><div><small>🎯 MISSÃO RECOMENDADA</small><h2>{BANK[top].name}</h2><p>{scores[top].domain<60?`${BANK[top].name} é uma das tuas maiores oportunidades de evolução.`:`A A+ quer consolidar esta competência com evidência recente e diversificada.`}</p><div className="chips"><span>~{minutes} min</span><span>Duração adaptativa</span><span>Domínio {scores[top].domain}</span><span>Confiança {scores[top].conf}%</span></div></div><button onClick={start}>Começar missão →</button></section>
+<div className="grid"><section className="card"><h3>Porque esta prioridade?</h3>{ranked.slice(0,4).map((x,i)=><div className="priority" key={x.id}><b>{i+1}</b><div><strong>{BANK[x.id].name}</strong><small>Domínio {scores[x.id].domain} · Confiança {scores[x.id].conf}%</small></div><em>{Math.round(x.p*100)}</em></div>)}</section>
+<section className="card"><h3>Memória pedagógica</h3><p>A A+ guarda quando cada competência foi avaliada, a confiança atual e erros recorrentes. Uma competência antiga pode voltar ao plano mesmo sem ter o pior score.</p><div className="memory">{Object.entries(scores).slice(0,4).map(([id,s])=><span key={id}><b>{BANK[id].name}</b>{s.last?` avaliada recentemente`:` ainda sem evidência recente`}</span>)}</div></section></div>
+<button className="reset" onClick={reset}>Repor dados do protótipo</button>
+</section></main>}
+function Mission({mission,current,selected,feedback,answer,next,route,ev}){const active=route[route.length-1];const detour=active!==mission.target;return <main className="light"><section className="panel">
+<header><Logo/><span>Missão · {ev.length+1} evidências</span></header>
+<div className={detour?"route detour":"route"}><b>{detour?"A Missão mudou de rumo":"Porque estás a responder a isto?"}</b><span>{detour?`A resposta anterior levantou uma dúvida em ${BANK[active].name.toLowerCase()}. Vamos confirmar o pré-requisito antes de continuar.`:`Esta questão recolhe evidência sobre ${BANK[mission.target].name.toLowerCase()}.`}</span></div>
+<p className="eyebrow">{BANK[active].parent.toUpperCase()} · D{current.d}</p><h1>{current.q}</h1>
+<div className="opts">{current.o.map((x,i)=>{let c="opt";if(selected===i)c+=" sel";if(feedback&&i===current.a)c+=" correct";if(feedback&&selected===i&&i!==current.a)c+=" wrong";return <button key={i} className={c} onClick={()=>answer(i)}><span>{String.fromCharCode(65+i)}</span>{x}</button>})}</div>
+{feedback&&<div className={feedback.ok?"feedback good":"feedback bad"}><b>{feedback.ok?"✓ Correto":"A A+ detetou uma hipótese."}</b><span>{feedback.text}</span><button>Ver resolução passo a passo</button></div>}
+<div className="foot">A Missão termina quando houver evidência suficiente ou quando atingir o limite de duração.</div>
+<button className="primary" disabled={!feedback} onClick={next}>Continuar</button>
+</section></main>}
+function Result({result,scores,home}){const id=result.changed,delta=result.new.domain-result.old.domain,cd=result.new.conf-result.old.conf;return <main className="light"><section className="panel result"><Logo/><div className="check">✓</div><p className="eyebrow">MISSÃO CONCLUÍDA</p><h1>{result.type==="prereq"?"Encontrámos o bloqueio real.":"A tua preparação foi atualizada."}</h1>
+<div className="change"><div><b>{BANK[id].name}</b><small>{BANK[id].parent}</small></div><span>{result.old.domain}</span><i>→</i><strong>{result.new.domain}</strong><em className={delta>=0?"up":"down"}>{delta>=0?"+":""}{delta}</em></div>
+<div className="conf"><span>Confiança</span><b>{result.old.conf}% → {result.new.conf}%</b><em className={cd>=0?"up":"down"}>{cd>=0?"+":""}{cd}%</em></div>
+<div className="why"><b>Porque tomou a A+ esta decisão?</b><span>{result.type==="prereq"?"A dificuldade foi confirmada num pré-requisito. Por isso, a competência principal não foi penalizada diretamente.":"A atualização resulta de várias evidências desta Missão, não de uma única resposta."}</span></div>
+<div className="next"><b>O que acontece a seguir?</b><span>{result.next}</span></div><button className="primary" onClick={home}>Voltar ao plano</button></section></main>}
