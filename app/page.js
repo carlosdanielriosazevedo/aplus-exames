@@ -40,7 +40,7 @@ const initialScores = TAXONOMY.reduce((acc,t,i)=>{
   return acc;
 },{});
 
-const initial = {goal:17,xp:1240,streak:12,scores:initialScores};
+const initial = {goal:17,xp:1240,streak:12,scores:initialScores,diagnosticStarted:false};
 
 const Q=[
 ["P(A∩B)=0,18 e P(B)=0,60. Quanto vale P(A|B)?",["0,30","0,108","0,42","0,78"],0,"P(A|B)=0,18/0,60=0,30."],
@@ -51,6 +51,15 @@ const Q=[
 const byYear = year => TAXONOMY.filter(t=>t.year===year);
 const theme = id => TAXONOMY.find(t=>t.id===id);
 
+const certaintyLabel = value => value>=85?"Muito elevada":value>=65?"Elevada":value>=40?"Moderada":"Baixa";
+const certaintyHelp = value => value>=85
+ ? "A A+ já tem evidência muito consistente, variada e recente."
+ : value>=65
+ ? "A A+ tem evidência consistente, embora continue a recalibrar."
+ : value>=40
+ ? "Já existem alguns sinais, mas a A+ ainda quer confirmar melhor."
+ : "A A+ ainda tem pouca evidência e deverá voltar a testar esta área.";
+
 export default function App(){
  const [s,setS]=useState(initial),[screen,setScreen]=useState("welcome");
  useEffect(()=>{try{let x=JSON.parse(localStorage.getItem("a12"));if(x){setS({...initial,...x,scores:{...initial.scores,...x.scores}});setScreen("home")}}catch{}},[]);
@@ -59,7 +68,9 @@ export default function App(){
  if(screen==="welcome")return <Welcome go={go}/>;
  if(screen==="onboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
  if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
- if(screen==="diag")return <Diag s={s} go={go}/>;
+ if(screen==="diag")return <DiagIntro s={s} go={go}/>;
+ if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go}/>;
+ if(screen==="diagResult")return <DiagResult s={s} go={go}/>;
  if(screen==="mission")return <Mission s={s} setS={setS} go={go}/>;
  if(screen==="train")return <Train go={go}/>;
  if(screen==="progress")return <Progress s={s} go={go}/>;
@@ -90,21 +101,74 @@ function GoalScreen({s,setS,go,onboarding=false}){
  </Shell>
 }
 
-function Diag({s,go}){
- const statusFor=(id)=>{
-   const x=s.scores[id];
-   if(x.conf>=50)return "done";
-   if(x.conf>=40)return "active";
-   return "todo";
- };
- return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO ADAPTATIVO</p><h1>A A+ está a construir o teu perfil.</h1>
- <p className="muted">A lista vem da mesma taxonomia usada no Treino e no Progresso. ✓ significa evidência suficiente; ● significa que a área está a ser avaliada; ○ significa que ainda falta evidência.</p>
- <div className="diagLegend"><span>✓ Evidência suficiente</span><span>● A avaliar</span><span>○ Por avaliar</span></div>
- {["10.º","11.º","12.º"].map(y=><div className="diagYear" key={y}><h3>{y} ano</h3><div className="diagGrid">
-   {byYear(y).map(t=>{const st=statusFor(t.id);return <div className={"diagItem "+st} key={t.id}><b>{st==="done"?"✓":st==="active"?"●":"○"}</b><span>{t.short}</span></div>})}
- </div></div>)}
- <div className="notice"><b>Importante</b><span>Um diagnóstico adaptativo não precisa de fazer uma pergunta de todas as microcompetências. O motor aprofunda apenas onde a evidência é insuficiente ou contraditória.</span></div>
- <button className="primary" onClick={()=>go("home")}>Simular diagnóstico concluído →</button>
+
+function DiagIntro({s,go}){
+ return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
+ <h1>Vamos descobrir o teu ponto de partida.</h1>
+ <p className="muted">O objetivo não é testar tudo. A A+ começa por poucas perguntas muito informativas e aprofunda apenas onde precisar de perceber melhor a causa de uma resposta.</p>
+ <div className="diagIntroGrid">
+   <div><span>⏱</span><b>~12–20 min</b><small>Duração adaptativa</small></div>
+   <div><span>🎯</span><b>Straight to the point</b><small>Poucas perguntas, muita informação</small></div>
+   <div><span>🧠</span><b>Continua a aprender contigo</b><small>O perfil melhora nos primeiros dias</small></div>
+ </div>
+ <div className="notice"><b>O que acontece no final?</b><span>Quando houver informação suficiente para começar, a A+ cria o teu primeiro plano. Não precisa de conhecer perfeitamente todas as áreas logo no primeiro dia.</span></div>
+ <button className="primary" onClick={()=>go("diagRun")}>Começar diagnóstico</button>
+ </Shell>
+}
+
+function DiagRun({s,setS,go}){
+ const anchors=[
+  {id:"11-cd",q:"Se f'(x)>0 num intervalo, o que podemos concluir?",o:["f é crescente","f é decrescente","f é constante","f é negativa"],a:0,sol:"Derivada positiva indica crescimento nesse intervalo."},
+  {id:"12-prob",q:"P(A∩B)=0,18 e P(B)=0,60. Quanto vale P(A|B)?",o:["0,30","0,108","0,42","0,78"],a:0,sol:"P(A|B)=0,18/0,60=0,30."},
+  {id:"11-cont",q:"De 6 alunos, quantas equipas diferentes de 2 se podem formar?",o:["12","15","30","6"],a:1,sol:"A ordem não interessa: C(6,2)=15."},
+  {id:"12-cplx",q:"Qual é o módulo de 3+4i?",o:["3","4","5","7"],a:2,sol:"√(3²+4²)=5."},
+  {id:"10-ga",q:"Qual é o ponto médio de (2,4) e (6,8)?",o:["(4,6)","(8,12)","(2,2)","(3,4)"],a:0,sol:"M=((2+6)/2,(4+8)/2)=(4,6)."},
+  {id:"12-fcont",q:"Se lim x→a f(x)=f(a), então f é...",o:["contínua em a","sempre derivável","sempre crescente","impossível"],a:0,sol:"Esta igualdade é a condição de continuidade em a."}
+ ];
+ const [i,setI]=useState(0),[sel,setSel]=useState(null),[fb,setFb]=useState(null),[history,setHistory]=useState([]);
+ const q=anchors[i];
+
+ function answer(n){
+   if(fb)return;
+   const ok=n===q.a;
+   setSel(n);
+   setFb({ok,text:ok?q.sol:"A A+ registou esta resposta como evidência. Se necessário, faria uma pergunta de confirmação antes de tirar uma conclusão."});
+ }
+ function next(){
+   const ok=sel===q.a;
+   const h=[...history,{id:q.id,ok}];
+   setHistory(h);
+   setS(a=>{
+     const scores={...a.scores};
+     const old=scores[q.id];
+     scores[q.id]={...old,
+       domain:Math.max(0,Math.min(100,old.domain+(ok?2:-2))),
+       conf:Math.min(90,old.conf+8)
+     };
+     return {...a,scores,diagnosticStarted:true};
+   });
+   if(i===anchors.length-1){go("diagResult");return}
+   setI(i+1);setSel(null);setFb(null);
+ }
+ return <Shell><div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+ <div className="diagProgressWrap"><div className="diagProgressText"><b>Já temos informação suficiente em {Math.min(6,i+1)} áreas</b><span>O total pode variar porque o diagnóstico é adaptativo.</span></div><div className="progress"><i style={{width:`${Math.min(92,18+(i+1)*12)}%`}}/></div></div>
+ <div className="activeArea"><span>● A avaliar agora</span><b>{theme(q.id).short}</b></div>
+ <p className="eyebrow">PERGUNTA ÂNCORA</p><h2>{q.q}</h2>
+ <div className="opts">{q.o.map((x,n)=><button key={x} className={(sel===n?"sel ":"")+(fb&&n===q.a?"correct ":"")+(fb&&sel===n&&n!==q.a?"wrong":"")} onClick={()=>answer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
+ {fb&&<div className={"feedback "+(fb.ok?"good":"bad")}><b>{fb.ok?"✓ Correto":"Resposta registada"}</b><span>{fb.text}</span></div>}
+ <button className="primary" disabled={!fb} onClick={next}>Continuar</button>
+ </Shell>
+}
+
+function DiagResult({s,go}){
+ const avg=Math.round(Object.values(s.scores).reduce((a,x)=>a+x.domain,0)/Object.values(s.scores).length);
+ const weakest=[...TAXONOMY].sort((a,b)=>s.scores[a.id].domain-s.scores[b.id].domain).slice(0,4);
+ return <Shell><div className="centered"><Logo/><div className="check">✓</div><p className="eyebrow">JÁ TEMOS INFORMAÇÃO SUFICIENTE</p><h1>Podemos criar o teu primeiro plano.</h1>
+ <div className="indexCircle"><strong>{avg}</strong><span>/100</span></div>
+ <p className="muted">Este é um ponto de partida, não uma sentença. A A+ vai continuar a melhorar a estimativa durante as primeiras Missões.</p></div>
+ <div className="resultSkills">{weakest.map(t=>{const v=s.scores[t.id];return <div className="resultSkill" key={t.id}><div><b>{t.short}</b><small>Domínio estimado: {v.domain}/100</small></div><div className="certainty"><span>Certeza da A+</span><strong>{certaintyLabel(v.conf)}</strong></div></div>})}</div>
+ <div className="notice"><b>O que significa “Certeza da A+”?</b><span>Não é a tua confiança em ti próprio. É apenas quão segura está a A+ da estimativa apresentada, com base na quantidade, variedade e recência da evidência.</span></div>
+ <button className="primary" onClick={()=>go("home")}>Ver o meu primeiro plano</button>
  </Shell>
 }
 
@@ -115,7 +179,7 @@ function Home({s,go,reset}){
  <div className="hello"><div><p>Boa noite 👋</p><h1>O que vamos conquistar hoje?</h1><button className="goalLink" onClick={()=>go("goalSettings")}>🎯 Objetivo: {s.goal} valores · Alterar</button></div><strong>{avg}<small>/100<br/>preparação</small></strong></div>
  <div className="mission"><div><small>🎯 MISSÃO DE HOJE · ~12 MIN</small><h2>Probabilidade condicionada</h2><p>É uma das tuas maiores oportunidades de evolução. A A+ considerou domínio, confiança, pré-requisitos e o teu objetivo de {s.goal} valores.</p></div><button onClick={()=>go("mission")}>Começar →</button></div>
  <div className="navgrid">{[["🧠","Treinar","Tema → foco → nível.","train"],["📝","Exames","Avaliação em contexto de prova.","exams"],["📈","Progresso","A mesma taxonomia, com domínio + confiança.","progress"],["👨‍👩‍👧","Área dos pais","Acompanhamento parental.","parent"]].map(x=><button key={x[1]} onClick={()=>go(x[3])}><b>{x[0]} {x[1]}</b><span>{x[2]}</span></button>)}</div>
- <div className="card"><h3>Prioridades atuais</h3>{weakest.map(t=>{const v=s.scores[t.id];return <div className="skill" key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:v.domain+"%"}}/></div><b>{v.domain}</b><small>conf. {v.conf}%</small></div>})}</div>
+ <div className="card"><h3>Prioridades atuais</h3>{weakest.map(t=>{const v=s.scores[t.id];return <div className="skill" key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:v.domain+"%"}}/></div><b>{v.domain}</b><small>Certeza: {certaintyLabel(v.conf)}</small></div>})}</div>
  <button className="reset" onClick={reset}>Recomeçar protótipo</button></section></main>
 }
 
@@ -149,8 +213,8 @@ function Progress({s,go}){
  const [year,setYear]=useState("12.º");
  return <Shell><Back go={go}/><p className="eyebrow">PROGRESSO</p><h1>O mesmo mapa de conhecimento, agora visto através do teu desempenho.</h1>
  <div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
- {byYear(year).map(t=>{const v=s.scores[t.id];return <div className="prog" key={t.id}><div className="progHead"><b>{t.short}</b><small>{t.name}</small></div><span>Domínio {v.domain}</span><div className="bar"><i style={{width:v.domain+"%"}}/></div><span>Confiança {v.conf}%</span><div className="bar green"><i style={{width:v.conf+"%"}}/></div></div>})}
- <div className="notice"><b>Porque separar domínio de confiança?</b><span>Um 80/100 baseado em pouca evidência não vale o mesmo que um 80/100 confirmado em vários formatos e momentos.</span></div>
+ {byYear(year).map(t=>{const v=s.scores[t.id];return <div className="prog" key={t.id}><div className="progHead"><b>{t.short}</b><small>{t.name}</small></div><span>Domínio estimado: {v.domain}/100</span><div className="bar"><i style={{width:v.domain+"%"}}/></div><div className="certaintyRow"><span>Certeza da A+</span><b>{certaintyLabel(v.conf)}</b><small>{certaintyHelp(v.conf)}</small></div></div>})}
+ <div className="notice"><b>Domínio ≠ Certeza da A+</b><span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
  </Shell>
 }
 
