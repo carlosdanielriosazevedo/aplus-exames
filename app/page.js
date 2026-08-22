@@ -1,25 +1,43 @@
 "use client";
 import {useEffect,useMemo,useRef,useState} from "react";
-import {TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT} from "./data/content";
+import {
+  TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
+} from "./data/content";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,diagnosticProbe,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
   priorityScore,selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
-  shouldEndMission,trainingQuestions,startingDifficulty,nextDiagnosticDifficulty,
-  dailyMissionPlan,markTrainingSignalConfirmed,selectQuestionForPlan,
+  shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,nextDiagnosticDifficulty,
+  dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,miniExamScore20,hasTrainingContent,hasGenerator,
-  eligibleQuestions,eligibleCount
+  eligibleQuestions,eligibleCount,rankedStudyPriorities,likelyUnlocks,
+  focusScore,focusRows,competenceMap,
+  selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
+  recalibrateAllScores,migratePedagogicalIds
 } from "./lib/engine";
 import {
   allFocusRows,qualitySnapshot,
   editorialQueue,editorialStats,makeReviewBatch,
   applyEditorialDecision,bumpEditorialVersion,urgentReviewItems,
-  eligibilitySummary
+  eligibilitySummary,betaContentReadiness,prioritizedReviewQueue,reviewPackRows,
+  minimumReviewRoadmap,reviewRoadmapProgress
 } from "./lib/quality";
-import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "./lib/beta";
 import {
-  loadLocalState,saveLocalState,clearLocalState,backendHealth,syncStateToBackend
+  buildTeacherReviewPack,serializeSemicolonCsv,parseSemicolonCsv,
+  validateTeacherReviewImport,applyTeacherReviewImport,teacherReviewInstructions
+} from "./lib/teacherReview";
+import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "./lib/beta";
+import {engineAuditSummary,engineAuditLabel} from "./lib/engineAudit";
+import {
+  loadLocalState,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
+  backendHealth,syncStateToBackend
 } from "./lib/persistence";
+import {
+  saveSessionDraft,loadSessionDraft,clearSessionDraft,draftScreen
+} from "./lib/sessionDraft";
+import {
+  claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
+} from "./lib/reliability";
 import {
   ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,
   activeParentLink,requestLinkRemoval,confirmLinkRemoval,demoIdentity
@@ -28,6 +46,10 @@ import {
   cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,
   loadStudentCloudState,saveStudentCloudState,mergeStudentCloudState
 } from "./lib/cloud";
+import {
+  friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
+  isFriendsBeta,friendsBetaReport
+} from "./lib/friendsBeta";
 
 const initial={
   goal:17,
@@ -44,14 +66,18 @@ const initial={
   contentReports:[],
   editorialOverrides:{},
   reviewBatches:[],
-  betaParticipant:{code:"BETA-001",cohort:"Piloto Matemática A"},
+  reviewImports:[],
+  betaParticipant:{code:null,cohort:"Piloto Matemática A"},
   betaEvents:[],
   betaSessions:[],
   betaFeedback:[],
   betaMode:"internal",
+  betaTesterMeta:null,
   syncMeta:{lastAttemptAt:null,lastSuccessAt:null,lastStatus:"local_only"},
   identity:demoIdentity("student"),
   cloudMeta:{lastLoadedAt:null,lastSavedAt:null,lastRemoteUpdatedAt:null},
+  learningHypotheses:[],
+  pedagogicalIdVersion:1,
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear"}
 };
@@ -61,35 +87,65 @@ export default function App(){
   const [screen,setScreen]=useState("welcome");
   const [trainingCfg,setTrainingCfg]=useState(null);
   const [examSession,setExamSession]=useState(null);
+  const [recoveredSession,setRecoveredSession]=useState(null);
+  const [hydrated,setHydrated]=useState(false);
 
   useEffect(()=>{
-    const x=loadLocalState(initial,emptyScores);
-    if(x){
-      setS(x);
-      setScreen(x.diagnosticDone?"home":"welcome");
+    const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
+    const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
+    const x=loadLocalState(initial,emptyScores,storageKey);
+    const base=x
+      ?migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)})
+      :initial;
+    const next=requested?activateFriendsBeta(base):base;
+    const draft=loadSessionDraft(next.betaMode||"internal");
+
+    if(x||requested)setS(next);
+
+    if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
+    if(draft?.kind==="mini_exam" && draft.session)setExamSession(draft.session);
+
+    const recovered=draftScreen(draft);
+    if(next.diagnosticDone && recovered){
+      setRecoveredSession(draft);
+      setScreen(recovered);
+    }else{
+      setScreen(next.diagnosticDone?"home":"welcome");
     }
+    setHydrated(true);
   },[]);
 
-  useEffect(()=>{saveLocalState(s)},[s]);
+  useEffect(()=>{
+    if(hydrated)saveLocalState(s);
+  },[s,hydrated]);
+
+  useEffect(()=>{
+    if(examSession && ["miniExamIntro","miniExamRun","miniExamReview"].includes(screen)){
+      saveSessionDraft({kind:"mini_exam",betaMode:s.betaMode||"internal",screen,session:examSession});
+    }
+  },[examSession,screen,s.betaMode]);
+
   const go=x=>setScreen(x);
 
-  if(screen==="welcome")return <Welcome go={go}/>;
+  if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go}/>;
-  if(screen==="diagResult")return <DiagResult s={s} go={go}/>;
-  if(screen==="mission")return <Mission s={s} setS={setS} go={go}/>;
+  if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
+  if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
   if(screen==="train")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
-  if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg}/>;
+  if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
+    clearSessionDraft(s.betaMode||"internal");
+    setRecoveredSession(null);
     const questions=buildMiniExam(s,8);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
     setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mini_exam_started",{sessionId:ses.id,questionCount:questions.length})]}));
-    setExamSession({questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
+    setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
     go("miniExamIntro");
   }}/>;
   if(screen==="miniExamIntro")return <MiniExamIntro session={examSession} go={go}/>;
@@ -104,25 +160,97 @@ export default function App(){
   if(screen==="parent")return <Parent s={s} setS={setS} go={go}/>;
 
   return <Home s={s} setS={setS} go={go} reset={()=>{
-    clearLocalState();
-    setS(initial);go("welcome");
+    clearLocalState(s.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:undefined);
+    clearSessionDraft(s.betaMode||"internal");
+    clearCompletionRegistry();
+    setRecoveredSession(null);
+    setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
   }}/>;
 }
 
 const Logo=()=> <div className="logo">A<span>+</span> EXAMES</div>;
 const Back=({go,to="home"})=> <button className="back" onClick={()=>go(to)}>← Voltar</button>;
-const Shell=({children})=> <main className="light"><section className="panel">{children}</section></main>;
+function FriendsBetaRibbon(){
+  const active=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
+  if(!active)return null;
+  return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>;
+}
 
-function Welcome({go}){
+function FriendsBetaDisclaimer({s,compact=false}){
+  if(!isFriendsBeta(s))return null;
+  return <div className={"friendsBetaDisclaimer "+(compact?"compact":"")}>
+    <b>Teste de experiência — não é uma avaliação real do teu nível.</b>
+    <span>Estamos a testar a app com conteúdo ainda em revisão pedagógica. Índice, Domínio, Certeza e notas servem para avaliar o funcionamento da experiência e podem mudar.</span>
+  </div>;
+}
+
+function FriendsBetaPanel({s}){
+  if(!isFriendsBeta(s))return null;
+  const sum=betaSummary(s);
+
+  function downloadReport(){
+    const payload=friendsBetaReport(s);
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=`teste-amigos-${s.betaParticipant?.code||"participante"}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return <div className="friendsBetaPanel">
+    <div className="friendsBetaPanelHead"><div><small>BETA PRIVADA · EXPERIÊNCIA</small><b>Código {s.betaParticipant?.code||"—"}</b></div><span>{sum.sessions} sessões</span></div>
+    <p>Testa como aluno normal e diz-nos onde ficaste confuso, aborrecido ou surpreendido. Os resultados académicos desta versão são provisórios.</p>
+    <div className="friendsBetaPanelMeta"><span>{sum.feedbackCount} feedbacks</span><span>{sum.reports} perguntas reportadas</span><span>{sum.completionRate}% conclusão</span></div>
+    <button onClick={downloadReport}>Exportar relatório do teste</button>
+    <small>No fim, envia este ficheiro a quem te deu o link. Não inclui nome nem email.</small>
+  </div>;
+}
+
+const Shell=({children})=> <main className="light"><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
+
+function Welcome({s,setS,go}){
+  const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
+  const friends=requested||isFriendsBeta(s);
+
+  function start(){
+    if(friends){
+      setS(prev=>{
+        const next=markFriendsBetaConsent(prev);
+        const already=(next.betaEvents||[]).some(e=>e.type==="friends_beta_started");
+        return already?next:{
+          ...next,
+          betaEvents:[...(next.betaEvents||[]),betaEvent("friends_beta_started",{
+            participantCode:next.betaParticipant?.code||null,
+            purpose:"ux_experience"
+          })]
+        };
+      });
+    }
+    go("onboard");
+  }
+
   return <main className="dark center"><section className="hero">
-    <Logo/><p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>
+    <Logo/>
+    {friends?<><p className="eyebrow">🧪 BETA PRIVADA · TESTE DE EXPERIÊNCIA</p>
+      <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está a ser revisto por professor, por isso não uses os resultados como avaliação real do teu nível.</span></div>
+    </>:<p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>}
     <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
     <p>A A+ descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
-    <button onClick={()=>go("onboard")}>Descobrir o meu nível →</button>
-    <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>📈 Progresso real</span></div>
+    <button onClick={start}>{friends?"Entrar no teste →":"Descobrir o meu nível →"}</button>
+    <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends?"🧪 Feedback importante":"📈 Progresso real"}</span></div>
   </section></main>
 }
 
+
+function suggestedExamTimingForYear(year,current){
+  if(year==="10.º")return "twoYears";
+  if(year==="11.º")return "nextYear";
+  if(year==="12.º")return "thisYear";
+  if(year==="Já terminei o secundário")return "unsure";
+  return current||"unsure";
+}
 
 function StudentProfile({s,setS,go}){
   const [p,setP]=useState(s.profile||initial.profile);
@@ -135,7 +263,7 @@ function StudentProfile({s,setS,go}){
     <p className="muted">Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</p>
 
     <h3>Em que ano estás?</h3>
-    <div className="chips">{["10.º","11.º","12.º","Já terminei"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x})}>{x}</button>)}</div>
+    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming)})}>{x}</button>)}</div>
 
     <h3>Que nota tens tido aproximadamente a Matemática?</h3>
     <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
@@ -144,14 +272,18 @@ function StudentProfile({s,setS,go}){
       setP({...p,recentGrade:n});
     }}/><span>/20</span></div>
 
-    <h3>Quanto do programa já deste?</h3>
+    <h3>{p.schoolYear==="Já terminei o secundário"?"Quanto do programa sentes que tens consolidado?":"Quanto do programa já deste?"}</h3>
     <div className="stackChoices">
-      {[["little","Ainda pouco"],["most","Uma parte significativa"],["all","Praticamente todo o programa"]].map(([v,l])=><button key={v} className={p.syllabus===v?"sel":""} onClick={()=>setP({...p,syllabus:v})}>{l}</button>)}
+      {[
+        ["little",p.schoolYear==="Já terminei o secundário"?"Pouco consolidado":"Ainda pouco"],
+        ["most","Uma parte significativa"],
+        ["all",p.schoolYear==="Já terminei o secundário"?"Praticamente todo consolidado":"Praticamente todo o programa"]
+      ].map(([v,l])=><button key={v} className={p.syllabus===v?"sel":""} onClick={()=>setP({...p,syllabus:v})}>{l}</button>)}
     </div>
 
     <h3>Quando pretendes fazer o exame?</h3>
     <div className="stackChoices">
-      {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
+      {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
     </div>
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a A+ não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
@@ -302,7 +434,7 @@ function DiagRun({s,setS,go}){
   </Shell>
 }
 
-function DiagResult({s,go}){
+function DiagResult({s,setS,go}){
   const measured=measuredThemes(s);
   const priority=selectMissionTheme(s);
   const index=prepIndex(s);
@@ -328,6 +460,8 @@ function DiagResult({s,go}){
   <div className="notice"><b>Domínio ≠ Certeza da A+</b>
     <span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>
 
+  <FriendsBetaDisclaimer s={s}/>
+  {isFriendsBeta(s)&&<BetaSessionFeedback s={s} setS={setS} kind="diagnostic"/>}
   <button className="primary" onClick={()=>go("home")}>Ver o meu primeiro plano</button>
   </Shell>
 }
@@ -335,22 +469,28 @@ function DiagResult({s,go}){
 
 function Home({s,setS,go,reset}){
   const index=prepIndex(s);
+  const devView=typeof window!=="undefined" && new URLSearchParams(window.location.search).get("dev")==="1";
   const measured=measuredThemes(s);
   const plan=dailyMissionPlan(s);
   const t=plan.themeId?theme(plan.themeId):null;
   const pv=plan.themeId?s.scores[plan.themeId]:null;
+  const fv=plan.themeId&&plan.focus?focusScore(s,plan.themeId,plan.focus):null;
   const priorities=[...measured].filter(x=>eligibleQuestions(s,x.id,"mission").length)
     .sort((a,b)=>priorityScore(b,s)-priorityScore(a,s)).slice(0,5);
+  const ranked=rankedStudyPriorities(s,4);
+  const [pausedDraft,setPausedDraft]=useState(null);
+  useEffect(()=>{setPausedDraft(loadSessionDraft(s.betaMode||"internal"))},[]);
 
   const labels={
     priority:"🎯 MISSÃO DE HOJE · PRIORIDADE",
     calibration:"🧭 MISSÃO DE HOJE · CALIBRAÇÃO",
     confirmation:"✅ MISSÃO DE HOJE · CONFIRMAÇÃO",
+    investigation:"🔎 MISSÃO DE HOJE · INVESTIGAÇÃO",
     blocked:"🔒 MISSÃO INDISPONÍVEL"
   };
 
   return <main className="dark"><section className="wrap">
-    <header><div><Logo/><small>MATEMÁTICA A · MOTOR v2.4</small></div><div className="headerRight"><span className="rolePill">{ROLES[normalizeIdentity(s.identity).activeRole]?.icon} {ROLES[normalizeIdentity(s.identity).activeRole]?.label}</span><span>🔥 {s.streak} dias · <b>{s.xp} XP</b></span></div></header>
+    <header><div><Logo/><small>MATEMÁTICA A</small></div><div className="headerRight"><span className="rolePill">{ROLES[normalizeIdentity(s.identity).activeRole]?.icon} {ROLES[normalizeIdentity(s.identity).activeRole]?.label}</span><span>🔥 {s.streak} dias · <b>{s.xp} XP</b></span></div></header>
 
     <div className="hello"><div><p>Boa noite 👋</p><h1>O que vamos conquistar hoje?</h1>
       <button className="goalLink" onClick={()=>go("goalSettings")}>🎯 Objetivo: {s.goal} valores · Alterar</button></div>
@@ -359,22 +499,50 @@ function Home({s,setS,go,reset}){
 
     <div className="coverageLine"><b>{measured.length}/{TAXONOMY.length}</b><span>áreas já têm evidência. A A+ vai completar o mapa sem te obrigar a fazer outro diagnóstico gigante.</span></div>
 
+    <FriendsBetaPanel s={s}/>
+
+    {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
+      if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
+      else if(pausedDraft.kind==="training")go("trainingRun");
+      else go("mission");
+    }}>Continuar →</button></div>}
+
     <div className={"mission "+plan.type}>
-      <div><small>{labels[plan.type]}</small><h2>{t?.short||"Conteúdo protegido"}</h2>
+      <div className="missionMain"><small>{labels[plan.type]}</small><h2>{t?.short||"Conteúdo protegido"}</h2>
+        {plan.focus&&<div className="missionFocus">Foco: <b>{plan.focus}</b></div>}
         <p>{plan.reason}</p>
         {pv&&<div className="missionMeta">
-          <span>{pv.domain===null?"Ainda sem Domínio":`Domínio ${pv.domain}/100`}</span>
-          <span>Certeza: {certaintyLabel(pv.conf,pv.evidence.length)}</span>
+          <span>{plan.focus?(fv?.domain!==null&&fv?.domain!==undefined?`Competência ${fv.domain}/100`:"Competência ainda sem estimativa"):(pv.domain===null?"Ainda sem Domínio":`Tema ${pv.domain}/100`)}</span>
+          <span>Certeza: {fv?certaintyLabel(fv.conf,fv.evidence.length):certaintyLabel(pv.conf,pv.evidence.length)}</span>
           {plan.type==="confirmation"&&<span>Vem do Treino Livre</span>}
         </div>}
+        {plan.reasons?.length>0&&<div className="whyNow"><b>Porque agora?</b>{plan.reasons.map((r,i)=><div key={`${r.kind}-${i}`}><span>✓</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}</div>}
+        {plan.unlocks?.length>0&&<div className="unlockLine"><b>↗ Pode desbloquear</b><span>{plan.unlocks.slice(0,3).map(x=>x.label).join(" · ")}</span></div>}
       </div>
       <button disabled={plan.type==="blocked"} onClick={()=>{
         if(plan.type==="blocked")return;
-        const ses=sessionStart("mission",{type:plan.type,themeId:plan.themeId});
-        setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mission_started",{sessionId:ses.id,type:plan.type,themeId:plan.themeId})]}));
+        const ses=sessionStart("mission",{
+          type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
+          microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
+          decisionSource:plan.decisionMeta?.source||null
+        });
+        setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mission_started",{
+          sessionId:ses.id,type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
+          microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
+          decisionSource:plan.decisionMeta?.source||null
+        })]}));
         go("mission");
       }}>{plan.type==="blocked"?"Bloqueado":"Começar →"}</button>
     </div>
+
+    {ranked.length>0&&<div className="nextActions"><div className="nextActionsHead"><div><small>O MOTOR ESTÁ A PENSAR À FRENTE</small><h3>Próximas prioridades prováveis</h3></div><span>Recalcula após cada sessão</span></div>
+      <div className="nextActionRows">{ranked.map((row,i)=>{
+        const v=s.scores[row.theme.id];
+        const unlocks=likelyUnlocks(row.theme.id);
+        return <div key={row.theme.id} className={i===0?"first":""}><b>{i+1}</b><div><strong>{row.theme.short}</strong><small>{v.domain}/100 · Certeza {certaintyLabel(v.conf,v.evidence.length)}{unlocks.length?` · desbloqueia ${unlocks[0].label}`:""}</small></div><span>{i===0?"Agora":"Depois"}</span></div>
+      })}</div>
+      <small className="dynamicPlan">Não é um calendário rígido: se uma resposta revelar outra causa, a ordem muda.</small>
+    </div>}
 
     <div className="navgrid">{[
       ["🧠","Treinar","Prática livre sem inflacionar Domínio.","train"],
@@ -391,48 +559,94 @@ function Home({s,setS,go,reset}){
       <div className="calibrationHint">Nos primeiros dias, algumas Missões podem servir para calibrar áreas ainda desconhecidas ou confirmar sinais vindos do Treino Livre.</div>
     </div>
 
-    <button className="qaLink" onClick={()=>go("account")}>☁️ Conta A+ & Cloud</button>
-    <button className="qaLink" onClick={()=>go("identity")}>👤 Identidade & Permissões (demo)</button>
-    <button className="qaLink" onClick={()=>go("qa")}>🧪 Painel interno de Qualidade</button>
-    <button className="qaLink" onClick={()=>go("review")}>👨‍🏫 Painel interno de Revisão Pedagógica</button>
-    <button className="qaLink" onClick={()=>go("beta")}>🧪 Painel interno da Beta · modo {s.betaMode||"internal"}</button>
-    <button className="reset" onClick={reset}>Recomeçar protótipo</button>
+    {!isFriendsBeta(s)&&<button className="qaLink studentAccount" onClick={()=>go("account")}>☁️ Conta & progresso na cloud</button>}
+
+    {devView&&<div className="devTools"><small>FERRAMENTAS INTERNAS · NÃO VISÍVEIS A TESTERS</small>
+      <button className="qaLink" onClick={()=>go("identity")}>👤 Identidade & Permissões (demo)</button>
+      <button className="qaLink" onClick={()=>go("qa")}>🧪 Painel interno de Qualidade</button>
+      <button className="qaLink" onClick={()=>go("review")}>👨‍🏫 Painel interno de Revisão Pedagógica</button>
+      <button className="qaLink" onClick={()=>go("beta")}>🧪 Painel interno da Beta · modo {s.betaMode||"internal"}</button>
+      <button className="reset" onClick={reset}>Recomeçar protótipo</button>
+    </div>}
   </section></main>
 }
 
 
-function Mission({s,setS,go}){
-  const [plan]=useState(()=>dailyMissionPlan(s));
+function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
+  const completingRef=useRef(false);
+  const draft=recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null);
+  const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"mission"));
+  const [plan]=useState(()=>draft?.plan||dailyMissionPlan(s));
   const targetId=plan.themeId;
-  const [before]=useState(()=>({...s.scores[targetId]}));
-  const [current,setCurrent]=useState(()=>({...selectQuestionForPlan(s,plan,[],[]),sessionRole:"target"}));
-  const [sel,setSel]=useState(null);
-  const [fb,setFb]=useState(null);
-  const [usedIds,setUsedIds]=useState([]);
-  const [usedSignatures,setUsedSignatures]=useState([]);
-  const [targetItems,setTargetItems]=useState([]);
-  const [targetCount,setTargetCount]=useState(0);
-  const [totalCount,setTotalCount]=useState(0);
-  const [pendingError,setPendingError]=useState(null);
-  const [detour,setDetour]=useState(null);
+  const [before]=useState(()=>draft?.before||({...s.scores[targetId]}));
+  const [beforeFocus]=useState(()=>draft?.beforeFocus??(plan.focus?focusScore(s,targetId,plan.focus):null));
+  const [current,setCurrent]=useState(()=>draft?.current||({...selectQuestionForPlan(s,plan,[],[]),sessionRole:"target"}));
+  const [sel,setSel]=useState(draft?.sel??null);
+  const [fb,setFb]=useState(draft?.fb??null);
+  const [usedIds,setUsedIds]=useState(draft?.usedIds||[]);
+  const [usedSignatures,setUsedSignatures]=useState(draft?.usedSignatures||[]);
+  const [targetItems,setTargetItems]=useState(draft?.targetItems||[]);
+  const [targetCount,setTargetCount]=useState(draft?.targetCount||0);
+  const [totalCount,setTotalCount]=useState(draft?.totalCount||0);
+  const [pendingError,setPendingError]=useState(draft?.pendingError||null);
+  const [detour,setDetour]=useState(draft?.detour||null);
+
+  useEffect(()=>{
+    if(draft)onRecovered();
+  },[]);
+
+  useEffect(()=>{
+    if(!targetId || !current)return;
+    saveSessionDraft({
+      kind:"mission",betaMode:s.betaMode||"internal",sessionId,plan,before,beforeFocus,current,sel,fb,
+      usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour
+    });
+  },[plan,current,sel,fb,usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour]);
 
   function answer(n){if(!fb){setSel(n);setFb({correct:n===current.a})}}
 
-  function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1){
+  function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null){
+    if(completingRef.current)return;
+    completingRef.current=true;
+
+    if(!claimSessionCompletion(sessionId)){
+      clearSessionDraft(s.betaMode||"internal");
+      go("missionResult");
+      return;
+    }
+
     const now=finalState.scores[targetId];
+    const afterFocus=plan.focus?focusScore(finalState,targetId,plan.focus):null;
     const historyItem={
-      type:plan.type,themeId:targetId,at:Date.now(),
+      type:plan.type,themeId:targetId,focus:plan.focus||null,
+      microcompetencyId:plan.microcompetencyId||microcompetencyId(targetId,plan.focus)||null,
+      at:Date.now(),
+      completionId:sessionId||null,
       beforeDomain:before.domain,afterDomain:now.domain,
-      beforeConf:before.conf,afterConf:now.conf,totalCount:newTotal
+      beforeConf:before.conf,afterConf:now.conf,
+      beforeFocusDomain:beforeFocus?.domain??null,afterFocusDomain:afterFocus?.domain??null,
+      beforeFocusConf:beforeFocus?.conf??0,afterFocusConf:afterFocus?.conf??0,
+      beforeFocusEvidence:beforeFocus?.evidence?.length||0,afterFocusEvidence:afterFocus?.evidence?.length||0,
+      totalCount:newTotal,
+      stopCode:stopDecision?.code||"unknown",
+      stopTitle:stopDecision?.title||null,
+      stopDetail:stopDecision?.detail||null,
+      decisionSource:plan.decisionMeta?.source||null,
+      decisionUtility:plan.decisionMeta?.utility??null,
+      alternatives:plan.alternatives||[]
     };
     const sessions=[...(finalState.betaSessions||[])];
     const openIdx=[...sessions].map(x=>x.kind==="mission"&&!x.finishedAt).lastIndexOf(true);
-    if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:targetId,type:plan.type,totalCount:newTotal});
+    if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:targetId,focus:plan.focus||null,type:plan.type,totalCount:newTotal});
 
     const finished={...finalState,
       streak:Math.max(1,finalState.streak+1),
       betaSessions:sessions,
-      betaEvents:[...(finalState.betaEvents||[]),betaEvent("mission_finished",{themeId:targetId,type:plan.type,totalCount:newTotal})],
+      betaEvents:[...(finalState.betaEvents||[]),betaEvent("mission_finished",{
+        sessionId:sessionId||null,themeId:targetId,focus:plan.focus||null,
+        microcompetencyId:plan.microcompetencyId||microcompetencyId(targetId,plan.focus)||null,
+        type:plan.type,totalCount:newTotal
+      })],
       missionHistory:[...(finalState.missionHistory||[]),historyItem],
       freeTrainingSignals:plan.type==="confirmation"
         ? markTrainingSignalConfirmed(finalState.freeTrainingSignals,plan.signal)
@@ -445,6 +659,7 @@ function Mission({s,setS,go}){
         signal:plan.signal||null
       }
     };
+    clearSessionDraft(s.betaMode||"internal");
     setS(finished);go("missionResult");
   }
 
@@ -455,13 +670,20 @@ function Mission({s,setS,go}){
     const newTotal=totalCount+1;
     setUsedIds(newUsed);setUsedSignatures(newSigs);setTotalCount(newTotal);
 
-    if(current.sessionRole==="target" && !correct && !detour && PREREQUISITES[targetId] && plan.type!=="calibration"){
-      const pre=selectPrereqQuestion(s,targetId,newUsed);
-      if(pre){
+    if(current.sessionRole==="target" && !correct && !detour && plan.type!=="calibration"){
+      const probe=selectCausalProbe(s,targetId,current.focus||plan.focus,newUsed);
+      if(probe?.question){
         setS(prev=>({...prev,xp:prev.xp+25}));
         setPendingError(current);
-        setDetour({preId:pre.themeId,result:null});
-        setCurrent({...pre,sessionRole:"prereq"});
+        setDetour({
+          preId:probe.question.themeId,
+          preFocus:probe.dependency.focus||probe.question.focus||null,
+          targetFocus:current.focus||plan.focus||null,
+          dependency:probe.dependency,
+          result:null,
+          verdict:null
+        });
+        setCurrent({...probe.question,sessionRole:"prereq"});
         setSel(null);setFb(null);
         return;
       }
@@ -475,14 +697,29 @@ function Mission({s,setS,go}){
     if(current.sessionRole==="prereq"){
       nextState.scores[current.themeId]=applyEvidence(nextState.scores[current.themeId],current,correct,"mission");
 
+      const verdict=causalVerdict({
+        probeCorrect:correct,
+        targetThemeId:targetId,
+        targetFocus:pendingError?.focus||plan.focus||null,
+        dependency:detour?.dependency
+      });
+
       if(pendingError){
-        const strength=correct?1:.25;
-        nextState.scores[targetId]=applyEvidence(nextState.scores[targetId],pendingError,false,"mission",strength);
+        nextState.scores[targetId]=applyEvidence(
+          nextState.scores[targetId],pendingError,false,"mission",verdict?.targetStrength??1
+        );
         newTargetCount=targetCount+1;
         newTargetItems=[...targetItems,pendingError];
         setTargetCount(newTargetCount);setTargetItems(newTargetItems);
       }
-      finalDetour={...detour,result:correct};
+
+      finalDetour={...detour,result:correct,verdict};
+      nextState.learningHypotheses=recordLearningHypothesis(nextState.learningHypotheses,{
+        targetThemeId:targetId,
+        targetFocus:pendingError?.focus||plan.focus||null,
+        dependency:detour?.dependency,
+        verdict
+      });
       setDetour(finalDetour);setPendingError(null);
     }else{
       nextState.scores[targetId]=applyEvidence(nextState.scores[targetId],current,correct,"mission");
@@ -494,30 +731,42 @@ function Mission({s,setS,go}){
     setS(nextState);
 
     const targetScore=nextState.scores[targetId];
-    const calibrationEnough=plan.type==="calibration" && newTargetCount>=1;
-    const confirmationEnough=plan.type==="confirmation" && newTargetCount>=2;
-    const normalEnd=shouldEndMission({
-      targetCount:newTargetCount,totalCount:newTotal,beforeConf:before.conf,
-      currentScore:targetScore,sessionTargetItems:newTargetItems
+    const currentFocusScore=plan.focus?focusScore(nextState,targetId,plan.focus):null;
+    const stopDecision=missionStopDecision({
+      missionType:plan.type,
+      targetCount:newTargetCount,
+      totalCount:newTotal,
+      beforeConf:before.conf,
+      currentScore:targetScore,
+      sessionTargetItems:newTargetItems,
+      beforeFocusConf:beforeFocus?.conf??null,
+      currentFocusScore
     });
 
-    if(calibrationEnough || confirmationEnough || normalEnd){
-      closeMission(nextState,finalDetour,newTargetCount,newTotal);return;
+    if(stopDecision.stop){
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,stopDecision);return;
     }
 
     const nxt=selectQuestionForPlan(nextState,plan,newUsed,newSigs);
-    if(!nxt){closeMission(nextState,finalDetour,newTargetCount,newTotal);return}
+    if(!nxt){
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,{
+        stop:true,code:"content_exhausted",
+        title:"Não há mais evidência útil disponível nesta sessão",
+        detail:"O motor terminou a Missão em vez de repetir perguntas demasiado semelhantes."
+      });return
+    }
     setCurrent({...nxt,sessionRole:"target"});setSel(null);setFb(null);
   }
 
   if(!current)return <Shell><Back go={go}/><h1>Ainda não existem perguntas suficientes para esta Missão.</h1></Shell>;
 
-  const typeName=plan.type==="confirmation"?"Confirmação":plan.type==="calibration"?"Calibração":"Prioridade";
+  const typeName=plan.type==="confirmation"?"Confirmação":plan.type==="calibration"?"Calibração":plan.type==="investigation"?"Investigação":"Prioridade";
 
   return <Shell>
     <div className="topline"><Logo/><span>Missão · {typeName}</span></div>
-    <div className="missionStep"><div><small>FOCO PRINCIPAL</small><b>{theme(targetId).short}</b></div>
-      <span>{totalCount} evidências recolhidas nesta Missão</span></div>
+    {draft&&<div className="resumeBanner"><b>↻ Sessão retomada</b><span>Continuaste exatamente no ponto onde tinhas ficado.</span></div>}
+    <div className="missionStep"><div><small>FOCO PRINCIPAL</small><b>{theme(targetId).short}</b>{plan.focus&&<em>{plan.focus}</em>}</div>
+      <span>{totalCount} evidências · duração adaptativa</span></div>
 
     {plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
       <span>Treinaste {plan.focus}. O desempenho foi promissor, mas o Treino Livre não altera o Domínio. Esta Missão serve para confirmar se a evolução se mantém.</span></div>}
@@ -525,10 +774,18 @@ function Mission({s,setS,go}){
     {plan.type==="calibration"&&<div className="notice"><b>Missão de calibração</b>
       <span>A A+ ainda não tinha evidência nesta área. Uma questão informativa ajuda a preencher o mapa sem transformar o primeiro diagnóstico numa prova interminável.</span></div>}
 
-    {plan.type==="priority"&&current.sessionRole==="target"&&<div className="notice"><b>Porque esta Missão?</b><span>{plan.reason}</span></div>}
+    {plan.type==="investigation"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque estamos a voltar a esta competência?</b>
+      {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
+      <footer>A app não assume que a hipótese anterior estava certa. Esta Missão existe precisamente para tentar confirmá-la ou enfraquecê-la.</footer>
+    </div>}
 
-    {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ A Missão mudou de direção por um momento.</b>
-      <span>A A+ está a verificar <b>{theme(current.themeId).short}</b> antes de decidir quanto peso dar ao erro anterior em {theme(targetId).short}.</span></div>}
+    {plan.type==="priority"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque é esta a próxima melhor ação?</b>
+      {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
+      {plan.unlocks?.length>0&&<footer>Se melhorares esta base, o motor poderá avançar com mais segurança para <b>{plan.unlocks.slice(0,2).map(x=>x.label).join(" e ")}</b>.</footer>}
+    </div>}
+
+    {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ Verificação rápida da causa</b>
+      <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a A+ vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
 
     {current.generated&&<div className="validatedVariant"><b>✓ Variante validada</b><span>Resposta calculada por regras matemáticas fechadas · seed {current.variantSeed}</span></div>}
     <p className="eyebrow">{current.cognitive.toUpperCase()} · NÍVEL {current.difficulty}</p>
@@ -538,8 +795,8 @@ function Mission({s,setS,go}){
     {fb&&<div className={"feedback "+(fb.correct?"good":"bad")}>
       <b>{fb.correct?"✓ Correto":"A A+ detetou uma hipótese."}</b>
       <span>{fb.correct?current.sol:current.hyp}</span>
-      {!fb.correct&&<small>{current.sessionRole==="target"&&PREREQUISITES[targetId]&&!detour&&plan.type!=="calibration"
-        ?"A A+ pode confirmar um pré-requisito antes de atribuir a causa."
+      {!fb.correct&&<small>{current.sessionRole==="target"&&!detour&&plan.type!=="calibration"
+        ?"Se existir um pré-requisito verificável, a A+ pode testá-lo antes de atribuir a causa."
         :"Ainda não existe evidência suficiente para uma conclusão forte."}</small>}
     </div>}
     {fb&&<ReportButton item={current} s={s} setS={setS}/>}
@@ -558,26 +815,40 @@ function MissionResult({s,setS,go}){
 
   return <Shell><div className="centered"><Logo/><div className="check">✓</div>
     <p className="eyebrow">{typeName.toUpperCase()}</p><h1>{t.short}</h1>
-    <p className="muted">{m.type==="calibration"
-      ?"A A+ já tem uma primeira evidência nesta área. Ainda é cedo para tratar esta estimativa como robusta."
-      :`A Missão terminou após ${m.totalCount} evidências porque o motor considerou que já tinha informação suficiente para esta sessão.`}</p></div>
+    <p className="muted">{m.stopDetail
+      ?m.stopDetail
+      :m.type==="calibration"
+        ?"A A+ já tem uma primeira evidência nesta área. Ainda é cedo para tratar esta estimativa como robusta."
+        :`A Missão terminou após ${m.totalCount} evidências.`}</p></div>
 
+    {m.stopTitle&&<div className="stopReason"><small>PORQUE TERMINOU AGORA?</small><b>{m.stopTitle}</b><span>{m.stopDetail}</span></div>}
+
+    {m.focus&&<div className="competenceOutcome"><small>COMPETÊNCIA TRABALHADA</small><h2>{m.focus}</h2><div>
+      <p><span>Domínio</span><b>{m.beforeFocusDomain??"—"} → {m.afterFocusDomain??"—"}/100</b></p>
+      <p><span>Certeza da A+</span><b>{certaintyLabel(m.beforeFocusConf,m.beforeFocusEvidence)} → {certaintyLabel(m.afterFocusConf,m.afterFocusEvidence)}</b></p>
+    </div></div>}
     <div className="missionOutcome">
-      <div><span>Domínio estimado</span><b>{m.beforeDomain??"—"} → {m.afterDomain}/100</b><small>{m.beforeDomain===null?"primeira estimativa":delta>0?`+${delta}`:delta===0?"sem alteração":delta}</small></div>
-      <div><span>Certeza da A+</span><b>{certaintyLabel(m.beforeConf,m.beforeDomain===null?0:1)} → {certaintyLabel(now.conf,now.evidence.length)}</b><small>A certeza depende da força e variedade da evidência.</small></div>
+      <div><span>{m.focus?"Tema — visão agregada":"Domínio estimado"}</span><b>{m.beforeDomain??"—"} → {m.afterDomain}/100</b><small>{m.beforeDomain===null?"primeira estimativa":delta>0?`+${delta}`:delta===0?"sem alteração":delta}</small></div>
+      <div><span>Certeza do tema</span><b>{certaintyLabel(m.beforeConf,m.beforeDomain===null?0:1)} → {certaintyLabel(now.conf,now.evidence.length)}</b><small>O tema agrega evidência de várias competências.</small></div>
     </div>
 
     {m.type==="confirmation"&&<div className="notice"><b>Sinal do Treino Livre confirmado</b>
       <span>O resultado deixou de ser apenas prática livre e passou a contar como evidência avaliativa desta competência.</span></div>}
 
-    {m.detour&&<div className="notice"><b>{m.detour.result===false?"Pré-requisito também revelou dificuldade":"Pré-requisito confirmado"}</b>
-      <span>{m.detour.result===false
-        ? `A verificação em ${theme(m.detour.preId).short} também falhou. O erro original teve peso reduzido na avaliação de ${t.short}.`
-        : `A verificação em ${theme(m.detour.preId).short} correu bem. Isso reforça a hipótese de que a dificuldade estava no foco principal.`}</span></div>}
+    {m.detour?.verdict&&<div className={"causeCard "+(m.detour.verdict.code==="prerequisite_suspected"?"suspect":"clear")}>
+      <small>CAUSA PROVÁVEL · AINDA NÃO É UMA CONCLUSÃO</small>
+      <h3>{m.detour.verdict.title}</h3>
+      <p>{m.detour.verdict.detail}</p>
+      <span>{m.detour.verdict.code==="prerequisite_suspected"
+        ?`Por isso, o erro anterior em ${m.detour.targetFocus||t.short} teve peso reduzido. A base será observada novamente noutra evidência independente.`
+        :"O erro do foco principal manteve o seu peso normal, porque a verificação da base não revelou a mesma dificuldade."}</span>
+    </div>}
 
     <div className="notice"><b>Porque mudou?</b>
       <span>O Domínio reage ao desempenho. A Certeza da A+ cresce sobretudo com evidências independentes, tipos de raciocínio diferentes e contextos avaliativos.</span></div>
+    <div className="notice"><b>O plano vai ser recalculado agora</b><span>A próxima Missão não está pré-programada. O motor volta a comparar dificuldades, certeza, pré-requisitos, relevância, recência e objetivo com esta nova evidência.</span></div>
 
+    <FriendsBetaDisclaimer s={s}/>
     <BetaSessionFeedback s={s} setS={setS} kind="mission"/>
     <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
     <button className="secondary" onClick={()=>go("progress")}>Ver progresso detalhado</button>
@@ -642,15 +913,25 @@ function Train({s,setS,go,start}){
   </Shell>
 }
 
-function TrainingRun({s,setS,go,cfg}){
+function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
+  const completingRef=useRef(false);
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
-  const questions=useMemo(()=>trainingQuestions(s,cfg,4),[]);
-  const [i,setI]=useState(0);
-  const [sel,setSel]=useState(null);
-  const [fb,setFb]=useState(null);
-  const [correct,setCorrect]=useState(0);
+  const draft=recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null);
+  const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
+  const questions=useMemo(()=>draft?.questions||trainingQuestions(s,cfg,4),[]);
+  const [i,setI]=useState(draft?.i||0);
+  const [sel,setSel]=useState(draft?.sel??null);
+  const [fb,setFb]=useState(draft?.fb??null);
+  const [correct,setCorrect]=useState(draft?.correct||0);
   const [done,setDone]=useState(false);
   const q=questions[i];
+
+  useEffect(()=>{if(draft)onRecovered()},[]);
+
+  useEffect(()=>{
+    if(done || !questions.length)return;
+    saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct});
+  },[cfg,questions,i,sel,fb,correct,done]);
 
   if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
 
@@ -660,6 +941,15 @@ function TrainingRun({s,setS,go,cfg}){
     const newCorrect=correct+(was?1:0);
     if(was)setCorrect(newCorrect);
     if(i===questions.length-1){
+      if(completingRef.current)return;
+      completingRef.current=true;
+
+      if(!claimSessionCompletion(sessionId)){
+        clearSessionDraft(s.betaMode||"internal");
+        setDone(true);
+        return;
+      }
+
       const ratio=newCorrect/questions.length;
       const potential=ratio>=.75 && cfg.level!=="basic";
       setS(prev=>{
@@ -669,12 +959,17 @@ function TrainingRun({s,setS,go,cfg}){
         return {...prev,
         xp:prev.xp+newCorrect*10,
         betaSessions:sessions,
-        betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length})],
+        betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length})],
         freeTrainingSignals:potential?[
           ...(prev.freeTrainingSignals||[]).filter(x=>!(x.themeId===cfg.themeId && x.focus===cfg.focus && !x.confirmed)),
-          {themeId:cfg.themeId,focus:cfg.focus,ratio,at:Date.now(),confirmed:false}
+          {
+            themeId:cfg.themeId,focus:cfg.focus,
+            microcompetencyId:microcompetencyId(cfg.themeId,cfg.focus)||null,
+            ratio,at:Date.now(),confirmed:false,originSessionId:sessionId||null
+          }
         ]:(prev.freeTrainingSignals||[])
       }});
+      clearSessionDraft(s.betaMode||"internal");
       setDone(true);return;
     }
     setI(i+1);setSel(null);setFb(null);
@@ -688,6 +983,7 @@ function TrainingRun({s,setS,go,cfg}){
       <p className="muted">{theme(cfg.themeId).short} → {cfg.focus}</p></div>
       {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A A+ guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
       :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da A+.</span></div>}
+      <FriendsBetaDisclaimer s={s}/>
       <BetaSessionFeedback s={s} setS={setS} kind="training"/>
       <button className="primary" onClick={()=>go("home")}>Voltar à Home</button>
       <button className="secondary" onClick={()=>go("train")}>Treinar outra coisa</button>
@@ -696,6 +992,7 @@ function TrainingRun({s,setS,go,cfg}){
 
   return <Shell><Back go={go} to="train"/>
     <div className="topline"><Logo/><span>Treino Livre · {i+1}/{questions.length}</span></div>
+    {draft&&<div className="resumeBanner"><b>↻ Treino retomado</b><span>As respostas anteriores desta sessão foram preservadas.</span></div>}
     <div className="activeArea"><span>🧠 Treino</span><b>{theme(cfg.themeId).short} · {q.focus}</b></div>
     {q.generated&&<div className="validatedVariant"><b>✓ Variante validada</b><span>Gerada por regras matemáticas fechadas · seed {q.variantSeed}</span></div>}
     <p className="eyebrow">{q.cognitive.toUpperCase()} · NÍVEL {q.difficulty}</p><h2>{q.q}</h2>
@@ -703,15 +1000,33 @@ function TrainingRun({s,setS,go,cfg}){
     {fb&&<div className={"feedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Correto":"Ainda não."}</b><span>{q.sol}</span></div>}
     {fb&&<ReportButton item={q} s={s} setS={setS}/>}
     <button className="primary" disabled={!fb} onClick={next}>Continuar</button>
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
 function Progress({s,go}){
   const [year,setYear]=useState("12.º");
+  const hypotheses=activeLearningHypotheses(s,4);
   return <Shell><Back go={go}/><p className="eyebrow">PROGRESSO</p>
     <h1>O teu mapa de conhecimento.</h1>
-    <p className="muted">As áreas ainda não avaliadas ficam explicitamente sem score. A A+ não inventa precisão que ainda não tem.</p>
+    <p className="muted">Agora distinguimos o <b>tema</b> das competências dentro dele. Podes estar forte em zeros de funções e fraco em monotonia — a A+ já não mistura as duas coisas numa única conclusão.</p>
+    <FriendsBetaDisclaimer s={s} compact/>
     <div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
+
+    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA</small><h3>O que a app está a tentar perceber</h3></div>
+      {hypotheses.map(h=><div className="hypothesisRow" key={h.key}>
+        <span>{h.status==="hipótese"?"?":h.status.includes("base")?"↳":"✓"}</span>
+        <div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{h.status==="dificuldade de base provável"
+          ?`Base provável: ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short}`
+          :h.status==="dificuldade específica provável"
+            ?`A base ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short} tem respondido bem`
+            :h.status==="causa ainda ambígua"
+              ?"A evidência aponta em direções diferentes; vamos voltar a testar."
+              :`A investigar: ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short}`}</small></div>
+        <em>{h.observations} {h.observations===1?"verificação":"verificações"}</em>
+      </div>)}
+      <p>Estas hipóteses não são diagnósticos definitivos. Só ganham força com verificações independentes ao longo do tempo.</p>
+    </div>}
 
     {byYear(year).map(t=>{
       const v=s.scores[t.id],has=v.domain!==null;
@@ -721,6 +1036,7 @@ function Progress({s,go}){
           <span>Domínio estimado: {v.domain}/100</span><div className="bar"><i style={{width:v.domain+"%"}}/></div>
           <div className="certaintyRow"><span>Certeza da A+</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
           <div className="evidenceMeta">{new Set(v.evidence.map(e=>e.signature)).size} evidências independentes · {new Set(v.evidence.map(e=>e.cognitive)).size} tipos de raciocínio</div>
+          <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
         </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A A+ vai recolher evidência quando esta área se tornar relevante.</span></div>}
       </div>
     })}
@@ -734,6 +1050,7 @@ function Exams({s,go,startMini}){
   const miniAvailable=buildMiniExam(s,8).length;
   const miniReady=miniAvailable>=8;
   return <Shell><Back go={go}/><p className="eyebrow">EXAMES</p><h1>Avaliação em contexto de prova.</h1>
+    <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
       <div><b>⚡ Mini-exame A+</b><span>{miniReady?"8 questões · ~10–15 min · 10.º, 11.º e 12.º":`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
@@ -782,20 +1099,38 @@ function MiniExamRun({session,setSession,go}){
         : <button className="primary small" onClick={()=>go("miniExamReview")}>Rever prova →</button>}
     </div>
     <button className="reviewLink" onClick={()=>go("miniExamReview")}>Ver mapa de respostas</button>
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
 function MiniExamReview({session,setSession,s,setS,go}){
+  const submittingRef=useRef(false);
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
   const unanswered=session.answers.filter(x=>x===null).length;
   function jump(i){setSession({...session,current:i});go("miniExamRun")}
   function submit(){
+    if(submittingRef.current)return;
+    submittingRef.current=true;
+
+    if(!claimSessionCompletion(session.sessionId)){
+      clearSessionDraft(s.betaMode||"internal");
+      go("miniExamResult");
+      return;
+    }
+
     const elapsed=Math.max(1,Math.round((Date.now()-session.startedAt)/1000));
     let updated=applyMiniExam(s,session.questions,session.answers,elapsed);
     const sessions=[...(updated.betaSessions||[])];
     const openIdx=[...sessions].map(x=>x.kind==="mini_exam"&&!x.finishedAt).lastIndexOf(true);
     if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{score20:updated.lastExam?.score20,total:session.questions.length});
-    updated={...updated,betaSessions:sessions,betaEvents:[...(updated.betaEvents||[]),betaEvent("mini_exam_finished",{score20:updated.lastExam?.score20,total:session.questions.length})]};
+    updated={
+      ...updated,
+      lastExam:updated.lastExam?{...updated.lastExam,completionId:session.sessionId||null}:updated.lastExam,
+      examHistory:(updated.examHistory||[]).map((x,i,arr)=>i===arr.length-1?{...x,completionId:session.sessionId||null}:x),
+      betaSessions:sessions,
+      betaEvents:[...(updated.betaEvents||[]),betaEvent("mini_exam_finished",{sessionId:session.sessionId||null,score20:updated.lastExam?.score20,total:session.questions.length})]
+    };
+    clearSessionDraft(s.betaMode||"internal");
     setS(updated);go("miniExamResult");
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
@@ -816,6 +1151,7 @@ function MiniExamResult({s,setS,go}){
     <h1>{String(r.score20).replace('.',',')}<small className="scoreOut">/20</small></h1>
     <p className="muted">{r.correctCount}/{r.total} respostas corretas · {mins}:{String(secs).padStart(2,'0')}</p>
     <small className="resultDisclaimer">Resultado deste Mini-exame A+ — não é uma previsão da nota do Exame Nacional.</small></div>
+    <FriendsBetaDisclaimer s={s}/>
 
     <div className="examChanges"><h3>O que mudou no teu mapa?</h3>{r.changes.map(c=>{
       const t=theme(c.themeId);
@@ -911,7 +1247,8 @@ function AccountCloud({s,setS,go}){
         setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado na cloud."});
       }else{
         const merged=mergeStudentCloudState(s,row.state_json);
-        setS({...merged,cloudMeta:{...(merged.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
+        const recalibrated=migratePedagogicalIds({...merged,scores:recalibrateAllScores(merged.scores)});
+        setS({...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
         setMessage({ok:true,text:"Progresso carregado da cloud para este dispositivo."});
       }
     }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
@@ -921,7 +1258,7 @@ function AccountCloud({s,setS,go}){
   const user=session.user;
   const localIndex=prepIndex(s);
 
-  return <Shell><Back go={go}/><p className="eyebrow">CONTA A+ · V2.5</p>
+  return <Shell><Back go={go}/><p className="eyebrow">CONTA A+ · CLOUD</p>
     <h1>O teu progresso, em qualquer dispositivo.</h1>
     <p className="muted">A A+ continua local-first. A conta acrescenta sincronização: se a cloud falhar, estudar não fica bloqueado.</p>
 
@@ -1110,6 +1447,10 @@ function Parent({s,setS,go}){
 
 function BetaDashboard({s,setS,go}){
   const sum=betaSummary(s);
+  const engineAudit=engineAuditSummary(s);
+  const integrityAudit=dataIntegrityAudit(s);
+  const contentReadiness=betaContentReadiness(s.editorialOverrides||{},s.contentReports||[]);
+  const reviewRoadmap=reviewRoadmapProgress(s.editorialOverrides||{},s.contentReports||[]);
   const eligibility=eligibilitySummary(QUESTION_BANK,s.editorialOverrides||{},s.betaMode||"internal");
   const [code,setCode]=useState(s.betaParticipant?.code||"");
   const [cohort,setCohort]=useState(s.betaParticipant?.cohort||"Piloto Matemática A");
@@ -1177,6 +1518,43 @@ function BetaDashboard({s,setS,go}){
       <div><span>Feedbacks</span><b>{sum.feedbackCount}</b><small>qualitativos</small></div>
       <div><span>Reports</span><b>{sum.reports}</b><small>problemas de conteúdo</small></div>
     </div>
+
+    <section className="qaSection betaGoNoGo">
+      <div className="engineHealthHead"><div><small>GO / NO-GO DA BETA</small><h3>Conteúdo pronto para beta pedagógica fechada?</h3></div><span className={contentReadiness.canClosedBeta?"healthy":"attention"}>{contentReadiness.canClosedBeta?"GO":"NO-GO"}</span></div>
+      <div className="betaGoScore"><b>{contentReadiness.score}%</b><div className="readinessBar"><i style={{width:contentReadiness.score+"%"}}/></div></div>
+      <p>{contentReadiness.canClosedBeta
+        ?"Os critérios mínimos de conteúdo revisto estão cumpridos. Ainda é necessário confirmar infraestrutura e QA da versão a distribuir."
+        :"A beta de experiência com amigos pode testar UX, clareza e engagement, mas ainda não devemos interpretar esses resultados académicos como pedagogicamente fiáveis enquanto estes bloqueios não forem resolvidos."}</p>
+      {!contentReadiness.canClosedBeta&&<div className="readinessBlockers">{contentReadiness.blockers.slice(0,4).map((x,i)=><span key={i}>• {x}</span>)}</div>}
+      {!contentReadiness.canClosedBeta&&<div className="goRoadmapSummary"><b>{reviewRoadmap.approvalsNeeded} aprovações no caminho mínimo</b><span>≈ {reviewRoadmap.estimatedHours} h de revisão a 5 min/questão</span></div>}
+    </section>
+
+    <section className="qaSection engineHealth"><div className="engineHealthHead"><div><small>AUDITORIA DO ORQUESTRADOR</small><h3>Saúde do motor</h3></div><span className={engineAudit.status}>{engineAuditLabel(engineAudit.status)}</span></div>
+      <div className="perceptionGrid">
+        <div><span>Maior sequência no mesmo tema</span><b>{engineAudit.maxSameThemeRun||0}</b></div>
+        <div><span>Calibração</span><b>{engineAudit.calibrationRate}%</b></div>
+        <div><span>Fim por pouca informação</span><b>{engineAudit.lowInfoRate}%</b></div>
+      </div>
+      {engineAudit.missions<5
+        ?<div className="qaEmpty">Precisamos de pelo menos 5 Missões para avaliar padrões do motor.</div>
+        :engineAudit.warnings.length===0
+          ?<div className="engineHealthy">✓ Não foram detetados padrões problemáticos no histórico atual.</div>
+          :<div className="engineWarnings">{engineAudit.warnings.map(w=><div key={w.code} className={w.severity}><b>{w.title}</b><span>{w.detail}</span></div>)}</div>}
+      <small className="auditFoot">Esta auditoria não altera o plano do aluno. Serve apenas para detetar comportamentos anómalos durante desenvolvimento e beta.</small>
+    </section>
+
+    <section className="qaSection integrityHealth">
+      <div className="engineHealthHead"><div><small>INTEGRIDADE DOS DADOS</small><h3>Sessões sem duplicação</h3></div><span className={integrityAudit.status}>{integrityAudit.status==="healthy"?"Saudável":integrityAudit.status==="attention"?"Requer atenção":"A observar"}</span></div>
+      <div className="perceptionGrid">
+        <div><span>Conclusões duplicadas</span><b>{integrityAudit.duplicateCompletions}</b></div>
+        <div><span>IDs duplicados</span><b>{integrityAudit.duplicateSessionIds+integrityAudit.duplicateEventIds}</b></div>
+        <div><span>Sessões ainda abertas</span><b>{integrityAudit.openSessions}</b></div>
+      </div>
+      {integrityAudit.issues.length===0
+        ?<div className="engineHealthy">✓ Não foram encontrados sinais de dupla contabilização ou telemetria inconsistente.</div>
+        :<div className="engineWarnings">{integrityAudit.issues.map(x=><div key={x.code} className={x.severity}><b>{x.title}</b><span>{x.detail}</span></div>)}</div>}
+      <small className="auditFoot">As conclusões de Missão, Treino e Mini-exame usam agora uma chave de idempotência local antes de alterar o progresso.</small>
+    </section>
 
     <section className="qaSection"><h3>Perceção dos alunos</h3>
       <div className="perceptionGrid">
@@ -1251,10 +1629,21 @@ function ReviewerDashboard({s,setS,go}){
   const [selectedId,setSelectedId]=useState(null);
   const [note,setNote]=useState("");
   const [reviewer,setReviewer]=useState("Professor Revisor");
+  const [checklist,setChecklist]=useState({
+    math:false,clarity:false,unique:false,distractors:false,
+    solution:false,taxonomy:false,difficulty:false,hypothesis:false
+  });
+  const [importPreview,setImportPreview]=useState(null);
+  const [importFileName,setImportFileName]=useState("");
+  const [importMessage,setImportMessage]=useState("");
 
   const queue=editorialQueue(QUESTION_BANK,s.editorialOverrides||{},s.contentReports||[]);
   const stats=editorialStats(queue);
   const urgent=urgentReviewItems(queue);
+  const readiness=betaContentReadiness(s.editorialOverrides||{},s.contentReports||[]);
+  const priorityQueue=prioritizedReviewQueue(s.editorialOverrides||{},s.contentReports||[],30);
+  const roadmap=reviewRoadmapProgress(s.editorialOverrides||{},s.contentReports||[]);
+  const allChecks=Object.values(checklist).every(Boolean);
 
   const filtered=queue.filter(row=>{
     const okStatus=statusFilter==="all" || row.status===statusFilter;
@@ -1270,10 +1659,16 @@ function ReviewerDashboard({s,setS,go}){
       s.editorialOverrides||{},
       selected.item.id,
       decision,
-      {reviewer,note}
+      {
+        reviewer,
+        note,
+        checklist:decision==="approve"?checklist:null,
+        source:"in_app"
+      }
     );
     setS(prev=>({...prev,editorialOverrides:next}));
     setNote("");
+    setChecklist({math:false,clarity:false,unique:false,distractors:false,solution:false,taxonomy:false,difficulty:false,hypothesis:false});
     const idx=filtered.findIndex(x=>x.item.id===selected.item.id);
     const nextRow=filtered[idx+1]||filtered[idx-1];
     setSelectedId(nextRow?.item.id||null);
@@ -1308,6 +1703,117 @@ function ReviewerDashboard({s,setS,go}){
     setSelectedId(ids[0]);
   }
 
+  function createPriorityBatch(){
+    const ids=priorityQueue.slice(0,12).map(x=>x.item.id);
+    if(!ids.length)return;
+    const batch={
+      id:`priority-batch-${Date.now()}`,
+      createdAt:Date.now(),
+      reviewer,
+      itemIds:ids,
+      status:"open",
+      kind:"beta_priority"
+    };
+    setS(prev=>({...prev,reviewBatches:[...(prev.reviewBatches||[]),batch]}));
+    setStatusFilter("all");
+    setThemeFilter("all");
+    setSelectedId(ids[0]);
+  }
+
+  function csvEscape(value){
+    const s=String(value??"");
+    return `"${s.replace(/"/g,'""')}"`;
+  }
+
+  function downloadCsv(csv,fileName){
+    const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=fileName;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function exportPriorityPack(){
+    const rows=reviewPackRows(s.editorialOverrides||{},s.contentReports||[],30);
+    if(!rows.length)return;
+    const headers=Object.keys(rows[0]);
+    const csv=[
+      headers.map(csvEscape).join(";"),
+      ...rows.map(r=>headers.map(h=>csvEscape(r[h])).join(";"))
+    ].join("\n");
+    downloadCsv(csv,`revisao-professor-prioridades-${Date.now()}.csv`);
+  }
+
+  function exportExternalReviewPack(){
+    const rows=buildTeacherReviewPack(
+      s.editorialOverrides||{},
+      s.contentReports||[],
+      {roadmapOnly:true,reviewer}
+    );
+    if(!rows.length)return;
+    downloadCsv(
+      serializeSemicolonCsv(rows),
+      `revisao-professor-caminho-beta-${rows.length}-questoes.csv`
+    );
+  }
+
+  async function previewImport(file){
+    setImportMessage("");
+    setImportPreview(null);
+    setImportFileName(file?.name||"");
+    if(!file)return;
+    try{
+      const text=await file.text();
+      const rows=parseSemicolonCsv(text);
+      const validation=validateTeacherReviewImport(rows,s.editorialOverrides||{});
+      setImportPreview({rows,validation});
+    }catch{
+      setImportMessage("Não foi possível ler este ficheiro de revisão.");
+    }
+  }
+
+  function applyImportedReviews(){
+    if(!importPreview?.validation)return;
+    const importId=`teacher-import-${Date.now()}`;
+    const result=applyTeacherReviewImport(
+      s.editorialOverrides||{},
+      importPreview.validation,
+      {importId,allowPartial:false}
+    );
+    if(result.rejected){
+      setImportMessage(result.reason||"Importação recusada.");
+      return;
+    }
+
+    const record={
+      id:importId,
+      at:Date.now(),
+      fileName:importFileName,
+      applied:result.applied.length,
+      reviewerNames:[...new Set(result.applied.map(x=>x.reviewer))],
+      itemIds:result.applied.map(x=>x.id)
+    };
+
+    setS(prev=>({
+      ...prev,
+      editorialOverrides:result.overrides,
+      reviewImports:[...(prev.reviewImports||[]),record]
+    }));
+    setImportMessage(`${result.applied.length} decisões importadas com sucesso.`);
+    setImportPreview(null);
+    setImportFileName("");
+  }
+
+  function openItem(itemId){
+    setStatusFilter("all");
+    setThemeFilter("all");
+    setSelectedId(itemId);
+    setNote("");
+    setChecklist({math:false,clarity:false,unique:false,distractors:false,solution:false,taxonomy:false,difficulty:false,hypothesis:false});
+  }
+
   const statusLabel={
     prototype:"Protótipo",
     pending:"A rever",
@@ -1318,6 +1824,57 @@ function ReviewerDashboard({s,setS,go}){
   return <Shell><Back go={go}/><p className="eyebrow">PAINEL INTERNO · REVISÃO PEDAGÓGICA</p>
     <h1>Workflow editorial de Matemática A.</h1>
     <p className="muted">Protótipo do espaço de trabalho de um professor revisor. Nada deste painel é visível para alunos.</p>
+
+    <section className="betaReadinessCard">
+      <div className="betaReadinessTop"><div><small>PRONTIDÃO DO CONTEÚDO PARA BETA FECHADA</small><h2>{readiness.score}%</h2></div><span className={readiness.canClosedBeta?"ready":"notReady"}>{readiness.canClosedBeta?"Pronto para beta":"Ainda não pronto"}</span></div>
+      <div className="readinessBar"><i style={{width:readiness.score+"%"}}/></div>
+      <div className="readinessMetrics">
+        <div><span>Diagnóstico</span><b>{readiness.diagnostic.ready}/{readiness.diagnostic.total}</b><small>temas com âncora + probe revistos</small></div>
+        <div><span>Missões</span><b>{readiness.missions.ready}/{readiness.missions.total}</b><small>focos críticos com ≥2 evidências revistas</small></div>
+        <div><span>Mini-exame</span><b>{readiness.exam.items}/8</b><small>{readiness.exam.themes}/6 temas · {readiness.exam.cognitive}/3 tipos</small></div>
+        <div><span>Total revisto</span><b>{readiness.totalReviewed}</b><small>questões aprovadas</small></div>
+      </div>
+      {readiness.blockers.length>0&&<div className="readinessBlockers"><b>O que bloqueia a beta neste momento</b>{readiness.blockers.map((x,i)=><span key={i}>• {x}</span>)}</div>}
+      <div className="readinessActions"><button onClick={createPriorityBatch}>Criar lote prioritário de 12</button><button className="secondary" onClick={exportPriorityPack}>Exportar 30 prioridades</button></div>
+
+      <div className="teacherBridge">
+        <div className="teacherBridgeHead"><div><small>PONTE COM PROFESSOR EXTERNO</small><h3>Rever fora da app e importar depois</h3></div><span>{roadmap.approvalsNeeded} no caminho atual</span></div>
+        <p>Exporta o roteiro mínimo já com enunciados, opções, solução e checklist. O professor preenche apenas as colunas de revisão e devolve o mesmo CSV.</p>
+        <div className="teacherBridgeInstructions">{teacherReviewInstructions().map((x,i)=><span key={i}>{i+1}. {x}</span>)}</div>
+        <div className="teacherBridgeActions">
+          <button onClick={exportExternalReviewPack}>Exportar roteiro completo para professor</button>
+          <label className="importFileButton">Importar CSV devolvido<input type="file" accept=".csv,text/csv" onChange={e=>previewImport(e.target.files?.[0]||null)}/></label>
+        </div>
+
+        {importPreview&&<div className="importPreview">
+          <div className="importPreviewStats">
+            <div><span>Decisões válidas</span><b>{importPreview.validation.valid.length}</b></div>
+            <div><span>Linhas inválidas</span><b>{importPreview.validation.invalid.length}</b></div>
+            <div><span>Sem decisão</span><b>{importPreview.validation.ignored.length}</b></div>
+          </div>
+          {importPreview.validation.invalid.length>0&&<div className="importErrors"><b>Corrigir antes de importar</b>{importPreview.validation.invalid.slice(0,8).map((x,i)=><span key={i}>Linha {x.rowNumber} · {x.id||"sem ID"} — {x.reason}</span>)}</div>}
+          <button disabled={!importPreview.validation.canApply} onClick={applyImportedReviews}>Aplicar decisões válidas</button>
+          {!importPreview.validation.canApply&&<small>A importação é atómica: enquanto existir uma linha inválida, nenhuma decisão é aplicada.</small>}
+        </div>}
+        {importMessage&&<div className="importMessage">{importMessage}</div>}
+      </div>
+    </section>
+
+    <section className="reviewRoadmap">
+      <div className="reviewRoadmapHead"><div><small>CAMINHO MÍNIMO PARA “GO”</small><h3>{roadmap.ready?"Critérios mínimos já cumpridos":`${roadmap.approvalsNeeded} aprovações estimadas em falta`}</h3></div><b>{roadmap.ready?"✓":roadmap.estimatedHours+" h"}</b></div>
+      {!roadmap.ready&&<><p>O motor calculou uma sequência de revisão que tenta satisfazer os critérios da beta com o menor número de aprovações possível. A estimativa usa cerca de 5 min por questão.</p>
+        <div className="roadmapSteps">{roadmap.selected.slice(0,10).map(row=><button key={row.item.id} onClick={()=>openItem(row.item.id)}>
+          <span>{row.step}</span><div><b>{row.item.id} · {theme(row.item.themeId)?.short}</b><small>{row.item.focus||"Geral"} · {row.reasons.slice(0,2).join(" · ")}</small></div>
+        </button>)}</div>
+        {roadmap.selected.length>10&&<small className="moreRows">+ {roadmap.selected.length-10} aprovações seguintes no roteiro</small>}
+      </>}
+      <div className="roadmapGateGrid">
+        <div><span>Diagnóstico</span><b>{roadmap.status.diagnosticReady}/{roadmap.status.diagnosticTotal}</b></div>
+        <div><span>Focos críticos</span><b>{roadmap.status.criticalReady}/{roadmap.status.criticalTarget}</b></div>
+        <div><span>Exame · itens</span><b>{roadmap.status.examItems}/8</b></div>
+        <div><span>Exame · temas</span><b>{roadmap.status.examThemes}/6</b></div>
+      </div>
+    </section>
 
     <div className="reviewStats">
       <div><span>Protótipo</span><b>{stats.prototype}</b></div>
@@ -1330,6 +1887,12 @@ function ReviewerDashboard({s,setS,go}){
       <div><b>⚠ Revisão prioritária</b><span>{urgent.length} itens bloqueados ou com vários reports</span></div>
       <div className="urgentChips">{urgent.slice(0,6).map(x=><button key={x.item.id} onClick={()=>setSelectedId(x.item.id)}>{x.item.id} · {x.reports} reports</button>)}</div>
     </div>}
+
+    {priorityQueue.length>0&&<section className="priorityReviewList"><div><b>Próximas revisões com maior impacto na beta</b><span>Ordenadas pelo que desbloqueia diagnóstico, Missões e Mini-exames.</span></div>
+      <div>{priorityQueue.slice(0,8).map((row,i)=><button key={row.item.id} onClick={()=>openItem(row.item.id)}>
+        <b>{i+1}. {row.item.id}</b><span>{row.theme?.short} · {row.item.focus||"Geral"}</span><small>{row.reasons.slice(0,3).join(" · ")}</small>
+      </button>)}</div>
+    </section>}
 
     <div className="reviewToolbar">
       <label>Estado<select value={statusFilter} onChange={e=>{setStatusFilter(e.target.value);setSelectedId(null)}}>
@@ -1345,7 +1908,7 @@ function ReviewerDashboard({s,setS,go}){
     <div className="reviewWorkspace">
       <aside className="reviewQueue">
         <div className="queueTitle"><b>Fila</b><span>{filtered.length} itens</span></div>
-        {filtered.slice(0,80).map(row=><button key={row.item.id} className={selected?.item.id===row.item.id?"active":""} onClick={()=>{setSelectedId(row.item.id);setNote("")}}>
+        {filtered.slice(0,80).map(row=><button key={row.item.id} className={selected?.item.id===row.item.id?"active":""} onClick={()=>{setSelectedId(row.item.id);setNote("");setChecklist({math:false,clarity:false,unique:false,distractors:false,solution:false,taxonomy:false,difficulty:false,hypothesis:false})}}>
           <div><b>{row.item.id}</b><small>{theme(row.item.themeId)?.short}</small></div>
           <span className={`state ${row.status}`}>{statusLabel[row.status]||row.status}</span>
           {row.reports>0&&<em>⚠ {row.reports}</em>}
@@ -1375,14 +1938,16 @@ function ReviewerDashboard({s,setS,go}){
           </div>
 
           <div className="reviewChecklist">
-            <label><input type="checkbox"/> Matemática correta</label>
-            <label><input type="checkbox"/> Enunciado claro</label>
-            <label><input type="checkbox"/> Resposta inequívoca</label>
-            <label><input type="checkbox"/> Distratores plausíveis</label>
-            <label><input type="checkbox"/> Resolução suficiente</label>
-            <label><input type="checkbox"/> Classificação curricular correta</label>
-            <label><input type="checkbox"/> Dificuldade adequada</label>
-            <label><input type="checkbox"/> Hipótese de erro plausível</label>
+            {[
+              ["math","Matemática correta"],
+              ["clarity","Enunciado claro"],
+              ["unique","Resposta inequívoca"],
+              ["distractors","Distratores plausíveis"],
+              ["solution","Resolução suficiente"],
+              ["taxonomy","Classificação curricular correta"],
+              ["difficulty","Dificuldade adequada"],
+              ["hypothesis","Hipótese de erro plausível"]
+            ].map(([k,l])=><label key={k}><input type="checkbox" checked={checklist[k]} onChange={e=>setChecklist(prev=>({...prev,[k]:e.target.checked}))}/>{l}</label>)}
           </div>
 
           {selected.reports>0&&<div className="itemReports"><b>⚠ {selected.reports} report{selected.reports!==1?"s":""} de utilizadores</b>
@@ -1390,8 +1955,9 @@ function ReviewerDashboard({s,setS,go}){
 
           <textarea className="reviewNote" placeholder="Nota do revisor (opcional)" value={note} onChange={e=>setNote(e.target.value)}/>
 
+          {!allChecks&&<small className="reviewGateHint">Para aprovar, o revisor tem de confirmar os 8 critérios acima. “Pedir alteração” e “Bloquear” continuam disponíveis sem checklist completa.</small>}
           <div className="reviewActions">
-            <button className="approve" onClick={()=>decide("approve")}>✓ Aprovar</button>
+            <button className="approve" disabled={!allChecks||!reviewer.trim()} onClick={()=>decide("approve")}>✓ Aprovar</button>
             <button className="changes" onClick={()=>decide("changes")}>✎ Pedir alteração</button>
             <button className="block" onClick={()=>decide("block")}>⛔ Bloquear</button>
           </div>
@@ -1410,6 +1976,11 @@ function ReviewerDashboard({s,setS,go}){
         </>}
       </section>
     </div>
+
+    {(s.reviewImports||[]).length>0&&<section className="reviewImports"><h3>Importações externas</h3>{[...(s.reviewImports||[])].reverse().slice(0,8).map(x=><div key={x.id}>
+      <div><b>{x.applied} decisões aplicadas</b><small>{x.fileName||"CSV externo"} · {new Date(x.at).toLocaleString("pt-PT")}</small></div>
+      <span>{(x.reviewerNames||[]).join(", ")||"Revisor externo"}</span>
+    </div>)}</section>}
 
     {(s.reviewBatches||[]).length>0&&<section className="reviewBatches"><h3>Lotes criados</h3>{[...s.reviewBatches].reverse().slice(0,8).map(b=><div key={b.id}>
       <div><b>{b.itemIds.length} questões</b><small>{b.reviewer} · {new Date(b.createdAt).toLocaleDateString("pt-PT")}</small></div><span>{b.status==="open"?"Aberto":"Fechado"}</span>

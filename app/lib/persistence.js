@@ -1,9 +1,10 @@
 export const STORAGE_KEY="a25";
-export const APP_STATE_VERSION=4;
+export const FRIENDS_STORAGE_KEY="a25-friends-beta";
+export const APP_STATE_VERSION=17;
 
-export function loadLocalState(initial,emptyScores){
+export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){
   try{
-    const raw=localStorage.getItem(STORAGE_KEY);
+    const raw=localStorage.getItem(storageKey);
     if(!raw)return null;
     const x=JSON.parse(raw);
     const scores=emptyScores();
@@ -16,23 +17,24 @@ export function loadLocalState(initial,emptyScores){
   }
 }
 
-export function saveLocalState(state){
+export function saveLocalState(state,storageKey=null){
   try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify({...state,_stateVersion:APP_STATE_VERSION}));
+    const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
+    localStorage.setItem(key,JSON.stringify({...state,_stateVersion:APP_STATE_VERSION}));
     return true;
   }catch{
     return false;
   }
 }
 
-export function clearLocalState(){
-  try{localStorage.removeItem(STORAGE_KEY)}catch{}
+export function clearLocalState(storageKey=STORAGE_KEY){
+  try{localStorage.removeItem(storageKey)}catch{}
 }
 
 export function buildSyncEnvelope(state){
   return {
     schema:"aplus-sync-v1",
-    appVersion:"2.5.0",
+    appVersion:"4.2.0",
     exportedAt:new Date().toISOString(),
     identity:{
       mode:state.identity?.mode||"demo",
@@ -49,14 +51,17 @@ export function buildSyncEnvelope(state){
       mode:state.betaMode||"internal",
       sessions:state.betaSessions||[],
       events:state.betaEvents||[],
-      feedback:state.betaFeedback||[]
+      feedback:state.betaFeedback||[],
+      testerMeta:state.betaTesterMeta||null
     },
     contentReports:state.contentReports||[],
     examHistory:state.examHistory||[],
     missionHistory:state.missionHistory||[],
+    learningHypotheses:state.learningHypotheses||[],
     editorial:{
       overrides:state.editorialOverrides||{},
-      batches:state.reviewBatches||[]
+      batches:state.reviewBatches||[],
+      imports:state.reviewImports||[]
     }
   };
 }

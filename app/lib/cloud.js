@@ -68,7 +68,7 @@ export async function cloudSignOut(){
 
 export function studentStateForCloud(s){
   return {
-    schema:"aplus-student-state-v1",
+    schema:"aplus-student-state-v3",
     goal:s.goal,
     profile:s.profile,
     scores:s.scores,
@@ -81,12 +81,15 @@ export function studentStateForCloud(s){
     examHistory:s.examHistory||[],
     lastMission:s.lastMission||null,
     lastExam:s.lastExam||null,
-    betaParticipant:s.betaParticipant||null
+    betaParticipant:s.betaParticipant||null,
+    learningHypotheses:s.learningHypotheses||[],
+    evidenceModelVersion:2,
+    pedagogicalIdVersion:s.pedagogicalIdVersion||1
   };
 }
 
 export function mergeStudentCloudState(local,remote){
-  if(!remote || remote.schema!=="aplus-student-state-v1")return local;
+  if(!remote || !["aplus-student-state-v1","aplus-student-state-v2","aplus-student-state-v3"].includes(remote.schema))return local;
   return {
     ...local,
     goal:remote.goal??local.goal,
@@ -101,7 +104,9 @@ export function mergeStudentCloudState(local,remote){
     examHistory:remote.examHistory??local.examHistory,
     lastMission:remote.lastMission??local.lastMission,
     lastExam:remote.lastExam??local.lastExam,
-    betaParticipant:remote.betaParticipant??local.betaParticipant
+    betaParticipant:remote.betaParticipant??local.betaParticipant,
+    learningHypotheses:remote.learningHypotheses??local.learningHypotheses,
+    pedagogicalIdVersion:remote.pedagogicalIdVersion??local.pedagogicalIdVersion??1
   };
 }
 

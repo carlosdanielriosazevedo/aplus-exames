@@ -1,11 +1,22 @@
 {
   "name": "aplus-exames",
-  "version": "2.5.0",
+  "version": "4.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "engine:audit": "node --experimental-default-type=module scripts/engine-audit.mjs",
+    "reliability:audit": "node --experimental-default-type=module scripts/reliability-audit.mjs",
+    "content:readiness": "node --experimental-default-type=module scripts/content-readiness.mjs",
+    "review:roadmap": "node --experimental-default-type=module scripts/review-roadmap.mjs",
+    "teacher-review:audit": "node --experimental-default-type=module scripts/teacher-review-audit.mjs",
+    "teacher-review:pack": "node --experimental-default-type=module scripts/teacher-review-pack.mjs",
+    "syntax:audit": "node scripts/syntax-audit.cjs",
+    "source:hygiene": "node --experimental-default-type=module scripts/source-hygiene-audit.mjs",
+    "technical:gate": "node --experimental-default-type=module scripts/technical-gate.mjs",
+    "competency-id:audit": "node --experimental-default-type=module scripts/competency-id-audit.mjs",
+    "friends-beta:audit": "node --experimental-default-type=module scripts/friends-beta-audit.mjs"
   },
   "dependencies": {
     "next": "14.2.5",
@@ -13,5 +24,8 @@
     "react-dom": "18.3.1",
     "@neondatabase/serverless": "^1.1.0",
     "@neondatabase/neon-js": "0.7.0-beta"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }
