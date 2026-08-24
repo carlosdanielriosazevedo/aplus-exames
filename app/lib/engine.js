@@ -3,7 +3,11 @@ import {
   QUESTION_BANK,microcompetencyFor,microcompetencyId,microcompetencyLabel
 } from "../data/content.js";
 import {generateVariants,hasGenerator} from "./generators.js";
-import {isEligibleForContext} from "./quality.js";
+import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
+import {
+  HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
+  refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
+} from "./pedagogicalMemory.js";
 
 export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
   acc[t.id]={domain:null,conf:0,evidence:[]};
@@ -13,8 +17,11 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
 export const byYear=year=>TAXONOMY.filter(t=>t.year===year);
 
-export function getQuestions(themeId,context,focus=null){
-  let q=QUESTION_BANK.filter(x=>x.themeId===themeId && x.contexts.includes(context));
+export function getQuestions(themeId,context,focus=null,s=null){
+  const overrides=s?.editorialOverrides||{};
+  let q=QUESTION_BANK
+    .map(x=>effectiveEditorialItem(x,overrides))
+    .filter(x=>x.themeId===themeId && x.contexts.includes(context));
   if(focus){
     const mcId=microcompetencyId(themeId,focus);
     const exact=q.filter(x=>
@@ -28,13 +35,13 @@ export function getQuestions(themeId,context,focus=null){
 }
 
 export function eligibleQuestions(s,themeId,context,focus=null){
-  let q=getQuestions(themeId,context,focus);
+  let q=getQuestions(themeId,context,focus,s);
   if(!s)return q;
   return q.filter(item=>isEligibleForContext(item,context,s.editorialOverrides||{},s.betaMode||"internal"));
 }
 
 export function eligibleCount(s,context){
-  return QUESTION_BANK.filter(q=>q.contexts?.includes(context) && isEligibleForContext(q,context,s?.editorialOverrides||{},s?.betaMode||"internal")).length;
+  return QUESTION_BANK.filter(q=>isEligibleForContext(q,context,s?.editorialOverrides||{},s?.betaMode||"internal")).length;
 }
 
 export function hasTrainingContent(themeId,focus=null,s=null){
@@ -263,7 +270,10 @@ export function selectMissionQuestion(s,themeId,usedIds=[],usedSignatures=[]){
   if(!candidates.length)return null;
   const target=desiredDifficulty(s.scores[themeId],s.goal);
   const usedCogs=new Set(
-    usedIds.map(id=>QUESTION_BANK.find(q=>q.id===id)?.cognitive).filter(Boolean)
+    usedIds.map(id=>{
+      const src=QUESTION_BANK.find(q=>q.id===id);
+      return effectiveEditorialItem(src,s?.editorialOverrides||{})?.cognitive;
+    }).filter(Boolean)
   );
 
   return [...candidates].sort((a,b)=>{
@@ -558,13 +568,13 @@ function calibrationCandidate(s){
 }
 
 function investigationCandidate(s){
-  const hypotheses=[...(s?.learningHypotheses||[])]
-    .filter(h=>h?.targetThemeId && (h.status==="hipótese" || h.status==="causa ainda ambígua" || h.status==="dificuldade de base provável"))
+  const hypotheses=actionableLearningHypotheses(s,12)
+    .filter(h=>h?.targetThemeId && hypothesisNeedsInvestigation(h))
     .sort((a,b)=>(b.lastAt||0)-(a.lastAt||0));
 
   for(const h of hypotheses){
     const ageDays=Math.max(0,(Date.now()-(h.lastAt||0))/(1000*60*60*24));
-    // Não reavaliar imediatamente a mesma hipótese: uma verificação independente no tempo é mais informativa.
+    // Não reavaliar imediatamente. Hipóteses desatualizadas/resolvidas já foram filtradas.
     if(ageDays<1 || ageDays>30)continue;
 
     const targetMcId=h.targetMicrocompetencyId||microcompetencyId(h.targetThemeId,h.targetFocus);
@@ -580,7 +590,11 @@ function investigationCandidate(s){
     if(recentSame)continue;
     if(!eligibleQuestions(s,h.targetThemeId,"mission",targetMcId||h.targetFocus).length)continue;
 
-    const statusBonus=h.status==="causa ainda ambígua"?12:h.status==="dificuldade de base provável"?9:5;
+    const statusBonus=h.lifecycleStatus===HYPOTHESIS_STATUS.ambiguous
+      ?12
+      :h.lifecycleStatus===HYPOTHESIS_STATUS.probablePrerequisite
+        ?9
+        :5;
     const utility=66 + statusBonus + Math.min(10,ageDays*.8);
 
     return {
@@ -723,7 +737,10 @@ export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
   if(!candidates.length)return null;
 
   const usedCogs=new Set(
-    usedIds.map(id=>QUESTION_BANK.find(q=>q.id===id)?.cognitive).filter(Boolean)
+    usedIds.map(id=>{
+      const src=QUESTION_BANK.find(q=>q.id===id);
+      return effectiveEditorialItem(src,s?.editorialOverrides||{})?.cognitive;
+    }).filter(Boolean)
   );
 
   const selected=[...candidates].sort((a,b)=>{
@@ -1076,17 +1093,23 @@ export function likelyUnlocks(themeId){
 }
 
 
-function evidenceMicrocompetencyId(e,themeId=null){
+function evidenceMicrocompetencyId(e,themeId=null,s=null){
   if(e?.microcompetencyId)return e.microcompetencyId;
-  const q=QUESTION_BANK.find(x=>x.id===e?.itemId);
+  const q=effectiveEditorialItem(
+    QUESTION_BANK.find(x=>x.id===e?.itemId),
+    s?.editorialOverrides||{}
+  );
   if(q?.microcompetencyId)return q.microcompetencyId;
   const resolvedTheme=themeId||e?.themeId||q?.themeId;
   return microcompetencyId(resolvedTheme,e?.focus||q?.focus)||null;
 }
 
-function evidenceFocus(e,themeId=null){
-  const id=evidenceMicrocompetencyId(e,themeId);
-  return microcompetencyLabel(id)||e?.focus||QUESTION_BANK.find(q=>q.id===e?.itemId)?.focus||null;
+function evidenceFocus(e,themeId=null,s=null){
+  const id=evidenceMicrocompetencyId(e,themeId,s);
+  return microcompetencyLabel(id)||e?.focus||effectiveEditorialItem(
+    QUESTION_BANK.find(q=>q.id===e?.itemId),
+    s?.editorialOverrides||{}
+  )?.focus||null;
 }
 
 function summarizeEvidenceSubset(evidence=[]){
@@ -1096,8 +1119,8 @@ function summarizeEvidenceSubset(evidence=[]){
 export function focusScore(s,themeId,focusRef){
   const mc=microcompetencyFor(themeId,focusRef);
   const evidence=(s?.scores?.[themeId]?.evidence||[]).filter(e=>{
-    if(mc)return evidenceMicrocompetencyId(e,themeId)===mc.id;
-    return evidenceFocus(e,themeId)===focusRef;
+    if(mc)return evidenceMicrocompetencyId(e,themeId,s)===mc.id;
+    return evidenceFocus(e,themeId,s)===focusRef;
   });
   return summarizeEvidenceSubset(evidence);
 }
@@ -1222,6 +1245,7 @@ export function causalVerdict({probeCorrect,targetThemeId,targetFocus,dependency
 export function recordLearningHypothesis(items=[],event){
   if(!event?.dependency || !event?.verdict)return items||[];
 
+  const at=event.at||Date.now();
   const targetMcId=event.targetMicrocompetencyId
     ||microcompetencyId(event.targetThemeId,event.targetFocus);
   const prerequisiteMcId=event.dependency.microcompetencyId
@@ -1246,29 +1270,68 @@ export function recordLearningHypothesis(items=[],event){
     prerequisiteThemeId:event.dependency.themeId,
     prerequisiteFocus:event.dependency.focus||microcompetencyLabel(prerequisiteMcId)||null,
     prerequisiteMicrocompetencyId:prerequisiteMcId||null,
-    supportsPrerequisite:0,supportsTarget:0,observations:0,status:"hipótese"
+    supportsPrerequisite:0,
+    supportsTarget:0,
+    observations:0,
+    recentPrerequisite:0,
+    recentTarget:0,
+    recentObservations:0,
+    lifecycleStatus:HYPOTHESIS_STATUS.open,
+    status:HYPOTHESIS_STATUS.open,
+    openedAt:at,
+    lastTransitionAt:at,
+    history:[]
   };
 
-  const next={
+  const observed=applyHypothesisObservation({
     ...prev,
     key:stableKey,
     targetMicrocompetencyId:targetMcId||prev.targetMicrocompetencyId||null,
     prerequisiteMicrocompetencyId:prerequisiteMcId||prev.prerequisiteMicrocompetencyId||null,
     targetFocus:prev.targetFocus||event.targetFocus||microcompetencyLabel(targetMcId)||null,
-    prerequisiteFocus:prev.prerequisiteFocus||event.dependency.focus||microcompetencyLabel(prerequisiteMcId)||null,
-    supportsPrerequisite:prev.supportsPrerequisite+(event.verdict.code==="prerequisite_suspected"?1:0),
-    supportsTarget:prev.supportsTarget+(event.verdict.code==="target_more_likely"?1:0),
-    observations:prev.observations+1,
-    lastAt:Date.now(),
-    lastVerdict:event.verdict.code
+    prerequisiteFocus:prev.prerequisiteFocus||event.dependency.focus||microcompetencyLabel(prerequisiteMcId)||null
+  },event.verdict.code,at);
+
+  if(idx>=0)list[idx]=observed; else list.push(observed);
+  return list.slice(-60);
+}
+
+export function refreshLearningHypotheses(state,at=Date.now()){
+  if(!state)return state;
+  const refreshed=(state.learningHypotheses||[]).map(raw=>{
+    const h=normalizeLearningHypothesis(raw,at);
+    const targetRef=h.targetMicrocompetencyId||h.targetFocus;
+    const prerequisiteRef=h.prerequisiteMicrocompetencyId||h.prerequisiteFocus;
+    const targetScore=targetRef?focusScore(state,h.targetThemeId,targetRef):state.scores?.[h.targetThemeId]||null;
+    const prerequisiteScore=prerequisiteRef
+      ?focusScore(state,h.prerequisiteThemeId,prerequisiteRef)
+      :state.scores?.[h.prerequisiteThemeId]||null;
+
+    return refreshHypothesisLifecycle(h,{targetScore,prerequisiteScore,at});
+  });
+
+  return {
+    ...state,
+    learningHypotheses:refreshed,
+    pedagogicalMemoryVersion:2
   };
-  if(next.observations>=2){
-    if(next.supportsPrerequisite>=2)next.status="dificuldade de base provável";
-    else if(next.supportsTarget>=2)next.status="dificuldade específica provável";
-    else next.status="causa ainda ambígua";
-  }
-  if(idx>=0)list[idx]=next; else list.push(next);
-  return list.slice(-40);
+}
+
+export function actionableLearningHypotheses(state,limit=8,at=Date.now()){
+  const refreshed=refreshLearningHypotheses(state,at);
+  return [...(refreshed?.learningHypotheses||[])]
+    .map(h=>hypothesisView(h,at))
+    .filter(h=>h.active)
+    .sort((a,b)=>{
+      const statusWeight=x=>({
+        [HYPOTHESIS_STATUS.ambiguous]:4,
+        [HYPOTHESIS_STATUS.probablePrerequisite]:3,
+        [HYPOTHESIS_STATUS.open]:2,
+        [HYPOTHESIS_STATUS.probableTarget]:1
+      }[x.lifecycleStatus]||0);
+      return statusWeight(b)-statusWeight(a)||(b.lastAt||0)-(a.lastAt||0);
+    })
+    .slice(0,limit);
 }
 
 function migrateEvidenceIds(scores={}){
@@ -1299,7 +1362,7 @@ function migrateHypothesisIds(items=[]){
   return (items||[]).map(h=>{
     const targetMcId=h.targetMicrocompetencyId||microcompetencyId(h.targetThemeId,h.targetFocus);
     const preMcId=h.prerequisiteMicrocompetencyId||microcompetencyId(h.prerequisiteThemeId,h.prerequisiteFocus);
-    return {
+    return normalizeLearningHypothesis({
       ...h,
       targetMicrocompetencyId:targetMcId||null,
       prerequisiteMicrocompetencyId:preMcId||null,
@@ -1309,7 +1372,7 @@ function migrateHypothesisIds(items=[]){
         h.targetThemeId,targetMcId||h.targetFocus||"",
         h.prerequisiteThemeId,preMcId||h.prerequisiteFocus||""
       ].join("|")
-    };
+    });
   });
 }
 
@@ -1327,19 +1390,27 @@ export function migratePedagogicalIds(state){
     microcompetencyId:sig.microcompetencyId||microcompetencyId(sig.themeId,sig.focus)||null
   }));
 
-  return {
+  const migrated={
     ...state,
     scores:migrateEvidenceIds(state.scores||{}),
     missionHistory,
     lastMission,
     freeTrainingSignals,
     learningHypotheses:migrateHypothesisIds(state.learningHypotheses||[]),
-    pedagogicalIdVersion:1
+    pedagogicalIdVersion:1,
+    pedagogicalMemoryVersion:2
   };
+  return refreshLearningHypotheses(migrated);
 }
 
 export function activeLearningHypotheses(s,limit=4){
-  return [...(s?.learningHypotheses||[])]
+  return actionableLearningHypotheses(s,limit);
+}
+
+export function allLearningHypotheses(s,limit=12){
+  const refreshed=refreshLearningHypotheses(s);
+  return [...(refreshed?.learningHypotheses||[])]
+    .map(h=>hypothesisView(h))
     .sort((a,b)=>(b.lastAt||0)-(a.lastAt||0))
     .slice(0,limit);
 }

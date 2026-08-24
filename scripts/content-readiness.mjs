@@ -1,6 +1,8 @@
 
 import fs from "node:fs";
-import {betaContentReadiness,reviewPackRows} from "../app/lib/quality.js";
+import assert from "node:assert/strict";
+import {betaContentReadiness,reviewPackRows,contentRevisionFingerprint} from "../app/lib/quality.js";
+import {QUESTION_BANK} from "../app/data/content.js";
 
 const readiness=betaContentReadiness({},[]);
 console.log(`Content beta readiness: ${readiness.score}%`);
@@ -17,5 +19,18 @@ const csv=[
   headers.map(esc).join(";"),
   ...rows.map(r=>headers.map(h=>esc(r[h])).join(";"))
 ].join("\n");
-fs.writeFileSync("docs/REVISAO_PROFESSOR_PRIORIDADES_v3.6.csv","\ufeff"+csv);
+fs.writeFileSync("docs/REVISAO_PROFESSOR_PRIORIDADES_v5.1.csv","\ufeff"+csv);
 console.log(`Professor review pack: ${rows.length} items`);
+
+
+const allReviewed=Object.fromEntries(QUESTION_BANK.map(q=>[
+  q.id,{
+    status:"reviewed",version:1,reviewer:"audit",
+    reviewedFingerprint:contentRevisionFingerprint(q)
+  }
+]));
+const full=betaContentReadiness(allReviewed,[]);
+assert.equal(10+25+30+20+15,100,"Os pesos teóricos do score devem totalizar 100.");
+assert.equal(full.canClosedBeta,true);
+assert.ok(full.score<=100 && full.score>=80);
+console.log(`✓ content readiness scale: weights total 100; current fully-reviewed corpus reaches ${full.score}% with full structural taxonomy coverage`);

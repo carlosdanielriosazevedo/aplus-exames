@@ -13,6 +13,7 @@ import {
   eligibleQuestions,eligibleCount,rankedStudyPriorities,likelyUnlocks,
   focusScore,focusRows,competenceMap,
   selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
+  allLearningHypotheses,refreshLearningHypotheses,
   recalibrateAllScores,migratePedagogicalIds
 } from "./lib/engine";
 import {
@@ -23,10 +24,24 @@ import {
   minimumReviewRoadmap,reviewRoadmapProgress
 } from "./lib/quality";
 import {
-  buildTeacherReviewPack,serializeSemicolonCsv,parseSemicolonCsv,
+  buildTeacherReviewPack,buildTeacherReviewBatches,teacherReviewOperationsSummary,
+  serializeSemicolonCsv,parseSemicolonCsv,
   validateTeacherReviewImport,applyTeacherReviewImport,teacherReviewInstructions
 } from "./lib/teacherReview";
+import {
+  revisionCandidateFromItem,validateRevisionCandidate,applyContentRevision,
+  revertLastContentRevision,editorialRevisionSummary
+} from "./lib/editorialRevisions";
+import {qaForItemId} from "./lib/preReviewQa";
+import {
+  hybridValidationPlan,hybridValidationSummary,hybridBetaReadiness,hybridLaneForItem
+} from "./lib/hybridValidation";
+import {buildHybridTeacherBatches} from "./lib/hybridTeacherReview";
 import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "./lib/beta";
+import {
+  migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent,
+  retentionSummary,funnelSummary,activationSummary
+} from "./lib/productAnalytics";
 import {engineAuditSummary,engineAuditLabel} from "./lib/engineAudit";
 import {
   loadLocalState,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
@@ -44,17 +59,45 @@ import {
 } from "./lib/identity";
 import {
   cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,
-  loadStudentCloudState,saveStudentCloudState,mergeStudentCloudState
+  loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
 } from "./lib/cloud";
 import {
-  friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
-  isFriendsBeta,friendsBetaReport
+  getOrCreateDeviceId,shortDeviceId,cloudSyncMeta,migrateCloudSync,
+  markCloudLoaded,markCloudSaved,cloudConflict,saveLocalSnapshot,
+  listLocalSnapshots,queueCloudSave,listPendingCloudSaves,removePendingCloudSave,
+  safeCloudMerge
+} from "./lib/cloudReliability";
+import {
+  TESTER_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
+  isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
+  isTargetStudentTester,friendsFeedbackSummary,aggregateFriendsBetaReports
 } from "./lib/friendsBeta";
+import {
+  emptyEngagement,recordStudyActivity,engagementSummary,migrateEngagement,
+  missionCompletedToday,todayMissionRecord
+} from "./lib/engagement";
+import {
+  emptyDailyMission,ensureDailyMissionAssignment,missionPlanForToday,
+  markDailyMissionPromptShown,dismissDailyMissionPrompt,markDailyMissionStarted,
+  dailyMissionPromptDecision,migrateDailyMission
+} from "./lib/dailyMission";
+import {
+  emptyCompetition,recordCompetitiveActivity,competitionSummary,latestCompetitiveActivity,demoLeaderboard,
+  leaderboardAroundUser,leagueProjection,updateCompetitionProfile,scopeAvailability,
+  PORTUGAL_REGIONS,DIVISIONS,PROMOTION_COUNT,DEMOTION_COUNT,
+  SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS,migrateCompetition
+} from "./lib/competition";
 
 const initial={
   goal:17,
   xp:0,
   streak:0,
+  engagement:emptyEngagement(),
+  engagementModelVersion:1,
+  competition:emptyCompetition(),
+  competitionModelVersion:1,
+  dailyMission:emptyDailyMission(),
+  dailyMissionModelVersion:1,
   scores:emptyScores(),
   diagnosticDone:false,
   diagnosticAnswers:0,
@@ -71,13 +114,18 @@ const initial={
   betaEvents:[],
   betaSessions:[],
   betaFeedback:[],
+  productAnalytics:{version:1,firstSeenAt:null,firstSeenDay:null,lastSeenAt:null,activeDays:[],appOpenCount:0,milestones:{},events:[]},
+  productAnalyticsVersion:1,
   betaMode:"internal",
   betaTesterMeta:null,
   syncMeta:{lastAttemptAt:null,lastSuccessAt:null,lastStatus:"local_only"},
   identity:demoIdentity("student"),
   cloudMeta:{lastLoadedAt:null,lastSavedAt:null,lastRemoteUpdatedAt:null},
+  cloudSync:{version:1,deviceId:null,baseRevision:0,baseFingerprint:null,lastRemoteRevision:null,lastRemoteDeviceId:null,lastSyncedAt:null,lastConflictAt:null,lastConflict:null,pendingCount:0},
+  cloudSyncModelVersion:1,
   learningHypotheses:[],
   pedagogicalIdVersion:1,
+  pedagogicalMemoryVersion:2,
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear"}
 };
@@ -95,12 +143,13 @@ export default function App(){
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
     const x=loadLocalState(initial,emptyScores,storageKey);
     const base=x
-      ?migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)})
-      :initial;
-    const next=requested?activateFriendsBeta(base):base;
+      ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)}))))))
+      :migrateProductAnalytics(migrateCloudSync(initial));
+    const betaState=requested?activateFriendsBeta(base):base;
+    const next=recordAppOpen(betaState,{source:"initial_load"});
     const draft=loadSessionDraft(next.betaMode||"internal");
 
-    if(x||requested)setS(next);
+    setS(next);
 
     if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
     if(draft?.kind==="mini_exam" && draft.session)setExamSession(draft.session);
@@ -118,6 +167,17 @@ export default function App(){
   useEffect(()=>{
     if(hydrated)saveLocalState(s);
   },[s,hydrated]);
+
+  useEffect(()=>{
+    if(!hydrated||typeof document==="undefined")return;
+    const register=()=>{
+      if(document.visibilityState==="visible"){
+        setS(prev=>recordAppOpen(prev,{source:"visibility"}));
+      }
+    };
+    document.addEventListener("visibilitychange",register);
+    return ()=>document.removeEventListener("visibilitychange",register);
+  },[hydrated]);
 
   useEffect(()=>{
     if(examSession && ["miniExamIntro","miniExamRun","miniExamReview"].includes(screen)){
@@ -139,6 +199,7 @@ export default function App(){
   if(screen==="train")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
+  if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
     clearSessionDraft(s.betaMode||"internal");
     setRecoveredSession(null);
@@ -187,6 +248,8 @@ function FriendsBetaDisclaimer({s,compact=false}){
 function FriendsBetaPanel({s}){
   if(!isFriendsBeta(s))return null;
   const sum=betaSummary(s);
+  const segment=testerSegmentInfo(currentTesterSegment(s));
+  const fx=friendsFeedbackSummary(s);
 
   function downloadReport(){
     const payload=friendsBetaReport(s);
@@ -201,10 +264,57 @@ function FriendsBetaPanel({s}){
 
   return <div className="friendsBetaPanel">
     <div className="friendsBetaPanelHead"><div><small>BETA PRIVADA · EXPERIÊNCIA</small><b>Código {s.betaParticipant?.code||"—"}</b></div><span>{sum.sessions} sessões</span></div>
+    <div className="testerSegmentTag"><b>{segment.short}</b><span>{segment.group==="target"?"Público-alvo":segment.group==="near_target"?"Próximo do público-alvo":segment.group==="buyer"?"Perspetiva de compra":"Observador"}</span></div>
     <p>Testa como aluno normal e diz-nos onde ficaste confuso, aborrecido ou surpreendido. Os resultados académicos desta versão são provisórios.</p>
     <div className="friendsBetaPanelMeta"><span>{sum.feedbackCount} feedbacks</span><span>{sum.reports} perguntas reportadas</span><span>{sum.completionRate}% conclusão</span></div>
+    {(fx.personalization!==null||fx.returnIntent!==null)&&<div className="friendExperienceNumbers">
+      <div><span>Personalização</span><b>{fx.personalization??"—"}/5</b></div>
+      <div><span>{isTargetStudentTester(s)?"Vontade de voltar amanhã":"Potencial de regresso"}</span><b>{fx.returnIntent??"—"}/5</b></div>
+    </div>}
     <button onClick={downloadReport}>Exportar relatório do teste</button>
     <small>No fim, envia este ficheiro a quem te deu o link. Não inclui nome nem email.</small>
+  </div>;
+}
+
+
+function DailyEngagementCard({s}){
+  const e=engagementSummary(s);
+  const pct=Math.min(100,Math.round((e.xpToday/Math.max(1,e.dailyGoalXp))*100));
+  return <section className={"dailyEngagement "+e.nudge.state}>
+    <div className="dailyEngagementHead">
+      <div><small>RITMO DIÁRIO</small><h3>{e.nudge.title}</h3><p>{e.nudge.detail}</p></div>
+      <div className="streakOrb"><b>🔥 {e.streak}</b><span>{e.streak===1?"dia":"dias"}</span></div>
+    </div>
+    <div className="dailyGoalLine"><div><span>Objetivo diário</span><b>{e.dailyGoalComplete?"Concluído":`${e.xpToday}/${e.dailyGoalXp} XP`}</b></div>
+      <div className="dailyGoalBar"><i style={{width:(e.dailyGoalComplete?100:pct)+"%"}}/></div>
+      <small>Uma Missão, Mini-exame ou Diagnóstico completa o objetivo; em Treino Livre podes completá-lo com {e.dailyGoalXp} XP.</small>
+    </div>
+    <div className="weekRhythm">{e.last7.map(d=>{
+      const label=new Date(`${d.key}T12:00:00`).toLocaleDateString("pt-PT",{weekday:"short"}).replace(".","");
+      return <div key={d.key} className={d.goalComplete?"goal":d.active?"active":""}><span>{label}</span><b>{d.goalComplete?"✓":d.active?"•":"·"}</b></div>;
+    })}</div>
+    <div className="dailyStats"><span>Melhor sequência: <b>{e.longestStreak}</b></span><span>Dias ativos: <b>{e.activeDays}</b></span><span>Objetivos cumpridos: <b>{e.goalDays}</b></span></div>
+  </section>;
+}
+
+function DailyCompletionNote({s}){
+  const e=engagementSummary(s);
+  if(!e.activeToday)return null;
+  return <div className={"dailyCompletionNote "+(e.dailyGoalComplete?"done":"partial")}>
+    <b>{e.dailyGoalComplete?"🔥 Objetivo diário concluído":`🔥 Sequência de ${e.streak} ${e.streak===1?"dia":"dias"} protegida`}</b>
+    <span>{e.dailyGoalComplete
+      ?"Hoje já fizeste o essencial. Podes continuar a treinar, mas não precisas de “farmar” exercícios para manter a sequência."
+      :`Já conta como dia de estudo. Se quiseres completar também o objetivo diário, faltam ${e.xpRemaining} XP ou uma Missão.`}</span>
+  </div>;
+}
+
+
+function CompetitionXpNote({s}){
+  const row=latestCompetitiveActivity(s);
+  if(!row)return null;
+  return <div className="competitionXpNote">
+    <div><small>🏆 XP COMPETITIVO · ESTA SEMANA</small><b>+{row.rankedXp} XP</b></div>
+    <span>{row.reason}</span>
   </div>;
 }
 
@@ -213,21 +323,28 @@ const Shell=({children})=> <main className="light"><FriendsBetaRibbon/><section 
 function Welcome({s,setS,go}){
   const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
   const friends=requested||isFriendsBeta(s);
+  const [segment,setSegment]=useState(currentTesterSegment(s));
 
   function start(){
     if(friends){
+      if(!segment)return;
       setS(prev=>{
-        const next=markFriendsBetaConsent(prev);
+        const next=markFriendsBetaConsent(prev,{segment});
         const already=(next.betaEvents||[]).some(e=>e.type==="friends_beta_started");
         return already?next:{
           ...next,
           betaEvents:[...(next.betaEvents||[]),betaEvent("friends_beta_started",{
             participantCode:next.betaParticipant?.code||null,
-            purpose:"ux_experience"
+            purpose:"ux_experience",
+            testerSegment:segment,
+            testerGroup:testerSegmentInfo(segment).group
           })]
         };
       });
     }
+    setS(prev=>recordMilestone(prev,"onboarding_started",{
+      testerSegment:friends?segment:null
+    }));
     go("onboard");
   }
 
@@ -235,14 +352,19 @@ function Welcome({s,setS,go}){
     <Logo/>
     {friends?<><p className="eyebrow">🧪 BETA PRIVADA · TESTE DE EXPERIÊNCIA</p>
       <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está a ser revisto por professor, por isso não uses os resultados como avaliação real do teu nível.</span></div>
+      <div className="testerSegmentPicker"><b>Antes de começar: qual é a tua perspetiva neste teste?</b>
+        <span>Não pedimos idade, nome nem email. Isto serve apenas para não misturarmos feedback de alunos com feedback de adultos.</span>
+        <div>{Object.entries(TESTER_SEGMENTS).map(([key,item])=><button key={key} className={segment===key?"selected":""} onClick={()=>setSegment(key)}>
+          <strong>{item.label}</strong><small>{item.description}</small>
+        </button>)}</div>
+      </div>
     </>:<p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>}
     <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
     <p>A A+ descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
-    <button onClick={start}>{friends?"Entrar no teste →":"Descobrir o meu nível →"}</button>
+    <button disabled={friends&&!segment} onClick={start}>{friends?(segment?"Entrar no teste →":"Escolhe primeiro o teu perfil"):"Descobrir o meu nível →"}</button>
     <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends?"🧪 Feedback importante":"📈 Progresso real"}</span></div>
   </section></main>
 }
-
 
 function suggestedExamTimingForYear(year,current){
   if(year==="10.º")return "twoYears";
@@ -255,7 +377,10 @@ function suggestedExamTimingForYear(year,current){
 function StudentProfile({s,setS,go}){
   const [p,setP]=useState(s.profile||initial.profile);
   function save(){
-    setS({...s,profile:p});
+    setS(prev=>recordMilestone({...prev,profile:p},"profile_completed",{
+      schoolYear:p.schoolYear||null,
+      examTiming:p.examTiming||null
+    }));
     go("goalOnboard");
   }
   return <Shell><Logo/><p className="eyebrow">ANTES DO DIAGNÓSTICO</p>
@@ -265,7 +390,7 @@ function StudentProfile({s,setS,go}){
     <h3>Em que ano estás?</h3>
     <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming)})}>{x}</button>)}</div>
 
-    <h3>Que nota tens tido aproximadamente a Matemática?</h3>
+    <h3>{p.schoolYear==="Já terminei o secundário"?"Que nota tinhas aproximadamente a Matemática?":"Que nota tens tido aproximadamente a Matemática?"}</h3>
     <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
       const raw=e.target.value.replace(/[^0-9]/g,"");
       const n=raw===""?"":Math.max(0,Math.min(20,Number(raw)));
@@ -293,7 +418,15 @@ function StudentProfile({s,setS,go}){
 
 function GoalScreen({s,setS,go,onboarding=false}){
   const [goal,setGoal]=useState(s.goal);
-  function save(){setS({...s,goal});go(onboarding?"diag":"home")}
+  function save(){
+    setS(prev=>{
+      const next={...prev,goal};
+      return onboarding
+        ?recordMilestone(next,"goal_completed",{goal})
+        :next;
+    });
+    go(onboarding?"diag":"home");
+  }
   return <Shell><Logo/>
     <p className="eyebrow">{onboarding?"O TEU OBJETIVO":"AJUSTAR OBJETIVO"}</p>
     <h1>Que nota queres alcançar?</h1>
@@ -325,7 +458,10 @@ function DiagIntro({s,setS,go}){
     {gated&&<div className="notice warning"><b>Diagnóstico bloqueado pelo gate editorial</b><span>Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão.</span></div>}
     <button className="primary" disabled={gated} onClick={()=>{
       const ses=sessionStart("diagnostic",{goal:s?.goal||null});
-      setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:ses.id})]}));
+      setS(prev=>{
+        const next={...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:ses.id})]};
+        return recordMilestone(next,"diagnostic_started",{sessionId:ses.id});
+      });
       go("diagRun");
     }}>Começar diagnóstico</button>
   </Shell>
@@ -354,7 +490,30 @@ function DiagRun({s,setS,go}){
     const sessions=[...(nextState.betaSessions||[])];
     const idx=[...sessions].map(x=>x.kind==="diagnostic"&&!x.finishedAt).lastIndexOf(true);
     if(idx>=0)sessions[idx]=sessionFinish(sessions[idx],{answers:nextState.diagnosticAnswers});
-    setS({...nextState,diagnosticDone:true,betaSessions:sessions,betaEvents:[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers})]});
+    const base={
+      ...nextState,
+      diagnosticDone:true,
+      betaSessions:sessions,
+      betaEvents:[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers})]
+    };
+    const activityAt=Date.now();
+    let completed=recordStudyActivity(base,{
+      kind:"diagnostic",
+      xpEarned:0,
+      sessionId:idx>=0?sessions[idx]?.id:null,
+      at:activityAt
+    });
+    completed=recordCompetitiveActivity(completed,{
+      kind:"diagnostic",
+      sessionId:idx>=0?sessions[idx]?.id:null,
+      at:activityAt
+    });
+    completed=refreshLearningHypotheses(completed,activityAt);
+    completed=recordMilestone(completed,"diagnostic_completed",{
+      answers:nextState.diagnosticAnswers,
+      sessionId:idx>=0?sessions[idx]?.id:null
+    },{at:activityAt});
+    setS(completed);
     go("diagResult");
   }
 
@@ -461,25 +620,99 @@ function DiagResult({s,setS,go}){
     <span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>
 
   <FriendsBetaDisclaimer s={s}/>
+  <DailyCompletionNote s={s}/>
+  <CompetitionXpNote s={s}/>
   {isFriendsBeta(s)&&<BetaSessionFeedback s={s} setS={setS} kind="diagnostic"/>}
-  <button className="primary" onClick={()=>go("home")}>Ver o meu primeiro plano</button>
+  <button className="primary" onClick={()=>{
+    setS(prev=>recordMilestone(prev,"first_plan_viewed",{
+      measuredThemes:measured.length,
+      firstPriority:priority?.id||null
+    }));
+    go("home");
+  }}>Ver o meu primeiro plano</button>
   </Shell>
+}
+
+
+
+function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
+  if(!plan||plan.type==="blocked")return null;
+  const t=plan.themeId?theme(plan.themeId):null;
+  const typeMeta={
+    priority:{icon:"🎯",label:"Prioridade"},
+    calibration:{icon:"🧭",label:"Calibração"},
+    confirmation:{icon:"✅",label:"Confirmação"},
+    investigation:{icon:"🔎",label:"Investigação"}
+  }[plan.type]||{icon:"🎯",label:"Missão"};
+  const duration={
+    priority:"~10–15 min",
+    calibration:"~6–10 min",
+    confirmation:"~8–12 min",
+    investigation:"~8–14 min"
+  }[plan.type]||"~8–15 min";
+  const daily=engagementSummary(s);
+
+  return <div className="dailyMissionOverlay" role="dialog" aria-modal="true" aria-label="Missão de Hoje">
+    <section className="dailyMissionModal">
+      <div className="dailyMissionGlow">{typeMeta.icon}</div>
+      <div className="dailyMissionModalTop">
+        <small>{mode==="resume"?"MISSÃO EM PAUSA":"NOVA MISSÃO DISPONÍVEL"}</small>
+        <span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"}</span>
+      </div>
+      <div className="dailyMissionTitle">
+        <span>{typeMeta.icon}</span>
+        <div><small>A TUA MISSÃO DE HOJE · {typeMeta.label.toUpperCase()}</small>
+          <h2>{mode==="resume"?"Continuamos de onde ficaste?":t?.short||"Missão de Hoje"}</h2>
+          {plan.focus&&<b>{plan.focus}</b>}
+        </div>
+      </div>
+
+      <p className="dailyMissionReason">{mode==="resume"
+        ?"O teu progresso ficou guardado. Não começamos outra Missão: continuas exatamente a Missão de hoje."
+        :plan.reason}</p>
+
+      {plan.reasons?.length>0&&mode!=="resume"&&<div className="dailyMissionWhy">
+        <small>PORQUE ESTA MISSÃO?</small>
+        {plan.reasons.slice(0,2).map((r,i)=><div key={`${r.kind||"reason"}-${i}`}><span>✓</span><p><b>{r.title}</b><small>{r.detail}</small></p></div>)}
+      </div>}
+
+      <div className="dailyMissionRewards">
+        <div><span>⏱</span><b>{duration}</b><small>duração estimada</small></div>
+        <div><span>🏆</span><b>+50 XP</b><small>competitivo</small></div>
+        <div><span>🔥</span><b>{daily.streak?`Dia ${daily.streak+1}`:"Começar"}</b><small>{daily.streak?"se mantiveres amanhã":"a tua sequência"}</small></div>
+      </div>
+
+      <button className="dailyMissionStart" onClick={onStart}>{mode==="resume"?"Continuar Missão →":"Começar Missão →"}</button>
+      <button className="dailyMissionLater" onClick={onDismiss}>Agora não · ver a Home</button>
+      <small className="dailyMissionFoot">Existe apenas uma Missão principal por dia. Depois podes continuar com Treino Livre ou Mini-exames.</small>
+    </section>
+  </div>;
 }
 
 
 function Home({s,setS,go,reset}){
   const index=prepIndex(s);
+  const daily=engagementSummary(s);
+  const missionDone=missionCompletedToday(s);
+  const completedMission=todayMissionRecord(s);
+  const league=competitionSummary(s);
+  const leagueProj=leagueProjection(s);
   const devView=typeof window!=="undefined" && new URLSearchParams(window.location.search).get("dev")==="1";
   const measured=measuredThemes(s);
-  const plan=dailyMissionPlan(s);
+  const computedPlan=dailyMissionPlan(s);
+  const persistedPlan=missionPlanForToday(s,null);
+  const [pausedDraft,setPausedDraft]=useState(()=>typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null);
+  const plan=pausedDraft?.kind==="mission"&&pausedDraft.plan
+    ?pausedDraft.plan
+    :(persistedPlan||computedPlan);
   const t=plan.themeId?theme(plan.themeId):null;
   const pv=plan.themeId?s.scores[plan.themeId]:null;
   const fv=plan.themeId&&plan.focus?focusScore(s,plan.themeId,plan.focus):null;
   const priorities=[...measured].filter(x=>eligibleQuestions(s,x.id,"mission").length)
     .sort((a,b)=>priorityScore(b,s)-priorityScore(a,s)).slice(0,5);
   const ranked=rankedStudyPriorities(s,4);
-  const [pausedDraft,setPausedDraft]=useState(null);
-  useEffect(()=>{setPausedDraft(loadSessionDraft(s.betaMode||"internal"))},[]);
+  const [showMissionModal,setShowMissionModal]=useState(false);
+  const [missionModalMode,setMissionModalMode]=useState("new");
 
   const labels={
     priority:"🎯 MISSÃO DE HOJE · PRIORIDADE",
@@ -489,13 +722,134 @@ function Home({s,setS,go,reset}){
     blocked:"🔒 MISSÃO INDISPONÍVEL"
   };
 
-  return <main className="dark"><section className="wrap">
-    <header><div><Logo/><small>MATEMÁTICA A</small></div><div className="headerRight"><span className="rolePill">{ROLES[normalizeIdentity(s.identity).activeRole]?.icon} {ROLES[normalizeIdentity(s.identity).activeRole]?.label}</span><span>🔥 {s.streak} dias · <b>{s.xp} XP</b></span></div></header>
+  useEffect(()=>{
+    if(typeof window==="undefined"||missionDone)return;
+
+    const assignmentPlan=pausedDraft?.kind==="mission"&&pausedDraft.plan
+      ?pausedDraft.plan
+      :(persistedPlan||computedPlan);
+
+    if(!s.diagnosticDone||!assignmentPlan||assignmentPlan.type==="blocked")return;
+    if(pausedDraft&&pausedDraft.kind!=="mission")return;
+
+    if(!persistedPlan){
+      setS(prev=>ensureDailyMissionAssignment(prev,assignmentPlan));
+    }
+
+    const decision=dailyMissionPromptDecision(s,{
+      plan:assignmentPlan,
+      diagnosticDone:s.diagnosticDone,
+      pausedDraft
+    });
+    if(!decision.show)return;
+
+    if(decision.mode==="resume"){
+      const resumeKey=`a25-daily-mission-resume:${decision.sessionId||"unknown"}`;
+      if(sessionStorage.getItem(resumeKey))return;
+      sessionStorage.setItem(resumeKey,"1");
+      setMissionModalMode("resume");
+      setShowMissionModal(true);
+      setS(prev=>{
+        let next=ensureDailyMissionAssignment(prev,decision.plan||assignmentPlan);
+        next=markDailyMissionPromptShown(next);
+        next=recordMilestone(next,"first_daily_mission_prompt_shown",{
+          mode:"resume",
+          themeId:decision.plan?.themeId||assignmentPlan.themeId
+        });
+        return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_shown",{
+          mode:"resume",sessionId:decision.sessionId||null,
+          themeId:decision.plan?.themeId||assignmentPlan.themeId,
+          focus:decision.plan?.focus||assignmentPlan.focus||null
+        })]};
+      });
+      return;
+    }
+
+    setMissionModalMode("new");
+    setShowMissionModal(true);
+    setS(prev=>{
+      let next=ensureDailyMissionAssignment(prev,decision.plan||assignmentPlan);
+      next=markDailyMissionPromptShown(next);
+      next=recordMilestone(next,"first_daily_mission_prompt_shown",{
+        mode:"new",themeId:assignmentPlan.themeId,type:assignmentPlan.type
+      });
+      return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_shown",{
+        mode:"new",themeId:assignmentPlan.themeId,focus:assignmentPlan.focus||null,
+        type:assignmentPlan.type
+      })]};
+    });
+  },[]);
+
+  function startDailyMission(source="home_card"){
+    if(missionDone||plan.type==="blocked")return;
+    setShowMissionModal(false);
+
+    if(pausedDraft?.kind==="mission"){
+      setS(prev=>{
+        let next=markDailyMissionStarted(prev);
+        next=recordMilestone(next,"first_mission_started",{
+          source,sessionId:pausedDraft.sessionId||null,themeId:plan.themeId,resumed:true
+        });
+        return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_resumed",{
+          source,sessionId:pausedDraft.sessionId||null,themeId:plan.themeId,focus:plan.focus||null
+        })]};
+      });
+      go("mission");
+      return;
+    }
+
+    const ses=sessionStart("mission",{
+      type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
+      microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
+      decisionSource:plan.decisionMeta?.source||null,
+      dailyMission:true
+    });
+    setS(prev=>{
+      let next=ensureDailyMissionAssignment(prev,plan);
+      next=markDailyMissionStarted(next);
+      next=recordMilestone(next,"first_mission_started",{
+        source,sessionId:ses.id,themeId:plan.themeId
+      });
+      return {...next,
+        betaSessions:[...(next.betaSessions||[]),ses],
+        betaEvents:[...(next.betaEvents||[]),betaEvent("mission_started",{
+          sessionId:ses.id,type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
+          microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
+          decisionSource:plan.decisionMeta?.source||null,
+          source,dailyMission:true
+        })]
+      };
+    });
+    go("mission");
+  }
+
+  function dismissMissionModal(){
+    setShowMissionModal(false);
+    setS(prev=>{
+      const next=dismissDailyMissionPrompt(prev);
+      return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_dismissed",{
+        mode:missionModalMode,themeId:plan.themeId,focus:plan.focus||null
+      })]};
+    });
+  }
+
+  return <main className="dark">
+    {showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
+    <section className="wrap">
+    <header><div><Logo/><small>MATEMÁTICA A</small></div><div className="headerRight"><span className="rolePill">{ROLES[normalizeIdentity(s.identity).activeRole]?.icon} {ROLES[normalizeIdentity(s.identity).activeRole]?.label}</span><span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"} · <b>{s.xp} XP</b></span></div></header>
 
     <div className="hello"><div><p>Boa noite 👋</p><h1>O que vamos conquistar hoje?</h1>
       <button className="goalLink" onClick={()=>go("goalSettings")}>🎯 Objetivo: {s.goal} valores · Alterar</button></div>
       <strong>{index??"—"}<small>/100<br/>índice parcial</small></strong>
     </div>
+
+    <DailyEngagementCard s={s}/>
+
+    <section className="leagueMini" onClick={()=>go("ranking")} role="button" tabIndex="0">
+      <div><small>🏆 RANKING SEMANAL · DEMONSTRAÇÃO</small><h3>{league.division.icon} Divisão {league.division.label}</h3>
+        <p><b>{league.weekXp} XP competitivo</b> esta semana · posição simulada #{leagueProj?.position||"—"}</p></div>
+      <div className={"leagueZone "+(leagueProj?.zone||"stay")}><b>{leagueProj?.message||"Liga em preparação"}</b><span>Ver ranking →</span></div>
+    </section>
 
     <div className="coverageLine"><b>{measured.length}/{TAXONOMY.length}</b><span>áreas já têm evidência. A A+ vai completar o mapa sem te obrigar a fazer outro diagnóstico gigante.</span></div>
 
@@ -507,7 +861,14 @@ function Home({s,setS,go,reset}){
       else go("mission");
     }}>Continuar →</button></div>}
 
-    <div className={"mission "+plan.type}>
+    {missionDone?<div className="mission completedToday">
+      <div className="missionMain"><small>✅ MISSÃO DE HOJE CONCLUÍDA</small>
+        <h2>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"}</h2>
+        <p>A recomendação principal de hoje está feita. A app só prepara uma nova Missão amanhã, depois de considerar tudo o que fizeres entretanto.</p>
+        <div className="missionMeta"><span>🔥 Streak protegido</span><span>🏆 +50 XP competitivo</span><span>Nova Missão amanhã</span></div>
+        <div className="postMissionChoices"><button onClick={()=>go("train")}>Treino Livre</button><button onClick={()=>go("exams")}>Mini-exame</button><button onClick={()=>go("ranking")}>Ranking</button></div>
+      </div>
+    </div>:<div className={"mission "+plan.type}>
       <div className="missionMain"><small>{labels[plan.type]}</small><h2>{t?.short||"Conteúdo protegido"}</h2>
         {plan.focus&&<div className="missionFocus">Foco: <b>{plan.focus}</b></div>}
         <p>{plan.reason}</p>
@@ -519,21 +880,8 @@ function Home({s,setS,go,reset}){
         {plan.reasons?.length>0&&<div className="whyNow"><b>Porque agora?</b>{plan.reasons.map((r,i)=><div key={`${r.kind}-${i}`}><span>✓</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}</div>}
         {plan.unlocks?.length>0&&<div className="unlockLine"><b>↗ Pode desbloquear</b><span>{plan.unlocks.slice(0,3).map(x=>x.label).join(" · ")}</span></div>}
       </div>
-      <button disabled={plan.type==="blocked"} onClick={()=>{
-        if(plan.type==="blocked")return;
-        const ses=sessionStart("mission",{
-          type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
-          microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
-          decisionSource:plan.decisionMeta?.source||null
-        });
-        setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mission_started",{
-          sessionId:ses.id,type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
-          microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
-          decisionSource:plan.decisionMeta?.source||null
-        })]}));
-        go("mission");
-      }}>{plan.type==="blocked"?"Bloqueado":"Começar →"}</button>
-    </div>
+      <button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Bloqueado":pausedDraft?.kind==="mission"?"Continuar →":"Começar →"}</button>
+    </div>}
 
     {ranked.length>0&&<div className="nextActions"><div className="nextActionsHead"><div><small>O MOTOR ESTÁ A PENSAR À FRENTE</small><h3>Próximas prioridades prováveis</h3></div><span>Recalcula após cada sessão</span></div>
       <div className="nextActionRows">{ranked.map((row,i)=>{
@@ -576,7 +924,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const completingRef=useRef(false);
   const draft=recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null);
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"mission"));
-  const [plan]=useState(()=>draft?.plan||dailyMissionPlan(s));
+  const [plan]=useState(()=>draft?.plan||missionPlanForToday(s,dailyMissionPlan(s)));
   const targetId=plan.themeId;
   const [before]=useState(()=>draft?.before||({...s.scores[targetId]}));
   const [beforeFocus]=useState(()=>draft?.beforeFocus??(plan.focus?focusScore(s,targetId,plan.focus):null));
@@ -602,6 +950,12 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour
     });
   },[plan,current,sel,fb,usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour]);
+
+  if(missionCompletedToday(s) && !draft){
+    return <Shell><Back go={go}/><div className="centered"><div className="check">✓</div><p className="eyebrow">MISSÃO DE HOJE CONCLUÍDA</p>
+      <h1>Volta amanhã para uma nova Missão.</h1><p className="muted">Hoje podes continuar com Treino Livre ou Mini-exames. O que fizeres será tido em conta quando o motor preparar a próxima Missão.</p></div>
+      <button className="primary" onClick={()=>go("train")}>Treino Livre</button><button className="secondary" onClick={()=>go("exams")}>Mini-exame</button></Shell>;
+  }
 
   function answer(n){if(!fb){setSel(n);setFb({correct:n===current.a})}}
 
@@ -639,8 +993,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     const openIdx=[...sessions].map(x=>x.kind==="mission"&&!x.finishedAt).lastIndexOf(true);
     if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:targetId,focus:plan.focus||null,type:plan.type,totalCount:newTotal});
 
-    const finished={...finalState,
-      streak:Math.max(1,finalState.streak+1),
+    const baseFinished={...finalState,
       betaSessions:sessions,
       betaEvents:[...(finalState.betaEvents||[]),betaEvent("mission_finished",{
         sessionId:sessionId||null,themeId:targetId,focus:plan.focus||null,
@@ -659,6 +1012,27 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
         signal:plan.signal||null
       }
     };
+    const activityAt=Date.now();
+    let finished=recordStudyActivity(baseFinished,{
+      kind:"mission",
+      xpEarned:newTotal*25,
+      sessionId:sessionId||historyItem.completionId,
+      at:activityAt
+    });
+    finished=recordCompetitiveActivity(finished,{
+      kind:"mission",
+      total:newTotal,
+      focusKey:plan.microcompetencyId||microcompetencyId(targetId,plan.focus)||`${targetId}:${plan.focus||""}`,
+      sessionId:sessionId||historyItem.completionId,
+      at:activityAt
+    });
+    finished=refreshLearningHypotheses(finished,activityAt);
+    finished=recordMilestone(finished,"first_mission_completed",{
+      sessionId:sessionId||historyItem.completionId,
+      themeId:targetId,
+      type:plan.type,
+      totalCount:newTotal
+    },{at:activityAt});
     clearSessionDraft(s.betaMode||"internal");
     setS(finished);go("missionResult");
   }
@@ -849,11 +1223,123 @@ function MissionResult({s,setS,go}){
     <div className="notice"><b>O plano vai ser recalculado agora</b><span>A próxima Missão não está pré-programada. O motor volta a comparar dificuldades, certeza, pré-requisitos, relevância, recência e objetivo com esta nova evidência.</span></div>
 
     <FriendsBetaDisclaimer s={s}/>
+    <DailyCompletionNote s={s}/>
+    <CompetitionXpNote s={s}/>
     <BetaSessionFeedback s={s} setS={setS} kind="mission"/>
     <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
     <button className="secondary" onClick={()=>go("progress")}>Ver progresso detalhado</button>
   </Shell>
 }
+
+
+function Ranking({s,setS,go}){
+  const summary=competitionSummary(s);
+  const projection=leagueProjection(s);
+  const profile=summary.profile||{};
+  const [scope,setScope]=useState("league");
+  const [nickname,setNickname]=useState(profile.nickname||"");
+  const [region,setRegion]=useState(profile.region||"");
+  const [school,setSchool]=useState(profile.school||"");
+  const [districtOptIn,setDistrictOptIn]=useState(!!profile.districtOptIn);
+  const [schoolOptIn,setSchoolOptIn]=useState(!!profile.schoolOptIn);
+  const availability=scopeAvailability(s,scope);
+  const allRows=availability.available?demoLeaderboard(s,{scope}):[];
+  const rows=scope==="league"?allRows:leaderboardAroundUser(allRows,3);
+  const self=allRows.find(x=>x.self);
+  const latest=latestCompetitiveActivity(s);
+
+  const scopeLabel={
+    league:`Divisão ${summary.division.label}`,
+    general:"Geral",
+    year:s.profile?.schoolYear||"Meu ano",
+    district:profile.region||"Distrito/Região",
+    school:profile.school||"Escola"
+  }[scope];
+
+  function saveProfile(){
+    setS(prev=>updateCompetitionProfile(prev,{
+      nickname,
+      region:region||null,
+      school:school||null,
+      districtOptIn,
+      schoolOptIn
+    }));
+  }
+
+  return <Shell><Back go={go}/>
+    <div className="rankingHero">
+      <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
+        <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
+      <div className="divisionBadge"><span>{summary.division.icon}</span><b>{summary.division.label}</b><small>{summary.weekXp} XP esta semana</small></div>
+    </div>
+
+    <div className="demoRankingWarning"><b>DEMONSTRAÇÃO LOCAL</b><span>Os outros nomes e XP desta versão são simulados para testarmos a experiência. O ranking real só será ligado quando existir backend multiutilizador.</span></div>
+
+    <div className="rankingTabs">
+      {[["league","Divisão"],["general","Geral"],["year","Ano"],["district","Distrito"],["school","Escola"]].map(([id,label])=>
+        <button key={id} className={scope===id?"sel":""} onClick={()=>setScope(id)}>{label}</button>
+      )}
+    </div>
+
+    {scope==="league"&&<section className="leagueStatus">
+      <div><small>DIVISÃO ATUAL</small><h3>{summary.division.icon} {summary.division.label}</h3><p>{projection?.message}</p></div>
+      <div><b>#{projection?.position||"—"}</b><span>de {allRows.length||20}</span></div>
+      <footer><span>↑ Top {PROMOTION_COUNT} sobem</span><span>↓ Últimos {DEMOTION_COUNT} descem</span><span>Termina em ~{summary.daysRemaining} d</span></footer>
+    </section>}
+
+    {!availability.available?<div className="rankingLocked">
+      <b>{scope==="district"?"Ranking de distrito/região ainda não ativo":"Ranking de escola ainda não ativo"}</b>
+      <span>{availability.reason}</span>
+      <small>{scope==="school"
+        ?`No ranking real, só abriremos uma tabela de escola com pelo menos ${SCHOOL_MIN_PARTICIPANTS} participantes elegíveis, para reduzir risco de identificação.`
+        :`No ranking real, o distrito/região terá um limiar mínimo de ${DISTRICT_MIN_PARTICIPANTS} participantes.`}</small>
+    </div>:<section className="leaderboard">
+      <div className="leaderboardHead"><div><small>RANKING SEMANAL · {scopeLabel?.toUpperCase()}</small><h3>{scope==="league"?"A tua liga":scopeLabel}</h3></div><span>{self?`Tu: #${self.position}`:"—"}</span></div>
+      <div className="leaderboardRows">{rows.map(row=>{
+        const promote=scope==="league"&&row.position<=PROMOTION_COUNT;
+        const demote=scope==="league"&&row.position>allRows.length-DEMOTION_COUNT;
+        return <div key={row.id} className={(row.self?"self ":"")+(promote?"promote ":demote?"demote ":"")}>
+          <b className="rankPos">{row.position}</b>
+          <span className="rankAvatar">{row.self?"🙂":row.position===1?"🥇":row.position===2?"🥈":row.position===3?"🥉":"●"}</span>
+          <div><strong>{row.nickname}{row.self?" · TU":""}</strong><small>{row.demo?"tester simulado":"o teu perfil"}</small></div>
+          <em>{row.xp} XP</em>
+        </div>
+      })}</div>
+      {scope!=="league"&&<small className="aroundYouNote">Em rankings muito grandes, a experiência deverá privilegiar a tua posição e quem está imediatamente acima/abaixo — não uma lista infinita.</small>}
+    </section>}
+
+    <section className="xpRules">
+      <div><small>COMO GANHAS XP COMPETITIVO</small><h3>Mais estudo útil, menos farming.</h3></div>
+      <div className="xpRuleGrid">
+        <div><b>🎯 +50</b><span>Missão diária</span><small>Uma única Missão por dia.</small></div>
+        <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
+        <div><b>📝 até +80</b><span>Mini-exame</span><small>XP pela atividade concluída, não pela nota.</small></div>
+        <div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Conta uma vez.</small></div>
+      </div>
+      {latest&&<div className="lastRankXp"><b>Último ganho: +{latest.rankedXp} XP</b><span>{latest.reason}</span></div>}
+      <p className="muted">O teu <b>XP total</b> continua acumulado para sempre. O <b>XP competitivo</b> reinicia semanalmente para que um aluno novo possa competir desde a primeira semana.</p>
+    </section>
+
+    <section className="divisionLadder">
+      <small>DIVISÕES</small>
+      <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===summary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
+      <p>Em produção, cada liga terá um pequeno grupo de alunos com atividade comparável. No final da semana, os primeiros sobem e os últimos podem descer.</p>
+    </section>
+
+    <section className="rankingProfile">
+      <div><small>PERFIL PÚBLICO DO RANKING</small><h3>Nickname, nunca nota.</h3>
+        <p>Por defeito não mostramos nome real. Escola e distrito/região são opcionais e só entram nos rankings se o aluno aderir.</p></div>
+      <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
+      <label>Distrito/Região<select value={region} onChange={e=>setRegion(e.target.value)}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
+      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Opcional"/></label>
+      <label className="rankConsent"><input type="checkbox" checked={districtOptIn} onChange={e=>setDistrictOptIn(e.target.checked)}/><span>Participar no ranking do meu distrito/região.</span></label>
+      <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
+      <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
+      <small className="privacyRankNote">Nunca entram no ranking: Domínio, Certeza, Índice de Preparação, nota objetivo, resultados de exame ou número de erros.</small>
+    </section>
+  </Shell>;
+}
+
 
 function Train({s,setS,go,start}){
   const [year,setYear]=useState("12.º");
@@ -956,19 +1442,36 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
         const sessions=[...(prev.betaSessions||[])];
         const openIdx=[...sessions].map(x=>x.kind==="training"&&!x.finishedAt).lastIndexOf(true);
         if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length});
-        return {...prev,
-        xp:prev.xp+newCorrect*10,
-        betaSessions:sessions,
-        betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length})],
-        freeTrainingSignals:potential?[
-          ...(prev.freeTrainingSignals||[]).filter(x=>!(x.themeId===cfg.themeId && x.focus===cfg.focus && !x.confirmed)),
-          {
-            themeId:cfg.themeId,focus:cfg.focus,
-            microcompetencyId:microcompetencyId(cfg.themeId,cfg.focus)||null,
-            ratio,at:Date.now(),confirmed:false,originSessionId:sessionId||null
-          }
-        ]:(prev.freeTrainingSignals||[])
-      }});
+        const base={
+          ...prev,
+          xp:prev.xp+newCorrect*10,
+          betaSessions:sessions,
+          betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length})],
+          freeTrainingSignals:potential?[
+            ...(prev.freeTrainingSignals||[]).filter(x=>!(x.themeId===cfg.themeId && x.focus===cfg.focus && !x.confirmed)),
+            {
+              themeId:cfg.themeId,focus:cfg.focus,
+              microcompetencyId:microcompetencyId(cfg.themeId,cfg.focus)||null,
+              ratio,at:Date.now(),confirmed:false,originSessionId:sessionId||null
+            }
+          ]:(prev.freeTrainingSignals||[])
+        };
+        const activityAt=Date.now();
+        let completed=recordStudyActivity(base,{
+          kind:"training",
+          xpEarned:newCorrect*10,
+          sessionId:sessionId||null,
+          at:activityAt
+        });
+        completed=recordCompetitiveActivity(completed,{
+          kind:"training",
+          total:questions.length,
+          focusKey:microcompetencyId(cfg.themeId,cfg.focus)||`${cfg.themeId}:${cfg.focus||""}`,
+          sessionId:sessionId||null,
+          at:activityAt
+        });
+        return completed;
+      });
       clearSessionDraft(s.betaMode||"internal");
       setDone(true);return;
     }
@@ -984,6 +1487,8 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A A+ guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
       :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da A+.</span></div>}
       <FriendsBetaDisclaimer s={s}/>
+      <DailyCompletionNote s={s}/>
+      <CompetitionXpNote s={s}/>
       <BetaSessionFeedback s={s} setS={setS} kind="training"/>
       <button className="primary" onClick={()=>go("home")}>Voltar à Home</button>
       <button className="secondary" onClick={()=>go("train")}>Treinar outra coisa</button>
@@ -1006,26 +1511,40 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
 
 function Progress({s,go}){
   const [year,setYear]=useState("12.º");
-  const hypotheses=activeLearningHypotheses(s,4);
+  const hypotheses=allLearningHypotheses(s,8);
+  const activeHypotheses=hypotheses.filter(h=>h.active);
+  const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
   return <Shell><Back go={go}/><p className="eyebrow">PROGRESSO</p>
     <h1>O teu mapa de conhecimento.</h1>
     <p className="muted">Agora distinguimos o <b>tema</b> das competências dentro dele. Podes estar forte em zeros de funções e fraco em monotonia — a A+ já não mistura as duas coisas numa única conclusão.</p>
     <FriendsBetaDisclaimer s={s} compact/>
     <div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
 
-    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA</small><h3>O que a app está a tentar perceber</h3></div>
-      {hypotheses.map(h=><div className="hypothesisRow" key={h.key}>
-        <span>{h.status==="hipótese"?"?":h.status.includes("base")?"↳":"✓"}</span>
-        <div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{h.status==="dificuldade de base provável"
-          ?`Base provável: ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short}`
-          :h.status==="dificuldade específica provável"
-            ?`A base ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short} tem respondido bem`
-            :h.status==="causa ainda ambígua"
-              ?"A evidência aponta em direções diferentes; vamos voltar a testar."
-              :`A investigar: ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short}`}</small></div>
+    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
+      {activeHypotheses.length>0?<>{activeHypotheses.slice(0,5).map(h=><div className={"hypothesisRow lifecycle-"+h.lifecycleStatus} key={h.key}>
+        <span>{h.icon}</span>
+        <div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{
+          h.lifecycleStatus==="probable_prerequisite"
+            ?`Base provável: ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short}. Vamos confirmar se continua a bloquear esta competência.`
+            :h.lifecycleStatus==="probable_target"
+              ?`A base ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short} tem respondido melhor; a dificuldade parece mais específica do alvo.`
+              :h.lifecycleStatus==="ambiguous"
+                ?"A evidência aponta em direções diferentes. A app não vai fingir que já sabe a causa."
+                :`Ainda estamos a investigar se ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short} explica parte da dificuldade.`
+        }</small><em className="hypothesisLifecycleLabel">{h.label}</em></div>
         <em>{h.observations} {h.observations===1?"verificação":"verificações"}</em>
-      </div>)}
-      <p>Estas hipóteses não são diagnósticos definitivos. Só ganham força com verificações independentes ao longo do tempo.</p>
+      </div>)}</>:<div className="memoryQuiet"><b>Sem hipóteses ativas neste momento.</b><span>A app continua a observar o teu desempenho e reabre uma hipótese se surgirem novas contradições.</span></div>}
+
+      {closedHypotheses.length>0&&<details className="closedHypotheses"><summary>Ver memória recente resolvida/desatualizada ({closedHypotheses.length})</summary>
+        {closedHypotheses.map(h=><div className={"hypothesisRow closed lifecycle-"+h.lifecycleStatus} key={h.key}>
+          <span>{h.icon}</span><div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{h.lifecycleStatus==="resolved"
+            ?(h.resolutionReason||"A evidência recente permitiu fechar esta hipótese.")
+            :"Passou demasiado tempo sem nova evidência causal. Não influencia a Missão até surgir um novo sinal."}</small><em className="hypothesisLifecycleLabel">{h.label}</em></div>
+          <em>{h.reopenCount?`${h.reopenCount} reab.`:""}</em>
+        </div>)}
+      </details>}
+
+      <p>Uma hipótese pode ganhar força, tornar-se ambígua, ser resolvida ou ficar desatualizada. Se aparecer nova evidência contraditória, pode ser reaberta. <b>Hipótese não é diagnóstico definitivo.</b></p>
     </div>}
 
     {byYear(year).map(t=>{
@@ -1130,6 +1649,20 @@ function MiniExamReview({session,setSession,s,setS,go}){
       betaSessions:sessions,
       betaEvents:[...(updated.betaEvents||[]),betaEvent("mini_exam_finished",{sessionId:session.sessionId||null,score20:updated.lastExam?.score20,total:session.questions.length})]
     };
+    const activityAt=Date.now();
+    updated=recordStudyActivity(updated,{
+      kind:"mini_exam",
+      xpEarned:(updated.lastExam?.correctCount||0)*18,
+      sessionId:session.sessionId||updated.lastExam?.completionId||null,
+      at:activityAt
+    });
+    updated=recordCompetitiveActivity(updated,{
+      kind:"mini_exam",
+      total:session.questions.length,
+      sessionId:session.sessionId||updated.lastExam?.completionId||null,
+      at:activityAt
+    });
+    updated=refreshLearningHypotheses(updated,activityAt);
     clearSessionDraft(s.betaMode||"internal");
     setS(updated);go("miniExamResult");
   }
@@ -1152,6 +1685,8 @@ function MiniExamResult({s,setS,go}){
     <p className="muted">{r.correctCount}/{r.total} respostas corretas · {mins}:{String(secs).padStart(2,'0')}</p>
     <small className="resultDisclaimer">Resultado deste Mini-exame A+ — não é uma previsão da nota do Exame Nacional.</small></div>
     <FriendsBetaDisclaimer s={s}/>
+    <DailyCompletionNote s={s}/>
+    <CompetitionXpNote s={s}/>
 
     <div className="examChanges"><h3>O que mudou no teu mapa?</h3>{r.changes.map(c=>{
       const t=theme(c.themeId);
@@ -1179,6 +1714,19 @@ function AccountCloud({s,setS,go}){
   const [session,setSession]=useState({loading:true,user:null,error:null});
   const [busy,setBusy]=useState(false);
   const [message,setMessage]=useState(null);
+  const [conflictRemote,setConflictRemote]=useState(null);
+  const [pending,setPending]=useState([]);
+  const [snapshots,setSnapshots]=useState([]);
+
+  const sync=cloudSyncMeta(s);
+  const deviceId=sync.deviceId||getOrCreateDeviceId();
+
+  function refreshLocalSafety(){
+    setPending(listPendingCloudSaves());
+    setSnapshots(listLocalSnapshots());
+  }
+
+  useEffect(()=>{refreshLocalSafety()},[]);
 
   async function refreshSession(){
     if(!cfg.configured){
@@ -1188,7 +1736,7 @@ function AccountCloud({s,setS,go}){
     const result=await getCloudSession();
     setSession({loading:false,user:result.user||null,error:result.error||null});
     if(result.user){
-      setS(prev=>({...prev,identity:{
+      setS(prev=>({...migrateCloudSync(prev),identity:{
         mode:"authenticated",
         authUserId:result.user.id,
         displayName:result.user.name||result.user.email?.split("@")[0]||"Aluno",
@@ -1200,6 +1748,21 @@ function AccountCloud({s,setS,go}){
   }
 
   useEffect(()=>{refreshSession()},[]);
+
+  function normalizeAfterCloud(base){
+    return migrateCloudSync(
+      migrateDailyMission(
+        migrateCompetition(
+          migrateEngagement(
+            migratePedagogicalIds({
+              ...base,
+              scores:recalibrateAllScores(base.scores)
+            })
+          )
+        )
+      )
+    );
+  }
 
   async function submit(){
     setBusy(true);setMessage(null);
@@ -1223,48 +1786,191 @@ function AccountCloud({s,setS,go}){
       await cloudSignOut();
       setS(prev=>({...prev,identity:demoIdentity("student")}));
       setSession({loading:false,user:null,error:null});
+      setConflictRemote(null);
       setMessage({ok:true,text:"Sessão terminada. O progresso local continua neste dispositivo."});
     }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
     finally{setBusy(false)}
   }
 
+  function registerConflict(remote){
+    setConflictRemote(remote||null);
+    setS(prev=>cloudConflict(prev,{
+      remoteRevision:remote?.revision,
+      remoteDeviceId:remote?.last_device_id,
+      remoteUpdatedAt:remote?.updated_at,
+      remoteState:remote?.state_json
+    }));
+    setMessage({ok:false,text:"A cloud tem uma versão mais recente. Não substituímos nada automaticamente."});
+  }
+
   async function saveCloud(){
-    setBusy(true);setMessage(null);
+    setBusy(true);setMessage(null);setConflictRemote(null);
+    const currentSync=cloudSyncMeta(s);
     try{
-      const result=await saveStudentCloudState(s);
+      const result=await saveStudentCloudState(s,{
+        expectedRevision:currentSync.baseRevision,
+        deviceId,
+        knownRemote:!!currentSync.baseFingerprint
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);return;
+      }
+
       const now=Date.now();
-      setS(prev=>({...prev,cloudMeta:{...(prev.cloudMeta||{}),lastSavedAt:now,lastRemoteUpdatedAt:result?.updated_at||new Date(now).toISOString()}}));
-      setMessage({ok:true,text:"Progresso guardado na cloud."});
-    }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
-    finally{setBusy(false)}
+      const revision=Number(result?.data?.revision)||currentSync.baseRevision+1;
+      setS(prev=>{
+        let next=markCloudSaved(prev,{revision,deviceId,savedState:prev,at:now});
+        return {...next,cloudMeta:{...(next.cloudMeta||{}),lastSavedAt:now,lastRemoteUpdatedAt:result?.data?.updated_at||new Date(now).toISOString()}};
+      });
+      setMessage({ok:true,text:`Progresso guardado com segurança na cloud · revisão ${revision}.`});
+    }catch(error){
+      if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
+        setMessage({ok:false,text:"Falta aplicar a migration v4.9 da cloud. O progresso local não foi alterado."});
+      }else{
+        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision});
+        refreshLocalSafety();
+        setMessage({ok:false,text:"Não foi possível chegar à cloud. Guardámos uma tentativa local para poderes repetir mais tarde; o estudo continua seguro neste dispositivo."});
+      }
+    }finally{setBusy(false)}
   }
 
   async function loadCloud(){
-    setBusy(true);setMessage(null);
+    setBusy(true);setMessage(null);setConflictRemote(null);
     try{
       const row=await loadStudentCloudState();
       if(!row?.state_json){
-        setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado na cloud."});
+        setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado na cloud. O primeiro Guardar criará a revisão 1."});
       }else{
+        saveLocalSnapshot(s,{label:"Antes de carregar da cloud"});
         const merged=mergeStudentCloudState(s,row.state_json);
-        const recalibrated=migratePedagogicalIds({...merged,scores:recalibrateAllScores(merged.scores)});
+        let recalibrated=normalizeAfterCloud(merged);
+        recalibrated=markCloudLoaded(recalibrated,{
+          revision:row.revision,
+          remoteDeviceId:row.last_device_id,
+          remoteState:row.state_json
+        });
         setS({...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
-        setMessage({ok:true,text:"Progresso carregado da cloud para este dispositivo."});
+        refreshLocalSafety();
+        setMessage({ok:true,text:`Cloud carregada · revisão ${row.revision}. Criámos um snapshot local antes da substituição.`});
       }
-    }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
-    finally{setBusy(false)}
+    }catch(error){
+      setMessage({ok:false,text:error?.code==="CLOUD_SCHEMA_OUTDATED"
+        ?"Falta aplicar a migration v4.9 da cloud. Não carregámos nem alterámos o progresso local."
+        :String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  async function resolveKeepRemote(){
+    if(!conflictRemote?.state_json)return;
+    setBusy(true);setMessage(null);
+    try{
+      saveLocalSnapshot(s,{label:"Conflito · antes de manter a cloud"});
+      const merged=mergeStudentCloudState(s,conflictRemote.state_json);
+      let next=normalizeAfterCloud(merged);
+      next=markCloudLoaded(next,{
+        revision:conflictRemote.revision,
+        remoteDeviceId:conflictRemote.last_device_id,
+        remoteState:conflictRemote.state_json
+      });
+      setS(next);
+      setConflictRemote(null);
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Mantivemos a revisão ${conflictRemote.revision} da cloud. A versão local anterior ficou num snapshot.`});
+    }finally{setBusy(false)}
+  }
+
+  async function resolveKeepLocal(){
+    if(!conflictRemote)return;
+    setBusy(true);setMessage(null);
+    try{
+      saveLocalSnapshot(s,{label:"Conflito · antes de substituir a cloud"});
+      const result=await overwriteStudentCloudState(s,{
+        remoteRevision:conflictRemote.revision,
+        deviceId
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);
+        setMessage({ok:false,text:"A cloud mudou novamente enquanto resolvias o conflito. Voltámos a bloquear a escrita."});
+        return;
+      }
+      const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
+      setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:prev}));
+      setConflictRemote(null);
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Mantivemos este dispositivo e criámos a revisão ${revision}. O estado anterior foi preservado num snapshot.`});
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  async function resolveMerge(){
+    if(!conflictRemote?.state_json)return;
+    setBusy(true);setMessage(null);
+    try{
+      saveLocalSnapshot(s,{label:"Conflito · antes de combinar"});
+      const combined=safeCloudMerge(s,conflictRemote.state_json);
+      let next=normalizeAfterCloud(combined);
+      next=markCloudLoaded(next,{
+        revision:conflictRemote.revision,
+        remoteDeviceId:conflictRemote.last_device_id,
+        remoteState:conflictRemote.state_json
+      });
+
+      const result=await overwriteStudentCloudState(next,{
+        remoteRevision:conflictRemote.revision,
+        deviceId
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);
+        setMessage({ok:false,text:"A cloud mudou novamente antes de concluirmos a combinação. Nada foi sobrescrito."});
+        return;
+      }
+
+      const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
+      next=markCloudSaved(next,{revision,deviceId,savedState:next});
+      setS(next);
+      setConflictRemote(null);
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Combinámos atividade independente dos dois dispositivos e guardámos a revisão ${revision}.`});
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  async function retryPending(){
+    const item=pending[0];
+    if(!item)return;
+    setBusy(true);setMessage(null);
+    try{
+      const result=await saveStudentCloudState(item.state,{
+        expectedRevision:item.expectedRevision,
+        deviceId:item.deviceId||deviceId,
+        knownRemote:!!item.knownRemote
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);return;
+      }
+      removePendingCloudSave(item.id);
+      const revision=Number(result?.data?.revision)||item.expectedRevision+1;
+      setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:item.state}));
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Tentativa pendente sincronizada · revisão ${revision}.`});
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
   }
 
   const user=session.user;
   const localIndex=prepIndex(s);
+  const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
-  return <Shell><Back go={go}/><p className="eyebrow">CONTA A+ · CLOUD</p>
-    <h1>O teu progresso, em qualquer dispositivo.</h1>
-    <p className="muted">A A+ continua local-first. A conta acrescenta sincronização: se a cloud falhar, estudar não fica bloqueado.</p>
+  return <Shell><Back go={go}/><p className="eyebrow">CONTA A+ · CLOUD SEGURA</p>
+    <h1>O teu progresso, sem sobrescritas silenciosas.</h1>
+    <p className="muted">A app continua local-first. A v4.9 passa a tratar cada gravação cloud como uma revisão: se outro dispositivo avançou entretanto, a escrita é bloqueada e és tu que decides o que fazer.</p>
 
     {!cfg.configured&&<div className="cloudUnavailable">
       <b>○ Neon Auth/Data API ainda não ativados</b>
-      <span>O código já está preparado, mas faltam os dois endpoints do projeto Neon. Até lá, a app continua integralmente em modo local/demo.</span>
+      <span>A arquitetura de conflitos já está pronta, mas nenhum serviço externo foi ativado por esta versão. O estudo continua integralmente local.</span>
     </div>}
 
     {cfg.configured&&session.loading&&<div className="cloudLoading">A verificar sessão…</div>}
@@ -1277,7 +1983,7 @@ function AccountCloud({s,setS,go}){
         <label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
         <button disabled={busy||!email.trim()||password.length<8} onClick={submit}>{busy?"A processar…":mode==="signup"?"Criar conta":"Entrar"}</button>
       </div>
-      <small className="cloudPrivacy">A password é tratada pelo Neon Auth. A+ não guarda nem recebe passwords na nossa base de dados de negócio.</small>
+      <small className="cloudPrivacy">A password é tratada pelo Neon Auth. A app não guarda passwords na base de dados de progresso.</small>
     </>}
 
     {cfg.configured&&!session.loading&&user&&<>
@@ -1291,12 +1997,34 @@ function AccountCloud({s,setS,go}){
         <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{TAXONOMY.length}</b></div>
       </div>
 
-      <div className="syncActions">
-        <button onClick={saveCloud} disabled={busy}>↑ Guardar este dispositivo na cloud</button>
-        <button onClick={loadCloud} disabled={busy}>↓ Carregar progresso da cloud</button>
+      <div className="cloudRevisionCard">
+        <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Revisão conhecida: {sync.baseRevision}</span></div>
+        <div><small>ÚLTIMA CLOUD CONHECIDA</small><b>rev. {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>
+        <div><small>REDE DE SEGURANÇA</small><b>{snapshots.length} snapshots</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>
       </div>
 
-      <div className="notice"><b>Porque ainda não sincronizamos silenciosamente?</b><span>Nesta primeira implementação real preferimos tornar o comportamento explícito. Depois de testarmos conflitos entre telemóvel/PC, podemos ativar sincronização automática com segurança.</span></div>
+      <div className="syncActions">
+        <button onClick={saveCloud} disabled={busy}>↑ Guardar com controlo de revisão</button>
+        <button onClick={loadCloud} disabled={busy}>↓ Carregar cloud com snapshot</button>
+      </div>
+
+      {pending.length>0&&<div className="pendingCloudSave">
+        <div><b>⟳ Há uma gravação por repetir</b><span>Falhou anteriormente sem apagar o progresso local.</span></div>
+        <button onClick={retryPending} disabled={busy}>Tentar novamente</button>
+      </div>}
+
+      {conflictRemote&&<div className="cloudConflictCard">
+        <div className="cloudConflictHead"><span>⚠</span><div><b>Conflito detetado — nada foi sobrescrito</b>
+          <small>Este dispositivo conhecia a revisão {sync.baseRevision}; a cloud está na revisão {conflictRemote.revision}.</small></div></div>
+        <p>Escolhe conscientemente. Antes de qualquer substituição ou combinação criamos um snapshot local.</p>
+        <div className="conflictChoices">
+          <button onClick={resolveKeepRemote} disabled={busy}><b>Manter cloud</b><span>Usar a versão mais recente que já está online.</span></button>
+          <button onClick={resolveMerge} disabled={busy}><b>Combinar atividade</b><span>Unir evidências, Missões e exames independentes e recalibrar.</span></button>
+          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Substituir a cloud apenas se ela não tiver mudado outra vez.</span></button>
+        </div>
+      </div>}
+
+      <div className="notice"><b>Porque ainda não sincronizamos silenciosamente?</b><span>Agora já detetamos conflitos e temos mecanismos de recuperação. A sincronização automática só deve ser ligada depois de testarmos estes fluxos com duas contas/dispositivos reais e a migration v4.9 aplicada.</span></div>
 
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
     </>}
@@ -1304,8 +2032,8 @@ function AccountCloud({s,setS,go}){
     {message&&<div className={"cloudMessage "+(message.ok?"ok":"bad")}><b>{message.ok?"✓":"!"}</b><span>{message.text}</span></div>}
 
     <div className="securityBox">
-      <b>🔐 Proteção dos dados</b>
-      <span>A tabela de progresso usa Row-Level Security. O Data API valida o JWT da sessão e o PostgreSQL só permite ler/escrever linhas cujo <code>auth_user_id</code> corresponde ao utilizador autenticado.</span>
+      <b>🔐 Duas proteções diferentes</b>
+      <span><b>RLS</b> impede um utilizador de ler/escrever o progresso de outra conta. <b>Revisões otimistas</b> impedem dois dispositivos da mesma conta de se sobrescreverem sem aviso.</span>
     </div>
   </Shell>
 }
@@ -1447,6 +2175,9 @@ function Parent({s,setS,go}){
 
 function BetaDashboard({s,setS,go}){
   const sum=betaSummary(s);
+  const retention=retentionSummary(s);
+  const funnel=funnelSummary(s);
+  const activation=activationSummary(s);
   const engineAudit=engineAuditSummary(s);
   const integrityAudit=dataIntegrityAudit(s);
   const contentReadiness=betaContentReadiness(s.editorialOverrides||{},s.contentReports||[]);
@@ -1457,6 +2188,8 @@ function BetaDashboard({s,setS,go}){
   const [infra,setInfra]=useState({loading:true,configured:false});
   const [syncing,setSyncing]=useState(false);
   const [syncMessage,setSyncMessage]=useState("");
+  const [externalReports,setExternalReports]=useState([]);
+  const [externalReportMessage,setExternalReportMessage]=useState("");
 
   useEffect(()=>{
     let live=true;
@@ -1493,6 +2226,28 @@ function BetaDashboard({s,setS,go}){
     URL.revokeObjectURL(url);
   }
 
+  async function importFriendReports(files){
+    const list=[...(files||[])];
+    if(!list.length)return;
+    const parsed=[];
+    let rejected=0;
+    for(const file of list){
+      try{
+        const data=JSON.parse(await file.text());
+        if(["aplus-friends-beta-v2","aplus-friends-beta-v3"].includes(data?.schema))parsed.push(data);
+        else rejected++;
+      }catch{rejected++}
+    }
+    setExternalReports(prev=>{
+      const byCode=new Map();
+      [...prev,...parsed].forEach(r=>byCode.set(r?.participant?.code||`${r?.exportedAt}-${Math.random()}`,r));
+      return [...byCode.values()];
+    });
+    setExternalReportMessage(`${parsed.length} relatório(s) válido(s) importado(s)${rejected?` · ${rejected} rejeitado(s)`:""}.`);
+  }
+
+  const externalAggregate=aggregateFriendsBetaReports(externalReports);
+
   return <Shell><Back go={go}/><p className="eyebrow">PAINEL INTERNO · BETA PILOTO</p>
     <h1>Medir antes de escalar.</h1>
     <p className="muted">Este painel permite testar a experiência num único dispositivo. Numa beta real, estes dados serão agregados num backend.</p>
@@ -1518,6 +2273,61 @@ function BetaDashboard({s,setS,go}){
       <div><span>Feedbacks</span><b>{sum.feedbackCount}</b><small>qualitativos</small></div>
       <div><span>Reports</span><b>{sum.reports}</b><small>problemas de conteúdo</small></div>
     </div>
+
+    <section className="qaSection retentionPanel">
+      <div className="externalBetaHead"><div><small>FUNIL + RETENÇÃO</small><h3>A experiência cria hábito ou só uma boa primeira impressão?</h3></div><span>{retention.activeDays} dia{retention.activeDays===1?"":"s"} ativo{retention.activeDays===1?"":"s"}</span></div>
+      <p>Estes números vêm de aberturas reais desta instalação, não da pergunta “voltarias amanhã?”. D1/D3/D7 só entram no denominador quando já passou tempo suficiente.</p>
+
+      <div className="retentionCards">
+        {[
+          ["D1",retention.d1],
+          ["D3",retention.d3],
+          ["D7",retention.d7]
+        ].map(([label,r])=><div key={label} className={r.eligible?(r.retained?"retained":"missed"):"waiting"}>
+          <span>{label}</span><b>{!r.eligible?"…":r.retained?"✓":"×"}</b>
+          <small>{!r.eligible?"Ainda não elegível":r.retained?"Regressou nesse dia":"Não abriu nesse dia"}</small>
+        </div>)}
+        <div className={activation.activated?"retained":"waiting"}><span>Ativação</span><b>{activation.activated?"✓":"…"}</b><small>{activation.activated?`Diagnóstico + 1.ª Missão${activation.minutesToActivation!==null?` · ${activation.minutesToActivation} min`:""}`:"Falta concluir diagnóstico + 1.ª Missão"}</small></div>
+      </div>
+
+      <div className="funnelRows">{funnel.map((step,i)=><div key={step.id} className={step.reached?"reached":"pending"}>
+        <b>{i+1}</b><span>{step.label}</span><em>{step.reached?"✓":"—"}</em>
+      </div>)}</div>
+
+      <small className="auditFoot">Retenção mede abertura da app, enquanto streak mede estudo efetivo. São métricas diferentes de propósito.</small>
+    </section>
+
+    <section className="externalBetaReports">
+      <div className="externalBetaHead"><div><small>RELATÓRIOS DOS TESTERS</small><h3>Separar alunos de observadores</h3></div><span>{externalAggregate.validReports} testers</span></div>
+      <p>Importa aqui os JSON enviados pelos testers. Os ficheiros são analisados apenas neste browser e os resultados são separados pelo tipo de tester.</p>
+      <label className="externalReportUpload">Importar relatórios JSON<input type="file" accept=".json,application/json" multiple onChange={e=>importFriendReports(e.target.files)}/></label>
+      {externalReportMessage&&<small className="externalReportMessage">{externalReportMessage}</small>}
+      {externalAggregate.validReports>0&&<>
+        <div className="testerGroupCards">
+          {[
+            ["target","Alunos atuais"],
+            ["near_target","Ex-alunos recentes"],
+            ["buyer","Pais / mães"],
+            ["observer","Observadores adultos"]
+          ].map(([key,label])=>{
+            const g=externalAggregate.byFit[key];
+            return <div key={key} className={key==="target"?"targetGroup":""}>
+              <span>{label}</span><b>{g.testers}</b><small>{g.sessionsPerTester} sessões/tester</small>
+              <em>Intenção de voltar: {g.returnIntent??"—"}/5</em>
+              <em>D1 real: {g.d1?.rate??"—"}% ({g.d1?.eligible||0} eleg.)</em>
+              <em>Ativação: {g.activation?.rate??"—"}%</em>
+              <em>Personalização: {g.personalization??"—"}/5</em>
+            </div>
+          })}
+        </div>
+        <div className="targetSignalCard">
+          <b>{externalAggregate.byFit.target.testers>=5?"Já há um pequeno sinal do público-alvo":"Ainda precisamos de mais alunos reais"}</b>
+          <span>{externalAggregate.byFit.target.testers
+            ?`${externalAggregate.byFit.target.testers} aluno(s) atual(is) · ativação ${externalAggregate.byFit.target.activation?.rate??"—"}% · D1 real ${externalAggregate.byFit.target.d1?.rate??"—"}% (${externalAggregate.byFit.target.d1?.eligible||0} elegíveis) · intenção declarada ${externalAggregate.byFit.target.returnIntent??"—"}/5.`
+            :"Os elogios de adultos continuam úteis para UX/conceito, mas esta caixa só começa a validar adesão quando entram alunos do secundário."}</span>
+        </div>
+      </>}
+    </section>
 
     <section className="qaSection betaGoNoGo">
       <div className="engineHealthHead"><div><small>GO / NO-GO DA BETA</small><h3>Conteúdo pronto para beta pedagógica fechada?</h3></div><span className={contentReadiness.canClosedBeta?"healthy":"attention"}>{contentReadiness.canClosedBeta?"GO":"NO-GO"}</span></div>
@@ -1600,25 +2410,49 @@ function BetaSessionFeedback({s,setS,kind}){
   const [clarity,setClarity]=useState(4);
   const [difficultyFit,setDifficultyFit]=useState(4);
   const [usefulness,setUsefulness]=useState(4);
+  const [personalization,setPersonalization]=useState(4);
+  const [returnIntent,setReturnIntent]=useState(4);
   const [comment,setComment]=useState("");
+  const friends=isFriendsBeta(s);
+  const segment=currentTesterSegment(s);
+  const target=isTargetStudentTester(s);
+  const showExperience=friends&&["diagnostic","mission","mini_exam"].includes(kind);
 
   if(done)return <div className="betaThanks">✓ Feedback guardado. Obrigado por ajudares a melhorar a A+.</div>;
 
   function save(){
     const row={
       id:`fb-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-      kind,at:Date.now(),clarity,difficultyFit,usefulness,comment
+      kind,at:Date.now(),clarity,difficultyFit,usefulness,comment,
+      testerSegment:segment||null,
+      testerGroup:testerSegmentInfo(segment).group,
+      targetTester:target,
+      personalization:showExperience?personalization:null,
+      returnIntent:showExperience?returnIntent:null
     };
-    setS(prev=>({...prev,betaFeedback:[...(prev.betaFeedback||[]),row],betaEvents:[...(prev.betaEvents||[]),betaEvent("beta_feedback",{kind,clarity,difficultyFit,usefulness})]}));
+    setS(prev=>({...prev,
+      betaFeedback:[...(prev.betaFeedback||[]),row],
+      betaEvents:[...(prev.betaEvents||[]),betaEvent("beta_feedback",{
+        kind,clarity,difficultyFit,usefulness,
+        testerSegment:segment||null,
+        targetTester:target,
+        personalization:showExperience?personalization:null,
+        returnIntent:showExperience?returnIntent:null
+      })]
+    }));
     setDone(true);
   }
 
-  return <div className="betaFeedback"><b>Ajuda-nos a calibrar a beta</b>
+  return <div className="betaFeedback"><b>{friends?"Ajuda-nos a perceber a experiência":"Ajuda-nos a calibrar a beta"}</b>
     <span>1 = fraco · 5 = excelente</span>
     <label>As perguntas foram claras?<input type="range" min="1" max="5" value={clarity} onChange={e=>setClarity(Number(e.target.value))}/><em>{clarity}/5</em></label>
     <label>A dificuldade pareceu adequada?<input type="range" min="1" max="5" value={difficultyFit} onChange={e=>setDifficultyFit(Number(e.target.value))}/><em>{difficultyFit}/5</em></label>
     <label>Esta sessão foi útil?<input type="range" min="1" max="5" value={usefulness} onChange={e=>setUsefulness(Number(e.target.value))}/><em>{usefulness}/5</em></label>
-    <textarea placeholder="Comentário opcional" value={comment} onChange={e=>setComment(e.target.value)}/>
+    {showExperience&&<>
+      <label>Sentiste que a app reagiu ao que tinhas feito antes?<input type="range" min="1" max="5" value={personalization} onChange={e=>setPersonalization(Number(e.target.value))}/><em>{personalization}/5</em></label>
+      <label>{target?"Se estivesses a estudar para o exame, voltarias amanhã?":"Se fosses aluno hoje, achas que isto daria vontade de voltar no dia seguinte?"}<input type="range" min="1" max="5" value={returnIntent} onChange={e=>setReturnIntent(Number(e.target.value))}/><em>{returnIntent}/5</em></label>
+    </>}
+    <textarea placeholder={friends?"O que te fez gostar, hesitar ou ter vontade de sair?":"Comentário opcional"} value={comment} onChange={e=>setComment(e.target.value)}/>
     <button onClick={save}>Enviar feedback</button>
   </div>
 }
@@ -1636,6 +2470,9 @@ function ReviewerDashboard({s,setS,go}){
   const [importPreview,setImportPreview]=useState(null);
   const [importFileName,setImportFileName]=useState("");
   const [importMessage,setImportMessage]=useState("");
+  const [revisionOpen,setRevisionOpen]=useState(false);
+  const [revisionDraft,setRevisionDraft]=useState(null);
+  const [revisionMessage,setRevisionMessage]=useState("");
 
   const queue=editorialQueue(QUESTION_BANK,s.editorialOverrides||{},s.contentReports||[]);
   const stats=editorialStats(queue);
@@ -1643,6 +2480,26 @@ function ReviewerDashboard({s,setS,go}){
   const readiness=betaContentReadiness(s.editorialOverrides||{},s.contentReports||[]);
   const priorityQueue=prioritizedReviewQueue(s.editorialOverrides||{},s.contentReports||[],30);
   const roadmap=reviewRoadmapProgress(s.editorialOverrides||{},s.contentReports||[]);
+  const reviewOps=useMemo(
+    ()=>teacherReviewOperationsSummary(s.editorialOverrides||{},s.contentReports||[]),
+    [s.editorialOverrides,s.contentReports]
+  );
+  const hybridPlan=useMemo(
+    ()=>hybridValidationPlan(s.editorialOverrides||{},s.contentReports||[]),
+    [s.editorialOverrides,s.contentReports]
+  );
+  const hybridSummary=useMemo(
+    ()=>hybridValidationSummary(s.editorialOverrides||{},s.contentReports||[]),
+    [s.editorialOverrides,s.contentReports]
+  );
+  const hybridReadiness=useMemo(
+    ()=>hybridBetaReadiness(s.editorialOverrides||{},s.contentReports||[]),
+    [s.editorialOverrides,s.contentReports]
+  );
+  const hybridOps=useMemo(
+    ()=>buildHybridTeacherBatches(s.editorialOverrides||{},s.contentReports||[],{reviewer}),
+    [s.editorialOverrides,s.contentReports,reviewer]
+  );
   const allChecks=Object.values(checklist).every(Boolean);
 
   const filtered=queue.filter(row=>{
@@ -1652,9 +2509,73 @@ function ReviewerDashboard({s,setS,go}){
   });
 
   const selected=queue.find(x=>x.item.id===selectedId) || filtered[0] || null;
+  const selectedQa=selected?qaForItemId(selected.item.id,s.editorialOverrides||{}):null;
+  const selectedHybrid=selected?hybridLaneForItem(selected.item,s.editorialOverrides||{}):null;
+  const revisionStats=editorialRevisionSummary(s.editorialOverrides||{});
+  const revisionValidation=useMemo(
+    ()=>selected&&revisionDraft?validateRevisionCandidate(selected.item,revisionDraft):null,
+    [selected?.item?.id,selected?.currentFingerprint,revisionDraft]
+  );
+
+  useEffect(()=>{
+    setRevisionOpen(false);
+    setRevisionDraft(null);
+    setRevisionMessage("");
+  },[selected?.item?.id]);
+
+  function openRevisionEditor(){
+    if(!selected)return;
+    setRevisionDraft(revisionCandidateFromItem(selected.item));
+    setRevisionOpen(true);
+    setRevisionMessage("");
+  }
+
+  function applyRevision(){
+    if(!selected||!revisionDraft)return;
+    const result=applyContentRevision(
+      s.editorialOverrides||{},
+      selected.item.id,
+      revisionDraft,
+      {
+        editor:"Equipa editorial",
+        note:note.trim()||"Alteração pedida na revisão pedagógica",
+        requestedBy:(s.editorialOverrides||{})[selected.item.id]?.reviewer||reviewer||null
+      }
+    );
+    if(!result.ok){
+      setRevisionMessage((result.errors||[]).join(" · ")||"Não foi possível aplicar a alteração.");
+      return;
+    }
+    setS(prev=>({...prev,editorialOverrides:result.overrides}));
+    setRevisionDraft(revisionCandidateFromItem(result.item));
+    setRevisionOpen(false);
+    setRevisionMessage(`Nova versão v${result.revision.toVersion} criada. A aprovação anterior deixou de valer e a questão voltou a “A rever”.`);
+    setChecklist({math:false,clarity:false,unique:false,distractors:false,solution:false,taxonomy:false,difficulty:false,hypothesis:false});
+  }
+
+  function revertRevision(){
+    if(!selected)return;
+    const result=revertLastContentRevision(
+      s.editorialOverrides||{},
+      selected.item.id,
+      {editor:"Equipa editorial",note:"Reversão manual da última alteração"}
+    );
+    if(!result.ok){
+      setRevisionMessage(result.reason||"Não foi possível reverter.");
+      return;
+    }
+    setS(prev=>({...prev,editorialOverrides:result.overrides}));
+    setRevisionOpen(false);
+    setRevisionDraft(null);
+    setRevisionMessage(`Reversão aplicada como nova versão v${result.revision.toVersion}. Continua a exigir nova revisão pedagógica.`);
+  }
 
   function decide(decision){
     if(!selected)return;
+    if(decision==="approve"&&(selectedQa?.blockerCount||0)>0){
+      setRevisionMessage("Esta questão tem bloqueios automáticos de pré-QA. Corrige-os antes de aprovar.");
+      return;
+    }
     const next=applyEditorialDecision(
       s.editorialOverrides||{},
       selected.item.id,
@@ -1671,18 +2592,18 @@ function ReviewerDashboard({s,setS,go}){
     setChecklist({math:false,clarity:false,unique:false,distractors:false,solution:false,taxonomy:false,difficulty:false,hypothesis:false});
     const idx=filtered.findIndex(x=>x.item.id===selected.item.id);
     const nextRow=filtered[idx+1]||filtered[idx-1];
-    setSelectedId(nextRow?.item.id||null);
+    if(decision==="changes"){
+      setSelectedId(selected.item.id);
+      setRevisionDraft(revisionCandidateFromItem(selected.item));
+      setRevisionOpen(true);
+      setRevisionMessage("Pedido de alteração registado. Podes agora preparar a nova versão lado a lado.");
+    }else{
+      setSelectedId(nextRow?.item.id||null);
+    }
   }
 
   function bump(){
-    if(!selected)return;
-    const next=bumpEditorialVersion(
-      s.editorialOverrides||{},
-      selected.item.id,
-      "Conteúdo alterado no protótipo — requer nova revisão"
-    );
-    setS(prev=>({...prev,editorialOverrides:next}));
-    setNote("");
+    openRevisionEditor();
   }
 
   function createBatch(){
@@ -1759,6 +2680,33 @@ function ReviewerDashboard({s,setS,go}){
     );
   }
 
+  function exportOperationalBatch(batch){
+    if(!batch?.rows?.length)return;
+    const n=String(batch.index).padStart(2,"0");
+    downloadCsv(
+      serializeSemicolonCsv(batch.rows.map(row=>({...row,reviewer:reviewer||row.reviewer}))),
+      `revisao-professor-lote-${n}-${batch.count}-questoes.csv`
+    );
+  }
+
+  function exportHybridBatch(batch){
+    if(!batch?.rows?.length)return;
+    const n=String(batch.index).padStart(2,"0");
+    downloadCsv(
+      serializeSemicolonCsv(batch.rows.map(row=>({...row,reviewer:reviewer||row.reviewer}))),
+      `revisao-professor-hibrido-lote-${n}-${batch.count}-questoes.csv`
+    );
+  }
+
+  function exportHybridFullPack(){
+    const rows=hybridOps.batches.flatMap(batch=>batch.rows);
+    if(!rows.length)return;
+    downloadCsv(
+      serializeSemicolonCsv(rows.map(row=>({...row,reviewer:reviewer||row.reviewer}))),
+      `revisao-professor-hibrida-${rows.length}-questoes.csv`
+    );
+  }
+
   async function previewImport(file){
     setImportMessage("");
     setImportPreview(null);
@@ -1793,7 +2741,10 @@ function ReviewerDashboard({s,setS,go}){
       fileName:importFileName,
       applied:result.applied.length,
       reviewerNames:[...new Set(result.applied.map(x=>x.reviewer))],
-      itemIds:result.applied.map(x=>x.id)
+      itemIds:result.applied.map(x=>x.id),
+      batchIds:[...new Set(result.applied.map(x=>x.batchId).filter(Boolean))],
+      packIds:[...new Set(result.applied.map(x=>x.packId).filter(Boolean))],
+      qualityControl:result.applied.filter(x=>x.qualityControl).length
     };
 
     setS(prev=>({
@@ -1842,7 +2793,8 @@ function ReviewerDashboard({s,setS,go}){
         <p>Exporta o roteiro mínimo já com enunciados, opções, solução e checklist. O professor preenche apenas as colunas de revisão e devolve o mesmo CSV.</p>
         <div className="teacherBridgeInstructions">{teacherReviewInstructions().map((x,i)=><span key={i}>{i+1}. {x}</span>)}</div>
         <div className="teacherBridgeActions">
-          <button onClick={exportExternalReviewPack}>Exportar roteiro completo para professor</button>
+          <button onClick={exportHybridFullPack}>Exportar roteiro híbrido recomendado ({hybridOps.remaining})</button>
+          <button className="secondary" onClick={exportExternalReviewPack}>Exportar roteiro conservador ({roadmap.approvalsNeeded})</button>
           <label className="importFileButton">Importar CSV devolvido<input type="file" accept=".csv,text/csv" onChange={e=>previewImport(e.target.files?.[0]||null)}/></label>
         </div>
 
@@ -1850,14 +2802,73 @@ function ReviewerDashboard({s,setS,go}){
           <div className="importPreviewStats">
             <div><span>Decisões válidas</span><b>{importPreview.validation.valid.length}</b></div>
             <div><span>Linhas inválidas</span><b>{importPreview.validation.invalid.length}</b></div>
+            <div><span>Conflitos</span><b>{importPreview.validation.conflicts?.length||0}</b></div>
             <div><span>Sem decisão</span><b>{importPreview.validation.ignored.length}</b></div>
           </div>
           {importPreview.validation.invalid.length>0&&<div className="importErrors"><b>Corrigir antes de importar</b>{importPreview.validation.invalid.slice(0,8).map((x,i)=><span key={i}>Linha {x.rowNumber} · {x.id||"sem ID"} — {x.reason}</span>)}</div>}
+          {(importPreview.validation.conflicts?.length||0)>0&&<div className="importErrors conflict"><b>Conflitos que exigem decisão explícita</b>{importPreview.validation.conflicts.slice(0,8).map((x,i)=><span key={i}>Linha {x.rowNumber} · {x.id} — {x.reason}</span>)}</div>}
           <button disabled={!importPreview.validation.canApply} onClick={applyImportedReviews}>Aplicar decisões válidas</button>
           {!importPreview.validation.canApply&&<small>A importação é atómica: enquanto existir uma linha inválida, nenhuma decisão é aplicada.</small>}
         </div>}
         {importMessage&&<div className="importMessage">{importMessage}</div>}
       </div>
+    </section>
+
+    <section className="hybridValidationPanel">
+      <div className="hybridValidationHead">
+        <div><small>POLÍTICA HÍBRIDA · v5.5</small><h2>Professor onde acrescenta julgamento. Máquina onde consegue provar.</h2></div>
+        <span>{hybridSummary.hybridTeacherTarget} vs {hybridSummary.conservativeTeacherApprovals}</span>
+      </div>
+      <p>O modelo conservador pedia revisão humana de todas as {hybridSummary.conservativeTeacherApprovals} questões do caminho mínimo. O novo modelo mantém revisão humana obrigatória no Diagnóstico, em questões com avisos e em itens de maior julgamento pedagógico; exercícios objetivos e atestados entram num lane de máquina, com uma amostra humana de controlo de 20%.</p>
+      <div className="hybridValidationMetrics">
+        <div><span>Humano obrigatório</span><b>{hybridSummary.mandatoryHuman}</b><small>impacto/complexidade pedagógica</small></div>
+        <div><span>Amostra humana</span><b>{hybridSummary.teacherSample}</b><small>20% do lane de máquina</small></div>
+        <div><span>Lane de máquina</span><b>{hybridSummary.machineCount}</b><small>oracle + fingerprint + pré-QA</small></div>
+        <div><span>Revisões poupadas</span><b>{hybridSummary.savedHumanReviews}</b><small>−{hybridSummary.savedPct}% de trabalho humano</small></div>
+      </div>
+      <div className="hybridGateLine">
+        <b>Gate híbrido para beta fechada</b>
+        <span>{hybridReadiness.score}% estrutural</span>
+        <em className={hybridReadiness.canClosedBeta?"go":"wait"}>{hybridReadiness.canClosedBeta?"GO":"A aguardar revisão humana"}</em>
+      </div>
+      {hybridReadiness.reasons.length>0&&<div className="hybridReasons">{hybridReadiness.reasons.slice(0,5).map((x,i)=><span key={i}>• {x}</span>)}</div>}
+      <div className="hybridPolicyNotes">
+        <span><b>Diagnóstico:</b> continua 100% humano.</span>
+        <span><b>Machine lane:</b> só é válido se o fingerprint atual coincidir com a atestação e o oracle determinístico passar.</span>
+        <span><b>Produção comercial:</b> ainda não aceita machine-only; o segundo validador externo/IA continua por configurar.</span>
+        <span><b>Dados reais:</b> dificuldade empírica será recalibrada com respostas dos alunos, não “certificada” por uma IA.</span>
+      </div>
+      <div className="reviewBatchCards hybrid">{hybridOps.batches.map(batch=><div key={batch.id}>
+        <div><small>LOTE HÍBRIDO {String(batch.index).padStart(2,"0")}</small><b>{batch.count} questões · ~{batch.estimatedMinutes} min</b></div>
+        <span>{batch.mandatoryCount} obrigatórias · {batch.sampleCount} de amostragem</span>
+        <button onClick={()=>exportHybridBatch(batch)}>Exportar este lote</button>
+      </div>)}</div>
+      <small className="reviewOpsFoot">O modelo antigo de 64 revisões continua disponível como opção conservadora. A política híbrida não inventa aprovação: cria tipos diferentes de evidência e mantém rastreabilidade por fingerprint.</small>
+    </section>
+
+    <section className="reviewOperations">
+      <div className="reviewOpsHead">
+        <div><small>ROTEIRO CONSERVADOR · v5.4</small><h3>{reviewOps.approvalsNeeded} aprovações em {reviewOps.batches.length} lote{reviewOps.batches.length===1?"":"s"}</h3></div>
+        <b>{reviewOps.estimatedHours} h estimadas</b>
+      </div>
+      <p>Em vez de enviar dezenas de questões soltas, o caminho mínimo é dividido em lotes de 8. Cada ficheiro fica preso a um <b>fingerprint do conteúdo</b>: se uma pergunta mudar depois da exportação, a aprovação antiga deixa de valer automaticamente.</p>
+      <div className="reviewOpsMetrics">
+        <div><span>Aprovações desatualizadas</span><b>{reviewOps.staleApprovals}</b><small>mudaram depois da revisão</small></div>
+        <div><span>QC por confirmar</span><b>{reviewOps.qcPending}</b><small>amostra ~10% após aprovações</small></div>
+        <div><span>Pack</span><b>{reviewOps.packId.slice(-8)}</b><small>identifica este roteiro</small></div>
+        <div><span>Revisões editoriais</span><b>{revisionStats.revisions}</b><small>{revisionStats.itemsChanged} questões alteradas</small></div>
+        <div><span>Pré-QA bloqueadas</span><b>{reviewOps.preReviewQa.blocked}</b><small>não chegam ao professor</small></div>
+        <div><span>Pré-QA com avisos</span><b>{reviewOps.preReviewQa.withWarnings}</b><small>professor vê as flags</small></div>
+      </div>
+      <div className="answerBalance"><b>Distribuição da resposta correta</b><span>A {reviewOps.preReviewQa.answerPositions.counts[0]} · B {reviewOps.preReviewQa.answerPositions.counts[1]} · C {reviewOps.preReviewQa.answerPositions.counts[2]} · D {reviewOps.preReviewQa.answerPositions.counts[3]}</span><em>{reviewOps.preReviewQa.answerPositions.balanced?"✓ equilibrada":"⚠ rever distribuição"}</em></div>
+      {!reviewOps.preflightOk&&<div className="preQaBlocker"><b>⛔ Existem questões bloqueadas antes da revisão</b><span>Os lotes exportáveis excluem automaticamente esses itens. Corrige o pré-QA e recalcula o roteiro antes de avançar.</span></div>}
+      <div className="reviewBatchCards">{reviewOps.batches.map(batch=><div key={batch.id} className={batch.projected.canClosedBeta?"final":""}>
+        <div><small>LOTE {String(batch.index).padStart(2,"0")}</small><b>{batch.count} questões · ~{batch.estimatedMinutes} min</b></div>
+        <span>Após aprovação: readiness projetado <b>{batch.projected.readinessScore}%</b></span>
+        <small>Diagnóstico {batch.projected.diagnostic} · focos {batch.projected.missions} · exame {batch.projected.examItems} itens / {batch.projected.examThemes} temas</small>
+        <button onClick={()=>exportOperationalBatch(batch)}>Exportar este lote</button>
+      </div>)}</div>
+      <small className="reviewOpsFoot">A projeção assume APROVAÇÃO dos itens do lote; ALTERAR/BLOQUEAR recalcula automaticamente o roteiro seguinte. QC é controlo de qualidade adicional e não cria falsa dupla aprovação.</small>
     </section>
 
     <section className="reviewRoadmap">
@@ -1921,6 +2932,7 @@ function ReviewerDashboard({s,setS,go}){
             <div><small>{theme(selected.item.themeId)?.year} · {theme(selected.item.themeId)?.short}</small><h2>{selected.item.focus||"Sem foco"}</h2></div>
             <div className="reviewMeta"><span>Versão {selected.version}</span><b className={`state ${selected.status}`}>{statusLabel[selected.status]}</b></div>
           </div>
+          {selected.reviewStale&&<div className="staleReviewAlert"><b>⚠ Aprovação invalidada automaticamente</b><span>{selected.integrityReason}</span><small>Fingerprint atual: {selected.currentFingerprint}</small></div>}
 
           <div className="reviewQuestion">
             <small>{selected.item.cognitive} · D{selected.item.difficulty} · {selected.item.generated?"Gerada":"Curada"}</small>
@@ -1934,8 +2946,21 @@ function ReviewerDashboard({s,setS,go}){
             <div><b>Resolução</b><span>{selected.item.sol}</span></div>
             <div><b>Hipótese de erro</b><span>{selected.item.hyp}</span></div>
             <div><b>Assinatura semântica</b><span>{selected.item.signature}</span></div>
+            <div><b>Fingerprint editorial</b><span>{selected.currentFingerprint}</span></div>
             {selected.item.generated&&<div><b>Template</b><span>{selected.item.templateId} · seed {selected.item.variantSeed}</span></div>}
           </div>
+
+          {selectedHybrid&&<div className={"hybridItemLane "+selectedHybrid.lane}>
+            <b>{selectedHybrid.lane==="machine_plus_sample"?"⚙ Lane máquina + amostragem":selectedHybrid.lane==="blocked"?"⛔ Bloqueado":"👤 Revisão humana"}</b>
+            <span>{selectedHybrid.reason}</span>
+            {selectedHybrid.passport?.attestation&&<small>Oracle: {selectedHybrid.passport.localOracle.status} · fingerprint {selectedHybrid.passport.attestationMatch?"válido":"desatualizado"} · segundo validador: {selectedHybrid.passport.externalSecondValidator}</small>}
+          </div>}
+
+          {selectedQa&&<div className={"preQaItem "+selectedQa.status}>
+            <div><b>{selectedQa.status==="clean"?"✓ Pré-QA limpo":selectedQa.status==="warning"?"⚠ Pré-QA com avisos":"⛔ Pré-QA bloqueado"}</b><span>{selectedQa.blockerCount} bloqueio{selectedQa.blockerCount===1?"":"s"} · {selectedQa.warningCount} aviso{selectedQa.warningCount===1?"":"s"}</span></div>
+            {selectedQa.issues.map((issue,i)=><p key={`${issue.code}-${i}`} className={issue.severity}><strong>{issue.code}</strong><span>{issue.message}</span></p>)}
+            {selectedQa.status==="clean"&&<small>Os controlos mecânicos passaram. Isto não substitui a avaliação matemática e pedagógica do professor.</small>}
+          </div>}
 
           <div className="reviewChecklist">
             {[
@@ -1955,14 +2980,45 @@ function ReviewerDashboard({s,setS,go}){
 
           <textarea className="reviewNote" placeholder="Nota do revisor (opcional)" value={note} onChange={e=>setNote(e.target.value)}/>
 
-          {!allChecks&&<small className="reviewGateHint">Para aprovar, o revisor tem de confirmar os 8 critérios acima. “Pedir alteração” e “Bloquear” continuam disponíveis sem checklist completa.</small>}
+          {(!allChecks||(selectedQa?.blockerCount||0)>0)&&<small className="reviewGateHint">{(selectedQa?.blockerCount||0)>0?"O pré-QA encontrou um bloqueio mecânico. Corrige a questão antes de pedir aprovação.":"Para aprovar, o revisor tem de confirmar os 8 critérios acima. “Pedir alteração” e “Bloquear” continuam disponíveis sem checklist completa."}</small>}
           <div className="reviewActions">
-            <button className="approve" disabled={!allChecks||!reviewer.trim()} onClick={()=>decide("approve")}>✓ Aprovar</button>
+            <button className="approve" disabled={!allChecks||!reviewer.trim()||(selectedQa?.blockerCount||0)>0} onClick={()=>decide("approve")}>✓ Aprovar</button>
             <button className="changes" onClick={()=>decide("changes")}>✎ Pedir alteração</button>
             <button className="block" onClick={()=>decide("block")}>⛔ Bloquear</button>
           </div>
 
-          <button className="versionButton" onClick={bump}>Simular alteração ao conteúdo → criar nova versão</button>
+          <button className="versionButton" onClick={bump}>✎ Preparar alteração editorial desta questão</button>
+          {revisionMessage&&<div className="revisionMessage">{revisionMessage}</div>}
+
+          {revisionOpen&&revisionDraft&&<div className="revisionEditor">
+            <div className="revisionEditorHead"><div><small>NOVA VERSÃO EDITORIAL</small><h3>Editar sem perder o histórico</h3></div><button onClick={()=>{setRevisionOpen(false);setRevisionDraft(null)}}>Fechar</button></div>
+            <p>A alteração só cria uma nova versão <b>pending</b>. Mesmo que a versão anterior estivesse aprovada, esta nova versão não entra numa beta pedagógica/produção até ser novamente revista.</p>
+
+            <label>Enunciado<textarea value={revisionDraft.q} onChange={e=>setRevisionDraft(prev=>({...prev,q:e.target.value}))}/></label>
+            <div className="revisionOptionGrid">{revisionDraft.o.map((value,i)=><label key={i}>Opção {String.fromCharCode(65+i)}
+              <input value={value} onChange={e=>setRevisionDraft(prev=>({...prev,o:prev.o.map((x,j)=>j===i?e.target.value:x)}))}/>
+            </label>)}</div>
+            <div className="revisionMetaGrid">
+              <label>Resposta correta<select value={revisionDraft.a} onChange={e=>setRevisionDraft(prev=>({...prev,a:Number(e.target.value)}))}>{revisionDraft.o.map((_,i)=><option key={i} value={i}>{String.fromCharCode(65+i)}</option>)}</select></label>
+              <label>Dificuldade<select value={revisionDraft.difficulty} onChange={e=>setRevisionDraft(prev=>({...prev,difficulty:Number(e.target.value)}))}>{[1,2,3,4,5].map(x=><option key={x} value={x}>D{x}</option>)}</select></label>
+              <label>Tipo cognitivo<input value={revisionDraft.cognitive} onChange={e=>setRevisionDraft(prev=>({...prev,cognitive:e.target.value}))}/></label>
+            </div>
+            <label>Resolução<textarea value={revisionDraft.sol} onChange={e=>setRevisionDraft(prev=>({...prev,sol:e.target.value}))}/></label>
+            <label>Hipótese de erro<textarea value={revisionDraft.hyp} onChange={e=>setRevisionDraft(prev=>({...prev,hyp:e.target.value}))}/></label>
+
+            <div className="revisionDiff">
+              <div><b>Comparação antes → depois</b><span>{revisionValidation?.diff?.length||0} campo{revisionValidation?.diff?.length===1?"":"s"} alterado{revisionValidation?.diff?.length===1?"":"s"}</span></div>
+              {(revisionValidation?.diff||[]).map(d=><div key={d.field}><strong>{d.label}</strong><small>ANTES</small><code>{Array.isArray(d.before)?d.before.join(" | "):String(d.before)}</code><small>DEPOIS</small><code>{Array.isArray(d.after)?d.after.join(" | "):String(d.after)}</code></div>)}
+              {revisionValidation?.warnings?.map((x,i)=><em key={i}>⚠ {x}</em>)}
+              {revisionValidation?.errors?.map((x,i)=><em className="error" key={i}>✕ {x}</em>)}
+              {revisionValidation?.valid&&<footer><span>Fingerprint atual: {revisionValidation.beforeFingerprint}</span><span>Novo: {revisionValidation.afterFingerprint}</span></footer>}
+            </div>
+
+            <div className="revisionEditorActions">
+              <button className="approve" disabled={!revisionValidation?.valid} onClick={applyRevision}>Aplicar como nova versão</button>
+              {((s.editorialOverrides||{})[selected.item.id]?.revisionHistory||[]).length>0&&<button className="secondary" onClick={revertRevision}>Reverter última alteração</button>}
+            </div>
+          </div>}
 
           <div className="reviewAudit">
             <b>Histórico editorial</b>
@@ -1972,6 +3028,12 @@ function ReviewerDashboard({s,setS,go}){
                 <small>v{h.version} · {new Date(h.at).toLocaleString("pt-PT")}</small>
                 <span>{h.reviewer}: {h.decision}{h.note?` — ${h.note}`:""}</span>
               </div>)}
+            {((s.editorialOverrides||{})[selected.item.id]?.revisionHistory||[]).length>0&&<details className="revisionHistory"><summary>Ver alterações de conteúdo</summary>
+              {[...((s.editorialOverrides||{})[selected.item.id]?.revisionHistory||[])].reverse().map((r,i)=><div key={i}>
+                <small>v{r.fromVersion} → v{r.toVersion} · {new Date(r.at).toLocaleString("pt-PT")}</small>
+                <span>{r.editor}: {r.kind==="rollback"?"reversão":(r.diff||[]).map(d=>d.label).join(", ")}</span>
+              </div>)}
+            </details>}
           </div>
         </>}
       </section>
@@ -1986,7 +3048,7 @@ function ReviewerDashboard({s,setS,go}){
       <div><b>{b.itemIds.length} questões</b><small>{b.reviewer} · {new Date(b.createdAt).toLocaleDateString("pt-PT")}</small></div><span>{b.status==="open"?"Aberto":"Fechado"}</span>
     </div>)}</section>}
 
-    <div className="notice"><b>O que falta para produção?</b><span>Autenticação real de revisores, permissões, backend, atribuição de lotes, edição colaborativa, comentários, dupla validação e notificações. Nesta versão estamos a validar o workflow e a experiência.</span></div>
+    <div className="notice"><b>O que falta para produção?</b><span>Autenticação real de revisores, permissões, backend, edição simultânea colaborativa, comentários em thread e notificações. Nesta versão estamos a validar o workflow e a experiência.</span></div>
   </Shell>
 }
 
@@ -2025,10 +3087,14 @@ function QualityPanel({s,setS,go}){
     <div className="qaMetrics">
       <div><span>Cobertura inicial</span><b>{snapshot.coverage.coveragePct}%</b><small>{snapshot.coverage.covered}/{snapshot.coverage.totalFocus} focos</small></div>
       <div><span>Erros automáticos</span><b>{snapshot.errors}</b><small>devem ser 0</small></div>
-      <div><span>Avisos</span><b>{snapshot.warnings}</b><small>metadados/qualidade</small></div>
+      <div><span>Validação matemática</span><b>{snapshot.mathValidation.failed}</b><small>falhas em {snapshot.mathValidation.samples} variantes-amostra</small></div>
       <div><span>Reports</span><b>{snapshot.reports}</b><small>neste dispositivo</small></div>
     </div>
-    <div className="notice"><b>Validação matemática ≠ revisão pedagógica</b><span>Uma “variante validada” foi calculada por regras fechadas. Isso não significa que um professor já aprovou o enunciado, a dificuldade e os distratores. Por defeito, o conteúdo continua marcado como <b>Protótipo</b>.</span></div>
+    <div className="notice"><b>Validação matemática ≠ revisão pedagógica</b><span>Uma variante automática só entra no motor se um validador independente do template recalcular a resposta e concordar com a opção marcada. Isso continua sem provar que o enunciado, dificuldade ou distratores são pedagogicamente bons — essa autoridade continua a ser do professor.</span></div>
+    <section className="qaSection mathValidationSection"><h3>Pipeline matemático dos geradores</h3>
+      <div className="mathValidationSummary"><div><span>Templates</span><b>{snapshot.mathValidation.templates}</b></div><div><span>Amostras</span><b>{snapshot.mathValidation.samples}</b></div><div><span>Validadas</span><b>{snapshot.mathValidation.passed}</b></div><div><span>Conflitos</span><b>{snapshot.mathValidation.failed}</b></div></div>
+      <p className="muted">O pipeline já está preparado para uma segunda validação externa. Se no futuro um motor como Wolfram discordar do nosso cálculo local, a questão passa automaticamente a bloqueada para revisão humana.</p>
+    </section>
 
     <section className="qaSection"><h3>Validações automáticas</h3>
       {snapshot.checks.length===0?<div className="qaOk">✓ Nenhum problema estrutural detetado no banco atual.</div>

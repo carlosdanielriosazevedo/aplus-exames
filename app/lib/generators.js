@@ -1,3 +1,5 @@
+import {validateGeneratedMath} from "./mathValidation.js";
+
 // A+ v1.8 — Geradores paramétricos validados
 // -------------------------------------------------
 // Estes itens NÃO são escritos por IA em tempo real.
@@ -56,7 +58,8 @@ export function validateGeneratedItem(q){
   if(!Array.isArray(q.o) || q.o.length!==4)return false;
   if(new Set(q.o).size!==4)return false;
   if(!Number.isInteger(q.a) || q.a<0 || q.a>3)return false;
-  if(!q.q || !q.sol || !q.signature)return false;
+  if(!q.q || !q.sol || !q.signature || !q.mathWitness)return false;
+  if(q.validation && q.validation.status==="invalid_local")return false;
   return true;
 }
 
@@ -69,7 +72,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Qual é o zero de f(x)=${a}x${b>=0?"+":""}${b}?`,
         sol:`${a}x${b>=0?"+":""}${b}=0 ⇔ x=${x0}.`,
-        hyp:"Pode haver dificuldade em ligar o zero da função à equação f(x)=0."};
+        hyp:"Pode haver dificuldade em ligar o zero da função à equação f(x)=0.",
+        mathWitness:{kind:"linear_zero",a,b}};
     }
   },
   {
@@ -83,7 +87,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Qual é o ponto médio de A(${x1},${y1}) e B(${x2},${y2})?`,
         sol:`M=((${x1}+${x2})/2,(${y1}+${y2})/2)=(${mx},${my}).`,
-        hyp:"Pode haver dificuldade em calcular a média de cada coordenada."};
+        hyp:"Pode haver dificuldade em calcular a média de cada coordenada.",
+        mathWitness:{kind:"midpoint",x1,y1,x2,y2}};
     }
   },
   {
@@ -102,7 +107,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Num ângulo agudo, sin(x)=${fracSin}. Quanto vale cos(x)?`,
         sol:`Pela identidade sin²x+cos²x=1, obtém-se cos(x)=${fracCos}.`,
-        hyp:"Pode faltar a identidade fundamental ou a interpretação do sinal no 1.º quadrante."};
+        hyp:"Pode faltar a identidade fundamental ou a interpretação do sinal no 1.º quadrante.",
+        mathWitness:{kind:"trig_pythag",sinNumerator:useA?a:b,cosNumerator:useA?b:a,hypotenuse:c}};
     }
   },
   {
@@ -113,7 +119,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`De ${n} pessoas, quantos pares diferentes podem ser formados?`,
         sol:`A ordem não interessa: C(${n},2)=${correct}.`,
-        hyp:"Pode estar a tratar uma escolha sem ordem como se fosse ordenada."};
+        hyp:"Pode estar a tratar uma escolha sem ordem como se fosse ordenada.",
+        mathWitness:{kind:"combination",n,k:2}};
     }
   },
   {
@@ -128,7 +135,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Qual é a derivada de f(x)=${a}x^${n}?`,
         sol:`Pela regra da potência: f'(x)=${coef}x^${pow}.`,
-        hyp:"Pode haver dificuldade na regra da potência ou no produto pelo expoente."};
+        hyp:"Pode haver dificuldade na regra da potência ou no produto pelo expoente.",
+        mathWitness:{kind:"power_derivative",coefficient:a,exponent:n}};
     }
   },
   {
@@ -141,7 +149,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Qual é o módulo de z=${a}${b>=0?"+":""}${b}i?`,
         sol:`|z|=√(${a}²+${b}²)=${c}.`,
-        hyp:"Pode haver dificuldade no cálculo do módulo de um número complexo."};
+        hyp:"Pode haver dificuldade no cálculo do módulo de um número complexo.",
+        mathWitness:{kind:"complex_modulus",re:a,im:b}};
     }
   },
   {
@@ -156,7 +165,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`P(A∩B)=${dec(inter)} e P(B)=${dec(pb)}. Quanto vale P(A|B)?`,
         sol:`P(A|B)=P(A∩B)/P(B)=${dec(inter)}/${dec(pb)}=${dec(cond)}.`,
-        hyp:"Pode haver dificuldade no significado ou cálculo da probabilidade condicionada."};
+        hyp:"Pode haver dificuldade no significado ou cálculo da probabilidade condicionada.",
+        mathWitness:{kind:"conditional_probability",intersection:inter,conditionProbability:pb}};
     }
   },
   {
@@ -167,7 +177,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Qual é a solução de ${base}^x=${value}?`,
         sol:`${value}=${base}^${exp}, logo x=${exp}.`,
-        hyp:"Pode haver dificuldade em reconhecer potências equivalentes numa equação exponencial."};
+        hyp:"Pode haver dificuldade em reconhecer potências equivalentes numa equação exponencial.",
+        mathWitness:{kind:"exponential_equation",base,value}};
     }
   },
   {
@@ -178,7 +189,8 @@ const TEMPLATES = [
       if(!p)return null;
       return {...p,q:`Quanto vale lim(x→${x}) (${a}x²${b>=0?"+":""}${b})?`,
         sol:`Sendo um polinómio contínuo, substitui-se x=${x}: ${a}×${x}²${b>=0?"+":""}${b}=${correct}.`,
-        hyp:"Pode haver dificuldade em reconhecer que um polinómio é contínuo e permite substituição direta."};
+        hyp:"Pode haver dificuldade em reconhecer que um polinómio é contínuo e permite substituição direta.",
+        mathWitness:{kind:"polynomial_limit",a,b,x}};
     }
   }
 ];
@@ -205,7 +217,7 @@ export function generateVariants({themeId,focus=null,difficulty=2,count=4,salt="
     attempt++;
     if(!core)continue;
 
-    const q={
+    const draft={
       ...core,
       id:`GEN-${t.templateId}-${seed}`,
       templateId:t.templateId,
@@ -217,16 +229,22 @@ export function generateVariants({themeId,focus=null,difficulty=2,count=4,salt="
       signature:`${t.themeId}:${t.focus}:${t.templateId}`,
       contexts:["mission","training"],
       generated:true,
-      reviewStatus:"prototype",
+      reviewStatus:"prototype"
+    };
+
+    const validation=validateGeneratedMath(draft);
+    const q={
+      ...draft,
       validation:{
-        method:"deterministic-template",
-        status:"validated",
+        ...validation,
         templateId:t.templateId,
         seed
       }
     };
 
-    if(validateGeneratedItem(q))out.push(q);
+    // Variante automática só existe para o motor se a verificação matemática
+    // independente do template concordar com a opção marcada como correta.
+    if(validateGeneratedItem(q) && validation.status==="validated_local" && validation.passed)out.push(q);
   }
 
   return out;

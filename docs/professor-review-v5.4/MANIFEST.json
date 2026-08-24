@@ -1,0 +1,370 @@
+{
+  "schema": "teacher-review-operations-v2",
+  "generatedAt": "2026-08-23T22:22:48.139Z",
+  "packId": "trp2-86558abb",
+  "approvalsNeeded": 64,
+  "batchSize": 8,
+  "estimatedMinutes": 320,
+  "estimatedHours": 5.3,
+  "preflightOk": true,
+  "qaBlocked": [],
+  "qaWarnings": [
+    {
+      "itemId": "M12E-4",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "short_solution",
+          "message": "Resolução muito curta; confirmar que explica o raciocínio necessário."
+        }
+      ]
+    },
+    {
+      "itemId": "D10F-A",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "reused_signature",
+          "message": "A assinatura semântica também é usada por D10F-P. Confirmar que não conta como evidência independente.",
+          "relatedIds": [
+            "D10F-P"
+          ]
+        }
+      ]
+    },
+    {
+      "itemId": "D12P-A",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "reused_signature",
+          "message": "A assinatura semântica também é usada por D12P-P. Confirmar que não conta como evidência independente.",
+          "relatedIds": [
+            "D12P-P"
+          ]
+        }
+      ]
+    },
+    {
+      "itemId": "D10F-P",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "reused_signature",
+          "message": "A assinatura semântica também é usada por D10F-A. Confirmar que não conta como evidência independente.",
+          "relatedIds": [
+            "D10F-A"
+          ]
+        }
+      ]
+    },
+    {
+      "itemId": "D12C-A",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "near_duplicate",
+          "message": "Enunciado muito semelhante a CV51-12CPLX-MA-1 (100%).",
+          "relatedIds": [
+            "CV51-12CPLX-MA-1"
+          ],
+          "similarity": 1
+        }
+      ]
+    },
+    {
+      "itemId": "D12P-P",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "reused_signature",
+          "message": "A assinatura semântica também é usada por D12P-A. Confirmar que não conta como evidência independente.",
+          "relatedIds": [
+            "D12P-A"
+          ]
+        }
+      ]
+    },
+    {
+      "itemId": "CV51-12CPLX-FT-1",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "near_duplicate",
+          "message": "Enunciado muito semelhante a CV51-12CPLX-FT-2 (100%).",
+          "relatedIds": [
+            "CV51-12CPLX-FT-2"
+          ],
+          "similarity": 1
+        }
+      ]
+    },
+    {
+      "itemId": "M12E-2",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "short_question",
+          "message": "Enunciado muito curto; confirmar que não depende de contexto implícito."
+        }
+      ]
+    },
+    {
+      "itemId": "CV51-12CPLX-FT-2",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "near_duplicate",
+          "message": "Enunciado muito semelhante a CV51-12CPLX-FT-1 (100%).",
+          "relatedIds": [
+            "CV51-12CPLX-FT-1"
+          ],
+          "similarity": 1
+        }
+      ]
+    },
+    {
+      "itemId": "M10F-1",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "short_solution",
+          "message": "Resolução muito curta; confirmar que explica o raciocínio necessário."
+        }
+      ]
+    },
+    {
+      "itemId": "M12E-3",
+      "warningCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "short_solution",
+          "message": "Resolução muito curta; confirmar que explica o raciocínio necessário."
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Preencher apenas reviewer, decision, note e check_*.",
+    "decision aceita: APROVAR, ALTERAR ou BLOQUEAR.",
+    "Para APROVAR, os oito campos check_* têm de estar SIM.",
+    "ALTERAR e BLOQUEAR podem ser usados sem checklist completa.",
+    "Não alterar pack_id, batch_id, id, version, content_fingerprint, pergunta, opções, resposta ou metadados.",
+    "content_fingerprint identifica exatamente o conteúdo revisto: se a questão mudar, a decisão é rejeitada mesmo que alguém se esqueça de aumentar a versão.",
+    "qa_status e qa_flags são preenchidos automaticamente; servem apenas para orientar a revisão e não devem ser editados.",
+    "Uma decisão contraditória sobre uma questão já aprovada é tratada como conflito e nunca substitui silenciosamente a revisão anterior."
+  ],
+  "batches": [
+    {
+      "id": "trp2-86558abb-B01",
+      "index": 1,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "BG10F-REP-1",
+        "BG12FC-CON-1",
+        "CV51-11CD-OPT-1",
+        "CV51-12FCD-COMP-1",
+        "M12E-4",
+        "M12P-2",
+        "CV51-11FUN-IG-1",
+        "D10F-A"
+      ],
+      "projected": {
+        "readinessScore": 44,
+        "canClosedBeta": false,
+        "diagnostic": "0/7",
+        "missions": "0/42",
+        "examItems": 7,
+        "examThemes": 7,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B02",
+      "index": 2,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "D11D-A",
+        "D12E-A",
+        "D12P-A",
+        "D10G-A",
+        "D11C-A",
+        "D10F-P",
+        "D11D-P",
+        "D12C-A"
+      ],
+      "projected": {
+        "readinessScore": 51,
+        "canClosedBeta": false,
+        "diagnostic": "2/7",
+        "missions": "0/42",
+        "examItems": 7,
+        "examThemes": 7,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B03",
+      "index": 3,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "D12E-P",
+        "D12P-P",
+        "D10G-P",
+        "D11C-P",
+        "CV51-10GA-VET-2",
+        "CV51-11CONT-PM-2",
+        "CV51-11TRIG-EQ-2",
+        "CV51-12INT-AREA-1"
+      ],
+      "projected": {
+        "readinessScore": 66,
+        "canClosedBeta": false,
+        "diagnostic": "6/7",
+        "missions": "0/42",
+        "examItems": 11,
+        "examThemes": 11,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B04",
+      "index": 4,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "D12C-P",
+        "CV51-12CPLX-FT-1",
+        "CV51-11CD-OPT-2",
+        "CV51-12FCD-COMP-2",
+        "M10F-2",
+        "M12L-3",
+        "M12E-2",
+        "M12P-3"
+      ],
+      "projected": {
+        "readinessScore": 74,
+        "canClosedBeta": false,
+        "diagnostic": "7/7",
+        "missions": "6/42",
+        "examItems": 18,
+        "examThemes": 12,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B05",
+      "index": 5,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "CV51-11FUN-IG-2",
+        "M10G-1",
+        "M11C-2",
+        "CV51-12INT-AREA-2",
+        "M11T-5",
+        "CV51-12CPLX-FT-2",
+        "BG12FC-ASS-1",
+        "M12L-4"
+      ],
+      "projected": {
+        "readinessScore": 79,
+        "canClosedBeta": false,
+        "diagnostic": "7/7",
+        "missions": "13/42",
+        "examItems": 26,
+        "examThemes": 12,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B06",
+      "index": 6,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "BG12FC-DER-1",
+        "M12L-1",
+        "CV51-11CD-TV-1",
+        "CV51-11CD-TV-2",
+        "CV51-12FCD-APL-1",
+        "CV51-12FCD-APL-2",
+        "CV51-12FCD-RC-1",
+        "CV51-12FCD-RC-2"
+      ],
+      "projected": {
+        "readinessScore": 82,
+        "canClosedBeta": false,
+        "diagnostic": "7/7",
+        "missions": "17/42",
+        "examItems": 34,
+        "examThemes": 12,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B07",
+      "index": 7,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "M10F-1",
+        "M10F-3",
+        "M10F-4",
+        "M11D-1",
+        "M11D-4",
+        "M11D-2",
+        "M11D-3",
+        "M12L-2"
+      ],
+      "projected": {
+        "readinessScore": 84,
+        "canClosedBeta": false,
+        "diagnostic": "7/7",
+        "missions": "20/42",
+        "examItems": 42,
+        "examThemes": 12,
+        "examCognitive": 7
+      }
+    },
+    {
+      "id": "trp2-86558abb-B08",
+      "index": 8,
+      "count": 8,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "M12L-5",
+        "BG12E-EXP-1",
+        "BG12E-MOD-1",
+        "M12E-5",
+        "M12E-1",
+        "M12E-3",
+        "CV51-12PROB-LAP-1",
+        "CV51-12PROB-LAP-2"
+      ],
+      "projected": {
+        "readinessScore": 87,
+        "canClosedBeta": true,
+        "diagnostic": "7/7",
+        "missions": "24/42",
+        "examItems": 50,
+        "examThemes": 12,
+        "examCognitive": 7
+      }
+    }
+  ]
+}

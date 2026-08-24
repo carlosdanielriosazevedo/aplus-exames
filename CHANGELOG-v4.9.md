@@ -1,0 +1,24 @@
+# v4.9 — Cloud Reliability
+
+- Criado `app/lib/cloudReliability.js`.
+- Identificador local por dispositivo.
+- Revisões cloud monotónicas.
+- Save passou de upsert cego para optimistic concurrency / compare-and-swap.
+- Distinção segura entre primeiro save e uma revisão 0 já conhecida.
+- Conflitos bloqueiam escrita em vez de usar last-write-wins.
+- UI explícita de conflito com:
+  - Manter cloud;
+  - Combinar atividade;
+  - Manter este dispositivo.
+- Merge pedagógico une evidências/atividade por IDs estáveis e força recalibração.
+- Snapshots locais antes de carregar/substituir/combinar.
+- Até 8 snapshots locais recentes.
+- Fila local para gravações que falham por rede.
+- Migration `006_v4_9_cloud_revisions.sql`.
+- Tabela `student_cloud_state_history` com trigger de snapshot server-side.
+- RLS no histórico: utilizador só lê o próprio histórico.
+- Cloud payload passa para `aplus-student-state-v8`.
+- Local persistence passa para versão 24.
+- Novo `npm run cloud-reliability:audit`.
+- Technical Gate passa a validar conflitos, revisões, snapshots e merge seguro.
+- Nenhum serviço externo/conta/custo foi ativado nesta versão.

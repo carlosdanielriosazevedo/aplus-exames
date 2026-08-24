@@ -261,8 +261,8 @@ const DIAG_BANK = [
    q:"Se f'(x)>0 em todo o intervalo ]1,4[, o que podemos concluir?",o:["f é crescente nesse intervalo","f é decrescente nesse intervalo","f é negativa nesse intervalo","f tem necessariamente um máximo em x=2"],a:0,
    sol:"Derivada positiva indica que a função é crescente nesse intervalo.",hyp:"Pode existir uma lacuna na interpretação do sinal da derivada.",probe:"D11D-P"},
   {id:"D11D-P",themeId:"11-cd",role:"probe",difficulty:1,cognitive:"Procedimento",
-   q:"Qual é a derivada de f(x)=x²?",o:["x","2x","x²/2","2"],a:1,
-   sol:"Pela regra da potência, (x²)'=2x.",hyp:"A dificuldade pode estar numa regra elementar de derivação."},
+   q:"Qual é a derivada de f(x)=5x?",o:["5x","x","5","0"],a:2,
+   sol:"A derivada de uma função linear ax é a constante a; logo (5x)'=5.",hyp:"A dificuldade pode estar numa regra elementar de derivação."},
 
   // 12.º — Complexos
   {id:"D12C-A",themeId:"12-cplx",role:"anchor",difficulty:2,cognitive:"Aplicação",
@@ -549,9 +549,493 @@ const BETA_GAP_BANK = [
 ];
 
 
+// v5.1 — cobertura original dos focos críticos ainda incompletos.
+// Questões integralmente originais, sem reprodução/adaptação de itens IAVE.
+// Permanecem "prototype": validação determinística interna NÃO substitui revisão por professor.
+const COVERAGE_V5_1_BANK = [
+  // 11.º — Cálculo diferencial · Taxa de variação
+  {
+    id:"CV51-11CD-TV-1",themeId:"11-cd",difficulty:2,cognitive:"Aplicação",focus:"Taxa de variação",
+    q:"A posição de uma partícula é s(t)=t²+2t, em metros. Qual é a taxa média de variação de s entre t=1 e t=3?",
+    o:["4 m/s","5 m/s","6 m/s","12 m/s"],a:2,
+    sol:"s(3)=15 e s(1)=3. A taxa média é (15−3)/(3−1)=12/2=6 m/s.",
+    hyp:"Pode existir dificuldade em calcular uma taxa média de variação a partir de valores da função.",
+    contexts:["mission","training","exam"],signature:"11-cd:Taxa de variação:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11CD-TV-2",themeId:"11-cd",difficulty:2,cognitive:"Procedimento",focus:"Taxa de variação",
+    q:"Se f(x)=3x²−1, qual é a taxa de variação instantânea de f no ponto de abcissa x=2?",
+    o:["6","9","12","18"],a:2,
+    sol:"f'(x)=6x. Assim, f'(2)=12.",
+    hyp:"Pode existir dificuldade em relacionar taxa de variação instantânea com derivada.",
+    contexts:["mission","training","exam"],signature:"11-cd:Taxa de variação:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 11.º — Cálculo diferencial · Otimização
+  {
+    id:"CV51-11CD-OPT-1",themeId:"11-cd",difficulty:3,cognitive:"Modelação",focus:"Otimização",
+    q:"Um retângulo tem perímetro 20. Se um dos lados mede x, a área pode escrever-se A(x)=x(10−x). Qual é a área máxima possível?",
+    o:["20","24","25","50"],a:2,
+    sol:"A(x)=−x²+10x é uma parábola com máximo no vértice x=5. Logo A(5)=25.",
+    hyp:"Pode existir dificuldade em transformar uma restrição geométrica numa função a otimizar.",
+    contexts:["mission","training","exam"],signature:"11-cd:Otimização:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11CD-OPT-2",themeId:"11-cd",difficulty:2,cognitive:"Aplicação",focus:"Otimização",
+    q:"Considere f(x)=−x²+6x+1. Para que valor de x a função atinge o seu máximo?",
+    o:["1","2","3","6"],a:2,
+    sol:"f'(x)=−2x+6. O ponto crítico verifica −2x+6=0, logo x=3; como a parábola é côncava, é máximo.",
+    hyp:"Pode existir dificuldade em localizar um extremo usando a derivada.",
+    contexts:["mission","training","exam"],signature:"11-cd:Otimização:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 11.º — Funções · Transformações
+  {
+    id:"CV51-11FUN-TR-1",themeId:"11-fun",difficulty:2,cognitive:"Interpretação",focus:"Transformações",
+    q:"O gráfico de g é definido por g(x)=f(x−3). Em relação ao gráfico de f, o gráfico de g resulta de uma translação de...",
+    o:["3 unidades para a esquerda","3 unidades para a direita","3 unidades para cima","3 unidades para baixo"],a:1,
+    sol:"Substituir x por x−3 desloca o gráfico horizontalmente 3 unidades para a direita.",
+    hyp:"Pode existir dificuldade em interpretar transformações horizontais de gráficos.",
+    contexts:["mission","training","exam"],signature:"11-fun:Transformações:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11FUN-TR-2",themeId:"11-fun",difficulty:2,cognitive:"Interpretação",focus:"Transformações",
+    q:"Se h(x)=f(x)+2, como se obtém o gráfico de h a partir do gráfico de f?",
+    o:["Translada-se 2 unidades para cima","Translada-se 2 unidades para baixo","Comprime-se horizontalmente para metade","Reflete-se no eixo Ox"],a:0,
+    sol:"Adicionar 2 aos valores de f aumenta todas as ordenadas em 2, correspondendo a uma translação vertical para cima.",
+    hyp:"Pode existir dificuldade em distinguir transformações verticais de horizontais.",
+    contexts:["mission","training","exam"],signature:"11-fun:Transformações:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 11.º — Funções · Modelação
+  {
+    id:"CV51-11FUN-MOD-1",themeId:"11-fun",difficulty:2,cognitive:"Modelação",focus:"Modelação",
+    q:"Um serviço de transporte cobra 3 € de taxa fixa e 0,80 € por quilómetro. Qual função C modela o custo, em euros, de uma viagem de x quilómetros?",
+    o:["C(x)=3x+0,8","C(x)=3+0,8x","C(x)=0,8(x+3)","C(x)=3−0,8x"],a:1,
+    sol:"O custo total é a taxa fixa de 3 € mais 0,80 € por cada quilómetro: C(x)=3+0,8x.",
+    hyp:"Pode existir dificuldade em distinguir termo fixo de taxa de variação num modelo afim.",
+    contexts:["mission","training","exam"],signature:"11-fun:Modelação:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11FUN-MOD-2",themeId:"11-fun",difficulty:2,cognitive:"Modelação",focus:"Modelação",
+    q:"Um depósito contém inicialmente 100 litros e perde água a uma taxa constante de 4 litros por minuto. Enquanto houver água, qual modelo descreve o volume V ao fim de t minutos?",
+    o:["V(t)=100+4t","V(t)=100−4t","V(t)=4−100t","V(t)=100/t"],a:1,
+    sol:"Parte-se de 100 litros e retiram-se 4 litros por minuto, logo V(t)=100−4t.",
+    hyp:"Pode existir dificuldade em traduzir uma variação constante negativa para uma função.",
+    contexts:["mission","training","exam"],signature:"11-fun:Modelação:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 11.º — Funções · Interpretação gráfica
+  {
+    id:"CV51-11FUN-IG-1",themeId:"11-fun",difficulty:2,cognitive:"Interpretação",focus:"Interpretação gráfica",
+    q:"Num certo intervalo, o gráfico de f sobe até x=1 e desce a partir de x=1. O que se pode concluir nesse intervalo?",
+    o:["x=1 corresponde a um mínimo local","x=1 corresponde a um máximo local","f é sempre crescente","f(1)=0 obrigatoriamente"],a:1,
+    sol:"Passar de crescente para decrescente em x=1 caracteriza um máximo local.",
+    hyp:"Pode existir dificuldade em inferir extremos a partir do comportamento gráfico.",
+    contexts:["mission","training","exam"],signature:"11-fun:Interpretação gráfica:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11FUN-IG-2",themeId:"11-fun",difficulty:2,cognitive:"Interpretação",focus:"Interpretação gráfica",
+    q:"O gráfico de uma função f interseta o eixo Ox no ponto (−2,0). Qual das afirmações é verdadeira?",
+    o:["f(0)=−2","f(−2)=0","f(2)=0","−2 não pertence ao domínio"],a:1,
+    sol:"Um ponto do gráfico com ordenada zero corresponde a um zero da função, logo f(−2)=0.",
+    hyp:"Pode existir dificuldade em relacionar interseções com o eixo Ox e zeros da função.",
+    contexts:["mission","training","exam"],signature:"11-fun:Interpretação gráfica:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Função composta e derivadas · Composição
+  {
+    id:"CV51-12FCD-COMP-1",themeId:"12-fcd",difficulty:2,cognitive:"Procedimento",focus:"Composição",
+    q:"Se f(x)=2x+1 e g(x)=x², qual é o valor de (g∘f)(2)?",
+    o:["9","16","25","36"],a:2,
+    sol:"f(2)=5 e g(5)=25, logo (g∘f)(2)=25.",
+    hyp:"Pode existir dificuldade em respeitar a ordem de aplicação numa composição de funções.",
+    contexts:["mission","training","exam"],signature:"12-fcd:Composição:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12FCD-COMP-2",themeId:"12-fcd",difficulty:3,cognitive:"Raciocínio",focus:"Composição",
+    q:"Considere f(x)=√x e g(x)=x−3. Qual é o domínio de f∘g?",
+    o:["x≤3","x<3","x≥3","Todos os números reais"],a:2,
+    sol:"(f∘g)(x)=√(x−3), que exige x−3≥0. Assim, x≥3.",
+    hyp:"Pode existir dificuldade em determinar o domínio de uma composição a partir da função exterior.",
+    contexts:["mission","training","exam"],signature:"12-fcd:Composição:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Função composta e derivadas · Regra da cadeia
+  {
+    id:"CV51-12FCD-RC-1",themeId:"12-fcd",difficulty:3,cognitive:"Procedimento",focus:"Regra da cadeia",
+    q:"Se h(x)=(3x−1)⁴, qual é h'(x)?",
+    o:["4(3x−1)³","12(3x−1)³","12(3x−1)⁴","(12x−4)³"],a:1,
+    sol:"Pela regra da cadeia, h'(x)=4(3x−1)³·3=12(3x−1)³.",
+    hyp:"Pode existir dificuldade em multiplicar pela derivada da função interior.",
+    contexts:["mission","training","exam"],signature:"12-fcd:Regra da cadeia:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12FCD-RC-2",themeId:"12-fcd",difficulty:3,cognitive:"Procedimento",focus:"Regra da cadeia",
+    q:"Para h(x)=√(2x+5), qual é h'(x)?",
+    o:["1/(2√(2x+5))","1/√(2x+5)","2/√(2x+5)","√(2x+5)"],a:1,
+    sol:"h'(x)=(1/(2√(2x+5)))·2=1/√(2x+5).",
+    hyp:"Pode existir dificuldade em aplicar a regra da cadeia a uma raiz quadrada.",
+    contexts:["mission","training","exam"],signature:"12-fcd:Regra da cadeia:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Função composta e derivadas · Aplicações
+  {
+    id:"CV51-12FCD-APL-1",themeId:"12-fcd",difficulty:3,cognitive:"Aplicação",focus:"Aplicações",
+    q:"O raio de um círculo varia segundo r(t)=t²+1. Sabendo que A=πr², qual é a taxa de variação da área no instante t=1?",
+    o:["4π","6π","8π","16π"],a:2,
+    sol:"A'(t)=2πr(t)r'(t). Em t=1, r=2 e r'=2, logo A'(1)=2π·2·2=8π.",
+    hyp:"Pode existir dificuldade em combinar composição, derivação e interpretação de uma taxa num contexto.",
+    contexts:["mission","training","exam"],signature:"12-fcd:Aplicações:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12FCD-APL-2",themeId:"12-fcd",difficulty:3,cognitive:"Aplicação",focus:"Aplicações",
+    q:"A posição de uma partícula é s(t)=(t²+1)². Qual é a sua velocidade no instante t=1?",
+    o:["4","6","8","16"],a:2,
+    sol:"s'(t)=2(t²+1)·2t=4t(t²+1). Assim, s'(1)=8.",
+    hyp:"Pode existir dificuldade em aplicar a derivada de uma função composta num problema de movimento.",
+    contexts:["mission","training","exam"],signature:"12-fcd:Aplicações:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Probabilidades · Regra de Laplace
+  {
+    id:"CV51-12PROB-LAP-1",themeId:"12-prob",difficulty:1,cognitive:"Aplicação",focus:"Regra de Laplace",
+    q:"Lança-se um dado equilibrado de seis faces. Qual é a probabilidade de sair um número par?",
+    o:["1/6","1/3","1/2","2/3"],a:2,
+    sol:"Há 3 resultados favoráveis {2,4,6} em 6 equiprováveis. Pela regra de Laplace, P=3/6=1/2.",
+    hyp:"Pode existir dificuldade em identificar casos favoráveis e possíveis em experiências equiprováveis.",
+    contexts:["mission","training","exam"],signature:"12-prob:Regra de Laplace:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12PROB-LAP-2",themeId:"12-prob",difficulty:2,cognitive:"Aplicação",focus:"Regra de Laplace",
+    q:"Escolhe-se ao acaso um número inteiro de 1 a 20. Qual é a probabilidade de esse número ser múltiplo de 3?",
+    o:["1/5","1/4","3/10","2/5"],a:2,
+    sol:"Os múltiplos de 3 são 3,6,9,12,15,18: 6 casos em 20. Logo P=6/20=3/10.",
+    hyp:"Pode existir dificuldade em contar corretamente os casos favoráveis antes de aplicar a regra de Laplace.",
+    contexts:["mission","training","exam"],signature:"12-prob:Regra de Laplace:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Probabilidades · Problemas mistos
+  {
+    id:"CV51-12PROB-MIX-1",themeId:"12-prob",difficulty:3,cognitive:"Raciocínio",focus:"Problemas mistos",
+    q:"Numa população, P(A)=0,6 e P(A∩B)=0,3. Qual é P(B|A)?",
+    o:["0,2","0,3","0,5","0,9"],a:2,
+    sol:"P(B|A)=P(A∩B)/P(A)=0,3/0,6=0,5.",
+    hyp:"Pode existir dificuldade em selecionar e aplicar a probabilidade condicionada dentro de um problema com vários dados.",
+    contexts:["mission","training","exam"],signature:"12-prob:Problemas mistos:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12PROB-MIX-2",themeId:"12-prob",difficulty:3,cognitive:"Raciocínio",focus:"Problemas mistos",
+    q:"Uma caixa contém 3 bolas vermelhas e 2 azuis. Retiram-se duas bolas sucessivamente, sem reposição. Qual é a probabilidade de ambas serem vermelhas?",
+    o:["1/5","3/10","2/5","3/5"],a:1,
+    sol:"P(VV)=3/5×2/4=6/20=3/10.",
+    hyp:"Pode existir dificuldade em atualizar o número de casos possíveis numa experiência sem reposição.",
+    contexts:["mission","training","exam"],signature:"12-prob:Problemas mistos:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Complexos · Módulo e argumento
+  {
+    id:"CV51-12CPLX-MA-1",themeId:"12-cplx",difficulty:2,cognitive:"Procedimento",focus:"Módulo e argumento",
+    q:"Qual é o módulo do número complexo z=−3+4i?",
+    o:["1","5","7","25"],a:1,
+    sol:"|z|=√((-3)²+4²)=√25=5.",
+    hyp:"Pode existir dificuldade em calcular o módulo a partir das partes real e imaginária.",
+    contexts:["mission","training","exam"],signature:"12-cplx:Módulo e argumento:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12CPLX-MA-2",themeId:"12-cplx",difficulty:3,cognitive:"Raciocínio",focus:"Módulo e argumento",
+    q:"Considere z=−1+√3 i. Um argumento de z no intervalo [0,2π[ é...",
+    o:["π/3","2π/3","4π/3","5π/3"],a:1,
+    sol:"z está no 2.º quadrante e tan do ângulo de referência é √3. O argumento é 2π/3.",
+    hyp:"Pode existir dificuldade em combinar quadrante e ângulo de referência na determinação do argumento.",
+    contexts:["mission","training","exam"],signature:"12-cplx:Módulo e argumento:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Complexos · Forma trigonométrica
+  {
+    id:"CV51-12CPLX-FT-1",themeId:"12-cplx",difficulty:3,cognitive:"Aplicação",focus:"Forma trigonométrica",
+    q:"Qual é uma forma trigonométrica de z=1+i?",
+    o:["cos(π/4)+i sin(π/4)","√2(cos(π/4)+i sin(π/4))","2(cos(π/2)+i sin(π/2))","√2(cos(3π/4)+i sin(3π/4))"],a:1,
+    sol:"|z|=√2 e um argumento é π/4. Logo z=√2(cos(π/4)+i sin(π/4)).",
+    hyp:"Pode existir dificuldade em combinar módulo e argumento na passagem para forma trigonométrica.",
+    contexts:["mission","training","exam"],signature:"12-cplx:Forma trigonométrica:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12CPLX-FT-2",themeId:"12-cplx",difficulty:2,cognitive:"Aplicação",focus:"Forma trigonométrica",
+    q:"Qual é uma forma trigonométrica de z=−i?",
+    o:["cos(π/2)+i sin(π/2)","cos(π)+i sin(π)","cos(3π/2)+i sin(3π/2)","2(cos(3π/2)+i sin(3π/2))"],a:2,
+    sol:"O módulo de −i é 1 e um argumento em [0,2π[ é 3π/2.",
+    hyp:"Pode existir dificuldade em reconhecer módulo e argumento de números complexos situados nos eixos.",
+    contexts:["mission","training","exam"],signature:"12-cplx:Forma trigonométrica:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Primitivas e integrais · Integral definido
+  {
+    id:"CV51-12INT-ID-1",themeId:"12-int",difficulty:2,cognitive:"Procedimento",focus:"Integral definido",
+    q:"Qual é o valor de ∫₀² 3x² dx?",
+    o:["4","6","8","12"],a:2,
+    sol:"Uma primitiva de 3x² é x³. Assim, [x³]₀²=8.",
+    hyp:"Pode existir dificuldade em aplicar o Teorema Fundamental do Cálculo a um integral simples.",
+    contexts:["mission","training","exam"],signature:"12-int:Integral definido:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12INT-ID-2",themeId:"12-int",difficulty:2,cognitive:"Compreensão",focus:"Integral definido",
+    q:"Se F é uma primitiva de f, F(3)=10 e F(1)=4, qual é o valor de ∫₁³ f(x) dx?",
+    o:["4","6","10","14"],a:1,
+    sol:"Pelo Teorema Fundamental do Cálculo, ∫₁³ f(x)dx=F(3)−F(1)=10−4=6.",
+    hyp:"Pode existir dificuldade em relacionar integral definido e valores de uma primitiva.",
+    contexts:["mission","training","exam"],signature:"12-int:Integral definido:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // 12.º — Primitivas e integrais · Áreas
+  {
+    id:"CV51-12INT-AREA-1",themeId:"12-int",difficulty:2,cognitive:"Aplicação",focus:"Áreas",
+    q:"Qual é a área limitada pelo gráfico de y=2x, pelo eixo Ox e pelas retas x=0 e x=2?",
+    o:["2","4","6","8"],a:1,
+    sol:"Como 2x≥0 em [0,2], a área é ∫₀²2x dx=[x²]₀²=4.",
+    hyp:"Pode existir dificuldade em interpretar um integral definido como área.",
+    contexts:["mission","training","exam"],signature:"12-int:Áreas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12INT-AREA-2",themeId:"12-int",difficulty:3,cognitive:"Raciocínio",focus:"Áreas",
+    q:"Qual é a área entre as curvas y=4 e y=x², para −2≤x≤2?",
+    o:["16/3","8","32/3","16"],a:2,
+    sol:"A área é ∫₋₂²(4−x²)dx=[4x−x³/3]₋₂²=32/3.",
+    hyp:"Pode existir dificuldade em identificar função superior/inferior e montar o integral de uma área entre curvas.",
+    contexts:["mission","training","exam"],signature:"12-int:Áreas:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  // Focos que já tinham uma evidência: acrescentar apenas a segunda assinatura independente.
+  {
+    id:"CV51-10GA-VET-2",themeId:"10-ga",difficulty:2,cognitive:"Procedimento",focus:"Vetores",
+    q:"Dados os vetores u=(2,−1) e v=(3,4), qual é u+v?",
+    o:["(5,3)","(1,5)","(6,−4)","(−1,−5)"],a:0,
+    sol:"Somam-se as componentes correspondentes: u+v=(2+3,−1+4)=(5,3).",
+    hyp:"Pode existir dificuldade em operar componente a componente com vetores.",
+    contexts:["mission","training","exam"],signature:"10-ga:Vetores:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11CONT-PM-2",themeId:"11-cont",difficulty:2,cognitive:"Aplicação",focus:"Princípio multiplicativo",
+    q:"Uma pessoa pode escolher 4 camisolas e 3 pares de calças. Quantos conjuntos diferentes de uma camisola e umas calças pode formar?",
+    o:["7","10","12","24"],a:2,
+    sol:"Pelo princípio multiplicativo existem 4×3=12 escolhas.",
+    hyp:"Pode existir dificuldade em reconhecer quando as escolhas sucessivas se multiplicam.",
+    contexts:["mission","training","exam"],signature:"11-cont:Princípio multiplicativo:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11TRIG-EQ-2",themeId:"11-trig",difficulty:2,cognitive:"Procedimento",focus:"Equações trigonométricas",
+    q:"No intervalo [0,2π], quais são as soluções da equação sin x=0?",
+    o:["0 e π","π/2 e 3π/2","0, π e 2π","π apenas"],a:2,
+    sol:"sin x=0 para múltiplos inteiros de π. Em [0,2π], as soluções são 0, π e 2π.",
+    hyp:"Pode existir dificuldade em identificar todas as soluções trigonométricas dentro de um intervalo fechado.",
+    contexts:["mission","training","exam"],signature:"11-trig:Equações trigonométricas:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12INT-PRIM-2",themeId:"12-int",difficulty:2,cognitive:"Procedimento",focus:"Primitivas",
+    q:"Qual das expressões representa uma primitiva de f(x)=3x²+2?",
+    o:["x³+2x","6x+2","x³+2","3x³+2x"],a:0,
+    sol:"A derivada de x³+2x é 3x²+2. Qualquer x³+2x+C é uma primitiva.",
+    hyp:"Pode existir dificuldade em primitivar termo a termo e reconhecer a constante arbitrária.",
+    contexts:["mission","training","exam"],signature:"12-int:Primitivas:cv51-2",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  // Cobertura mínima das 20 microcompetências restantes da taxonomia.
+  {
+    id:"CV51-10ELE-VOT-1",themeId:"10-ele",difficulty:2,cognitive:"Aplicação",focus:"Métodos de votação",
+    q:"Numa votação por maioria simples entre três opções, A recebe 18 votos, B recebe 12 e C recebe 10. Qual opção vence?",
+    o:["A","B","C","Há empate"],a:0,
+    sol:"Na maioria simples vence a opção com maior número de votos. A tem 18, o maior valor.",
+    hyp:"Pode existir dificuldade em interpretar a regra de decisão de um método de votação.",
+    contexts:["mission","training","exam"],signature:"10-ele:Métodos de votação:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-10ELE-PART-1",themeId:"10-ele",difficulty:2,cognitive:"Aplicação",focus:"Métodos de partilha",
+    q:"Um prémio de 600 € é dividido proporcionalmente na razão 1:2:3. Quanto recebe a pessoa correspondente à parte 3?",
+    o:["100 €","200 €","300 €","360 €"],a:2,
+    sol:"A soma das partes é 6. A terceira pessoa recebe 3/6 de 600 €, ou seja, 300 €.",
+    hyp:"Pode existir dificuldade em transformar uma razão de partilha em frações do total.",
+    contexts:["mission","training","exam"],signature:"10-ele:Métodos de partilha:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-10ELE-INT-1",themeId:"10-ele",difficulty:2,cognitive:"Interpretação",focus:"Interpretação de resultados",
+    q:"Num método de votação, o candidato X tem 42 pontos e Y tem 37. Se vence quem obtiver mais pontos, qual conclusão é correta?",
+    o:["Y vence por 5 pontos","X vence por 5 pontos","X e Y empatam","Não é possível comparar"],a:1,
+    sol:"42−37=5 e X tem a pontuação maior, portanto vence por 5 pontos.",
+    hyp:"Pode existir dificuldade em interpretar a pontuação final produzida por um método.",
+    contexts:["mission","training","exam"],signature:"10-ele:Interpretação de resultados:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-10FIN-JUR-1",themeId:"10-fin",difficulty:2,cognitive:"Aplicação",focus:"Juros",
+    q:"Um capital de 1000 € é aplicado durante um ano a uma taxa anual de juro simples de 4%. Qual é o juro obtido?",
+    o:["4 €","40 €","104 €","1040 €"],a:1,
+    sol:"O juro é 1000×0,04=40 €.",
+    hyp:"Pode existir dificuldade em converter uma taxa percentual em valor monetário.",
+    contexts:["mission","training","exam"],signature:"10-fin:Juros:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-10FIN-CAP-1",themeId:"10-fin",difficulty:2,cognitive:"Aplicação",focus:"Capitalização",
+    q:"Um capital de 1000 € cresce 10% por ano com capitalização composta. Qual é o capital ao fim de 2 anos?",
+    o:["1100 €","1200 €","1210 €","2000 €"],a:2,
+    sol:"Após dois anos: 1000×1,1²=1210 €.",
+    hyp:"Pode existir dificuldade em distinguir crescimento composto de adição repetida do juro inicial.",
+    contexts:["mission","training","exam"],signature:"10-fin:Capitalização:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-10FIN-MOD-1",themeId:"10-fin",difficulty:2,cognitive:"Modelação",focus:"Modelação financeira",
+    q:"Um investimento de 800 € cresce 5% por ano. Qual expressão modela o capital C(n), em euros, ao fim de n anos, admitindo capitalização anual?",
+    o:["C(n)=800+0,05n","C(n)=800·1,05ⁿ","C(n)=805ⁿ","C(n)=800·0,05ⁿ"],a:1,
+    sol:"Cada ano multiplica o capital por 1,05, logo C(n)=800·1,05ⁿ.",
+    hyp:"Pode existir dificuldade em construir um modelo exponencial a partir de uma taxa percentual.",
+    contexts:["mission","training","exam"],signature:"10-fin:Modelação financeira:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-10EST-REP-1",themeId:"10-est",difficulty:2,cognitive:"Interpretação",focus:"Representações de dados",
+    q:"Qual representação é particularmente adequada para comparar frequências de categorias como 'A', 'B' e 'C'?",
+    o:["Diagrama de barras","Gráfico de uma função contínua","Circunferência trigonométrica","Reta numérica apenas"],a:0,
+    sol:"Um diagrama de barras permite comparar diretamente as frequências associadas a categorias.",
+    hyp:"Pode existir dificuldade em selecionar uma representação apropriada ao tipo de dados.",
+    contexts:["mission","training","exam"],signature:"10-est:Representações de dados:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-10EST-MED-1",themeId:"10-est",difficulty:2,cognitive:"Procedimento",focus:"Medidas estatísticas",
+    q:"Qual é a média dos valores 4, 6, 8 e 10?",
+    o:["6","7","8","9"],a:1,
+    sol:"A média é (4+6+8+10)/4=28/4=7.",
+    hyp:"Pode existir dificuldade em calcular uma medida estatística elementar.",
+    contexts:["mission","training","exam"],signature:"10-est:Medidas estatísticas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-10GS-PROP-1",themeId:"10-gs",difficulty:2,cognitive:"Conhecimento",focus:"Propriedades geométricas",
+    q:"Num triângulo retângulo, os catetos medem 3 e 4. Quanto mede a hipotenusa?",
+    o:["5","6","7","12"],a:0,
+    sol:"Pelo teorema de Pitágoras, h²=3²+4²=25, logo h=5.",
+    hyp:"Pode existir dificuldade em aplicar uma propriedade geométrica fundamental.",
+    contexts:["mission","training","exam"],signature:"10-gs:Propriedades geométricas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-10GS-RP-1",themeId:"10-gs",difficulty:2,cognitive:"Resolução de problemas",focus:"Resolução de problemas",
+    q:"Uma escada de 5 m está encostada a uma parede e a base fica a 3 m da parede. A que altura chega a escada?",
+    o:["2 m","3 m","4 m","8 m"],a:2,
+    sol:"Forma-se um triângulo retângulo: h²+3²=5², logo h²=16 e h=4 m.",
+    hyp:"Pode existir dificuldade em reconhecer um modelo geométrico dentro de um contexto.",
+    contexts:["mission","training","exam"],signature:"10-gs:Resolução de problemas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-11PE-PE-1",themeId:"11-pe",difficulty:2,cognitive:"Procedimento",focus:"Produto escalar",
+    q:"Dados u=(1,2) e v=(3,−1), qual é o produto escalar u·v?",
+    o:["1","3","5","7"],a:0,
+    sol:"u·v=1×3+2×(−1)=3−2=1.",
+    hyp:"Pode existir dificuldade em calcular o produto escalar por coordenadas.",
+    contexts:["mission","training","exam"],signature:"11-pe:Produto escalar:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11PE-AG-1",themeId:"11-pe",difficulty:3,cognitive:"Aplicação",focus:"Aplicações geométricas",
+    q:"Se u e v são vetores não nulos e u·v=|u||v|, qual é o ângulo entre eles?",
+    o:["0","π/4","π/2","π"],a:0,
+    sol:"u·v=|u||v|cosθ. Logo cosθ=1 e θ=0.",
+    hyp:"Pode existir dificuldade em ligar produto escalar ao ângulo entre vetores.",
+    contexts:["mission","training","exam"],signature:"11-pe:Aplicações geométricas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-11SUC-PROG-1",themeId:"11-suc",difficulty:2,cognitive:"Aplicação",focus:"Progressões",
+    q:"Numa progressão aritmética com primeiro termo 5 e razão 3, qual é o quarto termo?",
+    o:["8","11","14","20"],a:2,
+    sol:"u₄=5+(4−1)×3=14.",
+    hyp:"Pode existir dificuldade em aplicar a expressão de uma progressão aritmética.",
+    contexts:["mission","training","exam"],signature:"11-suc:Progressões:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-11SUC-COMP-1",themeId:"11-suc",difficulty:2,cognitive:"Interpretação",focus:"Comportamento",
+    q:"Considere a sucessão uₙ=1/n, para n≥1. Quando n aumenta indefinidamente, uₙ...",
+    o:["cresce sem limite","aproxima-se de 0","aproxima-se de 1","é sempre igual a 0"],a:1,
+    sol:"Os termos 1/n tornam-se cada vez menores e aproximam-se de 0.",
+    hyp:"Pode existir dificuldade em interpretar o comportamento assintótico de uma sucessão.",
+    contexts:["mission","training","exam"],signature:"11-suc:Comportamento:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-12RAE-APR-1",themeId:"12-rae",difficulty:2,cognitive:"Aplicação",focus:"Aproximações",
+    q:"Sabe-se que f(1)<0 e f(2)>0 e que f é contínua em [1,2]. Qual intervalo é garantido conter pelo menos um zero de f?",
+    o:["[−2,−1]","[0,1]","[1,2]","[2,3]"],a:2,
+    sol:"Pela continuidade e mudança de sinal entre 1 e 2, existe pelo menos um zero em [1,2].",
+    hyp:"Pode existir dificuldade em usar uma mudança de sinal para localizar aproximadamente uma solução.",
+    contexts:["mission","training","exam"],signature:"12-rae:Aproximações:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12RAE-VAL-1",themeId:"12-rae",difficulty:2,cognitive:"Validação",focus:"Validação de soluções",
+    q:"Uma calculadora fornece x≈1,414 como solução de x²=2. Qual cálculo ajuda diretamente a validar essa aproximação?",
+    o:["1,414+2","1,414² e comparar com 2","2/1,414 sem qualquer comparação","1,414−2 apenas"],a:1,
+    sol:"Substituir a aproximação na equação permite verificar se 1,414² fica próximo de 2.",
+    hyp:"Pode existir dificuldade em validar uma solução aproximada por substituição.",
+    contexts:["mission","training","exam"],signature:"12-rae:Validação de soluções:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-12IE-EST-1",themeId:"12-ie",difficulty:2,cognitive:"Interpretação",focus:"Estimativas",
+    q:"Numa amostra aleatória de 200 alunos, 120 preferem a opção A. Qual é a estimativa pontual da proporção populacional que prefere A?",
+    o:["0,4","0,5","0,6","1,2"],a:2,
+    sol:"A proporção amostral é 120/200=0,6 e serve como estimativa pontual da proporção populacional.",
+    hyp:"Pode existir dificuldade em obter uma estimativa de proporção a partir de uma amostra.",
+    contexts:["mission","training","exam"],signature:"12-ie:Estimativas:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12IE-INF-1",themeId:"12-ie",difficulty:2,cognitive:"Interpretação",focus:"Interpretação inferencial",
+    q:"Uma amostra aleatória sugere que 62% dos inquiridos preferem A. Qual afirmação é mais adequada?",
+    o:["Exatamente 62% de toda a população prefere A","A amostra fornece evidência para estimar a preferência na população, com incerteza","A população tem obrigatoriamente a mesma composição da amostra","Não se pode obter qualquer informação sobre a população"],a:1,
+    sol:"A inferência usa a amostra para obter informação sobre a população, reconhecendo incerteza amostral.",
+    hyp:"Pode existir dificuldade em distinguir estimativa inferencial de certeza sobre toda a população.",
+    contexts:["mission","training","exam"],signature:"12-ie:Interpretação inferencial:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+
+  {
+    id:"CV51-12MAT-REP-1",themeId:"12-mat",difficulty:1,cognitive:"Compreensão",focus:"Representação",
+    q:"Uma matriz com 3 linhas e 2 colunas tem dimensão...",
+    o:["2×2","2×3","3×2","3×3"],a:2,
+    sol:"A dimensão indica primeiro o número de linhas e depois o número de colunas: 3×2.",
+    hyp:"Pode existir dificuldade em ler a dimensão de uma matriz.",
+    contexts:["mission","training","exam"],signature:"12-mat:Representação:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  },
+  {
+    id:"CV51-12MAT-APL-1",themeId:"12-mat",difficulty:2,cognitive:"Modelação",focus:"Aplicações",
+    q:"Uma loja regista as quantidades vendidas de dois produtos em v=(3,5) e os preços em p=(2,4), em euros. Qual é a receita total, usando o produto linha-coluna correspondente?",
+    o:["18 €","20 €","26 €","32 €"],a:2,
+    sol:"A receita é 3×2+5×4=6+20=26 €.",
+    hyp:"Pode existir dificuldade em interpretar uma operação matricial/vetorial num contexto.",
+    contexts:["mission","training","exam"],signature:"12-mat:Aplicações:cv51-1",reviewStatus:"prototype",origin:"original_v5_1"
+  }
+];
+
+
+function stableOptionTarget(itemId){
+  let h=2166136261;
+  const text=String(itemId||"");
+  for(let i=0;i<text.length;i++){
+    h^=text.charCodeAt(i);
+    h=Math.imul(h,16777619);
+  }
+  return (h>>>0)%4;
+}
+
+function balanceCorrectOption(item){
+  if(!Array.isArray(item.o)||item.o.length!==4||!Number.isInteger(item.a)||item.a<0||item.a>3){
+    return item;
+  }
+  const target=stableOptionTarget(item.id);
+  if(target===item.a)return item;
+
+  const options=[...item.o];
+  const [correct]=options.splice(item.a,1);
+  options.splice(target,0,correct);
+  return {...item,o:options,a:target,optionOrderVersion:1};
+}
+
 function attachMicrocompetency(item){
   const id=item.microcompetencyId||microcompetencyId(item.themeId,item.focus);
-  return {...item,microcompetencyId:id};
+  return balanceCorrectOption({...item,microcompetencyId:id});
 }
 
 export {TAXONOMY,PREREQUISITES,FOCUS_PREREQUISITES,MICRO_PREREQUISITES};
@@ -561,5 +1045,6 @@ export const QUESTION_BANK=[
   ...reusable,
   ...CALIBRATION_BANK.map(q=>({...q,reviewStatus:q.reviewStatus||"prototype"})),
   ...CAUSAL_PROBE_BANK,
-  ...BETA_GAP_BANK
+  ...BETA_GAP_BANK,
+  ...COVERAGE_V5_1_BANK
 ].map(attachMicrocompetency);

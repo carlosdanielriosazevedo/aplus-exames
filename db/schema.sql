@@ -262,3 +262,206 @@ on student_cloud_state(updated_at desc);
 -- auth.user_id() representa o utilizador autenticado;
 -- mesmo que o browser tente pedir o estado de outro auth_user_id,
 -- a política RLS impede a leitura/escrita.
+
+
+-- ============================================================
+-- v4.6 — rankings/divisões (ver migration 005 para políticas RLS completas)
+-- ============================================================
+
+-- A+ v4.6 — arquitetura de rankings/divisões.
+-- IMPORTANTE: estas tabelas ficam preparadas, mas o ranking real ainda NÃO está ativo.
+-- O browser nunca deve conseguir ler livremente perfis/XP de outros alunos.
+-- A composição de leaderboards deve ser feita por API server-side com regras de privacidade.
+
+create table if not exists ranking_profiles (
+  auth_user_id text primary key default (auth.user_id()),
+  nickname text,
+  school_year text,
+  region text,
+  school_name text,
+  district_opt_in boolean not null default false,
+  school_opt_in boolean not null default false,
+  leaderboard_enabled boolean not null default true,
+  division text not null default 'bronze'
+    check (division in ('bronze','silver','gold','platinum','diamond')),
+  highest_division text not null default 'bronze'
+    check (highest_division in ('bronze','silver','gold','platinum','diamond')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists ranking_xp_events (
+  id uuid primary key default gen_random_uuid(),
+  auth_user_id text not null,
+  event_key text not null,
+  week_start date not null,
+  occurred_at timestamptz not null,
+  activity_kind text not null
+    check (activity_kind in ('diagnostic','mission','training','mini_exam','exam')),
+  ranked_xp integer not null check (ranked_xp between 0 and 500),
+  raw_xp integer not null check (raw_xp between 0 and 500),
+  multiplier numeric(5,2) not null check (multiplier between 0 and 1),
+  focus_key_hash text,
+  server_rule_version integer not null default 1,
+  created_at timestamptz not null default now(),
+  unique(auth_user_id,event_key)
+);
+
+create table if not exists ranking_weekly_totals (
+  auth_user_id text not null,
+  week_start date not null,
+  ranked_xp integer not null default 0 check (ranked_xp >= 0),
+  updated_at timestamptz not null default now(),
+  primary key(auth_user_id,week_start)
+);
+
+create table if not exists ranking_league_memberships (
+  id uuid primary key default gen_random_uuid(),
+  auth_user_id text not null,
+  week_start date not null,
+  division text not null
+    check (division in ('bronze','silver','gold','platinum','diamond')),
+  league_group_id uuid not null,
+  final_position smallint,
+  outcome text check (outcome in ('promoted','stay','demoted')),
+  finalized_at timestamptz,
+  created_at timestamptz not null default now(),
+  unique(auth_user_id,week_start)
+);
+
+create index if not exists idx_ranking_weekly_xp
+  on ranking_weekly_totals(week_start,ranked_xp desc);
+
+create index if not exists idx_ranking_league_group
+  on ranking_league_memberships(week_start,division,league_group_id);
+
+create index if not exists idx_ranking_events_user_week
+  on ranking_xp_events(auth_user_id,week_start,occurred_at desc);
+
+-- Cada aluno pode gerir/ver apenas o seu próprio perfil/estado via Data API.
+-- Os rankings multiutilizador devem ser devolvidos por endpoints server-side
+-- que apliquem nickname, opt-in e limiares mínimos de anonimato.
+
+alter table ranking_profiles enable row level security;
+alter table ranking_xp_events enable row level security;
+alter table ranking_weekly_totals enable row level security;
+alter table ranking_league_memberships enable row level security;
+
+revoke all on table ranking_profiles from anonymous;
+revoke all on table ranking_xp_events from anonymous;
+revoke all on table ranking_weekly_totals from anonymous;
+revoke all on table ranking_league_memberships from anonymous;
+
+grant select,insert,update,delete on table ranking_profiles to authenticated;
+grant select on table ranking_xp_events to authenticated;
+grant select on table ranking_weekly_totals to authenticated;
+grant select on table ranking_league_memberships to authenticated;
+
+drop policy if exists "ranking_profiles_own_select" on ranking_profiles;
+create policy "ranking_profiles_own_select"
+on ranking_profiles for select to authenticated
+using ((select auth.user_id())=auth_user_id);
+
+drop policy if exists "ranking_profiles_own_insert" on ranking_profiles;
+create policy "ranking_profiles_own_insert"
+on ranking_profiles for insert to authenticated
+with check ((select auth.user_id())=auth_user_id);
+
+drop policy if exists "ranking_profiles_own_update" on ranking_profiles;
+create policy "ranking_profiles_own_update"
+on ranking_profiles for update to authenticated
+using ((select auth.user_id())=auth_user_id)
+with check ((select auth.user_id())=auth_user_id);
+
+drop policy if exists "ranking_profiles_own_delete" on ranking_profiles;
+create policy "ranking_profiles_own_delete"
+on ranking_profiles for delete to authenticated
+using ((select auth.user_id())=auth_user_id);
+
+drop policy if exists "ranking_events_own_select" on ranking_xp_events;
+create policy "ranking_events_own_select"
+on ranking_xp_events for select to authenticated
+using ((select auth.user_id())=auth_user_id);
+
+drop policy if exists "ranking_totals_own_select" on ranking_weekly_totals;
+create policy "ranking_totals_own_select"
+on ranking_weekly_totals for select to authenticated
+using ((select auth.user_id())=auth_user_id);
+
+drop policy if exists "ranking_league_own_select" on ranking_league_memberships;
+create policy "ranking_league_own_select"
+on ranking_league_memberships for select to authenticated
+using ((select auth.user_id())=auth_user_id);
+
+-- Escrita de XP/totais/divisões fica deliberadamente fora do cliente autenticado.
+-- Deve ser feita pelo backend após validar a conclusão real da atividade.
+-- Isto reduz cheating por manipulação do JavaScript/browser.
+
+
+-- ============================================================
+-- v4.9 — revisões otimistas e snapshots cloud
+-- ============================================================
+
+-- A+ v4.9 — revisões otimistas, device attribution e snapshots server-side.
+-- Aplicar apenas quando a cloud Neon estiver a ser ativada/testada.
+
+alter table student_cloud_state
+  add column if not exists revision integer not null default 0,
+  add column if not exists last_device_id text;
+
+create table if not exists student_cloud_state_history (
+  id uuid primary key default gen_random_uuid(),
+  auth_user_id text not null,
+  revision integer not null,
+  state_json jsonb not null,
+  device_id text,
+  saved_at timestamptz not null default now()
+);
+
+create index if not exists idx_student_cloud_history_user_revision
+  on student_cloud_state_history(auth_user_id,revision desc);
+
+-- Guardar automaticamente a versão anterior antes de cada UPDATE.
+create or replace function snapshot_student_cloud_state()
+returns trigger
+language plpgsql
+as $$
+begin
+  insert into student_cloud_state_history(
+    auth_user_id,revision,state_json,device_id,saved_at
+  ) values (
+    old.auth_user_id,
+    old.revision,
+    old.state_json,
+    old.last_device_id,
+    coalesce(old.updated_at,now())
+  );
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_student_cloud_state_snapshot on student_cloud_state;
+create trigger trg_student_cloud_state_snapshot
+before update on student_cloud_state
+for each row
+execute function snapshot_student_cloud_state();
+
+alter table student_cloud_state_history enable row level security;
+
+revoke all on table student_cloud_state_history from anonymous;
+grant select on table student_cloud_state_history to authenticated;
+
+drop policy if exists "student_cloud_history_select_own" on student_cloud_state_history;
+create policy "student_cloud_history_select_own"
+on student_cloud_state_history
+for select
+to authenticated
+using ((select auth.user_id()) = auth_user_id);
+
+-- A aplicação cliente NÃO recebe INSERT/UPDATE/DELETE na tabela de histórico.
+-- O trigger server-side é a única via normal de escrita.
+--
+-- A coluna revision funciona como compare-and-swap:
+-- UPDATE ... WHERE auth_user_id = current_user AND revision = expected_revision.
+-- Se zero linhas forem alteradas, outro dispositivo avançou a revisão e a app
+-- deve bloquear a escrita em vez de sobrescrever silenciosamente.

@@ -1,0 +1,24 @@
+# v5.4 — Pre‑Review QA
+
+- Criado `app/lib/preReviewQa.js`.
+- Pré‑QA automático passa a correr antes dos packs de professor.
+- Blockers incluem opções duplicadas/vazias, resposta inválida, metadados críticos em falta, questões exatamente duplicadas e outros erros mecânicos.
+- Warnings incluem assinaturas reutilizadas, near-duplicates, soluções/enunciados curtos e potenciais leaks pela dimensão da opção correta.
+- Aprovação in-app fica bloqueada perante blockers.
+- Importação CSV também rejeita APROVAR quando o pré‑QA bloqueia o item.
+- Packs externos excluem automaticamente blockers.
+- CSV recebe colunas `qa_status` e `qa_flags`.
+- Pré‑QA trabalha sobre a versão editorial efetiva (`QUESTION_BANK + contentPatch`).
+- Corrigido bug em que packs criados por `itemIds` podiam exportar a versão base em vez da revisão editorial atual.
+- Identificada e corrigida duplicação real no probe `D11D-P`.
+- Implementada distribuição estável da posição da resposta correta por ID.
+- Distribuição passa de A/B/C/D = 30/71/41/3 para 33/41/41/30.
+- O conteúdo correto é movido juntamente com o índice; não existe randomização por sessão.
+- Corpus atual: 145 questões, 0 blockers, 26 com warnings, 119 limpas.
+- Caminho mínimo do professor: 64/64 exportáveis; 11 têm warnings automáticos.
+- Pack atual passa para `docs/professor-review-v5.4/`.
+- Pack operacional usa schema `teacher-review-operations-v2`.
+- Local state passa para versão 28.
+- App version passa para 5.4.0.
+- Novo `npm run pre-review-qa:audit`.
+- Readiness pedagógico real continua 10%; pré‑QA não cria aprovações.

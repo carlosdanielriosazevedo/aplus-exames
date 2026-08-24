@@ -1,0 +1,33 @@
+# v5.5 — Hybrid Content Validation
+
+- Criada política híbrida de validação de conteúdo.
+- Modelo conservador continua disponível com 64 revisões humanas.
+- Plano híbrido reduz o alvo inicial para 45 revisões humanas:
+  - 40 obrigatórias;
+  - 5 de amostragem;
+  - 24 itens no lane de máquina;
+  - 19 revisões humanas poupadas (30%).
+- Diagnóstico continua 100% humano.
+- Compreensão, interpretação, raciocínio, modelação, itens com warnings e itens sem oracle continuam humanos.
+- Criado `app/lib/machineMathOracle.js`.
+- 24 itens prioritários recebem oracle determinístico reproduzível.
+- Criado `app/data/validationEvidence.js` com atestações ligadas a fingerprints.
+- Qualquer edição invalida automaticamente a atestação machine-only.
+- Criado `app/lib/validationPolicy.js`.
+- Criado `app/lib/hybridValidation.js`.
+- Criado `app/lib/hybridTeacherReview.js`.
+- Closed beta pode usar machine-only em Mission/Exam quando a atestação atual passa.
+- Diagnóstico fechado continua a exigir `reviewed`.
+- Produção continua a exigir revisão humana; machine-only tem `productionEligible:false`.
+- Amostra humana fixa em 20% do lane de máquina na política inicial.
+- Amostra é determinística e cobre 10.º/11.º/12.º quando possível.
+- Painel interno mostra plano híbrido e roteiro conservador lado a lado.
+- Pack recomendado passa para `docs/professor-review-v5.5-hybrid/`.
+- Pack híbrido: 45 questões em 6 lotes.
+- Preparado contrato provider-neutral para segundo validador externo/IA; nenhuma API/conta/custo ativado.
+- Novo `npm run hybrid-validation:audit`.
+- Novo `npm run teacher-review:hybrid`.
+- Simulação de 45 aprovações humanas atinge GO no gate híbrido com score estrutural 87%.
+- Gate conservador permanece distinto e não recebe falsas aprovações.
+- Local state passa para versão 29.
+- App version passa para 5.5.0.

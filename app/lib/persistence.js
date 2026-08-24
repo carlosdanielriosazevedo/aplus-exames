@@ -1,6 +1,6 @@
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
-export const APP_STATE_VERSION=17;
+export const APP_STATE_VERSION=29;
 
 export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){
   try{
@@ -34,7 +34,7 @@ export function clearLocalState(storageKey=STORAGE_KEY){
 export function buildSyncEnvelope(state){
   return {
     schema:"aplus-sync-v1",
-    appVersion:"4.2.0",
+    appVersion:"5.5.0",
     exportedAt:new Date().toISOString(),
     identity:{
       mode:state.identity?.mode||"demo",
@@ -52,12 +52,27 @@ export function buildSyncEnvelope(state){
       sessions:state.betaSessions||[],
       events:state.betaEvents||[],
       feedback:state.betaFeedback||[],
-      testerMeta:state.betaTesterMeta||null
+      testerMeta:state.betaTesterMeta||null,
+      productAnalytics:state.productAnalytics||null,
+      productAnalyticsVersion:state.productAnalyticsVersion||1
     },
     contentReports:state.contentReports||[],
     examHistory:state.examHistory||[],
     missionHistory:state.missionHistory||[],
+    engagement:state.engagement||null,
+    engagementModelVersion:state.engagementModelVersion||1,
+    competition:state.competition||null,
+    competitionModelVersion:state.competitionModelVersion||1,
+    dailyMission:state.dailyMission||null,
+    dailyMissionModelVersion:state.dailyMissionModelVersion||1,
     learningHypotheses:state.learningHypotheses||[],
+    pedagogicalMemoryVersion:state.pedagogicalMemoryVersion||2,
+    cloudSync:{
+      modelVersion:state.cloudSyncModelVersion||1,
+      baseRevision:state.cloudSync?.baseRevision??0,
+      lastRemoteRevision:state.cloudSync?.lastRemoteRevision??null,
+      pendingCount:state.cloudSync?.pendingCount??0
+    },
     editorial:{
       overrides:state.editorialOverrides||{},
       batches:state.reviewBatches||[],

@@ -1,0 +1,24 @@
+# v4.6 — Rankings + Divisões
+
+- Criado motor `competition.js`.
+- Separação entre XP total e XP competitivo semanal.
+- XP competitivo reinicia à segunda-feira.
+- Missão diária vale +50 XP competitivo.
+- Treino Livre vale até +40 XP com diminishing returns por repetição do mesmo foco.
+- Mini-exame vale até +80 XP, sem depender da nota.
+- Primeiro Diagnóstico vale +30 XP.
+- XP competitivo é idempotente por sessão.
+- Regra de **uma única Missão principal por dia** implementada na Home e no route da Missão.
+- Depois da Missão, Home oferece Treino Livre, Mini-exame e Ranking.
+- Rankings protótipo: Divisão, Geral, Ano, Distrito/Região e Escola.
+- Outros participantes são explicitamente simulados nesta versão.
+- Divisões: Bronze, Prata, Ouro, Platina e Diamante.
+- Liga protótipo: 20 alunos, Top 5 sobem, últimos 3 descem.
+- Perfil público usa nickname.
+- Escola/distrito são opcionais e exigem opt-in.
+- Métricas académicas ficam excluídas do contrato público.
+- Migration PostgreSQL `005_v4_6_rankings.sql`.
+- Cloud state passa para `aplus-student-state-v5`.
+- Friends beta report alinhado com appVersion 4.6.0.
+- Novo `npm run competition:audit`.
+- Technical Gate passa a validar rankings/divisões.

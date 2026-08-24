@@ -1,0 +1,374 @@
+{
+  "schema": "teacher-review-hybrid-operations-v1",
+  "generatedAt": "2026-08-23T23:32:48.116Z",
+  "packId": "hyb1-98cd6cc8",
+  "policy": "conservative_hybrid_beta_v1",
+  "conservativeApprovals": 64,
+  "hybridTarget": 45,
+  "savedReviews": 19,
+  "savedPct": 30,
+  "mandatoryHuman": 40,
+  "teacherSample": 5,
+  "machineLane": 24,
+  "sampleRate": 0.2,
+  "estimatedHours": 3.8,
+  "instructions": [
+    "Preencher apenas reviewer, decision, note e check_*.",
+    "decision aceita: APROVAR, ALTERAR ou BLOQUEAR.",
+    "Para APROVAR, os oito campos check_* têm de estar SIM.",
+    "ALTERAR e BLOQUEAR podem ser usados sem checklist completa.",
+    "Não alterar pack_id, batch_id, id, version, content_fingerprint, pergunta, opções, resposta ou metadados.",
+    "content_fingerprint identifica exatamente o conteúdo revisto: se a questão mudar, a decisão é rejeitada mesmo que alguém se esqueça de aumentar a versão.",
+    "qa_status e qa_flags são preenchidos automaticamente; servem apenas para orientar a revisão e não devem ser editados.",
+    "Uma decisão contraditória sobre uma questão já aprovada é tratada como conflito e nunca substitui silenciosamente a revisão anterior."
+  ],
+  "batches": [
+    {
+      "id": "hyb1-98cd6cc8-B01",
+      "index": 1,
+      "count": 8,
+      "mandatoryCount": 8,
+      "sampleCount": 0,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "CV51-11FUN-IG-1",
+        "CV51-12CPLX-MA-2",
+        "CV51-11CD-OPT-1",
+        "D10F-A",
+        "D11D-A",
+        "D12E-A",
+        "D12P-A",
+        "D10G-A"
+      ]
+    },
+    {
+      "id": "hyb1-98cd6cc8-B02",
+      "index": 2,
+      "count": 8,
+      "mandatoryCount": 8,
+      "sampleCount": 0,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "D11C-A",
+        "D10F-P",
+        "D11D-P",
+        "D12C-A",
+        "D12E-P",
+        "D12P-P",
+        "D10G-P",
+        "D11C-P"
+      ]
+    },
+    {
+      "id": "hyb1-98cd6cc8-B03",
+      "index": 3,
+      "count": 8,
+      "mandatoryCount": 8,
+      "sampleCount": 0,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "D12C-P",
+        "BG12FC-DER-1",
+        "M12E-4",
+        "CV51-12FCD-COMP-2",
+        "M10F-2",
+        "M12L-1",
+        "M12L-2",
+        "M12L-4"
+      ]
+    },
+    {
+      "id": "hyb1-98cd6cc8-B04",
+      "index": 4,
+      "count": 8,
+      "mandatoryCount": 8,
+      "sampleCount": 0,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "M12E-2",
+        "M12E-3",
+        "CV51-11FUN-IG-2",
+        "CV51-12INT-AREA-2",
+        "CV51-12CPLX-MA-1",
+        "BG12FC-CON-1",
+        "M12L-3",
+        "M10F-1"
+      ]
+    },
+    {
+      "id": "hyb1-98cd6cc8-B05",
+      "index": 5,
+      "count": 8,
+      "mandatoryCount": 8,
+      "sampleCount": 0,
+      "estimatedMinutes": 40,
+      "itemIds": [
+        "M10F-3",
+        "M10F-4",
+        "M11D-2",
+        "M11D-3",
+        "BG12E-MOD-1",
+        "M12E-5",
+        "CV51-12PROB-MIX-1",
+        "CV51-12PROB-MIX-2"
+      ]
+    },
+    {
+      "id": "hyb1-98cd6cc8-B06",
+      "index": 6,
+      "count": 5,
+      "mandatoryCount": 0,
+      "sampleCount": 5,
+      "estimatedMinutes": 25,
+      "itemIds": [
+        "CV51-10GA-VET-2",
+        "CV51-11CD-TV-1",
+        "M12E-1",
+        "BG12FC-ASS-1",
+        "CV51-12FCD-APL-2"
+      ]
+    }
+  ],
+  "machine": [
+    {
+      "id": "M10G-1",
+      "fingerprint": "cr1-d43bad3c",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "M11C-2",
+      "fingerprint": "cr1-5429e690",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "M11D-1",
+      "fingerprint": "cr1-c9a66b61",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "M12E-1",
+      "fingerprint": "cr1-9bdcb755",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": true
+    },
+    {
+      "id": "M11T-5",
+      "fingerprint": "cr1-34260634",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "M11D-4",
+      "fingerprint": "cr1-c7ce0363",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "M12L-5",
+      "fingerprint": "cr1-f907a566",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "BG10F-REP-1",
+      "fingerprint": "cr1-0d7b227d",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "BG12FC-ASS-1",
+      "fingerprint": "cr1-0acb8715",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": true
+    },
+    {
+      "id": "BG12E-EXP-1",
+      "fingerprint": "cr1-67987c55",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-11CD-TV-1",
+      "fingerprint": "cr1-9b97b3f3",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": true
+    },
+    {
+      "id": "CV51-11CD-TV-2",
+      "fingerprint": "cr1-3b39aa60",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-11CD-OPT-2",
+      "fingerprint": "cr1-0da7021d",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12FCD-COMP-1",
+      "fingerprint": "cr1-f1de1c62",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12FCD-RC-1",
+      "fingerprint": "cr1-d34cb36e",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12FCD-RC-2",
+      "fingerprint": "cr1-48fc3f7e",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12FCD-APL-1",
+      "fingerprint": "cr1-518fe871",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12FCD-APL-2",
+      "fingerprint": "cr1-0b7869dc",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": true
+    },
+    {
+      "id": "CV51-12PROB-LAP-1",
+      "fingerprint": "cr1-2c3f6968",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12PROB-LAP-2",
+      "fingerprint": "cr1-225f1f0a",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-12INT-AREA-1",
+      "fingerprint": "cr1-c145e4e8",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-10GA-VET-2",
+      "fingerprint": "cr1-09664998",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": true
+    },
+    {
+      "id": "CV51-11CONT-PM-2",
+      "fingerprint": "cr1-d33ab0c9",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    },
+    {
+      "id": "CV51-11TRIG-EQ-2",
+      "fingerprint": "cr1-5e48e7cf",
+      "localOracle": "validated_local_oracle",
+      "preReviewAttestedClean": true,
+      "externalSecondValidator": "not_configured",
+      "closedBetaEligible": true,
+      "productionEligible": false,
+      "sampledByTeacher": false
+    }
+  ]
+}

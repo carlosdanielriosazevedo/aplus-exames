@@ -2,7 +2,11 @@ import {
   TAXONOMY,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,
   MICROCOMPETENCIES,MICRO_PREREQUISITES,microcompetencyId
 } from "../data/content.js";
-import {generatorTemplates} from "./generators.js";
+import {generatorTemplates,generateVariants} from "./generators.js";
+import {mathValidationStatus} from "./mathValidation.js";
+import {contentRevisionFingerprint} from "./validationFingerprint.js";
+export {contentRevisionFingerprint} from "./validationFingerprint.js";
+import {machineClosedBetaEligible} from "./validationPolicy.js";
 
 export const REVIEW_STATUS={
   prototype:"Protótipo",
@@ -85,11 +89,48 @@ export function runContentChecks(){
   return issues;
 }
 
+
+export function generatorMathValidationSnapshot(samplesPerFocus=8){
+  const rows=[];
+  TAXONOMY.forEach(t=>(t.microcompetencies||[]).forEach(mc=>{
+    const templates=generatorTemplates(t.id,mc.label);
+    if(!templates.length)return;
+    const samples=generateVariants({
+      themeId:t.id,
+      focus:mc.label,
+      count:samplesPerFocus,
+      salt:`quality-math-validation|${t.id}|${mc.id}`
+    });
+    const validations=samples.map(q=>mathValidationStatus(q));
+    rows.push({
+      themeId:t.id,
+      focus:mc.label,
+      microcompetencyId:mc.id,
+      templates:templates.length,
+      samples:samples.length,
+      passed:validations.filter(v=>v.passed&&["validated_local","validated_dual"].includes(v.status)).length,
+      failed:validations.filter(v=>!v.passed).length,
+      statuses:validations.reduce((acc,v)=>{
+        acc[v.status]=(acc[v.status]||0)+1;
+        return acc;
+      },{})
+    });
+  }));
+  return {
+    focuses:rows.length,
+    templates:rows.reduce((n,r)=>n+r.templates,0),
+    samples:rows.reduce((n,r)=>n+r.samples,0),
+    passed:rows.reduce((n,r)=>n+r.passed,0),
+    failed:rows.reduce((n,r)=>n+r.failed,0),
+    rows
+  };
+}
+
 export function qualitySnapshot(reports=[]){
-  const checks=runContentChecks(),coverage=coverageSummary(),counts={};
+  const checks=runContentChecks(),coverage=coverageSummary(),mathValidation=generatorMathValidationSnapshot(),counts={};
   reports.forEach(r=>counts[r.itemId]=(counts[r.itemId]||0)+1);
   return {
-    coverage,checks,
+    coverage,checks,mathValidation,
     errors:checks.filter(x=>x.severity==="error").length,
     warnings:checks.filter(x=>x.severity==="warning").length,
     reports:reports.length,
@@ -98,22 +139,73 @@ export function qualitySnapshot(reports=[]){
 }
 
 
+
+
+export function effectiveEditorialItem(item,overrides={}){
+  if(!item)return item;
+  const patch=overrides?.[item.id]?.contentPatch;
+  if(!patch)return item;
+  return {
+    ...item,
+    ...patch,
+    o:Array.isArray(patch.o)?[...patch.o]:item.o,
+    // IDs estáveis e origem nunca podem ser reescritos por um patch editorial.
+    id:item.id,
+    themeId:item.themeId,
+    microcompetencyId:item.microcompetencyId,
+    generated:item.generated,
+    templateId:item.templateId,
+    variantSeed:item.variantSeed
+  };
+}
+
+
+export function editorialReviewIntegrity(item,overrides={}){
+  const ov=overrides?.[item?.id]||null;
+  const effective=effectiveEditorialItem(item,overrides);
+  if(!ov || ov.status!=="reviewed"){
+    return {valid:true,stale:false,reason:null,currentFingerprint:contentRevisionFingerprint(effective)};
+  }
+  const currentFingerprint=contentRevisionFingerprint(effective);
+  if(!ov.reviewedFingerprint){
+    return {
+      valid:false,stale:true,currentFingerprint,
+      reason:"A aprovação não tem fingerprint de conteúdo; requer reconfirmação na v5.2."
+    };
+  }
+  if(ov.reviewedFingerprint!==currentFingerprint){
+    return {
+      valid:false,stale:true,currentFingerprint,
+      reason:"O conteúdo mudou depois da aprovação; a revisão foi invalidada automaticamente."
+    };
+  }
+  return {valid:true,stale:false,currentFingerprint,reason:null};
+}
+
 export function editorialQueue(items=QUESTION_BANK,overrides={},reports=[]){
   const reportCount={};
   reports.forEach(r=>{reportCount[r.itemId]=(reportCount[r.itemId]||0)+1});
 
-  return items.map(q=>{
+  return items.map(sourceItem=>{
+    const q=effectiveEditorialItem(sourceItem,overrides);
     const ov=overrides[q.id]||{};
-    const status=ov.status || contentReviewStatus(q);
+    const integrity=editorialReviewIntegrity(sourceItem,overrides);
+    const status=effectiveReviewStatus(sourceItem,overrides);
     return {
       item:q,
+      sourceItem,
       status,
       version:ov.version||1,
       reviewer:ov.reviewer||null,
       reviewedAt:ov.reviewedAt||null,
+      reviewedFingerprint:ov.reviewedFingerprint||null,
+      currentFingerprint:integrity.currentFingerprint,
+      reviewStale:integrity.stale,
+      integrityReason:integrity.reason,
       note:ov.note||"",
       reports:reportCount[q.id]||0,
       priority:(reportCount[q.id]||0)*10
+        +(integrity.stale?30:0)
         +(status==="pending"?5:0)
         +(status==="blocked"?8:0)
         +(q.contexts?.includes("exam")?3:0)
@@ -143,9 +235,16 @@ export function applyEditorialDecision(overrides,itemId,decision,{
   note="",
   checklist=null,
   source="in_app",
-  importId=null
+  importId=null,
+  contentFingerprint=null,
+  batchId=null,
+  packId=null,
+  qualityControl=false
 }={}){
   const prev=overrides[itemId]||{version:1};
+  const item=QUESTION_BANK.find(q=>q.id===itemId)||null;
+  const effectiveItem=item?effectiveEditorialItem(item,overrides):null;
+  const fingerprint=contentFingerprint|| (effectiveItem?contentRevisionFingerprint(effectiveItem):null);
   let status=prev.status||"prototype";
   if(decision==="approve")status="reviewed";
   if(decision==="changes")status="pending";
@@ -163,12 +262,18 @@ export function applyEditorialDecision(overrides,itemId,decision,{
       reviewChecklist:checklist||prev.reviewChecklist||null,
       reviewSource:source,
       importId:importId||null,
+      reviewedFingerprint:status==="reviewed"?fingerprint:(prev.reviewedFingerprint||null),
+      reviewBatchId:batchId||prev.reviewBatchId||null,
+      reviewPackId:packId||prev.reviewPackId||null,
+      qualityControlCount:(prev.qualityControlCount||0)+(qualityControl?1:0),
       version:prev.version||1,
       history:[
         ...(prev.history||[]),
         {
           at:Date.now(),decision,status,reviewer,note,version:prev.version||1,
-          checklist:checklist||null,source,importId:importId||null
+          checklist:checklist||null,source,importId:importId||null,
+          contentFingerprint:fingerprint,batchId:batchId||null,packId:packId||null,
+          qualityControl:!!qualityControl
         }
       ]
     }
@@ -201,11 +306,17 @@ export function urgentReviewItems(queue){
 
 
 export function effectiveReviewStatus(item,overrides={}){
-  return overrides[item.id]?.status || contentReviewStatus(item);
+  const ov=overrides[item.id];
+  if(ov?.status==="reviewed" && !editorialReviewIntegrity(item,overrides).valid){
+    return "pending";
+  }
+  return ov?.status || contentReviewStatus(item);
 }
 
 export function isEligibleForContext(item,context,overrides={},mode="internal"){
+  const effective=effectiveEditorialItem(item,overrides);
   const status=effectiveReviewStatus(item,overrides);
+  if(!effective?.contexts?.includes(context))return false;
   if(status==="blocked")return false;
 
   // Durante desenvolvimento interno podemos testar protótipos.
@@ -221,9 +332,19 @@ export function isEligibleForContext(item,context,overrides={},mode="internal"){
   // Diagnóstico e Exames exigem revisão; Missões e Treino podem usar pending
   // apenas se a equipa ativar explicitamente essa política mais tarde.
   if(mode==="closed_beta"){
-    if(context==="diagnostic" || context==="exam")return status==="reviewed";
-    if(context==="mission")return status==="reviewed";
-    if(context==="training")return status==="reviewed" || status==="pending";
+    // Diagnóstico continua sempre humano: define o mapa inicial do aluno.
+    if(context==="diagnostic")return status==="reviewed";
+
+    // Missão/Exame podem usar o lane de máquina apenas quando o conteúdo atual
+    // corresponde exatamente a uma atestação v5.5 e o oracle determinístico passa.
+    if(context==="exam" || context==="mission"){
+      return status==="reviewed" || machineClosedBetaEligible(effective);
+    }
+
+    // Treino mantém a tolerância a pending da beta fechada e também aceita o lane.
+    if(context==="training"){
+      return status==="reviewed" || status==="pending" || machineClosedBetaEligible(effective);
+    }
   }
 
   // Produção comercial: só conteúdo formalmente revisto.
@@ -249,7 +370,9 @@ function uniqueSignatures(items){
 }
 
 function reviewedItems(overrides={}){
-  return QUESTION_BANK.filter(q=>effectiveReviewStatus(q,overrides)==="reviewed");
+  return QUESTION_BANK
+    .filter(q=>effectiveReviewStatus(q,overrides)==="reviewed")
+    .map(q=>effectiveEditorialItem(q,overrides));
 }
 
 export function betaContentReadiness(overrides={},reports=[]){
@@ -258,7 +381,9 @@ export function betaContentReadiness(overrides={},reports=[]){
   const reviewed=reviewedItems(overrides);
 
   const diagRows=DIAGNOSTIC_BLUEPRINT.map(themeId=>{
-    const items=QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts?.includes("diagnostic"));
+    const items=QUESTION_BANK
+      .map(q=>effectiveEditorialItem(q,overrides))
+      .filter(q=>q.themeId===themeId && q.contexts?.includes("diagnostic"));
     const approved=items.filter(q=>effectiveReviewStatus(q,overrides)==="reviewed");
     const roles=new Set(approved.map(q=>q.role).filter(Boolean));
     return {
@@ -274,9 +399,9 @@ export function betaContentReadiness(overrides={},reports=[]){
 
   const criticalFocusRows=[];
   TAXONOMY.filter(t=>t.relevance>=4).forEach(t=>(t.microcompetencies||[]).forEach(mc=>{
-    const pool=QUESTION_BANK.filter(q=>
-      q.themeId===t.id && q.microcompetencyId===mc.id && q.contexts?.includes("mission")
-    );
+    const pool=QUESTION_BANK
+      .map(q=>effectiveEditorialItem(q,overrides))
+      .filter(q=>q.themeId===t.id && q.microcompetencyId===mc.id && q.contexts?.includes("mission"));
     const approved=pool.filter(q=>effectiveReviewStatus(q,overrides)==="reviewed");
     criticalFocusRows.push({
       themeId:t.id,theme:t.short,year:t.year,focus:mc.label,microcompetencyId:mc.id,relevance:t.relevance,
@@ -293,10 +418,10 @@ export function betaContentReadiness(overrides={},reports=[]){
   const examIndependent=uniqueSignatures(examReviewed);
   const examReady=examIndependent>=8 && examThemes>=6 && examCognitive>=3;
 
-  const trainingEligible=QUESTION_BANK.filter(q=>
-    q.contexts?.includes("training") &&
-    ["reviewed","pending"].includes(effectiveReviewStatus(q,overrides))
-  );
+  const trainingEligible=QUESTION_BANK
+    .filter(q=>["reviewed","pending"].includes(effectiveReviewStatus(q,overrides)))
+    .map(q=>effectiveEditorialItem(q,overrides))
+    .filter(q=>q.contexts?.includes("training"));
   const trainingThemes=new Set(trainingEligible.map(q=>q.themeId)).size;
   const trainingReady=Math.min(1,trainingThemes/7);
 
@@ -310,7 +435,7 @@ export function betaContentReadiness(overrides={},reports=[]){
   const examScore=Math.round(Math.min(1,examIndependent/8)*10)
     +Math.round(Math.min(1,examThemes/6)*6)
     +Math.round(Math.min(1,examCognitive/3)*4);
-  const trainingScore=Math.round(trainingReady*10);
+  const trainingScore=Math.round(trainingReady*15);
 
   const score=Math.max(0,Math.min(100,
     structuralScore+diagnosticScore+missionScore+examScore+trainingScore
@@ -349,15 +474,17 @@ export function prioritizedReviewQueue(overrides={},reports=[],limit=40){
   (reports||[]).forEach(r=>reportCount[r.itemId]=(reportCount[r.itemId]||0)+1);
 
   const focusReviewedCount={};
-  QUESTION_BANK.forEach(q=>{
+  QUESTION_BANK.forEach(sourceItem=>{
+    const q=effectiveEditorialItem(sourceItem,overrides);
     const key=q.microcompetencyId||microcompetencyId(q.themeId,q.focus)||`${q.themeId}|${q.focus||""}`;
-    if(effectiveReviewStatus(q,overrides)==="reviewed"){
+    if(effectiveReviewStatus(sourceItem,overrides)==="reviewed"){
       focusReviewedCount[key]=(focusReviewedCount[key]||0)+1;
     }
   });
 
   const rows=QUESTION_BANK
     .filter(q=>!["reviewed","blocked"].includes(effectiveReviewStatus(q,overrides)))
+    .map(q=>effectiveEditorialItem(q,overrides))
     .map(q=>{
       const t=TAXONOMY.find(x=>x.id===q.themeId);
       const contexts=q.contexts||[];
@@ -447,8 +574,9 @@ function missionCriticalFocusKeys(){
 
 function currentReviewedByFocus(overrides={}){
   const map={};
-  QUESTION_BANK.forEach(q=>{
-    if(effectiveReviewStatus(q,overrides)!=="reviewed")return;
+  QUESTION_BANK.forEach(sourceItem=>{
+    if(effectiveReviewStatus(sourceItem,overrides)!=="reviewed")return;
+    const q=effectiveEditorialItem(sourceItem,overrides);
     const key=q.microcompetencyId||microcompetencyId(q.themeId,q.focus);
     if(key)map[key]=(map[key]||0)+1;
   });
@@ -458,9 +586,10 @@ function currentReviewedByFocus(overrides={}){
 function currentDiagnosticCoverage(overrides={}){
   const map={};
   DIAGNOSTIC_BLUEPRINT.forEach(themeId=>{map[themeId]={anchor:false,probe:false}});
-  QUESTION_BANK.forEach(q=>{
+  QUESTION_BANK.forEach(sourceItem=>{
+    const q=effectiveEditorialItem(sourceItem,overrides);
     if(!map[q.themeId])return;
-    if(effectiveReviewStatus(q,overrides)!=="reviewed")return;
+    if(effectiveReviewStatus(sourceItem,overrides)!=="reviewed")return;
     if(q.role==="anchor")map[q.themeId].anchor=true;
     if(q.role==="probe")map[q.themeId].probe=true;
   });
@@ -468,10 +597,10 @@ function currentDiagnosticCoverage(overrides={}){
 }
 
 function currentExamCoverage(overrides={}){
-  const reviewed=QUESTION_BANK.filter(q=>
-    q.contexts?.includes("exam") &&
-    effectiveReviewStatus(q,overrides)==="reviewed"
-  );
+  const reviewed=QUESTION_BANK
+    .filter(q=>effectiveReviewStatus(q,overrides)==="reviewed")
+    .map(q=>effectiveEditorialItem(q,overrides))
+    .filter(q=>q.contexts?.includes("exam"));
   return {
     ids:new Set(reviewed.map(q=>q.signature||q.id)),
     themes:new Set(reviewed.map(q=>q.themeId)),
@@ -579,7 +708,9 @@ export function minimumReviewRoadmap(overrides={},reports=[],maxItems=120){
   const reportCount={};
   (reports||[]).forEach(r=>reportCount[r.itemId]=(reportCount[r.itemId]||0)+1);
 
-  const pool=QUESTION_BANK.filter(q=>reviewable(q,overrides));
+  const pool=QUESTION_BANK
+    .filter(q=>reviewable(q,overrides))
+    .map(q=>effectiveEditorialItem(q,overrides));
   const selected=[];
   const used=new Set();
 

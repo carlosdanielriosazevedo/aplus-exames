@@ -1,7 +1,8 @@
 
 import assert from "node:assert/strict";
 import {
-  activateFriendsBeta,markFriendsBetaConsent,isFriendsBeta,friendsBetaReport
+  activateFriendsBeta,markFriendsBetaConsent,isFriendsBeta,friendsBetaReport,
+  testerSegmentInfo,isTargetStudentTester,aggregateFriendsBetaReports
 } from "../app/lib/friendsBeta.js";
 import {
   emptyScores,buildMiniExam,trainingQuestions,eligibleCount
@@ -42,9 +43,18 @@ assert.match(friend.betaParticipant.code,/^AMG-[A-Z0-9]{6}$/);
 assert.equal(friend.betaTesterMeta.contentStatus,"unreviewed_provisional");
 assert.equal(activateFriendsBeta(friend,2000).betaParticipant.code,friend.betaParticipant.code);
 
-const consent=markFriendsBetaConsent(friend,3000);
+const consent=markFriendsBetaConsent(friend,{segment:"student",now:3000});
 assert.equal(consent.betaTesterMeta.consentAt,3000);
+assert.equal(consent.betaTesterMeta.segment,"student");
+assert.equal(testerSegmentInfo("student").group,"target");
+assert.equal(isTargetStudentTester(consent),true);
 assert.equal(isFriendsBeta(consent),true);
+
+const adult=markFriendsBetaConsent(
+  {...base,profile:{...base.profile,schoolYear:"Já terminei o secundário"}},
+  {segment:"observer",now:3000}
+);
+assert.equal(isTargetStudentTester(adult),false);
 
 // Friend beta deliberately exposes curated prototype content while formal closed beta remains gated.
 for(const ctx of ["diagnostic","mission","training","exam"]){
@@ -68,17 +78,48 @@ const training=trainingQuestions(consent,{
 assert.ok(training.length>0);
 assert.ok(training.every(q=>!q.generated),"Treino da beta de amigos gerou conteúdo automaticamente.");
 
-// Report is pseudonymous and excludes app identity/account data.
-const report=friendsBetaReport({
+// Reports are pseudonymous and carry tester segmentation.
+const targetReport=friendsBetaReport({
   ...consent,
   identity:{displayName:"NOME QUE NÃO PODE SAIR",email:"teste@example.com"},
-  betaSessions:[{id:"s1",kind:"mission",finishedAt:1,durationSeconds:20}],
-  betaFeedback:[{id:"f1",clarity:4,difficultyFit:4,usefulness:5}]
+  betaEvents:[
+    {type:"mission_started",at:1},
+    {type:"mission_finished",at:2}
+  ],
+  betaSessions:[{id:"s1",kind:"mission",finishedAt:2,durationSeconds:20}],
+  betaFeedback:[{
+    id:"f1",clarity:4,difficultyFit:4,usefulness:5,
+    personalization:4,returnIntent:5,testerSegment:"student"
+  }]
 });
-const reportText=JSON.stringify(report);
-assert.equal(report.schema,"aplus-friends-beta-v1");
+const reportText=JSON.stringify(targetReport);
+assert.equal(targetReport.schema,"aplus-friends-beta-v3");
+assert.equal(targetReport.testerMeta.targetFit,"target");
+assert.equal(targetReport.testerMeta.schoolYear,"12.º");
 assert.ok(!reportText.includes("teste@example.com"));
 assert.ok(!reportText.includes("NOME QUE NÃO PODE SAIR"));
+
+const observerReport=friendsBetaReport({
+  ...adult,
+  betaParticipant:{...adult.betaParticipant,code:"AMG-OBS001"},
+  betaEvents:[
+    {type:"diagnostic_started",at:1},
+    {type:"diagnostic_finished",at:2}
+  ],
+  betaSessions:[{id:"s2",kind:"diagnostic",finishedAt:2,durationSeconds:30}],
+  betaFeedback:[{
+    id:"f2",clarity:5,difficultyFit:3,usefulness:4,
+    personalization:3,returnIntent:4,testerSegment:"observer"
+  }]
+});
+
+const aggregate=aggregateFriendsBetaReports([targetReport,observerReport,{schema:"invalid"}]);
+assert.equal(aggregate.validReports,2);
+assert.equal(aggregate.rejectedReports,1);
+assert.equal(aggregate.byFit.target.testers,1);
+assert.equal(aggregate.byFit.observer.testers,1);
+assert.equal(aggregate.byFit.target.returnIntent,5);
+assert.equal(aggregate.byFit.observer.returnIntent,4);
 
 // Local state is isolated from the developer/student state.
 saveLocalState({...base,betaMode:"internal"});
@@ -104,4 +145,4 @@ clearLocalState(FRIENDS_STORAGE_KEY);
 assert.equal(memory.has(FRIENDS_STORAGE_KEY),false);
 assert.equal(memory.has(STORAGE_KEY),true);
 
-console.log(`✓ friends beta: ${exam.length}-question mini-exam, curated-only content, pseudonymous report and isolated storage validated`);
+console.log(`✓ friends beta: target/observer segmentation, ${exam.length}-question mini-exam, aggregate reporting and isolated storage validated`);

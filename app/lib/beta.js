@@ -1,3 +1,5 @@
+import {productAnalyticsExport} from "./productAnalytics.js";
+
 // A+ v2.1 — instrumentação local de beta
 // Em produção estes eventos devem ser enviados para backend com regras de privacidade.
 
@@ -82,6 +84,9 @@ export function exportBetaPayload(state){
     sessions:state.betaSessions||[],
     events:state.betaEvents||[],
     feedback:state.betaFeedback||[],
+    productAnalytics:productAnalyticsExport(state),
+    engagement:state.engagement||null,
+    competition:state.competition||null,
     contentReports:state.contentReports||[],
     examHistory:state.examHistory||[],
     missionHistory:state.missionHistory||[]
