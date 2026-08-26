@@ -268,8 +268,30 @@ export function desiredDifficulty(score,goal=16){
   return target;
 }
 
+export const DAILY_MISSION_MIN_INTERACTIONS=3;
+export const DAILY_MISSION_MAX_INTERACTIONS=5;
+
+export function isUsefulMissionInteraction(item,usedIds=[],usedSignatures=[]){
+  if(!item||usedIds.includes(item.id))return false;
+  const signature=item.signature||item.id;
+  return !usedSignatures.includes(signature);
+}
+
+export function missionContentExhaustedDecision(){
+  return {
+    stop:true,code:"content_exhausted",
+    title:"Não há mais interações úteis disponíveis nesta sessão",
+    detail:"A Missão terminou mais cedo em vez de repetir perguntas demasiado semelhantes ou fabricar confiança."
+  };
+}
+
+export function canStartMissionDetour(completedInteractions){
+  return completedInteractions<DAILY_MISSION_MAX_INTERACTIONS;
+}
+
 export function selectMissionQuestion(s,themeId,usedIds=[],usedSignatures=[]){
-  const candidates=eligibleQuestions(s,themeId,"mission").filter(q=>!usedIds.includes(q.id));
+  const candidates=eligibleQuestions(s,themeId,"mission")
+    .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
   if(!candidates.length)return null;
   const target=desiredDifficulty(s.scores[themeId],s.goal);
   const usedCogs=new Set(
@@ -290,10 +312,11 @@ export function selectMissionQuestion(s,themeId,usedIds=[],usedSignatures=[]){
   })[0];
 }
 
-export function selectPrereqQuestion(s,targetThemeId,usedIds=[]){
+export function selectPrereqQuestion(s,targetThemeId,usedIds=[],usedSignatures=[]){
   const preId=PREREQUISITES[targetThemeId];
   if(!preId)return null;
-  const candidates=eligibleQuestions(s,preId,"mission").filter(q=>!usedIds.includes(q.id));
+  const candidates=eligibleQuestions(s,preId,"mission")
+    .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
   if(!candidates.length)return null;
   const target=Math.max(1,desiredDifficulty(s.scores[preId],s.goal)-1);
   return [...candidates].sort((a,b)=>Math.abs(a.difficulty-target)-Math.abs(b.difficulty-target))[0];
@@ -323,12 +346,22 @@ export function missionStopDecision({
     sessionTargetItems.map(x=>x.difficulty).filter(x=>x!==undefined)
   ).size;
 
-  // Calibração é deliberadamente curta: só precisamos de uma primeira âncora.
-  if(missionType==="calibration" && targetCount>=1){
+  // Uma Missão é uma sessão curta: não termina normalmente antes de três
+  // interações, mas também nunca cresce até se tornar um mini-exame.
+  if(totalCount>=DAILY_MISSION_MAX_INTERACTIONS){
     return {
-      stop:true,code:"calibration_anchor",
-      title:"Primeira âncora recolhida",
-      detail:"Esta área já deixou de estar totalmente desconhecida. Voltaremos a medi-la noutras Missões."
+      stop:true,code:"session_cap",
+      title:"Sessão curta concluída",
+      detail:"A Missão atingiu o seu limite útil. A A+ prefere distribuir novas observações por dias diferentes."
+    };
+  }
+  if(totalCount<DAILY_MISSION_MIN_INTERACTIONS)return {stop:false,code:"minimum_not_reached"};
+
+  if(missionType==="calibration"){
+    return {
+      stop:true,code:"calibration_session_complete",
+      title:"Primeira sessão de calibração concluída",
+      detail:"Já existem observações úteis para começar o mapa. A A+ voltará a esta área noutras Missões."
     };
   }
 
@@ -341,7 +374,7 @@ export function missionStopDecision({
         detail:"Foram recolhidas pelo menos duas evidências diferentes sem prolongar a sessão desnecessariamente."
       };
     }
-    if(targetCount>=4 || totalCount>=5){
+    if(targetCount>=4){
       return {
         stop:true,code:"confirmation_cap",
         title:"Confirmação encerrada por segurança",
@@ -350,24 +383,6 @@ export function missionStopDecision({
     }
     return {stop:false,code:"continue_confirmation"};
   }
-
-  // Segurança: uma Missão nunca deve transformar-se num teste longo.
-  if(totalCount>=7){
-    return {
-      stop:true,code:"session_cap",
-      title:"Limite útil da sessão atingido",
-      detail:"A A+ prefere distribuir a avaliação por momentos diferentes em vez de recolher demasiada evidência de uma só vez."
-    };
-  }
-  if(targetCount>=6){
-    return {
-      stop:true,code:"target_cap",
-      title:"Já existe evidência suficiente nesta sessão",
-      detail:"Se ainda houver incerteza, é mais informativo voltar a esta competência noutra Missão."
-    };
-  }
-
-  if(targetCount<3)return {stop:false,code:"minimum_not_reached"};
 
   // Caso ideal: informação diversa + ganho claro de certeza.
   if(independent>=3 && cognitiveVariety>=2 && confGain>=9){
@@ -714,7 +729,7 @@ export function markTrainingSignalConfirmed(signals,signal){
 
 export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
   let curated=eligibleQuestions(s,plan.themeId,"mission",plan.focus)
-    .filter(q=>!usedIds.includes(q.id));
+    .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
 
   const target=desiredDifficulty(s.scores[plan.themeId],s.goal);
   const evidenceCount=s.scores[plan.themeId]?.evidence?.length||0;
@@ -724,17 +739,18 @@ export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
     difficulty:target,
     count:5,
     salt:`mission|${plan.type}|${s.goal}|${evidenceCount}|${usedIds.length}`
-  }).filter(q=>!usedIds.includes(q.id)):[];
+  }).filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures)):[];
 
   let candidates=[...curated,...generated];
   if(!candidates.length){
-    curated=eligibleQuestions(s,plan.themeId,"mission").filter(q=>!usedIds.includes(q.id));
+    curated=eligibleQuestions(s,plan.themeId,"mission")
+      .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
     const fallbackGenerated=(s.betaMode||"internal")==="internal"?generateVariants({
       themeId:plan.themeId,
       difficulty:target,
       count:5,
       salt:`mission-fallback|${s.goal}|${evidenceCount}|${usedIds.length}`
-    }):[];
+    }).filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures)):[];
     candidates=[...curated,...fallbackGenerated];
   }
   if(!candidates.length)return null;
@@ -1204,18 +1220,19 @@ function causalCandidateScore(s,dep,q){
     +(dep.microcompetencyId && qMc!==dep.microcompetencyId?7:0);
 }
 
-export function selectCausalProbe(s,targetThemeId,targetFocus,usedIds=[]){
+export function selectCausalProbe(s,targetThemeId,targetFocus,usedIds=[],usedSignatures=[]){
   const deps=causalPrerequisitesFor(targetThemeId,targetFocus);
   for(const dep of deps){
     const depRef=dep.microcompetencyId||dep.focus;
     let candidates=eligibleQuestions(s,dep.themeId,"mission",depRef)
       .filter(q=>{
-        if(usedIds.includes(q.id))return false;
+        if(!isUsefulMissionInteraction(q,usedIds,usedSignatures))return false;
         if(!dep.microcompetencyId)return !dep.focus || q.focus===dep.focus;
         return (q.microcompetencyId||microcompetencyId(q.themeId,q.focus))===dep.microcompetencyId;
       });
     if(!candidates.length && depRef){
-      candidates=eligibleQuestions(s,dep.themeId,"mission").filter(q=>!usedIds.includes(q.id));
+      candidates=eligibleQuestions(s,dep.themeId,"mission")
+        .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
     }
     if(candidates.length){
       const question=[...candidates].sort((a,b)=>causalCandidateScore(s,dep,a)-causalCandidateScore(s,dep,b))[0];

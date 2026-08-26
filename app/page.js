@@ -8,6 +8,7 @@ import {
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
   priorityScore,selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
   shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,
+  missionContentExhaustedDecision,canStartMissionDetour,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,miniExamScore20,hasTrainingContent,hasGenerator,
   eligibleQuestions,eligibleCount,rankedStudyPriorities,likelyUnlocks,
@@ -684,12 +685,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
     confirmation:{icon:"✅",label:"Confirmação"},
     investigation:{icon:"🔎",label:"Investigação"}
   }[plan.type]||{icon:"🎯",label:"Missão"};
-  const duration={
-    priority:"~10–15 min",
-    calibration:"~6–10 min",
-    confirmation:"~8–12 min",
-    investigation:"~8–14 min"
-  }[plan.type]||"~8–15 min";
+  const duration="~3–5 min";
   const daily=engagementSummary(s);
 
   return <div className="dailyMissionOverlay" role="dialog" aria-modal="true" aria-label="Missão de Hoje">
@@ -1021,7 +1017,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       beforeFocusDomain:beforeFocus?.domain??null,afterFocusDomain:afterFocus?.domain??null,
       beforeFocusConf:beforeFocus?.conf??0,afterFocusConf:afterFocus?.conf??0,
       beforeFocusEvidence:beforeFocus?.evidence?.length||0,afterFocusEvidence:afterFocus?.evidence?.length||0,
-      totalCount:newTotal,
+      totalCount:newTotal,interactionCount:newTotal,
       stopCode:stopDecision?.code||"unknown",
       stopTitle:stopDecision?.title||null,
       stopDetail:stopDecision?.detail||null,
@@ -1080,12 +1076,13 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   function next(){
     const correct=sel===current.a;
     const newUsed=[...usedIds,current.id];
-    const newSigs=[...usedSignatures,current.signature];
+    const newSigs=[...usedSignatures,current.signature||current.id];
     const newTotal=totalCount+1;
     setUsedIds(newUsed);setUsedSignatures(newSigs);setTotalCount(newTotal);
 
-    if(current.sessionRole==="target" && !correct && !detour && plan.type!=="calibration"){
-      const probe=selectCausalProbe(s,targetId,current.focus||plan.focus,newUsed);
+    if(current.sessionRole==="target" && !correct && !detour && plan.type!=="calibration"
+      && canStartMissionDetour(newTotal)){
+      const probe=selectCausalProbe(s,targetId,current.focus||plan.focus,newUsed,newSigs);
       if(probe?.question){
         setS(prev=>({...prev,xp:prev.xp+25}));
         setPendingError(current);
@@ -1163,11 +1160,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
     const nxt=selectQuestionForPlan(nextState,plan,newUsed,newSigs);
     if(!nxt){
-      closeMission(nextState,finalDetour,newTargetCount,newTotal,{
-        stop:true,code:"content_exhausted",
-        title:"Não há mais evidência útil disponível nesta sessão",
-        detail:"O motor terminou a Missão em vez de repetir perguntas demasiado semelhantes."
-      });return
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision());return
     }
     setCurrent({...nxt,sessionRole:"target"});setSel(null);setFb(null);
   }
@@ -1175,18 +1168,19 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   if(!current)return <Shell><Back go={go}/><h1>Ainda não existem perguntas suficientes para esta Missão.</h1></Shell>;
 
   const typeName=plan.type==="confirmation"?"Confirmação":plan.type==="calibration"?"Calibração":plan.type==="investigation"?"Investigação":"Prioridade";
+  const missionStage=totalCount===0?"A começar":totalCount<3?"A aprofundar":"Quase concluída";
 
   return <Shell>
     <div className="topline"><Logo/><span>Missão · {typeName}</span></div>
     {draft&&<div className="resumeBanner"><b>↻ Sessão retomada</b><span>Continuaste exatamente no ponto onde tinhas ficado.</span></div>}
     <div className="missionStep"><div><small>FOCO PRINCIPAL</small><b>{theme(targetId).short}</b>{plan.focus&&<em>{plan.focus}</em>}</div>
-      <span>{totalCount} evidências · duração adaptativa</span></div>
+      <span>{missionStage} · sessão curta</span></div>
 
     {plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
       <span>Treinaste {plan.focus}. O desempenho foi promissor, mas o Treino Livre não altera o Domínio. Esta Missão serve para confirmar se a evolução se mantém.</span></div>}
 
     {plan.type==="calibration"&&<div className="notice"><b>Missão de calibração</b>
-      <span>A A+ ainda não tinha evidência nesta área. Uma questão informativa ajuda a preencher o mapa sem transformar o primeiro diagnóstico numa prova interminável.</span></div>}
+      <span>A A+ ainda conhece pouco esta área. Uma pequena sequência de interações úteis ajuda a começar o mapa sem transformar a Missão num teste.</span></div>}
 
     {plan.type==="investigation"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque estamos a voltar a esta competência?</b>
       {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
@@ -1232,8 +1226,8 @@ function MissionResult({s,setS,go}){
     <p className="muted">{m.stopDetail
       ?m.stopDetail
       :m.type==="calibration"
-        ?"A A+ já tem uma primeira evidência nesta área. Ainda é cedo para tratar esta estimativa como robusta."
-        :`A Missão terminou após ${m.totalCount} evidências.`}</p></div>
+        ?"A A+ já tem primeiras observações nesta área. Ainda é cedo para tratar esta estimativa como robusta."
+        :`A sessão terminou após ${m.interactionCount||m.totalCount} interações úteis.`}</p></div>
 
     {m.stopTitle&&<div className="stopReason"><small>PORQUE TERMINOU AGORA?</small><b>{m.stopTitle}</b><span>{m.stopDetail}</span></div>}
 
