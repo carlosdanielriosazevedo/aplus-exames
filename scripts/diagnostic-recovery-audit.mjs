@@ -185,4 +185,71 @@ const frozenEvidence=answeredFrozen.state.scores[frozenProbe.themeId].evidence.f
 assert.equal(frozenEvidence.contentFingerprint,frozenProbe.fingerprint);
 assert.equal(validateDiagnosticDraft(answeredFrozen.draft,{now:NOW}).ok,true);
 
-console.log("✓ diagnostic recovery WAL audit: 25 recovery/fault-injection groups passed");
+const reachFinalAnchor=id=>{
+  let routeState=stateFor(id),routeDraft=draftFor(routeState);
+  let route=step(routeState,routeDraft,(routeDraft.current.a+1)%routeDraft.current.o.length);
+  route=step(route.state,route.draft,route.draft.current.a);
+  while(route.draft.anchorIndex<DIAGNOSTIC_BLUEPRINT.length-1){
+    assert.equal(route.draft.phase,"active");assert.equal(route.draft.current.role,"anchor");
+    route=step(route.state,route.draft,route.draft.current.a);
+  }
+  assert.equal(route.draft.current.role,"anchor");
+  assert.equal(route.draft.current.themeId,DIAGNOSTIC_BLUEPRINT.at(-1));
+  return route;
+};
+const assignFinalProbe=route=>step(route.state,route.draft,(route.draft.current.a+1)%route.draft.current.o.length);
+
+// 26. Última anchor correta conclui diretamente.
+let finalRoute=reachFinalAnchor("ses-final-correct");
+let finalAnswer=step(finalRoute.state,finalRoute.draft,finalRoute.draft.current.a);
+assert.equal(finalAnswer.draft.phase,"completion_pending");
+assert.equal(finalAnswer.draft.anchorIndex,DIAGNOSTIC_BLUEPRINT.length);
+
+// 27/28. Última anchor errada atribui probe final; probe correto ou errado conclui.
+finalRoute=reachFinalAnchor("ses-final-probe-correct");
+let finalProbe=assignFinalProbe(finalRoute);
+assert.equal(finalProbe.draft.phase,"active");assert.equal(finalProbe.draft.current.role,"probe");
+assert.equal(finalProbe.draft.anchorIndex,DIAGNOSTIC_BLUEPRINT.length-1);
+assert.equal(validateDiagnosticDraft(finalProbe.draft,{now:NOW}).ok,true);
+finalAnswer=step(finalProbe.state,finalProbe.draft,finalProbe.draft.current.a);
+assert.equal(finalAnswer.draft.phase,"completion_pending");assert.equal(finalAnswer.draft.anchorIndex,DIAGNOSTIC_BLUEPRINT.length);
+
+finalRoute=reachFinalAnchor("ses-final-probe-wrong");finalProbe=assignFinalProbe(finalRoute);
+finalAnswer=step(finalProbe.state,finalProbe.draft,(finalProbe.draft.current.a+1)%finalProbe.draft.current.o.length);
+assert.equal(finalAnswer.draft.phase,"completion_pending");assert.equal(finalAnswer.draft.anchorIndex,DIAGNOSTIC_BLUEPRINT.length);
+
+// 29. Reload antes de responder ao probe final conserva o probe congelado.
+finalRoute=reachFinalAnchor("ses-final-reload");finalProbe=assignFinalProbe(finalRoute);
+let finalRecovery=recover(finalProbe.state,finalProbe.draft);
+assert.equal(finalRecovery.ok,true);assert.equal(finalRecovery.completed,false);
+assert.equal(finalRecovery.draft.current.fingerprint,finalProbe.draft.current.fingerprint);
+
+// 30. Reload depois da seleção, antes de Continuar, conserva seleção/feedback e permite concluir.
+const selectedFinalProbe={...finalProbe.draft,sel:finalProbe.draft.current.a,fb:{correct:true}};
+finalRecovery=recover(finalProbe.state,selectedFinalProbe);
+assert.equal(finalRecovery.ok,true);assert.equal(finalRecovery.draft.sel,selectedFinalProbe.sel);
+finalAnswer=step(finalRecovery.state,finalRecovery.draft,finalRecovery.draft.sel);
+assert.equal(finalAnswer.draft.phase,"completion_pending");
+
+// 31. Crash após evidência do probe, antes do avanço, é reconciliado até à conclusão.
+finalRoute=reachFinalAnchor("ses-final-state-ahead");finalProbe=assignFinalProbe(finalRoute);
+const finalPending=createPendingResponse(finalProbe.draft,finalProbe.draft.current.a,{state:finalProbe.state,now:NOW});
+const finalPendingDraft={...finalProbe.draft,pendingResponse:finalPending,sel:finalPending.sel,fb:{correct:finalPending.correct}};
+const finalApplied=applyDiagnosticTransaction(finalProbe.state,finalPending);assert.equal(finalApplied.ok,true);
+finalRecovery=recover(finalApplied.state,finalPendingDraft);
+assert.equal(finalRecovery.ok,true);assert.equal(finalRecovery.completed,true);assert.equal(finalRecovery.state.diagnosticDone,true);
+const finalEvidence=finalRecovery.state.scores[finalPending.item.themeId].evidence.filter(e=>e.responseId===finalPending.responseId);
+assert.equal(finalEvidence.length,1);
+
+// 32/33. expectedProbe tem precedência sobre completion_not_marked e nunca se seleciona anchor fora do blueprint.
+finalRoute=reachFinalAnchor("ses-final-no-overrun");finalProbe=assignFinalProbe(finalRoute);
+const finalValidation=validateDiagnosticDraft(finalProbe.draft,{now:NOW});
+assert.equal(finalValidation.ok,true);assert.ok(finalValidation.sequence.expectedProbe);
+assert.notEqual(finalValidation.reason,"completion_not_marked");
+finalAnswer=step(finalProbe.state,finalProbe.draft,finalProbe.draft.current.a);
+assert.equal(finalAnswer.draft.phase,"completion_pending");
+assert.equal(finalAnswer.draft.anchorIndex,DIAGNOSTIC_BLUEPRINT.length);
+assert.equal(DIAGNOSTIC_BLUEPRINT[finalAnswer.draft.anchorIndex],undefined);
+assert.ok(finalAnswer.draft.current);assert.equal(finalAnswer.draft.current.role,"probe");
+
+console.log("✓ diagnostic recovery WAL audit: 33 recovery/fault-injection groups passed");

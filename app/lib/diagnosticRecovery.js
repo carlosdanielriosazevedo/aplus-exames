@@ -94,7 +94,8 @@ export function validateDiagnosticDraft(draft,{now=Date.now()}={}){
   if(draft.fb!==null&&(!draft.fb||typeof draft.fb.correct!=="boolean"||draft.sel===null||draft.fb.correct!==(draft.sel===draft.current.a)))return {ok:false,reason:"invalid_feedback"};
   if(draft.pendingResponse&&(!validTransaction(draft.pendingResponse,draft,draft.responses.length,"pending",now)||draft.pendingResponse.item.id!==draft.current.id||draft.pendingResponse.item.fingerprint!==draft.current.fingerprint))return {ok:false,reason:"invalid_pending"};
   const done=draft.anchorResults.length,successRate=done?draft.anchorResults.filter(x=>x.correct).length/done:0;
-  const canComplete=(done>=5&&successRate>=.80&&draft.probeCount===0)||done>=DIAGNOSTIC_BLUEPRINT.length;
+  const canComplete=(done>=5&&successRate>=.80&&draft.probeCount===0)
+    ||(done>=DIAGNOSTIC_BLUEPRINT.length&&!sequence.expectedProbe);
   if(draft.phase==="completion_pending"&&(!canComplete||draft.pendingResponse))return {ok:false,reason:"invalid_completion"};
   if(draft.phase==="active"&&canComplete&&!draft.pendingResponse)return {ok:false,reason:"completion_not_marked"};
   return {ok:true,sequence};
