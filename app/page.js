@@ -48,10 +48,10 @@ import {
   backendHealth,syncStateToBackend
 } from "./lib/persistence";
 import {
-  saveSessionDraft,loadSessionDraft,clearSessionDraft,draftScreen
+  saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
 } from "./lib/sessionDraft";
 import {
-  createDiagnosticDraft,recoverDiagnosticTransaction,
+  createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
   transactDiagnosticAnswer
 } from "./lib/diagnosticRecovery";
 import {
@@ -153,12 +153,23 @@ export default function App(){
       :migrateProductAnalytics(migrateCloudSync(initial));
     const betaState=requested?activateFriendsBeta(base):base;
     const next=recordAppOpen(betaState,{source:"initial_load"});
-    const draft=loadSessionDraft(next.betaMode||"internal");
+    const draftStatus=loadSessionDraftStatus(next.betaMode||"internal");
+    if(draftStatus.error){setScreen("storageRecoveryError");return}
+    const draft=draftStatus.draft;
     let recoveredState=next;
     let validDraft=draft;
     let recoveryError=null;
     let recoveredCompletion=false;
-    if(draft?.kind==="diagnostic"){
+    let recoveredLegacy=false;
+    const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&draft.version!==2));
+    if(!next.diagnosticDone&&legacyDiagnostic){
+      const recovery=recoverLegacyDiagnosticSessions({state:next,saveState:saveLocalState});
+      if(recovery.ok){
+        recoveredState=recovery.state;recoveredLegacy=recovery.migrated;validDraft=null;
+        if(draft&&!clearSessionDraft(next.betaMode||"internal"))recoveryError="legacy_draft_clear_failed";
+      }else recoveryError=recovery.reason;
+    }else if(draft?.kind==="diagnostic"){
       const recovery=recoverDiagnosticTransaction({
         state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
         clearDraft:()=>clearSessionDraft(next.betaMode||"internal"),
@@ -187,6 +198,8 @@ export default function App(){
       setScreen("diagRecoveryError");
     }else if(recoveredCompletion){
       setScreen("diagResult");
+    }else if(recoveredLegacy){
+      setScreen("diag");
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
@@ -224,7 +237,7 @@ export default function App(){
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
-  if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O draft foi conservado para análise segura.</span></div></Shell>;
+  if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
   if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
   if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="diagnostic"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;

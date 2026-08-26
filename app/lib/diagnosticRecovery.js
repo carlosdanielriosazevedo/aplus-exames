@@ -25,6 +25,20 @@ export function createDiagnosticDraft({session,item,betaMode="internal",difficul
     sel:null,fb:null,completionAt:null};
 }
 
+export function recoverLegacyDiagnosticSessions({state,saveState,now=Date.now()}){
+  const open=(state?.betaSessions||[]).filter(x=>x?.kind==="diagnostic"&&!x.finishedAt);
+  if(!open.length)return {ok:true,state,migrated:false};
+  const openIds=new Set(open.map(x=>x.id));
+  if(openIds.size!==open.length||open.some(x=>typeof x.id!=="string"||!x.id))return {ok:false,reason:"ambiguous_legacy_session",state};
+  const sessions=(state.betaSessions||[]).map(session=>openIds.has(session.id)
+    ?{...session,finishedAt:now,durationSeconds:Math.max(1,Math.round((now-(session.startedAt||now))/1000)),
+      meta:{...(session.meta||{}),recoveryStatus:"legacy_abandoned",recoveryVersion:DIAGNOSTIC_DRAFT_VERSION,abandonedAt:now}}
+    :session);
+  const next={...state,betaSessions:sessions};
+  if(!saveState(next))return {ok:false,reason:"legacy_session_write_failed",state};
+  return {ok:true,state:next,migrated:true};
+}
+
 function validSnapshot(item){
   return !!item&&typeof item.id==="string"&&typeof item.themeId==="string"&&Array.isArray(item.o)
     &&integer(item.a)&&item.a<item.o.length&&["anchor","probe"].includes(item.role)
@@ -169,7 +183,7 @@ export function recoverDiagnosticTransaction({state,draft,saveState,saveDraft,cl
     nextState=started.state;
     if(!saveState(nextState))return {ok:false,reason:"start_state_write_failed",state,draft};
   }else if(matching.length!==1||other.length)return {ok:false,reason:"ambiguous_session",state,draft};
-  if(!draft.pendingResponse&&draft.phase==="active"){
+  if(!draft.pendingResponse&&draft.phase==="active"&&!valid.sequence.expectedProbe){
     const live=draft.current.role==="probe"?diagnosticProbe(draft.current.themeId,nextState):diagnosticAnchor(draft.current.themeId,draft.difficulty,nextState);
     if(!live)return {ok:false,reason:"current_item_unavailable",state:nextState,draft};
     const liveSnapshot=snapshotDiagnosticItem(live);

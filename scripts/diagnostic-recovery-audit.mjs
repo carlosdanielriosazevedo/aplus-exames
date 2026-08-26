@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import {DIAGNOSTIC_BLUEPRINT,QUESTION_BANK} from "../app/data/content.js";
-import {emptyScores,diagnosticAnchor,applyEvidence} from "../app/lib/engine.js";
+import {emptyScores,diagnosticAnchor,diagnosticProbe,applyEvidence} from "../app/lib/engine.js";
 import {recordMilestone,normalizeProductAnalytics} from "../app/lib/productAnalytics.js";
-import {saveSessionDraft,loadSessionDraft,clearSessionDraft,draftScreen} from "../app/lib/sessionDraft.js";
+import {saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen} from "../app/lib/sessionDraft.js";
 import {contentRevisionFingerprint} from "../app/lib/validationFingerprint.js";
 import {loadLocalStateStatus} from "../app/lib/persistence.js";
 import {
   createDiagnosticDraft,createPendingResponse,validateDiagnosticDraft,applyDiagnosticTransaction,
-  advanceDiagnosticDraft,transactDiagnosticAnswer,recoverDiagnosticTransaction,snapshotDiagnosticItem
+  advanceDiagnosticDraft,transactDiagnosticAnswer,recoverDiagnosticTransaction,snapshotDiagnosticItem,
+  recoverLegacyDiagnosticSessions
 } from "../app/lib/diagnosticRecovery.js";
 
 const NOW=Date.now();
@@ -150,4 +151,38 @@ failGet=true;assert.equal(loadLocalStateStatus({},()=>({})).error,true);failGet=
 saveSessionDraft(initial);failRemove=true;assert.equal(clearSessionDraft("internal"),false);failRemove=false;assert.equal(clearSessionDraft("internal"),true);
 
 assert.equal(draftScreen(initial),"diagRun");
-console.log("✓ diagnostic recovery WAL audit: 23 recovery/fault-injection groups passed");
+
+// 24. Sessão legacy sem WAL é abandonada explicitamente sem tocar na evidência académica.
+const legacyItem=QUESTION_BANK.find(q=>q.contexts.includes("diagnostic"));
+const legacyBase=stateFor("ses-legacy-open");
+const legacyScore=applyEvidence(legacyBase.scores[legacyItem.themeId],legacyItem,false,"diagnostic",1,{at:NOW-500});
+const legacyState={...legacyBase,scores:{...legacyBase.scores,[legacyItem.themeId]:legacyScore},diagnosticAnswers:1};
+const legacyScores=structuredClone(legacyState.scores);
+w=writes();let legacy=recoverLegacyDiagnosticSessions({state:legacyState,saveState:w.saveState,now:NOW});
+assert.equal(legacy.ok,true);assert.equal(legacy.migrated,true);
+assert.equal(legacy.state.betaSessions.filter(x=>x.kind==="diagnostic"&&!x.finishedAt).length,0);
+assert.equal(legacy.state.betaSessions[0].meta.recoveryStatus,"legacy_abandoned");
+assert.deepEqual(legacy.state.scores,legacyScores);assert.equal(legacy.state.diagnosticAnswers,1);
+legacy=recoverLegacyDiagnosticSessions({state:legacy.state,saveState:()=>{throw Error("must not write")},now:NOW+1});
+assert.equal(legacy.ok,true);assert.equal(legacy.migrated,false);assert.deepEqual(legacy.state.scores,legacyScores);
+failGet=true;const failedDraftRead=loadSessionDraftStatus("internal");failGet=false;
+assert.equal(failedDraftRead.error,true);assert.equal(failedDraftRead.draft,null);
+
+// 25. Probe atribuído conserva snapshot/fingerprint congelado após alteração editorial.
+base=stateFor("ses-frozen-probe");initial=draftFor(base);
+let assigned=step(base,initial,(initial.current.a+1)%initial.current.o.length);
+const frozenProbe=structuredClone(assigned.draft.current);
+const changedProbeState={...assigned.state,editorialOverrides:{
+  ...(assigned.state.editorialOverrides||{}),
+  [frozenProbe.id]:{contentPatch:{q:frozenProbe.q+" (nova versão editorial)"}}
+}};
+assert.notEqual(snapshotDiagnosticItem(diagnosticProbe(frozenProbe.themeId,changedProbeState)).fingerprint,frozenProbe.fingerprint);
+let frozenRecovery=recover(changedProbeState,assigned.draft);
+assert.equal(frozenRecovery.ok,true);assert.equal(frozenRecovery.draft.current.fingerprint,frozenProbe.fingerprint);
+assert.equal(frozenRecovery.draft.current.q,frozenProbe.q);
+const answeredFrozen=step(frozenRecovery.state,frozenRecovery.draft,frozenRecovery.draft.current.a);
+const frozenEvidence=answeredFrozen.state.scores[frozenProbe.themeId].evidence.filter(e=>e.itemId===frozenProbe.id).at(-1);
+assert.equal(frozenEvidence.contentFingerprint,frozenProbe.fingerprint);
+assert.equal(validateDiagnosticDraft(answeredFrozen.draft,{now:NOW}).ok,true);
+
+console.log("✓ diagnostic recovery WAL audit: 25 recovery/fault-injection groups passed");
