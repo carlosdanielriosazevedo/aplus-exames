@@ -4,10 +4,10 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {
-  emptyScores,theme,byYear,getQuestions,diagnosticAnchor,diagnosticProbe,
+  emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
   priorityScore,selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
-  shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,nextDiagnosticDifficulty,
+  shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,miniExamScore20,hasTrainingContent,hasGenerator,
   eligibleQuestions,eligibleCount,rankedStudyPriorities,likelyUnlocks,
@@ -44,12 +44,16 @@ import {
 } from "./lib/productAnalytics";
 import {engineAuditSummary,engineAuditLabel} from "./lib/engineAudit";
 import {
-  loadLocalState,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
+  loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
   backendHealth,syncStateToBackend
 } from "./lib/persistence";
 import {
   saveSessionDraft,loadSessionDraft,clearSessionDraft,draftScreen
 } from "./lib/sessionDraft";
+import {
+  createDiagnosticDraft,recoverDiagnosticTransaction,
+  transactDiagnosticAnswer
+} from "./lib/diagnosticRecovery";
 import {
   claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
 } from "./lib/reliability";
@@ -141,25 +145,53 @@ export default function App(){
   useEffect(()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
-    const x=loadLocalState(initial,emptyScores,storageKey);
+    const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
+    if(loaded.error){setScreen("storageRecoveryError");return}
+    const x=loaded.state;
     const base=x
       ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)}))))))
       :migrateProductAnalytics(migrateCloudSync(initial));
     const betaState=requested?activateFriendsBeta(base):base;
     const next=recordAppOpen(betaState,{source:"initial_load"});
     const draft=loadSessionDraft(next.betaMode||"internal");
+    let recoveredState=next;
+    let validDraft=draft;
+    let recoveryError=null;
+    let recoveredCompletion=false;
+    if(draft?.kind==="diagnostic"){
+      const recovery=recoverDiagnosticTransaction({
+        state:next,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+        clearDraft:()=>clearSessionDraft(next.betaMode||"internal"),
+        startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState
+      });
+      if(recovery.ok){recoveredState=recovery.state;validDraft=recovery.draft;recoveredCompletion=!!recovery.completed&&!next.diagnosticDone}
+      else if(String(recovery.reason).includes("write_failed")||String(recovery.reason).includes("advance_failed")){
+        recoveredState=recovery.state;validDraft=recovery.draft;
+      }else{
+        validDraft=null;
+        const hasDurableWork=(draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending";
+        if(!hasDurableWork)clearSessionDraft(next.betaMode||"internal");
+        else recoveryError=recovery.reason;
+        console.warn(`Draft de diagnóstico ignorado: ${recovery.reason}`);
+      }
+    }
 
-    setS(next);
+    setS(recoveredState);
 
     if(draft?.kind==="training" && draft.cfg)setTrainingCfg(draft.cfg);
     if(draft?.kind==="mini_exam" && draft.session)setExamSession(draft.session);
 
-    const recovered=draftScreen(draft);
-    if(next.diagnosticDone && recovered){
-      setRecoveredSession(draft);
+    const recovered=draftScreen(validDraft);
+    const canRecover=recovered&&(validDraft?.kind==="diagnostic"?!recoveredState.diagnosticDone:recoveredState.diagnosticDone);
+    if(recoveryError){
+      setScreen("diagRecoveryError");
+    }else if(recoveredCompletion){
+      setScreen("diagResult");
+    }else if(canRecover){
+      setRecoveredSession(validDraft);
       setScreen(recovered);
     }else{
-      setScreen(next.diagnosticDone?"home":"welcome");
+      setScreen(recoveredState.diagnosticDone?"home":"welcome");
     }
     setHydrated(true);
   },[]);
@@ -192,7 +224,9 @@ export default function App(){
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
-  if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go}/>;
+  if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O draft foi conservado para análise segura.</span></div></Shell>;
+  if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
+  if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="diagnostic"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
@@ -443,7 +477,36 @@ function GoalScreen({s,setS,go,onboarding=false}){
   </Shell>
 }
 
+function ensureDiagnosticStarted(state,draft){
+  const matching=(state.betaSessions||[]).filter(x=>x.id===draft.sessionId&&x.kind==="diagnostic");
+  const otherOpen=(state.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
+  if(otherOpen.length||matching.length>1||matching.some(x=>x.finishedAt))return {ok:false,reason:"ambiguous_session"};
+  if(matching.length===1)return {ok:true,state};
+  const eventExists=(state.betaEvents||[]).some(e=>e.type==="diagnostic_started"&&e.payload?.sessionId===draft.sessionId);
+  const base={...state,betaSessions:[...(state.betaSessions||[]),draft.session],
+    betaEvents:eventExists?(state.betaEvents||[]):[...(state.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:draft.sessionId})]};
+  return {ok:true,state:recordMilestone(base,"diagnostic_started",{sessionId:draft.sessionId})};
+}
+
+function finalizeDiagnosticState(nextState,draft){
+  if(nextState.diagnosticDone&&(nextState.betaSessions||[]).some(x=>x.id===draft.sessionId&&x.kind==="diagnostic"&&x.finishedAt))return {ok:true,state:nextState};
+  const matching=(nextState.betaSessions||[]).map((x,index)=>({x,index})).filter(({x})=>x.id===draft.sessionId&&x.kind==="diagnostic"&&!x.finishedAt);
+  const otherOpen=(nextState.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
+  if(matching.length!==1||otherOpen.length)return {ok:false,reason:"ambiguous_session"};
+  const at=draft.completionAt||Date.now(),sessions=[...(nextState.betaSessions||[])],idx=matching[0].index;
+  sessions[idx]={...sessions[idx],finishedAt:at,durationSeconds:Math.max(1,Math.round((at-sessions[idx].startedAt)/1000)),meta:{...(sessions[idx].meta||{}),answers:nextState.diagnosticAnswers}};
+  const eventExists=(nextState.betaEvents||[]).some(e=>e.type==="diagnostic_finished"&&e.payload?.sessionId===draft.sessionId);
+  let completed={...nextState,diagnosticDone:true,betaSessions:sessions,
+    betaEvents:eventExists?(nextState.betaEvents||[]):[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId})]};
+  completed=recordStudyActivity(completed,{kind:"diagnostic",xpEarned:0,sessionId:draft.sessionId,at});
+  completed=recordCompetitiveActivity(completed,{kind:"diagnostic",sessionId:draft.sessionId,at});
+  completed=refreshLearningHypotheses(completed,at);
+  completed=recordMilestone(completed,"diagnostic_completed",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId},{at});
+  return {ok:true,state:completed};
+}
+
 function DiagIntro({s,setS,go}){
+  const [saveError,setSaveError]=useState(false);
   const available=eligibleCount(s,"diagnostic");
   const gated=(s.betaMode||"internal")!=="internal" && available===0;
   return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
@@ -455,116 +518,80 @@ function DiagIntro({s,setS,go}){
       <div><span>🧠</span><b>Continua depois</b><small>O perfil é afinado nas Missões dos primeiros dias.</small></div>
     </div>
     <div className="notice"><b>O objetivo do diagnóstico</b><span>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</span></div>
+    {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
     {gated&&<div className="notice warning"><b>Diagnóstico bloqueado pelo gate editorial</b><span>Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão.</span></div>}
     <button className="primary" disabled={gated} onClick={()=>{
+      const existing=loadSessionDraft(s.betaMode||"internal");
+      const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
+      if(existing?.kind==="diagnostic"){go("diagRun");return}
+      if(open.length){setSaveError(true);return}
       const ses=sessionStart("diagnostic",{goal:s?.goal||null});
-      setS(prev=>{
-        const next={...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:ses.id})]};
-        return recordMilestone(next,"diagnostic_started",{sessionId:ses.id});
-      });
+      const difficulty=startingDifficulty(s.profile,s.goal);
+      const current=diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[0],difficulty,s);
+      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty});
+      if(!saveSessionDraft(draft)){setSaveError(true);return}
+      const started=ensureDiagnosticStarted(s,draft);
+      if(!started.ok||!saveLocalState(started.state)){setSaveError(true);return}
+      setSaveError(false);
+      setS(started.state);
       go("diagRun");
     }}>Começar diagnóstico</button>
   </Shell>
 }
 
 
-function DiagRun({s,setS,go}){
-  const initialDifficulty=startingDifficulty(s.profile,s.goal);
-  const [anchorIndex,setAnchorIndex]=useState(0);
-  const [difficulty,setDifficulty]=useState(initialDifficulty);
-  const [current,setCurrent]=useState(()=>diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[0],initialDifficulty,s));
-  const [sel,setSel]=useState(null);
-  const [fb,setFb]=useState(null);
-  const [anchorResults,setAnchorResults]=useState([]);
-  const [probeCount,setProbeCount]=useState(0);
+function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
+  const [draft,setDraft]=useState(()=>recoveredDraft||loadSessionDraft(s.betaMode||"internal"));
+  const [saveError,setSaveError]=useState(false);
+  const [ready,setReady]=useState(false);
+  function retryRecovery(){
+    const result=recoverDiagnosticTransaction({state:s,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+      clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});
+    if(!result.ok){setReady(false);setSaveError(true);setDraft(result.draft);return}
+    setReady(true);setSaveError(false);setS(result.state);setDraft(result.draft);
+    if(result.completed)go("diagResult");
+  }
+  useEffect(()=>{onRecovered();retryRecovery()},[]);
+  const current=draft.current,sel=draft.sel,fb=draft.fb,difficulty=draft.difficulty;
+  const anchorResults=draft.anchorResults,probeCount=draft.probeCount;
 
   const anchorsDone=anchorResults.length;
   const estimate=Math.min(94,Math.round(((anchorsDone+probeCount)/8)*100));
 
   function answer(n){
-    if(fb)return;
-    setSel(n);setFb({correct:n===current.a});
+    if(!ready||fb||draft.pendingResponse)return;
+    const selected={...draft,sel:n,fb:{correct:n===current.a}};
+    if(!saveSessionDraft(selected)){setSaveError(true);return}
+    setSaveError(false);setDraft(selected);
   }
 
-  function finish(nextState){
-    const sessions=[...(nextState.betaSessions||[])];
-    const idx=[...sessions].map(x=>x.kind==="diagnostic"&&!x.finishedAt).lastIndexOf(true);
-    if(idx>=0)sessions[idx]=sessionFinish(sessions[idx],{answers:nextState.diagnosticAnswers});
-    const base={
-      ...nextState,
-      diagnosticDone:true,
-      betaSessions:sessions,
-      betaEvents:[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers})]
-    };
-    const activityAt=Date.now();
-    let completed=recordStudyActivity(base,{
-      kind:"diagnostic",
-      xpEarned:0,
-      sessionId:idx>=0?sessions[idx]?.id:null,
-      at:activityAt
-    });
-    completed=recordCompetitiveActivity(completed,{
-      kind:"diagnostic",
-      sessionId:idx>=0?sessions[idx]?.id:null,
-      at:activityAt
-    });
-    completed=refreshLearningHypotheses(completed,activityAt);
-    completed=recordMilestone(completed,"diagnostic_completed",{
-      answers:nextState.diagnosticAnswers,
-      sessionId:idx>=0?sessions[idx]?.id:null
-    },{at:activityAt});
-    setS(completed);
-    go("diagResult");
+  function finish(nextState,nextDraft){
+    const final=finalizeDiagnosticState(nextState,nextDraft);
+    if(!final.ok||!saveLocalState(final.state)){setSaveError(true);setDraft(nextDraft);return}
+    clearSessionDraft(s.betaMode||"internal");setS(final.state);go("diagResult");
   }
 
   function next(){
-    const correct=sel===current.a;
-    let nextState={...s,scores:{...s.scores},diagnosticAnswers:s.diagnosticAnswers+1};
-    nextState.scores[current.themeId]=applyEvidence(nextState.scores[current.themeId],current,correct,"diagnostic");
-
-    if(current.role==="anchor"){
-      const nextAnchorResults=[...anchorResults,{themeId:current.themeId,correct,difficulty:current.difficulty}];
-      setAnchorResults(nextAnchorResults);
-
-      if(!correct){
-        const probe=diagnosticProbe(current.themeId,nextState);
-        if(probe){
-          setS(nextState);
-          setProbeCount(x=>x+1);
-          setCurrent(probe);setSel(null);setFb(null);
-          setDifficulty(nextDiagnosticDifficulty(difficulty,false,false));
-          return;
-        }
-      }
-
-      const done=nextAnchorResults.length;
-      const successRate=nextAnchorResults.filter(x=>x.correct).length/done;
-      const enoughEarly=done>=5 && successRate>=.80 && probeCount===0;
-      const enoughNormal=done>=DIAGNOSTIC_BLUEPRINT.length;
-
-      if(enoughEarly || enoughNormal){finish(nextState);return}
-
-      const nextDiff=nextDiagnosticDifficulty(difficulty,correct,false);
-      const nextIdx=anchorIndex+1;
-      setDifficulty(nextDiff);
-      setAnchorIndex(nextIdx);
-      setS(nextState);
-      setCurrent(diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[nextIdx],nextDiff,nextState));
-      setSel(null);setFb(null);
-      return;
-    }
-
-    const done=anchorResults.length;
-    if(done>=DIAGNOSTIC_BLUEPRINT.length){finish(nextState);return}
-    const nextIdx=anchorIndex+1;
-    setAnchorIndex(nextIdx);
-    setS(nextState);
-    setCurrent(diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[nextIdx],difficulty,nextState));
-    setSel(null);setFb(null);
+    if(draft.pendingResponse||draft.phase==="completion_pending"){retryRecovery();return}
+    if(!fb)return;
+    const result=transactDiagnosticAnswer({state:s,draft,sel,saveDraft:saveSessionDraft,saveState:saveLocalState});
+    if(!result.ok){setReady(false);setSaveError(true);setDraft(result.draft);return}
+    setSaveError(false);setS(result.state);setDraft(result.draft);
+    if(result.completed)finish(result.state,result.draft);
   }
+
+  if(draft.phase==="completion_pending")return <Shell><div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+    <div className="notice"><b>A concluir com segurança</b><span>O teu progresso está guardado.</span></div>
+    {saveError&&<div className="notice warning"><b>Não foi possível concluir agora</b><span>Tenta novamente sem fechar esta página.</span></div>}
+    <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
+
+  if(!ready)return <Shell><div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+    <div className="notice warning"><b>Estamos a confirmar o teu progresso</b><span>Nenhuma resposta será repetida enquanto a sessão não estiver segura.</span></div>
+    <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
 
   return <Shell>
     <div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+    {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
     <div className="diagProgressWrap">
       <div className="diagProgressText">
         <b>{anchorsDone?`${anchorsDone} áreas-âncora já observadas`:"A construir o primeiro mapa"}</b>

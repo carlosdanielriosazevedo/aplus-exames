@@ -8,6 +8,7 @@
     "start": "next start",
     "engine:audit": "node --experimental-default-type=module scripts/engine-audit.mjs",
     "reliability:audit": "node --experimental-default-type=module scripts/reliability-audit.mjs",
+    "diagnostic-recovery:audit": "node --experimental-default-type=module scripts/diagnostic-recovery-audit.mjs",
     "content:readiness": "node --experimental-default-type=module scripts/content-readiness.mjs",
     "review:roadmap": "node --experimental-default-type=module scripts/review-roadmap.mjs",
     "teacher-review:audit": "node --experimental-default-type=module scripts/teacher-review-audit.mjs",
