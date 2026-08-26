@@ -15,31 +15,41 @@ export function saveSessionDraft(draft){
   }catch{return false}
 }
 
-export function loadSessionDraft(mode="internal"){
+export function loadSessionDraftStatus(mode="internal"){
   const key=keyForMode(mode);
+  let raw;
   try{
-    const raw=localStorage.getItem(key);
-    if(!raw)return null;
+    raw=localStorage.getItem(key);
+  }catch{return {draft:null,error:true}}
+  if(!raw)return {draft:null,error:false};
+  try{
     const draft=JSON.parse(raw);
-    if(!draft?.kind || !draft.savedAt || Date.now()-draft.savedAt>MAX_AGE_MS){
+    const durableDiagnostic=draft?.kind==="diagnostic"&&draft?.version===2
+      &&((draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending");
+    if(!draft?.kind || !draft.savedAt || (!durableDiagnostic&&Date.now()-draft.savedAt>MAX_AGE_MS)){
       localStorage.removeItem(key);
-      return null;
+      return {draft:null,error:false};
     }
-    return draft;
+    return {draft,error:false};
   }catch{
     try{localStorage.removeItem(key)}catch{}
-    return null;
+    return {draft:null,error:false};
   }
 }
 
+export function loadSessionDraft(mode="internal"){
+  return loadSessionDraftStatus(mode).draft;
+}
+
 export function clearSessionDraft(mode="internal"){
-  try{localStorage.removeItem(keyForMode(mode))}catch{}
+  try{localStorage.removeItem(keyForMode(mode));return true}catch{return false}
 }
 
 export function draftScreen(draft){
   if(!draft)return null;
   if(draft.kind==="mission")return "mission";
   if(draft.kind==="training")return "trainingRun";
+  if(draft.kind==="diagnostic")return "diagRun";
   if(draft.kind==="mini_exam"){
     return ["miniExamIntro","miniExamRun","miniExamReview"].includes(draft.screen)
       ?draft.screen

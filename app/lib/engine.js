@@ -205,7 +205,7 @@ export function evidenceHealth(score,now=Date.now()){
   return summarizeEvidence(score?.evidence||[],now).diagnostics;
 }
 
-export function applyEvidence(score,item,correct,source="diagnostic",strength=1){
+export function applyEvidence(score,item,correct,source="diagnostic",strength=1,meta={}){
   const previous=score?.evidence || [];
   const duplicateSignature=previous.some(e=>(e.signature||e.itemId)===(item.signature||item.id));
   const effectiveStrength=strength*(duplicateSignature?.55:1);
@@ -220,9 +220,12 @@ export function applyEvidence(score,item,correct,source="diagnostic",strength=1)
     cognitive:item.cognitive,
     signature:item.signature,
     source,
-    at:Date.now(),
+    at:meta.at??Date.now(),
     signal:signalFor(item,correct),
-    strength:effectiveStrength
+    strength:effectiveStrength,
+    ...(meta.responseId?{responseId:meta.responseId}:{}),
+    ...(meta.sessionId?{sessionId:meta.sessionId}:{}),
+    ...(meta.contentFingerprint?{contentFingerprint:meta.contentFingerprint}:{})
   };
 
   return summarizeEvidence([...previous,newEvidence]);

@@ -15,6 +15,7 @@ const checks=[
   ["Beta de amigos","npm",["run","friends-beta:audit"]],
   ["Motor adaptativo","npm",["run","engine:audit"]],
   ["Fiabilidade","npm",["run","reliability:audit"]],
+  ["Recovery do diagnóstico","npm",["run","diagnostic-recovery:audit"]],
   ["Roadmap de revisão","npm",["run","review:roadmap"]],
   ["Ponte professor","npm",["run","teacher-review:audit"]],
   ["Revisões editoriais","npm",["run","editorial-revisions:audit"]],

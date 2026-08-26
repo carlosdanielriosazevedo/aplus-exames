@@ -2,19 +2,23 @@ export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
 export const APP_STATE_VERSION=29;
 
-export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){
+export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY){
   try{
     const raw=localStorage.getItem(storageKey);
-    if(!raw)return null;
+    if(!raw)return {state:null,found:false,error:false};
     const x=JSON.parse(raw);
     const scores=emptyScores();
     Object.keys(scores).forEach(id=>{
       if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]};
     });
-    return {...initial,...x,scores,_stateVersion:APP_STATE_VERSION};
+    return {state:{...initial,...x,scores,_stateVersion:APP_STATE_VERSION},found:true,error:false};
   }catch{
-    return null;
+    return {state:null,found:false,error:true};
   }
+}
+
+export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){
+  return loadLocalStateStatus(initial,emptyScores,storageKey).state;
 }
 
 export function saveLocalState(state,storageKey=null){
