@@ -96,6 +96,50 @@ Stop and ask before changing:
 - collection of new personal data from minors;
 - hybrid human/machine validation policy materially.
 
+## Operational autonomy
+Codex has high autonomy for engineering work inside the `aplus-exames` repository.
+
+For technical, reversible work confined to this repository, act autonomously instead of asking for command-by-command approval.
+
+You may autonomously:
+- inspect, create, edit, move and delete project files when required by the task;
+- run terminal/PowerShell commands inside the repository;
+- install and use declared project dependencies;
+- add free/local development dependencies when clearly justified;
+- run tests, audits, builds, linters and local development servers;
+- clean generated caches/build artefacts;
+- create `codex/*` branches;
+- use Git normally, including add, commit, fetch, pull/rebase and push on `codex/*` branches;
+- create and update Pull Requests;
+- inspect CI, GitHub checks and logs;
+- autonomously fix bugs, regressions, failing tests, reliability, performance, accessibility, internal security and technical debt;
+- repeat implementation → testing → adversarial review → correction until the task is complete.
+
+Do not stop merely because a test fails. Investigate, fix and rerun it.
+
+Do not ask the product owner to manually run commands you can execute yourself.
+
+Stop and ask before:
+- merging to `main`, unless the task explicitly authorizes it;
+- pushing directly to `main`;
+- manually deploying to production;
+- materially changing student-facing product direction or UX;
+- changing final/public branding;
+- changing pricing or business model;
+- changing pedagogical policy;
+- materially changing hybrid validation policy;
+- making IAVE/legal/licensing decisions;
+- activating paid/external services or creating costs;
+- accessing or modifying real credentials/secrets;
+- changing `.env` / `.env.local` with real values;
+- collecting new personal data;
+- modifying files outside `aplus-exames`;
+- performing destructive actions outside the project scope.
+
+Default rule:
+
+**If a decision is technical, reversible and confined to the repository, decide and execute autonomously. If it affects product, pedagogy, legal, costs, personal data or production, ask first.**
+
 ## Development workflow
 For meaningful work, prefer branch/PR workflow using branches such as codex/<task-name>.
 
