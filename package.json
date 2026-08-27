@@ -22,6 +22,7 @@
     "engagement:audit": "node --experimental-default-type=module scripts/engagement-audit.mjs",
     "competition:audit": "node --experimental-default-type=module scripts/competition-audit.mjs",
     "daily-mission:audit": "node --experimental-default-type=module scripts/daily-mission-audit.mjs",
+    "mobile:audit": "node --experimental-default-type=module scripts/mobile-legibility-audit.mjs",
     "pedagogical-memory:audit": "node --experimental-default-type=module scripts/pedagogical-memory-audit.mjs",
     "cloud-reliability:audit": "node --experimental-default-type=module scripts/cloud-reliability-audit.mjs",
     "retention:audit": "node --experimental-default-type=module scripts/retention-funnel-audit.mjs",

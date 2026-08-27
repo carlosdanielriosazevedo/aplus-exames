@@ -718,9 +718,11 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
         <div><span>🔥</span><b>{daily.streak?`Dia ${daily.streak+1}`:"Começar"}</b><small>{daily.streak?"se mantiveres amanhã":"a tua sequência"}</small></div>
       </div>
 
-      <button className="dailyMissionStart" onClick={onStart}>{mode==="resume"?"Continuar Missão →":"Começar Missão →"}</button>
-      <button className="dailyMissionLater" onClick={onDismiss}>Agora não · ver a Home</button>
-      <small className="dailyMissionFoot">Existe apenas uma Missão principal por dia. Depois podes continuar com Treino Livre ou Mini-exames.</small>
+      <div className="dailyMissionActions">
+        <button className="dailyMissionStart" onClick={onStart}>{mode==="resume"?"Continuar Missão →":"Começar Missão →"}</button>
+        <button className="dailyMissionLater" onClick={onDismiss}>Agora não · ver a Home</button>
+        <small className="dailyMissionFoot">Existe apenas uma Missão principal por dia. Depois podes continuar com Treino Livre ou Mini-exames.</small>
+      </div>
     </section>
   </div>;
 }
@@ -881,11 +883,11 @@ function Home({s,setS,go,reset}){
 
     <DailyEngagementCard s={s}/>
 
-    <section className="leagueMini" onClick={()=>go("ranking")} role="button" tabIndex="0">
+    <button type="button" className="leagueMini" onClick={()=>go("ranking")}>
       <div><small>🏆 RANKING SEMANAL · DEMONSTRAÇÃO</small><h3>{league.division.icon} Divisão {league.division.label}</h3>
         <p><b>{league.weekXp} XP competitivo</b> esta semana · posição simulada #{leagueProj?.position||"—"}</p></div>
       <div className={"leagueZone "+(leagueProj?.zone||"stay")}><b>{leagueProj?.message||"Liga em preparação"}</b><span>Ver ranking →</span></div>
-    </section>
+    </button>
 
     <div className="coverageLine"><b>{measured.length}/{TAXONOMY.length}</b><span>áreas já têm evidência. A A+ vai completar o mapa sem te obrigar a fazer outro diagnóstico gigante.</span></div>
 

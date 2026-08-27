@@ -331,3 +331,119 @@
 .reviewBatchCards.hybrid>div{background:#fff;border-color:#dcd8ef}
 .hybridItemLane{margin:9px 0;padding:9px;border-radius:9px;border:1px solid #e1e2e7;background:#fafafa}.hybridItemLane b,.hybridItemLane span,.hybridItemLane small{display:block}.hybridItemLane b{font-size:6.8px}.hybridItemLane span{font-size:6px;line-height:1.4;margin-top:2px;color:#737984}.hybridItemLane small{font-size:5.4px;margin-top:3px;color:#9398a1}.hybridItemLane.machine_plus_sample{background:#f4f8ff;border-color:#cfdbef}.hybridItemLane.machine_plus_sample b{color:#416ba4}.hybridItemLane.human_required{background:#fff9ef;border-color:#ead6ac}.hybridItemLane.human_required b{color:#866529}.hybridItemLane.blocked{background:#fff3f0;border-color:#e2b6ac}.hybridItemLane.blocked b{color:#a14b3e}
 @media(max-width:700px){.hybridValidationMetrics{grid-template-columns:repeat(2,1fr)}.hybridPolicyNotes{grid-template-columns:1fr}.hybridValidationHead{align-items:flex-start}}
+
+/* v5.6 — Beta Candidate mobile-first e legibilidade do fluxo do aluno */
+html,body{max-width:100%;overflow-x:hidden}
+body{min-width:0;font-size:16px;line-height:1.5}
+.dark,.light{min-height:100vh;min-height:100dvh}
+.wrap,.panel,.hero,.missionMain,.dailyMissionModal,.dailyMissionTitle>div,.opts button,.nextActionRows>div>div{min-width:0}
+img,svg,canvas,video{max-width:100%;height:auto}
+button{touch-action:manipulation}
+.leagueMini{width:100%;font:inherit;text-align:left}
+:where(button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid #9a86ff;outline-offset:3px}
+.light :where(h1,h2,h3,p,span,small,b,strong),.dark :where(h1,h2,h3,p,span,small,b,strong),.opts button{overflow-wrap:anywhere}
+.opts button>b{flex:0 0 28px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:16px;min-width:0;margin-bottom:16px}
+.topline>span{min-width:0;text-align:right;overflow-wrap:anywhere}
+.notice span,.goalMessage span,.trainingSummary span,.feedback span,.feedback small{font-size:14px;line-height:1.55}
+.branchNote span,.stopReason span,.resumeBanner span,.pausedSession span{font-size:13px;line-height:1.5}
+.dailyCompletionNote b{font-size:13px}.dailyCompletionNote span{font-size:12px}
+.dailyMissionModalTop small,.dailyMissionTitle small,.dailyMissionWhy>small{font-size:11px}
+.dailyMissionModalTop>span{font-size:12px}
+.dailyMissionTitle b{font-size:13px;line-height:1.4}
+.dailyMissionReason{font-size:14px;line-height:1.55}
+.dailyMissionWhy b{font-size:13px}.dailyMissionWhy p small{font-size:12px;line-height:1.45}
+.dailyMissionWhy>div>span{font-size:13px}
+.dailyMissionRewards b{font-size:13px}.dailyMissionRewards small{font-size:11px;line-height:1.3}
+.dailyMissionStart,.dailyMissionLater{min-height:48px;font-size:16px}
+.dailyMissionFoot{font-size:11px;line-height:1.45}
+
+@media(max-width:760px){
+  .wrap{width:100%;padding-top:max(18px,env(safe-area-inset-top));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:max(24px,env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left))}
+  .panel{width:100%;min-height:100vh;min-height:100dvh;padding-top:max(22px,env(safe-area-inset-top));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:max(28px,env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left))}
+  .hero{width:100%;padding-top:max(22px,env(safe-area-inset-top));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:max(24px,env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left))}
+  .hero .logo{margin-bottom:clamp(34px,9vh,58px)}
+  .hero h1{font-size:clamp(36px,12vw,44px);line-height:1;letter-spacing:-2px;margin:16px 0}
+  .hero>p:not(.eyebrow){font-size:16px;line-height:1.55}
+  .features{font-size:13px;line-height:1.4;gap:9px 14px;flex-wrap:wrap}
+  .friendsWelcome b{font-size:14px}.friendsWelcome span{font-size:13px;line-height:1.55}
+  .testerSegmentPicker>b{font-size:14px}.testerSegmentPicker>span{font-size:12px;line-height:1.5}
+  .testerSegmentPicker button{min-height:56px;padding:12px}.testerSegmentPicker strong{font-size:14px}.testerSegmentPicker small{font-size:12px;line-height:1.45}
+
+  button{min-height:44px}
+  input,select,textarea{font-size:16px!important}
+  input[type=range]{min-height:44px;height:44px}
+  .goalSlider{min-height:44px}
+  .primary,.secondary,.hero>button{min-height:50px;font-size:16px}
+  .back,.goalLink,.reviewLink,.pauseLink,.reportToggle,.qaLink.studentAccount{min-height:44px;display:inline-flex;align-items:center;font-size:12px}
+  .qaLink.studentAccount{justify-content:center}
+
+  .panel h1{font-size:clamp(29px,9vw,34px);line-height:1.12;margin-top:14px}
+  .panel h2{font-size:clamp(21px,6.5vw,25px);line-height:1.3}
+  .panel h3{font-size:17px;line-height:1.3}
+  .muted{font-size:16px;line-height:1.6}
+  .eyebrow{font-size:12px;line-height:1.4;font-weight:900;letter-spacing:.04em}
+  .notice{padding:16px;margin:18px 0}.notice b{font-size:15px}.notice span{font-size:14px}
+  .sliderLabels{font-size:12px}.goalMessage span,.trainingSummary span{font-size:14px}
+  .chips,.goals{gap:9px;margin:18px 0}.chips button,.goals button,.stackChoices button,.themeGrid button,.levelGrid button{font-size:15px;line-height:1.4;min-height:48px}
+  .themeGrid button small{font-size:12px;line-height:1.4}.levelGrid b{font-size:14px}
+
+  .diagIntroGrid,.examIntroGrid{gap:10px;margin:20px 0}
+  .diagIntroGrid div,.examIntroGrid div{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:10px;padding:14px}
+  .diagIntroGrid div>span,.examIntroGrid div>span{grid-row:1/3;align-self:start}
+  .diagIntroGrid b,.examIntroGrid b{font-size:14px;margin-top:0}
+  .diagIntroGrid small,.examIntroGrid small{font-size:13px;line-height:1.45;margin-top:3px}
+  .diagProgressText b{font-size:14px}.diagProgressText span{font-size:12px}
+  .activeArea{align-items:flex-start;margin:12px 0 20px}.activeArea span{font-size:12px;line-height:1.4}.activeArea b{font-size:14px}
+  .branchNote b{font-size:14px}.branchNote span{font-size:13px}
+  .opts{gap:10px;margin:20px 0}.opts button{min-height:58px;padding:14px;font-size:16px;line-height:1.45;align-items:flex-start;white-space:normal}
+  .feedback{padding:16px}.feedback b{font-size:16px}.feedback span,.feedback small{font-size:14px}
+  .resultSkill{align-items:flex-start}.resultSkill b{font-size:15px}.resultSkill small,.certainty span{font-size:12px}.certainty strong{font-size:13px}
+  .indexQualifier{font-size:12px;line-height:1.45}.certaintyRow span,.certaintyRow small,.evidenceMeta,.noEvidence span{font-size:12px;line-height:1.45}
+
+  .dark header{align-items:flex-start;gap:12px}.headerRight{font-size:12px;line-height:1.4}.rolePill{font-size:11px}
+  .hello{align-items:flex-start;gap:14px;margin:34px 0 20px}.hello h1{font-size:clamp(28px,9vw,36px);line-height:1.05}.hello>strong{font-size:34px}.hello small{font-size:11px;line-height:1.25}
+  .dailyEngagement{padding:16px}.dailyEngagementHead small{font-size:11px}.dailyEngagementHead h3{font-size:16px}.dailyEngagementHead p{font-size:13px;line-height:1.5}.streakOrb{min-width:64px}.streakOrb b{font-size:16px}.streakOrb span{font-size:11px}
+  .dailyGoalLine>div:first-child{font-size:12px}.dailyGoalLine small{font-size:11px;line-height:1.45}.weekRhythm span{font-size:11px}.weekRhythm b{font-size:14px}.dailyStats span{font-size:11px}
+  .leagueMini{width:100%;font:inherit;text-align:left;min-height:64px}.leagueMini small{font-size:11px}.leagueMini h3{font-size:15px}.leagueMini p{font-size:12px;line-height:1.45}.leagueZone b,.leagueZone span{font-size:12px}
+  .coverageLine{align-items:flex-start}.coverageLine span{font-size:12px;line-height:1.45}
+  .friendsBetaRibbon b,.friendsBetaRibbon span{font-size:11px;line-height:1.35}.friendsBetaPanelHead small{font-size:11px}.friendsBetaPanelHead b{font-size:14px}.friendsBetaPanelHead>span{font-size:11px}.friendsBetaPanel>p{font-size:13px}.friendsBetaPanelMeta span,.friendsBetaPanel>small{font-size:11px;line-height:1.45}
+  .pausedSession small{font-size:11px}.pausedSession b{font-size:14px}.pausedSession span{font-size:12px}.pausedSession button{font-size:14px}
+  .mission{padding:20px}.missionMain>small{font-size:11px;line-height:1.4}.mission h2{font-size:24px}.mission p{font-size:14px;line-height:1.55}.mission>button{min-height:48px;font-size:15px}
+  .missionFocus,.missionMeta span{font-size:12px;line-height:1.4}.whyNow>b{font-size:13px}.whyNow strong{font-size:13px}.whyNow small{font-size:12px;line-height:1.45}.whyNow>div>span,.unlockLine{font-size:12px}
+  .nextActionsHead small,.nextActionsHead>span{font-size:11px}.nextActionsHead h3{font-size:16px}.nextActionRows>div{grid-template-columns:28px minmax(0,1fr);align-items:start}.nextActionRows>div>b{font-size:12px}.nextActionRows strong{font-size:14px}.nextActionRows small{font-size:12px;line-height:1.45}.nextActionRows>div>span{grid-column:2;font-size:11px}.dynamicPlan{font-size:11px;line-height:1.45}
+  .navgrid button{min-height:64px}.navgrid b{font-size:15px}.navgrid span{font-size:13px;line-height:1.4}
+  .skill{grid-template-columns:minmax(96px,1.2fr) minmax(80px,1fr) 32px;font-size:13px}.skill small{display:block;grid-column:1/-1;font-size:11px}.calibrationHint{font-size:12px;line-height:1.5}
+
+  .missionStep{gap:8px}.missionStep div small,.missionStep>span,.missionStep em{font-size:12px;line-height:1.4}.missionStep div b{font-size:14px}
+  .decisionExplain>b{font-size:14px}.decisionExplain>div>span{font-size:11px;width:22px;height:22px}.decisionExplain strong{font-size:14px}.decisionExplain small,.decisionExplain footer{font-size:12px;line-height:1.45}
+  .resumeBanner{align-items:flex-start;padding:11px}.resumeBanner b{font-size:13px}.resumeBanner span{font-size:12px}
+  .stopReason small{font-size:11px}.stopReason b{font-size:14px}.stopReason span{font-size:12px}
+  .missionOutcome span,.missionOutcome small{font-size:12px}.missionOutcome b{font-size:16px}
+  .betaFeedback>b{font-size:15px}.betaFeedback>span{font-size:12px;line-height:1.45}.betaFeedback label{grid-template-columns:minmax(0,1.4fr) minmax(100px,1fr) auto;font-size:13px;gap:10px}.betaFeedback em{font-size:12px}.betaFeedback textarea{font-size:16px;min-height:88px}.betaFeedback button{min-height:44px;font-size:14px}.betaThanks{font-size:13px;line-height:1.45}
+
+  .examAction strong{font-size:13px}.exam span{font-size:13px;line-height:1.45}.lastExam small{font-size:11px}.lastExam span{font-size:13px}
+  .examProgress>span,.examQuestionMeta b{font-size:12px}.examQuestionMeta span{font-size:13px}
+  .examNav{gap:10px}.examNav button{min-height:48px;font-size:15px}
+  .reviewLink,.pauseLink{justify-content:center;width:100%}.answerMap button{min-height:54px}.answerMap button span{font-size:11px}
+  .resultDisclaimer{font-size:12px;line-height:1.45}.examChanges h3,.reviewWrong h3{font-size:16px}.examChange>div:first-child b{font-size:14px}.examChange>div:first-child small,.examChange>div:last-child span,.examChange>div:last-child strong{font-size:12px;line-height:1.4}
+  .reviewWrong summary{min-height:44px;display:flex;align-items:center;font-size:13px}.wrongBody b{font-size:15px}.wrongBody span,.wrongBody small{font-size:13px;line-height:1.5}
+  .validatedVariant b{font-size:12px}.validatedVariant span{font-size:11px;line-height:1.4}.reportToggle,.reportChoices button,.reportThanks{font-size:12px}.reportChoices button{min-height:44px}
+
+  .dailyMissionOverlay{height:100vh;height:100dvh;overflow-y:auto;overscroll-behavior:contain;padding-top:max(10px,env(safe-area-inset-top));padding-right:max(10px,env(safe-area-inset-right));padding-bottom:max(10px,env(safe-area-inset-bottom));padding-left:max(10px,env(safe-area-inset-left))}
+  .dailyMissionModal{width:100%;max-height:calc(100dvh - max(20px,env(safe-area-inset-top)) - max(20px,env(safe-area-inset-bottom)));overflow-y:auto;overscroll-behavior:contain;padding:18px}
+  .dailyMissionModalTop small,.dailyMissionTitle small,.dailyMissionWhy>small{font-size:11px}.dailyMissionModalTop>span{font-size:12px}
+  .dailyMissionTitle h2{font-size:22px;line-height:1.18}.dailyMissionTitle b{font-size:13px}.dailyMissionReason{font-size:14px}
+  .dailyMissionWhy b{font-size:13px}.dailyMissionWhy p small{font-size:12px}.dailyMissionRewards b{font-size:13px}.dailyMissionRewards small{font-size:11px}
+  .dailyMissionActions{position:sticky;z-index:2;bottom:-18px;margin:8px -18px -18px;padding:10px 18px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(247,244,255,.82) 0%,#f7f4ff 18%)}
+  .dailyMissionStart,.dailyMissionLater{min-height:50px;font-size:16px}.dailyMissionFoot{font-size:11px}
+}
+
+@media(max-width:360px){
+  .dark header{flex-direction:column}.headerRight{align-items:flex-start}
+  .hello{display:grid;grid-template-columns:minmax(0,1fr) auto}.hello h1{font-size:29px}
+  .dailyEngagementHead{gap:8px}.streakOrb{min-width:58px;padding:8px 6px}
+  .leagueMini{flex-direction:column;gap:8px}.leagueZone{min-width:0;text-align:left}
+  .dailyMissionRewards{gap:5px}.dailyMissionRewards>div{padding:8px 3px}
+  .examNav{grid-template-columns:1fr}.answerMap{gap:6px}
+}
