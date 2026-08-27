@@ -884,9 +884,9 @@ function Home({s,setS,go,reset}){
     <DailyEngagementCard s={s}/>
 
     <button type="button" className="leagueMini" onClick={()=>go("ranking")}>
-      <div><small>🏆 RANKING SEMANAL · DEMONSTRAÇÃO</small><h3>{league.division.icon} Divisão {league.division.label}</h3>
-        <p><b>{league.weekXp} XP competitivo</b> esta semana · posição simulada #{leagueProj?.position||"—"}</p></div>
-      <div className={"leagueZone "+(leagueProj?.zone||"stay")}><b>{leagueProj?.message||"Liga em preparação"}</b><span>Ver ranking →</span></div>
+      <span className="leagueMiniMain"><small>🏆 RANKING SEMANAL · DEMONSTRAÇÃO</small><span className="leagueMiniTitle">{league.division.icon} Divisão {league.division.label}</span>
+        <span className="leagueMiniMeta"><b>{league.weekXp} XP competitivo</b> esta semana · posição simulada #{leagueProj?.position||"—"}</span></span>
+      <span className={"leagueZone "+(leagueProj?.zone||"stay")}><b>{leagueProj?.message||"Liga em preparação"}</b><span>Ver ranking →</span></span>
     </button>
 
     <div className="coverageLine"><b>{measured.length}/{TAXONOMY.length}</b><span>áreas já têm evidência. A A+ vai completar o mapa sem te obrigar a fazer outro diagnóstico gigante.</span></div>

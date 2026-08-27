@@ -206,7 +206,7 @@
 
 /* v4.6 — rankings, divisões e XP competitivo */
 .leagueMini{margin:11px 0;padding:12px 13px;border:1px solid #e4defd;background:#f7f4ff;border-radius:13px;display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:pointer;color:#272344}
-.leagueMini small,.leagueMini h3,.leagueMini p{display:block}.leagueMini small{font-size:6px;font-weight:900;color:#6d5ac3}.leagueMini h3{font-size:10px;margin:2px 0}.leagueMini p{font-size:6.7px;color:#747084;margin:0}
+.leagueMini small,.leagueMiniTitle,.leagueMiniMeta{display:block}.leagueMini small{font-size:6px;font-weight:900;color:#6d5ac3}.leagueMiniTitle{font-size:10px;font-weight:700;margin:2px 0}.leagueMiniMeta{font-size:6.7px;color:#747084;margin:0}
 .leagueZone{text-align:right}.leagueZone b,.leagueZone span{display:block}.leagueZone b{font-size:6.7px}.leagueZone span{font-size:6px;color:#6b58be;margin-top:3px}.leagueZone.promote b{color:#2f7a45}.leagueZone.demote b{color:#a44343}
 .mission.completedToday{border-color:#cfe5d3;background:linear-gradient(145deg,#f5fbf6,#edf7ef);color:#24442b}.mission.completedToday .missionMain>small{color:#3e8451}.mission.completedToday .missionMeta span{background:#e1f2e5;color:#3b6947}
 .postMissionChoices{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.postMissionChoices button{margin:0;padding:7px 9px;border-radius:8px;border:1px solid #c9dfce;background:#fff;color:#365d3f;font-size:6.5px;font-weight:800}
@@ -405,7 +405,7 @@ button{touch-action:manipulation}
   .hello{align-items:flex-start;gap:14px;margin:34px 0 20px}.hello h1{font-size:clamp(28px,9vw,36px);line-height:1.05}.hello>strong{font-size:34px}.hello small{font-size:11px;line-height:1.25}
   .dailyEngagement{padding:16px}.dailyEngagementHead small{font-size:11px}.dailyEngagementHead h3{font-size:16px}.dailyEngagementHead p{font-size:13px;line-height:1.5}.streakOrb{min-width:64px}.streakOrb b{font-size:16px}.streakOrb span{font-size:11px}
   .dailyGoalLine>div:first-child{font-size:12px}.dailyGoalLine small{font-size:11px;line-height:1.45}.weekRhythm span{font-size:11px}.weekRhythm b{font-size:14px}.dailyStats span{font-size:11px}
-  .leagueMini{width:100%;font:inherit;text-align:left;min-height:64px}.leagueMini small{font-size:11px}.leagueMini h3{font-size:15px}.leagueMini p{font-size:12px;line-height:1.45}.leagueZone b,.leagueZone span{font-size:12px}
+  .leagueMini{width:100%;font:inherit;text-align:left;min-height:64px}.leagueMini small{font-size:11px}.leagueMiniTitle{font-size:15px}.leagueMiniMeta{font-size:12px;line-height:1.45}.leagueZone b,.leagueZone span{font-size:12px}
   .coverageLine{align-items:flex-start}.coverageLine span{font-size:12px;line-height:1.45}
   .friendsBetaRibbon b,.friendsBetaRibbon span{font-size:11px;line-height:1.35}.friendsBetaPanelHead small{font-size:11px}.friendsBetaPanelHead b{font-size:14px}.friendsBetaPanelHead>span{font-size:11px}.friendsBetaPanel>p{font-size:13px}.friendsBetaPanelMeta span,.friendsBetaPanel>small{font-size:11px;line-height:1.45}
   .pausedSession small{font-size:11px}.pausedSession b{font-size:14px}.pausedSession span{font-size:12px}.pausedSession button{font-size:14px}

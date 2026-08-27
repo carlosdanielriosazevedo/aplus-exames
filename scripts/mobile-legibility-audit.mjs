@@ -25,6 +25,11 @@ assert.match(mobileCss,/\.dailyMissionActions\{[^}]*position:sticky/);
 assert.match(page,/className="dailyMissionActions"/);
 assert.match(page,/<button type="button" className="leagueMini"/);
 assert.doesNotMatch(page,/<section className="leagueMini"[^>]*onClick/);
+const leagueButton=page.match(/<button type="button" className="leagueMini"[\s\S]*?<\/button>/)?.[0]||"";
+assert.match(leagueButton,/<span className="leagueMiniMain">/);
+assert.match(leagueButton,/<span className="leagueMiniTitle">/);
+assert.match(leagueButton,/<span className="leagueMiniMeta">/);
+assert.doesNotMatch(leagueButton,/<(?:div|h[1-6]|p|section|article)\b/,"league button descendants must remain phrasing content");
 
 const tooSmall=[...mobileCss.matchAll(/font-size:\s*([0-9.]+)px/g)]
   .map(match=>Number(match[1])).filter(size=>size<11);
