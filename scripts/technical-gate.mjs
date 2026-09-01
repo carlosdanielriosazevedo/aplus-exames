@@ -9,6 +9,7 @@ const checks=[
   ["Rankings e divisões","npm",["run","competition:audit"]],
   ["Missão de Hoje","npm",["run","daily-mission:audit"]],
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
+  ["Experiência do aluno","npm",["run","student-experience:audit"]],
   ["Memória pedagógica","npm",["run","pedagogical-memory:audit"]],
   ["Cloud reliability","npm",["run","cloud-reliability:audit"]],
   ["Funil e retenção","npm",["run","retention:audit"]],

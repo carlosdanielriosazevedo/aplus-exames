@@ -6,12 +6,12 @@ import {
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
-  priorityScore,selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
+  selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
   shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,
   missionContentExhaustedDecision,canStartMissionDetour,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,miniExamScore20,hasTrainingContent,hasGenerator,
-  eligibleQuestions,eligibleCount,rankedStudyPriorities,likelyUnlocks,
+  eligibleQuestions,eligibleCount,rankedStudyPriorities,
   focusScore,focusRows,competenceMap,
   selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
   allLearningHypotheses,refreshLearningHypotheses,
@@ -144,6 +144,14 @@ export default function App(){
   const [hydrated,setHydrated]=useState(false);
 
   useEffect(()=>{
+    if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
+    const previous=window.history.scrollRestoration;
+    window.history.scrollRestoration="manual";
+    window.scrollTo({top:0,left:0,behavior:"auto"});
+    return ()=>{window.history.scrollRestoration=previous};
+  },[]);
+
+  useEffect(()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
@@ -231,6 +239,13 @@ export default function App(){
     }
   },[examSession,screen,s.betaMode]);
 
+  useEffect(()=>{
+    if(typeof window==="undefined")return;
+    window.scrollTo({top:0,left:0,behavior:"auto"});
+    const frame=window.requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:"auto"}));
+    return ()=>window.cancelAnimationFrame(frame);
+  },[screen]);
+
   const go=x=>setScreen(x);
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
@@ -244,7 +259,8 @@ export default function App(){
   if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
-  if(screen==="train")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
+  if(screen==="train")return <TrainHub s={s} go={go}/>;
+  if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
   if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
@@ -267,6 +283,7 @@ export default function App(){
   if(screen==="identity")return <IdentityLab s={s} setS={setS} go={go}/>;
   if(screen==="account")return <AccountCloud s={s} setS={setS} go={go}/>;
   if(screen==="parent")return <Parent s={s} setS={setS} go={go}/>;
+  if(screen==="friendsBetaInfo")return <FriendsBetaInfo s={s} go={go}/>;
 
   return <Home s={s} setS={setS} go={go} reset={()=>{
     clearLocalState(s.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:undefined);
@@ -279,9 +296,18 @@ export default function App(){
 
 const Logo=()=> <div className="logo">A<span>+</span> EXAMES</div>;
 const Back=({go,to="home"})=> <button className="back" onClick={()=>go(to)}>← Voltar</button>;
-function FriendsBetaRibbon(){
-  const active=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
-  if(!active)return null;
+const STUDENT_NAV=[["home","⌂","Aprender"],["train","◎","Treinar"],["ranking","△","Ranking"],["progress","◫","Progresso"]];
+function StudentNav({active,go}){
+  return <nav className="studentNav" aria-label="Navegação principal">{STUDENT_NAV.map(([id,icon,label])=><button type="button" key={id} className={active===id?"active":""} aria-current={active===id?"page":undefined} onClick={()=>go(id)}><span aria-hidden="true">{icon}</span><b>{label}</b></button>)}</nav>;
+}
+function StudentTop({s,go,children}){
+  const daily=engagementSummary(s);
+  return <header className="studentTop"><Logo/><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
+}
+function FriendsBetaRibbon({s}){
+  const [queryActive,setQueryActive]=useState(false);
+  useEffect(()=>setQueryActive(friendsBetaRequested(window.location.search)),[]);
+  if(!(isFriendsBeta(s)||queryActive))return null;
   return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>;
 }
 
@@ -322,6 +348,10 @@ function FriendsBetaPanel({s}){
     <button onClick={downloadReport}>Exportar relatório do teste</button>
     <small>No fim, envia este ficheiro a quem te deu o link. Não inclui nome nem email.</small>
   </div>;
+}
+
+function FriendsBetaInfo({s,go}){
+  return <Shell><Back go={go}/><p className="eyebrow">TESTE PRIVADO</p><h1>Informação do teste</h1><FriendsBetaPanel s={s}/></Shell>;
 }
 
 
@@ -369,7 +399,7 @@ function CompetitionXpNote({s}){
 const Shell=({children})=> <main className="light"><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
 
 function Welcome({s,setS,go}){
-  const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
+  const requested=isFriendsBeta(s);
   const friends=requested||isFriendsBeta(s);
   const [segment,setSegment]=useState(currentTesterSegment(s));
 
@@ -604,14 +634,13 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
 
   return <Shell>
-    <div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+    <div className="focusTop"><button type="button" onClick={()=>go("diag")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.max(8,estimate)}%`}}/></div><span>Diagnóstico</span></div>
     {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
     <div className="diagProgressWrap">
       <div className="diagProgressText">
         <b>{anchorsDone?`${anchorsDone} áreas-âncora já observadas`:"A construir o primeiro mapa"}</b>
         <span>Dificuldade atual: {difficulty===1?"base":difficulty===2?"intermédia":"elevada"}</span>
       </div>
-      <div className="progress"><i style={{width:`${Math.max(8,estimate)}%`}}/></div>
     </div>
 
     <div className="activeArea">
@@ -619,17 +648,12 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       <b>{theme(current.themeId).short}</b>
     </div>
 
-    {current.role==="probe"&&<div className="branchNote"><b>Porque apareceu esta pergunta?</b>
-      <span>A resposta anterior deixou dúvidas. Esta pergunta mais simples ajuda a distinguir uma lacuna de base de um erro pontual.</span></div>}
+    {current.role==="probe"&&<details className="focusDisclosure"><summary>ⓘ Porque apareceu esta pergunta?</summary><div className="branchNote"><span>A resposta anterior deixou dúvidas. Esta pergunta mais simples ajuda a distinguir uma lacuna de base de um erro pontual.</span></div></details>}
 
     <p className="eyebrow">{current.cognitive.toUpperCase()} · NÍVEL {current.difficulty}</p>
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
-    {fb&&<div className={"feedback "+(fb.correct?"good":"bad")}>
-      <b>{fb.correct?"✓ Correto":"Resposta registada"}</b>
-      <span>{fb.correct?current.sol:current.hyp}</span>
-      {!fb.correct&&<small>A A+ usa esta resposta para decidir a próxima pergunta, não para “rotular” o teu nível.</small>}
-    </div>}
+    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
     <button className="primary" disabled={!fb} onClick={next}>Continuar</button>
   </Shell>
 }
@@ -691,6 +715,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
   return <div className="dailyMissionOverlay" role="dialog" aria-modal="true" aria-label="Missão de Hoje">
     <section className="dailyMissionModal">
       <div className="dailyMissionGlow">{typeMeta.icon}</div>
+      <div className="dailyMissionContent">
       <div className="dailyMissionModalTop">
         <small>{mode==="resume"?"MISSÃO EM PAUSA":"NOVA MISSÃO DISPONÍVEL"}</small>
         <span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"}</span>
@@ -717,6 +742,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
         <div><span>🏆</span><b>+50 XP</b><small>competitivo</small></div>
         <div><span>🔥</span><b>{daily.streak?`Dia ${daily.streak+1}`:"Começar"}</b><small>{daily.streak?"se mantiveres amanhã":"a tua sequência"}</small></div>
       </div>
+      </div>
 
       <div className="dailyMissionActions">
         <button className="dailyMissionStart" onClick={onStart}>{mode==="resume"?"Continuar Missão →":"Começar Missão →"}</button>
@@ -729,14 +755,9 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 
 
 function Home({s,setS,go,reset}){
-  const index=prepIndex(s);
-  const daily=engagementSummary(s);
   const missionDone=missionCompletedToday(s);
   const completedMission=todayMissionRecord(s);
-  const league=competitionSummary(s);
-  const leagueProj=leagueProjection(s);
   const devView=typeof window!=="undefined" && new URLSearchParams(window.location.search).get("dev")==="1";
-  const measured=measuredThemes(s);
   const computedPlan=dailyMissionPlan(s);
   const persistedPlan=missionPlanForToday(s,null);
   const [pausedDraft,setPausedDraft]=useState(()=>typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null);
@@ -744,21 +765,9 @@ function Home({s,setS,go,reset}){
     ?pausedDraft.plan
     :(persistedPlan||computedPlan);
   const t=plan.themeId?theme(plan.themeId):null;
-  const pv=plan.themeId?s.scores[plan.themeId]:null;
-  const fv=plan.themeId&&plan.focus?focusScore(s,plan.themeId,plan.focus):null;
-  const priorities=[...measured].filter(x=>eligibleQuestions(s,x.id,"mission").length)
-    .sort((a,b)=>priorityScore(b,s)-priorityScore(a,s)).slice(0,5);
   const ranked=rankedStudyPriorities(s,4);
   const [showMissionModal,setShowMissionModal]=useState(false);
   const [missionModalMode,setMissionModalMode]=useState("new");
-
-  const labels={
-    priority:"🎯 MISSÃO DE HOJE · PRIORIDADE",
-    calibration:"🧭 MISSÃO DE HOJE · CALIBRAÇÃO",
-    confirmation:"✅ MISSÃO DE HOJE · CONFIRMAÇÃO",
-    investigation:"🔎 MISSÃO DE HOJE · INVESTIGAÇÃO",
-    blocked:"🔒 MISSÃO INDISPONÍVEL"
-  };
 
   useEffect(()=>{
     if(typeof window==="undefined"||missionDone)return;
@@ -871,27 +880,12 @@ function Home({s,setS,go,reset}){
     });
   }
 
-  return <main className="dark">
+  const probableNext=ranked[0]?.theme;
+  return <main className="dark learnHome">
     {showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
-    <section className="wrap">
-    <header><div><Logo/><small>MATEMÁTICA A</small></div><div className="headerRight"><span className="rolePill">{ROLES[normalizeIdentity(s.identity).activeRole]?.icon} {ROLES[normalizeIdentity(s.identity).activeRole]?.label}</span><span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"} · <b>{s.xp} XP</b></span></div></header>
-
-    <div className="hello"><div><p>Boa noite 👋</p><h1>O que vamos conquistar hoje?</h1>
-      <button className="goalLink" onClick={()=>go("goalSettings")}>🎯 Objetivo: {s.goal} valores · Alterar</button></div>
-      <strong>{index??"—"}<small>/100<br/>índice parcial</small></strong>
-    </div>
-
-    <DailyEngagementCard s={s}/>
-
-    <button type="button" className="leagueMini" onClick={()=>go("ranking")}>
-      <span className="leagueMiniMain"><small>🏆 RANKING SEMANAL · DEMONSTRAÇÃO</small><span className="leagueMiniTitle">{league.division.icon} Divisão {league.division.label}</span>
-        <span className="leagueMiniMeta"><b>{league.weekXp} XP competitivo</b> esta semana · posição simulada #{leagueProj?.position||"—"}</span></span>
-      <span className={"leagueZone "+(leagueProj?.zone||"stay")}><b>{leagueProj?.message||"Liga em preparação"}</b><span>Ver ranking →</span></span>
-    </button>
-
-    <div className="coverageLine"><b>{measured.length}/{TAXONOMY.length}</b><span>áreas já têm evidência. A A+ vai completar o mapa sem te obrigar a fazer outro diagnóstico gigante.</span></div>
-
-    <FriendsBetaPanel s={s}/>
+    <section className="wrap studentSurface">
+    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
+    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
       if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
@@ -899,61 +893,14 @@ function Home({s,setS,go,reset}){
       else go("mission");
     }}>Continuar →</button></div>}
 
-    {missionDone?<div className="mission completedToday">
-      <div className="missionMain"><small>✅ MISSÃO DE HOJE CONCLUÍDA</small>
-        <h2>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"}</h2>
-        <p>A recomendação principal de hoje está feita. A app só prepara uma nova Missão amanhã, depois de considerar tudo o que fizeres entretanto.</p>
-        <div className="missionMeta"><span>🔥 Streak protegido</span><span>🏆 +50 XP competitivo</span><span>Nova Missão amanhã</span></div>
-        <div className="postMissionChoices"><button onClick={()=>go("train")}>Treino Livre</button><button onClick={()=>go("exams")}>Mini-exame</button><button onClick={()=>go("ranking")}>Ranking</button></div>
-      </div>
-    </div>:<div className={"mission "+plan.type}>
-      <div className="missionMain"><small>{labels[plan.type]}</small><h2>{t?.short||"Conteúdo protegido"}</h2>
-        {plan.focus&&<div className="missionFocus">Foco: <b>{plan.focus}</b></div>}
-        <p>{plan.reason}</p>
-        {pv&&<div className="missionMeta">
-          <span>{plan.focus?(fv?.domain!==null&&fv?.domain!==undefined?`Competência ${fv.domain}/100`:"Competência ainda sem estimativa"):(pv.domain===null?"Ainda sem Domínio":`Tema ${pv.domain}/100`)}</span>
-          <span>Certeza: {fv?certaintyLabel(fv.conf,fv.evidence.length):certaintyLabel(pv.conf,pv.evidence.length)}</span>
-          {plan.type==="confirmation"&&<span>Vem do Treino Livre</span>}
-        </div>}
-        {plan.reasons?.length>0&&<div className="whyNow"><b>Porque agora?</b>{plan.reasons.map((r,i)=><div key={`${r.kind}-${i}`}><span>✓</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}</div>}
-        {plan.unlocks?.length>0&&<div className="unlockLine"><b>↗ Pode desbloquear</b><span>{plan.unlocks.slice(0,3).map(x=>x.label).join(" · ")}</span></div>}
-      </div>
-      <button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Bloqueado":pausedDraft?.kind==="mission"?"Continuar →":"Começar →"}</button>
-    </div>}
-
-    {ranked.length>0&&<div className="nextActions"><div className="nextActionsHead"><div><small>O MOTOR ESTÁ A PENSAR À FRENTE</small><h3>Próximas prioridades prováveis</h3></div><span>Recalcula após cada sessão</span></div>
-      <div className="nextActionRows">{ranked.map((row,i)=>{
-        const v=s.scores[row.theme.id];
-        const unlocks=likelyUnlocks(row.theme.id);
-        return <div key={row.theme.id} className={i===0?"first":""}><b>{i+1}</b><div><strong>{row.theme.short}</strong><small>{v.domain}/100 · Certeza {certaintyLabel(v.conf,v.evidence.length)}{unlocks.length?` · desbloqueia ${unlocks[0].label}`:""}</small></div><span>{i===0?"Agora":"Depois"}</span></div>
-      })}</div>
-      <small className="dynamicPlan">Não é um calendário rígido: se uma resposta revelar outra causa, a ordem muda.</small>
-    </div>}
-
-    <div className="navgrid">{[
-      ["🧠","Treinar","Prática livre sem inflacionar Domínio.","train"],
-      ["📝","Exames","Avaliação em contexto de prova.","exams"],
-      ["📈","Progresso","Domínio + Certeza da A+.","progress"],
-      ["👨‍👩‍👧","Área dos pais","Acompanhamento parental.","parent"]
-    ].map(x=><button key={x[1]} onClick={()=>go(x[3])}><b>{x[0]} {x[1]}</b><span>{x[2]}</span></button>)}</div>
-
-    <div className="card"><h3>Prioridades atuais</h3>{priorities.length?priorities.map(x=>{
-      const v=s.scores[x.id];
-      return <div className="skill" key={x.id}><span>{x.short}</span><div className="bar"><i style={{width:(v.domain??0)+"%"}}/></div>
-        <b>{v.domain??"—"}</b><small>{certaintyLabel(v.conf,v.evidence.length)}</small></div>
-    }):<div className="calibrationHint">Ainda estamos a construir o mapa inicial.</div>}
-      <div className="calibrationHint">Nos primeiros dias, algumas Missões podem servir para calibrar áreas ainda desconhecidas ou confirmar sinais vindos do Treino Livre.</div>
-    </div>
-
-    {!isFriendsBeta(s)&&<button className="qaLink studentAccount" onClick={()=>go("account")}>☁️ Conta & progresso na cloud</button>}
-
-    {devView&&<div className="devTools"><small>FERRAMENTAS INTERNAS · NÃO VISÍVEIS A TESTERS</small>
-      <button className="qaLink" onClick={()=>go("identity")}>👤 Identidade & Permissões (demo)</button>
-      <button className="qaLink" onClick={()=>go("qa")}>🧪 Painel interno de Qualidade</button>
-      <button className="qaLink" onClick={()=>go("review")}>👨‍🏫 Painel interno de Revisão Pedagógica</button>
-      <button className="qaLink" onClick={()=>go("beta")}>🧪 Painel interno da Beta · modo {s.betaMode||"internal"}</button>
-      <button className="reset" onClick={reset}>Recomeçar protótipo</button>
-    </div>}
+    <section className="adaptivePath" aria-label="Caminho adaptativo">
+      <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
+      <div className="pathLine active"/>
+      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><p>{missionDone?"A recomendação principal de hoje está feita.":"Uma sessão curta escolhida pela A+ para ti."}</p><em>~3–5 min</em>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className="pathLine"/>
+      <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
+    </section>
+    <StudentNav active="home" go={go}/>
   </section></main>
 }
 
@@ -1169,16 +1116,16 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   if(!current)return <Shell><Back go={go}/><h1>Ainda não existem perguntas suficientes para esta Missão.</h1></Shell>;
 
-  const typeName=plan.type==="confirmation"?"Confirmação":plan.type==="calibration"?"Calibração":plan.type==="investigation"?"Investigação":"Prioridade";
   const missionStage=totalCount===0?"A começar":totalCount<3?"A aprofundar":"Quase concluída";
+  const hasQuestionContext=plan.type==="calibration"||(current.sessionRole==="target"&&(plan.type==="confirmation"||plan.type==="priority"));
 
   return <Shell>
-    <div className="topline"><Logo/><span>Missão · {typeName}</span></div>
+    <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.min(88,22+totalCount*22)}%`}}/></div><span>{missionStage}</span></div>
     {draft&&<div className="resumeBanner"><b>↻ Sessão retomada</b><span>Continuaste exatamente no ponto onde tinhas ficado.</span></div>}
     <div className="missionStep"><div><small>FOCO PRINCIPAL</small><b>{theme(targetId).short}</b>{plan.focus&&<em>{plan.focus}</em>}</div>
       <span>{missionStage} · sessão curta</span></div>
 
-    {plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
+    {hasQuestionContext&&<details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>{plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
       <span>Treinaste {plan.focus}. O desempenho foi promissor, mas o Treino Livre não altera o Domínio. Esta Missão serve para confirmar se a evolução se mantém.</span></div>}
 
     {plan.type==="calibration"&&<div className="notice"><b>Missão de calibração</b>
@@ -1192,7 +1139,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {plan.type==="priority"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque é esta a próxima melhor ação?</b>
       {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
       {plan.unlocks?.length>0&&<footer>Se melhorares esta base, o motor poderá avançar com mais segurança para <b>{plan.unlocks.slice(0,2).map(x=>x.label).join(" e ")}</b>.</footer>}
-    </div>}
+    </div>}</details>}
 
     {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ Verificação rápida da causa</b>
       <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a A+ vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
@@ -1202,13 +1149,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
 
-    {fb&&<div className={"feedback "+(fb.correct?"good":"bad")}>
-      <b>{fb.correct?"✓ Correto":"A A+ detetou uma hipótese."}</b>
-      <span>{fb.correct?current.sol:current.hyp}</span>
-      {!fb.correct&&<small>{current.sessionRole==="target"&&!detour&&plan.type!=="calibration"
-        ?"Se existir um pré-requisito verificável, a A+ pode testá-lo antes de atribuir a causa."
-        :"Ainda não existe evidência suficiente para uma conclusão forte."}</small>}
-    </div>}
+    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={current} s={s} setS={setS}/>}
     <button disabled={!fb} className="primary" onClick={next}>Continuar</button>
   </Shell>
@@ -1223,14 +1164,15 @@ function MissionResult({s,setS,go}){
   const delta=(m.afterDomain??0)-(m.beforeDomain??0);
   const typeName=m.type==="confirmation"?"Confirmação concluída":m.type==="calibration"?"Calibração concluída":"Missão concluída";
 
-  return <Shell><div className="centered"><Logo/><div className="check">✓</div>
-    <p className="eyebrow">{typeName.toUpperCase()}</p><h1>{t.short}</h1>
+  return <Shell><div className="centered completionMoment"><Logo/><div className="check">✓</div>
+    <p className="eyebrow">{typeName.toUpperCase()}</p><h1>Missão concluída</h1><h2>Hoje reforçaste {m.focus||t.short}.</h2>
     <p className="muted">{m.stopDetail
       ?m.stopDetail
       :m.type==="calibration"
         ?"A A+ já tem primeiras observações nesta área. Ainda é cedo para tratar esta estimativa como robusta."
         :`A sessão terminou após ${m.interactionCount||m.totalCount} interações úteis.`}</p></div>
 
+    <details className="resultDetails"><summary>Ver detalhes do progresso</summary>
     {m.stopTitle&&<div className="stopReason"><small>PORQUE TERMINOU AGORA?</small><b>{m.stopTitle}</b><span>{m.stopDetail}</span></div>}
 
     {m.focus&&<div className="competenceOutcome"><small>COMPETÊNCIA TRABALHADA</small><h2>{m.focus}</h2><div>
@@ -1256,7 +1198,7 @@ function MissionResult({s,setS,go}){
 
     <div className="notice"><b>Porque mudou?</b>
       <span>O Domínio reage ao desempenho. A Certeza da A+ cresce sobretudo com evidências independentes, tipos de raciocínio diferentes e contextos avaliativos.</span></div>
-    <div className="notice"><b>O plano vai ser recalculado agora</b><span>A próxima Missão não está pré-programada. O motor volta a comparar dificuldades, certeza, pré-requisitos, relevância, recência e objetivo com esta nova evidência.</span></div>
+    <div className="notice"><b>O plano vai ser recalculado agora</b><span>A próxima Missão não está pré-programada. O motor volta a comparar dificuldades, certeza, pré-requisitos, relevância, recência e objetivo com esta nova evidência.</span></div></details>
 
     <FriendsBetaDisclaimer s={s}/>
     <DailyCompletionNote s={s}/>
@@ -1302,7 +1244,7 @@ function Ranking({s,setS,go}){
     }));
   }
 
-  return <Shell><Back go={go}/>
+  return <Shell><StudentTop s={s} go={go}/>
     <div className="rankingHero">
       <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
         <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
@@ -1373,6 +1315,17 @@ function Ranking({s,setS,go}){
       <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
       <small className="privacyRankNote">Nunca entram no ranking: Domínio, Certeza, Índice de Preparação, nota objetivo, resultados de exame ou número de erros.</small>
     </section>
+    <StudentNav active="ranking" go={go}/>
+  </Shell>;
+}
+
+function TrainHub({s,go}){
+  return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1><p className="muted">Escolhe como queres estudar agora.</p></div>
+    <div className="trainChoices">
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe uma matéria e usa o Treino Livre.</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina em contexto de prova, com feedback no fim.</small></div><em>→</em></button>
+      <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos estão a ser preparados.</small></div><em>Em breve</em></button>
+    </div><StudentNav active="train" go={go}/>
   </Shell>;
 }
 
@@ -1398,7 +1351,7 @@ function Train({s,setS,go,start}){
   const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
   const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
 
-  return <Shell><Back go={go}/>
+  return <Shell><Back go={go} to="train"/>
     <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
     <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
 
@@ -1531,14 +1484,13 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     </Shell>
   }
 
-  return <Shell><Back go={go} to="train"/>
-    <div className="topline"><Logo/><span>Treino Livre · {i+1}/{questions.length}</span></div>
+  return <Shell><div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/questions.length)*100}%`}}/></div><span>{i+1}/{questions.length}</span></div>
     {draft&&<div className="resumeBanner"><b>↻ Treino retomado</b><span>As respostas anteriores desta sessão foram preservadas.</span></div>}
     <div className="activeArea"><span>🧠 Treino</span><b>{theme(cfg.themeId).short} · {q.focus}</b></div>
     {q.generated&&<div className="validatedVariant"><b>✓ Variante validada</b><span>Gerada por regras matemáticas fechadas · seed {q.variantSeed}</span></div>}
     <p className="eyebrow">{q.cognitive.toUpperCase()} · NÍVEL {q.difficulty}</p><h2>{q.q}</h2>
     <QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>
-    {fb&&<div className={"feedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Correto":"Ainda não."}</b><span>{q.sol}</span></div>}
+    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={q} s={s} setS={setS}/>}
     <button className="primary" disabled={!fb} onClick={next}>Continuar</button>
     <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
@@ -1550,10 +1502,15 @@ function Progress({s,go}){
   const hypotheses=allLearningHypotheses(s,8);
   const activeHypotheses=hypotheses.filter(h=>h.active);
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
-  return <Shell><Back go={go}/><p className="eyebrow">PROGRESSO</p>
-    <h1>O teu mapa de conhecimento.</h1>
-    <p className="muted">Agora distinguimos o <b>tema</b> das competências dentro dele. Podes estar forte em zeros de funções e fraco em monotonia — a A+ já não mistura as duas coisas numa única conclusão.</p>
+  const overview=measuredThemes(s).sort((a,b)=>(s.scores[b.id].domain??0)-(s.scores[a.id].domain??0)).slice(0,5);
+  const index=prepIndex(s);
+  return <Shell><StudentTop s={s} go={go}/><p className="eyebrow">PROGRESSO</p>
+    <h1>Como estás a evoluir.</h1>
+    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p></div>
+    <div className="progressOverview">{overview.map(t=><div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(s.scores[t.id].domain??0)+"%"}}/></div><b>{s.scores[t.id].domain??"—"}</b></div>)}</div>
     <FriendsBetaDisclaimer s={s} compact/>
+    <details className="progressDetails"><summary>Ver mapa completo →</summary>
+    <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
     <div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
 
     {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
@@ -1594,9 +1551,10 @@ function Progress({s,go}){
           <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
         </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A A+ vai recolher evidência quando esta área se tornar relevante.</span></div>}
       </div>
-    })}
+    })}</details>
     <div className="notice"><b>Domínio ≠ Certeza da A+</b><span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
     <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a A+ reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
+    <StudentNav active="progress" go={go}/>
   </Shell>
 }
 
@@ -1604,7 +1562,7 @@ function Exams({s,go,startMini}){
   const last=s.lastExam;
   const miniAvailable=buildMiniExam(s,8).length;
   const miniReady=miniAvailable>=8;
-  return <Shell><Back go={go}/><p className="eyebrow">EXAMES</p><h1>Avaliação em contexto de prova.</h1>
+  return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
       <div><b>⚡ Mini-exame A+</b><span>{miniReady?"8 questões · ~10–15 min · 10.º, 11.º e 12.º":`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
@@ -1636,14 +1594,12 @@ function MiniExamIntro({session,go}){
 function MiniExamRun({session,setSession,go}){
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
   const i=session.current||0,q=session.questions[i],answer=session.answers[i];
-  const answered=session.answers.filter(x=>x!==null).length;
   function choose(n){
     const answers=[...session.answers];answers[i]=n;setSession({...session,answers});
   }
   function move(n){setSession({...session,current:Math.max(0,Math.min(session.questions.length-1,n))})}
   return <Shell>
-    <div className="topline"><Logo/><span>Mini-exame · {answered}/{session.questions.length} respondidas</span></div>
-    <div className="examProgress"><div className="progress"><i style={{width:`${((i+1)/session.questions.length)*100}%`}}/></div><span>Questão {i+1} de {session.questions.length}</span></div>
+    <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/session.questions.length)*100}%`}}/></div><span>{i+1}/{session.questions.length}</span></div>
     <div className="examQuestionMeta"><span>{theme(q.themeId).short}</span><b>{q.cognitive} · nível {q.difficulty}</b></div>
     <h2>{q.q}</h2>
     <div className="opts examOpts">{q.o.map((x,n)=><button key={`${q.id}-${n}`} className={answer===n?"sel":""} onClick={()=>choose(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
@@ -1716,7 +1672,7 @@ function MiniExamResult({s,setS,go}){
   const questions=r.questionIds.map(id=>QUESTION_BANK.find(q=>q.id===id)).filter(Boolean);
   const wrong=questions.map((q,i)=>({q,i,answer:r.answers[i]})).filter(x=>x.answer!==x.q.a);
   const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
-  return <Shell><div className="centered"><Logo/><div className="check">✓</div><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
+  return <Shell><div className="centered completionMoment"><Logo/><div className="check">✓</div><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
     <h1>{String(r.score20).replace('.',',')}<small className="scoreOut">/20</small></h1>
     <p className="muted">{r.correctCount}/{r.total} respostas corretas · {mins}:{String(secs).padStart(2,'0')}</p>
     <small className="resultDisclaimer">Resultado deste Mini-exame A+ — não é uma previsão da nota do Exame Nacional.</small></div>
