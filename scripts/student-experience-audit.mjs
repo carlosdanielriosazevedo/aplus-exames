@@ -21,6 +21,7 @@ assert.match(page,/function Welcome\(\{s,setS,go\}\)\{\s*const requested=isFrien
 assert.match(page,/friendsBetaInfo/);
 assert.match(page,/Informação do teste/);
 assert.match(page,/className="progressDetails"/);
+assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza da A\+[\s\S]*?Variantes não contam/);
 assert.match(page,/Índice parcial — não é uma previsão da nota do exame/);
 assert.match(page,/className="focusTop"/);
 assert.match(page,/window\.history\.scrollRestoration="manual"/);
@@ -33,12 +34,26 @@ for(const name of ["DiagRun","Mission","TrainingRun","MiniExamRun"]){
   const sessionSource=page.slice(start,end<0?page.length:end);
   assert.doesNotMatch(sessionSource,/<StudentNav/,`${name} must remain in focus mode`);
   assert.equal((sessionSource.match(/className="focusTrack"/g)||[]).length,1,`${name} must expose one focus progress track`);
+  assert.match(sessionSource,/className="questionContext"/,`${name} must expose only a short question context by default`);
+  assert.match(sessionSource,/className="focusDisclosure"><summary>ⓘ Sobre esta pergunta<\/summary>/,`${name} must keep engine detail behind progressive disclosure`);
+}
+const diagnosticSource=page.slice(page.indexOf("function DiagRun("),page.indexOf("\nfunction DiagResult("));
+const missionSource=page.slice(page.indexOf("function Mission("),page.indexOf("\nfunction MissionResult("));
+const trainingSource=page.slice(page.indexOf("function TrainingRun("),page.indexOf("\nfunction Progress("));
+const miniExamSource=page.slice(page.indexOf("function MiniExamRun("),page.indexOf("\nfunction MiniExamReview("));
+assert.doesNotMatch(diagnosticSource,/className="(?:diagProgressWrap|activeArea)"/);
+assert.doesNotMatch(missionSource,/className="missionStep"/);
+assert.doesNotMatch(trainingSource,/className="(?:activeArea|validatedVariant)"/);
+assert.doesNotMatch(miniExamSource,/className="examQuestionMeta"/);
+for(const sessionSource of [diagnosticSource,missionSource,trainingSource,miniExamSource]){
+  assert.doesNotMatch(sessionSource,/<p className="eyebrow">\{[^}]*cognitive/,"cognitive type must not remain on the default question surface");
 }
 assert.doesNotMatch(page.slice(page.indexOf("function MiniExamRun("),page.indexOf("\nfunction MiniExamReview(")),/className="examProgress"/);
 assert.match(page,/✓ Muito bem!/);
 assert.match(page,/A resposta correta é:/);
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
-assert.match(css,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,1fr\)/);
+assert.match(css,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+assert.match(css,/\.studentNav button>b\{[^}]*font-size:12px[^}]*white-space:nowrap/);
 assert.match(css,/\.pathNode\.current button\{[^}]*min-height:54px/);
 assert.match(css,/\.opts button\{font-size:17px;min-height:62px\}/);
 assert.match(css,/\.rankingTabs button\{[^}]*min-height:44px[^}]*font-size:13px/);

@@ -636,21 +636,11 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   return <Shell>
     <div className="focusTop"><button type="button" onClick={()=>go("diag")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.max(8,estimate)}%`}}/></div><span>Diagnóstico</span></div>
     {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
-    <div className="diagProgressWrap">
-      <div className="diagProgressText">
-        <b>{anchorsDone?`${anchorsDone} áreas-âncora já observadas`:"A construir o primeiro mapa"}</b>
-        <span>Dificuldade atual: {difficulty===1?"base":difficulty===2?"intermédia":"elevada"}</span>
-      </div>
-    </div>
-
-    <div className="activeArea">
-      <span>{current.role==="probe"?"↳ A A+ decidiu aprofundar":"● Pergunta-âncora"}</span>
-      <b>{theme(current.themeId).short}</b>
-    </div>
-
-    {current.role==="probe"&&<details className="focusDisclosure"><summary>ⓘ Porque apareceu esta pergunta?</summary><div className="branchNote"><span>A resposta anterior deixou dúvidas. Esta pergunta mais simples ajuda a distinguir uma lacuna de base de um erro pontual.</span></div></details>}
-
-    <p className="eyebrow">{current.cognitive.toUpperCase()} · NÍVEL {current.difficulty}</p>
+    <p className="questionContext">{theme(current.themeId).short}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
+      <div className="questionMeta"><span>{current.role==="probe"?"Pergunta de aprofundamento":"Pergunta-âncora"}</span><span>{current.cognitive} · nível {current.difficulty}</span><span>{anchorsDone?`${anchorsDone} áreas-âncora já observadas`:"A construir o primeiro mapa"}</span><span>Dificuldade atual: {difficulty===1?"base":difficulty===2?"intermédia":"elevada"}</span></div>
+      {current.role==="probe"&&<div className="branchNote"><span>A resposta anterior deixou dúvidas. Esta pergunta mais simples ajuda a distinguir uma lacuna de base de um erro pontual.</span></div>}
+    </details>
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
     {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
@@ -1117,35 +1107,30 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   if(!current)return <Shell><Back go={go}/><h1>Ainda não existem perguntas suficientes para esta Missão.</h1></Shell>;
 
   const missionStage=totalCount===0?"A começar":totalCount<3?"A aprofundar":"Quase concluída";
-  const hasQuestionContext=plan.type==="calibration"||(current.sessionRole==="target"&&(plan.type==="confirmation"||plan.type==="priority"));
-
   return <Shell>
     <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.min(88,22+totalCount*22)}%`}}/></div><span>{missionStage}</span></div>
     {draft&&<div className="resumeBanner"><b>↻ Sessão retomada</b><span>Continuaste exatamente no ponto onde tinhas ficado.</span></div>}
-    <div className="missionStep"><div><small>FOCO PRINCIPAL</small><b>{theme(targetId).short}</b>{plan.focus&&<em>{plan.focus}</em>}</div>
-      <span>{missionStage} · sessão curta</span></div>
-
-    {hasQuestionContext&&<details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>{plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
+    <p className="questionContext">{theme(current.themeId).short}{current.focus&&<> · {current.focus}</>}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
+      <div className="questionMeta"><span>{current.cognitive} · nível {current.difficulty}</span><span>{current.sessionRole==="prereq"?"Verificação de pré-requisito":`Foco da Missão: ${plan.focus||theme(targetId).short}`}</span><span>{missionStage} · sessão curta</span>{current.generated&&<span>Variante validada · resposta calculada por regras matemáticas fechadas · seed {current.variantSeed}</span>}</div>
+      {plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
       <span>Treinaste {plan.focus}. O desempenho foi promissor, mas o Treino Livre não altera o Domínio. Esta Missão serve para confirmar se a evolução se mantém.</span></div>}
 
     {plan.type==="calibration"&&<div className="notice"><b>Missão de calibração</b>
       <span>A A+ ainda conhece pouco esta área. Uma pequena sequência de interações úteis ajuda a começar o mapa sem transformar a Missão num teste.</span></div>}
 
-    {plan.type==="investigation"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque estamos a voltar a esta competência?</b>
+      {plan.type==="investigation"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque estamos a voltar a esta competência?</b>
       {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
       <footer>A app não assume que a hipótese anterior estava certa. Esta Missão existe precisamente para tentar confirmá-la ou enfraquecê-la.</footer>
     </div>}
 
-    {plan.type==="priority"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque é esta a próxima melhor ação?</b>
+      {plan.type==="priority"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque é esta a próxima melhor ação?</b>
       {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
       {plan.unlocks?.length>0&&<footer>Se melhorares esta base, o motor poderá avançar com mais segurança para <b>{plan.unlocks.slice(0,2).map(x=>x.label).join(" e ")}</b>.</footer>}
-    </div>}</details>}
-
-    {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ Verificação rápida da causa</b>
+      </div>}
+      {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ Verificação rápida da causa</b>
       <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a A+ vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
-
-    {current.generated&&<div className="validatedVariant"><b>✓ Variante validada</b><span>Resposta calculada por regras matemáticas fechadas · seed {current.variantSeed}</span></div>}
-    <p className="eyebrow">{current.cognitive.toUpperCase()} · NÍVEL {current.difficulty}</p>
+    </details>
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
 
@@ -1486,9 +1471,9 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
 
   return <Shell><div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/questions.length)*100}%`}}/></div><span>{i+1}/{questions.length}</span></div>
     {draft&&<div className="resumeBanner"><b>↻ Treino retomado</b><span>As respostas anteriores desta sessão foram preservadas.</span></div>}
-    <div className="activeArea"><span>🧠 Treino</span><b>{theme(cfg.themeId).short} · {q.focus}</b></div>
-    {q.generated&&<div className="validatedVariant"><b>✓ Variante validada</b><span>Gerada por regras matemáticas fechadas · seed {q.variantSeed}</span></div>}
-    <p className="eyebrow">{q.cognitive.toUpperCase()} · NÍVEL {q.difficulty}</p><h2>{q.q}</h2>
+    <p className="questionContext">{theme(cfg.themeId).short}{q.focus&&<> · {q.focus}</>}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span>{q.generated&&<span>Variante validada · gerada por regras matemáticas fechadas · seed {q.variantSeed}</span>}</div></details>
+    <h2>{q.q}</h2>
     <QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>
     {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={q} s={s} setS={setS}/>}
@@ -1552,8 +1537,10 @@ function Progress({s,go}){
         </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A A+ vai recolher evidência quando esta área se tornar relevante.</span></div>}
       </div>
     })}</details>
-    <div className="notice"><b>Domínio ≠ Certeza da A+</b><span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
-    <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a A+ reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
+    <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary>
+      <div className="notice"><b>Domínio ≠ Certeza da A+</b><span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
+      <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a A+ reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
+    </details>
     <StudentNav active="progress" go={go}/>
   </Shell>
 }
@@ -1600,7 +1587,8 @@ function MiniExamRun({session,setSession,go}){
   function move(n){setSession({...session,current:Math.max(0,Math.min(session.questions.length-1,n))})}
   return <Shell>
     <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/session.questions.length)*100}%`}}/></div><span>{i+1}/{session.questions.length}</span></div>
-    <div className="examQuestionMeta"><span>{theme(q.themeId).short}</span><b>{q.cognitive} · nível {q.difficulty}</b></div>
+    <p className="questionContext">{theme(q.themeId).short}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span></div></details>
     <h2>{q.q}</h2>
     <div className="opts examOpts">{q.o.map((x,n)=><button key={`${q.id}-${n}`} className={answer===n?"sel":""} onClick={()=>choose(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
     <div className="examNav">

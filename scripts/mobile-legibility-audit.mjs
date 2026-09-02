@@ -30,6 +30,9 @@ assert.match(page,/<nav className="studentNav" aria-label="Navegação principal
 const studentNav=page.match(/<nav className="studentNav"[\s\S]*?<\/nav>/)?.[0]||"";
 assert.match(studentNav,/<button type="button"/);
 assert.doesNotMatch(studentNav,/<(?:div|h[1-6]|p|section|article)\b/,"navigation button descendants must remain phrasing content");
+assert.match(mobileCss,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)[^}]*gap:2px/);
+assert.match(mobileCss,/\.studentNav button\{[^}]*min-width:0[^}]*min-height:56px[^}]*padding:5px 2px/);
+assert.match(mobileCss,/\.studentNav button>b\{[^}]*font-size:12px[^}]*white-space:nowrap/);
 
 const tooSmall=[...mobileCss.matchAll(/font-size:\s*([0-9.]+)px/g)]
   .map(match=>Number(match[1])).filter(size=>size<11);
