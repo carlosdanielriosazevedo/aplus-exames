@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-suc",
+  "subtopicId": "11-suc-termo-recorrencia",
+  "subtopic": "Regularidades, termo geral e recorrência",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha notação de sucessões, termo geral, recorrência, determinação de termos/índices, monotonia elementar, cotas e modelação discreta. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11SUC-TR-001",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma sucessão é...",
+      "o": [
+        "uma função cujo domínio é um subconjunto dos números naturais.",
+        "qualquer conjunto sem ordem.",
+        "uma equação do 2.º grau.",
+        "uma função apenas definida em R."
+      ],
+      "a": 0,
+      "sol": "Uma sucessão associa a cada índice natural um termo.",
+      "hyp": "Pode confundir sucessão com conjunto não ordenado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-002",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na sucessão (u_n), u_5 representa...",
+      "o": [
+        "a soma dos 5 primeiros termos.",
+        "o 5.º termo.",
+        "o termo geral.",
+        "o índice inicial."
+      ],
+      "a": 1,
+      "sol": "O índice n identifica a posição do termo.",
+      "hyp": "Pode confundir termo com soma parcial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:notacao-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-003",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se u_n=2n+1, então u_4=",
+      "o": [
+        "7.",
+        "8.",
+        "9.",
+        "10."
+      ],
+      "a": 2,
+      "sol": "u_4=2×4+1=9.",
+      "hyp": "Pode substituir n por 3 ou esquecer o +1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-004",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se u_n=n², então u_5=",
+      "o": [
+        "10.",
+        "20.",
+        "5.",
+        "25."
+      ],
+      "a": 3,
+      "sol": "5²=25.",
+      "hyp": "Pode multiplicar 5 por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-005",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se u_n=3−n, então u_6=",
+      "o": [
+        "−3.",
+        "3.",
+        "−6.",
+        "9."
+      ],
+      "a": 0,
+      "sol": "3−6=−3.",
+      "hyp": "Pode trocar a ordem da subtração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-006",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma definição por recorrência especifica normalmente...",
+      "o": [
+        "apenas o primeiro termo.",
+        "um ou mais termos iniciais e uma regra para obter termos seguintes.",
+        "apenas uma fórmula em n.",
+        "apenas a soma dos termos."
+      ],
+      "a": 1,
+      "sol": "A recorrência precisa de condições iniciais e de uma relação entre termos.",
+      "hyp": "Pode achar que a recorrência dispensa termos iniciais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-007",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u_1=2 e u_{n+1}=u_n+3, então u_2=",
+      "o": [
+        "3.",
+        "6.",
+        "5.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "u_2=2+3=5.",
+      "hyp": "Pode somar ao índice em vez do termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-primeiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-008",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Na mesma sucessão, u_3=",
+      "o": [
+        "5.",
+        "11.",
+        "6.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "u_3=u_2+3=8.",
+      "hyp": "Pode aplicar a regra apenas uma vez.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-segundo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-009",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se v_1=10 e v_{n+1}=v_n−2, então v_4=",
+      "o": [
+        "4.",
+        "6.",
+        "2.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "10,8,6,4.",
+      "hyp": "Pode fazer apenas duas subtrações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-010",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se a_1=1 e a_{n+1}=2a_n, então a_4=",
+      "o": [
+        "6.",
+        "8.",
+        "4.",
+        "16."
+      ],
+      "a": 1,
+      "sol": "1,2,4,8.",
+      "hyp": "Pode somar 2 em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-multiplicativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-011",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se a_1=3 e a_{n+1}=a_n+2n, então a_2=",
+      "o": [
+        "7.",
+        "6.",
+        "5.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "Para n=1, a_2=3+2=5.",
+      "hyp": "Pode usar n=2 no primeiro passo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-com-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-012",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Na sucessão anterior, a_3=",
+      "o": [
+        "7.",
+        "11.",
+        "5.",
+        "9."
+      ],
+      "a": 3,
+      "sol": "a_2=5 e, para n=2, a_3=5+4=9.",
+      "hyp": "Pode reutilizar n=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-com-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-013",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A sucessão u_n=1/n, n≥1, é...",
+      "o": [
+        "positiva e decrescente.",
+        "negativa e crescente.",
+        "constante.",
+        "alternada de sinal."
+      ],
+      "a": 0,
+      "sol": "Os termos são positivos e diminuem à medida que n aumenta.",
+      "hyp": "Pode olhar apenas para o numerador constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:comportamento-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-014",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A sucessão u_n=n² é...",
+      "o": [
+        "decrescente.",
+        "crescente para n≥1.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 1,
+      "sol": "n² aumenta com n positivo.",
+      "hyp": "Pode confundir crescimento quadrático com sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-015",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A sucessão u_n=(−1)^n é...",
+      "o": [
+        "crescente.",
+        "sempre positiva.",
+        "alternada entre 1 e −1.",
+        "convergente para 0."
+      ],
+      "a": 2,
+      "sol": "O sinal alterna com a paridade de n.",
+      "hyp": "Pode supor que potência grande faz tender a 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:alternancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-016",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u_n=(−1)^n·n, então u_3=",
+      "o": [
+        "3.",
+        "−1.",
+        "1.",
+        "−3."
+      ],
+      "a": 3,
+      "sol": "(−1)^3×3=−3.",
+      "hyp": "Pode esquecer o fator n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:alternancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-017",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u_n=2^n, então u_5=",
+      "o": [
+        "32.",
+        "10.",
+        "16.",
+        "64."
+      ],
+      "a": 0,
+      "sol": "2⁵=32.",
+      "hyp": "Pode calcular 2×5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:exponencial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-018",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u_n=3·2^{n−1}, então u_4=",
+      "o": [
+        "12.",
+        "24.",
+        "18.",
+        "48."
+      ],
+      "a": 1,
+      "sol": "3×2³=24.",
+      "hyp": "Pode usar expoente n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:termo-exponencial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-019",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=4n−1, para que n se tem u_n=19?",
+      "o": [
+        "4.",
+        "6.",
+        "5.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "4n−1=19 => 4n=20 => n=5.",
+      "hyp": "Pode não isolar n corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:indice-por-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-020",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=n²+1, qual termo vale 26?",
+      "o": [
+        "u_4.",
+        "u_6.",
+        "u_25.",
+        "u_5."
+      ],
+      "a": 3,
+      "sol": "n²+1=26 => n²=25 => n=5.",
+      "hyp": "Pode esquecer que n é natural e escolher −5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:indice-por-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-021",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Duas fórmulas diferentes podem definir a mesma sucessão?",
+      "o": [
+        "Sim, se produzirem os mesmos termos para todos os índices do domínio.",
+        "Não, nunca.",
+        "Só se forem polinómios iguais.",
+        "Só nos três primeiros termos."
+      ],
+      "a": 0,
+      "sol": "A igualdade de sucessões depende dos valores em todos os índices, não da aparência algébrica da fórmula.",
+      "hyp": "Pode confundir expressão com função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:mesma-sucessao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-022",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é um termo geral para 3,5,7,9,... começando em n=1?",
+      "o": [
+        "u_n=2n−1.",
+        "u_n=2n+1.",
+        "u_n=n+2.",
+        "u_n=3n."
+      ],
+      "a": 1,
+      "sol": "Para n=1 dá 3 e cresce 2 por termo.",
+      "hyp": "Pode ajustar apenas o primeiro termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:inferir-termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-023",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é um termo geral para 2,4,6,8,... começando em n=1?",
+      "o": [
+        "u_n=n+1.",
+        "u_n=2n+2.",
+        "u_n=2n.",
+        "u_n=n²."
+      ],
+      "a": 2,
+      "sol": "Os termos são os números pares positivos.",
+      "hyp": "Pode deslocar a sequência uma posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:inferir-termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-024",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é um termo geral para 1,4,9,16,...?",
+      "o": [
+        "u_n=2n.",
+        "u_n=n+3.",
+        "u_n=3n−2.",
+        "u_n=n²."
+      ],
+      "a": 3,
+      "sol": "São quadrados perfeitos consecutivos.",
+      "hyp": "Pode confundir diferenças com termo geral linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:inferir-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-025",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é um termo geral para 1,1/2,1/3,1/4,...?",
+      "o": [
+        "u_n=1/n.",
+        "u_n=1/(n+1).",
+        "u_n=n.",
+        "u_n=(−1)^n/n."
+      ],
+      "a": 0,
+      "sol": "O denominador coincide com o índice.",
+      "hyp": "Pode deslocar o índice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:inferir-reciprocos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-026",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é um termo geral para −1,1,−1,1,... começando em n=1?",
+      "o": [
+        "u_n=(−1)^{n+1}.",
+        "u_n=(−1)^n.",
+        "u_n=−n.",
+        "u_n=1/n."
+      ],
+      "a": 1,
+      "sol": "Para n=1, (−1)^1=−1.",
+      "hyp": "Pode inverter a fase da alternância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:inferir-alternada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-027",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_1=4 e u_{n+1}=u_n+5, então uma fórmula explícita é...",
+      "o": [
+        "u_n=4+5n.",
+        "u_n=5n−4.",
+        "u_n=4+5(n−1).",
+        "u_n=4^n."
+      ],
+      "a": 2,
+      "sol": "Após n−1 incrementos de 5, chega-se a u_n.",
+      "hyp": "Pode contar n incrementos em vez de n−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-para-explicita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-028",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_1=2 e u_{n+1}=3u_n, então uma fórmula explícita é...",
+      "o": [
+        "u_n=2·3^n.",
+        "u_n=2+3(n−1).",
+        "u_n=6n.",
+        "u_n=2·3^{n−1}."
+      ],
+      "a": 3,
+      "sol": "Cada passo multiplica por 3.",
+      "hyp": "Pode transformar multiplicação recorrente em soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-para-explicita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-029",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A recorrência u_{n+1}=u_n implica que a sucessão é...",
+      "o": [
+        "constante.",
+        "crescente.",
+        "decrescente.",
+        "alternada."
+      ],
+      "a": 0,
+      "sol": "Cada termo seguinte é igual ao anterior.",
+      "hyp": "Pode pensar que o índice crescente força os termos a crescer.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-030",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u_{n+1}>u_n para todo n do domínio, então a sucessão é...",
+      "o": [
+        "estritamente decrescente.",
+        "estritamente crescente.",
+        "constante.",
+        "necessariamente limitada."
+      ],
+      "a": 1,
+      "sol": "Cada termo é maior do que o anterior.",
+      "hyp": "Pode confundir crescimento com limitação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:criterio-monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-031",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u_{n+1}<u_n para todo n, então a sucessão é...",
+      "o": [
+        "crescente.",
+        "constante.",
+        "estritamente decrescente.",
+        "alternada."
+      ],
+      "a": 2,
+      "sol": "A desigualdade compara termos consecutivos.",
+      "hyp": "Pode inverter a leitura da desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:criterio-monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-032",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para u_n=5−2n, o termo u_{n+1}−u_n é...",
+      "o": [
+        "2.",
+        "5.",
+        "−1.",
+        "−2."
+      ],
+      "a": 3,
+      "sol": "[5−2(n+1)]−[5−2n]=−2.",
+      "hyp": "Pode não distribuir o −2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:diferenca-consecutivos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-033",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para u_n=n², u_{n+1}−u_n é...",
+      "o": [
+        "2n+1.",
+        "n+1.",
+        "n²+1.",
+        "2n."
+      ],
+      "a": 0,
+      "sol": "(n+1)²−n²=2n+1.",
+      "hyp": "Pode esquecer o termo 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:diferenca-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-034",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Como 2n+1>0 para n≥1, a sucessão u_n=n² é...",
+      "o": [
+        "decrescente.",
+        "estritamente crescente.",
+        "constante.",
+        "não monótona."
+      ],
+      "a": 1,
+      "sol": "A diferença entre termos consecutivos é positiva.",
+      "hyp": "Pode ignorar a ligação entre diferença e monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:provar-monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-035",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para u_n=1/n, u_{n+1}−u_n é...",
+      "o": [
+        "1/[n(n+1)].",
+        "1.",
+        "−1/[n(n+1)].",
+        "−1/n."
+      ],
+      "a": 2,
+      "sol": "1/(n+1)−1/n=(n−(n+1))/[n(n+1)]=−1/[n(n+1)].",
+      "hyp": "Pode trocar a ordem dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:diferenca-reciprocos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-036",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Como u_{n+1}−u_n<0 para u_n=1/n, conclui-se que...",
+      "o": [
+        "é crescente.",
+        "é constante.",
+        "não é positiva.",
+        "é estritamente decrescente."
+      ],
+      "a": 3,
+      "sol": "A diferença consecutiva negativa implica decréscimo.",
+      "hyp": "Pode confundir sinal dos termos com sinal da diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:provar-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-037",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_1=1 e u_{n+1}=u_n+n, então u_4=",
+      "o": [
+        "7.",
+        "6.",
+        "10.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "u_2=2, u_3=4, u_4=7.",
+      "hyp": "Pode somar sempre o mesmo n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-038",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na sucessão u_1=1, u_{n+1}=u_n+n, um termo geral é...",
+      "o": [
+        "u_n=n².",
+        "u_n=1+n(n−1)/2.",
+        "u_n=n(n+1)/2.",
+        "u_n=1+n."
+      ],
+      "a": 1,
+      "sol": "Somam-se 1+1+2+...+(n−1)=1+n(n−1)/2.",
+      "hyp": "Pode usar a soma até n em vez de n−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:recorrencia-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-039",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=n/(n+1), então u_{n+1}=",
+      "o": [
+        "n/(n+2).",
+        "(n+1)/(n+1).",
+        "(n+1)/(n+2).",
+        "(n+2)/(n+1)."
+      ],
+      "a": 2,
+      "sol": "Substitui-se n por n+1 em toda a expressão.",
+      "hyp": "Pode alterar apenas o numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:substituir-n+1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-040",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para u_n=n/(n+1), u_{n+1}−u_n é...",
+      "o": [
+        "−1/[(n+1)(n+2)].",
+        "1/(n+1).",
+        "0.",
+        "1/[(n+1)(n+2)]."
+      ],
+      "a": 3,
+      "sol": "[(n+1)/(n+2)]−[n/(n+1)]=1/[(n+1)(n+2)].",
+      "hyp": "Pode errar a diferença de produtos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:diferenca-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-041",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Logo, u_n=n/(n+1) é...",
+      "o": [
+        "estritamente crescente.",
+        "decrescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 0,
+      "sol": "A diferença consecutiva é positiva.",
+      "hyp": "Pode focar-se apenas no denominador crescente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:monotonia-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-042",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=(−1)^n/n, então a sucessão é...",
+      "o": [
+        "sempre positiva e crescente.",
+        "alternada de sinal e não monótona.",
+        "constante.",
+        "sempre negativa."
+      ],
+      "a": 1,
+      "sol": "O fator (−1)^n alterna o sinal e 1/n reduz o módulo.",
+      "hyp": "Pode olhar apenas para o módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:alternada-decrescente-modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-043",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma sucessão pode ser limitada e não ser monótona?",
+      "o": [
+        "Não.",
+        "Só se for constante.",
+        "Sim.",
+        "Só se tiver termos negativos."
+      ],
+      "a": 2,
+      "sol": "Por exemplo, (−1)^n é limitada mas não monótona.",
+      "hyp": "Pode confundir propriedades independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:limitada-nao-monotona",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-044",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma sucessão pode ser crescente e limitada superiormente?",
+      "o": [
+        "Não.",
+        "Só se for constante.",
+        "Só se todos os termos forem inteiros.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Por exemplo, n/(n+1) cresce e fica abaixo de 1.",
+      "hyp": "Pode achar que crescer implica divergir para +∞.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:crescente-limitada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-045",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=2−1/n, qual é uma cota superior natural?",
+      "o": [
+        "2.",
+        "1.",
+        "3/2.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "Como 1/n>0, u_n<2.",
+      "hyp": "Pode achar que a cota superior tem de ser atingida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:cota-superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-046",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para u_n=2−1/n, a sucessão é...",
+      "o": [
+        "decrescente.",
+        "crescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 1,
+      "sol": "À medida que 1/n diminui, 2−1/n aumenta.",
+      "hyp": "Pode pensar que o termo −1/n torna a sucessão decrescente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:monotonia-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-047",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma população começa com 100 indivíduos e aumenta 20 em cada período. Uma recorrência adequada é...",
+      "o": [
+        "P_1=100, P_{n+1}=20P_n.",
+        "P_n=100n².",
+        "P_1=100, P_{n+1}=P_n+20.",
+        "P_{n+1}=P_n−20."
+      ],
+      "a": 2,
+      "sol": "O crescimento é aditivo e constante.",
+      "hyp": "Pode usar crescimento multiplicativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:modelacao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-048",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um capital começa em 500 € e aumenta 5% por período. Uma recorrência adequada é...",
+      "o": [
+        "C_{n+1}=C_n+0,05.",
+        "C_{n+1}=5C_n.",
+        "C_n=500+5n.",
+        "C_1=500, C_{n+1}=1,05C_n."
+      ],
+      "a": 3,
+      "sol": "Aumentar 5% significa multiplicar por 1,05.",
+      "hyp": "Pode somar 0,05 € em vez de 5%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:modelacao-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-049",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma sequência de quadrados usa 4,9,16,25,... unidades. Um termo geral adequado é...",
+      "o": [
+        "u_n=(n+1)².",
+        "u_n=n².",
+        "u_n=n+3.",
+        "u_n=4n."
+      ],
+      "a": 0,
+      "sol": "Para n=1 obtém-se 4 e depois 9,16,25.",
+      "hyp": "Pode esquecer o deslocamento do índice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:modelacao-padrao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-TR-050",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-termo-recorrencia",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma máquina perde 3 unidades de capacidade a cada ciclo, começando em 50. Uma recorrência adequada é...",
+      "o": [
+        "u_1=50, u_{n+1}=3u_n.",
+        "u_1=50, u_{n+1}=u_n−3.",
+        "u_n=50+3n.",
+        "u_{n+1}=u_n+3."
+      ],
+      "a": 1,
+      "sol": "Há uma diminuição aditiva constante de 3 por ciclo.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-termo-recorrencia:modelacao-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
