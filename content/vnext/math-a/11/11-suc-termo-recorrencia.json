@@ -206,7 +206,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Na mesma sucessão, u_3=",
+      "q": "Se u_1=2 e u_{n+1}=u_n+3, então u_3=",
       "o": [
         "5.",
         "11.",
