@@ -1,0 +1,1365 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-cplx",
+  "subtopicId": "12-cplx-forma-algebrica",
+  "subtopic": "Forma algébrica, parte real/imaginária e igualdade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha forma a+bi, partes real/imaginária, igualdade, classificação, parâmetros e transformações simples por multiplicação por i. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12CPLX-FA-001",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A forma algébrica de um número complexo é...",
+      "o": [
+        "a+bi, com a,b reais.",
+        "a/b.",
+        "a+bx.",
+        "r(cosθ+i sinθ) apenas.",
+        "a²+b²."
+      ],
+      "a": 0,
+      "sol": "Todo complexo pode escrever-se como a+bi.",
+      "hyp": "Pode confundir forma algébrica com trigonométrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:forma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-002",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em z=a+bi, a é...",
+      "o": [
+        "a parte imaginária.",
+        "a parte real.",
+        "o módulo.",
+        "o argumento."
+      ],
+      "a": 1,
+      "sol": "Re(z)=a.",
+      "hyp": "Pode trocar as duas componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:parte-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-003",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em z=a+bi, b é...",
+      "o": [
+        "a parte real.",
+        "o módulo.",
+        "o coeficiente da parte imaginária.",
+        "o argumento."
+      ],
+      "a": 2,
+      "sol": "Im(z)=b.",
+      "hyp": "Pode considerar bi como valor da parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:parte-imaginaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-004",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se z=3−2i, então Re(z)=",
+      "o": [
+        "−2.",
+        "2.",
+        "−3.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "A parte real é o termo sem i.",
+      "hyp": "Pode escolher o coeficiente de i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:ler-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-005",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se z=3−2i, então Im(z)=",
+      "o": [
+        "−2.",
+        "3.",
+        "2.",
+        "−3."
+      ],
+      "a": 0,
+      "sol": "A parte imaginária é o coeficiente de i.",
+      "hyp": "Pode omitir o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:ler-imaginaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-006",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se z=−5+7i, Re(z) é...",
+      "o": [
+        "7.",
+        "−5.",
+        "5.",
+        "−7."
+      ],
+      "a": 1,
+      "sol": "Re(z)=−5.",
+      "hyp": "Pode escolher a parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:ler-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-007",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se z=−5+7i, Im(z) é...",
+      "o": [
+        "−5.",
+        "−7.",
+        "7.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "Im(z)=7.",
+      "hyp": "Pode trocar as partes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:ler-imaginaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-008",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um número real r, visto em C, escreve-se...",
+      "o": [
+        "0+ri.",
+        "ri.",
+        "r+i.",
+        "r+0i."
+      ],
+      "a": 3,
+      "sol": "A parte imaginária é zero.",
+      "hyp": "Pode trocar o papel das componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:real-em-C",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-009",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um imaginário puro não nulo tem forma...",
+      "o": [
+        "bi, com b≠0.",
+        "a+0i, com a≠0.",
+        "a+bi com a,b≠0.",
+        "a real positivo."
+      ],
+      "a": 0,
+      "sol": "A parte real é zero.",
+      "hyp": "Pode achar que qualquer complexo não real é imaginário puro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:imaginario-puro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-010",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O número 4i é...",
+      "o": [
+        "real.",
+        "imaginário puro.",
+        "igual a 4.",
+        "de parte imaginária zero."
+      ],
+      "a": 1,
+      "sol": "Tem parte real 0 e parte imaginária 4.",
+      "hyp": "Pode tratar i como unidade real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:classificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-011",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O número −3 é, em C...",
+      "o": [
+        "imaginário puro não nulo.",
+        "de parte real zero.",
+        "real com parte imaginária zero.",
+        "não complexo."
+      ],
+      "a": 2,
+      "sol": "−3=−3+0i.",
+      "hyp": "Pode pensar que complexos excluem os reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:classificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-012",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Dois complexos a+bi e c+di são iguais se e só se...",
+      "o": [
+        "a+b=c+d.",
+        "a=d e b=c.",
+        "a²+b²=c²+d².",
+        "a=c e b=d."
+      ],
+      "a": 3,
+      "sol": "Igualdade exige igualdade componente a componente.",
+      "hyp": "Pode confundir igualdade com igual módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:igualdade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-013",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se 2+xi=2−3i, então x=",
+      "o": [
+        "−3.",
+        "3.",
+        "2.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "Igualando partes imaginárias: x=−3.",
+      "hyp": "Pode comparar x com a parte real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:igualdade-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-014",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se a+4i=−2+4i, então a=",
+      "o": [
+        "2.",
+        "−2.",
+        "4.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "As partes reais têm de coincidir.",
+      "hyp": "Pode usar a parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:igualdade-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-015",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se x+(y−1)i=3+2i, então...",
+      "o": [
+        "x=2 e y=3.",
+        "x=3 e y=2.",
+        "x=3 e y=3.",
+        "x=2 e y=2."
+      ],
+      "a": 2,
+      "sol": "x=3 e y−1=2 => y=3.",
+      "hyp": "Pode esquecer somar 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:sistema-partes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-016",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O oposto de z=3−2i é...",
+      "o": [
+        "3+2i.",
+        "−3−2i.",
+        "2−3i.",
+        "−3+2i."
+      ],
+      "a": 3,
+      "sol": "Muda-se o sinal de ambas as componentes.",
+      "hyp": "Pode confundir oposto com conjugado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-017",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O oposto de −1+5i é...",
+      "o": [
+        "1−5i.",
+        "1+5i.",
+        "−1−5i.",
+        "5−i."
+      ],
+      "a": 0,
+      "sol": "−z=1−5i.",
+      "hyp": "Pode mudar apenas um sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-018",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se Re(z)=0, então z é...",
+      "o": [
+        "necessariamente real não nulo.",
+        "imaginário puro ou zero.",
+        "necessariamente 1.",
+        "de módulo zero."
+      ],
+      "a": 1,
+      "sol": "z=bi; pode ser 0 se b=0.",
+      "hyp": "Pode excluir o zero ou classificar como real apenas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:real-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-019",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se Im(z)=0, então z é...",
+      "o": [
+        "imaginário puro não real.",
+        "sempre zero.",
+        "real.",
+        "sempre positivo."
+      ],
+      "a": 2,
+      "sol": "z=a+0i.",
+      "hyp": "Pode pensar que Im=0 implica z=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:imag-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-020",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se z=x+yi e z=0, então...",
+      "o": [
+        "x=y.",
+        "x=1,y=0.",
+        "x=0,y=1.",
+        "x=0 e y=0."
+      ],
+      "a": 3,
+      "sol": "O complexo zero tem ambas as partes nulas.",
+      "hyp": "Pode tratar 0 como uma única condição insuficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:zero-complexo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-021",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=(2a−1)+(b+3)i=5−2i, então a=",
+      "o": [
+        "3.",
+        "2.",
+        "−3.",
+        "5."
+      ],
+      "a": 0,
+      "sol": "2a−1=5 => a=3.",
+      "hyp": "Pode usar a equação da parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-022",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, b=",
+      "o": [
+        "5.",
+        "−5.",
+        "−2.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "b+3=−2 => b=−5.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-023",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se (x+1)+(2y−3)i=4+5i, então x=",
+      "o": [
+        "4.",
+        "2.",
+        "3.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "x+1=4 => x=3.",
+      "hyp": "Pode não subtrair 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:sistema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-024",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, y=",
+      "o": [
+        "3.",
+        "5.",
+        "1.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "2y−3=5 =>2y=8 =>y=4.",
+      "hyp": "Pode somar ou dividir incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:sistema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-025",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição Re(z)=3 descreve, na forma z=x+yi...",
+      "o": [
+        "todos os complexos 3+yi.",
+        "apenas z=3.",
+        "todos os yi.",
+        "os complexos de módulo 3."
+      ],
+      "a": 0,
+      "sol": "A parte real está fixa e a imaginária é livre.",
+      "hyp": "Pode reduzir uma condição a um único número.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:condicao-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-026",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição Im(z)=−2 descreve...",
+      "o": [
+        "apenas −2i.",
+        "todos os complexos x−2i.",
+        "todos os reais −2.",
+        "complexos de parte real −2."
+      ],
+      "a": 1,
+      "sol": "A parte imaginária fica fixa em −2.",
+      "hyp": "Pode trocar real e imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:condicao-imag",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-027",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se Re(z)=Im(z) e z=4+bi, então b=",
+      "o": [
+        "−4.",
+        "0.",
+        "4.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "Re(z)=4 e Im(z)=b.",
+      "hyp": "Pode impor b=−4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:partes-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-028",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se Re(z)=−Im(z) e z=3+bi, então b=",
+      "o": [
+        "3.",
+        "0.",
+        "6.",
+        "−3."
+      ],
+      "a": 3,
+      "sol": "3=−b => b=−3.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:partes-opostas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-029",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=a+bi é simultaneamente real e imaginário puro, então...",
+      "o": [
+        "z=0.",
+        "a=b=1.",
+        "z=i.",
+        "não existe."
+      ],
+      "a": 0,
+      "sol": "Ser real exige b=0; ser imaginário puro exige a=0.",
+      "hyp": "Pode achar que as classes são disjuntas sem interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:intersecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-030",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A parte real de iz, para z=a+bi, é...",
+      "o": [
+        "a.",
+        "−b.",
+        "b.",
+        "−a."
+      ],
+      "a": 1,
+      "sol": "iz=ai+b i²=−b+ai.",
+      "hyp": "Pode multiplicar i apenas pela parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:multiplicar-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-031",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A parte imaginária de iz é...",
+      "o": [
+        "−b.",
+        "b.",
+        "a.",
+        "−a."
+      ],
+      "a": 2,
+      "sol": "iz=−b+ai.",
+      "hyp": "Pode trocar as novas componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:multiplicar-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-032",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=2−3i, então iz=",
+      "o": [
+        "−3+2i.",
+        "2+3i.",
+        "3−2i.",
+        "3+2i."
+      ],
+      "a": 3,
+      "sol": "i(2−3i)=2i−3i²=3+2i.",
+      "hyp": "Pode esquecer i²=−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:multiplicar-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-033",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=a+bi e iz=z, então z=",
+      "o": [
+        "0.",
+        "1+i.",
+        "i.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "−b=a e a=b; daí a=b=0.",
+      "hyp": "Pode assumir que i atua como 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:equacao-iz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-034",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=a+bi e z=−z, então...",
+      "o": [
+        "z é imaginário puro.",
+        "z=0.",
+        "z é real.",
+        "qualquer z serve."
+      ],
+      "a": 1,
+      "sol": "2z=0.",
+      "hyp": "Pode pensar que apenas a parte real muda.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:oposto-igual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-035",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Re(5−7i)+Im(5−7i)=",
+      "o": [
+        "12.",
+        "2.",
+        "−2.",
+        "−12."
+      ],
+      "a": 2,
+      "sol": "5+(−7)=−2.",
+      "hyp": "Pode usar módulo dos coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:combinar-partes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-036",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Re(−2+6i)−Im(−2+6i)=",
+      "o": [
+        "4.",
+        "8.",
+        "−4.",
+        "−8."
+      ],
+      "a": 3,
+      "sol": "−2−6=−8.",
+      "hyp": "Pode trocar a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:combinar-partes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-037",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=(m²−1)+(m−1)i é real, então...",
+      "o": [
+        "m=1.",
+        "m=−1.",
+        "m=0.",
+        "m=±1."
+      ],
+      "a": 0,
+      "sol": "Para z ser real, Im(z)=m−1=0.",
+      "hyp": "Pode impor a parte real igual a zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:real-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-038",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=(m+2)+(m²−4)i é imaginário puro (admitindo zero), então...",
+      "o": [
+        "m=2.",
+        "m=−2.",
+        "m=±2.",
+        "m=0."
+      ],
+      "a": 1,
+      "sol": "Parte real zero implica m=−2; nesse caso z=0, que satisfaz a condição admitindo zero.",
+      "hyp": "Pode não verificar ambas as condições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:imaginario-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-039",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=(m−3)+(2m+1)i tem partes real e imaginária iguais, então m=",
+      "o": [
+        "4.",
+        "2/3.",
+        "−4.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "m−3=2m+1 => −m=4 => m=−4.",
+      "hyp": "Pode mover termos com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:partes-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-040",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=(2m−1)+(m+5)i tem partes opostas, então m=",
+      "o": [
+        "4/3.",
+        "−2.",
+        "2.",
+        "−4/3."
+      ],
+      "a": 3,
+      "sol": "2m−1=−(m+5) =>3m=−4.",
+      "hyp": "Pode esquecer distribuir o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:partes-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-041",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Re(z)=2 e Im(z)=−5, então z=",
+      "o": [
+        "2−5i.",
+        "−5+2i.",
+        "2+5i.",
+        "−2−5i."
+      ],
+      "a": 0,
+      "sol": "Reconstrói-se z=Re(z)+Im(z)i.",
+      "hyp": "Pode trocar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:reconstruir",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-042",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Re(z)=0 e Im(z)=7, então z=",
+      "o": [
+        "7.",
+        "7i.",
+        "−7i.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "z=0+7i.",
+      "hyp": "Pode omitir i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:reconstruir",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-043",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A aplicação z↦iz, na forma algébrica, transforma (a,b) em...",
+      "o": [
+        "(b,a).",
+        "(−a,−b).",
+        "(−b,a).",
+        "(a,−b)."
+      ],
+      "a": 2,
+      "sol": "iz=−b+ai.",
+      "hyp": "Pode trocar a regra de rotação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:transformacao-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-044",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Aplicar duas vezes z↦iz produz...",
+      "o": [
+        "z.",
+        "iz.",
+        "conjugado de z.",
+        "−z."
+      ],
+      "a": 3,
+      "sol": "i(iz)=i²z=−z.",
+      "hyp": "Pode achar que volta ao original após duas aplicações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:transformacao-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-045",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Aplicar quatro vezes z↦iz produz...",
+      "o": [
+        "z.",
+        "−z.",
+        "iz.",
+        "−iz."
+      ],
+      "a": 0,
+      "sol": "i⁴z=z.",
+      "hyp": "Pode esquecer o período 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:transformacao-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-046",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1+i, então i²z=",
+      "o": [
+        "1+i.",
+        "−1−i.",
+        "−1+i.",
+        "1−i."
+      ],
+      "a": 1,
+      "sol": "i²z=−z.",
+      "hyp": "Pode mudar só a parte real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:i2z",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-047",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=x+yi e iz=4−3i, então z=",
+      "o": [
+        "3+4i.",
+        "−3+4i.",
+        "−3−4i.",
+        "4+3i."
+      ],
+      "a": 2,
+      "sol": "iz=−y+xi=4−3i => y=−4,x=−3.",
+      "hyp": "Pode trocar sinais ao comparar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:resolver-iz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-048",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma grandeza é representada por z=12+5i. A sua componente real é...",
+      "o": [
+        "5.",
+        "17.",
+        "13.",
+        "12."
+      ],
+      "a": 3,
+      "sol": "A componente real é o coeficiente sem i.",
+      "hyp": "Pode somar componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:modelacao-componentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-049",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num sinal complexo z=−8+6i, a componente imaginária é...",
+      "o": [
+        "6.",
+        "−8.",
+        "−6.",
+        "10."
+      ],
+      "a": 0,
+      "sol": "Im(z)=6.",
+      "hyp": "Pode confundir o coeficiente com bi.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:modelacao-componentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FA-050",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-algebrica",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=a+bi e Re(z)+iIm(z)=5−2i, então...",
+      "o": [
+        "z=−2+5i.",
+        "z=5−2i.",
+        "z=5+2i.",
+        "z=−5−2i."
+      ],
+      "a": 1,
+      "sol": "A expressão Re(z)+iIm(z) é exatamente z.",
+      "hyp": "Pode trocar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-algebrica:identidade-forma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
