@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-ie",
+  "subtopicId": "12-ie-intervalos-confianca",
+  "subtopic": "Intervalos de confiança, margem de erro e interpretação",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha construção/interpretação de intervalos de confiança, margem de erro, efeito de n e nível, proporções, t introdutória, planeamento e limites da inferência. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12IE-IC-001",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um intervalo de confiança procura...",
+      "o": [
+        "dar um intervalo plausível para um parâmetro populacional.",
+        "dar o valor exato do parâmetro.",
+        "eliminar a variabilidade amostral.",
+        "descrever apenas os dados individuais."
+      ],
+      "a": 0,
+      "sol": "Combina estimativa pontual e margem de erro.",
+      "hyp": "Pode confundir intervalo com certeza absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-002",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um intervalo de confiança típico tem forma...",
+      "o": [
+        "parâmetro ± n.",
+        "estimativa ± margem de erro.",
+        "média ± população.",
+        "erro padrão ± estimativa."
+      ],
+      "a": 1,
+      "sol": "O centro é a estimativa e a largura depende da incerteza.",
+      "hyp": "Pode trocar centro e margem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:forma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-003",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A margem de erro é geralmente...",
+      "o": [
+        "estimativa × n.",
+        "erro padrão/n.",
+        "quantil crítico × erro padrão.",
+        "parâmetro−estimativa."
+      ],
+      "a": 2,
+      "sol": "Combina nível de confiança e variabilidade amostral.",
+      "hyp": "Pode confundir erro realizado e margem planejada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:margem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-004",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Aumentar o nível de confiança, mantendo tudo o resto, tende a...",
+      "o": [
+        "estreitar o intervalo.",
+        "não alterar nada.",
+        "mudar o centro obrigatoriamente.",
+        "alargar o intervalo."
+      ],
+      "a": 3,
+      "sol": "Maior confiança exige quantil crítico maior.",
+      "hyp": "Pode pensar que mais confiança dá intervalo mais estreito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:nivel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-005",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Aumentar o tamanho da amostra, mantendo tudo o resto, tende a...",
+      "o": [
+        "estreitar o intervalo.",
+        "alargar o intervalo.",
+        "mudar o parâmetro.",
+        "aumentar o erro padrão."
+      ],
+      "a": 0,
+      "sol": "O erro padrão diminui com n.",
+      "hyp": "Pode pensar que mais dados aumentam incerteza.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-006",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um intervalo de 95% não significa que...",
+      "o": [
+        "o procedimento cobre o parâmetro em cerca de95% de repetições sob as condições.",
+        "há 95% de probabilidade de o parâmetro fixo estar neste intervalo específico, na interpretação frequentista clássica.",
+        "o intervalo depende da amostra.",
+        "existe incerteza amostral."
+      ],
+      "a": 1,
+      "sol": "Depois de calculado, o intervalo específico cobre ou não cobre o parâmetro; 95% refere-se ao procedimento repetido.",
+      "hyp": "Pode interpretar diretamente como probabilidade posterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:interpretacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-007",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A interpretação frequentista correta de 95% é...",
+      "o": [
+        "95% dos dados estão dentro do intervalo.",
+        "o parâmetro muda de amostra para amostra.",
+        "em muitas repetições do procedimento, cerca de95% dos intervalos conteriam o parâmetro.",
+        "há 95% de certeza subjetiva por definição."
+      ],
+      "a": 2,
+      "sol": "A cobertura refere-se à frequência de sucesso do método.",
+      "hyp": "Pode confundir intervalo para parâmetro com intervalo para dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:cobertura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-008",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se estimativa=50 e margem=3, o intervalo é...",
+      "o": [
+        "[50,53].",
+        "[3,50].",
+        "[53,56].",
+        "[47,53]."
+      ],
+      "a": 3,
+      "sol": "50±3.",
+      "hyp": "Pode aplicar margem só para cima.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-009",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se p̂=0,60 e margem=0,05, o intervalo é...",
+      "o": [
+        "[0,55;0,65].",
+        "[0,60;0,65].",
+        "[0,05;0,60].",
+        "[0,50;0,70]."
+      ],
+      "a": 0,
+      "sol": "0,60±0,05.",
+      "hyp": "Pode dobrar a margem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-010",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A largura total de um intervalo estimativa±M é...",
+      "o": [
+        "M.",
+        "2M.",
+        "M/2.",
+        "estimativa+M."
+      ],
+      "a": 1,
+      "sol": "Vai de estimativa−M a estimativa+M.",
+      "hyp": "Pode confundir margem e largura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:largura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-011",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um intervalo [12,18] tem centro...",
+      "o": [
+        "6.",
+        "3.",
+        "15.",
+        "30."
+      ],
+      "a": 2,
+      "sol": "(12+18)/2=15.",
+      "hyp": "Pode usar a amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-012",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O mesmo intervalo tem margem de erro...",
+      "o": [
+        "6.",
+        "15.",
+        "30.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "Metade da amplitude6 é3.",
+      "hyp": "Pode usar a largura total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:margem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-013",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para um IC Normal aproximado da média com σ conhecido, a margem é...",
+      "o": [
+        "z* σ/√n.",
+        "z*σ/n.",
+        "σ√n/z*.",
+        "μ±σ."
+      ],
+      "a": 0,
+      "sol": "É quantil crítico vezes erro padrão.",
+      "hyp": "Pode dividir por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:media-sigma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-014",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para 95%, usando z*=1,96, σ=10 e n=100, a margem é...",
+      "o": [
+        "0,196.",
+        "1,96.",
+        "19,6.",
+        "0,98."
+      ],
+      "a": 1,
+      "sol": "1,96×10/10=1,96.",
+      "hyp": "Pode dividir por n duas vezes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:media-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-015",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se a média amostral é40 no caso anterior, o IC95% é aproximadamente...",
+      "o": [
+        "[30;50].",
+        "[39,02;40,98].",
+        "[38,04;41,96].",
+        "[40;41,96]."
+      ],
+      "a": 2,
+      "sol": "40±1,96.",
+      "hyp": "Pode usar 0,98 como margem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:media-ic",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-016",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para uma proporção, a margem Normal aproximada usa...",
+      "o": [
+        "z*p̂/n.",
+        "p̂±n.",
+        "√n/p̂.",
+        "z*√[p̂(1−p̂)/n]."
+      ],
+      "a": 3,
+      "sol": "Usa o erro padrão estimado da proporção.",
+      "hyp": "Pode esquecer 1−p̂.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:prop-margem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-017",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se p̂=0,5,n=400,z*=1,96, a margem é aproximadamente...",
+      "o": [
+        "0,049.",
+        "0,025.",
+        "0,098.",
+        "0,5."
+      ],
+      "a": 0,
+      "sol": "EP=√(0,25/400)=0,025; M≈1,96×0,025=0,049.",
+      "hyp": "Pode confundir EP e margem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:prop-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-018",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Logo um IC95% aproximado para p é...",
+      "o": [
+        "[0,475;0,525].",
+        "[0,451;0,549].",
+        "[0,402;0,598].",
+        "[0,5;0,549]."
+      ],
+      "a": 1,
+      "sol": "0,5±0,049.",
+      "hyp": "Pode usar EP em vez da margem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:prop-ic",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-019",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se um IC para p inclui 0,5, então...",
+      "o": [
+        "p=0,5 exatamente.",
+        "p≠0,5.",
+        "0,5 é compatível com os dados ao nível associado, não prova que p=0,5.",
+        "a amostra é inválida."
+      ],
+      "a": 2,
+      "sol": "Inclusão no intervalo significa que esse valor não é incompatível com a incerteza considerada.",
+      "hyp": "Pode transformar compatibilidade em igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:inclusao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-020",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se um IC95% para diferença de médias não inclui0, isso sugere...",
+      "o": [
+        "igualdade exata.",
+        "que ambas as médias são0.",
+        "certeza absoluta de causalidade.",
+        "uma diferença populacional diferente de0 sob o modelo e nível considerados."
+      ],
+      "a": 3,
+      "sol": "Zero é o valor de 'sem diferença' e fica fora do intervalo.",
+      "hyp": "Pode confundir significância com causalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-021",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Mantendo z* e σ, para reduzir a margem para metade precisamos...",
+      "o": [
+        "quadruplicar n.",
+        "duplicar n.",
+        "reduzir n para metade.",
+        "multiplicar n por8."
+      ],
+      "a": 0,
+      "sol": "Margem∝1/√n.",
+      "hyp": "Pode usar relação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-022",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para reduzir a margem a um terço, n deve ser multiplicado por...",
+      "o": [
+        "3.",
+        "9.",
+        "6.",
+        "27."
+      ],
+      "a": 1,
+      "sol": "1/√9=1/3.",
+      "hyp": "Pode usar o mesmo fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-023",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Passar de 95% para99% de confiança, com mesmos dados, faz a margem...",
+      "o": [
+        "diminuir.",
+        "ficar igual.",
+        "aumentar.",
+        "mudar de sinal."
+      ],
+      "a": 2,
+      "sol": "O quantil crítico99% é maior.",
+      "hyp": "Pode pensar que maior confiança é mais precisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:nivel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-024",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Há um compromisso entre...",
+      "o": [
+        "média e mediana apenas.",
+        "n e população sempre.",
+        "parâmetro e estimativa serem iguais.",
+        "nível de confiança e precisão/largura do intervalo."
+      ],
+      "a": 3,
+      "sol": "Com dados fixos, mais confiança implica intervalo mais largo.",
+      "hyp": "Pode querer maximizar simultaneamente confiança e estreiteza sem custo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:tradeoff",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-025",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se um IC95% é [20,24], então estimativa e margem são...",
+      "o": [
+        "22 e2.",
+        "20 e4.",
+        "24 e2.",
+        "22 e4."
+      ],
+      "a": 0,
+      "sol": "Centro22, meia largura2.",
+      "hyp": "Pode usar a largura inteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:reconstruir",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-026",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se um IC90% tem margem4 e centro100, é...",
+      "o": [
+        "[100,104].",
+        "[96,104].",
+        "[94,106].",
+        "[90,110]."
+      ],
+      "a": 1,
+      "sol": "Centro±4.",
+      "hyp": "Pode usar o nível90 como largura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-027",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um intervalo mais estreito é mais preciso, mas só é melhor se...",
+      "o": [
+        "tiver nível de confiança menor sempre.",
+        "for centrado em0.",
+        "mantiver nível de confiança e pressupostos adequados comparáveis.",
+        "usar menos dados."
+      ],
+      "a": 2,
+      "sol": "Largura isolada não basta para comparar procedimentos com níveis distintos.",
+      "hyp": "Pode comparar largura sem contexto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:comparar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-028",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um IC muito estreito obtido de amostra enviesada pode...",
+      "o": [
+        "corrigir o viés.",
+        "ser melhor que qualquer IC largo.",
+        "garantir representatividade.",
+        "ser enganador e não cobrir o parâmetro alvo corretamente."
+      ],
+      "a": 3,
+      "sol": "Inferência probabilística não corrige um desenho de seleção inadequado.",
+      "hyp": "Pode confundir precisão com validade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:vies",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-029",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Cobertura nominal de95% depende de...",
+      "o": [
+        "pressupostos/modelo e procedimento estarem razoavelmente satisfeitos.",
+        "apenas escrever 95% no relatório.",
+        "n ser exatamente100.",
+        "a média ser positiva."
+      ],
+      "a": 0,
+      "sol": "A cobertura real pode desviar-se se as condições falharem.",
+      "hyp": "Pode tratar nominal como garantia automática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:cobertura-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-030",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para proporções muito próximas de0 ou1 e n pequeno, o IC Normal simples pode...",
+      "o": [
+        "ser sempre exato.",
+        "ter desempenho fraco e até limites fora de [0,1].",
+        "ter margem zero.",
+        "ser independente de n."
+      ],
+      "a": 1,
+      "sol": "A aproximação simétrica Normal é frágil nos extremos.",
+      "hyp": "Pode usar fórmula sem avaliar adequação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:prop-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-031",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um limite inferior negativo para uma proporção pelo método Normal...",
+      "o": [
+        "significa p<0.",
+        "deve ser aceite literalmente.",
+        "é sinal de que a aproximação simples pode ser inadequada e o parâmetro real continua em [0,1].",
+        "prova erro de cálculo sempre."
+      ],
+      "a": 2,
+      "sol": "Proporções populacionais não podem ser negativas.",
+      "hyp": "Pode interpretar limite aproximado como valor fisicamente possível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:limites",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-032",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Quando σ é desconhecido para a média, em situações clássicas usa-se frequentemente...",
+      "o": [
+        "p̂ e Normal sempre.",
+        "σ=0.",
+        "apenas a mediana.",
+        "s e uma distribuição t de Student."
+      ],
+      "a": 3,
+      "sol": "A incerteza de estimar σ é incorporada pela t.",
+      "hyp": "Pode tratar σ desconhecido como conhecido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:t-student",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-033",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A distribuição t tem, para poucos graus de liberdade...",
+      "o": [
+        "caudas mais pesadas que a Normal.",
+        "caudas mais leves sempre.",
+        "suporte apenas positivo.",
+        "média infinita sempre."
+      ],
+      "a": 0,
+      "sol": "Isso gera quantis críticos maiores em amostras pequenas.",
+      "hyp": "Pode pensar que t é mais estreita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:t-caudas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-034",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "À medida que os graus de liberdade aumentam, a t aproxima-se...",
+      "o": [
+        "da Uniforme.",
+        "da Normal padrão.",
+        "da Exponencial.",
+        "da Binomial."
+      ],
+      "a": 1,
+      "sol": "Com grande n, a incerteza adicional sobre σ torna-se menor.",
+      "hyp": "Pode pensar que t nunca se aproxima da Normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:t-normal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-035",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄=10,s=4,n=16 e t*=2,131, a margem é aproximadamente...",
+      "o": [
+        "0,533.",
+        "8,524.",
+        "2,131.",
+        "4,262."
+      ],
+      "a": 2,
+      "sol": "EP=4/4=1; M=2,131.",
+      "hyp": "Pode dividir novamente por4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:t-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-036",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O IC correspondente é aproximadamente...",
+      "o": [
+        "[9,467;10,533].",
+        "[5,738;14,262].",
+        "[8;12].",
+        "[7,869;12,131]."
+      ],
+      "a": 3,
+      "sol": "10±2,131.",
+      "hyp": "Pode usar margem0,533.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:t-ic",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-037",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para planeamento conservador de IC para p com p desconhecido, usa-se p=0,5 porque...",
+      "o": [
+        "maximiza p(1−p).",
+        "minimiza p(1−p).",
+        "torna margem zero.",
+        "é sempre o verdadeiro p."
+      ],
+      "a": 0,
+      "sol": "A variância Bernoulli é máxima em0,5.",
+      "hyp": "Pode escolher extremos0 ou1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:planeamento-prop",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-038",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para margem≤0,03 a95%, usando z*=1,96 e p=0,5, precisamos aproximadamente de n≥...",
+      "o": [
+        "384.",
+        "1068.",
+        "196.",
+        "33."
+      ],
+      "a": 1,
+      "sol": "n≥(1,96²×0,25)/(0,03²)≈1067,1, arredondando para cima1068.",
+      "hyp": "Pode usar a fórmula sem quadrar z ou margem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:n-prop",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-039",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para margem≤2 com σ=10 e z*=1,96, n deve satisfazer...",
+      "o": [
+        "n≥25.",
+        "n≥49.",
+        "n≥97.",
+        "n≥196."
+      ],
+      "a": 2,
+      "sol": "1,96·10/√n≤2 =>√n≥9,8 =>n≥96,04, logo97.",
+      "hyp": "Pode arredondar para baixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:n-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-040",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "No planeamento de n, arredonda-se geralmente...",
+      "o": [
+        "para baixo.",
+        "para o inteiro par mais próximo.",
+        "sempre para100.",
+        "para cima."
+      ],
+      "a": 3,
+      "sol": "Precisamos garantir que a margem não excede o alvo.",
+      "hyp": "Pode reduzir n e perder a garantia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:arredondar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-041",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se 20 intervalos de95% forem construídos em estudos independentes idênticos, esperamos exatamente19 a cobrir?",
+      "o": [
+        "Não; 19 é uma média aproximada, não garantia em cada conjunto de20.",
+        "Sim, exatamente.",
+        "Sempre20.",
+        "Sempre18."
+      ],
+      "a": 0,
+      "sol": "A cobertura é probabilística ao longo de repetições.",
+      "hyp": "Pode transformar frequência esperada em contagem fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:repeticoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-042",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "É possível que os 20 intervalos anteriores cubram todos o parâmetro?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se o parâmetro for0.",
+        "Só com nível100%."
+      ],
+      "a": 1,
+      "sol": "95% de cobertura não impede uma sequência particular de20 sucessos.",
+      "hyp": "Pode interpretar 5% de falhas como quota obrigatória.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:repeticoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-043",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um IC de100% em contexto irrestrito seria normalmente...",
+      "o": [
+        "sempre de largura zero.",
+        "igual à estimativa pontual.",
+        "tão largo que perde utilidade, potencialmente todo o espaço paramétrico.",
+        "mais estreito que95%."
+      ],
+      "a": 2,
+      "sol": "Cobertura total exige enorme conservadorismo.",
+      "hyp": "Pode achar que mais confiança melhora tudo sem custo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:100",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-044",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se repetirmos a amostragem, o parâmetro populacional...",
+      "o": [
+        "muda e os intervalos ficam fixos.",
+        "muda exatamente com a média.",
+        "é aleatório por definição frequentista.",
+        "permanece fixo e os intervalos mudam."
+      ],
+      "a": 3,
+      "sol": "A aleatoriedade vem da amostra e do intervalo construído.",
+      "hyp": "Pode atribuir aleatoriedade ao parâmetro fixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:parametro-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-045",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma sondagem dá p̂=0,52 com IC95% [0,49;0,55]. Uma leitura cuidadosa é...",
+      "o": [
+        "os dados são compatíveis com valores próximos de metade e não sustentam uma separação clara de0,50 ao nível considerado.",
+        "p=0,52 exatamente.",
+        "há 95% dos eleitores entre0,49 e0,55.",
+        "p>0,5 está provado."
+      ],
+      "a": 0,
+      "sol": "0,50 está dentro do intervalo.",
+      "hyp": "Pode sobreinterpretar a estimativa pontual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:sondagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-046",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Outra sondagem dá p̂=0,56 com IC95% [0,53;0,59]. Relativamente a0,50...",
+      "o": [
+        "p=0,56 é exato.",
+        "0,50 fica fora do intervalo.",
+        "não podemos dizer nada.",
+        "o nível passou a99%."
+      ],
+      "a": 1,
+      "sol": "O intervalo está integralmente acima de0,50.",
+      "hyp": "Pode olhar apenas para a margem sem comparar valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:sondagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-047",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Dois ICs de estudos diferentes que se sobrepõem...",
+      "o": [
+        "provam igualdade.",
+        "provam diferença.",
+        "não permitem uma regra simples universal de 'sem diferença'; a comparação formal depende do IC da diferença/teste adequado.",
+        "têm de ter o mesmo centro."
+      ],
+      "a": 2,
+      "sol": "Sobreposição de ICs individuais não equivale diretamente a um teste de diferença.",
+      "hyp": "Pode usar uma heurística visual como regra formal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:sobreposicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-048",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um IC deve ser reportado com...",
+      "o": [
+        "apenas a margem.",
+        "apenas o centro.",
+        "apenas n.",
+        "nível de confiança, estimativa, limites e contexto/método."
+      ],
+      "a": 3,
+      "sol": "A interpretação depende de todos esses elementos.",
+      "hyp": "Pode omitir informação essencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:reportar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-049",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A margem de erro estatística de uma sondagem não inclui automaticamente...",
+      "o": [
+        "viés de cobertura, não resposta ou formulação de perguntas.",
+        "variabilidade amostral.",
+        "efeito do tamanho n.",
+        "quantil do nível de confiança."
+      ],
+      "a": 0,
+      "sol": "Erros não amostrais precisam de avaliação separada.",
+      "hyp": "Pode tratar '±3%' como erro total de tudo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:margem-limitacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IC-050",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-intervalos-confianca",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Um intervalo de confiança útil combina...",
+      "o": [
+        "apenas um intervalo estreito.",
+        "estimativa, erro padrão, nível de confiança e pressupostos credíveis.",
+        "apenas n grande.",
+        "certeza absoluta sobre o parâmetro."
+      ],
+      "a": 1,
+      "sol": "Cobertura e interpretação dependem do procedimento e do desenho.",
+      "hyp": "Pode reduzir um IC à largura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-intervalos-confianca:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
