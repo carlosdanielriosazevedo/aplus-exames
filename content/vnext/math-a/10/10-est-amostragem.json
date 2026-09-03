@@ -692,7 +692,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Na mesma população de 800 alunos, quantos do 10.º entram numa amostra proporcional de 150?",
+      "q": "Uma população tem 800 alunos: 320 do 10.º, 240 do 11.º e 240 do 12.º. Quantos alunos do 10.º entram numa amostra proporcional de 150?",
       "o": [
         "50",
         "60",
