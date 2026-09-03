@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **1 550 perguntas**
-- Progresso bruto: **27,43%**
+- Concluído em rascunho: **1 850 perguntas**
+- Progresso bruto: **32,74%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -164,3 +164,24 @@ Próxima matéria: **10.º — Geometria analítica no plano e no espaço**.
 - Total vNext: **1 550/~5 650 (27,43%)**
 
 Próxima matéria: **11.º — Trigonometria**.
+
+
+### 11.º ano — Trigonometria
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Ângulos orientados, arcos e radianos | 50 | 50 | lote completo em protótipo |
+| Círculo trigonométrico e redução | 50 | 50 | lote completo em protótipo |
+| Relações e identidades trigonométricas fundamentais | 50 | 50 | lote completo em protótipo |
+| Equações trigonométricas | 50 | 50 | lote completo em protótipo |
+| Funções seno e cosseno | 50 | 50 | lote completo em protótipo |
+| Resolução de triângulos e modelação periódica | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 1 850 perguntas
+
+- 10.º ano completo: **1 550/1 550**
+- 11.º — Trigonometria: **300/300**
+- Total vNext: **1 850/~5 650 (32,74%)**
+
+Próxima matéria: **11.º — Produto escalar**.
