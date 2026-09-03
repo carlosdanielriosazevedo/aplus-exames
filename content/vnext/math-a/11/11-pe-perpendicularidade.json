@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-pe",
+  "subtopicId": "11-pe-perpendicularidade",
+  "subtopic": "Perpendicularidade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha ortogonalidade de vetores, retas e planos, critérios por produto escalar, vetores normais/diretores, parâmetros e modelação espacial. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11PE-PERP-001",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Dois vetores não nulos são perpendiculares quando...",
+      "o": [
+        "o produto escalar é 0.",
+        "são proporcionais.",
+        "têm a mesma norma.",
+        "a soma é nula."
+      ],
+      "a": 0,
+      "sol": "u·v=||u||||v||cos90°=0.",
+      "hyp": "Pode confundir ortogonalidade com oposição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:criterio-produto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-002",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Os vetores (1,2) e (2,−1) são...",
+      "o": [
+        "paralelos.",
+        "perpendiculares.",
+        "iguais.",
+        "opostos."
+      ],
+      "a": 1,
+      "sol": "1×2+2×(−1)=0.",
+      "hyp": "Pode olhar só para as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:teste-vetores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-003",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Os vetores (3,4) e (−4,3) são...",
+      "o": [
+        "paralelos.",
+        "de sentidos opostos.",
+        "perpendiculares.",
+        "iguais."
+      ],
+      "a": 2,
+      "sol": "−12+12=0.",
+      "hyp": "Pode confundir com uma rotação de 180°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:teste-vetores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-004",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um vetor perpendicular a (a,b) pode ser...",
+      "o": [
+        "(a,b).",
+        "(−a,−b).",
+        "(b,a) sempre.",
+        "(−b,a)."
+      ],
+      "a": 3,
+      "sol": "a(−b)+ba=0.",
+      "hyp": "Pode escolher o vetor oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:construir-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-005",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um vetor perpendicular a (5,2) é...",
+      "o": [
+        "(−2,5).",
+        "(2,5).",
+        "(−5,−2).",
+        "(5,−2)."
+      ],
+      "a": 0,
+      "sol": "5(−2)+2×5=0.",
+      "hyp": "Pode trocar componentes sem mudar um sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:construir-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-006",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os vetores (k,3) e (2,−4) sejam perpendiculares?",
+      "o": [
+        "−6.",
+        "6.",
+        "3/2.",
+        "−3/2."
+      ],
+      "a": 1,
+      "sol": "2k−12=0 => k=6.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-007",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os vetores (2,k,1) e (1,3,−5) sejam perpendiculares?",
+      "o": [
+        "−1.",
+        "2.",
+        "1.",
+        "−2."
+      ],
+      "a": 2,
+      "sol": "2+3k−5=0 => 3k=3 => k=1.",
+      "hyp": "Pode esquecer a terceira componente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:parametro-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-008",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Duas retas no plano são perpendiculares se os seus vetores diretores forem...",
+      "o": [
+        "proporcionais.",
+        "iguais.",
+        "de mesma norma.",
+        "perpendiculares."
+      ],
+      "a": 3,
+      "sol": "A direção das retas é dada pelos seus vetores diretores.",
+      "hyp": "Pode confundir direção com posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:retas-vetores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-009",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As retas de vetores diretores (1,2) e (2,−1) são...",
+      "o": [
+        "perpendiculares.",
+        "paralelas.",
+        "coincidentes.",
+        "reversas."
+      ],
+      "a": 0,
+      "sol": "O produto escalar dos vetores é zero.",
+      "hyp": "Pode olhar apenas para a aparência das componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:retas-vetores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-010",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se uma reta tem declive m≠0, uma perpendicular tem declive...",
+      "o": [
+        "1/m.",
+        "−1/m.",
+        "−m.",
+        "m."
+      ],
+      "a": 1,
+      "sol": "O produto dos declives é −1.",
+      "hyp": "Pode usar apenas o oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:declives-perpendiculares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-011",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta perpendicular a y=2x+1 tem declive...",
+      "o": [
+        "1/2.",
+        "−2.",
+        "−1/2.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "Recíproco oposto de 2.",
+      "hyp": "Pode mudar só o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:declive-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-012",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta perpendicular a y=−3x+4 tem declive...",
+      "o": [
+        "−1/3.",
+        "3.",
+        "−3.",
+        "1/3."
+      ],
+      "a": 3,
+      "sol": "Recíproco oposto de −3 é 1/3.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:declive-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-013",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma reta horizontal é perpendicular a...",
+      "o": [
+        "uma reta vertical.",
+        "outra horizontal.",
+        "qualquer reta de declive 1.",
+        "nenhuma reta."
+      ],
+      "a": 0,
+      "sol": "Horizontal e vertical formam ângulo reto.",
+      "hyp": "Pode tentar usar declive infinito como número.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:horizontal-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-014",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a reta perpendicular a y=x e que passa pela origem?",
+      "o": [
+        "y=x.",
+        "y=−x.",
+        "x=0.",
+        "y=1."
+      ],
+      "a": 1,
+      "sol": "O declive perpendicular a 1 é −1.",
+      "hyp": "Pode confundir reflexão com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-015",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a reta perpendicular a y=2x+3 e que passa por (0,1)?",
+      "o": [
+        "y=2x+1.",
+        "y=x/2+1.",
+        "y=−x/2+1.",
+        "y=−2x+1."
+      ],
+      "a": 2,
+      "sol": "m=−1/2 e b=1.",
+      "hyp": "Pode usar o declive oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:equacao-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-016",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a reta perpendicular a y=−x+5 e que passa por (2,3)?",
+      "o": [
+        "y=−x+5.",
+        "y=x−1.",
+        "y=−x+1.",
+        "y=x+1."
+      ],
+      "a": 3,
+      "sol": "Declive perpendicular 1; 3=2+b => b=1.",
+      "hyp": "Pode manter o declive original.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:equacao-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-017",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma reta e um plano são perpendiculares quando um vetor diretor da reta é...",
+      "o": [
+        "paralelo a um vetor normal ao plano.",
+        "perpendicular ao vetor normal do plano.",
+        "paralelo a qualquer vetor do plano.",
+        "nulo."
+      ],
+      "a": 0,
+      "sol": "A normal do plano define a direção perpendicular ao plano.",
+      "hyp": "Pode confundir reta contida no plano com reta perpendicular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-018",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Dois planos são perpendiculares quando os seus vetores normais são...",
+      "o": [
+        "paralelos.",
+        "perpendiculares.",
+        "iguais.",
+        "opostos apenas."
+      ],
+      "a": 1,
+      "sol": "O ângulo entre os planos é o ângulo entre as suas normais, tomado agudo.",
+      "hyp": "Pode pensar que normais paralelas dão planos perpendiculares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-019",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os planos com normais n1=(1,0,0) e n2=(0,1,0) são...",
+      "o": [
+        "paralelos.",
+        "coincidentes.",
+        "perpendiculares.",
+        "sem relação possível."
+      ],
+      "a": 2,
+      "sol": "n1·n2=0.",
+      "hyp": "Pode confundir eixos distintos com paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos-normais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-020",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta de vetor diretor (0,0,1) é perpendicular ao plano...",
+      "o": [
+        "x=0.",
+        "y=0.",
+        "x+y=0.",
+        "z=0."
+      ],
+      "a": 3,
+      "sol": "O plano z=0 tem normal (0,0,1).",
+      "hyp": "Pode escolher um plano que contém a direção Oz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-021",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta de vetor diretor (2,−1,3) é perpendicular a um plano de normal...",
+      "o": [
+        "(2,−1,3).",
+        "(1,2,0).",
+        "(−1,−2,1).",
+        "(3,2,−1) sempre."
+      ],
+      "a": 0,
+      "sol": "Para perpendicularidade reta-plano, o diretor é paralelo à normal.",
+      "hyp": "Pode procurar uma normal perpendicular ao diretor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-plano-normal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-022",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O plano 2x−y+3z=5 tem vetor normal...",
+      "o": [
+        "(5,0,0).",
+        "(2,−1,3).",
+        "(1,2,3).",
+        "(2,1,−3)."
+      ],
+      "a": 1,
+      "sol": "Os coeficientes de x,y,z formam uma normal.",
+      "hyp": "Pode incluir o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:normal-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-023",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma reta com vetor diretor (2,−1,3) é perpendicular ao plano 2x−y+3z=5?",
+      "o": [
+        "Não.",
+        "Só se passar pela origem.",
+        "Sim.",
+        "Só se o plano passar pela origem."
+      ],
+      "a": 2,
+      "sol": "O vetor diretor coincide com uma normal do plano.",
+      "hyp": "Pode achar que a posição impede perpendicularidade direcional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-plano-teste",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-024",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os planos x+y=1 e x−y=2 são perpendiculares?",
+      "o": [
+        "Não.",
+        "Só se se intersectarem no eixo Oz.",
+        "Não é possível saber.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Normais (1,1,0) e (1,−1,0) têm produto 0.",
+      "hyp": "Pode olhar apenas para os termos independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos-teste",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-025",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os planos x+2y+2z=0 e 2x−y=3 são perpendiculares?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se z=0.",
+        "Só se forem paralelos."
+      ],
+      "a": 0,
+      "sol": "Normais (1,2,2) e (2,−1,0): produto 2−2+0=0.",
+      "hyp": "Pode esquecer a componente z zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos-teste",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-026",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os vetores (1,k,2) e (2,1,−1) sejam perpendiculares?",
+      "o": [
+        "1.",
+        "0.",
+        "−1.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "2+k−2=0 => k=0.",
+      "hyp": "Pode simplificar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:parametro-3d",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-027",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os planos x+ky+z=0 e 2x−y+3z=1 sejam perpendiculares?",
+      "o": [
+        "−5.",
+        "1.",
+        "5.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "Normais: (1,k,1)·(2,−1,3)=2−k+3=0 => k=5.",
+      "hyp": "Pode errar o sinal de k.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-028",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para que k a reta de vetor diretor (k,2,−1) seja perpendicular ao plano 3x+6y−3z=0?",
+      "o": [
+        "−1.",
+        "3.",
+        "6.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "A normal é (3,6,−3)=3(1,2,−1), logo k=1.",
+      "hyp": "Pode impor produto zero em vez de paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-plano-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-029",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma reta é perpendicular a um plano, então ela é perpendicular...",
+      "o": [
+        "a todas as retas do plano que passam pelo ponto de interseção.",
+        "a todas as retas do espaço.",
+        "apenas a uma reta do plano.",
+        "ao vetor normal do plano."
+      ],
+      "a": 0,
+      "sol": "Esta é a propriedade geométrica da perpendicularidade reta-plano.",
+      "hyp": "Pode achar que é perpendicular a qualquer reta do plano mesmo sem ponto comum no sentido estrito de ângulo entre retas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:propriedade-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-030",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se dois planos são paralelos, os seus vetores normais são...",
+      "o": [
+        "perpendiculares.",
+        "paralelos.",
+        "sempre unitários.",
+        "nulos."
+      ],
+      "a": 1,
+      "sol": "Planos paralelos têm a mesma direção normal.",
+      "hyp": "Pode confundir com planos perpendiculares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos-paralelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-031",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual vetor é normal à reta no plano de vetor diretor (3,4)?",
+      "o": [
+        "(6,8).",
+        "(3,4).",
+        "(−4,3).",
+        "(4,3)."
+      ],
+      "a": 2,
+      "sol": "(3,4)·(−4,3)=−12+12=0.",
+      "hyp": "Pode escolher vetor proporcional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:normal-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-032",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta 3x+4y=7 tem um vetor diretor possível...",
+      "o": [
+        "(3,4).",
+        "(−3,−4).",
+        "(7,0).",
+        "(4,−3)."
+      ],
+      "a": 3,
+      "sol": "(3,4) é normal, logo um diretor perpendicular é (4,−3).",
+      "hyp": "Pode usar a normal como diretor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:diretor-reta-implicita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-033",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta 2x−5y=1 tem declive...",
+      "o": [
+        "2/5.",
+        "−2/5.",
+        "5/2.",
+        "−5/2."
+      ],
+      "a": 0,
+      "sol": "−5y=1−2x => y=(2/5)x−1/5.",
+      "hyp": "Pode usar os coeficientes sem isolar y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:declive-implicita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-034",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta perpendicular a 2x−5y=1 tem declive...",
+      "o": [
+        "5/2.",
+        "−5/2.",
+        "−2/5.",
+        "2/5."
+      ],
+      "a": 1,
+      "sol": "Recíproco oposto de 2/5 é −5/2.",
+      "hyp": "Pode apenas mudar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:perpendicular-implicita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-035",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u e v são perpendiculares, então ||u+v||² é...",
+      "o": [
+        "(||u||+||v||)².",
+        "||u||²−||v||².",
+        "||u||²+||v||².",
+        "0."
+      ],
+      "a": 2,
+      "sol": "O termo cruzado 2u·v desaparece.",
+      "hyp": "Pode usar a desigualdade triangular como igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:pitagoras-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-036",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u⊥v, ||u||=3 e ||v||=4, então ||u+v||=",
+      "o": [
+        "7.",
+        "1.",
+        "12.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "Pelo Pitágoras vetorial, √(9+16)=5.",
+      "hyp": "Pode somar as normas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:pitagoras-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-037",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,2,2) e v=(2,−2,1), então...",
+      "o": [
+        "u·v=0, logo são perpendiculares.",
+        "são paralelos.",
+        "u·v=9.",
+        "têm ângulo 60°."
+      ],
+      "a": 0,
+      "sol": "2−4+2=0.",
+      "hyp": "Pode calcular a soma com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:teste-3d",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-038",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(a,b) é perpendicular a v=(b,−a), então...",
+      "o": [
+        "a=b obrigatoriamente.",
+        "a²−b²=0 é necessário? Não; o produto é ab−ab=0 para quaisquer a,b.",
+        "a=−b obrigatoriamente.",
+        "só acontece se um vetor for nulo."
+      ],
+      "a": 1,
+      "sol": "u·v=ab+b(−a)=0 identicamente.",
+      "hyp": "Pode impor uma condição que não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:familia-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-039",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta r tem diretor (1,2,−1). Que normal pode ter um plano perpendicular a r?",
+      "o": [
+        "(2,−1,0).",
+        "(1,−2,1).",
+        "(2,4,−2).",
+        "(0,1,2)."
+      ],
+      "a": 2,
+      "sol": "A normal deve ser paralela ao diretor de r; (2,4,−2)=2(1,2,−1).",
+      "hyp": "Pode procurar normal ortogonal ao diretor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:normal-plano-perp-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-040",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um plano α tem normal (1,2,3). Qual vetor pode ser diretor de uma reta contida em α?",
+      "o": [
+        "(1,2,3).",
+        "(2,4,6).",
+        "(3,6,9).",
+        "(2,−1,0)."
+      ],
+      "a": 3,
+      "sol": "Vetores contidos no plano são perpendiculares à normal: 2−2+0=0.",
+      "hyp": "Pode usar um vetor paralelo à normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:direcao-contida-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-041",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma reta contida num plano é necessariamente perpendicular ao vetor normal desse plano?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se passar pela origem.",
+        "Só se a reta for horizontal."
+      ],
+      "a": 0,
+      "sol": "Qualquer direção do plano é ortogonal à normal.",
+      "hyp": "Pode confundir posição com direção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-contida-normal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-042",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O plano x+2y−z=0 contém uma reta de vetor diretor...",
+      "o": [
+        "(1,2,−1).",
+        "(1,0,1).",
+        "(2,4,−2).",
+        "(0,1,0)."
+      ],
+      "a": 1,
+      "sol": "(1,2,−1)·(1,0,1)=1−1=0.",
+      "hyp": "Pode usar um múltiplo da normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:vetor-no-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-043",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta com diretor (1,0,1) é perpendicular ao plano x+z=4?",
+      "o": [
+        "Não.",
+        "Só se passar por (0,0,0).",
+        "Sim.",
+        "Só se y=0."
+      ],
+      "a": 2,
+      "sol": "A normal do plano é (1,0,1), paralela ao diretor.",
+      "hyp": "Pode exigir que a reta atravesse a origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-044",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Os planos x+z=0 e x−z=2 são...",
+      "o": [
+        "paralelos.",
+        "coincidentes.",
+        "sem interseção.",
+        "perpendiculares."
+      ],
+      "a": 3,
+      "sol": "Normais (1,0,1) e (1,0,−1) têm produto 0.",
+      "hyp": "Pode confundir sinais opostos parciais com paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:planos-perp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-045",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se duas retas no espaço têm diretores perpendiculares, conclui-se que as retas são perpendiculares?",
+      "o": [
+        "Não necessariamente; podem ser reversas.",
+        "Sim, sempre.",
+        "Só se forem paralelas.",
+        "Nunca."
+      ],
+      "a": 0,
+      "sol": "Para serem retas perpendiculares precisam também de se intersectar.",
+      "hyp": "Pode confundir direções ortogonais com retas concorrentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:retas-espaco-cuidado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-046",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma coluna deve ficar perpendicular a um piso horizontal z=0. Qual direção é adequada?",
+      "o": [
+        "(1,0,0).",
+        "(0,0,1).",
+        "(0,1,0).",
+        "(1,1,0)."
+      ],
+      "a": 1,
+      "sol": "A direção deve ser paralela à normal do piso.",
+      "hyp": "Pode escolher uma direção contida no piso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:modelacao-coluna",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-047",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma viga deve ficar contida no plano x+2y+2z=0. Qual vetor diretor é possível?",
+      "o": [
+        "(1,2,2).",
+        "(2,4,4).",
+        "(2,−1,0).",
+        "(0,1,1)."
+      ],
+      "a": 2,
+      "sol": "A normal é (1,2,2); (2,−1,0) tem produto 2−2=0.",
+      "hyp": "Pode usar a normal como direção da viga.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:modelacao-viga",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-048",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma reta é perpendicular a dois planos distintos, esses planos são...",
+      "o": [
+        "perpendiculares.",
+        "sempre coincidentes.",
+        "reversos.",
+        "paralelos."
+      ],
+      "a": 3,
+      "sol": "As normais dos dois planos são ambas paralelas ao diretor da reta, logo são paralelas entre si.",
+      "hyp": "Pode concluir perpendicularidade por associação verbal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:dois-planos-perp-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-049",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se dois planos são perpendiculares e uma reta é normal ao primeiro, essa reta é necessariamente paralela ao segundo plano?",
+      "o": [
+        "Sim, em termos de direção.",
+        "Não, nunca.",
+        "Só se passar pela origem.",
+        "Só se os planos forem coordenados."
+      ],
+      "a": 0,
+      "sol": "A normal do primeiro plano é perpendicular à normal do segundo, logo é uma direção paralela ao segundo plano.",
+      "hyp": "Pode achar que 'perpendicular ao plano' implica perpendicular ao outro plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:normal-e-plano-perp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PERP-050",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-perpendicularidade",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um sensor aponta segundo v=(2,−1,2). Para uma placa ser perpendicular ao feixe, um vetor normal à placa pode ser...",
+      "o": [
+        "(1,2,0).",
+        "(2,−1,2).",
+        "(−1,−2,1).",
+        "(2,1,−2)."
+      ],
+      "a": 1,
+      "sol": "A normal da placa deve ser paralela à direção do feixe.",
+      "hyp": "Pode procurar um vetor perpendicular ao feixe em vez de paralelo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-perpendicularidade:modelacao-feixe",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
