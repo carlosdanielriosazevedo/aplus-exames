@@ -530,7 +530,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A função anterior tem mínimo em...",
+      "q": "Para f(x)=x²−6x+8, a função tem mínimo em...",
       "o": [
         "x=6.",
         "x=−3.",
@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Os pontos críticos da função anterior são...",
+      "q": "Para f(x)=x⁴−2x², quais são os pontos críticos?",
       "o": [
         "−√2,0,√2.",
         "−1,1.",
@@ -881,7 +881,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na função anterior, f(0)=0, f(2)=−4 e f(5)=5. Logo o mínimo absoluto é...",
+      "q": "Para f(x)=x²−4x em [0,5], sabendo que f(0)=0, f(2)=−4 e f(5)=5, qual é o mínimo absoluto?",
       "o": [
         "−4 em x=2.",
         "0 em x=0.",
