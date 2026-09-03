@@ -746,7 +746,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A inclinação da reta do item anterior é...",
+      "q": "A reta que passa por (−2,1) e (2,−7) tem declive −2. Qual é a sua inclinação α∈[0,π[?",
       "o": [
         "arctan 2.",
         "π/2.",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Na estrada anterior, a inclinação é aproximadamente...",
+      "q": "Uma estrada sobe 1 m por cada 10 m na horizontal. A sua inclinação é aproximadamente...",
       "o": [
         "arctan(0,1).",
         "arctan(10).",
@@ -1286,7 +1286,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "No telhado anterior, a inclinação é...",
+      "q": "Um telhado sobe 4 m por cada 3 m na horizontal. A sua inclinação é...",
       "o": [
         "arctan(3/4).",
         "arcsin(4/3).",
