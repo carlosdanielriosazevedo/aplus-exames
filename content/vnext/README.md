@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **2 150 perguntas**
-- Progresso bruto: **38,05%**
+- Concluído em rascunho: **2 450 perguntas**
+- Progresso bruto: **43,36%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -207,3 +207,26 @@ Próxima matéria: **11.º — Produto escalar**.
 - Total vNext: **2 150/~5 650 (38,05%)**
 
 Próxima matéria: **11.º — Contagem**.
+
+
+### 11.º ano — Contagem
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Princípios da adição e multiplicação | 50 | 50 | lote completo em protótipo |
+| Diagramas, tabelas e organização de casos | 50 | 50 | lote completo em protótipo |
+| Fatorial e contagens elementares | 50 | 50 | lote completo em protótipo |
+| Permutações | 50 | 50 | lote completo em protótipo |
+| Arranjos | 50 | 50 | lote completo em protótipo |
+| Combinações e escolha sem ordem | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 2 450 perguntas
+
+- 10.º ano completo: **1 550/1 550**
+- 11.º — Trigonometria: **300/300**
+- 11.º — Produto escalar: **300/300**
+- 11.º — Contagem: **300/300**
+- Total vNext: **2 450/~5 650 (43,36%)**
+
+Próxima matéria: **11.º — Sucessões**.
