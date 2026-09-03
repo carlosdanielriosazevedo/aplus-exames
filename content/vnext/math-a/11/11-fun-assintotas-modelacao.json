@@ -665,7 +665,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para a mesma função, a assíntota horizontal é...",
+      "q": "Para f(x)=(2x²+1)/(x²−4), a assíntota horizontal é...",
       "o": [
         "y=2.",
         "y=1/2.",
@@ -746,7 +746,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Na mesma função, x=−1 corresponde a...",
+      "q": "Para f(x)=(x²−4)/(x²−x−2), que se simplifica no domínio para (x+2)/(x+1), x=−1 corresponde a...",
       "o": [
         "um buraco.",
         "um zero.",
