@@ -584,7 +584,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na mesma função, derivabilidade em1 exige adicionalmente...",
+      "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Para além da continuidade em1, a derivabilidade em1 exige...",
       "o": [
         "a=1.",
         "a=2.",
@@ -611,7 +611,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Juntando as duas condições anteriores, os valores são...",
+      "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Se f é contínua e derivável em1, quais são a e b?",
       "o": [
         "a=1,b=0.",
         "a=2,b=1.",
@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função do item anterior é derivável em0?",
+      "q": "Se f(x)=x+1 para x<0 e f(x)=x²+1 para x≥0, a função é derivável em0?",
       "o": [
         "Não.",
         "Sim, com derivada0.",
@@ -1016,7 +1016,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para a mesma f, o quociente incremental em0 é...",
+      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, o quociente incremental em0 é...",
       "o": [
         "h sin(1/h).",
         "sin(1/h).",
@@ -1043,7 +1043,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Como sin(1/h) não tem limite quando h→0, a função anterior...",
+      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, o quociente incremental em0 é sin(1/h). Como este não tem limite quando h→0, a função...",
       "o": [
         "é derivável com derivada0.",
         "é descontínua em0.",
@@ -1124,7 +1124,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Usando a linearização anterior, √4,1 é aproximadamente...",
+      "q": "Para f(x)=√x, a linearização em x=4 é L(x)=2+(x−4)/4. Usando-a, √4,1 é aproximadamente...",
       "o": [
         "2,05.",
         "2,025.",
