@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-rae",
+  "subtopicId": "12-rae-newton",
+  "subtopic": "Método de Newton-Raphson, aproximação e análise de adequação",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha construção pela tangente, fórmula de Newton, exemplos, convergência, falhas, raízes múltiplas, critérios de paragem e comparação/hibridação com bisseção. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12RAE-NEW-001",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O método de Newton-Raphson usa, em cada passo...",
+      "o": [
+        "a reta tangente ao gráfico.",
+        "o ponto médio de um intervalo.",
+        "apenas os sinais nos extremos.",
+        "uma média de duas raízes."
+      ],
+      "a": 0,
+      "sol": "A próxima aproximação é a abcissa onde a tangente corta o eixo Ox.",
+      "hyp": "Pode confundir com bisseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:ideia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-002",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A fórmula iterativa de Newton é...",
+      "o": [
+        "x_{n+1}=(a+b)/2.",
+        "x_{n+1}=x_n−f(x_n)/f'(x_n).",
+        "x_{n+1}=f'(x_n).",
+        "x_{n+1}=x_n+f(x_n)."
+      ],
+      "a": 1,
+      "sol": "É a abcissa da interseção da tangente em x_n com o eixo.",
+      "hyp": "Pode confundir com bisseção ou iteração simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-003",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para aplicar Newton num passo é necessário, em geral...",
+      "o": [
+        "f(x_n)=0.",
+        "f''(x_n)=0.",
+        "f'(x_n)≠0.",
+        "x_n ser inteiro."
+      ],
+      "a": 2,
+      "sol": "A fórmula divide por f'(x_n).",
+      "hyp": "Pode ignorar o denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:derivada-nao-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-004",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Se f(x_n)=0, então...",
+      "o": [
+        "o método falhou.",
+        "devemos dividir por f'(x_n).",
+        "é obrigatório continuar.",
+        "x_n já é uma raiz."
+      ],
+      "a": 3,
+      "sol": "A aproximação já satisfaz a equação.",
+      "hyp": "Pode continuar sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:raiz-exata",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-005",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x²−2, f'(x)=",
+      "o": [
+        "2x.",
+        "x.",
+        "2.",
+        "x²."
+      ],
+      "a": 0,
+      "sol": "Derivada de x²−2 é2x.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-006",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x²−2, a iteração de Newton pode escrever-se...",
+      "o": [
+        "x_{n+1}=x_n/2.",
+        "x_{n+1}=(x_n+2/x_n)/2.",
+        "x_{n+1}=2/x_n.",
+        "x_{n+1}=x_n−2."
+      ],
+      "a": 1,
+      "sol": "x−(x²−2)/(2x)=(x+2/x)/2.",
+      "hyp": "Pode simplificar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:sqrt2-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-007",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com x0=1 para x²−2=0, x1 é...",
+      "o": [
+        "1,25.",
+        "2.",
+        "1,5.",
+        "√2 exatamente."
+      ],
+      "a": 2,
+      "sol": "(1+2)/2=1,5.",
+      "hyp": "Pode usar o ponto médio [1,2].",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:sqrt2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-008",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A partir de x1=1,5, a aproximação seguinte é...",
+      "o": [
+        "1,75.",
+        "1,25.",
+        "1,5.",
+        "aprox.1,4167."
+      ],
+      "a": 3,
+      "sol": "(1,5+2/1,5)/2≈1,4167.",
+      "hyp": "Pode repetir a média aritmética simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:sqrt2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-009",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Newton costuma convergir muito rapidamente quando...",
+      "o": [
+        "a aproximação inicial é adequada e a raiz é simples.",
+        "f' é zero perto da raiz.",
+        "a função é descontínua.",
+        "não há raiz real."
+      ],
+      "a": 0,
+      "sol": "Perto de uma raiz simples, a convergência é tipicamente quadrática.",
+      "hyp": "Pode achar que qualquer ponto inicial serve.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:convergencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-010",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma desvantagem de Newton face à bisseção é...",
+      "o": [
+        "não usar derivadas.",
+        "não ter garantia global tão simples a partir de qualquer ponto inicial.",
+        "ser sempre mais lento.",
+        "não produzir aproximações."
+      ],
+      "a": 1,
+      "sol": "Pode divergir ou convergir para outra raiz.",
+      "hyp": "Pode inverter as características dos métodos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:desvantagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-011",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Geometricamente, x_{n+1} é...",
+      "o": [
+        "o ponto médio de x_n e f(x_n).",
+        "a ordenada da tangente.",
+        "a interseção com Ox da tangente em (x_n,f(x_n)).",
+        "a derivada em x_n."
+      ],
+      "a": 2,
+      "sol": "É exatamente a construção geométrica do método.",
+      "hyp": "Pode confundir abcissa e ordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:geometria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-012",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A reta tangente a f em x_n tem equação...",
+      "o": [
+        "y=f'(x_n)x.",
+        "y=f(x_n)x+x_n.",
+        "y=x_n+f'(x_n).",
+        "y=f(x_n)+f'(x_n)(x−x_n)."
+      ],
+      "a": 3,
+      "sol": "É a forma ponto-declive.",
+      "hyp": "Pode esquecer o ponto de tangência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:tangente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-013",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Impondo y=0 na tangente anterior obtemos...",
+      "o": [
+        "a fórmula de Newton.",
+        "a fórmula da bisseção.",
+        "o Teorema de Bolzano.",
+        "a regra da cadeia."
+      ],
+      "a": 0,
+      "sol": "Resolver a tangente para a abcissa de interseção dá x_n−f/f'.",
+      "hyp": "Pode não ligar a geometria à fórmula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:derivacao-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-014",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x³−2, f'(x)=",
+      "o": [
+        "3x.",
+        "3x².",
+        "x².",
+        "3."
+      ],
+      "a": 1,
+      "sol": "Derivada de x³ é3x².",
+      "hyp": "Pode esquecer o quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-015",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para x³−2=0 e x0=1, x1 é...",
+      "o": [
+        "3/2.",
+        "2.",
+        "4/3.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "1−(1−2)/3=1+1/3=4/3.",
+      "hyp": "Pode usar uma média em vez da tangente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-016",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=e^x−2, f'(x)=",
+      "o": [
+        "e^x−2.",
+        "xe^{x−1}.",
+        "1/e^x.",
+        "e^x."
+      ],
+      "a": 3,
+      "sol": "Derivada de e^x é e^x.",
+      "hyp": "Pode derivar a constante como −2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-017",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para e^x−2=0, a iteração de Newton é...",
+      "o": [
+        "x_{n+1}=x_n−(e^{x_n}−2)/e^{x_n}.",
+        "x_{n+1}=(x_n+2)/2.",
+        "x_{n+1}=ln2 sempre.",
+        "x_{n+1}=x_n−e^{x_n}."
+      ],
+      "a": 0,
+      "sol": "Substitui-se f e f' na fórmula.",
+      "hyp": "Pode confundir método iterativo com solução exata já conhecida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:exp-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-018",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com x0=1 no caso e^x−2=0, x1 é aproximadamente...",
+      "o": [
+        "1,264.",
+        "0,736.",
+        "0,5.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "1−(e−2)/e=2/e≈0,736.",
+      "hyp": "Pode errar o sinal da correção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:exp-passo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-019",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f'(x_n) é muito pequeno em módulo, o passo de Newton pode...",
+      "o": [
+        "ser sempre zero.",
+        "coincidir com bisseção.",
+        "tornar-se muito grande e instável.",
+        "garantir convergência."
+      ],
+      "a": 2,
+      "sol": "Dividir por um número pequeno amplifica a correção.",
+      "hyp": "Pode pensar que derivada pequena significa passo pequeno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:derivada-pequena",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-020",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um critério de paragem comum é...",
+      "o": [
+        "x_n inteiro.",
+        "f'(x_n)=1.",
+        "n par.",
+        "|x_{n+1}−x_n| suficientemente pequeno."
+      ],
+      "a": 3,
+      "sol": "Mudanças pequenas entre aproximações sugerem estabilização.",
+      "hyp": "Pode procurar um critério arbitrário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:paragem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-021",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Outro critério útil é...",
+      "o": [
+        "|f(x_n)| pequeno, com interpretação adequada.",
+        "f'(x_n)>0 sempre.",
+        "x_n>0.",
+        "x_n próximo de1."
+      ],
+      "a": 0,
+      "sol": "Um resíduo pequeno indica que a aproximação quase satisfaz a equação.",
+      "hyp": "Pode confundir sinal com precisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-022",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um resíduo |f(x_n)| pequeno garante sempre erro pequeno em x?",
+      "o": [
+        "Sim, sempre.",
+        "Não.",
+        "Só se x_n>0.",
+        "Só para polinómios."
+      ],
+      "a": 1,
+      "sol": "Se f for muito plana, pequenos resíduos podem corresponder a erros maiores na abcissa.",
+      "hyp": "Pode equiparar erro vertical e horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:residuo-erro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-023",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4 e x0=3, x1 é...",
+      "o": [
+        "2,5.",
+        "2.",
+        "13/6.",
+        "7/3."
+      ],
+      "a": 2,
+      "sol": "3−(9−4)/6=3−5/6=13/6.",
+      "hyp": "Pode usar ponto médio entre2 e3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-024",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A aproximação 13/6≈2,1667 está...",
+      "o": [
+        "mais longe da raiz2.",
+        "exatamente na raiz.",
+        "na raiz−2.",
+        "mais perto da raiz2 do que x0=3."
+      ],
+      "a": 3,
+      "sol": "O erro passou de1 para cerca de0,1667.",
+      "hyp": "Pode ignorar qual raiz está a ser aproximada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:melhoria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-025",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para uma equação com várias raízes, Newton pode...",
+      "o": [
+        "convergir para raízes diferentes consoante x0.",
+        "encontrar sempre a menor raiz.",
+        "encontrar todas simultaneamente.",
+        "ignorar x0."
+      ],
+      "a": 0,
+      "sol": "O ponto inicial influencia a bacia de atração.",
+      "hyp": "Pode pensar que o método escolhe uma raiz canónica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:multiplas-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-026",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Exemplo",
+      "q": "Para f(x)=x²−1, um x0 positivo razoável tende a convergir para...",
+      "o": [
+        "−1.",
+        "1.",
+        "0.",
+        "as duas raízes simultaneamente."
+      ],
+      "a": 1,
+      "sol": "Em geral, o lado positivo pertence à bacia da raiz positiva neste caso simples.",
+      "hyp": "Pode ignorar a influência do sinal inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:bacias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-027",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=ln x−1, f'(x)=",
+      "o": [
+        "ln x.",
+        "x.",
+        "1/x.",
+        "−1/x²."
+      ],
+      "a": 2,
+      "sol": "Derivada de ln x é1/x.",
+      "hyp": "Pode confundir com derivada de1/x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-028",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A iteração de Newton para ln x−1=0 é...",
+      "o": [
+        "x_{n+1}=x_n−(ln x_n−1).",
+        "x_{n+1}=ln x_n.",
+        "x_{n+1}=e.",
+        "x_{n+1}=x_n−x_n(ln x_n−1)."
+      ],
+      "a": 3,
+      "sol": "Divide-se por1/x_n, multiplicando pela própria abcissa.",
+      "hyp": "Pode esquecer o denominador da derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:log-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-029",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No problema ln x−1=0, é necessário manter x_n...",
+      "o": [
+        "positivo.",
+        "negativo.",
+        "inteiro.",
+        "menor que1."
+      ],
+      "a": 0,
+      "sol": "O logaritmo natural só está definido para x>0.",
+      "hyp": "Pode ignorar o domínio durante as iterações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-030",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=cosx−x, f'(x)=",
+      "o": [
+        "cosx−1.",
+        "−sinx−1.",
+        "sinx−1.",
+        "−cosx−1."
+      ],
+      "a": 1,
+      "sol": "Derivada de cosx é−sinx e de−x é−1.",
+      "hyp": "Pode esquecer um dos sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:cos-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-031",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A iteração para cosx−x=0 é...",
+      "o": [
+        "x_{n+1}=cosx_n.",
+        "x_{n+1}=(x_n+cosx_n)/2.",
+        "x_{n+1}=x_n−(cosx_n−x_n)/(−sinx_n−1).",
+        "x_{n+1}=x_n−sinx_n."
+      ],
+      "a": 2,
+      "sol": "Aplica-se diretamente a fórmula de Newton.",
+      "hyp": "Pode confundir com iteração de ponto fixo x=cosx.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:cos-x-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-032",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A iteração x_{n+1}=cosx_n também pode convergir para a mesma raiz, mas é...",
+      "o": [
+        "a fórmula de Newton simplificada.",
+        "a bisseção.",
+        "Bolzano.",
+        "um método de ponto fixo, não Newton."
+      ],
+      "a": 3,
+      "sol": "É uma iteração distinta baseada em x=cosx.",
+      "hyp": "Pode chamar Newton a qualquer iteração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:ponto-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-033",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Perto de uma raiz simples α, Newton tem tipicamente convergência...",
+      "o": [
+        "quadrática.",
+        "linear com fator1/2.",
+        "cúbica sempre.",
+        "sem taxa previsível."
+      ],
+      "a": 0,
+      "sol": "O erro seguinte é aproximadamente proporcional ao quadrado do erro atual.",
+      "hyp": "Pode atribuir a taxa da bisseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:convergencia-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-034",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Convergência quadrática significa, de forma aproximada, que...",
+      "o": [
+        "o erro é dividido exatamente por2.",
+        "o número de algarismos corretos pode duplicar em cada passo perto da raiz.",
+        "são precisas n² iterações.",
+        "a raiz é um quadrado."
+      ],
+      "a": 1,
+      "sol": "Quando o regime assintótico é atingido, o erro reduz-se muito rapidamente.",
+      "hyp": "Pode interpretar 'quadrática' como fórmula da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:significado-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-035",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para raízes múltiplas, Newton clássico costuma...",
+      "o": [
+        "convergir ainda mais depressa.",
+        "falhar sempre.",
+        "perder a convergência quadrática e ficar mais lento.",
+        "transformar-se em bisseção."
+      ],
+      "a": 2,
+      "sol": "A multiplicidade altera a taxa de convergência.",
+      "hyp": "Pode achar que múltiplas raízes facilitam sempre.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:raiz-multipla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-036",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Exemplo",
+      "q": "Para f(x)=(x−1)², a raiz1 é...",
+      "o": [
+        "simples.",
+        "complexa.",
+        "inexistente.",
+        "dupla."
+      ],
+      "a": 3,
+      "sol": "O fator (x−1) aparece com multiplicidade2.",
+      "hyp": "Pode ignorar a multiplicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:multiplicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-037",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Aplicando Newton a f(x)=(x−1)², obtemos...",
+      "o": [
+        "x_{n+1}=(x_n+1)/2.",
+        "x_{n+1}=1 em um passo sempre.",
+        "x_{n+1}=x_n².",
+        "x_{n+1}=2x_n−1."
+      ],
+      "a": 0,
+      "sol": "x−(x−1)²/[2(x−1)]=x−(x−1)/2=(x+1)/2.",
+      "hyp": "Pode esperar convergência instantânea.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:raiz-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-038",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A iteração anterior converge para1 de forma...",
+      "o": [
+        "quadrática.",
+        "linear, reduzindo o erro a metade.",
+        "divergente.",
+        "oscilatória sem convergência."
+      ],
+      "a": 1,
+      "sol": "x_{n+1}−1=(x_n−1)/2.",
+      "hyp": "Pode assumir taxa quadrática para qualquer raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:raiz-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-039",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x0)=0 mas f(x0)≠0, a fórmula clássica de Newton...",
+      "o": [
+        "dá x1=x0.",
+        "dá a raiz exata.",
+        "não pode ser aplicada nesse passo.",
+        "equivale a bisseção."
+      ],
+      "a": 2,
+      "sol": "Há divisão por zero.",
+      "hyp": "Pode ignorar o denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:derivada-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-040",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se uma iteração de Newton salta para fora do domínio de f, devemos...",
+      "o": [
+        "continuar avaliando f fora do domínio.",
+        "declarar a raiz complexa.",
+        "forçar x_n=0.",
+        "reavaliar o ponto inicial/estratégia ou usar um método mais robusto."
+      ],
+      "a": 3,
+      "sol": "O método só faz sentido onde f e f' estão definidas.",
+      "hyp": "Pode ignorar restrições de domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:fora-dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-041",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x−e^{-x}, f'(x)=",
+      "o": [
+        "1+e^{-x}.",
+        "1−e^{-x}.",
+        "−e^{-x}.",
+        "x+e^{-x}."
+      ],
+      "a": 0,
+      "sol": "Derivada de−e^{-x} é +e^{-x}.",
+      "hyp": "Pode perder o duplo sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:exp-misto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-042",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A iteração de Newton para x−e^{-x}=0 é...",
+      "o": [
+        "x_{n+1}=e^{-x_n}.",
+        "x_{n+1}=x_n−(x_n−e^{-x_n})/(1+e^{-x_n}).",
+        "x_{n+1}=x_n−e^{-x_n}.",
+        "x_{n+1}=(x_n+e^{-x_n})/2."
+      ],
+      "a": 1,
+      "sol": "Substitui-se f e f' na fórmula.",
+      "hyp": "Pode confundir com iteração de ponto fixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:equacao-mista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-043",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um método híbrido bisseção+Newton pode ser útil para...",
+      "o": [
+        "eliminar todas as avaliações de f.",
+        "evitar qualquer derivada sempre.",
+        "combinar garantia de intervalo com rapidez local.",
+        "obter solução simbólica exata."
+      ],
+      "a": 2,
+      "sol": "A bisseção mantém robustez e Newton acelera quando seguro.",
+      "hyp": "Pode pensar que os métodos são incompatíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:hibrido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-044",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma estratégia híbrida sensata é...",
+      "o": [
+        "usar sempre Newton mesmo fora do intervalo.",
+        "usar sempre o maior extremo.",
+        "alternar sem verificar nada.",
+        "usar Newton quando o passo permanece seguro no intervalo e bisseção caso contrário."
+      ],
+      "a": 3,
+      "sol": "Assim preserva-se o bracket e aproveita-se a rapidez de Newton.",
+      "hyp": "Pode sacrificar a garantia sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:hibrido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-045",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se x_n está muito perto de uma raiz simples α e f'(α)≠0, então o erro e_n=x_n−α tende a satisfazer...",
+      "o": [
+        "|e_{n+1}|≈C|e_n|².",
+        "|e_{n+1}|=|e_n|/2 exatamente.",
+        "|e_{n+1}|≈C|e_n|.",
+        "|e_{n+1}|=0 sempre."
+      ],
+      "a": 0,
+      "sol": "É a expressão típica da convergência quadrática.",
+      "hyp": "Pode atribuir uma taxa linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:erro-quadratico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-046",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo de equilíbrio F(p)=0, Newton requer além de avaliar F...",
+      "o": [
+        "conhecer duas raízes.",
+        "avaliar ou aproximar F'.",
+        "ter sempre um intervalo com sinais opostos.",
+        "integrar F."
+      ],
+      "a": 1,
+      "sol": "A inclinação local é necessária para construir a tangente.",
+      "hyp": "Pode transferir as exigências da bisseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-047",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se F'(p) representa sensibilidade do desequilíbrio ao preço, um |F'| muito pequeno pode tornar Newton...",
+      "o": [
+        "automaticamente exato.",
+        "igual à bisseção.",
+        "sensível e dar passos grandes.",
+        "independente do ponto inicial."
+      ],
+      "a": 2,
+      "sol": "A correção divide por F'.",
+      "hyp": "Pode pensar que pouca sensibilidade implica correção pequena.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:sensibilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-048",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Comparando métodos, a bisseção oferece erro intervalar explícito enquanto Newton...",
+      "o": [
+        "tem erro zero após duas iterações.",
+        "não converge.",
+        "não usa aproximações.",
+        "normalmente precisa de critérios adicionais para estimar/validar o erro."
+      ],
+      "a": 3,
+      "sol": "Newton fornece pontos, não um bracket garantido por si só.",
+      "hyp": "Pode atribuir a Newton a mesma garantia intervalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:comparacao-erro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-049",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma sequência de Newton que estabiliza numericamente deve ainda ser validada verificando...",
+      "o": [
+        "o resíduo f(x_n), domínio e coerência com a raiz procurada.",
+        "apenas o número de iterações.",
+        "que x_n é positivo sempre.",
+        "que f'(x_n)=0."
+      ],
+      "a": 0,
+      "sol": "Estabilização numérica isolada pode ser enganadora.",
+      "hyp": "Pode parar sem verificar a equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:validacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-NEW-050",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-newton",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Ao comunicar uma raiz aproximada obtida por Newton, é adequado indicar...",
+      "o": [
+        "apenas 'é exata'.",
+        "o valor aproximado e a precisão/critério de paragem usado.",
+        "apenas o ponto inicial.",
+        "somente a derivada."
+      ],
+      "a": 1,
+      "sol": "Resultados numéricos devem explicitar a natureza aproximada.",
+      "hyp": "Pode apresentar uma aproximação como valor exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-newton:comunicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
