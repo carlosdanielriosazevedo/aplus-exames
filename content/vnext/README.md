@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **3 300 perguntas**
-- Progresso bruto: **58,41%**
+- Concluído em rascunho: **3 650 perguntas**
+- Progresso bruto: **64,60%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -307,3 +307,26 @@ Próxima matéria: **11.º — Cálculo diferencial**.
 - Total vNext: **3 300/~5 650 (58,41%)**
 
 Próxima matéria: **12.º — Números complexos**.
+
+
+### 12.º ano — Números complexos
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Unidade imaginária, conjunto C e equações de 2.º grau | 50 | 50 | lote completo em protótipo |
+| Forma algébrica, parte real/imaginária e igualdade | 50 | 50 | lote completo em protótipo |
+| Conjugado e módulo | 50 | 50 | lote completo em protótipo |
+| Operações na forma algébrica | 50 | 50 | lote completo em protótipo |
+| Plano de Argand-Gauss e interpretação geométrica | 50 | 50 | lote completo em protótipo |
+| Forma trigonométrica, módulo e argumento | 50 | 50 | lote completo em protótipo |
+| Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 3 650 perguntas
+
+- **10.º ano completo: 1 550/1 550**
+- **11.º ano completo: 1 750/1 750**
+- 12.º — Números complexos: **350/350**
+- Total vNext: **3 650/~5 650 (64,60%)**
+
+Próxima matéria: **12.º — Probabilidade**.
