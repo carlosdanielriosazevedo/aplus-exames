@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcont",
+  "subtopicId": "12-fcont-limites-continuidade",
+  "subtopic": "Limite intuitivo e continuidade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha limites, limites laterais, indeterminações simples, continuidade, prolongamento por continuidade e Teorema do Valor Intermédio/Bolzano. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCONT-LC-001",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Dizer que f é contínua em a significa, em termos intuitivos, que...",
+      "o": [
+        "o gráfico não apresenta quebra em a.",
+        "f(a)=0.",
+        "f'(a)=0.",
+        "f é constante perto de a."
+      ],
+      "a": 0,
+      "sol": "Continuidade significa ausência de salto, buraco ou quebra no ponto.",
+      "hyp": "Pode confundir continuidade com derivada nula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:intuicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-002",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para f ser contínua em a é necessário que...",
+      "o": [
+        "f'(a)=0.",
+        "f(a) esteja definida.",
+        "f(a)>0.",
+        "a seja extremo local."
+      ],
+      "a": 1,
+      "sol": "Sem valor no ponto, não há continuidade nesse ponto.",
+      "hyp": "Pode pensar que basta existir limite.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-003",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma condição de continuidade em a é...",
+      "o": [
+        "lim_{x→a} f(x)=0.",
+        "f'(a)=f(a).",
+        "lim_{x→a} f(x)=f(a).",
+        "f(a)=a."
+      ],
+      "a": 2,
+      "sol": "O limite deve existir e coincidir com o valor da função.",
+      "hyp": "Pode impor limite zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-004",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=x² é contínua em...",
+      "o": [
+        "apenas x=0.",
+        "apenas x>0.",
+        "R\\{0}.",
+        "todo R."
+      ],
+      "a": 3,
+      "sol": "Polinómios são contínuos em todo R.",
+      "hyp": "Pode imaginar uma restrição por haver potência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-005",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=1/x é contínua em...",
+      "o": [
+        "R\\{0}.",
+        "R.",
+        "[0,+∞[.",
+        "R\\{1}."
+      ],
+      "a": 0,
+      "sol": "É racional e contínua onde o denominador não se anula.",
+      "hyp": "Pode esquecer a restrição x≠0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-006",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se os limites laterais em a existem mas são diferentes, então...",
+      "o": [
+        "o limite é a média dos laterais.",
+        "o limite bilateral em a não existe.",
+        "f é contínua.",
+        "o limite é zero."
+      ],
+      "a": 1,
+      "sol": "Para existir limite bilateral, os dois laterais devem coincidir.",
+      "hyp": "Pode fazer média de valores laterais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:laterais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-007",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se lim_{x→2−}f(x)=3 e lim_{x→2+}f(x)=3, então lim_{x→2}f(x)=",
+      "o": [
+        "6.",
+        "0.",
+        "3.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "Os limites laterais coincidem.",
+      "hyp": "Pode somar os limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:laterais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-008",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se lim_{x→1−}f(x)=2 e lim_{x→1+}f(x)=5, então lim_{x→1}f(x)...",
+      "o": [
+        "é 3,5.",
+        "é 7.",
+        "é 2.",
+        "não existe."
+      ],
+      "a": 3,
+      "sol": "Os limites laterais são diferentes.",
+      "hyp": "Pode tomar a média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:laterais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-009",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se lim_{x→a}f(x)=L mas f(a)≠L, então f em a é...",
+      "o": [
+        "descontínua.",
+        "contínua.",
+        "derivável.",
+        "constante."
+      ],
+      "a": 0,
+      "sol": "A igualdade limite=valor falha.",
+      "hyp": "Pode achar que existir limite basta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:removivel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-010",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma descontinuidade removível ocorre tipicamente quando...",
+      "o": [
+        "os limites laterais são diferentes.",
+        "o limite existe mas o valor no ponto falta ou é diferente.",
+        "a função tende a infinito.",
+        "não existe domínio perto do ponto."
+      ],
+      "a": 1,
+      "sol": "Pode-se 'corrigir' redefinindo o valor no ponto.",
+      "hyp": "Pode confundir com salto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:removivel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-011",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=(x²−1)/(x−1), x≠1, o limite quando x→1 é...",
+      "o": [
+        "0.",
+        "1.",
+        "2.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "Para x≠1, f(x)=x+1; o limite é2.",
+      "hyp": "Pode substituir diretamente e obter 0/0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-012",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se definirmos f(1)=2 no item anterior, a função torna-se...",
+      "o": [
+        "descontínua em1.",
+        "não definida em1.",
+        "constante.",
+        "contínua em1."
+      ],
+      "a": 3,
+      "sol": "O valor passa a coincidir com o limite.",
+      "hyp": "Pode ignorar a redefinição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:prolongamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-013",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→3}(2x+1)=",
+      "o": [
+        "7.",
+        "6.",
+        "3.",
+        "não existe."
+      ],
+      "a": 0,
+      "sol": "Funções afins são contínuas, basta substituir x=3.",
+      "hyp": "Pode derivar em vez de avaliar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:substituicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-014",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→−2}(x²+3x)=",
+      "o": [
+        "2.",
+        "−2.",
+        "−10.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "4−6=−2.",
+      "hyp": "Pode errar sinais ao substituir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-015",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→1}(x³−1)/(x−1)=",
+      "o": [
+        "1.",
+        "0.",
+        "3.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "x³−1=(x−1)(x²+x+1); limite=3.",
+      "hyp": "Pode parar na indeterminação 0/0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-016",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→4}(√x−2)/(x−4)=",
+      "o": [
+        "1/2.",
+        "0.",
+        "não existe.",
+        "1/4."
+      ],
+      "a": 3,
+      "sol": "Racionalizando:1/(√x+2)→1/4.",
+      "hyp": "Pode substituir e concluir que o limite não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:racionalizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-017",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A expressão 0/0 num cálculo de limite é...",
+      "o": [
+        "uma indeterminação, não o valor do limite.",
+        "sempre igual a0.",
+        "sempre igual a1.",
+        "prova de inexistência do limite."
+      ],
+      "a": 0,
+      "sol": "É necessário transformar ou analisar mais a expressão.",
+      "hyp": "Pode tratar 0/0 como resultado final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:indeterminacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-018",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se uma função é contínua num intervalo fechado [a,b], então...",
+      "o": [
+        "é necessariamente crescente.",
+        "assume todos os valores entre f(a) e f(b).",
+        "tem derivada positiva.",
+        "é polinomial."
+      ],
+      "a": 1,
+      "sol": "É consequência do Teorema do Valor Intermédio.",
+      "hyp": "Pode confundir continuidade com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:tvi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-019",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f é contínua em [a,b] e f(a)f(b)<0, então...",
+      "o": [
+        "f não tem zeros.",
+        "há exatamente um zero.",
+        "existe pelo menos c∈]a,b[ com f(c)=0.",
+        "f é linear."
+      ],
+      "a": 2,
+      "sol": "Pelo TVI/Bolzano, há pelo menos uma raiz.",
+      "hyp": "Pode concluir unicidade sem monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:bolzano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-020",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição f(a)f(b)<0 garante...",
+      "o": [
+        "exatamente dois zeros.",
+        "um máximo.",
+        "derivabilidade.",
+        "existência de pelo menos um zero se f for contínua."
+      ],
+      "a": 3,
+      "sol": "A mudança de sinal, com continuidade, força passagem por zero.",
+      "hyp": "Pode esquecer a hipótese de continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:bolzano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-021",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=|x| é contínua em0?",
+      "o": [
+        "Sim.",
+        "Não, porque não é derivável em0.",
+        "Só pela direita.",
+        "Só pela esquerda."
+      ],
+      "a": 0,
+      "sol": "lim_{x→0}|x|=0=f(0).",
+      "hyp": "Pode confundir continuidade com derivabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-022",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=1/(x−2) é contínua em x=2?",
+      "o": [
+        "Sim.",
+        "Não, nem está definida em2.",
+        "Sim, porque há assíntota.",
+        "Só se definirmos f(2)=0."
+      ],
+      "a": 1,
+      "sol": "O denominador anula-se em2.",
+      "hyp": "Pode pensar que uma assíntota é continuidade 'infinita'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:assintota",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-023",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se lim_{x→a}f(x)=+∞, então...",
+      "o": [
+        "f é contínua em a.",
+        "f(a)=+∞ como número real.",
+        "não existe limite real finito em a.",
+        "a é raiz."
+      ],
+      "a": 2,
+      "sol": "+∞ descreve comportamento ilimitado, não um valor real da função.",
+      "hyp": "Pode tratar infinito como número real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:infinito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-024",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0+}1/x=",
+      "o": [
+        "−∞.",
+        "0.",
+        "1.",
+        "+∞."
+      ],
+      "a": 3,
+      "sol": "Para x positivo muito pequeno,1/x cresce sem limite.",
+      "hyp": "Pode ignorar o lado do limite.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:lateral-infinito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-025",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0−}1/x=",
+      "o": [
+        "−∞.",
+        "+∞.",
+        "0.",
+        "não depende do lado."
+      ],
+      "a": 0,
+      "sol": "Para x negativo muito pequeno em módulo, o quociente é muito negativo.",
+      "hyp": "Pode usar o mesmo sinal dos dois lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:lateral-infinito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-026",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Como os limites laterais de 1/x em0 têm sinais opostos, o limite bilateral em0...",
+      "o": [
+        "é0.",
+        "não existe como limite real nem como +∞/−∞ comum.",
+        "é+∞.",
+        "é−∞."
+      ],
+      "a": 1,
+      "sol": "Os comportamentos laterais não coincidem.",
+      "hyp": "Pode escolher um dos lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:bilateral-infinito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-027",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Considere f(x)=x+1 se x<2 e f(x)=5 se x≥2. Para ser contínua em2 seria necessário...",
+      "o": [
+        "que x+1 fosse substituído por x+3.",
+        "que f(2)=2.",
+        "que 5 fosse substituído por3.",
+        "nada; já é contínua."
+      ],
+      "a": 2,
+      "sol": "Limite pela esquerda em2 é3; o valor pela direita e no ponto deve ser3.",
+      "hyp": "Pode usar o valor x=2 sem aplicar a expressão correta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:por-ramos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-028",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=ax+1 para x<2 e f(x)=5 para x≥2, a continuidade em2 exige a=",
+      "o": [
+        "1.",
+        "5/2.",
+        "0.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "2a+1=5 =>a=2.",
+      "hyp": "Pode igualar a diretamente a5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-029",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x² para x≤1 e f(x)=ax+b para x>1, continuidade em1 exige...",
+      "o": [
+        "a+b=1.",
+        "a+b=0.",
+        "2a+b=1.",
+        "a=b."
+      ],
+      "a": 0,
+      "sol": "O limite pela direita a+b deve igualar f(1)=1.",
+      "hyp": "Pode usar a derivada do ramo esquerdo numa condição só de continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-030",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A continuidade de uma função por ramos num ponto de junção verifica-se comparando...",
+      "o": [
+        "apenas derivadas laterais.",
+        "limites laterais e valor no ponto.",
+        "apenas os valores dos coeficientes.",
+        "apenas o gráfico global."
+      ],
+      "a": 1,
+      "sol": "Os três valores relevantes devem coincidir.",
+      "hyp": "Pode saltar um dos lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:por-ramos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-031",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→2}(x²−4)/(x−2)=",
+      "o": [
+        "2.",
+        "0.",
+        "4.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "Fatoriza-se (x−2)(x+2), ficando x+2.",
+      "hyp": "Pode concluir0/0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-032",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→−3}(x²+5x+6)/(x+3)=",
+      "o": [
+        "1.",
+        "0.",
+        "−3.",
+        "−1."
+      ],
+      "a": 3,
+      "sol": "Numerador=(x+2)(x+3); fica x+2→−1.",
+      "hyp": "Pode fatorizar com sinais errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-033",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0}(√(1+x)−1)/x=",
+      "o": [
+        "1/2.",
+        "1.",
+        "0.",
+        "não existe."
+      ],
+      "a": 0,
+      "sol": "Racionalizando obtém-se1/(√(1+x)+1)→1/2.",
+      "hyp": "Pode substituir diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:racionalizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-034",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0}sin x/x é...",
+      "o": [
+        "0.",
+        "1.",
+        "não existe.",
+        "+∞."
+      ],
+      "a": 1,
+      "sol": "É um limite fundamental.",
+      "hyp": "Pode substituir e parar em0/0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:fundamental",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-035",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0}(1−cos x)/x é...",
+      "o": [
+        "1.",
+        "1/2.",
+        "0.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "1−cosx é da ordem de x²/2, logo o quociente tende a0.",
+      "hyp": "Pode confundir com (1−cosx)/x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-036",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se lim_{x→a}f(x) existe e f(a) não está definida, a descontinuidade pode ser...",
+      "o": [
+        "sempre de salto.",
+        "sempre infinita.",
+        "impossível.",
+        "removível."
+      ],
+      "a": 3,
+      "sol": "Se o limite é finito, pode definir-se f(a) igual ao limite.",
+      "hyp": "Pode achar que falta de valor implica descontinuidade irremovível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:removivel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-037",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que valor de k a função f(x)=(x²−4)/(x−2), x≠2, e f(2)=k seja contínua?",
+      "o": [
+        "4.",
+        "2.",
+        "0.",
+        "−4."
+      ],
+      "a": 0,
+      "sol": "O limite em2 é4.",
+      "hyp": "Pode usar o valor do numerador ou do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:prolongamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-038",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que k a função f(x)=(√(x+1)−1)/x, x≠0, e f(0)=k seja contínua?",
+      "o": [
+        "1.",
+        "1/2.",
+        "0.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "O limite em0 é1/2.",
+      "hyp": "Pode substituir diretamente e obter indeterminação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:prolongamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-039",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua e f(1)=−2, f(4)=5, então podemos garantir...",
+      "o": [
+        "que tem exatamente um zero.",
+        "que é crescente.",
+        "que f toma o valor0 em algum ponto de ]1,4[.",
+        "que f'(x)>0."
+      ],
+      "a": 2,
+      "sol": "Pelo TVI, passa por todos os valores entre −2 e5.",
+      "hyp": "Pode concluir unicidade/monotonia sem dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:tvi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-040",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua em [0,2], f(0)=1 e f(2)=4, então existe c com f(c)=3?",
+      "o": [
+        "Não.",
+        "Só se f for derivável.",
+        "Só se f for crescente.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "3 está entre1 e4; o TVI garante pelo menos um c.",
+      "hyp": "Pode exigir monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:tvi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-041",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se f é contínua em [a,b] e nunca vale0, então f(a) e f(b)...",
+      "o": [
+        "não podem ter sinais opostos.",
+        "têm de ser iguais.",
+        "têm de ser positivos.",
+        "têm de ser negativos."
+      ],
+      "a": 0,
+      "sol": "Se tivessem sinais opostos, o TVI forçaria um zero.",
+      "hyp": "Pode concluir um sinal específico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:contrapositivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-042",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=x³+x−1 tem pelo menos uma raiz em ]0,1[ porque...",
+      "o": [
+        "f'(x)>0 apenas.",
+        "f(0)<0 e f(1)>0 e f é contínua.",
+        "é cúbica.",
+        "f(0)=f(1)."
+      ],
+      "a": 1,
+      "sol": "f(0)=−1 e f(1)=1; continuidade polinomial aplica Bolzano.",
+      "hyp": "Pode usar apenas o grau do polinómio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:bolzano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-043",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=e^x−2 tem uma raiz em ]0,1[ porque...",
+      "o": [
+        "e^x é sempre positiva, logo não há raiz.",
+        "f(0)=0.",
+        "f(0)=−1 e f(1)=e−2>0.",
+        "f(1)<0."
+      ],
+      "a": 2,
+      "sol": "Há mudança de sinal e continuidade.",
+      "hyp": "Pode confundir positividade de e^x com positividade de e^x−2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:bolzano-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-044",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O Teorema do Valor Intermédio garante existência, mas não garante...",
+      "o": [
+        "que a função assume valores intermédios.",
+        "continuidade.",
+        "existência de algum ponto.",
+        "unicidade do ponto onde o valor é atingido."
+      ],
+      "a": 3,
+      "sol": "Sem monotonia, o mesmo valor pode ser atingido várias vezes.",
+      "hyp": "Pode ler 'existe' como 'existe exatamente um'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:tvi-unicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-045",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua e estritamente crescente em [a,b], com f(a)<0<f(b), então a raiz em ]a,b[ é...",
+      "o": [
+        "única.",
+        "dupla.",
+        "inexistente.",
+        "necessariamente a média (a+b)/2."
+      ],
+      "a": 0,
+      "sol": "Continuidade dá existência e monotonia estrita dá unicidade.",
+      "hyp": "Pode concluir que a raiz fica no ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:existencia-unicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-046",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→2}(x³−8)/(x−2)=",
+      "o": [
+        "6.",
+        "12.",
+        "4.",
+        "8."
+      ],
+      "a": 1,
+      "sol": "x³−8=(x−2)(x²+2x+4); em2 dá12.",
+      "hyp": "Pode confundir com derivada x³ em x=2? A derivada também é12, confirmando.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:fatorizacao-cubo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-047",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→1}(x^n−1)/(x−1), para n natural positivo, é...",
+      "o": [
+        "1.",
+        "n−1.",
+        "n.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "É a soma 1+x+...+x^{n−1} avaliada em1, com n termos.",
+      "hyp": "Pode confundir com n−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:geral-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-048",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma temperatura T(t) é contínua entre as 10h e as 11h, com T(10)=18°C e T(11)=22°C. Podemos afirmar que...",
+      "o": [
+        "a temperatura cresceu sempre.",
+        "às10h30 era exatamente20°C.",
+        "a derivada foi sempre4.",
+        "em algum instante a temperatura foi20°C."
+      ],
+      "a": 3,
+      "sol": "O TVI garante que20°C foi atingido, mas não quando nem monotonia.",
+      "hyp": "Pode assumir variação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:modelacao-tvi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-049",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "A altura de água H(t) é contínua e passa de 1,2m para0,8m. Então...",
+      "o": [
+        "atinge 1,0m em algum instante intermédio.",
+        "desce sempre.",
+        "atinge 1,0m exatamente a meio do tempo.",
+        "tem derivada constante."
+      ],
+      "a": 0,
+      "sol": "1,0 está entre os valores extremos; continuidade basta para existência.",
+      "hyp": "Pode supor linearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:modelacao-tvi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-LC-050",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-limites-continuidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma função pode ser contínua num ponto e não ser derivável nesse ponto?",
+      "o": [
+        "Não.",
+        "Sim, por exemplo |x| em0.",
+        "Só se for polinomial.",
+        "Só se o valor no ponto for0."
+      ],
+      "a": 1,
+      "sol": "Derivabilidade implica continuidade, mas o recíproco é falso.",
+      "hyp": "Pode confundir as duas propriedades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-limites-continuidade:continua-nao-derivavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
