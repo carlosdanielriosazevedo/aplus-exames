@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se não são permitidas letras iguais na palavra anterior, quantas células válidas restam?",
+      "q": "Quantas palavras de 2 letras sobre {A,B,C} existem se não são permitidas letras iguais?",
       "o": [
         "9.",
         "6.",
@@ -1205,7 +1205,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Acrescentando uma terceira posição também sem repetição ao caso anterior, quantas folhas finais?",
+      "q": "Uma senha tem 3 posições escolhidas de 10 símbolos, sem repetição. Quantas senhas são possíveis?",
       "o": [
         "720.",
         "900.",
