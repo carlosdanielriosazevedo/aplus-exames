@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cont",
+  "subtopicId": "11-cont-diagramas",
+  "subtopic": "Diagramas, tabelas e organização de casos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha árvores de escolhas, tabelas de dupla entrada, enumeração sistemática, simetria, complemento e organização/validação de casos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CONT-DG-001",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um diagrama de árvore é útil para...",
+      "o": [
+        "organizar escolhas sucessivas e visualizar ramos.",
+        "calcular derivadas.",
+        "resolver apenas equações.",
+        "representar funções contínuas."
+      ],
+      "a": 0,
+      "sol": "Cada nível da árvore pode representar uma etapa do processo de escolha.",
+      "hyp": "Pode pensar que diagramas de árvore são apenas de probabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-utilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-002",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa árvore de contagem, cada caminho completo da raiz a uma folha representa...",
+      "o": [
+        "uma etapa isolada.",
+        "um resultado possível.",
+        "uma regra de soma apenas.",
+        "um resultado impossível."
+      ],
+      "a": 1,
+      "sol": "Um caminho completo fixa uma opção em cada etapa.",
+      "hyp": "Pode contar nós em vez de caminhos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:caminho-folha",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-003",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma árvore tem 2 ramos na primeira etapa e, de cada ramo, 3 na segunda. Quantas folhas?",
+      "o": [
+        "5.",
+        "3.",
+        "6.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "2×3=6.",
+      "hyp": "Pode somar níveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:folhas-uniformes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-004",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma tabela cruza 3 opções de linha com 4 opções de coluna. Quantas células de combinação?",
+      "o": [
+        "7.",
+        "4.",
+        "3.",
+        "12."
+      ],
+      "a": 3,
+      "sol": "3×4=12.",
+      "hyp": "Pode somar linhas e colunas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:tabela-cartesiana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-005",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma tabela de dupla entrada ajuda sobretudo a organizar...",
+      "o": [
+        "pares de escolhas de dois conjuntos.",
+        "apenas sequências longas.",
+        "permutação circular.",
+        "fatoriais."
+      ],
+      "a": 0,
+      "sol": "Linhas e colunas representam duas características ou escolhas.",
+      "hyp": "Pode limitar tabelas a dados estatísticos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:tabela-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-006",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com camisolas {A,B} e calças {1,2,3}, uma tabela de dupla entrada teria quantas combinações?",
+      "o": [
+        "5.",
+        "6.",
+        "3.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "2×3=6.",
+      "hyp": "Pode contar cabeçalhos da tabela.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:tabela-roupa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-007",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Num diagrama de árvore com ramos não uniformes, o total de resultados obtém-se...",
+      "o": [
+        "multiplicando sempre os graus máximos.",
+        "contando apenas os nós internos.",
+        "somando o número de folhas de todos os ramos.",
+        "fazendo a média dos ramos."
+      ],
+      "a": 2,
+      "sol": "Cada folha representa um resultado final distinto.",
+      "hyp": "Pode aplicar multiplicação uniforme quando não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-nao-uniforme",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-008",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um primeiro ramo A termina em 4 folhas e um ramo B termina em 7. O total é...",
+      "o": [
+        "28.",
+        "7.",
+        "4.",
+        "11."
+      ],
+      "a": 3,
+      "sol": "As folhas dos ramos exclusivos somam-se.",
+      "hyp": "Pode multiplicar 4×7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:somar-folhas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-009",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num problema de contagem, listar casos de forma sistemática ajuda a evitar...",
+      "o": [
+        "omissões e duplicações.",
+        "apenas cálculos com decimais.",
+        "uso de símbolos.",
+        "qualquer necessidade de raciocínio."
+      ],
+      "a": 0,
+      "sol": "Uma organização consistente permite verificar cobertura e exclusividade.",
+      "hyp": "Pode achar que listar casos é sempre menos rigoroso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:lista-sistematica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-010",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os pares ordenados (cor, tamanho) com 3 cores e 2 tamanhos podem ser organizados numa tabela com...",
+      "o": [
+        "5 combinações.",
+        "6 combinações.",
+        "3 combinações.",
+        "2 combinações."
+      ],
+      "a": 1,
+      "sol": "Produto cartesiano de conjuntos com 3 e 2 elementos.",
+      "hyp": "Pode somar os tamanhos dos conjuntos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:pares-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-011",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se a ordem dos acontecimentos importa, numa árvore...",
+      "o": [
+        "a árvore deixa de ser útil.",
+        "todas as folhas iguais fundem-se.",
+        "ramos diferentes podem representar sequências diferentes mesmo com as mesmas escolhas finais.",
+        "conta-se apenas o último nível."
+      ],
+      "a": 2,
+      "sol": "A sequência dos ramos identifica o resultado ordenado.",
+      "hyp": "Pode ignorar a ordem do caminho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:ordem-arvore",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-012",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Lançar uma moeda duas vezes pode ser representado por uma árvore com quantas folhas?",
+      "o": [
+        "2.",
+        "3.",
+        "8.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "Resultados: CC, CK, KC, KK.",
+      "hyp": "Pode contar apenas cara/coroa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:moeda-duas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-013",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Lançar uma moeda três vezes produz quantas folhas numa árvore completa?",
+      "o": [
+        "8.",
+        "6.",
+        "3.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "2³=8.",
+      "hyp": "Pode multiplicar 2×3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:moeda-tres",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-014",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Lançar um dado e depois uma moeda gera quantos caminhos completos?",
+      "o": [
+        "8.",
+        "12.",
+        "6.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "6×2=12.",
+      "hyp": "Pode somar 6+2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:dado-moeda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-015",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma tabela é particularmente conveniente quando há...",
+      "o": [
+        "muitas etapas dependentes e profundas.",
+        "apenas um resultado.",
+        "duas escolhas cruzadas com poucas opções.",
+        "nenhuma estrutura de casos."
+      ],
+      "a": 2,
+      "sol": "Uma grelha linha-coluna torna pares fáceis de visualizar.",
+      "hyp": "Pode escolher tabela para qualquer processo sem considerar legibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:quando-usar-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-016",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma árvore é particularmente conveniente quando...",
+      "o": [
+        "há apenas uma escolha.",
+        "não existem ramos.",
+        "o problema é puramente algébrico.",
+        "há várias etapas sucessivas ou escolhas dependentes."
+      ],
+      "a": 3,
+      "sol": "A árvore explicita a evolução do processo etapa a etapa.",
+      "hyp": "Pode preferir tabela mesmo com dependências complexas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:quando-usar-arvore",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-017",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um aluno escolhe Ciências ou Humanidades. Em Ciências há 3 opções de clube; em Humanidades há 2. Quantas folhas finais?",
+      "o": [
+        "5.",
+        "6.",
+        "3.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "3+2=5.",
+      "hyp": "Pode multiplicar os ramos principais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-ramos-desiguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-018",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se numa árvore cada uma das 4 folhas atuais se ramifica em 3 novas opções, o novo total de folhas é...",
+      "o": [
+        "7.",
+        "12.",
+        "4.",
+        "3."
+      ],
+      "a": 1,
+      "sol": "Cada folha antiga gera 3 novas:4×3.",
+      "hyp": "Pode somar 3 ao total antigo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:expandir-arvore",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-019",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela com 5 linhas úteis e 7 colunas úteis representa no máximo...",
+      "o": [
+        "12 pares.",
+        "7 pares.",
+        "35 pares.",
+        "5 pares."
+      ],
+      "a": 2,
+      "sol": "5×7=35.",
+      "hyp": "Pode contar cabeçalhos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:tabela-5x7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-020",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Ao listar resultados manualmente, uma estratégia útil é...",
+      "o": [
+        "escrever casos aleatoriamente.",
+        "repetir casos para confirmar.",
+        "parar quando parece haver muitos.",
+        "fixar primeiro uma característica e variar sistematicamente as restantes."
+      ],
+      "a": 3,
+      "sol": "Fixar uma ordem de variação reduz falhas e duplicações.",
+      "hyp": "Pode confundir informalidade com falta de método.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:lista-metodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-021",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas palavras de 2 letras sobre {A,B,C} há? Uma tabela 3×3 mostraria...",
+      "o": [
+        "9.",
+        "6.",
+        "3.",
+        "12."
+      ],
+      "a": 0,
+      "sol": "Cada primeira letra combina com 3 segundas letras.",
+      "hyp": "Pode excluir repetições sem indicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:tabela-palavras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-022",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se não são permitidas letras iguais na palavra anterior, quantas células válidas restam?",
+      "o": [
+        "9.",
+        "6.",
+        "3.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "Das 9, retiram-se AA,BB,CC: restam 6.",
+      "hyp": "Pode esquecer a diagonal inválida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:tabela-restricao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-023",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa tabela de dupla entrada para pares (i,j), a diagonal principal costuma corresponder a...",
+      "o": [
+        "casos em que i≠j.",
+        "casos impossíveis sempre.",
+        "casos em que i=j.",
+        "resultados não ordenados."
+      ],
+      "a": 2,
+      "sol": "Na diagonal, índice da linha e coluna coincide.",
+      "hyp": "Pode interpretar diagonal como exclusão obrigatória.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-024",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela 4×4 de pares ordenados tem 16 células. Excluindo a diagonal, restam...",
+      "o": [
+        "8.",
+        "4.",
+        "16.",
+        "12."
+      ],
+      "a": 3,
+      "sol": "16−4=12.",
+      "hyp": "Pode dividir por 2 sem razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:excluir-diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-025",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se os pares (i,j) e (j,i) forem considerados equivalentes e i≠j, numa tabela 4×4 quantos pares distintos sem ordem existem?",
+      "o": [
+        "6.",
+        "12.",
+        "4.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "As 12 células fora da diagonal agrupam-se aos pares:12/2=6.",
+      "hyp": "Pode contar pares ordenados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:simetria-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-026",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Quando uma tabela é simétrica relativamente à diagonal, isso pode indicar que...",
+      "o": [
+        "todos os casos são iguais.",
+        "trocar a ordem dos dois elementos produz uma relação equivalente ou comparável.",
+        "a diagonal deve ser contada duas vezes.",
+        "não há pares possíveis."
+      ],
+      "a": 1,
+      "sol": "A simetria ajuda a identificar duplicações por inversão.",
+      "hyp": "Pode ignorar o significado da simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:simetria-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-027",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma árvore tem 3 ramos iniciais. O primeiro gera 2 folhas, o segundo 4 e o terceiro 5. Total de folhas?",
+      "o": [
+        "24.",
+        "12.",
+        "11.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "2+4+5=11.",
+      "hyp": "Pode multiplicar 3×(2+4+5).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-028",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num ramo A há 2 opções e depois 3; num ramo B há 4 opções finais. Quantos resultados?",
+      "o": [
+        "24.",
+        "9.",
+        "6.",
+        "10."
+      ],
+      "a": 3,
+      "sol": "A produz 2×3=6; B produz 4; total 10.",
+      "hyp": "Pode multiplicar 2×3×4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-mista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-029",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma árvore representa escolher uma letra A/B e depois um dígito 0/1/2, exceto que após B não pode sair 2. Quantas folhas válidas?",
+      "o": [
+        "5.",
+        "6.",
+        "4.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "Após A:3; após B:2; total 5.",
+      "hyp": "Pode usar 2×3 sem aplicar a restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-dependencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-030",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma sequência tem 3 posições binárias, mas não pode começar por 0. Uma árvore mostra quantas folhas?",
+      "o": [
+        "8.",
+        "4.",
+        "6.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "Primeira posição fixa em 1; restantes 2²=4.",
+      "hyp": "Pode manter os 8 casos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-prefixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-031",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos resultados tem uma árvore de profundidade 4 com 2 ramos em cada nó?",
+      "o": [
+        "8.",
+        "6.",
+        "16.",
+        "4."
+      ],
+      "a": 2,
+      "sol": "2⁴=16.",
+      "hyp": "Pode multiplicar profundidade por número de ramos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-032",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se uma árvore binária de 4 etapas proíbe exatamente 3 folhas específicas, quantas folhas válidas restam?",
+      "o": [
+        "16.",
+        "12.",
+        "8.",
+        "13."
+      ],
+      "a": 3,
+      "sol": "Total 16; retirando 3, ficam 13.",
+      "hyp": "Pode remover ramos inteiros em vez de folhas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:excluir-folhas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-033",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Contar por complemento significa...",
+      "o": [
+        "contar o total e subtrair os casos indesejados.",
+        "somar apenas casos indesejados.",
+        "duplicar o total.",
+        "contar apenas um ramo."
+      ],
+      "a": 0,
+      "sol": "É útil quando os casos proibidos são mais fáceis de contar.",
+      "hyp": "Pode confundir complemento com casos adicionais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:complemento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-034",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Há 100 códigos possíveis e 18 têm uma propriedade proibida. Quantos são válidos?",
+      "o": [
+        "118.",
+        "82.",
+        "18.",
+        "100."
+      ],
+      "a": 1,
+      "sol": "100−18=82.",
+      "hyp": "Pode somar proibidos ao total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:complemento-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-035",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela de 5×5 representa pares ordenados. Excluindo pares com elementos iguais, ficam...",
+      "o": [
+        "25.",
+        "10.",
+        "20.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "25−5=20.",
+      "hyp": "Pode dividir por 2 embora a ordem ainda importe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:pares-distintos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-036",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se além de excluir a diagonal os pares inversos forem equivalentes, no caso 5×5 ficam quantos pares sem ordem?",
+      "o": [
+        "20.",
+        "5.",
+        "15.",
+        "10."
+      ],
+      "a": 3,
+      "sol": "20/2=10.",
+      "hyp": "Pode manter pares ordenados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:pares-sem-ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-037",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma árvore começa com 3 opções. Após a primeira há 2 escolhas, após a segunda 3 e após a terceira 4. Total de folhas?",
+      "o": [
+        "9.",
+        "24.",
+        "12.",
+        "6."
+      ],
+      "a": 0,
+      "sol": "Somam-se os ramos finais:2+3+4=9.",
+      "hyp": "Pode multiplicar 3×2×3×4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-dependente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-038",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma árvore tem dois ramos iniciais: A com 2×3 folhas e B com 3×4 folhas. Total?",
+      "o": [
+        "72.",
+        "18.",
+        "14.",
+        "24."
+      ],
+      "a": 1,
+      "sol": "A=6, B=12; total 18.",
+      "hyp": "Pode multiplicar os ramos independentes entre si.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-dois-subprocessos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-039",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma lista sistemática de números de 2 algarismos com algarismos {1,2,3} e sem repetição deve conter...",
+      "o": [
+        "9 números.",
+        "3 números.",
+        "6 números.",
+        "12 números."
+      ],
+      "a": 2,
+      "sol": "12,13,21,23,31,32.",
+      "hyp": "Pode incluir 11,22,33.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:lista-sem-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-040",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa grelha 6×6 de pares ordenados, quantas células estão estritamente acima da diagonal?",
+      "o": [
+        "30.",
+        "6.",
+        "18.",
+        "15."
+      ],
+      "a": 3,
+      "sol": "Fora da diagonal há 30; metade fica acima:15.",
+      "hyp": "Pode contar a diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:triangulo-superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-041",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Contar apenas a metade superior de uma tabela simétrica é adequado quando...",
+      "o": [
+        "a ordem dos dois elementos não importa e a diagonal é tratada separadamente.",
+        "a ordem importa.",
+        "todos os pares da diagonal são obrigatórios.",
+        "a tabela não é quadrada."
+      ],
+      "a": 0,
+      "sol": "Pares (i,j) e (j,i) seriam duplicados.",
+      "hyp": "Pode eliminar metade mesmo quando a ordem importa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:metade-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-042",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Há 7 pessoas. Uma tabela 7×7 de pares ordenados de pessoas distintas tem quantas células válidas?",
+      "o": [
+        "49.",
+        "42.",
+        "21.",
+        "14."
+      ],
+      "a": 1,
+      "sol": "7×6=42, ou 49−7.",
+      "hyp": "Pode contar a diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:pares-pessoas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-043",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se apenas interessa formar pares não ordenados das 7 pessoas, quantos pares há?",
+      "o": [
+        "42.",
+        "14.",
+        "21.",
+        "7."
+      ],
+      "a": 2,
+      "sol": "As 42 ordens agrupam-se duas a duas:21.",
+      "hyp": "Pode esquecer que AB e BA são o mesmo par.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:pares-nao-ordenados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-044",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma árvore de senhas tem 10 opções na primeira posição e 9 na segunda porque não há repetição. Quantas folhas após duas posições?",
+      "o": [
+        "100.",
+        "19.",
+        "81.",
+        "90."
+      ],
+      "a": 3,
+      "sol": "10×9=90.",
+      "hyp": "Pode ignorar a dependência criada pela primeira escolha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-sem-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-045",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Acrescentando uma terceira posição também sem repetição ao caso anterior, quantas folhas finais?",
+      "o": [
+        "720.",
+        "900.",
+        "810.",
+        "90."
+      ],
+      "a": 0,
+      "sol": "10×9×8=720.",
+      "hyp": "Pode manter 9 opções na terceira posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:arvore-sem-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-046",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma app mostra 3 categorias. Na primeira há 5 ações, na segunda 2 e na terceira 6. Um diagrama de árvore teria quantas folhas de ação final?",
+      "o": [
+        "60.",
+        "13.",
+        "11.",
+        "30."
+      ],
+      "a": 1,
+      "sol": "As categorias são ramos alternativos:5+2+6=13.",
+      "hyp": "Pode multiplicar categorias alternativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:modelacao-menu",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-047",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um processo tem 2 tipos de conta. Conta A permite 3 planos e cada plano 2 periodicidades; conta B permite 4 planos sem periodicidade. Total de configurações?",
+      "o": [
+        "24.",
+        "7.",
+        "10.",
+        "14."
+      ],
+      "a": 2,
+      "sol": "A:3×2=6; B:4; total 10.",
+      "hyp": "Pode multiplicar tudo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:modelacao-arvore",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-048",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num problema com muitos casos, uma boa verificação de uma enumeração é...",
+      "o": [
+        "confiar apenas no número de linhas escritas.",
+        "ordenar alfabeticamente e parar.",
+        "duplicar todos os casos.",
+        "comparar a lista com uma contagem independente pelo princípio da multiplicação/adicional."
+      ],
+      "a": 3,
+      "sol": "Métodos independentes ajudam a detetar omissões/duplicações.",
+      "hyp": "Pode tratar uma lista extensa como automaticamente completa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:validar-enumeracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-049",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma árvore completa prevê 24 folhas mas a enumeração manual tem 23 casos distintos, a conclusão mais prudente é...",
+      "o": [
+        "há provavelmente um caso em falta.",
+        "a árvore está necessariamente errada.",
+        "23=24 por arredondamento.",
+        "há exatamente um caso duplicado."
+      ],
+      "a": 0,
+      "sol": "Se os dois modelos descrevem o mesmo espaço, a discrepância sugere omissão; deve-se rever antes de concluir.",
+      "hyp": "Pode aceitar discrepâncias sem revisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:detetar-omissao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-DG-050",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-diagramas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Para organizar todas as combinações entre 8 modelos e 5 cores, a representação mais direta é...",
+      "o": [
+        "uma árvore de profundidade 8.",
+        "uma tabela 8×5.",
+        "uma reta numérica.",
+        "um gráfico circular."
+      ],
+      "a": 1,
+      "sol": "Uma tabela de dupla entrada representa diretamente o produto cartesiano dos dois conjuntos.",
+      "hyp": "Pode usar uma estrutura mais complexa sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-diagramas:modelacao-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
