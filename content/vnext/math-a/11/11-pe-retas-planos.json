@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-pe",
+  "subtopicId": "11-pe-retas-planos",
+  "subtopic": "Ângulos e posições relativas de retas e planos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha ângulos entre retas/planos, reta-plano, vetores diretores/normais, paralelismo, perpendicularidade, retas reversas e parâmetros. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11PE-RP-001",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O ângulo entre duas retas secantes é definido como...",
+      "o": [
+        "o menor ângulo entre vetores diretores das retas.",
+        "a soma das inclinações.",
+        "sempre 90°.",
+        "o maior ângulo entre vetores diretores."
+      ],
+      "a": 0,
+      "sol": "Usa-se o menor ângulo entre as direções das retas.",
+      "hyp": "Pode confundir com diferença orientada de inclinações sem redução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-002",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se duas retas têm vetores diretores paralelos, elas são...",
+      "o": [
+        "perpendiculares.",
+        "paralelas ou coincidentes.",
+        "reversas sempre.",
+        "secantes sempre."
+      ],
+      "a": 1,
+      "sol": "Vetores diretores proporcionais dão a mesma direção.",
+      "hyp": "Pode concluir coincidência sem verificar posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-003",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se duas retas no espaço não são paralelas nem se intersectam, chamam-se...",
+      "o": [
+        "coincidentes.",
+        "perpendiculares.",
+        "reversas.",
+        "concorrentes."
+      ],
+      "a": 2,
+      "sol": "Retas reversas são exclusivas do espaço tridimensional.",
+      "hyp": "Pode confundir não interseção com paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:retas-reversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-004",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Dois planos são paralelos quando os seus vetores normais são...",
+      "o": [
+        "perpendiculares.",
+        "nulos.",
+        "de mesma norma apenas.",
+        "paralelos."
+      ],
+      "a": 3,
+      "sol": "Normais proporcionais indicam planos paralelos ou coincidentes.",
+      "hyp": "Pode confundir paralelismo de planos com ortogonalidade de normais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-paralelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-005",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Dois planos são perpendiculares quando os seus vetores normais são...",
+      "o": [
+        "perpendiculares.",
+        "paralelos.",
+        "iguais.",
+        "opostos."
+      ],
+      "a": 0,
+      "sol": "O ângulo diedro agudo entre os planos é o ângulo entre as normais.",
+      "hyp": "Pode trocar as condições de paralelismo e perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-perpendiculares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-006",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As retas de diretores (1,2) e (2,4) são...",
+      "o": [
+        "perpendiculares.",
+        "paralelas.",
+        "de ângulo 45°.",
+        "sem relação."
+      ],
+      "a": 1,
+      "sol": "(2,4)=2(1,2).",
+      "hyp": "Pode olhar apenas para componentes diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:retas-diretores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-007",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As retas de diretores (1,2) e (2,−1) formam ângulo...",
+      "o": [
+        "45°.",
+        "0°.",
+        "90°.",
+        "60°."
+      ],
+      "a": 2,
+      "sol": "Produto escalar=2−2=0.",
+      "hyp": "Pode usar apenas declives sem calcular corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-retas-perp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-008",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O ângulo entre as direções (1,0) e (1,1) é...",
+      "o": [
+        "90°.",
+        "30°.",
+        "60°.",
+        "45°."
+      ],
+      "a": 3,
+      "sol": "cosθ=1/(1·√2)=√2/2.",
+      "hyp": "Pode usar o ângulo com o eixo errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-direcoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-009",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o cosseno do ângulo entre u=(1,2) e v=(2,1)?",
+      "o": [
+        "4/5.",
+        "3/5.",
+        "1/5.",
+        "−4/5."
+      ],
+      "a": 0,
+      "sol": "u·v=4 e ambas as normas são √5, logo cosθ=4/5.",
+      "hyp": "Pode dividir por √5 em vez de 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:cos-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-010",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "O ângulo entre as retas de diretores (1,2) e (2,1) é...",
+      "o": [
+        "arccos(1/5).",
+        "arccos(4/5).",
+        "arcsin(4/5).",
+        "π/2."
+      ],
+      "a": 1,
+      "sol": "O cosseno do menor ângulo é 4/5.",
+      "hyp": "Pode usar seno sem razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-arccos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-011",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ângulo entre uma reta e um plano é o complemento do ângulo entre...",
+      "o": [
+        "a reta e qualquer reta do plano.",
+        "duas normais ao plano.",
+        "a reta e uma normal ao plano.",
+        "a reta e a origem."
+      ],
+      "a": 2,
+      "sol": "Se β é o ângulo entre diretor da reta e normal do plano, então o ângulo reta-plano é π/2−β.",
+      "hyp": "Pode usar diretamente o ângulo com a normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-plano-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-012",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma reta é paralela a um plano, o ângulo entre reta e plano é...",
+      "o": [
+        "90°.",
+        "45°.",
+        "indefinido.",
+        "0°."
+      ],
+      "a": 3,
+      "sol": "Uma reta paralela ao plano tem direção contida no plano.",
+      "hyp": "Pode confundir com a normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-plano-paralela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-013",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma reta é perpendicular a um plano, o ângulo entre eles é...",
+      "o": [
+        "90°.",
+        "0°.",
+        "45°.",
+        "180°."
+      ],
+      "a": 0,
+      "sol": "A reta segue a direção normal ao plano.",
+      "hyp": "Pode usar o ângulo entre reta e normal, que seria 0°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-plano-perp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-014",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ângulo entre dois planos é normalmente tomado como...",
+      "o": [
+        "o maior ângulo entre as normais.",
+        "o menor ângulo entre as suas normais.",
+        "a soma dos ângulos com Ox.",
+        "sempre 90°."
+      ],
+      "a": 1,
+      "sol": "Usa-se o ângulo agudo ou reto entre as direções normais.",
+      "hyp": "Pode esquecer que normais opostas representam o mesmo plano direcionalmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-015",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os planos x=0 e y=0 são...",
+      "o": [
+        "paralelos.",
+        "coincidentes.",
+        "perpendiculares.",
+        "reversos."
+      ],
+      "a": 2,
+      "sol": "Normais (1,0,0) e (0,1,0) são perpendiculares.",
+      "hyp": "Pode achar que planos coordenados são sempre paralelos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-coordenados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-016",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os planos z=0 e z=5 são...",
+      "o": [
+        "perpendiculares.",
+        "coincidentes.",
+        "secantes.",
+        "paralelos distintos."
+      ],
+      "a": 3,
+      "sol": "Têm a mesma normal (0,0,1) e termos independentes diferentes.",
+      "hyp": "Pode achar que equações diferentes implicam direções diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-paralelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-017",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os planos x+y+z=1 e 2x+2y+2z=2 são...",
+      "o": [
+        "coincidentes.",
+        "paralelos distintos.",
+        "perpendiculares.",
+        "secantes."
+      ],
+      "a": 0,
+      "sol": "A segunda equação é o dobro da primeira.",
+      "hyp": "Pode ver apenas normais proporcionais e não comparar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-coincidentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-018",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Os planos x+y+z=1 e 2x+2y+2z=5 são...",
+      "o": [
+        "coincidentes.",
+        "paralelos distintos.",
+        "perpendiculares.",
+        "reversos."
+      ],
+      "a": 1,
+      "sol": "Normais proporcionais, mas equações não equivalentes.",
+      "hyp": "Pode concluir coincidência só pelas normais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-paralelos-distintos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-019",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de diretor (1,2,3) é paralela ao plano x−2y+z=0 se...",
+      "o": [
+        "os vetores forem proporcionais.",
+        "a reta passar pela origem.",
+        "o produto do diretor pela normal for 0.",
+        "a normal tiver norma 1."
+      ],
+      "a": 2,
+      "sol": "A direção da reta deve ser perpendicular à normal do plano.",
+      "hyp": "Pode usar a condição de perpendicularidade reta-plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-paralela-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-020",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A reta de diretor (1,1,0) é paralela ao plano x−y+2z=3?",
+      "o": [
+        "Não.",
+        "Só se passar pela origem.",
+        "Só se z=0.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "(1,1,0)·(1,−1,2)=1−1=0.",
+      "hyp": "Pode exigir que a reta esteja contida no plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:testar-reta-paralela-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-021",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta de diretor (1,2,2) é perpendicular ao plano x+2y+2z=4?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se passar por (0,0,0).",
+        "Só se for vertical."
+      ],
+      "a": 0,
+      "sol": "O diretor é igual à normal do plano.",
+      "hyp": "Pode impor produto zero em vez de paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-perpendicular-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-022",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ângulo entre os planos x=0 e x+y=0?",
+      "o": [
+        "90°.",
+        "45°.",
+        "30°.",
+        "60°."
+      ],
+      "a": 1,
+      "sol": "Normais n1=(1,0,0), n2=(1,1,0); cosθ=1/√2.",
+      "hyp": "Pode usar diretamente coeficientes sem normalizar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-023",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o cosseno do ângulo entre os planos x+y+z=0 e x−y=0?",
+      "o": [
+        "1/2.",
+        "1/√2.",
+        "0.",
+        "−1/2."
+      ],
+      "a": 2,
+      "sol": "Normais (1,1,1) e (1,−1,0) têm produto 0.",
+      "hyp": "Pode esquecer a componente z nula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-perpendiculares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-024",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma reta está contida num plano, então o seu vetor diretor é...",
+      "o": [
+        "paralelo à normal.",
+        "nulo.",
+        "sempre horizontal.",
+        "perpendicular à normal do plano."
+      ],
+      "a": 3,
+      "sol": "Direções contidas no plano são ortogonais à normal.",
+      "hyp": "Pode confundir estar contida com ser perpendicular ao plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-contida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-025",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A reta de diretor (2,−1,0) pode estar contida no plano x+2y+3z=5?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se o plano passar pela origem.",
+        "Só se z=0."
+      ],
+      "a": 0,
+      "sol": "(2,−1,0)·(1,2,3)=2−2=0, logo a direção é paralela ao plano; a posição decide contenção efetiva.",
+      "hyp": "Pode achar que direção compatível garante automaticamente a posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:direcao-contida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-026",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ângulo entre a reta de diretor v=(0,0,1) e o plano z=0?",
+      "o": [
+        "0°.",
+        "90°.",
+        "45°.",
+        "180°."
+      ],
+      "a": 1,
+      "sol": "A reta é normal ao plano.",
+      "hyp": "Pode usar o ângulo entre v e a normal, que é 0°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-027",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ângulo entre a reta de diretor v=(1,0,0) e o plano z=0?",
+      "o": [
+        "90°.",
+        "45°.",
+        "0°.",
+        "indefinido."
+      ],
+      "a": 2,
+      "sol": "A direção está contida no plano.",
+      "hyp": "Pode confundir com o eixo Oz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-028",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta tem diretor v=(1,1,1) e um plano normal n=(0,0,1). Se β é o ângulo reta-plano, então sinβ=",
+      "o": [
+        "√2/√3.",
+        "1/3.",
+        "√2/2.",
+        "1/√3."
+      ],
+      "a": 3,
+      "sol": "sinβ=|v·n|/(||v||||n||)=1/√3.",
+      "hyp": "Pode usar o cosseno diretamente como ângulo reta-plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:formula-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-029",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Para vetor diretor v e normal n, o seno do ângulo β entre reta e plano satisfaz...",
+      "o": [
+        "sinβ=|v·n|/(||v||||n||).",
+        "cosβ=|v·n|/(||v||||n||) sempre.",
+        "tanβ=||v||||n||.",
+        "sinβ=v·n sem normalização."
+      ],
+      "a": 0,
+      "sol": "É o complemento da fórmula do ângulo entre v e n.",
+      "hyp": "Pode confundir com a fórmula entre dois vetores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:formula-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-030",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de diretor (1,1,0) e o plano de normal (0,0,1) formam ângulo...",
+      "o": [
+        "90°.",
+        "0°.",
+        "45°.",
+        "60°."
+      ],
+      "a": 1,
+      "sol": "O produto é zero, logo a direção está paralela ao plano.",
+      "hyp": "Pode pensar que produto zero significa reta perpendicular ao plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-plano-produto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-031",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de diretor (1,0,1) e o plano z=0 formam ângulo...",
+      "o": [
+        "90°.",
+        "0°.",
+        "45°.",
+        "60°."
+      ],
+      "a": 2,
+      "sol": "sinβ=1/√2, logo β=45°.",
+      "hyp": "Pode usar o ângulo do vetor com a normal sem complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-032",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ângulo entre planos de normais n1=(1,0,1) e n2=(1,0,−1)?",
+      "o": [
+        "45°.",
+        "0°.",
+        "60°.",
+        "90°."
+      ],
+      "a": 3,
+      "sol": "Produto=1−1=0.",
+      "hyp": "Pode confundir simetria das normais com paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-033",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Dois planos têm normais n1=(1,2,2) e n2=(2,4,4). A posição relativa pode ser...",
+      "o": [
+        "paralelos ou coincidentes.",
+        "perpendiculares.",
+        "sempre secantes.",
+        "reversos."
+      ],
+      "a": 0,
+      "sol": "As normais são proporcionais.",
+      "hyp": "Pode concluir coincidência sem termos independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-normais-proporcionais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-034",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Dois planos têm normais n1=(1,0,0) e n2=(1,1,0). Eles são...",
+      "o": [
+        "paralelos.",
+        "secantes e não perpendiculares.",
+        "perpendiculares.",
+        "coincidentes."
+      ],
+      "a": 1,
+      "sol": "As normais não são proporcionais nem ortogonais, logo os planos intersectam-se numa reta com ângulo não reto.",
+      "hyp": "Pode achar que qualquer normais diferentes dão perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:planos-secantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-035",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No espaço, duas retas com diretores perpendiculares podem ser...",
+      "o": [
+        "sempre perpendiculares.",
+        "sempre reversas.",
+        "perpendiculares ou reversas, dependendo de se se intersectam.",
+        "sempre paralelas."
+      ],
+      "a": 2,
+      "sol": "A ortogonalidade das direções não garante concorrência.",
+      "hyp": "Pode esquecer a posição das retas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:retas-direcoes-ortogonais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-036",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas retas paralelas a um mesmo plano são necessariamente paralelas entre si?",
+      "o": [
+        "Sim.",
+        "Só se estiverem no plano.",
+        "Só se forem horizontais.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Um plano contém infinitas direções, portanto as retas podem ter direções diferentes.",
+      "hyp": "Pode transferir uma propriedade de retas paralelas à mesma reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:duas-retas-paralelas-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-037",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta r tem diretor (1,2,−1). Um plano α tem normal (2,4,−2). A relação é...",
+      "o": [
+        "r perpendicular a α.",
+        "r paralela a α.",
+        "não há relação especial.",
+        "r contida em α obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Diretor e normal são proporcionais.",
+      "hyp": "Pode interpretar vetores proporcionais como paralelismo reta-plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-plano-proporcionais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-038",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta r tem diretor (1,2,−1). Um plano α tem normal (2,−1,0). A relação direcional é...",
+      "o": [
+        "r perpendicular a α.",
+        "r paralela a α.",
+        "r normal ao plano.",
+        "impossível determinar qualquer coisa."
+      ],
+      "a": 1,
+      "sol": "Produto=2−2+0=0, logo a direção é paralela ao plano.",
+      "hyp": "Pode confundir produto zero com perpendicularidade reta-plano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:reta-paralela-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-039",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que k o plano x+ky+z=0 seja perpendicular ao plano 2x−y+3z=1?",
+      "o": [
+        "−5.",
+        "1.",
+        "5.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "(1,k,1)·(2,−1,3)=2−k+3=0 => k=5.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:parametro-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-040",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que k a reta de diretor (1,k,2) seja paralela ao plano x−2y+z=0?",
+      "o": [
+        "−3/2.",
+        "1/2.",
+        "−1/2.",
+        "3/2."
+      ],
+      "a": 3,
+      "sol": "Produto com normal (1,−2,1): 1−2k+2=0 => k=3/2.",
+      "hyp": "Pode impor proporcionalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:parametro-reta-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-041",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que k a reta de diretor (k,2,−1) seja perpendicular ao plano 3x+6y−3z=4?",
+      "o": [
+        "1.",
+        "−1.",
+        "3.",
+        "6."
+      ],
+      "a": 0,
+      "sol": "A normal é 3(1,2,−1), logo k=1.",
+      "hyp": "Pode usar produto zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:parametro-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-042",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O ângulo entre os planos x+y=0 e x+z=0 tem cosseno...",
+      "o": [
+        "0.",
+        "1/2.",
+        "1/√2.",
+        "√3/2."
+      ],
+      "a": 1,
+      "sol": "Normais (1,1,0) e (1,0,1): produto 1; normas √2 e √2; cos=1/2.",
+      "hyp": "Pode dividir por √2 em vez de 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:cos-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-043",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O ângulo entre os planos do item anterior é...",
+      "o": [
+        "45°.",
+        "90°.",
+        "60°.",
+        "30°."
+      ],
+      "a": 2,
+      "sol": "cosθ=1/2.",
+      "hyp": "Pode usar o ângulo suplementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-planos-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-044",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o ângulo entre uma reta e um plano é 30°, então o ângulo entre o diretor da reta e uma normal ao plano pode ser...",
+      "o": [
+        "30°.",
+        "90°.",
+        "120° como menor ângulo.",
+        "60°."
+      ],
+      "a": 3,
+      "sol": "Os ângulos são complementares.",
+      "hyp": "Pode esquecer a complementaridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:complementaridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-045",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o ângulo entre dois planos é 0°, então os planos são...",
+      "o": [
+        "paralelos ou coincidentes.",
+        "perpendiculares.",
+        "sempre coincidentes.",
+        "reversos."
+      ],
+      "a": 0,
+      "sol": "As normais têm a mesma direção.",
+      "hyp": "Pode concluir coincidência sem posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:angulo-zero-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-046",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma rampa tem direção v=(3,0,1) e o chão horizontal tem normal n=(0,0,1). O seno do ângulo da rampa com o chão é...",
+      "o": [
+        "3/√10.",
+        "1/√10.",
+        "1/3.",
+        "√10."
+      ],
+      "a": 1,
+      "sol": "sinβ=|v·n|/(||v||||n||)=1/√10.",
+      "hyp": "Pode usar a componente horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:modelacao-rampa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-047",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma parede vertical x=0 e o chão z=0 formam...",
+      "o": [
+        "0°.",
+        "45°.",
+        "90°.",
+        "60°."
+      ],
+      "a": 2,
+      "sol": "As normais (1,0,0) e (0,0,1) são perpendiculares.",
+      "hyp": "Pode pensar que ambos são planos coordenados e portanto paralelos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:modelacao-parede-chao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-048",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma barra com direção (0,0,1) relativamente ao chão z=0 está...",
+      "o": [
+        "paralela ao chão.",
+        "contida no chão.",
+        "a 45° do chão.",
+        "perpendicular ao chão."
+      ],
+      "a": 3,
+      "sol": "A direção coincide com a normal ao chão.",
+      "hyp": "Pode confundir direção vertical com paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:modelacao-barra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-049",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se dois planos são ambos perpendiculares a uma mesma reta, então são...",
+      "o": [
+        "paralelos.",
+        "perpendiculares entre si.",
+        "sempre coincidentes.",
+        "sem relação possível."
+      ],
+      "a": 0,
+      "sol": "As normais dos dois planos são paralelas ao diretor da reta.",
+      "hyp": "Pode aplicar uma falsa transitividade da perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:dois-planos-mesma-normal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-RP-050",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-retas-planos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma cobertura deve ser paralela ao plano 2x−y+2z=0. Um vetor normal adequado à cobertura pode ser...",
+      "o": [
+        "(1,2,0).",
+        "(2,−1,2).",
+        "(−1,−2,1).",
+        "(2,1,−2)."
+      ],
+      "a": 1,
+      "sol": "Planos paralelos têm normais proporcionais.",
+      "hyp": "Pode procurar um vetor perpendicular à normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-retas-planos:modelacao-plano-paralelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
