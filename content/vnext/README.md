@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **750 perguntas**
-- Progresso bruto: **13,27%**
+- Concluído em rascunho: **1 000 perguntas**
+- Progresso bruto: **17,70%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -93,3 +93,25 @@ Próximo lote: **10.º — Estatística — Amostragem, representatividade e env
 - Total vNext: **750/~5 650 (13,27%)**
 
 Próxima matéria: **10.º — Geometria sintética**.
+
+
+### 10.º ano — Geometria sintética
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Propriedades geométricas e construções de base | 50 | 50 | lote completo em protótipo |
+| Circuncentro e incentro | 50 | 50 | lote completo em protótipo |
+| Baricentro e propriedades das medianas | 50 | 50 | lote completo em protótipo |
+| Ortocentro e alturas | 50 | 50 | lote completo em protótipo |
+| Reta de Euler e circunferência dos nove pontos | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 1 000 perguntas
+
+- Eleições e Partilha: **200/200**
+- Modelos matemáticos em finanças: **250/250**
+- Estatística: **300/300**
+- Geometria sintética: **250/250**
+- Total vNext: **1 000/~5 650 (17,70%)**
+
+Próxima matéria: **10.º — Funções**.
