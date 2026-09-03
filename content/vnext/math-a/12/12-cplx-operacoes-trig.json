@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-cplx",
+  "subtopicId": "12-cplx-operacoes-trig",
+  "subtopic": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha operações em forma trigonométrica, Moivre, raízes n-ésimas, raízes da unidade, equações complexas e interpretação geométrica de multiplicações/divisões. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12CPLX-OT-001",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então z1z2 tem módulo...",
+      "o": [
+        "r1r2.",
+        "r1+r2.",
+        "r1/r2.",
+        "|r1−r2|."
+      ],
+      "a": 0,
+      "sol": "Na multiplicação, os módulos multiplicam-se.",
+      "hyp": "Pode somar módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:produto-modulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-002",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No mesmo produto, um argumento é...",
+      "o": [
+        "α−β.",
+        "α+β.",
+        "αβ.",
+        "α/β."
+      ],
+      "a": 1,
+      "sol": "Na multiplicação, somam-se argumentos.",
+      "hyp": "Pode subtrair argumentos como na divisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:produto-args",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-003",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No quociente z1/z2, com z2≠0, o módulo é...",
+      "o": [
+        "r1r2.",
+        "r1−r2.",
+        "r1/r2.",
+        "r1+r2."
+      ],
+      "a": 2,
+      "sol": "Na divisão, dividem-se os módulos.",
+      "hyp": "Pode multiplicar módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quociente-modulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-004",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No quociente z1/z2, um argumento é...",
+      "o": [
+        "α+β.",
+        "β−α sempre.",
+        "αβ.",
+        "α−β."
+      ],
+      "a": 3,
+      "sol": "Na divisão, subtraem-se argumentos na ordem numerador menos denominador.",
+      "hyp": "Pode inverter a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quociente-args",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-005",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A fórmula de Moivre afirma que [r(cosθ+i sinθ)]^n é...",
+      "o": [
+        "r^n(cos nθ+i sin nθ).",
+        "nr(cosθ+i sinθ).",
+        "r(cos θ^n+i sin θ^n).",
+        "r^n(cosθ+i sinθ)."
+      ],
+      "a": 0,
+      "sol": "Eleva-se o módulo a n e multiplica-se o argumento por n.",
+      "hyp": "Pode aplicar a potência só ao módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-006",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se z=2(cosπ/6+i sinπ/6), então z² tem módulo...",
+      "o": [
+        "2.",
+        "4.",
+        "8.",
+        "√2."
+      ],
+      "a": 1,
+      "sol": "|z²|=2²=4.",
+      "hyp": "Pode manter o módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:potencia-modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-007",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No item anterior, um argumento de z² é...",
+      "o": [
+        "π/6.",
+        "π/12.",
+        "π/3.",
+        "2π/3."
+      ],
+      "a": 2,
+      "sol": "2×π/6=π/3.",
+      "hyp": "Pode dividir o argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:potencia-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-008",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[cosπ/4+i sinπ/4]^2 é...",
+      "o": [
+        "1.",
+        "−1.",
+        "−i.",
+        "i."
+      ],
+      "a": 3,
+      "sol": "Pelo Moivre, cosπ/2+i sinπ/2=i.",
+      "hyp": "Pode manter o argumento π/4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-009",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[cosπ/3+i sinπ/3]^3 é...",
+      "o": [
+        "−1.",
+        "1.",
+        "i.",
+        "−i."
+      ],
+      "a": 0,
+      "sol": "O argumento triplica para π.",
+      "hyp": "Pode multiplicar seno/cosseno diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-010",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[cosπ/6+i sinπ/6]^6 é...",
+      "o": [
+        "1.",
+        "−1.",
+        "i.",
+        "−i."
+      ],
+      "a": 1,
+      "sol": "6×π/6=π.",
+      "hyp": "Pode considerar uma volta completa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-011",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se z1 tem módulo 2 e argumento π/3 e z2 módulo 3 e argumento π/6, então z1z2 tem módulo...",
+      "o": [
+        "5.",
+        "2/3.",
+        "6.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "2×3=6.",
+      "hyp": "Pode somar módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-012",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No item anterior, um argumento de z1z2 é...",
+      "o": [
+        "π/6.",
+        "π/3.",
+        "π/18.",
+        "π/2."
+      ],
+      "a": 3,
+      "sol": "π/3+π/6=π/2.",
+      "hyp": "Pode subtrair argumentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-013",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se |z1|=8, |z2|=2 e arg z1=π, arg z2=π/4, então |z1/z2|=",
+      "o": [
+        "4.",
+        "16.",
+        "6.",
+        "1/4."
+      ],
+      "a": 0,
+      "sol": "8/2=4.",
+      "hyp": "Pode multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-014",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No item anterior, um argumento do quociente é...",
+      "o": [
+        "5π/4.",
+        "3π/4.",
+        "π/4.",
+        "π."
+      ],
+      "a": 1,
+      "sol": "π−π/4=3π/4.",
+      "hyp": "Pode somar argumentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-015",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se z=√2(cosπ/4+i sinπ/4), então z em forma algébrica é...",
+      "o": [
+        "√2+i.",
+        "1+√2i.",
+        "1+i.",
+        "√2+√2i."
+      ],
+      "a": 2,
+      "sol": "√2·√2/2=1 em ambas as componentes.",
+      "hyp": "Pode esquecer multiplicar pelo módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-016",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para z=1+i, z² é...",
+      "o": [
+        "2.",
+        "−2.",
+        "1+2i.",
+        "2i."
+      ],
+      "a": 3,
+      "sol": "Em forma trigonométrica: módulo √2→2 e argumento π/4→π/2.",
+      "hyp": "Pode elevar componentes separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-017",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para z=1+i, z⁴ é...",
+      "o": [
+        "−4.",
+        "4.",
+        "4i.",
+        "−4i."
+      ],
+      "a": 0,
+      "sol": "Módulo (√2)^4=4 e argumento π.",
+      "hyp": "Pode esquecer o argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-018",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "As raízes n-ésimas de um complexo não nulo têm, em geral...",
+      "o": [
+        "um único valor.",
+        "n valores distintos igualmente espaçados em argumento.",
+        "2n valores.",
+        "n valores com o mesmo argumento."
+      ],
+      "a": 1,
+      "sol": "Os argumentos diferem de 2π/n.",
+      "hyp": "Pode pensar na raiz real única.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-019",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se z^n=w, com w de módulo R>0, então cada raiz z tem módulo...",
+      "o": [
+        "R^n.",
+        "R/n.",
+        "R^(1/n).",
+        "nR."
+      ],
+      "a": 2,
+      "sol": "Ao elevar a n, o módulo fica r^n=R.",
+      "hyp": "Pode dividir o módulo por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-020",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Os argumentos das raízes n-ésimas de w de argumento θ podem escrever-se...",
+      "o": [
+        "θ/n+2kπ.",
+        "nθ+2kπ.",
+        "θ+2kπn.",
+        "(θ+2kπ)/n."
+      ],
+      "a": 3,
+      "sol": "Resolve-se nφ=θ+2kπ.",
+      "hyp": "Pode esquecer dividir também 2kπ por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-args",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-021",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z²=1 são...",
+      "o": [
+        "±1.",
+        "±i.",
+        "1 apenas.",
+        "±(1+i)."
+      ],
+      "a": 0,
+      "sol": "São as raízes quadradas de 1.",
+      "hyp": "Pode incluir apenas a raiz principal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-quadrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-022",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z²=−1 são...",
+      "o": [
+        "±1.",
+        "±i.",
+        "i apenas.",
+        "−1 apenas."
+      ],
+      "a": 1,
+      "sol": "i²=−1 e (−i)²=−1.",
+      "hyp": "Pode esquecer a segunda raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-quadrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-023",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z²=i têm módulo...",
+      "o": [
+        "√2.",
+        "1/2.",
+        "1.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "|i|=1, logo módulo das raízes é √1=1.",
+      "hyp": "Pode usar módulo de 1+i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-024",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma solução de z²=i é...",
+      "o": [
+        "1+i.",
+        "(1−i)/√2.",
+        "i.",
+        "(1+i)/√2."
+      ],
+      "a": 3,
+      "sol": "Argumento π/4 e módulo 1; ao quadrado dá argumento π/2.",
+      "hyp": "Pode esquecer normalizar o módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-025",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A outra solução de z²=i é...",
+      "o": [
+        "−(1+i)/√2.",
+        "(1−i)/√2.",
+        "−(1−i)/√2.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "As duas raízes quadradas são opostas.",
+      "hyp": "Pode conjugar em vez de tomar o oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-026",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As raízes cúbicas de 1 têm argumentos em [0,2π[...",
+      "o": [
+        "0, π/3, 2π/3.",
+        "0, 2π/3, 4π/3.",
+        "π/3, π, 5π/3.",
+        "0, π, 2π."
+      ],
+      "a": 1,
+      "sol": "Dividem a circunferência em três partes iguais.",
+      "hyp": "Pode usar passo π/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-unidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-027",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma raiz cúbica não real de 1 é...",
+      "o": [
+        "1/2+√3 i/2.",
+        "−1.",
+        "−1/2+√3 i/2.",
+        "i."
+      ],
+      "a": 2,
+      "sol": "Corresponde ao argumento 2π/3.",
+      "hyp": "Pode escolher uma raiz sexta da unidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-unidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-028",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A outra raiz cúbica não real de 1 é...",
+      "o": [
+        "1/2−√3 i/2.",
+        "1.",
+        "−i.",
+        "−1/2−√3 i/2."
+      ],
+      "a": 3,
+      "sol": "Corresponde ao argumento 4π/3.",
+      "hyp": "Pode errar a parte real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-unidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-029",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z⁴=1 têm argumentos...",
+      "o": [
+        "0, π/2, π, 3π/2.",
+        "0, π/4, π/2, 3π/4.",
+        "π/4,3π/4,5π/4,7π/4.",
+        "0,π."
+      ],
+      "a": 0,
+      "sol": "As quatro raízes da unidade estão separadas por π/2.",
+      "hyp": "Pode usar as raízes de −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-unidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-030",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z⁴=−1 têm argumentos em [0,2π[...",
+      "o": [
+        "0,π/2,π,3π/2.",
+        "π/4,3π/4,5π/4,7π/4.",
+        "π/8,3π/8,5π/8,7π/8.",
+        "π/4 e5π/4 apenas."
+      ],
+      "a": 1,
+      "sol": "4φ=π+2kπ => φ=π/4+kπ/2.",
+      "hyp": "Pode dividir o argumento mas esquecer o termo 2kπ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-menos1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-031",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=2(cosπ/3+i sinπ/3), então z³=",
+      "o": [
+        "8.",
+        "8i.",
+        "−8.",
+        "−8i."
+      ],
+      "a": 2,
+      "sol": "Módulo 8 e argumento π.",
+      "hyp": "Pode elevar o módulo mas não o argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-032",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=3(cos2π/3+i sin2π/3), então z² tem argumento...",
+      "o": [
+        "2π/3.",
+        "π/3.",
+        "2π.",
+        "4π/3."
+      ],
+      "a": 3,
+      "sol": "O argumento duplica.",
+      "hyp": "Pode reduzir indevidamente para 2π/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-033",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z tem módulo 2 e argumento π/5, então z^5 é...",
+      "o": [
+        "−32.",
+        "32.",
+        "32i.",
+        "−32i."
+      ],
+      "a": 0,
+      "sol": "Módulo 32 e argumento π.",
+      "hyp": "Pode usar módulo 10.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:moivre",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-034",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Se z^n=1, então todas as soluções têm módulo...",
+      "o": [
+        "n.",
+        "1.",
+        "1/n.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "|z|^n=1 implica |z|=1.",
+      "hyp": "Pode confundir expoente com módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raizes-unidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-035",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Geometricamente, as n raízes de z^n=1 são vértices de...",
+      "o": [
+        "uma reta.",
+        "um círculo de raio n.",
+        "um polígono regular inscrito na circunferência unitária.",
+        "um triângulo para qualquer n."
+      ],
+      "a": 2,
+      "sol": "Têm igual módulo e argumentos igualmente espaçados.",
+      "hyp": "Pode ignorar a distribuição angular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:poligono-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-036",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A soma das raízes n-ésimas de 1, para n>1, é...",
+      "o": [
+        "1.",
+        "n.",
+        "−1 sempre.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "Por simetria/Viète, o centroide está na origem e o coeficiente de z^{n−1} é zero.",
+      "hyp": "Pode somar apenas módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:soma-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-037",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve z³=8.",
+      "o": [
+        "z=2, −1+√3i, −1−√3i.",
+        "z=2 apenas.",
+        "z=±2.",
+        "z=2,1±√3i."
+      ],
+      "a": 0,
+      "sol": "Módulo das raízes 2; argumentos 0,2π/3,4π/3.",
+      "hyp": "Pode esquecer as raízes complexas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:cubicas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-038",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve z³=−8.",
+      "o": [
+        "z=−2 apenas.",
+        "z=−2, 1+√3i, 1−√3i.",
+        "z=2,−1±√3i.",
+        "z=±2i."
+      ],
+      "a": 1,
+      "sol": "−8 tem argumento π; raízes têm argumentos π/3,π,5π/3 e módulo 2.",
+      "hyp": "Pode deslocar os argumentos incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:cubicas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-039",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z²=4i são...",
+      "o": [
+        "±(1+i).",
+        "±2i.",
+        "±√2(1+i).",
+        "±√2(1−i)."
+      ],
+      "a": 2,
+      "sol": "4i tem módulo 4 e argumento π/2; raízes têm módulo2 e argumento π/4 e5π/4, equivalentes a ±√2(1+i).",
+      "hyp": "Pode usar módulo √2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quadrada-complexa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-040",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de z²=−4i são...",
+      "o": [
+        "±√2(1+i).",
+        "±2i.",
+        "±(1−i).",
+        "±√2(1−i)."
+      ],
+      "a": 3,
+      "sol": "Argumento −π/2; raízes de módulo2 com argumentos −π/4 e3π/4.",
+      "hyp": "Pode errar o sinal imaginário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quadrada-complexa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-041",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z^4=16, todas as raízes têm módulo...",
+      "o": [
+        "2.",
+        "4.",
+        "16.",
+        "√2."
+      ],
+      "a": 0,
+      "sol": "r^4=16 => r=2.",
+      "hyp": "Pode tomar raiz quadrada em vez de quarta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:raiz-modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-042",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As raízes de z^4=16 são...",
+      "o": [
+        "±4,±4i.",
+        "2,2i,−2,−2i.",
+        "2 apenas.",
+        "±2."
+      ],
+      "a": 1,
+      "sol": "Módulo2 e argumentos 0,π/2,π,3π/2.",
+      "hyp": "Pode esquecer as raízes não reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-043",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=cis(θ)=cosθ+i sinθ, então z^n=1 equivale a...",
+      "o": [
+        "θ=2kπ apenas.",
+        "nθ=kπ.",
+        "nθ=2kπ.",
+        "θ=nkπ."
+      ],
+      "a": 2,
+      "sol": "cis(nθ)=1 quando nθ é múltiplo de 2π.",
+      "hyp": "Pode usar múltiplos de π, incluindo −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:equacao-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-044",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição z^6=1 produz quantas soluções distintas em C?",
+      "o": [
+        "3.",
+        "12.",
+        "1.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "Um polinómio z^6−1 tem seis raízes simples.",
+      "hyp": "Pode contar pares conjugados em vez de raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:numero-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-045",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Multiplicar por um complexo de módulo 2 e argumento π/3 corresponde geometricamente a...",
+      "o": [
+        "uma dilatação de fator 2 e rotação de π/3.",
+        "apenas uma rotação.",
+        "apenas uma dilatação.",
+        "uma reflexão."
+      ],
+      "a": 0,
+      "sol": "Módulo controla escala e argumento controla rotação.",
+      "hyp": "Pode ignorar um dos efeitos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:transformacao-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-046",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Dividir por um complexo de módulo 2 e argumento π/4 corresponde a...",
+      "o": [
+        "dilatar por 2 e rodar π/4.",
+        "dilatar por 1/2 e rodar −π/4.",
+        "rodar π/4 sem escala.",
+        "refletir no eixo real."
+      ],
+      "a": 1,
+      "sol": "No quociente, divide-se o módulo e subtrai-se o argumento.",
+      "hyp": "Pode aplicar as regras da multiplicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:transformacao-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-047",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z tem módulo 1 e z^3=1, então z pode ser...",
+      "o": [
+        "i.",
+        "−1.",
+        "−1/2+√3i/2.",
+        "1/2+√3i/2."
+      ],
+      "a": 2,
+      "sol": "Uma das raízes cúbicas é cis(2π/3).",
+      "hyp": "Pode escolher números de módulo1 que não satisfazem o cubo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:identificar-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-048",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z^2=conj(z) e |z|=1, então em argumentos θ satisfaz...",
+      "o": [
+        "θ=2kπ apenas.",
+        "2θ=−θ sem periodicidade.",
+        "θ=kπ/2.",
+        "3θ=2kπ."
+      ],
+      "a": 3,
+      "sol": "z² tem argumento2θ e conj(z) argumento−θ; igualdade implica 3θ=2kπ.",
+      "hyp": "Pode esquecer equivalência módulo2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:equacao-conjugado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-049",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma transformação multiplica todos os pontos por 3cis(π/2). Um vetor de módulo 4 passa a ter módulo...",
+      "o": [
+        "12.",
+        "7.",
+        "4.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "Os módulos multiplicam-se:3×4.",
+      "hyp": "Pode somar fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:modelacao-transformacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OT-050",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Na mesma transformação, a direção de cada vetor roda...",
+      "o": [
+        "−π/2.",
+        "+π/2.",
+        "π.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "O argumento do multiplicador soma-se ao argumento original.",
+      "hyp": "Pode usar o módulo como ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-trig:modelacao-rotacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
