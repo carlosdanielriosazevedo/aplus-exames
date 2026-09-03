@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-pe",
+  "subtopicId": "11-pe-distancias",
+  "subtopic": "Distâncias em problemas geométricos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha distância ponto-reta/ponto-plano, retas e planos paralelos, pés de perpendicular, lugares geométricos e modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11PE-DIST-001",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A distância de um ponto P a uma reta r é...",
+      "o": [
+        "o comprimento do segmento perpendicular de P a r.",
+        "qualquer segmento que una P a r.",
+        "a distância à origem.",
+        "o declive da reta."
+      ],
+      "a": 0,
+      "sol": "A menor distância é medida segundo a perpendicular à reta.",
+      "hyp": "Pode usar um segmento oblíquo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-ponto-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-002",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A distância de um ponto P a um plano α é...",
+      "o": [
+        "qualquer segmento até um ponto do plano.",
+        "o comprimento do segmento perpendicular de P ao plano.",
+        "a norma de P.",
+        "a distância à origem."
+      ],
+      "a": 1,
+      "sol": "A distância mínima é medida na direção normal ao plano.",
+      "hyp": "Pode confundir distância a plano com distância a um ponto arbitrário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-ponto-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-003",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A distância entre dois planos paralelos é...",
+      "o": [
+        "a soma das distâncias às origens.",
+        "sempre zero.",
+        "a distância de qualquer ponto de um deles ao outro.",
+        "o ângulo entre os planos."
+      ],
+      "a": 2,
+      "sol": "Planos paralelos têm distância constante entre si.",
+      "hyp": "Pode achar que é preciso escolher pontos correspondentes especiais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-planos-paralelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-004",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A distância entre duas retas paralelas no plano é...",
+      "o": [
+        "a diferença dos declives.",
+        "a soma das ordenadas na origem.",
+        "sempre 1.",
+        "a distância perpendicular entre elas."
+      ],
+      "a": 3,
+      "sol": "Mede-se ao longo de uma perpendicular comum.",
+      "hyp": "Pode usar parâmetros da equação sem normalização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-005",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se um ponto pertence a uma reta, a sua distância à reta é...",
+      "o": [
+        "0.",
+        "1.",
+        "indefinida.",
+        "igual à norma do ponto."
+      ],
+      "a": 0,
+      "sol": "O próprio ponto já pertence à reta.",
+      "hyp": "Pode pensar que a distância depende da origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-006",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de P=(3,4) ao eixo Ox?",
+      "o": [
+        "3.",
+        "4.",
+        "5.",
+        "7."
+      ],
+      "a": 1,
+      "sol": "O eixo Ox tem y=0, logo a distância vertical é |4|.",
+      "hyp": "Pode usar a abcissa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-007",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de P=(−5,2) ao eixo Oy?",
+      "o": [
+        "2.",
+        "7.",
+        "5.",
+        "√29."
+      ],
+      "a": 2,
+      "sol": "O eixo Oy tem x=0, logo a distância horizontal é |−5|=5.",
+      "hyp": "Pode usar a ordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-008",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância do ponto (2,−3,5) ao plano xOy é...",
+      "o": [
+        "3.",
+        "2.",
+        "√38.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "O plano xOy é z=0, logo a distância é |z|=5.",
+      "hyp": "Pode usar a norma do ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-009",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância do ponto (2,−3,5) ao plano yOz é...",
+      "o": [
+        "2.",
+        "3.",
+        "5.",
+        "√38."
+      ],
+      "a": 0,
+      "sol": "O plano yOz é x=0.",
+      "hyp": "Pode confundir os planos coordenados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-010",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância do ponto (2,−3,5) ao plano xOz é...",
+      "o": [
+        "2.",
+        "3.",
+        "5.",
+        "√38."
+      ],
+      "a": 1,
+      "sol": "O plano xOz é y=0, logo a distância é |−3|=3.",
+      "hyp": "Pode esquecer o valor absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:distancia-plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-011",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A distância do ponto P=(x0,y0) à reta ax+by+c=0 é...",
+      "o": [
+        "|ax0+by0+c|.",
+        "√(x0²+y0²).",
+        "|ax0+by0+c|/√(a²+b²).",
+        "(ax0+by0+c)/(a²+b²)."
+      ],
+      "a": 2,
+      "sol": "Divide-se o valor absoluto da substituição pela norma do vetor normal (a,b).",
+      "hyp": "Pode esquecer a normalização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:formula-ponto-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-012",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de (0,0) à reta 3x+4y−10=0?",
+      "o": [
+        "10.",
+        "5/2.",
+        "10/7.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "|−10|/√(9+16)=10/5=2.",
+      "hyp": "Pode esquecer dividir pela norma da normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-013",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de (1,2) à reta x−y+3=0?",
+      "o": [
+        "√2.",
+        "2√2.",
+        "2.",
+        "4/√2."
+      ],
+      "a": 0,
+      "sol": "|1−2+3|/√2=2/√2=√2.",
+      "hyp": "Pode não simplificar ou esquecer o módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-014",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de (2,1) à reta 2x+y−5=0?",
+      "o": [
+        "1.",
+        "0.",
+        "√5.",
+        "5."
+      ],
+      "a": 1,
+      "sol": "2×2+1−5=0, logo o ponto pertence à reta.",
+      "hyp": "Pode aplicar a fórmula sem notar o numerador nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-na-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-015",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A distância de P=(x0,y0,z0) ao plano ax+by+cz+d=0 é...",
+      "o": [
+        "|ax0+by0+cz0+d|.",
+        "√(x0²+y0²+z0²).",
+        "|ax0+by0+cz0+d|/√(a²+b²+c²).",
+        "(ax0+by0+cz0+d)/(a+b+c)."
+      ],
+      "a": 2,
+      "sol": "Divide-se pelo comprimento do vetor normal do plano.",
+      "hyp": "Pode omitir a componente z ou a normalização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:formula-ponto-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-016",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância da origem ao plano 2x−2y+z−6=0?",
+      "o": [
+        "6.",
+        "3.",
+        "√6.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "|−6|/√(4+4+1)=6/3=2.",
+      "hyp": "Pode esquecer a norma 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-017",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de (1,1,1) ao plano x+y+z−6=0?",
+      "o": [
+        "√3.",
+        "3.",
+        "1.",
+        "3√3."
+      ],
+      "a": 0,
+      "sol": "|1+1+1−6|/√3=3/√3=√3.",
+      "hyp": "Pode usar o numerador sem dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-018",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância de (2,−1,3) ao plano x+2y−z+3=0?",
+      "o": [
+        "1.",
+        "0.",
+        "2.",
+        "√6."
+      ],
+      "a": 1,
+      "sol": "2−2−3+3=0.",
+      "hyp": "Pode não testar pertença antes do cálculo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-no-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-019",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para retas paralelas ax+by+c1=0 e ax+by+c2=0, a distância é...",
+      "o": [
+        "|c2+c1|.",
+        "|c2−c1|.",
+        "|c2−c1|/√(a²+b²).",
+        "√(c1²+c2²)."
+      ],
+      "a": 2,
+      "sol": "Com a mesma normal, a diferença dos termos independentes mede a separação normalizada.",
+      "hyp": "Pode esquecer que as equações têm de estar com os mesmos coeficientes a,b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:formula-retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-020",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância entre 3x+4y−5=0 e 3x+4y+10=0 é...",
+      "o": [
+        "15.",
+        "5.",
+        "2.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "|10−(−5)|/5=15/5=3.",
+      "hyp": "Pode usar soma dos módulos sem normalização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-021",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Para planos paralelos ax+by+cz+d1=0 e ax+by+cz+d2=0, a distância é...",
+      "o": [
+        "|d2−d1|/√(a²+b²+c²).",
+        "|d2+d1|.",
+        "|d2−d1|.",
+        "√(d1²+d2²)."
+      ],
+      "a": 0,
+      "sol": "É o análogo tridimensional da distância entre retas paralelas.",
+      "hyp": "Pode esquecer normalizar pela norma da normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:formula-planos-paralelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-022",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A distância entre os planos x+2y+2z−3=0 e x+2y+2z+6=0 é...",
+      "o": [
+        "9.",
+        "3.",
+        "1.",
+        "√3."
+      ],
+      "a": 1,
+      "sol": "|6−(−3)|/√9=9/3=3.",
+      "hyp": "Pode usar 9 como distância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:planos-paralelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-023",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre x+y+z=0 e 2x+2y+2z−6=0 é...",
+      "o": [
+        "6.",
+        "3.",
+        "√3.",
+        "2√3."
+      ],
+      "a": 2,
+      "sol": "A segunda simplifica para x+y+z−3=0; distância=3/√3=√3.",
+      "hyp": "Pode comparar termos sem primeiro tornar as normais iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:normalizar-equacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-024",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância de P=(2,3) à reta 4x−3y+5=0 é...",
+      "o": [
+        "4.",
+        "5.",
+        "1/5.",
+        "4/5."
+      ],
+      "a": 3,
+      "sol": "|8−9+5|/5=4/5.",
+      "hyp": "Pode calcular o numerador com sinais errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-reta-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-025",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância de P=(−1,4) à reta 5x+12y−13=0 é...",
+      "o": [
+        "30/13.",
+        "30.",
+        "13/30.",
+        "√30."
+      ],
+      "a": 0,
+      "sol": "|−5+48−13|/13=30/13.",
+      "hyp": "Pode esquecer a norma 13.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-reta-5-12-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-026",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância de P=(1,−2,4) ao plano 2x+y+2z−5=0 é...",
+      "o": [
+        "3.",
+        "1.",
+        "1/3.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "|2−2+8−5|/√9=3/3=1.",
+      "hyp": "Pode usar 3 como distância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-plano-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-027",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância da origem ao plano 6x+3y−2z−7=0 é...",
+      "o": [
+        "7.",
+        "7/3.",
+        "1.",
+        "7/√49."
+      ],
+      "a": 2,
+      "sol": "Norma da normal=√(36+9+4)=7; distância=7/7=1.",
+      "hyp": "Pode não reconhecer a norma 7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-plano-triplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-028",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Multiplicar todos os coeficientes de uma equação de reta por λ≠0 altera a distância de um ponto à reta?",
+      "o": [
+        "Sim, multiplica por |λ|.",
+        "Sim, divide por |λ|.",
+        "Só se λ<0.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Numerador e denominador ficam ambos multiplicados por |λ|, cancelando-se.",
+      "hyp": "Pode achar que a fórmula depende da escala da equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:invariancia-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-029",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O mesmo vale para a equação de um plano: multiplicá-la por λ≠0...",
+      "o": [
+        "não altera a distância geométrica.",
+        "multiplica a distância por λ.",
+        "muda o plano.",
+        "torna a normal unitária."
+      ],
+      "a": 0,
+      "sol": "A equação representa o mesmo plano e a fórmula é homogénea.",
+      "hyp": "Pode confundir representação algébrica com objeto geométrico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:invariancia-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-030",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o pé da perpendicular de P=(2,3) à reta horizontal y=1?",
+      "o": [
+        "(1,3).",
+        "(2,1).",
+        "(2,3).",
+        "(0,1)."
+      ],
+      "a": 1,
+      "sol": "A perpendicular é vertical e mantém a abcissa x=2.",
+      "hyp": "Pode trocar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:pe-perpendicular-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-031",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o pé da perpendicular de P=(4,−2) à reta vertical x=1?",
+      "o": [
+        "(4,1).",
+        "(1,2).",
+        "(1,−2).",
+        "(0,−2)."
+      ],
+      "a": 2,
+      "sol": "A perpendicular é horizontal e mantém y=−2.",
+      "hyp": "Pode alterar a coordenada errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:pe-perpendicular-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-032",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O ponto da reta mais próximo de um ponto exterior P é...",
+      "o": [
+        "qualquer ponto médio.",
+        "o ponto da reta de menor abcissa.",
+        "a origem.",
+        "o pé da perpendicular por P."
+      ],
+      "a": 3,
+      "sol": "A perpendicular realiza a menor distância.",
+      "hyp": "Pode escolher um ponto por conveniência algébrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:minimo-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-033",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre as retas y=2x+1 e y=2x−4 é...",
+      "o": [
+        "√5.",
+        "5.",
+        "1.",
+        "5/2."
+      ],
+      "a": 0,
+      "sol": "Escrevendo 2x−y+1=0 e 2x−y−4=0: distância=5/√5=√5.",
+      "hyp": "Pode usar diretamente a diferença das ordenadas na origem 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:retas-reduzidas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-034",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre y=−x+3 e y=−x−1 é...",
+      "o": [
+        "4.",
+        "2√2.",
+        "√2.",
+        "4√2."
+      ],
+      "a": 1,
+      "sol": "x+y−3=0 e x+y+1=0: distância=4/√2=2√2.",
+      "hyp": "Pode usar diferença 4 sem normalizar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:retas-reduzidas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-035",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre os planos z=2 e z=9 é...",
+      "o": [
+        "11.",
+        "3,5.",
+        "7.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "São planos horizontais separados por |9−2|=7.",
+      "hyp": "Pode usar soma das cotas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:planos-coordenados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-036",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre os planos x=−3 e x=5 é...",
+      "o": [
+        "2.",
+        "5.",
+        "3.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "São planos paralelos perpendiculares a Ox e separados por 8.",
+      "hyp": "Pode subtrair em valor não absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:planos-coordenados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-037",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que valor positivo de k a distância da origem à reta 3x+4y−k=0 seja 6?",
+      "o": [
+        "30.",
+        "6.",
+        "5.",
+        "24."
+      ],
+      "a": 0,
+      "sol": "k/5=6 => k=30.",
+      "hyp": "Pode esquecer multiplicar pela norma da normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:parametro-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-038",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para que k>0 a distância da origem ao plano 2x−y+2z−k=0 seja 4?",
+      "o": [
+        "4.",
+        "12.",
+        "8.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "Norma da normal=3; k/3=4 => k=12.",
+      "hyp": "Pode usar a soma dos coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:parametro-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-039",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O conjunto dos pontos a distância 2 da reta x=0 é descrito por...",
+      "o": [
+        "y=2 ou y=−2.",
+        "x²+y²=4.",
+        "x=2 ou x=−2.",
+        "x=0."
+      ],
+      "a": 2,
+      "sol": "São duas retas paralelas ao eixo Oy, a 2 unidades dele.",
+      "hyp": "Pode confundir distância a reta com distância à origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:lugar-distancia-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-040",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O conjunto dos pontos a distância 3 do plano z=0 é...",
+      "o": [
+        "x=3 ou x=−3.",
+        "x²+y²+z²=9.",
+        "z=0.",
+        "z=3 ou z=−3."
+      ],
+      "a": 3,
+      "sol": "São dois planos paralelos ao plano xOy.",
+      "hyp": "Pode confundir com superfície esférica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:lugar-distancia-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-041",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto P está a igual distância das retas paralelas y=0 e y=6. Se P está entre elas, então a sua ordenada é...",
+      "o": [
+        "3.",
+        "0.",
+        "6.",
+        "12."
+      ],
+      "a": 0,
+      "sol": "A reta média é y=3.",
+      "hyp": "Pode escolher uma das fronteiras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:equidistante-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-042",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto está a igual distância dos planos z=−2 e z=8 e entre ambos. A sua cota é...",
+      "o": [
+        "5.",
+        "3.",
+        "−5.",
+        "6."
+      ],
+      "a": 1,
+      "sol": "É a média (−2+8)/2=3.",
+      "hyp": "Pode usar metade da distância 5 sem adicionar ao plano inferior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:equidistante-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-043",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A fórmula de distância ponto-plano pode ser vista como...",
+      "o": [
+        "a norma do vetor posição do ponto.",
+        "o produto vetorial com a origem.",
+        "o valor absoluto da projeção do vetor entre o ponto e um ponto do plano sobre uma normal unitária.",
+        "a soma das coordenadas."
+      ],
+      "a": 2,
+      "sol": "A distância é a componente normal do deslocamento.",
+      "hyp": "Pode confundir projeção normal com comprimento total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:interpretacao-projecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-044",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O plano α: x+2y+2z−9=0 e o ponto P=(1,1,1). A distância é...",
+      "o": [
+        "4.",
+        "3/4.",
+        "√3.",
+        "4/3."
+      ],
+      "a": 3,
+      "sol": "|1+2+2−9|/3=4/3.",
+      "hyp": "Pode usar o numerador 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-plano-fracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-045",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A reta r: 3x−4y+12=0 e P=(0,0). A distância é...",
+      "o": [
+        "12/5.",
+        "12.",
+        "5/12.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "|12|/5=12/5.",
+      "hyp": "Pode não normalizar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:ponto-reta-fracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-046",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma estrada é modelada por 3x+4y−20=0 e uma casa está na origem. A distância perpendicular à estrada é...",
+      "o": [
+        "5 unidades.",
+        "4 unidades.",
+        "20 unidades.",
+        "3 unidades."
+      ],
+      "a": 1,
+      "sol": "20/5=4.",
+      "hyp": "Pode usar 20 como distância direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:modelacao-estrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-047",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Duas paredes paralelas são dadas por x+2y−1=0 e x+2y−11=0. A largura perpendicular do corredor é...",
+      "o": [
+        "10.",
+        "√5.",
+        "2√5.",
+        "5√2."
+      ],
+      "a": 2,
+      "sol": "10/√5=2√5.",
+      "hyp": "Pode usar a diferença dos termos independentes sem normalizar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:modelacao-corredor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-048",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Dois pisos paralelos têm equações 2x−2y+z=1 e 2x−2y+z=10. A separação é...",
+      "o": [
+        "9.",
+        "1.",
+        "√3.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "Diferença 9 dividida pela norma 3 da normal.",
+      "hyp": "Pode usar 9 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:modelacao-pisos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-049",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma reta r é paralela a um plano α, a distância de qualquer ponto de r a α é...",
+      "o": [
+        "constante.",
+        "sempre zero.",
+        "crescente ao longo da reta.",
+        "indefinida."
+      ],
+      "a": 0,
+      "sol": "Ao deslocar-se numa direção paralela ao plano, a componente normal não muda.",
+      "hyp": "Pode confundir paralela com contida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:reta-paralela-plano-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DIST-050",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-distancias",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um drone está em P=(1,2,7) e deve descer perpendicularmente até ao plano horizontal z=1. Qual é a distância de descida?",
+      "o": [
+        "7.",
+        "6.",
+        "8.",
+        "√54."
+      ],
+      "a": 1,
+      "sol": "A distância ao plano z=1 é |7−1|=6.",
+      "hyp": "Pode medir até z=0 em vez do plano indicado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-distancias:modelacao-drone",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
