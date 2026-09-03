@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ga",
+  "subtopicId": "10-ga-distancias-ponto-medio",
+  "subtopic": "Distâncias e ponto médio",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha distância euclidiana, distância à origem, ponto médio, problemas inversos, mediatriz, perímetros/áreas e modelação coordenada. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GA-DPM-001",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A distância entre A=(x1,y1) e B=(x2,y2) é dada por...",
+      "o": [
+        "√[(x2−x1)²+(y2−y1)²].",
+        "|x2−x1|+|y2−y1| sempre.",
+        "(x1+x2)/2.",
+        "(y1+y2)/2."
+      ],
+      "a": 0,
+      "sol": "A fórmula resulta do Teorema de Pitágoras aplicado às diferenças de coordenadas.",
+      "hyp": "Pode confundir distância com ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:formula-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-002",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância entre (0,0) e (3,4)?",
+      "o": [
+        "3",
+        "5",
+        "4",
+        "7"
+      ],
+      "a": 1,
+      "sol": "√(3²+4²)=5.",
+      "hyp": "Pode somar 3+4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-003",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A distância entre (1,2) e (1,7) é...",
+      "o": [
+        "3",
+        "6",
+        "5",
+        "8"
+      ],
+      "a": 2,
+      "sol": "As abcissas são iguais; distância vertical=|7−2|=5.",
+      "hyp": "Pode usar soma das ordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-004",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A distância entre (−2,5) e (4,5) é...",
+      "o": [
+        "2",
+        "4",
+        "9",
+        "6"
+      ],
+      "a": 3,
+      "sol": "As ordenadas são iguais; distância horizontal=|4−(−2)|=6.",
+      "hyp": "Pode subtrair sinais incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-005",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O ponto médio de A=(x1,y1) e B=(x2,y2) é...",
+      "o": [
+        "((x1+x2)/2,(y1+y2)/2).",
+        "(x2−x1,y2−y1).",
+        "(x1x2,y1y2).",
+        "((x2−x1)/2,(y2−y1)/2)."
+      ],
+      "a": 0,
+      "sol": "Cada coordenada do ponto médio é a média das coordenadas correspondentes.",
+      "hyp": "Pode confundir com vetor AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:formula-ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-006",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o ponto médio de (0,0) e (6,4)?",
+      "o": [
+        "(6,2).",
+        "(3,2).",
+        "(3,4).",
+        "(2,3)."
+      ],
+      "a": 1,
+      "sol": "((0+6)/2,(0+4)/2)=(3,2).",
+      "hyp": "Pode trocar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-007",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o ponto médio de A=(−2,3) e B=(4,7)?",
+      "o": [
+        "(2,5).",
+        "(1,10).",
+        "(1,5).",
+        "(−3,2)."
+      ],
+      "a": 2,
+      "sol": "((−2+4)/2,(3+7)/2)=(1,5).",
+      "hyp": "Pode errar soma com número negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-008",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância da origem a P=(5,12)?",
+      "o": [
+        "12",
+        "17",
+        "25",
+        "13"
+      ],
+      "a": 3,
+      "sol": "√(25+144)=13.",
+      "hyp": "Pode usar 5+12.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-009",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância da origem a P=(−8,6)?",
+      "o": [
+        "10",
+        "14",
+        "2",
+        "100"
+      ],
+      "a": 0,
+      "sol": "√(64+36)=10.",
+      "hyp": "Pode subtrair coordenadas em vez de usar quadrados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-010",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A distância entre dois pontos é sempre...",
+      "o": [
+        "negativa se x diminui.",
+        "não negativa.",
+        "igual à diferença das abcissas.",
+        "um número inteiro."
+      ],
+      "a": 1,
+      "sol": "Distância é um comprimento e não pode ser negativa.",
+      "hyp": "Pode conservar sinais das diferenças.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-nao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-011",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre A=(a,0) e B=(0,b) é...",
+      "o": [
+        "a+b.",
+        "|a−b|.",
+        "√(a²+b²).",
+        "ab."
+      ],
+      "a": 2,
+      "sol": "As diferenças são −a e b; pelos quadrados obtém-se √(a²+b²).",
+      "hyp": "Pode somar coordenadas sem Pitágoras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-eixos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-012",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância entre (2,1) e (5,5) é...",
+      "o": [
+        "4",
+        "6",
+        "7",
+        "5"
+      ],
+      "a": 3,
+      "sol": "Diferenças 3 e 4; distância 5.",
+      "hyp": "Pode somar diferenças.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-013",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância entre (−1,−2) e (2,2) é...",
+      "o": [
+        "5",
+        "4",
+        "6",
+        "7"
+      ],
+      "a": 0,
+      "sol": "Diferenças 3 e 4; distância 5.",
+      "hyp": "Pode errar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-014",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se M=(3,4) é ponto médio de A=(1,2) e B=(x,y), então x=",
+      "o": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "sol": "(1+x)/2=3 => x=5.",
+      "hyp": "Pode esquecer multiplicar por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-015",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, y=",
+      "o": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "a": 2,
+      "sol": "(2+y)/2=4 => y=6.",
+      "hyp": "Pode usar diferença em vez de média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-016",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se M=(0,0) é ponto médio de A=(3,−5) e B, então B=",
+      "o": [
+        "(3,5).",
+        "(−5,3).",
+        "(−3,−5).",
+        "(−3,5)."
+      ],
+      "a": 3,
+      "sol": "Para a média ser zero, as coordenadas de B são opostas às de A.",
+      "hyp": "Pode mudar apenas um sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-017",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se M é ponto médio de AB, então...",
+      "o": [
+        "MA=MB.",
+        "MA=AB.",
+        "MA=2MB.",
+        "M coincide com A."
+      ],
+      "a": 0,
+      "sol": "O ponto médio divide o segmento em duas partes iguais.",
+      "hyp": "Pode confundir metade com total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:propriedade-ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-018",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se AB=14 e M é ponto médio de AB, então AM=",
+      "o": [
+        "5",
+        "7",
+        "14",
+        "28"
+      ],
+      "a": 1,
+      "sol": "AM=AB/2=7.",
+      "hyp": "Pode usar o comprimento inteiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:metade-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-019",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A fórmula da distância no plano é uma aplicação direta de...",
+      "o": [
+        "Teorema de Tales.",
+        "fórmula resolvente.",
+        "Teorema de Pitágoras.",
+        "regra de três."
+      ],
+      "a": 2,
+      "sol": "As diferenças horizontal e vertical são catetos de um triângulo retângulo.",
+      "hyp": "Pode associar coordenadas a outro teorema.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-pitagoras-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-020",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se dois pontos têm a mesma abcissa, a distância entre eles é...",
+      "o": [
+        "a soma das ordenadas.",
+        "zero sempre.",
+        "a média das ordenadas.",
+        "o valor absoluto da diferença das ordenadas."
+      ],
+      "a": 3,
+      "sol": "O segmento é vertical.",
+      "hyp": "Pode esquecer o valor absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-021",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para que valor positivo de x a distância entre (0,0) e (x,0) é 7?",
+      "o": [
+        "7",
+        "5",
+        "6",
+        "14"
+      ],
+      "a": 0,
+      "sol": "|x|=7 e, sendo x positivo, x=7.",
+      "hyp": "Pode esquecer a condição de positividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-022",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos P=(x,4) estão a distância 5 da origem. Que valores de x são possíveis?",
+      "o": [
+        "−5 e 5.",
+        "−3 e 3.",
+        "3 apenas.",
+        "−4 e 4."
+      ],
+      "a": 1,
+      "sol": "x²+16=25 => x²=9 => x=±3.",
+      "hyp": "Pode esquecer uma solução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-023",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto P=(6,y) está a distância 10 da origem. Quais valores de y são possíveis?",
+      "o": [
+        "−4 e 4.",
+        "8 apenas.",
+        "−8 e 8.",
+        "−10 e 10."
+      ],
+      "a": 2,
+      "sol": "36+y²=100 => y²=64 => y=±8.",
+      "hyp": "Pode usar diferença 10−6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-024",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a distância entre A=(2,3) e B=(−4,−5)?",
+      "o": [
+        "8",
+        "12",
+        "14",
+        "10"
+      ],
+      "a": 3,
+      "sol": "Diferenças −6 e −8; distância √(36+64)=10.",
+      "hyp": "Pode somar módulos 6+8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-025",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ponto médio de A=(7,−3) e B=(−1,5)?",
+      "o": [
+        "(3,1).",
+        "(4,2).",
+        "(3,−1).",
+        "(6,2)."
+      ],
+      "a": 0,
+      "sol": "((7−1)/2,(−3+5)/2)=(3,1).",
+      "hyp": "Pode esquecer que Bx é −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-026",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se M=(2,−1) é ponto médio de A=(−3,4) e B=(x,y), qual é B?",
+      "o": [
+        "(5,−5).",
+        "(7,−6).",
+        "(1,−2).",
+        "(7,2)."
+      ],
+      "a": 1,
+      "sol": "x=2×2−(−3)=7; y=2×(−1)−4=−6.",
+      "hyp": "Pode usar M−A em vez de 2M−A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-027",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O conjunto dos pontos que estão a igual distância de A e B é...",
+      "o": [
+        "a reta AB.",
+        "a circunferência de centro A sempre.",
+        "a mediatriz de AB.",
+        "o eixo Ox."
+      ],
+      "a": 2,
+      "sol": "A mediatriz é o lugar geométrico dos pontos equidistantes dos extremos.",
+      "hyp": "Pode confundir com segmento AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:equidistancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-028",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos A=(−2,0) e B=(2,0) têm mediatriz...",
+      "o": [
+        "y=0.",
+        "x=2.",
+        "y=2.",
+        "x=0."
+      ],
+      "a": 3,
+      "sol": "O ponto médio é (0,0) e AB é horizontal, logo a mediatriz é vertical x=0.",
+      "hyp": "Pode escolher a reta que contém AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:mediatriz-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-029",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A e B são simétricos relativamente à origem. Se A=(4,−7), então a distância AB é...",
+      "o": [
+        "2√65.",
+        "√65.",
+        "65.",
+        "130."
+      ],
+      "a": 0,
+      "sol": "B=(−4,7); diferenças −8 e 14; distância √(64+196)=√260=2√65.",
+      "hyp": "Pode calcular apenas a distância de A à origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:simetria-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-030",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são simétricos relativamente à origem, a origem é...",
+      "o": [
+        "um dos extremos.",
+        "o ponto médio de AB.",
+        "sempre fora do segmento.",
+        "o circuncentro de qualquer triângulo."
+      ],
+      "a": 1,
+      "sol": "Coordenadas opostas têm média (0,0).",
+      "hyp": "Pode não relacionar simetria central com ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:simetria-ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-031",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo com A=(0,0), B=(6,0), C=(0,8), qual é o comprimento BC?",
+      "o": [
+        "8",
+        "12",
+        "10",
+        "14"
+      ],
+      "a": 2,
+      "sol": "√((0−6)²+(8−0)²)=10.",
+      "hyp": "Pode usar apenas um cateto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:triangulo-distancias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-032",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O triângulo A=(0,0), B=(6,0), C=(0,8) é...",
+      "o": [
+        "equilátero.",
+        "isósceles em B.",
+        "obtusângulo em A.",
+        "retângulo em A."
+      ],
+      "a": 3,
+      "sol": "AB é horizontal e AC vertical, logo são perpendiculares.",
+      "hyp": "Pode olhar apenas para comprimentos sem geometria dos eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:triangulo-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-033",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o perímetro do triângulo anterior?",
+      "o": [
+        "24",
+        "18",
+        "20",
+        "30"
+      ],
+      "a": 0,
+      "sol": "AB=6, AC=8, BC=10; perímetro=24.",
+      "hyp": "Pode somar só catetos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:perimetro-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-034",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A=(1,1), B=(5,1), C=(3,4). O triângulo ABC é isósceles?",
+      "o": [
+        "Não.",
+        "Sim, porque AC=BC.",
+        "Sim, porque AB=AC.",
+        "Só se C=(3,3)."
+      ],
+      "a": 1,
+      "sol": "AC=√13 e BC=√13.",
+      "hyp": "Pode comparar coordenadas em vez de distâncias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:isosceles-distancias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-035",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No triângulo anterior, o ponto médio de AB é...",
+      "o": [
+        "(2,1).",
+        "(3,2).",
+        "(3,1).",
+        "(5,4)."
+      ],
+      "a": 2,
+      "sol": "((1+5)/2,(1+1)/2)=(3,1).",
+      "hyp": "Pode confundir ponto médio com C.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-036",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se C=(3,4) e o ponto médio de AB é (3,1), o segmento que liga C ao ponto médio é...",
+      "o": [
+        "horizontal.",
+        "de declive 1.",
+        "de comprimento 1.",
+        "vertical."
+      ],
+      "a": 3,
+      "sol": "As abcissas são iguais.",
+      "hyp": "Pode confundir mesma abcissa com horizontalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:segmento-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-037",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que valor de k faz a distância entre A=(1,2) e B=(5,k) ser 5, com k>2?",
+      "o": [
+        "5",
+        "3",
+        "4",
+        "7"
+      ],
+      "a": 0,
+      "sol": "16+(k−2)²=25 => (k−2)²=9; k=5 ou −1. Como k>2, k=5.",
+      "hyp": "Pode esquecer a condição adicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-038",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que valores de k fazem a distância entre (0,0) e (k,12) ser 13?",
+      "o": [
+        "5 apenas.",
+        "−5 e 5.",
+        "−13 e 13.",
+        "−1 e 1."
+      ],
+      "a": 1,
+      "sol": "k²+144=169 => k²=25 => k=±5.",
+      "hyp": "Pode esquecer uma solução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:distancia-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-039",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se M=(4,3) é ponto médio de A=(x,1) e B=(6,5), então x=",
+      "o": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "a": 2,
+      "sol": "(x+6)/2=4 => x=2.",
+      "hyp": "Pode resolver a equação incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-040",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A=(−1,2), B=(3,6) e C é o simétrico de A relativamente a B, então C=",
+      "o": [
+        "(5,8).",
+        "(4,4).",
+        "(−5,−2).",
+        "(7,10)."
+      ],
+      "a": 3,
+      "sol": "B é ponto médio de AC, logo C=2B−A=(6+1,12−2)=(7,10).",
+      "hyp": "Pode apenas refletir sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:simetria-centro-B",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-041",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos A=(0,0), B=(4,0), C=(4,3) formam um triângulo de área...",
+      "o": [
+        "6",
+        "8",
+        "12",
+        "16"
+      ],
+      "a": 0,
+      "sol": "Base AB=4 e altura desde C=3; área=1/2×4×3=6.",
+      "hyp": "Pode multiplicar sem dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:area-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-042",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A=(−2,1), B=(4,1), C=(1,5). Qual é a altura relativa à base AB?",
+      "o": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "sol": "AB é horizontal em y=1; distância vertical de C é |5−1|=4.",
+      "hyp": "Pode usar a ordenada de C diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:altura-base-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-043",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No triângulo anterior, qual é a área?",
+      "o": [
+        "18",
+        "24",
+        "12",
+        "30"
+      ],
+      "a": 2,
+      "sol": "AB=6 e altura=4; área=12.",
+      "hyp": "Pode esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:area-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-044",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um quadrado tem vértices consecutivos A=(0,0), B=(3,4). Qual é o comprimento do lado?",
+      "o": [
+        "4",
+        "7",
+        "25",
+        "5"
+      ],
+      "a": 3,
+      "sol": "AB=5.",
+      "hyp": "Pode confundir 3-4-5 com soma 7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:quadrado-lado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-045",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No quadrado anterior, qual é a área?",
+      "o": [
+        "25",
+        "20",
+        "40",
+        "50"
+      ],
+      "a": 0,
+      "sol": "Área=lado²=25.",
+      "hyp": "Pode usar perímetro ou soma de quadrados errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:quadrado-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-046",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se dois segmentos têm pontos médios iguais, pode concluir-se que têm os mesmos extremos?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se tiverem o mesmo comprimento.",
+        "Só se forem horizontais."
+      ],
+      "a": 1,
+      "sol": "Muitos segmentos diferentes podem partilhar o mesmo ponto médio.",
+      "hyp": "Pode confundir ponto médio com identificação única do segmento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:ponto-medio-nao-unico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-047",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se dois segmentos têm o mesmo ponto médio e o mesmo comprimento, são necessariamente o mesmo segmento?",
+      "o": [
+        "Sim.",
+        "Só se o ponto médio for a origem.",
+        "Não.",
+        "Só em dimensão 1."
+      ],
+      "a": 2,
+      "sol": "Podem ter orientações diferentes em torno do mesmo ponto médio.",
+      "hyp": "Pode ignorar a direção do segmento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:segmentos-mesmo-centro-comprimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-048",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Duas estações estão em A=(2,1) e B=(8,5). Um ponto M equidistante das duas e situado exatamente a meio do segmento AB é...",
+      "o": [
+        "(3,5).",
+        "(6,4).",
+        "(10,6).",
+        "(5,3)."
+      ],
+      "a": 3,
+      "sol": "M é o ponto médio: ((2+8)/2,(1+5)/2)=(5,3).",
+      "hyp": "Pode trocar coordenadas ou somar sem dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:modelacao-ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-049",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma rota direta liga P=(−1,2) a Q=(5,10). Qual é a distância euclidiana?",
+      "o": [
+        "10",
+        "8",
+        "12",
+        "14"
+      ],
+      "a": 0,
+      "sol": "Diferenças 6 e 8; distância 10.",
+      "hyp": "Pode somar deslocamentos 14.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:modelacao-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-DPM-050",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-distancias-ponto-medio",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um drone parte de (0,0), vai para (6,8) e regressa diretamente à origem. Qual é a distância total percorrida?",
+      "o": [
+        "10",
+        "20",
+        "14",
+        "28"
+      ],
+      "a": 1,
+      "sol": "Cada trajeto direto mede 10; ida e volta totalizam 20.",
+      "hyp": "Pode contar apenas um dos percursos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-distancias-ponto-medio:modelacao-ida-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
