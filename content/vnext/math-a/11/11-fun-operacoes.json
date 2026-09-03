@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Com as mesmas funções, (g∘f)(x)=",
+      "q": "Se f(x)=x² e g(x)=x³, então (g∘f)(x)=",
       "o": [
         "x⁶.",
         "x⁵.",
