@@ -1151,7 +1151,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "O ângulo entre os planos do item anterior é...",
+      "q": "Os planos x+y=0 e x+z=0 têm normais (1,1,0) e (1,0,1). Qual é o ângulo entre os planos?",
       "o": [
         "45°.",
         "90°.",
