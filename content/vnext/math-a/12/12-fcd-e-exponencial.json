@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcd",
+  "subtopicId": "12-fcd-e-exponencial",
+  "subtopic": "Número e e derivada da exponencial",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha número e, derivada da exponencial natural e de composições, tangentes, monotonia/convexidade, produtos/quocientes e modelos de crescimento contínuo. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCD-EE-001",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O número e é aproximadamente...",
+      "o": [
+        "2,71828.",
+        "3,14159.",
+        "1,61803.",
+        "0,57721."
+      ],
+      "a": 0,
+      "sol": "e≈2,71828.",
+      "hyp": "Pode confundir e com π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:valor-e",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-002",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A função exponencial natural é...",
+      "o": [
+        "x↦x^e.",
+        "x↦e^x.",
+        "x↦ln x.",
+        "x↦e x."
+      ],
+      "a": 1,
+      "sol": "A base é o número e.",
+      "hyp": "Pode confundir potência e exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:def-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-003",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de e^x é...",
+      "o": [
+        "xe^{x−1}.",
+        "ln x.",
+        "e^x.",
+        "1/e^x."
+      ],
+      "a": 2,
+      "sol": "A exponencial natural é igual à sua derivada.",
+      "hyp": "Pode aplicar a regra da potência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:derivada-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-004",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=e^x, então f'(0)=",
+      "o": [
+        "0.",
+        "e.",
+        "−1.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "f'(0)=e^0=1.",
+      "hyp": "Pode confundir valor do expoente com valor da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:derivada-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-005",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=3e^x, então f'(x)=",
+      "o": [
+        "3e^x.",
+        "e^{3x}.",
+        "3xe^{x−1}.",
+        "3e^{x−1}."
+      ],
+      "a": 0,
+      "sol": "A constante 3 mantém-se.",
+      "hyp": "Pode alterar o expoente ao derivar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-006",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para todo x real, e^x é...",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "nulo em x=0.",
+        "positivo apenas se x>0."
+      ],
+      "a": 1,
+      "sol": "Uma exponencial de base positiva nunca é zero nem negativa.",
+      "hyp": "Pode confundir sinal do expoente com sinal do valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:positividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-007",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A função e^x é...",
+      "o": [
+        "estritamente decrescente.",
+        "constante.",
+        "estritamente crescente em R.",
+        "crescente só para x>0."
+      ],
+      "a": 2,
+      "sol": "A derivada e^x é sempre positiva.",
+      "hyp": "Pode achar que expoentes negativos produzem função decrescente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-008",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=e^{2x}, então f'(x)=",
+      "o": [
+        "e^{2x}.",
+        "2xe^{2x−1}.",
+        "e^x.",
+        "2e^{2x}."
+      ],
+      "a": 3,
+      "sol": "Pela regra da cadeia, deriva-se 2x e multiplica-se.",
+      "hyp": "Pode esquecer o fator 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-009",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=e^{−x}, então f'(x)=",
+      "o": [
+        "−e^{−x}.",
+        "e^{−x}.",
+        "−xe^{−x−1}.",
+        "e^x."
+      ],
+      "a": 0,
+      "sol": "A derivada do expoente −x é −1.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-010",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=e^{3x+1}, então f'(x)=",
+      "o": [
+        "e^{3x+1}.",
+        "3e^{3x+1}.",
+        "(3x+1)e^{3x}.",
+        "3e^{x}."
+      ],
+      "a": 1,
+      "sol": "Deriva-se 3x+1, obtendo 3.",
+      "hyp": "Pode derivar apenas o e^x externo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-011",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f(x)=e^{g(x)}, então f'(x)=",
+      "o": [
+        "e^{g'(x)}.",
+        "g(x)e^{g(x)−1}.",
+        "g'(x)e^{g(x)}.",
+        "e^{g(x)}/g'(x)."
+      ],
+      "a": 2,
+      "sol": "É uma aplicação da regra da cadeia.",
+      "hyp": "Pode derivar o expoente no lugar do próprio expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:regra-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-012",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^{x²} é...",
+      "o": [
+        "e^{2x}.",
+        "x²e^{x²−1}.",
+        "2e^{x²}.",
+        "2xe^{x²}."
+      ],
+      "a": 3,
+      "sol": "g(x)=x², logo g'(x)=2x.",
+      "hyp": "Pode aplicar regra da potência a toda a expressão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-013",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^{√x}, para x>0, é...",
+      "o": [
+        "e^{√x}/(2√x).",
+        "√x e^{√x}.",
+        "e^{1/(2√x)}.",
+        "2√x e^{√x}."
+      ],
+      "a": 0,
+      "sol": "Derivada de √x é 1/(2√x).",
+      "hyp": "Pode elevar e ao valor da derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-014",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^{1/x}, x≠0, é...",
+      "o": [
+        "e^{1/x}/x².",
+        "−e^{1/x}/x².",
+        "−e^x/x².",
+        "e^{−1/x}."
+      ],
+      "a": 1,
+      "sol": "(1/x)'=−1/x².",
+      "hyp": "Pode perder o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-015",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=e^{sin x}, então f'(x)=",
+      "o": [
+        "sin x·e^{cos x}.",
+        "e^{cos x}.",
+        "cos x·e^{sin x}.",
+        "−sin x·e^{sin x}."
+      ],
+      "a": 2,
+      "sol": "Derivada de sin x é cos x.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-016",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=e^{cos x}, então f'(x)=",
+      "o": [
+        "cos x·e^{cos x}.",
+        "sin x·e^{cos x}.",
+        "−cos x·e^{sin x}.",
+        "−sin x·e^{cos x}."
+      ],
+      "a": 3,
+      "sol": "Derivada de cos x é −sin x.",
+      "hyp": "Pode esquecer o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-017",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A equação e^x=1 tem solução...",
+      "o": [
+        "x=0.",
+        "x=1.",
+        "x=e.",
+        "não tem solução."
+      ],
+      "a": 0,
+      "sol": "e^0=1 e a função é estritamente crescente.",
+      "hyp": "Pode confundir expoente e valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-018",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A equação e^x=e^3 tem solução...",
+      "o": [
+        "x=e³.",
+        "x=3.",
+        "x=1.",
+        "x=0."
+      ],
+      "a": 1,
+      "sol": "A função exponencial é injetiva.",
+      "hyp": "Pode aplicar logaritmo de modo desnecessário e errar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:injetividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-019",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se e^{2x}=e^6, então x=",
+      "o": [
+        "6.",
+        "12.",
+        "3.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "2x=6.",
+      "hyp": "Pode igualar x a 6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-020",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A reta tangente ao gráfico de y=e^x em x=0 tem declive...",
+      "o": [
+        "0.",
+        "e.",
+        "−1.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "O declive é f'(0)=1.",
+      "hyp": "Pode usar o valor de x em vez da derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:tangente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-021",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A equação da tangente a y=e^x em x=0 é...",
+      "o": [
+        "y=x+1.",
+        "y=x.",
+        "y=e x.",
+        "y=1."
+      ],
+      "a": 0,
+      "sol": "Passa por (0,1) e tem declive1.",
+      "hyp": "Pode esquecer o ponto de tangência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:tangente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-022",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A tangente a y=e^x em x=1 tem equação...",
+      "o": [
+        "y=e x+1.",
+        "y=e x.",
+        "y=x+e.",
+        "y=e(x+1)."
+      ],
+      "a": 1,
+      "sol": "Em x=1, ponto (1,e) e declive e: y−e=e(x−1), isto é y=ex.",
+      "hyp": "Pode não reconhecer formas equivalentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:tangente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-023",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=e^{2x−1}, então f'(1)=",
+      "o": [
+        "e.",
+        "2.",
+        "2e.",
+        "e²."
+      ],
+      "a": 2,
+      "sol": "f'(x)=2e^{2x−1}; em x=1 dá2e.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:derivada-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-024",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=e^{x²}, então f'(1)=",
+      "o": [
+        "e.",
+        "2.",
+        "e².",
+        "2e."
+      ],
+      "a": 3,
+      "sol": "f'(x)=2xe^{x²}; em1 dá2e.",
+      "hyp": "Pode avaliar o expoente errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:derivada-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-025",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Como f'(x)=e^x>0, podemos concluir que y=e^x...",
+      "o": [
+        "é estritamente crescente.",
+        "é convexa apenas.",
+        "é decrescente.",
+        "tem máximo em0."
+      ],
+      "a": 0,
+      "sol": "Derivada positiva implica crescimento.",
+      "hyp": "Pode usar a segunda derivada para uma conclusão de monotonia simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:sinal-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-026",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A segunda derivada de e^x é...",
+      "o": [
+        "0.",
+        "e^x.",
+        "2e^x.",
+        "−e^x."
+      ],
+      "a": 1,
+      "sol": "Derivar novamente mantém e^x.",
+      "hyp": "Pode pensar que a segunda derivada se anula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:segunda-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-027",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Como f''(x)=e^x>0, o gráfico de e^x é...",
+      "o": [
+        "côncavo em R.",
+        "linear.",
+        "convexo em R.",
+        "sem curvatura definida."
+      ],
+      "a": 2,
+      "sol": "Segunda derivada positiva indica convexidade.",
+      "hyp": "Pode confundir sinal da segunda derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:convexidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-028",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de x e^x é...",
+      "o": [
+        "xe^x.",
+        "e^{x+1}.",
+        "x e^{x−1}.",
+        "e^x(x+1)."
+      ],
+      "a": 3,
+      "sol": "Regra do produto:1·e^x+x·e^x.",
+      "hyp": "Pode derivar apenas um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-029",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de x²e^x é...",
+      "o": [
+        "e^x(x²+2x).",
+        "2xe^x.",
+        "x²e^x.",
+        "e^x(x²+2)."
+      ],
+      "a": 0,
+      "sol": "Produto:2xe^x+x²e^x.",
+      "hyp": "Pode esquecer um dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-030",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^x/x, x≠0, é...",
+      "o": [
+        "e^x/x².",
+        "e^x(x−1)/x².",
+        "e^x(x+1)/x².",
+        "e^x."
+      ],
+      "a": 1,
+      "sol": "Quociente:(e^x x−e^x)/x².",
+      "hyp": "Pode errar o sinal no numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-031",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de x/e^x é...",
+      "o": [
+        "e^{−x}(1+x).",
+        "1/e^x.",
+        "e^{−x}(1−x).",
+        "xe^{−x}."
+      ],
+      "a": 2,
+      "sol": "x/e^x=xe^{-x}; deriva-se pelo produto.",
+      "hyp": "Pode esquecer a derivada de e^{-x}.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-032",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=e^x−x, então f'(x)=",
+      "o": [
+        "e^x−x.",
+        "e^x+1.",
+        "1−e^x.",
+        "e^x−1."
+      ],
+      "a": 3,
+      "sol": "Derivada de −x é −1.",
+      "hyp": "Pode manter −x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:derivada-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-033",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=e^x−x tem ponto crítico em...",
+      "o": [
+        "x=0.",
+        "x=1.",
+        "x=−1.",
+        "não tem."
+      ],
+      "a": 0,
+      "sol": "f'(x)=e^x−1=0 => x=0.",
+      "hyp": "Pode resolver e^x=1 como x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:critico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-034",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O ponto crítico anterior é...",
+      "o": [
+        "um máximo.",
+        "um mínimo.",
+        "um ponto de inflexão.",
+        "indeterminado sem mais informação."
+      ],
+      "a": 1,
+      "sol": "f''(x)=e^x>0, logo é mínimo.",
+      "hyp": "Pode confundir derivada nula com máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-035",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O valor mínimo de e^x−x é...",
+      "o": [
+        "0.",
+        "e−1.",
+        "1.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "No mínimo x=0, f(0)=1.",
+      "hyp": "Pode avaliar em x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:valor-minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-036",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma população P(t)=P0e^{kt}. A taxa instantânea P'(t) é...",
+      "o": [
+        "P0kt.",
+        "P0e^t.",
+        "P(t)/k.",
+        "kP(t)."
+      ],
+      "a": 3,
+      "sol": "P'=kP0e^{kt}=kP.",
+      "hyp": "Pode derivar o expoente sem manter a exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:crescimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-037",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "No modelo P'(t)=kP(t), se k>0...",
+      "o": [
+        "a taxa de crescimento é proporcional à população e positiva.",
+        "a população é constante.",
+        "a taxa é sempre decrescente.",
+        "P(t) pode ser negativa."
+      ],
+      "a": 0,
+      "sol": "k>0 e P>0 implicam crescimento positivo.",
+      "hyp": "Pode confundir crescimento relativo e absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-038",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "No modelo P(t)=P0e^{kt}, k representa...",
+      "o": [
+        "o valor inicial.",
+        "a taxa de crescimento contínuo por unidade de tempo.",
+        "o tempo de duplicação diretamente.",
+        "o valor final."
+      ],
+      "a": 1,
+      "sol": "k é o parâmetro de crescimento/decrescimento contínuo.",
+      "hyp": "Pode confundir com P0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:parametro-k",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-039",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(t)=100e^{0,2t}, então P'(0)=",
+      "o": [
+        "100.",
+        "0,2.",
+        "20.",
+        "120."
+      ],
+      "a": 2,
+      "sol": "P'=20e^{0,2t}; em0 dá20.",
+      "hyp": "Pode confundir taxa relativa 0,2 com taxa absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:modelo-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-040",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Q(t)=500e^{−0,1t}, então Q'(0)=",
+      "o": [
+        "50.",
+        "−0,1.",
+        "500.",
+        "−50."
+      ],
+      "a": 3,
+      "sol": "Q'=-50e^{-0,1t}.",
+      "hyp": "Pode esquecer o sinal do decaimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:modelo-decaimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-041",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^{x³−2x} é...",
+      "o": [
+        "(3x²−2)e^{x³−2x}.",
+        "e^{3x²−2}.",
+        "3x²e^{x³−2x}.",
+        "(x³−2x)e^{x³−2x}."
+      ],
+      "a": 0,
+      "sol": "Regra da cadeia com g'(x)=3x²−2.",
+      "hyp": "Pode derivar apenas uma parcela do expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:cadeia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-042",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^{ln x}, para x>0, é...",
+      "o": [
+        "1/x.",
+        "1.",
+        "e^{1/x}.",
+        "x."
+      ],
+      "a": 1,
+      "sol": "e^{ln x}=x, ou pela cadeia e^{ln x}·1/x=x·1/x=1.",
+      "hyp": "Pode esquecer a simplificação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:exp-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-043",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(e^x) é...",
+      "o": [
+        "e^x.",
+        "1/e^x.",
+        "1.",
+        "x."
+      ],
+      "a": 2,
+      "sol": "ln(e^x)=x.",
+      "hyp": "Pode derivar ln sem reconhecer a composição inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:log-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-044",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=e^{ax}, com a constante, então f''(x)=",
+      "o": [
+        "ae^{ax}.",
+        "2ae^{ax}.",
+        "e^{a²x}.",
+        "a²e^{ax}."
+      ],
+      "a": 3,
+      "sol": "Cada derivação multiplica por a.",
+      "hyp": "Pode esquecer o segundo fator a.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:segunda-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-045",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma solução da equação diferencial y'=2y com y(0)=3 é...",
+      "o": [
+        "y=3e^{2x}.",
+        "y=2e^{3x}.",
+        "y=3e^x.",
+        "y=6x."
+      ],
+      "a": 0,
+      "sol": "A forma Ce^{2x} satisfaz y'=2y e C=3 pela condição inicial.",
+      "hyp": "Pode trocar o parâmetro de crescimento com o valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:edo-intro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-046",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A função e^x é a única função f do tipo Ce^x com f'=f e f(0)=1 porque...",
+      "o": [
+        "todas as funções exponenciais têm C=1.",
+        "a condição inicial fixa C=1.",
+        "f'=f implica f constante.",
+        "e é definido como π−1."
+      ],
+      "a": 1,
+      "sol": "Ce^x satisfaz f'=f; f(0)=C=1.",
+      "hyp": "Pode ignorar o papel da condição inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:caracterizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-047",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=e^{−x²}, então f'(x)=",
+      "o": [
+        "2xe^{−x²}.",
+        "−x²e^{−x²−1}.",
+        "−2xe^{−x²}.",
+        "e^{−2x}."
+      ],
+      "a": 2,
+      "sol": "Derivada de −x² é −2x.",
+      "hyp": "Pode perder o sinal ou derivar o expoente incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:gauss",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-048",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=e^{−x²} tem derivada nula em...",
+      "o": [
+        "x=1.",
+        "x=−1.",
+        "nenhum ponto.",
+        "x=0."
+      ],
+      "a": 3,
+      "sol": "f'=−2xe^{-x²}; a exponencial nunca é zero.",
+      "hyp": "Pode procurar zeros na exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:critico-gauss",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-049",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O ponto x=0 de e^{−x²} é...",
+      "o": [
+        "um máximo.",
+        "um mínimo.",
+        "um ponto de descontinuidade.",
+        "uma raiz."
+      ],
+      "a": 0,
+      "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em0.",
+      "hyp": "Pode confundir derivada nula com mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:maximo-gauss",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-EE-050",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-e-exponencial",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "A quantidade A(t)=80e^{-0,3t} diminui. A taxa relativa instantânea A'(t)/A(t) é...",
+      "o": [
+        "0,3.",
+        "−0,3.",
+        "−24.",
+        "80."
+      ],
+      "a": 1,
+      "sol": "A'=−0,3A, logo A'/A=−0,3.",
+      "hyp": "Pode confundir taxa relativa com taxa absoluta inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-e-exponencial:taxa-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
