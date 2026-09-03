@@ -1344,11 +1344,11 @@
       "o": [
         "20 primeiros, 10 segundos, 0 terceiros",
         "15 primeiros, 10 segundos, 5 terceiros",
-        "10 primeiros, 20 segundos, 0 terceiros",
+        "10 primeiros, 15 segundos, 5 terceiros",
         "18 primeiros, 4 segundos, 8 terceiros"
       ],
       "a": 1,
-      "sol": "Na opção compatível: 15×3+10×2+5×1=45+20+5=70 e as frequências somam 30. As restantes não produzem 70 pontos.",
+      "sol": "15×3+10×2+5×1=45+20+5=70 e 15+10+5=30. As restantes distribuições não produzem simultaneamente 70 pontos e 30 posições.",
       "hyp": "Pode verificar apenas a soma das frequências ou apenas a pontuação, mas não ambas.",
       "contexts": [
         "mission",
