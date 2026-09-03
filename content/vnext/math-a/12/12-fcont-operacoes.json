@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcont",
+  "subtopicId": "12-fcont-operacoes",
+  "subtopic": "Operações com funções contínuas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha preservação da continuidade por operações e composição, limites de composições, teoremas de limitação/Weierstrass e limites fundamentais associados. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCONT-OP-001",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A soma de duas funções contínuas num ponto é...",
+      "o": [
+        "contínua nesse ponto.",
+        "sempre descontínua.",
+        "contínua só se ambas forem positivas.",
+        "derivável obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "A continuidade é preservada pela soma.",
+      "hyp": "Pode pensar que a soma cria quebras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-002",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O produto de duas funções contínuas num ponto é...",
+      "o": [
+        "sempre zero.",
+        "contínuo nesse ponto.",
+        "descontínuo.",
+        "contínuo só se um fator for constante."
+      ],
+      "a": 1,
+      "sol": "A continuidade é preservada pelo produto.",
+      "hyp": "Pode transferir restrições que não existem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-003",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O quociente f/g de funções contínuas é contínuo onde...",
+      "o": [
+        "f não se anula.",
+        "f=g.",
+        "g não se anula.",
+        "g>1."
+      ],
+      "a": 2,
+      "sol": "A única nova restrição é o denominador não ser zero.",
+      "hyp": "Pode excluir zeros do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-004",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A composição f∘g de funções contínuas é contínua quando...",
+      "o": [
+        "f e g têm o mesmo domínio.",
+        "f=g.",
+        "ambas são polinómios apenas.",
+        "g é contínua e f é contínua nos valores g(x) relevantes."
+      ],
+      "a": 3,
+      "sol": "A continuidade é preservada pela composição nas condições de domínio.",
+      "hyp": "Pode exigir identidade de domínios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-005",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A função x²+sin x é contínua em...",
+      "o": [
+        "todo R.",
+        "apenas x≥0.",
+        "R\\{0}.",
+        "apenas ]−π,π[."
+      ],
+      "a": 0,
+      "sol": "Polinómios e seno são contínuos em R; a soma também.",
+      "hyp": "Pode impor restrição por combinar famílias diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:soma-exemplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-006",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função e^x cos x é contínua em...",
+      "o": [
+        "x>0 apenas.",
+        "todo R.",
+        "R\\{0}.",
+        "apenas onde cosx≠0."
+      ],
+      "a": 1,
+      "sol": "Exponencial e cosseno são contínuos em R; zeros do produto não são problema.",
+      "hyp": "Pode tratar zeros de um fator como denominadores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:produto-exemplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-007",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função ln x+x² é contínua em...",
+      "o": [
+        "R.",
+        "[0,+∞[.",
+        "]0,+∞[.",
+        "R\\{0}."
+      ],
+      "a": 2,
+      "sol": "O domínio é determinado por ln x: x>0.",
+      "hyp": "Pode incluir x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:dominio-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-008",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função (x²+1)/(x−3) é contínua em...",
+      "o": [
+        "R.",
+        "R\\{−3}.",
+        "]3,+∞[.",
+        "R\\{3}."
+      ],
+      "a": 3,
+      "sol": "Quociente de funções contínuas onde o denominador é não nulo.",
+      "hyp": "Pode excluir a raiz do numerador inexistente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-009",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função √(x+2) é contínua no seu domínio...",
+      "o": [
+        "[−2,+∞[.",
+        "]−2,+∞[.",
+        "R.",
+        "[0,+∞[."
+      ],
+      "a": 0,
+      "sol": "A raiz quadrada é contínua para argumento não negativo.",
+      "hyp": "Pode usar x≥0 em vez de x+2≥0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-010",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função 1/√(x−1) é contínua em...",
+      "o": [
+        "[1,+∞[.",
+        "]1,+∞[.",
+        "R\\{1}.",
+        "]−∞,1[."
+      ],
+      "a": 1,
+      "sol": "A raiz deve existir e o denominador ser não nulo: x−1>0.",
+      "hyp": "Pode usar ≥0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:raiz-denominador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-011",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f é contínua em a e k é constante, então kf é...",
+      "o": [
+        "descontínua se k=0.",
+        "contínua só se k>0.",
+        "contínua em a.",
+        "sempre derivável."
+      ],
+      "a": 2,
+      "sol": "Multiplicar por constante preserva continuidade.",
+      "hyp": "Pode achar que k=0 é exceção problemática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-012",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f e g são contínuas em a, então max(f,g) e min(f,g)...",
+      "o": [
+        "são sempre descontínuas.",
+        "só são contínuas se f=g.",
+        "não podem ser definidas.",
+        "também são contínuas em a."
+      ],
+      "a": 3,
+      "sol": "Podem escrever-se usando |f−g|, soma e divisão por2.",
+      "hyp": "Pode achar que mudar de ramo implica descontinuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:max-min",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-013",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Como |x|=√(x²), a continuidade de |x| pode justificar-se por...",
+      "o": [
+        "composição de funções contínuas.",
+        "produto de funções descontínuas.",
+        "quociente com denominador zero.",
+        "derivabilidade em0."
+      ],
+      "a": 0,
+      "sol": "x² é contínua e √· é contínua em [0,+∞[.",
+      "hyp": "Pode usar derivabilidade em0, que é falsa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-014",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f é contínua em2 e f(2)=3, então lim_{x→2}[2f(x)+1]=",
+      "o": [
+        "6.",
+        "7.",
+        "3.",
+        "não existe."
+      ],
+      "a": 1,
+      "sol": "Pelas operações com limites:2·3+1=7.",
+      "hyp": "Pode substituir x em vez do valor limite de f.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:limite-operacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-015",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se lim f=4 e lim g=−1 no mesmo ponto, então lim(f+g)=",
+      "o": [
+        "−4.",
+        "5.",
+        "3.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "O limite da soma é a soma dos limites.",
+      "hyp": "Pode multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:limite-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-016",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com os mesmos limites, lim(fg)=",
+      "o": [
+        "3.",
+        "−1.",
+        "4.",
+        "−4."
+      ],
+      "a": 3,
+      "sol": "4×(−1)=−4.",
+      "hyp": "Pode somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:limite-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-017",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se lim f=6 e lim g=2, então lim(f/g)=",
+      "o": [
+        "3.",
+        "8.",
+        "12.",
+        "1/3."
+      ],
+      "a": 0,
+      "sol": "Como o limite do denominador é2≠0, aplica-se a regra do quociente.",
+      "hyp": "Pode inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:limite-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-018",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se lim g=0, podemos concluir automaticamente lim(f/g)?",
+      "o": [
+        "Sim, é0.",
+        "Não; é preciso analisar o comportamento.",
+        "Sim, é lim f.",
+        "Sim, é infinito sempre."
+      ],
+      "a": 1,
+      "sol": "Denominador a tender a0 pode originar vários comportamentos.",
+      "hyp": "Pode aplicar a regra do quociente fora das hipóteses.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:quociente-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-019",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se lim f=L≥0 e √f(x) está definida perto do ponto, então...",
+      "o": [
+        "lim√f=L².",
+        "lim√f=−√L.",
+        "lim√f=√L.",
+        "o limite não existe."
+      ],
+      "a": 2,
+      "sol": "A raiz quadrada é contínua no seu domínio.",
+      "hyp": "Pode esquecer a continuidade da função raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:raiz-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-020",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se lim f=L>0, então lim ln(f(x))=",
+      "o": [
+        "L.",
+        "e^L.",
+        "1/L.",
+        "ln L."
+      ],
+      "a": 3,
+      "sol": "ln é contínuo em ]0,+∞[.",
+      "hyp": "Pode trocar função e derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:log-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-021",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Se lim f=L, então lim e^{f(x)}=",
+      "o": [
+        "e^L.",
+        "L e.",
+        "e^{lim x}.",
+        "L."
+      ],
+      "a": 0,
+      "sol": "A exponencial é contínua em R.",
+      "hyp": "Pode multiplicar e por L.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:exp-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-022",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→0} e^{x²}=",
+      "o": [
+        "0.",
+        "1.",
+        "e.",
+        "não existe."
+      ],
+      "a": 1,
+      "sol": "x²→0 e e^0=1.",
+      "hyp": "Pode confundir expoente com valor final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:composicao-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-023",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→1} ln(x²+3)=",
+      "o": [
+        "4.",
+        "ln3.",
+        "ln4.",
+        "1/4."
+      ],
+      "a": 2,
+      "sol": "x²+3→4>0 e ln é contínuo.",
+      "hyp": "Pode derivar em vez de avaliar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:composicao-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-024",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "lim_{x→0} sin(e^x−1)=",
+      "o": [
+        "1.",
+        "sin1.",
+        "não existe.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "e^x−1→0 e sin0=0.",
+      "hyp": "Pode parar na função interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:composicao-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-025",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=ln(x²+1) é contínua em...",
+      "o": [
+        "todo R.",
+        "x>0 apenas.",
+        "R\\{0}.",
+        "|x|>1."
+      ],
+      "a": 0,
+      "sol": "x²+1>0 para todo x.",
+      "hyp": "Pode impor domínio x>0 ao x em vez do argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:log-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-026",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=√(4−x²) é contínua em...",
+      "o": [
+        "R.",
+        "[−2,2].",
+        "]−2,2[.",
+        "]−∞,−2]∪[2,+∞[."
+      ],
+      "a": 1,
+      "sol": "É preciso4−x²≥0.",
+      "hyp": "Pode inverter a desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:raiz-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-027",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=1/(1+e^x) é contínua em...",
+      "o": [
+        "R\\{0}.",
+        "x>0 apenas.",
+        "todo R.",
+        "R\\{−1}."
+      ],
+      "a": 2,
+      "sol": "1+e^x>1, logo nunca se anula.",
+      "hyp": "Pode procurar uma raiz impossível no denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:logistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-028",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função tan x=sinx/cosx é contínua onde...",
+      "o": [
+        "sinx≠0.",
+        "x≠0.",
+        "todo R.",
+        "cosx≠0."
+      ],
+      "a": 3,
+      "sol": "É quociente de contínuas com denominador não nulo.",
+      "hyp": "Pode excluir zeros do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-029",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma função racional é contínua...",
+      "o": [
+        "em todos os pontos do seu domínio.",
+        "apenas se o grau do numerador for menor.",
+        "só para x>0.",
+        "apenas se não tiver raízes."
+      ],
+      "a": 0,
+      "sol": "Polinómios são contínuos e o quociente preserva continuidade onde o denominador não zera.",
+      "hyp": "Pode confundir assíntotas e continuidade global.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:racional-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-030",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma função polinomial é contínua...",
+      "o": [
+        "apenas entre as suas raízes.",
+        "em todo R.",
+        "apenas para x≥0.",
+        "exceto nos extremos locais."
+      ],
+      "a": 1,
+      "sol": "As operações finitas de soma e produto preservam continuidade.",
+      "hyp": "Pode associar raízes a descontinuidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:polinomio-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-031",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua em a e f(a)>0, então existe uma vizinhança de a onde...",
+      "o": [
+        "f é constante.",
+        "f'(x)>0.",
+        "f mantém-se positiva.",
+        "f(x)=f(a)."
+      ],
+      "a": 2,
+      "sol": "Por continuidade, valores suficientemente próximos de f(a)>0 permanecem positivos.",
+      "hyp": "Pode confundir continuidade com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:preservacao-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-032",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua em a e f(a)<0, então perto de a...",
+      "o": [
+        "f torna-se positiva.",
+        "f é necessariamente decrescente.",
+        "f tem uma raiz.",
+        "f permanece negativa numa vizinhança suficientemente pequena."
+      ],
+      "a": 3,
+      "sol": "Continuidade impede mudança de sinal arbitrariamente perto sem passar por zero.",
+      "hyp": "Pode supor mudança de sinal por proximidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:preservacao-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-033",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f e g são contínuas em a e g(a)≠0, então f/g é...",
+      "o": [
+        "contínua em a.",
+        "descontínua em a.",
+        "contínua só se f(a)=0.",
+        "derivável sempre."
+      ],
+      "a": 0,
+      "sol": "A condição g(a)≠0 garante denominador não nulo perto do ponto.",
+      "hyp": "Pode exigir numerador não nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:quociente-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-034",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se g é contínua em a e g(a)>0, então √g é...",
+      "o": [
+        "sempre descontínua.",
+        "contínua em a.",
+        "contínua só se g(a)=1.",
+        "não definida."
+      ],
+      "a": 1,
+      "sol": "A raiz quadrada é contínua para argumentos positivos e não negativos.",
+      "hyp": "Pode pensar que compor com raiz cria um canto automaticamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:raiz-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-035",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se g é contínua em a e g(a)=0, √g pode ser contínua em a desde que...",
+      "o": [
+        "g'(a)=0 obrigatoriamente.",
+        "g seja constante.",
+        "g(x) permaneça ≥0 perto de a no domínio considerado.",
+        "a=0."
+      ],
+      "a": 2,
+      "sol": "A composição é contínua se o argumento permanece no domínio da raiz.",
+      "hyp": "Pode exigir derivabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:raiz-fronteira",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-036",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A continuidade de f∘g em a pode verificar-se por 'passar o limite' por f quando...",
+      "o": [
+        "f é qualquer função.",
+        "g(a)=0 sempre.",
+        "f'(g(a))=0.",
+        "g(x)→g(a) e f é contínua em g(a)."
+      ],
+      "a": 3,
+      "sol": "Continuidade da função exterior permite trocar limite e aplicação.",
+      "hyp": "Pode usar a propriedade sem hipótese sobre f.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:passar-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-037",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0} ln(1+x)/x é...",
+      "o": [
+        "1.",
+        "0.",
+        "+∞.",
+        "−1."
+      ],
+      "a": 0,
+      "sol": "É um limite fundamental ligado à derivada de ln em1.",
+      "hyp": "Pode substituir e parar em0/0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:fundamental-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-038",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0} (e^x−1)/x é...",
+      "o": [
+        "e.",
+        "1.",
+        "0.",
+        "não existe."
+      ],
+      "a": 1,
+      "sol": "É o limite fundamental associado à derivada de e^x em0.",
+      "hyp": "Pode substituir e concluir0/0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:fundamental-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-039",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0} sin(3x)/x é...",
+      "o": [
+        "1.",
+        "0.",
+        "3.",
+        "1/3."
+      ],
+      "a": 2,
+      "sol": "sin(3x)/x=3·sin(3x)/(3x)→3.",
+      "hyp": "Pode esquecer o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:fundamental-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-040",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0} (1−cos(2x))/x² é...",
+      "o": [
+        "1/2.",
+        "1.",
+        "4.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "1−cos u ~u²/2; com u=2x resulta (4x²/2)/x²→2.",
+      "hyp": "Pode esquecer o quadrado do fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:trig-segunda-ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-041",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0} (e^{2x}−1)/x é...",
+      "o": [
+        "2.",
+        "1.",
+        "e².",
+        "0."
+      ],
+      "a": 0,
+      "sol": "Escreve-se2·(e^{2x}−1)/(2x)→2.",
+      "hyp": "Pode usar diretamente o limite fundamental sem ajustar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:exp-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-042",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "lim_{x→0} ln(1+5x)/x é...",
+      "o": [
+        "1.",
+        "5.",
+        "0.",
+        "1/5."
+      ],
+      "a": 1,
+      "sol": "=5·ln(1+5x)/(5x)→5.",
+      "hyp": "Pode esquecer o fator5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:log-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-043",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua e f(a)=0, g é contínua e limitada perto de a, então lim f(x)g(x) quando x→a é...",
+      "o": [
+        "lim g obrigatoriamente.",
+        "1.",
+        "0.",
+        "indeterminado sempre."
+      ],
+      "a": 2,
+      "sol": "Produto de algo que tende a0 por função limitada tende a0.",
+      "hyp": "Pode achar que é preciso existir lim g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:produto-limitada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-044",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O resultado anterior é uma forma do princípio...",
+      "o": [
+        "do valor intermédio.",
+        "de Rolle.",
+        "da derivada composta.",
+        "do confronto/estimativa por limitação."
+      ],
+      "a": 3,
+      "sol": "Se |g|≤M, então |fg|≤M|f|→0.",
+      "hyp": "Pode confundir teoremas de continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:confronto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-045",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se |f(x)|≤x² perto de0, então lim_{x→0}f(x)=",
+      "o": [
+        "0.",
+        "1.",
+        "não existe.",
+        "+∞."
+      ],
+      "a": 0,
+      "sol": "Como −x²≤f(x)≤x² e ambos os extremos tendem a0, aplica-se o confronto.",
+      "hyp": "Pode ignorar a desigualdade bilateral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:confronto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-046",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua em a, então |f| é...",
+      "o": [
+        "descontínua se f(a)=0.",
+        "contínua em a.",
+        "contínua só se f(a)>0.",
+        "derivável sempre."
+      ],
+      "a": 1,
+      "sol": "O valor absoluto é uma função contínua e a composição preserva continuidade.",
+      "hyp": "Pode confundir o canto de |x| com descontinuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:valor-absoluto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-047",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua em [a,b], então |f| atinge...",
+      "o": [
+        "apenas máximo.",
+        "apenas mínimo.",
+        "máximo e mínimo em [a,b].",
+        "nenhum extremo garantido."
+      ],
+      "a": 2,
+      "sol": "|f| é contínua e o Teorema de Weierstrass garante extremos absolutos no compacto.",
+      "hyp": "Pode esquecer a continuidade da composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:weierstrass",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-048",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma função contínua num intervalo fechado e limitado...",
+      "o": [
+        "é necessariamente monótona.",
+        "é necessariamente derivável.",
+        "não pode ter zeros.",
+        "é limitada e atinge máximo e mínimo."
+      ],
+      "a": 3,
+      "sol": "É o Teorema de Weierstrass.",
+      "hyp": "Pode confundir continuidade com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:weierstrass",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-049",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma grandeza Q(t)=√(1+P(t)) e P é contínua com P(t)≥−1, então Q...",
+      "o": [
+        "é contínua.",
+        "é sempre derivável.",
+        "é descontínua quando P=0.",
+        "é constante."
+      ],
+      "a": 0,
+      "sol": "É composição de funções contínuas no domínio da raiz.",
+      "hyp": "Pode confundir fronteira do domínio com descontinuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-OP-050",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-operacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se um índice I(t)=A(t)/B(t), com A,B contínuas e B(t) nunca nulo no período estudado, então I...",
+      "o": [
+        "é descontínuo por ser quociente.",
+        "é contínuo nesse período.",
+        "é constante.",
+        "só é contínuo se A=B."
+      ],
+      "a": 1,
+      "sol": "Quociente de contínuas com denominador não nulo preserva continuidade.",
+      "hyp": "Pode considerar qualquer quociente descontínuo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-operacoes:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
