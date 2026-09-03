@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ga",
+  "subtopicId": "10-ga-coordenadas-transformacoes",
+  "subtopic": "Coordenadas e transformações no plano",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha coordenadas, quadrantes, simetrias, translações, rotações, reflexões em y=x/y=−x e homotetias. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GA-CT-001",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num referencial cartesiano do plano, um ponto P=(x,y) é determinado por...",
+      "o": [
+        "duas coordenadas.",
+        "uma única coordenada.",
+        "três coordenadas.",
+        "apenas a distância à origem."
+      ],
+      "a": 0,
+      "sol": "No plano cartesiano, cada ponto é descrito por uma abcissa x e uma ordenada y.",
+      "hyp": "Pode confundir plano com espaço.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:coordenadas-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-002",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A primeira coordenada de P=(3,−2) chama-se...",
+      "o": [
+        "ordenada.",
+        "abcissa.",
+        "cota.",
+        "norma."
+      ],
+      "a": 1,
+      "sol": "A primeira coordenada é a abcissa.",
+      "hyp": "Pode trocar abcissa e ordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:abcissa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-003",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A segunda coordenada de P=(3,−2) chama-se...",
+      "o": [
+        "abcissa.",
+        "cota.",
+        "ordenada.",
+        "declive."
+      ],
+      "a": 2,
+      "sol": "A segunda coordenada é a ordenada.",
+      "hyp": "Pode trocar as duas coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:ordenada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-004",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual ponto pertence ao eixo Ox?",
+      "o": [
+        "(0,4).",
+        "(4,4).",
+        "(−4,2).",
+        "(4,0)."
+      ],
+      "a": 3,
+      "sol": "No eixo Ox a ordenada é zero.",
+      "hyp": "Pode confundir os dois eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:eixo-Ox",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-005",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual ponto pertence ao eixo Oy?",
+      "o": [
+        "(0,−3).",
+        "(−3,0).",
+        "(3,3).",
+        "(1,−3)."
+      ],
+      "a": 0,
+      "sol": "No eixo Oy a abcissa é zero.",
+      "hyp": "Pode confundir os dois eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:eixo-Oy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-006",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A origem do referencial tem coordenadas...",
+      "o": [
+        "(1,0).",
+        "(0,0).",
+        "(0,1).",
+        "(1,1)."
+      ],
+      "a": 1,
+      "sol": "A origem é a interseção dos eixos.",
+      "hyp": "Pode usar uma unidade em vez de zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-007",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um ponto com x>0 e y>0 pertence ao...",
+      "o": [
+        "2.º quadrante.",
+        "3.º quadrante.",
+        "1.º quadrante.",
+        "4.º quadrante."
+      ],
+      "a": 2,
+      "sol": "No 1.º quadrante ambas as coordenadas são positivas.",
+      "hyp": "Pode trocar a convenção dos quadrantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-008",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um ponto com x<0 e y>0 pertence ao...",
+      "o": [
+        "1.º quadrante.",
+        "3.º quadrante.",
+        "4.º quadrante.",
+        "2.º quadrante."
+      ],
+      "a": 3,
+      "sol": "No 2.º quadrante x é negativo e y positivo.",
+      "hyp": "Pode inverter sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-009",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um ponto com x<0 e y<0 pertence ao...",
+      "o": [
+        "3.º quadrante.",
+        "1.º quadrante.",
+        "2.º quadrante.",
+        "4.º quadrante."
+      ],
+      "a": 0,
+      "sol": "No 3.º quadrante ambas são negativas.",
+      "hyp": "Pode confundir com 4.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-010",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um ponto com x>0 e y<0 pertence ao...",
+      "o": [
+        "1.º quadrante.",
+        "4.º quadrante.",
+        "2.º quadrante.",
+        "3.º quadrante."
+      ],
+      "a": 1,
+      "sol": "No 4.º quadrante x é positivo e y negativo.",
+      "hyp": "Pode confundir os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-011",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A simetria relativamente ao eixo Oy transforma (x,y) em...",
+      "o": [
+        "(x,−y).",
+        "(−x,−y).",
+        "(−x,y).",
+        "(y,x)."
+      ],
+      "a": 2,
+      "sol": "Refletir em Oy troca o sinal da abcissa.",
+      "hyp": "Pode confundir reflexão em Oy com Ox.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-Oy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-012",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A simetria relativamente ao eixo Ox transforma (x,y) em...",
+      "o": [
+        "(−x,y).",
+        "(−x,−y).",
+        "(y,x).",
+        "(x,−y)."
+      ],
+      "a": 3,
+      "sol": "Refletir em Ox troca o sinal da ordenada.",
+      "hyp": "Pode confundir com reflexão em Oy.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-Ox",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-013",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A simetria relativamente à origem transforma (x,y) em...",
+      "o": [
+        "(−x,−y).",
+        "(−x,y).",
+        "(x,−y).",
+        "(y,x)."
+      ],
+      "a": 0,
+      "sol": "Ambas as coordenadas mudam de sinal.",
+      "hyp": "Pode alterar apenas uma coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-014",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o simétrico de A=(3,−5) relativamente ao eixo Oy?",
+      "o": [
+        "(3,5).",
+        "(−3,−5).",
+        "(−3,5).",
+        "(5,−3)."
+      ],
+      "a": 1,
+      "sol": "Muda o sinal de x e mantém y.",
+      "hyp": "Pode refletir no eixo errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-Oy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-015",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o simétrico de A=(3,−5) relativamente ao eixo Ox?",
+      "o": [
+        "(−3,−5).",
+        "(−3,5).",
+        "(3,5).",
+        "(5,3)."
+      ],
+      "a": 2,
+      "sol": "Mantém x e muda o sinal de y.",
+      "hyp": "Pode trocar os sinais errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-Ox",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-016",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o simétrico de A=(3,−5) relativamente à origem?",
+      "o": [
+        "(3,5).",
+        "(−3,−5).",
+        "(5,−3).",
+        "(−3,5)."
+      ],
+      "a": 3,
+      "sol": "Mudam os sinais de ambas as coordenadas.",
+      "hyp": "Pode aplicar só uma reflexão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-017",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma translação de vetor (a,b) transforma (x,y) em...",
+      "o": [
+        "(x+a,y+b).",
+        "(ax,by).",
+        "(x−a,y−b) sempre.",
+        "(a−x,b−y)."
+      ],
+      "a": 0,
+      "sol": "A translação soma as componentes do vetor às coordenadas.",
+      "hyp": "Pode confundir translação com escala.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-018",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Transladando P=(2,−1) pelo vetor (3,4), obtém-se...",
+      "o": [
+        "(−1,−5).",
+        "(5,3).",
+        "(6,−4).",
+        "(3,4)."
+      ],
+      "a": 1,
+      "sol": "(2+3,−1+4)=(5,3).",
+      "hyp": "Pode subtrair o vetor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-019",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Que vetor de translação leva A=(1,2) a B=(5,−1)?",
+      "o": [
+        "(−4,3).",
+        "(6,1).",
+        "(4,−3).",
+        "(5,−1)."
+      ],
+      "a": 2,
+      "sol": "B−A=(5−1,−1−2)=(4,−3).",
+      "hyp": "Pode usar A−B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:vetor-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-020",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa translação, as distâncias entre pontos...",
+      "o": [
+        "duplicam.",
+        "ficam sempre zero.",
+        "dependem da origem do referencial.",
+        "mantêm-se."
+      ],
+      "a": 3,
+      "sol": "Translações são isometrias: preservam distâncias.",
+      "hyp": "Pode achar que deslocar altera comprimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:translacao-isometria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-021",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma rotação de 90° no sentido anti-horário em torno da origem transforma (x,y) em...",
+      "o": [
+        "(−y,x).",
+        "(y,−x).",
+        "(−x,−y).",
+        "(x,−y)."
+      ],
+      "a": 0,
+      "sol": "A regra padrão é (x,y)→(−y,x).",
+      "hyp": "Pode usar a rotação horária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-022",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma rotação de 90° no sentido horário em torno da origem transforma (x,y) em...",
+      "o": [
+        "(−y,x).",
+        "(y,−x).",
+        "(−x,−y).",
+        "(x,−y)."
+      ],
+      "a": 1,
+      "sol": "A regra horária é (x,y)→(y,−x).",
+      "hyp": "Pode trocar os sentidos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-023",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Rodando P=(2,5) 90° anti-horário em torno da origem obtém-se...",
+      "o": [
+        "(5,−2).",
+        "(−2,−5).",
+        "(−5,2).",
+        "(2,−5)."
+      ],
+      "a": 2,
+      "sol": "Aplicando (−y,x), resulta (−5,2).",
+      "hyp": "Pode usar a rotação horária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-024",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Rodando P=(−3,4) 90° horário em torno da origem obtém-se...",
+      "o": [
+        "(−4,−3).",
+        "(−4,3).",
+        "(3,−4).",
+        "(4,3)."
+      ],
+      "a": 3,
+      "sol": "(y,−x)=(4,3).",
+      "hyp": "Pode errar o sinal de −x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-025",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma rotação de 180° em torno da origem transforma (x,y) em...",
+      "o": [
+        "(−x,−y).",
+        "(−y,x).",
+        "(y,−x).",
+        "(x,−y)."
+      ],
+      "a": 0,
+      "sol": "Uma meia-volta equivale à simetria central na origem.",
+      "hyp": "Pode confundir com rotação de 90°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-180",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-026",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A imagem de (4,−2) por uma rotação de 180° em torno da origem é...",
+      "o": [
+        "(4,2).",
+        "(−4,2).",
+        "(−2,4).",
+        "(2,−4)."
+      ],
+      "a": 1,
+      "sol": "Ambas as coordenadas mudam de sinal.",
+      "hyp": "Pode mudar só uma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-180",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-027",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma rotação em torno da origem preserva...",
+      "o": [
+        "apenas abcissas.",
+        "apenas ordenadas.",
+        "distâncias e amplitudes de ângulos.",
+        "a orientação horizontal de todos os segmentos."
+      ],
+      "a": 2,
+      "sol": "Rotações são isometrias e preservam ângulos.",
+      "hyp": "Pode achar que rotação altera comprimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-isometria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-028",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A composição de duas simetrias, primeiro em Ox e depois em Oy, equivale a...",
+      "o": [
+        "uma translação.",
+        "uma rotação de 90°.",
+        "a identidade.",
+        "uma rotação de 180° em torno da origem."
+      ],
+      "a": 3,
+      "sol": "(x,y)→(x,−y)→(−x,−y), que é uma meia-volta.",
+      "hyp": "Pode achar que duas reflexões anulam sempre.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:composicao-simetrias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-029",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A composição de uma rotação de 90° anti-horária com outra igual resulta numa rotação de...",
+      "o": [
+        "180°.",
+        "90°.",
+        "270°.",
+        "360°."
+      ],
+      "a": 0,
+      "sol": "90°+90°=180°.",
+      "hyp": "Pode somar incorretamente ou pensar que volta ao início.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:composicao-rotacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-030",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Aplicar quatro rotações sucessivas de 90° anti-horárias em torno da origem equivale a...",
+      "o": [
+        "reflexão em Ox.",
+        "identidade.",
+        "rotação de 180°.",
+        "translação."
+      ],
+      "a": 1,
+      "sol": "4×90°=360°, regressando ao ponto inicial.",
+      "hyp": "Pode parar após 270°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:rotacao-360",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-031",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A reflexão na reta y=x transforma (x,y) em...",
+      "o": [
+        "(−x,y).",
+        "(x,−y).",
+        "(y,x).",
+        "(−y,−x)."
+      ],
+      "a": 2,
+      "sol": "Refletir em y=x troca as coordenadas.",
+      "hyp": "Pode mudar sinais em vez de trocar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-y=x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-032",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "O simétrico de (2,−7) relativamente à reta y=x é...",
+      "o": [
+        "(7,−2).",
+        "(−2,7).",
+        "(2,7).",
+        "(−7,2)."
+      ],
+      "a": 3,
+      "sol": "Trocam-se as coordenadas.",
+      "hyp": "Pode trocar e mudar sinais sem razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-y=x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-033",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A reflexão na reta y=−x transforma (x,y) em...",
+      "o": [
+        "(−y,−x).",
+        "(y,x).",
+        "(−x,y).",
+        "(x,−y)."
+      ],
+      "a": 0,
+      "sol": "Na simetria em y=−x trocam-se as coordenadas e mudam-se ambos os sinais.",
+      "hyp": "Pode usar a regra de y=x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-y=-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-034",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "O simétrico de (3,1) relativamente a y=−x é...",
+      "o": [
+        "(1,3).",
+        "(−1,−3).",
+        "(−3,−1).",
+        "(−1,3)."
+      ],
+      "a": 1,
+      "sol": "Aplica-se (−y,−x).",
+      "hyp": "Pode apenas trocar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:simetria-y=-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-035",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto P=(x,y) é fixo pela reflexão em y=x quando...",
+      "o": [
+        "x=−y.",
+        "x=0.",
+        "x=y.",
+        "y=0."
+      ],
+      "a": 2,
+      "sol": "Pontos da própria reta y=x não se alteram.",
+      "hyp": "Pode confundir com y=−x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:pontos-fixos-reflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-036",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto P=(x,y) é fixo pela reflexão no eixo Oy quando...",
+      "o": [
+        "y=0.",
+        "x=y.",
+        "x=−y.",
+        "x=0."
+      ],
+      "a": 3,
+      "sol": "Os pontos do eixo de reflexão permanecem fixos.",
+      "hyp": "Pode escolher o eixo errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:pontos-fixos-reflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-037",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma translação leva A=(−2,3) a A'=(4,−1). Onde leva B=(1,5)?",
+      "o": [
+        "(7,1).",
+        "(5,2).",
+        "(−5,9).",
+        "(3,4)."
+      ],
+      "a": 0,
+      "sol": "O vetor é (6,−4). Aplicando a B: (7,1).",
+      "hyp": "Pode recalcular um vetor diferente para B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:mesma-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-038",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma rotação de 90° anti-horária leva A=(a,b) a A'=(−4,3). Quais são a e b?",
+      "o": [
+        "a=−3,b=−4.",
+        "a=3,b=4.",
+        "a=4,b=3.",
+        "a=−4,b=3."
+      ],
+      "a": 1,
+      "sol": "(−b,a)=(−4,3), logo b=4 e a=3.",
+      "hyp": "Pode inverter a regra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:inverter-rotacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-039",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A imagem de P=(2,1) por uma reflexão em Oy seguida de translação (3,−2) é...",
+      "o": [
+        "(5,−1).",
+        "(−5,3).",
+        "(1,−1).",
+        "(1,3)."
+      ],
+      "a": 2,
+      "sol": "Reflexão: (−2,1). Translação: (1,−1).",
+      "hyp": "Pode trocar a ordem das transformações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-040",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A imagem de P=(1,2) por translação (2,−1) seguida de rotação 90° anti-horária é...",
+      "o": [
+        "(3,1).",
+        "(1,−3).",
+        "(−3,1).",
+        "(−1,3)."
+      ],
+      "a": 3,
+      "sol": "Translação dá (3,1); rotação dá (−1,3).",
+      "hyp": "Pode aplicar a rotação antes da translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-041",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A ordem de duas transformações geométricas é sempre irrelevante?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só em rotações.",
+        "Só em translações."
+      ],
+      "a": 0,
+      "sol": "Em geral a composição não é comutativa; trocar a ordem pode dar imagens diferentes.",
+      "hyp": "Pode assumir comutatividade por analogia com soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:ordem-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-042",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma homotetia de centro na origem e razão 2 transforma (x,y) em...",
+      "o": [
+        "(x+2,y+2).",
+        "(2x,2y).",
+        "(x/2,y/2) sempre.",
+        "(−x,−y)."
+      ],
+      "a": 1,
+      "sol": "Uma homotetia de razão 2 duplica as coordenadas relativamente à origem.",
+      "hyp": "Pode confundir homotetia com translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:homotetia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-043",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "A imagem de (−3,4) numa homotetia de centro O e razão 1/2 é...",
+      "o": [
+        "(−6,8).",
+        "(−2,3).",
+        "(−1,5,2).",
+        "(1,5,−2)."
+      ],
+      "a": 2,
+      "sol": "Multiplicam-se ambas as coordenadas por 1/2: (−1,5;2).",
+      "hyp": "Pode duplicar em vez de reduzir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:homotetia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-044",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma homotetia de razão k altera comprimentos por fator...",
+      "o": [
+        "k².",
+        "1/k sempre.",
+        "k+1.",
+        "|k|."
+      ],
+      "a": 3,
+      "sol": "Comprimentos são multiplicados pelo módulo da razão.",
+      "hyp": "Pode usar k², que se relaciona com áreas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:homotetia-comprimentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-045",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Numa homotetia plana de razão 3, as áreas são multiplicadas por...",
+      "o": [
+        "9.",
+        "3.",
+        "6.",
+        "27."
+      ],
+      "a": 0,
+      "sol": "Áreas variam com o quadrado da razão linear: 3²=9.",
+      "hyp": "Pode usar a razão linear diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:homotetia-areas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-046",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma homotetia de razão −2 relativamente à origem transforma (1,−3) em...",
+      "o": [
+        "(2,−6).",
+        "(−2,6).",
+        "(−1,3).",
+        "(−2,−6)."
+      ],
+      "a": 1,
+      "sol": "Multiplica-se cada coordenada por −2.",
+      "hyp": "Pode ignorar o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:homotetia-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-047",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma homotetia de razão negativa inclui, além da alteração de escala...",
+      "o": [
+        "uma translação fixa.",
+        "uma rotação obrigatória de 90°.",
+        "uma inversão de direção relativamente ao centro.",
+        "uma reflexão apenas em Ox."
+      ],
+      "a": 2,
+      "sol": "Pontos passam para o semirraio oposto relativamente ao centro.",
+      "hyp": "Pode interpretar sinal negativo como reflexão num único eixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:homotetia-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-048",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um desenho é ampliado com centro na origem e fator 1,5. O ponto (4,2) passa para...",
+      "o": [
+        "(5,5,3,5).",
+        "(4,1,5).",
+        "(2,67,1,33).",
+        "(6,3)."
+      ],
+      "a": 3,
+      "sol": "Multiplica-se por 1,5: (6,3).",
+      "hyp": "Pode somar 1,5 em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:modelacao-homotetia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-049",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que transformação leva simultaneamente (1,2) a (−1,−2) e (3,0) a (−3,0)?",
+      "o": [
+        "Simetria relativamente à origem.",
+        "Simetria em Ox.",
+        "Simetria em Oy.",
+        "Translação (−2,−4)."
+      ],
+      "a": 0,
+      "sol": "Ambas as coordenadas mudam de sinal em todos os pontos.",
+      "hyp": "Pode escolher uma transformação que funciona só num ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:identificar-transformacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-CT-050",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-coordenadas-transformacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num mapa cartesiano, um objeto é deslocado 4 unidades para leste e 3 para sul. Qual vetor representa essa translação, tomando leste como +x e norte como +y?",
+      "o": [
+        "(−4,3).",
+        "(4,−3).",
+        "(4,3).",
+        "(−3,4)."
+      ],
+      "a": 1,
+      "sol": "Leste corresponde a x positivo e sul a y negativo.",
+      "hyp": "Pode trocar convenções de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-coordenadas-transformacoes:modelacao-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
