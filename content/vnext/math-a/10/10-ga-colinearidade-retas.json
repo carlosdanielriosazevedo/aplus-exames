@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ga",
+  "subtopicId": "10-ga-colinearidade-retas",
+  "subtopic": "Colinearidade e equações de retas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha declive, equações reduzidas/vetoriais, pertença, colinearidade, paralelismo, perpendicularidade, interseções e modelação com retas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GA-RET-001",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Três pontos A,B,C são colineares quando...",
+      "o": [
+        "pertencem à mesma reta.",
+        "têm a mesma ordenada sempre.",
+        "têm a mesma abcissa sempre.",
+        "formam um triângulo."
+      ],
+      "a": 0,
+      "sol": "Colinearidade significa pertença a uma mesma reta.",
+      "hyp": "Pode reduzir colinearidade a casos horizontais ou verticais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-002",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma reta não vertical pode ser escrita na forma reduzida...",
+      "o": [
+        "x=a.",
+        "y=mx+b.",
+        "x²+y²=r².",
+        "y=ax²+bx+c."
+      ],
+      "a": 1,
+      "sol": "m é o declive e b a ordenada na origem.",
+      "hyp": "Pode confundir reta com outras curvas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reta-reduzida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-003",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na equação y=mx+b, m representa...",
+      "o": [
+        "a ordenada na origem.",
+        "a abcissa do ponto médio.",
+        "o declive.",
+        "a norma."
+      ],
+      "a": 2,
+      "sol": "m mede a taxa de variação da reta.",
+      "hyp": "Pode trocar m e b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-004",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma reta vertical tem equação do tipo...",
+      "o": [
+        "y=k.",
+        "y=mx+b com m=0.",
+        "x²=k.",
+        "x=k."
+      ],
+      "a": 3,
+      "sol": "Todos os pontos de uma reta vertical têm a mesma abcissa.",
+      "hyp": "Pode confundir vertical com horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reta-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-005",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma reta horizontal tem equação do tipo...",
+      "o": [
+        "y=k.",
+        "x=k.",
+        "y=x+k sempre.",
+        "x+y=0."
+      ],
+      "a": 0,
+      "sol": "Todos os pontos de uma reta horizontal têm a mesma ordenada.",
+      "hyp": "Pode confundir horizontal e vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reta-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-006",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o declive da reta que passa por (0,0) e (2,6)?",
+      "o": [
+        "2",
+        "3",
+        "4",
+        "6"
+      ],
+      "a": 1,
+      "sol": "m=(6−0)/(2−0)=3.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:declive-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-007",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o declive da reta que passa por (1,4) e (3,0)?",
+      "o": [
+        "−1",
+        "1",
+        "−2",
+        "2"
+      ],
+      "a": 2,
+      "sol": "m=(0−4)/(3−1)=−4/2=−2.",
+      "hyp": "Pode perder o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:declive-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-008",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma reta tem declive positivo, ela é...",
+      "o": [
+        "decrescente.",
+        "horizontal.",
+        "vertical.",
+        "crescente da esquerda para a direita."
+      ],
+      "a": 3,
+      "sol": "m>0 implica crescimento.",
+      "hyp": "Pode confundir sinal do declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:declive-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-009",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma reta tem declive negativo, ela é...",
+      "o": [
+        "decrescente da esquerda para a direita.",
+        "crescente.",
+        "horizontal.",
+        "vertical."
+      ],
+      "a": 0,
+      "sol": "m<0 implica decréscimo.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:declive-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-010",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma reta de declive zero é...",
+      "o": [
+        "vertical.",
+        "horizontal.",
+        "crescente.",
+        "sem equação."
+      ],
+      "a": 1,
+      "sol": "y=b tem declive 0.",
+      "hyp": "Pode confundir zero com reta vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:declive-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-011",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A reta y=2x−3 passa por qual ponto?",
+      "o": [
+        "(2,2).",
+        "(1,0).",
+        "(2,1).",
+        "(0,3)."
+      ],
+      "a": 2,
+      "sol": "Para x=2, y=4−3=1.",
+      "hyp": "Pode não substituir corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:testar-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-012",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O ponto (3,7) pertence à reta y=2x+1?",
+      "o": [
+        "Não.",
+        "Só se x=7.",
+        "Só se y=3.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "2×3+1=7.",
+      "hyp": "Pode trocar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:testar-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-013",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O ponto (2,5) pertence à reta y=3x−1?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se o declive for 2.",
+        "Não é possível saber."
+      ],
+      "a": 0,
+      "sol": "3×2−1=5.",
+      "hyp": "Pode esquecer o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:testar-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-014",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a equação da reta de declive 2 que passa por (0,3)?",
+      "o": [
+        "y=3x+2.",
+        "y=2x+3.",
+        "y=2x−3.",
+        "x=3."
+      ],
+      "a": 1,
+      "sol": "A ordenada na origem é 3.",
+      "hyp": "Pode trocar parâmetros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:equacao-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-015",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a equação da reta de declive −1 que passa por (0,4)?",
+      "o": [
+        "y=x−4.",
+        "y=4x−1.",
+        "y=−x+4.",
+        "x=4."
+      ],
+      "a": 2,
+      "sol": "m=−1 e b=4.",
+      "hyp": "Pode trocar declive e termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:equacao-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-016",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a equação da reta que passa por (1,2) e (3,6)?",
+      "o": [
+        "y=2x+1.",
+        "y=x+1.",
+        "y=3x−1.",
+        "y=2x."
+      ],
+      "a": 3,
+      "sol": "m=2 e usando (1,2), b=0.",
+      "hyp": "Pode determinar o declive certo mas b errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:equacao-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-017",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a equação da reta que passa por (−1,3) e (1,−1)?",
+      "o": [
+        "y=−2x+1.",
+        "y=2x+1.",
+        "y=−x+2.",
+        "y=−2x−1."
+      ],
+      "a": 0,
+      "sol": "m=(−1−3)/(1−(−1))=−2; 3=2+b => b=1.",
+      "hyp": "Pode errar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:equacao-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-018",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Duas retas não verticais são paralelas quando têm...",
+      "o": [
+        "declives opostos sempre.",
+        "o mesmo declive.",
+        "ordenadas na origem iguais.",
+        "declives cujo produto é −1."
+      ],
+      "a": 1,
+      "sol": "Retas paralelas têm direção igual.",
+      "hyp": "Pode confundir paralelismo com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:paralelismo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-019",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "As retas y=3x+1 e y=3x−5 são...",
+      "o": [
+        "coincidentes.",
+        "perpendiculares.",
+        "paralelas distintas.",
+        "secantes no eixo Oy."
+      ],
+      "a": 2,
+      "sol": "Têm mesmo declive e b diferente.",
+      "hyp": "Pode achar que mesmo declive implica coincidência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:paralelismo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-020",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "As retas y=2x+4 e 2y=4x+8 são...",
+      "o": [
+        "paralelas distintas.",
+        "perpendiculares.",
+        "verticais.",
+        "coincidentes."
+      ],
+      "a": 3,
+      "sol": "A segunda simplifica para y=2x+4.",
+      "hyp": "Pode não simplificar a equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:retas-coincidentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-021",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Duas retas não verticais de declives m1 e m2 são perpendiculares quando...",
+      "o": [
+        "m1m2=−1.",
+        "m1=m2.",
+        "m1+m2=0 sempre.",
+        "m1m2=1."
+      ],
+      "a": 0,
+      "sol": "Declives de retas perpendiculares são recíprocos e de sinais opostos.",
+      "hyp": "Pode confundir declives opostos com perpendiculares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:perpendicularidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-022",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma reta de declive 2 é perpendicular a uma reta de declive...",
+      "o": [
+        "1/2.",
+        "−1/2.",
+        "−2.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "2×(−1/2)=−1.",
+      "hyp": "Pode usar apenas o oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:perpendicularidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-023",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma reta de declive −3 é perpendicular a uma de declive...",
+      "o": [
+        "−1/3.",
+        "3.",
+        "1/3.",
+        "−3."
+      ],
+      "a": 2,
+      "sol": "(−3)(1/3)=−1.",
+      "hyp": "Pode esquecer trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:perpendicularidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-024",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma reta horizontal é perpendicular a...",
+      "o": [
+        "outra horizontal.",
+        "qualquer reta de declive 1.",
+        "nenhuma reta.",
+        "uma reta vertical."
+      ],
+      "a": 3,
+      "sol": "Eixos horizontal e vertical formam 90°.",
+      "hyp": "Pode tentar aplicar fórmula de declives à reta vertical, cujo declive não está definido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:horizontal-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-025",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a reta paralela a y=4x−2 que passa por (0,5)?",
+      "o": [
+        "y=4x+5.",
+        "y=−4x+5.",
+        "y=5x+4.",
+        "y=4x−5."
+      ],
+      "a": 0,
+      "sol": "Mantém declive 4 e b=5.",
+      "hyp": "Pode trocar o sinal ou o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reta-paralela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-026",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a reta perpendicular a y=2x+3 que passa pela origem?",
+      "o": [
+        "y=x/2.",
+        "y=−x/2.",
+        "y=−2x.",
+        "y=2x."
+      ],
+      "a": 1,
+      "sol": "O declive perpendicular é −1/2 e b=0.",
+      "hyp": "Pode usar o oposto −2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reta-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-027",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a reta perpendicular a y=−x+2 que passa por (0,4)?",
+      "o": [
+        "y=−x+4.",
+        "y=2x+4.",
+        "y=x+4.",
+        "y=x−4."
+      ],
+      "a": 2,
+      "sol": "O declive perpendicular a −1 é 1.",
+      "hyp": "Pode manter o mesmo declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reta-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-028",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos A=(0,0), B=(2,4), C=(3,6) são colineares?",
+      "o": [
+        "Não.",
+        "Só A e B.",
+        "Só B e C.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "AB=(2,4) e AC=(3,6) são proporcionais.",
+      "hyp": "Pode comparar apenas distâncias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-vetores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-029",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos (1,1),(2,3),(3,5) são colineares?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se a reta for vertical.",
+        "Não é possível saber."
+      ],
+      "a": 0,
+      "sol": "Os declives entre pares são ambos 2.",
+      "hyp": "Pode não verificar consistência dos declives.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-declives",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-030",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos (0,0),(1,2),(2,5) são colineares?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só os dois primeiros.",
+        "Só se x=5."
+      ],
+      "a": 1,
+      "sol": "Declives 2 e 5/2 não coincidem.",
+      "hyp": "Pode assumir padrão quase linear como colinearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-declives",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-031",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os pontos (0,0),(2,4),(3,k) sejam colineares?",
+      "o": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "a": 2,
+      "sol": "A reta pelos dois primeiros é y=2x; para x=3, k=6.",
+      "hyp": "Pode usar diferença constante em vez de declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-032",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os pontos (1,2),(3,6),(k,10) sejam colineares?",
+      "o": [
+        "4",
+        "6",
+        "7",
+        "5"
+      ],
+      "a": 3,
+      "sol": "A reta é y=2x; 10=2k => k=5.",
+      "hyp": "Pode usar progressão das coordenadas sem equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-033",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma equação vetorial de uma reta pode ser escrita como...",
+      "o": [
+        "P=P0+t v.",
+        "P=P0+t².",
+        "x²+y²=r².",
+        "P=v/P0."
+      ],
+      "a": 0,
+      "sol": "Uma reta é obtida a partir de um ponto e de um vetor diretor multiplicado por parâmetro real.",
+      "hyp": "Pode confundir reta com curva quadrática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:equacao-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-034",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na equação (x,y)=(1,2)+t(3,−1), o vetor diretor é...",
+      "o": [
+        "(1,2).",
+        "(3,−1).",
+        "(4,1).",
+        "t."
+      ],
+      "a": 1,
+      "sol": "O vetor multiplicado pelo parâmetro define a direção.",
+      "hyp": "Pode usar o ponto base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:vetor-diretor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-035",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na reta (x,y)=(1,2)+t(3,−1), que ponto se obtém para t=2?",
+      "o": [
+        "(4,1).",
+        "(6,1).",
+        "(7,0).",
+        "(7,4)."
+      ],
+      "a": 2,
+      "sol": "(1+6,2−2)=(7,0).",
+      "hyp": "Pode esquecer multiplicar o vetor por t.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:avaliar-parametrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-036",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A reta (x,y)=(2,−1)+t(4,2) é paralela a uma reta de vetor diretor...",
+      "o": [
+        "(−2,1).",
+        "(1,−2).",
+        "(4,−2).",
+        "(2,1)."
+      ],
+      "a": 3,
+      "sol": "(4,2)=2(2,1), logo têm a mesma direção.",
+      "hyp": "Pode exigir vetor exatamente igual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:vetores-diretores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-037",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que equação reduzida corresponde a (x,y)=(1,2)+t(2,4)?",
+      "o": [
+        "y=2x.",
+        "y=2x+1.",
+        "y=4x−2.",
+        "y=x+1."
+      ],
+      "a": 0,
+      "sol": "x=1+2t => t=(x−1)/2; y=2+4t=2+2(x−1)=2x.",
+      "hyp": "Pode usar diretamente 4/2 como b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:parametrica-para-reduzida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-038",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que equação reduzida corresponde a (x,y)=(−1,3)+t(1,−2)?",
+      "o": [
+        "y=−2x+3.",
+        "y=−2x+1.",
+        "y=2x+5.",
+        "y=−x+2."
+      ],
+      "a": 1,
+      "sol": "m=−2; usando (−1,3): 3=2+b => b=1.",
+      "hyp": "Pode errar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:parametrica-para-reduzida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-039",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual equação vetorial representa a reta y=3x−2 usando o ponto (0,−2)?",
+      "o": [
+        "(x,y)=(0,−2)+t(3,1).",
+        "(x,y)=(3,−2)+t(1,0).",
+        "(x,y)=(0,−2)+t(1,3).",
+        "(x,y)=t(0,−2)."
+      ],
+      "a": 2,
+      "sol": "Um vetor diretor compatível com declive 3 é (1,3).",
+      "hyp": "Pode inverter componentes do vetor diretor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:reduzida-para-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-040",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As retas (x,y)=(0,0)+t(2,4) e (x,y)=(1,1)+s(1,2) são...",
+      "o": [
+        "perpendiculares.",
+        "de direções diferentes.",
+        "verticais.",
+        "paralelas."
+      ],
+      "a": 3,
+      "sol": "Os vetores diretores são proporcionais: (2,4)=2(1,2).",
+      "hyp": "Pode olhar apenas para os pontos base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:parametricas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-041",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As retas y=2x+1 e y=−x/2+4 intersectam-se em...",
+      "o": [
+        "(6/5,17/5).",
+        "(1,3).",
+        "(2,5).",
+        "(3,7)."
+      ],
+      "a": 0,
+      "sol": "2x+1=−x/2+4 => (5/2)x=3 => x=6/5; y=17/5.",
+      "hyp": "Pode resolver a equação linear incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:intersecao-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-042",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas retas têm um único ponto em comum, são...",
+      "o": [
+        "paralelas distintas.",
+        "secantes.",
+        "coincidentes.",
+        "necessariamente perpendiculares."
+      ],
+      "a": 1,
+      "sol": "Retas secantes intersectam-se num único ponto.",
+      "hyp": "Pode confundir secância com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:secantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-043",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas retas têm infinitos pontos em comum, então são...",
+      "o": [
+        "paralelas distintas.",
+        "perpendiculares.",
+        "coincidentes.",
+        "verticais obrigatoriamente."
+      ],
+      "a": 2,
+      "sol": "Duas retas no plano com mais de um ponto comum são a mesma reta.",
+      "hyp": "Pode achar que paralelas partilham pontos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:coincidentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-044",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A reta que passa por A=(2,1) e é paralela ao vetor v=(3,6) tem declive...",
+      "o": [
+        "1/2.",
+        "3.",
+        "6.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "Declive=6/3=2.",
+      "hyp": "Pode inverter a razão Δy/Δx.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:vetor-diretor-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-045",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de vetor diretor (4,−2) tem declive...",
+      "o": [
+        "−1/2.",
+        "−2.",
+        "2.",
+        "1/2."
+      ],
+      "a": 0,
+      "sol": "m=Δy/Δx=−2/4=−1/2.",
+      "hyp": "Pode usar Δx/Δy.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:vetor-diretor-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-046",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma reta tem vetor diretor (2,5), um vetor diretor de uma reta perpendicular pode ser...",
+      "o": [
+        "(5,2).",
+        "(5,−2).",
+        "(4,10).",
+        "(−2,−5)."
+      ],
+      "a": 1,
+      "sol": "(2,5)·(5,−2)=10−10=0; geometricamente é uma rotação de 90°.",
+      "hyp": "Pode escolher apenas um vetor não proporcional sem garantir perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:vetor-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-047",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos A=(1,2), B=(4,8), C=(−1,−2) pertencem à mesma reta?",
+      "o": [
+        "Não.",
+        "Só A e B.",
+        "Sim.",
+        "Só A e C."
+      ],
+      "a": 2,
+      "sol": "Todos satisfazem y=2x.",
+      "hyp": "Pode não reconhecer a mesma relação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:colinearidade-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-048",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma estrada retilínea passa por (0,2) e (5,12). Qual é uma equação da estrada?",
+      "o": [
+        "y=5x+2.",
+        "y=2x+5.",
+        "y=x+2.",
+        "y=2x+2."
+      ],
+      "a": 3,
+      "sol": "Declive=(12−2)/5=2 e ordenada na origem 2.",
+      "hyp": "Pode usar 5 como declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:modelacao-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-049",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma segunda estrada deve ser paralela a y=2x+2 e passar por (0,−3). Qual é a sua equação?",
+      "o": [
+        "y=2x−3.",
+        "y=−2x−3.",
+        "y=3x+2.",
+        "y=2x+3."
+      ],
+      "a": 0,
+      "sol": "Mantém declive 2 e passa em y=−3 quando x=0.",
+      "hyp": "Pode mudar o declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:modelacao-paralela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-RET-050",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-colinearidade-retas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma rua deve ser perpendicular a y=2x+2 e passar por (4,1). Qual é a equação?",
+      "o": [
+        "y=x/2−1.",
+        "y=−x/2+3.",
+        "y=−2x+9.",
+        "y=2x−7."
+      ],
+      "a": 1,
+      "sol": "Declive perpendicular −1/2; 1=−2+b => b=3.",
+      "hyp": "Pode usar o oposto −2 em vez do recíproco oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-colinearidade-retas:modelacao-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
