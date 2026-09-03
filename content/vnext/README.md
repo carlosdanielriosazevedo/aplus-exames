@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **4 050 perguntas**
-- Progresso bruto: **71,68%**
+- Concluído em rascunho: **4 550 perguntas**
+- Progresso bruto: **80,53%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -356,3 +356,39 @@ Próxima matéria: **12.º — Probabilidade**.
 - Total vNext: **4 050/~5 650 (71,68%)**
 
 Próxima matéria: **12.º — Funções exponenciais e logarítmicas**.
+
+
+### 12.º ano — Funções exponenciais e logarítmicas
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Função exponencial | 50 | 50 | lote completo em protótipo |
+| Crescimento/decrescimento exponencial e modelação | 50 | 50 | lote completo em protótipo |
+| Função inversa e raízes | 50 | 50 | lote completo em protótipo |
+| Função logarítmica e propriedades | 50 | 50 | lote completo em protótipo |
+| Equações exponenciais/logarítmicas e problemas | 50 | 50 | lote completo em protótipo |
+
+
+### 12.º ano — Função composta e derivadas
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Função composta e domínio | 50 | 50 | lote completo em protótipo |
+| Número e e derivada da exponencial | 50 | 50 | lote completo em protótipo |
+| Derivadas de logaritmos, trigonométricas e potências | 50 | 50 | lote completo em protótipo |
+| Operações entre derivadas e regra da cadeia | 50 | 50 | lote completo em protótipo |
+| Estudo de funções, modelação e otimização | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 4 550 perguntas
+
+- **10.º ano completo: 1 550/1 550**
+- **11.º ano completo: 1 750/1 750**
+- 12.º — Números complexos: **350/350**
+- 12.º — Probabilidade: **400/400**
+- 12.º — Funções exponenciais e logarítmicas: **250/250**
+- 12.º — Função composta e derivadas: **250/250**
+- 12.º ano obrigatório acumulado: **1 250/1 600**
+- Total vNext: **4 550/~5 650 (80,53%)**
+
+Próxima matéria: **12.º — Funções contínuas e deriváveis**.
