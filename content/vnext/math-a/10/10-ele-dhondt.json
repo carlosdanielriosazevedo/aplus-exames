@@ -1340,22 +1340,22 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Há 8 mandatos e votos A=2500, B=1800, C=1200, D=700. Qual afirmação resume corretamente a aplicação de D'Hondt?",
+      "q": "Há 7 mandatos e votos A=4200, B=3100 e C=1700. Qual afirmação resume corretamente a aplicação de D'Hondt?",
       "o": [
-        "A recebe 3, B 2, C 2 e D 1.",
-        "A recebe 4, B 2, C 1 e D 1.",
-        "A recebe 4, B 3, C 1 e D 0.",
-        "Cada lista recebe 2 mandatos."
+        "A recebe 3, B 3 e C 1.",
+        "A recebe 4, B 2 e C 1.",
+        "A recebe 4, B 1 e C 2.",
+        "A recebe 5, B 2 e C 0."
       ],
       "a": 1,
-      "sol": "Os 8 maiores quocientes são 2500(A),1800(B),1250(A),1200(C),900(B),833,33(A),700(D),625(A). Resultado 4-2-1-1.",
+      "sol": "Os 7 maiores quocientes são 4200(A), 3100(B), 2100(A), 1700(C), 1550(B), 1400(A) e 1050(A). Resultado: A=4, B=2, C=1.",
       "hyp": "Pode distribuir lugares por arredondamento intuitivo sem verificar a sequência de quocientes.",
       "contexts": [
         "mission",
         "training",
         "exam"
       ],
-      "signature": "10-ele-dhondt:modelacao-completa",
+      "signature": "10-ele-dhondt:modelacao-completa-7",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
