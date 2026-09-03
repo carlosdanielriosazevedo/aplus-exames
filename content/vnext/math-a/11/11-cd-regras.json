@@ -640,9 +640,9 @@
       "cognitive": "Aplicacao",
       "q": "Usando a regra do produto, deriva f(x)=(x+1)(x-1).",
       "o": [
-        "2x",
-        "(x+1)(x-1)",
-        "0",
+        "x^2-1",
+        "2x^2",
+        "2",
         "2x"
       ],
       "a": 3,
@@ -656,7 +656,7 @@
       "signature": "11-cd-regras:produto:24",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-025",
@@ -668,9 +668,9 @@
       "q": "Usando a regra do produto, deriva f(x)=x^2(2x-1).",
       "o": [
         "6x^2-2x",
-        "6x^2-2x",
-        "x^2(2x-1)",
-        "0"
+        "6x^2-x",
+        "2x(2x-1)",
+        "x^2(2x-1)"
       ],
       "a": 0,
       "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 6x^2-2x.",
@@ -683,7 +683,7 @@
       "signature": "11-cd-regras:produto:25",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-026",
@@ -721,8 +721,8 @@
       "cognitive": "Aplicacao",
       "q": "Usando a regra do produto, deriva f(x)=x^3(x-2).",
       "o": [
-        "4x^3-6x^2",
-        "x^3(x-2)",
+        "3x^2(x-2)",
+        "4x^3-2x^2",
         "4x^3-6x^2",
         "0"
       ],
@@ -737,7 +737,7 @@
       "signature": "11-cd-regras:produto:27",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-028",
@@ -776,9 +776,9 @@
       "q": "Usando a regra do produto, deriva f(x)=x(3x^2-4).",
       "o": [
         "9x^2-4",
-        "9x^2-4",
-        "x(3x^2-4)",
-        "0"
+        "6x^2-4",
+        "9x^2",
+        "3x^2-4"
       ],
       "a": 0,
       "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 9x^2-4.",
@@ -791,7 +791,7 @@
       "signature": "11-cd-regras:produto:29",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-030",
@@ -802,9 +802,9 @@
       "cognitive": "Aplicacao",
       "q": "Usando a regra do produto, deriva f(x)=(x^2-1)(x^2+1).",
       "o": [
+        "4x^3-4x",
         "4x^3",
-        "4x^3",
-        "(x^2-1)(x^2+1)",
+        "4x^2",
         "0"
       ],
       "a": 1,
@@ -818,7 +818,7 @@
       "signature": "11-cd-regras:produto:30",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-031",
@@ -829,10 +829,10 @@
       "cognitive": "Aplicacao",
       "q": "No dominio da funcao, deriva f(x)=x/(x+1).",
       "o": [
-        "x/(x+1)",
-        "1/1/(x+1)^2",
+        "1/(x+1)",
+        "-1/(x+1)^2",
         "1/(x+1)^2",
-        "1/(x+1)^2"
+        "x/(x+1)^2"
       ],
       "a": 2,
       "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1/(x+1)^2.",
@@ -845,7 +845,7 @@
       "signature": "11-cd-regras:quociente:31",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-032",
@@ -884,9 +884,9 @@
       "q": "No dominio da funcao, deriva f(x)=x^2/x.",
       "o": [
         "1",
-        "x^2/x",
-        "1/1",
-        "1"
+        "2",
+        "1/x",
+        "x"
       ],
       "a": 0,
       "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1.",
@@ -899,7 +899,7 @@
       "signature": "11-cd-regras:quociente:33",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-034",
@@ -938,9 +938,9 @@
       "q": "No dominio da funcao, deriva f(x)=x^2/(x+1).",
       "o": [
         "x^2/(x+1)",
-        "1/x(x+2)/(x+1)^2",
+        "(2x+1)/(x+1)^2",
         "x(x+2)/(x+1)^2",
-        "x(x+2)/(x+1)^2"
+        "x^2/(x+1)^2"
       ],
       "a": 2,
       "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se x(x+2)/(x+1)^2.",
@@ -953,7 +953,7 @@
       "signature": "11-cd-regras:quociente:35",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-036",
@@ -1046,9 +1046,9 @@
       "q": "No dominio da funcao, deriva f(x)=(x^2-1)/(x+1).",
       "o": [
         "(x^2-1)/(x+1)",
-        "1/1",
+        "-1",
         "1",
-        "1"
+        "1/(x+1)"
       ],
       "a": 2,
       "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1.",
@@ -1061,7 +1061,7 @@
       "signature": "11-cd-regras:quociente:39",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-040",
@@ -1073,8 +1073,8 @@
       "q": "No dominio da funcao, deriva f(x)=(3x+2)/(x+4).",
       "o": [
         "(3x+2)/(x+4)",
-        "1/10/(x+4)^2",
-        "10/(x+4)^2",
+        "3/(x+4)",
+        "-10/(x+4)^2",
         "10/(x+4)^2"
       ],
       "a": 3,
@@ -1088,7 +1088,7 @@
       "signature": "11-cd-regras:quociente:40",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-REG-041",
