@@ -962,7 +962,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Nos mesmos votos e lugares, D'Hondt e St. Laguë podem produzir exatamente a mesma distribuição?",
+      "q": "Para um mesmo conjunto de votos e o mesmo número de lugares, D'Hondt e St. Laguë podem produzir exatamente a mesma distribuição?",
       "o": [
         "Não, nunca.",
         "Só quando todas as listas têm os mesmos votos.",
