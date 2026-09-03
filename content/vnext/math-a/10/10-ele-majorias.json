@@ -34,7 +34,8 @@
       ],
       "signature": "10-ele-majorias:definicao-simples",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-002",
@@ -60,7 +61,8 @@
       ],
       "signature": "10-ele-majorias:definicao-absoluta",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-003",
@@ -86,7 +88,8 @@
       ],
       "signature": "10-ele-majorias:simples-identificar-maximo",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-004",
@@ -98,11 +101,11 @@
       "q": "Em 120 votos válidos, qual é o menor número de votos que garante maioria absoluta?",
       "o": [
         "60",
-        "61",
         "62",
-        "59"
+        "59",
+        "61"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "Metade de 120 é 60; é necessário ultrapassar 60, logo o mínimo é 61.",
       "hyp": "Pode confundir 'mais de metade' com 'metade'.",
       "contexts": [
@@ -112,7 +115,8 @@
       ],
       "signature": "10-ele-majorias:limiar-par",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-005",
@@ -123,12 +127,12 @@
       "cognitive": "Compreensão",
       "q": "Em 101 votos válidos, qual é o menor número de votos que garante maioria absoluta?",
       "o": [
-        "50",
         "51",
+        "50",
         "52",
         "49"
       ],
-      "a": 1,
+      "a": 0,
       "sol": "Metade de 101 é 50,5; o menor inteiro superior é 51.",
       "hyp": "Pode aplicar incorretamente o limiar usado para um total par.",
       "contexts": [
@@ -138,7 +142,8 @@
       ],
       "signature": "10-ele-majorias:limiar-impar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-006",
@@ -164,7 +169,8 @@
       ],
       "signature": "10-ele-majorias:simples-sem-absoluta",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-007",
@@ -176,11 +182,11 @@
       "q": "Foram contabilizados 160 votos válidos: 87 em A, 49 em B e 24 em C. Que tipo de maioria tem A?",
       "o": [
         "Apenas maioria simples.",
-        "Maioria absoluta e, consequentemente, também simples.",
         "Nenhuma maioria.",
+        "Maioria absoluta e, consequentemente, também simples.",
         "Exatamente metade dos votos."
       ],
-      "a": 1,
+      "a": 2,
       "sol": "87 > 80, logo A tem mais de metade dos votos válidos e possui maioria absoluta; também é o mais votado.",
       "hyp": "Pode não reconhecer que a maioria absoluta implica também ficar em primeiro lugar.",
       "contexts": [
@@ -190,7 +196,8 @@
       ],
       "signature": "10-ele-majorias:absoluta-implica-simples",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-008",
@@ -203,10 +210,10 @@
       "o": [
         "Sim, porque 37 é o maior número.",
         "Sim, porque 37 é quase metade.",
-        "Não, porque são necessários pelo menos 38 votos.",
-        "Não, porque seriam necessários 40 votos."
+        "Não, porque seriam necessários 40 votos.",
+        "Não, porque são necessários pelo menos 38 votos."
       ],
-      "a": 2,
+      "a": 3,
       "sol": "Mais de metade de 75 é mais de 37,5; são necessários pelo menos 38 votos.",
       "hyp": "Pode usar o maior número de votos em vez do limiar de metade.",
       "contexts": [
@@ -216,7 +223,8 @@
       ],
       "signature": "10-ele-majorias:limiar-impar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-009",
@@ -227,12 +235,12 @@
       "cognitive": "Aplicação",
       "q": "Numa votação com 96 votos válidos, uma lista recebeu 48 votos. Pode dizer-se que obteve maioria absoluta?",
       "o": [
-        "Sim, porque obteve metade.",
         "Não, porque maioria absoluta exige mais de metade.",
+        "Sim, porque obteve metade.",
         "Sim, desde que nenhuma outra lista tenha mais de 48.",
         "Não, porque seriam necessários 50 votos."
       ],
-      "a": 1,
+      "a": 0,
       "sol": "48 é exatamente metade de 96; maioria absoluta exige mais de metade, portanto não chega.",
       "hyp": "Pode confundir metade exata com maioria absoluta.",
       "contexts": [
@@ -242,7 +250,8 @@
       ],
       "signature": "10-ele-majorias:exatamente-metade",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-010",
@@ -268,7 +277,8 @@
       ],
       "signature": "10-ele-majorias:limiar-impar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-011",
@@ -280,11 +290,11 @@
       "q": "Os resultados são A=45%, B=35% e C=20%. Qual conclusão é necessariamente verdadeira?",
       "o": [
         "A tem maioria absoluta.",
-        "A tem maioria simples.",
         "B e C juntos não ultrapassam A.",
+        "A tem maioria simples.",
         "É obrigatório existir uma segunda volta."
       ],
-      "a": 1,
+      "a": 2,
       "sol": "A tem a percentagem mais elevada, portanto tem maioria simples. 45% não constitui maioria absoluta.",
       "hyp": "Pode confundir maior percentagem com mais de 50%.",
       "contexts": [
@@ -294,7 +304,8 @@
       ],
       "signature": "10-ele-majorias:percentagens-simples",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-012",
@@ -306,11 +317,11 @@
       "q": "Os resultados são A=52%, B=31% e C=17%. Qual conclusão é correta?",
       "o": [
         "A tem apenas maioria simples.",
-        "A tem maioria absoluta.",
         "A não tem maioria porque existem três candidatos.",
-        "B e C estão empatados."
+        "B e C estão empatados.",
+        "A tem maioria absoluta."
       ],
-      "a": 1,
+      "a": 3,
       "sol": "52% é superior a 50%, logo A tem maioria absoluta.",
       "hyp": "Pode acreditar que a maioria absoluta só se aplica quando existem dois candidatos.",
       "contexts": [
@@ -320,7 +331,8 @@
       ],
       "signature": "10-ele-majorias:percentagens-absoluta",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-013",
@@ -331,12 +343,12 @@
       "cognitive": "Aplicação",
       "q": "Numa votação são registados 180 boletins, dos quais 12 são nulos. Considerando apenas os 168 votos válidos, qual é o mínimo para maioria absoluta?",
       "o": [
-        "84",
         "85",
+        "84",
         "91",
         "90"
       ],
-      "a": 1,
+      "a": 0,
       "sol": "A maioria absoluta é calculada sobre os 168 votos válidos: metade é 84, logo são necessários 85.",
       "hyp": "Pode incluir votos nulos no denominador apesar de o enunciado os excluir.",
       "contexts": [
@@ -346,7 +358,8 @@
       ],
       "signature": "10-ele-majorias:validos-excluir-nulos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-014",
@@ -372,7 +385,8 @@
       ],
       "signature": "10-ele-majorias:validos-excluir-brancos-nulos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-015",
@@ -398,7 +412,8 @@
       ],
       "signature": "10-ele-majorias:empate-primeiro",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-016",
@@ -410,11 +425,11 @@
       "q": "Num total fixo de 82 votos válidos, A recebeu 40. Quantos votos separam A do limiar de maioria absoluta?",
       "o": [
         "1",
-        "2",
         "3",
-        "4"
+        "4",
+        "2"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "Para 82 votos, a maioria absoluta começa em 42. A tem 40, portanto está 2 votos abaixo desse limiar.",
       "hyp": "Pode calcular metade como limiar suficiente ou confundir diferença para 50% com votos necessários.",
       "contexts": [
@@ -424,7 +439,8 @@
       ],
       "signature": "10-ele-majorias:distancia-limiar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-017",
@@ -435,12 +451,12 @@
       "cognitive": "Aplicação",
       "q": "Com 99 votos válidos, uma candidata obteve 47. Quantos votos faltam para atingir o mínimo de maioria absoluta, mantendo o mesmo total de votos válidos?",
       "o": [
-        "2",
         "3",
+        "2",
         "4",
         "5"
       ],
-      "a": 1,
+      "a": 0,
       "sol": "Com 99 votos, a maioria absoluta começa em 50. De 47 até 50 faltam 3 votos.",
       "hyp": "Pode arredondar 49,5 para 49 ou calcular apenas a distância até metade.",
       "contexts": [
@@ -450,7 +466,8 @@
       ],
       "signature": "10-ele-majorias:distancia-limiar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-018",
@@ -462,11 +479,11 @@
       "q": "Qual situação mostra um vencedor por maioria simples, mas não por maioria absoluta?",
       "o": [
         "A=51%, B=49%",
-        "A=46%, B=46%, C=8%",
         "A=47%, B=32%, C=21%",
+        "A=46%, B=46%, C=8%",
         "A=60%, B=25%, C=15%"
       ],
-      "a": 2,
+      "a": 1,
       "sol": "Com 47%, A é o único mais votado, mas não ultrapassa 50%; tem maioria simples, não absoluta.",
       "hyp": "Pode não distinguir primeiro lugar de obtenção de mais de metade dos votos.",
       "contexts": [
@@ -476,7 +493,8 @@
       ],
       "signature": "10-ele-majorias:comparar-casos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-019",
@@ -502,7 +520,8 @@
       ],
       "signature": "10-ele-majorias:comparar-casos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-020",
@@ -513,12 +532,12 @@
       "cognitive": "Aplicação",
       "q": "Numa turma, 29 alunos votam entre três opções. A recebe 15 votos, B 9 e C 5. A tem maioria absoluta?",
       "o": [
-        "Sim, porque 15>14,5.",
         "Não, porque precisaria de 16.",
         "Não, porque existem três opções.",
-        "Sim, mas apenas se B e C empatarem."
+        "Sim, mas apenas se B e C empatarem.",
+        "Sim, porque 15>14,5."
       ],
-      "a": 0,
+      "a": 3,
       "sol": "Metade de 29 é 14,5; 15 é superior a metade, logo há maioria absoluta.",
       "hyp": "Pode exigir incorretamente 16 votos num total ímpar de 29.",
       "contexts": [
@@ -528,7 +547,8 @@
       ],
       "signature": "10-ele-majorias:absoluta-total-impar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-021",
@@ -539,12 +559,12 @@
       "cognitive": "Raciocínio",
       "q": "Uma votação tem 120 votos válidos. A recebeu 59, B recebeu 41 e C recebeu 20. Se dois eleitores que votaram em C mudarem o voto para A, qual passa a ser a situação de A?",
       "o": [
+        "Passa a ter maioria absoluta com 61 votos.",
         "Continua sem maioria absoluta.",
         "Passa a ter exatamente metade.",
-        "Passa a ter maioria absoluta com 61 votos.",
         "Fica empatado com B."
       ],
-      "a": 2,
+      "a": 0,
       "sol": "O total mantém-se 120 e A passa de 59 para 61. Como 61>60, atinge maioria absoluta.",
       "hyp": "Pode esquecer que a transferência não altera o total de votos válidos.",
       "contexts": [
@@ -554,7 +574,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-votos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-022",
@@ -580,7 +601,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-votos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-023",
@@ -591,12 +613,12 @@
       "cognitive": "Raciocínio",
       "q": "Em 101 votos válidos, A=50, B=30 e C=21. Um voto de C muda para A. Que conclusão é correta?",
       "o": [
-        "A passa a 51 e obtém maioria absoluta.",
         "A continua sem maioria absoluta porque precisa de 52.",
         "A fica apenas com maioria simples.",
+        "A passa a 51 e obtém maioria absoluta.",
         "O total válido passa para 102."
       ],
-      "a": 0,
+      "a": 2,
       "sol": "O total mantém-se 101. A passa a 51; como metade é 50,5, 51 constitui maioria absoluta.",
       "hyp": "Pode usar um limiar de 52 por arredondamento incorreto.",
       "contexts": [
@@ -606,7 +628,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-votos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-024",
@@ -618,11 +641,11 @@
       "q": "Uma lista tem 74 dos 150 votos válidos. Quantos votos de outros candidatos teriam de ser transferidos para essa lista, sem alterar o total, para ela atingir maioria absoluta?",
       "o": [
         "1",
-        "2",
         "3",
-        "4"
+        "4",
+        "2"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "Para 150 votos são necessários 76. De 74 para 76 faltam 2 votos.",
       "hyp": "Pode pensar que 75, metade exata, é suficiente.",
       "contexts": [
@@ -632,7 +655,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-minima",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-025",
@@ -643,12 +667,12 @@
       "cognitive": "Interpretação",
       "q": "Um jornal escreve: 'A lista X venceu com 44% dos votos, logo obteve maioria absoluta.' O que está errado?",
       "o": [
-        "Nada; 44% é maioria absoluta.",
         "44% pode ser maioria simples, mas nunca é maioria absoluta.",
+        "Nada; 44% é maioria absoluta.",
         "44% não pode vencer uma eleição com três listas.",
         "Maioria absoluta significa ter pelo menos 40%."
       ],
-      "a": 1,
+      "a": 0,
       "sol": "44% pode ser a maior percentagem e dar maioria simples, mas não ultrapassa 50%.",
       "hyp": "Pode aceitar linguagem imprecisa sem verificar a definição matemática.",
       "contexts": [
@@ -658,7 +682,8 @@
       ],
       "signature": "10-ele-majorias:criticar-afirmacao",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-026",
@@ -669,12 +694,12 @@
       "cognitive": "Interpretação",
       "q": "Um aluno afirma: 'Se alguém tem maioria absoluta, então também tem maioria simples.' A afirmação é...",
       "o": [
-        "Verdadeira.",
         "Falsa, porque os conceitos são incompatíveis.",
+        "Verdadeira.",
         "Verdadeira apenas com dois candidatos.",
         "Falsa sempre que existam votos brancos."
       ],
-      "a": 0,
+      "a": 1,
       "sol": "Quem tem mais de metade dos votos válidos tem necessariamente mais votos do que qualquer outro candidato.",
       "hyp": "Pode tratar maioria simples e absoluta como categorias mutuamente exclusivas.",
       "contexts": [
@@ -684,7 +709,8 @@
       ],
       "signature": "10-ele-majorias:implicacao-logica",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-027",
@@ -710,7 +736,8 @@
       ],
       "signature": "10-ele-majorias:contraexemplo",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-028",
@@ -722,11 +749,11 @@
       "q": "Numa votação com 240 votos válidos, o vencedor por maioria simples obteve 118. Qual é o menor número de votos que teria de receber por transferência de outros candidatos, mantendo o total, para alcançar maioria absoluta?",
       "o": [
         "2",
-        "3",
         "4",
-        "1"
+        "1",
+        "3"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "A maioria absoluta começa em 121. De 118 até 121 faltam 3 votos.",
       "hyp": "Pode apontar 120 como suficiente ou esquecer que o total se mantém.",
       "contexts": [
@@ -736,7 +763,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-minima",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-029",
@@ -762,7 +790,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-votos",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-030",
@@ -788,7 +817,8 @@
       ],
       "signature": "10-ele-majorias:validos-regra-explicita",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-031",
@@ -799,12 +829,12 @@
       "cognitive": "Aplicação",
       "q": "Uma associação tem 300 membros, mas apenas 180 emitiram votos válidos. O regulamento define maioria absoluta como 'mais de metade dos votos válidos'. Qual é o mínimo?",
       "o": [
-        "91",
         "151",
         "90",
+        "91",
         "181"
       ],
-      "a": 0,
+      "a": 2,
       "sol": "O denominador é 180 votos válidos, não os 300 membros. Mais de 90 exige pelo menos 91.",
       "hyp": "Pode usar o número de eleitores inscritos em vez do denominador definido pelo regulamento.",
       "contexts": [
@@ -814,7 +844,8 @@
       ],
       "signature": "10-ele-majorias:denominador-regra",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-032",
@@ -826,11 +857,11 @@
       "q": "Uma assembleia define maioria absoluta como 'mais de metade dos 80 membros', independentemente de quantos votem. Quantos votos favoráveis são necessários?",
       "o": [
         "40",
-        "41",
         "42",
-        "39"
+        "39",
+        "41"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "A regra usa os 80 membros: mais de metade de 80 significa pelo menos 41 votos.",
       "hyp": "Pode assumir que a maioria absoluta é sempre calculada sobre votos válidos; o enunciado define outro denominador.",
       "contexts": [
@@ -840,7 +871,8 @@
       ],
       "signature": "10-ele-majorias:denominador-regra",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-033",
@@ -866,7 +898,8 @@
       ],
       "signature": "10-ele-majorias:denominador-conceito",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-034",
@@ -892,7 +925,8 @@
       ],
       "signature": "10-ele-majorias:recontagem-denominador",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-035",
@@ -904,11 +938,11 @@
       "q": "Em 200 votos válidos, A tem 101 e maioria absoluta. Uma recontagem acrescenta 4 votos válidos a B, ficando o total em 204 e A mantendo 101. O que acontece?",
       "o": [
         "A mantém maioria absoluta.",
-        "A deixa de ter maioria absoluta, porque agora seriam necessários 103 votos.",
         "A fica exatamente com metade.",
+        "A deixa de ter maioria absoluta, porque agora seriam necessários 103 votos.",
         "A deixa também de ter maioria simples necessariamente."
       ],
-      "a": 1,
+      "a": 2,
       "sol": "Com 204 votos válidos, a maioria absoluta exige 103. A mantém 101, por isso perde a maioria absoluta.",
       "hyp": "Pode olhar apenas para a contagem de A sem recalcular a metade do novo total.",
       "contexts": [
@@ -918,7 +952,8 @@
       ],
       "signature": "10-ele-majorias:recontagem-denominador",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-036",
@@ -929,12 +964,12 @@
       "cognitive": "Raciocínio",
       "q": "Duas eleições têm o mesmo vencedor com 60 votos. Na eleição I há 100 votos válidos; na II há 140. Em qual tem maioria absoluta?",
       "o": [
-        "Apenas na I.",
         "Apenas na II.",
         "Nas duas.",
-        "Em nenhuma."
+        "Em nenhuma.",
+        "Apenas na I."
       ],
-      "a": 0,
+      "a": 3,
       "sol": "Na I, 60>50; na II, 60<70. O mesmo número de votos pode ter significado diferente consoante o total.",
       "hyp": "Pode avaliar maioria absoluta pelo número isolado de votos, sem considerar o total.",
       "contexts": [
@@ -944,7 +979,8 @@
       ],
       "signature": "10-ele-majorias:comparar-denominadores",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-037",
@@ -955,12 +991,12 @@
       "cognitive": "Interpretação",
       "q": "A candidata X venceu por maioria simples com 46% dos votos. Qual destas informações não é possível concluir a partir desse dado?",
       "o": [
+        "X teria vencido qualquer eventual segunda volta.",
         "X foi a candidata mais votada.",
         "X não teve maioria absoluta.",
-        "X teve mais votos do que cada adversário individualmente.",
-        "X teria vencido qualquer eventual segunda volta."
+        "X teve mais votos do que cada adversário individualmente."
       ],
-      "a": 3,
+      "a": 0,
       "sol": "Os dados permitem concluir que X foi a mais votada e não ultrapassou 50%. Nada dizem sobre uma eventual segunda volta.",
       "hyp": "Pode extrapolar resultados para regras ou rondas não observadas.",
       "contexts": [
@@ -970,7 +1006,8 @@
       ],
       "signature": "10-ele-majorias:nao-inferir",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-038",
@@ -981,12 +1018,12 @@
       "cognitive": "Interpretação",
       "q": "A candidata Y obteve 54% dos votos válidos. Qual afirmação é necessariamente verdadeira?",
       "o": [
-        "Y tem maioria absoluta.",
         "Y recebeu exatamente 54 votos.",
+        "Y tem maioria absoluta.",
         "Só havia dois candidatos.",
         "O total de votos era 100."
       ],
-      "a": 0,
+      "a": 1,
       "sol": "54% é superior a metade, logo existe maioria absoluta. A percentagem não determina o total nem o número de candidatos.",
       "hyp": "Pode confundir percentagem com número absoluto de votos.",
       "contexts": [
@@ -996,7 +1033,8 @@
       ],
       "signature": "10-ele-majorias:inferir-percentagem",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-039",
@@ -1008,11 +1046,11 @@
       "q": "Num total de 80 votos válidos, A tem 39, B 31 e C 10. Qual é o menor número de votos que pode ser transferido de B para A para A obter maioria absoluta?",
       "o": [
         "1",
-        "2",
         "3",
+        "2",
         "4"
       ],
-      "a": 1,
+      "a": 2,
       "sol": "A precisa de 41 votos; dois votos transferidos de B fazem A passar de 39 para 41, mantendo o total em 80.",
       "hyp": "Pode considerar 40 suficiente ou alterar indevidamente o total.",
       "contexts": [
@@ -1022,7 +1060,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-minima",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-040",
@@ -1034,11 +1073,11 @@
       "q": "Em 75 votos válidos, A=36, B=25, C=14. Quantos votos de C têm de passar para A para A alcançar maioria absoluta?",
       "o": [
         "1",
-        "2",
         "3",
-        "4"
+        "4",
+        "2"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "A maioria absoluta começa em 38. A tem 36, por isso precisa de 2 votos transferidos.",
       "hyp": "Pode calcular o limiar como 37 em vez de 38.",
       "contexts": [
@@ -1048,7 +1087,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-minima",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-041",
@@ -1059,12 +1099,12 @@
       "cognitive": "Raciocínio",
       "q": "Numa eleição com 300 votos válidos, A tem 148, B 92 e C 60. Pretende-se que A atinja maioria absoluta apenas por transferência de votos de C para A. Qual é o menor número de transferências?",
       "o": [
-        "2",
         "3",
+        "2",
         "4",
         "1"
       ],
-      "a": 1,
+      "a": 0,
       "sol": "A precisa de pelo menos 151 votos. De 148 para 151 são necessárias 3 transferências; o total permanece 300.",
       "hyp": "Pode aceitar 150 votos como maioria absoluta ou errar a diferença para o limiar.",
       "contexts": [
@@ -1074,7 +1114,8 @@
       ],
       "signature": "10-ele-majorias:transferencia-minima",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-042",
@@ -1085,12 +1126,12 @@
       "cognitive": "Raciocínio",
       "q": "Há 201 votos válidos: A=100, B=70, C=31. Uma recontagem transforma 2 votos inicialmente nulos em votos válidos para A. Qual passa a ser o total válido e A tem maioria absoluta?",
       "o": [
-        "203 votos válidos; A=102 e tem maioria absoluta.",
         "203 votos válidos; A=102 e não tem maioria absoluta.",
+        "203 votos válidos; A=102 e tem maioria absoluta.",
         "201 votos válidos; A=102 e tem maioria absoluta.",
         "203 votos válidos; A=100 e não tem maioria absoluta."
       ],
-      "a": 0,
+      "a": 1,
       "sol": "O total válido passa a 203 e A passa a 102. Metade de 203 é 101,5; 102 é maioria absoluta.",
       "hyp": "Pode atualizar apenas o numerador ou apenas o denominador, mas não ambos.",
       "contexts": [
@@ -1100,7 +1141,8 @@
       ],
       "signature": "10-ele-majorias:recontagem-dupla-alteracao",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-043",
@@ -1112,11 +1154,11 @@
       "q": "Há 199 votos válidos e A tem 100. Surgem 3 novos votos válidos, todos para B, elevando o total para 202 sem alterar A. Qual conclusão é correta?",
       "o": [
         "A continua com maioria absoluta.",
-        "A deixa de ter maioria absoluta porque 100 não ultrapassa 101.",
         "A passa a ter exatamente metade.",
+        "A deixa de ter maioria absoluta porque 100 não ultrapassa 101.",
         "A deixa necessariamente de ser o mais votado."
       ],
-      "a": 1,
+      "a": 2,
       "sol": "Com 202 votos válidos, a maioria absoluta começa em 102. Os 100 votos de A deixam de representar mais de metade.",
       "hyp": "Pode manter a classificação anterior sem recalcular a percentagem após novos votos.",
       "contexts": [
@@ -1126,7 +1168,8 @@
       ],
       "signature": "10-ele-majorias:recontagem-denominador",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-044",
@@ -1139,10 +1182,10 @@
       "o": [
         "Sim, porque antes tinha maioria absoluta.",
         "Sim, porque 47 é o maior número possível.",
-        "Não, porque 47 não ultrapassa 48.",
-        "Não, porque seriam necessários 51 votos."
+        "Não, porque seriam necessários 51 votos.",
+        "Não, porque 47 não ultrapassa 48."
       ],
-      "a": 2,
+      "a": 3,
       "sol": "Após a recontagem, metade de 96 é 48. Com 47 votos, a proposta não tem maioria absoluta.",
       "hyp": "Pode conservar a classificação inicial ou esquecer de recalcular numerador e denominador.",
       "contexts": [
@@ -1152,7 +1195,8 @@
       ],
       "signature": "10-ele-majorias:recontagem-dupla-alteracao",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-045",
@@ -1163,12 +1207,12 @@
       "cognitive": "Modelação",
       "q": "Um regulamento diz: 'É eleito à primeira volta quem obtiver mais de 50% dos votos válidos; caso contrário, passam à segunda volta os dois mais votados.' Os resultados são A=48%, B=33%, C=19%. O que acontece?",
       "o": [
-        "A é eleita à primeira volta por maioria simples.",
         "A e B passam à segunda volta.",
+        "A é eleita à primeira volta por maioria simples.",
         "B e C passam à segunda volta.",
         "Não é possível aplicar a regra."
       ],
-      "a": 1,
+      "a": 0,
       "sol": "A é a mais votada, mas 48% não ultrapassa 50%; portanto não há maioria absoluta e passam A e B.",
       "hyp": "Pode confundir primeiro lugar com a condição específica de eleição na primeira volta.",
       "contexts": [
@@ -1178,7 +1222,8 @@
       ],
       "signature": "10-ele-majorias:regra-duas-voltas",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-046",
@@ -1204,7 +1249,8 @@
       ],
       "signature": "10-ele-majorias:regra-duas-voltas",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-047",
@@ -1230,7 +1276,8 @@
       ],
       "signature": "10-ele-majorias:denominador-regra",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-048",
@@ -1242,11 +1289,11 @@
       "q": "Numa reunião com 45 membros, o regulamento exige maioria absoluta dos presentes. Estão presentes 37 e todos votam validamente. Quantos votos favoráveis são necessários?",
       "o": [
         "18",
-        "19",
         "23",
-        "20"
+        "20",
+        "19"
       ],
-      "a": 1,
+      "a": 3,
       "sol": "A maioria é calculada sobre 37 presentes; metade é 18,5, logo são necessários 19 votos.",
       "hyp": "Pode usar o total de membros em vez dos presentes ou aceitar 18.",
       "contexts": [
@@ -1256,7 +1303,8 @@
       ],
       "signature": "10-ele-majorias:denominador-regra",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-049",
@@ -1267,12 +1315,12 @@
       "cognitive": "Raciocínio",
       "q": "A obteve maioria absoluta com exatamente o mínimo possível num total de 127 votos válidos. Quantos votos teve A?",
       "o": [
-        "63",
         "64",
+        "63",
         "65",
         "66"
       ],
-      "a": 1,
+      "a": 0,
       "sol": "Metade de 127 é 63,5; o menor inteiro superior é 64.",
       "hyp": "Pode arredondar a metade para baixo ou acrescentar votos a mais.",
       "contexts": [
@@ -1282,7 +1330,8 @@
       ],
       "signature": "10-ele-majorias:inverter-limiar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     },
     {
       "id": "VN10ELE-MAJ-050",
@@ -1293,12 +1342,12 @@
       "cognitive": "Raciocínio",
       "q": "Uma lista recebeu 126 votos e obteve exatamente o mínimo necessário para maioria absoluta. Qual destes totais de votos válidos é compatível com essa informação?",
       "o": [
-        "250",
         "252",
+        "250",
         "253",
         "254"
       ],
-      "a": 0,
+      "a": 1,
       "sol": "Com 250 votos válidos, metade é 125 e o mínimo superior é 126. Para 252, 253 ou 254, o mínimo já é 127 ou 128.",
       "hyp": "Pode ter dificuldade em inverter a condição de maioria absoluta.",
       "contexts": [
@@ -1308,7 +1357,8 @@
       ],
       "signature": "10-ele-majorias:inverter-limiar",
       "reviewStatus": "prototype",
-      "origin": "original_vnext_2026"
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
     }
   ]
 }
