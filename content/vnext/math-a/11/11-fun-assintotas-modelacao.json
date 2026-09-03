@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-fun",
+  "subtopicId": "11-fun-assintotas-modelacao",
+  "subtopic": "Assíntotas, interpretação e modelação",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha assíntotas verticais/horizontais/oblíquas, divisão polinomial, buracos removíveis, comportamento junto de exclusões e interpretação em modelos racionais. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11FUN-AM-001",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma assíntota vertical de uma função racional ocorre tipicamente num valor x=a onde...",
+      "o": [
+        "o denominador se anula sem cancelamento completo.",
+        "o numerador se anula.",
+        "a função vale zero.",
+        "a função é constante."
+      ],
+      "a": 0,
+      "sol": "Se o denominador tende a zero e o fator não se cancela, o gráfico pode divergir junto de x=a.",
+      "hyp": "Pode confundir zero da função com exclusão do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:assintota-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-002",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A função f(x)=1/x tem assíntota vertical...",
+      "o": [
+        "y=0.",
+        "x=0.",
+        "x=1.",
+        "y=1."
+      ],
+      "a": 1,
+      "sol": "O denominador anula-se em x=0.",
+      "hyp": "Pode trocar vertical e horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:base-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-003",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A função f(x)=1/x tem assíntota horizontal...",
+      "o": [
+        "x=0.",
+        "y=1.",
+        "y=0.",
+        "x=1."
+      ],
+      "a": 2,
+      "sol": "Para |x| grande, 1/x aproxima-se de 0.",
+      "hyp": "Pode trocar a orientação da assíntota.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:base-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-004",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=1/(x−3) tem assíntota vertical...",
+      "o": [
+        "x=−3.",
+        "y=3.",
+        "y=0.",
+        "x=3."
+      ],
+      "a": 3,
+      "sol": "O denominador anula-se em x=3.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:vertical-translada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-005",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=1/x+4 tem assíntota horizontal...",
+      "o": [
+        "y=4.",
+        "x=4.",
+        "y=0.",
+        "x=0."
+      ],
+      "a": 0,
+      "sol": "A translação vertical desloca a assíntota horizontal de y=0 para y=4.",
+      "hyp": "Pode colocar o deslocamento na assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal-translada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-006",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=2/(x+1)−3, as assíntotas são...",
+      "o": [
+        "x=1 e y=3.",
+        "x=−1 e y=−3.",
+        "x=−3 e y=−1.",
+        "x=0 e y=0."
+      ],
+      "a": 1,
+      "sol": "Na forma a/(x−h)+k, as assíntotas são x=h e y=k.",
+      "hyp": "Pode trocar h e k.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:forma-canonica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-007",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O ponto de interseção das assíntotas de a/(x−h)+k é...",
+      "o": [
+        "(−h,−k).",
+        "(a,k).",
+        "(h,k).",
+        "(0,0)."
+      ],
+      "a": 2,
+      "sol": "As retas x=h e y=k intersectam-se em (h,k), centro da hipérbole.",
+      "hyp": "Pode usar o coeficiente a.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-008",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=−3/(x−2)+5 tem centro de simetria...",
+      "o": [
+        "(−2,5).",
+        "(2,−5).",
+        "(−3,5).",
+        "(2,5)."
+      ],
+      "a": 3,
+      "sol": "O centro é a interseção x=2,y=5.",
+      "hyp": "Pode usar o coeficiente −3 como coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-009",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se numerador e denominador de uma função racional têm o mesmo grau, a assíntota horizontal é dada pela...",
+      "o": [
+        "razão dos coeficientes líderes.",
+        "soma dos coeficientes líderes.",
+        "diferença dos graus.",
+        "razão dos termos constantes."
+      ],
+      "a": 0,
+      "sol": "Para |x| grande dominam os termos de maior grau.",
+      "hyp": "Pode usar os termos independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:mesmo-grau",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-010",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=(2x+1)/(x−3), a assíntota horizontal é...",
+      "o": [
+        "y=1/2.",
+        "y=2.",
+        "x=3.",
+        "y=−3."
+      ],
+      "a": 1,
+      "sol": "Os graus são iguais e a razão dos coeficientes líderes é 2/1=2.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal-mesmo-grau",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-011",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=(3x²−1)/(2x²+5), a assíntota horizontal é...",
+      "o": [
+        "y=2/3.",
+        "y=0.",
+        "y=3/2.",
+        "x=−5/2."
+      ],
+      "a": 2,
+      "sol": "Razão dos coeficientes líderes 3/2.",
+      "hyp": "Pode usar os termos constantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal-mesmo-grau",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-012",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se o grau do numerador é menor que o do denominador, a assíntota horizontal é geralmente...",
+      "o": [
+        "x=0.",
+        "y=1.",
+        "não existe nunca.",
+        "y=0."
+      ],
+      "a": 3,
+      "sol": "O quociente tende a 0 para |x| grande.",
+      "hyp": "Pode achar que grau menor impede assíntota.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:grau-menor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-013",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=(x+1)/(x²+1), a assíntota horizontal é...",
+      "o": [
+        "y=0.",
+        "y=1.",
+        "x=0.",
+        "não existe."
+      ],
+      "a": 0,
+      "sol": "Grau do numerador 1 < grau do denominador 2.",
+      "hyp": "Pode usar a razão 1/1 sem considerar os graus.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal-grau-menor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-014",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se o grau do numerador excede o do denominador em exatamente 1, pode surgir uma assíntota...",
+      "o": [
+        "vertical apenas.",
+        "oblíqua.",
+        "horizontal y=0 sempre.",
+        "circular."
+      ],
+      "a": 1,
+      "sol": "A divisão polinomial produz quociente linear e resto relativo que tende a zero.",
+      "hyp": "Pode achar que toda função racional tem assíntota horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:obliqua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-015",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma assíntota oblíqua tem equação do tipo...",
+      "o": [
+        "x=a.",
+        "y=b apenas.",
+        "y=mx+b.",
+        "x²+y²=r²."
+      ],
+      "a": 2,
+      "sol": "É uma reta não horizontal aproximada pelo gráfico nos extremos.",
+      "hyp": "Pode confundir com assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:obliqua-forma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-016",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Divide x²+1 por x. Obtém-se...",
+      "o": [
+        "x+1.",
+        "x².",
+        "1/x.",
+        "x+1/x."
+      ],
+      "a": 3,
+      "sol": "x²/x=x e sobra 1/x.",
+      "hyp": "Pode cancelar x num termo onde não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:divisao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-017",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Da forma f(x)=x+1/x conclui-se que uma assíntota oblíqua é...",
+      "o": [
+        "y=x.",
+        "y=0.",
+        "x=0.",
+        "y=1."
+      ],
+      "a": 0,
+      "sol": "A diferença f(x)−x=1/x tende a 0 para |x| grande.",
+      "hyp": "Pode usar a assíntota horizontal de 1/x sem considerar o termo x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:obliqua-yx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-018",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x²+2x+3)/(x+1), a divisão dá...",
+      "o": [
+        "x+2+1/(x+1).",
+        "x+1+2/(x+1).",
+        "x+1.",
+        "x+3."
+      ],
+      "a": 1,
+      "sol": "(x+1)(x+1)=x²+2x+1, sobra 2.",
+      "hyp": "Pode errar o resto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:divisao-obliqua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-019",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Logo, para a função anterior, uma assíntota oblíqua é...",
+      "o": [
+        "y=x+2.",
+        "y=2.",
+        "y=x+1.",
+        "x=−1 apenas."
+      ],
+      "a": 2,
+      "sol": "O termo 2/(x+1) tende a 0 para |x| grande.",
+      "hyp": "Pode usar o divisor como assíntota.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:obliqua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-020",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função (x²−1)/(x−1), com domínio original, tem assíntota vertical em x=1?",
+      "o": [
+        "Sim.",
+        "Só do lado direito.",
+        "Só do lado esquerdo.",
+        "Não; há um buraco removível."
+      ],
+      "a": 3,
+      "sol": "O fator x−1 cancela e a função coincide com x+1 exceto no ponto x=1.",
+      "hyp": "Pode classificar qualquer zero do denominador como assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:buraco-vs-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-021",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para confirmar uma assíntota vertical em x=a, é importante verificar se...",
+      "o": [
+        "o fator responsável não foi totalmente cancelado.",
+        "o numerador também é zero sempre.",
+        "a função tem grau par.",
+        "a função é crescente."
+      ],
+      "a": 0,
+      "sol": "Um fator cancelado pode criar apenas uma descontinuidade removível.",
+      "hyp": "Pode usar apenas o denominador antes de simplificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:confirmar-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-022",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "f(x)=(x+2)/[(x−1)(x+3)] tem possíveis assíntotas verticais em...",
+      "o": [
+        "x=−2.",
+        "x=1 e x=−3.",
+        "x=1 apenas.",
+        "x=−3 apenas."
+      ],
+      "a": 1,
+      "sol": "O denominador anula-se em 1 e −3 e não há fatores comuns com x+2.",
+      "hyp": "Pode incluir o zero do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:duas-verticais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-023",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para a função anterior, a assíntota horizontal é...",
+      "o": [
+        "y=1.",
+        "y=−3.",
+        "y=0.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "Grau do numerador 1 < grau do denominador 2.",
+      "hyp": "Pode usar a razão dos coeficientes líderes sem comparar graus.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-024",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "f(x)=(2x²+1)/(x²−4) tem assíntotas verticais...",
+      "o": [
+        "x=0.",
+        "x=2 apenas.",
+        "nenhuma.",
+        "x=−2 e x=2."
+      ],
+      "a": 3,
+      "sol": "x²−4=(x−2)(x+2) e o numerador não se anula nesses pontos.",
+      "hyp": "Pode esquecer a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:verticais-quadraticas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-025",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para a mesma função, a assíntota horizontal é...",
+      "o": [
+        "y=2.",
+        "y=1/2.",
+        "y=0.",
+        "x=2."
+      ],
+      "a": 0,
+      "sol": "Graus iguais; razão 2/1=2.",
+      "hyp": "Pode inverter os coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal-grau2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-026",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "f(x)=(x²−4)/(x²−x−2) simplifica-se, no domínio, para...",
+      "o": [
+        "(x+2)/(x+1) sem exclusões.",
+        "(x+2)/(x+1), excluindo ainda x=2 e x=−1.",
+        "(x−2)/(x−1).",
+        "1."
+      ],
+      "a": 1,
+      "sol": "Denominador=(x−2)(x+1), numerador=(x−2)(x+2); cancela-se x−2, mas x=2 continua excluído.",
+      "hyp": "Pode recuperar o ponto cancelado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:simplificacao-com-dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-027",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na função anterior, x=2 corresponde a...",
+      "o": [
+        "uma assíntota vertical.",
+        "um zero.",
+        "um buraco removível.",
+        "uma assíntota horizontal."
+      ],
+      "a": 2,
+      "sol": "O fator responsável foi cancelado.",
+      "hyp": "Pode tratar toda exclusão como assíntota.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:buraco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-028",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na mesma função, x=−1 corresponde a...",
+      "o": [
+        "um buraco.",
+        "um zero.",
+        "uma assíntota horizontal.",
+        "uma assíntota vertical."
+      ],
+      "a": 3,
+      "sol": "O fator x+1 permanece no denominador após simplificação.",
+      "hyp": "Pode confundir os dois pontos excluídos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-029",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x²−4)/(x²−x−2), a assíntota horizontal é...",
+      "o": [
+        "y=1.",
+        "y=0.",
+        "y=−1.",
+        "x=−1."
+      ],
+      "a": 0,
+      "sol": "Os graus são iguais e os coeficientes líderes são 1 e 1.",
+      "hyp": "Pode usar a forma simplificada e concluir incorretamente outra razão; ela dá o mesmo 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-030",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A presença de uma assíntota horizontal y=L significa que...",
+      "o": [
+        "f(x)=L para todo x.",
+        "para valores muito grandes em módulo de x, f(x) pode aproximar-se de L.",
+        "o gráfico nunca pode cruzar y=L.",
+        "x=L está fora do domínio."
+      ],
+      "a": 1,
+      "sol": "Assíntota descreve comportamento de aproximação, não igualdade global.",
+      "hyp": "Pode pensar que assíntota é uma barreira intransponível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:interpretacao-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-031",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um gráfico pode cruzar uma assíntota horizontal?",
+      "o": [
+        "Não, nunca.",
+        "Só se a função for polinomial.",
+        "Sim.",
+        "Só em x=0."
+      ],
+      "a": 2,
+      "sol": "A assíntota horizontal descreve o comportamento no infinito, não impede interseções finitas.",
+      "hyp": "Pode tratar assíntota horizontal como barreira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:cruzar-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-032",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um gráfico pode cruzar uma assíntota vertical x=a?",
+      "o": [
+        "Sim exatamente em x=a.",
+        "Sempre.",
+        "Só se f(a)=0.",
+        "Não no próprio x=a, porque a função não está definida aí no caso típico."
+      ],
+      "a": 3,
+      "sol": "A reta vertical corresponde a uma exclusão do domínio onde a função diverge.",
+      "hyp": "Pode confundir cruzar a reta em outro valor de y com cruzar y=L.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:vertical-nao-cruza",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-033",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=3/(x−2)+1, quando x cresce muito, f(x)...",
+      "o": [
+        "aproxima-se de 1.",
+        "aproxima-se de 3.",
+        "cresce sem limite.",
+        "aproxima-se de 2."
+      ],
+      "a": 0,
+      "sol": "3/(x−2) torna-se pequeno.",
+      "hyp": "Pode usar o coeficiente do numerador como limite.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:comportamento-infinito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-034",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=−4/(x+5)−2, quando |x| cresce muito, f(x)...",
+      "o": [
+        "aproxima-se de 0.",
+        "aproxima-se de −2.",
+        "aproxima-se de −4.",
+        "cresce sem limite."
+      ],
+      "a": 1,
+      "sol": "O termo racional tende a 0.",
+      "hyp": "Pode esquecer o deslocamento vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:comportamento-infinito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-035",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=1/(x−2), quando x se aproxima de 2 pela direita, f(x)...",
+      "o": [
+        "vai para valores negativos muito grandes.",
+        "vai para 0.",
+        "cresce para valores positivos muito grandes.",
+        "aproxima-se de 2."
+      ],
+      "a": 2,
+      "sol": "x−2 é positivo e muito pequeno.",
+      "hyp": "Pode ignorar o lado de aproximação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:lado-direito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-036",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=1/(x−2), quando x se aproxima de 2 pela esquerda, f(x)...",
+      "o": [
+        "vai para positivos muito grandes.",
+        "vai para 0.",
+        "aproxima-se de −2.",
+        "vai para valores negativos muito grandes."
+      ],
+      "a": 3,
+      "sol": "x−2 é negativo e muito pequeno em módulo.",
+      "hyp": "Pode trocar os lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:lado-esquerdo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-037",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=−1/(x−2), o comportamento junto de x=2 inverte-se porque...",
+      "o": [
+        "o sinal negativo reflete os valores relativamente a Ox.",
+        "a assíntota passa para x=−2.",
+        "a assíntota horizontal passa para y=1.",
+        "o domínio passa a incluir 2."
+      ],
+      "a": 0,
+      "sol": "Multiplicar por −1 troca os sinais dos valores, sem alterar a exclusão x=2.",
+      "hyp": "Pode achar que a reflexão muda a assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:reflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-038",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A divisão de (2x²+3x+1)/(x−1) produz quociente...",
+      "o": [
+        "2x+1 e resto 2.",
+        "2x+5 e resto 6.",
+        "2x+5 e resto −4.",
+        "2x−5 e resto 6."
+      ],
+      "a": 1,
+      "sol": "(x−1)(2x+5)=2x²+3x−5, sobra 6.",
+      "hyp": "Pode errar o termo intermédio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:divisao-obliqua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-039",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Logo uma assíntota oblíqua da função anterior é...",
+      "o": [
+        "y=2x+1.",
+        "y=6.",
+        "y=2x+5.",
+        "x=1."
+      ],
+      "a": 2,
+      "sol": "O resto 6/(x−1) tende a 0 em módulo para |x| grande.",
+      "hyp": "Pode usar o resto como ordenada na origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:obliqua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-040",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x³+1)/(x²+1), o grau do numerador excede o do denominador em...",
+      "o": [
+        "2.",
+        "0.",
+        "3.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "3−2=1.",
+      "hyp": "Pode usar os coeficientes em vez dos graus.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:diferenca-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-041",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Assim, é razoável procurar para a função anterior uma assíntota...",
+      "o": [
+        "oblíqua.",
+        "horizontal apenas.",
+        "vertical x=0.",
+        "circular."
+      ],
+      "a": 0,
+      "sol": "Diferença de graus 1 conduz a quociente linear na divisão.",
+      "hyp": "Pode procurar sempre horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:tipo-assintota",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-042",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Dividindo x³+1 por x²+1, obtemos...",
+      "o": [
+        "x+1.",
+        "x+(−x+1)/(x²+1).",
+        "x²+(1−x²)/(x²+1).",
+        "1+x/(x²+1)."
+      ],
+      "a": 1,
+      "sol": "x(x²+1)=x³+x; subtraindo de x³+1 sobra −x+1.",
+      "hyp": "Pode errar o resto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:divisao-grau3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-043",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A assíntota oblíqua da função anterior é...",
+      "o": [
+        "y=x+1.",
+        "y=0.",
+        "y=x.",
+        "x=0."
+      ],
+      "a": 2,
+      "sol": "O resto dividido por x²+1 tende a 0.",
+      "hyp": "Pode acrescentar o resto constante à assíntota.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:obliqua-yx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-044",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um custo médio é modelado por C(x)=500/x+8, x>0. Para produção muito elevada, C(x) aproxima-se de...",
+      "o": [
+        "500.",
+        "0.",
+        "+∞.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "O custo fixo médio 500/x diminui e sobra o nível 8.",
+      "hyp": "Pode interpretar 500 como valor assintótico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:custo-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-045",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo C(x)=500/x+8, a assíntota horizontal tem interpretação de...",
+      "o": [
+        "custo por unidade que o modelo se aproxima de atingir para produção muito grande.",
+        "produção mínima.",
+        "custo fixo total.",
+        "valor onde o modelo deixa de existir."
+      ],
+      "a": 0,
+      "sol": "O termo 8 é o patamar de longo prazo do custo médio.",
+      "hyp": "Pode confundir assíntota com restrição de domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:interpretacao-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-046",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma concentração é modelada por c(t)=10/(t+1), t≥0. À medida que t aumenta, c(t)...",
+      "o": [
+        "aproxima-se de 10.",
+        "aproxima-se de 0.",
+        "cresce sem limite.",
+        "torna-se negativa."
+      ],
+      "a": 1,
+      "sol": "O denominador cresce e o quociente positivo diminui.",
+      "hyp": "Pode tratar 10 como valor limite.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:decaimento-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-047",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo c(t)=10/(t+1), existe assíntota vertical relevante no domínio t≥0?",
+      "o": [
+        "Sim, t=−1 está no domínio.",
+        "Sim, t=0.",
+        "Não, porque t=−1 está fora do domínio físico considerado.",
+        "Não há assíntotas."
+      ],
+      "a": 2,
+      "sol": "A expressão tem assíntota vertical em t=−1, mas o domínio de modelação t≥0 não a inclui.",
+      "hyp": "Pode ignorar o domínio contextual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:dominio-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-048",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função racional com assíntota vertical x=4 e horizontal y=−2 pode ter a forma...",
+      "o": [
+        "f(x)=3/(x+4)+2.",
+        "f(x)=3/(x−2)−4.",
+        "f(x)=3x−2.",
+        "f(x)=3/(x−4)−2."
+      ],
+      "a": 3,
+      "sol": "Na forma a/(x−h)+k, h=4 e k=−2.",
+      "hyp": "Pode trocar os parâmetros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:construir-assintotas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-049",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=a/(x−1)+3 passa por (2,7), então a=",
+      "o": [
+        "4.",
+        "1.",
+        "7.",
+        "−4."
+      ],
+      "a": 0,
+      "sol": "7=a/(1)+3 => a=4.",
+      "hyp": "Pode usar o ponto sem subtrair o deslocamento vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-AM-050",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-assintotas-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Assíntotas são úteis em modelação porque...",
+      "o": [
+        "determinam todos os valores exatos da função.",
+        "resumem comportamentos-limite e restrições importantes do modelo.",
+        "eliminam a necessidade de domínio.",
+        "garantem que o modelo é perfeito."
+      ],
+      "a": 1,
+      "sol": "Ajudam a interpretar aproximações, barreiras e tendências sem substituir a análise completa.",
+      "hyp": "Pode sobrestimar o que uma assíntota determina.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-assintotas-modelacao:papel-modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
