@@ -1,53 +1,1364 @@
 {
-"schemaVersion":1,"subject":"Matemática A","curriculum":"vNext 2026/27","year":"12.º","themeId":"12-prob","subtopicId":"12-prob-propriedades","subtopic":"Probabilidade e propriedades elementares","editorialTarget":50,"status":"prototype","note":"Conteúdo original A+. Trabalha axiomas, equiprobabilidade, complemento, união, inclusão-exclusão e propriedades elementares da probabilidade. Não ligado ao motor atual.","questions":[
-{"id":"VN12PROB-PR-001","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"Para qualquer acontecimento A, P(A) pertence a...","o":["[0,1].","R.","]1,+∞[.","{0,1} apenas."],"a":0,"sol":"Uma probabilidade está sempre entre 0 e 1.","hyp":"Pode confundir probabilidade com frequência absoluta.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:intervalo-1","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-002","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"A probabilidade do acontecimento certo Ω é...","o":["0.","1.","1/2.","indefinida."],"a":1,"sol":"P(Ω)=1.","hyp":"Pode trocar acontecimento certo e impossível.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:omega-2","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-003","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"A probabilidade do acontecimento impossível ∅ é...","o":["1.","1/2.","0.","−1."],"a":2,"sol":"P(∅)=0.","hyp":"Pode atribuir probabilidade negativa ao impossível.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:vazio-3","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-004","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"Se A e A^c são complementares, então...","o":["P(A)=P(A^c).","P(A)P(A^c)=1.","P(A)−P(A^c)=1.","P(A)+P(A^c)=1."],"a":3,"sol":"Os dois acontecimentos formam uma partição de Ω.","hyp":"Pode confundir soma com produto.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:complemento-4","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-005","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":1,"cognitive":"Aplicação","q":"Se P(A)=0,3, então P(A^c)=...","o":["0,7.","0,3.","1,3.","0."],"a":0,"sol":"1−0,3=0,7.","hyp":"Pode repetir P(A) em vez de complementar.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:complemento-num-5","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-006","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Se P(A)=0,82, então P(A^c)=...","o":["0,82.","0,18.","1,82.","0,28."],"a":1,"sol":"1−0,82=0,18.","hyp":"Pode inverter algarismos ou somar.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:complemento-num-6","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-007","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Se A e B são incompatíveis, então P(A∪B)=...","o":["P(A)P(B).","P(A)+P(B)−1.","P(A)+P(B).","P(A∩B)."],"a":2,"sol":"Como P(A∩B)=0, a probabilidade da união é a soma.","hyp":"Pode multiplicar probabilidades por ver dois acontecimentos.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:incomp-uniao-7","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-008","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Se A e B são incompatíveis, P(A)=0,2 e P(B)=0,5, então P(A∪B)=...","o":["0,1.","0,3.","1.","0,7."],"a":3,"sol":"0,2+0,5=0,7.","hyp":"Pode multiplicar 0,2 por 0,5.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:incomp-num-8","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-009","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Para quaisquer A e B, P(A∪B) é...","o":["P(A)+P(B)−P(A∩B).","P(A)+P(B).","P(A)P(B).","P(A∩B)−P(A)."],"a":0,"sol":"Subtrai-se a interseção porque foi contada duas vezes.","hyp":"Pode usar a fórmula válida apenas para incompatíveis.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:inclusao-exclusao-9","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-010","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"P(A)=0,6, P(B)=0,5 e P(A∩B)=0,2. Então P(A∪B)=...","o":["0,3.","0,9.","1,1.","0,7."],"a":1,"sol":"0,6+0,5−0,2=0,9.","hyp":"Pode esquecer subtrair a interseção.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:uniao-num-10","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-011","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"P(A)=0,4, P(B)=0,7 e P(A∪B)=0,8. P(A∩B)=...","o":["0,1.","0,2.","0,3.","0,4."],"a":2,"sol":"0,4+0,7−x=0,8 => x=0,3.","hyp":"Pode somar a união em vez de isolar a interseção.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:inter-num-11","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-012","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Se A⊂B, então necessariamente...","o":["P(A)>P(B).","P(A)=1.","P(B)=0.","P(A)≤P(B)."],"a":3,"sol":"A monotonia da probabilidade preserva a inclusão.","hyp":"Pode inverter a desigualdade.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:monotonia-12","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-013","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Num espaço finito equiprovável, P(A)=...","o":["n(A)/n(Ω).","n(Ω)/n(A).","n(A)+n(Ω).","1/n(A) sempre."],"a":0,"sol":"É a regra de Laplace para resultados elementares equiprováveis.","hyp":"Pode inverter casos favoráveis e possíveis.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:laplace-13","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-014","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Num dado equilibrado, P(sair 6)=...","o":["1/3.","1/6.","1/2.","1."],"a":1,"sol":"Há 1 resultado favorável em 6 equiprováveis.","hyp":"Pode usar o valor 6 como probabilidade.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:dado-14","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-015","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Num dado equilibrado, P(sair número par)=...","o":["1/6.","2/3.","1/2.","3/4."],"a":2,"sol":"Há 3 pares em 6 resultados:3/6=1/2.","hyp":"Pode usar a quantidade de pares sem dividir.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:dado-par-15","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-016","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Num baralho de 52 cartas, P(retirar um ás)=...","o":["1/52.","4/13.","1/4.","1/13."],"a":3,"sol":"Há 4 ases em 52 cartas:4/52=1/13.","hyp":"Pode dividir 4 por 13 em vez de 52.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:baralho-as-16","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-017","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Numa urna com 3 bolas vermelhas e 7 azuis, escolhendo uma ao acaso, P(vermelha)=...","o":["3/10.","7/10.","3/7.","1/3."],"a":0,"sol":"3 resultados favoráveis em 10 bolas equiprováveis.","hyp":"Pode dividir pela quantidade azul.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:urna-17","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-018","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Na urna anterior, P(não vermelha)=...","o":["3/10.","7/10.","1/2.","7/3."],"a":1,"sol":"É o complementar:1−3/10=7/10.","hyp":"Pode repetir a probabilidade de vermelha.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:urna-comp-18","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-019","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"Se P(A)=1, então A...","o":["tem de ser exatamente Ω como conjunto em qualquer modelo.","é impossível.","é um acontecimento quase certo; num modelo finito com todos os elementares de probabilidade positiva, contém todos os resultados.","tem probabilidade 0 no complementar e isso é impossível."],"a":2,"sol":"P(A)=1 implica P(A^c)=0; em modelos finitos equiprováveis isso força A=Ω.","hyp":"Pode confundir probabilidade 1 com uma identidade de conjuntos sem atender ao modelo.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:prob1-19","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-020","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Uma probabilidade de 0,25 corresponde a...","o":["25 resultados sempre.","um acontecimento impossível.","75%.","25%."],"a":3,"sol":"0,25=25/100=25%.","hyp":"Pode confundir decimal e percentagem.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:percentagem-20","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-021","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A∪B)=1, então P((A∪B)^c)=...","o":["0.","1.","P(A∩B).","1/2."],"a":0,"sol":"O complementar de um acontecimento de probabilidade 1 tem probabilidade 0.","hyp":"Pode manter a mesma probabilidade.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:comp-uniao-21","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-022","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A∩B)=0, pode concluir-se sempre que A e B são independentes?","o":["Sim.","Não.","Só se P(A)=P(B).","Só se P(A∪B)=1."],"a":1,"sol":"Interseção nula significa incompatibilidade probabilística; independência exigiria P(A∩B)=P(A)P(B), o que só acontece se pelo menos um tiver probabilidade 0.","hyp":"Pode confundir incompatibilidade e independência.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:incomp-indep-22","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-023","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A)=0,7 e P(B)=0,6, então P(A∩B) é pelo menos...","o":["0.","0,1.","0,3.","0,6."],"a":2,"sol":"P(A∪B)≤1 =>0,7+0,6−P(A∩B)≤1, logo P(A∩B)≥0,3.","hyp":"Pode assumir interseção zero apesar de a soma ultrapassar 1.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:limite-inter-23","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-024","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A)=0,4 e P(B)=0,3, o maior valor possível de P(A∩B) é...","o":["0,7.","0,12.","0,1.","0,3."],"a":3,"sol":"A interseção não pode ter probabilidade superior ao menor dos acontecimentos: min(0,4,0,3)=0,3.","hyp":"Pode multiplicar probabilidades sem independência.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:max-inter-24","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-025","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se A⊂B, P(A)=0,2 e P(B)=0,5, então P(B\\A)=...","o":["0,3.","0,7.","0,1.","0,5."],"a":0,"sol":"B é a união disjunta de A com B\\A; logo 0,5−0,2=0,3.","hyp":"Pode somar as probabilidades.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:diferenca-25","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-026","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"P(A\\B) é igual a...","o":["P(A)−P(B).","P(A)−P(A∩B).","P(B)−P(A∩B).","P(A∪B)."],"a":1,"sol":"A decompõe-se em A\\B e A∩B, que são incompatíveis.","hyp":"Pode subtrair P(B) inteiro mesmo quando B não está contido em A.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:diferenca-formula-26","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-027","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A)=0,8 e P(A∩B)=0,5, então P(A\\B)=...","o":["0,5.","0,8.","0,3.","1,3."],"a":2,"sol":"0,8−0,5=0,3.","hyp":"Pode somar em vez de subtrair.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:diferenca-num-27","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-028","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se A e B são incompatíveis e P(A)=0,6, então P(B) pode ser no máximo...","o":["0,6.","1.","0,6?","0,4."],"a":3,"sol":"P(A)+P(B)≤1, logo P(B)≤0,4.","hyp":"Pode ignorar o limite total 1.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:max-incomp-28","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-029","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Num espaço equiprovável com 20 resultados, um acontecimento com 7 resultados tem probabilidade...","o":["7/20.","13/20.","7.","1/7."],"a":0,"sol":"P(A)=7/20.","hyp":"Pode usar o complementar.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:laplace-29","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-030","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se num espaço equiprovável P(A)=3/8 e n(Ω)=40, então n(A)=...","o":["8.","15.","24.","37."],"a":1,"sol":"n(A)=40×3/8=15.","hyp":"Pode dividir 40 por 3/8.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:laplace-inversa-30","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-031","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Ao lançar dois dados equilibrados, P(soma 7)=...","o":["1/12.","1/3.","1/6.","7/36."],"a":2,"sol":"Há 6 pares favoráveis em 36 resultados equiprováveis:6/36=1/6.","hyp":"Pode usar a soma 7 como numerador.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:dois-dados-31","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-032","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Ao lançar dois dados, P(soma 2 ou soma 12)=...","o":["1/36.","1/12.","1/6.","1/18."],"a":3,"sol":"São dois resultados incompatíveis: (1,1) e (6,6), logo 2/36=1/18.","hyp":"Pode contar apenas um extremo.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:extremos-32","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-033","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Aplicação","q":"Ao lançar uma moeda equilibrada 3 vezes, P(três caras)=...","o":["1/8.","3/8.","1/3.","1/6."],"a":0,"sol":"Dos 8 resultados equiprováveis, apenas CCC é favorável.","hyp":"Pode usar 3 resultados favoráveis por haver 3 lançamentos.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:3-moedas-33","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-034","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Aplicação","q":"Ao lançar uma moeda equilibrada 3 vezes, P(pelo menos uma cara)=...","o":["1/8.","7/8.","3/8.","1/2."],"a":1,"sol":"Complemento de nenhuma cara:1−1/8=7/8.","hyp":"Pode contar apenas resultados com exatamente uma cara.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:pelo-menos-uma-34","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-035","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A)=0,55 e P(B)=0,45 e A∩B=∅, então A e B são complementares se...","o":["P(A∩B)=1.","P(A)=P(B).","A∪B=Ω, o que aqui é compatível com P(A∪B)=1.","forem independentes."],"a":2,"sol":"Como são incompatíveis, P(A∪B)=1; num modelo probabilístico isto significa que a união tem probabilidade 1, e se a cobertura de Ω for dada então são complementares.","hyp":"Pode concluir igualdade de conjuntos apenas pela soma das probabilidades.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:comp-35","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-036","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A∪B)=P(A)+P(B), então...","o":["A=B.","A e B são independentes.","P(A)=P(B).","P(A∩B)=0."],"a":3,"sol":"Comparando com a fórmula geral, a interseção tem probabilidade zero.","hyp":"Pode confundir soma da união com independência.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:inter-zero-36","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-037","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"P(A∪B)=0,75, P(A)=0,5 e P(B)=0,4. Então P(A∩B)=...","o":["0,15.","0,1.","0,25.","0,35."],"a":0,"sol":"0,5+0,4−x=0,75 =>x=0,15.","hyp":"Pode subtrair a união apenas a um dos acontecimentos.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:inter-37","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-038","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"P(A^c)=0,2 e P(B)=0,5. Se A∩B tem probabilidade 0,4, então P(A∪B)=...","o":["0,4.","0,9.","1,3.","0,7."],"a":1,"sol":"P(A)=0,8; união=0,8+0,5−0,4=0,9.","hyp":"Pode usar diretamente P(A^c) como P(A).","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:combinado-38","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-039","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se P(A)=0,6 e P(B)=0,6, qual valor de P(A∩B) é impossível?","o":["0,2.","0,4.","0,1.","0,6."],"a":2,"sol":"A interseção deve ser pelo menos 0,2 porque P(A∪B)≤1.","hyp":"Pode esquecer o limite inferior max(0,P(A)+P(B)−1).","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:valor-impossivel-39","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-040","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se P(A)=0,2 e P(B)=0,9, qual é o menor P(A∩B) possível?","o":["0.","0,2.","0,9.","0,1."],"a":3,"sol":"max(0,0,2+0,9−1)=0,1.","hyp":"Pode assumir que interseção pode ser zero.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:min-inter-40","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-041","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se A⊂B e P(A)=P(B), então P(B\\A)=...","o":["0.","P(A).","1.","não pode ser determinado."],"a":0,"sol":"P(B\\A)=P(B)−P(A)=0.","hyp":"Pode concluir necessariamente A=B como conjuntos sem atender a eventos de probabilidade zero.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:igual-prob-inclusao-41","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-042","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"P(A∩B^c) pode escrever-se como...","o":["P(B)−P(A∩B).","P(A)−P(A∩B).","P(A)+P(B).","1−P(A)."],"a":1,"sol":"A decompõe-se em A∩B e A∩B^c.","hyp":"Pode subtrair à probabilidade errada.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:A-naoB-42","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-043","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"P(A^c∩B^c) é igual a...","o":["P(A∪B).","P(A^c)+P(B^c).","1−P(A∪B).","1−P(A∩B)."],"a":2,"sol":"Por De Morgan, A^c∩B^c=(A∪B)^c.","hyp":"Pode complementar a interseção em vez da união.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:nenhum-43","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-044","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"P(A^c∪B^c) é igual a...","o":["P(A∩B).","P(A∪B).","1−P(A∪B).","1−P(A∩B)."],"a":3,"sol":"Por De Morgan, A^c∪B^c=(A∩B)^c.","hyp":"Pode complementar a operação errada.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:nao-ambos-44","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-045","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Numa escola, 60% praticam desporto, 45% música e 25% ambos. A percentagem que pratica pelo menos uma atividade é...","o":["80%.","105%.","35%.","25%."],"a":0,"sol":"60+45−25=80.","hyp":"Pode somar sem retirar a sobreposição.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:modelacao-uniao-45","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-046","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"No contexto anterior, a percentagem que não pratica nenhuma das duas é...","o":["25%.","20%.","80%.","45%."],"a":1,"sol":"Complemento de 80%:20%.","hyp":"Pode usar a interseção como nenhum.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:modelacao-nenhum-46","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-047","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Num inquérito, P(A)=0,7, P(B)=0,5 e P(A∪B)=0,9. A proporção em ambos é...","o":["0,1.","0,2.","0,3.","0,4."],"a":2,"sol":"0,7+0,5−0,9=0,3.","hyp":"Pode subtrair a interseção ao total em vez de calculá-la.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:modelacao-inter-47","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-048","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se P(A)=0, P(B)=0,4, então P(A∪B)=...","o":["0.","1.","não pode ser determinada.","0,4."],"a":3,"sol":"P(A∩B)≤P(A)=0, logo a união tem probabilidade 0+0,4=0,4.","hyp":"Pode achar que um evento de probabilidade zero altera a união.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:evento-zero-48","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-049","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se P(A)=1, então para qualquer B, P(A∩B)=...","o":["P(B), assumindo A ocorre quase certamente.","1.","0.","P(A)+P(B)."],"a":0,"sol":"Quando A tem probabilidade 1, a parte de B fora de A tem probabilidade zero; assim P(A∩B)=P(B).","hyp":"Pode concluir que a interseção tem probabilidade 1.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:evento-um-49","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PR-050","themeId":"12-prob","subtopicId":"12-prob-propriedades","year":"12.º","difficulty":4,"cognitive":"Interpretação","q":"A regra de Laplace deve ser usada diretamente quando...","o":["os resultados têm probabilidades arbitrárias.","os resultados elementares são equiprováveis e o espaço é finito.","o espaço é necessariamente infinito.","há apenas um acontecimento."],"a":1,"sol":"A razão casos favoráveis/casos possíveis pressupõe equiprobabilidade dos resultados elementares.","hyp":"Pode aplicar contagem simples mesmo quando resultados não são equiprováveis.","contexts":["mission","training","exam"],"signature":"12-prob-propriedades:laplace-condicao-50","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1}
-]}
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-propriedades",
+  "subtopic": "Probabilidade e propriedades elementares",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha axiomas, equiprobabilidade, complemento, união, inclusão-exclusão e propriedades elementares da probabilidade. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-PR-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para qualquer acontecimento A, P(A) pertence a...",
+      "o": [
+        "[0,1].",
+        "R.",
+        "]1,+∞[.",
+        "{0,1} apenas."
+      ],
+      "a": 0,
+      "sol": "Uma probabilidade está sempre entre 0 e 1.",
+      "hyp": "Pode confundir probabilidade com frequência absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:intervalo-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A probabilidade do acontecimento certo Ω é...",
+      "o": [
+        "0.",
+        "1.",
+        "1/2.",
+        "indefinida."
+      ],
+      "a": 1,
+      "sol": "P(Ω)=1.",
+      "hyp": "Pode trocar acontecimento certo e impossível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:omega-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A probabilidade do acontecimento impossível ∅ é...",
+      "o": [
+        "1.",
+        "1/2.",
+        "0.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "P(∅)=0.",
+      "hyp": "Pode atribuir probabilidade negativa ao impossível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:vazio-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se A e A^c são complementares, então...",
+      "o": [
+        "P(A)=P(A^c).",
+        "P(A)P(A^c)=1.",
+        "P(A)−P(A^c)=1.",
+        "P(A)+P(A^c)=1."
+      ],
+      "a": 3,
+      "sol": "Os dois acontecimentos formam uma partição de Ω.",
+      "hyp": "Pode confundir soma com produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:complemento-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se P(A)=0,3, então P(A^c)=...",
+      "o": [
+        "0,7.",
+        "0,3.",
+        "1,3.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "1−0,3=0,7.",
+      "hyp": "Pode repetir P(A) em vez de complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:complemento-num-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se P(A)=0,82, então P(A^c)=...",
+      "o": [
+        "0,82.",
+        "0,18.",
+        "1,82.",
+        "0,28."
+      ],
+      "a": 1,
+      "sol": "1−0,82=0,18.",
+      "hyp": "Pode inverter algarismos ou somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:complemento-num-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se A e B são incompatíveis, então P(A∪B)=...",
+      "o": [
+        "P(A)P(B).",
+        "P(A)+P(B)−1.",
+        "P(A)+P(B).",
+        "P(A∩B)."
+      ],
+      "a": 2,
+      "sol": "Como P(A∩B)=0, a probabilidade da união é a soma.",
+      "hyp": "Pode multiplicar probabilidades por ver dois acontecimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:incomp-uniao-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A e B são incompatíveis, P(A)=0,2 e P(B)=0,5, então P(A∪B)=...",
+      "o": [
+        "0,1.",
+        "0,3.",
+        "1.",
+        "0,7."
+      ],
+      "a": 3,
+      "sol": "0,2+0,5=0,7.",
+      "hyp": "Pode multiplicar 0,2 por 0,5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:incomp-num-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para quaisquer A e B, P(A∪B) é...",
+      "o": [
+        "P(A)+P(B)−P(A∩B).",
+        "P(A)+P(B).",
+        "P(A)P(B).",
+        "P(A∩B)−P(A)."
+      ],
+      "a": 0,
+      "sol": "Subtrai-se a interseção porque foi contada duas vezes.",
+      "hyp": "Pode usar a fórmula válida apenas para incompatíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:inclusao-exclusao-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "P(A)=0,6, P(B)=0,5 e P(A∩B)=0,2. Então P(A∪B)=...",
+      "o": [
+        "0,3.",
+        "0,9.",
+        "1,1.",
+        "0,7."
+      ],
+      "a": 1,
+      "sol": "0,6+0,5−0,2=0,9.",
+      "hyp": "Pode esquecer subtrair a interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:uniao-num-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,4, P(B)=0,7 e P(A∪B)=0,8. P(A∩B)=...",
+      "o": [
+        "0,1.",
+        "0,2.",
+        "0,3.",
+        "0,4."
+      ],
+      "a": 2,
+      "sol": "0,4+0,7−x=0,8 => x=0,3.",
+      "hyp": "Pode somar a união em vez de isolar a interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:inter-num-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se A⊂B, então necessariamente...",
+      "o": [
+        "P(A)>P(B).",
+        "P(A)=1.",
+        "P(B)=0.",
+        "P(A)≤P(B)."
+      ],
+      "a": 3,
+      "sol": "A monotonia da probabilidade preserva a inclusão.",
+      "hyp": "Pode inverter a desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:monotonia-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Num espaço finito equiprovável, P(A)=...",
+      "o": [
+        "n(A)/n(Ω).",
+        "n(Ω)/n(A).",
+        "n(A)+n(Ω).",
+        "1/n(A) sempre."
+      ],
+      "a": 0,
+      "sol": "É a regra de Laplace para resultados elementares equiprováveis.",
+      "hyp": "Pode inverter casos favoráveis e possíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:laplace-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado equilibrado, P(sair 6)=...",
+      "o": [
+        "1/3.",
+        "1/6.",
+        "1/2.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "Há 1 resultado favorável em 6 equiprováveis.",
+      "hyp": "Pode usar o valor 6 como probabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:dado-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado equilibrado, P(sair número par)=...",
+      "o": [
+        "1/6.",
+        "2/3.",
+        "1/2.",
+        "3/4."
+      ],
+      "a": 2,
+      "sol": "Há 3 pares em 6 resultados:3/6=1/2.",
+      "hyp": "Pode usar a quantidade de pares sem dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:dado-par-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num baralho de 52 cartas, P(retirar um ás)=...",
+      "o": [
+        "1/52.",
+        "4/13.",
+        "1/4.",
+        "1/13."
+      ],
+      "a": 3,
+      "sol": "Há 4 ases em 52 cartas:4/52=1/13.",
+      "hyp": "Pode dividir 4 por 13 em vez de 52.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:baralho-as-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa urna com 3 bolas vermelhas e 7 azuis, escolhendo uma ao acaso, P(vermelha)=...",
+      "o": [
+        "3/10.",
+        "7/10.",
+        "3/7.",
+        "1/3."
+      ],
+      "a": 0,
+      "sol": "3 resultados favoráveis em 10 bolas equiprováveis.",
+      "hyp": "Pode dividir pela quantidade azul.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:urna-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa urna com 3 bolas vermelhas e 7 azuis, escolhendo uma ao acaso, qual é P(não vermelha)?",
+      "o": [
+        "3/10.",
+        "7/10.",
+        "1/2.",
+        "7/3."
+      ],
+      "a": 1,
+      "sol": "É o complementar:1−3/10=7/10.",
+      "hyp": "Pode repetir a probabilidade de vermelha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:urna-comp-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=1, então A...",
+      "o": [
+        "tem de ser exatamente Ω como conjunto em qualquer modelo.",
+        "é impossível.",
+        "é um acontecimento quase certo; num modelo finito com todos os elementares de probabilidade positiva, contém todos os resultados.",
+        "tem probabilidade 0 no complementar e isso é impossível."
+      ],
+      "a": 2,
+      "sol": "P(A)=1 implica P(A^c)=0; em modelos finitos equiprováveis isso força A=Ω.",
+      "hyp": "Pode confundir probabilidade 1 com uma identidade de conjuntos sem atender ao modelo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:prob1-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma probabilidade de 0,25 corresponde a...",
+      "o": [
+        "25 resultados sempre.",
+        "um acontecimento impossível.",
+        "75%.",
+        "25%."
+      ],
+      "a": 3,
+      "sol": "0,25=25/100=25%.",
+      "hyp": "Pode confundir decimal e percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:percentagem-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∪B)=1, então P((A∪B)^c)=...",
+      "o": [
+        "0.",
+        "1.",
+        "P(A∩B).",
+        "1/2."
+      ],
+      "a": 0,
+      "sol": "O complementar de um acontecimento de probabilidade 1 tem probabilidade 0.",
+      "hyp": "Pode manter a mesma probabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:comp-uniao-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∩B)=0, pode concluir-se sempre que A e B são independentes?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se P(A)=P(B).",
+        "Só se P(A∪B)=1."
+      ],
+      "a": 1,
+      "sol": "Interseção nula significa incompatibilidade probabilística; independência exigiria P(A∩B)=P(A)P(B), o que só acontece se pelo menos um tiver probabilidade 0.",
+      "hyp": "Pode confundir incompatibilidade e independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:incomp-indep-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,7 e P(B)=0,6, então P(A∩B) é pelo menos...",
+      "o": [
+        "0.",
+        "0,1.",
+        "0,3.",
+        "0,6."
+      ],
+      "a": 2,
+      "sol": "P(A∪B)≤1 =>0,7+0,6−P(A∩B)≤1, logo P(A∩B)≥0,3.",
+      "hyp": "Pode assumir interseção zero apesar de a soma ultrapassar 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:limite-inter-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,4 e P(B)=0,3, o maior valor possível de P(A∩B) é...",
+      "o": [
+        "0,7.",
+        "0,12.",
+        "0,1.",
+        "0,3."
+      ],
+      "a": 3,
+      "sol": "A interseção não pode ter probabilidade superior ao menor dos acontecimentos: min(0,4,0,3)=0,3.",
+      "hyp": "Pode multiplicar probabilidades sem independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:max-inter-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A⊂B, P(A)=0,2 e P(B)=0,5, então P(B\\A)=...",
+      "o": [
+        "0,3.",
+        "0,7.",
+        "0,1.",
+        "0,5."
+      ],
+      "a": 0,
+      "sol": "B é a união disjunta de A com B\\A; logo 0,5−0,2=0,3.",
+      "hyp": "Pode somar as probabilidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:diferenca-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A\\B) é igual a...",
+      "o": [
+        "P(A)−P(B).",
+        "P(A)−P(A∩B).",
+        "P(B)−P(A∩B).",
+        "P(A∪B)."
+      ],
+      "a": 1,
+      "sol": "A decompõe-se em A\\B e A∩B, que são incompatíveis.",
+      "hyp": "Pode subtrair P(B) inteiro mesmo quando B não está contido em A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:diferenca-formula-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,8 e P(A∩B)=0,5, então P(A\\B)=...",
+      "o": [
+        "0,5.",
+        "0,8.",
+        "0,3.",
+        "1,3."
+      ],
+      "a": 2,
+      "sol": "0,8−0,5=0,3.",
+      "hyp": "Pode somar em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:diferenca-num-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são incompatíveis e P(A)=0,6, então P(B) pode ser no máximo...",
+      "o": [
+        "0,6.",
+        "1.",
+        "0,6?",
+        "0,4."
+      ],
+      "a": 3,
+      "sol": "P(A)+P(B)≤1, logo P(B)≤0,4.",
+      "hyp": "Pode ignorar o limite total 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:max-incomp-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num espaço equiprovável com 20 resultados, um acontecimento com 7 resultados tem probabilidade...",
+      "o": [
+        "7/20.",
+        "13/20.",
+        "7.",
+        "1/7."
+      ],
+      "a": 0,
+      "sol": "P(A)=7/20.",
+      "hyp": "Pode usar o complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:laplace-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se num espaço equiprovável P(A)=3/8 e n(Ω)=40, então n(A)=...",
+      "o": [
+        "8.",
+        "15.",
+        "24.",
+        "37."
+      ],
+      "a": 1,
+      "sol": "n(A)=40×3/8=15.",
+      "hyp": "Pode dividir 40 por 3/8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:laplace-inversa-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Ao lançar dois dados equilibrados, P(soma 7)=...",
+      "o": [
+        "1/12.",
+        "1/3.",
+        "1/6.",
+        "7/36."
+      ],
+      "a": 2,
+      "sol": "Há 6 pares favoráveis em 36 resultados equiprováveis:6/36=1/6.",
+      "hyp": "Pode usar a soma 7 como numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:dois-dados-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Ao lançar dois dados, P(soma 2 ou soma 12)=...",
+      "o": [
+        "1/36.",
+        "1/12.",
+        "1/6.",
+        "1/18."
+      ],
+      "a": 3,
+      "sol": "São dois resultados incompatíveis: (1,1) e (6,6), logo 2/36=1/18.",
+      "hyp": "Pode contar apenas um extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:extremos-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Ao lançar uma moeda equilibrada 3 vezes, P(três caras)=...",
+      "o": [
+        "1/8.",
+        "3/8.",
+        "1/3.",
+        "1/6."
+      ],
+      "a": 0,
+      "sol": "Dos 8 resultados equiprováveis, apenas CCC é favorável.",
+      "hyp": "Pode usar 3 resultados favoráveis por haver 3 lançamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:3-moedas-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Ao lançar uma moeda equilibrada 3 vezes, P(pelo menos uma cara)=...",
+      "o": [
+        "1/8.",
+        "7/8.",
+        "3/8.",
+        "1/2."
+      ],
+      "a": 1,
+      "sol": "Complemento de nenhuma cara:1−1/8=7/8.",
+      "hyp": "Pode contar apenas resultados com exatamente uma cara.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:pelo-menos-uma-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,55 e P(B)=0,45 e A∩B=∅, então A e B são complementares se...",
+      "o": [
+        "P(A∩B)=1.",
+        "P(A)=P(B).",
+        "A∪B=Ω, o que aqui é compatível com P(A∪B)=1.",
+        "forem independentes."
+      ],
+      "a": 2,
+      "sol": "Como são incompatíveis, P(A∪B)=1; num modelo probabilístico isto significa que a união tem probabilidade 1, e se a cobertura de Ω for dada então são complementares.",
+      "hyp": "Pode concluir igualdade de conjuntos apenas pela soma das probabilidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:comp-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∪B)=P(A)+P(B), então...",
+      "o": [
+        "A=B.",
+        "A e B são independentes.",
+        "P(A)=P(B).",
+        "P(A∩B)=0."
+      ],
+      "a": 3,
+      "sol": "Comparando com a fórmula geral, a interseção tem probabilidade zero.",
+      "hyp": "Pode confundir soma da união com independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:inter-zero-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A∪B)=0,75, P(A)=0,5 e P(B)=0,4. Então P(A∩B)=...",
+      "o": [
+        "0,15.",
+        "0,1.",
+        "0,25.",
+        "0,35."
+      ],
+      "a": 0,
+      "sol": "0,5+0,4−x=0,75 =>x=0,15.",
+      "hyp": "Pode subtrair a união apenas a um dos acontecimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:inter-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A^c)=0,2 e P(B)=0,5. Se A∩B tem probabilidade 0,4, então P(A∪B)=...",
+      "o": [
+        "0,4.",
+        "0,9.",
+        "1,3.",
+        "0,7."
+      ],
+      "a": 1,
+      "sol": "P(A)=0,8; união=0,8+0,5−0,4=0,9.",
+      "hyp": "Pode usar diretamente P(A^c) como P(A).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:combinado-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,6 e P(B)=0,6, qual valor de P(A∩B) é impossível?",
+      "o": [
+        "0,2.",
+        "0,4.",
+        "0,1.",
+        "0,6."
+      ],
+      "a": 2,
+      "sol": "A interseção deve ser pelo menos 0,2 porque P(A∪B)≤1.",
+      "hyp": "Pode esquecer o limite inferior max(0,P(A)+P(B)−1).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:valor-impossivel-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,2 e P(B)=0,9, qual é o menor P(A∩B) possível?",
+      "o": [
+        "0.",
+        "0,2.",
+        "0,9.",
+        "0,1."
+      ],
+      "a": 3,
+      "sol": "max(0,0,2+0,9−1)=0,1.",
+      "hyp": "Pode assumir que interseção pode ser zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:min-inter-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A⊂B e P(A)=P(B), então P(B\\A)=...",
+      "o": [
+        "0.",
+        "P(A).",
+        "1.",
+        "não pode ser determinado."
+      ],
+      "a": 0,
+      "sol": "P(B\\A)=P(B)−P(A)=0.",
+      "hyp": "Pode concluir necessariamente A=B como conjuntos sem atender a eventos de probabilidade zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:igual-prob-inclusao-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A∩B^c) pode escrever-se como...",
+      "o": [
+        "P(B)−P(A∩B).",
+        "P(A)−P(A∩B).",
+        "P(A)+P(B).",
+        "1−P(A)."
+      ],
+      "a": 1,
+      "sol": "A decompõe-se em A∩B e A∩B^c.",
+      "hyp": "Pode subtrair à probabilidade errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:A-naoB-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A^c∩B^c) é igual a...",
+      "o": [
+        "P(A∪B).",
+        "P(A^c)+P(B^c).",
+        "1−P(A∪B).",
+        "1−P(A∩B)."
+      ],
+      "a": 2,
+      "sol": "Por De Morgan, A^c∩B^c=(A∪B)^c.",
+      "hyp": "Pode complementar a interseção em vez da união.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:nenhum-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A^c∪B^c) é igual a...",
+      "o": [
+        "P(A∩B).",
+        "P(A∪B).",
+        "1−P(A∪B).",
+        "1−P(A∩B)."
+      ],
+      "a": 3,
+      "sol": "Por De Morgan, A^c∪B^c=(A∩B)^c.",
+      "hyp": "Pode complementar a operação errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:nao-ambos-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa escola, 60% praticam desporto, 45% música e 25% ambos. A percentagem que pratica pelo menos uma atividade é...",
+      "o": [
+        "80%.",
+        "105%.",
+        "35%.",
+        "25%."
+      ],
+      "a": 0,
+      "sol": "60+45−25=80.",
+      "hyp": "Pode somar sem retirar a sobreposição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:modelacao-uniao-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa escola, 60% praticam desporto, 45% música e 25% ambas as atividades. Qual é a percentagem que não pratica nenhuma das duas?",
+      "o": [
+        "25%.",
+        "20%.",
+        "80%.",
+        "45%."
+      ],
+      "a": 1,
+      "sol": "Complemento de 80%:20%.",
+      "hyp": "Pode usar a interseção como nenhum.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:modelacao-nenhum-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num inquérito, P(A)=0,7, P(B)=0,5 e P(A∪B)=0,9. A proporção em ambos é...",
+      "o": [
+        "0,1.",
+        "0,2.",
+        "0,3.",
+        "0,4."
+      ],
+      "a": 2,
+      "sol": "0,7+0,5−0,9=0,3.",
+      "hyp": "Pode subtrair a interseção ao total em vez de calculá-la.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:modelacao-inter-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0, P(B)=0,4, então P(A∪B)=...",
+      "o": [
+        "0.",
+        "1.",
+        "não pode ser determinada.",
+        "0,4."
+      ],
+      "a": 3,
+      "sol": "P(A∩B)≤P(A)=0, logo a união tem probabilidade 0+0,4=0,4.",
+      "hyp": "Pode achar que um evento de probabilidade zero altera a união.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:evento-zero-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=1, então para qualquer B, P(A∩B)=...",
+      "o": [
+        "P(B), assumindo A ocorre quase certamente.",
+        "1.",
+        "0.",
+        "P(A)+P(B)."
+      ],
+      "a": 0,
+      "sol": "Quando A tem probabilidade 1, a parte de B fora de A tem probabilidade zero; assim P(A∩B)=P(B).",
+      "hyp": "Pode concluir que a interseção tem probabilidade 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:evento-um-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PR-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-propriedades",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A regra de Laplace deve ser usada diretamente quando...",
+      "o": [
+        "os resultados têm probabilidades arbitrárias.",
+        "os resultados elementares são equiprováveis e o espaço é finito.",
+        "o espaço é necessariamente infinito.",
+        "há apenas um acontecimento."
+      ],
+      "a": 1,
+      "sol": "A razão casos favoráveis/casos possíveis pressupõe equiprobabilidade dos resultados elementares.",
+      "hyp": "Pode aplicar contagem simples mesmo quando resultados não são equiprováveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-propriedades:laplace-condicao-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
