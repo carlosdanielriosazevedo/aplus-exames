@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-pe",
+  "subtopicId": "11-pe-declive-inclinacao",
+  "subtopic": "Declive e inclinação",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha declive por pontos, relação m=tan α, inclinação, paralelismo, perpendicularidade e modelação de inclinações. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11PE-DI-001",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O declive de uma reta não vertical que passa por A(x1,y1) e B(x2,y2) é...",
+      "o": [
+        "(y2−y1)/(x2−x1).",
+        "(x2−x1)/(y2−y1).",
+        "(x1+x2)/(y1+y2).",
+        "y2−y1."
+      ],
+      "a": 0,
+      "sol": "O declive é a razão entre a variação vertical e a variação horizontal.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:formula-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-002",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o declive da reta que passa por (0,0) e (2,6)?",
+      "o": [
+        "2.",
+        "3.",
+        "6.",
+        "1/3."
+      ],
+      "a": 1,
+      "sol": "m=(6−0)/(2−0)=3.",
+      "hyp": "Pode usar Δx/Δy.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-003",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o declive da reta que passa por (1,4) e (3,0)?",
+      "o": [
+        "2.",
+        "−1/2.",
+        "−2.",
+        "1/2."
+      ],
+      "a": 2,
+      "sol": "m=(0−4)/(3−1)=−2.",
+      "hyp": "Pode perder o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-004",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma reta horizontal tem declive...",
+      "o": [
+        "1.",
+        "indefinido.",
+        "infinito.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "A variação vertical é zero.",
+      "hyp": "Pode confundir com reta vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-005",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma reta vertical tem declive...",
+      "o": [
+        "não definido.",
+        "0.",
+        "1.",
+        "−1."
+      ],
+      "a": 0,
+      "sol": "Na fórmula do declive, Δx=0, o que levaria a divisão por zero.",
+      "hyp": "Pode atribuir declive 0 a qualquer reta alinhada com um eixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-006",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se uma reta tem declive positivo, a sua inclinação α relativamente ao semieixo Ox positivo satisfaz...",
+      "o": [
+        "π/2<α<π.",
+        "0<α<π/2.",
+        "α=π/2.",
+        "α=0."
+      ],
+      "a": 1,
+      "sol": "Declive positivo corresponde a ângulo agudo com o eixo Ox positivo.",
+      "hyp": "Pode confundir sinal do declive com quadrante do vetor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:sinal-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-007",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se uma reta tem declive negativo, a inclinação α em [0,π[ satisfaz...",
+      "o": [
+        "0<α<π/2.",
+        "α=0.",
+        "π/2<α<π.",
+        "α=π/2."
+      ],
+      "a": 2,
+      "sol": "Declive negativo corresponde a ângulo obtuso.",
+      "hyp": "Pode achar que inclinação pode ser negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:sinal-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-008",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A relação entre declive m e inclinação α é...",
+      "o": [
+        "m=sin α.",
+        "m=cos α.",
+        "m=1/tan α sempre.",
+        "m=tan α."
+      ],
+      "a": 3,
+      "sol": "Para retas não verticais, o declive é a tangente do ângulo de inclinação.",
+      "hyp": "Pode usar seno ou cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:m-tan-alpha",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-009",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se α=45°, então o declive é...",
+      "o": [
+        "1.",
+        "√3.",
+        "1/2.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "tan45°=1.",
+      "hyp": "Pode confundir com sin45°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:m-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-010",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se α=60°, então o declive é...",
+      "o": [
+        "1/√3.",
+        "√3.",
+        "1.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "tan60°=√3.",
+      "hyp": "Pode trocar com tan30°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:m-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-011",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se α=135°, então o declive é...",
+      "o": [
+        "1.",
+        "−√3.",
+        "−1.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "tan135°=−1.",
+      "hyp": "Pode ignorar o sinal no 2.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:m-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-012",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta tem declive 1/√3. Uma inclinação possível em [0,π[ é...",
+      "o": [
+        "60°.",
+        "120°.",
+        "150°.",
+        "30°."
+      ],
+      "a": 3,
+      "sol": "tan30°=1/√3.",
+      "hyp": "Pode usar a tangente recíproca errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-por-m",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-013",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta tem declive −√3. Qual é a sua inclinação em [0,π[?",
+      "o": [
+        "120°.",
+        "60°.",
+        "150°.",
+        "30°."
+      ],
+      "a": 0,
+      "sol": "tan120°=−√3.",
+      "hyp": "Pode escolher o ângulo de referência sem ajustar o quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-por-m",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-014",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas retas não verticais com o mesmo declive são...",
+      "o": [
+        "perpendiculares.",
+        "paralelas ou coincidentes.",
+        "sempre coincidentes.",
+        "sempre secantes."
+      ],
+      "a": 1,
+      "sol": "Mesmo declive significa mesma direção.",
+      "hyp": "Pode concluir coincidência sem comparar posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:mesmo-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-015",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas retas de declives m1 e m2 são perpendiculares, quando ambas não são verticais, se...",
+      "o": [
+        "m1=m2.",
+        "m1+m2=0.",
+        "m1m2=−1.",
+        "m1m2=1."
+      ],
+      "a": 2,
+      "sol": "Declives perpendiculares são recíprocos e de sinais opostos.",
+      "hyp": "Pode confundir opostos com recíprocos opostos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declives-perpendiculares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-016",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta de declive 2 é perpendicular a outra de declive...",
+      "o": [
+        "1/2.",
+        "−2.",
+        "2.",
+        "−1/2."
+      ],
+      "a": 3,
+      "sol": "2×(−1/2)=−1.",
+      "hyp": "Pode usar apenas o oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-017",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma reta de declive −3 é perpendicular a uma de declive...",
+      "o": [
+        "1/3.",
+        "−1/3.",
+        "3.",
+        "−3."
+      ],
+      "a": 0,
+      "sol": "(−3)(1/3)=−1.",
+      "hyp": "Pode perder a troca de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-018",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma reta vertical é perpendicular a...",
+      "o": [
+        "qualquer reta de declive 1.",
+        "uma reta horizontal.",
+        "outra vertical.",
+        "nenhuma reta."
+      ],
+      "a": 1,
+      "sol": "Vertical e horizontal formam ângulo reto.",
+      "hyp": "Pode tentar aplicar uma fórmula com declive vertical indefinido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:vertical-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-019",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o declive da reta paralela a y=4x−7?",
+      "o": [
+        "−4.",
+        "7.",
+        "4.",
+        "−7."
+      ],
+      "a": 2,
+      "sol": "Retas paralelas têm o mesmo declive.",
+      "hyp": "Pode usar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:paralela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-020",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o declive de uma reta perpendicular a y=(1/3)x+2?",
+      "o": [
+        "3.",
+        "−1/3.",
+        "1/3.",
+        "−3."
+      ],
+      "a": 3,
+      "sol": "O recíproco oposto de 1/3 é −3.",
+      "hyp": "Pode usar apenas o oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-021",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta que passa por (1,2) e (4,8) tem inclinação...",
+      "o": [
+        "arctan 2.",
+        "arctan 1/2.",
+        "arctan 6.",
+        "60° obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "m=(8−2)/(4−1)=2, logo α=arctan2.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:inclinacao-arctan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-022",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se uma reta tem inclinação 150°, o seu declive é...",
+      "o": [
+        "1/√3.",
+        "−1/√3.",
+        "−√3.",
+        "√3."
+      ],
+      "a": 1,
+      "sol": "tan150°=−tan30°=−1/√3.",
+      "hyp": "Pode errar o valor notável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:m-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-023",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se uma reta tem declive 0, então a inclinação em [0,π[ é...",
+      "o": [
+        "π/2.",
+        "π.",
+        "0.",
+        "π/4."
+      ],
+      "a": 2,
+      "sol": "tan0=0.",
+      "hyp": "Pode usar π, que não pertence ao intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-024",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "À medida que a inclinação α se aproxima de π/2 pela esquerda, tan α...",
+      "o": [
+        "tende para 0.",
+        "tende para −∞.",
+        "fica constante.",
+        "cresce sem limite."
+      ],
+      "a": 3,
+      "sol": "A tangente cresce e não está definida em π/2.",
+      "hyp": "Pode confundir com seno ou cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:tan-perto-pi2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-025",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "À medida que α se aproxima de π/2 pela direita, tan α...",
+      "o": [
+        "decresce sem limite, tendendo a −∞.",
+        "tende a +∞.",
+        "tende a 0.",
+        "fica igual a 1."
+      ],
+      "a": 0,
+      "sol": "Logo após π/2, a tangente é grande em módulo e negativa.",
+      "hyp": "Pode ignorar a mudança de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:tan-perto-pi2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-026",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a inclinação de uma reta de declive −1 em [0,π[?",
+      "o": [
+        "π/4.",
+        "3π/4.",
+        "5π/4.",
+        "−π/4."
+      ],
+      "a": 1,
+      "sol": "tan(3π/4)=−1.",
+      "hyp": "Pode dar ângulo fora do intervalo de inclinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-menos1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-027",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta que passa por (−2,1) e (2,−7) tem declive...",
+      "o": [
+        "2.",
+        "−1/2.",
+        "−2.",
+        "1/2."
+      ],
+      "a": 2,
+      "sol": "m=(−7−1)/(2−(−2))=−8/4=−2.",
+      "hyp": "Pode errar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-028",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A inclinação da reta do item anterior é...",
+      "o": [
+        "arctan 2.",
+        "π/2.",
+        "arctan(1/2).",
+        "π−arctan 2."
+      ],
+      "a": 3,
+      "sol": "Como m<0, a inclinação está no 2.º quadrante: α=π−arctan2.",
+      "hyp": "Pode usar um ângulo agudo sem ajustar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-029",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se duas retas têm inclinações que diferem de 90°, então elas são...",
+      "o": [
+        "perpendiculares.",
+        "paralelas.",
+        "coincidentes.",
+        "horizontais."
+      ],
+      "a": 0,
+      "sol": "A diferença angular de π/2 define perpendicularidade.",
+      "hyp": "Pode confundir com diferença de 180°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:diferenca-inclinacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-030",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se duas retas têm a mesma inclinação em [0,π[, então são...",
+      "o": [
+        "perpendiculares.",
+        "paralelas ou coincidentes.",
+        "necessariamente a mesma reta.",
+        "sempre distintas."
+      ],
+      "a": 1,
+      "sol": "A inclinação determina a direção, não a posição.",
+      "hyp": "Pode confundir direção com posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:mesma-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-031",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta passa por (0,2) e tem inclinação 60°. Qual é uma equação?",
+      "o": [
+        "y=(1/√3)x+2.",
+        "y=60x+2.",
+        "y=√3x+2.",
+        "y=√3x−2."
+      ],
+      "a": 2,
+      "sol": "m=tan60°=√3 e b=2.",
+      "hyp": "Pode usar o ângulo como declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:equacao-por-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-032",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta passa por (1,−1) e tem inclinação 135°. Qual é a sua equação?",
+      "o": [
+        "y=x−2.",
+        "y=−x−2.",
+        "y=x.",
+        "y=−x."
+      ],
+      "a": 3,
+      "sol": "m=−1; usando o ponto, −1=−1+b => b=0.",
+      "hyp": "Pode errar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:equacao-por-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-033",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de inclinação 30° passa pela origem. Qual é a sua equação?",
+      "o": [
+        "y=x/√3.",
+        "y=√3x.",
+        "y=x.",
+        "y=−x/√3."
+      ],
+      "a": 0,
+      "sol": "m=tan30°=1/√3.",
+      "hyp": "Pode trocar 30° por 60°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:equacao-por-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-034",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a inclinação de uma reta paralela a y=√3x−5?",
+      "o": [
+        "π/6.",
+        "π/3.",
+        "2π/3.",
+        "5π/6."
+      ],
+      "a": 1,
+      "sol": "m=√3 e α=π/3.",
+      "hyp": "Pode confundir com o ângulo de referência de declive 1/√3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:paralela-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-035",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a inclinação de uma reta perpendicular a y=√3x?",
+      "o": [
+        "π/6.",
+        "2π/3.",
+        "5π/6.",
+        "π/3."
+      ],
+      "a": 2,
+      "sol": "A perpendicular tem declive −1/√3, cuja inclinação é 150°=5π/6.",
+      "hyp": "Pode usar apenas o ângulo de referência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:perpendicular-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-036",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma estrada sobe 1 m por cada 10 m na horizontal. O declive é...",
+      "o": [
+        "10.",
+        "1.",
+        "11.",
+        "0,1."
+      ],
+      "a": 3,
+      "sol": "m=Δy/Δx=1/10.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:modelacao-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-037",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Na estrada anterior, a inclinação é aproximadamente...",
+      "o": [
+        "arctan(0,1).",
+        "arctan(10).",
+        "sin⁻¹(0,1) obrigatoriamente.",
+        "0,1 rad exatamente."
+      ],
+      "a": 0,
+      "sol": "Declive e inclinação relacionam-se por m=tan α.",
+      "hyp": "Pode confundir tangente com seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:modelacao-inclinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-038",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta tem declive m e a perpendicular tem declive 4. Então m=",
+      "o": [
+        "1/4.",
+        "−1/4.",
+        "−4.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "m×4=−1.",
+      "hyp": "Pode usar apenas o oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-039",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta tem inclinação α=arctan(2). A perpendicular pode ter inclinação...",
+      "o": [
+        "α+π.",
+        "π−α sempre.",
+        "α+π/2 reduzida a [0,π[.",
+        "α/2."
+      ],
+      "a": 2,
+      "sol": "Perpendiculares diferem angularmente de π/2.",
+      "hyp": "Pode somar π, que preserva a direção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-040",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se tan α=−2 e α∈[0,π[, então...",
+      "o": [
+        "α está no 1.º quadrante.",
+        "α=π/2.",
+        "α=0.",
+        "α está no 2.º quadrante."
+      ],
+      "a": 3,
+      "sol": "Tangente negativa no intervalo [0,π[ implica 2.º quadrante.",
+      "hyp": "Pode permitir um ângulo negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:quadrante-alpha",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-041",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O declive depende da escala escolhida nos eixos se os eixos não usam a mesma unidade gráfica?",
+      "o": [
+        "Sim, a inclinação visual pode mudar embora a relação algébrica nas unidades permaneça definida.",
+        "Não, nunca.",
+        "Só em retas horizontais.",
+        "Só em retas verticais."
+      ],
+      "a": 0,
+      "sol": "A aparência geométrica num desenho com escalas diferentes pode distorcer o ângulo.",
+      "hyp": "Pode assumir que qualquer representação gráfica preserva visualmente os ângulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:escala-grafica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-042",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta passa por A=(a,b) e B=(a+3,b−6). O seu declive é...",
+      "o": [
+        "2.",
+        "−2.",
+        "−1/2.",
+        "1/2."
+      ],
+      "a": 1,
+      "sol": "Δy=−6 e Δx=3, logo m=−2.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-043",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de declive m>0 faz um ângulo agudo α com Ox. Se m aumenta, α...",
+      "o": [
+        "diminui.",
+        "fica igual.",
+        "aumenta.",
+        "torna-se negativo."
+      ],
+      "a": 2,
+      "sol": "tan α é crescente em ]0,π/2[.",
+      "hyp": "Pode confundir inclinação com recíproco do declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:monotonia-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-044",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma reta tem inclinação 120°, o declive da perpendicular é...",
+      "o": [
+        "−1/√3.",
+        "√3.",
+        "−√3.",
+        "1/√3."
+      ],
+      "a": 3,
+      "sol": "m=tan120°=−√3; perpendicular tem declive 1/√3.",
+      "hyp": "Pode usar o mesmo sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:declive-perpendicular-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-045",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma reta tem declive 5/12, qual é o declive de uma perpendicular?",
+      "o": [
+        "−12/5.",
+        "12/5.",
+        "−5/12.",
+        "5/12."
+      ],
+      "a": 0,
+      "sol": "É o recíproco oposto.",
+      "hyp": "Pode apenas trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:reciproco-oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-046",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de inclinação 30° é perpendicular a uma reta de inclinação...",
+      "o": [
+        "60°.",
+        "120°.",
+        "150°.",
+        "210° em [0,π[."
+      ],
+      "a": 1,
+      "sol": "30°+90°=120°.",
+      "hyp": "Pode confundir suplementaridade com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:alpha-perpendicular-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-047",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um telhado sobe 4 m por cada 3 m na horizontal. Qual é o declive?",
+      "o": [
+        "3/4.",
+        "7/3.",
+        "4/3.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "Declive=variação vertical/horizontal=4/3.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:modelacao-telhado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-048",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No telhado anterior, a inclinação é...",
+      "o": [
+        "arctan(3/4).",
+        "arcsin(4/3).",
+        "4/3 rad exatamente.",
+        "arctan(4/3)."
+      ],
+      "a": 3,
+      "sol": "m=tan α.",
+      "hyp": "Pode usar seno ou considerar o declive como ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:modelacao-telhado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-049",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma linha de tendência aumenta 15 unidades em y quando x aumenta 6. O declive é...",
+      "o": [
+        "2,5.",
+        "0,4.",
+        "9.",
+        "21."
+      ],
+      "a": 0,
+      "sol": "15/6=2,5.",
+      "hyp": "Pode dividir na ordem inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:taxa-variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-DI-050",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-declive-inclinacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma trajetória tem declive −0,5. Isto significa que, por cada aumento de 2 unidades em x, y varia aproximadamente...",
+      "o": [
+        "+1 unidade.",
+        "−1 unidade.",
+        "−2 unidades.",
+        "+0,5 unidade."
+      ],
+      "a": 1,
+      "sol": "Δy=mΔx=−0,5×2=−1.",
+      "hyp": "Pode interpretar o declive como variação total fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-declive-inclinacao:interpretar-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
