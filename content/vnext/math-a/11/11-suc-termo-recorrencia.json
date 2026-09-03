@@ -314,7 +314,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Na sucessão anterior, a_3=",
+      "q": "Se a_1=3 e a_{n+1}=a_n+2n, então a_3=",
       "o": [
         "7.",
         "11.",
