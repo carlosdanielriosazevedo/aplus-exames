@@ -530,7 +530,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "O valor máximo da função anterior é...",
+      "q": "Para f(x)=−x²+6x−5, qual é o valor máximo?",
       "o": [
         "3.",
         "−5.",
@@ -611,7 +611,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A receita máxima no item anterior é...",
+      "q": "Para R(q)=20q−q², qual é a receita máxima?",
       "o": [
         "200.",
         "20.",
@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "O custo mínimo do item anterior é...",
+      "q": "Para C(x)=x²−12x+50, qual é o custo mínimo?",
       "o": [
         "14.",
         "50.",
@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A área do retângulo anterior é máxima para...",
+      "q": "Um retângulo tem perímetro 20 e área A(x)=x(10−x), onde x é um lado. Para que valor de x a área é máxima?",
       "o": [
         "x=10.",
         "x=2,5.",
@@ -746,7 +746,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "O resultado anterior mostra que, entre retângulos de perímetro fixo, a área é máxima quando...",
+      "q": "Entre todos os retângulos com perímetro fixo, a área é máxima quando...",
       "o": [
         "um lado tende a0.",
         "os lados são muito diferentes.",
@@ -800,7 +800,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "No modelo anterior, P'(t)/P(t) é...",
+      "q": "Se P(t)=1000e^{0,05t}, então P'(t)/P(t) é...",
       "o": [
         "50.",
         "0,05.",
@@ -1016,7 +1016,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "No caso anterior, f tem...",
+      "q": "Se f'(x)=(x−1)(x+2), então f tem...",
       "o": [
         "mínimo em−2 e máximo em1.",
         "máximo local em −2 e mínimo local em1.",
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "A altura máxima do projétil anterior é...",
+      "q": "A altura de um projétil é h(t)=−5t²+20t+2. Qual é a altura máxima?",
       "o": [
         "22.",
         "42.",
@@ -1259,7 +1259,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "O lucro máximo no item anterior é...",
+      "q": "Uma função lucro é L(q)=−2q²+80q−300. Qual é o lucro máximo?",
       "o": [
         "300.",
         "800.",
@@ -1340,7 +1340,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Antes de otimizar o volume da caixa anterior, o domínio fisicamente admissível é...",
+      "q": "Uma caixa sem tampa é feita cortando quadrados de lado x nos cantos de uma folha 20×30. Antes de otimizar V(x)=x(20−2x)(30−2x), qual é o domínio fisicamente admissível?",
       "o": [
         "0<x<20.",
         "0<x<10.",
