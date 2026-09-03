@@ -235,10 +235,10 @@
       "cognitive": "Interpretação",
       "q": "Uma oferta paga 1 400 € em 12 prestações e outra 1 200 € em 14 prestações. Qual é a comparação anual?",
       "o": [
-        "A primeira é maior em 0 €; ambas dão 16 800 €.",
-        "A primeira é maior em 0 €.",
+        "São iguais: 16 800 € por ano.",
         "A segunda é maior em 400 €.",
-        "A primeira é maior em 1 200 €."
+        "A primeira é maior em 1 200 €.",
+        "A segunda é maior em 1 200 €."
       ],
       "a": 0,
       "sol": "1 400×12=16 800 € e 1 200×14=16 800 €. Os totais anuais são iguais.",
