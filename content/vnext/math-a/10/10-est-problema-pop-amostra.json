@@ -125,7 +125,7 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "No estudo anterior, qual é a amostra?",
+      "q": "Pretende-se estudar o tempo diário de estudo dos 600 alunos de uma escola e são inquiridos 80 alunos. Qual é a amostra?",
       "o": [
         "Os 80 alunos inquiridos.",
         "Os 600 alunos.",
@@ -692,7 +692,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "No mesmo estudo, a nota do teste é...",
+      "q": "Uma escola quer estudar a nota do último teste de Matemática de todos os alunos do 10.º ano e seleciona 60 alunos. A nota do teste é...",
       "o": [
         "a população.",
         "a variável estatística.",
@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No estudo anterior, se o objetivo é a produção de 10 000 aparelhos, qual combinação está correta?",
+      "q": "Pretende-se estudar a duração de bateria de uma produção de 10 000 aparelhos, testando uma amostra de 40. Qual combinação está correta?",
       "o": [
         "População=40; amostra=10 000; variável=marca.",
         "População=10 000 aparelhos; amostra=40; variável=duração da bateria.",
