@@ -881,7 +881,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na função anterior, f(1)=",
+      "q": "Considere f(x)=x+2 para x≤1 e f(x)=3x para x>1. Qual é f(1)?",
       "o": [
         "3",
         "2",
@@ -962,7 +962,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na função anterior, o valor do primeiro ramo quando x se aproxima de 2 é aproximadamente 3, enquanto f(2)=5. Isso sugere...",
+      "q": "Considere f(x)=x+1 para x<2 e f(x)=5 para x≥2. Quando x se aproxima de 2 pela esquerda, os valores aproximam-se de 3, mas f(2)=5. Isso sugere...",
       "o": [
         "continuidade perfeita.",
         "um zero em x=2.",
