@@ -317,7 +317,7 @@
       "q": "Para f(x)=x^2, a tangente em x=2 tem equacao",
       "o": [
         "y=4x+4",
-        "y=4x+4",
+        "y=2x",
         "x=2",
         "y=4x-4"
       ],
@@ -332,7 +332,7 @@
       "signature": "11-cd-tangente:equacao-tangente:12",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-TAN-013",
@@ -640,8 +640,8 @@
       "cognitive": "Aplicacao",
       "q": "Para f(x)=4x^2, a tangente em x=0 tem equacao",
       "o": [
-        "y=0x+0",
-        "y=0x+0",
+        "y=4x",
+        "y=4",
         "x=0",
         "y=0"
       ],
@@ -656,7 +656,7 @@
       "signature": "11-cd-tangente:equacao-tangente:24",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-TAN-025",
@@ -966,7 +966,7 @@
       "o": [
         "5",
         "2",
-        "5",
+        "-3",
         "4"
       ],
       "a": 3,
@@ -980,7 +980,7 @@
       "signature": "11-cd-tangente:ler-declive:36",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-TAN-037",
