@@ -474,3 +474,21 @@ Próxima matéria: **12.º opcional — Introdução à inferência estatística
 - **Total vNext: 5 650/5 650 (100%)**
 
 Estado: banco editorial completo em **protótipo**, ainda não ligado ao motor live. O passo seguinte é QA global matemático/estrutural/pedagógico, deduplicação semântica, validação curricular e integração segura com o scope por ano e opcionais do 12.º.
+
+
+## QA estrutural global
+
+Em 2026-09-03 foi concluída uma primeira passagem estrutural aos **113 lotes / 5 650 perguntas**.
+
+Foram verificados, entre outros:
+- 50 perguntas por lote;
+- IDs e textos locais únicos;
+- quatro opções por pergunta e sem opções duplicadas;
+- índice de resposta válido;
+- distribuição editorial 13 / 13 / 12 / 12;
+- nos opcionais do 12.º, metadados obrigatórios e contextos Mission / Training / Exam.
+
+As anomalias estruturais encontradas foram corrigidas. Relatório detalhado:
+`docs/content-vnext-structural-qa-2026-09-03.md`.
+
+**Isto não equivale a validação matemática/pedagógica final.** O banco permanece em protótipo e desligado do motor live.
