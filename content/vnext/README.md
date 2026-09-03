@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **3 650 perguntas**
-- Progresso bruto: **64,60%**
+- Concluído em rascunho: **4 050 perguntas**
+- Progresso bruto: **71,68%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -330,3 +330,29 @@ Próxima matéria: **12.º — Números complexos**.
 - Total vNext: **3 650/~5 650 (64,60%)**
 
 Próxima matéria: **12.º — Probabilidade**.
+
+
+### 12.º ano — Probabilidade
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Fenómeno aleatório, espaço de resultados e acontecimentos | 50 | 50 | lote completo em protótipo |
+| Probabilidade e propriedades elementares | 50 | 50 | lote completo em protótipo |
+| Probabilidade condicionada | 50 | 50 | lote completo em protótipo |
+| Regra do produto e árvores de probabilidade | 50 | 50 | lote completo em protótipo |
+| Tabelas de contingência e independência | 50 | 50 | lote completo em protótipo |
+| Probabilidade total e problemas em cadeia | 50 | 50 | lote completo em protótipo |
+| Variáveis aleatórias discretas e função massa | 50 | 50 | lote completo em protótipo |
+| Valor médio/dispersão de modelos e Modelo Normal | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 4 050 perguntas
+
+- **10.º ano completo: 1 550/1 550**
+- **11.º ano completo: 1 750/1 750**
+- 12.º — Números complexos: **350/350**
+- 12.º — Probabilidade: **400/400**
+- 12.º ano obrigatório acumulado: **750/1 600**
+- Total vNext: **4 050/~5 650 (71,68%)**
+
+Próxima matéria: **12.º — Funções exponenciais e logarítmicas**.
