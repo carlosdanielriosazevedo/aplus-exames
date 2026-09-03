@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-ie",
+  "subtopicId": "12-ie-tlc",
+  "subtopic": "Teorema Limite Central em contexto introdutório",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha TLC para médias/somas, padronização, erro padrão, regras de aproximação, ligação Binomial-Normal e interpretação responsável. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12IE-TLC-001",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O Teorema Limite Central descreve, em termos gerais, o comportamento...",
+      "o": [
+        "da distribuição da média/soma de muitas observações.",
+        "apenas da mediana populacional.",
+        "de qualquer dado individual.",
+        "só de amostras de tamanho1."
+      ],
+      "a": 0,
+      "sol": "Sob condições adequadas, médias/somas normalizadas aproximam uma distribuição Normal.",
+      "hyp": "Pode confundir dados individuais com médias amostrais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:ideia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-002",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O TLC diz que, para n suficientemente grande e condições adequadas, X̄ é aproximadamente...",
+      "o": [
+        "Uniforme.",
+        "Normal.",
+        "Exponencial.",
+        "Binomial sempre."
+      ],
+      "a": 1,
+      "sol": "A distribuição de amostragem da média aproxima-se da Normal.",
+      "hyp": "Pode confundir distribuição populacional e amostral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:forma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-003",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A média aproximada da distribuição de X̄ é...",
+      "o": [
+        "μ/n.",
+        "nμ.",
+        "μ.",
+        "σ."
+      ],
+      "a": 2,
+      "sol": "E(X̄)=μ.",
+      "hyp": "Pode dividir a média por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-004",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O desvio padrão de X̄ é...",
+      "o": [
+        "σ/n.",
+        "σ√n.",
+        "nσ.",
+        "σ/√n."
+      ],
+      "a": 3,
+      "sol": "É o erro padrão da média.",
+      "hyp": "Pode dividir por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-005",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "O TLC não afirma que a população original...",
+      "o": [
+        "se torna Normal.",
+        "tem média μ.",
+        "tem desvio padrão σ.",
+        "pode gerar amostras."
+      ],
+      "a": 0,
+      "sol": "Quem tende à Normal é a distribuição de médias/somas, não os dados individuais.",
+      "hyp": "Pode pensar que aumentar n transforma a população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:nao-populacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-006",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se a população já é Normal, a média amostral é Normal...",
+      "o": [
+        "apenas para n≥30.",
+        "para qualquer n, sob amostragem independente usual.",
+        "apenas para n≥100.",
+        "nunca exatamente."
+      ],
+      "a": 1,
+      "sol": "Combinações lineares de Normais são Normais.",
+      "hyp": "Pode aplicar a regra prática n≥30 como necessidade universal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:normal-exata",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-007",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para população muito assimétrica, normalmente precisamos de...",
+      "o": [
+        "n menor.",
+        "σ=0.",
+        "n maior para boa aproximação Normal.",
+        "média zero."
+      ],
+      "a": 2,
+      "sol": "A velocidade de aproximação depende da forma da população.",
+      "hyp": "Pode usar um limiar fixo para todos os casos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:assimetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-008",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A regra 'n≥30' é...",
+      "o": [
+        "uma condição matemática necessária e suficiente.",
+        "válida só para proporções.",
+        "sempre falsa.",
+        "uma heurística, não uma lei universal."
+      ],
+      "a": 3,
+      "sol": "O tamanho necessário depende da distribuição e do objetivo.",
+      "hyp": "Pode tratar regra prática como teorema.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:regra30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-009",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se μ=100, σ=20 e n=100, então X̄ tem aproximadamente média...",
+      "o": [
+        "100.",
+        "10.",
+        "20.",
+        "1000."
+      ],
+      "a": 0,
+      "sol": "A média de X̄ é μ.",
+      "hyp": "Pode dividir por√n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-010",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No caso anterior, o erro padrão é...",
+      "o": [
+        "20.",
+        "2.",
+        "0,2.",
+        "10."
+      ],
+      "a": 1,
+      "sol": "20/√100=2.",
+      "hyp": "Pode dividir por100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-011",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Assim, X̄ é aproximadamente N(100,2²), se a notação usar variância no segundo parâmetro. Isto significa desvio padrão...",
+      "o": [
+        "4.",
+        "100.",
+        "2.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "2² é a variância, logo o desvio padrão é2.",
+      "hyp": "Pode confundir variância e desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:notacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-012",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se μ=50, σ=12 e n=36, o erro padrão é...",
+      "o": [
+        "12.",
+        "6.",
+        "1/3.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "12/6=2.",
+      "hyp": "Pode dividir por36.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-013",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Aumentar n estreita a distribuição de X̄ porque...",
+      "o": [
+        "o erro padrão diminui.",
+        "μ diminui.",
+        "σ populacional desaparece.",
+        "a população fica menor."
+      ],
+      "a": 0,
+      "sol": "σ/√n cai com n.",
+      "hyp": "Pode confundir parâmetros populacionais e amostrais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:concentracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-014",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se n passa de25 para100, o erro padrão...",
+      "o": [
+        "fica um quarto.",
+        "fica metade.",
+        "duplica.",
+        "não muda."
+      ],
+      "a": 1,
+      "sol": "√100/√25=2.",
+      "hyp": "Pode usar a razão n diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-015",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para a soma S_n=X1+...+Xn, E(S_n)=",
+      "o": [
+        "μ.",
+        "μ/n.",
+        "nμ.",
+        "nσ."
+      ],
+      "a": 2,
+      "sol": "As médias somam-se: nμ.",
+      "hyp": "Pode confundir soma e média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:soma-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-016",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se as Xi são independentes com variância σ², Var(S_n)=",
+      "o": [
+        "σ²/n.",
+        "n²σ².",
+        "σ².",
+        "nσ²."
+      ],
+      "a": 3,
+      "sol": "Variâncias de independentes somam-se.",
+      "hyp": "Pode quadrar n indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:soma-var",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-017",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Logo, o desvio padrão de S_n é...",
+      "o": [
+        "σ√n.",
+        "σ/n.",
+        "σ/√n.",
+        "nσ."
+      ],
+      "a": 0,
+      "sol": "√(nσ²)=σ√n.",
+      "hyp": "Pode usar a fórmula da média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:soma-dp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-018",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A soma fica mais dispersa em termos absolutos com n, mas a média fica...",
+      "o": [
+        "mais dispersa.",
+        "menos dispersa.",
+        "com o mesmo erro padrão.",
+        "sem média."
+      ],
+      "a": 1,
+      "sol": "Soma tem DP σ√n; média tem DP σ/√n.",
+      "hyp": "Pode pensar que ambas se comportam igual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:soma-vs-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-019",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se Xi têm μ=5, σ=2 e n=100, a soma tem média...",
+      "o": [
+        "5.",
+        "50.",
+        "500.",
+        "200."
+      ],
+      "a": 2,
+      "sol": "100×5=500.",
+      "hyp": "Pode usar média da observação individual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-020",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, o desvio padrão da soma é...",
+      "o": [
+        "2.",
+        "0,2.",
+        "200.",
+        "20."
+      ],
+      "a": 3,
+      "sol": "2√100=20.",
+      "hyp": "Pode usar σ/√n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-021",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Suponha X̄≈N(100,2²). O valor z associado a X̄=104 é...",
+      "o": [
+        "2.",
+        "1.",
+        "4.",
+        "0,5."
+      ],
+      "a": 0,
+      "sol": "z=(104−100)/2=2.",
+      "hyp": "Pode dividir pela variância4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:padronizar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-022",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com X̄≈N(50,3²), o valor z de44 é...",
+      "o": [
+        "2.",
+        "−2.",
+        "−6.",
+        "−1."
+      ],
+      "a": 1,
+      "sol": "(44−50)/3=−2.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:padronizar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-023",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma média amostral 2 erros padrão acima de μ corresponde a...",
+      "o": [
+        "z=−2.",
+        "z=μ+2.",
+        "z=2.",
+        "probabilidade2."
+      ],
+      "a": 2,
+      "sol": "z mede número de erros padrão desde a média.",
+      "hyp": "Pode confundir z e valor original.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:z",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-024",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄≈N(80,4²), então P(X̄≤80) é aproximadamente...",
+      "o": [
+        "0.",
+        "1.",
+        "0,95.",
+        "0,5."
+      ],
+      "a": 3,
+      "sol": "A Normal é simétrica em torno da média.",
+      "hyp": "Pode achar que a média é limite inferior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-025",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄≈N(80,4²), P(76≤X̄≤84) corresponde a...",
+      "o": [
+        "P(−1≤Z≤1).",
+        "P(−4≤Z≤4).",
+        "P(0≤Z≤1).",
+        "P(Z≤1)."
+      ],
+      "a": 0,
+      "sol": "76 e84 estão a um desvio padrão de80.",
+      "hyp": "Pode usar diferenças brutas como z.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:intervalo-z",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-026",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Aproximadamente 68% de uma Normal está entre...",
+      "o": [
+        "μ−2σ e μ+2σ.",
+        "μ−σ e μ+σ.",
+        "μ−3σ e μ+3σ.",
+        "0 e μ."
+      ],
+      "a": 1,
+      "sol": "É a regra empírica 68-95-99,7.",
+      "hyp": "Pode trocar níveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:regra68",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-027",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Aproximadamente 95% está entre...",
+      "o": [
+        "μ−σ e μ+σ.",
+        "μ−3σ e μ+3σ.",
+        "μ−2σ e μ+2σ.",
+        "μ e μ+2σ."
+      ],
+      "a": 2,
+      "sol": "É a regra aproximada dos dois desvios padrão.",
+      "hyp": "Pode confundir 68% e95%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:regra95",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-028",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se médias de lotes de64 peças têm μ=10g, σ individual=0,8g, o erro padrão é...",
+      "o": [
+        "0,8g.",
+        "0,0125g.",
+        "6,4g.",
+        "0,1g."
+      ],
+      "a": 3,
+      "sol": "0,8/8=0,1.",
+      "hyp": "Pode dividir por64.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:lotes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-029",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, uma média de10,2g está...",
+      "o": [
+        "2 erros padrão acima da média.",
+        "0,2 erros padrão.",
+        "1 erro padrão.",
+        "20 erros padrão."
+      ],
+      "a": 0,
+      "sol": "(10,2−10)/0,1=2.",
+      "hyp": "Pode usar σ individual0,8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:lotes-z",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-030",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O TLC é particularmente útil porque permite...",
+      "o": [
+        "obter μ sem dados.",
+        "aproximar probabilidades de médias/somas mesmo sem população Normal, sob condições.",
+        "eliminar aleatoriedade.",
+        "garantir ausência de viés de seleção."
+      ],
+      "a": 1,
+      "sol": "A forma Normal emerge para estatísticas agregadas.",
+      "hyp": "Pode atribuir ao TLC correção de problemas de desenho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:utilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-031",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Observações fortemente dependentes podem...",
+      "o": [
+        "melhorar sempre a aproximação.",
+        "tornar σ=0.",
+        "invalidar a versão simples do TLC baseada em independência.",
+        "não ter qualquer efeito."
+      ],
+      "a": 2,
+      "sol": "Dependência altera variâncias e condições de convergência.",
+      "hyp": "Pode ignorar a hipótese estrutural.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:dependencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-032",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Outliers extremamente pesados podem exigir...",
+      "o": [
+        "n menor.",
+        "ignorar a variância.",
+        "assumir Normal exata.",
+        "amostras muito maiores ou condições adicionais."
+      ],
+      "a": 3,
+      "sol": "Caudas pesadas tornam a aproximação mais lenta e podem violar condições clássicas se a variância nem existir.",
+      "hyp": "Pode usar o TLC mecanicamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:caudas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-033",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se σ dobra e n fica igual, o erro padrão...",
+      "o": [
+        "dobra.",
+        "fica metade.",
+        "quadruplica.",
+        "não muda."
+      ],
+      "a": 0,
+      "sol": "EP=σ/√n é linear em σ.",
+      "hyp": "Pode aplicar raiz a σ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:sigma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-034",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se σ dobra e queremos manter o mesmo erro padrão, n deve...",
+      "o": [
+        "duplicar.",
+        "quadruplicar.",
+        "ficar metade.",
+        "não mudar."
+      ],
+      "a": 1,
+      "sol": "2σ/√(4n)=σ/√n.",
+      "hyp": "Pode pensar que basta duplicar n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-035",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A aproximação Normal para a média melhora geralmente quando...",
+      "o": [
+        "n diminui.",
+        "σ aumenta.",
+        "n aumenta e não há violações graves das condições.",
+        "μ se aproxima de0."
+      ],
+      "a": 2,
+      "sol": "O TLC é um resultado assintótico em n.",
+      "hyp": "Pode associar qualidade à média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:qualidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-036",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X é Bernoulli(p), a soma de n observações é...",
+      "o": [
+        "Normal exata sempre.",
+        "Poisson sempre.",
+        "Uniforme.",
+        "Binomial(n,p)."
+      ],
+      "a": 3,
+      "sol": "Conta o número de sucessos em n ensaios Bernoulli independentes.",
+      "hyp": "Pode saltar diretamente para a aproximação Normal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:bernoulli",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-037",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A aproximação Normal à Binomial é uma manifestação de...",
+      "o": [
+        "ideias do TLC.",
+        "Teorema de Pitágoras.",
+        "regra do produto escalar.",
+        "derivação."
+      ],
+      "a": 0,
+      "sol": "A soma de Bernoullis normalizada aproxima a Normal.",
+      "hyp": "Pode ver as aproximações como não relacionadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:binomial-normal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-038",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para Binomial(n,p), média e variância são...",
+      "o": [
+        "p e p(1−p).",
+        "np e np(1−p).",
+        "n e p.",
+        "np e √[np(1−p)]."
+      ],
+      "a": 1,
+      "sol": "São os parâmetros da soma de Bernoullis.",
+      "hyp": "Pode confundir variância com desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:binomial-param",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-039",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma correção de continuidade pode ser usada ao aproximar uma variável discreta por Normal porque...",
+      "o": [
+        "a Binomial é contínua.",
+        "a Normal tem média0 sempre.",
+        "a Normal é contínua e a Binomial é discreta.",
+        "p é desconhecido."
+      ],
+      "a": 2,
+      "sol": "Ajusta fronteiras de contagens inteiras por cerca de0,5.",
+      "hyp": "Pode pensar que é correção do tamanho amostral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:correcao-continuidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-040",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Exemplo",
+      "q": "Aproximar P(X≤20) para X Binomial por Normal pode usar fronteira...",
+      "o": [
+        "20.",
+        "19,5 sempre.",
+        "21,5.",
+        "20,5."
+      ],
+      "a": 3,
+      "sol": "A correção típica inclui toda a barra de X=20 até20,5.",
+      "hyp": "Pode deslocar no sentido errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:correcao-continuidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-041",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O TLC é sobre convergência de distribuição, não significa que...",
+      "o": [
+        "cada média amostral fique igual a μ.",
+        "a forma se aproxime da Normal.",
+        "o erro padrão diminua com n.",
+        "possamos padronizar."
+      ],
+      "a": 0,
+      "sol": "Amostras continuam a produzir médias aleatórias.",
+      "hyp": "Pode transformar convergência probabilística em igualdade determinística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:nao-igualdade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-042",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄ tem erro padrão1 para n=100, qual será aproximadamente para n=400?",
+      "o": [
+        "0,25.",
+        "0,5.",
+        "2.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "Quadruplicar n reduz o EP para metade.",
+      "hyp": "Pode usar razão4 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-043",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para reduzir EP de2 para0,5, n deve ser multiplicado por...",
+      "o": [
+        "4.",
+        "8.",
+        "16.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "O EP reduz por fator4; n aumenta por4²=16.",
+      "hyp": "Pode usar o mesmo fator4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-044",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Tempos individuais têm média30min e DP12min. Para n=144, a média de uma amostra tem DP...",
+      "o": [
+        "12min.",
+        "0,083min.",
+        "144min.",
+        "1min."
+      ],
+      "a": 3,
+      "sol": "12/12=1.",
+      "hyp": "Pode dividir por144.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:tempos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-045",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Nesse cenário, uma média de33min corresponde a z...",
+      "o": [
+        "3.",
+        "0,25.",
+        "−3.",
+        "33."
+      ],
+      "a": 0,
+      "sol": "(33−30)/1=3.",
+      "hyp": "Pode usar DP individual12.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:tempos-z",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-046",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma média amostral extrema sob o modelo pode indicar...",
+      "o": [
+        "prova automática de fraude.",
+        "uma amostra rara, modelo inadequado ou mudança real, a investigar.",
+        "que o TLC é falso.",
+        "que μ deve ser igual ao valor observado."
+      ],
+      "a": 1,
+      "sol": "Valores improváveis motivam análise, não conclusões automáticas.",
+      "hyp": "Pode transformar raridade em certeza causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-047",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Padronizar X̄ subtraindo μ e dividindo por σ/√n produz...",
+      "o": [
+        "sempre exatamente uniforme.",
+        "a média populacional.",
+        "uma variável aproximadamente N(0,1) sob o TLC.",
+        "o erro amostral bruto."
+      ],
+      "a": 2,
+      "sol": "É a padronização usual.",
+      "hyp": "Pode dividir pelo σ individual sem √n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:padronizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-048",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Z=(X̄−μ)/(σ/√n), então X̄=μ+zσ/√n. Isto permite...",
+      "o": [
+        "calcular μ sem dados.",
+        "eliminar σ.",
+        "substituir n por z.",
+        "converter quantis z em valores da média amostral."
+      ],
+      "a": 3,
+      "sol": "É a transformação inversa da padronização.",
+      "hyp": "Pode ver z apenas como probabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:quantis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-049",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se o quantil superior de interesse é z≈1,645, μ=100 e EP=2, o ponto de corte é aproximadamente...",
+      "o": [
+        "103,29.",
+        "101,645.",
+        "96,71.",
+        "200."
+      ],
+      "a": 0,
+      "sol": "100+1,645×2=103,29.",
+      "hyp": "Pode somar z sem escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:quantil",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-TLC-050",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-tlc",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "O uso responsável do TLC exige...",
+      "o": [
+        "aplicar n≥30 sem pensar.",
+        "verificar desenho/independência, variância finita e adequação de n à forma da população.",
+        "assumir Normal exata sempre.",
+        "ignorar eventos raros."
+      ],
+      "a": 1,
+      "sol": "A aproximação deve ser justificada no contexto.",
+      "hyp": "Pode tratar o TLC como regra automática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-tlc:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
