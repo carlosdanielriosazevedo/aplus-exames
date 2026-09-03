@@ -449,7 +449,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "O resto da divisão anterior é...",
+      "q": "Na divisão de x³+2x²−x−2 por x+2, qual é o resto?",
       "o": [
         "0.",
         "−2.",
@@ -503,7 +503,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Na divisão anterior, o resto é...",
+      "q": "Na divisão de 2x³−3x²−8x+12 por x−2, qual é o resto?",
       "o": [
         "12.",
         "2.",
@@ -962,7 +962,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Do resultado anterior conclui-se que...",
+      "q": "Se P(x)=x³−4x²+x+6 e P(−1)=0, conclui-se que...",
       "o": [
         "x−1 é fator de P.",
         "P não tem fatores lineares.",
@@ -1016,7 +1016,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Se o quociente do item anterior é x³−4x²+x+6 e P(−1)=0, então uma fatorização parcial é...",
+      "q": "Se P(x)=x⁴−5x³+5x²+5x−6 é divisível por x−1 com quociente x³−4x²+x+6 e P(−1)=0, então uma fatorização parcial é...",
       "o": [
         "P=(x−1)(x+1) automaticamente sem verificar o quociente.",
         "P=(x−1)(x+1)(x²−4x+6)? Não necessariamente; é preciso dividir o quociente por x+1.",
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, P(4)=",
+      "q": "Se a divisão de P por x−4 dá quociente Q e resto 7, então P(4)=",
       "o": [
         "7.",
         "0.",
