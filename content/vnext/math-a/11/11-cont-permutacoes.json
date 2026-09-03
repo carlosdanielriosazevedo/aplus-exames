@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Se as duas tarefas críticas do item anterior devem aparecer consecutivas e numa ordem pré-definida, quantas ordens?",
+      "q": "Numa sequência de 7 tarefas, duas tarefas críticas devem ficar consecutivas e numa ordem pré-definida. Quantas ordens são possíveis?",
       "o": [
         "720.",
         "1440.",
