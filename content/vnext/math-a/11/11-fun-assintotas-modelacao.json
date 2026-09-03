@@ -503,7 +503,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Logo, para a função anterior, uma assíntota oblíqua é...",
+      "q": "Para f(x)=(x²+2x+3)/(x+1)=x+1+2/(x+1), uma assíntota oblíqua é...",
       "o": [
         "y=x+2.",
         "y=2.",
@@ -611,7 +611,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para a função anterior, a assíntota horizontal é...",
+      "q": "Para f(x)=(x+2)/[(x−1)(x+3)], a assíntota horizontal é...",
       "o": [
         "y=1.",
         "y=−3.",
@@ -719,7 +719,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Na função anterior, x=2 corresponde a...",
+      "q": "Para f(x)=(x²−4)/(x²−x−2), que se simplifica no domínio para (x+2)/(x+1) mantendo x=2 excluído, x=2 corresponde a...",
       "o": [
         "uma assíntota vertical.",
         "um zero.",
@@ -1043,7 +1043,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Logo uma assíntota oblíqua da função anterior é...",
+      "q": "Para f(x)=(2x²+3x+1)/(x−1)=2x+5+6/(x−1), uma assíntota oblíqua é...",
       "o": [
         "y=2x+1.",
         "y=6.",
@@ -1097,7 +1097,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Assim, é razoável procurar para a função anterior uma assíntota...",
+      "q": "Para f(x)=(x³+1)/(x²+1), cujo grau do numerador excede o do denominador em 1, é razoável procurar uma assíntota...",
       "o": [
         "oblíqua.",
         "horizontal apenas.",
@@ -1151,7 +1151,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "A assíntota oblíqua da função anterior é...",
+      "q": "Para f(x)=(x³+1)/(x²+1)=x+(−x+1)/(x²+1), a assíntota oblíqua é...",
       "o": [
         "y=x+1.",
         "y=0.",
