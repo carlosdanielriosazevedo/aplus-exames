@@ -584,7 +584,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Na reta anterior, que ponto corresponde a t=2?",
+      "q": "Na reta (x,y,z)=(1,2,3)+t(2,−1,4), que ponto corresponde a t=2?",
       "o": [
         "(3,1,7).",
         "(5,0,11).",
@@ -1097,7 +1097,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, o ponto (1,1,1) pertence a r?",
+      "q": "Considere r: (x,y,z)=(0,0,0)+t(1,2,3). O ponto (1,1,1) pertence a r?",
       "o": [
         "Não.",
         "Sim.",
@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Logo, as retas do caso anterior são...",
+      "q": "Considere r: (x,y,z)=(0,0,0)+t(1,2,3) e s: (x,y,z)=(1,1,1)+u(2,4,6). Sabendo que (1,1,1) não pertence a r, como se classificam as retas?",
       "o": [
         "coincidentes.",
         "paralelas distintas.",
