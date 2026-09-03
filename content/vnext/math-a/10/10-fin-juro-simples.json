@@ -71,7 +71,7 @@
       "year": "10.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, qual é o montante final?",
+      "q": "Um capital de 1 000 € é aplicado durante 1 ano a 5% de juro simples. Qual é o montante final?",
       "o": [
         "1 025 €",
         "1 075 €",
@@ -179,7 +179,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, qual é o montante ao fim de 2 anos?",
+      "q": "Um capital de 1 500 € é aplicado a 6% ao ano durante 2 anos, em juro simples. Qual é o montante final?",
       "o": [
         "1 590 €",
         "1 620 €",
@@ -557,7 +557,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, se o montante for pago integralmente no fim dos 2 anos, qual é o total?",
+      "q": "Um empréstimo didático de 4 000 € usa juro simples de 7% ao ano por 2 anos. Se for pago integralmente no fim, qual é o montante total?",
       "o": [
         "4 560 €",
         "4 280 €",
@@ -1286,7 +1286,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "No caso anterior, qual é o montante total a liquidar no fim, ignorando quaisquer outras comissões?",
+      "q": "Um empréstimo didático de 6 000 € cobra juro simples de 0,8% ao mês durante 10 meses. Qual é o montante total a liquidar no fim, ignorando outras comissões?",
       "o": [
         "6 360 €",
         "6 420 €",
