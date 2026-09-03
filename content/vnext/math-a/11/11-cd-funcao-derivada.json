@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matematica A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-funcao-derivada",
+  "subtopic": "Funcao derivada",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteudo original A+. Trabalha funcao derivada, derivacao de polinomios simples, avaliacao, sinal de f' e interpretacao da monotonia. Nao ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CD-FD-001",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A funcao derivada f' associa a cada x do seu dominio",
+      "o": [
+        "o declive da tangente ao grafico de f nesse x",
+        "o valor f(x)",
+        "a area sob f",
+        "a taxa media desde 0"
+      ],
+      "a": 0,
+      "sol": "A funcao derivada recolhe as taxas instantaneas de variacao.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-002",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(x)>0 num intervalo, f e",
+      "o": [
+        "decrescente",
+        "crescente nesse intervalo",
+        "constante",
+        "necessariamente positiva"
+      ],
+      "a": 1,
+      "sol": "Sinal positivo da derivada indica crescimento.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-003",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(x)<0 num intervalo, f e",
+      "o": [
+        "crescente",
+        "constante",
+        "decrescente nesse intervalo",
+        "necessariamente negativa"
+      ],
+      "a": 2,
+      "sol": "Sinal negativo indica decrescimento.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-004",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(x)=0 em todos os pontos de um intervalo, f e",
+      "o": [
+        "linear crescente",
+        "quadratica",
+        "sempre nula",
+        "constante nesse intervalo"
+      ],
+      "a": 3,
+      "sol": "Derivada identicamente zero implica constancia.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-005",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada da funcao constante f(x)=c e",
+      "o": [
+        "0",
+        "c",
+        "1",
+        "x"
+      ],
+      "a": 0,
+      "sol": "Uma constante nao varia.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-006",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de f(x)=x e",
+      "o": [
+        "x",
+        "1",
+        "0",
+        "2x"
+      ],
+      "a": 1,
+      "sol": "A reta y=x tem declive 1.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-007",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de f(x)=x^2 e",
+      "o": [
+        "x",
+        "x^2",
+        "2x",
+        "2"
+      ],
+      "a": 2,
+      "sol": "Pela regra da potencia.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-008",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de f(x)=x^3 e",
+      "o": [
+        "x^2",
+        "3x",
+        "x^3",
+        "3x^2"
+      ],
+      "a": 3,
+      "sol": "Pela regra da potencia.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-009",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A funcao derivada de uma funcao afim f(x)=mx+b e",
+      "o": [
+        "f'(x)=m",
+        "f'(x)=b",
+        "f'(x)=mx",
+        "f'(x)=m+b"
+      ],
+      "a": 0,
+      "sol": "O declive e constante.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-010",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "O grafico de f' permite estudar diretamente",
+      "o": [
+        "apenas zeros de f",
+        "crescimento e decrescimento de f",
+        "apenas valores de f",
+        "a area exata sob f sem mais informacao"
+      ],
+      "a": 1,
+      "sol": "O sinal de f' controla a monotonia.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:conceito:10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-011",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=x^4, entao f'(x)=",
+      "o": [
+        "x^4",
+        "4x^3+1",
+        "4x^3",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Derivando termo a termo obtem-se 4x^3.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-012",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=5x^3, entao f'(x)=",
+      "o": [
+        "5x^3",
+        "15x^2+1",
+        "0",
+        "15x^2"
+      ],
+      "a": 3,
+      "sol": "Derivando termo a termo obtem-se 15x^2.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-013",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=2x^5, entao f'(x)=",
+      "o": [
+        "10x^4",
+        "2x^5",
+        "10x^4+1",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Derivando termo a termo obtem-se 10x^4.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-014",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=x^2+3x, entao f'(x)=",
+      "o": [
+        "x^2+3x",
+        "2x+3",
+        "2x+3+1",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Derivando termo a termo obtem-se 2x+3.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-015",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=3x^2-4x+1, entao f'(x)=",
+      "o": [
+        "3x^2-4x+1",
+        "6x-4+1",
+        "6x-4",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Derivando termo a termo obtem-se 6x-4.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-016",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=x^3+x, entao f'(x)=",
+      "o": [
+        "x^3+x",
+        "3x^2+1+1",
+        "0",
+        "3x^2+1"
+      ],
+      "a": 3,
+      "sol": "Derivando termo a termo obtem-se 3x^2+1.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-017",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=4x^2+7, entao f'(x)=",
+      "o": [
+        "8x",
+        "4x^2+7",
+        "8x+1",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Derivando termo a termo obtem-se 8x.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-018",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=-x^3+2x, entao f'(x)=",
+      "o": [
+        "-x^3+2x",
+        "-3x^2+2",
+        "-3x^2+2+1",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Derivando termo a termo obtem-se -3x^2+2.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-019",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=7x-5, entao f'(x)=",
+      "o": [
+        "7x-5",
+        "7+1",
+        "7",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Derivando termo a termo obtem-se 7.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-020",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=9, entao f'(x)=",
+      "o": [
+        "9",
+        "0+1",
+        "0",
+        "0"
+      ],
+      "a": 3,
+      "sol": "Derivando termo a termo obtem-se 0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-021",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=x^5-x^2, entao f'(x)=",
+      "o": [
+        "5x^4-2x",
+        "x^5-x^2",
+        "5x^4-2x+1",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Derivando termo a termo obtem-se 5x^4-2x.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-022",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=2x^3+6x^2, entao f'(x)=",
+      "o": [
+        "2x^3+6x^2",
+        "6x^2+12x",
+        "6x^2+12x+1",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Derivando termo a termo obtem-se 6x^2+12x.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-023",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=x^4+2x^2+1, entao f'(x)=",
+      "o": [
+        "x^4+2x^2+1",
+        "4x^3+4x+1",
+        "4x^3+4x",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Derivando termo a termo obtem-se 4x^3+4x.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-024",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=-3x^2+x-8, entao f'(x)=",
+      "o": [
+        "-3x^2+x-8",
+        "-6x+1+1",
+        "0",
+        "-6x+1"
+      ],
+      "a": 3,
+      "sol": "Derivando termo a termo obtem-se -6x+1.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-025",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Se f(x)=6x^3-2, entao f'(x)=",
+      "o": [
+        "18x^2",
+        "6x^3-2",
+        "18x^2+1",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Derivando termo a termo obtem-se 18x^2.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:derivar-polinomio:25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-026",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=2x+3, quanto vale f'(1)?",
+      "o": [
+        "6",
+        "5",
+        "4",
+        "1"
+      ],
+      "a": 1,
+      "sol": "Substitui-se x=1 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-027",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=6x-4, quanto vale f'(2)?",
+      "o": [
+        "9",
+        "7",
+        "8",
+        "2"
+      ],
+      "a": 2,
+      "sol": "Substitui-se x=2 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-028",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=3x^2+1, quanto vale f'(2)?",
+      "o": [
+        "14",
+        "12",
+        "2",
+        "13"
+      ],
+      "a": 3,
+      "sol": "Substitui-se x=2 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-029",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=8x, quanto vale f'(-1)?",
+      "o": [
+        "-8",
+        "-7",
+        "-9",
+        "-1"
+      ],
+      "a": 0,
+      "sol": "Substitui-se x=-1 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-030",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=-3x^2+2, quanto vale f'(1)?",
+      "o": [
+        "0",
+        "-1",
+        "-2",
+        "1"
+      ],
+      "a": 1,
+      "sol": "Substitui-se x=1 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-031",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=5x^4-2x, quanto vale f'(1)?",
+      "o": [
+        "4",
+        "2",
+        "3",
+        "1"
+      ],
+      "a": 2,
+      "sol": "Substitui-se x=1 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-032",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=4x^3+4x, quanto vale f'(2)?",
+      "o": [
+        "41",
+        "39",
+        "2",
+        "40"
+      ],
+      "a": 3,
+      "sol": "Substitui-se x=2 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-033",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=-6x+1, quanto vale f'(3)?",
+      "o": [
+        "-17",
+        "-16",
+        "-18",
+        "3"
+      ],
+      "a": 0,
+      "sol": "Substitui-se x=3 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-034",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=18x^2, quanto vale f'(-2)?",
+      "o": [
+        "73",
+        "72",
+        "71",
+        "-2"
+      ],
+      "a": 1,
+      "sol": "Substitui-se x=-2 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-035",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Sabendo que f'(x)=15x^2, quanto vale f'(4)?",
+      "o": [
+        "241",
+        "239",
+        "240",
+        "4"
+      ],
+      "a": 2,
+      "sol": "Substitui-se x=4 em f'(x).",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:avaliar-derivada:35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-036",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=2x, em x>0, entao",
+      "o": [
+        "f e decrescente",
+        "f e constante",
+        "f e negativa",
+        "f e crescente"
+      ],
+      "a": 3,
+      "sol": "Para x>0, 2x>0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-037",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=2x, em x<0, entao",
+      "o": [
+        "f e decrescente",
+        "f e crescente",
+        "f e constante",
+        "f e positiva"
+      ],
+      "a": 0,
+      "sol": "Para x<0, 2x<0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-038",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x^2, em todo x diferente de 0, entao",
+      "o": [
+        "f e decrescente",
+        "f e crescente",
+        "f e constante",
+        "f alterna monotonia"
+      ],
+      "a": 1,
+      "sol": "x^2>0 para x diferente de 0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-039",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=-x^2, em todo x diferente de 0, entao",
+      "o": [
+        "f e crescente",
+        "f e constante",
+        "f e decrescente",
+        "f e positiva"
+      ],
+      "a": 2,
+      "sol": "-x^2<0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-040",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x-2, em x>2, entao",
+      "o": [
+        "f e decrescente",
+        "f e constante",
+        "f e negativa",
+        "f e crescente"
+      ],
+      "a": 3,
+      "sol": "x-2>0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-041",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x-2, em x<2, entao",
+      "o": [
+        "f e decrescente",
+        "f e crescente",
+        "f e constante",
+        "f e positiva"
+      ],
+      "a": 0,
+      "sol": "x-2<0.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-042",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=(x-1)(x+2), em x>1, entao",
+      "o": [
+        "f e decrescente",
+        "f e crescente",
+        "f e constante",
+        "nao se pode concluir"
+      ],
+      "a": 1,
+      "sol": "Ambos os fatores sao positivos.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-043",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=(x-1)(x+2), em -2<x<1, entao",
+      "o": [
+        "f e crescente",
+        "f e constante",
+        "f e decrescente",
+        "nao se pode concluir"
+      ],
+      "a": 2,
+      "sol": "Os fatores tem sinais opostos.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-044",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=(x-1)(x+2), em x<-2, entao",
+      "o": [
+        "f e decrescente",
+        "f e constante",
+        "nao se pode concluir",
+        "f e crescente"
+      ],
+      "a": 3,
+      "sol": "Ambos os fatores sao negativos, produto positivo.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-045",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=0, em num intervalo inteiro, entao",
+      "o": [
+        "f e constante nesse intervalo",
+        "f e crescente",
+        "f e decrescente",
+        "f nao existe"
+      ],
+      "a": 0,
+      "sol": "Derivada nula em todo o intervalo implica constancia.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:sinal:45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-046",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "f'(x)=4x^3; uma possibilidade para f(x) e",
+      "o": [
+        "4x^4+C",
+        "x^4+C",
+        "x^3+C",
+        "x^4/4+C"
+      ],
+      "a": 1,
+      "sol": "A derivada de x^4+C e 4x^3.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:reconstruir:46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-047",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "f'(x)=6x; uma possibilidade para f(x) e",
+      "o": [
+        "6x^2+C",
+        "x^6+C",
+        "3x^2+C",
+        "3x+C"
+      ],
+      "a": 2,
+      "sol": "A derivada de 3x^2+C e 6x.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:reconstruir:47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-048",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "f'(x)=5; uma possibilidade para f(x) e",
+      "o": [
+        "5+C",
+        "x^5+C",
+        "x/5+C",
+        "5x+C"
+      ],
+      "a": 3,
+      "sol": "A derivada de 5x+C e 5.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:reconstruir:48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-049",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "f'(x)=3x^2+2; uma possibilidade para f(x) e",
+      "o": [
+        "x^3+2x+C",
+        "3x^3+2x+C",
+        "x^3+x^2+C",
+        "x^2+2x+C"
+      ],
+      "a": 0,
+      "sol": "Derivando x^3+2x+C obtem-se 3x^2+2.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:reconstruir:49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-FD-050",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-funcao-derivada",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "f'(x)=2x-4; uma possibilidade para f(x) e",
+      "o": [
+        "2x^2-4x+C",
+        "x^2-4x+C",
+        "x^2-2x+C",
+        "x^2-4+C"
+      ],
+      "a": 1,
+      "sol": "A derivada e 2x-4.",
+      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-funcao-derivada:reconstruir:50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
