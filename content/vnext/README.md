@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **1 850 perguntas**
-- Progresso bruto: **32,74%**
+- Concluído em rascunho: **2 150 perguntas**
+- Progresso bruto: **38,05%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -185,3 +185,25 @@ Próxima matéria: **11.º — Trigonometria**.
 - Total vNext: **1 850/~5 650 (32,74%)**
 
 Próxima matéria: **11.º — Produto escalar**.
+
+
+### 11.º ano — Produto escalar
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Declive e inclinação | 50 | 50 | lote completo em protótipo |
+| Produto escalar por coordenadas | 50 | 50 | lote completo em protótipo |
+| Produto escalar, norma e ângulo | 50 | 50 | lote completo em protótipo |
+| Perpendicularidade | 50 | 50 | lote completo em protótipo |
+| Ângulos e posições relativas de retas e planos | 50 | 50 | lote completo em protótipo |
+| Distâncias em problemas geométricos | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 2 150 perguntas
+
+- 10.º ano completo: **1 550/1 550**
+- 11.º — Trigonometria: **300/300**
+- 11.º — Produto escalar: **300/300**
+- Total vNext: **2 150/~5 650 (38,05%)**
+
+Próxima matéria: **11.º — Contagem**.
