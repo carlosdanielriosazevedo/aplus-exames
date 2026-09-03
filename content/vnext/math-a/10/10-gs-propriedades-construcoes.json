@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-gs",
+  "subtopicId": "10-gs-propriedades-construcoes",
+  "subtopic": "Propriedades geométricas e construções de base",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha propriedades elementares de triângulos, mediatrizes, bissetrizes, medianas/alturas, semelhança, Tales, Pitágoras, circunferência e construções. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GS-PC-001",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo, a soma dos ângulos internos é...",
+      "o": [
+        "180°",
+        "90°",
+        "270°",
+        "360°"
+      ],
+      "a": 0,
+      "sol": "A soma dos ângulos internos de qualquer triângulo euclidiano é 180°.",
+      "hyp": "Pode confundir com a soma dos ângulos de um quadrilátero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:soma-angulos-triangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-002",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, dois ângulos medem 50° e 60°. Quanto mede o terceiro?",
+      "o": [
+        "60°",
+        "70°",
+        "80°",
+        "90°"
+      ],
+      "a": 1,
+      "sol": "180−50−60=70°.",
+      "hyp": "Pode subtrair apenas um dos ângulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:soma-angulos-triangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-003",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo isósceles, os ângulos opostos aos lados iguais são...",
+      "o": [
+        "suplementares.",
+        "sempre retos.",
+        "iguais.",
+        "sempre de 60°."
+      ],
+      "a": 2,
+      "sol": "Lados iguais implicam ângulos da base iguais.",
+      "hyp": "Pode confundir propriedade de isósceles com equilátero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:isosceles-angulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-004",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo isósceles, o ângulo do vértice mede 40°. Quanto mede cada ângulo da base?",
+      "o": [
+        "40°",
+        "60°",
+        "80°",
+        "70°"
+      ],
+      "a": 3,
+      "sol": "Os dois ângulos da base somam 140°, logo cada um mede 70°.",
+      "hyp": "Pode dividir 180 por 3 como se fosse equilátero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:isosceles-angulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-005",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo equilátero, cada ângulo interno mede...",
+      "o": [
+        "60°",
+        "45°",
+        "90°",
+        "120°"
+      ],
+      "a": 0,
+      "sol": "Os três ângulos são iguais e somam 180°, logo cada um mede 60°.",
+      "hyp": "Pode confundir com quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:equilatero-angulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-006",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A mediatriz de um segmento é o conjunto dos pontos que...",
+      "o": [
+        "estão sempre sobre o segmento.",
+        "estão à mesma distância dos extremos do segmento.",
+        "estão à mesma distância de três pontos.",
+        "formam ângulo de 45° com o segmento."
+      ],
+      "a": 1,
+      "sol": "A mediatriz é perpendicular ao segmento no ponto médio e caracteriza os pontos equidistantes dos seus extremos.",
+      "hyp": "Pode memorizar apenas a construção e não a propriedade de distância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:mediatriz-lugar-geometrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-007",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se P pertence à mediatriz de AB, então...",
+      "o": [
+        "PA+PB=AB.",
+        "PA=AB.",
+        "PA=PB.",
+        "PB=2PA."
+      ],
+      "a": 2,
+      "sol": "Todo ponto da mediatriz é equidistante de A e B.",
+      "hyp": "Pode não associar mediatriz a equidistância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:mediatriz-lugar-geometrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-008",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A bissetriz de um ângulo divide-o em...",
+      "o": [
+        "dois ângulos suplementares.",
+        "três ângulos iguais.",
+        "um ângulo reto e outro agudo.",
+        "dois ângulos iguais."
+      ],
+      "a": 3,
+      "sol": "A bissetriz divide o ângulo em duas partes de igual amplitude.",
+      "hyp": "Pode confundir bissetriz com mediatriz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:bissetriz-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-009",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Os pontos da bissetriz interna de um ângulo estão à mesma distância...",
+      "o": [
+        "dos dois lados do ângulo.",
+        "dos dois vértices de um segmento.",
+        "de quaisquer três pontos.",
+        "do vértice e de um lado."
+      ],
+      "a": 0,
+      "sol": "A bissetriz é lugar geométrico dos pontos equidistantes dos lados do ângulo.",
+      "hyp": "Pode associar equidistância apenas à mediatriz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:bissetriz-lugar-geometrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-010",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um ângulo mede 86°. Qual é a amplitude de cada ângulo criado pela sua bissetriz?",
+      "o": [
+        "38°",
+        "43°",
+        "46°",
+        "48°"
+      ],
+      "a": 1,
+      "sol": "86÷2=43°.",
+      "hyp": "Pode subtrair 2 em vez de dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:bissetriz-aplicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-011",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma mediana de um triângulo é o segmento que une...",
+      "o": [
+        "dois pontos médios de lados.",
+        "um vértice ao pé da perpendicular no lado oposto.",
+        "um vértice ao ponto médio do lado oposto.",
+        "os centros de duas circunferências."
+      ],
+      "a": 2,
+      "sol": "Por definição, a mediana liga um vértice ao ponto médio do lado oposto.",
+      "hyp": "Pode confundir mediana com altura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:mediana-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-012",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma altura de um triângulo é um segmento/perpendicular que parte de um vértice e é perpendicular...",
+      "o": [
+        "ao lado adjacente sempre.",
+        "à mediana do mesmo vértice.",
+        "à bissetriz do mesmo vértice.",
+        "à reta que contém o lado oposto."
+      ],
+      "a": 3,
+      "sol": "A altura é perpendicular à reta suporte do lado oposto.",
+      "hyp": "Pode esquecer que em triângulos obtusângulos o pé pode estar no prolongamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:altura-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-013",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A mediatriz de um lado de um triângulo passa necessariamente...",
+      "o": [
+        "pelo ponto médio desse lado.",
+        "pelo vértice oposto.",
+        "pelo baricentro.",
+        "pelo incentro."
+      ],
+      "a": 0,
+      "sol": "A mediatriz é perpendicular ao lado no seu ponto médio.",
+      "hyp": "Pode confundir mediatriz com mediana.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:mediatriz-ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-014",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo equilátero, mediana, altura, mediatriz e bissetriz relativas ao mesmo vértice...",
+      "o": [
+        "são sempre distintas.",
+        "coincidem.",
+        "só duas coincidem.",
+        "não existem."
+      ],
+      "a": 1,
+      "sol": "A simetria do triângulo equilátero faz coincidir essas retas notáveis.",
+      "hyp": "Pode transportar propriedades de triângulo escaleno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:equilatero-retas-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-015",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, a mediana traçada do vértice principal à base é também...",
+      "o": [
+        "apenas mediatriz, nunca altura.",
+        "paralela à base.",
+        "altura e bissetriz.",
+        "um lado do triângulo."
+      ],
+      "a": 2,
+      "sol": "Pela simetria, essa mediana é também altura, bissetriz e mediatriz da base.",
+      "hyp": "Pode não usar a simetria do triângulo isósceles.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:isosceles-retas-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-016",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se M é ponto médio de AB e AB=14 cm, então AM mede...",
+      "o": [
+        "6 cm",
+        "8 cm",
+        "14 cm",
+        "7 cm"
+      ],
+      "a": 3,
+      "sol": "Ponto médio divide o segmento em duas partes iguais: 14/2=7.",
+      "hyp": "Pode confundir ponto médio com metade do perímetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-017",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se M é ponto médio de AB, AM=x+2 e MB=3x−6. Qual é x?",
+      "o": [
+        "4",
+        "2",
+        "3",
+        "5"
+      ],
+      "a": 0,
+      "sol": "x+2=3x−6 => 8=2x => x=4.",
+      "hyp": "Pode não impor igualdade das duas metades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:ponto-medio-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-018",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O segmento que une os pontos médios de dois lados de um triângulo é...",
+      "o": [
+        "perpendicular ao terceiro lado.",
+        "paralelo ao terceiro lado e mede metade dele.",
+        "igual ao terceiro lado.",
+        "sempre uma altura."
+      ],
+      "a": 1,
+      "sol": "É o teorema do segmento médio do triângulo.",
+      "hyp": "Pode confundir paralelismo com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:segmento-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-019",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, o segmento que une os pontos médios de dois lados mede 6 cm. Quanto mede o terceiro lado paralelo a ele?",
+      "o": [
+        "3 cm",
+        "6 cm",
+        "12 cm",
+        "9 cm"
+      ],
+      "a": 2,
+      "sol": "O segmento médio mede metade do terceiro lado; o lado mede 12 cm.",
+      "hyp": "Pode inverter a relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:segmento-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-020",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, um lado mede 18 cm. O segmento médio paralelo a esse lado mede...",
+      "o": [
+        "6 cm",
+        "12 cm",
+        "18 cm",
+        "9 cm"
+      ],
+      "a": 3,
+      "sol": "Metade de 18 é 9.",
+      "hyp": "Pode confundir segmento médio com lado completo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:segmento-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-021",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Dois triângulos são congruentes quando...",
+      "o": [
+        "têm a mesma forma e o mesmo tamanho.",
+        "têm apenas a mesma área.",
+        "têm apenas um ângulo igual.",
+        "têm perímetros diferentes."
+      ],
+      "a": 0,
+      "sol": "Congruência preserva comprimentos e ângulos correspondentes.",
+      "hyp": "Pode confundir congruência com semelhança.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:congruencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-022",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O critério LLL de congruência usa...",
+      "o": [
+        "dois lados e qualquer ângulo.",
+        "três lados correspondentes iguais.",
+        "três ângulos iguais.",
+        "um lado apenas."
+      ],
+      "a": 1,
+      "sol": "Se os três lados correspondentes são iguais, os triângulos são congruentes.",
+      "hyp": "Pode confundir com critérios de semelhança.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:criterio-lll",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-023",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Dois triângulos com três ângulos correspondentes iguais são necessariamente...",
+      "o": [
+        "congruentes sempre.",
+        "de áreas iguais sempre.",
+        "semelhantes, mas não necessariamente congruentes.",
+        "retângulos."
+      ],
+      "a": 2,
+      "sol": "AAA garante semelhança, não igualdade de escala.",
+      "hyp": "Pode confundir semelhança com congruência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:aaa-semelhanca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-024",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Dois triângulos semelhantes têm razão de semelhança 2 do menor para o maior. Se um lado do menor mede 5, o correspondente no maior mede...",
+      "o": [
+        "2,5",
+        "7",
+        "25",
+        "10"
+      ],
+      "a": 3,
+      "sol": "5×2=10.",
+      "hyp": "Pode elevar a razão ao quadrado para comprimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:semelhanca-comprimentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-025",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Dois triângulos semelhantes têm razão de comprimentos 3. Qual é a razão das áreas?",
+      "o": [
+        "9",
+        "3",
+        "6",
+        "27"
+      ],
+      "a": 0,
+      "sol": "Áreas variam com o quadrado da razão linear: 3²=9.",
+      "hyp": "Pode usar a mesma razão para comprimentos e áreas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:semelhanca-areas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-026",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se dois triângulos semelhantes têm áreas na razão 16:25, qual é a razão dos comprimentos correspondentes?",
+      "o": [
+        "8:10",
+        "4:5",
+        "16:25",
+        "2:5"
+      ],
+      "a": 1,
+      "sol": "A razão linear é a raiz quadrada da razão das áreas: 4:5.",
+      "hyp": "Pode usar diretamente a razão das áreas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:semelhanca-inverter-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-027",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O Teorema de Tales, em configuração de paralelas cortadas por transversais, permite concluir...",
+      "o": [
+        "igualdade de todos os segmentos.",
+        "perpendicularidade automática.",
+        "proporcionalidade de segmentos correspondentes.",
+        "que todos os ângulos são retos."
+      ],
+      "a": 2,
+      "sol": "Retas paralelas determinam segmentos proporcionais em transversais.",
+      "hyp": "Pode confundir proporcionalidade com igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:tales",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-028",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo ABC, D∈AB e E∈AC, com DE∥BC. Se AD/AB=1/2 e AC=10, então AE=",
+      "o": [
+        "4",
+        "6",
+        "8",
+        "5"
+      ],
+      "a": 3,
+      "sol": "Pela semelhança dos triângulos ADE e ABC, AE/AC=1/2, logo AE=5.",
+      "hyp": "Pode aplicar a razão ao segmento errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:tales-triangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-029",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na mesma configuração DE∥BC, se AD=4, AB=10 e BC=15, então DE=",
+      "o": [
+        "6",
+        "5",
+        "7,5",
+        "9"
+      ],
+      "a": 0,
+      "sol": "Razão AD/AB=0,4; DE=0,4×15=6.",
+      "hyp": "Pode usar diferença em vez de razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:tales-triangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-030",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, se os catetos medem 6 e 8, a hipotenusa mede...",
+      "o": [
+        "9",
+        "10",
+        "12",
+        "14"
+      ],
+      "a": 1,
+      "sol": "Pelo Teorema de Pitágoras: sqrt(36+64)=10.",
+      "hyp": "Pode somar catetos ou esquecer a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-031",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um triângulo tem lados 5,12,13. É retângulo?",
+      "o": [
+        "Não.",
+        "Só se o lado 5 for hipotenusa.",
+        "Sim.",
+        "Não é possível saber."
+      ],
+      "a": 2,
+      "sol": "5²+12²=25+144=169=13².",
+      "hyp": "Pode não reconhecer a recíproca de Pitágoras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:pitagoras-reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-032",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um triângulo tem lados 4,5,8. Pode ser retângulo?",
+      "o": [
+        "Sim, porque 4²+5²=8².",
+        "Sim, porque 4+5>8.",
+        "É equilátero.",
+        "Não, porque 4²+5²≠8²."
+      ],
+      "a": 3,
+      "sol": "Para ser retângulo com maior lado 8 seria necessário 4²+5²=64, mas dá 41.",
+      "hyp": "Pode usar apenas desigualdade triangular para concluir retângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:pitagoras-reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-033",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A desigualdade triangular exige que, num triângulo, a soma de dois lados seja...",
+      "o": [
+        "maior que o terceiro.",
+        "igual ao terceiro.",
+        "menor que o terceiro.",
+        "sempre o dobro do terceiro."
+      ],
+      "a": 0,
+      "sol": "Cada lado é menor que a soma dos outros dois.",
+      "hyp": "Pode confundir com igualdade de segmentos colineares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:desigualdade-triangular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-034",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "É possível construir um triângulo com lados 2,3,6?",
+      "o": [
+        "Sim.",
+        "Não, porque 2+3≤6.",
+        "Sim, se for obtusângulo.",
+        "Só se for isósceles."
+      ],
+      "a": 1,
+      "sol": "2+3=5<6, violando a desigualdade triangular.",
+      "hyp": "Pode olhar apenas para positividade dos lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:desigualdade-triangular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-035",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual conjunto pode formar um triângulo?",
+      "o": [
+        "2,4,7",
+        "3,5,8",
+        "4,5,6",
+        "1,2,4"
+      ],
+      "a": 2,
+      "sol": "4+5>6 e as restantes desigualdades também se verificam.",
+      "hyp": "Pode aceitar igualdade na desigualdade triangular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:desigualdade-triangular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-036",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Numa circunferência, um raio é...",
+      "o": [
+        "segmento que une quaisquer dois pontos da circunferência e passa sempre pelo centro.",
+        "qualquer reta tangente.",
+        "o dobro do diâmetro.",
+        "segmento que liga o centro a um ponto da circunferência."
+      ],
+      "a": 3,
+      "sol": "Raio liga centro a um ponto da circunferência.",
+      "hyp": "Pode confundir raio com diâmetro ou corda.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:circunferencia-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-037",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Um diâmetro de uma circunferência mede...",
+      "o": [
+        "o dobro do raio.",
+        "metade do raio.",
+        "o mesmo que qualquer corda.",
+        "sempre 1."
+      ],
+      "a": 0,
+      "sol": "d=2r.",
+      "hyp": "Pode inverter relação entre raio e diâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:diametro-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-038",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A reta tangente a uma circunferência num ponto P é perpendicular...",
+      "o": [
+        "a qualquer corda.",
+        "ao raio OP nesse ponto.",
+        "ao diâmetro oposto apenas.",
+        "à própria circunferência inteira."
+      ],
+      "a": 1,
+      "sol": "Raio ao ponto de tangência é perpendicular à tangente.",
+      "hyp": "Pode não ligar tangência a perpendicularidade radial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:tangente-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-039",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se uma circunferência tem raio 5, o diâmetro mede...",
+      "o": [
+        "2,5",
+        "5",
+        "10",
+        "25"
+      ],
+      "a": 2,
+      "sol": "d=2r=10.",
+      "hyp": "Pode confundir com área ou metade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:diametro-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-040",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "De um ponto exterior P traçam-se duas tangentes à mesma circunferência, tocando-a em A e B. Então...",
+      "o": [
+        "PA+PB é sempre o diâmetro.",
+        "PA é sempre o dobro de PB.",
+        "A e B coincidem.",
+        "PA=PB."
+      ],
+      "a": 3,
+      "sol": "Os segmentos tangentes a partir do mesmo ponto exterior têm comprimentos iguais.",
+      "hyp": "Pode não reconhecer a propriedade das tangentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:tangentes-exteriores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-041",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se PA e PB são tangentes a uma circunferência e PA=7, então PB=",
+      "o": [
+        "7",
+        "3,5",
+        "14",
+        "49"
+      ],
+      "a": 0,
+      "sol": "Tangentes a partir do mesmo ponto exterior têm igual comprimento.",
+      "hyp": "Pode duplicar ou dividir sem fundamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:tangentes-exteriores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-042",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo, uma construção com régua e compasso da mediatriz de dois lados permite localizar...",
+      "o": [
+        "um ponto equidistante dos três lados.",
+        "um ponto equidistante dos três vértices.",
+        "o ponto médio de qualquer altura.",
+        "a moda das medidas."
+      ],
+      "a": 1,
+      "sol": "A interseção das mediatrizes é equidistante dos três vértices; isso antecipa o circuncentro.",
+      "hyp": "Pode confundir equidistância a vértices com equidistância a lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:mediatrizes-intersecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-043",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A interseção de duas bissetrizes internas de um triângulo determina um ponto que também pertence...",
+      "o": [
+        "a qualquer mediatriz.",
+        "sempre a um vértice.",
+        "à terceira bissetriz interna.",
+        "a uma reta exterior ao triângulo."
+      ],
+      "a": 2,
+      "sol": "As três bissetrizes internas são concorrentes.",
+      "hyp": "Pode achar que apenas duas têm interseção especial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:bissetrizes-concorrentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-044",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo isósceles ABC com AB=AC, se M é ponto médio de BC, então AM é perpendicular a BC. Qual argumento é adequado?",
+      "o": [
+        "É verdadeiro apenas por desenho.",
+        "Porque AM=BC sempre.",
+        "Porque todos os triângulos isósceles são retângulos.",
+        "Os triângulos ABM e ACM são congruentes por LLL."
+      ],
+      "a": 3,
+      "sol": "AB=AC, BM=CM e AM é comum; LLL dá congruência, logo os ângulos em M são iguais e suplementares, portanto retos.",
+      "hyp": "Pode aceitar a propriedade sem justificação ou usar critério inválido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:prova-isosceles-mediana-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-045",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se num triângulo uma mediana relativa à base é também perpendicular à base, o triângulo é...",
+      "o": [
+        "isósceles relativamente a essa base.",
+        "necessariamente equilátero.",
+        "necessariamente escaleno.",
+        "impossível."
+      ],
+      "a": 0,
+      "sol": "A perpendicular no ponto médio é mediatriz; o vértice pertence à mediatriz da base e é equidistante dos extremos.",
+      "hyp": "Pode concluir equilátero em vez de isósceles.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:reciproco-isosceles",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-046",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se um ponto P está à mesma distância de A e B, o que se pode concluir?",
+      "o": [
+        "P pertence necessariamente ao segmento AB.",
+        "P pertence à mediatriz de AB.",
+        "P é ponto médio de AB.",
+        "P coincide com A."
+      ],
+      "a": 1,
+      "sol": "A equidistância caracteriza a mediatriz.",
+      "hyp": "Pode usar apenas uma direção da propriedade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:mediatriz-reciproca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-047",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se um ponto P no interior de um ângulo está à mesma distância dos dois lados, então P pertence...",
+      "o": [
+        "à mediatriz de um lado.",
+        "à circunferência de centro no vértice apenas.",
+        "à bissetriz interna.",
+        "a qualquer reta paralela a um lado."
+      ],
+      "a": 2,
+      "sol": "A equidistância aos lados caracteriza a bissetriz.",
+      "hyp": "Pode confundir distância a lados com distância a vértices.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:bissetriz-reciproca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-048",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Pretende-se localizar um ponto de um terreno que fique à mesma distância de dois marcos A e B. Que construção geométrica é adequada?",
+      "o": [
+        "Bissetriz de um ângulo qualquer.",
+        "Altura de um triângulo.",
+        "Reta paralela a AB por A.",
+        "Mediatriz de AB."
+      ],
+      "a": 3,
+      "sol": "Todos os pontos da mediatriz têm distâncias iguais a A e B.",
+      "hyp": "Pode escolher uma reta notável sem relação com a condição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:modelacao-mediatriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-049",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Pretende-se instalar um ponto à mesma distância de duas estradas que se cruzam. Que lugar geométrico é relevante?",
+      "o": [
+        "As bissetrizes dos ângulos formados pelas estradas.",
+        "A mediatriz de qualquer segmento da estrada.",
+        "Uma circunferência aleatória.",
+        "Uma paralela a uma estrada."
+      ],
+      "a": 0,
+      "sol": "Pontos equidistantes de duas retas concorrentes pertencem às bissetrizes dos ângulos que formam.",
+      "hyp": "Pode usar mediatriz, que trata distância a pontos, não a retas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:modelacao-bissetriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-PC-050",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-propriedades-construcoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num triângulo, quer-se construir um segmento paralelo a um lado e com metade do seu comprimento. Uma forma natural é unir...",
+      "o": [
+        "o vértice aos dois extremos do lado.",
+        "os pontos médios dos outros dois lados.",
+        "os pés de duas alturas quaisquer.",
+        "dois pontos aleatórios do interior."
+      ],
+      "a": 1,
+      "sol": "O segmento médio é paralelo ao terceiro lado e mede metade dele.",
+      "hyp": "Pode não reconhecer aplicação do teorema do segmento médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-propriedades-construcoes:modelacao-segmento-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
