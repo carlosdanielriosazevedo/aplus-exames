@@ -368,7 +368,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "No item anterior, θ=",
+      "q": "Se u·v=5, ||u||=2 e ||v||=5, então o ângulo θ entre u e v é...",
       "o": [
         "π/6.",
         "π/3.",
@@ -1097,7 +1097,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No item anterior, o ângulo é...",
+      "q": "Se u=(1,2,2) e v=(2,1,2), então o ângulo entre os vetores é...",
       "o": [
         "arccos(8/9).",
         "arccos(9/8).",
