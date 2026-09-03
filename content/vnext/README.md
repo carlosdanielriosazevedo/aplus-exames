@@ -8,7 +8,7 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
 - Concluído em rascunho: **1 000 perguntas**
-- Progresso bruto: **17,70%**
+- Progresso bruto: **22,12%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -115,3 +115,26 @@ Próxima matéria: **10.º — Geometria sintética**.
 - Total vNext: **1 000/~5 650 (17,70%)**
 
 Próxima matéria: **10.º — Funções**.
+
+
+### 10.º ano — Funções
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Conceito de função e representações | 50 | 50 | lote completo em protótipo |
+| Domínio, contradomínio/imagem, zeros e sinal | 50 | 50 | lote completo em protótipo |
+| Função afim e modelação | 50 | 50 | lote completo em protótipo |
+| Função quadrática, zeros, extremos e problemas | 50 | 50 | lote completo em protótipo |
+| Transformações de gráficos, funções por ramos e módulo | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 1 250 perguntas
+
+- Eleições e Partilha: **200/200**
+- Modelos matemáticos em finanças: **250/250**
+- Estatística: **300/300**
+- Geometria sintética: **250/250**
+- Funções: **250/250**
+- Total vNext: **1 250/~5 650 (22,12%)**
+
+Próxima matéria: **10.º — Geometria analítica no plano e no espaço**.
