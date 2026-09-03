@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **4 550 perguntas**
-- Progresso bruto: **80,53%**
+- Concluído em rascunho: **4 900 perguntas**
+- Progresso bruto: **86,73%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -392,3 +392,38 @@ Próxima matéria: **12.º — Funções exponenciais e logarítmicas**.
 - Total vNext: **4 550/~5 650 (80,53%)**
 
 Próxima matéria: **12.º — Funções contínuas e deriváveis**.
+
+
+### 12.º ano — Funções contínuas e deriváveis
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Limite intuitivo e continuidade | 50 | 50 | lote completo em protótipo |
+| Operações com funções contínuas | 50 | 50 | lote completo em protótipo |
+| Derivabilidade e relação com continuidade | 50 | 50 | lote completo em protótipo |
+| Monotonia, extremos e estudo global de funções | 50 | 50 | lote completo em protótipo |
+
+
+### 12.º ano — Resolução aproximada de equações
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes | 50 | 50 | lote completo em protótipo |
+| Método da bisseção, aproximação e erro | 50 | 50 | lote completo em protótipo |
+| Método de Newton-Raphson, aproximação e análise de adequação | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 4 900 perguntas
+
+- **10.º ano completo: 1 550/1 550**
+- **11.º ano completo: 1 750/1 750**
+- **12.º ano obrigatório completo: 1 600/1 600**
+- Total obrigatório 10.º+11.º+12.º: **4 900/4 900**
+- Total vNext incluindo opcionais: **4 900/~5 650 (86,73%)**
+
+Restam apenas os **15 subtemas opcionais do 12.º ano**:
+- Introdução à inferência estatística — 250 perguntas
+- Primitivas e integrais — 250 perguntas
+- Matrizes — 250 perguntas
+
+Próxima matéria: **12.º opcional — Introdução à inferência estatística**.
