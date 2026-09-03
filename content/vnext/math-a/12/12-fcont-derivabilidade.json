@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcont",
+  "subtopicId": "12-fcont-derivabilidade",
+  "subtopic": "Derivabilidade e relação com continuidade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha implicação derivável-contínua, derivadas laterais, cantos/cúspides/tangentes verticais, funções por ramos e linearização local. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCONT-DER-001",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f é derivável em a, então f é...",
+      "o": [
+        "contínua em a.",
+        "descontínua em a.",
+        "constante perto de a.",
+        "necessariamente crescente."
+      ],
+      "a": 0,
+      "sol": "Derivabilidade implica continuidade.",
+      "hyp": "Pode inverter a implicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:derivavel-continua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-002",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O recíproco 'contínua implica derivável' é...",
+      "o": [
+        "sempre verdadeiro.",
+        "falso em geral.",
+        "verdadeiro só para |x|.",
+        "verdadeiro para qualquer função por ramos."
+      ],
+      "a": 1,
+      "sol": "Por exemplo, |x| é contínua mas não derivável em0.",
+      "hyp": "Pode confundir implicação com equivalência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-003",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A função |x| é derivável em0?",
+      "o": [
+        "Sim, com derivada0.",
+        "Sim, com derivada1.",
+        "Não.",
+        "Sim, com derivada−1."
+      ],
+      "a": 2,
+      "sol": "As derivadas laterais são −1 e1.",
+      "hyp": "Pode olhar apenas para continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-004",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para existir f'(a), os quocientes incrementais laterais devem...",
+      "o": [
+        "ter sinais opostos.",
+        "ser ambos zero.",
+        "ser constantes.",
+        "ter o mesmo limite finito."
+      ],
+      "a": 3,
+      "sol": "A derivada bilateral exige coincidência das derivadas laterais.",
+      "hyp": "Pode achar que basta existirem separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:laterais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-005",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma tangente vertical num ponto pode corresponder a...",
+      "o": [
+        "derivada infinita/não derivabilidade finita.",
+        "derivada0.",
+        "continuidade impossível.",
+        "máximo obrigatório."
+      ],
+      "a": 0,
+      "sol": "O declive não é um número real finito.",
+      "hyp": "Pode identificar verticalidade com derivada zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-006",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=x² é derivável em todo R com...",
+      "o": [
+        "f'(x)=x.",
+        "f'(x)=2x.",
+        "f'(x)=2.",
+        "f'(x)=x²."
+      ],
+      "a": 1,
+      "sol": "É polinomial e a regra da potência dá2x.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-007",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=√x é derivável para...",
+      "o": [
+        "x≥0.",
+        "todo R.",
+        "x>0.",
+        "x<0."
+      ],
+      "a": 2,
+      "sol": "f'(x)=1/(2√x) requer x>0; em0 a derivada finita não existe.",
+      "hyp": "Pode confundir domínio com domínio de derivabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-008",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "√x é contínua em0 mas...",
+      "o": [
+        "é descontínua em0.",
+        "tem derivada0.",
+        "tem derivada1.",
+        "não é derivável em0 com derivada real finita."
+      ],
+      "a": 3,
+      "sol": "O quociente incremental é1/√h→+∞ pela direita.",
+      "hyp": "Pode concluir derivabilidade a partir da continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:raiz-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-009",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=|x|, a derivada lateral esquerda em0 é...",
+      "o": [
+        "−1.",
+        "1.",
+        "0.",
+        "não existe."
+      ],
+      "a": 0,
+      "sol": "Para x<0, |x|=−x.",
+      "hyp": "Pode usar a expressão do ramo direito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:modulo-lateral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-010",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=|x|, a derivada lateral direita em0 é...",
+      "o": [
+        "−1.",
+        "1.",
+        "0.",
+        "não existe."
+      ],
+      "a": 1,
+      "sol": "Para x>0, |x|=x.",
+      "hyp": "Pode trocar os lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:modulo-lateral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-011",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se as derivadas laterais em a existem mas são diferentes, f...",
+      "o": [
+        "é derivável com média das duas.",
+        "é necessariamente descontínua.",
+        "não é derivável em a.",
+        "tem derivada0."
+      ],
+      "a": 2,
+      "sol": "A derivada bilateral exige igualdade dos limites laterais.",
+      "hyp": "Pode fazer média de declives.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:laterais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-012",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um 'canto' no gráfico costuma indicar...",
+      "o": [
+        "descontinuidade obrigatória.",
+        "derivada zero.",
+        "assíntota vertical.",
+        "continuidade possível mas não derivabilidade."
+      ],
+      "a": 3,
+      "sol": "Num canto, os declives laterais podem ser finitos e diferentes.",
+      "hyp": "Pode confundir canto com salto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:canto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-013",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma descontinuidade num ponto implica que a função...",
+      "o": [
+        "não é derivável nesse ponto.",
+        "pode ser derivável.",
+        "tem derivada infinita apenas.",
+        "tem derivada0."
+      ],
+      "a": 0,
+      "sol": "Como derivabilidade implica continuidade, a contrapartida é válida.",
+      "hyp": "Pode achar que a derivada pode existir apesar de salto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:descontinua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-014",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f é derivável em a, então lim_{x→a}f(x)=",
+      "o": [
+        "f'(a).",
+        "f(a).",
+        "0.",
+        "a."
+      ],
+      "a": 1,
+      "sol": "Derivabilidade implica continuidade.",
+      "hyp": "Pode confundir limite da função com derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:continuidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-015",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A derivada f'(a) é o limite, se existir, de...",
+      "o": [
+        "f(a+h)/h.",
+        "[f(a)−f(h)]/a.",
+        "[f(a+h)−f(a)]/h quando h→0.",
+        "f(a+h)−f(a)."
+      ],
+      "a": 2,
+      "sol": "É o quociente incremental.",
+      "hyp": "Pode omitir a divisão por h.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:def-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-016",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Pela definição, para f(x)=x², [f(a+h)−f(a)]/h simplifica para...",
+      "o": [
+        "a²+h.",
+        "2a.",
+        "h.",
+        "2a+h."
+      ],
+      "a": 3,
+      "sol": "[(a+h)²−a²]/h=(2ah+h²)/h=2a+h.",
+      "hyp": "Pode cancelar h incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:def-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-017",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Logo, para f(x)=x², f'(a)=",
+      "o": [
+        "2a.",
+        "a².",
+        "2a+1.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "Fazendo h→0 em2a+h obtém-se2a.",
+      "hyp": "Pode manter h no resultado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:def-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-018",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f'(a)=0, então...",
+      "o": [
+        "a é sempre máximo.",
+        "a é candidato a extremo, mas pode não ser extremo.",
+        "a é sempre mínimo.",
+        "f(a)=0."
+      ],
+      "a": 1,
+      "sol": "Por exemplo, x³ tem derivada0 em0 sem extremo.",
+      "hyp": "Pode confundir ponto crítico com extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:critico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-019",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x³, f'(0)=",
+      "o": [
+        "1.",
+        "3.",
+        "0.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "f'=3x².",
+      "hyp": "Pode usar o expoente como valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:x3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-020",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Apesar de f'(0)=0 para x³, em0 há...",
+      "o": [
+        "máximo.",
+        "mínimo.",
+        "descontinuidade.",
+        "um ponto de inflexão horizontal, não extremo."
+      ],
+      "a": 3,
+      "sol": "A função continua crescente dos dois lados.",
+      "hyp": "Pode associar derivada nula automaticamente a extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:x3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-021",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Considere f(x)=x² para x≤1 e f(x)=ax+b para x>1. Continuidade em1 exige...",
+      "o": [
+        "a+b=1.",
+        "a+b=2.",
+        "2a+b=1.",
+        "a=2."
+      ],
+      "a": 0,
+      "sol": "O valor do ramo esquerdo em1 é1.",
+      "hyp": "Pode usar a condição de derivabilidade prematuramente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:ramos-cont",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-022",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na mesma função, derivabilidade em1 exige adicionalmente...",
+      "o": [
+        "a=1.",
+        "a=2.",
+        "b=2.",
+        "a+b=2."
+      ],
+      "a": 1,
+      "sol": "Derivada esquerda de x² em1 é2; derivada direita da reta éa.",
+      "hyp": "Pode igualar valores em vez de declives.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:ramos-der",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-023",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Juntando as duas condições anteriores, os valores são...",
+      "o": [
+        "a=1,b=0.",
+        "a=2,b=1.",
+        "a=2,b=−1.",
+        "a=−2,b=3."
+      ],
+      "a": 2,
+      "sol": "a=2 e a+b=1 =>b=−1.",
+      "hyp": "Pode resolver o sistema incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:ramos-parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-024",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x+1 para x<0 e f(x)=x²+1 para x≥0, f é contínua em0?",
+      "o": [
+        "Não.",
+        "Só pela direita.",
+        "Só pela esquerda.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Ambos os ramos tendem e valem1 em0.",
+      "hyp": "Pode confundir mudança de fórmula com descontinuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:ramos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-025",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função do item anterior é derivável em0?",
+      "o": [
+        "Não.",
+        "Sim, com derivada0.",
+        "Sim, com derivada1.",
+        "Sim, com derivada1/2."
+      ],
+      "a": 0,
+      "sol": "Derivada esquerda é1 e direita é0.",
+      "hyp": "Pode concluir derivabilidade por continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:ramos-canto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-026",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para uma função por ramos ser derivável no ponto de junção, é necessário...",
+      "o": [
+        "apenas ter valores laterais iguais.",
+        "ser contínua e ter derivadas laterais iguais.",
+        "apenas ser contínua.",
+        "ter derivada zero."
+      ],
+      "a": 1,
+      "sol": "Derivabilidade exige continuidade e igualdade de declives laterais.",
+      "hyp": "Pode verificar apenas a continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:criterio-ramos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-027",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=|x−2|, a não derivabilidade ocorre em...",
+      "o": [
+        "x=0.",
+        "x=−2.",
+        "x=2.",
+        "nenhum ponto."
+      ],
+      "a": 2,
+      "sol": "O vértice do valor absoluto está em x=2.",
+      "hyp": "Pode localizar o canto no0 por hábito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:modulo-transladado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-028",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada lateral esquerda de |x−2| em2 é...",
+      "o": [
+        "1.",
+        "0.",
+        "2.",
+        "−1."
+      ],
+      "a": 3,
+      "sol": "Para x<2, |x−2|=2−x.",
+      "hyp": "Pode usar o ramo direito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:modulo-transladado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-029",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada lateral direita de |x−2| em2 é...",
+      "o": [
+        "1.",
+        "−1.",
+        "0.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "Para x>2, |x−2|=x−2.",
+      "hyp": "Pode trocar os lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:modulo-transladado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-030",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f tem uma assíntota vertical em x=a, então f é derivável em a?",
+      "o": [
+        "Sim, com derivada infinita real.",
+        "Não, porque nem sequer é contínua/definida adequadamente em a.",
+        "Sim, se a assíntota for dos dois lados.",
+        "Depende apenas de f(a)."
+      ],
+      "a": 1,
+      "sol": "Derivabilidade real exige um valor finito e continuidade no ponto.",
+      "hyp": "Pode tratar infinito como derivada real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:assintota",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-031",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=x^{2/3} é contínua em0 e...",
+      "o": [
+        "tem derivada0.",
+        "tem derivada2/3.",
+        "não tem derivada finita em0.",
+        "é descontínua."
+      ],
+      "a": 2,
+      "sol": "f'(x)=(2/3)x^{-1/3}, que se torna ilimitada em0.",
+      "hyp": "Pode aplicar a fórmula substituindo x=0 sem notar o expoente negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:cuspide",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-032",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O gráfico de x^{2/3} em0 apresenta...",
+      "o": [
+        "um salto.",
+        "um máximo suave.",
+        "uma assíntota horizontal.",
+        "uma cúspide/tangente vertical, não derivabilidade finita."
+      ],
+      "a": 3,
+      "sol": "Os declives tornam-se ilimitados com sinais opostos.",
+      "hyp": "Pode confundir com descontinuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:cuspide",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-033",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=x^{1/3} é contínua em0 e...",
+      "o": [
+        "não tem derivada real finita em0.",
+        "tem derivada0.",
+        "é descontínua.",
+        "tem derivada1/3."
+      ],
+      "a": 0,
+      "sol": "f'(x)=1/(3x^{2/3}) para x≠0 e cresce sem limite perto de0.",
+      "hyp": "Pode substituir diretamente na regra sem considerar denominador zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:raiz-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-034",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma função pode ter tangente vertical num ponto e ser contínua nesse ponto?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se o ponto for extremo.",
+        "Só se a função for racional."
+      ],
+      "a": 1,
+      "sol": "Exemplo: x^{1/3} em0.",
+      "hyp": "Pode achar que tangente vertical implica assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:vertical-continua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-035",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é derivável em a e f'(a)>0, então para incrementos muito pequenos espera-se localmente...",
+      "o": [
+        "tendência decrescente.",
+        "função constante.",
+        "tendência crescente.",
+        "descontinuidade."
+      ],
+      "a": 2,
+      "sol": "A derivada positiva é o declive local.",
+      "hyp": "Pode confundir com valor positivo da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:interpretacao-der",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-036",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é derivável em a e f'(a)<0, a tangente em a tem...",
+      "o": [
+        "declive positivo.",
+        "declive zero.",
+        "declive infinito.",
+        "declive negativo."
+      ],
+      "a": 3,
+      "sol": "A derivada é o declive da tangente.",
+      "hyp": "Pode usar o sinal de f(a).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:tangente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-037",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, f é contínua em0 porque...",
+      "o": [
+        "|x sin(1/x)|≤|x|→0.",
+        "sin(1/x) tem limite0.",
+        "1/x→0.",
+        "f'(0)=0 automaticamente."
+      ],
+      "a": 0,
+      "sol": "O confronto mostra que f(x)→0.",
+      "hyp": "Pode afirmar um limite inexistente de sin(1/x).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:oscilatoria-cont",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-038",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para a mesma f, o quociente incremental em0 é...",
+      "o": [
+        "h sin(1/h).",
+        "sin(1/h).",
+        "1/h.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "[f(h)−f(0)]/h=[h sin(1/h)]/h.",
+      "hyp": "Pode esquecer cancelar h.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:oscilatoria-der",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-039",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Como sin(1/h) não tem limite quando h→0, a função anterior...",
+      "o": [
+        "é derivável com derivada0.",
+        "é descontínua em0.",
+        "não é derivável em0.",
+        "tem derivada1."
+      ],
+      "a": 2,
+      "sol": "O quociente incremental oscila sem limite.",
+      "hyp": "Pode pensar que continuidade garante derivabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:oscilatoria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-040",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é derivável em a, então f(a+h)=f(a)+f'(a)h+o(h) exprime...",
+      "o": [
+        "uma identidade global exata.",
+        "a definição de continuidade apenas.",
+        "uma série infinita obrigatória.",
+        "a aproximação linear local."
+      ],
+      "a": 3,
+      "sol": "A derivabilidade equivale a admitir uma aproximação linear de primeira ordem.",
+      "hyp": "Pode tratar a aproximação como igualdade exata para qualquer h.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:linearizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-041",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=√x, a linearização em x=4 é...",
+      "o": [
+        "L(x)=2+(x−4)/4.",
+        "L(x)=2+(x−4)/2.",
+        "L(x)=4+(x−4)/2.",
+        "L(x)=2+x/4."
+      ],
+      "a": 0,
+      "sol": "f(4)=2 e f'(4)=1/4.",
+      "hyp": "Pode usar f'(4)=1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:linearizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-042",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Usando a linearização anterior, √4,1 é aproximadamente...",
+      "o": [
+        "2,05.",
+        "2,025.",
+        "2,1.",
+        "2,0025."
+      ],
+      "a": 1,
+      "sol": "L(4,1)=2+0,1/4=2,025.",
+      "hyp": "Pode multiplicar o incremento por4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:aproximacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-043",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=ln x, a linearização em x=1 é...",
+      "o": [
+        "L(x)=x.",
+        "L(x)=1+x.",
+        "L(x)=x−1.",
+        "L(x)=ln1+x."
+      ],
+      "a": 2,
+      "sol": "f(1)=0 e f'(1)=1, logo L=x−1.",
+      "hyp": "Pode esquecer que ln1=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:linearizacao-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-044",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Pela linearização de ln x em1, ln(1,02)≈...",
+      "o": [
+        "1,02.",
+        "0,98.",
+        "0,2.",
+        "0,02."
+      ],
+      "a": 3,
+      "sol": "L(1,02)=0,02.",
+      "hyp": "Pode usar o valor da função identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:aproximacao-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-045",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=e^x, a linearização em0 é...",
+      "o": [
+        "L(x)=1+x.",
+        "L(x)=x.",
+        "L(x)=e x.",
+        "L(x)=1+e x."
+      ],
+      "a": 0,
+      "sol": "f(0)=1 e f'(0)=1.",
+      "hyp": "Pode esquecer o termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:linearizacao-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-046",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Assim, e^{0,03}≈...",
+      "o": [
+        "0,03.",
+        "1,03.",
+        "1,003.",
+        "1,3."
+      ],
+      "a": 1,
+      "sol": "Usando1+x com x=0,03.",
+      "hyp": "Pode deslocar a casa decimal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:aproximacao-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-047",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A linearização é mais fiável quando...",
+      "o": [
+        "x está muito distante.",
+        "a derivada é sempre zero.",
+        "x está suficientemente próximo do ponto de tangência.",
+        "a função é descontínua."
+      ],
+      "a": 2,
+      "sol": "O erro de primeira ordem tende a ser pequeno para incrementos pequenos.",
+      "hyp": "Pode aplicar aproximações locais globalmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:linearizacao-validade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-048",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é derivável em a e f'(a)≠0, então perto de a a função...",
+      "o": [
+        "é necessariamente exatamente linear.",
+        "é descontínua.",
+        "tem extremo em a.",
+        "tem comportamento local aproximadamente linear com declive não nulo."
+      ],
+      "a": 3,
+      "sol": "A derivada fornece a melhor aproximação linear de primeira ordem.",
+      "hyp": "Pode confundir aproximação com identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:local",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-049",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma função derivável pode ter derivada descontínua?",
+      "o": [
+        "Sim, é possível.",
+        "Não, a derivada é sempre contínua.",
+        "Só se a função for descontínua.",
+        "Só em extremos."
+      ],
+      "a": 0,
+      "sol": "Derivabilidade de f não garante continuidade de f'.",
+      "hyp": "Pode assumir que todas as derivadas são contínuas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:derivada-descontinua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-DER-050",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-derivabilidade",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A relação lógica correta é...",
+      "o": [
+        "contínua ⇒ derivável.",
+        "derivável ⇒ contínua, mas contínua ⇏ derivável.",
+        "derivável ⇔ contínua.",
+        "nenhuma relação existe."
+      ],
+      "a": 1,
+      "sol": "É a hierarquia fundamental entre as duas propriedades.",
+      "hyp": "Pode inverter a implicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-derivabilidade:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
