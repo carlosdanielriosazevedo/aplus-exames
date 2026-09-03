@@ -395,7 +395,7 @@
       "year": "10.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, y=",
+      "q": "Se M=(3,4) é ponto médio de A=(1,2) e B=(x,y), então y=",
       "o": [
         "4",
         "5",
@@ -881,7 +881,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Qual é o perímetro do triângulo anterior?",
+      "q": "No triângulo A=(0,0), B=(6,0), C=(0,8), qual é o perímetro?",
       "o": [
         "24",
         "18",
@@ -935,7 +935,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No triângulo anterior, o ponto médio de AB é...",
+      "q": "No triângulo A=(1,1), B=(5,1), C=(3,4), o ponto médio de AB é...",
       "o": [
         "(2,1).",
         "(3,2).",
@@ -1151,7 +1151,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No triângulo anterior, qual é a área?",
+      "q": "No triângulo A=(−2,1), B=(4,1), C=(1,5), qual é a área?",
       "o": [
         "18",
         "24",
@@ -1205,7 +1205,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No quadrado anterior, qual é a área?",
+      "q": "Um quadrado tem vértices consecutivos A=(0,0) e B=(3,4). Qual é a sua área?",
       "o": [
         "25",
         "20",
