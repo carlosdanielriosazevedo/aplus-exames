@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-est",
+  "subtopicId": "10-est-dispersao",
+  "subtopic": "Medidas de dispersão e interpretação conjunta",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Usa variância populacional quando é necessário um cálculo explícito e trabalha amplitude, quartis/IQR, variância, desvio padrão, transformações e leitura crítica. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10EST-DIS-001",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A amplitude de um conjunto de dados é...",
+      "o": [
+        "máximo−mínimo.",
+        "média−mediana.",
+        "soma dos valores.",
+        "maior frequência."
+      ],
+      "a": 0,
+      "sol": "Amplitude=max−min.",
+      "hyp": "Pode confundir amplitude com média ou frequência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:amplitude-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-002",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é a amplitude de 3,5,8,10?",
+      "o": [
+        "5",
+        "7",
+        "8",
+        "10"
+      ],
+      "a": 1,
+      "sol": "10−3=7.",
+      "hyp": "Pode subtrair valores centrais em vez dos extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-003",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma medida de dispersão serve para descrever...",
+      "o": [
+        "apenas o valor central.",
+        "o número de categorias.",
+        "quanto os valores se espalham.",
+        "o nome da variável."
+      ],
+      "a": 2,
+      "sol": "Dispersão mede variabilidade em torno de um centro ou entre extremos.",
+      "hyp": "Pode confundir localização com dispersão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:dispersao-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-004",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Dois conjuntos podem ter a mesma média e dispersões diferentes?",
+      "o": [
+        "Não.",
+        "Só se tiverem tamanhos diferentes.",
+        "Só se forem qualitativos.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "A média não determina o espalhamento.",
+      "hyp": "Pode achar que a média resume completamente os dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:mesma-media-diferente-dispersao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-005",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é a amplitude de 12,12,12,12?",
+      "o": [
+        "0",
+        "12",
+        "24",
+        "48"
+      ],
+      "a": 0,
+      "sol": "Máximo e mínimo são ambos 12, logo amplitude 0.",
+      "hyp": "Pode usar o próprio valor como amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:amplitude-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-006",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A variância baseia-se, em termos simples, em...",
+      "o": [
+        "diferenças apenas entre máximo e mínimo.",
+        "desvios quadráticos relativamente à média.",
+        "frequências relativas acumuladas.",
+        "ordenação alfabética."
+      ],
+      "a": 1,
+      "sol": "A variância resume o quadrado dos desvios à média.",
+      "hyp": "Pode confundir variância com amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:variancia-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-007",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O desvio padrão é...",
+      "o": [
+        "o quadrado da média.",
+        "o máximo menos o mínimo.",
+        "a raiz quadrada da variância.",
+        "sempre igual à mediana."
+      ],
+      "a": 2,
+      "sol": "Desvio padrão=sqrt(variância).",
+      "hyp": "Pode inverter relação entre variância e desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:desvio-padrao-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-008",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma vantagem do desvio padrão face à variância é que...",
+      "o": [
+        "é sempre inteiro.",
+        "ignora todos os extremos.",
+        "é sempre menor que 1.",
+        "fica nas mesmas unidades da variável."
+      ],
+      "a": 3,
+      "sol": "Como é raiz da variância, recupera as unidades originais.",
+      "hyp": "Pode ignorar unidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:unidades-desvio-padrao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-009",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os dados 2,4,6 têm média 4. Quais são os desvios à média?",
+      "o": [
+        "−2,0,2",
+        "2,4,6",
+        "−4,0,4",
+        "2,0,−2"
+      ],
+      "a": 0,
+      "sol": "Subtrai-se 4 a cada valor: −2,0,2.",
+      "hyp": "Pode usar valores absolutos ou inverter sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:desvios-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-010",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A soma dos desvios relativamente à média, considerando todos os dados, é...",
+      "o": [
+        "sempre positiva.",
+        "0.",
+        "igual à variância.",
+        "igual à amplitude."
+      ],
+      "a": 1,
+      "sol": "Por definição da média, os desvios positivos e negativos somam zero.",
+      "hyp": "Pode pensar que somar desvios mede dispersão diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:soma-desvios-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-011",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para os dados 2,4,6, qual é a soma dos quadrados dos desvios à média 4?",
+      "o": [
+        "4",
+        "12",
+        "8",
+        "16"
+      ],
+      "a": 2,
+      "sol": "Desvios −2,0,2; quadrados 4,0,4; soma 8.",
+      "hyp": "Pode somar desvios sem quadrar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:soma-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-012",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usando variância populacional como média dos quadrados dos desvios, qual é a variância de 2,4,6?",
+      "o": [
+        "2",
+        "4",
+        "8",
+        "8/3"
+      ],
+      "a": 3,
+      "sol": "(4+0+4)/3=8/3.",
+      "hyp": "Pode dividir por número errado ou confundir soma com média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:variancia-populacional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-013",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o desvio padrão populacional de 2,4,6, aproximadamente?",
+      "o": [
+        "1,63",
+        "1,00",
+        "2,00",
+        "2,67"
+      ],
+      "a": 0,
+      "sol": "sqrt(8/3)≈1,63.",
+      "hyp": "Pode usar a variância como desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:desvio-padrao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-014",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se todos os valores de um conjunto forem iguais, o desvio padrão é...",
+      "o": [
+        "1.",
+        "0.",
+        "igual ao valor comum.",
+        "indeterminado."
+      ],
+      "a": 1,
+      "sol": "Não existem desvios à média.",
+      "hyp": "Pode achar que desvio padrão depende do nível dos valores, não da variação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:desvio-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-015",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Entre dois conjuntos com mesma unidade e média semelhante, o maior desvio padrão indica geralmente...",
+      "o": [
+        "menor dispersão.",
+        "mesma dispersão obrigatoriamente.",
+        "maior dispersão.",
+        "maior mediana."
+      ],
+      "a": 2,
+      "sol": "Desvio padrão maior significa maior espalhamento típico em torno da média.",
+      "hyp": "Pode inverter interpretação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:comparar-desvio-padrao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-016",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Conjunto A: 9,10,11. Conjunto B: 0,10,20. Ambos têm média 10. Qual tem maior amplitude?",
+      "o": [
+        "A",
+        "Igual",
+        "Nenhum",
+        "B"
+      ],
+      "a": 3,
+      "sol": "A amplitude A=2; B=20.",
+      "hyp": "Pode focar apenas na média comum.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:comparar-amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-017",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A amplitude é muito sensível a...",
+      "o": [
+        "valores extremos.",
+        "apenas à mediana.",
+        "apenas ao tamanho da amostra.",
+        "valores repetidos centrais."
+      ],
+      "a": 0,
+      "sol": "Usa apenas mínimo e máximo, por isso um extremo pode alterá-la muito.",
+      "hyp": "Pode achar que amplitude usa todos os valores igualmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:amplitude-outliers",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-018",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O intervalo interquartil, IQR, é...",
+      "o": [
+        "máximo−mínimo.",
+        "Q3−Q1.",
+        "média−mediana.",
+        "Q1+Q3."
+      ],
+      "a": 1,
+      "sol": "IQR mede a largura dos 50% centrais.",
+      "hyp": "Pode confundir com amplitude total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:iqr-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-019",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O IQR é menos sensível a extremos do que a amplitude porque...",
+      "o": [
+        "ignora sempre metade dos dados sem regra.",
+        "é uma média.",
+        "usa quartis centrais em vez de apenas máximo e mínimo.",
+        "é sempre zero."
+      ],
+      "a": 2,
+      "sol": "Q1 e Q3 são posições internas da distribuição.",
+      "hyp": "Pode não compreender robustez dos quartis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:iqr-robustez",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-020",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se Q1=12 e Q3=20, qual é o IQR?",
+      "o": [
+        "6",
+        "12",
+        "32",
+        "8"
+      ],
+      "a": 3,
+      "sol": "20−12=8.",
+      "hyp": "Pode somar quartis em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:iqr",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-021",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Dados ordenados: 1,2,3,4,5,6,7,8. Usando mediana das metades, Q1 é...",
+      "o": [
+        "2,5",
+        "2",
+        "3",
+        "3,5"
+      ],
+      "a": 0,
+      "sol": "Metade inferior 1,2,3,4; mediana=(2+3)/2=2,5.",
+      "hyp": "Pode escolher o segundo valor sem fazer mediana da metade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:quartil",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-022",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Nos mesmos dados 1 a 8, Q3 é...",
+      "o": [
+        "5,5",
+        "6,5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "sol": "Metade superior 5,6,7,8; mediana=(6+7)/2=6,5.",
+      "hyp": "Pode usar 6 ou 7 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:quartil",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-023",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para os dados 1 a 8, qual é o IQR?",
+      "o": [
+        "3",
+        "4,5",
+        "4",
+        "5"
+      ],
+      "a": 2,
+      "sol": "6,5−2,5=4.",
+      "hyp": "Pode usar amplitude total 7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:iqr",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-024",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num diagrama de extremos e quartis, a caixa normalmente representa...",
+      "o": [
+        "do mínimo ao máximo inteiro.",
+        "apenas a média.",
+        "a moda.",
+        "de Q1 a Q3."
+      ],
+      "a": 3,
+      "sol": "A caixa representa os 50% centrais entre Q1 e Q3.",
+      "hyp": "Pode confundir caixa com amplitude total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:boxplot-caixa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-025",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num boxplot, uma caixa mais larga, na mesma escala, indica...",
+      "o": [
+        "maior IQR.",
+        "menor IQR.",
+        "maior média necessariamente.",
+        "mais observações obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "A largura da caixa corresponde a Q3−Q1.",
+      "hyp": "Pode relacionar tamanho visual com n em vez de dispersão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:boxplot-iqr",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-026",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Dois grupos têm a mesma mediana, mas um tem IQR muito maior. O que se conclui?",
+      "o": [
+        "As médias são necessariamente iguais.",
+        "Os 50% centrais desse grupo estão mais dispersos.",
+        "Os máximos são iguais.",
+        "O grupo com maior IQR tem menos alunos."
+      ],
+      "a": 1,
+      "sol": "IQR maior indica maior espalhamento central.",
+      "hyp": "Pode confundir localização igual com dispersão igual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:mesma-mediana-dispersao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-027",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se todos os valores aumentarem 5 unidades, o desvio padrão...",
+      "o": [
+        "aumenta 5.",
+        "multiplica por 5.",
+        "mantém-se.",
+        "fica zero."
+      ],
+      "a": 2,
+      "sol": "Adicionar constante desloca todos os valores e a média igualmente, preservando desvios.",
+      "hyp": "Pode pensar que qualquer aumento nos dados aumenta a dispersão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:transformacao-aditiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-028",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se todos os valores forem multiplicados por 3, o desvio padrão...",
+      "o": [
+        "mantém-se.",
+        "multiplica por 9.",
+        "aumenta 3 unidades.",
+        "multiplica por 3."
+      ],
+      "a": 3,
+      "sol": "Os desvios são multiplicados por 3, logo o desvio padrão também.",
+      "hyp": "Pode aplicar regra da variância ao desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:transformacao-multiplicativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-029",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se todos os valores forem multiplicados por 3, a variância...",
+      "o": [
+        "multiplica por 9.",
+        "multiplica por 3.",
+        "multiplica por 6.",
+        "mantém-se."
+      ],
+      "a": 0,
+      "sol": "Os desvios quadráticos multiplicam por 3²=9.",
+      "hyp": "Pode confundir transformação da variância com a do desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:transformacao-variancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-030",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Adicionar o mesmo valor a todos os dados altera a amplitude?",
+      "o": [
+        "Sim, aumenta pelo valor adicionado.",
+        "Não.",
+        "Sim, duplica.",
+        "Só se houver mais de 10 valores."
+      ],
+      "a": 1,
+      "sol": "Máximo e mínimo aumentam pela mesma constante; a diferença mantém-se.",
+      "hyp": "Pode alterar extremos sem perceber que a diferença é invariável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:amplitude-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-031",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Multiplicar todos os valores por 2 altera a amplitude como?",
+      "o": [
+        "Mantém-se.",
+        "Quadruplica.",
+        "Duplica.",
+        "Aumenta 2."
+      ],
+      "a": 2,
+      "sol": "(2max−2min)=2(max−min).",
+      "hyp": "Pode confundir multiplicação com adição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:amplitude-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-032",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Conjunto A tem desvio padrão 2; B tem desvio padrão 5, na mesma unidade. Qual é mais disperso em torno da média?",
+      "o": [
+        "A",
+        "Igual",
+        "Não é possível comparar de todo",
+        "B"
+      ],
+      "a": 3,
+      "sol": "B tem maior desvio padrão.",
+      "hyp": "Pode escolher o menor por interpretar desvio como erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:comparar-desvio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-033",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um desvio padrão pequeno significa que...",
+      "o": [
+        "os valores tendem a estar relativamente próximos da média.",
+        "todos os valores são necessariamente iguais.",
+        "a média é pequena.",
+        "a amostra é pequena."
+      ],
+      "a": 0,
+      "sol": "Pequeno desvio padrão indica concentração relativa em torno da média.",
+      "hyp": "Pode confundir magnitude da média com dispersão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:interpretar-desvio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-034",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um valor extremo pode aumentar bastante o desvio padrão porque...",
+      "o": [
+        "o desvio padrão usa apenas a mediana.",
+        "o quadrado de um desvio grande pesa muito na variância.",
+        "extremos são ignorados.",
+        "a variância não depende dos dados."
+      ],
+      "a": 1,
+      "sol": "Desvios grandes tornam-se ainda mais influentes ao quadrado.",
+      "hyp": "Pode não perceber sensibilidade quadrática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:outlier-desvio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-035",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Dados 0,0,10,10 têm média 5. Qual é a variância populacional?",
+      "o": [
+        "5",
+        "10",
+        "25",
+        "50"
+      ],
+      "a": 2,
+      "sol": "Desvios −5,−5,5,5; quadrados 25 cada; média=25.",
+      "hyp": "Pode somar quadrados e não dividir por 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:variancia-simetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-036",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para 0,0,10,10, qual é o desvio padrão populacional?",
+      "o": [
+        "2,5",
+        "10",
+        "25",
+        "5"
+      ],
+      "a": 3,
+      "sol": "sqrt(25)=5.",
+      "hyp": "Pode usar variância como desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:desvio-simetrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-037",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Conjunto A: 4,5,6. Conjunto B: 3,5,7. Ambos têm média 5. Qual tem maior variância populacional?",
+      "o": [
+        "B",
+        "A",
+        "Igual",
+        "Nenhum"
+      ],
+      "a": 0,
+      "sol": "A desvios −1,0,1; variância 2/3. B desvios −2,0,2; variância 8/3.",
+      "hyp": "Pode olhar apenas para a média comum.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:comparar-variancias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-038",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um conjunto tem variância 16. Qual é o desvio padrão?",
+      "o": [
+        "2",
+        "4",
+        "8",
+        "16"
+      ],
+      "a": 1,
+      "sol": "sqrt(16)=4.",
+      "hyp": "Pode esquecer a raiz quadrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:variancia-para-dp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-039",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um conjunto tem desvio padrão 3. Qual é a variância?",
+      "o": [
+        "3",
+        "6",
+        "9",
+        "12"
+      ],
+      "a": 2,
+      "sol": "3²=9.",
+      "hyp": "Pode usar o mesmo valor para variância e desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:dp-para-variancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-040",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Pode uma variância ser negativa?",
+      "o": [
+        "Sim, sempre.",
+        "Só com média negativa.",
+        "Só em amostras pequenas.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "É uma média de quadrados de desvios, logo não negativa.",
+      "hyp": "Pode associar desvios negativos a variância negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:variancia-nao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-041",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se a variância é 0, o que se conclui?",
+      "o": [
+        "Todos os valores são iguais à média.",
+        "A média é 0 obrigatoriamente.",
+        "A amostra tem um elemento obrigatoriamente.",
+        "A amplitude é positiva."
+      ],
+      "a": 0,
+      "sol": "Quadrados dos desvios só têm média zero se todos os desvios forem zero.",
+      "hyp": "Pode confundir ausência de dispersão com nível zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:variancia-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-042",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Dois grupos têm médias 50 e 500, com desvios padrão 5 e 20. Comparar apenas desvios padrão absolutos pode ser insuficiente quando...",
+      "o": [
+        "as unidades são iguais.",
+        "se quer comparar dispersão relativa a escalas muito diferentes.",
+        "as médias são iguais.",
+        "os grupos têm o mesmo tamanho."
+      ],
+      "a": 1,
+      "sol": "A dispersão relativa pode exigir considerar a escala/nível dos dados.",
+      "hyp": "Pode usar medidas absolutas sem contexto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:dispersao-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-043",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "Conjunto A: mínimo 20, Q1=30, mediana=40, Q3=50, máximo=70. Qual é o IQR?",
+      "o": [
+        "10",
+        "30",
+        "20",
+        "50"
+      ],
+      "a": 2,
+      "sol": "50−30=20.",
+      "hyp": "Pode usar máximo−mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:boxplot-iqr",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-044",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "No conjunto anterior, qual é a amplitude?",
+      "o": [
+        "20",
+        "30",
+        "40",
+        "50"
+      ],
+      "a": 3,
+      "sol": "70−20=50.",
+      "hyp": "Pode usar quartis em vez dos extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:boxplot-amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-045",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se dois boxplots têm o mesmo IQR mas amplitudes muito diferentes, o que pode explicar a diferença?",
+      "o": [
+        "Extremos mais afastados num deles.",
+        "Médias necessariamente diferentes.",
+        "Número de observações obrigatoriamente diferente.",
+        "Uma das caixas está errada."
+      ],
+      "a": 0,
+      "sol": "Os 50% centrais podem ter espalhamento semelhante enquanto os extremos diferem.",
+      "hyp": "Pode concluir que igual IQR implica igual amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:iqr-vs-amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-046",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um conjunto tem média 10 e variância populacional 4. Se se somar 7 a todos os valores, qual passa a ser a média e a variância?",
+      "o": [
+        "17 e 11",
+        "17 e 4",
+        "10 e 4",
+        "17 e 49"
+      ],
+      "a": 1,
+      "sol": "A média aumenta 7; a variância mantém-se sob translação.",
+      "hyp": "Pode alterar a variância ao adicionar constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:transformacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-047",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um conjunto tem média 10 e variância 4. Se todos os valores forem multiplicados por 2, qual passa a ser a média e a variância?",
+      "o": [
+        "20 e 8",
+        "12 e 8",
+        "20 e 16",
+        "20 e 4"
+      ],
+      "a": 2,
+      "sol": "Média duplica; variância multiplica por 4: 16.",
+      "hyp": "Pode multiplicar variância apenas por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:transformacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-048",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Duas máquinas produzem peças com a mesma média de 100 mm. A tem desvio padrão 0,2 mm e B 1,1 mm. Qual é mais consistente em torno da dimensão alvo?",
+      "o": [
+        "B",
+        "Iguais",
+        "Não é possível porque as médias são iguais",
+        "A"
+      ],
+      "a": 3,
+      "sol": "Menor desvio padrão indica menor variação em torno da média.",
+      "hyp": "Pode confundir consistência com média correta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:consistencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-049",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Dois grupos têm mesma mediana 12. Grupo A tem Q1=10,Q3=14; B tem Q1=6,Q3=18. Qual apresenta maior dispersão central?",
+      "o": [
+        "B",
+        "A",
+        "Igual",
+        "Não é possível"
+      ],
+      "a": 0,
+      "sol": "IQR A=4; IQR B=12. B é mais disperso nos 50% centrais.",
+      "hyp": "Pode olhar apenas para mediana.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:comparar-iqr",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-DIS-050",
+      "themeId": "10-est",
+      "subtopicId": "10-est-dispersao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Qual conjunto apresenta maior dispersão: A=9,10,11,10,10 ou B=0,5,10,15,20, sabendo que ambos têm média 10?",
+      "o": [
+        "A",
+        "B",
+        "Igual",
+        "A média não permite qualquer análise de dispersão"
+      ],
+      "a": 1,
+      "sol": "B contém valores muito mais afastados de 10 e tem maior amplitude e desvio padrão.",
+      "hyp": "Pode assumir que médias iguais implicam distribuições semelhantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-dispersao:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
