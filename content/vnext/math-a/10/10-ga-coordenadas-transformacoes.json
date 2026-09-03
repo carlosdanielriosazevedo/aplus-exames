@@ -1153,12 +1153,12 @@
       "cognitive": "Aplicação",
       "q": "A imagem de (−3,4) numa homotetia de centro O e razão 1/2 é...",
       "o": [
-        "(−1,5; 2)",
         "(−6; 8)",
         "(−2; 3)",
+        "(−1,5; 2)",
         "(1,5; −2)"
       ],
-      "a": 0,
+      "a": 2,
       "sol": "Multiplicam-se ambas as coordenadas por 1/2: (−1,5; 2).",
       "hyp": "Pode duplicar em vez de reduzir.",
       "contexts": [
@@ -1169,7 +1169,7 @@
       "signature": "10-ga-coordenadas-transformacoes:homotetia",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN10GA-CT-044",
@@ -1288,12 +1288,12 @@
       "cognitive": "Modelação",
       "q": "Um desenho é ampliado com centro na origem e fator 1,5. O ponto (4,2) passa para...",
       "o": [
-        "(6; 3)",
         "(5,5; 3,5)",
         "(4; 1,5)",
-        "(2,67; 1,33)"
+        "(2,67; 1,33)",
+        "(6; 3)"
       ],
-      "a": 0,
+      "a": 3,
       "sol": "Multiplica-se cada coordenada por 1,5: (6; 3).",
       "hyp": "Pode somar 1,5 em vez de multiplicar.",
       "contexts": [
@@ -1304,7 +1304,7 @@
       "signature": "10-ga-coordenadas-transformacoes:modelacao-homotetia",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN10GA-CT-049",
