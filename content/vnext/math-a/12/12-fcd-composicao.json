@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcd",
+  "subtopicId": "12-fcd-composicao",
+  "subtopic": "Função composta e domínio",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha composição, ordem, avaliação, domínio, simplificações com restrições herdadas, inversas, monotonia e modelação funcional. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCD-COMP-001",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A composição (f∘g)(x) significa...",
+      "o": [
+        "f(g(x)).",
+        "g(f(x)).",
+        "f(x)g(x).",
+        "f(x)+g(x)."
+      ],
+      "a": 0,
+      "sol": "Por definição, aplica-se primeiro g e depois f.",
+      "hyp": "Pode trocar a ordem da composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-002",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=2x+1 e g(x)=x², então (f∘g)(x)=",
+      "o": [
+        "(2x+1)².",
+        "2x²+1.",
+        "x²+2x+1.",
+        "2x+1+x²."
+      ],
+      "a": 1,
+      "sol": "f(g(x))=2x²+1.",
+      "hyp": "Pode calcular g∘f em vez de f∘g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-003",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+3 e g(x)=2x, então (g∘f)(x)=",
+      "o": [
+        "2x+3.",
+        "x+6.",
+        "2x+6.",
+        "2x."
+      ],
+      "a": 2,
+      "sol": "g(f(x))=2(x+3)=2x+6.",
+      "hyp": "Pode compor na ordem errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-004",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em geral, f∘g e g∘f...",
+      "o": [
+        "são sempre iguais.",
+        "só diferem por uma constante.",
+        "têm sempre o mesmo domínio.",
+        "não são iguais."
+      ],
+      "a": 3,
+      "sol": "A composição não é comutativa em geral.",
+      "hyp": "Pode transferir a comutatividade da soma/produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:nao-comutativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-005",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x² e g(x)=x+1, então (f∘g)(x)=",
+      "o": [
+        "(x+1)².",
+        "x²+1.",
+        "x²+x.",
+        "x+1²."
+      ],
+      "a": 0,
+      "sol": "f(g(x))=(x+1)².",
+      "hyp": "Pode elevar apenas x ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-006",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com f(x)=x² e g(x)=x+1, (g∘f)(x)=",
+      "o": [
+        "(x+1)².",
+        "x²+1.",
+        "x²+x.",
+        "2x+1."
+      ],
+      "a": 1,
+      "sol": "g(f(x))=x²+1.",
+      "hyp": "Pode repetir f∘g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-007",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para x pertencer ao domínio de f∘g, é necessário que...",
+      "o": [
+        "x pertença apenas ao domínio de f.",
+        "f(x) pertença ao domínio de g.",
+        "x pertença ao domínio de g e g(x) pertença ao domínio de f.",
+        "x pertença aos dois domínios, sempre."
+      ],
+      "a": 2,
+      "sol": "A composição exige que g esteja definida em x e que a sua imagem seja admissível em f.",
+      "hyp": "Pode intersectar domínios mecanicamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-008",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=x−2, o domínio de f∘g é...",
+      "o": [
+        "[0,+∞[.",
+        "]−∞,2].",
+        "R.",
+        "[2,+∞[."
+      ],
+      "a": 3,
+      "sol": "É preciso x−2≥0, logo x≥2.",
+      "hyp": "Pode usar apenas o domínio de f antes da composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-009",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/x e g(x)=x−3, o domínio de f∘g é...",
+      "o": [
+        "R\\{3}.",
+        "R\\{0}.",
+        "]3,+∞[.",
+        "R."
+      ],
+      "a": 0,
+      "sol": "f(g(x))=1/(x−3), exigindo x≠3.",
+      "hyp": "Pode excluir 0 em vez de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-010",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=ln x e g(x)=x+4, o domínio de f∘g é...",
+      "o": [
+        "]0,+∞[.",
+        "]−4,+∞[.",
+        "[−4,+∞[.",
+        "R."
+      ],
+      "a": 1,
+      "sol": "ln(x+4) exige x+4>0.",
+      "hyp": "Pode usar ≥0 em logaritmos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-011",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√(x−1) e g(x)=2x, o domínio de f∘g é...",
+      "o": [
+        "[1,+∞[.",
+        "[0,+∞[.",
+        "[1/2,+∞[.",
+        "R."
+      ],
+      "a": 2,
+      "sol": "√(2x−1) exige 2x−1≥0.",
+      "hyp": "Pode não substituir g dentro da condição de domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-012",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=3x−1 e g(x)=x/2, então (f∘g)(4)=",
+      "o": [
+        "11.",
+        "6.",
+        "2.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "g(4)=2 e f(2)=5.",
+      "hyp": "Pode avaliar f antes de g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:avaliacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-013",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x²+1 e g(x)=x−1, então (g∘f)(2)=",
+      "o": [
+        "4.",
+        "9.",
+        "3.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "f(2)=5 e g(5)=4.",
+      "hyp": "Pode calcular f∘g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:avaliacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-014",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se g transforma temperatura em °C para °F e f transforma °F em custo energético, então f∘g representa...",
+      "o": [
+        "temperatura em °C em função do custo.",
+        "custo em função da temperatura em °C.",
+        "soma das duas transformações.",
+        "uma relação sem interpretação."
+      ],
+      "a": 1,
+      "sol": "Primeiro converte-se a temperatura e depois calcula-se o custo.",
+      "hyp": "Pode ignorar a ordem semântica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-015",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A composição de funções é associativa:...",
+      "o": [
+        "f∘g=g∘f.",
+        "f∘f=f sempre.",
+        "f∘(g∘h)=(f∘g)∘h, quando tudo está definido.",
+        "f∘g=f+g."
+      ],
+      "a": 2,
+      "sol": "A composição é associativa nas condições de domínio adequadas.",
+      "hyp": "Pode confundir associatividade com comutatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:associatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-016",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+1, g(x)=2x e h(x)=x², então (f∘g∘h)(x)=",
+      "o": [
+        "(2x+1)².",
+        "2(x+1)².",
+        "x²+3.",
+        "2x²+1."
+      ],
+      "a": 3,
+      "sol": "h primeiro: x²; g:2x²; f:2x²+1.",
+      "hyp": "Pode ler a composição da esquerda para a direita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:tres-funcoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-017",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x² e g(x)=−x, então f∘g é...",
+      "o": [
+        "igual a f.",
+        "igual a g.",
+        "a função nula.",
+        "x↦−x²."
+      ],
+      "a": 0,
+      "sol": "f(g(x))=(−x)²=x².",
+      "hyp": "Pode conservar o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-018",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Com as mesmas funções, g∘f é...",
+      "o": [
+        "x↦x².",
+        "x↦−x².",
+        "x↦−x.",
+        "x↦x."
+      ],
+      "a": 1,
+      "sol": "g(f(x))=−x².",
+      "hyp": "Pode assumir que a composição é comutativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-019",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=|x| e g(x)=x−2, então (f∘g)(x)=",
+      "o": [
+        "|x|−2.",
+        "x−2.",
+        "|x−2|.",
+        "|x+2|."
+      ],
+      "a": 2,
+      "sol": "Substitui-se g(x) no argumento de f.",
+      "hyp": "Pode tirar o módulo para fora da translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-020",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+5 e g(x)=1/x, então (g∘f)(x)=",
+      "o": [
+        "1/x+5.",
+        "x/(x+5).",
+        "x+1/5.",
+        "1/(x+5)."
+      ],
+      "a": 3,
+      "sol": "g(f(x))=1/(x+5).",
+      "hyp": "Pode distribuir incorretamente o recíproco.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-021",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=x²−4, o domínio de f∘g é...",
+      "o": [
+        "]−∞,−2]∪[2,+∞[.",
+        "[−2,2].",
+        "[2,+∞[.",
+        "R."
+      ],
+      "a": 0,
+      "sol": "É preciso x²−4≥0, ou seja |x|≥2.",
+      "hyp": "Pode resolver x²≥4 como x≥2 apenas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-quadratico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-022",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/(x−1) e g(x)=x², o domínio de f∘g é...",
+      "o": [
+        "R\\{1}.",
+        "R\\{−1,1}.",
+        "R\\{0}.",
+        "]−1,1[."
+      ],
+      "a": 1,
+      "sol": "f(g(x))=1/(x²−1), logo x²≠1.",
+      "hyp": "Pode excluir apenas 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-023",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=ln x e g(x)=x²−9, o domínio de f∘g é...",
+      "o": [
+        "[−3,3].",
+        "]−3,3[.",
+        "]−∞,−3[∪]3,+∞[.",
+        "R\\{−3,3}."
+      ],
+      "a": 2,
+      "sol": "ln(x²−9) exige x²−9>0.",
+      "hyp": "Pode usar condição ≠0 em vez de >0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-024",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√(1−x) e g(x)=x², o domínio de f∘g é...",
+      "o": [
+        "[0,1].",
+        "]−1,1[.",
+        "R.",
+        "[−1,1]."
+      ],
+      "a": 3,
+      "sol": "√(1−x²) exige x²≤1.",
+      "hyp": "Pode restringir x a não negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-025",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O domínio de f∘g é sempre igual a D_g∩D_f?",
+      "o": [
+        "Não; depende também da condição g(x)∈D_f.",
+        "Sim.",
+        "Só para funções polinomiais não.",
+        "Apenas quando f=g."
+      ],
+      "a": 0,
+      "sol": "Os domínios vivem sobre a variável de entrada, mas a restrição crucial é aplicada a g(x).",
+      "hyp": "Pode fazer interseção mecânica de domínios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-026",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/(x+2) e g(x)=1/x, então (f∘g)(x)=",
+      "o": [
+        "1/(x+2).",
+        "x/(1+2x).",
+        "1/(1/x+2x).",
+        "1/(1+2x)."
+      ],
+      "a": 1,
+      "sol": "1/(1/x+2)=x/(1+2x).",
+      "hyp": "Pode não simplificar corretamente a fração complexa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:composicao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-027",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, o domínio é...",
+      "o": [
+        "R\\{−2}.",
+        "R\\{0}.",
+        "R\\{0,−1/2}.",
+        "R\\{1/2}."
+      ],
+      "a": 2,
+      "sol": "É preciso x≠0 para g e 1/x≠−2, isto é x≠−1/2.",
+      "hyp": "Pode olhar apenas para a forma simplificada ou apenas para um dos passos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-028",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x²−1 e g(x)=√x, então (f∘g)(x)=",
+      "o": [
+        "√(x²−1).",
+        "x²−1.",
+        "√x−1.",
+        "x−1."
+      ],
+      "a": 3,
+      "sol": "(√x)²−1=x−1, mas o domínio continua x≥0.",
+      "hyp": "Pode esquecer que a simplificação não alarga automaticamente o domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:simplificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-029",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No item anterior, apesar de a expressão simplificada ser x−1, o domínio de f∘g é...",
+      "o": [
+        "[0,+∞[.",
+        "R.",
+        "[1,+∞[.",
+        "]0,+∞[."
+      ],
+      "a": 0,
+      "sol": "A composição original exige que √x esteja definida.",
+      "hyp": "Pode alargar indevidamente o domínio após simplificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-herdado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-030",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=x², então (f∘g)(x)=",
+      "o": [
+        "x.",
+        "|x|.",
+        "x².",
+        "√x."
+      ],
+      "a": 1,
+      "sol": "√(x²)=|x| para x real.",
+      "hyp": "Pode substituir √(x²) por x sem considerar x<0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:raiz-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-031",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x³ e g(x)=∛x, então (f∘g)(x)=",
+      "o": [
+        "|x|.",
+        "x apenas para x≥0.",
+        "x para todo x real.",
+        "x³."
+      ],
+      "a": 2,
+      "sol": "(∛x)³=x em R.",
+      "hyp": "Pode transferir a restrição da raiz quadrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:cubo-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-032",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f e g são inversas uma da outra, então...",
+      "o": [
+        "f∘g=0.",
+        "f∘g=f+g.",
+        "f=g sempre.",
+        "f∘g e g∘f são identidades nos domínios apropriados."
+      ],
+      "a": 3,
+      "sol": "Funções inversas desfazem-se mutuamente.",
+      "hyp": "Pode confundir inversa com oposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:inversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-033",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=2x+3 e g(x)=(x−3)/2, então (f∘g)(x)=",
+      "o": [
+        "x.",
+        "2x.",
+        "x+3.",
+        "x−3."
+      ],
+      "a": 0,
+      "sol": "2((x−3)/2)+3=x.",
+      "hyp": "Pode não reconhecer funções inversas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:inversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-034",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com as mesmas funções, (g∘f)(x)=",
+      "o": [
+        "(x+3)/2.",
+        "x.",
+        "2x+3.",
+        "x−3."
+      ],
+      "a": 1,
+      "sol": "[(2x+3)−3]/2=x.",
+      "hyp": "Pode compor apenas num sentido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:inversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-035",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f∘g é a identidade, podemos concluir sempre que g∘f também é identidade sem outras hipóteses?",
+      "o": [
+        "Sim, sempre e sem condições.",
+        "Nunca.",
+        "Não em toda a generalidade; é preciso atender aos domínios/codomínios e bijetividade adequada.",
+        "Só se f e g forem polinómios."
+      ],
+      "a": 2,
+      "sol": "Uma inversa bilateral exige condições apropriadas; uma inversa apenas de um lado não basta em geral.",
+      "hyp": "Pode generalizar uma identidade unilateral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:inversa-lados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-036",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=e^x e g(x)=ln x, então (f∘g)(x)=",
+      "o": [
+        "x, para todo x real.",
+        "e^x ln x.",
+        "ln(e^x).",
+        "x, para x>0."
+      ],
+      "a": 3,
+      "sol": "e^{ln x}=x no domínio x>0.",
+      "hyp": "Pode esquecer o domínio do logaritmo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:exp-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-037",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=ln x e g(x)=e^x, então (f∘g)(x)=",
+      "o": [
+        "x, para todo x real.",
+        "x, apenas para x>0.",
+        "ln x.",
+        "e^x."
+      ],
+      "a": 0,
+      "sol": "ln(e^x)=x e e^x>0 para todo x real.",
+      "hyp": "Pode herdar indevidamente x>0 do ln aplicado diretamente a x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:log-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-038",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=1−x², então o domínio de f∘g é...",
+      "o": [
+        "]−∞,−1]∪[1,+∞[.",
+        "[−1,1].",
+        "[0,1].",
+        "R."
+      ],
+      "a": 1,
+      "sol": "1−x²≥0 implica x²≤1.",
+      "hyp": "Pode inverter a desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-039",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/√x e g(x)=x−5, o domínio de f∘g é...",
+      "o": [
+        "[5,+∞[.",
+        "R\\{5}.",
+        "]5,+∞[.",
+        "]−∞,5[."
+      ],
+      "a": 2,
+      "sol": "No denominador, √(x−5) exige x−5>0.",
+      "hyp": "Pode usar ≥0 esquecendo que o denominador não pode ser zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-raiz-denominador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-040",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=ln x e g(x)=1/x, o domínio de f∘g é...",
+      "o": [
+        "]−∞,0[.",
+        "R\\{0}.",
+        "R.",
+        "]0,+∞[."
+      ],
+      "a": 3,
+      "sol": "É preciso 1/x>0, logo x>0.",
+      "hyp": "Pode exigir apenas x≠0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-log-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-041",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√(x+1) e g(x)=1/(x−2), então x pertence ao domínio de f∘g quando...",
+      "o": [
+        "1/(x−2)+1≥0 e x≠2.",
+        "x≥−1 apenas.",
+        "x≠2 apenas.",
+        "1/(x−2)>0 apenas."
+      ],
+      "a": 0,
+      "sol": "A composição é √(1/(x−2)+1), além da condição x≠2.",
+      "hyp": "Pode aplicar apenas uma das restrições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:condicao-dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-042",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolvendo a condição do item anterior, o domínio é...",
+      "o": [
+        "]1,2[.",
+        "]−∞,1]∪]2,+∞[.",
+        "[1,2[.",
+        "R\\{2}."
+      ],
+      "a": 1,
+      "sol": "(x−1)/(x−2)≥0 dá x≤1 ou x>2.",
+      "hyp": "Pode resolver incorretamente uma inequação racional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:dominio-inequacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-043",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se g é constante, g(x)=c, então f∘g...",
+      "o": [
+        "é igual a f.",
+        "é sempre identidade.",
+        "é constante sempre que c∈D_f.",
+        "não pode ser definida."
+      ],
+      "a": 2,
+      "sol": "f(g(x))=f(c), valor constante.",
+      "hyp": "Pode pensar que uma função constante desaparece na composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:composicao-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-044",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é constante, f(x)=k, então f∘g...",
+      "o": [
+        "é igual a g.",
+        "é sempre indefinida.",
+        "é identidade.",
+        "é constante k onde g estiver definida e g(x)∈D_f."
+      ],
+      "a": 3,
+      "sol": "A função exterior devolve sempre k nos pontos admissíveis.",
+      "hyp": "Pode atribuir à composição o comportamento da função interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:constante-exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-045",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é par e g é ímpar, e a composição está definida simetricamente, então f∘g é...",
+      "o": [
+        "par.",
+        "ímpar.",
+        "sempre constante.",
+        "nem par nem ímpar necessariamente."
+      ],
+      "a": 0,
+      "sol": "(f∘g)(−x)=f(g(−x))=f(−g(x))=f(g(x)).",
+      "hyp": "Pode multiplicar paridades como numa regra decorada sem justificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-046",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é ímpar e g é ímpar, então f∘g é...",
+      "o": [
+        "par.",
+        "ímpar.",
+        "constante.",
+        "sempre positiva."
+      ],
+      "a": 1,
+      "sol": "f(g(−x))=f(−g(x))=−f(g(x)).",
+      "hyp": "Pode concluir par por haver duas funções ímpares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-047",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é crescente e g é crescente, então f∘g, nos intervalos adequados, é...",
+      "o": [
+        "decrescente.",
+        "constante.",
+        "crescente.",
+        "sem qualquer relação possível."
+      ],
+      "a": 2,
+      "sol": "A composição de duas funções crescentes preserva a ordem.",
+      "hyp": "Pode achar que a composição muda necessariamente a monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-048",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é crescente e g é decrescente, então f∘g é...",
+      "o": [
+        "crescente.",
+        "constante.",
+        "sempre par.",
+        "decrescente."
+      ],
+      "a": 3,
+      "sol": "g inverte a ordem e f preserva-a.",
+      "hyp": "Pode multiplicar sinais de declives sem pensar na composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-049",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma empresa converte quantidade produzida q em custo C(q) e tempo t em quantidade q(t). O custo em função do tempo é...",
+      "o": [
+        "C(q(t)).",
+        "q(C(t)).",
+        "C(t)+q(t).",
+        "C(t)q(t)."
+      ],
+      "a": 0,
+      "sol": "Primeiro o tempo determina a produção; depois a produção determina o custo.",
+      "hyp": "Pode inverter a cadeia causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-COMP-050",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-composicao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se q(t)=100t e C(q)=500+2q, então o custo em função do tempo é...",
+      "o": [
+        "100(500+2t).",
+        "C(q(t))=500+200t.",
+        "500+2t.",
+        "200+500t."
+      ],
+      "a": 1,
+      "sol": "Substitui-se q=100t em C(q).",
+      "hyp": "Pode compor na ordem errada ou esquecer o fator 100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-composicao:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
