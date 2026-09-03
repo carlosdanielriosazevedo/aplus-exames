@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-fun",
+  "subtopicId": "11-fun-cubicas-quarticas",
+  "subtopic": "Famílias cúbicas/quárticas e comportamento gráfico",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha grau, termo líder, comportamento extremo, zeros, multiplicidade, paridade, fatorização e modelação com funções cúbicas/quárticas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11FUN-CQ-001",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função polinomial cúbica tem grau...",
+      "o": [
+        "3.",
+        "2.",
+        "4.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "Cúbica significa grau 3.",
+      "hyp": "Pode confundir cúbica com quadrática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:grau-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-002",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função polinomial quártica tem grau...",
+      "o": [
+        "3.",
+        "4.",
+        "2.",
+        "5."
+      ],
+      "a": 1,
+      "sol": "Quártica significa grau 4.",
+      "hyp": "Pode confundir quártica com cúbica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:grau-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-003",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual destas é uma função cúbica?",
+      "o": [
+        "f(x)=x²+1.",
+        "f(x)=x⁴−3.",
+        "f(x)=2x³−x+1.",
+        "f(x)=5x−2."
+      ],
+      "a": 2,
+      "sol": "O maior expoente é 3.",
+      "hyp": "Pode olhar para o número de termos em vez do grau.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:identificar-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-004",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual destas é uma função quártica?",
+      "o": [
+        "g(x)=x³+1.",
+        "g(x)=x²−4.",
+        "g(x)=1/x.",
+        "g(x)=x⁴−2x²+1."
+      ],
+      "a": 3,
+      "sol": "O maior expoente é 4.",
+      "hyp": "Pode confundir função racional com polinomial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:identificar-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-005",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O comportamento de uma função polinomial para |x| muito grande é dominado sobretudo pelo...",
+      "o": [
+        "termo de maior grau.",
+        "termo constante.",
+        "coeficiente linear.",
+        "número de zeros."
+      ],
+      "a": 0,
+      "sol": "O termo líder domina assintoticamente.",
+      "hyp": "Pode focar no termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:termo-lider",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-006",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x³, quando x→+∞, f(x)...",
+      "o": [
+        "→−∞.",
+        "→+∞.",
+        "→0.",
+        "fica limitada."
+      ],
+      "a": 1,
+      "sol": "Potência ímpar positiva cresce para +∞ à direita.",
+      "hyp": "Pode confundir com coeficiente negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:extremos-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-007",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x³, quando x→−∞, f(x)...",
+      "o": [
+        "→+∞.",
+        "→0.",
+        "→−∞.",
+        "fica positiva."
+      ],
+      "a": 2,
+      "sol": "Potência ímpar preserva o sinal.",
+      "hyp": "Pode tratar x³ como x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:extremos-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-008",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para g(x)=x⁴, quando x→±∞, g(x)...",
+      "o": [
+        "→−∞.",
+        "→0.",
+        "muda de sinal.",
+        "→+∞."
+      ],
+      "a": 3,
+      "sol": "Potência par positiva cresce para +∞ em ambos os extremos.",
+      "hyp": "Pode confundir com potência ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:extremos-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-009",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para g(x)=−x⁴, quando x→±∞, g(x)...",
+      "o": [
+        "→−∞.",
+        "→+∞.",
+        "→0.",
+        "fica sempre positiva."
+      ],
+      "a": 0,
+      "sol": "O coeficiente líder negativo inverte o comportamento.",
+      "hyp": "Pode ignorar o sinal do coeficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:extremos-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-010",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma função polinomial de grau ímpar com coeficiente líder positivo tem, nos extremos...",
+      "o": [
+        "ambos para +∞.",
+        "esquerda para −∞ e direita para +∞.",
+        "ambos para −∞.",
+        "esquerda +∞ e direita −∞."
+      ],
+      "a": 1,
+      "sol": "É o padrão típico de grau ímpar positivo.",
+      "hyp": "Pode aplicar o padrão de grau par.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:padrao-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-011",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "f(x)=x³−4x tem zeros...",
+      "o": [
+        "−4,0,4.",
+        "0 e 4.",
+        "−2,0,2.",
+        "−2 e 2 apenas."
+      ],
+      "a": 2,
+      "sol": "x³−4x=x(x²−4)=x(x−2)(x+2).",
+      "hyp": "Pode esquecer o zero x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:zeros-fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-012",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "g(x)=x⁴−5x²+4 fatoriza-se em...",
+      "o": [
+        "(x²+1)(x²+4).",
+        "(x−1)(x−4).",
+        "x²(x²−5)+4.",
+        "(x²−1)(x²−4)."
+      ],
+      "a": 3,
+      "sol": "Produto dá x⁴−5x²+4.",
+      "hyp": "Pode fatorizar como se fosse quadrática em x sem usar x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:quartica-biquadrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-013",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os zeros de x⁴−5x²+4 são...",
+      "o": [
+        "−2,−1,1,2.",
+        "−4,−1,1,4.",
+        "−2,2.",
+        "−1,1."
+      ],
+      "a": 0,
+      "sol": "x²=1 ou 4, logo x=±1,±2.",
+      "hyp": "Pode esquecer raízes negativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:zeros-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-014",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma quártica do tipo ax⁴+bx²+c é frequentemente chamada...",
+      "o": [
+        "linear.",
+        "biquadrada.",
+        "afim.",
+        "racional."
+      ],
+      "a": 1,
+      "sol": "É uma quadrática em x².",
+      "hyp": "Pode confundir nomenclatura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:biquadrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-015",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Resolver x⁴−13x²+36=0 equivale a resolver, com y=x²...",
+      "o": [
+        "y⁴−13y²+36=0.",
+        "y²−13x+36=0.",
+        "y²−13y+36=0.",
+        "y−13+36=0."
+      ],
+      "a": 2,
+      "sol": "Substituindo y=x², x⁴=y².",
+      "hyp": "Pode substituir apenas um termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:substituicao-y",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-016",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "As soluções reais de x⁴−13x²+36=0 são...",
+      "o": [
+        "±6.",
+        "2 e 3.",
+        "±1 e ±6.",
+        "±2 e ±3."
+      ],
+      "a": 3,
+      "sol": "y²−13y+36=(y−4)(y−9), logo x²=4 ou 9.",
+      "hyp": "Pode esquecer sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:resolver-biquadrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-017",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)=x³, então f é...",
+      "o": [
+        "ímpar.",
+        "par.",
+        "constante.",
+        "periódica."
+      ],
+      "a": 0,
+      "sol": "f(−x)=−x³=−f(x).",
+      "hyp": "Pode confundir simetria de x² e x³.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:paridade-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-018",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se g(x)=x⁴, então g é...",
+      "o": [
+        "ímpar.",
+        "par.",
+        "linear.",
+        "sem simetria."
+      ],
+      "a": 1,
+      "sol": "g(−x)=g(x).",
+      "hyp": "Pode confundir expoente par com função ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:paridade-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-019",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função f(x)=x³+1 tem ordenada na origem...",
+      "o": [
+        "0.",
+        "−1.",
+        "1.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "f(0)=1.",
+      "hyp": "Pode usar o coeficiente de x³.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:ordenada-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-020",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A função g(x)=2x⁴−3x²+5 tem ordenada na origem...",
+      "o": [
+        "2.",
+        "−3.",
+        "0.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "g(0)=5.",
+      "hyp": "Pode usar o coeficiente líder.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:ordenada-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-021",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma cúbica tem três zeros reais distintos, o gráfico cruza Ox...",
+      "o": [
+        "em três pontos distintos.",
+        "em dois pontos apenas.",
+        "em quatro pontos.",
+        "em nenhum ponto."
+      ],
+      "a": 0,
+      "sol": "Cada zero real distinto corresponde a uma interseção com Ox.",
+      "hyp": "Pode confundir grau com número exato de zeros reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:tres-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-022",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma cúbica real pode ter quantos zeros reais distintos?",
+      "o": [
+        "apenas 3.",
+        "1, 2 ou 3.",
+        "0, 2 ou 4.",
+        "apenas 1."
+      ],
+      "a": 1,
+      "sol": "Pode ter um zero simples e um duplo (2 distintos) ou três simples, ou apenas um real.",
+      "hyp": "Pode achar que o grau fixa o número de zeros reais distintos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:numero-zeros-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-023",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma quártica real pode não ter zeros reais?",
+      "o": [
+        "Não.",
+        "Só se for cúbica.",
+        "Sim.",
+        "Só se o coeficiente líder for 0."
+      ],
+      "a": 2,
+      "sol": "Por exemplo x⁴+1>0 para todo x.",
+      "hyp": "Pode achar que grau par garante zeros reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:quartica-sem-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-024",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "f(x)=x³−x²−4x+4 pode fatorizar-se por agrupamento como...",
+      "o": [
+        "(x+1)(x−2)(x+2).",
+        "x(x−1)(x−4).",
+        "(x−4)(x²−1).",
+        "(x−1)(x−2)(x+2)."
+      ],
+      "a": 3,
+      "sol": "x²(x−1)−4(x−1)=(x−1)(x²−4).",
+      "hyp": "Pode agrupar sem fator comum correto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:agrupamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-025",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Os zeros da função anterior são...",
+      "o": [
+        "−2,1,2.",
+        "−1,2,4.",
+        "−2,2,4.",
+        "0,1,4."
+      ],
+      "a": 0,
+      "sol": "Da fatorização (x−1)(x−2)(x+2).",
+      "hyp": "Pode trocar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:zeros-agrupamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-026",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=(x−1)²(x+2), então x=1 é um zero de multiplicidade...",
+      "o": [
+        "1.",
+        "2.",
+        "3.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "O fator (x−1) aparece ao quadrado.",
+      "hyp": "Pode somar todos os expoentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:multiplicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-027",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num zero de multiplicidade par, o gráfico tipicamente...",
+      "o": [
+        "cruza Ox e muda sempre de sinal.",
+        "tem assíntota vertical.",
+        "toca Ox e não muda de sinal.",
+        "é descontínuo."
+      ],
+      "a": 2,
+      "sol": "Fatores de multiplicidade par mantêm o sinal ao atravessar o zero.",
+      "hyp": "Pode aplicar o comportamento de multiplicidade ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:multiplicidade-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-028",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num zero de multiplicidade ímpar, o gráfico tipicamente...",
+      "o": [
+        "toca e volta sem mudar de sinal.",
+        "fica sempre acima de Ox.",
+        "é descontínuo.",
+        "cruza Ox e muda de sinal."
+      ],
+      "a": 3,
+      "sol": "O fator muda de sinal.",
+      "hyp": "Pode confundir paridade da multiplicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:multiplicidade-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-029",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se g(x)=(x+1)^2(x−3)^2, então g(x)...",
+      "o": [
+        "é não negativa para todo x.",
+        "é sempre negativa.",
+        "muda de sinal em −1 e 3.",
+        "é cúbica."
+      ],
+      "a": 0,
+      "sol": "Produto de quadrados é ≥0.",
+      "hyp": "Pode assumir que zeros implicam mudança de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:produto-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-030",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O grau de (x−1)^2(x+2)^2 é...",
+      "o": [
+        "2.",
+        "4.",
+        "3.",
+        "8."
+      ],
+      "a": 1,
+      "sol": "Somam-se os graus dos fatores:2+2=4.",
+      "hyp": "Pode multiplicar os expoentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:grau-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-031",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O termo líder de (x−1)(x+2)(x−3) é...",
+      "o": [
+        "−6x.",
+        "x².",
+        "x³.",
+        "−x³."
+      ],
+      "a": 2,
+      "sol": "Multiplicando os termos líderes x·x·x resulta x³.",
+      "hyp": "Pode usar o produto das constantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:termo-lider-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-032",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O termo líder de −2(x−1)^4 é...",
+      "o": [
+        "2x⁴.",
+        "−8x⁴.",
+        "−2x.",
+        "−2x⁴."
+      ],
+      "a": 3,
+      "sol": "(x−1)^4 tem termo líder x⁴.",
+      "hyp": "Pode elevar também o coeficiente −2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:termo-lider",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-033",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=−x³+2x, o comportamento extremo é...",
+      "o": [
+        "x→−∞: f→+∞; x→+∞: f→−∞.",
+        "ambos +∞.",
+        "ambos −∞.",
+        "esquerda −∞ e direita +∞."
+      ],
+      "a": 0,
+      "sol": "Grau ímpar com coeficiente líder negativo inverte o padrão de x³.",
+      "hyp": "Pode ignorar o sinal do coeficiente líder.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:extremos-cubica-neg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-034",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para g(x)=3x⁴−x², o comportamento extremo é...",
+      "o": [
+        "ambos para −∞.",
+        "ambos os lados para +∞.",
+        "esquerda −∞, direita +∞.",
+        "fica limitada."
+      ],
+      "a": 1,
+      "sol": "Grau par e coeficiente líder positivo.",
+      "hyp": "Pode dar demasiado peso ao termo −x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:extremos-quartica-pos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-035",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é f(−2) para f(x)=x³−3x?",
+      "o": [
+        "2.",
+        "−14.",
+        "−2.",
+        "14."
+      ],
+      "a": 2,
+      "sol": "−8+6=−2.",
+      "hyp": "Pode errar o cubo de número negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:avaliar-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-036",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é g(−2) para g(x)=x⁴−2x²?",
+      "o": [
+        "−8.",
+        "12.",
+        "0.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "16−8=8.",
+      "hyp": "Pode tratar (−2)^4 como −16.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:avaliar-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-037",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma cúbica monica tem zeros −1,2 e 4, uma expressão é...",
+      "o": [
+        "(x+1)(x−2)(x−4).",
+        "(x−1)(x+2)(x+4).",
+        "(x+1)(x+2)(x+4).",
+        "x³−8."
+      ],
+      "a": 0,
+      "sol": "Cada zero r origina fator x−r.",
+      "hyp": "Pode trocar os sinais dos fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:construir-pelos-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-038",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma quártica monica tem zeros −2 e 3, ambos duplos, então...",
+      "o": [
+        "g(x)=(x−2)²(x+3)².",
+        "g(x)=(x+2)²(x−3)².",
+        "g(x)=(x+2)(x−3).",
+        "g(x)=x⁴−6."
+      ],
+      "a": 1,
+      "sol": "Multiplicidade dupla corresponde ao quadrado de cada fator.",
+      "hyp": "Pode esquecer as multiplicidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:construir-multiplicidades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-039",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=a(x−1)(x−2)(x+1) e f(0)=4, então a=",
+      "o": [
+        "−2.",
+        "4.",
+        "2.",
+        "−4."
+      ],
+      "a": 2,
+      "sol": "f(0)=a(−1)(−2)(1)=2a=4, logo a=2.",
+      "hyp": "Pode errar o sinal do produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-040",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se g(x)=a(x−1)^2(x+2)^2 e g(0)=16, então a=",
+      "o": [
+        "2.",
+        "8.",
+        "16.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "g(0)=a·1·4=4a=16, logo a=4.",
+      "hyp": "Pode esquecer que (0+2)^2=4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-041",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma quártica par pode ser expressa apenas com potências...",
+      "o": [
+        "pares de x.",
+        "ímpares de x.",
+        "sempre todas as potências.",
+        "apenas x⁴ e constante."
+      ],
+      "a": 0,
+      "sol": "Paridade exige g(−x)=g(x), eliminando termos ímpares.",
+      "hyp": "Pode achar que toda quártica é par.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:quartica-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-042",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma cúbica ímpar pode ter termo constante não nulo?",
+      "o": [
+        "Sim, sempre.",
+        "Não.",
+        "Só se for 1.",
+        "Só se o coeficiente líder for negativo."
+      ],
+      "a": 1,
+      "sol": "Para f(−x)=−f(x), necessariamente f(0)=0.",
+      "hyp": "Pode ignorar a condição em x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:cubica-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-043",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual destas funções é ímpar?",
+      "o": [
+        "f(x)=x³+1.",
+        "f(x)=x⁴−x².",
+        "f(x)=2x³−5x.",
+        "f(x)=x²+x."
+      ],
+      "a": 2,
+      "sol": "Só contém potências ímpares e sem constante.",
+      "hyp": "Pode olhar apenas para o grau máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:identificar-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-044",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual destas funções é par?",
+      "o": [
+        "g(x)=x⁴+x.",
+        "g(x)=x³−x.",
+        "g(x)=x⁴+x³.",
+        "g(x)=x⁴−3x²+2."
+      ],
+      "a": 3,
+      "sol": "Só contém potências pares e termo constante.",
+      "hyp": "Pode achar que grau par basta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:identificar-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-045",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um volume simplificado é dado por V(x)=x³ para x>0. Se x duplica, V...",
+      "o": [
+        "fica 8 vezes maior.",
+        "duplica.",
+        "fica 4 vezes maior.",
+        "fica 6 vezes maior."
+      ],
+      "a": 0,
+      "sol": "(2x)³=8x³.",
+      "hyp": "Pode aplicar proporcionalidade linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:modelacao-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-046",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma grandeza proporcional a x⁴, ao duplicar x, é multiplicada por...",
+      "o": [
+        "8.",
+        "16.",
+        "4.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "(2x)^4=16x^4.",
+      "hyp": "Pode confundir com comportamento cúbico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:modelacao-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-047",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A equação x³=x pode escrever-se como...",
+      "o": [
+        "x(x−1)=0.",
+        "(x−1)³=0.",
+        "x(x−1)(x+1)=0.",
+        "x²=1 apenas."
+      ],
+      "a": 2,
+      "sol": "x³−x=x(x²−1)=x(x−1)(x+1).",
+      "hyp": "Pode dividir por x e perder x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:fatorizacao-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-048",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As soluções de x³=x são...",
+      "o": [
+        "−1,1.",
+        "0,1.",
+        "0.",
+        "−1,0,1."
+      ],
+      "a": 3,
+      "sol": "Da fatorização x(x−1)(x+1)=0.",
+      "hyp": "Pode perder a solução x=0 ao dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:resolver-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-049",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A equação x⁴=x² tem soluções reais...",
+      "o": [
+        "−1,0,1.",
+        "−1,1.",
+        "0,1.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "x²(x²−1)=x²(x−1)(x+1).",
+      "hyp": "Pode dividir por x² e perder x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:resolver-quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-CQ-050",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-cubicas-quarticas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O facto de uma função polinomial ter grau 4 implica que tenha exatamente 4 zeros reais distintos?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se o coeficiente líder for positivo.",
+        "Só se for par."
+      ],
+      "a": 1,
+      "sol": "O grau limita o número de zeros reais distintos, mas podem existir menos.",
+      "hyp": "Pode confundir grau com número exato de raízes reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-cubicas-quarticas:grau-vs-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
