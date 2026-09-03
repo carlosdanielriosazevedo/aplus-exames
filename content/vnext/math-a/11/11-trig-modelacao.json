@@ -665,7 +665,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No item anterior, c é aproximadamente...",
+      "q": "Num triângulo, dois lados medem 7 e 9 e o ângulo compreendido é 60°. Se o terceiro lado c satisfaz c²=67, então c é aproximadamente...",
       "o": [
         "8,19",
         "6,70",
@@ -989,7 +989,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Na roda-gigante anterior, a altura do centro é...",
+      "q": "Uma roda-gigante tem altura máxima 42 m e mínima 2 m. Qual é a altura do centro?",
       "o": [
         "22 m",
         "20 m",
@@ -1070,7 +1070,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Na maré anterior, qual é o nível médio?",
+      "q": "Uma maré varia entre 1,2 m e 5,8 m. Qual é o nível médio?",
       "o": [
         "2,3 m",
         "5,8 m",
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "No triângulo do item anterior, AB=100 está oposto a C=75°. A distância AC, oposta a B=60°, é dada por...",
+      "q": "Num triângulo com AB=100, A=45°, B=60° e C=75°, a distância AC, oposta a B=60°, é dada por...",
       "o": [
         "100 sin60°/sin75°",
         "100 sin75°/sin60°",
