@@ -476,7 +476,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Na mesma função, −1 é raiz de multiplicidade...",
+      "q": "Se P(x)=(x−2)²(x+1), então −1 é raiz de multiplicidade...",
       "o": [
         "2.",
         "1.",
@@ -908,7 +908,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na mesma função, o sinal muda em x=−2?",
+      "q": "Para P(x)=(x−1)²(x+2), o sinal muda em x=−2?",
       "o": [
         "Não.",
         "Sim.",
