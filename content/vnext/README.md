@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **2 700 perguntas**
-- Progresso bruto: **47,79%**
+- Concluído em rascunho: **3 000 perguntas**
+- Progresso bruto: **53,10%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -254,3 +254,29 @@ Próxima matéria: **11.º — Sucessões**.
 - Total vNext: **2 700/~5 650 (47,79%)**
 
 Próxima matéria: **11.º — Funções**.
+
+
+### 11.º ano — Funções
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Famílias cúbicas/quárticas e comportamento gráfico | 50 | 50 | lote completo em protótipo |
+| Divisão de polinómios, Ruffini/Horner | 50 | 50 | lote completo em protótipo |
+| Teorema do resto, raízes, multiplicidade e fatorização | 50 | 50 | lote completo em protótipo |
+| Operações entre funções | 50 | 50 | lote completo em protótipo |
+| Funções racionais | 50 | 50 | lote completo em protótipo |
+| Assíntotas, interpretação e modelação | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 3 000 perguntas
+
+- 10.º ano completo: **1 550/1 550**
+- 11.º — Trigonometria: **300/300**
+- 11.º — Produto escalar: **300/300**
+- 11.º — Contagem: **300/300**
+- 11.º — Sucessões: **250/250**
+- 11.º — Funções: **300/300**
+- 11.º ano acumulado: **1 450/1 750**
+- Total vNext: **3 000/~5 650 (53,10%)**
+
+Próxima matéria: **11.º — Cálculo diferencial**.
