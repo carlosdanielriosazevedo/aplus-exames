@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fun",
+  "subtopicId": "10-fun-afim",
+  "subtopic": "Função afim e modelação",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha parâmetros, gráfico, zeros, equação por pontos, interseção de retas, taxas de variação e modelação linear. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FUN-AF-001",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função afim tem a forma...",
+      "o": [
+        "f(x)=ax+b.",
+        "f(x)=ax²+b.",
+        "f(x)=a/x+b.",
+        "f(x)=|x|+b."
+      ],
+      "a": 0,
+      "sol": "A forma geral de uma função afim é ax+b.",
+      "hyp": "Pode confundir função afim com quadrática ou racional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:forma-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-002",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na função f(x)=ax+b, o coeficiente a representa...",
+      "o": [
+        "a ordenada na origem.",
+        "o declive da reta.",
+        "o zero sempre.",
+        "o domínio."
+      ],
+      "a": 1,
+      "sol": "a mede a variação de y por unidade de x.",
+      "hyp": "Pode confundir declive com termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-003",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na função f(x)=ax+b, b representa...",
+      "o": [
+        "o declive.",
+        "o zero da função.",
+        "f(0), a ordenada na origem.",
+        "a imagem."
+      ],
+      "a": 2,
+      "sol": "f(0)=b.",
+      "hyp": "Pode trocar os papéis de a e b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:ordenada-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-004",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=3x+2, qual é f(4)?",
+      "o": [
+        "10",
+        "12",
+        "16",
+        "14"
+      ],
+      "a": 3,
+      "sol": "3×4+2=14.",
+      "hyp": "Pode esquecer o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:avaliar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-005",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o declive de y=−2x+5?",
+      "o": [
+        "−2",
+        "2",
+        "5",
+        "−5"
+      ],
+      "a": 0,
+      "sol": "O coeficiente de x é −2.",
+      "hyp": "Pode usar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:identificar-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-006",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se a>0 numa função afim f(x)=ax+b, a função é...",
+      "o": [
+        "decrescente.",
+        "crescente.",
+        "constante.",
+        "quadrática."
+      ],
+      "a": 1,
+      "sol": "Declive positivo implica crescimento.",
+      "hyp": "Pode confundir sinal do declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-007",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se a<0 numa função afim, a função é...",
+      "o": [
+        "crescente.",
+        "constante.",
+        "decrescente.",
+        "sempre positiva."
+      ],
+      "a": 2,
+      "sol": "Declive negativo implica decréscimo.",
+      "hyp": "Pode associar sinal de a ao sinal de f.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-008",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se a=0, f(x)=ax+b é...",
+      "o": [
+        "crescente.",
+        "decrescente.",
+        "sem domínio.",
+        "constante."
+      ],
+      "a": 3,
+      "sol": "Fica f(x)=b.",
+      "hyp": "Pode achar que toda função afim tem reta inclinada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:funcao-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-009",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o zero de f(x)=2x−6?",
+      "o": [
+        "3",
+        "−3",
+        "0",
+        "6"
+      ],
+      "a": 0,
+      "sol": "2x−6=0 => x=3.",
+      "hyp": "Pode trocar sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-010",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o zero de f(x)=−4x+8?",
+      "o": [
+        "−2",
+        "2",
+        "0",
+        "4"
+      ],
+      "a": 1,
+      "sol": "−4x+8=0 => x=2.",
+      "hyp": "Pode dividir por 4 sem considerar sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-011",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A reta y=5x−3 interseta o eixo Oy em...",
+      "o": [
+        "(−3,0).",
+        "(0,5).",
+        "(0,−3).",
+        "(5,0)."
+      ],
+      "a": 2,
+      "sol": "Em x=0, y=−3.",
+      "hyp": "Pode trocar eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:intersecao-Oy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-012",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A reta y=2x−4 interseta o eixo Ox em...",
+      "o": [
+        "(0,−4).",
+        "(−2,0).",
+        "(4,0).",
+        "(2,0)."
+      ],
+      "a": 3,
+      "sol": "O zero é x=2.",
+      "hyp": "Pode usar b como abcissa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:intersecao-Ox",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-013",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A reta passa por (0,3) e (2,7). Qual é o declive?",
+      "o": [
+        "2",
+        "1",
+        "3",
+        "4"
+      ],
+      "a": 0,
+      "sol": "(7−3)/(2−0)=2.",
+      "hyp": "Pode dividir variação de x por variação de y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:declive-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-014",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A reta passa por (1,5) e (3,9). Qual é o declive?",
+      "o": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 1,
+      "sol": "(9−5)/(3−1)=4/2=2.",
+      "hyp": "Pode usar soma em vez de diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:declive-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-015",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta tem declive 3 e passa por (0,−2). Qual é a equação?",
+      "o": [
+        "y=−2x+3",
+        "y=3x+2",
+        "y=3x−2",
+        "y=x−2"
+      ],
+      "a": 2,
+      "sol": "b=−2 e a=3.",
+      "hyp": "Pode trocar coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:equacao-a-b",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-016",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta tem declive −1 e ordenada na origem 4. Qual é a equação?",
+      "o": [
+        "y=x−4",
+        "y=4x−1",
+        "y=−4x+1",
+        "y=−x+4"
+      ],
+      "a": 3,
+      "sol": "a=−1 e b=4.",
+      "hyp": "Pode trocar sinais ou parâmetros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:equacao-a-b",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-017",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas retas não verticais com o mesmo declive e diferentes ordenadas na origem são...",
+      "o": [
+        "paralelas distintas.",
+        "perpendiculares.",
+        "coincidentes sempre.",
+        "secantes no eixo Oy."
+      ],
+      "a": 0,
+      "sol": "Mesmo declive, b diferente => paralelas.",
+      "hyp": "Pode achar que mesmo declive implica mesma reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:paralelismo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-018",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas funções afins com o mesmo a e o mesmo b representam...",
+      "o": [
+        "retas paralelas distintas.",
+        "a mesma reta.",
+        "retas perpendiculares.",
+        "parábolas."
+      ],
+      "a": 1,
+      "sol": "Os dois parâmetros determinam a mesma expressão.",
+      "hyp": "Pode achar que fórmulas iguais podem dar gráficos diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:mesma-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-019",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=4x+1, quanto aumenta f quando x aumenta 3 unidades?",
+      "o": [
+        "4",
+        "7",
+        "12",
+        "13"
+      ],
+      "a": 2,
+      "sol": "Com declive 4, aumento em y=4×3=12.",
+      "hyp": "Pode usar b ou somar 4+3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-020",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se g(x)=10−2x, quanto varia g quando x aumenta 5?",
+      "o": [
+        "−5",
+        "5",
+        "10",
+        "−10"
+      ],
+      "a": 3,
+      "sol": "Declive −2×5=−10.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-021",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a equação da reta que passa por (1,3) e (3,7)?",
+      "o": [
+        "y=2x+1",
+        "y=x+2",
+        "y=2x−1",
+        "y=3x"
+      ],
+      "a": 0,
+      "sol": "Declive=2. Usando (1,3): 3=2+b => b=1.",
+      "hyp": "Pode calcular declive certo e termo independente errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:equacao-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-022",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a equação da reta que passa por (−1,4) e (2,−2)?",
+      "o": [
+        "y=2x+6",
+        "y=−2x+2",
+        "y=−x+3",
+        "y=−2x−2"
+      ],
+      "a": 1,
+      "sol": "Declive=(−2−4)/(2−(−1))=−6/3=−2. 4=2+b => b=2.",
+      "hyp": "Pode errar diferenças com negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:equacao-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-023",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta y=3x+b passa por (2,10). Quanto vale b?",
+      "o": [
+        "2",
+        "6",
+        "4",
+        "8"
+      ],
+      "a": 2,
+      "sol": "10=6+b => b=4.",
+      "hyp": "Pode multiplicar b por x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:determinar-b",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-024",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A reta y=ax+5 passa por (3,11). Quanto vale a?",
+      "o": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "a": 3,
+      "sol": "11=3a+5 => a=2.",
+      "hyp": "Pode usar 11−5 sem dividir por 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-025",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma tarifa C(x)=4+1,2x significa...",
+      "o": [
+        "4 € fixos e 1,2 € por unidade de x.",
+        "1,2 € fixos e 4 € por unidade.",
+        "4+1,2 € independentemente de x.",
+        "uma redução de 1,2 € por unidade."
+      ],
+      "a": 0,
+      "sol": "b é custo fixo e a é taxa variável.",
+      "hyp": "Pode trocar termo fixo e declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:modelacao-tarifa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-026",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa tarifa C(x)=4+1,2x, qual é o custo para x=10?",
+      "o": [
+        "12 €",
+        "16 €",
+        "14 €",
+        "18 €"
+      ],
+      "a": 1,
+      "sol": "4+12=16.",
+      "hyp": "Pode esquecer a parte fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:modelacao-tarifa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-027",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma empresa cobra 10 € fixos mais 2 € por unidade. Para que x o custo é 30 €?",
+      "o": [
+        "5",
+        "15",
+        "10",
+        "20"
+      ],
+      "a": 2,
+      "sol": "10+2x=30 => x=10.",
+      "hyp": "Pode dividir 30 por 2 sem retirar a parte fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:inverter-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-028",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma vela mede 30 cm e perde 2 cm por hora. Qual modelo é adequado?",
+      "o": [
+        "h(t)=30+2t",
+        "h(t)=2−30t",
+        "h(t)=28t",
+        "h(t)=30−2t"
+      ],
+      "a": 3,
+      "sol": "Valor inicial 30 e taxa −2 cm/h.",
+      "hyp": "Pode errar sinal ou interpretar 2 como valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:modelo-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-029",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "No modelo h(t)=30−2t, quando a altura chega a 10 cm?",
+      "o": [
+        "10 h",
+        "5 h",
+        "15 h",
+        "20 h"
+      ],
+      "a": 0,
+      "sol": "30−2t=10 => t=10.",
+      "hyp": "Pode dividir 30 por 2 sem considerar o alvo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:resolver-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-030",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No modelo T(t)=18+0,5t, o coeficiente 0,5 representa...",
+      "o": [
+        "valor inicial 0,5.",
+        "aumento de 0,5 unidades de T por unidade de t.",
+        "tempo máximo.",
+        "zero da função."
+      ],
+      "a": 1,
+      "sol": "É a taxa de variação constante.",
+      "hyp": "Pode confundir declive com valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:taxa-variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-031",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As retas y=2x+1 e y=2x−5 têm quantos pontos em comum?",
+      "o": [
+        "1.",
+        "2.",
+        "0.",
+        "Infinitos."
+      ],
+      "a": 2,
+      "sol": "São paralelas distintas.",
+      "hyp": "Pode pensar que todas as retas se intersectam.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-032",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As retas y=2x+1 e y=−x+7 intersectam-se em que valor de x?",
+      "o": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "a": 3,
+      "sol": "2x+1=−x+7 => 3x=6 => x=2.",
+      "hyp": "Pode igualar apenas coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:intersecao-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-033",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, qual é o ponto de interseção?",
+      "o": [
+        "(2,5)",
+        "(2,3)",
+        "(3,7)",
+        "(1,4)"
+      ],
+      "a": 0,
+      "sol": "Para x=2, y=5.",
+      "hyp": "Pode obter x certo e avaliar y mal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:intersecao-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-034",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Resolver f(x)=g(x) para duas funções afins corresponde graficamente a...",
+      "o": [
+        "encontrar apenas os zeros de f.",
+        "encontrar as abcissas dos pontos de interseção.",
+        "calcular os declives.",
+        "determinar o domínio."
+      ],
+      "a": 1,
+      "sol": "Nos pontos de interseção as ordenadas são iguais.",
+      "hyp": "Pode confundir igualdade de funções num ponto com zeros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:igualdade-funcoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-035",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual função afim tem zero em x=4 e declive 2?",
+      "o": [
+        "f(x)=2x+4",
+        "f(x)=4x−2",
+        "f(x)=2x−8",
+        "f(x)=x−4"
+      ],
+      "a": 2,
+      "sol": "Com zero 4, f(x)=2(x−4)=2x−8.",
+      "hyp": "Pode usar o zero como termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:zero-e-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-036",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual função afim tem zero −3 e declive −2?",
+      "o": [
+        "f(x)=−2x+6",
+        "f(x)=2x−6",
+        "f(x)=−x−3",
+        "f(x)=−2x−6"
+      ],
+      "a": 3,
+      "sol": "f(x)=−2(x+3)=−2x−6.",
+      "hyp": "Pode trocar sinal do zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:zero-e-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-037",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta passa por (2,5) e tem zero em x=−3. Qual é o declive?",
+      "o": [
+        "1",
+        "0,5",
+        "2",
+        "5"
+      ],
+      "a": 0,
+      "sol": "Usando pontos (−3,0) e (2,5): a=5/5=1.",
+      "hyp": "Pode usar apenas 5/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:zero-e-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-038",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta passa por (0,4) e (x,0), tendo declive −2. Qual é x?",
+      "o": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 1,
+      "sol": "0−4=−2(x−0) => x=2.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:zero-a-partir-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-039",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas funções afins têm declives de sinais opostos, uma é crescente e outra...",
+      "o": [
+        "constante.",
+        "paralela.",
+        "decrescente.",
+        "necessariamente perpendicular."
+      ],
+      "a": 2,
+      "sol": "Sinais opostos implicam monotonicidades opostas.",
+      "hyp": "Pode inferir perpendicularidade apenas do sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:comparar-monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-040",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função afim satisfaz f(1)=4 e f(5)=12. Qual é f(0)?",
+      "o": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "a": 3,
+      "sol": "Declive=(12−4)/(5−1)=2. Então f(x)=2x+2 e f(0)=2.",
+      "hyp": "Pode assumir b=4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:reconstruir-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-041",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função afim satisfaz f(−2)=7 e f(2)=−1. Qual é a expressão?",
+      "o": [
+        "f(x)=−2x+3",
+        "f(x)=2x+3",
+        "f(x)=−x+5",
+        "f(x)=−2x−3"
+      ],
+      "a": 0,
+      "sol": "Declive=(−1−7)/4=−2. Usando x=2: −1=−4+b => b=3.",
+      "hyp": "Pode errar sinais com pontos negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:reconstruir-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-042",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um depósito tem 120 L e enche a 8 L/min. Qual função V(t) é adequada?",
+      "o": [
+        "V(t)=120−8t",
+        "V(t)=120+8t",
+        "V(t)=8+120t",
+        "V(t)=128t"
+      ],
+      "a": 1,
+      "sol": "Valor inicial 120 e crescimento 8 por minuto.",
+      "hyp": "Pode trocar taxa e valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:modelo-crescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-043",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo V(t)=120+8t, quanto tempo demora a atingir 200 L?",
+      "o": [
+        "5 min",
+        "15 min",
+        "10 min",
+        "25 min"
+      ],
+      "a": 2,
+      "sol": "120+8t=200 => 8t=80 => t=10.",
+      "hyp": "Pode dividir 200 por 8 sem retirar o valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:resolver-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-044",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Plano A custa 5+2x e Plano B custa 11+x. Para que x têm o mesmo custo?",
+      "o": [
+        "4",
+        "5",
+        "7",
+        "6"
+      ],
+      "a": 3,
+      "sol": "5+2x=11+x => x=6.",
+      "hyp": "Pode igualar apenas termos fixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:ponto-equilibrio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-045",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "No problema anterior, para x>6, qual plano é mais barato?",
+      "o": [
+        "Plano B.",
+        "Plano A.",
+        "Custam sempre igual.",
+        "Não é possível saber."
+      ],
+      "a": 0,
+      "sol": "Após o ponto de interseção, A cresce mais depressa (declive 2) do que B (declive 1).",
+      "hyp": "Pode olhar apenas para custo fixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:comparar-planos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-046",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta com declive 0,5 passa por (4,3). Qual é a ordenada na origem?",
+      "o": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "a": 1,
+      "sol": "3=0,5×4+b => 3=2+b => b=1.",
+      "hyp": "Pode subtrair incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:determinar-b",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-047",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta passa por (−2,1) e tem ordenada na origem 5. Qual é o declive?",
+      "o": [
+        "−2",
+        "−1",
+        "2",
+        "1"
+      ],
+      "a": 2,
+      "sol": "1=a(−2)+5 => −4=−2a => a=2.",
+      "hyp": "Pode errar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-048",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a unidade de x muda de metros para centímetros, o valor numérico do declive pode mudar?",
+      "o": [
+        "Não, nunca.",
+        "Só se b=0.",
+        "Só se a função for constante.",
+        "Sim, porque a taxa é expressa por unidade de x."
+      ],
+      "a": 3,
+      "sol": "Alterar a unidade da variável independente altera a escala numérica da taxa.",
+      "hyp": "Pode tratar declive como invariável a qualquer mudança de unidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:unidades-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-049",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=ax+b tem f(0)=−3 e f(2)=5. Qual é a?",
+      "o": [
+        "4",
+        "2",
+        "3",
+        "5"
+      ],
+      "a": 0,
+      "sol": "b=−3; 5=2a−3 => 2a=8 => a=4.",
+      "hyp": "Pode usar f(0) como declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:reconstruir-parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-AF-050",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-afim",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma viagem de táxi custa 3,50 € de bandeirada e 0,80 €/km. Qual é o custo de 12 km?",
+      "o": [
+        "11,60 €",
+        "13,10 €",
+        "12,10 €",
+        "13,50 €"
+      ],
+      "a": 1,
+      "sol": "3,50+0,80×12=3,50+9,60=13,10 €.",
+      "hyp": "Pode esquecer a bandeirada ou multiplicar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-afim:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
