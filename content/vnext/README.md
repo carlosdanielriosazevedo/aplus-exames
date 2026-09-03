@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **3 000 perguntas**
-- Progresso bruto: **53,10%**
+- Concluído em rascunho: **3 300 perguntas**
+- Progresso bruto: **58,41%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -280,3 +280,30 @@ Próxima matéria: **11.º — Funções**.
 - Total vNext: **3 000/~5 650 (53,10%)**
 
 Próxima matéria: **11.º — Cálculo diferencial**.
+
+
+### 11.º ano — Cálculo diferencial
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Taxa média de variação | 50 | 50 | lote completo em protótipo |
+| Taxa instantânea e derivada num ponto | 50 | 50 | lote completo em protótipo |
+| Reta tangente e interpretação geométrica | 50 | 50 | lote completo em protótipo |
+| Função derivada | 50 | 50 | lote completo em protótipo |
+| Regras de derivação | 50 | 50 | lote completo em protótipo |
+| Monotonia, extremos e otimização | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 3 300 perguntas
+
+- 10.º ano completo: **1 550/1 550**
+- 11.º — Trigonometria: **300/300**
+- 11.º — Produto escalar: **300/300**
+- 11.º — Contagem: **300/300**
+- 11.º — Sucessões: **250/250**
+- 11.º — Funções: **300/300**
+- 11.º — Cálculo diferencial: **300/300**
+- **11.º ano completo: 1 750/1 750**
+- Total vNext: **3 300/~5 650 (58,41%)**
+
+Próxima matéria: **12.º — Números complexos**.
