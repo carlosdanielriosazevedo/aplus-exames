@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-fun",
+  "subtopicId": "11-fun-resto-raizes",
+  "subtopic": "Teorema do resto, raízes, multiplicidade e fatorização",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha Teorema do Resto/Fator, zeros, multiplicidade, fatorização, parâmetros e estudo de sinal por fatores. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11FUN-RR-001",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O Teorema do Resto afirma que o resto da divisão de P(x) por x−a é...",
+      "o": [
+        "P(a).",
+        "P(0).",
+        "a.",
+        "P'(a)."
+      ],
+      "a": 0,
+      "sol": "O resto é o valor do polinómio no zero do divisor.",
+      "hyp": "Pode confundir com o termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:teorema-resto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-002",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O Teorema do Fator diz que x−a é fator de P se e só se...",
+      "o": [
+        "P(a)=1.",
+        "P(a)=0.",
+        "P(0)=a.",
+        "P(a)=a."
+      ],
+      "a": 1,
+      "sol": "Resto zero equivale a divisibilidade por x−a.",
+      "hyp": "Pode confundir fator com resto 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:teorema-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-003",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o resto de P(x)=x²+3x+2 por x−1?",
+      "o": [
+        "0.",
+        "2.",
+        "6.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "P(1)=1+3+2=6.",
+      "hyp": "Pode fatorizar desnecessariamente ou usar P(0).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:resto-avaliacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-004",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o resto de x²−4 por x−2?",
+      "o": [
+        "2.",
+        "−2.",
+        "4.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "P(2)=4−4=0.",
+      "hyp": "Pode usar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:resto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-005",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "x−3 é fator de x²−9?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se x=0.",
+        "Só se o grau for 3."
+      ],
+      "a": 0,
+      "sol": "P(3)=0.",
+      "hyp": "Pode não reconhecer diferença de quadrados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:fator-basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-006",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O resto da divisão de x³−2x+5 por x+1 é...",
+      "o": [
+        "4.",
+        "6.",
+        "2.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "P(−1)=−1+2+5=6.",
+      "hyp": "Pode substituir x=1 em vez de −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:resto-xmais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-007",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O resto de 2x³+x²−4 por x−2 é...",
+      "o": [
+        "12.",
+        "8.",
+        "16.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "P(2)=16+4−4=16.",
+      "hyp": "Pode esquecer o termo x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:resto-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-008",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(5)=0, então...",
+      "o": [
+        "x+5 é fator de P.",
+        "P é de grau 5.",
+        "5 é o resto da divisão por x−5.",
+        "x−5 é fator de P."
+      ],
+      "a": 3,
+      "sol": "P(5)=0 implica divisibilidade por x−5.",
+      "hyp": "Pode trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:zero-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-009",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(−2)=0, então um fator é...",
+      "o": [
+        "x+2.",
+        "x−2.",
+        "x+1/2.",
+        "2x+1."
+      ],
+      "a": 0,
+      "sol": "x−(−2)=x+2.",
+      "hyp": "Pode copiar o sinal da raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:zero-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-010",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma raiz ou zero de P é um número a tal que...",
+      "o": [
+        "P(a)=1.",
+        "P(a)=0.",
+        "P(0)=a.",
+        "P(a)=a."
+      ],
+      "a": 1,
+      "sol": "É a definição de zero de uma função polinomial.",
+      "hyp": "Pode confundir zero com ordenada na origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:definicao-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-011",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os zeros de x²−5x+6 são...",
+      "o": [
+        "−2 e −3.",
+        "1 e 6.",
+        "2 e 3.",
+        "−1 e −6."
+      ],
+      "a": 2,
+      "sol": "x²−5x+6=(x−2)(x−3).",
+      "hyp": "Pode trocar os sinais dos fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:zeros-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-012",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os zeros de x³−4x são...",
+      "o": [
+        "−4,0,4.",
+        "0,2.",
+        "−2,2.",
+        "−2,0,2."
+      ],
+      "a": 3,
+      "sol": "x(x−2)(x+2).",
+      "hyp": "Pode perder a raiz 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:zeros-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-013",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se x=a é raiz de multiplicidade 2, então P tem fator...",
+      "o": [
+        "(x−a)².",
+        "x−2a.",
+        "(x+a)².",
+        "x²−a."
+      ],
+      "a": 0,
+      "sol": "Multiplicidade 2 significa o fator linear repetido duas vezes.",
+      "hyp": "Pode confundir multiplicidade com coeficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:multiplicidade2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-014",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se x=a é raiz de multiplicidade 3, então P contém...",
+      "o": [
+        "3(x−a).",
+        "(x−a)³.",
+        "(x+a)³.",
+        "x³−a."
+      ],
+      "a": 1,
+      "sol": "O fator linear aparece três vezes.",
+      "hyp": "Pode multiplicar por 3 em vez de elevar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:multiplicidade3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-015",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um zero de multiplicidade par tende a fazer o gráfico...",
+      "o": [
+        "cruzar Ox mudando de sinal.",
+        "ter assíntota vertical.",
+        "tocar Ox sem mudar de sinal.",
+        "ficar descontínuo."
+      ],
+      "a": 2,
+      "sol": "O fator mantém o sinal ao atravessar o zero.",
+      "hyp": "Pode confundir paridade da multiplicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:grafico-mult-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-016",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um zero de multiplicidade ímpar tende a fazer o gráfico...",
+      "o": [
+        "tocar e voltar sem mudar de sinal.",
+        "ficar sempre positivo.",
+        "ser descontínuo.",
+        "cruzar Ox e mudar de sinal."
+      ],
+      "a": 3,
+      "sol": "O fator muda de sinal ao atravessar a raiz.",
+      "hyp": "Pode aplicar o comportamento de multiplicidade par.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:grafico-mult-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-017",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=(x−2)²(x+1), então 2 é raiz de multiplicidade...",
+      "o": [
+        "2.",
+        "1.",
+        "3.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "O fator (x−2) aparece ao quadrado.",
+      "hyp": "Pode somar graus de todos os fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:ler-multiplicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-018",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Na mesma função, −1 é raiz de multiplicidade...",
+      "o": [
+        "2.",
+        "1.",
+        "3.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "O fator x+1 aparece uma vez.",
+      "hyp": "Pode associar multiplicidade ao valor absoluto da raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:ler-multiplicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-019",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=(x+3)^4, o único zero real é...",
+      "o": [
+        "3.",
+        "0.",
+        "−3.",
+        "4."
+      ],
+      "a": 2,
+      "sol": "x+3=0 => x=−3.",
+      "hyp": "Pode esquecer a inversão de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:zero-unico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-020",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O grau de um polinómio não nulo limita o número de zeros reais distintos a...",
+      "o": [
+        "exatamente o grau.",
+        "o dobro do grau.",
+        "um único zero.",
+        "no máximo o grau."
+      ],
+      "a": 3,
+      "sol": "Um polinómio de grau n não pode ter mais de n raízes distintas.",
+      "hyp": "Pode confundir máximo com número exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:limite-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-021",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=x³+kx²−4x−4 é divisível por x+1, então k=",
+      "o": [
+        "1.",
+        "−1.",
+        "3.",
+        "−3."
+      ],
+      "a": 0,
+      "sol": "P(−1)=−1+k+4−4=k−1=0, logo k=1.",
+      "hyp": "Pode substituir x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:parametro-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-022",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=2x³−x²+kx+3 é divisível por x−1, então k=",
+      "o": [
+        "4.",
+        "−4.",
+        "−3.",
+        "3."
+      ],
+      "a": 1,
+      "sol": "P(1)=2−1+k+3=k+4=0, logo k=−4.",
+      "hyp": "Pode esquecer o termo +3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:parametro-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-023",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se o resto da divisão de P por x−2 é 5, então...",
+      "o": [
+        "P(5)=2.",
+        "P(2)=0.",
+        "P(2)=5.",
+        "x−2 é fator."
+      ],
+      "a": 2,
+      "sol": "Pelo Teorema do Resto, o resto é P(2).",
+      "hyp": "Pode concluir divisibilidade mesmo com resto não nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:resto-dado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-024",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se o resto da divisão de P por x+3 é −2, então...",
+      "o": [
+        "P(3)=−2.",
+        "P(−2)=−3.",
+        "P(−3)=0.",
+        "P(−3)=−2."
+      ],
+      "a": 3,
+      "sol": "x+3=x−(−3).",
+      "hyp": "Pode usar a=3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:resto-xmais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-025",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=x³−6x²+11x−6, quais são os zeros?",
+      "o": [
+        "1,2,3.",
+        "−1,−2,−3.",
+        "0,1,6.",
+        "1,3,6."
+      ],
+      "a": 0,
+      "sol": "P=(x−1)(x−2)(x−3).",
+      "hyp": "Pode confundir coeficientes com raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:zeros-classico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-026",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 1 é raiz de P(x)=x³−6x²+11x−6, o quociente por x−1 é...",
+      "o": [
+        "x²−6x+5.",
+        "x²−5x+6.",
+        "x²−5x−6.",
+        "x²+5x+6."
+      ],
+      "a": 1,
+      "sol": "Ruffini com 1 dá 1,−5,6.",
+      "hyp": "Pode errar o termo linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:quociente-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-027",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O quociente x²−5x+6 tem zeros...",
+      "o": [
+        "−2 e −3.",
+        "1 e 6.",
+        "2 e 3.",
+        "−1 e −6."
+      ],
+      "a": 2,
+      "sol": "Fatoriza-se como (x−2)(x−3).",
+      "hyp": "Pode trocar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:quociente-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-028",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se P tem raízes 1,2,3 e coeficiente líder 2, então...",
+      "o": [
+        "P(x)=(x−1)(x−2)(x−3).",
+        "P(x)=2(x+1)(x+2)(x+3).",
+        "P(x)=x³−6.",
+        "P(x)=2(x−1)(x−2)(x−3)."
+      ],
+      "a": 3,
+      "sol": "Os fatores vêm das raízes e o coeficiente líder ajusta a escala.",
+      "hyp": "Pode esquecer o coeficiente líder.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:construir-polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-029",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se uma quadrática monica tem raiz dupla 4, então é...",
+      "o": [
+        "(x−4)².",
+        "(x+4)².",
+        "x²−4.",
+        "x²−16."
+      ],
+      "a": 0,
+      "sol": "Raiz 4 dupla corresponde a fator (x−4)².",
+      "hyp": "Pode trocar raiz e fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:raiz-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-030",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se P(a)=P'(a)=0, isso sugere que a é...",
+      "o": [
+        "não raiz.",
+        "raiz múltipla.",
+        "necessariamente raiz simples.",
+        "ordenada na origem."
+      ],
+      "a": 1,
+      "sol": "Uma raiz múltipla anula também a derivada, no contexto polinomial.",
+      "hyp": "Pode achar que toda raiz simples anula a derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:criterio-multipla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-031",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para P(x)=(x−1)²(x+2), qual é P(1)?",
+      "o": [
+        "3.",
+        "−3.",
+        "0.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "O fator (x−1)² anula-se.",
+      "hyp": "Pode multiplicar antes de reconhecer o zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:avaliar-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-032",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para o mesmo P, qual é P(−2)?",
+      "o": [
+        "9.",
+        "−9.",
+        "2.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "O fator x+2 anula-se.",
+      "hyp": "Pode esquecer a raiz −2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:avaliar-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-033",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para P(x)=(x−1)²(x+2), o sinal muda em x=1?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se x>0.",
+        "Não é possível saber."
+      ],
+      "a": 0,
+      "sol": "A multiplicidade 2 é par.",
+      "hyp": "Pode ignorar a multiplicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:mudanca-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-034",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na mesma função, o sinal muda em x=−2?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se o coeficiente líder for negativo.",
+        "Nunca em raízes negativas."
+      ],
+      "a": 1,
+      "sol": "A multiplicidade é 1, ímpar.",
+      "hyp": "Pode confundir sinal da raiz com mudança de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:mudanca-sinal-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-035",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se P tem todos os zeros reais conhecidos, fatorizar P ajuda a...",
+      "o": [
+        "calcular apenas P(0).",
+        "eliminar o grau.",
+        "estudar o sinal por intervalos.",
+        "tornar P constante."
+      ],
+      "a": 2,
+      "sol": "Os fatores permitem ver onde cada sinal muda.",
+      "hyp": "Pode achar que fatorização serve apenas para resolver equações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:estudo-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-036",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para P(x)=(x−1)(x−3), em ]1,3[ o sinal de P é...",
+      "o": [
+        "positivo.",
+        "zero.",
+        "sempre indefinido.",
+        "negativo."
+      ],
+      "a": 3,
+      "sol": "Um fator é positivo e o outro negativo.",
+      "hyp": "Pode assumir que produto de dois fatores lineares é sempre positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:sinal-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-037",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para P(x)=(x+2)(x−1)(x−4), em ]1,4[ o sinal é...",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "sempre positivo por ser cúbica."
+      ],
+      "a": 0,
+      "sol": "x+2>0, x−1>0, x−4<0: produto negativo.",
+      "hyp": "Pode não analisar cada fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:sinal-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-038",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para o mesmo P, em ]−2,1[ o sinal é...",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "indefinido."
+      ],
+      "a": 1,
+      "sol": "x+2>0, x−1<0, x−4<0: produto positivo.",
+      "hyp": "Pode esquecer que dois negativos dão positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:sinal-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-039",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para P(x)=(x−2)²(x+1), em ]−1,2[ o sinal é...",
+      "o": [
+        "negativo.",
+        "zero.",
+        "positivo.",
+        "alternado."
+      ],
+      "a": 2,
+      "sol": "(x−2)²>0 e x+1>0.",
+      "hyp": "Pode achar que atravessar 2 já influencia o intervalo anterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:sinal-multiplicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-040",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para P(x)=(x−2)²(x+1), em ]−∞,−1[ o sinal é...",
+      "o": [
+        "positivo.",
+        "zero.",
+        "não definido.",
+        "negativo."
+      ],
+      "a": 3,
+      "sol": "O quadrado é positivo e x+1<0.",
+      "hyp": "Pode considerar o quadrado negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:sinal-esquerda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-041",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P tem raízes −1 e 2, sendo 2 dupla, e coeficiente líder positivo, uma expressão compatível é...",
+      "o": [
+        "(x+1)(x−2)².",
+        "(x−1)(x+2)².",
+        "−(x+1)(x−2)².",
+        "(x+1)²(x−2)."
+      ],
+      "a": 0,
+      "sol": "Os fatores e multiplicidades correspondem exatamente às raízes indicadas.",
+      "hyp": "Pode trocar qual raiz é dupla.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:construir-multiplicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-042",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=x³+ax²+bx−6 tem raízes 1,2,3, então a=",
+      "o": [
+        "6.",
+        "−6.",
+        "−11.",
+        "11."
+      ],
+      "a": 1,
+      "sol": "(x−1)(x−2)(x−3)=x³−6x²+11x−6.",
+      "hyp": "Pode confundir soma e produto das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:coeficientes-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-043",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, b=",
+      "o": [
+        "−11.",
+        "6.",
+        "11.",
+        "−6."
+      ],
+      "a": 2,
+      "sol": "Da expansão resulta coeficiente 11 em x.",
+      "hyp": "Pode trocar com a soma das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:coeficientes-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-044",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P é monico de grau 4 com raízes 1 e −1, ambas duplas, então P(0)=",
+      "o": [
+        "0.",
+        "−1.",
+        "4.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "P=(x−1)²(x+1)²=(x²−1)²; P(0)=1.",
+      "hyp": "Pode achar que por ter raízes P(0)=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:avaliar-fatorizado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-045",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se o resto da divisão de P por x−1 é 2 e por x+1 é 4, então...",
+      "o": [
+        "P(1)=2 e P(−1)=4.",
+        "P(−1)=2 e P(1)=4.",
+        "P(1)=P(−1)=0.",
+        "x²−1 é fator de P."
+      ],
+      "a": 0,
+      "sol": "Aplicam-se diretamente os dois Teoremas do Resto.",
+      "hyp": "Pode trocar os sinais dos divisores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:dois-restos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-046",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(1)=P(−1)=0, então P é divisível por...",
+      "o": [
+        "x²+1.",
+        "x²−1.",
+        "x−1 apenas.",
+        "x+1 apenas."
+      ],
+      "a": 1,
+      "sol": "Tem fatores x−1 e x+1, cujo produto é x²−1.",
+      "hyp": "Pode não combinar os dois fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:duas-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-047",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Conhecer uma raiz de um polinómio de grau 4 permite...",
+      "o": [
+        "concluir todas as outras raízes.",
+        "garantir quatro raízes reais.",
+        "reduzir o problema a um polinómio de grau 3 por divisão exata.",
+        "transformá-lo diretamente em linear."
+      ],
+      "a": 2,
+      "sol": "Dividir pelo fator linear reduz o grau em 1.",
+      "hyp": "Pode achar que uma raiz determina todas as restantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:reduzir-grau",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-048",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo polinomial, P(t)=0 representa frequentemente...",
+      "o": [
+        "o valor máximo obrigatório.",
+        "uma assíntota.",
+        "um ponto onde o modelo não existe.",
+        "um instante em que a grandeza modelada se anula."
+      ],
+      "a": 3,
+      "sol": "Zeros do modelo correspondem a valores da variável em que a saída é 0.",
+      "hyp": "Pode confundir zero com máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:modelacao-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-049",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=(x−a)^2Q(x) e Q(a)≠0, então a tem multiplicidade...",
+      "o": [
+        "exatamente 2.",
+        "pelo menos 3.",
+        "1.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "O fator quadrado está presente e Q não acrescenta outro fator x−a.",
+      "hyp": "Pode ignorar a condição Q(a)≠0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:multiplicidade-exata",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RR-050",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-resto-raizes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma raiz de multiplicidade 4 é...",
+      "o": [
+        "ímpar, logo provoca mudança de sinal.",
+        "par, logo não provoca mudança de sinal apenas por esse fator.",
+        "sempre negativa.",
+        "sempre positiva."
+      ],
+      "a": 1,
+      "sol": "4 é par e (x−a)^4≥0.",
+      "hyp": "Pode confundir valor da raiz com multiplicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-resto-raizes:mult4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
