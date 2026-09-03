@@ -694,10 +694,10 @@
       "cognitive": "Raciocinio",
       "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0+h)-f(0)]/h vale",
       "o": [
-        "1",
+        "2",
         "0",
-        "-1",
-        "0"
+        "-2",
+        "1"
       ],
       "a": 1,
       "sol": "Expandindo e simplificando, o quociente tende para 2a=0.",
@@ -710,7 +710,7 @@
       "signature": "11-cd-derivada-ponto:definicao-limite:26",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-DP-027",
@@ -721,10 +721,10 @@
       "cognitive": "Raciocinio",
       "q": "Para f(x)=x^2, o limite lim_{h->0} [f(1+h)-f(1)]/h vale",
       "o": [
-        "3",
         "1",
+        "3",
         "2",
-        "1"
+        "4"
       ],
       "a": 2,
       "sol": "Expandindo e simplificando, o quociente tende para 2a=2.",
@@ -737,7 +737,7 @@
       "signature": "11-cd-derivada-ponto:definicao-limite:27",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-DP-028",
@@ -748,9 +748,9 @@
       "cognitive": "Raciocinio",
       "q": "Para f(x)=x^2, o limite lim_{h->0} [f(2+h)-f(2)]/h vale",
       "o": [
-        "5",
+        "2",
+        "6",
         "3",
-        "4",
         "4"
       ],
       "a": 3,
@@ -764,7 +764,7 @@
       "signature": "11-cd-derivada-ponto:definicao-limite:28",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-DP-029",
@@ -1181,8 +1181,8 @@
       "q": "A posicao e dada por s(t)=5t. Qual e a velocidade instantanea em t=7?",
       "o": [
         "7",
-        "3",
-        "7",
+        "35",
+        "1",
         "5"
       ],
       "a": 3,
@@ -1196,7 +1196,7 @@
       "signature": "11-cd-derivada-ponto:movimento:44",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-DP-045",
