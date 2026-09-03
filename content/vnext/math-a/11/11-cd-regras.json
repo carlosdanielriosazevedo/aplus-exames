@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matematica A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-regras",
+  "subtopic": "Regras de derivacao",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteudo original A+. Trabalha linearidade, regra da potencia, produto, quociente, simplificacao e avaliacao de derivadas em contextos elementares. Nao ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CD-REG-001",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de uma soma f+g e",
+      "o": [
+        "f'+g'",
+        "f'g'",
+        "f'+g",
+        "fg'"
+      ],
+      "a": 0,
+      "sol": "A derivacao e linear relativamente a soma.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-002",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de cf, com c constante, e",
+      "o": [
+        "c'f",
+        "cf'",
+        "f'/c",
+        "cf"
+      ],
+      "a": 1,
+      "sol": "A constante multiplica a derivada.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-003",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de x^n, para n inteiro positivo, e",
+      "o": [
+        "x^(n-1)",
+        "n x^n",
+        "n x^(n-1)",
+        "(n-1)x^n"
+      ],
+      "a": 2,
+      "sol": "E a regra da potencia.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-004",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de uma constante e",
+      "o": [
+        "1",
+        "a propria constante",
+        "x",
+        "0"
+      ],
+      "a": 3,
+      "sol": "Uma constante nao varia.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-005",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de x e",
+      "o": [
+        "1",
+        "x",
+        "0",
+        "2x"
+      ],
+      "a": 0,
+      "sol": "A reta y=x tem declive 1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-006",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de fg e",
+      "o": [
+        "f'g'",
+        "f'g+fg'",
+        "f'g",
+        "fg'"
+      ],
+      "a": 1,
+      "sol": "E a regra do produto.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-007",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de f/g, com g diferente de 0, e",
+      "o": [
+        "f'/g'",
+        "(f'g+fg')/g^2",
+        "(f'g-fg')/g^2",
+        "(fg'-f'g)/g^2"
+      ],
+      "a": 2,
+      "sol": "E a regra do quociente.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-008",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Derivar termo a termo um polinomio e valido porque",
+      "o": [
+        "o produto distribui sempre",
+        "todos os termos sao constantes",
+        "a derivada ignora expoentes",
+        "a derivada da soma e a soma das derivadas"
+      ],
+      "a": 3,
+      "sol": "Usa-se linearidade.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-009",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Na regra do produto, a derivada de fg e em geral diferente de",
+      "o": [
+        "f'g'",
+        "f'g+fg'",
+        "g f'+f g'",
+        "(fg)'"
+      ],
+      "a": 0,
+      "sol": "Derivar cada fator e multiplicar nao e a regra correta.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-010",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Na regra do quociente, o denominador final aparece como",
+      "o": [
+        "g'",
+        "g^2",
+        "f^2",
+        "g"
+      ],
+      "a": 1,
+      "sol": "A formula padrao tem denominador g ao quadrado.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:conceito:10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-011",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=x^5.",
+      "o": [
+        "x^5",
+        "5x^4+1",
+        "5x^4",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 5x^4.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-012",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=x^7.",
+      "o": [
+        "x^7",
+        "7x^6+1",
+        "0",
+        "7x^6"
+      ],
+      "a": 3,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 7x^6.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-013",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=3x^4.",
+      "o": [
+        "12x^3",
+        "3x^4",
+        "12x^3+1",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 12x^3.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-014",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=-2x^6.",
+      "o": [
+        "-2x^6",
+        "-12x^5",
+        "-12x^5+1",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se -12x^5.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-015",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=5x^2.",
+      "o": [
+        "5x^2",
+        "10x+1",
+        "10x",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 10x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-016",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=4x^3+2x.",
+      "o": [
+        "4x^3+2x",
+        "12x^2+2+1",
+        "0",
+        "12x^2+2"
+      ],
+      "a": 3,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 12x^2+2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-017",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=2x^5-3x^2.",
+      "o": [
+        "10x^4-6x",
+        "2x^5-3x^2",
+        "10x^4-6x+1",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 10x^4-6x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-018",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=x^4+x^2+1.",
+      "o": [
+        "x^4+x^2+1",
+        "4x^3+2x",
+        "4x^3+2x+1",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 4x^3+2x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-019",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=-x^3+7x-4.",
+      "o": [
+        "-x^3+7x-4",
+        "-3x^2+7+1",
+        "-3x^2+7",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se -3x^2+7.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-020",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Deriva f(x)=6x^2-5.",
+      "o": [
+        "6x^2-5",
+        "12x+1",
+        "0",
+        "12x"
+      ],
+      "a": 3,
+      "sol": "Aplicando regra da potencia e linearidade obtem-se 12x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:potencia:20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-021",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=x(x+1).",
+      "o": [
+        "2x+1",
+        "2x-1",
+        "x(x+1)",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 2x+1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-022",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=x^2(x+1).",
+      "o": [
+        "3x^2-2x",
+        "3x^2+2x",
+        "x^2(x+1)",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 3x^2+2x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-023",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=x(x^2+3).",
+      "o": [
+        "3x^2-3",
+        "x(x^2+3)",
+        "3x^2+3",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 3x^2+3.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-024",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=(x+1)(x-1).",
+      "o": [
+        "2x",
+        "(x+1)(x-1)",
+        "0",
+        "2x"
+      ],
+      "a": 3,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 2x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-025",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=x^2(2x-1).",
+      "o": [
+        "6x^2-2x",
+        "6x^2-2x",
+        "x^2(2x-1)",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 6x^2-2x.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-026",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=(2x+1)(x+3).",
+      "o": [
+        "4x-7",
+        "4x+7",
+        "(2x+1)(x+3)",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 4x+7.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-027",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=x^3(x-2).",
+      "o": [
+        "4x^3-6x^2",
+        "x^3(x-2)",
+        "4x^3-6x^2",
+        "0"
+      ],
+      "a": 2,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 4x^3-6x^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-028",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=(x^2+1)(x+1).",
+      "o": [
+        "3x^2-2x-1",
+        "(x^2+1)(x+1)",
+        "0",
+        "3x^2+2x+1"
+      ],
+      "a": 3,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 3x^2+2x+1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-029",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=x(3x^2-4).",
+      "o": [
+        "9x^2-4",
+        "9x^2-4",
+        "x(3x^2-4)",
+        "0"
+      ],
+      "a": 0,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 9x^2-4.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-030",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "Usando a regra do produto, deriva f(x)=(x^2-1)(x^2+1).",
+      "o": [
+        "4x^3",
+        "4x^3",
+        "(x^2-1)(x^2+1)",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 4x^3.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:produto:30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-031",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=x/(x+1).",
+      "o": [
+        "x/(x+1)",
+        "1/1/(x+1)^2",
+        "1/(x+1)^2",
+        "1/(x+1)^2"
+      ],
+      "a": 2,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1/(x+1)^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-032",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=1/x.",
+      "o": [
+        "1/x",
+        "1/-1/x^2",
+        "+1/x^2",
+        "-1/x^2"
+      ],
+      "a": 3,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se -1/x^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-033",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=x^2/x.",
+      "o": [
+        "1",
+        "x^2/x",
+        "1/1",
+        "1"
+      ],
+      "a": 0,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-034",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=(x+1)/x.",
+      "o": [
+        "(x+1)/x",
+        "-1/x^2",
+        "1/-1/x^2",
+        "+1/x^2"
+      ],
+      "a": 1,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se -1/x^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-035",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=x^2/(x+1).",
+      "o": [
+        "x^2/(x+1)",
+        "1/x(x+2)/(x+1)^2",
+        "x(x+2)/(x+1)^2",
+        "x(x+2)/(x+1)^2"
+      ],
+      "a": 2,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se x(x+2)/(x+1)^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-036",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=(2x+1)/(x-1).",
+      "o": [
+        "(2x+1)/(x-1)",
+        "1/-3/(x-1)^2",
+        "+3/(x-1)^2",
+        "-3/(x-1)^2"
+      ],
+      "a": 3,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se -3/(x-1)^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-037",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=x/(x-2).",
+      "o": [
+        "-2/(x-2)^2",
+        "x/(x-2)",
+        "1/-2/(x-2)^2",
+        "+2/(x-2)^2"
+      ],
+      "a": 0,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se -2/(x-2)^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-038",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=(x^2+1)/x.",
+      "o": [
+        "(x^2+1)/x",
+        "1-1/x^2",
+        "1/1-1/x^2",
+        "1+1/x^2"
+      ],
+      "a": 1,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1-1/x^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-039",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=(x^2-1)/(x+1).",
+      "o": [
+        "(x^2-1)/(x+1)",
+        "1/1",
+        "1",
+        "1"
+      ],
+      "a": 2,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-040",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicacao",
+      "q": "No dominio da funcao, deriva f(x)=(3x+2)/(x+4).",
+      "o": [
+        "(3x+2)/(x+4)",
+        "1/10/(x+4)^2",
+        "10/(x+4)^2",
+        "10/(x+4)^2"
+      ],
+      "a": 3,
+      "sol": "Usando (u/v)'=(u'v-uv')/v^2 e simplificando obtem-se 10/(x+4)^2.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:quociente:40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-041",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f'(x)=2x e g'(x)=3, entao (f+g)'(x)=",
+      "o": [
+        "2x+3",
+        "6x",
+        "2x",
+        "3"
+      ],
+      "a": 0,
+      "sol": "Somam-se as derivadas.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-042",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f'(x)=4x^3, entao (5f)'(x)=",
+      "o": [
+        "5x^3",
+        "20x^3",
+        "4x^3+5",
+        "20x^4"
+      ],
+      "a": 1,
+      "sol": "Multiplica-se a derivada por 5.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-043",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(2)=3, f'(2)=4, g(2)=5 e g'(2)=-1, entao (fg)'(2)=",
+      "o": [
+        "19",
+        "-4",
+        "17",
+        "20"
+      ],
+      "a": 2,
+      "sol": "4*5+3*(-1)=17.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-044",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(1)=2, f'(1)=3, g(1)=4 e g'(1)=5, entao (f/g)'(1)=",
+      "o": [
+        "2",
+        "-1/8",
+        "3/4",
+        "1/8"
+      ],
+      "a": 3,
+      "sol": "(3*4-2*5)/16=2/16=1/8.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-045",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se h(x)=3f(x)-2g(x), entao h'(x)=",
+      "o": [
+        "3f'(x)-2g'(x)",
+        "3f(x)-2g(x)",
+        "f'(x)-g'(x)",
+        "6f'(x)g'(x)"
+      ],
+      "a": 0,
+      "sol": "Usa-se linearidade da derivada.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-046",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Derivar f(x)=x^2(x+1) por expansao ou regra do produto deve dar",
+      "o": [
+        "resultados diferentes",
+        "o mesmo resultado",
+        "apenas a expansao e valida",
+        "apenas o produto e valido"
+      ],
+      "a": 1,
+      "sol": "As regras sao coerentes e descrevem a mesma derivada.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-047",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "A derivada de (x+1)(x-1) pode ser obtida mais rapidamente apos",
+      "o": [
+        "integrar",
+        "substituir x=1",
+        "expandir para x^2-1",
+        "dividir por x"
+      ],
+      "a": 2,
+      "sol": "Depois basta derivar x^2-1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-048",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Ao derivar x^2/x no dominio x diferente de 0, pode simplificar primeiro para",
+      "o": [
+        "x^2",
+        "1/x",
+        "1",
+        "x"
+      ],
+      "a": 3,
+      "sol": "Como x^2/x=x para x diferente de 0, a derivada e 1.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-049",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "A regra do quociente exige especial atencao a",
+      "o": [
+        "pontos onde o denominador e zero",
+        "pontos onde o numerador e zero",
+        "apenas x=0",
+        "sinais positivos"
+      ],
+      "a": 0,
+      "sol": "A funcao e o quociente nao estao definidos quando o denominador se anula.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-REG-050",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-regras",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f e g sao constantes, entao (fg)' e",
+      "o": [
+        "fg",
+        "0",
+        "1",
+        "f+g"
+      ],
+      "a": 1,
+      "sol": "O produto tambem e constante.",
+      "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-regras:misto:50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
