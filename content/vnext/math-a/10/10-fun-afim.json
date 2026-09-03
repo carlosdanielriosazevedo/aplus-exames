@@ -881,7 +881,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, qual é o ponto de interseção?",
+      "q": "As retas y=2x+1 e y=−x+7 intersectam-se em que ponto?",
       "o": [
         "(2,5)",
         "(2,3)",
@@ -1205,7 +1205,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "No problema anterior, para x>6, qual plano é mais barato?",
+      "q": "O Plano A custa 5+2x e o Plano B custa 11+x. Para x>6, qual plano é mais barato?",
       "o": [
         "Plano B.",
         "Plano A.",
