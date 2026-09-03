@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-suc",
+  "subtopicId": "11-suc-somas",
+  "subtopic": "Somas de termos de PA e PG",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha somas finitas de progressões aritméticas e geométricas, somas parciais, recuperação de termos, determinação de n e modelação acumulada. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11SUC-SOM-001",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A soma dos n primeiros termos de uma PA é...",
+      "o": [
+        "S_n=n(u_1+u_n)/2.",
+        "S_n=nu_1.",
+        "S_n=u_1r^n.",
+        "S_n=(u_1+u_n)/n."
+      ],
+      "a": 0,
+      "sol": "Emparelhar primeiro e último termo conduz à fórmula n(u_1+u_n)/2.",
+      "hyp": "Pode confundir média com soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pa-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-002",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Também se pode escrever a soma dos n primeiros termos de uma PA como...",
+      "o": [
+        "S_n=n(u_1+r).",
+        "S_n=n[2u_1+(n−1)r]/2.",
+        "S_n=u_1(1−r^n)/(1−r).",
+        "S_n=n²r."
+      ],
+      "a": 1,
+      "sol": "Substitui-se u_n=u_1+(n−1)r na fórmula dos extremos.",
+      "hyp": "Pode usar a fórmula de PG.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pa-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-003",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A soma 1+2+3+4+5 é...",
+      "o": [
+        "10.",
+        "20.",
+        "15.",
+        "25."
+      ],
+      "a": 2,
+      "sol": "5×(1+5)/2=15.",
+      "hyp": "Pode multiplicar 5 pela média errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-004",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A soma dos 10 primeiros naturais positivos é...",
+      "o": [
+        "45.",
+        "100.",
+        "50.",
+        "55."
+      ],
+      "a": 3,
+      "sol": "10×11/2=55.",
+      "hyp": "Pode usar 10²/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:gauss",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-005",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A soma dos 5 primeiros termos da PA 2,5,8,11,14 é...",
+      "o": [
+        "40.",
+        "35.",
+        "45.",
+        "50."
+      ],
+      "a": 0,
+      "sol": "5×(2+14)/2=40.",
+      "hyp": "Pode somar apenas extremos e multiplicar por 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-006",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa PA com u_1=4, r=3, qual é S_6?",
+      "o": [
+        "54.",
+        "69.",
+        "78.",
+        "63."
+      ],
+      "a": 1,
+      "sol": "u_6=19; S_6=6(4+19)/2=69.",
+      "hyp": "Pode calcular u_6 como 22.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pa-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-007",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a soma 10+8+6+4+2?",
+      "o": [
+        "20.",
+        "40.",
+        "30.",
+        "25."
+      ],
+      "a": 2,
+      "sol": "É uma PA com 5 termos; média dos extremos=(10+2)/2=6; total 30.",
+      "hyp": "Pode multiplicar 5 por 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-008",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos primeiros 20 termos da PA 3,6,9,... é...",
+      "o": [
+        "600.",
+        "660.",
+        "603.",
+        "630."
+      ],
+      "a": 3,
+      "sol": "u_20=60; S=20(3+60)/2=630.",
+      "hyp": "Pode usar 20×30.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-multiplos-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-009",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos primeiros 15 números ímpares positivos é...",
+      "o": [
+        "225.",
+        "120.",
+        "210.",
+        "240."
+      ],
+      "a": 0,
+      "sol": "A soma dos primeiros n ímpares é n²; 15²=225.",
+      "hyp": "Pode usar a soma dos naturais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-impares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-010",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A soma 2+4+6+...+20 é...",
+      "o": [
+        "100.",
+        "110.",
+        "120.",
+        "90."
+      ],
+      "a": 1,
+      "sol": "Há 10 termos; S=10(2+20)/2=110.",
+      "hyp": "Pode contar 20 termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-011",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para uma PG de razão q≠1, a soma dos n primeiros termos é...",
+      "o": [
+        "S_n=n(u_1+u_n)/2.",
+        "S_n=u_1q^{n−1}.",
+        "S_n=u_1(1−q^n)/(1−q).",
+        "S_n=nq."
+      ],
+      "a": 2,
+      "sol": "É a fórmula da soma geométrica finita.",
+      "hyp": "Pode usar a fórmula de PA.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-012",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A soma 1+2+4+8 é...",
+      "o": [
+        "16.",
+        "14.",
+        "12.",
+        "15."
+      ],
+      "a": 3,
+      "sol": "PG com u_1=1,q=2,n=4: (1−16)/(1−2)=15.",
+      "hyp": "Pode usar apenas o último termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-013",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A soma 3+6+12+24 é...",
+      "o": [
+        "45.",
+        "48.",
+        "42.",
+        "36."
+      ],
+      "a": 0,
+      "sol": "3(1−2^4)/(1−2)=45.",
+      "hyp": "Pode multiplicar primeiro pelo número de termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-014",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A soma 81+27+9+3+1 é...",
+      "o": [
+        "120.",
+        "121.",
+        "122.",
+        "243."
+      ],
+      "a": 1,
+      "sol": "Somando os cinco termos obtém-se 121; também é PG de razão 1/3.",
+      "hyp": "Pode parar no penúltimo termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg-fracionaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-015",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a soma dos 6 primeiros termos da PG 2,4,8,...?",
+      "o": [
+        "128.",
+        "124.",
+        "126.",
+        "64."
+      ],
+      "a": 2,
+      "sol": "2(1−2^6)/(1−2)=126.",
+      "hyp": "Pode confundir soma com 6.º termo 64.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-016",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG com u_1=5,q=3, a soma dos 4 primeiros termos é...",
+      "o": [
+        "160.",
+        "180.",
+        "405.",
+        "200."
+      ],
+      "a": 3,
+      "sol": "5(1−81)/(1−3)=5×40=200.",
+      "hyp": "Pode usar u_4=135 como soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg-q3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-017",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Na fórmula da soma da PG, se q=1...",
+      "o": [
+        "usa-se S_n=nu_1.",
+        "a fórmula dá diretamente 0/0 mas continua válida sem adaptação.",
+        "S_n=0.",
+        "S_n=u_1."
+      ],
+      "a": 0,
+      "sol": "Com q=1, todos os termos são u_1, logo a soma é n u_1.",
+      "hyp": "Pode aplicar a fórmula com divisão por zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:caso-q1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-018",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa PG constante 7,7,7,7, a soma dos 4 termos é...",
+      "o": [
+        "7.",
+        "28.",
+        "49.",
+        "14."
+      ],
+      "a": 1,
+      "sol": "4×7=28.",
+      "hyp": "Pode usar uma fórmula geométrica inválida em q=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:pg-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-019",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos termos 5+10+15+...+50 é...",
+      "o": [
+        "250.",
+        "300.",
+        "275.",
+        "500."
+      ],
+      "a": 2,
+      "sol": "Há 10 termos; S=10(5+50)/2=275.",
+      "hyp": "Pode usar 50×5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:pa-multiplos-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-020",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos números de 1 a 100 é...",
+      "o": [
+        "5000.",
+        "10000.",
+        "4950.",
+        "5050."
+      ],
+      "a": 3,
+      "sol": "100×101/2=5050.",
+      "hyp": "Pode usar 100²/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:gauss-100",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-021",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_1=7,r=4. Qual é S_10?",
+      "o": [
+        "250.",
+        "230.",
+        "270.",
+        "290."
+      ],
+      "a": 0,
+      "sol": "u_10=43; S=10(7+43)/2=250.",
+      "hyp": "Pode calcular u_10 com 10 incrementos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:pa-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-022",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_5=18 e u_12=46. Qual é a soma do 5.º ao 12.º termo inclusive?",
+      "o": [
+        "224.",
+        "256.",
+        "288.",
+        "192."
+      ],
+      "a": 1,
+      "sol": "Há 8 termos; soma=8(18+46)/2=256.",
+      "hyp": "Pode contar apenas 7 intervalos como termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-trecho-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-023",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, a soma de 11 termos consecutivos cujo termo central é 20 é...",
+      "o": [
+        "200.",
+        "240.",
+        "220.",
+        "110."
+      ],
+      "a": 2,
+      "sol": "Em uma PA, a média dos termos simétricos é o termo central; média=20, logo soma=11×20=220.",
+      "hyp": "Pode somar apenas 10 termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:termo-central",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-024",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A soma de 9 termos consecutivos de uma PA com termo central 7 é...",
+      "o": [
+        "56.",
+        "72.",
+        "49.",
+        "63."
+      ],
+      "a": 3,
+      "sol": "Soma=n×termo central=9×7=63.",
+      "hyp": "Pode usar 8×7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:termo-central",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-025",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG, u_1=2,q=3. Qual é S_5?",
+      "o": [
+        "242.",
+        "243.",
+        "240.",
+        "162."
+      ],
+      "a": 0,
+      "sol": "2(1−3^5)/(1−3)=2(−242)/(−2)=242.",
+      "hyp": "Pode usar 3^5=243 como soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-026",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG, u_1=64,q=1/2. Qual é a soma dos 4 primeiros termos?",
+      "o": [
+        "112.",
+        "120.",
+        "124.",
+        "128."
+      ],
+      "a": 1,
+      "sol": "64+32+16+8=120.",
+      "hyp": "Pode somar também o 5.º termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-027",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a soma 1+3+9+27+81?",
+      "o": [
+        "120.",
+        "122.",
+        "121.",
+        "243."
+      ],
+      "a": 2,
+      "sol": "PG q=3: (1−3^5)/(1−3)=121.",
+      "hyp": "Pode confundir com 3^5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-potencias-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-028",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A soma 2+6+18+54+162 é...",
+      "o": [
+        "243.",
+        "240.",
+        "486.",
+        "242."
+      ],
+      "a": 3,
+      "sol": "É 2 vezes a soma 1+3+9+27+81:2×121=242.",
+      "hyp": "Pode usar o termo seguinte.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-029",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se S_n representa a soma dos n primeiros termos, então u_n=",
+      "o": [
+        "S_n−S_{n−1}.",
+        "S_n+S_{n−1}.",
+        "S_n/n sempre.",
+        "S_{n−1}−S_n."
+      ],
+      "a": 0,
+      "sol": "A soma nova acrescenta precisamente o termo u_n.",
+      "hyp": "Pode inverter a diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:recuperar-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-030",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se S_8=100 e S_7=82, então u_8=",
+      "o": [
+        "182.",
+        "18.",
+        "12.",
+        "8."
+      ],
+      "a": 1,
+      "sol": "u_8=S_8−S_7=18.",
+      "hyp": "Pode somar as somas parciais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:termo-por-somas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-031",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se S_n=n², então u_n para n≥2 é...",
+      "o": [
+        "n.",
+        "n²−1.",
+        "2n−1.",
+        "2n+1."
+      ],
+      "a": 2,
+      "sol": "u_n=n²−(n−1)²=2n−1.",
+      "hyp": "Pode derivar em vez de diferenciar somas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-para-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-032",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A sucessão definida por S_n=n² tem termos...",
+      "o": [
+        "1,2,3,4,...",
+        "1,4,9,16,...",
+        "2,4,6,8,...",
+        "1,3,5,7,..."
+      ],
+      "a": 3,
+      "sol": "u_1=S_1=1 e, para n≥2, u_n=2n−1.",
+      "hyp": "Pode confundir S_n com u_n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:somas-parciais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-033",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se S_n=3n²+n, então u_n para n≥2 é...",
+      "o": [
+        "6n−2.",
+        "3n+1.",
+        "6n+1.",
+        "3n−2."
+      ],
+      "a": 0,
+      "sol": "S_n−S_{n−1}=3[n²−(n−1)²]+1=3(2n−1)+1=6n−2.",
+      "hyp": "Pode substituir incorretamente n−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-034",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos primeiros n números pares 2+4+...+2n é...",
+      "o": [
+        "n².",
+        "n(n+1).",
+        "2n².",
+        "n(n−1)."
+      ],
+      "a": 1,
+      "sol": "2(1+2+...+n)=2·n(n+1)/2=n(n+1).",
+      "hyp": "Pode esquecer o fator 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:formula-pares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-035",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos primeiros n números ímpares é...",
+      "o": [
+        "n(n+1).",
+        "2n.",
+        "n².",
+        "n²+n."
+      ],
+      "a": 2,
+      "sol": "1+3+...+(2n−1)=n².",
+      "hyp": "Pode confundir com soma dos pares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:formula-impares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-036",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A soma dos múltiplos de 4 de 4 até 40 é...",
+      "o": [
+        "200.",
+        "240.",
+        "400.",
+        "220."
+      ],
+      "a": 3,
+      "sol": "4(1+...+10)=4×55=220.",
+      "hyp": "Pode usar 40×10/2 sem acrescentar o primeiro termo corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:multiplos-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-037",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, S_10=150 e u_1=6. Qual é u_10?",
+      "o": [
+        "24.",
+        "30.",
+        "18.",
+        "12."
+      ],
+      "a": 0,
+      "sol": "150=10(6+u_10)/2=5(6+u_10); logo 6+u_10=30, u_10=24.",
+      "hyp": "Pode dividir por 10 em vez de 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:achar-ultimo-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-038",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, S_8=100 e u_8=16. Qual é u_1?",
+      "o": [
+        "8.",
+        "9.",
+        "10.",
+        "12."
+      ],
+      "a": 1,
+      "sol": "100=8(u_1+16)/2=4(u_1+16); u_1+16=25 =>u_1=9.",
+      "hyp": "Pode esquecer dividir por 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:achar-primeiro-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-039",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG, u_1=3,q=2 e S_n=93. Qual é n?",
+      "o": [
+        "4.",
+        "6.",
+        "5.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "S_n=3(2^n−1)=93 =>2^n−1=31 =>2^n=32 =>n=5.",
+      "hyp": "Pode esquecer o fator 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:achar-n-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-040",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA 2,5,8,..., quantos primeiros termos têm soma 77?",
+      "o": [
+        "6.",
+        "8.",
+        "5.",
+        "7."
+      ],
+      "a": 3,
+      "sol": "S_n=n[4+3(n−1)]/2=n(3n+1)/2=77; n=7 satisfaz 7×22/2=77.",
+      "hyp": "Pode resolver apenas aproximadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:achar-n-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-041",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a soma dos termos da PA 7,10,13,...,100?",
+      "o": [
+        "1712.",
+        "1600.",
+        "1800.",
+        "1650."
+      ],
+      "a": 0,
+      "sol": "100=7+3(n−1)=>n=32. S=32(7+100)/2=16×107=1712.",
+      "hyp": "Pode errar o número de termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-ate-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-042",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a soma dos termos da PG 3,6,12,...,384?",
+      "o": [
+        "768.",
+        "765.",
+        "762.",
+        "381."
+      ],
+      "a": 1,
+      "sol": "384=3·2^7, logo há 8 termos. S=3(2^8−1)=3×255=765.",
+      "hyp": "Pode usar 384 como último expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-ate-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-043",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Numa PA, a soma de um número ímpar de termos consecutivos é igual a...",
+      "o": [
+        "n vezes o primeiro termo.",
+        "n vezes a razão.",
+        "n vezes o termo central.",
+        "metade do último termo."
+      ],
+      "a": 2,
+      "sol": "A média dos termos é o termo central.",
+      "hyp": "Pode achar que só vale para PA simétrica em torno de zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:media-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-044",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um plano de poupança deposita 50 € no 1.º mês e aumenta o depósito em 10 € por mês. Quanto é depositado ao todo em 12 meses?",
+      "o": [
+        "1200 €.",
+        "1320 €.",
+        "720 €.",
+        "1260 €."
+      ],
+      "a": 3,
+      "sol": "Último depósito=50+11×10=160; soma=12(50+160)/2=1260.",
+      "hyp": "Pode multiplicar 12 pelo depósito final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:poupanca-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-045",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma bancada tem 20 lugares na 1.ª fila e mais 4 por fila. Quantos lugares há ao todo nas primeiras 15 filas?",
+      "o": [
+        "720.",
+        "660.",
+        "780.",
+        "840."
+      ],
+      "a": 0,
+      "sol": "u_15=20+14×4=76; S=15(20+76)/2=15×48=720.",
+      "hyp": "Pode somar apenas 15×20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:lugares-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-046",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma campanha alcança 100 pessoas no 1.º dia e duplica diariamente. Quantas pessoas-dia são alcançadas ao todo nos primeiros 5 dias?",
+      "o": [
+        "3200.",
+        "3100.",
+        "1600.",
+        "3000."
+      ],
+      "a": 1,
+      "sol": "100(1+2+4+8+16)=100×31=3100.",
+      "hyp": "Pode usar apenas o alcance do 5.º dia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:alcance-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-047",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um prémio paga 1 €,2 €,4 €,8 €,... durante 10 dias. Qual é o total?",
+      "o": [
+        "1024 €.",
+        "512 €.",
+        "1023 €.",
+        "2047 €."
+      ],
+      "a": 2,
+      "sol": "S_10=2^{10}−1=1023.",
+      "hyp": "Pode usar o termo seguinte como soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:premio-dobro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-048",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma PG tem q=−1 e primeiro termo 5, a soma dos primeiros 6 termos é...",
+      "o": [
+        "5.",
+        "−5.",
+        "30.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "5−5+5−5+5−5=0.",
+      "hyp": "Pode usar uma fórmula sem considerar a alternância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:pg-q-menos1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-049",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG de razão 1/2 e u_1=32, a soma dos primeiros 5 termos é...",
+      "o": [
+        "62.",
+        "64.",
+        "60.",
+        "31."
+      ],
+      "a": 0,
+      "sol": "32+16+8+4+2=62.",
+      "hyp": "Pode incluir o 6.º termo ou usar o limite infinito 64.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:soma-pg-fracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-SOM-050",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-somas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma bola percorre 10 m na primeira queda, 5 m na seguinte, 2,5 m na seguinte e assim sucessivamente. A distância total nas primeiras 4 quedas é...",
+      "o": [
+        "20 m.",
+        "18,75 m.",
+        "17,5 m.",
+        "15 m."
+      ],
+      "a": 1,
+      "sol": "10+5+2,5+1,25=18,75.",
+      "hyp": "Pode usar o valor limite infinito 20 m.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-somas:modelacao-distancias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
