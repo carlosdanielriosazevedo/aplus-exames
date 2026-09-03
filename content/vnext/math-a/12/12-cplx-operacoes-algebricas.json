@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-cplx",
+  "subtopicId": "12-cplx-operacoes-algebricas",
+  "subtopic": "Operações na forma algébrica",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha soma, subtração, produto, potências, divisão, racionalização, inverso e equações lineares com números complexos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12CPLX-OA-001",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A soma (a+bi)+(c+di) é...",
+      "o": [
+        "(a+c)+(b+d)i.",
+        "(ac)+(bd)i.",
+        "(a−c)+(b−d)i.",
+        "(a+d)+(b+c)i."
+      ],
+      "a": 0,
+      "sol": "Somam-se partes reais e imaginárias separadamente.",
+      "hyp": "Pode misturar componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:soma-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-002",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "(2+3i)+(4+i)=",
+      "o": [
+        "6+3i.",
+        "6+4i.",
+        "8+4i.",
+        "6+2i."
+      ],
+      "a": 1,
+      "sol": "2+4=6 e 3+1=4.",
+      "hyp": "Pode somar apenas partes reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-003",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "(5−2i)+(−3+4i)=",
+      "o": [
+        "8+2i.",
+        "2−6i.",
+        "2+2i.",
+        "−8+2i."
+      ],
+      "a": 2,
+      "sol": "5−3=2 e −2+4=2.",
+      "hyp": "Pode perder sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:soma-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-004",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A diferença (a+bi)−(c+di) é...",
+      "o": [
+        "(a+c)+(b+d)i.",
+        "(a−d)+(b−c)i.",
+        "(ac−bd)i.",
+        "(a−c)+(b−d)i."
+      ],
+      "a": 3,
+      "sol": "Subtraem-se partes correspondentes.",
+      "hyp": "Pode não distribuir o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:subtracao-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-005",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "(3+5i)−(1+2i)=",
+      "o": [
+        "2+3i.",
+        "4+7i.",
+        "2+7i.",
+        "4+3i."
+      ],
+      "a": 0,
+      "sol": "3−1=2 e 5−2=3.",
+      "hyp": "Pode somar as partes imaginárias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:subtracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-006",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(2−3i)−(−4+i)=",
+      "o": [
+        "−2−2i.",
+        "6−4i.",
+        "6−2i.",
+        "−6−4i."
+      ],
+      "a": 1,
+      "sol": "2+4=6 e −3−1=−4.",
+      "hyp": "Pode esquecer mudar o sinal de −4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:subtracao-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-007",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O produto (a+bi)(c+di) tem parte real...",
+      "o": [
+        "ac+bd.",
+        "ad+bc.",
+        "ac−bd.",
+        "ad−bc."
+      ],
+      "a": 2,
+      "sol": "bi·di=bd i²=−bd.",
+      "hyp": "Pode esquecer i²=−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-008",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "No mesmo produto, a parte imaginária é...",
+      "o": [
+        "ac−bd.",
+        "ad−bc.",
+        "ab+cd.",
+        "ad+bc."
+      ],
+      "a": 3,
+      "sol": "Os termos cruzados são adi+bci.",
+      "hyp": "Pode trocar sinais ou componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-009",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(1+i)(1+i)=",
+      "o": [
+        "2i.",
+        "2.",
+        "1+i.",
+        "−2."
+      ],
+      "a": 0,
+      "sol": "1+2i+i²=2i.",
+      "hyp": "Pode esquecer i²=−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-010",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(1+i)(1−i)=",
+      "o": [
+        "0.",
+        "2.",
+        "2i.",
+        "−2."
+      ],
+      "a": 1,
+      "sol": "É produto de conjugados:1²+1²=2.",
+      "hyp": "Pode usar diferença de quadrados real sem i².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto-conjugados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-011",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(2+3i)(1+i)=",
+      "o": [
+        "5+5i.",
+        "−1+i.",
+        "−1+5i.",
+        "2+3i."
+      ],
+      "a": 2,
+      "sol": "2+2i+3i+3i²=−1+5i.",
+      "hyp": "Pode esquecer o termo −3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-012",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(3−2i)(2+i)=",
+      "o": [
+        "4−i.",
+        "8+i.",
+        "4+i.",
+        "8−i."
+      ],
+      "a": 3,
+      "sol": "6+3i−4i−2i²=8−i.",
+      "hyp": "Pode errar o último sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-013",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(2+i)²=",
+      "o": [
+        "3+4i.",
+        "5+4i.",
+        "3+2i.",
+        "4+4i."
+      ],
+      "a": 0,
+      "sol": "4+4i+i²=3+4i.",
+      "hyp": "Pode esquecer o termo cruzado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-014",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(3−i)²=",
+      "o": [
+        "10−6i.",
+        "8−6i.",
+        "8−3i.",
+        "9−i."
+      ],
+      "a": 1,
+      "sol": "9−6i+i²=8−6i.",
+      "hyp": "Pode não quadrar corretamente o binómio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-015",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "(1+i)³ é...",
+      "o": [
+        "2+2i.",
+        "−2−2i.",
+        "−2+2i.",
+        "2i."
+      ],
+      "a": 2,
+      "sol": "(1+i)²=2i; multiplicando por (1+i):−2+2i.",
+      "hyp": "Pode usar potência componente a componente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-016",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para dividir por c+di≠0, é útil multiplicar por...",
+      "o": [
+        "o oposto −c−di.",
+        "i.",
+        "o módulo apenas.",
+        "o conjugado c−di."
+      ],
+      "a": 3,
+      "sol": "O produto com o conjugado torna o denominador real.",
+      "hyp": "Pode usar o oposto, que não elimina i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao-conjugado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-017",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "1/i é...",
+      "o": [
+        "−i.",
+        "i.",
+        "1.",
+        "−1."
+      ],
+      "a": 0,
+      "sol": "1/i·(−i)/(−i)=−i.",
+      "hyp": "Pode pensar que i é o próprio inverso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:inverso-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-018",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "1/(1+i) é...",
+      "o": [
+        "1−i.",
+        "(1−i)/2.",
+        "(1+i)/2.",
+        "−1+i."
+      ],
+      "a": 1,
+      "sol": "Multiplica-se por 1−i; denominador 2.",
+      "hyp": "Pode esquecer dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-019",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(1+i)/(1−i)=",
+      "o": [
+        "−i.",
+        "1.",
+        "i.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "Multiplicando por 1+i: (1+i)²/2=2i/2=i.",
+      "hyp": "Pode confundir conjugado do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-020",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(2+2i)/(1+i)=",
+      "o": [
+        "2i.",
+        "1+i.",
+        "4.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "2+2i=2(1+i).",
+      "hyp": "Pode racionalizar desnecessariamente e errar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-021",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(3+4i)/(1+i)=",
+      "o": [
+        "(7+i)/2.",
+        "(7−i)/2.",
+        "3+4i.",
+        "7+i."
+      ],
+      "a": 0,
+      "sol": "(3+4i)(1−i)/2=(7+i)/2.",
+      "hyp": "Pode errar os termos cruzados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-022",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(2−i)/(1+2i)=",
+      "o": [
+        "i.",
+        "−i.",
+        "1.",
+        "−1."
+      ],
+      "a": 1,
+      "sol": "(2−i)(1−2i)/(5)=(−5i)/5=−i.",
+      "hyp": "Pode esquecer i² ao expandir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-023",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(1+2i)/(2−i)=",
+      "o": [
+        "−i.",
+        "1.",
+        "i.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "(1+2i)(2+i)/5=5i/5=i.",
+      "hyp": "Pode errar o sinal do conjugado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-024",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(4+3i)/(4−3i) tem módulo...",
+      "o": [
+        "5.",
+        "25.",
+        "7.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Numerador e denominador são conjugados e têm o mesmo módulo.",
+      "hyp": "Pode somar os módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:quociente-modulo1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-025",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O inverso de z≠0 pode escrever-se como...",
+      "o": [
+        "conj(z)/|z|².",
+        "z/|z|.",
+        "−z/|z|².",
+        "conj(z)/|z|."
+      ],
+      "a": 0,
+      "sol": "z·conj(z)=|z|².",
+      "hyp": "Pode esquecer o quadrado no denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:inverso-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-026",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "O inverso de 3+4i é...",
+      "o": [
+        "(3−4i)/5.",
+        "(3−4i)/25.",
+        "(3+4i)/25.",
+        "−3−4i."
+      ],
+      "a": 1,
+      "sol": "|3+4i|²=25.",
+      "hyp": "Pode dividir pelo módulo em vez do módulo ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-027",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=2+i, então z²−2z=",
+      "o": [
+        "1+2i.",
+        "−1−2i.",
+        "−1+2i.",
+        "2i."
+      ],
+      "a": 2,
+      "sol": "z²=(2+i)²=3+4i e 2z=4+2i; diferença=−1+2i.",
+      "hyp": "Pode fazer z(z−2) sem expandir corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:expressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-028",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1−i, então z²=",
+      "o": [
+        "2i.",
+        "2.",
+        "−2.",
+        "−2i."
+      ],
+      "a": 3,
+      "sol": "1−2i+i²=−2i.",
+      "hyp": "Pode esquecer cancelamento das partes reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-029",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1+i, então z⁴=",
+      "o": [
+        "−4.",
+        "4.",
+        "4i.",
+        "−4i."
+      ],
+      "a": 0,
+      "sol": "z²=2i, logo z⁴=(2i)²=−4.",
+      "hyp": "Pode usar (1+i⁴).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-030",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(2+i)(2−i)=",
+      "o": [
+        "3.",
+        "5.",
+        "4.",
+        "5i."
+      ],
+      "a": 1,
+      "sol": "É 2²+1²=5.",
+      "hyp": "Pode usar 4−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto-conjugado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-031",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(a+bi)(a−bi)=",
+      "o": [
+        "a²−b².",
+        "a²+b²i.",
+        "a²+b².",
+        "a²−b²i."
+      ],
+      "a": 2,
+      "sol": "O produto é real e igual ao módulo ao quadrado.",
+      "hyp": "Pode aplicar diferença de quadrados sem i².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-032",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z+w=5+2i e z=1−i, então w=",
+      "o": [
+        "4+i.",
+        "6+i.",
+        "−4−3i.",
+        "4+3i."
+      ],
+      "a": 3,
+      "sol": "w=(5+2i)−(1−i)=4+3i.",
+      "hyp": "Pode não distribuir o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:resolver-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-033",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se zw=1 e z=1+i, então w=",
+      "o": [
+        "(1−i)/2.",
+        "1−i.",
+        "(1+i)/2.",
+        "−1+i."
+      ],
+      "a": 0,
+      "sol": "w=1/z.",
+      "hyp": "Pode usar o conjugado sem normalização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:resolver-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-034",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se (1+i)z=2, então z=",
+      "o": [
+        "1+i.",
+        "1−i.",
+        "2−2i.",
+        "−1+i."
+      ],
+      "a": 1,
+      "sol": "z=2/(1+i)=1−i.",
+      "hyp": "Pode esquecer dividir pelo módulo ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:equacao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-035",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se iz=3+i, então z=",
+      "o": [
+        "−1+3i.",
+        "3−i.",
+        "1−3i.",
+        "−3−i."
+      ],
+      "a": 2,
+      "sol": "z=(3+i)/i=(3+i)(−i)=1−3i.",
+      "hyp": "Pode dividir cada termo por i incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:equacao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-036",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Para quaisquer z,w, |zw| é...",
+      "o": [
+        "|z|+|w|.",
+        "|z−w|.",
+        "|z|²|w|².",
+        "|z||w|."
+      ],
+      "a": 3,
+      "sol": "O módulo é multiplicativo.",
+      "hyp": "Pode somar módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:modulo-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-037",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=2+3i e w=1−i, então zw=",
+      "o": [
+        "5+i.",
+        "−1+i.",
+        "5−i.",
+        "−1+5i."
+      ],
+      "a": 0,
+      "sol": "2−2i+3i−3i²=5+i.",
+      "hyp": "Pode errar i².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-038",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=3−i e w=2+4i, então z+w e zw são, respetivamente...",
+      "o": [
+        "5+3i e 2+10i.",
+        "5+3i e 10+10i.",
+        "1−5i e 10+10i.",
+        "5−5i e 10−10i."
+      ],
+      "a": 1,
+      "sol": "Soma=5+3i; produto=6+12i−2i−4i²=10+10i.",
+      "hyp": "Pode misturar operações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:duas-operacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-039",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve (2+i)z=5.",
+      "o": [
+        "z=2+i.",
+        "z=1−2i.",
+        "z=2−i.",
+        "z=5/(2−i)."
+      ],
+      "a": 2,
+      "sol": "z=5/(2+i)=5(2−i)/5=2−i.",
+      "hyp": "Pode usar o conjugado errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:equacao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-040",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve (1−2i)z=5.",
+      "o": [
+        "z=1−2i.",
+        "z=2+i.",
+        "z=−1+2i.",
+        "z=1+2i."
+      ],
+      "a": 3,
+      "sol": "5/(1−2i)=5(1+2i)/5=1+2i.",
+      "hyp": "Pode manter o denominador complexo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:equacao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-041",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z+iz=2+2i, então z=",
+      "o": [
+        "2.",
+        "1+i.",
+        "1.",
+        "2i."
+      ],
+      "a": 0,
+      "sol": "z(1+i)=2(1+i), logo z=2.",
+      "hyp": "Pode dividir componente a componente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:equacao-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-042",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z−iz=2, então z=",
+      "o": [
+        "1−i.",
+        "1+i.",
+        "2+2i.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "z(1−i)=2 => z=2/(1−i)=1+i.",
+      "hyp": "Pode usar conjugado com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:equacao-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-043",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "(1+i)/(1−i)+(1−i)/(1+i)=",
+      "o": [
+        "2.",
+        "2i.",
+        "0.",
+        "−2."
+      ],
+      "a": 2,
+      "sol": "Os quocientes são i e −i.",
+      "hyp": "Pode achar que são conjugados com soma 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:soma-quocientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-044",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z≠0, z/conj(z)·conj(z)/z é...",
+      "o": [
+        "|z|².",
+        "0.",
+        "−1.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Os fatores são recíprocos.",
+      "hyp": "Pode multiplicar apenas numeradores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-045",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1+i, então 1/z² é...",
+      "o": [
+        "−i/2.",
+        "i/2.",
+        "−i.",
+        "i."
+      ],
+      "a": 0,
+      "sol": "z²=2i; 1/(2i)=−i/2.",
+      "hyp": "Pode esquecer racionalizar 1/i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:inverso-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-046",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "(2i)/(1−i)=",
+      "o": [
+        "1+i.",
+        "−1+i.",
+        "−1−i.",
+        "1−i."
+      ],
+      "a": 1,
+      "sol": "2i(1+i)/2=i+i²=−1+i.",
+      "hyp": "Pode esquecer i².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-047",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z²=4i e z=a+bi com a=b>0, então z=",
+      "o": [
+        "1+i.",
+        "2+2i.",
+        "√2(1+i).",
+        "√2(1−i)."
+      ],
+      "a": 2,
+      "sol": "[√2(1+i)]²=2(1+i)²=4i.",
+      "hyp": "Pode não verificar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:raiz-complexa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-048",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma impedância simplificada z=3+4i é multiplicada por 2. O resultado é...",
+      "o": [
+        "5+6i.",
+        "6+4i.",
+        "3+8i.",
+        "6+8i."
+      ],
+      "a": 3,
+      "sol": "Multiplica-se cada componente por 2.",
+      "hyp": "modelacao-escalar",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-049",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Dois sinais z1=2+i e z2=−1+3i somam-se. O resultado é...",
+      "o": [
+        "1+4i.",
+        "3+2i.",
+        "1+2i.",
+        "−3+4i."
+      ],
+      "a": 0,
+      "sol": "Somam-se componentes correspondentes.",
+      "hyp": "modelacao-soma",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-OA-050",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-operacoes-algebricas",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z+w=0, então w=",
+      "o": [
+        "conj(z).",
+        "−z.",
+        "z.",
+        "1/z."
+      ],
+      "a": 1,
+      "sol": "w é o oposto aditivo de z.",
+      "hyp": "Pode confundir oposto, conjugado e inverso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-operacoes-algebricas:oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
