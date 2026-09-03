@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fin",
+  "subtopicId": "10-fin-salarios",
+  "subtopic": "Salário mensal, anual e valor-hora",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Os problemas usam apenas convenções explicitadas no enunciado (por exemplo 12/14 pagamentos ou 4 semanas/mês) e não pressupõem regras laborais externas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FIN-SAL-001",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa recebe 950 € por mês durante 12 meses. Qual é o salário anual correspondente?",
+      "o": [
+        "11 400 €",
+        "10 400 €",
+        "11 900 €",
+        "12 400 €"
+      ],
+      "a": 0,
+      "sol": "950×12=11 400 €.",
+      "hyp": "Pode multiplicar pelo número errado de meses.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:mensal-para-anual-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-002",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um salário anual de 18 000 € é pago em 12 prestações mensais iguais. Qual é cada prestação?",
+      "o": [
+        "1 200 €",
+        "1 500 €",
+        "1 400 €",
+        "1 800 €"
+      ],
+      "a": 1,
+      "sol": "18 000÷12=1 500 €.",
+      "hyp": "Pode dividir por 10 ou 14 sem ler o número de pagamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:anual-para-mensal-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-003",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um contrato prevê 14 pagamentos anuais de 1 100 € cada. Qual é o total anual?",
+      "o": [
+        "14 400 €",
+        "16 400 €",
+        "15 400 €",
+        "13 200 €"
+      ],
+      "a": 2,
+      "sol": "14×1 100=15 400 €.",
+      "hyp": "Pode assumir automaticamente 12 pagamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:pagamentos-14-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-004",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma remuneração anual de 21 000 € é repartida igualmente por 14 pagamentos. Quanto vale cada pagamento?",
+      "o": [
+        "1 400 €",
+        "1 600 €",
+        "1 750 €",
+        "1 500 €"
+      ],
+      "a": 3,
+      "sol": "21 000÷14=1 500 €.",
+      "hyp": "Pode dividir o total anual por 12 apesar de o enunciado indicar 14 pagamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:anual-para-pagamento-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-005",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa trabalha 30 horas e recebe 270 €. Qual é o valor médio por hora nesse período?",
+      "o": [
+        "9 €",
+        "8 €",
+        "10 €",
+        "12 €"
+      ],
+      "a": 0,
+      "sol": "270÷30=9 € por hora.",
+      "hyp": "Pode inverter a divisão e calcular horas por euro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:valor-hora-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-006",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Com uma taxa de 8,50 € por hora, quanto se recebe por 24 horas de trabalho?",
+      "o": [
+        "196 €",
+        "204 €",
+        "212 €",
+        "216 €"
+      ],
+      "a": 1,
+      "sol": "8,50×24=204 €.",
+      "hyp": "Pode somar horas à taxa em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:remuneracao-horas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-007",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa trabalha 35 horas por semana durante 4 semanas, à taxa de 10 € por hora. Neste modelo simplificado, quanto recebe no período?",
+      "o": [
+        "1 200 €",
+        "1 300 €",
+        "1 400 €",
+        "1 500 €"
+      ],
+      "a": 2,
+      "sol": "35×4=140 horas; 140×10=1 400 €.",
+      "hyp": "Pode esquecer uma das etapas: converter semanas em horas e depois aplicar a taxa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:semanas-horas-remuneracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-008",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas ofertas são: X — 1 250 € por mês em 12 pagamentos; Y — 1 100 € por pagamento em 14 pagamentos. Qual tem maior total anual?",
+      "o": [
+        "X, por 400 €.",
+        "São iguais.",
+        "Y, por 1 400 €.",
+        "Y, por 400 €."
+      ],
+      "a": 3,
+      "sol": "X=1 250×12=15 000 €. Y=1 100×14=15 400 €. Y é superior em 400 €.",
+      "hyp": "Pode comparar apenas os valores de cada prestação e ignorar o número de pagamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:comparar-ofertas-num-pagamentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-009",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma oferta paga 1 400 € em 12 prestações e outra 1 200 € em 14 prestações. Qual é a comparação anual?",
+      "o": [
+        "A primeira é maior em 0 €; ambas dão 16 800 €.",
+        "A primeira é maior em 0 €.",
+        "A segunda é maior em 400 €.",
+        "A primeira é maior em 1 200 €."
+      ],
+      "a": 0,
+      "sol": "1 400×12=16 800 € e 1 200×14=16 800 €. Os totais anuais são iguais.",
+      "hyp": "Pode escolher a prestação mensal maior sem anualizar as duas propostas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:comparar-ofertas-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-010",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa ganha 12 € por hora e trabalha 18 horas numa semana. Quanto recebe nessa semana?",
+      "o": [
+        "196 €",
+        "216 €",
+        "206 €",
+        "226 €"
+      ],
+      "a": 1,
+      "sol": "12×18=216 €.",
+      "hyp": "Pode confundir horas semanais com dias ou meses.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:remuneracao-horas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-011",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma remuneração de 720 € corresponde a 80 horas de trabalho. Qual foi a taxa horária média?",
+      "o": [
+        "8 €",
+        "10 €",
+        "9 €",
+        "11 €"
+      ],
+      "a": 2,
+      "sol": "720÷80=9 € por hora.",
+      "hyp": "Pode dividir o número de horas pelo salário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:valor-hora-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-012",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa recebe 1 280 € num mês em que trabalhou 160 horas. Qual é o valor médio por hora?",
+      "o": [
+        "7 €",
+        "9 €",
+        "10 €",
+        "8 €"
+      ],
+      "a": 3,
+      "sol": "1 280÷160=8 € por hora.",
+      "hyp": "Pode usar 40 horas semanais sem necessidade, apesar de as horas do mês já estarem dadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:valor-hora-mensal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-013",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se uma remuneração anual de 16 800 € for paga em 12 prestações, cada uma vale 1 400 €. Se for repartida em 14 prestações iguais, quanto vale cada uma?",
+      "o": [
+        "1 200 €",
+        "1 000 €",
+        "1 100 €",
+        "1 300 €"
+      ],
+      "a": 0,
+      "sol": "16 800÷14=1 200 €.",
+      "hyp": "Pode concluir que mais prestações aumentam o total anual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:mesmo-anual-diferentes-prestacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-014",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação é correta sobre dois contratos com o mesmo salário anual, um pago em 12 e outro em 14 prestações iguais?",
+      "o": [
+        "O de 14 prestações tem necessariamente maior salário anual.",
+        "O total anual é o mesmo; muda o valor de cada prestação.",
+        "O de 12 prestações tem necessariamente maior salário anual.",
+        "Os valores de cada prestação são iguais."
+      ],
+      "a": 1,
+      "sol": "Se o total anual é fixo, alterar o número de prestações apenas redistribui esse total.",
+      "hyp": "Pode confundir periodicidade de pagamento com valor anual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:periodicidade-vs-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-015",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa trabalhou apenas 8 meses de um ano e recebeu 1 300 € em cada um desses 8 meses. Qual foi o total recebido nesses meses?",
+      "o": [
+        "9 400 €",
+        "11 400 €",
+        "10 400 €",
+        "15 600 €"
+      ],
+      "a": 2,
+      "sol": "8×1 300=10 400 €.",
+      "hyp": "Pode anualizar para 12 meses apesar de a pergunta pedir apenas o período trabalhado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:periodo-parcial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-016",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma taxa horária é 11 €. Quantas horas correspondem a uma remuneração de 385 €?",
+      "o": [
+        "30",
+        "32",
+        "40",
+        "35"
+      ],
+      "a": 3,
+      "sol": "385÷11=35 horas.",
+      "hyp": "Pode multiplicar em vez de resolver a divisão inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:horas-a-partir-remuneracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-017",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa trabalha 7 horas por dia, 5 dias por semana. Quantas horas trabalha numa semana?",
+      "o": [
+        "35",
+        "30",
+        "32",
+        "40"
+      ],
+      "a": 0,
+      "sol": "7×5=35 horas.",
+      "hyp": "Pode somar horas e dias em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:dias-para-semana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-018",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num modelo simplificado de 4 semanas por mês, quem trabalha 35 horas por semana trabalha quantas horas nesse mês?",
+      "o": [
+        "120",
+        "140",
+        "130",
+        "150"
+      ],
+      "a": 1,
+      "sol": "35×4=140 horas.",
+      "hyp": "Pode usar 30 dias ou 52 semanas sem respeitar a simplificação indicada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:semana-para-mes-simplificado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-019",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com 140 horas num mês e taxa de 9,50 € por hora, qual é a remuneração?",
+      "o": [
+        "1 230 €",
+        "1 280 €",
+        "1 330 €",
+        "1 380 €"
+      ],
+      "a": 2,
+      "sol": "140×9,50=1 330 €.",
+      "hyp": "Pode deslocar incorretamente a vírgula decimal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:taxa-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-020",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Oferta A: 1 600 € por mês para 40 h/semana. Oferta B: 1 500 € por mês para 35 h/semana. Sem outras diferenças e usando 4 semanas/mês, qual tem maior valor médio por hora?",
+      "o": [
+        "A, com 10 €/h.",
+        "A, com cerca de 11,43 €/h.",
+        "Têm o mesmo valor/hora.",
+        "B, com cerca de 10,71 €/h."
+      ],
+      "a": 3,
+      "sol": "A: 160 h/mês, 1600/160=10 €/h. B: 140 h/mês, 1500/140≈10,71 €/h. B tem maior valor horário.",
+      "hyp": "Pode comparar apenas os salários mensais e ignorar as horas trabalhadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:comparar-ofertas-valor-hora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-021",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para comparar corretamente duas ofertas em valor por hora, que informação é indispensável além da remuneração?",
+      "o": [
+        "O número de horas de trabalho correspondente.",
+        "A idade do trabalhador.",
+        "O nome da empresa.",
+        "O número de colegas."
+      ],
+      "a": 0,
+      "sol": "O valor por hora é remuneração dividida pelas horas associadas ao mesmo período.",
+      "hyp": "Pode tentar comparar taxas horárias sem denominadores compatíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:dados-necessarios-valor-hora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-022",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa recebe 14 400 € por ano e trabalha 1 600 horas nesse ano. Qual é o valor médio por hora?",
+      "o": [
+        "8 €",
+        "9 €",
+        "10 €",
+        "12 €"
+      ],
+      "a": 1,
+      "sol": "14 400÷1 600=9 € por hora.",
+      "hyp": "Pode dividir por meses em vez de usar as horas anuais fornecidas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:anual-para-hora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-023",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa ganha 10 € por hora e trabalha 1 750 horas num ano. Qual é a remuneração anual, neste modelo?",
+      "o": [
+        "16 500 €",
+        "17 000 €",
+        "17 500 €",
+        "18 500 €"
+      ],
+      "a": 2,
+      "sol": "10×1 750=17 500 €.",
+      "hyp": "Pode converter desnecessariamente para meses e introduzir erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:hora-para-anual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-024",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma pessoa recebe 15 600 € por ano. Após uma alteração, passa a receber 1 350 € por mês em 12 pagamentos. Qual é a variação anual?",
+      "o": [
+        "Aumenta 300 €.",
+        "Diminui 300 €.",
+        "Diminui 600 €.",
+        "Aumenta 600 €."
+      ],
+      "a": 3,
+      "sol": "O novo anual é 1 350×12=16 200 €. A diferença é 600 €.",
+      "hyp": "Pode comparar 1 350 com 15 600 sem converter para o mesmo período.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:comparar-periodos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-025",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma remuneração mensal passa de 1 200 € para 1 260 €. Qual é o aumento percentual?",
+      "o": [
+        "5%",
+        "4%",
+        "6%",
+        "10%"
+      ],
+      "a": 0,
+      "sol": "O aumento é 60 €. 60/1 200=0,05=5%.",
+      "hyp": "Pode dividir pelo valor novo em vez do valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:percentagem-aumento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-026",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um salário mensal de 1 500 € sofre uma redução de 8%. Qual é o novo valor?",
+      "o": [
+        "1 360 €",
+        "1 380 €",
+        "1 400 €",
+        "1 420 €"
+      ],
+      "a": 1,
+      "sol": "8% de 1 500 é 120; 1 500−120=1 380 €.",
+      "hyp": "Pode retirar 8 euros em vez de 8%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:percentagem-reducao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-027",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se as horas semanais diminuem de 40 para 32 e a remuneração é estritamente proporcional às horas, que percentagem do salário anterior deve permanecer?",
+      "o": [
+        "70%",
+        "75%",
+        "80%",
+        "85%"
+      ],
+      "a": 2,
+      "sol": "32/40=0,8, logo permanece 80%.",
+      "hyp": "Pode calcular apenas a redução em horas e não a proporção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:proporcionalidade-horas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-028",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um salário de 1 600 € corresponde a 40 h/semana. Se passar proporcionalmente para 30 h/semana, qual será o salário?",
+      "o": [
+        "1 000 €",
+        "1 100 €",
+        "1 300 €",
+        "1 200 €"
+      ],
+      "a": 3,
+      "sol": "30/40=0,75; 1 600×0,75=1 200 €.",
+      "hyp": "Pode subtrair apenas 10 € ou 10% em vez de usar a razão das horas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:proporcionalidade-horas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-029",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa recebe 84 € por um dia de 7 horas. Qual é a taxa horária?",
+      "o": [
+        "12 €",
+        "10 €",
+        "11 €",
+        "13 €"
+      ],
+      "a": 0,
+      "sol": "84÷7=12 € por hora.",
+      "hyp": "Pode confundir remuneração diária com taxa horária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:diario-para-hora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-030",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "À taxa de 12 € por hora, qual é a remuneração de uma semana de 35 horas?",
+      "o": [
+        "400 €",
+        "420 €",
+        "410 €",
+        "430 €"
+      ],
+      "a": 1,
+      "sol": "12×35=420 €.",
+      "hyp": "Pode multiplicar por 5 dias sem conhecer horas diárias, apesar de o total semanal já estar dado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:semana-remuneracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-031",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um contrato paga x euros por mês durante 12 meses. Outro paga 1 200 € em 14 prestações. Para terem o mesmo total anual, quanto deve valer x?",
+      "o": [
+        "1 300 €",
+        "1 350 €",
+        "1 400 €",
+        "1 450 €"
+      ],
+      "a": 2,
+      "sol": "12x=14×1 200=16 800; x=1 400 €.",
+      "hyp": "Pode igualar diretamente os valores de cada prestação sem considerar a quantidade de pagamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:equacao-comparar-contratos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-032",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um contrato anual de 19 200 € é dividido em 12 pagamentos. Se cada pagamento aumentar 50 €, qual será o novo total anual?",
+      "o": [
+        "19 250 €",
+        "19 600 €",
+        "20 400 €",
+        "19 800 €"
+      ],
+      "a": 3,
+      "sol": "O aumento anual é 12×50=600 €. Novo total: 19 800 €.",
+      "hyp": "Pode adicionar 50 € apenas uma vez ao total anual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:aumento-por-prestacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-033",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um contrato de 14 pagamentos reduz cada prestação em 30 €. Qual é a redução anual total?",
+      "o": [
+        "420 €",
+        "300 €",
+        "360 €",
+        "480 €"
+      ],
+      "a": 0,
+      "sol": "14×30=420 €.",
+      "hyp": "Pode multiplicar por 12 por hábito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:variacao-14-pagamentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-034",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma oferta anuncia '1 500 € por mês', mas não indica quantos pagamentos existem por ano. Pode determinar-se o total anual exato?",
+      "o": [
+        "Sim, é sempre 18 000 €.",
+        "Não; é necessário saber quantos pagamentos anuais estão previstos.",
+        "Sim, é sempre 21 000 €.",
+        "Só depende das horas semanais."
+      ],
+      "a": 1,
+      "sol": "Sem saber se o contrato tem 12, 14 ou outro número de pagamentos, o total anual não fica determinado.",
+      "hyp": "Pode assumir uma convenção não indicada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:informacao-insuficiente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-035",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma oferta apresenta apenas '18 000 € anuais'. Para saber o valor de cada pagamento, falta conhecer...",
+      "o": [
+        "a percentagem de votos da empresa.",
+        "a idade do trabalhador.",
+        "o número de pagamentos em que o total é repartido.",
+        "o mês de início do ano civil."
+      ],
+      "a": 2,
+      "sol": "O valor por pagamento é o total anual dividido pelo número de prestações.",
+      "hyp": "Pode procurar dados irrelevantes em vez da variável necessária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:informacao-insuficiente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-036",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa trabalha 20 h/semana a 11 €/h durante 4 semanas. Quanto recebe nesse período?",
+      "o": [
+        "800 €",
+        "840 €",
+        "920 €",
+        "880 €"
+      ],
+      "a": 3,
+      "sol": "20×4×11=880 €.",
+      "hyp": "Pode multiplicar apenas horas semanais pela taxa e esquecer o número de semanas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:part-time-periodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-037",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa trabalha 25 h/semana durante 48 semanas num ano. Quantas horas trabalha nesse ano?",
+      "o": [
+        "1 200",
+        "1 000",
+        "1 100",
+        "1 250"
+      ],
+      "a": 0,
+      "sol": "25×48=1 200 horas.",
+      "hyp": "Pode usar 52 semanas apesar de o enunciado indicar 48.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:horas-anuais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-038",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com 1 200 horas anuais e remuneração anual de 13 800 €, qual é o valor médio por hora?",
+      "o": [
+        "10,50 €",
+        "11,50 €",
+        "11,00 €",
+        "12,00 €"
+      ],
+      "a": 1,
+      "sol": "13 800÷1 200=11,50 € por hora.",
+      "hyp": "Pode arredondar antes de efetuar a divisão completa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:valor-hora-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-039",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Num modelo simplificado, uma pessoa trabalha 6 h/dia, 5 dias/semana, 4 semanas/mês e recebe 1 200 €/mês. Qual é o valor médio por hora?",
+      "o": [
+        "8 €",
+        "9 €",
+        "10 €",
+        "12 €"
+      ],
+      "a": 2,
+      "sol": "Horas mensais: 6×5×4=120. Valor/hora: 1 200÷120=10 €.",
+      "hyp": "Pode esquecer uma dimensão temporal na conversão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:cadeia-temporal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-040",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma pessoa trabalha 7,5 h/dia, 5 dias/semana. Quantas horas faz numa semana?",
+      "o": [
+        "35",
+        "36,5",
+        "40",
+        "37,5"
+      ],
+      "a": 3,
+      "sol": "7,5×5=37,5 horas.",
+      "hyp": "Pode arredondar 7,5 antes de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:horas-decimais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-041",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Oferta A: 16 800 € anuais por 1 680 h/ano. Oferta B: 17 100 € anuais por 1 800 h/ano. Qual tem maior valor médio por hora?",
+      "o": [
+        "A, com 10 €/h.",
+        "B, com 10 €/h.",
+        "B, com 9,50 €/h.",
+        "Têm o mesmo valor/hora."
+      ],
+      "a": 0,
+      "sol": "A: 16 800/1 680=10 €/h. B: 17 100/1 800=9,50 €/h. A tem maior valor por hora.",
+      "hyp": "Pode escolher o maior salário anual sem ponderar as horas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:comparar-anual-valor-hora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-042",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma pessoa ganha 9,60 €/h. Quantas horas precisa de trabalhar para receber 768 €?",
+      "o": [
+        "75",
+        "80",
+        "85",
+        "90"
+      ],
+      "a": 1,
+      "sol": "768÷9,60=80 horas.",
+      "hyp": "Pode perder precisão ao trabalhar com decimais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:inversa-taxa-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-043",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um aluno calcula o valor/hora de 1 400 €/mês dividindo por 40, porque o contrato diz 40 h/semana. Qual é o problema?",
+      "o": [
+        "Devia multiplicar 1 400 por 40.",
+        "Salário mensal nunca pode ser convertido em valor/hora.",
+        "Mistura um valor mensal com horas semanais; é preciso converter os períodos para a mesma unidade.",
+        "40 horas semanais significam 40 horas mensais."
+      ],
+      "a": 2,
+      "sol": "O numerador e denominador devem referir-se ao mesmo período; por exemplo, com 4 semanas/mês seriam 160 horas.",
+      "hyp": "Pode dividir grandezas de períodos incompatíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:consistencia-unidades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-044",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num mês simplificado de 4 semanas, uma oferta paga 1 440 € por 36 h/semana. Qual é o valor médio por hora?",
+      "o": [
+        "9 €",
+        "11 €",
+        "12 €",
+        "10 €"
+      ],
+      "a": 3,
+      "sol": "Horas mensais=36×4=144; 1 440÷144=10 €/h.",
+      "hyp": "Pode dividir diretamente por 36 e obter um valor sem unidade temporal coerente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:valor-hora-mensal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-045",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um total anual de 17 500 € resulta de 14 pagamentos iguais. Qual é cada pagamento?",
+      "o": [
+        "1 250 €",
+        "1 150 €",
+        "1 200 €",
+        "1 300 €"
+      ],
+      "a": 0,
+      "sol": "17 500÷14=1 250 €.",
+      "hyp": "Pode dividir por 12 ou fazer arredondamento prematuro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:anual-para-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-046",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um contrato tem pagamentos iguais de 1 250 € e total anual de 17 500 €. Quantos pagamentos existem?",
+      "o": [
+        "12",
+        "14",
+        "13",
+        "15"
+      ],
+      "a": 1,
+      "sol": "17 500÷1 250=14 pagamentos.",
+      "hyp": "Pode assumir 12 ou 14 sem usar a relação entre total e prestação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:numero-pagamentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-047",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma pessoa trabalha 9 meses num projeto, recebendo 1 600 € por mês, e recebe ainda um bónus fixo de 900 € no fim. Qual é o total do projeto?",
+      "o": [
+        "14 400 €",
+        "14 900 €",
+        "15 300 €",
+        "15 900 €"
+      ],
+      "a": 2,
+      "sol": "9×1 600=14 400; mais 900 dá 15 300 €.",
+      "hyp": "Pode esquecer o bónus ou contar 12 meses.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:salario-mais-bonus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-048",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Oferta A: 1 300 € em 12 pagamentos mais um bónus anual fixo de 600 €. Oferta B: 1 150 € em 14 pagamentos sem bónus. Qual tem maior total anual?",
+      "o": [
+        "B, por 100 €.",
+        "A, por 500 €.",
+        "São iguais.",
+        "A, por 100 €."
+      ],
+      "a": 3,
+      "sol": "A=1 300×12+600=16 200 €. B=1 150×14=16 100 €. A é maior em 100 €.",
+      "hyp": "Pode comparar apenas salários base ou esquecer o bónus.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:comparar-com-bonus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-049",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Oferta A paga 1 600 €/mês por 40 h/semana; B paga 1 500 €/mês por 35 h/semana. Usando 4 semanas/mês, quanto teria A de pagar por mês para igualar o valor/hora de B?",
+      "o": [
+        "1 714,29 €",
+        "1 600 €",
+        "1 650 €",
+        "1 700 €"
+      ],
+      "a": 0,
+      "sol": "B vale 1 500/(35×4)=1 500/140≈10,7143 €/h. Para 160 h em A: 160×10,7143≈1 714,29 €.",
+      "hyp": "Pode comparar salários mensais sem ajustar às horas ou arredondar demasiado cedo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:igualar-valor-hora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-SAL-050",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-salarios",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma pessoa recebe 1 260 € por mês durante 12 meses e trabalha, em média, 30 h/semana durante 48 semanas no ano. Qual é o valor médio por hora anual?",
+      "o": [
+        "9,50 €",
+        "10,50 €",
+        "10,00 €",
+        "11,00 €"
+      ],
+      "a": 1,
+      "sol": "Remuneração anual=1 260×12=15 120 €. Horas anuais=30×48=1 440. 15 120/1 440=10,50 €/h.",
+      "hyp": "Pode misturar períodos ou usar 52 semanas apesar de o enunciado indicar 48.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-salarios:modelacao-anual-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
