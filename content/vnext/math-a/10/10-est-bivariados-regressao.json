@@ -1340,7 +1340,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "No modelo anterior, prever para −20°C deve ser feito com cautela principalmente porque...",
+      "q": "Um modelo ajustado na faixa observada de 10°C a 25°C é y=120−2x, onde x é a temperatura. Prever y para −20°C deve ser feito com cautela principalmente porque...",
       "o": [
         "a reta deixa de ser uma equação.",
         "−20°C está muito fora da faixa 10–25°C usada para ajustar o modelo.",
