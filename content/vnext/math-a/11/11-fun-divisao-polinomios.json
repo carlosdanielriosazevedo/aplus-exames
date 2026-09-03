@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-fun",
+  "subtopicId": "11-fun-divisao-polinomios",
+  "subtopic": "Divisão de polinómios, Ruffini/Horner",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha divisão euclidiana, grau de quociente/resto, Ruffini, Horner, divisibilidade e fatorização progressiva. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11FUN-DP-001",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na divisão de polinómios P(x) por D(x), com D≠0, escreve-se...",
+      "o": [
+        "P=DQ+R.",
+        "P=Q+R.",
+        "P=DR.",
+        "P=D+Q+R."
+      ],
+      "a": 0,
+      "sol": "É a identidade fundamental da divisão euclidiana de polinómios.",
+      "hyp": "Pode esquecer multiplicar divisor pelo quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:algoritmo-divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-002",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O grau do resto R na divisão por um divisor de grau 2 deve ser...",
+      "o": [
+        "igual a 2.",
+        "inferior a 2.",
+        "superior a 2.",
+        "sempre 0."
+      ],
+      "a": 1,
+      "sol": "O resto tem grau estritamente inferior ao do divisor.",
+      "hyp": "Pode usar grau igual ao divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:grau-resto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-003",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Ao dividir por x−a, o resto é...",
+      "o": [
+        "um polinómio de grau 1.",
+        "sempre zero.",
+        "uma constante.",
+        "de grau 2."
+      ],
+      "a": 2,
+      "sol": "O divisor tem grau 1, logo o resto tem grau inferior a 1.",
+      "hyp": "Pode pensar que o resto deve ter o mesmo grau do divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-004",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o quociente de x²−1 por x−1?",
+      "o": [
+        "x−1.",
+        "x²+1.",
+        "1.",
+        "x+1."
+      ],
+      "a": 3,
+      "sol": "x²−1=(x−1)(x+1).",
+      "hyp": "Pode repetir o mesmo fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:diferenca-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-005",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual é o resto da divisão de x²−1 por x−1?",
+      "o": [
+        "0.",
+        "1.",
+        "−1.",
+        "x."
+      ],
+      "a": 0,
+      "sol": "A divisão é exata.",
+      "hyp": "Pode confundir o valor do divisor com resto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-006",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Divide x²+3x+2 por x+1. O quociente é...",
+      "o": [
+        "x+1.",
+        "x+2.",
+        "x−2.",
+        "x²+2."
+      ],
+      "a": 1,
+      "sol": "x²+3x+2=(x+1)(x+2).",
+      "hyp": "Pode errar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:divisao-fatorizada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-007",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Divide x²−4x+3 por x−1. O quociente é...",
+      "o": [
+        "x+3.",
+        "x−1.",
+        "x−3.",
+        "x−4."
+      ],
+      "a": 2,
+      "sol": "x²−4x+3=(x−1)(x−3).",
+      "hyp": "Pode trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:divisao-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-008",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Ao dividir x²+1 por x+1, o quociente e resto são...",
+      "o": [
+        "x+1 e 0.",
+        "x−1 e 0.",
+        "x+1 e 2.",
+        "x−1 e 2."
+      ],
+      "a": 3,
+      "sol": "x²+1=(x+1)(x−1)+2.",
+      "hyp": "Pode assumir que toda quadrática se fatora exatamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:quociente-resto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-009",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Ao dividir x³−1 por x−1, o quociente é...",
+      "o": [
+        "x²+x+1.",
+        "x²−x+1.",
+        "x²+1.",
+        "x+1."
+      ],
+      "a": 0,
+      "sol": "x³−1=(x−1)(x²+x+1).",
+      "hyp": "Pode usar a fórmula da soma de cubos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:diferenca-cubos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-010",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Ao dividir x³+1 por x+1, o quociente é...",
+      "o": [
+        "x²+x+1.",
+        "x²−x+1.",
+        "x²−1.",
+        "x+1."
+      ],
+      "a": 1,
+      "sol": "x³+1=(x+1)(x²−x+1).",
+      "hyp": "Pode errar o padrão de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:soma-cubos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-011",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O esquema de Ruffini aplica-se diretamente quando o divisor é da forma...",
+      "o": [
+        "x²+a.",
+        "ax+b com a≠1 sem adaptação.",
+        "x−a.",
+        "qualquer polinómio."
+      ],
+      "a": 2,
+      "sol": "Ruffini é preparado para divisores monómios de grau 1 na forma x−a.",
+      "hyp": "Pode usar Ruffini sem transformar o divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-condicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-012",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para dividir por x−3 em Ruffini, usa-se o número...",
+      "o": [
+        "−3.",
+        "1/3.",
+        "0.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "O valor a é 3.",
+      "hyp": "Pode trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-numero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-013",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para dividir por x+2 em Ruffini, usa-se...",
+      "o": [
+        "−2.",
+        "2.",
+        "1/2.",
+        "−1/2."
+      ],
+      "a": 0,
+      "sol": "x+2=x−(−2).",
+      "hyp": "Pode copiar o sinal do divisor sem inversão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-numero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-014",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se falta um termo intermédio num polinómio usado em Ruffini, deve-se...",
+      "o": [
+        "ignorar a posição.",
+        "incluir coeficiente 0.",
+        "parar o algoritmo.",
+        "substituir por 1."
+      ],
+      "a": 1,
+      "sol": "Todos os graus devem estar representados na sequência de coeficientes.",
+      "hyp": "Pode deslocar os coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:coeficiente-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-015",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os coeficientes de x³−5x+2 para Ruffini são...",
+      "o": [
+        "1,−5,2.",
+        "1,0,5,2.",
+        "1,0,−5,2.",
+        "0,1,−5,2."
+      ],
+      "a": 2,
+      "sol": "Falta o termo x², cujo coeficiente é 0.",
+      "hyp": "Pode omitir o zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:coeficientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-016",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Divide x³+2x²−x−2 por x+2. O quociente é...",
+      "o": [
+        "x²+1.",
+        "x²−2x+1.",
+        "x²+2x−1.",
+        "x²−1."
+      ],
+      "a": 3,
+      "sol": "Por agrupamento: x²(x+2)−1(x+2)=(x+2)(x²−1).",
+      "hyp": "Pode não reconhecer o fator comum.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:divisao-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-017",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O resto da divisão anterior é...",
+      "o": [
+        "0.",
+        "−2.",
+        "2.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "x+2 é fator do polinómio.",
+      "hyp": "Pode usar o termo constante como resto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-018",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Divide 2x³−3x²−8x+12 por x−2. O quociente é...",
+      "o": [
+        "2x²−7x+6.",
+        "2x²+x−6.",
+        "2x²+x+6.",
+        "x²+x−6."
+      ],
+      "a": 1,
+      "sol": "Ruffini com 2 nos coeficientes 2,−3,−8,12 dá 2,1,−6 e resto 0.",
+      "hyp": "Pode errar uma soma intermédia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-019",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Na divisão anterior, o resto é...",
+      "o": [
+        "12.",
+        "2.",
+        "0.",
+        "−6."
+      ],
+      "a": 2,
+      "sol": "P(2)=0.",
+      "hyp": "Pode confundir último coeficiente do quociente com resto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-ruffini",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-020",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O último valor obtido no esquema de Ruffini corresponde ao...",
+      "o": [
+        "coeficiente líder do quociente.",
+        "divisor.",
+        "grau.",
+        "resto."
+      ],
+      "a": 3,
+      "sol": "Após as operações, o último número é o resto.",
+      "hyp": "Pode incluí-lo entre os coeficientes do quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ultimo-ruffini",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-021",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Divide x³−6x²+11x−6 por x−1. O quociente é...",
+      "o": [
+        "x²−5x+6.",
+        "x²−6x+5.",
+        "x²−5x−6.",
+        "x²+5x+6."
+      ],
+      "a": 0,
+      "sol": "Ruffini com 1 dá coeficientes 1,−5,6 e resto 0.",
+      "hyp": "Pode errar a soma de coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-022",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Divide o mesmo polinómio por x−2. O quociente é...",
+      "o": [
+        "x²−5x+3.",
+        "x²−4x+3.",
+        "x²−4x−3.",
+        "x²+4x+3."
+      ],
+      "a": 1,
+      "sol": "Ruffini com 2 dá 1,−4,3 e resto 0.",
+      "hyp": "Pode usar o resultado da divisão por x−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-raiz2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-023",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Depois de dividir x³−6x²+11x−6 por x−1, fatorizar o quociente dá...",
+      "o": [
+        "(x+2)(x+3).",
+        "(x−1)(x−6).",
+        "(x−2)(x−3).",
+        "(x−3)²."
+      ],
+      "a": 2,
+      "sol": "x²−5x+6=(x−2)(x−3).",
+      "hyp": "Pode trocar os sinais das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:fatorizar-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-024",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se a divisão P(x) por x−a tem resto zero, então...",
+      "o": [
+        "P é constante.",
+        "a não pode ser zero de P.",
+        "o quociente é zero.",
+        "x−a é fator de P."
+      ],
+      "a": 3,
+      "sol": "Resto zero caracteriza divisibilidade.",
+      "hyp": "Pode confundir fator com termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:divisibilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-025",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na divisão de P(x)=x³+ax²+bx+c por x−1, o resto pode obter-se...",
+      "o": [
+        "somando os coeficientes 1+a+b+c.",
+        "multiplicando os coeficientes.",
+        "usando apenas c.",
+        "subtraindo a de b."
+      ],
+      "a": 0,
+      "sol": "P(1)=1+a+b+c.",
+      "hyp": "Pode usar apenas o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-xmenos1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-026",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=x³+2x²+kx−4 é divisível por x−1, então k=",
+      "o": [
+        "−1.",
+        "1.",
+        "2.",
+        "−2."
+      ],
+      "a": 1,
+      "sol": "P(1)=1+2+k−4=k−1=0, logo k=1.",
+      "hyp": "Pode errar o sinal do termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:parametro-divisibilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-027",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=2x³+kx²−5x+2 é divisível por x+1, então k=",
+      "o": [
+        "5.",
+        "1.",
+        "−5.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "P(−1)=−2+k+5+2=k+5=0, logo k=−5.",
+      "hyp": "Pode usar x=1 em vez de −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:parametro-divisibilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-028",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Divide x⁴−1 por x−1. O quociente é...",
+      "o": [
+        "x³−x²+x−1.",
+        "x³+1.",
+        "x²+1.",
+        "x³+x²+x+1."
+      ],
+      "a": 3,
+      "sol": "Diferença de potências: x⁴−1=(x−1)(x³+x²+x+1).",
+      "hyp": "Pode alternar sinais incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:x4-menos1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-029",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Divide x⁴−16 por x−2. O quociente é...",
+      "o": [
+        "x³+2x²+4x+8.",
+        "x³−2x²+4x−8.",
+        "x³+8.",
+        "x²+4."
+      ],
+      "a": 0,
+      "sol": "x⁴−2⁴=(x−2)(x³+2x²+4x+8).",
+      "hyp": "Pode usar a fórmula dos quadrados apenas parcialmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:diferenca-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-030",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Ao dividir 2x⁴−3x³+x−5 por x−1, o resto é...",
+      "o": [
+        "−4.",
+        "−5.",
+        "−3.",
+        "5."
+      ],
+      "a": 1,
+      "sol": "P(1)=2−3+1−5=−5.",
+      "hyp": "Pode esquecer o termo x² ausente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-avaliacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-031",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Ao dividir P(x)=x⁴+2x³−x+7 por x+1, o resto é...",
+      "o": [
+        "5.",
+        "9.",
+        "7.",
+        "−7."
+      ],
+      "a": 2,
+      "sol": "P(−1)=1−2+1+7=7.",
+      "hyp": "Pode errar os sinais das potências de −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-xmais1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-032",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "No método de Horner, tal como em Ruffini para divisor linear, trabalhamos principalmente com...",
+      "o": [
+        "gráficos.",
+        "raízes quadradas.",
+        "derivadas.",
+        "coeficientes."
+      ],
+      "a": 3,
+      "sol": "Horner reorganiza a avaliação/divisão através dos coeficientes.",
+      "hyp": "Pode confundir com métodos numéricos de raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:horner",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-033",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A forma de Horner de x³+2x²−5x+1 pode escrever-se como...",
+      "o": [
+        "((x+2)x−5)x+1.",
+        "x(x+2)(x−5)+1.",
+        "(x+2)(x−5)(x+1).",
+        "x³+2(x²−5x+1)."
+      ],
+      "a": 0,
+      "sol": "Agrupamento aninhado: ((1x+2)x−5)x+1.",
+      "hyp": "Pode fatorizar indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:horner-forma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-034",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Usando Horner, P(2) para P(x)=x³+2x²−5x+1 é...",
+      "o": [
+        "3.",
+        "7.",
+        "5.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "((2+2)·2−5)·2+1=(8−5)·2+1=7.",
+      "hyp": "Pode avaliar os termos com erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:horner-avaliacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-035",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(x)=x³−4x²+x+6, qual é P(−1)?",
+      "o": [
+        "2.",
+        "−2.",
+        "0.",
+        "10."
+      ],
+      "a": 2,
+      "sol": "−1−4−1+6=0.",
+      "hyp": "Pode tratar (−1)² como −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:avaliacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-036",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Do resultado anterior conclui-se que...",
+      "o": [
+        "x−1 é fator de P.",
+        "P não tem fatores lineares.",
+        "o resto por x+1 é 1.",
+        "x+1 é fator de P."
+      ],
+      "a": 3,
+      "sol": "P(−1)=0 implica divisibilidade por x+1.",
+      "hyp": "Pode trocar o sinal do fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:conclusao-fator",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-037",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Divide x⁴−5x³+5x²+5x−6 por x−1. O quociente é...",
+      "o": [
+        "x³−4x²+x+6.",
+        "x³−5x²+5x+5.",
+        "x³−4x²−x+6.",
+        "x³+4x²+x−6."
+      ],
+      "a": 0,
+      "sol": "Ruffini com 1: coeficientes 1,−5,5,5,−6 → 1,−4,1,6, resto 0.",
+      "hyp": "Pode errar uma das somas intermédias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-grau4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-038",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se o quociente do item anterior é x³−4x²+x+6 e P(−1)=0, então uma fatorização parcial é...",
+      "o": [
+        "P=(x−1)(x+1) automaticamente sem verificar o quociente.",
+        "P=(x−1)(x+1)(x²−4x+6)? Não necessariamente; é preciso dividir o quociente por x+1.",
+        "P=(x−1)².",
+        "P não é divisível por x+1."
+      ],
+      "a": 1,
+      "sol": "Para concluir x+1 como fator de P basta P(−1)=0; mas para obter o novo quociente é preciso efetuar a divisão.",
+      "hyp": "Pode multiplicar fatores sem calcular o quociente correspondente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:fatorizacao-processo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-039",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Divide x³−4x²+x+6 por x+1. O quociente é...",
+      "o": [
+        "x²−3x−2.",
+        "x²−5x−6.",
+        "x²−5x+6.",
+        "x²+5x+6."
+      ],
+      "a": 2,
+      "sol": "Ruffini com −1 dá 1,−5,6 e resto 0.",
+      "hyp": "Pode usar +1 em vez de −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:segunda-divisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-040",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Logo x⁴−5x³+5x²+5x−6 fatoriza-se como...",
+      "o": [
+        "(x−1)²(x−2)(x−3).",
+        "(x+1)²(x−2)(x−3).",
+        "(x−1)(x+1)(x+2)(x+3).",
+        "(x−1)(x+1)(x−2)(x−3)."
+      ],
+      "a": 3,
+      "sol": "O segundo quociente x²−5x+6=(x−2)(x−3).",
+      "hyp": "Pode trocar sinais ou multiplicidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:fatorizacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-041",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na divisão de P por x²+1, o resto geral tem a forma...",
+      "o": [
+        "ax+b.",
+        "a apenas.",
+        "ax²+b.",
+        "ax²+bx+c."
+      ],
+      "a": 0,
+      "sol": "O resto deve ter grau inferior a 2.",
+      "hyp": "Pode usar grau 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:resto-divisor-quadratico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-042",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na divisão de P por x³−1, o resto pode ter no máximo grau...",
+      "o": [
+        "3.",
+        "2.",
+        "1.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "O grau do resto é menor que 3.",
+      "hyp": "Pode permitir o mesmo grau do divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:grau-resto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-043",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P=DQ+R e R=0, diz-se que a divisão é...",
+      "o": [
+        "impossível.",
+        "irracional.",
+        "exata.",
+        "indeterminada."
+      ],
+      "a": 2,
+      "sol": "Resto zero significa divisibilidade exata.",
+      "hyp": "Pode confundir com quociente zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:divisao-exata",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-044",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P tem grau 5 e D grau 2, o quociente Q, numa divisão usual com coeficiente líder não nulo, tem grau...",
+      "o": [
+        "2.",
+        "5.",
+        "7.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "grau Q=5−2=3.",
+      "hyp": "Pode somar os graus.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:grau-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-045",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P tem grau 4 e é dividido por um polinómio de grau 1, o quociente tem grau...",
+      "o": [
+        "3.",
+        "4.",
+        "2.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "4−1=3.",
+      "hyp": "Pode manter o grau do dividendo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:grau-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-046",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O objetivo de usar Ruffini repetidamente numa fatorização é...",
+      "o": [
+        "aumentar o grau.",
+        "extrair fatores lineares conhecidos e reduzir o grau.",
+        "eliminar todos os coeficientes.",
+        "transformar qualquer polinómio em quadrática sem condições."
+      ],
+      "a": 1,
+      "sol": "Cada divisão exata por x−a reduz o grau em 1.",
+      "hyp": "Pode achar que Ruffini descobre automaticamente todas as raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ruffini-repetido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-047",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um polinómio P representa um modelo e sabe-se que P(2)=0. Isto garante que...",
+      "o": [
+        "x+2 é fator de P.",
+        "P é de grau 2.",
+        "x−2 é fator de P.",
+        "P(0)=2."
+      ],
+      "a": 2,
+      "sol": "É a ligação entre zero e divisibilidade por x−2.",
+      "hyp": "Pode trocar o sinal do fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:modelacao-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-048",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se a divisão de P por x−4 dá quociente Q e resto 7, então...",
+      "o": [
+        "P(x)=(x+4)Q(x)+7.",
+        "P=7Q.",
+        "P(4)=4.",
+        "P(x)=(x−4)Q(x)+7."
+      ],
+      "a": 3,
+      "sol": "É a identidade da divisão para divisor x−4.",
+      "hyp": "Pode trocar o sinal do divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:identidade-especifica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-049",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, P(4)=",
+      "o": [
+        "7.",
+        "0.",
+        "4.",
+        "Q(4)."
+      ],
+      "a": 0,
+      "sol": "Substituindo x=4, o termo (x−4)Q desaparece.",
+      "hyp": "Pode achar que P(4)=0 porque x−4 é divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:avaliacao-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-DP-050",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-divisao-polinomios",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Divisão polinomial e fatorização relacionam-se porque...",
+      "o": [
+        "qualquer resto identifica um fator.",
+        "um resto zero identifica um divisor como fator.",
+        "todo divisor linear é fator.",
+        "o quociente nunca é útil."
+      ],
+      "a": 1,
+      "sol": "A divisibilidade exata permite decompor P em produto divisor×quociente.",
+      "hyp": "Pode concluir fatorização mesmo com resto não nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-divisao-polinomios:ligacao-fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
