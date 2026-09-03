@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-trig",
+  "subtopicId": "11-trig-funcoes",
+  "subtopic": "Funções seno e cosseno",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha período, imagem, amplitude, eixo médio, fase, transformações, zeros/extremos e leitura/construção de modelos sinusoidais. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11TRIG-FUN-001",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A função y=sin x tem período fundamental...",
+      "o": [
+        "2π.",
+        "π.",
+        "π/2.",
+        "4π."
+      ],
+      "a": 0,
+      "sol": "O seno repete os valores a cada 2π.",
+      "hyp": "Pode confundir com a tangente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-seno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-002",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A função y=cos x tem período fundamental...",
+      "o": [
+        "π.",
+        "2π.",
+        "π/2.",
+        "4π."
+      ],
+      "a": 1,
+      "sol": "O cosseno repete-se a cada 2π.",
+      "hyp": "Pode usar período π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-cosseno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-003",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A imagem da função seno é...",
+      "o": [
+        "R.",
+        "[0,1].",
+        "[−1,1].",
+        "]−∞,1]."
+      ],
+      "a": 2,
+      "sol": "O seno varia entre −1 e 1.",
+      "hyp": "Pode esquecer os valores negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:imagem-seno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-004",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A imagem da função cosseno é...",
+      "o": [
+        "R.",
+        "[0,1].",
+        "]−∞,1].",
+        "[−1,1]."
+      ],
+      "a": 3,
+      "sol": "O cosseno também varia entre −1 e 1.",
+      "hyp": "Pode pensar que cosseno é sempre positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:imagem-cosseno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-005",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O valor máximo de sin x é...",
+      "o": [
+        "1.",
+        "π.",
+        "0.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "O seno atinge 1.",
+      "hyp": "Pode confundir valor da função com posição do máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:maximo-seno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-006",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O valor mínimo de cos x é...",
+      "o": [
+        "0.",
+        "−1.",
+        "−π.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "O cosseno atinge −1.",
+      "hyp": "Pode confundir mínimo com zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:minimo-cosseno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-007",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "sin(x+2π) é igual a...",
+      "o": [
+        "−sin x.",
+        "cos x.",
+        "sin x.",
+        "−cos x."
+      ],
+      "a": 2,
+      "sol": "Período do seno é 2π.",
+      "hyp": "Pode aplicar mudança de sinal indevida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-008",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "cos(x−2π) é igual a...",
+      "o": [
+        "−cos x.",
+        "sin x.",
+        "−sin x.",
+        "cos x."
+      ],
+      "a": 3,
+      "sol": "Deslocar por um período não altera o valor.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-009",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função seno é...",
+      "o": [
+        "ímpar.",
+        "par.",
+        "constante.",
+        "sempre crescente."
+      ],
+      "a": 0,
+      "sol": "sin(−x)=−sin x.",
+      "hyp": "Pode trocar com o cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-010",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função cosseno é...",
+      "o": [
+        "ímpar.",
+        "par.",
+        "constante.",
+        "sempre decrescente."
+      ],
+      "a": 1,
+      "sol": "cos(−x)=cos x.",
+      "hyp": "Pode trocar as paridades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-011",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "No modelo y=A sin x, com A>0, a amplitude é...",
+      "o": [
+        "2A.",
+        "A/2.",
+        "A.",
+        "πA."
+      ],
+      "a": 2,
+      "sol": "A amplitude é a distância do eixo médio ao máximo.",
+      "hyp": "Pode confundir amplitude com distância máximo-mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-012",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "No modelo y=A cos x, a distância entre máximo e mínimo é...",
+      "o": [
+        "|A|.",
+        "4|A|.",
+        "π|A|.",
+        "2|A|."
+      ],
+      "a": 3,
+      "sol": "Máximo e mínimo são |A| e −|A|, diferença 2|A|.",
+      "hyp": "Pode chamar amplitude à amplitude total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:amplitude-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-013",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a amplitude de y=3sin x?",
+      "o": [
+        "3.",
+        "6.",
+        "1/3.",
+        "π."
+      ],
+      "a": 0,
+      "sol": "O coeficiente do seno é 3.",
+      "hyp": "Pode usar máximo-mínimo=6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-014",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de y=2cos x?",
+      "o": [
+        "[−1,1].",
+        "[−2,2].",
+        "[0,2].",
+        "R."
+      ],
+      "a": 1,
+      "sol": "Multiplicar por 2 duplica os valores extremos.",
+      "hyp": "Pode esquecer a escala vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:imagem-escalada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-015",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "No modelo y=sin(bx), com b>0, o período fundamental é...",
+      "o": [
+        "2πb.",
+        "π/b.",
+        "2π/b.",
+        "b/2π."
+      ],
+      "a": 2,
+      "sol": "É necessário que bx aumente 2π; logo x aumenta 2π/b.",
+      "hyp": "Pode multiplicar pelo fator b em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-escalado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-016",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o período de y=sin(2x)?",
+      "o": [
+        "2π.",
+        "π/2.",
+        "4π.",
+        "π."
+      ],
+      "a": 3,
+      "sol": "2π/2=π.",
+      "hyp": "Pode usar o período original.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-escalado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-017",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o período de y=cos(3x)?",
+      "o": [
+        "2π/3.",
+        "3π.",
+        "π/3.",
+        "6π."
+      ],
+      "a": 0,
+      "sol": "2π/3.",
+      "hyp": "Pode multiplicar por 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-escalado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-018",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o período de y=sin(x/2)?",
+      "o": [
+        "2π.",
+        "4π.",
+        "π.",
+        "π/2."
+      ],
+      "a": 1,
+      "sol": "Aqui b=1/2, logo T=2π/(1/2)=4π.",
+      "hyp": "Pode dividir por 2 em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-escalado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-019",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O gráfico de y=sin x deslocado 2 unidades para cima torna-se...",
+      "o": [
+        "y=sin(x+2).",
+        "y=2sin x.",
+        "y=sin x+2.",
+        "y=sin x−2."
+      ],
+      "a": 2,
+      "sol": "Uma translação vertical soma 2 à saída.",
+      "hyp": "Pode colocar o 2 no argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:translacao-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-020",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O gráfico de y=cos x deslocado π/3 para a direita é...",
+      "o": [
+        "y=cos(x+π/3).",
+        "y=cos x−π/3.",
+        "y=(π/3)cos x.",
+        "y=cos(x−π/3)."
+      ],
+      "a": 3,
+      "sol": "Deslocamento à direita corresponde a x→x−π/3.",
+      "hyp": "Pode seguir o sinal literal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:translacao-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-021",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "No modelo y=A sin(Bx+C)+D, D representa...",
+      "o": [
+        "o deslocamento vertical/eixo médio.",
+        "a amplitude.",
+        "o período.",
+        "a frequência angular."
+      ],
+      "a": 0,
+      "sol": "D desloca todo o gráfico verticalmente.",
+      "hyp": "Pode confundir com amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:parametro-D",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-022",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "No modelo y=A sin(Bx+C)+D, |A| representa...",
+      "o": [
+        "o período.",
+        "a amplitude.",
+        "a fase.",
+        "o valor médio."
+      ],
+      "a": 1,
+      "sol": "O módulo de A determina a escala vertical.",
+      "hyp": "Pode usar A sem módulo quando A<0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:parametro-A",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-023",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "No modelo y=A sin(Bx+C)+D, com B≠0, o período é...",
+      "o": [
+        "2π|B|.",
+        "π/|B|.",
+        "2π/|B|.",
+        "|B|/2π."
+      ],
+      "a": 2,
+      "sol": "O módulo é usado porque o período é positivo.",
+      "hyp": "Pode esquecer o valor absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:parametro-B",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-024",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de y=3sin x+2?",
+      "o": [
+        "[−3,3].",
+        "[2,5].",
+        "[−5,1].",
+        "[−1,5]."
+      ],
+      "a": 3,
+      "sol": "Eixo médio 2 e amplitude 3: 2±3.",
+      "hyp": "Pode somar amplitude apenas ao máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:imagem-deslocada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-025",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de y=−4cos x+1?",
+      "o": [
+        "[−3,5].",
+        "[−4,4].",
+        "[−5,3].",
+        "[1,5]."
+      ],
+      "a": 0,
+      "sol": "Amplitude 4 e eixo médio 1: [1−4,1+4].",
+      "hyp": "Pode deixar o sinal de A inverter os limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:imagem-deslocada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-026",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é o valor médio de y=5+2sin x?",
+      "o": [
+        "2.",
+        "5.",
+        "7.",
+        "3."
+      ],
+      "a": 1,
+      "sol": "A linha média é y=5.",
+      "hyp": "Pode usar o coeficiente do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:eixo-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-027",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a amplitude de y=−6cos(3x)+4?",
+      "o": [
+        "3.",
+        "4.",
+        "6.",
+        "12."
+      ],
+      "a": 2,
+      "sol": "Amplitude=|−6|=6.",
+      "hyp": "Pode usar o fator do argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:amplitude-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-028",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é o período de y=2sin(4x)−1?",
+      "o": [
+        "2π.",
+        "π/4.",
+        "4π.",
+        "π/2."
+      ],
+      "a": 3,
+      "sol": "T=2π/4=π/2.",
+      "hyp": "Pode usar amplitude no cálculo do período.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-029",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é o período de y=3cos(πx)?",
+      "o": [
+        "2.",
+        "2π.",
+        "π.",
+        "1/2."
+      ],
+      "a": 0,
+      "sol": "T=2π/π=2.",
+      "hyp": "Pode assumir que o período tem de conter π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-numerico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-030",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O gráfico de y=−sin x é obtido de y=sin x por...",
+      "o": [
+        "reflexão relativamente ao eixo Oy.",
+        "reflexão relativamente ao eixo Ox.",
+        "translação π para cima.",
+        "compressão horizontal."
+      ],
+      "a": 1,
+      "sol": "Multiplicar a saída por −1 reflete verticalmente.",
+      "hyp": "Pode confundir com sin(−x), embora para seno os gráficos coincidam por imparidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:reflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-031",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O gráfico de y=cos(−x) coincide com y=cos x porque...",
+      "o": [
+        "o cosseno é ímpar.",
+        "tem período π.",
+        "o cosseno é par.",
+        "cos x é sempre positivo."
+      ],
+      "a": 2,
+      "sol": "cos(−x)=cos x.",
+      "hyp": "Pode atribuir a igualdade apenas à periodicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:paridade-grafico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-032",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Em [0,2π], em que pontos y=sin x atinge o máximo?",
+      "o": [
+        "x=0 e 2π.",
+        "x=π.",
+        "x=3π/2.",
+        "x=π/2."
+      ],
+      "a": 3,
+      "sol": "sin x=1 em π/2.",
+      "hyp": "Pode confundir máximo com zeros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-033",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Em [0,2π], em que ponto y=cos x atinge o mínimo?",
+      "o": [
+        "x=π.",
+        "x=0.",
+        "x=π/2.",
+        "x=2π."
+      ],
+      "a": 0,
+      "sol": "cos π=−1.",
+      "hyp": "Pode usar 3π/2, onde cos=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-034",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Os zeros de y=sin x ocorrem em...",
+      "o": [
+        "x=π/2+kπ.",
+        "x=kπ.",
+        "x=2kπ apenas.",
+        "x=π/4+kπ."
+      ],
+      "a": 1,
+      "sol": "sin x=0 nos múltiplos de π.",
+      "hyp": "Pode usar zeros do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-035",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Os zeros de y=cos x ocorrem em...",
+      "o": [
+        "x=kπ.",
+        "x=2kπ.",
+        "x=π/2+kπ.",
+        "x=π/4+kπ."
+      ],
+      "a": 2,
+      "sol": "cos x=0 nos ângulos ímpares de π/2.",
+      "hyp": "Pode usar os zeros do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-036",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o máximo de y=4sin x−3?",
+      "o": [
+        "4.",
+        "7.",
+        "−3.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Máximo=−3+4=1.",
+      "hyp": "Pode somar o valor médio com o mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:extremo-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-037",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o mínimo de y=−2cos x+5?",
+      "o": [
+        "3.",
+        "5.",
+        "7.",
+        "−3."
+      ],
+      "a": 0,
+      "sol": "Como −2cos x varia em [−2,2], o mínimo total é 3.",
+      "hyp": "Pode achar que o sinal negativo troca o intervalo para [0,2].",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:extremo-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-038",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função sinusoidal tem máximo 9 e mínimo 1. A amplitude é...",
+      "o": [
+        "5.",
+        "4.",
+        "8.",
+        "10."
+      ],
+      "a": 1,
+      "sol": "Amplitude=(9−1)/2=4.",
+      "hyp": "Pode usar a diferença total 8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:amplitude-de-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-039",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função sinusoidal tem máximo 9 e mínimo 1. O eixo médio é...",
+      "o": [
+        "4.",
+        "8.",
+        "5.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "Eixo médio=(9+1)/2=5.",
+      "hyp": "Pode usar a amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:eixo-medio-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-040",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função periódica completa 3 ciclos no intervalo de comprimento 6π. O período é...",
+      "o": [
+        "3π.",
+        "6π.",
+        "π.",
+        "2π."
+      ],
+      "a": 3,
+      "sol": "T=6π/3=2π.",
+      "hyp": "Pode multiplicar número de ciclos pelo comprimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:periodo-ciclos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-041",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função sinusoidal tem período π/2. Qual é um valor possível de |B| em A sin(Bx+C)+D?",
+      "o": [
+        "4.",
+        "2.",
+        "1/4.",
+        "π/2."
+      ],
+      "a": 0,
+      "sol": "2π/|B|=π/2 => |B|=4.",
+      "hyp": "Pode inverter a equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:determinar-B",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-042",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se y=2sin(3x−π)+1, qual é o deslocamento horizontal equivalente?",
+      "o": [
+        "π para a direita.",
+        "π/3 para a direita.",
+        "π/3 para a esquerda.",
+        "1 para cima apenas."
+      ],
+      "a": 1,
+      "sol": "3x−π=3(x−π/3), logo deslocamento π/3 para a direita.",
+      "hyp": "Pode usar C diretamente sem dividir por B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:fase",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-043",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se y=cos(2x+π/2), qual é o deslocamento horizontal equivalente?",
+      "o": [
+        "π/2 para a esquerda.",
+        "π/4 para a direita.",
+        "π/4 para a esquerda.",
+        "π para a esquerda."
+      ],
+      "a": 2,
+      "sol": "2x+π/2=2(x+π/4), logo deslocamento π/4 à esquerda.",
+      "hyp": "Pode não dividir o termo de fase por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:fase",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-044",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Duas funções sinusoidais podem ter a mesma amplitude e período mas gráficos diferentes devido a...",
+      "o": [
+        "não poderem ter os mesmos parâmetros.",
+        "serem necessariamente iguais.",
+        "terem sempre imagens diferentes.",
+        "fase e deslocamento vertical."
+      ],
+      "a": 3,
+      "sol": "A posição horizontal e o eixo médio podem distinguir os gráficos.",
+      "hyp": "Pode achar que amplitude+período determinam a função inteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:parametros-insuficientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-045",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual expressão tem amplitude 2, período π e eixo médio 3?",
+      "o": [
+        "y=2sin(2x)+3.",
+        "y=3sin(2x)+2.",
+        "y=2sin(x)+3.",
+        "y=2sin(πx)+3."
+      ],
+      "a": 0,
+      "sol": "Amplitude 2; B=2 dá período π; D=3.",
+      "hyp": "Pode confundir amplitude com eixo médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:identificar-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-046",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual expressão tem máximo 5, mínimo −1 e período 4π?",
+      "o": [
+        "y=2sin(x/2)+3.",
+        "y=3sin(x/2)+2.",
+        "y=3sin(2x)+2.",
+        "y=5sin(x/2)−1."
+      ],
+      "a": 1,
+      "sol": "Amplitude 3, eixo médio 2 e B=1/2 dá período 4π.",
+      "hyp": "Pode determinar apenas dois dos três parâmetros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:construir-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-047",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se y=sin x e y=cos x têm o mesmo período e amplitude, a principal diferença gráfica é...",
+      "o": [
+        "uma escala vertical.",
+        "um período diferente.",
+        "uma deslocação horizontal de π/2.",
+        "uma imagem diferente."
+      ],
+      "a": 2,
+      "sol": "cos x=sin(x+π/2).",
+      "hyp": "Pode achar que seno e cosseno são funções sem relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:sin-cos-fase",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-048",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma roda produz altura h(t)=5+2sin t. Qual é o intervalo de alturas?",
+      "o": [
+        "[−2,2].",
+        "[5,7].",
+        "[0,10].",
+        "[3,7]."
+      ],
+      "a": 3,
+      "sol": "5±2 dá mínimo 3 e máximo 7.",
+      "hyp": "Pode esquecer o deslocamento vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:modelacao-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-049",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma maré é modelada por h(t)=4+1,5cos(πt/6). Qual é o período?",
+      "o": [
+        "12.",
+        "6.",
+        "2π.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "B=π/6, logo T=2π/(π/6)=12.",
+      "hyp": "Pode usar 6 como período por olhar para o denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:modelacao-periodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-FUN-050",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-funcoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo h(t)=4+1,5cos(πt/6), qual é a altura máxima?",
+      "o": [
+        "4.",
+        "5,5.",
+        "2,5.",
+        "6."
+      ],
+      "a": 1,
+      "sol": "Máximo=4+1,5=5,5.",
+      "hyp": "Pode usar o período ou esquecer a amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-funcoes:modelacao-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
