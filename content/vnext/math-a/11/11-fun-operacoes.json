@@ -125,7 +125,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Com as mesmas funções, (fg)(x)=",
+      "q": "Se f(x)=x+1 e g(x)=2x, então (fg)(x)=",
       "o": [
         "2x²+2x.",
         "3x+1.",
@@ -503,7 +503,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Com as mesmas funções, (g∘f)(x)=",
+      "q": "Se f(x)=x² e g(x)=x+1, então (g∘f)(x)=",
       "o": [
         "(x+1)².",
         "2x².",
