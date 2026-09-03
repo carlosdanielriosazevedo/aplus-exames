@@ -422,7 +422,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, (f/g)(2)...",
+      "q": "Se f(x)=x+2 e g(x)=x−2, então (f/g)(2)...",
       "o": [
         "vale 2.",
         "vale 0.",
@@ -584,7 +584,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, (g∘f)(x)=",
+      "q": "Se f(x)=2x−1 e g(x)=x², então (g∘f)(x)=",
       "o": [
         "2x²−1.",
         "(2x−1)².",
@@ -1124,7 +1124,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "O domínio da composição do item anterior é...",
+      "q": "Se f(x)=1/(x−1) e g(x)=x+2, então (f∘g)(x)=1/(x+1). Qual é o domínio desta composição?",
       "o": [
         "R\\{1}.",
         "R\\{−1}.",
