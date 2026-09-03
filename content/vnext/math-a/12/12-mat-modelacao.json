@@ -692,7 +692,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Se P=[[0,8,0,3],[0,2,0,7]] e x_0=(100,0)^T, então x_1=",
+      "q": "Se P tem 1.ª linha (0,8; 0,3), 2.ª linha (0,2; 0,7) e x_0=(100,0)^T, então x_1=",
       "o": [
         "(30,70)^T.",
         "(80,20)^T.",
@@ -719,7 +719,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Com a mesma P e x_0=(0,100)^T, x_1=",
+      "q": "Com a mesma matriz P do item anterior e x_0=(0,100)^T, x_1=",
       "o": [
         "(80,20)^T.",
         "(0,100)^T.",
@@ -1124,7 +1124,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Aplicação",
-      "q": "Se W=[[0,5,0,5],[1,0]] e x=(8,6)^T, então Wx=",
+      "q": "Se W tem 1.ª linha (0,5; 0,5), 2.ª linha (1; 0) e x=(8,6)^T, então Wx=",
       "o": [
         "(14,8)^T.",
         "(7,8)^T.",
