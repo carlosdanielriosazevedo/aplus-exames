@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-est",
+  "subtopicId": "10-est-problema-pop-amostra",
+  "subtopic": "Problema estatístico, variabilidade, população, amostra e variável",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha identificação de população/amostra/unidade/variável, natureza das variáveis, variabilidade e distinção entre estatística amostral e parâmetro populacional. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10EST-PPA-001",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num estudo estatístico, o que é a população?",
+      "o": [
+        "O conjunto total de indivíduos/elementos sobre os quais se pretende estudar uma característica.",
+        "Apenas os elementos efetivamente observados.",
+        "A média dos dados.",
+        "Uma representação gráfica."
+      ],
+      "a": 0,
+      "sol": "A população é o conjunto de referência do estudo.",
+      "hyp": "Pode confundir população com amostra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:definicao-populacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-002",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O que é uma amostra?",
+      "o": [
+        "O conjunto de todos os dados possíveis.",
+        "Um subconjunto da população selecionado para ser observado.",
+        "A variável medida.",
+        "O resultado final do estudo."
+      ],
+      "a": 1,
+      "sol": "A amostra contém os elementos efetivamente selecionados da população.",
+      "hyp": "Pode confundir amostra com população ou variável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:definicao-amostra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-003",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num estudo sobre a altura dos alunos de uma escola, qual é a variável?",
+      "o": [
+        "A escola inteira.",
+        "O número total de alunos.",
+        "A altura de cada aluno.",
+        "A tabela usada para registar os dados."
+      ],
+      "a": 2,
+      "sol": "A variável é a característica observada em cada elemento: a altura.",
+      "hyp": "Pode confundir variável com população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:definicao-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-004",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Pretende-se estudar o tempo diário de estudo dos 600 alunos de uma escola. São inquiridos 80 alunos. Qual é a população?",
+      "o": [
+        "Os 80 alunos inquiridos.",
+        "Apenas os alunos que estudam mais de 1 hora.",
+        "Os tempos de estudo registados.",
+        "Os 600 alunos da escola."
+      ],
+      "a": 3,
+      "sol": "A população é o conjunto dos 600 alunos sobre os quais se pretende tirar conclusões.",
+      "hyp": "Pode identificar a amostra como população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:identificar-populacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-005",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "No estudo anterior, qual é a amostra?",
+      "o": [
+        "Os 80 alunos inquiridos.",
+        "Os 600 alunos.",
+        "O tempo médio de estudo.",
+        "A escola."
+      ],
+      "a": 0,
+      "sol": "A amostra é o subconjunto observado: 80 alunos.",
+      "hyp": "Pode confundir população e amostra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:identificar-amostra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-006",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "No estudo do tempo diário de estudo, qual é a variável observada?",
+      "o": [
+        "O número de alunos da escola.",
+        "O tempo diário de estudo de cada aluno.",
+        "A dimensão da amostra.",
+        "O nome da escola."
+      ],
+      "a": 1,
+      "sol": "A característica medida em cada aluno é o tempo diário de estudo.",
+      "hyp": "Pode escolher uma característica do estudo que não varia entre indivíduos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:identificar-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-007",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A variável 'cor dos olhos' é, neste contexto, uma variável...",
+      "o": [
+        "quantitativa discreta.",
+        "quantitativa contínua.",
+        "qualitativa.",
+        "constante numérica."
+      ],
+      "a": 2,
+      "sol": "Cor dos olhos descreve categorias, não quantidades numéricas.",
+      "hyp": "Pode classificar qualquer variável registada como quantitativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-qualitativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-008",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A variável 'número de irmãos' é...",
+      "o": [
+        "qualitativa.",
+        "quantitativa contínua.",
+        "nominal sem contagem.",
+        "quantitativa discreta."
+      ],
+      "a": 3,
+      "sol": "É uma contagem que assume valores inteiros: variável quantitativa discreta.",
+      "hyp": "Pode confundir contagem com medida contínua.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-discreta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-009",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A variável 'massa corporal em kg' é normalmente tratada como...",
+      "o": [
+        "quantitativa contínua.",
+        "qualitativa.",
+        "quantitativa discreta.",
+        "binária."
+      ],
+      "a": 0,
+      "sol": "A massa pode assumir valores numéricos numa escala contínua.",
+      "hyp": "Pode tratar qualquer valor registado com casas decimais como categoria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-continua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-010",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num estudo sobre o meio de transporte usado para ir à escola, qual é a natureza da variável?",
+      "o": [
+        "Quantitativa contínua.",
+        "Qualitativa.",
+        "Quantitativa discreta.",
+        "Uma constante."
+      ],
+      "a": 1,
+      "sol": "Carro, autocarro, a pé, etc. são categorias.",
+      "hyp": "Pode tentar ordenar numericamente categorias sem significado quantitativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-qualitativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-011",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num estudo sobre quantos livros cada aluno leu no último mês, a variável é...",
+      "o": [
+        "qualitativa.",
+        "quantitativa contínua.",
+        "quantitativa discreta.",
+        "sempre zero."
+      ],
+      "a": 2,
+      "sol": "Número de livros é uma contagem inteira.",
+      "hyp": "Pode confundir uma contagem com uma medida contínua.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-discreta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-012",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num estudo sobre a duração, em minutos, do trajeto casa-escola, a variável é normalmente...",
+      "o": [
+        "qualitativa.",
+        "quantitativa discreta.",
+        "nominal.",
+        "quantitativa contínua."
+      ],
+      "a": 3,
+      "sol": "Tempo é uma grandeza mensurável em escala contínua, mesmo que seja arredondado no registo.",
+      "hyp": "Pode classificar pelo formato arredondado dos dados em vez da natureza da grandeza.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-continua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-013",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual situação corresponde a um censo, e não a uma amostra?",
+      "o": [
+        "Medir todos os 240 alunos de uma escola.",
+        "Escolher 40 dos 240 alunos.",
+        "Inquirir apenas uma turma.",
+        "Selecionar 10% dos alunos."
+      ],
+      "a": 0,
+      "sol": "Num censo observa-se toda a população.",
+      "hyp": "Pode pensar que qualquer recolha de dados é amostragem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:censo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-014",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Porque se usa frequentemente uma amostra em vez de estudar toda a população?",
+      "o": [
+        "Porque uma amostra elimina todo o erro possível.",
+        "Pode ser mais rápido e menos dispendioso, mantendo informação útil se a amostra for adequada.",
+        "Porque a população nunca existe.",
+        "Porque uma amostra é sempre maior que a população."
+      ],
+      "a": 1,
+      "sol": "A amostragem pode reduzir recursos necessários, desde que a seleção permita inferências adequadas.",
+      "hyp": "Pode acreditar que amostrar elimina incerteza.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:motivo-amostragem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-015",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma fábrica produz 20 000 peças num dia e testa 200 quanto à resistência. Qual é a população de interesse nesse dia?",
+      "o": [
+        "As 200 peças testadas.",
+        "Apenas as peças defeituosas.",
+        "As 20 000 peças produzidas.",
+        "Os valores de resistência."
+      ],
+      "a": 2,
+      "sol": "O estudo pretende caracterizar as 20 000 peças produzidas.",
+      "hyp": "Pode identificar os elementos testados como população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:populacao-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-016",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No estudo das peças, qual é a amostra?",
+      "o": [
+        "As 20 000 peças.",
+        "Todas as peças não testadas.",
+        "A resistência média.",
+        "As 200 peças testadas."
+      ],
+      "a": 3,
+      "sol": "As 200 peças são o subconjunto efetivamente observado.",
+      "hyp": "Pode confundir população com amostra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:amostra-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-017",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se a característica medida é a resistência à rutura em newtons, qual é a variável?",
+      "o": [
+        "A resistência à rutura de cada peça.",
+        "O número de peças produzidas.",
+        "A fábrica.",
+        "A dimensão da amostra."
+      ],
+      "a": 0,
+      "sol": "A variável é a resistência medida em cada peça.",
+      "hyp": "Pode selecionar uma quantidade agregada em vez da característica individual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variavel-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-018",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma variável pode assumir valores diferentes para diferentes elementos da população. Esta ideia está ligada a quê?",
+      "o": [
+        "Certeza absoluta.",
+        "Variabilidade.",
+        "Constância obrigatória.",
+        "Erro de cálculo apenas."
+      ],
+      "a": 1,
+      "sol": "A variabilidade é central em Estatística: os valores não são necessariamente iguais entre indivíduos.",
+      "hyp": "Pode tratar diferenças entre valores como erro em vez de característica do fenómeno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variabilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-019",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se todos os elementos observados tiverem exatamente o mesmo valor numa variável, existe variabilidade nessa amostra para essa variável?",
+      "o": [
+        "Sim, máxima.",
+        "Sim, porque qualquer amostra varia.",
+        "Não, nessa amostra observada não há variação desse valor.",
+        "Não é possível responder."
+      ],
+      "a": 2,
+      "sol": "Se todos os valores coincidem, a variabilidade observada nessa amostra é nula.",
+      "hyp": "Pode assumir que a palavra 'estatística' implica sempre dispersão positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variabilidade-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-020",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Qual destas perguntas é estatística, por admitir variabilidade entre muitas observações?",
+      "o": [
+        "Quanto é 7×8?",
+        "Qual é a capital de Portugal?",
+        "Qual é o número 10 ao quadrado?",
+        "Qual é o tempo de deslocação dos alunos da escola até casa?"
+      ],
+      "a": 3,
+      "sol": "O tempo de deslocação varia entre alunos e exige recolha/análise de dados.",
+      "hyp": "Pode não distinguir perguntas com variabilidade de perguntas determinísticas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:pergunta-estatistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-021",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Pretende-se estudar o consumo semanal de água das famílias de uma cidade. Qual formulação identifica corretamente população e variável?",
+      "o": [
+        "População: famílias da cidade; variável: consumo semanal de água por família.",
+        "População: litros de água; variável: cidade.",
+        "População: apenas famílias escolhidas; variável: número de ruas.",
+        "População: consumo médio; variável: famílias."
+      ],
+      "a": 0,
+      "sol": "A população é o conjunto de famílias; a variável é a quantidade observada em cada família.",
+      "hyp": "Pode trocar elementos e característica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:populacao-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-022",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num estudo sobre satisfação dos clientes de uma loja, 'muito insatisfeito, insatisfeito, neutro, satisfeito, muito satisfeito' é uma variável...",
+      "o": [
+        "qualitativa nominal sem ordem.",
+        "qualitativa ordinal.",
+        "quantitativa contínua.",
+        "quantitativa discreta."
+      ],
+      "a": 1,
+      "sol": "As categorias têm uma ordem natural de satisfação, embora não sejam medidas numéricas com distâncias fixas.",
+      "hyp": "Pode tratar códigos numéricos das categorias como quantidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:qualitativa-ordinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-023",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A variável 'distrito de residência' é melhor classificada como...",
+      "o": [
+        "qualitativa ordinal.",
+        "quantitativa contínua.",
+        "qualitativa nominal.",
+        "quantitativa discreta."
+      ],
+      "a": 2,
+      "sol": "Os distritos são categorias sem ordem quantitativa natural.",
+      "hyp": "Pode impor uma ordem arbitrária às categorias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:qualitativa-nominal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-024",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma variável registada com códigos 1=autocarro, 2=carro, 3=a pé torna-se quantitativa só porque usa números?",
+      "o": [
+        "Sim, sempre.",
+        "Sim, e a média dos códigos tem sempre significado físico.",
+        "Só se houver mais de três categorias.",
+        "Não; os números são apenas códigos de categorias."
+      ],
+      "a": 3,
+      "sol": "A natureza da variável depende do significado, não do símbolo usado para codificar categorias.",
+      "hyp": "Pode confundir codificação numérica com grandeza quantitativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:codificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-025",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma escola quer estudar a nota do último teste de Matemática de todos os alunos do 10.º ano. São selecionados 60 alunos. A unidade estatística é...",
+      "o": [
+        "cada aluno.",
+        "a nota média.",
+        "a escola inteira.",
+        "o teste enquanto documento."
+      ],
+      "a": 0,
+      "sol": "Cada aluno é um elemento sobre o qual se observa a nota.",
+      "hyp": "Pode confundir unidade estatística com variável ou resumo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:unidade-estatistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-026",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "No mesmo estudo, a nota do teste é...",
+      "o": [
+        "a população.",
+        "a variável estatística.",
+        "a amostra.",
+        "a unidade estatística."
+      ],
+      "a": 1,
+      "sol": "A nota é a característica registada em cada aluno.",
+      "hyp": "Pode confundir característica com conjunto de indivíduos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variavel-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-027",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se o objetivo é estudar todos os alunos do 10.º ano de Portugal, observar apenas alunos de uma única escola altera o quê?",
+      "o": [
+        "A população passa automaticamente a ser só essa escola.",
+        "A variável deixa de existir.",
+        "A amostra continua a ser subconjunto da população, mas pode não representar bem a diversidade da população.",
+        "O estudo torna-se um censo nacional."
+      ],
+      "a": 2,
+      "sol": "A definição da população vem do objetivo; a amostra pode ser inadequada sem mudar esse objetivo.",
+      "hyp": "Pode redefinir a população para justificar uma amostra limitada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:objetivo-vs-amostra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-028",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Qual é a diferença entre um parâmetro da população e uma estatística da amostra, em linguagem introdutória?",
+      "o": [
+        "São sempre exatamente iguais.",
+        "O parâmetro só existe em gráficos.",
+        "A estatística descreve obrigatoriamente toda a população sem incerteza.",
+        "O parâmetro descreve a população; a estatística é calculada a partir da amostra."
+      ],
+      "a": 3,
+      "sol": "Uma estatística amostral é usada para resumir a amostra e pode ajudar a inferir sobre um parâmetro populacional.",
+      "hyp": "Pode tratar estimativa amostral como valor populacional exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:parametro-vs-estatistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-029",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa população de 5 000 clientes, uma amostra tem 250 clientes. Que fração da população foi observada?",
+      "o": [
+        "5%",
+        "2%",
+        "10%",
+        "20%"
+      ],
+      "a": 0,
+      "sol": "250/5000=0,05=5%.",
+      "hyp": "Pode inverter a divisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:fracao-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-030",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma amostra corresponde a 8% de uma população de 2 500 pessoas. Quantos indivíduos tem a amostra?",
+      "o": [
+        "100",
+        "200",
+        "150",
+        "250"
+      ],
+      "a": 1,
+      "sol": "0,08×2500=200.",
+      "hyp": "Pode aplicar 8 como multiplicador em vez de 0,08.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tamanho-amostra-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-031",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma amostra tem 120 elementos e representa 15% da população. Qual é o tamanho da população?",
+      "o": [
+        "600",
+        "700",
+        "800",
+        "900"
+      ],
+      "a": 2,
+      "sol": "120/0,15=800.",
+      "hyp": "Pode multiplicar por 0,15 em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:populacao-a-partir-amostra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-032",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra maior garante, por si só, que o estudo representa bem a população?",
+      "o": [
+        "Sim, qualquer amostra grande é perfeita.",
+        "Sim, desde que tenha mais de 100 elementos.",
+        "Não, porque amostras nunca representam populações.",
+        "Não; o modo de seleção também é essencial."
+      ],
+      "a": 3,
+      "sol": "Tamanho ajuda, mas uma seleção enviesada pode continuar problemática mesmo com muitos elementos.",
+      "hyp": "Pode confundir dimensão com representatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tamanho-vs-selecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-033",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se um estudo pretende caracterizar hábitos de todos os alunos de uma escola, mas só entrevista membros do clube de desporto, qual é o principal risco conceptual?",
+      "o": [
+        "A amostra pode ter características sistematicamente diferentes da população.",
+        "A variável deixa de ser qualitativa.",
+        "A população fica menor.",
+        "O tamanho da escola muda."
+      ],
+      "a": 0,
+      "sol": "A seleção pode favorecer um subgrupo específico e não refletir a população toda.",
+      "hyp": "Pode ignorar diferenças estruturais entre amostra e população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:amostra-enviesada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-034",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma medição contém pequenas diferenças por erro de instrumento. Essas diferenças são o mesmo que variabilidade real da população?",
+      "o": [
+        "Sim, são sempre a mesma coisa.",
+        "Não necessariamente; variabilidade observada pode incluir variação real e erro de medição.",
+        "Não, porque instrumentos nunca erram.",
+        "Sim, e por isso a estatística é impossível."
+      ],
+      "a": 1,
+      "sol": "É importante distinguir heterogeneidade real de imprecisão de medição.",
+      "hyp": "Pode atribuir toda a variabilidade a uma única causa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variabilidade-vs-medicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-035",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Estuda-se o número de mensagens enviadas por dia por cada aluno. Que tipo de variável é?",
+      "o": [
+        "Quantitativa contínua.",
+        "Qualitativa nominal.",
+        "Quantitativa discreta.",
+        "Qualitativa ordinal."
+      ],
+      "a": 2,
+      "sol": "É uma contagem de ocorrências, normalmente inteira.",
+      "hyp": "Pode classificar como contínua por poder ter muitos valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-discreta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-036",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Estuda-se a temperatura corporal medida em °C. Que tipo de variável é?",
+      "o": [
+        "Quantitativa discreta.",
+        "Qualitativa nominal.",
+        "Qualitativa ordinal.",
+        "Quantitativa contínua."
+      ],
+      "a": 3,
+      "sol": "Temperatura é uma medida numa escala contínua.",
+      "hyp": "Pode classificar pelo número de casas decimais registadas em vez da natureza da medida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tipo-continua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-037",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Estuda-se o nível de escolaridade com categorias 'básico, secundário, superior'. Que tipo de variável é?",
+      "o": [
+        "Qualitativa ordinal.",
+        "Qualitativa nominal.",
+        "Quantitativa contínua.",
+        "Quantitativa discreta."
+      ],
+      "a": 0,
+      "sol": "As categorias possuem uma ordem natural.",
+      "hyp": "Pode tratar categorias ordenadas como valores quantitativos com diferenças iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:qualitativa-ordinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-038",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num estudo, 300 pessoas são a população e 300 são observadas. Qual é a dimensão da amostra e que tipo de recolha foi feita?",
+      "o": [
+        "150; amostragem.",
+        "300; censo.",
+        "300; amostra parcial.",
+        "600; censo."
+      ],
+      "a": 1,
+      "sol": "Foram observados todos os 300 elementos da população, portanto é um censo.",
+      "hyp": "Pode pensar que 'amostra' nunca pode coincidir com a população inteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:censo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-039",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um relatório diz: 'A média de 50 clientes foi 7,8 pontos; logo a média de todos os clientes é exatamente 7,8.' Qual é o problema?",
+      "o": [
+        "A média nunca pode ter decimais.",
+        "50 clientes constituem sempre um censo.",
+        "Transforma uma estatística amostral numa certeza sobre o parâmetro populacional.",
+        "Uma amostra não pode ter média."
+      ],
+      "a": 2,
+      "sol": "A média amostral pode estimar a média populacional, mas não a determina exatamente sem observar toda a população.",
+      "hyp": "Pode confundir estimativa com valor exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:inferir-com-incerteza",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-040",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação descreve melhor a relação entre uma boa pergunta estatística e variabilidade?",
+      "o": [
+        "A resposta deve ser conhecida antes de recolher dados.",
+        "Uma pergunta estatística tem sempre resposta única e determinística.",
+        "A variabilidade torna a pergunta inválida.",
+        "A pergunta antecipa respostas que podem variar entre elementos e requer dados para as analisar."
+      ],
+      "a": 3,
+      "sol": "A existência de variabilidade é uma das razões para recorrer a métodos estatísticos.",
+      "hyp": "Pode esperar uma resposta exata única como numa equação determinística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:pergunta-estatistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-041",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma investigação quer estudar a duração de bateria de um modelo de telemóvel. São testados 40 aparelhos retirados de uma produção de 10 000. Qual é a unidade estatística?",
+      "o": [
+        "Cada aparelho.",
+        "Os 10 000 aparelhos em conjunto.",
+        "A duração média.",
+        "O laboratório."
+      ],
+      "a": 0,
+      "sol": "Cada aparelho é uma unidade sobre a qual se mede a duração.",
+      "hyp": "Pode confundir unidade estatística com população ou variável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:unidade-estatistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-042",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No estudo anterior, se o objetivo é a produção de 10 000 aparelhos, qual combinação está correta?",
+      "o": [
+        "População=40; amostra=10 000; variável=marca.",
+        "População=10 000 aparelhos; amostra=40; variável=duração da bateria.",
+        "População=duração; amostra=baterias; variável=40.",
+        "População=laboratório; amostra=40; variável=produção."
+      ],
+      "a": 1,
+      "sol": "A população é o lote de interesse, a amostra são os testados e a variável é a duração.",
+      "hyp": "Pode trocar os três conceitos centrais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:tripla-identificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-043",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a variável é 'número de chamadas recebidas num dia', é possível observar o valor 3,5 chamadas?",
+      "o": [
+        "Sim, porque todas as variáveis numéricas são contínuas.",
+        "Sim, desde que se use uma média.",
+        "Não, porque é uma contagem discreta.",
+        "Só em amostras grandes."
+      ],
+      "a": 2,
+      "sol": "Uma observação individual de número de chamadas é inteira; médias podem ser não inteiras, mas são outra grandeza.",
+      "hyp": "Pode confundir valores individuais com estatísticas como a média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:discreta-vs-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-044",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A média de uma variável discreta pode ser não inteira?",
+      "o": [
+        "Não, nunca.",
+        "Só se a variável for qualitativa.",
+        "Só se a população for infinita.",
+        "Sim; por exemplo, a média de contagens pode ser 2,5."
+      ],
+      "a": 3,
+      "sol": "Embora cada observação seja inteira, a média é uma razão e pode ser decimal.",
+      "hyp": "Pode transferir a restrição dos valores individuais para a média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:discreta-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-045",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma população tem 2 400 elementos. São observados 120. Depois acrescentam-se mais 60 elementos à amostra, sem repetir nenhum. Que percentagem da população passa a estar observada?",
+      "o": [
+        "7,5%",
+        "5%",
+        "6%",
+        "10%"
+      ],
+      "a": 0,
+      "sol": "Amostra final=180; 180/2400=0,075=7,5%.",
+      "hyp": "Pode calcular a percentagem apenas dos 60 novos elementos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:fracao-amostral-atualizada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-046",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma amostra de 200 pessoas corresponde a 4% da população. Qual é a dimensão da população?",
+      "o": [
+        "4 000",
+        "5 000",
+        "6 000",
+        "8 000"
+      ],
+      "a": 1,
+      "sol": "200/0,04=5000.",
+      "hyp": "Pode multiplicar por 4% em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:populacao-a-partir-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-047",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas amostras diferentes da mesma população produzem resultados ligeiramente diferentes, isso é necessariamente sinal de erro?",
+      "o": [
+        "Sim, resultados amostrais têm de ser idênticos.",
+        "Sim, se as amostras tiverem o mesmo tamanho.",
+        "Não; a variabilidade amostral pode produzir diferenças entre amostras.",
+        "Não, porque qualquer resultado é sempre correto."
+      ],
+      "a": 2,
+      "sol": "Amostras diferentes contêm elementos diferentes e podem gerar estatísticas distintas.",
+      "hyp": "Pode esperar invariância exata entre amostras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variabilidade-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-048",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um estudo mede 'idade em anos completos'. A idade é conceptualmente contínua, mas o registo em anos completos aparece como inteiros. O que é mais rigoroso?",
+      "o": [
+        "A idade torna-se qualitativa.",
+        "A idade é necessariamente discreta em qualquer contexto.",
+        "O registo não tem qualquer efeito.",
+        "A grandeza idade é contínua, embora o método de registo a discretize."
+      ],
+      "a": 3,
+      "sol": "A classificação pode depender da natureza da grandeza e do modo como é observada/registada.",
+      "hyp": "Pode classificar apenas olhando para o formato dos dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:medicao-e-registo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-049",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma escola quer estimar a proporção de alunos que usa transporte público. Qual é a variável observada em cada aluno?",
+      "o": [
+        "Usa ou não usa transporte público.",
+        "Número total de alunos da escola.",
+        "Tamanho da amostra.",
+        "Proporção final estimada."
+      ],
+      "a": 0,
+      "sol": "Em cada aluno observa-se uma variável categórica binária: usa/não usa.",
+      "hyp": "Pode confundir a estatística final com a variável individual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:variavel-binaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-PPA-050",
+      "themeId": "10-est",
+      "subtopicId": "10-est-problema-pop-amostra",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma investigação pergunta 'quantas horas dormem, em média, os alunos do 10.º ano desta escola?'. Qual desenho conceptual está correto?",
+      "o": [
+        "População=média de horas; variável=escola.",
+        "População=alunos do 10.º ano; variável=horas de sono por aluno; uma amostra pode ser usada para estimar a média populacional.",
+        "População=apenas alunos que dormem 8 horas; variável=número de turmas.",
+        "Amostra=sempre todos os alunos."
+      ],
+      "a": 1,
+      "sol": "O objetivo define a população e a variável individual; a média é um resumo a estimar.",
+      "hyp": "Pode confundir variável, resumo e população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-problema-pop-amostra:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
