@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cont",
+  "subtopicId": "11-cont-arranjos",
+  "subtopic": "Arranjos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha arranjos simples, situações em que a ordem importa, cargos/pódios/códigos, restrições de posição, parâmetros e relação com combinações. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CONT-ARR-001",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um arranjo de n elementos tomados k a k corresponde a...",
+      "o": [
+        "escolher e ordenar k elementos distintos de um conjunto de n.",
+        "escolher k elementos sem ordem.",
+        "ordenar todos os n elementos.",
+        "escolher com repetição ilimitada."
+      ],
+      "a": 0,
+      "sol": "Nos arranjos simples, escolhem-se k elementos distintos e a ordem importa.",
+      "hyp": "Pode confundir arranjo com combinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-002",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O número de arranjos simples de n elementos tomados k a k é...",
+      "o": [
+        "n!/k!.",
+        "n!/(n−k)!.",
+        "n!/[k!(n−k)!].",
+        "n^k."
+      ],
+      "a": 1,
+      "sol": "Há n escolhas para a primeira posição, depois n−1, até k fatores.",
+      "hyp": "Pode confundir com combinação ou arranjo com repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-003",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Quantos arranjos de 5 elementos tomados 2 a 2 existem?",
+      "o": [
+        "10.",
+        "25.",
+        "20.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "5×4=20.",
+      "hyp": "Pode dividir por 2! e obter combinações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A5-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-004",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Quantos arranjos de 6 elementos tomados 3 a 3 existem?",
+      "o": [
+        "20.",
+        "216.",
+        "18.",
+        "120."
+      ],
+      "a": 3,
+      "sol": "6×5×4=120.",
+      "hyp": "Pode usar 6³ com repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A6-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-005",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Num pódio com ouro, prata e bronze, a ordem dos 3 atletas escolhidos...",
+      "o": [
+        "importa.",
+        "não importa.",
+        "só importa o ouro.",
+        "é irrelevante se forem distintos."
+      ],
+      "a": 0,
+      "sol": "Cada posição do pódio é diferente.",
+      "hyp": "Pode tratar o pódio como simples grupo de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:podio-ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-006",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "De 8 finalistas, quantos pódios distintos de 3 lugares podem ser formados?",
+      "o": [
+        "56.",
+        "336.",
+        "512.",
+        "24."
+      ],
+      "a": 1,
+      "sol": "8×7×6=336.",
+      "hyp": "Pode usar C(8,3) e esquecer a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:podio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-007",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantas palavras de 3 letras distintas podem ser feitas com 7 letras disponíveis?",
+      "o": [
+        "35.",
+        "343.",
+        "210.",
+        "21."
+      ],
+      "a": 2,
+      "sol": "7×6×5=210.",
+      "hyp": "Pode permitir repetição ou ignorar ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:palavras-sem-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-008",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantos códigos de 4 algarismos distintos podem ser feitos com os 10 algarismos, permitindo zero inicial?",
+      "o": [
+        "10000.",
+        "210.",
+        "9000.",
+        "5040."
+      ],
+      "a": 3,
+      "sol": "10×9×8×7=5040.",
+      "hyp": "Pode usar 10⁴ ou excluir zero inicial sem indicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:codigo-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-009",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantos números de 3 algarismos distintos podem ser formados com {1,2,3,4,5}?",
+      "o": [
+        "60.",
+        "125.",
+        "10.",
+        "20."
+      ],
+      "a": 0,
+      "sol": "5×4×3=60.",
+      "hyp": "Pode usar 5³ ou combinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:numeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-010",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se k=n, então A(n,n) é...",
+      "o": [
+        "1.",
+        "n!.",
+        "n.",
+        "n²."
+      ],
+      "a": 1,
+      "sol": "Escolher e ordenar todos os n elementos é uma permutação.",
+      "hyp": "Pode esquecer a ligação entre arranjos e permutações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:k-igual-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-011",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A(n,1) é igual a...",
+      "o": [
+        "1.",
+        "n!.",
+        "n.",
+        "n−1."
+      ],
+      "a": 2,
+      "sol": "Há n formas de escolher um único elemento para uma posição.",
+      "hyp": "Pode usar a fórmula de combinação incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:k-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-012",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A(7,2)=",
+      "o": [
+        "21.",
+        "49.",
+        "14.",
+        "42."
+      ],
+      "a": 3,
+      "sol": "7×6=42.",
+      "hyp": "Pode dividir por 2 por confundir com combinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A7-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-013",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A(9,3)=",
+      "o": [
+        "504.",
+        "84.",
+        "729.",
+        "27."
+      ],
+      "a": 0,
+      "sol": "9×8×7=504.",
+      "hyp": "Pode usar C(9,3).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A9-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-014",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A(10,2)=",
+      "o": [
+        "45.",
+        "90.",
+        "100.",
+        "20."
+      ],
+      "a": 1,
+      "sol": "10×9=90.",
+      "hyp": "Pode usar combinação 45.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A10-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-015",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A(10,4)=",
+      "o": [
+        "210.",
+        "10000.",
+        "5040.",
+        "720."
+      ],
+      "a": 2,
+      "sol": "10×9×8×7=5040.",
+      "hyp": "Pode usar C(10,4).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A10-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-016",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A(n,2) simplifica para...",
+      "o": [
+        "n².",
+        "n(n+1).",
+        "n!/2.",
+        "n(n−1)."
+      ],
+      "a": 3,
+      "sol": "n!/(n−2)!=n(n−1).",
+      "hyp": "Pode usar n² como se houvesse repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-017",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A(n,3) simplifica para...",
+      "o": [
+        "n(n−1)(n−2).",
+        "n³.",
+        "n(n−1).",
+        "n!/3!."
+      ],
+      "a": 0,
+      "sol": "Ficam três fatores consecutivos.",
+      "hyp": "Pode dividir por 3! como numa combinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-018",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Comparando A(n,k) e C(n,k), para k≥1...",
+      "o": [
+        "A(n,k)=C(n,k)/k!.",
+        "A(n,k)=k!·C(n,k).",
+        "A(n,k)=C(n,k).",
+        "A(n,k)=n^k."
+      ],
+      "a": 1,
+      "sol": "Cada escolha sem ordem de k elementos pode ser ordenada de k! maneiras.",
+      "hyp": "Pode inverter a relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:relacao-combinacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-019",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se C(6,2)=15, então A(6,2)=",
+      "o": [
+        "15.",
+        "60.",
+        "30.",
+        "6."
+      ],
+      "a": 2,
+      "sol": "A=2!×15=30.",
+      "hyp": "Pode esquecer a ordem das duas posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:via-combinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-020",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num arranjo simples, um elemento pode repetir-se em duas posições?",
+      "o": [
+        "Sim.",
+        "Só se k=n.",
+        "Só na última posição.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Arranjos simples são sem repetição.",
+      "hyp": "Pode confundir com sequências com repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:sem-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-021",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 10 alunos escolhem-se presidente e vice-presidente. Quantas escolhas ordenadas?",
+      "o": [
+        "90.",
+        "45.",
+        "100.",
+        "20."
+      ],
+      "a": 0,
+      "sol": "10 escolhas para presidente e 9 para vice:90.",
+      "hyp": "Pode usar combinação porque são duas pessoas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:cargos-distintos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-022",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 12 pessoas escolhem-se presidente, secretário e tesoureiro. Quantas distribuições?",
+      "o": [
+        "220.",
+        "1320.",
+        "1728.",
+        "36."
+      ],
+      "a": 1,
+      "sol": "12×11×10=1320.",
+      "hyp": "Pode escolher o grupo sem distribuir cargos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:tres-cargos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-023",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 8 atletas escolhem-se 1.º e 2.º lugares. Quantos resultados?",
+      "o": [
+        "28.",
+        "64.",
+        "56.",
+        "16."
+      ],
+      "a": 2,
+      "sol": "8×7=56.",
+      "hyp": "Pode usar C(8,2).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:dois-lugares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-024",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 4 algarismos distintos podem ser formados com os algarismos 1 a 7?",
+      "o": [
+        "35.",
+        "2401.",
+        "210.",
+        "840."
+      ],
+      "a": 3,
+      "sol": "7×6×5×4=840.",
+      "hyp": "Pode usar combinação ou repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:quatro-de-sete",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-025",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos distintos podem ser formados com 0,1,2,3,4, sem zero inicial?",
+      "o": [
+        "48.",
+        "60.",
+        "36.",
+        "100."
+      ],
+      "a": 0,
+      "sol": "Primeiro:4 opções (1-4); segundo:4 restantes incluindo 0; terceiro:3. Total 48.",
+      "hyp": "Pode usar A(5,3)=60 sem excluir zero inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:zero-inicial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-026",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 4 algarismos distintos podem ser formados com 0,1,2,3,4,5, sem zero inicial?",
+      "o": [
+        "360.",
+        "300.",
+        "240.",
+        "625."
+      ],
+      "a": 1,
+      "sol": "Primeiro:5; depois 5×4×3; total 300.",
+      "hyp": "Pode usar A(6,4)=360.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:zero-inicial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-027",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos códigos de 3 letras distintas podem ser formados com 8 letras se devem começar por A?",
+      "o": [
+        "56.",
+        "336.",
+        "42.",
+        "21."
+      ],
+      "a": 2,
+      "sol": "A fixo; duas posições com 7 e 6 opções:42.",
+      "hyp": "Pode contar A novamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:prefixo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-028",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos códigos de 4 letras distintas com 9 letras disponíveis terminam em Z, supondo Z disponível?",
+      "o": [
+        "504.",
+        "3024.",
+        "72.",
+        "336."
+      ],
+      "a": 3,
+      "sol": "Última fixa; primeiras três usam 8×7×6=336.",
+      "hyp": "Pode usar 9×8×7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:sufixo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-029",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 7 elementos tomados 3 a 3 contêm um elemento específico A?",
+      "o": [
+        "90.",
+        "210.",
+        "30.",
+        "120."
+      ],
+      "a": 0,
+      "sol": "Escolhe-se a posição de A:3; preenchem-se as outras duas com 6×5: total 90.",
+      "hyp": "Pode fixar A numa única posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:contem-A",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-030",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 8 elementos tomados 3 a 3 não contêm um elemento específico A?",
+      "o": [
+        "336.",
+        "210.",
+        "42.",
+        "120."
+      ],
+      "a": 1,
+      "sol": "Usam-se apenas os outros 7: A(7,3)=7×6×5=210.",
+      "hyp": "Pode subtrair apenas 1 ao total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:nao-contem-A",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-031",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 8 elementos tomados 3 a 3 contêm A?",
+      "o": [
+        "210.",
+        "336.",
+        "126.",
+        "42."
+      ],
+      "a": 2,
+      "sol": "Total A(8,3)=336; sem A=A(7,3)=210; diferença 126. Também 3×7×6=126.",
+      "hyp": "Pode usar C(7,2) sem ordenar as restantes posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:contem-A",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-032",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 9 elementos tomados 4 a 4 começam por um elemento fixo A?",
+      "o": [
+        "3024.",
+        "504.",
+        "56.",
+        "336."
+      ],
+      "a": 3,
+      "sol": "A fixo; restantes 3 posições: A(8,3)=8×7×6=336.",
+      "hyp": "Pode usar A(9,4).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:comeca-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-033",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 9 elementos tomados 4 a 4 têm A numa das 4 posições?",
+      "o": [
+        "1344.",
+        "3024.",
+        "336.",
+        "672."
+      ],
+      "a": 0,
+      "sol": "4 escolhas para a posição de A × A(8,3)=4×336=1344.",
+      "hyp": "Pode contar apenas A na primeira posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A-qualquer-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-034",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 7 elementos tomados 3 a 3 têm A e B ambos presentes?",
+      "o": [
+        "60.",
+        "30.",
+        "210.",
+        "12."
+      ],
+      "a": 1,
+      "sol": "Escolhe-se a posição do terceiro elemento? Melhor: escolhe terceiro entre 5 e ordena os 3 elementos em 3!:5×6=30.",
+      "hyp": "Pode esquecer ordenar A,B e o terceiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A-B-presentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-035",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 8 elementos tomados 4 a 4 têm A e B nas duas primeiras posições, em qualquer ordem?",
+      "o": [
+        "120.",
+        "336.",
+        "60.",
+        "30."
+      ],
+      "a": 2,
+      "sol": "A,B nas primeiras:2!; restantes duas:6×5=30; total 60.",
+      "hyp": "Pode fixar a ordem de A,B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:AB-primeiras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-036",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 8 elementos tomados 4 a 4 começam por A e não contêm B?",
+      "o": [
+        "210.",
+        "336.",
+        "60.",
+        "120."
+      ],
+      "a": 3,
+      "sol": "A fixo; três posições escolhidas e ordenadas dos 6 elementos que não são A nem B:6×5×4=120.",
+      "hyp": "Pode permitir B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:A-sem-B",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-037",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A(n,2)=56, então n=",
+      "o": [
+        "8.",
+        "7.",
+        "9.",
+        "28."
+      ],
+      "a": 0,
+      "sol": "n(n−1)=56; 8×7=56.",
+      "hyp": "Pode resolver n²=56.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:equacao-arranjo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-038",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A(n,3)=120, então n=",
+      "o": [
+        "5.",
+        "6.",
+        "7.",
+        "10."
+      ],
+      "a": 1,
+      "sol": "n(n−1)(n−2)=120; 6×5×4=120.",
+      "hyp": "Pode confundir com 5!=120.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:equacao-arranjo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-039",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A(n,k)/A(n,k−1), para k≥1, é...",
+      "o": [
+        "k.",
+        "n.",
+        "n−k+1.",
+        "n−k."
+      ],
+      "a": 2,
+      "sol": "O novo fator ao passar de k−1 para k posições é n−(k−1)=n−k+1.",
+      "hyp": "Pode usar n−k.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:razao-arranjos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-040",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A(10,4)/A(10,3)=",
+      "o": [
+        "6.",
+        "10.",
+        "4.",
+        "7."
+      ],
+      "a": 3,
+      "sol": "O quarto fator é 10−4+1=7.",
+      "hyp": "Pode calcular o fator errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:razao-numerica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-041",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos códigos de 5 letras distintas podem ser formados com 10 letras, se A deve aparecer?",
+      "o": [
+        "15120.",
+        "30240.",
+        "5040.",
+        "7560."
+      ],
+      "a": 0,
+      "sol": "Escolhe-se posição de A:5; restantes 4 posições: A(9,4)=9×8×7×6=3024; total 15120.",
+      "hyp": "Pode esquecer as 5 posições possíveis de A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:contem-A-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-042",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos códigos de 5 letras distintas com 10 letras não contêm A nem B?",
+      "o": [
+        "30240.",
+        "6720.",
+        "15120.",
+        "5040."
+      ],
+      "a": 1,
+      "sol": "Usam-se 8 letras: A(8,5)=8×7×6×5×4=6720.",
+      "hyp": "Pode subtrair apenas 2 ao total de códigos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:excluir-dois",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-043",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos distintos e pares podem formar-se com 0,1,2,3,4,5?",
+      "o": [
+        "60.",
+        "48.",
+        "52.",
+        "40."
+      ],
+      "a": 2,
+      "sol": "Caso unidade 0: centenas 5, dezenas 4 =>20. Caso unidade 2 ou4:2 escolhas; centenas 4 não nulas restantes; dezenas 4 restantes =>32. Total 52.",
+      "hyp": "Pode usar 3 unidades pares ×5×4 sem tratar zero inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:numeros-pares-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-044",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos distintos e ímpares podem formar-se com 0,1,2,3,4,5?",
+      "o": [
+        "60.",
+        "52.",
+        "36.",
+        "48."
+      ],
+      "a": 3,
+      "sol": "Unidade ímpar:3 escolhas; centenas:4 escolhas não nulas distintas da unidade; dezenas:4 restantes incluindo 0. Total 48.",
+      "hyp": "Pode contar 0 como escolha de centenas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:numeros-impares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-045",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 10 elementos tomados 3 a 3 têm o primeiro elemento escolhido de um subconjunto de 4 elementos?",
+      "o": [
+        "288.",
+        "720.",
+        "240.",
+        "120."
+      ],
+      "a": 0,
+      "sol": "Primeira posição:4; segunda:9; terceira:8. Total 288.",
+      "hyp": "Pode usar 4×3×2 ignorando os restantes elementos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:primeiro-subconjunto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-046",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos arranjos de 10 elementos tomados 3 a 3 têm o primeiro elemento fora de um subconjunto de 4?",
+      "o": [
+        "288.",
+        "432.",
+        "720.",
+        "336."
+      ],
+      "a": 1,
+      "sol": "Primeira:6; depois 9×8; total 432.",
+      "hyp": "Pode usar apenas os 6 elementos fora do subconjunto em todas as posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:primeiro-fora",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-047",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "De 15 candidatos escolhem-se líder, vice e porta-voz. Quantas distribuições?",
+      "o": [
+        "455.",
+        "3375.",
+        "2730.",
+        "45."
+      ],
+      "a": 2,
+      "sol": "15×14×13=2730.",
+      "hyp": "Pode escolher apenas o grupo de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:modelacao-cargos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-048",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "De 12 equipas escolhem-se 1.º, 2.º, 3.º e 4.º lugares. Quantos resultados?",
+      "o": [
+        "495.",
+        "20736.",
+        "48.",
+        "11880."
+      ],
+      "a": 3,
+      "sol": "12×11×10×9=11880.",
+      "hyp": "Pode usar combinação 495.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:modelacao-classificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-049",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a ordem deixa de importar num problema originalmente contado por A(n,k), para obter a contagem correta devemos...",
+      "o": [
+        "dividir por k!.",
+        "multiplicar por k!.",
+        "dividir por n!.",
+        "usar n^k."
+      ],
+      "a": 0,
+      "sol": "Cada conjunto de k elementos foi contado nas k! ordens possíveis.",
+      "hyp": "Pode multiplicar e aumentar a duplicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:converter-combinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-ARR-050",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-arranjos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma API gera identificadores com 3 símbolos distintos escolhidos de 20, em ordem. Quantos identificadores?",
+      "o": [
+        "1140.",
+        "6840.",
+        "8000.",
+        "60."
+      ],
+      "a": 1,
+      "sol": "20×19×18=6840.",
+      "hyp": "Pode usar C(20,3) ou 20³.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-arranjos:modelacao-identificadores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
