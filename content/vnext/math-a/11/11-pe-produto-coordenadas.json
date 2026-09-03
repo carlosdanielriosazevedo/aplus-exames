@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-pe",
+  "subtopicId": "11-pe-produto-coordenadas",
+  "subtopic": "Produto escalar por coordenadas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha cálculo do produto escalar no plano/espaço, linearidade, ortogonalidade, sinais, parâmetros e interpretação como projeção escalar. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11PE-PC-001",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No plano, o produto escalar de u=(a,b) e v=(c,d) é...",
+      "o": [
+        "ac+bd.",
+        "ac−bd.",
+        "a+c+b+d.",
+        "ad+bc."
+      ],
+      "a": 0,
+      "sol": "Multiplicam-se componentes correspondentes e somam-se os produtos.",
+      "hyp": "Pode trocar componentes ou usar determinante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:formula-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-002",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se u=(2,3) e v=(4,5), então u·v=",
+      "o": [
+        "26.",
+        "23.",
+        "10.",
+        "40."
+      ],
+      "a": 1,
+      "sol": "2×4+3×5=8+15=23.",
+      "hyp": "Pode somar componentes ou multiplicar tudo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:calculo-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-003",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se u=(1,−2) e v=(3,4), então u·v=",
+      "o": [
+        "11.",
+        "5.",
+        "−5.",
+        "−11."
+      ],
+      "a": 2,
+      "sol": "1×3+(−2)×4=3−8=−5.",
+      "hyp": "Pode perder o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:calculo-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-004",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O produto escalar de dois vetores é...",
+      "o": [
+        "um vetor.",
+        "uma reta.",
+        "uma matriz.",
+        "um número real."
+      ],
+      "a": 3,
+      "sol": "O resultado do produto escalar é um escalar.",
+      "hyp": "Pode confundir com soma vetorial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:resultado-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-005",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O produto escalar é comutativo, isto é...",
+      "o": [
+        "u·v=v·u.",
+        "u·v=−v·u.",
+        "u·v=u+v.",
+        "u·v=0 sempre."
+      ],
+      "a": 0,
+      "sol": "A multiplicação real das componentes é comutativa.",
+      "hyp": "Pode confundir com operações não comutativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:comutatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-006",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u=(−3,2) e v=(5,−1), então u·v=",
+      "o": [
+        "−13.",
+        "−17.",
+        "17.",
+        "13."
+      ],
+      "a": 1,
+      "sol": "−15−2=−17.",
+      "hyp": "Pode errar a multiplicação de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:calculo-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-007",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u=(0,7) e v=(4,0), então u·v=",
+      "o": [
+        "28.",
+        "11.",
+        "0.",
+        "7."
+      ],
+      "a": 2,
+      "sol": "0×4+7×0=0.",
+      "hyp": "Pode multiplicar componentes não correspondentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:eixos-perpendiculares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-008",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u=(5,0) e v=(−2,3), então u·v=",
+      "o": [
+        "15.",
+        "5.",
+        "−6.",
+        "−10."
+      ],
+      "a": 3,
+      "sol": "5×(−2)+0×3=−10.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:calculo-com-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-009",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "No espaço, para u=(a,b,c) e v=(d,e,f), u·v é...",
+      "o": [
+        "ad+be+cf.",
+        "ad−be+cf.",
+        "a+d+b+e+c+f.",
+        "af+be+cd."
+      ],
+      "a": 0,
+      "sol": "Somam-se os produtos das componentes correspondentes.",
+      "hyp": "Pode cruzar componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:formula-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-010",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No espaço, (1,2,3)·(4,5,6)=",
+      "o": [
+        "21.",
+        "32.",
+        "24.",
+        "18."
+      ],
+      "a": 1,
+      "sol": "1×4+2×5+3×6=4+10+18=32.",
+      "hyp": "Pode somar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:calculo-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-011",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(2,−1,4)·(3,5,−2)=",
+      "o": [
+        "7.",
+        "−1.",
+        "−7.",
+        "13."
+      ],
+      "a": 2,
+      "sol": "6−5−8=−7.",
+      "hyp": "Pode perder os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:calculo-espaco-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-012",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "u·u é igual a...",
+      "o": [
+        "||u||.",
+        "2||u||.",
+        "0.",
+        "||u||²."
+      ],
+      "a": 3,
+      "sol": "Somar os quadrados das componentes dá a norma ao quadrado.",
+      "hyp": "Pode confundir norma com norma ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:u-ponto-u",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-013",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u=(3,4), então u·u=",
+      "o": [
+        "25.",
+        "5.",
+        "7.",
+        "12."
+      ],
+      "a": 0,
+      "sol": "3²+4²=25.",
+      "hyp": "Pode devolver a norma em vez do quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:u-ponto-u",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-014",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se u=(−2,1,2), então u·u=",
+      "o": [
+        "3.",
+        "9.",
+        "5.",
+        "−1."
+      ],
+      "a": 1,
+      "sol": "4+1+4=9.",
+      "hyp": "Pode conservar sinais negativos ao quadrar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:u-ponto-u-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-015",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se u·v=0 e ambos são não nulos, então u e v são...",
+      "o": [
+        "paralelos.",
+        "iguais.",
+        "perpendiculares.",
+        "opostos."
+      ],
+      "a": 2,
+      "sol": "Produto escalar nulo caracteriza perpendicularidade entre vetores não nulos.",
+      "hyp": "Pode confundir com colinearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:produto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-016",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os vetores (1,2) e (2,−1) são...",
+      "o": [
+        "paralelos.",
+        "iguais.",
+        "de norma zero.",
+        "perpendiculares."
+      ],
+      "a": 3,
+      "sol": "1×2+2×(−1)=0.",
+      "hyp": "Pode olhar apenas para componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:testar-perpendicularidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-017",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os vetores (3,4) e (4,−3) são...",
+      "o": [
+        "perpendiculares.",
+        "paralelos.",
+        "iguais.",
+        "de sentidos opostos."
+      ],
+      "a": 0,
+      "sol": "12−12=0.",
+      "hyp": "Pode confundir rotação de 90° com vetor oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:testar-perpendicularidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-018",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os vetores (k,2) e (3,−6) sejam perpendiculares?",
+      "o": [
+        "−4.",
+        "4.",
+        "1.",
+        "3."
+      ],
+      "a": 1,
+      "sol": "3k+2(−6)=0 => 3k=12 => k=4.",
+      "hyp": "Pode resolver a equação de sinais incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:parametro-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-019",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para que k os vetores (1,k) e (2,5) sejam perpendiculares?",
+      "o": [
+        "2/5.",
+        "−5/2.",
+        "−2/5.",
+        "5/2."
+      ],
+      "a": 2,
+      "sol": "2+5k=0 => k=−2/5.",
+      "hyp": "Pode inverter o coeficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:parametro-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-020",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=12 e v·u é pedido, então...",
+      "o": [
+        "−12.",
+        "0.",
+        "144.",
+        "12."
+      ],
+      "a": 3,
+      "sol": "O produto escalar é comutativo.",
+      "hyp": "Pode pensar que trocar a ordem muda o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:comutatividade-aplicada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-021",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Para qualquer escalar λ, (λu)·v é igual a...",
+      "o": [
+        "λ(u·v).",
+        "λ²(u·v).",
+        "u·v+λ.",
+        "(u·v)/λ sempre."
+      ],
+      "a": 0,
+      "sol": "O produto escalar é linear em cada argumento.",
+      "hyp": "Pode elevar λ ao quadrado sem motivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-022",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se u·v=5, então (3u)·v=",
+      "o": [
+        "8.",
+        "15.",
+        "45.",
+        "5/3."
+      ],
+      "a": 1,
+      "sol": "3(u·v)=15.",
+      "hyp": "Pode usar 3².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-023",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se u·v=−4, então u·(−2v)=",
+      "o": [
+        "−8.",
+        "−6.",
+        "8.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "−2×(−4)=8.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:linearidade-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-024",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "u·(v+w) é igual a...",
+      "o": [
+        "u·v·w.",
+        "(u·v)+(v·w).",
+        "u+v+w.",
+        "u·v+u·w."
+      ],
+      "a": 3,
+      "sol": "O produto escalar é distributivo relativamente à soma vetorial.",
+      "hyp": "Pode confundir com produto de três vetores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:distributividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-025",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,2), v=(3,0), w=(−1,4), então u·(v+w)=",
+      "o": [
+        "10.",
+        "4.",
+        "8.",
+        "16."
+      ],
+      "a": 0,
+      "sol": "v+w=(2,4); u·(2,4)=1×2+2×4=10.",
+      "hyp": "Pode somar os produtos erradamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:distributividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-026",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=3 e u·w=−5, então u·(v+w)=",
+      "o": [
+        "8.",
+        "−2.",
+        "−8.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "Pela distributividade, 3+(−5)=−2.",
+      "hyp": "Pode multiplicar os valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:distributividade-aplicada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-027",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(a,b) e v=(−b,a), então u·v=",
+      "o": [
+        "a²+b².",
+        "a²−b².",
+        "0.",
+        "2ab."
+      ],
+      "a": 2,
+      "sol": "a(−b)+ba=0.",
+      "hyp": "Pode não reconhecer a estrutura perpendicular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:rotacao-90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-028",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O vetor (−b,a) resulta de (a,b), geometricamente, por...",
+      "o": [
+        "uma rotação de 180°.",
+        "uma reflexão em Ox.",
+        "uma homotetia de razão 2.",
+        "uma rotação de 90° anti-horária."
+      ],
+      "a": 3,
+      "sol": "A regra (a,b)→(−b,a) é uma rotação de 90° anti-horária.",
+      "hyp": "Pode confundir rotação com reflexão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:rotacao-90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-029",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(2,3) e v=(x,4) e u·v=20, então x=",
+      "o": [
+        "4.",
+        "2.",
+        "6.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "2x+12=20 => x=4.",
+      "hyp": "Pode esquecer o termo 12.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:parametro-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-030",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(−1,5) e v=(3,y) e u·v=7, então y=",
+      "o": [
+        "−2.",
+        "2.",
+        "1.",
+        "5."
+      ],
+      "a": 1,
+      "sol": "−3+5y=7 => 5y=10 => y=2.",
+      "hyp": "Pode errar o sinal inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:parametro-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-031",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,2,−1), v=(2,k,3) e u·v=0, então k=",
+      "o": [
+        "−1/2.",
+        "2.",
+        "1/2.",
+        "−2."
+      ],
+      "a": 2,
+      "sol": "2+2k−3=0 => 2k=1 => k=1/2.",
+      "hyp": "Pode errar a soma das componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:parametro-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-032",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(2,−1,1), v=(1,3,k) e u·v=4, então k=",
+      "o": [
+        "−5.",
+        "3.",
+        "1.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "2−3+k=4 => k=5.",
+      "hyp": "Pode esquecer o termo −3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:parametro-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-033",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u·v>0, o ângulo entre u e v, para vetores não nulos, é...",
+      "o": [
+        "agudo.",
+        "reto.",
+        "obtuso.",
+        "sempre zero."
+      ],
+      "a": 0,
+      "sol": "Como u·v=||u||||v||cosθ, sinal positivo implica cosθ>0.",
+      "hyp": "Pode confundir sinal do produto com orientação de componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:sinal-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-034",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u·v<0, o ângulo entre u e v é...",
+      "o": [
+        "agudo.",
+        "obtuso.",
+        "reto.",
+        "sempre π."
+      ],
+      "a": 1,
+      "sol": "Produto negativo implica cosθ<0.",
+      "hyp": "Pode achar que negativo implica vetores exatamente opostos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:sinal-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-035",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u·v=||u||||v|| para vetores não nulos, então o ângulo entre eles é...",
+      "o": [
+        "π/2.",
+        "π.",
+        "0.",
+        "π/4."
+      ],
+      "a": 2,
+      "sol": "cosθ=1, logo θ=0.",
+      "hyp": "Pode confundir com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:produto-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-036",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se u·v=−||u||||v||, o ângulo entre eles é...",
+      "o": [
+        "0.",
+        "π/2.",
+        "3π/2.",
+        "π."
+      ],
+      "a": 3,
+      "sol": "cosθ=−1, logo os vetores têm sentidos opostos.",
+      "hyp": "Pode confundir com produto nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:produto-minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-037",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u||=3, ||v||=4 e u·v=6, então cosθ=",
+      "o": [
+        "1/2.",
+        "2.",
+        "1/4.",
+        "3/4."
+      ],
+      "a": 0,
+      "sol": "cosθ=(u·v)/(||u||||v||)=6/12=1/2.",
+      "hyp": "Pode esquecer dividir pelas duas normas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:cos-por-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-038",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, θ=",
+      "o": [
+        "π/6.",
+        "π/3.",
+        "2π/3.",
+        "π/2."
+      ],
+      "a": 1,
+      "sol": "cosθ=1/2 e θ∈[0,π], logo θ=π/3.",
+      "hyp": "Pode escolher o ângulo de seno correspondente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:angulo-por-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-039",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u||=5, ||v||=2 e u·v=−5, então cosθ=",
+      "o": [
+        "1/2.",
+        "−1.",
+        "−1/2.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "−5/(10)=−1/2.",
+      "hyp": "Pode ignorar o sinal do produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:cos-por-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-040",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(3,4) e v=(−4,3), então o ângulo entre eles é...",
+      "o": [
+        "0.",
+        "π.",
+        "π/4.",
+        "π/2."
+      ],
+      "a": 3,
+      "sol": "u·v=−12+12=0.",
+      "hyp": "Pode inferir pelo desenho sem cálculo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:angulo-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-041",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,0) e v=(cosα,sinα), então u·v=",
+      "o": [
+        "cosα.",
+        "sinα.",
+        "1.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "1×cosα+0×sinα=cosα.",
+      "hyp": "Pode usar a segunda componente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:produto-com-unitario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-042",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se j=(0,1) e v=(cosα,sinα), então j·v=",
+      "o": [
+        "cosα.",
+        "sinα.",
+        "0.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "0×cosα+1×sinα=sinα.",
+      "hyp": "Pode trocar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:produto-com-unitario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-043",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O produto escalar de um vetor com um vetor unitário de direção e1 mede...",
+      "o": [
+        "a norma de u sempre.",
+        "o ângulo diretamente em radianos.",
+        "a componente de u nessa direção.",
+        "a área de um paralelogramo."
+      ],
+      "a": 2,
+      "sol": "É a projeção escalar de u sobre essa direção unitária.",
+      "hyp": "Pode confundir produto escalar com área.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:interpretacao-projecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-044",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(4,−3) e e=(1,0), então u·e=",
+      "o": [
+        "−3.",
+        "5.",
+        "1.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "O produto seleciona a componente horizontal.",
+      "hyp": "Pode usar a norma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:componente-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-045",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(4,−3) e e=(0,1), então u·e=",
+      "o": [
+        "−3.",
+        "4.",
+        "5.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "O produto seleciona a componente vertical.",
+      "hyp": "Pode usar a primeira componente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:componente-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-046",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma força F=(10,0) atua num deslocamento d=(3,4). O produto F·d é...",
+      "o": [
+        "40.",
+        "30.",
+        "50.",
+        "70."
+      ],
+      "a": 1,
+      "sol": "10×3+0×4=30.",
+      "hyp": "Pode usar apenas normas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:trabalho-simplificado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-047",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma força F=(0,5) atua num deslocamento d=(6,0). O produto F·d é...",
+      "o": [
+        "30.",
+        "11.",
+        "0.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "Os vetores são perpendiculares.",
+      "hyp": "Pode multiplicar as normas ignorando o ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:trabalho-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-048",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=0 e u≠0, então v pode ser...",
+      "o": [
+        "apenas o vetor nulo.",
+        "apenas −u.",
+        "apenas u.",
+        "qualquer vetor perpendicular a u, incluindo vários possíveis."
+      ],
+      "a": 3,
+      "sol": "Há infinitos vetores perpendiculares a um dado vetor não nulo.",
+      "hyp": "Pode pensar que produto zero obriga vetor nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:produto-zero-nao-unico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-049",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(2,−3), um vetor não nulo perpendicular pode ser...",
+      "o": [
+        "(3,2).",
+        "(2,3).",
+        "(−2,3).",
+        "(4,−6)."
+      ],
+      "a": 0,
+      "sol": "2×3+(−3)×2=0.",
+      "hyp": "Pode escolher vetor apenas com sinais trocados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:construir-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-PC-050",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-produto-coordenadas",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um vetor velocidade v=(8,6) e um vetor direção unitário e=(4/5,3/5) têm produto escalar...",
+      "o": [
+        "8.",
+        "10.",
+        "6.",
+        "14."
+      ],
+      "a": 1,
+      "sol": "8×4/5+6×3/5=32/5+18/5=10.",
+      "hyp": "Pode somar apenas componentes ou esquecer normalização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-produto-coordenadas:modelacao-projecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
