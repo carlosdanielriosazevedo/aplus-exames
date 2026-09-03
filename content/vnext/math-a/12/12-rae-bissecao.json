@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-rae",
+  "subtopicId": "12-rae-bissecao",
+  "subtopic": "Método da bisseção, aproximação e erro",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha algoritmo da bisseção, atualização por sinais, convergência, número de iterações, erro máximo, arredondamento e comparação de robustez. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12RAE-BIS-001",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O método da bisseção começa com...",
+      "o": [
+        "um intervalo [a,b] onde uma função contínua muda de sinal.",
+        "um ponto qualquer e a derivada.",
+        "duas raízes exatas.",
+        "um polinómio obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "A bisseção usa uma garantia de raiz por mudança de sinal.",
+      "hyp": "Pode confundir com Newton, que usa um ponto inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:inicio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-002",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em cada iteração da bisseção calcula-se...",
+      "o": [
+        "a derivada no extremo esquerdo.",
+        "o ponto médio do intervalo.",
+        "a média dos valores f(a),f(b).",
+        "o zero da tangente."
+      ],
+      "a": 1,
+      "sol": "Divide-se o intervalo em duas metades.",
+      "hyp": "Pode confundir média das abcissas com média das ordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-003",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Depois de calcular o ponto médio m, escolhe-se...",
+      "o": [
+        "sempre a metade esquerda.",
+        "sempre a metade direita.",
+        "a metade onde permanece a mudança de sinal.",
+        "a metade com maior valor de f."
+      ],
+      "a": 2,
+      "sol": "Mantém-se a garantia de raiz.",
+      "hyp": "Pode escolher o lado pelo tamanho de f em vez do sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:selecionar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-004",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Após uma iteração, a amplitude do intervalo fica...",
+      "o": [
+        "igual.",
+        "o dobro.",
+        "reduzida em1 unidade.",
+        "metade da anterior."
+      ],
+      "a": 3,
+      "sol": "Bissectar significa dividir em duas partes iguais.",
+      "hyp": "Pode pensar em redução aditiva fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-005",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se o intervalo inicial é [1,3], o primeiro ponto médio é...",
+      "o": [
+        "2.",
+        "1,5.",
+        "3.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "(1+3)/2=2.",
+      "hyp": "Pode dividir apenas um extremo por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-006",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(1)<0, f(3)>0 e f(2)<0, o novo intervalo é...",
+      "o": [
+        "[1,2].",
+        "[2,3].",
+        "[1,3].",
+        "[0,2]."
+      ],
+      "a": 1,
+      "sol": "A mudança de sinal ocorre entre2 e3.",
+      "hyp": "Pode escolher o lado com sinais iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:novo-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-007",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(1)<0, f(3)>0 e f(2)>0, o novo intervalo é...",
+      "o": [
+        "[2,3].",
+        "[1,3].",
+        "[1,2].",
+        "[0,2]."
+      ],
+      "a": 2,
+      "sol": "A mudança de sinal ocorre entre1 e2.",
+      "hyp": "Pode escolher a metade errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:novo-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-008",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(m)=0 numa iteração, então...",
+      "o": [
+        "é obrigatório continuar.",
+        "o método falhou.",
+        "devemos escolher a metade direita.",
+        "a raiz foi encontrada exatamente."
+      ],
+      "a": 3,
+      "sol": "O ponto médio é a própria raiz.",
+      "hyp": "Pode continuar sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:raiz-exata",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-009",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um intervalo de amplitude 8 passa, após uma bisseção, a amplitude...",
+      "o": [
+        "4.",
+        "2.",
+        "8.",
+        "7."
+      ],
+      "a": 0,
+      "sol": "Divide-se por2.",
+      "hyp": "Pode subtrair1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-010",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Após 3 bisseções, uma amplitude inicial 8 torna-se...",
+      "o": [
+        "2.",
+        "1.",
+        "4.",
+        "0,5."
+      ],
+      "a": 1,
+      "sol": "8/2³=1.",
+      "hyp": "Pode dividir apenas uma vez.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-011",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Após n bisseções, a amplitude é...",
+      "o": [
+        "L0/n.",
+        "2^nL0.",
+        "L0/2^n.",
+        "L0−n."
+      ],
+      "a": 2,
+      "sol": "Cada iteração divide a amplitude por2.",
+      "hyp": "Pode usar decrescimento linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:formula-amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-012",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se L0=1, após 10 bisseções a amplitude é...",
+      "o": [
+        "1/10.",
+        "1/100.",
+        "1024.",
+        "1/1024."
+      ],
+      "a": 3,
+      "sol": "1/2^{10}=1/1024.",
+      "hyp": "Pode confundir potência com produto10×2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-013",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Usando o ponto médio do intervalo final como aproximação, o erro máximo é...",
+      "o": [
+        "metade da amplitude final.",
+        "a amplitude final.",
+        "o dobro da amplitude.",
+        "zero sempre."
+      ],
+      "a": 0,
+      "sol": "A raiz está algures no intervalo, no máximo a meia amplitude do centro.",
+      "hyp": "Pode usar a amplitude inteira como erro ótimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:erro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-014",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se o intervalo final é [1,40;1,42], o ponto médio é...",
+      "o": [
+        "1,40.",
+        "1,41.",
+        "1,42.",
+        "1,81."
+      ],
+      "a": 1,
+      "sol": "(1,40+1,42)/2=1,41.",
+      "hyp": "Pode somar sem dividir por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:aproximacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-015",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No item anterior, o erro máximo do ponto médio é...",
+      "o": [
+        "0,02.",
+        "0,005.",
+        "0,01.",
+        "0,1."
+      ],
+      "a": 2,
+      "sol": "A amplitude é0,02; metade é0,01.",
+      "hyp": "Pode usar a amplitude inteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:erro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-016",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para garantir erro máximo ≤0,005 com ponto médio, a amplitude final deve ser...",
+      "o": [
+        "≤0,005.",
+        "≤0,02.",
+        "≤0,1.",
+        "≤0,01."
+      ],
+      "a": 3,
+      "sol": "Erro≤L/2, então L≤0,01.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:erro-alvo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-017",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Partindo de amplitude1, quantas bisseções são suficientes para amplitude≤1/8?",
+      "o": [
+        "3.",
+        "2.",
+        "4.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "1/2³=1/8.",
+      "hyp": "Pode usar n=8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:iteracoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-018",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Partindo de amplitude2, após 4 bisseções a amplitude é...",
+      "o": [
+        "1/4.",
+        "1/8.",
+        "1/16.",
+        "1/2."
+      ],
+      "a": 1,
+      "sol": "2/16=1/8.",
+      "hyp": "Pode esquecer o fator inicial2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-019",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A bisseção é considerada robusta porque...",
+      "o": [
+        "converge em uma iteração.",
+        "não precisa avaliar f.",
+        "mantém um intervalo que, sob as hipóteses, contém uma raiz.",
+        "usa sempre derivadas."
+      ],
+      "a": 2,
+      "sol": "A garantia é preservada a cada iteração.",
+      "hyp": "Pode confundir robustez com rapidez extrema.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:robustez",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-020",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma desvantagem típica da bisseção é...",
+      "o": [
+        "não ter controlo de erro.",
+        "precisar de segunda derivada.",
+        "não funcionar com funções contínuas.",
+        "convergência relativamente lenta."
+      ],
+      "a": 3,
+      "sol": "O erro reduz-se por fator2 por iteração, de forma previsível mas não muito rápida.",
+      "hyp": "Pode pensar que não há estimativa de erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:desvantagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-021",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−2 em [1,2], o primeiro ponto médio é1,5 e f(1,5)>0. O novo intervalo é...",
+      "o": [
+        "[1,1,5].",
+        "[1,5,2].",
+        "[1,25,1,5].",
+        "[0,1,5]."
+      ],
+      "a": 0,
+      "sol": "f(1)<0 e f(1,5)>0.",
+      "hyp": "Pode manter a metade sem mudança de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:sqrt2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-022",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na iteração seguinte do caso anterior, o ponto médio de [1,1,5] é...",
+      "o": [
+        "1,75.",
+        "1,25.",
+        "1,125.",
+        "1,5."
+      ],
+      "a": 1,
+      "sol": "(1+1,5)/2=1,25.",
+      "hyp": "Pode somar metade do extremo errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-023",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Como f(1,25)=1,5625−2<0, o novo intervalo passa a...",
+      "o": [
+        "[1,1,25].",
+        "[1,5,2].",
+        "[1,25,1,5].",
+        "[1,25,2]."
+      ],
+      "a": 2,
+      "sol": "A mudança de sinal é entre1,25 e1,5.",
+      "hyp": "Pode escolher o lado com dois valores negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:sqrt2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-024",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Depois de duas bisseções de [1,2], a raiz de x²−2 está num intervalo de amplitude...",
+      "o": [
+        "0,5.",
+        "0,125.",
+        "1.",
+        "0,25."
+      ],
+      "a": 3,
+      "sol": "1/2²=0,25.",
+      "hyp": "Pode contar o intervalo inicial como primeira bisseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-025",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³−2 em [1,2], se f(1,5)>0, o primeiro novo intervalo é...",
+      "o": [
+        "[1,1,5].",
+        "[1,5,2].",
+        "[0,1,5].",
+        "[1,2]."
+      ],
+      "a": 0,
+      "sol": "f(1)<0 e f(1,5)>0.",
+      "hyp": "Pode ignorar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-026",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se num intervalo [a,b] temos f(a)<0<f(b) e no ponto médio m ocorre f(m)=0,2>0, então...",
+      "o": [
+        "substituímos a por m.",
+        "substituímos b por m.",
+        "mantemos [a,b].",
+        "o método termina sem raiz."
+      ],
+      "a": 1,
+      "sol": "O sinal oposto a f(m)>0 está em a.",
+      "hyp": "Pode atualizar o extremo com o mesmo sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:atualizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-027",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(a)<0<f(b) e f(m)=−0,1, então...",
+      "o": [
+        "substituímos b por m.",
+        "terminamos.",
+        "substituímos a por m.",
+        "trocamos a e b."
+      ],
+      "a": 2,
+      "sol": "m tem o mesmo sinal de a, logo o novo extremo esquerdo é m.",
+      "hyp": "Pode escolher o extremo oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:atualizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-028",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O critério de paragem pode basear-se em...",
+      "o": [
+        "apenas número par de iterações.",
+        "apenas f'(m)=0.",
+        "apenas m inteiro.",
+        "amplitude do intervalo, erro máximo desejado ou valor |f(m)|, conforme o objetivo."
+      ],
+      "a": 3,
+      "sol": "Há vários critérios práticos, devendo ser coerentes com a precisão pedida.",
+      "hyp": "Pode pensar que existe um único critério universal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:paragem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-029",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Usar apenas |f(m)| pequeno como controlo do erro em x pode ser enganador quando...",
+      "o": [
+        "f é muito plana perto da raiz.",
+        "f é linear com declive1.",
+        "o intervalo é pequeno.",
+        "a raiz é inteira."
+      ],
+      "a": 0,
+      "sol": "Uma pequena variação de f pode corresponder a grande variação de x se o declive for pequeno.",
+      "hyp": "Pode equiparar erro em y a erro em x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-030",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para garantir erro do ponto médio ≤10^{-3}, basta ter amplitude final...",
+      "o": [
+        "≤10^{-3}.",
+        "≤2×10^{-3}.",
+        "≤10^{-2}.",
+        "≤5×10^{-3}."
+      ],
+      "a": 1,
+      "sol": "Erro≤L/2.",
+      "hyp": "Pode esquecer multiplicar o erro alvo por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:erro-alvo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-031",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com amplitude inicial1, quantas bisseções garantem amplitude≤1/1000?",
+      "o": [
+        "9.",
+        "1000.",
+        "10.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "2^{10}=1024≥1000, enquanto2^9=512.",
+      "hyp": "Pode usar log10 em vez de log2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:iteracoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-032",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com amplitude inicial10, para obter amplitude≤0,01 precisamos de n tal que...",
+      "o": [
+        "n≥1000.",
+        "2n≥1000.",
+        "10^n≥2.",
+        "2^n≥1000."
+      ],
+      "a": 3,
+      "sol": "10/2^n≤0,01 =>2^n≥1000.",
+      "hyp": "Pode transformar a desigualdade incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:iteracoes-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-033",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O número de iterações cresce aproximadamente de forma...",
+      "o": [
+        "logarítmica com a precisão inversa.",
+        "linear com o número de casas decimais em base10 exatamente.",
+        "quadrática.",
+        "exponencial."
+      ],
+      "a": 0,
+      "sol": "n≈log2(L0/ε).",
+      "hyp": "Pode confundir redução exponencial do erro com crescimento exponencial das iterações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:complexidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-034",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se após n iterações o intervalo é [a_n,b_n], então a raiz garantida satisfaz...",
+      "o": [
+        "α=(a_n+b_n)/2 exatamente.",
+        "a_n≤α≤b_n.",
+        "α=a_n.",
+        "α=b_n."
+      ],
+      "a": 1,
+      "sol": "O método fornece confinamento intervalar.",
+      "hyp": "Pode tomar a aproximação como igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:confinamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-035",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Os intervalos produzidos pela bisseção são...",
+      "o": [
+        "disjuntos.",
+        "sempre centrados na raiz.",
+        "encaixados: cada um está contido no anterior.",
+        "de amplitude constante."
+      ],
+      "a": 2,
+      "sol": "Cada novo intervalo é uma das metades do anterior.",
+      "hyp": "Pode pensar que o centro é a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:intervalos-encaixados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-036",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "As amplitudes dos intervalos da bisseção tendem para...",
+      "o": [
+        "1.",
+        "a raiz.",
+        "+∞.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "L_n=L0/2^n→0.",
+      "hyp": "Pode confundir amplitude com localização da raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:convergencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-037",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=cosx−x em [0,1], o primeiro ponto médio é0,5 e f(0,5)>0. Como f(1)<0, o novo intervalo é...",
+      "o": [
+        "[0,5,1].",
+        "[0,0,5].",
+        "[0,25,0,5].",
+        "[0,1]."
+      ],
+      "a": 0,
+      "sol": "A mudança de sinal fica entre0,5 e1.",
+      "hyp": "Pode escolher o lado com sinais positivos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:cos-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-038",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se depois f(0,75)<0, o intervalo seguinte é...",
+      "o": [
+        "[0,75,1].",
+        "[0,5,0,75].",
+        "[0,625,0,75].",
+        "[0,0,5]."
+      ],
+      "a": 1,
+      "sol": "f(0,5)>0 e f(0,75)<0.",
+      "hyp": "Pode escolher a metade errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:cos-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-039",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Após essas duas bisseções, a amplitude do intervalo é...",
+      "o": [
+        "0,5.",
+        "0,125.",
+        "0,25.",
+        "0,75."
+      ],
+      "a": 2,
+      "sol": "Começou com amplitude1 e foi dividida duas vezes.",
+      "hyp": "Pode contar uma só divisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-040",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se queremos arredondar uma raiz às 3 casas decimais com segurança pelo ponto médio, um critério simples é erro máximo <...",
+      "o": [
+        "0,001.",
+        "0,005.",
+        "0,01.",
+        "0,0005."
+      ],
+      "a": 3,
+      "sol": "Metade de uma unidade na 3.ª casa decimal é0,0005.",
+      "hyp": "Pode usar uma unidade inteira da última casa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-041",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para erro máximo <0,0005, basta amplitude final <...",
+      "o": [
+        "0,001.",
+        "0,0005.",
+        "0,005.",
+        "0,01."
+      ],
+      "a": 0,
+      "sol": "Erro máximo do ponto médio é L/2.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-042",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a função não muda de sinal no intervalo inicial, a bisseção clássica baseada em Bolzano...",
+      "o": [
+        "funciona sempre igual.",
+        "não tem a sua garantia habitual.",
+        "encontra automaticamente raízes duplas.",
+        "usa a derivada para compensar."
+      ],
+      "a": 1,
+      "sol": "O invariante de mudança de sinal deixa de estar disponível.",
+      "hyp": "Pode achar que qualquer intervalo serve.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:sem-bracket",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-043",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma raiz de multiplicidade par pode ser difícil de detetar por bisseção porque...",
+      "o": [
+        "a derivada nunca existe.",
+        "a raiz é complexa.",
+        "a função pode tocar zero sem mudar de sinal.",
+        "o intervalo tem amplitude zero."
+      ],
+      "a": 2,
+      "sol": "Uma raiz par não implica mudança de sinal.",
+      "hyp": "Pode pensar que todas as raízes cruzam o eixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:raiz-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-044",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Exemplo",
+      "q": "Para f(x)=(x−1)², f(0)>0 e f(2)>0 apesar de haver raiz em1. Isto mostra que...",
+      "o": [
+        "Bolzano é falso.",
+        "a função é descontínua.",
+        "a raiz não é real.",
+        "a condição de mudança de sinal é suficiente, mas não necessária para existir raiz."
+      ],
+      "a": 3,
+      "sol": "Há raiz sem sinais opostos nos extremos.",
+      "hyp": "Pode tratar a condição como necessária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:raiz-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-045",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se a amplitude inicial é5 e queremos amplitude≤0,005, precisamos de n com...",
+      "o": [
+        "2^n≥1000.",
+        "n≥1000.",
+        "2^n≥100.",
+        "5^n≥2."
+      ],
+      "a": 0,
+      "sol": "5/2^n≤0,005 =>2^n≥1000.",
+      "hyp": "Pode dividir os dois lados incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:iteracoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-046",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Assim, no item anterior, n=10 é suficiente porque...",
+      "o": [
+        "5/10=0,5.",
+        "5/1024<0,005.",
+        "5/1000=0,005 é a fórmula da bisseção.",
+        "2^{10}=100."
+      ],
+      "a": 1,
+      "sol": "A amplitude após10 passos é5/1024≈0,00488.",
+      "hyp": "Pode usar divisão por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:iteracoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-047",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num problema de equilíbrio, a bisseção é especialmente adequada quando...",
+      "o": [
+        "a derivada é impossível e também não podemos avaliar a função.",
+        "já conhecemos a raiz exata.",
+        "conseguimos avaliar a função e encontrar dois valores com sinais opostos, mesmo sem solução fechada.",
+        "o modelo é descontínuo no intervalo."
+      ],
+      "a": 2,
+      "sol": "A bisseção precisa essencialmente de avaliações de sinal e continuidade.",
+      "hyp": "Pode pensar que exige derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-048",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Comparada com Newton, a bisseção normalmente tem...",
+      "o": [
+        "sempre convergência mais rápida.",
+        "necessidade de derivada.",
+        "nenhum controlo de erro.",
+        "garantia mais robusta sob hipóteses simples, mas convergência mais lenta."
+      ],
+      "a": 3,
+      "sol": "O bracket fornece robustez e o erro reduz-se linearmente por fator1/2.",
+      "hyp": "Pode inverter as características dos métodos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:comparacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-049",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma implementação correta da bisseção deve preservar em cada iteração...",
+      "o": [
+        "a mudança de sinal entre os extremos, salvo raiz exata num extremo/meio.",
+        "o mesmo ponto médio.",
+        "a mesma amplitude.",
+        "o mesmo valor de f."
+      ],
+      "a": 0,
+      "sol": "Esse é o invariante que sustenta a garantia de raiz.",
+      "hyp": "Pode atualizar extremos sem verificar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:invariante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BIS-050",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bissecao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se um parâmetro p resolve F(p)=0 e a bisseção termina com [2,34;2,35], uma comunicação rigorosa é...",
+      "o": [
+        "'a raiz é exatamente2,345'.",
+        "'a raiz está localizada entre2,34 e2,35'.",
+        "'p=2,35 com erro zero'.",
+        "'F é linear'."
+      ],
+      "a": 1,
+      "sol": "O método fornece um intervalo e, opcionalmente, uma aproximação com erro declarado.",
+      "hyp": "Pode apresentar o ponto médio como valor exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bissecao:comunicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
