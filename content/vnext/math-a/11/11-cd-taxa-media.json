@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matematica A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-taxa-media",
+  "subtopic": "Taxa media de variacao",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteudo original A+. Trabalha taxa media de variacao, declive de secantes, sinais, unidades, funcoes afins/quadraticas e modelacao. Nao ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CD-TM-001",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A taxa media de variacao de f entre a e b e",
+      "o": [
+        "(f(b)-f(a))/(b-a)",
+        "(f(a)+f(b))/2",
+        "f(b)-f(a)",
+        "(b-a)/(f(b)-f(a))"
+      ],
+      "a": 0,
+      "sol": "E a variacao da funcao por unidade de variacao da variavel.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-002",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Geometricamente, a taxa media de variacao entre dois pontos do grafico e",
+      "o": [
+        "o declive da tangente no primeiro ponto",
+        "o declive da reta secante",
+        "a area sob o grafico",
+        "a ordenada media"
+      ],
+      "a": 1,
+      "sol": "A secante passa pelos dois pontos considerados.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-003",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f mede distancia em km e t mede tempo em horas, a taxa media tem unidades",
+      "o": [
+        "km.h",
+        "h/km",
+        "km/h",
+        "km"
+      ],
+      "a": 2,
+      "sol": "As unidades da taxa sao unidades de saida por unidades de entrada.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-004",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f(b)=f(a) e a e diferente de b, a taxa media e",
+      "o": [
+        "1",
+        "indefinida",
+        "b-a",
+        "0"
+      ],
+      "a": 3,
+      "sol": "O numerador da razao incremental e zero.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-005",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Numa funcao afim f(x)=mx+b, a taxa media em qualquer intervalo e",
+      "o": [
+        "m",
+        "b",
+        "m+b",
+        "dependente do intervalo"
+      ],
+      "a": 0,
+      "sol": "A taxa de variacao de uma funcao afim e constante.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-006",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Uma taxa media positiva em [a,b], com b>a, garante que",
+      "o": [
+        "f e crescente em todos os pontos",
+        "f(b)>f(a)",
+        "f(b)<f(a)",
+        "f e sempre positiva"
+      ],
+      "a": 1,
+      "sol": "A variacao total e positiva, mas isso nao garante monotonia interna.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-007",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Uma taxa media negativa em [a,b], com b>a, garante que",
+      "o": [
+        "f e decrescente em todos os pontos",
+        "f(b)>f(a)",
+        "f(b)<f(a)",
+        "f e negativa em todo o intervalo"
+      ],
+      "a": 2,
+      "sol": "A variacao total e negativa.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-008",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Uma taxa media nula entre a e b",
+      "o": [
+        "implica sempre que f e constante",
+        "implica a=b",
+        "implica que f nao e continua",
+        "nao implica que f seja constante entre a e b"
+      ],
+      "a": 3,
+      "sol": "A funcao pode variar e regressar ao mesmo valor.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-009",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Para comparar variacoes em intervalos de amplitudes diferentes devemos",
+      "o": [
+        "dividir a variacao de f pela variacao de x",
+        "comparar apenas f(b)-f(a)",
+        "usar a media de f(a) e f(b)",
+        "ignorar o comprimento do intervalo"
+      ],
+      "a": 0,
+      "sol": "A divisao por b-a normaliza a variacao.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-010",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A taxa media de variacao corresponde a",
+      "o": [
+        "uma derivada em todos os casos",
+        "uma taxa media, nao necessariamente a uma taxa instantanea",
+        "um valor da funcao",
+        "uma area"
+      ],
+      "a": 1,
+      "sol": "Taxa media e taxa instantanea sao conceitos distintos.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:conceito:10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-011",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=1 e x=3?",
+      "o": [
+        "5",
+        "3",
+        "4",
+        "8"
+      ],
+      "a": 2,
+      "sol": "(9-1)/(3-1)=4.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-012",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=2 e x=5?",
+      "o": [
+        "8",
+        "6",
+        "21",
+        "7"
+      ],
+      "a": 3,
+      "sol": "(25-4)/(5-2)=7.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-013",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=0 e x=4?",
+      "o": [
+        "4",
+        "5",
+        "3",
+        "16"
+      ],
+      "a": 0,
+      "sol": "(16-0)/(4-0)=4.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-014",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=-2 e x=1?",
+      "o": [
+        "0",
+        "-1",
+        "-2",
+        "-3"
+      ],
+      "a": 1,
+      "sol": "(1-4)/(1--2)=-1.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-015",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=3 e x=6?",
+      "o": [
+        "10",
+        "8",
+        "9",
+        "27"
+      ],
+      "a": 2,
+      "sol": "(36-9)/(6-3)=9.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-016",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=1 e x=4?",
+      "o": [
+        "6",
+        "4",
+        "15",
+        "5"
+      ],
+      "a": 3,
+      "sol": "(16-1)/(4-1)=5.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-017",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=-1 e x=2?",
+      "o": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "a": 0,
+      "sol": "(4-1)/(2--1)=1.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-018",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=2 e x=4?",
+      "o": [
+        "7",
+        "6",
+        "5",
+        "12"
+      ],
+      "a": 1,
+      "sol": "(16-4)/(4-2)=6.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-019",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=0 e x=5?",
+      "o": [
+        "6",
+        "4",
+        "5",
+        "25"
+      ],
+      "a": 2,
+      "sol": "(25-0)/(5-0)=5.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-020",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=-3 e x=1?",
+      "o": [
+        "-1",
+        "-3",
+        "-8",
+        "-2"
+      ],
+      "a": 3,
+      "sol": "(1-9)/(1--3)=-2.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:quadratica:20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-021",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=2x+(3), qual e a taxa media de variacao entre x=1 e x=5?",
+      "o": [
+        "2",
+        "3",
+        "1",
+        "3"
+      ],
+      "a": 0,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 2.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-022",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-3x+(7), qual e a taxa media de variacao entre x=-2 e x=4?",
+      "o": [
+        "-2",
+        "-3",
+        "-4",
+        "7"
+      ],
+      "a": 1,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive -3.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-023",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=5x+(-1), qual e a taxa media de variacao entre x=0 e x=3?",
+      "o": [
+        "6",
+        "4",
+        "5",
+        "-1"
+      ],
+      "a": 2,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 5.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-024",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=1x+(4), qual e a taxa media de variacao entre x=2 e x=8?",
+      "o": [
+        "2",
+        "0",
+        "4",
+        "1"
+      ],
+      "a": 3,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 1.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-025",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-2x+(6), qual e a taxa media de variacao entre x=1 e x=7?",
+      "o": [
+        "-2",
+        "-1",
+        "-3",
+        "6"
+      ],
+      "a": 0,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive -2.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-026",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=4x+(0), qual e a taxa media de variacao entre x=-1 e x=2?",
+      "o": [
+        "5",
+        "4",
+        "3",
+        "0"
+      ],
+      "a": 1,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 4.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-027",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=3x+(-5), qual e a taxa media de variacao entre x=2 e x=9?",
+      "o": [
+        "4",
+        "2",
+        "3",
+        "-5"
+      ],
+      "a": 2,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 3.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-028",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-1x+(2), qual e a taxa media de variacao entre x=-3 e x=5?",
+      "o": [
+        "0",
+        "-2",
+        "2",
+        "-1"
+      ],
+      "a": 3,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive -1.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-029",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=6x+(1), qual e a taxa media de variacao entre x=0 e x=4?",
+      "o": [
+        "6",
+        "7",
+        "5",
+        "1"
+      ],
+      "a": 0,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 6.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-030",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=0.5x+(3), qual e a taxa media de variacao entre x=2 e x=10?",
+      "o": [
+        "1.5",
+        "0.5",
+        "-0.5",
+        "3"
+      ],
+      "a": 1,
+      "sol": "Por ser afim, a taxa media e constante e igual ao declive 0.5.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:linear:30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-031",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "8",
+        "2",
+        "2",
+        "3"
+      ],
+      "a": 2,
+      "sol": "(20-12)/4=2 graus por hora.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-032",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "60",
+        "20",
+        "21",
+        "20"
+      ],
+      "a": 3,
+      "sol": "(160-100)/3=20 litros por minuto.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-033",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de populacao passa de 500 para 620 em 6 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "20",
+        "120",
+        "20",
+        "21"
+      ],
+      "a": 0,
+      "sol": "(620-500)/6=20 individuos por ano.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-034",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de posicao passa de 10 para -2 em 4 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "-12",
+        "-3",
+        "3",
+        "-2"
+      ],
+      "a": 1,
+      "sol": "(-2-10)/4=-3 metros por segundo.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-035",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de preco passa de 30 para 24 em 2 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "-6",
+        "3",
+        "-3",
+        "-2"
+      ],
+      "a": 2,
+      "sol": "(24-30)/2=-3 euros por mes.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-036",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de distancia passa de 80 para 140 em 5 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "60",
+        "12",
+        "13",
+        "12"
+      ],
+      "a": 3,
+      "sol": "(140-80)/5=12 km por hora.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-037",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de saldo passa de 200 para 155 em 9 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "-5",
+        "-45",
+        "5",
+        "-4"
+      ],
+      "a": 0,
+      "sol": "(155-200)/9=-5 euros por periodo.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-038",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de altura passa de 7 para 22 em 3 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "15",
+        "5",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "sol": "(22-7)/3=5 metros por segundo.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-039",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de producao passa de 50 para 110 em 4 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "60",
+        "15",
+        "15",
+        "16"
+      ],
+      "a": 2,
+      "sol": "(110-50)/4=15 unidades por dia.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-040",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma grandeza de massa passa de 300 para 240 em 12 unidades de tempo. Qual e a taxa media?",
+      "o": [
+        "-60",
+        "5",
+        "-4",
+        "-5"
+      ],
+      "a": 3,
+      "sol": "(240-300)/12=-5 kg por hora.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:modelacao:40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-041",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(1)=5 e a taxa media em [1,4] e 3, quanto vale f(4)?",
+      "o": [
+        "14",
+        "15",
+        "13",
+        "8"
+      ],
+      "a": 0,
+      "sol": "[f(4)-5]/(4-1)=3, logo f(4)=14.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-042",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(0)=2 e a taxa media em [0,5] e 4, quanto vale f(5)?",
+      "o": [
+        "23",
+        "22",
+        "21",
+        "6"
+      ],
+      "a": 1,
+      "sol": "[f(5)-2]/(5-0)=4, logo f(5)=22.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-043",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(2)=7 e a taxa media em [2,6] e -1, quanto vale f(6)?",
+      "o": [
+        "4",
+        "2",
+        "3",
+        "6"
+      ],
+      "a": 2,
+      "sol": "[f(6)-7]/(6-2)=-1, logo f(6)=3.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-044",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(-1)=3 e a taxa media em [-1,3] e 2, quanto vale f(3)?",
+      "o": [
+        "12",
+        "10",
+        "5",
+        "11"
+      ],
+      "a": 3,
+      "sol": "[f(3)-3]/(3--1)=2, logo f(3)=11.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-045",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(4)=10 e a taxa media em [4,7] e 5, quanto vale f(7)?",
+      "o": [
+        "25",
+        "26",
+        "24",
+        "15"
+      ],
+      "a": 0,
+      "sol": "[f(7)-10]/(7-4)=5, logo f(7)=25.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-046",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(0)=-2 e a taxa media em [0,2] e 6, quanto vale f(2)?",
+      "o": [
+        "11",
+        "10",
+        "9",
+        "4"
+      ],
+      "a": 1,
+      "sol": "[f(2)--2]/(2-0)=6, logo f(2)=10.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-047",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(3)=8 e a taxa media em [3,5] e -2, quanto vale f(5)?",
+      "o": [
+        "5",
+        "3",
+        "4",
+        "6"
+      ],
+      "a": 2,
+      "sol": "[f(5)-8]/(5-3)=-2, logo f(5)=4.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-048",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(1)=1 e a taxa media em [1,3] e 7, quanto vale f(3)?",
+      "o": [
+        "16",
+        "14",
+        "8",
+        "15"
+      ],
+      "a": 3,
+      "sol": "[f(3)-1]/(3-1)=7, logo f(3)=15.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-049",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(2)=4 e a taxa media em [2,8] e 0.5, quanto vale f(8)?",
+      "o": [
+        "7",
+        "8",
+        "6",
+        "4.5"
+      ],
+      "a": 0,
+      "sol": "[f(8)-4]/(8-2)=0.5, logo f(8)=7.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TM-050",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-taxa-media",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f(-2)=6 e a taxa media em [-2,2] e 3, quanto vale f(2)?",
+      "o": [
+        "19",
+        "18",
+        "17",
+        "9"
+      ],
+      "a": 1,
+      "sol": "[f(2)-6]/(2--2)=3, logo f(2)=18.",
+      "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-taxa-media:inversa:50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
