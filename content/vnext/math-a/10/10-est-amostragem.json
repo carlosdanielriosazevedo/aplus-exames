@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-est",
+  "subtopicId": "10-est-amostragem",
+  "subtopic": "Amostragem, representatividade e enviesamento",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha amostragem aleatória, estratificada, sistemática, conglomerados, conveniência, cobertura e não resposta. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10EST-AMO-001",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma amostra é representativa quando...",
+      "o": [
+        "reflete de forma razoável características relevantes da população.",
+        "é sempre muito pequena.",
+        "contém apenas voluntários.",
+        "tem exatamente 100 elementos."
+      ],
+      "a": 0,
+      "sol": "Uma amostra representativa procura refletir a diversidade relevante da população.",
+      "hyp": "Pode confundir representatividade com tamanho fixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:representatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-002",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O que é enviesamento de seleção?",
+      "o": [
+        "Uma média diferente de zero.",
+        "Um erro sistemático introduzido pelo modo como os elementos são escolhidos.",
+        "Uma amostra grande.",
+        "Uma tabela mal desenhada."
+      ],
+      "a": 1,
+      "sol": "O enviesamento de seleção surge quando o processo de escolha favorece certos elementos e prejudica outros.",
+      "hyp": "Pode tratar enviesamento como simples erro aleatório.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:enviesamento-selecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-003",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Qual método tende a reduzir enviesamento de seleção numa população bem definida?",
+      "o": [
+        "Escolher apenas amigos.",
+        "Escolher apenas os primeiros da lista.",
+        "Seleção aleatória adequada.",
+        "Aceitar apenas voluntários muito motivados."
+      ],
+      "a": 2,
+      "sol": "A seleção aleatória dá oportunidades de seleção mais equilibradas aos elementos.",
+      "hyp": "Pode confundir conveniência com aleatoriedade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:aleatoria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-004",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma escola quer estudar hábitos de estudo e inquiriu apenas alunos da biblioteca. Qual é o principal risco?",
+      "o": [
+        "A variável deixa de existir.",
+        "A população fica igual à biblioteca.",
+        "O estudo torna-se um censo.",
+        "A amostra pode sobre-representar alunos com hábitos de estudo mais intensos."
+      ],
+      "a": 3,
+      "sol": "Escolher apenas utilizadores da biblioteca pode distorcer os hábitos médios da escola.",
+      "hyp": "Pode ignorar diferenças entre o local de seleção e a população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:conveniencia-enviesada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-005",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Para estudar a satisfação de clientes de uma loja, qual amostra é claramente de conveniência?",
+      "o": [
+        "Perguntar aos 20 primeiros clientes que entram de manhã.",
+        "Sortear clientes ao longo de vários dias.",
+        "Selecionar aleatoriamente códigos de compra.",
+        "Usar amostragem estratificada por período do dia."
+      ],
+      "a": 0,
+      "sol": "Os primeiros clientes da manhã são escolhidos por facilidade, não por um mecanismo probabilístico.",
+      "hyp": "Pode confundir rapidez com representatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:conveniencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-006",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra muito grande, mas escolhida apenas num único bairro, garante representatividade de toda a cidade?",
+      "o": [
+        "Sim, sempre.",
+        "Não.",
+        "Sim, se tiver mais de 1000 pessoas.",
+        "Só se o bairro for o maior."
+      ],
+      "a": 1,
+      "sol": "Tamanho não corrige necessariamente uma seleção sistematicamente limitada.",
+      "hyp": "Pode confundir dimensão com representatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:tamanho-nao-basta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-007",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O que caracteriza uma amostra aleatória simples, num modelo introdutório?",
+      "o": [
+        "Escolhem-se os mais fáceis de contactar.",
+        "Escolhem-se apenas voluntários.",
+        "Cada elemento tem a mesma oportunidade de ser selecionado.",
+        "Escolhe-se exatamente metade da população."
+      ],
+      "a": 2,
+      "sol": "A ideia central é igualdade de oportunidade de seleção, segundo o mecanismo definido.",
+      "hyp": "Pode confundir aleatoriedade com escolha informal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:aleatoria-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-008",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma população tem alunos do 10.º, 11.º e 12.º. Para garantir presença dos três anos, uma estratégia útil é...",
+      "o": [
+        "escolher apenas o 12.º ano.",
+        "escolher só a primeira turma disponível.",
+        "inquirir apenas alunos voluntários.",
+        "amostragem estratificada por ano."
+      ],
+      "a": 3,
+      "sol": "Estratificar permite assegurar representação de subgrupos relevantes.",
+      "hyp": "Pode ignorar grupos importantes da população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-009",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Na amostragem estratificada, a população é primeiro...",
+      "o": [
+        "dividida em grupos relevantes, escolhendo-se depois elementos de cada grupo.",
+        "ordenada alfabeticamente e truncada.",
+        "reduzida ao grupo maior.",
+        "substituída por voluntários."
+      ],
+      "a": 0,
+      "sol": "Os estratos são subgrupos definidos por características relevantes.",
+      "hyp": "Pode confundir estratos com amostras de conveniência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-010",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma escola tem 60% de alunos do sexo feminino e 40% masculino. Numa amostra proporcional de 100 alunos, quantos de cada grupo seriam escolhidos?",
+      "o": [
+        "50 e 50",
+        "60 e 40",
+        "70 e 30",
+        "80 e 20"
+      ],
+      "a": 1,
+      "sol": "Uma amostra proporcional preserva as proporções da população: 60 e 40.",
+      "hyp": "Pode impor igualdade em vez de proporcionalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-011",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma população tem 30% de alunos do 10.º ano, 35% do 11.º e 35% do 12.º. Numa amostra proporcional de 200, quantos devem vir do 10.º?",
+      "o": [
+        "30",
+        "40",
+        "60",
+        "70"
+      ],
+      "a": 2,
+      "sol": "30% de 200=60.",
+      "hyp": "Pode aplicar 30% à população em vez da amostra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-012",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra proporcional de 200, se um estrato representa 25% da população, quantos elementos desse estrato são esperados?",
+      "o": [
+        "25",
+        "40",
+        "75",
+        "50"
+      ],
+      "a": 3,
+      "sol": "25% de 200=50.",
+      "hyp": "Pode confundir percentagem com número absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-013",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual é uma vantagem de estratificar por uma característica fortemente relacionada com a variável estudada?",
+      "o": [
+        "Ajuda a garantir representação dos diferentes subgrupos.",
+        "Elimina automaticamente todo o erro.",
+        "Dispensa qualquer seleção dentro dos estratos.",
+        "Torna a população menor."
+      ],
+      "a": 0,
+      "sol": "A estratificação pode melhorar cobertura de subgrupos importantes.",
+      "hyp": "Pode sobrestimar a capacidade da estratificação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-vantagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-014",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Amostragem sistemática significa, tipicamente...",
+      "o": [
+        "escolher apenas voluntários.",
+        "escolher elementos segundo um intervalo regular após um início definido.",
+        "escolher um bairro inteiro.",
+        "sortear apenas um elemento."
+      ],
+      "a": 1,
+      "sol": "Num esquema sistemático seleciona-se, por exemplo, cada k-ésimo elemento após um início apropriado.",
+      "hyp": "Pode confundir sistemática com conveniência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:sistematica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-015",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa lista de 1 000 clientes quer-se uma amostra sistemática de cerca de 100. Um intervalo natural é...",
+      "o": [
+        "5",
+        "20",
+        "10",
+        "100"
+      ],
+      "a": 2,
+      "sol": "1000/100=10, logo escolher aproximadamente cada 10.º elemento.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:sistematica-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-016",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual risco existe na amostragem sistemática se a lista tiver uma periodicidade relacionada com o intervalo escolhido?",
+      "o": [
+        "A amostra torna-se aleatória simples automaticamente.",
+        "O tamanho da amostra duplica.",
+        "A variável torna-se qualitativa.",
+        "Pode surgir enviesamento por sincronização com o padrão da lista."
+      ],
+      "a": 3,
+      "sol": "Uma periodicidade coincidente com o passo pode selecionar sempre elementos semelhantes.",
+      "hyp": "Pode ignorar estrutura da lista.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:sistematica-periodicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-017",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O que caracteriza uma amostra por conglomerados?",
+      "o": [
+        "Selecionam-se grupos inteiros naturais da população.",
+        "Selecionam-se apenas os indivíduos com maior valor da variável.",
+        "Escolhe-se sempre um elemento de cada grupo.",
+        "Ordena-se a população pela média."
+      ],
+      "a": 0,
+      "sol": "Conglomerados são grupos naturais, como turmas ou bairros, que podem ser selecionados como unidades.",
+      "hyp": "Pode confundir conglomerados com estratos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:conglomerados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-018",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual diferença essencial entre estratos e conglomerados, em linguagem introdutória?",
+      "o": [
+        "São exatamente iguais.",
+        "Na estratificada procura-se representar todos os estratos; em conglomerados podem selecionar-se apenas alguns grupos inteiros.",
+        "Estratos só existem em populações pequenas.",
+        "Conglomerados exigem sempre censo nacional."
+      ],
+      "a": 1,
+      "sol": "A lógica de seleção difere: estratos garantem cobertura; conglomerados usam grupos como unidades de seleção.",
+      "hyp": "Pode tratar técnicas distintas como equivalentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratos-vs-conglomerados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-019",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma cidade seleciona aleatoriamente 5 escolas e inquiri todos os alunos dessas 5 escolas. Isto aproxima-se de...",
+      "o": [
+        "amostragem estratificada proporcional.",
+        "amostra de conveniência.",
+        "amostragem por conglomerados.",
+        "censo."
+      ],
+      "a": 2,
+      "sol": "As escolas funcionam como conglomerados selecionados e depois totalmente observados.",
+      "hyp": "Pode confundir grupo inteiro com estrato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:conglomerados-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-020",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma sondagem online aberta em que responde quem quiser sofre sobretudo risco de...",
+      "o": [
+        "ausência de variável.",
+        "excesso de população.",
+        "censo obrigatório.",
+        "enviesamento de auto-seleção."
+      ],
+      "a": 3,
+      "sol": "Quem decide responder pode diferir sistematicamente de quem não responde.",
+      "hyp": "Pode achar que muitos voluntários eliminam enviesamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:auto-selecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-021",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um questionário sobre atividade física é divulgado apenas num ginásio. Qual conclusão é mais rigorosa?",
+      "o": [
+        "A amostra pode sobrestimar níveis de atividade física da população geral.",
+        "A amostra é necessariamente aleatória.",
+        "O tamanho do ginásio torna o estudo um censo.",
+        "Não existe qualquer risco de enviesamento."
+      ],
+      "a": 0,
+      "sol": "O local de recolha favorece pessoas mais ativas do que a média populacional.",
+      "hyp": "Pode ignorar o contexto de seleção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:conveniencia-enviesada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-022",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma escola envia questionário a todos os alunos, mas só 15% responde. Qual risco permanece?",
+      "o": [
+        "Nenhum, porque todos receberam o questionário.",
+        "Enviesamento de não resposta.",
+        "A população desaparece.",
+        "A amostra passa a ser censo."
+      ],
+      "a": 1,
+      "sol": "Respondentes e não respondentes podem diferir sistematicamente.",
+      "hyp": "Pode confundir convite universal com resposta universal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:nao-resposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-023",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Enviesamento de não resposta ocorre quando...",
+      "o": [
+        "a amostra é demasiado grande.",
+        "todos os elementos respondem.",
+        "quem não responde difere de forma relevante de quem responde.",
+        "a variável é contínua."
+      ],
+      "a": 2,
+      "sol": "Se a propensão a responder se relaciona com o fenómeno estudado, a amostra observada pode ficar distorcida.",
+      "hyp": "Pode tratar ausência de respostas como mera redução de tamanho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:nao-resposta-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-024",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Qual medida pode ajudar a reduzir não resposta?",
+      "o": [
+        "Eliminar aleatoriamente respostas válidas.",
+        "Perguntar apenas a voluntários.",
+        "Reduzir a população.",
+        "Recontactar selecionados e facilitar formas de resposta."
+      ],
+      "a": 3,
+      "sol": "Melhorar a taxa de resposta pode reduzir diferenças entre selecionados e respondentes.",
+      "hyp": "Pode procurar soluções que aumentam conveniência mas pioram cobertura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:reduzir-nao-resposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-025",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma população tem 800 alunos: 320 do 10.º, 240 do 11.º e 240 do 12.º. Numa amostra proporcional de 100, quantos do 11.º?",
+      "o": [
+        "30",
+        "24",
+        "32",
+        "40"
+      ],
+      "a": 0,
+      "sol": "240/800=30%; 30% de 100=30.",
+      "hyp": "Pode errar a proporção do estrato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-026",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na mesma população de 800 alunos, quantos do 10.º entram numa amostra proporcional de 150?",
+      "o": [
+        "50",
+        "60",
+        "70",
+        "80"
+      ],
+      "a": 1,
+      "sol": "320/800=40%; 40% de 150=60.",
+      "hyp": "Pode usar o número bruto do estrato sem converter em proporção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-027",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma amostra proporcional de 200 tem 50 elementos de certo estrato. Que percentagem da população esse estrato representa, assumindo proporcionalidade exata?",
+      "o": [
+        "20%",
+        "30%",
+        "25%",
+        "40%"
+      ],
+      "a": 2,
+      "sol": "50/200=25%.",
+      "hyp": "Pode dividir 200 por 50.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:inferir-proporcao-estrato",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-028",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma população tem dois estratos na razão 3:2. Numa amostra proporcional de 150, quantos elementos vêm do maior estrato?",
+      "o": [
+        "60",
+        "75",
+        "100",
+        "90"
+      ],
+      "a": 3,
+      "sol": "3/(3+2)=60%; 60% de 150=90.",
+      "hyp": "Pode interpretar a razão como diferença absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-029",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra aleatória simples pode, por acaso, ficar desequilibrada entre subgrupos pequenos?",
+      "o": [
+        "Sim.",
+        "Não, nunca.",
+        "Só se houver erro de cálculo.",
+        "Só em censos."
+      ],
+      "a": 0,
+      "sol": "Aleatoriedade não garante composição exata em cada amostra; apenas define o mecanismo de seleção.",
+      "hyp": "Pode confundir aleatoriedade com proporcionalidade exata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:aleatoria-variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-030",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se é essencial garantir presença suficiente de um subgrupo raro, qual método pode ser preferível a uma aleatória simples?",
+      "o": [
+        "Conveniência.",
+        "Estratificada.",
+        "Voluntária.",
+        "Apenas sistemática sem considerar subgrupos."
+      ],
+      "a": 1,
+      "sol": "Estratificar permite controlar o número selecionado em cada subgrupo.",
+      "hyp": "Pode achar que qualquer amostragem aleatória garante tamanho adequado em grupos raros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-grupo-raro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-031",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra de conveniência pode ser útil para exploração inicial, mas qual limitação deve ser reconhecida?",
+      "o": [
+        "Nunca produz dados.",
+        "É sempre maior que a população.",
+        "As conclusões para a população podem ser frágeis por falta de representatividade.",
+        "Não pode conter números."
+      ],
+      "a": 2,
+      "sol": "Conveniência pode gerar dados úteis localmente, mas não sustenta automaticamente generalizações populacionais.",
+      "hyp": "Pode rejeitar totalmente dados de conveniência ou generalizá-los sem cautela.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:conveniencia-limitacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-032",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma sondagem pretende estimar opinião de todos os residentes, mas usa apenas telefones fixos. Qual tipo de problema pode surgir?",
+      "o": [
+        "Excesso de aleatoriedade.",
+        "Censo.",
+        "Ausência de variável.",
+        "Subcobertura de pessoas sem telefone fixo."
+      ],
+      "a": 3,
+      "sol": "Parte da população tem menor ou nenhuma probabilidade de ser incluída.",
+      "hyp": "Pode não reconhecer falhas da moldura amostral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:subcobertura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-033",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O que é uma moldura amostral, em termos simples?",
+      "o": [
+        "A lista ou mecanismo que identifica elementos disponíveis para seleção.",
+        "Um gráfico de barras.",
+        "A média populacional.",
+        "O questionário respondido."
+      ],
+      "a": 0,
+      "sol": "A moldura amostral operacionaliza quem pode ser selecionado.",
+      "hyp": "Pode confundir instrumento de seleção com instrumento de medição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:moldura-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-034",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se a moldura amostral omitir sistematicamente um grupo da população, ocorre risco de...",
+      "o": [
+        "superpopulação automática.",
+        "subcobertura.",
+        "censo.",
+        "variável constante."
+      ],
+      "a": 1,
+      "sol": "Esse grupo fica sub-representado ou impossível de selecionar.",
+      "hyp": "Pode não relacionar cobertura da moldura com representatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:subcobertura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-035",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma boa amostra deve ser escolhida antes de conhecer os valores da variável de interesse sempre que possível porque...",
+      "o": [
+        "os valores deixam de existir depois.",
+        "a média só funciona com seleção prévia.",
+        "escolher com base nos valores pode introduzir enviesamento.",
+        "amostras posteriores são sempre censos."
+      ],
+      "a": 2,
+      "sol": "Selecionar elementos porque têm certos valores pode distorcer a distribuição observada.",
+      "hyp": "Pode escolher dados 'interessantes' e achar que continuam representativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:selecao-baseada-no-resultado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-036",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma população tem 1 200 pessoas. Seleciona-se sistematicamente cada 20.ª pessoa após um início adequado. Aproximadamente quantas entram na amostra?",
+      "o": [
+        "40",
+        "50",
+        "80",
+        "60"
+      ],
+      "a": 3,
+      "sol": "1200/20=60.",
+      "hyp": "Pode multiplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:sistematica-tamanho",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-037",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quer-se uma amostra sistemática de 80 elementos numa lista de 1 600. Qual passo aproximado usar?",
+      "o": [
+        "20",
+        "10",
+        "40",
+        "80"
+      ],
+      "a": 0,
+      "sol": "1600/80=20.",
+      "hyp": "Pode usar o tamanho da amostra como passo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:sistematica-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-038",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma lista está ordenada por uma variável muito relacionada com o estudo, escolher um bloco consecutivo dessa lista é uma boa aproximação a aleatória simples?",
+      "o": [
+        "Sim, sempre.",
+        "Não; pode concentrar valores semelhantes.",
+        "Sim, porque a lista já está organizada.",
+        "Só se o bloco tiver 10 elementos."
+      ],
+      "a": 1,
+      "sol": "Um bloco consecutivo numa lista ordenada pode ser muito pouco diverso.",
+      "hyp": "Pode confundir organização da lista com aleatoriedade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:bloco-consecutivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-039",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma população tem 70% de grupo A e 30% de grupo B. Uma amostra estratificada deliberadamente escolhe 50 A e 50 B para comparar os grupos. Esta amostra é proporcional à população?",
+      "o": [
+        "Sim.",
+        "Só se a população tiver 100 pessoas.",
+        "Não.",
+        "Não é possível saber."
+      ],
+      "a": 2,
+      "sol": "A amostra tem 50%-50%, diferente de 70%-30%. Pode ser útil para comparação, mas não é proporcional.",
+      "hyp": "Pode confundir estratificação com proporcionalidade obrigatória.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-desproporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-040",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra estratificada desproporcional pode ser útil porquê?",
+      "o": [
+        "Porque reproduz automaticamente as proporções populacionais.",
+        "Porque elimina a necessidade de ponderação em qualquer análise.",
+        "Porque transforma a amostra em censo.",
+        "Pode garantir tamanho suficiente em subgrupos pequenos para comparação."
+      ],
+      "a": 3,
+      "sol": "Sobreamostrar grupos raros pode facilitar análises específicas, embora exija cuidado ao estimar a população total.",
+      "hyp": "Pode pensar que desproporcionalidade é sempre erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-desproporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-041",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma população tem 2 000 elementos divididos em estratos de 1 000, 600 e 400. Numa amostra proporcional de 250, quantos vêm do menor estrato?",
+      "o": [
+        "50",
+        "40",
+        "60",
+        "80"
+      ],
+      "a": 0,
+      "sol": "400/2000=20%; 20% de 250=50.",
+      "hyp": "Pode aplicar 400/250 em vez de 400/2000.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-042",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na população anterior, quantos elementos vêm do estrato de 600 numa amostra proporcional de 250?",
+      "o": [
+        "50",
+        "75",
+        "60",
+        "100"
+      ],
+      "a": 1,
+      "sol": "600/2000=30%; 30% de 250=75.",
+      "hyp": "Pode usar o tamanho absoluto do estrato como percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-043",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma sondagem tem taxa de resposta de 90%, mas os 10% que não respondem pertencem sobretudo a um grupo com opiniões muito diferentes. O risco de enviesamento de não resposta é...",
+      "o": [
+        "zero, porque 90% é sempre suficiente.",
+        "impossível em amostras grandes.",
+        "ainda relevante.",
+        "igual ao erro de medição."
+      ],
+      "a": 2,
+      "sol": "Uma pequena fração de não resposta pode ser importante se for sistematicamente diferente.",
+      "hyp": "Pode avaliar risco apenas pela percentagem de resposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:nao-resposta-grupo-diferente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-044",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação distingue erro amostral de enviesamento?",
+      "o": [
+        "São exatamente iguais.",
+        "Enviesamento desaparece sempre com amostras maiores.",
+        "Erro amostral só existe em censos.",
+        "Erro amostral varia de amostra para amostra; enviesamento é uma distorção sistemática do processo."
+      ],
+      "a": 3,
+      "sol": "Uma amostra aleatória pode ter flutuações; um processo enviesado desloca sistematicamente os resultados.",
+      "hyp": "Pode tratar todo o desvio como o mesmo fenómeno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:erro-vs-enviesamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-045",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Aumentar muito o tamanho de uma amostra enviesada resolve necessariamente o problema?",
+      "o": [
+        "Não; pode produzir uma estimativa muito precisa do valor errado.",
+        "Sim, sempre.",
+        "Sim, se duplicar exatamente.",
+        "Só se a variável for qualitativa."
+      ],
+      "a": 0,
+      "sol": "Mais observações reduzem variabilidade amostral, mas não corrigem automaticamente uma seleção sistematicamente enviesada.",
+      "hyp": "Pode confundir precisão com ausência de viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:tamanho-vs-enviesamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-046",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma sondagem seleciona aleatoriamente 1 000 pessoas, mas só 300 respondem. Qual é a amostra efetivamente observada para analisar respostas?",
+      "o": [
+        "1 000 selecionados.",
+        "300 respondentes.",
+        "A população inteira.",
+        "700 não respondentes."
+      ],
+      "a": 1,
+      "sol": "Os dados de resposta existem para os 300 que responderam; os 700 restantes representam não resposta.",
+      "hyp": "Pode confundir amostra selecionada com amostra respondente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:selecionados-vs-respondentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-047",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se os 300 respondentes da questão anterior diferirem dos 700 não respondentes, qual é o principal problema?",
+      "o": [
+        "Erro de arredondamento.",
+        "Censo.",
+        "Enviesamento de não resposta.",
+        "Variável discreta."
+      ],
+      "a": 2,
+      "sol": "As respostas observadas podem não representar os selecionados nem a população.",
+      "hyp": "Pode tratar não resposta apenas como redução de tamanho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:nao-resposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-048",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma universidade quer estimar hábitos de estudo e tem 60% licenciatura, 25% mestrado e 15% doutoramento. Para amostra proporcional de 400, quantos doutorandos?",
+      "o": [
+        "40",
+        "50",
+        "80",
+        "60"
+      ],
+      "a": 3,
+      "sol": "15% de 400=60.",
+      "hyp": "Pode usar 15 como número absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-049",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Na mesma população, quantos estudantes de mestrado entram numa amostra proporcional de 400?",
+      "o": [
+        "100",
+        "80",
+        "90",
+        "120"
+      ],
+      "a": 0,
+      "sol": "25% de 400=100.",
+      "hyp": "Pode dividir por 25 em vez de multiplicar por 0,25.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-AMO-050",
+      "themeId": "10-est",
+      "subtopicId": "10-est-amostragem",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Qual plano é mais defensável para estimar satisfação de todos os alunos de uma escola com três anos muito diferentes em tamanho?",
+      "o": [
+        "Inquirir apenas amigos do investigador.",
+        "Definir estratos por ano e selecionar aleatoriamente dentro de cada um, idealmente de forma proporcional ao objetivo do estudo.",
+        "Usar só voluntários de uma turma.",
+        "Escolher apenas alunos presentes na biblioteca."
+      ],
+      "a": 1,
+      "sol": "A estratificação por ano ajuda a garantir cobertura dos três níveis e a seleção aleatória reduz enviesamento dentro de cada estrato.",
+      "hyp": "Pode preferir conveniência por ser mais fácil.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-amostragem:plano-completo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
