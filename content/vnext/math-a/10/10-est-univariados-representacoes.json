@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-est",
+  "subtopicId": "10-est-univariados-representacoes",
+  "subtopic": "Dados univariados e representações",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha frequências absolutas/relativas/acumuladas, classes, barras, setores, histogramas, pictogramas e leitura crítica de representações. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10EST-UNI-001",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa tabela de frequências, a frequência absoluta de um valor indica...",
+      "o": [
+        "quantas vezes esse valor ocorre.",
+        "a percentagem acumulada.",
+        "a média dos dados.",
+        "o maior valor."
+      ],
+      "a": 0,
+      "sol": "A frequência absoluta é a contagem de ocorrências.",
+      "hyp": "Pode confundir contagem com percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-absoluta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-002",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A frequência relativa de uma categoria é...",
+      "o": [
+        "frequência absoluta multiplicada pelo maior valor.",
+        "frequência absoluta dividida pelo total de observações.",
+        "sempre um número inteiro.",
+        "a soma de todas as categorias."
+      ],
+      "a": 1,
+      "sol": "Frequência relativa = frequência absoluta / total.",
+      "hyp": "Pode inverter ou confundir com contagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-003",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num conjunto de 20 observações, um valor aparece 5 vezes. Qual é a frequência relativa?",
+      "o": [
+        "20%",
+        "30%",
+        "25%",
+        "40%"
+      ],
+      "a": 2,
+      "sol": "5/20=0,25=25%.",
+      "hyp": "Pode dividir 20 por 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-004",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma categoria tem frequência relativa de 30% numa amostra de 50. Qual é a frequência absoluta?",
+      "o": [
+        "10",
+        "20",
+        "30",
+        "15"
+      ],
+      "a": 3,
+      "sol": "0,30×50=15.",
+      "hyp": "Pode usar 30 como contagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-absoluta-de-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-005",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A soma das frequências relativas de todas as categorias deve ser...",
+      "o": [
+        "1 ou 100%.",
+        "0.",
+        "o tamanho da amostra em percentagem.",
+        "a média."
+      ],
+      "a": 0,
+      "sol": "As categorias cobrem todas as observações, logo as proporções somam 1.",
+      "hyp": "Pode confundir frequências relativas com absolutas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:soma-relativas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-006",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As frequências absolutas de quatro categorias são 4, 6, 5 e 5. Qual é o total de observações?",
+      "o": [
+        "15",
+        "20",
+        "18",
+        "24"
+      ],
+      "a": 1,
+      "sol": "4+6+5+5=20.",
+      "hyp": "Pode calcular média das frequências em vez da soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:total-frequencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-007",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 40, uma categoria tem frequência absoluta 10. Qual é a frequência relativa?",
+      "o": [
+        "10%",
+        "20%",
+        "25%",
+        "40%"
+      ],
+      "a": 2,
+      "sol": "10/40=25%.",
+      "hyp": "Pode usar a própria frequência absoluta como percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-008",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa tabela, as frequências relativas são 20%, 35%, 15% e x. Qual é x?",
+      "o": [
+        "20%",
+        "25%",
+        "35%",
+        "30%"
+      ],
+      "a": 3,
+      "sol": "x=100−20−35−15=30%.",
+      "hyp": "Pode esquecer que as frequências relativas totalizam 100%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:completar-relativas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-009",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As frequências absolutas são 8, 12 e x, num total de 30. Qual é x?",
+      "o": [
+        "10",
+        "8",
+        "12",
+        "14"
+      ],
+      "a": 0,
+      "sol": "x=30−8−12=10.",
+      "hyp": "Pode somar em vez de completar para o total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:completar-absolutas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-010",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Qual representação é particularmente adequada para comparar frequências de categorias qualitativas?",
+      "o": [
+        "Diagrama de dispersão.",
+        "Gráfico de barras.",
+        "Gráfico de uma função contínua.",
+        "Reta numérica sem marcas."
+      ],
+      "a": 1,
+      "sol": "O gráfico de barras permite comparar categorias distintas.",
+      "hyp": "Pode escolher uma representação destinada a duas variáveis quantitativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:barras-qualitativas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-011",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Num gráfico de barras de categorias, as barras devem...",
+      "o": [
+        "ser sempre contíguas para sugerir continuidade.",
+        "ter alturas sem relação com os dados.",
+        "representar a frequência de cada categoria.",
+        "ser ordenadas alfabeticamente obrigatoriamente."
+      ],
+      "a": 2,
+      "sol": "A altura/comprimento da barra codifica a frequência.",
+      "hyp": "Pode confundir barra com histograma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:barras-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-012",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual diferença visual típica existe entre gráfico de barras e histograma?",
+      "o": [
+        "São sempre idênticos.",
+        "No gráfico de barras não há eixo.",
+        "Histogramas só usam percentagens.",
+        "No histograma, classes contíguas são representadas por retângulos adjacentes; em barras, categorias podem estar separadas."
+      ],
+      "a": 3,
+      "sol": "O histograma representa intervalos contíguos de uma variável quantitativa.",
+      "hyp": "Pode tratar qualquer conjunto de retângulos como o mesmo gráfico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:barras-vs-histograma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-013",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um histograma é especialmente adequado para...",
+      "o": [
+        "dados quantitativos agrupados em classes.",
+        "nomes de cores.",
+        "duas variáveis quantitativas emparelhadas.",
+        "apenas amostras de tamanho 10."
+      ],
+      "a": 0,
+      "sol": "Histogramas mostram distribuição por intervalos de uma variável quantitativa.",
+      "hyp": "Pode usar histograma para categorias nominais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:histograma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-014",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As idades 15,15,16,16,16,17 têm frequência absoluta de 16 igual a...",
+      "o": [
+        "2",
+        "3",
+        "4",
+        "6"
+      ],
+      "a": 1,
+      "sol": "O valor 16 aparece 3 vezes.",
+      "hyp": "Pode confundir valor da variável com frequência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:contar-frequencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-015",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para os dados 2,2,3,4,4,4,5, qual é a frequência relativa do valor 4?",
+      "o": [
+        "4/7",
+        "3/5",
+        "3/7",
+        "4/5"
+      ],
+      "a": 2,
+      "sol": "O 4 aparece 3 vezes em 7 observações: 3/7.",
+      "hyp": "Pode dividir pelo número de valores distintos em vez do total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-relativa-fracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-016",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 80 pessoas, 24 escolheram a opção A. Qual é o ângulo correspondente num gráfico circular?",
+      "o": [
+        "72°",
+        "90°",
+        "120°",
+        "108°"
+      ],
+      "a": 3,
+      "sol": "24/80=0,30; 30% de 360°=108°.",
+      "hyp": "Pode usar 24° ou multiplicar pela percentagem errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:setor-circular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-017",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma categoria ocupa 25% de um gráfico circular. Qual é o ângulo do setor?",
+      "o": [
+        "90°",
+        "60°",
+        "75°",
+        "120°"
+      ],
+      "a": 0,
+      "sol": "0,25×360°=90°.",
+      "hyp": "Pode calcular 25% de 100 em vez de 360.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:setor-circular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-018",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um setor de 72° num gráfico circular corresponde a que percentagem?",
+      "o": [
+        "10%",
+        "20%",
+        "25%",
+        "30%"
+      ],
+      "a": 1,
+      "sol": "72/360=0,20=20%.",
+      "hyp": "Pode dividir por 100 em vez de 360.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:setor-para-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-019",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num gráfico de barras, duplicar visualmente a largura de uma barra sem alterar a altura pode induzir em erro se o leitor interpretar...",
+      "o": [
+        "o título.",
+        "a ordem alfabética.",
+        "a área como representando frequência.",
+        "a unidade da variável."
+      ],
+      "a": 2,
+      "sol": "Se áreas variam sem significado, a perceção pode exagerar diferenças.",
+      "hyp": "Pode ignorar elementos gráficos que distorcem comparação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:grafico-enganador-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-020",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um eixo vertical começa em 95 em vez de 0 num gráfico de barras de valores 98 e 100. Qual risco existe?",
+      "o": [
+        "Os valores tornam-se incorretos automaticamente.",
+        "As barras deixam de ter frequência.",
+        "Não há qualquer efeito visual.",
+        "A diferença visual pode parecer muito maior do que a diferença real."
+      ],
+      "a": 3,
+      "sol": "Um eixo truncado pode exagerar diferenças pequenas.",
+      "hyp": "Pode ler apenas a forma sem verificar a escala.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:eixo-truncado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-021",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 100, as categorias A,B,C têm frequências 45,35,20. Qual é a frequência relativa acumulada até B, nessa ordem?",
+      "o": [
+        "80%",
+        "35%",
+        "45%",
+        "100%"
+      ],
+      "a": 0,
+      "sol": "45%+35%=80%.",
+      "hyp": "Pode usar apenas B ou somar todas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:acumulada-categorias-ordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-022",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A frequência acumulada é especialmente útil quando as categorias/valores têm...",
+      "o": [
+        "nenhuma ordem possível.",
+        "uma ordem natural.",
+        "apenas nomes aleatórios.",
+        "sempre frequência igual."
+      ],
+      "a": 1,
+      "sol": "A acumulação faz sentido quando se pode falar em 'até' determinado valor/classe.",
+      "hyp": "Pode acumular categorias nominais sem significado ordinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:acumulada-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-023",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Frequências de valores 1,2,3,4 são 2,3,4,1. Qual é a frequência acumulada até 3?",
+      "o": [
+        "4",
+        "5",
+        "9",
+        "10"
+      ],
+      "a": 2,
+      "sol": "2+3+4=9.",
+      "hyp": "Pode usar apenas a frequência de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:acumulada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-024",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa tabela, a frequência acumulada até certo valor é 18 num total de 30. Qual é a frequência relativa acumulada?",
+      "o": [
+        "40%",
+        "50%",
+        "70%",
+        "60%"
+      ],
+      "a": 3,
+      "sol": "18/30=60%.",
+      "hyp": "Pode dividir 30 por 18.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:acumulada-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-025",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "As frequências acumuladas para quatro valores são 4, 9, 15, 20. Qual é a frequência absoluta do terceiro valor?",
+      "o": [
+        "6",
+        "5",
+        "9",
+        "15"
+      ],
+      "a": 0,
+      "sol": "15−9=6.",
+      "hyp": "Pode usar a acumulada como frequência simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:recuperar-frequencia-de-acumulada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-026",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Frequências acumuladas: 3,8,12,20. Qual é a frequência do último valor?",
+      "o": [
+        "10",
+        "8",
+        "12",
+        "20"
+      ],
+      "a": 1,
+      "sol": "20−12=8.",
+      "hyp": "Pode tomar 20 como frequência do último valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:recuperar-frequencia-de-acumulada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-027",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma classe [10,20[ tem frequência 12 numa amostra de 60. Qual é a frequência relativa da classe?",
+      "o": [
+        "10%",
+        "15%",
+        "20%",
+        "25%"
+      ],
+      "a": 2,
+      "sol": "12/60=20%.",
+      "hyp": "Pode usar a amplitude da classe como frequência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:classe-freq-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-028",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Na notação [10,20[, quais valores pertencem ao intervalo?",
+      "o": [
+        "20 pertence e 10 não.",
+        "Ambos pertencem.",
+        "Nenhum pertence.",
+        "10 pertence e 20 não."
+      ],
+      "a": 3,
+      "sol": "[ inclui 10 e [ à direita indica exclusão de 20.",
+      "hyp": "Pode interpretar incorretamente a notação de intervalos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:intervalo-classe",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-029",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a amplitude da classe [20,30[?",
+      "o": [
+        "10",
+        "5",
+        "20",
+        "30"
+      ],
+      "a": 0,
+      "sol": "30−20=10.",
+      "hyp": "Pode usar o ponto médio ou um limite como amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:amplitude-classe",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-030",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é o ponto médio da classe [20,30[?",
+      "o": [
+        "20",
+        "25",
+        "30",
+        "50"
+      ],
+      "a": 1,
+      "sol": "(20+30)/2=25.",
+      "hyp": "Pode usar a amplitude em vez do centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:ponto-medio-classe",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-031",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Agrupar dados contínuos em classes provoca normalmente...",
+      "o": [
+        "aumento do número exato de observações.",
+        "eliminação de toda a variabilidade.",
+        "perda de algum detalhe individual.",
+        "transformação da variável em qualitativa nominal."
+      ],
+      "a": 2,
+      "sol": "Passa-se dos valores exatos para intervalos, sacrificando detalhe em troca de síntese.",
+      "hyp": "Pode pensar que agrupamento preserva toda a informação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:agrupamento-perda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-032",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas escolhas diferentes de classes para os mesmos dados podem produzir histogramas visualmente diferentes?",
+      "o": [
+        "Não, nunca.",
+        "Só se a amostra mudar.",
+        "Só se houver erro.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Limites e amplitudes das classes afetam a representação visual da distribuição.",
+      "hyp": "Pode considerar histogramas independentes da escolha de classes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:classes-influenciam",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-033",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num histograma com classes de igual amplitude, comparar alturas dos retângulos permite comparar diretamente...",
+      "o": [
+        "frequências, se a altura foi definida como frequência.",
+        "apenas os pontos médios.",
+        "a média dos dados.",
+        "o tamanho da população."
+      ],
+      "a": 0,
+      "sol": "Com amplitudes iguais e altura proporcional à frequência, a comparação é direta.",
+      "hyp": "Pode ignorar a convenção usada no eixo vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:histograma-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-034",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se classes têm amplitudes diferentes num histograma de densidade, o que deve representar a frequência?",
+      "o": [
+        "A altura isoladamente.",
+        "A área do retângulo.",
+        "A largura isoladamente.",
+        "O título."
+      ],
+      "a": 1,
+      "sol": "Com densidade, área = largura×altura representa frequência/proporção.",
+      "hyp": "Pode comparar alturas de classes com larguras diferentes sem considerar áreas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:histograma-densidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-035",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma classe tem amplitude 5 e frequência 20. Outra tem amplitude 10 e frequência 20. Num histograma de densidade, qual terá maior altura?",
+      "o": [
+        "A segunda, com o dobro.",
+        "Têm a mesma altura.",
+        "A primeira, com o dobro da altura.",
+        "Não é possível construir."
+      ],
+      "a": 2,
+      "sol": "Para a mesma área/frequência, metade da largura exige o dobro da altura.",
+      "hyp": "Pode tratar altura como frequência direta com amplitudes diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:densidade-comparar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-036",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 50, as frequências por quatro classes são 5,15,20,10. Qual classe modal é a de maior frequência?",
+      "o": [
+        "1.ª",
+        "2.ª",
+        "4.ª",
+        "3.ª"
+      ],
+      "a": 3,
+      "sol": "A maior frequência é 20, na 3.ª classe.",
+      "hyp": "Pode confundir posição da classe com valor da frequência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:classe-modal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-037",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um gráfico circular é pouco adequado quando existem dezenas de categorias pequenas porque...",
+      "o": [
+        "a comparação entre muitos setores se torna difícil.",
+        "não pode representar percentagens.",
+        "só aceita variáveis contínuas.",
+        "a soma dos ângulos deixa de ser 360°."
+      ],
+      "a": 0,
+      "sol": "Muitos setores estreitos dificultam leitura e comparação.",
+      "hyp": "Pode escolher representação apenas por estética.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:escolher-representacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-038",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para mostrar a evolução temporal de uma quantidade medida mensalmente, uma representação frequentemente útil é...",
+      "o": [
+        "gráfico circular.",
+        "gráfico de linhas.",
+        "histograma sem ordem temporal.",
+        "lista de categorias sem escala."
+      ],
+      "a": 1,
+      "sol": "Uma linha ordenada no tempo evidencia tendências e variações.",
+      "hyp": "Pode usar uma representação que perde a ordem temporal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:serie-temporal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-039",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela apresenta frequências relativas 0,15; 0,25; 0,35; x. Qual é x?",
+      "o": [
+        "0,15",
+        "0,20",
+        "0,25",
+        "0,30"
+      ],
+      "a": 2,
+      "sol": "x=1−0,75=0,25.",
+      "hyp": "Pode completar para 100 em vez de 1 na forma decimal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:completar-relativas-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-040",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As frequências absolutas são 12,18,30 e 40. Qual é a frequência relativa da terceira categoria?",
+      "o": [
+        "18%",
+        "25%",
+        "40%",
+        "30%"
+      ],
+      "a": 3,
+      "sol": "Total=100; terceira frequência=30, logo 30%.",
+      "hyp": "Pode usar 30/40 em vez do total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:freq-relativa-multiplas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-041",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num gráfico circular, três setores medem 90°, 126° e 72°. Qual é o ângulo do quarto setor?",
+      "o": [
+        "72°",
+        "54°",
+        "62°",
+        "82°"
+      ],
+      "a": 0,
+      "sol": "360−90−126−72=72°.",
+      "hyp": "Pode somar incorretamente os ângulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:completar-circular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-042",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O setor de uma categoria mede 54°. Qual é a sua frequência relativa?",
+      "o": [
+        "10%",
+        "15%",
+        "12,5%",
+        "18%"
+      ],
+      "a": 1,
+      "sol": "54/360=0,15=15%.",
+      "hyp": "Pode dividir por 100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:setor-para-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-043",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um pictograma usa um ícone completo=10 pessoas e meio ícone=5. Uma categoria com 3,5 ícones representa...",
+      "o": [
+        "30",
+        "40",
+        "35",
+        "45"
+      ],
+      "a": 2,
+      "sol": "3 ícones=30 e meio=5; total 35.",
+      "hyp": "Pode ignorar o significado do meio símbolo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:pictograma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-044",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual risco existe num pictograma em que o desenho é duplicado em altura e largura para representar o dobro?",
+      "o": [
+        "A área fica exatamente duas vezes maior.",
+        "Não existe efeito.",
+        "O valor passa a metade.",
+        "A área fica quatro vezes maior e pode exagerar visualmente a diferença."
+      ],
+      "a": 3,
+      "sol": "Escalar ambas as dimensões por 2 multiplica a área por 4.",
+      "hyp": "Pode não perceber que imagens 2D codificam área visual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:pictograma-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-045",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela agrupada tem classes [0,10[, [10,20[, [20,30[ com frequências 8,12,10. Qual é a frequência relativa acumulada até 20?",
+      "o": [
+        "66,7%",
+        "40%",
+        "50%",
+        "80%"
+      ],
+      "a": 0,
+      "sol": "Até 20: 8+12=20 em 30; 20/30≈66,7%.",
+      "hyp": "Pode incluir a terceira classe ou usar apenas 12.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:acumulada-classes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-046",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com as frequências 8,12,10, qual percentagem está na classe [20,30[?",
+      "o": [
+        "20%",
+        "33,3%",
+        "25%",
+        "40%"
+      ],
+      "a": 1,
+      "sol": "10/30≈33,3%.",
+      "hyp": "Pode usar a amplitude 10 como percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:classe-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-047",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma tabela arredonda frequências relativas a uma casa decimal e a soma dá 99,9%. Isto prova necessariamente erro nos dados?",
+      "o": [
+        "Sim, sempre.",
+        "Sim, porque frequências relativas nunca são decimais.",
+        "Não; pode resultar do arredondamento.",
+        "Só se a amostra tiver mais de 100."
+      ],
+      "a": 2,
+      "sol": "Arredondamentos individuais podem produzir pequenas diferenças na soma.",
+      "hyp": "Pode tratar qualquer desvio de 100% como erro estrutural.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:arredondamento-relativas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-048",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Ao comparar dois histogramas de amostras com tamanhos diferentes, usar frequências relativas em vez de absolutas pode ser útil porque...",
+      "o": [
+        "faz desaparecer a variabilidade.",
+        "torna todas as barras iguais.",
+        "elimina valores extremos.",
+        "coloca as distribuições numa escala proporcional comparável."
+      ],
+      "a": 3,
+      "sol": "Proporções permitem comparar formatos sem o efeito direto do tamanho amostral.",
+      "hyp": "Pode comparar contagens brutas de amostras muito diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:comparar-amostras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-049",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma pesquisa a 200 alunos dá A=80, B=50, C=40, D=30. Qual conjunto de frequências relativas está correto?",
+      "o": [
+        "40%,25%,20%,15%",
+        "80%,50%,40%,30%",
+        "20%,25%,40%,15%",
+        "40%,20%,25%,15%"
+      ],
+      "a": 0,
+      "sol": "Dividindo cada contagem por 200: 40%,25%,20%,15%.",
+      "hyp": "Pode usar contagens como percentagens ou trocar categorias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:tabela-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-UNI-050",
+      "themeId": "10-est",
+      "subtopicId": "10-est-univariados-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma variável contínua tem valores entre 0 e 50. Para uma primeira síntese equilibrada em 5 classes de igual amplitude, qual conjunto é natural?",
+      "o": [
+        "[0,5[, [5,20[, [20,35[, [35,45[, [45,50]",
+        "[0,10[, [10,20[, [20,30[, [30,40[, [40,50]",
+        "0,10,20,30,40 sem intervalos",
+        "Cinco categorias aleatórias sem ordem"
+      ],
+      "a": 1,
+      "sol": "O intervalo total de amplitude 50 dividido em 5 classes dá amplitude 10.",
+      "hyp": "Pode criar classes desiguais sem motivo ou confundir limites com classes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-univariados-representacoes:construir-classes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
