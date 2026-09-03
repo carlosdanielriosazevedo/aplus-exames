@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-mat",
+  "subtopicId": "12-mat-produto",
+  "subtopic": "Produto de matrizes, compatibilidade e não comutatividade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha compatibilidade/dimensões, regra linha-coluna, identidade e zero, não comutatividade, associatividade, distributividade, potências, transposta do produto, inversa introdutória e aplicações matriz-vetor. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12MAT-PRD-001",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O produto AB está definido quando...",
+      "o": [
+        "o número de colunas de A é igual ao número de linhas de B.",
+        "A e B têm a mesma dimensão.",
+        "A e B são quadradas.",
+        "o número de linhas de A é igual ao número de colunas de B."
+      ],
+      "a": 0,
+      "sol": "Para multiplicar A_{m×n} por B_{n×p}, as dimensões internas n têm de coincidir.",
+      "hyp": "Pode exigir dimensões iguais como na soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:compatibilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-002",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se A é m×n e B é n×p, então AB é...",
+      "o": [
+        "n×n.",
+        "m×p.",
+        "m×n.",
+        "p×m."
+      ],
+      "a": 1,
+      "sol": "A dimensão externa fica m×p.",
+      "hyp": "Pode conservar a dimensão de A ou trocar a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:dimensao-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-003",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se A é 2×3 e B é 3×4, então AB tem dimensão...",
+      "o": [
+        "3×3.",
+        "2×3.",
+        "2×4.",
+        "4×2."
+      ],
+      "a": 2,
+      "sol": "As dimensões internas 3 coincidem; ficam 2 linhas e 4 colunas.",
+      "hyp": "Pode multiplicar ou trocar dimensões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:dimensao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-004",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se A é 2×3 e B é 2×3, então AB...",
+      "o": [
+        "é 2×3.",
+        "é 2×2.",
+        "é 3×3.",
+        "não está definido."
+      ],
+      "a": 3,
+      "sol": "As colunas de A são 3 e as linhas de B são 2, logo não coincidem.",
+      "hyp": "Pode achar que dimensões iguais bastam.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:incompativel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-005",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O elemento (AB)_ij resulta de...",
+      "o": [
+        "produto escalar da linha i de A pela coluna j de B.",
+        "soma da linha i de A com a coluna j de B.",
+        "produto elemento a elemento das matrizes.",
+        "produto das diagonais."
+      ],
+      "a": 0,
+      "sol": "Multiplica-se termo a termo ao longo da dimensão interna e somam-se os produtos.",
+      "hyp": "Pode confundir produto matricial com produto elemento a elemento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:linha-coluna",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-006",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[1,2],[3,4]]·[[1,0],[0,1]]=",
+      "o": [
+        "[[1,0],[0,4]].",
+        "[[1,2],[3,4]].",
+        "[[1,3],[2,4]].",
+        "[[2,2],[3,8]]."
+      ],
+      "a": 1,
+      "sol": "Multiplicar pela identidade à direita não altera a matriz.",
+      "hyp": "Pode tratar a identidade como máscara diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:identidade-direita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-007",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[1,0],[0,1]]·[[5,−1],[2,3]]=",
+      "o": [
+        "[[5,0],[0,3]].",
+        "[[5,2],[−1,3]].",
+        "[[5,−1],[2,3]].",
+        "[[1,−1],[2,1]]."
+      ],
+      "a": 2,
+      "sol": "A identidade à esquerda também não altera a matriz.",
+      "hyp": "Pode conservar apenas a diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:identidade-esquerda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-008",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para qualquer matriz A compatível, AI e IA são...",
+      "o": [
+        "iguais a I.",
+        "iguais a 0.",
+        "iguais a A^T.",
+        "iguais a A."
+      ],
+      "a": 3,
+      "sol": "A identidade é o elemento neutro do produto matricial.",
+      "hyp": "Pode confundir com matriz nula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:neutro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-009",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se 0 é uma matriz nula compatível, então A0 e 0A são...",
+      "o": [
+        "matrizes nulas.",
+        "iguais a A.",
+        "iguais a I.",
+        "não definidos nunca."
+      ],
+      "a": 0,
+      "sol": "Cada combinação linha-coluna soma apenas produtos por zero.",
+      "hyp": "Pode transferir o papel da identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:zero-absorvente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-010",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[1,2],[3,4]]·[[2,0],[1,5]]=",
+      "o": [
+        "[[2,0],[3,20]].",
+        "[[4,10],[10,20]].",
+        "[[3,7],[7,9]].",
+        "[[4,5],[8,20]]."
+      ],
+      "a": 1,
+      "sol": "1.ª linha: (1·2+2·1, 1·0+2·5)=(4,10); 2.ª linha=(10,20).",
+      "hyp": "Pode multiplicar elemento a elemento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:calculo-2x2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-011",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[2,−1],[0,3]]·[[4,1],[2,−2]]=",
+      "o": [
+        "[[8,−1],[0,−6]].",
+        "[[10,0],[6,−6]].",
+        "[[6,4],[6,−6]].",
+        "[[6,0],[12,−6]]."
+      ],
+      "a": 2,
+      "sol": "(1,1)=8−2=6; (1,2)=2+2=4; (2,1)=6; (2,2)=−6.",
+      "hyp": "Pode errar sinais nos produtos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:calculo-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-012",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[1,2,3]]·[[4],[5],[6]]=",
+      "o": [
+        "[[15]].",
+        "[[4,10,18]].",
+        "[[21]].",
+        "[[32]]."
+      ],
+      "a": 3,
+      "sol": "1·4+2·5+3·6=32.",
+      "hyp": "Pode somar os vetores sem ponderar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:linha-coluna",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-013",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[1],[2],[3]]·[[4,5]] tem dimensão e valor...",
+      "o": [
+        "3×2: [[4,5],[8,10],[12,15]].",
+        "1×1: [[32]].",
+        "2×3: [[4,8,12],[5,10,15]].",
+        "3×1: [[9],[18],[27]]."
+      ],
+      "a": 0,
+      "sol": "Produto 3×1 por 1×2 gera 3×2 com produtos exteriores.",
+      "hyp": "Pode confundir produto exterior com produto escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:produto-exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-014",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Em geral, AB e BA...",
+      "o": [
+        "são sempre iguais.",
+        "não são iguais e um deles pode até não estar definido.",
+        "têm sempre a mesma dimensão.",
+        "são sempre transpostos um do outro."
+      ],
+      "a": 1,
+      "sol": "O produto matricial não é comutativo.",
+      "hyp": "Pode transferir a comutatividade dos números reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:nao-comutatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-015",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para A=[[1,1],[0,1]] e B=[[1,0],[1,1]], AB=",
+      "o": [
+        "[[1,1],[1,2]].",
+        "[[2,0],[0,2]].",
+        "[[2,1],[1,1]].",
+        "[[1,0],[0,1]]."
+      ],
+      "a": 2,
+      "sol": "AB: linha1·colunas=(2,1); linha2=(1,1).",
+      "hyp": "Pode calcular BA em vez de AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-016",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com as mesmas A e B, BA=",
+      "o": [
+        "[[2,1],[1,1]].",
+        "[[2,0],[0,2]].",
+        "[[1,0],[0,1]].",
+        "[[1,1],[1,2]]."
+      ],
+      "a": 3,
+      "sol": "BA: primeira linha=(1,1); segunda=(1,2).",
+      "hyp": "Pode assumir AB=BA.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-017",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Os dois itens anteriores mostram que...",
+      "o": [
+        "AB≠BA em geral.",
+        "AB=BA sempre.",
+        "A e B não podem ser multiplicadas.",
+        "produto matricial é elemento a elemento."
+      ],
+      "a": 0,
+      "sol": "A ordem dos fatores altera o resultado.",
+      "hyp": "Pode ignorar o contraexemplo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:nao-comutatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-018",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O produto matricial é associativo:...",
+      "o": [
+        "AB=BA.",
+        "A(BC)=(AB)C quando as operações estão definidas.",
+        "A(B+C)=AB+C.",
+        "(A+B)C=AB+BC."
+      ],
+      "a": 1,
+      "sol": "A ordem de agrupamento pode mudar sem alterar a ordem dos fatores.",
+      "hyp": "Pode confundir associatividade com comutatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:associatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-019",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A distributividade correta é...",
+      "o": [
+        "A(B+C)=AB+C.",
+        "A(B+C)=BA+CA.",
+        "A(B+C)=AB+AC.",
+        "A(B+C)=A+B+C."
+      ],
+      "a": 2,
+      "sol": "O produto distribui-se sobre a soma mantendo a ordem.",
+      "hyp": "Pode alterar a ordem dos fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:distributividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-020",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Também vale...",
+      "o": [
+        "(A+B)C=CA+CB.",
+        "(A+B)C=A+BC.",
+        "(A+B)C=AB+BC.",
+        "(A+B)C=AC+BC."
+      ],
+      "a": 3,
+      "sol": "Distribui-se o fator C à direita.",
+      "hyp": "Pode mudar a posição de C.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:distributividade-direita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-021",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A é 3×2 e B é 2×5, então BA...",
+      "o": [
+        "não está definido.",
+        "é 2×2.",
+        "é 3×5.",
+        "é 2×5."
+      ],
+      "a": 0,
+      "sol": "B tem 5 colunas e A tem 3 linhas; 5≠3.",
+      "hyp": "Pode assumir que se AB existe então BA também.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:ordem-dimensoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-022",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A é 2×3 e B é 3×2, então AB e BA...",
+      "o": [
+        "só AB existe.",
+        "estão ambos definidos, com dimensões 2×2 e 3×3.",
+        "só BA existe.",
+        "têm ambos dimensão 2×3."
+      ],
+      "a": 1,
+      "sol": "AB usa 2×3·3×2→2×2; BA usa 3×2·2×3→3×3.",
+      "hyp": "Pode achar que os dois produtos têm a mesma dimensão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:dois-produtos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-023",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[1,2],[0,1]], então A²=",
+      "o": [
+        "[[1,2],[0,1]].",
+        "[[1,0],[0,1]].",
+        "[[1,4],[0,1]].",
+        "[[2,4],[0,2]]."
+      ],
+      "a": 2,
+      "sol": "A·A dá (1,1)=1, (1,2)=2+2=4, (2,2)=1.",
+      "hyp": "Pode elevar cada entrada ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-024",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A² significa...",
+      "o": [
+        "elevar cada entrada de A ao quadrado.",
+        "A+A.",
+        "A^T A.",
+        "A·A."
+      ],
+      "a": 3,
+      "sol": "Potência matricial é produto repetido para matriz quadrada.",
+      "hyp": "Pode confundir com potência elemento a elemento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:potencia-def",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-025",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para I, I^n é...",
+      "o": [
+        "I para qualquer n natural positivo.",
+        "nI.",
+        "0.",
+        "I^T apenas."
+      ],
+      "a": 0,
+      "sol": "I·I=I e o resultado repete-se.",
+      "hyp": "Pode multiplicar a identidade por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:potencia-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-026",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A²=A, então A é dita idempotente. Nesse caso A³=",
+      "o": [
+        "A²+A.",
+        "A.",
+        "I.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "A³=A²A=AA=A²=A.",
+      "hyp": "Pode somar expoentes como escalares sem usar A²=A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:idempotente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-027",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A²=0, então A³=",
+      "o": [
+        "A.",
+        "I.",
+        "0.",
+        "A²+A."
+      ],
+      "a": 2,
+      "sol": "A³=A²A=0A=0.",
+      "hyp": "Pode achar que A²=0 implica A=0 sempre.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:nilpotente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-028",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Pode existir A≠0 com A²=0?",
+      "o": [
+        "Não, nunca.",
+        "Só se A for identidade.",
+        "Só para matrizes 1×1 reais.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Por exemplo [[0,1],[0,0]] é não nula e o seu quadrado é zero.",
+      "hyp": "Pode transferir a propriedade dos números reais para matrizes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:divisores-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-029",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para A=[[0,1],[0,0]], A²=",
+      "o": [
+        "[[0,0],[0,0]].",
+        "[[0,1],[0,0]].",
+        "[[1,0],[0,1]].",
+        "[[0,0],[1,0]]."
+      ],
+      "a": 0,
+      "sol": "Cada produto linha-coluna dá zero.",
+      "hyp": "Pode elevar entradas ou assumir identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:nilpotente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-030",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O facto de AB=0 implica necessariamente A=0 ou B=0?",
+      "o": [
+        "Sim, como nos reais.",
+        "Não.",
+        "Só se A=B.",
+        "Só se forem quadradas."
+      ],
+      "a": 1,
+      "sol": "Matrizes podem ter divisores de zero.",
+      "hyp": "Pode aplicar cancelamento multiplicativo sem hipóteses.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:divisores-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-031",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A transposta de um produto satisfaz...",
+      "o": [
+        "(AB)^T=A^T B^T.",
+        "(AB)^T=AB.",
+        "(AB)^T=B^T A^T.",
+        "(AB)^T=A+B."
+      ],
+      "a": 2,
+      "sol": "A transposição inverte a ordem dos fatores.",
+      "hyp": "Pode preservar a ordem indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:transposta-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-032",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são simétricas, AB é necessariamente simétrica?",
+      "o": [
+        "Sim, sempre.",
+        "Nunca.",
+        "Só se A=B=0.",
+        "Não; é simétrica se, por exemplo, AB=BA."
+      ],
+      "a": 3,
+      "sol": "(AB)^T=BA; para coincidir com AB é suficiente que comutem.",
+      "hyp": "Pode pensar que o produto de simétricas preserva sempre simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:simetria-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-033",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são simétricas e AB=BA, então AB é...",
+      "o": [
+        "simétrica.",
+        "antissimétrica.",
+        "nula.",
+        "identidade."
+      ],
+      "a": 0,
+      "sol": "(AB)^T=B^T A^T=BA=AB.",
+      "hyp": "Pode esquecer a condição de comutatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:simetrica-comutam",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-034",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se AB=AC, podemos cancelar A à esquerda em geral?",
+      "o": [
+        "Sim, sempre.",
+        "Não, sem hipóteses adicionais.",
+        "Só se B=C=0.",
+        "Só se as matrizes forem 2×2."
+      ],
+      "a": 1,
+      "sol": "Matrizes não nulas podem não admitir cancelamento multiplicativo.",
+      "hyp": "Pode transferir cancelamento dos reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-035",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se A admite inversa e AB=AC, então...",
+      "o": [
+        "B=−C.",
+        "A=0.",
+        "B=C.",
+        "nada se pode concluir."
+      ],
+      "a": 2,
+      "sol": "Multiplicando à esquerda por A^{-1}, obtém-se B=C.",
+      "hyp": "Pode esquecer que a inversa permite cancelamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:cancelamento-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-036",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz inversa A^{-1}, quando existe, satisfaz...",
+      "o": [
+        "AA^{-1}=0.",
+        "A+A^{-1}=I.",
+        "A^{-1}=A^T sempre.",
+        "AA^{-1}=A^{-1}A=I."
+      ],
+      "a": 3,
+      "sol": "É o inverso multiplicativo da matriz.",
+      "hyp": "Pode confundir inversa com oposto ou transposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-037",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A=[[2,0],[0,3]], uma inversa é...",
+      "o": [
+        "[[1/2,0],[0,1/3]].",
+        "[[2,0],[0,3]].",
+        "[[-2,0],[0,−3]].",
+        "[[3,0],[0,2]]."
+      ],
+      "a": 0,
+      "sol": "O produto das diagonais correspondentes fica 1.",
+      "hyp": "Pode trocar ou mudar sinais sem inverter.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:inversa-diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-038",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A é invertível e AX=B, então...",
+      "o": [
+        "X=BA^{-1} sempre.",
+        "X=A^{-1}B.",
+        "X=A+B.",
+        "X=B−A."
+      ],
+      "a": 1,
+      "sol": "Multiplica-se à esquerda por A^{-1}; a ordem é essencial.",
+      "hyp": "Pode deslocar A como se fosse escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:equacao-matricial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-039",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se XA=B e A é invertível, então...",
+      "o": [
+        "X=A^{-1}B.",
+        "X=A+B.",
+        "X=BA^{-1}.",
+        "X=B/A sem ordem."
+      ],
+      "a": 2,
+      "sol": "Multiplica-se à direita por A^{-1}.",
+      "hyp": "Pode usar a mesma ordem do caso AX=B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:equacao-direita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-040",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "As duas equações anteriores mostram que...",
+      "o": [
+        "dividir por A é sempre uma operação sem ordem.",
+        "AB=BA.",
+        "A^{-1} comuta com qualquer matriz.",
+        "a posição do fator importa no isolamento matricial."
+      ],
+      "a": 3,
+      "sol": "O produto não é comutativo, por isso o lado em que se multiplica importa.",
+      "hyp": "Pode tratar matrizes como escalares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:ordem-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-041",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[1,2],[0,1]] e v=[[3],[4]], então Av=",
+      "o": [
+        "[[11],[4]].",
+        "[[3],[4]].",
+        "[[7],[4]].",
+        "[[3],[11]]."
+      ],
+      "a": 0,
+      "sol": "Primeira entrada 1·3+2·4=11; segunda 4.",
+      "hyp": "Pode multiplicar elemento a elemento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:matriz-vetor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-042",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O produto matriz-vetor Av combina...",
+      "o": [
+        "cada coluna de A apenas com o mesmo índice de v.",
+        "cada linha de A com o vetor v para gerar uma coordenada de saída.",
+        "apenas a diagonal de A.",
+        "uma soma sem pesos."
+      ],
+      "a": 1,
+      "sol": "Cada componente de saída é produto escalar linha-vetor.",
+      "hyp": "Pode pensar em cópia direta das coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:matriz-vetor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-043",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A é 4×3 e v é 3×1, então Av é...",
+      "o": [
+        "3×1.",
+        "4×3.",
+        "4×1.",
+        "1×4."
+      ],
+      "a": 2,
+      "sol": "As dimensões internas 3 coincidem e ficam 4×1.",
+      "hyp": "Pode manter a dimensão do vetor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:dim-vetor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-044",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A é 3×4 e v é 3×1, então Av...",
+      "o": [
+        "é 3×1.",
+        "é 4×1.",
+        "é 3×3.",
+        "não está definido."
+      ],
+      "a": 3,
+      "sol": "A tem 4 colunas, mas v tem 3 linhas.",
+      "hyp": "Pode olhar apenas para o número de linhas de A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:dim-vetor-incomp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-045",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se A transforma um vetor x em y=Ax e B transforma y em z=By, então a transformação total é...",
+      "o": [
+        "z=(BA)x.",
+        "z=(AB)x.",
+        "z=(A+B)x.",
+        "z=B+A+x."
+      ],
+      "a": 0,
+      "sol": "Primeiro A atua em x e depois B: B(Ax)=(BA)x.",
+      "hyp": "Pode escrever as matrizes na ordem temporal direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:composicao-transformacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-046",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Na composição de transformações, a matriz mais à direita atua...",
+      "o": [
+        "por último.",
+        "primeiro.",
+        "nunca.",
+        "só se for identidade."
+      ],
+      "a": 1,
+      "sol": "Em BAx, primeiro calcula-se Ax e depois B.",
+      "hyp": "Pode ler o produto da esquerda para a direita como sequência temporal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:ordem-transformacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-047",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A=[[1,1],[0,1]] e v=(2,3)^T, então A²v=",
+      "o": [
+        "(5,3)^T.",
+        "(2,3)^T.",
+        "(8,3)^T.",
+        "(11,3)^T."
+      ],
+      "a": 2,
+      "sol": "A²=[[1,2],[0,1]]; multiplicando por (2,3) dá (2+6,3)=(8,3).",
+      "hyp": "Pode aplicar A apenas uma vez.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:potencia-vetor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-048",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são matrizes diagonais da mesma ordem, então...",
+      "o": [
+        "AB≠BA sempre.",
+        "AB não está definido.",
+        "AB é antissimétrica.",
+        "AB=BA."
+      ],
+      "a": 3,
+      "sol": "Na diagonal, os produtos correspondentes são escalares e comutam.",
+      "hyp": "Pode generalizar não comutatividade para todos os casos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:diagonais-comutam",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-049",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma matriz de preços P (1×n) multiplicada por um vetor de quantidades q (n×1) produz...",
+      "o": [
+        "um escalar com o custo/valor total, se as unidades forem compatíveis.",
+        "um vetor n×1 de preços.",
+        "uma matriz n×n.",
+        "a média dos preços."
+      ],
+      "a": 0,
+      "sol": "Pq soma preço_i×quantidade_i.",
+      "hyp": "Pode pensar que o produto mantém todas as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:produto-escalar-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-PRD-050",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-produto",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Para trabalhar corretamente com produtos de matrizes é essencial controlar...",
+      "o": [
+        "apenas a soma dos elementos.",
+        "compatibilidade das dimensões, ordem dos fatores e regra linha-coluna.",
+        "apenas se as matrizes são quadradas.",
+        "apenas a diagonal principal."
+      ],
+      "a": 1,
+      "sol": "Esses três aspetos evitam os erros mais comuns do produto matricial.",
+      "hyp": "Pode reduzir o produto matricial a cálculo mecânico sem verificar estrutura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-produto:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
