@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No item anterior, um argumento de z² é...",
+      "q": "Se z=2(cos(π/6)+i sin(π/6)), um argumento de z² é...",
       "o": [
         "π/6.",
         "π/12.",
@@ -314,7 +314,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No item anterior, um argumento de z1z2 é...",
+      "q": "Se z1 tem argumento π/3 e z2 tem argumento π/6, um argumento de z1z2 é...",
       "o": [
         "π/6.",
         "π/3.",
@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No item anterior, um argumento do quociente é...",
+      "q": "Se arg z1=π e arg z2=π/4, um argumento de z1/z2 é...",
       "o": [
         "5π/4.",
         "3π/4.",
