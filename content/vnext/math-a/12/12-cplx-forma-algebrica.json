@@ -22,8 +22,7 @@
         "a+bi, com a,b reais.",
         "a/b.",
         "a+bx.",
-        "r(cosθ+i sinθ) apenas.",
-        "a²+b²."
+        "r(cosθ+i sinθ) apenas."
       ],
       "a": 0,
       "sol": "Todo complexo pode escrever-se como a+bi.",
@@ -36,7 +35,7 @@
       "signature": "12-cplx-forma-algebrica:forma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN12CPLX-FA-002",
