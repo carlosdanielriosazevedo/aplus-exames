@@ -1178,7 +1178,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Aplicação",
-      "q": "No conjunto anterior, qual é a amplitude?",
+      "q": "Num conjunto com mínimo 20, Q1=30, mediana=40, Q3=50 e máximo=70, qual é a amplitude?",
       "o": [
         "20",
         "30",
