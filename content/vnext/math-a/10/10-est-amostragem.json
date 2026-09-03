@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Na população anterior, quantos elementos vêm do estrato de 600 numa amostra proporcional de 250?",
+      "q": "Uma população de 2 000 elementos está dividida em estratos de 1 000, 600 e 400. Quantos elementos vêm do estrato de 600 numa amostra proporcional de 250?",
       "o": [
         "50",
         "75",
@@ -1259,7 +1259,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Se os 300 respondentes da questão anterior diferirem dos 700 não respondentes, qual é o principal problema?",
+      "q": "Uma sondagem seleciona aleatoriamente 1 000 pessoas, mas só 300 respondem. Se os 300 respondentes diferirem sistematicamente dos 700 não respondentes, qual é o principal problema?",
       "o": [
         "Erro de arredondamento.",
         "Censo.",
@@ -1313,7 +1313,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Na mesma população, quantos estudantes de mestrado entram numa amostra proporcional de 400?",
+      "q": "Uma universidade tem 60% estudantes de licenciatura, 25% de mestrado e 15% de doutoramento. Quantos estudantes de mestrado entram numa amostra proporcional de 400?",
       "o": [
         "100",
         "80",
