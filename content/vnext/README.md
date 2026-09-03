@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **4 900 perguntas**
-- Progresso bruto: **86,73%**
+- Concluído em rascunho: **5 650 perguntas**
+- Progresso bruto: **100%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -427,3 +427,50 @@ Restam apenas os **15 subtemas opcionais do 12.º ano**:
 - Matrizes — 250 perguntas
 
 Próxima matéria: **12.º opcional — Introdução à inferência estatística**.
+
+
+### 12.º opcional — Introdução à inferência estatística
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Raciocínio inferencial e amostragem | 50 | 50 | lote completo em protótipo |
+| Distribuições de amostragem / comportamento amostral | 50 | 50 | lote completo em protótipo |
+| Teorema Limite Central em contexto introdutório | 50 | 50 | lote completo em protótipo |
+| Estimação de parâmetros | 50 | 50 | lote completo em protótipo |
+| Intervalos de confiança, margem de erro e interpretação | 50 | 50 | lote completo em protótipo |
+
+
+### 12.º opcional — Primitivas e integrais
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Conceito de primitiva/antiderivada | 50 | 50 | lote completo em protótipo |
+| Primitivas imediatas e propriedades | 50 | 50 | lote completo em protótipo |
+| Integral definido | 50 | 50 | lote completo em protótipo |
+| Teorema Fundamental do Cálculo / Fórmula de Barrow | 50 | 50 | lote completo em protótipo |
+| Áreas e aplicações | 50 | 50 | lote completo em protótipo |
+
+
+### 12.º opcional — Matrizes
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Representação, dimensão, elementos e tipos de matrizes | 50 | 50 | lote completo em protótipo |
+| Adição, subtração e multiplicação por escalar | 50 | 50 | lote completo em protótipo |
+| Produto de matrizes, compatibilidade e não comutatividade | 50 | 50 | lote completo em protótipo |
+| Transformações geométricas com matrizes | 50 | 50 | lote completo em protótipo |
+| Modelação e aplicações | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 5 650 perguntas
+
+- **10.º ano completo: 1 550/1 550**
+- **11.º ano completo: 1 750/1 750**
+- **12.º ano obrigatório completo: 1 600/1 600**
+- **12.º opcional — Inferência Estatística: 250/250**
+- **12.º opcional — Primitivas e Integrais: 250/250**
+- **12.º opcional — Matrizes: 250/250**
+- **113/113 submatérias com o alvo editorial inicial de 50 perguntas**
+- **Total vNext: 5 650/5 650 (100%)**
+
+Estado: banco editorial completo em **protótipo**, ainda não ligado ao motor live. O passo seguinte é QA global matemático/estrutural/pedagógico, deduplicação semântica, validação curricular e integração segura com o scope por ano e opcionais do 12.º.
