@@ -533,8 +533,8 @@
       "q": "Se f(x)=9, entao f'(x)=",
       "o": [
         "9",
-        "0+1",
-        "0",
+        "1",
+        "-9",
         "0"
       ],
       "a": 3,
@@ -548,7 +548,7 @@
       "signature": "11-cd-funcao-derivada:derivar-polinomio:20",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
-      "optionOrderVersion": 1
+      "optionOrderVersion": 2
     },
     {
       "id": "VN11CD-FD-021",
