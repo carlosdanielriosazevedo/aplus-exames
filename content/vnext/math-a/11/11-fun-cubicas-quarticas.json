@@ -665,7 +665,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Os zeros da função anterior são...",
+      "q": "Se f(x)=x³−x²−4x+4=(x−1)(x−2)(x+2), quais são os zeros?",
       "o": [
         "−2,1,2.",
         "−1,2,4.",
