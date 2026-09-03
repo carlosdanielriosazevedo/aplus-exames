@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Simplificando a derivada do item anterior obtemos...",
+      "q": "No domínio de f(x)=ln((x+1)/(x−1)), f'(x)=1/(x+1)−1/(x−1). Simplificando, obtemos...",
       "o": [
         "−2/(x²−1).",
         "2/(x²−1).",
@@ -1178,7 +1178,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No domínio anterior, f'(x)=",
+      "q": "Se f(x)=ln(x²−4), com domínio ]−∞,−2[∪]2,+∞[, então f'(x)=",
       "o": [
         "1/(x²−4).",
         "2/(x−4).",
