@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **500 perguntas**
-- Progresso bruto: **8,85%**
+- Concluído em rascunho: **750 perguntas**
+- Progresso bruto: **13,27%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -68,11 +68,11 @@ Próxima matéria: **10.º — Modelos matemáticos em finanças**.
 | Submatéria | Meta | Rascunho | Estado |
 |---|---:|---:|---|
 | Problema estatístico, população, amostra, variável e variabilidade | 50 | 50 | lote completo em protótipo |
-| Amostragem, representatividade e enviesamento | 50 | 0 | próximo lote |
-| Dados univariados e representações | 50 | 0 | por iniciar |
-| Medidas de localização | 50 | 0 | por iniciar |
-| Medidas de dispersão e interpretação conjunta | 50 | 0 | por iniciar |
-| Dados bivariados, correlação e regressão | 50 | 0 | por iniciar |
+| Amostragem, representatividade e enviesamento | 50 | 50 | lote completo em protótipo |
+| Dados univariados e representações | 50 | 50 | lote completo em protótipo |
+| Medidas de localização | 50 | 50 | lote completo em protótipo |
+| Medidas de dispersão e interpretação conjunta | 50 | 50 | lote completo em protótipo |
+| Dados bivariados, correlação e regressão | 50 | 50 | lote completo em protótipo |
 
 
 ## Marco editorial — 500 perguntas
@@ -83,3 +83,13 @@ Próxima matéria: **10.º — Modelos matemáticos em finanças**.
 - Total vNext: **500/~5 650 (8,85%)**
 
 Próximo lote: **10.º — Estatística — Amostragem, representatividade e enviesamento**.
+
+
+## Marco editorial — 750 perguntas
+
+- Eleições e Partilha: **200/200**
+- Modelos matemáticos em finanças: **250/250**
+- Estatística: **300/300**
+- Total vNext: **750/~5 650 (13,27%)**
+
+Próxima matéria: **10.º — Geometria sintética**.
