@@ -800,7 +800,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Na mesma função, quanto vale f(3)?",
+      "q": "Se f(x)=x+1 para x<0 e f(x)=x² para x≥0, quanto vale f(3)?",
       "o": [
         "4",
         "9",
