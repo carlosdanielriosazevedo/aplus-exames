@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcd",
+  "subtopicId": "12-fcd-aplicacoes",
+  "subtopic": "Estudo de funções, modelação e otimização",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha monotonia, extremos, concavidade, otimização e modelação com polinómios, exponenciais e logaritmos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCD-AP-001",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f'(x)>0 num intervalo, então f é...",
+      "o": [
+        "crescente nesse intervalo.",
+        "decrescente nesse intervalo.",
+        "constante.",
+        "necessariamente positiva."
+      ],
+      "a": 0,
+      "sol": "Derivada positiva implica crescimento.",
+      "hyp": "Pode confundir sinal da função com sinal da derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-002",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f'(x)<0 num intervalo, então f é...",
+      "o": [
+        "crescente.",
+        "decrescente.",
+        "constante.",
+        "necessariamente negativa."
+      ],
+      "a": 1,
+      "sol": "Derivada negativa implica decréscimo.",
+      "hyp": "Pode confundir valor e variação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-003",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um ponto crítico interior pode ocorrer quando...",
+      "o": [
+        "f(x)=0 apenas.",
+        "f(x)=1.",
+        "f'(x)=0 ou f' não existe.",
+        "f''(x)=0 sempre."
+      ],
+      "a": 2,
+      "sol": "Extremos interiores podem ocorrer em pontos onde a derivada é nula ou não existe.",
+      "hyp": "Pode reduzir ponto crítico a raiz da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:critico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-004",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f' muda de positivo para negativo em x=a, então f tem em a...",
+      "o": [
+        "mínimo local.",
+        "ponto de inflexão obrigatório.",
+        "raiz obrigatória.",
+        "máximo local."
+      ],
+      "a": 3,
+      "sol": "A função passa de crescente a decrescente.",
+      "hyp": "Pode inverter o teste de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-005",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f' muda de negativo para positivo em x=a, então f tem...",
+      "o": [
+        "mínimo local.",
+        "máximo local.",
+        "assíntota.",
+        "descontinuidade."
+      ],
+      "a": 0,
+      "sol": "A função passa de decrescente a crescente.",
+      "hyp": "Pode inverter a interpretação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-006",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f'(x)=2x−4, o ponto crítico é...",
+      "o": [
+        "x=4.",
+        "x=2.",
+        "x=−2.",
+        "x=0."
+      ],
+      "a": 1,
+      "sol": "2x−4=0 => x=2.",
+      "hyp": "Pode igualar apenas x a4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:critico-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-007",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para f'(x)=2x−4, f é decrescente em...",
+      "o": [
+        "]2,+∞[.",
+        "R.",
+        "]−∞,2[.",
+        "nenhum intervalo."
+      ],
+      "a": 2,
+      "sol": "2x−4<0 quando x<2.",
+      "hyp": "Pode trocar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:sinal-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-008",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No mesmo caso, f tem em x=2...",
+      "o": [
+        "máximo local.",
+        "ponto de inflexão.",
+        "nenhum extremo.",
+        "mínimo local."
+      ],
+      "a": 3,
+      "sol": "f' passa de negativo para positivo.",
+      "hyp": "Pode não combinar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-009",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)=x(x−3), os pontos críticos são...",
+      "o": [
+        "0 e 3.",
+        "0 apenas.",
+        "3 apenas.",
+        "−3 e0."
+      ],
+      "a": 0,
+      "sol": "Produto nulo quando x=0 ou x=3.",
+      "hyp": "Pode resolver apenas um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:criticos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-010",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Com f'(x)=x(x−3), f é crescente em...",
+      "o": [
+        "]0,3[.",
+        "]−∞,0[∪]3,+∞[.",
+        "R.",
+        "]−∞,3[."
+      ],
+      "a": 1,
+      "sol": "O produto é positivo fora das raízes.",
+      "hyp": "Pode errar a tabela de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-011",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Com f'(x)=x(x−3), em x=0 ocorre...",
+      "o": [
+        "mínimo local.",
+        "nenhum extremo.",
+        "máximo local.",
+        "assíntota."
+      ],
+      "a": 2,
+      "sol": "f' muda de positivo para negativo.",
+      "hyp": "Pode ignorar a ordem dos sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-012",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No mesmo exemplo, em x=3 ocorre...",
+      "o": [
+        "máximo local.",
+        "nenhum extremo.",
+        "raiz obrigatória de f.",
+        "mínimo local."
+      ],
+      "a": 3,
+      "sol": "f' muda de negativo para positivo.",
+      "hyp": "Pode confundir raiz de f' com raiz de f.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-013",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f''(a)>0 e f'(a)=0, então a é, sob condições usuais...",
+      "o": [
+        "ponto de mínimo local.",
+        "ponto de máximo local.",
+        "ponto de inflexão.",
+        "assíntota vertical."
+      ],
+      "a": 0,
+      "sol": "Segunda derivada positiva indica convexidade local.",
+      "hyp": "Pode inverter o teste da segunda derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:segunda-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-014",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f''(a)<0 e f'(a)=0, então a é...",
+      "o": [
+        "ponto de mínimo local.",
+        "ponto de máximo local.",
+        "necessariamente raiz.",
+        "ponto de descontinuidade."
+      ],
+      "a": 1,
+      "sol": "Segunda derivada negativa indica concavidade local.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:segunda-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-015",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f''(x)>0 num intervalo, o gráfico é...",
+      "o": [
+        "côncavo.",
+        "linear.",
+        "convexo nesse intervalo.",
+        "necessariamente crescente."
+      ],
+      "a": 2,
+      "sol": "Segunda derivada positiva caracteriza convexidade.",
+      "hyp": "Pode confundir convexidade com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:convexidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-016",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f''(x)<0 num intervalo, o gráfico é...",
+      "o": [
+        "convexo.",
+        "necessariamente decrescente.",
+        "constante.",
+        "côncavo."
+      ],
+      "a": 3,
+      "sol": "Segunda derivada negativa indica concavidade.",
+      "hyp": "Pode confundir curvatura com declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:concavidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-017",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4x+7, o ponto crítico é...",
+      "o": [
+        "x=2.",
+        "x=4.",
+        "x=−2.",
+        "x=7."
+      ],
+      "a": 0,
+      "sol": "f'=2x−4=0.",
+      "hyp": "Pode usar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-018",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "O valor mínimo de f(x)=x²−4x+7 é...",
+      "o": [
+        "7.",
+        "3.",
+        "−1.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "f(2)=4−8+7=3.",
+      "hyp": "Pode devolver a abcissa do mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:valor-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-019",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=−x²+6x−5, o máximo ocorre em...",
+      "o": [
+        "x=6.",
+        "x=−3.",
+        "x=3.",
+        "x=5."
+      ],
+      "a": 2,
+      "sol": "f'=−2x+6=0.",
+      "hyp": "Pode usar −b/a sem dividir por2 corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:maximo-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-020",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "O valor máximo da função anterior é...",
+      "o": [
+        "3.",
+        "−5.",
+        "9.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "f(3)=−9+18−5=4.",
+      "hyp": "Pode devolver a abcissa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:valor-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-021",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma receita é R(q)=20q−q². Para maximizar R, devemos resolver...",
+      "o": [
+        "R'(q)=0.",
+        "R(q)=0 apenas.",
+        "R''(q)=0.",
+        "q=20 obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Candidatos interiores a máximo surgem de R'(q)=0.",
+      "hyp": "Pode procurar zeros da receita em vez do máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:otimizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-022",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para R(q)=20q−q², a quantidade que maximiza a receita é...",
+      "o": [
+        "q=20.",
+        "q=10.",
+        "q=5.",
+        "q=0."
+      ],
+      "a": 1,
+      "sol": "R'=20−2q=0 =>q=10.",
+      "hyp": "Pode usar a interseção com o eixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:otimizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-023",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A receita máxima no item anterior é...",
+      "o": [
+        "200.",
+        "20.",
+        "100.",
+        "10."
+      ],
+      "a": 2,
+      "sol": "R(10)=200−100=100.",
+      "hyp": "Pode confundir quantidade e receita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:otimizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-024",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Um custo é C(x)=x²−12x+50. O nível de produção de custo mínimo é...",
+      "o": [
+        "x=12.",
+        "x=50.",
+        "x=0.",
+        "x=6."
+      ],
+      "a": 3,
+      "sol": "C'=2x−12=0.",
+      "hyp": "Pode usar o coeficiente linear sem dividir por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:custo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-025",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O custo mínimo do item anterior é...",
+      "o": [
+        "14.",
+        "50.",
+        "36.",
+        "6."
+      ],
+      "a": 0,
+      "sol": "C(6)=36−72+50=14.",
+      "hyp": "Pode devolver x=6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:custo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-026",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Um retângulo tem perímetro 20. Se um lado mede x, a área pode escrever-se...",
+      "o": [
+        "A(x)=x(20−x).",
+        "A(x)=x(10−x).",
+        "A(x)=20x.",
+        "A(x)=x²."
+      ],
+      "a": 1,
+      "sol": "2x+2y=20 => y=10−x.",
+      "hyp": "Pode esquecer dividir o perímetro por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-027",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área do retângulo anterior é máxima para...",
+      "o": [
+        "x=10.",
+        "x=2,5.",
+        "x=5.",
+        "x=20."
+      ],
+      "a": 2,
+      "sol": "A'=10−2x=0 =>x=5.",
+      "hyp": "Pode usar uma extremidade do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-028",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O resultado anterior mostra que, entre retângulos de perímetro fixo, a área é máxima quando...",
+      "o": [
+        "um lado tende a0.",
+        "os lados são muito diferentes.",
+        "o maior lado é o dobro do menor.",
+        "o retângulo é um quadrado."
+      ],
+      "a": 3,
+      "sol": "Com perímetro20, x=y=5.",
+      "hyp": "Pode não traduzir o resultado algébrico geometricamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-029",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma população segue P(t)=1000e^{0,05t}. A taxa instantânea de crescimento é...",
+      "o": [
+        "P'(t)=50e^{0,05t}.",
+        "P'(t)=0,05e^{0,05t}.",
+        "P'(t)=1000e^t.",
+        "P'(t)=1050e^{0,05t}."
+      ],
+      "a": 0,
+      "sol": "Deriva-se a exponencial:1000·0,05=50.",
+      "hyp": "Pode confundir taxa relativa e absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:populacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-030",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No modelo anterior, P'(t)/P(t) é...",
+      "o": [
+        "50.",
+        "0,05.",
+        "1000.",
+        "e^{0,05t}."
+      ],
+      "a": 1,
+      "sol": "A taxa relativa é constante0,05.",
+      "hyp": "Pode usar a taxa absoluta inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:taxa-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-031",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma substância decai segundo M(t)=80e^{-0,2t}. Como M'(t)<0, conclui-se que...",
+      "o": [
+        "M cresce.",
+        "M é constante.",
+        "M diminui ao longo do tempo.",
+        "M fica negativa."
+      ],
+      "a": 2,
+      "sol": "M'=-16e^{-0,2t}<0.",
+      "hyp": "Pode pensar que expoente negativo torna a função negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:decaimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-032",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x e^{-x}, x>0, f'(x)=",
+      "o": [
+        "e^{-x}(1+x).",
+        "−xe^{-x}.",
+        "e^{-x}.",
+        "e^{-x}(1−x)."
+      ],
+      "a": 3,
+      "sol": "Produto: e^{-x}−xe^{-x}.",
+      "hyp": "Pode esquecer a derivada de e^{-x}.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:produto-aplicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-033",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A função x e^{-x}, x>0, atinge máximo em...",
+      "o": [
+        "x=1.",
+        "x=0.",
+        "x=e.",
+        "x=−1."
+      ],
+      "a": 0,
+      "sol": "f'=e^{-x}(1−x)=0 =>x=1.",
+      "hyp": "Pode procurar zero da exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:maximo-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-034",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O valor máximo de x e^{-x}, x>0, é...",
+      "o": [
+        "e.",
+        "1/e.",
+        "1.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "f(1)=e^{-1}=1/e.",
+      "hyp": "Pode devolver a abcissa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:valor-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-035",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=ln x/x, x>0, f'(x)=",
+      "o": [
+        "(1+ln x)/x².",
+        "1/x².",
+        "(1−ln x)/x².",
+        "ln x/x²."
+      ],
+      "a": 2,
+      "sol": "Regra do quociente.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:log-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-036",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A função ln x/x tem máximo em...",
+      "o": [
+        "x=1.",
+        "x=0.",
+        "x=e².",
+        "x=e."
+      ],
+      "a": 3,
+      "sol": "f'=0 quando ln x=1, isto é x=e.",
+      "hyp": "Pode resolver ln x=1 como x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:maximo-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-037",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)=(x−1)(x+2), então f é crescente em...",
+      "o": [
+        "]−∞,−2[∪]1,+∞[.",
+        "]−2,1[.",
+        "R.",
+        "]−∞,1[."
+      ],
+      "a": 0,
+      "sol": "O produto é positivo fora das raízes −2 e1.",
+      "hyp": "Pode construir mal a tabela de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:sinal-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-038",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "No caso anterior, f tem...",
+      "o": [
+        "mínimo em−2 e máximo em1.",
+        "máximo local em −2 e mínimo local em1.",
+        "dois máximos.",
+        "dois mínimos."
+      ],
+      "a": 1,
+      "sol": "O sinal muda +→− em−2 e −→+ em1.",
+      "hyp": "Pode inverter os extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-039",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)=e^x−2, o ponto crítico é...",
+      "o": [
+        "x=2.",
+        "x=e².",
+        "x=ln2.",
+        "x=1/2."
+      ],
+      "a": 2,
+      "sol": "e^x=2 =>x=ln2.",
+      "hyp": "Pode aplicar ln apenas ao expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:critico-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-040",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Para f'(x)=e^x−2, f tem nesse ponto...",
+      "o": [
+        "máximo local.",
+        "nenhum extremo.",
+        "ponto de inflexão obrigatório.",
+        "mínimo local."
+      ],
+      "a": 3,
+      "sol": "e^x−2 passa de negativo para positivo.",
+      "hyp": "Pode não usar a monotonia da exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:minimo-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-041",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x−ln x, x>0, então f'(x)=",
+      "o": [
+        "1−1/x.",
+        "1+1/x.",
+        "x−1/x.",
+        "1−ln x."
+      ],
+      "a": 0,
+      "sol": "Deriva-se termo a termo.",
+      "hyp": "Pode manter ln x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-042",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A função x−ln x, x>0, tem mínimo em...",
+      "o": [
+        "x=e.",
+        "x=1.",
+        "x=0.",
+        "x=−1."
+      ],
+      "a": 1,
+      "sol": "f'=0 =>1−1/x=0 =>x=1; f''=1/x²>0.",
+      "hyp": "Pode resolver 1−1/x=0 incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:minimo-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-043",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O valor mínimo de x−ln x, x>0, é...",
+      "o": [
+        "0.",
+        "e−1.",
+        "1.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "f(1)=1−0=1.",
+      "hyp": "Pode avaliar em e.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:valor-minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-044",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "A altura de um projétil é h(t)=−5t²+20t+2. A altura máxima ocorre em...",
+      "o": [
+        "t=4.",
+        "t=1.",
+        "t=20.",
+        "t=2."
+      ],
+      "a": 3,
+      "sol": "h'=−10t+20=0 =>t=2.",
+      "hyp": "Pode usar a raiz positiva da função em vez do vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:projetil",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-045",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A altura máxima do projétil anterior é...",
+      "o": [
+        "22.",
+        "42.",
+        "20.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "h(2)=−20+40+2=22.",
+      "hyp": "Pode devolver o instante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:projetil",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-046",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma função lucro é L(q)=−2q²+80q−300. O lucro máximo ocorre para...",
+      "o": [
+        "q=40.",
+        "q=20.",
+        "q=10.",
+        "q=80."
+      ],
+      "a": 1,
+      "sol": "L'=−4q+80=0 =>q=20.",
+      "hyp": "Pode usar o coeficiente80 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:lucro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-047",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O lucro máximo no item anterior é...",
+      "o": [
+        "300.",
+        "800.",
+        "500.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "L(20)=−800+1600−300=500.",
+      "hyp": "Pode esquecer o custo fixo300.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:lucro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-048",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num problema de otimização com domínio fechado [a,b], para encontrar máximo absoluto devemos comparar...",
+      "o": [
+        "apenas os pontos onde f'=0.",
+        "apenas a e b.",
+        "apenas onde f''=0.",
+        "valores nos pontos críticos interiores e nos extremos a,b."
+      ],
+      "a": 3,
+      "sol": "Extremos absolutos em intervalos fechados podem ocorrer nos extremos do domínio ou em pontos críticos.",
+      "hyp": "Pode ignorar as fronteiras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:otimizacao-fechada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-049",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma caixa sem tampa é feita cortando quadrados de lado x nos cantos de uma folha 20×30. O volume é...",
+      "o": [
+        "V(x)=x(20−2x)(30−2x).",
+        "V(x)=x(20−x)(30−x).",
+        "V(x)=600x.",
+        "V(x)=20·30−4x²."
+      ],
+      "a": 0,
+      "sol": "Após dobrar, altura x e lados da base 20−2x e30−2x.",
+      "hyp": "Pode retirar x apenas uma vez de cada dimensão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:caixa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-AP-050",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-aplicacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Antes de otimizar o volume da caixa anterior, o domínio fisicamente admissível é...",
+      "o": [
+        "0<x<20.",
+        "0<x<10.",
+        "0<x<15.",
+        "x>0 sem limite."
+      ],
+      "a": 1,
+      "sol": "É preciso 20−2x>0 e30−2x>0; a restrição mais forte é x<10.",
+      "hyp": "Pode considerar apenas a maior dimensão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-aplicacoes:dominio-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
