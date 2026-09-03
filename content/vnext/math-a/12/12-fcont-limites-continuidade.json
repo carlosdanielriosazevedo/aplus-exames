@@ -268,7 +268,7 @@
         "não existe domínio perto do ponto."
       ],
       "a": 1,
-      "sol": "Pode-se 'corrigir' redefinindo o valor no ponto.",
+      "sol": "Se o limite é finito, a descontinuidade pode ser eliminada redefinindo o valor da função no ponto.",
       "hyp": "Pode confundir com salto.",
       "contexts": [
         "mission",
