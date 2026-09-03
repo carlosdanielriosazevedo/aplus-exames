@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-trig",
+  "subtopicId": "11-trig-relacoes",
+  "subtopic": "Relações e identidades trigonométricas fundamentais",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha identidade fundamental, tangente, sinais, reduções, paridade, recuperação de seno/cosseno e simplificação de expressões trigonométricas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11TRIG-REL-001",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A identidade trigonométrica fundamental é...",
+      "o": [
+        "sin²x+cos²x=1.",
+        "sin x+cos x=1.",
+        "tan²x=1.",
+        "sin x cos x=1."
+      ],
+      "a": 0,
+      "sol": "Resulta da equação do círculo unitário.",
+      "hyp": "Pode confundir soma dos quadrados com soma simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:identidade-fundamental",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-002",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Quando cos x≠0, tan x é igual a...",
+      "o": [
+        "cos x/sin x.",
+        "sin x/cos x.",
+        "sin x·cos x.",
+        "1/cos x."
+      ],
+      "a": 1,
+      "sol": "A tangente é o quociente seno/cosseno.",
+      "hyp": "Pode inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:definicao-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-003",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se sin x=0 e cos x≠0, então tan x=",
+      "o": [
+        "1.",
+        "não existe.",
+        "0.",
+        "cos x."
+      ],
+      "a": 2,
+      "sol": "tan x=sin x/cos x=0.",
+      "hyp": "Pode achar que tangente não existe sempre que seno é zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-004",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A tangente não está definida quando...",
+      "o": [
+        "sin x=0.",
+        "sin x=cos x.",
+        "x=0.",
+        "cos x=0."
+      ],
+      "a": 3,
+      "sol": "O denominador de tan x=sin x/cos x não pode ser zero.",
+      "hyp": "Pode confundir com zeros do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:dominio-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-005",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se sin x=3/5 e cos x=4/5, então tan x=",
+      "o": [
+        "3/4",
+        "4/3",
+        "7/5",
+        "12/25"
+      ],
+      "a": 0,
+      "sol": "tan x=(3/5)/(4/5)=3/4.",
+      "hyp": "Pode multiplicar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:calcular-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-006",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se sin x=5/13 e x está no 1.º quadrante, então cos x=",
+      "o": [
+        "−12/13",
+        "12/13",
+        "5/12",
+        "8/13"
+      ],
+      "a": 1,
+      "sol": "cos²x=1−25/169=144/169 e no 1.º quadrante cos>0.",
+      "hyp": "Pode escolher a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:achar-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-007",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se cos x=−3/5 e x está no 2.º quadrante, então sin x=",
+      "o": [
+        "−4/5",
+        "3/4",
+        "4/5",
+        "−3/4"
+      ],
+      "a": 2,
+      "sol": "sin²x=1−9/25=16/25 e no 2.º quadrante sin>0.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:achar-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-008",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se sin x=−8/17 e x está no 4.º quadrante, então cos x=",
+      "o": [
+        "−15/17",
+        "8/15",
+        "−8/15",
+        "15/17"
+      ],
+      "a": 3,
+      "sol": "cos²x=1−64/289=225/289 e no 4.º quadrante cos>0.",
+      "hyp": "Pode escolher o sinal do 3.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:achar-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-009",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se cos x=−12/13 e x está no 3.º quadrante, então sin x=",
+      "o": [
+        "−5/13",
+        "5/13",
+        "−12/5",
+        "5/12"
+      ],
+      "a": 0,
+      "sol": "sin²x=25/169 e no 3.º quadrante sin<0.",
+      "hyp": "Pode usar o sinal positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:achar-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-010",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se sin x=1/2 e cos x=√3/2, então tan x=",
+      "o": [
+        "√3",
+        "√3/3",
+        "1/2",
+        "2/√3"
+      ],
+      "a": 1,
+      "sol": "(1/2)/(√3/2)=1/√3=√3/3.",
+      "hyp": "Pode inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-011",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "tan(π/4)=",
+      "o": [
+        "0",
+        "√3",
+        "1",
+        "√3/3"
+      ],
+      "a": 2,
+      "sol": "sin e cos valem ambos √2/2.",
+      "hyp": "Pode confundir com π/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-012",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "tan(π/3)=",
+      "o": [
+        "√3/3",
+        "1",
+        "0",
+        "√3"
+      ],
+      "a": 3,
+      "sol": "(√3/2)/(1/2)=√3.",
+      "hyp": "Pode trocar com tan π/6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-013",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "tan(π/6)=",
+      "o": [
+        "√3/3",
+        "√3",
+        "1",
+        "1/2"
+      ],
+      "a": 0,
+      "sol": "(1/2)/(√3/2)=√3/3.",
+      "hyp": "Pode trocar com tan π/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-014",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No 2.º quadrante, tan x é...",
+      "o": [
+        "positiva.",
+        "negativa.",
+        "zero sempre.",
+        "indefinida sempre."
+      ],
+      "a": 1,
+      "sol": "Seno positivo e cosseno negativo dão quociente negativo.",
+      "hyp": "Pode confundir sinal da tangente com sinal do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:sinal-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-015",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No 3.º quadrante, tan x é...",
+      "o": [
+        "negativa.",
+        "zero.",
+        "positiva.",
+        "sempre indefinida."
+      ],
+      "a": 2,
+      "sol": "Seno e cosseno são ambos negativos, logo o quociente é positivo.",
+      "hyp": "Pode esquecer regra de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:sinal-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-016",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A identidade 1+tan²x=1/cos²x é válida quando...",
+      "o": [
+        "sin x≠0.",
+        "x>0.",
+        "tan x=0.",
+        "cos x≠0."
+      ],
+      "a": 3,
+      "sol": "Deriva de dividir sin²x+cos²x=1 por cos²x, exigindo cos x≠0.",
+      "hyp": "Pode esquecer a condição de domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:identidade-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-017",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=3/4 e x está no 1.º quadrante, uma escolha compatível para (sin x,cos x) é...",
+      "o": [
+        "(3/5,4/5).",
+        "(4/5,3/5).",
+        "(−3/5,4/5).",
+        "(3/4,1)."
+      ],
+      "a": 0,
+      "sol": "Um triângulo 3-4-5 dá sin/cos=3/4.",
+      "hyp": "Pode inverter seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-para-sincos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-018",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=−5/12 e x está no 4.º quadrante, então...",
+      "o": [
+        "sin x=5/13 e cos x=−12/13.",
+        "sin x=−5/13 e cos x=12/13.",
+        "sin x=−12/13 e cos x=5/13.",
+        "sin x=5/12 e cos x=1."
+      ],
+      "a": 1,
+      "sol": "No 4.º quadrante seno negativo e cosseno positivo; triângulo 5-12-13.",
+      "hyp": "Pode atribuir os sinais do 2.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-para-sincos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-019",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A relação sin(−x)=−sin x mostra que...",
+      "o": [
+        "o seno é par.",
+        "o seno tem período π.",
+        "o seno é ímpar.",
+        "o seno é sempre negativo."
+      ],
+      "a": 2,
+      "sol": "Função ímpar satisfaz f(−x)=−f(x).",
+      "hyp": "Pode trocar paridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-020",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A relação cos(−x)=cos x mostra que...",
+      "o": [
+        "o cosseno é ímpar.",
+        "o cosseno tem período π.",
+        "o cosseno é sempre positivo.",
+        "o cosseno é par."
+      ],
+      "a": 3,
+      "sol": "Função par satisfaz f(−x)=f(x).",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-021",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "sin(π−x) é igual a...",
+      "o": [
+        "sin x.",
+        "−sin x.",
+        "cos x.",
+        "−cos x."
+      ],
+      "a": 0,
+      "sol": "Ângulos suplementares têm o mesmo seno.",
+      "hyp": "Pode trocar a relação de redução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:reducoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-022",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "cos(π−x) é igual a...",
+      "o": [
+        "cos x.",
+        "−cos x.",
+        "sin x.",
+        "−sin x."
+      ],
+      "a": 1,
+      "sol": "No 2.º quadrante a abcissa muda de sinal.",
+      "hyp": "Pode manter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:reducoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-023",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "sin(π+x) é igual a...",
+      "o": [
+        "sin x.",
+        "cos x.",
+        "−sin x.",
+        "−cos x."
+      ],
+      "a": 2,
+      "sol": "Somar π leva ao ponto oposto no círculo.",
+      "hyp": "Pode esquecer que ambas as coordenadas mudam de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:reducoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-024",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "cos(π+x) é igual a...",
+      "o": [
+        "cos x.",
+        "sin x.",
+        "−sin x.",
+        "−cos x."
+      ],
+      "a": 3,
+      "sol": "Pontos diametralmente opostos têm cossenos opostos.",
+      "hyp": "Pode manter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:reducoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-025",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "sin(2π−x) é igual a...",
+      "o": [
+        "−sin x.",
+        "sin x.",
+        "cos x.",
+        "−cos x."
+      ],
+      "a": 0,
+      "sol": "É a reflexão em Ox do ângulo x.",
+      "hyp": "Pode confundir com π−x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:reducoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-026",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "cos(2π−x) é igual a...",
+      "o": [
+        "−cos x.",
+        "cos x.",
+        "sin x.",
+        "−sin x."
+      ],
+      "a": 1,
+      "sol": "Reflexão em Ox preserva a abcissa.",
+      "hyp": "Pode trocar cosseno e seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:reducoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-027",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se sin x=4/5 e x∈]π/2,π[, então tan x=",
+      "o": [
+        "4/3",
+        "−3/4",
+        "−4/3",
+        "3/4"
+      ],
+      "a": 2,
+      "sol": "cos x=−3/5 e tan=(4/5)/(−3/5)=−4/3.",
+      "hyp": "Pode errar o sinal ou inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:sincos-para-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-028",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se cos x=8/17 e x está no 4.º quadrante, então tan x=",
+      "o": [
+        "15/8",
+        "−8/15",
+        "8/15",
+        "−15/8"
+      ],
+      "a": 3,
+      "sol": "sin x=−15/17, logo tan=−15/8.",
+      "hyp": "Pode inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:sincos-para-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-029",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=1 e x∈]π,3π/2[, então sin x=",
+      "o": [
+        "−√2/2",
+        "√2/2",
+        "−1/2",
+        "1/2"
+      ],
+      "a": 0,
+      "sol": "No 3.º quadrante seno e cosseno são negativos com igual módulo.",
+      "hyp": "Pode escolher os sinais do 1.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-para-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-030",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=−√3 e x está no 2.º quadrante, então cos x=",
+      "o": [
+        "1/2",
+        "−1/2",
+        "−√3/2",
+        "√3/2"
+      ],
+      "a": 1,
+      "sol": "Ângulo de referência π/3; no 2.º quadrante cos<0.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-notavel-quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-031",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (1−sin²x)/cos²x, onde cos x≠0.",
+      "o": [
+        "tan²x.",
+        "sin²x.",
+        "1.",
+        "cos²x."
+      ],
+      "a": 2,
+      "sol": "1−sin²x=cos²x; o quociente vale 1.",
+      "hyp": "Pode não usar a identidade fundamental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-032",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (1−cos²x)/sin²x, onde sin x≠0.",
+      "o": [
+        "cot²x.",
+        "cos²x.",
+        "tan²x.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "1−cos²x=sin²x.",
+      "hyp": "Pode não reconhecer a identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-033",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica sin²x/(1−cos²x), quando definida.",
+      "o": [
+        "1.",
+        "sin²x.",
+        "cos²x.",
+        "tan²x."
+      ],
+      "a": 0,
+      "sol": "1−cos²x=sin²x.",
+      "hyp": "Pode esquecer as condições de definição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-034",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica tan x·cos x, onde cos x≠0.",
+      "o": [
+        "cos x.",
+        "sin x.",
+        "1.",
+        "sin x cos x."
+      ],
+      "a": 1,
+      "sol": "tan x=sin x/cos x.",
+      "hyp": "Pode multiplicar sem substituir a definição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-035",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica sin x/tan x, quando definida.",
+      "o": [
+        "sin x.",
+        "1/cos x.",
+        "cos x.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "tan x=sin x/cos x, logo sin/tan=cos quando as expressões estão definidas.",
+      "hyp": "Pode inverter mal o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-036",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se sin x+cos x=1, então (sin x+cos x)² vale...",
+      "o": [
+        "sin²x+cos²x.",
+        "2.",
+        "0.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "É simplesmente o quadrado de 1.",
+      "hyp": "Pode expandir e esquecer a informação dada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:usar-condicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-037",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se sin x+cos x=1, então sin x·cos x=",
+      "o": [
+        "0.",
+        "1/2.",
+        "1.",
+        "−1/2."
+      ],
+      "a": 0,
+      "sol": "1=(sin+cos)²=1+2sin cos, logo sin cos=0.",
+      "hyp": "Pode não usar a identidade sin²+cos²=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:produto-sin-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-038",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se sin x−cos x=1, então sin x·cos x=",
+      "o": [
+        "−1/2.",
+        "0.",
+        "1/2.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "1=(sin−cos)²=1−2sin cos, logo sin cos=0.",
+      "hyp": "Pode errar o sinal do termo cruzado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:produto-sin-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-039",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se sin x+cos x=√2, o que se conclui?",
+      "o": [
+        "sin x=1 e cos x=√2−1.",
+        "sin x=0.",
+        "sin x=cos x=√2/2.",
+        "cos x=0."
+      ],
+      "a": 2,
+      "sol": "O máximo de sin x+cos x é √2, atingido quando sin=cos=√2/2.",
+      "hyp": "Pode escolher valores que não respeitam a identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:maximo-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-040",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se sin x−cos x=−√2, então uma possibilidade é...",
+      "o": [
+        "sin x=√2/2 e cos x=−√2/2.",
+        "sin x=cos x=−√2/2.",
+        "sin x=0 e cos x=1.",
+        "sin x=−√2/2 e cos x=√2/2."
+      ],
+      "a": 3,
+      "sol": "A diferença mínima −√2 ocorre para o par indicado.",
+      "hyp": "Pode trocar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:extremo-diferenca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-041",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=2, quanto vale 1/cos²x?",
+      "o": [
+        "5.",
+        "3.",
+        "4.",
+        "1/5."
+      ],
+      "a": 0,
+      "sol": "1+tan²x=1+4=5.",
+      "hyp": "Pode esquecer o termo 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:identidade-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-042",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=−3, quanto vale cos²x?",
+      "o": [
+        "1/9.",
+        "1/10.",
+        "10.",
+        "9/10."
+      ],
+      "a": 1,
+      "sol": "1/cos²x=1+9=10, logo cos²x=1/10.",
+      "hyp": "Pode confundir cos² com 1+tan².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:identidade-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-043",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=3/4, quanto vale cos²x?",
+      "o": [
+        "9/25",
+        "4/5",
+        "16/25",
+        "3/5"
+      ],
+      "a": 2,
+      "sol": "1+tan²=1+9/16=25/16, logo cos²=16/25.",
+      "hyp": "Pode usar diretamente 4/5 sem quadrar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:identidade-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-044",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se tan x=3/4 e x está no 3.º quadrante, então cos x=",
+      "o": [
+        "4/5",
+        "−3/5",
+        "3/5",
+        "−4/5"
+      ],
+      "a": 3,
+      "sol": "cos²=16/25 e no 3.º quadrante cos<0.",
+      "hyp": "Pode perder o sinal ao tirar a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:tan-para-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-045",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A identidade sin²x+cos²x=1 implica que o ponto (cos x,sin x)...",
+      "o": [
+        "pertence ao círculo unitário.",
+        "pertence sempre à reta y=x.",
+        "tem norma 2.",
+        "fica sempre no 1.º quadrante."
+      ],
+      "a": 0,
+      "sol": "x²+y²=1 é a equação do círculo unitário.",
+      "hyp": "Pode não ligar a identidade à geometria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:interpretacao-geometrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-046",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (1+tan²x)cos²x, onde cos x≠0.",
+      "o": [
+        "tan²x.",
+        "1.",
+        "cos²x.",
+        "sin²x."
+      ],
+      "a": 1,
+      "sol": "1+tan²x=1/cos²x.",
+      "hyp": "Pode expandir desnecessariamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-identidade-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-047",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (sin²x+cos²x)/(1+tan²x), quando definida.",
+      "o": [
+        "1.",
+        "sin²x.",
+        "cos²x.",
+        "tan²x."
+      ],
+      "a": 2,
+      "sol": "Numerador=1 e 1+tan²x=1/cos²x; quociente=cos²x.",
+      "hyp": "Pode parar no numerador 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:simplificar-combinada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-048",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num mecanismo circular unitário, a coordenada vertical é 12/13 e a horizontal é positiva. Qual é a tangente do ângulo?",
+      "o": [
+        "5/12",
+        "−12/5",
+        "13/5",
+        "12/5"
+      ],
+      "a": 3,
+      "sol": "cos=5/13; tan=(12/13)/(5/13)=12/5.",
+      "hyp": "Pode usar o inverso ou sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:modelacao-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-049",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um vetor unitário faz um ângulo θ e tem componente horizontal −8/17, estando no 2.º quadrante. Qual é a componente vertical?",
+      "o": [
+        "15/17",
+        "−15/17",
+        "8/15",
+        "−8/15"
+      ],
+      "a": 0,
+      "sol": "sin²=1−64/289=225/289 e no 2.º quadrante é positiva.",
+      "hyp": "Pode escolher a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:modelacao-vetor-unitario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-REL-050",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-relacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num ponto do círculo unitário, tan θ=−1 e cos θ>0. Em que quadrante está o ponto?",
+      "o": [
+        "2.º quadrante.",
+        "4.º quadrante.",
+        "1.º quadrante.",
+        "3.º quadrante."
+      ],
+      "a": 1,
+      "sol": "Tangente negativa e cosseno positivo implicam seno negativo: 4.º quadrante.",
+      "hyp": "Pode escolher o 2.º, onde a tangente também é negativa mas cos<0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-relacoes:modelacao-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
