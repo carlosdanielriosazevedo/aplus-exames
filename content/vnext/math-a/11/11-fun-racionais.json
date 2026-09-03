@@ -476,7 +476,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Para a mesma função, em x<−2 o sinal é...",
+      "q": "Para f(x)=(x−1)/(x+2), em x<−2 o sinal é...",
       "o": [
         "negativo.",
         "positivo.",
@@ -800,7 +800,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na mesma função, x=2 é...",
+      "q": "Para f(x)=(x²−4)/(x−2), x=2 é...",
       "o": [
         "um zero.",
         "um ponto excluído do domínio, não um zero.",
