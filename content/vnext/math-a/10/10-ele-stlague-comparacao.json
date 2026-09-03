@@ -1097,7 +1097,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "O resultado da questão anterior permite afirmar que St. Laguë é sempre mais próximo das quotas exatas, qualquer que seja o perfil?",
+      "q": "No exemplo A=500, B=400, C=200 e 3 lugares, St. Laguë ficou mais próximo das quotas do que D'Hondt pela soma dos desvios absolutos. Isso permite afirmar que St. Laguë é sempre mais próximo das quotas exatas, qualquer que seja o perfil?",
       "o": [
         "Não; a conclusão demonstrada vale apenas para o exemplo e para a medida usada.",
         "Sim.",
