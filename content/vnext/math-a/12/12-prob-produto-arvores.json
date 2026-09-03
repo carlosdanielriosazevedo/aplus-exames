@@ -1,53 +1,1364 @@
 {
-"schemaVersion":1,"subject":"Matemática A","curriculum":"vNext 2026/27","year":"12.º","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","subtopic":"Regra do produto e árvores de probabilidade","editorialTarget":50,"status":"prototype","note":"Conteúdo original A+. Trabalha regra do produto, probabilidades em cadeia, árvores de probabilidade, reposição/não reposição e leitura de ramos. Não ligado ao motor atual.","questions":[
-{"id":"VN12PROB-PA-001","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"A regra do produto pode escrever-se como...","o":["P(A∩B)=P(A)P(B|A).","P(A∩B)=P(A)+P(B).","P(A∪B)=P(A)P(B).","P(A|B)=P(A)P(B)."],"a":0,"sol":"A probabilidade de ocorrer A e depois B é P(A) vezes a probabilidade de B condicionada a A.","hyp":"Pode somar probabilidades de etapas sucessivas.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:regra-1","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-002","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"Numa árvore de probabilidade, a probabilidade de um caminho completo obtém-se...","o":["somando as probabilidades dos ramos.","multiplicando as probabilidades ao longo do caminho.","fazendo a média dos ramos.","usando apenas o último ramo."],"a":1,"sol":"Cada caminho representa uma sequência/interseção de acontecimentos.","hyp":"Pode somar ramos em série.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:caminho-2","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-003","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"Numa árvore, os ramos que saem do mesmo nó devem ter probabilidades cuja soma é...","o":["0.","1/2.","1.","depende sempre do número de ramos."],"a":2,"sol":"Os ramos a partir de um nó formam alternativas que cobrem o estado seguinte.","hyp":"Pode multiplicar em vez de somar alternativas do mesmo nó.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:soma-no-3","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-004","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":1,"cognitive":"Aplicação","q":"Se P(A)=0,4 e P(B|A)=0,5, então P(A∩B)=...","o":["0,9.","0,4.","0,5.","0,2."],"a":3,"sol":"0,4×0,5=0,2.","hyp":"Pode somar as probabilidades.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:produto-4","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-005","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":1,"cognitive":"Aplicação","q":"Se P(A)=0,3 e P(B|A)=0,2, então P(A∩B)=...","o":["0,06.","0,5.","0,1.","0,3."],"a":0,"sol":"0,3×0,2=0,06.","hyp":"Pode somar 0,3 e 0,2.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:produto-5","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-006","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Uma moeda equilibrada é lançada duas vezes. P(cara e depois cara)=...","o":["1/2.","1/4.","1/3.","1."],"a":1,"sol":"(1/2)(1/2)=1/4.","hyp":"Pode somar as probabilidades dos dois lançamentos.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:moeda-6","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-007","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Uma moeda equilibrada é lançada 3 vezes. P(CCC)=...","o":["1/6.","3/8.","1/8.","1/3."],"a":2,"sol":"(1/2)^3=1/8.","hyp":"Pode usar 3/8 por haver três caras.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:3-moedas-7","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-008","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Num dado equilibrado lançado duas vezes, P(sair 6 nas duas)=...","o":["1/6.","1/12.","1/18.","1/36."],"a":3,"sol":"(1/6)(1/6)=1/36.","hyp":"Pode duplicar em vez de multiplicar.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:dado-8","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-009","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Num processo com reposição, as probabilidades dos ramos de uma segunda extração...","o":["podem manter-se iguais às da primeira, se a reposição restaura a composição.","têm sempre de diminuir.","somam sempre 2.","são impossíveis de calcular."],"a":0,"sol":"A reposição pode devolver o sistema ao estado inicial.","hyp":"Pode ignorar o efeito da reposição.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:reposicao-9","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-010","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Sem reposição, a probabilidade da segunda extração...","o":["é sempre igual à primeira.","pode depender do resultado da primeira extração.","é sempre 1/2.","é sempre zero."],"a":1,"sol":"A composição da urna altera-se após a primeira extração.","hyp":"Pode assumir independência automática entre extrações.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:sem-reposicao-10","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-011","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Uma urna tem 3 vermelhas e 2 azuis. Retira-se uma bola, repõe-se e retira-se outra. P(VV)=...","o":["3/5.","6/25.","9/25.","3/10."],"a":2,"sol":"Com reposição, P(V)=3/5 em ambas; (3/5)^2=9/25.","hyp":"Pode usar 3/5×2/5.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:urna-rep-11","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-012","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Na mesma urna, com reposição, P(VA)=...","o":["9/25.","2/5.","1/5.","6/25."],"a":3,"sol":"(3/5)(2/5)=6/25.","hyp":"Pode esquecer a ordem do caminho.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:urna-rep-12","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-013","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Numa urna com 3 V e 2 A, sem reposição, P(VV)=...","o":["3/10.","9/25.","6/25.","1/2."],"a":0,"sol":"(3/5)(2/4)=3/10.","hyp":"Pode manter 3/5 no segundo ramo.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:urna-semrep-13","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-014","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Na mesma urna sem reposição, P(VA)=...","o":["2/5.","3/10.","1/5.","6/25."],"a":1,"sol":"(3/5)(2/4)=3/10.","hyp":"Pode usar 2/5 no segundo passo em vez de 2/4.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:urna-semrep-14","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-015","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"Na urna 3 V e 2 A sem reposição, P(duas cores diferentes)=...","o":["3/10.","1/2.","3/5.","6/25."],"a":2,"sol":"P(VA)+P(AV)=3/10+3/10=3/5.","hyp":"Pode contar apenas uma das ordens.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:cores-dif-15","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-016","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"Na urna anterior sem reposição, P(duas da mesma cor)=...","o":["3/5.","3/10.","1/10.","2/5."],"a":3,"sol":"VV=3/10 e AA=(2/5)(1/4)=1/10; soma=2/5.","hyp":"Pode contar apenas VV.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:mesma-cor-16","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-017","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Numa árvore, para calcular a probabilidade de um acontecimento que pode ocorrer por vários caminhos incompatíveis, deve-se...","o":["somar as probabilidades desses caminhos.","multiplicar todos os caminhos entre si.","usar só o caminho mais provável.","fazer a média simples."],"a":0,"sol":"Cada caminho é uma interseção; caminhos alternativos incompatíveis somam-se.","hyp":"Pode aplicar multiplicação também entre caminhos alternativos.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:somar-caminhos-17","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-018","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"Uma árvore tem P(A)=0,6, P(B|A)=0,3 e P(B|A^c)=0,8. A probabilidade do caminho A→B é...","o":["0,9.","0,18.","0,48.","0,3."],"a":1,"sol":"0,6×0,3=0,18.","hyp":"Pode usar o ramo condicionado ao complementar.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:caminho-18","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-019","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"No mesmo caso, P(A^c→B)=...","o":["0,8.","0,2.","0,32.","0,48."],"a":2,"sol":"P(A^c)=0,4; 0,4×0,8=0,32.","hyp":"Pode usar 0,6 no primeiro ramo.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:caminho-19","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-020","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"No mesmo caso, P(B)=...","o":["0,18.","0,32.","0,8.","0,50."],"a":3,"sol":"Soma dos dois caminhos que terminam em B:0,18+0,32=0,50.","hyp":"Pode escolher apenas um ramo terminal.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:total-simples-20","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-021","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A)=0,7, P(B|A)=0,4 e P(B^c|A)=...","o":["0,6.","0,4.","0,3.","1,1."],"a":0,"sol":"Os ramos B e B^c a partir de A somam 1:1−0,4=0,6.","hyp":"Pode usar P(A^c).","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:complemento-ramo-21","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-022","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"P(A)=0,2 e P(B|A)=0,75. Qual é P(A∩B^c)?","o":["0,15.","0,05.","0,25.","0,8."],"a":1,"sol":"P(B^c|A)=0,25; 0,2×0,25=0,05.","hyp":"Pode usar 0,75 em vez do complementar.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:caminho-complementar-22","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-023","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"P(A)=0,4, P(B|A)=0,5 e P(C|A∩B)=0,3. P(A∩B∩C)=...","o":["0,2.","0,15.","0,06.","0,12."],"a":2,"sol":"0,4×0,5×0,3=0,06.","hyp":"Pode somar três probabilidades condicionais.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:tres-etapas-23","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-024","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Uma sequência de 3 etapas independentes tem sucesso com probabilidade 0,8 em cada etapa. P(3 sucessos)=...","o":["0,8.","2,4.","0,64.","0,512."],"a":3,"sol":"0,8³=0,512.","hyp":"Pode somar ou elevar apenas ao quadrado.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:tres-indep-24","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-025","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Num processo com probabilidade de falha 0,1 em cada uma de 4 etapas independentes, P(nenhuma falha)=...","o":["0,9^4.","0,1^4.","1−0,1^4.","0,9×4."],"a":0,"sol":"Cada etapa tem sucesso 0,9; quatro sucessos independentes dão 0,9^4.","hyp":"Pode usar a probabilidade de falha em vez da de sucesso.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:nenhuma-falha-25","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-026","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"No processo anterior, P(pelo menos uma falha)=...","o":["0,1^4.","1−0,9^4.","0,9^4.","4×0,1."],"a":1,"sol":"É o complementar de nenhuma falha.","hyp":"Pode somar 4×0,1, ignorando sobreposições.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:pelo-menos-falha-26","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-027","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Uma urna tem 5 brancas e 3 pretas. Sem reposição, P(branca depois preta)=...","o":["15/64.","5/8.","15/56.","3/8."],"a":2,"sol":"(5/8)(3/7)=15/56.","hyp":"Pode manter denominador 8 na segunda extração.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:urna-27","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-028","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Na urna 5 B e 3 P sem reposição, P(preta depois branca)=...","o":["5/8.","15/64.","3/8.","15/56."],"a":3,"sol":"(3/8)(5/7)=15/56.","hyp":"Pode achar que a ordem muda a probabilidade total neste caso sem observar a simetria do produto.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:urna-28","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-029","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Na mesma urna, P(uma de cada cor nas duas extrações)=...","o":["15/28.","15/56.","30/64.","3/8."],"a":0,"sol":"Há dois caminhos: BP e PB, cada um 15/56; soma=30/56=15/28.","hyp":"Pode contar apenas uma ordem.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:uma-cada-29","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-030","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Na urna 5 B e 3 P sem reposição, P(duas pretas)=...","o":["9/64.","3/28.","3/8.","6/56?"],"a":1,"sol":"(3/8)(2/7)=6/56=3/28.","hyp":"Pode manter 3 pretas disponíveis na segunda extração.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:duas-pretas-30","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-031","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Uma máquina A é escolhida com probabilidade 0,6 e B com 0,4. A produz defeito com 0,02 e B com 0,05. O caminho A→defeito tem probabilidade...","o":["0,02.","0,6.","0,012.","0,03."],"a":2,"sol":"0,6×0,02=0,012.","hyp":"Pode usar a taxa de defeito condicionada como probabilidade conjunta.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:maquina-31","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-032","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"No mesmo modelo, o caminho B→defeito vale...","o":["0,05.","0,4.","0,045.","0,02."],"a":3,"sol":"0,4×0,05=0,02.","hyp":"Pode somar 0,4 e 0,05.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:maquina-32","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-033","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"A probabilidade total de defeito no modelo anterior é...","o":["0,032.","0,07.","0,012.","0,02."],"a":0,"sol":"0,012+0,02=0,032.","hyp":"Pode somar diretamente 0,02+0,05.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:maquina-total-33","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-034","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Interpretação","q":"Numa árvore com primeira ramificação A/A^c, a probabilidade dos ramos iniciais é P(A) e...","o":["P(A).","1−P(A).","P(A)^2.","1/P(A)."],"a":1,"sol":"A^c é o complementar de A.","hyp":"Pode repetir a mesma probabilidade nos dois ramos.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:ramos-iniciais-34","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-035","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Interpretação","q":"Se após A surgem B e B^c, e P(B|A)=p, então o outro ramo vale...","o":["p.","1/p.","1−p.","p²."],"a":2,"sol":"Probabilidades condicionadas complementares dentro de A somam 1.","hyp":"Pode usar o complementar de P(A) em vez de p.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:ramos-cond-35","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-036","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se P(A)=0,5, P(B|A)=0,8 e P(B|A^c)=0,2, então P(B)=...","o":["0,8.","0,2.","0,4.","0,5."],"a":3,"sol":"0,5×0,8+0,5×0,2=0,4+0,1=0,5.","hyp":"Pode fazer a média sem ponderar, embora neste caso coincida apenas por pesos iguais.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:total-36","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-037","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"P(A)=0,3, P(B|A)=0,9 e P(B|A^c)=0,1. P(B)=...","o":["0,34.","0,27.","0,07.","0,5."],"a":0,"sol":"0,3×0,9+0,7×0,1=0,27+0,07=0,34.","hyp":"Pode somar apenas as condicionadas.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:total-37","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-038","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Num processo, P(A)=0,2, P(C|A)=0,4 e P(C|A^c)=0,6. P(C)=...","o":["0,4.","0,56.","0,48.","0,52."],"a":1,"sol":"0,2×0,4+0,8×0,6=0,08+0,48=0,56.","hyp":"Pode fazer média simples 0,5.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:total-38","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-039","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Uma moeda tem P(cara)=0,7 e é lançada duas vezes independentemente. P(exatamente uma cara)=...","o":["0,49.","0,09.","0,42.","0,21."],"a":2,"sol":"CK ou KC:2×0,7×0,3=0,42.","hyp":"Pode contar apenas uma ordem.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:moeda-enviesada-39","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-040","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Na moeda anterior, P(pelo menos uma cara em dois lançamentos)=...","o":["0,49.","0,42.","0,7.","0,91."],"a":3,"sol":"Complemento de duas coroas:1−0,3²=0,91.","hyp":"Pode somar 0,7+0,7 e ultrapassar 1.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:pelo-menos-cara-40","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-041","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Uma urna tem 4 V e 6 A. Sem reposição, P(VVV) em três extrações é...","o":["1/30.","(4/10)^3.","4/10×3/9.","1/5."],"a":0,"sol":"(4/10)(3/9)(2/8)=24/720=1/30.","hyp":"Pode usar reposição ou parar em duas extrações.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:3-semrep-41","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-042","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Na mesma urna, P(AAA) é...","o":["(6/10)^3.","1/6.","3/10.","1/5."],"a":1,"sol":"(6/10)(5/9)(4/8)=120/720=1/6.","hyp":"Pode manter denominadores constantes.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:3-semrep-42","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-043","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Uma urna tem 2 V e 3 A. Sem reposição, P(a segunda ser V) é...","o":["1/5.","1/2.","2/5.","3/5."],"a":2,"sol":"Por simetria das posições, cada extração tem probabilidade marginal 2/5 de ser V; também se confirma somando os caminhos VV e AV.","hyp":"Pode pensar que a segunda posição tem distribuição diferente sem condicionar na primeira.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:marginal-posicao-43","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-044","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Na urna 2 V e 3 A sem reposição, P(V na segunda)=P(V na primeira) porque...","o":["as extrações são independentes.","há reposição.","a composição não muda.","as posições numa amostra aleatória sem reposição são simétricas marginalmente."],"a":3,"sol":"A probabilidade marginal por posição é a mesma, embora as extrações não sejam independentes.","hyp":"Pode justificar erradamente por independência.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:simetria-44","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-045","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Um cliente entra pelo canal online com probabilidade 0,7 e, nesse canal, compra com probabilidade 0,2. P(online e compra)=...","o":["0,14.","0,9.","0,5.","0,2."],"a":0,"sol":"0,7×0,2=0,14.","hyp":"Pode confundir taxa de conversão condicionada com probabilidade conjunta.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:modelacao-online-45","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-046","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Se 30% entram em loja física e 40% desses compram, P(físico e compra)=...","o":["0,7.","0,12.","0,4.","0,3."],"a":1,"sol":"0,3×0,4=0,12.","hyp":"Pode somar percentagens.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:modelacao-loja-46","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-047","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Com os dois canais anteriores, a probabilidade total de compra é...","o":["0,2.","0,4.","0,26.","0,52."],"a":2,"sol":"Online+compra 0,14; físico+compra 0,12; total 0,26.","hyp":"Pode fazer média simples das taxas 0,2 e0,4.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:modelacao-total-47","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-048","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Interpretação","q":"Numa árvore, a probabilidade escrita num ramo de segundo nível deve ser lida como...","o":["probabilidade marginal global.","probabilidade conjunta do caminho completo.","frequência absoluta.","probabilidade condicionada ao ramo anterior."],"a":3,"sol":"O valor do ramo descreve a transição dado o estado já alcançado.","hyp":"Pode confundir ramo com probabilidade conjunta.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:ler-ramo-48","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-049","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Interpretação","q":"O valor numa folha terminal de uma árvore é tipicamente obtido por...","o":["produto dos ramos do caminho desde a raiz.","soma dos ramos do caminho.","último ramo apenas.","média de todos os nós."],"a":0,"sol":"Uma folha representa uma interseção sequencial.","hyp":"Pode confundir composição em série com alternativas.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:folha-49","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-PA-050","themeId":"12-prob","subtopicId":"12-prob-produto-arvores","year":"12.º","difficulty":4,"cognitive":"Interpretação","q":"Para obter a probabilidade de um resultado final alcançável por várias folhas, deve-se...","o":["multiplicar as folhas.","somar as probabilidades das folhas correspondentes.","usar apenas a maior folha.","subtrair todas as folhas de 1."],"a":1,"sol":"As folhas distintas correspondem a caminhos incompatíveis que conduzem ao mesmo resultado final.","hyp":"Pode multiplicar caminhos alternativos.","contexts":["mission","training","exam"],"signature":"12-prob-produto-arvores:agregar-folhas-50","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1}
-]}
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-produto-arvores",
+  "subtopic": "Regra do produto e árvores de probabilidade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha regra do produto, probabilidades em cadeia, árvores de probabilidade, reposição/não reposição e leitura de ramos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-PA-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A regra do produto pode escrever-se como...",
+      "o": [
+        "P(A∩B)=P(A)P(B|A).",
+        "P(A∩B)=P(A)+P(B).",
+        "P(A∪B)=P(A)P(B).",
+        "P(A|B)=P(A)P(B)."
+      ],
+      "a": 0,
+      "sol": "A probabilidade de ocorrer A e depois B é P(A) vezes a probabilidade de B condicionada a A.",
+      "hyp": "Pode somar probabilidades de etapas sucessivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:regra-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa árvore de probabilidade, a probabilidade de um caminho completo obtém-se...",
+      "o": [
+        "somando as probabilidades dos ramos.",
+        "multiplicando as probabilidades ao longo do caminho.",
+        "fazendo a média dos ramos.",
+        "usando apenas o último ramo."
+      ],
+      "a": 1,
+      "sol": "Cada caminho representa uma sequência/interseção de acontecimentos.",
+      "hyp": "Pode somar ramos em série.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:caminho-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa árvore, os ramos que saem do mesmo nó devem ter probabilidades cuja soma é...",
+      "o": [
+        "0.",
+        "1/2.",
+        "1.",
+        "depende sempre do número de ramos."
+      ],
+      "a": 2,
+      "sol": "Os ramos a partir de um nó formam alternativas que cobrem o estado seguinte.",
+      "hyp": "Pode multiplicar em vez de somar alternativas do mesmo nó.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:soma-no-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se P(A)=0,4 e P(B|A)=0,5, então P(A∩B)=...",
+      "o": [
+        "0,9.",
+        "0,4.",
+        "0,5.",
+        "0,2."
+      ],
+      "a": 3,
+      "sol": "0,4×0,5=0,2.",
+      "hyp": "Pode somar as probabilidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:produto-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se P(A)=0,3 e P(B|A)=0,2, então P(A∩B)=...",
+      "o": [
+        "0,06.",
+        "0,5.",
+        "0,1.",
+        "0,3."
+      ],
+      "a": 0,
+      "sol": "0,3×0,2=0,06.",
+      "hyp": "Pode somar 0,3 e 0,2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:produto-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma moeda equilibrada é lançada duas vezes. P(cara e depois cara)=...",
+      "o": [
+        "1/2.",
+        "1/4.",
+        "1/3.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "(1/2)(1/2)=1/4.",
+      "hyp": "Pode somar as probabilidades dos dois lançamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:moeda-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma moeda equilibrada é lançada 3 vezes. P(CCC)=...",
+      "o": [
+        "1/6.",
+        "3/8.",
+        "1/8.",
+        "1/3."
+      ],
+      "a": 2,
+      "sol": "(1/2)^3=1/8.",
+      "hyp": "Pode usar 3/8 por haver três caras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:3-moedas-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado equilibrado lançado duas vezes, P(sair 6 nas duas)=...",
+      "o": [
+        "1/6.",
+        "1/12.",
+        "1/18.",
+        "1/36."
+      ],
+      "a": 3,
+      "sol": "(1/6)(1/6)=1/36.",
+      "hyp": "Pode duplicar em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:dado-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Num processo com reposição, as probabilidades dos ramos de uma segunda extração...",
+      "o": [
+        "podem manter-se iguais às da primeira, se a reposição restaura a composição.",
+        "têm sempre de diminuir.",
+        "somam sempre 2.",
+        "são impossíveis de calcular."
+      ],
+      "a": 0,
+      "sol": "A reposição pode devolver o sistema ao estado inicial.",
+      "hyp": "Pode ignorar o efeito da reposição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:reposicao-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Sem reposição, a probabilidade da segunda extração...",
+      "o": [
+        "é sempre igual à primeira.",
+        "pode depender do resultado da primeira extração.",
+        "é sempre 1/2.",
+        "é sempre zero."
+      ],
+      "a": 1,
+      "sol": "A composição da urna altera-se após a primeira extração.",
+      "hyp": "Pode assumir independência automática entre extrações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:sem-reposicao-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma urna tem 3 vermelhas e 2 azuis. Retira-se uma bola, repõe-se e retira-se outra. P(VV)=...",
+      "o": [
+        "3/5.",
+        "6/25.",
+        "9/25.",
+        "3/10."
+      ],
+      "a": 2,
+      "sol": "Com reposição, P(V)=3/5 em ambas; (3/5)^2=9/25.",
+      "hyp": "Pode usar 3/5×2/5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:urna-rep-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Na mesma urna, com reposição, P(VA)=...",
+      "o": [
+        "9/25.",
+        "2/5.",
+        "1/5.",
+        "6/25."
+      ],
+      "a": 3,
+      "sol": "(3/5)(2/5)=6/25.",
+      "hyp": "Pode esquecer a ordem do caminho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:urna-rep-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa urna com 3 V e 2 A, sem reposição, P(VV)=...",
+      "o": [
+        "3/10.",
+        "9/25.",
+        "6/25.",
+        "1/2."
+      ],
+      "a": 0,
+      "sol": "(3/5)(2/4)=3/10.",
+      "hyp": "Pode manter 3/5 no segundo ramo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:urna-semrep-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Na mesma urna sem reposição, P(VA)=...",
+      "o": [
+        "2/5.",
+        "3/10.",
+        "1/5.",
+        "6/25."
+      ],
+      "a": 1,
+      "sol": "(3/5)(2/4)=3/10.",
+      "hyp": "Pode usar 2/5 no segundo passo em vez de 2/4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:urna-semrep-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Na urna 3 V e 2 A sem reposição, P(duas cores diferentes)=...",
+      "o": [
+        "3/10.",
+        "1/2.",
+        "3/5.",
+        "6/25."
+      ],
+      "a": 2,
+      "sol": "P(VA)+P(AV)=3/10+3/10=3/5.",
+      "hyp": "Pode contar apenas uma das ordens.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:cores-dif-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Numa urna com 3 bolas vermelhas e 2 azuis, sem reposição, qual é P(duas bolas da mesma cor)?",
+      "o": [
+        "3/5.",
+        "3/10.",
+        "1/10.",
+        "2/5."
+      ],
+      "a": 3,
+      "sol": "VV=3/10 e AA=(2/5)(1/4)=1/10; soma=2/5.",
+      "hyp": "Pode contar apenas VV.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:mesma-cor-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa árvore, para calcular a probabilidade de um acontecimento que pode ocorrer por vários caminhos incompatíveis, deve-se...",
+      "o": [
+        "somar as probabilidades desses caminhos.",
+        "multiplicar todos os caminhos entre si.",
+        "usar só o caminho mais provável.",
+        "fazer a média simples."
+      ],
+      "a": 0,
+      "sol": "Cada caminho é uma interseção; caminhos alternativos incompatíveis somam-se.",
+      "hyp": "Pode aplicar multiplicação também entre caminhos alternativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:somar-caminhos-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma árvore tem P(A)=0,6, P(B|A)=0,3 e P(B|A^c)=0,8. A probabilidade do caminho A→B é...",
+      "o": [
+        "0,9.",
+        "0,18.",
+        "0,48.",
+        "0,3."
+      ],
+      "a": 1,
+      "sol": "0,6×0,3=0,18.",
+      "hyp": "Pode usar o ramo condicionado ao complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:caminho-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No mesmo caso, P(A^c→B)=...",
+      "o": [
+        "0,8.",
+        "0,2.",
+        "0,32.",
+        "0,48."
+      ],
+      "a": 2,
+      "sol": "P(A^c)=0,4; 0,4×0,8=0,32.",
+      "hyp": "Pode usar 0,6 no primeiro ramo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:caminho-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No mesmo caso, P(B)=...",
+      "o": [
+        "0,18.",
+        "0,32.",
+        "0,8.",
+        "0,50."
+      ],
+      "a": 3,
+      "sol": "Soma dos dois caminhos que terminam em B:0,18+0,32=0,50.",
+      "hyp": "Pode escolher apenas um ramo terminal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:total-simples-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,7, P(B|A)=0,4 e P(B^c|A)=...",
+      "o": [
+        "0,6.",
+        "0,4.",
+        "0,3.",
+        "1,1."
+      ],
+      "a": 0,
+      "sol": "Os ramos B e B^c a partir de A somam 1:1−0,4=0,6.",
+      "hyp": "Pode usar P(A^c).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:complemento-ramo-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,2 e P(B|A)=0,75. Qual é P(A∩B^c)?",
+      "o": [
+        "0,15.",
+        "0,05.",
+        "0,25.",
+        "0,8."
+      ],
+      "a": 1,
+      "sol": "P(B^c|A)=0,25; 0,2×0,25=0,05.",
+      "hyp": "Pode usar 0,75 em vez do complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:caminho-complementar-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,4, P(B|A)=0,5 e P(C|A∩B)=0,3. P(A∩B∩C)=...",
+      "o": [
+        "0,2.",
+        "0,15.",
+        "0,06.",
+        "0,12."
+      ],
+      "a": 2,
+      "sol": "0,4×0,5×0,3=0,06.",
+      "hyp": "Pode somar três probabilidades condicionais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:tres-etapas-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma sequência de 3 etapas independentes tem sucesso com probabilidade 0,8 em cada etapa. P(3 sucessos)=...",
+      "o": [
+        "0,8.",
+        "2,4.",
+        "0,64.",
+        "0,512."
+      ],
+      "a": 3,
+      "sol": "0,8³=0,512.",
+      "hyp": "Pode somar ou elevar apenas ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:tres-indep-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num processo com probabilidade de falha 0,1 em cada uma de 4 etapas independentes, P(nenhuma falha)=...",
+      "o": [
+        "0,9^4.",
+        "0,1^4.",
+        "1−0,1^4.",
+        "0,9×4."
+      ],
+      "a": 0,
+      "sol": "Cada etapa tem sucesso 0,9; quatro sucessos independentes dão 0,9^4.",
+      "hyp": "Pode usar a probabilidade de falha em vez da de sucesso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:nenhuma-falha-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num processo com probabilidade de falha 0,1 em cada uma de 4 etapas independentes, qual é P(pelo menos uma falha)?",
+      "o": [
+        "0,1^4.",
+        "1−0,9^4.",
+        "0,9^4.",
+        "4×0,1."
+      ],
+      "a": 1,
+      "sol": "É o complementar de nenhuma falha.",
+      "hyp": "Pode somar 4×0,1, ignorando sobreposições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:pelo-menos-falha-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma urna tem 5 brancas e 3 pretas. Sem reposição, P(branca depois preta)=...",
+      "o": [
+        "15/64.",
+        "5/8.",
+        "15/56.",
+        "3/8."
+      ],
+      "a": 2,
+      "sol": "(5/8)(3/7)=15/56.",
+      "hyp": "Pode manter denominador 8 na segunda extração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:urna-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na urna 5 B e 3 P sem reposição, P(preta depois branca)=...",
+      "o": [
+        "5/8.",
+        "15/64.",
+        "3/8.",
+        "15/56."
+      ],
+      "a": 3,
+      "sol": "(3/8)(5/7)=15/56.",
+      "hyp": "Pode achar que a ordem muda a probabilidade total neste caso sem observar a simetria do produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:urna-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na mesma urna, P(uma de cada cor nas duas extrações)=...",
+      "o": [
+        "15/28.",
+        "15/56.",
+        "30/64.",
+        "3/8."
+      ],
+      "a": 0,
+      "sol": "Há dois caminhos: BP e PB, cada um 15/56; soma=30/56=15/28.",
+      "hyp": "Pode contar apenas uma ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:uma-cada-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na urna 5 B e 3 P sem reposição, P(duas pretas)=...",
+      "o": [
+        "9/64.",
+        "3/28.",
+        "3/8.",
+        "6/56?"
+      ],
+      "a": 1,
+      "sol": "(3/8)(2/7)=6/56=3/28.",
+      "hyp": "Pode manter 3 pretas disponíveis na segunda extração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:duas-pretas-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma máquina A é escolhida com probabilidade 0,6 e B com 0,4. A produz defeito com 0,02 e B com 0,05. O caminho A→defeito tem probabilidade...",
+      "o": [
+        "0,02.",
+        "0,6.",
+        "0,012.",
+        "0,03."
+      ],
+      "a": 2,
+      "sol": "0,6×0,02=0,012.",
+      "hyp": "Pode usar a taxa de defeito condicionada como probabilidade conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:maquina-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma máquina A é escolhida com probabilidade 0,6 e B com 0,4. A produz defeito com 0,02 e B com 0,05. Qual é P(B∩defeito)?",
+      "o": [
+        "0,05.",
+        "0,4.",
+        "0,045.",
+        "0,02."
+      ],
+      "a": 3,
+      "sol": "0,4×0,05=0,02.",
+      "hyp": "Pode somar 0,4 e 0,05.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:maquina-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma máquina A é escolhida com probabilidade 0,6 e B com 0,4. A produz defeito com 0,02 e B com 0,05. Qual é a probabilidade total de defeito?",
+      "o": [
+        "0,032.",
+        "0,07.",
+        "0,012.",
+        "0,02."
+      ],
+      "a": 0,
+      "sol": "0,012+0,02=0,032.",
+      "hyp": "Pode somar diretamente 0,02+0,05.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:maquina-total-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa árvore com primeira ramificação A/A^c, a probabilidade dos ramos iniciais é P(A) e...",
+      "o": [
+        "P(A).",
+        "1−P(A).",
+        "P(A)^2.",
+        "1/P(A)."
+      ],
+      "a": 1,
+      "sol": "A^c é o complementar de A.",
+      "hyp": "Pode repetir a mesma probabilidade nos dois ramos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:ramos-iniciais-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se após A surgem B e B^c, e P(B|A)=p, então o outro ramo vale...",
+      "o": [
+        "p.",
+        "1/p.",
+        "1−p.",
+        "p²."
+      ],
+      "a": 2,
+      "sol": "Probabilidades condicionadas complementares dentro de A somam 1.",
+      "hyp": "Pode usar o complementar de P(A) em vez de p.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:ramos-cond-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,5, P(B|A)=0,8 e P(B|A^c)=0,2, então P(B)=...",
+      "o": [
+        "0,8.",
+        "0,2.",
+        "0,4.",
+        "0,5."
+      ],
+      "a": 3,
+      "sol": "0,5×0,8+0,5×0,2=0,4+0,1=0,5.",
+      "hyp": "Pode fazer a média sem ponderar, embora neste caso coincida apenas por pesos iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:total-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,3, P(B|A)=0,9 e P(B|A^c)=0,1. P(B)=...",
+      "o": [
+        "0,34.",
+        "0,27.",
+        "0,07.",
+        "0,5."
+      ],
+      "a": 0,
+      "sol": "0,3×0,9+0,7×0,1=0,27+0,07=0,34.",
+      "hyp": "Pode somar apenas as condicionadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:total-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num processo, P(A)=0,2, P(C|A)=0,4 e P(C|A^c)=0,6. P(C)=...",
+      "o": [
+        "0,4.",
+        "0,56.",
+        "0,48.",
+        "0,52."
+      ],
+      "a": 1,
+      "sol": "0,2×0,4+0,8×0,6=0,08+0,48=0,56.",
+      "hyp": "Pode fazer média simples 0,5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:total-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma moeda tem P(cara)=0,7 e é lançada duas vezes independentemente. P(exatamente uma cara)=...",
+      "o": [
+        "0,49.",
+        "0,09.",
+        "0,42.",
+        "0,21."
+      ],
+      "a": 2,
+      "sol": "CK ou KC:2×0,7×0,3=0,42.",
+      "hyp": "Pode contar apenas uma ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:moeda-enviesada-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma moeda tem P(cara)=0,7 e é lançada duas vezes independentemente. Qual é P(pelo menos uma cara)?",
+      "o": [
+        "0,49.",
+        "0,42.",
+        "0,7.",
+        "0,91."
+      ],
+      "a": 3,
+      "sol": "Complemento de duas coroas:1−0,3²=0,91.",
+      "hyp": "Pode somar 0,7+0,7 e ultrapassar 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:pelo-menos-cara-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma urna tem 4 V e 6 A. Sem reposição, P(VVV) em três extrações é...",
+      "o": [
+        "1/30.",
+        "(4/10)^3.",
+        "4/10×3/9.",
+        "1/5."
+      ],
+      "a": 0,
+      "sol": "(4/10)(3/9)(2/8)=24/720=1/30.",
+      "hyp": "Pode usar reposição ou parar em duas extrações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:3-semrep-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na mesma urna, P(AAA) é...",
+      "o": [
+        "(6/10)^3.",
+        "1/6.",
+        "3/10.",
+        "1/5."
+      ],
+      "a": 1,
+      "sol": "(6/10)(5/9)(4/8)=120/720=1/6.",
+      "hyp": "Pode manter denominadores constantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:3-semrep-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma urna tem 2 V e 3 A. Sem reposição, P(a segunda ser V) é...",
+      "o": [
+        "1/5.",
+        "1/2.",
+        "2/5.",
+        "3/5."
+      ],
+      "a": 2,
+      "sol": "Por simetria das posições, cada extração tem probabilidade marginal 2/5 de ser V; também se confirma somando os caminhos VV e AV.",
+      "hyp": "Pode pensar que a segunda posição tem distribuição diferente sem condicionar na primeira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:marginal-posicao-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na urna 2 V e 3 A sem reposição, P(V na segunda)=P(V na primeira) porque...",
+      "o": [
+        "as extrações são independentes.",
+        "há reposição.",
+        "a composição não muda.",
+        "as posições numa amostra aleatória sem reposição são simétricas marginalmente."
+      ],
+      "a": 3,
+      "sol": "A probabilidade marginal por posição é a mesma, embora as extrações não sejam independentes.",
+      "hyp": "Pode justificar erradamente por independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:simetria-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um cliente entra pelo canal online com probabilidade 0,7 e, nesse canal, compra com probabilidade 0,2. P(online e compra)=...",
+      "o": [
+        "0,14.",
+        "0,9.",
+        "0,5.",
+        "0,2."
+      ],
+      "a": 0,
+      "sol": "0,7×0,2=0,14.",
+      "hyp": "Pode confundir taxa de conversão condicionada com probabilidade conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:modelacao-online-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se 30% entram em loja física e 40% desses compram, P(físico e compra)=...",
+      "o": [
+        "0,7.",
+        "0,12.",
+        "0,4.",
+        "0,3."
+      ],
+      "a": 1,
+      "sol": "0,3×0,4=0,12.",
+      "hyp": "Pode somar percentagens.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:modelacao-loja-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um cliente entra online com probabilidade 0,7 e compra nesse canal com probabilidade 0,2; entra em loja física com probabilidade 0,3 e compra aí com probabilidade 0,4. Qual é a probabilidade total de compra?",
+      "o": [
+        "0,2.",
+        "0,4.",
+        "0,26.",
+        "0,52."
+      ],
+      "a": 2,
+      "sol": "Online+compra 0,14; físico+compra 0,12; total 0,26.",
+      "hyp": "Pode fazer média simples das taxas 0,2 e0,4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:modelacao-total-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Numa árvore, a probabilidade escrita num ramo de segundo nível deve ser lida como...",
+      "o": [
+        "probabilidade marginal global.",
+        "probabilidade conjunta do caminho completo.",
+        "frequência absoluta.",
+        "probabilidade condicionada ao ramo anterior."
+      ],
+      "a": 3,
+      "sol": "O valor do ramo descreve a transição dado o estado já alcançado.",
+      "hyp": "Pode confundir ramo com probabilidade conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:ler-ramo-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O valor numa folha terminal de uma árvore é tipicamente obtido por...",
+      "o": [
+        "produto dos ramos do caminho desde a raiz.",
+        "soma dos ramos do caminho.",
+        "último ramo apenas.",
+        "média de todos os nós."
+      ],
+      "a": 0,
+      "sol": "Uma folha representa uma interseção sequencial.",
+      "hyp": "Pode confundir composição em série com alternativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:folha-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PA-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-produto-arvores",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Para obter a probabilidade de um resultado final alcançável por várias folhas, deve-se...",
+      "o": [
+        "multiplicar as folhas.",
+        "somar as probabilidades das folhas correspondentes.",
+        "usar apenas a maior folha.",
+        "subtrair todas as folhas de 1."
+      ],
+      "a": 1,
+      "sol": "As folhas distintas correspondem a caminhos incompatíveis que conduzem ao mesmo resultado final.",
+      "hyp": "Pode multiplicar caminhos alternativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-produto-arvores:agregar-folhas-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
