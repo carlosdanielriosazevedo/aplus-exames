@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cont",
+  "subtopicId": "11-cont-combinacoes",
+  "subtopic": "Combinações e escolha sem ordem",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha combinações simples, simetria, identidade de Pascal, restrições de inclusão/exclusão, escolhas por categorias e modelação sem ordem. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CONT-COMB-001",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma combinação de n elementos tomados k a k corresponde a...",
+      "o": [
+        "escolher k elementos sem atender à ordem.",
+        "ordenar k elementos escolhidos.",
+        "ordenar todos os n elementos.",
+        "escolher com repetição obrigatória."
+      ],
+      "a": 0,
+      "sol": "Numa combinação simples, interessa apenas o subconjunto escolhido.",
+      "hyp": "Pode confundir combinação com arranjo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-002",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O número de combinações de n elementos tomados k a k é...",
+      "o": [
+        "n!/(n−k)!.",
+        "n!/[k!(n−k)!].",
+        "n^k.",
+        "n!/k!."
+      ],
+      "a": 1,
+      "sol": "É a fórmula do coeficiente binomial.",
+      "hyp": "Pode usar a fórmula de arranjos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-003",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "C(5,2) é...",
+      "o": [
+        "20.",
+        "25.",
+        "10.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "5!/(2!3!)=10.",
+      "hyp": "Pode esquecer dividir por 2!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C5-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-004",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "C(6,3) é...",
+      "o": [
+        "120.",
+        "18.",
+        "6.",
+        "20."
+      ],
+      "a": 3,
+      "sol": "6!/(3!3!)=20.",
+      "hyp": "Pode usar A(6,3).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C6-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-005",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Escolher uma equipa de 3 pessoas entre 8 é um problema de...",
+      "o": [
+        "combinações.",
+        "arranjos.",
+        "permutação de 8.",
+        "potências."
+      ],
+      "a": 0,
+      "sol": "A ordem dos membros da equipa não interessa.",
+      "hyp": "Pode tratar cargos inexistentes como posições distintas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:equipa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-006",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantas equipas de 2 pessoas podem ser escolhidas entre 7?",
+      "o": [
+        "42.",
+        "21.",
+        "49.",
+        "14."
+      ],
+      "a": 1,
+      "sol": "C(7,2)=21.",
+      "hyp": "Pode contar AB e BA separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:equipa-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-007",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantas comissões de 4 pessoas podem ser escolhidas entre 10?",
+      "o": [
+        "5040.",
+        "10000.",
+        "210.",
+        "40."
+      ],
+      "a": 2,
+      "sol": "C(10,4)=210.",
+      "hyp": "Pode usar arranjos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:comissao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-008",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(8,1) é...",
+      "o": [
+        "1.",
+        "7.",
+        "56.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "Escolher 1 elemento entre 8 pode ser feito de 8 formas.",
+      "hyp": "Pode usar 1 por haver apenas uma escolha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C-n-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-009",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(8,8) é...",
+      "o": [
+        "1.",
+        "8.",
+        "40320.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "Há uma única forma de escolher todos os 8 elementos.",
+      "hyp": "Pode usar 8!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C-n-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-010",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(8,0) é...",
+      "o": [
+        "0.",
+        "1.",
+        "8.",
+        "não definido."
+      ],
+      "a": 1,
+      "sol": "Há uma única forma de escolher nenhum elemento: o conjunto vazio.",
+      "hyp": "Pode pensar que nenhuma escolha significa zero formas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C-n-0",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-011",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A identidade de simetria das combinações é...",
+      "o": [
+        "C(n,k)=C(k,n).",
+        "C(n,k)=n−k.",
+        "C(n,k)=C(n,n−k).",
+        "C(n,k)=k!."
+      ],
+      "a": 2,
+      "sol": "Escolher k elementos equivale a escolher os n−k que ficam de fora.",
+      "hyp": "Pode trocar os argumentos sem condição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-012",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(10,8) é igual a...",
+      "o": [
+        "C(8,10).",
+        "C(10,8)/2.",
+        "C(8,2).",
+        "C(10,2)."
+      ],
+      "a": 3,
+      "sol": "Pela simetria, 10−8=2.",
+      "hyp": "Pode usar n−k no primeiro argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-013",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(10,8)=",
+      "o": [
+        "45.",
+        "90.",
+        "210.",
+        "10."
+      ],
+      "a": 0,
+      "sol": "C(10,2)=10×9/2=45.",
+      "hyp": "Pode usar A(10,2)=90.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C10-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-014",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(9,2)=",
+      "o": [
+        "72.",
+        "36.",
+        "18.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "9×8/2=36.",
+      "hyp": "Pode esquecer dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C9-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-015",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(9,7)=",
+      "o": [
+        "72.",
+        "84.",
+        "36.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "C(9,7)=C(9,2)=36.",
+      "hyp": "Pode calcular um arranjo de 7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:simetria-num",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-016",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se escolher presidente e vice entre 8 pessoas, devemos usar diretamente C(8,2)?",
+      "o": [
+        "Sim, sempre.",
+        "Só se houver 8 cargos.",
+        "Só se as pessoas forem iguais.",
+        "Não, porque os cargos distinguem a ordem/função."
+      ],
+      "a": 3,
+      "sol": "O par escolhido pode ocupar os dois cargos de 2 formas.",
+      "hyp": "Pode ignorar a distinção entre cargos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:ordem-importa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-017",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se escolher apenas 2 representantes sem cargos entre 8, a contagem é...",
+      "o": [
+        "C(8,2).",
+        "A(8,2).",
+        "8².",
+        "8!."
+      ],
+      "a": 0,
+      "sol": "A ordem dos representantes não importa.",
+      "hyp": "Pode usar arranjos por haver duas pessoas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:representantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-018",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A relação entre arranjos e combinações é...",
+      "o": [
+        "C(n,k)=k!A(n,k).",
+        "A(n,k)=k!C(n,k).",
+        "A(n,k)=C(n,k).",
+        "A(n,k)=n^k."
+      ],
+      "a": 1,
+      "sol": "Cada subconjunto de k elementos tem k! ordenações.",
+      "hyp": "Pode inverter o fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:relacao-arranjos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-019",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A(7,3)=210, então C(7,3)=",
+      "o": [
+        "210.",
+        "70.",
+        "35.",
+        "6."
+      ],
+      "a": 2,
+      "sol": "C=A/3!=210/6=35.",
+      "hyp": "Pode esquecer dividir pelas ordens internas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:via-arranjo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-020",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "C(7,3)=",
+      "o": [
+        "21.",
+        "210.",
+        "14.",
+        "35."
+      ],
+      "a": 3,
+      "sol": "7×6×5/(3×2×1)=35.",
+      "hyp": "Pode parar no numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:C7-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-021",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 12 alunos escolhem-se 3 para uma equipa. Quantas equipas?",
+      "o": [
+        "220.",
+        "1320.",
+        "1728.",
+        "36."
+      ],
+      "a": 0,
+      "sol": "C(12,3)=220.",
+      "hyp": "Pode usar arranjos por considerar posições inexistentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:equipa-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-022",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 15 livros escolhem-se 4 para levar. Quantas escolhas?",
+      "o": [
+        "32760.",
+        "1365.",
+        "60.",
+        "455."
+      ],
+      "a": 1,
+      "sol": "C(15,4)=1365.",
+      "hyp": "Pode usar C(15,3)=455 ou arranjos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:livros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-023",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa turma de 10 alunos, quantos pares distintos podem formar-se?",
+      "o": [
+        "90.",
+        "100.",
+        "45.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "C(10,2)=45.",
+      "hyp": "Pode contar AB e BA separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:pares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-024",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos apertos de mão ocorrem se 8 pessoas apertarem a mão uma vez a cada outra?",
+      "o": [
+        "56.",
+        "64.",
+        "16.",
+        "28."
+      ],
+      "a": 3,
+      "sol": "Cada aperto corresponde a um par não ordenado: C(8,2)=28.",
+      "hyp": "Pode contar cada aperto duas vezes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:apertos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-025",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos segmentos são determinados por 9 pontos distintos, supondo cada par de pontos define um segmento?",
+      "o": [
+        "36.",
+        "72.",
+        "81.",
+        "18."
+      ],
+      "a": 0,
+      "sol": "Escolhem-se 2 extremos sem ordem: C(9,2)=36.",
+      "hyp": "Pode considerar AB e BA diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:segmentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-026",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos triângulos podem ser formados por 7 pontos, sem três colineares?",
+      "o": [
+        "210.",
+        "35.",
+        "21.",
+        "14."
+      ],
+      "a": 1,
+      "sol": "Escolhem-se 3 vértices: C(7,3)=35.",
+      "hyp": "Pode ordenar os vértices.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:triangulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-027",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos triângulos podem ser formados por 10 pontos, sem três colineares?",
+      "o": [
+        "720.",
+        "45.",
+        "120.",
+        "100."
+      ],
+      "a": 2,
+      "sol": "C(10,3)=120.",
+      "hyp": "Pode usar arranjos de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:triangulos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-028",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 8 pessoas escolhem-se 3, sendo A obrigatoriamente incluído. Quantas escolhas?",
+      "o": [
+        "56.",
+        "42.",
+        "7.",
+        "21."
+      ],
+      "a": 3,
+      "sol": "Com A fixo, escolhem-se 2 das outras 7: C(7,2)=21.",
+      "hyp": "Pode escolher 3 das restantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:inclui-A",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-029",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 8 pessoas escolhem-se 3, sendo A excluído. Quantas escolhas?",
+      "o": [
+        "35.",
+        "56.",
+        "21.",
+        "28."
+      ],
+      "a": 0,
+      "sol": "Escolhem-se 3 entre as outras 7: C(7,3)=35.",
+      "hyp": "Pode subtrair apenas 1 à contagem total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:exclui-A",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-030",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 9 pessoas escolhem-se 4, incluindo obrigatoriamente A e B. Quantas escolhas?",
+      "o": [
+        "126.",
+        "21.",
+        "42.",
+        "36."
+      ],
+      "a": 1,
+      "sol": "A e B fixos; escolhem-se mais 2 entre 7: C(7,2)=21.",
+      "hyp": "Pode escolher 4 entre os 7 restantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:inclui-AB",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-031",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 9 pessoas escolhem-se 4, sem poder escolher A nem B. Quantas escolhas?",
+      "o": [
+        "126.",
+        "70.",
+        "35.",
+        "21."
+      ],
+      "a": 2,
+      "sol": "Restam 7 pessoas; C(7,4)=35.",
+      "hyp": "Pode subtrair 2 à contagem total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:exclui-AB",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-032",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 10 pessoas escolhem-se 4, com exatamente uma de A e B. Quantas escolhas?",
+      "o": [
+        "56.",
+        "70.",
+        "140.",
+        "112."
+      ],
+      "a": 3,
+      "sol": "Escolhe-se qual de A,B:2; depois 3 das outras 8:C(8,3)=56; total112.",
+      "hyp": "Pode escolher A,B ambos ou nenhum.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:exatamente-uma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-033",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 10 pessoas escolhem-se 4, com pelo menos uma de A e B. Quantas escolhas?",
+      "o": [
+        "140.",
+        "210.",
+        "70.",
+        "112."
+      ],
+      "a": 0,
+      "sol": "Total C(10,4)=210; sem A,B: C(8,4)=70; diferença140.",
+      "hyp": "Pode contar apenas exatamente uma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:pelo-menos-uma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-034",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "De 10 pessoas escolhem-se 4, com no máximo uma de A e B. Quantas escolhas?",
+      "o": [
+        "140.",
+        "182.",
+        "112.",
+        "70."
+      ],
+      "a": 1,
+      "sol": "Exclui-se o caso com ambos: C(8,2)=28. Total210−28=182.",
+      "hyp": "Pode confundir 'no máximo uma' com 'exatamente uma'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:no-maximo-uma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-035",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A identidade de Pascal é...",
+      "o": [
+        "C(n,k)=C(n−1,k).",
+        "C(n,k)=kC(n−1,k).",
+        "C(n,k)=C(n−1,k−1)+C(n−1,k).",
+        "C(n,k)=C(n,k−1)+1."
+      ],
+      "a": 2,
+      "sol": "Separa as escolhas conforme incluem ou não um elemento distinguido.",
+      "hyp": "Pode confundir com a simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:pascal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-036",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Usando Pascal, C(6,2)=C(5,1)+C(5,2)=",
+      "o": [
+        "10.",
+        "20.",
+        "6.",
+        "15."
+      ],
+      "a": 3,
+      "sol": "5+10=15.",
+      "hyp": "Pode multiplicar os dois termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:pascal-num",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-037",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se C(n,2)=28, então n=",
+      "o": [
+        "8.",
+        "7.",
+        "14.",
+        "56."
+      ],
+      "a": 0,
+      "sol": "n(n−1)/2=28 => n(n−1)=56 => n=8.",
+      "hyp": "Pode esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:equacao-combinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-038",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se C(n,2)=45, então n=",
+      "o": [
+        "9.",
+        "10.",
+        "15.",
+        "90."
+      ],
+      "a": 1,
+      "sol": "n(n−1)=90 =>10×9=90.",
+      "hyp": "Pode escolher n=9 por ver 9×10.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:equacao-combinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-039",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A razão C(n,k)/C(n,k−1), para 1≤k≤n, é...",
+      "o": [
+        "k/(n−k+1).",
+        "n/k.",
+        "(n−k+1)/k.",
+        "n−k."
+      ],
+      "a": 2,
+      "sol": "Da fórmula fatorial resulta (n−k+1)/k.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:razao-combinacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-040",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "C(10,4)/C(10,3)=",
+      "o": [
+        "4/7.",
+        "10/4.",
+        "6/3.",
+        "7/4."
+      ],
+      "a": 3,
+      "sol": "(10−4+1)/4=7/4.",
+      "hyp": "Pode usar 10/4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:razao-num",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-041",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "De 12 pessoas escolhem-se 5, com A obrigatoriamente incluído e B excluído. Quantas escolhas?",
+      "o": [
+        "210.",
+        "330.",
+        "495.",
+        "126."
+      ],
+      "a": 0,
+      "sol": "A fixo, B excluído; escolhem-se mais 4 entre 10: C(10,4)=210.",
+      "hyp": "Pode escolher 5 entre 10.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:inclui-exclui",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-042",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "De 12 pessoas escolhem-se 5, com A e B não podendo estar ambos na equipa. Quantas escolhas?",
+      "o": [
+        "792.",
+        "672.",
+        "330.",
+        "462."
+      ],
+      "a": 1,
+      "sol": "Total C(12,5)=792; com A,B ambos: C(10,3)=120; diferença672.",
+      "hyp": "Pode excluir todos os casos com A ou B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:nao-ambos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-043",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "De 12 pessoas escolhem-se 5, com A e B obrigatoriamente juntos: ou entram ambos ou nenhum. Quantas escolhas?",
+      "o": [
+        "120.",
+        "252.",
+        "372.",
+        "792."
+      ],
+      "a": 2,
+      "sol": "Ambos:C(10,3)=120; nenhum:C(10,5)=252; total372.",
+      "hyp": "Pode contar só o caso ambos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:juntos-logicos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-044",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Há 6 homens e 5 mulheres. Quantas equipas de 4 têm exatamente 2 homens e 2 mulheres?",
+      "o": [
+        "330.",
+        "60.",
+        "120.",
+        "150."
+      ],
+      "a": 3,
+      "sol": "C(6,2)C(5,2)=15×10=150.",
+      "hyp": "Pode escolher 4 do total sem restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:grupos-categorias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-045",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com 6 homens e 5 mulheres, quantas equipas de 4 têm exatamente 1 homem?",
+      "o": [
+        "60.",
+        "150.",
+        "30.",
+        "120."
+      ],
+      "a": 0,
+      "sol": "C(6,1)C(5,3)=6×10=60.",
+      "hyp": "Pode escolher 1 mulher em vez de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:categorias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-046",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com 6 homens e 5 mulheres, quantas equipas de 4 têm pelo menos 1 mulher?",
+      "o": [
+        "330.",
+        "315.",
+        "15.",
+        "300."
+      ],
+      "a": 1,
+      "sol": "Total C(11,4)=330; só homens:C(6,4)=15; diferença315.",
+      "hyp": "Pode somar apenas casos com exatamente uma mulher.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:pelo-menos-uma-mulher",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-047",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas diagonais tem um polígono convexo de 10 vértices?",
+      "o": [
+        "45.",
+        "10.",
+        "35.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "Cada par de vértices define segmento: C(10,2)=45; retiram-se 10 lados:35.",
+      "hyp": "Pode contar todos os segmentos como diagonais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:diagonais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-048",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas diagonais tem um hexágono?",
+      "o": [
+        "15.",
+        "6.",
+        "12.",
+        "9."
+      ],
+      "a": 3,
+      "sol": "C(6,2)−6=15−6=9.",
+      "hyp": "Pode esquecer retirar os lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:diagonais-hexagono",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-049",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma app escolhe 3 tópicos distintos entre 12 para uma revisão, sem ordem. Quantas seleções?",
+      "o": [
+        "220.",
+        "1320.",
+        "1728.",
+        "36."
+      ],
+      "a": 0,
+      "sol": "C(12,3)=220.",
+      "hyp": "Pode usar arranjos por imaginar uma ordem de apresentação não pedida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:modelacao-topicos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-COMB-050",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-combinacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "De 20 questões, um teste escolhe 5 distintas sem atender à ordem. Quantos conjuntos possíveis?",
+      "o": [
+        "1860480.",
+        "15504.",
+        "100000.",
+        "4845."
+      ],
+      "a": 1,
+      "sol": "C(20,5)=15504.",
+      "hyp": "Pode usar A(20,5) ou 20^5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-combinacoes:modelacao-teste",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
