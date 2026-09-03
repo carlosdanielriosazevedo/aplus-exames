@@ -287,7 +287,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A função anterior coincide com y=x+1 exceto...",
+      "q": "A função f(x)=(x²−1)/(x−1) coincide com y=x+1 exceto...",
       "o": [
         "em x=−1.",
         "em x=0.",
@@ -746,7 +746,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Qual é o zero da função anterior?",
+      "q": "Qual é o zero de f(x)=(x+2)/(x²−1)?",
       "o": [
         "2.",
         "−1.",
@@ -1259,7 +1259,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "A função anterior simplifica para 1/(x+1), mas em x=2 apresenta...",
+      "q": "A função f(x)=(x−2)/[(x−2)(x+1)] simplifica para 1/(x+1), mas em x=2 apresenta...",
       "o": [
         "uma assíntota vertical.",
         "um zero.",
