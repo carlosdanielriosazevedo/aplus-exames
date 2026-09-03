@@ -584,7 +584,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Na mesma tabela, que taxa efetiva resulta de 200 € de imposto num rendimento de 2 000 €?",
+      "q": "Que taxa efetiva resulta de 200 € de imposto num rendimento de 2 000 €?",
       "o": [
         "8%",
         "10%",
@@ -665,7 +665,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na mesma tabela, que rendimento produz imposto total de 450 €?",
+      "q": "Numa tabela didática de 10% até 1 000 €, 20% entre 1 000 € e 2 000 € e 30% acima de 2 000 €, que rendimento produz imposto total de 450 €?",
       "o": [
         "2 500 €",
         "2 300 €",
@@ -1043,7 +1043,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Na mesma tabela, qual é o imposto sobre 3 500 €?",
+      "q": "Numa tabela didática de 10% até 1 000 €, 20% entre 1 000 € e 2 000 € e 30% acima de 2 000 €, qual é o imposto sobre 3 500 €?",
       "o": [
         "650 €",
         "700 €",
