@@ -1178,7 +1178,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No mesmo modelo, em que instante positivo mais pequeno se atinge o mínimo?",
+      "q": "No modelo y=5+3cos(πt/3), em que instante positivo mais pequeno se atinge o mínimo?",
       "o": [
         "t=1,5",
         "t=6",
