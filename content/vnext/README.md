@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **1 000 perguntas**
-- Progresso bruto: **22,12%**
+- Concluído em rascunho: **1 550 perguntas**
+- Progresso bruto: **27,43%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -138,3 +138,29 @@ Próxima matéria: **10.º — Funções**.
 - Total vNext: **1 250/~5 650 (22,12%)**
 
 Próxima matéria: **10.º — Geometria analítica no plano e no espaço**.
+
+
+### 10.º ano — Geometria analítica no plano e no espaço
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Coordenadas e transformações no plano | 50 | 50 | lote completo em protótipo |
+| Distâncias e ponto médio | 50 | 50 | lote completo em protótipo |
+| Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica | 50 | 50 | lote completo em protótipo |
+| Vetores, coordenadas, norma e operações | 50 | 50 | lote completo em protótipo |
+| Colinearidade e equações de retas | 50 | 50 | lote completo em protótipo |
+| Coordenadas, vetores e relações geométricas no espaço | 50 | 50 | lote completo em protótipo |
+
+
+## Marco editorial — 1 550 perguntas
+
+- Eleições e Partilha: **200/200**
+- Modelos matemáticos em finanças: **250/250**
+- Estatística: **300/300**
+- Geometria sintética: **250/250**
+- Funções: **250/250**
+- Geometria analítica no plano e no espaço: **300/300**
+- **10.º ano completo: 1 550/1 550**
+- Total vNext: **1 550/~5 650 (27,43%)**
+
+Próxima matéria: **11.º — Trigonometria**.
