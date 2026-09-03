@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcd",
+  "subtopicId": "12-fcd-log-trig-potencias",
+  "subtopic": "Derivadas de logaritmos, trigonométricas e potências",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha derivadas de ln, seno, cosseno, tangente e potências reais, incluindo composições e domínio. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCD-LTP-001",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de ln x, para x>0, é...",
+      "o": [
+        "1/x.",
+        "ln x.",
+        "x.",
+        "e^x."
+      ],
+      "a": 0,
+      "sol": "(ln x)'=1/x.",
+      "hyp": "Pode confundir função e derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-002",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de sin x é...",
+      "o": [
+        "−sin x.",
+        "cos x.",
+        "−cos x.",
+        "tan x."
+      ],
+      "a": 1,
+      "sol": "(sin x)'=cos x.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:sin-basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-003",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de cos x é...",
+      "o": [
+        "sin x.",
+        "cos x.",
+        "−sin x.",
+        "−cos x."
+      ],
+      "a": 2,
+      "sol": "(cos x)'=−sin x.",
+      "hyp": "Pode esquecer o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cos-basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-004",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de x^n, para n real em domínio adequado, é...",
+      "o": [
+        "x^{n−1}.",
+        "n x^n.",
+        "x^n/n.",
+        "n x^{n−1}."
+      ],
+      "a": 3,
+      "sol": "É a regra da potência.",
+      "hyp": "Pode esquecer o fator n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-005",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x^5 é...",
+      "o": [
+        "5x^4.",
+        "x^4.",
+        "5x^5.",
+        "4x^5."
+      ],
+      "a": 0,
+      "sol": "Aplica-se a regra da potência.",
+      "hyp": "Pode diminuir o expoente sem multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-006",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x^{-2} é...",
+      "o": [
+        "2x^{-1}.",
+        "−2x^{-3}.",
+        "−x^{-2}.",
+        "x^{-3}."
+      ],
+      "a": 1,
+      "sol": "n=−2, logo nx^{n−1}=−2x^{-3}.",
+      "hyp": "Pode errar o novo expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-007",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de √x=x^{1/2}, x>0, é...",
+      "o": [
+        "√x/2.",
+        "2√x.",
+        "1/(2√x).",
+        "1/√x."
+      ],
+      "a": 2,
+      "sol": "(1/2)x^{-1/2}=1/(2√x).",
+      "hyp": "Pode esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-008",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de 1/x=x^{-1} é...",
+      "o": [
+        "1/x².",
+        "−1/x.",
+        "1.",
+        "−1/x²."
+      ],
+      "a": 3,
+      "sol": "−x^{-2}=−1/x².",
+      "hyp": "Pode perder o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-009",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de ln(2x), para x>0, é...",
+      "o": [
+        "1/x.",
+        "2/x.",
+        "1/(2x).",
+        "2."
+      ],
+      "a": 0,
+      "sol": "Pela cadeia: (2)/(2x)=1/x; também ln(2x)=ln2+lnx.",
+      "hyp": "Pode esquecer simplificar o fator 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-010",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de ln(x²), para x>0, é...",
+      "o": [
+        "1/x².",
+        "2/x.",
+        "2x.",
+        "2ln x."
+      ],
+      "a": 1,
+      "sol": "Pela cadeia:2x/x²=2/x.",
+      "hyp": "Pode derivar ln e x² separadamente sem cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-011",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f(x)=ln(g(x)), então f'(x)=",
+      "o": [
+        "ln(g'(x)).",
+        "g(x)/g'(x).",
+        "g'(x)/g(x).",
+        "1/g'(x)."
+      ],
+      "a": 2,
+      "sol": "É a regra da cadeia aplicada ao logaritmo natural.",
+      "hyp": "Pode derivar apenas a função exterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-012",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de ln(x+3) é...",
+      "o": [
+        "1/x+3.",
+        "ln(x+3).",
+        "x/(x+3).",
+        "1/(x+3)."
+      ],
+      "a": 3,
+      "sol": "A derivada interna é1.",
+      "hyp": "Pode deslocar fora do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-013",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de ln(3x−1) é...",
+      "o": [
+        "3/(3x−1).",
+        "1/(3x−1).",
+        "3ln(3x−1).",
+        "1/x."
+      ],
+      "a": 0,
+      "sol": "Derivada interna 3.",
+      "hyp": "Pode esquecer o fator da cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-014",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de sin(2x) é...",
+      "o": [
+        "cos(2x).",
+        "2cos(2x).",
+        "2sin(2x).",
+        "−2sin(2x)."
+      ],
+      "a": 1,
+      "sol": "Derivada interna2.",
+      "hyp": "Pode esquecer a cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:sin-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-015",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de cos(3x) é...",
+      "o": [
+        "3sin(3x).",
+        "−sin(3x).",
+        "−3sin(3x).",
+        "3cos(3x)."
+      ],
+      "a": 2,
+      "sol": "Derivada de cos é −sin e a interna dá3.",
+      "hyp": "Pode esquecer o sinal ou o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cos-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-016",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de sin(x²) é...",
+      "o": [
+        "cos(2x).",
+        "2x sin(x²).",
+        "−2x sin(x²).",
+        "2x cos(x²)."
+      ],
+      "a": 3,
+      "sol": "Pela cadeia: cos(x²)·2x.",
+      "hyp": "Pode derivar o argumento dentro do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:sin-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-017",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de cos(x²) é...",
+      "o": [
+        "−2x sin(x²).",
+        "2x sin(x²).",
+        "−sin(2x).",
+        "2x cos(x²)."
+      ],
+      "a": 0,
+      "sol": "Pela cadeia:−sin(x²)·2x.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cos-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-018",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de (2x+1)^4 é...",
+      "o": [
+        "4(2x+1)^3.",
+        "8(2x+1)^3.",
+        "8(2x+1)^4.",
+        "4(2x+1)^4."
+      ],
+      "a": 1,
+      "sol": "4(2x+1)^3×2.",
+      "hyp": "Pode esquecer derivar a função interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-019",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de (x²+1)^3 é...",
+      "o": [
+        "3(x²+1)^2.",
+        "6x(x²+1)^3.",
+        "6x(x²+1)^2.",
+        "3x²(x²+1)^2."
+      ],
+      "a": 2,
+      "sol": "3(x²+1)^2·2x.",
+      "hyp": "Pode esquecer o fator2x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-020",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de √(x²+1) é...",
+      "o": [
+        "1/(2√(x²+1)).",
+        "2x√(x²+1).",
+        "√(2x).",
+        "x/√(x²+1)."
+      ],
+      "a": 3,
+      "sol": "(1/2)(x²+1)^{-1/2}·2x.",
+      "hyp": "Pode esquecer a derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:raiz-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-021",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(sin x), onde sin x>0, é...",
+      "o": [
+        "cos x/sin x.",
+        "sin x/cos x.",
+        "1/sin x.",
+        "−sin x."
+      ],
+      "a": 0,
+      "sol": "g'/g=cosx/sinx.",
+      "hyp": "Pode esquecer a cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-022",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(cos x), onde cos x>0, é...",
+      "o": [
+        "cos x/sin x.",
+        "−sin x/cos x.",
+        "sin x/cos x.",
+        "−cos x."
+      ],
+      "a": 1,
+      "sol": "g'/g=(−sinx)/cosx.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-023",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(x²+1) é...",
+      "o": [
+        "1/(x²+1).",
+        "2x ln(x²+1).",
+        "2x/(x²+1).",
+        "2/(x+1)."
+      ],
+      "a": 2,
+      "sol": "Pela cadeia: g'/g.",
+      "hyp": "Pode esquecer o numerador2x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-024",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln((x+1)/(x−1)), no domínio, é...",
+      "o": [
+        "1/(x+1)+1/(x−1).",
+        "2x/(x²−1).",
+        "ln(x+1)−ln(x−1).",
+        "1/(x+1)−1/(x−1)."
+      ],
+      "a": 3,
+      "sol": "Usando propriedades: ln(x+1)−ln(x−1).",
+      "hyp": "Pode trocar o sinal da diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-025",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplificando a derivada do item anterior obtemos...",
+      "o": [
+        "−2/(x²−1).",
+        "2/(x²−1).",
+        "2x/(x²−1).",
+        "−2x/(x²−1)."
+      ],
+      "a": 0,
+      "sol": "[(x−1)−(x+1)]/(x²−1)=−2/(x²−1).",
+      "hyp": "Pode errar a combinação das frações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-quociente-simplificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-026",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin x+cos x é...",
+      "o": [
+        "sin x+cos x.",
+        "cos x−sin x.",
+        "cos x+sin x.",
+        "−cos x−sin x."
+      ],
+      "a": 1,
+      "sol": "Deriva-se termo a termo.",
+      "hyp": "Pode esquecer o sinal da derivada do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:soma-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-027",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin x−cos x é...",
+      "o": [
+        "cos x−sin x.",
+        "−cos x+sin x.",
+        "cos x+sin x.",
+        "sin x−cos x."
+      ],
+      "a": 2,
+      "sol": "(−cosx)'=+sinx.",
+      "hyp": "Pode não distribuir o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:soma-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-028",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin²x é...",
+      "o": [
+        "2sin x.",
+        "cos²x.",
+        "−2sin x cos x.",
+        "2sin x cos x."
+      ],
+      "a": 3,
+      "sol": "É (sinx)^2:2sinx·cosx.",
+      "hyp": "Pode esquecer a cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:sin-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-029",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de cos²x é...",
+      "o": [
+        "−2sin x cos x.",
+        "2sin x cos x.",
+        "−2sin x.",
+        "sin²x."
+      ],
+      "a": 0,
+      "sol": "2cosx·(−sinx).",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cos-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-030",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin²x+cos²x é...",
+      "o": [
+        "1.",
+        "0.",
+        "2sinxcosx.",
+        "−2sinxcosx."
+      ],
+      "a": 1,
+      "sol": "A função é identicamente1; derivada0.",
+      "hyp": "Pode derivar apenas um termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:identidade-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-031",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de x^{3/2}, para x>0, é...",
+      "o": [
+        "(2/3)√x.",
+        "3x^{1/2}.",
+        "(3/2)√x.",
+        "(3/2)x^{3/2}."
+      ],
+      "a": 2,
+      "sol": "(3/2)x^{1/2}.",
+      "hyp": "Pode inverter o coeficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-fracionaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-032",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de x^{-1/2}, x>0, é...",
+      "o": [
+        "1/(2√x).",
+        "−1/(2√x).",
+        "−2x^{-3/2}.",
+        "−1/(2x^{3/2})."
+      ],
+      "a": 3,
+      "sol": "(−1/2)x^{-3/2}.",
+      "hyp": "Pode errar o coeficiente ou o expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-fracionaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-033",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de (1+x²)^{-1} é...",
+      "o": [
+        "−2x/(1+x²)^2.",
+        "−1/(1+x²)^2.",
+        "2x/(1+x²).",
+        "(1+x²)^{-2}."
+      ],
+      "a": 0,
+      "sol": "−(1+x²)^{-2}·2x.",
+      "hyp": "Pode esquecer a cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-negativa-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-034",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de 1/√(1+x²) é...",
+      "o": [
+        "1/(2√(1+x²)).",
+        "−x/(1+x²)^{3/2}.",
+        "−1/(1+x²).",
+        "x/√(1+x²)."
+      ],
+      "a": 1,
+      "sol": "(1+x²)^{-1/2}'=−(1/2)(1+x²)^{-3/2}·2x.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:raiz-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-035",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f'(x)=cos x, uma função possível é...",
+      "o": [
+        "f(x)=−sin x+C.",
+        "f(x)=cos x+C.",
+        "f(x)=sin x+C.",
+        "f(x)=ln x+C."
+      ],
+      "a": 2,
+      "sol": "A derivada de sinx é cosx.",
+      "hyp": "Pode confundir com uma derivação em vez de antiderivação simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:reconhecer-primitiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-036",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f'(x)=−sin x, uma função possível é...",
+      "o": [
+        "f(x)=sin x+C.",
+        "f(x)=−cos x+C.",
+        "f(x)=tan x+C.",
+        "f(x)=cos x+C."
+      ],
+      "a": 3,
+      "sol": "A derivada de cosx é −sinx.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:reconhecer",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-037",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(√x), x>0, é...",
+      "o": [
+        "1/(2x).",
+        "1/√x.",
+        "1/(2√x).",
+        "2/x."
+      ],
+      "a": 0,
+      "sol": "ln√x=(1/2)lnx.",
+      "hyp": "Pode derivar √x e esquecer dividir pelo próprio argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-038",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(1/x), x>0, é...",
+      "o": [
+        "1/x.",
+        "−1/x.",
+        "−1/x².",
+        "1."
+      ],
+      "a": 1,
+      "sol": "ln(1/x)=−lnx.",
+      "hyp": "Pode derivar apenas 1/x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln-reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-039",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin(ln x), x>0, é...",
+      "o": [
+        "sin(ln x)/x.",
+        "cos x/ln x.",
+        "cos(ln x)/x.",
+        "−sin(ln x)/x."
+      ],
+      "a": 2,
+      "sol": "Cadeia: cos(lnx)·1/x.",
+      "hyp": "Pode esquecer o fator1/x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:sin-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-040",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(sin(x²)), onde definida, é...",
+      "o": [
+        "cos(x²)/sin(x²).",
+        "2x/sin(x²).",
+        "−2x sin(x²).",
+        "2x cos(x²)/sin(x²)."
+      ],
+      "a": 3,
+      "sol": "Deriva-se ln: g'/g, com g=sin(x²) e g'=2xcos(x²).",
+      "hyp": "Pode esquecer uma das duas cadeias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cadeia-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-041",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de [sin(2x)]³ é...",
+      "o": [
+        "6sin²(2x)cos(2x).",
+        "3sin²(2x)cos(2x).",
+        "6sin(2x)cos²(2x).",
+        "3sin³(2x)."
+      ],
+      "a": 0,
+      "sol": "Exterior:3sin²(2x); interior:2cos(2x).",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cadeia-multipla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-042",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de [cos(3x)]² é...",
+      "o": [
+        "6cos(3x)sin(3x).",
+        "−6cos(3x)sin(3x).",
+        "−2sin(3x).",
+        "−3sin²(3x)."
+      ],
+      "a": 1,
+      "sol": "2cos(3x)·[−3sin(3x)].",
+      "hyp": "Pode perder o sinal ou o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:cadeia-multipla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-043",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=ln(x²−4), o domínio de f é...",
+      "o": [
+        "R\\{−2,2}.",
+        "[−2,2].",
+        "]−∞,−2[∪]2,+∞[.",
+        "]−2,2[."
+      ],
+      "a": 2,
+      "sol": "É preciso x²−4>0.",
+      "hyp": "Pode tratar logaritmo como denominador e exigir apenas ≠0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:dominio-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-044",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No domínio anterior, f'(x)=",
+      "o": [
+        "1/(x²−4).",
+        "2/(x−4).",
+        "2x ln(x²−4).",
+        "2x/(x²−4)."
+      ],
+      "a": 3,
+      "sol": "g'/g com g=x²−4.",
+      "hyp": "Pode esquecer a derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:ln",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-045",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de (sin x)/(cos x), onde cosx≠0, é...",
+      "o": [
+        "1/cos²x.",
+        "cos²x.",
+        "−1/sin²x.",
+        "1/sin²x."
+      ],
+      "a": 0,
+      "sol": "É tanx; derivada sec²x=1/cos²x.",
+      "hyp": "Pode aplicar o quociente incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:tan-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-046",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de tan(2x) é...",
+      "o": [
+        "1/cos²(2x).",
+        "2/cos²(2x).",
+        "2tan(2x).",
+        "−2/sin²(2x)."
+      ],
+      "a": 1,
+      "sol": "Cadeia: sec²(2x)·2.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:tan-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-047",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se f'(x)=0 para todo x num intervalo, então f nesse intervalo é...",
+      "o": [
+        "estritamente crescente.",
+        "estritamente decrescente.",
+        "constante.",
+        "necessariamente nula."
+      ],
+      "a": 2,
+      "sol": "Derivada identicamente zero implica constância no intervalo.",
+      "hyp": "Pode confundir constante com função zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:derivada-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-048",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x^{1/3}, então para x≠0 f'(x)=",
+      "o": [
+        "3x^{2/3}.",
+        "1/(3x^{1/3}).",
+        "x^{-2/3}.",
+        "1/(3x^{2/3})."
+      ],
+      "a": 3,
+      "sol": "(1/3)x^{-2/3}.",
+      "hyp": "Pode esquecer o fator1/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:potencia-cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-049",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma oscilação é y(t)=5sin(2t). A velocidade y'(t) é...",
+      "o": [
+        "10cos(2t).",
+        "5cos(2t).",
+        "10sin(2t).",
+        "−10sin(2t)."
+      ],
+      "a": 0,
+      "sol": "Deriva-se seno e multiplica-se pela frequência angular2.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:modelacao-oscilacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-LTP-050",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-log-trig-potencias",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma quantidade Q(x)=ln(1+x²) tem taxa de variação Q'(x)=",
+      "o": [
+        "1/(1+x²).",
+        "2x/(1+x²).",
+        "2/(1+x).",
+        "ln(2x)."
+      ],
+      "a": 1,
+      "sol": "Pela cadeia, g'/g.",
+      "hyp": "Pode derivar o logaritmo sem a função interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-log-trig-potencias:modelacao-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
