@@ -719,7 +719,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No item anterior, o domínio é...",
+      "q": "Se f(x)=1/(x+2) e g(x)=1/x, qual é o domínio de (f∘g)(x)=x/(1+2x)?",
       "o": [
         "R\\{−2}.",
         "R\\{0}.",
@@ -773,7 +773,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "No item anterior, apesar de a expressão simplificada ser x−1, o domínio de f∘g é...",
+      "q": "Se f(x)=x²−1 e g(x)=√x, então (f∘g)(x)=x−1. Qual é o domínio da composição?",
       "o": [
         "[0,+∞[.",
         "R.",
@@ -1124,7 +1124,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Resolvendo a condição do item anterior, o domínio é...",
+      "q": "Se f(x)=√(x+1) e g(x)=1/(x−2), o domínio de f∘g exige (x−1)/(x−2)≥0 e x≠2. Qual é esse domínio?",
       "o": [
         "]1,2[.",
         "]−∞,1]∪]2,+∞[.",
