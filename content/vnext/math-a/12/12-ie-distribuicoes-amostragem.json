@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-ie",
+  "subtopicId": "12-ie-distribuicoes-amostragem",
+  "subtopic": "Distribuições de amostragem / comportamento amostral",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha distribuição de amostragem, erro padrão da média e proporção, efeito de n, precisão, simulação e correção finita introdutória. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12IE-DA-001",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma distribuição de amostragem descreve...",
+      "o": [
+        "a distribuição de uma estatística em muitas amostras possíveis.",
+        "a distribuição dos dados de uma única amostra apenas.",
+        "a população sem incerteza.",
+        "apenas os erros de medição."
+      ],
+      "a": 0,
+      "sol": "Imagina-se repetir o processo amostral e observar a estatística em cada amostra.",
+      "hyp": "Pode confundir distribuição dos dados com distribuição de uma estatística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-002",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A média da distribuição de amostragem de X̄, sob amostragem adequada, é...",
+      "o": [
+        "σ.",
+        "μ.",
+        "n.",
+        "0 sempre."
+      ],
+      "a": 1,
+      "sol": "E(X̄)=μ.",
+      "hyp": "Pode confundir média populacional com desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:media-xbar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-003",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O desvio padrão de X̄ é chamado...",
+      "o": [
+        "média populacional.",
+        "viés.",
+        "erro padrão da média.",
+        "amplitude."
+      ],
+      "a": 2,
+      "sol": "Mede a variabilidade de médias amostrais entre amostras.",
+      "hyp": "Pode confundir erro padrão e desvio padrão dos dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:erro-padrao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-004",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em condições usuais, o erro padrão de X̄ é...",
+      "o": [
+        "σ/n.",
+        "σ√n.",
+        "n/σ.",
+        "σ/√n."
+      ],
+      "a": 3,
+      "sol": "A média de n observações tem desvio padrão reduzido por √n.",
+      "hyp": "Pode dividir por n em vez de √n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:formula-ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-005",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Quando n aumenta, o erro padrão de X̄...",
+      "o": [
+        "diminui.",
+        "aumenta.",
+        "fica sempre igual.",
+        "muda de sinal."
+      ],
+      "a": 0,
+      "sol": "σ/√n diminui com n.",
+      "hyp": "Pode pensar que mais dados aumentam incerteza.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:n-ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-006",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se σ=12 e n=36, o erro padrão de X̄ é...",
+      "o": [
+        "12/36.",
+        "2.",
+        "6.",
+        "72."
+      ],
+      "a": 1,
+      "sol": "12/√36=12/6=2.",
+      "hyp": "Pode dividir por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:ep-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-007",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se σ=20 e n=100, o erro padrão é...",
+      "o": [
+        "0,2.",
+        "10.",
+        "2.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "20/10=2.",
+      "hyp": "Pode dividir por100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:ep-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-008",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Quadruplicar n faz o erro padrão da média...",
+      "o": [
+        "ficar um quarto.",
+        "duplicar.",
+        "não mudar.",
+        "ficar metade."
+      ],
+      "a": 3,
+      "sol": "√(4n)=2√n.",
+      "hyp": "Pode supor proporcionalidade direta com n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-009",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Multiplicar n por9 faz o erro padrão...",
+      "o": [
+        "dividir por3.",
+        "dividir por9.",
+        "multiplicar por3.",
+        "multiplicar por9."
+      ],
+      "a": 0,
+      "sol": "A dependência é 1/√n.",
+      "hyp": "Pode esquecer a raiz quadrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-010",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O erro padrão mede...",
+      "o": [
+        "a dispersão dos indivíduos na população exatamente.",
+        "a variabilidade da estatística entre amostras.",
+        "o viés sistemático.",
+        "o erro de digitação."
+      ],
+      "a": 1,
+      "sol": "É uma medida de incerteza amostral da estatística.",
+      "hyp": "Pode confundir com σ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:interpretacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-011",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para uma proporção amostral p̂, em modelo Bernoulli, E(p̂)=",
+      "o": [
+        "p(1−p).",
+        "√p.",
+        "p.",
+        "n p."
+      ],
+      "a": 2,
+      "sol": "A proporção amostral é não enviesada para p.",
+      "hyp": "Pode usar a variância em vez da média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-012",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O erro padrão teórico de p̂ é...",
+      "o": [
+        "p(1−p)/n.",
+        "√p/n.",
+        "p/√n.",
+        "√[p(1−p)/n]."
+      ],
+      "a": 3,
+      "sol": "É o desvio padrão da proporção amostral.",
+      "hyp": "Pode esquecer a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat-ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-013",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se p=0,5 e n=100, o erro padrão de p̂ é...",
+      "o": [
+        "0,05.",
+        "0,5.",
+        "0,025.",
+        "0,1."
+      ],
+      "a": 0,
+      "sol": "√(0,25/100)=√0,0025=0,05.",
+      "hyp": "Pode não tirar raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-014",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se p=0,84 e n=400, o erro padrão é aproximadamente...",
+      "o": [
+        "0,04.",
+        "0,0183.",
+        "0,000336.",
+        "0,084."
+      ],
+      "a": 1,
+      "sol": "√(0,84×0,16/400)≈0,0183.",
+      "hyp": "Pode dividir p por√n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-015",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas amostras aleatórias do mesmo tamanho podem dar médias diferentes porque...",
+      "o": [
+        "a média populacional muda entre amostras.",
+        "uma delas tem de estar errada.",
+        "há variabilidade amostral.",
+        "a estatística é constante."
+      ],
+      "a": 2,
+      "sol": "A seleção aleatória produz flutuação natural.",
+      "hyp": "Pode tratar diferença como erro necessariamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:variabilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-016",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A distribuição de amostragem é um objeto...",
+      "o": [
+        "igual ao histograma de uma única amostra.",
+        "sempre observado integralmente.",
+        "independente do método de amostragem.",
+        "teórico/conceptual ligado a todas as amostras possíveis sob o desenho."
+      ],
+      "a": 3,
+      "sol": "Serve para modelar o comportamento repetido da estatística.",
+      "hyp": "Pode confundir com distribuição empírica dos dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-017",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma estatística não enviesada tem distribuição de amostragem centrada...",
+      "o": [
+        "no parâmetro alvo.",
+        "em zero sempre.",
+        "na mediana da amostra.",
+        "no tamanho n."
+      ],
+      "a": 0,
+      "sol": "O valor esperado da estatística coincide com o parâmetro.",
+      "hyp": "Pode confundir centragem com zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:nao-enviesamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-018",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma estatística com erro padrão menor é, em geral...",
+      "o": [
+        "mais enviesada obrigatoriamente.",
+        "mais precisa.",
+        "menos informativa.",
+        "sempre exata."
+      ],
+      "a": 1,
+      "sol": "Menor dispersão amostral significa maior precisão.",
+      "hyp": "Pode confundir precisão com ausência de viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:precisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-019",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se duplicarmos n, o erro padrão da média é multiplicado por...",
+      "o": [
+        "1/2.",
+        "√2.",
+        "1/√2.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "EP∝1/√n.",
+      "hyp": "Pode usar inversão linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-020",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para reduzir o erro padrão da média para um terço, n deve ser multiplicado por...",
+      "o": [
+        "3.",
+        "6.",
+        "1/3.",
+        "9."
+      ],
+      "a": 3,
+      "sol": "1/√k=1/3 =>k=9.",
+      "hyp": "Pode supor relação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-021",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X tem média50 e desvio padrão10, então uma média de25 observações tem média...",
+      "o": [
+        "50.",
+        "10.",
+        "2.",
+        "250."
+      ],
+      "a": 0,
+      "sol": "E(X̄)=μ=50.",
+      "hyp": "Pode dividir a média por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:xbar-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-022",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, o desvio padrão de X̄ é...",
+      "o": [
+        "10.",
+        "2.",
+        "0,4.",
+        "50."
+      ],
+      "a": 1,
+      "sol": "10/√25=2.",
+      "hyp": "Pode dividir por25.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:xbar-ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-023",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A distribuição de X̄ costuma ser menos dispersa do que a distribuição individual porque...",
+      "o": [
+        "a média é sempre igual a μ.",
+        "os dados individuais deixam de variar.",
+        "a média agrega informação de várias observações.",
+        "σ aumenta."
+      ],
+      "a": 2,
+      "sol": "A média suaviza flutuações individuais.",
+      "hyp": "Pode confundir menor variabilidade com ausência de variabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:xbar-dispersao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-024",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se σ é desconhecido na prática, o erro padrão da média é frequentemente estimado por...",
+      "o": [
+        "s/n.",
+        "n/s.",
+        "s√n.",
+        "s/√n."
+      ],
+      "a": 3,
+      "sol": "Substitui-se σ pelo desvio padrão amostral s.",
+      "hyp": "Pode dividir por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:ep-estimado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-025",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se s=15 e n=100, o erro padrão estimado é...",
+      "o": [
+        "1,5.",
+        "0,15.",
+        "15.",
+        "150."
+      ],
+      "a": 0,
+      "sol": "15/10=1,5.",
+      "hyp": "Pode dividir por100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:ep-estimado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-026",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O erro padrão estimado varia de amostra para amostra porque...",
+      "o": [
+        "n muda sempre.",
+        "s também varia.",
+        "μ muda.",
+        "a população muda."
+      ],
+      "a": 1,
+      "sol": "A estimativa de σ é baseada nos dados observados.",
+      "hyp": "Pode pensar que erro padrão estimado é fixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:ep-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-027",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se duas estimativas têm o mesmo viés mas uma tem metade do erro padrão, essa tende a...",
+      "o": [
+        "ser mais enviesada.",
+        "ter centro diferente.",
+        "concentrar-se mais perto do seu centro.",
+        "ser menos precisa."
+      ],
+      "a": 2,
+      "sol": "Menor erro padrão significa menor dispersão.",
+      "hyp": "Pode associar menor EP a maior viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:comparar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-028",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um histograma de 10 000 médias de amostras simuladas aproxima...",
+      "o": [
+        "a distribuição populacional original.",
+        "a função de densidade de cada observação apenas.",
+        "o quadro amostral.",
+        "a distribuição de amostragem de X̄."
+      ],
+      "a": 3,
+      "sol": "A simulação repetida emula o processo amostral.",
+      "hyp": "Pode confundir médias simuladas com dados individuais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:simulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-029",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se a distribuição populacional é muito assimétrica, a distribuição de X̄ para n pequeno pode...",
+      "o": [
+        "também ser assimétrica.",
+        "ser sempre Normal exata.",
+        "ter desvio padrão zero.",
+        "ser uniforme."
+      ],
+      "a": 0,
+      "sol": "A aproximação Normal melhora com n, mas não é garantida para n pequeno.",
+      "hyp": "Pode usar o TLC sem condições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:n-pequeno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-030",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "À medida que n aumenta, a distribuição de X̄ tende geralmente a...",
+      "o": [
+        "ficar mais dispersa.",
+        "ficar mais concentrada e frequentemente mais próxima da Normal.",
+        "copiar exatamente a população.",
+        "tornar-se uniforme."
+      ],
+      "a": 1,
+      "sol": "O erro padrão diminui e o TLC atua sob condições usuais.",
+      "hyp": "Pode separar incorretamente concentração e forma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:n-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-031",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para p=0,2 e n=100, E(p̂)=",
+      "o": [
+        "0,16.",
+        "0,04.",
+        "0,2.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "A proporção amostral é centrada em p.",
+      "hyp": "Pode usar p(1−p).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-032",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No caso anterior, Var(p̂)=",
+      "o": [
+        "0,04.",
+        "0,016.",
+        "0,16.",
+        "0,0016."
+      ],
+      "a": 3,
+      "sol": "p(1−p)/n=0,2×0,8/100=0,0016.",
+      "hyp": "Pode esquecer dividir por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat-var",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-033",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O erro padrão do caso anterior é...",
+      "o": [
+        "0,04.",
+        "0,0016.",
+        "0,16.",
+        "0,2."
+      ],
+      "a": 0,
+      "sol": "√0,0016=0,04.",
+      "hyp": "Pode confundir variância e desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:phat-ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-034",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição aproximada np e n(1−p) suficientemente grandes ajuda a...",
+      "o": [
+        "garantir p̂=p.",
+        "justificar aproximação Normal para p̂.",
+        "eliminar viés de seleção.",
+        "tornar p conhecido."
+      ],
+      "a": 1,
+      "sol": "Evita distribuições demasiado assimétricas/discretas nos extremos.",
+      "hyp": "Pode confundir condição de forma com representatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:normal-phat",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-035",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se p=0,02 e n=20, np=0,4. A aproximação Normal de p̂ tende a ser...",
+      "o": [
+        "excelente por n>10.",
+        "exata.",
+        "fraca.",
+        "independente de p."
+      ],
+      "a": 2,
+      "sol": "Há muito poucos sucessos esperados.",
+      "hyp": "Pode olhar só para n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:condicao-normal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-036",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O tamanho da população aparece diretamente em σ/√n quando a população é muito grande e a amostragem é aproximadamente independente?",
+      "o": [
+        "Sim, sempre.",
+        "Apenas como N².",
+        "Só se n=1.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Na aproximação usual para população grande, o principal termo é σ/√n.",
+      "hyp": "Pode exigir percentagem amostral fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:populacao-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-037",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Quando a amostra sem reposição é uma fração relevante de uma população finita, pode usar-se...",
+      "o": [
+        "correção para população finita.",
+        "TLC sem qualquer ajuste.",
+        "apenas dobrar n.",
+        "substituir σ por μ."
+      ],
+      "a": 0,
+      "sol": "A dependência entre observações reduz a variabilidade relativamente à fórmula de população infinita.",
+      "hyp": "Pode ignorar amostragem sem reposição elevada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:cpf",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-038",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A correção finita √[(N−n)/(N−1)] é...",
+      "o": [
+        "sempre maior que1.",
+        "menor ou igual a1.",
+        "sempre zero.",
+        "igual a n/N."
+      ],
+      "a": 1,
+      "sol": "Como N−n≤N−1 para n≥1, o fator não excede1.",
+      "hyp": "Pode achar que correção aumenta o erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:cpf",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-039",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se n é muito pequeno face a N, a correção finita fica...",
+      "o": [
+        "próxima de0.",
+        "muito maior que1.",
+        "próxima de1.",
+        "negativa."
+      ],
+      "a": 2,
+      "sol": "N−n≈N−1.",
+      "hyp": "Pode imaginar grande efeito mesmo com fração pequena.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:cpf-pequena",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-040",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A distribuição de amostragem depende de...",
+      "o": [
+        "apenas do valor observado da estatística.",
+        "apenas de n.",
+        "apenas da média populacional.",
+        "população/modelo, estatística, tamanho n e desenho de amostragem."
+      ],
+      "a": 3,
+      "sol": "Todos esses elementos afetam o comportamento repetido.",
+      "hyp": "Pode simplificar excessivamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:dependencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-041",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄1 usa n=25 e X̄2 usa n=100 da mesma população, então EP(X̄2) é...",
+      "o": [
+        "metade de EP(X̄1).",
+        "um quarto.",
+        "o dobro.",
+        "igual."
+      ],
+      "a": 0,
+      "sol": "√100/√25=2, logo o erro padrão cai para metade.",
+      "hyp": "Pode usar razão 100/25=4 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:comparar-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-042",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se pretendemos metade do erro padrão com o mesmo σ, precisamos de...",
+      "o": [
+        "2 vezes.",
+        "4 vezes mais observações.",
+        "metade das observações.",
+        "8 vezes."
+      ],
+      "a": 1,
+      "sol": "EP∝1/√n.",
+      "hyp": "Pode pensar em proporcionalidade linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-043",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O termo 'erro padrão' não significa...",
+      "o": [
+        "uma medida de variabilidade amostral.",
+        "incerteza de uma estatística.",
+        "que houve um erro na recolha dos dados.",
+        "desvio padrão da distribuição de amostragem."
+      ],
+      "a": 2,
+      "sol": "É terminologia estatística, não uma falha operacional.",
+      "hyp": "Pode interpretar 'erro' literalmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:terminologia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-044",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma estatística pode ter erro padrão pequeno e ser enviesada?",
+      "o": [
+        "Não.",
+        "Só se n=1.",
+        "Só se a população for infinita.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Precisão e viés são dimensões distintas.",
+      "hyp": "Pode confundir baixa variabilidade com centragem correta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:vies-ep",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-045",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma estatística não enviesada pode ter erro padrão grande?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só para proporções.",
+        "Só se p=0,5."
+      ],
+      "a": 0,
+      "sol": "Pode estar centrada corretamente mas ser muito variável.",
+      "hyp": "Pode confundir não enviesamento com precisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:nao-vies-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-046",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma média de tempos de espera baseada em n=400 terá, face a n=100 e mesmo σ, erro padrão...",
+      "o": [
+        "um quarto.",
+        "metade.",
+        "quádruplo.",
+        "igual."
+      ],
+      "a": 1,
+      "sol": "√400=20 e√100=10.",
+      "hyp": "Pode usar a razão de tamanhos em vez das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-047",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se a taxa verdadeira de defeito é p=0,01, amostras pequenas produzirão p̂ frequentemente...",
+      "o": [
+        "sempre igual a0,01.",
+        "Normal perfeita.",
+        "igual a0, refletindo a raridade e discreção.",
+        "negativa."
+      ],
+      "a": 2,
+      "sol": "Com poucos itens, é comum não observar qualquer defeito.",
+      "hyp": "Pode aplicar aproximação contínua sem pensar na raridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:evento-raro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-048",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A simulação Monte Carlo pode ajudar a estudar uma distribuição de amostragem quando...",
+      "o": [
+        "não conhecemos como gerar amostras do modelo.",
+        "queremos eliminar a incerteza.",
+        "temos apenas uma constante.",
+        "a teoria é complexa ou queremos ilustrar o comportamento repetido."
+      ],
+      "a": 3,
+      "sol": "Repetir amostragens simuladas aproxima a distribuição da estatística.",
+      "hyp": "Pode pensar que simulação substitui qualquer modelo sem pressupostos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:simulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-049",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Ao comparar duas distribuições de amostragem com o mesmo centro, a mais estreita representa...",
+      "o": [
+        "estimador mais preciso.",
+        "maior viés.",
+        "parâmetro maior.",
+        "amostra necessariamente enviesada."
+      ],
+      "a": 0,
+      "sol": "Menor dispersão significa menor erro padrão.",
+      "hyp": "Pode associar largura ao valor do parâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:largura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-DA-050",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-distribuicoes-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "A principal ponte entre amostragem e inferência é...",
+      "o": [
+        "assumir que uma amostra é a população.",
+        "conhecer/modelar como uma estatística varia de amostra para amostra.",
+        "ignorar o desenho amostral.",
+        "usar apenas gráficos dos dados brutos."
+      ],
+      "a": 1,
+      "sol": "A distribuição de amostragem quantifica a incerteza da estatística.",
+      "hyp": "Pode fazer inferência sem modelar a variabilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-distribuicoes-amostragem:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
