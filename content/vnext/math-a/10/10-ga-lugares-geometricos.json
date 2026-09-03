@@ -1178,7 +1178,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Qual é a equação da superfície esférica do item anterior?",
+      "q": "Uma superfície esférica tem centro C=(1,−2,3) e raio 5. Qual é a sua equação?",
       "o": [
         "(x+1)²+(y−2)²+(z+3)²=25.",
         "(x−1)²+(y+2)²+(z−3)²=5.",
