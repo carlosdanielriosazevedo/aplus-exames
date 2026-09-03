@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **200 perguntas**
-- Progresso bruto: **3,54%**
+- Concluído em rascunho: **250 perguntas**
+- Progresso bruto: **4,42%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -50,3 +50,14 @@ A matéria **10.º — Eleições e Partilha** atingiu o alvo inicial de **200 p
 - 50 St. Laguë/comparação
 
 Próxima matéria: **10.º — Modelos matemáticos em finanças**.
+
+
+### 10.º ano — Modelos matemáticos em finanças
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Salário mensal, anual e valor-hora | 50 | 50 | lote completo em protótipo |
+| Salário bruto/líquido, Segurança Social e retenção | 50 | 0 | próximo lote |
+| IRS, taxas, escalões e progressividade | 50 | 0 | por iniciar |
+| Juro simples | 50 | 0 | por iniciar |
+| Juro composto, poupança, crédito e modelação | 50 | 0 | por iniciar |
