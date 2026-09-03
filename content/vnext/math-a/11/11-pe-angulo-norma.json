@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-pe",
+  "subtopicId": "11-pe-angulo-norma",
+  "subtopic": "Produto escalar, norma e ângulo",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha a forma geométrica do produto escalar, norma, normalização, ângulo entre vetores, Cauchy-Schwarz, identidades de normas e aplicações. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11PE-AN-001",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para vetores não nulos u e v, u·v é igual a...",
+      "o": [
+        "||u||||v||cosθ.",
+        "||u||+||v||.",
+        "||u||||v||sinθ.",
+        "cos(||u||+||v||)."
+      ],
+      "a": 0,
+      "sol": "Esta é a forma geométrica do produto escalar.",
+      "hyp": "Pode trocar cosseno por seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:formula-geometrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-002",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O ângulo θ entre dois vetores não nulos é tomado em...",
+      "o": [
+        "[0,2π[.",
+        "[0,π].",
+        "R.",
+        "[−π,π]."
+      ],
+      "a": 1,
+      "sol": "O menor ângulo não orientado entre vetores varia entre 0 e π.",
+      "hyp": "Pode usar um ângulo orientado completo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:intervalo-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-003",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se θ=0, então cosθ=",
+      "o": [
+        "0.",
+        "−1.",
+        "1.",
+        "1/2."
+      ],
+      "a": 2,
+      "sol": "cos0=1.",
+      "hyp": "Pode confundir com seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:cos-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-004",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se θ=π/2, então cosθ=",
+      "o": [
+        "1.",
+        "−1.",
+        "√2/2.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "cos90°=0.",
+      "hyp": "Pode confundir com cosπ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:cos-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-005",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se θ=π, então cosθ=",
+      "o": [
+        "−1.",
+        "0.",
+        "1.",
+        "−1/2."
+      ],
+      "a": 0,
+      "sol": "cosπ=−1.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:cos-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-006",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se ||u||=3, ||v||=4 e θ=60°, então u·v=",
+      "o": [
+        "12.",
+        "6.",
+        "3.",
+        "24."
+      ],
+      "a": 1,
+      "sol": "3×4×cos60°=12×1/2=6.",
+      "hyp": "Pode esquecer o cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:produto-por-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-007",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se ||u||=5, ||v||=2 e θ=90°, então u·v=",
+      "o": [
+        "10.",
+        "5.",
+        "0.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "cos90°=0.",
+      "hyp": "Pode multiplicar apenas as normas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:produto-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-008",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se ||u||=2, ||v||=7 e θ=180°, então u·v=",
+      "o": [
+        "14.",
+        "0.",
+        "−9.",
+        "−14."
+      ],
+      "a": 3,
+      "sol": "2×7×cosπ=−14.",
+      "hyp": "Pode ignorar o sinal do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:produto-opostos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-009",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se ||u||=4, ||v||=4 e θ=45°, então u·v=",
+      "o": [
+        "8√2.",
+        "16√2.",
+        "8.",
+        "16."
+      ],
+      "a": 0,
+      "sol": "16×√2/2=8√2.",
+      "hyp": "Pode esquecer dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:produto-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-010",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=12, ||u||=3 e ||v||=4, então θ=",
+      "o": [
+        "π/3.",
+        "0.",
+        "π/2.",
+        "π."
+      ],
+      "a": 1,
+      "sol": "cosθ=12/(12)=1, logo θ=0.",
+      "hyp": "Pode pensar que produto igual ao produto das normas implica 60°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-produto-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-011",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=0 e os vetores são não nulos, então θ=",
+      "o": [
+        "0.",
+        "π.",
+        "π/2.",
+        "π/4."
+      ],
+      "a": 2,
+      "sol": "cosθ=0.",
+      "hyp": "Pode confundir produto nulo com vetores opostos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-012",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=−20, ||u||=4 e ||v||=5, então θ=",
+      "o": [
+        "π/2.",
+        "0.",
+        "2π/3.",
+        "π."
+      ],
+      "a": 3,
+      "sol": "cosθ=−1.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-opostos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-013",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=5, ||u||=2 e ||v||=5, então cosθ=",
+      "o": [
+        "1/2.",
+        "2.",
+        "1/5.",
+        "5/2."
+      ],
+      "a": 0,
+      "sol": "cosθ=5/10=1/2.",
+      "hyp": "Pode inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:cos-por-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-014",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, θ=",
+      "o": [
+        "π/6.",
+        "π/3.",
+        "π/2.",
+        "2π/3."
+      ],
+      "a": 1,
+      "sol": "cosθ=1/2.",
+      "hyp": "Pode usar o ângulo do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-015",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se u·v>0, então θ é...",
+      "o": [
+        "reto.",
+        "obtuso.",
+        "agudo.",
+        "sempre 0."
+      ],
+      "a": 2,
+      "sol": "cosθ>0 em ]0,π/2[.",
+      "hyp": "Pode achar que positivo implica vetores iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:sinal-e-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-016",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se u·v<0, então θ é...",
+      "o": [
+        "agudo.",
+        "reto.",
+        "sempre π.",
+        "obtuso."
+      ],
+      "a": 3,
+      "sol": "cosθ<0 em ]π/2,π[.",
+      "hyp": "Pode confundir produto negativo com vetores exatamente opostos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:sinal-e-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-017",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A norma de u=(a,b) é...",
+      "o": [
+        "√(a²+b²).",
+        "a+b.",
+        "a²+b².",
+        "|a+b|."
+      ],
+      "a": 0,
+      "sol": "A norma é o comprimento euclidiano.",
+      "hyp": "Pode esquecer a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:norma-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-018",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A norma de (6,8) é...",
+      "o": [
+        "14.",
+        "10.",
+        "100.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "√(36+64)=10.",
+      "hyp": "Pode somar componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:norma-pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-019",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A norma de (2,−3,6) é...",
+      "o": [
+        "11.",
+        "49.",
+        "7.",
+        "√11."
+      ],
+      "a": 2,
+      "sol": "√(4+9+36)=√49=7.",
+      "hyp": "Pode não quadrar a componente negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:norma-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-020",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para qualquer escalar λ, ||λu||=",
+      "o": [
+        "λ||u|| sempre.",
+        "λ²||u||.",
+        "||u||+λ.",
+        "|λ| ||u||."
+      ],
+      "a": 3,
+      "sol": "A norma é não negativa, por isso entra o módulo de λ.",
+      "hyp": "Pode dar norma negativa quando λ<0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:norma-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-021",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se ||u||=4, então ||−3u||=",
+      "o": [
+        "12.",
+        "−12.",
+        "7.",
+        "36."
+      ],
+      "a": 0,
+      "sol": "|−3|×4=12.",
+      "hyp": "Pode conservar sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:norma-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-022",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(3,4), qual é um vetor unitário na mesma direção e sentido?",
+      "o": [
+        "(5/3,5/4).",
+        "(3/5,4/5).",
+        "(3/25,4/25).",
+        "(−3/5,−4/5)."
+      ],
+      "a": 1,
+      "sol": "Divide-se por ||u||=5.",
+      "hyp": "Pode dividir pela norma ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:normalizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-023",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Normalizar um vetor significa...",
+      "o": [
+        "multiplicá-lo pela norma.",
+        "somar as componentes.",
+        "dividi-lo pela sua norma.",
+        "torná-lo perpendicular."
+      ],
+      "a": 2,
+      "sol": "O resultado é um vetor unitário com mesma direção e sentido.",
+      "hyp": "Pode confundir com projeção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:normalizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-024",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,1), então um vetor unitário na mesma direção é...",
+      "o": [
+        "(1/2,1/2).",
+        "(1,1).",
+        "(2,2).",
+        "(√2/2,√2/2)."
+      ],
+      "a": 3,
+      "sol": "||u||=√2, logo u/√2=(√2/2,√2/2).",
+      "hyp": "Pode dividir por 2 em vez de √2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:normalizacao-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-025",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(2,0) e v=(1,√3), então o ângulo entre eles é...",
+      "o": [
+        "π/3.",
+        "π/6.",
+        "π/2.",
+        "2π/3."
+      ],
+      "a": 0,
+      "sol": "u·v=2, ||u||=2, ||v||=2, logo cosθ=1/2.",
+      "hyp": "Pode usar o ângulo do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-026",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,1) e v=(1,−1), então θ=",
+      "o": [
+        "0.",
+        "π/2.",
+        "π.",
+        "π/4."
+      ],
+      "a": 1,
+      "sol": "Produto escalar 1−1=0.",
+      "hyp": "Pode olhar apenas para normas iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-027",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,0) e v=(−1,√3), então θ=",
+      "o": [
+        "π/3.",
+        "π/6.",
+        "2π/3.",
+        "5π/6."
+      ],
+      "a": 2,
+      "sol": "u·v=−1, ||u||=1, ||v||=2, cosθ=−1/2.",
+      "hyp": "Pode esquecer que o ângulo está em [0,π].",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-028",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(3,4) e v=(6,8), então o ângulo entre eles é...",
+      "o": [
+        "π/2.",
+        "π.",
+        "π/4.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "v=2u, mesmo sentido.",
+      "hyp": "Pode achar que vetores diferentes têm ângulo não nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:vetores-proporcionais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-029",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(3,4) e v=(−6,−8), então θ=",
+      "o": [
+        "π.",
+        "0.",
+        "π/2.",
+        "3π/4."
+      ],
+      "a": 0,
+      "sol": "v=−2u, sentidos opostos.",
+      "hyp": "Pode usar apenas colinearidade sem o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:vetores-opostos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-030",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Entre vetores de normas fixas, o produto escalar é máximo quando...",
+      "o": [
+        "são perpendiculares.",
+        "têm o mesmo sentido.",
+        "têm sentidos opostos.",
+        "formam 60°."
+      ],
+      "a": 1,
+      "sol": "cosθ é máximo em θ=0.",
+      "hyp": "Pode achar que perpendicularidade maximiza independência e por isso o produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:maximo-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-031",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Entre vetores de normas fixas, o produto escalar é mínimo quando...",
+      "o": [
+        "têm o mesmo sentido.",
+        "são perpendiculares.",
+        "têm sentidos opostos.",
+        "formam 45°."
+      ],
+      "a": 2,
+      "sol": "cosθ é mínimo em θ=π.",
+      "hyp": "Pode confundir mínimo com zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:minimo-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-032",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u||=5 e ||v||=7, qual é o maior valor possível de u·v?",
+      "o": [
+        "12.",
+        "0.",
+        "−35.",
+        "35."
+      ],
+      "a": 3,
+      "sol": "Máximo=||u||||v|| quando θ=0.",
+      "hyp": "Pode somar as normas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:limites-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-033",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com as mesmas normas 5 e 7, o menor valor possível de u·v é...",
+      "o": [
+        "−35.",
+        "0.",
+        "35.",
+        "−12."
+      ],
+      "a": 0,
+      "sol": "Mínimo=−||u||||v|| quando θ=π.",
+      "hyp": "Pode pensar que produto escalar não pode ser negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:limites-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-034",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Para quaisquer vetores u,v, vale a desigualdade...",
+      "o": [
+        "|u·v|≥||u||||v||.",
+        "|u·v|≤||u||||v||.",
+        "u·v≥0 sempre.",
+        "||u+v||=||u||+||v|| sempre."
+      ],
+      "a": 1,
+      "sol": "É a desigualdade de Cauchy-Schwarz.",
+      "hyp": "Pode supor que o produto escalar é sempre positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:cauchy-schwarz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-035",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na desigualdade de Cauchy-Schwarz, há igualdade quando...",
+      "o": [
+        "u e v são perpendiculares.",
+        "u=v=0 apenas.",
+        "u e v são linearmente dependentes/colineares.",
+        "os vetores têm norma 1."
+      ],
+      "a": 2,
+      "sol": "A igualdade ocorre para vetores proporcionais.",
+      "hyp": "Pode confundir com produto nulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:caso-igualdade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-036",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u·v=8, ||u||=2 e ||v||=3, a informação é...",
+      "o": [
+        "compatível com ângulo agudo.",
+        "compatível com ângulo reto.",
+        "compatível com vetores opostos.",
+        "impossível, pois 8>6."
+      ],
+      "a": 3,
+      "sol": "Pela Cauchy-Schwarz, |u·v|≤2×3=6.",
+      "hyp": "Pode aceitar qualquer valor real para o produto escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:validar-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-037",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u||=4, ||v||=5 e o ângulo é 120°, então u·v=",
+      "o": [
+        "−10.",
+        "10.",
+        "−20.",
+        "20."
+      ],
+      "a": 0,
+      "sol": "4×5×cos120°=20×(−1/2)=−10.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:produto-angulo-obtuso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-038",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u||=6, ||v||=2 e u·v=6√3, então θ=",
+      "o": [
+        "π/3.",
+        "π/6.",
+        "π/2.",
+        "5π/6."
+      ],
+      "a": 1,
+      "sol": "cosθ=6√3/12=√3/2.",
+      "hyp": "Pode usar seno correspondente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-039",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(2,2,1) e v=(1,−2,2), então cosθ=",
+      "o": [
+        "1/3.",
+        "−1/3.",
+        "0.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "u·v=2−4+2=0.",
+      "hyp": "Pode calcular as normas sem verificar o produto primeiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-040",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u=(1,2,2) e v=(2,1,2), então cosθ=",
+      "o": [
+        "7/9.",
+        "2/3.",
+        "1/9.",
+        "8/9."
+      ],
+      "a": 3,
+      "sol": "u·v=2+2+4=8; ambas as normas são 3.",
+      "hyp": "Pode dividir por 3 em vez de 9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-041",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No item anterior, o ângulo é...",
+      "o": [
+        "arccos(8/9).",
+        "arccos(9/8).",
+        "arcsin(8/9).",
+        "π/2."
+      ],
+      "a": 0,
+      "sol": "θ=arccos((u·v)/(||u||||v||)).",
+      "hyp": "Pode inverter o quociente ou usar seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:angulo-arccos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-042",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u+v||²=||u||²+||v||², então...",
+      "o": [
+        "u=v.",
+        "u·v=0.",
+        "u·v=1.",
+        "u e v são paralelos."
+      ],
+      "a": 1,
+      "sol": "Expandindo: ||u+v||²=||u||²+2u·v+||v||².",
+      "hyp": "Pode não reconhecer a condição de Pitágoras vetorial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:pitagoras-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-043",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u−v||²=||u||²+||v||², então...",
+      "o": [
+        "u=v.",
+        "u·v=−1.",
+        "u·v=0.",
+        "u=−v."
+      ],
+      "a": 2,
+      "sol": "Expandindo: ||u−v||²=||u||²−2u·v+||v||².",
+      "hyp": "Pode achar que o sinal muda a conclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:pitagoras-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-044",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ||u||=||v||=1, então ||u−v||² é igual a...",
+      "o": [
+        "2+2u·v.",
+        "1−u·v.",
+        "u·v.",
+        "2−2u·v."
+      ],
+      "a": 3,
+      "sol": "Expande-se o quadrado da norma da diferença.",
+      "hyp": "Pode usar a fórmula da soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:norma-diferenca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-045",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Para vetores unitários u,v, u·v é diretamente...",
+      "o": [
+        "cosθ.",
+        "sinθ.",
+        "θ.",
+        "tanθ."
+      ],
+      "a": 0,
+      "sol": "Como as normas valem 1, a fórmula reduz-se a u·v=cosθ.",
+      "hyp": "Pode esquecer que os vetores precisam ser unitários.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:unitarios-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-046",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma força de 10 N atua num deslocamento de 5 m formando 60°. O produto escalar F·d é...",
+      "o": [
+        "50.",
+        "25.",
+        "15.",
+        "100."
+      ],
+      "a": 1,
+      "sol": "10×5×cos60°=25.",
+      "hyp": "Pode multiplicar só as magnitudes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:trabalho-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-047",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma força de 20 N é perpendicular a um deslocamento de 3 m. O produto escalar é...",
+      "o": [
+        "60.",
+        "20.",
+        "0.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "cos90°=0.",
+      "hyp": "Pode ignorar o ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:trabalho-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-048",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um deslocamento de 8 m faz 30° com uma direção unitária e. A projeção escalar nesse eixo é...",
+      "o": [
+        "4.",
+        "8√3.",
+        "8.",
+        "4√3."
+      ],
+      "a": 3,
+      "sol": "8cos30°=4√3.",
+      "hyp": "Pode usar seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:projecao-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-049",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u e v são unitários e u·v=−1/2, então o ângulo entre eles é...",
+      "o": [
+        "2π/3.",
+        "π/3.",
+        "π/6.",
+        "5π/6."
+      ],
+      "a": 0,
+      "sol": "cosθ=−1/2 e θ∈[0,π], logo θ=2π/3.",
+      "hyp": "Pode escolher o ângulo suplementar errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:unitarios-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11PE-AN-050",
+      "themeId": "11-pe",
+      "subtopicId": "11-pe-angulo-norma",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Duas direções de movimento têm vetores unitários com produto escalar √2/2. O menor ângulo entre elas é...",
+      "o": [
+        "π/2.",
+        "π/4.",
+        "3π/4.",
+        "π/6."
+      ],
+      "a": 1,
+      "sol": "Para vetores unitários, u·v=cosθ=√2/2.",
+      "hyp": "Pode interpretar diretamente o valor como ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-pe-angulo-norma:modelacao-direcoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
