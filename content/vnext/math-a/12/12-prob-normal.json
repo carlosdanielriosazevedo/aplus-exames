@@ -1,53 +1,1364 @@
 {
-"schemaVersion":1,"subject":"Matemática A","curriculum":"vNext 2026/27","year":"12.º","themeId":"12-prob","subtopicId":"12-prob-normal","subtopic":"Valor médio/dispersão de modelos e Modelo Normal","editorialTarget":50,"status":"prototype","note":"Conteúdo original A+. Trabalha valor médio, variância/desvio-padrão em modelos discretos simples, padronização e interpretação do Modelo Normal. Não ligado ao motor atual.","questions":[
-{"id":"VN12PROB-NO-001","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"A variância de uma variável aleatória mede sobretudo...","o":["a dispersão em torno do valor médio.","a probabilidade total.","o valor máximo.","a mediana sempre."],"a":0,"sol":"A variância quantifica a variabilidade relativamente à média.","hyp":"Pode confundir dispersão com localização.","contexts":["mission","training","exam"],"signature":"12-prob-normal:variancia-1","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-002","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"O desvio-padrão é...","o":["a variância ao quadrado.","a raiz quadrada da variância.","o dobro da média.","sempre 1."],"a":1,"sol":"σ=√Var(X).","hyp":"Pode trocar variância e desvio-padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:dp-2","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-003","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"A variância é sempre...","o":["negativa.","inferior à média.","não negativa.","igual ao desvio-padrão."],"a":2,"sol":"É uma média de quadrados de desvios.","hyp":"Pode pensar que desvios negativos produzem variância negativa.","contexts":["mission","training","exam"],"signature":"12-prob-normal:var-nao-neg-3","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-004","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"Se X é constante, então Var(X)=...","o":["1.","E(X).","não definida.","0."],"a":3,"sol":"Não há dispersão quando todos os valores são iguais.","hyp":"Pode achar que variância mede o próprio nível da variável.","contexts":["mission","training","exam"],"signature":"12-prob-normal:constante-4","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-005","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":1,"cognitive":"Compreensão","q":"Uma distribuição Normal é caracterizada pelos parâmetros...","o":["média μ e desvio-padrão σ>0.","apenas mediana.","mínimo e máximo.","número de observações apenas."],"a":0,"sol":"A média determina o centro e σ a dispersão.","hyp":"Pode tratar todos os modelos Normais como iguais.","contexts":["mission","training","exam"],"signature":"12-prob-normal:parametros-5","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-006","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"O gráfico de uma distribuição Normal é...","o":["assimétrico à direita sempre.","simétrico em torno de μ.","uniforme.","discreto em barras."],"a":1,"sol":"A densidade Normal é simétrica em relação à média.","hyp":"Pode confundir com distribuições enviesadas.","contexts":["mission","training","exam"],"signature":"12-prob-normal:simetria-6","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-007","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Numa Normal, média, mediana e moda...","o":["são sempre diferentes.","não existem.","coincidem em μ.","coincidem em σ."],"a":2,"sol":"A simetria unimodal centra as três medidas em μ.","hyp":"Pode associar moda ao desvio-padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:centro-7","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-008","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"A área total sob a curva de densidade Normal é...","o":["0.","μ.","σ.","1."],"a":3,"sol":"Toda a probabilidade totaliza 1.","hyp":"Pode confundir área total com altura máxima.","contexts":["mission","training","exam"],"signature":"12-prob-normal:area-8","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-009","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Aumentar σ mantendo μ fixo torna a curva Normal...","o":["mais espalhada e menos alta.","mais estreita e alta.","deslocada para a direita.","assimétrica."],"a":0,"sol":"Maior desvio-padrão significa maior dispersão; a área total mantém-se 1.","hyp":"Pode pensar que σ desloca a média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:sigma-9","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-010","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Alterar μ mantendo σ desloca a curva...","o":["verticalmente apenas.","horizontalmente, sem alterar a forma.","e altera obrigatoriamente a dispersão.","tornando-a assimétrica."],"a":1,"sol":"μ define a localização do centro.","hyp":"Pode confundir localização com escala.","contexts":["mission","training","exam"],"signature":"12-prob-normal:mu-10","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-011","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"Para X~N(μ,σ), a variável padronizada Z é...","o":["(X+μ)/σ.","X/μ.","(X−μ)/σ.","σ(X−μ)."],"a":2,"sol":"Subtrai-se a média e divide-se pelo desvio-padrão.","hyp":"Pode somar μ ou dividir pela média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:padronizar-11","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-012","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Se X~N(100,15) e X=130, o valor z é...","o":["130/15.","15/30.","1.","2."],"a":3,"sol":"z=(130−100)/15=2.","hyp":"Pode esquecer subtrair a média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-12","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-013","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Aplicação","q":"Se μ=50, σ=5 e x=40, então z=...","o":["−2.","2.","−10.","8."],"a":0,"sol":"(40−50)/5=−2.","hyp":"Pode perder o sinal negativo.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-13","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-014","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Um z-score igual a2 significa que o valor está...","o":["2 unidades acima da média.","2 desvios-padrão acima da média.","2 desvios-padrão abaixo da média.","na média."],"a":1,"sol":"O z-score mede distância à média em unidades de σ.","hyp":"Pode confundir unidades originais com desvios-padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-interpret-14","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-015","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Um z-score −1,5 indica um valor...","o":["1,5 unidades acima da média.","na média.","1,5 desvios-padrão abaixo da média.","impossível."],"a":2,"sol":"O sinal negativo indica posição abaixo da média.","hyp":"Pode ignorar o sinal.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-interpret-15","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-016","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Compreensão","q":"A Normal padrão tem...","o":["μ=1,σ=0.","μ=0,σ=0.","μ=1,σ=1.","μ=0,σ=1."],"a":3,"sol":"Z~N(0,1).","hyp":"Pode trocar média e desvio-padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:normal-padrao-16","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-017","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Por simetria da Normal, P(X≤μ)=...","o":["0,5.","1.","0.","depende de σ."],"a":0,"sol":"Metade da área fica de cada lado da média.","hyp":"Pode pensar que σ altera a área à esquerda da média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:metade-17","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-018","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Numa variável contínua Normal, P(X=μ)=...","o":["0,5.","0.","1.","depende de μ."],"a":1,"sol":"Em variáveis contínuas, um ponto isolado tem probabilidade zero.","hyp":"Pode confundir densidade máxima em μ com probabilidade pontual positiva.","contexts":["mission","training","exam"],"signature":"12-prob-normal:ponto-18","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-019","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Raciocínio","q":"Para uma Normal, P(X<μ) e P(X>μ) são...","o":["0 e1.","dependentes de μ.","ambas 0,5.","ambas 1."],"a":2,"sol":"A simetria divide a área ao meio e P(X=μ)=0.","hyp":"Pode achar que o valor numérico de μ altera as metades.","contexts":["mission","training","exam"],"signature":"12-prob-normal:simetria-19","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-020","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":2,"cognitive":"Interpretação","q":"Se a curva Normal é simétrica, P(X≥μ+a) é igual a...","o":["P(X≥μ−a).","P(X≤μ+a).","P(X≤μ).","P(X≤μ−a)."],"a":3,"sol":"Os pontos μ−a e μ+a são simétricos; as caudas exteriores têm a mesma área.","hyp":"Pode comparar regiões não simétricas.","contexts":["mission","training","exam"],"signature":"12-prob-normal:simetria-caudas-20","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-021","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Compreensão","q":"A regra empírica indica que aproximadamente 68% de uma Normal está em...","o":["[μ−σ, μ+σ].","[μ−2σ, μ+2σ].","[μ−3σ, μ+3σ].","[0,μ]."],"a":0,"sol":"Cerca de68% fica a menos de um desvio-padrão da média.","hyp":"Pode trocar as percentagens 68-95-99,7.","contexts":["mission","training","exam"],"signature":"12-prob-normal:68-21","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-022","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Compreensão","q":"Aproximadamente 95% dos valores de uma Normal situam-se em...","o":["μ±σ.","μ±2σ.","μ±3σ.","μ±0,5σ."],"a":1,"sol":"É a segunda parte da regra 68-95-99,7.","hyp":"Pode usar um único desvio-padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:95-22","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-023","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Compreensão","q":"Aproximadamente 99,7% situa-se em...","o":["μ±σ.","μ±2σ.","μ±3σ.","μ±4σ."],"a":2,"sol":"Três desvios-padrão de cada lado cobrem cerca de99,7%.","hyp":"Pode trocar95% e99,7%.","contexts":["mission","training","exam"],"signature":"12-prob-normal:997-23","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-024","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Pela regra empírica, a percentagem aproximadamente acima de μ+2σ é...","o":["5%.","95%.","2,5%?", "2,5%."],"a":3,"sol":"Fora de μ±2σ ficam cerca de5%, divididos em duas caudas de2,5%.","hyp":"Pode atribuir os5% todos a uma cauda.","contexts":["mission","training","exam"],"signature":"12-prob-normal:cauda-2sigma-24","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-025","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Pela regra empírica, aproximadamente que percentagem fica entre μ e μ+σ?","o":["34%.","68%.","16%.","50%."],"a":0,"sol":"Metade dos68% centrais fica de cada lado da média:34%.","hyp":"Pode usar68% inteiro.","contexts":["mission","training","exam"],"signature":"12-prob-normal:meia-faixa-25","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-026","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Aproximadamente que percentagem fica entre μ+σ e μ+2σ?","o":["34%.","13,5%.","2,5%.","47,5%."],"a":1,"sol":"Entre ±σ há68%; entre ±2σ há95%; diferença27%, metade em cada lado=13,5%.","hyp":"Pode usar a diferença total27% numa única faixa.","contexts":["mission","training","exam"],"signature":"12-prob-normal:faixa-1-2-26","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-027","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Aplicação","q":"X~N(70,10). O intervalo μ±σ é...","o":["[50,90].","[70,80].","[60,80].","[60,90]."],"a":2,"sol":"70−10=60 e70+10=80.","hyp":"Pode somar/descontar2σ.","contexts":["mission","training","exam"],"signature":"12-prob-normal:intervalo-27","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-028","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Aplicação","q":"Para X~N(70,10), aproximadamente 95% dos valores ficam em...","o":["[60,80].","[40,100].","[50,80].","[50,90]."],"a":3,"sol":"μ±2σ=70±20=[50,90].","hyp":"Pode usar apenas ±σ.","contexts":["mission","training","exam"],"signature":"12-prob-normal:intervalo-95-28","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-029","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se X~N(100,20), o valor80 tem z-score...","o":["−1.","1.","−4.","4."],"a":0,"sol":"(80−100)/20=−1.","hyp":"Pode perder o sinal ou dividir80 por20.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-29","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-030","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se X~N(100,20), o valor140 tem z-score...","o":["1.","2.","7.","40."],"a":1,"sol":"(140−100)/20=2.","hyp":"Pode usar diferença40 como z-score.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-30","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-031","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se z=1,5, μ=50 eσ=4, então x=...","o":["54.","55.","56.","60."],"a":2,"sol":"x=μ+zσ=50+1,5×4=56.","hyp":"Pode somar apenas z à média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:despadronizar-31","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-032","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Se z=−2, μ=80 eσ=5, então x=...","o":["90.","78.","75.","70."],"a":3,"sol":"80−2×5=70.","hyp":"Pode somar em vez de subtrair.","contexts":["mission","training","exam"],"signature":"12-prob-normal:despadronizar-32","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-033","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Compreensão","q":"Uma fórmula útil para a variância é...","o":["Var(X)=E(X²)−[E(X)]².","Var(X)=E(X²)+[E(X)]².","Var(X)=E(X).","Var(X)=√E(X)."],"a":0,"sol":"É equivalente à definição por desvios quadráticos à média.","hyp":"Pode trocar o sinal ou esquecer o quadrado da média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:var-formula-33","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-034","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Aplicação","q":"X vale0 ou1 com P(X=1)=p. E(X)=...","o":["1−p.","p.","p².","1."],"a":1,"sol":"0(1−p)+1·p=p.","hyp":"Pode usar o complementar.","contexts":["mission","training","exam"],"signature":"12-prob-normal:bernoulli-media-34","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-035","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"Para a variável de Bernoulli anterior, E(X²)=...","o":["p².","1−p.","p.","2p."],"a":2,"sol":"Como X∈{0,1}, X²=X; logo E(X²)=p.","hyp":"Pode quadrar a esperança em vez da variável.","contexts":["mission","training","exam"],"signature":"12-prob-normal:bernoulli-X2-35","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-036","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":3,"cognitive":"Raciocínio","q":"A variância de uma Bernoulli(p) é...","o":["p².","p.","1−p.","p(1−p)."],"a":3,"sol":"Var(X)=p−p²=p(1−p).","hyp":"Pode usar apenas p como variância.","contexts":["mission","training","exam"],"signature":"12-prob-normal:bernoulli-var-36","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-037","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se X vale0 ou1 com p=0,5, então Var(X)=...","o":["0,25.","0,5.","1.","0."],"a":0,"sol":"0,5×0,5=0,25.","hyp":"Pode confundir variância com média.","contexts":["mission","training","exam"],"signature":"12-prob-normal:bernoulli-var-num-37","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-038","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se Var(X)=9, então o desvio-padrão é...","o":["9.","3.","81.","−3."],"a":1,"sol":"σ=√9=3.","hyp":"Pode não tirar a raiz.","contexts":["mission","training","exam"],"signature":"12-prob-normal:dp-num-38","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-039","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se σ=4, então Var(X)=...","o":["4.","8.","16.","2."],"a":2,"sol":"Variância=σ²=16.","hyp":"Pode dividir o desvio-padrão por2.","contexts":["mission","training","exam"],"signature":"12-prob-normal:var-num-39","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-040","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se Y=X+5, então Var(Y)=...","o":["Var(X)+5.","Var(X)+25.","5Var(X).","Var(X)."],"a":3,"sol":"Somar uma constante desloca todos os valores mas não altera a dispersão.","hyp":"Pode somar a constante à variância.","contexts":["mission","training","exam"],"signature":"12-prob-normal:var-translacao-40","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-041","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se Y=3X, então Var(Y)=...","o":["9Var(X).","3Var(X).","Var(X)+3.","Var(X)."],"a":0,"sol":"Var(aX)=a²Var(X).","hyp":"Pode multiplicar a variância apenas por3.","contexts":["mission","training","exam"],"signature":"12-prob-normal:var-escala-41","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-042","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se Y=−2X+7, então Var(Y)=...","o":["−2Var(X)+7.","4Var(X).","2Var(X).","Var(X)+7."],"a":1,"sol":"A translação não conta e o fator −2 entra ao quadrado:4.","hyp":"Pode manter o sinal negativo na variância.","contexts":["mission","training","exam"],"signature":"12-prob-normal:var-afim-42","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-043","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Se X~N(μ,σ), então Y=(X−μ)/σ tem média e desvio-padrão...","o":["μ eσ.","1 e0.","0 e1.","0 eσ²."],"a":2,"sol":"A padronização centra e escala para a Normal padrão.","hyp":"Pode trocar média e desvio-padrão padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:padronizacao-param-43","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-044","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Raciocínio","q":"Duas distribuições Normais têm a mesma μ, mas σ1<σ2. A primeira é...","o":["mais dispersa.","deslocada à esquerda.","assimétrica.","mais concentrada em torno de μ."],"a":3,"sol":"Menor σ implica menor dispersão.","hyp":"Pode pensar que menor σ desloca o centro.","contexts":["mission","training","exam"],"signature":"12-prob-normal:comparar-sigma-44","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-045","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Alturas têm modelo N(170,6). Uma altura182 cm está a...","o":["2 desvios-padrão acima da média.","12 desvios-padrão acima.","1 desvio-padrão acima.","2 abaixo."],"a":0,"sol":"(182−170)/6=2.","hyp":"Pode usar a diferença12 como número de desvios.","contexts":["mission","training","exam"],"signature":"12-prob-normal:modelacao-altura-45","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-046","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"No modelo N(170,6), aproximadamente 95% das alturas ficam entre...","o":["164 e176.","158 e182.","152 e188.","160 e180."],"a":1,"sol":"μ±2σ=170±12=[158,182].","hyp":"Pode usar apenas um desvio-padrão.","contexts":["mission","training","exam"],"signature":"12-prob-normal:modelacao-altura-46","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-047","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Tempos de execução seguem N(50,5). Aproximadamente 68% ficam entre...","o":["40 e60.","50 e55.","45 e55.","35 e65."],"a":2,"sol":"μ±σ=[45,55].","hyp":"Pode usar ±2σ.","contexts":["mission","training","exam"],"signature":"12-prob-normal:modelacao-tempo-47","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-048","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Interpretação","q":"Usar um Modelo Normal para dados é uma decisão de modelação que...","o":["é sempre correta para qualquer variável.","depende apenas da média.","depende apenas do tamanho da amostra.","deve ser avaliada à luz da forma/distribuição e do contexto."],"a":3,"sol":"A Normal é um modelo, não uma identidade automática para quaisquer dados.","hyp":"Pode aplicar a Normal apenas porque média e desvio-padrão existem.","contexts":["mission","training","exam"],"signature":"12-prob-normal:adequacao-48","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-049","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Interpretação","q":"Numa distribuição Normal, valores muito afastados de μ em unidades de σ são...","o":["menos prováveis do que valores próximos do centro, em intervalos comparáveis.","mais prováveis.","igualmente prováveis em qualquer intervalo.","impossíveis."],"a":0,"sol":"A densidade decresce nas caudas, embora valores extremos não sejam impossíveis.","hyp":"Pode confundir baixa probabilidade com impossibilidade.","contexts":["mission","training","exam"],"signature":"12-prob-normal:caudas-49","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1},
-{"id":"VN12PROB-NO-050","themeId":"12-prob","subtopicId":"12-prob-normal","year":"12.º","difficulty":4,"cognitive":"Modelação","q":"Comparar resultados de escalas diferentes através de z-scores é útil porque...","o":["torna todas as médias iguais a1.","expressa cada valor em desvios-padrão relativamente à respetiva média.","elimina toda a variabilidade.","transforma qualquer distribuição em Normal."],"a":1,"sol":"A padronização cria uma unidade comum de distância relativa ao centro.","hyp":"Pode pensar que padronizar normaliza a forma da distribuição automaticamente.","contexts":["mission","training","exam"],"signature":"12-prob-normal:z-comparar-50","reviewStatus":"prototype","origin":"original_vnext_2026","optionOrderVersion":1}
-]}
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-normal",
+  "subtopic": "Valor médio/dispersão de modelos e Modelo Normal",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha valor médio, variância/desvio-padrão em modelos discretos simples, padronização e interpretação do Modelo Normal. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-NO-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A variância de uma variável aleatória mede sobretudo...",
+      "o": [
+        "a dispersão em torno do valor médio.",
+        "a probabilidade total.",
+        "o valor máximo.",
+        "a mediana sempre."
+      ],
+      "a": 0,
+      "sol": "A variância quantifica a variabilidade relativamente à média.",
+      "hyp": "Pode confundir dispersão com localização.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:variancia-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O desvio-padrão é...",
+      "o": [
+        "a variância ao quadrado.",
+        "a raiz quadrada da variância.",
+        "o dobro da média.",
+        "sempre 1."
+      ],
+      "a": 1,
+      "sol": "σ=√Var(X).",
+      "hyp": "Pode trocar variância e desvio-padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:dp-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A variância é sempre...",
+      "o": [
+        "negativa.",
+        "inferior à média.",
+        "não negativa.",
+        "igual ao desvio-padrão."
+      ],
+      "a": 2,
+      "sol": "É uma média de quadrados de desvios.",
+      "hyp": "Pode pensar que desvios negativos produzem variância negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:var-nao-neg-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se X é constante, então Var(X)=...",
+      "o": [
+        "1.",
+        "E(X).",
+        "não definida.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "Não há dispersão quando todos os valores são iguais.",
+      "hyp": "Pode achar que variância mede o próprio nível da variável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:constante-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma distribuição Normal é caracterizada pelos parâmetros...",
+      "o": [
+        "média μ e desvio-padrão σ>0.",
+        "apenas mediana.",
+        "mínimo e máximo.",
+        "número de observações apenas."
+      ],
+      "a": 0,
+      "sol": "A média determina o centro e σ a dispersão.",
+      "hyp": "Pode tratar todos os modelos Normais como iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:parametros-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O gráfico de uma distribuição Normal é...",
+      "o": [
+        "assimétrico à direita sempre.",
+        "simétrico em torno de μ.",
+        "uniforme.",
+        "discreto em barras."
+      ],
+      "a": 1,
+      "sol": "A densidade Normal é simétrica em relação à média.",
+      "hyp": "Pode confundir com distribuições enviesadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:simetria-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Numa Normal, média, mediana e moda...",
+      "o": [
+        "são sempre diferentes.",
+        "não existem.",
+        "coincidem em μ.",
+        "coincidem em σ."
+      ],
+      "a": 2,
+      "sol": "A simetria unimodal centra as três medidas em μ.",
+      "hyp": "Pode associar moda ao desvio-padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:centro-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A área total sob a curva de densidade Normal é...",
+      "o": [
+        "0.",
+        "μ.",
+        "σ.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Toda a probabilidade totaliza 1.",
+      "hyp": "Pode confundir área total com altura máxima.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:area-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Aumentar σ mantendo μ fixo torna a curva Normal...",
+      "o": [
+        "mais espalhada e menos alta.",
+        "mais estreita e alta.",
+        "deslocada para a direita.",
+        "assimétrica."
+      ],
+      "a": 0,
+      "sol": "Maior desvio-padrão significa maior dispersão; a área total mantém-se 1.",
+      "hyp": "Pode pensar que σ desloca a média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:sigma-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Alterar μ mantendo σ desloca a curva...",
+      "o": [
+        "verticalmente apenas.",
+        "horizontalmente, sem alterar a forma.",
+        "e altera obrigatoriamente a dispersão.",
+        "tornando-a assimétrica."
+      ],
+      "a": 1,
+      "sol": "μ define a localização do centro.",
+      "hyp": "Pode confundir localização com escala.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:mu-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para X~N(μ,σ), a variável padronizada Z é...",
+      "o": [
+        "(X+μ)/σ.",
+        "X/μ.",
+        "(X−μ)/σ.",
+        "σ(X−μ)."
+      ],
+      "a": 2,
+      "sol": "Subtrai-se a média e divide-se pelo desvio-padrão.",
+      "hyp": "Pode somar μ ou dividir pela média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:padronizar-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se X~N(100,15) e X=130, o valor z é...",
+      "o": [
+        "130/15.",
+        "15/30.",
+        "1.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "z=(130−100)/15=2.",
+      "hyp": "Pode esquecer subtrair a média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se μ=50, σ=5 e x=40, então z=...",
+      "o": [
+        "−2.",
+        "2.",
+        "−10.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "(40−50)/5=−2.",
+      "hyp": "Pode perder o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um z-score igual a2 significa que o valor está...",
+      "o": [
+        "2 unidades acima da média.",
+        "2 desvios-padrão acima da média.",
+        "2 desvios-padrão abaixo da média.",
+        "na média."
+      ],
+      "a": 1,
+      "sol": "O z-score mede distância à média em unidades de σ.",
+      "hyp": "Pode confundir unidades originais com desvios-padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-interpret-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um z-score −1,5 indica um valor...",
+      "o": [
+        "1,5 unidades acima da média.",
+        "na média.",
+        "1,5 desvios-padrão abaixo da média.",
+        "impossível."
+      ],
+      "a": 2,
+      "sol": "O sinal negativo indica posição abaixo da média.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-interpret-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A Normal padrão tem...",
+      "o": [
+        "μ=1,σ=0.",
+        "μ=0,σ=0.",
+        "μ=1,σ=1.",
+        "μ=0,σ=1."
+      ],
+      "a": 3,
+      "sol": "Z~N(0,1).",
+      "hyp": "Pode trocar média e desvio-padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:normal-padrao-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Por simetria da Normal, P(X≤μ)=...",
+      "o": [
+        "0,5.",
+        "1.",
+        "0.",
+        "depende de σ."
+      ],
+      "a": 0,
+      "sol": "Metade da área fica de cada lado da média.",
+      "hyp": "Pode pensar que σ altera a área à esquerda da média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:metade-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa variável contínua Normal, P(X=μ)=...",
+      "o": [
+        "0,5.",
+        "0.",
+        "1.",
+        "depende de μ."
+      ],
+      "a": 1,
+      "sol": "Em variáveis contínuas, um ponto isolado tem probabilidade zero.",
+      "hyp": "Pode confundir densidade máxima em μ com probabilidade pontual positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:ponto-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para uma Normal, P(X<μ) e P(X>μ) são...",
+      "o": [
+        "0 e1.",
+        "dependentes de μ.",
+        "ambas 0,5.",
+        "ambas 1."
+      ],
+      "a": 2,
+      "sol": "A simetria divide a área ao meio e P(X=μ)=0.",
+      "hyp": "Pode achar que o valor numérico de μ altera as metades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:simetria-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se a curva Normal é simétrica, P(X≥μ+a) é igual a...",
+      "o": [
+        "P(X≥μ−a).",
+        "P(X≤μ+a).",
+        "P(X≤μ).",
+        "P(X≤μ−a)."
+      ],
+      "a": 3,
+      "sol": "Os pontos μ−a e μ+a são simétricos; as caudas exteriores têm a mesma área.",
+      "hyp": "Pode comparar regiões não simétricas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:simetria-caudas-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A regra empírica indica que aproximadamente 68% de uma Normal está em...",
+      "o": [
+        "[μ−σ, μ+σ].",
+        "[μ−2σ, μ+2σ].",
+        "[μ−3σ, μ+3σ].",
+        "[0,μ]."
+      ],
+      "a": 0,
+      "sol": "Cerca de68% fica a menos de um desvio-padrão da média.",
+      "hyp": "Pode trocar as percentagens 68-95-99,7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:68-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Aproximadamente 95% dos valores de uma Normal situam-se em...",
+      "o": [
+        "μ±σ.",
+        "μ±2σ.",
+        "μ±3σ.",
+        "μ±0,5σ."
+      ],
+      "a": 1,
+      "sol": "É a segunda parte da regra 68-95-99,7.",
+      "hyp": "Pode usar um único desvio-padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:95-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Aproximadamente 99,7% situa-se em...",
+      "o": [
+        "μ±σ.",
+        "μ±2σ.",
+        "μ±3σ.",
+        "μ±4σ."
+      ],
+      "a": 2,
+      "sol": "Três desvios-padrão de cada lado cobrem cerca de99,7%.",
+      "hyp": "Pode trocar95% e99,7%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:997-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Pela regra empírica, a percentagem aproximadamente acima de μ+2σ é...",
+      "o": [
+        "5%.",
+        "95%.",
+        "2,5%?",
+        "2,5%."
+      ],
+      "a": 3,
+      "sol": "Fora de μ±2σ ficam cerca de5%, divididos em duas caudas de2,5%.",
+      "hyp": "Pode atribuir os5% todos a uma cauda.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:cauda-2sigma-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Pela regra empírica, aproximadamente que percentagem fica entre μ e μ+σ?",
+      "o": [
+        "34%.",
+        "68%.",
+        "16%.",
+        "50%."
+      ],
+      "a": 0,
+      "sol": "Metade dos68% centrais fica de cada lado da média:34%.",
+      "hyp": "Pode usar68% inteiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:meia-faixa-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Aproximadamente que percentagem fica entre μ+σ e μ+2σ?",
+      "o": [
+        "34%.",
+        "13,5%.",
+        "2,5%.",
+        "47,5%."
+      ],
+      "a": 1,
+      "sol": "Entre ±σ há68%; entre ±2σ há95%; diferença27%, metade em cada lado=13,5%.",
+      "hyp": "Pode usar a diferença total27% numa única faixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:faixa-1-2-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "X~N(70,10). O intervalo μ±σ é...",
+      "o": [
+        "[50,90].",
+        "[70,80].",
+        "[60,80].",
+        "[60,90]."
+      ],
+      "a": 2,
+      "sol": "70−10=60 e70+10=80.",
+      "hyp": "Pode somar/descontar2σ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:intervalo-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para X~N(70,10), aproximadamente 95% dos valores ficam em...",
+      "o": [
+        "[60,80].",
+        "[40,100].",
+        "[50,80].",
+        "[50,90]."
+      ],
+      "a": 3,
+      "sol": "μ±2σ=70±20=[50,90].",
+      "hyp": "Pode usar apenas ±σ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:intervalo-95-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X~N(100,20), o valor80 tem z-score...",
+      "o": [
+        "−1.",
+        "1.",
+        "−4.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "(80−100)/20=−1.",
+      "hyp": "Pode perder o sinal ou dividir80 por20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X~N(100,20), o valor140 tem z-score...",
+      "o": [
+        "1.",
+        "2.",
+        "7.",
+        "40."
+      ],
+      "a": 1,
+      "sol": "(140−100)/20=2.",
+      "hyp": "Pode usar diferença40 como z-score.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1,5, μ=50 eσ=4, então x=...",
+      "o": [
+        "54.",
+        "55.",
+        "56.",
+        "60."
+      ],
+      "a": 2,
+      "sol": "x=μ+zσ=50+1,5×4=56.",
+      "hyp": "Pode somar apenas z à média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:despadronizar-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=−2, μ=80 eσ=5, então x=...",
+      "o": [
+        "90.",
+        "78.",
+        "75.",
+        "70."
+      ],
+      "a": 3,
+      "sol": "80−2×5=70.",
+      "hyp": "Pode somar em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:despadronizar-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma fórmula útil para a variância é...",
+      "o": [
+        "Var(X)=E(X²)−[E(X)]².",
+        "Var(X)=E(X²)+[E(X)]².",
+        "Var(X)=E(X).",
+        "Var(X)=√E(X)."
+      ],
+      "a": 0,
+      "sol": "É equivalente à definição por desvios quadráticos à média.",
+      "hyp": "Pode trocar o sinal ou esquecer o quadrado da média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:var-formula-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "X vale0 ou1 com P(X=1)=p. E(X)=...",
+      "o": [
+        "1−p.",
+        "p.",
+        "p².",
+        "1."
+      ],
+      "a": 1,
+      "sol": "0(1−p)+1·p=p.",
+      "hyp": "Pode usar o complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:bernoulli-media-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se X é Bernoulli com P(X=1)=p e P(X=0)=1−p, então E(X²)=...",
+      "o": [
+        "p².",
+        "1−p.",
+        "p.",
+        "2p."
+      ],
+      "a": 2,
+      "sol": "Como X∈{0,1}, X²=X; logo E(X²)=p.",
+      "hyp": "Pode quadrar a esperança em vez da variável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:bernoulli-X2-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A variância de uma Bernoulli(p) é...",
+      "o": [
+        "p².",
+        "p.",
+        "1−p.",
+        "p(1−p)."
+      ],
+      "a": 3,
+      "sol": "Var(X)=p−p²=p(1−p).",
+      "hyp": "Pode usar apenas p como variância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:bernoulli-var-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se X vale0 ou1 com p=0,5, então Var(X)=...",
+      "o": [
+        "0,25.",
+        "0,5.",
+        "1.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "0,5×0,5=0,25.",
+      "hyp": "Pode confundir variância com média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:bernoulli-var-num-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Var(X)=9, então o desvio-padrão é...",
+      "o": [
+        "9.",
+        "3.",
+        "81.",
+        "−3."
+      ],
+      "a": 1,
+      "sol": "σ=√9=3.",
+      "hyp": "Pode não tirar a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:dp-num-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se σ=4, então Var(X)=...",
+      "o": [
+        "4.",
+        "8.",
+        "16.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "Variância=σ²=16.",
+      "hyp": "Pode dividir o desvio-padrão por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:var-num-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Y=X+5, então Var(Y)=...",
+      "o": [
+        "Var(X)+5.",
+        "Var(X)+25.",
+        "5Var(X).",
+        "Var(X)."
+      ],
+      "a": 3,
+      "sol": "Somar uma constante desloca todos os valores mas não altera a dispersão.",
+      "hyp": "Pode somar a constante à variância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:var-translacao-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Y=3X, então Var(Y)=...",
+      "o": [
+        "9Var(X).",
+        "3Var(X).",
+        "Var(X)+3.",
+        "Var(X)."
+      ],
+      "a": 0,
+      "sol": "Var(aX)=a²Var(X).",
+      "hyp": "Pode multiplicar a variância apenas por3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:var-escala-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Y=−2X+7, então Var(Y)=...",
+      "o": [
+        "−2Var(X)+7.",
+        "4Var(X).",
+        "2Var(X).",
+        "Var(X)+7."
+      ],
+      "a": 1,
+      "sol": "A translação não conta e o fator −2 entra ao quadrado:4.",
+      "hyp": "Pode manter o sinal negativo na variância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:var-afim-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se X~N(μ,σ), então Y=(X−μ)/σ tem média e desvio-padrão...",
+      "o": [
+        "μ eσ.",
+        "1 e0.",
+        "0 e1.",
+        "0 eσ²."
+      ],
+      "a": 2,
+      "sol": "A padronização centra e escala para a Normal padrão.",
+      "hyp": "Pode trocar média e desvio-padrão padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:padronizacao-param-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Duas distribuições Normais têm a mesma μ, mas σ1<σ2. A primeira é...",
+      "o": [
+        "mais dispersa.",
+        "deslocada à esquerda.",
+        "assimétrica.",
+        "mais concentrada em torno de μ."
+      ],
+      "a": 3,
+      "sol": "Menor σ implica menor dispersão.",
+      "hyp": "Pode pensar que menor σ desloca o centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:comparar-sigma-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Alturas têm modelo N(170,6). Uma altura182 cm está a...",
+      "o": [
+        "2 desvios-padrão acima da média.",
+        "12 desvios-padrão acima.",
+        "1 desvio-padrão acima.",
+        "2 abaixo."
+      ],
+      "a": 0,
+      "sol": "(182−170)/6=2.",
+      "hyp": "Pode usar a diferença12 como número de desvios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:modelacao-altura-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo N(170,6), aproximadamente 95% das alturas ficam entre...",
+      "o": [
+        "164 e176.",
+        "158 e182.",
+        "152 e188.",
+        "160 e180."
+      ],
+      "a": 1,
+      "sol": "μ±2σ=170±12=[158,182].",
+      "hyp": "Pode usar apenas um desvio-padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:modelacao-altura-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Tempos de execução seguem N(50,5). Aproximadamente 68% ficam entre...",
+      "o": [
+        "40 e60.",
+        "50 e55.",
+        "45 e55.",
+        "35 e65."
+      ],
+      "a": 2,
+      "sol": "μ±σ=[45,55].",
+      "hyp": "Pode usar ±2σ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:modelacao-tempo-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Usar um Modelo Normal para dados é uma decisão de modelação que...",
+      "o": [
+        "é sempre correta para qualquer variável.",
+        "depende apenas da média.",
+        "depende apenas do tamanho da amostra.",
+        "deve ser avaliada à luz da forma/distribuição e do contexto."
+      ],
+      "a": 3,
+      "sol": "A Normal é um modelo, não uma identidade automática para quaisquer dados.",
+      "hyp": "Pode aplicar a Normal apenas porque média e desvio-padrão existem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:adequacao-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Numa distribuição Normal, valores muito afastados de μ em unidades de σ são...",
+      "o": [
+        "menos prováveis do que valores próximos do centro, em intervalos comparáveis.",
+        "mais prováveis.",
+        "igualmente prováveis em qualquer intervalo.",
+        "impossíveis."
+      ],
+      "a": 0,
+      "sol": "A densidade decresce nas caudas, embora valores extremos não sejam impossíveis.",
+      "hyp": "Pode confundir baixa probabilidade com impossibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:caudas-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-NO-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-normal",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Comparar resultados de escalas diferentes através de z-scores é útil porque...",
+      "o": [
+        "torna todas as médias iguais a1.",
+        "expressa cada valor em desvios-padrão relativamente à respetiva média.",
+        "elimina toda a variabilidade.",
+        "transforma qualquer distribuição em Normal."
+      ],
+      "a": 1,
+      "sol": "A padronização cria uma unidade comum de distância relativa ao centro.",
+      "hyp": "Pode pensar que padronizar normaliza a forma da distribuição automaticamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-normal:z-comparar-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
