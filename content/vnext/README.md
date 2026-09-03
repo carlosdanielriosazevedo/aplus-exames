@@ -7,8 +7,8 @@ Este diretório guarda conteúdo editorial **ainda não ligado ao motor atual**.
 - Meta curricular vNext: **113 submatérias**
 - Meta editorial: **~50 perguntas por submatéria**
 - Meta total aproximada: **~5 650 perguntas originais**
-- Concluído em rascunho: **300 perguntas**
-- Progresso bruto: **5,31%**
+- Concluído em rascunho: **500 perguntas**
+- Progresso bruto: **8,85%**
 
 ### 10.º ano — Eleições e Partilha
 
@@ -58,6 +58,28 @@ Próxima matéria: **10.º — Modelos matemáticos em finanças**.
 |---|---:|---:|---|
 | Salário mensal, anual e valor-hora | 50 | 50 | lote completo em protótipo |
 | Salário bruto/líquido, Segurança Social e retenção | 50 | 50 | lote completo em protótipo |
-| IRS, taxas, escalões e progressividade | 50 | 0 | próximo lote |
-| Juro simples | 50 | 0 | por iniciar |
-| Juro composto, poupança, crédito e modelação | 50 | 0 | por iniciar |
+| IRS, taxas, escalões e progressividade | 50 | 50 | lote completo em protótipo |
+| Juro simples | 50 | 50 | lote completo em protótipo |
+| Juro composto, poupança, crédito e modelação | 50 | 50 | lote completo em protótipo |
+
+
+### 10.º ano — Estatística
+
+| Submatéria | Meta | Rascunho | Estado |
+|---|---:|---:|---|
+| Problema estatístico, população, amostra, variável e variabilidade | 50 | 50 | lote completo em protótipo |
+| Amostragem, representatividade e enviesamento | 50 | 0 | próximo lote |
+| Dados univariados e representações | 50 | 0 | por iniciar |
+| Medidas de localização | 50 | 0 | por iniciar |
+| Medidas de dispersão e interpretação conjunta | 50 | 0 | por iniciar |
+| Dados bivariados, correlação e regressão | 50 | 0 | por iniciar |
+
+
+## Marco editorial — 500 perguntas
+
+- Eleições e Partilha: **200/200**
+- Modelos matemáticos em finanças: **250/250**
+- Estatística: **50/300**
+- Total vNext: **500/~5 650 (8,85%)**
+
+Próximo lote: **10.º — Estatística — Amostragem, representatividade e enviesamento**.
