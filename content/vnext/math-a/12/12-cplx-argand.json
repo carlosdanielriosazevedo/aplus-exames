@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-cplx",
+  "subtopicId": "12-cplx-argand",
+  "subtopic": "Plano de Argand-Gauss e interpretação geométrica",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha representação no plano complexo, distância, conjugado/oposto, rotações por i, lugares geométricos, mediatrizes, semiplanos e transformações. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12CPLX-AG-001",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No plano de Argand-Gauss, z=a+bi corresponde ao ponto...",
+      "o": [
+        "(a,b).",
+        "(b,a).",
+        "(a,−b).",
+        "(−a,b)."
+      ],
+      "a": 0,
+      "sol": "A abcissa é a parte real e a ordenada a parte imaginária.",
+      "hyp": "Pode trocar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:representacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-002",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "O complexo 3+2i corresponde ao ponto...",
+      "o": [
+        "(2,3).",
+        "(3,2).",
+        "(3,−2).",
+        "(−3,2)."
+      ],
+      "a": 1,
+      "sol": "Re=3, Im=2.",
+      "hyp": "Pode trocar ou mudar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-003",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "O ponto (−4,5) representa o complexo...",
+      "o": [
+        "5−4i.",
+        "−4−5i.",
+        "−4+5i.",
+        "4+5i."
+      ],
+      "a": 2,
+      "sol": "z=x+yi.",
+      "hyp": "Pode trocar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:complexo-por-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-004",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O eixo horizontal no plano complexo representa...",
+      "o": [
+        "os imaginários puros.",
+        "os módulos.",
+        "os argumentos.",
+        "os números reais."
+      ],
+      "a": 3,
+      "sol": "Im(z)=0 no eixo real.",
+      "hyp": "Pode confundir os eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:eixo-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-005",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O eixo vertical representa...",
+      "o": [
+        "os imaginários puros.",
+        "os reais positivos apenas.",
+        "os módulos.",
+        "os conjugados."
+      ],
+      "a": 0,
+      "sol": "Re(z)=0.",
+      "hyp": "Pode confundir com o eixo real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:eixo-imaginario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-006",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O módulo |z| representa geometricamente...",
+      "o": [
+        "a abcissa de z.",
+        "a distância da origem ao ponto z.",
+        "a ordenada de z.",
+        "o declive OZ."
+      ],
+      "a": 1,
+      "sol": "|z|=√(x²+y²).",
+      "hyp": "Pode confundir com uma coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:modulo-geometrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-007",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância da origem ao ponto que representa 6+8i é...",
+      "o": [
+        "14.",
+        "100.",
+        "10.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "√(36+64)=10.",
+      "hyp": "Pode usar soma das coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:distancia-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-008",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O conjugado de z corresponde geometricamente a...",
+      "o": [
+        "reflexão no eixo imaginário.",
+        "rotação de 90°.",
+        "translação horizontal.",
+        "reflexão no eixo real."
+      ],
+      "a": 3,
+      "sol": "(x,y)→(x,−y).",
+      "hyp": "Pode confundir conjugação com oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:conjugado-geometrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-009",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O oposto −z corresponde a...",
+      "o": [
+        "simetria central relativamente à origem.",
+        "reflexão no eixo real.",
+        "reflexão no eixo imaginário.",
+        "translação de 1."
+      ],
+      "a": 0,
+      "sol": "(x,y)→(−x,−y).",
+      "hyp": "Pode mudar apenas uma coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:oposto-geometrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-010",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Multiplicar z por i corresponde geometricamente a...",
+      "o": [
+        "uma reflexão no eixo real.",
+        "uma rotação de +90° em torno da origem.",
+        "uma rotação de 180°.",
+        "uma homotetia de razão 2."
+      ],
+      "a": 1,
+      "sol": "(x,y)→(−y,x).",
+      "hyp": "Pode confundir com conjugação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:multiplicar-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-011",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se z=2+i, então iz corresponde ao ponto...",
+      "o": [
+        "(1,2).",
+        "(−2,1).",
+        "(−1,2).",
+        "(2,−1)."
+      ],
+      "a": 2,
+      "sol": "iz=−1+2i.",
+      "hyp": "Pode aplicar rotação no sentido errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:rotacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-012",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A distância entre os pontos z1 e z2 é...",
+      "o": [
+        "|z1+z2|.",
+        "|z1||z2|.",
+        "Re(z1−z2).",
+        "|z1−z2|."
+      ],
+      "a": 3,
+      "sol": "A diferença representa o vetor entre os pontos.",
+      "hyp": "Pode usar a soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:distancia-dois-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-013",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância entre z1=1+i e z2=4+5i é...",
+      "o": [
+        "5.",
+        "7.",
+        "25.",
+        "√7."
+      ],
+      "a": 0,
+      "sol": "|z2−z1|=|3+4i|=5.",
+      "hyp": "Pode somar deslocamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-014",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A distância entre −2+3i e 4+3i é...",
+      "o": [
+        "2.",
+        "6.",
+        "4.",
+        "8."
+      ],
+      "a": 1,
+      "sol": "Os pontos têm a mesma ordenada e abcissas separadas por 6.",
+      "hyp": "Pode ignorar o sinal de −2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:distancia-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-015",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição Re(z)=2 descreve...",
+      "o": [
+        "uma reta horizontal y=2.",
+        "uma circunferência.",
+        "uma reta vertical x=2.",
+        "um ponto."
+      ],
+      "a": 2,
+      "sol": "A abcissa está fixa.",
+      "hyp": "Pode trocar Re e Im.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:lugar-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-016",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição Im(z)=−3 descreve...",
+      "o": [
+        "uma reta vertical x=−3.",
+        "uma circunferência.",
+        "o eixo real.",
+        "uma reta horizontal y=−3."
+      ],
+      "a": 3,
+      "sol": "A ordenada está fixa.",
+      "hyp": "Pode trocar os eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:lugar-imag",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-017",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição |z|=4 descreve...",
+      "o": [
+        "uma circunferência de centro 0 e raio 4.",
+        "um disco fechado.",
+        "uma reta.",
+        "um ponto."
+      ],
+      "a": 0,
+      "sol": "A distância à origem é constante 4.",
+      "hyp": "Pode confundir igualdade com ≤.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:circunferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-018",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição |z|<4 descreve...",
+      "o": [
+        "a circunferência.",
+        "o interior do círculo de raio 4, sem fronteira.",
+        "o exterior.",
+        "uma reta."
+      ],
+      "a": 1,
+      "sol": "A distância à origem é inferior a 4.",
+      "hyp": "Pode inverter a desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:disco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-019",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição |z−(2+i)|=3 descreve...",
+      "o": [
+        "uma circunferência de centro 0 e raio 3.",
+        "uma reta.",
+        "uma circunferência de centro 2+i e raio 3.",
+        "um disco."
+      ],
+      "a": 2,
+      "sol": "|z−z0| mede a distância a z0.",
+      "hyp": "Pode ignorar o deslocamento do centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:circunferencia-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-020",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição |z−1|≤2 descreve...",
+      "o": [
+        "uma circunferência apenas.",
+        "um semiplano.",
+        "o exterior do círculo.",
+        "um disco fechado de centro 1 e raio 2."
+      ],
+      "a": 3,
+      "sol": "≤ inclui interior e fronteira.",
+      "hyp": "Pode confundir com igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:disco-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-021",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição |z−z1|=|z−z2| descreve...",
+      "o": [
+        "a mediatriz do segmento que une z1 e z2.",
+        "a reta z1z2.",
+        "uma circunferência de centro z1.",
+        "apenas o ponto médio."
+      ],
+      "a": 0,
+      "sol": "São os pontos equidistantes de z1 e z2.",
+      "hyp": "Pode reduzir o lugar ao ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:mediatriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-022",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z1=−2 e z2=2, a condição |z+2|=|z−2| descreve...",
+      "o": [
+        "o eixo real.",
+        "o eixo imaginário.",
+        "a circunferência unitária.",
+        "x=2."
+      ],
+      "a": 1,
+      "sol": "A mediatriz de [−2,2] é x=0.",
+      "hyp": "Pode escolher a reta que contém os pontos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:mediatriz-eixos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-023",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z1=i e z2=−i, os pontos equidistantes são...",
+      "o": [
+        "o eixo imaginário.",
+        "a reta y=1.",
+        "o eixo real.",
+        "a circunferência unitária."
+      ],
+      "a": 2,
+      "sol": "A mediatriz do segmento vertical é y=0.",
+      "hyp": "Pode escolher o segmento original.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:mediatriz-eixos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-024",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição Re(z)>0 corresponde...",
+      "o": [
+        "ao semiplano superior.",
+        "ao semiplano esquerdo.",
+        "ao eixo real.",
+        "ao semiplano à direita do eixo imaginário."
+      ],
+      "a": 3,
+      "sol": "Re(z)=x>0.",
+      "hyp": "Pode interpretar Re como y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:semiplano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-025",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição Im(z)≤0 corresponde...",
+      "o": [
+        "ao semiplano inferior incluindo o eixo real.",
+        "ao semiplano esquerdo.",
+        "ao semiplano superior.",
+        "ao eixo imaginário."
+      ],
+      "a": 0,
+      "sol": "Im(z)=y≤0.",
+      "hyp": "Pode trocar eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:semiplano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-026",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ponto médio dos complexos z1=1+2i e z2=5+6i?",
+      "o": [
+        "6+8i.",
+        "3+4i.",
+        "2+3i.",
+        "4+5i."
+      ],
+      "a": 1,
+      "sol": "Média das coordenadas: (3,4).",
+      "hyp": "Pode somar sem dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-027",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O ponto médio de z1 e z2 pode escrever-se como...",
+      "o": [
+        "z1−z2.",
+        "z1z2.",
+        "(z1+z2)/2.",
+        "|z1−z2|."
+      ],
+      "a": 2,
+      "sol": "A média complexa faz a média de ambas as coordenadas.",
+      "hyp": "Pode confundir vetor com ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:ponto-medio-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-028",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O ponto z=−3+4i está no...",
+      "o": [
+        "1.º quadrante.",
+        "3.º quadrante.",
+        "4.º quadrante.",
+        "2.º quadrante."
+      ],
+      "a": 3,
+      "sol": "Re<0 e Im>0.",
+      "hyp": "Pode trocar os sinais dos quadrantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-029",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O ponto 5−2i está no...",
+      "o": [
+        "4.º quadrante.",
+        "1.º quadrante.",
+        "2.º quadrante.",
+        "3.º quadrante."
+      ],
+      "a": 0,
+      "sol": "Re>0 e Im<0.",
+      "hyp": "Pode ignorar o sinal da parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-030",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O complexo −4−i situa-se no...",
+      "o": [
+        "2.º quadrante.",
+        "3.º quadrante.",
+        "4.º quadrante.",
+        "1.º quadrante."
+      ],
+      "a": 1,
+      "sol": "Ambas as coordenadas são negativas.",
+      "hyp": "Pode trocar 3.º e 4.º quadrantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-031",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Multiplicar por −1 corresponde a...",
+      "o": [
+        "rotação de 90°.",
+        "reflexão no eixo real.",
+        "rotação de 180° em torno da origem.",
+        "translação."
+      ],
+      "a": 2,
+      "sol": "z→−z leva ao ponto diametralmente oposto.",
+      "hyp": "Pode confundir com conjugação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:rotacao-180",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-032",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Multiplicar por −i corresponde a...",
+      "o": [
+        "rotação de +90°.",
+        "rotação de 180°.",
+        "reflexão no eixo real.",
+        "rotação de −90°."
+      ],
+      "a": 3,
+      "sol": "−i tem argumento −π/2.",
+      "hyp": "Pode errar o sentido da rotação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:rotacao-menos-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-033",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1+2i, então −iz corresponde a...",
+      "o": [
+        "2−i.",
+        "−2+i.",
+        "−2−i.",
+        "1−2i."
+      ],
+      "a": 0,
+      "sol": "−i(1+2i)=2−i.",
+      "hyp": "Pode aplicar a rotação no sentido errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:rotacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-034",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição |z−2i|>1 descreve...",
+      "o": [
+        "o interior.",
+        "o exterior da circunferência de centro 2i e raio 1.",
+        "a fronteira apenas.",
+        "uma reta horizontal."
+      ],
+      "a": 1,
+      "sol": "A distância ao centro 2i é superior a 1.",
+      "hyp": "Pode inverter >.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-035",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A condição |z+3|=2 tem centro...",
+      "o": [
+        "3.",
+        "−3i.",
+        "−3.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "z+3=z−(−3).",
+      "hyp": "Pode ler o sinal sem inversão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:centro-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-036",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A distância entre z e 2+i é dada por...",
+      "o": [
+        "|z+2+i|.",
+        "|z|−|2+i|.",
+        "|z(2+i)|.",
+        "|z−(2+i)|."
+      ],
+      "a": 3,
+      "sol": "Distância entre pontos é módulo da diferença.",
+      "hyp": "Pode somar em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:distancia-expressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-037",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição |z−1|=|z+1| é equivalente a...",
+      "o": [
+        "Re(z)=0.",
+        "Im(z)=0.",
+        "|z|=1.",
+        "Re(z)=1."
+      ],
+      "a": 0,
+      "sol": "É a mediatriz dos pontos 1 e −1: o eixo imaginário.",
+      "hyp": "Pode escolher o eixo que contém ±1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:mediatriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-038",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição |z−i|=|z+i| é equivalente a...",
+      "o": [
+        "Re(z)=0.",
+        "Im(z)=0.",
+        "|z|=1.",
+        "Im(z)=1."
+      ],
+      "a": 1,
+      "sol": "A mediatriz de i e −i é o eixo real.",
+      "hyp": "Pode trocar Re e Im.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:mediatriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-039",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se |z−(1+i)|=√2, qual destes pontos pertence ao lugar?",
+      "o": [
+        "z=1+i.",
+        "z=3+i.",
+        "z=2+2i.",
+        "z=0."
+      ],
+      "a": 2,
+      "sol": "A distância de 2+2i a 1+i é √(1²+1²)=√2.",
+      "hyp": "Pode testar apenas uma coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:pertença-circunferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-040",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se |z−2|≤1 e z é real, então z pertence ao intervalo...",
+      "o": [
+        "[−1,1].",
+        "[2,3].",
+        "[0,2].",
+        "[1,3]."
+      ],
+      "a": 3,
+      "sol": "Na reta real, distância a 2 não excede 1.",
+      "hyp": "Pode esquecer uma das extremidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:intersecao-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-041",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição Re(z)=Im(z) descreve...",
+      "o": [
+        "a reta y=x.",
+        "a reta y=−x.",
+        "o eixo real.",
+        "uma circunferência."
+      ],
+      "a": 0,
+      "sol": "x=y.",
+      "hyp": "Pode trocar igualdade com oposição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:reta-diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-042",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição Re(z)=−Im(z) descreve...",
+      "o": [
+        "a reta y=x.",
+        "a reta y=−x.",
+        "x=0.",
+        "y=0."
+      ],
+      "a": 1,
+      "sol": "x=−y, logo y=−x.",
+      "hyp": "Pode não reorganizar a equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:reta-diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-043",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição |z−1|=2 e Im(z)=0 tem soluções...",
+      "o": [
+        "z=1 ou z=2.",
+        "z=−2 ou z=2.",
+        "z=−1 ou z=3.",
+        "z=3 apenas."
+      ],
+      "a": 2,
+      "sol": "Na reta real, |x−1|=2.",
+      "hyp": "Pode esquecer uma das interseções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:intersecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-044",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição |z|=5 e Re(z)=3 dá...",
+      "o": [
+        "z=±3+4i.",
+        "z=3+5i.",
+        "z=±5+3i.",
+        "z=3±4i."
+      ],
+      "a": 3,
+      "sol": "x=3 e x²+y²=25 => y=±4.",
+      "hyp": "Pode trocar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:intersecao-circulo-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-045",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A condição |z|=13 e Im(z)=−12 dá...",
+      "o": [
+        "z=±5−12i.",
+        "z=5±12i.",
+        "z=±12−5i.",
+        "z=13−12i."
+      ],
+      "a": 0,
+      "sol": "x²+144=169 => x=±5.",
+      "hyp": "Pode esquecer as duas abcissas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:intersecao-circulo-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-046",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um deslocamento no plano é representado por z=4+3i. A distância total à origem é...",
+      "o": [
+        "7.",
+        "5.",
+        "12.",
+        "25."
+      ],
+      "a": 1,
+      "sol": "É o módulo de z.",
+      "hyp": "Pode somar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:modelacao-vetor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-047",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Do ponto z1=2−i ao ponto z2=−1+3i, o deslocamento é...",
+      "o": [
+        "3−4i.",
+        "1+2i.",
+        "−3+4i.",
+        "−1+2i."
+      ],
+      "a": 2,
+      "sol": "z2−z1=(−1−2)+(3−(−1))i=−3+4i.",
+      "hyp": "Pode inverter a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:deslocamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-048",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No item anterior, a distância entre os pontos é...",
+      "o": [
+        "7.",
+        "25.",
+        "1.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "|−3+4i|=5.",
+      "hyp": "Pode usar o módulo ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-049",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma translação por w no plano complexo transforma z em...",
+      "o": [
+        "z+w.",
+        "zw.",
+        "z/w.",
+        "conj(z)."
+      ],
+      "a": 0,
+      "sol": "Somar w adiciona o mesmo vetor a todos os pontos.",
+      "hyp": "Pode confundir translação com rotação/dilatação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-AG-050",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-argand",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Transladar o ponto 1+2i pelo vetor −3+i dá...",
+      "o": [
+        "4+i.",
+        "−2+3i.",
+        "−2+i.",
+        "−3+2i."
+      ],
+      "a": 1,
+      "sol": "(1+2i)+(−3+i)=−2+3i.",
+      "hyp": "Pode subtrair o vetor em vez de somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-argand:translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
