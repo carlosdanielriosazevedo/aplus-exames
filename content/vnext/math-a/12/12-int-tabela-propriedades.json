@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-int",
+  "subtopicId": "12-int-tabela-propriedades",
+  "subtopic": "Primitivas imediatas e propriedades",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha linearidade, tabela de primitivas imediatas, composições lineares e reconhecimento de padrões g'/g, g'e^g e trigonométricos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12INT-TP-001",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A integral indefinida é linear: ∫(f+g)dx=",
+      "o": [
+        "∫f dx+∫g dx.",
+        "∫f dx·∫g dx.",
+        "∫f dx−∫g dx.",
+        "∫fg dx."
+      ],
+      "a": 0,
+      "sol": "Primitivas somam-se termo a termo.",
+      "hyp": "Pode confundir soma com produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:linearidade-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-002",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para constante k, ∫k f(x)dx=",
+      "o": [
+        "∫f(x)dx/k.",
+        "k∫f(x)dx.",
+        "k+∫f(x)dx.",
+        "∫f(kx)dx."
+      ],
+      "a": 1,
+      "sol": "A constante pode ser colocada fora da integral.",
+      "hyp": "Pode alterar o argumento da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:linearidade-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-003",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "∫5 dx=",
+      "o": [
+        "5+C.",
+        "x⁵+C.",
+        "5x+C.",
+        "x/5+C."
+      ],
+      "a": 2,
+      "sol": "A primitiva de uma constante k é kx.",
+      "hyp": "Pode deixar a constante sem multiplicar por x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-004",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "∫x⁴ dx=",
+      "o": [
+        "4x³+C.",
+        "x⁵+C.",
+        "5x⁴+C.",
+        "x⁵/5+C."
+      ],
+      "a": 3,
+      "sol": "Aumenta-se o expoente e divide-se por5.",
+      "hyp": "Pode aplicar a regra de derivação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-005",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "∫e^x dx=",
+      "o": [
+        "e^x+C.",
+        "xe^x+C.",
+        "ln x+C.",
+        "e^{x+1}+C."
+      ],
+      "a": 0,
+      "sol": "A derivada de e^x é e^x.",
+      "hyp": "Pode acrescentar fator x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-006",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫cos x dx=",
+      "o": [
+        "−sin x+C.",
+        "sin x+C.",
+        "cos x+C.",
+        "−cos x+C."
+      ],
+      "a": 1,
+      "sol": "(sinx)'=cosx.",
+      "hyp": "Pode trocar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-007",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫sin x dx=",
+      "o": [
+        "cos x+C.",
+        "sin x+C.",
+        "−cos x+C.",
+        "tan x+C."
+      ],
+      "a": 2,
+      "sol": "(−cosx)'=sinx.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-008",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫1/x dx=",
+      "o": [
+        "1/x²+C.",
+        "x ln x+C.",
+        "e^x+C.",
+        "ln|x|+C."
+      ],
+      "a": 3,
+      "sol": "A primitiva é ln|x| em intervalos que não atravessam0.",
+      "hyp": "Pode aplicar a regra das potências com n=−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-009",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫x^{-3}dx=",
+      "o": [
+        "−1/(2x²)+C.",
+        "−1/x²+C.",
+        "x^{-2}/2+C.",
+        "3x^{-4}+C."
+      ],
+      "a": 0,
+      "sol": "x^{-2}/(−2)=−1/(2x²).",
+      "hyp": "Pode errar o divisor−2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:potencia-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-010",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫√x dx=",
+      "o": [
+        "(3/2)x^{1/2}+C.",
+        "(2/3)x^{3/2}+C.",
+        "2√x+C.",
+        "x^{3/2}+C."
+      ],
+      "a": 1,
+      "sol": "x^{1/2} integra para x^{3/2}/(3/2).",
+      "hyp": "Pode inverter 2/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-011",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫(2x+3)dx=",
+      "o": [
+        "2x²+3x+C.",
+        "x²+3+C.",
+        "x²+3x+C.",
+        "2+3x+C."
+      ],
+      "a": 2,
+      "sol": "Integra-se termo a termo.",
+      "hyp": "Pode esquecer dividir o coeficiente2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-012",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫(x²−4x+1)dx=",
+      "o": [
+        "x³−4x²+x+C.",
+        "2x−4+C.",
+        "x³/3−4x²+x+C.",
+        "x³/3−2x²+x+C."
+      ],
+      "a": 3,
+      "sol": "∫−4x dx=−2x².",
+      "hyp": "Pode manter coeficiente−4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-013",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se F é primitiva de f e G de g, então F−G é primitiva de...",
+      "o": [
+        "f−g.",
+        "fg.",
+        "f/g.",
+        "f+g."
+      ],
+      "a": 0,
+      "sol": "Derivar F−G dá f−g.",
+      "hyp": "Pode confundir linearidade e produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:linearidade-diferenca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-014",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫(3e^x−2cosx)dx=",
+      "o": [
+        "3e^x+2sinx+C.",
+        "3e^x−2sinx+C.",
+        "e^{3x}−2sinx+C.",
+        "3e^x−2cosx+C."
+      ],
+      "a": 1,
+      "sol": "Integra-se cada termo.",
+      "hyp": "Pode trocar a primitiva do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-015",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫(4/x)dx=",
+      "o": [
+        "ln|4x|+C apenas.",
+        "4/x²+C.",
+        "4ln|x|+C.",
+        "x⁴+C."
+      ],
+      "a": 2,
+      "sol": "A constante4 sai da integral.",
+      "hyp": "Pode absorver tudo na expressão log sem perceber que ln4 é apenas constante; 4ln|x| é a forma correta base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log-coef",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-016",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A constante de integração pode absorver...",
+      "o": [
+        "fatores dependentes de x.",
+        "termos x².",
+        "qualquer função.",
+        "outras constantes aditivas surgidas por manipulação."
+      ],
+      "a": 3,
+      "sol": "Duas primitivas diferem por constante.",
+      "hyp": "Pode apagar termos variáveis como se fossem constantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:constante-absorve",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-017",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫2e^{2x}dx=",
+      "o": [
+        "e^{2x}+C.",
+        "2e^{2x}+C.",
+        "e^{x}+C.",
+        "4e^{2x}+C."
+      ],
+      "a": 0,
+      "sol": "Derivar e^{2x} dá2e^{2x}.",
+      "hyp": "Pode esquecer a compensação do fator interno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:reconhecimento-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-018",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫3cos(3x)dx=",
+      "o": [
+        "3sin(3x)+C.",
+        "sin(3x)+C.",
+        "cos(3x)+C.",
+        "−sin(3x)+C."
+      ],
+      "a": 1,
+      "sol": "Derivar sin(3x) dá3cos(3x).",
+      "hyp": "Pode manter o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:reconhecimento-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-019",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫−5sin(5x)dx=",
+      "o": [
+        "−cos(5x)+C.",
+        "5cos(5x)+C.",
+        "cos(5x)+C.",
+        "sin(5x)+C."
+      ],
+      "a": 2,
+      "sol": "Derivar cos(5x) dá−5sin(5x).",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:reconhecimento-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-020",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫[2x/(x²+4)]dx=",
+      "o": [
+        "2ln(x²+4)+C.",
+        "1/(x²+4)+C.",
+        "x²/(x²+4)+C.",
+        "ln(x²+4)+C."
+      ],
+      "a": 3,
+      "sol": "Numerador é a derivada do denominador.",
+      "hyp": "Pode esquecer o padrão g'/g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-021",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫[6x²/(x³+1)]dx=",
+      "o": [
+        "2ln|x³+1|+C.",
+        "ln|x³+1|+C.",
+        "6ln|x³+1|+C.",
+        "2/(x³+1)+C."
+      ],
+      "a": 0,
+      "sol": "g'=3x²; 6x²=2g'.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-022",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫4x e^{2x²}dx=",
+      "o": [
+        "2e^{2x²}+C.",
+        "e^{2x²}+C.",
+        "4e^{2x²}+C.",
+        "x²e^{2x²}+C."
+      ],
+      "a": 1,
+      "sol": "Derivar e^{2x²} dá4x e^{2x²}.",
+      "hyp": "Pode integrar os fatores separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-023",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫2x cos(x²)dx=",
+      "o": [
+        "cos(x²)+C.",
+        "2sin(x²)+C.",
+        "sin(x²)+C.",
+        "−sin(x²)+C."
+      ],
+      "a": 2,
+      "sol": "É a regra da cadeia ao contrário.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-024",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫2x sin(x²)dx=",
+      "o": [
+        "cos(x²)+C.",
+        "sin(x²)+C.",
+        "−2cos(x²)+C.",
+        "−cos(x²)+C."
+      ],
+      "a": 3,
+      "sol": "Derivar −cos(x²) dá2xsin(x²).",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-025",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫(2x+1)^4·2 dx=",
+      "o": [
+        "(2x+1)^5/5+C.",
+        "(2x+1)^5/10+C.",
+        "2(2x+1)^5/5+C.",
+        "4(2x+1)^3+C."
+      ],
+      "a": 0,
+      "sol": "Com u=2x+1, du=2dx e∫u⁴du=u⁵/5.",
+      "hyp": "Pode dividir novamente por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:substituicao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-026",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫(3x−2)^2·3 dx=",
+      "o": [
+        "(3x−2)^3+C.",
+        "(3x−2)^3/3+C.",
+        "(3x−2)^3/9+C.",
+        "2(3x−2)+C."
+      ],
+      "a": 1,
+      "sol": "u=3x−2, du=3dx; ∫u²du=u³/3.",
+      "hyp": "Pode esquecer dividir pelo novo expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:substituicao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-027",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫e^{x+1}dx=",
+      "o": [
+        "e^x+C.",
+        "(1/2)e^{x+1}+C.",
+        "e^{x+1}+C.",
+        "(x+1)e^{x+1}+C."
+      ],
+      "a": 2,
+      "sol": "A derivada do expoente x+1 é1.",
+      "hyp": "Pode remover a constante do expoente como se fosse aditiva fora.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-028",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫e^{4x}dx=",
+      "o": [
+        "4e^{4x}+C.",
+        "e^{4x}+C.",
+        "e^x/4+C.",
+        "e^{4x}/4+C."
+      ],
+      "a": 3,
+      "sol": "É necessário dividir pelo fator4.",
+      "hyp": "Pode esquecer a derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-029",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫cos(7x)dx=",
+      "o": [
+        "sin(7x)/7+C.",
+        "7sin(7x)+C.",
+        "sin(7x)+C.",
+        "−sin(7x)/7+C."
+      ],
+      "a": 0,
+      "sol": "Compensa-se o fator7 da cadeia.",
+      "hyp": "Pode multiplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-030",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫sin(4x)dx=",
+      "o": [
+        "cos(4x)/4+C.",
+        "−cos(4x)/4+C.",
+        "−4cos(4x)+C.",
+        "−cos(4x)+C."
+      ],
+      "a": 1,
+      "sol": "Derivar −cos(4x)/4 dá sin(4x).",
+      "hyp": "Pode errar sinal/fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-031",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫1/(5x−1) dx=",
+      "o": [
+        "5ln|5x−1|+C.",
+        "ln|5x−1|+C.",
+        "(1/5)ln|5x−1|+C.",
+        "1/(5x−1)²+C."
+      ],
+      "a": 2,
+      "sol": "Compensa-se a derivada interna5.",
+      "hyp": "Pode multiplicar por5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-032",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A substituição simples u=g(x) é natural quando aparece...",
+      "o": [
+        "qualquer produto sem relação.",
+        "apenas uma constante.",
+        "uma soma de funções independentes.",
+        "g'(x) junto de uma função de g(x)."
+      ],
+      "a": 3,
+      "sol": "É a regra da cadeia ao contrário.",
+      "hyp": "Pode usar substituição sem estrutura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:substituicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-033",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫(x+1)e^{x²+2x}dx é proporcional a...",
+      "o": [
+        "e^{x²+2x}.",
+        "ln(x²+2x).",
+        "(x+1)².",
+        "e^{x+1}."
+      ],
+      "a": 0,
+      "sol": "Derivada de x²+2x é2(x+1), logo a integral é (1/2)e^{x²+2x}+C.",
+      "hyp": "Pode não reconhecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:reconhecimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-034",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O valor correto da integral anterior é...",
+      "o": [
+        "e^{x²+2x}+C.",
+        "(1/2)e^{x²+2x}+C.",
+        "2e^{x²+2x}+C.",
+        "(x+1)e^{x²+2x}+C."
+      ],
+      "a": 1,
+      "sol": "Falta metade da derivada interna.",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:reconhecimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-035",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫[x/(x²+9)]dx=",
+      "o": [
+        "ln(x²+9)+C.",
+        "1/(x²+9)+C.",
+        "(1/2)ln(x²+9)+C.",
+        "x²/(x²+9)+C."
+      ],
+      "a": 2,
+      "sol": "Derivada do denominador é2x.",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-036",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫x e^{x²}dx=",
+      "o": [
+        "e^{x²}+C.",
+        "x²e^{x²}+C.",
+        "2e^{x²}+C.",
+        "(1/2)e^{x²}+C."
+      ],
+      "a": 3,
+      "sol": "Derivada de x² é2x.",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-037",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A igualdade ∫f(x)g(x)dx=∫f dx·∫g dx é...",
+      "o": [
+        "falsa em geral.",
+        "sempre verdadeira.",
+        "verdadeira para polinómios.",
+        "a regra do produto inversa."
+      ],
+      "a": 0,
+      "sol": "Não existe propriedade multiplicativa simples para primitivas.",
+      "hyp": "Pode tentar integrar fatores separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:produto-falso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-038",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Do mesmo modo, ∫f/g dx geralmente...",
+      "o": [
+        "é sempre esse quociente.",
+        "não é igual a (∫f dx)/(∫g dx).",
+        "é f'/g'.",
+        "é ln(f/g)."
+      ],
+      "a": 1,
+      "sol": "Não há regra de quociente para integrais desse tipo.",
+      "hyp": "Pode inverter mecanicamente regras de derivação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:quociente-falso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-039",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se F'=f, então ∫(f+7)dx pode escrever-se...",
+      "o": [
+        "F+7+C.",
+        "7F+C.",
+        "F+7x+C.",
+        "F'+7x+C."
+      ],
+      "a": 2,
+      "sol": "A primitiva de7 é7x.",
+      "hyp": "Pode tratar constante aditiva como constante de integração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-040",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se F'=f, então ∫(3f−2)dx=",
+      "o": [
+        "3F−2+C.",
+        "F−6x+C.",
+        "3F'+C.",
+        "3F−2x+C."
+      ],
+      "a": 3,
+      "sol": "Usa-se linearidade.",
+      "hyp": "Pode confundir f e F.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-041",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de f'(x)/f(x), onde f não se anula, é...",
+      "o": [
+        "ln|f(x)|.",
+        "f(x)²/2.",
+        "1/f(x).",
+        "f'(x)ln f(x)."
+      ],
+      "a": 0,
+      "sol": "É o padrão g'/g.",
+      "hyp": "Pode escolher uma primitiva de f' em vez da razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:log-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-042",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de f'(x)e^{f(x)} é...",
+      "o": [
+        "f(x)e^{f(x)}.",
+        "e^{f(x)}.",
+        "ln f(x).",
+        "e^{f'(x)}."
+      ],
+      "a": 1,
+      "sol": "É a regra da cadeia ao contrário.",
+      "hyp": "Pode derivar o expoente em vez de integrar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:exp-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-043",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de f'(x)cos(f(x)) é...",
+      "o": [
+        "cos(f(x)).",
+        "−sin(f(x)).",
+        "sin(f(x)).",
+        "f(x)sin(f(x))."
+      ],
+      "a": 2,
+      "sol": "Derivar sin(f(x)) dá f'cos(f).",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-044",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de f'(x)sin(f(x)) é...",
+      "o": [
+        "cos(f(x)).",
+        "sin(f(x)).",
+        "f(x)cos(f(x)).",
+        "−cos(f(x))."
+      ],
+      "a": 3,
+      "sol": "Derivar −cos(f) dá f'sin(f).",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:trig-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-045",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Quando uma integral não corresponde às formas imediatas conhecidas, a resposta adequada é...",
+      "o": [
+        "reconhecer que pode exigir técnica adicional, em vez de forçar uma fórmula errada.",
+        "inventar uma primitiva semelhante.",
+        "assumir que não existe primitiva.",
+        "derivar o integrando."
+      ],
+      "a": 0,
+      "sol": "Nem toda integral é imediata ou elementar no âmbito dado.",
+      "hyp": "Pode aplicar padrões fora das condições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:limites",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-046",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Verifique: F(x)=e^{x²}/2 é primitiva de x e^{x²} porque...",
+      "o": [
+        "F'=e^{x²}.",
+        "F'=x e^{x²}.",
+        "F'=2x e^{x²}.",
+        "F'=x²e^{x²}."
+      ],
+      "a": 1,
+      "sol": "Derivada: (1/2)·2xe^{x²}=xe^{x²}.",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:verificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-047",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Verifique: F(x)=ln(x²+1)/2 é primitiva de...",
+      "o": [
+        "2x/(x²+1).",
+        "1/(x²+1).",
+        "x/(x²+1).",
+        "ln(x²+1)."
+      ],
+      "a": 2,
+      "sol": "F'=(1/2)·2x/(x²+1).",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:verificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-048",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma taxa r(t)=3e^{3t}, uma quantidade acumulada compatível é...",
+      "o": [
+        "3e^{3t}+C.",
+        "e^t+C.",
+        "t e^{3t}+C.",
+        "e^{3t}+C."
+      ],
+      "a": 3,
+      "sol": "Derivar e^{3t} dá3e^{3t}.",
+      "hyp": "Pode manter o coeficiente3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-049",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma taxa r(t)=2t/(t²+1), uma quantidade acumulada é...",
+      "o": [
+        "ln(t²+1)+C.",
+        "1/(t²+1)+C.",
+        "t²+C.",
+        "2ln(t²+1)+C."
+      ],
+      "a": 0,
+      "sol": "É o padrão g'/g.",
+      "hyp": "Pode confundir com derivada do recíproco.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TP-050",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tabela-propriedades",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Uma tabela de primitivas é mais útil quando combinada com...",
+      "o": [
+        "memorização sem domínio.",
+        "linearidade, reconhecimento de composições simples e verificação por derivação.",
+        "integração de produtos fator a fator.",
+        "eliminação da constante C."
+      ],
+      "a": 1,
+      "sol": "A estrutura e a verificação evitam aplicações mecânicas erradas.",
+      "hyp": "Pode usar a tabela sem reconhecer padrões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tabela-propriedades:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
