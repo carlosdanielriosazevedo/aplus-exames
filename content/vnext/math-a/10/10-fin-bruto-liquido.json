@@ -827,7 +827,7 @@
       "year": "10.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, com bruto de 1 900 € e descontos totais de 329 €, qual é o líquido?",
+      "q": "Com um salário bruto de 1 900 € e descontos totais de 329 €, qual é o salário líquido?",
       "o": [
         "1 551 €",
         "1 591 €",
@@ -1124,7 +1124,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, qual é a taxa efetiva total de desconto sobre o bruto?",
+      "q": "Um salário bruto de 2 500 € fica em 2 137,50 € líquidos após um desconto de 10% do bruto e depois 5% sobre o valor restante. Qual é a taxa efetiva total de desconto sobre o bruto?",
       "o": [
         "14,0%",
         "14,5%",
