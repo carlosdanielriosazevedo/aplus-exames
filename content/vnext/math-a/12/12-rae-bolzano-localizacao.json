@@ -179,7 +179,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "A conclusão anterior refere-se à raiz positiva de x²−2 porque...",
+      "q": "Para f(x)=x²−2, como f(1)<0 e f(2)>0, Bolzano garante uma raiz em ]1,2[. Esta conclusão refere-se à raiz positiva porque...",
       "o": [
         "Bolzano exclui raízes negativas.",
         "x²−2 só tem uma raiz.",
@@ -638,7 +638,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se no caso anterior f(1,5)<0, então a raiz fica em...",
+      "q": "Para f(x)=x³−5, sabe-se que f(1)<0, f(2)>0 e f(1,5)<0. Em que intervalo fica localizada a raiz?",
       "o": [
         "]1;1,5[.",
         "]0;1[.",
@@ -746,7 +746,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Além disso, f'(x)=−sinx−1<0 em [0,1], portanto a raiz anterior é...",
+      "q": "Para f(x)=cos x−x, existe uma raiz em ]0,1[ e f'(x)=−sin x−1<0 em [0,1]. Portanto essa raiz é...",
       "o": [
         "dupla.",
         "inexistente.",
@@ -854,7 +854,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Como f'(x)=1/x+1>0 para x>0, a raiz anterior é...",
+      "q": "Para f(x)=ln x+x−2, existe uma raiz em ]1,2[ e f'(x)=1/x+1>0 para x>0. Portanto essa raiz é...",
       "o": [
         "dupla.",
         "uma de pelo menos duas.",
