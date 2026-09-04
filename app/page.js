@@ -552,10 +552,10 @@ function finalizeDiagnosticState(nextState,draft){
 
 function DiagIntro({s,setS,go}){
   const [saveError,setSaveError]=useState(false);
-  const blueprint=diagnosticBlueprintForProfile(s.profile);
   const difficulty=startingDifficulty(s.profile,s.goal);
-  const available=blueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s)).length;
-  const gated=blueprint.length===0 || ((s.betaMode||"internal")!=="internal" && available===0);
+  const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
+  const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
+  const gated=blueprint.length===0;
   return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
     <h1>Poucas perguntas. Muita informação.</h1>
     <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
@@ -1320,7 +1320,8 @@ function TrainHub({s,go}){
 
 
 function Train({s,setS,go,start}){
-  const [year,setYear]=useState("12.º");
+  const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
+  const [year,setYear]=useState(preferredYear);
   const themes=byYear(year);
   const [themeId,setThemeId]=useState(themes[0].id);
   const current=theme(themeId)||themes[0];
