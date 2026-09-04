@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import {DIAGNOSTIC_BLUEPRINT,TAXONOMY} from "../app/data/content.js";
 import {
   emptyScores,measuredThemes,prepIndex,selectMissionTheme,calibrationCandidates,
@@ -94,5 +95,11 @@ assert.equal(selectQuestionForPlan(s10,invalidPlan),null);
 const legacyDraft={...draft,version:2};
 delete legacyDraft.blueprint;
 assert.equal(validateDiagnosticDraft(legacyDraft).ok,true);
+
+const pageSource=fs.readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+assert.match(pageSource,/const scopedThemes=academicScopeThemes\(s\.profile\)/);
+assert.match(pageSource,/const preferredYear=\["10\.º","11\.º","12\.º"\]\.includes\(s\.profile\?\.schoolYear\)/);
+assert.doesNotMatch(pageSource,/8 questões · ~10–15 min · 10\.º, 11\.º e 12\.º/);
+assert.match(pageSource,/Que tema opcional está a tua turma a estudar\?/);
 
 console.log("✓ curriculum year scope audit: diagnostic, missions, progress and mini-exam stay inside academic scope; Free Training remains open");
