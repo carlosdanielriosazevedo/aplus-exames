@@ -4,6 +4,7 @@ import {
 } from "../data/content.js";
 import {generateVariants,hasGenerator} from "./generators.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
+import {academicScopeThemes,isThemeInAcademicScope} from "./curriculumScope.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -232,7 +233,7 @@ export function applyEvidence(score,item,correct,source="diagnostic",strength=1,
 }
 
 export function measuredThemes(s){
-  return TAXONOMY.filter(t=>s.scores[t.id]?.domain!==null);
+  return academicScopeThemes(s?.profile).filter(t=>s.scores[t.id]?.domain!==null);
 }
 
 export function prepIndex(s){
@@ -254,7 +255,7 @@ export function priorityScore(t,s){
 }
 
 export function selectMissionTheme(s){
-  const assessed=TAXONOMY
+  const assessed=academicScopeThemes(s?.profile)
     .filter(t=>s.scores[t.id]?.domain!==null && eligibleQuestions(s,t.id,"mission").length)
     .map(t=>({t,p:priorityScore(t,s)}))
     .sort((a,b)=>b.p-a.p);
@@ -493,7 +494,7 @@ export function nextDiagnosticDifficulty(previousDifficulty,correct,wasProbe=fal
 }
 
 export function unknownThemes(s){
-  return TAXONOMY.filter(t=>s.scores[t.id]?.domain===null);
+  return academicScopeThemes(s?.profile).filter(t=>s.scores[t.id]?.domain===null);
 }
 
 export function calibrationCandidates(s){
@@ -517,7 +518,7 @@ function recentMissionTypes(s,count=4){
 function confirmationCandidate(s){
   const signal=strongestTrainingSignal(s);
   const signalMcId=signal?.microcompetencyId||microcompetencyId(signal?.themeId,signal?.focus);
-  if(!signal || !eligibleQuestions(s,signal.themeId,"mission",signalMcId||signal.focus).length)return null;
+  if(!signal || !isThemeInAcademicScope(theme(signal.themeId),s?.profile) || !eligibleQuestions(s,signal.themeId,"mission",signalMcId||signal.focus).length)return null;
 
   const ageDays=Math.max(0,(Date.now()-(signal.at||Date.now()))/(1000*60*60*24));
   if(ageDays>21)return null;
@@ -606,6 +607,7 @@ function investigationCandidate(s){
       Date.now()-(m.at||0)<1000*60*60*24
     );
     if(recentSame)continue;
+    if(!isThemeInAcademicScope(theme(h.targetThemeId),s?.profile))continue;
     if(!eligibleQuestions(s,h.targetThemeId,"mission",targetMcId||h.targetFocus).length)continue;
 
     const statusBonus=h.lifecycleStatus===HYPOTHESIS_STATUS.ambiguous
@@ -806,22 +808,23 @@ export function buildMiniExam(s,count=8){
   const usedCognitive=new Set();
   const selected=[];
   const usedThemes=new Set();
+  const scopedThemes=academicScopeThemes(s?.profile)
+    .filter(t=>eligibleQuestions(s,t.id,"exam").length);
 
-  // Nesta versão o banco de produção ainda não existe. O mini-exame procura
-  // deliberadamente cobertura ampla: 10.º -> 11.º -> 12.º, em vez de se
-  // transformar noutra Missão focada apenas nas fragilidades do aluno.
-  const targets=[
-    {year:"10.º",n:2},
-    {year:"11.º",n:3},
-    {year:"12.º",n:3}
-  ];
+  // O mini-exame cobre apenas matéria academicamente disponível para o perfil:
+  // 10.º -> só 10.º; 11.º -> 10.º+11.º; 12.º/terminado -> anos anteriores + atual.
+  // Dentro desse scope, distribuímos as perguntas pelos anos disponíveis.
+  const availableYears=["10.º","11.º","12.º"].filter(year=>scopedThemes.some(t=>t.year===year));
+  if(!availableYears.length)return [];
+
+  const base=Math.floor(count/availableYears.length);
+  let remainder=count%availableYears.length;
+  const targets=availableYears.map(year=>({year,n:base+(remainder-->0?1:0)}));
 
   for(const group of targets){
-    const candidates=byYear(group.year)
-      .filter(t=>eligibleQuestions(s,t.id,"exam").length)
+    const candidates=scopedThemes
+      .filter(t=>t.year===group.year)
       .sort((a,b)=>{
-        // relevância primeiro; em empate preferimos menor Certeza para o exame
-        // também acrescentar informação útil ao mapa global.
         const ac=s.scores[a.id]?.conf||0, bc=s.scores[b.id]?.conf||0;
         return (b.relevance-a.relevance) || (ac-bc);
       });
@@ -837,9 +840,11 @@ export function buildMiniExam(s,count=8){
     }
   }
 
-  // Fallback caso o banco disponível não permita cumprir a distribuição.
+  // Se um ano não tiver diversidade suficiente, completar apenas com outros
+  // temas dentro do mesmo scope académico — nunca com matéria futura.
   if(selected.length<count){
-    const themes=TAXONOMY.filter(t=>eligibleQuestions(s,t.id,"exam").length && !usedThemes.has(t.id))
+    const themes=scopedThemes
+      .filter(t=>!usedThemes.has(t.id))
       .sort((a,b)=>b.relevance-a.relevance);
     for(const t of themes){
       if(selected.length>=count)break;
@@ -1100,7 +1105,7 @@ export function humanMissionReasons(t,s){
 }
 
 export function rankedStudyPriorities(s,limit=4){
-  return TAXONOMY
+  return academicScopeThemes(s?.profile)
     .filter(t=>s.scores[t.id]?.domain!==null && eligibleQuestions(s,t.id,"mission").length)
     .map(t=>({theme:t,breakdown:nextBestActionBreakdown(t,s)}))
     .sort((a,b)=>b.breakdown.total-a.breakdown.total)
@@ -1190,7 +1195,7 @@ export function focusMissionReasons(t,focus,s){
 }
 
 export function competenceMap(s,year=null){
-  const themes=year?byYear(year):TAXONOMY;
+  const themes=year?byYear(year).filter(t=>isThemeInAcademicScope(t,s?.profile)):academicScopeThemes(s?.profile);
   return themes.flatMap(t=>focusRows(s,t.id).map(r=>({themeId:t.id,theme:t.short,year:t.year,...r})));
 }
 
