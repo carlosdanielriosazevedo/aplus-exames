@@ -133,7 +133,7 @@ const initial={
   pedagogicalIdVersion:1,
   pedagogicalMemoryVersion:2,
   parentInvites:[],
-  profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear"}
+  profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[]}
 };
 
 export default function App(){
@@ -467,7 +467,20 @@ function StudentProfile({s,setS,go}){
     <p className="muted">Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</p>
 
     <h3>Em que ano estás?</h3>
-    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming)})}>{x}</button>)}</div>
+    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[]})}>{x}</button>)}</div>
+
+    {p.schoolYear==="12.º"&&<>
+      <h3>Que tema opcional está a tua turma a estudar?</h3>
+      <p className="muted">Seleciona apenas o que já foi escolhido na tua turma. Podes selecionar mais do que um se for esse o caso. Se ainda não sabes, deixa vazio.</p>
+      <div className="stackChoices">{[
+        ["inferencia","Inferência estatística"],
+        ["integrais","Primitivas e integrais"],
+        ["matrizes","Matrizes"]
+      ].map(([v,l])=>{
+        const selected=(p.optionalTopics||[]).includes(v);
+        return <button key={v} className={selected?"sel":""} onClick={()=>setP({...p,optionalTopics:selected?(p.optionalTopics||[]).filter(x=>x!==v):[...(p.optionalTopics||[]),v]})}>{l}</button>;
+      })}</div>
+    </>}
 
     <h3>{p.schoolYear==="Já terminei o secundário"?"Que nota tinhas aproximadamente a Matemática?":"Que nota tens tido aproximadamente a Matemática?"}</h3>
     <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
