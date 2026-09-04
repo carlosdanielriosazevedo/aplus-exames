@@ -422,7 +422,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Com as mesmas A e B, BA=",
+      "q": "Para A=[[1,1],[0,1]] e B=[[1,0],[1,1]], BA=",
       "o": [
         "[[2,1],[1,1]].",
         "[[2,0],[0,2]].",
@@ -449,7 +449,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Os dois itens anteriores mostram que...",
+      "q": "Para A=[[1,1],[0,1]] e B=[[1,0],[1,1]], tem-se AB=[[2,1],[1,1]] e BA=[[1,1],[1,2]]. Isto mostra que...",
       "o": [
         "AB≠BA em geral.",
         "AB=BA sempre.",
@@ -1070,7 +1070,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "As duas equações anteriores mostram que...",
+      "q": "Se A é invertível, AX=B implica X=A^{-1}B, enquanto XA=B implica X=BA^{-1}. Estas duas equações mostram que...",
       "o": [
         "dividir por A é sempre uma operação sem ordem.",
         "AB=BA.",
