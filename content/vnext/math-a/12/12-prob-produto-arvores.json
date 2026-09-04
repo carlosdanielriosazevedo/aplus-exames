@@ -503,7 +503,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "No mesmo caso, P(A^c→B)=...",
+      "q": "Se P(A)=0,6 e P(B|A^c)=0,8, então P(A^c∩B)=...",
       "o": [
         "0,8.",
         "0,2.",
@@ -530,7 +530,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "No mesmo caso, P(B)=...",
+      "q": "Se P(A)=0,6, P(B|A)=0,3 e P(B|A^c)=0,8, então P(B)=...",
       "o": [
         "0,18.",
         "0,32.",
