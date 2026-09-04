@@ -1259,7 +1259,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Uma primitiva de 1/(1+x²) não pertence à tabela elementar indicada pelas derivadas anteriores; isto significa que...",
+      "q": "A função 1/(1+x²) tem primitivas, mas a sua forma pode não pertencer à tabela elementar trabalhada neste bloco. Isto significa que...",
       "o": [
         "não tem primitiva.",
         "a primitiva é ln(1+x²).",
