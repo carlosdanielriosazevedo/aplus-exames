@@ -2010,7 +2010,7 @@ function AccountCloud({s,setS,go}){
       <div className="cloudProgressCard">
         <div><span>Progresso local atual</span><b>{localIndex??"—"}<small>/100 índice parcial</small></b></div>
         <div><span>XP</span><b>{s.xp}</b></div>
-        <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{TAXONOMY.length}</b></div>
+        <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{academicScopeThemes(s.profile).length}</b></div>
       </div>
 
       <div className="cloudRevisionCard">
@@ -2177,7 +2177,7 @@ function Parent({s,setS,go}){
     {link&&<>
       <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · Matemática A</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
       <small className="parentFoot">* índice ainda parcial enquanto o perfil está a ser construído</small>
-      <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{TAXONOMY.length}</b><span>áreas com evidência</span></div></div>
+      <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{academicScopeThemes(s.profile).length}</b><span>áreas com evidência</span></div></div>
       {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{String(s.lastExam.score20).replace('.',',')}/20</b><small>{s.lastExam.correctCount}/{s.lastExam.total} corretas</small></div>}
       <div className="notice"><b>O que os pais veem?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados de avaliações — não cada resposta individual.</span></div>
 
