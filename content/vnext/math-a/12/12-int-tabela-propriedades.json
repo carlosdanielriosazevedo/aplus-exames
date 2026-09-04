@@ -908,7 +908,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "O valor correto da integral anterior é...",
+      "q": "Qual é ∫(x+1)e^{x²+2x}dx?",
       "o": [
         "e^{x²+2x}+C.",
         "(1/2)e^{x²+2x}+C.",
