@@ -206,7 +206,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "No mesmo caso, f tem em x=2...",
+      "q": "Se f'(x)=2x−4, então f tem em x=2...",
       "o": [
         "máximo local.",
         "ponto de inflexão.",
