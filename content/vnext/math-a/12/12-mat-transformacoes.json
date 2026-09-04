@@ -1178,7 +1178,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "A transformação do item anterior envia (1,1) para...",
+      "q": "Uma transformação linear envia e1 para (2,1) e e2 para (−1,3). Para onde envia (1,1)?",
       "o": [
         "(3,2).",
         "(2,3).",
