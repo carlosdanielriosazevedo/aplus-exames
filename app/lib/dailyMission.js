@@ -158,6 +158,6 @@ export function migrateDailyMission(state){
   return {
     ...state,
     dailyMission:{...dailyMission,assignment},
-    dailyMissionModelVersion:2
+    dailyMissionModelVersion:1
   };
 }
