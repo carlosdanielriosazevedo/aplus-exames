@@ -341,7 +341,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Impondo y=0 na tangente anterior obtemos...",
+      "q": "A tangente a f em x_n tem equação y=f(x_n)+f'(x_n)(x−x_n). Ao impor y=0 para obter a abcissa de interseção com o eixo Ox, obtemos...",
       "o": [
         "a fórmula de Newton.",
         "a fórmula da bisseção.",
@@ -1016,7 +1016,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "A iteração anterior converge para1 de forma...",
+      "q": "Ao aplicar Newton a f(x)=(x−1)² obtém-se x_{n+1}=(x_n+1)/2. Esta iteração converge para 1 de forma...",
       "o": [
         "quadrática.",
         "linear, reduzindo o erro a metade.",
