@@ -314,7 +314,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "No item anterior, a primeira componente de Aq representa...",
+      "q": "Se A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T, então Aq=(12,23)^T. A primeira componente representa...",
       "o": [
         "produção total do produto1.",
         "custo do recurso1.",
@@ -611,7 +611,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "No item anterior, (A²)_11=1 significa...",
+      "q": "Numa rede com matriz de adjacência A=[[0,1],[1,0]], tem-se A²=I. O facto de (A²)_11=1 significa...",
       "o": [
         "há um laço direto no vértice1.",
         "o grau é1 necessariamente por essa entrada.",
@@ -719,7 +719,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Com a mesma matriz P do item anterior e x_0=(0,100)^T, x_1=",
+      "q": "Se P tem 1.ª linha (0,8; 0,3) e 2.ª linha (0,2; 0,7), e x_0=(0,100)^T, então x_1=",
       "o": [
         "(80,20)^T.",
         "(0,100)^T.",
@@ -935,7 +935,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Para o sistema anterior, o vetor b é...",
+      "q": "Para o sistema 2x+y=5, x−y=1, qual é o vetor b na forma Ax=b?",
       "o": [
         "(2,1)^T.",
         "(1,−1)^T.",
@@ -1151,7 +1151,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "No item anterior, a primeira linha de W calcula...",
+      "q": "Se W tem 1.ª linha (0,5;0,5), 2.ª linha (1;0) e x=(8,6)^T, então a primeira linha de W calcula...",
       "o": [
         "o dobro da primeira.",
         "a diferença.",
