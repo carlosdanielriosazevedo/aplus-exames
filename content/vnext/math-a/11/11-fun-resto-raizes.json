@@ -854,7 +854,7 @@
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para o mesmo P, qual é P(−2)?",
+      "q": "Para P(x)=(x−1)²(x+2), qual é P(−2)?",
       "o": [
         "9.",
         "−9.",
@@ -1016,7 +1016,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para o mesmo P, em ]−2,1[ o sinal é...",
+      "q": "Para P(x)=(x+2)(x−1)(x−4), em ]−2,1[ o sinal é...",
       "o": [
         "negativo.",
         "positivo.",
