@@ -1070,7 +1070,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "No mesmo caso A=500, B=400, C=200 e 3 lugares, usando como medida a soma dos desvios absolutos face às quotas 1,36;1,09;0,55, qual distribuição fica mais próxima?",
+      "q": "Para A=500, B=400, C=200 e 3 lugares, usando como medida a soma dos desvios absolutos face às quotas 1,36;1,09;0,55, qual distribuição fica mais próxima?",
       "o": [
         "D'Hondt 2-1-0.",
         "Ficam exatamente iguais.",
