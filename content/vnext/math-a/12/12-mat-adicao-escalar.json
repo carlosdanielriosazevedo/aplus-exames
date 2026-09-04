@@ -1151,7 +1151,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Na decomposição anterior, S=(A+A^T)/2 é...",
+      "q": "Para uma matriz quadrada A, defina S=(A+A^T)/2. A matriz S é...",
       "o": [
         "antissimétrica.",
         "nula sempre.",
