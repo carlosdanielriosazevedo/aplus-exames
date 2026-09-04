@@ -503,7 +503,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "O valor do item anterior é aproximadamente...",
+      "q": "Se p̂=0,4 e n=100, o erro padrão estimado √(0,4·0,6/100) é aproximadamente...",
       "o": [
         "0,24.",
         "0,0049.",
@@ -1016,7 +1016,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Da condição anterior resulta n aproximadamente pelo menos...",
+      "q": "Se queremos erro padrão máximo de p̂≤0,02 e usamos o caso conservador p=0,5, então 0,5/√n≤0,02. Qual é aproximadamente o menor n inteiro necessário?",
       "o": [
         "25.",
         "625.",
