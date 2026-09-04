@@ -908,7 +908,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Os itens anteriores mostram que...",
+      "q": "Como ∫_0^π cos x dx=0 mas cos x muda de sinal em [0,π], conclui-se que...",
       "o": [
         "área e integral são sempre iguais.",
         "área geométrica e integral algébrica podem diferir quando há mudança de sinal.",
@@ -1043,7 +1043,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "O valor da área anterior é...",
+      "q": "Em [0,1], a área entre y=e^x e y=1 é ∫_0^1(e^x−1)dx. Qual é o seu valor?",
       "o": [
         "e−1.",
         "2−e.",
