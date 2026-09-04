@@ -584,7 +584,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, o desvio padrão de X̄ é...",
+      "q": "Se X tem média 50 e desvio padrão 10, qual é o desvio padrão de X̄ para amostras de dimensão 25?",
       "o": [
         "10.",
         "2.",
@@ -854,7 +854,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, Var(p̂)=",
+      "q": "Para uma proporção populacional p=0,2 e amostras de dimensão n=100, qual é Var(p̂)?",
       "o": [
         "0,04.",
         "0,016.",
@@ -881,7 +881,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "O erro padrão do caso anterior é...",
+      "q": "Para p=0,2 e n=100, Var(p̂)=0,0016. Qual é o erro padrão de p̂?",
       "o": [
         "0,04.",
         "0,0016.",
