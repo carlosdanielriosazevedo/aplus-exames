@@ -395,7 +395,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No item anterior, o erro máximo do ponto médio é...",
+      "q": "Se o intervalo final da bisseção é [1,40;1,42] e usamos o ponto médio como aproximação, qual é o erro máximo?",
       "o": [
         "0,02.",
         "0,005.",
@@ -584,7 +584,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na iteração seguinte do caso anterior, o ponto médio de [1,1,5] é...",
+      "q": "Para f(x)=x²−2, após uma iteração de bisseção obteve-se o intervalo [1;1,5]. Qual é o ponto médio da iteração seguinte?",
       "o": [
         "1,75.",
         "1,25.",
@@ -1232,7 +1232,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Assim, no item anterior, n=10 é suficiente porque...",
+      "q": "Se a amplitude inicial é 5 e queremos uma amplitude final ≤0,005, por que n=10 iterações de bisseção são suficientes?",
       "o": [
         "5/10=0,5.",
         "5/1024<0,005.",
