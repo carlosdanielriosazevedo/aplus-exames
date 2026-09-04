@@ -580,7 +580,7 @@ function calibrationCandidate(s){
         {kind:"calibration",title:"Ainda não conhecemos bem esta área",detail:"Uma pergunta informativa ajuda a completar o mapa sem prolongar o diagnóstico inicial."},
         {kind:"exam",title:"É relevante o suficiente para ser medida",detail:"O motor prefere reduzir zonas desconhecidas que podem influenciar o plano."}
       ],
-      unlocks:likelyUnlocks(candidate.id)
+      unlocks:likelyUnlocks(candidate.id,s)
     },
     why:"coverage_gap"
   };
@@ -632,7 +632,7 @@ function investigationCandidate(s){
           {kind:"evidence",title:"A verificação foi espaçada no tempo",detail:`A última observação foi há cerca de ${Math.max(1,Math.round(ageDays))} dias.`}
         ],
         hypothesisKey:h.key,
-        unlocks:likelyUnlocks(h.targetThemeId)
+        unlocks:likelyUnlocks(h.targetThemeId,s)
       },
       why:"causal_followup"
     };
@@ -665,7 +665,7 @@ function priorityCandidate(s){
         : "O motor escolheu esta área como a próxima melhor ação para o teu perfil atual.",
       reasons:focusMissionReasons(t,focus,s),
       breakdown,
-      unlocks:likelyUnlocks(t.id)
+      unlocks:likelyUnlocks(t.id,s)
     },
     why:"next_best_action"
   };
@@ -1122,8 +1122,10 @@ export function rankedStudyPriorities(s,limit=4){
     .slice(0,limit);
 }
 
-export function likelyUnlocks(themeId){
-  return dependentThemes(themeId).map(t=>({id:t.id,label:t.short,year:t.year}));
+export function likelyUnlocks(themeId,s=null){
+  return dependentThemes(themeId)
+    .filter(t=>!s || isThemeInAcademicScope(t,s?.profile))
+    .map(t=>({id:t.id,label:t.short,year:t.year}));
 }
 
 
