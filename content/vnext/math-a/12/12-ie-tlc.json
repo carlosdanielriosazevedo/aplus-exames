@@ -260,7 +260,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "No caso anterior, o erro padrão é...",
+      "q": "Se uma população tem μ=100 e σ=20, qual é o erro padrão de X̄ para amostras de dimensão 100?",
       "o": [
         "20.",
         "2.",
@@ -530,7 +530,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, o desvio padrão da soma é...",
+      "q": "Se X_i são independentes com μ=5 e σ=2, qual é o desvio padrão da soma de 100 observações?",
       "o": [
         "2.",
         "0,2.",
@@ -773,7 +773,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "No caso anterior, uma média de10,2g está...",
+      "q": "Se médias de lotes de 64 peças têm média 10 g e erro padrão 0,1 g, uma média amostral de 10,2 g está...",
       "o": [
         "2 erros padrão acima da média.",
         "0,2 erros padrão.",
