@@ -251,6 +251,7 @@ export default function App(){
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
+  if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
@@ -453,18 +454,25 @@ function suggestedExamTimingForYear(year,current){
   return current||"unsure";
 }
 
-function StudentProfile({s,setS,go}){
+function StudentProfile({s,setS,go,editing=false}){
   const [p,setP]=useState(s.profile||initial.profile);
   function save(){
+    if(editing){
+      setS(prev=>migrateDailyMission({...prev,profile:p}));
+      go("progress");
+      return;
+    }
     setS(prev=>recordMilestone({...prev,profile:p},"profile_completed",{
       schoolYear:p.schoolYear||null,
       examTiming:p.examTiming||null
     }));
     go("goalOnboard");
   }
-  return <Shell><Logo/><p className="eyebrow">ANTES DO DIAGNÓSTICO</p>
-    <h1>Ajuda a A+ a começar no sítio certo.</h1>
-    <p className="muted">Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</p>
+  return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":"ANTES DO DIAGNÓSTICO"}</p>
+    <h1>{editing?"Atualiza o que estás a estudar.":"Ajuda a A+ a começar no sítio certo."}</h1>
+    <p className="muted">{editing
+      ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a A+ ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
+      :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
 
     <h3>Em que ano estás?</h3>
     <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[]})}>{x}</button>)}</div>
@@ -504,7 +512,7 @@ function StudentProfile({s,setS,go}){
     </div>
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a A+ não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
-    <button className="primary" onClick={save}>Continuar</button>
+    <button className="primary" onClick={save}>{editing?"Guardar percurso":"Continuar"}</button>
   </Shell>
 }
 
@@ -1518,6 +1526,7 @@ function Progress({s,go}){
     <h1>Como estás a evoluir.</h1>
     <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p></div>
     <div className="progressOverview">{overview.map(t=><div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(s.scores[t.id].domain??0)+"%"}}/></div><b>{s.scores[t.id].domain??"—"}</b></div>)}</div>
+    <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar percurso escolar</button>
     <FriendsBetaDisclaimer s={s} compact/>
     <details className="progressDetails"><summary>Ver mapa completo →</summary>
     <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
