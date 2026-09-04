@@ -638,7 +638,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Para a mesma função, em x=1 há...",
+      "q": "Para f(x)=x³−3x, em x=1 há...",
       "o": [
         "máximo local.",
         "inflexão.",
@@ -773,7 +773,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Nos pontos x=±1 da mesma função há...",
+      "q": "Para f(x)=x⁴−2x², nos pontos x=±1 há...",
       "o": [
         "mínimos locais.",
         "máximos locais.",
@@ -1043,7 +1043,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Na mesma função, há máximo local em...",
+      "q": "Para f(x)=x/(1+x²), há máximo local em...",
       "o": [
         "x=−1.",
         "x=0.",
