@@ -125,7 +125,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Na mesma matriz, a_21 é...",
+      "q": "Em A=[[2,5],[7,1]], a_21 é...",
       "o": [
         "7.",
         "5.",
