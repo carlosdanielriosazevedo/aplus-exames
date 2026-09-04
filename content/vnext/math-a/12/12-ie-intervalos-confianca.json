@@ -314,7 +314,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "O mesmo intervalo tem margem de erro...",
+      "q": "O intervalo [12,18] tem que margem de erro?",
       "o": [
         "6.",
         "15.",
@@ -395,7 +395,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se a média amostral é40 no caso anterior, o IC95% é aproximadamente...",
+      "q": "Para 95%, usando z*=1,96, σ=10 e n=100, a margem de erro é 1,96. Se a média amostral é 40, qual é aproximadamente o IC95%?",
       "o": [
         "[30;50].",
         "[39,02;40,98].",
@@ -1124,7 +1124,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "É possível que os 20 intervalos anteriores cubram todos o parâmetro?",
+      "q": "Ao construir 20 intervalos de confiança de 95% em estudos independentes idênticos, é possível que todos cubram o parâmetro?",
       "o": [
         "Não.",
         "Sim.",
