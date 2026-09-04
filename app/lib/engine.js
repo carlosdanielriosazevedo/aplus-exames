@@ -315,7 +315,7 @@ export function selectMissionQuestion(s,themeId,usedIds=[],usedSignatures=[]){
 
 export function selectPrereqQuestion(s,targetThemeId,usedIds=[],usedSignatures=[]){
   const preId=PREREQUISITES[targetThemeId];
-  if(!preId)return null;
+  if(!preId || !isThemeInAcademicScope(theme(preId),s?.profile))return null;
   const candidates=eligibleQuestions(s,preId,"mission")
     .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
   if(!candidates.length)return null;
@@ -730,6 +730,7 @@ export function markTrainingSignalConfirmed(signals,signal){
 }
 
 export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
+  if(plan?.themeId && !isThemeInAcademicScope(theme(plan.themeId),s?.profile))return null;
   let curated=eligibleQuestions(s,plan.themeId,"mission",plan.focus)
     .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
 
@@ -789,8 +790,8 @@ export function seenQuestionIds(s){
   return new Set(ids);
 }
 
-function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive){
-  const all=eligibleQuestions(s,themeId,"exam");
+function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds=new Set()){
+  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!usedSessionIds.has(q.id));
   if(!all.length)return null;
   const unseen=all.filter(q=>!seenIds.has(q.id));
   const pool=unseen.length?unseen:all;
@@ -806,14 +807,12 @@ function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive){
 export function buildMiniExam(s,count=8){
   const seen=seenQuestionIds(s);
   const usedCognitive=new Set();
+  const usedSessionIds=new Set();
   const selected=[];
   const usedThemes=new Set();
   const scopedThemes=academicScopeThemes(s?.profile)
     .filter(t=>eligibleQuestions(s,t.id,"exam").length);
 
-  // O mini-exame cobre apenas matéria academicamente disponível para o perfil:
-  // 10.º -> só 10.º; 11.º -> 10.º+11.º; 12.º/terminado -> anos anteriores + atual.
-  // Dentro desse scope, distribuímos as perguntas pelos anos disponíveis.
   const availableYears=["10.º","11.º","12.º"].filter(year=>scopedThemes.some(t=>t.year===year));
   if(!availableYears.length)return [];
 
@@ -833,23 +832,34 @@ export function buildMiniExam(s,count=8){
       const inYear=selected.filter(q=>theme(q.themeId)?.year===group.year).length;
       if(inYear>=group.n)break;
       if(usedThemes.has(t.id))continue;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive);
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
       if(q){
-        selected.push(q);usedThemes.add(t.id);usedCognitive.add(q.cognitive);
+        selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);
       }
     }
   }
 
-  // Se um ano não tiver diversidade suficiente, completar apenas com outros
-  // temas dentro do mesmo scope académico — nunca com matéria futura.
   if(selected.length<count){
     const themes=scopedThemes
       .filter(t=>!usedThemes.has(t.id))
       .sort((a,b)=>b.relevance-a.relevance);
     for(const t of themes){
       if(selected.length>=count)break;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive);
-      if(q){selected.push(q);usedThemes.add(t.id);usedCognitive.add(q.cognitive)}
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
+      if(q){selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive)}
+    }
+  }
+
+  // Um scope pode ter menos temas live do que questões pedidas. Repetimos
+  // temas, nunca itens, em vez de saltar para matéria de um ano futuro.
+  let progress=true;
+  while(selected.length<count && progress){
+    progress=false;
+    for(const t of [...scopedThemes].sort((a,b)=>b.relevance-a.relevance)){
+      if(selected.length>=count)break;
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
+      if(!q)continue;
+      selected.push(q);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);progress=true;
     }
   }
 
@@ -1228,6 +1238,7 @@ function causalCandidateScore(s,dep,q){
 export function selectCausalProbe(s,targetThemeId,targetFocus,usedIds=[],usedSignatures=[]){
   const deps=causalPrerequisitesFor(targetThemeId,targetFocus);
   for(const dep of deps){
+    if(!isThemeInAcademicScope(theme(dep.themeId),s?.profile))continue;
     const depRef=dep.microcompetencyId||dep.focus;
     let candidates=eligibleQuestions(s,dep.themeId,"mission",depRef)
       .filter(q=>{
