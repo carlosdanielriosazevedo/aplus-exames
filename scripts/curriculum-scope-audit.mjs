@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import {DIAGNOSTIC_BLUEPRINT,TAXONOMY} from "../app/data/content.js";
 import {
   emptyScores,measuredThemes,prepIndex,selectMissionTheme,calibrationCandidates,
-  buildMiniExam,trainingQuestions,diagnosticAnchor
+  buildMiniExam,trainingQuestions,diagnosticAnchor,selectQuestionForPlan
 } from "../app/lib/engine.js";
 import {
   academicScopeThemes,diagnosticBlueprintForProfile,isThemeInAcademicScope
 } from "../app/lib/curriculumScope.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../app/lib/diagnosticRecovery.js";
+import {migrateDailyMission} from "../app/lib/dailyMission.js";
 
 const profile=schoolYear=>({schoolYear,recentGrade:"",syllabus:"most",examTiming:"thisYear"});
 const stateFor=schoolYear=>({
@@ -50,7 +51,7 @@ assert.ok(calibrationCandidates(s10).every(t=>t.year==="10.º"));
 // O Mini-exame nunca sobe para matéria futura.
 for(const [state,maxYear] of [[s10,10],[s11,11],[s12,12]]){
   const exam=buildMiniExam(state,8);
-  assert.ok(exam.length>0);
+  assert.equal(exam.length,8);
   for(const q of exam){
     const t=TAXONOMY.find(x=>x.id===q.themeId);
     const n=Number.parseInt(t.year,10);
@@ -75,5 +76,17 @@ const draft=createDiagnosticDraft({session,item:first,difficulty:2,blueprint:blu
 assert.equal(draft.version,3);
 assert.deepEqual(draft.blueprint,blueprint10);
 assert.equal(validateDiagnosticDraft(draft).ok,true);
+
+// Uma atribuição diária antiga fora do scope é descartada na migração e um
+// plano legado fora do scope não consegue selecionar nova pergunta.
+const invalidPlan={type:"priority",themeId:"12-prob",focus:null};
+const legacy10={...s10,dailyMission:{version:1,assignment:{day:"2026-09-04",assignedAt:1,plan:invalidPlan},prompt:{}}};
+assert.equal(migrateDailyMission(legacy10).dailyMission.assignment,null);
+assert.equal(selectQuestionForPlan(s10,invalidPlan),null);
+
+// Drafts v2 anteriores ao scope continuam válidos usando o blueprint histórico.
+const legacyDraft={...draft,version:2};
+delete legacyDraft.blueprint;
+assert.equal(validateDiagnosticDraft(legacyDraft).ok,true);
 
 console.log("✓ curriculum year scope audit: diagnostic, missions, progress and mini-exam stay inside academic scope; Free Training remains open");
