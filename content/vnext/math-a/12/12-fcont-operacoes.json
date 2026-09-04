@@ -1178,7 +1178,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "O resultado anterior é uma forma do princípio...",
+      "q": "Se f(x)→0 quando x→a e g é limitada perto de a, então f(x)g(x)→0. Este resultado é uma forma do princípio...",
       "o": [
         "do valor intermédio.",
         "de Rolle.",
