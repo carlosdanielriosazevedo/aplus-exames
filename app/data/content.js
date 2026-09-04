@@ -150,9 +150,9 @@ const TAXONOMY = [
   {id:"12-fcd",year:"12.º",name:"Função composta e derivadas",short:"Função composta e derivadas",focus:MICROCOMPETENCY_DEFS["12-fcd"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-fcd"],relevance:5,blocking:5},
   {id:"12-fcont",year:"12.º",name:"Funções contínuas e deriváveis",short:"Continuidade e derivabilidade",focus:MICROCOMPETENCY_DEFS["12-fcont"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-fcont"],relevance:5,blocking:5},
   {id:"12-rae",year:"12.º",name:"Resolução aproximada de equações",short:"Resolução aproximada",focus:MICROCOMPETENCY_DEFS["12-rae"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-rae"],relevance:3,blocking:2},
-  {id:"12-ie",year:"12.º",name:"Introdução à inferência estatística",short:"Inferência estatística",focus:MICROCOMPETENCY_DEFS["12-ie"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-ie"],relevance:3,blocking:2},
-  {id:"12-int",year:"12.º",name:"Primitivas imediatas e integrais definidos",short:"Primitivas e integrais",focus:MICROCOMPETENCY_DEFS["12-int"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-int"],relevance:4,blocking:3},
-  {id:"12-mat",year:"12.º",name:"Matrizes",short:"Matrizes",focus:MICROCOMPETENCY_DEFS["12-mat"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-mat"],relevance:3,blocking:2},
+  {id:"12-ie",year:"12.º",optionalTrack:"inferencia",name:"Introdução à inferência estatística",short:"Inferência estatística",focus:MICROCOMPETENCY_DEFS["12-ie"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-ie"],relevance:3,blocking:2},
+  {id:"12-int",year:"12.º",optionalTrack:"integrais",name:"Primitivas imediatas e integrais definidos",short:"Primitivas e integrais",focus:MICROCOMPETENCY_DEFS["12-int"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-int"],relevance:4,blocking:3},
+  {id:"12-mat",year:"12.º",optionalTrack:"matrizes",name:"Matrizes",short:"Matrizes",focus:MICROCOMPETENCY_DEFS["12-mat"].map(x=>x.label),microcompetencies:MICROCOMPETENCY_DEFS["12-mat"],relevance:3,blocking:2},
 ];
 
 const PREREQUISITES = {
