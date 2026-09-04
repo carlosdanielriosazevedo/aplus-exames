@@ -34,6 +34,12 @@ assert.ok(diagnosticBlueprintForProfile(s11.profile).every(id=>!id.startsWith("1
 const s12=stateFor("12.º");
 assert.deepEqual([...years(academicScopeThemes(s12.profile))],["10.º","11.º","12.º"]);
 assert.deepEqual(diagnosticBlueprintForProfile(s12.profile),DIAGNOSTIC_BLUEPRINT);
+assert.equal(academicScopeThemes(s12.profile).some(t=>t.optionalTrack),false);
+const s12WithOptional=stateFor("12.º");
+s12WithOptional.profile.optionalTopics=["matrizes"];
+assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-mat"),s12WithOptional.profile),true);
+assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-ie"),s12WithOptional.profile),false);
+assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-int"),s12WithOptional.profile),false);
 
 const finished=stateFor("Já terminei o secundário");
 assert.equal(academicScopeThemes(finished.profile).length,TAXONOMY.length);
