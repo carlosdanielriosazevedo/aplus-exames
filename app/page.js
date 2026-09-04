@@ -55,6 +55,7 @@ import {
   createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
   transactDiagnosticAnswer
 } from "./lib/diagnosticRecovery";
+import {academicScopeThemes,diagnosticBlueprintForProfile} from "./lib/curriculumScope";
 import {
   claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
 } from "./lib/reliability";
@@ -171,7 +172,7 @@ export default function App(){
     let recoveredCompletion=false;
     let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
-    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&draft.version!==2));
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
     if(!next.diagnosticDone&&legacyDiagnostic){
       const recovery=recoverLegacyDiagnosticSessions({state:next,saveState:saveLocalState});
       if(recovery.ok){
@@ -551,11 +552,13 @@ function finalizeDiagnosticState(nextState,draft){
 
 function DiagIntro({s,setS,go}){
   const [saveError,setSaveError]=useState(false);
-  const available=eligibleCount(s,"diagnostic");
-  const gated=(s.betaMode||"internal")!=="internal" && available===0;
+  const blueprint=diagnosticBlueprintForProfile(s.profile);
+  const difficulty=startingDifficulty(s.profile,s.goal);
+  const available=blueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s)).length;
+  const gated=blueprint.length===0 || ((s.betaMode||"internal")!=="internal" && available===0);
   return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
     <h1>Poucas perguntas. Muita informação.</h1>
-    <p className="muted">A A+ mistura conteúdos de 10.º, 11.º e 12.º. Começa por perguntas-âncora e só faz uma pergunta extra quando precisa de localizar melhor uma dificuldade.</p>
+    <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se a evidência for consistente.</small></div>
       <div><span>🎯</span><b>Direto ao ponto</b><small>Não existe uma pergunta obrigatória para cada tema.</small></div>
@@ -570,9 +573,8 @@ function DiagIntro({s,setS,go}){
       if(existing?.kind==="diagnostic"){go("diagRun");return}
       if(open.length){setSaveError(true);return}
       const ses=sessionStart("diagnostic",{goal:s?.goal||null});
-      const difficulty=startingDifficulty(s.profile,s.goal);
-      const current=diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[0],difficulty,s);
-      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty});
+      const current=diagnosticAnchor(blueprint[0],difficulty,s);
+      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty,blueprint});
       if(!saveSessionDraft(draft)){setSaveError(true);return}
       const started=ensureDiagnosticStarted(s,draft);
       if(!started.ok||!saveLocalState(started.state)){setSaveError(true);return}
@@ -600,7 +602,8 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const anchorResults=draft.anchorResults,probeCount=draft.probeCount;
 
   const anchorsDone=anchorResults.length;
-  const estimate=Math.min(94,Math.round(((anchorsDone+probeCount)/8)*100));
+  const blueprintLength=Math.max(1,draft.blueprint?.length||DIAGNOSTIC_BLUEPRINT.length);
+  const estimate=Math.min(94,Math.round(((anchorsDone+Math.min(probeCount,1)*.5)/blueprintLength)*100));
 
   function answer(n){
     if(!ready||fb||draft.pendingResponse)return;
@@ -650,6 +653,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
 function DiagResult({s,setS,go}){
   const measured=measuredThemes(s);
+  const scopedTotal=academicScopeThemes(s.profile).length;
   const priority=selectMissionTheme(s);
   const index=prepIndex(s);
   const ranked=[...measured].sort((a,b)=>(s.scores[a.id].domain??100)-(s.scores[b.id].domain??100)).slice(0,4);
@@ -658,12 +662,12 @@ function DiagResult({s,setS,go}){
     <p className="eyebrow">JÁ TEMOS INFORMAÇÃO SUFICIENTE</p>
     <h1>Podemos criar o teu primeiro plano.</h1>
     <div className="indexCircle"><strong>{index}</strong><span>/100</span></div>
-    <p className="indexQualifier">Índice inicial parcial · {measured.length}/{TAXONOMY.length} áreas com evidência</p>
+    <p className="indexQualifier">Índice inicial parcial · {measured.length}/{scopedTotal} áreas do teu percurso com evidência</p>
     <p className="muted">Não é uma fotografia completa da Matemática A. A A+ vai preencher as áreas em falta e recalibrar as restantes durante as próximas Missões.</p>
   </div>
 
-  <div className="notice"><b>Primeira prioridade: {priority.short}</b>
-    <span>A escolha combina Domínio, Certeza da A+, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>
+  {priority&&<div className="notice"><b>Primeira prioridade: {priority.short}</b>
+    <span>A escolha combina Domínio, Certeza da A+, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>}
 
   <div className="resultSkills">{ranked.map(t=>{
     const v=s.scores[t.id];
