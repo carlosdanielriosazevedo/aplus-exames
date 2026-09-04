@@ -1501,8 +1501,15 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
 }
 
 function Progress({s,go}){
-  const [year,setYear]=useState("12.º");
-  const hypotheses=allLearningHypotheses(s,8);
+  const scopedThemes=academicScopeThemes(s.profile);
+  const allowedYears=["10.º","11.º","12.º"].filter(y=>scopedThemes.some(t=>t.year===y));
+  const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)&&allowedYears.includes(s.profile.schoolYear)
+    ?s.profile.schoolYear
+    :(allowedYears.at(-1)||"10.º");
+  const [year,setYear]=useState(preferredYear);
+  useEffect(()=>{if(!allowedYears.includes(year))setYear(preferredYear)},[s.profile?.schoolYear]);
+  const scopeIds=new Set(scopedThemes.map(t=>t.id));
+  const hypotheses=allLearningHypotheses(s,8).filter(h=>scopeIds.has(h.targetThemeId));
   const activeHypotheses=hypotheses.filter(h=>h.active);
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
   const overview=measuredThemes(s).sort((a,b)=>(s.scores[b.id].domain??0)-(s.scores[a.id].domain??0)).slice(0,5);
@@ -1514,7 +1521,7 @@ function Progress({s,go}){
     <FriendsBetaDisclaimer s={s} compact/>
     <details className="progressDetails"><summary>Ver mapa completo →</summary>
     <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
-    <div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
+    <div className="chips">{allowedYears.map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
 
     {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
       {activeHypotheses.length>0?<>{activeHypotheses.slice(0,5).map(h=><div className={"hypothesisRow lifecycle-"+h.lifecycleStatus} key={h.key}>
@@ -1543,7 +1550,7 @@ function Progress({s,go}){
       <p>Uma hipótese pode ganhar força, tornar-se ambígua, ser resolvida ou ficar desatualizada. Se aparecer nova evidência contraditória, pode ser reaberta. <b>Hipótese não é diagnóstico definitivo.</b></p>
     </div>}
 
-    {byYear(year).map(t=>{
+    {scopedThemes.filter(t=>t.year===year).map(t=>{
       const v=s.scores[t.id],has=v.domain!==null;
       return <div className={"prog "+(!has?"unmeasured":"")} key={t.id}>
         <div className="progHead"><b>{t.short}</b><small>{t.name}</small></div>
@@ -1565,12 +1572,14 @@ function Progress({s,go}){
 
 function Exams({s,go,startMini}){
   const last=s.lastExam;
-  const miniAvailable=buildMiniExam(s,8).length;
+  const miniQuestions=buildMiniExam(s,8);
+  const miniAvailable=miniQuestions.length;
   const miniReady=miniAvailable>=8;
+  const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
   return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame A+</b><span>{miniReady?"8 questões · ~10–15 min · 10.º, 11.º e 12.º":`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+      <div><b>⚡ Mini-exame A+</b><span>{miniReady?`8 questões · ~10–15 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{String(last.score20).replace('.',',')}/20</b></div><span>{last.correctCount}/{last.total} corretas</span></div>}
