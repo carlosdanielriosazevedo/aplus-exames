@@ -611,7 +611,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Para a mesma A, A(3)=",
+      "q": "Se A(x)=∫_1^x (t−2)dt, então A(3)=",
       "o": [
         "1.",
         "−1/2.",
@@ -638,7 +638,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "O facto A(3)=0 no item anterior ocorre porque...",
+      "q": "Se A(x)=∫_1^x (t−2)dt, então A(3)=0 porque...",
       "o": [
         "o integrando é zero em todo intervalo.",
         "a derivada é zero em3.",
