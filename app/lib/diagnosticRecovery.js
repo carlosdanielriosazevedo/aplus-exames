@@ -2,7 +2,8 @@ import {DIAGNOSTIC_BLUEPRINT} from "../data/content.js";
 import {applyEvidence,diagnosticAnchor,diagnosticProbe,nextDiagnosticDifficulty} from "./engine.js";
 import {contentRevisionFingerprint} from "./validationFingerprint.js";
 
-export const DIAGNOSTIC_DRAFT_VERSION=2;
+export const DIAGNOSTIC_DRAFT_VERSION=3;
+export const SUPPORTED_DIAGNOSTIC_DRAFT_VERSIONS=[2,3];
 export const DIAGNOSTIC_CLOCK_SKEW_MS=1000*60*10;
 const integer=(x,min=0)=>Number.isInteger(x)&&x>=min;
 
@@ -18,11 +19,21 @@ export function diagnosticResponseId(sessionId,ordinal,itemId,fingerprint){
   return `${sessionId}:diagnostic:${ordinal}:${itemId}:${fingerprint}`;
 }
 
-export function createDiagnosticDraft({session,item,betaMode="internal",difficulty,now=Date.now()}){
+export function createDiagnosticDraft({session,item,betaMode="internal",difficulty,blueprint=DIAGNOSTIC_BLUEPRINT,now=Date.now()}){
   return {kind:"diagnostic",version:DIAGNOSTIC_DRAFT_VERSION,betaMode,session:{...session},sessionId:session.id,
     startedAt:session.startedAt||now,phase:"active",initialDifficulty:difficulty,anchorIndex:0,difficulty,
-    current:snapshotDiagnosticItem(item),anchorResults:[],probeCount:0,responses:[],pendingResponse:null,
+    blueprint:[...blueprint],current:snapshotDiagnosticItem(item),anchorResults:[],probeCount:0,responses:[],pendingResponse:null,
     sel:null,fb:null,completionAt:null};
+}
+
+function draftBlueprint(draft){
+  return draft?.version>=3?draft.blueprint:DIAGNOSTIC_BLUEPRINT;
+}
+
+function validBlueprint(blueprint){
+  return Array.isArray(blueprint)&&blueprint.length>0
+    &&blueprint.every(x=>typeof x==="string"&&x)
+    &&new Set(blueprint).size===blueprint.length;
 }
 
 export function recoverLegacyDiagnosticSessions({state,saveState,now=Date.now()}){
@@ -47,10 +58,11 @@ function validSnapshot(item){
 }
 
 function deterministicSequence(draft){
+  const blueprint=draftBlueprint(draft);
   let anchorIndex=0,difficulty=draft.initialDifficulty,probeCount=0,expectedProbe=null;
   const anchorResults=[];
   for(const row of draft.responses){
-    const expectedTheme=DIAGNOSTIC_BLUEPRINT[anchorIndex];
+    const expectedTheme=blueprint[anchorIndex];
     const expectedRole=expectedProbe?"probe":"anchor";
     if(row.item.role!==expectedRole||row.item.themeId!==expectedTheme)return {ok:false,reason:"impossible_sequence"};
     if(expectedProbe&&(row.item.id!==expectedProbe.id||row.item.fingerprint!==expectedProbe.fingerprint))return {ok:false,reason:"probe_sequence_mismatch"};
@@ -64,7 +76,7 @@ function deterministicSequence(draft){
     }else{anchorIndex++;expectedProbe=null}
   }
   return {ok:true,anchorIndex,difficulty,probeCount,anchorResults,
-    expectedRole:expectedProbe?"probe":"anchor",expectedTheme:DIAGNOSTIC_BLUEPRINT[anchorIndex]||null,expectedProbe};
+    expectedRole:expectedProbe?"probe":"anchor",expectedTheme:blueprint[anchorIndex]||null,expectedProbe};
 }
 
 function validTransaction(row,draft,index,status,now){
@@ -77,7 +89,8 @@ function validTransaction(row,draft,index,status,now){
 }
 
 export function validateDiagnosticDraft(draft,{now=Date.now()}={}){
-  if(!draft||draft.kind!=="diagnostic"||draft.version!==DIAGNOSTIC_DRAFT_VERSION)return {ok:false,reason:"unsupported_version"};
+  if(!draft||draft.kind!=="diagnostic"||!SUPPORTED_DIAGNOSTIC_DRAFT_VERSIONS.includes(draft.version))return {ok:false,reason:"unsupported_version"};
+  if(draft.version>=3&&!validBlueprint(draft.blueprint))return {ok:false,reason:"invalid_blueprint"};
   if(typeof draft.sessionId!=="string"||draft.session?.id!==draft.sessionId||draft.session?.kind!=="diagnostic")return {ok:false,reason:"invalid_session"};
   if(!Number.isFinite(draft.startedAt)||draft.startedAt>now+DIAGNOSTIC_CLOCK_SKEW_MS)return {ok:false,reason:"invalid_started_at"};
   if(draft.savedAt!==undefined&&(!Number.isFinite(draft.savedAt)||draft.savedAt>now+DIAGNOSTIC_CLOCK_SKEW_MS))return {ok:false,reason:"invalid_saved_at"};
@@ -94,8 +107,9 @@ export function validateDiagnosticDraft(draft,{now=Date.now()}={}){
   if(draft.fb!==null&&(!draft.fb||typeof draft.fb.correct!=="boolean"||draft.sel===null||draft.fb.correct!==(draft.sel===draft.current.a)))return {ok:false,reason:"invalid_feedback"};
   if(draft.pendingResponse&&(!validTransaction(draft.pendingResponse,draft,draft.responses.length,"pending",now)||draft.pendingResponse.item.id!==draft.current.id||draft.pendingResponse.item.fingerprint!==draft.current.fingerprint))return {ok:false,reason:"invalid_pending"};
   const done=draft.anchorResults.length,successRate=done?draft.anchorResults.filter(x=>x.correct).length/done:0;
-  const canComplete=(done>=5&&successRate>=.80&&draft.probeCount===0)
-    ||(done>=DIAGNOSTIC_BLUEPRINT.length&&!sequence.expectedProbe);
+  const blueprint=draftBlueprint(draft);
+  const canComplete=(done>=Math.min(5,blueprint.length)&&successRate>=.80&&draft.probeCount===0)
+    ||(done>=blueprint.length&&!sequence.expectedProbe);
   if(draft.phase==="completion_pending"&&(!canComplete||draft.pendingResponse))return {ok:false,reason:"invalid_completion"};
   if(draft.phase==="active"&&canComplete&&!draft.pendingResponse)return {ok:false,reason:"completion_not_marked"};
   return {ok:true,sequence};
@@ -139,8 +153,9 @@ export function advanceDiagnosticDraft(draft,state,tx){
     if(item)return {...draft,responses,pendingResponse:null,anchorResults,difficulty:nextDiagnosticDifficulty(draft.difficulty,false,false),probeCount:draft.probeCount+1,current:snapshotDiagnosticItem(item),sel:null,fb:null};
   }
   const done=anchorResults.length,successRate=done?anchorResults.filter(x=>x.correct).length/done:0;
-  const enoughEarly=done>=5&&successRate>=.80&&draft.probeCount===0;
-  const enoughNormal=done>=DIAGNOSTIC_BLUEPRINT.length;
+  const blueprint=draftBlueprint(draft);
+  const enoughEarly=done>=Math.min(5,blueprint.length)&&successRate>=.80&&draft.probeCount===0;
+  const enoughNormal=done>=blueprint.length;
   if(enoughEarly||enoughNormal){
     const finalIndex=draft.anchorIndex+1;
     const finalDifficulty=tx.item.role==="anchor"?nextDiagnosticDifficulty(draft.difficulty,tx.correct,false):draft.difficulty;
@@ -148,7 +163,7 @@ export function advanceDiagnosticDraft(draft,state,tx){
   }
   let item,anchorIndex=draft.anchorIndex,difficulty=draft.difficulty,probeCount=draft.probeCount;
   anchorIndex++;if(tx.item.role==="anchor")difficulty=nextDiagnosticDifficulty(difficulty,tx.correct,false);
-  item=diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[anchorIndex],difficulty,state);
+  item=diagnosticAnchor(blueprint[anchorIndex],difficulty,state);
   if(!item)return {error:"missing_next_item"};
   return {...draft,responses,pendingResponse:null,anchorResults,anchorIndex,difficulty,probeCount,current:snapshotDiagnosticItem(item),sel:null,fb:null};
 }
