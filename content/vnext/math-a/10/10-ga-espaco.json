@@ -1043,7 +1043,7 @@
       "year": "10.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "O ponto Q=(5,3,0) pertence à mesma reta?",
+      "q": "O ponto Q=(5,3,0) pertence à reta (x,y,z)=(1,0,2)+t(2,1,−1)?",
       "o": [
         "Sim.",
         "Só se t=2.",
