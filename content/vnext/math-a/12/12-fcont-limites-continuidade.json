@@ -314,7 +314,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Se definirmos f(1)=2 no item anterior, a função torna-se...",
+      "q": "Para f(x)=(x²−1)/(x−1), x≠1, sabe-se que lim_{x→1}f(x)=2. Se definirmos f(1)=2, a função torna-se...",
       "o": [
         "descontínua em1.",
         "não definida em1.",
