@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ele",
+  "subtopicId": "10-ele-dhondt",
+  "subtopic": "Método de D'Hondt",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+ com listas e votações sintéticas. Não ligado ao motor atual. Empates só são resolvidos quando o enunciado fornece regra; caso contrário são assinalados como não unívocos. Requer QA matemático e revisão pedagógica antes de elegibilidade.",
+  "questions": [
+    {
+      "id": "VN10ELE-DHO-001",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No método de D'Hondt, os votos de cada lista são sucessivamente divididos por...",
+      "o": [
+        "1, 2, 3, 4, ...",
+        "2, 4, 6, 8, ...",
+        "1, 3, 5, 7, ...",
+        "10, 100, 1000, ..."
+      ],
+      "a": 0,
+      "sol": "Os quocientes de D'Hondt obtêm-se dividindo os votos de cada lista por 1, 2, 3, 4, ...",
+      "hyp": "Pode confundir a sequência de divisores de D'Hondt com outras regras de partilha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:definicao-divisores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-002",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma lista recebeu 1200 votos. Qual é o seu segundo quociente no método de D'Hondt?",
+      "o": [
+        "1200",
+        "600",
+        "400",
+        "300"
+      ],
+      "a": 1,
+      "sol": "O segundo quociente é 1200÷2=600.",
+      "hyp": "Pode usar o número de ordem do mandato como multiplicador em vez de divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-003",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma lista recebeu 900 votos. Qual é o seu terceiro quociente de D'Hondt?",
+      "o": [
+        "900",
+        "450",
+        "300",
+        "225"
+      ],
+      "a": 2,
+      "sol": "O terceiro quociente é 900÷3=300.",
+      "hyp": "Pode dividir sempre por 2 em vez de acompanhar a ordem do divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-004",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma lista tem 1000 votos. Quais são os seus três primeiros quocientes de D'Hondt?",
+      "o": [
+        "1000, 333,33..., 250",
+        "500, 333,33..., 250",
+        "1000, 750, 500",
+        "1000, 500, 333,33..."
+      ],
+      "a": 3,
+      "sol": "Calculam-se 1000÷1, 1000÷2 e 1000÷3.",
+      "hyp": "Pode saltar divisores ou começar a divisão em 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:sequencia-quocientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-005",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para distribuir 5 mandatos por D'Hondt, o procedimento central é...",
+      "o": [
+        "escolher os 5 maiores quocientes produzidos pelas listas.",
+        "dar um mandato a cada lista e sortear o restante.",
+        "ordenar apenas o número original de votos.",
+        "calcular a média aritmética dos votos."
+      ],
+      "a": 0,
+      "sol": "Cada mandato corresponde a um dos maiores quocientes globais, até preencher os lugares disponíveis.",
+      "hyp": "Pode confundir D'Hondt com uma simples ordenação das listas por votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:selecionar-maiores-quocientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-006",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Há 4 mandatos e três listas: A=1000 votos, B=800 e C=600. Qual é a distribuição por D'Hondt?",
+      "o": [
+        "A:1, B:2, C:1",
+        "A:2, B:1, C:1",
+        "A:2, B:2, C:0",
+        "A:3, B:1, C:0"
+      ],
+      "a": 1,
+      "sol": "Os quatro maiores quocientes são 1000(A), 800(B), 600(C) e 500(A). Logo A=2, B=1, C=1.",
+      "hyp": "Pode atribuir mandatos diretamente pelas percentagens sem ordenar quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:alocacao-3-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-007",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Há 5 mandatos: A=1300, B=950 e C=520 votos. Qual é a distribuição de mandatos por D'Hondt?",
+      "o": [
+        "A:3, B:1, C:1",
+        "A:2, B:3, C:0",
+        "A:2, B:2, C:1",
+        "A:3, B:2, C:0"
+      ],
+      "a": 2,
+      "sol": "Os cinco maiores quocientes são 1300(A), 950(B), 650(A), 520(C) e 475(B). Distribuição 2-2-1.",
+      "hyp": "Pode ignorar o segundo quociente de B ou o primeiro de C.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:alocacao-3-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-008",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com 6 mandatos e votos A=2100, B=1600, C=900, quantos mandatos recebe A pelo método de D'Hondt?",
+      "o": [
+        "2",
+        "4",
+        "5",
+        "3"
+      ],
+      "a": 3,
+      "sol": "Os seis maiores quocientes dão A três lugares, B dois e C um.",
+      "hyp": "Pode contar apenas a posição de A nos votos originais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:mandatos-lista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-009",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com 6 mandatos e votos A=2100, B=1600, C=900, quantos mandatos recebe B?",
+      "o": [
+        "2",
+        "1",
+        "3",
+        "4"
+      ],
+      "a": 0,
+      "sol": "A distribuição é A=3, B=2, C=1.",
+      "hyp": "Pode confundir o número de quocientes calculados com o número de mandatos atribuídos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:mandatos-lista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-010",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para A=1300, B=950, C=520 e 5 mandatos, qual é o quociente que atribui o 5.º mandato?",
+      "o": [
+        "650 de A",
+        "475 de B",
+        "520 de C",
+        "433,33... de A"
+      ],
+      "a": 1,
+      "sol": "Após 1300(A), 950(B), 650(A) e 520(C), o 5.º maior é 950÷2=475, de B.",
+      "hyp": "Pode parar a ordenação antes do último lugar ou usar apenas primeiros quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-011",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se há 7 mandatos para distribuir, quantos mandatos devem existir no total no final da aplicação de D'Hondt?",
+      "o": [
+        "6",
+        "8",
+        "7",
+        "Depende do número de listas"
+      ],
+      "a": 2,
+      "sol": "O método distribui exatamente o número de lugares definido, salvo regras externas não indicadas.",
+      "hyp": "Pode achar que algumas cadeiras ficam por preencher se uma lista tiver poucos votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:conservacao-mandatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-012",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se todos os votos de todas as listas forem multiplicados por 10, mantendo o número de mandatos, o que acontece à distribuição de D'Hondt?",
+      "o": [
+        "Muda sempre a favor da lista maior.",
+        "Todas as listas recebem mais mandatos.",
+        "Passa a existir empate.",
+        "Mantém-se, porque todos os quocientes são multiplicados por 10."
+      ],
+      "a": 3,
+      "sol": "Multiplicar todos os votos pelo mesmo fator positivo multiplica todos os quocientes pelo mesmo fator e preserva a sua ordem.",
+      "hyp": "Pode pensar que a escala absoluta dos votos, por si só, altera a distribuição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:invariancia-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-013",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Adicionar exatamente 100 votos a todas as listas garante que a distribuição de D'Hondt fica igual?",
+      "o": [
+        "Não; somar a mesma constante não multiplica todos os quocientes pelo mesmo fator e pode alterar a ordem.",
+        "Sim, porque todas aumentam o mesmo.",
+        "Sim, desde que haja três listas.",
+        "Não, porque D'Hondt não usa votos."
+      ],
+      "a": 0,
+      "sol": "A invariância é garantida para multiplicação comum, não para adição comum. A soma pode alterar razões e quocientes de forma diferente.",
+      "hyp": "Pode generalizar incorretamente a invariância por escala para uma translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:nao-invariancia-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-014",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma lista tem 40% dos votos. É correto concluir, sem fazer as contas, que receberá exatamente 40% dos mandatos por D'Hondt?",
+      "o": [
+        "Sim, sempre.",
+        "Não; a distribuição é discreta e depende da comparação dos quocientes.",
+        "Sim, se houver mais de duas listas.",
+        "Não, porque os votos não entram no método."
+      ],
+      "a": 1,
+      "sol": "Os mandatos são indivisíveis e são atribuídos pelos maiores quocientes, pelo que a proporção final pode não coincidir exatamente com a percentagem de votos.",
+      "hyp": "Pode tratar uma partilha discreta como uma proporcionalidade contínua exata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:proporcionalidade-discreta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-015",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Sem qualquer barreira eleitoral adicional indicada no problema, uma lista pequena...",
+      "o": [
+        "fica automaticamente excluída se tiver menos de 5%.",
+        "recebe sempre pelo menos um mandato.",
+        "pode obter ou não mandato, dependendo dos seus quocientes face aos restantes.",
+        "recebe sempre zero mandatos."
+      ],
+      "a": 2,
+      "sol": "No modelo matemático puro de D'Hondt dado no enunciado, contam os quocientes. Um limiar legal só deve ser aplicado se for explicitado.",
+      "hyp": "Pode introduzir uma regra de barreira eleitoral que não foi fornecida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:nao-inventar-limiar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-016",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Duas listas têm A=600 e B=400 votos e há 3 mandatos. Qual é a distribuição por D'Hondt?",
+      "o": [
+        "A:1, B:2",
+        "A:3, B:0",
+        "A:1, B:1 e sobra um",
+        "A:2, B:1"
+      ],
+      "a": 3,
+      "sol": "Os maiores quocientes são 600(A), 400(B) e 300(A). Logo A=2 e B=1.",
+      "hyp": "Pode repartir os três lugares apenas pela ordem inicial dos votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:alocacao-2-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-017",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A lista A tem 1500 votos. Qual destes valores é o seu 4.º quociente de D'Hondt?",
+      "o": [
+        "375",
+        "750",
+        "500",
+        "300"
+      ],
+      "a": 0,
+      "sol": "1500÷4=375.",
+      "hyp": "Pode confundir quarto quociente com dividir por 3 ou 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-018",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A=1200 e B=600 votos. Qual igualdade de quocientes ocorre?",
+      "o": [
+        "A÷3 = B÷1",
+        "A÷2 = B÷1",
+        "A÷1 = B÷2",
+        "A÷4 = B÷1"
+      ],
+      "a": 1,
+      "sol": "1200÷2=600 e 600÷1=600.",
+      "hyp": "Pode não reconhecer empates entre quocientes de ordens diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:empate-quocientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-019",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa tabela de D'Hondt, a lista A tem 1800 votos. Qual valor falta na sequência 1800, 900, ___, 450?",
+      "o": [
+        "720",
+        "550",
+        "600",
+        "500"
+      ],
+      "a": 2,
+      "sol": "Os divisores são 1,2,3,4; 1800÷3=600.",
+      "hyp": "Pode inferir uma progressão aritmética em vez de divisões sucessivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:completar-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-020",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um aluno escreveu para 1200 votos os quocientes 1200, 600, 300, 150. Qual é o primeiro erro?",
+      "o": [
+        "O 1.º quociente deveria ser 600.",
+        "O 2.º deveria ser 400.",
+        "Não há erro.",
+        "O 3.º deveria ser 400, pois 1200÷3=400."
+      ],
+      "a": 3,
+      "sol": "Os quocientes corretos começam 1200, 600, 400, 300. O primeiro erro está no 3.º valor.",
+      "hyp": "Pode dividir repetidamente por 2 em vez de dividir os votos originais por 1,2,3,...",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:detetar-erro-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-021",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para A=1300, B=950 e C=520, após atribuir 4 mandatos os quocientes selecionados são 1300(A), 950(B), 650(A) e 520(C). Qual lista recebe o 5.º mandato?",
+      "o": [
+        "B",
+        "A",
+        "C",
+        "Não é possível saber"
+      ],
+      "a": 0,
+      "sol": "Os próximos quocientes relevantes são A÷3≈433,33, B÷2=475 e C÷2=260; vence 475 de B.",
+      "hyp": "Pode comparar quocientes já utilizados em vez dos próximos disponíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:proximo-mandato",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-022",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com votos A=900, B=650, C=400, a distribuição de 4 mandatos é A=2, B=1, C=1. Se passar a haver 5 mandatos, quem recebe o novo lugar?",
+      "o": [
+        "A",
+        "B",
+        "C",
+        "Há empate"
+      ],
+      "a": 1,
+      "sol": "O 5.º maior quociente é B÷2=325. A distribuição passa a A=2, B=2, C=1.",
+      "hyp": "Pode assumir que o lugar adicional vai sempre para a lista mais votada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:mandato-adicional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-023",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com A=900, B=650, C=400 e já 5 mandatos distribuídos como A=2, B=2, C=1, quem recebe o 6.º mandato?",
+      "o": [
+        "B",
+        "C",
+        "A",
+        "Nenhuma lista"
+      ],
+      "a": 2,
+      "sol": "O próximo maior quociente é A÷3=300; B÷3≈216,67 e C÷2=200. O 6.º lugar vai para A.",
+      "hyp": "Pode reutilizar B÷2 depois de esse quociente já ter atribuído um lugar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:mandato-adicional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-024",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para garantir quocientes suficientes para distribuir 6 mandatos, é sempre suficiente calcular, para cada lista, divisões pelos inteiros...",
+      "o": [
+        "1 a 3",
+        "1 a 4",
+        "2 a 7",
+        "1 a 6"
+      ],
+      "a": 3,
+      "sol": "Nenhuma lista pode receber mais do que os 6 lugares disponíveis, por isso os divisores 1,2,...,6 são suficientes.",
+      "hyp": "Pode calcular demasiado poucos quocientes para preencher todos os lugares possíveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quantos-divisores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-025",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma distribuição final para 8 mandatos foi registada como A=4, B=3, C=2. O que se conclui imediatamente?",
+      "o": [
+        "Está errada, porque soma 9 mandatos.",
+        "Está correta.",
+        "Está errada porque A não pode ter 4.",
+        "Só é possível com quatro listas."
+      ],
+      "a": 0,
+      "sol": "4+3+2=9, mas só existem 8 mandatos. Há uma inconsistência independentemente dos votos.",
+      "hyp": "Pode validar cada parcela isoladamente sem verificar o total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:auditar-total-mandatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-026",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Há 8 mandatos e votos A=2500, B=1800, C=1200, D=700. Qual é a distribuição por D'Hondt?",
+      "o": [
+        "A:3, B:3, C:1, D:1",
+        "A:4, B:2, C:1, D:1",
+        "A:4, B:3, C:1, D:0",
+        "A:3, B:2, C:2, D:1"
+      ],
+      "a": 1,
+      "sol": "Os 8 maiores quocientes conduzem a A=4, B=2, C=1 e D=1.",
+      "hyp": "Pode excluir D apenas por ser a lista menor sem comparar o seu primeiro quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:alocacao-4-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-027",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Há 7 mandatos e votos A=3500, B=2400, C=1100. Quantos mandatos recebe A?",
+      "o": [
+        "3",
+        "5",
+        "4",
+        "6"
+      ],
+      "a": 2,
+      "sol": "Os sete maiores quocientes dão A=4, B=2 e C=1.",
+      "hyp": "Pode aproximar a partilha apenas pela percentagem sem ordenar os quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:mandatos-lista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-028",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com A=5000, B=3200, C=1800 e 8 mandatos, qual é a distribuição por D'Hondt?",
+      "o": [
+        "A:5, B:2, C:1",
+        "A:4, B:2, C:2",
+        "A:3, B:3, C:2",
+        "A:4, B:3, C:1"
+      ],
+      "a": 3,
+      "sol": "Os oito maiores quocientes atribuem 4 lugares a A, 3 a B e 1 a C.",
+      "hyp": "Pode arredondar quotas proporcionais em vez de usar a ordenação D'Hondt.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:alocacao-3-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-029",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Por que razão o método de D'Hondt é chamado um método de 'maiores médias/quocientes' neste contexto?",
+      "o": [
+        "Porque se escolhem sucessivamente os maiores valores obtidos ao dividir os votos por 1,2,3,...",
+        "Porque se calcula apenas a média dos votos de todas as listas.",
+        "Porque vence a lista cuja média de candidatos é maior.",
+        "Porque todos os quocientes são somados numa única média."
+      ],
+      "a": 0,
+      "sol": "A atribuição resulta da ordenação dos quocientes de cada lista, produzidos pelos divisores inteiros sucessivos.",
+      "hyp": "Pode interpretar 'médias' como uma média aritmética global dos votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:interpretar-metodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-030",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com A=1600, B=1100, C=700 e 5 mandatos, qual é a sequência de listas que recebe os lugares, por ordem dos quocientes selecionados?",
+      "o": [
+        "A, A, B, C, B",
+        "A, B, A, C, B",
+        "A, B, C, A, B",
+        "A, B, A, B, C"
+      ],
+      "a": 1,
+      "sol": "Os maiores quocientes são 1600(A), 1100(B), 800(A), 700(C) e 550(B).",
+      "hyp": "Pode ordenar os mandatos apenas pela contagem final, sem respeitar a ordem dos quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:sequencia-mandatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-031",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num quadro de D'Hondt surge o quociente 700 associado à lista A, que tem 2100 votos. De que divisor resulta?",
+      "o": [
+        "2",
+        "4",
+        "3",
+        "5"
+      ],
+      "a": 2,
+      "sol": "2100÷3=700.",
+      "hyp": "Pode confundir o número do quociente com a sua posição na tabela global.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:reconstruir-divisor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-032",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para A=2800, B=1700 e C=900, com 6 mandatos, qual é o menor dos seis quocientes vencedores?",
+      "o": [
+        "900 de C",
+        "933,33... de A",
+        "700 de A",
+        "850 de B"
+      ],
+      "a": 3,
+      "sol": "Os seis maiores são 2800(A),1700(B),1400(A),933,33...(A),900(C),850(B). O menor selecionado é 850.",
+      "hyp": "Pode confundir o último quociente selecionado com o próximo não selecionado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-033",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com A=900, B=650, C=400 e 4 mandatos, C obtém algum mandato?",
+      "o": [
+        "Sim, um.",
+        "Sim, dois.",
+        "Não.",
+        "Só se A desistir."
+      ],
+      "a": 0,
+      "sol": "Os quatro maiores quocientes são 900(A),650(B),450(A),400(C). C recebe um lugar.",
+      "hyp": "Pode excluir automaticamente a lista com menos votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:lista-pequena-obtem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-034",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com A=980, B=760, C=460, D=300 e 6 mandatos, qual lista fica sem mandato?",
+      "o": [
+        "A",
+        "D",
+        "B",
+        "C"
+      ],
+      "a": 1,
+      "sol": "Os seis maiores quocientes atribuem A=3, B=2, C=1 e D=0.",
+      "hyp": "Pode supor que todas as listas recebem um mandato antes de haver repetições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:lista-sem-mandato",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-035",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com os mesmos votos A=900, B=650, C=400, como evolui a distribuição quando os mandatos passam de 4 para 5 e depois 6?",
+      "o": [
+        "2-1-1 → 3-1-1 → 3-2-1",
+        "2-2-0 → 2-2-1 → 2-2-2",
+        "2-1-1 → 2-2-1 → 3-2-1",
+        "3-1-0 → 3-1-1 → 3-2-1"
+      ],
+      "a": 2,
+      "sol": "Para 4 lugares: 2-1-1; o 5.º vai a B; o 6.º vai a A.",
+      "hyp": "Pode recalcular incorretamente a sequência ao adicionar lugares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:evolucao-numero-mandatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-036",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se um problema substituir A=900, B=650, C=400 por A=9000, B=6500, C=4000, mantendo os mesmos mandatos, a distribuição...",
+      "o": [
+        "muda porque existem mais votos.",
+        "dá um mandato extra a cada lista.",
+        "fica indeterminada.",
+        "mantém-se."
+      ],
+      "a": 3,
+      "sol": "Todos os votos foram multiplicados por 10, portanto todos os quocientes também; a ordem mantém-se.",
+      "hyp": "Pode reagir ao aumento dos números absolutos sem reconhecer a proporcionalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:invariancia-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-037",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Por que é perigoso arredondar cedo demais quocientes muito próximos numa aplicação de D'Hondt?",
+      "o": [
+        "Porque a ordenação dos quocientes pode ser alterada artificialmente.",
+        "Porque D'Hondt proíbe números decimais.",
+        "Porque todos os quocientes têm de ser inteiros.",
+        "Porque arredondar aumenta sempre os votos."
+      ],
+      "a": 0,
+      "sol": "Se dois valores forem próximos, um arredondamento prematuro pode criar ou eliminar um empate e trocar a ordem relevante.",
+      "hyp": "Pode tratar o arredondamento como uma operação sem efeito na comparação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-038",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é 1000÷3, quociente que pode surgir numa tabela de D'Hondt?",
+      "o": [
+        "300",
+        "333,33...",
+        "350",
+        "500"
+      ],
+      "a": 1,
+      "sol": "1000÷3=333,33... periódico.",
+      "hyp": "Pode arredondar para um valor grosseiro ou dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-039",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma lista tem 2500 votos. Qual é o seu 4.º quociente?",
+      "o": [
+        "500",
+        "833,33...",
+        "625",
+        "1000"
+      ],
+      "a": 2,
+      "sol": "2500÷4=625.",
+      "hyp": "Pode usar o terceiro ou quinto divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-040",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na fronteira do último mandato surgem dois quocientes exatamente iguais e o enunciado não fornece regra de desempate. O que deve fazer a resolução?",
+      "o": [
+        "Inventar um desempate alfabético.",
+        "Dar o lugar à lista com menos votos.",
+        "Ignorar um dos quocientes.",
+        "Assinalar que, com os dados fornecidos, a atribuição desse lugar não é unívoca."
+      ],
+      "a": 3,
+      "sol": "Um empate exato no quociente decisivo exige uma regra adicional; não deve ser inventada.",
+      "hyp": "Pode introduzir uma regra de desempate não presente no problema.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:empate-sem-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-041",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Com votos A=1300, B=950, C=520 e 5 mandatos, A recebe 40% dos lugares (2 em 5), apesar de ter cerca de 46,9% dos votos. O que ilustra isto?",
+      "o": [
+        "A partilha de mandatos é discreta e não reproduz necessariamente as percentagens de votos de forma exata.",
+        "D'Hondt ignora os votos de A.",
+        "A deveria receber 2,345 mandatos.",
+        "O método está mal aplicado."
+      ],
+      "a": 0,
+      "sol": "Como os mandatos são inteiros, a representação final aproxima proporções através de uma regra discreta de quocientes.",
+      "hyp": "Pode esperar igualdade exata entre percentagem de votos e percentagem de lugares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:discretizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-042",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se A recebe 4 dos 7 mandatos, que percentagem dos lugares obtém aproximadamente?",
+      "o": [
+        "42,9%",
+        "57,1%",
+        "50%",
+        "70%"
+      ],
+      "a": 1,
+      "sol": "4÷7≈0,571, ou seja, cerca de 57,1%.",
+      "hyp": "Pode confundir percentagem de lugares com percentagem de votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quota-mandatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-043",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com A=900, B=650, C=400 e 4 mandatos, o quociente de C que lhe dá um lugar é 400. Qual é o próximo quociente de A que fica abaixo desse valor?",
+      "o": [
+        "450",
+        "225",
+        "300",
+        "180"
+      ],
+      "a": 2,
+      "sol": "A já usa 900 e 450 nos dois lugares que recebe; o quociente seguinte é 900÷3=300, inferior a 400.",
+      "hyp": "Pode reutilizar um quociente que já foi selecionado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:proximo-nao-selecionado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-044",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com A=900, B=650, C=400, a passagem de 4 para 5 mandatos atribui o lugar adicional a B. Qual quociente decide esse lugar?",
+      "o": [
+        "B÷1=650",
+        "A÷3=300",
+        "C÷2=200",
+        "B÷2=325"
+      ],
+      "a": 3,
+      "sol": "Depois dos quatro primeiros lugares, o maior quociente ainda não usado é 650÷2=325.",
+      "hyp": "Pode comparar apenas os votos originais ou um quociente já selecionado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-mandato-adicional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-045",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Depois de distribuídos 5 mandatos para A=900, B=650, C=400, qual quociente atribui o 6.º lugar?",
+      "o": [
+        "A÷3=300",
+        "B÷3≈216,67",
+        "C÷2=200",
+        "A÷4=225"
+      ],
+      "a": 0,
+      "sol": "O maior quociente seguinte é 900÷3=300.",
+      "hyp": "Pode esquecer quantos mandatos cada lista já recebeu ao escolher o divisor seguinte.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:quociente-mandato-adicional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-046",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela apresenta para A=1800 os valores 1800, 900, 600, 450 e para B=1000 os valores 1000, 500, 333,33..., 250. Se há 4 mandatos, quais quocientes são selecionados?",
+      "o": [
+        "1800(A),1000(B),900(A),500(B)",
+        "1800(A),1000(B),900(A),600(A)",
+        "1800(A),900(A),600(A),450(A)",
+        "1000(B),900(A),600(A),500(B)"
+      ],
+      "a": 1,
+      "sol": "Ordenando globalmente: 1800, 1000, 900, 600. Assim A recebe três mandatos e B um.",
+      "hyp": "Pode ler cada coluna separadamente em vez de ordenar todos os quocientes em conjunto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:ordenar-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-047",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com A=1800, B=1000 e 4 mandatos, qual é a distribuição final?",
+      "o": [
+        "A:2, B:2",
+        "A:4, B:0",
+        "A:3, B:1",
+        "A:1, B:3"
+      ],
+      "a": 2,
+      "sol": "Os quatro maiores quocientes são 1800(A),1000(B),900(A),600(A), dando 3-1.",
+      "hyp": "Pode supor uma repartição 2-2 apenas por existirem duas listas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:alocacao-2-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-048",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Num problema com s mandatos e várias listas, por que motivo não é necessário calcular quocientes com divisor superior a s para decidir os s lugares?",
+      "o": [
+        "Porque os divisores superiores a s são proibidos por lei matemática.",
+        "Porque todos esses quocientes seriam zero.",
+        "Porque só existe uma lista.",
+        "Porque nenhuma lista pode receber mais de s mandatos."
+      ],
+      "a": 3,
+      "sol": "Mesmo que uma lista ganhasse todos os lugares, usaria no máximo os divisores 1 até s.",
+      "hyp": "Pode não relacionar o número máximo de lugares de uma lista com o número total disponível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:limite-divisores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-049",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Qual diferença essencial existe entre o método de Borda estudado nas eleições e D'Hondt na partilha de mandatos?",
+      "o": [
+        "Borda usa ordenações de preferências e pontos; D'Hondt parte de totais de votos e quocientes sucessivos.",
+        "São exatamente o mesmo cálculo.",
+        "D'Hondt exige ordenar individualmente todos os candidatos em cada boletim.",
+        "Borda divide votos por 1,2,3,..."
+      ],
+      "a": 0,
+      "sol": "Borda agrega posições em preferências; D'Hondt distribui lugares a partir de quocientes dos totais de votos.",
+      "hyp": "Pode confundir dois métodos do mesmo tema curricular por ambos produzirem uma classificação/partilha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:comparar-borda-dhondt",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-DHO-050",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-dhondt",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Há 7 mandatos e votos A=4200, B=3100 e C=1700. Qual afirmação resume corretamente a aplicação de D'Hondt?",
+      "o": [
+        "A recebe 3, B 3 e C 1.",
+        "A recebe 4, B 2 e C 1.",
+        "A recebe 4, B 1 e C 2.",
+        "A recebe 5, B 2 e C 0."
+      ],
+      "a": 1,
+      "sol": "Os 7 maiores quocientes são 4200(A), 3100(B), 2100(A), 1700(C), 1550(B), 1400(A) e 1050(A). Resultado: A=4, B=2, C=1.",
+      "hyp": "Pode distribuir lugares por arredondamento intuitivo sem verificar a sequência de quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-dhondt:modelacao-completa-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

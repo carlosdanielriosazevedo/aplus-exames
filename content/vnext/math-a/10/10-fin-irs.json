@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fin",
+  "subtopicId": "10-fin-irs",
+  "subtopic": "IRS, taxas, escalões e progressividade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Todas as tabelas e deduções são didáticas/fictícias e autocontidas; não representam legislação fiscal real ou atual. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FIN-IRS-001",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa tabela progressiva por escalões, o que significa uma taxa marginal de 20% num certo escalão?",
+      "o": [
+        "Aplica-se apenas à parcela do rendimento situada nesse escalão.",
+        "Aplica-se sempre ao rendimento total.",
+        "É igual à taxa efetiva de todos os contribuintes.",
+        "Significa pagar 20 € de imposto."
+      ],
+      "a": 0,
+      "sol": "A taxa marginal incide sobre a parcela do rendimento que cai nesse escalão.",
+      "hyp": "Pode confundir taxa marginal com taxa efetiva ou com uma taxa única.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:marginal-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-002",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Como se calcula a taxa efetiva de imposto num exercício simplificado?",
+      "o": [
+        "Maior taxa marginal ÷ número de escalões.",
+        "Imposto total ÷ rendimento considerado.",
+        "Soma das taxas marginais.",
+        "Rendimento ÷ imposto total."
+      ],
+      "a": 1,
+      "sol": "Taxa efetiva = imposto total / rendimento.",
+      "hyp": "Pode inverter a razão ou usar a maior taxa marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-003",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma tabela didática tributa um rendimento de 800 € a uma taxa única de 10%. Qual é o imposto?",
+      "o": [
+        "60 €",
+        "70 €",
+        "80 €",
+        "90 €"
+      ],
+      "a": 2,
+      "sol": "10% de 800 € = 80 €.",
+      "hyp": "Pode deslocar incorretamente a vírgula ao calcular percentagens.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:taxa-unica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-004",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se o imposto total é 120 € para um rendimento de 1 200 €, qual é a taxa efetiva?",
+      "o": [
+        "8%",
+        "9%",
+        "12%",
+        "10%"
+      ],
+      "a": 3,
+      "sol": "120/1 200 = 0,10 = 10%.",
+      "hyp": "Pode dividir o rendimento pelo imposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-direta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-005",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Num sistema progressivo puro por escalões, ao entrar num escalão superior, o que acontece ao rendimento já tributado nos escalões anteriores?",
+      "o": [
+        "Mantém as taxas anteriores; só a parcela adicional usa a nova taxa.",
+        "Passa todo a ser tributado pela nova taxa.",
+        "Fica isento.",
+        "É duplicado."
+      ],
+      "a": 0,
+      "sol": "A progressividade por escalões aplica taxas diferentes a diferentes parcelas.",
+      "hyp": "Pode pensar que o novo escalão reclassifica todo o rendimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:entrada-escalão",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-006",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Tabela didática: 10% até 1 000 € e 20% entre 1 000 € e 2 000 €. Qual é o imposto sobre 1 500 €?",
+      "o": [
+        "150 €",
+        "200 €",
+        "180 €",
+        "250 €"
+      ],
+      "a": 1,
+      "sol": "Primeiros 1 000 €: 100 €. Restantes 500 €: 100 €. Total 200 €.",
+      "hyp": "Pode aplicar 20% ao rendimento total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:dois-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-007",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Na mesma tabela (10% até 1 000 €; 20% entre 1 000 € e 2 000 €), quanto imposto paga um rendimento de 2 000 €?",
+      "o": [
+        "200 €",
+        "250 €",
+        "300 €",
+        "400 €"
+      ],
+      "a": 2,
+      "sol": "100 € no primeiro escalão + 200 € no segundo = 300 €.",
+      "hyp": "Pode usar apenas a taxa do último escalão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:dois-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-008",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com imposto de 300 € sobre um rendimento de 2 000 €, qual é a taxa efetiva?",
+      "o": [
+        "10%",
+        "12,5%",
+        "20%",
+        "15%"
+      ],
+      "a": 3,
+      "sol": "300/2 000 = 15%.",
+      "hyp": "Pode confundir taxa efetiva com taxa marginal de 20%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-dois-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-009",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Tabela didática: 10% até 1 000 €, 20% entre 1 000 € e 2 000 €, 30% acima de 2 000 €. Qual é o imposto sobre 2 500 €?",
+      "o": [
+        "450 €",
+        "400 €",
+        "500 €",
+        "750 €"
+      ],
+      "a": 0,
+      "sol": "100 + 200 + 30% de 500 = 450 €.",
+      "hyp": "Pode aplicar 30% ao rendimento todo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:tres-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-010",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Na tabela 10%-20%-30% por escalões, qual é o imposto sobre 3 000 €?",
+      "o": [
+        "500 €",
+        "600 €",
+        "550 €",
+        "900 €"
+      ],
+      "a": 1,
+      "sol": "100 + 200 + 300 = 600 €.",
+      "hyp": "Pode esquecer uma das parcelas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:tres-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-011",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se o imposto é 450 € num rendimento de 2 500 €, qual é a taxa efetiva?",
+      "o": [
+        "16%",
+        "20%",
+        "18%",
+        "30%"
+      ],
+      "a": 2,
+      "sol": "450/2 500 = 18%.",
+      "hyp": "Pode usar a taxa marginal máxima de 30%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-tres-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-012",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um rendimento atinge um escalão marginal de 30%, mas a taxa efetiva é 18%. Isto é coerente?",
+      "o": [
+        "Não, as duas taxas têm de ser iguais.",
+        "Só se não houver imposto.",
+        "Só se o rendimento for inferior ao primeiro escalão.",
+        "Sim, porque as parcelas inferiores são tributadas a taxas menores."
+      ],
+      "a": 3,
+      "sol": "A taxa efetiva é uma média ponderada das taxas aplicadas às parcelas.",
+      "hyp": "Pode esperar igualdade entre taxa marginal e média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:marginal-vs-efetiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-013",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Numa tabela em que o segundo escalão tem taxa marginal de 20%, quanto aumenta o imposto se o rendimento subir 100 € dentro desse escalão?",
+      "o": [
+        "20 €",
+        "10 €",
+        "30 €",
+        "100 €"
+      ],
+      "a": 0,
+      "sol": "20% de 100 € = 20 €.",
+      "hyp": "Pode recalcular todo o imposto em vez de olhar para a parcela adicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:incremento-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-014",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se os últimos 100 € de rendimento estão num escalão marginal de 30%, quanto imposto corresponde a esses 100 €?",
+      "o": [
+        "20 €",
+        "30 €",
+        "25 €",
+        "70 €"
+      ],
+      "a": 1,
+      "sol": "30% de 100 € = 30 €.",
+      "hyp": "Pode confundir a parcela que fica com a parcela tributada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:incremento-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-015",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa tabela progressiva com taxas crescentes, qual afirmação pode ser verdadeira?",
+      "o": [
+        "A taxa efetiva é sempre superior a todas as marginais.",
+        "Todos os escalões usam a mesma taxa.",
+        "A taxa efetiva é inferior à maior taxa marginal atingida.",
+        "O imposto total é sempre zero."
+      ],
+      "a": 2,
+      "sol": "As parcelas inferiores pagam taxas menores, baixando a taxa média.",
+      "hyp": "Pode inverter a relação entre taxa marginal e efetiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-inferior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-016",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Tabela didática: 0% até 500 € e 10% entre 500 € e 1 500 €. Qual é o imposto sobre 1 200 €?",
+      "o": [
+        "50 €",
+        "100 €",
+        "120 €",
+        "70 €"
+      ],
+      "a": 3,
+      "sol": "Só 700 € são tributados a 10%: imposto 70 €.",
+      "hyp": "Pode aplicar 10% a todo o rendimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:primeiro-escalão-isento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-017",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um imposto de 70 € sobre um rendimento de 1 200 € corresponde a que taxa efetiva aproximada?",
+      "o": [
+        "5,83%",
+        "5,0%",
+        "7,0%",
+        "10%"
+      ],
+      "a": 0,
+      "sol": "70/1 200 ≈ 5,83%.",
+      "hyp": "Pode usar a taxa marginal de 10%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-018",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Tabela didática: 5% até 1 000 € e 15% entre 1 000 € e 2 000 €. Qual é o imposto sobre 1 800 €?",
+      "o": [
+        "120 €",
+        "170 €",
+        "150 €",
+        "270 €"
+      ],
+      "a": 1,
+      "sol": "50 € + 15% de 800 € (120 €) = 170 €.",
+      "hyp": "Pode aplicar 15% ao total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:dois-escaloes-5-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-019",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com imposto de 170 € e rendimento de 1 800 €, qual é a taxa efetiva aproximada?",
+      "o": [
+        "8,44%",
+        "10,44%",
+        "9,44%",
+        "15%"
+      ],
+      "a": 2,
+      "sol": "170/1 800 ≈ 9,44%.",
+      "hyp": "Pode usar diretamente 15%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-020",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O que caracteriza uma tabela progressiva por escalões?",
+      "o": [
+        "Todos pagam sempre a mesma taxa.",
+        "As taxas diminuem com o rendimento.",
+        "Não existem limites de escalões.",
+        "As taxas marginais aumentam em escalões superiores."
+      ],
+      "a": 3,
+      "sol": "A progressividade decorre da subida das taxas marginais para parcelas superiores.",
+      "hyp": "Pode confundir progressividade com imposto simplesmente crescente em euros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:progressividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-021",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Tabela: 0% até 600 €, 10% entre 600 € e 1 600 €, 25% acima de 1 600 €. Qual é o imposto sobre 2 000 €?",
+      "o": [
+        "200 €",
+        "160 €",
+        "180 €",
+        "250 €"
+      ],
+      "a": 0,
+      "sol": "0 + 10% de 1 000 (100 €) + 25% de 400 (100 €) = 200 €.",
+      "hyp": "Pode aplicar 25% ao total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:tres-escaloes-isento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-022",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Que taxa efetiva resulta de 200 € de imposto num rendimento de 2 000 €?",
+      "o": [
+        "8%",
+        "10%",
+        "12%",
+        "25%"
+      ],
+      "a": 1,
+      "sol": "200/2 000 = 10%.",
+      "hyp": "Pode usar a taxa marginal de 25%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-023",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa tabela didática com 0% até 600 €, 10% entre 600 € e 1 600 € e 25% acima de 1 600 €, se o rendimento aumenta de 2 000 € para 2 400 €, quanto aumenta o imposto?",
+      "o": [
+        "40 €",
+        "60 €",
+        "100 €",
+        "160 €"
+      ],
+      "a": 2,
+      "sol": "Os 400 € adicionais são tributados a 25%: 100 €.",
+      "hyp": "Pode voltar a tributar os escalões inferiores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:incremento-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-024",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Tabela 10%-20%-30% com limites em 1 000 € e 2 000 €. Que rendimento produz imposto total de 600 €?",
+      "o": [
+        "2 500 €",
+        "2 800 €",
+        "3 200 €",
+        "3 000 €"
+      ],
+      "a": 3,
+      "sol": "Até 2 000 € pagam-se 300 €. Faltam 300 €, que a 30% correspondem a 1 000 € adicionais. Total 3 000 €.",
+      "hyp": "Pode dividir o imposto inteiro por 30%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:inverter-imposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-025",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa tabela didática de 10% até 1 000 €, 20% entre 1 000 € e 2 000 € e 30% acima de 2 000 €, que rendimento produz imposto total de 450 €?",
+      "o": [
+        "2 500 €",
+        "2 300 €",
+        "2 400 €",
+        "2 600 €"
+      ],
+      "a": 0,
+      "sol": "Até 2 000 € o imposto é 300 €. Restam 150 €, correspondentes a 500 € a 30%.",
+      "hyp": "Pode esquecer o imposto acumulado dos escalões inferiores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:inverter-imposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-026",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um aluno calcula 30% de 2 500 € para obter o imposto numa tabela 10%-20%-30% por escalões. Qual é o erro?",
+      "o": [
+        "Deveria somar 10%+20%+30%.",
+        "Aplicou a taxa marginal superior a todo o rendimento.",
+        "Deveria dividir por 30.",
+        "Não existe erro."
+      ],
+      "a": 1,
+      "sol": "A taxa de 30% só se aplica à parcela acima de 2 000 €.",
+      "hyp": "Pode ignorar a decomposição em parcelas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:erro-taxa-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-027",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num modelo progressivo puro, com taxas marginais inferiores a 100%, subir de escalão faz o rendimento após imposto diminuir por causa desse aumento?",
+      "o": [
+        "Sim, sempre.",
+        "Só quando há três escalões.",
+        "Não; uma parte positiva do rendimento adicional continua a ficar com o contribuinte.",
+        "É impossível determinar."
+      ],
+      "a": 2,
+      "sol": "A parcela adicional paga apenas a taxa marginal correspondente, inferior a 100%.",
+      "hyp": "Pode pensar que entrar num escalão superior retributa todo o rendimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:salto-escalão",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-028",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com taxa marginal de 30%, quanto de um aumento de rendimento de 200 € fica depois desse imposto marginal?",
+      "o": [
+        "60 €",
+        "100 €",
+        "170 €",
+        "140 €"
+      ],
+      "a": 3,
+      "sol": "Imposto adicional = 60 €; ficam 140 €.",
+      "hyp": "Pode confundir imposto adicional com rendimento adicional líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:ganho-liquido-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-029",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se a taxa marginal é 25%, quanto fica de um aumento de rendimento de 400 € após esse imposto marginal?",
+      "o": [
+        "300 €",
+        "100 €",
+        "200 €",
+        "400 €"
+      ],
+      "a": 0,
+      "sol": "Imposto = 100 €; ficam 300 €.",
+      "hyp": "Pode tratar 25% como a parcela restante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:ganho-liquido-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-030",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Tabela didática: 8% até 1 000 €, 18% entre 1 000 € e 2 500 €, 28% acima de 2 500 €. Qual é o imposto sobre 3 000 €?",
+      "o": [
+        "430 €",
+        "490 €",
+        "450 €",
+        "540 €"
+      ],
+      "a": 1,
+      "sol": "80 + 270 + 140 = 490 €.",
+      "hyp": "Pode usar larguras erradas dos escalões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:tres-escaloes-larguras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-031",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num modelo didático, um rendimento de 3 000 € paga 490 € de imposto. Qual é a taxa efetiva aproximada?",
+      "o": [
+        "14,33%",
+        "15,33%",
+        "16,33%",
+        "28%"
+      ],
+      "a": 2,
+      "sol": "490/3 000 ≈ 16,33%.",
+      "hyp": "Pode usar a taxa marginal máxima.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-032",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O imposto passa de 360 € para 380 € quando o rendimento sobe de 2 400 € para 2 500 €. Qual é a taxa marginal nesse intervalo?",
+      "o": [
+        "10%",
+        "30%",
+        "38%",
+        "20%"
+      ],
+      "a": 3,
+      "sol": "Aumento do imposto 20 € / aumento de rendimento 100 € = 20%.",
+      "hyp": "Pode usar a taxa efetiva em vez da taxa marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:inferir-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-033",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O imposto aumenta de 450 € para 480 € quando o rendimento aumenta de 2 500 € para 2 600 €. Que taxa marginal se observa?",
+      "o": [
+        "30%",
+        "20%",
+        "25%",
+        "35%"
+      ],
+      "a": 0,
+      "sol": "30/100 = 30%.",
+      "hyp": "Pode dividir imposto total por rendimento total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:inferir-marginal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-034",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num sistema progressivo, é possível que quem tem maior rendimento pague mais imposto em euros e tenha também maior taxa efetiva?",
+      "o": [
+        "Não, nunca.",
+        "Sim.",
+        "Só com taxa única.",
+        "Só se pagar menos imposto em euros."
+      ],
+      "a": 1,
+      "sol": "A progressividade pode aumentar tanto o imposto total como a taxa média.",
+      "hyp": "Pode pensar que progressividade só altera o valor absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:progressividade-efetiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-035",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Tabela: 0% até 500 €, 10% de 500 € a 1 500 €, 20% acima. Qual é o imposto sobre 1 700 €?",
+      "o": [
+        "100 €",
+        "120 €",
+        "140 €",
+        "170 €"
+      ],
+      "a": 2,
+      "sol": "100 € no segundo escalão + 40 € no terceiro = 140 €.",
+      "hyp": "Pode aplicar 20% ao total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:isento-tres-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-036",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa tabela com 0% até 500 €, 10% entre 500 € e 1 500 € e 20% acima de 1 500 €, por que a taxa efetiva sobre um rendimento de 1 700 € fica abaixo da taxa marginal de 20%?",
+      "o": [
+        "Porque 20% não é uma percentagem.",
+        "Porque a taxa efetiva ignora o rendimento.",
+        "Porque todo o rendimento paga 0%.",
+        "Porque uma parcela é isenta e outra paga 10%."
+      ],
+      "a": 3,
+      "sol": "A taxa efetiva combina parcelas a 0%, 10% e 20%.",
+      "hyp": "Pode não compreender a média ponderada implícita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:explicar-efetiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-037",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Tabela 10%-20%-30% com limites em 1 000 € e 2 000 €. Para que rendimento a taxa efetiva é exatamente 20%?",
+      "o": [
+        "3 000 €",
+        "2 000 €",
+        "2 500 €",
+        "4 000 €"
+      ],
+      "a": 0,
+      "sol": "Em 3 000 €, imposto 600 €; 600/3 000 = 20%.",
+      "hyp": "Pode associar 20% ao segundo escalão sem resolver a média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:resolver-efetiva-alvo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-038",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Na tabela 10%-20%-30%, qual é a taxa efetiva num rendimento de 4 000 €?",
+      "o": [
+        "20%",
+        "22,5%",
+        "21%",
+        "30%"
+      ],
+      "a": 1,
+      "sol": "Imposto = 100+200+600=900 €; 900/4 000 = 22,5%.",
+      "hyp": "Pode usar a taxa marginal de 30%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-avancada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-039",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa tabela didática de 10% até 1 000 €, 20% entre 1 000 € e 2 000 € e 30% acima de 2 000 €, qual é o imposto sobre 3 500 €?",
+      "o": [
+        "650 €",
+        "700 €",
+        "750 €",
+        "800 €"
+      ],
+      "a": 2,
+      "sol": "100+200+450=750 €.",
+      "hyp": "Pode aplicar 30% apenas aos 500 € acima de 3 000 € em vez de aos 1 500 € acima de 2 000 €.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:tres-escaloes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-040",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se o rendimento é 3 500 € e o imposto é 750 €, quanto resta após imposto neste modelo?",
+      "o": [
+        "2 650 €",
+        "2 700 €",
+        "2 800 €",
+        "2 750 €"
+      ],
+      "a": 3,
+      "sol": "3 500−750=2 750 €.",
+      "hyp": "Pode confundir imposto com rendimento restante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:apos-imposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-041",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Tabela didática: 5% até 1 000 €, 15% nos 1 500 € seguintes, 25% no excedente. Qual é o imposto sobre 3 000 €?",
+      "o": [
+        "400 €",
+        "350 €",
+        "375 €",
+        "425 €"
+      ],
+      "a": 0,
+      "sol": "50 + 225 + 125 = 400 €.",
+      "hyp": "Pode aplicar as taxas aos limites acumulados em vez das larguras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:escaloes-larguras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-042",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo didático, um rendimento de 3 000 € paga 400 € de imposto. Qual é a taxa efetiva aproximada?",
+      "o": [
+        "11,33%",
+        "13,33%",
+        "12,33%",
+        "25%"
+      ],
+      "a": 1,
+      "sol": "400/3 000 ≈ 13,33%.",
+      "hyp": "Pode usar a taxa marginal de 25%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-043",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O rendimento sobe de 2 400 € para 2 700 €. O limite do novo escalão é 2 500 €. Que parte do aumento de 300 € cai acima desse limite?",
+      "o": [
+        "100 €",
+        "250 €",
+        "200 €",
+        "300 €"
+      ],
+      "a": 2,
+      "sol": "De 2 500 € a 2 700 € há 200 €.",
+      "hyp": "Pode aplicar a nova taxa ao aumento inteiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:cruzar-escalão",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-044",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O rendimento sobe de 2 400 € para 2 700 €. Se os primeiros 100 € do aumento pagam 15% e os 200 € seguintes pagam 25%, qual é o imposto adicional total?",
+      "o": [
+        "50 €",
+        "55 €",
+        "75 €",
+        "65 €"
+      ],
+      "a": 3,
+      "sol": "15 + 50 = 65 €.",
+      "hyp": "Pode aplicar uma única taxa ao aumento que atravessa dois escalões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:cruzar-escalão",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-045",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual é a estratégia correta para resolver uma tabela com vários escalões progressivos?",
+      "o": [
+        "Separar o rendimento pelas parcelas de cada escalão e somar os impostos dessas parcelas.",
+        "Aplicar a taxa mais alta ao total.",
+        "Somar todas as taxas e aplicar ao total.",
+        "Escolher a taxa média por aproximação visual."
+      ],
+      "a": 0,
+      "sol": "A decomposição por parcelas respeita as bases corretas de cada taxa.",
+      "hyp": "Pode procurar atalhos incorretos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:estrategia-resolucao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-046",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O imposto calculado pelos escalões é 450 €. Se o exercício prevê uma dedução fixa de 50 € diretamente ao imposto, qual é o imposto final?",
+      "o": [
+        "350 €",
+        "400 €",
+        "450 €",
+        "500 €"
+      ],
+      "a": 1,
+      "sol": "450−50=400 €.",
+      "hyp": "Pode subtrair a dedução ao rendimento em vez de ao imposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:deducao-imposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-047",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com imposto final de 400 € sobre rendimento de 2 500 €, qual é a taxa efetiva?",
+      "o": [
+        "14%",
+        "18%",
+        "16%",
+        "20%"
+      ],
+      "a": 2,
+      "sol": "400/2 500 = 16%.",
+      "hyp": "Pode usar a taxa efetiva anterior à dedução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:efetiva-pos-deducao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-048",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um imposto calculado de 620 € recebe um crédito fiscal didático de 120 € diretamente abatido ao imposto. Qual é o imposto final?",
+      "o": [
+        "480 €",
+        "520 €",
+        "740 €",
+        "500 €"
+      ],
+      "a": 3,
+      "sol": "620−120=500 €.",
+      "hyp": "Pode somar o crédito ao imposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:credito-fiscal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-049",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Porque é que estas perguntas fornecem sempre as taxas e os limites dos escalões no próprio enunciado?",
+      "o": [
+        "Porque as tabelas são didáticas e o objetivo é avaliar o raciocínio matemático, não memorizar legislação atual.",
+        "Porque os impostos reais não usam percentagens.",
+        "Porque as taxas nunca mudam.",
+        "Porque todos os países usam a mesma tabela."
+      ],
+      "a": 0,
+      "sol": "Os exercícios são autocontidos e não pretendem reproduzir uma tabela fiscal real.",
+      "hyp": "Pode interpretar uma tabela fictícia como legislação atual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:tabela-didatica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-IRS-050",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-irs",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Tabela didática: 0% até 800 €, 12% entre 800 € e 1 800 €, 24% acima de 1 800 €. Para rendimento de 2 300 €, qual é o imposto e a taxa efetiva aproximada?",
+      "o": [
+        "220 € e 9,57%",
+        "240 € e 10,43%",
+        "260 € e 11,30%",
+        "276 € e 12%"
+      ],
+      "a": 1,
+      "sol": "Imposto=120 € + 120 € = 240 €. Taxa efetiva=240/2 300≈10,43%.",
+      "hyp": "Pode aplicar 24% ao total ou esquecer a parcela isenta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-irs:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

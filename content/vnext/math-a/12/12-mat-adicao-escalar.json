@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-mat",
+  "subtopicId": "12-mat-adicao-escalar",
+  "subtopic": "Adição, subtração e multiplicação por escalar",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha compatibilidade, operações elemento a elemento, propriedades algébricas, equações matriciais simples, simetria e modelação por escalas/diferenças. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12MAT-AE-001",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Duas matrizes podem somar-se quando...",
+      "o": [
+        "têm a mesma dimensão.",
+        "são ambas quadradas apenas.",
+        "têm o mesmo determinante.",
+        "o número total de elementos é igual, mesmo com dimensões diferentes."
+      ],
+      "a": 0,
+      "sol": "A soma é definida elemento a elemento em posições correspondentes.",
+      "hyp": "Pode olhar apenas para o número de elementos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:compatibilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-002",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A soma de matrizes é feita...",
+      "o": [
+        "linha vezes coluna.",
+        "elemento a elemento.",
+        "multiplicando diagonais.",
+        "somando apenas a diagonal."
+      ],
+      "a": 1,
+      "sol": "Cada elemento da soma é a_ij+b_ij.",
+      "hyp": "Pode confundir com produto matricial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-003",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "[[1,2],[3,4]]+[[5,6],[7,8]]=",
+      "o": [
+        "[[5,12],[21,32]].",
+        "[[6,6],[10,10]].",
+        "[[6,8],[10,12]].",
+        "[[1,8],[3,12]]."
+      ],
+      "a": 2,
+      "sol": "Somam-se elementos correspondentes.",
+      "hyp": "Pode multiplicar em vez de somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:soma-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-004",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "[[2,−1],[0,3]]+[[−2,4],[5,1]]=",
+      "o": [
+        "[[−4,−4],[0,3]].",
+        "[[0,5],[5,3]].",
+        "[[4,3],[5,2]].",
+        "[[0,3],[5,4]]."
+      ],
+      "a": 3,
+      "sol": "2−2=0, −1+4=3, 0+5=5, 3+1=4.",
+      "hyp": "Pode errar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:soma-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-005",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A matriz nula funciona na adição como...",
+      "o": [
+        "elemento neutro.",
+        "elemento absorvente.",
+        "inverso multiplicativo.",
+        "transposta."
+      ],
+      "a": 0,
+      "sol": "A+0=A.",
+      "hyp": "Pode transferir o papel absorvente do zero na multiplicação escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:neutro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-006",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O oposto de uma matriz A é...",
+      "o": [
+        "A^T.",
+        "−A, obtida mudando o sinal de todos os elementos.",
+        "A^{-1}.",
+        "a matriz nula."
+      ],
+      "a": 1,
+      "sol": "A+(−A)=0.",
+      "hyp": "Pode confundir oposto com inversa ou transposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-007",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[1,−3],[2,0]], então −A=",
+      "o": [
+        "[[1,3],[−2,0]].",
+        "[[-1,−3],[2,0]].",
+        "[[-1,3],[-2,0]].",
+        "[[0,0],[0,0]]."
+      ],
+      "a": 2,
+      "sol": "Muda-se o sinal de cada elemento.",
+      "hyp": "Pode mudar apenas alguns sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-008",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A−B significa...",
+      "o": [
+        "B−A.",
+        "AB.",
+        "A+B.",
+        "A+(−B)."
+      ],
+      "a": 3,
+      "sol": "Subtração matricial é soma com o oposto.",
+      "hyp": "Pode trocar a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:subtracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-009",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[4,5],[1,2]]−[[1,3],[2,−1]]=",
+      "o": [
+        "[[3,2],[−1,3]].",
+        "[[5,8],[3,1]].",
+        "[[3,8],[1,−3]].",
+        "[[4,2],[−1,2]]."
+      ],
+      "a": 0,
+      "sol": "Subtrai-se cada elemento correspondente.",
+      "hyp": "Pode esquecer distribuir o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:subtracao-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-010",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A multiplicação de uma matriz por escalar k consiste em...",
+      "o": [
+        "multiplicar só a diagonal.",
+        "multiplicar todos os elementos por k.",
+        "somar k a todos os elementos.",
+        "multiplicar o número de linhas por k."
+      ],
+      "a": 1,
+      "sol": "(kA)_ij=k a_ij.",
+      "hyp": "Pode confundir escalar com translação dos valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-011",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "3[[1,−2],[0,4]]=",
+      "o": [
+        "[[4,1],[3,7]].",
+        "[[3,−2],[0,4]].",
+        "[[3,−6],[0,12]].",
+        "[[1,−6],[0,12]]."
+      ],
+      "a": 2,
+      "sol": "Cada entrada é multiplicada por3.",
+      "hyp": "Pode multiplicar apenas entradas não nulas parcialmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:escalar-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-012",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "−2[[3,1],[−1,5]]=",
+      "o": [
+        "[[-6,2],[−2,−10]].",
+        "[[1,−1],[−3,3]].",
+        "[[-6,−2],[−2,−10]].",
+        "[[-6,−2],[2,−10]]."
+      ],
+      "a": 3,
+      "sol": "Multiplica-se cada elemento por−2, respeitando sinais.",
+      "hyp": "Pode errar produto de negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:escalar-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-013",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para matrizes A,B da mesma dimensão, A+B=",
+      "o": [
+        "B+A.",
+        "A−B.",
+        "AB.",
+        "B−A."
+      ],
+      "a": 0,
+      "sol": "A adição matricial é comutativa.",
+      "hyp": "Pode transferir não comutatividade do produto para a soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:comutatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-014",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A+(B+C) é igual a...",
+      "o": [
+        "A+B−C.",
+        "(A+B)+C.",
+        "AB+C.",
+        "A+(C−B)."
+      ],
+      "a": 1,
+      "sol": "A adição é associativa.",
+      "hyp": "Pode alterar a ordem com sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:associatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-015",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "k(A+B)=",
+      "o": [
+        "kA+B.",
+        "A+kB.",
+        "kA+kB.",
+        "kAB."
+      ],
+      "a": 2,
+      "sol": "A multiplicação escalar é distributiva sobre a soma.",
+      "hyp": "Pode multiplicar apenas uma parcela.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:distributividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-016",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "(k+l)A=",
+      "o": [
+        "klA.",
+        "k(A+l).",
+        "A+k+l.",
+        "kA+lA."
+      ],
+      "a": 3,
+      "sol": "Distribui-se o escalar sobre a soma de escalares.",
+      "hyp": "Pode multiplicar k e l.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:distributividade-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-017",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "k(lA)=",
+      "o": [
+        "(kl)A.",
+        "(k+l)A.",
+        "kA+lA.",
+        "A."
+      ],
+      "a": 0,
+      "sol": "Multiplicações escalares associam-se.",
+      "hyp": "Pode somar os escalares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:associatividade-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-018",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[1,2],[3,4]] e B=[[0,1],[−1,2]], então A+2B=",
+      "o": [
+        "[[2,6],[4,8]].",
+        "[[1,4],[1,8]].",
+        "[[1,3],[2,6]].",
+        "[[0,4],[−3,8]]."
+      ],
+      "a": 1,
+      "sol": "2B=[[0,2],[−2,4]]; somando a A resulta [[1,4],[1,8]].",
+      "hyp": "Pode somar B antes de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:combinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-019",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[1,2],[3,4]] e B=[[0,1],[−1,2]], então 2A−B=",
+      "o": [
+        "[[2,5],[5,10]].",
+        "[[1,3],[7,4]].",
+        "[[2,3],[7,6]].",
+        "[[2,4],[6,8]]."
+      ],
+      "a": 2,
+      "sol": "2A=[[2,4],[6,8]]; subtrair B dá [[2,3],[7,6]].",
+      "hyp": "Pode errar o sinal de −1 em B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:combinacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-020",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se A e B têm dimensões 2×3 e3×2, então A+B...",
+      "o": [
+        "é2×2.",
+        "é3×3.",
+        "tem6 elementos e por isso existe.",
+        "não está definida."
+      ],
+      "a": 3,
+      "sol": "As dimensões têm de coincidir exatamente.",
+      "hyp": "Pode olhar apenas para o mesmo número total de entradas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:incompativel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-021",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A+X=B, então X=",
+      "o": [
+        "B−A.",
+        "A−B.",
+        "A+B.",
+        "AB."
+      ],
+      "a": 0,
+      "sol": "Subtrai-se A a ambos os membros.",
+      "hyp": "Pode trocar a ordem da subtração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-022",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 2X=A, então X=",
+      "o": [
+        "2A.",
+        "A/2.",
+        "−A/2.",
+        "A+2."
+      ],
+      "a": 1,
+      "sol": "Divide-se cada entrada por2.",
+      "hyp": "Pode multiplicar novamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:equacao-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-023",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 3X−A=B, então...",
+      "o": [
+        "X=(B−A)/3.",
+        "X=3(A+B).",
+        "X=(A+B)/3.",
+        "X=A−B."
+      ],
+      "a": 2,
+      "sol": "3X=A+B.",
+      "hyp": "Pode mover A com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:equacao-matricial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-024",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[2,4],[−2,6]] e 2X=A, então X=",
+      "o": [
+        "[[4,8],[−4,12]].",
+        "[[1,4],[−2,3]].",
+        "[[0,2],[−1,6]].",
+        "[[1,2],[−1,3]]."
+      ],
+      "a": 3,
+      "sol": "Divide-se cada elemento por2.",
+      "hyp": "Pode dividir apenas uma linha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:resolver-X",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-025",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A+B=0, então B=",
+      "o": [
+        "−A.",
+        "A.",
+        "A^T.",
+        "0 obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "B é o oposto aditivo de A.",
+      "hyp": "Pode pensar que ambos têm de ser nulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:oposto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-026",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A transposta respeita a soma: (A+B)^T=",
+      "o": [
+        "A^T−B^T.",
+        "A^T+B^T.",
+        "B^TA^T.",
+        "A+B."
+      ],
+      "a": 1,
+      "sol": "Transpor é uma operação linear.",
+      "hyp": "Pode transferir a regra do produto em ordem inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:transposta-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-027",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "(kA)^T=",
+      "o": [
+        "−kA^T.",
+        "A^T/k.",
+        "kA^T.",
+        "k+A^T."
+      ],
+      "a": 2,
+      "sol": "O escalar não é afetado pela transposição.",
+      "hyp": "Pode alterar o escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:transposta-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-028",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são simétricas da mesma ordem, A+B é...",
+      "o": [
+        "antissimétrica.",
+        "nula.",
+        "não quadrada.",
+        "simétrica."
+      ],
+      "a": 3,
+      "sol": "(A+B)^T=A^T+B^T=A+B.",
+      "hyp": "Pode achar que soma destrói simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:simetricas-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-029",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A é simétrica, então kA é...",
+      "o": [
+        "simétrica para qualquer escalar k.",
+        "antissimétrica se k<0.",
+        "não simétrica se k≠1.",
+        "identidade."
+      ],
+      "a": 0,
+      "sol": "(kA)^T=kA.",
+      "hyp": "Pode associar sinal do escalar à simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:simetrica-escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-030",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são antissimétricas, A+B é...",
+      "o": [
+        "simétrica.",
+        "antissimétrica.",
+        "identidade.",
+        "diagonal com1."
+      ],
+      "a": 1,
+      "sol": "(A+B)^T=−A−B=−(A+B).",
+      "hyp": "Pode pensar que sinais opostos se cancelam sempre.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:anti-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-031",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A média de duas matrizes de dados A e B da mesma dimensão é...",
+      "o": [
+        "AB/2.",
+        "A+B sem dividir.",
+        "(A+B)/2 elemento a elemento.",
+        "(A^T+B^T)/4."
+      ],
+      "a": 2,
+      "sol": "Cada entrada média corresponde à média das entradas homólogas.",
+      "hyp": "Pode usar produto matricial para médias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-032",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se A contém vendas do 1.º trimestre e B do 2.º nas mesmas lojas/produtos, A+B representa...",
+      "o": [
+        "média das vendas.",
+        "diferença de vendas.",
+        "taxa de crescimento percentual.",
+        "vendas acumuladas dos dois trimestres."
+      ],
+      "a": 3,
+      "sol": "Somam-se quantidades correspondentes.",
+      "hyp": "Pode atribuir interpretação de média ou variação relativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-033",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se A contém vendas do 1.º trimestre e B do 2.º trimestre nas mesmas lojas/produtos, então B−A representa...",
+      "o": [
+        "variação absoluta do 1.º para o 2.º trimestre.",
+        "total dos dois trimestres.",
+        "média.",
+        "razão percentual."
+      ],
+      "a": 0,
+      "sol": "Cada entrada mostra aumento ou diminuição absoluta.",
+      "hyp": "Pode confundir diferença absoluta com percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-034",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Multiplicar uma matriz de preços por1,10 representa...",
+      "o": [
+        "aumento de1,10€ em cada preço.",
+        "aumento uniforme de10%.",
+        "redução de10%.",
+        "soma de10 a cada entrada."
+      ],
+      "a": 1,
+      "sol": "Cada preço fica 110% do original.",
+      "hyp": "Pode confundir multiplicação percentual com soma fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-035",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Multiplicar uma matriz por0,8 representa...",
+      "o": [
+        "redução de0,8 unidades.",
+        "aumento de80%.",
+        "redução uniforme de20%.",
+        "redução de80%."
+      ],
+      "a": 2,
+      "sol": "Ficam80% dos valores originais.",
+      "hyp": "Pode interpretar 0,8 como 80% de redução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:escala-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-036",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A=[[a,b],[c,d]] e B=[[1,1],[1,1]], então A−B=",
+      "o": [
+        "[[a,b],[c,d]]−1 como número.",
+        "[[a−1,b],[c,d−1]].",
+        "[[a+1,b+1],[c+1,d+1]].",
+        "[[a−1,b−1],[c−1,d−1]]."
+      ],
+      "a": 3,
+      "sol": "Subtrai-se1 a cada entrada correspondente.",
+      "hyp": "Pode subtrair apenas na diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-037",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se 2A−3B=0, então A=",
+      "o": [
+        "(3/2)B.",
+        "(2/3)B.",
+        "−(3/2)B.",
+        "3B."
+      ],
+      "a": 0,
+      "sol": "2A=3B.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:proporcionalidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-038",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A−2B=C, então B=",
+      "o": [
+        "(C−A)/2.",
+        "(A−C)/2.",
+        "A−2C.",
+        "2(A−C)."
+      ],
+      "a": 1,
+      "sol": "2B=A−C.",
+      "hyp": "Pode mover C com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-039",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se X+A=2B−X, então X=",
+      "o": [
+        "2B−A.",
+        "A/2−B.",
+        "B−A/2.",
+        "(A+B)/2."
+      ],
+      "a": 2,
+      "sol": "2X=2B−A, logo X=B−A/2.",
+      "hyp": "Pode esquecer juntar os dois X.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:equacao-X",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-040",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A é matriz 2×2 e λA=0 com A≠0, então λ=",
+      "o": [
+        "1.",
+        "−1.",
+        "2.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "Um escalar não nulo não pode anular todos os elementos de uma matriz não nula.",
+      "hyp": "Pode pensar que a matriz pode cancelar internamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:escalar-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-041",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A soma de uma matriz simétrica e uma antissimétrica pode ser...",
+      "o": [
+        "uma matriz geral.",
+        "sempre simétrica.",
+        "sempre antissimétrica.",
+        "sempre nula."
+      ],
+      "a": 0,
+      "sol": "As duas componentes podem coexistir numa matriz arbitrária.",
+      "hyp": "Pode pensar que uma propriedade domina a outra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:decomposicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-042",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Compreensão",
+      "q": "Qualquer matriz quadrada A pode decompor-se como...",
+      "o": [
+        "A=A^T+(−A^T) apenas.",
+        "A=(A+A^T)/2+(A−A^T)/2.",
+        "A=2A+0.",
+        "A=(A+A^T)(A−A^T)."
+      ],
+      "a": 1,
+      "sol": "A primeira parcela é simétrica e a segunda antissimétrica.",
+      "hyp": "Pode não reconhecer a decomposição padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:decomposicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-043",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para uma matriz quadrada A, defina S=(A+A^T)/2. A matriz S é...",
+      "o": [
+        "antissimétrica.",
+        "nula sempre.",
+        "simétrica.",
+        "identidade."
+      ],
+      "a": 2,
+      "sol": "S^T=(A^T+A)/2=S.",
+      "hyp": "Pode trocar as duas componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:parte-simetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-044",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "K=(A−A^T)/2 é...",
+      "o": [
+        "simétrica.",
+        "diagonal sempre.",
+        "identidade.",
+        "antissimétrica."
+      ],
+      "a": 3,
+      "sol": "K^T=(A^T−A)/2=−K.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:parte-antissimetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-045",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se A contém coordenadas de vários pontos por colunas e D contém deslocamentos compatíveis para esses pontos, A+D pode representar...",
+      "o": [
+        "translação das coordenadas.",
+        "rotação obrigatoriamente.",
+        "produto escalar.",
+        "mudança de dimensão."
+      ],
+      "a": 0,
+      "sol": "A adição ajusta cada coordenada pela deslocação correspondente.",
+      "hyp": "Pode confundir soma com rotação matricial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-046",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma matriz de consumos mensais é multiplicada por uma tarifa escalar k, a nova matriz representa...",
+      "o": [
+        "soma dos consumos.",
+        "custos proporcionais por entrada, se a mesma tarifa se aplica a todas.",
+        "média mensal.",
+        "produto matricial de tarifas diferentes."
+      ],
+      "a": 1,
+      "sol": "Cada consumo é escalado pela mesma tarifa.",
+      "hyp": "Pode atribuir diferenças de tarifa não modeladas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:tarifa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-047",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A operação A+B preserva a dimensão porque...",
+      "o": [
+        "multiplica linhas por colunas.",
+        "remove uma linha.",
+        "combina apenas entradas correspondentes.",
+        "adiciona dimensões m+n."
+      ],
+      "a": 2,
+      "sol": "O resultado tem exatamente as mesmas posições.",
+      "hyp": "Pode somar dimensões numericamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:dimensao-preservada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-048",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A+B=A para matrizes da mesma dimensão, então B=",
+      "o": [
+        "A.",
+        "I.",
+        "−A.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "Subtraindo A, B=0.",
+      "hyp": "Pode pensar que B pode ser identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-049",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A+B=A+C, então...",
+      "o": [
+        "B=C.",
+        "B=−C.",
+        "A=0.",
+        "B+C=0."
+      ],
+      "a": 0,
+      "sol": "A adição matricial admite cancelamento.",
+      "hyp": "Pode achar que matrizes não têm propriedade de cancelamento na soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-AE-050",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-adicao-escalar",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Adição, subtração e multiplicação escalar de matrizes são operações...",
+      "o": [
+        "baseadas em linha por coluna.",
+        "elemento a elemento e lineares.",
+        "definidas só para matrizes quadradas.",
+        "sempre não comutativas."
+      ],
+      "a": 1,
+      "sol": "Estas operações preservam a estrutura de espaço vetorial das matrizes da mesma dimensão.",
+      "hyp": "Pode confundir com produto matricial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-adicao-escalar:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

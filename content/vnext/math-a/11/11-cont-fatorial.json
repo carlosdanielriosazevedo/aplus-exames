@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cont",
+  "subtopicId": "11-cont-fatorial",
+  "subtopic": "Fatorial e contagens elementares",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição e propriedades do fatorial, simplificação de quocientes, equações simples com fatoriais e interpretação em contagens elementares. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CONT-FAT-001",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para n natural positivo, n! significa...",
+      "o": [
+        "n(n−1)(n−2)…2·1.",
+        "n+n−1+…+1.",
+        "n².",
+        "2n."
+      ],
+      "a": 0,
+      "sol": "O fatorial é o produto dos inteiros positivos de n até 1.",
+      "hyp": "Pode confundir produto com soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:definicao-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-002",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Por convenção, 0! é igual a...",
+      "o": [
+        "0.",
+        "1.",
+        "−1.",
+        "não definido."
+      ],
+      "a": 1,
+      "sol": "A convenção 0!=1 torna válidas várias fórmulas combinatórias.",
+      "hyp": "Pode assumir que um produto sem fatores vale 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:zero-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-003",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "3! é...",
+      "o": [
+        "3.",
+        "9.",
+        "6.",
+        "12."
+      ],
+      "a": 2,
+      "sol": "3×2×1=6.",
+      "hyp": "Pode calcular 3².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:calcular-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-004",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "5! é...",
+      "o": [
+        "25.",
+        "60.",
+        "20.",
+        "120."
+      ],
+      "a": 3,
+      "sol": "5×4×3×2×1=120.",
+      "hyp": "Pode parar em 5×4×3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:calcular-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-005",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "1! é...",
+      "o": [
+        "1.",
+        "0.",
+        "2.",
+        "não definido."
+      ],
+      "a": 0,
+      "sol": "1!=1.",
+      "hyp": "Pode confundir com 0!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:um-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-006",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "6! é...",
+      "o": [
+        "360.",
+        "720.",
+        "120.",
+        "36."
+      ],
+      "a": 1,
+      "sol": "6×5!=6×120=720.",
+      "hyp": "Pode esquecer o fator 6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:calcular-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-007",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A relação correta é...",
+      "o": [
+        "n!=(n−1)!+n.",
+        "n!=n+(n−1).",
+        "n!=n(n−1)!.",
+        "n!=(n−1)!/n."
+      ],
+      "a": 2,
+      "sol": "É a relação recursiva fundamental do fatorial.",
+      "hyp": "Pode trocar produto por soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:recorrencia-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-008",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "7!/6! é...",
+      "o": [
+        "42.",
+        "1.",
+        "5040.",
+        "7."
+      ],
+      "a": 3,
+      "sol": "7!=7·6!, logo o quociente é 7.",
+      "hyp": "Pode calcular fatoriais completos sem simplificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente-consecutivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-009",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "8!/6! é...",
+      "o": [
+        "56.",
+        "8.",
+        "48.",
+        "336."
+      ],
+      "a": 0,
+      "sol": "8!/6!=8×7=56.",
+      "hyp": "Pode cancelar também o 7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente-dois-fatores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-010",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "10!/8! é...",
+      "o": [
+        "80.",
+        "90.",
+        "10.",
+        "720."
+      ],
+      "a": 1,
+      "sol": "10×9=90.",
+      "hyp": "Pode usar 10×8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente-dois-fatores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-011",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "n!/(n−1)! simplifica para...",
+      "o": [
+        "n−1.",
+        "n!−1.",
+        "n.",
+        "1/n."
+      ],
+      "a": 2,
+      "sol": "n!=n(n−1)!.",
+      "hyp": "Pode subtrair fatoriais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-012",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "(n+1)!/n! é...",
+      "o": [
+        "n.",
+        "1.",
+        "(n+1)n.",
+        "n+1."
+      ],
+      "a": 3,
+      "sol": "(n+1)!=(n+1)n!.",
+      "hyp": "Pode esquecer o +1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-013",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "n!/(n−2)! é...",
+      "o": [
+        "n(n−1).",
+        "n².",
+        "n−2.",
+        "2n."
+      ],
+      "a": 0,
+      "sol": "n!=n(n−1)(n−2)!.",
+      "hyp": "Pode tratar o fatorial como potência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-014",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "9!/7! é...",
+      "o": [
+        "63.",
+        "72.",
+        "81.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "9×8=72.",
+      "hyp": "Pode usar 9×7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-015",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "7!/(5!·2!) é...",
+      "o": [
+        "42.",
+        "14.",
+        "21.",
+        "7."
+      ],
+      "a": 2,
+      "sol": "7×6/(2)=21.",
+      "hyp": "Pode esquecer dividir por 2!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente-com-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-016",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "6!/(3!·3!) é...",
+      "o": [
+        "120.",
+        "40.",
+        "10.",
+        "20."
+      ],
+      "a": 3,
+      "sol": "720/(6×6)=20.",
+      "hyp": "Pode dividir apenas por um 3!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:coef-binomial-basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-017",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A expressão n! cresce, para n natural positivo, de forma...",
+      "o": [
+        "muito rápida.",
+        "linear.",
+        "constante.",
+        "decrescente."
+      ],
+      "a": 0,
+      "sol": "Cada novo termo multiplica o anterior por n+1.",
+      "hyp": "Pode confundir crescimento fatorial com crescimento linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:crescimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-018",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "4!+3! é...",
+      "o": [
+        "24.",
+        "30.",
+        "18.",
+        "12."
+      ],
+      "a": 1,
+      "sol": "24+6=30.",
+      "hyp": "Pode interpretar (4+3)!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:soma-fatoriais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-019",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "4!·3! é...",
+      "o": [
+        "30.",
+        "72.",
+        "144.",
+        "24."
+      ],
+      "a": 2,
+      "sol": "24×6=144.",
+      "hyp": "Pode somar os fatoriais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:produto-fatoriais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-020",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Em geral, (a+b)! é igual a a!+b!?",
+      "o": [
+        "Sim.",
+        "Só se a=b.",
+        "Só se um deles for 0.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "O fatorial não distribui sobre a soma.",
+      "hyp": "Pode tratar ! como uma operação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:nao-distributivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-021",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve n!=24 em naturais.",
+      "o": [
+        "n=4.",
+        "n=3.",
+        "n=5.",
+        "n=24."
+      ],
+      "a": 0,
+      "sol": "4!=24.",
+      "hyp": "Pode confundir n! com n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-022",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve n!=120.",
+      "o": [
+        "n=4.",
+        "n=5.",
+        "n=6.",
+        "n=120."
+      ],
+      "a": 1,
+      "sol": "5!=120.",
+      "hyp": "Pode escolher 6! sem calcular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-023",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se (n+1)!/n!=8, então n=",
+      "o": [
+        "8.",
+        "6.",
+        "7.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "O quociente é n+1, logo n+1=8.",
+      "hyp": "Pode identificar o quociente com n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-024",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se n!/(n−2)!=30, com n≥2, então n=",
+      "o": [
+        "5.",
+        "10.",
+        "3.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "n(n−1)=30; 6×5=30.",
+      "hyp": "Pode resolver como n²=30.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-produto-consecutivos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-025",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se (n+2)!/n!=42, então n=",
+      "o": [
+        "5.",
+        "6.",
+        "4.",
+        "7."
+      ],
+      "a": 0,
+      "sol": "(n+2)(n+1)=42; 7×6=42, logo n=5.",
+      "hyp": "Pode usar n(n+1).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-dois-fatores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-026",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (n+2)!/(n!).",
+      "o": [
+        "n+2.",
+        "(n+2)(n+1).",
+        "(n+1)n.",
+        "(n+2)!."
+      ],
+      "a": 1,
+      "sol": "Expandem-se apenas os fatores acima de n!.",
+      "hyp": "Pode cancelar demasiado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar-dois",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-027",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (n+3)!/(n+1)!.",
+      "o": [
+        "(n+3)(n+2)(n+1).",
+        "n+3.",
+        "(n+3)(n+2).",
+        "n+2."
+      ],
+      "a": 2,
+      "sol": "Cancelam-se todos os fatores até (n+1)!.",
+      "hyp": "Pode deixar um fator a mais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-028",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica n!/(n−3)!.",
+      "o": [
+        "n(n−1)(n−2)(n−3).",
+        "n³.",
+        "3n.",
+        "n(n−1)(n−2)."
+      ],
+      "a": 3,
+      "sol": "Ficam os três fatores acima de (n−3)!.",
+      "hyp": "Pode incluir n−3 indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar-tres",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-029",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "10!/(7!·3!) é...",
+      "o": [
+        "120.",
+        "720.",
+        "210.",
+        "30."
+      ],
+      "a": 0,
+      "sol": "10×9×8/(6)=120.",
+      "hyp": "Pode esquecer 3!=6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:coef-binomial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-030",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "8!/(5!·3!) é...",
+      "o": [
+        "336.",
+        "56.",
+        "24.",
+        "16."
+      ],
+      "a": 1,
+      "sol": "8×7×6/6=56.",
+      "hyp": "Pode não cancelar 3!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:coef-binomial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-031",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A expressão n!/(n−k)! contém, depois de simplificada, quantos fatores consecutivos?",
+      "o": [
+        "n−k.",
+        "n.",
+        "k.",
+        "k+1."
+      ],
+      "a": 2,
+      "sol": "Ficam n(n−1)…(n−k+1), num total de k fatores.",
+      "hyp": "Pode contar os extremos de forma errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:numero-fatores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-032",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "12!/10! é...",
+      "o": [
+        "120.",
+        "110.",
+        "22.",
+        "132."
+      ],
+      "a": 3,
+      "sol": "12×11=132.",
+      "hyp": "Pode usar 12×10.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-033",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "12!/9! é...",
+      "o": [
+        "1320.",
+        "1080.",
+        "1188.",
+        "120."
+      ],
+      "a": 0,
+      "sol": "12×11×10=1320.",
+      "hyp": "Pode esquecer um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente-tres",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-034",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "5!/0! é...",
+      "o": [
+        "0.",
+        "120.",
+        "1.",
+        "5."
+      ],
+      "a": 1,
+      "sol": "0!=1.",
+      "hyp": "Pode dividir por zero por interpretar 0!=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:zero-fatorial-aplicado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-035",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "0!/1! é...",
+      "o": [
+        "0.",
+        "−1.",
+        "1.",
+        "não definido."
+      ],
+      "a": 2,
+      "sol": "Ambos valem 1.",
+      "hyp": "Pode pensar que 0! é 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:zero-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-036",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O quociente n!/n! vale...",
+      "o": [
+        "0.",
+        "n.",
+        "n!.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Qualquer número não nulo dividido por si próprio é 1; n!≥1.",
+      "hyp": "Pode confundir com n!−n!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:quociente-igual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-037",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica (n+1)!/(n−1)!.",
+      "o": [
+        "n(n+1).",
+        "n+1.",
+        "n(n−1).",
+        "(n+1)(n−1)."
+      ],
+      "a": 0,
+      "sol": "(n+1)!= (n+1)n(n−1)!.",
+      "hyp": "Pode esquecer o fator n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:simplificar-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-038",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se (n+1)!/(n−1)!=20, então n=",
+      "o": [
+        "5.",
+        "4.",
+        "3.",
+        "20."
+      ],
+      "a": 1,
+      "sol": "n(n+1)=20; 4×5=20.",
+      "hyp": "Pode resolver n²=20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-simbolica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-039",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se n!/(n−3)!=120, então n=",
+      "o": [
+        "5.",
+        "8.",
+        "6.",
+        "4."
+      ],
+      "a": 2,
+      "sol": "n(n−1)(n−2)=120; 6×5×4=120.",
+      "hyp": "Pode testar apenas dois fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:equacao-tres-fatores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-040",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A razão (n+1)!/n! relativamente a n!/ (n−1)! é...",
+      "o": [
+        "n/(n+1).",
+        "1.",
+        "n+1.",
+        "(n+1)/n."
+      ],
+      "a": 3,
+      "sol": "Os quocientes são n+1 e n; a razão é (n+1)/n.",
+      "hyp": "Pode confundir a ordem da razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:razao-quocientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-041",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica 9!/(6!·3!).",
+      "o": [
+        "84.",
+        "504.",
+        "28.",
+        "72."
+      ],
+      "a": 0,
+      "sol": "9×8×7/(6)=84.",
+      "hyp": "Pode dividir por 3 em vez de 6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:coef-binomial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-042",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Simplifica 11!/(9!·2!).",
+      "o": [
+        "110.",
+        "55.",
+        "99.",
+        "22."
+      ],
+      "a": 1,
+      "sol": "11×10/2=55.",
+      "hyp": "Pode esquecer 2!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:coef-binomial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-043",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual destas igualdades é verdadeira para n≥1?",
+      "o": [
+        "(n+1)!=n!+1.",
+        "(n+1)!=n(n!).",
+        "(n+1)!=(n+1)n!.",
+        "(n+1)!=n!/(n+1)."
+      ],
+      "a": 2,
+      "sol": "É a definição recursiva do fatorial.",
+      "hyp": "Pode confundir multiplicação pelo novo fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-044",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual destas expressões é igual a n(n−1)(n−2)?",
+      "o": [
+        "n!/(n−2)!.",
+        "(n−1)!/(n−3)!.",
+        "n!/3!.",
+        "n!/(n−3)!."
+      ],
+      "a": 3,
+      "sol": "Cancelando (n−3)! ficam três fatores.",
+      "hyp": "Pode contar fatores incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:reconhecer-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-045",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual expressão é igual a (n+2)(n+1)?",
+      "o": [
+        "(n+2)!/n!.",
+        "(n+1)!/n!.",
+        "(n+2)!/(n+1)!.",
+        "n!/ (n−2)!."
+      ],
+      "a": 0,
+      "sol": "Cancelam-se todos os fatores até n!.",
+      "hyp": "Pode deixar apenas um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:reconhecer-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-046",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Em contagem, o fatorial aparece naturalmente quando...",
+      "o": [
+        "todas as etapas têm sempre o mesmo número de opções.",
+        "há uma sequência de escolhas sem repetição com uma opção a menos em cada etapa.",
+        "a ordem nunca importa.",
+        "há apenas duas alternativas."
+      ],
+      "a": 1,
+      "sol": "n×(n−1)×…×1=n! surge ao ordenar n objetos distintos.",
+      "hyp": "Pode associar fatorial apenas à notação, sem o processo de contagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:origem-fatorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-047",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Há 6 lugares em fila e 6 pessoas distintas, uma por lugar. O produto de opções sucessivas é...",
+      "o": [
+        "6⁶.",
+        "6+5+4+3+2+1.",
+        "6·5·4·3·2·1=6!.",
+        "2⁶."
+      ],
+      "a": 2,
+      "sol": "Depois de cada pessoa colocada resta uma opção a menos.",
+      "hyp": "Pode usar repetição em cada lugar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:modelacao-fila",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-048",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se 8!=40320, então 9! é...",
+      "o": [
+        "45360.",
+        "322560.",
+        "40329.",
+        "362880."
+      ],
+      "a": 3,
+      "sol": "9!=9×8!=9×40320=362880.",
+      "hyp": "Pode somar 9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:recorrencia-numerica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-049",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se 10!=3628800, então 10!/10 é...",
+      "o": [
+        "9!.",
+        "10!.",
+        "8!.",
+        "11!."
+      ],
+      "a": 0,
+      "sol": "10!=10·9!, logo dividir por 10 dá 9!.",
+      "hyp": "Pode achar que reduz o argumento e também divide novamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:inverter-recorrencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-FAT-050",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-fatorial",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um algoritmo testa todas as ordens possíveis de 7 itens distintos. O número de ordens a testar é...",
+      "o": [
+        "7².",
+        "7!.",
+        "2⁷.",
+        "7."
+      ],
+      "a": 1,
+      "sol": "Cada ordem é uma permutação dos 7 itens, totalizando 7!.",
+      "hyp": "Pode usar potência por confundir posição com repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-fatorial:modelacao-ordens",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

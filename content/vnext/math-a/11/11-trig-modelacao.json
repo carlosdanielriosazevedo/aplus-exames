@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-trig",
+  "subtopicId": "11-trig-modelacao",
+  "subtopic": "Resolução de triângulos e modelação periódica",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha razões trigonométricas em triângulos retângulos, Leis dos Senos/Cossenos, área trigonométrica, ângulos de elevação, triangulação e modelos periódicos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11TRIG-MOD-001",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo retângulo, sin α é...",
+      "o": [
+        "cateto oposto/hipotenusa.",
+        "cateto adjacente/hipotenusa.",
+        "cateto oposto/cateto adjacente.",
+        "hipotenusa/cateto oposto."
+      ],
+      "a": 0,
+      "sol": "Por definição, sin α=oposto/hipotenusa.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:razoes-triangulo-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-002",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo retângulo, cos α é...",
+      "o": [
+        "cateto oposto/hipotenusa.",
+        "cateto adjacente/hipotenusa.",
+        "cateto oposto/cateto adjacente.",
+        "hipotenusa/cateto adjacente."
+      ],
+      "a": 1,
+      "sol": "cos α=adjacente/hipotenusa.",
+      "hyp": "Pode trocar cosseno e seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:razoes-triangulo-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-003",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo retângulo, tan α é...",
+      "o": [
+        "cateto adjacente/hipotenusa.",
+        "cateto oposto/hipotenusa.",
+        "cateto oposto/cateto adjacente.",
+        "hipotenusa/cateto oposto."
+      ],
+      "a": 2,
+      "sol": "tan α=oposto/adjacente.",
+      "hyp": "Pode usar uma razão com a hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:razoes-triangulo-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-004",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo retângulo, relativamente a α, o cateto oposto mede 3 e a hipotenusa 5. Então sin α=",
+      "o": [
+        "4/5",
+        "3/4",
+        "5/3",
+        "3/5"
+      ],
+      "a": 3,
+      "sol": "sin α=oposto/hipotenusa=3/5.",
+      "hyp": "Pode usar o cateto adjacente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:razao-direta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-005",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo 3-4-5, se α é oposto ao lado 3, então cos α=",
+      "o": [
+        "4/5",
+        "3/5",
+        "3/4",
+        "5/4"
+      ],
+      "a": 0,
+      "sol": "O cateto adjacente a α mede 4 e a hipotenusa 5.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:razao-direta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-006",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo retângulo, tan α=3/4 e o cateto adjacente mede 8. O cateto oposto mede...",
+      "o": [
+        "8",
+        "6",
+        "10",
+        "12"
+      ],
+      "a": 1,
+      "sol": "oposto/8=3/4 => oposto=6.",
+      "hyp": "Pode multiplicar pela razão inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:usar-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-007",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo retângulo, sin α=1/2 e a hipotenusa mede 10. O cateto oposto mede...",
+      "o": [
+        "10",
+        "20",
+        "5",
+        "√5"
+      ],
+      "a": 2,
+      "sol": "oposto/10=1/2 => oposto=5.",
+      "hyp": "Pode dividir por 1/2 em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:usar-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-008",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo retângulo, cos α=√3/2 e a hipotenusa mede 12. O cateto adjacente mede...",
+      "o": [
+        "6",
+        "12√3",
+        "3√3",
+        "6√3"
+      ],
+      "a": 3,
+      "sol": "adjacente=12×√3/2=6√3.",
+      "hyp": "Pode dividir por √3/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:usar-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-009",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma escada de 5 m encostada a uma parede faz 60° com o chão. A altura atingida é...",
+      "o": [
+        "5√3/2 m",
+        "2,5 m",
+        "5 m",
+        "5/√3 m"
+      ],
+      "a": 0,
+      "sol": "Altura=5 sin60°=5√3/2.",
+      "hyp": "Pode usar cosseno em vez de seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:modelacao-escada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-010",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma rampa de 10 m faz 30° com a horizontal. A subida vertical é...",
+      "o": [
+        "5√3 m",
+        "5 m",
+        "10√3/2 m",
+        "20 m"
+      ],
+      "a": 1,
+      "sol": "Subida=10 sin30°=5.",
+      "hyp": "Pode usar cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:modelacao-rampa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-011",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A Lei dos Senos afirma que, num triângulo ABC...",
+      "o": [
+        "a cos A=b cos B=c cos C.",
+        "a²+b²=c² sempre.",
+        "a/sin A=b/sin B=c/sin C.",
+        "sin A+sin B=sin C."
+      ],
+      "a": 2,
+      "sol": "Lados são proporcionais aos senos dos ângulos opostos.",
+      "hyp": "Pode confundir com Lei dos Cossenos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-senos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-012",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A Lei dos Cossenos para o lado a é...",
+      "o": [
+        "a=b+c−2bc cos A.",
+        "a²=b²+c².",
+        "a²=b²+c²+2bc sin A.",
+        "a²=b²+c²−2bc cos A."
+      ],
+      "a": 3,
+      "sol": "É a generalização de Pitágoras para qualquer triângulo.",
+      "hyp": "Pode esquecer o termo de correção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-cossenos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-013",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se A=90°, a Lei dos Cossenos reduz-se a...",
+      "o": [
+        "a²=b²+c².",
+        "a=b+c.",
+        "a²=b²−c².",
+        "a²=2bc."
+      ],
+      "a": 0,
+      "sol": "cos90°=0.",
+      "hyp": "Pode não reconhecer a ligação a Pitágoras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:cossenos-pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-014",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, A=30°, a=5 e B=90°. Pela Lei dos Senos, b=",
+      "o": [
+        "5√3",
+        "10",
+        "5",
+        "10√3"
+      ],
+      "a": 1,
+      "sol": "5/sin30°=b/sin90° => 5/(1/2)=b => b=10.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-senos-direta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-015",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, A=45°, a=6 e B=45°. Então b=",
+      "o": [
+        "3",
+        "6√2",
+        "6",
+        "12"
+      ],
+      "a": 2,
+      "sol": "Ângulos iguais opõem-se a lados iguais.",
+      "hyp": "Pode aplicar fórmula sem notar simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-senos-igualdade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-016",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, dois lados medem 3 e 4 e o ângulo compreendido é 90°. O terceiro lado mede...",
+      "o": [
+        "7",
+        "√7",
+        "12",
+        "5"
+      ],
+      "a": 3,
+      "sol": "Pela Lei dos Cossenos, c²=9+16=25.",
+      "hyp": "Pode somar os lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-cossenos-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-017",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Dois lados de um triângulo medem 5 e 5 e o ângulo compreendido é 60°. O terceiro lado mede...",
+      "o": [
+        "5",
+        "5√2",
+        "10",
+        "√15"
+      ],
+      "a": 0,
+      "sol": "c²=25+25−50×1/2=25, logo c=5.",
+      "hyp": "Pode esquecer o termo −2ab cosC.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-cossenos-equilatero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-018",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A área de um triângulo com lados a,b e ângulo compreendido C pode ser calculada por...",
+      "o": [
+        "A=ab cos C.",
+        "A=ab sin C/2.",
+        "A=(a+b)sin C.",
+        "A=abc/2."
+      ],
+      "a": 1,
+      "sol": "Área=1/2 ab sin C.",
+      "hyp": "Pode trocar seno por cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:area-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-019",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Dois lados medem 8 e 10 e o ângulo compreendido é 30°. A área é...",
+      "o": [
+        "40",
+        "80",
+        "20",
+        "20√3"
+      ],
+      "a": 2,
+      "sol": "A=1/2×8×10×1/2=20.",
+      "hyp": "Pode esquecer um dos fatores 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:area-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-020",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Dois lados medem 6 e 7 e o ângulo compreendido é 90°. A área é...",
+      "o": [
+        "42",
+        "13",
+        "6√7",
+        "21"
+      ],
+      "a": 3,
+      "sol": "A=1/2×6×7×1=21.",
+      "hyp": "Pode multiplicar sem dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:area-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-021",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, A=40°, B=60°. Quanto mede C?",
+      "o": [
+        "80°",
+        "100°",
+        "60°",
+        "40°"
+      ],
+      "a": 0,
+      "sol": "C=180−40−60=80°.",
+      "hyp": "Pode esquecer a soma dos ângulos internos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:completar-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-022",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, a=7, A=30° e B=45°. Pela Lei dos Senos, b é aproximadamente...",
+      "o": [
+        "7,00",
+        "9,90",
+        "4,95",
+        "14,00"
+      ],
+      "a": 1,
+      "sol": "b=7 sin45°/sin30°=7(√2/2)/(1/2)=7√2≈9,90.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-senos-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-023",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, b=10, B=60° e C=30°. Quanto mede c?",
+      "o": [
+        "5",
+        "5√3",
+        "10/√3",
+        "20"
+      ],
+      "a": 2,
+      "sol": "c=10 sin30°/sin60°=10/√3≈5,77.",
+      "hyp": "Pode usar sin60/sin30 em vez do inverso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-senos-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-024",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Dois lados medem 7 e 9 e o ângulo compreendido 60°. O terceiro lado c satisfaz...",
+      "o": [
+        "c²=130.",
+        "c²=18.",
+        "c²=31.",
+        "c²=67."
+      ],
+      "a": 3,
+      "sol": "c²=49+81−2×7×9×1/2=130−63=67.",
+      "hyp": "Pode esquecer o cosseno ou o fator 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-cossenos-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-025",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, dois lados medem 7 e 9 e o ângulo compreendido é 60°. Se o terceiro lado c satisfaz c²=67, então c é aproximadamente...",
+      "o": [
+        "8,19",
+        "6,70",
+        "7,00",
+        "9,00"
+      ],
+      "a": 0,
+      "sol": "c=√67≈8,19.",
+      "hyp": "Pode usar c² como comprimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-cossenos-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-026",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo com lados 5,6,7, qual é cos do ângulo C oposto ao lado 7?",
+      "o": [
+        "−1/5",
+        "1/5",
+        "3/5",
+        "1/2"
+      ],
+      "a": 1,
+      "sol": "49=25+36−60 cosC => 60cosC=12 => cosC=1/5.",
+      "hyp": "Pode mover termos com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:achar-angulo-cossenos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-027",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se, num triângulo, c²>a²+b², então o ângulo C é...",
+      "o": [
+        "reto.",
+        "agudo.",
+        "obtuso.",
+        "zero."
+      ],
+      "a": 2,
+      "sol": "Pela Lei dos Cossenos, isso implica cosC<0, logo C>90°.",
+      "hyp": "Pode inverter a classificação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:classificar-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-028",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se c²<a²+b², então o ângulo C é...",
+      "o": [
+        "obtuso.",
+        "reto.",
+        "impossível.",
+        "agudo."
+      ],
+      "a": 3,
+      "sol": "A Lei dos Cossenos dá cosC>0.",
+      "hyp": "Pode confundir com o caso obtuso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:classificar-angulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-029",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um triângulo tem lados 5,5,8. O ângulo oposto ao lado 8 é aproximadamente...",
+      "o": [
+        "106,3°",
+        "73,7°",
+        "90°",
+        "53,1°"
+      ],
+      "a": 0,
+      "sol": "cosC=(25+25−64)/(50)=−14/50=−0,28; C≈106,3°.",
+      "hyp": "Pode ignorar o sinal negativo do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:angulo-lei-cossenos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-030",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área de um triângulo com lados 5 e 8 e ângulo compreendido 120° é...",
+      "o": [
+        "20√3",
+        "10√3",
+        "40√3",
+        "10"
+      ],
+      "a": 1,
+      "sol": "A=1/2×5×8×sin120°=20×√3/2=10√3.",
+      "hyp": "Pode usar cos120° ou esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:area-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-031",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "De um ponto a 30 m da base de uma torre, o ângulo de elevação ao topo é 45°. Ignorando a altura do observador, a torre mede...",
+      "o": [
+        "15 m",
+        "30√2 m",
+        "30 m",
+        "60 m"
+      ],
+      "a": 2,
+      "sol": "tan45°=h/30=1, logo h=30.",
+      "hyp": "Pode usar seno ou hipotenusa inexistente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:angulo-elevacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-032",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "A 20 m da base de uma árvore, o ângulo de elevação ao topo é 60°. A altura é...",
+      "o": [
+        "10√3 m",
+        "20 m",
+        "40 m",
+        "20√3 m"
+      ],
+      "a": 3,
+      "sol": "tan60°=h/20=√3, logo h=20√3.",
+      "hyp": "Pode usar sin60° diretamente com 20 como hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:angulo-elevacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-033",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Um cabo de 50 m faz 30° com a horizontal. Qual é a componente vertical do cabo?",
+      "o": [
+        "25 m",
+        "25√3 m",
+        "50√3 m",
+        "50 m"
+      ],
+      "a": 0,
+      "sol": "50 sin30°=25.",
+      "hyp": "Pode usar cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:componentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-034",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Um avião sobe numa trajetória de 2 km fazendo 15° com a horizontal. O ganho de altitude é...",
+      "o": [
+        "2cos15° km",
+        "2sin15° km",
+        "2tan15° km",
+        "sin15°/2 km"
+      ],
+      "a": 1,
+      "sol": "A subida vertical é a componente oposta ao ângulo.",
+      "hyp": "Pode escolher a componente horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:componentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-035",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num modelo periódico h(t)=D+A sin(ωt), D representa...",
+      "o": [
+        "a amplitude.",
+        "o período.",
+        "o nível médio.",
+        "a fase inicial."
+      ],
+      "a": 2,
+      "sol": "D é o deslocamento vertical/eixo médio.",
+      "hyp": "Pode trocar D e A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:modelo-periodico-parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-036",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma roda-gigante tem altura máxima 42 m e mínima 2 m, a amplitude vertical é...",
+      "o": [
+        "22 m",
+        "40 m",
+        "44 m",
+        "20 m"
+      ],
+      "a": 3,
+      "sol": "Amplitude=(42−2)/2=20.",
+      "hyp": "Pode usar metade da altura máxima.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:roda-gigante-amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-037",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma roda-gigante tem altura máxima 42 m e mínima 2 m. Qual é a altura do centro?",
+      "o": [
+        "22 m",
+        "20 m",
+        "42 m",
+        "2 m"
+      ],
+      "a": 0,
+      "sol": "Eixo médio=(42+2)/2=22.",
+      "hyp": "Pode confundir centro com amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:roda-gigante-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-038",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma roda-gigante completa uma volta em 40 s. Num modelo sin/cos em segundos, a frequência angular pode ser...",
+      "o": [
+        "20π rad/s",
+        "π/20 rad/s",
+        "π/40 rad/s",
+        "40π rad/s"
+      ],
+      "a": 1,
+      "sol": "ω=2π/T=2π/40=π/20.",
+      "hyp": "Pode usar 1/T sem converter para frequência angular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:frequencia-angular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-039",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma maré varia entre 1,2 m e 5,8 m. Qual é a amplitude?",
+      "o": [
+        "3,5 m",
+        "4,6 m",
+        "2,3 m",
+        "7,0 m"
+      ],
+      "a": 2,
+      "sol": "(5,8−1,2)/2=2,3.",
+      "hyp": "Pode usar a diferença total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:mare-amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-040",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma maré varia entre 1,2 m e 5,8 m. Qual é o nível médio?",
+      "o": [
+        "2,3 m",
+        "5,8 m",
+        "4,6 m",
+        "3,5 m"
+      ],
+      "a": 3,
+      "sol": "(5,8+1,2)/2=3,5.",
+      "hyp": "Pode usar a amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:mare-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-041",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma oscilação tem período 12 h. Quantos ciclos completos ocorrem em 3 dias?",
+      "o": [
+        "6",
+        "4",
+        "3",
+        "12"
+      ],
+      "a": 0,
+      "sol": "3 dias=72 h; 72/12=6.",
+      "hyp": "Pode dividir dias diretamente por horas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:ciclos-periodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-042",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma função periódica tem máximo 8, mínimo 2 e período 6. Qual modelo é compatível?",
+      "o": [
+        "y=3+5cos(πt/3).",
+        "y=5+3cos(πt/3).",
+        "y=5+6cos(3πt).",
+        "y=8+2cos(πt/6)."
+      ],
+      "a": 1,
+      "sol": "Eixo médio 5, amplitude 3, e ω=2π/6=π/3.",
+      "hyp": "Pode acertar amplitude mas errar período ou média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:construir-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-043",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No modelo y=5+3cos(πt/3), qual é y(0)?",
+      "o": [
+        "5",
+        "3",
+        "8",
+        "2"
+      ],
+      "a": 2,
+      "sol": "cos0=1, logo y=8.",
+      "hyp": "Pode assumir que no instante 0 começa no eixo médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:avaliar-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-044",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No modelo y=5+3cos(πt/3), em que instante positivo mais pequeno se atinge o mínimo?",
+      "o": [
+        "t=1,5",
+        "t=6",
+        "t=9",
+        "t=3"
+      ],
+      "a": 3,
+      "sol": "Mínimo quando cos(πt/3)=−1, isto é, πt/3=π => t=3.",
+      "hyp": "Pode usar o período completo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:instante-minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-045",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, a=8, b=10, C=60°. Qual é a área?",
+      "o": [
+        "20√3",
+        "40√3",
+        "80√3",
+        "10√3"
+      ],
+      "a": 0,
+      "sol": "A=1/2×8×10×√3/2=20√3.",
+      "hyp": "Pode esquecer um fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:area-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-046",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, a=8, b=10, C=60°. Qual é c²?",
+      "o": [
+        "164",
+        "84",
+        "36",
+        "100"
+      ],
+      "a": 1,
+      "sol": "c²=64+100−160×1/2=84.",
+      "hyp": "Pode usar sinal positivo no termo do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-cossenos-multi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-047",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, A=30°, B=45° e a=6. Qual é b?",
+      "o": [
+        "3√2",
+        "12",
+        "6√2",
+        "6/√2"
+      ],
+      "a": 2,
+      "sol": "b=6 sin45°/sin30°=6√2.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:lei-senos-multi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-048",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Dois observadores A e B estão a 100 m um do outro e veem um ponto C com ângulos internos A=45° e B=60°. Quanto mede C?",
+      "o": [
+        "105°",
+        "15°",
+        "90°",
+        "75°"
+      ],
+      "a": 3,
+      "sol": "C=180−45−60=75°.",
+      "hyp": "Pode somar os ângulos em vez de subtrair de 180.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:triangulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-049",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num triângulo com AB=100, A=45°, B=60° e C=75°, a distância AC, oposta a B=60°, é dada por...",
+      "o": [
+        "100 sin60°/sin75°",
+        "100 sin75°/sin60°",
+        "100 cos60°/cos75°",
+        "100 tan60°"
+      ],
+      "a": 0,
+      "sol": "Pela Lei dos Senos, AC/sin60°=100/sin75°.",
+      "hyp": "Pode inverter a proporção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:triangulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-MOD-050",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-modelacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma temperatura periódica tem média 18°C, amplitude 6°C e período 24 h, começando no máximo em t=0. Qual modelo simples é adequado?",
+      "o": [
+        "T(t)=6+18cos(πt/12).",
+        "T(t)=18+6cos(πt/12).",
+        "T(t)=18+6sin(πt/12).",
+        "T(t)=18+6cos(12πt)."
+      ],
+      "a": 1,
+      "sol": "ω=2π/24=π/12; cosseno começa no máximo porque cos0=1.",
+      "hyp": "Pode trocar média/amplitude ou usar seno sem fase.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-modelacao:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

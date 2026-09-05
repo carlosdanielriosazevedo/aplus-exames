@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-trig",
+  "subtopicId": "11-trig-equacoes",
+  "subtopic": "Equações trigonométricas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha equações elementares de seno/cosseno/tangente, soluções gerais, fatorização, quadráticas trigonométricas, argumentos transformados e modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11TRIG-EQ-001",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A equação sin x=0 tem, em R, soluções...",
+      "o": [
+        "x=kπ, k∈Z.",
+        "x=π/2+kπ.",
+        "x=2kπ apenas.",
+        "x=π/4+kπ."
+      ],
+      "a": 0,
+      "sol": "O seno anula-se nos múltiplos inteiros de π.",
+      "hyp": "Pode esquecer os múltiplos ímpares de π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-002",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A equação cos x=0 tem soluções...",
+      "o": [
+        "x=kπ.",
+        "x=π/2+kπ, k∈Z.",
+        "x=2kπ.",
+        "x=π/4+2kπ."
+      ],
+      "a": 1,
+      "sol": "O cosseno anula-se nos ângulos π/2 e 3π/2 módulo 2π.",
+      "hyp": "Pode confundir zeros de seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:cos-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-003",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A equação tan x=0 tem soluções...",
+      "o": [
+        "x=π/2+kπ.",
+        "x=π/4+kπ.",
+        "x=kπ, k∈Z.",
+        "x=2kπ apenas."
+      ],
+      "a": 2,
+      "sol": "tan x=0 quando sin x=0 e cos x≠0, isto é, x=kπ.",
+      "hyp": "Pode confundir com pontos onde a tangente não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:tan-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-004",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, as soluções de sin x=0 são...",
+      "o": [
+        "π/2 e 3π/2.",
+        "0 apenas.",
+        "π apenas.",
+        "0 e π."
+      ],
+      "a": 3,
+      "sol": "No intervalo dado, seno anula-se em 0 e π.",
+      "hyp": "Pode esquecer o extremo 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-zero-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-005",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, as soluções de cos x=0 são...",
+      "o": [
+        "π/2 e 3π/2.",
+        "0 e π.",
+        "π/2 apenas.",
+        "π e 2π."
+      ],
+      "a": 0,
+      "sol": "Cosseno é zero nos eixos verticais.",
+      "hyp": "Pode usar zeros do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:cos-zero-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-006",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, sin x=1/2 tem soluções...",
+      "o": [
+        "π/6 e 11π/6.",
+        "π/6 e 5π/6.",
+        "π/3 e 2π/3.",
+        "5π/6 e 7π/6."
+      ],
+      "a": 1,
+      "sol": "Seno positivo nos quadrantes I e II com referência π/6.",
+      "hyp": "Pode usar quadrantes do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-007",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, cos x=1/2 tem soluções...",
+      "o": [
+        "π/3 e 2π/3.",
+        "π/6 e 11π/6.",
+        "π/3 e 5π/3.",
+        "2π/3 e 4π/3."
+      ],
+      "a": 2,
+      "sol": "Cosseno positivo nos quadrantes I e IV, referência π/3.",
+      "hyp": "Pode usar quadrantes do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:cos-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-008",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, sin x=−1/2 tem soluções...",
+      "o": [
+        "π/6 e 5π/6.",
+        "4π/3 e 5π/3.",
+        "5π/6 e 7π/6.",
+        "7π/6 e 11π/6."
+      ],
+      "a": 3,
+      "sol": "Seno negativo nos quadrantes III e IV, referência π/6.",
+      "hyp": "Pode esquecer uma das soluções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-009",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, cos x=−√2/2 tem soluções...",
+      "o": [
+        "3π/4 e 5π/4.",
+        "π/4 e 7π/4.",
+        "π/4 e 3π/4.",
+        "5π/4 e 7π/4."
+      ],
+      "a": 0,
+      "sol": "Cosseno negativo nos quadrantes II e III, referência π/4.",
+      "hyp": "Pode escolher quadrantes errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:cos-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-010",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Em [0,2π[, tan x=1 tem soluções...",
+      "o": [
+        "π/4 e 3π/4.",
+        "π/4 e 5π/4.",
+        "3π/4 e 7π/4.",
+        "π/2 e 3π/2."
+      ],
+      "a": 1,
+      "sol": "Tangente positiva nos quadrantes I e III e tem período π.",
+      "hyp": "Pode usar quadrantes de seno positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:tan-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-011",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A solução geral de sin x=sin α pode ser escrita como...",
+      "o": [
+        "x=α+kπ apenas.",
+        "x=−α+2kπ apenas.",
+        "x=α+2kπ ou x=π−α+2kπ.",
+        "x=π+α+2kπ apenas."
+      ],
+      "a": 2,
+      "sol": "O seno tem a mesma ordenada em α e π−α, repetindo-se a cada 2π.",
+      "hyp": "Pode usar indevidamente período π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:solucao-geral-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-012",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A solução geral de cos x=cos α pode ser escrita como...",
+      "o": [
+        "x=α+kπ.",
+        "x=π−α+2kπ apenas.",
+        "x=α+π/2+kπ.",
+        "x=±α+2kπ."
+      ],
+      "a": 3,
+      "sol": "O cosseno é par e 2π-periódico.",
+      "hyp": "Pode confundir com a solução geral do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:solucao-geral-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-013",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A solução geral de tan x=tan α é...",
+      "o": [
+        "x=α+kπ.",
+        "x=α+2kπ apenas.",
+        "x=π−α+2kπ.",
+        "x=−α+2kπ."
+      ],
+      "a": 0,
+      "sol": "A tangente tem período π.",
+      "hyp": "Pode usar período 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:solucao-geral-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-014",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Resolve sin x=√3/2 em [0,2π[.",
+      "o": [
+        "x=π/6 ou 5π/6.",
+        "x=π/3 ou 2π/3.",
+        "x=4π/3 ou 5π/3.",
+        "x=π/3 apenas."
+      ],
+      "a": 1,
+      "sol": "Seno positivo com referência π/3 nos quadrantes I e II.",
+      "hyp": "Pode trocar π/3 por π/6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-015",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Resolve cos x=−1/2 em [0,2π[.",
+      "o": [
+        "x=π/3 ou 5π/3.",
+        "x=π/6 ou 5π/6.",
+        "x=2π/3 ou 4π/3.",
+        "x=2π/3 apenas."
+      ],
+      "a": 2,
+      "sol": "Cosseno negativo nos quadrantes II e III.",
+      "hyp": "Pode usar os quadrantes positivos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:cos-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-016",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Resolve tan x=−√3 em [0,2π[.",
+      "o": [
+        "x=π/3 ou 4π/3.",
+        "x=π/6 ou 7π/6.",
+        "x=5π/6 ou 11π/6.",
+        "x=2π/3 ou 5π/3."
+      ],
+      "a": 3,
+      "sol": "Referência π/3; tangente negativa nos quadrantes II e IV.",
+      "hyp": "Pode escolher quadrantes I e III.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:tan-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-017",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 2sin x=1 em [0,2π[.",
+      "o": [
+        "π/6 e 5π/6.",
+        "π/3 e 2π/3.",
+        "7π/6 e 11π/6.",
+        "π/6 apenas."
+      ],
+      "a": 0,
+      "sol": "A equação reduz-se a sin x=1/2.",
+      "hyp": "Pode esquecer dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:equacao-linear-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-018",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 3cos x+3=0 em [0,2π[.",
+      "o": [
+        "0.",
+        "π.",
+        "π/2 e 3π/2.",
+        "2π."
+      ],
+      "a": 1,
+      "sol": "cos x=−1, o que ocorre em x=π.",
+      "hyp": "Pode parar em cos x=−3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:equacao-linear-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-019",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 2tan x−2=0 em [0,2π[.",
+      "o": [
+        "π/4 apenas.",
+        "3π/4 e 7π/4.",
+        "π/4 e 5π/4.",
+        "π/2 e 3π/2."
+      ],
+      "a": 2,
+      "sol": "tan x=1, período π.",
+      "hyp": "Pode dar apenas uma solução no intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:equacao-linear-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-020",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A equação sin x=2 tem...",
+      "o": [
+        "duas soluções por período.",
+        "uma solução.",
+        "infinitas soluções.",
+        "nenhuma solução real."
+      ],
+      "a": 3,
+      "sol": "O seno assume apenas valores em [−1,1].",
+      "hyp": "Pode esquecer a imagem do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sem-solucao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-021",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A equação cos x=−3/2 tem...",
+      "o": [
+        "nenhuma solução real.",
+        "duas soluções em [0,2π[.",
+        "uma solução em π.",
+        "infinitas soluções."
+      ],
+      "a": 0,
+      "sol": "O cosseno também tem imagem [−1,1].",
+      "hyp": "Pode tentar resolver numericamente um valor impossível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sem-solucao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-022",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin²x=1 em [0,2π[.",
+      "o": [
+        "0 e π.",
+        "π/2 e 3π/2.",
+        "π/4 e 5π/4.",
+        "π/2 apenas."
+      ],
+      "a": 1,
+      "sol": "sin²x=1 implica sin x=±1.",
+      "hyp": "Pode considerar apenas sin x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:quadratica-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-023",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve cos²x=1/4 em [0,2π[.",
+      "o": [
+        "π/3 e 5π/3 apenas.",
+        "2π/3 e 4π/3 apenas.",
+        "π/3,2π/3,4π/3,5π/3.",
+        "π/6,5π/6,7π/6,11π/6."
+      ],
+      "a": 2,
+      "sol": "cos x=±1/2, produzindo quatro soluções.",
+      "hyp": "Pode esquecer a raiz negativa ou usar os valores de seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:quadratica-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-024",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin x cos x=0 em [0,2π[.",
+      "o": [
+        "0 e π.",
+        "π/2 e 3π/2.",
+        "π/4 e 5π/4.",
+        "0,π/2,π,3π/2."
+      ],
+      "a": 3,
+      "sol": "Produto zero quando sin x=0 ou cos x=0.",
+      "hyp": "Pode resolver apenas um dos fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:produto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-025",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin x(2cos x−1)=0 em [0,2π[.",
+      "o": [
+        "0,π,π/3,5π/3.",
+        "0,π apenas.",
+        "π/3,5π/3 apenas.",
+        "π/2,3π/2,π/3,5π/3."
+      ],
+      "a": 0,
+      "sol": "sin x=0 dá 0,π; cos x=1/2 dá π/3,5π/3.",
+      "hyp": "Pode esquecer um dos fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:produto-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-026",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 2cos²x−1=0 em [0,2π[.",
+      "o": [
+        "π/4 e 5π/4.",
+        "π/4,3π/4,5π/4,7π/4.",
+        "π/2 e 3π/2.",
+        "0 e π."
+      ],
+      "a": 1,
+      "sol": "cos²x=1/2 => cos x=±√2/2.",
+      "hyp": "Pode aceitar apenas a raiz positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:quadratica-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-027",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 2sin²x−sin x=0 em [0,2π[.",
+      "o": [
+        "0,π apenas.",
+        "π/6,5π/6 apenas.",
+        "0,π,π/6,5π/6.",
+        "π/2,3π/2."
+      ],
+      "a": 2,
+      "sol": "sin x(2sin x−1)=0.",
+      "hyp": "Pode não fatorizar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:fatorizacao-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-028",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve tan²x=1 em [0,2π[.",
+      "o": [
+        "π/4,5π/4 apenas.",
+        "3π/4,7π/4 apenas.",
+        "π/2,3π/2.",
+        "π/4,3π/4,5π/4,7π/4."
+      ],
+      "a": 3,
+      "sol": "tan x=±1, dando quatro soluções.",
+      "hyp": "Pode considerar apenas tan x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:quadratica-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-029",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin x=cos x em [0,2π[.",
+      "o": [
+        "π/4 e 5π/4.",
+        "π/4 e 3π/4.",
+        "π/2 e 3π/2.",
+        "0 e π."
+      ],
+      "a": 0,
+      "sol": "Quando cos x≠0, tan x=1; os pontos onde cos x=0 não satisfazem a igualdade.",
+      "hyp": "Pode dividir por cos sem verificar, embora aqui os excluídos não sejam soluções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-igual-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-030",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin x=−cos x em [0,2π[.",
+      "o": [
+        "π/4 e 5π/4.",
+        "3π/4 e 7π/4.",
+        "π/2 e 3π/2.",
+        "0 e π."
+      ],
+      "a": 1,
+      "sol": "tan x=−1.",
+      "hyp": "Pode usar tan x=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-oposto-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-031",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 1−2sin²x=0 em [0,2π[.",
+      "o": [
+        "π/4 e 3π/4.",
+        "π/2 e 3π/2.",
+        "π/4,3π/4,5π/4,7π/4.",
+        "0 e π."
+      ],
+      "a": 2,
+      "sol": "sin²x=1/2 => sin x=±√2/2.",
+      "hyp": "Pode esquecer duas soluções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:quadratica-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-032",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Ao resolver uma equação trigonométrica em R, é essencial...",
+      "o": [
+        "dar apenas soluções em [0,2π[.",
+        "considerar só ângulos positivos.",
+        "substituir sempre por graus.",
+        "incluir a periodicidade nas soluções."
+      ],
+      "a": 3,
+      "sol": "As funções trigonométricas repetem valores periodicamente.",
+      "hyp": "Pode responder apenas com representantes de um período.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:periodicidade-solucoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-033",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A solução geral de sin x=1/2 é...",
+      "o": [
+        "x=π/6+2kπ ou x=5π/6+2kπ.",
+        "x=π/6+kπ.",
+        "x=π/3+2kπ ou 2π/3+2kπ.",
+        "x=π/6+πk/2."
+      ],
+      "a": 0,
+      "sol": "São as duas famílias correspondentes aos quadrantes I e II.",
+      "hyp": "Pode usar período π para o seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:solucao-geral-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-034",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A solução geral de cos x=−1 é...",
+      "o": [
+        "x=π+kπ.",
+        "x=π+2kπ.",
+        "x=2kπ.",
+        "x=π/2+kπ."
+      ],
+      "a": 1,
+      "sol": "Cosseno vale −1 apenas em π módulo 2π.",
+      "hyp": "Pode usar período π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:solucao-geral-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-035",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A solução geral de tan x=√3 é...",
+      "o": [
+        "x=π/3+2kπ.",
+        "x=2π/3+kπ.",
+        "x=π/3+kπ.",
+        "x=π/6+kπ."
+      ],
+      "a": 2,
+      "sol": "Tangente tem período π.",
+      "hyp": "Pode usar período 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:solucao-geral-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-036",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin(2x)=0 em [0,2π[.",
+      "o": [
+        "0 e π.",
+        "π/2 e 3π/2.",
+        "0,π.",
+        "0,π/2,π,3π/2."
+      ],
+      "a": 3,
+      "sol": "2x=kπ => x=kπ/2; no intervalo surgem quatro valores.",
+      "hyp": "Pode esquecer que duplicar o argumento duplica a frequência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:argumento-duplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-037",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve cos(2x)=1 em [0,2π[.",
+      "o": [
+        "0 e π.",
+        "0 apenas.",
+        "π/2 e 3π/2.",
+        "π e 2π."
+      ],
+      "a": 0,
+      "sol": "2x=2kπ => x=kπ; em [0,2π[ são 0 e π.",
+      "hyp": "Pode incluir 2π, que está excluído.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:argumento-duplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-038",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin(2x)=1 em [0,2π[.",
+      "o": [
+        "π/2 e 3π/2.",
+        "π/4 e 5π/4.",
+        "π/4 apenas.",
+        "3π/4 e 7π/4."
+      ],
+      "a": 1,
+      "sol": "2x=π/2+2kπ => x=π/4+kπ.",
+      "hyp": "Pode usar período π no argumento original sem dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:argumento-duplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-039",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve cos(2x)=0 em [0,π[.",
+      "o": [
+        "π/2 apenas.",
+        "0 e π/2.",
+        "π/4 e 3π/4.",
+        "π/4 apenas."
+      ],
+      "a": 2,
+      "sol": "2x=π/2+kπ => x=π/4+kπ/2.",
+      "hyp": "Pode não adaptar o intervalo após dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:argumento-duplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-040",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve tan(2x)=1 em [0,π[.",
+      "o": [
+        "π/4 e 3π/4.",
+        "π/8 apenas.",
+        "3π/8 e 7π/8.",
+        "π/8 e 5π/8."
+      ],
+      "a": 3,
+      "sol": "2x=π/4+kπ => x=π/8+kπ/2; no intervalo surgem π/8 e 5π/8.",
+      "hyp": "Pode usar período π em x em vez de π/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:argumento-duplo-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-041",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin(x−π/6)=0 em [0,2π[.",
+      "o": [
+        "π/6 e 7π/6.",
+        "0 e π.",
+        "π/6 apenas.",
+        "5π/6 e 11π/6."
+      ],
+      "a": 0,
+      "sol": "x−π/6=kπ => x=π/6+kπ.",
+      "hyp": "Pode esquecer a translação de fase.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:fase",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-042",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve cos(x+π/3)=1 em [0,2π[.",
+      "o": [
+        "π/3.",
+        "5π/3.",
+        "2π/3.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "x+π/3=2kπ; no intervalo o representante é x=5π/3.",
+      "hyp": "Pode usar x=−π/3 sem ajustar ao intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:fase",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-043",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin x=sin(π/5) em R.",
+      "o": [
+        "x=π/5+kπ.",
+        "x=−π/5+2kπ apenas.",
+        "x=π/5+2kπ ou x=4π/5+2kπ.",
+        "x=4π/5+kπ."
+      ],
+      "a": 2,
+      "sol": "Usa-se a solução geral do seno.",
+      "hyp": "Pode esquecer a segunda família.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:sin-igual-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-044",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve cos x=cos(2π/7) em R.",
+      "o": [
+        "x=2π/7+kπ.",
+        "x=5π/7+2kπ.",
+        "x=±2π/7+kπ.",
+        "x=±2π/7+2kπ."
+      ],
+      "a": 3,
+      "sol": "A solução geral do cosseno é x=±α+2kπ.",
+      "hyp": "Pode usar período π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:cos-igual-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-045",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve tan x=tan(π/8) em R.",
+      "o": [
+        "x=π/8+kπ.",
+        "x=π/8+2kπ.",
+        "x=7π/8+kπ.",
+        "x=±π/8+2kπ."
+      ],
+      "a": 0,
+      "sol": "A tangente repete-se de π em π.",
+      "hyp": "Pode duplicar desnecessariamente as famílias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:tan-igual-tan",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-046",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Ao dividir uma equação por sin x, que cuidado é necessário?",
+      "o": [
+        "Pode criar sempre soluções com sin x=0.",
+        "Pode perder soluções com sin x=0.",
+        "Não há qualquer cuidado.",
+        "A tangente deixa de existir sempre."
+      ],
+      "a": 1,
+      "sol": "Dividir por uma expressão que pode ser zero elimina os casos em que ela se anula; esses casos devem ser testados separadamente.",
+      "hyp": "Pode dividir por expressão desconhecida sem analisar zeros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:divisao-perigosa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-047",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve sin x( sin x−1)=0 em [0,2π[.",
+      "o": [
+        "0,π apenas.",
+        "π/2 apenas.",
+        "0,π,π/2.",
+        "π/2,3π/2."
+      ],
+      "a": 2,
+      "sol": "sin x=0 dá 0,π; sin x=1 dá π/2.",
+      "hyp": "Pode dividir por sin x e perder 0,π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-048",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "A altura de uma maré simplificada é h(t)=2+sin t. Em [0,2π[, quando h(t)=2?",
+      "o": [
+        "t=π/2 e 3π/2.",
+        "t=π apenas.",
+        "t=0 apenas.",
+        "t=0 e t=π."
+      ],
+      "a": 3,
+      "sol": "h=2 implica sin t=0.",
+      "hyp": "Pode procurar extremos em vez do nível médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:modelacao-periodica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-049",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo T(t)=10+4cos t, quando T=14 em [0,2π[?",
+      "o": [
+        "t=0.",
+        "t=π.",
+        "t=π/2 ou 3π/2.",
+        "t=2π."
+      ],
+      "a": 0,
+      "sol": "10+4cos t=14 => cos t=1, que em [0,2π[ ocorre em 0.",
+      "hyp": "Pode incluir 2π, excluído pelo intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:modelacao-periodica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-EQ-050",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-equacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo y=3sin(2t), em t∈[0,π[, quando y=3?",
+      "o": [
+        "t=π/2.",
+        "t=π/4.",
+        "t=3π/4.",
+        "t=0."
+      ],
+      "a": 1,
+      "sol": "sin(2t)=1 => 2t=π/2+2kπ; no intervalo dado, t=π/4.",
+      "hyp": "Pode esquecer o fator 2 no argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-equacoes:modelacao-frequencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

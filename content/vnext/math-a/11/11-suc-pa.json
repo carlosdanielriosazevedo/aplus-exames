@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-suc",
+  "subtopicId": "11-suc-pa",
+  "subtopic": "Progressões aritméticas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição, termo geral, razão, interpolação, simetria de termos, pertença, monotonia e modelação com progressões aritméticas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11SUC-PA-001",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma progressão aritmética (PA) é uma sucessão em que...",
+      "o": [
+        "a diferença entre termos consecutivos é constante.",
+        "a razão entre termos consecutivos é constante.",
+        "todos os termos são positivos.",
+        "o termo geral é sempre quadrático."
+      ],
+      "a": 0,
+      "sol": "Numa PA, u_{n+1}−u_n=r é constante.",
+      "hyp": "Pode confundir PA com PG.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:definicao-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-002",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na PA, a constante u_{n+1}−u_n chama-se...",
+      "o": [
+        "média.",
+        "razão.",
+        "amplitude.",
+        "produto."
+      ],
+      "a": 1,
+      "sol": "Tradicionalmente chama-se razão da PA, apesar de ser uma diferença.",
+      "hyp": "Pode confundir com a razão multiplicativa de uma PG.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:razao-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-003",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A sucessão 2,5,8,11,... é uma PA de razão...",
+      "o": [
+        "2.",
+        "5.",
+        "3.",
+        "8."
+      ],
+      "a": 2,
+      "sol": "5−2=3 e a diferença mantém-se.",
+      "hyp": "Pode usar o primeiro termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:identificar-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-004",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A sucessão 10,7,4,1,... é uma PA de razão...",
+      "o": [
+        "3.",
+        "−7.",
+        "1.",
+        "−3."
+      ],
+      "a": 3,
+      "sol": "7−10=−3.",
+      "hyp": "Pode usar o módulo e perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:razao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-005",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O termo geral de uma PA com primeiro termo u_1 e razão r é...",
+      "o": [
+        "u_n=u_1+(n−1)r.",
+        "u_n=u_1+nr.",
+        "u_n=u_1r^{n−1}.",
+        "u_n=nr."
+      ],
+      "a": 0,
+      "sol": "Entre u_1 e u_n há n−1 incrementos de r.",
+      "hyp": "Pode contar n incrementos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:formula-termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-006",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa PA com u_1=4 e r=3, u_5=",
+      "o": [
+        "19.",
+        "16.",
+        "15.",
+        "12."
+      ],
+      "a": 1,
+      "sol": "u_5=4+4×3=16.",
+      "hyp": "Pode usar 5r em vez de 4r.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:calcular-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-007",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa PA com u_1=10 e r=−2, u_6=",
+      "o": [
+        "2.",
+        "−2.",
+        "0.",
+        "−10."
+      ],
+      "a": 2,
+      "sol": "u_6=10+5(−2)=0.",
+      "hyp": "Pode fazer apenas 4 passos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:calcular-termo-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-008",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_1=5 e u_4=14 numa PA, a razão é...",
+      "o": [
+        "9.",
+        "4.",
+        "14/5.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "14=5+3r => r=3.",
+      "hyp": "Pode dividir a diferença por 4 em vez de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:achar-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-009",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_2=7 e u_5=16 numa PA, a razão é...",
+      "o": [
+        "3.",
+        "9.",
+        "2.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "Entre u_2 e u_5 há 3 passos:16−7=9=3r.",
+      "hyp": "Pode dividir por 5−0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:achar-razao-dois-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-010",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_3=11 e r=4, então u_1=",
+      "o": [
+        "7.",
+        "3.",
+        "15.",
+        "−1."
+      ],
+      "a": 1,
+      "sol": "u_3=u_1+2r => 11=u_1+8.",
+      "hyp": "Pode subtrair apenas um r.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:achar-primeiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-011",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o 10.º termo da PA 1,4,7,10,...?",
+      "o": [
+        "31.",
+        "27.",
+        "28.",
+        "30."
+      ],
+      "a": 2,
+      "sol": "u_10=1+9×3=28.",
+      "hyp": "Pode usar 10×3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:termo-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-012",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o 8.º termo da PA 20,17,14,...?",
+      "o": [
+        "2.",
+        "−4.",
+        "−7.",
+        "−1."
+      ],
+      "a": 3,
+      "sol": "u_8=20+7(−3)=−1.",
+      "hyp": "Pode errar o número de diferenças.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:termo-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-013",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma PA de razão positiva é...",
+      "o": [
+        "estritamente crescente.",
+        "estritamente decrescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 0,
+      "sol": "Cada termo aumenta por uma quantidade positiva.",
+      "hyp": "Pode confundir sinal da razão com sinal dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:monotonia-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-014",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma PA de razão negativa é...",
+      "o": [
+        "crescente.",
+        "estritamente decrescente.",
+        "constante.",
+        "sempre negativa."
+      ],
+      "a": 1,
+      "sol": "Cada termo diminui.",
+      "hyp": "Pode pensar que razão negativa implica todos os termos negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:monotonia-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-015",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma PA de razão zero é...",
+      "o": [
+        "crescente.",
+        "decrescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 2,
+      "sol": "u_{n+1}=u_n.",
+      "hyp": "Pode achar que toda PA tem crescimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:pa-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-016",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Numa PA, o termo médio de três termos consecutivos a,b,c satisfaz...",
+      "o": [
+        "b=a+c.",
+        "b=ac.",
+        "b=√(ac).",
+        "b=(a+c)/2."
+      ],
+      "a": 3,
+      "sol": "Como as diferenças são iguais, 2b=a+c.",
+      "hyp": "Pode confundir média aritmética com geométrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:media-aritmetica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-017",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se 5,x,13 são termos consecutivos de uma PA, então x=",
+      "o": [
+        "9.",
+        "8.",
+        "10.",
+        "18."
+      ],
+      "a": 0,
+      "sol": "x=(5+13)/2=9.",
+      "hyp": "Pode usar diferença direta 13−5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:termo-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-018",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se x,7,11 são consecutivos numa PA, x=",
+      "o": [
+        "5.",
+        "3.",
+        "4.",
+        "−3."
+      ],
+      "a": 1,
+      "sol": "7−x=11−7=4 => x=3.",
+      "hyp": "Pode somar 4 em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:termo-anterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-019",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=4n−3, então (u_n) é uma PA de razão...",
+      "o": [
+        "−3.",
+        "1.",
+        "4.",
+        "n."
+      ],
+      "a": 2,
+      "sol": "u_{n+1}−u_n=4.",
+      "hyp": "Pode usar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:reconhecer-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-020",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=7−2n, então a razão é...",
+      "o": [
+        "2.",
+        "7.",
+        "−7.",
+        "−2."
+      ],
+      "a": 3,
+      "sol": "A diferença entre termos consecutivos é o coeficiente de n:−2.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:reconhecer-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-021",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_4=14 e u_9=34. Qual é r?",
+      "o": [
+        "4.",
+        "5.",
+        "20.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "34−14=20 ao longo de 5 passos, logo r=4.",
+      "hyp": "Pode dividir por 9 em vez de 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:dois-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-022",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_4=14 e u_9=34. Qual é u_1?",
+      "o": [
+        "−2.",
+        "2.",
+        "6.",
+        "10."
+      ],
+      "a": 1,
+      "sol": "u_4=u_1+3r =>14=u_1+12 =>u_1=2.",
+      "hyp": "Pode usar 4r em vez de 3r.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:achar-primeiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-023",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_5=20 e u_12=48, então a razão é...",
+      "o": [
+        "28/12.",
+        "7.",
+        "4.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "48−20=28 em 7 passos, logo r=4.",
+      "hyp": "Pode dividir por 12−5+1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:razao-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-024",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_7=25 e r=3, então u_20=",
+      "o": [
+        "61.",
+        "67.",
+        "58.",
+        "64."
+      ],
+      "a": 3,
+      "sol": "u_20=u_7+(20−7)3=25+39=64.",
+      "hyp": "Pode contar 12 passos em vez de 13.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:salto-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-025",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_3=8 e u_8=23. Qual é u_1?",
+      "o": [
+        "2.",
+        "5.",
+        "−1.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "r=(23−8)/5=3; u_1=8−2×3=2.",
+      "hyp": "Pode esquecer que u_3 está dois passos depois de u_1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:sistema-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-026",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_2+u_6 é igual a...",
+      "o": [
+        "u_8.",
+        "2u_4.",
+        "u_4.",
+        "4u_2."
+      ],
+      "a": 1,
+      "sol": "Os índices 2 e 6 são simétricos em torno de 4, logo a soma é 2u_4.",
+      "hyp": "Pode achar que só termos consecutivos têm relação média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:simetria-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-027",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_5 é a média aritmética de...",
+      "o": [
+        "u_4 e u_8.",
+        "u_1 e u_10.",
+        "u_2 e u_8.",
+        "u_3 e u_8."
+      ],
+      "a": 2,
+      "sol": "2 e 8 estão equidistantes de 5.",
+      "hyp": "Pode escolher índices cuja média não é 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:media-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-028",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_2=6 e u_8=30, então u_5=",
+      "o": [
+        "12.",
+        "24.",
+        "20.",
+        "18."
+      ],
+      "a": 3,
+      "sol": "u_5=(u_2+u_8)/2=18.",
+      "hyp": "Pode interpolar de forma não linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:interpolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-029",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos termos há na PA 4,7,10,...,100?",
+      "o": [
+        "33.",
+        "32.",
+        "34.",
+        "31."
+      ],
+      "a": 0,
+      "sol": "100=4+(n−1)3 =>96=3(n−1)=>n−1=32=>n=33.",
+      "hyp": "Pode devolver n−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:numero-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-030",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O número 52 pertence à PA 1,5,9,13,...?",
+      "o": [
+        "Sim, como u_14=53? Não. Logo não pertence.",
+        "Não porque todos os termos são ímpares.",
+        "Sim, é u_13.",
+        "Sim, é u_14."
+      ],
+      "a": 1,
+      "sol": "A PA tem termos 1 mod 4, todos ímpares; 52 é par, logo não pertence.",
+      "hyp": "Pode resolver a equação com erro ou ignorar congruência simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:pertença-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-031",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O número 57 pertence à PA 1,5,9,13,...?",
+      "o": [
+        "Não.",
+        "Sim, é u_14.",
+        "Sim, é u_15.",
+        "Sim, é u_16."
+      ],
+      "a": 2,
+      "sol": "57=1+(n−1)4 =>56=4(n−1)=>n=15.",
+      "hyp": "Pode errar o deslocamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:pertença-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-032",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_1=2 e r=5. Para que n se tem u_n=47?",
+      "o": [
+        "9.",
+        "11.",
+        "8.",
+        "10."
+      ],
+      "a": 3,
+      "sol": "47=2+5(n−1)=>45=5(n−1)=>n=10.",
+      "hyp": "Pode responder n−1=9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:indice-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-033",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma PA não constante pode ser limitada superior e inferiormente ao mesmo tempo?",
+      "o": [
+        "Não.",
+        "Sim, sempre.",
+        "Só se r>0.",
+        "Só se r<0."
+      ],
+      "a": 0,
+      "sol": "Uma PA com r>0 cresce sem limite superior; com r<0 decresce sem limite inferior.",
+      "hyp": "Pode confundir monotonia com limitação bilateral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:limitacao-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-034",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma PA crescente pode ter termos negativos no início?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se r=0.",
+        "Só se u_1=0."
+      ],
+      "a": 1,
+      "sol": "O sinal dos termos e a monotonia são propriedades distintas.",
+      "hyp": "Pode achar que crescente implica positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:sinal-vs-monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-035",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se três números x,10,18 estão em PA nessa ordem, x=",
+      "o": [
+        "6.",
+        "14.",
+        "2.",
+        "−2."
+      ],
+      "a": 2,
+      "sol": "10−x=8 =>x=2.",
+      "hyp": "Pode calcular a média errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:tres-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-036",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 4,x,y,19 são quatro termos consecutivos de uma PA, a razão é...",
+      "o": [
+        "3.",
+        "15.",
+        "4.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "De 4 a 19 há 3 passos: r=(19−4)/3=5.",
+      "hyp": "Pode dividir por 4 termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:quatro-consecutivos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-037",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No caso 4,x,y,19, os valores de x e y são...",
+      "o": [
+        "9 e 14.",
+        "8 e 13.",
+        "10 e 15.",
+        "5 e 10."
+      ],
+      "a": 0,
+      "sol": "Somando razão 5:4,9,14,19.",
+      "hyp": "Pode usar uma razão incorreta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:quatro-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-038",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma PA satisfaz u_3+u_7=40. Quanto vale u_5?",
+      "o": [
+        "10.",
+        "20.",
+        "40.",
+        "5."
+      ],
+      "a": 1,
+      "sol": "Por simetria, u_3+u_7=2u_5.",
+      "hyp": "Pode achar que precisa conhecer a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-039",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_4+u_10=50 numa PA, então u_7=",
+      "o": [
+        "20.",
+        "30.",
+        "25.",
+        "50."
+      ],
+      "a": 2,
+      "sol": "Os índices 4 e 10 são simétricos em torno de 7.",
+      "hyp": "Pode usar a média dos índices incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-040",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, u_1+u_9=30. Então u_5=",
+      "o": [
+        "30.",
+        "9.",
+        "10.",
+        "15."
+      ],
+      "a": 3,
+      "sol": "u_5=(u_1+u_9)/2=15.",
+      "hyp": "Pode somar os extremos sem dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:media-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-041",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=an+b é uma PA, a sua razão é...",
+      "o": [
+        "a.",
+        "b.",
+        "a+b.",
+        "n."
+      ],
+      "a": 0,
+      "sol": "u_{n+1}−u_n=a.",
+      "hyp": "Pode usar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:linear-pa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-042",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma PA tem u_1=100 e u_{n+1}=u_n−7. Qual termo é o primeiro negativo?",
+      "o": [
+        "u_15.",
+        "u_16.",
+        "u_14.",
+        "u_17."
+      ],
+      "a": 1,
+      "sol": "u_n=100−7(n−1). u_15=2 e u_16=−5.",
+      "hyp": "Pode resolver apenas u_n<0 sem verificar o primeiro índice inteiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:primeiro-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-043",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma PA tem u_1=−20 e r=6. Qual termo é o primeiro positivo?",
+      "o": [
+        "u_4.",
+        "u_6.",
+        "u_5.",
+        "u_3."
+      ],
+      "a": 2,
+      "sol": "Termos:−20,−14,−8,−2,4; primeiro positivo é u_5.",
+      "hyp": "Pode considerar zero/negativo como positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:primeiro-positivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-044",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma bancada tem 12 lugares na primeira fila e cada fila seguinte tem mais 3. Quantos lugares tem a 10.ª fila?",
+      "o": [
+        "42.",
+        "30.",
+        "36.",
+        "39."
+      ],
+      "a": 3,
+      "sol": "12+9×3=39.",
+      "hyp": "Pode multiplicar 10×3 e somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:modelacao-filas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-045",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma empresa paga 900 € no 1.º ano e aumenta 50 € por ano. Qual o valor no 6.º ano?",
+      "o": [
+        "1150 €.",
+        "1200 €.",
+        "950 €.",
+        "1100 €."
+      ],
+      "a": 0,
+      "sol": "900+5×50=1150.",
+      "hyp": "Pode contar 6 aumentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:modelacao-salario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-046",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um treino começa com 20 minutos e aumenta 5 minutos por sessão. A duração da 8.ª sessão é...",
+      "o": [
+        "60 min.",
+        "55 min.",
+        "40 min.",
+        "45 min."
+      ],
+      "a": 1,
+      "sol": "20+7×5=55.",
+      "hyp": "Pode usar 8×5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:modelacao-treino",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-047",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma escada decorativa tem 30 cm no primeiro degrau e cada degrau seguinte aumenta 2 cm. O 15.º mede...",
+      "o": [
+        "60 cm.",
+        "56 cm.",
+        "58 cm.",
+        "32 cm."
+      ],
+      "a": 2,
+      "sol": "30+14×2=58.",
+      "hyp": "Pode usar 15 incrementos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:modelacao-degraus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-048",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PA, se u_p=A e u_q=B, então a razão é...",
+      "o": [
+        "(A+B)/(p+q).",
+        "(B−A)/(q+p).",
+        "AB/(q−p).",
+        "(B−A)/(q−p)."
+      ],
+      "a": 3,
+      "sol": "Entre os índices p e q há q−p passos.",
+      "hyp": "Pode dividir pela diferença errada de índices.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:formula-dois-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-049",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_6=17 e u_14=49, então u_20=",
+      "o": [
+        "73.",
+        "69.",
+        "77.",
+        "65."
+      ],
+      "a": 0,
+      "sol": "r=(49−17)/8=4; u_20=49+6×4=73.",
+      "hyp": "Pode contar 7 passos de 14 a 20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:extrapolar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PA-050",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pa",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um reservatório perde 2,5 L por hora, partindo de 100 L no instante n=1. Um modelo discreto de PA é...",
+      "o": [
+        "u_n=100·2,5^{n−1}.",
+        "u_n=100−2,5(n−1).",
+        "u_n=100−2,5n com primeiro termo 100.",
+        "u_n=102,5−2,5n sem equivalência ao termo inicial."
+      ],
+      "a": 1,
+      "sol": "Uma perda absoluta constante produz uma PA de razão −2,5.",
+      "hyp": "Pode usar um modelo multiplicativo ou deslocar mal o índice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pa:modelacao-perda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

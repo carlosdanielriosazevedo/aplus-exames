@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-int",
+  "subtopicId": "12-int-tfc-barrow",
+  "subtopic": "Teorema Fundamental do Cálculo / Fórmula de Barrow",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha Fórmula de Barrow, função acumulação, TFC, limites variáveis simples, interpretação de taxas e extremos da acumulação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12INT-TFC-001",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A Fórmula de Barrow afirma que, se F'=f, então...",
+      "o": [
+        "∫_a^b f(x)dx=F(b)−F(a).",
+        "∫_a^b f=F(a)−F(b).",
+        "∫f=F'(b).",
+        "∫f=f(b)−f(a)."
+      ],
+      "a": 0,
+      "sol": "Avalia-se uma primitiva nos limites superior e inferior.",
+      "hyp": "Pode inverter os limites ou usar f em vez de F.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:barrow",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-002",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na expressão [F(x)]_a^b significa...",
+      "o": [
+        "F(a)+F(b).",
+        "F(b)−F(a).",
+        "F(a)−F(b).",
+        "F'(b)."
+      ],
+      "a": 1,
+      "sol": "É a notação de avaliação nos limites.",
+      "hyp": "Pode somar os valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:notacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-003",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "∫_0^1 x dx=",
+      "o": [
+        "1.",
+        "0.",
+        "1/2.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "Uma primitiva é x²/2; em1 menos em0 dá1/2.",
+      "hyp": "Pode usar f(1)−f(0).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-004",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "∫_0^2 2x dx=",
+      "o": [
+        "2.",
+        "8.",
+        "1.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "Primitiva x²; 4−0=4.",
+      "hyp": "Pode usar 2×2 sem considerar área triangular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:basico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-005",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "∫_1^3 1 dx=",
+      "o": [
+        "2.",
+        "3.",
+        "1.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "Primitiva x;3−1=2.",
+      "hyp": "Pode usar o limite superior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-006",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_0^2 x² dx=",
+      "o": [
+        "4.",
+        "8/3.",
+        "2.",
+        "4/3."
+      ],
+      "a": 1,
+      "sol": "Primitiva x³/3;8/3.",
+      "hyp": "Pode usar x²/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-007",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_1^2 3x² dx=",
+      "o": [
+        "3.",
+        "8.",
+        "7.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "Primitiva x³;8−1=7.",
+      "hyp": "Pode esquecer o limite inferior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-008",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_0^1 e^x dx=",
+      "o": [
+        "e.",
+        "1.",
+        "1/e.",
+        "e−1."
+      ],
+      "a": 3,
+      "sol": "Primitiva e^x; e−1.",
+      "hyp": "Pode esquecer F(0)=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-009",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_0^{π/2} cos x dx=",
+      "o": [
+        "1.",
+        "0.",
+        "π/2.",
+        "−1."
+      ],
+      "a": 0,
+      "sol": "Primitiva sinx;1−0=1.",
+      "hyp": "Pode usar cos nos extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-010",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_0^π sin x dx=",
+      "o": [
+        "0.",
+        "2.",
+        "1.",
+        "π."
+      ],
+      "a": 1,
+      "sol": "Primitiva −cosx; −cosπ−(−cos0)=1+1=2.",
+      "hyp": "Pode esquecer sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-011",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫_1^e 1/x dx=",
+      "o": [
+        "e−1.",
+        "ln(e−1).",
+        "1.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "Primitiva lnx; ln e−ln1=1.",
+      "hyp": "Pode usar e−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-012",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫_1^4 1/√x dx=",
+      "o": [
+        "3.",
+        "4.",
+        "1.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "Primitiva2√x;4−2=2.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-013",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫_0^1 (2x+1)dx=",
+      "o": [
+        "2.",
+        "3.",
+        "1.",
+        "3/2."
+      ],
+      "a": 0,
+      "sol": "Primitiva x²+x; em1 dá2.",
+      "hyp": "Pode avaliar apenas o integrando.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-014",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫_{−1}^1 x² dx=",
+      "o": [
+        "0.",
+        "2/3.",
+        "1/3.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "Primitiva x³/3;1/3−(−1/3)=2/3.",
+      "hyp": "Pode usar simetria errada de função ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-015",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "∫_{−1}^1 x³ dx=",
+      "o": [
+        "1/2.",
+        "2.",
+        "0.",
+        "−2."
+      ],
+      "a": 2,
+      "sol": "Função ímpar em intervalo simétrico ou Barrow.",
+      "hyp": "Pode esquecer simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-016",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O Teorema Fundamental do Cálculo liga...",
+      "o": [
+        "apenas áreas e trigonometria.",
+        "probabilidade e matrizes.",
+        "limites e vetores.",
+        "derivação e integração."
+      ],
+      "a": 3,
+      "sol": "A derivada de uma função acumulação recupera o integrando e Barrow usa primitivas para calcular integrais.",
+      "hyp": "Pode tratar as operações como independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:ligacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-017",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se A(x)=∫_a^x f(t)dt e f é contínua, então...",
+      "o": [
+        "A'(x)=f(x).",
+        "A'(x)=F(a).",
+        "A'(x)=0.",
+        "A'(x)=∫_a^x f'(t)dt sempre."
+      ],
+      "a": 0,
+      "sol": "É a primeira parte do TFC.",
+      "hyp": "Pode derivar os limites como constantes ambos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:funcao-acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-018",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A(x)=∫_0^x t²dt, então A'(x)=",
+      "o": [
+        "2x.",
+        "x².",
+        "x³/3.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "Pelo TFC, a derivada da acumulação é o integrando no limite superior.",
+      "hyp": "Pode integrar antes e derivar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:tfc",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-019",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A função A(x)=∫_0^x t²dt pode escrever-se...",
+      "o": [
+        "x²/2.",
+        "x³.",
+        "x³/3.",
+        "2x."
+      ],
+      "a": 2,
+      "sol": "Por Barrow, [t³/3]_0^x=x³/3.",
+      "hyp": "Pode confundir variável muda t com x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-020",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)>0, então A(x)=∫_a^x f tende a ser...",
+      "o": [
+        "decrescente.",
+        "constante.",
+        "negativa obrigatoriamente.",
+        "crescente."
+      ],
+      "a": 3,
+      "sol": "A'=f>0.",
+      "hyp": "Pode confundir valor de A e sinal do integrando.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:monotonia-acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-021",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)<0 num intervalo, a função acumulação A tem nesse intervalo...",
+      "o": [
+        "decréscimo.",
+        "crescimento.",
+        "derivada zero.",
+        "máximo em todo ponto."
+      ],
+      "a": 0,
+      "sol": "A'=f<0.",
+      "hyp": "Pode esquecer a ligação pelo TFC.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-022",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A(x)=∫_1^x (t−2)dt, então A'(3)=",
+      "o": [
+        "3.",
+        "1.",
+        "1/2.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "A'(x)=x−2; em3 dá1.",
+      "hyp": "Pode calcular A(3) em vez da derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:tfc-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-023",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A(x)=∫_1^x (t−2)dt, então A(3)=",
+      "o": [
+        "1.",
+        "−1/2.",
+        "0.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "Primitiva (t−2)²/2? Melhor: t²/2−2t; em3 dá4,5−6=−1,5; em1 dá0,5−2=−1,5; diferença0.",
+      "hyp": "Pode confundir derivada e valor acumulado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:acumulacao-cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-024",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se A(x)=∫_1^x (t−2)dt, então A(3)=0 porque...",
+      "o": [
+        "o integrando é zero em todo intervalo.",
+        "a derivada é zero em3.",
+        "o intervalo tem comprimento zero.",
+        "as contribuições negativa em [1,2] e positiva em [2,3] cancelam-se."
+      ],
+      "a": 3,
+      "sol": "As áreas algébricas são simétricas.",
+      "hyp": "Pode confundir integral zero com função nula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-025",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F é primitiva de f, então ∫_a^b f não depende...",
+      "o": [
+        "da constante escolhida em F+C.",
+        "dos limites a,b.",
+        "do integrando.",
+        "do sinal de f."
+      ],
+      "a": 0,
+      "sol": "C cancela em (F(b)+C)−(F(a)+C).",
+      "hyp": "Pode pensar que C afeta o valor definido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:constante-cancela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-026",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫_0^1 6x(1+x²)^2 dx=",
+      "o": [
+        "26.",
+        "7.",
+        "13.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "Uma primitiva é (1+x²)^3; valor=2³−1³=7.",
+      "hyp": "Pode expandir sem necessidade ou esquecer a cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-027",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫_0^1 2x e^{x²}dx=",
+      "o": [
+        "e.",
+        "1.",
+        "e−1.",
+        "2(e−1)."
+      ],
+      "a": 2,
+      "sol": "Primitiva e^{x²}; e−1.",
+      "hyp": "Pode manter o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:composta-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-028",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫_0^{π/2} 2sin x cos x dx=",
+      "o": [
+        "0.",
+        "2.",
+        "1/2.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Uma primitiva é sin²x;1−0=1.",
+      "hyp": "Pode integrar fatores separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:composta-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-029",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫_0^1 [2x/(1+x²)]dx=",
+      "o": [
+        "ln2.",
+        "2ln2.",
+        "1.",
+        "1/2."
+      ],
+      "a": 0,
+      "sol": "Primitiva ln(1+x²); ln2−ln1=ln2.",
+      "hyp": "Pode esquecer o padrão logarítmico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:log-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-030",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫_0^1 e^{2x}dx=",
+      "o": [
+        "e²−1.",
+        "(e²−1)/2.",
+        "e−1.",
+        "2e²."
+      ],
+      "a": 1,
+      "sol": "Primitiva e^{2x}/2.",
+      "hyp": "Pode esquecer dividir por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:exp-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-031",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫_0^{π/3} cos(3x)dx=",
+      "o": [
+        "1/3.",
+        "√3/2.",
+        "0.",
+        "−1/3."
+      ],
+      "a": 2,
+      "sol": "Primitiva sin(3x)/3; sinπ=0 e sin0=0.",
+      "hyp": "Pode olhar apenas para cos nos limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:trig-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-032",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "∫_0^{π/6} cos(3x)dx=",
+      "o": [
+        "1.",
+        "√3/6.",
+        "1/2.",
+        "1/3."
+      ],
+      "a": 3,
+      "sol": "sin(π/2)/3=1/3.",
+      "hyp": "Pode esquecer o fator1/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:trig-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-033",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Se A(x)=∫_{g(x)}^{h(x)} f(t)dt, a derivada envolve...",
+      "o": [
+        "f(h(x))h'(x)−f(g(x))g'(x).",
+        "f(h(x))−f(g(x)) apenas.",
+        "h(x)−g(x).",
+        "f'(x)."
+      ],
+      "a": 0,
+      "sol": "É a regra de Leibniz para limites variáveis simples.",
+      "hyp": "Pode esquecer derivar os limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:leibniz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-034",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A(x)=∫_0^{x²} cos t dt, então A'(x)=",
+      "o": [
+        "cos(x²).",
+        "2x cos(x²).",
+        "−sin(x²).",
+        "2x sin(x²)."
+      ],
+      "a": 1,
+      "sol": "TFC + cadeia: cos(x²)·2x.",
+      "hyp": "Pode esquecer o fator2x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:limite-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-035",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A(x)=∫_1^{e^x} 1/t dt, então A'(x)=",
+      "o": [
+        "e^x.",
+        "1/e^x.",
+        "1.",
+        "x."
+      ],
+      "a": 2,
+      "sol": "f(e^x)e^x=(1/e^x)e^x=1; também A=x.",
+      "hyp": "Pode esquecer derivar o limite.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:limite-variavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-036",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A(x)=∫_x^2 t²dt, então A'(x)=",
+      "o": [
+        "x².",
+        "2x.",
+        "0.",
+        "−x²."
+      ],
+      "a": 3,
+      "sol": "O limite variável está em baixo, gerando sinal negativo.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:limite-inferior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-037",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A(x)=∫_{x}^{x²} t dt, então A'(x)=",
+      "o": [
+        "2x³−x.",
+        "x³−x.",
+        "2x²−1.",
+        "x²−x."
+      ],
+      "a": 0,
+      "sol": "A'(x)=f(x²)·2x−f(x)=x²·2x−x=2x³−x.",
+      "hyp": "Pode esquecer um dos limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:dois-limites",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-038",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se F'=f e ∫_2^5 f=7, então F(5)−F(2)=",
+      "o": [
+        "−7.",
+        "7.",
+        "3.",
+        "F(5)+F(2)."
+      ],
+      "a": 1,
+      "sol": "É exatamente a Fórmula de Barrow.",
+      "hyp": "Pode inverter a diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:barrow-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-039",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se F(5)=10 e ∫_2^5 f=7, então F(2)=",
+      "o": [
+        "17.",
+        "7.",
+        "3.",
+        "−3."
+      ],
+      "a": 2,
+      "sol": "10−F(2)=7.",
+      "hyp": "Pode somar7.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:barrow-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-040",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O TFC mostra que calcular acumulação por uma integral e calcular variação de uma primitiva são...",
+      "o": [
+        "operações sem relação.",
+        "iguais apenas para constantes.",
+        "válidas só para polinómios.",
+        "duas perspetivas do mesmo fenómeno."
+      ],
+      "a": 3,
+      "sol": "Integração acumula uma taxa e a primitiva mede a quantidade acumulada.",
+      "hyp": "Pode limitar o teorema a funções simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:significado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-041",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se v=s' e s(0)=2, então ∫_0^5 v(t)dt=",
+      "o": [
+        "s(5)−2.",
+        "s(5).",
+        "v(5)−v(0).",
+        "5s(5)."
+      ],
+      "a": 0,
+      "sol": "Por Barrow, a integral da velocidade é a variação da posição.",
+      "hyp": "Pode esquecer a posição inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:movimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-042",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma conta tem taxa de variação B'(t)=r(t), então ∫_0^T r(t)dt representa...",
+      "o": [
+        "B(T) apenas.",
+        "B(T)−B(0).",
+        "r(T).",
+        "B'(T)−B'(0)."
+      ],
+      "a": 1,
+      "sol": "Integral da taxa dá variação acumulada.",
+      "hyp": "Pode confundir nível e variação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-043",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_0^2 f=5 e F é primitiva com F(0)=1, então F(2)=",
+      "o": [
+        "5.",
+        "4.",
+        "6.",
+        "10."
+      ],
+      "a": 2,
+      "sol": "F(2)−1=5.",
+      "hyp": "Pode esquecer o valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:primitiva-dados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-044",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_1^3 f=−4 e F(1)=10, então F(3)=",
+      "o": [
+        "14.",
+        "−4.",
+        "10.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "F(3)−10=−4.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:primitiva-dados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-045",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma função acumulação A pode ter máximo quando...",
+      "o": [
+        "o integrando f=A' muda de positivo para negativo.",
+        "f=0 sem mudança de sinal sempre.",
+        "A=0.",
+        "f é contínua apenas."
+      ],
+      "a": 0,
+      "sol": "Estuda-se A pela derivada f.",
+      "hyp": "Pode esquecer que o integrando é a derivada de A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:extremos-acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-046",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A pode ter mínimo quando f muda...",
+      "o": [
+        "de positivo para negativo.",
+        "de negativo para positivo.",
+        "de positivo para positivo.",
+        "sem mudar sinal."
+      ],
+      "a": 1,
+      "sol": "É o teste de sinais da primeira derivada aplicado a A.",
+      "hyp": "Pode inverter o critério.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:extremos-acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-047",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(t)>0 em [0,2], f(t)<0 em [2,5], então A(x)=∫_0^x f tem...",
+      "o": [
+        "mínimo em x=2.",
+        "nenhum extremo em2.",
+        "máximo local em x=2.",
+        "descontinuidade em2."
+      ],
+      "a": 2,
+      "sol": "A'=f muda + para −.",
+      "hyp": "Pode interpretar o sinal da integral total em vez do integrando.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:max-acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-048",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma taxa líquida de entrada r(t) é positiva até t=3 e negativa depois. O conteúdo acumulado tende a...",
+      "o": [
+        "diminuir até3 e aumentar depois.",
+        "ser constante.",
+        "ser sempre positivo.",
+        "aumentar até3 e diminuir depois."
+      ],
+      "a": 3,
+      "sol": "A derivada do conteúdo é r.",
+      "hyp": "Pode confundir sinal da taxa com sinal do conteúdo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:taxa-liquida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-049",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A Fórmula de Barrow exige uma primitiva de f em condições adequadas; para f contínua...",
+      "o": [
+        "tal primitiva pode ser construída pela função acumulação.",
+        "não existem primitivas em geral.",
+        "só polinómios têm primitivas.",
+        "é preciso f'>0."
+      ],
+      "a": 0,
+      "sol": "O próprio TFC garante que A(x)=∫_a^x f é uma primitiva.",
+      "hyp": "Pode pensar que a existência de primitiva é excecional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:existencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-TFC-050",
+      "themeId": "12-int",
+      "subtopicId": "12-int-tfc-barrow",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "O TFC permite passar entre...",
+      "o": [
+        "apenas áreas geométricas positivas.",
+        "taxa instantânea, acumulação e variação de uma primitiva.",
+        "probabilidades e matrizes.",
+        "derivadas de segunda ordem apenas."
+      ],
+      "a": 1,
+      "sol": "É a ligação estrutural entre derivação e integração.",
+      "hyp": "Pode reduzir o TFC a uma regra de substituição de limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-tfc-barrow:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

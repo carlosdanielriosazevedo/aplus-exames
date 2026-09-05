@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fun",
+  "subtopicId": "10-fun-dominio-imagem-zeros",
+  "subtopic": "Domínio, contradomínio/imagem, zeros e sinal",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha domínio real e contextual, imagem, zeros, leitura gráfica e estudo de sinal em exemplos lineares, quadráticos, racionais, raízes e módulo. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FUN-DIZ-001",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O domínio de uma função é...",
+      "o": [
+        "o conjunto dos valores de entrada admissíveis.",
+        "o conjunto dos valores de saída obtidos.",
+        "o maior valor da função.",
+        "o conjunto dos zeros apenas."
+      ],
+      "a": 0,
+      "sol": "O domínio reúne os valores que podem ser usados como argumentos.",
+      "hyp": "Pode confundir domínio com imagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-002",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A imagem de uma função é...",
+      "o": [
+        "o conjunto de todas as entradas.",
+        "o conjunto dos valores efetivamente obtidos pela função.",
+        "um único valor obrigatório.",
+        "o contradomínio sempre por definição."
+      ],
+      "a": 1,
+      "sol": "A imagem contém as saídas que a função realmente assume.",
+      "hyp": "Pode confundir imagem com domínio ou contradomínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-003",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um zero de f é um valor x tal que...",
+      "o": [
+        "x=0 obrigatoriamente.",
+        "f(0)=x.",
+        "f(x)=0.",
+        "f(x)=1."
+      ],
+      "a": 2,
+      "sol": "Os zeros são as preimagens de 0.",
+      "hyp": "Pode achar que zero da função significa apenas x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-004",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x−3, qual é o zero de f?",
+      "o": [
+        "−3",
+        "0",
+        "6",
+        "3"
+      ],
+      "a": 3,
+      "sol": "x−3=0 => x=3.",
+      "hyp": "Pode trocar sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-005",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se g(x)=2x+4, qual é o zero?",
+      "o": [
+        "−2",
+        "−4",
+        "2",
+        "4"
+      ],
+      "a": 0,
+      "sol": "2x+4=0 => x=−2.",
+      "hyp": "Pode dividir incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-006",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "No gráfico de y=f(x), os zeros correspondem aos pontos onde o gráfico...",
+      "o": [
+        "interseta o eixo Oy.",
+        "interseta ou toca o eixo Ox.",
+        "atinge a média.",
+        "tem sempre máximo."
+      ],
+      "a": 1,
+      "sol": "Nesses pontos y=0.",
+      "hyp": "Pode confundir eixo Ox com Oy.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-grafico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-007",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se o gráfico cruza o eixo Ox em x=−1 e x=4, os zeros são...",
+      "o": [
+        "0 e 3.",
+        "−4 e 1.",
+        "−1 e 4.",
+        "apenas 4."
+      ],
+      "a": 2,
+      "sol": "As abcissas das interseções com Ox são os zeros.",
+      "hyp": "Pode usar ordenadas em vez de abcissas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zeros-grafico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-008",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Dizer que f(x)>0 significa que o gráfico está...",
+      "o": [
+        "abaixo do eixo Ox.",
+        "sobre o eixo Oy.",
+        "sempre no primeiro quadrante.",
+        "acima do eixo Ox."
+      ],
+      "a": 3,
+      "sol": "f(x)>0 significa ordenada positiva.",
+      "hyp": "Pode associar positividade a x>0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-positivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-009",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Dizer que f(x)<0 significa que o gráfico está...",
+      "o": [
+        "abaixo do eixo Ox.",
+        "acima do eixo Ox.",
+        "à direita do eixo Oy.",
+        "sempre no terceiro quadrante."
+      ],
+      "a": 0,
+      "sol": "f(x)<0 corresponde a ordenada negativa.",
+      "hyp": "Pode confundir sinal de x com sinal de f(x).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-010",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x−5, em que valores é f(x)>0?",
+      "o": [
+        "x<5",
+        "x>5",
+        "x≥0",
+        "x<0"
+      ],
+      "a": 1,
+      "sol": "x−5>0 => x>5.",
+      "hyp": "Pode inverter desigualdade sem razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-011",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=2−x, quando é f(x)>0?",
+      "o": [
+        "x>2",
+        "x<0",
+        "x<2",
+        "x>0"
+      ],
+      "a": 2,
+      "sol": "2−x>0 => x<2.",
+      "hyp": "Pode esquecer o sinal negativo de x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-012",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=3x+6, quando é f(x)<0?",
+      "o": [
+        "x>−2",
+        "x<2",
+        "x>2",
+        "x<−2"
+      ],
+      "a": 3,
+      "sol": "3x+6<0 => x<−2.",
+      "hyp": "Pode trocar o sinal do zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-013",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O domínio de f(x)=1/x, em R, é...",
+      "o": [
+        "R\\{0}.",
+        "R.",
+        "[0,+∞[.",
+        "]−∞,0]."
+      ],
+      "a": 0,
+      "sol": "Não se pode dividir por zero.",
+      "hyp": "Pode esquecer a restrição do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-014",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O domínio de f(x)=1/(x−2) é...",
+      "o": [
+        "R\\{−2}.",
+        "R\\{2}.",
+        "R.",
+        "[2,+∞[."
+      ],
+      "a": 1,
+      "sol": "x−2 não pode ser zero, logo x≠2.",
+      "hyp": "Pode resolver x−2=0 com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-015",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O domínio real de f(x)=√x é...",
+      "o": [
+        "R.",
+        "]−∞,0].",
+        "[0,+∞[.",
+        "R\\{0}."
+      ],
+      "a": 2,
+      "sol": "A raiz quadrada real exige x≥0.",
+      "hyp": "Pode pensar que raiz quadrada aceita qualquer real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-016",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O domínio real de f(x)=√(x−3) é...",
+      "o": [
+        "]−∞,3].",
+        "R\\{3}.",
+        "R.",
+        "[3,+∞[."
+      ],
+      "a": 3,
+      "sol": "x−3≥0 => x≥3.",
+      "hyp": "Pode impor apenas x≠3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-017",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O domínio real de f(x)=√(5−x) é...",
+      "o": [
+        "]−∞,5].",
+        "[5,+∞[.",
+        "R\\{5}.",
+        "R."
+      ],
+      "a": 0,
+      "sol": "5−x≥0 => x≤5.",
+      "hyp": "Pode inverter a desigualdade de forma errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-018",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O domínio de f(x)=1/√x, em R, é...",
+      "o": [
+        "[0,+∞[.",
+        "]0,+∞[.",
+        "R\\{0}.",
+        "]−∞,0[."
+      ],
+      "a": 1,
+      "sol": "É preciso x≥0 para a raiz e, por estar no denominador, √x≠0; logo x>0.",
+      "hyp": "Pode permitir x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-raiz-denominador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-019",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma função tem domínio [−2,5], isso significa que...",
+      "o": [
+        "as saídas estão sempre entre −2 e 5.",
+        "os zeros são −2 e 5.",
+        "só estão admitidas entradas entre −2 e 5, inclusive.",
+        "a função vale zero fora desse intervalo."
+      ],
+      "a": 2,
+      "sol": "O domínio refere-se às entradas possíveis.",
+      "hyp": "Pode confundir domínio com imagem ou zeros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-020",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se a imagem de f é [1,4], então...",
+      "o": [
+        "o domínio é [1,4].",
+        "os zeros são 1 e 4.",
+        "f só está definida para x entre 1 e 4.",
+        "os valores assumidos por f ficam entre 1 e 4."
+      ],
+      "a": 3,
+      "sol": "Imagem refere-se às saídas realmente atingidas.",
+      "hyp": "Pode trocar domínio e imagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-021",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de f(x)=x² com domínio R?",
+      "o": [
+        "[0,+∞[.",
+        "R.",
+        "]−∞,0].",
+        "R\\{0}."
+      ],
+      "a": 0,
+      "sol": "Quadrados reais são não negativos e qualquer valor não negativo é atingido.",
+      "hyp": "Pode achar que a imagem é R.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-022",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de f(x)=x²+2 com domínio R?",
+      "o": [
+        "[0,+∞[.",
+        "[2,+∞[.",
+        "R.",
+        "[−2,+∞[."
+      ],
+      "a": 1,
+      "sol": "Como x²≥0, x²+2≥2, e 2 é atingido em x=0.",
+      "hyp": "Pode deslocar a imagem para o lado errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-023",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de f(x)=−x²+5 com domínio R?",
+      "o": [
+        "[5,+∞[.",
+        "R.",
+        "]−∞,5].",
+        "[0,5]."
+      ],
+      "a": 2,
+      "sol": "−x²≤0, logo f(x)≤5, e 5 é atingido em x=0.",
+      "hyp": "Pode confundir máximo com mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-024",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a imagem de f(x)=|x| com domínio R?",
+      "o": [
+        "R.",
+        "]−∞,0].",
+        "R\\{0}.",
+        "[0,+∞[."
+      ],
+      "a": 3,
+      "sol": "O valor absoluto nunca é negativo e assume todos os valores não negativos.",
+      "hyp": "Pode tratar |x| como x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-025",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x²−4, quais são os zeros?",
+      "o": [
+        "−2 e 2.",
+        "−4 e 4.",
+        "0 e 4.",
+        "apenas 2."
+      ],
+      "a": 0,
+      "sol": "x²−4=0 => x²=4 => x=±2.",
+      "hyp": "Pode esquecer uma das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zeros-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-026",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=(x−1)(x+3), quais são os zeros?",
+      "o": [
+        "−1 e 3.",
+        "1 e −3.",
+        "1 e 3.",
+        "−1 e −3."
+      ],
+      "a": 1,
+      "sol": "Cada fator pode ser zero: x=1 ou x=−3.",
+      "hyp": "Pode trocar sinais dos fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zeros-fatorizados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-027",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x(x−5), quais são os zeros?",
+      "o": [
+        "−5 e 0.",
+        "5 apenas.",
+        "0 e 5.",
+        "0 apenas."
+      ],
+      "a": 2,
+      "sol": "Produto zero quando x=0 ou x−5=0.",
+      "hyp": "Pode esquecer o fator x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zeros-fatorizados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-028",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma função não tem zeros reais, o seu gráfico...",
+      "o": [
+        "não interseta o eixo Oy.",
+        "é necessariamente constante.",
+        "está sempre acima de Ox.",
+        "não interseta o eixo Ox."
+      ],
+      "a": 3,
+      "sol": "Não ter zeros significa não ter pontos com y=0; pode estar acima, abaixo ou em regiões separadas.",
+      "hyp": "Pode concluir sinal positivo sem dados suficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sem-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-029",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)>0 em ]−∞,2[ e f(x)<0 em ]2,+∞[, com f(2)=0, então o gráfico...",
+      "o": [
+        "cruza ou toca Ox em x=2 e muda de sinal aí.",
+        "nunca toca Ox.",
+        "tem zero em x=0.",
+        "é sempre crescente."
+      ],
+      "a": 0,
+      "sol": "x=2 é zero e o sinal muda de positivo para negativo.",
+      "hyp": "Pode confundir mudança de sinal com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:tabela-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-030",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)>0 dos dois lados de x=1 e f(1)=0, então em x=1 o gráfico pode...",
+      "o": [
+        "atravessar obrigatoriamente o eixo.",
+        "tocar o eixo Ox sem o atravessar.",
+        "ter assíntota vertical.",
+        "deixar de ser função."
+      ],
+      "a": 1,
+      "sol": "Um zero de multiplicidade par, por exemplo, pode tocar sem mudar de sinal.",
+      "hyp": "Pode achar que todo zero implica mudança de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-sem-mudanca-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-031",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=(x−2)(x+1), em que intervalo é f(x)<0?",
+      "o": [
+        "]−∞,−1[∪]2,+∞[.",
+        "]−∞,2[.",
+        "]−1,2[.",
+        "]−1,+∞[."
+      ],
+      "a": 2,
+      "sol": "Entre os zeros −1 e 2, os fatores têm sinais opostos, logo o produto é negativo.",
+      "hyp": "Pode não fazer quadro de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-032",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=(x−2)(x+1), em que conjunto é f(x)>0?",
+      "o": [
+        "]−1,2[.",
+        "[−1,2].",
+        "R.",
+        "]−∞,−1[∪]2,+∞[."
+      ],
+      "a": 3,
+      "sol": "Fora dos zeros, os fatores têm o mesmo sinal.",
+      "hyp": "Pode trocar interior e exterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-033",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=−(x−1)(x+2), em que intervalo é f(x)>0?",
+      "o": [
+        "]−2,1[.",
+        "]−∞,−2[∪]1,+∞[.",
+        "]−∞,1[.",
+        "]−2,+∞[."
+      ],
+      "a": 0,
+      "sol": "(x−1)(x+2) é negativo entre −2 e 1; o sinal menos torna f positiva aí.",
+      "hyp": "Pode esquecer o sinal global negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-produto-negado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-034",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se o domínio de f é [−3,4] e f tem zeros em −1 e 2, quantos zeros são conhecidos?",
+      "o": [
+        "1.",
+        "2.",
+        "7.",
+        "Não se pode dizer que −1 e 2 pertençam ao domínio."
+      ],
+      "a": 1,
+      "sol": "Ambos pertencem ao domínio e foram explicitamente dados como zeros.",
+      "hyp": "Pode confundir quantidade de zeros com extensão do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:contar-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-035",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Pode um zero de uma função ficar fora do domínio?",
+      "o": [
+        "Sim, sempre.",
+        "Só em funções quadráticas.",
+        "Não.",
+        "Só se for negativo."
+      ],
+      "a": 2,
+      "sol": "Um zero é, por definição, um elemento do domínio onde f(x)=0.",
+      "hyp": "Pode resolver uma equação sem verificar se a solução pertence ao domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-e-dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-036",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Considere f(x)=(x²−1)/(x−1), com domínio R\\{1}. A equação f(x)=0 tem solução...",
+      "o": [
+        "x=−1 e x=1.",
+        "x=1 apenas.",
+        "nenhuma.",
+        "x=−1 apenas."
+      ],
+      "a": 3,
+      "sol": "O numerador zera em ±1, mas x=1 não pertence ao domínio; resta x=−1.",
+      "hyp": "Pode aceitar raiz anulada pelo denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zeros-com-restricao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-037",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o domínio real de f(x)=√(x+2)/(x−3)?",
+      "o": [
+        "[−2,+∞[\\{3}.",
+        "[−2,3[.",
+        "R\\{3}.",
+        "]−2,+∞[."
+      ],
+      "a": 0,
+      "sol": "É necessário x+2≥0 e x≠3.",
+      "hyp": "Pode esquecer uma das duas restrições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-combinado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-038",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o domínio real de f(x)=1/√(4−x)?",
+      "o": [
+        "]−∞,4].",
+        "]−∞,4[.",
+        "[4,+∞[.",
+        "R\\{4}."
+      ],
+      "a": 1,
+      "sol": "É preciso 4−x>0 porque a raiz está no denominador; logo x<4.",
+      "hyp": "Pode permitir x=4 ou inverter desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-raiz-denominador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-039",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o domínio de f(x)=1/(x²−9)?",
+      "o": [
+        "R\\{9}.",
+        "R\\{3}.",
+        "R\\{−3,3}.",
+        "[−3,3]."
+      ],
+      "a": 2,
+      "sol": "x²−9=0 em x=±3, que devem ser excluídos.",
+      "hyp": "Pode esquecer a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-racional-quadratico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-040",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o domínio real de f(x)=√(9−x²)?",
+      "o": [
+        "R\\{−3,3}.",
+        "[0,3].",
+        "]−3,3[.",
+        "[−3,3]."
+      ],
+      "a": 3,
+      "sol": "9−x²≥0 => x²≤9 => −3≤x≤3.",
+      "hyp": "Pode aceitar apenas x≥0 ou excluir extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-raiz-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-041",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a imagem de f(x)=√x+2, x≥0?",
+      "o": [
+        "[2,+∞[.",
+        "[0,+∞[.",
+        "R.",
+        "]2,+∞[."
+      ],
+      "a": 0,
+      "sol": "√x≥0 e vale 0 em x=0, logo f≥2 e 2 é atingido.",
+      "hyp": "Pode esquecer a translação vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-042",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a imagem de f(x)=3−|x|, x∈R?",
+      "o": [
+        "[3,+∞[.",
+        "]−∞,3].",
+        "R.",
+        "[0,3]."
+      ],
+      "a": 1,
+      "sol": "|x|≥0, então 3−|x|≤3 e pode descer sem limite.",
+      "hyp": "Pode assumir imagem não negativa por causa do módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-043",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a imagem de uma função é ]−∞,5], qual afirmação é correta?",
+      "o": [
+        "5 é zero obrigatório.",
+        "o domínio termina em 5.",
+        "5 é valor máximo da função.",
+        "a função é crescente."
+      ],
+      "a": 2,
+      "sol": "A imagem não contém valores acima de 5 e contém 5.",
+      "hyp": "Pode confundir extremo da imagem com extremo do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-044",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a imagem é [−2,+∞[, então −2 é...",
+      "o": [
+        "um zero obrigatório.",
+        "a única entrada.",
+        "o máximo da função.",
+        "um valor mínimo assumido pela função."
+      ],
+      "a": 3,
+      "sol": "É o menor valor pertencente à imagem.",
+      "hyp": "Pode confundir valor mínimo com zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:imagem-minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-045",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−1, em que conjunto é f(x)≤0?",
+      "o": [
+        "[−1,1].",
+        "]−∞,−1]∪[1,+∞[.",
+        "]−1,1[.",
+        "R."
+      ],
+      "a": 0,
+      "sol": "x²−1≤0 => x²≤1 => −1≤x≤1.",
+      "hyp": "Pode trocar sinal ou excluir os zeros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-046",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4, em que conjunto é f(x)>0?",
+      "o": [
+        "]−2,2[.",
+        "]−∞,−2[∪]2,+∞[.",
+        "[−2,2].",
+        "R\\{0}."
+      ],
+      "a": 1,
+      "sol": "x²>4 => |x|>2.",
+      "hyp": "Pode escolher o intervalo entre as raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-047",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=−x²+9, em que conjunto é f(x)≥0?",
+      "o": [
+        "]−∞,−3]∪[3,+∞[.",
+        "]−3,3[.",
+        "[−3,3].",
+        "R."
+      ],
+      "a": 2,
+      "sol": "−x²+9≥0 => x²≤9.",
+      "hyp": "Pode esquecer que a parábola abre para baixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:sinal-quadratica-negada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-048",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma função tem domínio [0,10] e imagem [−2,7]. Pode concluir-se que f(10)=7?",
+      "o": [
+        "Sim.",
+        "Só se f for crescente.",
+        "Sim, porque 10 e 7 são extremos.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Conhecer domínio e imagem não diz em que entrada o máximo 7 ocorre.",
+      "hyp": "Pode emparelhar extremos sem justificação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:dominio-imagem-nao-determina",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-049",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se 0 pertence à imagem de f, então...",
+      "o": [
+        "f tem pelo menos um zero.",
+        "0 pertence necessariamente ao domínio.",
+        "f é constante.",
+        "a imagem é apenas {0}."
+      ],
+      "a": 0,
+      "sol": "0 estar na imagem significa existir algum x do domínio com f(x)=0.",
+      "hyp": "Pode confundir entrada zero com saída zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:zero-e-imagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-DIZ-050",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-dominio-imagem-zeros",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma altura h(t)=20−5t é fisicamente válida até atingir o solo. Qual é o domínio temporal natural e o zero do modelo?",
+      "o": [
+        "Domínio R e zero t=5.",
+        "Domínio [0,4] e zero t=4.",
+        "Domínio [0,5] e zero t=4.",
+        "Domínio [−4,0] e zero t=−4."
+      ],
+      "a": 1,
+      "sol": "20−5t=0 dá t=4; fisicamente considera-se desde t=0 até esse instante.",
+      "hyp": "Pode ignorar o contexto ao definir o domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-dominio-imagem-zeros:modelo-dominio-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

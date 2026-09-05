@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matematica A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-tangente",
+  "subtopic": "Reta tangente e interpretacao geometrica",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteudo original A+. Trabalha equacao da reta tangente, leitura geometrica da derivada, reta normal e aproximacao linear local. Nao ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CD-TAN-001",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A reta tangente ao grafico de f em x=a passa por",
+      "o": [
+        "(a,f(a))",
+        "(a,f'(a))",
+        "(f(a),a)",
+        "(0,f(a))"
+      ],
+      "a": 0,
+      "sol": "O ponto de tangencia pertence ao grafico.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-002",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "O declive da tangente em x=a e",
+      "o": [
+        "f(a)",
+        "f'(a)",
+        "a",
+        "f(a)/a"
+      ],
+      "a": 1,
+      "sol": "A derivada no ponto e o declive tangente.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-003",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Uma equacao da tangente em x=a e",
+      "o": [
+        "y-a=f(a)(x-f'(a))",
+        "y=f(a)x+a",
+        "y-f(a)=f'(a)(x-a)",
+        "y=f'(a) apenas"
+      ],
+      "a": 2,
+      "sol": "E a forma ponto-declive.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-004",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(a)=0, a tangente e",
+      "o": [
+        "vertical",
+        "sempre y=0",
+        "inexistente",
+        "horizontal"
+      ],
+      "a": 3,
+      "sol": "Declive zero significa reta horizontal.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-005",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(a)>0, a tangente tem declive",
+      "o": [
+        "positivo",
+        "negativo",
+        "zero",
+        "indefinido"
+      ],
+      "a": 0,
+      "sol": "O sinal da derivada e o sinal do declive.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-006",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(a)<0, a tangente e",
+      "o": [
+        "ascendente",
+        "descendente da esquerda para a direita",
+        "horizontal",
+        "vertical"
+      ],
+      "a": 1,
+      "sol": "Declive negativo corresponde a reta descendente.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-007",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A tangente aproxima localmente o grafico por",
+      "o": [
+        "uma circunferencia",
+        "uma parabola obrigatoriamente",
+        "uma reta",
+        "um ponto apenas"
+      ],
+      "a": 2,
+      "sol": "A aproximacao linear usa a reta tangente.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-008",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A secante e a tangente diferem porque",
+      "o": [
+        "a tangente nunca toca no grafico",
+        "a secante tem sempre declive zero",
+        "sao sempre a mesma reta",
+        "a secante usa dois pontos e a tangente resulta do limite local"
+      ],
+      "a": 3,
+      "sol": "A tangente surge como limite de secantes.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-009",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se a tangente em a tem equacao y=3x-2, entao f'(a)=",
+      "o": [
+        "3",
+        "-2",
+        "a",
+        "1"
+      ],
+      "a": 0,
+      "sol": "O coeficiente de x e o declive.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-010",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se a tangente em a e horizontal e passa por (2,5), a sua equacao e",
+      "o": [
+        "x=2",
+        "y=5",
+        "y=2",
+        "x=5"
+      ],
+      "a": 1,
+      "sol": "Uma horizontal que passa por ordenada 5 e y=5.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:conceito:10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-011",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, a tangente em x=1 tem equacao",
+      "o": [
+        "y=2x+1",
+        "y=1x+2",
+        "y=2x-1",
+        "x=1"
+      ],
+      "a": 2,
+      "sol": "Usa-se y-1=2(x-1), que simplifica para y=2x-1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-012",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, a tangente em x=2 tem equacao",
+      "o": [
+        "y=4x+4",
+        "y=2x",
+        "x=2",
+        "y=4x-4"
+      ],
+      "a": 3,
+      "sol": "Usa-se y-4=4(x-2), que simplifica para y=4x-4.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-TAN-013",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, a tangente em x=-1 tem equacao",
+      "o": [
+        "y=-2x-1",
+        "y=-2x+1",
+        "y=1x+-2",
+        "x=-1"
+      ],
+      "a": 0,
+      "sol": "Usa-se y-1=-2(x--1), que simplifica para y=-2x-1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-014",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2+1, a tangente em x=0 tem equacao",
+      "o": [
+        "y=0x+1",
+        "y=1",
+        "y=1x+0",
+        "x=0"
+      ],
+      "a": 1,
+      "sol": "Usa-se y-1=0(x-0), que simplifica para y=1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-015",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2-4x, a tangente em x=2 tem equacao",
+      "o": [
+        "y=0x+-4",
+        "y=-4x+0",
+        "y=-4",
+        "x=2"
+      ],
+      "a": 2,
+      "sol": "Usa-se y--4=0(x-2), que simplifica para y=-4.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-016",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3, a tangente em x=1 tem equacao",
+      "o": [
+        "y=3x+1",
+        "y=1x+3",
+        "x=1",
+        "y=3x-2"
+      ],
+      "a": 3,
+      "sol": "Usa-se y-1=3(x-1), que simplifica para y=3x-2.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-017",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3, a tangente em x=2 tem equacao",
+      "o": [
+        "y=12x-16",
+        "y=12x+8",
+        "y=8x+12",
+        "x=2"
+      ],
+      "a": 0,
+      "sol": "Usa-se y-8=12(x-2), que simplifica para y=12x-16.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-018",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=2x^2, a tangente em x=1 tem equacao",
+      "o": [
+        "y=4x+2",
+        "y=4x-2",
+        "y=2x+4",
+        "x=1"
+      ],
+      "a": 1,
+      "sol": "Usa-se y-2=4(x-1), que simplifica para y=4x-2.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-019",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=3x+1, a tangente em x=2 tem equacao",
+      "o": [
+        "y=3x+7",
+        "y=7x+3",
+        "y=3x+1",
+        "x=2"
+      ],
+      "a": 2,
+      "sol": "Usa-se y-7=3(x-2), que simplifica para y=3x+1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-020",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-2x+5, a tangente em x=1 tem equacao",
+      "o": [
+        "y=-2x+3",
+        "y=3x+-2",
+        "x=1",
+        "y=-2x+5"
+      ],
+      "a": 3,
+      "sol": "Usa-se y-3=-2(x-1), que simplifica para y=-2x+5.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-021",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2+2x, a tangente em x=1 tem equacao",
+      "o": [
+        "y=4x-1",
+        "y=4x+3",
+        "y=3x+4",
+        "x=1"
+      ],
+      "a": 0,
+      "sol": "Usa-se y-3=4(x-1), que simplifica para y=4x-1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-022",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3-x, a tangente em x=1 tem equacao",
+      "o": [
+        "y=2x+0",
+        "y=2x-2",
+        "y=0x+2",
+        "x=1"
+      ],
+      "a": 1,
+      "sol": "Usa-se y-0=2(x-1), que simplifica para y=2x-2.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-023",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2-1, a tangente em x=0 tem equacao",
+      "o": [
+        "y=0x+-1",
+        "y=-1x+0",
+        "y=-1",
+        "x=0"
+      ],
+      "a": 2,
+      "sol": "Usa-se y--1=0(x-0), que simplifica para y=-1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-024",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=4x^2, a tangente em x=0 tem equacao",
+      "o": [
+        "y=4x",
+        "y=4",
+        "x=0",
+        "y=0"
+      ],
+      "a": 3,
+      "sol": "Usa-se y-0=0(x-0), que simplifica para y=0.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-TAN-025",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2+3, a tangente em x=3 tem equacao",
+      "o": [
+        "y=6x-6",
+        "y=6x+12",
+        "y=12x+6",
+        "x=3"
+      ],
+      "a": 0,
+      "sol": "Usa-se y-12=6(x-3), que simplifica para y=6x-6.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:equacao-tangente:25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-026",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(2)=5 e f'(2)=3, qual e a reta tangente?",
+      "o": [
+        "y=3x+5",
+        "y=3x-1",
+        "y=5x+3",
+        "x=2"
+      ],
+      "a": 1,
+      "sol": "y-5=3(x-2)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-027",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(1)=4 e f'(1)=-2, qual e a reta tangente?",
+      "o": [
+        "y=-2x+4",
+        "y=4x+-2",
+        "y=-2x+6",
+        "x=1"
+      ],
+      "a": 2,
+      "sol": "y-4=-2(x-1)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-028",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(0)=-3 e f'(0)=4, qual e a reta tangente?",
+      "o": [
+        "y=4x+-3",
+        "y=-3x+4",
+        "x=0",
+        "y=4x-3"
+      ],
+      "a": 3,
+      "sol": "y--3=4(x-0)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-029",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(-1)=2 e f'(-1)=5, qual e a reta tangente?",
+      "o": [
+        "y=5x+7",
+        "y=5x+2",
+        "y=2x+5",
+        "x=-1"
+      ],
+      "a": 0,
+      "sol": "y-2=5(x--1)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-030",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(3)=1 e f'(3)=0, qual e a reta tangente?",
+      "o": [
+        "y=0x+1",
+        "y=1",
+        "y=1x+0",
+        "x=3"
+      ],
+      "a": 1,
+      "sol": "y-1=0(x-3)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-031",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(4)=10 e f'(4)=2, qual e a reta tangente?",
+      "o": [
+        "y=2x+10",
+        "y=10x+2",
+        "y=2x+2",
+        "x=4"
+      ],
+      "a": 2,
+      "sol": "y-10=2(x-4)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-032",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(-2)=6 e f'(-2)=-1, qual e a reta tangente?",
+      "o": [
+        "y=-1x+6",
+        "y=6x+-1",
+        "x=-2",
+        "y=-x+4"
+      ],
+      "a": 3,
+      "sol": "y-6=-1(x--2)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-033",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(5)=-1 e f'(5)=3, qual e a reta tangente?",
+      "o": [
+        "y=3x-16",
+        "y=3x+-1",
+        "y=-1x+3",
+        "x=5"
+      ],
+      "a": 0,
+      "sol": "y--1=3(x-5)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-034",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(1)=0 e f'(1)=7, qual e a reta tangente?",
+      "o": [
+        "y=7x+0",
+        "y=7x-7",
+        "y=0x+7",
+        "x=1"
+      ],
+      "a": 1,
+      "sol": "y-0=7(x-1)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-035",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Sabendo que f(2)=8 e f'(2)=-4, qual e a reta tangente?",
+      "o": [
+        "y=-4x+8",
+        "y=8x+-4",
+        "y=-4x+16",
+        "x=2"
+      ],
+      "a": 2,
+      "sol": "y-8=-4(x-2)",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:dados:35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-036",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "A tangente ao grafico em x=2 e y=4x-3. Entao f'(2)=",
+      "o": [
+        "5",
+        "2",
+        "-3",
+        "4"
+      ],
+      "a": 3,
+      "sol": "O declive da reta y=4x-3 e 4.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:ler-declive:36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-TAN-037",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "A tangente ao grafico em x=1 e y=-2x+7. Entao f'(1)=",
+      "o": [
+        "-2",
+        "5",
+        "1",
+        "-1"
+      ],
+      "a": 0,
+      "sol": "O declive da reta y=-2x+7 e -2.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:ler-declive:37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-038",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "A tangente ao grafico em x=3 e y=6. Entao f'(3)=",
+      "o": [
+        "6",
+        "0",
+        "3",
+        "1"
+      ],
+      "a": 1,
+      "sol": "O declive da reta y=6 e 0.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:ler-declive:38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-039",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "A tangente ao grafico em x=-1 e y=x+4. Entao f'(-1)=",
+      "o": [
+        "3",
+        "-1",
+        "1",
+        "2"
+      ],
+      "a": 2,
+      "sol": "O declive da reta y=x+4 e 1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:ler-declive:39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-040",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "A tangente ao grafico em x=0 e y=-5x+2. Entao f'(0)=",
+      "o": [
+        "2",
+        "0",
+        "-4",
+        "-5"
+      ],
+      "a": 3,
+      "sol": "O declive da reta y=-5x+2 e -5.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:ler-declive:40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-041",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se a tangente em (2,5) tem declive 3, uma reta normal ao grafico nesse ponto e",
+      "o": [
+        "y=(-1/3)x+17/3",
+        "y=3x+5",
+        "y=-3x+5",
+        "x=2"
+      ],
+      "a": 0,
+      "sol": "O declive normal e -1/3; usando o ponto obtem-se y=(-1/3)x+17/3.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:reta-normal:41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-042",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se a tangente em (1,4) tem declive -2, uma reta normal ao grafico nesse ponto e",
+      "o": [
+        "y=-2x+4",
+        "y=(1/2)x+7/2",
+        "y=2x+4",
+        "x=1"
+      ],
+      "a": 1,
+      "sol": "O declive normal e -1/-2; usando o ponto obtem-se y=(1/2)x+7/2.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:reta-normal:42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-043",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao grafico nesse ponto e",
+      "o": [
+        "y=4x+-3",
+        "y=-4x+-3",
+        "y=(-1/4)x-3",
+        "x=0"
+      ],
+      "a": 2,
+      "sol": "O declive normal e -1/4; usando o ponto obtem-se y=(-1/4)x-3.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:reta-normal:43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-044",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se a tangente em (-1,2) tem declive 1, uma reta normal ao grafico nesse ponto e",
+      "o": [
+        "y=1x+2",
+        "y=-1x+2",
+        "x=-1",
+        "y=-x+1"
+      ],
+      "a": 3,
+      "sol": "O declive normal e -1/1; usando o ponto obtem-se y=-x+1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:reta-normal:44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-045",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se a tangente em (3,1) tem declive -1, uma reta normal ao grafico nesse ponto e",
+      "o": [
+        "y=x-2",
+        "y=-1x+1",
+        "y=1x+1",
+        "x=3"
+      ],
+      "a": 0,
+      "sol": "O declive normal e -1/-1; usando o ponto obtem-se y=x-2.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:reta-normal:45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-046",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximacao linear f(2,1) e",
+      "o": [
+        "5,03",
+        "aproximadamente 5,3",
+        "8",
+        "2,1"
+      ],
+      "a": 1,
+      "sol": "Usa-se f(2+h)≈f(2)+f'(2)h com h=0,1.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:aproximacao-linear:46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-047",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "Sabendo que f(1)=4 e f'(1)=-2, pela aproximacao linear f(1,05) e",
+      "o": [
+        "4,1",
+        "3,8",
+        "aproximadamente 3,9",
+        "2"
+      ],
+      "a": 2,
+      "sol": "h=0,05; 4-2(0,05)=3,9.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:aproximacao-linear:47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-048",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "Sabendo que f(0)=2 e f'(0)=5, pela aproximacao linear f(0,2) e",
+      "o": [
+        "2,5",
+        "7",
+        "1",
+        "aproximadamente 3"
+      ],
+      "a": 3,
+      "sol": "2+5(0,2)=3.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:aproximacao-linear:48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-049",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "Sabendo que f(3)=10 e f'(3)=0, pela aproximacao linear f(3,1) e",
+      "o": [
+        "aproximadamente 10",
+        "10,1",
+        "0",
+        "3,1"
+      ],
+      "a": 0,
+      "sol": "A aproximacao linear local nao varia quando o declive e 0.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:aproximacao-linear:49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-TAN-050",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-tangente",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "Sabendo que f(-1)=1 e f'(-1)=4, pela aproximacao linear f(-0,9) e",
+      "o": [
+        "0,6",
+        "aproximadamente 1,4",
+        "4,1",
+        "1,04"
+      ],
+      "a": 1,
+      "sol": "h=0,1; 1+4(0,1)=1,4.",
+      "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-tangente:aproximacao-linear:50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

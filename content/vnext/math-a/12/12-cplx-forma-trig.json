@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-cplx",
+  "subtopicId": "12-cplx-forma-trig",
+  "subtopic": "Forma trigonométrica, módulo e argumento",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha forma trigonométrica, módulo, argumento, conversões algébrica/trigonométrica, quadrantes e efeitos geométricos sobre argumentos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12CPLX-FT-001",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A forma trigonométrica de z≠0 pode escrever-se como...",
+      "o": [
+        "r(cosθ+i sinθ), com r>0.",
+        "a+bi apenas.",
+        "r+iθ.",
+        "cos r+i sin r."
+      ],
+      "a": 0,
+      "sol": "r é o módulo e θ um argumento de z.",
+      "hyp": "Pode trocar módulo e argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:forma-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-002",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na forma r(cosθ+i sinθ), r representa...",
+      "o": [
+        "a parte real.",
+        "o módulo de z.",
+        "a parte imaginária.",
+        "o argumento."
+      ],
+      "a": 1,
+      "sol": "r=|z|.",
+      "hyp": "Pode confundir r com Re(z).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-003",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na forma z=r(cosθ+i sinθ), θ representa...",
+      "o": [
+        "o módulo.",
+        "a parte real.",
+        "um argumento de z.",
+        "a parte imaginária."
+      ],
+      "a": 2,
+      "sol": "θ determina a direção do vetor complexo.",
+      "hyp": "Pode confundir com o raio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:argumento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-004",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Os argumentos de um complexo não nulo diferem entre si por múltiplos de...",
+      "o": [
+        "π.",
+        "π/2.",
+        "4π.",
+        "2π."
+      ],
+      "a": 3,
+      "sol": "Uma volta completa não altera a direção.",
+      "hyp": "Pode pensar que o período angular é π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:argumentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-005",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "O módulo de z=3+4i é...",
+      "o": [
+        "5.",
+        "7.",
+        "25.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "√(9+16)=5.",
+      "hyp": "Pode somar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-006",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O complexo 1+i tem módulo...",
+      "o": [
+        "2.",
+        "√2.",
+        "1.",
+        "1/√2."
+      ],
+      "a": 1,
+      "sol": "√(1+1)=√2.",
+      "hyp": "Pode usar soma 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-007",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um argumento de 1+i é...",
+      "o": [
+        "π/2.",
+        "3π/4.",
+        "π/4.",
+        "−π/4."
+      ],
+      "a": 2,
+      "sol": "O ponto está no 1.º quadrante com x=y.",
+      "hyp": "Pode escolher o argumento do 4.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-008",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um argumento de −1+i é...",
+      "o": [
+        "π/4.",
+        "5π/4.",
+        "7π/4.",
+        "3π/4."
+      ],
+      "a": 3,
+      "sol": "2.º quadrante, ângulo de referência π/4.",
+      "hyp": "Pode ignorar os sinais das coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-009",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um argumento de −1−i em [0,2π[ é...",
+      "o": [
+        "5π/4.",
+        "3π/4.",
+        "7π/4.",
+        "π/4."
+      ],
+      "a": 0,
+      "sol": "3.º quadrante.",
+      "hyp": "Pode escolher o quadrante errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-010",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um argumento de 1−i em [0,2π[ é...",
+      "o": [
+        "π/4.",
+        "7π/4.",
+        "5π/4.",
+        "3π/4."
+      ],
+      "a": 1,
+      "sol": "4.º quadrante.",
+      "hyp": "Pode usar o argumento principal negativo sem respeitar o intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-notavel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-011",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A forma trigonométrica de 1+i é...",
+      "o": [
+        "2(cosπ/4+i sinπ/4).",
+        "√2(cos3π/4+i sin3π/4).",
+        "√2(cosπ/4+i sinπ/4).",
+        "cosπ/4+i sinπ/4."
+      ],
+      "a": 2,
+      "sol": "Módulo √2 e argumento π/4.",
+      "hyp": "Pode esquecer o módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-012",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A forma trigonométrica de −1+i é...",
+      "o": [
+        "√2(cosπ/4+i sinπ/4).",
+        "2(cos3π/4+i sin3π/4).",
+        "√2(cos5π/4+i sin5π/4).",
+        "√2(cos3π/4+i sin3π/4)."
+      ],
+      "a": 3,
+      "sol": "Módulo √2 e argumento 3π/4.",
+      "hyp": "Pode acertar módulo e errar quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-013",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A forma trigonométrica de 2i é...",
+      "o": [
+        "2(cosπ/2+i sinπ/2).",
+        "2(cos0+i sin0).",
+        "2(cosπ+i sinπ).",
+        "cosπ/2+i sinπ/2."
+      ],
+      "a": 0,
+      "sol": "Módulo 2 e direção do eixo imaginário positivo.",
+      "hyp": "Pode confundir com eixo real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-014",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A forma trigonométrica de −3 é...",
+      "o": [
+        "3(cos0+i sin0).",
+        "3(cosπ+i sinπ).",
+        "−3(cos0+i sin0).",
+        "3(cosπ/2+i sinπ/2)."
+      ],
+      "a": 1,
+      "sol": "Módulo é positivo 3 e argumento π.",
+      "hyp": "Pode colocar módulo negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-015",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A forma algébrica de 2(cos0+i sin0) é...",
+      "o": [
+        "2i.",
+        "−2.",
+        "2.",
+        "1+i."
+      ],
+      "a": 2,
+      "sol": "cos0=1, sin0=0.",
+      "hyp": "Pode usar o seno como parte real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:trig-para-alg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-016",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A forma algébrica de 3(cosπ/2+i sinπ/2) é...",
+      "o": [
+        "3.",
+        "−3.",
+        "−3i.",
+        "3i."
+      ],
+      "a": 3,
+      "sol": "cosπ/2=0 e sinπ/2=1.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:trig-para-alg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-017",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "2(cosπ+i sinπ) é...",
+      "o": [
+        "−2.",
+        "2.",
+        "2i.",
+        "−2i."
+      ],
+      "a": 0,
+      "sol": "cosπ=−1 e sinπ=0.",
+      "hyp": "Pode ignorar o sinal do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:trig-para-alg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-018",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "4(cos3π/2+i sin3π/2) é...",
+      "o": [
+        "4i.",
+        "−4i.",
+        "−4.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "sin3π/2=−1.",
+      "hyp": "Pode confundir 3π/2 com π/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:trig-para-alg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-019",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se z=r(cosθ+i sinθ), então Re(z)=",
+      "o": [
+        "r sinθ.",
+        "cos r.",
+        "r cosθ.",
+        "θ cos r."
+      ],
+      "a": 2,
+      "sol": "A parte real é a componente horizontal.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:componentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-020",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se z=r(cosθ+i sinθ), então Im(z)=",
+      "o": [
+        "r cosθ.",
+        "sin r.",
+        "θ sin r.",
+        "r sinθ."
+      ],
+      "a": 3,
+      "sol": "A parte imaginária é a componente vertical.",
+      "hyp": "Pode trocar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:componentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-021",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se |z|=2 e arg(z)=π/3, então z em forma algébrica é...",
+      "o": [
+        "1+√3 i.",
+        "√3+i.",
+        "2+√3 i.",
+        "1+(√3/2)i."
+      ],
+      "a": 0,
+      "sol": "Como cos(π/3)=1/2 e sin(π/3)=√3/2, z=2(1/2+i√3/2)=1+√3i.",
+      "hyp": "Pode esquecer multiplicar pelo módulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-022",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se |z|=4 e arg(z)=π/6, então z=",
+      "o": [
+        "2+2√3i.",
+        "2√3+2i.",
+        "4√3+2i.",
+        "√3+2i."
+      ],
+      "a": 1,
+      "sol": "4cosπ/6=2√3 e 4sinπ/6=2.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-023",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se |z|=6 e arg(z)=2π/3, então z=",
+      "o": [
+        "3+3√3i.",
+        "−3√3+3i.",
+        "−3+3√3i.",
+        "−6+3i."
+      ],
+      "a": 2,
+      "sol": "6cos120°=−3 e 6sin120°=3√3.",
+      "hyp": "Pode errar o sinal do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-024",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se |z|=10 e arg(z)=−π/6, então z=",
+      "o": [
+        "5√3+5i.",
+        "5−5√3i.",
+        "10−5i.",
+        "5√3−5i."
+      ],
+      "a": 3,
+      "sol": "cos é √3/2 e sin é −1/2.",
+      "hyp": "Pode esquecer o sinal do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:converter",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-025",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se arg(z)=0 mod2π, então z é...",
+      "o": [
+        "real positivo.",
+        "real negativo.",
+        "imaginário puro positivo.",
+        "zero."
+      ],
+      "a": 0,
+      "sol": "O vetor aponta no sentido positivo de Ox.",
+      "hyp": "Pode incluir z=0, que não tem argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-026",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se arg(z)=π mod2π, então z é...",
+      "o": [
+        "real positivo.",
+        "real negativo.",
+        "imaginário puro.",
+        "zero."
+      ],
+      "a": 1,
+      "sol": "Direção do eixo real negativo.",
+      "hyp": "Pode usar módulo negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-027",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se arg(z)=π/2 mod2π, então z é...",
+      "o": [
+        "real positivo.",
+        "real negativo.",
+        "imaginário puro positivo.",
+        "imaginário puro negativo."
+      ],
+      "a": 2,
+      "sol": "Direção do eixo imaginário positivo.",
+      "hyp": "Pode confundir os eixos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-028",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se arg(z)=3π/2 mod2π, então z é...",
+      "o": [
+        "imaginário puro positivo.",
+        "real negativo.",
+        "real positivo.",
+        "imaginário puro negativo."
+      ],
+      "a": 3,
+      "sol": "Direção do eixo imaginário negativo.",
+      "hyp": "Pode trocar π/2 e 3π/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-029",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O argumento principal costuma ser escolhido num intervalo de comprimento...",
+      "o": [
+        "2π.",
+        "π.",
+        "π/2.",
+        "4π."
+      ],
+      "a": 0,
+      "sol": "Uma convenção possível é ]−π,π] ou [0,2π[.",
+      "hyp": "Pode pensar que só existe uma convenção universal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg-principal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-030",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=−√3+i, um argumento em [0,2π[ é...",
+      "o": [
+        "π/6.",
+        "5π/6.",
+        "7π/6.",
+        "11π/6."
+      ],
+      "a": 1,
+      "sol": "2.º quadrante com referência π/6.",
+      "hyp": "Pode escolher o quadrante pelo sinal da parte imaginária apenas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-031",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=−√3−i, um argumento em [0,2π[ é...",
+      "o": [
+        "5π/6.",
+        "11π/6.",
+        "7π/6.",
+        "π/6."
+      ],
+      "a": 2,
+      "sol": "3.º quadrante com referência π/6.",
+      "hyp": "Pode esquecer ambos os sinais negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-032",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=√3−i, um argumento em [0,2π[ é...",
+      "o": [
+        "π/6.",
+        "5π/6.",
+        "7π/6.",
+        "11π/6."
+      ],
+      "a": 3,
+      "sol": "4.º quadrante, referência π/6.",
+      "hyp": "Pode escolher o ângulo de referência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-033",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=−1+√3i, um argumento é...",
+      "o": [
+        "2π/3.",
+        "π/3.",
+        "4π/3.",
+        "5π/3."
+      ],
+      "a": 0,
+      "sol": "2.º quadrante e tan referência √3.",
+      "hyp": "Pode escolher o quadrante errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-034",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=−1−√3i, um argumento em [0,2π[ é...",
+      "o": [
+        "2π/3.",
+        "4π/3.",
+        "5π/3.",
+        "π/3."
+      ],
+      "a": 1,
+      "sol": "3.º quadrante.",
+      "hyp": "Pode usar o conjugado sem alterar argumento corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-035",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z=1−√3i, um argumento em [0,2π[ é...",
+      "o": [
+        "π/3.",
+        "4π/3.",
+        "5π/3.",
+        "2π/3."
+      ],
+      "a": 2,
+      "sol": "4.º quadrante.",
+      "hyp": "Pode esquecer o sinal da parte imaginária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-036",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O conjugado de r(cosθ+i sinθ) pode escrever-se como...",
+      "o": [
+        "r(cosθ+i sinθ).",
+        "−r(cosθ+i sinθ).",
+        "r(cos(π−θ)+i sin(π−θ)).",
+        "r(cos(−θ)+i sin(−θ))."
+      ],
+      "a": 3,
+      "sol": "Conjugar reflete o argumento: θ→−θ.",
+      "hyp": "Pode confundir com oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:conjugado-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-037",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z tem módulo 5 e argumento π/4, o conjugado tem argumento possível...",
+      "o": [
+        "−π/4.",
+        "π/4.",
+        "3π/4.",
+        "5π/4."
+      ],
+      "a": 0,
+      "sol": "Conjugação muda θ para −θ módulo 2π.",
+      "hyp": "Pode manter o argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:conjugado-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-038",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z tem argumento θ, então −z tem argumento...",
+      "o": [
+        "−θ.",
+        "θ+π mod2π.",
+        "θ+π/2.",
+        "2θ."
+      ],
+      "a": 1,
+      "sol": "Oposto corresponde a rotação de π.",
+      "hyp": "Pode confundir com conjugação ou multiplicação por i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:oposto-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-039",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z tem argumento θ, então iz tem argumento...",
+      "o": [
+        "θ−π/2.",
+        "−θ.",
+        "θ+π/2 mod2π.",
+        "θ+π."
+      ],
+      "a": 2,
+      "sol": "Multiplicar por i roda +90°.",
+      "hyp": "Pode errar o sentido da rotação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:i-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-040",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z tem argumento θ, então −iz tem argumento...",
+      "o": [
+        "θ+π/2.",
+        "θ+π.",
+        "−θ.",
+        "θ−π/2 mod2π."
+      ],
+      "a": 3,
+      "sol": "Multiplicar por −i roda −90°.",
+      "hyp": "Pode usar o argumento de i em vez de −i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:menos-i-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-041",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O conjunto dos complexos com argumento π/4 e módulo positivo é...",
+      "o": [
+        "a semirreta de origem 0 na direção π/4, excluindo 0.",
+        "uma reta inteira.",
+        "uma circunferência.",
+        "um disco."
+      ],
+      "a": 0,
+      "sol": "Fixar argumento fixa direção; o módulo varia.",
+      "hyp": "Pode incluir a semirreta oposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:lugar-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-042",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A condição arg(z)=π/2, z≠0, descreve...",
+      "o": [
+        "todo o eixo imaginário.",
+        "o semieixo imaginário positivo.",
+        "o semieixo real positivo.",
+        "uma circunferência."
+      ],
+      "a": 1,
+      "sol": "Argumento π/2 fixa a direção positiva de Oy.",
+      "hyp": "Pode incluir a direção oposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:lugar-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-043",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=2(cosθ+i sinθ) e z é real positivo, então θ pode ser...",
+      "o": [
+        "π+2kπ.",
+        "π/2+2kπ.",
+        "2kπ.",
+        "π/4+kπ."
+      ],
+      "a": 2,
+      "sol": "A direção deve ser 0 módulo 2π.",
+      "hyp": "Pode usar direção real negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:condicao-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-044",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=3(cosθ+i sinθ) é real negativo, então θ pode ser...",
+      "o": [
+        "2kπ.",
+        "π/2+2kπ.",
+        "3π/2+2kπ.",
+        "π+2kπ."
+      ],
+      "a": 3,
+      "sol": "A direção do eixo real negativo é π.",
+      "hyp": "Pode escolher o eixo imaginário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:condicao-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-045",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se z=4(cosθ+i sinθ) é imaginário puro positivo, então θ pode ser...",
+      "o": [
+        "π/2+2kπ.",
+        "3π/2+2kπ.",
+        "π+2kπ.",
+        "2kπ."
+      ],
+      "a": 0,
+      "sol": "Direção de Oy positivo.",
+      "hyp": "Pode trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:condicao-arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-046",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O complexo z=−2√3+2i tem módulo...",
+      "o": [
+        "2.",
+        "4.",
+        "√8.",
+        "8."
+      ],
+      "a": 1,
+      "sol": "√(12+4)=4.",
+      "hyp": "Pode somar módulos das componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-047",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para z=−2√3+2i, um argumento de z é...",
+      "o": [
+        "π/6.",
+        "7π/6.",
+        "5π/6.",
+        "11π/6."
+      ],
+      "a": 2,
+      "sol": "Re<0, Im>0 e referência π/6.",
+      "hyp": "Pode escolher o quadrante errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:arg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-048",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um vetor complexo tem módulo 10 e direção 30°. A forma trigonométrica é...",
+      "o": [
+        "10(cosπ/3+i sinπ/3).",
+        "5(cosπ/6+i sinπ/6).",
+        "10(cos30+i sin30), com 30 em radianos.",
+        "10(cosπ/6+i sinπ/6)."
+      ],
+      "a": 3,
+      "sol": "30°=π/6.",
+      "hyp": "Pode não converter graus para radianos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modelacao-direcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-049",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um sinal tem forma 5(cos2π/3+i sin2π/3). A parte real é...",
+      "o": [
+        "−5/2.",
+        "5/2.",
+        "5√3/2.",
+        "−5√3/2."
+      ],
+      "a": 0,
+      "sol": "5cos120°=−5/2.",
+      "hyp": "Pode usar o seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modelacao-componente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-FT-050",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-forma-trig",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Para z=5(cos(2π/3)+i sin(2π/3)), a parte imaginária é...",
+      "o": [
+        "−5√3/2.",
+        "5√3/2.",
+        "5/2.",
+        "−5/2."
+      ],
+      "a": 1,
+      "sol": "5sin120°=5√3/2.",
+      "hyp": "Pode usar o cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-forma-trig:modelacao-componente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

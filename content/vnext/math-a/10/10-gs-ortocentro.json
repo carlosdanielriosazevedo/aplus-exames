@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-gs",
+  "subtopicId": "10-gs-ortocentro",
+  "subtopic": "Ortocentro e alturas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição e localização do ortocentro, alturas, casos retângulos/isósceles, área, altura à hipotenusa e modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GS-ORT-001",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O ortocentro de um triângulo é o ponto de interseção das...",
+      "o": [
+        "alturas.",
+        "medianas.",
+        "mediatrizes.",
+        "bissetrizes."
+      ],
+      "a": 0,
+      "sol": "As três alturas são concorrentes no ortocentro.",
+      "hyp": "Pode confundir os centros notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-002",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma altura de um triângulo parte de um vértice e é perpendicular...",
+      "o": [
+        "à mediana oposta.",
+        "à reta que contém o lado oposto.",
+        "à bissetriz oposta.",
+        "a qualquer lado adjacente."
+      ],
+      "a": 1,
+      "sol": "A altura é perpendicular à reta suporte do lado oposto.",
+      "hyp": "Pode esquecer que o pé pode estar num prolongamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-003",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo acutângulo, o ortocentro fica...",
+      "o": [
+        "fora.",
+        "num vértice.",
+        "no interior.",
+        "no ponto médio de um lado."
+      ],
+      "a": 2,
+      "sol": "As três alturas intersectam-se no interior num triângulo acutângulo.",
+      "hyp": "Pode generalizar a localização de outros centros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:localizacao-acutangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-004",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo retângulo, o ortocentro coincide com...",
+      "o": [
+        "o ponto médio da hipotenusa.",
+        "o incentro.",
+        "o baricentro.",
+        "o vértice do ângulo reto."
+      ],
+      "a": 3,
+      "sol": "Os catetos são duas alturas, logo intersectam-se no vértice reto.",
+      "hyp": "Pode confundir com circuncentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-005",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, o ortocentro fica...",
+      "o": [
+        "fora do triângulo.",
+        "sempre no interior.",
+        "num vértice.",
+        "no ponto médio do maior lado."
+      ],
+      "a": 0,
+      "sol": "As alturas de um triângulo obtusângulo concorrem no exterior.",
+      "hyp": "Pode assumir que centros notáveis são sempre interiores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:localizacao-obtuso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-006",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para determinar o ortocentro, basta traçar...",
+      "o": [
+        "duas medianas.",
+        "duas alturas; a terceira passa pelo mesmo ponto.",
+        "duas mediatrizes.",
+        "uma bissetriz."
+      ],
+      "a": 1,
+      "sol": "Duas alturas não paralelas determinam o ponto comum das três.",
+      "hyp": "Pode escolher retas notáveis erradas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:construcao-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-007",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo retângulo em A, qual lado serve de base para a altura que parte de A?",
+      "o": [
+        "O cateto AB apenas.",
+        "O cateto AC apenas.",
+        "A hipotenusa BC.",
+        "Nenhum lado."
+      ],
+      "a": 2,
+      "sol": "A altura por A é perpendicular à hipotenusa BC.",
+      "hyp": "Pode pensar que os catetos são a única referência possível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-ao-hipotenusa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-008",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo retângulo em A, as alturas que partem de B e C coincidem respetivamente com...",
+      "o": [
+        "as mediatrizes.",
+        "as bissetrizes.",
+        "a hipotenusa.",
+        "os catetos BA e CA."
+      ],
+      "a": 3,
+      "sol": "BA é perpendicular a AC e CA é perpendicular a AB.",
+      "hyp": "Pode não reconhecer os próprios catetos como alturas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:catetos-como-alturas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-009",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se num triângulo retângulo o ângulo reto está em C, onde fica o ortocentro?",
+      "o": [
+        "Em C.",
+        "No ponto médio de AB.",
+        "No incentro.",
+        "Fora do triângulo."
+      ],
+      "a": 0,
+      "sol": "O vértice reto é interseção das duas alturas que coincidem com os catetos.",
+      "hyp": "Pode confundir com circuncentro no ponto médio da hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-010",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo equilátero, ortocentro, baricentro, incentro e circuncentro...",
+      "o": [
+        "são sempre quatro pontos distintos.",
+        "coincidem.",
+        "só dois coincidem.",
+        "não existem."
+      ],
+      "a": 1,
+      "sol": "A simetria do equilátero faz coincidir todas as retas notáveis.",
+      "hyp": "Pode achar que definições diferentes impedem coincidência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:equilatero-centros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-011",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, o ortocentro pertence...",
+      "o": [
+        "sempre à base.",
+        "sempre fora.",
+        "ao eixo de simetria.",
+        "a um dos lados iguais obrigatoriamente."
+      ],
+      "a": 2,
+      "sol": "A altura do vértice principal coincide com o eixo de simetria e contém o ortocentro.",
+      "hyp": "Pode ignorar simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:isosceles-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-012",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O pé de uma altura é...",
+      "o": [
+        "o ponto médio do lado.",
+        "o baricentro.",
+        "o centro da circunferência inscrita.",
+        "o ponto onde a perpendicular pelo vértice encontra a reta do lado oposto."
+      ],
+      "a": 3,
+      "sol": "É a projeção perpendicular do vértice sobre a reta suporte do lado oposto.",
+      "hyp": "Pode confundir pé da altura com ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:pe-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-013",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se a altura AD é perpendicular a BC e ∠ADB mede...",
+      "o": [
+        "90°",
+        "45°",
+        "60°",
+        "180°"
+      ],
+      "a": 0,
+      "sol": "Perpendicularidade implica ângulo reto.",
+      "hyp": "Pode não traduzir perpendicularidade em 90°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-perpendicular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-014",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, algumas alturas encontram...",
+      "o": [
+        "sempre o interior dos lados.",
+        "prolongamentos dos lados opostos.",
+        "apenas pontos médios.",
+        "o incentro."
+      ],
+      "a": 1,
+      "sol": "Para obter perpendicularidade, o pé pode estar fora do segmento, na reta suporte.",
+      "hyp": "Pode limitar 'lado oposto' ao segmento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-prolongamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-015",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se duas alturas de um triângulo se intersectam em H, então a terceira altura...",
+      "o": [
+        "é paralela a ambas.",
+        "não existe.",
+        "também passa por H.",
+        "passa pelo circuncentro obrigatoriamente."
+      ],
+      "a": 2,
+      "sol": "As três alturas são concorrentes.",
+      "hyp": "Pode achar que concorrência não é garantida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:alturas-concorrentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-016",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma mediana é sempre uma altura?",
+      "o": [
+        "Sim.",
+        "Só em triângulos escalenos.",
+        "Só em obtusângulos.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Só em casos especiais, como a mediana relativa à base de um isósceles, há coincidência.",
+      "hyp": "Pode confundir definição de mediana com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:mediana-vs-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-017",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, a altura do vértice principal à base é também...",
+      "o": [
+        "mediana e bissetriz.",
+        "apenas mediatriz de outro lado.",
+        "paralela à base.",
+        "um lado do triângulo."
+      ],
+      "a": 0,
+      "sol": "A simetria faz coincidir altura, mediana, bissetriz e mediatriz da base.",
+      "hyp": "Pode não reconhecer coincidência das retas notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:isosceles-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-018",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo de base 10 e altura correspondente 6, qual é a área?",
+      "o": [
+        "20",
+        "30",
+        "40",
+        "60"
+      ],
+      "a": 1,
+      "sol": "Área=1/2×10×6=30.",
+      "hyp": "Pode esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:area-base-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-019",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um triângulo tem área 24 e base 8. Qual é a altura correspondente?",
+      "o": [
+        "3",
+        "8",
+        "6",
+        "12"
+      ],
+      "a": 2,
+      "sol": "24=1/2×8×h => h=6.",
+      "hyp": "Pode dividir apenas a área pela base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-a-partir-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-020",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um triângulo tem área 35 e altura 7. Qual é a base correspondente?",
+      "o": [
+        "5",
+        "7",
+        "14",
+        "10"
+      ],
+      "a": 3,
+      "sol": "35=1/2×b×7 => b=10.",
+      "hyp": "Pode usar b=35/7=5 e esquecer o 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:base-a-partir-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-021",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com catetos 6 e 8, qual é a área?",
+      "o": [
+        "24",
+        "12",
+        "36",
+        "48"
+      ],
+      "a": 0,
+      "sol": "Os catetos são base e altura perpendiculares: 1/2×6×8=24.",
+      "hyp": "Pode multiplicar sem dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:area-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-022",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com catetos 9 e 12, a hipotenusa mede 15. Qual é a altura à hipotenusa h, usando a igualdade das áreas?",
+      "o": [
+        "6",
+        "7,2",
+        "9",
+        "12"
+      ],
+      "a": 1,
+      "sol": "1/2×9×12=54 e 1/2×15×h=54, logo h=108/15=7,2.",
+      "hyp": "Pode usar um cateto como altura à hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-023",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com catetos a,b e hipotenusa c, a altura h à hipotenusa satisfaz...",
+      "o": [
+        "a+b=c+h.",
+        "a²+b²=h².",
+        "ab=ch.",
+        "h=c."
+      ],
+      "a": 2,
+      "sol": "Igualando áreas: ab/2=ch/2, logo ab=ch.",
+      "hyp": "Pode confundir com Pitágoras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-024",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo retângulo com catetos 5 e 12 e hipotenusa 13, qual é a altura à hipotenusa?",
+      "o": [
+        "5",
+        "12/5",
+        "13/2",
+        "60/13"
+      ],
+      "a": 3,
+      "sol": "h=ab/c=60/13.",
+      "hyp": "Pode escolher um cateto ou metade da hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-025",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se o ortocentro coincide com um vértice do triângulo, então o triângulo é...",
+      "o": [
+        "retângulo.",
+        "equilátero.",
+        "obtusângulo não retângulo.",
+        "necessariamente escaleno."
+      ],
+      "a": 0,
+      "sol": "No triângulo retângulo, o ortocentro é o vértice reto.",
+      "hyp": "Pode confundir com circuncentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:classificar-pelo-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-026",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se o ortocentro está no interior, então o triângulo é...",
+      "o": [
+        "retângulo.",
+        "acutângulo.",
+        "obtusângulo.",
+        "degenerado."
+      ],
+      "a": 1,
+      "sol": "Ortocentro interior caracteriza triângulos acutângulos.",
+      "hyp": "Pode confundir com incentro, sempre interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:classificar-pelo-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-027",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se o ortocentro está fora, então o triângulo é...",
+      "o": [
+        "retângulo.",
+        "equilátero.",
+        "obtusângulo.",
+        "necessariamente isósceles."
+      ],
+      "a": 2,
+      "sol": "Ortocentro exterior caracteriza triângulos obtusângulos.",
+      "hyp": "Pode não relacionar localização com tipo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:classificar-pelo-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-028",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo ABC, AD e BE são alturas e intersectam-se em H. O que se pode concluir sobre CH?",
+      "o": [
+        "É mediana de AB.",
+        "É bissetriz de C obrigatoriamente.",
+        "É paralela a AB.",
+        "É perpendicular a AB."
+      ],
+      "a": 3,
+      "sol": "A terceira altura passa por H; logo CH⊥AB.",
+      "hyp": "Pode não usar concorrência das alturas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:terceira-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-029",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se AH é uma altura e H pertence a BC, então ∠AHB mede...",
+      "o": [
+        "90°",
+        "45°",
+        "60°",
+        "120°"
+      ],
+      "a": 0,
+      "sol": "AH⊥BC e HB está em BC.",
+      "hyp": "Pode não identificar HB como parte da reta BC.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:angulo-pe-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-030",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo acutângulo, os três pés das alturas ficam...",
+      "o": [
+        "todos fora.",
+        "nos três lados do triângulo.",
+        "todos num vértice.",
+        "no circuncentro."
+      ],
+      "a": 1,
+      "sol": "Em triângulo acutângulo, cada perpendicular encontra o lado oposto dentro do segmento.",
+      "hyp": "Pode transferir caso obtuso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:pes-acutangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-031",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, a altura a partir do vértice obtuso encontra o lado oposto...",
+      "o": [
+        "sempre fora do segmento.",
+        "no circuncentro.",
+        "no próprio segmento.",
+        "no baricentro."
+      ],
+      "a": 2,
+      "sol": "A perpendicular do vértice obtuso ao lado oposto cai no segmento; as outras duas alturas recorrem a prolongamentos.",
+      "hyp": "Pode pensar que todas as alturas de obtusângulo têm pés exteriores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:pes-obtuso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-032",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, as alturas a partir dos dois vértices agudos encontram normalmente...",
+      "o": [
+        "sempre o interior dos lados.",
+        "o incentro.",
+        "o ponto médio da base.",
+        "prolongamentos dos lados opostos."
+      ],
+      "a": 3,
+      "sol": "Essas alturas precisam dos prolongamentos para obter perpendicularidade.",
+      "hyp": "Pode não distinguir quais alturas saem do triângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:pes-obtuso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-033",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo isósceles com base BC, se a altura AD à base passa pelo ponto médio D de BC, então...",
+      "o": [
+        "AD é também mediana.",
+        "AD é paralela a BC.",
+        "AD é lado do triângulo.",
+        "AD é circunferência."
+      ],
+      "a": 0,
+      "sol": "Passar pelo ponto médio do lado oposto é a definição de mediana.",
+      "hyp": "Pode não combinar propriedades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:isosceles-altura-mediana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-034",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se num triângulo a altura a partir de A passa pelo ponto médio de BC, então AB e AC são...",
+      "o": [
+        "perpendiculares.",
+        "iguais.",
+        "paralelos.",
+        "sempre de comprimento 1."
+      ],
+      "a": 1,
+      "sol": "A está na mediatriz de BC, logo AB=AC.",
+      "hyp": "Pode não usar a mediatriz como lugar geométrico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-mediana-implica-isosceles",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-035",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma torre deve ser ligada perpendicularmente a uma estrada representada por uma reta. A menor distância da torre à estrada é medida ao longo...",
+      "o": [
+        "de qualquer segmento oblíquo.",
+        "de uma paralela à estrada.",
+        "da perpendicular à estrada.",
+        "da bissetriz de um ângulo aleatório."
+      ],
+      "a": 2,
+      "sol": "Distância de ponto a reta é o comprimento da perpendicular.",
+      "hyp": "Pode achar que qualquer ligação mede distância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:distancia-ponto-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-036",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma altura mede 8 e a base correspondente 15. Qual é a área do triângulo?",
+      "o": [
+        "30",
+        "90",
+        "120",
+        "60"
+      ],
+      "a": 3,
+      "sol": "1/2×15×8=60.",
+      "hyp": "Pode multiplicar diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:area-base-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-037",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, a altura à hipotenusa divide-a em segmentos p e q. Se se usa a relação h²=pq e p=4,q=9, quanto mede h?",
+      "o": [
+        "6",
+        "5",
+        "6,5",
+        "13"
+      ],
+      "a": 0,
+      "sol": "h²=36, logo h=6.",
+      "hyp": "Pode somar p e q ou esquecer a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa-teorema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-038",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se a altura à hipotenusa de um triângulo retângulo mede 6 e um dos segmentos da hipotenusa mede 4, usando h²=pq, o outro mede...",
+      "o": [
+        "6",
+        "9",
+        "8",
+        "12"
+      ],
+      "a": 1,
+      "sol": "36=4q => q=9.",
+      "hyp": "Pode dividir 6 por 4 em vez de usar h².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa-teorema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-039",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, se a hipotenusa é 25 e uma projeção de um cateto sobre ela é 9, a outra projeção mede...",
+      "o": [
+        "9",
+        "12",
+        "16",
+        "25"
+      ],
+      "a": 2,
+      "sol": "As duas projeções somam a hipotenusa: 25−9=16.",
+      "hyp": "Pode usar Pitágoras sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:projecoes-hipotenusa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-040",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com projeções p=9 e q=16 na hipotenusa, qual é a altura à hipotenusa?",
+      "o": [
+        "10",
+        "13",
+        "15",
+        "12"
+      ],
+      "a": 3,
+      "sol": "h²=pq=144, logo h=12.",
+      "hyp": "Pode somar projeções em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa-teorema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-041",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O ortocentro é equidistante dos vértices?",
+      "o": [
+        "Não necessariamente.",
+        "Sim, por definição.",
+        "Sim, mas só em obtusângulos.",
+        "Sempre à distância zero."
+      ],
+      "a": 0,
+      "sol": "Equidistância aos vértices caracteriza o circuncentro, não o ortocentro.",
+      "hyp": "Pode misturar propriedades dos centros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-nao-equidistante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-042",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O ortocentro é equidistante dos lados?",
+      "o": [
+        "Sim, por definição.",
+        "Não necessariamente.",
+        "Sim, sempre que o triângulo é retângulo.",
+        "Só em escalenos."
+      ],
+      "a": 1,
+      "sol": "Equidistância aos lados caracteriza o incentro.",
+      "hyp": "Pode trocar ortocentro por incentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-nao-equidistante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-043",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo equilátero de altura 9, a distância do vértice ao ortocentro é...",
+      "o": [
+        "3",
+        "4,5",
+        "6",
+        "9"
+      ],
+      "a": 2,
+      "sol": "No equilátero, ortocentro=baricentro e o baricentro fica a 2/3 da mediana/altura: 6.",
+      "hyp": "Pode usar metade ou um terço.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:equilatero-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-044",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo equilátero, a distância do ortocentro à base é 4. Qual é a altura total?",
+      "o": [
+        "6",
+        "8",
+        "10",
+        "12"
+      ],
+      "a": 3,
+      "sol": "Ortocentro=baricentro e a distância à base ao longo da altura é 1/3 da altura; h=12.",
+      "hyp": "Pode usar 2/3 para a parte junto à base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:equilatero-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-045",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se num triângulo duas alturas são perpendiculares a dois lados que já se intersectam num vértice A, quando pode A ser o ortocentro?",
+      "o": [
+        "Quando o triângulo é retângulo em A.",
+        "Sempre.",
+        "Só se for obtusângulo.",
+        "Nunca."
+      ],
+      "a": 0,
+      "sol": "Se os lados por A são perpendiculares, eles próprios funcionam como alturas e intersectam-se em A.",
+      "hyp": "Pode não ligar perpendicularidade dos lados ao ângulo reto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-retangulo-caracterizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-046",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, o ortocentro exterior significa que...",
+      "o": [
+        "as alturas deixam de existir.",
+        "as retas das alturas concorrem fora, embora cada altura continue definida.",
+        "o triângulo não tem perpendicularidades.",
+        "o incentro também fica fora."
+      ],
+      "a": 1,
+      "sol": "As alturas são retas/segmentos perpendiculares bem definidos mesmo quando a interseção exterior exige prolongamentos.",
+      "hyp": "Pode pensar que 'exterior' invalida o centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:ortocentro-exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-047",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Quer-se encontrar o ponto comum às três perpendiculares traçadas dos vértices aos lados opostos de uma região triangular. Que ponto é esse?",
+      "o": [
+        "Baricentro.",
+        "Incentro.",
+        "Ortocentro.",
+        "Circuncentro."
+      ],
+      "a": 2,
+      "sol": "Essas perpendiculares são as alturas.",
+      "hyp": "Pode confundir famílias de retas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:modelacao-ortocentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-048",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com catetos 8 e 15 e hipotenusa 17, qual é a altura à hipotenusa?",
+      "o": [
+        "8",
+        "15",
+        "17/2",
+        "120/17"
+      ],
+      "a": 3,
+      "sol": "h=ab/c=120/17.",
+      "hyp": "Pode usar um cateto ou metade da hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-hipotenusa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-049",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com área 30 e hipotenusa 13, qual é a altura à hipotenusa?",
+      "o": [
+        "60/13",
+        "30/13",
+        "13/2",
+        "5"
+      ],
+      "a": 0,
+      "sol": "30=1/2×13×h => h=60/13.",
+      "hyp": "Pode esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:altura-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-ORT-050",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-ortocentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma estrutura triangular tem base horizontal e pretende-se medir a distância perpendicular do vértice oposto à base. Geometricamente, essa distância é...",
+      "o": [
+        "a mediana relativa à base sempre.",
+        "a altura relativa à base.",
+        "a bissetriz sempre.",
+        "o raio circunscrito."
+      ],
+      "a": 1,
+      "sol": "A altura é precisamente a distância perpendicular do vértice à reta da base.",
+      "hyp": "Pode confundir segmentos notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-ortocentro:modelacao-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

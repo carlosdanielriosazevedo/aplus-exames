@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-trig",
+  "subtopicId": "11-trig-angulos-radianos",
+  "subtopic": "Ângulos orientados, arcos e radianos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha graus/radianos, coterminalidade, orientação, comprimento de arco, área de setor e modelação angular. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11TRIG-AR-001",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma volta completa mede...",
+      "o": [
+        "360°",
+        "180°",
+        "90°",
+        "720°"
+      ],
+      "a": 0,
+      "sol": "Uma rotação completa corresponde a 360°.",
+      "hyp": "Pode confundir meia-volta com volta completa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-002",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma meia-volta mede...",
+      "o": [
+        "90°",
+        "180°",
+        "360°",
+        "45°"
+      ],
+      "a": 1,
+      "sol": "Metade de 360° é 180°.",
+      "hyp": "Pode confundir meia-volta com quarto de volta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-meia-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-003",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um quarto de volta mede...",
+      "o": [
+        "45°",
+        "180°",
+        "90°",
+        "270°"
+      ],
+      "a": 2,
+      "sol": "360°/4=90°.",
+      "hyp": "Pode dividir por 2 em vez de 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-quarto-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-004",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em radianos, uma volta completa mede...",
+      "o": [
+        "π",
+        "π/2",
+        "4π",
+        "2π"
+      ],
+      "a": 3,
+      "sol": "360° correspondem a 2π rad.",
+      "hyp": "Pode esquecer o fator 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:radianos-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-005",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Em radianos, uma meia-volta mede...",
+      "o": [
+        "π",
+        "2π",
+        "π/2",
+        "π/4"
+      ],
+      "a": 0,
+      "sol": "180° correspondem a π rad.",
+      "hyp": "Pode confundir com volta completa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:radianos-meia-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-006",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A conversão de graus para radianos faz-se multiplicando por...",
+      "o": [
+        "180/π",
+        "π/180",
+        "2π",
+        "360"
+      ],
+      "a": 1,
+      "sol": "θ(rad)=θ(°)×π/180.",
+      "hyp": "Pode usar a fórmula inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:converter-graus-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-007",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A conversão de radianos para graus faz-se multiplicando por...",
+      "o": [
+        "π/180",
+        "360/π",
+        "180/π",
+        "π/360"
+      ],
+      "a": 2,
+      "sol": "θ(°)=θ(rad)×180/π.",
+      "hyp": "Pode usar o fator inverso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:converter-rad-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-008",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "60° correspondem a...",
+      "o": [
+        "π/6",
+        "2π/3",
+        "3π",
+        "π/3"
+      ],
+      "a": 3,
+      "sol": "60×π/180=π/3.",
+      "hyp": "Pode simplificar a fração incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-009",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "45° correspondem a...",
+      "o": [
+        "π/4",
+        "π/2",
+        "π/3",
+        "3π/4"
+      ],
+      "a": 0,
+      "sol": "45×π/180=π/4.",
+      "hyp": "Pode confundir com 90°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-010",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "30° correspondem a...",
+      "o": [
+        "π/3",
+        "π/6",
+        "π/4",
+        "π/12"
+      ],
+      "a": 1,
+      "sol": "30×π/180=π/6.",
+      "hyp": "Pode confundir denominadores notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-011",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "120° correspondem a...",
+      "o": [
+        "π/3",
+        "3π/2",
+        "2π/3",
+        "5π/6"
+      ],
+      "a": 2,
+      "sol": "120×π/180=2π/3.",
+      "hyp": "Pode não simplificar 120/180.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-012",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "225° correspondem a...",
+      "o": [
+        "3π/4",
+        "7π/6",
+        "9π/4",
+        "5π/4"
+      ],
+      "a": 3,
+      "sol": "225/180=5/4.",
+      "hyp": "Pode reduzir incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:graus-para-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-013",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "π/6 rad correspondem a...",
+      "o": [
+        "30°",
+        "45°",
+        "60°",
+        "90°"
+      ],
+      "a": 0,
+      "sol": "π/6×180/π=30°.",
+      "hyp": "Pode confundir ângulos notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:rad-para-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-014",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "2π/3 rad correspondem a...",
+      "o": [
+        "60°",
+        "120°",
+        "135°",
+        "150°"
+      ],
+      "a": 1,
+      "sol": "2π/3×180/π=120°.",
+      "hyp": "Pode multiplicar apenas por 90.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:rad-para-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-015",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "5π/4 rad correspondem a...",
+      "o": [
+        "200°",
+        "240°",
+        "225°",
+        "315°"
+      ],
+      "a": 2,
+      "sol": "5π/4×180/π=225°.",
+      "hyp": "Pode usar 45° como valor total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:rad-para-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-016",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um ângulo orientado positivo mede-se, por convenção, no sentido...",
+      "o": [
+        "horário.",
+        "vertical.",
+        "indiferente.",
+        "anti-horário."
+      ],
+      "a": 3,
+      "sol": "A convenção usual toma o sentido anti-horário como positivo.",
+      "hyp": "Pode inverter a convenção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:angulo-orientado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-017",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um ângulo orientado negativo mede-se, por convenção, no sentido...",
+      "o": [
+        "horário.",
+        "anti-horário.",
+        "apenas no 3.º quadrante.",
+        "sem orientação."
+      ],
+      "a": 0,
+      "sol": "O sentido horário é tomado como negativo.",
+      "hyp": "Pode achar que sinal depende do quadrante final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:angulo-orientado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-018",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Os ângulos 30° e 390° são...",
+      "o": [
+        "suplementares.",
+        "coterminais.",
+        "complementares.",
+        "opostos."
+      ],
+      "a": 1,
+      "sol": "390°=30°+360°, logo têm o mesmo lado terminal.",
+      "hyp": "Pode confundir diferença de 360° com suplementaridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:coterminais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-019",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Os ângulos π/3 e 7π/3 são...",
+      "o": [
+        "complementares.",
+        "suplementares.",
+        "coterminais.",
+        "iguais como números reais."
+      ],
+      "a": 2,
+      "sol": "7π/3=π/3+2π.",
+      "hyp": "Pode esquecer a periodicidade angular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:coterminais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-020",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um ângulo coterminal positivo com −30° é...",
+      "o": [
+        "30°",
+        "150°",
+        "390°",
+        "330°"
+      ],
+      "a": 3,
+      "sol": "−30°+360°=330°.",
+      "hyp": "Pode trocar apenas o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:coterminal-positivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-021",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um ângulo coterminal em [0,360[ com 765° é...",
+      "o": [
+        "45°",
+        "135°",
+        "225°",
+        "315°"
+      ],
+      "a": 0,
+      "sol": "765−720=45°.",
+      "hyp": "Pode retirar apenas uma volta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:reduzir-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-022",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um ângulo coterminal em [0,2π[ com 17π/6 é...",
+      "o": [
+        "11π/6",
+        "5π/6",
+        "π/6",
+        "7π/6"
+      ],
+      "a": 1,
+      "sol": "17π/6−12π/6=5π/6.",
+      "hyp": "Pode subtrair π em vez de 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:reduzir-rad",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-023",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um ângulo coterminal em [0,2π[ com −π/4 é...",
+      "o": [
+        "π/4",
+        "3π/4",
+        "7π/4",
+        "5π/4"
+      ],
+      "a": 2,
+      "sol": "−π/4+2π=7π/4.",
+      "hyp": "Pode apenas trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:reduzir-rad-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-024",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas voltas completas contém 13π/2 rad?",
+      "o": [
+        "6 voltas completas e mais π/2.",
+        "2 voltas completas e mais 5π/2.",
+        "3,5 voltas completas exatas.",
+        "3 voltas completas e mais π/2."
+      ],
+      "a": 3,
+      "sol": "13π/2=6π+π/2=3×2π+π/2.",
+      "hyp": "Pode dividir por π em vez de 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:decompor-voltas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-025",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O comprimento de um arco de raio r e amplitude θ em radianos é...",
+      "o": [
+        "s=rθ.",
+        "s=2πrθ.",
+        "s=r/θ.",
+        "s=θ/r."
+      ],
+      "a": 0,
+      "sol": "A definição de radiano conduz diretamente a s=rθ.",
+      "hyp": "Pode usar a fórmula apenas válida para graus sem conversão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:comprimento-arco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-026",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num círculo de raio 5, um arco correspondente a θ=π/3 mede...",
+      "o": [
+        "π/15",
+        "5π/3",
+        "10π/3",
+        "5π"
+      ],
+      "a": 1,
+      "sol": "s=rθ=5π/3.",
+      "hyp": "Pode multiplicar por 2π desnecessariamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:comprimento-arco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-027",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num círculo de raio 8, um arco de 90° mede...",
+      "o": [
+        "2π",
+        "8π",
+        "4π",
+        "16π"
+      ],
+      "a": 2,
+      "sol": "90°=π/2; s=8×π/2=4π.",
+      "hyp": "Pode usar 90 diretamente na fórmula s=rθ.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:comprimento-arco-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-028",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um arco mede 6 cm num círculo de raio 4 cm. Qual é a amplitude em radianos?",
+      "o": [
+        "2/3",
+        "24",
+        "π/6",
+        "3/2"
+      ],
+      "a": 3,
+      "sol": "θ=s/r=6/4=3/2 rad.",
+      "hyp": "Pode usar graus sem conversão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:angulo-por-arco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-029",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A área de um setor circular de raio r e ângulo θ em radianos é...",
+      "o": [
+        "A=r²θ/2.",
+        "A=πr²θ.",
+        "A=rθ/2.",
+        "A=2r²θ."
+      ],
+      "a": 0,
+      "sol": "A proporção angular leva a A=(1/2)r²θ.",
+      "hyp": "Pode confundir área do setor com comprimento do arco.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:area-setor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-030",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um setor de raio 6 e ângulo π/3 tem área...",
+      "o": [
+        "12π",
+        "6π",
+        "18π",
+        "36π"
+      ],
+      "a": 1,
+      "sol": "A=1/2×36×π/3=6π.",
+      "hyp": "Pode esquecer dividir por 2 ou 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:area-setor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-031",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um setor de raio 4 e ângulo π/2 tem área...",
+      "o": [
+        "8π",
+        "16π",
+        "4π",
+        "2π"
+      ],
+      "a": 2,
+      "sol": "A=1/2×16×π/2=4π.",
+      "hyp": "Pode usar área do círculo inteiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:area-setor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-032",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um setor de raio 3 tem área 9π/4. Qual é o ângulo em radianos?",
+      "o": [
+        "π/4",
+        "π",
+        "2π",
+        "π/2"
+      ],
+      "a": 3,
+      "sol": "9π/4=(1/2)×9×θ => θ=π/2.",
+      "hyp": "Pode esquecer o fator 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:angulo-por-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-033",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um radiano é o ângulo ao centro que subtende um arco de comprimento...",
+      "o": [
+        "igual ao raio.",
+        "igual ao diâmetro.",
+        "igual à circunferência inteira.",
+        "metade do raio."
+      ],
+      "a": 0,
+      "sol": "Esta é a definição geométrica de radiano.",
+      "hyp": "Pode confundir com diâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:definicao-radiano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-034",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Aproximadamente, 1 rad corresponde a...",
+      "o": [
+        "90°",
+        "57,3°",
+        "45°",
+        "180°"
+      ],
+      "a": 1,
+      "sol": "180/π≈57,3.",
+      "hyp": "Pode assumir que 1 rad é um ângulo notável em graus.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:rad-aproximacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-035",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O uso de radianos é especialmente conveniente em fórmulas como s=rθ porque...",
+      "o": [
+        "torna π igual a 180.",
+        "impede ângulos negativos.",
+        "elimina fatores adicionais de conversão.",
+        "só funciona em círculos unitários."
+      ],
+      "a": 2,
+      "sol": "As fórmulas naturais de arco usam diretamente θ em radianos.",
+      "hyp": "Pode pensar que radianos só servem no círculo trigonométrico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:vantagem-radianos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-036",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a menor amplitude positiva coterminal com −17π/6?",
+      "o": [
+        "5π/6",
+        "π/6",
+        "11π/6",
+        "7π/6"
+      ],
+      "a": 3,
+      "sol": "−17π/6+24π/6=7π/6.",
+      "hyp": "Pode somar apenas 2π uma vez e continuar negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:reduzir-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-037",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto percorre 5 voltas completas e mais 60° no sentido anti-horário. Qual é o ângulo orientado total?",
+      "o": [
+        "1860°",
+        "1500°",
+        "1800°",
+        "186°"
+      ],
+      "a": 0,
+      "sol": "5×360+60=1860°.",
+      "hyp": "Pode contar apenas as voltas ou o ângulo residual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:voltas-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-038",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto percorre 3 voltas no sentido horário e depois mais π/4 no mesmo sentido. Qual é a amplitude orientada?",
+      "o": [
+        "−13π/4",
+        "−25π/4",
+        "25π/4",
+        "−7π/4"
+      ],
+      "a": 1,
+      "sol": "−3×2π−π/4=−6π−π/4=−25π/4.",
+      "hyp": "Pode perder o sinal ou contar 3π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:voltas-orientadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-039",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num círculo de raio 10, um arco mede 15π. Quantas voltas corresponde esse percurso angular?",
+      "o": [
+        "1,5 voltas.",
+        "3 voltas.",
+        "3/4 de volta.",
+        "15 voltas."
+      ],
+      "a": 2,
+      "sol": "θ=s/r=15π/10=3π/2, que é 3/4 de 2π.",
+      "hyp": "Pode dividir por π em vez de 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:arco-para-voltas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-040",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um setor de raio 5 ocupa 20% da área do círculo. Qual é o seu ângulo ao centro?",
+      "o": [
+        "π/5",
+        "4π/5",
+        "π/2",
+        "2π/5"
+      ],
+      "a": 3,
+      "sol": "20% de uma volta corresponde a 0,2×2π=2π/5.",
+      "hyp": "Pode usar 20% de π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:setor-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-041",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um arco corresponde a 35% de uma circunferência. Qual é a sua amplitude em radianos?",
+      "o": [
+        "7π/10",
+        "7π/20",
+        "14π/5",
+        "3π/5"
+      ],
+      "a": 0,
+      "sol": "0,35×2π=0,7π=7π/10.",
+      "hyp": "Pode usar 35% de π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:percentagem-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-042",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num círculo de raio r, um arco de comprimento πr/2 corresponde a...",
+      "o": [
+        "π rad.",
+        "π/2 rad.",
+        "1/2 rad.",
+        "2π rad."
+      ],
+      "a": 1,
+      "sol": "θ=s/r=(πr/2)/r=π/2.",
+      "hyp": "Pode não cancelar r.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:arco-simbolico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-043",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A área de um setor é 12 e o raio é 4. Qual é a amplitude em radianos?",
+      "o": [
+        "3",
+        "6",
+        "3/2",
+        "3π/2"
+      ],
+      "a": 2,
+      "sol": "12=(1/2)×16×θ=8θ => θ=3/2.",
+      "hyp": "Pode usar fórmula do arco.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:area-setor-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-044",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um setor de ângulo 2 rad e raio r tem área 25. Qual é r?",
+      "o": [
+        "√25/2",
+        "25",
+        "10",
+        "5"
+      ],
+      "a": 3,
+      "sol": "25=(1/2)r²×2=r² => r=5.",
+      "hyp": "Pode esquecer a raiz positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:raio-por-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-045",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Dois ângulos diferem de 6π rad. Eles são...",
+      "o": [
+        "coterminais.",
+        "suplementares.",
+        "complementares.",
+        "necessariamente opostos."
+      ],
+      "a": 0,
+      "sol": "6π=3×2π, isto é, três voltas completas.",
+      "hyp": "Pode achar que só diferenças de 2π exatas uma vez contam.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:coterminais-multiplas-voltas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-046",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ângulo em [0,2π[ coterminal com 53π/6?",
+      "o": [
+        "π/6",
+        "5π/6",
+        "11π/6",
+        "7π/6"
+      ],
+      "a": 1,
+      "sol": "53π/6−48π/6=5π/6.",
+      "hyp": "Pode subtrair 42π/6 e parar em valor >2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:reduzir-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-047",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o ângulo em ]−π,π] coterminal com 7π/4?",
+      "o": [
+        "π/4",
+        "3π/4",
+        "−π/4",
+        "−3π/4"
+      ],
+      "a": 2,
+      "sol": "7π/4−2π=−π/4.",
+      "hyp": "Pode manter o representante em [0,2π[.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:reduzir-intervalo-simetrico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-048",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma roda de raio 0,4 m gira 5 rad sem escorregar. Que distância linear percorre o bordo em contacto?",
+      "o": [
+        "0,8 m",
+        "5,4 m",
+        "12,5 m",
+        "2 m"
+      ],
+      "a": 3,
+      "sol": "s=rθ=0,4×5=2 m.",
+      "hyp": "Pode multiplicar por 2π desnecessariamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:modelacao-roda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-049",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma polia de raio 0,25 m roda 8π rad. Qual é o comprimento de correia deslocado?",
+      "o": [
+        "2π m",
+        "4π m",
+        "8π m",
+        "π/2 m"
+      ],
+      "a": 0,
+      "sol": "s=rθ=0,25×8π=2π.",
+      "hyp": "Pode usar o diâmetro ou esquecer o fator 0,25.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:modelacao-polia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-AR-050",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-angulos-radianos",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um ponteiro de 12 cm descreve um arco de 6π cm. Qual foi a amplitude da rotação?",
+      "o": [
+        "2π rad.",
+        "π/2 rad.",
+        "π/4 rad.",
+        "6π rad."
+      ],
+      "a": 1,
+      "sol": "θ=s/r=6π/12=π/2.",
+      "hyp": "Pode dividir pelo diâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-angulos-radianos:modelacao-ponteiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

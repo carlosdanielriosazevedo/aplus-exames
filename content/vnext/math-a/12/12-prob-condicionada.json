@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-condicionada",
+  "subtopic": "Probabilidade condicionada",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição de probabilidade condicionada, interpretação, cálculo, reconstrução de interseções e leitura de contextos condicionais. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-PC-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A probabilidade condicionada P(A|B) significa...",
+      "o": [
+        "a probabilidade de A sabendo que B ocorreu.",
+        "a probabilidade de B sabendo que A ocorreu.",
+        "a probabilidade de A∪B.",
+        "a probabilidade de A^c."
+      ],
+      "a": 0,
+      "sol": "A barra vertical lê-se 'dado que' ou 'sabendo que'.",
+      "hyp": "Pode inverter a ordem A e B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:def-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se P(B)>0, então P(A|B)=...",
+      "o": [
+        "P(A)/P(B).",
+        "P(A∩B)/P(B).",
+        "P(A∪B)/P(B).",
+        "P(B)/P(A)."
+      ],
+      "a": 1,
+      "sol": "A definição restringe o espaço ao acontecimento B.",
+      "hyp": "Pode usar P(A) no numerador sem exigir A∩B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:formula-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se P(A∩B)=0,2 e P(B)=0,5, então P(A|B)=...",
+      "o": [
+        "0,2.",
+        "0,5.",
+        "0,4.",
+        "0,7."
+      ],
+      "a": 2,
+      "sol": "0,2/0,5=0,4.",
+      "hyp": "Pode somar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:calc-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se P(A∩B)=0,15 e P(B)=0,3, então P(A|B)=...",
+      "o": [
+        "0,15.",
+        "0,3.",
+        "0,45.",
+        "0,5."
+      ],
+      "a": 3,
+      "sol": "0,15/0,3=0,5.",
+      "hyp": "Pode usar a interseção como resposta direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:calc-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para P(A|B) estar definida pela fórmula usual é necessário...",
+      "o": [
+        "P(B)>0.",
+        "P(A)>0.",
+        "P(A∩B)=1.",
+        "A e B serem independentes."
+      ],
+      "a": 0,
+      "sol": "P(B) aparece no denominador.",
+      "hyp": "Pode exigir positividade do acontecimento errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:denominador-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Ao saber que B ocorreu, o novo universo de referência passa a ser...",
+      "o": [
+        "A.",
+        "B.",
+        "A∪B.",
+        "Ω^c."
+      ],
+      "a": 1,
+      "sol": "Condicionar em B restringe a atenção aos resultados em B.",
+      "hyp": "Pode tomar A como novo espaço por ser o primeiro símbolo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:novo-universo-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A⊂B e P(B)>0, então P(A|B)=...",
+      "o": [
+        "P(B)/P(A).",
+        "P(A).",
+        "P(A)/P(B).",
+        "1."
+      ],
+      "a": 2,
+      "sol": "A∩B=A, logo P(A|B)=P(A)/P(B).",
+      "hyp": "Pode concluir 1 só por haver inclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:inclusao-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se B⊂A e P(B)>0, então P(A|B)=...",
+      "o": [
+        "P(A).",
+        "P(B).",
+        "P(A)/P(B).",
+        "1."
+      ],
+      "a": 3,
+      "sol": "Se B ocorreu e B está contido em A, então A ocorreu certamente.",
+      "hyp": "Pode inverter a inclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:inclusao-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são incompatíveis e P(B)>0, então P(A|B)=...",
+      "o": [
+        "0.",
+        "1.",
+        "P(A).",
+        "P(B)."
+      ],
+      "a": 0,
+      "sol": "A∩B=∅, logo o numerador é 0.",
+      "hyp": "Pode confundir incompatibilidade com independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:incomp-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "P(A∩B)=0,18 e P(A)=0,6. Então P(B|A)=...",
+      "o": [
+        "0,18.",
+        "0,3.",
+        "0,78.",
+        "0,6."
+      ],
+      "a": 1,
+      "sol": "0,18/0,6=0,3.",
+      "hyp": "Pode dividir pelo acontecimento condicionado errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:invertida-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,4 e P(B)=0,5, então P(A∩B)=...",
+      "o": [
+        "0,9.",
+        "0,4.",
+        "0,2.",
+        "0,1."
+      ],
+      "a": 2,
+      "sol": "P(A∩B)=P(A|B)P(B)=0,2.",
+      "hyp": "Pode somar os valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:reconstruir-inter-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)=0,25 e P(A)=0,8, então P(A∩B)=...",
+      "o": [
+        "1,05.",
+        "0,55.",
+        "0,25.",
+        "0,2."
+      ],
+      "a": 3,
+      "sol": "0,25×0,8=0,2.",
+      "hyp": "Pode usar P(B) em vez de P(A).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:reconstruir-inter-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa turma, 12 de 30 alunos praticam natação. Entre os 18 alunos do sexo feminino, 9 praticam natação. P(natação | feminino)=...",
+      "o": [
+        "1/2.",
+        "3/5.",
+        "3/10.",
+        "2/3."
+      ],
+      "a": 0,
+      "sol": "Dentro do grupo feminino há 9 casos favoráveis em 18:9/18=1/2.",
+      "hyp": "Pode usar o total da turma como denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:turma-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa urna há 4 bolas vermelhas e 6 azuis. Sabendo que a bola escolhida não é azul, a probabilidade de ser vermelha é...",
+      "o": [
+        "0,4.",
+        "1.",
+        "0,6.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "'Não azul' coincide com 'vermelha' neste modelo.",
+      "hyp": "Pode manter a probabilidade não condicionada 0,4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:urna-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado equilibrado, sabendo que saiu número par, P(sair 6)=...",
+      "o": [
+        "1/6.",
+        "1/2.",
+        "1/3.",
+        "2/3."
+      ],
+      "a": 2,
+      "sol": "Entre {2,4,6}, apenas um resultado é 6.",
+      "hyp": "Pode usar a probabilidade original 1/6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:dado-par-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado equilibrado, sabendo que saiu número maior que 3, P(sair par)=...",
+      "o": [
+        "1/2.",
+        "1/3.",
+        "1/6.",
+        "2/3."
+      ],
+      "a": 3,
+      "sol": "O novo espaço é {4,5,6}; pares:4 e6, logo2/3.",
+      "hyp": "Pode usar 3 pares em 6 resultados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:dado-maior3-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num baralho de 52 cartas, sabendo que saiu uma figura (valete,dama,rei), P(sair rei)=...",
+      "o": [
+        "1/3.",
+        "1/13.",
+        "1/4.",
+        "4/52."
+      ],
+      "a": 0,
+      "sol": "Há 12 figuras, das quais 4 reis:4/12=1/3.",
+      "hyp": "Pode usar a probabilidade não condicionada do rei.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:baralho-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num baralho, sabendo que a carta é de copas, P(ser ás)=...",
+      "o": [
+        "1/52.",
+        "1/13.",
+        "1/4.",
+        "4/13."
+      ],
+      "a": 1,
+      "sol": "Entre as 13 cartas de copas há um ás.",
+      "hyp": "Pode usar 4 ases no conjunto total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:copas-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "P(A|B) e P(B|A)...",
+      "o": [
+        "são sempre iguais.",
+        "somam sempre 1.",
+        "podem ser diferentes.",
+        "são sempre complementares."
+      ],
+      "a": 2,
+      "sol": "Os denominadores são diferentes: P(B) num caso e P(A) no outro.",
+      "hyp": "Pode assumir simetria da interseção implica simetria da condicionada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:nao-simetria-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∩B)=0,12, P(A)=0,3 e P(B)=0,4, então P(A|B)=...",
+      "o": [
+        "0,4.",
+        "0,12.",
+        "0,7.",
+        "0,3."
+      ],
+      "a": 3,
+      "sol": "0,12/0,4=0,3.",
+      "hyp": "Pode dividir por P(A).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:dois-cond-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∩B)=0,12, P(A)=0,3 e P(B)=0,4, então P(B|A)=...",
+      "o": [
+        "0,4.",
+        "0,3.",
+        "0,12.",
+        "0,7."
+      ],
+      "a": 0,
+      "sol": "0,12/0,3=0,4.",
+      "hyp": "Pode repetir P(A|B).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:dois-cond-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=1, com P(B)>0, então...",
+      "o": [
+        "A e B são incompatíveis.",
+        "P(B\\A)=0.",
+        "P(A)=1 necessariamente.",
+        "P(B|A)=1 necessariamente."
+      ],
+      "a": 1,
+      "sol": "Dentro de B, A ocorre com probabilidade 1; a parte de B fora de A tem probabilidade zero.",
+      "hyp": "Pode concluir que A tem probabilidade global 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:cond1-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0, com P(B)>0, então...",
+      "o": [
+        "P(A)=0 sempre.",
+        "P(B)=0.",
+        "P(A∩B)=0.",
+        "A=B."
+      ],
+      "a": 2,
+      "sol": "A probabilidade da interseção é P(A|B)P(B)=0.",
+      "hyp": "Pode concluir que A é globalmente impossível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:cond0-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,6 e P(B)=0,25, então P(A∩B)=...",
+      "o": [
+        "0,85.",
+        "0,35.",
+        "0,6.",
+        "0,15."
+      ],
+      "a": 3,
+      "sol": "0,6×0,25=0,15.",
+      "hyp": "Pode somar ou subtrair os valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:inter-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)=0,2 e P(A)=0,7, então P(A∩B)=...",
+      "o": [
+        "0,14.",
+        "0,9.",
+        "0,5.",
+        "0,2."
+      ],
+      "a": 0,
+      "sol": "0,2×0,7=0,14.",
+      "hyp": "Pode usar o complementar de 0,2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:inter-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,75 e P(A∩B)=0,3, então P(B)=...",
+      "o": [
+        "0,225.",
+        "0,4.",
+        "0,45.",
+        "0,75."
+      ],
+      "a": 1,
+      "sol": "0,75=P(A∩B)/P(B), logo P(B)=0,3/0,75=0,4.",
+      "hyp": "Pode multiplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:resolver-base-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,5 e P(B|A)=0,6. Então P(A∩B)=...",
+      "o": [
+        "1,1.",
+        "0,1.",
+        "0,3.",
+        "0,6."
+      ],
+      "a": 2,
+      "sol": "0,5×0,6=0,3.",
+      "hyp": "Pode somar as probabilidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:produto-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(B)=0,8 e P(A|B)=0,25. Então P(A∩B)=...",
+      "o": [
+        "0,55.",
+        "1,05.",
+        "0,25.",
+        "0,2."
+      ],
+      "a": 3,
+      "sol": "0,8×0,25=0,2.",
+      "hyp": "Pode subtrair 0,25 de 0,8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:produto-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa empresa, 40% dos trabalhadores são do turno da noite e 10% são do turno da noite e têm função de chefia. P(chefia | noite)=...",
+      "o": [
+        "0,25.",
+        "0,1.",
+        "0,4.",
+        "0,5."
+      ],
+      "a": 0,
+      "sol": "0,10/0,40=0,25.",
+      "hyp": "Pode usar a percentagem conjunta como condicionada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:empresa-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num estudo, 30% têm condição A e 18% têm A e B. P(B|A)=...",
+      "o": [
+        "0,18.",
+        "0,6.",
+        "0,12.",
+        "0,3."
+      ],
+      "a": 1,
+      "sol": "0,18/0,30=0,6.",
+      "hyp": "Pode dividir pela probabilidade de B, que nem foi dada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:estudo-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se P(A|B)>P(A), saber que B ocorreu...",
+      "o": [
+        "torna A impossível.",
+        "não muda nada necessariamente.",
+        "aumenta a probabilidade atribuída a A.",
+        "prova que A e B são incompatíveis."
+      ],
+      "a": 2,
+      "sol": "A informação B torna A mais plausível no sentido probabilístico.",
+      "hyp": "Pode interpretar condicionamento como causalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:evidencia-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se P(A|B)<P(A), então a informação B...",
+      "o": [
+        "garante que A não ocorre.",
+        "faz P(A)=0.",
+        "torna A certo.",
+        "reduz a probabilidade atribuída a A."
+      ],
+      "a": 3,
+      "sol": "A ocorrência de B está associada a menor probabilidade condicional de A.",
+      "hyp": "Pode transformar redução em impossibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:evidencia-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=P(A), com P(B)>0, isso é uma condição equivalente a...",
+      "o": [
+        "independência de A e B.",
+        "incompatibilidade.",
+        "A⊂B.",
+        "B⊂A."
+      ],
+      "a": 0,
+      "sol": "A ocorrência de B não altera a probabilidade de A; esta é uma caracterização de independência.",
+      "hyp": "Pode confundir independência com acontecimentos disjuntos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:indep-cond-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes e P(B)>0, então P(A|B)=...",
+      "o": [
+        "P(B).",
+        "P(A).",
+        "P(A∩B).",
+        "1."
+      ],
+      "a": 1,
+      "sol": "Por independência, condicionar em B não altera P(A).",
+      "hyp": "Pode inverter A e B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:indep-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,4 e A,B independentes com P(B)=0,5. P(A|B)=...",
+      "o": [
+        "0,2.",
+        "0,5.",
+        "0,4.",
+        "0,9."
+      ],
+      "a": 2,
+      "sol": "A independência implica P(A|B)=P(A)=0,4.",
+      "hyp": "Pode multiplicar P(A)P(B).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:indep-num-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,7, P(B)=0,2 e A,B independentes. P(B|A)=...",
+      "o": [
+        "0,14.",
+        "0,7.",
+        "0,9.",
+        "0,2."
+      ],
+      "a": 3,
+      "sol": "P(B|A)=P(B)=0,2.",
+      "hyp": "Pode usar a interseção 0,14.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:indep-num-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A|B)=0,6, P(B)=0,5 e P(A)=0,3. A e B são...",
+      "o": [
+        "não independentes.",
+        "independentes.",
+        "incompatíveis.",
+        "complementares."
+      ],
+      "a": 0,
+      "sol": "Se fossem independentes, P(A|B)=P(A)=0,3; como 0,6≠0,3, não são independentes.",
+      "hyp": "Pode olhar apenas para P(A∩B)=0,3 e concluir independência sem testar corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:testar-indep-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P(A|B)=0,4 e P(A)=0,4, com P(B)>0. Então A e B...",
+      "o": [
+        "são incompatíveis.",
+        "satisfazem uma condição de independência.",
+        "são complementares.",
+        "têm necessariamente a mesma probabilidade."
+      ],
+      "a": 1,
+      "sol": "A probabilidade de A não muda após condicionar em B.",
+      "hyp": "Pode confundir igualdade de probabilidades condicionais com igualdade dos acontecimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:testar-indep-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,8 e P(B)=0,25, então a probabilidade conjunta A∩B é...",
+      "o": [
+        "0,8.",
+        "0,25.",
+        "0,2.",
+        "1,05."
+      ],
+      "a": 2,
+      "sol": "0,8×0,25=0,2.",
+      "hyp": "Pode confundir condicional e conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:conjunta-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∩B)=0,24 e P(A|B)=0,6, então P(B)=...",
+      "o": [
+        "0,144.",
+        "0,84.",
+        "0,24.",
+        "0,4."
+      ],
+      "a": 3,
+      "sol": "P(B)=0,24/0,6=0,4.",
+      "hyp": "Pode multiplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:base-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "De 100 clientes, 40 compraram A, 30 compraram B e 20 compraram ambos. Entre quem comprou B, a percentagem que também comprou A é...",
+      "o": [
+        "66,7% aproximadamente.",
+        "20%.",
+        "50%.",
+        "30%."
+      ],
+      "a": 0,
+      "sol": "P(A|B)=20/30=2/3≈66,7%.",
+      "hyp": "Pode dividir 20 pelo total 100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:clientes-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "De 100 clientes, 40 compraram A, 30 compraram B e 20 compraram ambos. Entre quem comprou A, a percentagem que também comprou B é...",
+      "o": [
+        "66,7%.",
+        "50%.",
+        "20%.",
+        "40%."
+      ],
+      "a": 1,
+      "sol": "P(B|A)=20/40=50%.",
+      "hyp": "Pode assumir simetria com P(A|B).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:clientes-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=3/4 e P(B)=2/5, então P(A∩B)=...",
+      "o": [
+        "3/4.",
+        "2/5.",
+        "3/10.",
+        "1/5."
+      ],
+      "a": 2,
+      "sol": "(3/4)(2/5)=6/20=3/10.",
+      "hyp": "Pode somar frações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:fracoes-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∩B)=1/6 e P(B)=1/2, então P(A|B)=...",
+      "o": [
+        "1/12.",
+        "2/3.",
+        "1/2.",
+        "1/3."
+      ],
+      "a": 3,
+      "sol": "(1/6)/(1/2)=1/3.",
+      "hyp": "Pode multiplicar por 1/2 em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:fracoes-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma probabilidade condicionada deve ser interpretada como causalidade?",
+      "o": [
+        "Não; condicionamento atualiza a probabilidade com informação, não prova causa.",
+        "Sim, sempre.",
+        "Sim, se for superior à probabilidade inicial.",
+        "Só quando é igual a 1."
+      ],
+      "a": 0,
+      "sol": "Associação probabilística e causalidade são conceitos distintos.",
+      "hyp": "Pode confundir informação estatística com mecanismo causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:causalidade-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um teste é positivo em 90% dos doentes. Se D='doente' e += 'teste positivo', essa informação é...",
+      "o": [
+        "P(D|+)=0,9.",
+        "P(+|D)=0,9.",
+        "P(D∩+)=0,9 necessariamente.",
+        "P(+)=0,9."
+      ],
+      "a": 1,
+      "sol": "A frase condiciona a positividade ao facto de a pessoa estar doente.",
+      "hyp": "Pode inverter condicionada, erro clássico de base-rate.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:teste-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "'Entre os alunos aprovados, 30% tiveram explicações' corresponde a...",
+      "o": [
+        "P(aprovado|explicações)=0,3.",
+        "P(aprovado∩explicações)=0,3.",
+        "P(explicações|aprovado)=0,3.",
+        "P(explicações)=0,3."
+      ],
+      "a": 2,
+      "sol": "O universo restringido é o grupo dos aprovados.",
+      "hyp": "Pode inverter a leitura linguística da condicionada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:linguagem-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "'Dos produtos premium, 8% são devolvidos' corresponde a...",
+      "o": [
+        "P(premium|devolvido)=0,08.",
+        "P(premium∩devolvido)=0,08.",
+        "P(devolvido)=0,08.",
+        "P(devolvido|premium)=0,08."
+      ],
+      "a": 3,
+      "sol": "A percentagem é calculada dentro do grupo premium.",
+      "hyp": "Pode tomar a frase como probabilidade marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:linguagem-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=P(A^c|B), com P(B)>0, então P(A|B)=...",
+      "o": [
+        "1/2.",
+        "0.",
+        "1.",
+        "P(A)."
+      ],
+      "a": 0,
+      "sol": "Dentro de B, A e A^c são complementares; probabilidades iguais somam 1, logo cada uma vale 1/2.",
+      "hyp": "Pode esquecer que os complementares continuam a somar 1 sob condicionamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:comp-cond-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PC-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-condicionada",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,7, então P(A^c|B)=...",
+      "o": [
+        "0,7.",
+        "0,3.",
+        "1,7.",
+        "não pode ser calculada."
+      ],
+      "a": 1,
+      "sol": "No espaço condicionado B, A e A^c continuam complementares:1−0,7=0,3.",
+      "hyp": "Pode pensar que é preciso conhecer P(B).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-condicionada:comp-cond-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

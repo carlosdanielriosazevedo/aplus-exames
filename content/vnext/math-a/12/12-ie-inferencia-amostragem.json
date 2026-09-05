@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-ie",
+  "subtopicId": "12-ie-inferencia-amostragem",
+  "subtopic": "Raciocínio inferencial e amostragem",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha população/amostra, parâmetros/estatísticas, desenhos amostrais, representatividade, viés, variabilidade, não resposta e qualidade inferencial. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12IE-IA-001",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A inferência estatística procura...",
+      "o": [
+        "tirar conclusões sobre uma população a partir de uma amostra.",
+        "descrever apenas a amostra sem generalizar.",
+        "eliminar toda a incerteza.",
+        "substituir a recolha de dados."
+      ],
+      "a": 0,
+      "sol": "A ideia central é usar informação amostral para aprender sobre parâmetros populacionais.",
+      "hyp": "Pode confundir estatística descritiva com inferencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:objetivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-002",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma população estatística é...",
+      "o": [
+        "apenas os indivíduos observados.",
+        "o conjunto total de unidades sobre as quais queremos concluir.",
+        "sempre um conjunto de pessoas.",
+        "o valor médio de uma variável."
+      ],
+      "a": 1,
+      "sol": "A população é o universo de interesse, podendo ser pessoas, objetos, transações, etc.",
+      "hyp": "Pode limitar 'população' a pessoas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:populacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-003",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma amostra é...",
+      "o": [
+        "a população inteira.",
+        "um parâmetro desconhecido.",
+        "um subconjunto observado da população.",
+        "uma distribuição teórica apenas."
+      ],
+      "a": 2,
+      "sol": "A amostra contém as unidades efetivamente estudadas.",
+      "hyp": "Pode confundir amostra com parâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:amostra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-004",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um parâmetro é...",
+      "o": [
+        "qualquer dado individual.",
+        "uma característica calculada apenas na amostra.",
+        "o tamanho da amostra sempre.",
+        "uma característica numérica da população."
+      ],
+      "a": 3,
+      "sol": "Exemplos: média populacional μ ou proporção populacional p.",
+      "hyp": "Pode confundir parâmetro e estatística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-005",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma estatística amostral é...",
+      "o": [
+        "uma quantidade calculada a partir dos dados da amostra.",
+        "um parâmetro populacional conhecido.",
+        "sempre uma probabilidade.",
+        "a população inteira."
+      ],
+      "a": 0,
+      "sol": "Exemplos: média amostral ou proporção amostral.",
+      "hyp": "Pode confundir com parâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:estatistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-006",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A média de 80 alunos selecionados de uma escola é...",
+      "o": [
+        "um parâmetro populacional necessariamente.",
+        "uma estatística amostral.",
+        "a população.",
+        "um viés."
+      ],
+      "a": 1,
+      "sol": "Foi calculada numa amostra.",
+      "hyp": "Pode chamar parâmetro a qualquer média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:media-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-007",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A média verdadeira de todos os alunos da escola é...",
+      "o": [
+        "uma estatística amostral.",
+        "uma amostra.",
+        "um parâmetro populacional.",
+        "um erro de medição."
+      ],
+      "a": 2,
+      "sol": "Refere-se a toda a população de interesse.",
+      "hyp": "Pode trocar parâmetro e estatística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:media-populacional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-008",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Amostragem aleatória simples procura dar...",
+      "o": [
+        "vantagem aos indivíduos mais acessíveis.",
+        "garantia de média exata.",
+        "mais peso aos extremos.",
+        "a cada amostra possível de mesmo tamanho uma chance apropriada de seleção."
+      ],
+      "a": 3,
+      "sol": "A seleção aleatória reduz mecanismos sistemáticos de preferência.",
+      "hyp": "Pode confundir aleatoriedade com precisão perfeita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:aleatoria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-009",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Selecionar apenas voluntários para um inquérito pode causar...",
+      "o": [
+        "viés de autoseleção.",
+        "amostragem perfeitamente representativa.",
+        "erro padrão zero.",
+        "censo."
+      ],
+      "a": 0,
+      "sol": "Quem decide responder pode diferir sistematicamente de quem não responde.",
+      "hyp": "Pode pensar que muitos voluntários eliminam viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:autoselecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-010",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Inquirir apenas clientes presentes numa loja às 10h para concluir sobre todos os clientes pode introduzir...",
+      "o": [
+        "maior aleatoriedade.",
+        "viés de cobertura/seleção.",
+        "ausência de incerteza.",
+        "censo."
+      ],
+      "a": 1,
+      "sol": "Certos perfis de clientes podem estar sub-representados nesse horário.",
+      "hyp": "Pode confundir conveniência com representatividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:conveniencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-011",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Aumentar o tamanho da amostra tende a reduzir...",
+      "o": [
+        "todo o viés de seleção automaticamente.",
+        "o tamanho da população.",
+        "a variabilidade amostral.",
+        "o parâmetro."
+      ],
+      "a": 2,
+      "sol": "Amostras maiores costumam produzir estimativas menos variáveis.",
+      "hyp": "Pode pensar que tamanho corrige qualquer desenho enviesado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:tamanho",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-012",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra enorme mas selecionada de forma enviesada...",
+      "o": [
+        "é necessariamente representativa.",
+        "elimina o viés.",
+        "equivale a um censo.",
+        "pode produzir uma estimativa muito precisa do valor errado."
+      ],
+      "a": 3,
+      "sol": "Baixa variabilidade não compensa viés sistemático.",
+      "hyp": "Pode confundir precisão com ausência de viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:viés-vs-precisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-013",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Erro amostral refere-se...",
+      "o": [
+        "à variação natural por observar apenas uma amostra.",
+        "a qualquer erro de digitação.",
+        "apenas a fraude.",
+        "sempre a viés."
+      ],
+      "a": 0,
+      "sol": "Mesmo com bom desenho, diferentes amostras dão resultados diferentes.",
+      "hyp": "Pode confundir erro amostral com erro humano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:erro-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-014",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Erro não amostral pode incluir...",
+      "o": [
+        "apenas variação aleatória entre amostras.",
+        "não resposta, medição incorreta e perguntas enviesadas.",
+        "só o tamanho da amostra.",
+        "somente o desvio padrão."
+      ],
+      "a": 1,
+      "sol": "São fontes de erro não explicadas pela simples seleção de uma amostra.",
+      "hyp": "Pode limitar erro a amostragem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:nao-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-015",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma pergunta formulada de modo tendencioso pode causar...",
+      "o": [
+        "redução automática da variância.",
+        "amostragem estratificada.",
+        "viés de resposta.",
+        "censo."
+      ],
+      "a": 2,
+      "sol": "A forma da pergunta pode empurrar respostas numa direção.",
+      "hyp": "Pode pensar que só a seleção da amostra gera viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:questionario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-016",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Amostragem estratificada divide a população em...",
+      "o": [
+        "um único grupo homogéneo apenas.",
+        "pares ordenados.",
+        "intervalos de confiança.",
+        "grupos relevantes e amostra dentro de cada grupo."
+      ],
+      "a": 3,
+      "sol": "Os estratos procuram assegurar representação de subgrupos importantes.",
+      "hyp": "Pode confundir com amostragem por conveniência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:estratificada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-017",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma escola tem 60% alunos do 10.º e 40% do 11.º, uma amostra estratificada proporcional de 100 teria...",
+      "o": [
+        "60 do 10.º e 40 do 11.º.",
+        "50 de cada ano.",
+        "100 do 10.º.",
+        "40 do 10.º e 60 do 11.º."
+      ],
+      "a": 0,
+      "sol": "Mantém-se a proporção populacional.",
+      "hyp": "Pode inverter as percentagens.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:estratificada-proporcional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-018",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Amostragem sistemática pode selecionar...",
+      "o": [
+        "apenas voluntários.",
+        "cada k-ésima unidade após um início aleatório.",
+        "todos os indivíduos.",
+        "somente unidades extremas."
+      ],
+      "a": 1,
+      "sol": "É uma regra regular de seleção com arranque aleatório.",
+      "hyp": "Pode confundir sistemática com não aleatória.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:sistematica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-019",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A amostragem sistemática pode ser problemática se a lista tiver...",
+      "o": [
+        "ordem aleatória.",
+        "muitos elementos.",
+        "periodicidade alinhada com o passo k.",
+        "identificadores únicos."
+      ],
+      "a": 2,
+      "sol": "Uma periodicidade pode sobre- ou sub-representar certos padrões.",
+      "hyp": "Pode achar que qualquer sistemática é sempre segura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:periodicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-020",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Amostragem por conglomerados seleciona...",
+      "o": [
+        "um indivíduo de cada grupo obrigatoriamente.",
+        "apenas extremos.",
+        "sempre a população toda.",
+        "grupos naturais inteiros ou subconjuntos deles."
+      ],
+      "a": 3,
+      "sol": "Conglomerados são grupos como turmas, escolas ou bairros.",
+      "hyp": "Pode confundir conglomerados e estratos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:conglomerados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-021",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Estratos devem idealmente ser...",
+      "o": [
+        "internamente relativamente homogéneos quanto à característica relevante e cobrir subgrupos importantes.",
+        "sempre do mesmo tamanho.",
+        "escolhidos ao acaso sem critério.",
+        "idênticos à amostra final."
+      ],
+      "a": 0,
+      "sol": "A estratificação usa informação auxiliar para melhorar representação/precisão.",
+      "hyp": "Pode focar apenas tamanho igual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:estratos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-022",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Conglomerados, ao contrário de estratos, são frequentemente escolhidos por...",
+      "o": [
+        "garantir cada subgrupo na proporção exata.",
+        "conveniência logística e agrupamento natural.",
+        "eliminar toda a correlação interna.",
+        "tornar a amostra um censo."
+      ],
+      "a": 1,
+      "sol": "Pode ser mais barato observar grupos inteiros geograficamente ou administrativamente próximos.",
+      "hyp": "Pode confundir os objetivos de estratificação e conglomerados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:conglomerados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-023",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma empresa quer estimar satisfação e tem 70% clientes particulares e30% empresariais. Numa amostra proporcional de200, quantos empresariais?",
+      "o": [
+        "140.",
+        "30.",
+        "60.",
+        "70."
+      ],
+      "a": 2,
+      "sol": "0,30×200=60.",
+      "hyp": "Pode usar a percentagem como contagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:estratificada-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-024",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa população de 5000, uma amostra aleatória simples de 250 corresponde a...",
+      "o": [
+        "20%.",
+        "0,5%.",
+        "50%.",
+        "5% da população."
+      ],
+      "a": 3,
+      "sol": "250/5000=0,05.",
+      "hyp": "Pode inverter o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:fracao-amostral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-025",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma fração amostral pequena não significa necessariamente amostra inadequada porque...",
+      "o": [
+        "a precisão depende fortemente do tamanho absoluto e do desenho, não só da percentagem da população.",
+        "é sempre melhor ter menos dados.",
+        "o tamanho da população nunca importa.",
+        "qualquer amostra serve."
+      ],
+      "a": 0,
+      "sol": "Em populações grandes, amostras moderadas podem estimar bem certas quantidades.",
+      "hyp": "Pode exigir uma grande percentagem da população.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:fracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-026",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra representativa é aquela que...",
+      "o": [
+        "tem necessariamente mais de1000 unidades.",
+        "reflete adequadamente características relevantes da população para o objetivo do estudo.",
+        "tem média igual à população por definição.",
+        "é escolhida por voluntariado."
+      ],
+      "a": 1,
+      "sol": "Representatividade é sobre desenho e cobertura, não um número mágico de observações.",
+      "hyp": "Pode associar representatividade apenas a tamanho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:representatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-027",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Não resposta é preocupante sobretudo quando...",
+      "o": [
+        "a taxa de resposta é100%.",
+        "as respostas são numéricas.",
+        "quem não responde difere sistematicamente de quem responde.",
+        "a amostra é aleatória."
+      ],
+      "a": 2,
+      "sol": "Diferenças sistemáticas podem enviesar a estimativa.",
+      "hyp": "Pode olhar apenas para o número absoluto de respostas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:nao-resposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-028",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 1000 pessoas são contactadas mas só200 respondem, a taxa de resposta é...",
+      "o": [
+        "80%.",
+        "5%.",
+        "200%.",
+        "20%."
+      ],
+      "a": 3,
+      "sol": "200/1000=0,20.",
+      "hyp": "Pode calcular a taxa de não resposta em vez da resposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:taxa-resposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-029",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma taxa de resposta de20% é, por si só, prova de viés?",
+      "o": [
+        "Não; aumenta a preocupação, mas o viés depende de como respondentes e não respondentes diferem.",
+        "Sim, prova viés exato de80%.",
+        "Sim, invalida qualquer estudo.",
+        "Não, nunca importa."
+      ],
+      "a": 0,
+      "sol": "Baixa resposta é um risco, não uma quantificação automática do viés.",
+      "hyp": "Pode converter taxa de não resposta em viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:nao-resposta-interpretacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-030",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Um censo observa...",
+      "o": [
+        "uma amostra aleatória.",
+        "todas as unidades da população alvo, idealmente.",
+        "apenas metade da população.",
+        "sempre menos unidades que uma amostra."
+      ],
+      "a": 1,
+      "sol": "Censo tenta recolher informação de toda a população.",
+      "hyp": "Pode confundir censo com amostra grande.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:censo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-031",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Mesmo um censo pode ter erro porque...",
+      "o": [
+        "não tem dados suficientes por definição.",
+        "usa sempre amostragem.",
+        "pode haver não resposta, medição incorreta ou cobertura incompleta.",
+        "a média deixa de existir."
+      ],
+      "a": 2,
+      "sol": "Erros não amostrais continuam possíveis.",
+      "hyp": "Pode achar que censo é automaticamente perfeito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:censo-erros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-032",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Aleatorização na seleção ajuda principalmente a...",
+      "o": [
+        "garantir resultados exatos.",
+        "eliminar todos os erros de medição.",
+        "tornar a amostra maior.",
+        "reduzir seleção sistemática e permitir modelar a variabilidade amostral."
+      ],
+      "a": 3,
+      "sol": "O acaso controlado dá base probabilística à inferência.",
+      "hyp": "Pode confundir aleatorização com perfeição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:aleatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-033",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma amostra de conveniência é...",
+      "o": [
+        "formada por unidades facilmente acessíveis.",
+        "necessariamente aleatória.",
+        "sempre estratificada.",
+        "um censo."
+      ],
+      "a": 0,
+      "sol": "A facilidade de acesso decide a seleção.",
+      "hyp": "Pode pensar que conveniência é um subtipo de aleatória simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:conveniencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-034",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Porque uma amostra de conveniência é frágil para inferência?",
+      "o": [
+        "é sempre demasiado pequena.",
+        "o mecanismo de seleção pode estar relacionado com a variável estudada.",
+        "não permite calcular média.",
+        "não contém valores numéricos."
+      ],
+      "a": 1,
+      "sol": "A falta de aleatoriedade pode criar diferenças sistemáticas.",
+      "hyp": "Pode atribuir o problema apenas ao tamanho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:conveniencia-viés",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-035",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Para estimar hábitos de transporte de todos os trabalhadores de uma cidade, inquirir apenas utilizadores de metro tende a...",
+      "o": [
+        "ser perfeitamente representativo.",
+        "eliminar viés.",
+        "sobre-representar utilizadores de transporte público ferroviário.",
+        "medir toda a população."
+      ],
+      "a": 2,
+      "sol": "O quadro amostral exclui muitos trabalhadores com outros modos de transporte.",
+      "hyp": "Pode ignorar cobertura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:cobertura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-036",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Para estudar rendimento das famílias, perguntar 'Quanto ganha?' sem clarificar período e conceito pode gerar...",
+      "o": [
+        "amostragem aleatória simples.",
+        "erro amostral apenas.",
+        "estratificação.",
+        "erro de medição/resposta."
+      ],
+      "a": 3,
+      "sol": "Ambiguidade da pergunta afeta o valor observado.",
+      "hyp": "Pode atribuir todo erro à seleção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:medicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-037",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Viés e variabilidade são diferentes porque...",
+      "o": [
+        "viés é desvio sistemático; variabilidade é flutuação entre amostras.",
+        "são sinónimos.",
+        "viés é aleatório e variabilidade sistemática.",
+        "ambos desaparecem apenas aumentando n."
+      ],
+      "a": 0,
+      "sol": "Uma estimativa pode ser pouco variável mas enviesada, ou não enviesada mas variável.",
+      "hyp": "Pode misturar precisão e exatidão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:viés-variabilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-038",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Aumentar n reduz tipicamente...",
+      "o": [
+        "qualquer viés automaticamente.",
+        "variabilidade, mas não um viés estrutural de seleção.",
+        "o parâmetro populacional.",
+        "a necessidade de desenho amostral."
+      ],
+      "a": 1,
+      "sol": "Mais dados do mesmo mecanismo enviesado não corrigem o mecanismo.",
+      "hyp": "Pode confiar cegamente no tamanho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:n-vs-vies",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-039",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma estimativa 'precisa' no sentido estatístico tem...",
+      "o": [
+        "necessariamente zero viés.",
+        "valor sempre correto.",
+        "baixa variabilidade amostral.",
+        "amostra pequena."
+      ],
+      "a": 2,
+      "sol": "Precisão refere-se à dispersão entre estimativas repetidas.",
+      "hyp": "Pode confundir precisão e exatidão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:precisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-040",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma estimativa 'não enviesada' significa, idealmente, que...",
+      "o": [
+        "cada amostra dá exatamente o parâmetro.",
+        "a variância é zero.",
+        "não existem erros de medição.",
+        "o seu valor esperado sob repetição amostral coincide com o parâmetro."
+      ],
+      "a": 3,
+      "sol": "Não enviesamento é uma propriedade média do procedimento.",
+      "hyp": "Pode interpretar como acerto em todas as amostras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:nao-enviesada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-041",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se duas estratégias são não enviesadas mas A tem menor variância que B, A é...",
+      "o": [
+        "mais precisa.",
+        "mais enviesada.",
+        "menos eficiente.",
+        "sempre pior."
+      ],
+      "a": 0,
+      "sol": "Menor variância significa menor dispersão amostral.",
+      "hyp": "Pode confundir variância menor com viés maior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:comparar-estimadores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-042",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O quadro amostral é...",
+      "o": [
+        "a tabela final de resultados.",
+        "a lista ou mecanismo que identifica as unidades elegíveis para seleção.",
+        "a média amostral.",
+        "o intervalo de confiança."
+      ],
+      "a": 1,
+      "sol": "Dele depende a cobertura da população alvo.",
+      "hyp": "Pode confundir quadro amostral com base de dados de respostas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:quadro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-043",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Subcobertura ocorre quando...",
+      "o": [
+        "algumas pessoas respondem duas vezes apenas.",
+        "a amostra é grande.",
+        "partes da população têm pouca ou nenhuma possibilidade de entrar no quadro amostral.",
+        "o questionário tem muitas perguntas."
+      ],
+      "a": 2,
+      "sol": "A população alvo não está integralmente representada no mecanismo de seleção.",
+      "hyp": "Pode confundir com não resposta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:subcobertura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-044",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Sobrecobertura pode ocorrer quando...",
+      "o": [
+        "faltam grupos da população.",
+        "ninguém responde.",
+        "a amostra é estratificada.",
+        "o quadro inclui unidades que não pertencem à população alvo ou duplicados."
+      ],
+      "a": 3,
+      "sol": "O quadro pode conter entradas indevidas ou repetidas.",
+      "hyp": "Pode confundir subcobertura e sobrecobertura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:sobrecobertura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-045",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma população tem 40% grupo A e60% grupo B. Uma amostra tem80% A e20% B sem ponderação. Isto sugere...",
+      "o": [
+        "possível falta de representatividade face à composição populacional.",
+        "representatividade perfeita.",
+        "prova de que A tem média maior.",
+        "erro padrão zero."
+      ],
+      "a": 0,
+      "sol": "A composição amostral diverge muito da população conhecida.",
+      "hyp": "Pode inferir características da variável a partir da composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:desbalanceamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-046",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Ponderação pós-amostral pode tentar...",
+      "o": [
+        "eliminar qualquer viés desconhecido.",
+        "corrigir desequilíbrios conhecidos dando pesos diferentes a grupos.",
+        "transformar uma amostra em censo.",
+        "reduzir n."
+      ],
+      "a": 1,
+      "sol": "Pesos ajustam contribuição de grupos com representação desigual.",
+      "hyp": "Pode atribuir poderes ilimitados à ponderação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:ponderacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-047",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A ponderação é mais credível quando...",
+      "o": [
+        "os pesos são escolhidos para obter o resultado desejado.",
+        "não conhecemos nada sobre a população.",
+        "se baseia em características populacionais conhecidas relacionadas com seleção/resposta.",
+        "todos recebem peso aleatório."
+      ],
+      "a": 2,
+      "sol": "Ajustes precisam de informação auxiliar defensável.",
+      "hyp": "Pode tratar ponderação como manipulação arbitrária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:ponderacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-048",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma sondagem eleitoral online aberta a qualquer visitante é sobretudo vulnerável a...",
+      "o": [
+        "erro amostral puro apenas.",
+        "ausência total de dados.",
+        "amostragem estratificada automática.",
+        "autoseleção e múltiplas diferenças entre visitantes e população alvo."
+      ],
+      "a": 3,
+      "sol": "Não há seleção probabilística controlada da população alvo.",
+      "hyp": "Pode confundir volume de respostas com qualidade do desenho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:sondagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-049",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A frase 'a amostra é aleatória, portanto representa perfeitamente a população' é...",
+      "o": [
+        "falsa; aleatoriedade dá uma base probabilística, mas há variabilidade e outros erros.",
+        "verdadeira.",
+        "verdadeira se n>30.",
+        "verdadeira se a população for grande."
+      ],
+      "a": 0,
+      "sol": "Mesmo uma boa amostra pode diferir da população por acaso.",
+      "hyp": "Pode transformar garantia probabilística em igualdade exata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:aleatoriedade-nao-perfeita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-IA-050",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-inferencia-amostragem",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Uma inferência credível depende de...",
+      "o": [
+        "apenas tamanho grande.",
+        "pergunta bem definida, população alvo clara, desenho amostral adequado, qualidade de medição e quantificação da incerteza.",
+        "apenas média amostral.",
+        "apenas software estatístico."
+      ],
+      "a": 1,
+      "sol": "A qualidade inferencial é um processo completo, não apenas um cálculo.",
+      "hyp": "Pode reduzir inferência a uma fórmula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-inferencia-amostragem:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

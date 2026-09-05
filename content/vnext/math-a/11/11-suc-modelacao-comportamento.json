@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-suc",
+  "subtopicId": "11-suc-modelacao-comportamento",
+  "subtopic": "Comportamento e modelação com sucessões",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha escolha entre modelos aritméticos/geométricos, crescimento e decaimento percentual, comportamento de longo prazo, equilíbrio, comparação e limites de validade da modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11SUC-MC-001",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa modelação discreta, cada termo de uma sucessão pode representar...",
+      "o": [
+        "o valor de uma grandeza num instante ou etapa.",
+        "apenas uma coordenada geométrica.",
+        "sempre uma probabilidade.",
+        "um intervalo contínuo inteiro."
+      ],
+      "a": 0,
+      "sol": "Sucessões modelam grandezas observadas em etapas discretas.",
+      "hyp": "Pode confundir modelo discreto com função contínua.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:modelo-discreto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-002",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Se uma quantidade aumenta sempre pela mesma diferença absoluta, o modelo natural é...",
+      "o": [
+        "uma PG.",
+        "uma PA.",
+        "uma sucessão alternada.",
+        "uma função trigonométrica."
+      ],
+      "a": 1,
+      "sol": "Acréscimos absolutos constantes correspondem a progressões aritméticas.",
+      "hyp": "Pode confundir crescimento absoluto com percentual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:pa-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-003",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Se uma quantidade aumenta sempre pela mesma percentagem, o modelo natural é...",
+      "o": [
+        "uma PA.",
+        "uma sucessão constante.",
+        "uma PG.",
+        "uma soma aritmética."
+      ],
+      "a": 2,
+      "sol": "Percentagens constantes correspondem a fatores multiplicativos constantes.",
+      "hyp": "Pode somar sempre a mesma percentagem em valor absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:pg-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-004",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma população cresce 100 indivíduos por ano. O tipo de modelo é...",
+      "o": [
+        "geométrico.",
+        "alternado.",
+        "constante.",
+        "aritmético."
+      ],
+      "a": 3,
+      "sol": "O aumento absoluto é constante: +100.",
+      "hyp": "Pode tratar qualquer crescimento como exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:crescimento-absoluto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-005",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um investimento cresce 4% ao ano. O tipo de modelo é...",
+      "o": [
+        "geométrico.",
+        "aritmético.",
+        "constante.",
+        "quadrático obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Cada ano multiplica o capital por 1,04.",
+      "hyp": "Pode somar sempre o mesmo valor monetário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:crescimento-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-006",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um valor inicial de 200 aumenta 10 unidades por período. Após 4 aumentos vale...",
+      "o": [
+        "230.",
+        "240.",
+        "220.",
+        "242."
+      ],
+      "a": 1,
+      "sol": "200+4×10=240.",
+      "hyp": "Pode contar o valor inicial como um aumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:linear-passos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-007",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um valor inicial de 200 aumenta 10% por período. Após 4 aumentos vale...",
+      "o": [
+        "280.",
+        "240.",
+        "292,82.",
+        "300."
+      ],
+      "a": 2,
+      "sol": "200×1,1^4=292,82.",
+      "hyp": "Pode somar 20 em cada período.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:percentagem-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-008",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Crescimento de 10 unidades por período e crescimento de 10% por período...",
+      "o": [
+        "são sempre equivalentes.",
+        "só diferem no primeiro período.",
+        "produzem sempre uma PA.",
+        "são modelos diferentes."
+      ],
+      "a": 3,
+      "sol": "Um é aditivo, o outro multiplicativo.",
+      "hyp": "Pode confundir unidade com percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:absoluto-vs-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-009",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma máquina perde 5 unidades de capacidade por ciclo. Se começa em 80, após 6 ciclos fica em...",
+      "o": [
+        "50.",
+        "55.",
+        "60.",
+        "45."
+      ],
+      "a": 0,
+      "sol": "80−6×5=50.",
+      "hyp": "Pode aplicar apenas 5 perdas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:decaimento-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-010",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um equipamento perde 5% do valor por ciclo. Se começa em 80, após 2 ciclos vale...",
+      "o": [
+        "70.",
+        "72,2.",
+        "72.",
+        "76."
+      ],
+      "a": 1,
+      "sol": "80×0,95²=72,2.",
+      "hyp": "Pode subtrair 4 em cada ciclo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:decaimento-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-011",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa PG positiva com razão q entre 0 e 1, os termos...",
+      "o": [
+        "crescem sem limite.",
+        "alternam de sinal.",
+        "diminuem e aproximam-se de 0.",
+        "ficam constantes."
+      ],
+      "a": 2,
+      "sol": "Cada termo é uma fração positiva do anterior.",
+      "hyp": "Pode pensar que q positivo implica crescimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:q-entre-0-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-012",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa PG positiva com q>1, os termos...",
+      "o": [
+        "diminuem para 0.",
+        "ficam limitados superiormente.",
+        "alternam de sinal.",
+        "crescem sem limite."
+      ],
+      "a": 3,
+      "sol": "Multiplicar repetidamente por um fator superior a 1 produz crescimento.",
+      "hyp": "Pode achar que toda PG converge.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:q-maior1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-013",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa PA de razão positiva, os termos...",
+      "o": [
+        "crescem sem limite superior.",
+        "aproximam-se de 0.",
+        "ficam constantes.",
+        "alternam."
+      ],
+      "a": 0,
+      "sol": "Somar repetidamente uma quantidade positiva faz crescer indefinidamente.",
+      "hyp": "Pode confundir crescimento linear com convergência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:pa-positiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-014",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa PA de razão negativa, os termos...",
+      "o": [
+        "aproximam-se sempre de 0.",
+        "decrescem sem limite inferior.",
+        "ficam positivos.",
+        "são limitados inferiormente."
+      ],
+      "a": 1,
+      "sol": "Subtrair repetidamente uma quantidade positiva leva a valores arbitrariamente negativos.",
+      "hyp": "Pode pensar que uma sequência física não pode ser negativa e transportar isso para a matemática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:pa-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-015",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual cresce mais rapidamente para n grande: u_n=100+5n ou v_n=100·1,05^n?",
+      "o": [
+        "u_n.",
+        "crescem exatamente igual.",
+        "v_n.",
+        "não é possível comparar."
+      ],
+      "a": 2,
+      "sol": "O crescimento exponencial com base >1 acaba por superar o crescimento linear.",
+      "hyp": "Pode olhar apenas para os primeiros termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:linear-vs-exponencial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-016",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num modelo real, uma sucessão pode deixar de ser válida quando...",
+      "o": [
+        "n aumenta.",
+        "os termos são positivos.",
+        "a fórmula é simples.",
+        "as hipóteses do modelo deixam de ser realistas."
+      ],
+      "a": 3,
+      "sol": "Modelos matemáticos têm domínios de validade ligados às hipóteses usadas.",
+      "hyp": "Pode tratar a fórmula como verdade indefinida no contexto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:validade-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-017",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Uma conta começa com 1000 € e recebe 50 € fixos por mês, sem juros. Um termo geral após n−1 depósitos é...",
+      "o": [
+        "u_n=1000+50(n−1).",
+        "u_n=1000·1,05^{n−1}.",
+        "u_n=50n.",
+        "u_n=1000−50(n−1)."
+      ],
+      "a": 0,
+      "sol": "O acréscimo é absoluto e constante.",
+      "hyp": "Pode interpretar 50 como 5%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:deposito-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-018",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Uma conta começa com 1000 € e rende 5% por período, sem depósitos. Um termo geral é...",
+      "o": [
+        "u_n=1000+50(n−1).",
+        "u_n=1000·1,05^{n−1}.",
+        "u_n=1000·0,95^{n−1}.",
+        "u_n=1050n."
+      ],
+      "a": 1,
+      "sol": "Cada período multiplica por 1,05.",
+      "hyp": "Pode modelar juros compostos como juros simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:juros-compostos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-019",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Uma bateria retém 90% da carga anterior a cada ciclo. Se começa em 100, o modelo é...",
+      "o": [
+        "u_n=100−10(n−1).",
+        "u_n=90n.",
+        "u_n=100·0,9^{n−1}.",
+        "u_n=100·1,1^{n−1}."
+      ],
+      "a": 2,
+      "sol": "Reter 90% significa multiplicar por 0,9.",
+      "hyp": "Pode subtrair sempre 10 pontos percentuais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:retencao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-020",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Uma fila começa com 8 elementos e cresce 3 por etapa. O termo geral é...",
+      "o": [
+        "u_n=8·3^{n−1}.",
+        "u_n=3n.",
+        "u_n=8−3(n−1).",
+        "u_n=8+3(n−1)."
+      ],
+      "a": 3,
+      "sol": "A variação absoluta é +3.",
+      "hyp": "Pode usar modelo geométrico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:crescimento-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-021",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual modelo descreve melhor 100,110,121,133,1,...?",
+      "o": [
+        "PG de razão 1,1.",
+        "PA de razão 10.",
+        "PA de razão 11.",
+        "PG de razão 10."
+      ],
+      "a": 0,
+      "sol": "Cada termo é 1,1 vezes o anterior.",
+      "hyp": "Pode olhar apenas para a primeira diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:reconhecer-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-022",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual modelo descreve 100,110,120,130,...?",
+      "o": [
+        "PG de razão 1,1.",
+        "PA de razão 10.",
+        "PG de razão 10.",
+        "sucessão quadrática."
+      ],
+      "a": 1,
+      "sol": "A diferença é sempre 10.",
+      "hyp": "Pode associar aumento de 10 a 10%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:reconhecer-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-023",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa PG de razão 0,8, a redução percentual por passo é...",
+      "o": [
+        "80%.",
+        "8%.",
+        "20%.",
+        "0,8%."
+      ],
+      "a": 2,
+      "sol": "Multiplicar por 0,8 significa reter 80% e perder 20%.",
+      "hyp": "Pode confundir fator de retenção com percentagem perdida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:fator-para-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-024",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa PG de razão 1,25, o crescimento percentual por passo é...",
+      "o": [
+        "125%.",
+        "12,5%.",
+        "1,25%.",
+        "25%."
+      ],
+      "a": 3,
+      "sol": "1,25=1+0,25.",
+      "hyp": "Pode interpretar diretamente 1,25 como 125% de aumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:fator-crescimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-025",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma quantidade duplica a cada 3 períodos. Após 9 períodos, o fator total de crescimento é...",
+      "o": [
+        "8.",
+        "6.",
+        "3.",
+        "9."
+      ],
+      "a": 0,
+      "sol": "Em 9 períodos ocorrem 3 duplicações:2³=8.",
+      "hyp": "Pode multiplicar 2×3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:tempo-duplicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-026",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma quantidade reduz-se a metade a cada 4 períodos. Após 12 períodos, fica em que fração do valor inicial?",
+      "o": [
+        "1/6.",
+        "1/8.",
+        "1/4.",
+        "1/12."
+      ],
+      "a": 1,
+      "sol": "Há 3 meias-vidas: (1/2)^3=1/8.",
+      "hyp": "Pode dividir diretamente 12 por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:meia-vida-discreta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-027",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um preço sobe 20% e depois desce 20%. O valor final relativamente ao inicial é...",
+      "o": [
+        "100%.",
+        "80%.",
+        "96%.",
+        "104%."
+      ],
+      "a": 2,
+      "sol": "1,2×0,8=0,96.",
+      "hyp": "Pode achar que percentagens opostas se anulam.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:percentagens-sucessivas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-028",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um valor desce 10% em dois períodos consecutivos. A redução total é...",
+      "o": [
+        "20%.",
+        "10%.",
+        "21%.",
+        "19%."
+      ],
+      "a": 3,
+      "sol": "Retém-se 0,9²=0,81, logo perde-se 19%.",
+      "hyp": "Pode somar 10%+10%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:reducoes-compostas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-029",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num modelo u_n=L+a·q^n com |q|<1, o termo a·q^n...",
+      "o": [
+        "aproxima-se de 0.",
+        "cresce sem limite.",
+        "fica constante.",
+        "torna-se sempre negativo."
+      ],
+      "a": 0,
+      "sol": "Potências de base com módulo inferior a 1 tendem a 0.",
+      "hyp": "Pode confundir q negativo com divergência obrigatória.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:termo-transitorio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-030",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Assim, num modelo u_n=L+a·q^n com |q|<1, os termos aproximam-se de...",
+      "o": [
+        "a.",
+        "L.",
+        "q.",
+        "0 obrigatoriamente."
+      ],
+      "a": 1,
+      "sol": "Como a·q^n tende a 0, sobra L.",
+      "hyp": "Pode achar que toda PG tende a 0 mesmo após translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:equilibrio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-031",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na sucessão u_n=50+20·(1/2)^n, o valor de equilíbrio é...",
+      "o": [
+        "20.",
+        "70.",
+        "50.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "O termo variável tende a 0, deixando 50.",
+      "hyp": "Pode usar o primeiro termo ou o coeficiente 20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:equilibrio-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-032",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na sucessão u_n=100−30·(0,8)^n, os termos aproximam-se de...",
+      "o": [
+        "70.",
+        "30.",
+        "0.",
+        "100."
+      ],
+      "a": 3,
+      "sol": "0,8^n tende a 0.",
+      "hyp": "Pode usar u_0=70 como limite.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:equilibrio-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-033",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se q está entre −1 e 0 em u_n=L+a q^n, a aproximação a L é...",
+      "o": [
+        "alternada em torno de L.",
+        "monótona necessariamente.",
+        "divergente.",
+        "constante."
+      ],
+      "a": 0,
+      "sol": "O sinal de q^n alterna enquanto o módulo diminui.",
+      "hyp": "Pode ignorar o sinal negativo de q.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:oscilacao-amortecida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-034",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A sucessão u_n=10+5(−1/2)^n...",
+      "o": [
+        "cresce sem limite.",
+        "oscila em torno de 10 com amplitude decrescente.",
+        "é uma PA.",
+        "oscila com amplitude constante."
+      ],
+      "a": 1,
+      "sol": "(−1/2)^n alterna sinal e diminui em módulo.",
+      "hyp": "Pode focar apenas na alternância e esquecer o amortecimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:oscilacao-amortecida",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-035",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um modelo de PA é mais adequado do que uma PG quando...",
+      "o": [
+        "a variação percentual é constante.",
+        "há duplicação regular.",
+        "a variação absoluta por período é aproximadamente constante.",
+        "a grandeza é sempre positiva."
+      ],
+      "a": 2,
+      "sol": "PA modela incrementos/decrementos absolutos constantes.",
+      "hyp": "Pode escolher pelo sinal dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:escolher-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-036",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um modelo de PG é mais adequado do que uma PA quando...",
+      "o": [
+        "a diferença absoluta é constante.",
+        "os dados são inteiros.",
+        "há apenas dois termos.",
+        "a variação relativa/percentual por período é aproximadamente constante."
+      ],
+      "a": 3,
+      "sol": "PG modela fatores multiplicativos constantes.",
+      "hyp": "Pode confundir percentagem constante com diferença constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:escolher-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-037",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um capital passa de 1000 para 1210 em 2 períodos com a mesma taxa percentual. A taxa por período é...",
+      "o": [
+        "10%.",
+        "21%.",
+        "5%.",
+        "20%."
+      ],
+      "a": 0,
+      "sol": "1000(1+r)^2=1210 =>(1+r)^2=1,21 =>1+r=1,1 =>r=10%.",
+      "hyp": "Pode dividir 21% por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:taxa-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-038",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma quantidade passa de 500 para 405 em 2 períodos com a mesma taxa de redução. A taxa de redução por período é...",
+      "o": [
+        "19%.",
+        "10%.",
+        "9,5%.",
+        "5%."
+      ],
+      "a": 1,
+      "sol": "405/500=0,81=0,9², logo reduz 10% por período.",
+      "hyp": "Pode dividir a redução total de 19% por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:taxa-reducao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-039",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma população segue P_n=800·1,03^{n−1}. O fator 1,03 significa...",
+      "o": [
+        "crescimento de 103% por período.",
+        "aumento de 1,03 indivíduos.",
+        "crescimento de 3% por período.",
+        "redução de 3%."
+      ],
+      "a": 2,
+      "sol": "1,03=1+0,03.",
+      "hyp": "Pode confundir fator com taxa percentual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:interpretar-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-040",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num modelo V_n=2000·0,85^{n−1}, o fator 0,85 significa...",
+      "o": [
+        "desvalorização de 85%.",
+        "aumento de 15%.",
+        "perda fixa de 0,85 unidades.",
+        "desvalorização de 15% por período."
+      ],
+      "a": 3,
+      "sol": "Retém-se 85%, portanto perde-se 15%.",
+      "hyp": "Pode confundir percentagem retida e perdida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:interpretar-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-041",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se dois modelos têm o mesmo valor inicial 100, um é PA com +10 e outro PG com +10%, então após o primeiro aumento...",
+      "o": [
+        "coincidem em 110.",
+        "a PA dá 110 e a PG 100.",
+        "a PG dá 120.",
+        "já são diferentes."
+      ],
+      "a": 0,
+      "sol": "10% de 100 é 10, por isso coincidem após um período; depois divergem.",
+      "hyp": "Pode achar que modelos distintos nunca coincidem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:comparar-modelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-042",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Dois modelos começam em 100: uma PA aumenta 10 por período e uma PG aumenta 10% por período. Após o segundo aumento, os valores são...",
+      "o": [
+        "120 e 120.",
+        "120 e 121.",
+        "121 e 120.",
+        "130 e 121."
+      ],
+      "a": 1,
+      "sol": "PA:100+2×10=120; PG:100×1,1²=121.",
+      "hyp": "Pode aplicar juros simples à PG.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:comparar-modelos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-043",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma subscrição custa 20 € no 1.º ano e aumenta 2 € por ano. O custo no ano n é...",
+      "o": [
+        "20·1,02^{n−1}.",
+        "2n.",
+        "20+2(n−1).",
+        "20+2n."
+      ],
+      "a": 2,
+      "sol": "O aumento é absoluto e há n−1 aumentos até ao ano n.",
+      "hyp": "Pode deslocar o índice ou usar percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:preco-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-044",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma subscrição custa 20 € e aumenta 2% por ano. O custo no ano n é...",
+      "o": [
+        "20+0,02(n−1).",
+        "20+2(n−1).",
+        "20·0,98^{n−1}.",
+        "20·1,02^{n−1}."
+      ],
+      "a": 3,
+      "sol": "A taxa de 2% corresponde ao fator 1,02.",
+      "hyp": "Pode somar 0,02 € ou 2 €.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:preco-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-045",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma cidade tinha 50 000 habitantes e perde 1% ao ano. Um modelo é...",
+      "o": [
+        "P_n=50000·0,99^{n−1}.",
+        "P_n=50000−500(n−1) sempre.",
+        "P_n=50000·1,01^{n−1}.",
+        "P_n=49999n."
+      ],
+      "a": 0,
+      "sol": "Perder 1% significa reter 99% do valor anterior.",
+      "hyp": "Pode transformar uma taxa proporcional em perda fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:populacao-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-046",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num modelo percentual, a variação absoluta por período...",
+      "o": [
+        "é sempre constante.",
+        "geralmente muda ao longo do tempo.",
+        "é sempre igual à taxa.",
+        "é zero."
+      ],
+      "a": 1,
+      "sol": "A mesma percentagem aplicada a bases diferentes gera variações absolutas diferentes.",
+      "hyp": "Pode confundir taxa constante com incremento constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:variacao-absoluta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-047",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma PG positiva tem razão 1,01, então em 100 períodos o fator de crescimento é...",
+      "o": [
+        "2.",
+        "1+100×0,01 exatamente.",
+        "1,01^{100}.",
+        "100,01."
+      ],
+      "a": 2,
+      "sol": "Em crescimento composto, multiplicam-se 100 fatores 1,01.",
+      "hyp": "Pode usar aproximação linear como igualdade exata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:composto-longo-prazo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-048",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Ao comparar modelos com dados reais, um bom critério é...",
+      "o": [
+        "escolher sempre o modelo com fórmula mais simples.",
+        "usar sempre PG para crescimento.",
+        "ignorar unidades.",
+        "verificar erros/resíduos e se as hipóteses fazem sentido no contexto."
+      ],
+      "a": 3,
+      "sol": "Adequação estatística e plausibilidade contextual são ambas importantes.",
+      "hyp": "Pode reduzir modelação a encaixe mecânico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:validacao-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-049",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Extrapolar muito além dos dados observados pode ser perigoso porque...",
+      "o": [
+        "o mecanismo real pode mudar e o modelo deixar de ser válido.",
+        "as sucessões deixam de existir.",
+        "n deixa de ser natural.",
+        "as fórmulas deixam de poder ser calculadas."
+      ],
+      "a": 0,
+      "sol": "A validade de um modelo não é garantida fora do intervalo observado.",
+      "hyp": "Pode confundir validade matemática com validade empírica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:extrapolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-MC-050",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-modelacao-comportamento",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um utilizador começa com 120 pontos e perde 25% após cada penalização. Após k penalizações, o valor é...",
+      "o": [
+        "120−25k.",
+        "120·0,75^k.",
+        "120·1,25^k.",
+        "95k."
+      ],
+      "a": 1,
+      "sol": "Cada penalização retém 75% dos pontos anteriores.",
+      "hyp": "Pode subtrair 25 pontos em vez de 25%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-modelacao-comportamento:modelacao-penalizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

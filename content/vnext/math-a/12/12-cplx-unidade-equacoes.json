@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-cplx",
+  "subtopicId": "12-cplx-unidade-equacoes",
+  "subtopic": "Unidade imaginária, conjunto C e equações de 2.º grau",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha unidade imaginária, potências de i, raízes de números negativos e equações quadráticas com soluções complexas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12CPLX-UE-001",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A unidade imaginária i satisfaz...",
+      "o": [
+        "i²=−1.",
+        "i²=1.",
+        "i=−1.",
+        "i²=0."
+      ],
+      "a": 0,
+      "sol": "Por definição, i²=−1.",
+      "hyp": "Pode confundir i com um número real negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:def-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-002",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "i³ é igual a...",
+      "o": [
+        "i.",
+        "−i.",
+        "1.",
+        "−1."
+      ],
+      "a": 1,
+      "sol": "i³=i²·i=−i.",
+      "hyp": "Pode esquecer i²=−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-003",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "i⁴ é igual a...",
+      "o": [
+        "−1.",
+        "i.",
+        "1.",
+        "−i."
+      ],
+      "a": 2,
+      "sol": "i⁴=(i²)²=1.",
+      "hyp": "Pode assumir que todas as potências pares dão −1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-004",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "i⁵ é igual a...",
+      "o": [
+        "−i.",
+        "1.",
+        "−1.",
+        "i."
+      ],
+      "a": 3,
+      "sol": "i⁵=i⁴·i=i.",
+      "hyp": "Pode não reconhecer o ciclo de período 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-i",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-005",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "As potências de i repetem-se com período...",
+      "o": [
+        "4.",
+        "2.",
+        "3.",
+        "6."
+      ],
+      "a": 0,
+      "sol": "i,i²,i³,i⁴ repetem-se de quatro em quatro.",
+      "hyp": "Pode considerar apenas alternância de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:periodo-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-006",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "i¹⁰ é...",
+      "o": [
+        "1.",
+        "−1.",
+        "i.",
+        "−i."
+      ],
+      "a": 1,
+      "sol": "10≡2 mod4, logo i¹⁰=i²=−1.",
+      "hyp": "Pode reduzir o expoente módulo 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-007",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "i¹⁵ é...",
+      "o": [
+        "i.",
+        "−1.",
+        "−i.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "15≡3 mod4, logo i¹⁵=i³=−i.",
+      "hyp": "Pode usar apenas a paridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-008",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "i²⁰ é...",
+      "o": [
+        "−1.",
+        "i.",
+        "−i.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "20 é múltiplo de 4.",
+      "hyp": "Pode pensar que expoente positivo implica i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-009",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "i²⁰²⁶ é...",
+      "o": [
+        "−1.",
+        "1.",
+        "i.",
+        "−i."
+      ],
+      "a": 0,
+      "sol": "2026≡2 mod4.",
+      "hyp": "Pode não reduzir módulo 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-010",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "i²⁰²⁷ é...",
+      "o": [
+        "i.",
+        "−i.",
+        "1.",
+        "−1."
+      ],
+      "a": 1,
+      "sol": "2027≡3 mod4.",
+      "hyp": "Pode trocar i³ e i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-011",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A soma 1+i+i²+i³ vale...",
+      "o": [
+        "1.",
+        "i.",
+        "0.",
+        "−1."
+      ],
+      "a": 2,
+      "sol": "1+i−1−i=0.",
+      "hyp": "Pode somar módulos em vez de termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:soma-ciclo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-012",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "i+i³ vale...",
+      "o": [
+        "2i.",
+        "−2i.",
+        "1.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "i³=−i.",
+      "hyp": "Pode somar expoentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:soma-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-013",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "√(−9), no conjunto dos complexos, pode escrever-se como...",
+      "o": [
+        "3i.",
+        "−3.",
+        "9i.",
+        "i/3."
+      ],
+      "a": 0,
+      "sol": "√(−9)=√9·i=3i, tomando a raiz principal.",
+      "hyp": "Pode tratar a raiz como real.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:raiz-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-014",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "√(−25) pode escrever-se como...",
+      "o": [
+        "−5.",
+        "5i.",
+        "25i.",
+        "−25."
+      ],
+      "a": 1,
+      "sol": "√(−25)=5i.",
+      "hyp": "Pode esquecer o i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:raiz-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-015",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A equação x²+1=0 tem, em C, soluções...",
+      "o": [
+        "x=1.",
+        "x=−1.",
+        "x=±i.",
+        "não tem solução."
+      ],
+      "a": 2,
+      "sol": "x²=−1, logo x=±i.",
+      "hyp": "Pode manter a conclusão válida apenas em R.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:equacao-basica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-016",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As soluções de x²+9=0 são...",
+      "o": [
+        "±3.",
+        "9i.",
+        "não existem.",
+        "±3i."
+      ],
+      "a": 3,
+      "sol": "x²=−9.",
+      "hyp": "Pode esquecer o par de soluções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:equacao-basica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-017",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As soluções de x²+16=0 são...",
+      "o": [
+        "±4i.",
+        "±4.",
+        "−16.",
+        "4i apenas."
+      ],
+      "a": 0,
+      "sol": "x²=−16.",
+      "hyp": "Pode dar apenas uma raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:equacao-basica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-018",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "As soluções de x²−4=0 em C são...",
+      "o": [
+        "±2i.",
+        "±2.",
+        "2i apenas.",
+        "não existem."
+      ],
+      "a": 1,
+      "sol": "O alargamento a C conserva as soluções reais.",
+      "hyp": "Pode inserir i desnecessariamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:equacao-real",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-019",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Todo número real é também...",
+      "o": [
+        "um imaginário puro.",
+        "um número sem módulo.",
+        "um número complexo com parte imaginária zero.",
+        "um complexo com parte real zero."
+      ],
+      "a": 2,
+      "sol": "R⊂C e a+0i representa qualquer real.",
+      "hyp": "Pode pensar que reais e complexos são conjuntos disjuntos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:inclusao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-020",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma equação quadrática com discriminante negativo...",
+      "o": [
+        "não tem solução em C.",
+        "tem sempre raiz dupla real.",
+        "tem uma única raiz imaginária.",
+        "não tem raízes reais, mas tem duas raízes complexas conjugadas."
+      ],
+      "a": 3,
+      "sol": "Em C, a fórmula resolvente produz duas raízes conjugadas quando os coeficientes são reais.",
+      "hyp": "Pode manter a restrição do conjunto R.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:disc-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-021",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve x²−2x+5=0.",
+      "o": [
+        "x=1±2i.",
+        "x=−1±2i.",
+        "x=2±i.",
+        "x=1±i."
+      ],
+      "a": 0,
+      "sol": "Δ=4−20=−16; x=(2±4i)/2=1±2i.",
+      "hyp": "Pode errar a divisão por 2a.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-022",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve x²+4x+13=0.",
+      "o": [
+        "x=2±3i.",
+        "x=−2±3i.",
+        "x=−4±i.",
+        "x=−2±i."
+      ],
+      "a": 1,
+      "sol": "Δ=16−52=−36; x=(−4±6i)/2=−2±3i.",
+      "hyp": "Pode errar o sinal de −b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-023",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve x²−6x+10=0.",
+      "o": [
+        "x=−3±i.",
+        "x=6±i.",
+        "x=3±i.",
+        "x=3±2i."
+      ],
+      "a": 2,
+      "sol": "Δ=36−40=−4; x=(6±2i)/2=3±i.",
+      "hyp": "Pode esquecer dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-024",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 2x²+4x+10=0.",
+      "o": [
+        "x=1±2i.",
+        "x=−2±i.",
+        "x=−1±i.",
+        "x=−1±2i."
+      ],
+      "a": 3,
+      "sol": "Dividindo por 2: x²+2x+5=0; Δ=−16.",
+      "hyp": "Pode não simplificar a equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-025",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve x²+2x+10=0.",
+      "o": [
+        "x=−1±3i.",
+        "x=1±3i.",
+        "x=−2±3i.",
+        "x=−1±i."
+      ],
+      "a": 0,
+      "sol": "Δ=4−40=−36; x=(−2±6i)/2=−1±3i.",
+      "hyp": "Pode errar √36.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-026",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z²=−36, então z pode ser...",
+      "o": [
+        "±6.",
+        "±6i.",
+        "36i.",
+        "−36."
+      ],
+      "a": 1,
+      "sol": "(6i)²=−36.",
+      "hyp": "Pode esquecer as duas soluções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:z-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-027",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se z²=−2, então z=",
+      "o": [
+        "±√2.",
+        "−2i.",
+        "±i√2.",
+        "i/√2."
+      ],
+      "a": 2,
+      "sol": "As raízes são ±√2·i.",
+      "hyp": "Pode remover o sinal negativo sem i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:z-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-028",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "iⁿ=1 quando n é...",
+      "o": [
+        "ímpar.",
+        "congruente com 2 mod4.",
+        "múltiplo de 3.",
+        "múltiplo de 4."
+      ],
+      "a": 3,
+      "sol": "O ciclo retorna a 1 em expoentes 4k.",
+      "hyp": "Pode usar apenas paridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:classe-residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-029",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "iⁿ=−1 quando...",
+      "o": [
+        "n≡2 mod4.",
+        "n≡0 mod4.",
+        "n≡1 mod4.",
+        "n≡3 mod4."
+      ],
+      "a": 0,
+      "sol": "i²=−1 e o ciclo repete-se.",
+      "hyp": "Pode trocar as classes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:classe-residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-030",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "iⁿ=i quando...",
+      "o": [
+        "n≡2 mod4.",
+        "n≡1 mod4.",
+        "n≡3 mod4.",
+        "n≡0 mod4."
+      ],
+      "a": 1,
+      "sol": "O primeiro termo do ciclo corresponde a resto 1.",
+      "hyp": "Pode trocar i e −i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:classe-residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-031",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "iⁿ=−i quando...",
+      "o": [
+        "n≡1 mod4.",
+        "n≡2 mod4.",
+        "n≡3 mod4.",
+        "n≡0 mod4."
+      ],
+      "a": 2,
+      "sol": "i³=−i.",
+      "hyp": "Pode trocar os restos 1 e 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:classe-residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-032",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A expressão i²+i⁶ vale...",
+      "o": [
+        "2.",
+        "0.",
+        "−2i.",
+        "−2."
+      ],
+      "a": 3,
+      "sol": "Ambas as potências têm resto 2 mod4 e valem −1.",
+      "hyp": "Pode somar expoentes em vez de valores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:soma-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-033",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "i⁷+i⁹ vale...",
+      "o": [
+        "0.",
+        "2i.",
+        "−2i.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "i⁷=−i e i⁹=i.",
+      "hyp": "Pode reduzir um dos expoentes incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:soma-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-034",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "i¹²−i¹⁰ vale...",
+      "o": [
+        "0.",
+        "2.",
+        "−2.",
+        "2i."
+      ],
+      "a": 1,
+      "sol": "i¹²=1 e i¹⁰=−1; diferença 2.",
+      "hyp": "Pode tratar ambos como 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:diferenca-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-035",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(2i)² é...",
+      "o": [
+        "4.",
+        "2i.",
+        "−4.",
+        "−2."
+      ],
+      "a": 2,
+      "sol": "4i²=−4.",
+      "hyp": "Pode quadrar só o 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadrado-imaginario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-036",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(3i)³ é...",
+      "o": [
+        "27i.",
+        "−9i.",
+        "27.",
+        "−27i."
+      ],
+      "a": 3,
+      "sol": "27i³=−27i.",
+      "hyp": "Pode confundir i³ com i.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-imaginario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-037",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve x²+6x+25=0.",
+      "o": [
+        "x=−3±4i.",
+        "x=3±4i.",
+        "x=−6±4i.",
+        "x=−3±2i."
+      ],
+      "a": 0,
+      "sol": "Δ=36−100=−64; x=(−6±8i)/2=−3±4i.",
+      "hyp": "Pode errar o sinal de −b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-038",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 3x²−6x+15=0.",
+      "o": [
+        "x=−1±2i.",
+        "x=1±2i.",
+        "x=2±i.",
+        "x=1±i."
+      ],
+      "a": 1,
+      "sol": "Dividindo por3: x²−2x+5=0.",
+      "hyp": "Pode não simplificar corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-039",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma equação real de 2.º grau tem uma raiz 2+3i, a outra é...",
+      "o": [
+        "−2+3i.",
+        "−2−3i.",
+        "2−3i.",
+        "3+2i."
+      ],
+      "a": 2,
+      "sol": "Coeficientes reais implicam raízes complexas conjugadas.",
+      "hyp": "Pode trocar sinais das duas partes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:conjugadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-040",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma equação monica com raízes 1+i e 1−i é...",
+      "o": [
+        "x²+2x+2=0.",
+        "x²−2x+1=0.",
+        "x²+2=0.",
+        "x²−2x+2=0."
+      ],
+      "a": 3,
+      "sol": "Soma=2 e produto=(1+i)(1−i)=2.",
+      "hyp": "Pode usar produto 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:equacao-por-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-041",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma equação monica com raízes 3+2i e 3−2i é...",
+      "o": [
+        "x²−6x+13=0.",
+        "x²+6x+13=0.",
+        "x²−6x+5=0.",
+        "x²−3x+13=0."
+      ],
+      "a": 0,
+      "sol": "Soma=6 e produto=9+4=13.",
+      "hyp": "Pode subtrair os quadrados no produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:equacao-por-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-042",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se x²+ax+13=0 tem raízes 3±2i, então a=",
+      "o": [
+        "6.",
+        "−6.",
+        "−3.",
+        "3."
+      ],
+      "a": 1,
+      "sol": "A soma das raízes é 6=−a.",
+      "hyp": "Pode esquecer a relação de Viète.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:viete",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-043",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se x²−4x+b=0 tem raízes 2±3i, então b=",
+      "o": [
+        "5.",
+        "−5.",
+        "13.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "O produto das raízes é 2²+3²=13.",
+      "hyp": "Pode usar 4−9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:viete",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-044",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A equação x²+4=0 tem raízes cujo produto é...",
+      "o": [
+        "−4.",
+        "2i.",
+        "0.",
+        "4."
+      ],
+      "a": 3,
+      "sol": "As raízes são 2i e −2i; produto=4, coerente com Viète.",
+      "hyp": "Pode multiplicar módulos e manter sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:produto-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-045",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A soma das raízes de x²+2x+10=0 é...",
+      "o": [
+        "−2.",
+        "2.",
+        "10.",
+        "−10."
+      ],
+      "a": 0,
+      "sol": "Por Viète, soma=−b/a=−2.",
+      "hyp": "Pode somar diretamente os módulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:soma-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-046",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se uma equação quadrática com coeficientes reais tem discriminante <0, então as raízes...",
+      "o": [
+        "são reais distintas.",
+        "têm a mesma parte real e partes imaginárias opostas.",
+        "são ambas imaginárias puras sempre.",
+        "têm módulos necessariamente diferentes."
+      ],
+      "a": 1,
+      "sol": "São conjugadas: a±bi.",
+      "hyp": "Pode pensar que parte real tem de ser zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:estrutura-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-047",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é i^{4k+2}, para k inteiro?",
+      "o": [
+        "1.",
+        "i.",
+        "−1.",
+        "−i."
+      ],
+      "a": 2,
+      "sol": "i^{4k+2}=i^{4k}i²=−1.",
+      "hyp": "Pode depender de k indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-048",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é i^{4k+3}?",
+      "o": [
+        "i.",
+        "−1.",
+        "1.",
+        "−i."
+      ],
+      "a": 3,
+      "sol": "i^{4k}=1 e i³=−i.",
+      "hyp": "Pode trocar com resto 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:potencia-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-049",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo algébrico surge x²+100=0. Em C, as soluções são...",
+      "o": [
+        "±10i.",
+        "±100i.",
+        "±10.",
+        "não existem."
+      ],
+      "a": 0,
+      "sol": "x²=−100.",
+      "hyp": "Pode manter a restrição aos reais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:modelacao-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12CPLX-UE-050",
+      "themeId": "12-cplx",
+      "subtopicId": "12-cplx-unidade-equacoes",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se p(x)=x²−2x+10, então as suas raízes complexas são...",
+      "o": [
+        "−1±3i.",
+        "1±3i.",
+        "1±√10i.",
+        "2±3i."
+      ],
+      "a": 1,
+      "sol": "Δ=4−40=−36; raízes=(2±6i)/2=1±3i.",
+      "hyp": "Pode esquecer dividir o termo imaginário por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-cplx-unidade-equacoes:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

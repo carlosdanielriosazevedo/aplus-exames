@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-int",
+  "subtopicId": "12-int-areas",
+  "subtopic": "Áreas e aplicações",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha área algébrica vs geométrica, zeros/interseções, área entre curvas, separação por sinais e aplicações a movimento/taxas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12INT-AR-001",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f(x)≥0 em [a,b], a área entre o gráfico de f e o eixo Ox é...",
+      "o": [
+        "∫_a^b f(x)dx.",
+        "−∫_a^b f(x)dx.",
+        "|f(b)−f(a)|.",
+        "f(a)+f(b)."
+      ],
+      "a": 0,
+      "sol": "Quando f é não negativa, a integral definida coincide com a área geométrica.",
+      "hyp": "Pode confundir área com variação da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-positiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-002",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f(x)≤0 em [a,b], a área geométrica entre o gráfico e Ox é...",
+      "o": [
+        "∫_a^b f(x)dx.",
+        "−∫_a^b f(x)dx.",
+        "0.",
+        "f(b)−f(a)."
+      ],
+      "a": 1,
+      "sol": "A integral é negativa, por isso a área geométrica é o seu oposto.",
+      "hyp": "Pode usar diretamente a integral negativa como área.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-003",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f muda de sinal em [a,b], para calcular área geométrica total devemos...",
+      "o": [
+        "usar sempre ∫_a^b f sem separar.",
+        "somar apenas valores de f nos extremos.",
+        "separar nos zeros e somar áreas positivas.",
+        "derivar f."
+      ],
+      "a": 2,
+      "sol": "As contribuições abaixo do eixo devem entrar em valor absoluto.",
+      "hyp": "Pode deixar cancelamentos na área total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:mudanca-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-004",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A área sob y=2 entre x=0 e x=3 é...",
+      "o": [
+        "3.",
+        "2.",
+        "5.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "É um retângulo de base3 e altura2.",
+      "hyp": "Pode somar base e altura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-005",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A área sob y=x entre x=0 e x=2 é...",
+      "o": [
+        "2.",
+        "4.",
+        "1.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "É um triângulo de base2 e altura2, área2; também ∫_0^2 x dx=2.",
+      "hyp": "Pode esquecer dividir por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:triangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-006",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A área sob y=x² entre x=0 e x=1 é...",
+      "o": [
+        "1/2.",
+        "1/3.",
+        "1.",
+        "2/3."
+      ],
+      "a": 1,
+      "sol": "∫_0^1 x²dx=[x³/3]_0^1=1/3.",
+      "hyp": "Pode usar fórmula de triângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:parabola",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-007",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A área sob y=3x² entre x=0 e x=2 é...",
+      "o": [
+        "12.",
+        "4.",
+        "8.",
+        "6."
+      ],
+      "a": 2,
+      "sol": "∫_0^2 3x²dx=[x³]_0^2=8.",
+      "hyp": "Pode esquecer integrar o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:parabola",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-008",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A área entre y=1−x e Ox, para x∈[0,1], é...",
+      "o": [
+        "1.",
+        "2.",
+        "1/4.",
+        "1/2."
+      ],
+      "a": 3,
+      "sol": "É um triângulo de base1 e altura1.",
+      "hyp": "Pode usar base×altura sem dividir por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:triangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-009",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A integral ∫_{−1}^1 x dx vale0, mas a área geométrica entre y=x e Ox nesse intervalo é...",
+      "o": [
+        "1.",
+        "0.",
+        "2.",
+        "1/2."
+      ],
+      "a": 0,
+      "sol": "Há dois triângulos de área1/2 cada, sem cancelamento geométrico.",
+      "hyp": "Pode confundir integral algébrica com área total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-010",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A área geométrica entre y=x e Ox em [−1,1] pode escrever-se...",
+      "o": [
+        "∫_{−1}^1 xdx.",
+        "∫_{−1}^0(−x)dx+∫_0^1 xdx.",
+        "∫_{−1}^1(−x)dx.",
+        "∫_0^1 xdx apenas."
+      ],
+      "a": 1,
+      "sol": "No lado negativo, a função está abaixo de Ox e usa-se −x.",
+      "hyp": "Pode não inverter o sinal onde a função é negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:separar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-011",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A área entre dois gráficos f e g, com f≥g em [a,b], é...",
+      "o": [
+        "∫_a^b[f(x)+g(x)]dx.",
+        "∫_a^b[g(x)−f(x)]dx.",
+        "∫_a^b[f(x)−g(x)]dx.",
+        "f(b)−g(a)."
+      ],
+      "a": 2,
+      "sol": "A altura vertical entre as curvas é f−g.",
+      "hyp": "Pode somar as ordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:entre-curvas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-012",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Entre y=2 e y=0, de x=0 a x=4, a área é...",
+      "o": [
+        "4.",
+        "2.",
+        "6.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "∫_0^4(2−0)dx=8.",
+      "hyp": "Pode usar apenas a amplitude horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:entre-retas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-013",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Entre y=x+1 e y=x−1, para x∈[0,3], a área é...",
+      "o": [
+        "6.",
+        "3.",
+        "2.",
+        "9."
+      ],
+      "a": 0,
+      "sol": "A diferença vertical é constante2; área=2×3=6.",
+      "hyp": "Pode somar as funções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-014",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Os gráficos y=x e y=x² intersectam-se em...",
+      "o": [
+        "x=−1 e x=1.",
+        "x=0 e x=1.",
+        "x=0 apenas.",
+        "x=1 apenas."
+      ],
+      "a": 1,
+      "sol": "x=x² =>x(x−1)=0.",
+      "hyp": "Pode dividir por x e perder a solução0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:intersecoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-015",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Em [0,1], entre y=x e y=x², a função superior é...",
+      "o": [
+        "y=x².",
+        "nenhuma; são iguais sempre.",
+        "y=x.",
+        "depende de x sem padrão."
+      ],
+      "a": 2,
+      "sol": "Para 0<x<1, x>x².",
+      "hyp": "Pode pensar que maior expoente dá sempre maior valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-016",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=x e y=x² em [0,1] é...",
+      "o": [
+        "1/3.",
+        "1/2.",
+        "2/3.",
+        "1/6."
+      ],
+      "a": 3,
+      "sol": "∫_0^1(x−x²)dx=1/2−1/3=1/6.",
+      "hyp": "Pode somar as integrais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-curvas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-017",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os gráficos y=x² e y=1 intersectam-se em...",
+      "o": [
+        "x=−1 e x=1.",
+        "x=0 e x=1.",
+        "x=1 apenas.",
+        "x=±2."
+      ],
+      "a": 0,
+      "sol": "x²=1 =>x=±1.",
+      "hyp": "Pode esquecer a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:intersecoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-018",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Em [−1,1], entre y=1 e y=x², a função superior é...",
+      "o": [
+        "y=x².",
+        "y=1.",
+        "são iguais em todo o intervalo.",
+        "depende do sinal de x."
+      ],
+      "a": 1,
+      "sol": "x²≤1 nesse intervalo.",
+      "hyp": "Pode achar que a parábola fica sempre acima.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-019",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=1 e y=x² em [−1,1] é...",
+      "o": [
+        "2/3.",
+        "1.",
+        "4/3.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "∫_{−1}^1(1−x²)dx=2−2/3=4/3.",
+      "hyp": "Pode esquecer a simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-curvas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-020",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para determinar área entre dois gráficos sem limites dados, primeiro devemos...",
+      "o": [
+        "derivar ambos obrigatoriamente.",
+        "integrar de0 a1.",
+        "somar as funções.",
+        "encontrar pontos de interseção relevantes."
+      ],
+      "a": 3,
+      "sol": "As interseções costumam definir os limites da região fechada.",
+      "hyp": "Pode escolher limites arbitrários.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:limites",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-021",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os gráficos y=2x e y=x² delimitam uma região entre...",
+      "o": [
+        "x=0 e x=2.",
+        "x=−2 e x=2.",
+        "x=0 e x=1.",
+        "x=1 e x=2."
+      ],
+      "a": 0,
+      "sol": "x²=2x =>x(x−2)=0.",
+      "hyp": "Pode dividir por x e perder0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:intersecoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-022",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No intervalo [0,2], entre y=2x e y=x², a função superior é...",
+      "o": [
+        "x².",
+        "2x.",
+        "são iguais sempre.",
+        "depende apenas do sinal de x."
+      ],
+      "a": 1,
+      "sol": "2x−x²=x(2−x)≥0.",
+      "hyp": "Pode escolher a quadrática por crescer mais depressa fora do intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-023",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área delimitada por y=2x e y=x² é...",
+      "o": [
+        "2.",
+        "8/3.",
+        "4/3.",
+        "2/3."
+      ],
+      "a": 2,
+      "sol": "∫_0^2(2x−x²)dx=[x²−x³/3]_0^2=4−8/3=4/3.",
+      "hyp": "Pode integrar na ordem errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-curvas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-024",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os gráficos y=x²−1 e Ox cortam-se em...",
+      "o": [
+        "x=0 e x=1.",
+        "x=±√2.",
+        "x=1 apenas.",
+        "x=−1 e x=1."
+      ],
+      "a": 3,
+      "sol": "x²−1=0.",
+      "hyp": "Pode esquecer a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-025",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Em [−1,1], y=x²−1 está...",
+      "o": [
+        "abaixo ou sobre Ox.",
+        "acima de Ox.",
+        "sempre igual a0.",
+        "acima para x<0 e abaixo para x>0."
+      ],
+      "a": 0,
+      "sol": "x²≤1, logo x²−1≤0.",
+      "hyp": "Pode usar o sinal de x em vez de x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-026",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=x²−1 e Ox em [−1,1] é...",
+      "o": [
+        "−4/3.",
+        "4/3.",
+        "2/3.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "Área=∫_{−1}^1(1−x²)dx=4/3.",
+      "hyp": "Pode reportar a integral algébrica negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-abaixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-027",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4, em [−3,3], os zeros relevantes são...",
+      "o": [
+        "−4 e4.",
+        "0 e2.",
+        "−2 e2.",
+        "−2 e0."
+      ],
+      "a": 2,
+      "sol": "x²=4.",
+      "hyp": "Pode confundir raiz com coeficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-028",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No intervalo [−2,2], x²−4 é...",
+      "o": [
+        "não negativa.",
+        "positiva exceto em0.",
+        "ímpar.",
+        "não positiva."
+      ],
+      "a": 3,
+      "sol": "x²≤4.",
+      "hyp": "Pode achar que um quadrado torna toda a expressão positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-029",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área geométrica entre y=x²−4 e Ox em [−2,2] é...",
+      "o": [
+        "32/3.",
+        "−32/3.",
+        "16/3.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "∫_{−2}^2(4−x²)dx=16−16/3=32/3.",
+      "hyp": "Pode usar a integral algébrica com sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-parabola",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-030",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f muda de sinal em x=c, a área em [a,b] com a<c<b é...",
+      "o": [
+        "|∫_a^b f| sempre.",
+        "|∫_a^c f|+|∫_c^b f| quando o sinal é constante em cada parte.",
+        "∫_a^b f sem módulo.",
+        "f(c)."
+      ],
+      "a": 1,
+      "sol": "A separação evita cancelamentos.",
+      "hyp": "Pode mover um módulo apenas para fora da integral total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-031",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=sin x e Ox em [0,π] é...",
+      "o": [
+        "0.",
+        "1.",
+        "2.",
+        "π."
+      ],
+      "a": 2,
+      "sol": "sinx≥0 e ∫_0^π sinx dx=2.",
+      "hyp": "Pode usar simetria como se fosse função ímpar nesse intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:seno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-032",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=cos x e Ox em [0,π] é...",
+      "o": [
+        "0.",
+        "1.",
+        "π.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "cos muda de sinal emπ/2; área=∫_0^{π/2}cosx dx−∫_{π/2}^π cosx dx=1+1=2.",
+      "hyp": "Pode usar a integral algébrica0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:cosseno",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-033",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A integral ∫_0^π cosx dx vale...",
+      "o": [
+        "0.",
+        "2.",
+        "1.",
+        "−2."
+      ],
+      "a": 0,
+      "sol": "sinπ−sin0=0.",
+      "hyp": "Pode confundir com área geométrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:cosseno-integral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-034",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Como ∫_0^π cos x dx=0 mas cos x muda de sinal em [0,π], conclui-se que...",
+      "o": [
+        "área e integral são sempre iguais.",
+        "área geométrica e integral algébrica podem diferir quando há mudança de sinal.",
+        "integral não pode ser zero.",
+        "cosx não muda de sinal."
+      ],
+      "a": 1,
+      "sol": "Cancelamentos podem anular a integral sem anular a área.",
+      "hyp": "Pode generalizar igualdade fora de f≥0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:distincao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-035",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=e^x e Ox em [0,1] é...",
+      "o": [
+        "e.",
+        "1.",
+        "e−1.",
+        "1/e."
+      ],
+      "a": 2,
+      "sol": "e^x>0 e ∫_0^1e^xdx=e−1.",
+      "hyp": "Pode esquecer F(0)=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:exp-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-036",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=1/x e Ox em [1,e] é...",
+      "o": [
+        "e−1.",
+        "ln(e−1).",
+        "1/e.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "∫_1^e 1/x dx=1.",
+      "hyp": "Pode usar diferença dos extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:log-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-037",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Os gráficos y=e^x e y=1 intersectam-se em...",
+      "o": [
+        "x=0.",
+        "x=1.",
+        "x=e.",
+        "não se intersectam."
+      ],
+      "a": 0,
+      "sol": "e^x=1 =>x=0.",
+      "hyp": "Pode confundir e^1=e com1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:intersecao-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-038",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Em [0,1], e^x≥1, logo a área entre y=e^x e y=1 é...",
+      "o": [
+        "∫_0^1(1−e^x)dx.",
+        "∫_0^1(e^x−1)dx.",
+        "∫_0^1(e^x+1)dx.",
+        "e−1."
+      ],
+      "a": 1,
+      "sol": "Subtrai-se a função inferior à superior.",
+      "hyp": "Pode esquecer retirar a reta y=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:entre-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-039",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Em [0,1], a área entre y=e^x e y=1 é ∫_0^1(e^x−1)dx. Qual é o seu valor?",
+      "o": [
+        "e−1.",
+        "2−e.",
+        "e−2.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "∫_0^1(e^x−1)dx=(e−1)−1=e−2.",
+      "hyp": "Pode esquecer integrar o termo−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:entre-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-040",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Os gráficos y=x+2 e y=x² intersectam-se em...",
+      "o": [
+        "x=0 e x=2.",
+        "x=−2 e x=1.",
+        "x=1 e x=2.",
+        "x=−1 e x=2."
+      ],
+      "a": 3,
+      "sol": "x²=x+2 =>x²−x−2=(x−2)(x+1)=0.",
+      "hyp": "Pode fatorizar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:intersecoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-041",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Entre x=−1 e x=2, a função superior é...",
+      "o": [
+        "x+2.",
+        "x².",
+        "alternam em x=0.",
+        "são iguais em todo o intervalo."
+      ],
+      "a": 0,
+      "sol": "(x+2)−x²=−(x−2)(x+1)≥0 no intervalo.",
+      "hyp": "Pode escolher a parábola pelo crescimento fora do intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-042",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A área entre y=x+2 e y=x² entre as interseções é...",
+      "o": [
+        "3.",
+        "9/2.",
+        "9.",
+        "3/2."
+      ],
+      "a": 1,
+      "sol": "∫_{−1}^2(x+2−x²)dx=9/2.",
+      "hyp": "Pode integrar na ordem errada ou perder o limite negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:area-curvas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-043",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma velocidade v(t) é positiva entre0 e4 e negativa entre4 e6. A distância total percorrida é...",
+      "o": [
+        "∫_0^6v(t)dt.",
+        "|∫_0^6v(t)dt| sempre.",
+        "∫_0^4v(t)dt−∫_4^6v(t)dt.",
+        "v(6)−v(0)."
+      ],
+      "a": 2,
+      "sol": "Na parte negativa, a distância usa o oposto da integral.",
+      "hyp": "Pode confundir deslocamento com distância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-044",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma taxa líquida r(t) é negativa, a área geométrica entre r e o eixo num intervalo representa...",
+      "o": [
+        "acumulação líquida com sinal negativo apenas.",
+        "sempre zero.",
+        "a derivada de r.",
+        "magnitude acumulada da saída/perda, usando −∫r."
+      ],
+      "a": 3,
+      "sol": "A área geométrica mede magnitude, não direção.",
+      "hyp": "Pode confundir quantidade líquida e magnitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:taxa-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-045",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Quando f e g se intersectam várias vezes, uma estratégia correta para área entre curvas é...",
+      "o": [
+        "ordenar as interseções, identificar qual gráfico está acima em cada subintervalo e integrar a diferença positiva.",
+        "integrar f−g num único intervalo sem analisar sinais.",
+        "somar apenas as abcissas de interseção.",
+        "usar sempre |f(a)−g(b)|."
+      ],
+      "a": 0,
+      "sol": "A função superior pode trocar em cada interseção.",
+      "hyp": "Pode ignorar alterações de ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:multi-intersecoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-046",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f−g é positiva em [a,c] e negativa em [c,b], a área entre os gráficos é...",
+      "o": [
+        "∫_a^b(f−g)dx.",
+        "∫_a^c(f−g)dx+∫_c^b(g−f)dx.",
+        "∫_a^b(f+g)dx.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "Em cada subintervalo usa-se superior−inferior.",
+      "hyp": "Pode manter a mesma ordem após a troca.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:troca-superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-047",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A unidade de uma área calculada por ∫f(x)dx, quando x e f têm unidades de comprimento, é...",
+      "o": [
+        "unidade de comprimento.",
+        "sem unidade.",
+        "unidade de comprimento ao quadrado.",
+        "unidade por comprimento."
+      ],
+      "a": 2,
+      "sol": "Produto vertical×horizontal produz área.",
+      "hyp": "Pode esquecer análise dimensional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:unidades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-048",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma densidade linear ρ(x) em kg/m é integrada ao longo de metros, ∫ρ(x)dx tem unidade...",
+      "o": [
+        "kg/m.",
+        "m².",
+        "kg·m.",
+        "kg."
+      ],
+      "a": 3,
+      "sol": "kg/m × m = kg.",
+      "hyp": "Pode multiplicar unidades sem cancelar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:massa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-049",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma área obtida por integral deve ser reportada...",
+      "o": [
+        "não negativa; se a integral algébrica for negativa, é preciso tratar o sinal conforme o contexto.",
+        "com o sinal da integral sempre.",
+        "negativa quando o gráfico está abaixo do eixo.",
+        "sem unidades."
+      ],
+      "a": 0,
+      "sol": "Área geométrica é uma magnitude não negativa.",
+      "hyp": "Pode confundir integral orientada e área.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:reportar-area",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-AR-050",
+      "themeId": "12-int",
+      "subtopicId": "12-int-areas",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "O cálculo de áreas com integrais exige sobretudo...",
+      "o": [
+        "integrar qualquer diferença sem estudar sinais.",
+        "identificar limites, pontos de interseção/zeros e qual função fica acima em cada trecho.",
+        "usar apenas figuras aproximadas.",
+        "derivar até obter zero."
+      ],
+      "a": 1,
+      "sol": "A configuração geométrica precede o cálculo algébrico.",
+      "hyp": "Pode aplicar Barrow sem definir corretamente a região.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-areas:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

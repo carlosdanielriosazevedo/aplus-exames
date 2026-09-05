@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-trig",
+  "subtopicId": "11-trig-circulo",
+  "subtopic": "Círculo trigonométrico e redução",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha círculo unitário, sinais por quadrante, valores notáveis, ângulos de referência, reduções, paridade e leitura de coordenadas trigonométricas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11TRIG-CIR-001",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No círculo trigonométrico, o raio é...",
+      "o": [
+        "1.",
+        "π.",
+        "2.",
+        "variável."
+      ],
+      "a": 0,
+      "sol": "Por definição, o círculo trigonométrico é unitário.",
+      "hyp": "Pode confundir raio com diâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:raio-unitario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-002",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No círculo trigonométrico, cos θ corresponde...",
+      "o": [
+        "à ordenada.",
+        "à abcissa do ponto associado ao ângulo.",
+        "ao raio.",
+        "ao arco."
+      ],
+      "a": 1,
+      "sol": "O ponto associado tem coordenadas (cos θ,sin θ).",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:cos-abcissa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-003",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No círculo trigonométrico, sin θ corresponde...",
+      "o": [
+        "à abcissa.",
+        "ao raio.",
+        "à ordenada do ponto associado.",
+        "ao comprimento do arco."
+      ],
+      "a": 2,
+      "sol": "O ponto associado tem coordenadas (cos θ,sin θ).",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:sin-ordenada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-004",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O ponto associado a θ=0 é...",
+      "o": [
+        "(0,1).",
+        "(−1,0).",
+        "(0,−1).",
+        "(1,0)."
+      ],
+      "a": 3,
+      "sol": "No ângulo 0, o raio aponta para o eixo Ox positivo.",
+      "hyp": "Pode confundir com π/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:pontos-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-005",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O ponto associado a θ=π/2 é...",
+      "o": [
+        "(0,1).",
+        "(1,0).",
+        "(−1,0).",
+        "(0,−1)."
+      ],
+      "a": 0,
+      "sol": "Uma rotação de 90° leva ao topo do círculo.",
+      "hyp": "Pode confundir quadrantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:pontos-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-006",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ponto associado a θ=π é...",
+      "o": [
+        "(0,−1).",
+        "(−1,0).",
+        "(1,0).",
+        "(0,1)."
+      ],
+      "a": 1,
+      "sol": "π rad=180°, lado terminal no eixo Ox negativo.",
+      "hyp": "Pode confundir com 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:pontos-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-007",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ponto associado a θ=3π/2 é...",
+      "o": [
+        "(−1,0).",
+        "(0,1).",
+        "(0,−1).",
+        "(1,0)."
+      ],
+      "a": 2,
+      "sol": "3π/2=270°, direção do eixo Oy negativo.",
+      "hyp": "Pode confundir com π/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:pontos-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-008",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No 1.º quadrante, seno e cosseno são...",
+      "o": [
+        "ambos negativos.",
+        "seno positivo e cosseno negativo.",
+        "seno negativo e cosseno positivo.",
+        "ambos positivos."
+      ],
+      "a": 3,
+      "sol": "x>0 e y>0 no 1.º quadrante.",
+      "hyp": "Pode esquecer a interpretação coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:sinais-quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-009",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No 2.º quadrante...",
+      "o": [
+        "sin θ>0 e cos θ<0.",
+        "sin θ<0 e cos θ>0.",
+        "ambos positivos.",
+        "ambos negativos."
+      ],
+      "a": 0,
+      "sol": "No 2.º quadrante x<0 e y>0.",
+      "hyp": "Pode trocar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:sinais-quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-010",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No 3.º quadrante...",
+      "o": [
+        "sin θ>0 e cos θ<0.",
+        "sin θ<0 e cos θ<0.",
+        "sin θ<0 e cos θ>0.",
+        "ambos positivos."
+      ],
+      "a": 1,
+      "sol": "No 3.º quadrante x e y são negativos.",
+      "hyp": "Pode confundir com 4.º quadrante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:sinais-quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-011",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No 4.º quadrante...",
+      "o": [
+        "sin θ>0 e cos θ<0.",
+        "ambos negativos.",
+        "sin θ<0 e cos θ>0.",
+        "ambos positivos."
+      ],
+      "a": 2,
+      "sol": "No 4.º quadrante x>0 e y<0.",
+      "hyp": "Pode trocar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:sinais-quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-012",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale cos 0?",
+      "o": [
+        "0",
+        "−1",
+        "1/2",
+        "1"
+      ],
+      "a": 3,
+      "sol": "A abcissa de (1,0) é 1.",
+      "hyp": "Pode usar a ordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-013",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin 0?",
+      "o": [
+        "0",
+        "1",
+        "−1",
+        "1/2"
+      ],
+      "a": 0,
+      "sol": "A ordenada de (1,0) é 0.",
+      "hyp": "Pode confundir com cos 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-014",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin(π/2)?",
+      "o": [
+        "0",
+        "1",
+        "−1",
+        "√2/2"
+      ],
+      "a": 1,
+      "sol": "O ponto é (0,1).",
+      "hyp": "Pode usar o cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-015",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale cos π?",
+      "o": [
+        "0",
+        "1",
+        "−1",
+        "−1/2"
+      ],
+      "a": 2,
+      "sol": "O ponto é (−1,0).",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-016",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin(3π/2)?",
+      "o": [
+        "0",
+        "1",
+        "−√2/2",
+        "−1"
+      ],
+      "a": 3,
+      "sol": "O ponto é (0,−1).",
+      "hyp": "Pode confundir com π/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-017",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ângulo de referência de 5π/6 é...",
+      "o": [
+        "π/6.",
+        "π/3.",
+        "5π/6.",
+        "π/2."
+      ],
+      "a": 0,
+      "sol": "No 2.º quadrante, referência=π−5π/6=π/6.",
+      "hyp": "Pode usar o próprio ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:angulo-referencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-018",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ângulo de referência de 4π/3 é...",
+      "o": [
+        "2π/3.",
+        "π/3.",
+        "π/6.",
+        "4π/3."
+      ],
+      "a": 1,
+      "sol": "No 3.º quadrante, referência=4π/3−π=π/3.",
+      "hyp": "Pode subtrair de 2π.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:angulo-referencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-019",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ângulo de referência de 7π/4 é...",
+      "o": [
+        "3π/4.",
+        "π/2.",
+        "π/4.",
+        "7π/4."
+      ],
+      "a": 2,
+      "sol": "No 4.º quadrante, referência=2π−7π/4=π/4.",
+      "hyp": "Pode esquecer a distância ao eixo Ox.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:angulo-referencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-020",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Os ângulos θ e θ+2π têm...",
+      "o": [
+        "senos opostos sempre.",
+        "cossenos opostos sempre.",
+        "valores sem relação.",
+        "os mesmos seno e cosseno."
+      ],
+      "a": 3,
+      "sol": "Correspondem ao mesmo ponto do círculo trigonométrico.",
+      "hyp": "Pode esquecer periodicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:periodicidade-2pi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-021",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin(π/6)?",
+      "o": [
+        "1/2",
+        "√2/2",
+        "√3/2",
+        "1"
+      ],
+      "a": 0,
+      "sol": "É um valor notável.",
+      "hyp": "Pode confundir com seno de π/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-022",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale cos(π/3)?",
+      "o": [
+        "√2/2",
+        "1/2",
+        "√3/2",
+        "0"
+      ],
+      "a": 1,
+      "sol": "É um valor notável.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-023",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin(π/4)?",
+      "o": [
+        "1/2",
+        "√3/2",
+        "√2/2",
+        "1"
+      ],
+      "a": 2,
+      "sol": "No ângulo de 45°, seno e cosseno são iguais a √2/2.",
+      "hyp": "Pode confundir com 30° ou 60°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:valores-notaveis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-024",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale cos(5π/6)?",
+      "o": [
+        "√3/2",
+        "−1/2",
+        "1/2",
+        "−√3/2"
+      ],
+      "a": 3,
+      "sol": "Referência π/6; cosseno negativo no 2.º quadrante.",
+      "hyp": "Pode acertar o valor absoluto e errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reduzir-quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-025",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin(7π/6)?",
+      "o": [
+        "−1/2",
+        "1/2",
+        "−√3/2",
+        "√3/2"
+      ],
+      "a": 0,
+      "sol": "Referência π/6; seno negativo no 3.º quadrante.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reduzir-quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-026",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale cos(5π/4)?",
+      "o": [
+        "√2/2",
+        "−√2/2",
+        "−1/2",
+        "1/2"
+      ],
+      "a": 1,
+      "sol": "Referência π/4; cosseno negativo no 3.º quadrante.",
+      "hyp": "Pode usar sinal positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reduzir-quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-027",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quanto vale sin(11π/6)?",
+      "o": [
+        "1/2",
+        "−√3/2",
+        "−1/2",
+        "√3/2"
+      ],
+      "a": 2,
+      "sol": "Referência π/6; seno negativo no 4.º quadrante.",
+      "hyp": "Pode trocar com cos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reduzir-quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-028",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se cos θ=√3/2 e θ∈[0,2π[, então θ pode ser...",
+      "o": [
+        "π/3 ou 5π/3.",
+        "π/6 ou 5π/6.",
+        "π/3 ou 2π/3.",
+        "π/6 ou 11π/6."
+      ],
+      "a": 3,
+      "sol": "Cosseno positivo nos quadrantes I e IV, com referência π/6.",
+      "hyp": "Pode usar quadrantes do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:preimagens-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-029",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se sin θ=√2/2 e θ∈[0,2π[, então θ pode ser...",
+      "o": [
+        "π/4 ou 3π/4.",
+        "π/4 ou 7π/4.",
+        "3π/4 ou 5π/4.",
+        "π/2 apenas."
+      ],
+      "a": 0,
+      "sol": "Seno positivo nos quadrantes I e II, referência π/4.",
+      "hyp": "Pode usar quadrantes do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:preimagens-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-030",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se sin θ=−√3/2 e θ∈[0,2π[, então θ pode ser...",
+      "o": [
+        "2π/3 ou 4π/3.",
+        "4π/3 ou 5π/3.",
+        "π/3 ou 5π/3.",
+        "4π/3 apenas."
+      ],
+      "a": 1,
+      "sol": "Seno negativo nos quadrantes III e IV, referência π/3.",
+      "hyp": "Pode esquecer uma solução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:preimagens-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-031",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se cos θ=−1/2 em [0,2π[, então θ é...",
+      "o": [
+        "π/3 ou 5π/3.",
+        "2π/3 apenas.",
+        "2π/3 ou 4π/3.",
+        "π/3 ou 2π/3."
+      ],
+      "a": 2,
+      "sol": "Cosseno negativo nos quadrantes II e III, referência π/3.",
+      "hyp": "Pode usar os quadrantes errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:preimagens-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-032",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A igualdade sin(π−α)=sin α exprime uma simetria relativamente...",
+      "o": [
+        "ao eixo Ox.",
+        "à origem.",
+        "à reta y=x.",
+        "ao eixo Oy."
+      ],
+      "a": 3,
+      "sol": "Os pontos de ângulos α e π−α têm mesma ordenada e abcissas opostas.",
+      "hyp": "Pode confundir com a simetria do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:simetria-circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-033",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A igualdade cos(−α)=cos α mostra que o cosseno é...",
+      "o": [
+        "par.",
+        "ímpar.",
+        "periódico de π apenas.",
+        "sempre positivo."
+      ],
+      "a": 0,
+      "sol": "Função par satisfaz f(−x)=f(x).",
+      "hyp": "Pode confundir paridade de seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:paridade-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-034",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A igualdade sin(−α)=−sin α mostra que o seno é...",
+      "o": [
+        "par.",
+        "ímpar.",
+        "constante.",
+        "sempre negativo."
+      ],
+      "a": 1,
+      "sol": "Função ímpar satisfaz f(−x)=−f(x).",
+      "hyp": "Pode trocar a paridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:paridade-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-035",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se sin α=3/5 e α está no 2.º quadrante, qual é cos α?",
+      "o": [
+        "4/5",
+        "−3/5",
+        "−4/5",
+        "3/5"
+      ],
+      "a": 2,
+      "sol": "Pelo círculo unitário, cos²α=1−9/25=16/25 e no 2.º quadrante o cosseno é negativo.",
+      "hyp": "Pode escolher a raiz positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:coordenada-em-falta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-036",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se cos α=−5/13 e α está no 3.º quadrante, qual é sin α?",
+      "o": [
+        "12/13",
+        "−5/13",
+        "5/13",
+        "−12/13"
+      ],
+      "a": 3,
+      "sol": "sin²α=1−25/169=144/169 e seno é negativo no 3.º quadrante.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:coordenada-em-falta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-037",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é sin(13π/6)?",
+      "o": [
+        "1/2",
+        "−1/2",
+        "√3/2",
+        "0"
+      ],
+      "a": 0,
+      "sol": "13π/6=2π+π/6, logo tem o mesmo seno de π/6.",
+      "hyp": "Pode reduzir incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reducao-2pi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-038",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é cos(−7π/3)?",
+      "o": [
+        "−1/2",
+        "1/2",
+        "√3/2",
+        "−√3/2"
+      ],
+      "a": 1,
+      "sol": "−7π/3 é coterminal com −π/3 ou 5π/3; cos=1/2.",
+      "hyp": "Pode errar periodicidade ou paridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reducao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-039",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é sin(17π/4)?",
+      "o": [
+        "−√2/2",
+        "1/2",
+        "√2/2",
+        "−1/2"
+      ],
+      "a": 2,
+      "sol": "17π/4−4π=π/4; seno=√2/2.",
+      "hyp": "Pode subtrair apenas 2π e não reduzir totalmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reducao-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-040",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é cos(23π/6)?",
+      "o": [
+        "−√3/2",
+        "1/2",
+        "−1/2",
+        "√3/2"
+      ],
+      "a": 3,
+      "sol": "23π/6−12π/6=11π/6; cos=√3/2.",
+      "hyp": "Pode usar o seno do ângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:reducao-grande",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-041",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se P=(−3/5,4/5) pertence ao círculo trigonométrico, o ângulo associado está no...",
+      "o": [
+        "2.º quadrante.",
+        "1.º quadrante.",
+        "3.º quadrante.",
+        "4.º quadrante."
+      ],
+      "a": 0,
+      "sol": "x<0 e y>0.",
+      "hyp": "Pode trocar os quadrantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:ponto-para-quadrante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-042",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se P=(5/13,−12/13), então...",
+      "o": [
+        "sin θ=5/13 e cos θ=−12/13.",
+        "cos θ=5/13 e sin θ=−12/13.",
+        "ambos são positivos.",
+        "θ está no 2.º quadrante."
+      ],
+      "a": 1,
+      "sol": "As coordenadas são (cos θ,sin θ).",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:ponto-para-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-043",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto do círculo trigonométrico tem ordenada 1/2 e está no 2.º quadrante. A abcissa é...",
+      "o": [
+        "√3/2",
+        "−1/2",
+        "−√3/2",
+        "1/2"
+      ],
+      "a": 2,
+      "sol": "x²=1−1/4=3/4 e no 2.º quadrante x<0.",
+      "hyp": "Pode escolher a raiz positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:coordenada-circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-044",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um ponto do círculo trigonométrico tem abcissa −√2/2 e está abaixo de Ox. A ordenada é...",
+      "o": [
+        "√2/2",
+        "−1/2",
+        "1/2",
+        "−√2/2"
+      ],
+      "a": 3,
+      "sol": "No 3.º quadrante ambas as coordenadas são negativas e têm o mesmo módulo.",
+      "hyp": "Pode escolher o sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:coordenada-circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-045",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Os ângulos α e 2π−α, com α no 1.º quadrante, têm...",
+      "o": [
+        "o mesmo cosseno e senos opostos.",
+        "o mesmo seno e cossenos opostos.",
+        "seno e cosseno iguais.",
+        "ambos seno e cosseno opostos."
+      ],
+      "a": 0,
+      "sol": "São simétricos relativamente ao eixo Ox.",
+      "hyp": "Pode confundir o eixo de simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:simetria-quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-046",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Os ângulos α e π−α têm...",
+      "o": [
+        "o mesmo cosseno e senos opostos.",
+        "o mesmo seno e cossenos opostos.",
+        "ambos opostos.",
+        "os mesmos seno e cosseno."
+      ],
+      "a": 1,
+      "sol": "São simétricos relativamente ao eixo Oy.",
+      "hyp": "Pode trocar a relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:simetria-quadrantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-047",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Os ângulos α e α+π têm...",
+      "o": [
+        "o mesmo seno.",
+        "o mesmo cosseno.",
+        "senos e cossenos opostos.",
+        "apenas cossenos opostos."
+      ],
+      "a": 2,
+      "sol": "Pontos diametralmente opostos têm ambas as coordenadas opostas.",
+      "hyp": "Pode mudar apenas um sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:angulo-mais-pi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-048",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um ponto move-se num círculo unitário e está na posição angular θ=5π/3. Qual é a sua coordenada vertical?",
+      "o": [
+        "√3/2",
+        "−1/2",
+        "1/2",
+        "−√3/2"
+      ],
+      "a": 3,
+      "sol": "A coordenada vertical é sin(5π/3)=−√3/2.",
+      "hyp": "Pode usar o cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:modelacao-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-049",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num movimento circular unitário, a coordenada horizontal é −1/2 e o ponto está acima de Ox. Qual pode ser o ângulo em [0,2π[?",
+      "o": [
+        "2π/3",
+        "4π/3",
+        "π/3",
+        "5π/3"
+      ],
+      "a": 0,
+      "sol": "Cosseno −1/2 e seno positivo correspondem ao 2.º quadrante: 2π/3.",
+      "hyp": "Pode ignorar a informação vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:modelacao-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11TRIG-CIR-050",
+      "themeId": "11-trig",
+      "subtopicId": "11-trig-circulo",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um marcador num círculo unitário tem coordenadas (0,−1). Qual é uma amplitude positiva mínima associada?",
+      "o": [
+        "π/2",
+        "3π/2",
+        "π",
+        "2π"
+      ],
+      "a": 1,
+      "sol": "O ponto inferior do círculo corresponde a 270°=3π/2.",
+      "hyp": "Pode confundir com o ponto superior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-trig-circulo:modelacao-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

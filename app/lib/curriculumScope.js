@@ -1,4 +1,8 @@
 import {DIAGNOSTIC_BLUEPRINT,TAXONOMY,microcompetencyId} from "../data/content.js";
+import {
+  CURRICULUM_SUBTOPIC_BY_ID,LEGACY_MICROCOMPETENCY_SUBTOPIC,
+  curriculumSubtopicsForTheme,curriculumSubtopicId,curriculumSubtopicForItem
+} from "../data/curriculumVnext.js";
 
 const YEAR_LEVEL={
   "10.º":10,
@@ -34,8 +38,7 @@ export function isThemeInAcademicScope(theme,profile={}){
   }
 
   if(learnerLevel===99||contentLevel<learnerLevel)return true;
-  return taughtSubtopicIds(profile).some(id=>id.startsWith(`mc-${contentLevel}-`) &&
-    (theme.microcompetencies||[]).some(mc=>mc.id===id));
+  return normalizeTaughtSubtopics(profile).some(id=>CURRICULUM_SUBTOPIC_BY_ID.get(id)?.themeId===theme.id);
 }
 
 export function taughtSubtopicIds(profile={}){
@@ -54,22 +57,26 @@ export function currentYearThemes(profile={}){
 }
 
 export function currentYearSubtopicIds(profile={}){
-  return currentYearThemes(profile).flatMap(t=>(t.microcompetencies||[]).map(mc=>mc.id));
+  return currentYearThemes(profile).flatMap(t=>curriculumSubtopicsForTheme(t.id).map(row=>row.id));
 }
 
 export function normalizeTaughtSubtopics(profile={}){
   const valid=new Set(currentYearSubtopicIds(profile));
-  return taughtSubtopicIds(profile).filter(id=>valid.has(id));
+  return [...new Set(taughtSubtopicIds(profile).map(id=>{
+    if(CURRICULUM_SUBTOPIC_BY_ID.has(id))return id;
+    return LEGACY_MICROCOMPETENCY_SUBTOPIC[id]||null;
+  }).filter(id=>id&&valid.has(id)))];
 }
 
 export function isSubtopicInAcademicScope(theme,subtopicRef,profile={}){
   const learnerLevel=schoolYearLevel(profile);
   const contentLevel=themeYearLevel(theme);
   if(learnerLevel===null||contentLevel===null||contentLevel>learnerLevel)return false;
-  const id=String(subtopicRef||"").startsWith("mc-")
+  const legacyId=String(subtopicRef||"").startsWith("mc-")
     ?subtopicRef
     :microcompetencyId(theme?.id,subtopicRef);
-  if(!id||!(theme?.microcompetencies||[]).some(mc=>mc.id===id))return false;
+  const id=curriculumSubtopicId(theme?.id,subtopicRef)||curriculumSubtopicId(theme?.id,legacyId);
+  if(!id)return false;
   if(learnerLevel===99||contentLevel<learnerLevel)return true;
   return !!id&&normalizeTaughtSubtopics(profile).includes(id);
 }
@@ -78,11 +85,13 @@ export function isQuestionInAcademicScope(item,profile={},context=null){
   if(context==="training")return true;
   const theme=TAXONOMY.find(t=>t.id===item?.themeId);
   if(!theme||!isThemeInAcademicScope(theme,profile))return false;
-  return isSubtopicInAcademicScope(theme,item?.microcompetencyId||item?.focus,profile);
+  const subtopicId=curriculumSubtopicForItem(item);
+  if(!subtopicId)return false;
+  return isSubtopicInAcademicScope(theme,subtopicId,profile);
 }
 
 export function isEvidenceInAcademicScope(evidence,theme,profile={}){
-  return isSubtopicInAcademicScope(theme,evidence?.microcompetencyId||evidence?.focus,profile);
+  return isSubtopicInAcademicScope(theme,evidence?.subtopicId||evidence?.microcompetencyId||evidence?.focus,profile);
 }
 
 export function academicScopeThemes(profile={}){

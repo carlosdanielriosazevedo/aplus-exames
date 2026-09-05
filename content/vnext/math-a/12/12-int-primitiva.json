@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-int",
+  "subtopicId": "12-int-primitiva",
+  "subtopic": "Conceito de primitiva/antiderivada",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha conceito/família de primitivas, condições iniciais, potências, exp/log/trig e reconhecimento simples da regra da cadeia ao contrário. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12INT-PR-001",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função F é primitiva de f num intervalo se...",
+      "o": [
+        "F'=f nesse intervalo.",
+        "F=f'.",
+        "F=f.",
+        "F''=0."
+      ],
+      "a": 0,
+      "sol": "Por definição, derivar F devolve f.",
+      "hyp": "Pode inverter a relação entre função e primitiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-002",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se F é uma primitiva de f, então F+C, com C constante, é...",
+      "o": [
+        "uma função diferente sem relação.",
+        "também uma primitiva de f.",
+        "a derivada de f.",
+        "sempre zero."
+      ],
+      "a": 1,
+      "sol": "A derivada de uma constante é zero.",
+      "hyp": "Pode pensar que só existe uma primitiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-003",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Duas primitivas da mesma função num intervalo diferem por...",
+      "o": [
+        "um fator x.",
+        "uma derivada.",
+        "uma constante.",
+        "uma função arbitrária."
+      ],
+      "a": 2,
+      "sol": "Se F'=G', então (F−G)'=0 e F−G é constante.",
+      "hyp": "Pode achar que diferem por qualquer função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:unicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-004",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de f(x)=1 é...",
+      "o": [
+        "F(x)=1.",
+        "F(x)=x².",
+        "F(x)=0.",
+        "F(x)=x."
+      ],
+      "a": 3,
+      "sol": "A derivada de x é1.",
+      "hyp": "Pode escolher a própria função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:basica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-005",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de f(x)=x é...",
+      "o": [
+        "x²/2.",
+        "x².",
+        "2x.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "(x²/2)'=x.",
+      "hyp": "Pode esquecer dividir por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-006",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de x² é...",
+      "o": [
+        "2x.",
+        "x³/3.",
+        "x³.",
+        "3x²."
+      ],
+      "a": 1,
+      "sol": "A derivada de x³/3 éx².",
+      "hyp": "Pode manter o expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-007",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de x³ é...",
+      "o": [
+        "3x².",
+        "x⁴.",
+        "x⁴/4.",
+        "4x³."
+      ],
+      "a": 2,
+      "sol": "Aumenta-se o expoente e divide-se pelo novo expoente.",
+      "hyp": "Pode multiplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-008",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para n≠−1, uma primitiva de x^n é...",
+      "o": [
+        "n x^{n−1}.",
+        "x^{n−1}/(n−1).",
+        "x^{n+1}.",
+        "x^{n+1}/(n+1)."
+      ],
+      "a": 3,
+      "sol": "É a regra inversa da derivação de potências.",
+      "hyp": "Pode aplicar a regra da derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:formula-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-009",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de x^{-2} é...",
+      "o": [
+        "−x^{-1}.",
+        "2x^{-3}.",
+        "x^{-1}.",
+        "−2x^{-1}."
+      ],
+      "a": 0,
+      "sol": "x^{-1}/(−1)=−x^{-1}.",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:potencia-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-010",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de 1/x² é...",
+      "o": [
+        "ln x.",
+        "−1/x.",
+        "1/x.",
+        "−2/x³."
+      ],
+      "a": 1,
+      "sol": "1/x²=x^{-2}.",
+      "hyp": "Pode confundir com1/x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:reciproco-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-011",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma primitiva de 1/x, num intervalo onde x não muda de sinal, é...",
+      "o": [
+        "x ln x.",
+        "1/x².",
+        "ln|x|.",
+        "e^x."
+      ],
+      "a": 2,
+      "sol": "(ln|x|)'=1/x.",
+      "hyp": "Pode esquecer o valor absoluto fora de x>0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:ln",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-012",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de e^x é...",
+      "o": [
+        "xe^x.",
+        "ln x.",
+        "e^x/x.",
+        "e^x."
+      ],
+      "a": 3,
+      "sol": "A exponencial natural é a sua própria derivada.",
+      "hyp": "Pode alterar a função sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-013",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de cos x é...",
+      "o": [
+        "sin x.",
+        "−sin x.",
+        "cos x.",
+        "−cos x."
+      ],
+      "a": 0,
+      "sol": "(sinx)'=cosx.",
+      "hyp": "Pode trocar seno e cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-014",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma primitiva de sin x é...",
+      "o": [
+        "cos x.",
+        "−cos x.",
+        "−sin x.",
+        "tan x."
+      ],
+      "a": 1,
+      "sol": "(−cosx)'=sinx.",
+      "hyp": "Pode esquecer o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-015",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A notação ∫f(x)dx representa...",
+      "o": [
+        "apenas uma derivada.",
+        "um valor numérico sempre.",
+        "a família de primitivas de f.",
+        "uma soma finita."
+      ],
+      "a": 2,
+      "sol": "Sem limites de integração, é uma integral indefinida/família de primitivas.",
+      "hyp": "Pode confundir com integral definida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:notacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-016",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫2x dx é...",
+      "o": [
+        "2x²+C.",
+        "2+C.",
+        "x+C.",
+        "x²+C."
+      ],
+      "a": 3,
+      "sol": "Uma primitiva de2x éx².",
+      "hyp": "Pode esquecer integrar o coeficiente corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-017",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫(3x²)dx=",
+      "o": [
+        "x³+C.",
+        "3x³+C.",
+        "x²+C.",
+        "6x+C."
+      ],
+      "a": 0,
+      "sol": "3·x³/3=x³.",
+      "hyp": "Pode esquecer simplificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:coeficiente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-018",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A constante C numa integral indefinida existe porque...",
+      "o": [
+        "f é sempre constante.",
+        "todas as constantes têm derivada zero.",
+        "a primitiva é única.",
+        "C representa o domínio."
+      ],
+      "a": 1,
+      "sol": "Derivar F+C dá a mesma f.",
+      "hyp": "Pode pensar que C é um erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:constante-C",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-019",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se F'(x)=2x e F(0)=5, então F(x)=",
+      "o": [
+        "x².",
+        "2x+5.",
+        "x²+5.",
+        "x²−5."
+      ],
+      "a": 2,
+      "sol": "F=x²+C; F(0)=C=5.",
+      "hyp": "Pode esquecer usar a condição inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:condicao-inicial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-020",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se F'(x)=3x² e F(1)=4, então F(x)=",
+      "o": [
+        "x³+4.",
+        "3x³+1.",
+        "x³−3.",
+        "x³+3."
+      ],
+      "a": 3,
+      "sol": "F=x³+C e1+C=4.",
+      "hyp": "Pode somar a condição diretamente sem resolver C.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:condicao-inicial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-021",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫(x²+2x)dx=",
+      "o": [
+        "x³/3+x²+C.",
+        "x³+2x²+C.",
+        "2x+2+C.",
+        "x²/2+x²+C."
+      ],
+      "a": 0,
+      "sol": "Integra-se termo a termo.",
+      "hyp": "Pode esquecer dividir pelo novo expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-022",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫(4x³−2x)dx=",
+      "o": [
+        "4x⁴−2x²+C.",
+        "x⁴−x²+C.",
+        "x⁴−2x²+C.",
+        "12x²−2+C."
+      ],
+      "a": 1,
+      "sol": "4·x⁴/4=x⁴ e−2·x²/2=−x².",
+      "hyp": "Pode manter coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-023",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫(1+e^x)dx=",
+      "o": [
+        "1+e^x+C.",
+        "x+xe^x+C.",
+        "x+e^x+C.",
+        "e^x+C."
+      ],
+      "a": 2,
+      "sol": "Primitivas somam-se.",
+      "hyp": "Pode esquecer integrar a constante1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:soma-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-024",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "∫(cos x−sin x)dx=",
+      "o": [
+        "sin x−cos x+C.",
+        "−sin x+cos x+C.",
+        "cos x+sin x sem C.",
+        "sin x+cos x+C."
+      ],
+      "a": 3,
+      "sol": "∫cos=sin e∫(−sin)=cos.",
+      "hyp": "Pode errar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-025",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F(x)=x³−2x+7, então a função da qual F é primitiva é...",
+      "o": [
+        "3x²−2.",
+        "x²−2.",
+        "3x²+7.",
+        "x³−2x."
+      ],
+      "a": 0,
+      "sol": "Basta derivar F.",
+      "hyp": "verificacao",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-026",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "F(x)=ln x é primitiva de 1/x em...",
+      "o": [
+        "todo R.",
+        "]0,+∞[.",
+        "[0,+∞[.",
+        "R\\{0} com a mesma expressão sem módulo."
+      ],
+      "a": 1,
+      "sol": "lnx só está definida para x>0.",
+      "hyp": "dominio",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-027",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Em ]−∞,0[, uma primitiva de1/x pode escrever-se...",
+      "o": [
+        "ln x.",
+        "−ln(−x).",
+        "ln(−x).",
+        "1/x."
+      ],
+      "a": 2,
+      "sol": "ln(−x)=ln|x| e a sua derivada é1/x para x<0.",
+      "hyp": "Pode pensar que é necessário sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:dominio-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-028",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F e G são primitivas de f no mesmo intervalo e F(2)=G(2), então...",
+      "o": [
+        "F e G diferem por2.",
+        "F'≠G'.",
+        "nada se pode concluir.",
+        "F=G nesse intervalo."
+      ],
+      "a": 3,
+      "sol": "F−G é constante e vale0 em x=2.",
+      "hyp": "Pode esquecer a informação do ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:mesma-primitiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-029",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F e G são primitivas da mesma f e F(0)−G(0)=3, então...",
+      "o": [
+        "F(x)−G(x)=3 para todo x do intervalo.",
+        "a diferença varia com x.",
+        "F'=G'+3.",
+        "F=3G."
+      ],
+      "a": 0,
+      "sol": "A diferença é constante.",
+      "hyp": "Pode achar que a diferença só vale no ponto dado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:diferenca-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-030",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A operação de obter primitivas é, em certo sentido...",
+      "o": [
+        "igual à derivação.",
+        "inversa da derivação, até uma constante.",
+        "inversa da multiplicação.",
+        "sempre única."
+      ],
+      "a": 1,
+      "sol": "Derivar uma primitiva recupera a função original.",
+      "hyp": "Pode ignorar a constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-031",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se v'(t)=a(t), então uma forma de obter v(t) a partir de a(t) é...",
+      "o": [
+        "derivar a novamente.",
+        "multiplicar por t sempre.",
+        "procurar uma primitiva de a e usar uma condição inicial.",
+        "somar apenas v(0)."
+      ],
+      "a": 2,
+      "sol": "Velocidade é uma primitiva da aceleração.",
+      "hyp": "Pode confundir direções das taxas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:fisica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-032",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se a(t)=4 é constante e v(0)=3, então v(t)=",
+      "o": [
+        "4t.",
+        "3t+4.",
+        "t²+3.",
+        "4t+3."
+      ],
+      "a": 3,
+      "sol": "Uma primitiva de4 é4t+C; C=3.",
+      "hyp": "Pode usar a fórmula de posição diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:aceleracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-033",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se v(t)=2t e s(0)=5, então s(t)=",
+      "o": [
+        "t²+5.",
+        "2t²+5.",
+        "t².",
+        "2t+5."
+      ],
+      "a": 0,
+      "sol": "s'=v; primitiva de2t ét².",
+      "hyp": "Pode esquecer a condição inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-034",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F'(x)=1/x² e F(1)=0, então F(x)=",
+      "o": [
+        "−1/x.",
+        "1−1/x.",
+        "1/x−1.",
+        "ln x."
+      ],
+      "a": 1,
+      "sol": "F=−1/x+C; F(1)=−1+C=0 =>C=1.",
+      "hyp": "Pode errar o sinal da primitiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:condicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-035",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F'(x)=e^x e F(0)=2, então F(x)=",
+      "o": [
+        "e^x+2.",
+        "2e^x.",
+        "e^x+1.",
+        "e^x−1."
+      ],
+      "a": 2,
+      "sol": "F=e^x+C;1+C=2.",
+      "hyp": "Pode usar C=2 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:exp-condicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-036",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se F'(x)=cos x e F(0)=4, então F(x)=",
+      "o": [
+        "cos x+3.",
+        "sin x+3.",
+        "−sin x+4.",
+        "sin x+4."
+      ],
+      "a": 3,
+      "sol": "F=sinx+C e sin0=0.",
+      "hyp": "Pode usar cos como primitiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig-condicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-037",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de 2x/(x²+1) é...",
+      "o": [
+        "ln(x²+1).",
+        "1/(x²+1).",
+        "2ln x.",
+        "(x²+1)²."
+      ],
+      "a": 0,
+      "sol": "A derivada de ln(x²+1) é2x/(x²+1).",
+      "hyp": "Pode não reconhecer a composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:reconhecimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-038",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de e^{2x} é...",
+      "o": [
+        "2e^{2x}.",
+        "e^{2x}/2.",
+        "e^{2x}.",
+        "e^x."
+      ],
+      "a": 1,
+      "sol": "Derivar e^{2x}/2 dá e^{2x}.",
+      "hyp": "Pode esquecer compensar a derivada interna2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:exp-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-039",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de cos(3x) é...",
+      "o": [
+        "3sin(3x).",
+        "sin(3x).",
+        "sin(3x)/3.",
+        "−sin(3x)/3."
+      ],
+      "a": 2,
+      "sol": "Derivada de sin(3x)/3 é cos(3x).",
+      "hyp": "Pode esquecer dividir por3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-040",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de sin(2x) é...",
+      "o": [
+        "cos(2x)/2.",
+        "−2cos(2x).",
+        "−cos(2x).",
+        "−cos(2x)/2."
+      ],
+      "a": 3,
+      "sol": "Derivada de−cos(2x)/2 é sin(2x).",
+      "hyp": "Pode errar sinal ou fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-041",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de 1/(2x+1) é...",
+      "o": [
+        "(1/2)ln|2x+1|.",
+        "ln|2x+1|.",
+        "2ln|2x+1|.",
+        "1/(2x+1)²."
+      ],
+      "a": 0,
+      "sol": "Derivar (1/2)ln|2x+1| dá1/(2x+1).",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:log-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-042",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de (2x+1)^3 pode obter-se por reconhecimento como...",
+      "o": [
+        "(2x+1)^4/4.",
+        "(2x+1)^4/8.",
+        "3(2x+1)^2.",
+        "(2x+1)^4/2."
+      ],
+      "a": 1,
+      "sol": "Derivar (2x+1)^4/8 dá4·2/8=1 vezes o cubo.",
+      "hyp": "Pode compensar mal o fator interno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:potencia-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-043",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Reconhecer uma derivada composta permite encontrar primitivas do tipo...",
+      "o": [
+        "f'(x)+g'(x) apenas.",
+        "qualquer produto sem estrutura.",
+        "g'(x)·F'(g(x)) a partir de F(g(x)).",
+        "qualquer quociente automaticamente."
+      ],
+      "a": 2,
+      "sol": "É a regra da cadeia lida ao contrário.",
+      "hyp": "Pode pensar que toda primitiva de produto se separa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:cadeia-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-044",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de 3x² e^{x³} é...",
+      "o": [
+        "3e^{x³}.",
+        "x³e^{x³}.",
+        "e^x³.",
+        "e^{x³}."
+      ],
+      "a": 3,
+      "sol": "Derivar e^{x³} dá3x²e^{x³}.",
+      "hyp": "Pode esquecer o fator da cadeia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:exp-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-045",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de 2x cos(x²) é...",
+      "o": [
+        "sin(x²).",
+        "cos(x²).",
+        "2sin(x²).",
+        "−sin(x²)."
+      ],
+      "a": 0,
+      "sol": "Derivar sin(x²) dá2xcos(x²).",
+      "hyp": "Pode escolher a função exterior errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-046",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma primitiva de −2x sin(x²) é...",
+      "o": [
+        "−cos(x²).",
+        "cos(x²).",
+        "sin(x²).",
+        "2cos(x²)."
+      ],
+      "a": 1,
+      "sol": "Derivar cos(x²) dá−2xsin(x²).",
+      "hyp": "Pode esquecer o sinal da derivada do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:trig-composta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-047",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A função 1/(1+x²) tem primitivas, mas a sua forma pode não pertencer à tabela elementar trabalhada neste bloco. Isto significa que...",
+      "o": [
+        "não tem primitiva.",
+        "a primitiva é ln(1+x²).",
+        "pode exigir uma função especial/conhecimento adicional, não devemos inventar uma primitiva elementar do programa.",
+        "a primitiva é1/(1+x²)²."
+      ],
+      "a": 2,
+      "sol": "Existem primitivas, mas nem todas são cobertas pela tabela elementar em causa.",
+      "hyp": "Pode afirmar inexistência por não reconhecer a forma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:limites-programa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-048",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Verificar uma primitiva proposta faz-se...",
+      "o": [
+        "integrando f novamente.",
+        "avaliando apenas em x=0.",
+        "comparando domínios sem derivar.",
+        "derivando-a e comparando com f."
+      ],
+      "a": 3,
+      "sol": "A derivada é o teste direto.",
+      "hyp": "Pode confiar apenas na aparência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:verificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-049",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se a taxa de crescimento de uma quantidade é q'(t)=6t² e q(0)=10, então q(t)=",
+      "o": [
+        "2t³+10.",
+        "6t³+10.",
+        "3t²+10.",
+        "2t³."
+      ],
+      "a": 0,
+      "sol": "Uma primitiva de6t² é2t³.",
+      "hyp": "Pode esquecer o coeficiente1/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-PR-050",
+      "themeId": "12-int",
+      "subtopicId": "12-int-primitiva",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Ao determinar uma primitiva com condição inicial, o processo é...",
+      "o": [
+        "derivar a função duas vezes.",
+        "encontrar a família F+C e usar a condição para determinar C.",
+        "ignorar C.",
+        "resolver sempre uma equação quadrática."
+      ],
+      "a": 1,
+      "sol": "A condição seleciona um membro único da família de primitivas.",
+      "hyp": "Pode esquecer a constante de integração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-primitiva:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

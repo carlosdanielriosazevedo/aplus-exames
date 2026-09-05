@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cont",
+  "subtopicId": "11-cont-permutacoes",
+  "subtopic": "Permutações",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha permutações de objetos distintos, posições fixas, ordens relativas, adjacência, método do bloco, complemento e inclusão-exclusão simples. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CONT-PERM-001",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma permutação de n objetos distintos é...",
+      "o": [
+        "uma ordenação dos n objetos.",
+        "uma escolha de alguns objetos sem ordem.",
+        "uma escolha com repetição.",
+        "uma soma de fatoriais."
+      ],
+      "a": 0,
+      "sol": "Permutar significa ordenar todos os objetos distintos.",
+      "hyp": "Pode confundir permutação com combinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-002",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O número de permutações de n objetos distintos é...",
+      "o": [
+        "n².",
+        "n!.",
+        "2ⁿ.",
+        "n."
+      ],
+      "a": 1,
+      "sol": "Há n escolhas para a primeira posição, n−1 para a segunda, etc.",
+      "hyp": "Pode usar potência como se houvesse repetição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-003",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Quantas permutações existem de 3 objetos distintos?",
+      "o": [
+        "3.",
+        "9.",
+        "6.",
+        "8."
+      ],
+      "a": 2,
+      "sol": "3!=6.",
+      "hyp": "Pode usar 3².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:perm-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-004",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Quantas ordens diferentes há para 4 livros distintos numa prateleira?",
+      "o": [
+        "16.",
+        "8.",
+        "4.",
+        "24."
+      ],
+      "a": 3,
+      "sol": "4!=24.",
+      "hyp": "Pode usar 2⁴.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:livros-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-005",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Quantas maneiras de ordenar 5 pessoas numa fila?",
+      "o": [
+        "120.",
+        "25.",
+        "60.",
+        "20."
+      ],
+      "a": 0,
+      "sol": "5!=120.",
+      "hyp": "Pode esquecer alguns fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:fila-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-006",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantas ordens existem para 6 objetos distintos?",
+      "o": [
+        "360.",
+        "720.",
+        "120.",
+        "36."
+      ],
+      "a": 1,
+      "sol": "6!=720.",
+      "hyp": "Pode parar em 5!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:perm-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-007",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se duas pessoas A e B devem ficar nas duas primeiras posições, em qualquer ordem, numa fila de 5, quantas filas?",
+      "o": [
+        "24.",
+        "6.",
+        "12.",
+        "20."
+      ],
+      "a": 2,
+      "sol": "A e B podem trocar:2! maneiras; restantes 3 pessoas:3!=6. Total 12.",
+      "hyp": "Pode fixar uma ordem para A,B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:duas-primeiras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-008",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A deve ocupar a primeira posição numa fila de 6 pessoas distintas, quantas filas?",
+      "o": [
+        "720.",
+        "24.",
+        "6.",
+        "120."
+      ],
+      "a": 3,
+      "sol": "Com A fixo, permutam-se as outras 5:5!=120.",
+      "hyp": "Pode contar A novamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:primeiro-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-009",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A deve ocupar a última posição numa fila de 7, quantas ordens?",
+      "o": [
+        "720.",
+        "5040.",
+        "120.",
+        "42."
+      ],
+      "a": 0,
+      "sol": "Restam 6 pessoas para 6 lugares:6!=720.",
+      "hyp": "Pode usar 7!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:ultimo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-010",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B devem ficar juntos numa fila de 5 pessoas, quantas ordens?",
+      "o": [
+        "24.",
+        "48.",
+        "12.",
+        "60."
+      ],
+      "a": 1,
+      "sol": "Trata-se AB como bloco:4! posições dos 4 blocos ×2! ordens internas=48.",
+      "hyp": "Pode esquecer a troca dentro do bloco.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:juntos-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-011",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B não podem ficar juntos numa fila de 5 pessoas, quantas ordens?",
+      "o": [
+        "48.",
+        "120.",
+        "72.",
+        "24."
+      ],
+      "a": 2,
+      "sol": "Total 5!=120; juntos 48; não juntos 72.",
+      "hyp": "Pode contar apenas os casos juntos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:nao-juntos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-012",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 4 pessoas têm A antes de B?",
+      "o": [
+        "24.",
+        "6.",
+        "8.",
+        "12."
+      ],
+      "a": 3,
+      "sol": "Por simetria, em metade das 4!=24 ordens A vem antes de B.",
+      "hyp": "Pode achar que 'antes' fixa posições consecutivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:antes-de",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-013",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 6 pessoas têm A antes de B?",
+      "o": [
+        "360.",
+        "720.",
+        "120.",
+        "240."
+      ],
+      "a": 0,
+      "sol": "Metade de 6!=720 é 360.",
+      "hyp": "Pode dividir por mais fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:antes-de",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-014",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações das letras ABCD começam por A?",
+      "o": [
+        "24.",
+        "6.",
+        "4.",
+        "8."
+      ],
+      "a": 1,
+      "sol": "Fixando A, restam 3!=6.",
+      "hyp": "Pode usar 4!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:prefixo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-015",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de ABCDE terminam em E?",
+      "o": [
+        "120.",
+        "20.",
+        "24.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "Fixando E, restam 4!=24.",
+      "hyp": "Pode contar E entre as posições livres.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:sufixo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-016",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de ABCDE começam por A e terminam em E?",
+      "o": [
+        "24.",
+        "12.",
+        "4.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "Restam B,C,D para 3 posições:3!=6.",
+      "hyp": "Pode multiplicar por posições já fixas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:dois-fixos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-017",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Numa permutação de objetos distintos...",
+      "o": [
+        "todos os objetos são usados uma vez.",
+        "alguns objetos ficam sempre de fora.",
+        "a ordem não importa.",
+        "a repetição é obrigatória."
+      ],
+      "a": 0,
+      "sol": "Permuta-se o conjunto inteiro de objetos.",
+      "hyp": "Pode confundir com arranjo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:todos-usados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-018",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se trocarmos duas posições numa permutação de objetos distintos...",
+      "o": [
+        "a permutação mantém-se sempre igual.",
+        "obtemos em geral uma permutação diferente.",
+        "a ordem deixa de importar.",
+        "o número de objetos muda."
+      ],
+      "a": 1,
+      "sol": "A identidade dos objetos por posição muda.",
+      "hyp": "Pode confundir ordenação com conjunto sem ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:troca-posicoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-019",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantas ordens lineares existem para 8 pessoas?",
+      "o": [
+        "5040.",
+        "64.",
+        "40320.",
+        "256."
+      ],
+      "a": 2,
+      "sol": "8!=40320.",
+      "hyp": "Pode usar 2⁸.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:fila-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-020",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quantas formas de ordenar 7 livros distintos?",
+      "o": [
+        "720.",
+        "49.",
+        "343.",
+        "5040."
+      ],
+      "a": 3,
+      "sol": "7!=5040.",
+      "hyp": "Pode confundir 7! com 6!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:livros-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-021",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa fila de 6, A e B devem ficar juntos e A à esquerda de B. Quantas ordens?",
+      "o": [
+        "120.",
+        "240.",
+        "48.",
+        "720."
+      ],
+      "a": 0,
+      "sol": "Bloco AB com ordem fixa + 4 pessoas =5 blocos:5!=120.",
+      "hyp": "Pode multiplicar por 2 mesmo com ordem interna fixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:bloco-ordem-fixa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-022",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa fila de 6, A,B,C devem ficar juntos, em qualquer ordem. Quantas filas?",
+      "o": [
+        "720.",
+        "144.",
+        "120.",
+        "36."
+      ],
+      "a": 1,
+      "sol": "Bloco ABC +3 pessoas =4 blocos:4!×3!=24×6=144.",
+      "hyp": "Pode esquecer permutar dentro do bloco.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:tres-juntos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-023",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa fila de 7, A,B,C devem ficar juntos e nessa ordem. Quantas filas?",
+      "o": [
+        "720.",
+        "24.",
+        "120.",
+        "5040."
+      ],
+      "a": 2,
+      "sol": "Bloco ABC com ordem fixa +4 pessoas =5 blocos:5!=120.",
+      "hyp": "Pode multiplicar por 3!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:tres-juntos-ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-024",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa fila de 5, A deve ficar antes de B e B antes de C. Quantas ordens?",
+      "o": [
+        "60.",
+        "120.",
+        "10.",
+        "20."
+      ],
+      "a": 3,
+      "sol": "Entre A,B,C, apenas 1 das 3!=6 ordens relativas serve. Logo 5!/6=20.",
+      "hyp": "Pode dividir apenas por 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:ordem-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-025",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa fila de 6, A,B,C devem aparecer nessa ordem relativa, não necessariamente consecutivos. Quantas filas?",
+      "o": [
+        "120.",
+        "720.",
+        "36.",
+        "240."
+      ],
+      "a": 0,
+      "sol": "6!/3!=720/6=120.",
+      "hyp": "Pode tratar como bloco e exigir consecutividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:ordem-relativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-026",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de 6 objetos têm A numa das extremidades?",
+      "o": [
+        "120.",
+        "240.",
+        "720.",
+        "48."
+      ],
+      "a": 1,
+      "sol": "2 escolhas para a extremidade de A e 5! para os restantes:2×120=240.",
+      "hyp": "Pode contar apenas uma extremidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:A-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-027",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de 7 pessoas têm A e B nas duas extremidades, em qualquer ordem?",
+      "o": [
+        "720.",
+        "120.",
+        "240.",
+        "5040."
+      ],
+      "a": 2,
+      "sol": "2! ordens nas extremidades ×5! no meio=240.",
+      "hyp": "Pode fixar qual deles fica em cada extremidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:duas-extremidades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-028",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 6 pessoas têm A na primeira ou na última posição?",
+      "o": [
+        "120.",
+        "720.",
+        "48.",
+        "240."
+      ],
+      "a": 3,
+      "sol": "Os casos são exclusivos:2×5!=240.",
+      "hyp": "Pode somar sem reconhecer simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:primeira-ou-ultima",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-029",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 5 pessoas têm A e B separados por exatamente uma pessoa?",
+      "o": [
+        "36.",
+        "24.",
+        "48.",
+        "12."
+      ],
+      "a": 0,
+      "sol": "Posições possíveis para o par ordenado de lugares: (1,3),(2,4),(3,5):3 escolhas; A,B trocam:2; restantes 3!:6. Total 36.",
+      "hyp": "Pode tratar 'uma pessoa entre' como adjacência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:separados-uma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-030",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de ABCDEF têm A e B não adjacentes?",
+      "o": [
+        "240.",
+        "480.",
+        "720.",
+        "360."
+      ],
+      "a": 1,
+      "sol": "Total 720; adjacentes:5!×2=240; diferença 480.",
+      "hyp": "Pode subtrair apenas 2 casos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:nao-adjacentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-031",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O método do bloco é útil quando...",
+      "o": [
+        "a ordem não importa.",
+        "há repetição ilimitada.",
+        "certos elementos devem ficar consecutivos.",
+        "todos os objetos são idênticos."
+      ],
+      "a": 2,
+      "sol": "Agrupar elementos consecutivos reduz temporariamente o número de objetos a ordenar.",
+      "hyp": "Pode usar blocos para qualquer restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:metodo-bloco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-032",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 8 pessoas têm A,B,C,D consecutivos, em qualquer ordem?",
+      "o": [
+        "40320.",
+        "576.",
+        "24.",
+        "2880."
+      ],
+      "a": 3,
+      "sol": "Bloco de 4 +4 pessoas=5 blocos:5!×4!=120×24=2880.",
+      "hyp": "Pode usar 8! diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:quatro-juntos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-033",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 8 pessoas têm A,B,C,D consecutivos e nessa ordem?",
+      "o": [
+        "120.",
+        "2880.",
+        "24.",
+        "40320."
+      ],
+      "a": 0,
+      "sol": "Bloco ABCD com ordem fixa +4 pessoas =5!:120.",
+      "hyp": "Pode multiplicar por 4!.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:quatro-juntos-ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-034",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 6 pessoas têm A imediatamente antes de B?",
+      "o": [
+        "240.",
+        "120.",
+        "60.",
+        "720."
+      ],
+      "a": 1,
+      "sol": "Bloco AB com ordem fixa +4 pessoas=5!=120.",
+      "hyp": "Pode multiplicar por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:imediatamente-antes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-035",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 6 pessoas têm A e B adjacentes, sem impor ordem?",
+      "o": [
+        "120.",
+        "360.",
+        "240.",
+        "60."
+      ],
+      "a": 2,
+      "sol": "Bloco com ordem interna 2:5!×2=240.",
+      "hyp": "Pode esquecer a troca interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:adjacentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-036",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 5 pessoas têm A não na primeira posição?",
+      "o": [
+        "120.",
+        "24.",
+        "100.",
+        "96."
+      ],
+      "a": 3,
+      "sol": "Total 120; A primeiro:4!=24; resto 96.",
+      "hyp": "Pode subtrair 1 em vez de 24.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:complemento-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-037",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de 7 pessoas têm A e B não nas extremidades?",
+      "o": [
+        "2400.",
+        "600.",
+        "720.",
+        "1200."
+      ],
+      "a": 0,
+      "sol": "A:5 posições internas; B:4 restantes; outras 5 pessoas:5!=120. Total 5×4×120=2400.",
+      "hyp": "Pode contar posições internas como combinação sem ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:restricao-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-038",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 7 pessoas têm A numa extremidade e B na outra?",
+      "o": [
+        "120.",
+        "240.",
+        "720.",
+        "5040."
+      ],
+      "a": 1,
+      "sol": "2 maneiras de distribuir A,B pelas extremidades ×5!=240.",
+      "hyp": "Pode esquecer trocar A e B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:extremos-A-B",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-039",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de 6 elementos têm A antes de B e C antes de D?",
+      "o": [
+        "360.",
+        "120.",
+        "180.",
+        "90."
+      ],
+      "a": 2,
+      "sol": "As duas condições independentes de ordem relativa cortam 6! por 2×2:720/4=180.",
+      "hyp": "Pode dividir por 4! ou tratar pares como blocos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:duas-ordens-relativas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-040",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 7 pessoas têm A,B,C nas três primeiras posições, em qualquer ordem?",
+      "o": [
+        "720.",
+        "5040.",
+        "36.",
+        "144."
+      ],
+      "a": 3,
+      "sol": "Primeiras três:3!; restantes quatro:4!; total 6×24=144.",
+      "hyp": "Pode usar 7! ou combinar sem ordenar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:tres-primeiras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-041",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 8 pessoas têm A,B nas duas primeiras posições e C,D nas duas últimas, em qualquer ordem dentro de cada par?",
+      "o": [
+        "96.",
+        "192.",
+        "48.",
+        "40320."
+      ],
+      "a": 0,
+      "sol": "2!×4!×2!=2×24×2=96.",
+      "hyp": "Pode multiplicar por 8! depois das restrições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:pares-extremos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-042",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de 6 pessoas têm A exatamente na 3.ª posição?",
+      "o": [
+        "720.",
+        "120.",
+        "24.",
+        "60."
+      ],
+      "a": 1,
+      "sol": "Fixando A, permutam-se as outras 5:5!=120.",
+      "hyp": "Pode usar 6! e dividir por 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:posicao-exata",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-043",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas ordens de 6 pessoas têm A antes de B mas não necessariamente adjacente?",
+      "o": [
+        "120.",
+        "240.",
+        "360.",
+        "180."
+      ],
+      "a": 2,
+      "sol": "Por simetria, metade de 6!=720.",
+      "hyp": "Pode usar o bloco AB, que imporia adjacência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:antes-nao-adjacente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-044",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de ABCDEF começam por vogal, considerando A e E como as únicas vogais?",
+      "o": [
+        "120.",
+        "480.",
+        "60.",
+        "240."
+      ],
+      "a": 3,
+      "sol": "2 escolhas para a primeira posição e 5! para o resto:240.",
+      "hyp": "Pode usar apenas uma vogal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:comeca-vogal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-045",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantas permutações de ABCDEF terminam em consoante, considerando B,C,D,F consoantes?",
+      "o": [
+        "480.",
+        "240.",
+        "120.",
+        "720."
+      ],
+      "a": 0,
+      "sol": "4 escolhas para a última posição ×5!=480.",
+      "hyp": "Pode escolher apenas uma consoante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:termina-consoante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-046",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se uma condição fixa k posições específicas numa permutação de n objetos distintos, e fixa também que objetos ocupam essas posições, restam...",
+      "o": [
+        "n! ordens.",
+        "(n−k)! ordens.",
+        "k! ordens.",
+        "n−k ordens."
+      ],
+      "a": 1,
+      "sol": "Só os n−k objetos restantes precisam ser permutados.",
+      "hyp": "Pode multiplicar novamente pelas posições fixas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:k-posicoes-fixas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-047",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Sete tarefas distintas vão ser executadas em sequência. Quantas ordens de execução existem?",
+      "o": [
+        "720.",
+        "49.",
+        "5040.",
+        "128."
+      ],
+      "a": 2,
+      "sol": "São as permutações das 7 tarefas:7!.",
+      "hyp": "Pode usar 2⁷.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:modelacao-tarefas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-048",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se duas tarefas críticas devem ficar consecutivas numa sequência de 7 tarefas, quantas ordens?",
+      "o": [
+        "720.",
+        "5040.",
+        "240.",
+        "1440."
+      ],
+      "a": 3,
+      "sol": "Bloco crítico +5 tarefas=6 blocos:6!×2=1440.",
+      "hyp": "Pode esquecer a ordem interna das duas tarefas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:modelacao-bloco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-049",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa sequência de 7 tarefas, duas tarefas críticas devem ficar consecutivas e numa ordem pré-definida. Quantas ordens são possíveis?",
+      "o": [
+        "720.",
+        "1440.",
+        "120.",
+        "5040."
+      ],
+      "a": 0,
+      "sol": "O bloco tem ordem fixa:6!=720.",
+      "hyp": "Pode multiplicar por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:modelacao-bloco-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-PERM-050",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-permutacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa fila de 6 pessoas, quantas ordens têm A e B juntos ou C e D juntos? Considere inclusão-exclusão.",
+      "o": [
+        "480.",
+        "384.",
+        "240.",
+        "432."
+      ],
+      "a": 1,
+      "sol": "AB juntos:5!×2=240; CD juntos:240; ambos:4!×2×2=96. União=240+240−96=384.",
+      "hyp": "Pode somar os dois grupos sem retirar a interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-permutacoes:inclusao-exclusao-blocos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

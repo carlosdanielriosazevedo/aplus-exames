@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-fun",
+  "subtopicId": "11-fun-operacoes",
+  "subtopic": "Operações entre funções",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha soma, diferença, produto, quociente, composição, domínios, inversas e relações entre operações funcionais. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11FUN-OP-001",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A soma de duas funções f e g é definida por...",
+      "o": [
+        "(f+g)(x)=f(x)+g(x).",
+        "(f+g)(x)=f(g(x)).",
+        "(f+g)(x)=f(x)g(x).",
+        "(f+g)(x)=f(x)/g(x)."
+      ],
+      "a": 0,
+      "sol": "Somam-se os valores das duas funções no mesmo x.",
+      "hyp": "Pode confundir soma com composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:definicao-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-002",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O produto de funções é...",
+      "o": [
+        "(fg)(x)=f(x)+g(x).",
+        "(fg)(x)=f(x)g(x).",
+        "(fg)(x)=f(g(x)).",
+        "(fg)(x)=f(x)/g(x)."
+      ],
+      "a": 1,
+      "sol": "Multiplicam-se os valores de f e g.",
+      "hyp": "Pode confundir com composição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:definicao-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-003",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O quociente f/g está definido nos pontos do domínio comum em que...",
+      "o": [
+        "f(x)=0.",
+        "g(x)=0.",
+        "g(x)≠0.",
+        "f(x)=g(x)."
+      ],
+      "a": 2,
+      "sol": "Não se pode dividir por zero.",
+      "hyp": "Pode excluir zeros do numerador em vez do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-004",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+1 e g(x)=2x, então (f+g)(x)=",
+      "o": [
+        "2x²+2x.",
+        "x+1.",
+        "3x.",
+        "3x+1."
+      ],
+      "a": 3,
+      "sol": "x+1+2x=3x+1.",
+      "hyp": "Pode multiplicar em vez de somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:soma-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-005",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+1 e g(x)=2x, então (fg)(x)=",
+      "o": [
+        "2x²+2x.",
+        "3x+1.",
+        "2x+1.",
+        "x²+2."
+      ],
+      "a": 0,
+      "sol": "(x+1)(2x)=2x²+2x.",
+      "hyp": "Pode somar as funções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:produto-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-006",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x² e g(x)=x−3, então (f−g)(x)=",
+      "o": [
+        "x²+x−3.",
+        "x²−x+3.",
+        "x²−3x.",
+        "x²−x−3."
+      ],
+      "a": 1,
+      "sol": "x²−(x−3)=x²−x+3.",
+      "hyp": "Pode não distribuir o sinal menos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:subtracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-007",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x²+1 e g(x)=x+1, então (f+g)(x)=",
+      "o": [
+        "x³+x²+x+1.",
+        "x²+x.",
+        "x²+x+2.",
+        "2x²+2."
+      ],
+      "a": 2,
+      "sol": "Somam-se termos semelhantes.",
+      "hyp": "Pode multiplicar as funções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:soma-polinomial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-008",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x²−1 e g(x)=x+1, então (f/g)(x) simplifica para...",
+      "o": [
+        "x−1 para todo x.",
+        "x+1.",
+        "x²−1.",
+        "x−1, com x≠−1."
+      ],
+      "a": 3,
+      "sol": "x²−1=(x−1)(x+1), mas o domínio original exclui x=−1.",
+      "hyp": "Pode esquecer a restrição do domínio após simplificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:quociente-simplificado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-009",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Mesmo que uma expressão de quociente simplifique, o domínio...",
+      "o": [
+        "mantém as exclusões da expressão original.",
+        "passa a ser sempre R.",
+        "depende apenas do numerador.",
+        "deixa de importar."
+      ],
+      "a": 0,
+      "sol": "Pontos onde o denominador original era zero continuam excluídos.",
+      "hyp": "Pode recuperar indevidamente pontos cancelados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-original",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-010",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O domínio de f+g é, em geral...",
+      "o": [
+        "D_f∪D_g.",
+        "D_f∩D_g.",
+        "D_f apenas.",
+        "D_g apenas."
+      ],
+      "a": 1,
+      "sol": "Ambas as funções têm de estar definidas.",
+      "hyp": "Pode usar união em vez de interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-011",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O domínio de fg é...",
+      "o": [
+        "D_f∪D_g.",
+        "R sempre.",
+        "D_f∩D_g.",
+        "D_f\\D_g."
+      ],
+      "a": 2,
+      "sol": "É necessário que ambas as funções estejam definidas.",
+      "hyp": "Pode achar que produto alarga o domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-012",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O domínio de f/g é...",
+      "o": [
+        "D_f∪D_g.",
+        "D_f excluindo zeros de f.",
+        "D_g apenas.",
+        "D_f∩D_g excluindo os zeros de g."
+      ],
+      "a": 3,
+      "sol": "Além do domínio comum, o denominador não pode ser zero.",
+      "hyp": "Pode excluir zeros do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-013",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=√x e g(x)=x−1, o domínio de f+g é...",
+      "o": [
+        "[0,+∞[.",
+        "R.",
+        "]−∞,0].",
+        "]1,+∞[."
+      ],
+      "a": 0,
+      "sol": "√x exige x≥0; g está definida em R.",
+      "hyp": "Pode usar o domínio mais restrito errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-014",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=1/x e g(x)=x², o domínio de f+g é...",
+      "o": [
+        "R.",
+        "R\\{0}.",
+        "[0,+∞[.",
+        "]0,+∞[."
+      ],
+      "a": 1,
+      "sol": "A única restrição vem de 1/x.",
+      "hyp": "Pode achar que x² exige x≥0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-015",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+2 e g(x)=x−2, então (f/g)(0)=",
+      "o": [
+        "1.",
+        "0.",
+        "−1.",
+        "não definido."
+      ],
+      "a": 2,
+      "sol": "(0+2)/(0−2)=−1.",
+      "hyp": "Pode confundir com f(0)/g(0) sem sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:avaliar-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-016",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x+2 e g(x)=x−2, então (f/g)(2)...",
+      "o": [
+        "vale 2.",
+        "vale 0.",
+        "vale 1.",
+        "não está definido."
+      ],
+      "a": 3,
+      "sol": "g(2)=0.",
+      "hyp": "Pode cancelar algo que não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:zero-denominador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-017",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A composição f∘g é definida por...",
+      "o": [
+        "(f∘g)(x)=f(g(x)).",
+        "f(x)+g(x).",
+        "f(x)g(x).",
+        "g(f(x)) sempre."
+      ],
+      "a": 0,
+      "sol": "Primeiro aplica-se g, depois f.",
+      "hyp": "Pode inverter a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:definicao-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-018",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x² e g(x)=x+1, então (f∘g)(x)=",
+      "o": [
+        "x²+1.",
+        "(x+1)².",
+        "x²+x.",
+        "2x+1."
+      ],
+      "a": 1,
+      "sol": "f(g(x))=(x+1)².",
+      "hyp": "Pode somar as expressões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-basica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-019",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x² e g(x)=x+1, então (g∘f)(x)=",
+      "o": [
+        "(x+1)².",
+        "2x².",
+        "x²+1.",
+        "x+1."
+      ],
+      "a": 2,
+      "sol": "g(f(x))=x²+1.",
+      "hyp": "Pode assumir que composição é comutativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:ordem-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-020",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Em geral, f∘g e g∘f...",
+      "o": [
+        "são sempre iguais.",
+        "só diferem por constante.",
+        "têm sempre o mesmo domínio.",
+        "não são iguais."
+      ],
+      "a": 3,
+      "sol": "A composição não é comutativa.",
+      "hyp": "Pode transferir a comutatividade da soma/produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:nao-comutativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-021",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=2x−1 e g(x)=x², então (f∘g)(x)=",
+      "o": [
+        "2x²−1.",
+        "(2x−1)².",
+        "x²−1.",
+        "2x−x²."
+      ],
+      "a": 0,
+      "sol": "f(x²)=2x²−1.",
+      "hyp": "Pode substituir f dentro de g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-linear-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-022",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=2x−1 e g(x)=x², então (g∘f)(x)=",
+      "o": [
+        "2x²−1.",
+        "(2x−1)².",
+        "4x²−1.",
+        "x²−2x+1."
+      ],
+      "a": 1,
+      "sol": "g(f(x))=(2x−1)².",
+      "hyp": "Pode não elevar toda a expressão ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-023",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=x−4, o domínio de f∘g é...",
+      "o": [
+        "[0,+∞[.",
+        "R.",
+        "[4,+∞[.",
+        "]−∞,4]."
+      ],
+      "a": 2,
+      "sol": "É preciso g(x)=x−4≥0.",
+      "hyp": "Pode usar apenas o domínio de f sem o traduzir para x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-024",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/x e g(x)=x−2, o domínio de f∘g é...",
+      "o": [
+        "R\\{0}.",
+        "R.",
+        "]2,+∞[.",
+        "R\\{2}."
+      ],
+      "a": 3,
+      "sol": "f(g(x))=1/(x−2), logo x≠2.",
+      "hyp": "Pode excluir 0 em vez de 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-025",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x²+1 e g(x)=1/x, o domínio de f∘g é...",
+      "o": [
+        "R\\{0}.",
+        "R.",
+        "[0,+∞[.",
+        "]0,+∞[."
+      ],
+      "a": 0,
+      "sol": "g exige x≠0; f aceita qualquer real.",
+      "hyp": "Pode pensar que x²+1 introduz restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-026",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/x e g(x)=x²+1, o domínio de f∘g é...",
+      "o": [
+        "R\\{0}.",
+        "R.",
+        "R\\{−1,1}.",
+        "[0,+∞[."
+      ],
+      "a": 1,
+      "sol": "g(x)=x²+1 nunca é zero, logo 1/g está definida para todo real.",
+      "hyp": "Pode excluir x=0 por olhar só para f.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-027",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Para x pertencer ao domínio de f∘g, é necessário que...",
+      "o": [
+        "x∈D_f apenas.",
+        "x∈D_f∪D_g.",
+        "x∈D_g e g(x)∈D_f.",
+        "f(x)∈D_g."
+      ],
+      "a": 2,
+      "sol": "Primeiro g tem de estar definida e a sua imagem deve poder entrar em f.",
+      "hyp": "Pode inverter a condição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:criterio-dominio-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-028",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=3x+2 e g(x)=x−2, então f∘g=",
+      "o": [
+        "3x+4.",
+        "x.",
+        "3x.",
+        "3x−4."
+      ],
+      "a": 3,
+      "sol": "3(x−2)+2=3x−4.",
+      "hyp": "Pode não distribuir o 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-029",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x+2 e g(x)=x−2, então f∘g=",
+      "o": [
+        "x.",
+        "x+4.",
+        "x−4.",
+        "x²−4."
+      ],
+      "a": 0,
+      "sol": "f(g(x))=(x−2)+2=x.",
+      "hyp": "Pode multiplicar as funções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-030",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se f∘g(x)=x e g∘f(x)=x nos domínios adequados, f e g são...",
+      "o": [
+        "funções iguais.",
+        "funções inversas uma da outra.",
+        "sempre lineares.",
+        "funções constantes."
+      ],
+      "a": 1,
+      "sol": "A composição em ambas as ordens dá a identidade.",
+      "hyp": "Pode confundir inversa com recíproca 1/f.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:inversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-031",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A inversa de f(x)=2x+3 é...",
+      "o": [
+        "1/(2x+3).",
+        "2x−3.",
+        "f⁻¹(x)=(x−3)/2.",
+        "(x+3)/2."
+      ],
+      "a": 2,
+      "sol": "Troca-se y e x e resolve-se y=2x+3 para x.",
+      "hyp": "Pode confundir função inversa com recíproca.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:inversa-afim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-032",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A notação f⁻¹(x) significa...",
+      "o": [
+        "sempre 1/f(x).",
+        "derivada de f.",
+        "oposto de f.",
+        "função inversa, não 1/f(x)."
+      ],
+      "a": 3,
+      "sol": "O expoente −1 na função tem significado de inversa sob composição.",
+      "hyp": "Pode interpretar como potência recíproca.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:notacao-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-033",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x−5, então f⁻¹(x)=",
+      "o": [
+        "x+5.",
+        "5−x.",
+        "1/(x−5).",
+        "x−5."
+      ],
+      "a": 0,
+      "sol": "A operação inversa soma 5.",
+      "hyp": "Pode confundir inversa com oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:inversa-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-034",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=3x, então f⁻¹(x)=",
+      "o": [
+        "3/x.",
+        "x/3.",
+        "−3x.",
+        "3x."
+      ],
+      "a": 1,
+      "sol": "A operação inversa divide por 3.",
+      "hyp": "Pode usar recíproco da expressão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:inversa-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-035",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para uma função ter inversa global no seu domínio, deve ser...",
+      "o": [
+        "constante.",
+        "par.",
+        "injetiva.",
+        "periódica."
+      ],
+      "a": 2,
+      "sol": "Cada valor de saída deve corresponder a no máximo uma entrada.",
+      "hyp": "Pode achar que qualquer função tem inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:injetividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-036",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=x² em R tem inversa global?",
+      "o": [
+        "Sim, √x em R.",
+        "Sim, 1/x².",
+        "Não, porque não é contínua.",
+        "Não, porque não é injetiva em R."
+      ],
+      "a": 3,
+      "sol": "f(1)=f(−1), logo não é injetiva.",
+      "hyp": "Pode ignorar as duas raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:x2-nao-injetiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-037",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Restringindo f(x)=x² a [0,+∞[, a inversa é...",
+      "o": [
+        "√x.",
+        "−√x.",
+        "x/2.",
+        "1/x²."
+      ],
+      "a": 0,
+      "sol": "No ramo não negativo, x² é injetiva e a operação inversa é a raiz quadrada principal.",
+      "hyp": "Pode incluir o ramo negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:inversa-x2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-038",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=x² com x≥0, então (f∘g)(x)=",
+      "o": [
+        "|x|.",
+        "x.",
+        "x².",
+        "√x."
+      ],
+      "a": 1,
+      "sol": "√(x²)=x porque x≥0.",
+      "hyp": "Pode escrever |x| sem usar a restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-inversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-039",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Sem restrição x≥0, √(x²) é...",
+      "o": [
+        "x.",
+        "−x.",
+        "|x|.",
+        "x²."
+      ],
+      "a": 2,
+      "sol": "A raiz quadrada principal é não negativa.",
+      "hyp": "Pode cancelar quadrado e raiz sem considerar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:raiz-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-040",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x²−1 e g(x)=x+1, então (f∘g)(x)=",
+      "o": [
+        "x².",
+        "x²+2x+2.",
+        "x²+x.",
+        "x²+2x."
+      ],
+      "a": 3,
+      "sol": "(x+1)²−1=x²+2x.",
+      "hyp": "Pode esquecer cancelar +1−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-expandir",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-041",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/(x−1) e g(x)=x+2, então (f∘g)(x)=",
+      "o": [
+        "1/(x+1).",
+        "1/(x−3).",
+        "1/(x+2)−1.",
+        "(x+2)/(x−1)."
+      ],
+      "a": 0,
+      "sol": "f(g(x))=1/[(x+2)−1]=1/(x+1).",
+      "hyp": "Pode deslocar no sentido errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-042",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=1/(x−1) e g(x)=x+2, então (f∘g)(x)=1/(x+1). Qual é o domínio desta composição?",
+      "o": [
+        "R\\{1}.",
+        "R\\{−1}.",
+        "R\\{−2}.",
+        "R."
+      ],
+      "a": 1,
+      "sol": "x+1≠0.",
+      "hyp": "Pode transportar a exclusão x=1 sem transformar pelo g.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-043",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√(x+1) e g(x)=x², o domínio de f∘g é...",
+      "o": [
+        "[−1,+∞[.",
+        "[0,+∞[.",
+        "R.",
+        "R\\{0}."
+      ],
+      "a": 2,
+      "sol": "x²+1≥0 para todo x.",
+      "hyp": "Pode usar o domínio de f sem considerar g(x).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-044",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=√x e g(x)=1−x², o domínio de f∘g é...",
+      "o": [
+        "[0,+∞[.",
+        "R.",
+        "R\\{−1,1}.",
+        "[−1,1]."
+      ],
+      "a": 3,
+      "sol": "É preciso 1−x²≥0, ou seja |x|≤1.",
+      "hyp": "Pode exigir x≥0 em vez de g(x)≥0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:dominio-composicao-inequacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-045",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A soma e o produto de funções polinomiais são...",
+      "o": [
+        "sempre funções polinomiais.",
+        "sempre racionais não polinomiais.",
+        "sempre lineares.",
+        "sempre do mesmo grau."
+      ],
+      "a": 0,
+      "sol": "Polinómios são fechados para soma e produto.",
+      "hyp": "Pode achar que o produto deixa de ser polinomial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:fecho-polinomios",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-046",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O quociente de dois polinómios é, em geral...",
+      "o": [
+        "sempre um polinómio.",
+        "uma função racional.",
+        "uma função trigonométrica.",
+        "uma função constante."
+      ],
+      "a": 1,
+      "sol": "Quocientes de polinómios definem funções racionais quando o denominador não é zero.",
+      "hyp": "Pode assumir divisibilidade exata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:quociente-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-047",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x² e g(x)=x³, então (fg)(x)=",
+      "o": [
+        "x⁶.",
+        "2x⁵.",
+        "x⁵.",
+        "x³."
+      ],
+      "a": 2,
+      "sol": "x²·x³=x⁵.",
+      "hyp": "Pode multiplicar os expoentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:produto-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-048",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x² e g(x)=x³, então (f∘g)(x)=",
+      "o": [
+        "x⁵.",
+        "x⁹.",
+        "2x³.",
+        "x⁶."
+      ],
+      "a": 3,
+      "sol": "f(x³)=(x³)²=x⁶.",
+      "hyp": "Pode confundir composição com produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-potencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-049",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=x² e g(x)=x³, então (g∘f)(x)=",
+      "o": [
+        "x⁶.",
+        "x⁵.",
+        "x⁹.",
+        "x³."
+      ],
+      "a": 0,
+      "sol": "g(x²)=(x²)³=x⁶.",
+      "hyp": "Neste caso particular as composições coincidem, o que pode levar a generalizar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:composicao-coincide",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-OP-050",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-operacoes",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O facto de f∘g=g∘f num exemplo particular implica que a composição é comutativa em geral?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só para polinómios.",
+        "Só para funções de potência."
+      ],
+      "a": 1,
+      "sol": "Uma coincidência particular não altera a não comutatividade geral da composição.",
+      "hyp": "Pode generalizar a partir de um caso especial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-operacoes:nao-generalizar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

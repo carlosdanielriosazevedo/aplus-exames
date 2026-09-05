@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fin",
+  "subtopicId": "10-fin-bruto-liquido",
+  "subtopic": "Salário bruto/líquido, Segurança Social e retenção",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. As percentagens usadas nos exercícios são valores didáticos explicitamente fornecidos no enunciado e não pretendem representar tabelas fiscais reais ou atuais. Não ligado ao motor atual. Requer QA matemático e revisão pedagógica antes de elegibilidade.",
+  "questions": [
+    {
+      "id": "VN10FIN-BRL-001",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Qual é a diferença entre salário bruto e salário líquido?",
+      "o": [
+        "O bruto é o valor antes dos descontos; o líquido é o valor após os descontos.",
+        "O líquido é sempre maior do que o bruto.",
+        "O bruto é apenas o valor por hora.",
+        "Não existe diferença."
+      ],
+      "a": 0,
+      "sol": "O salário bruto corresponde ao valor antes das deduções; o líquido é o valor que resta depois das deduções consideradas.",
+      "hyp": "Pode inverter os conceitos de bruto e líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:definicao-bruto-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-002",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto é 1 200 € e existem descontos totais de 180 €. Qual é o salário líquido?",
+      "o": [
+        "1 080 €",
+        "1 020 €",
+        "1 180 €",
+        "1 380 €"
+      ],
+      "a": 1,
+      "sol": "1 200−180=1 020 €.",
+      "hyp": "Pode somar os descontos ao salário bruto em vez de os subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-desconto-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-003",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto é 1 500 € e os descontos representam 10% do bruto. Qual é o valor dos descontos?",
+      "o": [
+        "100 €",
+        "200 €",
+        "150 €",
+        "250 €"
+      ],
+      "a": 2,
+      "sol": "10% de 1 500 € é 150 €.",
+      "hyp": "Pode confundir percentagem com valor absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:desconto-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-004",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto é 1 500 € e os descontos totais são 150 €. Qual é o salário líquido?",
+      "o": [
+        "1 250 €",
+        "1 300 €",
+        "1 400 €",
+        "1 350 €"
+      ],
+      "a": 3,
+      "sol": "1 500−150=1 350 €.",
+      "hyp": "Pode subtrair incorretamente o valor dos descontos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-desconto-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-005",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, a contribuição para a Segurança Social é definida como 11% de um salário bruto de 1 000 €. Qual é essa contribuição?",
+      "o": [
+        "110 €",
+        "100 €",
+        "120 €",
+        "130 €"
+      ],
+      "a": 0,
+      "sol": "11% de 1 000 € é 110 €.",
+      "hyp": "Pode deslocar incorretamente a vírgula ao calcular 11%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:ss-percentual-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-006",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, a retenção na fonte é 8% de 1 250 €. Qual é o valor retido?",
+      "o": [
+        "80 €",
+        "100 €",
+        "90 €",
+        "110 €"
+      ],
+      "a": 1,
+      "sol": "8% de 1 250 € é 100 €.",
+      "hyp": "Pode aplicar a percentagem ao valor errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:retencao-percentual-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-007",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um trabalhador tem salário bruto de 1 400 €. Neste exercício, desconta 11% para Segurança Social e 6% de retenção. Qual é a percentagem total de descontos?",
+      "o": [
+        "15%",
+        "16%",
+        "17%",
+        "18%"
+      ],
+      "a": 2,
+      "sol": "11%+6%=17%.",
+      "hyp": "Pode somar percentagens de forma incorreta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:somar-taxas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-008",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto é 1 400 €. Neste exercício, os descontos são 11% de Segurança Social e 6% de retenção, ambos calculados sobre o bruto. Qual é o total dos descontos?",
+      "o": [
+        "224 €",
+        "252 €",
+        "266 €",
+        "238 €"
+      ],
+      "a": 3,
+      "sol": "17% de 1 400 € é 238 €.",
+      "hyp": "Pode aplicar uma taxa após a outra sobre bases diferentes quando o enunciado diz que ambas incidem sobre o bruto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:duas-taxas-mesma-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-009",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com 1 400 € brutos, 11% de Segurança Social e 6% de retenção sobre o bruto, qual é o salário líquido?",
+      "o": [
+        "1 162 €",
+        "1 122 €",
+        "1 182 €",
+        "1 238 €"
+      ],
+      "a": 0,
+      "sol": "Descontos=238 €. Líquido=1 400−238=1 162 €.",
+      "hyp": "Pode confundir o valor descontado com o valor líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-duas-taxas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-010",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto de 1 800 € tem descontos totais de 270 €. Que percentagem do bruto representam esses descontos?",
+      "o": [
+        "10%",
+        "15%",
+        "12%",
+        "18%"
+      ],
+      "a": 1,
+      "sol": "270/1 800=0,15=15%.",
+      "hyp": "Pode dividir o salário pelo desconto em vez do desconto pelo salário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:percentagem-a-partir-valores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-011",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um salário líquido é 1 275 € após descontos de 225 €. Qual era o salário bruto?",
+      "o": [
+        "1 400 €",
+        "1 450 €",
+        "1 500 €",
+        "1 550 €"
+      ],
+      "a": 2,
+      "sol": "Bruto=líquido+descontos=1 275+225=1 500 €.",
+      "hyp": "Pode subtrair os descontos ao líquido em vez de os somar para recuperar o bruto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-012",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto de 1 600 € sofre descontos totais de 20%. Qual é o salário líquido?",
+      "o": [
+        "1 120 €",
+        "1 240 €",
+        "1 320 €",
+        "1 280 €"
+      ],
+      "a": 3,
+      "sol": "20% de 1 600=320 €; líquido=1 280 €.",
+      "hyp": "Pode tomar 20% como valor a receber em vez de valor a descontar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-013",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se o salário bruto se mantiver e a percentagem total de descontos aumentar, o que acontece ao salário líquido?",
+      "o": [
+        "Diminui.",
+        "Aumenta.",
+        "Mantém-se sempre.",
+        "Passa a ser igual ao bruto."
+      ],
+      "a": 0,
+      "sol": "Com o bruto fixo, mais descontos deixam um valor líquido menor.",
+      "hyp": "Pode pensar que percentagens maiores aumentam todos os valores envolvidos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:relacao-descontos-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-014",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação é necessariamente verdadeira num modelo em que apenas se subtraem descontos não negativos ao salário bruto?",
+      "o": [
+        "O salário líquido é maior do que o bruto.",
+        "O salário líquido é menor ou igual ao bruto.",
+        "O bruto é sempre zero.",
+        "Os descontos são sempre 50%."
+      ],
+      "a": 1,
+      "sol": "Subtrair valores não negativos não pode aumentar o salário.",
+      "hyp": "Pode ignorar a relação algébrica líquido=bruto−descontos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:ordem-bruto-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-015",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, o bruto é 2 000 €, a Segurança Social é 11% do bruto e a retenção é 7% do bruto. Qual é o líquido?",
+      "o": [
+        "1 540 €",
+        "1 600 €",
+        "1 640 €",
+        "1 680 €"
+      ],
+      "a": 2,
+      "sol": "Desconto total=18% de 2 000=360 €. Líquido=1 640 €.",
+      "hyp": "Pode somar incorretamente as taxas ou calcular o líquido como 18% do bruto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-duas-taxas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-016",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, o salário bruto é 1 300 € e apenas se considera um desconto de Segurança Social de 11%. Qual é o líquido?",
+      "o": [
+        "1 137 €",
+        "1 177 €",
+        "1 197 €",
+        "1 157 €"
+      ],
+      "a": 3,
+      "sol": "11% de 1 300=143 €. Líquido=1 157 €.",
+      "hyp": "Pode calcular 11% como 123 € ou subtrair a percentagem diretamente ao valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:ss-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-017",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um salário bruto é 1 750 €. Neste exercício, a retenção é 12% do bruto. Qual é o líquido, ignorando outros descontos?",
+      "o": [
+        "1 540 €",
+        "1 500 €",
+        "1 520 €",
+        "1 560 €"
+      ],
+      "a": 0,
+      "sol": "12% de 1 750=210 €. Líquido=1 540 €.",
+      "hyp": "Pode arredondar incorretamente a percentagem ou subtrair 12 €.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:retencao-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-018",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um trabalhador recebe 1 360 € líquidos depois de descontos iguais a 15% do bruto. Qual é o bruto?",
+      "o": [
+        "1 500 €",
+        "1 600 €",
+        "1 550 €",
+        "1 650 €"
+      ],
+      "a": 1,
+      "sol": "O líquido representa 85% do bruto. Bruto=1 360/0,85=1 600 €.",
+      "hyp": "Pode somar 15% ao líquido em vez de inverter a percentagem restante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-019",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um trabalhador recebe 1 530 € líquidos depois de descontos de 10% do bruto. Qual era o bruto?",
+      "o": [
+        "1 650 €",
+        "1 750 €",
+        "1 700 €",
+        "1 800 €"
+      ],
+      "a": 2,
+      "sol": "O líquido é 90% do bruto: 1 530/0,9=1 700 €.",
+      "hyp": "Pode calcular 10% do líquido em vez de usar a base original.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-020",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num exercício, Segurança Social e retenção são ambas percentagens do mesmo salário bruto. Para calcular o total de descontos, pode-se...",
+      "o": [
+        "multiplicar as duas percentagens entre si.",
+        "subtrair uma percentagem da outra.",
+        "ignorar uma delas.",
+        "somar diretamente as percentagens e aplicar a soma ao bruto."
+      ],
+      "a": 3,
+      "sol": "Quando ambas incidem sobre a mesma base, o desconto total é a soma das duas taxas aplicada ao bruto.",
+      "hyp": "Pode confundir adição de taxas sobre a mesma base com aplicação sucessiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:somar-taxas-mesma-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-021",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, um bruto de 1 850 € tem 11% de Segurança Social e 9% de retenção, ambas sobre o bruto. Qual é o líquido?",
+      "o": [
+        "1 480 €",
+        "1 430 €",
+        "1 460 €",
+        "1 500 €"
+      ],
+      "a": 0,
+      "sol": "Taxa total=20%. Descontos=370 €. Líquido=1 480 €.",
+      "hyp": "Pode calcular apenas uma das taxas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-duas-taxas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-022",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um bruto de 2 400 € tem descontos de 11% e 14%, ambos sobre o bruto. Qual é o total de descontos?",
+      "o": [
+        "540 €",
+        "600 €",
+        "660 €",
+        "720 €"
+      ],
+      "a": 1,
+      "sol": "Taxa total=25%. 25% de 2 400=600 €.",
+      "hyp": "Pode aplicar 14% sobre o valor já reduzido em 11% apesar de a base comum estar explícita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:duas-taxas-mesma-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-023",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com bruto de 2 400 € e descontos totais de 25%, qual é o líquido?",
+      "o": [
+        "1 700 €",
+        "1 750 €",
+        "1 800 €",
+        "1 850 €"
+      ],
+      "a": 2,
+      "sol": "75% de 2 400=1 800 €.",
+      "hyp": "Pode calcular 25% como valor líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-024",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um líquido de 1 800 € corresponde a 75% do salário bruto. Qual é o bruto?",
+      "o": [
+        "2 200 €",
+        "2 300 €",
+        "2 500 €",
+        "2 400 €"
+      ],
+      "a": 3,
+      "sol": "Bruto=1 800/0,75=2 400 €.",
+      "hyp": "Pode adicionar 25% ao líquido em vez de dividir pela fração restante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-025",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, um trabalhador tem bruto de 1 680 €, desconto A de 11% e desconto B de 4%, ambos sobre o bruto. Qual é o desconto total?",
+      "o": [
+        "252,00 €",
+        "235,20 €",
+        "268,80 €",
+        "285,60 €"
+      ],
+      "a": 0,
+      "sol": "15% de 1 680=252 €.",
+      "hyp": "Pode somar os valores percentuais incorretamente ou arredondar cedo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:duas-taxas-decimais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-026",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com 1 680 € brutos e 15% de descontos totais sobre o bruto, qual é o salário líquido?",
+      "o": [
+        "1 378 €",
+        "1 428 €",
+        "1 408 €",
+        "1 448 €"
+      ],
+      "a": 1,
+      "sol": "1 680−252=1 428 €.",
+      "hyp": "Pode subtrair 15 em vez de 15% ou confundir desconto com líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-027",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um trabalhador compara dois meses com o mesmo salário bruto. Num mês, a retenção foi 5%; no outro, 8%, mantendo-se os restantes descontos iguais. Em qual mês o líquido é maior?",
+      "o": [
+        "No mês com 8%.",
+        "É igual.",
+        "No mês com 5%.",
+        "Não é possível saber mesmo com o bruto igual."
+      ],
+      "a": 2,
+      "sol": "Com tudo o resto igual, uma retenção menor implica menor desconto total e maior líquido.",
+      "hyp": "Pode interpretar uma percentagem maior como maior rendimento líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:comparar-retencoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-028",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um salário bruto de 2 000 € gera líquido de 1 600 €. Qual é a taxa total de descontos?",
+      "o": [
+        "10%",
+        "15%",
+        "25%",
+        "20%"
+      ],
+      "a": 3,
+      "sol": "Descontos=400 €. 400/2 000=20%.",
+      "hyp": "Pode dividir o líquido pelo bruto e usar 80% como taxa de desconto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:taxa-a-partir-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-029",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um salário bruto de 1 500 € gera líquido de 1 260 €. Qual é a taxa total de descontos?",
+      "o": [
+        "16%",
+        "14%",
+        "15%",
+        "18%"
+      ],
+      "a": 0,
+      "sol": "Desconto=240 €. 240/1 500=0,16=16%.",
+      "hyp": "Pode calcular a percentagem sobre o líquido em vez do bruto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:taxa-a-partir-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-030",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num exercício, a Segurança Social é 11% de 1 900 € e a retenção é um valor fixo de 120 €. Qual é o total de descontos?",
+      "o": [
+        "309 €",
+        "329 €",
+        "319 €",
+        "339 €"
+      ],
+      "a": 1,
+      "sol": "11% de 1 900=209 €. Somando 120 €, total=329 €.",
+      "hyp": "Pode somar 11 ao valor fixo em vez de converter a percentagem em euros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:taxa-mais-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-031",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com um salário bruto de 1 900 € e descontos totais de 329 €, qual é o salário líquido?",
+      "o": [
+        "1 551 €",
+        "1 591 €",
+        "1 571 €",
+        "1 611 €"
+      ],
+      "a": 2,
+      "sol": "1 900−329=1 571 €.",
+      "hyp": "Pode subtrair apenas o desconto fixo ou apenas a percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:liquido-taxa-mais-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-032",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num exercício, o líquido é 1 500 €, a retenção é 100 € e a contribuição para a Segurança Social é 10% do bruto. Qual é o bruto?",
+      "o": [
+        "1 700 €",
+        "1 750 €",
+        "1 800 €",
+        "1 777,78 €"
+      ],
+      "a": 3,
+      "sol": "Se B é o bruto: B−0,10B−100=1 500, logo 0,90B=1 600 e B=1 777,78 € aproximadamente.",
+      "hyp": "Pode somar 10% ao líquido sem montar a relação algébrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto-taxa-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-033",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um salário bruto é 1 600 €. O líquido é 1 280 €. Se um dos descontos é 11% do bruto, que percentagem do bruto corresponde aos restantes descontos?",
+      "o": [
+        "9%",
+        "7%",
+        "8%",
+        "10%"
+      ],
+      "a": 0,
+      "sol": "Desconto total=320 €, ou 20%. Restantes=20%−11%=9%.",
+      "hyp": "Pode subtrair valores em euros a percentagens sem converter unidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:descobrir-taxa-restante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-034",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um recibo mostra bruto de 1 700 €, descontos totais de 340 € e líquido de 1 360 €. A igualdade está...",
+      "o": [
+        "incorreta, porque o líquido deveria ser 1 400 €.",
+        "correta, porque 1 700−340=1 360.",
+        "incorreta, porque descontos devem ser somados.",
+        "impossível de verificar."
+      ],
+      "a": 1,
+      "sol": "A relação bruto−descontos=líquido verifica-se exatamente.",
+      "hyp": "Pode não usar a identidade fundamental para validar um recibo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:auditar-recibo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-035",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um recibo apresenta bruto=1 900 €, descontos=360 € e líquido=1 560 €. O que se conclui?",
+      "o": [
+        "Está coerente.",
+        "Há uma diferença de 40 €: o líquido deveria ser 1 520 €.",
+        "Há uma diferença de 20 €: o líquido deveria ser 1 540 €.",
+        "Não se pode verificar sem saber as taxas."
+      ],
+      "a": 2,
+      "sol": "1 900−360=1 540 €, não 1 560 €. Há um erro de 20 €.",
+      "hyp": "Pode pensar que é sempre necessário conhecer as taxas para verificar a aritmética básica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:auditar-recibo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-036",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma empresa apresenta, num exercício simplificado, bruto de 1 800 €, desconto de 11% para Segurança Social e retenção de 180 €. Qual é o líquido?",
+      "o": [
+        "1 402 €",
+        "1 442 €",
+        "1 462 €",
+        "1 422 €"
+      ],
+      "a": 3,
+      "sol": "11% de 1 800=198 €. Total descontos=378 €. Líquido=1 422 €.",
+      "hyp": "Pode subtrair 180 e esquecer a percentagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:modelacao-taxa-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-037",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Um trabalhador tem bruto de 2 200 €. Neste exercício, há 11% de Segurança Social e 12% de retenção, ambas sobre o bruto. Qual é a diferença entre bruto e líquido?",
+      "o": [
+        "506 €",
+        "462 €",
+        "484 €",
+        "528 €"
+      ],
+      "a": 0,
+      "sol": "Taxa total=23%. 23% de 2 200=506 €.",
+      "hyp": "Pode calcular o líquido quando a pergunta pede a diferença bruto−líquido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:gap-bruto-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-038",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se a diferença entre bruto e líquido é 18% do bruto, que percentagem do bruto representa o líquido?",
+      "o": [
+        "72%",
+        "82%",
+        "78%",
+        "88%"
+      ],
+      "a": 1,
+      "sol": "100%−18%=82%.",
+      "hyp": "Pode somar em vez de complementar para 100%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:percentagem-restante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-039",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se o líquido representa 84% do bruto, qual é a taxa total de descontos?",
+      "o": [
+        "14%",
+        "15%",
+        "16%",
+        "18%"
+      ],
+      "a": 2,
+      "sol": "100%−84%=16%.",
+      "hyp": "Pode confundir a percentagem recebida com a percentagem descontada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:percentagem-complementar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-040",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num exercício, a retenção é calculada sobre o salário bruto. Um aluno calcula primeiro o líquido após Segurança Social e depois aplica a retenção sobre esse valor reduzido. Qual é o erro?",
+      "o": [
+        "Somou duas percentagens.",
+        "Usou demasiadas casas decimais.",
+        "O método está sempre correto.",
+        "Usou uma base de cálculo diferente da indicada."
+      ],
+      "a": 3,
+      "sol": "Se o enunciado diz que ambas as taxas incidem sobre o bruto, cada percentagem deve ser calculada sobre o bruto original.",
+      "hyp": "Pode aplicar descontos sucessivamente apesar de uma base comum explícita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:base-de-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-041",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um bruto de 2 500 € sofre dois descontos: 10% do bruto e depois um desconto adicional de 5% calculado sobre o valor que resta após o primeiro desconto. Qual é o líquido?",
+      "o": [
+        "2 137,50 €",
+        "2 125 €",
+        "2 150 €",
+        "2 175 €"
+      ],
+      "a": 0,
+      "sol": "Após 10% restam 2 250 €. Depois descontam-se 5% de 2 250=112,50 €. Líquido=2 137,50 €.",
+      "hyp": "Pode somar 10%+5% como se incidissem sobre a mesma base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:taxas-sucessivas-bases-diferentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-042",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um salário bruto de 2 500 € fica em 2 137,50 € líquidos após um desconto de 10% do bruto e depois 5% sobre o valor restante. Qual é a taxa efetiva total de desconto sobre o bruto?",
+      "o": [
+        "14,0%",
+        "14,5%",
+        "15,0%",
+        "15,5%"
+      ],
+      "a": 1,
+      "sol": "Desconto total=2 500−2 137,50=362,50 €. 362,50/2 500=14,5%.",
+      "hyp": "Pode somar mecanicamente 10%+5% e obter 15%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:taxa-efetiva-sucessiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-043",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um líquido de 1 764 € resulta de descontos totais equivalentes a 16% do bruto. Qual é o bruto?",
+      "o": [
+        "2 000 €",
+        "2 050 €",
+        "2 100 €",
+        "2 150 €"
+      ],
+      "a": 2,
+      "sol": "O líquido representa 84% do bruto. 1 764/0,84=2 100 €.",
+      "hyp": "Pode aumentar 16% ao líquido em vez de dividir por 84%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-044",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num exercício, um trabalhador recebe 1 620 € líquidos. O desconto total corresponde a 19% do bruto. Qual é o salário bruto?",
+      "o": [
+        "1 900 €",
+        "2 100 €",
+        "2 200 €",
+        "2 000 €"
+      ],
+      "a": 3,
+      "sol": "O líquido é 81% do bruto. 1 620/0,81=2 000 €.",
+      "hyp": "Pode usar 19% como fator restante em vez de 81%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:reconstruir-bruto-percentagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-045",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um bruto de 1 800 € tem retenção de 7% e um desconto fixo de 90 €. Qual é a taxa efetiva total de descontos sobre o bruto?",
+      "o": [
+        "12%",
+        "10%",
+        "11%",
+        "13%"
+      ],
+      "a": 0,
+      "sol": "7% de 1 800=126 €. Total descontos=216 €. 216/1 800=12%.",
+      "hyp": "Pode somar 7% e 90 como se tivessem a mesma unidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:taxa-efetiva-taxa-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-046",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um bruto de 2 000 € tem líquido de 1 560 €. Um dos descontos é 11% do bruto. Qual é o valor, em euros, dos restantes descontos?",
+      "o": [
+        "180 €",
+        "220 €",
+        "200 €",
+        "240 €"
+      ],
+      "a": 1,
+      "sol": "Desconto total=440 €. Segurança Social=220 €. Restantes=220 €.",
+      "hyp": "Pode confundir percentagem com valor ou não separar as componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:restante-em-euros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-047",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num exercício, o bruto é 2 100 €, a Segurança Social é 11% do bruto e a retenção é 8% do bruto. Existe ainda um desconto fixo de 35 €. Qual é o líquido?",
+      "o": [
+        "1 626 €",
+        "1 686 €",
+        "1 666 €",
+        "1 706 €"
+      ],
+      "a": 2,
+      "sol": "11%+8%=19% de 2 100=399 €. Total descontos=399+35=434 €. Líquido=1 666 €.",
+      "hyp": "Pode esquecer o desconto fixo ou aplicar uma das taxas sobre o líquido intermédio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:duas-taxas-mais-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-048",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Dois recibos têm o mesmo bruto de 2 000 €. No A, descontos totais são 360 €; no B, 420 €. Qual afirmação é correta?",
+      "o": [
+        "O líquido de B é 60 € maior do que o de A.",
+        "Os líquidos são iguais.",
+        "A diferença é 420 €.",
+        "O líquido de A é 60 € maior do que o de B."
+      ],
+      "a": 3,
+      "sol": "Com o mesmo bruto, a diferença dos líquidos é a diferença dos descontos: 420−360=60 €. A tem menos descontos e maior líquido.",
+      "hyp": "Pode perder o sinal da diferença ao comparar descontos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:comparar-recibos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-049",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um bruto aumenta de 1 800 € para 1 980 €, mantendo-se a taxa total de descontos em 20%. Quanto aumenta o líquido?",
+      "o": [
+        "144 €",
+        "126 €",
+        "162 €",
+        "180 €"
+      ],
+      "a": 0,
+      "sol": "O aumento bruto é 180 €. O líquido conserva 80% do bruto, logo aumenta 0,8×180=144 €.",
+      "hyp": "Pode assumir que o líquido aumenta exatamente o mesmo que o bruto apesar de a taxa se manter.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:variacao-bruto-com-taxa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-BRL-050",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-bruto-liquido",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num exercício comparativo, Oferta A tem bruto de 2 000 € e descontos totais de 18%; Oferta B tem bruto de 1 950 € e descontos totais de 14%. Qual oferece maior líquido?",
+      "o": [
+        "A, por 37 €.",
+        "B, por 37 €.",
+        "A, por 50 €.",
+        "B, por 50 €."
+      ],
+      "a": 1,
+      "sol": "A: 82% de 2 000=1 640 €. B: 86% de 1 950=1 677 €. B é superior em 37 €.",
+      "hyp": "Pode comparar apenas os brutos ou apenas as taxas de desconto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-bruto-liquido:comparar-ofertas-liquido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
