@@ -314,7 +314,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Na mesma urna, com reposição, P(VA)=...",
+      "q": "Uma urna tem 3 bolas vermelhas e 2 azuis. Retira-se uma bola, repõe-se e retira-se outra. Qual é P(vermelha depois azul)?",
       "o": [
         "9/25.",
         "2/5.",
@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Na mesma urna sem reposição, P(VA)=...",
+      "q": "Uma urna tem 3 bolas vermelhas e 2 azuis. Sem reposição, qual é P(vermelha depois azul)?",
       "o": [
         "2/5.",
         "3/10.",
@@ -773,7 +773,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Na mesma urna, P(uma de cada cor nas duas extrações)=...",
+      "q": "Uma urna tem 5 bolas brancas e 3 pretas. Sem reposição, qual é P(uma de cada cor em duas extrações)?",
       "o": [
         "15/28.",
         "15/56.",
@@ -1124,7 +1124,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Na mesma urna, P(AAA) é...",
+      "q": "Uma urna tem 4 bolas vermelhas e 6 azuis. Sem reposição, qual é P(três azuis em três extrações)?",
       "o": [
         "(6/10)^3.",
         "1/6.",
