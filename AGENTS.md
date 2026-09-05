@@ -8,6 +8,11 @@ Gamified, adaptive preparation app for Portuguese National Exams. Matemática A 
 Core principle:
 > O aluno não deve ter de saber o que precisa de estudar. A app deve perceber isso por ele e indicar qual é a melhor próxima ação.
 
+Student experience principles:
+> A A+ pensa muito e mostra pouco.
+
+> Cada ecrã do aluno deve ter uma ação visualmente dominante.
+
 Current version: 5.5.0.
 
 ## Non-negotiable product rules

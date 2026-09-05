@@ -21,15 +21,18 @@ assert.match(mobileCss,/@media\(max-width:760px\)[\s\S]*input,select,textarea\{f
 assert.match(mobileCss,/input\[type=range\]\{min-height:44px;height:44px\}/);
 assert.match(mobileCss,/\.betaFeedback>b\{font-size:15px\}/);
 assert.match(mobileCss,/\.dailyMissionModal\{[^}]*max-height:calc\(100dvh/);
-assert.match(mobileCss,/\.dailyMissionActions\{[^}]*position:sticky/);
+assert.match(css,/\.dailyMissionModal\{[^}]*overflow:hidden[^}]*display:flex[^}]*flex-direction:column/);
+assert.match(css,/\.dailyMissionContent\{[^}]*overflow-y:auto/);
+assert.match(mobileCss,/\.dailyMissionActions\{[^}]*flex:0 0 auto/);
 assert.match(page,/className="dailyMissionActions"/);
-assert.match(page,/<button type="button" className="leagueMini"/);
 assert.doesNotMatch(page,/<section className="leagueMini"[^>]*onClick/);
-const leagueButton=page.match(/<button type="button" className="leagueMini"[\s\S]*?<\/button>/)?.[0]||"";
-assert.match(leagueButton,/<span className="leagueMiniMain">/);
-assert.match(leagueButton,/<span className="leagueMiniTitle">/);
-assert.match(leagueButton,/<span className="leagueMiniMeta">/);
-assert.doesNotMatch(leagueButton,/<(?:div|h[1-6]|p|section|article)\b/,"league button descendants must remain phrasing content");
+assert.match(page,/<nav className="studentNav" aria-label="Navegação principal">/);
+const studentNav=page.match(/<nav className="studentNav"[\s\S]*?<\/nav>/)?.[0]||"";
+assert.match(studentNav,/<button type="button"/);
+assert.doesNotMatch(studentNav,/<(?:div|h[1-6]|p|section|article)\b/,"navigation button descendants must remain phrasing content");
+assert.match(mobileCss,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)[^}]*gap:2px/);
+assert.match(mobileCss,/\.studentNav button\{[^}]*min-width:0[^}]*min-height:56px[^}]*padding:5px 2px/);
+assert.match(mobileCss,/\.studentNav button>b\{[^}]*font-size:12px[^}]*white-space:nowrap/);
 
 const tooSmall=[...mobileCss.matchAll(/font-size:\s*([0-9.]+)px/g)]
   .map(match=>Number(match[1])).filter(size=>size<11);
