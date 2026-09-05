@@ -439,6 +439,9 @@ button{touch-action:manipulation}
   .dailyMissionStart,.dailyMissionLater{min-height:50px;font-size:16px}.dailyMissionFoot{font-size:11px}
 }
 
+.scopeCounter{display:flex;align-items:baseline;gap:8px;margin:18px 0;padding:14px 16px;border-radius:14px;background:#f2f5ff;color:#26335f}.scopeCounter b{font-size:24px}.scopeCounter span{font-size:14px}
+.curriculumPicker{display:grid;gap:12px;margin:16px 0 20px}.curriculumPicker details{border:1px solid #dfe4ef;border-radius:16px;background:#fff;overflow:hidden}.curriculumPicker summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;cursor:pointer;list-style:none}.curriculumPicker summary::-webkit-details-marker{display:none}.curriculumPicker summary div{display:grid;gap:3px}.curriculumPicker summary small{color:#697386;font-weight:500}.curriculumPicker details>div{display:grid;padding:0 16px 12px}.curriculumPicker label{display:flex;align-items:center;gap:11px;padding:12px 2px;border-top:1px solid #edf0f5;cursor:pointer}.curriculumPicker input{width:20px;height:20px;accent-color:#6755d9}.selectTheme{margin:0 16px 8px;padding:8px 10px;border:0;border-radius:10px;background:#f2f0ff;color:#5742c6;font-weight:700;cursor:pointer}
+
 @media(max-width:360px){
   .dark header{flex-direction:column}.headerRight{align-items:flex-start}
   .hello{display:grid;grid-template-columns:minmax(0,1fr) auto}.hello h1{font-size:29px}
