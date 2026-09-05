@@ -32,7 +32,8 @@
     "pre-review-qa:audit": "node --experimental-default-type=module scripts/pre-review-qa-audit.mjs",
     "hybrid-validation:audit": "node --experimental-default-type=module scripts/hybrid-validation-audit.mjs",
     "teacher-review:hybrid": "node --experimental-default-type=module scripts/generate-hybrid-teacher-review.mjs",
-    "vnext-content:audit": "node --experimental-default-type=module scripts/vnext-content-audit.mjs"
+    "vnext-content:audit": "node --experimental-default-type=module scripts/vnext-content-audit.mjs",
+    "vnext-context:audit": "node --experimental-default-type=module scripts/vnext-context-independence-audit.mjs"
   },
   "dependencies": {
     "next": "14.2.5",
