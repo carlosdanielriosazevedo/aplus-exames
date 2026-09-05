@@ -65,7 +65,8 @@ assert.equal(contentRevisionFingerprint(effectiveV2),validation.afterFingerprint
 // Engine usa o patch editorial no modo interno.
 const state={
   editorialOverrides:overrides,
-  betaMode:"internal"
+  betaMode:"internal",
+  profile:{schoolYear:"Já terminei o secundário",taughtSubtopicIds:[]}
 };
 const fromEngine=eligibleQuestions(state,item.themeId,"mission",item.focus)
   .find(q=>q.id===item.id);
@@ -87,7 +88,7 @@ assert.equal(effectiveReviewStatus(item,overrides),"reviewed");
 assert.equal(overrides[item.id].reviewedFingerprint,contentRevisionFingerprint(effectiveV2));
 
 const closedReviewed=eligibleQuestions({
-  editorialOverrides:overrides,betaMode:"closed_beta"
+  editorialOverrides:overrides,betaMode:"closed_beta",profile:state.profile
 },item.themeId,"mission",item.focus).find(q=>q.id===item.id);
 assert.ok(closedReviewed);
 assert.equal(closedReviewed.q,candidate.q);
