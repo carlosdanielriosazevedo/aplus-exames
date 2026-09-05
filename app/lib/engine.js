@@ -6,6 +6,7 @@ import {generateVariants,hasGenerator} from "./generators.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
 import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isEvidenceInAcademicScope,isSubtopicInAcademicScope,normalizeTaughtSubtopics} from "./curriculumScope.js";
 import {curriculumSubtopicForItem} from "../data/curriculumVnext.js";
+import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -16,12 +17,17 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
   return acc;
 },{});
 
+// Apenas este subconjunto vNext entra no runtime. Os restantes 5.550 itens
+// continuam no repositório editorial e nunca são incluídos no bundle do aluno.
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS];
+export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
+
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
 export const byYear=year=>TAXONOMY.filter(t=>t.year===year);
 
 export function getQuestions(themeId,context,focus=null,s=null){
   const overrides=s?.editorialOverrides||{};
-  let q=QUESTION_BANK
+  let q=RUNTIME_QUESTION_BANK
     .map(x=>effectiveEditorialItem(x,overrides))
     .filter(x=>x.themeId===themeId && x.contexts.includes(context));
   if(focus){
@@ -43,7 +49,7 @@ export function eligibleQuestions(s,themeId,context,focus=null){
 }
 
 export function eligibleCount(s,context){
-  return QUESTION_BANK.filter(q=>isEligibleForContext(q,context,s?.editorialOverrides||{},s?.betaMode||"internal")).length;
+  return RUNTIME_QUESTION_BANK.filter(q=>isEligibleForContext(q,context,s?.editorialOverrides||{},s?.betaMode||"internal")).length;
 }
 
 export function hasTrainingContent(themeId,focus=null,s=null){
@@ -53,13 +59,13 @@ export function hasTrainingContent(themeId,focus=null,s=null){
 }
 
 export function diagnosticAnchor(themeId,startDifficulty=2,s=null){
-  const candidates=(s?eligibleQuestions(s,themeId,"diagnostic"):QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts.includes("diagnostic"))).filter(q=>q.role==="anchor");
+  const candidates=(s?eligibleQuestions(s,themeId,"diagnostic"):RUNTIME_QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts.includes("diagnostic"))).filter(q=>q.role==="anchor");
   if(!candidates.length)return null;
   return [...candidates].sort((a,b)=>Math.abs(a.difficulty-startDifficulty)-Math.abs(b.difficulty-startDifficulty))[0];
 }
 
 export const diagnosticProbe=(themeId,s=null)=>
-  (s?eligibleQuestions(s,themeId,"diagnostic"):QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts.includes("diagnostic"))).find(q=>q.role==="probe");
+  (s?eligibleQuestions(s,themeId,"diagnostic"):RUNTIME_QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts.includes("diagnostic"))).find(q=>q.role==="probe");
 
 export function certaintyLabel(value,evidenceCount=1){
   if(!evidenceCount)return "Ainda sem evidência";
@@ -305,7 +311,7 @@ export function selectMissionQuestion(s,themeId,usedIds=[],usedSignatures=[]){
   const target=desiredDifficulty(s.scores[themeId],s.goal);
   const usedCogs=new Set(
     usedIds.map(id=>{
-      const src=QUESTION_BANK.find(q=>q.id===id);
+      const src=RUNTIME_QUESTION_BANK.find(q=>q.id===id);
       return effectiveEditorialItem(src,s?.editorialOverrides||{})?.cognitive;
     }).filter(Boolean)
   );
@@ -771,7 +777,7 @@ export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
 
   const usedCogs=new Set(
     usedIds.map(id=>{
-      const src=QUESTION_BANK.find(q=>q.id===id);
+      const src=RUNTIME_QUESTION_BANK.find(q=>q.id===id);
       return effectiveEditorialItem(src,s?.editorialOverrides||{})?.cognitive;
     }).filter(Boolean)
   );
@@ -1143,7 +1149,7 @@ export function likelyUnlocks(themeId,s=null){
 function evidenceMicrocompetencyId(e,themeId=null,s=null){
   if(e?.microcompetencyId)return e.microcompetencyId;
   const q=effectiveEditorialItem(
-    QUESTION_BANK.find(x=>x.id===e?.itemId),
+    RUNTIME_QUESTION_BANK.find(x=>x.id===e?.itemId),
     s?.editorialOverrides||{}
   );
   if(q?.microcompetencyId)return q.microcompetencyId;
@@ -1154,7 +1160,7 @@ function evidenceMicrocompetencyId(e,themeId=null,s=null){
 function evidenceFocus(e,themeId=null,s=null){
   const id=evidenceMicrocompetencyId(e,themeId,s);
   return microcompetencyLabel(id)||e?.focus||effectiveEditorialItem(
-    QUESTION_BANK.find(q=>q.id===e?.itemId),
+    RUNTIME_QUESTION_BANK.find(q=>q.id===e?.itemId),
     s?.editorialOverrides||{}
   )?.focus||null;
 }
@@ -1392,19 +1398,19 @@ function migrateEvidenceIds(scores={}){
         ...e,
         themeId:e.themeId||themeId,
         subtopicId:e.subtopicId||curriculumSubtopicForItem(
-          QUESTION_BANK.find(q=>q.id===e.itemId)||{
+          RUNTIME_QUESTION_BANK.find(q=>q.id===e.itemId)||{
             id:e.itemId,themeId:e.themeId||themeId,
             microcompetencyId:e.microcompetencyId||microcompetencyId(themeId,e.focus)
           }
         ),
         microcompetencyId:e.microcompetencyId
-          ||QUESTION_BANK.find(q=>q.id===e.itemId)?.microcompetencyId
+          ||RUNTIME_QUESTION_BANK.find(q=>q.id===e.itemId)?.microcompetencyId
           ||microcompetencyId(themeId,e.focus)
           ||null,
         focus:e.focus
           ||microcompetencyLabel(
             e.microcompetencyId
-            ||QUESTION_BANK.find(q=>q.id===e.itemId)?.microcompetencyId
+            ||RUNTIME_QUESTION_BANK.find(q=>q.id===e.itemId)?.microcompetencyId
             ||microcompetencyId(themeId,e.focus)
           )
           ||null
