@@ -24,7 +24,7 @@ export function loadSessionDraftStatus(mode="internal"){
   if(!raw)return {draft:null,error:false};
   try{
     const draft=JSON.parse(raw);
-    const durableDiagnostic=draft?.kind==="diagnostic"&&draft?.version===2
+    const durableDiagnostic=draft?.kind==="diagnostic"&&[2,3].includes(draft?.version)
       &&((draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending");
     if(!draft?.kind || !draft.savedAt || (!durableDiagnostic&&Date.now()-draft.savedAt>MAX_AGE_MS)){
       localStorage.removeItem(key);

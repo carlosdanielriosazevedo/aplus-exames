@@ -21,7 +21,7 @@ global.localStorage={
 };
 
 const analytics=()=>({version:1,firstSeenAt:null,firstSeenDay:null,lastSeenAt:null,activeDays:[],appOpenCount:0,milestones:{},events:[]});
-const stateFor=(id="ses-wal")=>({goal:17,profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear"},
+const stateFor=(id="ses-wal")=>({goal:17,profile:{schoolYear:"Já terminei o secundário",recentGrade:"",syllabus:"most",examTiming:"thisYear",taughtSubtopicIds:[]},
   betaMode:"internal",editorialOverrides:{},scores:emptyScores(),diagnosticAnswers:0,diagnosticDone:false,
   betaSessions:[{id,kind:"diagnostic",startedAt:NOW-1000,finishedAt:null,meta:{}}],betaEvents:[],productAnalytics:analytics()});
 const draftFor=(state,id=state.betaSessions[0].id)=>createDiagnosticDraft({

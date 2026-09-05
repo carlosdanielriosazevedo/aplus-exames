@@ -1,6 +1,6 @@
 
 import assert from "node:assert/strict";
-import {QUESTION_BANK} from "../app/data/content.js";
+import {QUESTION_BANK,TAXONOMY} from "../app/data/content.js";
 import {emptyScores,missionCandidateQueue,dailyMissionPlan} from "../app/lib/engine.js";
 
 const DAY=24*60*60*1000;
@@ -25,13 +25,15 @@ function baseState(){
   return {
     goal:17,scores:emptyScores(),missionHistory:[],freeTrainingSignals:[],
     learningHypotheses:[],editorialOverrides:{},betaMode:"internal",
-    profile:{schoolYear:"12.º",examTiming:"thisYear"}
+    profile:{schoolYear:"Já terminei o secundário",examTiming:"thisYear",taughtSubtopicIds:[]}
   };
 }
 
 function seedMeasured(s,count=6,domain=65){
   missionThemes.slice(0,count).forEach((id,i)=>{
-    s.scores[id]=syntheticScore(domain+i%3,55+i%10,3+i);
+    const microcompetencyId=TAXONOMY.find(t=>t.id===id)?.microcompetencies?.[0]?.id;
+    const score=syntheticScore(domain+i%3,55+i%10,3+i);
+    s.scores[id]={...score,evidence:score.evidence.map(e=>({...e,themeId:id,microcompetencyId}))};
   });
   return s;
 }
