@@ -1288,6 +1288,7 @@ function Ranking({s,setS,go}){
   const [nickname,setNickname]=useState(profile.nickname||"");
   const [region,setRegion]=useState(profile.region||"");
   const [school,setSchool]=useState(profile.school||"");
+  const [schoolYear,setSchoolYear]=useState(s.profile?.schoolYear||"");
   const [districtOptIn,setDistrictOptIn]=useState(!!profile.districtOptIn);
   const [schoolOptIn,setSchoolOptIn]=useState(!!profile.schoolOptIn);
   const availability=scopeAvailability(s,scope);
@@ -1305,10 +1306,13 @@ function Ranking({s,setS,go}){
   }[scope];
 
   function saveProfile(){
-    setS(prev=>updateCompetitionProfile(prev,{
+    setS(prev=>updateCompetitionProfile({
+      ...prev,
+      profile:{...prev.profile,schoolYear:schoolYear||prev.profile?.schoolYear||null}
+    },{
       nickname,
       region:region||null,
-      school:school||null,
+      school:school.trim()||null,
       districtOptIn,
       schoolOptIn
     }));
@@ -1376,10 +1380,11 @@ function Ranking({s,setS,go}){
 
     <section className="rankingProfile">
       <div><small>PERFIL PÚBLICO DO RANKING</small><h3>Nickname, nunca nota.</h3>
-        <p>Por defeito não mostramos nome real. Escola e distrito/região são opcionais e só entram nos rankings se o aluno aderir.</p></div>
+        <p>O ano já faz parte do teu perfil académico. Para entrares no ranking da escola, indica o ano, a escola e ativa a participação. O nome da escola serve apenas para agrupar resultados e nunca aparece publicamente.</p></div>
       <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
       <label>Distrito/Região<select value={region} onChange={e=>setRegion(e.target.value)}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
-      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Opcional"/></label>
+      <label>Ano para o ranking<select value={schoolYear} onChange={e=>setSchoolYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
+      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Nome da escola (opcional)"/></label>
       <label className="rankConsent"><input type="checkbox" checked={districtOptIn} onChange={e=>setDistrictOptIn(e.target.checked)}/><span>Participar no ranking do meu distrito/região.</span></label>
       <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
       <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
@@ -1788,6 +1793,9 @@ function AccountCloud({s,setS,go}){
   const [name,setName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
+  const [rankingSchool,setRankingSchool]=useState(s.competition?.profile?.school||"");
+  const [rankingSchoolOptIn,setRankingSchoolOptIn]=useState(!!s.competition?.profile?.schoolOptIn);
   const [session,setSession]=useState({loading:true,user:null,error:null});
   const [busy,setBusy]=useState(false);
   const [message,setMessage]=useState(null);
@@ -1855,6 +1863,17 @@ function AccountCloud({s,setS,go}){
     }catch(error){
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}
+  }
+
+  function saveRankingIdentity(){
+    setS(prev=>updateCompetitionProfile({
+      ...prev,
+      profile:{...prev.profile,schoolYear:rankingYear||prev.profile?.schoolYear||null}
+    },{
+      school:rankingSchool.trim()||null,
+      schoolOptIn:rankingSchoolOptIn
+    }));
+    setMessage({ok:true,text:"Dados do ranking guardados neste dispositivo. A escola só será usada se a participação estiver ativa."});
   }
 
   async function signout(){
@@ -2066,6 +2085,15 @@ function AccountCloud({s,setS,go}){
     {cfg.configured&&!session.loading&&user&&<>
       <div className="signedAccount">
         <div><span>Conta autenticada</span><b>{user.name||"Aluno A+"}</b><small>{user.email}</small></div><strong>● online</strong>
+      </div>
+
+      <div className="rankingIdentityCard">
+        <div><small>DADOS PARA O RANKING</small><b>Indica o teu ano e escola</b><span>O login continua disponível sem estes dados. Para aderires ao ranking da escola, precisamos do ano, da escola e da tua autorização explícita.</span></div>
+        <label>Ano<select value={rankingYear} onChange={e=>setRankingYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
+        <label>Escola<input value={rankingSchool} onChange={e=>setRankingSchool(e.target.value)} placeholder="Nome da escola"/></label>
+        <label className="rankConsent"><input type="checkbox" checked={rankingSchoolOptIn} onChange={e=>setRankingSchoolOptIn(e.target.checked)}/><span>Quero participar no ranking da minha escola.</span></label>
+        <button onClick={saveRankingIdentity}>Guardar dados do ranking</button>
+        <small className="privacyRankNote">A escola é usada apenas para agrupar o ranking e não é mostrada no teu perfil público. Podes retirar a autorização a qualquer momento.</small>
       </div>
 
       <div className="cloudProgressCard">
