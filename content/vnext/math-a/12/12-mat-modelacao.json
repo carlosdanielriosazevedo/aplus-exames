@@ -530,7 +530,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Na mesma rede, os vértices2 e3...",
+      "q": "Para a rede com matriz de adjacência A=[[0,1,1],[1,0,0],[1,0,0]], os vértices 2 e 3...",
       "o": [
         "estão diretamente ligados.",
         "têm grau2.",
