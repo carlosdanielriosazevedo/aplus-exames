@@ -476,7 +476,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Com as mesmas funções, g∘f é...",
+      "q": "Se f(x)=x² e g(x)=−x, então (g∘f)(x)=",
       "o": [
         "x↦x².",
         "x↦−x².",
@@ -908,7 +908,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
-      "q": "Com as mesmas funções, (g∘f)(x)=",
+      "q": "Se f(x)=2x+3 e g(x)=(x−3)/2, então (g∘f)(x)=",
       "o": [
         "(x+3)/2.",
         "x.",
