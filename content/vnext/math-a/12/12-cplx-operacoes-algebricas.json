@@ -206,7 +206,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "No mesmo produto, a parte imaginária é...",
+      "q": "No produto (a+bi)(c+di), a parte imaginária é...",
       "o": [
         "ac−bd.",
         "ad−bc.",
