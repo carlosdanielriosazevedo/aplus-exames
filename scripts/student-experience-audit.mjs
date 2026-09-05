@@ -32,6 +32,11 @@ assert.match(missionModalSource,/Matéria desta Missão:[\s\S]*?submatérias já
 assert.doesNotMatch(curriculumPickerSource,/Diagnóstico, Missões e Mini-exames|<b>Treino Livre<\/b>/);
 assert.match(page,/function FriendsBetaRibbon\(\{s\}\)[\s\S]*?useEffect\(\(\)=>setQueryActive\(friendsBetaRequested\(window\.location\.search\)\),\[\]\)/);
 assert.match(page,/function Welcome\(\{s,setS,go\}\)\{\s*const requested=isFriendsBeta\(s\)/);
+assert.match(page,/PUBLIC_ENTRY_SEGMENTS\.map/);
+assert.match(page,/segment==="parent"\?"parent":"student"/);
+assert.match(page,/segment==="parent"\?"parent":"subjectOnboard"/);
+const welcomeSource=page.slice(page.indexOf("function Welcome("),page.indexOf("\nfunction SubjectSelection("));
+assert.doesNotMatch(welcomeSource,/recent_student|observer/);
 assert.match(page,/friendsBetaInfo/);
 assert.match(page,/Informação do teste/);
 assert.match(page,/className="progressDetails"/);
