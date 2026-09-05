@@ -386,9 +386,10 @@ export function scopeAvailability(state,scope){
       :{available:false,reason:"Adiciona o distrito/região e ativa a participação opcional."};
   }
   if(scope==="school"){
-    return c.profile.school&&c.profile.schoolOptIn
+    const schoolYear=["10.º","11.º","12.º","Já terminei o secundário"].includes(state?.profile?.schoolYear);
+    return c.profile.school&&c.profile.schoolOptIn&&schoolYear
       ?{available:true}
-      :{available:false,reason:"Adiciona a escola e ativa a participação opcional."};
+      :{available:false,reason:"Indica o ano, adiciona a escola e ativa a participação opcional."};
   }
   return {available:false,reason:"Ranking indisponível."};
 }
