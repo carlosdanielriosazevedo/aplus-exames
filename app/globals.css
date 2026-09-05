@@ -232,6 +232,7 @@
 .dailyMissionModalTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.dailyMissionModalTop small{font-size:6.4px;color:#705bc8;font-weight:900;letter-spacing:.08em}.dailyMissionModalTop>span{font-size:6.5px;background:#fff2d8;color:#785b1c;border-radius:999px;padding:5px 8px}
 .dailyMissionTitle{display:flex;gap:10px;align-items:flex-start;margin-top:15px}.dailyMissionTitle>span{font-size:25px}.dailyMissionTitle small,.dailyMissionTitle h2,.dailyMissionTitle b{display:block}.dailyMissionTitle small{font-size:6.3px;color:#6d5ac1;font-weight:900}.dailyMissionTitle h2{font-size:19px;line-height:1.08;margin:3px 0}.dailyMissionTitle b{font-size:8px;color:#746d86}
 .dailyMissionReason{font-size:8px;line-height:1.55;color:#676275;margin:13px 0}
+.dailyMissionScope{margin:0 0 12px;padding:10px 11px;border:1px solid #e0d8ff;border-radius:11px;background:#f5f2ff;color:#625c73;font-size:7px;line-height:1.5}.dailyMissionScope b{color:#463b7d}
 .dailyMissionWhy{background:#f0ecff;border:1px solid #e0d8ff;border-radius:12px;padding:10px}.dailyMissionWhy>small{font-size:5.8px;color:#725fc5;font-weight:900}.dailyMissionWhy>div{display:flex;gap:7px;margin-top:7px}.dailyMissionWhy>div>span{font-size:7px;color:#5e9b6b}.dailyMissionWhy p,.dailyMissionWhy b,.dailyMissionWhy p small{display:block;margin:0}.dailyMissionWhy b{font-size:7px}.dailyMissionWhy p small{font-size:5.9px;line-height:1.4;color:#777183;margin-top:1px}
 .dailyMissionRewards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}.dailyMissionRewards>div{text-align:center;background:#fff;border:1px solid #e6e3ee;border-radius:10px;padding:8px 4px}.dailyMissionRewards span,.dailyMissionRewards b,.dailyMissionRewards small{display:block}.dailyMissionRewards span{font-size:13px}.dailyMissionRewards b{font-size:7.6px;margin-top:2px}.dailyMissionRewards small{font-size:5.4px;color:#92909c;margin-top:1px}
 .dailyMissionStart,.dailyMissionLater{width:100%;border:0;border-radius:11px;padding:11px;font-size:8px;font-weight:900}.dailyMissionStart{background:#352c70;color:#fff}.dailyMissionLater{margin-top:7px;background:transparent;color:#777083;border:1px solid #dedbe6}.dailyMissionFoot{display:block;text-align:center;font-size:5.6px;line-height:1.45;color:#9a96a4;margin-top:8px}
@@ -353,6 +354,7 @@ button{touch-action:manipulation}
 .dailyMissionModalTop>span{font-size:12px}
 .dailyMissionTitle b{font-size:13px;line-height:1.4}
 .dailyMissionReason{font-size:14px;line-height:1.55}
+.dailyMissionScope{font-size:13px;line-height:1.5}
 .dailyMissionWhy b{font-size:13px}.dailyMissionWhy p small{font-size:12px;line-height:1.45}
 .dailyMissionWhy>div>span{font-size:13px}
 .dailyMissionRewards b{font-size:13px}.dailyMissionRewards small{font-size:11px;line-height:1.3}
