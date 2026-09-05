@@ -1124,7 +1124,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Aplicação",
-      "q": "No mesmo grupo, entre quem comprou A, a percentagem que também comprou B é...",
+      "q": "De 100 clientes, 40 compraram A, 30 compraram B e 20 compraram ambos. Entre quem comprou A, a percentagem que também comprou B é...",
       "o": [
         "66,7%.",
         "50%.",
