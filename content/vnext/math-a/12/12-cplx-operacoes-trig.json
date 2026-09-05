@@ -44,7 +44,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "No mesmo produto, um argumento é...",
+      "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então um argumento de z1z2 é...",
       "o": [
         "α−β.",
         "α+β.",
@@ -1340,7 +1340,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Na mesma transformação, a direção de cada vetor roda...",
+      "q": "Se todos os pontos são multiplicados por 3cis(π/2), a direção de cada vetor roda...",
       "o": [
         "−π/2.",
         "+π/2.",
