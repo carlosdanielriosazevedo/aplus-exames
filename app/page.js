@@ -15,7 +15,7 @@ import {
   focusScore,focusRows,competenceMap,
   selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
   allLearningHypotheses,refreshLearningHypotheses,
-  recalibrateAllScores,migratePedagogicalIds
+  recalibrateAllScores,migratePedagogicalIds,scopedThemeScore
 } from "./lib/engine";
 import {
   allFocusRows,qualitySnapshot,
@@ -55,7 +55,9 @@ import {
   createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
   transactDiagnosticAnswer
 } from "./lib/diagnosticRecovery";
-import {academicScopeThemes,diagnosticBlueprintForProfile} from "./lib/curriculumScope";
+import {
+  academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
+} from "./lib/curriculumScope";
 import {
   claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
 } from "./lib/reliability";
@@ -133,7 +135,7 @@ const initial={
   pedagogicalIdVersion:1,
   pedagogicalMemoryVersion:2,
   parentInvites:[],
-  profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[]}
+  profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]}
 };
 
 export default function App(){
@@ -252,6 +254,8 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
+  if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
+  if(screen==="curriculumSettings")return <TaughtCurriculum s={s} setS={setS} go={go}/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
@@ -459,14 +463,14 @@ function StudentProfile({s,setS,go,editing=false}){
   function save(){
     if(editing){
       setS(prev=>migrateDailyMission({...prev,profile:p}));
-      go("progress");
+      go("curriculumSettings");
       return;
     }
     setS(prev=>recordMilestone({...prev,profile:p},"profile_completed",{
       schoolYear:p.schoolYear||null,
       examTiming:p.examTiming||null
     }));
-    go("goalOnboard");
+    go("curriculumOnboard");
   }
   return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":"ANTES DO DIAGNÓSTICO"}</p>
     <h1>{editing?"Atualiza o que estás a estudar.":"Ajuda a A+ a começar no sítio certo."}</h1>
@@ -475,7 +479,7 @@ function StudentProfile({s,setS,go,editing=false}){
       :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
 
     <h3>Em que ano estás?</h3>
-    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[]})}>{x}</button>)}</div>
+    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div>
 
     {p.schoolYear==="12.º"&&<>
       <h3>Que tema opcional está a tua turma a estudar?</h3>
@@ -497,15 +501,6 @@ function StudentProfile({s,setS,go,editing=false}){
       setP({...p,recentGrade:n});
     }}/><span>/20</span></div>
 
-    <h3>{p.schoolYear==="Já terminei o secundário"?"Quanto do programa sentes que tens consolidado?":"Quanto do programa já deste?"}</h3>
-    <div className="stackChoices">
-      {[
-        ["little",p.schoolYear==="Já terminei o secundário"?"Pouco consolidado":"Ainda pouco"],
-        ["most","Uma parte significativa"],
-        ["all",p.schoolYear==="Já terminei o secundário"?"Praticamente todo consolidado":"Praticamente todo o programa"]
-      ].map(([v,l])=><button key={v} className={p.syllabus===v?"sel":""} onClick={()=>setP({...p,syllabus:v})}>{l}</button>)}
-    </div>
-
     <h3>Quando pretendes fazer o exame?</h3>
     <div className="stackChoices">
       {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
@@ -514,6 +509,64 @@ function StudentProfile({s,setS,go,editing=false}){
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a A+ não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
     <button className="primary" onClick={save}>{editing?"Guardar percurso":"Continuar"}</button>
   </Shell>
+}
+
+function TaughtCurriculum({s,setS,go,onboarding=false}){
+  const themes=currentYearThemes(s.profile);
+  const valid=new Set(themes.flatMap(t=>(t.microcompetencies||[]).map(mc=>mc.id)));
+  const [selected,setSelected]=useState(()=>normalizeTaughtSubtopics(s.profile));
+  const selectedSet=new Set(selected);
+  const finished=s.profile?.schoolYear==="Já terminei o secundário";
+
+  function toggle(id){
+    if(selectedSet.has(id)){
+      const hasEvidence=Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>e.microcompetencyId===id));
+      if(hasEvidence&&!window.confirm("Já existem resultados nesta submatéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
+    }
+    setSelected(rows=>rows.includes(id)?rows.filter(x=>x!==id):[...rows,id]);
+  }
+  function toggleTheme(t){
+    const ids=(t.microcompetencies||[]).map(mc=>mc.id);
+    const all=ids.every(id=>selectedSet.has(id));
+    const hasEvidence=all&&Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>ids.includes(e.microcompetencyId)));
+    if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
+    setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
+  }
+  function save(){
+    const clean=selected.filter(id=>valid.has(id));
+    clearSessionDraft(s.betaMode||"internal");
+    setS(prev=>{
+      const at=Date.now();
+      const betaSessions=(prev.betaSessions||[]).map(session=>session.finishedAt||!["diagnostic","mission","mini_exam"].includes(session.kind)?session:{...session,finishedAt:at,durationSeconds:Math.max(1,Math.round((at-(session.startedAt||at))/1000)),meta:{...(session.meta||{}),recoveryStatus:"scope_changed",abandonedAt:at}});
+      return migrateDailyMission({...prev,betaSessions,profile:{...prev.profile,taughtSubtopicIds:clean}});
+    });
+    go(onboarding?"goalOnboard":"progress");
+  }
+
+  if(finished){
+    return <Shell><Logo/><p className="eyebrow">MATÉRIA DADA NA ESCOLA</p><h1>O programa completo fica disponível.</h1>
+      <p className="muted">Como já terminaste o secundário, a A+ pode usar matéria do 10.º, 11.º e 12.º anos.</p>
+      <button className="primary" onClick={save}>Continuar</button></Shell>;
+  }
+
+  return <Shell>{!onboarding&&<Back go={go} to="progress"/>}<Logo/>
+    <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p>
+    <h1>O que já deste no {s.profile?.schoolYear}?</h1>
+    <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
+    <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
+    <div className="curriculumPicker">{themes.map(t=>{
+      const ids=(t.microcompetencies||[]).map(mc=>mc.id);
+      const count=ids.filter(id=>selectedSet.has(id)).length;
+      return <details key={t.id} open={count>0}>
+        <summary><div><b>{t.short}</b><small>{count}/{ids.length} selecionadas</small></div><span>⌄</span></summary>
+        <button type="button" className="selectTheme" onClick={()=>toggleTheme(t)}>{count===ids.length?"Desmarcar esta matéria":"Selecionar toda esta matéria"}</button>
+        <div>{(t.microcompetencies||[]).map(mc=><label key={mc.id}><input type="checkbox" checked={selectedSet.has(mc.id)} onChange={()=>toggle(mc.id)}/><span>{mc.label}</span></label>)}</div>
+      </details>;
+    })}</div>
+    {selected.length===0&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>A app usará apenas matéria de anos anteriores. No 10.º ano, o Diagnóstico ficará indisponível até assinalares pelo menos uma submatéria.</span></div>}
+    <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
+    <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>
+  </Shell>;
 }
 
 function GoalScreen({s,setS,go,onboarding=false}){
@@ -587,7 +640,10 @@ function DiagIntro({s,setS,go}){
     </div>
     <div className="notice"><b>O objetivo do diagnóstico</b><span>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</span></div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
-    {gated&&<div className="notice warning"><b>Diagnóstico bloqueado pelo gate editorial</b><span>Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão.</span></div>}
+    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
+      ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
+      :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
+    {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button>}
     <button className="primary" disabled={gated} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
@@ -899,7 +955,7 @@ function Home({s,setS,go,reset}){
   return <main className="dark learnHome">
     {showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
-    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
+    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
     <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
@@ -926,7 +982,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"mission"));
   const [plan]=useState(()=>draft?.plan||missionPlanForToday(s,dailyMissionPlan(s)));
   const targetId=plan.themeId;
-  const [before]=useState(()=>draft?.before||({...s.scores[targetId]}));
+  const [before]=useState(()=>draft?.before||scopedThemeScore(s,targetId));
   const [beforeFocus]=useState(()=>draft?.beforeFocus??(plan.focus?focusScore(s,targetId,plan.focus):null));
   const [current,setCurrent]=useState(()=>draft?.current||({...selectQuestionForPlan(s,plan,[],[]),sessionRole:"target"}));
   const [sel,setSel]=useState(draft?.sel??null);
@@ -1170,7 +1226,7 @@ function MissionResult({s,setS,go}){
   const m=s.lastMission;
   if(!m)return <Shell><Back go={go}/><h1>Missão concluída.</h1></Shell>;
   const t=theme(m.themeId);
-  const now=s.scores[m.themeId];
+  const now=scopedThemeScore(s,m.themeId);
   const delta=(m.afterDomain??0)-(m.beforeDomain??0);
   const typeName=m.type==="confirmation"?"Confirmação concluída":m.type==="calibration"?"Calibração concluída":"Missão concluída";
 
@@ -1520,13 +1576,14 @@ function Progress({s,go}){
   const hypotheses=allLearningHypotheses(s,8).filter(h=>scopeIds.has(h.targetThemeId));
   const activeHypotheses=hypotheses.filter(h=>h.active);
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
-  const overview=measuredThemes(s).sort((a,b)=>(s.scores[b.id].domain??0)-(s.scores[a.id].domain??0)).slice(0,5);
+  const overview=measuredThemes(s).sort((a,b)=>(scopedThemeScore(s,b.id).domain??0)-(scopedThemeScore(s,a.id).domain??0)).slice(0,5);
   const index=prepIndex(s);
   return <Shell><StudentTop s={s} go={go}/><p className="eyebrow">PROGRESSO</p>
     <h1>Como estás a evoluir.</h1>
     <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p></div>
-    <div className="progressOverview">{overview.map(t=><div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(s.scores[t.id].domain??0)+"%"}}/></div><b>{s.scores[t.id].domain??"—"}</b></div>)}</div>
-    <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar percurso escolar</button>
+    <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
+    <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
+    <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
     <FriendsBetaDisclaimer s={s} compact/>
     <details className="progressDetails"><summary>Ver mapa completo →</summary>
     <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
@@ -1560,14 +1617,14 @@ function Progress({s,go}){
     </div>}
 
     {scopedThemes.filter(t=>t.year===year).map(t=>{
-      const v=s.scores[t.id],has=v.domain!==null;
+      const v=scopedThemeScore(s,t.id),has=v.domain!==null;
       return <div className={"prog "+(!has?"unmeasured":"")} key={t.id}>
         <div className="progHead"><b>{t.short}</b><small>{t.name}</small></div>
         {has?<>
           <span>Domínio estimado: {v.domain}/100</span><div className="bar"><i style={{width:v.domain+"%"}}/></div>
           <div className="certaintyRow"><span>Certeza da A+</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
           <div className="evidenceMeta">{new Set(v.evidence.map(e=>e.signature)).size} evidências independentes · {new Set(v.evidence.map(e=>e.cognitive)).size} tipos de raciocínio</div>
-          <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
+          <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).filter(f=>f.questionCount>0).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
         </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A A+ vai recolher evidência quando esta área se tornar relevante.</span></div>}
       </div>
     })}</details>
