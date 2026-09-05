@@ -492,3 +492,17 @@ As anomalias estruturais encontradas foram corrigidas. Relatório detalhado:
 `docs/content-vnext-structural-qa-2026-09-03.md`.
 
 **Isto não equivale a validação matemática/pedagógica final.** O banco permanece em protótipo e desligado do motor live.
+
+
+### Independência contextual dos itens
+
+Foi concluída uma passagem específica para garantir que as perguntas vNext podem ser selecionadas isoladamente pelo motor adaptativo.
+
+Foram removidas referências que dependiam de sequência, como "item anterior", "na mesma urna", "no mesmo contexto", "com as mesmas funções" e equivalentes, reescrevendo os itens para incluírem os dados necessários no próprio enunciado.
+
+Prevenção adicionada:
+- `scripts/vnext-context-independence-audit.mjs`
+- `npm run vnext-context:audit`
+- padrões equivalentes reforçados em `scripts/vnext-content-audit.mjs`
+
+O banco continua em `prototype`; esta passagem melhora autonomia/UX dos itens, mas não substitui a validação matemática e pedagógica.
