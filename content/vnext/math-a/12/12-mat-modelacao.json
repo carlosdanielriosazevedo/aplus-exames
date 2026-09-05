@@ -98,7 +98,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Na mesma Q, o total vendido do 1.º produto é...",
+      "q": "Se Q=[[10,20],[15,5]] representa quantidades de 2 produtos em 2 lojas, o total vendido do 1.º produto é...",
       "o": [
         "30.",
         "20.",
