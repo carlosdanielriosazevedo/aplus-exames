@@ -4,7 +4,7 @@ import {
 } from "../data/content.js";
 import {generateVariants,hasGenerator} from "./generators.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
-import {academicScopeThemes,isThemeInAcademicScope} from "./curriculumScope.js";
+import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isEvidenceInAcademicScope,isSubtopicInAcademicScope} from "./curriculumScope.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -38,7 +38,7 @@ export function getQuestions(themeId,context,focus=null,s=null){
 export function eligibleQuestions(s,themeId,context,focus=null){
   let q=getQuestions(themeId,context,focus,s);
   if(!s)return q;
-  return q.filter(item=>isEligibleForContext(item,context,s.editorialOverrides||{},s.betaMode||"internal"));
+  return q.filter(item=>isQuestionInAcademicScope(item,s.profile,context)&&isEligibleForContext(item,context,s.editorialOverrides||{},s.betaMode||"internal"));
 }
 
 export function eligibleCount(s,context){
@@ -202,6 +202,12 @@ export function recalibrateAllScores(scores={},now=Date.now()){
   },{});
 }
 
+export function scopedThemeScore(s,themeId,now=Date.now()){
+  const t=theme(themeId);
+  if(!t||!isThemeInAcademicScope(t,s?.profile))return summarizeEvidence([],now);
+  return summarizeEvidence((s?.scores?.[themeId]?.evidence||[]).filter(e=>isEvidenceInAcademicScope(e,t,s?.profile)),now);
+}
+
 export function evidenceHealth(score,now=Date.now()){
   return summarizeEvidence(score?.evidence||[],now).diagnostics;
 }
@@ -233,14 +239,14 @@ export function applyEvidence(score,item,correct,source="diagnostic",strength=1,
 }
 
 export function measuredThemes(s){
-  return academicScopeThemes(s?.profile).filter(t=>s.scores[t.id]?.domain!==null);
+  return academicScopeThemes(s?.profile).filter(t=>scopedThemeScore(s,t.id).domain!==null);
 }
 
 export function prepIndex(s){
   const measured=measuredThemes(s);
   if(!measured.length)return null;
   const rows=measured.map(t=>{
-    const v=s.scores[t.id];
+    const v=scopedThemeScore(s,t.id);
     const certaintyWeight=Math.max(.35,v.conf/100);
     const relevanceWeight=.75+t.relevance*.08;
     return {value:v.domain,w:certaintyWeight*relevanceWeight};
@@ -249,14 +255,14 @@ export function prepIndex(s){
 }
 
 export function priorityScore(t,s){
-  const v=s.scores[t.id];
+  const v=scopedThemeScore(s,t.id);
   if(v?.domain===null || v?.domain===undefined)return -Infinity;
   return nextBestActionBreakdown(t,s).total;
 }
 
 export function selectMissionTheme(s){
   const assessed=academicScopeThemes(s?.profile)
-    .filter(t=>s.scores[t.id]?.domain!==null && eligibleQuestions(s,t.id,"mission").length)
+    .filter(t=>scopedThemeScore(s,t.id).domain!==null && eligibleQuestions(s,t.id,"mission").length)
     .map(t=>({t,p:priorityScore(t,s)}))
     .sort((a,b)=>b.p-a.p);
   return assessed[0]?.t || null;
@@ -494,7 +500,7 @@ export function nextDiagnosticDifficulty(previousDifficulty,correct,wasProbe=fal
 }
 
 export function unknownThemes(s){
-  return academicScopeThemes(s?.profile).filter(t=>s.scores[t.id]?.domain===null);
+  return academicScopeThemes(s?.profile).filter(t=>scopedThemeScore(s,t.id).domain===null);
 }
 
 export function calibrationCandidates(s){
@@ -730,7 +736,10 @@ export function markTrainingSignalConfirmed(signals,signal){
 }
 
 export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
-  if(plan?.themeId && !isThemeInAcademicScope(theme(plan.themeId),s?.profile))return null;
+  const planTheme=theme(plan?.themeId);
+  if(plan?.themeId && !isThemeInAcademicScope(planTheme,s?.profile))return null;
+  const planFocus=plan?.microcompetencyId||plan?.focus||null;
+  if(planFocus&&!isSubtopicInAcademicScope(planTheme,planFocus,s?.profile))return null;
   let curated=eligibleQuestions(s,plan.themeId,"mission",plan.focus)
     .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
 
@@ -742,7 +751,7 @@ export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
     difficulty:target,
     count:5,
     salt:`mission|${plan.type}|${s.goal}|${evidenceCount}|${usedIds.length}`
-  }).filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures)):[];
+  }).filter(q=>isQuestionInAcademicScope(q,s.profile,"mission")&&isUsefulMissionInteraction(q,usedIds,usedSignatures)):[];
 
   let candidates=[...curated,...generated];
   if(!candidates.length){
@@ -753,7 +762,7 @@ export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
       difficulty:target,
       count:5,
       salt:`mission-fallback|${s.goal}|${evidenceCount}|${usedIds.length}`
-    }).filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures)):[];
+    }).filter(q=>isQuestionInAcademicScope(q,s.profile,"mission")&&isUsefulMissionInteraction(q,usedIds,usedSignatures)):[];
     candidates=[...curated,...fallbackGenerated];
   }
   if(!candidates.length)return null;
@@ -1031,7 +1040,7 @@ function missionCooldownAdjustment(s,t,health){
 }
 
 export function nextBestActionBreakdown(t,s){
-  const v=s.scores[t.id]||{domain:null,conf:0,evidence:[]};
+  const v=scopedThemeScore(s,t.id);
   const domain=v.domain??50;
   const weakness=(100-domain)*.48;
   const uncertainty=(100-(v.conf||0))*.16;
@@ -1067,7 +1076,7 @@ export function nextBestActionBreakdown(t,s){
 
 export function humanMissionReasons(t,s){
   if(!t)return [];
-  const v=s.scores[t.id]||{domain:null,conf:0,evidence:[]};
+  const v=scopedThemeScore(s,t.id);
   const b=nextBestActionBreakdown(t,s);
   const rows=[];
 
@@ -1116,7 +1125,7 @@ export function humanMissionReasons(t,s){
 
 export function rankedStudyPriorities(s,limit=4){
   return academicScopeThemes(s?.profile)
-    .filter(t=>s.scores[t.id]?.domain!==null && eligibleQuestions(s,t.id,"mission").length)
+    .filter(t=>scopedThemeScore(s,t.id).domain!==null && eligibleQuestions(s,t.id,"mission").length)
     .map(t=>({theme:t,breakdown:nextBestActionBreakdown(t,s)}))
     .sort((a,b)=>b.breakdown.total-a.breakdown.total)
     .slice(0,limit);
