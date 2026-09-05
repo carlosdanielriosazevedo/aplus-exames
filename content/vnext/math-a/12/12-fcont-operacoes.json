@@ -395,7 +395,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se lim f=4 e lim g=−1 no mesmo ponto, então lim(f+g)=",
+      "q": "Se lim_{x→a}f(x)=4 e lim_{x→a}g(x)=−1, então lim_{x→a}[f(x)+g(x)]=",
       "o": [
         "−4.",
         "5.",
@@ -422,7 +422,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Com os mesmos limites, lim(fg)=",
+      "q": "Se lim_{x→a}f(x)=4 e lim_{x→a}g(x)=−1, então lim_{x→a}[f(x)g(x)]=",
       "o": [
         "3.",
         "−1.",
