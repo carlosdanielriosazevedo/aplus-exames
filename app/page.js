@@ -624,8 +624,6 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
     <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p>
     <h1>O que já deste no {s.profile?.schoolYear}?</h1>
     <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
-    <div className="notice"><b>Diagnóstico, Missões e Mini-exames</b><span>No teu ano atual, a A+ usa apenas as submatérias que assinalares como já lecionadas. A matéria dos anos anteriores fica automaticamente incluída.</span></div>
-    <div className="notice"><b>Treino Livre</b><span>Podes praticar qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio nem inclui esse conteúdo automaticamente nas recomendações.</span></div>
     <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
     <div className="curriculumPicker">{themes.map(t=>{
       const rows=subtopicsByTheme.get(t.id)||[];
@@ -722,6 +720,7 @@ function DiagIntro({s,setS,go}){
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
     {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
+    <div className="notice"><b>Que matéria entra no diagnóstico?</b><span>No teu ano atual, apenas as submatérias que assinalaste como já lecionadas. A matéria dos anos anteriores fica automaticamente incluída.</span></div>
     <button className="primary" disabled={gated} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
@@ -880,6 +879,8 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
       <p className="dailyMissionReason">{mode==="resume"
         ?"O teu progresso ficou guardado. Não começamos outra Missão: continuas exatamente a Missão de hoje."
         :plan.reason}</p>
+
+      <p className="dailyMissionScope"><b>Matéria desta Missão:</b> apenas submatérias já lecionadas no teu ano, incluindo automaticamente a matéria dos anos anteriores.</p>
 
       {plan.reasons?.length>0&&mode!=="resume"&&<div className="dailyMissionWhy">
         <small>PORQUE ESTA MISSÃO?</small>
@@ -1471,8 +1472,8 @@ function Ranking({s,setS,go}){
 function TrainHub({s,go}){
   return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1><p className="muted">Escolhe como queres estudar agora.</p></div>
     <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe uma matéria e usa o Treino Livre.</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina em contexto de prova, com feedback no fim.</small></div><em>→</em></button>
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Usa as submatérias já lecionadas no teu ano e inclui automaticamente a matéria dos anos anteriores. Recebes o feedback no fim.</small></div><em>→</em></button>
       <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos estão a ser preparados.</small></div><em>Em breve</em></button>
     </div><StudentNav active="train" go={go}/>
   </Shell>;
