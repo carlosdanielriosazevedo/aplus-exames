@@ -71,7 +71,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Na mesma forma, θ representa...",
+      "q": "Na forma z=r(cosθ+i sinθ), θ representa...",
       "o": [
         "o módulo.",
         "a parte real.",
@@ -1340,7 +1340,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "No mesmo sinal, a parte imaginária é...",
+      "q": "Para z=5(cos(2π/3)+i sin(2π/3)), a parte imaginária é...",
       "o": [
         "−5√3/2.",
         "5√3/2.",
