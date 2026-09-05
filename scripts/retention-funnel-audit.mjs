@@ -46,6 +46,7 @@ s=recordMilestone(s,"onboarding_started",{source:"duplicate"},{at:firstOnboardin
 assert.equal(s.productAnalytics.milestones.onboarding_started.at,firstOnboarding);
 
 for(const [type,time] of [
+  ["subjects_selected",firstOnboarding+1000],
   ["profile_completed",at(2026,8,20,9,31)],
   ["goal_completed",at(2026,8,20,9,32)],
   ["diagnostic_started",at(2026,8,20,9,33)],
@@ -58,7 +59,7 @@ for(const [type,time] of [
 }
 
 const funnel=funnelSummary(s);
-assert.equal(funnel.length,9);
+assert.equal(funnel.length,10);
 assert.ok(funnel.every(x=>x.reached));
 assert.ok(funnel.every(x=>x.validOrder));
 
