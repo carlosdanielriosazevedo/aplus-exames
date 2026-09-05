@@ -665,7 +665,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(1,5)>0 no mesmo contexto, então a raiz fica em...",
+      "q": "Para f(x)=x³−5, sabe-se que f(1)<0, f(2)>0 e f(1,5)>0. Em que intervalo fica localizada a raiz?",
       "o": [
         "]1;1,5[.",
         "]1,5;2[.",
