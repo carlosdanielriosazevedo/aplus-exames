@@ -138,6 +138,7 @@ const initial={
   pedagogicalMemoryVersion:2,
   selectedSubjectIds:[],
   activeSubjectId:null,
+  firstUseTourCompleted:false,
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]}
 };
@@ -903,6 +904,31 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
   </div>;
 }
 
+const FIRST_USE_TOUR_STEPS=[
+  {icon:"🎯",eyebrow:"PASSO 1 DE 3",title:"A tua Missão diária",text:"Todos os dias, a A+ escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
+  {icon:"🧠",eyebrow:"PASSO 2 DE 3",title:"Treina à tua maneira",text:"Em Praticar escolhes qualquer matéria. No Mini-exame, treinas apenas matéria já lecionada, em contexto de prova."},
+  {icon:"📈",eyebrow:"PASSO 3 DE 3",title:"Acompanha a evolução",text:"Em Progresso vês o teu Domínio, a Certeza da A+ e as áreas que ainda precisam de mais evidência."}
+];
+
+function FirstUseTour({onComplete,onSkip}){
+  const [step,setStep]=useState(0);
+  const item=FIRST_USE_TOUR_STEPS[step];
+  const last=step===FIRST_USE_TOUR_STEPS.length-1;
+  return <div className="dailyMissionOverlay firstUseTourOverlay" role="dialog" aria-modal="true" aria-label="Como funciona a A+">
+    <section className="firstUseTourModal">
+      <div className="firstUseTourProgress" aria-label={`Passo ${step+1} de ${FIRST_USE_TOUR_STEPS.length}`}>
+        {FIRST_USE_TOUR_STEPS.map((_,i)=><i key={i} className={i<=step?"active":""}/>) }
+      </div>
+      <span className="firstUseTourIcon" aria-hidden="true">{item.icon}</span>
+      <small>{item.eyebrow}</small>
+      <h2>{item.title}</h2>
+      <p>{item.text}</p>
+      <button className="firstUseTourNext" onClick={()=>last?onComplete():setStep(current=>current+1)}>{last?"Começar →":"Seguinte →"}</button>
+      <button className="firstUseTourSkip" onClick={onSkip}>Saltar explicação</button>
+    </section>
+  </div>;
+}
+
 
 function Home({s,setS,go,reset}){
   const missionDone=missionCompletedToday(s);
@@ -918,9 +944,10 @@ function Home({s,setS,go,reset}){
   const ranked=rankedStudyPriorities(s,4);
   const [showMissionModal,setShowMissionModal]=useState(false);
   const [missionModalMode,setMissionModalMode]=useState("new");
+  const showFirstUseTour=s.diagnosticDone&&s.firstUseTourCompleted!==true;
 
   useEffect(()=>{
-    if(typeof window==="undefined"||missionDone)return;
+    if(typeof window==="undefined"||missionDone||showFirstUseTour)return;
 
     const assignmentPlan=pausedDraft?.kind==="mission"&&pausedDraft.plan
       ?pausedDraft.plan
@@ -975,7 +1002,11 @@ function Home({s,setS,go,reset}){
         type:assignmentPlan.type
       })]};
     });
-  },[]);
+  },[s.firstUseTourCompleted]);
+
+  function finishFirstUseTour(skipped=false){
+    setS(prev=>recordMilestone({...prev,firstUseTourCompleted:true},"first_use_tour_completed",{skipped,steps:skipped?null:FIRST_USE_TOUR_STEPS.length}));
+  }
 
   function startDailyMission(source="home_card"){
     if(missionDone||plan.type==="blocked")return;
@@ -1032,9 +1063,11 @@ function Home({s,setS,go,reset}){
 
   const probableNext=ranked[0]?.theme;
   return <main className="dark learnHome">
-    {showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
+    {showFirstUseTour
+      ?<FirstUseTour onComplete={()=>finishFirstUseTour(false)} onSkip={()=>finishFirstUseTour(true)}/>
+      :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
-    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
+    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
     <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
