@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-int",
+  "subtopicId": "12-int-integral-definido",
+  "subtopic": "Integral definido",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha significado e propriedades da integral definida, linearidade, simetria, valor médio, somas de Riemann e acumulação em contexto. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12INT-ID-001",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A integral definida ∫_a^b f(x)dx representa, em termos geométricos...",
+      "o": [
+        "área algébrica entre o gráfico e Ox.",
+        "sempre área positiva.",
+        "a derivada de f.",
+        "a média de a e b."
+      ],
+      "a": 0,
+      "sol": "Áreas acima de Ox contam positivamente e abaixo negativamente.",
+      "hyp": "Pode confundir integral com área geométrica sempre positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:interpretacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-002",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A integral definida é...",
+      "o": [
+        "uma família de funções.",
+        "um número real, quando existe.",
+        "sempre uma função de x.",
+        "uma derivada."
+      ],
+      "a": 1,
+      "sol": "Com limites fixos, a variável de integração é muda e o resultado é numérico.",
+      "hyp": "Pode confundir com integral indefinida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:numero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-003",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "∫_a^a f(x)dx é...",
+      "o": [
+        "f(a).",
+        "1.",
+        "0.",
+        "indefinida."
+      ],
+      "a": 2,
+      "sol": "O intervalo tem amplitude zero.",
+      "hyp": "Pode usar o valor da função no ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:limites-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-004",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Trocar os limites de integração faz...",
+      "o": [
+        "manter o valor.",
+        "quadrar o valor.",
+        "tornar a integral zero.",
+        "mudar o sinal."
+      ],
+      "a": 3,
+      "sol": "∫_b^a f=−∫_a^b f.",
+      "hyp": "Pode pensar que ordem dos limites não importa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:troca-limites",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-005",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A propriedade de aditividade diz que, para a<c<b...",
+      "o": [
+        "∫_a^b f=∫_a^c f+∫_c^b f.",
+        "∫_a^b f=∫_a^c f·∫_c^b f.",
+        "∫_a^b f=∫_a^c f−∫_c^b f.",
+        "∫_a^b f=0."
+      ],
+      "a": 0,
+      "sol": "Integrais em intervalos adjacentes somam-se.",
+      "hyp": "Pode multiplicar parcelas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:aditividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-006",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_0^1 1 dx=",
+      "o": [
+        "0.",
+        "1.",
+        "1/2.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "É a área de um retângulo de base1 e altura1.",
+      "hyp": "Pode confundir com média dos limites.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-007",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_0^2 3 dx=",
+      "o": [
+        "3.",
+        "2.",
+        "6.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "Área de retângulo:3×2=6.",
+      "hyp": "Pode somar altura e base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-008",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "∫_1^4 2 dx=",
+      "o": [
+        "8.",
+        "3.",
+        "2.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "2×(4−1)=6.",
+      "hyp": "Pode multiplicar pelo limite superior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-009",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_1^3 f=5, então ∫_3^1 f=",
+      "o": [
+        "−5.",
+        "5.",
+        "0.",
+        "1/5."
+      ],
+      "a": 0,
+      "sol": "Trocar limites muda o sinal.",
+      "hyp": "Pode manter o valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:troca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-010",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_0^2 f=3 e ∫_2^5 f=7, então ∫_0^5 f=",
+      "o": [
+        "4.",
+        "10.",
+        "21.",
+        "7."
+      ],
+      "a": 1,
+      "sol": "Pela aditividade:3+7=10.",
+      "hyp": "Pode multiplicar integrais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:aditividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-011",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_0^5 f=10 e ∫_0^2 f=3, então ∫_2^5 f=",
+      "o": [
+        "13.",
+        "3.",
+        "7.",
+        "10."
+      ],
+      "a": 2,
+      "sol": "10=3+∫_2^5f.",
+      "hyp": "Pode somar em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:aditividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-012",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A integral é linear: ∫_a^b (f+g)=",
+      "o": [
+        "∫f·∫g.",
+        "∫f−∫g.",
+        "∫fg.",
+        "∫f+∫g."
+      ],
+      "a": 3,
+      "sol": "Integra-se soma termo a termo.",
+      "hyp": "Pode confundir com produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-013",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para constante k, ∫_a^b kf=",
+      "o": [
+        "k∫_a^b f.",
+        "∫f/k.",
+        "k+∫f.",
+        "∫f+k(b−a) sempre."
+      ],
+      "a": 0,
+      "sol": "Constantes multiplicativas saem da integral.",
+      "hyp": "Pode alterar a estrutura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:linearidade-k",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-014",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫f=4 e ∫g=−1 no mesmo intervalo, então ∫(f+g)=",
+      "o": [
+        "−4.",
+        "3.",
+        "5.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "4+(−1)=3.",
+      "hyp": "Pode multiplicar ou ignorar sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-015",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫f=4, então ∫3f=",
+      "o": [
+        "7.",
+        "4/3.",
+        "12.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "A constante3 sai da integral.",
+      "hyp": "Pode somar3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:linearidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-016",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)≥0 em [a,b], então ∫_a^b f...",
+      "o": [
+        "é sempre zero.",
+        "é negativa.",
+        "não existe.",
+        "é não negativa."
+      ],
+      "a": 3,
+      "sol": "A área algébrica coincide com área geométrica positiva.",
+      "hyp": "Pode ignorar o sinal da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-017",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(x)≤0 em [a,b], então a integral é...",
+      "o": [
+        "não positiva.",
+        "sempre positiva.",
+        "sempre zero.",
+        "igual a b−a."
+      ],
+      "a": 0,
+      "sol": "Área algébrica abaixo do eixo conta negativamente.",
+      "hyp": "Pode usar área geométrica sem sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-018",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f≤g em [a,b], então...",
+      "o": [
+        "∫f≥∫g.",
+        "∫f≤∫g.",
+        "as integrais são iguais.",
+        "nada se pode concluir."
+      ],
+      "a": 1,
+      "sol": "A integral preserva a ordem.",
+      "hyp": "Pode inverter desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-019",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se 2≤f(x)≤5 em [0,3], então ∫_0^3 f está entre...",
+      "o": [
+        "2 e5.",
+        "0 e3.",
+        "6 e15.",
+        "3 e7."
+      ],
+      "a": 2,
+      "sol": "Integram-se os limites constantes:2×3 e5×3.",
+      "hyp": "Pode esquecer a largura do intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:estimativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-020",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O valor médio de f em [a,b] é...",
+      "o": [
+        "∫f sem dividir.",
+        "(a+b)/2.",
+        "f(a)+f(b).",
+        "(1/(b−a))∫_a^b f."
+      ],
+      "a": 3,
+      "sol": "É a média integral.",
+      "hyp": "Pode confundir média da função e média dos extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:valor-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-021",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se ∫_0^4 f=20, o valor médio de f em [0,4] é...",
+      "o": [
+        "5.",
+        "20.",
+        "4.",
+        "80."
+      ],
+      "a": 0,
+      "sol": "20/4=5.",
+      "hyp": "Pode esquecer dividir pela amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-022",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é constante igual a7 em [2,5], o seu valor médio é...",
+      "o": [
+        "21.",
+        "7.",
+        "3.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "A média de uma função constante é a própria constante.",
+      "hyp": "Pode usar integral total21.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:media-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-023",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se ∫_a^b f=0, podemos concluir f=0 em todo o intervalo?",
+      "o": [
+        "Sim.",
+        "Só se f for contínua.",
+        "Não.",
+        "Só se b−a=1."
+      ],
+      "a": 2,
+      "sol": "Áreas positivas e negativas podem cancelar-se.",
+      "hyp": "Pode confundir integral zero com função nula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-024",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Exemplo",
+      "q": "Para f(x)=x em [−1,1], ∫f=0 porque...",
+      "o": [
+        "f é zero em todo o intervalo.",
+        "a função é constante.",
+        "o intervalo tem comprimento zero.",
+        "as áreas simétricas positiva e negativa cancelam-se."
+      ],
+      "a": 3,
+      "sol": "f é ímpar em intervalo simétrico.",
+      "hyp": "Pode ignorar o sinal da área.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-025",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Se f é ímpar e integrável em [−a,a], então...",
+      "o": [
+        "∫_{−a}^a f=0.",
+        "a integral é2∫_0^a f.",
+        "a integral é sempre positiva.",
+        "não existe."
+      ],
+      "a": 0,
+      "sol": "Contribuições simétricas cancelam-se.",
+      "hyp": "Pode aplicar a regra das funções pares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:simetria-impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-026",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Se f é par em [−a,a], então...",
+      "o": [
+        "a integral é0.",
+        "∫_{−a}^a f=2∫_0^a f.",
+        "a integral é∫_0^a f.",
+        "a integral é negativa."
+      ],
+      "a": 1,
+      "sol": "As duas metades são iguais.",
+      "hyp": "Pode confundir par e ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:simetria-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-027",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_0^2 f=3 e f é par, então ∫_{−2}^2 f=",
+      "o": [
+        "0.",
+        "3.",
+        "6.",
+        "−3."
+      ],
+      "a": 2,
+      "sol": "Dobra-se a integral da metade positiva.",
+      "hyp": "Pode usar a regra das ímpares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-028",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é ímpar, ∫_{−5}^5 f=",
+      "o": [
+        "10.",
+        "5.",
+        "depende de f(0).",
+        "0."
+      ],
+      "a": 3,
+      "sol": "Simetria ímpar cancela.",
+      "hyp": "Pode pensar que precisa conhecer a fórmula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:impar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-029",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A integral de |f| corresponde geometricamente...",
+      "o": [
+        "à área total entre o gráfico de f e o eixo, sem cancelamento.",
+        "à área algébrica com sinais.",
+        "sempre a zero.",
+        "à derivada de f."
+      ],
+      "a": 0,
+      "sol": "O módulo torna todas as contribuições não negativas.",
+      "hyp": "Pode confundir ∫|f| e |∫f|.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:area-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-030",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Em geral, ∫|f| e |∫f|...",
+      "o": [
+        "são sempre iguais.",
+        "não são iguais necessariamente.",
+        "diferem por uma constante C.",
+        "são ambos zero."
+      ],
+      "a": 1,
+      "sol": "Cancelamentos podem tornar |∫f| menor que∫|f|.",
+      "hyp": "Pode mover o módulo para fora da integral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:modulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-031",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f≥0 em [a,b], então ∫|f|...",
+      "o": [
+        "é−∫f.",
+        "é0.",
+        "é igual a∫f.",
+        "não existe."
+      ],
+      "a": 2,
+      "sol": "|f|=f quando f≥0.",
+      "hyp": "Pode introduzir sinal desnecessário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:modulo-positivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-032",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f≤0 em [a,b], então ∫|f|...",
+      "o": [
+        "é∫f.",
+        "é0.",
+        "é (∫f)².",
+        "é−∫f."
+      ],
+      "a": 3,
+      "sol": "|f|=−f.",
+      "hyp": "Pode esquecer mudar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:modulo-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-033",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A integral definida pode ser aproximada por...",
+      "o": [
+        "somas de áreas de retângulos.",
+        "apenas derivadas.",
+        "fatorização.",
+        "equações de 2.º grau."
+      ],
+      "a": 0,
+      "sol": "As somas de Riemann aproximam a área algébrica.",
+      "hyp": "Pode não ligar integral a acumulação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:riemann",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-034",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Ao aumentar o número de subintervalos numa soma de Riemann adequada...",
+      "o": [
+        "a integral muda.",
+        "a aproximação tende a melhorar para funções regulares.",
+        "o erro aumenta sempre.",
+        "a função fica contínua."
+      ],
+      "a": 1,
+      "sol": "Retângulos mais finos aproximam melhor a área.",
+      "hyp": "Pode pensar que integral depende da partição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:riemann",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-035",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A integral definida pode modelar uma quantidade acumulada quando f representa...",
+      "o": [
+        "apenas uma posição fixa.",
+        "uma constante sem unidade.",
+        "uma taxa por unidade da variável.",
+        "um parâmetro populacional."
+      ],
+      "a": 2,
+      "sol": "Integrar taxa ao longo do tempo/espaço produz acumulação.",
+      "hyp": "Pode confundir valor e taxa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:acumulacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-036",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se v(t)≥0 é velocidade em m/s, ∫_0^10 v(t)dt representa...",
+      "o": [
+        "velocidade final.",
+        "aceleração média.",
+        "tempo total.",
+        "distância percorrida em10s."
+      ],
+      "a": 3,
+      "sol": "Integrar velocidade positiva dá deslocamento/distância.",
+      "hyp": "Pode confundir integral e valor final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:velocidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-037",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se v(t) muda de sinal, ∫v(t)dt representa...",
+      "o": [
+        "deslocamento líquido.",
+        "distância total sempre.",
+        "velocidade média sem divisão.",
+        "aceleração."
+      ],
+      "a": 0,
+      "sol": "Partes negativas subtraem ao deslocamento.",
+      "hyp": "Pode confundir deslocamento e distância total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:deslocamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-038",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "A distância total percorrida quando v muda de sinal é...",
+      "o": [
+        "|∫v(t)dt| sempre.",
+        "∫|v(t)|dt.",
+        "∫v'(t)dt.",
+        "∫t v(t)dt."
+      ],
+      "a": 1,
+      "sol": "O módulo elimina cancelamentos de direção.",
+      "hyp": "Pode usar módulo apenas no resultado final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:distancia-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-039",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma taxa de entrada é r(t)=5 L/min durante12min, o acumulado é...",
+      "o": [
+        "17 L.",
+        "5/12 L.",
+        "60 L.",
+        "12 L."
+      ],
+      "a": 2,
+      "sol": "∫_0^12 5dt=60.",
+      "hyp": "Pode somar taxa e tempo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:taxa-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-040",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma potência constante de2 kW atua durante3h, a energia é...",
+      "o": [
+        "2/3 kWh.",
+        "5 kWh.",
+        "1,5 kWh.",
+        "6 kWh."
+      ],
+      "a": 3,
+      "sol": "Energia=∫potência dt=2×3.",
+      "hyp": "Pode dividir em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:energia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-041",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se f≥g em [a,b], então a área algébrica entre os gráficos é...",
+      "o": [
+        "∫_a^b(f−g)dx.",
+        "∫(f+g)dx.",
+        "∫g−∫f com sinal positivo.",
+        "f(b)−g(a)."
+      ],
+      "a": 0,
+      "sol": "A diferença vertical é f−g.",
+      "hyp": "Pode somar as alturas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:entre-graficos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-042",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫f=10 e ∫g=6 no mesmo intervalo, então ∫(f−g)=",
+      "o": [
+        "16.",
+        "4.",
+        "60.",
+        "−4."
+      ],
+      "a": 1,
+      "sol": "Linearidade:10−6=4.",
+      "hyp": "Pode somar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:diferenca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-043",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se f−g muda de sinal, a área geométrica entre os gráficos requer...",
+      "o": [
+        "usar ∫(f−g) sem cuidado.",
+        "somar apenas valores nos extremos.",
+        "integrar |f−g| ou separar nos pontos de interseção.",
+        "derivar ambos."
+      ],
+      "a": 2,
+      "sol": "A função superior pode trocar ao longo do intervalo.",
+      "hyp": "Pode ignorar mudança de ordem dos gráficos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:area-entre",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-044",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_0^1 f=2 e ∫_1^3 f=−1, então ∫_0^3 f=",
+      "o": [
+        "3.",
+        "−3.",
+        "2.",
+        "1."
+      ],
+      "a": 3,
+      "sol": "2+(−1)=1.",
+      "hyp": "Pode subtrair o valor negativo incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:aditividade-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-045",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ∫_0^3 f=1 e ∫_1^3 f=−1, então ∫_0^1 f=",
+      "o": [
+        "2.",
+        "0.",
+        "−2.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "1=∫_0^1f−1, logo∫_0^1f=2.",
+      "hyp": "Pode somar na direção errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:aditividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-046",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se f é contínua e positiva, o valor médio de f em [a,b]...",
+      "o": [
+        "é sempre f(a).",
+        "é atingido por f em algum ponto do intervalo.",
+        "é sempre f(b).",
+        "pode estar fora do intervalo de valores de f."
+      ],
+      "a": 1,
+      "sol": "Pelo teorema do valor médio para integrais, existe c com f(c)=médio.",
+      "hyp": "Pode achar que é apenas uma média abstrata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:media-integral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-047",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=2x em [0,2], o valor médio é...",
+      "o": [
+        "4.",
+        "1.",
+        "2.",
+        "8."
+      ],
+      "a": 2,
+      "sol": "Integral=4; divide-se pela amplitude2:2.",
+      "hyp": "Pode usar a integral total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:media-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-048",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma taxa de consumo c(t) em L/h tem integral 120 L num período de8h. A taxa média foi...",
+      "o": [
+        "120 L/h.",
+        "8 L/h.",
+        "960 L/h.",
+        "15 L/h."
+      ],
+      "a": 3,
+      "sol": "120/8=15.",
+      "hyp": "Pode não dividir pelo tempo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:taxa-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-049",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Unidades da integral 'taxa × variável' são...",
+      "o": [
+        "produto das unidades da taxa pelas da variável.",
+        "as mesmas da taxa sempre.",
+        "sem unidades.",
+        "o quadrado da variável."
+      ],
+      "a": 0,
+      "sol": "Ex.: L/h × h = L.",
+      "hyp": "Pode esquecer análise dimensional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:unidades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12INT-ID-050",
+      "themeId": "12-int",
+      "subtopicId": "12-int-integral-definido",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "A integral definida combina essencialmente ideias de...",
+      "o": [
+        "apenas derivação.",
+        "acumulação, área algébrica e linearidade.",
+        "apenas álgebra de polinómios.",
+        "apenas probabilidade."
+      ],
+      "a": 1,
+      "sol": "É uma medida de acumulação com fortes propriedades algébricas e geométricas.",
+      "hyp": "Pode reduzir a integral a uma fórmula sem significado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-int-integral-definido:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

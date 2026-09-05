@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-rae",
+  "subtopicId": "12-rae-bolzano-localizacao",
+  "subtopic": "Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha condições de Bolzano, existência vs unicidade, localização intervalar, refinamento, precisão e contextos de equilíbrio. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12RAE-BL-001",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O Teorema de Bolzano permite garantir uma raiz de f em ]a,b[ quando...",
+      "o": [
+        "f é contínua em [a,b] e f(a)f(b)<0.",
+        "f'(a)=f'(b).",
+        "f(a)=f(b).",
+        "f é derivável e positiva."
+      ],
+      "a": 0,
+      "sol": "A mudança de sinal numa função contínua força passagem por zero.",
+      "hyp": "Pode esquecer a hipótese de continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:bolzano-condicoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-002",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A condição f(a)f(b)<0 significa que...",
+      "o": [
+        "f(a)=f(b).",
+        "f(a) e f(b) têm sinais opostos.",
+        "ambos são negativos.",
+        "um deles é necessariamente zero."
+      ],
+      "a": 1,
+      "sol": "Produto negativo implica sinais contrários.",
+      "hyp": "Pode confundir produto negativo com ambos negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-003",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Bolzano garante...",
+      "o": [
+        "unicidade da raiz.",
+        "valor exato da raiz.",
+        "existência de pelo menos uma raiz.",
+        "derivabilidade da função."
+      ],
+      "a": 2,
+      "sol": "O teorema é de existência, não de unicidade nem cálculo explícito.",
+      "hyp": "Pode ler 'existe' como 'existe uma única'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:existencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-004",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f é contínua e f(1)=−2, f(3)=5, então existe uma raiz em...",
+      "o": [
+        "]−2,5[.",
+        "]0,1[.",
+        "não é possível concluir.",
+        "]1,3[."
+      ],
+      "a": 3,
+      "sol": "Há mudança de sinal entre x=1 e x=3.",
+      "hyp": "Pode usar os valores da função como intervalo de x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-005",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f é contínua e f(2)=3, f(4)=7, Bolzano entre2 e4...",
+      "o": [
+        "não garante raiz.",
+        "garante uma raiz.",
+        "garante duas raízes.",
+        "garante máximo."
+      ],
+      "a": 0,
+      "sol": "Não há mudança de sinal.",
+      "hyp": "Pode pensar que continuidade basta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:sem-mudanca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-006",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x²−2, temos f(1)=−1 e f(2)=2. Logo existe uma raiz em...",
+      "o": [
+        "]−1,2[.",
+        "]1,2[.",
+        "]0,1[.",
+        "]2,3[."
+      ],
+      "a": 1,
+      "sol": "O polinómio é contínuo e muda de sinal entre1 e2.",
+      "hyp": "Pode usar o valor √2 sem justificar pelo teorema.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:sqrt2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-007",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x²−2, como f(1)<0 e f(2)>0, Bolzano garante uma raiz em ]1,2[. Esta conclusão refere-se à raiz positiva porque...",
+      "o": [
+        "Bolzano exclui raízes negativas.",
+        "x²−2 só tem uma raiz.",
+        "o intervalo ]1,2[ é positivo.",
+        "f é crescente em todo R."
+      ],
+      "a": 2,
+      "sol": "O intervalo escolhido localiza especificamente a raiz positiva.",
+      "hyp": "Pode atribuir ao teorema exclusões que vêm do intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:localizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-008",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x³−2, f(1)<0 e f(2)>0. Assim...",
+      "o": [
+        "a raiz é exatamente1,5.",
+        "há duas raízes.",
+        "não há raiz.",
+        "há pelo menos uma raiz em ]1,2[."
+      ],
+      "a": 3,
+      "sol": "Continuidade e mudança de sinal dão existência.",
+      "hyp": "Pode confundir localização com aproximação exata.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-009",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=e^x−3, f(1)=e−3<0 e f(2)=e²−3>0. Então...",
+      "o": [
+        "há raiz em ]1,2[.",
+        "a raiz é2.",
+        "não há raiz porque e^x>0.",
+        "há raiz em ]−3,0[."
+      ],
+      "a": 0,
+      "sol": "A função contínua muda de sinal.",
+      "hyp": "Pode olhar apenas para positividade de e^x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-010",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=ln x−1, qual intervalo localiza uma raiz por mudança de sinal?",
+      "o": [
+        "]0,1[.",
+        "]2,3[.",
+        "]−1,0[.",
+        "]3,4[."
+      ],
+      "a": 1,
+      "sol": "ln2<1 e ln3>1; a raiz é e≈2,718.",
+      "hyp": "Pode escolher intervalo fora do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-011",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f(a)=0, então...",
+      "o": [
+        "Bolzano exige f(a)f(b)<0 e por isso a não pode ser raiz.",
+        "f é descontínua.",
+        "a já é uma raiz.",
+        "não há raiz no intervalo."
+      ],
+      "a": 2,
+      "sol": "Se o valor num extremo é zero, a raiz já foi encontrada.",
+      "hyp": "Pode ignorar raízes nos extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:extremo-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-012",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(a)f(b)>0, podemos concluir que não há raízes em ]a,b[?",
+      "o": [
+        "Sim.",
+        "Só se f for contínua.",
+        "Só se f for polinomial.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "A função pode cruzar o eixo um número par de vezes e voltar ao mesmo sinal.",
+      "hyp": "Pode usar a contrarrecíproca errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:mesmo-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-013",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Exemplo",
+      "q": "A função f(x)=x²−1 em [−2,2] tem f(−2)>0 e f(2)>0, mas...",
+      "o": [
+        "tem raízes −1 e1.",
+        "não tem raízes.",
+        "tem apenas a raiz0.",
+        "é descontínua."
+      ],
+      "a": 0,
+      "sol": "Mesmo sinal nos extremos não exclui zeros interiores.",
+      "hyp": "Pode achar que Bolzano dá condição necessária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:contraexemplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-014",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f(a)f(b)<0 mas f não for contínua, a conclusão de Bolzano...",
+      "o": [
+        "continua sempre válida.",
+        "pode falhar.",
+        "garante duas raízes.",
+        "garante uma assíntota."
+      ],
+      "a": 1,
+      "sol": "A continuidade é essencial.",
+      "hyp": "Pode pensar que mudança de sinal isolada basta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:continuidade-essencial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-015",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Exemplo",
+      "q": "A função f(x)=1/x em [−1,1] muda de sinal nos extremos, mas...",
+      "o": [
+        "tem raiz0.",
+        "tem duas raízes.",
+        "não tem raiz porque é descontínua/não definida em0.",
+        "é contínua."
+      ],
+      "a": 2,
+      "sol": "A descontinuidade em0 invalida o teorema.",
+      "hyp": "Pode tratar a assíntota como passagem por zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:contraexemplo-descontinua",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-016",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para provar unicidade de uma raiz além da existência, é útil mostrar que f é...",
+      "o": [
+        "periódica.",
+        "par.",
+        "limitada.",
+        "estritamente monótona."
+      ],
+      "a": 3,
+      "sol": "Uma função estritamente monótona não pode assumir o valor zero duas vezes.",
+      "hyp": "Pode pensar que continuidade garante unicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:unicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-017",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua e estritamente crescente em [a,b], com f(a)<0<f(b), então há...",
+      "o": [
+        "exatamente uma raiz em ]a,b[.",
+        "pelo menos duas raízes.",
+        "nenhuma raiz.",
+        "uma raiz apenas se f'(a)=0."
+      ],
+      "a": 0,
+      "sol": "Bolzano dá existência e monotonia estrita dá unicidade.",
+      "hyp": "Pode ignorar o papel da monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:existencia-unicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-018",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³+x−1, f'(x)=3x²+1>0. Se f(0)<0<f(1), então...",
+      "o": [
+        "há três raízes.",
+        "há uma única raiz em ]0,1[.",
+        "não há raiz.",
+        "a raiz é1/2 exatamente."
+      ],
+      "a": 1,
+      "sol": "A função é contínua, estritamente crescente e muda de sinal.",
+      "hyp": "Pode concluir valor exato sem cálculo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:cubica-unica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-019",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para localizar uma raiz com precisão às décimas, uma estratégia é...",
+      "o": [
+        "resolver sempre simbolicamente.",
+        "usar apenas f'(x).",
+        "encontrar dois décimos consecutivos onde f muda de sinal.",
+        "testar um único valor."
+      ],
+      "a": 2,
+      "sol": "Um intervalo de amplitude0,1 com mudança de sinal localiza a raiz às décimas.",
+      "hyp": "Pode confundir localização com arredondamento sem intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:decimas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-020",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Dizer que uma raiz α está em ]1,4;1,5[ significa...",
+      "o": [
+        "α=1,45.",
+        "α=1,4 ou1,5.",
+        "α≈1,5 obrigatoriamente.",
+        "1,4<α<1,5."
+      ],
+      "a": 3,
+      "sol": "É uma localização intervalar, não um valor exato.",
+      "hyp": "Pode usar o ponto médio como igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-021",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−2, f(1,4)=−0,04 e f(1,5)=0,25. Logo √2 está em...",
+      "o": [
+        "]1,4;1,5[.",
+        "]1,3;1,4[.",
+        "]1,5;1,6[.",
+        "]0,04;0,25[."
+      ],
+      "a": 0,
+      "sol": "Há mudança de sinal entre1,4 e1,5.",
+      "hyp": "Pode usar os valores de f como extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:localizacao-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-022",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua, f(2,1)<0 e f(2,2)>0, então a raiz fica confinada num intervalo de amplitude...",
+      "o": [
+        "0,01.",
+        "0,1.",
+        "1.",
+        "2,2."
+      ],
+      "a": 1,
+      "sol": "2,2−2,1=0,1.",
+      "hyp": "Pode confundir amplitude com casas decimais exatas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:erro-intervalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-023",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³−5, temos f(1)=−4 e f(2)=3. Qual teste seguinte melhora a localização?",
+      "o": [
+        "avaliar apenas f(10).",
+        "calcular f'(0).",
+        "avaliar f num ponto entre1 e2, por exemplo1,5.",
+        "mudar para um intervalo sem relação."
+      ],
+      "a": 2,
+      "sol": "Testar um ponto interior permite escolher um subintervalo com mudança de sinal.",
+      "hyp": "Pode não refinar o intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:refinamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-024",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³−5, sabe-se que f(1)<0, f(2)>0 e f(1,5)<0. Em que intervalo fica localizada a raiz?",
+      "o": [
+        "]1;1,5[.",
+        "]0;1[.",
+        "]2;3[.",
+        "]1,5;2[."
+      ],
+      "a": 3,
+      "sol": "Mantém-se o subintervalo onde os sinais são opostos.",
+      "hyp": "Pode escolher o lado errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:refinamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-025",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³−5, sabe-se que f(1)<0, f(2)>0 e f(1,5)>0. Em que intervalo fica localizada a raiz?",
+      "o": [
+        "]1;1,5[.",
+        "]1,5;2[.",
+        "]0;1[.",
+        "]2;3[."
+      ],
+      "a": 0,
+      "sol": "f(1)<0 e f(1,5)>0.",
+      "hyp": "Pode não combinar os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:refinamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-026",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A localização sucessiva de raízes por mudança de sinal é a ideia central de...",
+      "o": [
+        "derivação logarítmica.",
+        "métodos de intervalos como a bisseção.",
+        "integração por partes.",
+        "regressão linear."
+      ],
+      "a": 1,
+      "sol": "A bisseção repete esta lógica de seleção de subintervalos.",
+      "hyp": "Pode separar Bolzano do método numérico que o usa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:ligacao-bissecao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-027",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=cos x−x, f(0)=1>0 e f(1)=cos1−1<0. Logo...",
+      "o": [
+        "a raiz é0.",
+        "não há raiz.",
+        "há pelo menos uma raiz em ]0,1[.",
+        "a raiz éπ/2."
+      ],
+      "a": 2,
+      "sol": "A função é contínua e muda de sinal.",
+      "hyp": "Pode usar um valor trigonométrico notável incorreto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:cos-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-028",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=cos x−x, existe uma raiz em ]0,1[ e f'(x)=−sin x−1<0 em [0,1]. Portanto essa raiz é...",
+      "o": [
+        "dupla.",
+        "inexistente.",
+        "exatamente0,5.",
+        "única."
+      ],
+      "a": 3,
+      "sol": "f é estritamente decrescente.",
+      "hyp": "Pode concluir valor exato em vez de unicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:unicidade-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-029",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=e^{-x}−x, f(0)>0 e f(1)<0. Como f'(x)=−e^{-x}−1<0, há...",
+      "o": [
+        "uma única raiz em ]0,1[.",
+        "duas raízes.",
+        "nenhuma raiz.",
+        "uma raiz exatamente em1/2."
+      ],
+      "a": 0,
+      "sol": "Continuidade, mudança de sinal e monotonia estrita.",
+      "hyp": "Pode assumir 1/2 por simetria inexistente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:exp-unica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-030",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Ao escolher um intervalo inicial para procurar uma raiz, é vantajoso...",
+      "o": [
+        "escolher sempre [0,1].",
+        "encontrar extremos onde f tenha sinais opostos e a função seja contínua.",
+        "escolher extremos onde f seja igual.",
+        "ignorar o domínio da função."
+      ],
+      "a": 1,
+      "sol": "Assim Bolzano fornece uma garantia de existência.",
+      "hyp": "Pode aplicar o método fora do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:intervalo-inicial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-031",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=ln x+x−2 é contínua em ]0,+∞[. Como f(1)=−1 e f(2)=ln2>0, então...",
+      "o": [
+        "há raiz em ]−1,0[.",
+        "não há raiz.",
+        "há raiz em ]1,2[.",
+        "x=2 é raiz."
+      ],
+      "a": 2,
+      "sol": "Há mudança de sinal no domínio.",
+      "hyp": "Pode escolher intervalo fora do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:log-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-032",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=ln x+x−2, existe uma raiz em ]1,2[ e f'(x)=1/x+1>0 para x>0. Portanto essa raiz é...",
+      "o": [
+        "dupla.",
+        "uma de pelo menos duas.",
+        "inexistente.",
+        "única."
+      ],
+      "a": 3,
+      "sol": "A função é estritamente crescente.",
+      "hyp": "Pode ignorar monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:log-unica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-033",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se uma raiz α está em ]3,27;3,28[, então podemos afirmar que...",
+      "o": [
+        "3,27<α<3,28.",
+        "α=3,275.",
+        "α arredondada às centésimas é sempre3,28.",
+        "α=3,27."
+      ],
+      "a": 0,
+      "sol": "O intervalo só garante confinamento; arredondamento exige saber em que lado de3,275 está a raiz.",
+      "hyp": "Pode arredondar sem informação suficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:precisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-034",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para garantir o arredondamento às centésimas, é útil localizar a raiz num intervalo que...",
+      "o": [
+        "tenha amplitude1.",
+        "não atravesse o ponto de meia unidade da centésima relevante.",
+        "contenha um inteiro.",
+        "comece em0."
+      ],
+      "a": 1,
+      "sol": "O intervalo deve ficar todo dentro da mesma zona de arredondamento.",
+      "hyp": "Pode usar apenas amplitude sem considerar o limiar de arredondamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-035",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se α∈]1,423;1,424[, então α arredondada às centésimas é...",
+      "o": [
+        "1,43.",
+        "1,424.",
+        "1,42.",
+        "não é possível saber."
+      ],
+      "a": 2,
+      "sol": "Todo o intervalo está abaixo de1,425 e acima de1,415, logo arredonda a1,42.",
+      "hyp": "Pode olhar apenas para o extremo superior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-036",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se α∈]1,424;1,426[, o arredondamento às centésimas...",
+      "o": [
+        "é1,42.",
+        "é1,43.",
+        "é1,425.",
+        "não fica determinado pelo intervalo."
+      ],
+      "a": 3,
+      "sol": "O intervalo atravessa1,425, o limiar entre1,42 e1,43.",
+      "hyp": "Pode escolher o ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-037",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x^3−x−1, f(1)=−1 e f(2)=5. Se f(1,3)=−0,103 e f(1,4)=0,344, então a raiz está em...",
+      "o": [
+        "]1,3;1,4[.",
+        "]1;1,3[.",
+        "]1,4;2[.",
+        "]−0,103;0,344[."
+      ],
+      "a": 0,
+      "sol": "Os sinais mudam entre1,3 e1,4.",
+      "hyp": "Pode usar os valores da função como intervalo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:cubica-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-038",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ainda f(1,32)<0 e f(1,33)>0, então a raiz está em...",
+      "o": [
+        "]1,3;1,32[.",
+        "]1,32;1,33[.",
+        "]1,33;1,4[.",
+        "]0;1[."
+      ],
+      "a": 1,
+      "sol": "Seleciona-se o subintervalo com mudança de sinal.",
+      "hyp": "Pode escolher o subintervalo sem mudança.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:refino",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-039",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A amplitude do intervalo ]1,32;1,33[ é...",
+      "o": [
+        "0,1.",
+        "1,325.",
+        "0,01.",
+        "0,001."
+      ],
+      "a": 2,
+      "sol": "1,33−1,32=0,01.",
+      "hyp": "Pode confundir número de casas decimais com amplitude.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:amplitude",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-040",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua e estritamente convexa, a mudança de sinal em [a,b] garante unicidade?",
+      "o": [
+        "Sim, sempre.",
+        "Só se f(a)=−f(b).",
+        "Só se a=0.",
+        "Não necessariamente."
+      ],
+      "a": 3,
+      "sol": "Uma função estritamente convexa pode cruzar o eixo duas vezes; é preciso informação adicional como monotonia.",
+      "hyp": "Pode confundir convexidade com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:convexidade-nao-unicidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-041",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua e estritamente crescente, então uma mudança de sinal em [a,b] garante...",
+      "o": [
+        "uma única raiz.",
+        "duas raízes.",
+        "nenhuma raiz.",
+        "uma raiz dupla."
+      ],
+      "a": 0,
+      "sol": "Continuidade dá existência e crescimento estrito dá no máximo uma.",
+      "hyp": "Pode esquecer a parte de unicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-042",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f é contínua, f(a)<0<f(b), e existe c∈]a,b[ com f(c)>0, podemos restringir a procura a...",
+      "o": [
+        "[c,b] obrigatoriamente.",
+        "um intervalo entre a e c onde ainda haja mudança de sinal.",
+        "qualquer intervalo fora de [a,b].",
+        "apenas ao ponto c."
+      ],
+      "a": 1,
+      "sol": "Como f(a)<0 e f(c)>0, [a,c] preserva a garantia.",
+      "hyp": "Pode escolher o lado com sinais iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:refinamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-043",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(a)<0, f(c)<0 e f(b)>0 com a<c<b, então a raiz garantida pode ser procurada em...",
+      "o": [
+        "]a,c[.",
+        "fora de [a,b].",
+        "]c,b[.",
+        "apenas em c."
+      ],
+      "a": 2,
+      "sol": "A mudança de sinal ocorre entre c e b.",
+      "hyp": "Pode manter o lado sem mudança.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:refinamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-044",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um modelo de equilíbrio usa F(x)=procura(x)−oferta(x). Um equilíbrio ocorre quando...",
+      "o": [
+        "F'(x)=0 apenas.",
+        "F(x)>0.",
+        "F(x)<0.",
+        "F(x)=0."
+      ],
+      "a": 3,
+      "sol": "Equilíbrio significa procura=oferta.",
+      "hyp": "Pode confundir equilíbrio com extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:equilibrio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-045",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se F é contínua e F(10)>0, F(20)<0, então existe...",
+      "o": [
+        "pelo menos um equilíbrio entre10 e20.",
+        "equilíbrio exatamente em15.",
+        "nenhum equilíbrio.",
+        "dois equilíbrios obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Aplica-se Bolzano a F.",
+      "hyp": "Pode assumir o ponto médio como solução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:equilibrio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-046",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se além disso F é estritamente decrescente, o equilíbrio é...",
+      "o": [
+        "duplo.",
+        "único.",
+        "inexistente.",
+        "necessariamente em10."
+      ],
+      "a": 1,
+      "sol": "Monotonia estrita impede dois zeros.",
+      "hyp": "Pode ignorar a informação adicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:equilibrio-unico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-047",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A localização de uma raiz por intervalos fornece...",
+      "o": [
+        "sempre a expressão algébrica exata.",
+        "apenas um gráfico qualitativo.",
+        "um intervalo garantido que contém a raiz, não necessariamente um valor exato.",
+        "uma derivada."
+      ],
+      "a": 2,
+      "sol": "É uma forma de aproximação controlada.",
+      "hyp": "Pode confundir numérico com simbólico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:localizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-048",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Quanto menor a amplitude de um intervalo que sabemos conter uma única raiz...",
+      "o": [
+        "menos sabemos sobre a raiz.",
+        "maior é o erro máximo inevitável.",
+        "mais provável é não haver raiz.",
+        "mais precisa é a localização."
+      ],
+      "a": 3,
+      "sol": "Um intervalo menor restringe mais a posição da raiz.",
+      "hyp": "Pode inverter a noção de precisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:precisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-049",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma raiz única está em [a,b], usar o ponto médio m=(a+b)/2 como aproximação dá erro máximo...",
+      "o": [
+        "≤(b−a)/2.",
+        "≤b−a sempre, mas não melhor.",
+        "≤(b−a)².",
+        "zero."
+      ],
+      "a": 0,
+      "sol": "A raiz está no máximo a metade da amplitude do ponto médio.",
+      "hyp": "Pode usar a amplitude inteira como limite ótimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:erro-ponto-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12RAE-BL-050",
+      "themeId": "12-rae",
+      "subtopicId": "12-rae-bolzano-localizacao",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma temperatura de equilíbrio resolve T(t)=20. Se G(t)=T(t)−20 é contínua e muda de sinal entre4h e5h, então...",
+      "o": [
+        "o equilíbrio é exatamente4h30.",
+        "há pelo menos um instante de equilíbrio entre4h e5h.",
+        "não existe equilíbrio.",
+        "T é linear."
+      ],
+      "a": 1,
+      "sol": "G=0 equivale a T=20 e Bolzano garante existência.",
+      "hyp": "Pode assumir interpolação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-rae-bolzano-localizacao:modelacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

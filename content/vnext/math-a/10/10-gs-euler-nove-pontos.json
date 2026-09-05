@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-gs",
+  "subtopicId": "10-gs-euler-nove-pontos",
+  "subtopic": "Localização dos centros, reta de Euler e circunferência dos nove pontos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha reta de Euler, razão OG:GH=1:2, centro N como ponto médio de OH, raio R/2 e os nove pontos clássicos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GS-E9-001",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num triângulo não equilátero, a reta de Euler contém...",
+      "o": [
+        "circuncentro, baricentro e ortocentro.",
+        "incentro, baricentro e excentro.",
+        "apenas os pontos médios.",
+        "os três vértices."
+      ],
+      "a": 0,
+      "sol": "Circuncentro O, baricentro G e ortocentro H são colineares na reta de Euler.",
+      "hyp": "Pode incluir o incentro, que em geral não pertence à reta de Euler.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-002",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na reta de Euler, o baricentro G divide o segmento OH segundo...",
+      "o": [
+        "OG:GH=2:1.",
+        "OG:GH=1:2.",
+        "OG:GH=1:1.",
+        "OG:GH=3:1."
+      ],
+      "a": 1,
+      "sol": "G está entre O e H e GH=2·OG.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-003",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O centro da circunferência dos nove pontos é...",
+      "o": [
+        "o incentro.",
+        "o baricentro sempre.",
+        "o ponto médio de OH, onde O é circuncentro e H ortocentro.",
+        "um vértice."
+      ],
+      "a": 2,
+      "sol": "O centro N da circunferência dos nove pontos é o ponto médio do segmento OH.",
+      "hyp": "Pode confundir o centro dos nove pontos com outro centro notável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-004",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O raio da circunferência dos nove pontos é...",
+      "o": [
+        "igual ao raio circunscrito.",
+        "o dobro do raio circunscrito.",
+        "igual ao raio inscrito sempre.",
+        "metade do raio da circunferência circunscrita."
+      ],
+      "a": 3,
+      "sol": "Se R é o raio circunscrito, o raio dos nove pontos é R/2.",
+      "hyp": "Pode confundir os vários raios notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-005",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Quantos pontos notáveis dão nome à circunferência dos nove pontos?",
+      "o": [
+        "9",
+        "6",
+        "8",
+        "12"
+      ],
+      "a": 0,
+      "sol": "Ela passa por nove pontos clássicos associados ao triângulo.",
+      "hyp": "Pode confundir com os seis pontos de medianas e alturas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-contagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-006",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Três dos nove pontos são...",
+      "o": [
+        "os três vértices.",
+        "os pontos médios dos três lados.",
+        "os três excentros.",
+        "os três centros de massa."
+      ],
+      "a": 1,
+      "sol": "A circunferência dos nove pontos passa pelos três pontos médios dos lados.",
+      "hyp": "Pode pensar que passa pelos vértices como a circunscrita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-midpoints",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-007",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Outros três pontos da circunferência dos nove pontos são...",
+      "o": [
+        "os três vértices.",
+        "as interseções das medianas com os lados.",
+        "os pés das três alturas.",
+        "os três pontos de tangência da inscrita sempre."
+      ],
+      "a": 2,
+      "sol": "Os pés das alturas pertencem à circunferência dos nove pontos.",
+      "hyp": "Pode confundir com pontos de tangência da incircunferência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-pes-alturas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-008",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Os últimos três pontos clássicos da circunferência dos nove pontos são...",
+      "o": [
+        "os vértices A,B,C.",
+        "os pontos médios das bissetrizes.",
+        "os pés das mediatrizes.",
+        "os pontos médios de HA, HB e HC."
+      ],
+      "a": 3,
+      "sol": "São os pontos médios dos segmentos que unem o ortocentro aos vértices.",
+      "hyp": "Pode esquecer o papel do ortocentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-midpoints-H",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-009",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se o raio circunscrito é R=12 cm, o raio da circunferência dos nove pontos é...",
+      "o": [
+        "6 cm",
+        "3 cm",
+        "12 cm",
+        "24 cm"
+      ],
+      "a": 0,
+      "sol": "R/2=6 cm.",
+      "hyp": "Pode usar o raio inteiro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-010",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se o raio da circunferência dos nove pontos é 7 cm, o raio circunscrito é...",
+      "o": [
+        "3,5 cm",
+        "14 cm",
+        "7 cm",
+        "21 cm"
+      ],
+      "a": 1,
+      "sol": "R=2×7=14 cm.",
+      "hyp": "Pode inverter a relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-raio-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-011",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se OH=18 cm, quanto mede ON, sendo N o centro dos nove pontos?",
+      "o": [
+        "6 cm",
+        "12 cm",
+        "9 cm",
+        "18 cm"
+      ],
+      "a": 2,
+      "sol": "N é ponto médio de OH, logo ON=9 cm.",
+      "hyp": "Pode usar a razão do baricentro em vez do ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-012",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se OH=18 cm, quanto mede NH?",
+      "o": [
+        "6 cm",
+        "12 cm",
+        "18 cm",
+        "9 cm"
+      ],
+      "a": 3,
+      "sol": "N é ponto médio de OH, logo NH=9 cm.",
+      "hyp": "Pode confundir N com G.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-013",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se OG=5 cm, quanto mede GH?",
+      "o": [
+        "10 cm",
+        "2,5 cm",
+        "5 cm",
+        "15 cm"
+      ],
+      "a": 0,
+      "sol": "Na reta de Euler, GH=2·OG=10.",
+      "hyp": "Pode inverter a razão 1:2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-014",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se GH=14 cm, quanto mede OG?",
+      "o": [
+        "5 cm",
+        "7 cm",
+        "14 cm",
+        "28 cm"
+      ],
+      "a": 1,
+      "sol": "OG=GH/2=7.",
+      "hyp": "Pode duplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-015",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se OG=4 cm, quanto mede OH?",
+      "o": [
+        "8 cm",
+        "10 cm",
+        "12 cm",
+        "16 cm"
+      ],
+      "a": 2,
+      "sol": "GH=8 e OH=OG+GH=12; equivalentemente OH=3OG.",
+      "hyp": "Pode esquecer uma das partes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-OH",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-016",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se OH=21 cm, quanto mede OG?",
+      "o": [
+        "5 cm",
+        "10,5 cm",
+        "14 cm",
+        "7 cm"
+      ],
+      "a": 3,
+      "sol": "OH=3OG, logo OG=7.",
+      "hyp": "Pode dividir por 2 em vez de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-OH",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-017",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se OH=21 cm, quanto mede GH?",
+      "o": [
+        "14 cm",
+        "7 cm",
+        "10,5 cm",
+        "21 cm"
+      ],
+      "a": 0,
+      "sol": "GH=2/3·OH=14.",
+      "hyp": "Pode usar 1/3 em vez de 2/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-OH",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-018",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo equilátero, O, G e H...",
+      "o": [
+        "formam sempre três pontos distintos.",
+        "coincidem.",
+        "ficam nos vértices.",
+        "não existem."
+      ],
+      "a": 1,
+      "sol": "No equilátero, os principais centros notáveis coincidem.",
+      "hyp": "Pode pensar que a reta de Euler mantém três pontos distintos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:equilatero-centros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-019",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No triângulo equilátero, a 'reta de Euler' fica degenerada no sentido de que...",
+      "o": [
+        "não existe baricentro.",
+        "não existe circuncentro.",
+        "O, G e H coincidem, pelo que não determinam uma única reta distinta.",
+        "os três vértices ficam colineares."
+      ],
+      "a": 2,
+      "sol": "Um único ponto não determina uma reta única; a propriedade de colinearidade torna-se degenerada.",
+      "hyp": "Pode concluir que os centros deixam de existir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:equilatero-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-020",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles não equilátero, a reta de Euler coincide com...",
+      "o": [
+        "a base.",
+        "qualquer lado.",
+        "uma tangente à circunferência inscrita.",
+        "o eixo de simetria do triângulo."
+      ],
+      "a": 3,
+      "sol": "O, G e H pertencem ao eixo de simetria.",
+      "hyp": "Pode não usar a simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:isosceles-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-021",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se O, G e H estão alinhados e OG=6, qual é a distância GH?",
+      "o": [
+        "12",
+        "3",
+        "6",
+        "18"
+      ],
+      "a": 0,
+      "sol": "GH=2OG=12.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-022",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se OG=6 e GH=12, qual é OH?",
+      "o": [
+        "12",
+        "18",
+        "15",
+        "24"
+      ],
+      "a": 1,
+      "sol": "OH=6+12=18.",
+      "hyp": "Pode usar apenas o maior segmento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-segmentos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-023",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se N é ponto médio de OH e OH=24, qual é ON?",
+      "o": [
+        "6",
+        "8",
+        "12",
+        "16"
+      ],
+      "a": 2,
+      "sol": "ON=12.",
+      "hyp": "Pode confundir com OG=OH/3=8.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:N-vs-G",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-024",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se OH=24, quanto mede OG?",
+      "o": [
+        "6",
+        "12",
+        "16",
+        "8"
+      ],
+      "a": 3,
+      "sol": "OG=OH/3=8.",
+      "hyp": "Pode confundir G com ponto médio N.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:N-vs-G",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-025",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se OH=24, qual dos pontos N e G está a 12 unidades de O?",
+      "o": [
+        "N.",
+        "G.",
+        "Ambos.",
+        "Nenhum."
+      ],
+      "a": 0,
+      "sol": "N é ponto médio, então ON=12; OG=8.",
+      "hyp": "Pode confundir as posições relativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:N-vs-G",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-026",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na reta orientada de O para H, tome O=0 e H=30. Quais são as coordenadas de G e N?",
+      "o": [
+        "G=15, N=10",
+        "G=10, N=15",
+        "G=20, N=15",
+        "G=10, N=20"
+      ],
+      "a": 1,
+      "sol": "G fica a 1/3 de OH a partir de O:10; N é ponto médio:15.",
+      "hyp": "Pode inverter a razão de G ou confundir N com G.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:coordenadas-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-027",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Na configuração O=0, H=30, qual é a distância GN?",
+      "o": [
+        "2",
+        "10",
+        "5",
+        "15"
+      ],
+      "a": 2,
+      "sol": "G=10 e N=15, logo GN=5.",
+      "hyp": "Pode usar ON−OG incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:coordenadas-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-028",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Em geral, se OH=d, qual é a distância GN entre baricentro e centro dos nove pontos?",
+      "o": [
+        "d/3",
+        "d/2",
+        "2d/3",
+        "d/6"
+      ],
+      "a": 3,
+      "sol": "OG=d/3 e ON=d/2; GN=d/2−d/3=d/6.",
+      "hyp": "Pode confundir as duas frações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:GN-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-029",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se OH=36, quanto mede GN?",
+      "o": [
+        "6",
+        "3",
+        "9",
+        "12"
+      ],
+      "a": 0,
+      "sol": "GN=OH/6=6.",
+      "hyp": "Pode dividir por 3 ou 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:GN-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-030",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Qual ponto está entre O e H e é mais próximo de O: G ou N?",
+      "o": [
+        "N.",
+        "G.",
+        "Estão à mesma distância.",
+        "Depende sempre do tipo de triângulo."
+      ],
+      "a": 1,
+      "sol": "OG=OH/3 e ON=OH/2, logo G fica mais perto de O.",
+      "hyp": "Pode não comparar 1/3 e 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:ordem-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-031",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na ordem ao longo do segmento OH, quando O≠H, temos...",
+      "o": [
+        "O–N–G–H.",
+        "G–O–H–N.",
+        "O–G–N–H.",
+        "O–H–G–N."
+      ],
+      "a": 2,
+      "sol": "G está a 1/3 e N a 1/2 do caminho de O para H.",
+      "hyp": "Pode trocar G e N.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:ordem-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-032",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A circunferência dos nove pontos passa pelos pontos médios dos lados e pelos pés das alturas. Isto significa que...",
+      "o": [
+        "os seis pontos são colineares.",
+        "todos coincidem.",
+        "formam sempre um hexágono regular.",
+        "essas seis posições estão concíclicas."
+      ],
+      "a": 3,
+      "sol": "Estar na mesma circunferência significa serem concíclicos.",
+      "hyp": "Pode confundir conciclicidade com regularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:conciclicidade-seis",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-033",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Os nove pontos formam necessariamente um polígono regular?",
+      "o": [
+        "Não.",
+        "Sim, sempre.",
+        "Só em qualquer triângulo isósceles.",
+        "Sim, porque estão numa circunferência."
+      ],
+      "a": 0,
+      "sol": "Conciclicidade não implica espaçamento angular igual.",
+      "hyp": "Pode confundir 'mesma circunferência' com 'regular'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nao-regular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-034",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, H coincide com o vértice do ângulo reto e O é o ponto médio da hipotenusa. Então N é...",
+      "o": [
+        "o incentro.",
+        "o ponto médio do segmento que une esses dois pontos.",
+        "um vértice da hipotenusa.",
+        "sempre o baricentro."
+      ],
+      "a": 1,
+      "sol": "N é sempre ponto médio de OH.",
+      "hyp": "Pode procurar uma definição especial em vez da geral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-035",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, a hipotenusa mede 20. Logo R=10. Qual é o raio da circunferência dos nove pontos?",
+      "o": [
+        "2,5",
+        "10",
+        "5",
+        "20"
+      ],
+      "a": 2,
+      "sol": "O raio dos nove pontos é R/2=5.",
+      "hyp": "Pode usar metade da hipotenusa diretamente como raio dos nove pontos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-retangulo-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-036",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com hipotenusa 26, qual é o raio dos nove pontos?",
+      "o": [
+        "13",
+        "26",
+        "52",
+        "6,5"
+      ],
+      "a": 3,
+      "sol": "R=13 e o raio dos nove pontos é 6,5.",
+      "hyp": "Pode parar no raio circunscrito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-retangulo-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-037",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se OG=x+2 e GH=4x−2, com G baricentro na reta de Euler, qual é x?",
+      "o": [
+        "3",
+        "1",
+        "2",
+        "4"
+      ],
+      "a": 0,
+      "sol": "4x−2=2(x+2) => 4x−2=2x+4 => x=3.",
+      "hyp": "Pode não usar a razão 1:2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-038",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se OH=3x+6 e OG=x+2, a relação da reta de Euler é satisfeita para...",
+      "o": [
+        "apenas x=0.",
+        "qualquer x para que os comprimentos sejam positivos.",
+        "apenas x=2.",
+        "nunca."
+      ],
+      "a": 1,
+      "sol": "OH=3OG porque 3(x+2)=3x+6; é uma identidade.",
+      "hyp": "Pode procurar uma solução única quando a relação é identicamente verdadeira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:euler-identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-039",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se ON=9 e N é centro dos nove pontos, quanto mede OH?",
+      "o": [
+        "9",
+        "27",
+        "18",
+        "36"
+      ],
+      "a": 2,
+      "sol": "N é ponto médio: OH=18.",
+      "hyp": "Pode confundir ON com OG.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:nove-pontos-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-040",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se GN=4, quanto mede OH?",
+      "o": [
+        "12",
+        "18",
+        "30",
+        "24"
+      ],
+      "a": 3,
+      "sol": "GN=OH/6, logo OH=24.",
+      "hyp": "Pode usar 1/3 ou 1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:GN-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-041",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se GN=4, quais são OG e GH?",
+      "o": [
+        "8 e 16",
+        "4 e 8",
+        "12 e 24",
+        "6 e 12"
+      ],
+      "a": 0,
+      "sol": "OH=24; OG=8 e GH=16.",
+      "hyp": "Pode tratar GN como uma das partes principais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:GN-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-042",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O incentro pertence sempre à reta de Euler?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se o triângulo for obtusângulo.",
+        "Só se o triângulo for retângulo."
+      ],
+      "a": 1,
+      "sol": "Em geral, o incentro não está na reta de Euler; em casos simétricos, como isósceles, pode estar no eixo comum.",
+      "hyp": "Pode incluir todos os centros notáveis na reta de Euler.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:incentro-euler",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-043",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, por que incentro, circuncentro, baricentro e ortocentro ficam alinhados?",
+      "o": [
+        "Porque qualquer quatro pontos são colineares.",
+        "Porque o triângulo é sempre retângulo.",
+        "Todos pertencem ao eixo de simetria.",
+        "Porque os lados são todos iguais."
+      ],
+      "a": 2,
+      "sol": "A simetria força esses centros a pertencerem ao eixo do triângulo.",
+      "hyp": "Pode confundir isósceles com equilátero ou usar argumento inválido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:isosceles-centros-alinhados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-044",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se R=18 e OH=30, qual é o raio r9 da circunferência dos nove pontos e ON?",
+      "o": [
+        "r9=18 e ON=15",
+        "r9=9 e ON=10",
+        "r9=6 e ON=15",
+        "r9=9 e ON=15"
+      ],
+      "a": 3,
+      "sol": "r9=R/2=9; ON=OH/2=15.",
+      "hyp": "Pode confundir as duas metades com relações diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:duas-relacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-045",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se R=10 e GN=3, quanto mede OH e o raio dos nove pontos?",
+      "o": [
+        "OH=18 e r9=5",
+        "OH=6 e r9=5",
+        "OH=18 e r9=10",
+        "OH=30 e r9=5"
+      ],
+      "a": 0,
+      "sol": "GN=OH/6 => OH=18; r9=R/2=5.",
+      "hyp": "Pode usar GN como metade de OH.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:duas-relacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-046",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma construção já tem circuncentro O e ortocentro H localizados. Qual é a forma mais direta de obter o centro N da circunferência dos nove pontos?",
+      "o": [
+        "Traçar uma bissetriz qualquer.",
+        "Construir o ponto médio de OH.",
+        "Usar o ponto médio de um lado do triângulo.",
+        "Escolher o baricentro."
+      ],
+      "a": 1,
+      "sol": "N é, por definição geométrica, o ponto médio de OH.",
+      "hyp": "Pode confundir N com G.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:construir-N",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-047",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Depois de encontrar N e conhecer o raio circunscrito R=16, como construir a circunferência dos nove pontos?",
+      "o": [
+        "Centro em G e raio 16.",
+        "Centro em H e raio 8.",
+        "Centro em N e raio 8.",
+        "Centro em O e raio 4."
+      ],
+      "a": 2,
+      "sol": "O raio dos nove pontos é R/2=8 e o centro é N.",
+      "hyp": "Pode usar o centro ou raio errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:construir-circunferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-048",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se um ponto é ponto médio de um lado do triângulo, o que se pode afirmar relativamente à circunferência dos nove pontos?",
+      "o": [
+        "É sempre o seu centro.",
+        "É sempre o ortocentro.",
+        "Está sempre fora dela.",
+        "Pertence-lhe."
+      ],
+      "a": 3,
+      "sol": "Os três pontos médios dos lados pertencem à circunferência.",
+      "hyp": "Pode confundir ponto da circunferência com centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:membership-midpoint",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-049",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se D é o pé de uma altura de um triângulo, relativamente à circunferência dos nove pontos D...",
+      "o": [
+        "pertence à circunferência.",
+        "é sempre o centro.",
+        "fica sempre no exterior.",
+        "coincide com o circuncentro."
+      ],
+      "a": 0,
+      "sol": "Os três pés das alturas são três dos nove pontos.",
+      "hyp": "Pode confundir pé de altura com centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:membership-foot",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-E9-050",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-euler-nove-pontos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Para verificar experimentalmente a circunferência dos nove pontos de um triângulo, qual conjunto de pontos é adequado construir?",
+      "o": [
+        "Os três vértices, o incentro e cinco pontos aleatórios.",
+        "Três pontos médios dos lados, três pés das alturas e três pontos médios entre H e os vértices.",
+        "Apenas O,G,H.",
+        "Os três excentros e seis vértices repetidos."
+      ],
+      "a": 1,
+      "sol": "Esses são precisamente os nove pontos clássicos concíclicos.",
+      "hyp": "Pode misturar pontos de outras construções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-euler-nove-pontos:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

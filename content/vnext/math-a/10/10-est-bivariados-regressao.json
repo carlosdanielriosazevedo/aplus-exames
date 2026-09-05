@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-est",
+  "subtopicId": "10-est-bivariados-regressao",
+  "subtopic": "Dados bivariados, diagrama de dispersão, correlação, regressão, outliers e correlação vs causalidade",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha associação linear, coeficiente de correlação, regressão, resíduos, outliers, interpolação/extrapolação e distinção entre correlação e causalidade. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10EST-BIV-001",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Dados bivariados correspondem a...",
+      "o": [
+        "duas variáveis observadas em cada unidade estatística.",
+        "duas amostras sem relação.",
+        "uma variável com duas modas.",
+        "dois gráficos da mesma variável."
+      ],
+      "a": 0,
+      "sol": "Em dados bivariados, cada unidade fornece um par (x,y).",
+      "hyp": "Pode confundir duas variáveis emparelhadas com dois conjuntos independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-002",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um diagrama de dispersão representa...",
+      "o": [
+        "apenas frequências de categorias.",
+        "pares de valores de duas variáveis quantitativas.",
+        "uma única média.",
+        "classes de um histograma."
+      ],
+      "a": 1,
+      "sol": "Cada ponto representa um par observado.",
+      "hyp": "Pode confundir scatterplot com gráfico de barras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:scatterplot",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-003",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Num diagrama de dispersão, pontos que tendem a subir da esquerda para a direita sugerem...",
+      "o": [
+        "associação negativa.",
+        "ausência total de relação.",
+        "associação positiva.",
+        "variável qualitativa."
+      ],
+      "a": 2,
+      "sol": "Valores maiores de x tendem a associar-se a valores maiores de y.",
+      "hyp": "Pode inverter o sinal da associação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:correlacao-positiva",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-004",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Pontos que tendem a descer da esquerda para a direita sugerem...",
+      "o": [
+        "associação positiva.",
+        "correlação perfeita positiva.",
+        "nenhuma variável.",
+        "associação negativa."
+      ],
+      "a": 3,
+      "sol": "À medida que x aumenta, y tende a diminuir.",
+      "hyp": "Pode confundir orientação visual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:correlacao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-005",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Uma nuvem de pontos sem tendência clara sugere...",
+      "o": [
+        "associação linear fraca ou inexistente.",
+        "correlação positiva perfeita.",
+        "correlação negativa perfeita.",
+        "que x e y são iguais."
+      ],
+      "a": 0,
+      "sol": "Sem padrão linear claro, a associação linear pode ser fraca.",
+      "hyp": "Pode forçar uma tendência onde não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:sem-correlacao-clara",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-006",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O coeficiente de correlação linear r varia entre...",
+      "o": [
+        "0 e 100.",
+        "−1 e 1.",
+        "−100 e 100.",
+        "0 e 1 apenas."
+      ],
+      "a": 1,
+      "sol": "O coeficiente de correlação linear está entre −1 e 1.",
+      "hyp": "Pode esquecer valores negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:intervalo-r",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-007",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um valor r próximo de 1 indica...",
+      "o": [
+        "forte associação linear negativa.",
+        "ausência de relação.",
+        "forte associação linear positiva.",
+        "causalidade garantida."
+      ],
+      "a": 2,
+      "sol": "r próximo de 1 significa pontos próximos de uma reta crescente.",
+      "hyp": "Pode confundir correlação forte com causalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:interpretar-r-positivo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-008",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um valor r próximo de −1 indica...",
+      "o": [
+        "forte associação linear positiva.",
+        "ausência de relação.",
+        "variância zero.",
+        "forte associação linear negativa."
+      ],
+      "a": 3,
+      "sol": "r próximo de −1 corresponde a forte padrão linear decrescente.",
+      "hyp": "Pode ignorar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:interpretar-r-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-009",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um valor r próximo de 0 significa necessariamente que não existe qualquer relação entre as variáveis?",
+      "o": [
+        "Não; pode existir relação não linear.",
+        "Sim.",
+        "Sim, se houver muitos dados.",
+        "Só se a média for zero."
+      ],
+      "a": 0,
+      "sol": "r mede associação linear; padrões curvos podem produzir r perto de 0.",
+      "hyp": "Pode confundir ausência de correlação linear com ausência de relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:r-zero-nao-significa-independencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-010",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação sobre correlação é correta?",
+      "o": [
+        "Correlação prova causa.",
+        "Correlação mede intensidade/direção de associação linear, não causalidade.",
+        "Correlação só existe se x=y.",
+        "Correlação é uma média de frequências."
+      ],
+      "a": 1,
+      "sol": "Correlação descreve associação, não mecanismo causal.",
+      "hyp": "Pode confundir associação com causalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:correlacao-nao-causalidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-011",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os pares (1,2),(2,4),(3,6),(4,8) apresentam que padrão?",
+      "o": [
+        "Linear negativo perfeito.",
+        "Sem tendência.",
+        "Linear positivo perfeito.",
+        "Curvo."
+      ],
+      "a": 2,
+      "sol": "Todos os pontos pertencem a y=2x.",
+      "hyp": "Pode não reconhecer alinhamento exato crescente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:padrao-linear-perfeito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-012",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Os pares (1,8),(2,6),(3,4),(4,2) apresentam...",
+      "o": [
+        "associação linear positiva perfeita.",
+        "sem relação.",
+        "uma função constante.",
+        "associação linear negativa perfeita."
+      ],
+      "a": 3,
+      "sol": "Todos pertencem a uma reta decrescente y=10−2x.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:padrao-linear-perfeito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-013",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se todos os pontos estiverem exatamente numa reta crescente não horizontal, r é...",
+      "o": [
+        "1",
+        "−1",
+        "0",
+        "depende da inclinação"
+      ],
+      "a": 0,
+      "sol": "Correlação linear perfeita crescente implica r=1.",
+      "hyp": "Pode achar que r depende do valor da inclinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:r-perfeito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-014",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se todos os pontos estiverem exatamente numa reta decrescente não horizontal, r é...",
+      "o": [
+        "0",
+        "−1",
+        "1",
+        "depende do intercepto"
+      ],
+      "a": 1,
+      "sol": "Correlação perfeita decrescente implica r=−1.",
+      "hyp": "Pode pensar que r depende da ordenada na origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:r-perfeito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-015",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma reta de regressão é usada para...",
+      "o": [
+        "provar causalidade.",
+        "substituir todos os dados por um único valor exato.",
+        "resumir a tendência linear e fazer previsões aproximadas.",
+        "calcular frequências acumuladas."
+      ],
+      "a": 2,
+      "sol": "A regressão linear aproxima a relação média entre x e y.",
+      "hyp": "Pode interpretar o modelo como lei exata ou causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:regressao-conceito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-016",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa reta de regressão y=2x+5, o coeficiente 2 representa...",
+      "o": [
+        "o valor previsto de y quando x=2.",
+        "o coeficiente de correlação.",
+        "a média de x.",
+        "a variação prevista em y por cada aumento unitário de x."
+      ],
+      "a": 3,
+      "sol": "A inclinação é 2 unidades de y por unidade de x.",
+      "hyp": "Pode confundir declive com intercepto ou correlação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:declive-regressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-017",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Na reta y=2x+5, o número 5 representa...",
+      "o": [
+        "o valor previsto de y quando x=0.",
+        "o coeficiente de correlação.",
+        "o desvio padrão de y.",
+        "o maior valor de x."
+      ],
+      "a": 0,
+      "sol": "É a ordenada na origem do modelo.",
+      "hyp": "Pode confundir intercepto com inclinação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:intercepto-regressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-018",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usando y=2x+5, qual é a previsão para x=3?",
+      "o": [
+        "8",
+        "11",
+        "10",
+        "12"
+      ],
+      "a": 1,
+      "sol": "y=2×3+5=11.",
+      "hyp": "Pode esquecer o intercepto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:previsao-regressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-019",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usando y=10−1,5x, qual é a previsão para x=4?",
+      "o": [
+        "2",
+        "6",
+        "4",
+        "8"
+      ],
+      "a": 2,
+      "sol": "10−1,5×4=10−6=4.",
+      "hyp": "Pode somar em vez de subtrair.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:previsao-regressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-020",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma reta de regressão com declive negativo indica...",
+      "o": [
+        "r obrigatoriamente positivo.",
+        "causalidade negativa.",
+        "que todos os pontos estão exatamente na reta.",
+        "previsão de y tendencialmente decrescente quando x aumenta."
+      ],
+      "a": 3,
+      "sol": "Declive negativo corresponde a tendência linear decrescente.",
+      "hyp": "Pode confundir tendência com ajuste perfeito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:declive-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-021",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Um resíduo, num modelo de regressão, é...",
+      "o": [
+        "valor observado de y menos valor previsto de y.",
+        "a média de x.",
+        "o coeficiente de correlação.",
+        "o número de observações."
+      ],
+      "a": 0,
+      "sol": "Resíduo mede o erro vertical da previsão para um ponto.",
+      "hyp": "Pode confundir resíduo com valor previsto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuo-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-022",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A reta prevê y=12 para certo x, mas o valor observado é 15. Qual é o resíduo observado−previsto?",
+      "o": [
+        "−3",
+        "3",
+        "0",
+        "27"
+      ],
+      "a": 1,
+      "sol": "15−12=3.",
+      "hyp": "Pode inverter o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-023",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A previsão é 20 e o observado é 17. Qual é o resíduo observado−previsto?",
+      "o": [
+        "3",
+        "17",
+        "−3",
+        "20"
+      ],
+      "a": 2,
+      "sol": "17−20=−3.",
+      "hyp": "Pode usar valor absoluto e perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-024",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um resíduo positivo significa que...",
+      "o": [
+        "o observado ficou abaixo do previsto.",
+        "a correlação é positiva.",
+        "o declive é positivo.",
+        "o observado ficou acima do previsto."
+      ],
+      "a": 3,
+      "sol": "Observado−previsto>0.",
+      "hyp": "Pode confundir sinal do resíduo com sinal da correlação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuo-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-025",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um bom ajuste linear tende a ter resíduos...",
+      "o": [
+        "relativamente pequenos e sem padrão sistemático forte.",
+        "todos positivos.",
+        "todos iguais a 10.",
+        "crescentes obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Resíduos pequenos e sem estrutura indicam que a reta capta bem a tendência linear.",
+      "hyp": "Pode avaliar apenas a média dos resíduos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:qualidade-ajuste",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-026",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se os resíduos formam um padrão curvo claro, isso sugere que...",
+      "o": [
+        "a correlação é necessariamente 1.",
+        "uma reta pode não ser o modelo mais adequado.",
+        "todos os dados estão errados.",
+        "não há relação entre as variáveis."
+      ],
+      "a": 1,
+      "sol": "Estrutura sistemática nos resíduos indica que o modelo linear deixa padrão por explicar.",
+      "hyp": "Pode ignorar evidência de não linearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuos-curvatura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-027",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um ponto muito afastado da nuvem principal pode ser chamado...",
+      "o": [
+        "mediana.",
+        "quartil.",
+        "outlier.",
+        "frequência acumulada."
+      ],
+      "a": 2,
+      "sol": "Outlier é uma observação atípica relativamente ao padrão geral.",
+      "hyp": "Pode confundir ponto extremo com medida-resumo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:outlier",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-028",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um outlier pode afetar bastante a reta de regressão e a correlação?",
+      "o": [
+        "Não, nunca.",
+        "Só se houver exatamente dois pontos.",
+        "Só em variáveis qualitativas.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Pontos influentes podem alterar inclinação, intercepto e r.",
+      "hyp": "Pode achar que um único ponto nunca importa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:outlier-influencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-029",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Deve um outlier ser eliminado automaticamente?",
+      "o": [
+        "Não; deve ser investigado antes de decidir.",
+        "Sim, sempre.",
+        "Sim, se não gostar do resultado.",
+        "Só se reduzir a correlação."
+      ],
+      "a": 0,
+      "sol": "Pode ser erro, caso válido raro ou informação importante; a decisão deve ter justificação.",
+      "hyp": "Pode remover dados apenas para melhorar o modelo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:outlier-nao-eliminar-automatico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-030",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Extrapolar significa...",
+      "o": [
+        "prever exatamente no centro dos dados.",
+        "usar o modelo para prever fora do intervalo de x observado.",
+        "calcular a média.",
+        "retirar outliers."
+      ],
+      "a": 1,
+      "sol": "Extrapolação leva o modelo além da região onde foi ajustado.",
+      "hyp": "Pode confundir com interpolação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:extrapolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-031",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Porque a extrapolação é geralmente mais arriscada do que a interpolação?",
+      "o": [
+        "Porque valores fora do intervalo são sempre impossíveis.",
+        "Porque não usa equações.",
+        "A relação pode mudar fora da região observada.",
+        "Porque a correlação deixa de existir matematicamente."
+      ],
+      "a": 2,
+      "sol": "O padrão observado pode não continuar longe dos dados.",
+      "hyp": "Pode assumir que uma reta válida localmente é universal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:extrapolacao-risco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-032",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Interpolar significa, aproximadamente...",
+      "o": [
+        "prever muito para além dos dados.",
+        "eliminar todos os resíduos.",
+        "trocar x por y.",
+        "prever dentro do intervalo de valores x observados."
+      ],
+      "a": 3,
+      "sol": "Interpolação ocorre dentro da faixa coberta pelos dados.",
+      "hyp": "Pode confundir com extrapolação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:interpolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-033",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas variáveis apresentam forte correlação entre vendas de gelados e número de banhistas. Qual explicação alternativa plausível à causalidade direta entre elas?",
+      "o": [
+        "Temperatura elevada influencia ambas.",
+        "Gelados criam praias.",
+        "Banhistas diminuem sempre a temperatura.",
+        "Correlação prova que uma causa a outra."
+      ],
+      "a": 0,
+      "sol": "Uma terceira variável, como temperatura, pode influenciar ambas.",
+      "hyp": "Pode ignorar confundidores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:correlacao-confundidor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-034",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Encontrar correlação entre horas de estudo e nota prova que aumentar horas causará necessariamente a mesma subida de nota para qualquer aluno?",
+      "o": [
+        "Sim, sempre.",
+        "Não.",
+        "Sim, se r>0.",
+        "Só se houver mais de 100 alunos."
+      ],
+      "a": 1,
+      "sol": "Correlação observacional não estabelece efeito causal individual nem linear perfeito.",
+      "hyp": "Pode transformar associação média em garantia causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:correlacao-nao-causalidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-035",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Uma reta de regressão é y=50+3x. Qual é a diferença prevista em y entre x=4 e x=7?",
+      "o": [
+        "3",
+        "6",
+        "9",
+        "21"
+      ],
+      "a": 2,
+      "sol": "O aumento de x é 3; com declive 3, y aumenta 9.",
+      "hyp": "Pode calcular valores absolutos desnecessariamente ou usar o intercepto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:diferenca-prevista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-036",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na reta y=100−4x, aumentar x em 5 unidades altera a previsão de y em...",
+      "o": [
+        "+20",
+        "−5",
+        "+5",
+        "−20"
+      ],
+      "a": 3,
+      "sol": "Declive −4 vezes 5 = −20.",
+      "hyp": "Pode ignorar sinal do declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:diferenca-prevista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-037",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A reta y=8+2x prevê y=18 para x=5. Se o observado é 21, qual é o resíduo e interpretação?",
+      "o": [
+        "3; observado acima da reta.",
+        "−3; observado acima da reta.",
+        "3; observado abaixo da reta.",
+        "−3; observado abaixo da reta."
+      ],
+      "a": 0,
+      "sol": "Previsto=18; observado−previsto=3, logo o ponto está acima.",
+      "hyp": "Pode inverter o sinal ou a posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuo-interpretacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-038",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um modelo y=30−0,5x é usado para x entre 0 e 20. Prever para x=100 é...",
+      "o": [
+        "interpolação.",
+        "extrapolação forte.",
+        "cálculo de mediana.",
+        "sempre seguro por ser uma reta."
+      ],
+      "a": 1,
+      "sol": "100 está muito fora do intervalo observado.",
+      "hyp": "Pode pensar que equação válida implica previsão segura em qualquer x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:extrapolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-039",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se r=0,92 e um único outlier for removido, r pode mudar bastante?",
+      "o": [
+        "Não, r nunca muda.",
+        "Só pode aumentar exatamente para 1.",
+        "Sim.",
+        "Só pode tornar-se 0."
+      ],
+      "a": 2,
+      "sol": "Correlação pode ser sensível a observações influentes.",
+      "hyp": "Pode tratar r como propriedade imutável dos restantes dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:outlier-r",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-040",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se r=−0,85, qual descrição é mais adequada?",
+      "o": [
+        "Fraca associação linear positiva.",
+        "Causalidade negativa de 85%.",
+        "85% dos pontos estão errados.",
+        "Forte associação linear negativa."
+      ],
+      "a": 3,
+      "sol": "O sinal indica direção negativa e o módulo elevado indica associação linear forte.",
+      "hyp": "Pode interpretar r como percentagem causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:interpretar-r",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-041",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se r=0,08, qual descrição é prudente?",
+      "o": [
+        "Pouca associação linear aparente, embora possa existir relação não linear.",
+        "Forte associação positiva.",
+        "Causalidade de 8%.",
+        "Relação impossível."
+      ],
+      "a": 0,
+      "sol": "r próximo de 0 aponta para fraca associação linear, não ausência total de qualquer padrão.",
+      "hyp": "Pode confundir linearidade com relação em geral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:interpretar-r-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-042",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta de regressão é y=12+1,5x. Para x=8, o observado é 27. Qual é o resíduo?",
+      "o": [
+        "−3",
+        "3",
+        "0",
+        "15"
+      ],
+      "a": 1,
+      "sol": "Previsto=12+12=24; resíduo=27−24=3.",
+      "hyp": "Pode esquecer multiplicação ou inverter o resíduo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:residuo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-043",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para a reta y=5+4x, em que x a previsão é y=29?",
+      "o": [
+        "5",
+        "7",
+        "6",
+        "8"
+      ],
+      "a": 2,
+      "sol": "29=5+4x => 24=4x => x=6.",
+      "hyp": "Pode substituir 29 diretamente como x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:inverter-regressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-044",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O intercepto de uma regressão deve ser sempre interpretado no contexto?",
+      "o": [
+        "Não, é sempre fisicamente significativo.",
+        "Só se r=1.",
+        "Nunca deve ser interpretado.",
+        "Sim; se x=0 não fizer sentido ou estiver fora dos dados, a interpretação pode ser limitada."
+      ],
+      "a": 3,
+      "sol": "A ordenada na origem é uma previsão matemática em x=0, que pode não ter significado prático.",
+      "hyp": "Pode interpretar parâmetros sem considerar domínio/contexto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:intercepto-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-045",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma correlação muito forte pode coexistir com uma relação sem sentido causal, como número de filmes lançados e outra variável temporal. Isto mostra...",
+      "o": [
+        "que variáveis de contexto ou tendências comuns podem criar associações espúrias.",
+        "que correlação forte prova causalidade.",
+        "que r deixa de estar entre −1 e 1.",
+        "que regressão não usa dados."
+      ],
+      "a": 0,
+      "sol": "Associações podem surgir por fatores comuns ou coincidência.",
+      "hyp": "Pode transformar força estatística em prova causal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:correlacao-espuria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-046",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se todos os valores de x forem convertidos de metros para centímetros, a correlação linear r com y muda?",
+      "o": [
+        "Sim, multiplica por 100.",
+        "Não, permanece igual se a transformação for multiplicação por constante positiva.",
+        "Sim, divide por 100.",
+        "Fica sempre 1."
+      ],
+      "a": 1,
+      "sol": "Mudança linear positiva de escala não altera a correlação.",
+      "hyp": "Pode confundir escala dos dados com intensidade de associação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:invariancia-r-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-047",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se todos os valores de y forem multiplicados por −1, o que acontece ao sinal de r?",
+      "o": [
+        "Mantém-se.",
+        "Fica zero.",
+        "Inverte-se.",
+        "Fica sempre 1."
+      ],
+      "a": 2,
+      "sol": "Multiplicar uma variável por constante negativa inverte a direção da associação.",
+      "hyp": "Pode achar que só a magnitude importa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:r-transformacao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-048",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um modelo linear tem r elevado, mas os resíduos mostram padrão em U. Qual conclusão é mais adequada?",
+      "o": [
+        "A reta é necessariamente perfeita.",
+        "Os resíduos não interessam.",
+        "A relação é causal.",
+        "Apesar do r elevado, um modelo não linear pode descrever melhor os dados."
+      ],
+      "a": 3,
+      "sol": "A análise de resíduos complementa r e pode revelar curvatura sistemática.",
+      "hyp": "Pode usar apenas r como critério absoluto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:r-vs-residuos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-049",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Dados sobre temperatura x e consumo de energia y originam reta y=120−2x numa faixa observada de 10°C a 25°C. Qual é a previsão para 20°C?",
+      "o": [
+        "80",
+        "60",
+        "100",
+        "120"
+      ],
+      "a": 0,
+      "sol": "120−2×20=80.",
+      "hyp": "Pode esquecer o sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:modelacao-previsao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10EST-BIV-050",
+      "themeId": "10-est",
+      "subtopicId": "10-est-bivariados-regressao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um modelo ajustado na faixa observada de 10°C a 25°C é y=120−2x, onde x é a temperatura. Prever y para −20°C deve ser feito com cautela principalmente porque...",
+      "o": [
+        "a reta deixa de ser uma equação.",
+        "−20°C está muito fora da faixa 10–25°C usada para ajustar o modelo.",
+        "correlação só funciona com temperaturas positivas.",
+        "o intercepto é 120."
+      ],
+      "a": 1,
+      "sol": "É uma extrapolação distante e a relação pode não continuar linear.",
+      "hyp": "Pode confiar cegamente na fórmula fora dos dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-est-bivariados-regressao:modelacao-extrapolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

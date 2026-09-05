@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-contingencia-independencia",
+  "subtopic": "Tabelas de contingência e independência",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha tabelas de contingência, frequências conjuntas/marginais/condicionais e critérios de independência. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-CI-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma tabela de contingência organiza dados segundo...",
+      "o": [
+        "duas variáveis categóricas.",
+        "uma única variável contínua.",
+        "apenas médias.",
+        "apenas probabilidades condicionadas."
+      ],
+      "a": 0,
+      "sol": "As linhas e colunas correspondem a categorias de duas variáveis.",
+      "hyp": "Pode confundir com tabela de frequências univariada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:def-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa tabela de contingência, os totais de linha e coluna são frequências...",
+      "o": [
+        "conjuntas.",
+        "marginais.",
+        "condicionais apenas.",
+        "impossíveis."
+      ],
+      "a": 1,
+      "sol": "Resultam de somar sobre a outra variável.",
+      "hyp": "Pode chamar conjunta ao total marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:marginais-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma célula interior da tabela representa uma frequência...",
+      "o": [
+        "marginal.",
+        "total.",
+        "conjunta.",
+        "necessariamente condicional."
+      ],
+      "a": 2,
+      "sol": "A célula corresponde simultaneamente a uma categoria de cada variável.",
+      "hyp": "Pode confundir célula com total de linha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:conjunta-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Dois acontecimentos A e B são independentes quando...",
+      "o": [
+        "A∩B=∅.",
+        "P(A)=P(B).",
+        "P(A∪B)=1.",
+        "P(A∩B)=P(A)P(B)."
+      ],
+      "a": 3,
+      "sol": "Este é o critério multiplicativo de independência.",
+      "hyp": "Pode confundir independência com incompatibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:criterio-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se A e B são independentes e P(B)>0, então...",
+      "o": [
+        "P(A|B)=P(A).",
+        "P(A|B)=P(B).",
+        "P(A|B)=0.",
+        "P(A|B)=1."
+      ],
+      "a": 0,
+      "sol": "Saber que B ocorreu não altera a probabilidade de A.",
+      "hyp": "Pode inverter o acontecimento mantido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "P(A)=0,4, P(B)=0,5 e A,B independentes. P(A∩B)=...",
+      "o": [
+        "0,9.",
+        "0,2.",
+        "0,1.",
+        "0,4."
+      ],
+      "a": 1,
+      "sol": "0,4×0,5=0,2.",
+      "hyp": "Pode somar as probabilidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:produto-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "P(A)=0,3, P(B)=0,2 e P(A∩B)=0,06. Os acontecimentos são...",
+      "o": [
+        "incompatíveis.",
+        "complementares.",
+        "independentes.",
+        "iguais."
+      ],
+      "a": 2,
+      "sol": "0,3×0,2=0,06.",
+      "hyp": "Pode confundir produto pequeno com incompatibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:testar-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "P(A)=0,3, P(B)=0,2 e P(A∩B)=0,1. Então A e B...",
+      "o": [
+        "são independentes.",
+        "são incompatíveis.",
+        "são complementares.",
+        "não são independentes."
+      ],
+      "a": 3,
+      "sol": "0,3×0,2=0,06≠0,1.",
+      "hyp": "Pode olhar apenas para a interseção ser positiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:testar-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Dois acontecimentos incompatíveis com probabilidades positivas podem ser independentes?",
+      "o": [
+        "Não.",
+        "Sim, sempre.",
+        "Só se tiverem a mesma probabilidade.",
+        "Só se a soma for 1."
+      ],
+      "a": 0,
+      "sol": "Incompatibilidade dá P(A∩B)=0, mas independência exigiria P(A)P(B)>0.",
+      "hyp": "Pode tratar 'não influenciam' e 'não podem ocorrer juntos' como sinónimos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:incomp-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes, P(A)=0,6 e P(B)=0,5, então P(A∪B)=...",
+      "o": [
+        "1,1.",
+        "0,8.",
+        "0,3.",
+        "0,5."
+      ],
+      "a": 1,
+      "sol": "Interseção=0,3; união=0,6+0,5−0,3=0,8.",
+      "hyp": "Pode somar e ultrapassar 1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:uniao-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes, então A e B^c são...",
+      "o": [
+        "incompatíveis.",
+        "complementares.",
+        "independentes.",
+        "necessariamente iguais."
+      ],
+      "a": 2,
+      "sol": "A independência preserva-se ao complementar um dos acontecimentos.",
+      "hyp": "Pode achar que complementar destrói independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:complementos-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes, então A^c e B^c são...",
+      "o": [
+        "incompatíveis.",
+        "complementares.",
+        "dependentes.",
+        "independentes."
+      ],
+      "a": 3,
+      "sol": "Os complementares de acontecimentos independentes continuam independentes.",
+      "hyp": "Pode confundir complementos com acontecimentos complementares entre si.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:complementos-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 200 pessoas, 80 são fumadoras e 50 praticam desporto; 20 fazem ambas as coisas. P(fumador)=...",
+      "o": [
+        "0,4.",
+        "0,25.",
+        "0,1.",
+        "0,5."
+      ],
+      "a": 0,
+      "sol": "80/200=0,4.",
+      "hyp": "Pode usar a célula conjunta 20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:marginal-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 200 pessoas, 80 são fumadoras, 50 praticam desporto e 20 fazem ambas as coisas. Qual é P(desporto)?",
+      "o": [
+        "0,4.",
+        "0,25.",
+        "0,1.",
+        "0,75."
+      ],
+      "a": 1,
+      "sol": "50/200=0,25.",
+      "hyp": "Pode usar 20/200.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:marginal-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 200 pessoas, 80 são fumadoras, 50 praticam desporto e 20 fazem ambas as coisas. Qual é P(fumador∩desporto)?",
+      "o": [
+        "0,4.",
+        "0,25.",
+        "0,1.",
+        "0,65."
+      ],
+      "a": 2,
+      "sol": "20/200=0,1.",
+      "hyp": "Pode usar um total marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:conjunta-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Numa amostra de 200 pessoas, P(fumador)=0,4, P(desporto)=0,25 e P(fumador∩desporto)=0,1. Fumar e praticar desporto são...",
+      "o": [
+        "incompatíveis.",
+        "complementares.",
+        "dependentes porque 0,1>0.",
+        "independentes, pois 0,4×0,25=0,1."
+      ],
+      "a": 3,
+      "sol": "A probabilidade conjunta coincide com o produto das marginais.",
+      "hyp": "Pode achar que interseção positiva implica dependência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:testar-tabela-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa tabela, 60 de 100 são A e, entre os A, 30 são B. Então P(B|A)=...",
+      "o": [
+        "0,5.",
+        "0,3.",
+        "0,6.",
+        "0,9."
+      ],
+      "a": 0,
+      "sol": "30/60=0,5.",
+      "hyp": "Pode dividir pelo total 100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-tabela-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)=P(B), com P(A)>0, então...",
+      "o": [
+        "A e B são incompatíveis.",
+        "A e B são independentes.",
+        "A=B.",
+        "A^c=B."
+      ],
+      "a": 1,
+      "sol": "É uma caracterização de independência.",
+      "hyp": "Pode confundir ausência de alteração com incompatibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-crit-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,2 e P(B|A)=0,7, enquanto P(B)=0,4, então A e B...",
+      "o": [
+        "são independentes.",
+        "são incompatíveis.",
+        "não são independentes.",
+        "são complementares."
+      ],
+      "a": 2,
+      "sol": "0,7≠0,4, portanto a ocorrência de A altera a probabilidade de B.",
+      "hyp": "Pode comparar P(A) com P(B) em vez da condicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-test-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,4 e P(B)=0,3 e A,B independentes, P(A^c∩B)=...",
+      "o": [
+        "0,12.",
+        "0,7.",
+        "0,4.",
+        "0,18."
+      ],
+      "a": 3,
+      "sol": "A^c também é independente de B; P(A^c)=0,6, logo0,6×0,3=0,18.",
+      "hyp": "Pode usar P(A)P(B).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:comp-prod-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,4 e P(B)=0,3 e A,B independentes, P(A^c∩B^c)=...",
+      "o": [
+        "0,42.",
+        "0,12.",
+        "0,3.",
+        "0,58."
+      ],
+      "a": 0,
+      "sol": "0,6×0,7=0,42.",
+      "hyp": "Pode usar complementos depois de multiplicar:1−0,12.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:dois-comp-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com A,B independentes e P(A)=0,4, P(B)=0,3, P(A∪B)=...",
+      "o": [
+        "0,12.",
+        "0,58.",
+        "0,7.",
+        "0,42."
+      ],
+      "a": 1,
+      "sol": "0,4+0,3−0,12=0,58.",
+      "hyp": "Pode somar sem subtrair a interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:uniao-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Independência significa que...",
+      "o": [
+        "os acontecimentos nunca ocorrem juntos.",
+        "têm a mesma probabilidade.",
+        "conhecer a ocorrência de um não altera a probabilidade do outro.",
+        "a sua união é certa."
+      ],
+      "a": 2,
+      "sol": "Essa é a interpretação probabilística da independência.",
+      "hyp": "Pode confundir independência com incompatibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:interpretacao-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma associação observada numa tabela de contingência...",
+      "o": [
+        "prova causalidade.",
+        "prova independência.",
+        "é sempre erro amostral.",
+        "não prova, por si só, causalidade."
+      ],
+      "a": 3,
+      "sol": "Associação estatística e relação causal são conceitos distintos.",
+      "hyp": "Pode interpretar associação como causa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:causalidade-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 500 pessoas, 300 usam app A, 200 usam B e 120 usam ambas. A frequência relativa conjunta é...",
+      "o": [
+        "0,24.",
+        "0,4.",
+        "0,6.",
+        "0,12."
+      ],
+      "a": 0,
+      "sol": "120/500=0,24.",
+      "hyp": "Pode dividir por um total marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 500 pessoas, 300 usam a app A, 200 usam a app B e 120 usam ambas. Qual é a frequência relativa marginal de A?",
+      "o": [
+        "0,24.",
+        "0,6.",
+        "0,4.",
+        "0,84."
+      ],
+      "a": 1,
+      "sol": "300/500=0,6.",
+      "hyp": "Pode usar a célula de ambos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de 500 pessoas, 300 usam a app A, 200 usam a app B e 120 usam ambas. Qual é a frequência relativa marginal de B?",
+      "o": [
+        "0,24.",
+        "0,6.",
+        "0,4.",
+        "0,8."
+      ],
+      "a": 2,
+      "sol": "200/500=0,4.",
+      "hyp": "Pode somar ambos aos utilizadores B novamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa amostra de 500 pessoas, 300 usam A, 200 usam B e 120 usam ambas. A e B parecem independentes porque...",
+      "o": [
+        "0,6+0,4=1.",
+        "120 pessoas usam ambas.",
+        "as marginais são diferentes.",
+        "0,6×0,4=0,24, igual à frequência conjunta."
+      ],
+      "a": 3,
+      "sol": "O produto das marginais coincide com a conjunta.",
+      "hyp": "Pode usar a soma das marginais como critério.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-indep-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa tabela, P(A)=0,5, P(B)=0,2 e P(A∩B)=0,15. A e B são...",
+      "o": [
+        "dependentes.",
+        "independentes.",
+        "incompatíveis.",
+        "complementares."
+      ],
+      "a": 0,
+      "sol": "0,5×0,2=0,1, diferente de 0,15.",
+      "hyp": "Pode aceitar qualquer interseção positiva como independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:dep-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,25 e P(B)=0,8 e A,B independentes, P(A∩B)=...",
+      "o": [
+        "0,05.",
+        "0,2.",
+        "1,05.",
+        "0,55."
+      ],
+      "a": 1,
+      "sol": "0,25×0,8=0,2.",
+      "hyp": "Pode somar probabilidades.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:produto-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A∩B)=0,2, P(A)=0,25 e P(B)=0,8, então...",
+      "o": [
+        "são incompatíveis.",
+        "não se pode testar.",
+        "são independentes.",
+        "são complementares."
+      ],
+      "a": 2,
+      "sol": "0,25×0,8=0,2.",
+      "hyp": "Pode achar que faltam probabilidades condicionadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:produto-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes e P(A)=0, então...",
+      "o": [
+        "B também tem probabilidade 0.",
+        "A=B.",
+        "A e B são incompatíveis apenas se B=∅.",
+        "o critério P(A∩B)=P(A)P(B) é automaticamente satisfeito."
+      ],
+      "a": 3,
+      "sol": "P(A∩B)=0=P(A)P(B), qualquer que seja B.",
+      "hyp": "Pode pensar que probabilidade zero impede falar de independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:evento-zero-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes, P(A^c∩B)=...",
+      "o": [
+        "(1−P(A))P(B).",
+        "1−P(A)P(B).",
+        "P(A)−P(B).",
+        "P(A)P(B)."
+      ],
+      "a": 0,
+      "sol": "A^c e B também são independentes.",
+      "hyp": "Pode complementar o produto conjunto em vez de uma marginal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:formula-comp-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A,B independentes, P(A^c∩B^c)=...",
+      "o": [
+        "1−P(A)P(B).",
+        "(1−P(A))(1−P(B)).",
+        "P(A^c)+P(B^c).",
+        "P(A∩B)."
+      ],
+      "a": 1,
+      "sol": "Os dois complementares são independentes.",
+      "hyp": "Pode complementar apenas a conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:formula-doiscomp-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,2 e P(A)=0,2, com P(B)>0, então...",
+      "o": [
+        "A e B são incompatíveis.",
+        "A⊂B.",
+        "A e B são independentes.",
+        "P(B)=0,2."
+      ],
+      "a": 2,
+      "sol": "A probabilidade de A não se altera ao condicionar em B.",
+      "hyp": "Pode confundir igualdade com inclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A|B)=0,2 e P(A)=0,4, então...",
+      "o": [
+        "A e B são independentes.",
+        "A e B são complementares.",
+        "A=B.",
+        "A e B não são independentes."
+      ],
+      "a": 3,
+      "sol": "A condicionada difere da marginal.",
+      "hyp": "Pode olhar apenas para ambas estarem em [0,1].",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma tabela tem 1000 casos. A ocorre em 400, B em 300 e ambos em 120. O teste de independência dá...",
+      "o": [
+        "120/1000=(400/1000)(300/1000), logo independência.",
+        "120=400+300, logo independência.",
+        "400/300=120, logo independência.",
+        "dependência porque a interseção não é zero."
+      ],
+      "a": 0,
+      "sol": "0,12=0,4×0,3.",
+      "hyp": "Pode exigir interseção zero para independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa tabela com 200 casos, A ocorre em 100, B em 80 e ambos em 50. A e B são...",
+      "o": [
+        "independentes porque 50 é metade de 100.",
+        "dependentes.",
+        "incompatíveis.",
+        "complementares."
+      ],
+      "a": 1,
+      "sol": "P(A)=0,5, P(B)=0,4, produto=0,2; P(A∩B)=0,25, logo dependentes.",
+      "hyp": "Pode comparar proporções erradas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A,B independentes, P(A)=0,6 e P(A∪B)=0,8, então P(B)=...",
+      "o": [
+        "0,2.",
+        "0,8.",
+        "0,5.",
+        "0,4."
+      ],
+      "a": 2,
+      "sol": "0,8=0,6+p−0,6p=0,6+0,4p => p=0,5.",
+      "hyp": "Pode subtrair 0,6 a 0,8 e obter 0,2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:resolver-marginal-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A,B independentes, P(A)=0,3 e P(A∪B)=0,65, então P(B)=...",
+      "o": [
+        "0,35.",
+        "0,5.",
+        "0,2.",
+        "0,5?"
+      ],
+      "a": 3,
+      "sol": "0,65=0,3+p−0,3p=0,3+0,7p =>p=0,5.",
+      "hyp": "Pode fazer apenas 0,65−0,3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:resolver-marginal-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=1/2, P(B)=1/3 e A,B independentes, P(A∩B)=...",
+      "o": [
+        "1/6.",
+        "5/6.",
+        "1/2.",
+        "2/3."
+      ],
+      "a": 0,
+      "sol": "(1/2)(1/3)=1/6.",
+      "hyp": "Pode somar frações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:frac-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=1/2, P(B)=1/3 e A e B são independentes, então P(A∪B)=...",
+      "o": [
+        "1/6.",
+        "2/3.",
+        "5/6.",
+        "1/2."
+      ],
+      "a": 1,
+      "sol": "1/2+1/3−1/6=2/3.",
+      "hyp": "Pode somar para 5/6 sem retirar interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:frac-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são independentes e ambos têm probabilidade 1/2, então P(exatamente um deles ocorrer)=...",
+      "o": [
+        "1/4.",
+        "3/4.",
+        "1/2.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "A∩B^c e A^c∩B têm 1/4 cada; soma=1/2.",
+      "hyp": "Pode contar apenas um dos casos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:exatamente-um-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A,B independentes e P(A)=P(B)=p, então P(A∩B)=...",
+      "o": [
+        "2p.",
+        "p.",
+        "1−p.",
+        "p²."
+      ],
+      "a": 3,
+      "sol": "P(A∩B)=P(A)P(B)=p².",
+      "hyp": "Pode somar probabilidades iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:simetrico-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa empresa, 40% trabalham remotamente, 30% têm horário flexível e 12% têm ambos. Os dois fatores são...",
+      "o": [
+        "independentes.",
+        "dependentes.",
+        "incompatíveis.",
+        "complementares."
+      ],
+      "a": 0,
+      "sol": "0,4×0,3=0,12.",
+      "hyp": "Pode confundir sobreposição com dependência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:modelacao-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa escola, 50% praticam desporto, 20% tocam instrumento e 15% fazem ambos. São...",
+      "o": [
+        "independentes.",
+        "dependentes.",
+        "incompatíveis.",
+        "complementares."
+      ],
+      "a": 1,
+      "sol": "0,5×0,2=0,1, mas a conjunta é0,15.",
+      "hyp": "Pode achar que qualquer sobreposição é independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:modelacao-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se a frequência condicional de B entre A é muito diferente da frequência marginal de B, isso sugere...",
+      "o": [
+        "incompatibilidade obrigatória.",
+        "complementaridade.",
+        "associação/dependência entre A e B.",
+        "igualdade dos acontecimentos."
+      ],
+      "a": 2,
+      "sol": "A ocorrência de A altera substancialmente a distribuição de B.",
+      "hyp": "Pode exigir causalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:comparar-cond-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma tabela de contingência com frequências absolutas pode ser convertida em frequências relativas dividindo cada célula por...",
+      "o": [
+        "o total da linha sempre.",
+        "o total da coluna sempre.",
+        "a maior célula.",
+        "o total geral, para frequências relativas conjuntas."
+      ],
+      "a": 3,
+      "sol": "A divisão pelo total geral dá proporções conjuntas; outros denominadores servem para condicionais.",
+      "hyp": "Pode confundir relativa conjunta com condicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:freq-rel-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,4 e P(B)=0,5 e P(A|B)=0,4, então P(A∩B)=...",
+      "o": [
+        "0,2.",
+        "0,4.",
+        "0,5.",
+        "0,9."
+      ],
+      "a": 0,
+      "sol": "P(A∩B)=P(A|B)P(B)=0,4×0,5=0,2; coincide com P(A)P(B).",
+      "hyp": "Pode usar a condicional como conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:cond-prod-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-CI-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-contingencia-independencia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Independência estatística entre duas variáveis categóricas significa, em termos de tabelas, que...",
+      "o": [
+        "todas as células são iguais.",
+        "as proporções condicionais de uma variável são as mesmas nas categorias da outra.",
+        "todos os totais marginais são iguais.",
+        "não existem observações conjuntas."
+      ],
+      "a": 1,
+      "sol": "A distribuição de uma variável não muda ao condicionar nas categorias da outra.",
+      "hyp": "Pode confundir independência com uniformidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-contingencia-independencia:tabela-criterio-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

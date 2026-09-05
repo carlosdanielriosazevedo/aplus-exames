@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-mat",
+  "subtopicId": "12-mat-modelacao",
+  "subtopic": "Modelação e aplicações",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha matrizes de dados, custos/recursos, redes, transições, sistemas lineares, combinações ponderadas e validação contextual de modelos matriciais. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12MAT-MOD-001",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma vantagem das matrizes em modelação é...",
+      "o": [
+        "organizar e combinar muitos dados relacionados de forma compacta.",
+        "eliminar a necessidade de interpretar unidades.",
+        "garantir que qualquer modelo é linear.",
+        "substituir todos os gráficos."
+      ],
+      "a": 0,
+      "sol": "Matrizes permitem estruturar tabelas, transformações e relações lineares.",
+      "hyp": "Pode atribuir às matrizes propriedades que o modelo não tem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:vantagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-002",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Modelação",
+      "q": "Uma matriz com linhas=lojas e colunas=produtos pode representar...",
+      "o": [
+        "apenas o total global.",
+        "quantidades vendidas por loja e produto.",
+        "uma função de uma variável.",
+        "um vetor sem estrutura."
+      ],
+      "a": 1,
+      "sol": "Cada entrada identifica uma combinação loja-produto.",
+      "hyp": "Pode ignorar o significado de linhas/colunas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-003",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se Q=[[10,20],[15,5]] representa quantidades de 2 produtos em 2 lojas, o total de unidades na 1.ª loja é...",
+      "o": [
+        "25.",
+        "35.",
+        "30.",
+        "50."
+      ],
+      "a": 2,
+      "sol": "Primeira linha:10+20=30.",
+      "hyp": "Pode somar a primeira coluna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:linha-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-004",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se Q=[[10,20],[15,5]] representa quantidades de 2 produtos em 2 lojas, o total vendido do 1.º produto é...",
+      "o": [
+        "30.",
+        "20.",
+        "50.",
+        "25."
+      ],
+      "a": 3,
+      "sol": "Primeira coluna:10+15=25.",
+      "hyp": "Pode somar a primeira linha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:coluna-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-005",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se p é um vetor-coluna de preços e q um vetor-coluna de quantidades, o custo total pode ser escrito como...",
+      "o": [
+        "p^T q.",
+        "pq^T obrigatoriamente.",
+        "p+q.",
+        "p^T+q."
+      ],
+      "a": 0,
+      "sol": "O produto escalar soma preço_i×quantidade_i.",
+      "hyp": "Pode usar produto exterior ou soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:custo-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-006",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Preços p=(2,3)^T e quantidades q=(10,5)^T dão custo total...",
+      "o": [
+        "25.",
+        "35.",
+        "30.",
+        "50."
+      ],
+      "a": 1,
+      "sol": "2·10+3·5=35.",
+      "hyp": "Pode somar preços e quantidades separadamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:custo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-007",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Se uma matriz Q tem linhas=lojas e colunas=produtos e p é vetor-coluna de preços, Qp dá...",
+      "o": [
+        "quantidade total por produto.",
+        "uma matriz de preços.",
+        "receita/valor total por loja.",
+        "o total global numa única entrada sempre."
+      ],
+      "a": 2,
+      "sol": "Cada linha de Q faz produto escalar com p.",
+      "hyp": "Pode confundir totais por linha e por coluna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:receita-lojas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-008",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com Q=[[10,20],[15,5]] e p=(2,3)^T, Qp=",
+      "o": [
+        "(25,25)^T.",
+        "(50,60)^T.",
+        "(30,20)^T.",
+        "(80,45)^T."
+      ],
+      "a": 3,
+      "sol": "1.ª loja:10·2+20·3=80; 2.ª:15·2+5·3=45.",
+      "hyp": "Pode somar quantidades sem ponderar pelos preços.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:receita-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-009",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se c é um vetor de custos unitários de recursos e A descreve consumo de recursos por produto, então c^T A pode representar...",
+      "o": [
+        "custo de recursos por produto.",
+        "quantidade produzida por recurso.",
+        "apenas o custo total global.",
+        "a identidade dos produtos."
+      ],
+      "a": 0,
+      "sol": "Cada coluna de A combina custos dos recursos usados por uma unidade de produto.",
+      "hyp": "Pode confundir orientação dos dados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:custos-recursos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-010",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Uma fábrica usa 2 recursos para 3 produtos. A matriz de consumo por unidade deve ter dimensão 2×3 se...",
+      "o": [
+        "linhas=produtos e colunas=recursos.",
+        "linhas=recursos e colunas=produtos.",
+        "há 2 produtos e3 recursos.",
+        "a dimensão é arbitrária."
+      ],
+      "a": 1,
+      "sol": "A convenção fixa duas linhas e três colunas.",
+      "hyp": "Pode trocar a interpretação das dimensões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:dimensao-contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-011",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T. Aq=",
+      "o": [
+        "(7,9)^T.",
+        "(13,18)^T.",
+        "(12,23)^T.",
+        "(10,8)^T."
+      ],
+      "a": 2,
+      "sol": "Recurso1:2·5+1·2=12; recurso2:3·5+4·2=23.",
+      "hyp": "Pode multiplicar elemento a elemento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:recursos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-012",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se A=[[2,1],[3,4]] dá unidades de recursos por produto e q=(5,2)^T, então Aq=(12,23)^T. A primeira componente representa...",
+      "o": [
+        "produção total do produto1.",
+        "custo do recurso1.",
+        "número de produtos.",
+        "consumo total do recurso1."
+      ],
+      "a": 3,
+      "sol": "A primeira linha corresponde ao recurso1.",
+      "hyp": "Pode interpretar a componente pela coluna em vez da linha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:interpretacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-013",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Se A representa consumos por unidade e q quantidades produzidas, a restrição Aq≤b significa...",
+      "o": [
+        "não exceder disponibilidades b de recursos.",
+        "produzir exatamente b produtos.",
+        "preços inferiores a b.",
+        "A ser menor que q."
+      ],
+      "a": 0,
+      "sol": "Cada componente do consumo total deve ficar dentro da disponibilidade.",
+      "hyp": "Pode ler a desigualdade sem contexto componente a componente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:restricoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-014",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se Aq=(12,23)^T e b=(15,20)^T, o plano é...",
+      "o": [
+        "viável porque 12<15.",
+        "inviável porque excede o recurso2.",
+        "viável porque o total35<35.",
+        "inviável apenas no recurso1."
+      ],
+      "a": 1,
+      "sol": "23>20, logo a segunda restrição falha.",
+      "hyp": "Pode verificar apenas uma componente ou somar recursos diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:viabilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-015",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz de adjacência de uma rede simples regista...",
+      "o": [
+        "apenas distâncias geométricas.",
+        "custos de produção.",
+        "quais pares de vértices estão ligados.",
+        "coordenadas dos vértices."
+      ],
+      "a": 2,
+      "sol": "Entradas 0/1 podem codificar ligações.",
+      "hyp": "Pode confundir adjacência com matriz de distâncias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:rede",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-016",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa rede não dirigida simples, a matriz de adjacência é tipicamente...",
+      "o": [
+        "antissimétrica.",
+        "triangular.",
+        "identidade.",
+        "simétrica."
+      ],
+      "a": 3,
+      "sol": "A ligação i-j implica também j-i.",
+      "hyp": "Pode esquecer a reciprocidade da ligação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:rede-simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-017",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa rede simples sem laços, os elementos diagonais da matriz de adjacência são...",
+      "o": [
+        "0.",
+        "1.",
+        "sempre−1.",
+        "graus dos vértices."
+      ],
+      "a": 0,
+      "sol": "Não há ligação de um vértice consigo próprio.",
+      "hyp": "Pode confundir diagonal com grau.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:rede-diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-018",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A é matriz de adjacência 0/1, a soma dos elementos da linha i numa rede não dirigida simples dá...",
+      "o": [
+        "o número total de vértices.",
+        "o grau do vértice i.",
+        "o número de caminhos de comprimento2.",
+        "a distância ao vértice i."
+      ],
+      "a": 1,
+      "sol": "Conta quantos vizinhos estão ligados a i.",
+      "hyp": "Pode confundir ligações diretas com caminhos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:grau",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-019",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para A=[[0,1,1],[1,0,0],[1,0,0]], o grau do vértice1 é...",
+      "o": [
+        "1.",
+        "0.",
+        "2.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "A primeira linha tem dois uns.",
+      "hyp": "Pode incluir a diagonal ou somar a coluna errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:grau-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-020",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para a rede com matriz de adjacência A=[[0,1,1],[1,0,0],[1,0,0]], os vértices 2 e 3...",
+      "o": [
+        "estão diretamente ligados.",
+        "têm grau2.",
+        "têm laço.",
+        "não estão diretamente ligados."
+      ],
+      "a": 3,
+      "sol": "a_23=a_32=0.",
+      "hyp": "Pode inferir ligação indireta como direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:adjacencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-021",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Em uma matriz de adjacência A, a entrada (A²)_ij conta, em rede simples apropriada...",
+      "o": [
+        "percursos de comprimento2 de i para j.",
+        "ligações diretas apenas.",
+        "distância mínima sempre.",
+        "grau de i apenas."
+      ],
+      "a": 0,
+      "sol": "Cada termo soma escolhas de um vértice intermédio.",
+      "hyp": "Pode confundir potência matricial com elevar entradas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:caminhos2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-022",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para A=[[0,1],[1,0]], A²=",
+      "o": [
+        "A.",
+        "I_2.",
+        "0.",
+        "2A."
+      ],
+      "a": 1,
+      "sol": "Dois passos levam cada vértice de volta a si próprio.",
+      "hyp": "Pode elevar entradas individualmente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:rede-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-023",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa rede com matriz de adjacência A=[[0,1],[1,0]], tem-se A²=I. O facto de (A²)_11=1 significa...",
+      "o": [
+        "há um laço direto no vértice1.",
+        "o grau é1 necessariamente por essa entrada.",
+        "existe um percurso de comprimento2 do vértice1 para ele próprio.",
+        "o vértice1 é isolado."
+      ],
+      "a": 2,
+      "sol": "O percurso é1→2→1.",
+      "hyp": "Pode interpretar A² como adjacência direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:caminho",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-024",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz de transição com colunas que somam1 pode modelar...",
+      "o": [
+        "uma rotação geométrica apenas.",
+        "uma tabela de preços.",
+        "um sistema sem dinâmica.",
+        "redistribuição de proporções entre estados ao longo do tempo."
+      ],
+      "a": 3,
+      "sol": "As colunas podem representar frações que saem de cada estado para os seguintes.",
+      "hyp": "Pode confundir transição de estados com transformação geométrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:transicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-025",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Se x_n é vetor de proporções e x_{n+1}=Px_n, então P descreve...",
+      "o": [
+        "a transição de um período para o seguinte.",
+        "a soma total de indivíduos.",
+        "apenas o estado inicial.",
+        "uma translação."
+      ],
+      "a": 0,
+      "sol": "Multiplicar por P atualiza o estado.",
+      "hyp": "Pode confundir operador e vetor de estado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:dinamica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-026",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se P tem 1.ª linha (0,8; 0,3), 2.ª linha (0,2; 0,7) e x_0=(100,0)^T, então x_1=",
+      "o": [
+        "(30,70)^T.",
+        "(80,20)^T.",
+        "(100,0)^T.",
+        "(50,50)^T."
+      ],
+      "a": 1,
+      "sol": "A primeira coluna indica que 80% permanecem no estado1 e20% passam ao estado2.",
+      "hyp": "Pode usar a segunda coluna apesar de x_0 estar todo no estado1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:transicao-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-027",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se P tem 1.ª linha (0,8; 0,3) e 2.ª linha (0,2; 0,7), e x_0=(0,100)^T, então x_1=",
+      "o": [
+        "(80,20)^T.",
+        "(0,100)^T.",
+        "(30,70)^T.",
+        "(50,50)^T."
+      ],
+      "a": 2,
+      "sol": "A segunda coluna aplica-se aos100 indivíduos no estado2.",
+      "hyp": "Pode escolher a coluna errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:transicao-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-028",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se as colunas de P somam1 e x representa contagens, então a soma total tende a...",
+      "o": [
+        "duplicar sempre.",
+        "cair para0.",
+        "depender apenas da diagonal.",
+        "ser preservada no modelo fechado."
+      ],
+      "a": 3,
+      "sol": "Cada unidade é redistribuída entre estados sem criação/perda.",
+      "hyp": "Pode ignorar conservação do total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:conservacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-029",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se x_{n+1}=Px_n, então x_2 é...",
+      "o": [
+        "P²x_0.",
+        "2Px_0.",
+        "P+x_0.",
+        "P^T x_0."
+      ],
+      "a": 0,
+      "sol": "Aplicam-se duas transições: P(Px_0)=P²x_0.",
+      "hyp": "Pode confundir repetição com multiplicação por2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:potencia-transicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-030",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "P^k num modelo de transição representa...",
+      "o": [
+        "k vezes a mesma matriz por soma.",
+        "o efeito de k períodos consecutivos.",
+        "o estado inicial.",
+        "apenas uma transição."
+      ],
+      "a": 1,
+      "sol": "Potência matricial corresponde à composição repetida.",
+      "hyp": "Pode interpretar expoente elemento a elemento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:transicao-k",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-031",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Um vetor x=(jovens,adultos)^T e uma matriz P podem modelar...",
+      "o": [
+        "idades individuais exatas sem perdas.",
+        "apenas coordenadas geométricas.",
+        "evolução entre classes etárias/estados segundo regras lineares simplificadas.",
+        "uma regressão não linear automaticamente."
+      ],
+      "a": 2,
+      "sol": "Modelos matriciais podem representar transferências e contribuições entre grupos.",
+      "hyp": "Pode exigir interpretação individual de cada entrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:populacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-032",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num modelo populacional, uma entrada p_ij de P pode significar...",
+      "o": [
+        "distância entre grupos.",
+        "probabilidade de i multiplicada por j sempre.",
+        "soma das populações.",
+        "contribuição do grupo j para o grupo i no período seguinte."
+      ],
+      "a": 3,
+      "sol": "Com x_{n+1}=Px_n, a coluna j descreve contribuições do estado j.",
+      "hyp": "Pode inverter origem e destino.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:entrada-transicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-033",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Um sistema linear de equações pode escrever-se compactamente como...",
+      "o": [
+        "Ax=b.",
+        "A+b=x.",
+        "A^T=x+b.",
+        "A=x/b sem ordem."
+      ],
+      "a": 0,
+      "sol": "A contém coeficientes, x incógnitas e b termos independentes.",
+      "hyp": "Pode tratar a matriz como um escalar divisível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:sistema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-034",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "O sistema 2x+y=5, x−y=1 tem matriz de coeficientes...",
+      "o": [
+        "[[2,5],[1,1]].",
+        "[[2,1],[1,−1]].",
+        "[[x,y],[x,−y]].",
+        "[[5],[1]]."
+      ],
+      "a": 1,
+      "sol": "Retiram-se os coeficientes de x e y por linha.",
+      "hyp": "Pode colocar termos independentes na matriz A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:coeficientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-035",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para o sistema 2x+y=5, x−y=1, qual é o vetor b na forma Ax=b?",
+      "o": [
+        "(2,1)^T.",
+        "(1,−1)^T.",
+        "(5,1)^T.",
+        "(x,y)^T."
+      ],
+      "a": 2,
+      "sol": "São os termos independentes das duas equações.",
+      "hyp": "Pode confundir b com uma coluna de coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:vetor-b",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-036",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A solução do sistema 2x+y=5, x−y=1 é...",
+      "o": [
+        "(1,2).",
+        "(3,−1).",
+        "(2,3).",
+        "(x,y)=(2,1)."
+      ],
+      "a": 3,
+      "sol": "Da segunda, y=x−1; na primeira 3x−1=5, logo x=2,y=1.",
+      "hyp": "Pode trocar as coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:resolver-sistema",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-037",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se A é invertível no modelo Ax=b, então...",
+      "o": [
+        "x=A^{-1}b.",
+        "x=bA^{-1}.",
+        "x=A+b.",
+        "x=A^{-1}+b."
+      ],
+      "a": 0,
+      "sol": "Multiplica-se à esquerda pela inversa.",
+      "hyp": "Pode ignorar a ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:sistema-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-038",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma matriz C pode converter quantidades de produtos em necessidades de matérias-primas. Se q muda, Cq...",
+      "o": [
+        "permanece igual.",
+        "atualiza automaticamente os consumos segundo o modelo linear.",
+        "dá sempre preços.",
+        "só existe se C for identidade."
+      ],
+      "a": 1,
+      "sol": "O modelo linear combina necessidades por unidade com quantidades.",
+      "hyp": "Pode pensar que a matriz é apenas armazenamento de dados sem operação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:conversao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-039",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se C=[[2,1],[1,3]] e q=(4,2)^T, então Cq=",
+      "o": [
+        "(8,6)^T.",
+        "(6,8)^T.",
+        "(10,10)^T.",
+        "(12,8)^T."
+      ],
+      "a": 2,
+      "sol": "Primeiro recurso:8+2=10; segundo:4+6=10.",
+      "hyp": "Pode multiplicar apenas diagonais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:conversao-calculo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-040",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se uma previsão matricial dá valores negativos para uma quantidade que fisicamente não pode ser negativa, isso sugere...",
+      "o": [
+        "que a quantidade real é negativa.",
+        "que matrizes não podem modelar o problema.",
+        "que se deve tomar módulo sem justificar.",
+        "limitação/inadequação do modelo ou necessidade de restrições."
+      ],
+      "a": 3,
+      "sol": "Resultados matemáticos devem ser confrontados com o domínio físico.",
+      "hyp": "Pode corrigir resultados mecanicamente sem rever o modelo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:validade-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-041",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma matriz de pesos W aplicada a um vetor de características x produz Wx, que pode representar...",
+      "o": [
+        "combinações lineares ponderadas das características.",
+        "apenas uma cópia de x.",
+        "uma soma sem pesos.",
+        "sempre probabilidades."
+      ],
+      "a": 0,
+      "sol": "Cada linha define uma combinação linear diferente.",
+      "hyp": "Pode ignorar o papel dos coeficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:pesos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-042",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "Se W tem 1.ª linha (0,5; 0,5), 2.ª linha (1; 0) e x=(8,6)^T, então Wx=",
+      "o": [
+        "(14,8)^T.",
+        "(7,8)^T.",
+        "(4,3)^T.",
+        "(8,7)^T."
+      ],
+      "a": 1,
+      "sol": "Primeira saída=0,5·8+0,5·6=7; segunda=8.",
+      "hyp": "Pode somar sem ponderação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:media-pesada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-043",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se W tem 1.ª linha (0,5;0,5), 2.ª linha (1;0) e x=(8,6)^T, então a primeira linha de W calcula...",
+      "o": [
+        "o dobro da primeira.",
+        "a diferença.",
+        "a média aritmética das duas características.",
+        "a segunda característica apenas."
+      ],
+      "a": 2,
+      "sol": "Os pesos 0,5 e0,5 somam1 e dão a média.",
+      "hyp": "Pode interpretar pesos iguais como soma total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-044",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma cadeia de operações 'converter unidades com A e depois agregar com B' é modelada por...",
+      "o": [
+        "ABx.",
+        "(A+B)x.",
+        "A(B+x).",
+        "BAx."
+      ],
+      "a": 3,
+      "sol": "A atua primeiro e B depois.",
+      "hyp": "Pode escrever as matrizes na ordem verbal direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:cadeia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-045",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Mudar a ordem para ABx pode alterar o resultado porque...",
+      "o": [
+        "o produto matricial não é comutativo.",
+        "a soma não é associativa.",
+        "x muda de dimensão sozinho.",
+        "A e B são sempre inversas."
+      ],
+      "a": 0,
+      "sol": "Composição de operações depende da ordem.",
+      "hyp": "Pode assumir que processos lineares comutam.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-046",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma matriz de incidência/adjacência numa rede pode ajudar a estudar...",
+      "o": [
+        "apenas preços.",
+        "ligações, graus e percursos.",
+        "apenas áreas geométricas.",
+        "apenas derivadas."
+      ],
+      "a": 1,
+      "sol": "As potências e somas de linhas podem revelar estrutura da rede.",
+      "hyp": "Pode reduzir a matriz a uma tabela sem relações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:rede-aplicacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-047",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num modelo linear y=Ax, duplicar x produz...",
+      "o": [
+        "y.",
+        "y².",
+        "2y.",
+        "A²x."
+      ],
+      "a": 2,
+      "sol": "A(2x)=2Ax=2y.",
+      "hyp": "Pode confundir linearidade com potência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:linearidade-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-048",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se y=A(x_1+x_2), então pela linearidade...",
+      "o": [
+        "y=A²x_1x_2.",
+        "y=Ax_1·Ax_2.",
+        "y=x_1+x_2.",
+        "y=Ax_1+Ax_2."
+      ],
+      "a": 3,
+      "sol": "A distribui-se sobre a soma de vetores.",
+      "hyp": "Pode multiplicar saídas em vez de somá-las.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:superposicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-049",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Ao validar um modelo matricial convém verificar...",
+      "o": [
+        "unidades, dimensões, significado das entradas e se os resultados fazem sentido no contexto.",
+        "apenas se as matrizes são quadradas.",
+        "apenas se há muitos números.",
+        "apenas se o produto é possível."
+      ],
+      "a": 0,
+      "sol": "Compatibilidade algébrica não basta; o modelo precisa de coerência semântica e física.",
+      "hyp": "Pode considerar validade matemática suficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:validacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-MOD-050",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-modelacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "A modelação com matrizes é especialmente útil quando o problema envolve...",
+      "o": [
+        "uma única constante sem relações.",
+        "várias quantidades interdependentes relacionadas de forma linear ou aproximadamente linear.",
+        "apenas uma equação sem dados.",
+        "processos que nunca podem ser organizados em tabelas."
+      ],
+      "a": 1,
+      "sol": "Matrizes compactam relações simultâneas entre muitas variáveis.",
+      "hyp": "Pode usar matrizes sem necessidade estrutural.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-modelacao:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

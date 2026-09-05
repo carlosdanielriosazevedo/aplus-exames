@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fin",
+  "subtopicId": "10-fin-juro-simples",
+  "subtopic": "Juro simples",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. As conversões temporais e taxas usadas são sempre explicitadas ou inferíveis diretamente do enunciado. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FIN-JS-001",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No regime de juro simples, os juros de cada período são calculados sobre...",
+      "o": [
+        "o capital inicial.",
+        "o montante acumulado até esse momento.",
+        "apenas os juros anteriores.",
+        "uma média aleatória."
+      ],
+      "a": 0,
+      "sol": "No juro simples, a base de cálculo mantém-se no capital inicial.",
+      "hyp": "Pode confundir juro simples com juro composto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:definicao-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-002",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um capital de 1 000 € é aplicado durante 1 ano a 5% de juro simples. Qual é o juro?",
+      "o": [
+        "25 €",
+        "50 €",
+        "75 €",
+        "100 €"
+      ],
+      "a": 1,
+      "sol": "J=1000×0,05×1=50 €.",
+      "hyp": "Pode usar 5 como fator em vez de 0,05.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juro-1-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-003",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um capital de 1 000 € é aplicado durante 1 ano a 5% de juro simples. Qual é o montante final?",
+      "o": [
+        "1 025 €",
+        "1 075 €",
+        "1 050 €",
+        "1 100 €"
+      ],
+      "a": 2,
+      "sol": "M=1000+50=1050 €.",
+      "hyp": "Pode confundir juro com montante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:montante-1-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-004",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Um capital de 800 € rende 4% ao ano em juro simples durante 1 ano. Qual é o juro?",
+      "o": [
+        "16 €",
+        "24 €",
+        "40 €",
+        "32 €"
+      ],
+      "a": 3,
+      "sol": "800×0,04=32 €.",
+      "hyp": "Pode calcular 4% de 1 000 por hábito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juro-1-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-005",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Qual fórmula representa o juro simples J para capital C, taxa por período i e n períodos?",
+      "o": [
+        "J=C×i×n",
+        "J=C+i+n",
+        "J=C(1+i)^n",
+        "J=C/i×n"
+      ],
+      "a": 0,
+      "sol": "No regime simples, J=Cin.",
+      "hyp": "Pode confundir com a fórmula do montante composto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-006",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um capital de 1 500 € é aplicado a 6% ao ano durante 2 anos, em juro simples. Qual é o juro total?",
+      "o": [
+        "90 €",
+        "180 €",
+        "120 €",
+        "210 €"
+      ],
+      "a": 1,
+      "sol": "1500×0,06×2=180 €.",
+      "hyp": "Pode calcular apenas um ano ou capitalizar os juros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juro-multiano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-007",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um capital de 1 500 € é aplicado a 6% ao ano durante 2 anos, em juro simples. Qual é o montante final?",
+      "o": [
+        "1 590 €",
+        "1 620 €",
+        "1 680 €",
+        "1 710 €"
+      ],
+      "a": 2,
+      "sol": "M=1500+180=1680 €.",
+      "hyp": "Pode somar 6% duas vezes de forma composta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:montante-multiano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-008",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "2 000 € são aplicados a 3% ao ano em juro simples durante 4 anos. Qual é o juro total?",
+      "o": [
+        "120 €",
+        "180 €",
+        "260 €",
+        "240 €"
+      ],
+      "a": 3,
+      "sol": "2000×0,03×4=240 €.",
+      "hyp": "Pode usar 12% como 0,12 sem confirmar que resulta da soma linear, embora aqui dê o mesmo juro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juro-multiano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-009",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um capital de 2 500 € rende 2,5% ao ano durante 3 anos em juro simples. Qual é o juro?",
+      "o": [
+        "187,50 €",
+        "156,25 €",
+        "175,00 €",
+        "200,00 €"
+      ],
+      "a": 0,
+      "sol": "2500×0,025×3=187,50 €.",
+      "hyp": "Pode converter 2,5% incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:taxa-decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-010",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "1 200 € a 5% ao ano durante 6 meses, assumindo proporcionalidade temporal simples. Qual é o juro?",
+      "o": [
+        "15 €",
+        "30 €",
+        "45 €",
+        "60 €"
+      ],
+      "a": 1,
+      "sol": "6 meses=0,5 ano; J=1200×0,05×0,5=30 €.",
+      "hyp": "Pode tratar 6 meses como 6 anos ou como um ano completo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:meses-fracao-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-011",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "3 000 € a 4% ao ano durante 9 meses, em juro simples proporcional ao tempo. Qual é o juro?",
+      "o": [
+        "60 €",
+        "75 €",
+        "90 €",
+        "120 €"
+      ],
+      "a": 2,
+      "sol": "9 meses=0,75 ano; J=3000×0,04×0,75=90 €.",
+      "hyp": "Pode usar 9/10 em vez de 9/12.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:meses-fracao-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-012",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "1 800 € a 8% ao ano durante 3 meses. Qual é o juro simples?",
+      "o": [
+        "18 €",
+        "24 €",
+        "48 €",
+        "36 €"
+      ],
+      "a": 3,
+      "sol": "3 meses=0,25 ano; J=1800×0,08×0,25=36 €.",
+      "hyp": "Pode esquecer a conversão temporal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:meses-fracao-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-013",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um capital gera 100 € de juro em 1 ano a uma taxa simples de 5%. Qual era o capital?",
+      "o": [
+        "2 000 €",
+        "1 000 €",
+        "1 500 €",
+        "2 500 €"
+      ],
+      "a": 0,
+      "sol": "C=J/(i n)=100/0,05=2000 €.",
+      "hyp": "Pode dividir pela percentagem escrita como 5 em vez de 0,05.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:inverter-capital",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-014",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um capital de 1 000 € gera 120 € em 2 anos com juro simples. Qual é a taxa anual?",
+      "o": [
+        "4%",
+        "6%",
+        "5%",
+        "12%"
+      ],
+      "a": 1,
+      "sol": "i=120/(1000×2)=0,06=6%.",
+      "hyp": "Pode dividir apenas pelo capital e obter a taxa total de 12%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:inverter-taxa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-015",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "1 500 € a 4% ao ano geraram 180 € de juro simples. Durante quantos anos esteve aplicado?",
+      "o": [
+        "2",
+        "4",
+        "3",
+        "5"
+      ],
+      "a": 2,
+      "sol": "n=180/(1500×0,04)=3 anos.",
+      "hyp": "Pode esquecer que a taxa é anual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:inverter-tempo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-016",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "No juro simples com capital e taxa fixos, como evolui o montante ao longo do tempo?",
+      "o": [
+        "Exponencialmente.",
+        "De forma aleatória.",
+        "Mantém-se constante.",
+        "Linearmente."
+      ],
+      "a": 3,
+      "sol": "O juro cresce proporcionalmente ao número de períodos, logo o montante é uma função afim do tempo.",
+      "hyp": "Pode confundir crescimento linear com composto exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:crescimento-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-017",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se o tempo de aplicação duplica num regime simples, mantendo capital e taxa, o juro...",
+      "o": [
+        "duplica.",
+        "fica igual.",
+        "quadruplica.",
+        "é elevado ao quadrado."
+      ],
+      "a": 0,
+      "sol": "J=Cin é diretamente proporcional a n.",
+      "hyp": "Pode aplicar uma lógica exponencial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:proporcionalidade-tempo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-018",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se o capital inicial duplica em juro simples, mantendo taxa e tempo, o juro...",
+      "o": [
+        "reduz para metade.",
+        "duplica.",
+        "mantém-se.",
+        "quadruplica."
+      ],
+      "a": 1,
+      "sol": "J é diretamente proporcional a C.",
+      "hyp": "Pode não reconhecer proporcionalidade direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:proporcionalidade-capital",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-019",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se a taxa anual passa de 3% para 6%, mantendo capital e tempo, o juro simples...",
+      "o": [
+        "triplica.",
+        "fica igual.",
+        "duplica.",
+        "passa a metade."
+      ],
+      "a": 2,
+      "sol": "A taxa duplicou, logo o juro também duplica.",
+      "hyp": "Pode confundir percentagens com diferenças absolutas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:proporcionalidade-taxa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-020",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um empréstimo didático de 4 000 € usa juro simples de 7% ao ano por 2 anos. Qual é o juro total?",
+      "o": [
+        "280 €",
+        "420 €",
+        "700 €",
+        "560 €"
+      ],
+      "a": 3,
+      "sol": "4000×0,07×2=560 €.",
+      "hyp": "Pode calcular apenas um ano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:emprestimo-juro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-021",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um empréstimo didático de 4 000 € usa juro simples de 7% ao ano por 2 anos. Se for pago integralmente no fim, qual é o montante total?",
+      "o": [
+        "4 560 €",
+        "4 280 €",
+        "4 420 €",
+        "4 700 €"
+      ],
+      "a": 0,
+      "sol": "4000+560=4560 €.",
+      "hyp": "Pode confundir prestação com montante final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:emprestimo-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-022",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma aplicação de 2 000 € terminou com 2 300 € após 3 anos em juro simples. Qual foi a taxa anual?",
+      "o": [
+        "4%",
+        "5%",
+        "6%",
+        "7%"
+      ],
+      "a": 1,
+      "sol": "J=300 €. i=300/(2000×3)=0,05=5%.",
+      "hyp": "Pode calcular 300/2000=15% e esquecer os 3 anos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:taxa-a-partir-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-023",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um capital terminou em 1 260 € depois de 2 anos a 5% ao ano em juro simples. Qual era o capital inicial?",
+      "o": [
+        "1 100 €",
+        "1 200 €",
+        "1 145,45 €",
+        "1 230 €"
+      ],
+      "a": 2,
+      "sol": "M=C(1+0,05×2)=1,1C. C=1260/1,1≈1145,45 €.",
+      "hyp": "Pode subtrair 10% do montante em vez de dividir pelo fator 1,1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:capital-a-partir-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-024",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Que capital, aplicado a 4% ao ano durante 5 anos em juro simples, produz montante de 3 600 €?",
+      "o": [
+        "2 800 €",
+        "3 200 €",
+        "3 400 €",
+        "3 000 €"
+      ],
+      "a": 3,
+      "sol": "M=C(1+0,04×5)=1,2C; C=3600/1,2=3000 €.",
+      "hyp": "Pode subtrair 20% do montante em vez de dividir por 1,2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:capital-a-partir-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-025",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quanto tempo precisa um capital de 2 500 € a 4% ao ano para gerar 500 € de juro simples?",
+      "o": [
+        "5 anos",
+        "4 anos",
+        "6 anos",
+        "8 anos"
+      ],
+      "a": 0,
+      "sol": "2500×0,04=100 € por ano; para 500 € são 5 anos.",
+      "hyp": "Pode dividir pelo montante em vez do juro anual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:tempo-a-partir-juro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-026",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "1 800 € são aplicados a 6% ao ano durante 15 meses em regime simples. Qual é o juro?",
+      "o": [
+        "108 €",
+        "135 €",
+        "121,50 €",
+        "162 €"
+      ],
+      "a": 1,
+      "sol": "15 meses=1,25 anos; J=1800×0,06×1,25=135 €.",
+      "hyp": "Pode usar 15/10 ou 15 anos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:meses-acima-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-027",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "2 400 € a 5% ao ano durante 18 meses em juro simples geram quanto de juro?",
+      "o": [
+        "120 €",
+        "150 €",
+        "180 €",
+        "240 €"
+      ],
+      "a": 2,
+      "sol": "18 meses=1,5 anos; J=2400×0,05×1,5=180 €.",
+      "hyp": "Pode tratar 18 meses como 18/100 anos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:meses-acima-ano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-028",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma aplicação simples de 1 000 € a 5% ao ano rende 50 € no primeiro ano. Quanto rende apenas no segundo ano?",
+      "o": [
+        "52,50 €",
+        "55 €",
+        "100 €",
+        "50 €"
+      ],
+      "a": 3,
+      "sol": "Em juro simples a base permanece 1000 €, logo cada ano rende 50 €.",
+      "hyp": "Pode capitalizar os juros do primeiro ano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juros-por-periodo-constantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-029",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Em juro simples, por que o juro de cada ano é constante quando capital e taxa não mudam?",
+      "o": [
+        "Porque a taxa é sempre aplicada ao mesmo capital inicial.",
+        "Porque a taxa diminui todos os anos.",
+        "Porque os juros anteriores são sempre duplicados.",
+        "Porque o montante não cresce."
+      ],
+      "a": 0,
+      "sol": "A base de cálculo não incorpora os juros acumulados.",
+      "hyp": "Pode confundir com capitalização composta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:base-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-030",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Comparação",
+      "q": "Opção A: 2 000 € a 4% simples por 3 anos. Opção B: 2 000 € a 5% simples por 2 anos. Qual gera mais juro?",
+      "o": [
+        "B, por 40 €.",
+        "A, por 40 €.",
+        "A, por 20 €.",
+        "São iguais."
+      ],
+      "a": 1,
+      "sol": "A: 240 €. B: 200 €. A gera mais 40 €.",
+      "hyp": "Pode comparar apenas as taxas e ignorar o tempo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:comparar-opcoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-031",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Comparação",
+      "q": "Opção A: 1 500 € a 6% simples por 2 anos. Opção B: 1 800 € a 5% simples por 2 anos. Qual gera mais juro?",
+      "o": [
+        "A, por 30 €.",
+        "B, por 30 €.",
+        "A, por 0 €; são iguais.",
+        "B, por 60 €."
+      ],
+      "a": 2,
+      "sol": "A: 1500×0,06×2=180 €. B: 1800×0,05×2=180 €. São iguais.",
+      "hyp": "Pode olhar apenas para capital ou taxa isoladamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:comparar-opcoes-igual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-032",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um capital rende 72 € por ano em regime simples. Quanto rende em 2 anos e meio?",
+      "o": [
+        "144 €",
+        "162 €",
+        "216 €",
+        "180 €"
+      ],
+      "a": 3,
+      "sol": "72×2,5=180 €.",
+      "hyp": "Pode arredondar 2,5 para 2 ou 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juro-anual-para-periodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-033",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma aplicação gera 45 € de juro a cada 6 meses em regime simples. Quanto gera em 2 anos?",
+      "o": [
+        "180 €",
+        "90 €",
+        "135 €",
+        "225 €"
+      ],
+      "a": 0,
+      "sol": "2 anos contêm 4 períodos de 6 meses; 4×45=180 €.",
+      "hyp": "Pode contar apenas dois semestres.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:periodos-semestrais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-034",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Capital de 5 000 €, taxa simples de 0,5% ao mês durante 8 meses. Qual é o juro?",
+      "o": [
+        "100 €",
+        "200 €",
+        "150 €",
+        "250 €"
+      ],
+      "a": 1,
+      "sol": "J=5000×0,005×8=200 €.",
+      "hyp": "Pode converter para taxa anual sem necessidade ou usar 0,5 como fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:taxa-mensal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-035",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "1 200 € a 1% ao mês durante 5 meses, em juro simples. Qual é o montante?",
+      "o": [
+        "1 240 €",
+        "1 250 €",
+        "1 260 €",
+        "1 300 €"
+      ],
+      "a": 2,
+      "sol": "J=1200×0,01×5=60 €; M=1260 €.",
+      "hyp": "Pode aplicar crescimento composto mensal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:taxa-mensal-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-036",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma aplicação simples de 2 000 € rende 160 € em 8 meses. Qual é a taxa mensal?",
+      "o": [
+        "0,5%",
+        "0,8%",
+        "2%",
+        "1%"
+      ],
+      "a": 3,
+      "sol": "i=160/(2000×8)=0,01=1% ao mês.",
+      "hyp": "Pode tratar 8 meses como anos ou esquecer o número de períodos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:inverter-taxa-mensal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-037",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um fundo aplica 3 000 € a 4,8% ao ano em juro simples durante 10 meses. Qual é o montante final?",
+      "o": [
+        "3 120 €",
+        "3 100 €",
+        "3 110 €",
+        "3 140 €"
+      ],
+      "a": 0,
+      "sol": "10/12 ano; J=3000×0,048×10/12=120 €. M=3120 €.",
+      "hyp": "Pode usar 10/100 como fração anual.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:modelacao-meses",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-038",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma aplicação simples de 2 400 € termina com 2 688 € após 3 anos. Qual foi a taxa anual?",
+      "o": [
+        "3%",
+        "4%",
+        "5%",
+        "6%"
+      ],
+      "a": 1,
+      "sol": "J=288 €. i=288/(2400×3)=0,04=4%.",
+      "hyp": "Pode calcular a taxa total de 12% e não anualizar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:inverter-taxa-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-039",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um capital aplicado a 7,5% ao ano em juro simples durante 2 anos termina em 2 300 €. Qual era o capital?",
+      "o": [
+        "1 900 €",
+        "2 050 €",
+        "2 000 €",
+        "2 100 €"
+      ],
+      "a": 2,
+      "sol": "M=C(1+0,075×2)=1,15C; C=2300/1,15=2000 €.",
+      "hyp": "Pode subtrair 15% do montante em vez de dividir pelo fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:capital-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-040",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um capital de 4 000 € deve atingir 4 600 € em juro simples a 5% ao ano. Quanto tempo é necessário?",
+      "o": [
+        "2 anos",
+        "2,5 anos",
+        "4 anos",
+        "3 anos"
+      ],
+      "a": 3,
+      "sol": "J=600 €. J anual=200 €. 600/200=3 anos.",
+      "hyp": "Pode usar 600/0,05 sem dividir pelo capital.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:tempo-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-041",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se M(t)=2 000+80t representa o montante em euros ao fim de t anos num regime simples, qual é o capital inicial?",
+      "o": [
+        "2 000 €",
+        "80 €",
+        "1 920 €",
+        "2 080 €"
+      ],
+      "a": 0,
+      "sol": "Em t=0, M(0)=2000 €, o capital inicial.",
+      "hyp": "Pode confundir declive com ordenada na origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:funcao-afim-capital",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-042",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Na função M(t)=2 000+80t, o que representa 80?",
+      "o": [
+        "O capital inicial.",
+        "O juro ganho por ano.",
+        "A taxa percentual anual.",
+        "O montante após 80 anos."
+      ],
+      "a": 1,
+      "sol": "O coeficiente de t é o acréscimo anual constante em euros.",
+      "hyp": "Pode confundir taxa percentual com juro anual em euros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:funcao-afim-declive",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-043",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se M(t)=1 500(1+0,04t), qual é o montante ao fim de 5 anos?",
+      "o": [
+        "1 650 €",
+        "1 725 €",
+        "1 800 €",
+        "1 875 €"
+      ],
+      "a": 2,
+      "sol": "1+0,04×5=1,2; 1500×1,2=1800 €.",
+      "hyp": "Pode aplicar (1,04)^5, que seria regime composto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:formula-montante-simples",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-044",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para M(t)=1 500(1+0,04t), em que instante o montante chega a 1 740 €?",
+      "o": [
+        "3 anos",
+        "5 anos",
+        "6 anos",
+        "4 anos"
+      ],
+      "a": 3,
+      "sol": "1740/1500=1,16; 0,04t=0,16; t=4.",
+      "hyp": "Pode resolver como exponencial em vez de equação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:resolver-tempo-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-045",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Comparação",
+      "q": "A: 3 000 € a 4% simples por 5 anos. B: 2 500 € a 5% simples por 5 anos. Qual termina com maior montante?",
+      "o": [
+        "A, com 3 600 €.",
+        "B, com 3 625 €.",
+        "A, com 3 750 €.",
+        "São iguais."
+      ],
+      "a": 0,
+      "sol": "A: 3000(1+0,2)=3600 €. B: 2500(1+0,25)=3125 €. A é maior.",
+      "hyp": "Pode comparar apenas a taxa e ignorar o capital inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:comparar-montantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-046",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um investimento simples tem capital 2 500 € e juro anual fixo de 125 €. Qual é a taxa anual?",
+      "o": [
+        "4%",
+        "5%",
+        "6%",
+        "8%"
+      ],
+      "a": 1,
+      "sol": "125/2500=0,05=5%.",
+      "hyp": "Pode dividir capital pelo juro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:juro-anual-para-taxa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-047",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um empréstimo didático de 6 000 € cobra juro simples de 0,8% ao mês durante 10 meses. Qual é o juro total?",
+      "o": [
+        "360 €",
+        "420 €",
+        "480 €",
+        "600 €"
+      ],
+      "a": 2,
+      "sol": "6000×0,008×10=480 €.",
+      "hyp": "Pode tratar 0,8% como 0,8 ou multiplicar por 12 sem necessidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:taxa-mensal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-048",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um empréstimo didático de 6 000 € cobra juro simples de 0,8% ao mês durante 10 meses. Qual é o montante total a liquidar no fim, ignorando outras comissões?",
+      "o": [
+        "6 360 €",
+        "6 420 €",
+        "6 600 €",
+        "6 480 €"
+      ],
+      "a": 3,
+      "sol": "6000+480=6480 €.",
+      "hyp": "Pode esquecer que o montante inclui capital e juro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:emprestimo-montante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-049",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação distingue corretamente juro simples de composto?",
+      "o": [
+        "No simples, os juros não passam a gerar novos juros; no composto, passam.",
+        "No simples, a taxa é sempre maior.",
+        "No composto, o capital inicial desaparece.",
+        "São matematicamente idênticos para qualquer duração."
+      ],
+      "a": 0,
+      "sol": "A capitalização dos juros é a diferença estrutural essencial.",
+      "hyp": "Pode confundir diferenças de fórmula com diferenças apenas de taxa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:simples-vs-composto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FIN-JS-050",
+      "themeId": "10-fin",
+      "subtopicId": "10-fin-juro-simples",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma aplicação de 4 800 € a juro simples de 3,5% ao ano permanece 30 meses. Qual é o montante final?",
+      "o": [
+        "5 136 €",
+        "5 220 €",
+        "5 184 €",
+        "5 280 €"
+      ],
+      "a": 1,
+      "sol": "30 meses=2,5 anos. J=4800×0,035×2,5=420 €. M=5220 €.",
+      "hyp": "Pode usar 30/100 ou 30 anos em vez de 2,5 anos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fin-juro-simples:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcd",
+  "subtopicId": "12-fcd-regras-cadeia",
+  "subtopic": "Operações entre derivadas e regra da cadeia",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha linearidade, produto, quociente, cadeia simples/múltipla, diferenciação logarítmica e aplicações a taxas relacionadas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCD-RC-001",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de f(x)+g(x) é...",
+      "o": [
+        "f'(x)+g'(x).",
+        "f'(x)g'(x).",
+        "f(x)+g'(x).",
+        "f'(x)+g(x)."
+      ],
+      "a": 0,
+      "sol": "A derivação é linear relativamente à soma.",
+      "hyp": "Pode multiplicar derivadas por analogia com o produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:soma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-002",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A derivada de kf(x), com k constante, é...",
+      "o": [
+        "k' f(x).",
+        "k f'(x).",
+        "f'(x)/k.",
+        "kf(x)."
+      ],
+      "a": 1,
+      "sol": "A constante sai da derivação.",
+      "hyp": "Pode derivar a constante como se fosse variável.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-003",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A regra do produto é...",
+      "o": [
+        "(fg)'=f'g'.",
+        "(fg)'=f'g−fg'.",
+        "(fg)'=f'g+fg'.",
+        "(fg)'=fg."
+      ],
+      "a": 2,
+      "sol": "Deriva-se um fator de cada vez e somam-se os termos.",
+      "hyp": "Pode multiplicar apenas as derivadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-004",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A regra do quociente é...",
+      "o": [
+        "(f/g)'=f'/g'.",
+        "(f/g)'=(f'g+fg')/g².",
+        "(f/g)'=(fg'−f'g)/g².",
+        "(f/g)'=(f'g−fg')/g²."
+      ],
+      "a": 3,
+      "sol": "Numerador: derivada do de cima vezes o de baixo menos o de cima vezes derivada do de baixo.",
+      "hyp": "Pode trocar a ordem dos termos ou usar f'/g'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-005",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A regra da cadeia para f(g(x)) é...",
+      "o": [
+        "f'(g(x))g'(x).",
+        "f'(x)g'(x).",
+        "f(g'(x)).",
+        "f'(g'(x))."
+      ],
+      "a": 0,
+      "sol": "Deriva-se a função exterior no ponto interior e multiplica-se pela derivada interior.",
+      "hyp": "Pode derivar interior e exterior sem composição correta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-006",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x e^x é...",
+      "o": [
+        "xe^x.",
+        "e^x(x+1).",
+        "e^{x+1}.",
+        "x e^{x−1}."
+      ],
+      "a": 1,
+      "sol": "Produto:1·e^x+x·e^x.",
+      "hyp": "Pode derivar apenas um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-007",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x ln x, x>0, é...",
+      "o": [
+        "1/x.",
+        "x/x.",
+        "ln x+1.",
+        "ln x."
+      ],
+      "a": 2,
+      "sol": "Produto:1·lnx+x·1/x=lnx+1.",
+      "hyp": "Pode esquecer um dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-008",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x sin x é...",
+      "o": [
+        "cos x.",
+        "x cos x.",
+        "sin x−x cos x.",
+        "sin x+x cos x."
+      ],
+      "a": 3,
+      "sol": "Produto: sinx+xcosx.",
+      "hyp": "Pode derivar apenas o seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-009",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x cos x é...",
+      "o": [
+        "cos x−x sin x.",
+        "−sin x.",
+        "x sin x.",
+        "cos x+x sin x."
+      ],
+      "a": 0,
+      "sol": "Produto: cosx+x(−sinx).",
+      "hyp": "Pode perder o sinal do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-010",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de (x²+1)e^x é...",
+      "o": [
+        "2xe^x.",
+        "e^x(x²+2x+1).",
+        "e^x(x²+1).",
+        "e^x(2x+1)."
+      ],
+      "a": 1,
+      "sol": "Produto:2xe^x+(x²+1)e^x.",
+      "hyp": "Pode esquecer um dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-011",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de sin x·cos x é...",
+      "o": [
+        "1.",
+        "sin²x+cos²x.",
+        "cos²x−sin²x.",
+        "−2sinxcosx."
+      ],
+      "a": 2,
+      "sol": "Produto:cosx·cosx+sinx·(−sinx).",
+      "hyp": "Pode substituir imediatamente pela identidade errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-012",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x² ln x é...",
+      "o": [
+        "2x/x.",
+        "x²/x.",
+        "2x ln x.",
+        "2x ln x+x."
+      ],
+      "a": 3,
+      "sol": "Produto:2xlnx+x²(1/x)=2xlnx+x.",
+      "hyp": "Pode esquecer o segundo termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-013",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^x sin x é...",
+      "o": [
+        "e^x(sin x+cos x).",
+        "e^x cos x.",
+        "e^x(sin x−cos x).",
+        "sin x+e^x."
+      ],
+      "a": 0,
+      "sol": "Produto: e^x sinx+e^x cosx.",
+      "hyp": "Pode derivar apenas um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-exp-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-014",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^x cos x é...",
+      "o": [
+        "e^x(cos x+sin x).",
+        "e^x(cos x−sin x).",
+        "−e^x sin x.",
+        "e^x cos x."
+      ],
+      "a": 1,
+      "sol": "Produto: e^x cosx−e^x sinx.",
+      "hyp": "Pode perder o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-exp-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-015",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de (x+1)/(x−1) é...",
+      "o": [
+        "2/(x−1)².",
+        "1.",
+        "−2/(x−1)².",
+        "2x/(x−1)²."
+      ],
+      "a": 2,
+      "sol": "[(x−1)−(x+1)]/(x−1)²=−2/(x−1)².",
+      "hyp": "Pode trocar a ordem do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-016",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de x/(x+1) é...",
+      "o": [
+        "(2x+1)/(x+1)².",
+        "x/(x+1)².",
+        "1/(x+1).",
+        "1/(x+1)²."
+      ],
+      "a": 3,
+      "sol": "[(x+1)−x]/(x+1)²=1/(x+1)².",
+      "hyp": "Pode esquecer simplificar o numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-017",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de sin x/x, x≠0, é...",
+      "o": [
+        "(x cos x−sin x)/x².",
+        "(cos x−1)/x.",
+        "cos x/x.",
+        "(x cos x+sin x)/x²."
+      ],
+      "a": 0,
+      "sol": "Quociente: (cosx·x−sinx·1)/x².",
+      "hyp": "Pode usar sinal positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-018",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de ln x/x, x>0, é...",
+      "o": [
+        "(1+ln x)/x².",
+        "(1−ln x)/x².",
+        "1/x².",
+        "ln x/x²."
+      ],
+      "a": 1,
+      "sol": "[(1/x)x−lnx]/x²=(1−lnx)/x².",
+      "hyp": "Pode errar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-019",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^x/(x+1) é...",
+      "o": [
+        "e^x/(x+1)².",
+        "e^x(x+2)/(x+1)².",
+        "e^x x/(x+1)².",
+        "e^x."
+      ],
+      "a": 2,
+      "sol": "[e^x(x+1)−e^x]/(x+1)²=e^x x/(x+1)².",
+      "hyp": "Pode não simplificar corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-020",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A derivada de (2x−1)^5 é...",
+      "o": [
+        "5(2x−1)^4.",
+        "10(2x−1)^5.",
+        "5(2x−1)^5.",
+        "10(2x−1)^4."
+      ],
+      "a": 3,
+      "sol": "Regra da cadeia:5(2x−1)^4·2.",
+      "hyp": "Pode esquecer a derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-021",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A derivada de √(3x+1) é...",
+      "o": [
+        "3/[2√(3x+1)].",
+        "1/[2√(3x+1)].",
+        "3√(3x+1).",
+        "1/√(3x+1)."
+      ],
+      "a": 0,
+      "sol": "(1/2)(3x+1)^{-1/2}·3.",
+      "hyp": "Pode esquecer o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-022",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A derivada de 1/(2x+3) é...",
+      "o": [
+        "−1/(2x+3)².",
+        "−2/(2x+3)².",
+        "2/(2x+3)².",
+        "1/(2x+3)."
+      ],
+      "a": 1,
+      "sol": "(2x+3)^{-1}'=−(2x+3)^{-2}·2.",
+      "hyp": "Pode perder o fator ou o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-023",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A derivada de e^{x²+1} é...",
+      "o": [
+        "e^{2x}.",
+        "2e^{x²+1}.",
+        "2x e^{x²+1}.",
+        "(x²+1)e^{x²}."
+      ],
+      "a": 2,
+      "sol": "Regra da cadeia com g'=2x.",
+      "hyp": "Pode substituir o expoente pela derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-024",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A derivada de ln(1+x²) é...",
+      "o": [
+        "1/(1+x²).",
+        "2/(1+x).",
+        "ln(2x).",
+        "2x/(1+x²)."
+      ],
+      "a": 3,
+      "sol": "g'/g com g=1+x².",
+      "hyp": "Pode esquecer a derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-025",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A derivada de sin(3x²) é...",
+      "o": [
+        "6x cos(3x²).",
+        "3cos(3x²).",
+        "6x sin(3x²).",
+        "cos(6x)."
+      ],
+      "a": 0,
+      "sol": "Derivada interna 6x.",
+      "hyp": "Pode derivar o argumento dentro do cosseno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-sin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-026",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A derivada de cos(1−x) é...",
+      "o": [
+        "−sin(1−x).",
+        "sin(1−x).",
+        "cos(1−x).",
+        "−cos(1−x)."
+      ],
+      "a": 1,
+      "sol": "−sin(1−x)·(−1)=sin(1−x).",
+      "hyp": "Pode esquecer o duplo sinal negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-cos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-027",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de [ln x]^2, x>0, é...",
+      "o": [
+        "2/x.",
+        "(ln x)/x².",
+        "2ln x/x.",
+        "2ln x."
+      ],
+      "a": 2,
+      "sol": "Cadeia:2lnx·1/x.",
+      "hyp": "Pode derivar o quadrado sem a função interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-log-potencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-028",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^{sin x} é...",
+      "o": [
+        "e^{cos x}.",
+        "e^{sin x}sin x.",
+        "−e^{sin x}sin x.",
+        "e^{sin x}cos x."
+      ],
+      "a": 3,
+      "sol": "Cadeia: exp(sinx)·cosx.",
+      "hyp": "Pode substituir o expoente pela derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-exp-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-029",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(e^x+1) é...",
+      "o": [
+        "e^x/(e^x+1).",
+        "1/(e^x+1).",
+        "e^x.",
+        "e^x ln(e^x+1)."
+      ],
+      "a": 0,
+      "sol": "g'/g, com g=e^x+1.",
+      "hyp": "Pode esquecer o numerador e^x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-log-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-030",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin(e^x) é...",
+      "o": [
+        "cos(e^x).",
+        "e^x cos(e^x).",
+        "e^x sin(e^x).",
+        "cos x·e^x."
+      ],
+      "a": 1,
+      "sol": "Cadeia:cos(e^x)·e^x.",
+      "hyp": "Pode esquecer a derivada interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-trig-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-031",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^{x²} ln x, x>0, é...",
+      "o": [
+        "2x e^{x²}/x.",
+        "e^{x²}ln x.",
+        "2x e^{x²}ln x+e^{x²}/x.",
+        "2x e^{x²}+1/x."
+      ],
+      "a": 2,
+      "sol": "Regra do produto e cadeia no primeiro fator.",
+      "hyp": "Pode esquecer uma das regras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-cadeia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-032",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de x² sin(3x) é...",
+      "o": [
+        "2x sin(3x)+x² cos(3x).",
+        "6x cos(3x).",
+        "3x² cos(3x).",
+        "2x sin(3x)+3x² cos(3x)."
+      ],
+      "a": 3,
+      "sol": "Produto e cadeia no seno.",
+      "hyp": "Pode esquecer o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-cadeia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-033",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de (x+1)e^{2x} é...",
+      "o": [
+        "e^{2x}(2x+3).",
+        "e^{2x}(x+2).",
+        "2(x+1)e^{2x}.",
+        "e^{2x}."
+      ],
+      "a": 0,
+      "sol": "Produto: e^{2x}+2(x+1)e^{2x}=e^{2x}(2x+3).",
+      "hyp": "Pode esquecer o primeiro termo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-exp",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-034",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln x·sin x é...",
+      "o": [
+        "cos x/x.",
+        "sin x/x+ln x cos x.",
+        "ln x cos x.",
+        "sin x/x−ln x cos x."
+      ],
+      "a": 1,
+      "sol": "Produto: (1/x)sinx+lnx cosx.",
+      "hyp": "Pode derivar apenas um fator.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:produto-log-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-035",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de (x²+1)/(x−1) é...",
+      "o": [
+        "(x²+2x−1)/(x−1)².",
+        "2x/(x−1).",
+        "(x²−2x−1)/(x−1)².",
+        "(x²+1)/(x−1)²."
+      ],
+      "a": 2,
+      "sol": "[2x(x−1)−(x²+1)]/(x−1)²=x²−2x−1 sobre o denominador.",
+      "hyp": "Pode errar a expansão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente-polinomial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-036",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^x/sin x é...",
+      "o": [
+        "e^x(sin x+cos x)/sin²x.",
+        "e^x/sin²x.",
+        "e^x cos x/sin²x.",
+        "e^x(sin x−cos x)/sin²x."
+      ],
+      "a": 3,
+      "sol": "Quociente: [e^x sinx−e^x cosx]/sin²x.",
+      "hyp": "Pode trocar o sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:quociente-exp-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-037",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(x²+e^x) é...",
+      "o": [
+        "(2x+e^x)/(x²+e^x).",
+        "1/(x²+e^x).",
+        "2x+e^x.",
+        "ln(2x+e^x)."
+      ],
+      "a": 0,
+      "sol": "g'/g com g'=2x+e^x.",
+      "hyp": "Pode esquecer dividir pela função interna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-log-complexa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-038",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de e^{ln(x²+1)} é...",
+      "o": [
+        "2x e^{ln(x²+1)}.",
+        "2x.",
+        "1/(x²+1).",
+        "e^{2x/(x²+1)}."
+      ],
+      "a": 1,
+      "sol": "A função simplifica para x²+1; pela cadeia também resulta 2x.",
+      "hyp": "Pode não reconhecer a composição inversa e manter fatores redundantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:simplificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-039",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(e^{x²}) é...",
+      "o": [
+        "e^{x²}.",
+        "2x/e^{x²}.",
+        "2x.",
+        "x²."
+      ],
+      "a": 2,
+      "sol": "ln(e^{x²})=x².",
+      "hyp": "Pode derivar sem simplificar e errar o cancelamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:simplificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-040",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de √(1+sin x) é...",
+      "o": [
+        "sin x/[2√(1+sin x)].",
+        "cos x/√(1+sin x).",
+        "−sin x/[2√(1+sin x)].",
+        "cos x/[2√(1+sin x)]."
+      ],
+      "a": 3,
+      "sol": "Cadeia com derivada interna cosx.",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-raiz-trig",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-041",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de [1+e^{2x}]^3 é...",
+      "o": [
+        "6e^{2x}[1+e^{2x}]².",
+        "3e^{2x}[1+e^{2x}]².",
+        "6e^{2x}[1+e^{2x}]³.",
+        "3[1+e^{2x}]²."
+      ],
+      "a": 0,
+      "sol": "Exterior:3[...]²; interior:2e^{2x}.",
+      "hyp": "Pode esquecer uma das cadeias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-042",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de sin²(e^x) é...",
+      "o": [
+        "2sin(e^x)cos(e^x).",
+        "2e^x sin(e^x)cos(e^x).",
+        "e^x cos²(e^x).",
+        "2e^x sin²(e^x)."
+      ],
+      "a": 1,
+      "sol": "Duas cadeias: quadrado, seno e exponencial.",
+      "hyp": "Pode esquecer o fator e^x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-tripla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-043",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de ln(√(1+x²)) é...",
+      "o": [
+        "2x/(1+x²).",
+        "1/[2√(1+x²)].",
+        "x/(1+x²).",
+        "x/√(1+x²)."
+      ],
+      "a": 2,
+      "sol": "ln√u=(1/2)lnu; derivada=(1/2)·2x/(1+x²).",
+      "hyp": "Pode esquecer o fator1/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:cadeia-simplificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-044",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de [e^x/(1+e^x)] é...",
+      "o": [
+        "e^x(1−e^x)/(1+e^x)².",
+        "1/(1+e^x).",
+        "e^x/(1+e^x).",
+        "e^x/(1+e^x)²."
+      ],
+      "a": 3,
+      "sol": "Quociente: e^x(1+e^x)−e^x·e^x=e^x.",
+      "hyp": "Pode não cancelar os termos e^{2x}.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:logistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-045",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A derivada de 1/(1+e^{-x}) é...",
+      "o": [
+        "e^{-x}/(1+e^{-x})².",
+        "−e^{-x}/(1+e^{-x})².",
+        "1/(1+e^{-x})².",
+        "e^x/(1+e^{-x})²."
+      ],
+      "a": 0,
+      "sol": "Escrevendo (1+e^{-x})^{-1}, deriva-se:−(...)^{-2}·(−e^{-x}).",
+      "hyp": "Pode perder um dos dois sinais negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:logistica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-046",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Antes de derivar uma expressão complexa, simplificá-la pode...",
+      "o": [
+        "alterar sempre a função.",
+        "reduzir erros, desde que se preserve o domínio relevante.",
+        "eliminar a necessidade de conhecer regras.",
+        "permitir ignorar restrições de domínio."
+      ],
+      "a": 1,
+      "sol": "Simplificações algébricas podem tornar a derivação mais clara, mas não devem apagar restrições herdadas.",
+      "hyp": "Pode alargar o domínio indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:estrategia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-047",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=u(x)^v(x), uma estratégia quando u(x)>0 é escrever...",
+      "o": [
+        "f'=u'v' diretamente.",
+        "f=u+v.",
+        "ln f=v ln u.",
+        "ln f=ln u+ln v."
+      ],
+      "a": 2,
+      "sol": "A diferenciação logarítmica transforma a potência variável num produto.",
+      "hyp": "Pode aplicar a regra da potência com expoente variável sem adaptação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:diferenciacao-log",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-048",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Usando diferenciação logarítmica, a derivada de x^x, x>0, é...",
+      "o": [
+        "x x^{x−1}.",
+        "x^x ln x.",
+        "x^{x−1}.",
+        "x^x(ln x+1)."
+      ],
+      "a": 3,
+      "sol": "ln y=xlnx; y'/y=lnx+1.",
+      "hyp": "Pode aplicar a regra da potência tratando o expoente como constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:x-elevado-x",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-049",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se receita R(q)=q·p(q), então a receita marginal R'(q) é...",
+      "o": [
+        "p(q)+q p'(q).",
+        "p'(q).",
+        "q p'(q).",
+        "p(q)p'(q)."
+      ],
+      "a": 0,
+      "sol": "É uma aplicação direta da regra do produto.",
+      "hyp": "Pode derivar apenas o preço.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:receita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCD-RC-050",
+      "themeId": "12-fcd",
+      "subtopicId": "12-fcd-regras-cadeia",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se uma variável y depende de u e u depende de t, a taxa dy/dt é...",
+      "o": [
+        "dy/du+du/dt.",
+        "(dy/du)(du/dt).",
+        "(dy/dt)(du/dt).",
+        "du/dy."
+      ],
+      "a": 1,
+      "sol": "É a interpretação de taxas relacionadas da regra da cadeia.",
+      "hyp": "Pode somar taxas em vez de as compor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcd-regras-cadeia:taxas-relacionadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

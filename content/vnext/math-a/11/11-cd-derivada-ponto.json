@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matematica A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-derivada-ponto",
+  "subtopic": "Taxa instantanea e derivada num ponto",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteudo original A+. Trabalha definicao e interpretacao da derivada num ponto, quociente incremental, sinais, calculos simples e modelacao de velocidade instantanea. Nao ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CD-DP-001",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A derivada de f no ponto a representa",
+      "o": [
+        "a taxa instantanea de variacao de f em a",
+        "uma taxa media em qualquer intervalo",
+        "o valor f(a)",
+        "a area acumulada"
+      ],
+      "a": 0,
+      "sol": "A derivada mede a variacao local instantanea.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-002",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Geometricamente, f'(a) representa",
+      "o": [
+        "o declive de qualquer secante",
+        "o declive da reta tangente ao grafico em x=a",
+        "a ordenada do ponto",
+        "a distancia a origem"
+      ],
+      "a": 1,
+      "sol": "A derivada e o declive da tangente.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-003",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A definicao por limite de f'(a) e",
+      "o": [
+        "lim_{h->0} [f(a+h)+f(a)]/h",
+        "f(a+h)-f(a)",
+        "lim_{h->0} [f(a+h)-f(a)]/h",
+        "lim_{h->0} h/[f(a+h)-f(a)]"
+      ],
+      "a": 2,
+      "sol": "E o limite do quociente incremental.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-004",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(a)>0, localmente o grafico tende a",
+      "o": [
+        "descer necessariamente em todo o dominio",
+        "ser horizontal",
+        "ter f(a)>0",
+        "subir quando x aumenta"
+      ],
+      "a": 3,
+      "sol": "Derivada positiva indica inclinacao local positiva.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-005",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(a)<0, localmente o grafico tende a",
+      "o": [
+        "descer quando x aumenta",
+        "subir",
+        "ser horizontal",
+        "ter f(a)<0"
+      ],
+      "a": 0,
+      "sol": "O declive tangente e negativo.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-006",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(a)=0, a tangente e",
+      "o": [
+        "vertical",
+        "horizontal",
+        "sempre inexistente",
+        "de declive 1"
+      ],
+      "a": 1,
+      "sol": "Declive zero corresponde a reta horizontal.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-007",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Uma funcao pode ter f'(a)=0 e nao ter um maximo ou minimo em a",
+      "o": [
+        "Nao",
+        "So se f(a)=0",
+        "Sim",
+        "So se a=0"
+      ],
+      "a": 2,
+      "sol": "Um ponto estacionario pode nao ser extremo.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-008",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se a derivada existe em a, entao a funcao e continua em a",
+      "o": [
+        "Nao",
+        "Apenas para polinomios",
+        "Apenas se f'(a)>0",
+        "Sim"
+      ],
+      "a": 3,
+      "sol": "Derivabilidade implica continuidade.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-009",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A continuidade em a garante sempre derivabilidade em a",
+      "o": [
+        "Nao",
+        "Sim",
+        "Apenas se f(a)=0",
+        "Apenas para funcoes positivas"
+      ],
+      "a": 0,
+      "sol": "Uma funcao continua pode ter canto ou cuspide.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-010",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "No contexto posicao-tempo, a derivada da posicao representa",
+      "o": [
+        "distancia total",
+        "velocidade instantanea",
+        "aceleracao media sempre",
+        "tempo total"
+      ],
+      "a": 1,
+      "sol": "A taxa instantanea de variacao da posicao e a velocidade.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:conceito:10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-011",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, quanto vale f'(0)?",
+      "o": [
+        "1",
+        "-1",
+        "0",
+        "2"
+      ],
+      "a": 2,
+      "sol": "Derivando a expressao e substituindo x=0, obtem-se 0.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-012",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, quanto vale f'(1)?",
+      "o": [
+        "3",
+        "1",
+        "4",
+        "2"
+      ],
+      "a": 3,
+      "sol": "Derivando a expressao e substituindo x=1, obtem-se 2.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-013",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, quanto vale f'(3)?",
+      "o": [
+        "6",
+        "7",
+        "5",
+        "12"
+      ],
+      "a": 0,
+      "sol": "Derivando a expressao e substituindo x=3, obtem-se 6.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-014",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2, quanto vale f'(-2)?",
+      "o": [
+        "-3",
+        "-4",
+        "-5",
+        "-8"
+      ],
+      "a": 1,
+      "sol": "Derivando a expressao e substituindo x=-2, obtem-se -4.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-015",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=3x^2, quanto vale f'(2)?",
+      "o": [
+        "13",
+        "11",
+        "12",
+        "24"
+      ],
+      "a": 2,
+      "sol": "Derivando a expressao e substituindo x=2, obtem-se 12.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-016",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=2x^2+1, quanto vale f'(3)?",
+      "o": [
+        "13",
+        "11",
+        "24",
+        "12"
+      ],
+      "a": 3,
+      "sol": "Derivando a expressao e substituindo x=3, obtem-se 12.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-017",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3, quanto vale f'(1)?",
+      "o": [
+        "3",
+        "4",
+        "2",
+        "6"
+      ],
+      "a": 0,
+      "sol": "Derivando a expressao e substituindo x=1, obtem-se 3.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-018",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3, quanto vale f'(2)?",
+      "o": [
+        "13",
+        "12",
+        "11",
+        "24"
+      ],
+      "a": 1,
+      "sol": "Derivando a expressao e substituindo x=2, obtem-se 12.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-019",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3, quanto vale f'(-1)?",
+      "o": [
+        "4",
+        "2",
+        "3",
+        "6"
+      ],
+      "a": 2,
+      "sol": "Derivando a expressao e substituindo x=-1, obtem-se 3.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-020",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^3+2x, quanto vale f'(1)?",
+      "o": [
+        "6",
+        "4",
+        "10",
+        "5"
+      ],
+      "a": 3,
+      "sol": "Derivando a expressao e substituindo x=1, obtem-se 5.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-021",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=4x-7, quanto vale f'(5)?",
+      "o": [
+        "4",
+        "5",
+        "3",
+        "8"
+      ],
+      "a": 0,
+      "sol": "Derivando a expressao e substituindo x=5, obtem-se 4.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-022",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-3x+2, quanto vale f'(2)?",
+      "o": [
+        "-2",
+        "-3",
+        "-4",
+        "-6"
+      ],
+      "a": 1,
+      "sol": "Derivando a expressao e substituindo x=2, obtem-se -3.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-023",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=5, quanto vale f'(4)?",
+      "o": [
+        "1",
+        "-1",
+        "0",
+        "2"
+      ],
+      "a": 2,
+      "sol": "Derivando a expressao e substituindo x=4, obtem-se 0.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-024",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2-4x, quanto vale f'(2)?",
+      "o": [
+        "1",
+        "-1",
+        "2",
+        "0"
+      ],
+      "a": 3,
+      "sol": "Derivando a expressao e substituindo x=2, obtem-se 0.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-025",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2-4x, quanto vale f'(1)?",
+      "o": [
+        "-2",
+        "-1",
+        "-3",
+        "-4"
+      ],
+      "a": 0,
+      "sol": "Derivando a expressao e substituindo x=1, obtem-se -2.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:calculo:25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-026",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0+h)-f(0)]/h vale",
+      "o": [
+        "2",
+        "0",
+        "-2",
+        "1"
+      ],
+      "a": 1,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=0.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-DP-027",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(1+h)-f(1)]/h vale",
+      "o": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "a": 2,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=2.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-DP-028",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(2+h)-f(2)]/h vale",
+      "o": [
+        "2",
+        "6",
+        "3",
+        "4"
+      ],
+      "a": 3,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=4.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-DP-029",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(-1+h)-f(-1)]/h vale",
+      "o": [
+        "-2",
+        "-1",
+        "-3",
+        "1"
+      ],
+      "a": 0,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=-2.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-030",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(3+h)-f(3)]/h vale",
+      "o": [
+        "7",
+        "6",
+        "5",
+        "9"
+      ],
+      "a": 1,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=6.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-031",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(4+h)-f(4)]/h vale",
+      "o": [
+        "9",
+        "7",
+        "8",
+        "16"
+      ],
+      "a": 2,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=8.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-032",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(5+h)-f(5)]/h vale",
+      "o": [
+        "11",
+        "9",
+        "25",
+        "10"
+      ],
+      "a": 3,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=10.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-033",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(-2+h)-f(-2)]/h vale",
+      "o": [
+        "-4",
+        "-3",
+        "-5",
+        "4"
+      ],
+      "a": 0,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=-4.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-034",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(6+h)-f(6)]/h vale",
+      "o": [
+        "13",
+        "12",
+        "11",
+        "36"
+      ],
+      "a": 1,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=12.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-035",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0.5+h)-f(0.5)]/h vale",
+      "o": [
+        "2",
+        "0",
+        "1",
+        "0.25"
+      ],
+      "a": 2,
+      "sol": "Expandindo e simplificando, o quociente tende para 2a=1.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:definicao-limite:35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-036",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Num ponto x=2, sabe-se que f(2)=5 e f'(2)=3. Qual e o declive da tangente?",
+      "o": [
+        "5",
+        "2",
+        "4",
+        "3"
+      ],
+      "a": 3,
+      "sol": "Por definicao, o declive da tangente e f'(2)=3.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:dados-derivada:36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-037",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Num ponto x=1, sabe-se que f(1)=4 e f'(1)=-2. Qual e o declive da tangente?",
+      "o": [
+        "-2",
+        "4",
+        "1",
+        "-1"
+      ],
+      "a": 0,
+      "sol": "Por definicao, o declive da tangente e f'(1)=-2.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:dados-derivada:37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-038",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Num ponto x=0, sabe-se que f(0)=-1 e f'(0)=5. Qual e o declive da tangente?",
+      "o": [
+        "-1",
+        "5",
+        "0",
+        "6"
+      ],
+      "a": 1,
+      "sol": "Por definicao, o declive da tangente e f'(0)=5.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:dados-derivada:38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-039",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Num ponto x=3, sabe-se que f(3)=7 e f'(3)=0. Qual e o declive da tangente?",
+      "o": [
+        "7",
+        "3",
+        "0",
+        "1"
+      ],
+      "a": 2,
+      "sol": "Por definicao, o declive da tangente e f'(3)=0.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:dados-derivada:39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-040",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretacao",
+      "q": "Num ponto x=-2, sabe-se que f(-2)=1 e f'(-2)=4. Qual e o declive da tangente?",
+      "o": [
+        "1",
+        "-2",
+        "5",
+        "4"
+      ],
+      "a": 3,
+      "sol": "Por definicao, o declive da tangente e f'(-2)=4.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:dados-derivada:40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-041",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "A posicao e dada por s(t)=t^2. Qual e a velocidade instantanea em t=3?",
+      "o": [
+        "6",
+        "8",
+        "4",
+        "3"
+      ],
+      "a": 0,
+      "sol": "A velocidade e s'(t); avaliando em t=3, obtem-se 6.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:movimento:41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-042",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "A posicao e dada por s(t)=2t^2. Qual e a velocidade instantanea em t=4?",
+      "o": [
+        "18",
+        "16",
+        "14",
+        "4"
+      ],
+      "a": 1,
+      "sol": "A velocidade e s'(t); avaliando em t=4, obtem-se 16.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:movimento:42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-043",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "A posicao e dada por s(t)=t^3. Qual e a velocidade instantanea em t=2?",
+      "o": [
+        "14",
+        "10",
+        "12",
+        "2"
+      ],
+      "a": 2,
+      "sol": "A velocidade e s'(t); avaliando em t=2, obtem-se 12.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:movimento:43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-044",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "A posicao e dada por s(t)=5t. Qual e a velocidade instantanea em t=7?",
+      "o": [
+        "7",
+        "35",
+        "1",
+        "5"
+      ],
+      "a": 3,
+      "sol": "A velocidade e s'(t); avaliando em t=7, obtem-se 5.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:movimento:44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN11CD-DP-045",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelacao",
+      "q": "A posicao e dada por s(t)=t^2+3t. Qual e a velocidade instantanea em t=2?",
+      "o": [
+        "7",
+        "9",
+        "5",
+        "2"
+      ],
+      "a": 0,
+      "sol": "A velocidade e s'(t); avaliando em t=2, obtem-se 7.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:movimento:45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-046",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(2)=5, a melhor interpretacao e",
+      "o": [
+        "f(2)=5",
+        "perto de x=2, f aumenta cerca de 5 unidades por unidade de x",
+        "f aumenta exatamente 5 em qualquer intervalo",
+        "a taxa media global e 5"
+      ],
+      "a": 1,
+      "sol": "A derivada e uma taxa local.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:interpretacao:46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-047",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(a)=0, entao",
+      "o": [
+        "a e necessariamente maximo",
+        "f(a)=0",
+        "a tangente em a e horizontal, se a derivada existe",
+        "a funcao e constante"
+      ],
+      "a": 2,
+      "sol": "Derivada zero identifica um ponto estacionario, nao necessariamente um extremo.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:interpretacao:47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-048",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretacao",
+      "q": "Se a funcao tem um canto em x=a, pode acontecer que",
+      "o": [
+        "a funcao seja necessariamente descontinua",
+        "f(a)=0",
+        "a derivada seja sempre 0",
+        "a derivada em a nao exista"
+      ],
+      "a": 3,
+      "sol": "Num canto, os declives laterais podem ser diferentes.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:interpretacao:48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-049",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretacao",
+      "q": "Uma derivada muito positiva significa",
+      "o": [
+        "uma inclinacao local positiva acentuada",
+        "uma ordenada grande",
+        "um valor da funcao negativo",
+        "uma area grande"
+      ],
+      "a": 0,
+      "sol": "A derivada mede inclinacao/taxa, nao altura.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:interpretacao:49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-DP-050",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-derivada-ponto",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(a)=-4, uma pequena variacao positiva dx tende a produzir",
+      "o": [
+        "+4 dx",
+        "uma variacao aproximada de f de -4 dx",
+        "-dx/4",
+        "zero"
+      ],
+      "a": 1,
+      "sol": "Linearmente, df e aproximadamente f'(a)dx.",
+      "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-derivada-ponto:interpretacao:50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

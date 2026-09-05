@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fun",
+  "subtopicId": "10-fun-conceito-representacoes",
+  "subtopic": "Conceito de função e representações",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição, notação, avaliação, tabelas, gráficos, teste da reta vertical, preimagens, representações equivalentes e modelação introdutória. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FUN-CR-001",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função associa a cada elemento do domínio...",
+      "o": [
+        "exatamente um valor de saída.",
+        "sempre dois valores de saída.",
+        "nenhum valor de saída.",
+        "todos os valores do contradomínio."
+      ],
+      "a": 0,
+      "sol": "A característica essencial de uma função é a unicidade da imagem de cada elemento do domínio.",
+      "hyp": "Pode confundir função com uma relação arbitrária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:definicao-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-002",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na notação f(x), x representa normalmente...",
+      "o": [
+        "a imagem obrigatória.",
+        "uma variável de entrada.",
+        "o contradomínio.",
+        "o gráfico inteiro."
+      ],
+      "a": 1,
+      "sol": "x representa um elemento do domínio usado como entrada da função.",
+      "hyp": "Pode confundir argumento com valor da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:notacao-fx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-003",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se f(3)=7, isso significa que...",
+      "o": [
+        "a imagem de 7 é 3 obrigatoriamente.",
+        "f é constante.",
+        "a imagem de 3 por f é 7.",
+        "3 e 7 são o mesmo número."
+      ],
+      "a": 2,
+      "sol": "f(3)=7 indica que ao argumento 3 corresponde o valor 7.",
+      "hyp": "Pode inverter entrada e saída.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:interpretar-fx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-004",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=2x+1, quanto vale f(4)?",
+      "o": [
+        "7",
+        "8",
+        "10",
+        "9"
+      ],
+      "a": 3,
+      "sol": "f(4)=2×4+1=9.",
+      "hyp": "Pode esquecer o termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-005",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Se g(x)=x²−3, quanto vale g(2)?",
+      "o": [
+        "1",
+        "−1",
+        "3",
+        "4"
+      ],
+      "a": 0,
+      "sol": "g(2)=4−3=1.",
+      "hyp": "Pode calcular 2² como 2 ou esquecer o −3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-006",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma função pode ser representada por...",
+      "o": [
+        "apenas uma fórmula.",
+        "uma fórmula, tabela, gráfico ou descrição verbal adequada.",
+        "apenas um gráfico.",
+        "apenas uma tabela."
+      ],
+      "a": 1,
+      "sol": "Uma função pode ter diferentes representações equivalentes.",
+      "hyp": "Pode reduzir conceito de função a uma fórmula algébrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:multiplas-representacoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-007",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Numa tabela de uma função, a mesma entrada aparece associada a 4 e a 6. A tabela representa uma função?",
+      "o": [
+        "Sim.",
+        "Só se 4=6.",
+        "Não.",
+        "Só se houver mais entradas."
+      ],
+      "a": 2,
+      "sol": "Uma mesma entrada não pode ter duas imagens diferentes numa função.",
+      "hyp": "Pode aceitar múltiplas saídas para a mesma entrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:teste-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-008",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma tabela tem entradas 1,2,3 e saídas 5,5,7. Pode representar uma função?",
+      "o": [
+        "Não, porque duas entradas têm a mesma saída.",
+        "Só se todas as saídas forem diferentes.",
+        "Não, porque 5 se repete.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Diferentes entradas podem ter a mesma imagem; o que não pode acontecer é uma entrada ter duas imagens.",
+      "hyp": "Pode confundir função com função injetiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:saidas-repetidas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-009",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O teste da reta vertical num gráfico serve para verificar se...",
+      "o": [
+        "cada valor de x tem no máximo um valor de y no gráfico.",
+        "cada y tem no máximo um x.",
+        "o gráfico é uma reta.",
+        "a função é crescente."
+      ],
+      "a": 0,
+      "sol": "Se alguma reta vertical intersecta o gráfico em mais de um ponto, não é gráfico de função y=f(x).",
+      "hyp": "Pode confundir reta vertical com horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:teste-reta-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-010",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma circunferência completa no plano cartesiano representa y como função de x?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se o raio for 1.",
+        "Só se o centro estiver na origem."
+      ],
+      "a": 1,
+      "sol": "Para muitos valores de x, a circunferência tem dois valores de y, falhando o teste vertical.",
+      "hyp": "Pode assumir que qualquer curva é gráfico de função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:circunferencia-nao-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-011",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A reta vertical x=2 representa y como função de x?",
+      "o": [
+        "Sim.",
+        "Só no ponto (2,0).",
+        "Não.",
+        "Só se y>0."
+      ],
+      "a": 2,
+      "sol": "Para x=2 existem infinitos valores de y.",
+      "hyp": "Pode confundir uma equação no plano com função y=f(x).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:reta-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-012",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A reta horizontal y=4 representa y como função de x?",
+      "o": [
+        "Não.",
+        "Só para x=4.",
+        "Só se x>0.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Cada x admissível tem a única imagem y=4.",
+      "hyp": "Pode achar que só retas não horizontais representam funções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:reta-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-013",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=3x−2, quanto vale f(0)?",
+      "o": [
+        "−2",
+        "0",
+        "1",
+        "2"
+      ],
+      "a": 0,
+      "sol": "f(0)=−2.",
+      "hyp": "Pode ignorar o termo independente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-014",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x²+1, quanto vale f(−3)?",
+      "o": [
+        "−8",
+        "10",
+        "8",
+        "−10"
+      ],
+      "a": 1,
+      "sol": "(−3)²+1=9+1=10.",
+      "hyp": "Pode esquecer que o quadrado de negativo é positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-015",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=5−x, quanto vale f(7)?",
+      "o": [
+        "2",
+        "7",
+        "−2",
+        "12"
+      ],
+      "a": 2,
+      "sol": "5−7=−2.",
+      "hyp": "Pode inverter a subtração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-016",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma tabela contém (1,4), (2,7), (3,10), qual fórmula é compatível com esses três pares?",
+      "o": [
+        "f(x)=2x+2",
+        "f(x)=x+3",
+        "f(x)=4x",
+        "f(x)=3x+1"
+      ],
+      "a": 3,
+      "sol": "Para x=1,2,3 obtêm-se 4,7,10 com 3x+1.",
+      "hyp": "Pode ajustar apenas um par e não verificar os restantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:formula-a-partir-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-017",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma tabela dá f(0)=2, f(1)=4, f(2)=6. Qual expressão simples é compatível?",
+      "o": [
+        "f(x)=2x+2",
+        "f(x)=x+2",
+        "f(x)=2x",
+        "f(x)=x²+2"
+      ],
+      "a": 0,
+      "sol": "2x+2 produz 2,4,6 para 0,1,2.",
+      "hyp": "Pode ignorar o valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:formula-a-partir-tabela",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-018",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se f associa a cada número real o seu quadrado, então f pode ser escrita como...",
+      "o": [
+        "f(x)=2x",
+        "f(x)=x²",
+        "f(x)=√x",
+        "f(x)=x+2"
+      ],
+      "a": 1,
+      "sol": "'O quadrado de x' é x².",
+      "hyp": "Pode confundir quadrado com dobro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:descricao-para-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-019",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A frase 'a cada número associa-se o seu dobro menos 1' corresponde a...",
+      "o": [
+        "f(x)=x²−1",
+        "f(x)=2(x−1)²",
+        "f(x)=2x−1",
+        "f(x)=x/2−1"
+      ],
+      "a": 2,
+      "sol": "Dobro de x é 2x; depois subtrai-se 1.",
+      "hyp": "Pode aplicar a operação pela ordem errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:descricao-para-formula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-020",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num gráfico de y=f(x), o ponto (3,−2) significa...",
+      "o": [
+        "f(−2)=3.",
+        "f(3)=2.",
+        "f(−3)=2.",
+        "f(3)=−2."
+      ],
+      "a": 3,
+      "sol": "A abcissa é a entrada e a ordenada é a imagem.",
+      "hyp": "Pode trocar coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:grafico-para-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-021",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se o ponto (−1,5) pertence ao gráfico de f, então...",
+      "o": [
+        "f(−1)=5.",
+        "f(5)=−1.",
+        "f(1)=−5.",
+        "f(−5)=1."
+      ],
+      "a": 0,
+      "sol": "Num gráfico y=f(x), o par é (x,f(x)).",
+      "hyp": "Pode inverter as coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:grafico-para-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-022",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(2)=3 e f(3)=2, pode concluir-se que f não é função?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se f(2)=f(3).",
+        "Só se o domínio for inteiro."
+      ],
+      "a": 1,
+      "sol": "É perfeitamente possível duas entradas trocarem imagens; cada entrada continua a ter uma única saída.",
+      "hyp": "Pode confundir função com monotonia ou injetividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:funcao-nao-monotona",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-023",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma relação dada pelos pares (1,2),(1,3),(2,4) é função de x?",
+      "o": [
+        "Sim.",
+        "Só se 2=3.",
+        "Não.",
+        "Só para x=2."
+      ],
+      "a": 2,
+      "sol": "A entrada 1 tem duas saídas distintas.",
+      "hyp": "Pode não verificar entradas repetidas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:pares-nao-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-024",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A relação (1,2),(2,2),(3,2) é função?",
+      "o": [
+        "Não.",
+        "Só se as imagens forem distintas.",
+        "Não, porque 2 se repete.",
+        "Sim."
+      ],
+      "a": 3,
+      "sol": "Cada entrada tem exatamente uma imagem; repetir a mesma saída é permitido.",
+      "hyp": "Pode confundir função com injetividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:pares-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-025",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se f(x)=x²−2x, quanto vale f(3)?",
+      "o": [
+        "3",
+        "1",
+        "6",
+        "9"
+      ],
+      "a": 0,
+      "sol": "9−6=3.",
+      "hyp": "Pode esquecer um dos termos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-026",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se h(t)=100−5t representa a quantidade restante após t minutos, quanto vale h(6)?",
+      "o": [
+        "60",
+        "70",
+        "65",
+        "75"
+      ],
+      "a": 1,
+      "sol": "100−30=70.",
+      "hyp": "Pode somar ou multiplicar incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:avaliar-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-027",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No modelo h(t)=100−5t, o valor h(0)=100 representa...",
+      "o": [
+        "a taxa de variação.",
+        "o instante final.",
+        "a quantidade inicial.",
+        "o domínio inteiro."
+      ],
+      "a": 2,
+      "sol": "No instante zero, a função dá o valor inicial.",
+      "hyp": "Pode confundir valor inicial com declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:interpretar-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-028",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No modelo h(t)=100−5t, o coeficiente −5 indica...",
+      "o": [
+        "um valor inicial de −5.",
+        "que h é sempre negativa.",
+        "que o domínio é −5.",
+        "uma diminuição de 5 unidades por minuto."
+      ],
+      "a": 3,
+      "sol": "É a taxa de variação constante.",
+      "hyp": "Pode confundir coeficiente com valor da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:interpretar-parametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-029",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=2x+3 e f(a)=11, qual é a?",
+      "o": [
+        "4",
+        "3",
+        "5",
+        "7"
+      ],
+      "a": 0,
+      "sol": "2a+3=11 => a=4.",
+      "hyp": "Pode substituir 11 por x em vez de resolver a equação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:preimagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-030",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se g(x)=x² e g(a)=9, quais podem ser os valores reais de a?",
+      "o": [
+        "Apenas 3.",
+        "−3 ou 3.",
+        "Apenas −3.",
+        "0 ou 9."
+      ],
+      "a": 1,
+      "sol": "a²=9 tem soluções a=±3.",
+      "hyp": "Pode esquecer a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:preimagem-multipla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-031",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O facto de g(x)=x² ter duas preimagens para 9 impede g de ser função?",
+      "o": [
+        "Sim.",
+        "Só se o domínio for R.",
+        "Não.",
+        "Só se 9 pertencer à imagem."
+      ],
+      "a": 2,
+      "sol": "Uma função pode ter várias entradas com a mesma imagem; só não pode ter uma entrada com várias imagens.",
+      "hyp": "Pode confundir preimagem múltipla com saída múltipla.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:preimagens-multiplas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-032",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma função constante f(x)=5 tem gráfico...",
+      "o": [
+        "uma reta vertical.",
+        "uma parábola.",
+        "uma circunferência.",
+        "uma reta horizontal."
+      ],
+      "a": 3,
+      "sol": "Todos os pontos têm ordenada 5.",
+      "hyp": "Pode trocar horizontais e verticais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:grafico-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-033",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma função identidade f(x)=x tem gráfico...",
+      "o": [
+        "a reta y=x.",
+        "a reta y=1.",
+        "a parábola y=x².",
+        "a reta x=1."
+      ],
+      "a": 0,
+      "sol": "Cada ponto satisfaz y=x.",
+      "hyp": "Pode confundir identidade com função constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-034",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No gráfico de f, uma deslocação para a direita corresponde a alterar...",
+      "o": [
+        "apenas as unidades de y.",
+        "os valores de x onde certas características ocorrem.",
+        "o número de pontos do domínio obrigatoriamente.",
+        "a função para uma relação não funcional."
+      ],
+      "a": 1,
+      "sol": "Características como zeros e máximos passam a ocorrer noutros valores de x.",
+      "hyp": "Pode pensar que deslocação horizontal altera apenas y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:representacao-grafica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-035",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(1)=2, f(2)=4 e f(3)=8, pode concluir-se unicamente destes três valores que f(x)=2^x para todo x?",
+      "o": [
+        "Sim.",
+        "Sim, se o domínio for real.",
+        "Não.",
+        "Só se f(4)=16."
+      ],
+      "a": 2,
+      "sol": "Três pares não determinam, por si só, uma regra única para todos os valores.",
+      "hyp": "Pode inferir fórmula global a partir de poucos pontos sem informação adicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:dados-insuficientes-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-036",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas fórmulas diferentes podem definir a mesma função no mesmo domínio?",
+      "o": [
+        "Não, nunca.",
+        "Só se tiverem o mesmo aspeto algébrico.",
+        "Só em domínios finitos.",
+        "Sim, se produzirem os mesmos valores para todas as entradas do domínio."
+      ],
+      "a": 3,
+      "sol": "Expressões equivalentes podem representar a mesma função.",
+      "hyp": "Pode identificar função com a escrita concreta da fórmula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:expressoes-equivalentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-037",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No domínio R, f(x)=(x²−1)/(x−1) e g(x)=x+1 definem a mesma função?",
+      "o": [
+        "Não, porque f não está definida em x=1 e g está.",
+        "Sim, porque simplificam para a mesma expressão.",
+        "Sim, sempre que x≠0.",
+        "Não, porque os gráficos nunca coincidem."
+      ],
+      "a": 0,
+      "sol": "Apesar de f(x)=x+1 para x≠1, os domínios diferem em x=1.",
+      "hyp": "Pode simplificar uma expressão e esquecer restrições do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:mesma-expressao-dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-038",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se uma função é dada por uma tabela finita, é possível conhecer f(100) sem regra adicional quando 100 não aparece na tabela?",
+      "o": [
+        "Sim, pela média.",
+        "Não.",
+        "Sim, escolhendo o último valor.",
+        "Sempre 0."
+      ],
+      "a": 1,
+      "sol": "A tabela só define explicitamente os valores listados, salvo regra extra.",
+      "hyp": "Pode extrapolar arbitrariamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:tabela-dominio-finito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-039",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma sequência pode ser vista como função cujo domínio é tipicamente...",
+      "o": [
+        "todo R obrigatoriamente.",
+        "um conjunto de cores.",
+        "um conjunto de números naturais/inteiros positivos.",
+        "apenas {0}."
+      ],
+      "a": 2,
+      "sol": "O índice n funciona como entrada discreta da função.",
+      "hyp": "Pode pensar que função exige domínio contínuo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:sequencia-como-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-040",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma tarifa custa 3 € fixos mais 0,50 € por quilómetro. Qual função do número x de quilómetros modela o custo?",
+      "o": [
+        "C(x)=3x+0,5",
+        "C(x)=0,5(x+3)",
+        "C(x)=3−0,5x",
+        "C(x)=3+0,5x"
+      ],
+      "a": 3,
+      "sol": "Há uma componente fixa 3 e uma variável 0,5x.",
+      "hyp": "Pode trocar taxa variável e termo fixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:modelo-tarifa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-041",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma piscina contém 500 L e perde 20 L por minuto. Qual função V(t) modela o volume, enquanto o modelo fizer sentido?",
+      "o": [
+        "V(t)=500−20t",
+        "V(t)=20−500t",
+        "V(t)=500+20t",
+        "V(t)=20t"
+      ],
+      "a": 0,
+      "sol": "O volume começa em 500 e diminui 20 por minuto.",
+      "hyp": "Pode errar sinal ou valor inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:modelo-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-042",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo V(t)=500−20t, qual interpretação faz sentido para o domínio físico?",
+      "o": [
+        "t pode ser qualquer real sem restrição física.",
+        "0≤t≤25.",
+        "t<0 apenas.",
+        "t≥500."
+      ],
+      "a": 1,
+      "sol": "O volume não deve ficar negativo; V=0 em t=25 e o tempo físico começa em 0.",
+      "hyp": "Pode ignorar restrições contextuais do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:dominio-contextual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-043",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma relação associa a cada pessoa o seu número de identificação único. Isto pode ser modelado como função pessoa→número?",
+      "o": [
+        "Não, porque números não são pessoas.",
+        "Só se todos os números forem iguais.",
+        "Sim.",
+        "Só se houver duas pessoas."
+      ],
+      "a": 2,
+      "sol": "Cada pessoa tem exatamente um identificador na modelação proposta.",
+      "hyp": "Pode pensar que domínio e imagem têm de ser do mesmo tipo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:funcao-contextual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-044",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma relação associa a cada número real x os números y que satisfazem y²=x. É uma função R→R?",
+      "o": [
+        "Sim.",
+        "Só para x<0.",
+        "Sim, porque existe raiz quadrada.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Para x>0 há dois y e para x<0 não há y real; não define uma função R→R sem escolha/restrição.",
+      "hyp": "Pode ignorar múltiplas saídas e ausência de saídas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:relacao-raiz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-045",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Restringindo a relação y²=x a y≥0 e x≥0, obtém-se...",
+      "o": [
+        "a função y=√x.",
+        "duas funções simultâneas.",
+        "nenhuma função.",
+        "a função y=x²."
+      ],
+      "a": 0,
+      "sol": "A restrição escolhe a raiz não negativa, dando uma única saída para cada x≥0.",
+      "hyp": "Pode confundir função inversa com a original.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:restricao-para-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-046",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O gráfico de uma função pode ter dois pontos com a mesma ordenada?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se forem o mesmo ponto.",
+        "Só em funções constantes."
+      ],
+      "a": 1,
+      "sol": "Diferentes entradas podem partilhar a mesma imagem.",
+      "hyp": "Pode aplicar indevidamente o teste da reta horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:mesma-imagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-047",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O teste da reta horizontal está mais relacionado com verificar...",
+      "o": [
+        "se uma relação é função.",
+        "se o domínio é R.",
+        "se uma função é injetiva.",
+        "se a função é contínua."
+      ],
+      "a": 2,
+      "sol": "Uma reta horizontal com mais de uma interseção indica imagens repetidas e, portanto, não injetividade.",
+      "hyp": "Pode confundir com teste da reta vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:teste-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-048",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=x², com domínio R, passa no teste da reta horizontal para todas as alturas?",
+      "o": [
+        "Sim.",
+        "Só em y<0.",
+        "Só em y=0.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Para y>0, uma horizontal intersecta o gráfico em x e −x.",
+      "hyp": "Pode achar que toda função passa teste horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:injetividade-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-049",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se restringirmos f(x)=x² ao domínio x≥0, a função torna-se injetiva?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só para x>1.",
+        "Só se a imagem for R."
+      ],
+      "a": 0,
+      "sol": "No domínio não negativo, x² é estritamente crescente e cada imagem tem no máximo uma preimagem.",
+      "hyp": "Pode esquecer o efeito da restrição de domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:restricao-injetividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-CR-050",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-conceito-representacoes",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma grandeza y depende de x segundo a regra 'triplica-se x e somam-se 4 unidades'. Qual representação algébrica é correta?",
+      "o": [
+        "y=3(x+4)",
+        "y=3x+4",
+        "y=x+12",
+        "y=4x+3"
+      ],
+      "a": 1,
+      "sol": "Triplicar x dá 3x e depois somar 4 dá 3x+4.",
+      "hyp": "Pode alterar a ordem das operações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-conceito-representacoes:descricao-modelo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

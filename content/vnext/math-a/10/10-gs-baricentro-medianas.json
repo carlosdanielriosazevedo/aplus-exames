@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-gs",
+  "subtopicId": "10-gs-baricentro-medianas",
+  "subtopic": "Baricentro e propriedades das medianas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição, razão 2:1, áreas determinadas pelas medianas, centro de massa e modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GS-BAR-001",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O baricentro de um triângulo é o ponto de interseção das...",
+      "o": [
+        "medianas.",
+        "alturas.",
+        "mediatrizes.",
+        "bissetrizes."
+      ],
+      "a": 0,
+      "sol": "As três medianas são concorrentes no baricentro.",
+      "hyp": "Pode confundir os centros notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-002",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma mediana liga um vértice...",
+      "o": [
+        "ao pé da altura.",
+        "ao ponto médio do lado oposto.",
+        "ao incentro.",
+        "ao circuncentro."
+      ],
+      "a": 1,
+      "sol": "Essa é a definição de mediana.",
+      "hyp": "Pode confundir mediana com altura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-003",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O baricentro fica...",
+      "o": [
+        "sempre fora.",
+        "num vértice.",
+        "sempre no interior do triângulo.",
+        "no ponto médio do maior lado."
+      ],
+      "a": 2,
+      "sol": "As medianas intersectam-se sempre no interior.",
+      "hyp": "Pode transferir comportamento de outros centros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-interior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-004",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O baricentro divide cada mediana na razão...",
+      "o": [
+        "1:1.",
+        "3:1.",
+        "1:2, contando do vértice para o lado.",
+        "2:1, contando do vértice para o lado."
+      ],
+      "a": 3,
+      "sol": "O segmento do vértice ao baricentro é o dobro do segmento do baricentro ao ponto médio.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-2-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-005",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma mediana mede 9 cm. Quanto mede o segmento do vértice até ao baricentro?",
+      "o": [
+        "6 cm",
+        "3 cm",
+        "4,5 cm",
+        "9 cm"
+      ],
+      "a": 0,
+      "sol": "O vértice-baricentro mede 2/3 da mediana: 6 cm.",
+      "hyp": "Pode usar metade em vez de dois terços.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-2tercos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-006",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma mediana mede 12 cm. Quanto mede do baricentro ao ponto médio do lado?",
+      "o": [
+        "2 cm",
+        "4 cm",
+        "6 cm",
+        "8 cm"
+      ],
+      "a": 1,
+      "sol": "Essa parte é 1/3 da mediana: 4 cm.",
+      "hyp": "Pode usar 2/3 em vez de 1/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-1terco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-007",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Do vértice ao baricentro medem 10 cm. Quanto mede a mediana inteira?",
+      "o": [
+        "12 cm",
+        "18 cm",
+        "15 cm",
+        "20 cm"
+      ],
+      "a": 2,
+      "sol": "10 corresponde a 2/3 da mediana; total=15.",
+      "hyp": "Pode somar metade ou duplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:inverter-mediana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-008",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Do baricentro ao ponto médio do lado medem 5 cm. Quanto mede a mediana inteira?",
+      "o": [
+        "10 cm",
+        "12 cm",
+        "20 cm",
+        "15 cm"
+      ],
+      "a": 3,
+      "sol": "Essa parte é 1/3; mediana=15 cm.",
+      "hyp": "Pode duplicar em vez de triplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:inverter-mediana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-009",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se G é baricentro na mediana AM e AG=8, então GM=",
+      "o": [
+        "4",
+        "2",
+        "6",
+        "8"
+      ],
+      "a": 0,
+      "sol": "AG:GM=2:1, logo GM=4.",
+      "hyp": "Pode pensar que as duas partes são iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-2-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-010",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se G é baricentro e GM=3 numa mediana AM, então AG=",
+      "o": [
+        "3",
+        "6",
+        "9",
+        "12"
+      ],
+      "a": 1,
+      "sol": "AG=2×GM=6.",
+      "hyp": "Pode inverter a razão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-2-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-011",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "As três medianas de um triângulo...",
+      "o": [
+        "são sempre paralelas.",
+        "só duas se intersectam.",
+        "são concorrentes.",
+        "são sempre perpendiculares."
+      ],
+      "a": 2,
+      "sol": "As três medianas passam pelo baricentro.",
+      "hyp": "Pode não reconhecer concorrência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:medianas-concorrentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-012",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se duas medianas se intersectam em G, a terceira mediana...",
+      "o": [
+        "é paralela às outras.",
+        "não existe.",
+        "passa necessariamente pelo circuncentro, mas não por G.",
+        "também passa por G."
+      ],
+      "a": 3,
+      "sol": "A concorrência das medianas garante que a terceira passa pelo mesmo ponto.",
+      "hyp": "Pode achar que duas medianas não determinam o baricentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:medianas-concorrentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-013",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O baricentro também pode ser interpretado, para uma lâmina triangular uniforme, como...",
+      "o": [
+        "centro de massa.",
+        "centro da circunferência inscrita.",
+        "centro da circunferência circunscrita.",
+        "pé de uma altura."
+      ],
+      "a": 0,
+      "sol": "Para densidade uniforme, o baricentro coincide com o centro de massa geométrico.",
+      "hyp": "Pode associar todos os 'centros' a circunferências.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:centro-massa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-014",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Modelação",
+      "q": "Uma placa triangular homogénea deve equilibrar-se num único ponto. Qual é o ponto natural?",
+      "o": [
+        "Incentro.",
+        "Baricentro.",
+        "Circuncentro.",
+        "Ortocentro."
+      ],
+      "a": 1,
+      "sol": "O baricentro é o centro de massa da placa triangular uniforme.",
+      "hyp": "Pode escolher outro centro notável sem relação física.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:centro-massa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-015",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo, M é ponto médio de BC. Se BC=18, então BM=",
+      "o": [
+        "6",
+        "12",
+        "9",
+        "18"
+      ],
+      "a": 2,
+      "sol": "M divide BC em duas partes iguais: 9.",
+      "hyp": "Pode confundir mediana com comprimento do lado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:ponto-medio-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-016",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se M é ponto médio de BC, BM=2x+1 e MC=3x−4. Qual é x?",
+      "o": [
+        "3",
+        "4",
+        "6",
+        "5"
+      ],
+      "a": 3,
+      "sol": "2x+1=3x−4 => x=5.",
+      "hyp": "Pode não usar a igualdade BM=MC.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:ponto-medio-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-017",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma mediana divide o triângulo em dois triângulos de...",
+      "o": [
+        "áreas iguais.",
+        "perímetros iguais sempre.",
+        "ângulos iguais sempre.",
+        "lados todos iguais."
+      ],
+      "a": 0,
+      "sol": "Partilham a mesma altura relativa ao lado dividido em duas bases iguais.",
+      "hyp": "Pode confundir igualdade de áreas com congruência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-areas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-018",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se a área de ABC é 30 e AM é mediana, qual é a área de ABM?",
+      "o": [
+        "10",
+        "15",
+        "20",
+        "30"
+      ],
+      "a": 1,
+      "sol": "A mediana divide a área em duas partes iguais: 15.",
+      "hyp": "Pode usar razão 2:1 do baricentro indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-areas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-019",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "As três medianas dividem um triângulo em seis triângulos pequenos com...",
+      "o": [
+        "perímetros iguais.",
+        "ângulos todos iguais.",
+        "áreas iguais.",
+        "lados todos iguais."
+      ],
+      "a": 2,
+      "sol": "As medianas geram seis triângulos de igual área.",
+      "hyp": "Pode assumir apenas duas áreas iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:seis-areas-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-020",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se a área do triângulo ABC é 60, qual é a área de cada um dos seis pequenos triângulos formados pelas medianas?",
+      "o": [
+        "5",
+        "15",
+        "20",
+        "10"
+      ],
+      "a": 3,
+      "sol": "60/6=10.",
+      "hyp": "Pode dividir por 3 em vez de 6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:seis-areas-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-021",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na mediana AM, AG=12. Quanto mede GM?",
+      "o": [
+        "6",
+        "4",
+        "8",
+        "12"
+      ],
+      "a": 0,
+      "sol": "AG=2GM, logo GM=6.",
+      "hyp": "Pode usar 12/3 como GM.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-2-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-022",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na mediana AM, GM=7. Qual é AG?",
+      "o": [
+        "7",
+        "14",
+        "10,5",
+        "21"
+      ],
+      "a": 1,
+      "sol": "AG=2×7=14.",
+      "hyp": "Pode usar 3×7 como AG em vez de mediana total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-2-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-023",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na mediana AM, AG=14 e GM=7. Quanto mede AM?",
+      "o": [
+        "14",
+        "18",
+        "21",
+        "28"
+      ],
+      "a": 2,
+      "sol": "AM=AG+GM=21.",
+      "hyp": "Pode usar apenas a maior parte.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-total",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-024",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se AM=18 e G é baricentro, quanto valem AG e GM?",
+      "o": [
+        "9 e 9",
+        "6 e 12",
+        "15 e 3",
+        "12 e 6"
+      ],
+      "a": 3,
+      "sol": "AG=2/3×18=12 e GM=1/3×18=6.",
+      "hyp": "Pode dividir a mediana em duas partes iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-025",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se AG=x+4 e GM=x−1, sendo G baricentro na mediana AM, qual é x?",
+      "o": [
+        "6",
+        "4",
+        "5",
+        "7"
+      ],
+      "a": 0,
+      "sol": "AG=2GM: x+4=2(x−1) => x=6.",
+      "hyp": "Pode igualar os dois segmentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:equacao-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-026",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se AG=3x e GM=x+2, sendo G baricentro, qual é x?",
+      "o": [
+        "2",
+        "4",
+        "3",
+        "6"
+      ],
+      "a": 1,
+      "sol": "3x=2(x+2) => x=4.",
+      "hyp": "Pode usar AG=GM.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:equacao-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-027",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo equilátero, o baricentro coincide com...",
+      "o": [
+        "apenas o incentro.",
+        "apenas o ortocentro.",
+        "circuncentro, incentro e ortocentro.",
+        "nenhum outro centro."
+      ],
+      "a": 2,
+      "sol": "A simetria do equilátero faz coincidir todos os centros notáveis.",
+      "hyp": "Pode pensar que definições diferentes impedem coincidência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:equilatero-centros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-028",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, o baricentro pertence...",
+      "o": [
+        "à base obrigatoriamente.",
+        "fora do triângulo.",
+        "a um dos lados iguais.",
+        "ao eixo de simetria."
+      ],
+      "a": 3,
+      "sol": "A mediana relativa à base coincide com o eixo de simetria e contém o baricentro.",
+      "hyp": "Pode ignorar simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:isosceles-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-029",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, a área de ABG é 12, onde G é baricentro. Qual é a área total de ABC?",
+      "o": [
+        "36",
+        "24",
+        "30",
+        "48"
+      ],
+      "a": 0,
+      "sol": "As três regiões maiores ABG, BCG, CAG têm áreas iguais e cada uma é 1/3 do total. Total=36.",
+      "hyp": "Pode usar 1/6 em vez de 1/3 para ABG.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-areas-tercos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-030",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se a área de ABC é 45 e G é baricentro, qual é a área de ACG?",
+      "o": [
+        "10",
+        "15",
+        "20",
+        "30"
+      ],
+      "a": 1,
+      "sol": "Cada triângulo formado por G e um lado tem 1/3 da área total: 15.",
+      "hyp": "Pode confundir com os seis pequenos triângulos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-areas-tercos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-031",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Porque uma mediana divide a área ao meio?",
+      "o": [
+        "Porque é sempre perpendicular ao lado.",
+        "Porque passa pelo incentro.",
+        "Porque cria duas bases iguais sobre a mesma altura.",
+        "Porque os dois triângulos são sempre congruentes."
+      ],
+      "a": 2,
+      "sol": "As áreas são 1/2×base×altura; as bases são iguais e a altura comum.",
+      "hyp": "Pode justificar com perpendicularidade inexistente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-areas-justificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-032",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma mediana é necessariamente uma altura?",
+      "o": [
+        "Sim.",
+        "Só em triângulos escalenos.",
+        "Só em triângulos obtusângulos.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "Em geral não; pode coincidir com altura em casos simétricos, como isósceles relativo à base.",
+      "hyp": "Pode confundir definições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-vs-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-033",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, a mediana relativa à base é também altura. Isto acontece por...",
+      "o": [
+        "simetria.",
+        "acaso apenas.",
+        "a definição geral de mediana.",
+        "ser sempre retângulo."
+      ],
+      "a": 0,
+      "sol": "O eixo de simetria passa pelo vértice e ponto médio da base e é perpendicular à base.",
+      "hyp": "Pode generalizar para qualquer triângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:isosceles-mediana-altura",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-034",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se uma mediana de um triângulo tem comprimento 15, qual é a distância do baricentro ao vértice correspondente?",
+      "o": [
+        "5",
+        "10",
+        "7,5",
+        "12"
+      ],
+      "a": 1,
+      "sol": "2/3 de 15 =10.",
+      "hyp": "Pode usar 1/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:mediana-2tercos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-035",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se a distância do baricentro ao vértice é 16, qual é a distância ao ponto médio oposto?",
+      "o": [
+        "4",
+        "12",
+        "8",
+        "16"
+      ],
+      "a": 2,
+      "sol": "A razão é 2:1, logo a parte menor é 8.",
+      "hyp": "Pode dividir por 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-2-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-036",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se a distância G ao ponto médio M é 4, quanto mede a mediana AM?",
+      "o": [
+        "8",
+        "10",
+        "16",
+        "12"
+      ],
+      "a": 3,
+      "sol": "GM=1/3 AM, logo AM=12.",
+      "hyp": "Pode duplicar em vez de triplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:inverter-mediana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-037",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As três medianas dividem ABC em seis triângulos iguais em área. Se um deles tem área 7, qual é a área de ABC?",
+      "o": [
+        "42",
+        "21",
+        "35",
+        "49"
+      ],
+      "a": 0,
+      "sol": "6×7=42.",
+      "hyp": "Pode multiplicar por 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:seis-areas-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-038",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A área de ABC é 72. G é baricentro e M é ponto médio de BC. Qual é a área de triângulo BGM?",
+      "o": [
+        "6",
+        "12",
+        "18",
+        "24"
+      ],
+      "a": 1,
+      "sol": "As três medianas formam seis triângulos de igual área: 72/6=12.",
+      "hyp": "Pode usar 1/3 ou 1/2 da área.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:seis-areas-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-039",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se AG:GM=2:1 e AM=24, quanto mede AG−GM?",
+      "o": [
+        "4",
+        "12",
+        "8",
+        "16"
+      ],
+      "a": 2,
+      "sol": "AG=16, GM=8; diferença=8.",
+      "hyp": "Pode calcular apenas uma das partes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:razao-diferenca",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-040",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa mediana, AG+GM=27 e AG=2GM. Quanto mede GM?",
+      "o": [
+        "6",
+        "12",
+        "18",
+        "9"
+      ],
+      "a": 3,
+      "sol": "3GM=27 => GM=9.",
+      "hyp": "Pode dividir por 2 em vez de 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:equacao-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-041",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se um ponto G pertence às três medianas de um triângulo, então G é...",
+      "o": [
+        "o baricentro.",
+        "o ortocentro.",
+        "o incentro.",
+        "o circuncentro."
+      ],
+      "a": 0,
+      "sol": "A concorrência das medianas define o baricentro.",
+      "hyp": "Pode trocar centros notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-042",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se um ponto divide cada mediana na razão 2:1 a partir do vértice, esse ponto é...",
+      "o": [
+        "o incentro.",
+        "o baricentro.",
+        "o circuncentro.",
+        "um ponto arbitrário."
+      ],
+      "a": 1,
+      "sol": "Essa propriedade caracteriza o baricentro.",
+      "hyp": "Pode não reconhecer a propriedade distintiva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-caracterizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-043",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma placa triangular homogénea tem vértices em três pontos. Para colocar um apoio único que a equilibre idealmente, deve-se localizar...",
+      "o": [
+        "a interseção das mediatrizes.",
+        "a interseção das bissetrizes.",
+        "a interseção das medianas.",
+        "o ponto médio do maior lado."
+      ],
+      "a": 2,
+      "sol": "O centro de massa da placa triangular uniforme é o baricentro.",
+      "hyp": "Pode escolher circuncentro por associar a equilíbrio geométrico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:modelacao-centro-massa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-044",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo, duas medianas têm comprimentos 12 e 15. As distâncias dos respetivos vértices ao baricentro são...",
+      "o": [
+        "6 e 7,5.",
+        "4 e 5.",
+        "12 e 15.",
+        "8 e 10."
+      ],
+      "a": 3,
+      "sol": "O baricentro fica a 2/3 de cada mediana a partir do vértice: 8 e 10.",
+      "hyp": "Pode usar 1/2 ou 1/3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:duas-medianas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-045",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se AG=10 numa mediana e BG=12 noutra, quais os comprimentos completos dessas medianas?",
+      "o": [
+        "15 e 18.",
+        "20 e 24.",
+        "12 e 15.",
+        "30 e 36."
+      ],
+      "a": 0,
+      "sol": "Cada distância vértice-baricentro é 2/3 da mediana: 10×3/2=15 e 12×3/2=18.",
+      "hyp": "Pode duplicar em vez de multiplicar por 3/2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:inverter-duas-medianas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-046",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "O baricentro depende apenas da forma e posição dos vértices, não dos comprimentos dos lados isoladamente. Qual construção o determina?",
+      "o": [
+        "As bissetrizes.",
+        "As medianas.",
+        "As alturas.",
+        "As mediatrizes."
+      ],
+      "a": 1,
+      "sol": "As medianas são definidas pelos vértices e pontos médios dos lados.",
+      "hyp": "Pode escolher outra família de retas notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:construcao-baricentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-047",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo ABC, M é ponto médio de BC e G está em AM com AG=2GM. O que se pode concluir sobre G?",
+      "o": [
+        "G é o incentro.",
+        "G é o circuncentro.",
+        "G é o baricentro.",
+        "Nada, porque a razão não é relevante."
+      ],
+      "a": 2,
+      "sol": "Um ponto da mediana que a divide 2:1 desde o vértice é o baricentro.",
+      "hyp": "Pode não usar a propriedade de divisão das medianas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:baricentro-caracterizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-048",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Quer-se dividir uma região triangular em três sub-regiões de igual área ligando um ponto interior aos três vértices. Que ponto natural consegue isso?",
+      "o": [
+        "Circuncentro.",
+        "Ortocentro.",
+        "Um ponto qualquer.",
+        "Baricentro."
+      ],
+      "a": 3,
+      "sol": "Os triângulos ABG, BCG e CAG têm áreas iguais quando G é baricentro.",
+      "hyp": "Pode confundir igualdade de distâncias com igualdade de áreas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:modelacao-areas-tercos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-049",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma região triangular de área 90 é dividida ligando o baricentro aos vértices. Qual é a área de cada uma das três regiões maiores?",
+      "o": [
+        "30",
+        "15",
+        "45",
+        "60"
+      ],
+      "a": 0,
+      "sol": "Cada uma tem 1/3 da área total: 30.",
+      "hyp": "Pode usar 1/6, que corresponde às regiões após incluir também as medianas completas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:areas-tercos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-BAR-050",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-baricentro-medianas",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num triângulo de área 96, desenham-se as três medianas. Qual é a área total de quaisquer três dos seis pequenos triângulos, sem sobreposição?",
+      "o": [
+        "16",
+        "48",
+        "32",
+        "64"
+      ],
+      "a": 1,
+      "sol": "Cada pequeno triângulo tem área 96/6=16; três somam 48.",
+      "hyp": "Pode depender indevidamente de quais três são escolhidos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-baricentro-medianas:seis-areas-iguais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

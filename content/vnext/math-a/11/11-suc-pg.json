@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-suc",
+  "subtopicId": "11-suc-pg",
+  "subtopic": "Progressões geométricas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definição, termo geral, razão, termos médios geométricos, simetria, pertença, monotonia, limitação e modelação com progressões geométricas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11SUC-PG-001",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma progressão geométrica (PG) é uma sucessão em que...",
+      "o": [
+        "a razão entre termos consecutivos é constante.",
+        "a diferença entre termos consecutivos é constante.",
+        "todos os termos são positivos.",
+        "o termo geral é sempre linear."
+      ],
+      "a": 0,
+      "sol": "Numa PG, para termos não nulos, u_{n+1}/u_n=q é constante.",
+      "hyp": "Pode confundir PG com PA.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:definicao-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-002",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na PG, a constante multiplicativa entre termos consecutivos chama-se...",
+      "o": [
+        "diferença.",
+        "razão.",
+        "média.",
+        "amplitude."
+      ],
+      "a": 1,
+      "sol": "A razão q multiplica cada termo para obter o seguinte.",
+      "hyp": "Pode confundir com a razão aditiva de uma PA.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:razao-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-003",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A sucessão 2,6,18,54,... é uma PG de razão...",
+      "o": [
+        "2.",
+        "6.",
+        "3.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "6/2=3 e a razão mantém-se.",
+      "hyp": "Pode usar a diferença 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:identificar-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-004",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A sucessão 81,27,9,3,... tem razão...",
+      "o": [
+        "3.",
+        "−3.",
+        "−1/3.",
+        "1/3."
+      ],
+      "a": 3,
+      "sol": "27/81=1/3.",
+      "hyp": "Pode usar a razão inversa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:razao-fracionaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-005",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O termo geral de uma PG com primeiro termo u_1 e razão q é...",
+      "o": [
+        "u_n=u_1q^{n−1}.",
+        "u_n=u_1+(n−1)q.",
+        "u_n=u_1q^n.",
+        "u_n=nq."
+      ],
+      "a": 0,
+      "sol": "Entre u_1 e u_n há n−1 multiplicações por q.",
+      "hyp": "Pode contar n multiplicações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:formula-termo-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-006",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa PG com u_1=2 e q=3, u_4=",
+      "o": [
+        "18.",
+        "54.",
+        "81.",
+        "24."
+      ],
+      "a": 1,
+      "sol": "u_4=2×3³=54.",
+      "hyp": "Pode usar expoente 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:calcular-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-007",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa PG com u_1=64 e q=1/2, u_5=",
+      "o": [
+        "8.",
+        "2.",
+        "4.",
+        "16."
+      ],
+      "a": 2,
+      "sol": "64×(1/2)^4=4.",
+      "hyp": "Pode fazer apenas três divisões por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:calcular-termo-fracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-008",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_1=5 e u_3=45 numa PG de razão positiva, q=",
+      "o": [
+        "9.",
+        "√5.",
+        "2.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "45=5q² => q²=9; sendo q>0, q=3.",
+      "hyp": "Pode esquecer a raiz ou a condição de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:achar-razao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-009",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_2=6 e u_5=162, com q>0, então q=",
+      "o": [
+        "3.",
+        "9.",
+        "27.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "162/6=27=q³, logo q=3.",
+      "hyp": "Pode dividir pelo número de passos em vez de extrair raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:razao-dois-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-010",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_3=20 e q=2, então u_1=",
+      "o": [
+        "10.",
+        "5.",
+        "40.",
+        "80."
+      ],
+      "a": 1,
+      "sol": "u_3=u_1·2²=4u_1, logo u_1=5.",
+      "hyp": "Pode dividir apenas por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:achar-primeiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-011",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o 6.º termo da PG 1,2,4,8,...?",
+      "o": [
+        "16.",
+        "64.",
+        "32.",
+        "12."
+      ],
+      "a": 2,
+      "sol": "u_6=1×2^5=32.",
+      "hyp": "Pode usar 2^6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:termo-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-012",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o 5.º termo da PG 3,−6,12,−24,...?",
+      "o": [
+        "−48.",
+        "24.",
+        "−96.",
+        "48."
+      ],
+      "a": 3,
+      "sol": "A razão é −2; o 5.º termo é (−24)(−2)=48.",
+      "hyp": "Pode perder a alternância de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:razao-negativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-013",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se u_1>0 e q>1, a PG é...",
+      "o": [
+        "estritamente crescente.",
+        "estritamente decrescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 0,
+      "sol": "Multiplicar um termo positivo por q>1 aumenta-o.",
+      "hyp": "Pode ignorar a condição u_1>0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:monotonia-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-014",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se u_1>0 e 0<q<1, a PG é...",
+      "o": [
+        "crescente.",
+        "estritamente decrescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 1,
+      "sol": "Cada termo fica entre 0 e o anterior.",
+      "hyp": "Pode pensar que razão positiva implica crescimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:monotonia-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-015",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se q=1, a PG é...",
+      "o": [
+        "crescente.",
+        "decrescente.",
+        "constante.",
+        "alternada."
+      ],
+      "a": 2,
+      "sol": "Cada termo é igual ao anterior.",
+      "hyp": "Pode achar que toda PG muda.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:pg-constante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-016",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se q<0 e u_1≠0, os sinais dos termos...",
+      "o": [
+        "são sempre positivos.",
+        "são sempre negativos.",
+        "não dependem de q.",
+        "alternam."
+      ],
+      "a": 3,
+      "sol": "Cada multiplicação por uma razão negativa troca o sinal.",
+      "hyp": "Pode confundir módulo e sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:alternancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-017",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Em três termos positivos consecutivos a,b,c de uma PG, vale...",
+      "o": [
+        "b²=ac.",
+        "2b=a+c.",
+        "b=ac.",
+        "b=a+c."
+      ],
+      "a": 0,
+      "sol": "Como b/a=c/b, obtém-se b²=ac.",
+      "hyp": "Pode usar a média aritmética de uma PA.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:media-geometrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-018",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se 4,x,36 são termos positivos consecutivos de uma PG, x=",
+      "o": [
+        "20.",
+        "12.",
+        "16.",
+        "18."
+      ],
+      "a": 1,
+      "sol": "x²=4×36=144 e x>0, logo x=12.",
+      "hyp": "Pode usar a média aritmética 20.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:termo-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-019",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se 2,x,18 são termos consecutivos de uma PG e x>0, então x=",
+      "o": [
+        "10.",
+        "8.",
+        "6.",
+        "9."
+      ],
+      "a": 2,
+      "sol": "x²=36, logo x=6.",
+      "hyp": "Pode usar média aritmética.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:termo-medio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-020",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=5·2^{n−1}, então (u_n) é uma PG de razão...",
+      "o": [
+        "5.",
+        "10.",
+        "n.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "u_{n+1}/u_n=2.",
+      "hyp": "Pode usar o coeficiente inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:reconhecer-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-021",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=3·(1/4)^{n−1}, a razão é...",
+      "o": [
+        "1/4.",
+        "3.",
+        "4.",
+        "−1/4."
+      ],
+      "a": 0,
+      "sol": "O fator que multiplica de termo para termo é 1/4.",
+      "hyp": "Pode usar o inverso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:reconhecer-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-022",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG, u_2=6 e u_6=486. Com q>0, qual é q?",
+      "o": [
+        "9.",
+        "3.",
+        "81.",
+        "2."
+      ],
+      "a": 1,
+      "sol": "486/6=81=q^4, logo q=3.",
+      "hyp": "Pode tirar raiz quadrada em vez de quarta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:dois-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-023",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG, u_2=6 e u_6=486, com q>0. Qual é u_1?",
+      "o": [
+        "6.",
+        "18.",
+        "2.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "u_2=u_1q => 6=3u_1, logo u_1=2.",
+      "hyp": "Pode dividir por q².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:achar-primeiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-024",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_4=24 e u_7=192, com q>0, q=",
+      "o": [
+        "4.",
+        "8.",
+        "3.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "192/24=8=q³, logo q=2.",
+      "hyp": "Pode dividir pelo número de passos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:razao-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-025",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_5=16 e q=1/2, então u_2=",
+      "o": [
+        "128.",
+        "64.",
+        "32.",
+        "8."
+      ],
+      "a": 0,
+      "sol": "De u_2 a u_5 há 3 multiplicações por 1/2: u_5=u_2/8, logo u_2=128.",
+      "hyp": "Pode multiplicar em vez de dividir ao recuar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:recuar-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-026",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG positiva, u_2u_6 é igual a...",
+      "o": [
+        "2u_4.",
+        "u_4².",
+        "u_8.",
+        "u_3u_5 apenas se q=1."
+      ],
+      "a": 1,
+      "sol": "Os índices 2 e 6 são simétricos em torno de 4, logo o produto é u_4².",
+      "hyp": "Pode aplicar a relação de média aritmética.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:simetria-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-027",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG positiva, u_5 é a média geométrica de...",
+      "o": [
+        "u_4 e u_8.",
+        "u_1 e u_10.",
+        "u_2 e u_8.",
+        "u_3 e u_8."
+      ],
+      "a": 2,
+      "sol": "2 e 8 estão equidistantes de 5.",
+      "hyp": "Pode escolher índices cuja média não é 5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:media-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-028",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se u_2=3 e u_8=192 numa PG positiva, então u_5=",
+      "o": [
+        "48.",
+        "12.",
+        "96.",
+        "24."
+      ],
+      "a": 3,
+      "sol": "u_5²=u_2u_8=576, logo u_5=24.",
+      "hyp": "Pode usar média aritmética 97,5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:interpolacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-029",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos termos tem a PG 2,6,18,...,1458?",
+      "o": [
+        "7.",
+        "6.",
+        "8.",
+        "9."
+      ],
+      "a": 0,
+      "sol": "2·3^{n−1}=1458 =>3^{n−1}=729=3^6 =>n=7.",
+      "hyp": "Pode devolver o expoente 6.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:numero-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-030",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O número 486 pertence à PG 2,6,18,54,...?",
+      "o": [
+        "Não.",
+        "Sim, é u_6.",
+        "Sim, é u_5.",
+        "Sim, é u_7."
+      ],
+      "a": 1,
+      "sol": "2·3^{5}=486, logo n=6.",
+      "hyp": "Pode confundir com 3^5=243.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:pertença-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-031",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O número 500 pertence à PG 2,6,18,54,...?",
+      "o": [
+        "Sim, é u_6.",
+        "Sim, é u_7.",
+        "Não.",
+        "Sim, é u_5."
+      ],
+      "a": 2,
+      "sol": "Os termos são 2·3^{n−1}; 500/2=250 não é potência de 3.",
+      "hyp": "Pode aproximar 486 a 500 e aceitar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:pertença-pg",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-032",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG com u_1=3 e q=2, para que n se tem u_n=96?",
+      "o": [
+        "5.",
+        "7.",
+        "4.",
+        "6."
+      ],
+      "a": 3,
+      "sol": "3·2^{n−1}=96 =>2^{n−1}=32=2^5 =>n=6.",
+      "hyp": "Pode devolver o expoente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:indice-termo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-033",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma PG positiva com 0<q<1 é limitada inferiormente por...",
+      "o": [
+        "0.",
+        "1.",
+        "u_1 obrigatoriamente como inferior.",
+        "−∞."
+      ],
+      "a": 0,
+      "sol": "Todos os termos são positivos e aproximam-se de 0.",
+      "hyp": "Pode achar que a cota inferior tem de ser atingida.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:cota-inferior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-034",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma PG positiva com q>1 é limitada inferiormente por...",
+      "o": [
+        "0 apenas e nunca por u_1.",
+        "u_1, se n começa em 1.",
+        "não tem qualquer cota inferior.",
+        "−∞ apenas."
+      ],
+      "a": 1,
+      "sol": "Sendo crescente e positiva, o primeiro termo é o mínimo.",
+      "hyp": "Pode confundir ausência de cota superior com inferior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:limitacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-035",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 3,x,27 são termos consecutivos de uma PG positiva, x=",
+      "o": [
+        "15.",
+        "12.",
+        "9.",
+        "6."
+      ],
+      "a": 2,
+      "sol": "x²=81, logo x=9.",
+      "hyp": "Pode usar a média aritmética.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:tres-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-036",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 2,x,y,54 são quatro termos consecutivos de uma PG positiva, q=",
+      "o": [
+        "2.",
+        "9.",
+        "27.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "54=2q³ =>q³=27=>q=3.",
+      "hyp": "Pode dividir apenas os extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:quatro-consecutivos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-037",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "No caso 2,x,y,54, os valores de x e y são...",
+      "o": [
+        "6 e 18.",
+        "4 e 12.",
+        "9 e 27.",
+        "3 e 9."
+      ],
+      "a": 0,
+      "sol": "Multiplicando sucessivamente por 3:2,6,18,54.",
+      "hyp": "Pode usar uma razão errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:quatro-termos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-038",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG positiva, u_3u_7=400. Quanto vale u_5?",
+      "o": [
+        "40.",
+        "20.",
+        "10.",
+        "200."
+      ],
+      "a": 1,
+      "sol": "u_5²=u_3u_7=400 e u_5>0, logo u_5=20.",
+      "hyp": "Pode esquecer a raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-039",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa PG, u_4u_10=144 e u_7>0. Então u_7=",
+      "o": [
+        "−12.",
+        "72.",
+        "12.",
+        "24."
+      ],
+      "a": 2,
+      "sol": "u_7²=u_4u_10=144 e u_7>0.",
+      "hyp": "Pode ignorar a condição de positividade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:simetria-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-040",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_n=aq^{n−1}, então u_{n+k}/u_n, quando definido, é...",
+      "o": [
+        "q^{n+k}.",
+        "q^n.",
+        "kq.",
+        "q^k."
+      ],
+      "a": 3,
+      "sol": "Os fatores a e q^{n−1} cancelam, sobrando q^k.",
+      "hyp": "Pode somar expoentes indevidamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:salto-indices",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-041",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma PG tem u_1=100 e q=0,8. Qual é u_4?",
+      "o": [
+        "51,2.",
+        "64.",
+        "80.",
+        "40,96."
+      ],
+      "a": 0,
+      "sol": "100×0,8³=51,2.",
+      "hyp": "Pode usar apenas duas multiplicações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:decimal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-042",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma PG tem u_1=5 e q=−2. Qual é o primeiro termo negativo?",
+      "o": [
+        "u_1.",
+        "u_2.",
+        "u_3.",
+        "u_4."
+      ],
+      "a": 1,
+      "sol": "u_1=5>0 e u_2=−10<0.",
+      "hyp": "Pode pensar que razão negativa torna o primeiro termo negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:primeiro-negativo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-043",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma PG com q=−1 e u_1≠0 é...",
+      "o": [
+        "constante.",
+        "crescente.",
+        "alternada entre dois valores opostos.",
+        "decrescente."
+      ],
+      "a": 2,
+      "sol": "Os termos alternam u_1,−u_1,u_1,−u_1,...",
+      "hyp": "Pode confundir |q|=1 com constância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:q-menos1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-044",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma população de 500 aumenta 10% por período. Qual é o 4.º valor se o primeiro é 500?",
+      "o": [
+        "650.",
+        "550.",
+        "605.",
+        "665,5."
+      ],
+      "a": 3,
+      "sol": "500×1,1³=665,5.",
+      "hyp": "Pode somar sempre 50 em vez de aplicar percentagem ao novo valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:crescimento-percentual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-045",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um equipamento perde 20% do valor por ano, começando em 1000 €. Após 3 desvalorizações, vale...",
+      "o": [
+        "512 €.",
+        "600 €.",
+        "640 €.",
+        "800 €."
+      ],
+      "a": 0,
+      "sol": "1000×0,8³=512.",
+      "hyp": "Pode subtrair 200 € em cada ano.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:desvalorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-046",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma cultura de bactérias duplica em cada hora. Começando com 200, ao fim de 5 duplicações há...",
+      "o": [
+        "3200.",
+        "6400.",
+        "1000.",
+        "12800."
+      ],
+      "a": 1,
+      "sol": "200×2^5=6400.",
+      "hyp": "Pode contar o valor inicial como primeira duplicação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:duplicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-047",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma bola ressalta a 75% da altura anterior. Se a primeira altura é 4 m, a terceira é...",
+      "o": [
+        "3 m.",
+        "1,6875 m.",
+        "2,25 m.",
+        "2,5 m."
+      ],
+      "a": 2,
+      "sol": "4×0,75²=2,25.",
+      "hyp": "Pode aplicar três reduções em vez de duas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:ressalto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-048",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_2=12 e u_5=96 numa PG positiva, então u_8=",
+      "o": [
+        "384.",
+        "192.",
+        "1536.",
+        "768."
+      ],
+      "a": 3,
+      "sol": "q³=96/12=8 =>q=2. De u_5 a u_8 há 3 passos:96×8=768.",
+      "hyp": "Pode aplicar só um fator 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:extrapolar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-049",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se u_3=18 e u_6=486 numa PG positiva, u_1=",
+      "o": [
+        "2.",
+        "6.",
+        "3.",
+        "9."
+      ],
+      "a": 0,
+      "sol": "q³=486/18=27=>q=3; u_3=u_1·9=>u_1=2.",
+      "hyp": "Pode dividir por 3 em vez de 9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:recuperar-primeiro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11SUC-PG-050",
+      "themeId": "11-suc",
+      "subtopicId": "11-suc-pg",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um ficheiro perde metade do tamanho a cada compressão sucessiva, começando em 80 MB. Um modelo adequado é...",
+      "o": [
+        "u_n=80−(n−1)/2.",
+        "u_n=80·(1/2)^{n−1}.",
+        "u_n=40n.",
+        "u_n=80·2^{n−1}."
+      ],
+      "a": 1,
+      "sol": "Reduzir a metade é uma alteração multiplicativa constante.",
+      "hyp": "Pode modelar uma perda absoluta em vez de proporcional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-suc-pg:modelacao-compressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

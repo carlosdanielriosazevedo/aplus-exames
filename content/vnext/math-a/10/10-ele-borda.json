@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ele",
+  "subtopicId": "10-ele-borda",
+  "subtopic": "Método de Borda",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. A escala de pontuação é sempre explicitada quando necessária para evitar ambiguidades entre convenções. Não ligado ao motor atual. Requer QA matemático e revisão pedagógica antes de elegibilidade.",
+  "questions": [
+    {
+      "id": "VN10ELE-BOR-001",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num método de Borda com três candidatos, cada eleitor ordena os candidatos e atribuem-se 3 pontos ao 1.º, 2 ao 2.º e 1 ao 3.º. O vencedor é...",
+      "o": [
+        "o candidato com maior soma de pontos.",
+        "o candidato com mais votos em último lugar.",
+        "sempre quem tiver mais primeiros lugares.",
+        "o candidato com menor soma de pontos."
+      ],
+      "a": 0,
+      "sol": "No método de Borda somam-se os pontos associados às posições de todos os boletins; vence a maior pontuação total.",
+      "hyp": "Pode reduzir o método de Borda à contagem de primeiros lugares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-002",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num boletim com preferência A > B > C e pontuação 3-2-1, quantos pontos recebe B?",
+      "o": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "a": 1,
+      "sol": "B está em 2.º lugar e recebe 2 pontos.",
+      "hyp": "Pode não relacionar corretamente posição e pontuação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:pontuacao-posicao-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-003",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Num boletim A > B > C > D, usando 4-3-2-1 pontos, quantos pontos recebe C?",
+      "o": [
+        "4",
+        "3",
+        "2",
+        "1"
+      ],
+      "a": 2,
+      "sol": "C aparece em 3.º lugar, por isso recebe 2 pontos.",
+      "hyp": "Pode inverter a ordem da pontuação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:pontuacao-posicao-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-004",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Com quatro candidatos e a escala 4-3-2-1, quantos pontos são distribuídos no total por cada boletim válido?",
+      "o": [
+        "8",
+        "9",
+        "11",
+        "10"
+      ],
+      "a": 3,
+      "sol": "Cada boletim distribui 4+3+2+1=10 pontos.",
+      "hyp": "Pode somar incorretamente os pontos de um boletim.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:soma-boletim-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-005",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Com cinco candidatos e pontuação 5-4-3-2-1, qual é o total de pontos distribuído por cada eleitor?",
+      "o": [
+        "15",
+        "10",
+        "12",
+        "20"
+      ],
+      "a": 0,
+      "sol": "5+4+3+2+1=15 pontos por eleitor.",
+      "hyp": "Pode confundir o número de candidatos com o total de pontos distribuídos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:soma-boletim-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-006",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usa Borda 3-2-1. Há 4 eleitores com A > B > C, 3 com B > A > C e 2 com C > A > B. Qual candidato vence?",
+      "o": [
+        "B",
+        "A",
+        "C",
+        "A e B empatam"
+      ],
+      "a": 1,
+      "sol": "As pontuações são A=22, B=19 e C=13. A tem a maior soma.",
+      "hyp": "Pode contar apenas primeiros lugares ou esquecer a multiplicidade de cada perfil.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-3-grupos-vencedor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-007",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No mesmo perfil — 4 eleitores A > B > C, 3 B > A > C e 2 C > A > B — qual é a pontuação de B em Borda 3-2-1?",
+      "o": [
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "a": 2,
+      "sol": "B recebe 4×2 + 3×3 + 2×1 = 8+9+2 = 19.",
+      "hyp": "Pode ignorar um grupo ou atribuir pontos errados à posição de B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-3-grupos-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-008",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usa Borda 3-2-1. Há 5 eleitores A > B > C, 4 B > C > A e 3 C > A > B. Qual é o resultado?",
+      "o": [
+        "A vence.",
+        "B vence.",
+        "C vence.",
+        "A e B empatam em primeiro."
+      ],
+      "a": 3,
+      "sol": "As pontuações são A=25, B=25 e C=22. A e B empatam.",
+      "hyp": "Pode assumir que o método produz sempre um vencedor único.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-empate",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-009",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usa Borda 3-2-1. Se 6 eleitores preferem A > B > C e 5 preferem B > C > A, quem vence por Borda?",
+      "o": [
+        "B",
+        "A",
+        "C",
+        "Há empate"
+      ],
+      "a": 0,
+      "sol": "A soma 6×3+5×1=23; B soma 6×2+5×3=27; C soma 6×1+5×2=16. Vence B.",
+      "hyp": "Pode escolher automaticamente quem tem mais primeiros lugares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:maioria-primeiros-vs-borda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-010",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No perfil 6 eleitores A > B > C e 5 eleitores B > C > A, A tem 6 dos 11 primeiros lugares. Mesmo assim, B vence por Borda 3-2-1. O que mostra este exemplo?",
+      "o": [
+        "Borda considera apenas os primeiros lugares.",
+        "Ter maioria de primeiros lugares não garante necessariamente vitória por Borda.",
+        "Borda ignora os segundos lugares.",
+        "O perfil é inválido."
+      ],
+      "a": 1,
+      "sol": "O método de Borda valoriza toda a ordenação. B acumula muitos pontos por aparecer sempre em posições altas.",
+      "hyp": "Pode supor que a maioria de primeiras preferências domina qualquer método.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:criterio-maioria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-011",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com Borda 3-2-1, um candidato ficou 7 vezes em 1.º, 4 vezes em 2.º e 3 vezes em 3.º. Quantos pontos obteve?",
+      "o": [
+        "29",
+        "30",
+        "32",
+        "31"
+      ],
+      "a": 2,
+      "sol": "7×3 + 4×2 + 3×1 = 21+8+3 = 32.",
+      "hyp": "Pode somar posições em vez de pontos ponderados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:contagens-posicoes-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-012",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com Borda 3-2-1, B ficou 5 vezes em 1.º, 8 em 2.º e 2 em 3.º. Qual é a sua pontuação?",
+      "o": [
+        "31",
+        "32",
+        "34",
+        "33"
+      ],
+      "a": 3,
+      "sol": "5×3 + 8×2 + 2×1 = 15+16+2 = 33.",
+      "hyp": "Pode esquecer a ponderação das frequências.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:contagens-posicoes-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-013",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com quatro candidatos e Borda 4-3-2-1, A ficou 3 vezes em 1.º, 2 em 2.º, 1 em 3.º e 4 em 4.º. Quantos pontos somou?",
+      "o": [
+        "24",
+        "22",
+        "23",
+        "25"
+      ],
+      "a": 0,
+      "sol": "3×4+2×3+1×2+4×1=12+6+2+4=24.",
+      "hyp": "Pode calcular a média das posições em vez da soma Borda.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:contagens-posicoes-score-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-014",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Com 12 eleitores e Borda 3-2-1, qual é a pontuação máxima que um candidato pode obter?",
+      "o": [
+        "24",
+        "36",
+        "30",
+        "48"
+      ],
+      "a": 1,
+      "sol": "O máximo ocorre se ficar em 1.º nos 12 boletins: 12×3=36.",
+      "hyp": "Pode confundir pontuação máxima com total de pontos de todos os candidatos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:maximo-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-015",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Com 12 eleitores e Borda 3-2-1, qual é a pontuação mínima possível de um candidato?",
+      "o": [
+        "0",
+        "6",
+        "12",
+        "24"
+      ],
+      "a": 2,
+      "sol": "Mesmo ficando sempre em último recebe 1 ponto por boletim: 12×1=12.",
+      "hyp": "Pode assumir uma variante 2-1-0 sem ler a escala indicada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:minimo-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-016",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Com três candidatos, Borda 3-2-1 e 20 eleitores, qual tem de ser a soma das pontuações finais dos três candidatos?",
+      "o": [
+        "100",
+        "110",
+        "140",
+        "120"
+      ],
+      "a": 3,
+      "sol": "Cada eleitor distribui 3+2+1=6 pontos. Com 20 eleitores, a soma global é 20×6=120.",
+      "hyp": "Pode não usar a conservação do total de pontos para validar resultados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:soma-global",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-017",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Com quatro candidatos, Borda 4-3-2-1 e 15 eleitores, qual é a soma total das quatro pontuações finais?",
+      "o": [
+        "150",
+        "120",
+        "135",
+        "160"
+      ],
+      "a": 0,
+      "sol": "Cada eleitor distribui 10 pontos. Logo 15×10=150.",
+      "hyp": "Pode multiplicar pelo número de candidatos em vez da soma da escala.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:soma-global-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-018",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num concurso com três candidatos, 20 eleitores e Borda 3-2-1, foram publicadas as pontuações A=42, B=39 e C=37. O que se conclui?",
+      "o": [
+        "Os resultados são coerentes.",
+        "Há um erro, porque a soma deveria ser 120 e é 118.",
+        "Há necessariamente um empate.",
+        "C deveria vencer."
+      ],
+      "a": 1,
+      "sol": "A soma publicada é 42+39+37=118, mas 20 boletins válidos distribuem 120 pontos. Há pelo menos um erro.",
+      "hyp": "Pode validar apenas a ordem final sem verificar a soma global.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:auditar-soma-global",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-019",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para três candidatos, comparar Borda 3-2-1 com a escala 2-1-0, aplicada aos mesmos boletins completos, conduz a quê?",
+      "o": [
+        "Pode mudar sempre o vencedor.",
+        "Produz necessariamente um empate.",
+        "Mantém as diferenças de pontuação e o vencedor, porque se retira 1 ponto a cada candidato por eleitor.",
+        "Só mantém o vencedor se houver dois candidatos."
+      ],
+      "a": 2,
+      "sol": "A escala 2-1-0 é a escala 3-2-1 menos 1 em todas as posições. Cada candidato perde exatamente um ponto por eleitor, por isso as diferenças permanecem.",
+      "hyp": "Pode pensar que qualquer alteração numérica da escala altera a classificação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:transformacao-afim-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-020",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se, para os mesmos boletins, a escala 3-2-1 for substituída por 6-4-2, o vencedor muda?",
+      "o": [
+        "Sim, necessariamente.",
+        "Só muda se houver empate.",
+        "Muda apenas com número ímpar de eleitores.",
+        "Não: todas as pontuações ficam multiplicadas por 2."
+      ],
+      "a": 3,
+      "sol": "6-4-2 é exatamente o dobro de 3-2-1. Multiplicar todas as pontuações por 2 preserva a ordem.",
+      "hyp": "Pode não reconhecer que multiplicar todos os pesos pela mesma constante positiva preserva o ranking.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:transformacao-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-021",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num perfil de 6 eleitores A > B > C e 5 B > C > A, qual afirmação compara corretamente maioria simples e Borda 3-2-1?",
+      "o": [
+        "A tem mais primeiros lugares, mas B vence por Borda.",
+        "A vence nos dois métodos.",
+        "B vence nos dois métodos.",
+        "C vence por Borda."
+      ],
+      "a": 0,
+      "sol": "A lidera em primeiros lugares, mas as pontuações Borda são A=23, B=27 e C=16.",
+      "hyp": "Pode considerar os dois métodos equivalentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:comparar-metodos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-022",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Usa Borda 3-2-1. Há 8 eleitores A > B > C, 7 B > A > C e 5 C > B > A. Quem vence?",
+      "o": [
+        "A",
+        "B",
+        "C",
+        "A e B empatam"
+      ],
+      "a": 1,
+      "sol": "A=8×3+7×2+5×1=43; B=8×2+7×3+5×2=47; C=8×1+7×1+5×3=30. Vence B.",
+      "hyp": "Pode contar apenas primeiros lugares ou errar a multiplicidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-comparacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-023",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Depois de aplicar Borda, A e B terminam empatados com 52 pontos e o regulamento não indica qualquer critério de desempate. Qual é a conclusão matematicamente correta?",
+      "o": [
+        "A deve vencer por ordem alfabética.",
+        "B deve vencer por ter nome mais curto.",
+        "O método, com a informação dada, não determina um vencedor único.",
+        "É obrigatório repetir toda a eleição."
+      ],
+      "a": 2,
+      "sol": "Sem uma regra adicional de desempate, a pontuação Borda apenas permite concluir que A e B estão empatados.",
+      "hyp": "Pode inventar um critério de desempate não previsto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:empate-sem-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-024",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Em Borda 3-2-1, entra um novo boletim A > B > C. Que incremento recebem A, B e C, respetivamente?",
+      "o": [
+        "1,2,3",
+        "3,1,2",
+        "2,3,1",
+        "3,2,1"
+      ],
+      "a": 3,
+      "sol": "O boletim atribui 3 pontos ao primeiro, 2 ao segundo e 1 ao terceiro.",
+      "hyp": "Pode inverter a direção da pontuação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:efeito-novo-boletim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-025",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um eleitor muda o boletim de A > B > C para B > A > C, mantendo-se Borda 3-2-1. Como muda a diferença B−A?",
+      "o": [
+        "Aumenta 2 pontos.",
+        "Diminui 2 pontos.",
+        "Não muda.",
+        "Aumenta 1 ponto."
+      ],
+      "a": 0,
+      "sol": "A perde 1 ponto e B ganha 1; logo B−A aumenta 2 pontos.",
+      "hyp": "Pode olhar apenas para a variação de um dos candidatos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:swap-adjacente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-026",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Num boletim de três candidatos com Borda 3-2-1, C passa de 3.º para 1.º. Quantos pontos adicionais recebe C nesse boletim?",
+      "o": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 1,
+      "sol": "C passa de 1 para 3 pontos, ganhando 2.",
+      "hyp": "Pode confundir número de posições subidas com pontuação final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:ganho-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-027",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Com quatro candidatos e Borda 4-3-2-1, um candidato passa de 4.º para 1.º num boletim. Qual é o aumento da sua pontuação nesse boletim?",
+      "o": [
+        "2",
+        "4",
+        "3",
+        "5"
+      ],
+      "a": 2,
+      "sol": "Passa de 1 para 4 pontos, um aumento de 3.",
+      "hyp": "Pode tomar a posição final como o ganho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:ganho-posicao-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-028",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Antes de entrarem novos eleitores, A tem 30 pontos e B 34. Cada novo eleitor tem preferência A > C > B e usa-se Borda 3-2-1. Qual é o menor número desses novos boletins para A ultrapassar B?",
+      "o": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ],
+      "a": 3,
+      "sol": "Cada novo boletim dá A=3 e B=1, reduzindo a diferença em 2. Com 2 boletins empatam; com 3 A ultrapassa B.",
+      "hyp": "Pode parar no empate quando a pergunta exige ultrapassar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:boletins-necessarios-diferenca-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-029",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A tem 30 pontos e B 34. Cada novo boletim é A > B > C, em Borda 3-2-1. Quantos desses boletins são necessários para A ultrapassar B?",
+      "o": [
+        "5",
+        "4",
+        "6",
+        "3"
+      ],
+      "a": 0,
+      "sol": "Cada boletim aumenta A−B em apenas 1 ponto. Quatro boletins produzem empate; cinco dão vantagem a A.",
+      "hyp": "Pode não distinguir empatar de ultrapassar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:boletins-necessarios-diferenca-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-030",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Usa Borda 3-2-1. O perfil é 5 eleitores A > B > C, 4 B > A > C e 3 C > B > A. Inicialmente B vence. Se os 3 boletins C > B > A forem retirados por serem inválidos, quem passa a vencer?",
+      "o": [
+        "B",
+        "A",
+        "C",
+        "A e B empatam"
+      ],
+      "a": 1,
+      "sol": "Inicialmente A=26, B=28, C=18. Sem os 3 boletins finais, A=23, B=22 e C=9; passa a vencer A.",
+      "hyp": "Pode retirar boletins sem recalcular todas as pontuações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:retirar-grupo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-031",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com Borda 3-2-1 e 20 eleitores, um candidato tem 45 pontos. Sabe-se que ficou 10 vezes em 1.º e 5 vezes em 2.º. Quantas vezes ficou em 3.º?",
+      "o": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 2,
+      "sol": "Os 10 primeiros lugares dão 30 pontos e os 5 segundos dão 10. Faltam 5 pontos, correspondentes a 5 terceiros lugares; 10+5+5=20 eleitores.",
+      "hyp": "Pode resolver a pontuação mas não verificar se as frequências totalizam o número de eleitores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:consistencia-frequencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-032",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com Borda 3-2-1 e 18 eleitores, um candidato ficou 8 vezes em 1.º e 6 em 2.º. Se os restantes lugares foram 3.º, qual é a sua pontuação?",
+      "o": [
+        "38",
+        "39",
+        "41",
+        "40"
+      ],
+      "a": 3,
+      "sol": "Restam 18−8−6=4 terceiros lugares. Pontos: 8×3+6×2+4×1=24+12+4=40.",
+      "hyp": "Pode esquecer de determinar primeiro a frequência em 3.º lugar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:frequencias-complementares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-033",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num eleitorado de 100 pessoas: 40 têm A > B > C, 35 têm B > C > A e 25 têm C > A > B. Em Borda 3-2-1, quem vence?",
+      "o": [
+        "B",
+        "A",
+        "C",
+        "A e B empatam"
+      ],
+      "a": 0,
+      "sol": "A=205, B=210 e C=185. B vence com 210 pontos.",
+      "hyp": "Pode usar as percentagens como se fossem apenas três boletins, ignorando os pesos 40,35,25.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-percentagens",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-034",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num eleitorado de 100 pessoas: 50 têm A > B > C, 30 têm B > C > A e 20 têm C > A > B. Qual é a pontuação Borda de A na escala 3-2-1?",
+      "o": [
+        "200",
+        "220",
+        "210",
+        "230"
+      ],
+      "a": 1,
+      "sol": "A=50×3+30×1+20×2=150+30+40=220.",
+      "hyp": "Pode atribuir a A a mesma posição em todos os grupos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-percentagens-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-035",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um aluno calcula Borda para 40 boletins A > B > C, 35 B > C > A e 25 C > A > B, mas soma apenas 3+1+2 para A, obtendo 6. Qual foi o erro principal?",
+      "o": [
+        "Usou uma escala errada.",
+        "Devia dividir por 100.",
+        "Ignorou quantos eleitores pertencem a cada perfil de preferência.",
+        "Borda só permite dois candidatos."
+      ],
+      "a": 2,
+      "sol": "Cada ranking representa muitos eleitores; é necessário multiplicar os pontos pelas respetivas frequências.",
+      "hyp": "Pode interpretar uma tabela de perfis como três eleitores individuais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:ignorar-multiplicidades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-036",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com 10 eleitores e Borda 3-2-1, qual destas pontuações é impossível para um candidato?",
+      "o": [
+        "10",
+        "18",
+        "25",
+        "31"
+      ],
+      "a": 3,
+      "sol": "Cada candidato recebe entre 1 e 3 pontos por eleitor. Com 10 eleitores, a pontuação tem de estar entre 10 e 30; 31 é impossível.",
+      "hyp": "Pode não usar limites mínimo e máximo para validar um resultado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:limites-score",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-037",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com 8 eleitores e Borda 4-3-2-1, qual é o intervalo possível de pontuação de um candidato?",
+      "o": [
+        "8 a 32",
+        "0 a 32",
+        "8 a 24",
+        "4 a 32"
+      ],
+      "a": 0,
+      "sol": "O mínimo é 8×1=8 e o máximo é 8×4=32.",
+      "hyp": "Pode assumir que o último lugar vale zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:limites-score-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-038",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Por que motivo um candidato pode ganhar em Borda sem ser o mais escolhido em 1.º lugar?",
+      "o": [
+        "Porque Borda ignora o 1.º lugar.",
+        "Porque os segundos e restantes lugares também contribuem para a soma.",
+        "Porque o último lugar vale mais pontos.",
+        "Porque a pontuação é escolhida pelo vencedor."
+      ],
+      "a": 1,
+      "sol": "Borda agrega a ordenação completa, pelo que uma preferência consistentemente alta pode superar mais primeiros lugares acompanhados de muitos últimos lugares.",
+      "hyp": "Pode pensar que apenas a primeira preferência determina o resultado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:interpretacao-consenso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-039",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num boletim A > B > C > D com escala 4-3-2-1, A e C trocam de posição, ficando C > B > A > D. Qual é a variação da pontuação de A e C nesse boletim?",
+      "o": [
+        "A perde 1 e C ganha 1.",
+        "A perde 3 e C ganha 3.",
+        "A perde 2 e C ganha 2.",
+        "Ambos mantêm a pontuação."
+      ],
+      "a": 2,
+      "sol": "A passa de 4 para 2 pontos (−2) e C passa de 2 para 4 (+2).",
+      "hyp": "Pode contar a troca como uma única posição apesar de haver duas posições de diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:swap-nao-adjacente-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-040",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Em Borda 3-2-1, um eleitor muda de A > C > B para C > B > A. Quanto varia a pontuação de A nesse boletim?",
+      "o": [
+        "−1",
+        "+1",
+        "+2",
+        "−2"
+      ],
+      "a": 3,
+      "sol": "A passa de 3 pontos (1.º) para 1 ponto (3.º), perdendo 2.",
+      "hyp": "Pode calcular apenas a posição final sem comparar com a inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:mudanca-boletim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-041",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Usa Borda 4-3-2-1. Há 4 eleitores A > B > C > D, 3 B > C > D > A, 2 C > D > A > B e 1 D > A > B > C. Quem vence?",
+      "o": [
+        "B",
+        "A",
+        "C",
+        "D"
+      ],
+      "a": 0,
+      "sol": "As pontuações são A=26, B=28, C=26 e D=20. B vence.",
+      "hyp": "Pode perder-se na agregação de vários perfis com quatro candidatos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-4-candidatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-042",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Usa Borda 4-3-2-1. Há 6 eleitores A > B > C > D, 5 B > C > D > A, 4 C > A > B > D e 3 D > C > B > A. Qual é o resultado no topo?",
+      "o": [
+        "A vence sozinho.",
+        "B e C empatam em primeiro.",
+        "B vence sozinho.",
+        "C e D empatam em primeiro."
+      ],
+      "a": 1,
+      "sol": "As pontuações são A=44, B=52, C=52 e D=32. B e C empatam.",
+      "hyp": "Pode assumir que um perfil maior implica vencedor único.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:perfil-4-empate",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-043",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "Com Borda 4-3-2-1, um candidato ficou 5 vezes em 1.º, 4 em 2.º, 3 em 3.º e 2 em 4.º. Qual é a sua pontuação?",
+      "o": [
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "a": 2,
+      "sol": "5×4+4×3+3×2+2×1=20+12+6+2=40.",
+      "hyp": "Pode usar 3-2-1 ou esquecer a quarta posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:contagens-posicoes-score-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-044",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com 14 eleitores e quatro candidatos, Borda 4-3-2-1 distribui quantos pontos no total? Se as pontuações publicadas somarem 138, o que se conclui?",
+      "o": [
+        "O total correto é 138.",
+        "O total correto é 56.",
+        "Não é possível verificar sem conhecer cada boletim.",
+        "O total correto é 140 e há erro nos resultados publicados."
+      ],
+      "a": 3,
+      "sol": "Cada boletim distribui 10 pontos; 14×10=140. Uma soma publicada de 138 é incompatível com todos os boletins completos.",
+      "hyp": "Pode achar que a soma global não permite controlo de consistência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:auditar-soma-global-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-045",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa associação usa-se Borda 3-2-1. Antes dos últimos boletins, A=64, B=66 e C=50. Restam exatamente 2 eleitores, ambos com preferência A > C > B. Qual será o vencedor final?",
+      "o": [
+        "A",
+        "B",
+        "C",
+        "A e B empatam"
+      ],
+      "a": 0,
+      "sol": "Os dois boletins acrescentam A=6, B=2 e C=4. Ficam A=70, B=68 e C=54; vence A.",
+      "hyp": "Pode olhar apenas para a classificação antes dos boletins restantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:atualizacao-final",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-046",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Antes do último boletim, em Borda 3-2-1, A=40 e B=42. Qual preferência do último eleitor faria A empatar com B, ignorando C na comparação?",
+      "o": [
+        "A > B > C",
+        "A > C > B",
+        "B > A > C",
+        "C > A > B"
+      ],
+      "a": 1,
+      "sol": "A precisa de recuperar 2 pontos relativamente a B. Num boletim A > C > B, A recebe 3 e B 1, reduzindo a diferença exatamente em 2.",
+      "hyp": "Pode escolher A>B>C, que só recupera 1 ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:construir-boletim-alvo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-047",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Em Borda 3-2-1, A lidera B por 5 pontos antes de entrar um único novo boletim. É possível B ultrapassar A com apenas esse boletim?",
+      "o": [
+        "Sim, sempre.",
+        "Sim, se B ficar 1.º e A 3.º.",
+        "Não, porque num único boletim B pode recuperar no máximo 2 pontos relativamente a A.",
+        "Não, porque novos boletins nunca mudam a ordem."
+      ],
+      "a": 2,
+      "sol": "A maior vantagem relativa de B num boletim ocorre com B em 1.º e A em 3.º: B ganha 2 pontos relativamente a A. Não chega para recuperar 5.",
+      "hyp": "Pode não calcular a variação relativa máxima num único boletim.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:robustez-margem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-048",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com Borda 4-3-2-1, A lidera B por 7 pontos e faltam 2 boletins. Mesmo que em ambos B fique 1.º e A 4.º, B pode ultrapassar A?",
+      "o": [
+        "Sim, por 1 ponto.",
+        "Sim, por 2 pontos.",
+        "Não; consegue recuperar no máximo 4 pontos.",
+        "Não; consegue recuperar no máximo 6 pontos."
+      ],
+      "a": 3,
+      "sol": "Em cada boletim a maior recuperação relativa é 4−1=3 pontos. Em dois boletins são 6, insuficientes para uma diferença de 7.",
+      "hyp": "Pode multiplicar incorretamente a margem máxima por boletim.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:robustez-margem-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-049",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num método de Borda, conhecer apenas o número de primeiros lugares de cada candidato é suficiente para calcular o vencedor?",
+      "o": [
+        "Não; é necessário conhecer também como os candidatos aparecem nas restantes posições ou informação equivalente.",
+        "Sim, sempre.",
+        "Sim, desde que existam três candidatos.",
+        "Só não é suficiente quando há empate nos primeiros lugares."
+      ],
+      "a": 0,
+      "sol": "Borda atribui pontos a todas as posições. Contar apenas primeiros lugares perde informação essencial.",
+      "hyp": "Pode confundir Borda com pluralidade/maioria simples.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:informacao-necessaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-BOR-050",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-borda",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com 30 eleitores e Borda 3-2-1, um candidato obteve 70 pontos. Qual destas distribuições de posições é compatível com esse total?",
+      "o": [
+        "20 primeiros, 10 segundos, 0 terceiros",
+        "15 primeiros, 10 segundos, 5 terceiros",
+        "10 primeiros, 15 segundos, 5 terceiros",
+        "18 primeiros, 4 segundos, 8 terceiros"
+      ],
+      "a": 1,
+      "sol": "15×3+10×2+5×1=45+20+5=70 e 15+10+5=30. As restantes distribuições não produzem simultaneamente 70 pontos e 30 posições.",
+      "hyp": "Pode verificar apenas a soma das frequências ou apenas a pontuação, mas não ambas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-borda:reconstruir-frequencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

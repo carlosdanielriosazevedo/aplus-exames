@@ -1,14 +1,16 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import {DIAGNOSTIC_BLUEPRINT,TAXONOMY} from "../app/data/content.js";
+import {DIAGNOSTIC_BLUEPRINT,TAXONOMY,QUESTION_BANK} from "../app/data/content.js";
 import {
   emptyScores,measuredThemes,prepIndex,selectMissionTheme,calibrationCandidates,
   buildMiniExam,trainingQuestions,diagnosticAnchor,selectQuestionForPlan,applyEvidence,scopedThemeScore
 } from "../app/lib/engine.js";
 import {
   academicScopeThemes,diagnosticBlueprintForProfile,isThemeInAcademicScope,
-  currentYearSubtopicIds,isQuestionInAcademicScope,isSubtopicInAcademicScope
+  currentYearSubtopicIds,isQuestionInAcademicScope,isSubtopicInAcademicScope,
+  normalizeTaughtSubtopics
 } from "../app/lib/curriculumScope.js";
+import {CURRICULUM_SUBTOPICS,curriculumSubtopicForItem} from "../app/data/curriculumVnext.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../app/lib/diagnosticRecovery.js";
 import {migrateDailyMission} from "../app/lib/dailyMission.js";
 
@@ -34,17 +36,36 @@ assert.deepEqual(diagnosticBlueprintForProfile(s10.profile),DIAGNOSTIC_BLUEPRINT
 
 // No ano atual, o âmbito é fechado ao nível da submatéria, não apenas do tema.
 const partial10=stateFor("10.º");
-partial10.profile.taughtSubtopicIds=["mc-10-fun-dominio-e-zeros"];
+partial10.profile.taughtSubtopicIds=["10-fun-dominio-imagem-zeros"];
 assert.deepEqual(academicScopeThemes(partial10.profile).map(t=>t.id),["10-fun"]);
 assert.equal(isSubtopicInAcademicScope(TAXONOMY.find(t=>t.id==="10-fun"),"mc-10-fun-dominio-e-zeros",partial10.profile),true);
 assert.equal(isSubtopicInAcademicScope(TAXONOMY.find(t=>t.id==="10-fun"),"mc-10-fun-monotonia-e-extremos",partial10.profile),false);
+assert.deepEqual(normalizeTaughtSubtopics({...partial10.profile,taughtSubtopicIds:["mc-10-fun-dominio-e-zeros"]}),["10-fun-dominio-imagem-zeros"]);
+assert.equal(CURRICULUM_SUBTOPICS.length,113);
+assert.equal(currentYearSubtopicIds(profile("10.º")).length,31);
+assert.equal(currentYearSubtopicIds(profile("11.º")).length,35);
 const currentQuestions=buildMiniExam(partial10,8);
 assert.ok(currentQuestions.every(q=>isQuestionInAcademicScope(q,partial10.profile,"exam")));
 const selectedQuestion=trainingQuestions(partial10,{themeId:"10-fun",focus:"mc-10-fun-dominio-e-zeros",level:"auto"},1)[0];
 const hiddenQuestion=trainingQuestions(partial10,{themeId:"10-fun",focus:"mc-10-fun-monotonia-e-extremos",level:"auto"},1)[0];
 partial10.scores["10-fun"]=applyEvidence(partial10.scores["10-fun"],selectedQuestion,true,"exam");
 partial10.scores["10-fun"]=applyEvidence(partial10.scores["10-fun"],hiddenQuestion,false,"training");
+assert.equal(partial10.scores["10-fun"].evidence[0].subtopicId,"10-fun-dominio-imagem-zeros");
 assert.equal(scopedThemeScore(partial10,"10-fun").evidence.length,1);
+assert.equal(curriculumSubtopicForItem(hiddenQuestion),"10-fun-quadratica");
+assert.equal(isQuestionInAcademicScope({...selectedQuestion,subtopicId:"10-fun-desconhecida"},partial10.profile,"exam"),false);
+
+// Oito itens legados ficam deliberadamente fora do motor académico: a sua
+// classificação antiga é mais larga do que qualquer submatéria real adequada.
+// Continuam acessíveis no Treino Livre, que não produz fraquezas automáticas.
+assert.deepEqual(
+  QUESTION_BANK.filter(q=>!curriculumSubtopicForItem(q)).map(q=>q.id).sort(),
+  [
+    "CV51-10ELE-INT-1","CV51-10ELE-PART-1",
+    "CV51-11FUN-IG-1","CV51-11FUN-IG-2","CV51-11FUN-MOD-1",
+    "CV51-11FUN-MOD-2","CV51-11FUN-TR-1","CV51-11FUN-TR-2"
+  ]
+);
 
 const s11=stateFor("11.º");
 assert.deepEqual([...years(academicScopeThemes(s11.profile))],["10.º","11.º"]);
@@ -128,5 +149,6 @@ assert.doesNotMatch(pageSource,/8 questões · ~10–15 min · 10\.º, 11\.º e 
 assert.match(pageSource,/Que tema opcional está a tua turma a estudar\?/);
 assert.match(pageSource,/Matéria dada na escola/);
 assert.doesNotMatch(pageSource,/Quanto do programa já deste\?/);
+assert.doesNotMatch(pageSource,/content\/vnext/);
 
 console.log("✓ curriculum year scope audit: diagnostic, missions, progress and mini-exam stay inside academic scope; Free Training remains open");

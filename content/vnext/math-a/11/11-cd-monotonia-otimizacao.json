@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matematica A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-monotonia-otimizacao",
+  "subtopic": "Monotonia, extremos e otimizacao",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteudo original A+. Trabalha sinal da derivada, quadros de variacao, extremos locais/absolutos e problemas de otimizacao em modelos quadraticos e contextos simples. Nao ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CD-MO-001",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(x)>0 num intervalo, f e",
+      "o": [
+        "crescente nesse intervalo",
+        "decrescente",
+        "constante",
+        "necessariamente positiva"
+      ],
+      "a": 0,
+      "sol": "O sinal positivo da derivada determina crescimento.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-002",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f'(x)<0 num intervalo, f e",
+      "o": [
+        "crescente",
+        "decrescente nesse intervalo",
+        "constante",
+        "necessariamente negativa"
+      ],
+      "a": 1,
+      "sol": "O sinal negativo determina decrescimento.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-003",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
+      "o": [
+        "assintota",
+        "zero obrigatorio de f",
+        "ponto estacionario",
+        "ponto de descontinuidade"
+      ],
+      "a": 2,
+      "sol": "A tangente e horizontal quando f'(a)=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-004",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f' muda de positivo para negativo em a, f tem tipicamente",
+      "o": [
+        "um minimo local",
+        "nenhum extremo",
+        "uma assintota",
+        "um maximo local em a"
+      ],
+      "a": 3,
+      "sol": "A funcao passa de crescente para decrescente.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-005",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f' muda de negativo para positivo em a, f tem tipicamente",
+      "o": [
+        "um minimo local em a",
+        "um maximo local",
+        "um zero obrigatorio",
+        "uma descontinuidade"
+      ],
+      "a": 0,
+      "sol": "A funcao passa de decrescente para crescente.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-006",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "A condicao f'(a)=0, so por si,",
+      "o": [
+        "garante um maximo",
+        "nao garante que a seja extremo",
+        "garante um minimo",
+        "garante f(a)=0"
+      ],
+      "a": 1,
+      "sol": "E preciso analisar o comportamento em torno do ponto.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-007",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Num problema de maximizacao, depois de encontrar candidatos deve-se",
+      "o": [
+        "escolher sempre o primeiro zero de f'",
+        "ignorar extremos do intervalo",
+        "comparar valores relevantes e respeitar o dominio",
+        "usar apenas f'"
+      ],
+      "a": 2,
+      "sol": "Em dominios fechados, extremos da fronteira tambem podem ser relevantes.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-008",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Num problema de minimizacao, um ponto interior candidato surge muitas vezes de",
+      "o": [
+        "f(x)=0 obrigatoriamente",
+        "f'(x)=1",
+        "x=0 sempre",
+        "f'(x)=0"
+      ],
+      "a": 3,
+      "sol": "Extremos interiores diferenciaveis sao pontos criticos.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-009",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "Se f e crescente antes de a e crescente depois de a, mesmo com f'(a)=0, entao a",
+      "o": [
+        "nao e necessariamente extremo",
+        "e maximo",
+        "e minimo",
+        "e sempre zero"
+      ],
+      "a": 0,
+      "sol": "Nao houve mudanca de monotonia.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-010",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensao",
+      "q": "O estudo do sinal de f' permite construir",
+      "o": [
+        "apenas o grafico de f'",
+        "um quadro de variacao de f",
+        "uma tabela de probabilidades",
+        "uma soma de termos"
+      ],
+      "a": 1,
+      "sol": "Os intervalos de sinal determinam monotonia.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:conceito:10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-011",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=2x, entao junto de x=0 a situacao correta e",
+      "o": [
+        "decrescente em ]-inf,0[ e crescente em ]0,+inf[",
+        "minimo em x=0",
+        "decrescente em ]-inf,0[ e crescente em ]0,+inf[; minimo em x=0.",
+        "nao se pode concluir nada"
+      ],
+      "a": 2,
+      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-012",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=-2x, entao junto de x=0 a situacao correta e",
+      "o": [
+        "crescente em ]-inf,0[ e decrescente em ]0,+inf[",
+        "maximo em x=0",
+        "nao se pode concluir nada",
+        "crescente em ]-inf,0[ e decrescente em ]0,+inf[; maximo em x=0."
+      ],
+      "a": 3,
+      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-013",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x-3, entao junto de x=3 a situacao correta e",
+      "o": [
+        "decrescente para x<3 e crescente para x>3; minimo em x=3.",
+        "decrescente para x<3 e crescente para x>3",
+        "minimo em x=3",
+        "nao se pode concluir nada"
+      ],
+      "a": 0,
+      "sol": "Analisa-se o sinal de f' antes e depois de 3.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-014",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=3-x, entao junto de x=3 a situacao correta e",
+      "o": [
+        "crescente para x<3 e decrescente para x>3",
+        "crescente para x<3 e decrescente para x>3; maximo em x=3.",
+        "maximo em x=3",
+        "nao se pode concluir nada"
+      ],
+      "a": 1,
+      "sol": "Analisa-se o sinal de f' antes e depois de 3.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-015",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=(x-1)(x+2), entao junto de x=1 a situacao correta e",
+      "o": [
+        "crescente para x<-2 e x>1; decrescente para -2<x<1",
+        "minimo em x=1",
+        "crescente para x<-2 e x>1; decrescente para -2<x<1; minimo em x=1.",
+        "nao se pode concluir nada"
+      ],
+      "a": 2,
+      "sol": "Analisa-se o sinal de f' antes e depois de 1.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-016",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=(x-1)(x+2), entao junto de x=-2 a situacao correta e",
+      "o": [
+        "crescente antes de -2 e decrescente depois de -2",
+        "maximo em x=-2",
+        "nao se pode concluir nada",
+        "crescente antes de -2 e decrescente depois de -2; maximo em x=-2."
+      ],
+      "a": 3,
+      "sol": "Analisa-se o sinal de f' antes e depois de -2.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-017",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x^2, entao junto de x=0 a situacao correta e",
+      "o": [
+        "crescente dos dois lados de 0; sem extremo garantido em x=0.",
+        "crescente dos dois lados de 0",
+        "sem extremo garantido em x=0",
+        "nao se pode concluir nada"
+      ],
+      "a": 0,
+      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-018",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=-x^2, entao junto de x=0 a situacao correta e",
+      "o": [
+        "decrescente dos dois lados de 0",
+        "decrescente dos dois lados de 0; sem extremo garantido em x=0.",
+        "sem extremo garantido em x=0",
+        "nao se pode concluir nada"
+      ],
+      "a": 1,
+      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-019",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x(x-2), entao junto de x=0 a situacao correta e",
+      "o": [
+        "positivo para x<0, negativo para 0<x<2",
+        "maximo em x=0",
+        "positivo para x<0, negativo para 0<x<2; maximo em x=0.",
+        "nao se pode concluir nada"
+      ],
+      "a": 2,
+      "sol": "Analisa-se o sinal de f' antes e depois de 0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-020",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretacao",
+      "q": "Se f'(x)=x(x-2), entao junto de x=2 a situacao correta e",
+      "o": [
+        "negativo para 0<x<2, positivo para x>2",
+        "minimo em x=2",
+        "nao se pode concluir nada",
+        "negativo para 0<x<2, positivo para x>2; minimo em x=2."
+      ],
+      "a": 3,
+      "sol": "Analisa-se o sinal de f' antes e depois de 2.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:sinal:20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-021",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
+      "o": [
+        "x=2, sendo minimo e f(2)=1.",
+        "x=2, sendo minimo mas com outro valor",
+        "x=0",
+        "nao existe extremo"
+      ],
+      "a": 0,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-022",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-x^2+6x-5, o extremo relevante ocorre em",
+      "o": [
+        "x=3, sendo maximo mas com outro valor",
+        "x=3, sendo maximo e f(3)=4.",
+        "x=0",
+        "nao existe extremo"
+      ],
+      "a": 1,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-023",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2+2x+3, o extremo relevante ocorre em",
+      "o": [
+        "x=-1, sendo minimo mas com outro valor",
+        "x=0",
+        "x=-1, sendo minimo e f(-1)=2.",
+        "nao existe extremo"
+      ],
+      "a": 2,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-024",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-2x^2+8x+1, o extremo relevante ocorre em",
+      "o": [
+        "x=2, sendo maximo mas com outro valor",
+        "x=0",
+        "nao existe extremo",
+        "x=2, sendo maximo e f(2)=9."
+      ],
+      "a": 3,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-025",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=3x^2-12x+7, o extremo relevante ocorre em",
+      "o": [
+        "x=2, sendo minimo e f(2)=-5.",
+        "x=2, sendo minimo mas com outro valor",
+        "x=0",
+        "nao existe extremo"
+      ],
+      "a": 0,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-026",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-x^2-4x, o extremo relevante ocorre em",
+      "o": [
+        "x=-2, sendo maximo mas com outro valor",
+        "x=-2, sendo maximo e f(-2)=4.",
+        "x=0",
+        "nao existe extremo"
+      ],
+      "a": 1,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-027",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=x^2-10x+30, o extremo relevante ocorre em",
+      "o": [
+        "x=5, sendo minimo mas com outro valor",
+        "x=0",
+        "x=5, sendo minimo e f(5)=5.",
+        "nao existe extremo"
+      ],
+      "a": 2,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-028",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-3x^2+12x, o extremo relevante ocorre em",
+      "o": [
+        "x=2, sendo maximo mas com outro valor",
+        "x=0",
+        "nao existe extremo",
+        "x=2, sendo maximo e f(2)=12."
+      ],
+      "a": 3,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-029",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=2x^2+4x-1, o extremo relevante ocorre em",
+      "o": [
+        "x=-1, sendo minimo e f(-1)=-3.",
+        "x=-1, sendo minimo mas com outro valor",
+        "x=0",
+        "nao existe extremo"
+      ],
+      "a": 0,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-030",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicacao",
+      "q": "Para f(x)=-x^2+2x+8, o extremo relevante ocorre em",
+      "o": [
+        "x=1, sendo maximo mas com outro valor",
+        "x=1, sendo maximo e f(1)=9.",
+        "x=0",
+        "nao existe extremo"
+      ],
+      "a": 1,
+      "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:quadratica:30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-031",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
+      "o": [
+        "maximo 9 em x=3",
+        "minimo 0 em x=0",
+        "maximo 9 em x=3; minimo 0 em x=0.",
+        "apenas o ponto onde f'=0"
+      ],
+      "a": 2,
+      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:extremos-absolutos:31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-032",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "No intervalo [0,5], para f(x)=x^2-4x, os extremos absolutos sao",
+      "o": [
+        "maximo 5 em x=5",
+        "minimo -4 em x=2",
+        "apenas o ponto onde f'=0",
+        "maximo 5 em x=5; minimo -4 em x=2."
+      ],
+      "a": 3,
+      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:extremos-absolutos:32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-033",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "No intervalo [0,5], para f(x)=-x^2+4x, os extremos absolutos sao",
+      "o": [
+        "maximo 4 em x=2; minimo -5 em x=5.",
+        "maximo 4 em x=2",
+        "minimo -5 em x=5",
+        "apenas o ponto onde f'=0"
+      ],
+      "a": 0,
+      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:extremos-absolutos:33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-034",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "No intervalo [-3,1], para f(x)=x^2+2x, os extremos absolutos sao",
+      "o": [
+        "maximo 3 em x=1",
+        "maximo 3 em x=1; minimo -1 em x=-1.",
+        "minimo -1 em x=-1",
+        "apenas o ponto onde f'=0"
+      ],
+      "a": 1,
+      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:extremos-absolutos:34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-035",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocinio",
+      "q": "No intervalo [-2,1], para f(x)=-x^2, os extremos absolutos sao",
+      "o": [
+        "maximo 0 em x=0",
+        "minimo -4 em x=-2",
+        "maximo 0 em x=0; minimo -4 em x=-2.",
+        "apenas o ponto onde f'=0"
+      ],
+      "a": 2,
+      "sol": "Comparam-se valores nos pontos criticos e nas extremidades do intervalo.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:extremos-absolutos:35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-036",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Um retangulo tem perimetro 20. Se um lado mede x, a area e A(x)=x(10-x). A area maxima ocorre para",
+      "o": [
+        "x=10",
+        "x=2",
+        "x=0",
+        "x=5"
+      ],
+      "a": 3,
+      "sol": "A'(x)=10-2x=0 => x=5.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-037",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Um retangulo tem lados x e 12-x. A area maxima ocorre para",
+      "o": [
+        "x=6",
+        "x=12",
+        "x=3",
+        "x=4"
+      ],
+      "a": 0,
+      "sol": "A=x(12-x); A'=12-2x=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-038",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Um lucro e modelado por L(x)=-x^2+20x-60. O lucro maximo ocorre em",
+      "o": [
+        "x=20",
+        "x=10",
+        "x=5",
+        "x=0"
+      ],
+      "a": 1,
+      "sol": "L'(x)=-2x+20=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-039",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Um custo e C(x)=x^2-8x+30. O custo minimo ocorre em",
+      "o": [
+        "x=8",
+        "x=2",
+        "x=4",
+        "x=0"
+      ],
+      "a": 2,
+      "sol": "C'(x)=2x-8=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-040",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "A altura de um projetil e h(t)=-5t^2+20t+2. A altura maxima ocorre em",
+      "o": [
+        "t=4",
+        "t=1",
+        "t=0",
+        "t=2"
+      ],
+      "a": 3,
+      "sol": "h'(t)=-10t+20=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-041",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma receita e R(x)=-2x^2+40x. O maximo ocorre para",
+      "o": [
+        "x=10",
+        "x=20",
+        "x=5",
+        "x=40"
+      ],
+      "a": 0,
+      "sol": "R'(x)=-4x+40=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-042",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma area e A(x)=24x-2x^2. O maximo ocorre em",
+      "o": [
+        "x=12",
+        "x=6",
+        "x=4",
+        "x=8"
+      ],
+      "a": 1,
+      "sol": "A'(x)=24-4x=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-043",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma distancia quadratica e D(x)=x^2-6x+13. O minimo ocorre em",
+      "o": [
+        "x=6",
+        "x=1",
+        "x=3",
+        "x=13"
+      ],
+      "a": 2,
+      "sol": "D'(x)=2x-6=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-044",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Uma funcao de erro e E(x)=4x^2-16x+25. O minimo ocorre em",
+      "o": [
+        "x=4",
+        "x=1",
+        "x=0",
+        "x=2"
+      ],
+      "a": 3,
+      "sol": "E'(x)=8x-16=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-045",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Modelacao",
+      "q": "Um rendimento e P(x)=-3x^2+18x+1. O maximo ocorre em",
+      "o": [
+        "x=3",
+        "x=6",
+        "x=9",
+        "x=1"
+      ],
+      "a": 0,
+      "sol": "P'(x)=-6x+18=0.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:otimizacao:45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-046",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, entao",
+      "o": [
+        "f tem minimo local em x=1",
+        "f tem maximo local em x=1",
+        "f e crescente em todo o dominio",
+        "f(1)=0"
+      ],
+      "a": 1,
+      "sol": "O sinal muda de + para -.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:avancado:46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-047",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f'(x)<0 em ]-inf,4[, f'(4)=0 e f'(x)>0 em ]4,+inf[, entao",
+      "o": [
+        "f tem maximo local",
+        "f e decrescente em todo o dominio",
+        "f tem minimo local em x=4",
+        "f(4)=0"
+      ],
+      "a": 2,
+      "sol": "O sinal muda de - para +.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:avancado:47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-048",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Se f'(x)=0 em x=2 mas e positiva de ambos os lados, entao",
+      "o": [
+        "x=2 e maximo",
+        "x=2 e minimo",
+        "f(2)=0",
+        "x=2 nao e extremo por mudanca de monotonia"
+      ],
+      "a": 3,
+      "sol": "A funcao continua crescente.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:avancado:48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-049",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Num intervalo fechado, para localizar maximo absoluto devemos",
+      "o": [
+        "comparar pontos criticos interiores e extremidades",
+        "usar apenas f'=0",
+        "usar apenas as extremidades",
+        "escolher o maior x"
+      ],
+      "a": 0,
+      "sol": "Extremos absolutos podem ocorrer em qualquer desses candidatos.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:avancado:49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CD-MO-050",
+      "themeId": "11-cd",
+      "subtopicId": "11-cd-monotonia-otimizacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocinio",
+      "q": "Uma solucao de f'(x)=0 fora do dominio fisico de um problema",
+      "o": [
+        "deve ser sempre aceite",
+        "deve ser rejeitada como candidata nesse contexto",
+        "e automaticamente maximo",
+        "e automaticamente minimo"
+      ],
+      "a": 1,
+      "sol": "O dominio do modelo faz parte do problema.",
+      "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cd-monotonia-otimizacao:avancado:50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ga",
+  "subtopicId": "10-ga-lugares-geometricos",
+  "subtopic": "Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha lugares geométricos no plano e espaço, equações de circunferências/superfícies esféricas, círculos/esferas, mediatrizes, planos mediadores e posições relativas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GA-LG-001",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O lugar geométrico dos pontos do plano à mesma distância de A e B é...",
+      "o": [
+        "a mediatriz de AB.",
+        "a reta AB.",
+        "uma circunferência de centro A.",
+        "o eixo Ox."
+      ],
+      "a": 0,
+      "sol": "A mediatriz reúne os pontos equidistantes dos extremos do segmento.",
+      "hyp": "Pode confundir distância a dois pontos com pertença à reta que os une.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:mediatriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-002",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O lugar geométrico dos pontos do plano a distância r de um ponto C é...",
+      "o": [
+        "um círculo completo.",
+        "uma circunferência de centro C e raio r.",
+        "uma reta.",
+        "uma parábola."
+      ],
+      "a": 1,
+      "sol": "A circunferência contém os pontos cuja distância ao centro é exatamente r.",
+      "hyp": "Pode confundir circunferência com círculo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circunferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-003",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O círculo de centro C e raio r contém os pontos cuja distância a C é...",
+      "o": [
+        "exatamente r.",
+        "maior que r.",
+        "menor ou igual a r.",
+        "sempre zero."
+      ],
+      "a": 2,
+      "sol": "O círculo inclui interior e fronteira.",
+      "hyp": "Pode confundir círculo com circunferência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-004",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma esfera de centro C e raio r, no espaço, é o conjunto dos pontos cuja distância a C é...",
+      "o": [
+        "exatamente r.",
+        "maior que r.",
+        "igual a 2r.",
+        "menor ou igual a r."
+      ],
+      "a": 3,
+      "sol": "Na terminologia usada aqui, esfera inclui o sólido; a superfície esférica corresponde à igualdade.",
+      "hyp": "Pode confundir esfera com superfície esférica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:esfera",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-005",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A superfície esférica de centro C e raio r contém os pontos cuja distância a C é...",
+      "o": [
+        "exatamente r.",
+        "menor que r.",
+        "menor ou igual a r.",
+        "maior ou igual a r."
+      ],
+      "a": 0,
+      "sol": "A superfície esférica é a fronteira da esfera.",
+      "hyp": "Pode confundir sólido e superfície.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:superficie-esferica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-006",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A equação de uma circunferência de centro (a,b) e raio r é...",
+      "o": [
+        "x+y=r.",
+        "(x−a)²+(y−b)²=r².",
+        "(x+a)²+(y+b)²=r.",
+        "x²+y²=r."
+      ],
+      "a": 1,
+      "sol": "A distância de (x,y) ao centro deve ser r.",
+      "hyp": "Pode errar sinais ou esquecer o quadrado do raio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:equacao-circunferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-007",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a equação da circunferência de centro (0,0) e raio 5?",
+      "o": [
+        "x²+y²=5.",
+        "x+y=5.",
+        "x²+y²=25.",
+        "(x−5)²+y²=25."
+      ],
+      "a": 2,
+      "sol": "r²=25.",
+      "hyp": "Pode usar r em vez de r².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circunferencia-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-008",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a equação da circunferência de centro (2,−1) e raio 3?",
+      "o": [
+        "(x+2)²+(y−1)²=9.",
+        "(x−2)²+(y−1)²=3.",
+        "x²+y²=9.",
+        "(x−2)²+(y+1)²=9."
+      ],
+      "a": 3,
+      "sol": "Substituindo a=2,b=−1,r=3 obtém-se a expressão indicada.",
+      "hyp": "Pode trocar sinais dentro dos quadrados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:equacao-circunferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-009",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Na equação (x+4)²+(y−3)²=16, o centro é...",
+      "o": [
+        "(−4,3).",
+        "(4,−3).",
+        "(4,3).",
+        "(−4,−3)."
+      ],
+      "a": 0,
+      "sol": "x+4=x−(−4) e y−3 mantém 3.",
+      "hyp": "Pode ler diretamente os sinais sem inversão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:ler-centro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-010",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Na equação (x−1)²+(y+2)²=49, o raio é...",
+      "o": [
+        "49.",
+        "7.",
+        "14.",
+        "√7."
+      ],
+      "a": 1,
+      "sol": "r²=49, logo r=7.",
+      "hyp": "Pode usar 49 como raio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:ler-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-011",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O ponto (3,4) pertence à circunferência x²+y²=25?",
+      "o": [
+        "Não.",
+        "Só se x=y.",
+        "Sim.",
+        "Não é possível saber."
+      ],
+      "a": 2,
+      "sol": "3²+4²=25.",
+      "hyp": "Pode não substituir corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:testar-pertença",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-012",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O ponto (1,1) pertence à circunferência x²+y²=4?",
+      "o": [
+        "Sim.",
+        "Só se o raio for 1.",
+        "Só se a circunferência for um círculo.",
+        "Não."
+      ],
+      "a": 3,
+      "sol": "1²+1²=2≠4.",
+      "hyp": "Pode confundir estar dentro com estar na circunferência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:testar-pertença",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-013",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para o círculo x²+y²≤25, o ponto (1,1) está...",
+      "o": [
+        "no interior.",
+        "na fronteira.",
+        "no exterior.",
+        "não definido."
+      ],
+      "a": 0,
+      "sol": "1²+1²=2<25.",
+      "hyp": "Pode confundir desigualdade com igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circulo-interior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-014",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para o círculo x²+y²≤25, o ponto (5,0) está...",
+      "o": [
+        "no interior estrito.",
+        "na fronteira.",
+        "no exterior.",
+        "no centro."
+      ],
+      "a": 1,
+      "sol": "25=25, logo pertence à circunferência fronteira.",
+      "hyp": "Pode interpretar ≤ como interior apenas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circulo-fronteira",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-015",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para o círculo x²+y²≤25, o ponto (6,0) está...",
+      "o": [
+        "na fronteira.",
+        "no interior.",
+        "no exterior.",
+        "no centro."
+      ],
+      "a": 2,
+      "sol": "36>25.",
+      "hyp": "Pode olhar apenas para o sinal das coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circulo-exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-016",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O plano mediador de um segmento AB no espaço é o conjunto dos pontos...",
+      "o": [
+        "a distância fixa da origem.",
+        "que pertencem à reta AB.",
+        "com a mesma cota.",
+        "equidistantes de A e B."
+      ],
+      "a": 3,
+      "sol": "É o análogo espacial da mediatriz: plano perpendicular a AB no ponto médio.",
+      "hyp": "Pode confundir com plano contendo AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:plano-mediador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-017",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O plano mediador de AB é perpendicular...",
+      "o": [
+        "à reta AB.",
+        "a qualquer plano horizontal.",
+        "ao eixo Ox.",
+        "a todas as retas do espaço."
+      ],
+      "a": 0,
+      "sol": "Por definição, passa pelo ponto médio e é perpendicular à reta AB.",
+      "hyp": "Pode confundir pertença com perpendicularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:plano-mediador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-018",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para A=(−2,0) e B=(2,0), a mediatriz de AB é...",
+      "o": [
+        "y=0.",
+        "x=0.",
+        "x=2.",
+        "y=2."
+      ],
+      "a": 1,
+      "sol": "AB é horizontal e o ponto médio é a origem; a mediatriz é vertical.",
+      "hyp": "Pode escolher a reta AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:mediatriz-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-019",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para A=(0,−3) e B=(0,3), a mediatriz é...",
+      "o": [
+        "x=0.",
+        "y=3.",
+        "y=0.",
+        "x=3."
+      ],
+      "a": 2,
+      "sol": "AB é vertical e o ponto médio é a origem; a mediatriz é horizontal.",
+      "hyp": "Pode confundir orientação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:mediatriz-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-020",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A equação x²+y²<9 descreve...",
+      "o": [
+        "a circunferência de raio 3.",
+        "o exterior do círculo.",
+        "uma reta.",
+        "o interior do círculo de raio 3, sem a fronteira."
+      ],
+      "a": 3,
+      "sol": "A desigualdade estrita seleciona pontos a distância inferior a 3 da origem.",
+      "hyp": "Pode confundir < com =.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:inequacao-circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-021",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A mediatriz de A=(1,1) e B=(5,1) tem equação...",
+      "o": [
+        "x=3.",
+        "y=1.",
+        "x=1.",
+        "y=3."
+      ],
+      "a": 0,
+      "sol": "Ponto médio (3,1), AB horizontal; mediatriz vertical x=3.",
+      "hyp": "Pode usar a ordenada do segmento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:mediatriz-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-022",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A mediatriz de A=(2,−1) e B=(2,5) tem equação...",
+      "o": [
+        "x=2.",
+        "y=2.",
+        "y=3.",
+        "x=3."
+      ],
+      "a": 1,
+      "sol": "Ponto médio (2,2), AB vertical; mediatriz horizontal y=2.",
+      "hyp": "Pode confundir ponto médio com equação x=2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:mediatriz-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-023",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o centro e raio de x²−6x+y²+4y−12=0?",
+      "o": [
+        "Centro (−3,2), raio 5.",
+        "Centro (3,−2), raio 12.",
+        "Centro (3,−2), raio 5.",
+        "Centro (6,−4), raio 5."
+      ],
+      "a": 2,
+      "sol": "Completando quadrados: (x−3)²+(y+2)²=25.",
+      "hyp": "Pode completar quadrados incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:completar-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-024",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o centro e raio de x²+y²+2x−8y+1=0?",
+      "o": [
+        "Centro (1,−4), raio 4.",
+        "Centro (−1,4), raio 16.",
+        "Centro (−2,8), raio 4.",
+        "Centro (−1,4), raio 4."
+      ],
+      "a": 3,
+      "sol": "(x+1)²+(y−4)²=16.",
+      "hyp": "Pode errar constantes ao completar quadrados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:completar-quadrados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-025",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas circunferências de centros C1,C2 e raios r1,r2 são exteriores sem interseção quando...",
+      "o": [
+        "d(C1,C2)>r1+r2.",
+        "d=r1+r2.",
+        "d<|r1−r2| sempre.",
+        "d=0."
+      ],
+      "a": 0,
+      "sol": "Se a distância entre centros excede a soma dos raios, há separação.",
+      "hyp": "Pode confundir tangência exterior com ausência de interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:posicao-circunferencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-026",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas circunferências são tangentes exteriormente quando...",
+      "o": [
+        "d(C1,C2)=|r1−r2|.",
+        "d(C1,C2)=r1+r2.",
+        "d=0.",
+        "d>r1+r2."
+      ],
+      "a": 1,
+      "sol": "Na tangência exterior a distância entre centros é a soma dos raios.",
+      "hyp": "Pode confundir tangência exterior e interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:tangencia-exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-027",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas circunferências são tangentes interiormente quando...",
+      "o": [
+        "d=r1+r2.",
+        "d=0 sempre.",
+        "d(C1,C2)=|r1−r2|.",
+        "d>r1+r2."
+      ],
+      "a": 2,
+      "sol": "Na tangência interior a distância é a diferença dos raios em módulo.",
+      "hyp": "Pode usar a soma dos raios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:tangencia-interior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-028",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Circunferências de raios 3 e 5 têm centros a distância 8. A posição relativa é...",
+      "o": [
+        "secantes em dois pontos.",
+        "disjuntas exteriores.",
+        "tangentes interiormente.",
+        "tangentes exteriormente."
+      ],
+      "a": 3,
+      "sol": "3+5=8.",
+      "hyp": "Pode não comparar d com soma dos raios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:posicao-circunferencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-029",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Circunferências de raios 2 e 7 têm centros a distância 5. São...",
+      "o": [
+        "tangentes interiormente.",
+        "tangentes exteriormente.",
+        "secantes em dois pontos.",
+        "concêntricas."
+      ],
+      "a": 0,
+      "sol": "|7−2|=5.",
+      "hyp": "Pode usar soma 9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:posicao-circunferencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-030",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Circunferências de raios 4 e 6 têm centros a distância 7. São...",
+      "o": [
+        "tangentes exteriormente.",
+        "secantes em dois pontos.",
+        "tangentes interiormente.",
+        "disjuntas."
+      ],
+      "a": 1,
+      "sol": "|6−4|=2<7<10=4+6, logo intersectam-se em dois pontos.",
+      "hyp": "Pode verificar apenas a soma dos raios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:secantes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-031",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A equação de uma superfície esférica de centro (a,b,c) e raio r é...",
+      "o": [
+        "x+y+z=r.",
+        "(x−a)+(y−b)+(z−c)=r.",
+        "(x−a)²+(y−b)²+(z−c)²=r².",
+        "x²+y²+z²=r."
+      ],
+      "a": 2,
+      "sol": "A distância espacial ao centro é r.",
+      "hyp": "Pode esquecer a terceira coordenada ou o quadrado do raio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:superficie-esferica-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-032",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual é a superfície esférica de centro O=(0,0,0) e raio 4?",
+      "o": [
+        "x²+y²+z²=4.",
+        "x+y+z=4.",
+        "x²+y²=16.",
+        "x²+y²+z²=16."
+      ],
+      "a": 3,
+      "sol": "r²=16.",
+      "hyp": "Pode esquecer z ou usar r em vez de r².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:superficie-esferica-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-033",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A inequação x²+y²+z²≤16 descreve...",
+      "o": [
+        "a esfera sólida de raio 4 centrada na origem.",
+        "apenas a superfície esférica.",
+        "o exterior da esfera.",
+        "um círculo no plano."
+      ],
+      "a": 0,
+      "sol": "≤ inclui interior e superfície.",
+      "hyp": "Pode confundir sólido e fronteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:esfera-inequacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-034",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A inequação x²+y²+z²>9 descreve...",
+      "o": [
+        "o interior da esfera.",
+        "os pontos exteriores à esfera fechada de raio 3.",
+        "a superfície apenas.",
+        "um plano."
+      ],
+      "a": 1,
+      "sol": "A distância à origem é maior que 3.",
+      "hyp": "Pode interpretar > como interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:exterior-esfera",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-035",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O ponto P=(1,2,2) pertence à superfície x²+y²+z²=9?",
+      "o": [
+        "Não.",
+        "Só se z=0.",
+        "Sim.",
+        "Só se x=y."
+      ],
+      "a": 2,
+      "sol": "1+4+4=9.",
+      "hyp": "Pode somar coordenadas sem quadrar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:pertença-superficie",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-036",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O ponto P=(1,1,1) está onde relativamente à esfera x²+y²+z²≤9?",
+      "o": [
+        "Na superfície.",
+        "No exterior.",
+        "No centro.",
+        "No interior."
+      ],
+      "a": 3,
+      "sol": "1+1+1=3<9.",
+      "hyp": "Pode confundir esfera com superfície.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:pertença-esfera",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-037",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que condição caracteriza os pontos P=(x,y) equidistantes de A=(−1,0) e B=(3,0)?",
+      "o": [
+        "x=1.",
+        "y=1.",
+        "x=0.",
+        "y=0."
+      ],
+      "a": 0,
+      "sol": "O ponto médio tem x=1 e a mediatriz é vertical x=1.",
+      "hyp": "Pode usar a reta AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:equidistancia-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-038",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Que equação resulta de d(P,A)=d(P,B), com A=(0,0), B=(4,2)?",
+      "o": [
+        "x+2y=5.",
+        "2x+y=5.",
+        "4x+2y=20.",
+        "2x−y=5."
+      ],
+      "a": 1,
+      "sol": "x²+y²=(x−4)²+(y−2)² => 8x+4y=20 => 2x+y=5.",
+      "hyp": "Pode não cancelar os termos quadráticos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:mediatriz-equacao-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-039",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o círculo de centro (2,3) e raio 4?",
+      "o": [
+        "(x−2)²+(y−3)²=16.",
+        "(x+2)²+(y+3)²≤4.",
+        "(x−2)²+(y−3)²≤16.",
+        "(x−2)²+(y−3)²≥16."
+      ],
+      "a": 2,
+      "sol": "Círculo inclui os pontos a distância menor ou igual a 4.",
+      "hyp": "Pode usar igualdade, que descreve apenas a circunferência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:circulo-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-040",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual conjunto descreve os pontos exteriores ao círculo fechado de centro (−1,2) e raio 3?",
+      "o": [
+        "(x+1)²+(y−2)²<9.",
+        "(x−1)²+(y+2)²>3.",
+        "(x+1)²+(y−2)²=9.",
+        "(x+1)²+(y−2)²>9."
+      ],
+      "a": 3,
+      "sol": "Exterior estrito corresponde a distância maior que o raio.",
+      "hyp": "Pode errar sinais do centro ou usar igualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:exterior-circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-041",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas circunferências são concêntricas e têm raios diferentes, então...",
+      "o": [
+        "não se intersectam.",
+        "são tangentes.",
+        "intersectam-se em dois pontos.",
+        "coincidem."
+      ],
+      "a": 0,
+      "sol": "Com o mesmo centro e raios distintos, uma fica dentro da outra sem contacto.",
+      "hyp": "Pode achar que mesmo centro implica coincidência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:concentricas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-042",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas circunferências têm o mesmo centro e o mesmo raio, então...",
+      "o": [
+        "são tangentes.",
+        "coincidem.",
+        "são secantes em dois pontos apenas.",
+        "são exteriores."
+      ],
+      "a": 1,
+      "sol": "A equação geométrica é a mesma.",
+      "hyp": "Pode limitar a interseção a pontos finitos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:coincidentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-043",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma superfície esférica tem centro C=(1,−2,3) e passa por P=(4,2,3). Qual é o raio?",
+      "o": [
+        "4.",
+        "3.",
+        "5.",
+        "√7."
+      ],
+      "a": 2,
+      "sol": "CP=√(3²+4²+0²)=5.",
+      "hyp": "Pode somar diferenças sem Pitágoras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:raio-superficie",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-044",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma superfície esférica tem centro C=(1,−2,3) e raio 5. Qual é a sua equação?",
+      "o": [
+        "(x+1)²+(y−2)²+(z+3)²=25.",
+        "(x−1)²+(y+2)²+(z−3)²=5.",
+        "x²+y²+z²=25.",
+        "(x−1)²+(y+2)²+(z−3)²=25."
+      ],
+      "a": 3,
+      "sol": "Centro e raio entram diretamente na fórmula.",
+      "hyp": "Pode errar sinais ou usar raio não quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:equacao-superficie",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-045",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O plano mediador de A=(−2,0,0) e B=(2,0,0) é...",
+      "o": [
+        "x=0.",
+        "y=0.",
+        "z=0.",
+        "x=2."
+      ],
+      "a": 0,
+      "sol": "O segmento está no eixo Ox e o ponto médio é a origem; o plano perpendicular é x=0.",
+      "hyp": "Pode escolher um plano que contém AB.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:plano-mediador-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-046",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O plano mediador de A=(0,0,−3) e B=(0,0,5) é...",
+      "o": [
+        "z=0.",
+        "z=1.",
+        "x=1.",
+        "y=1."
+      ],
+      "a": 1,
+      "sol": "Ponto médio tem z=(−3+5)/2=1; segmento paralelo a Oz, plano mediador z=1.",
+      "hyp": "Pode usar um dos extremos em vez do ponto médio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:plano-mediador-coordenadas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-047",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma antena deve ser colocada a igual distância de duas cidades A e B. Sem outras restrições, o conjunto de posições possíveis no plano é...",
+      "o": [
+        "o segmento AB.",
+        "uma circunferência de centro A.",
+        "a mediatriz de AB.",
+        "o ponto médio apenas."
+      ],
+      "a": 2,
+      "sol": "Todos os pontos da mediatriz satisfazem a condição de equidistância.",
+      "hyp": "Pode reduzir um lugar geométrico inteiro a um único ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:modelacao-mediatriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-048",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma zona de cobertura alcança todos os pontos até 10 km de uma estação C. No plano, a região é modelada por...",
+      "o": [
+        "uma circunferência apenas.",
+        "uma reta de comprimento 20.",
+        "o exterior de um círculo.",
+        "um círculo de centro C e raio 10."
+      ],
+      "a": 3,
+      "sol": "'Até 10 km' significa distância ≤10.",
+      "hyp": "Pode interpretar cobertura como apenas a fronteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:modelacao-circulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-049",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma zona de exclusão exige distância superior a 5 unidades do ponto O=(0,0). Qual condição representa a região?",
+      "o": [
+        "x²+y²>25.",
+        "x²+y²<25.",
+        "x²+y²=25.",
+        "x+y>5."
+      ],
+      "a": 0,
+      "sol": "Distância >5 equivale a x²+y²>25.",
+      "hyp": "Pode esquecer o quadrado ou escolher a região interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:modelacao-exterior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-LG-050",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-lugares-geometricos",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No espaço, um sensor deteta todos os pontos a no máximo 6 m de C=(1,2,3). Qual inequação descreve a zona?",
+      "o": [
+        "(x−1)²+(y−2)²+(z−3)²=36.",
+        "(x−1)²+(y−2)²+(z−3)²≤36.",
+        "x²+y²+z²≤6.",
+        "(x+1)²+(y+2)²+(z+3)²≤36."
+      ],
+      "a": 1,
+      "sol": "Distância a C menor ou igual a 6 corresponde à esfera sólida indicada.",
+      "hyp": "Pode descrever apenas a superfície ou errar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-lugares-geometricos:modelacao-esfera",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

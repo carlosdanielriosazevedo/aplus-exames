@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-fun",
+  "subtopicId": "11-fun-racionais",
+  "subtopic": "Funções racionais",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha domínio, zeros, simplificação, sinal, transformações de 1/x, buracos removíveis, equações e modelação racional. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11FUN-RAT-001",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função racional é, em geral, um quociente...",
+      "o": [
+        "de dois polinómios, com denominador não identicamente nulo.",
+        "de duas funções trigonométricas.",
+        "de dois números naturais.",
+        "de duas sucessões."
+      ],
+      "a": 0,
+      "sol": "Funções racionais têm a forma P(x)/Q(x), com Q não nulo.",
+      "hyp": "Pode confundir racional com qualquer fração numérica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-002",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O domínio de f(x)=1/(x−2) é...",
+      "o": [
+        "R.",
+        "R\\{2}.",
+        "R\\{−2}.",
+        "]2,+∞[."
+      ],
+      "a": 1,
+      "sol": "O denominador não pode ser zero.",
+      "hyp": "Pode trocar o sinal da exclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:dominio-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-003",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O domínio de f(x)=1/(x²−4) exclui...",
+      "o": [
+        "apenas 2.",
+        "apenas −2.",
+        "−2 e 2.",
+        "0."
+      ],
+      "a": 2,
+      "sol": "x²−4=(x−2)(x+2).",
+      "hyp": "Pode esquecer uma das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:dominio-quadratico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-004",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "f(x)=(x+1)/(x−3). Quanto vale f(0)?",
+      "o": [
+        "1/3.",
+        "−1.",
+        "1.",
+        "−1/3."
+      ],
+      "a": 3,
+      "sol": "f(0)=1/(−3)=−1/3.",
+      "hyp": "Pode ignorar o sinal do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:avaliar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-005",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=2/x, f(4)=",
+      "o": [
+        "1/2.",
+        "2.",
+        "8.",
+        "1/4."
+      ],
+      "a": 0,
+      "sol": "2/4=1/2.",
+      "hyp": "Pode multiplicar em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:avaliar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-006",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=1/x é...",
+      "o": [
+        "par.",
+        "ímpar.",
+        "constante.",
+        "polinomial."
+      ],
+      "a": 1,
+      "sol": "f(−x)=−1/x=−f(x).",
+      "hyp": "Pode confundir simetria de 1/x com 1/x².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-007",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=1/x² é...",
+      "o": [
+        "ímpar.",
+        "linear.",
+        "par.",
+        "sem domínio."
+      ],
+      "a": 2,
+      "sol": "f(−x)=1/x²=f(x).",
+      "hyp": "Pode confundir expoente par do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:paridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-008",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o zero de f(x)=(x−5)/(x+1)?",
+      "o": [
+        "−1.",
+        "0.",
+        "não tem zeros.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "Um zero ocorre quando o numerador é zero e o denominador não é.",
+      "hyp": "Pode usar a raiz do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:zero-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-009",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Os zeros de uma função racional P/Q ocorrem, em geral, nos zeros de...",
+      "o": [
+        "P que não sejam também zeros proibidos do denominador.",
+        "Q.",
+        "P e Q simultaneamente sempre.",
+        "nenhum dos dois."
+      ],
+      "a": 0,
+      "sol": "É necessário numerador zero e denominador não zero.",
+      "hyp": "Pode usar os zeros do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:zero-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-010",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "f(x)=(x²−1)/(x−1) simplifica-se, para x≠1, para...",
+      "o": [
+        "x−1.",
+        "x+1.",
+        "x²+1.",
+        "1."
+      ],
+      "a": 1,
+      "sol": "x²−1=(x−1)(x+1).",
+      "hyp": "Pode recuperar indevidamente x=1 no domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:simplificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-011",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=(x²−1)/(x−1) coincide com y=x+1 exceto...",
+      "o": [
+        "em x=−1.",
+        "em x=0.",
+        "no ponto x=1, que está excluído.",
+        "em todo o domínio."
+      ],
+      "a": 2,
+      "sol": "A expressão original não está definida em x=1.",
+      "hyp": "Pode esquecer o buraco removível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:buraco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-012",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "O domínio de (x²−9)/(x−3) é...",
+      "o": [
+        "R.",
+        "R\\{−3,3}.",
+        "R\\{−3}.",
+        "R\\{3}."
+      ],
+      "a": 3,
+      "sol": "Só o denominador original x−3 restringe o domínio.",
+      "hyp": "Pode excluir também a raiz cancelada do numerador −3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:dominio-cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-013",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "(x²−9)/(x−3), para x≠3, é igual a...",
+      "o": [
+        "x+3.",
+        "x−3.",
+        "x²+3.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "Diferença de quadrados.",
+      "hyp": "Pode usar o fator errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:simplificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-014",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o sinal de 1/x para x>0?",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "indefinido."
+      ],
+      "a": 1,
+      "sol": "Numerador e denominador são positivos.",
+      "hyp": "Pode confundir proximidade de zero com valor zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-015",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o sinal de 1/x para x<0?",
+      "o": [
+        "positivo.",
+        "zero.",
+        "negativo.",
+        "indefinido."
+      ],
+      "a": 2,
+      "sol": "O denominador é negativo.",
+      "hyp": "Pode achar que 1/x é sempre positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-016",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x−1)/(x+2), em x>1 o sinal é...",
+      "o": [
+        "negativo.",
+        "zero.",
+        "indefinido.",
+        "positivo."
+      ],
+      "a": 3,
+      "sol": "Numerador e denominador são positivos.",
+      "hyp": "Pode olhar apenas para o numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:sinal-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-017",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x−1)/(x+2), em −2<x<1 o sinal é...",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "indefinido."
+      ],
+      "a": 0,
+      "sol": "Numerador negativo e denominador positivo.",
+      "hyp": "Pode errar a tabela de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:sinal-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-018",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x−1)/(x+2), em x<−2 o sinal é...",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "indefinido em todo o intervalo."
+      ],
+      "a": 1,
+      "sol": "Numerador e denominador são ambos negativos.",
+      "hyp": "Pode esquecer que quociente de dois negativos é positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:sinal-intervalo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-019",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma função racional pode ter pontos onde não está definida devido a...",
+      "o": [
+        "zeros do numerador apenas.",
+        "coeficientes negativos.",
+        "zeros do denominador.",
+        "grau par."
+      ],
+      "a": 2,
+      "sol": "Divisão por zero não é permitida.",
+      "hyp": "Pode confundir zero da função com exclusão do domínio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:restricoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-020",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se numerador e denominador têm um fator comum que se cancela, pode surgir...",
+      "o": [
+        "sempre uma assíntota vertical.",
+        "um máximo obrigatório.",
+        "uma função polinomial sem qualquer restrição.",
+        "uma descontinuidade removível/buraco."
+      ],
+      "a": 3,
+      "sol": "O ponto cancelado continua fora do domínio original.",
+      "hyp": "Pode concluir que o cancelamento elimina a restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:buraco-removivel",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-021",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "f(x)=(2x+3)/(x−1). Qual é f(2)?",
+      "o": [
+        "7.",
+        "5.",
+        "1.",
+        "−7."
+      ],
+      "a": 0,
+      "sol": "(4+3)/(1)=7.",
+      "hyp": "Pode esquecer o termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:avaliar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-022",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve (x−2)/(x+1)=0.",
+      "o": [
+        "x=−1.",
+        "x=2.",
+        "x=0.",
+        "x=1."
+      ],
+      "a": 1,
+      "sol": "O numerador deve ser zero e o denominador não zero.",
+      "hyp": "Pode usar a raiz do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-023",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve (x+3)/(x−4)=1.",
+      "o": [
+        "x=7.",
+        "x=1.",
+        "não tem solução.",
+        "x=4."
+      ],
+      "a": 2,
+      "sol": "x+3=x−4 levaria a 3=−4, impossível.",
+      "hyp": "Pode cancelar x sem verificar a contradição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-024",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve (2x)/(x−1)=4.",
+      "o": [
+        "x=1.",
+        "x=−2.",
+        "x=4.",
+        "x=2."
+      ],
+      "a": 3,
+      "sol": "2x=4x−4 => x=2.",
+      "hyp": "Pode multiplicar cruzado com erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-025",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 1/(x−2)=3.",
+      "o": [
+        "x=7/3.",
+        "x=3.",
+        "x=5.",
+        "x=1/3."
+      ],
+      "a": 0,
+      "sol": "1=3(x−2) => 3x=7.",
+      "hyp": "Pode inverter apenas um membro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-026",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Resolve 2/(x+1)=1.",
+      "o": [
+        "x=−1.",
+        "x=1.",
+        "x=2.",
+        "x=3."
+      ],
+      "a": 1,
+      "sol": "2=x+1 => x=1.",
+      "hyp": "Pode escolher o valor proibido x=−1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao-racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-027",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o domínio de f(x)=(x+2)/(x²−1)?",
+      "o": [
+        "R\\{1}.",
+        "R\\{−1}.",
+        "R\\{−1,1}.",
+        "R."
+      ],
+      "a": 2,
+      "sol": "x²−1=0 em ±1.",
+      "hyp": "Pode esquecer uma raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:dominio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-028",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o zero de f(x)=(x+2)/(x²−1)?",
+      "o": [
+        "2.",
+        "−1.",
+        "1.",
+        "−2."
+      ],
+      "a": 3,
+      "sol": "x+2=0 e −2 pertence ao domínio.",
+      "hyp": "Pode usar os zeros do denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-029",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "f(x)=(x²−4)/(x−2) tem zero em x=−2?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se x=2.",
+        "A função não tem zeros."
+      ],
+      "a": 0,
+      "sol": "Após simplificar para x+2 com x≠2, em x=−2 vale 0.",
+      "hyp": "Pode pensar que todo zero do numerador cancelado desaparece.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:zero-apos-cancelar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-030",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=(x²−4)/(x−2), x=2 é...",
+      "o": [
+        "um zero.",
+        "um ponto excluído do domínio, não um zero.",
+        "um máximo.",
+        "um ponto sempre pertencente ao gráfico."
+      ],
+      "a": 1,
+      "sol": "O denominador original anula-se em 2.",
+      "hyp": "Pode considerar 0/0 como zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:ponto-excluido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-031",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=1/(x−a), o gráfico de 1/x sofre uma translação...",
+      "o": [
+        "a unidades na vertical.",
+        "a vezes na escala vertical.",
+        "a unidades na horizontal.",
+        "nenhuma."
+      ],
+      "a": 2,
+      "sol": "Substituir x por x−a desloca para a direita se a>0.",
+      "hyp": "Pode confundir deslocamento horizontal e vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:transformacao-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-032",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=1/x+b, o gráfico de 1/x desloca-se...",
+      "o": [
+        "b unidades horizontalmente.",
+        "por fator b.",
+        "apenas se b<0.",
+        "b unidades verticalmente."
+      ],
+      "a": 3,
+      "sol": "Somar b à saída é uma translação vertical.",
+      "hyp": "Pode colocar b no argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:transformacao-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-033",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=1/(x−3)+2 tem centro de simetria...",
+      "o": [
+        "(3,2).",
+        "(−3,2).",
+        "(3,−2).",
+        "(0,0)."
+      ],
+      "a": 0,
+      "sol": "É a hipérbole 1/x transladada 3 à direita e 2 para cima.",
+      "hyp": "Pode inverter sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:centro-simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-034",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A função f(x)=−2/(x+1)−4 tem centro de simetria...",
+      "o": [
+        "(1,−4).",
+        "(−1,−4).",
+        "(−1,4).",
+        "(2,−4)."
+      ],
+      "a": 1,
+      "sol": "A forma a/(x−h)+k tem centro (h,k); aqui h=−1,k=−4.",
+      "hyp": "Pode ler x+1 como h=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:centro-simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-035",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Multiplicar 1/x por um número negativo...",
+      "o": [
+        "desloca-o horizontalmente.",
+        "elimina o domínio.",
+        "reflete o gráfico relativamente a Ox.",
+        "torna-o polinomial."
+      ],
+      "a": 2,
+      "sol": "Mudar o sinal da saída reflete verticalmente.",
+      "hyp": "Pode confundir reflexão com translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:reflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-036",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=a/(x−2)+3 e f(3)=5, então a=",
+      "o": [
+        "−2.",
+        "5.",
+        "3.",
+        "2."
+      ],
+      "a": 3,
+      "sol": "5=a/(1)+3 => a=2.",
+      "hyp": "Pode esquecer subtrair 3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-037",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=a/(x+1)−2 e f(1)=1, então a=",
+      "o": [
+        "6.",
+        "3.",
+        "−6.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "1=a/2−2 => a/2=3 => a=6.",
+      "hyp": "Pode usar x+1=1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:determinar-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-038",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A equação (x+1)/(x−2)=2 tem solução...",
+      "o": [
+        "x=3.",
+        "x=5.",
+        "x=2.",
+        "x=−5."
+      ],
+      "a": 1,
+      "sol": "x+1=2x−4 => x=5.",
+      "hyp": "Pode escolher o valor proibido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-039",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A equação (x−1)/(x+3)=−1 tem solução...",
+      "o": [
+        "x=1.",
+        "x=−3.",
+        "x=−1.",
+        "não tem solução."
+      ],
+      "a": 2,
+      "sol": "x−1=−x−3 => 2x=−2 => x=−1.",
+      "hyp": "Pode usar a exclusão x=−3 como solução.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-040",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Resolve (x²−1)/(x−1)=4, respeitando o domínio.",
+      "o": [
+        "x=1.",
+        "x=5.",
+        "não tem solução.",
+        "x=3."
+      ],
+      "a": 3,
+      "sol": "Para x≠1, a expressão é x+1; x+1=4 => x=3.",
+      "hyp": "Pode aceitar x=1 por cancelamento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:equacao-com-buraco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-041",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o sinal de (x−2)/(x+1) em ]−1,2[?",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "indefinido."
+      ],
+      "a": 0,
+      "sol": "Numerador negativo e denominador positivo.",
+      "hyp": "Pode ignorar o sinal do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:tabela-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-042",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o sinal de (x−2)/(x+1) em ]2,+∞[?",
+      "o": [
+        "negativo.",
+        "positivo.",
+        "zero.",
+        "indefinido."
+      ],
+      "a": 1,
+      "sol": "Ambos os fatores são positivos.",
+      "hyp": "Pode usar o comportamento do intervalo anterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:tabela-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-043",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o sinal de (x−2)/(x+1) em ]−∞,−1[?",
+      "o": [
+        "negativo.",
+        "zero.",
+        "positivo.",
+        "indefinido."
+      ],
+      "a": 2,
+      "sol": "Ambos numerador e denominador são negativos.",
+      "hyp": "Pode esquecer a regra de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:tabela-sinais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-044",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma função racional pode ter várias exclusões no domínio quando...",
+      "o": [
+        "o numerador tem vários termos.",
+        "o grau do numerador é alto.",
+        "o coeficiente líder é negativo.",
+        "o denominador tem vários zeros reais distintos."
+      ],
+      "a": 3,
+      "sol": "Cada zero real do denominador é um candidato a exclusão.",
+      "hyp": "Pode olhar para o numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:varias-exclusoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-045",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O domínio de (x+1)/[(x−2)(x+3)] é...",
+      "o": [
+        "R\\{−3,2}.",
+        "R\\{−1}.",
+        "R\\{−3,−1,2}.",
+        "R."
+      ],
+      "a": 0,
+      "sol": "O denominador anula-se em 2 e −3.",
+      "hyp": "Pode excluir também o zero do numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:dominio-fatorizado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-046",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se f(x)=(x−2)/[(x−2)(x+1)], o domínio exclui...",
+      "o": [
+        "apenas −1.",
+        "−1 e 2.",
+        "apenas 2.",
+        "nenhum valor."
+      ],
+      "a": 1,
+      "sol": "As exclusões vêm do denominador original antes do cancelamento.",
+      "hyp": "Pode recuperar x=2 após simplificar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:dominio-cancelamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-047",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=(x−2)/[(x−2)(x+1)] simplifica para 1/(x+1), mas em x=2 apresenta...",
+      "o": [
+        "uma assíntota vertical.",
+        "um zero.",
+        "um buraco removível.",
+        "um máximo."
+      ],
+      "a": 2,
+      "sol": "O fator x−2 foi cancelado, mas o ponto continua excluído.",
+      "hyp": "Pode classificar todo ponto excluído como assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:buraco-vs-assintota",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-048",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um custo médio C(x)=1000/x+5, com x>0, representa um termo 1000/x que...",
+      "o": [
+        "aumenta linearmente.",
+        "é constante.",
+        "fica negativo.",
+        "diminui à medida que x aumenta."
+      ],
+      "a": 3,
+      "sol": "Para x>0, 1000/x diminui com x.",
+      "hyp": "Pode tratar inversa como proporcionalidade direta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:modelacao-inversa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-049",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo C(x)=1000/x+5, quando x é muito grande, C(x) aproxima-se de...",
+      "o": [
+        "5.",
+        "0.",
+        "1000.",
+        "+∞."
+      ],
+      "a": 0,
+      "sol": "1000/x torna-se pequeno.",
+      "hyp": "Pode esquecer o termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:modelacao-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11FUN-RAT-050",
+      "themeId": "11-fun",
+      "subtopicId": "11-fun-racionais",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A expressão 1/(x−a)+b sugere naturalmente duas referências geométricas...",
+      "o": [
+        "x=−a e y=−b.",
+        "x=a e y=b.",
+        "x=b e y=a.",
+        "x=0 e y=0 sempre."
+      ],
+      "a": 1,
+      "sol": "São as linhas associadas às translações horizontal e vertical da hipérbole base.",
+      "hyp": "Pode inverter os parâmetros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-fun-racionais:referencias",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

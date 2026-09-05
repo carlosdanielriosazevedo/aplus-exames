@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
+import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -513,22 +514,23 @@ function StudentProfile({s,setS,go,editing=false}){
 
 function TaughtCurriculum({s,setS,go,onboarding=false}){
   const themes=currentYearThemes(s.profile);
-  const valid=new Set(themes.flatMap(t=>(t.microcompetencies||[]).map(mc=>mc.id)));
+  const subtopicsByTheme=new Map(themes.map(t=>[t.id,curriculumSubtopicsForTheme(t.id)]));
+  const valid=new Set([...subtopicsByTheme.values()].flat().map(row=>row.id));
   const [selected,setSelected]=useState(()=>normalizeTaughtSubtopics(s.profile));
   const selectedSet=new Set(selected);
   const finished=s.profile?.schoolYear==="Já terminei o secundário";
 
   function toggle(id){
     if(selectedSet.has(id)){
-      const hasEvidence=Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>e.microcompetencyId===id));
+      const hasEvidence=Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>(e.subtopicId||curriculumSubtopicId(e.themeId,e.microcompetencyId||e.focus))===id));
       if(hasEvidence&&!window.confirm("Já existem resultados nesta submatéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
     }
     setSelected(rows=>rows.includes(id)?rows.filter(x=>x!==id):[...rows,id]);
   }
   function toggleTheme(t){
-    const ids=(t.microcompetencies||[]).map(mc=>mc.id);
+    const ids=(subtopicsByTheme.get(t.id)||[]).map(row=>row.id);
     const all=ids.every(id=>selectedSet.has(id));
-    const hasEvidence=all&&Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>ids.includes(e.microcompetencyId)));
+    const hasEvidence=all&&Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>ids.includes(e.subtopicId||curriculumSubtopicId(e.themeId,e.microcompetencyId||e.focus))));
     if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
     setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
   }
@@ -555,16 +557,18 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
     <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
     <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
     <div className="curriculumPicker">{themes.map(t=>{
-      const ids=(t.microcompetencies||[]).map(mc=>mc.id);
+      const rows=subtopicsByTheme.get(t.id)||[];
+      const ids=rows.map(row=>row.id);
       const count=ids.filter(id=>selectedSet.has(id)).length;
       return <details key={t.id} open={count>0}>
         <summary><div><b>{t.short}</b><small>{count}/{ids.length} selecionadas</small></div><span>⌄</span></summary>
         <button type="button" className="selectTheme" onClick={()=>toggleTheme(t)}>{count===ids.length?"Desmarcar esta matéria":"Selecionar toda esta matéria"}</button>
-        <div>{(t.microcompetencies||[]).map(mc=><label key={mc.id}><input type="checkbox" checked={selectedSet.has(mc.id)} onChange={()=>toggle(mc.id)}/><span>{mc.label}</span></label>)}</div>
+        <div>{rows.map(row=><label key={row.id}><input type="checkbox" checked={selectedSet.has(row.id)} onChange={()=>toggle(row.id)}/><span>{row.label}</span></label>)}</div>
       </details>;
     })}</div>
     {selected.length===0&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>A app usará apenas matéria de anos anteriores. No 10.º ano, o Diagnóstico ficará indisponível até assinalares pelo menos uma submatéria.</span></div>}
     <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
+    <div className="notice"><b>Conteúdo em validação</b><span>A seleção representa o que já aprendeste, mesmo que algumas submatérias ainda não tenham perguntas validadas. A app nunca usa automaticamente as 5.650 perguntas protótipo.</span></div>
     <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>
   </Shell>;
 }

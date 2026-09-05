@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-fenomeno-acontecimentos",
+  "subtopic": "Fenómeno aleatório, espaço de resultados e acontecimentos",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha fenómenos aleatórios, espaço de resultados, acontecimentos, operações entre acontecimentos, incompatibilidade e complemento. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-FA-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um fenómeno aleatório é uma experiência cujo resultado...",
+      "o": [
+        "não pode ser previsto com certeza antes da realização.",
+        "é sempre o mesmo.",
+        "é necessariamente numérico.",
+        "é impossível de observar."
+      ],
+      "a": 0,
+      "sol": "Num fenómeno aleatório conhecem-se os resultados possíveis, mas não o que ocorrerá numa realização concreta.",
+      "hyp": "Pode confundir aleatoriedade com ausência total de regras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:definicao-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O espaço de resultados Ω de uma experiência é...",
+      "o": [
+        "um único resultado observado.",
+        "o conjunto de todos os resultados possíveis.",
+        "o conjunto dos resultados impossíveis.",
+        "a probabilidade do acontecimento certo."
+      ],
+      "a": 1,
+      "sol": "Ω reúne todos os resultados elementares possíveis da experiência.",
+      "hyp": "Pode confundir espaço amostral com acontecimento observado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:omega-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "No lançamento de uma moeda, um espaço de resultados possível é...",
+      "o": [
+        "{cara}.",
+        "{0,1,2}.",
+        "{cara,coroa}.",
+        "{cara,cara}."
+      ],
+      "a": 2,
+      "sol": "Há dois resultados elementares possíveis: cara e coroa.",
+      "hyp": "Pode indicar apenas um dos resultados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:moeda-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "No lançamento de um dado cúbico numerado de 1 a 6, Ω pode ser...",
+      "o": [
+        "{1,6}.",
+        "{par,ímpar,zero}.",
+        "{0,1,2,3,4,5}.",
+        "{1,2,3,4,5,6}."
+      ],
+      "a": 3,
+      "sol": "Os seis valores possíveis são 1 a 6.",
+      "hyp": "Pode incluir 0 ou apenas extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:dado-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um acontecimento é...",
+      "o": [
+        "um subconjunto do espaço de resultados.",
+        "sempre um resultado elementar.",
+        "sempre o espaço inteiro.",
+        "uma probabilidade sem conjunto associado."
+      ],
+      "a": 0,
+      "sol": "Um acontecimento contém os resultados elementares que o tornam verdadeiro.",
+      "hyp": "Pode confundir acontecimento com resultado elementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:acontecimento-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado, o acontecimento A='sair número par' é...",
+      "o": [
+        "{1,3,5}.",
+        "{2,4,6}.",
+        "{2}.",
+        "{1,2,3,4,5,6}."
+      ],
+      "a": 1,
+      "sol": "Os resultados pares são 2,4 e 6.",
+      "hyp": "Pode confundir par com ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:evento-par-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O acontecimento impossível é representado por...",
+      "o": [
+        "Ω.",
+        "{Ω}.",
+        "∅.",
+        "1."
+      ],
+      "a": 2,
+      "sol": "Não contém qualquer resultado elementar.",
+      "hyp": "Pode trocar acontecimento impossível e certo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:impossivel-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O acontecimento certo é...",
+      "o": [
+        "∅.",
+        "um singleton.",
+        "qualquer acontecimento com dois resultados.",
+        "Ω."
+      ],
+      "a": 3,
+      "sol": "O espaço inteiro ocorre necessariamente.",
+      "hyp": "Pode trocar Ω e ∅.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:certo-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um acontecimento elementar contém...",
+      "o": [
+        "um único resultado elementar.",
+        "todos os resultados.",
+        "nenhum resultado.",
+        "sempre dois resultados."
+      ],
+      "a": 0,
+      "sol": "É um subconjunto de Ω com exatamente um elemento.",
+      "hyp": "Pode confundir resultado e espaço de resultados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:elementar-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "No dado, 'sair 4' é um acontecimento...",
+      "o": [
+        "certo.",
+        "elementar.",
+        "impossível.",
+        "composto com três resultados."
+      ],
+      "a": 1,
+      "sol": "Corresponde ao singleton {4}.",
+      "hyp": "Pode achar que qualquer acontecimento numérico é composto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:elementar-dado-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A união A∪B corresponde a ocorrer...",
+      "o": [
+        "A e B apenas simultaneamente.",
+        "A mas nunca B.",
+        "A ou B, incluindo a possibilidade de ambos.",
+        "nem A nem B."
+      ],
+      "a": 2,
+      "sol": "A união reúne resultados pertencentes a A, a B ou a ambos.",
+      "hyp": "Pode interpretar 'ou' como exclusivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:uniao-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A interseção A∩B corresponde a ocorrer...",
+      "o": [
+        "A ou B mas não ambos.",
+        "apenas A.",
+        "nenhum dos dois.",
+        "A e B simultaneamente."
+      ],
+      "a": 3,
+      "sol": "A interseção contém os resultados comuns aos dois acontecimentos.",
+      "hyp": "Pode trocar união e interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:intersecao-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado, A={2,4,6} e B={4,5,6}. Então A∩B=...",
+      "o": [
+        "{4,6}.",
+        "{2,4,5,6}.",
+        "{2}.",
+        "∅."
+      ],
+      "a": 0,
+      "sol": "Os elementos comuns são 4 e 6.",
+      "hyp": "Pode calcular a união.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:intersecao-dado-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado, A={2,4,6} e B={4,5,6}. Então A∪B=...",
+      "o": [
+        "{4,6}.",
+        "{2,4,5,6}.",
+        "{2,5}.",
+        "Ω."
+      ],
+      "a": 1,
+      "sol": "Juntam-se os elementos de ambos sem repetir.",
+      "hyp": "Pode ficar apenas com os elementos comuns.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:uniao-dado-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O complementar A^c contém...",
+      "o": [
+        "os resultados comuns a A e Ω.",
+        "apenas os resultados impossíveis.",
+        "os resultados de Ω que não pertencem a A.",
+        "os elementos repetidos de A."
+      ],
+      "a": 2,
+      "sol": "A^c=Ω\\A.",
+      "hyp": "Pode confundir complemento com oposto numérico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:complemento-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado, se A={2,4,6}, então A^c=...",
+      "o": [
+        "{2,4,6}.",
+        "{1,2,3}.",
+        "∅.",
+        "{1,3,5}."
+      ],
+      "a": 3,
+      "sol": "O complementar contém os resultados ímpares.",
+      "hyp": "Pode repetir o próprio acontecimento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:complemento-dado-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A e B são incompatíveis quando...",
+      "o": [
+        "A∩B=∅.",
+        "A∪B=Ω.",
+        "A=B.",
+        "A^c=B sempre."
+      ],
+      "a": 0,
+      "sol": "Não podem ocorrer simultaneamente.",
+      "hyp": "Pode confundir incompatibilidade com complementaridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:incompativeis-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num dado, 'sair par' e 'sair ímpar' são...",
+      "o": [
+        "compatíveis.",
+        "incompatíveis e complementares.",
+        "iguais.",
+        "ambos impossíveis."
+      ],
+      "a": 1,
+      "sol": "Não ocorrem juntos e cobrem todo Ω.",
+      "hyp": "Pode reconhecer incompatibilidade mas não complementaridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:par-impar-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Dois acontecimentos complementares são sempre...",
+      "o": [
+        "independentes.",
+        "iguais.",
+        "incompatíveis e com união Ω.",
+        "elementares."
+      ],
+      "a": 2,
+      "sol": "A∩A^c=∅ e A∪A^c=Ω.",
+      "hyp": "Pode confundir complementaridade com independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:complementares-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se A⊂B, então A∩B=...",
+      "o": [
+        "B.",
+        "∅.",
+        "Ω.",
+        "A."
+      ],
+      "a": 3,
+      "sol": "Tudo o que está em A já pertence a B.",
+      "hyp": "Pode trocar interseção com união.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:inclusao-intersecao-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A⊂B, então A∪B=...",
+      "o": [
+        "B.",
+        "A.",
+        "∅.",
+        "A^c."
+      ],
+      "a": 0,
+      "sol": "A não acrescenta elementos fora de B.",
+      "hyp": "Pode trocar união e interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:inclusao-uniao-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "(A^c)^c é igual a...",
+      "o": [
+        "A^c.",
+        "A.",
+        "Ω.",
+        "∅."
+      ],
+      "a": 1,
+      "sol": "Complementar duas vezes devolve o acontecimento original.",
+      "hyp": "Pode manter o complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:duplo-complemento-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A∩A^c é...",
+      "o": [
+        "Ω.",
+        "A.",
+        "∅.",
+        "A^c."
+      ],
+      "a": 2,
+      "sol": "Nenhum resultado pertence simultaneamente a A e ao seu complementar.",
+      "hyp": "Pode confundir com a união.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:A-inter-complemento-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A∪A^c é...",
+      "o": [
+        "∅.",
+        "A.",
+        "A^c.",
+        "Ω."
+      ],
+      "a": 3,
+      "sol": "Todo resultado está em A ou fora de A.",
+      "hyp": "Pode confundir com a interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:A-uniao-complemento-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Pela lei de De Morgan, (A∪B)^c é...",
+      "o": [
+        "A^c∩B^c.",
+        "A^c∪B^c.",
+        "A∩B.",
+        "A∪B."
+      ],
+      "a": 0,
+      "sol": "Não ocorrer A nem B equivale a ocorrer A^c e B^c.",
+      "hyp": "Pode manter a operação união ao complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:demorgan-uniao-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Pela lei de De Morgan, (A∩B)^c é...",
+      "o": [
+        "A^c∩B^c.",
+        "A^c∪B^c.",
+        "A∩B.",
+        "∅."
+      ],
+      "a": 1,
+      "sol": "Não ocorrer ambos simultaneamente equivale a falhar A ou falhar B.",
+      "hyp": "Pode não trocar interseção por união.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:demorgan-inter-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Ao lançar duas moedas, um espaço de resultados ordenado pode ser...",
+      "o": [
+        "{C,K}.",
+        "{CC,KK}.",
+        "{CC,CK,KC,KK}.",
+        "{0,1,2}."
+      ],
+      "a": 2,
+      "sol": "Cada lançamento pode dar C ou K e a ordem dos lançamentos distingue CK de KC.",
+      "hyp": "Pode ignorar a ordem dos lançamentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:duas-moedas-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "No lançamento de duas moedas, A='sair exatamente uma cara' é...",
+      "o": [
+        "{CC}.",
+        "{CC,CK,KC}.",
+        "{KK}.",
+        "{CK,KC}."
+      ],
+      "a": 3,
+      "sol": "Exatamente uma cara ocorre em CK ou KC.",
+      "hyp": "Pode incluir duas caras ou nenhuma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:uma-cara-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "No lançamento de dois dados, um resultado elementar pode ser representado por...",
+      "o": [
+        "um par ordenado (a,b), com a,b∈{1,...,6}.",
+        "apenas a soma a+b.",
+        "um único número de 1 a 6.",
+        "um subconjunto de seis números."
+      ],
+      "a": 0,
+      "sol": "A experiência distingue o resultado do primeiro e do segundo dado.",
+      "hyp": "Pode substituir o resultado completo apenas pela soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:dois-dados-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No lançamento de dois dados, o acontecimento 'soma 2' contém...",
+      "o": [
+        "(1,1) e (2,0).",
+        "apenas (1,1).",
+        "seis resultados.",
+        "nenhum resultado."
+      ],
+      "a": 1,
+      "sol": "Como cada dado tem mínimo 1, só 1+1=2.",
+      "hyp": "Pode usar resultados impossíveis como 0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:soma2-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "No lançamento de dois dados, o acontecimento 'soma 7' contém quantos resultados elementares ordenados?",
+      "o": [
+        "7.",
+        "5.",
+        "6.",
+        "12."
+      ],
+      "a": 2,
+      "sol": "(1,6),(2,5),(3,4),(4,3),(5,2),(6,1).",
+      "hyp": "Pode não distinguir ordens simétricas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:soma7-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um mesmo fenómeno aleatório pode ser descrito com diferentes espaços de resultados?",
+      "o": [
+        "Não, existe sempre uma única representação possível.",
+        "Só se o fenómeno for impossível.",
+        "Só em experiências contínuas.",
+        "Sim, dependendo do nível de detalhe relevante, desde que a descrição seja coerente com o problema."
+      ],
+      "a": 3,
+      "sol": "Por exemplo, um dado pode ser descrito pelos valores 1-6 ou por categorias par/ímpar se esse for o único aspeto observado.",
+      "hyp": "Pode pensar que Ω é uma escrita única e absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:modelacao-omega-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A e B são complementares, então B=...",
+      "o": [
+        "A^c.",
+        "A.",
+        "Ω.",
+        "∅."
+      ],
+      "a": 0,
+      "sol": "Por definição, o complementar de A contém exatamente os resultados que não estão em A.",
+      "hyp": "Pode usar apenas incompatibilidade sem exigir cobertura de Ω.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:complementares-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A e B podem ser incompatíveis sem serem complementares?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se A=B.",
+        "Só se Ω=∅."
+      ],
+      "a": 1,
+      "sol": "Podem ter interseção vazia sem que a união cubra todo Ω.",
+      "hyp": "Pode confundir incompatibilidade com complementaridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:incomp-nao-comp-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Num dado, A={1,2}, B={3,4}. Estes acontecimentos são...",
+      "o": [
+        "complementares.",
+        "iguais.",
+        "incompatíveis mas não complementares.",
+        "compatíveis."
+      ],
+      "a": 2,
+      "sol": "A∩B=∅, mas A∪B={1,2,3,4}≠Ω.",
+      "hyp": "Pode assumir que qualquer par incompatível é complementar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:ex-incomp-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se A∩B=A, então conclui-se que...",
+      "o": [
+        "B⊂A.",
+        "A e B são incompatíveis.",
+        "A=∅ necessariamente.",
+        "A⊂B."
+      ],
+      "a": 3,
+      "sol": "Todos os elementos de A pertencem também a B.",
+      "hyp": "Pode inverter a relação de inclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:inclusao-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A∪B=A, então...",
+      "o": [
+        "B⊂A.",
+        "A⊂B.",
+        "A∩B=∅.",
+        "B=Ω."
+      ],
+      "a": 0,
+      "sol": "B não acrescenta resultados fora de A.",
+      "hyp": "Pode inverter a inclusão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:uniao-inclusao-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A diferença A\\B corresponde a...",
+      "o": [
+        "A∪B^c.",
+        "A∩B^c.",
+        "A^c∩B.",
+        "A∩B."
+      ],
+      "a": 1,
+      "sol": "São os resultados que pertencem a A e não a B.",
+      "hyp": "Pode trocar qual acontecimento é complementado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:diferenca-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num dado, A={1,2,3,4} e B={3,4,5}. Então A\\B=...",
+      "o": [
+        "{5}.",
+        "{3,4}.",
+        "{1,2}.",
+        "{1,2,5}."
+      ],
+      "a": 2,
+      "sol": "Retiram-se de A os elementos que também pertencem a B.",
+      "hyp": "Pode calcular B\\A ou a diferença simétrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:diferenca-dado-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A diferença simétrica entre A e B contém resultados que...",
+      "o": [
+        "pertencem aos dois simultaneamente.",
+        "não pertencem a nenhum.",
+        "pertencem sempre a Ω^c.",
+        "pertencem a exatamente um dos acontecimentos."
+      ],
+      "a": 3,
+      "sol": "É (A\\B)∪(B\\A).",
+      "hyp": "Pode confundir com interseção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:diferenca-simetrica-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A,B,C são acontecimentos, A∩(B∪C) é igual a...",
+      "o": [
+        "(A∩B)∪(A∩C).",
+        "(A∪B)∩C.",
+        "A∪(B∩C).",
+        "(A∩B)∩C apenas."
+      ],
+      "a": 0,
+      "sol": "É a propriedade distributiva da interseção relativamente à união.",
+      "hyp": "Pode distribuir com a operação errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:distributiva-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A∪(B∩C) é igual a...",
+      "o": [
+        "(A∩B)∪C.",
+        "(A∪B)∩(A∪C).",
+        "A∩(B∪C).",
+        "(A∪B)∪C."
+      ],
+      "a": 1,
+      "sol": "É a propriedade distributiva dual.",
+      "hyp": "Pode trocar união e interseção de forma incompleta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:distributiva-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A descrição 'pelo menos um de A ou B ocorre' corresponde a...",
+      "o": [
+        "A∩B.",
+        "(A∪B)^c.",
+        "A∪B.",
+        "A\\B."
+      ],
+      "a": 2,
+      "sol": "'Pelo menos um' inclui A, B ou ambos.",
+      "hyp": "Pode interpretar 'ou' como exclusivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:linguagem-pelo-menos-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A descrição 'nenhum de A ou B ocorre' corresponde a...",
+      "o": [
+        "A∪B.",
+        "A∩B.",
+        "A^c∪B^c apenas por definição direta.",
+        "A^c∩B^c."
+      ],
+      "a": 3,
+      "sol": "Nenhum ocorre significa não A e não B.",
+      "hyp": "Pode usar a união dos complementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:linguagem-nenhum-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A descrição 'A ocorre mas B não' corresponde a...",
+      "o": [
+        "A∩B^c.",
+        "A^c∩B.",
+        "A∩B.",
+        "A∪B."
+      ],
+      "a": 0,
+      "sol": "É necessário ocorrer A e simultaneamente falhar B.",
+      "hyp": "Pode inverter os acontecimentos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:linguagem-A-naoB-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "'Exatamente um de A e B ocorre' corresponde a...",
+      "o": [
+        "A∩B.",
+        "(A∩B^c)∪(A^c∩B).",
+        "A∪B sem restrição.",
+        "A^c∩B^c."
+      ],
+      "a": 1,
+      "sol": "São os dois casos exclusivos: só A ou só B.",
+      "hyp": "Pode incluir o caso em que ambos ocorrem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:exatamente-um-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num controlo de qualidade, A='peça tem defeito de pintura' e B='peça tem defeito dimensional'. 'Tem algum dos defeitos' é...",
+      "o": [
+        "A∩B.",
+        "A^c∩B^c.",
+        "A∪B.",
+        "A\\B."
+      ],
+      "a": 2,
+      "sol": "Ter algum inclui um ou ambos os tipos de defeito.",
+      "hyp": "Pode exigir simultaneamente os dois defeitos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:modelacao-defeitos-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num controlo de qualidade, A='peça tem defeito de pintura' e B='peça tem defeito dimensional'. 'Não tem qualquer desses defeitos' é...",
+      "o": [
+        "A∪B.",
+        "A∩B.",
+        "A^c∪B^c.",
+        "A^c∩B^c."
+      ],
+      "a": 3,
+      "sol": "Não ter nenhum significa falhar A e falhar B.",
+      "hyp": "Pode usar apenas um dos complementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:modelacao-sem-defeito-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    },
+    {
+      "id": "VN12PROB-FA-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Ω tem 8 resultados elementares, quantos acontecimentos diferentes existem?",
+      "o": [
+        "256.",
+        "64.",
+        "8.",
+        "16."
+      ],
+      "a": 0,
+      "sol": "Cada acontecimento é um subconjunto de Ω; um conjunto com 8 elementos tem 2^8=256 subconjuntos.",
+      "hyp": "Pode contar apenas os acontecimentos elementares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:numero-subconjuntos-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-FA-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-fenomeno-acontecimentos",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se Ω tem n resultados elementares finitos, o número total de acontecimentos é...",
+      "o": [
+        "n².",
+        "2^n.",
+        "n!.",
+        "2n."
+      ],
+      "a": 1,
+      "sol": "Os acontecimentos são todos os subconjuntos de Ω.",
+      "hyp": "Pode confundir subconjuntos com ordenações.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-fenomeno-acontecimentos:numero-eventos-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 2
+    }
+  ]
+}

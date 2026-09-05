@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-fun",
+  "subtopicId": "10-fun-quadratica",
+  "subtopic": "Função quadrática, zeros, extremos e problemas",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha formas geral/fatorizada/de vértice, concavidade, zeros, discriminante, eixo de simetria, imagem, sinal e modelação de máximos/mínimos. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10FUN-QUA-001",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma função quadrática tem a forma...",
+      "o": [
+        "f(x)=ax²+bx+c, com a≠0.",
+        "f(x)=ax+b.",
+        "f(x)=a/x.",
+        "f(x)=|x|+b."
+      ],
+      "a": 0,
+      "sol": "O termo de grau 2 com coeficiente não nulo caracteriza a função quadrática.",
+      "hyp": "Pode confundir quadrática com afim.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-002",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O gráfico de uma função quadrática é...",
+      "o": [
+        "uma reta.",
+        "uma parábola.",
+        "uma circunferência.",
+        "uma hipérbole sempre."
+      ],
+      "a": 1,
+      "sol": "Funções quadráticas têm gráficos parabólicos.",
+      "hyp": "Pode confundir famílias de gráficos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:grafico-parabola",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-003",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se a>0 em f(x)=ax²+bx+c, a parábola abre...",
+      "o": [
+        "para baixo.",
+        "para a direita.",
+        "para cima.",
+        "para a esquerda."
+      ],
+      "a": 2,
+      "sol": "Coeficiente quadrático positivo implica concavidade voltada para cima.",
+      "hyp": "Pode confundir sinal de a com declive.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:concavidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-004",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se a<0, a parábola abre...",
+      "o": [
+        "para cima.",
+        "para a direita.",
+        "não tem gráfico.",
+        "para baixo."
+      ],
+      "a": 3,
+      "sol": "Coeficiente quadrático negativo implica concavidade para baixo.",
+      "hyp": "Pode inverter concavidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:concavidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-005",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Para f(x)=x²−4, qual é f(3)?",
+      "o": [
+        "5",
+        "1",
+        "9",
+        "13"
+      ],
+      "a": 0,
+      "sol": "9−4=5.",
+      "hyp": "Pode esquecer o termo constante.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:avaliar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-006",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quais são os zeros de f(x)=x²−9?",
+      "o": [
+        "−9 e 9.",
+        "−3 e 3.",
+        "0 e 9.",
+        "apenas 3."
+      ],
+      "a": 1,
+      "sol": "x²=9 => x=±3.",
+      "hyp": "Pode esquecer a raiz negativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-007",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quais são os zeros de f(x)=x²−5x+6?",
+      "o": [
+        "−2 e −3.",
+        "1 e 6.",
+        "2 e 3.",
+        "−1 e 6."
+      ],
+      "a": 2,
+      "sol": "x²−5x+6=(x−2)(x−3).",
+      "hyp": "Pode fatorizar com sinais errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:zeros-fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-008",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Quais são os zeros de f(x)=x²+5x+6?",
+      "o": [
+        "2 e 3.",
+        "−1 e −6.",
+        "1 e 6.",
+        "−2 e −3."
+      ],
+      "a": 3,
+      "sol": "x²+5x+6=(x+2)(x+3).",
+      "hyp": "Pode trocar os sinais das raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:zeros-fatorizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-009",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O eixo de simetria de y=ax²+bx+c é...",
+      "o": [
+        "x=−b/(2a).",
+        "y=−b/(2a).",
+        "x=c.",
+        "y=a."
+      ],
+      "a": 0,
+      "sol": "A abcissa do vértice é −b/(2a).",
+      "hyp": "Pode confundir equação vertical do eixo com valor de y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:eixo-simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-010",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o eixo de simetria de f(x)=x²−6x+5?",
+      "o": [
+        "x=−3",
+        "x=3",
+        "y=3",
+        "x=5"
+      ],
+      "a": 1,
+      "sol": "−b/(2a)=6/2=3.",
+      "hyp": "Pode errar o sinal de b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:eixo-simetria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-011",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o vértice de f(x)=x²−6x+5?",
+      "o": [
+        "(−3,−4)",
+        "(3,4)",
+        "(3,−4)",
+        "(5,0)"
+      ],
+      "a": 2,
+      "sol": "xV=3; f(3)=9−18+5=−4.",
+      "hyp": "Pode acertar a abcissa e errar a ordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:vertice",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-012",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se a>0, o vértice da parábola corresponde a...",
+      "o": [
+        "um máximo.",
+        "um zero obrigatório.",
+        "a ordenada na origem.",
+        "um mínimo."
+      ],
+      "a": 3,
+      "sol": "Parábola voltada para cima tem ponto mais baixo no vértice.",
+      "hyp": "Pode confundir concavidade com extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-013",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se a<0, o vértice corresponde a...",
+      "o": [
+        "um máximo.",
+        "um mínimo.",
+        "um zero obrigatório.",
+        "um ponto de inflexão."
+      ],
+      "a": 0,
+      "sol": "Parábola voltada para baixo tem ponto mais alto no vértice.",
+      "hyp": "Pode inverter máximo e mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-014",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o vértice de f(x)=−x²+4x+1?",
+      "o": [
+        "(−2,5)",
+        "(2,5)",
+        "(2,−5)",
+        "(4,1)"
+      ],
+      "a": 1,
+      "sol": "xV=−4/(−2)=2; f(2)=−4+8+1=5.",
+      "hyp": "Pode errar sinais na fórmula do vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:vertice",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-015",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=(x−2)²+3 tem vértice...",
+      "o": [
+        "(−2,3).",
+        "(2,−3).",
+        "(2,3).",
+        "(3,2)."
+      ],
+      "a": 2,
+      "sol": "Na forma de vértice a(x−h)²+k, o vértice é (h,k).",
+      "hyp": "Pode trocar sinais em x−h.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-vertice",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-016",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A função f(x)=−(x+1)²+4 tem vértice...",
+      "o": [
+        "(1,4).",
+        "(−1,−4).",
+        "(4,−1).",
+        "(−1,4)."
+      ],
+      "a": 3,
+      "sol": "x+1=x−(−1), logo h=−1 e k=4.",
+      "hyp": "Pode esquecer a inversão de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-vertice",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-017",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o valor mínimo de f(x)=(x−3)²−2?",
+      "o": [
+        "−2",
+        "−3",
+        "0",
+        "2"
+      ],
+      "a": 0,
+      "sol": "O quadrado é ≥0; mínimo em x=3 vale −2.",
+      "hyp": "Pode confundir abcissa e ordenada do vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:valor-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-018",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o valor máximo de f(x)=−(x−4)²+7?",
+      "o": [
+        "4",
+        "7",
+        "11",
+        "−7"
+      ],
+      "a": 1,
+      "sol": "Como o coeficiente é negativo, máximo no vértice =7.",
+      "hyp": "Pode usar a abcissa 4 como máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:valor-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-019",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se os zeros de uma quadrática são 2 e 5 e a=1, uma expressão possível é...",
+      "o": [
+        "f(x)=(x+2)(x+5).",
+        "f(x)=x²+7.",
+        "f(x)=(x−2)(x−5).",
+        "f(x)=x−10."
+      ],
+      "a": 2,
+      "sol": "Fatores x−raiz produzem os zeros dados.",
+      "hyp": "Pode trocar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-fatorizada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-020",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se os zeros são −1 e 3 e a=2, uma expressão é...",
+      "o": [
+        "2(x−1)(x+3).",
+        "(x+1)(x−3).",
+        "2(x+1)(x+3).",
+        "2(x+1)(x−3)."
+      ],
+      "a": 3,
+      "sol": "As raízes −1 e 3 correspondem a fatores x+1 e x−3, com coeficiente 2.",
+      "hyp": "Pode esquecer a ou trocar sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-fatorizada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-021",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma parábola tem zeros 1 e 5. Qual é a abcissa do eixo de simetria?",
+      "o": [
+        "3",
+        "2",
+        "4",
+        "5"
+      ],
+      "a": 0,
+      "sol": "O eixo fica a meio das raízes: (1+5)/2=3.",
+      "hyp": "Pode usar soma sem dividir por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:eixo-entre-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-022",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma parábola tem zeros −4 e 2. Qual é a abcissa do vértice?",
+      "o": [
+        "−2",
+        "−1",
+        "1",
+        "3"
+      ],
+      "a": 1,
+      "sol": "(−4+2)/2=−1.",
+      "hyp": "Pode errar a média com negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:eixo-entre-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-023",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma quadrática com a>0 não tem zeros reais, então o seu gráfico...",
+      "o": [
+        "fica totalmente abaixo de Ox.",
+        "é uma reta.",
+        "fica totalmente acima do eixo Ox.",
+        "tem de tocar Ox."
+      ],
+      "a": 2,
+      "sol": "Com concavidade para cima e sem interseções com Ox, o mínimo é positivo.",
+      "hyp": "Pode esquecer a concavidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:sem-zeros-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-024",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se uma quadrática com a<0 não tem zeros reais, o gráfico...",
+      "o": [
+        "fica totalmente acima de Ox.",
+        "toca Ox uma vez.",
+        "tem sempre dois zeros.",
+        "fica totalmente abaixo de Ox."
+      ],
+      "a": 3,
+      "sol": "Com concavidade para baixo e sem zeros, o máximo é negativo.",
+      "hyp": "Pode inverter o sinal global.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:sem-zeros-sinal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-025",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O discriminante Δ=b²−4ac permite saber...",
+      "o": [
+        "o número de raízes reais de uma equação quadrática.",
+        "o domínio da função afim.",
+        "a ordenada na origem apenas.",
+        "o declive da parábola."
+      ],
+      "a": 0,
+      "sol": "Δ>0 duas raízes reais, Δ=0 uma raiz dupla, Δ<0 nenhuma raiz real.",
+      "hyp": "Pode confundir discriminante com coeficientes do gráfico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:discriminante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-026",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para x²−4x+4=0, o discriminante é...",
+      "o": [
+        "−4",
+        "0",
+        "4",
+        "16"
+      ],
+      "a": 1,
+      "sol": "Δ=(−4)²−4×1×4=16−16=0.",
+      "hyp": "Pode esquecer o sinal de b.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:discriminante",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-027",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se Δ=0, a parábola...",
+      "o": [
+        "corta Ox em dois pontos distintos.",
+        "não toca Ox.",
+        "toca o eixo Ox num único ponto.",
+        "é necessariamente constante."
+      ],
+      "a": 2,
+      "sol": "Há uma raiz real dupla.",
+      "hyp": "Pode achar que Δ=0 significa ausência de raízes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:discriminante-grafico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-028",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Quais são as raízes de x²−4x+3=0?",
+      "o": [
+        "−1 e −3.",
+        "1 e 4.",
+        "3 e 4.",
+        "1 e 3."
+      ],
+      "a": 3,
+      "sol": "Fatoriza em (x−1)(x−3).",
+      "hyp": "Pode trocar sinais ou fatores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:resolver-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-029",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Resolve x²−2x−3=0.",
+      "o": [
+        "x=−1 ou 3.",
+        "x=1 ou −3.",
+        "x=−1 apenas.",
+        "x=3 apenas."
+      ],
+      "a": 0,
+      "sol": "(x−3)(x+1)=0.",
+      "hyp": "Pode esquecer uma raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:resolver-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-030",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−6x+8, em que intervalo f(x)<0?",
+      "o": [
+        "]−∞,2[∪]4,+∞[.",
+        "]2,4[.",
+        "[2,4].",
+        "R."
+      ],
+      "a": 1,
+      "sol": "Zeros 2 e 4; com a>0, a função é negativa entre as raízes.",
+      "hyp": "Pode trocar interior e exterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:sinal-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-031",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=−x²+5x−6, em que intervalo f(x)>0?",
+      "o": [
+        "]−∞,2[∪]3,+∞[.",
+        "[2,3].",
+        "]2,3[.",
+        "R."
+      ],
+      "a": 2,
+      "sol": "f=−(x−2)(x−3); com concavidade para baixo, é positiva entre as raízes.",
+      "hyp": "Pode esquecer o sinal global negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:sinal-quadratica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-032",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a imagem de f(x)=(x−1)²+4?",
+      "o": [
+        "R.",
+        "[1,+∞[.",
+        "]−∞,4].",
+        "[4,+∞[."
+      ],
+      "a": 3,
+      "sol": "Mínimo 4 no vértice.",
+      "hyp": "Pode usar a abcissa do vértice como limite da imagem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:imagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-033",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a imagem de f(x)=−2(x+3)²+5?",
+      "o": [
+        "]−∞,5].",
+        "[5,+∞[.",
+        "R.",
+        "]−∞,3]."
+      ],
+      "a": 0,
+      "sol": "Máximo 5 no vértice.",
+      "hyp": "Pode usar −3 como máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:imagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-034",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A forma f(x)=a(x−h)²+k é especialmente útil para identificar...",
+      "o": [
+        "apenas os zeros.",
+        "o vértice e a concavidade.",
+        "apenas a ordenada na origem.",
+        "o domínio."
+      ],
+      "a": 1,
+      "sol": "O vértice é (h,k) e o sinal de a indica a concavidade.",
+      "hyp": "Pode achar que forma de vértice mostra raízes diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-vertice",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-035",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A forma f(x)=a(x−r1)(x−r2) é especialmente útil para identificar...",
+      "o": [
+        "o vértice diretamente sem cálculo.",
+        "a imagem diretamente.",
+        "os zeros.",
+        "o domínio."
+      ],
+      "a": 2,
+      "sol": "Os zeros são r1 e r2, quando reais.",
+      "hyp": "Pode confundir forma fatorizada com forma de vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:forma-fatorizada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-036",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Expande (x−2)²−3.",
+      "o": [
+        "x²−4x+4",
+        "x²−2x+1",
+        "x²+4x+1",
+        "x²−4x+1"
+      ],
+      "a": 3,
+      "sol": "(x−2)²−3=x²−4x+4−3=x²−4x+1.",
+      "hyp": "Pode esquecer o termo 2ab.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:expandir",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-037",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Escreve x²−6x+5 na forma de vértice.",
+      "o": [
+        "(x−3)²−4",
+        "(x−3)²+4",
+        "(x+3)²−4",
+        "(x−6)²+5"
+      ],
+      "a": 0,
+      "sol": "x²−6x+5=(x−3)²−9+5=(x−3)²−4.",
+      "hyp": "Pode completar quadrado com sinal errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:completar-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-038",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Escreve x²+4x−1 na forma de vértice.",
+      "o": [
+        "(x−2)²−5",
+        "(x+2)²−5",
+        "(x+2)²+3",
+        "(x+4)²−1"
+      ],
+      "a": 1,
+      "sol": "x²+4x−1=(x+2)²−4−1=(x+2)²−5.",
+      "hyp": "Pode errar o termo de correção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:completar-quadrado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-039",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma parábola tem vértice (2,−3) e passa por (0,5). Qual é a?",
+      "o": [
+        "1",
+        "−2",
+        "2",
+        "4"
+      ],
+      "a": 2,
+      "sol": "5=a(0−2)²−3 => 5=4a−3 => a=2.",
+      "hyp": "Pode esquecer o termo k.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:determinar-a-vertice-ponto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-040",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma parábola tem vértice (−1,4) e passa por (1,0). Qual é a expressão?",
+      "o": [
+        "f(x)=(x+1)²+4",
+        "f(x)=−(x−1)²+4",
+        "f(x)=−2(x+1)²+4",
+        "f(x)=−(x+1)²+4"
+      ],
+      "a": 3,
+      "sol": "0=a(2)²+4 => 4a=−4 => a=−1.",
+      "hyp": "Pode trocar o sinal de h.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:determinar-funcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-041",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "A altura de um objeto é h(t)=−5t²+20t+1. Em que instante ocorre a altura máxima?",
+      "o": [
+        "2 s",
+        "1 s",
+        "3 s",
+        "4 s"
+      ],
+      "a": 0,
+      "sol": "tV=−20/(2×−5)=2.",
+      "hyp": "Pode usar o zero da função em vez do vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:modelo-altura-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-042",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo h(t)=−5t²+20t+1, qual é a altura máxima?",
+      "o": [
+        "16",
+        "21",
+        "20",
+        "25"
+      ],
+      "a": 1,
+      "sol": "h(2)=−20+40+1=21.",
+      "hyp": "Pode usar apenas o termo 20 ou esquecer o +1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:modelo-altura-maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-043",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma receita é R(x)=−2x²+40x. Para que x é máxima?",
+      "o": [
+        "5",
+        "20",
+        "10",
+        "40"
+      ],
+      "a": 2,
+      "sol": "xV=−40/(2×−2)=10.",
+      "hyp": "Pode usar metade do coeficiente linear sem dividir por a corretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:modelo-otimizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-044",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "No modelo R(x)=−2x²+40x, qual é o valor máximo?",
+      "o": [
+        "100",
+        "300",
+        "400",
+        "200"
+      ],
+      "a": 3,
+      "sol": "R(10)=−200+400=200.",
+      "hyp": "Pode usar o x do vértice como valor máximo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:modelo-otimizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-045",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma quadrática tem zeros 1 e 5 e valor f(0)=10. Qual é a expressão?",
+      "o": [
+        "2(x−1)(x−5)",
+        "−2(x−1)(x−5)",
+        "(x−1)(x−5)",
+        "5(x−1)(x−5)"
+      ],
+      "a": 0,
+      "sol": "f(0)=a(−1)(−5)=5a=10 => a=2.",
+      "hyp": "Pode esquecer de usar o valor dado para determinar a.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:determinar-a-raizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-046",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma quadrática tem zero duplo em x=3 e passa por (0,18). Qual é a expressão?",
+      "o": [
+        "−2(x−3)²",
+        "2(x−3)²",
+        "(x−3)²",
+        "3(x−2)²"
+      ],
+      "a": 1,
+      "sol": "f(x)=a(x−3)²; 18=9a => a=2.",
+      "hyp": "Pode usar dois fatores diferentes para uma raiz dupla.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:raiz-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-047",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o vértice de uma parábola com a>0 está exatamente sobre o eixo Ox, então a função tem...",
+      "o": [
+        "dois zeros distintos.",
+        "nenhum zero.",
+        "um zero real duplo.",
+        "imagem R."
+      ],
+      "a": 2,
+      "sol": "O mínimo é 0 e a parábola toca Ox no vértice.",
+      "hyp": "Pode confundir toque com duas interseções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:vertice-sobre-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-048",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4x+3, quanto vale f(1)+f(3)?",
+      "o": [
+        "2",
+        "4",
+        "6",
+        "0"
+      ],
+      "a": 3,
+      "sol": "1 e 3 são zeros, logo a soma é 0.",
+      "hyp": "Pode avaliar algebricamente com erros desnecessários.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:usar-zeros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-049",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas parábolas têm o mesmo vértice e o mesmo eixo de simetria, mas valores de |a| diferentes, a de maior |a| é...",
+      "o": [
+        "mais estreita.",
+        "mais larga.",
+        "uma reta.",
+        "necessariamente deslocada."
+      ],
+      "a": 0,
+      "sol": "Maior módulo de a produz crescimento mais rápido afastando-se do vértice, visualmente uma parábola mais estreita.",
+      "hyp": "Pode relacionar |a| com altura do vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:efeito-a",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10FUN-QUA-050",
+      "themeId": "10-fun",
+      "subtopicId": "10-fun-quadratica",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um retângulo tem perímetro 20. Se um lado mede x, a área é A(x)=x(10−x). Para que x a área é máxima?",
+      "o": [
+        "2,5",
+        "5",
+        "10",
+        "20"
+      ],
+      "a": 1,
+      "sol": "A(x)=−x²+10x tem vértice em x=5.",
+      "hyp": "Pode usar um extremo do domínio em vez do vértice.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-fun-quadratica:modelacao-area-maxima",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

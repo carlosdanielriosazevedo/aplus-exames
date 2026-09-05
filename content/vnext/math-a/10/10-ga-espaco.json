@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ga",
+  "subtopicId": "10-ga-espaco",
+  "subtopic": "Coordenadas, vetores e relações geométricas no espaço",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha coordenadas 3D, distâncias, pontos médios, vetores, planos coordenados, retas no espaço, paralelismo, retas reversas, coplanaridade e modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GA-ESP-001",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "No espaço cartesiano, um ponto P é representado por...",
+      "o": [
+        "três coordenadas (x,y,z).",
+        "duas coordenadas.",
+        "uma coordenada.",
+        "quatro coordenadas obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "No espaço tridimensional usam-se três coordenadas.",
+      "hyp": "Pode confundir plano com espaço.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:coordenadas-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-002",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Na notação P=(x,y,z), a terceira coordenada chama-se geralmente...",
+      "o": [
+        "abcissa.",
+        "cota.",
+        "ordenada.",
+        "declive."
+      ],
+      "a": 1,
+      "sol": "A terceira coordenada é a cota.",
+      "hyp": "Pode confundir as designações das coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:cota",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-003",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual ponto pertence ao eixo Oz?",
+      "o": [
+        "(5,0,0).",
+        "(0,5,0).",
+        "(0,0,5).",
+        "(1,1,5)."
+      ],
+      "a": 2,
+      "sol": "No eixo Oz, x=y=0.",
+      "hyp": "Pode confundir os eixos coordenados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:eixo-Oz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-004",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Qual ponto pertence ao plano xOy?",
+      "o": [
+        "(0,2,3).",
+        "(2,0,3).",
+        "(1,1,1).",
+        "(2,−1,0)."
+      ],
+      "a": 3,
+      "sol": "No plano xOy a cota z é zero.",
+      "hyp": "Pode confundir o plano com um eixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-xOy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-005",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O vetor AB no espaço calcula-se por...",
+      "o": [
+        "B−A coordenada a coordenada.",
+        "A+B.",
+        "A−B.",
+        "a média das coordenadas."
+      ],
+      "a": 0,
+      "sol": "AB=(xB−xA,yB−yA,zB−zA).",
+      "hyp": "Pode inverter o sentido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:vetor-AB",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-006",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se A=(1,2,3) e B=(4,6,5), então AB=",
+      "o": [
+        "(5,8,8).",
+        "(3,4,2).",
+        "(−3,−4,−2).",
+        "(3,2,4)."
+      ],
+      "a": 1,
+      "sol": "Subtraindo coordenadas: (3,4,2).",
+      "hyp": "Pode somar ou trocar componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:vetor-AB",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-007",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A distância entre dois pontos no espaço usa...",
+      "o": [
+        "|Δx|+|Δy|+|Δz| sempre.",
+        "apenas Δz.",
+        "√[(Δx)²+(Δy)²+(Δz)²].",
+        "a média das coordenadas."
+      ],
+      "a": 2,
+      "sol": "É a extensão tridimensional do Teorema de Pitágoras.",
+      "hyp": "Pode esquecer uma dimensão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:distancia-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-008",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância entre O=(0,0,0) e P=(1,2,2)?",
+      "o": [
+        "2",
+        "4",
+        "√5",
+        "3"
+      ],
+      "a": 3,
+      "sol": "√(1+4+4)=3.",
+      "hyp": "Pode somar 1+2+2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:distancia-origem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-009",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a distância entre A=(1,1,1) e B=(4,5,1)?",
+      "o": [
+        "5",
+        "4",
+        "6",
+        "7"
+      ],
+      "a": 0,
+      "sol": "Diferenças 3,4,0; distância 5.",
+      "hyp": "Pode ignorar que z não varia e somar diferenças.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:distancia-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-010",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O ponto médio de A=(x1,y1,z1) e B=(x2,y2,z2) obtém-se...",
+      "o": [
+        "subtraindo coordenadas.",
+        "fazendo a média de cada par de coordenadas.",
+        "somando apenas x e y.",
+        "fazendo a média das distâncias à origem."
+      ],
+      "a": 1,
+      "sol": "Cada coordenada do ponto médio é a média das coordenadas correspondentes.",
+      "hyp": "Pode esquecer a terceira coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:ponto-medio-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-011",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o ponto médio de A=(0,0,0) e B=(4,6,8)?",
+      "o": [
+        "(4,3,2).",
+        "(2,6,4).",
+        "(2,3,4).",
+        "(1,2,3)."
+      ],
+      "a": 2,
+      "sol": "Metades coordenada a coordenada: (2,3,4).",
+      "hyp": "Pode trocar a ordem ou não dividir tudo por 2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:ponto-medio-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-012",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é o ponto médio de A=(−2,4,6) e B=(4,0,−2)?",
+      "o": [
+        "(2,2,1).",
+        "(1,4,4).",
+        "(−3,2,4).",
+        "(1,2,2)."
+      ],
+      "a": 3,
+      "sol": "((−2+4)/2,(4+0)/2,(6−2)/2)=(1,2,2).",
+      "hyp": "Pode errar sinais ou médias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:ponto-medio-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-013",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A norma de v=(a,b,c) é...",
+      "o": [
+        "√(a²+b²+c²).",
+        "a+b+c.",
+        "abc.",
+        "√(a+b+c)."
+      ],
+      "a": 0,
+      "sol": "A norma é o comprimento euclidiano do vetor.",
+      "hyp": "Pode omitir os quadrados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:norma-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-014",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a norma de v=(2,3,6)?",
+      "o": [
+        "6",
+        "7",
+        "9",
+        "49"
+      ],
+      "a": 1,
+      "sol": "√(4+9+36)=√49=7.",
+      "hyp": "Pode somar componentes e obter 11.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:norma-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-015",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é a norma de v=(−1,−2,−2)?",
+      "o": [
+        "2",
+        "4",
+        "3",
+        "5"
+      ],
+      "a": 2,
+      "sol": "√(1+4+4)=3.",
+      "hyp": "Pode manter sinais negativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:norma-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-016",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O plano xOy tem equação...",
+      "o": [
+        "x=0.",
+        "y=0.",
+        "x+y=0.",
+        "z=0."
+      ],
+      "a": 3,
+      "sol": "Todos os seus pontos têm cota zero.",
+      "hyp": "Pode confundir com os outros planos coordenados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-017",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O plano yOz tem equação...",
+      "o": [
+        "x=0.",
+        "y=0.",
+        "z=0.",
+        "x+y+z=0."
+      ],
+      "a": 0,
+      "sol": "No plano yOz a abcissa é zero.",
+      "hyp": "Pode confundir com xOz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-018",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O plano xOz tem equação...",
+      "o": [
+        "x=0.",
+        "y=0.",
+        "z=0.",
+        "x=z."
+      ],
+      "a": 1,
+      "sol": "No plano xOz a ordenada é zero.",
+      "hyp": "Pode trocar os planos coordenados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-019",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma reta no espaço pode ser descrita por...",
+      "o": [
+        "apenas um ponto.",
+        "apenas uma distância à origem.",
+        "um ponto e um vetor diretor.",
+        "uma única equação reduzida y=mx+b sempre."
+      ],
+      "a": 2,
+      "sol": "Um ponto fixa a posição e um vetor não nulo fixa a direção.",
+      "hyp": "Pode transferir diretamente a forma reduzida do plano para o espaço.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:reta-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-020",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma equação vetorial de reta no espaço pode escrever-se como...",
+      "o": [
+        "P=P0+t².",
+        "x+y+z=0 sempre.",
+        "P=v/P0.",
+        "P=P0+t v."
+      ],
+      "a": 3,
+      "sol": "O parâmetro real percorre a reta a partir de P0 na direção v.",
+      "hyp": "Pode confundir reta com curva.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:reta-vetorial",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-021",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Na reta (x,y,z)=(1,2,3)+t(2,−1,4), o vetor diretor é...",
+      "o": [
+        "(2,−1,4).",
+        "(1,2,3).",
+        "(3,1,7).",
+        "t."
+      ],
+      "a": 0,
+      "sol": "O vetor multiplicado pelo parâmetro define a direção da reta.",
+      "hyp": "Pode usar o ponto base como direção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:vetor-diretor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-022",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Na reta (x,y,z)=(1,2,3)+t(2,−1,4), que ponto corresponde a t=2?",
+      "o": [
+        "(3,1,7).",
+        "(5,0,11).",
+        "(4,0,8).",
+        "(5,4,11)."
+      ],
+      "a": 1,
+      "sol": "(1+4,2−2,3+8)=(5,0,11).",
+      "hyp": "Pode não multiplicar todas as componentes por t.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:avaliar-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-023",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas retas no espaço com vetores diretores proporcionais são...",
+      "o": [
+        "sempre coincidentes.",
+        "sempre perpendiculares.",
+        "paralelas ou coincidentes.",
+        "sempre secantes."
+      ],
+      "a": 2,
+      "sol": "Vetores proporcionais dão a mesma direção; a posição decide se coincidem ou são distintas.",
+      "hyp": "Pode concluir coincidência só pela direção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-024",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas retas no espaço que não são paralelas podem ainda assim não se intersectar?",
+      "o": [
+        "Não.",
+        "Só se forem coincidentes.",
+        "Só no plano.",
+        "Sim, podem ser reversas."
+      ],
+      "a": 3,
+      "sol": "No espaço existem retas não paralelas e não concorrentes: retas reversas.",
+      "hyp": "Pode aplicar ao espaço a dicotomia plana paralelas/secantes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:retas-reversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-025",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Retas reversas são retas que...",
+      "o": [
+        "não são paralelas nem se intersectam.",
+        "são paralelas distintas.",
+        "se intersectam a 90°.",
+        "coincidem."
+      ],
+      "a": 0,
+      "sol": "É uma possibilidade exclusiva do espaço tridimensional.",
+      "hyp": "Pode confundir reversas com paralelas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:retas-reversas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-026",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os vetores u=(1,2,3) e v=(2,4,6) têm...",
+      "o": [
+        "direções perpendiculares.",
+        "a mesma direção.",
+        "normas iguais.",
+        "sentidos opostos."
+      ],
+      "a": 1,
+      "sol": "v=2u.",
+      "hyp": "Pode não reconhecer proporcionalidade em três componentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:vetores-colineares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-027",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os vetores u=(1,−2,3) e v=(−2,4,−6) têm...",
+      "o": [
+        "direções distintas.",
+        "normas iguais.",
+        "mesma direção e sentidos opostos.",
+        "sentido igual."
+      ],
+      "a": 2,
+      "sol": "v=−2u.",
+      "hyp": "Pode ignorar o fator negativo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:vetores-colineares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-028",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A=(0,0,0), B=(1,2,3), C=(2,4,6). Os três pontos são...",
+      "o": [
+        "não colineares.",
+        "coplanares mas nunca colineares.",
+        "vértices de triângulo equilátero.",
+        "colineares."
+      ],
+      "a": 3,
+      "sol": "AC=2AB, logo os vetores são proporcionais.",
+      "hyp": "Pode achar que três coordenadas diferentes impedem colinearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:pontos-colineares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-029",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "A=(1,0,0), B=(0,1,0), C=(0,0,1). Os três pontos são colineares?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se o referencial for ortonormado.",
+        "Só A e B."
+      ],
+      "a": 0,
+      "sol": "AB=(−1,1,0) e AC=(−1,0,1) não são proporcionais.",
+      "hyp": "Pode assumir simetria implica colinearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:pontos-nao-colineares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-030",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Três pontos não colineares determinam...",
+      "o": [
+        "uma reta única.",
+        "um plano único.",
+        "uma esfera única sem raio.",
+        "infinitos planos sem condição."
+      ],
+      "a": 1,
+      "sol": "Por três pontos não colineares passa um único plano.",
+      "hyp": "Pode confundir com três pontos colineares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-por-tres-pontos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-031",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma reta e um ponto exterior a ela determinam...",
+      "o": [
+        "duas retas paralelas.",
+        "uma esfera única.",
+        "um plano único.",
+        "nenhum plano."
+      ],
+      "a": 2,
+      "sol": "É uma condição clássica de determinação de plano.",
+      "hyp": "Pode pensar que há infinitos planos mesmo com o ponto adicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:determinar-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-032",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas retas concorrentes determinam...",
+      "o": [
+        "uma esfera.",
+        "sempre duas superfícies.",
+        "nenhum plano.",
+        "um plano único."
+      ],
+      "a": 3,
+      "sol": "Duas retas que se intersectam estão contidas num único plano.",
+      "hyp": "Pode confundir com retas reversas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-retas-concorrentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-033",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas retas paralelas distintas determinam...",
+      "o": [
+        "um plano único.",
+        "infinitos planos.",
+        "nenhum plano.",
+        "uma reta perpendicular única."
+      ],
+      "a": 0,
+      "sol": "Duas paralelas distintas são coplanares e determinam esse plano.",
+      "hyp": "Pode achar que qualquer duas retas determinam plano, incluindo reversas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:plano-retas-paralelas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-034",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Duas retas reversas determinam um plano comum?",
+      "o": [
+        "Sim, exatamente um.",
+        "Não.",
+        "Sim, infinitos.",
+        "Só se forem perpendiculares."
+      ],
+      "a": 1,
+      "sol": "Por definição, não são coplanares.",
+      "hyp": "Pode confundir não interseção com paralelismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:retas-reversas-coplanaridade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-035",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é a distância entre A=(1,2,3) e B=(4,6,15)?",
+      "o": [
+        "12",
+        "14",
+        "13",
+        "15"
+      ],
+      "a": 2,
+      "sol": "Diferenças 3,4,12; distância √(9+16+144)=13.",
+      "hyp": "Pode usar apenas a maior diferença.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:distancia-3d-pitagoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-036",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Que ponto B tem A=(1,2,3) como ponto médio com C=(5,6,7)?",
+      "o": [
+        "B=(3,4,5).",
+        "B=(6,8,10).",
+        "B=(−4,−4,−4).",
+        "B=(−3,−2,−1)."
+      ],
+      "a": 3,
+      "sol": "A=(B+C)/2 => B=2A−C=(2,4,6)−(5,6,7)=(−3,−2,−1).",
+      "hyp": "Pode usar C−A.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:ponto-medio-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-037",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma reta tem ponto P0=(1,0,2) e vetor diretor v=(2,1,−1). Qual ponto pertence à reta?",
+      "o": [
+        "(5,2,0).",
+        "(3,2,1).",
+        "(2,1,2).",
+        "(5,1,0)."
+      ],
+      "a": 0,
+      "sol": "Para t=2 obtém-se (5,2,0).",
+      "hyp": "Pode escolher um ponto que altera componentes por fatores diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:pertença-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-038",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O ponto Q=(7,3,−1) pertence à reta (x,y,z)=(1,0,2)+t(2,1,−1)?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só se t=2.",
+        "Não é possível saber."
+      ],
+      "a": 1,
+      "sol": "De x: t=3; então y=3 e z=−1, logo pertence.",
+      "hyp": "Pode testar só uma coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:pertença-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-039",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O ponto Q=(5,3,0) pertence à reta (x,y,z)=(1,0,2)+t(2,1,−1)?",
+      "o": [
+        "Sim.",
+        "Só se t=2.",
+        "Não.",
+        "Só se z=2."
+      ],
+      "a": 2,
+      "sol": "x=5 implica t=2, mas então y=2, não 3.",
+      "hyp": "Pode verificar apenas x e z.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:pertença-reta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-040",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "As retas r: P=(0,0,0)+t(1,2,3) e s: P=(1,1,1)+u(2,4,6) são...",
+      "o": [
+        "perpendiculares.",
+        "reversas obrigatoriamente.",
+        "secantes obrigatoriamente.",
+        "paralelas distintas ou coincidentes; é preciso testar um ponto."
+      ],
+      "a": 3,
+      "sol": "Os vetores diretores são proporcionais; falta verificar se um ponto de s pertence a r para decidir coincidência.",
+      "hyp": "Pode concluir coincidência só pela direção.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:paralelas-ou-coincidentes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-041",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Considere r: (x,y,z)=(0,0,0)+t(1,2,3). O ponto (1,1,1) pertence a r?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Só para t=1.",
+        "Só para t=1/2."
+      ],
+      "a": 0,
+      "sol": "Para x=1 seria t=1, mas r daria y=2,z=3.",
+      "hyp": "Pode verificar apenas a primeira coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:testar-coincidencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-042",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Considere r: (x,y,z)=(0,0,0)+t(1,2,3) e s: (x,y,z)=(1,1,1)+u(2,4,6). Sabendo que (1,1,1) não pertence a r, como se classificam as retas?",
+      "o": [
+        "coincidentes.",
+        "paralelas distintas.",
+        "reversas.",
+        "secantes."
+      ],
+      "a": 1,
+      "sol": "Têm a mesma direção e não partilham o ponto base de s.",
+      "hyp": "Pode confundir paralelas espaciais com reversas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:paralelas-distintas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-043",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O vetor posição de P=(−2,5,4) é...",
+      "o": [
+        "PO=(−2,5,4).",
+        "OP=(2,−5,−4).",
+        "OP=(−2,5,4).",
+        "OP=(5,4,−2)."
+      ],
+      "a": 2,
+      "sol": "Do O ao ponto, as componentes coincidem com as coordenadas.",
+      "hyp": "Pode inverter o sentido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:vetor-posicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-044",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se OA=(1,2,3) e AB=(4,−1,2), então OB=",
+      "o": [
+        "(3,3,1).",
+        "(4,−1,2).",
+        "(5,3,6).",
+        "(5,1,5)."
+      ],
+      "a": 3,
+      "sol": "OB=OA+AB=(5,1,5).",
+      "hyp": "Pode subtrair os vetores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:chasles-espaco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-045",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se AB=(2,1,−3) e AC=(5,−1,1), então BC=",
+      "o": [
+        "(3,−2,4).",
+        "(7,0,−2).",
+        "(−3,2,−4).",
+        "(3,2,4)."
+      ],
+      "a": 0,
+      "sol": "BC=AC−AB=(3,−2,4).",
+      "hyp": "Pode inverter a subtração.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:chasles-inverso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-046",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um ponto P pertence ao plano xOy quando...",
+      "o": [
+        "x=0.",
+        "z=0.",
+        "y=0.",
+        "x=y."
+      ],
+      "a": 1,
+      "sol": "O plano xOy contém os eixos Ox e Oy e tem cota nula.",
+      "hyp": "Pode confundir o nome do plano com coordenada a anular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:pertença-plano-coordenado",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-047",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um ponto P pertence simultaneamente aos planos xOy e xOz quando...",
+      "o": [
+        "x=0.",
+        "z=0 apenas.",
+        "y=0 e z=0, isto é, P pertence ao eixo Ox.",
+        "P é a origem obrigatoriamente."
+      ],
+      "a": 2,
+      "sol": "A interseção dos dois planos é o eixo Ox.",
+      "hyp": "Pode achar que a interseção é apenas a origem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:intersecao-planos-coordenados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-048",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um drone está em A=(1,2,3) e desloca-se segundo v=(4,−2,5). A nova posição é...",
+      "o": [
+        "(4,−2,5).",
+        "(3,4,−2).",
+        "(5,4,8).",
+        "(5,0,8)."
+      ],
+      "a": 3,
+      "sol": "A+v=(5,0,8).",
+      "hyp": "Pode tratar o vetor como posição absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:modelacao-deslocamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-049",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um sensor está na origem e um alvo em P=(6,2,3). Qual é a distância direta?",
+      "o": [
+        "7.",
+        "11.",
+        "√41.",
+        "49."
+      ],
+      "a": 0,
+      "sol": "√(36+4+9)=√49=7.",
+      "hyp": "Pode somar coordenadas ou esquecer uma dimensão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:modelacao-distancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GA-ESP-050",
+      "themeId": "10-ga",
+      "subtopicId": "10-ga-espaco",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Três pontos A,B,C de uma estrutura não são colineares. Geometricamente, eles determinam...",
+      "o": [
+        "uma reta única.",
+        "um plano único que pode representar a face da estrutura.",
+        "uma esfera de raio zero.",
+        "nenhum objeto geométrico."
+      ],
+      "a": 1,
+      "sol": "Três pontos não colineares determinam um plano.",
+      "hyp": "Pode confundir determinação de plano com colinearidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ga-espaco:modelacao-plano",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

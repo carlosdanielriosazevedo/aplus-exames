@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-gs",
+  "subtopicId": "10-gs-circuncentro-incentro",
+  "subtopic": "Circuncentro e incentro",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha definições, lugares geométricos, posições dos centros, circunferências inscrita/circunscrita, casos retângulos/equiláteros e modelação. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10GS-CI-001",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O circuncentro de um triângulo é o ponto de interseção das...",
+      "o": [
+        "mediatrizes dos lados.",
+        "bissetrizes internas.",
+        "medianas.",
+        "alturas."
+      ],
+      "a": 0,
+      "sol": "As três mediatrizes dos lados são concorrentes no circuncentro.",
+      "hyp": "Pode confundir os quatro centros notáveis.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-002",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O circuncentro está à mesma distância...",
+      "o": [
+        "dos três lados.",
+        "dos três vértices.",
+        "dos pontos médios apenas.",
+        "das três alturas."
+      ],
+      "a": 1,
+      "sol": "Por pertencer às mediatrizes, é equidistante dos vértices.",
+      "hyp": "Pode confundir equidistância a vértices com equidistância a lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-equidistancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-003",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O incentro de um triângulo é a interseção das...",
+      "o": [
+        "mediatrizes.",
+        "alturas.",
+        "bissetrizes internas.",
+        "medianas."
+      ],
+      "a": 2,
+      "sol": "As bissetrizes internas são concorrentes no incentro.",
+      "hyp": "Pode trocar incentro por circuncentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:incentro-definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-004",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O incentro está à mesma distância...",
+      "o": [
+        "dos três vértices.",
+        "dos pontos médios.",
+        "dos prolongamentos das medianas apenas.",
+        "dos três lados."
+      ],
+      "a": 3,
+      "sol": "Todo ponto da bissetriz é equidistante dos lados do ângulo; no incentro isso vale para os três lados.",
+      "hyp": "Pode confundir as duas noções de equidistância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:incentro-equidistancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-005",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A circunferência circunscrita a um triângulo tem centro no...",
+      "o": [
+        "circuncentro.",
+        "incentro.",
+        "baricentro.",
+        "ortocentro."
+      ],
+      "a": 0,
+      "sol": "O circuncentro é equidistante dos vértices, logo serve de centro da circunferência que passa pelos três.",
+      "hyp": "Pode associar qualquer centro notável a qualquer circunferência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circunferencia-circunscrita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-006",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A circunferência inscrita num triângulo tem centro no...",
+      "o": [
+        "circuncentro.",
+        "incentro.",
+        "baricentro.",
+        "ortocentro."
+      ],
+      "a": 1,
+      "sol": "O incentro é equidistante dos lados e é o centro da circunferência tangente aos três lados.",
+      "hyp": "Pode confundir inscrita com circunscrita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circunferencia-inscrita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-007",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se O é o circuncentro de ABC e OA=7 cm, então OB mede...",
+      "o": [
+        "3,5 cm",
+        "14 cm",
+        "7 cm",
+        "não é possível saber"
+      ],
+      "a": 2,
+      "sol": "OA=OB=OC porque O é equidistante dos vértices.",
+      "hyp": "Pode achar que só dois raios são iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:raios-circunscrita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-008",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se I é o incentro e a distância perpendicular de I ao lado AB é 4 cm, qual é a distância de I ao lado BC?",
+      "o": [
+        "2 cm",
+        "8 cm",
+        "depende do comprimento de BC",
+        "4 cm"
+      ],
+      "a": 3,
+      "sol": "O incentro é equidistante dos três lados.",
+      "hyp": "Pode não reconhecer que a distância a uma reta é perpendicular.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:raio-inscrita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-009",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo acutângulo, o circuncentro fica...",
+      "o": [
+        "no interior.",
+        "sempre num vértice.",
+        "fora do triângulo.",
+        "no ponto médio de um lado sempre."
+      ],
+      "a": 0,
+      "sol": "Num triângulo acutângulo, as mediatrizes intersectam-se no interior.",
+      "hyp": "Pode não relacionar tipo de triângulo com localização do circuncentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:localizacao-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-010",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo retângulo, o circuncentro fica...",
+      "o": [
+        "no vértice do ângulo reto.",
+        "no ponto médio da hipotenusa.",
+        "no incentro.",
+        "fora do triângulo."
+      ],
+      "a": 1,
+      "sol": "O ponto médio da hipotenusa é equidistante dos três vértices.",
+      "hyp": "Pode confundir com ortocentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-011",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, o circuncentro fica...",
+      "o": [
+        "sempre no interior.",
+        "num vértice.",
+        "fora do triângulo.",
+        "no ponto médio do maior lado."
+      ],
+      "a": 2,
+      "sol": "As mediatrizes intersectam-se exteriormente num triângulo obtusângulo.",
+      "hyp": "Pode generalizar a localização interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:localizacao-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-012",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "O incentro de qualquer triângulo não degenerado fica...",
+      "o": [
+        "sempre fora.",
+        "num vértice.",
+        "no ponto médio do maior lado.",
+        "sempre no interior."
+      ],
+      "a": 3,
+      "sol": "As bissetrizes internas intersectam-se no interior.",
+      "hyp": "Pode transferir para o incentro a variação de posição do circuncentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:localizacao-incentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-013",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo com hipotenusa 10 cm, qual é o raio da circunferência circunscrita?",
+      "o": [
+        "5 cm",
+        "2,5 cm",
+        "10 cm",
+        "20 cm"
+      ],
+      "a": 0,
+      "sol": "O circuncentro é o ponto médio da hipotenusa; o raio é metade de 10, ou seja, 5.",
+      "hyp": "Pode usar a hipotenusa inteira como raio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:raio-circunscrita-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-014",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo de catetos 6 e 8, qual é o raio da circunferência circunscrita?",
+      "o": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "a": 1,
+      "sol": "Hipotenusa=10 pelo Teorema de Pitágoras; raio=10/2=5.",
+      "hyp": "Pode esquecer de calcular primeiro a hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:raio-circunscrita-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-015",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para construir o circuncentro, basta traçar...",
+      "o": [
+        "uma única mediana.",
+        "uma única bissetriz.",
+        "duas mediatrizes de lados; a terceira passa pelo mesmo ponto.",
+        "duas alturas."
+      ],
+      "a": 2,
+      "sol": "Duas mediatrizes não paralelas determinam o ponto comum; a terceira também passa nele.",
+      "hyp": "Pode achar que é necessário traçar sempre as três para definir o ponto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:construcao-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-016",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Para construir o incentro, basta traçar...",
+      "o": [
+        "duas mediatrizes.",
+        "uma mediana e uma altura.",
+        "duas paralelas.",
+        "duas bissetrizes internas; a terceira passa pelo mesmo ponto."
+      ],
+      "a": 3,
+      "sol": "As bissetrizes internas são concorrentes.",
+      "hyp": "Pode confundir construção de centros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:construcao-incentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-017",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se P está na mediatriz de AB e na mediatriz de AC, então...",
+      "o": [
+        "PA=PB=PC.",
+        "P está necessariamente num lado.",
+        "P é incentro.",
+        "AB=AC obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Da primeira mediatriz PA=PB; da segunda PA=PC; logo os três são iguais.",
+      "hyp": "Pode não combinar duas relações de equidistância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:duas-mediatrizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-018",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se P pertence à bissetriz de A e à bissetriz de B de um triângulo, então...",
+      "o": [
+        "P está à mesma distância dos três vértices.",
+        "as distâncias de P aos três lados são iguais.",
+        "P é ponto médio de AB.",
+        "P está fora do triângulo."
+      ],
+      "a": 1,
+      "sol": "Da bissetriz de A, distâncias a AB e AC são iguais; da de B, distâncias a BA e BC são iguais.",
+      "hyp": "Pode confundir distância a lados com distância a vértices.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:duas-bissetrizes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-019",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Num triângulo equilátero, circuncentro e incentro...",
+      "o": [
+        "são sempre distintos.",
+        "ficam nos vértices.",
+        "coincidem.",
+        "não existem."
+      ],
+      "a": 2,
+      "sol": "Pela simetria, todos os centros notáveis coincidem.",
+      "hyp": "Pode achar que centros definidos de forma diferente nunca coincidem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:equilatero-centros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-020",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo isósceles, circuncentro e incentro pertencem ambos...",
+      "o": [
+        "à base obrigatoriamente.",
+        "ao lado esquerdo.",
+        "fora do triângulo.",
+        "ao eixo de simetria do triângulo."
+      ],
+      "a": 3,
+      "sol": "O eixo de simetria contém as principais retas notáveis relativas à base.",
+      "hyp": "Pode não usar simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:isosceles-eixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-021",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, por que o ponto médio da hipotenusa é circuncentro?",
+      "o": [
+        "Porque é equidistante dos três vértices.",
+        "Porque é equidistante dos três lados.",
+        "Porque é interseção das medianas apenas.",
+        "Porque a hipotenusa é uma bissetriz."
+      ],
+      "a": 0,
+      "sol": "Num triângulo retângulo, a circunferência com diâmetro igual à hipotenusa passa pelos três vértices.",
+      "hyp": "Pode justificar com propriedade errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-retangulo-justificacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-022",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Um triângulo retângulo tem hipotenusa 26. Qual é o diâmetro da circunferência circunscrita?",
+      "o": [
+        "13",
+        "26",
+        "52",
+        "não é possível saber"
+      ],
+      "a": 1,
+      "sol": "A hipotenusa é o diâmetro da circunferência circunscrita.",
+      "hyp": "Pode confundir raio e diâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:diametro-circunscrita-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-023",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se O é circuncentro e o raio da circunferência circunscrita é 9, então o diâmetro é...",
+      "o": [
+        "9",
+        "27",
+        "18",
+        "81"
+      ],
+      "a": 2,
+      "sol": "d=2r=18.",
+      "hyp": "Pode confundir com quadrado do raio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:diametro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-024",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O raio da circunferência inscrita é igual...",
+      "o": [
+        "à distância do incentro a qualquer vértice.",
+        "ao maior lado do triângulo.",
+        "à mediana maior.",
+        "à distância perpendicular do incentro a qualquer lado."
+      ],
+      "a": 3,
+      "sol": "A circunferência inscrita é tangente aos três lados, e o raio é perpendicular ao lado no ponto de tangência.",
+      "hyp": "Pode usar distância a vértices em vez de lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:raio-inscrita",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-025",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se uma circunferência de centro I é tangente aos três lados de um triângulo, então I é...",
+      "o": [
+        "o incentro.",
+        "o circuncentro.",
+        "o baricentro.",
+        "o ortocentro."
+      ],
+      "a": 0,
+      "sol": "Ser tangente aos três lados significa que I está à mesma distância dos três lados, caracterizando o incentro.",
+      "hyp": "Pode não reconhecer a recíproca.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:incentro-reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-026",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se uma circunferência de centro O passa pelos três vértices de um triângulo, então O é...",
+      "o": [
+        "o incentro.",
+        "o circuncentro.",
+        "o baricentro.",
+        "o ortocentro."
+      ],
+      "a": 1,
+      "sol": "O está à mesma distância dos três vértices, logo pertence às mediatrizes.",
+      "hyp": "Pode não reconhecer a recíproca.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-reciproco",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-027",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Três aldeias A, B e C não colineares querem instalar um posto à mesma distância das três. Onde deve ficar?",
+      "o": [
+        "No incentro de ABC.",
+        "No baricentro.",
+        "No circuncentro de ABC.",
+        "Num vértice."
+      ],
+      "a": 2,
+      "sol": "O circuncentro é equidistante dos três vértices.",
+      "hyp": "Pode escolher incentro por associar a 'centro'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:modelacao-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-028",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Três estradas formam um triângulo e pretende-se colocar um ponto interior à mesma distância das três estradas. Onde deve ficar?",
+      "o": [
+        "No circuncentro.",
+        "No ortocentro.",
+        "No ponto médio de um lado.",
+        "No incentro."
+      ],
+      "a": 3,
+      "sol": "O incentro é equidistante dos três lados.",
+      "hyp": "Pode usar equidistância a vértices em vez de lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:modelacao-incentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-029",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo equilátero de lado 6√3, o raio da circunferência circunscrita é 4? Sabendo que R=a/√3, qual é R?",
+      "o": [
+        "6",
+        "2",
+        "3",
+        "6√3"
+      ],
+      "a": 0,
+      "sol": "R=(6√3)/√3=6.",
+      "hyp": "Pode usar uma fórmula incorreta ou simplificar mal radicais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:equilatero-raio-circunscrito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-030",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo equilátero de lado 6√3, sabendo que o raio inscrito é r=a/(2√3), qual é r?",
+      "o": [
+        "1",
+        "3",
+        "2",
+        "6"
+      ],
+      "a": 1,
+      "sol": "r=(6√3)/(2√3)=3.",
+      "hyp": "Pode confundir R com r.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:equilatero-raio-inscrito",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-031",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo equilátero, como se relacionam R e r?",
+      "o": [
+        "R=r.",
+        "R=3r.",
+        "R=2r.",
+        "r=2R."
+      ],
+      "a": 2,
+      "sol": "Para equilátero, R=a/√3 e r=a/(2√3), logo R=2r.",
+      "hyp": "Pode confundir os dois raios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:equilatero-relacao-raios",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-032",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se num triângulo equilátero o raio inscrito é 4, o raio circunscrito é...",
+      "o": [
+        "2",
+        "4",
+        "16",
+        "8"
+      ],
+      "a": 3,
+      "sol": "R=2r=8.",
+      "hyp": "Pode inverter a relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:equilatero-relacao-raios",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-033",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo de catetos 5 e 12, qual é a distância do circuncentro a cada vértice?",
+      "o": [
+        "6,5",
+        "5",
+        "6",
+        "13"
+      ],
+      "a": 0,
+      "sol": "Hipotenusa=13, logo R=13/2=6,5.",
+      "hyp": "Pode usar um cateto ou a hipotenusa inteira.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:raio-circunscrita-retangulo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-034",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num triângulo obtusângulo, embora o circuncentro fique fora, a circunferência circunscrita...",
+      "o": [
+        "deixa de existir.",
+        "continua a passar pelos três vértices.",
+        "passa apenas por dois vértices.",
+        "tem centro no incentro."
+      ],
+      "a": 1,
+      "sol": "A posição exterior do centro não impede a circunferência de passar pelos três vértices.",
+      "hyp": "Pode pensar que centro exterior invalida a circunferência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-obtuso",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-035",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O incentro pode ficar fora do triângulo se este for obtusângulo?",
+      "o": [
+        "Sim, sempre.",
+        "Só se for isósceles.",
+        "Não.",
+        "Só se o maior ângulo exceder 120°."
+      ],
+      "a": 2,
+      "sol": "As bissetrizes internas intersectam-se sempre no interior.",
+      "hyp": "Pode transferir comportamento do circuncentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:incentro-sempre-interior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-036",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se O pertence às mediatrizes de AB e BC, qual igualdade é garantida?",
+      "o": [
+        "AB=BC.",
+        "OA=AB.",
+        "OB=BC.",
+        "OA=OB=OC."
+      ],
+      "a": 3,
+      "sol": "O na mediatriz de AB dá OA=OB; na de BC dá OB=OC.",
+      "hyp": "Pode confundir segmentos do centro com lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-equidistancia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-037",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo ABC, I é incentro. Se a distância de I a AB é 3 e a distância de I a AC é x+1, qual é x?",
+      "o": [
+        "2",
+        "1",
+        "3",
+        "4"
+      ],
+      "a": 0,
+      "sol": "As distâncias aos lados são iguais: x+1=3, então x=2.",
+      "hyp": "Pode não usar equidistância do incentro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:incentro-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-038",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O é circuncentro e OA=2x+1, OB=5x−8. Qual é x?",
+      "o": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "sol": "2x+1=5x−8 => 9=3x => x=3.",
+      "hyp": "Pode não igualar os raios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:circuncentro-equacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-039",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo, o circuncentro está à distância 7,5 dos vértices. Quanto mede a hipotenusa?",
+      "o": [
+        "7,5",
+        "10",
+        "15",
+        "30"
+      ],
+      "a": 2,
+      "sol": "A hipotenusa é o diâmetro: 2×7,5=15.",
+      "hyp": "Pode usar o raio como hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:retangulo-inverter-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-040",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual afirmação distingue corretamente circuncentro e incentro?",
+      "o": [
+        "Ambos são equidistantes dos vértices.",
+        "Ambos são interseções das medianas.",
+        "Circuncentro é sempre interior e incentro pode ser exterior.",
+        "Circuncentro: equidistante dos vértices; incentro: equidistante dos lados."
+      ],
+      "a": 3,
+      "sol": "Essa é a diferença geométrica fundamental entre os dois centros.",
+      "hyp": "Pode trocar as propriedades dos centros.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:comparar-centros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-041",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo ABC, P é interior e as distâncias perpendiculares de P a AB e AC são iguais. O que se conclui?",
+      "o": [
+        "P pertence à bissetriz interna de A.",
+        "P é necessariamente incentro.",
+        "P pertence à mediatriz de BC.",
+        "P é circuncentro."
+      ],
+      "a": 0,
+      "sol": "Equidistância a dois lados de um ângulo caracteriza a bissetriz; para ser incentro seria preciso também a relação com o terceiro lado.",
+      "hyp": "Pode concluir demasiado a partir de duas distâncias.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:bissetriz-nao-basta-incentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-042",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "P é equidistante de A e B, mas não se sabe a distância a C. Pode concluir-se que P é circuncentro de ABC?",
+      "o": [
+        "Sim.",
+        "Não; apenas se conclui que P pertence à mediatriz de AB.",
+        "Sim, se P estiver dentro do triângulo.",
+        "Só se AB for o maior lado."
+      ],
+      "a": 1,
+      "sol": "É necessário ser equidistante dos três vértices, não apenas de dois.",
+      "hyp": "Pode concluir circuncentro com informação insuficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:mediatriz-nao-basta-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-043",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Quer-se desenhar a maior circunferência interior tangente aos três lados de um triângulo. O seu centro é...",
+      "o": [
+        "o circuncentro.",
+        "o baricentro.",
+        "o incentro.",
+        "o ponto médio do maior lado."
+      ],
+      "a": 2,
+      "sol": "A circunferência inscrita é tangente aos três lados e tem centro no incentro.",
+      "hyp": "Pode confundir inscrita e circunscrita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:modelacao-incircle",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-044",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Quer-se desenhar a circunferência que passa exatamente pelos três vértices de um triângulo. Para encontrar o centro, deve-se...",
+      "o": [
+        "intersetar duas bissetrizes.",
+        "intersetar duas medianas.",
+        "escolher o maior vértice.",
+        "intersetar duas mediatrizes."
+      ],
+      "a": 3,
+      "sol": "O centro é o circuncentro, interseção das mediatrizes.",
+      "hyp": "Pode escolher retas notáveis erradas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:modelacao-circumcircle",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-045",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo retângulo isósceles com catetos 8, qual é o raio da circunferência circunscrita?",
+      "o": [
+        "4√2",
+        "2√2",
+        "4",
+        "8"
+      ],
+      "a": 0,
+      "sol": "Hipotenusa=8√2; raio=4√2.",
+      "hyp": "Pode usar metade do cateto em vez de metade da hipotenusa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:retangulo-isosceles-raio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-046",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Num triângulo equilátero com raio circunscrito R=10, qual é o raio inscrito?",
+      "o": [
+        "2,5",
+        "5",
+        "10",
+        "20"
+      ],
+      "a": 1,
+      "sol": "No equilátero, R=2r, logo r=5.",
+      "hyp": "Pode inverter a relação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:equilatero-relacao-raios",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-047",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se um triângulo tem circuncentro exatamente sobre um lado, que tipo de triângulo pode ser?",
+      "o": [
+        "Obtusângulo obrigatoriamente.",
+        "Equilátero.",
+        "Retângulo, sendo esse lado a hipotenusa.",
+        "Escaleno acutângulo."
+      ],
+      "a": 2,
+      "sol": "No triângulo retângulo, o circuncentro é o ponto médio da hipotenusa, portanto está sobre esse lado.",
+      "hyp": "Pode confundir com localização exterior em obtusângulo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:classificar-pelo-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-048",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o circuncentro está fora do triângulo, então o triângulo é...",
+      "o": [
+        "retângulo.",
+        "equilátero.",
+        "necessariamente isósceles.",
+        "obtusângulo."
+      ],
+      "a": 3,
+      "sol": "Circuncentro exterior caracteriza triângulo obtusângulo.",
+      "hyp": "Pode não usar a localização do centro como critério.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:classificar-pelo-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-049",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o circuncentro está no interior do triângulo, então o triângulo é...",
+      "o": [
+        "acutângulo.",
+        "retângulo.",
+        "obtusângulo.",
+        "degenerado."
+      ],
+      "a": 0,
+      "sol": "Circuncentro interior caracteriza triângulo acutângulo.",
+      "hyp": "Pode confundir com incentro, que é sempre interior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:classificar-pelo-circuncentro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10GS-CI-050",
+      "themeId": "10-gs",
+      "subtopicId": "10-gs-circuncentro-incentro",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma rede quer um ponto igualmente distante de três antenas não colineares A,B,C. Se o terreno permitir qualquer posição, que construção resolve exatamente o problema?",
+      "o": [
+        "Traçar duas bissetrizes dos ângulos internos.",
+        "Traçar duas mediatrizes e usar a sua interseção.",
+        "Usar o ponto médio de AB.",
+        "Usar a mediana maior."
+      ],
+      "a": 1,
+      "sol": "A interseção das mediatrizes é o circuncentro, único ponto equidistante de A,B,C.",
+      "hyp": "Pode confundir distância a pontos com distância a lados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-gs-circuncentro-incentro:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

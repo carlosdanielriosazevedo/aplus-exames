@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-ie",
+  "subtopicId": "12-ie-estimacao",
+  "subtopic": "Estimação de parâmetros",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha estimadores/estimativas, média e proporção amostrais, viés, consistência, eficiência, erro padrão, MSE, robustez e planeamento introdutório. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12IE-EST-001",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Estimar um parâmetro significa...",
+      "o": [
+        "usar dados amostrais para aproximar uma característica populacional desconhecida.",
+        "calcular um valor sem incerteza.",
+        "observar toda a população sempre.",
+        "substituir a amostra pelo parâmetro."
+      ],
+      "a": 0,
+      "sol": "A estimação usa estatísticas para aprender sobre parâmetros desconhecidos.",
+      "hyp": "Pode confundir estimativa com valor exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:definicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-002",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um estimador é...",
+      "o": [
+        "o valor verdadeiro do parâmetro.",
+        "uma regra/estatística usada para estimar um parâmetro.",
+        "sempre a média populacional.",
+        "uma amostra inteira."
+      ],
+      "a": 1,
+      "sol": "O estimador é aleatório antes da amostra ser observada.",
+      "hyp": "Pode confundir estimador e estimativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:estimador",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-003",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma estimativa é...",
+      "o": [
+        "a regra geral antes de observar dados.",
+        "a população.",
+        "o valor concreto assumido pelo estimador numa amostra observada.",
+        "o erro padrão."
+      ],
+      "a": 2,
+      "sol": "Depois de recolher a amostra, o estimador produz uma estimativa.",
+      "hyp": "Pode trocar estimador e estimativa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:estimativa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-004",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A média amostral X̄ é um estimador natural de...",
+      "o": [
+        "σ apenas.",
+        "n.",
+        "p̂.",
+        "μ."
+      ],
+      "a": 3,
+      "sol": "A média da amostra estima a média populacional.",
+      "hyp": "Pode confundir parâmetro e estatística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-005",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A proporção amostral p̂ estima...",
+      "o": [
+        "a proporção populacional p.",
+        "a média μ.",
+        "o tamanho n.",
+        "a variância σ² sempre."
+      ],
+      "a": 0,
+      "sol": "p̂ é a fração de sucessos observados.",
+      "hyp": "Pode usar p̂ como parâmetro já conhecido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:proporcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-006",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Numa amostra de100 pessoas, 64 respondem 'sim'. A estimativa pontual de p é...",
+      "o": [
+        "64.",
+        "0,64.",
+        "0,36.",
+        "1,64."
+      ],
+      "a": 1,
+      "sol": "p̂=64/100=0,64.",
+      "hyp": "Pode usar a contagem sem dividir por n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:proporcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-007",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma amostra tem valores 4,6,8. A estimativa de μ pela média é...",
+      "o": [
+        "18.",
+        "3.",
+        "6.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "(4+6+8)/3=6.",
+      "hyp": "Pode usar a soma.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-008",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma estimativa pontual fornece...",
+      "o": [
+        "um intervalo de valores.",
+        "certeza absoluta.",
+        "uma distribuição completa da população.",
+        "um único valor como aproximação do parâmetro."
+      ],
+      "a": 3,
+      "sol": "É um ponto no espaço de parâmetros.",
+      "hyp": "Pode confundir com intervalo de confiança.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:pontual",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-009",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Duas amostras diferentes podem dar estimativas pontuais diferentes porque...",
+      "o": [
+        "há variabilidade amostral.",
+        "o parâmetro muda de amostra para amostra.",
+        "uma delas é inválida necessariamente.",
+        "o estimador é constante."
+      ],
+      "a": 0,
+      "sol": "O parâmetro é fixo, mas a estatística varia.",
+      "hyp": "Pode atribuir a variação ao parâmetro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:variabilidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-010",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um estimador não enviesado tem...",
+      "o": [
+        "erro padrão zero.",
+        "valor esperado igual ao parâmetro.",
+        "estimativa igual ao parâmetro em toda amostra.",
+        "variância infinita."
+      ],
+      "a": 1,
+      "sol": "Não enviesamento é uma propriedade média sob repetição.",
+      "hyp": "Pode interpretar como acerto em cada amostra.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:nao-vies",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-011",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Um estimador consistente tende a...",
+      "o": [
+        "ficar mais variável com n.",
+        "ter viés crescente obrigatoriamente.",
+        "aproximar o parâmetro à medida que n aumenta.",
+        "ignorar os dados."
+      ],
+      "a": 2,
+      "sol": "Consistência significa concentração perto do parâmetro com amostras grandes.",
+      "hyp": "Pode confundir consistência com constância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:consistencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-012",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Entre dois estimadores não enviesados, preferimos em geral o de...",
+      "o": [
+        "maior variância.",
+        "maior valor esperado.",
+        "maior n implícito.",
+        "menor variância."
+      ],
+      "a": 3,
+      "sol": "Menor variabilidade significa maior eficiência/precisão.",
+      "hyp": "Pode confundir variância e viés.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:eficiencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-013",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Erro de estimação de uma estimativa θ̂ relativamente ao parâmetro θ é...",
+      "o": [
+        "θ̂−θ.",
+        "θ̂+θ.",
+        "θ̂/θ sempre.",
+        "o erro padrão."
+      ],
+      "a": 0,
+      "sol": "É a diferença entre estimativa e valor verdadeiro, embora θ seja normalmente desconhecido.",
+      "hyp": "Pode confundir erro realizado e erro padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:erro",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-014",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Na prática, o erro θ̂−θ geralmente...",
+      "o": [
+        "é sempre zero.",
+        "não é conhecido porque θ é desconhecido.",
+        "é igual ao erro padrão.",
+        "é sempre positivo."
+      ],
+      "a": 1,
+      "sol": "É precisamente por θ ser desconhecido que estimamos.",
+      "hyp": "Pode tratar erro padrão como erro realizado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:erro-desconhecido",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-015",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "O erro padrão ajuda a quantificar...",
+      "o": [
+        "o parâmetro exato.",
+        "o viés de seleção automaticamente.",
+        "a incerteza típica do estimador.",
+        "o erro de medição individual."
+      ],
+      "a": 2,
+      "sol": "É o desvio padrão da distribuição de amostragem.",
+      "hyp": "Pode confundir diferentes fontes de erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:erro-padrao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-016",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄ estima μ com erro padrão 2, uma amostra maior tende a produzir erro padrão...",
+      "o": [
+        "maior sempre.",
+        "igual sempre.",
+        "negativo.",
+        "menor que2, mantendo σ comparável."
+      ],
+      "a": 3,
+      "sol": "EP≈σ/√n.",
+      "hyp": "Pode pensar que mais dados aumentam erro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-017",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se s=10 e n=25, o erro padrão estimado da média é...",
+      "o": [
+        "2.",
+        "0,4.",
+        "5.",
+        "10."
+      ],
+      "a": 0,
+      "sol": "10/√25=2.",
+      "hyp": "Pode dividir por25.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:ep-media",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-018",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Se p̂=0,4 e n=100, o erro padrão estimado de p̂ é aproximadamente...",
+      "o": [
+        "0,4/100.",
+        "√(0,4·0,6/100).",
+        "0,24.",
+        "√0,4/100."
+      ],
+      "a": 1,
+      "sol": "Substitui-se p por p̂ na fórmula de erro padrão.",
+      "hyp": "Pode esquecer o fator1−p̂.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:ep-proporcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-019",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se p̂=0,4 e n=100, o erro padrão estimado √(0,4·0,6/100) é aproximadamente...",
+      "o": [
+        "0,24.",
+        "0,0049.",
+        "0,049.",
+        "0,4."
+      ],
+      "a": 2,
+      "sol": "√0,0024≈0,049.",
+      "hyp": "Pode confundir variância e desvio padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:ep-proporcao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-020",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma estimativa pontual sem medida de incerteza é...",
+      "o": [
+        "sempre suficiente.",
+        "mais rigorosa que um intervalo.",
+        "equivalente a um censo.",
+        "incompleta para muitas decisões inferenciais."
+      ],
+      "a": 3,
+      "sol": "O valor central não mostra quanta variabilidade amostral existe.",
+      "hyp": "Pode ignorar incerteza.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:incerteza",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-021",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "O erro quadrático médio (EQM/MSE) combina...",
+      "o": [
+        "variância e viés ao quadrado.",
+        "apenas média e mediana.",
+        "erro padrão e n por soma.",
+        "apenas viés."
+      ],
+      "a": 0,
+      "sol": "MSE=Var(θ̂)+Bias(θ̂)².",
+      "hyp": "Pode pensar que avalia só dispersão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:mse",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-022",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Um pequeno viés pode ser aceitável se permitir...",
+      "o": [
+        "variância infinita.",
+        "grande redução de variância e menor erro global.",
+        "ignorar o parâmetro.",
+        "eliminar os dados."
+      ],
+      "a": 1,
+      "sol": "Há trade-offs entre viés e variância em alguns estimadores.",
+      "hyp": "Pode tratar não enviesamento como único critério.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:bias-variance",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-023",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se um estimador tem viés2 e variância9, o MSE é...",
+      "o": [
+        "11.",
+        "9.",
+        "13.",
+        "4."
+      ],
+      "a": 2,
+      "sol": "9+2²=13.",
+      "hyp": "Pode somar viés sem quadrar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:mse",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-024",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se outro estimador tem viés0 e variância16, comparando MSE...",
+      "o": [
+        "ambos têm16.",
+        "o primeiro tem11.",
+        "não é possível comparar.",
+        "o primeiro tem MSE13 e o segundo16."
+      ],
+      "a": 3,
+      "sol": "MSE1=13, MSE2=16.",
+      "hyp": "Pode preferir automaticamente o não enviesado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:mse-comparar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-025",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma estimativa robusta é uma que...",
+      "o": [
+        "não é excessivamente afetada por pequenas contaminações/outliers.",
+        "é sempre a média.",
+        "tem erro padrão zero.",
+        "ignora metade dos dados obrigatoriamente."
+      ],
+      "a": 0,
+      "sol": "Robustez descreve resistência a observações extremas ou desvios do modelo.",
+      "hyp": "Pode confundir robustez com precisão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:robustez",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-026",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para centro de dados com outliers fortes, a mediana pode ser mais...",
+      "o": [
+        "enviesada sempre.",
+        "robusta que a média.",
+        "variável zero.",
+        "adequada apenas em Normais."
+      ],
+      "a": 1,
+      "sol": "A mediana é menos sensível a extremos.",
+      "hyp": "Pode achar que média é sempre melhor estimador de centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:mediana",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-027",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Um estimador pode ser função de...",
+      "o": [
+        "do parâmetro desconhecido apenas.",
+        "apenas n.",
+        "todos os dados da amostra.",
+        "nenhuma observação."
+      ],
+      "a": 2,
+      "sol": "Estatísticas são funções dos dados observados.",
+      "hyp": "Pode esquecer a dependência amostral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:funcao-dados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-028",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A média aparada procura...",
+      "o": [
+        "aumentar influência dos outliers.",
+        "estimar apenas n.",
+        "garantir Normalidade.",
+        "reduzir influência de extremos removendo uma fração de caudas."
+      ],
+      "a": 3,
+      "sol": "É uma estratégia robusta intermédia entre média e mediana.",
+      "hyp": "Pode pensar que 'aparar' significa arredondar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:media-aparada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-029",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma amostra de n=400 dá p̂=0,55. O número observado de sucessos é...",
+      "o": [
+        "220.",
+        "55.",
+        "400.",
+        "180."
+      ],
+      "a": 0,
+      "sol": "0,55×400=220.",
+      "hyp": "Pode confundir proporção com percentagem de100.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:sucessos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-030",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se 45 sucessos são observados em n=150, p̂=",
+      "o": [
+        "0,45.",
+        "0,30.",
+        "3,33.",
+        "0,15."
+      ],
+      "a": 1,
+      "sol": "45/150=0,30.",
+      "hyp": "Pode dividir ao contrário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:phat",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-031",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A média amostral é sensível a...",
+      "o": [
+        "apenas ao tamanho n.",
+        "só à mediana.",
+        "valores extremos.",
+        "nunca a outliers."
+      ],
+      "a": 2,
+      "sol": "Outliers podem deslocar bastante a média.",
+      "hyp": "Pode achar que média é robusta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:media-outliers",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-032",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A proporção amostral é uma média de...",
+      "o": [
+        "valores contínuos arbitrários.",
+        "desvios padrão.",
+        "tamanhos populacionais.",
+        "variáveis indicadoras 0/1."
+      ],
+      "a": 3,
+      "sol": "p̂=(1/n)ΣI_i.",
+      "hyp": "Pode não ver a ligação entre proporção e média.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:indicadoras",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-033",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Por isso, para p̂, a variância teórica é...",
+      "o": [
+        "p(1−p)/n.",
+        "p/n.",
+        "p²/n.",
+        "n p(1−p)."
+      ],
+      "a": 0,
+      "sol": "É a variância da média de Bernoullis.",
+      "hyp": "Pode esquecer o fator1−p.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:var-phat",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-034",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "O erro padrão máximo de p̂ para n fixo ocorre perto de...",
+      "o": [
+        "p=0.",
+        "p=0,5.",
+        "p=1.",
+        "p=0,1 sempre."
+      ],
+      "a": 1,
+      "sol": "p(1−p) é máximo em0,5.",
+      "hyp": "Pode pensar que eventos raros têm maior variância absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:phat-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-035",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para n=400, o erro padrão máximo aproximado de p̂ é...",
+      "o": [
+        "0,05.",
+        "0,0025.",
+        "0,025.",
+        "0,5."
+      ],
+      "a": 2,
+      "sol": "√(0,25/400)=0,5/20=0,025.",
+      "hyp": "Pode não tirar raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:phat-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-036",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Esta propriedade permite planear tamanho amostral de forma conservadora usando...",
+      "o": [
+        "p=0.",
+        "p=1.",
+        "p̂=1/n.",
+        "p=0,5 quando p é desconhecido."
+      ],
+      "a": 3,
+      "sol": "p=0,5 maximiza a incerteza binomial.",
+      "hyp": "Pode escolher extremos, que dão variância zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-037",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se queremos erro padrão máximo de p̂≤0,02 e usamos p=0,5, precisamos de n tal que...",
+      "o": [
+        "0,5/√n≤0,02.",
+        "0,25/n≤0,02 sem raiz.",
+        "n≤25.",
+        "√n≤25."
+      ],
+      "a": 0,
+      "sol": "EP máximo=0,5/√n.",
+      "hyp": "Pode usar variância como erro padrão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-038",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se queremos erro padrão máximo de p̂≤0,02 e usamos o caso conservador p=0,5, então 0,5/√n≤0,02. Qual é aproximadamente o menor n inteiro necessário?",
+      "o": [
+        "25.",
+        "625.",
+        "250.",
+        "1250."
+      ],
+      "a": 1,
+      "sol": "√n≥25 =>n≥625.",
+      "hyp": "Pode esquecer elevar ao quadrado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:planeamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-039",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Dobrar a precisão no sentido de reduzir o erro padrão para metade exige aproximadamente...",
+      "o": [
+        "duplicar n.",
+        "reduzir n para metade.",
+        "quadruplicar n.",
+        "aumentar n em50%."
+      ],
+      "a": 2,
+      "sol": "Erro padrão varia com1/√n.",
+      "hyp": "Pode usar relação linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:precisao-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-040",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se um estimador é consistente mas enviesado em amostras pequenas, o viés pode...",
+      "o": [
+        "crescer obrigatoriamente.",
+        "ser sempre constante.",
+        "impedir consistência por definição.",
+        "tender a desaparecer à medida que n cresce."
+      ],
+      "a": 3,
+      "sol": "Consistência é propriedade assintótica; pequeno viés finito pode desaparecer.",
+      "hyp": "Pode achar que qualquer viés exclui consistência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:consistencia-vies",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-041",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um estimador θ̂ tem E(θ̂)=θ+1/n. É...",
+      "o": [
+        "enviesado para n finito, mas o viés tende a0.",
+        "não enviesado.",
+        "inconsistente obrigatoriamente.",
+        "de viés1."
+      ],
+      "a": 0,
+      "sol": "Bias=1/n.",
+      "hyp": "Pode ignorar dependência em n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:vies-n",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-042",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A estimativa de σ por s usa...",
+      "o": [
+        "a média apenas.",
+        "a dispersão amostral para aproximar a populacional.",
+        "p̂.",
+        "o tamanho N da população."
+      ],
+      "a": 1,
+      "sol": "O desvio padrão amostral estima σ.",
+      "hyp": "Pode confundir estimadores de centro e dispersão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:sigma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-043",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Em pequenas amostras, estimar σ acrescenta...",
+      "o": [
+        "certeza adicional.",
+        "viés de seleção automático.",
+        "incerteza adicional face a conhecer σ.",
+        "Normalidade exata."
+      ],
+      "a": 2,
+      "sol": "O próprio erro padrão passa a usar uma quantidade estimada.",
+      "hyp": "Pode tratar s como σ conhecido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:sigma-incerteza",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-044",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se X̄=52, μ desconhecido, s=10 e n=100, uma forma de comunicar a estimativa pontual é...",
+      "o": [
+        "μ=52 exatamente.",
+        "μ̂=10.",
+        "μ̂=100.",
+        "μ̂=52 com erro padrão estimado1."
+      ],
+      "a": 3,
+      "sol": "A estimativa central é52 e s/√n=1 quantifica incerteza típica.",
+      "hyp": "Pode apresentar estimativa como parâmetro exato.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:comunicar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-045",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma estimativa deve ser acompanhada de contexto sobre...",
+      "o": [
+        "população alvo, desenho amostral e incerteza.",
+        "apenas casas decimais.",
+        "apenas software usado.",
+        "apenas n sem descrição."
+      ],
+      "a": 0,
+      "sol": "Inferência depende da origem e qualidade dos dados.",
+      "hyp": "Pode reduzir qualidade a precisão numérica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:contexto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-046",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma fábrica estima a taxa de defeitos por p̂. Se a seleção inspeciona apenas peças de um turno...",
+      "o": [
+        "a fórmula de p̂ corrige automaticamente o viés.",
+        "a estimativa pode não representar toda a produção.",
+        "o erro padrão torna o desenho irrelevante.",
+        "p̂ é sempre não enviesada para toda a fábrica."
+      ],
+      "a": 1,
+      "sol": "O estimador pode ser adequado ao turno mas o alvo populacional é mais amplo.",
+      "hyp": "Pode ignorar validade externa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:fabrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-047",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Mais casas decimais numa estimativa...",
+      "o": [
+        "garantem maior precisão estatística.",
+        "reduzem o erro padrão.",
+        "não significam necessariamente maior informação real.",
+        "eliminam viés."
+      ],
+      "a": 2,
+      "sol": "Precisão aparente de escrita não substitui incerteza amostral.",
+      "hyp": "Pode confundir resolução numérica e precisão estatística.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:casas-decimais",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-048",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o erro padrão é0,1, reportar uma estimativa com 8 casas decimais pode ser...",
+      "o": [
+        "necessário sempre.",
+        "prova de grande n.",
+        "equivalente a erro zero.",
+        "falsa precisão."
+      ],
+      "a": 3,
+      "sol": "A incerteza estatística é muito maior que as últimas casas mostradas.",
+      "hyp": "Pode valorizar dígitos sem significado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:falsa-precisao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-049",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se θ̂ é não enviesado e EP=3, então aproximadamente a sua distribuição é centrada...",
+      "o": [
+        "em θ, com dispersão típica3.",
+        "em θ+3.",
+        "em0.",
+        "em3."
+      ],
+      "a": 0,
+      "sol": "Não enviesamento fixa o centro; EP descreve a dispersão.",
+      "hyp": "Pode somar o erro padrão ao centro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:centro-dispersao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12IE-EST-050",
+      "themeId": "12-ie",
+      "subtopicId": "12-ie-estimacao",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Uma boa estimação combina...",
+      "o": [
+        "apenas um valor pontual.",
+        "um estimador adequado, desenho amostral credível e quantificação da incerteza.",
+        "apenas n grande.",
+        "apenas ausência de outliers."
+      ],
+      "a": 1,
+      "sol": "A qualidade depende do procedimento completo.",
+      "hyp": "Pode reduzir estimação a um cálculo isolado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-ie-estimacao:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-fcont",
+  "subtopicId": "12-fcont-estudo-global",
+  "subtopic": "Monotonia, extremos e estudo global de funções",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha quadros de variação, extremos locais/absolutos, concavidade, inflexão, assíntotas e síntese de estudos globais de funções. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12FCONT-EG-001",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para estudar a monotonia de f usa-se sobretudo o sinal de...",
+      "o": [
+        "f'.",
+        "f.",
+        "f'' apenas.",
+        "ln f."
+      ],
+      "a": 0,
+      "sol": "O sinal da primeira derivada determina crescimento/decrescimento.",
+      "hyp": "Pode usar o sinal da própria função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-002",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Para estudar concavidade/convexidade usa-se sobretudo o sinal de...",
+      "o": [
+        "f'.",
+        "f''.",
+        "f.",
+        "1/f."
+      ],
+      "a": 1,
+      "sol": "A segunda derivada indica a curvatura.",
+      "hyp": "Pode confundir com monotonia.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:concavidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-003",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um máximo absoluto de f num domínio é um ponto onde...",
+      "o": [
+        "f'=0 obrigatoriamente.",
+        "f=0.",
+        "f atinge o maior valor do domínio considerado.",
+        "f''=0."
+      ],
+      "a": 2,
+      "sol": "É uma definição global, podendo ocorrer numa fronteira.",
+      "hyp": "Pode reduzir máximos absolutos a pontos críticos interiores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:maximo-absoluto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-004",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Um mínimo absoluto corresponde...",
+      "o": [
+        "a qualquer raiz.",
+        "a qualquer ponto onde f'=0.",
+        "ao menor x do domínio.",
+        "ao menor valor de f no domínio."
+      ],
+      "a": 3,
+      "sol": "Compara valores da função, não abcissas.",
+      "hyp": "Pode confundir menor valor com menor argumento.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:minimo-absoluto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-005",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Interpretação",
+      "q": "Uma função contínua em [a,b]...",
+      "o": [
+        "atinge máximo e mínimo absolutos.",
+        "é sempre monótona.",
+        "tem sempre exatamente um extremo.",
+        "não pode ter zeros."
+      ],
+      "a": 0,
+      "sol": "É o Teorema de Weierstrass.",
+      "hyp": "Pode atribuir propriedades extra à continuidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:weierstrass",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-006",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)>0 em ]−∞,1[ e f'(x)<0 em ]1,+∞[, então x=1 é...",
+      "o": [
+        "mínimo local.",
+        "máximo local.",
+        "ponto de inflexão.",
+        "nenhum extremo."
+      ],
+      "a": 1,
+      "sol": "A função passa de crescente a decrescente.",
+      "hyp": "Pode inverter a mudança de sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:maximo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-007",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)<0 antes de2 e f'(x)>0 depois de2, então x=2 é...",
+      "o": [
+        "máximo local.",
+        "assíntota.",
+        "mínimo local.",
+        "ponto de inflexão obrigatório."
+      ],
+      "a": 2,
+      "sol": "Passa de decrescente a crescente.",
+      "hyp": "Pode inverter os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:minimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-008",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se f' não muda de sinal ao atravessar um zero de f', então esse ponto...",
+      "o": [
+        "é sempre máximo.",
+        "é sempre mínimo.",
+        "é sempre descontinuidade.",
+        "pode não ser extremo."
+      ],
+      "a": 3,
+      "sol": "Por exemplo x³ em0.",
+      "hyp": "Pode assumir que todo ponto crítico é extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:critico-sem-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-009",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)=(x−1)², então f é...",
+      "o": [
+        "crescente em R e não tem extremo em1.",
+        "decrescente.",
+        "tem máximo em1.",
+        "tem mínimo em1."
+      ],
+      "a": 0,
+      "sol": "f'≥0 e só se anula em1 sem mudar de sinal.",
+      "hyp": "Pode classificar o zero duplo como mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:zero-duplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-010",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f'(x)=−(x+2)², então f é...",
+      "o": [
+        "crescente.",
+        "decrescente em R.",
+        "tem mínimo em−2.",
+        "tem máximo em−2."
+      ],
+      "a": 1,
+      "sol": "f'≤0 e não muda de sinal.",
+      "hyp": "Pode atribuir extremo ao zero da derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:zero-duplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-011",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Um ponto de inflexão é um ponto onde...",
+      "o": [
+        "f'=0 sempre.",
+        "f=0.",
+        "a concavidade muda.",
+        "há um máximo absoluto."
+      ],
+      "a": 2,
+      "sol": "A mudança de concavidade é a característica essencial.",
+      "hyp": "Pode usar f''=0 como definição suficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:inflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-012",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A condição f''(a)=0 é...",
+      "o": [
+        "garantia de inflexão.",
+        "garantia de máximo.",
+        "garantia de mínimo.",
+        "um candidato a inflexão, mas não garante mudança de concavidade."
+      ],
+      "a": 3,
+      "sol": "É necessário verificar mudança do sinal de f'' ou curvatura.",
+      "hyp": "Pode tomar condição necessária em alguns casos como suficiente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:inflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-013",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³, f''(x)=...",
+      "o": [
+        "6x.",
+        "3x².",
+        "6.",
+        "x."
+      ],
+      "a": 0,
+      "sol": "f'=3x² e f''=6x.",
+      "hyp": "Pode parar na primeira derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:segunda-derivada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-014",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para x³, em x=0 ocorre...",
+      "o": [
+        "máximo.",
+        "ponto de inflexão.",
+        "mínimo.",
+        "descontinuidade."
+      ],
+      "a": 1,
+      "sol": "f'' muda de negativo para positivo.",
+      "hyp": "Pode associar f'=0 a extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:x3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-015",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f''(x)>0 em todo R, então f' é...",
+      "o": [
+        "decrescente.",
+        "constante.",
+        "crescente.",
+        "sempre positiva."
+      ],
+      "a": 2,
+      "sol": "A derivada de f' é f'' positiva.",
+      "hyp": "Pode concluir que f é crescente sem saber o sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:fprime-crescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-016",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se f''(x)<0 em todo R, então f' é...",
+      "o": [
+        "crescente.",
+        "sempre negativa.",
+        "nula.",
+        "decrescente."
+      ],
+      "a": 3,
+      "sol": "f'' é a derivada de f'.",
+      "hyp": "Pode confundir sinal de f'' com sinal de f'.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:fprime-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-017",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma função convexa pode ser decrescente?",
+      "o": [
+        "Sim.",
+        "Não.",
+        "Só se for linear.",
+        "Só se tiver f''=0."
+      ],
+      "a": 0,
+      "sol": "Convexidade e monotonia são propriedades diferentes; e^{-x} é convexa e decrescente.",
+      "hyp": "Pode confundir curvatura com sentido de variação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:convexa-decrescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-018",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Uma função côncava pode ser crescente?",
+      "o": [
+        "Não.",
+        "Sim.",
+        "Apenas se constante.",
+        "Só em intervalos negativos."
+      ],
+      "a": 1,
+      "sol": "Por exemplo ln x é crescente e côncava em x>0.",
+      "hyp": "Pode confundir concavidade com decréscimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:concava-crescente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-019",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−6x+8, f'(x)=...",
+      "o": [
+        "x−6.",
+        "2x+8.",
+        "2x−6.",
+        "x²−6."
+      ],
+      "a": 2,
+      "sol": "Deriva-se termo a termo.",
+      "hyp": "quadratica",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-020",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x²−6x+8, a função tem mínimo em...",
+      "o": [
+        "x=6.",
+        "x=−3.",
+        "x=8.",
+        "x=3."
+      ],
+      "a": 3,
+      "sol": "2x−6=0 =>x=3 e f''=2>0.",
+      "hyp": "Pode devolver o coeficiente linear.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quadratica-min",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-021",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x³−3x, f'(x)=",
+      "o": [
+        "3x²−3.",
+        "x²−3.",
+        "3x²−1.",
+        "3x−3."
+      ],
+      "a": 0,
+      "sol": "Derivada de x³ é3x².",
+      "hyp": "Pode esquecer o fator3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:cubica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-022",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Os pontos críticos de x³−3x são...",
+      "o": [
+        "x=0 e x=3.",
+        "x=−1 e x=1.",
+        "x=±√3.",
+        "x=1 apenas."
+      ],
+      "a": 1,
+      "sol": "3(x²−1)=0.",
+      "hyp": "Pode resolver x²=1 com uma só raiz.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:cubica-criticos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-023",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x³−3x, em x=−1 há...",
+      "o": [
+        "mínimo local.",
+        "inflexão.",
+        "máximo local.",
+        "nenhum extremo."
+      ],
+      "a": 2,
+      "sol": "f''=6x<0 em−1.",
+      "hyp": "Pode trocar os extremos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:cubica-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-024",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x³−3x, em x=1 há...",
+      "o": [
+        "máximo local.",
+        "inflexão.",
+        "descontinuidade.",
+        "mínimo local."
+      ],
+      "a": 3,
+      "sol": "f''(1)=6>0.",
+      "hyp": "Pode inverter o teste.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:cubica-min",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-025",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O ponto de inflexão de x³−3x ocorre em...",
+      "o": [
+        "x=0.",
+        "x=1.",
+        "x=−1.",
+        "x=3."
+      ],
+      "a": 0,
+      "sol": "f''=6x muda de sinal em0.",
+      "hyp": "Pode escolher pontos críticos da primeira derivada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:cubica-inflexao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-026",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x⁴−2x², f'(x)=",
+      "o": [
+        "4x³−2x.",
+        "4x(x²−1).",
+        "x³−x.",
+        "2x(x²−1)."
+      ],
+      "a": 1,
+      "sol": "4x³−4x=4x(x²−1).",
+      "hyp": "Pode derivar −2x² como −2x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quartica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-027",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x⁴−2x², quais são os pontos críticos?",
+      "o": [
+        "−√2,0,√2.",
+        "−1,1.",
+        "−1,0,1.",
+        "0 apenas."
+      ],
+      "a": 2,
+      "sol": "4x(x−1)(x+1)=0.",
+      "hyp": "Pode esquecer a raiz x=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quartica-criticos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-028",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x⁴−2x², x=0 é...",
+      "o": [
+        "mínimo local.",
+        "inflexão.",
+        "nenhum extremo.",
+        "máximo local."
+      ],
+      "a": 3,
+      "sol": "f''=12x²−4; f''(0)=−4<0.",
+      "hyp": "Pode achar que quartica com coeficiente líder positivo só tem mínimos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quartica-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-029",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x⁴−2x², nos pontos x=±1 há...",
+      "o": [
+        "mínimos locais.",
+        "máximos locais.",
+        "inflexões.",
+        "raízes obrigatórias."
+      ],
+      "a": 0,
+      "sol": "f''(±1)=8>0.",
+      "hyp": "Pode confundir valor da função com tipo de extremo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quartica-min",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-030",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "O valor mínimo de x⁴−2x² é...",
+      "o": [
+        "0.",
+        "−1.",
+        "1.",
+        "−2."
+      ],
+      "a": 1,
+      "sol": "f(±1)=1−2=−1 e a função tende a+∞.",
+      "hyp": "Pode usar f(0)=0.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quartica-min-valor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-031",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para encontrar extremos absolutos em [a,b], devemos...",
+      "o": [
+        "avaliar apenas f' nos extremos.",
+        "olhar apenas para f''.",
+        "avaliar f nos pontos críticos interiores e nas extremidades.",
+        "resolver f=0."
+      ],
+      "a": 2,
+      "sol": "A comparação de valores identifica o maior e o menor valor.",
+      "hyp": "Pode ignorar as fronteiras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:absolutos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-032",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4x em [0,5], os candidatos a extremos absolutos são...",
+      "o": [
+        "x=2 apenas.",
+        "x=0 e5 apenas.",
+        "x=0,4,5.",
+        "x=0,2,5."
+      ],
+      "a": 3,
+      "sol": "f'=2x−4=0 dá2, além das extremidades0 e5.",
+      "hyp": "Pode considerar apenas pontos críticos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:candidatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-033",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x²−4x em [0,5], sabendo que f(0)=0, f(2)=−4 e f(5)=5, qual é o mínimo absoluto?",
+      "o": [
+        "−4 em x=2.",
+        "0 em x=0.",
+        "5 em x=5.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "Comparam-se os valores candidatos.",
+      "hyp": "min-absoluto",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-034",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "E o máximo absoluto é...",
+      "o": [
+        "0 em x=0.",
+        "5 em x=5.",
+        "−4 em x=2.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "5 é o maior dos valores.",
+      "hyp": "Pode devolver o maior x sem avaliar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:max-absoluto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-035",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma assíntota horizontal y=L está relacionada com...",
+      "o": [
+        "f'(x)=0 num ponto.",
+        "f(x)=0.",
+        "lim_{x→±∞}f(x)=L em pelo menos um dos sentidos.",
+        "lim_{x→a}f(x)=∞."
+      ],
+      "a": 2,
+      "sol": "Assíntotas horizontais descrevem comportamento no infinito.",
+      "hyp": "Pode confundir com assíntota vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:assintota-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-036",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma assíntota vertical x=a está associada tipicamente a...",
+      "o": [
+        "f(x)→a quando x→∞.",
+        "f'(a)=0.",
+        "f(a)=0.",
+        "|f(x)|→∞ quando x→a por pelo menos um lado."
+      ],
+      "a": 3,
+      "sol": "A função cresce sem limite perto de uma abcissa finita.",
+      "hyp": "Pode trocar os papéis de x e y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:assintota-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-037",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=x/(1+x²), f'(x)=",
+      "o": [
+        "(1−x²)/(1+x²)².",
+        "(1+x²)/(1−x²)².",
+        "1/(1+x²).",
+        "(1+3x²)/(1+x²)²."
+      ],
+      "a": 0,
+      "sol": "Quociente:[1+x²−2x²]/(1+x²)².",
+      "hyp": "Pode somar em vez de subtrair no numerador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:racional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-038",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A função x/(1+x²) é crescente em...",
+      "o": [
+        "]−∞,−1[∪]1,+∞[.",
+        "]−1,1[.",
+        "R.",
+        "x>0."
+      ],
+      "a": 1,
+      "sol": "f'>0 quando1−x²>0.",
+      "hyp": "Pode inverter a desigualdade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:racional-monotonia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-039",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Para f(x)=x/(1+x²), há máximo local em...",
+      "o": [
+        "x=−1.",
+        "x=0.",
+        "x=1.",
+        "nenhum."
+      ],
+      "a": 2,
+      "sol": "f' passa de positivo para negativo em1.",
+      "hyp": "Pode trocar o ponto de máximo e mínimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:racional-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-040",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "E mínimo local em...",
+      "o": [
+        "x=1.",
+        "x=0.",
+        "nenhum.",
+        "x=−1."
+      ],
+      "a": 3,
+      "sol": "f' passa de negativo para positivo em−1.",
+      "hyp": "Pode inverter os sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:racional-min",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-041",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=ln x−x, x>0, f'(x)=",
+      "o": [
+        "1/x−1.",
+        "1/x+1.",
+        "ln x−1.",
+        "1−ln x."
+      ],
+      "a": 0,
+      "sol": "Deriva-se ln x e −x.",
+      "hyp": "log",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:undefined",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-042",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A função ln x−x tem máximo em...",
+      "o": [
+        "x=e.",
+        "x=1.",
+        "x=0.",
+        "x=−1."
+      ],
+      "a": 1,
+      "sol": "f'=0 em x=1; f''=−1/x²<0.",
+      "hyp": "Pode resolver 1/x=1 como x=e.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:log-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-043",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "O valor máximo de ln x−x é...",
+      "o": [
+        "0.",
+        "1.",
+        "−1.",
+        "−e."
+      ],
+      "a": 2,
+      "sol": "f(1)=0−1=−1.",
+      "hyp": "Pode achar que máximo tem de ser positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:valor-max",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-044",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para f(x)=e^x−x², f'(x)=",
+      "o": [
+        "e^x−x.",
+        "e^x−2.",
+        "xe^x−2x.",
+        "e^x−2x."
+      ],
+      "a": 3,
+      "sol": "Derivada de x² é2x.",
+      "hyp": "Pode esquecer o fator2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:exp-polinomio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-045",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se o estudo analítico de f' não permite resolver exatamente f'(x)=0, uma abordagem adequada é...",
+      "o": [
+        "localizar numericamente as raízes de f'.",
+        "assumir que não há pontos críticos.",
+        "igualar f a0.",
+        "substituir x=1."
+      ],
+      "a": 0,
+      "sol": "Métodos aproximados podem ser usados para localizar pontos críticos.",
+      "hyp": "Pode abandonar o estudo por falta de solução fechada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:numerico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-046",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num quadro de variação, uma seta ↑ indica...",
+      "o": [
+        "derivada necessariamente crescente.",
+        "função crescente.",
+        "concavidade positiva.",
+        "função positiva."
+      ],
+      "a": 1,
+      "sol": "A seta descreve variação dos valores de f.",
+      "hyp": "Pode confundir crescimento da função com sinal da função.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quadro-variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-047",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num quadro de variação, uma seta ↓ indica...",
+      "o": [
+        "função negativa.",
+        "derivada crescente.",
+        "função decrescente.",
+        "concavidade negativa."
+      ],
+      "a": 2,
+      "sol": "Indica decréscimo de f.",
+      "hyp": "Pode confundir valor negativo e tendência decrescente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:quadro-variacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-048",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num modelo de concentração C(t), um máximo local representa...",
+      "o": [
+        "um instante em que C=0.",
+        "necessariamente o fim do processo.",
+        "uma descontinuidade.",
+        "um instante em que a concentração deixa de aumentar e começa a diminuir."
+      ],
+      "a": 3,
+      "sol": "Traduz a mudança de sinal de C'.",
+      "hyp": "Pode interpretar extremo sem contexto dinâmico.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:modelacao-extremo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-049",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se a velocidade v(t)=s'(t) muda de positiva para negativa, então a posição s(t)...",
+      "o": [
+        "atinge um máximo local.",
+        "atinge um mínimo local.",
+        "fica constante para sempre.",
+        "é descontínua."
+      ],
+      "a": 0,
+      "sol": "O movimento muda de sentido e a posição passa de crescente a decrescente.",
+      "hyp": "Pode confundir velocidade zero com posição zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:movimento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12FCONT-EG-050",
+      "themeId": "12-fcont",
+      "subtopicId": "12-fcont-estudo-global",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Um estudo global coerente de uma função costuma integrar...",
+      "o": [
+        "apenas a derivada.",
+        "domínio, limites/assíntotas, zeros/sinal, monotonia, extremos e concavidade quando relevante.",
+        "apenas os zeros.",
+        "apenas o gráfico obtido por calculadora."
+      ],
+      "a": 1,
+      "sol": "A combinação de informação analítica dá uma descrição global robusta.",
+      "hyp": "Pode reduzir estudo de função a uma única técnica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-fcont-estudo-global:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

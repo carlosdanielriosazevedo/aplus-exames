@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-mat",
+  "subtopicId": "12-mat-transformacoes",
+  "subtopic": "Transformações geométricas com matrizes",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha ação matriz-vetor, escalamentos, reflexões, rotações, cisalhamentos, composição, imagens da base e interpretação geométrica de transformações lineares. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12MAT-TR-001",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma transformação linear do plano representada por uma matriz 2×2 atua num ponto/vetor (x,y)^T através de...",
+      "o": [
+        "A(x,y)^T.",
+        "(x,y)A sem convenção.",
+        "A+(x,y).",
+        "A^T apenas."
+      ],
+      "a": 0,
+      "sol": "Com vetores-coluna, a imagem é obtida pelo produto matriz-vetor.",
+      "hyp": "Pode confundir transformação com soma matricial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:acao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-002",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[2,0],[0,2]] transforma (1,3) em...",
+      "o": [
+        "(3,4).",
+        "(2,6).",
+        "(1,6).",
+        "(2,3)."
+      ],
+      "a": 1,
+      "sol": "Multiplica ambas as coordenadas por2.",
+      "hyp": "Pode escalar apenas uma coordenada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:escala-uniforme",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-003",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A matriz [[k,0],[0,k]] representa...",
+      "o": [
+        "uma rotação de90°.",
+        "uma reflexão no eixo Ox.",
+        "uma dilatação/redução uniforme de fator k.",
+        "uma translação."
+      ],
+      "a": 2,
+      "sol": "Ambas as coordenadas são multiplicadas pelo mesmo fator.",
+      "hyp": "Pode confundir escalamento com translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-004",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "[[−1,0],[0,1]] transforma (x,y) em...",
+      "o": [
+        "(x,−y).",
+        "(−x,−y).",
+        "(y,x).",
+        "(−x,y)."
+      ],
+      "a": 3,
+      "sol": "A coordenada x muda de sinal e y mantém-se.",
+      "hyp": "Pode trocar o eixo refletido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-oy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-005",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "A transformação (x,y)→(−x,y) é uma reflexão relativamente ao...",
+      "o": [
+        "eixo Oy.",
+        "eixo Ox.",
+        "reta y=x.",
+        "origem apenas."
+      ],
+      "a": 0,
+      "sol": "Refletir no eixo vertical troca o sinal de x.",
+      "hyp": "Pode associar o sinal de x ao eixo Ox.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-oy",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-006",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "[[1,0],[0,−1]] transforma (2,−3) em...",
+      "o": [
+        "(−2,−3).",
+        "(2,3).",
+        "(−2,3).",
+        "(3,2)."
+      ],
+      "a": 1,
+      "sol": "Mantém x e muda o sinal de y.",
+      "hyp": "Pode refletir no eixo errado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-ox",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-007",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A matriz [[1,0],[0,−1]] representa reflexão no...",
+      "o": [
+        "eixo Oy.",
+        "reta y=x.",
+        "eixo Ox.",
+        "reta y=−x."
+      ],
+      "a": 2,
+      "sol": "Pontos sobre Ox mantêm-se e y muda de sinal.",
+      "hyp": "Pode trocar Ox/Oy.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-ox",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-008",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[0,1],[1,0]] envia (2,5) para...",
+      "o": [
+        "(−5,2).",
+        "(2,−5).",
+        "(−2,−5).",
+        "(5,2)."
+      ],
+      "a": 3,
+      "sol": "Troca as duas coordenadas.",
+      "hyp": "Pode alterar sinais sem motivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-yx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-009",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A transformação (x,y)→(y,x) é reflexão na reta...",
+      "o": [
+        "y=x.",
+        "y=−x.",
+        "x=0.",
+        "y=0."
+      ],
+      "a": 0,
+      "sol": "Os pontos da reta y=x ficam fixos.",
+      "hyp": "Pode confundir as duas bissetrizes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-yx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-010",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[0,−1],[−1,0]] envia (2,5) para...",
+      "o": [
+        "(5,2).",
+        "(−5,−2).",
+        "(−2,−5).",
+        "(5,−2)."
+      ],
+      "a": 1,
+      "sol": "Primeira coordenada −y, segunda −x.",
+      "hyp": "Pode trocar com reflexão em y=x.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-ynegx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-011",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A transformação (x,y)→(−y,−x) é reflexão na reta...",
+      "o": [
+        "y=x.",
+        "eixo Ox.",
+        "y=−x.",
+        "origem."
+      ],
+      "a": 2,
+      "sol": "Os pontos com y=−x ficam fixos.",
+      "hyp": "Pode confundir com rotação de180°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-ynegx",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-012",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[−1,0],[0,−1]] envia (3,−2) para...",
+      "o": [
+        "(3,2).",
+        "(−2,3).",
+        "(−3,−2).",
+        "(−3,2)."
+      ],
+      "a": 3,
+      "sol": "Muda o sinal das duas coordenadas.",
+      "hyp": "Pode refletir apenas um eixo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao180",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-013",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A matriz −I=[[−1,0],[0,−1]] representa...",
+      "o": [
+        "rotação de180° em torno da origem.",
+        "reflexão no eixo Ox.",
+        "rotação de90°.",
+        "translação pela origem."
+      ],
+      "a": 0,
+      "sol": "Cada vetor é enviado para o seu oposto.",
+      "hyp": "Pode confundir reflexão central com axial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao180",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-014",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[0,−1],[1,0]] envia (1,0) para...",
+      "o": [
+        "(0,−1).",
+        "(0,1).",
+        "(1,0).",
+        "(−1,0)."
+      ],
+      "a": 1,
+      "sol": "Produto resulta (0,1).",
+      "hyp": "Pode escolher o sentido horário.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-015",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A matriz [[0,−1],[1,0]] representa uma rotação de...",
+      "o": [
+        "90° no sentido horário.",
+        "180°.",
+        "90° no sentido anti-horário.",
+        "45°."
+      ],
+      "a": 2,
+      "sol": "O vetor (1,0) passa para (0,1).",
+      "hyp": "Pode inverter o sentido da rotação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-016",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[0,1],[−1,0]] envia (1,0) para...",
+      "o": [
+        "(0,1).",
+        "(−1,0).",
+        "(1,0).",
+        "(0,−1)."
+      ],
+      "a": 3,
+      "sol": "O vetor unitário de x roda para baixo.",
+      "hyp": "Pode usar a matriz da rotação anti-horária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao-neg90",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-017",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "[[0,1],[−1,0]] representa rotação de...",
+      "o": [
+        "90° no sentido horário.",
+        "90° anti-horário.",
+        "180°.",
+        "270° horário."
+      ],
+      "a": 0,
+      "sol": "É uma rotação de −90°; equivalentemente 270° anti-horário.",
+      "hyp": "Pode inverter o sentido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao-horaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-018",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma rotação anti-horária de90° transforma (2,3) em...",
+      "o": [
+        "(3,−2).",
+        "(−3,2).",
+        "(−2,−3).",
+        "(3,2)."
+      ],
+      "a": 1,
+      "sol": "A regra é (x,y)→(−y,x).",
+      "hyp": "Pode trocar sinais ou ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao90-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-019",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma rotação horária de90° transforma (2,3) em...",
+      "o": [
+        "(−3,2).",
+        "(−2,−3).",
+        "(3,−2).",
+        "(2,−3)."
+      ],
+      "a": 2,
+      "sol": "A regra é (x,y)→(y,−x).",
+      "hyp": "Pode usar a rotação no sentido oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao-horaria-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-020",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A matriz de rotação de ângulo θ em torno da origem é...",
+      "o": [
+        "[[cosθ,sinθ],[sinθ,cosθ]].",
+        "[[sinθ,−cosθ],[cosθ,sinθ]].",
+        "[[1,θ],[0,1]].",
+        "[[cosθ,−sinθ],[sinθ,cosθ]]."
+      ],
+      "a": 3,
+      "sol": "É a forma padrão para vetores-coluna e orientação anti-horária.",
+      "hyp": "Pode trocar o sinal do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao-geral",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-021",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para θ=π, a matriz de rotação é...",
+      "o": [
+        "[[-1,0],[0,−1]].",
+        "[[1,0],[0,1]].",
+        "[[0,−1],[1,0]].",
+        "[[0,1],[−1,0]]."
+      ],
+      "a": 0,
+      "sol": "cosπ=−1 e sinπ=0.",
+      "hyp": "Pode confundir π com90°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao-pi",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-022",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Para θ=π/2, a matriz de rotação é...",
+      "o": [
+        "[[0,1],[−1,0]].",
+        "[[0,−1],[1,0]].",
+        "[[−1,0],[0,−1]].",
+        "[[1,0],[0,1]]."
+      ],
+      "a": 1,
+      "sol": "cosπ/2=0 e sinπ/2=1.",
+      "hyp": "Pode inverter o sinal do seno.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacao-pi2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-023",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma rotação em torno da origem preserva...",
+      "o": [
+        "apenas a coordenada x.",
+        "apenas áreas, não comprimentos.",
+        "distâncias e ângulos.",
+        "a orientação de todos os vetores para o eixo Ox."
+      ],
+      "a": 2,
+      "sol": "Rotações são isometrias.",
+      "hyp": "Pode pensar que coordenadas mudarem implica comprimentos mudarem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:isometria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-024",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma reflexão axial preserva...",
+      "o": [
+        "apenas distâncias à origem e não entre pontos.",
+        "sempre as coordenadas.",
+        "a orientação.",
+        "distâncias, mas inverte a orientação."
+      ],
+      "a": 3,
+      "sol": "Reflexões são isometrias, mas trocam orientação.",
+      "hyp": "Pode confundir preservação de distâncias com preservação de orientação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-propriedades",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-025",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[3,0],[0,1]] transforma (2,4) em...",
+      "o": [
+        "(6,4).",
+        "(6,12).",
+        "(2,12).",
+        "(5,4)."
+      ],
+      "a": 0,
+      "sol": "Escala x por3 e mantém y.",
+      "hyp": "Pode aplicar o mesmo fator às duas coordenadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:escala-nao-uniforme",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-026",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "[[3,0],[0,1]] representa...",
+      "o": [
+        "alongamento vertical de fator3.",
+        "alongamento horizontal de fator3.",
+        "rotação de3 radianos.",
+        "translação horizontal de3."
+      ],
+      "a": 1,
+      "sol": "A primeira coordenada é multiplicada por3.",
+      "hyp": "Pode confundir fator na diagonal com translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:escala-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-027",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "[[1,0],[0,1/2]] envia (4,6) para...",
+      "o": [
+        "(2,6).",
+        "(2,3).",
+        "(4,3).",
+        "(4,12)."
+      ],
+      "a": 2,
+      "sol": "Mantém x e reduz y para metade.",
+      "hyp": "Pode aplicar o fator à coordenada errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:escala-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-028",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "[[1,0],[0,1/2]] representa...",
+      "o": [
+        "compressão horizontal.",
+        "reflexão no eixo Ox.",
+        "rotação de180°.",
+        "compressão vertical de fator1/2."
+      ],
+      "a": 3,
+      "sol": "Só a coordenada y é reduzida.",
+      "hyp": "Pode confundir com mudança de sinal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:compressao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-029",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[1,2],[0,1]] envia (3,4) para...",
+      "o": [
+        "(11,4).",
+        "(3,10).",
+        "(7,4).",
+        "(3,4)."
+      ],
+      "a": 0,
+      "sol": "x'=3+2·4=11 e y'=4.",
+      "hyp": "Pode somar o fator ao invés de multiplicar y.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:cisalhamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-030",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A transformação (x,y)→(x+2y,y) é um...",
+      "o": [
+        "cisalhamento vertical.",
+        "cisalhamento horizontal.",
+        "escalamento uniforme.",
+        "reflexão."
+      ],
+      "a": 1,
+      "sol": "A coordenada x recebe uma parcela proporcional a y.",
+      "hyp": "Pode confundir com escala horizontal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:cisalhamento-horizontal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-031",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[1,0],[3,1]] envia (2,5) para...",
+      "o": [
+        "(17,5).",
+        "(6,5).",
+        "(2,11).",
+        "(2,8)."
+      ],
+      "a": 2,
+      "sol": "x'=2; y'=3·2+5=11.",
+      "hyp": "Pode aplicar o cisalhamento na direção errada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:cisalhamento-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-032",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A transformação (x,y)→(x,3x+y) é um...",
+      "o": [
+        "cisalhamento horizontal.",
+        "rotação.",
+        "reflexão.",
+        "cisalhamento vertical."
+      ],
+      "a": 3,
+      "sol": "A coordenada y recebe uma parcela proporcional a x.",
+      "hyp": "Pode trocar horizontal/vertical.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:cisalhamento-vertical",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-033",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Toda transformação linear representada por matriz 2×2 envia a origem...",
+      "o": [
+        "na própria origem.",
+        "num ponto arbitrário.",
+        "em (1,1).",
+        "num ponto da diagonal principal."
+      ],
+      "a": 0,
+      "sol": "A·0=0.",
+      "hyp": "Pode atribuir uma translação implícita.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:origem-fixa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-034",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma translação não nula do plano pode ser representada apenas por uma matriz 2×2 aplicada a vetores-coluna (x,y)^T?",
+      "o": [
+        "Sim, sempre.",
+        "Não.",
+        "Só se a translação for horizontal.",
+        "Só se for vertical."
+      ],
+      "a": 1,
+      "sol": "Uma matriz linear fixa a origem; uma translação não nula desloca-a.",
+      "hyp": "Pode confundir transformações lineares e afins.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:translacao-nao-linear",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-035",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Aplicar primeiro A e depois B corresponde à matriz composta...",
+      "o": [
+        "AB.",
+        "A+B.",
+        "BA.",
+        "A−B."
+      ],
+      "a": 2,
+      "sol": "B(Ax)=(BA)x.",
+      "hyp": "Pode escrever as transformações na ordem temporal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-036",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Duas rotações em torno da origem de90° anti-horárias compõem uma rotação de...",
+      "o": [
+        "90°.",
+        "270°.",
+        "0°.",
+        "180°."
+      ],
+      "a": 3,
+      "sol": "Os ângulos somam-se:90°+90°=180°.",
+      "hyp": "Pode pensar que a mesma transformação se anula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:rotacoes-composicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-037",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "A matriz R=[[0,−1],[1,0]] satisfaz R²=",
+      "o": [
+        "−I.",
+        "I.",
+        "R.",
+        "0."
+      ],
+      "a": 0,
+      "sol": "Duas rotações de90° dão180°, isto é −I.",
+      "hyp": "Pode achar que R²=I.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:potencia-rotacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-038",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para a mesma R, R⁴=",
+      "o": [
+        "−I.",
+        "I.",
+        "R.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "Quatro rotações de90° completam360°.",
+      "hyp": "Pode confundir com R².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:ciclo-rotacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-039",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Refletir no eixo Ox duas vezes equivale a...",
+      "o": [
+        "rotação de180°.",
+        "reflexão no eixo Oy.",
+        "identidade.",
+        "matriz nula."
+      ],
+      "a": 2,
+      "sol": "A segunda reflexão desfaz a primeira.",
+      "hyp": "Pode pensar que duas reflexões no mesmo eixo dão180°.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-dupla",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-040",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Refletir no eixo Ox e depois no eixo Oy equivale a...",
+      "o": [
+        "identidade.",
+        "rotação de90°.",
+        "reflexão em y=x.",
+        "rotação de180°."
+      ],
+      "a": 3,
+      "sol": "(x,y)→(x,−y)→(−x,−y).",
+      "hyp": "Pode pensar que as reflexões se anulam.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:duas-reflexoes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-041",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Refletir em y=x e depois novamente em y=x equivale a...",
+      "o": [
+        "identidade.",
+        "rotação de180°.",
+        "reflexão no eixo Ox.",
+        "cisalhamento."
+      ],
+      "a": 0,
+      "sol": "Trocar coordenadas duas vezes recupera o ponto inicial.",
+      "hyp": "Pode pensar que duas reflexões iguais mantêm a reflexão.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reflexao-involucao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-042",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se A transforma e1=(1,0) em u e e2=(0,1) em v, então as colunas de A são...",
+      "o": [
+        "u+v e u−v.",
+        "u e v, respetivamente.",
+        "as coordenadas de e1,e2.",
+        "sempre e1,e2."
+      ],
+      "a": 1,
+      "sol": "Ae1 é a primeira coluna e Ae2 a segunda.",
+      "hyp": "Pode pensar que as linhas codificam imagens da base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:colunas-imagens",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-043",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma transformação envia e1 para (2,1) e e2 para (−1,3). A sua matriz é...",
+      "o": [
+        "[[2,1],[−1,3]].",
+        "[[−1,2],[3,1]].",
+        "[[2,−1],[1,3]].",
+        "[[2,0],[0,3]]."
+      ],
+      "a": 2,
+      "sol": "As imagens dos vetores da base são as colunas.",
+      "hyp": "Pode colocá-las como linhas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:construir-matriz",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-044",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma transformação linear envia e1 para (2,1) e e2 para (−1,3). Para onde envia (1,1)?",
+      "o": [
+        "(3,2).",
+        "(2,3).",
+        "(−1,3).",
+        "(1,4)."
+      ],
+      "a": 3,
+      "sol": "A(1,1)=coluna1+coluna2=(2,1)+(−1,3)=(1,4).",
+      "hyp": "Pode somar linhas em vez de colunas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:imagem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-045",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se duas transformações lineares têm a mesma imagem de e1 e e2, então...",
+      "o": [
+        "são a mesma transformação.",
+        "podem ser diferentes em outros vetores.",
+        "só coincidem na origem.",
+        "uma é transposta da outra."
+      ],
+      "a": 0,
+      "sol": "Uma transformação linear fica determinada pela ação numa base.",
+      "hyp": "Pode achar que dois vetores não chegam para determinar a transformação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:determinacao-base",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-046",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma transformação envia e1 para (0,1) e e2 para (−1,0). Isto é...",
+      "o": [
+        "rotação de90° horária.",
+        "rotação de90° anti-horária.",
+        "reflexão no eixo Oy.",
+        "escala uniforme."
+      ],
+      "a": 1,
+      "sol": "As colunas [[0,−1],[1,0]] identificam a rotação anti-horária.",
+      "hyp": "Pode inverter o sentido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:reconhecer-colunas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-047",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Num gráfico computacional, aplicar [[2,0],[0,1]] a todos os vértices de uma figura...",
+      "o": [
+        "duplica toda a figura uniformemente.",
+        "roda a figura.",
+        "duplica as coordenadas horizontais e mantém as verticais.",
+        "translada a figura2 unidades."
+      ],
+      "a": 2,
+      "sol": "É um escalamento horizontal.",
+      "hyp": "Pode confundir escalamento direcional e uniforme.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:grafica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-048",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Aplicar uma rotação de90° a todos os vértices de um polígono em torno da origem...",
+      "o": [
+        "duplica a área.",
+        "altera comprimentos.",
+        "faz uma translação.",
+        "preserva comprimentos e forma, mudando a orientação angular."
+      ],
+      "a": 3,
+      "sol": "Rotações são isometrias.",
+      "hyp": "Pode pensar que coordenadas diferentes alteram tamanho.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:poligono",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-049",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Se uma transformação linear envia dois vetores diferentes para o mesmo vetor, então ela...",
+      "o": [
+        "não é injetiva.",
+        "é necessariamente uma rotação.",
+        "é identidade.",
+        "é reflexão."
+      ],
+      "a": 0,
+      "sol": "Duas entradas distintas com a mesma imagem violam injetividade.",
+      "hyp": "Pode associar qualquer matriz 2×2 a uma transformação reversível.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:injetividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-TR-050",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-transformacoes",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Para interpretar geometricamente uma matriz 2×2 é útil observar...",
+      "o": [
+        "apenas a soma das entradas.",
+        "as imagens dos vetores da base, o efeito em pontos simples e a composição com transformações conhecidas.",
+        "apenas a diagonal, sempre.",
+        "apenas se tem entradas inteiras."
+      ],
+      "a": 1,
+      "sol": "Estas estratégias revelam direção, escala, reflexão e rotação de forma estruturada.",
+      "hyp": "Pode tentar classificar pela aparência sem testar a ação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-transformacoes:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

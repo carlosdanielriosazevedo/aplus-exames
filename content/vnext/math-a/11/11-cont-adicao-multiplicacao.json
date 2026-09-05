@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "11.º",
+  "themeId": "11-cont",
+  "subtopicId": "11-cont-adicao-multiplicacao",
+  "subtopic": "Princípios da adição e multiplicação",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha princípios fundamentais de contagem, etapas sucessivas, alternativas exclusivas, restrições simples e combinações de soma/produto. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN11CONT-AM-001",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O princípio da adição aplica-se quando contamos alternativas...",
+      "o": [
+        "mutuamente exclusivas.",
+        "que ocorrem em sequência.",
+        "com repetição obrigatória.",
+        "com ordem irrelevante apenas."
+      ],
+      "a": 0,
+      "sol": "Se os casos não podem ocorrer simultaneamente, somam-se as contagens.",
+      "hyp": "Pode usar multiplicação quando os casos são alternativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:principio-adicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-002",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O princípio da multiplicação aplica-se quando um processo é feito em...",
+      "o": [
+        "alternativas incompatíveis.",
+        "etapas sucessivas.",
+        "um único caso.",
+        "eventos impossíveis."
+      ],
+      "a": 1,
+      "sol": "Se uma escolha é seguida de outra, multiplicam-se as possibilidades por etapa.",
+      "hyp": "Pode somar escolhas sucessivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:principio-multiplicacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-003",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Há 3 entradas e 4 saídas possíveis num percurso. Quantos pares entrada-saída existem?",
+      "o": [
+        "7.",
+        "1.",
+        "12.",
+        "24."
+      ],
+      "a": 2,
+      "sol": "3×4=12.",
+      "hyp": "Pode somar as opções em vez de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:produto-duas-etapas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-004",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma cantina oferece 2 sopas ou 3 saladas, escolhendo apenas uma entrada. Quantas escolhas existem?",
+      "o": [
+        "6.",
+        "1.",
+        "8.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "São alternativas exclusivas: 2+3=5.",
+      "hyp": "Pode multiplicar opções que não são combinadas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:soma-alternativas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-005",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma senha tem 1 letra entre A,B,C seguida de 1 algarismo entre 0,1,2,3. Quantas senhas existem?",
+      "o": [
+        "12.",
+        "7.",
+        "4.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "3×4=12.",
+      "hyp": "Pode somar 3+4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:produto-senha",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-006",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um menu tem 4 pratos principais e 3 bebidas. Escolhendo um de cada, há...",
+      "o": [
+        "7 menus.",
+        "12 menus.",
+        "4 menus.",
+        "3 menus."
+      ],
+      "a": 1,
+      "sol": "4×3=12.",
+      "hyp": "Pode usar o princípio da adição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:menu",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-007",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Para ir de A a B há 3 estradas e de B a C há 5. Quantos percursos A-B-C?",
+      "o": [
+        "8.",
+        "5.",
+        "15.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "Escolhe-se uma estrada em cada etapa: 3×5.",
+      "hyp": "Pode somar caminhos de etapas sucessivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:percursos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-008",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma matrícula simplificada tem 2 letras, cada uma com 26 opções, seguidas de 1 algarismo com 10 opções, admitindo repetição. Quantas existem?",
+      "o": [
+        "260.",
+        "676.",
+        "520.",
+        "6760."
+      ],
+      "a": 3,
+      "sol": "26×26×10=6760.",
+      "hyp": "Pode esquecer uma posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:codigos-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-009",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um aluno pode escolher 1 de 5 clubes desportivos ou 1 de 4 clubes culturais, mas não ambos. Quantas escolhas?",
+      "o": [
+        "9.",
+        "20.",
+        "5.",
+        "4."
+      ],
+      "a": 0,
+      "sol": "São alternativas: 5+4=9.",
+      "hyp": "Pode multiplicar alternativas exclusivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:adicao-clubes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-010",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma bandeira tem 3 faixas; cada faixa pode ser vermelha, azul ou verde. Admitindo repetição, quantas bandeiras?",
+      "o": [
+        "9.",
+        "27.",
+        "6.",
+        "3."
+      ],
+      "a": 1,
+      "sol": "3×3×3=27.",
+      "hyp": "Pode somar as opções por faixa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:produto-tres-etapas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-011",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma tarefa pode ser feita por 4 métodos do tipo A ou 6 do tipo B, sem sobreposição, o total é...",
+      "o": [
+        "24.",
+        "6.",
+        "10.",
+        "4."
+      ],
+      "a": 2,
+      "sol": "Pelo princípio da adição: 4+6.",
+      "hyp": "Pode multiplicar por serem dois grupos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:adicao-metodos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-012",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Se uma escolha tem 4 opções e depois uma segunda escolha tem 6 opções para cada primeira, o total é...",
+      "o": [
+        "10.",
+        "6.",
+        "4.",
+        "24."
+      ],
+      "a": 3,
+      "sol": "Pelo princípio da multiplicação: 4×6.",
+      "hyp": "Pode somar por ver dois números de opções.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:multiplicacao-metodos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-013",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma senha tem 3 posições binárias (0 ou 1). Quantas senhas?",
+      "o": [
+        "8.",
+        "6.",
+        "3.",
+        "2."
+      ],
+      "a": 0,
+      "sol": "2³=8.",
+      "hyp": "Pode multiplicar apenas duas posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:binario",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-014",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma palavra-código usa 2 letras entre 5 opções, com repetição, e depois 1 símbolo entre 3. Quantos códigos?",
+      "o": [
+        "30.",
+        "75.",
+        "15.",
+        "25."
+      ],
+      "a": 1,
+      "sol": "5×5×3=75.",
+      "hyp": "Pode esquecer a repetição de letras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:codigo-etapas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-015",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma pessoa escolhe 1 de 4 camisas e 1 de 3 calças. Quantos conjuntos?",
+      "o": [
+        "7.",
+        "4.",
+        "12.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "4×3=12.",
+      "hyp": "Pode somar peças de tipos diferentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:roupa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-016",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Há 6 autocarros diretos ou 2 comboios diretos para um destino. Quantas opções de viagem direta?",
+      "o": [
+        "12.",
+        "6.",
+        "2.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "6+2=8.",
+      "hyp": "Pode multiplicar meios alternativos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:transportes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-017",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Uma refeição inclui 1 sopa (2 opções), 1 prato (5) e 1 sobremesa (3). Quantas refeições?",
+      "o": [
+        "30.",
+        "10.",
+        "15.",
+        "7."
+      ],
+      "a": 0,
+      "sol": "2×5×3=30.",
+      "hyp": "Pode somar as etapas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:refeicao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-018",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Um percurso pode seguir pela rota Norte, com 4 variantes, ou pela Sul, com 7 variantes, sem sobreposição. Quantos percursos?",
+      "o": [
+        "28.",
+        "11.",
+        "7.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "4+7=11.",
+      "hyp": "Pode multiplicar rotas alternativas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:rotas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-019",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma chave tem 4 posições, cada uma com 10 algarismos possíveis, repetição permitida. Quantas chaves?",
+      "o": [
+        "4000.",
+        "40.",
+        "10000.",
+        "1000."
+      ],
+      "a": 2,
+      "sol": "10⁴=10000.",
+      "hyp": "Pode multiplicar apenas por 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:pin",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-020",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Um dado de 6 faces e uma moeda de 2 faces são lançados. Quantos resultados ordenados possíveis?",
+      "o": [
+        "8.",
+        "6.",
+        "2.",
+        "12."
+      ],
+      "a": 3,
+      "sol": "6×2=12.",
+      "hyp": "Pode somar resultados dos dois objetos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:dado-moeda",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-021",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 2 algarismos podem ser formados com dezenas 1,2,3 e unidades 0,1,2,3, permitindo repetição?",
+      "o": [
+        "12.",
+        "16.",
+        "9.",
+        "7."
+      ],
+      "a": 0,
+      "sol": "3 opções para dezenas e 4 para unidades: 12.",
+      "hyp": "Pode permitir 0 nas dezenas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:numeros-dois-algarismos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-022",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos existem no total?",
+      "o": [
+        "1000.",
+        "900.",
+        "999.",
+        "810."
+      ],
+      "a": 1,
+      "sol": "Centenas:9 opções; dezenas e unidades:10 cada. 9×10×10=900.",
+      "hyp": "Pode incluir números com zero inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:numeros-tres-algarismos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-023",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos pares existem?",
+      "o": [
+        "500.",
+        "900.",
+        "450.",
+        "400."
+      ],
+      "a": 2,
+      "sol": "Centenas:9, dezenas:10, unidades pares:5. 9×10×5=450.",
+      "hyp": "Pode contar zero inicial ou esquecer paridade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:numeros-pares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-024",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos ímpares existem?",
+      "o": [
+        "500.",
+        "400.",
+        "900.",
+        "450."
+      ],
+      "a": 3,
+      "sol": "9×10×5=450.",
+      "hyp": "Pode achar que zero afeta a simetria entre pares e ímpares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:numeros-impares",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-025",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um código tem 2 letras distintas escolhidas de 4 e depois 1 dígito entre 0 e 9. Quantos códigos?",
+      "o": [
+        "120.",
+        "160.",
+        "40.",
+        "80."
+      ],
+      "a": 0,
+      "sol": "Primeira letra 4, segunda 3, dígito 10: 4×3×10=120.",
+      "hyp": "Pode permitir repetição das letras.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:codigo-sem-repeticao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-026",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma senha tem 3 algarismos distintos escolhidos de 0 a 9. Quantas?",
+      "o": [
+        "1000.",
+        "720.",
+        "30.",
+        "900."
+      ],
+      "a": 1,
+      "sol": "10×9×8=720.",
+      "hyp": "Pode usar 10³ e esquecer a restrição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:senha-distinta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-027",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Há 5 caminhos de A a B, mas 2 estão interditos. De B a C há 4. Quantos percursos válidos A-B-C?",
+      "o": [
+        "20.",
+        "9.",
+        "12.",
+        "7."
+      ],
+      "a": 2,
+      "sol": "Restam 3 caminhos A-B; 3×4=12.",
+      "hyp": "Pode subtrair depois de multiplicar 20−2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:restricao-etapa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-028",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um restaurante tem 3 entradas, 4 pratos e 2 sobremesas. Se a sobremesa é opcional, quantos menus com ou sem sobremesa?",
+      "o": [
+        "24.",
+        "18.",
+        "12.",
+        "36."
+      ],
+      "a": 3,
+      "sol": "Escolhas: 3×4×(2+1)=36, contando a opção 'sem sobremesa'.",
+      "hyp": "Pode ignorar a alternativa sem sobremesa.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:opcao-nenhuma",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-029",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Um dispositivo pode estar em 4 modos e cada modo tem 3 níveis. Quantos estados?",
+      "o": [
+        "12.",
+        "7.",
+        "4.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "4×3.",
+      "hyp": "Pode somar atributos simultâneos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:estados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-030",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma viagem de ida tem 5 opções e a volta tem 4 opções, sem exigir rota diferente. Quantos pares ida-volta?",
+      "o": [
+        "9.",
+        "20.",
+        "5.",
+        "4."
+      ],
+      "a": 1,
+      "sol": "5×4=20.",
+      "hyp": "Pode somar ida e volta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:ida-volta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-031",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se a rota de volta não pode coincidir com a ida e existem 5 rotas disponíveis em ambos os sentidos, quantos pares ida-volta?",
+      "o": [
+        "25.",
+        "10.",
+        "20.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "5 escolhas para ida e 4 para volta: 20.",
+      "hyp": "Pode usar 5².",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:ida-volta-diferente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-032",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas sequências de comprimento 4 usando A ou B começam por A?",
+      "o": [
+        "16.",
+        "4.",
+        "2.",
+        "8."
+      ],
+      "a": 3,
+      "sol": "Primeira posição fixa; restam 3 posições com 2 opções: 2³=8.",
+      "hyp": "Pode contar também sequências que começam por B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:prefixo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-033",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas sequências de comprimento 5 sobre {0,1} terminam em 1?",
+      "o": [
+        "16.",
+        "32.",
+        "10.",
+        "5."
+      ],
+      "a": 0,
+      "sol": "Última posição fixa; 4 posições livres: 2⁴=16.",
+      "hyp": "Pode usar 2⁵.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:sufixo-fixo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-034",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantas sequências de 4 letras de um alfabeto de 3 letras existem se a primeira não pode ser A?",
+      "o": [
+        "81.",
+        "54.",
+        "27.",
+        "24."
+      ],
+      "a": 1,
+      "sol": "Primeira:2 opções; restantes:3³=27. Total 54.",
+      "hyp": "Pode esquecer a restrição inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:restricao-primeira",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-035",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 4 algarismos começam por 7?",
+      "o": [
+        "900.",
+        "700.",
+        "1000.",
+        "100."
+      ],
+      "a": 2,
+      "sol": "Primeiro fixo; restam 3 posições com 10 opções: 1000.",
+      "hyp": "Pode excluir zeros nas restantes posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:prefixo-numerico",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-036",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 4 algarismos terminam em 0?",
+      "o": [
+        "1000.",
+        "100.",
+        "90.",
+        "900."
+      ],
+      "a": 3,
+      "sol": "Primeiro:9 opções; duas posições intermédias:10×10; último fixo. 9×100=900.",
+      "hyp": "Pode permitir zero inicial.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:sufixo-zero",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-037",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 4 algarismos são múltiplos de 5?",
+      "o": [
+        "1800.",
+        "2000.",
+        "900.",
+        "450."
+      ],
+      "a": 0,
+      "sol": "Último algarismo 0 ou 5:2 opções; primeiro 9; dois intermédios 10². Total 1800.",
+      "hyp": "Pode usar apenas uma opção final.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:multiplo-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-038",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 4 algarismos têm primeiro algarismo par não nulo?",
+      "o": [
+        "5000.",
+        "4000.",
+        "4500.",
+        "3600."
+      ],
+      "a": 1,
+      "sol": "Primeiro ∈{2,4,6,8}:4 opções; restantes 10³. Total 4000.",
+      "hyp": "Pode incluir 0 no primeiro algarismo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:primeiro-par",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-039",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma senha tem 4 caracteres: os 2 primeiros são letras entre 26 e os 2 últimos são algarismos entre 10, com repetição. Quantas?",
+      "o": [
+        "2600.",
+        "6760.",
+        "67600.",
+        "676000."
+      ],
+      "a": 2,
+      "sol": "26²×10²=676×100=67600.",
+      "hyp": "Pode esquecer uma das posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:senha-mista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-040",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma password começa por uma letra entre 5, seguida de 3 dígitos, mas o primeiro dígito não pode ser 0. Repetição permitida. Quantas?",
+      "o": [
+        "5000.",
+        "4050.",
+        "900.",
+        "4500."
+      ],
+      "a": 3,
+      "sol": "5×9×10×10=4500.",
+      "hyp": "Pode usar 10 opções no primeiro dígito.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:password-restricao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-041",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um percurso tem duas opções: caminho A com 3 escolhas na primeira etapa e 4 na segunda; caminho B com 5 escolhas únicas. Quantos percursos?",
+      "o": [
+        "17.",
+        "12.",
+        "20.",
+        "9."
+      ],
+      "a": 0,
+      "sol": "Pelo A:3×4=12; pelo B:5; total 17.",
+      "hyp": "Pode multiplicar tudo ou somar antes de multiplicar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:soma-produto-combinados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-042",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Um produto pode ser comprado online em 4 lojas com 3 métodos de entrega cada, ou fisicamente em 5 lojas sem escolha de entrega. Quantas opções totais?",
+      "o": [
+        "12.",
+        "17.",
+        "20.",
+        "9."
+      ],
+      "a": 1,
+      "sol": "Online:4×3=12; físico:5; total 17.",
+      "hyp": "Pode multiplicar 4×3×5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:soma-produto-combinados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-043",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma placa tem 3 posições. A primeira tem 4 opções; a segunda depende da primeira e tem sempre 2 opções; a terceira tem 5. Quantas placas?",
+      "o": [
+        "11.",
+        "20.",
+        "40.",
+        "30."
+      ],
+      "a": 2,
+      "sol": "4×2×5=40.",
+      "hyp": "Pode somar opções por posição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:dependencia-uniforme",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-044",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma placa tem 2 posições. Se a primeira é A há 3 opções na segunda; se é B há 5; se é C há 2. Quantas placas?",
+      "o": [
+        "30.",
+        "6.",
+        "15.",
+        "10."
+      ],
+      "a": 3,
+      "sol": "Os ramos são exclusivos:3+5+2=10.",
+      "hyp": "Pode multiplicar os ramos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:arvore-ramos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-045",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma sequência de 3 etapas tem 2 opções na primeira. Num dos ramos há 4 opções depois; no outro há 5. Quantos resultados ao fim de 2 etapas?",
+      "o": [
+        "9.",
+        "10.",
+        "8.",
+        "20."
+      ],
+      "a": 0,
+      "sol": "Somam-se os resultados dos ramos:4+5=9.",
+      "hyp": "Pode multiplicar 2×(4+5), contando o ramo inicial duas vezes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:arvore-nao-uniforme",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-046",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Quando os números de opções da segunda etapa dependem da primeira...",
+      "o": [
+        "multiplica-se sempre o total de opções médias.",
+        "podemos somar os produtos de cada ramo.",
+        "usa-se apenas adição.",
+        "não é possível contar."
+      ],
+      "a": 1,
+      "sol": "Conta-se cada ramo pelo princípio da multiplicação e somam-se os ramos exclusivos.",
+      "hyp": "Pode aplicar uma multiplicação uniforme que não existe.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:principio-misto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-047",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma pessoa escolhe um de 3 cursos. O curso A tem 2 horários, B tem 4 e C tem 1. Quantas combinações curso-horário?",
+      "o": [
+        "24.",
+        "12.",
+        "7.",
+        "3."
+      ],
+      "a": 2,
+      "sol": "2+4+1=7, somando os ramos por curso.",
+      "hyp": "Pode multiplicar 3 pelos horários totais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:ramos-horarios",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-048",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos podem ser formados se o algarismo das centenas é 1 ou 2 e os restantes são livres?",
+      "o": [
+        "180.",
+        "20.",
+        "100.",
+        "200."
+      ],
+      "a": 3,
+      "sol": "2×10×10=200.",
+      "hyp": "Pode excluir zeros nas posições internas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:centenas-restritas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-049",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Quantos números de 3 algarismos terminam em algarismo par e começam por 1,2 ou 3?",
+      "o": [
+        "150.",
+        "120.",
+        "300.",
+        "75."
+      ],
+      "a": 0,
+      "sol": "Centenas:3; dezenas:10; unidades pares:5. Total 150.",
+      "hyp": "Pode esquecer o zero como algarismo par.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:inicio-fim-restritos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN11CONT-AM-050",
+      "themeId": "11-cont",
+      "subtopicId": "11-cont-adicao-multiplicacao",
+      "year": "11.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma app permite escolher 1 de 4 temas, depois 1 de 3 níveis e finalmente 1 de 2 modos. Quantos percursos de configuração?",
+      "o": [
+        "9.",
+        "24.",
+        "12.",
+        "6."
+      ],
+      "a": 1,
+      "sol": "4×3×2=24.",
+      "hyp": "Pode somar as escolhas independentes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "11-cont-adicao-multiplicacao:modelacao-configuracao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

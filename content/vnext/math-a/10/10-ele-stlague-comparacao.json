@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "10.º",
+  "themeId": "10-ele",
+  "subtopicId": "10-ele-stlague-comparacao",
+  "subtopic": "Método de St. Laguë, comparação e limitações",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Nesta coleção, St. Laguë significa explicitamente a versão com divisores 1,3,5,7,...; não se assume a variante modificada. Comparações normativas são separadas de conclusões matemáticas. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN10ELE-STL-001",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Nesta versão do método de St. Laguë usam-se os divisores...",
+      "o": [
+        "1, 3, 5, 7, ...",
+        "1, 2, 3, 4, ...",
+        "2, 4, 6, 8, ...",
+        "1, 4, 9, 16, ..."
+      ],
+      "a": 0,
+      "sol": "St. Laguë usa a sequência dos ímpares 1,3,5,7,... para formar os quocientes.",
+      "hyp": "Pode confundir St. Laguë com D'Hondt.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:definicao-divisores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-002",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma lista tem 1200 votos. Qual é o seu segundo quociente em St. Laguë, usando 1,3,5,...?",
+      "o": [
+        "600",
+        "400",
+        "300",
+        "240"
+      ],
+      "a": 1,
+      "sol": "O segundo divisor é 3: 1200÷3=400.",
+      "hyp": "Pode aplicar o divisor 2 de D'Hondt.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-003",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Uma lista tem 1200 votos. Qual é o terceiro quociente em St. Laguë?",
+      "o": [
+        "400",
+        "300",
+        "240",
+        "200"
+      ],
+      "a": 2,
+      "sol": "O terceiro divisor é 5: 1200÷5=240.",
+      "hyp": "Pode continuar a sequência 1,2,3 em vez de 1,3,5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-004",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Para 1500 votos, quais são os três primeiros quocientes de St. Laguë?",
+      "o": [
+        "1500, 750, 500",
+        "1500, 500, 375",
+        "750, 500, 300",
+        "1500, 500, 300"
+      ],
+      "a": 3,
+      "sol": "Os divisores são 1,3,5: 1500, 500 e 300.",
+      "hyp": "Pode usar os divisores consecutivos de D'Hondt.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:sequencia-quocientes",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-005",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Depois de calcular os quocientes de todas as listas em St. Laguë, os mandatos são atribuídos...",
+      "o": [
+        "aos maiores quocientes globais, até preencher todos os lugares.",
+        "um por lista, antes de repetir qualquer lista.",
+        "apenas segundo o número inicial de votos.",
+        "pela média dos quocientes de cada lista."
+      ],
+      "a": 0,
+      "sol": "Tal como num método de maiores quocientes, ordenam-se globalmente os valores e escolhem-se os maiores até preencher os mandatos.",
+      "hyp": "Pode achar que a sequência de divisores elimina a necessidade de ordenar os quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:selecionar-maiores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-006",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Usa St. Laguë (1,3,5,...). Há 4 mandatos e votos A=1000, B=800, C=600. Qual é a distribuição?",
+      "o": [
+        "A:1, B:2, C:1",
+        "A:2, B:1, C:1",
+        "A:2, B:2, C:0",
+        "A:3, B:1, C:0"
+      ],
+      "a": 1,
+      "sol": "Os quatro maiores quocientes são 1000(A), 800(B), 600(C) e 333,33...(A). Resultado 2-1-1.",
+      "hyp": "Pode usar os quocientes de D'Hondt ou repartir apenas pela ordem dos votos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:alocacao-3-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-007",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com St. Laguë e 5 mandatos, A=1300, B=950, C=520. Qual é a distribuição?",
+      "o": [
+        "A:3, B:1, C:1",
+        "A:2, B:3, C:0",
+        "A:2, B:2, C:1",
+        "A:3, B:2, C:0"
+      ],
+      "a": 2,
+      "sol": "Os cinco maiores quocientes são 1300(A), 950(B), 520(C), 433,33...(A) e 316,67...(B). Resultado 2-2-1.",
+      "hyp": "Pode aplicar divisores 1,2,3 ou excluir C antes de comparar o seu primeiro quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:alocacao-3-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-008",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Com 6 mandatos e votos A=2100, B=1600, C=900, quantos lugares recebe A em St. Laguë?",
+      "o": [
+        "2",
+        "4",
+        "5",
+        "3"
+      ],
+      "a": 3,
+      "sol": "A distribuição é A=3, B=2, C=1.",
+      "hyp": "Pode contar apenas o número de vezes que A lidera os votos originais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:mandatos-lista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-009",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com 8 mandatos e votos A=2500, B=1800, C=1200, D=700, qual é a distribuição em St. Laguë?",
+      "o": [
+        "A:3, B:2, C:2, D:1",
+        "A:4, B:2, C:1, D:1",
+        "A:3, B:3, C:1, D:1",
+        "A:4, B:1, C:2, D:1"
+      ],
+      "a": 0,
+      "sol": "Os oito maiores quocientes dão A=3, B=2, C=2 e D=1.",
+      "hyp": "Pode assumir a mesma distribuição obtida por D'Hondt sem recalcular os quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:alocacao-4-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-010",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com 6 mandatos e votos A=980, B=760, C=460, D=300, qual lista recebe dois mandatos além de A?",
+      "o": [
+        "C",
+        "B",
+        "D",
+        "Nenhuma"
+      ],
+      "a": 1,
+      "sol": "St. Laguë dá A=2, B=2, C=1 e D=1.",
+      "hyp": "Pode desvalorizar os primeiros quocientes de C e D face aos segundos quocientes das listas maiores.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:mandatos-lista-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-011",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com A=900, B=650, C=400 e 4 mandatos, St. Laguë dá A=2, B=1, C=1. Se houver um 5.º mandato, quem o recebe?",
+      "o": [
+        "A",
+        "C",
+        "B",
+        "Há empate"
+      ],
+      "a": 2,
+      "sol": "O próximo maior quociente é B÷3≈216,67; A÷5=180 e C÷3≈133,33. O 5.º vai a B.",
+      "hyp": "Pode usar o próximo divisor de D'Hondt em vez do próximo ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:mandato-adicional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-012",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Depois de 5 mandatos em A=900, B=650, C=400, a distribuição é 2-2-1. Quem recebe o 6.º lugar em St. Laguë?",
+      "o": [
+        "B",
+        "C",
+        "Nenhuma lista",
+        "A"
+      ],
+      "a": 3,
+      "sol": "O próximo quociente de A é 900÷5=180, superior a B÷5=130 e C÷3≈133,33. O lugar vai a A.",
+      "hyp": "Pode reutilizar um quociente já selecionado ou usar divisores errados.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:mandato-adicional",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-013",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma lista recebeu 2100 votos. Qual é o seu quarto quociente em St. Laguë?",
+      "o": [
+        "300",
+        "420",
+        "350",
+        "233,33..."
+      ],
+      "a": 0,
+      "sol": "Os divisores são 1,3,5,7; 2100÷7=300.",
+      "hyp": "Pode identificar o quarto quociente com divisor 4.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-014",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se todos os votos forem multiplicados pelo mesmo fator positivo, mantendo os mandatos, a distribuição de St. Laguë...",
+      "o": [
+        "muda sempre.",
+        "mantém-se.",
+        "atribui um lugar extra a cada lista.",
+        "fica indeterminada."
+      ],
+      "a": 1,
+      "sol": "Todos os quocientes são multiplicados pelo mesmo fator e a sua ordem não se altera.",
+      "hyp": "Pode pensar que aumentar os números absolutos altera necessariamente a partilha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:invariancia-escala",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-015",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Somar a mesma quantidade de votos a todas as listas garante a mesma distribuição em St. Laguë?",
+      "o": [
+        "Sim, porque todas crescem igual.",
+        "Sim, mas só com três listas.",
+        "Não; as razões e os quocientes podem mudar de forma suficiente para alterar a ordem.",
+        "Não, porque St. Laguë não usa votos."
+      ],
+      "a": 2,
+      "sol": "A invariância garantida é para multiplicação comum, não para soma comum.",
+      "hyp": "Pode generalizar a propriedade de escala para uma translação.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:nao-invariancia-translacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-016",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se existem 6 mandatos, quantos mandatos devem estar distribuídos no final da aplicação do método?",
+      "o": [
+        "5",
+        "7",
+        "Depende do número de listas",
+        "6"
+      ],
+      "a": 3,
+      "sol": "O método preenche os 6 lugares disponíveis.",
+      "hyp": "Pode achar que uma lista sem quociente elevado deixa um lugar vazio.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:conservacao-mandatos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-017",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se o último mandato coincide com dois quocientes exatamente iguais e não é dada regra de desempate, a resolução deve...",
+      "o": [
+        "indicar que a informação não determina univocamente quem recebe esse lugar.",
+        "atribuir o lugar por ordem alfabética.",
+        "dar o lugar à lista menor.",
+        "ignorar o empate."
+      ],
+      "a": 0,
+      "sol": "Um empate no quociente decisivo precisa de uma regra adicional que o problema terá de fornecer.",
+      "hyp": "Pode inventar um critério de desempate.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:empate-sem-regra",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-018",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Por que deve evitar-se arredondar demasiado cedo quocientes próximos em St. Laguë?",
+      "o": [
+        "Porque só são permitidos inteiros.",
+        "Porque pode alterar artificialmente a ordem dos quocientes.",
+        "Porque arredondar aumenta todos os votos.",
+        "Porque os divisores deixam de ser ímpares."
+      ],
+      "a": 1,
+      "sol": "A distribuição depende da comparação ordenada dos quocientes; arredondamentos grosseiros podem trocar posições ou criar falsos empates.",
+      "hyp": "Pode tratar o arredondamento como irrelevante para comparações próximas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:arredondamento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-019",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Qual comparação das sequências de divisores está correta?",
+      "o": [
+        "D'Hondt: 1,3,5,...; St. Laguë: 1,2,3,...",
+        "Ambos usam 1,2,3,...",
+        "D'Hondt: 1,2,3,4,...; St. Laguë: 1,3,5,7,...",
+        "Ambos usam 1,3,5,..."
+      ],
+      "a": 2,
+      "sol": "Esta é a diferença operacional central entre as duas versões estudadas.",
+      "hyp": "Pode trocar os nomes dos métodos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-divisores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-020",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para uma lista com V votos, o primeiro quociente é diferente entre D'Hondt e St. Laguë?",
+      "o": [
+        "Sim: é V em D'Hondt e V/3 em St. Laguë.",
+        "Sim: é V/2 em D'Hondt e V em St. Laguë.",
+        "Só coincide quando V é par.",
+        "Não: em ambos é V/1=V."
+      ],
+      "a": 3,
+      "sol": "Ambos começam pelo divisor 1, logo o primeiro quociente é o total de votos.",
+      "hyp": "Pode assumir que todas as posições da sequência diferem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-primeiro-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-021",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Para a mesma lista com V>0, compare o segundo quociente: D'Hondt usa V/2 e St. Laguë usa V/3. Qual é maior?",
+      "o": [
+        "V/2",
+        "V/3",
+        "São iguais.",
+        "Depende do número de listas."
+      ],
+      "a": 0,
+      "sol": "Como 2<3 e V é positivo, V/2>V/3.",
+      "hyp": "Pode não relacionar o tamanho do divisor com o quociente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-segundo-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-022",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Há 3 mandatos e votos A=500, B=400, C=200. Qual comparação é correta?",
+      "o": [
+        "Ambos dão 2-1-0.",
+        "D'Hondt dá 2-1-0 e St. Laguë dá 1-1-1.",
+        "D'Hondt dá 1-1-1 e St. Laguë 2-1-0.",
+        "Ambos dão 1-1-1."
+      ],
+      "a": 1,
+      "sol": "D'Hondt seleciona 500(A),400(B),250(A); St. Laguë seleciona 500(A),400(B),200(C).",
+      "hyp": "Pode presumir que dois métodos de maiores quocientes dão sempre a mesma partilha.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-alocacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-023",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com A=500, B=400, C=200 e 4 mandatos, qual comparação é correta?",
+      "o": [
+        "D'Hondt: 2-1-1; St. Laguë: 2-2-0.",
+        "Ambos: 2-2-0.",
+        "D'Hondt: 2-2-0; St. Laguë: 2-1-1.",
+        "Ambos: 2-1-1."
+      ],
+      "a": 2,
+      "sol": "Os divisores diferentes fazem o 4.º lugar ir a B em D'Hondt e a A após C já ter entrado em St. Laguë: resultados 2-2-0 e 2-1-1.",
+      "hyp": "Pode transferir automaticamente a distribuição de um método para o outro.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-alocacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-024",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "No exemplo A=500, B=400, C=200 com 3 mandatos, St. Laguë atribui um lugar a C e D'Hondt não. O que é seguro concluir?",
+      "o": [
+        "St. Laguë dá sempre um mandato a qualquer lista pequena.",
+        "D'Hondt nunca representa a terceira lista.",
+        "Os dois métodos são equivalentes.",
+        "Neste perfil concreto, a escolha do método altera a representação de C."
+      ],
+      "a": 3,
+      "sol": "O exemplo demonstra uma diferença neste conjunto de votos e lugares; não autoriza uma afirmação universal sobre todos os perfis.",
+      "hyp": "Pode transformar um exemplo particular numa regra absoluta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:nao-generalizar-exemplo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-025",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com 5 mandatos e votos A=600, B=400, C=300, qual é a comparação correta?",
+      "o": [
+        "D'Hondt: 3-1-1; St. Laguë: 2-2-1.",
+        "D'Hondt: 2-2-1; St. Laguë: 3-1-1.",
+        "Ambos: 3-1-1.",
+        "Ambos: 2-2-1."
+      ],
+      "a": 0,
+      "sol": "Em D'Hondt os maiores quocientes dão 3-1-1; com divisores ímpares, St. Laguë dá 2-2-1.",
+      "hyp": "Pode não recalcular os segundos e terceiros quocientes de A e B.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-alocacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-026",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Com 6 mandatos e votos A=600, B=500, C=400, qual é a distribuição em cada método?",
+      "o": [
+        "D'Hondt 2-2-2; St. Laguë 3-2-1.",
+        "D'Hondt 3-2-1; St. Laguë 2-2-2.",
+        "Ambos 3-2-1.",
+        "Ambos 2-2-2."
+      ],
+      "a": 1,
+      "sol": "D'Hondt seleciona três quocientes de A, dois de B e um de C; St. Laguë acaba com dois lugares para cada lista.",
+      "hyp": "Pode supor que a proximidade dos votos torna os métodos iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-alocacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-027",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Em geral, por que os segundos e terceiros mandatos de uma mesma lista são 'penalizados' mais rapidamente em St. Laguë do que em D'Hondt?",
+      "o": [
+        "Porque St. Laguë subtrai votos.",
+        "Porque os primeiros quocientes são zero.",
+        "Porque os divisores seguintes são 3,5,... em vez de 2,3,...",
+        "Porque cada lista só pode ter um mandato."
+      ],
+      "a": 2,
+      "sol": "Divisores maiores fazem cair mais depressa os quocientes seguintes de uma lista que já acumulou lugares.",
+      "hyp": "Pode atribuir a diferença a uma regra inexistente de limite de mandatos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-mecanismo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-028",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "A frase 'St. Laguë favorece sempre a lista mais pequena' é matematicamente adequada?",
+      "o": [
+        "Sim, sem exceções.",
+        "Sim, porque usa apenas divisores grandes.",
+        "Não, porque as listas pequenas nunca recebem mandatos.",
+        "Não; o método pode produzir resultados diferentes de D'Hondt, mas a atribuição depende do perfil completo de votos e lugares."
+      ],
+      "a": 3,
+      "sol": "Não se deve transformar uma tendência observada em alguns perfis numa regra universal.",
+      "hyp": "Pode confundir comportamento frequente ou exemplo particular com garantia matemática.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:evitar-universalizacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-029",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com 30 mandatos, qual conjunto de divisores é suficiente calcular por lista em St. Laguë para garantir quocientes suficientes?",
+      "o": [
+        "1,3,5,...,59",
+        "1,2,3,...,30",
+        "3,5,7,...,61",
+        "Apenas 1 e 3"
+      ],
+      "a": 0,
+      "sol": "No máximo uma lista poderia receber os 30 lugares; os 30 primeiros divisores ímpares vão de 1 até 2×30−1=59.",
+      "hyp": "Pode esquecer a fórmula do n-ésimo número ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quantos-divisores",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-030",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Qual é o 8.º divisor da sequência 1,3,5,7,... usada em St. Laguë?",
+      "o": [
+        "13",
+        "15",
+        "16",
+        "17"
+      ],
+      "a": 1,
+      "sol": "O n-ésimo ímpar é 2n−1; para n=8 resulta 15.",
+      "hyp": "Pode contar incorretamente a sequência dos ímpares.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:enesimo-divisor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-031",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma lista tem 3500 votos. Qual é o quociente correspondente ao divisor 5 em St. Laguë?",
+      "o": [
+        "500",
+        "875",
+        "700",
+        "1166,67"
+      ],
+      "a": 2,
+      "sol": "3500÷5=700.",
+      "hyp": "Pode confundir divisor 5 com a quinta posição em D'Hondt.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-direto",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-032",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com A=3500, B=2400, C=1100 e 7 mandatos, qual é a distribuição em St. Laguë?",
+      "o": [
+        "A:3, B:3, C:1",
+        "A:4, B:1, C:2",
+        "A:3, B:2, C:2",
+        "A:4, B:2, C:1"
+      ],
+      "a": 3,
+      "sol": "Os sete maiores quocientes dão A=4, B=2 e C=1.",
+      "hyp": "Pode arredondar as proporções sem verificar os quocientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:alocacao-3-listas",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-033",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com A=5000, B=3200, C=1800 e 8 mandatos, quantos lugares recebe B em St. Laguë?",
+      "o": [
+        "3",
+        "2",
+        "4",
+        "5"
+      ],
+      "a": 0,
+      "sol": "A distribuição é A=4, B=3, C=1.",
+      "hyp": "Pode assumir que B fica com dois lugares apenas por ser a segunda lista.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:mandatos-lista",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-034",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Com A=2800, B=1700, C=900 e 6 mandatos, qual é o quociente que atribui o 6.º lugar em St. Laguë?",
+      "o": [
+        "900 de C",
+        "560 de A",
+        "566,67 de B",
+        "340 de B"
+      ],
+      "a": 1,
+      "sol": "Os seis selecionados terminam com A÷5=560; os anteriores incluem B÷3≈566,67 e C=900.",
+      "hyp": "Pode confundir o último quociente selecionado com o penúltimo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-limite",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-035",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com A=980, B=760, C=460, D=300 e 6 mandatos, qual é o menor quociente entre os seis selecionados em St. Laguë?",
+      "o": [
+        "300 de D",
+        "326,67 de A",
+        "253,33 de B",
+        "460 de C"
+      ],
+      "a": 2,
+      "sol": "Os selecionados são 980(A),760(B),460(C),326,67(A),300(D),253,33(B). O menor é 253,33.",
+      "hyp": "Pode identificar o menor voto inicial em vez do último quociente vencedor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-limite-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-036",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Para um mesmo conjunto de votos e o mesmo número de lugares, D'Hondt e St. Laguë podem produzir exatamente a mesma distribuição?",
+      "o": [
+        "Não, nunca.",
+        "Só quando todas as listas têm os mesmos votos.",
+        "Só quando existe uma lista.",
+        "Sim; por exemplo A=1300, B=950, C=520 com 5 lugares dá 2-2-1 nos dois."
+      ],
+      "a": 3,
+      "sol": "Divisores diferentes não implicam necessariamente resultados finais diferentes em todos os perfis.",
+      "hyp": "Pode assumir que métodos distintos têm sempre resultados distintos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:metodos-podem-coincidir",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-037",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Se dois métodos dão a mesma distribuição num caso concreto, pode concluir-se que são matematicamente equivalentes?",
+      "o": [
+        "Não; podem coincidir nesse perfil e divergir noutros.",
+        "Sim.",
+        "Sim, desde que existam três listas.",
+        "Só divergem se houver empate."
+      ],
+      "a": 0,
+      "sol": "Uma coincidência de resultado não significa que as regras de cálculo sejam iguais.",
+      "hyp": "Pode inferir equivalência de métodos a partir de um único exemplo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:nao-inferir-equivalencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-038",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Qual informação é necessária para comparar corretamente D'Hondt e St. Laguë num problema concreto?",
+      "o": [
+        "Apenas o nome das listas.",
+        "Totais de votos, número de mandatos e regras de desempate/limiares se existirem.",
+        "Apenas a lista vencedora.",
+        "A idade dos eleitores."
+      ],
+      "a": 1,
+      "sol": "A comparação exige aplicar as regras ao mesmo perfil de votos e ao mesmo número de lugares, respeitando regras adicionais explicitadas.",
+      "hyp": "Pode comparar métodos sem controlar os dados de entrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:dados-necessarios",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-039",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Em A=500, B=400, C=200 com 3 lugares, as quotas proporcionais exatas seriam aproximadamente 1,36; 1,09; 0,55. Qual distribuição é a de St. Laguë?",
+      "o": [
+        "2-1-0",
+        "1-2-0",
+        "1-1-1",
+        "2-0-1"
+      ],
+      "a": 2,
+      "sol": "St. Laguë seleciona 500(A),400(B),200(C), produzindo 1-1-1.",
+      "hyp": "Pode arredondar diretamente as quotas em vez de aplicar o método pedido.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quotas-vs-metodo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-040",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para A=500, B=400, C=200 e 3 lugares, usando como medida a soma dos desvios absolutos face às quotas 1,36;1,09;0,55, qual distribuição fica mais próxima?",
+      "o": [
+        "D'Hondt 2-1-0.",
+        "Ficam exatamente iguais.",
+        "Não é possível calcular.",
+        "St. Laguë 1-1-1."
+      ],
+      "a": 3,
+      "sol": "Desvio D'Hondt≈|2−1,36|+|1−1,09|+|0−0,55|=1,28; St. Laguë≈0,36+0,09+0,45=0,90. Nesta medida e neste exemplo, St. Laguë fica mais próximo.",
+      "hyp": "Pode transformar uma comparação quantitativa local numa opinião geral ou não calcular os desvios.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-desvio",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-041",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "No exemplo A=500, B=400, C=200 e 3 lugares, St. Laguë ficou mais próximo das quotas do que D'Hondt pela soma dos desvios absolutos. Isso permite afirmar que St. Laguë é sempre mais próximo das quotas exatas, qualquer que seja o perfil?",
+      "o": [
+        "Não; a conclusão demonstrada vale apenas para o exemplo e para a medida usada.",
+        "Sim.",
+        "Sim, desde que haja três listas.",
+        "Não, porque quotas exatas nunca existem."
+      ],
+      "a": 0,
+      "sol": "Uma propriedade observada num exemplo não constitui prova universal.",
+      "hyp": "Pode generalizar indevidamente um resultado experimental.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:nao-generalizar-metrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-042",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma cooperativa vai distribuir 4 lugares entre grupos com 500, 400 e 200 votos e decidiu usar St. Laguë. Qual resultado deve comunicar?",
+      "o": [
+        "2-2-0",
+        "2-1-1",
+        "1-2-1",
+        "3-1-0"
+      ],
+      "a": 1,
+      "sol": "Os quatro maiores quocientes são 500(A),400(B),200(C),166,67(A), dando 2-1-1.",
+      "hyp": "Pode usar D'Hondt por hábito apesar de o método estar explicitado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:modelacao-completa",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-043",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Se a mesma cooperativa do caso 500,400,200 usasse D'Hondt em vez de St. Laguë para 4 lugares, qual seria a diferença?",
+      "o": [
+        "A perderia um lugar para C.",
+        "Nada mudaria.",
+        "C perderia o seu lugar e B passaria de 1 para 2; A manteria 2.",
+        "B perderia um lugar para A."
+      ],
+      "a": 2,
+      "sol": "St. Laguë dá 2-1-1; D'Hondt dá 2-2-0. A diferença é um lugar de C transferido para B.",
+      "hyp": "Pode identificar apenas que 'muda' sem localizar a alteração concreta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-transferencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-044",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Em St. Laguë, uma lista que já obteve dois lugares terá como próximo quociente V/5. Em D'Hondt, depois de dois lugares, o próximo é...",
+      "o": [
+        "V/2",
+        "V/4",
+        "V/5",
+        "V/3"
+      ],
+      "a": 3,
+      "sol": "Em D'Hondt os divisores são consecutivos: depois dos usados 1 e 2, vem 3.",
+      "hyp": "Pode alinhar os números de lugares com os mesmos divisores nos dois métodos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-proximo-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-045",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para V=900 e depois de dois lugares, compare o próximo quociente: St. Laguë usa 900/5=180 e D'Hondt usa 900/3=300. Qual interpretação é correta?",
+      "o": [
+        "O próximo quociente é menor em St. Laguë.",
+        "O próximo quociente é maior em St. Laguë.",
+        "São iguais.",
+        "A comparação depende de outra lista."
+      ],
+      "a": 0,
+      "sol": "180<300. Isto ajuda a explicar por que a sequência de St. Laguë reduz mais depressa os quocientes seguintes de uma lista já representada.",
+      "hyp": "Pode olhar apenas para o total V e ignorar o divisor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:comparar-proximo-quociente",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-046",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma apresentação afirma: 'Como St. Laguë deu um lugar à lista C num exemplo, C merece matematicamente esse lugar.' Qual é a formulação mais rigorosa?",
+      "o": [
+        "A matemática prova que C merece sempre o lugar.",
+        "O método escolhido atribui C esse lugar segundo a sua regra; 'merecer' é uma avaliação normativa, não uma conclusão matemática do cálculo.",
+        "D'Hondt prova o contrário.",
+        "Nenhum método permite fazer contas."
+      ],
+      "a": 1,
+      "sol": "A matemática determina o resultado de uma regra; a escolha ou avaliação normativa da regra é outra questão.",
+      "hyp": "Pode confundir resultado matemático com juízo de valor sobre justiça eleitoral.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:separar-matematica-normatividade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-047",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual é uma limitação inevitável de qualquer método que distribua um número inteiro de mandatos a partir de percentagens de votos?",
+      "o": [
+        "Não é possível usar divisões.",
+        "Todos os partidos têm de receber o mesmo.",
+        "As quotas proporcionais podem ser fracionárias, mas os mandatos têm de ser inteiros.",
+        "As percentagens deixam de somar 100%."
+      ],
+      "a": 2,
+      "sol": "A passagem de quotas contínuas para lugares indivisíveis exige uma regra de arredondamento/atribuição discreta.",
+      "hyp": "Pode esperar correspondência proporcional exata em todos os casos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:limitacao-discreta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-048",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Com 10 mandatos, qual é o 10.º divisor usado em St. Laguë?",
+      "o": [
+        "17",
+        "18",
+        "21",
+        "19"
+      ],
+      "a": 3,
+      "sol": "O 10.º número ímpar é 2×10−1=19.",
+      "hyp": "Pode confundir a posição n com o próprio divisor n.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:enesimo-divisor",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-049",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma lista tem 1900 votos. Qual é o quociente correspondente ao 10.º divisor de St. Laguë?",
+      "o": [
+        "100",
+        "90",
+        "111,76...",
+        "190"
+      ],
+      "a": 0,
+      "sol": "O 10.º divisor é 19 e 1900÷19=100.",
+      "hyp": "Pode usar divisor 10 em vez do 10.º ímpar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:quociente-enesimo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN10ELE-STL-050",
+      "themeId": "10-ele",
+      "subtopicId": "10-ele-stlague-comparacao",
+      "year": "10.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Qual estratégia é correta para comparar dois métodos de partilha num exercício?",
+      "o": [
+        "Escolher primeiro o método que parece mais justo.",
+        "Aplicar cada método aos mesmos votos e mandatos, verificar empates/regras adicionais e só depois comparar distribuições e medidas relevantes.",
+        "Comparar apenas a lista com mais votos.",
+        "Usar os quocientes de um método na tabela do outro."
+      ],
+      "a": 1,
+      "sol": "Uma comparação válida controla os dados de entrada, aplica corretamente cada regra e distingue resultados matemáticos de avaliações normativas.",
+      "hyp": "Pode misturar regras ou introduzir juízos antes de concluir o cálculo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "10-ele-stlague-comparacao:metodo-comparacao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

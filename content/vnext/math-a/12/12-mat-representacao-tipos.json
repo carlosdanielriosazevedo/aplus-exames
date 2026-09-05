@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º opcional",
+  "themeId": "12-mat",
+  "subtopicId": "12-mat-representacao-tipos",
+  "subtopic": "Representação, dimensão, elementos e tipos de matrizes",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha dimensão, índices, matrizes linha/coluna/quadradas/nulas/diagonais/triangulares, identidade, transposta, simetria e interpretação de dados. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12MAT-RT-001",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz m×n tem...",
+      "o": [
+        "m linhas e n colunas.",
+        "m colunas e n linhas.",
+        "m+n linhas.",
+        "mn linhas."
+      ],
+      "a": 0,
+      "sol": "A primeira dimensão indica linhas e a segunda colunas.",
+      "hyp": "Pode trocar linhas e colunas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dimensao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-002",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[1,2,3],[4,5,6]] tem dimensão...",
+      "o": [
+        "3×2.",
+        "2×3.",
+        "2×2.",
+        "3×3."
+      ],
+      "a": 1,
+      "sol": "Tem 2 linhas e 3 colunas.",
+      "hyp": "Pode contar primeiro as colunas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dimensao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-003",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O elemento a_ij de uma matriz A é o elemento da...",
+      "o": [
+        "linha j e coluna i.",
+        "diagonal i+j.",
+        "linha i e coluna j.",
+        "coluna i apenas."
+      ],
+      "a": 2,
+      "sol": "O primeiro índice é a linha e o segundo a coluna.",
+      "hyp": "Pode inverter os índices.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:elemento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-004",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Em A=[[2,5],[7,1]], a_12 é...",
+      "o": [
+        "2.",
+        "7.",
+        "1.",
+        "5."
+      ],
+      "a": 3,
+      "sol": "Linha1, coluna2.",
+      "hyp": "Pode ler coluna1, linha2.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:elemento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-005",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "Em A=[[2,5],[7,1]], a_21 é...",
+      "o": [
+        "7.",
+        "5.",
+        "2.",
+        "1."
+      ],
+      "a": 0,
+      "sol": "Linha2, coluna1.",
+      "hyp": "Pode inverter os índices.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:elemento",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-006",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz quadrada é aquela que tem...",
+      "o": [
+        "uma única linha.",
+        "o mesmo número de linhas e colunas.",
+        "uma única coluna.",
+        "todos os elementos iguais."
+      ],
+      "a": 1,
+      "sol": "A dimensão é n×n.",
+      "hyp": "Pode confundir forma quadrada com valores iguais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:quadrada",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-007",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz linha tem...",
+      "o": [
+        "uma coluna.",
+        "duas linhas.",
+        "uma linha.",
+        "todos os elementos nulos."
+      ],
+      "a": 2,
+      "sol": "É uma matriz 1×n.",
+      "hyp": "Pode confundir matriz linha e coluna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:linha",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-008",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz coluna tem...",
+      "o": [
+        "uma linha.",
+        "dimensão n×n.",
+        "diagonal nula.",
+        "uma coluna."
+      ],
+      "a": 3,
+      "sol": "É uma matriz m×1.",
+      "hyp": "Pode trocar linha e coluna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:coluna",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-009",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[3,−1,4]] é uma matriz...",
+      "o": [
+        "linha 1×3.",
+        "coluna 3×1.",
+        "quadrada3×3.",
+        "diagonal."
+      ],
+      "a": 0,
+      "sol": "Tem uma linha e três colunas.",
+      "hyp": "Pode ler os três elementos como linhas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:linha",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-010",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A matriz [[2],[0],[5]] é...",
+      "o": [
+        "linha1×3.",
+        "coluna 3×1.",
+        "quadrada3×3.",
+        "identidade."
+      ],
+      "a": 1,
+      "sol": "Tem três linhas e uma coluna.",
+      "hyp": "Pode confundir apresentação vertical com 1×3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:coluna",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-011",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz nula é aquela em que...",
+      "o": [
+        "a diagonal é0 apenas.",
+        "o determinante é0.",
+        "todos os elementos são0.",
+        "há uma linha nula."
+      ],
+      "a": 2,
+      "sol": "Todos os seus elementos são nulos.",
+      "hyp": "Pode confundir matriz nula com singularidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:nula",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-012",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz diagonal quadrada tem...",
+      "o": [
+        "todos os elementos iguais.",
+        "diagonal principal nula.",
+        "uma única coluna.",
+        "elementos fora da diagonal principal iguais a0."
+      ],
+      "a": 3,
+      "sol": "Só a diagonal principal pode ter valores não nulos.",
+      "hyp": "Pode inverter dentro/fora da diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-013",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A matriz identidade I_n é diagonal com...",
+      "o": [
+        "1 na diagonal principal.",
+        "0 na diagonal principal.",
+        "todos os elementos1.",
+        "−1 na diagonal."
+      ],
+      "a": 0,
+      "sol": "A identidade tem uns na diagonal e zeros fora.",
+      "hyp": "Pode confundir com matriz de uns.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-014",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Qual é I_2?",
+      "o": [
+        "[[0,1],[1,0]].",
+        "[[1,0],[0,1]].",
+        "[[1,1],[1,1]].",
+        "[[0,0],[0,0]]."
+      ],
+      "a": 1,
+      "sol": "A identidade 2×2 tem uns na diagonal principal.",
+      "hyp": "Pode escolher a matriz de troca.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:identidade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-015",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz escalar é...",
+      "o": [
+        "qualquer matriz linha.",
+        "qualquer matriz com um escalar.",
+        "diagonal com todos os elementos diagonais iguais.",
+        "sempre a identidade."
+      ],
+      "a": 2,
+      "sol": "Tem forma λI.",
+      "hyp": "Pode confundir matriz escalar com multiplicação por escalar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:escalar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-016",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz triangular superior tem...",
+      "o": [
+        "zeros acima da diagonal.",
+        "zeros na diagonal.",
+        "todos os elementos superiores iguais.",
+        "zeros abaixo da diagonal principal."
+      ],
+      "a": 3,
+      "sol": "A parte abaixo da diagonal é nula.",
+      "hyp": "Pode trocar superior e inferior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:triangular-superior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-017",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz triangular inferior tem...",
+      "o": [
+        "zeros acima da diagonal principal.",
+        "zeros abaixo da diagonal.",
+        "todos os elementos abaixo iguais.",
+        "diagonal nula."
+      ],
+      "a": 0,
+      "sol": "A parte acima da diagonal é nula.",
+      "hyp": "Pode inverter a definição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:triangular-inferior",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-018",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "A=[[2,3],[0,5]] é...",
+      "o": [
+        "triangular inferior.",
+        "triangular superior.",
+        "nula.",
+        "identidade."
+      ],
+      "a": 1,
+      "sol": "O elemento abaixo da diagonal é0.",
+      "hyp": "Pode olhar apenas para o 3 acima.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:classificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-019",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "B=[[4,0],[−1,2]] é...",
+      "o": [
+        "triangular superior.",
+        "diagonal.",
+        "triangular inferior.",
+        "nula."
+      ],
+      "a": 2,
+      "sol": "O elemento acima da diagonal é0.",
+      "hyp": "Pode confundir a posição do zero.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:classificar",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-020",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A transposta A^T obtém-se...",
+      "o": [
+        "mudando sinais.",
+        "invertendo a ordem dos elementos na diagonal.",
+        "substituindo tudo por1.",
+        "trocando linhas por colunas."
+      ],
+      "a": 3,
+      "sol": "O elemento a_ij passa para a posição j,i.",
+      "hyp": "Pode confundir transposição com oposto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:transposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-021",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Se A=[[1,2,3],[4,5,6]], então A^T é...",
+      "o": [
+        "[[1,4],[2,5],[3,6]].",
+        "[[1,2],[3,4],[5,6]].",
+        "[[6,5,4],[3,2,1]].",
+        "[[1,4,2],[5,3,6]]."
+      ],
+      "a": 0,
+      "sol": "As colunas de A tornam-se linhas da transposta.",
+      "hyp": "Pode apenas reorganizar sem respeitar linhas/colunas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:transposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-022",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Se A tem dimensão m×n, A^T tem dimensão...",
+      "o": [
+        "m×n.",
+        "n×m.",
+        "m×m.",
+        "n×n."
+      ],
+      "a": 1,
+      "sol": "Transposição troca linhas e colunas.",
+      "hyp": "Pode manter a mesma dimensão para matriz não quadrada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dim-transposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-023",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz simétrica satisfaz...",
+      "o": [
+        "A^T=−A.",
+        "A²=A.",
+        "A^T=A.",
+        "A=0."
+      ],
+      "a": 2,
+      "sol": "Refletir relativamente à diagonal principal não altera a matriz.",
+      "hyp": "Pode confundir simétrica com antissimétrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:simetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-024",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "Qual destas é simétrica?",
+      "o": [
+        "[[1,2],[3,4]].",
+        "[[0,1],[−1,0]].",
+        "[[1,0],[2,1]].",
+        "[[1,2],[2,3]]."
+      ],
+      "a": 3,
+      "sol": "Os elementos a_12 e a_21 coincidem.",
+      "hyp": "Pode olhar apenas para a diagonal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:simetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-025",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Numa matriz simétrica, relativamente à diagonal principal...",
+      "o": [
+        "a_ij=a_ji.",
+        "a_ij=−a_ji.",
+        "todos os elementos são iguais.",
+        "a_ii=0 sempre."
+      ],
+      "a": 0,
+      "sol": "Os pares simétricos são iguais.",
+      "hyp": "Pode usar a condição antissimétrica.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:simetria-elementos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-026",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Uma matriz antissimétrica satisfaz...",
+      "o": [
+        "A^T=A.",
+        "A^T=−A.",
+        "A²=I.",
+        "A=I."
+      ],
+      "a": 1,
+      "sol": "A transposta é o oposto da matriz.",
+      "hyp": "Pode confundir com simetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:antissimetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-027",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Numa matriz antissimétrica real, os elementos da diagonal principal são...",
+      "o": [
+        "1.",
+        "−1.",
+        "0.",
+        "arbitrários."
+      ],
+      "a": 2,
+      "sol": "a_ii=−a_ii implica a_ii=0.",
+      "hyp": "Pode achar que a diagonal pode ser qualquer valor.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:diag-antissimetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-028",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Aplicação",
+      "q": "A=[[0,3],[−3,0]] é...",
+      "o": [
+        "simétrica.",
+        "identidade.",
+        "diagonal.",
+        "antissimétrica."
+      ],
+      "a": 3,
+      "sol": "A^T=−A.",
+      "hyp": "Pode classificar como simétrica por haver números opostos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:antissimetrica",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-029",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "Duas matrizes A e B são iguais se...",
+      "o": [
+        "têm a mesma dimensão e elementos correspondentes iguais.",
+        "têm o mesmo número total de elementos.",
+        "têm a mesma soma dos elementos.",
+        "são ambas quadradas."
+      ],
+      "a": 0,
+      "sol": "Igualdade é elemento a elemento na mesma posição.",
+      "hyp": "Pode usar critérios globais insuficientes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:igualdade",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-030",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se [[x,2],[3,y]]=[[5,2],[3,−1]], então...",
+      "o": [
+        "x=−1 e y=5.",
+        "x=5 e y=−1.",
+        "x=2 e y=3.",
+        "x=y."
+      ],
+      "a": 1,
+      "sol": "Comparam-se elementos correspondentes.",
+      "hyp": "Pode trocar posições.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:igualdade-parametros",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-031",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Uma matriz pode representar uma tabela de dados em que...",
+      "o": [
+        "a ordem dos elementos é irrelevante.",
+        "todos os valores têm de ser positivos.",
+        "linhas e colunas codificam duas dimensões de organização.",
+        "só existem dados geométricos."
+      ],
+      "a": 2,
+      "sol": "A estrutura matricial preserva posição e organização.",
+      "hyp": "Pode tratar matriz como conjunto sem ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dados",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-032",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Modelação",
+      "q": "Uma tabela com vendas de 4 lojas em 3 meses pode ser representada por matriz...",
+      "o": [
+        "3×4 obrigatoriamente.",
+        "4×4.",
+        "3×3.",
+        "4×3 se linhas=lojas e colunas=meses."
+      ],
+      "a": 3,
+      "sol": "A convenção dada fixa 4 linhas e3 colunas.",
+      "hyp": "Pode ignorar a convenção especificada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dados-dim",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-033",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Numa matriz 4×3, quantos elementos existem?",
+      "o": [
+        "12.",
+        "7.",
+        "4.",
+        "3."
+      ],
+      "a": 0,
+      "sol": "4×3=12 posições.",
+      "hyp": "Pode somar dimensões.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:numero-elementos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-034",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma matriz com 20 elementos e5 linhas tem quantas colunas?",
+      "o": [
+        "15.",
+        "4.",
+        "5.",
+        "100."
+      ],
+      "a": 1,
+      "sol": "5n=20 =>n=4.",
+      "hyp": "Pode subtrair em vez de dividir.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dimensao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-035",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma matriz quadrada com 16 elementos tem ordem...",
+      "o": [
+        "8.",
+        "16.",
+        "4.",
+        "2."
+      ],
+      "a": 2,
+      "sol": "n²=16 =>n=4.",
+      "hyp": "Pode usar número de elementos como ordem.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:ordem",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-036",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 3,
+      "cognitive": "Compreensão",
+      "q": "A diagonal principal de uma matriz quadrada contém elementos...",
+      "o": [
+        "a_1n,a_2,n−1,...",
+        "todos da primeira linha.",
+        "todos da última coluna.",
+        "a_11,a_22,...,a_nn."
+      ],
+      "a": 3,
+      "sol": "Os índices de linha e coluna são iguais.",
+      "hyp": "Pode confundir com diagonal secundária.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:diagonal-principal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-037",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Compreensão",
+      "q": "A diagonal secundária de uma matriz n×n contém posições com...",
+      "o": [
+        "i+j=n+1.",
+        "i=j.",
+        "i+j=n.",
+        "i−j=1."
+      ],
+      "a": 0,
+      "sol": "Em indexação começando em1, os índices somam n+1.",
+      "hyp": "Pode usar a regra da diagonal principal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:diagonal-secundaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-038",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Aplicação",
+      "q": "Numa matriz 3×3, a diagonal secundária é formada por...",
+      "o": [
+        "a_11,a_22,a_33.",
+        "a_13,a_22,a_31.",
+        "a_12,a_23,a_31.",
+        "a_31,a_32,a_33."
+      ],
+      "a": 1,
+      "sol": "As posições satisfazem i+j=4.",
+      "hyp": "Pode escolher a diagonal principal.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:diagonal-secundaria",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-039",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A é simétrica 3×3, quantos elementos independentes são necessários para a determinar?",
+      "o": [
+        "9.",
+        "3.",
+        "6.",
+        "5."
+      ],
+      "a": 2,
+      "sol": "São 3 diagonais +3 acima da diagonal; os restantes ficam determinados por simetria.",
+      "hyp": "Pode contar todos os9.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:simetria-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-040",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Numa matriz antissimétrica 3×3, quantos elementos independentes fora da diagonal são suficientes?",
+      "o": [
+        "6.",
+        "9.",
+        "2.",
+        "3."
+      ],
+      "a": 3,
+      "sol": "Escolhem-se os 3 pares acima da diagonal; abaixo ficam os opostos e a diagonal é0.",
+      "hyp": "Pode contar cada par duas vezes.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:antissimetria-graus",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-041",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A transposta de uma matriz simétrica é...",
+      "o": [
+        "a própria matriz.",
+        "o oposto.",
+        "a identidade.",
+        "a matriz nula."
+      ],
+      "a": 0,
+      "sol": "É a definição de simetria.",
+      "hyp": "Pode confundir com antissimetria.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:simetria-transposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-042",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Para qualquer matriz A, (A^T)^T é...",
+      "o": [
+        "−A.",
+        "A.",
+        "I.",
+        "0."
+      ],
+      "a": 1,
+      "sol": "Transpor duas vezes repõe a organização original.",
+      "hyp": "Pode achar que duas transposições invertem sinais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:dupla-transposta",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-043",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A tem dimensão 2×5, quantos elementos tem A^T?",
+      "o": [
+        "7.",
+        "25.",
+        "10.",
+        "4."
+      ],
+      "a": 2,
+      "sol": "A^T é5×2 e conserva os10 elementos.",
+      "hyp": "Pode achar que transposição altera quantidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:transposta-elementos",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-044",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma matriz diagonal é simultaneamente...",
+      "o": [
+        "apenas triangular superior.",
+        "apenas triangular inferior.",
+        "nunca triangular.",
+        "triangular superior e inferior."
+      ],
+      "a": 3,
+      "sol": "Tem zeros tanto acima como abaixo da diagonal.",
+      "hyp": "Pode tratar as categorias como exclusivas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:diagonal-triangular",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-045",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A identidade é um caso particular de...",
+      "o": [
+        "matriz diagonal e escalar.",
+        "matriz antissimétrica.",
+        "matriz nula.",
+        "matriz linha."
+      ],
+      "a": 0,
+      "sol": "I=1·I é diagonal com diagonal constante1.",
+      "hyp": "Pode considerar identidade uma classe isolada.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:identidade-tipo",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-046",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se A é simultaneamente simétrica e antissimétrica, então...",
+      "o": [
+        "A é a identidade.",
+        "A é a matriz nula.",
+        "A pode ser qualquer diagonal.",
+        "A tem apenas diagonal1."
+      ],
+      "a": 1,
+      "sol": "A^T=A e A^T=−A implicam A=−A, logo2A=0.",
+      "hyp": "Pode pensar que basta diagonal nula.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:sim-e-anti",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-047",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Uma matriz de adjacência de uma rede não dirigida simples tende a ser...",
+      "o": [
+        "antissimétrica.",
+        "triangular superior sempre.",
+        "simétrica.",
+        "identidade."
+      ],
+      "a": 2,
+      "sol": "Se i está ligado a j, j está ligado a i, logo a_ij=a_ji.",
+      "hyp": "Pode confundir direção da rede.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:adjacencia",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-048",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Numa rede simples sem laços, a diagonal da matriz de adjacência é...",
+      "o": [
+        "1.",
+        "arbitrária.",
+        "−1.",
+        "0."
+      ],
+      "a": 3,
+      "sol": "Sem laços, nenhum vértice liga a si próprio.",
+      "hyp": "Pode colocar1 por identidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:adjacencia-diagonal",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-049",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A escolha de linhas e colunas numa matriz de dados deve...",
+      "o": [
+        "ser explicitada para que a interpretação dos elementos seja inequívoca.",
+        "ser irrelevante.",
+        "mudar em cada cálculo.",
+        "seguir sempre pessoas nas linhas."
+      ],
+      "a": 0,
+      "sol": "O significado posicional depende da convenção adotada.",
+      "hyp": "Pode tratar organização como detalhe sem importância.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:convencao",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12MAT-RT-050",
+      "themeId": "12-mat",
+      "subtopicId": "12-mat-representacao-tipos",
+      "year": "12.º opcional",
+      "difficulty": 4,
+      "cognitive": "Síntese",
+      "q": "Para ler corretamente uma matriz é essencial identificar...",
+      "o": [
+        "apenas a soma dos valores.",
+        "dimensão, significado de linhas/colunas e posição dos elementos.",
+        "apenas a diagonal.",
+        "apenas se é quadrada."
+      ],
+      "a": 1,
+      "sol": "Esses elementos determinam a interpretação estrutural.",
+      "hyp": "Pode reduzir leitura matricial a um único aspeto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-mat-representacao-tipos:sintese",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}

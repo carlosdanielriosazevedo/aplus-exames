@@ -4,7 +4,8 @@ import {
 } from "../data/content.js";
 import {generateVariants,hasGenerator} from "./generators.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
-import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isEvidenceInAcademicScope,isSubtopicInAcademicScope} from "./curriculumScope.js";
+import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isEvidenceInAcademicScope,isSubtopicInAcademicScope,normalizeTaughtSubtopics} from "./curriculumScope.js";
+import {curriculumSubtopicForItem} from "../data/curriculumVnext.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -222,6 +223,7 @@ export function applyEvidence(score,item,correct,source="diagnostic",strength=1,
     themeId:item.themeId,
     focus:item.focus || microcompetencyLabel(item.microcompetencyId) || null,
     microcompetencyId:item.microcompetencyId||microcompetencyId(item.themeId,item.focus)||null,
+    subtopicId:curriculumSubtopicForItem(item),
     correct,
     difficulty:item.difficulty,
     cognitive:item.cognitive,
@@ -1389,6 +1391,12 @@ function migrateEvidenceIds(scores={}){
       evidence:(score?.evidence||[]).map(e=>({
         ...e,
         themeId:e.themeId||themeId,
+        subtopicId:e.subtopicId||curriculumSubtopicForItem(
+          QUESTION_BANK.find(q=>q.id===e.itemId)||{
+            id:e.itemId,themeId:e.themeId||themeId,
+            microcompetencyId:e.microcompetencyId||microcompetencyId(themeId,e.focus)
+          }
+        ),
         microcompetencyId:e.microcompetencyId
           ||QUESTION_BANK.find(q=>q.id===e.itemId)?.microcompetencyId
           ||microcompetencyId(themeId,e.focus)
@@ -1439,6 +1447,11 @@ export function migratePedagogicalIds(state){
 
   const migrated={
     ...state,
+    profile:{
+      ...(state.profile||{}),
+      taughtSubtopicIds:normalizeTaughtSubtopics(state.profile||{}),
+      curriculumScopeVersion:2
+    },
     scores:migrateEvidenceIds(state.scores||{}),
     missionHistory,
     lastMission,

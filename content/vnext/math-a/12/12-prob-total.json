@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "curriculum": "vNext 2026/27",
+  "year": "12.º",
+  "themeId": "12-prob",
+  "subtopicId": "12-prob-total",
+  "subtopic": "Probabilidade total e problemas em cadeia",
+  "editorialTarget": 50,
+  "status": "prototype",
+  "note": "Conteúdo original A+. Trabalha partições, teorema da probabilidade total, problemas em cadeia, diagnóstico inverso elementar e atualização probabilística. Não ligado ao motor atual.",
+  "questions": [
+    {
+      "id": "VN12PROB-PT-001",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Se A e A^c formam uma partição, então P(B) pode escrever-se como...",
+      "o": [
+        "P(B|A)P(A)+P(B|A^c)P(A^c).",
+        "P(B|A)+P(B|A^c).",
+        "P(A)P(A^c).",
+        "P(A|B)+P(A^c|B)."
+      ],
+      "a": 0,
+      "sol": "B pode ocorrer pelo ramo A ou pelo ramo A^c; somam-se as probabilidades conjuntas dos dois caminhos.",
+      "hyp": "Pode somar condicionais sem ponderar.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:formula-dois-ramos-1",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-002",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "O teorema da probabilidade total requer uma família de acontecimentos que forme...",
+      "o": [
+        "uma sequência crescente.",
+        "uma partição do espaço de resultados.",
+        "um conjunto de acontecimentos independentes obrigatoriamente.",
+        "apenas dois acontecimentos iguais."
+      ],
+      "a": 1,
+      "sol": "Os acontecimentos da partição são disjuntos e cobrem Ω.",
+      "hyp": "Pode achar que independência substitui a condição de partição.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:particao-2",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-003",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Compreensão",
+      "q": "Numa partição {A1,...,An}, P(B) é...",
+      "o": [
+        "ΣP(Ai).",
+        "ΣP(B|Ai).",
+        "ΣP(B|Ai)P(Ai).",
+        "ΠP(B|Ai)."
+      ],
+      "a": 2,
+      "sol": "Soma-se a probabilidade de B através de cada ramo da partição.",
+      "hyp": "Pode esquecer ponderar pelas probabilidades dos ramos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:formula-geral-3",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-004",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "P(A)=0,6, P(B|A)=0,2 e P(B|A^c)=0,5. Então P(B)=...",
+      "o": [
+        "0,7.",
+        "0,12.",
+        "0,2.",
+        "0,32."
+      ],
+      "a": 3,
+      "sol": "0,6×0,2+0,4×0,5=0,12+0,20=0,32.",
+      "hyp": "Pode fazer média simples das condicionais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:dois-ramos-4",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-005",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 1,
+      "cognitive": "Aplicação",
+      "q": "P(A)=0,3, P(B|A)=0,8 e P(B|A^c)=0,1. P(B)=...",
+      "o": [
+        "0,31.",
+        "0,9.",
+        "0,24.",
+        "0,17."
+      ],
+      "a": 0,
+      "sol": "0,3×0,8+0,7×0,1=0,24+0,07=0,31.",
+      "hyp": "Pode somar 0,8+0,1.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:dois-ramos-5",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-006",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma fábrica usa máquina M1 em 70% da produção e M2 em 30%. Taxas de defeito:2% e5%. P(defeito)=...",
+      "o": [
+        "0,07.",
+        "0,029.",
+        "0,035.",
+        "0,02."
+      ],
+      "a": 1,
+      "sol": "0,7×0,02+0,3×0,05=0,014+0,015=0,029.",
+      "hyp": "Pode fazer média não ponderada 3,5%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:fabrica-6",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-007",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Uma escola tem 40% alunos do 10.º, 35% do 11.º e 25% do 12.º. Taxas de participação:50%,60%,80%. P(participar)=...",
+      "o": [
+        "0,63.",
+        "0,60.",
+        "0,61.",
+        "0,65."
+      ],
+      "a": 2,
+      "sol": "0,4×0,5+0,35×0,6+0,25×0,8=0,20+0,21+0,20=0,61.",
+      "hyp": "Pode fazer média simples das três taxas.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:escola-7",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-008",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "Três fornecedores entregam 20%,30% e50% das peças; as taxas de falha são 1%,2% e4%. A taxa global é...",
+      "o": [
+        "7%.",
+        "2%.",
+        "4%.",
+        "2,8%."
+      ],
+      "a": 3,
+      "sol": "0,2×0,01+0,3×0,02+0,5×0,04=0,028.",
+      "hyp": "Pode somar as três taxas ou usar a maior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:fornecedores-8",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-009",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "Se A1,A2,A3 formam uma partição, então P(A1)+P(A2)+P(A3)=...",
+      "o": [
+        "1.",
+        "0.",
+        "3.",
+        "depende de B."
+      ],
+      "a": 0,
+      "sol": "Uma partição cobre todo Ω sem sobreposição.",
+      "hyp": "Pode multiplicar as probabilidades dos ramos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:soma-particao-9",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-010",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "A probabilidade total é uma...",
+      "o": [
+        "soma simples das probabilidades condicionadas.",
+        "média ponderada das probabilidades condicionadas pelos pesos da partição.",
+        "média aritmética obrigatória.",
+        "multiplicação de todos os ramos."
+      ],
+      "a": 1,
+      "sol": "Os pesos são P(Ai) e somam 1.",
+      "hyp": "Pode ignorar que grupos com tamanhos diferentes devem pesar de forma diferente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:media-ponderada-10",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-011",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)=0,2 e P(B|A^c)=0,8, então P(B)...",
+      "o": [
+        "tem de ser 0,5.",
+        "tem de ser 1.",
+        "fica entre 0,2 e0,8, dependendo de P(A).",
+        "é sempre 0,16."
+      ],
+      "a": 2,
+      "sol": "É uma média ponderada de 0,2 e0,8.",
+      "hyp": "Pode usar média simples sem conhecer os pesos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:intervalo-media-11",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-012",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)=P(B|A^c)=0,4, então P(B)=...",
+      "o": [
+        "depende de P(A).",
+        "0,8.",
+        "0,16.",
+        "0,4."
+      ],
+      "a": 3,
+      "sol": "Qualquer média ponderada de dois valores iguais a0,4 vale0,4.",
+      "hyp": "Pode somar as condicionais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:cond-iguais-12",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-013",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "70% dos clientes são novos e30% recorrentes. Compram 10% dos novos e40% dos recorrentes. P(compra)=...",
+      "o": [
+        "0,19.",
+        "0,25.",
+        "0,50.",
+        "0,12."
+      ],
+      "a": 0,
+      "sol": "0,7×0,1+0,3×0,4=0,07+0,12=0,19.",
+      "hyp": "Pode fazer média simples 25%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:clientes-13",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-014",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Aplicação",
+      "q": "25% dos emails são spam. O filtro marca 90% do spam e5% dos não-spam. P(marcado)=...",
+      "o": [
+        "0,95.",
+        "0,2625.",
+        "0,2375.",
+        "0,225."
+      ],
+      "a": 1,
+      "sol": "0,25×0,90+0,75×0,05=0,225+0,0375=0,2625.",
+      "hyp": "Pode somar sensibilidade e falso positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:spam-14",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-015",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No exemplo do spam, P(spam∩marcado)=...",
+      "o": [
+        "0,25.",
+        "0,90.",
+        "0,225.",
+        "0,2625."
+      ],
+      "a": 2,
+      "sol": "0,25×0,90=0,225.",
+      "hyp": "Pode usar a probabilidade total de marcado.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:spam-junta-15",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-016",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "No exemplo do spam, P(não spam∩marcado)=...",
+      "o": [
+        "0,05.",
+        "0,75.",
+        "0,225.",
+        "0,0375."
+      ],
+      "a": 3,
+      "sol": "0,75×0,05=0,0375.",
+      "hyp": "Pode usar apenas a taxa de falso positivo.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:spam-junta-16",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-017",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Compreensão",
+      "q": "A fórmula de Bayes, num caso simples, permite calcular...",
+      "o": [
+        "P(A|B) a partir de P(B|A), P(A) e P(B).",
+        "P(A∪B) sem qualquer informação adicional.",
+        "P(A) apenas a partir de P(A^c).",
+        "uma frequência absoluta sem amostra."
+      ],
+      "a": 0,
+      "sol": "P(A|B)=P(B|A)P(A)/P(B), quando P(B)>0.",
+      "hyp": "Pode confundir Bayes com probabilidade total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:bayes-17",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-018",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,4, P(B|A)=0,5 e P(B)=0,25, então P(A|B)=...",
+      "o": [
+        "0,2.",
+        "0,8.",
+        "0,5.",
+        "0,1."
+      ],
+      "a": 1,
+      "sol": "0,5×0,4/0,25=0,8.",
+      "hyp": "Pode inverter numerador e denominador.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:bayes-num-18",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-019",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)=0,9, P(A)=0,1 e P(B)=0,18, então P(A|B)=...",
+      "o": [
+        "0,9.",
+        "0,18.",
+        "0,5.",
+        "0,09."
+      ],
+      "a": 2,
+      "sol": "0,9×0,1/0,18=0,09/0,18=0,5.",
+      "hyp": "Pode tomar a sensibilidade como posterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:bayes-num-19",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-020",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 2,
+      "cognitive": "Interpretação",
+      "q": "Em Bayes, P(A) antes de observar B é frequentemente chamada probabilidade...",
+      "o": [
+        "condicionada.",
+        "conjunta.",
+        "total.",
+        "a priori."
+      ],
+      "a": 3,
+      "sol": "É a informação inicial sobre A antes da evidência B.",
+      "hyp": "Pode confundir prior com posterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:prior-20",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-021",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "P(A|B) após observar B é uma probabilidade...",
+      "o": [
+        "a posteriori.",
+        "marginal anterior.",
+        "impossível.",
+        "de complemento."
+      ],
+      "a": 0,
+      "sol": "A evidência B atualiza a probabilidade atribuída a A.",
+      "hyp": "Pode trocar prior e posterior.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:posterior-21",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-022",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma doença afeta 1% da população. Um teste dá positivo em99% dos doentes e em5% dos não doentes. P(positivo)=...",
+      "o": [
+        "0,99.",
+        "0,0594.",
+        "0,05.",
+        "0,0495."
+      ],
+      "a": 1,
+      "sol": "0,01×0,99+0,99×0,05=0,0099+0,0495=0,0594.",
+      "hyp": "Pode confundir sensibilidade com taxa global de positivos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:teste-22",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-023",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma doença afeta 1% da população e um teste dá positivo em 99% dos doentes. Qual é P(doente∩positivo)?",
+      "o": [
+        "0,99.",
+        "0,05.",
+        "0,0099.",
+        "0,0594."
+      ],
+      "a": 2,
+      "sol": "0,01×0,99=0,0099.",
+      "hyp": "Pode usar a taxa de positivos total.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:teste-junta-23",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-024",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Uma doença afeta 1% da população. Um teste dá positivo em 99% dos doentes e em 5% dos não doentes. Qual é aproximadamente P(doente|positivo)?",
+      "o": [
+        "99%.",
+        "5,94%.",
+        "1%.",
+        "16,7%."
+      ],
+      "a": 3,
+      "sol": "0,0099/0,0594≈0,1667=16,7%.",
+      "hyp": "Pode confundir P(+|D) com P(D|+).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:base-rate-24",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-025",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Interpretação",
+      "q": "Num exemplo com prevalência de 1%, sensibilidade de 99% e 5% de falsos positivos, P(doença|positivo) é cerca de 16,7%. Isto mostra que uma elevada sensibilidade do teste...",
+      "o": [
+        "não implica, por si só, elevada P(doença|positivo).",
+        "garante posterior superior a90%.",
+        "torna irrelevante a prevalência.",
+        "elimina falsos positivos."
+      ],
+      "a": 0,
+      "sol": "A prevalência e a taxa de falsos positivos também influenciam fortemente o posterior.",
+      "hyp": "Pode ignorar a taxa-base.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:base-rate-25",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-026",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Duas urnas são escolhidas com probabilidades 0,4 e0,6. Na U1, P(V)=0,75; na U2, P(V)=0,25. P(V)=...",
+      "o": [
+        "0,50.",
+        "0,45.",
+        "0,25.",
+        "0,75."
+      ],
+      "a": 1,
+      "sol": "0,4×0,75+0,6×0,25=0,30+0,15=0,45.",
+      "hyp": "Pode fazer média simples 0,50.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:urnas-26",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-027",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Duas urnas são escolhidas com probabilidades 0,4 e 0,6. Na U1, P(V)=0,75. Qual é P(U1∩V)?",
+      "o": [
+        "0,75.",
+        "0,40.",
+        "0,30.",
+        "0,45."
+      ],
+      "a": 2,
+      "sol": "0,4×0,75=0,30.",
+      "hyp": "Pode usar P(V|U1) como conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:urnas-junta-27",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-028",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Duas urnas são escolhidas com probabilidades P(U1)=0,4 e P(U2)=0,6; P(V|U1)=0,75 e P(V|U2)=0,25. Sabendo que saiu V, qual é P(U1|V)?",
+      "o": [
+        "0,4.",
+        "0,75.",
+        "0,45.",
+        "2/3."
+      ],
+      "a": 3,
+      "sol": "0,30/0,45=2/3.",
+      "hyp": "Pode manter a probabilidade inicial da urna.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:urnas-bayes-28",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-029",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Três caixas são escolhidas com probabilidades 0,2,0,3,0,5. P(sucesso|caixa)=0,1,0,4,0,8. P(sucesso)=...",
+      "o": [
+        "0,54.",
+        "0,43.",
+        "0,80.",
+        "0,30."
+      ],
+      "a": 0,
+      "sol": "0,02+0,12+0,40=0,54.",
+      "hyp": "Pode fazer média simples 0,433 sem pesos.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:3-caixas-29",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-030",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Três caixas são escolhidas com probabilidades 0,2, 0,3 e 0,5; as probabilidades de sucesso condicionadas às caixas são 0,1, 0,4 e 0,8. Qual é P(caixa3∩sucesso)?",
+      "o": [
+        "0,8.",
+        "0,4.",
+        "0,5.",
+        "0,54."
+      ],
+      "a": 1,
+      "sol": "0,5×0,8=0,4.",
+      "hyp": "Pode usar a taxa condicional 0,8 diretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:3-caixas-junta-30",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-031",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Sabendo que houve sucesso, a probabilidade de ter sido a caixa3 é...",
+      "o": [
+        "0,5.",
+        "0,8.",
+        "20/27 aproximadamente0,741.",
+        "0,4."
+      ],
+      "a": 2,
+      "sol": "0,4/0,54=40/54=20/27≈0,741.",
+      "hyp": "Pode confundir posterior com probabilidade inicial0,5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:3-caixas-bayes-31",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-032",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(B|A)>P(B|A^c), observar B tende a...",
+      "o": [
+        "diminuir P(A) necessariamente para zero.",
+        "não alterar P(A).",
+        "tornar A impossível.",
+        "aumentar P(A|B) relativamente a P(A), desde que ambas as classes tenham peso positivo."
+      ],
+      "a": 3,
+      "sol": "B é evidência relativamente mais provável sob A do que sob A^c.",
+      "hyp": "Pode confundir associação probabilística com certeza ou causalidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:evidencia-32",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-033",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,5, P(B|A)=0,7, P(B|A^c)=0,3. P(B)=...",
+      "o": [
+        "0,5.",
+        "0,7.",
+        "0,3.",
+        "0,21."
+      ],
+      "a": 0,
+      "sol": "0,5×0,7+0,5×0,3=0,5.",
+      "hyp": "Pode escolher uma das condicionais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:simetrico-33",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-034",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,5, P(B|A)=0,7 e P(B|A^c)=0,3, então P(A|B)=...",
+      "o": [
+        "0,5.",
+        "0,7.",
+        "0,3.",
+        "0,35."
+      ],
+      "a": 1,
+      "sol": "P(A∩B)=0,35; dividir por P(B)=0,5 dá0,7.",
+      "hyp": "Pode não atualizar ou usar P(B|A^c).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:simetrico-bayes-34",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-035",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "P(A)=0,2, P(B|A)=0,9, P(B|A^c)=0,4. P(B)=...",
+      "o": [
+        "0,9.",
+        "0,4.",
+        "0,5.",
+        "0,58."
+      ],
+      "a": 2,
+      "sol": "0,2×0,9+0,8×0,4=0,18+0,32=0,50.",
+      "hyp": "Pode somar os produtos incorretamente.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:ponderada-35",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-036",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 3,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=0,2, P(B|A)=0,9 e P(B|A^c)=0,4, então P(A|B)=...",
+      "o": [
+        "0,2.",
+        "0,9.",
+        "0,5.",
+        "0,36."
+      ],
+      "a": 3,
+      "sol": "P(A∩B)=0,18; 0,18/0,50=0,36.",
+      "hyp": "Pode confundir P(B|A)=0,9 com P(A|B).",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:ponderada-bayes-36",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-037",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma condição rara ocorre em2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
+      "o": [
+        "0,117.",
+        "0,105.",
+        "0,95.",
+        "0,019."
+      ],
+      "a": 0,
+      "sol": "0,02×0,95+0,98×0,10=0,019+0,098=0,117.",
+      "hyp": "Pode usar apenas a sensibilidade.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:alarme-37",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-038",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Uma condição ocorre em 2% dos casos. Um alarme dispara em 95% dos casos com condição e em 10% sem condição. Qual é aproximadamente P(condição|alarme)?",
+      "o": [
+        "95%.",
+        "16,2%.",
+        "2%.",
+        "11,7%."
+      ],
+      "a": 1,
+      "sol": "0,019/0,117≈0,1624.",
+      "hyp": "Pode inverter a condicional.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:alarme-bayes-38",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-039",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se dois grupos têm pesos 0,8 e0,2 e taxas 0,1 e0,9, a taxa global é...",
+      "o": [
+        "0,5.",
+        "0,18.",
+        "0,26.",
+        "0,9."
+      ],
+      "a": 2,
+      "sol": "0,8×0,1+0,2×0,9=0,08+0,18=0,26.",
+      "hyp": "Pode fazer média simples0,5.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:pesos-desiguais-39",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-040",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Uma média simples das taxas condicionais é correta no teorema da probabilidade total apenas quando...",
+      "o": [
+        "há dois grupos.",
+        "as taxas são diferentes.",
+        "os grupos são independentes.",
+        "os pesos dos grupos são iguais, ou por coincidência numérica produz o mesmo valor."
+      ],
+      "a": 3,
+      "sol": "A fórmula correta usa pesos P(Ai); com pesos iguais reduz-se à média simples.",
+      "hyp": "Pode fazer média simples em qualquer mistura.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:media-simples-40",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-041",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Três classes têm pesos 0,2,0,5,0,3 e taxas de sucesso0,4,0,6,0,9. P(sucesso)=...",
+      "o": [
+        "0,65.",
+        "0,633.",
+        "0,6.",
+        "1,9."
+      ],
+      "a": 0,
+      "sol": "0,08+0,30+0,27=0,65.",
+      "hyp": "Pode fazer média simples≈0,633.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:3-grupos-41",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-042",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Três classes têm pesos 0,2, 0,5 e 0,3 e taxas de sucesso 0,4, 0,6 e 0,9. Qual é P(classe3∩sucesso)?",
+      "o": [
+        "0,9.",
+        "0,27.",
+        "0,3.",
+        "0,65."
+      ],
+      "a": 1,
+      "sol": "0,3×0,9=0,27.",
+      "hyp": "Pode usar a taxa condicionada como conjunta.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:3-grupos-junta-42",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-043",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Três classes têm pesos 0,2, 0,5 e 0,3 e taxas de sucesso 0,4, 0,6 e 0,9. Qual é aproximadamente P(classe3|sucesso)?",
+      "o": [
+        "0,3.",
+        "0,9.",
+        "0,415.",
+        "0,27."
+      ],
+      "a": 2,
+      "sol": "0,27/0,65≈0,415.",
+      "hyp": "Pode manter o peso inicial0,3.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:3-grupos-bayes-43",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-044",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=p, P(B|A)=0,8 e P(B|A^c)=0,2 e P(B)=0,5, então p=...",
+      "o": [
+        "0,2.",
+        "0,8.",
+        "0,3.",
+        "0,5."
+      ],
+      "a": 3,
+      "sol": "0,5=0,8p+0,2(1−p)=0,2+0,6p =>p=0,5.",
+      "hyp": "Pode escolher diretamente uma das condicionais.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:resolver-peso-44",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-045",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Raciocínio",
+      "q": "Se P(A)=p, P(B|A)=0,9, P(B|A^c)=0,3 e P(B)=0,42, então p=...",
+      "o": [
+        "0,2.",
+        "0,42.",
+        "0,3.",
+        "0,7."
+      ],
+      "a": 0,
+      "sol": "0,42=0,9p+0,3−0,3p=0,3+0,6p =>p=0,2.",
+      "hyp": "Pode usar P(B) como peso.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:resolver-peso-45",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-046",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um seguro tem 30% clientes jovens e70% adultos. Sinistro anual:12% jovens,5% adultos. Taxa global de sinistro=...",
+      "o": [
+        "8,5%.",
+        "7,1%.",
+        "17%.",
+        "5%."
+      ],
+      "a": 1,
+      "sol": "0,3×0,12+0,7×0,05=0,036+0,035=0,071.",
+      "hyp": "Pode fazer média simples8,5%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:seguro-46",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-047",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Modelação",
+      "q": "Um seguro tem 30% clientes jovens e 70% adultos. A taxa anual de sinistro é 12% nos jovens e 5% nos adultos. Sabendo que houve sinistro, qual é aproximadamente P(cliente jovem)?",
+      "o": [
+        "30%.",
+        "12%.",
+        "50,7%.",
+        "7,1%."
+      ],
+      "a": 2,
+      "sol": "0,036/0,071≈0,507.",
+      "hyp": "Pode manter o peso inicial30%.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:seguro-bayes-47",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-048",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Ao aplicar Bayes, o denominador P(B) pode ser obtido por...",
+      "o": [
+        "P(A) apenas.",
+        "P(B|A) apenas.",
+        "P(A∩B) apenas.",
+        "probabilidade total sobre uma partição relevante."
+      ],
+      "a": 3,
+      "sol": "Soma-se a evidência B através de todos os ramos da partição.",
+      "hyp": "Pode usar apenas o ramo favorável à hipótese.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:bayes-denominador-48",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-049",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "A probabilidade total serve sobretudo para...",
+      "o": [
+        "agregar probabilidades condicionais de um resultado através de grupos/ramos que cobrem Ω.",
+        "provar independência automaticamente.",
+        "substituir qualquer probabilidade condicionada por uma marginal.",
+        "contar permutações."
+      ],
+      "a": 0,
+      "sol": "A técnica decompõe o resultado pelos vários caminhos possíveis.",
+      "hyp": "Pode confundir com regras de contagem ou independência.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:interpretacao-49",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    },
+    {
+      "id": "VN12PROB-PT-050",
+      "themeId": "12-prob",
+      "subtopicId": "12-prob-total",
+      "year": "12.º",
+      "difficulty": 4,
+      "cognitive": "Interpretação",
+      "q": "Num problema em cadeia, uma boa estratégia é...",
+      "o": [
+        "somar todas as probabilidades dadas sem estrutura.",
+        "identificar ramos/partição, multiplicar ao longo dos caminhos e somar caminhos alternativos.",
+        "multiplicar todas as probabilidades do enunciado.",
+        "usar sempre Bayes, mesmo sem pergunta inversa."
+      ],
+      "a": 1,
+      "sol": "A árvore ou decomposição em caminhos reduz erros de condicionamento e agregação.",
+      "hyp": "Pode misturar regras de soma e produto.",
+      "contexts": [
+        "mission",
+        "training",
+        "exam"
+      ],
+      "signature": "12-prob-total:estrategia-50",
+      "reviewStatus": "prototype",
+      "origin": "original_vnext_2026",
+      "optionOrderVersion": 1
+    }
+  ]
+}
