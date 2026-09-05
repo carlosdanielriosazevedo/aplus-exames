@@ -12,6 +12,11 @@ assert.equal((page.match(/<StudentNav active=/g)||[]).length,4,"exactly four pri
 assert.doesNotMatch(page,/STUDENT_NAV[\s\S]{0,300}(?:Exames|Pais|Conta)/);
 assert.match(page,/className="adaptivePath"/);
 assert.match(page,/MISSÃO DE HOJE/);
+assert.match(page,/const FIRST_USE_TOUR_STEPS=\[[\s\S]*?PASSO 1 DE 3[\s\S]*?PASSO 2 DE 3[\s\S]*?PASSO 3 DE 3[\s\S]*?\];/);
+assert.match(page,/function FirstUseTour\([\s\S]*?Seguinte →[\s\S]*?Saltar explicação/);
+assert.match(page,/showFirstUseTour[\s\S]*?FirstUseTour[\s\S]*?DailyMissionModal/);
+assert.match(page,/Como funciona a app/);
+assert.match(page,/firstUseTourCompleted:true/);
 assert.match(page,/PRÓXIMO PASSO PROVÁVEL/);
 assert.match(page,/function TrainHub/);
 assert.match(page,/Rever matéria/);
