@@ -70,3 +70,25 @@ It does **not** certify all 5 650 questions as mathematically/pedagogically fina
 6. safe integration with year scope and 12.º optional-topic selection.
 
 Until those gates are completed, all questions remain `reviewStatus: "prototype"` and must stay disconnected from the live adaptive engine.
+
+
+## Context-independence pass
+
+A second QA layer was completed after the structural pass to make questions safe for isolated adaptive selection.
+
+The audit specifically searched for question text that depended on hidden previous context, such as:
+- "item anterior", "caso anterior", "problema anterior";
+- "na mesma urna/rede/variável";
+- "no mesmo exemplo/contexto/grupo/produto";
+- "com as mesmas funções";
+- equivalent references that assume the learner has seen the immediately preceding item.
+
+Affected questions across 10.º, 11.º, 12.º mandatory and 12.º optional content were rewritten to include the required data directly in the question, without intentionally changing the mathematical answer.
+
+A preventive audit was added:
+- `scripts/vnext-context-independence-audit.mjs`
+- npm script: `vnext-context:audit`
+
+This is important because Mission, Training and Exam contexts may sample questions independently or in a different order.
+
+The pass still does **not** promote any item beyond `prototype`; it only removes a class of sequencing/UX defects before mathematical and pedagogical approval.
