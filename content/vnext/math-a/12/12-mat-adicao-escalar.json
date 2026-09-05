@@ -881,7 +881,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Modelação",
-      "q": "No mesmo contexto, B−A representa...",
+      "q": "Se A contém vendas do 1.º trimestre e B do 2.º trimestre nas mesmas lojas/produtos, então B−A representa...",
       "o": [
         "variação absoluta do 1.º para o 2.º trimestre.",
         "total dos dois trimestres.",
@@ -1205,7 +1205,7 @@
       "year": "12.º opcional",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "Se A contém coordenadas de vários pontos por colunas e somamos a mesma matriz de deslocamentos D compatível, A+D pode representar...",
+      "q": "Se A contém coordenadas de vários pontos por colunas e D contém deslocamentos compatíveis para esses pontos, A+D pode representar...",
       "o": [
         "translação das coordenadas.",
         "rotação obrigatoriamente.",
