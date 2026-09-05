@@ -314,7 +314,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "No mesmo exemplo, em x=3 ocorre...",
+      "q": "Se f'(x)=x(x−3), o que ocorre em x=3?",
       "o": [
         "máximo local.",
         "nenhum extremo.",
