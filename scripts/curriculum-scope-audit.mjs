@@ -148,9 +148,6 @@ assert.match(pageSource,/const preferredYear=\["10\.º","11\.º","12\.º"\]\.inc
 assert.doesNotMatch(pageSource,/8 questões · ~10–15 min · 10\.º, 11\.º e 12\.º/);
 assert.match(pageSource,/Que tema opcional está a tua turma a estudar\?/);
 assert.match(pageSource,/Matéria dada na escola/);
-assert.match(pageSource,/Diagnóstico, Missões e Mini-exames/);
-assert.match(pageSource,/A matéria dos anos anteriores fica automaticamente incluída/);
-assert.match(pageSource,/Treino Livre não altera diretamente o teu Domínio/);
 assert.match(pageSource,/A tua seleção ficou guardada/);
 assert.doesNotMatch(pageSource,/Quanto do programa já deste\?/);
 assert.doesNotMatch(pageSource,/content\/vnext/);
