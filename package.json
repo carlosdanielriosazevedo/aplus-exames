@@ -32,7 +32,8 @@
     "editorial-revisions:audit": "node --experimental-default-type=module scripts/editorial-revisions-audit.mjs",
     "pre-review-qa:audit": "node --experimental-default-type=module scripts/pre-review-qa-audit.mjs",
     "hybrid-validation:audit": "node --experimental-default-type=module scripts/hybrid-validation-audit.mjs",
-    "teacher-review:hybrid": "node --experimental-default-type=module scripts/generate-hybrid-teacher-review.mjs"
+    "teacher-review:hybrid": "node --experimental-default-type=module scripts/generate-hybrid-teacher-review.mjs",
+    "curriculum-scope:audit": "node --experimental-default-type=module scripts/curriculum-scope-audit.mjs"
   },
   "dependencies": {
     "next": "14.2.5",

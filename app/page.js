@@ -55,6 +55,7 @@ import {
   createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
   transactDiagnosticAnswer
 } from "./lib/diagnosticRecovery";
+import {academicScopeThemes,diagnosticBlueprintForProfile} from "./lib/curriculumScope";
 import {
   claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
 } from "./lib/reliability";
@@ -132,7 +133,7 @@ const initial={
   pedagogicalIdVersion:1,
   pedagogicalMemoryVersion:2,
   parentInvites:[],
-  profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear"}
+  profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[]}
 };
 
 export default function App(){
@@ -171,7 +172,7 @@ export default function App(){
     let recoveredCompletion=false;
     let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
-    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&draft.version!==2));
+    const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
     if(!next.diagnosticDone&&legacyDiagnostic){
       const recovery=recoverLegacyDiagnosticSessions({state:next,saveState:saveLocalState});
       if(recovery.ok){
@@ -250,6 +251,7 @@ export default function App(){
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
+  if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
@@ -452,21 +454,41 @@ function suggestedExamTimingForYear(year,current){
   return current||"unsure";
 }
 
-function StudentProfile({s,setS,go}){
+function StudentProfile({s,setS,go,editing=false}){
   const [p,setP]=useState(s.profile||initial.profile);
   function save(){
+    if(editing){
+      setS(prev=>migrateDailyMission({...prev,profile:p}));
+      go("progress");
+      return;
+    }
     setS(prev=>recordMilestone({...prev,profile:p},"profile_completed",{
       schoolYear:p.schoolYear||null,
       examTiming:p.examTiming||null
     }));
     go("goalOnboard");
   }
-  return <Shell><Logo/><p className="eyebrow">ANTES DO DIAGNÓSTICO</p>
-    <h1>Ajuda a A+ a começar no sítio certo.</h1>
-    <p className="muted">Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</p>
+  return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":"ANTES DO DIAGNÓSTICO"}</p>
+    <h1>{editing?"Atualiza o que estás a estudar.":"Ajuda a A+ a começar no sítio certo."}</h1>
+    <p className="muted">{editing
+      ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a A+ ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
+      :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
 
     <h3>Em que ano estás?</h3>
-    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming)})}>{x}</button>)}</div>
+    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[]})}>{x}</button>)}</div>
+
+    {p.schoolYear==="12.º"&&<>
+      <h3>Que tema opcional está a tua turma a estudar?</h3>
+      <p className="muted">Seleciona apenas o que já foi escolhido na tua turma. Podes selecionar mais do que um se for esse o caso. Se ainda não sabes, deixa vazio.</p>
+      <div className="stackChoices">{[
+        ["inferencia","Inferência estatística"],
+        ["integrais","Primitivas e integrais"],
+        ["matrizes","Matrizes"]
+      ].map(([v,l])=>{
+        const selected=(p.optionalTopics||[]).includes(v);
+        return <button key={v} className={selected?"sel":""} onClick={()=>setP({...p,optionalTopics:selected?(p.optionalTopics||[]).filter(x=>x!==v):[...(p.optionalTopics||[]),v]})}>{l}</button>;
+      })}</div>
+    </>}
 
     <h3>{p.schoolYear==="Já terminei o secundário"?"Que nota tinhas aproximadamente a Matemática?":"Que nota tens tido aproximadamente a Matemática?"}</h3>
     <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
@@ -490,7 +512,7 @@ function StudentProfile({s,setS,go}){
     </div>
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a A+ não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
-    <button className="primary" onClick={save}>Continuar</button>
+    <button className="primary" onClick={save}>{editing?"Guardar percurso":"Continuar"}</button>
   </Shell>
 }
 
@@ -551,11 +573,13 @@ function finalizeDiagnosticState(nextState,draft){
 
 function DiagIntro({s,setS,go}){
   const [saveError,setSaveError]=useState(false);
-  const available=eligibleCount(s,"diagnostic");
-  const gated=(s.betaMode||"internal")!=="internal" && available===0;
+  const difficulty=startingDifficulty(s.profile,s.goal);
+  const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
+  const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
+  const gated=blueprint.length===0;
   return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
     <h1>Poucas perguntas. Muita informação.</h1>
-    <p className="muted">A A+ mistura conteúdos de 10.º, 11.º e 12.º. Começa por perguntas-âncora e só faz uma pergunta extra quando precisa de localizar melhor uma dificuldade.</p>
+    <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se a evidência for consistente.</small></div>
       <div><span>🎯</span><b>Direto ao ponto</b><small>Não existe uma pergunta obrigatória para cada tema.</small></div>
@@ -570,9 +594,8 @@ function DiagIntro({s,setS,go}){
       if(existing?.kind==="diagnostic"){go("diagRun");return}
       if(open.length){setSaveError(true);return}
       const ses=sessionStart("diagnostic",{goal:s?.goal||null});
-      const difficulty=startingDifficulty(s.profile,s.goal);
-      const current=diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[0],difficulty,s);
-      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty});
+      const current=diagnosticAnchor(blueprint[0],difficulty,s);
+      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty,blueprint});
       if(!saveSessionDraft(draft)){setSaveError(true);return}
       const started=ensureDiagnosticStarted(s,draft);
       if(!started.ok||!saveLocalState(started.state)){setSaveError(true);return}
@@ -600,7 +623,8 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const anchorResults=draft.anchorResults,probeCount=draft.probeCount;
 
   const anchorsDone=anchorResults.length;
-  const estimate=Math.min(94,Math.round(((anchorsDone+probeCount)/8)*100));
+  const blueprintLength=Math.max(1,draft.blueprint?.length||DIAGNOSTIC_BLUEPRINT.length);
+  const estimate=Math.min(94,Math.round(((anchorsDone+Math.min(probeCount,1)*.5)/blueprintLength)*100));
 
   function answer(n){
     if(!ready||fb||draft.pendingResponse)return;
@@ -650,6 +674,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
 function DiagResult({s,setS,go}){
   const measured=measuredThemes(s);
+  const scopedTotal=academicScopeThemes(s.profile).length;
   const priority=selectMissionTheme(s);
   const index=prepIndex(s);
   const ranked=[...measured].sort((a,b)=>(s.scores[a.id].domain??100)-(s.scores[b.id].domain??100)).slice(0,4);
@@ -658,12 +683,12 @@ function DiagResult({s,setS,go}){
     <p className="eyebrow">JÁ TEMOS INFORMAÇÃO SUFICIENTE</p>
     <h1>Podemos criar o teu primeiro plano.</h1>
     <div className="indexCircle"><strong>{index}</strong><span>/100</span></div>
-    <p className="indexQualifier">Índice inicial parcial · {measured.length}/{TAXONOMY.length} áreas com evidência</p>
+    <p className="indexQualifier">Índice inicial parcial · {measured.length}/{scopedTotal} áreas do teu percurso com evidência</p>
     <p className="muted">Não é uma fotografia completa da Matemática A. A A+ vai preencher as áreas em falta e recalibrar as restantes durante as próximas Missões.</p>
   </div>
 
-  <div className="notice"><b>Primeira prioridade: {priority.short}</b>
-    <span>A escolha combina Domínio, Certeza da A+, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>
+  {priority&&<div className="notice"><b>Primeira prioridade: {priority.short}</b>
+    <span>A escolha combina Domínio, Certeza da A+, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>}
 
   <div className="resultSkills">{ranked.map(t=>{
     const v=s.scores[t.id];
@@ -1316,7 +1341,8 @@ function TrainHub({s,go}){
 
 
 function Train({s,setS,go,start}){
-  const [year,setYear]=useState("12.º");
+  const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
+  const [year,setYear]=useState(preferredYear);
   const themes=byYear(year);
   const [themeId,setThemeId]=useState(themes[0].id);
   const current=theme(themeId)||themes[0];
@@ -1483,8 +1509,15 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
 }
 
 function Progress({s,go}){
-  const [year,setYear]=useState("12.º");
-  const hypotheses=allLearningHypotheses(s,8);
+  const scopedThemes=academicScopeThemes(s.profile);
+  const allowedYears=["10.º","11.º","12.º"].filter(y=>scopedThemes.some(t=>t.year===y));
+  const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)&&allowedYears.includes(s.profile.schoolYear)
+    ?s.profile.schoolYear
+    :(allowedYears.at(-1)||"10.º");
+  const [year,setYear]=useState(preferredYear);
+  useEffect(()=>{if(!allowedYears.includes(year))setYear(preferredYear)},[s.profile?.schoolYear]);
+  const scopeIds=new Set(scopedThemes.map(t=>t.id));
+  const hypotheses=allLearningHypotheses(s,8).filter(h=>scopeIds.has(h.targetThemeId));
   const activeHypotheses=hypotheses.filter(h=>h.active);
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
   const overview=measuredThemes(s).sort((a,b)=>(s.scores[b.id].domain??0)-(s.scores[a.id].domain??0)).slice(0,5);
@@ -1493,10 +1526,11 @@ function Progress({s,go}){
     <h1>Como estás a evoluir.</h1>
     <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p></div>
     <div className="progressOverview">{overview.map(t=><div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(s.scores[t.id].domain??0)+"%"}}/></div><b>{s.scores[t.id].domain??"—"}</b></div>)}</div>
+    <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar percurso escolar</button>
     <FriendsBetaDisclaimer s={s} compact/>
     <details className="progressDetails"><summary>Ver mapa completo →</summary>
     <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
-    <div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
+    <div className="chips">{allowedYears.map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
 
     {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
       {activeHypotheses.length>0?<>{activeHypotheses.slice(0,5).map(h=><div className={"hypothesisRow lifecycle-"+h.lifecycleStatus} key={h.key}>
@@ -1525,7 +1559,7 @@ function Progress({s,go}){
       <p>Uma hipótese pode ganhar força, tornar-se ambígua, ser resolvida ou ficar desatualizada. Se aparecer nova evidência contraditória, pode ser reaberta. <b>Hipótese não é diagnóstico definitivo.</b></p>
     </div>}
 
-    {byYear(year).map(t=>{
+    {scopedThemes.filter(t=>t.year===year).map(t=>{
       const v=s.scores[t.id],has=v.domain!==null;
       return <div className={"prog "+(!has?"unmeasured":"")} key={t.id}>
         <div className="progHead"><b>{t.short}</b><small>{t.name}</small></div>
@@ -1547,12 +1581,14 @@ function Progress({s,go}){
 
 function Exams({s,go,startMini}){
   const last=s.lastExam;
-  const miniAvailable=buildMiniExam(s,8).length;
+  const miniQuestions=buildMiniExam(s,8);
+  const miniAvailable=miniQuestions.length;
   const miniReady=miniAvailable>=8;
+  const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
   return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame A+</b><span>{miniReady?"8 questões · ~10–15 min · 10.º, 11.º e 12.º":`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+      <div><b>⚡ Mini-exame A+</b><span>{miniReady?`8 questões · ~10–15 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{String(last.score20).replace('.',',')}/20</b></div><span>{last.correctCount}/{last.total} corretas</span></div>}
@@ -1974,7 +2010,7 @@ function AccountCloud({s,setS,go}){
       <div className="cloudProgressCard">
         <div><span>Progresso local atual</span><b>{localIndex??"—"}<small>/100 índice parcial</small></b></div>
         <div><span>XP</span><b>{s.xp}</b></div>
-        <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{TAXONOMY.length}</b></div>
+        <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{academicScopeThemes(s.profile).length}</b></div>
       </div>
 
       <div className="cloudRevisionCard">
@@ -2141,7 +2177,7 @@ function Parent({s,setS,go}){
     {link&&<>
       <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · Matemática A</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
       <small className="parentFoot">* índice ainda parcial enquanto o perfil está a ser construído</small>
-      <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{TAXONOMY.length}</b><span>áreas com evidência</span></div></div>
+      <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{academicScopeThemes(s.profile).length}</b><span>áreas com evidência</span></div></div>
       {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{String(s.lastExam.score20).replace('.',',')}/20</b><small>{s.lastExam.correctCount}/{s.lastExam.total} corretas</small></div>}
       <div className="notice"><b>O que os pais veem?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados de avaliações — não cada resposta individual.</span></div>
 

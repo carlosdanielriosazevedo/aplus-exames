@@ -4,6 +4,7 @@ import {
 } from "../data/content.js";
 import {generateVariants,hasGenerator} from "./generators.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
+import {academicScopeThemes,isThemeInAcademicScope} from "./curriculumScope.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -232,7 +233,7 @@ export function applyEvidence(score,item,correct,source="diagnostic",strength=1,
 }
 
 export function measuredThemes(s){
-  return TAXONOMY.filter(t=>s.scores[t.id]?.domain!==null);
+  return academicScopeThemes(s?.profile).filter(t=>s.scores[t.id]?.domain!==null);
 }
 
 export function prepIndex(s){
@@ -254,7 +255,7 @@ export function priorityScore(t,s){
 }
 
 export function selectMissionTheme(s){
-  const assessed=TAXONOMY
+  const assessed=academicScopeThemes(s?.profile)
     .filter(t=>s.scores[t.id]?.domain!==null && eligibleQuestions(s,t.id,"mission").length)
     .map(t=>({t,p:priorityScore(t,s)}))
     .sort((a,b)=>b.p-a.p);
@@ -314,7 +315,7 @@ export function selectMissionQuestion(s,themeId,usedIds=[],usedSignatures=[]){
 
 export function selectPrereqQuestion(s,targetThemeId,usedIds=[],usedSignatures=[]){
   const preId=PREREQUISITES[targetThemeId];
-  if(!preId)return null;
+  if(!preId || !isThemeInAcademicScope(theme(preId),s?.profile))return null;
   const candidates=eligibleQuestions(s,preId,"mission")
     .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
   if(!candidates.length)return null;
@@ -493,7 +494,7 @@ export function nextDiagnosticDifficulty(previousDifficulty,correct,wasProbe=fal
 }
 
 export function unknownThemes(s){
-  return TAXONOMY.filter(t=>s.scores[t.id]?.domain===null);
+  return academicScopeThemes(s?.profile).filter(t=>s.scores[t.id]?.domain===null);
 }
 
 export function calibrationCandidates(s){
@@ -517,7 +518,7 @@ function recentMissionTypes(s,count=4){
 function confirmationCandidate(s){
   const signal=strongestTrainingSignal(s);
   const signalMcId=signal?.microcompetencyId||microcompetencyId(signal?.themeId,signal?.focus);
-  if(!signal || !eligibleQuestions(s,signal.themeId,"mission",signalMcId||signal.focus).length)return null;
+  if(!signal || !isThemeInAcademicScope(theme(signal.themeId),s?.profile) || !eligibleQuestions(s,signal.themeId,"mission",signalMcId||signal.focus).length)return null;
 
   const ageDays=Math.max(0,(Date.now()-(signal.at||Date.now()))/(1000*60*60*24));
   if(ageDays>21)return null;
@@ -579,7 +580,7 @@ function calibrationCandidate(s){
         {kind:"calibration",title:"Ainda não conhecemos bem esta área",detail:"Uma pergunta informativa ajuda a completar o mapa sem prolongar o diagnóstico inicial."},
         {kind:"exam",title:"É relevante o suficiente para ser medida",detail:"O motor prefere reduzir zonas desconhecidas que podem influenciar o plano."}
       ],
-      unlocks:likelyUnlocks(candidate.id)
+      unlocks:likelyUnlocks(candidate.id,s)
     },
     why:"coverage_gap"
   };
@@ -606,6 +607,7 @@ function investigationCandidate(s){
       Date.now()-(m.at||0)<1000*60*60*24
     );
     if(recentSame)continue;
+    if(!isThemeInAcademicScope(theme(h.targetThemeId),s?.profile))continue;
     if(!eligibleQuestions(s,h.targetThemeId,"mission",targetMcId||h.targetFocus).length)continue;
 
     const statusBonus=h.lifecycleStatus===HYPOTHESIS_STATUS.ambiguous
@@ -630,7 +632,7 @@ function investigationCandidate(s){
           {kind:"evidence",title:"A verificação foi espaçada no tempo",detail:`A última observação foi há cerca de ${Math.max(1,Math.round(ageDays))} dias.`}
         ],
         hypothesisKey:h.key,
-        unlocks:likelyUnlocks(h.targetThemeId)
+        unlocks:likelyUnlocks(h.targetThemeId,s)
       },
       why:"causal_followup"
     };
@@ -663,7 +665,7 @@ function priorityCandidate(s){
         : "O motor escolheu esta área como a próxima melhor ação para o teu perfil atual.",
       reasons:focusMissionReasons(t,focus,s),
       breakdown,
-      unlocks:likelyUnlocks(t.id)
+      unlocks:likelyUnlocks(t.id,s)
     },
     why:"next_best_action"
   };
@@ -728,6 +730,7 @@ export function markTrainingSignalConfirmed(signals,signal){
 }
 
 export function selectQuestionForPlan(s,plan,usedIds=[],usedSignatures=[]){
+  if(plan?.themeId && !isThemeInAcademicScope(theme(plan.themeId),s?.profile))return null;
   let curated=eligibleQuestions(s,plan.themeId,"mission",plan.focus)
     .filter(q=>isUsefulMissionInteraction(q,usedIds,usedSignatures));
 
@@ -787,8 +790,8 @@ export function seenQuestionIds(s){
   return new Set(ids);
 }
 
-function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive){
-  const all=eligibleQuestions(s,themeId,"exam");
+function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds=new Set()){
+  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!usedSessionIds.has(q.id));
   if(!all.length)return null;
   const unseen=all.filter(q=>!seenIds.has(q.id));
   const pool=unseen.length?unseen:all;
@@ -804,24 +807,23 @@ function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive){
 export function buildMiniExam(s,count=8){
   const seen=seenQuestionIds(s);
   const usedCognitive=new Set();
+  const usedSessionIds=new Set();
   const selected=[];
   const usedThemes=new Set();
+  const scopedThemes=academicScopeThemes(s?.profile)
+    .filter(t=>eligibleQuestions(s,t.id,"exam").length);
 
-  // Nesta versão o banco de produção ainda não existe. O mini-exame procura
-  // deliberadamente cobertura ampla: 10.º -> 11.º -> 12.º, em vez de se
-  // transformar noutra Missão focada apenas nas fragilidades do aluno.
-  const targets=[
-    {year:"10.º",n:2},
-    {year:"11.º",n:3},
-    {year:"12.º",n:3}
-  ];
+  const availableYears=["10.º","11.º","12.º"].filter(year=>scopedThemes.some(t=>t.year===year));
+  if(!availableYears.length)return [];
+
+  const base=Math.floor(count/availableYears.length);
+  let remainder=count%availableYears.length;
+  const targets=availableYears.map(year=>({year,n:base+(remainder-->0?1:0)}));
 
   for(const group of targets){
-    const candidates=byYear(group.year)
-      .filter(t=>eligibleQuestions(s,t.id,"exam").length)
+    const candidates=scopedThemes
+      .filter(t=>t.year===group.year)
       .sort((a,b)=>{
-        // relevância primeiro; em empate preferimos menor Certeza para o exame
-        // também acrescentar informação útil ao mapa global.
         const ac=s.scores[a.id]?.conf||0, bc=s.scores[b.id]?.conf||0;
         return (b.relevance-a.relevance) || (ac-bc);
       });
@@ -830,21 +832,34 @@ export function buildMiniExam(s,count=8){
       const inYear=selected.filter(q=>theme(q.themeId)?.year===group.year).length;
       if(inYear>=group.n)break;
       if(usedThemes.has(t.id))continue;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive);
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
       if(q){
-        selected.push(q);usedThemes.add(t.id);usedCognitive.add(q.cognitive);
+        selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);
       }
     }
   }
 
-  // Fallback caso o banco disponível não permita cumprir a distribuição.
   if(selected.length<count){
-    const themes=TAXONOMY.filter(t=>eligibleQuestions(s,t.id,"exam").length && !usedThemes.has(t.id))
+    const themes=scopedThemes
+      .filter(t=>!usedThemes.has(t.id))
       .sort((a,b)=>b.relevance-a.relevance);
     for(const t of themes){
       if(selected.length>=count)break;
-      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive);
-      if(q){selected.push(q);usedThemes.add(t.id);usedCognitive.add(q.cognitive)}
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
+      if(q){selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive)}
+    }
+  }
+
+  // Um scope pode ter menos temas live do que questões pedidas. Repetimos
+  // temas, nunca itens, em vez de saltar para matéria de um ano futuro.
+  let progress=true;
+  while(selected.length<count && progress){
+    progress=false;
+    for(const t of [...scopedThemes].sort((a,b)=>b.relevance-a.relevance)){
+      if(selected.length>=count)break;
+      const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
+      if(!q)continue;
+      selected.push(q);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);progress=true;
     }
   }
 
@@ -1100,15 +1115,17 @@ export function humanMissionReasons(t,s){
 }
 
 export function rankedStudyPriorities(s,limit=4){
-  return TAXONOMY
+  return academicScopeThemes(s?.profile)
     .filter(t=>s.scores[t.id]?.domain!==null && eligibleQuestions(s,t.id,"mission").length)
     .map(t=>({theme:t,breakdown:nextBestActionBreakdown(t,s)}))
     .sort((a,b)=>b.breakdown.total-a.breakdown.total)
     .slice(0,limit);
 }
 
-export function likelyUnlocks(themeId){
-  return dependentThemes(themeId).map(t=>({id:t.id,label:t.short,year:t.year}));
+export function likelyUnlocks(themeId,s=null){
+  return dependentThemes(themeId)
+    .filter(t=>!s || isThemeInAcademicScope(t,s?.profile))
+    .map(t=>({id:t.id,label:t.short,year:t.year}));
 }
 
 
@@ -1190,7 +1207,7 @@ export function focusMissionReasons(t,focus,s){
 }
 
 export function competenceMap(s,year=null){
-  const themes=year?byYear(year):TAXONOMY;
+  const themes=year?byYear(year).filter(t=>isThemeInAcademicScope(t,s?.profile)):academicScopeThemes(s?.profile);
   return themes.flatMap(t=>focusRows(s,t.id).map(r=>({themeId:t.id,theme:t.short,year:t.year,...r})));
 }
 
@@ -1223,6 +1240,7 @@ function causalCandidateScore(s,dep,q){
 export function selectCausalProbe(s,targetThemeId,targetFocus,usedIds=[],usedSignatures=[]){
   const deps=causalPrerequisitesFor(targetThemeId,targetFocus);
   for(const dep of deps){
+    if(!isThemeInAcademicScope(theme(dep.themeId),s?.profile))continue;
     const depRef=dep.microcompetencyId||dep.focus;
     let candidates=eligibleQuestions(s,dep.themeId,"mission",depRef)
       .filter(q=>{
