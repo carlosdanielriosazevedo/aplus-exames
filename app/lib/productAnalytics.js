@@ -4,6 +4,7 @@ import {localDayKey,dayGap} from "./engagement.js";
 export const FUNNEL_STEPS=[
   {id:"app_opened",label:"Abriu a app"},
   {id:"onboarding_started",label:"Começou onboarding"},
+  {id:"subjects_selected",label:"Escolheu disciplinas"},
   {id:"profile_completed",label:"Perfil inicial"},
   {id:"goal_completed",label:"Objetivo definido"},
   {id:"diagnostic_started",label:"Começou diagnóstico"},

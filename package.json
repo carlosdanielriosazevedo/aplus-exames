@@ -36,7 +36,8 @@
     "curriculum-scope:audit": "node scripts/curriculum-scope-audit.mjs",
     "vnext-content:audit": "node scripts/vnext-content-audit.mjs",
     "vnext-context:audit": "node scripts/vnext-context-independence-audit.mjs",
-    "vnext-pilot:audit": "node scripts/vnext-pilot-audit.mjs"
+    "vnext-pilot:audit": "node scripts/vnext-pilot-audit.mjs",
+    "subjects:audit": "node scripts/subjects-audit.mjs"
   },
   "dependencies": {
     "next": "14.2.5",

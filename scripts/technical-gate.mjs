@@ -3,6 +3,7 @@ import {spawnSync} from "node:child_process";
 
 const checks=[
   ["Syntax/JSX","npm",["run","syntax:audit"]],
+  ["Disciplinas do secundário","npm",["run","subjects:audit"]],
   ["IDs pedagógicos","npm",["run","competency-id:audit"]],
   ["Validação matemática","npm",["run","math-validation:audit"]],
   ["Engagement diário","npm",["run","engagement:audit"]],

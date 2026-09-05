@@ -4,6 +4,7 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
+import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel} from "./data/subjects";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -135,6 +136,8 @@ const initial={
   learningHypotheses:[],
   pedagogicalIdVersion:1,
   pedagogicalMemoryVersion:2,
+  selectedSubjectIds:[],
+  activeSubjectId:null,
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]}
 };
@@ -207,7 +210,10 @@ export default function App(){
 
     const recovered=draftScreen(validDraft);
     const canRecover=recovered&&(validDraft?.kind==="diagnostic"?!recoveredState.diagnosticDone:recoveredState.diagnosticDone);
-    if(recoveryError){
+    const preview=typeof window!=="undefined"?new URLSearchParams(window.location.search).get("preview"):null;
+    if(preview==="subjects"){
+      setScreen("subjectOnboard");
+    }else if(recoveryError){
       setScreen("diagRecoveryError");
     }else if(recoveredCompletion){
       setScreen("diagResult");
@@ -216,9 +222,7 @@ export default function App(){
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
-    }else{
-      setScreen(recoveredState.diagnosticDone?"home":"welcome");
-    }
+    }else setScreen(recoveredState.diagnosticDone?"home":"welcome");
     setHydrated(true);
   },[]);
 
@@ -253,6 +257,7 @@ export default function App(){
   const go=x=>setScreen(x);
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
+  if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
@@ -430,7 +435,7 @@ function Welcome({s,setS,go}){
     setS(prev=>recordMilestone(prev,"onboarding_started",{
       testerSegment:friends?segment:null
     }));
-    go("onboard");
+    go("subjectOnboard");
   }
 
   return <main className="dark center"><section className="hero">
@@ -449,6 +454,70 @@ function Welcome({s,setS,go}){
     <button disabled={friends&&!segment} onClick={start}>{friends?(segment?"Entrar no teste →":"Escolhe primeiro o teu perfil"):"Descobrir o meu nível →"}</button>
     <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends?"🧪 Feedback importante":"📈 Progresso real"}</span></div>
   </section></main>
+}
+
+function SubjectSelection({s,setS,go}){
+  const [selected,setSelected]=useState(()=>{
+    const saved=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
+    return saved;
+  });
+
+  function toggleSubject(subject){
+    if(!subject.available)return;
+    setSelected(current=>current.includes(subject.id)
+      ?current.filter(id=>id!==subject.id)
+      :[...current,subject.id]);
+  }
+
+  function save(){
+    if(!selected.length)return;
+    setS(prev=>recordMilestone({
+      ...prev,
+      selectedSubjectIds:selected,
+      activeSubjectId:selected[0]
+    },"subjects_selected",{subjectIds:selected}));
+    go("onboard");
+  }
+
+  return <Shell><Logo/>
+    <p className="eyebrow">O TEU PLANO DE ESTUDO</p>
+    <h1>Que disciplinas queres preparar?</h1>
+    <p className="muted">Escolhe os exames em que queres melhorar. Cada disciplina terá o seu diagnóstico, objetivo e plano de estudo.</p>
+    <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>
+
+    <div className="subjectSelectionSummary">
+      <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
+      <strong>Matemática A disponível</strong>
+    </div>
+
+    <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
+      const subjects=SECONDARY_EXAM_SUBJECTS.filter(subject=>subject.group===group.id);
+      return <section key={group.id} className="subjectGroup" aria-labelledby={`subject-group-${group.id}`}>
+        <h2 id={`subject-group-${group.id}`}>{group.label}</h2>
+        <div>{subjects.map(subject=>{
+          const isSelected=selected.includes(subject.id);
+          return <button
+            type="button"
+            key={subject.id}
+            className={`subjectCard ${isSelected?"selected":""} ${subject.available?"available":"coming"}`}
+            disabled={!subject.available}
+            aria-pressed={subject.available?isSelected:undefined}
+            onClick={()=>toggleSubject(subject)}
+          >
+            <span className="subjectIcon" aria-hidden="true">{subject.icon}</span>
+            <span className="subjectInfo">
+              <b>{subject.shortName||subject.name}</b>
+              <small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small>
+            </span>
+            <span className="subjectStatus">{subject.available?(isSelected?"✓ Selecionada":"Selecionar"):"Brevemente"}</span>
+          </button>;
+        })}</div>
+      </section>;
+    })}</div>
+
+    <div className="notice"><b>Começamos por uma disciplina</b><span>Nesta versão, apenas Matemática A está disponível. As restantes aparecem para mostrar como a app crescerá, mas ainda não podem ser selecionadas.</span></div>
+    <button className="primary" disabled={!selected.length} onClick={save}>Continuar com Matemática A</button>
+  </Shell>;
 }
 
 function suggestedExamTimingForYear(year,current){

@@ -1,6 +1,6 @@
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
-export const APP_STATE_VERSION=29;
+export const APP_STATE_VERSION=30;
 
 export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY){
   try{
@@ -49,7 +49,9 @@ export function buildSyncEnvelope(state){
       code:state.betaParticipant?.code||null,
       cohort:state.betaParticipant?.cohort||null,
       schoolYear:state.profile?.schoolYear||null,
-      goal:state.goal??null
+      goal:state.goal??null,
+      selectedSubjectIds:state.selectedSubjectIds||[],
+      activeSubjectId:state.activeSubjectId||null
     },
     beta:{
       mode:state.betaMode||"internal",
