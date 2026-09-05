@@ -624,6 +624,8 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
     <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p>
     <h1>O que já deste no {s.profile?.schoolYear}?</h1>
     <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
+    <div className="notice"><b>Diagnóstico, Missões e Mini-exames</b><span>No teu ano atual, a A+ usa apenas as submatérias que assinalares como já lecionadas. A matéria dos anos anteriores fica automaticamente incluída.</span></div>
+    <div className="notice"><b>Treino Livre</b><span>Podes praticar qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio nem inclui esse conteúdo automaticamente nas recomendações.</span></div>
     <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
     <div className="curriculumPicker">{themes.map(t=>{
       const rows=subtopicsByTheme.get(t.id)||[];
@@ -700,6 +702,7 @@ function finalizeDiagnosticState(nextState,draft){
 function DiagIntro({s,setS,go}){
   const [saveError,setSaveError]=useState(false);
   const difficulty=startingDifficulty(s.profile,s.goal);
+  const hasIndicatedScope=academicScopeThemes(s.profile).length>0;
   const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
@@ -713,10 +716,12 @@ function DiagIntro({s,setS,go}){
     </div>
     <div className="notice"><b>O objetivo do diagnóstico</b><span>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</span></div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
-    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
+    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
       ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
-      :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
-    {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button>}
+      :hasIndicatedScope
+        ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
+        :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
+    {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
     <button className="primary" disabled={gated} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
