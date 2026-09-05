@@ -706,15 +706,16 @@ function DiagIntro({s,setS,go}){
   const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
-  return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
-    <h1>Poucas perguntas. Muita informação.</h1>
+  return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL</p>
+    <h1>Diagnóstico</h1>
+    <div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</strong></div>
+    <h2>Poucas perguntas. Muita informação.</h2>
     <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se a evidência for consistente.</small></div>
       <div><span>🎯</span><b>Direto ao ponto</b><small>Não existe uma pergunta obrigatória para cada tema.</small></div>
       <div><span>🧠</span><b>Continua depois</b><small>O perfil é afinado nas Missões dos primeiros dias.</small></div>
     </div>
-    <div className="notice"><b>O objetivo do diagnóstico</b><span>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</span></div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
     {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
       ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
