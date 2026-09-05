@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Com os mesmos A e B, A∪B=...",
+      "q": "Num dado, A={2,4,6} e B={4,5,6}. Então A∪B=...",
       "o": [
         "{4,6}.",
         "{2,4,5,6}.",
@@ -1286,7 +1286,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Modelação",
-      "q": "No mesmo contexto, 'não tem qualquer desses defeitos' é...",
+      "q": "Num controlo de qualidade, A='peça tem defeito de pintura' e B='peça tem defeito dimensional'. 'Não tem qualquer desses defeitos' é...",
       "o": [
         "A∪B.",
         "A∩B.",
