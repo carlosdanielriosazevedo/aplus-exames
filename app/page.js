@@ -16,7 +16,7 @@ import {
   focusScore,focusRows,competenceMap,
   selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
   allLearningHypotheses,refreshLearningHypotheses,
-  recalibrateAllScores,migratePedagogicalIds,scopedThemeScore
+  recalibrateAllScores,migratePedagogicalIds,scopedThemeScore,questionById
 } from "./lib/engine";
 import {
   allFocusRows,qualitySnapshot,
@@ -1754,7 +1754,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
 function MiniExamResult({s,setS,go}){
   const r=s.lastExam;
   if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há resultado.</h1></Shell>;
-  const questions=r.questionIds.map(id=>QUESTION_BANK.find(q=>q.id===id)).filter(Boolean);
+  const questions=r.questionIds.map(questionById).filter(Boolean);
   const wrong=questions.map((q,i)=>({q,i,answer:r.answers[i]})).filter(x=>x.answer!==x.q.a);
   const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
   return <Shell><div className="centered completionMoment"><Logo/><div className="check">✓</div><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
