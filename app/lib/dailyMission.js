@@ -1,7 +1,7 @@
 
 import {localDayKey,missionCompletedToday} from "./engagement.js";
 import {TAXONOMY} from "../data/content.js";
-import {isThemeInAcademicScope} from "./curriculumScope.js";
+import {isThemeInAcademicScope,isSubtopicInAcademicScope} from "./curriculumScope.js";
 
 export function emptyDailyMission(){
   return {
@@ -152,7 +152,9 @@ export function migrateDailyMission(state){
   const dailyMission=normalizeDailyMission(state);
   const assignedThemeId=dailyMission.assignment?.plan?.themeId||null;
   const assignedTheme=assignedThemeId?TAXONOMY.find(t=>t.id===assignedThemeId):null;
-  const assignment=assignedTheme && !isThemeInAcademicScope(assignedTheme,state.profile)
+  const assignedFocus=dailyMission.assignment?.plan?.microcompetencyId||dailyMission.assignment?.plan?.focus||null;
+  const assignment=assignedTheme && (!isThemeInAcademicScope(assignedTheme,state.profile)||
+    (assignedFocus&&!isSubtopicInAcademicScope(assignedTheme,assignedFocus,state.profile)))
     ?null
     :dailyMission.assignment;
   return {
