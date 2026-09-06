@@ -13,6 +13,7 @@ const checks=[
   ["Banco vNext estrutural","npm",["run","vnext-content:audit"]],
   ["Independência contextual vNext","npm",["run","vnext-context:audit"]],
   ["Piloto vNext isolado","npm",["run","vnext-pilot:audit"]],
+  ["Diagnóstico vNext completo","npm",["run","vnext-diagnostic:audit"]],
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
   ["Experiência do aluno","npm",["run","student-experience:audit"]],
   ["Memória pedagógica","npm",["run","pedagogical-memory:audit"]],

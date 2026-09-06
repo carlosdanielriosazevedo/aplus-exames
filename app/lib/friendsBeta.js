@@ -6,10 +6,10 @@ export const FRIENDS_BETA_COHORT="Amigos · teste de experiência";
 
 export const TESTER_SEGMENTS={
   student:{
-    label:"Aluno do secundário",
+    label:"Aluno",
     short:"Aluno",
     group:"target",
-    description:"Estou atualmente no 10.º, 11.º ou 12.º ano."
+    description:"Quero preparar os meus exames e acompanhar a minha evolução."
   },
   recent_student:{
     label:"Terminei o secundário há pouco tempo",
@@ -18,10 +18,10 @@ export const TESTER_SEGMENTS={
     description:"Ainda tenho experiência recente com os Exames Nacionais."
   },
   parent:{
-    label:"Pai / Mãe",
+    label:"Pai/Mãe ou Encarregado de Educação",
     short:"Pai/Mãe",
     group:"buyer",
-    description:"Estou a avaliar a ideia sobretudo na perspetiva de quem acompanha um aluno."
+    description:"Quero acompanhar o estudo e a evolução de um aluno."
   },
   observer:{
     label:"Observador adulto",
@@ -30,6 +30,10 @@ export const TESTER_SEGMENTS={
     description:"Já fiz os exames há vários anos e estou sobretudo a testar o conceito e a experiência."
   }
 };
+
+// A beta pública replica a escolha final. Os restantes segmentos permanecem
+// apenas para interpretar relatórios antigos, nunca como opções de entrada.
+export const PUBLIC_ENTRY_SEGMENTS=["student","parent"];
 
 export function friendsBetaRequested(search=""){
   try{

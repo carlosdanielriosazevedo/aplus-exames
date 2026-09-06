@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import {
   activateFriendsBeta,markFriendsBetaConsent,isFriendsBeta,friendsBetaReport,
-  testerSegmentInfo,isTargetStudentTester,aggregateFriendsBetaReports
+  testerSegmentInfo,isTargetStudentTester,aggregateFriendsBetaReports,PUBLIC_ENTRY_SEGMENTS
 } from "../app/lib/friendsBeta.js";
 import {
   emptyScores,buildMiniExam,trainingQuestions,eligibleCount
@@ -38,6 +38,7 @@ const base={
 };
 
 const friend=activateFriendsBeta(base,1000);
+assert.deepEqual(PUBLIC_ENTRY_SEGMENTS,["student","parent"]);
 assert.equal(friend.betaMode,"friends_beta");
 assert.match(friend.betaParticipant.code,/^AMG-[A-Z0-9]{6}$/);
 assert.equal(friend.betaTesterMeta.contentStatus,"unreviewed_provisional");

@@ -32,7 +32,8 @@ const years=themes=>new Set(themes.map(t=>t.year));
 
 const s10=stateFor("10.º");
 assert.deepEqual([...years(academicScopeThemes(s10.profile))],["10.º"]);
-assert.deepEqual(diagnosticBlueprintForProfile(s10.profile),DIAGNOSTIC_BLUEPRINT.filter(id=>id.startsWith("10-")));
+assert.equal(diagnosticBlueprintForProfile(s10.profile).length,7);
+assert.ok(diagnosticBlueprintForProfile(s10.profile).every(id=>id.startsWith("10-")));
 
 // No ano atual, o âmbito é fechado ao nível da submatéria, não apenas do tema.
 const partial10=stateFor("10.º");
@@ -69,11 +70,14 @@ assert.deepEqual(
 
 const s11=stateFor("11.º");
 assert.deepEqual([...years(academicScopeThemes(s11.profile))],["10.º","11.º"]);
-assert.ok(diagnosticBlueprintForProfile(s11.profile).every(id=>!id.startsWith("12-")));
+assert.equal(diagnosticBlueprintForProfile(s11.profile).length,7);
+assert.ok(diagnosticBlueprintForProfile(s11.profile).every(id=>id.startsWith("10-")||id.startsWith("11-")));
+assert.ok(diagnosticBlueprintForProfile(s11.profile)[0].startsWith("11-"));
 
 const s12=stateFor("12.º");
 assert.deepEqual([...years(academicScopeThemes(s12.profile))],["10.º","11.º","12.º"]);
-assert.deepEqual(diagnosticBlueprintForProfile(s12.profile),DIAGNOSTIC_BLUEPRINT);
+assert.equal(diagnosticBlueprintForProfile(s12.profile).length,7);
+assert.ok(diagnosticBlueprintForProfile(s12.profile).some(id=>id.startsWith("12-")));
 assert.equal(academicScopeThemes(s12.profile).some(t=>t.optionalTrack),false);
 const s12WithOptional=stateFor("12.º");
 s12WithOptional.profile.optionalTopics=["matrizes"];
@@ -84,7 +88,7 @@ assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-int"),s12WithOpt
 
 const finished=stateFor("Já terminei o secundário");
 assert.equal(academicScopeThemes(finished.profile).length,TAXONOMY.length);
-assert.deepEqual(diagnosticBlueprintForProfile(finished.profile),DIAGNOSTIC_BLUEPRINT);
+assert.equal(diagnosticBlueprintForProfile(finished.profile).length,7);
 
 // Evidência futura pode existir num estado antigo ou vinda de Treino Livre,
 // mas não entra no índice/preparação nem nas prioridades de um aluno do 10.º.
@@ -122,7 +126,7 @@ const first=diagnosticAnchor(blueprint10[0],2,s10);
 assert.ok(first);
 const session={id:"scope-diagnostic",kind:"diagnostic",startedAt:Date.now()-1000,finishedAt:null,meta:{}};
 const draft=createDiagnosticDraft({session,item:first,difficulty:2,blueprint:blueprint10,now:Date.now()-1000});
-assert.equal(draft.version,3);
+assert.equal(draft.version,4);
 assert.deepEqual(draft.blueprint,blueprint10);
 assert.equal(validateDiagnosticDraft(draft).ok,true);
 

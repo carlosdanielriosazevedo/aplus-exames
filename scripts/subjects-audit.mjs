@@ -25,7 +25,7 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.meta.url),"utf8");
 assert.match(page,/if\(screen==="subjectOnboard"\)/);
 assert.match(page,/if\(preview==="subjects"\)/);
-assert.match(page,/go\("subjectOnboard"\)/);
+assert.match(page,/segment==="parent"\?"parent":"subjectOnboard"/);
 assert.match(page,/disabled=\{!subject\.available\}/);
 assert.match(page,/Continuar com Matemática A/);
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);

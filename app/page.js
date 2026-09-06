@@ -78,7 +78,7 @@ import {
   safeCloudMerge
 } from "./lib/cloudReliability";
 import {
-  TESTER_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
+  TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
   isTargetStudentTester,friendsFeedbackSummary,aggregateFriendsBetaReports
 } from "./lib/friendsBeta";
@@ -414,13 +414,14 @@ const Shell=({children})=> <main className="light"><FriendsBetaRibbon/><section 
 function Welcome({s,setS,go}){
   const requested=isFriendsBeta(s);
   const friends=requested||isFriendsBeta(s);
-  const [segment,setSegment]=useState(currentTesterSegment(s));
+  const savedSegment=currentTesterSegment(s);
+  const [segment,setSegment]=useState(PUBLIC_ENTRY_SEGMENTS.includes(savedSegment)?savedSegment:null);
 
   function start(){
     if(friends){
       if(!segment)return;
       setS(prev=>{
-        const next=markFriendsBetaConsent(prev,{segment});
+        const next={...markFriendsBetaConsent(prev,{segment}),identity:demoIdentity(segment==="parent"?"parent":"student")};
         const already=(next.betaEvents||[]).some(e=>e.type==="friends_beta_started");
         return already?next:{
           ...next,
@@ -436,23 +437,23 @@ function Welcome({s,setS,go}){
     setS(prev=>recordMilestone(prev,"onboarding_started",{
       testerSegment:friends?segment:null
     }));
-    go("subjectOnboard");
+    go(friends&&segment==="parent"?"parent":"subjectOnboard");
   }
 
   return <main className="dark center"><section className="hero">
     <Logo/>
     {friends?<><p className="eyebrow">🧪 BETA PRIVADA · TESTE DE EXPERIÊNCIA</p>
       <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está a ser revisto por professor, por isso não uses os resultados como avaliação real do teu nível.</span></div>
-      <div className="testerSegmentPicker"><b>Antes de começar: qual é a tua perspetiva neste teste?</b>
-        <span>Não pedimos idade, nome nem email. Isto serve apenas para não misturarmos feedback de alunos com feedback de adultos.</span>
-        <div>{Object.entries(TESTER_SEGMENTS).map(([key,item])=><button key={key} className={segment===key?"selected":""} onClick={()=>setSegment(key)}>
+      <div className="testerSegmentPicker"><b>Como vais usar a A+?</b>
+        <span>Escolhe o tipo de acesso para abrirmos a experiência certa.</span>
+        <div>{PUBLIC_ENTRY_SEGMENTS.map(key=>[key,TESTER_SEGMENTS[key]]).map(([key,item])=><button key={key} className={segment===key?"selected":""} onClick={()=>setSegment(key)}>
           <strong>{item.label}</strong><small>{item.description}</small>
         </button>)}</div>
       </div>
     </>:<p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>}
     <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
     <p>A A+ descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
-    <button disabled={friends&&!segment} onClick={start}>{friends?(segment?"Entrar no teste →":"Escolhe primeiro o teu perfil"):"Descobrir o meu nível →"}</button>
+    <button disabled={friends&&!segment} onClick={start}>{friends?(segment?"Continuar →":"Escolhe primeiro o teu perfil"):"Descobrir o meu nível →"}</button>
     <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends?"🧪 Feedback importante":"📈 Progresso real"}</span></div>
   </section></main>
 }
@@ -705,15 +706,16 @@ function DiagIntro({s,setS,go}){
   const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
-  return <Shell><Logo/><p className="eyebrow">DIAGNÓSTICO INICIAL</p>
-    <h1>Poucas perguntas. Muita informação.</h1>
+  return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL</p>
+    <h1>Diagnóstico</h1>
+    <div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</strong></div>
+    <h2>Poucas perguntas. Muita informação.</h2>
     <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se a evidência for consistente.</small></div>
       <div><span>🎯</span><b>Direto ao ponto</b><small>Não existe uma pergunta obrigatória para cada tema.</small></div>
       <div><span>🧠</span><b>Continua depois</b><small>O perfil é afinado nas Missões dos primeiros dias.</small></div>
     </div>
-    <div className="notice"><b>O objetivo do diagnóstico</b><span>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</span></div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
     {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
       ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
@@ -2338,6 +2340,7 @@ function Parent({s,setS,go}){
   const link=activeParentLink(s.parentInvites||[]);
   const [email,setEmail]=useState("");
   const [copied,setCopied]=useState(false);
+  const parentAccess=identity.activeRole==="parent";
 
   function createInvite(){
     if(!email.trim())return;
@@ -2357,10 +2360,16 @@ function Parent({s,setS,go}){
     setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?requestLinkRemoval(x,"student"):x)}));
   }
 
-  return <Shell><Back go={go}/><p className="eyebrow">ÁREA DOS PAIS · MODELO DE LIGAÇÃO</p>
+  return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
     <h1>Acompanhar progresso, não vigiar respostas.</h1>
 
-    {!link&&<div className="parentConnect">
+    {!link&&parentAccess&&<div className="parentConnect">
+      <b>Ainda não tens um aluno ligado</b>
+      <span>Por segurança, não existe pesquisa pública de alunos. A ligação começa sempre através de um convite privado criado pelo aluno.</span>
+      <span><b>Como funciona?</b> O aluno envia-te um convite. Depois de o aceitares com a tua conta, o progresso autorizado passa a aparecer aqui.</span>
+    </div>}
+
+    {!link&&!parentAccess&&<div className="parentConnect">
       <b>Ligar Pai/Mãe ou Encarregado de Educação</b>
       <span>Não existe pesquisa pública de utilizadores. A ligação nasce sempre de um convite privado criado pelo aluno.</span>
       <div><input type="email" placeholder="email do encarregado" value={email} onChange={e=>setEmail(e.target.value)}/><button disabled={!email.trim()} onClick={createInvite}>Criar convite</button></div>
@@ -2368,7 +2377,7 @@ function Parent({s,setS,go}){
         <div><b>{inv.email}</b><small>Expira em 7 dias · uso único</small></div>
         <button onClick={()=>copyInvite(inv)}>{copied?"Copiado ✓":"Copiar link demo"}</button>
       </div>)}
-      <small className="parentFoot">No produto real, o token é criado no servidor, guardamos apenas o hash e o convite é enviado por email. Este ecrã simula o fluxo localmente.</small>
+      <small className="parentFoot">O convite é privado, de utilização única e com validade limitada.</small>
     </div>}
 
     {link&&<>
