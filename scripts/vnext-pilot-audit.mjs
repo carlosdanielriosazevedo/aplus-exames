@@ -4,6 +4,7 @@ import fs from "node:fs";
 import {QUESTION_BANK} from "../app/data/content.js";
 import {VNEXT_PILOT_META,VNEXT_PILOT_QUESTIONS} from "../app/data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../app/data/vnextDiagnostic.js";
+import {VNEXT_MISSION_QUESTIONS} from "../app/data/vnextMission.js";
 import {curriculumSubtopicForItem} from "../app/data/curriculumVnext.js";
 import {RUNTIME_QUESTION_BANK,eligibleQuestions,questionById} from "../app/lib/engine.js";
 import {isEligibleForContext} from "../app/lib/quality.js";
@@ -22,7 +23,7 @@ const SPECS={
 assert.deepEqual(VNEXT_PILOT_META.map(row=>row.subtopicId).sort(),Object.keys(SPECS).sort());
 assert.equal(VNEXT_PILOT_QUESTIONS.length,100);
 assert.equal(new Set(VNEXT_PILOT_QUESTIONS.map(q=>q.id)).size,100);
-assert.equal(RUNTIME_QUESTION_BANK.length,QUESTION_BANK.length+VNEXT_PILOT_QUESTIONS.length+VNEXT_DIAGNOSTIC_QUESTIONS.length);
+assert.equal(RUNTIME_QUESTION_BANK.length,QUESTION_BANK.length+VNEXT_PILOT_QUESTIONS.length+VNEXT_DIAGNOSTIC_QUESTIONS.length+VNEXT_MISSION_QUESTIONS.length);
 assert.equal(new Set(RUNTIME_QUESTION_BANK.map(q=>q.id)).size,RUNTIME_QUESTION_BANK.length);
 
 for(const meta of VNEXT_PILOT_META){
