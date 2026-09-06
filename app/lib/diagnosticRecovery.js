@@ -2,14 +2,14 @@ import {DIAGNOSTIC_BLUEPRINT} from "../data/content.js";
 import {applyEvidence,diagnosticAnchor,diagnosticProbe,nextDiagnosticDifficulty} from "./engine.js";
 import {contentRevisionFingerprint} from "./validationFingerprint.js";
 
-export const DIAGNOSTIC_DRAFT_VERSION=3;
-export const SUPPORTED_DIAGNOSTIC_DRAFT_VERSIONS=[2,3];
+export const DIAGNOSTIC_DRAFT_VERSION=4;
+export const SUPPORTED_DIAGNOSTIC_DRAFT_VERSIONS=[2,3,4];
 export const DIAGNOSTIC_CLOCK_SKEW_MS=1000*60*10;
 const integer=(x,min=0)=>Number.isInteger(x)&&x>=min;
 
 export function snapshotDiagnosticItem(item){
   if(!item)return null;
-  return {id:item.id,themeId:item.themeId,microcompetencyId:item.microcompetencyId||null,focus:item.focus||null,
+  return {id:item.id,themeId:item.themeId,subtopicId:item.subtopicId||null,microcompetencyId:item.microcompetencyId||null,focus:item.focus||null,
     q:item.q,o:Array.isArray(item.o)?[...item.o]:[],a:item.a,sol:item.sol||"",hyp:item.hyp||"",
     cognitive:item.cognitive,difficulty:item.difficulty,signature:item.signature,role:item.role,contexts:Array.isArray(item.contexts)?[...item.contexts]:["diagnostic"],
     fingerprint:contentRevisionFingerprint(item)};
@@ -34,6 +34,10 @@ function validBlueprint(blueprint){
   return Array.isArray(blueprint)&&blueprint.length>0
     &&blueprint.every(x=>typeof x==="string"&&x)
     &&new Set(blueprint).size===blueprint.length;
+}
+
+function itemMatchesRef(item,ref){
+  return item?.themeId===ref||item?.subtopicId===ref;
 }
 
 export function recoverLegacyDiagnosticSessions({state,saveState,now=Date.now()}){
@@ -64,10 +68,10 @@ function deterministicSequence(draft){
   for(const row of draft.responses){
     const expectedTheme=blueprint[anchorIndex];
     const expectedRole=expectedProbe?"probe":"anchor";
-    if(row.item.role!==expectedRole||row.item.themeId!==expectedTheme)return {ok:false,reason:"impossible_sequence"};
+    if(row.item.role!==expectedRole||!itemMatchesRef(row.item,expectedTheme))return {ok:false,reason:"impossible_sequence"};
     if(expectedProbe&&(row.item.id!==expectedProbe.id||row.item.fingerprint!==expectedProbe.fingerprint))return {ok:false,reason:"probe_sequence_mismatch"};
     if(row.item.role==="anchor"){
-      anchorResults.push({themeId:row.item.themeId,correct:row.correct,difficulty:row.item.difficulty});
+      anchorResults.push({themeId:row.item.themeId,...(row.item.subtopicId?{subtopicId:row.item.subtopicId}:{}),correct:row.correct,difficulty:row.item.difficulty});
       if(row.correct){anchorIndex++;difficulty=nextDiagnosticDifficulty(difficulty,true,false)}
       else{
         difficulty=nextDiagnosticDifficulty(difficulty,false,false);
@@ -82,7 +86,7 @@ function deterministicSequence(draft){
 function validTransaction(row,draft,index,status,now){
   if(!row||row.ordinal!==index||row.status!==status||row.sessionId!==draft.sessionId||!validSnapshot(row.item))return false;
   if(!integer(row.sel)||row.sel>=row.item.o.length||typeof row.correct!=="boolean"||row.correct!==(row.sel===row.item.a))return false;
-  if(row.nextProbe!==null&&row.nextProbe!==undefined&&(!validSnapshot(row.nextProbe)||row.nextProbe.role!=="probe"||row.nextProbe.themeId!==row.item.themeId))return false;
+  if(row.nextProbe!==null&&row.nextProbe!==undefined&&(!validSnapshot(row.nextProbe)||row.nextProbe.role!=="probe"||!itemMatchesRef(row.nextProbe,row.item.subtopicId||row.item.themeId)))return false;
   if((row.item.role!=="anchor"||row.correct)&&row.nextProbe)return false;
   if(!Number.isFinite(row.processedAt)||row.processedAt<draft.startedAt-DIAGNOSTIC_CLOCK_SKEW_MS||row.processedAt>now+DIAGNOSTIC_CLOCK_SKEW_MS)return false;
   return row.responseId===diagnosticResponseId(draft.sessionId,index,row.item.id,row.item.fingerprint);
@@ -100,7 +104,7 @@ export function validateDiagnosticDraft(draft,{now=Date.now()}={}){
   const sequence=deterministicSequence(draft);
   if(!sequence.ok)return sequence;
   if(draft.anchorIndex!==sequence.anchorIndex||draft.difficulty!==sequence.difficulty||draft.probeCount!==sequence.probeCount||JSON.stringify(draft.anchorResults)!==JSON.stringify(sequence.anchorResults))return {ok:false,reason:"derived_progress_mismatch"};
-  if(draft.phase!=="completion_pending"&&sequence.expectedTheme&&draft.current.themeId!==sequence.expectedTheme)return {ok:false,reason:"wrong_theme"};
+  if(draft.phase!=="completion_pending"&&sequence.expectedTheme&&!itemMatchesRef(draft.current,sequence.expectedTheme))return {ok:false,reason:"wrong_theme"};
   if(draft.phase!=="completion_pending"&&draft.current.role!==sequence.expectedRole)return {ok:false,reason:"wrong_role"};
   if(draft.phase!=="completion_pending"&&sequence.expectedProbe&&(draft.current.id!==sequence.expectedProbe.id||draft.current.fingerprint!==sequence.expectedProbe.fingerprint))return {ok:false,reason:"wrong_probe"};
   if(draft.sel!==null&&(!integer(draft.sel)||draft.sel>=draft.current.o.length))return {ok:false,reason:"invalid_selection"};
@@ -139,7 +143,7 @@ export function createPendingResponse(draft,sel,{state=null,now=Date.now()}={}){
   if(draft.pendingResponse)return draft.pendingResponse;
   const ordinal=draft.responses.length,item=draft.current;
   const correct=sel===item.a;
-  const nextProbe=item.role==="anchor"&&!correct?snapshotDiagnosticItem(diagnosticProbe(item.themeId,state)):null;
+  const nextProbe=item.role==="anchor"&&!correct?snapshotDiagnosticItem(diagnosticProbe(item.subtopicId||item.themeId,state)):null;
   return {status:"pending",sessionId:draft.sessionId,ordinal,item,sel,correct,nextProbe,processedAt:now,
     responseId:diagnosticResponseId(draft.sessionId,ordinal,item.id,item.fingerprint)};
 }
@@ -147,7 +151,7 @@ export function createPendingResponse(draft,sel,{state=null,now=Date.now()}={}){
 export function advanceDiagnosticDraft(draft,state,tx){
   const responses=[...draft.responses,{...tx,status:"processed"}];
   const anchorResults=[...draft.anchorResults];
-  if(tx.item.role==="anchor")anchorResults.push({themeId:tx.item.themeId,correct:tx.correct,difficulty:tx.item.difficulty});
+  if(tx.item.role==="anchor")anchorResults.push({themeId:tx.item.themeId,...(tx.item.subtopicId?{subtopicId:tx.item.subtopicId}:{}),correct:tx.correct,difficulty:tx.item.difficulty});
   if(tx.item.role==="anchor"&&!tx.correct){
     const item=tx.nextProbe;
     if(item)return {...draft,responses,pendingResponse:null,anchorResults,difficulty:nextDiagnosticDifficulty(draft.difficulty,false,false),probeCount:draft.probeCount+1,current:snapshotDiagnosticItem(item),sel:null,fb:null};
@@ -200,7 +204,8 @@ export function recoverDiagnosticTransaction({state,draft,saveState,saveDraft,cl
     if(!saveState(nextState))return {ok:false,reason:"start_state_write_failed",state,draft};
   }else if(matching.length!==1||other.length)return {ok:false,reason:"ambiguous_session",state,draft};
   if(!draft.pendingResponse&&draft.phase==="active"&&!valid.sequence.expectedProbe){
-    const live=draft.current.role==="probe"?diagnosticProbe(draft.current.themeId,nextState):diagnosticAnchor(draft.current.themeId,draft.difficulty,nextState);
+    const currentRef=draftBlueprint(draft)[draft.anchorIndex]||draft.current.subtopicId||draft.current.themeId;
+    const live=draft.current.role==="probe"?diagnosticProbe(currentRef,nextState):diagnosticAnchor(currentRef,draft.difficulty,nextState);
     if(!live)return {ok:false,reason:"current_item_unavailable",state:nextState,draft};
     const liveSnapshot=snapshotDiagnosticItem(live);
     if(liveSnapshot.fingerprint!==draft.current.fingerprint){
