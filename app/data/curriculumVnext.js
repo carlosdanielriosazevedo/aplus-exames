@@ -775,6 +775,8 @@ export function curriculumSubtopicId(themeId,ref){
   if(!ref)return null;
   const direct=CURRICULUM_SUBTOPIC_BY_ID.get(ref);
   if(direct)return direct.themeId===themeId?direct.id:null;
+  const byLabel=CURRICULUM_SUBTOPICS.find(row=>row.themeId===themeId&&row.label===ref);
+  if(byLabel)return byLabel.id;
   const migrated=LEGACY_MICROCOMPETENCY_SUBTOPIC[ref]||null;
   return CURRICULUM_SUBTOPIC_BY_ID.get(migrated)?.themeId===themeId?migrated:null;
 }
