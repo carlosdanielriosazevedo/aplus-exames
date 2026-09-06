@@ -5,8 +5,9 @@ import {
 import {generateVariants,hasGenerator} from "./generators.js";
 import {isEligibleForContext,effectiveEditorialItem} from "./quality.js";
 import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isEvidenceInAcademicScope,isSubtopicInAcademicScope,normalizeTaughtSubtopics} from "./curriculumScope.js";
-import {curriculumSubtopicForItem} from "../data/curriculumVnext.js";
+import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curriculumVnext.js";
 import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
+import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -17,9 +18,9 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
   return acc;
 },{});
 
-// Apenas este subconjunto vNext entra no runtime. Os restantes 5.550 itens
-// continuam no repositório editorial e nunca são incluídos no bundle do aluno.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS];
+// O runtime recebe o piloto de treino e um extrato diagnóstico compacto. As
+// restantes perguntas vNext continuam no repositório editorial e fora do bundle.
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -58,14 +59,24 @@ export function hasTrainingContent(themeId,focus=null,s=null){
   return curated.length>0 || (generatedAllowed && hasGenerator(themeId,focus));
 }
 
-export function diagnosticAnchor(themeId,startDifficulty=2,s=null){
-  const candidates=(s?eligibleQuestions(s,themeId,"diagnostic"):RUNTIME_QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts.includes("diagnostic"))).filter(q=>q.role==="anchor");
+function diagnosticCandidates(ref,s=null){
+  const subtopic=CURRICULUM_SUBTOPIC_BY_ID.get(ref);
+  const themeId=subtopic?.themeId||ref;
+  const candidates=s
+    ?eligibleQuestions(s,themeId,"diagnostic")
+    :RUNTIME_QUESTION_BANK.filter(q=>q.themeId===themeId&&q.contexts.includes("diagnostic"));
+  return subtopic
+    ?candidates.filter(q=>curriculumSubtopicForItem(q)===subtopic.id).map(q=>q.subtopicId?q:{...q,subtopicId:subtopic.id})
+    :candidates;
+}
+
+export function diagnosticAnchor(ref,startDifficulty=2,s=null){
+  const candidates=diagnosticCandidates(ref,s).filter(q=>q.role==="anchor");
   if(!candidates.length)return null;
   return [...candidates].sort((a,b)=>Math.abs(a.difficulty-startDifficulty)-Math.abs(b.difficulty-startDifficulty))[0];
 }
 
-export const diagnosticProbe=(themeId,s=null)=>
-  (s?eligibleQuestions(s,themeId,"diagnostic"):RUNTIME_QUESTION_BANK.filter(q=>q.themeId===themeId && q.contexts.includes("diagnostic"))).find(q=>q.role==="probe");
+export const diagnosticProbe=(ref,s=null)=>diagnosticCandidates(ref,s).find(q=>q.role==="probe");
 
 export function certaintyLabel(value,evidenceCount=1){
   if(!evidenceCount)return "Ainda sem evidência";
