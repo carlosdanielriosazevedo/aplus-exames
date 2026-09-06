@@ -1,6 +1,6 @@
-import {DIAGNOSTIC_BLUEPRINT,TAXONOMY,microcompetencyId} from "../data/content.js";
+import {TAXONOMY,microcompetencyId} from "../data/content.js";
 import {
-  CURRICULUM_SUBTOPIC_BY_ID,LEGACY_MICROCOMPETENCY_SUBTOPIC,
+  CURRICULUM_SUBTOPICS,CURRICULUM_SUBTOPIC_BY_ID,LEGACY_MICROCOMPETENCY_SUBTOPIC,
   curriculumSubtopicsForTheme,curriculumSubtopicId,curriculumSubtopicForItem
 } from "../data/curriculumVnext.js";
 
@@ -103,8 +103,37 @@ export function academicScopeThemeIds(profile={}){
 }
 
 export function diagnosticBlueprintForProfile(profile={}){
-  const allowed=academicScopeThemeIds(profile);
-  return DIAGNOSTIC_BLUEPRINT.filter(themeId=>allowed.has(themeId));
+  const learnerLevel=schoolYearLevel(profile);
+  const candidates=CURRICULUM_SUBTOPICS.filter(subtopic=>{
+    const theme=TAXONOMY.find(row=>row.id===subtopic.themeId);
+    return theme&&isThemeInAcademicScope(theme,profile)&&isSubtopicInAcademicScope(theme,subtopic.id,profile);
+  });
+  const buckets=TAXONOMY.map((theme,themeIndex)=>({
+    theme,themeIndex,
+    rows:candidates.filter(row=>row.themeId===theme.id),
+    hasCurrent:candidates.some(row=>row.themeId===theme.id&&themeYearLevel(theme)===learnerLevel)
+  })).filter(bucket=>bucket.rows.length).sort((a,b)=>
+    Number(b.hasCurrent)-Number(a.hasCurrent)
+    ||themeYearLevel(b.theme)-themeYearLevel(a.theme)
+    ||(b.theme.relevance+b.theme.blocking)-(a.theme.relevance+a.theme.blocking)
+    ||a.themeIndex-b.themeIndex
+  );
+
+  // O diagnóstico mantém-se curto: percorre primeiro temas diferentes e só
+  // depois recolhe uma segunda submatéria do mesmo tema. A seleção do ano atual
+  // tem prioridade; os anos anteriores permanecem elegíveis automaticamente.
+  const blueprint=[];
+  for(let depth=0;blueprint.length<7;depth++){
+    let added=false;
+    for(const bucket of buckets){
+      const row=bucket.rows[depth];
+      if(!row)continue;
+      blueprint.push(row.id);added=true;
+      if(blueprint.length===7)break;
+    }
+    if(!added)break;
+  }
+  return blueprint;
 }
 
 export function academicScopeSummary(profile={}){
