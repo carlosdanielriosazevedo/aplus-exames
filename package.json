@@ -39,6 +39,8 @@
     "vnext-pilot:audit": "node scripts/vnext-pilot-audit.mjs",
     "vnext-diagnostic:generate": "node scripts/generate-vnext-diagnostic.mjs",
     "vnext-diagnostic:audit": "node scripts/vnext-diagnostic-audit.mjs",
+    "vnext-mission:generate": "node scripts/generate-vnext-mission.mjs",
+    "vnext-mission:audit": "node scripts/vnext-mission-audit.mjs",
     "subjects:audit": "node scripts/subjects-audit.mjs"
   },
   "dependencies": {

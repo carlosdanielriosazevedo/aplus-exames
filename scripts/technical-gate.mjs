@@ -14,6 +14,7 @@ const checks=[
   ["Independência contextual vNext","npm",["run","vnext-context:audit"]],
   ["Piloto vNext isolado","npm",["run","vnext-pilot:audit"]],
   ["Diagnóstico vNext completo","npm",["run","vnext-diagnostic:audit"]],
+  ["Missões vNext 3–5 minutos","npm",["run","vnext-mission:audit"]],
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
   ["Experiência do aluno","npm",["run","student-experience:audit"]],
   ["Memória pedagógica","npm",["run","pedagogical-memory:audit"]],

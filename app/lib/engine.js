@@ -8,6 +8,7 @@ import {academicScopeThemes,isThemeInAcademicScope,isQuestionInAcademicScope,isE
 import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curriculumVnext.js";
 import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
+import {VNEXT_MISSION_QUESTIONS} from "../data/vnextMission.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -20,7 +21,7 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
 
 // O runtime recebe o piloto de treino e um extrato diagnóstico compacto. As
 // restantes perguntas vNext continuam no repositório editorial e fora do bundle.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS];
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -294,8 +295,18 @@ export function desiredDifficulty(score,goal=16){
   return target;
 }
 
-export const DAILY_MISSION_MIN_INTERACTIONS=3;
-export const DAILY_MISSION_MAX_INTERACTIONS=5;
+export const DAILY_MISSION_MIN_INTERACTIONS=5;
+export const DAILY_MISSION_MAX_INTERACTIONS=10;
+export const DAILY_MISSION_MIN_SECONDS=180;
+export const DAILY_MISSION_MAX_SECONDS=300;
+
+export function estimateMissionSeconds(item){
+  if(!item)return 0;
+  const difficulty={1:24,2:34,3:48,4:62}[item.difficulty]||38;
+  const cognitive={Conhecimento:-3,Compreensão:0,Procedimento:5,Aplicação:9,Interpretação:12,Raciocínio:18}[item.cognitive]||6;
+  const reading=Math.min(16,Math.round((String(item.q||"").length+(item.o||[]).join("").length)/90)*4);
+  return Math.max(22,Math.min(90,difficulty+cognitive+reading));
+}
 
 export function isUsefulMissionInteraction(item,usedIds=[],usedSignatures=[]){
   if(!item||usedIds.includes(item.id))return false;
@@ -356,7 +367,8 @@ export function missionStopDecision({
   currentScore,
   sessionTargetItems=[],
   beforeFocusConf=null,
-  currentFocusScore=null
+  currentFocusScore=null,
+  estimatedSeconds=0
 }){
   const relevantBefore=beforeFocusConf??beforeConf??0;
   const relevantNow=currentFocusScore?.conf??currentScore?.conf??0;
@@ -372,8 +384,8 @@ export function missionStopDecision({
     sessionTargetItems.map(x=>x.difficulty).filter(x=>x!==undefined)
   ).size;
 
-  // Uma Missão é uma sessão curta: não termina normalmente antes de três
-  // interações, mas também nunca cresce até se tornar um mini-exame.
+  // Cinco perguntas é o mínimo absoluto. Depois disso, a sessão termina por
+  // valor pedagógico ou por orçamento temporal, nunca apenas por contagem fixa.
   if(totalCount>=DAILY_MISSION_MAX_INTERACTIONS){
     return {
       stop:true,code:"session_cap",
@@ -382,6 +394,14 @@ export function missionStopDecision({
     };
   }
   if(totalCount<DAILY_MISSION_MIN_INTERACTIONS)return {stop:false,code:"minimum_not_reached"};
+  if(estimatedSeconds<DAILY_MISSION_MIN_SECONDS)return {stop:false,code:"time_budget_not_reached"};
+  if(estimatedSeconds>=DAILY_MISSION_MAX_SECONDS){
+    return {
+      stop:true,code:"time_budget_reached",
+      title:"Sessão curta concluída",
+      detail:"A Missão atingiu aproximadamente cinco minutos de trabalho útil."
+    };
+  }
 
   if(missionType==="calibration"){
     return {

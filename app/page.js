@@ -10,7 +10,7 @@ import {
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
   selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
   shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,
-  missionContentExhaustedDecision,canStartMissionDetour,
+  missionContentExhaustedDecision,canStartMissionDetour,estimateMissionSeconds,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,miniExamScore20,hasTrainingContent,hasGenerator,
   eligibleQuestions,eligibleCount,rankedStudyPriorities,
@@ -1106,6 +1106,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const [targetItems,setTargetItems]=useState(draft?.targetItems||[]);
   const [targetCount,setTargetCount]=useState(draft?.targetCount||0);
   const [totalCount,setTotalCount]=useState(draft?.totalCount||0);
+  const [estimatedSeconds,setEstimatedSeconds]=useState(draft?.estimatedSeconds||0);
   const [pendingError,setPendingError]=useState(draft?.pendingError||null);
   const [detour,setDetour]=useState(draft?.detour||null);
 
@@ -1117,9 +1118,9 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     if(!targetId || !current)return;
     saveSessionDraft({
       kind:"mission",betaMode:s.betaMode||"internal",sessionId,plan,before,beforeFocus,current,sel,fb,
-      usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour
+      usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour,estimatedSeconds
     });
-  },[plan,current,sel,fb,usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour]);
+  },[plan,current,sel,fb,usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour,estimatedSeconds]);
 
   if(missionCompletedToday(s) && !draft){
     return <Shell><Back go={go}/><div className="centered"><div className="check">✓</div><p className="eyebrow">MISSÃO DE HOJE CONCLUÍDA</p>
@@ -1129,7 +1130,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   function answer(n){if(!fb){setSel(n);setFb({correct:n===current.a})}}
 
-  function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null){
+  function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
     if(completingRef.current)return;
     completingRef.current=true;
 
@@ -1152,6 +1153,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       beforeFocusConf:beforeFocus?.conf??0,afterFocusConf:afterFocus?.conf??0,
       beforeFocusEvidence:beforeFocus?.evidence?.length||0,afterFocusEvidence:afterFocus?.evidence?.length||0,
       totalCount:newTotal,interactionCount:newTotal,
+      estimatedSeconds:newEstimatedSeconds,
       stopCode:stopDecision?.code||"unknown",
       stopTitle:stopDecision?.title||null,
       stopDetail:stopDecision?.detail||null,
@@ -1212,7 +1214,9 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     const newUsed=[...usedIds,current.id];
     const newSigs=[...usedSignatures,current.signature||current.id];
     const newTotal=totalCount+1;
+    const newEstimatedSeconds=estimatedSeconds+estimateMissionSeconds(current);
     setUsedIds(newUsed);setUsedSignatures(newSigs);setTotalCount(newTotal);
+    setEstimatedSeconds(newEstimatedSeconds);
 
     if(current.sessionRole==="target" && !correct && !detour && plan.type!=="calibration"
       && canStartMissionDetour(newTotal)){
@@ -1285,16 +1289,17 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       currentScore:targetScore,
       sessionTargetItems:newTargetItems,
       beforeFocusConf:beforeFocus?.conf??null,
-      currentFocusScore
+      currentFocusScore,
+      estimatedSeconds:newEstimatedSeconds
     });
 
     if(stopDecision.stop){
-      closeMission(nextState,finalDetour,newTargetCount,newTotal,stopDecision);return;
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,stopDecision,newEstimatedSeconds);return;
     }
 
     const nxt=selectQuestionForPlan(nextState,plan,newUsed,newSigs);
     if(!nxt){
-      closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision());return
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision(),newEstimatedSeconds);return
     }
     setCurrent({...nxt,sessionRole:"target"});setSel(null);setFb(null);
   }
