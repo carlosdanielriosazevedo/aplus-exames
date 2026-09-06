@@ -22,7 +22,7 @@ Current version: 5.5.0.
 - One principal Daily Mission per calendar day.
 - Daily Mission is frozen once assigned for that day.
 - A Daily Mission is a short study session, normally ~3–5 minutes.
-- A Daily Mission should normally have at least 3 pedagogically useful interactions.
+- A Daily Mission must never have fewer than 5 pedagogically useful interactions.
 - Session duration and academic evidence quantity are separate concepts.
 - Never create or inflate Domain/Certainty merely to prolong a Daily Mission.
 - Repeated or near-equivalent items retain diminishing weight and do not count as independent evidence.
