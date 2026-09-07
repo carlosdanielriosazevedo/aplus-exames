@@ -1,6 +1,6 @@
-// A+ v2.4 — domínio de identidade e permissões
+// APPprova+ v2.4 — domínio de identidade e permissões
 // A autenticação real será delegada ao Neon Auth.
-// Este módulo contém apenas regras de negócio da A+ (roles, ligações, convites).
+// Este módulo contém apenas regras de negócio da APPprova+ (roles, ligações, convites).
 
 export const ROLES={
   student:{label:"Aluno",icon:"🎓"},
@@ -112,7 +112,7 @@ export function demoIdentity(role="student"){
     student:{displayName:"Aluno Demo",email:"aluno.demo@aplus.local",roles:["student"]},
     parent:{displayName:"Encarregado Demo",email:"pai.demo@aplus.local",roles:["parent"]},
     reviewer:{displayName:"Professor Revisor",email:"revisor.demo@aplus.local",roles:["reviewer"]},
-    admin:{displayName:"Admin A+",email:"admin.demo@aplus.local",roles:["admin"]}
+    admin:{displayName:"Admin APPprova+",email:"admin.demo@aplus.local",roles:["admin"]}
   };
   return normalizeIdentity({mode:"demo",activeRole:role,...profiles[role]});
 }

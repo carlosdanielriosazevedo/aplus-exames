@@ -1,5 +1,5 @@
-// A+ v2.4 — autorização server-side
-// NÃO é autenticação. Recebe uma identidade já autenticada e valida permissões da A+.
+// APPprova+ v2.4 — autorização server-side
+// NÃO é autenticação. Recebe uma identidade já autenticada e valida permissões da APPprova+.
 
 const ROLE_CAPABILITIES={
   student:new Set(["study","progress","exams","manage_parent_link"]),

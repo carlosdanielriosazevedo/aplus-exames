@@ -88,11 +88,11 @@ export function certaintyLabel(value,evidenceCount=1){
 }
 
 export function certaintyHelp(value,evidenceCount=1){
-  if(!evidenceCount)return "A A+ ainda não recolheu evidência suficiente nesta área.";
-  if(value>=85)return "A A+ já tem evidência muito consistente, variada e recente.";
-  if(value>=65)return "A A+ tem evidência consistente, embora continue a recalibrar.";
-  if(value>=40)return "Já existem alguns sinais, mas a A+ ainda quer confirmar melhor.";
-  return "A A+ ainda tem pouca evidência e deverá voltar a testar esta área.";
+  if(!evidenceCount)return "A APPprova+ ainda não recolheu evidência suficiente nesta área.";
+  if(value>=85)return "A APPprova+ já tem evidência muito consistente, variada e recente.";
+  if(value>=65)return "A APPprova+ tem evidência consistente, embora continue a recalibrar.";
+  if(value>=40)return "Já existem alguns sinais, mas a APPprova+ ainda quer confirmar melhor.";
+  return "A APPprova+ ainda tem pouca evidência e deverá voltar a testar esta área.";
 }
 
 function signalFor(item,correct){
@@ -390,7 +390,7 @@ export function missionStopDecision({
     return {
       stop:true,code:"session_cap",
       title:"Sessão curta concluída",
-      detail:"A Missão atingiu o seu limite útil. A A+ prefere distribuir novas observações por dias diferentes."
+      detail:"A Missão atingiu o seu limite útil. A APPprova+ prefere distribuir novas observações por dias diferentes."
     };
   }
   if(totalCount<DAILY_MISSION_MIN_INTERACTIONS)return {stop:false,code:"minimum_not_reached"};
@@ -407,7 +407,7 @@ export function missionStopDecision({
     return {
       stop:true,code:"calibration_session_complete",
       title:"Primeira sessão de calibração concluída",
-      detail:"Já existem observações úteis para começar o mapa. A A+ voltará a esta área noutras Missões."
+      detail:"Já existem observações úteis para começar o mapa. A APPprova+ voltará a esta área noutras Missões."
     };
   }
 
@@ -1126,9 +1126,9 @@ export function humanMissionReasons(t,s){
   }
 
   if(b.health?.contradictory){
-    rows.push({kind:"certainty",title:"Os sinais recentes não são totalmente consistentes",detail:"A A+ prefere voltar a medir antes de assumir que houve melhoria ou regressão."});
+    rows.push({kind:"certainty",title:"Os sinais recentes não são totalmente consistentes",detail:"A APPprova+ prefere voltar a medir antes de assumir que houve melhoria ou regressão."});
   }else if((v.conf||0)<50){
-    rows.push({kind:"certainty",title:"A estimativa ainda precisa de confirmação",detail:`Certeza da A+: ${certaintyLabel(v.conf,v.evidence?.length||0)}.`});
+    rows.push({kind:"certainty",title:"A estimativa ainda precisa de confirmação",detail:`Certeza da APPprova+: ${certaintyLabel(v.conf,v.evidence?.length||0)}.`});
   }
 
   if(b.dependents.length){

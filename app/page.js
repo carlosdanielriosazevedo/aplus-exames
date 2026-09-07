@@ -307,7 +307,10 @@ export default function App(){
   }}/>;
 }
 
-const Logo=()=> <div className="logo">A<span>+</span> EXAMES</div>;
+const Logo=()=> <div className="logo" aria-label="APPprova+"><span className="logoApp">APP</span><span className="logoProva">prova</span><span className="logoPlus">+</span></div>;
+function Apronso({pose="welcome",className="",alt=""}){
+  return <img className={`apronso ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>;
+}
 const Back=({go,to="home"})=> <button className="back" onClick={()=>go(to)}>← Voltar</button>;
 const STUDENT_NAV=[["home","⌂","Aprender"],["train","◎","Treinar"],["ranking","△","Ranking"],["progress","◫","Progresso"]];
 function StudentNav({active,go}){
@@ -442,9 +445,13 @@ function Welcome({s,setS,go}){
 
   return <main className="dark center"><section className="hero">
     <Logo/>
+    <div className="welcomeApronso">
+      <Apronso pose="welcome" alt="Apronso, a mascote da APPprova+"/>
+      <div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div>
+    </div>
     {friends?<><p className="eyebrow">🧪 BETA PRIVADA · TESTE DE EXPERIÊNCIA</p>
       <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está a ser revisto por professor, por isso não uses os resultados como avaliação real do teu nível.</span></div>
-      <div className="testerSegmentPicker"><b>Como vais usar a A+?</b>
+      <div className="testerSegmentPicker"><b>Como vais usar a APPprova+?</b>
         <span>Escolhe o tipo de acesso para abrirmos a experiência certa.</span>
         <div>{PUBLIC_ENTRY_SEGMENTS.map(key=>[key,TESTER_SEGMENTS[key]]).map(([key,item])=><button key={key} className={segment===key?"selected":""} onClick={()=>setSegment(key)}>
           <strong>{item.label}</strong><small>{item.description}</small>
@@ -452,7 +459,7 @@ function Welcome({s,setS,go}){
       </div>
     </>:<p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>}
     <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
-    <p>A A+ descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
+    <p>A APPprova+ descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
     <button disabled={friends&&!segment} onClick={start}>{friends?(segment?"Continuar →":"Escolhe primeiro o teu perfil"):"Descobrir o meu nível →"}</button>
     <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends?"🧪 Feedback importante":"📈 Progresso real"}</span></div>
   </section></main>
@@ -545,9 +552,9 @@ function StudentProfile({s,setS,go,editing=false}){
     go("curriculumOnboard");
   }
   return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":"ANTES DO DIAGNÓSTICO"}</p>
-    <h1>{editing?"Atualiza o que estás a estudar.":"Ajuda a A+ a começar no sítio certo."}</h1>
+    <h1>{editing?"Atualiza o que estás a estudar.":"Ajuda a APPprova+ a começar no sítio certo."}</h1>
     <p className="muted">{editing
-      ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a A+ ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
+      ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a APPprova+ ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
       :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
 
     <h3>Em que ano estás?</h3>
@@ -578,7 +585,7 @@ function StudentProfile({s,setS,go,editing=false}){
       {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
     </div>
 
-    <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a A+ não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
+    <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a APPprova+ não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
     <button className="primary" onClick={save}>{editing?"Guardar percurso":"Continuar"}</button>
   </Shell>
 }
@@ -618,7 +625,7 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
 
   if(finished){
     return <Shell><Logo/><p className="eyebrow">MATÉRIA DADA NA ESCOLA</p><h1>O programa completo fica disponível.</h1>
-      <p className="muted">Como já terminaste o secundário, a A+ pode usar matéria do 10.º, 11.º e 12.º anos.</p>
+      <p className="muted">Como já terminaste o secundário, a APPprova+ pode usar matéria do 10.º, 11.º e 12.º anos.</p>
       <button className="primary" onClick={save}>Continuar</button></Shell>;
   }
 
@@ -660,7 +667,7 @@ function GoalScreen({s,setS,go,onboarding=false}){
     <h1>Que nota queres alcançar?</h1>
     <p className="muted">{onboarding
       ?"Isto ajusta a exigência das Missões. Não é uma previsão da tua nota."
-      :"Podes alterar o objetivo quando quiseres. A A+ adapta as decisões seguintes sem apagar o teu histórico."}</p>
+      :"Podes alterar o objetivo quando quiseres. A APPprova+ adapta as decisões seguintes sem apagar o teu histórico."}</p>
     <div className="goalHero"><strong>{goal}</strong><span>valores</span></div>
     <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
     <input aria-label="Nota objetivo" className="goalSlider" type="range" min="10" max="20" step="1" value={goal} onChange={e=>setGoal(Number(e.target.value))}/>
@@ -707,8 +714,7 @@ function DiagIntro({s,setS,go}){
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
   return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL</p>
-    <h1>Diagnóstico</h1>
-    <div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</strong></div>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não é conhecer-te perfeitamente. É conhecer-te o suficiente para tomar a primeira boa decisão.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <h2>Poucas perguntas. Muita informação.</h2>
     <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
     <div className="diagIntroGrid">
@@ -815,25 +821,25 @@ function DiagResult({s,setS,go}){
   const index=prepIndex(s);
   const ranked=[...measured].sort((a,b)=>(s.scores[a.id].domain??100)-(s.scores[b.id].domain??100)).slice(0,4);
 
-  return <Shell><div className="centered"><Logo/><div className="check">✓</div>
+  return <Shell><div className="centered"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o diagnóstico concluído"/>
     <p className="eyebrow">JÁ TEMOS INFORMAÇÃO SUFICIENTE</p>
     <h1>Podemos criar o teu primeiro plano.</h1>
     <div className="indexCircle"><strong>{index}</strong><span>/100</span></div>
     <p className="indexQualifier">Índice inicial parcial · {measured.length}/{scopedTotal} áreas do teu percurso com evidência</p>
-    <p className="muted">Não é uma fotografia completa da Matemática A. A A+ vai preencher as áreas em falta e recalibrar as restantes durante as próximas Missões.</p>
+    <p className="muted">Não é uma fotografia completa da Matemática A. A APPprova+ vai preencher as áreas em falta e recalibrar as restantes durante as próximas Missões.</p>
   </div>
 
   {priority&&<div className="notice"><b>Primeira prioridade: {priority.short}</b>
-    <span>A escolha combina Domínio, Certeza da A+, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>}
+    <span>A escolha combina Domínio, Certeza da APPprova+, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>}
 
   <div className="resultSkills">{ranked.map(t=>{
     const v=s.scores[t.id];
     return <div className="resultSkill" key={t.id}><div><b>{t.short}</b><small>Domínio estimado: {v.domain}/100</small></div>
-      <div className="certainty"><span>Certeza da A+</span><strong>{certaintyLabel(v.conf,v.evidence.length)}</strong></div></div>
+      <div className="certainty"><span>Certeza da APPprova+</span><strong>{certaintyLabel(v.conf,v.evidence.length)}</strong></div></div>
   })}</div>
 
-  <div className="notice"><b>Domínio ≠ Certeza da A+</b>
-    <span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>
+  <div className="notice"><b>Domínio ≠ Certeza da APPprova+</b>
+    <span><b>Domínio</b> é quanto a APPprova+ estima que sabes. <b>Certeza da APPprova+</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>
 
   <FriendsBetaDisclaimer s={s}/>
   <DailyCompletionNote s={s}/>
@@ -865,7 +871,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 
   return <div className="dailyMissionOverlay" role="dialog" aria-modal="true" aria-label="Missão de Hoje">
     <section className="dailyMissionModal">
-      <div className="dailyMissionGlow">{typeMeta.icon}</div>
+      <Apronso pose="thinking" className="dailyMissionApronso" alt="Apronso apresenta a Missão de hoje"/>
       <div className="dailyMissionContent">
       <div className="dailyMissionModalTop">
         <small>{mode==="resume"?"MISSÃO EM PAUSA":"NOVA MISSÃO DISPONÍVEL"}</small>
@@ -907,21 +913,22 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 }
 
 const FIRST_USE_TOUR_STEPS=[
-  {icon:"🎯",eyebrow:"PASSO 1 DE 3",title:"A tua Missão diária",text:"Todos os dias, a A+ escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
-  {icon:"🧠",eyebrow:"PASSO 2 DE 3",title:"Treina à tua maneira",text:"Em Praticar escolhes qualquer matéria. No Mini-exame, treinas apenas matéria já lecionada, em contexto de prova."},
-  {icon:"📈",eyebrow:"PASSO 3 DE 3",title:"Acompanha a evolução",text:"Em Progresso vês o teu Domínio, a Certeza da A+ e as áreas que ainda precisam de mais evidência."}
+  {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:"Sou o teu parceiro de estudo na APPprova+. Ajudo-te a perceber o que estudar e acompanho-te até aos exames — mas o esforço e as conquistas são teus."},
+  {mascot:"thinking",eyebrow:"PASSO 2 DE 4",title:"Onde encontras o Apronso",text:"Estou contigo no plano diário, nas explicações quando algo parece difícil, nos resultados para celebrar e em Progresso para te mostrar o caminho."},
+  {mascot:"thinking",eyebrow:"PASSO 3 DE 4",title:"A tua Missão diária",text:"Todos os dias, a APPprova+ escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
+  {mascot:"progress",eyebrow:"PASSO 4 DE 4",title:"Treina e acompanha a evolução",text:"Em Praticar escolhes qualquer matéria. No Mini-exame treinas matéria já lecionada; em Progresso vês o teu Domínio e a Certeza da APPprova+."}
 ];
 
 function FirstUseTour({onComplete,onSkip}){
   const [step,setStep]=useState(0);
   const item=FIRST_USE_TOUR_STEPS[step];
   const last=step===FIRST_USE_TOUR_STEPS.length-1;
-  return <div className="dailyMissionOverlay firstUseTourOverlay" role="dialog" aria-modal="true" aria-label="Como funciona a A+">
+  return <div className="dailyMissionOverlay firstUseTourOverlay" role="dialog" aria-modal="true" aria-label="Conhece o Apronso e a APPprova+">
     <section className="firstUseTourModal">
       <div className="firstUseTourProgress" aria-label={`Passo ${step+1} de ${FIRST_USE_TOUR_STEPS.length}`}>
         {FIRST_USE_TOUR_STEPS.map((_,i)=><i key={i} className={i<=step?"active":""}/>) }
       </div>
-      <span className="firstUseTourIcon" aria-hidden="true">{item.icon}</span>
+      <Apronso pose={item.mascot} className="firstUseTourMascot" alt=""/>
       <small>{item.eyebrow}</small>
       <h2>{item.title}</h2>
       <p>{item.text}</p>
@@ -1069,7 +1076,7 @@ function Home({s,setS,go,reset}){
       ?<FirstUseTour onComplete={()=>finishFirstUseTour(false)} onSkip={()=>finishFirstUseTour(true)}/>
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
-    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
+    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
     <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
@@ -1081,7 +1088,7 @@ function Home({s,setS,go,reset}){
     <section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><p>{missionDone?"A recomendação principal de hoje está feita.":"Uma sessão curta escolhida pela A+ para ti."}</p><em>~3–5 min</em>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><p>{missionDone?"A recomendação principal de hoje está feita.":"Uma sessão curta escolhida pela APPprova+ para ti."}</p><em>~3–5 min</em>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
@@ -1317,7 +1324,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       <span>Treinaste {plan.focus}. O desempenho foi promissor, mas o Treino Livre não altera o Domínio. Esta Missão serve para confirmar se a evolução se mantém.</span></div>}
 
     {plan.type==="calibration"&&<div className="notice"><b>Missão de calibração</b>
-      <span>A A+ ainda conhece pouco esta área. Uma pequena sequência de interações úteis ajuda a começar o mapa sem transformar a Missão num teste.</span></div>}
+      <span>A APPprova+ ainda conhece pouco esta área. Uma pequena sequência de interações úteis ajuda a começar o mapa sem transformar a Missão num teste.</span></div>}
 
       {plan.type==="investigation"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque estamos a voltar a esta competência?</b>
       {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
@@ -1329,7 +1336,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       {plan.unlocks?.length>0&&<footer>Se melhorares esta base, o motor poderá avançar com mais segurança para <b>{plan.unlocks.slice(0,2).map(x=>x.label).join(" e ")}</b>.</footer>}
       </div>}
       {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ Verificação rápida da causa</b>
-      <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a A+ vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
+      <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a APPprova+ vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
     </details>
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
@@ -1349,12 +1356,12 @@ function MissionResult({s,setS,go}){
   const delta=(m.afterDomain??0)-(m.beforeDomain??0);
   const typeName=m.type==="confirmation"?"Confirmação concluída":m.type==="calibration"?"Calibração concluída":"Missão concluída";
 
-  return <Shell><div className="centered completionMoment"><Logo/><div className="check">✓</div>
+  return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra a missão concluída"/>
     <p className="eyebrow">{typeName.toUpperCase()}</p><h1>Missão concluída</h1><h2>Hoje reforçaste {m.focus||t.short}.</h2>
     <p className="muted">{m.stopDetail
       ?m.stopDetail
       :m.type==="calibration"
-        ?"A A+ já tem primeiras observações nesta área. Ainda é cedo para tratar esta estimativa como robusta."
+        ?"A APPprova+ já tem primeiras observações nesta área. Ainda é cedo para tratar esta estimativa como robusta."
         :`A sessão terminou após ${m.interactionCount||m.totalCount} interações úteis.`}</p></div>
 
     <details className="resultDetails"><summary>Ver detalhes do progresso</summary>
@@ -1362,7 +1369,7 @@ function MissionResult({s,setS,go}){
 
     {m.focus&&<div className="competenceOutcome"><small>COMPETÊNCIA TRABALHADA</small><h2>{m.focus}</h2><div>
       <p><span>Domínio</span><b>{m.beforeFocusDomain??"—"} → {m.afterFocusDomain??"—"}/100</b></p>
-      <p><span>Certeza da A+</span><b>{certaintyLabel(m.beforeFocusConf,m.beforeFocusEvidence)} → {certaintyLabel(m.afterFocusConf,m.afterFocusEvidence)}</b></p>
+      <p><span>Certeza da APPprova+</span><b>{certaintyLabel(m.beforeFocusConf,m.beforeFocusEvidence)} → {certaintyLabel(m.afterFocusConf,m.afterFocusEvidence)}</b></p>
     </div></div>}
     <div className="missionOutcome">
       <div><span>{m.focus?"Tema — visão agregada":"Domínio estimado"}</span><b>{m.beforeDomain??"—"} → {m.afterDomain}/100</b><small>{m.beforeDomain===null?"primeira estimativa":delta>0?`+${delta}`:delta===0?"sem alteração":delta}</small></div>
@@ -1382,7 +1389,7 @@ function MissionResult({s,setS,go}){
     </div>}
 
     <div className="notice"><b>Porque mudou?</b>
-      <span>O Domínio reage ao desempenho. A Certeza da A+ cresce sobretudo com evidências independentes, tipos de raciocínio diferentes e contextos avaliativos.</span></div>
+      <span>O Domínio reage ao desempenho. A Certeza da APPprova+ cresce sobretudo com evidências independentes, tipos de raciocínio diferentes e contextos avaliativos.</span></div>
     <div className="notice"><b>O plano vai ser recalculado agora</b><span>A próxima Missão não está pré-programada. O motor volta a comparar dificuldades, certeza, pré-requisitos, relevância, recência e objetivo com esta nova evidência.</span></div></details>
 
     <FriendsBetaDisclaimer s={s}/>
@@ -1568,7 +1575,7 @@ function Train({s,setS,go,start}){
         ?"Este foco já tem variantes paramétricas validadas: os números mudam, mas a resposta é calculada por regras determinísticas."
         :exactCurated
         ?`${exactCurated} questões curadas correspondem diretamente a este foco.`
-        :"A A+ usará perguntas próximas do mesmo tema enquanto este foco é expandido."}</span></div>
+        :"A APPprova+ usará perguntas próximas do mesmo tema enquanto este foco é expandido."}</span></div>
       : <div className="notice"><b>Conteúdo ainda em construção</b><span>A taxonomia já contém esta área, mas o banco de perguntas desta versão ainda não tem itens suficientes para a treinar de forma honesta.</span></div>}
 
     <button className="primary" disabled={!available} onClick={()=>{
@@ -1661,11 +1668,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   if(done){
     const ratio=correct/questions.length;
     const potential=ratio>=.75 && cfg.level!=="basic";
-    return <Shell><div className="centered"><Logo/><div className="check">✓</div>
+    return <Shell><div className="centered"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o treino concluído"/>
       <p className="eyebrow">TREINO CONCLUÍDO</p><h1>{correct}/{questions.length} corretas</h1>
       <p className="muted">{theme(cfg.themeId).short} → {cfg.focus}</p></div>
-      {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A A+ guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
-      :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da A+.</span></div>}
+      {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A APPprova+ guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
+      :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da APPprova+.</span></div>}
       <FriendsBetaDisclaimer s={s}/>
       <DailyCompletionNote s={s}/>
       <CompetitionXpNote s={s}/>
@@ -1704,7 +1711,7 @@ function Progress({s,go}){
   const index=prepIndex(s);
   return <Shell><StudentTop s={s} go={go}/><p className="eyebrow">PROGRESSO</p>
     <h1>Como estás a evoluir.</h1>
-    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p></div>
+    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
     <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
     <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
     <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
@@ -1746,15 +1753,15 @@ function Progress({s,go}){
         <div className="progHead"><b>{t.short}</b><small>{t.name}</small></div>
         {has?<>
           <span>Domínio estimado: {v.domain}/100</span><div className="bar"><i style={{width:v.domain+"%"}}/></div>
-          <div className="certaintyRow"><span>Certeza da A+</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
+          <div className="certaintyRow"><span>Certeza da APPprova+</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
           <div className="evidenceMeta">{new Set(v.evidence.map(e=>e.signature)).size} evidências independentes · {new Set(v.evidence.map(e=>e.cognitive)).size} tipos de raciocínio</div>
           <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).filter(f=>f.questionCount>0).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
-        </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A A+ vai recolher evidência quando esta área se tornar relevante.</span></div>}
+        </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A APPprova+ vai recolher evidência quando esta área se tornar relevante.</span></div>}
       </div>
     })}</details>
     <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary>
-      <div className="notice"><b>Domínio ≠ Certeza da A+</b><span><b>Domínio</b> é quanto a A+ estima que sabes. <b>Certeza da A+</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
-      <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a A+ reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
+      <div className="notice"><b>Domínio ≠ Certeza da APPprova+</b><span><b>Domínio</b> é quanto a APPprova+ estima que sabes. <b>Certeza da APPprova+</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
+      <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a APPprova+ reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
     </details>
     <StudentNav active="progress" go={go}/>
   </Shell>
@@ -1769,11 +1776,11 @@ function Exams({s,go,startMini}){
   return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame A+</b><span>{miniReady?`8 questões · ~10–15 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+      <div><b>⚡ Mini-exame APPprova+</b><span>{miniReady?`8 questões · ~10–15 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{String(last.score20).replace('.',',')}/20</b></div><span>{last.correctCount}/{last.total} corretas</span></div>}
-    <div className="exam locked"><b>📝 Exame de treino A+</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
+    <div className="exam locked"><b>📝 Exame de treino APPprova+</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div>
   </Shell>
@@ -1782,7 +1789,7 @@ function Exams({s,go,startMini}){
 function MiniExamIntro({session,go}){
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Ainda não existem perguntas suficientes.</h1></Shell>;
   const years=[...new Set(session.questions.map(q=>theme(q.themeId).year))];
-  return <Shell><Back go={go} to="exams"/><Logo/><p className="eyebrow">MINI-EXAME A+</p>
+  return <Shell><Back go={go} to="exams"/><Logo/><p className="eyebrow">MINI-EXAME APPprova+</p>
     <h1>Agora é prova. O feedback fica para o fim.</h1>
     <p className="muted">Este Mini-exame foi montado para dar cobertura ampla, e não apenas para atacar a tua maior fragilidade.</p>
     <div className="examIntroGrid">
@@ -1877,10 +1884,10 @@ function MiniExamResult({s,setS,go}){
   const questions=r.questionIds.map(questionById).filter(Boolean);
   const wrong=questions.map((q,i)=>({q,i,answer:r.answers[i]})).filter(x=>x.answer!==x.q.a);
   const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
-  return <Shell><div className="centered completionMoment"><Logo/><div className="check">✓</div><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
+  return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o Mini-exame concluído"/><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
     <h1>{String(r.score20).replace('.',',')}<small className="scoreOut">/20</small></h1>
     <p className="muted">{r.correctCount}/{r.total} respostas corretas · {mins}:{String(secs).padStart(2,'0')}</p>
-    <small className="resultDisclaimer">Resultado deste Mini-exame A+ — não é uma previsão da nota do Exame Nacional.</small></div>
+    <small className="resultDisclaimer">Resultado deste Mini-exame APPprova+ — não é uma previsão da nota do Exame Nacional.</small></div>
     <FriendsBetaDisclaimer s={s}/>
     <DailyCompletionNote s={s}/>
     <CompetitionXpNote s={s}/>
@@ -1889,7 +1896,7 @@ function MiniExamResult({s,setS,go}){
       const t=theme(c.themeId);
       const beforeLabel=certaintyLabel(c.before.conf,c.before.evidenceCount);
       const afterLabel=certaintyLabel(c.after.conf,c.after.evidenceCount);
-      return <div className="examChange" key={c.themeId}><div><b>{t.short}</b><small>Domínio {c.before.domain??'—'} → {c.after.domain}/100</small></div><div><span>Certeza da A+</span><strong>{beforeLabel} → {afterLabel}</strong></div></div>
+      return <div className="examChange" key={c.themeId}><div><b>{t.short}</b><small>Domínio {c.before.domain??'—'} → {c.after.domain}/100</small></div><div><span>Certeza da APPprova+</span><strong>{beforeLabel} → {afterLabel}</strong></div></div>
     })}</div>
 
     <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>
@@ -1968,7 +1975,7 @@ function AccountCloud({s,setS,go}){
     setBusy(true);setMessage(null);
     try{
       if(mode==="signup"){
-        await cloudSignUp({name:name.trim()||"Aluno A+",email:email.trim(),password});
+        await cloudSignUp({name:name.trim()||"Aluno",email:email.trim(),password});
         setMessage({ok:true,text:"Conta criada. Se a verificação de email estiver ativa no Neon, confirma o email antes de entrar."});
       }else{
         await cloudSignIn({email:email.trim(),password});
@@ -2175,7 +2182,7 @@ function AccountCloud({s,setS,go}){
   const localIndex=prepIndex(s);
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
-  return <Shell><Back go={go}/><p className="eyebrow">CONTA A+ · CLOUD SEGURA</p>
+  return <Shell><Back go={go}/><p className="eyebrow">CONTA APPprova+ · CLOUD SEGURA</p>
     <h1>O teu progresso, sem sobrescritas silenciosas.</h1>
     <p className="muted">A app continua local-first. A v4.9 passa a tratar cada gravação cloud como uma revisão: se outro dispositivo avançou entretanto, a escrita é bloqueada e és tu que decides o que fazer.</p>
 
@@ -2199,7 +2206,7 @@ function AccountCloud({s,setS,go}){
 
     {cfg.configured&&!session.loading&&user&&<>
       <div className="signedAccount">
-        <div><span>Conta autenticada</span><b>{user.name||"Aluno A+"}</b><small>{user.email}</small></div><strong>● online</strong>
+        <div><span>Conta autenticada</span><b>{user.name||"Aluno"}</b><small>{user.email}</small></div><strong>● online</strong>
       </div>
 
       <div className="rankingIdentityCard">
@@ -2317,7 +2324,7 @@ function IdentityLab({s,setS,go}){
     </button>)}</div>
 
     <button className="primary" onClick={openRole}>Abrir experiência de {ROLES[identity.activeRole]?.label}</button>
-    <button className="secondary" onClick={()=>go("account")}>Conta A+ & Progresso na Cloud →</button>
+    <button className="secondary" onClick={()=>go("account")}>Conta APPprova+ & Progresso na Cloud →</button>
 
     <div className="permissionMatrix"><h3>Permissões principais</h3>
       {[
@@ -2645,7 +2652,7 @@ function BetaSessionFeedback({s,setS,kind}){
   const target=isTargetStudentTester(s);
   const showExperience=friends&&["diagnostic","mission","mini_exam"].includes(kind);
 
-  if(done)return <div className="betaThanks">✓ Feedback guardado. Obrigado por ajudares a melhorar a A+.</div>;
+  if(done)return <div className="betaThanks">✓ Feedback guardado. Obrigado por ajudares a melhorar a APPprova+.</div>;
 
   function save(){
     const row={
