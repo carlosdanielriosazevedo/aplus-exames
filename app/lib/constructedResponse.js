@@ -88,7 +88,7 @@ const hasText=value=>typeof value==="string"&&value.trim().length>0;
 
 export function isResponseAnswered(question,answer){
   if(responseType(question)==="choice")return Number.isInteger(answer);
-  if(responseType(question)==="stepwise")return Object.values(answer?.steps||{}).some(hasText);
+  if(responseType(question)==="stepwise")return hasText(answer)||hasText(answer?.working)||Object.values(answer?.steps||{}).some(hasText);
   return hasText(answer);
 }
 
@@ -135,6 +135,22 @@ function gradeStep(spec,value){
   return {stepId:spec.id,label:spec.label,status:correct?"correct":"incorrect",correct,points:correct?spec.points:0,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason:correct?null:reason};
 }
 
+function stepwiseLines(answer){
+  if(typeof answer==="string")return answer.split(/\r?\n/).map(row=>row.trim()).filter(Boolean);
+  if(hasText(answer?.working))return answer.working.split(/\r?\n/).map(row=>row.trim()).filter(Boolean);
+  return [];
+}
+
+function gradeStepFromWorking(spec,lines,fullAnswer){
+  const candidates=[...lines];
+  if(spec.type==="text"&&hasText(fullAnswer))candidates.push(fullAnswer);
+  for(const candidate of candidates){
+    const result=gradeStep(spec,candidate);
+    if(result.correct)return result;
+  }
+  return gradeStep(spec,"");
+}
+
 export function expectedResponseLabel(question){
   const response=question?.response;
   if(!response)return question?.o?.[question?.a]??"—";
@@ -148,8 +164,9 @@ export function studentResponseLabel(question,answer){
   if(!isResponseAnswered(question,answer))return "Sem resposta";
   if(responseType(question)==="choice")return `${String.fromCharCode(65+answer)} — ${question.o[answer]}`;
   if(responseType(question)==="stepwise"){
+    if(typeof answer==="string")return answer.trim();
     const filled=question.response.steps.filter(row=>hasText(answer?.steps?.[row.id])).length;
-    return `${filled}/${question.response.steps.length} etapas preenchidas`;
+    return hasText(answer?.working)?answer.working.trim():`${filled}/${question.response.steps.length} etapas preenchidas`;
   }
   return String(answer).trim();
 }
@@ -158,7 +175,12 @@ export function gradeResponse(question,answer){
   const type=responseType(question),maxPoints=Number(question?.points)||(type==="choice"?5:35);
   if(!isResponseAnswered(question,answer))return {status:"unanswered",correct:false,points:0,maxPoints,stepResults:[]};
   if(type==="stepwise"){
-    const stepResults=question.response.steps.map(spec=>gradeStep(spec,answer?.steps?.[spec.id]));
+    const lines=stepwiseLines(answer);
+    const fullAnswer=typeof answer==="string"?answer:answer?.working||"";
+    const stepResults=question.response.steps.map(spec=>{
+      if(hasText(answer?.steps?.[spec.id]))return gradeStep(spec,answer.steps[spec.id]);
+      return gradeStepFromWorking(spec,lines,fullAnswer);
+    });
     const points=stepResults.reduce((sum,row)=>sum+row.points,0),correct=points===maxPoints;
     return {status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,reason:correct?null:points>0?"partial_credit":"incorrect"};
   }

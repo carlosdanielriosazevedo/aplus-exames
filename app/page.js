@@ -1828,20 +1828,19 @@ function MiniExamIntro({session,go}){
 function ConstructedResponseField({question,value,onChange}){
   const spec=question.response;
   if(spec.type==="stepwise"){
-    const answer=value&&typeof value==="object"?value:{steps:{}};
-    const updateStep=(id,next)=>onChange({...answer,steps:{...(answer.steps||{}),[id]:next}});
+    const legacySteps=value&&typeof value==="object"?spec.steps.map(row=>value.steps?.[row.id]).filter(Boolean).join("\n"):"";
+    const answer=typeof value==="string"?value:typeof value?.working==="string"?value.working:legacySteps;
     return <div className="constructedResponse stepwiseResponse">
       <div className="constructedHeading"><b>Resolução por etapas</b><span>{question.points} pontos · pontuação parcial</span></div>
-      {typeof answer.working==="string"&&answer.working.trim()&&<div className="legacyWorking"><b>Texto que já tinhas escrito</b><p>{answer.working}</p><small>Foi preservado para não perderes o trabalho. Copia para as etapas apenas o que for necessário.</small></div>}
-      <div className="stepCheckpoints"><b>Constrói aqui a tua resolução</b><small>Preenche cada etapa uma única vez. Uma etapa correta vale os pontos indicados mesmo que a resposta final esteja errada.</small>
-        {spec.steps.map(row=><label key={row.id} htmlFor={`step-${question.id}-${row.id}`}>
-          <span><b>{row.label}</b><em>{row.points} pontos</em></span>
-          {row.type==="text"
-            ?<textarea id={`step-${question.id}-${row.id}`} value={answer.steps?.[row.id]||""} placeholder={row.placeholder} onChange={event=>updateStep(row.id,event.target.value)}/>
-            :<input id={`step-${question.id}-${row.id}`} inputMode={row.type==="numeric"?"decimal":"text"} autoComplete="off" value={answer.steps?.[row.id]||""} placeholder={row.placeholder} onChange={event=>updateStep(row.id,event.target.value)}/>
-          }
-        </label>)}
-      </div>
+      <label htmlFor={`working-${question.id}`}><b>Escreve a tua resolução completa</b></label>
+      <textarea
+        id={`working-${question.id}`}
+        value={answer}
+        placeholder={"Apresenta os cálculos e a conclusão.\nUsa uma linha nova para cada etapa."}
+        onChange={event=>onChange(event.target.value)}
+        aria-describedby={`working-help-${question.id}`}
+      />
+      <small id={`working-help-${question.id}`} className="workingHint"><b>Dica de escrita:</b> carrega em Enter sempre que avançares para uma nova etapa. Assim conseguimos analisar melhor o teu raciocínio e atribuir pontuação parcial.</small>
     </div>;
   }
   return <div className="constructedResponse">
@@ -1931,7 +1930,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
     <p className="muted">Ainda podes voltar a qualquer questão. A correção só acontece quando entregares.</p>
-    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Por etapas":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Resolução escrita":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>

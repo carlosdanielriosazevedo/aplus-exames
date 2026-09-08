@@ -44,6 +44,13 @@ assert.equal(partial.status,"partial");
 assert.equal(partial.points,stepwise.response.steps[0].points);
 assert.equal(isResponseAnswered(stepwise,{steps:{}}),false);
 
+const derivative=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-11CD-STEPS-1");
+const writtenDerivative="f'(x)=3x^2-2\n3*2^2-2\n10";
+const writtenGrade=gradeResponse(derivative,writtenDerivative);
+assert.equal(isResponseAnswered(derivative,writtenDerivative),true);
+assert.equal(writtenGrade.correct,true,"Uma resolução numa caixa ampla deve ser corrigida por etapas.");
+assert.equal(writtenGrade.points,35);
+
 const state={
   goal:17,xp:0,betaMode:"friends_beta",editorialOverrides:{},scores:emptyScores(),
   missionHistory:[],examHistory:[],
