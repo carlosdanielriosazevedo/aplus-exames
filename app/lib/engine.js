@@ -474,19 +474,36 @@ export function shouldEndMission(args){
   return missionStopDecision(args).stop;
 }
 
-export function trainingQuestions(s,{themeId,focus,level},limit=4){
-  let curated=eligibleQuestions(s,themeId,"training",focus);
-  if(!curated.length)curated=eligibleQuestions(s,themeId,"training");
+export function trainingQuestions(s,{themeId,focus,level},limit=8){
+  const focusLabel=microcompetencyLabel(focus)||focus;
+  const selectedSubtopic=curriculumSubtopicForItem({
+    themeId,
+    microcompetencyId:microcompetencyId(themeId,focus)
+  });
+  const exactTraining=eligibleQuestions(s,themeId,"training",focus);
+  const sameSubtopicPractice=eligibleQuestions(s,themeId,"mission")
+    .filter(q=>selectedSubtopic&&curriculumSubtopicForItem(q)===selectedSubtopic);
+  const themeTraining=eligibleQuestions(s,themeId,"training");
+  const themePractice=eligibleQuestions(s,themeId,"mission");
+  let curated=[...new Map(
+    [...exactTraining,...sameSubtopicPractice,...themeTraining,...themePractice]
+      .map(q=>[q.id,q])
+  ).values()];
+  const exactIds=new Set(exactTraining.map(q=>q.id));
+  const sameSubtopicIds=new Set(sameSubtopicPractice.map(q=>q.id));
 
   const map={basic:1,mid:2,adv:3,challenge:4};
   const target=level==="auto"?desiredDifficulty(s.scores[themeId],s.goal):(map[level]||2);
 
   const generated=(s.betaMode||"internal")==="internal"?generateVariants({
     themeId,
-    focus,
+    focus:focusLabel,
     difficulty:target,
     count:Math.max(limit,5),
     salt:`training|${themeId}|${focus}|${level}|${Date.now()}`
+  }).map(q=>{
+    const generatedMicrocompetencyId=microcompetencyId(q.themeId,q.focus);
+    return {...q,microcompetencyId:generatedMicrocompetencyId,subtopicId:curriculumSubtopicForItem({...q,microcompetencyId:generatedMicrocompetencyId})};
   }):[];
 
   let candidates=[...generated,...curated];
@@ -508,6 +525,7 @@ export function trainingQuestions(s,{themeId,focus,level},limit=4){
   while(pool.length && selected.length<limit){
     pool.sort((a,b)=>{
       const score=q=>Math.abs(q.difficulty-target)*3
+        +(q.generated||exactIds.has(q.id)?0:sameSubtopicIds.has(q.id)?1:6)
         +(usedCog.has(q.cognitive)?1.5:0)
         +(usedSignatures.has(q.signature)?3.5:0)
         +(q.generated?0:0.25);

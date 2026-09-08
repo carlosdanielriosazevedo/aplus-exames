@@ -1604,7 +1604,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
   const draft=recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null);
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
-  const questions=useMemo(()=>draft?.questions||trainingQuestions(s,cfg,4),[]);
+  const questions=useMemo(()=>{
+    const fresh=trainingQuestions(s,cfg,8);
+    if(!draft?.questions?.length)return fresh;
+    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,8);
+  },[]);
   const [i,setI]=useState(draft?.i||0);
   const [sel,setSel]=useState(draft?.sel??null);
   const [fb,setFb]=useState(draft?.fb??null);
@@ -1816,13 +1820,32 @@ function MiniExamIntro({session,go}){
       <div><span>⏱</span><b>~15–20 min</b><small>Podes avançar ao teu ritmo</small></div>
       <div><span>📚</span><b>{years.join(' · ')}</b><small>Cobertura transversal</small></div>
     </div>
-    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas frações, usa a forma a/b. Não mostramos se acertaste nem a resolução durante a prova.</span></div>
+    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas respostas construídas, escreve a resolução e preenche os resultados de cada etapa: é isso que permite atribuir pontuação parcial. Não mostramos a correção durante a prova.</span></div>
     <button className="primary" onClick={()=>go("miniExamRun")}>Começar Mini-exame</button>
   </Shell>
 }
 
 function ConstructedResponseField({question,value,onChange}){
   const spec=question.response;
+  if(spec.type==="stepwise"){
+    const answer=value&&typeof value==="object"?value:{working:"",steps:{}};
+    const updateWorking=working=>onChange({...answer,working,steps:answer.steps||{}});
+    const updateStep=(id,next)=>onChange({...answer,working:answer.working||"",steps:{...(answer.steps||{}),[id]:next}});
+    return <div className="constructedResponse stepwiseResponse">
+      <div className="constructedHeading"><b>Resolução por etapas</b><span>{question.points} pontos · pontuação parcial</span></div>
+      <label htmlFor={`working-${question.id}`}><b>{spec.workingLabel}</b><small>Este espaço guarda o teu raciocínio completo.</small></label>
+      <textarea id={`working-${question.id}`} value={answer.working||""} placeholder={spec.workingPlaceholder} onChange={event=>updateWorking(event.target.value)}/>
+      <div className="stepCheckpoints"><b>Resultados a avaliar</b><small>Preenche cada etapa. Uma etapa correta vale os pontos indicados mesmo que a resposta final esteja errada.</small>
+        {spec.steps.map(row=><label key={row.id} htmlFor={`step-${question.id}-${row.id}`}>
+          <span><b>{row.label}</b><em>{row.points} pontos</em></span>
+          {row.type==="text"
+            ?<textarea id={`step-${question.id}-${row.id}`} value={answer.steps?.[row.id]||""} placeholder={row.placeholder} onChange={event=>updateStep(row.id,event.target.value)}/>
+            :<input id={`step-${question.id}-${row.id}`} inputMode={row.type==="numeric"?"decimal":"text"} autoComplete="off" value={answer.steps?.[row.id]||""} placeholder={row.placeholder} onChange={event=>updateStep(row.id,event.target.value)}/>
+          }
+        </label>)}
+      </div>
+    </div>;
+  }
   return <div className="constructedResponse">
     <label htmlFor={`response-${question.id}`}><b>{spec.label}</b><span>{question.points} pontos · resposta construída</span></label>
     <input
@@ -1910,7 +1933,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
     <p className="muted">Ainda podes voltar a qualquer questão. A correção só acontece quando entregares.</p>
-    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{answered?(isConstructedResponse(q)?String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Por etapas":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>
@@ -1943,7 +1966,9 @@ function MiniExamResult({s,setS,go}){
 
     <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>
 
-    {wrong.length>0&&<div className="reviewWrong"><h3>Rever o que falhou</h3>{wrong.map(({q,i,answer,grade})=><details key={q.id}><summary>Questão {i+1} · {theme(q.themeId).short} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</summary><div className="wrongBody"><b>{q.q}</b><span>A tua resposta: {studentResponseLabel(q,answer)}</span><span>Resposta correta: {expectedResponseLabel(q)}</span><small>{q.sol}</small><ReportButton item={q} s={s} setS={setS} compact/></div></details>)}</div>}
+    {wrong.length>0&&<div className="reviewWrong"><h3>Rever o que falhou</h3>{wrong.map(({q,i,answer,grade})=><details key={q.id}><summary>Questão {i+1} · {theme(q.themeId).short} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</summary><div className="wrongBody"><b>{q.q}</b><span>A tua resposta: {studentResponseLabel(q,answer)}</span>
+      {grade?.stepResults?.length?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.correct?"correct":"incorrect"}><span>{row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>Respondeste: {row.answer||"Sem resposta"}</small>{!row.correct&&<small>Esperado: {row.expected}</small>}</div></div>)}</div>:<span>Resposta correta: {expectedResponseLabel(q)}</span>}
+      <small>{q.sol}</small><ReportButton item={q} s={s} setS={setS} compact/></div></details>)}</div>}
 
     <BetaSessionFeedback s={s} setS={setS} kind="mini_exam"/>
     <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
