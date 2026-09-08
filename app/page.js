@@ -871,18 +871,20 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 
   return <div className="dailyMissionOverlay" role="dialog" aria-modal="true" aria-label="Missão de Hoje">
     <section className="dailyMissionModal">
-      <Apronso pose="thinking" className="dailyMissionApronso" alt="Apronso apresenta a Missão de hoje"/>
       <div className="dailyMissionContent">
       <div className="dailyMissionModalTop">
         <small>{mode==="resume"?"MISSÃO EM PAUSA":"NOVA MISSÃO DISPONÍVEL"}</small>
         <span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"}</span>
       </div>
-      <div className="dailyMissionTitle">
-        <span>{typeMeta.icon}</span>
-        <div><small>A TUA MISSÃO DE HOJE · {typeMeta.label.toUpperCase()}</small>
-          <h2>{mode==="resume"?"Continuamos de onde ficaste?":t?.short||"Missão de Hoje"}</h2>
-          {plan.focus&&<b>{plan.focus}</b>}
+      <div className="dailyMissionHero">
+        <div className="dailyMissionTitle">
+          <span>{typeMeta.icon}</span>
+          <div><small>A TUA MISSÃO DE HOJE · {typeMeta.label.toUpperCase()}</small>
+            <h2>{mode==="resume"?"Continuamos de onde ficaste?":t?.short||"Missão de Hoje"}</h2>
+            {plan.focus&&<b>{plan.focus}</b>}
+          </div>
         </div>
+        <Apronso pose="thinking" className="dailyMissionApronso" alt="Apronso apresenta a Missão de hoje"/>
       </div>
 
       <p className="dailyMissionReason">{mode==="resume"
