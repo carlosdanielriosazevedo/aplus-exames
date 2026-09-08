@@ -24,7 +24,7 @@ assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type=
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="expression")),"O piloto deve avaliar expressões intermédias.");
 
 function answerFor(question){
-  return {working:"Resolução completa do aluno",steps:Object.fromEntries(question.response.steps.map(row=>[
+  return {steps:Object.fromEntries(question.response.steps.map(row=>[
     row.id,
     row.type==="numeric"?String(row.value)
       :row.type==="fraction"?`${row.numerator*2}/${row.denominator*2}`
@@ -38,12 +38,11 @@ const fullStepwise=gradeResponse(stepwise,answerFor(stepwise));
 assert.equal(fullStepwise.correct,true);
 assert.equal(fullStepwise.points,35);
 assert.equal(fullStepwise.stepResults.length,stepwise.response.steps.length);
-const firstOnly={working:"Tentativa",steps:{[stepwise.response.steps[0].id]:answerFor(stepwise).steps[stepwise.response.steps[0].id]}};
+const firstOnly={steps:{[stepwise.response.steps[0].id]:answerFor(stepwise).steps[stepwise.response.steps[0].id]}};
 const partial=gradeResponse(stepwise,firstOnly);
 assert.equal(partial.status,"partial");
 assert.equal(partial.points,stepwise.response.steps[0].points);
-assert.equal(isResponseAnswered(stepwise,{working:"Rascunho sem checkpoints",steps:{}}),true);
-assert.equal(isResponseAnswered(stepwise,{working:"",steps:{}}),false);
+assert.equal(isResponseAnswered(stepwise,{steps:{}}),false);
 
 const state={
   goal:17,xp:0,betaMode:"friends_beta",editorialOverrides:{},scores:emptyScores(),
@@ -64,7 +63,7 @@ assert.deepEqual({earned:perfect.earnedPoints,max:perfect.maxPoints,score:perfec
 const mixed=[...correctAnswers];
 const partialIndex=exam.findIndex(isConstructedResponse);
 const partialQuestion=exam[partialIndex];
-mixed[partialIndex]={working:"Tentativa",steps:{[partialQuestion.response.steps[0].id]:answerFor(partialQuestion).steps[partialQuestion.response.steps[0].id]}};
+mixed[partialIndex]={steps:{[partialQuestion.response.steps[0].id]:answerFor(partialQuestion).steps[partialQuestion.response.steps[0].id]}};
 const result=applyMiniExam(state,exam,mixed,900).lastExam;
 assert.equal(result.maxPoints,100);
 assert.equal(result.earnedPoints,65+partialQuestion.response.steps[0].points);
@@ -77,4 +76,4 @@ assert.equal(training.length,8,"O Treino Livre normal não pode terminar ao fim 
 assert.ok(training.every(q=>q.themeId==="10-ele"));
 assert.ok(training.every(q=>!q.generated),"A beta de amigos deve usar apenas perguntas curadas.");
 
-console.log("✓ constructed response v2: 8-question training, written multi-step work, deterministic checkpoints and partial credit validated");
+console.log("✓ constructed response v2: 8-question training, one-pass multi-step work, deterministic checkpoints and partial credit validated");

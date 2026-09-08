@@ -1820,7 +1820,7 @@ function MiniExamIntro({session,go}){
       <div><span>⏱</span><b>~15–20 min</b><small>Podes avançar ao teu ritmo</small></div>
       <div><span>📚</span><b>{years.join(' · ')}</b><small>Cobertura transversal</small></div>
     </div>
-    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas respostas construídas, escreve a resolução e preenche os resultados de cada etapa: é isso que permite atribuir pontuação parcial. Não mostramos a correção durante a prova.</span></div>
+    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas respostas construídas, desenvolve a resolução etapa a etapa: cada uma tem cotação própria. Não mostramos a correção durante a prova.</span></div>
     <button className="primary" onClick={()=>go("miniExamRun")}>Começar Mini-exame</button>
   </Shell>
 }
@@ -1828,14 +1828,12 @@ function MiniExamIntro({session,go}){
 function ConstructedResponseField({question,value,onChange}){
   const spec=question.response;
   if(spec.type==="stepwise"){
-    const answer=value&&typeof value==="object"?value:{working:"",steps:{}};
-    const updateWorking=working=>onChange({...answer,working,steps:answer.steps||{}});
-    const updateStep=(id,next)=>onChange({...answer,working:answer.working||"",steps:{...(answer.steps||{}),[id]:next}});
+    const answer=value&&typeof value==="object"?value:{steps:{}};
+    const updateStep=(id,next)=>onChange({...answer,steps:{...(answer.steps||{}),[id]:next}});
     return <div className="constructedResponse stepwiseResponse">
       <div className="constructedHeading"><b>Resolução por etapas</b><span>{question.points} pontos · pontuação parcial</span></div>
-      <label htmlFor={`working-${question.id}`}><b>{spec.workingLabel}</b><small>Este espaço guarda o teu raciocínio completo.</small></label>
-      <textarea id={`working-${question.id}`} value={answer.working||""} placeholder={spec.workingPlaceholder} onChange={event=>updateWorking(event.target.value)}/>
-      <div className="stepCheckpoints"><b>Resultados a avaliar</b><small>Preenche cada etapa. Uma etapa correta vale os pontos indicados mesmo que a resposta final esteja errada.</small>
+      {typeof answer.working==="string"&&answer.working.trim()&&<div className="legacyWorking"><b>Texto que já tinhas escrito</b><p>{answer.working}</p><small>Foi preservado para não perderes o trabalho. Copia para as etapas apenas o que for necessário.</small></div>}
+      <div className="stepCheckpoints"><b>Constrói aqui a tua resolução</b><small>Preenche cada etapa uma única vez. Uma etapa correta vale os pontos indicados mesmo que a resposta final esteja errada.</small>
         {spec.steps.map(row=><label key={row.id} htmlFor={`step-${question.id}-${row.id}`}>
           <span><b>{row.label}</b><em>{row.points} pontos</em></span>
           {row.type==="text"
