@@ -10,6 +10,8 @@ assert.match(layout,/APProva\+/);
 assert.match(page,/aria-label="APProva\+"/);
 assert.doesNotMatch(page,/APPp/);
 assert.doesNotMatch(layout,/APPp/);
+assert.match(page,/className="brandApp">APP<\/span><span className="brandRova">rova<\/span><span className="brandPlus">\+<\/span>/);
+assert.match(page,/Não te vou avaliar\. Só te quero conhecer um pouco melhor para saber por onde começarmos\./);
 assert.match(page,/Conhece o Apronso/);
 assert.match(page,/Onde encontras o Apronso/);
 assert.match(page,/PASSO 4 DE 4/);
@@ -19,12 +21,14 @@ assert.match(page,/resultApronso/);
 assert.match(page,/Apronso acompanha o teu progresso/);
 assert.match(css,/--app-orange:#f59e0b/);
 assert.match(css,/--app-navy:#081a2a/);
-assert.match(css,/\.logo \.logoApp,\.logo \.logoPlus\{color:var\(--app-orange\)\}/);
+assert.match(css,/--app-card-dark:#0f3047/);
+assert.match(css,/--app-card-light:#fff4df/);
+assert.match(css,/\.brandApp,\.brandPlus\{color:var\(--app-orange\)\}/);
 assert.match(css,/\.dailyMissionHero\{display:grid/);
 assert.match(css,/\.dailyMissionApronso\{position:relative/);
 assert.match(css,/\.dark,\.light,\.learnHome\{background:#fff/);
-assert.match(css,/\.testerSegmentPicker button\{background:#eef5fa;[^}]*color:var\(--app-navy\)/);
-assert.match(css,/\.testerSegmentPicker button\.selected\{background:#173d5b;[^}]*color:#fff/);
+assert.match(css,/\.testerSegmentPicker button\{background:var\(--app-card-light\);[^}]*color:var\(--app-navy\)/);
+assert.match(css,/\.testerSegmentPicker button\.selected\{background:var\(--app-card-dark\);[^}]*color:#fff/);
 assert.match(css,/\.testerSegmentPicker button\.selected small\{color:#dce7ef\}/);
 assert.ok(
   css.lastIndexOf(".dark,.light,.learnHome{background:#fff")>css.lastIndexOf(".learnHome{background:radial-gradient"),
@@ -32,6 +36,7 @@ assert.ok(
 );
 assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);
 assert.doesNotMatch(css,/\.diagApronsoHero>\.apronso\{[^}]*margin:-/);
+assert.ok((page.match(/<ApronsoNudge/g)||[]).length>=4,"Apronso must be present in the main navigation surfaces");
 
 for(const pose of poses){
   const asset=new URL(`../public/mascot/apronso-${pose}.webp`,import.meta.url);

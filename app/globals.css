@@ -487,12 +487,12 @@ button{touch-action:manipulation}
 @media(max-width:760px){.subjectSelectionSummary{align-items:flex-start;flex-direction:column}.subjectSelectionSummary>strong{font-size:12px}.subjectGroup>div{grid-template-columns:1fr}.subjectCard{grid-template-columns:42px minmax(0,1fr);min-height:82px;padding:14px}.subjectStatus{grid-column:2}.subjectInfo b{font-size:16px}.subjectInfo small,.subjectStatus{font-size:12px}}
 
 /* v5.7 — identidade APProva+ e Apronso */
-:root{--app-navy:#081a2a;--app-navy-2:#102b42;--app-orange:#f59e0b;--app-orange-dark:#c96a05;--app-cream:#fff9f1;--app-orange-soft:#fff1d6;--app-line:#eadfce;--app-muted:#687489}
+:root{--app-navy:#081a2a;--app-navy-2:#102b42;--app-orange:#f59e0b;--app-orange-dark:#c96a05;--app-cream:#fff9f1;--app-orange-soft:#fff1d6;--app-line:#eadfce;--app-muted:#687489;--app-card-dark:#0f3047;--app-card-light:#fff4df;--app-card-light-border:#efd7a6}
 body{color:var(--app-navy);background:#fff}
 .dark,.light,.learnHome{background:#fff;color:var(--app-navy)}
 .panel{background:#fff;border:1px solid #edf0f5;box-shadow:0 25px 70px #17203c10}
 .logo{display:inline-flex;align-items:baseline;font-weight:950;font-size:22px;letter-spacing:-.8px;color:var(--app-navy)}
-.dark .logo{color:var(--app-navy)}.logo .logoApp,.logo .logoPlus{color:var(--app-orange)}.logo .logoProva{color:inherit}.logo .logoPlus{font-size:1.12em;margin-left:1px}
+.dark .logo{color:var(--app-navy)}.brandName{display:inline-flex;align-items:baseline;white-space:nowrap;font:inherit;letter-spacing:-.04em}.brandApp,.brandPlus{color:var(--app-orange)}.brandRova{color:var(--app-navy)}.brandPlus{font-size:1.12em;margin-left:1px}
 .eyebrow,.questionContext,.trainChoices em,.pathNode.current article small,.pathNode.current summary,.focusDisclosure>summary,.resultDetails>summary,.progressDetails>summary,.progressHelp>summary{color:var(--app-orange-dark)}
 .hero .logo{margin-bottom:24px}
 .hero h1 em{color:var(--app-orange-dark)}.hero>p:not(.eyebrow){color:var(--app-muted)}
@@ -518,11 +518,11 @@ body{color:var(--app-navy);background:#fff}
 .apronso{display:block;object-fit:contain;user-select:none;-webkit-user-drag:none}
 .welcomeApronso{width:min(600px,100%);margin:0 auto 20px;display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;text-align:left;border:1px solid #244d68;border-radius:24px;background:linear-gradient(145deg,#173d5b,var(--app-navy));overflow:hidden;box-shadow:0 16px 36px #102b4226}
 .welcomeApronso .apronso{width:160px;height:154px;align-self:end}.welcomeApronso>div{padding:18px 22px 18px 4px}.welcomeApronso small,.welcomeApronso b,.welcomeApronso span{display:block}.welcomeApronso small{color:#ffb224;font-size:11px;font-weight:950;letter-spacing:.08em}.welcomeApronso b{font-size:21px;margin:4px 0 6px;color:#fff}.welcomeApronso span{font-size:14px;line-height:1.5;color:#cbd4de}
-.friendsWelcome{background:#f4f7fa;border-color:#dbe4eb;color:var(--app-navy)}
+.friendsWelcome{background:var(--app-card-light);border-color:var(--app-card-light-border);color:var(--app-navy)}
 .friendsWelcome span,.testerSegmentPicker>span{color:var(--app-muted)}
-.testerSegmentPicker button{background:#eef5fa;border-color:#cbdbe6;color:var(--app-navy)}
+.testerSegmentPicker button{background:var(--app-card-light);border-color:var(--app-card-light-border);color:var(--app-navy)}
 .testerSegmentPicker button small{color:#5f6e80}
-.testerSegmentPicker button.selected{background:#173d5b;border-color:#244d68;color:#fff;box-shadow:0 10px 24px #102b4226}
+.testerSegmentPicker button.selected{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff;box-shadow:0 10px 24px #102b4226}
 .testerSegmentPicker button.selected small{color:#dce7ef}
 .diagApronsoHero{display:grid;grid-template-columns:minmax(0,1fr) 145px;gap:12px;align-items:end}.diagApronsoHero h1{margin-bottom:14px}.diagApronsoHero>.apronso{width:145px;height:170px}.diagPurposeHero{background:linear-gradient(140deg,#fff1d6,#fff8ec);border:1px solid #f2d39c}.diagPurposeHero small{color:var(--app-orange-dark)}
 .dailyMissionModal{background:linear-gradient(160deg,#fff,#fff5e4);color:var(--app-navy);border:1px solid #f3d9a7}.dailyMissionContent{position:relative;scrollbar-gutter:stable;padding-right:4px}.dailyMissionHero{display:grid;grid-template-columns:minmax(0,1fr) 124px;gap:8px;align-items:end}.dailyMissionApronso{position:relative;width:124px;height:145px;opacity:.96;align-self:end}.dailyMissionModalTop,.dailyMissionTitle,.dailyMissionReason,.dailyMissionScope,.dailyMissionWhy,.dailyMissionRewards{position:relative;z-index:1}.dailyMissionTitle{padding-right:0}.dailyMissionModalTop small,.dailyMissionTitle small,.dailyMissionWhy>small,.dailyMissionScope b{color:var(--app-orange-dark)}.dailyMissionScope,.dailyMissionWhy{background:#fff4df;border-color:#f2d39c}.dailyMissionStart{font-size:15px;min-height:50px}.dailyMissionLater{font-size:14px;min-height:46px}.dailyMissionFoot{font-size:11px}
@@ -531,19 +531,37 @@ body{color:var(--app-navy);background:#fff}
 .progressHero{grid-template-columns:1.2fr 1fr 130px;align-items:stretch}.progressHero>div,.progressHero>p{background:#fff4df;border:1px solid #f1d8aa}.progressHero>.apronso{width:130px;height:100%;min-height:145px;align-self:end}
 
 /* Superfícies de ação: a cor pertence aos cartões, nunca ao fundo da página. */
-.trainChoices>button{background:#173d5b;border-color:#244d68;color:#fff}
-.trainChoices>button:nth-child(even){background:#493d7c;border-color:#5a4b96}
+.trainChoices>button,.trainChoices>button:nth-child(even){background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
 .trainChoices>button small{color:#dce7ef}.trainChoices>button em{color:#ffd084}
 .trainChoices>button:hover{border-color:#f4bd58;box-shadow:0 14px 35px #102b4226}
-.exam{background:#173d5b;border-color:#244d68;color:#fff}
-.exam:nth-of-type(even),.exam.locked{background:#493d7c;border-color:#5a4b96}
+.exam,.exam:nth-of-type(even),.exam.locked{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
 .exam span,.exam.locked span{color:#dde3ee}.examAction strong{color:#ffd084}
+.exam .brandRova,.apronsoNudge.dark .brandRova{color:#fff}
+
+/* v5.8 — dois tons de cartão e presença contextual do Apronso */
+.notice,.friendsWelcome,.testerSegmentPicker button:not(.selected),.diagPurposeHero,.diagIntroGrid>div,.goalMessage,.branchNote,.missionStep,.missionOutcome>div,.progressHero>div,.progressHero>p,.prog,.resultSkill,.examIntroGrid>div,.questionMeta>span,.subjectSelectionSummary,.scopeCounter,.curriculumPicker details,.leagueMini,.demoRankingWarning,.leaderboard,.xpRules,.divisionLadder,.rankingProfile,.rankingLocked,.lastExam,.dailyMissionScope,.dailyMissionWhy,.dailyMissionRewards>div,.firstUseTourModal,.dailyMissionModal,.activeArea,.trainingSummary,.parent,.metrics>div,.resumeBanner,.pausedSession,.friendsBetaDisclaimer,.competitionXpNote,.dailyCompletionNote,.mission.completedToday,.examQuestionMeta,.answerMap button,.answerMap button.answered,.parentExam,.reportChoices,.reportChoices button,.reportThanks,.progressDetails>summary,.hypothesisPanel,.hypothesisRow,.memoryQuiet,.rankingIdentityCard,.nextActions,.decisionExplain{background:var(--app-card-light);border-color:var(--app-card-light-border);color:var(--app-navy)}
+.welcomeApronso,.testerSegmentPicker button.selected,.pathNode.current article,.mission,.divisionBadge,.leagueStatus,.trainChoices>button,.exam,.apronsoNudge.dark,.friendsBetaPanel,.dailyEngagement{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
+.leagueStatus{background-image:none}.leagueMini small,.leagueZone span,.xpRules>div:first-child small,.divisionLadder>small,.rankingProfile>div:first-child small{color:var(--app-orange-dark)}
+.divisionLadder>div>div.current{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
+.xpRuleGrid>div,.lastRankXp,.leaderboardHead>span{background:var(--app-card-light);color:var(--app-navy)}
+.dailyMissionActions,.subjectSelectionSummary>strong{background:var(--app-card-light);border-color:var(--app-card-light-border);color:var(--app-orange-dark)}
+.leaderboardRows>div.self{background:var(--app-card-light);border-color:var(--app-orange);color:var(--app-navy)}
+.good{background:var(--app-card-light);border-color:#9bd8bd;color:#176b4a}.bad{background:var(--app-card-light);border-color:#efb2aa;color:#8b2c23}
+.friendsBetaPanelHead small,.friendsBetaPanel>p,.friendsBetaPanel>small,.dailyEngagementHead small,.dailyEngagementHead p{color:#dce7ef}
+.studentNav button.active,.rankingTabs button.sel,.subjectCard.selected{background:var(--app-card-light)!important;border-color:var(--app-card-light-border)!important;color:var(--app-orange-dark)}
+.subjectCard,.subjectCard:disabled{background:var(--app-card-light);border-color:var(--app-card-light-border)}
+.focusTrack i,.pathLine.active{background:var(--app-orange)}
+.pathNode.done>span,.pathNode.current.complete>span{background:var(--app-card-light);border-color:var(--app-orange);color:var(--app-orange-dark)}
+.pathNode.next>span{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
+.apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:12px;min-height:100px;margin:0 0 22px;padding:8px 18px 8px 8px;border:1px solid var(--app-card-light-border);border-radius:20px;background:var(--app-card-light);color:var(--app-navy);overflow:hidden}
+.apronsoNudge .apronso{width:82px;height:88px;align-self:end}.apronsoNudge p{margin:0;font-size:14px;line-height:1.5;font-weight:750}.apronsoNudge.dark p{color:#eef5f8}
 
 @media(max-width:760px){
   .welcomeApronso{grid-template-columns:112px minmax(0,1fr);border-radius:20px}.welcomeApronso .apronso{width:112px;height:128px}.welcomeApronso>div{padding:14px 14px 14px 0}.welcomeApronso b{font-size:18px}.welcomeApronso span{font-size:13px}
   .diagApronsoHero{grid-template-columns:minmax(0,1fr) 105px;gap:4px}.diagApronsoHero>.apronso{width:105px;height:145px}.diagPurposeHero strong{font-size:20px}
   .dailyMissionHero{grid-template-columns:minmax(0,1fr) 102px}.dailyMissionApronso{width:102px;height:122px}.dailyMissionTitle{padding-right:0}
   .firstUseTourMascot{width:155px;height:138px}.progressHero{grid-template-columns:1fr 94px}.progressHero>div{grid-column:1}.progressHero>p{grid-column:1}.progressHero>.apronso{grid-column:2;grid-row:1/3;width:94px;min-height:180px}
+  .apronsoNudge{grid-template-columns:68px minmax(0,1fr);min-height:86px;margin-bottom:18px;padding:6px 14px 6px 6px}.apronsoNudge .apronso{width:68px;height:76px}.apronsoNudge p{font-size:13px;line-height:1.42}
 }
 @media(max-width:420px){
   .hero{padding:14px}.welcomeApronso{grid-template-columns:96px minmax(0,1fr)}.welcomeApronso .apronso{width:96px;height:116px}.welcomeApronso small{font-size:11px}.welcomeApronso b{font-size:16px}.welcomeApronso span{font-size:12px;line-height:1.4}
