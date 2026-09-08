@@ -23,6 +23,9 @@ assert.match(css,/\.logo \.logoApp,\.logo \.logoPlus\{color:var\(--app-orange\)\
 assert.match(css,/\.dailyMissionHero\{display:grid/);
 assert.match(css,/\.dailyMissionApronso\{position:relative/);
 assert.match(css,/\.dark,\.light,\.learnHome\{background:#fff/);
+assert.match(css,/\.testerSegmentPicker button\{background:#eef5fa;[^}]*color:var\(--app-navy\)/);
+assert.match(css,/\.testerSegmentPicker button\.selected\{background:#173d5b;[^}]*color:#fff/);
+assert.match(css,/\.testerSegmentPicker button\.selected small\{color:#dce7ef\}/);
 assert.ok(
   css.lastIndexOf(".dark,.light,.learnHome{background:#fff")>css.lastIndexOf(".learnHome{background:radial-gradient"),
   "O fundo branco global tem de prevalecer sobre os temas antigos."
