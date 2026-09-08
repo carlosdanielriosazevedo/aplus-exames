@@ -9,6 +9,7 @@ import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curri
 import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../data/vnextMission.js";
+import {CONSTRUCTED_RESPONSE_BANK,gradeResponse,miniExamPointSummary} from "./constructedResponse.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -21,7 +22,7 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
 
 // O runtime recebe o piloto de treino e um extrato diagnóstico compacto. As
 // restantes perguntas vNext continuam no repositório editorial e fora do bundle.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS];
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -839,7 +840,7 @@ export function seenQuestionIds(s){
 }
 
 function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds=new Set()){
-  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!usedSessionIds.has(q.id));
+  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!q.response||q.response.type==="choice").filter(q=>!usedSessionIds.has(q.id));
   if(!all.length)return null;
   const unseen=all.filter(q=>!seenIds.has(q.id));
   const pool=unseen.length?unseen:all;
@@ -853,19 +854,21 @@ function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds
 }
 
 export function buildMiniExam(s,count=8){
+  const constructedTarget=count>=4?Math.min(2,count-2):0;
+  const choiceTarget=count-constructedTarget;
   const seen=seenQuestionIds(s);
   const usedCognitive=new Set();
   const usedSessionIds=new Set();
   const selected=[];
   const usedThemes=new Set();
   const scopedThemes=academicScopeThemes(s?.profile)
-    .filter(t=>eligibleQuestions(s,t.id,"exam").length);
+    .filter(t=>eligibleQuestions(s,t.id,"exam").some(q=>!q.response||q.response.type==="choice"));
 
   const availableYears=["10.º","11.º","12.º"].filter(year=>scopedThemes.some(t=>t.year===year));
   if(!availableYears.length)return [];
 
-  const base=Math.floor(count/availableYears.length);
-  let remainder=count%availableYears.length;
+  const base=Math.floor(choiceTarget/availableYears.length);
+  let remainder=choiceTarget%availableYears.length;
   const targets=availableYears.map(year=>({year,n:base+(remainder-->0?1:0)}));
 
   for(const group of targets){
@@ -876,7 +879,7 @@ export function buildMiniExam(s,count=8){
         return (b.relevance-a.relevance) || (ac-bc);
       });
     for(const t of candidates){
-      if(selected.length>=count)break;
+      if(selected.length>=choiceTarget)break;
       const inYear=selected.filter(q=>theme(q.themeId)?.year===group.year).length;
       if(inYear>=group.n)break;
       if(usedThemes.has(t.id))continue;
@@ -887,12 +890,12 @@ export function buildMiniExam(s,count=8){
     }
   }
 
-  if(selected.length<count){
+  if(selected.length<choiceTarget){
     const themes=scopedThemes
       .filter(t=>!usedThemes.has(t.id))
       .sort((a,b)=>b.relevance-a.relevance);
     for(const t of themes){
-      if(selected.length>=count)break;
+      if(selected.length>=choiceTarget)break;
       const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
       if(q){selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive)}
     }
@@ -901,23 +904,35 @@ export function buildMiniExam(s,count=8){
   // Um scope pode ter menos temas live do que questões pedidas. Repetimos
   // temas, nunca itens, em vez de saltar para matéria de um ano futuro.
   let progress=true;
-  while(selected.length<count && progress){
+  while(selected.length<choiceTarget && progress){
     progress=false;
     for(const t of [...scopedThemes].sort((a,b)=>b.relevance-a.relevance)){
-      if(selected.length>=count)break;
+      if(selected.length>=choiceTarget)break;
       const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
       if(!q)continue;
       selected.push(q);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);progress=true;
     }
   }
 
-  return selected.slice(0,count);
+  const constructed=CONSTRUCTED_RESPONSE_BANK
+    .filter(q=>isQuestionInAcademicScope(q,s?.profile,"exam"))
+    .filter(q=>isEligibleForContext(q,"exam",s?.editorialOverrides||{},s?.betaMode||"internal"))
+    .sort((a,b)=>{
+      const unseenA=seen.has(a.id)?1:0,unseenB=seen.has(b.id)?1:0;
+      const yearA=Number(theme(a.themeId)?.year?.slice(0,2))||0;
+      const yearB=Number(theme(b.themeId)?.year?.slice(0,2))||0;
+      return unseenA-unseenB||yearB-yearA||b.difficulty-a.difficulty;
+    })
+    .slice(0,constructedTarget);
+  const choices=selected.slice(0,choiceTarget).map(q=>({...q,response:{type:"choice"},points:5}));
+  if(constructed.length<constructedTarget)return choices;
+  const mixed=[...choices];
+  constructed.forEach((q,index)=>mixed.splice(index===0?Math.min(2,mixed.length):mixed.length,0,q));
+  return mixed.slice(0,count);
 }
 
 export function miniExamScore20(questions,answers){
-  if(!questions.length)return 0;
-  const correct=questions.reduce((n,q,i)=>n+(answers[i]===q.a?1:0),0);
-  return Math.round((correct/questions.length)*200)/10;
+  return miniExamPointSummary(questions,answers).score20;
 }
 
 export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
@@ -930,16 +945,17 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
   });
 
   const scores={...s.scores};
+  const pointSummary=miniExamPointSummary(questions,answers);
   questions.forEach((q,i)=>{
-    const answered=answers[i]!==null && answers[i]!==undefined;
-    const correct=answered && answers[i]===q.a;
+    const grade=gradeResponse(q,answers[i]);
+    const answered=grade.status!=="unanswered";
+    const correct=grade.correct;
     // Em prova, uma não-resposta conta para o resultado, mas recebe peso
     // pedagógico ligeiramente menor do que uma resposta explicitamente errada.
     scores[q.themeId]=applyEvidence(scores[q.themeId],q,correct,"exam",answered?1:.65);
   });
 
-  const correctCount=questions.reduce((n,q,i)=>n+(answers[i]===q.a?1:0),0);
-  const score20=miniExamScore20(questions,answers);
+  const {correctCount,score20,earnedPoints,maxPoints,results:itemResults}=pointSummary;
   const changes=Object.keys(before).map(themeId=>({
     themeId,
     before:before[themeId],
@@ -957,8 +973,11 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
     elapsedSeconds,
     questionIds:questions.map(q=>q.id),
     answers,
+    itemResults,
     correctCount,
     total:questions.length,
+    earnedPoints,
+    maxPoints,
     score20,
     changes
   };

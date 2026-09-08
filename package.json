@@ -25,6 +25,7 @@
     "mobile:audit": "node scripts/mobile-legibility-audit.mjs",
     "student-experience:audit": "node scripts/student-experience-audit.mjs",
     "apronso-brand:audit": "node scripts/apronso-brand-audit.mjs",
+    "constructed-response:audit": "node scripts/constructed-response-audit.mjs",
     "pedagogical-memory:audit": "node scripts/pedagogical-memory-audit.mjs",
     "cloud-reliability:audit": "node scripts/cloud-reliability-audit.mjs",
     "retention:audit": "node scripts/retention-funnel-audit.mjs",

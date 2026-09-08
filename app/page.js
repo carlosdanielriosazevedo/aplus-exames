@@ -12,7 +12,7 @@ import {
   shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,
   missionContentExhaustedDecision,canStartMissionDetour,estimateMissionSeconds,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
-  buildMiniExam,applyMiniExam,miniExamScore20,hasTrainingContent,hasGenerator,
+  buildMiniExam,applyMiniExam,hasTrainingContent,hasGenerator,
   eligibleQuestions,eligibleCount,rankedStudyPriorities,
   focusScore,focusRows,competenceMap,
   selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
@@ -97,6 +97,10 @@ import {
   PORTUGAL_REGIONS,DIVISIONS,PROMOTION_COUNT,DEMOTION_COUNT,
   SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS,migrateCompetition
 } from "./lib/competition";
+import {
+  responseType,isConstructedResponse,isResponseAnswered,
+  expectedResponseLabel,studentResponseLabel,miniExamPointSummary
+} from "./lib/constructedResponse";
 
 const initial={
   goal:17,
@@ -1781,15 +1785,17 @@ function Exams({s,go,startMini}){
   const miniQuestions=buildMiniExam(s,8);
   const miniAvailable=miniQuestions.length;
   const miniReady=miniAvailable>=8;
+  const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
+  const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
   return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame</b><span>{miniReady?`8 questões · ~10–15 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~15–20 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
-    {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{String(last.score20).replace('.',',')}/20</b></div><span>{last.correctCount}/{last.total} corretas</span></div>}
+    {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{String(last.score20).replace('.',',')}/20</b></div><span>{last.earnedPoints!==undefined?`${last.earnedPoints}/${last.maxPoints} pontos`:`${last.correctCount}/${last.total} corretas`}</span></div>}
     <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div>
@@ -1799,32 +1805,54 @@ function Exams({s,go,startMini}){
 function MiniExamIntro({session,go}){
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Ainda não existem perguntas suficientes.</h1></Shell>;
   const years=[...new Set(session.questions.map(q=>theme(q.themeId).year))];
+  const constructed=session.questions.filter(isConstructedResponse).length;
+  const selection=session.questions.length-constructed;
+  const maxPoints=session.questions.reduce((sum,q)=>sum+(q.points||0),0);
   return <Shell><Back go={go} to="exams"/><Logo/><p className="eyebrow">MINI-EXAME <BrandName/></p>
     <h1>Agora é prova. O feedback fica para o fim.</h1>
-    <p className="muted">Este Mini-exame foi montado para dar cobertura ampla, e não apenas para atacar a tua maior fragilidade.</p>
+    <p className="muted">Este Mini-exame combina seleção e resposta construída, aproximando o treino do formato real da prova.</p>
     <div className="examIntroGrid">
-      <div><span>📝</span><b>{session.questions.length} questões</b><small>Escolha múltipla nesta versão</small></div>
-      <div><span>⏱</span><b>~10–15 min</b><small>Podes avançar ao teu ritmo</small></div>
+      <div><span>📝</span><b>{selection} seleção + {constructed} construção</b><small>{maxPoints} pontos · ponderação 30/70</small></div>
+      <div><span>⏱</span><b>~15–20 min</b><small>Podes avançar ao teu ritmo</small></div>
       <div><span>📚</span><b>{years.join(' · ')}</b><small>Cobertura transversal</small></div>
     </div>
-    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Não mostramos se acertaste nem a resolução durante a prova.</span></div>
+    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas frações, usa a forma a/b. Não mostramos se acertaste nem a resolução durante a prova.</span></div>
     <button className="primary" onClick={()=>go("miniExamRun")}>Começar Mini-exame</button>
   </Shell>
+}
+
+function ConstructedResponseField({question,value,onChange}){
+  const spec=question.response;
+  return <div className="constructedResponse">
+    <label htmlFor={`response-${question.id}`}><b>{spec.label}</b><span>{question.points} pontos · resposta construída</span></label>
+    <input
+      id={`response-${question.id}`}
+      inputMode={spec.type==="numeric"?"decimal":"text"}
+      autoComplete="off"
+      value={typeof value==="string"?value:""}
+      placeholder={spec.placeholder}
+      onChange={event=>onChange(event.target.value)}
+      aria-describedby={`response-help-${question.id}`}
+    />
+    <small id={`response-help-${question.id}`}>{spec.type==="fraction"?"Escreve uma fração, por exemplo 1/2. Frações equivalentes são corrigidas matematicamente.":"Podes usar vírgula ou ponto nos números decimais."}</small>
+  </div>;
 }
 
 function MiniExamRun({session,setSession,go}){
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
   const i=session.current||0,q=session.questions[i],answer=session.answers[i];
-  function choose(n){
-    const answers=[...session.answers];answers[i]=n;setSession({...session,answers});
+  function setAnswer(value){
+    const answers=[...session.answers];answers[i]=value;setSession({...session,answers});
   }
   function move(n){setSession({...session,current:Math.max(0,Math.min(session.questions.length-1,n))})}
   return <Shell>
     <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/session.questions.length)*100}%`}}/></div><span>{i+1}/{session.questions.length}</span></div>
     <p className="questionContext">{theme(q.themeId).short}</p>
-    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span></div></details>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span><span>{q.points} pontos · {isConstructedResponse(q)?"resposta construída":"seleção"}</span></div></details>
     <h2>{q.q}</h2>
-    <div className="opts examOpts">{q.o.map((x,n)=><button key={`${q.id}-${n}`} className={answer===n?"sel":""} onClick={()=>choose(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
+    {responseType(q)==="choice"
+      ?<div className="opts examOpts">{q.o.map((x,n)=><button key={`${q.id}-${n}`} className={answer===n?"sel":""} onClick={()=>setAnswer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
+      :<ConstructedResponseField question={q} value={answer} onChange={setAnswer}/>}
     <div className="examNav">
       <button className="secondary small" disabled={i===0} onClick={()=>move(i-1)}>← Anterior</button>
       {i<session.questions.length-1
@@ -1839,7 +1867,7 @@ function MiniExamRun({session,setSession,go}){
 function MiniExamReview({session,setSession,s,setS,go}){
   const submittingRef=useRef(false);
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
-  const unanswered=session.answers.filter(x=>x===null).length;
+  const unanswered=session.questions.filter((q,i)=>!isResponseAnswered(q,session.answers[i])).length;
   function jump(i){setSession({...session,current:i});go("miniExamRun")}
   function submit(){
     if(submittingRef.current)return;
@@ -1882,7 +1910,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
     <p className="muted">Ainda podes voltar a qualquer questão. A correção só acontece quando entregares.</p>
-    <div className="answerMap">{session.questions.map((q,i)=><button key={q.id} className={session.answers[i]===null?"empty":"answered"} onClick={()=>jump(i)}><b>{i+1}</b><span>{session.answers[i]===null?"Por responder":String.fromCharCode(65+session.answers[i])}</span></button>)}</div>
+    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{answered?(isConstructedResponse(q)?String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>
@@ -1892,11 +1920,15 @@ function MiniExamResult({s,setS,go}){
   const r=s.lastExam;
   if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há resultado.</h1></Shell>;
   const questions=r.questionIds.map(questionById).filter(Boolean);
-  const wrong=questions.map((q,i)=>({q,i,answer:r.answers[i]})).filter(x=>x.answer!==x.q.a);
+  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  const itemResults=r.itemResults||fallbackSummary.results;
+  const earnedPoints=r.earnedPoints??fallbackSummary.earnedPoints;
+  const maxPoints=r.maxPoints??fallbackSummary.maxPoints;
+  const wrong=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]})).filter(x=>x.grade?.status!=="correct");
   const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
   return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o Mini-exame concluído"/><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
     <h1>{String(r.score20).replace('.',',')}<small className="scoreOut">/20</small></h1>
-    <p className="muted">{r.correctCount}/{r.total} respostas corretas · {mins}:{String(secs).padStart(2,'0')}</p>
+    <p className="muted"><b>{earnedPoints}/{maxPoints} pontos</b> · {r.correctCount}/{r.total} itens totalmente corretos · {mins}:{String(secs).padStart(2,'0')}</p>
     <small className="resultDisclaimer">Resultado deste Mini-exame <BrandName/> — não é uma previsão da nota do Exame Nacional.</small></div>
     <FriendsBetaDisclaimer s={s}/>
     <DailyCompletionNote s={s}/>
@@ -1911,7 +1943,7 @@ function MiniExamResult({s,setS,go}){
 
     <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>
 
-    {wrong.length>0&&<div className="reviewWrong"><h3>Rever o que falhou</h3>{wrong.map(({q,i,answer})=><details key={q.id}><summary>Questão {i+1} · {theme(q.themeId).short}</summary><div className="wrongBody"><b>{q.q}</b><span>A tua resposta: {answer===null?'Sem resposta':`${String.fromCharCode(65+answer)} — ${q.o[answer]}`}</span><span>Resposta correta: {String.fromCharCode(65+q.a)} — {q.o[q.a]}</span><small>{q.sol}</small><ReportButton item={q} s={s} setS={setS} compact/></div></details>)}</div>}
+    {wrong.length>0&&<div className="reviewWrong"><h3>Rever o que falhou</h3>{wrong.map(({q,i,answer,grade})=><details key={q.id}><summary>Questão {i+1} · {theme(q.themeId).short} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</summary><div className="wrongBody"><b>{q.q}</b><span>A tua resposta: {studentResponseLabel(q,answer)}</span><span>Resposta correta: {expectedResponseLabel(q)}</span><small>{q.sol}</small><ReportButton item={q} s={s} setS={setS} compact/></div></details>)}</div>}
 
     <BetaSessionFeedback s={s} setS={setS} kind="mini_exam"/>
     <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
@@ -2406,7 +2438,7 @@ function Parent({s,setS,go}){
       <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · Matemática A</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
       <small className="parentFoot">* índice ainda parcial enquanto o perfil está a ser construído</small>
       <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{academicScopeThemes(s.profile).length}</b><span>áreas com evidência</span></div></div>
-      {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{String(s.lastExam.score20).replace('.',',')}/20</b><small>{s.lastExam.correctCount}/{s.lastExam.total} corretas</small></div>}
+      {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{String(s.lastExam.score20).replace('.',',')}/20</b><small>{s.lastExam.earnedPoints!==undefined?`${s.lastExam.earnedPoints}/${s.lastExam.maxPoints} pontos`:`${s.lastExam.correctCount}/${s.lastExam.total} corretas`}</small></div>}
       <div className="notice"><b>O que os pais veem?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados de avaliações — não cada resposta individual.</span></div>
 
       {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}

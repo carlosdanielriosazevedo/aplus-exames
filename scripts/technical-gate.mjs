@@ -18,6 +18,7 @@ const checks=[
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
   ["Experiência do aluno","npm",["run","student-experience:audit"]],
   ["Identidade APProva+ e Apronso","npm",["run","apronso-brand:audit"]],
+  ["Resposta construída v1","npm",["run","constructed-response:audit"]],
   ["Memória pedagógica","npm",["run","pedagogical-memory:audit"]],
   ["Cloud reliability","npm",["run","cloud-reliability:audit"]],
   ["Funil e retenção","npm",["run","retention:audit"]],

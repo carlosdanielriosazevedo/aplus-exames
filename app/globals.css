@@ -556,6 +556,10 @@ body{color:var(--app-navy);background:#fff}
 .apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:12px;min-height:100px;margin:0 0 22px;padding:8px 18px 8px 8px;border:1px solid var(--app-card-light-border);border-radius:20px;background:var(--app-card-light);color:var(--app-navy);overflow:hidden}
 .apronsoNudge .apronso{width:82px;height:88px;align-self:end}.apronsoNudge p{margin:0;font-size:14px;line-height:1.5;font-weight:750}.apronsoNudge.dark p{color:#eef5f8}
 .apronsoNudge.plain{min-height:88px;padding:0 8px 0 0;border:0;border-radius:0;background:transparent;color:var(--app-navy)}
+.constructedResponse{margin:20px 0;padding:20px;border:1px solid var(--app-card-light-border);border-radius:18px;background:var(--app-card-light);color:var(--app-navy)}
+.constructedResponse label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.constructedResponse label b{font-size:15px}.constructedResponse label span{font-size:12px;font-weight:850;color:var(--app-orange-dark)}
+.constructedResponse input{width:100%;min-height:58px;padding:14px 16px;border:2px solid #cbd2dc;border-radius:13px;background:#fff;color:var(--app-navy);font-size:21px;font-weight:850;outline:none}.constructedResponse input:focus{border-color:var(--app-orange);box-shadow:0 0 0 4px #f59e0b24}.constructedResponse input::placeholder{color:#9099a7;font-weight:600}
+.constructedResponse small{display:block;margin-top:9px;color:var(--app-muted);font-size:12px;line-height:1.45}
 
 @media(max-width:760px){
   .welcomeApronso{grid-template-columns:112px minmax(0,1fr);border-radius:20px}.welcomeApronso .apronso{width:112px;height:128px}.welcomeApronso>div{padding:14px 14px 14px 0}.welcomeApronso b{font-size:18px}.welcomeApronso span{font-size:13px}
@@ -563,6 +567,7 @@ body{color:var(--app-navy);background:#fff}
   .dailyMissionHero{grid-template-columns:minmax(0,1fr) 102px}.dailyMissionApronso{width:102px;height:122px}.dailyMissionTitle{padding-right:0}
   .firstUseTourMascot{width:155px;height:138px}.progressHero{grid-template-columns:1fr 94px}.progressHero>div{grid-column:1}.progressHero>p{grid-column:1}.progressHero>.apronso{grid-column:2;grid-row:1/3;width:94px;min-height:180px}
   .apronsoNudge{grid-template-columns:68px minmax(0,1fr);min-height:86px;margin-bottom:18px;padding:6px 14px 6px 6px}.apronsoNudge .apronso{width:68px;height:76px}.apronsoNudge p{font-size:13px;line-height:1.42}
+  .constructedResponse{padding:16px}.constructedResponse label{align-items:flex-start;flex-direction:column;gap:3px}.constructedResponse input{font-size:20px}
 }
 @media(max-width:420px){
   .hero{padding:14px}.welcomeApronso{grid-template-columns:96px minmax(0,1fr)}.welcomeApronso .apronso{width:96px;height:116px}.welcomeApronso small{font-size:11px}.welcomeApronso b{font-size:16px}.welcomeApronso span{font-size:12px;line-height:1.4}
