@@ -1525,8 +1525,8 @@ function Ranking({s,setS,go}){
 }
 
 function TrainHub({s,go}){
-  return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1><p className="muted">Escolhe como queres estudar agora.</p></div>
-    <ApronsoNudge pose="thinking" tone="dark">Queres praticar um tema específico ou testar várias matérias? Escolhe o formato e eu acompanho-te.</ApronsoNudge>
+  return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
+    <ApronsoNudge pose="thinking" tone="plain">Queres praticar um tema específico ou testar várias matérias? Escolhe o formato e eu acompanho-te.</ApronsoNudge>
     <div className="trainChoices">
       <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Usa as submatérias já lecionadas no teu ano e inclui automaticamente a matéria dos anos anteriores. Recebes o feedback no fim.</small></div><em>→</em></button>

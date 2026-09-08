@@ -555,6 +555,7 @@ body{color:var(--app-navy);background:#fff}
 .pathNode.next>span{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
 .apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:12px;min-height:100px;margin:0 0 22px;padding:8px 18px 8px 8px;border:1px solid var(--app-card-light-border);border-radius:20px;background:var(--app-card-light);color:var(--app-navy);overflow:hidden}
 .apronsoNudge .apronso{width:82px;height:88px;align-self:end}.apronsoNudge p{margin:0;font-size:14px;line-height:1.5;font-weight:750}.apronsoNudge.dark p{color:#eef5f8}
+.apronsoNudge.plain{min-height:88px;padding:0 8px 0 0;border:0;border-radius:0;background:transparent;color:var(--app-navy)}
 
 @media(max-width:760px){
   .welcomeApronso{grid-template-columns:112px minmax(0,1fr);border-radius:20px}.welcomeApronso .apronso{width:112px;height:128px}.welcomeApronso>div{padding:14px 14px 14px 0}.welcomeApronso b{font-size:18px}.welcomeApronso span{font-size:13px}
