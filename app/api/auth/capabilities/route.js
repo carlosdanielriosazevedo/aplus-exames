@@ -11,6 +11,6 @@ export async function GET(){
     roles:["student","parent","reviewer","admin"],
     note:cfg.configured
       ?"Neon Auth configurado no ambiente. A ligação de sessão real é a etapa seguinte."
-      :"Modo demo/local. Não existem passwords geridas pela APPprova+."
+      :"Modo demo/local. Não existem passwords geridas pela APProva+."
   });
 }

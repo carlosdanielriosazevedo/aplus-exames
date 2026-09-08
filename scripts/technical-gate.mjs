@@ -17,7 +17,7 @@ const checks=[
   ["Missões vNext 3–5 minutos","npm",["run","vnext-mission:audit"]],
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
   ["Experiência do aluno","npm",["run","student-experience:audit"]],
-  ["Identidade APPprova+ e Apronso","npm",["run","apronso-brand:audit"]],
+  ["Identidade APProva+ e Apronso","npm",["run","apronso-brand:audit"]],
   ["Memória pedagógica","npm",["run","pedagogical-memory:audit"]],
   ["Cloud reliability","npm",["run","cloud-reliability:audit"]],
   ["Funil e retenção","npm",["run","retention:audit"]],

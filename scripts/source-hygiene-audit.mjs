@@ -37,7 +37,7 @@ assert.ok(!page.includes("MOTOR v3.2"),"Rótulo de motor antigo reapareceu na UI
 assert.ok(page.includes("devView"),"Ferramentas internas deixaram de estar protegidas pelo modo dev.");
 assert.ok(page.includes("PONTE COM PROFESSOR EXTERNO"),"Ponte de revisão externa desapareceu.");
 assert.ok(page.includes("BETA PRIVADA · TESTE DE EXPERIÊNCIA"),"Entrada da beta de amigos desapareceu.");
-assert.ok(page.includes("Como vais usar a APPprova+?"),"Escolha pública entre aluno e encarregado desapareceu.");
+assert.ok(page.includes("Como vais usar a APProva+?"),"Escolha pública entre aluno e encarregado desapareceu.");
 assert.ok(page.includes("PUBLIC_ENTRY_SEGMENTS.map"),"Entrada pública deixou de usar a lista restrita de papéis.");
 assert.ok(page.includes("RELATÓRIOS DOS TESTERS"),"Agregador de feedback externo desapareceu.");
 assert.ok(page.includes("Pipeline matemático dos geradores"),"Painel de validação matemática desapareceu.");

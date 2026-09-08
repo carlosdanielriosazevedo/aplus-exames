@@ -6,8 +6,10 @@ const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
 const poses=["welcome","thinking","celebrate","progress"];
 
-assert.match(layout,/APPprova\+/);
-assert.match(page,/aria-label="APPprova\+"/);
+assert.match(layout,/APProva\+/);
+assert.match(page,/aria-label="APProva\+"/);
+assert.doesNotMatch(page,/APPp/);
+assert.doesNotMatch(layout,/APPp/);
 assert.match(page,/Conhece o Apronso/);
 assert.match(page,/Onde encontras o Apronso/);
 assert.match(page,/PASSO 4 DE 4/);
@@ -20,6 +22,11 @@ assert.match(css,/--app-navy:#081a2a/);
 assert.match(css,/\.logo \.logoApp,\.logo \.logoPlus\{color:var\(--app-orange\)\}/);
 assert.match(css,/\.dailyMissionHero\{display:grid/);
 assert.match(css,/\.dailyMissionApronso\{position:relative/);
+assert.match(css,/\.dark,\.light,\.learnHome\{background:#fff/);
+assert.ok(
+  css.lastIndexOf(".dark,.light,.learnHome{background:#fff")>css.lastIndexOf(".learnHome{background:radial-gradient"),
+  "O fundo branco global tem de prevalecer sobre os temas antigos."
+);
 assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);
 assert.doesNotMatch(css,/\.diagApronsoHero>\.apronso\{[^}]*margin:-/);
 
@@ -31,4 +38,4 @@ for(const pose of poses){
   assert.match(page,new RegExp(`(?:pose=|mascot:)['\"]${pose}['\"]`),`${pose}: pose must be used in the experience`);
 }
 
-console.log("✓ APPprova+ identity: palette, onboarding and four Apronso poses guarded");
+console.log("✓ APProva+ identity: white surfaces, action-card palette, onboarding and four Apronso poses guarded");

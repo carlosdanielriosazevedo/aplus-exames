@@ -5,7 +5,7 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const agents=readFileSync(new URL("../AGENTS.md",import.meta.url),"utf8");
 
-assert.match(agents,/A APPprova\+ pensa muito e mostra pouco/);
+assert.match(agents,/A APProva\+ pensa muito e mostra pouco/);
 assert.match(agents,/Cada ecrã do aluno deve ter uma ação visualmente dominante/);
 assert.match(page,/const STUDENT_NAV=\[\["home","⌂","Aprender"\],\["train","◎","Treinar"\],\["ranking","△","Ranking"\],\["progress","◫","Progresso"\]\]/);
 assert.equal((page.match(/<StudentNav active=/g)||[]).length,4,"exactly four primary student surfaces need navigation");
@@ -40,7 +40,7 @@ assert.doesNotMatch(welcomeSource,/recent_student|observer/);
 assert.match(page,/friendsBetaInfo/);
 assert.match(page,/Informação do teste/);
 assert.match(page,/className="progressDetails"/);
-assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza da APPprova\+[\s\S]*?Variantes não contam/);
+assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza da APProva\+[\s\S]*?Variantes não contam/);
 assert.match(page,/Índice parcial — não é uma previsão da nota do exame/);
 assert.match(page,/className="focusTop"/);
 assert.match(page,/window\.history\.scrollRestoration="manual"/);
