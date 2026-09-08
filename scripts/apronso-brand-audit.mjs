@@ -14,7 +14,8 @@ assert.match(page,/className="brandAP">AP<\/span><span className="brandProva">Pr
 assert.match(page,/Não te vou avaliar\. Só te quero conhecer um pouco melhor para saber por onde começarmos\./);
 assert.match(page,/Conhece o Apronso/);
 assert.match(page,/Onde encontras o Apronso/);
-assert.match(page,/PASSO 4 DE 4/);
+assert.match(page,/const PRE_DIAGNOSTIC_TOUR_STEPS=/);
+assert.match(page,/PASSO 2 DE 2/);
 assert.match(page,/dailyMissionApronso/);
 assert.match(page,/className="dailyMissionHero"/);
 assert.match(page,/resultApronso/);

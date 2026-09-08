@@ -12,7 +12,9 @@ assert.equal((page.match(/<StudentNav active=/g)||[]).length,4,"exactly four pri
 assert.doesNotMatch(page,/STUDENT_NAV[\s\S]{0,300}(?:Exames|Pais|Conta)/);
 assert.match(page,/className="adaptivePath"/);
 assert.match(page,/MISSÃO DE HOJE/);
-assert.match(page,/const FIRST_USE_TOUR_STEPS=\[[\s\S]*?PASSO 1 DE 4[\s\S]*?PASSO 2 DE 4[\s\S]*?PASSO 3 DE 4[\s\S]*?PASSO 4 DE 4[\s\S]*?\];/);
+assert.match(page,/const PRE_DIAGNOSTIC_TOUR_STEPS=\[[\s\S]*?PASSO 1 DE 2[\s\S]*?PASSO 2 DE 2[\s\S]*?\];/);
+assert.match(page,/function ApronsoIntro[\s\S]*?go\("diag"\)/);
+assert.match(page,/const FIRST_USE_TOUR_STEPS=\[[\s\S]*?PASSO 1 DE 2[\s\S]*?PASSO 2 DE 2[\s\S]*?\];/);
 assert.match(page,/function FirstUseTour\([\s\S]*?Seguinte →[\s\S]*?Saltar explicação/);
 assert.match(page,/showFirstUseTour[\s\S]*?FirstUseTour[\s\S]*?DailyMissionModal/);
 assert.match(page,/Apronso e como funciona a app/);
@@ -70,6 +72,8 @@ for(const sessionSource of [diagnosticSource,missionSource,trainingSource,miniEx
 }
 assert.doesNotMatch(page.slice(page.indexOf("function MiniExamRun("),page.indexOf("\nfunction MiniExamReview(")),/className="examProgress"/);
 assert.match(page,/✓ Muito bem!/);
+assert.match(page,/disabled=\{sel===null\} onClick=\{submitAnswer\}>Responder/);
+assert.match(page,/Próxima pergunta →/);
 assert.match(page,/A resposta correta é:/);
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(css,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);

@@ -269,6 +269,7 @@ export default function App(){
   if(screen==="curriculumSettings")return <TaughtCurriculum s={s} setS={setS} go={go}/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
+  if(screen==="apronsoIntro")return <ApronsoIntro setS={setS} go={go}/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
   if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
@@ -668,7 +669,7 @@ function GoalScreen({s,setS,go,onboarding=false}){
         ?recordMilestone(next,"goal_completed",{goal})
         :next;
     });
-    go(onboarding?"diag":"home");
+    go(onboarding?"apronsoIntro":"home");
   }
   return <Shell><Logo/>
     <p className="eyebrow">{onboarding?"O TEU OBJETIVO":"AJUSTAR OBJETIVO"}</p>
@@ -684,6 +685,25 @@ function GoalScreen({s,setS,go,onboarding=false}){
     <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar novo objetivo"}</button>
     {!onboarding&&<button className="secondary" onClick={()=>go("home")}>Cancelar</button>}
   </Shell>
+}
+
+const PRE_DIAGNOSTIC_TOUR_STEPS=[
+  {mascot:"welcome",eyebrow:"PASSO 1 DE 2",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
+  {mascot:"thinking",eyebrow:"PASSO 2 DE 2",title:"Primeiro, quero conhecer-te",text:"Não te vou avaliar. O diagnóstico serve apenas para perceber por onde devemos começar e adaptar o teu plano."}
+];
+
+function ApronsoIntro({setS,go}){
+  function finish(skipped=false){
+    setS(prev=>recordMilestone(prev,"apronso_intro_completed",{skipped,steps:skipped?null:PRE_DIAGNOSTIC_TOUR_STEPS.length}));
+    go("diag");
+  }
+  return <FirstUseTour
+    steps={PRE_DIAGNOSTIC_TOUR_STEPS}
+    ariaLabel="Conhece o Apronso antes do diagnóstico"
+    finalLabel="Ir para o diagnóstico →"
+    onComplete={()=>finish(false)}
+    onSkip={()=>finish(true)}
+  />;
 }
 
 function ensureDiagnosticStarted(state,draft){
@@ -778,9 +798,16 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   function answer(n){
     if(!ready||fb||draft.pendingResponse)return;
-    const selected={...draft,sel:n,fb:{correct:n===current.a}};
+    const selected={...draft,sel:n,fb:null};
     if(!saveSessionDraft(selected)){setSaveError(true);return}
     setSaveError(false);setDraft(selected);
+  }
+
+  function submitAnswer(){
+    if(!ready||sel===null||fb||draft.pendingResponse)return;
+    const submitted={...draft,fb:{correct:sel===current.a}};
+    if(!saveSessionDraft(submitted)){setSaveError(true);return}
+    setSaveError(false);setDraft(submitted);
   }
 
   function finish(nextState,nextDraft){
@@ -818,7 +845,9 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
     {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
-    <button className="primary" disabled={!fb} onClick={next}>Continuar</button>
+    {!fb
+      ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
+      :<button className="primary" onClick={next}>Próxima pergunta →</button>}
   </Shell>
 }
 
@@ -923,26 +952,24 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 }
 
 const FIRST_USE_TOUR_STEPS=[
-  {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Ajudo-te a perceber o que estudar e acompanho-te até aos exames — mas o esforço e as conquistas são teus.</>},
-  {mascot:"thinking",eyebrow:"PASSO 2 DE 4",title:"Onde encontras o Apronso",text:"Estou contigo no plano diário, nas explicações quando algo parece difícil, nos resultados para celebrar e em Progresso para te mostrar o caminho."},
-  {mascot:"thinking",eyebrow:"PASSO 3 DE 4",title:"A tua Missão diária",text:"Todos os dias, a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
-  {mascot:"progress",eyebrow:"PASSO 4 DE 4",title:"Treina e acompanha a evolução",text:"Em Praticar escolhes qualquer matéria. No Mini-exame treinas matéria já lecionada; em Progresso vês o teu Domínio e a certeza da app."}
+  {mascot:"thinking",eyebrow:"PASSO 1 DE 2",title:"Onde encontras o Apronso",text:"Estou contigo na Missão diária, onde a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
+  {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:"Em Praticar escolhes qualquer matéria. No Mini-exame treinas matéria já lecionada; em Progresso vês o teu Domínio e a certeza da app."}
 ];
 
-function FirstUseTour({onComplete,onSkip}){
+function FirstUseTour({onComplete,onSkip,steps=FIRST_USE_TOUR_STEPS,ariaLabel="Como funciona a APProva+",finalLabel="Começar →"}){
   const [step,setStep]=useState(0);
-  const item=FIRST_USE_TOUR_STEPS[step];
-  const last=step===FIRST_USE_TOUR_STEPS.length-1;
-  return <div className="dailyMissionOverlay firstUseTourOverlay" role="dialog" aria-modal="true" aria-label="Conhece o Apronso e a APProva+">
+  const item=steps[step];
+  const last=step===steps.length-1;
+  return <div className="dailyMissionOverlay firstUseTourOverlay" role="dialog" aria-modal="true" aria-label={ariaLabel}>
     <section className="firstUseTourModal">
-      <div className="firstUseTourProgress" aria-label={`Passo ${step+1} de ${FIRST_USE_TOUR_STEPS.length}`}>
-        {FIRST_USE_TOUR_STEPS.map((_,i)=><i key={i} className={i<=step?"active":""}/>) }
+      <div className="firstUseTourProgress" aria-label={`Passo ${step+1} de ${steps.length}`}>
+        {steps.map((_,i)=><i key={i} className={i<=step?"active":""}/>) }
       </div>
       <Apronso pose={item.mascot} className="firstUseTourMascot" alt=""/>
       <small>{item.eyebrow}</small>
       <h2>{item.title}</h2>
       <p>{item.text}</p>
-      <button className="firstUseTourNext" onClick={()=>last?onComplete():setStep(current=>current+1)}>{last?"Começar →":"Seguinte →"}</button>
+      <button className="firstUseTourNext" onClick={()=>last?onComplete():setStep(current=>current+1)}>{last?finalLabel:"Seguinte →"}</button>
       <button className="firstUseTourSkip" onClick={onSkip}>Saltar explicação</button>
     </section>
   </div>;
@@ -3420,5 +3447,6 @@ function QualityPanel({s,setS,go}){
 function QuestionOptions({q,sel,fb,answer}){
   return <div className="opts">{q.o.map((x,n)=><button key={`${q.id}-${n}`}
     className={(sel===n?"sel ":"")+(fb&&n===q.a?"correct ":"")+(fb&&sel===n&&n!==q.a?"wrong":"")}
+    disabled={!!fb}
     onClick={()=>answer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
 }
