@@ -547,7 +547,8 @@ body{color:var(--app-navy);background:#fff}
 .leaderboardRows>div.self{background:var(--app-card-light);border-color:var(--app-orange);color:var(--app-navy)}
 .good{background:var(--app-card-light);border-color:#9bd8bd;color:#176b4a}.bad{background:var(--app-card-light);border-color:#efb2aa;color:#8b2c23}
 .friendsBetaPanelHead small,.friendsBetaPanel>p,.friendsBetaPanel>small,.dailyEngagementHead small,.dailyEngagementHead p{color:#dce7ef}
-.studentNav button.active,.rankingTabs button.sel,.subjectCard.selected{background:var(--app-card-light)!important;border-color:var(--app-card-light-border)!important;color:var(--app-orange-dark)}
+.studentNav button.active,.subjectCard.selected{background:var(--app-card-light)!important;border-color:var(--app-card-light-border)!important;color:var(--app-orange-dark)}
+.rankingTabs button.sel{background:var(--app-card-dark)!important;border-color:var(--app-orange)!important;color:#fff!important;font-weight:900;box-shadow:0 0 0 2px #f59e0b2e}
 .subjectCard,.subjectCard:disabled{background:var(--app-card-light);border-color:var(--app-card-light-border)}
 .focusTrack i,.pathLine.active{background:var(--app-orange)}
 .pathNode.done>span,.pathNode.current.complete>span{background:var(--app-card-light);border-color:var(--app-orange);color:var(--app-orange-dark)}

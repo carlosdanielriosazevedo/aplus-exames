@@ -77,6 +77,7 @@ assert.match(css,/\.studentNav button>b\{[^}]*font-size:12px[^}]*white-space:now
 assert.match(css,/\.pathNode\.current button\{[^}]*min-height:54px/);
 assert.match(css,/\.opts button\{font-size:17px;min-height:62px\}/);
 assert.match(css,/\.rankingTabs button\{[^}]*min-height:44px[^}]*font-size:13px/);
+assert.match(css,/\.rankingTabs button\.sel\{background:var\(--app-card-dark\)!important;[^}]*border-color:var\(--app-orange\)!important;[^}]*color:#fff!important/);
 assert.match(css,/\.leaderboardRows strong\{font-size:15px\}/);
 assert.match(css,/\.demoRankingWarning span\{font-size:13px\}/);
 assert.match(css,/\.pausedSession button\{[^}]*min-height:48px/);
