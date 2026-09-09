@@ -295,6 +295,7 @@ export default function App(){
   if(screen==="miniExamRun")return <MiniExamRun session={examSession} setSession={setExamSession} go={go}/>;
   if(screen==="miniExamReview")return <MiniExamReview session={examSession} setSession={setExamSession} s={s} setS={setS} go={go}/>;
   if(screen==="miniExamResult")return <MiniExamResult s={s} setS={setS} go={go}/>;
+  if(screen==="miniExamCompletedReview")return <MiniExamCompletedReview s={s} setS={setS} go={go}/>;
   if(screen==="qa")return <QualityPanel s={s} setS={setS} go={go}/>;
   if(screen==="review")return <ReviewerDashboard s={s} setS={setS} go={go}/>;
   if(screen==="beta")return <BetaDashboard s={s} setS={setS} go={go}/>;
@@ -1971,7 +1972,6 @@ function MiniExamResult({s,setS,go}){
   const itemResults=r.itemResults||fallbackSummary.results;
   const earnedPoints=r.earnedPoints??fallbackSummary.earnedPoints;
   const maxPoints=r.maxPoints??fallbackSummary.maxPoints;
-  const wrong=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]})).filter(x=>x.grade?.status!=="correct");
   const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
   return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o Mini-exame concluído"/><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
     <h1>{String(r.score20).replace('.',',')}<small className="scoreOut">/20</small></h1>
@@ -1980,6 +1980,7 @@ function MiniExamResult({s,setS,go}){
     <FriendsBetaDisclaimer s={s}/>
     <DailyCompletionNote s={s}/>
     <CompetitionXpNote s={s}/>
+    <button className="primary" onClick={()=>go("miniExamCompletedReview")}>Rever o Mini-exame</button>
 
     <div className="examChanges"><h3>O que mudou no teu mapa?</h3>{r.changes.map(c=>{
       const t=theme(c.themeId);
@@ -1990,14 +1991,38 @@ function MiniExamResult({s,setS,go}){
 
     <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>
 
-    {wrong.length>0&&<div className="reviewWrong"><h3>Rever o que falhou</h3>{wrong.map(({q,i,answer,grade})=><details key={q.id}><summary>Questão {i+1} · {theme(q.themeId).short} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</summary><div className="wrongBody"><b>{q.q}</b><span>A tua resposta: {studentResponseLabel(q,answer)}</span>
-      {grade?.stepResults?.length?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.correct?"correct":"incorrect"}><span>{row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>Respondeste: {row.answer||"Sem resposta"}</small>{!row.correct&&<small>Esperado: {row.expected}</small>}</div></div>)}</div>:<span>Resposta correta: {expectedResponseLabel(q)}</span>}
-      <small>{q.sol}</small><ReportButton item={q} s={s} setS={setS} compact/></div></details>)}</div>}
-
     <BetaSessionFeedback s={s} setS={setS} kind="mini_exam"/>
     <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
     <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
   </Shell>
+}
+
+function MiniExamCompletedReview({s,setS,go}){
+  const r=s.lastExam;
+  if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há um Mini-exame para rever.</h1></Shell>;
+  const questions=r.questionIds.map(questionById).filter(Boolean);
+  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  const itemResults=r.itemResults||fallbackSummary.results;
+  const rows=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]||fallbackSummary.results[i]}));
+  const statusLabel=status=>status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
+  return <Shell><Back go={go} to="miniExamResult"/><Logo/><p className="eyebrow">REVISÃO DO MINI-EXAME</p>
+    <h1>Revê as tuas respostas.</h1>
+    <p className="muted">O Mini-exame já terminou e as respostas estão bloqueadas. Aqui podes perceber o que acertaste, o que falhou e como resolver cada pergunta.</p>
+    <div className="completedExamSummary"><b>{String(r.score20).replace('.',',')}/20</b><span>{r.earnedPoints??fallbackSummary.earnedPoints}/{r.maxPoints??fallbackSummary.maxPoints} pontos</span></div>
+    <div className="completedExamReview">{rows.map(({q,i,answer,grade})=><details key={q.id} open={grade?.status!=="correct"} className={`reviewItem ${grade?.status||"unanswered"}`}>
+      <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{statusLabel(grade?.status)} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</strong></summary>
+      <div className="reviewItemBody"><h2>{q.q}</h2>
+        <div className="reviewAnswer"><small>A tua resposta</small><p>{studentResponseLabel(q,answer)}</p></div>
+        {grade?.stepResults?.length
+          ?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.correct?"correct":"incorrect"}><span>{row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>Identificado na tua resolução: {row.answer||"Não identificado"}</small>{!row.correct&&<small>Esperado: {row.expected}</small>}</div></div>)}</div>
+          :<div className="reviewAnswer correctAnswer"><small>Resposta correta</small><p>{expectedResponseLabel(q)}</p></div>}
+        <div className="reviewResolution"><small>Resolução</small><p>{q.sol||"Ainda não existe uma resolução explicada para esta pergunta."}</p></div>
+        <ReportButton item={q} s={s} setS={setS} compact/>
+      </div>
+    </details>)}</div>
+    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
+  </Shell>;
 }
 
 function AccountCloud({s,setS,go}){

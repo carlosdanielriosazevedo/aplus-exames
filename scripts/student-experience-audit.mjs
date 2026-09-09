@@ -74,6 +74,9 @@ assert.doesNotMatch(page.slice(page.indexOf("function MiniExamRun("),page.indexO
 assert.match(page,/✓ Muito bem!/);
 assert.match(page,/disabled=\{sel===null\} onClick=\{submitAnswer\}>Responder/);
 assert.match(page,/Próxima pergunta →/);
+assert.match(page,/Rever o Mini-exame/);
+assert.match(page,/function MiniExamCompletedReview/);
+assert.match(page,/O Mini-exame já terminou e as respostas estão bloqueadas/);
 assert.match(page,/A resposta correta é:/);
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(css,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
