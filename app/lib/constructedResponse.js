@@ -1,3 +1,4 @@
+import {equivalentPolynomial} from "./polynomial.js";
 const step=(id,label,type,points,expected)=>({id,label,type,points,...expected});
 
 export const CONSTRUCTED_RESPONSE_BANK=[
@@ -34,7 +35,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     q:"Seja f(x)=x³−2x. Calcula f′(2), apresentando todas as etapas.",
     response:{type:"stepwise",steps:[
       step("derivative","1. Expressão de f′(x)","expression",15,{accepted:["f'(x)=3x^2-2","3x^2-2","f′(x)=3x^2-2"],expected:"f′(x)=3x²−2",placeholder:"Ex.: 3x^2−2"}),
-      step("substitution","2. Substituição de x=2","expression",8,{accepted:["3*2^2-2","3x2^2-2","3·2^2-2","3(2)^2-2"],expected:"3×2²−2",placeholder:"Ex.: 3×2^2−2"}),
+      step("substitution","2. Substituição de x=2","expression",8,{prefixes:["f'(2)"],accepted:["3*2^2-2","3x2^2-2","3·2^2-2","3(2)^2-2"],expected:"3×2²−2",placeholder:"Ex.: 3×2^2−2"}),
       step("value","3. Valor de f′(2)","numeric",12,{value:10,tolerance:0,expected:"f′(2)=10",placeholder:"Ex.: 10"})
     ]},
     points:35,sol:"f′(x)=3x²−2. Logo, f′(2)=3×2²−2=10.",
@@ -112,7 +113,7 @@ export function isResponseAnswered(question,answer){
 }
 
 function normalizedInput(value){return String(value??"").trim().replace(/−/g,"-").replace(/\s+/g,"").replace(",", ".")}
-function normalizedExpression(value){return normalizedInput(value).toLowerCase().replace(/²/g,"^2").replace(/[×·]/g,"*").replace(/:/g,"/")}
+function normalizedExpression(value){return normalizedInput(value).toLowerCase().replace(/′/g,"'").replace(/²/g,"^2").replace(/³/g,"^3").replace(/[×·]/g,"*").replace(/:/g,"/")}
 function normalizedWords(value){return String(value??"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[−–—]/g,"-").replace(/\s+/g," ").trim()}
 
 function withoutPrefix(value){return normalizedInput(value).replace(/^[a-zA-ZÀ-ÿ′']+(?:\([^)]*\))?=/,"")}
@@ -131,6 +132,9 @@ function parseFraction(value){
 
 function gradeStep(spec,value){
   let correct=false,reason="incorrect";
+  const typedPrefix=String(value??"").includes("=")?String(value).split("=")[0]:null;
+  const expectedPrefix=String(spec.expected).includes("=")?String(spec.expected).split("=")[0]:null;
+  if(["numeric","fraction"].includes(spec.type)&&typedPrefix&&expectedPrefix&&normalizedExpression(typedPrefix)!==normalizedExpression(expectedPrefix))return {stepId:spec.id,label:spec.label,status:"incorrect",correct:false,points:0,maxPoints:spec.points,expected:spec.expected,answer:value,reason:"wrong_quantity"};
   if(spec.type==="numeric"){
     const parsed=parseNumeric(value),tolerance=Math.max(0,Number(spec.tolerance)||0);
     correct=parsed!==null&&Math.abs(parsed-Number(spec.value))<=tolerance+Number.EPSILON;
@@ -143,12 +147,19 @@ function gradeStep(spec,value){
   }
   if(spec.type==="expression"){
     const input=normalizedExpression(value);
-    correct=hasText(value)&&(spec.accepted||[]).some(candidate=>normalizedExpression(candidate)===input);
+    correct=hasText(value)&&(spec.accepted||[]).some(candidate=>{
+      const expected=normalizedExpression(candidate);
+      if(expected===input)return true;
+      const strip=s=>s.replace(/^f'\(x\)=/,"");
+      const a=strip(input),b=strip(expected);
+      return a.includes("x")&&b.includes("x")&&equivalentPolynomial(a,b);
+    });
     if(!input)reason="empty_expression";
   }
   if(spec.type==="text"){
     const input=normalizedWords(value);
-    correct=hasText(value)&&(spec.conceptGroups||[]).every(group=>group.some(concept=>input.includes(normalizedWords(concept))));
+    // Unrestricted prose is not certified by keyword presence.
+    correct=hasText(value)&&input.replace(/[.!]$/g,"")===normalizedWords(spec.expected).replace(/[.!]$/g,"");
     if(!input)reason="empty_justification";
   }
   return {stepId:spec.id,label:spec.label,status:correct?"correct":"incorrect",correct,points:correct?spec.points:0,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason:correct?null:reason};
@@ -162,12 +173,19 @@ function stepwiseLines(answer){
 
 function gradeStepFromWorking(spec,lines,fullAnswer){
   const candidates=[...lines];
+  if(spec.type!=="text")for(const line of lines){
+    const parts=line.split("=").map(x=>x.trim());
+    // Only extract from an equation with the expected mathematical designation.
+    const expectedPrefix=String(spec.expected).split("=")[0];
+    if(parts.length>1&&[expectedPrefix,...(spec.prefixes||[])].some(prefix=>normalizedExpression(parts[0])===normalizedExpression(prefix)))candidates.push(...parts.slice(1));
+  }
   if(spec.type==="text"&&hasText(fullAnswer))candidates.push(fullAnswer);
   for(const candidate of candidates){
     const result=gradeStep(spec,candidate);
     if(result.correct)return result;
   }
-  return gradeStep(spec,"");
+  const result=gradeStep(spec,"");
+  return fullAnswer.trim()?{...result,status:"needs_review",reason:"not_verified",answer:""}:result;
 }
 
 export function expectedResponseLabel(question){
@@ -206,11 +224,15 @@ export function gradeResponse(question,answer){
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";
     const stepResults=question.response.steps.map(spec=>{
-      if(hasText(answer?.steps?.[spec.id]))return gradeStep(spec,answer.steps[spec.id]);
+      if(hasText(answer?.steps?.[spec.id])){
+        const result=gradeStep(spec,answer.steps[spec.id]);
+        return !result.correct&&spec.type==="text"?{...result,status:"needs_review",reason:"not_verified"}:result;
+      }
       return gradeStepFromWorking(spec,lines,fullAnswer);
     });
     const points=stepResults.reduce((sum,row)=>sum+row.points,0),correct=points===maxPoints;
-    return {status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,reason:correct?null:points>0?"partial_credit":"incorrect"};
+    const pendingPoints=stepResults.filter(row=>row.status==="needs_review").reduce((sum,row)=>sum+row.maxPoints,0);
+    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,reason:pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect"};
   }
   let correct=false,reason="incorrect";
   if(type==="choice")correct=answer===question.a;
@@ -231,5 +253,11 @@ export function miniExamPointSummary(questions=[],answers=[]){
   const results=questions.map((question,index)=>({questionId:question.id,answer:answers[index],...gradeResponse(question,answers[index])}));
   const earnedPoints=results.reduce((sum,row)=>sum+row.points,0),maxPoints=results.reduce((sum,row)=>sum+row.maxPoints,0);
   const score20=maxPoints?Math.round((earnedPoints/maxPoints)*200)/10:0;
-  return {results,earnedPoints,maxPoints,score20,correctCount:results.filter(row=>row.correct).length};
+  const pendingPoints=results.reduce((sum,row)=>sum+(row.pendingPoints||0),0);
+  return {results,earnedPoints,maxPoints,score20,pendingPoints,reviewRequired:pendingPoints>0,score20Upper:maxPoints?Math.round((earnedPoints+pendingPoints)/maxPoints*200)/10:0,correctCount:results.filter(row=>row.correct).length};
+}
+
+export function examScoreLabel(result){
+  const lower=String(result.score20).replace(".",",");
+  return result.reviewRequired?`${lower}–${String(result.score20Upper).replace(".",",")}/20 · provisório`:`${lower}/20`;
 }

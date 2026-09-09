@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import {canonicalPolynomial,equivalentPolynomial} from "../app/lib/polynomial.js";
+import {insertMathText} from "../app/lib/mathInput.js";
 import {
   CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,isConstructedResponse,
   isResponseAnswered,miniExamPointSummary
@@ -48,6 +50,23 @@ assert.equal(isResponseAnswered(stepwise,{steps:{}}),false);
 const derivative=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-11CD-STEPS-1");
 const writtenDerivative="f'(x)=3x^2-2\n3*2^2-2\n10";
 const writtenGrade=gradeResponse(derivative,writtenDerivative);
+assert.equal(equivalentPolynomial("3*x*x-2","-2+3x²"),true);
+assert.equal(equivalentPolynomial("(x-3)(x+3)","x²-9"),true);
+assert.equal(equivalentPolynomial("x²/2","0,5*x*x"),true);
+assert.equal(equivalentPolynomial("-x^2","(-x)^2"),false);
+for(const invalid of ["x/x","1/0","x^999","process.exit()","sqrt(x)","2**3","x^2^3"]){assert.equal(canonicalPolynomial(invalid),null);}
+assert.deepEqual(insertMathText("f(x)=x",5,6,"x²"),{value:"f(x)=x²",cursor:7});
+assert.deepEqual(insertMathText("abc",1,1,"π"),{value:"aπbc",cursor:2});
+const equivalentAnswer=gradeResponse(derivative,"f'(x)=-2+3*x*x\n3*2^2-2\nf'(2)=10");
+assert.equal(equivalentAnswer.correct,true);
+assert.equal(gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=3*2²-2=10").correct,true);
+const wrongQuantity=gradeResponse(derivative,"f(2)=10");
+assert.equal(wrongQuantity.points,0,"f(2) não é f'(2)");
+assert.equal(wrongQuantity.reviewRequired,true);
+const ambiguous=gradeResponse(stepwise,"3x-12=0\nx=4\nO zero não é 4.");
+assert.equal(ambiguous.points,25,"Uma negação não ganha pontos por conter palavras-chave");
+assert.equal(ambiguous.pendingPoints,10);
+assert.equal(ambiguous.status,"needs_review");
 assert.equal(isResponseAnswered(derivative,writtenDerivative),true);
 assert.equal(writtenGrade.correct,true,"Uma resolução numa caixa ampla deve ser corrigida por etapas.");
 assert.equal(writtenGrade.points,35);
@@ -82,6 +101,10 @@ const partialIndex=exam.findIndex(isConstructedResponse);
 const partialQuestion=exam[partialIndex];
 mixed[partialIndex]={steps:{[partialQuestion.response.steps[0].id]:answerFor(partialQuestion).steps[partialQuestion.response.steps[0].id]}};
 const result=applyMiniExam(state,exam,mixed,900).lastExam;
+const uncertainState=applyMiniExam(state,[derivative],["f(2)=10"],60);
+assert.deepEqual(uncertainState.scores,state.scores,"Uma correção incerta não altera o domínio");
+assert.equal(uncertainState.lastExam.reviewRequired,true);
+assert.equal(uncertainState.lastExam.score20Upper,20);
 assert.equal(result.maxPoints,100);
 assert.equal(result.earnedPoints,65+partialQuestion.response.steps[0].points);
 assert.equal(result.itemResults[partialIndex].status,"partial");

@@ -969,6 +969,8 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
   const pointSummary=miniExamPointSummary(questions,answers);
   questions.forEach((q,i)=>{
     const grade=gradeResponse(q,answers[i]);
+    // A partial or unverified resolution is not evidence of a wholly wrong answer.
+    if(grade.reviewRequired||grade.status==="partial")return;
     const answered=grade.status!=="unanswered";
     const correct=grade.correct;
     // Em prova, uma não-resposta conta para o resultado, mas recebe peso
@@ -1000,6 +1002,9 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
     earnedPoints,
     maxPoints,
     score20,
+    pendingPoints:pointSummary.pendingPoints,
+    reviewRequired:pointSummary.reviewRequired,
+    score20Upper:pointSummary.score20Upper,
     changes
   };
 
