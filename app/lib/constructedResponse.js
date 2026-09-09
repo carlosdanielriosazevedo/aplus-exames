@@ -82,11 +82,30 @@ export const CONSTRUCTED_RESPONSE_BANK=[
   }
 ];
 
+export const COMPLETION_RESPONSE_BANK=[{
+  id:"SEL-COMP-10FUN-1",themeId:"10-fun",subtopicId:"10-fun-dominio-imagem-zeros",
+  microcompetencyId:"mc-10-fun-dominio-e-zeros",focus:"Domínio e zeros",difficulty:2,cognitive:"Interpretação",
+  q:"Considera f(x)=2x−6, definida em ℝ. Completa cada afirmação escolhendo uma opção por espaço.",
+  response:{type:"completion",blanks:[
+    {id:"a",label:"(a) O zero da função é",options:["−3","3","6"],correct:1},
+    {id:"b",label:"(b) A função é",options:["crescente","decrescente","constante"],correct:0},
+    {id:"c",label:"(c) O valor de f(0) é",options:["0","6","−6"],correct:2},
+    {id:"d",label:"(d) A condição f(x)>0 verifica-se quando",options:["x<3","x>3","x>0"],correct:1}
+  ]},points:5,contexts:["exam"],reviewStatus:"prototype",origin:"completion_v1",
+  signature:"10-fun:Domínio e zeros:completion-v1-1",
+  sol:"2x−6=0 dá x=3. O declive 2 é positivo, por isso f é crescente. f(0)=−6. Finalmente, 2x−6>0 equivale a x>3.",
+  hyp:"Revê a relação entre a expressão de uma função afim, o zero, o declive e o sinal."
+}];
+
 export function responseType(question){return question?.response?.type||"choice"}
-export function isConstructedResponse(question){return responseType(question)!=="choice"}
+export function isConstructedResponse(question){return !["choice","completion"].includes(responseType(question))}
+export function completionFilledCount(question,answer){
+  return (question.response?.blanks||[]).filter(blank=>Number.isInteger(answer?.[blank.id])&&answer[blank.id]>=0&&answer[blank.id]<blank.options.length).length;
+}
 const hasText=value=>typeof value==="string"&&value.trim().length>0;
 
 export function isResponseAnswered(question,answer){
+  if(responseType(question)==="completion")return completionFilledCount(question,answer)>0;
   if(responseType(question)==="choice")return Number.isInteger(answer);
   if(responseType(question)==="stepwise")return hasText(answer)||hasText(answer?.working)||Object.values(answer?.steps||{}).some(hasText);
   return hasText(answer);
@@ -153,6 +172,7 @@ function gradeStepFromWorking(spec,lines,fullAnswer){
 
 export function expectedResponseLabel(question){
   const response=question?.response;
+  if(response?.type==="completion")return response.blanks.map(b=>`${b.label} ${b.options[b.correct]}`).join(" · ");
   if(!response)return question?.o?.[question?.a]??"—";
   if(response.type==="numeric")return String(response.value).replace(".",",");
   if(response.type==="fraction")return `${response.numerator}/${response.denominator}`;
@@ -162,6 +182,7 @@ export function expectedResponseLabel(question){
 
 export function studentResponseLabel(question,answer){
   if(!isResponseAnswered(question,answer))return "Sem resposta";
+  if(responseType(question)==="completion")return question.response.blanks.map(b=>`${b.label} ${b.options[answer?.[b.id]]??"Sem resposta"}`).join(" · ");
   if(responseType(question)==="choice")return `${String.fromCharCode(65+answer)} — ${question.o[answer]}`;
   if(responseType(question)==="stepwise"){
     if(typeof answer==="string")return answer.trim();
@@ -174,6 +195,13 @@ export function studentResponseLabel(question,answer){
 export function gradeResponse(question,answer){
   const type=responseType(question),maxPoints=Number(question?.points)||(type==="choice"?5:35);
   if(!isResponseAnswered(question,answer))return {status:"unanswered",correct:false,points:0,maxPoints,stepResults:[]};
+  if(type==="completion"){
+    const blanks=question.response.blanks;
+    const blankResults=blanks.map(b=>({id:b.id,label:b.label,correct:answer?.[b.id]===b.correct,answer:b.options[answer?.[b.id]]??"Sem resposta",expected:b.options[b.correct]}));
+    const correctCount=blankResults.filter(b=>b.correct).length;
+    const points=maxPoints*correctCount/blanks.length,correct=correctCount===blanks.length;
+    return {status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults:[],blankResults};
+  }
   if(type==="stepwise"){
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";

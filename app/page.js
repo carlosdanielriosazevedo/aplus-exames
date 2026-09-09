@@ -98,7 +98,7 @@ import {
   SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS,migrateCompetition
 } from "./lib/competition";
 import {
-  responseType,isConstructedResponse,isResponseAnswered,
+  responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
   expectedResponseLabel,studentResponseLabel,miniExamPointSummary
 } from "./lib/constructedResponse";
 
@@ -1855,6 +1855,21 @@ function MiniExamIntro({session,go}){
 
 function ConstructedResponseField({question,value,onChange}){
   const spec=question.response;
+  if(spec.type==="completion")return <div className="completionResponse">
+    <p className="muted">Cada espaço tem o mesmo peso. Podes mudar ou limpar as escolhas até entregares.</p>
+    {spec.blanks.map(blank=><label key={blank.id} htmlFor={`${question.id}-${blank.id}`}>
+      <span>{blank.label}</span>
+      <select id={`${question.id}-${blank.id}`} value={Number.isInteger(value?.[blank.id])?value[blank.id]:""} onChange={event=>{
+        const next={...(value&&typeof value==="object"?value:{})};
+        if(event.target.value==="")delete next[blank.id];else next[blank.id]=Number(event.target.value);
+        onChange(next);
+      }}>
+        <option value="">Escolhe uma opção</option>
+        {blank.options.map((option,index)=><option key={index} value={index}>{option}</option>)}
+      </select>
+    </label>)}
+    <small>{completionFilledCount(question,value)}/{spec.blanks.length} espaços preenchidos · {question.points} pontos</small>
+  </div>;
   if(spec.type==="stepwise"){
     const legacySteps=value&&typeof value==="object"?spec.steps.map(row=>value.steps?.[row.id]).filter(Boolean).join("\n"):"";
     const answer=typeof value==="string"?value:typeof value?.working==="string"?value.working:legacySteps;
@@ -1958,7 +1973,8 @@ function MiniExamReview({session,setSession,s,setS,go}){
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
     <p className="muted">Ainda podes voltar a qualquer questão. A correção só acontece quando entregares.</p>
-    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Resolução escrita":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{responseType(q)==="completion"?`${completionFilledCount(q,session.answers[i])}/${q.response.blanks.length} espaços preenchidos`:answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Resolução escrita":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    {session.questions.some((q,i)=>responseType(q)==="completion"&&completionFilledCount(q,session.answers[i])<q.response.blanks.length)&&<p className="notice warning">Há espaços por preencher nas perguntas de completamento. Podes voltar à pergunta ou entregar com esses espaços em branco.</p>}
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
   </Shell>
@@ -2013,6 +2029,7 @@ function MiniExamCompletedReview({s,setS,go}){
       <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{statusLabel(grade?.status)} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</strong></summary>
       <div className="reviewItemBody"><h2>{q.q}</h2>
         <div className="reviewAnswer"><small>A tua resposta</small><p>{studentResponseLabel(q,answer)}</p></div>
+        {responseType(q)==="completion"&&<div className="stepResults">{q.response.blanks.map(blank=><div key={blank.id} className={answer?.[blank.id]===blank.correct?"correct":"incorrect"}><div><b>{blank.label}</b><small>A tua escolha: {blank.options[answer?.[blank.id]]??"Sem resposta"}</small><small>Resposta correta: {blank.options[blank.correct]}</small></div></div>)}</div>}
         {grade?.stepResults?.length
           ?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.correct?"correct":"incorrect"}><span>{row.correct?"✓":"×"}</span><div><b>{row.label} · {row.points}/{row.maxPoints} pontos</b><small>Identificado na tua resolução: {row.answer||"Não identificado"}</small>{!row.correct&&<small>Esperado: {row.expected}</small>}</div></div>)}</div>
           :<div className="reviewAnswer correctAnswer"><small>Resposta correta</small><p>{expectedResponseLabel(q)}</p></div>}

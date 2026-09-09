@@ -9,7 +9,7 @@ import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curri
 import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../data/vnextMission.js";
-import {CONSTRUCTED_RESPONSE_BANK,gradeResponse,miniExamPointSummary} from "./constructedResponse.js";
+import {CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,miniExamPointSummary} from "./constructedResponse.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -22,7 +22,7 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
 
 // O runtime recebe o piloto de treino e um extrato diagnóstico compacto. As
 // restantes perguntas vNext continuam no repositório editorial e fora do bundle.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK];
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -943,6 +943,9 @@ export function buildMiniExam(s,count=8){
     })
     .slice(0,constructedTarget);
   const choices=selected.slice(0,choiceTarget).map(q=>({...q,response:{type:"choice"},points:5}));
+  const completion=COMPLETION_RESPONSE_BANK.find(q=>isQuestionInAcademicScope(q,s?.profile,"exam")&&isEligibleForContext(q,"exam",s?.editorialOverrides||{},s?.betaMode||"internal"));
+  const replaceIndex=completion?choices.findIndex(q=>q.themeId===completion.themeId):-1;
+  if(count>=4&&replaceIndex>=0)choices[replaceIndex]=completion;
   if(constructed.length<constructedTarget)return choices;
   const mixed=[...choices];
   constructed.forEach((q,index)=>mixed.splice(index===0?Math.min(2,mixed.length):mixed.length,0,q));

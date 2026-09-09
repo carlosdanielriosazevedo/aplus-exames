@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {
-  CONSTRUCTED_RESPONSE_BANK,gradeResponse,isConstructedResponse,
+  CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,isConstructedResponse,
   isResponseAnswered,miniExamPointSummary
 } from "../app/lib/constructedResponse.js";
 import {applyMiniExam,buildMiniExam,emptyScores,trainingQuestions} from "../app/lib/engine.js";
@@ -24,6 +24,7 @@ assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type=
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="expression")),"O piloto deve avaliar expressões intermédias.");
 
 function answerFor(question){
+  if(question.response.type==="completion")return Object.fromEntries(question.response.blanks.map(b=>[b.id,b.correct]));
   return {steps:Object.fromEntries(question.response.steps.map(row=>[
     row.id,
     row.type==="numeric"?String(row.value)
@@ -57,6 +58,15 @@ const state={
   profile:{schoolYear:"12.º",optionalTopics:[],taughtSubtopicIds:["12-fcont-limites-continuidade","12-int-integral-definido"]}
 };
 const exam=buildMiniExam(state,8);
+const completion=COMPLETION_RESPONSE_BANK[0];
+assert.ok(exam.some(q=>q.id===completion.id),"O Mini-exame deve incluir o completamento quando a matéria é elegível.");
+assert.equal(isConstructedResponse(completion),false);
+assert.equal(gradeResponse(completion,{}).status,"unanswered");
+assert.equal(gradeResponse(completion,{a:99}).status,"unanswered");
+assert.equal(gradeResponse(completion,{a:1}).points,1.25);
+assert.equal(gradeResponse(completion,{a:1,b:0,c:2}).status,"partial");
+assert.equal(gradeResponse(completion,answerFor(completion)).points,5);
+assert.deepEqual(gradeResponse(completion,JSON.parse(JSON.stringify(answerFor(completion)))),gradeResponse(completion,answerFor(completion)));
 assert.equal(exam.length,8);
 assert.equal(exam.filter(isConstructedResponse).length,2);
 assert.equal(exam.filter(q=>!isConstructedResponse(q)).length,6);
