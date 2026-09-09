@@ -1174,7 +1174,8 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       <button className="primary" onClick={()=>go("train")}>Treino Livre</button><button className="secondary" onClick={()=>go("exams")}>Mini-exame</button></Shell>;
   }
 
-  function answer(n){if(!fb){setSel(n);setFb({correct:n===current.a})}}
+  function answer(n){if(!fb)setSel(n)}
+  function submitAnswer(){if(!fb&&Number.isInteger(sel))setFb({correct:sel===current.a})}
 
   function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
     if(completingRef.current)return;
@@ -1382,7 +1383,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
     {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={current} s={s} setS={setS}/>}
-    <button disabled={!fb} className="primary" onClick={next}>Continuar</button>
+    {!fb?<button disabled={!Number.isInteger(sel)} className="primary" onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
   </Shell>
 }
 
@@ -1653,7 +1654,8 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
 
   if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
 
-  function answer(n){if(!fb){setSel(n);setFb({correct:n===q.a})}}
+  function answer(n){if(!fb)setSel(n)}
+  function submitAnswer(){if(!fb&&Number.isInteger(sel))setFb({correct:sel===q.a})}
   function next(){
     const was=sel===q.a;
     const newCorrect=correct+(was?1:0);
@@ -1735,7 +1737,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     <QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>
     {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={q} s={s} setS={setS}/>}
-    <button className="primary" disabled={!fb} onClick={next}>Continuar</button>
+    {!fb?<button className="primary" disabled={!Number.isInteger(sel)} onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
     <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
@@ -1918,10 +1920,9 @@ function MiniExamRun({session,setSession,go}){
       :<ConstructedResponseField question={q} value={answer} onChange={setAnswer}/>}
     <div className="examNav">
       <button className="secondary small" disabled={i===0} onClick={()=>move(i-1)}>← Anterior</button>
-      {i<session.questions.length-1
-        ? <button className="primary small" onClick={()=>move(i+1)}>Seguinte →</button>
-        : <button className="primary small" onClick={()=>go("miniExamReview")}>Rever prova →</button>}
+      <button className="primary small" disabled={!isResponseAnswered(q,answer)} onClick={()=>i<session.questions.length-1?move(i+1):go("miniExamReview")}>Responder</button>
     </div>
+    {i<session.questions.length-1&&<button className="pauseLink" onClick={()=>move(i+1)}>Saltar por agora</button>}
     <button className="reviewLink" onClick={()=>go("miniExamReview")}>Ver mapa de respostas</button>
     <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
