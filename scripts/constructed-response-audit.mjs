@@ -3,7 +3,7 @@ import {canonicalPolynomial,equivalentPolynomial} from "../app/lib/polynomial.js
 import {insertMathText} from "../app/lib/mathInput.js";
 import {
   CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,isConstructedResponse,
-  isResponseAnswered,miniExamPointSummary
+  isResponseAnswered,miniExamPointSummary,examScoreLabel,stepFeedback
 } from "../app/lib/constructedResponse.js";
 import {applyMiniExam,buildMiniExam,emptyScores,trainingQuestions} from "../app/lib/engine.js";
 
@@ -117,3 +117,21 @@ assert.ok(training.every(q=>q.themeId==="10-ele"));
 assert.ok(training.every(q=>!q.generated),"A beta de amigos deve usar apenas perguntas curadas.");
 
 console.log("✓ constructed response v2: 8-question training, one-pass multi-step work, deterministic checkpoints and partial credit validated");
+
+const slopeQuestion=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10GA-STEPS-1");
+const randomGrade=gradeResponse(slopeQuestion,"−†×−³");
+assert.equal(randomGrade.points,0);
+assert.ok(randomGrade.stepResults.every(row=>row.reason==="no_recognizable_work"));
+assert.ok(stepFeedback(randomGrade.stepResults[0]).includes("Não identificámos"));
+const arithmetic=gradeResponse(slopeQuestion,"Δy=4−2=2\nΔx=5−1=4\nm=2/4=0,5");
+assert.equal(arithmetic.points,28);
+const wrongFinal=gradeResponse(derivative,"f'(x)=3x^2-2\nf'(2)=3*2^2-2=11");
+assert.equal(wrongFinal.points,23);
+assert.equal(wrongFinal.stepResults[2].reason,"calculation_error");
+const conflicting=gradeResponse(derivative,"f'(2)=10\nf'(2)=11");
+assert.equal(conflicting.stepResults[2].reason,"conflicting_results");
+assert.equal(conflicting.stepResults[2].points,0);
+assert.equal(examScoreLabel({score20:3.3,score20Upper:17.3,reviewRequired:true}),"Avaliação incompleta");
+assert.equal(examScoreLabel({score20:15.5}),"15,5/20");
+assert.equal(gradeResponse(slopeQuestion,"").status,"unanswered");
+console.log("✓ recognition feedback, explicit arithmetic errors, conflicting results and incomplete score labels");

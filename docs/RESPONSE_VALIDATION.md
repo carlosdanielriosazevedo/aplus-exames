@@ -13,8 +13,9 @@
 ## Uncertainty and academic state
 
 An unmatched step in free writing is marked `needs_review`, not automatically wrong.
-Its points are excluded from confirmed points and included in the displayed upper bound.
-This is an interval of possible rubric points, not a statistical confidence interval.
+Its points are excluded from confirmed points. The UI shows “Avaliação incompleta”
+and confirmed points, never a speculative score range. Legacy upper bounds remain
+in stored data for compatibility but are not displayed.
 There is no automatic human-review service. The UI must not imply one exists.
 Partial or unverified items do not update the binary mastery evidence model.
 Old completed exams retain their stored results; this change does not retroactively
@@ -33,4 +34,19 @@ expression that can be entered (including roots, pi and infinity).
 
 `npm run constructed-response:audit` covers equivalent polynomials, rejected unsafe
 and unsupported inputs, cursor insertion, incorrect quantity labels, negated prose,
-provisional point bounds and isolation from mastery updates, plus existing sessions.
+incomplete score labels and isolation from mastery updates, plus existing sessions.
+
+## Recognition and arithmetic feedback
+
+- Unrecognizable input receives neutral “no recognizable work” feedback, not a
+  mathematical declaration of invalidity. It awards no confirmed points.
+- Labelled numeric/fraction steps accept bounded constant arithmetic and equality
+  chains, including delta labels and equivalent decimal values.
+- A labelled chain with an incorrect value fails that numeric checkpoint while
+  independently recognized prior checkpoints can retain credit.
+- Conflicting evaluable lines for the same numeric quantity require verification;
+  the checker does not cherry-pick the correct line or assume the last is a correction.
+- This is not whole-proof contradiction detection. Unmatched prose and alternative
+  methods remain unsupported; the recognition heuristic never awards points.
+- Stored completed exams keep their original grades; updated labels apply to them,
+  while new grading reasons apply to newly delivered exams.

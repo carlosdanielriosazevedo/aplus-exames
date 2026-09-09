@@ -100,7 +100,7 @@ import {
 } from "./lib/competition";
 import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
-  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel
+  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback
 } from "./lib/constructedResponse";
 
 const initial={
@@ -1830,7 +1830,7 @@ function Exams({s,go,startMini}){
       <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~15–20 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
-    {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${last.earnedPoints}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
+    {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
     <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div>
@@ -2009,9 +2009,9 @@ function MiniExamResult({s,setS,go}){
   const maxPoints=r.maxPoints??fallbackSummary.maxPoints;
   const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
   return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o Mini-exame concluído"/><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
-    <h1>{String(r.score20).replace('.',',')}{r.reviewRequired&&<>–{String(r.score20Upper).replace('.',',')}</>}<small className="scoreOut">/20</small></h1>
-    {r.reviewRequired&&<p className="notice warning">Avaliação incompleta: {r.pendingPoints} pontos não puderam ser verificados automaticamente. O intervalo mostra os pontos confirmados e o máximo possível. Consulta a revisão; estas respostas não alteraram o teu domínio.</p>}
-    <p className="muted"><b>{earnedPoints}/{maxPoints} pontos</b> · {r.correctCount}/{r.total} itens totalmente corretos · {mins}:{String(secs).padStart(2,'0')}</p>
+    <h1>{examScoreLabel(r)}</h1>
+    {r.reviewRequired&&<p className="notice warning">Avaliação incompleta: {r.pendingPoints} pontos não puderam ser verificados automaticamente. A nota final não está disponível. Consulta os pontos confirmados e a resolução de cada pergunta; as respostas não verificadas não alteraram o teu domínio.</p>}
+    <p className="muted"><b>{String(earnedPoints).replace(".",",")}/{maxPoints} pontos{r.reviewRequired?" confirmados":""}</b> · {r.correctCount}/{r.total} itens totalmente corretos · {mins}:{String(secs).padStart(2,'0')}</p>
     <small className="resultDisclaimer">Resultado deste Mini-exame <BrandName/> — não é uma previsão da nota do Exame Nacional.</small></div>
     <FriendsBetaDisclaimer s={s}/>
     <DailyCompletionNote s={s}/>
@@ -2040,19 +2040,19 @@ function MiniExamCompletedReview({s,setS,go}){
   const fallbackSummary=miniExamPointSummary(questions,r.answers);
   const itemResults=r.itemResults||fallbackSummary.results;
   const rows=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]||fallbackSummary.results[i]}));
-  const statusLabel=status=>status==="needs_review"?"Por verificar":status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
+  const statusLabel=status=>status==="needs_review"?"Avaliação incompleta":status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
   return <Shell><Back go={go} to="miniExamResult"/><Logo/><p className="eyebrow">REVISÃO DO MINI-EXAME</p>
     <h1>Revê as tuas respostas.</h1>
     <p className="muted">O Mini-exame já terminou e as respostas estão bloqueadas. Aqui podes perceber o que acertaste, o que falhou e como resolver cada pergunta.</p>
-    {r.reviewRequired&&<p className="notice warning">Há partes que a app não conseguiu avaliar com segurança. “Por verificar” não significa que estejam erradas. Não existe uma revisão humana automática pendente; compara a tua resolução com a explicação apresentada.</p>}
-    <div className="completedExamSummary"><b>{examScoreLabel(r)}</b><span>{r.earnedPoints??fallbackSummary.earnedPoints}/{r.maxPoints??fallbackSummary.maxPoints} pontos{r.reviewRequired?" confirmados":""}</span></div>
+    {r.reviewRequired&&<p className="notice warning">A app não conseguiu avaliar toda a resolução. Os pontos apresentados são apenas os confirmados, sem estimativa de nota final. Compara as etapas com a resolução abaixo; não há uma revisão humana pendente.</p>}
+    <div className="completedExamSummary"><b>{examScoreLabel(r)}</b><span>{String(r.earnedPoints??fallbackSummary.earnedPoints).replace(".",",")}/{r.maxPoints??fallbackSummary.maxPoints} pontos{r.reviewRequired?" confirmados":""}</span></div>
     <div className="completedExamReview">{rows.map(({q,i,answer,grade})=><details key={q.id} open={grade?.status!=="correct"} className={`reviewItem ${grade?.status||"unanswered"}`}>
-      <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{statusLabel(grade?.status)} · {grade?.points||0}/{grade?.maxPoints||q.points} pontos</strong></summary>
+      <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{statusLabel(grade?.status)} · {String(grade?.points||0).replace(".",",")}/{grade?.maxPoints||q.points} pontos</strong></summary>
       <div className="reviewItemBody"><h2>{q.q}</h2>
         <div className="reviewAnswer"><small>A tua resposta</small><p>{studentResponseLabel(q,answer)}</p></div>
         {responseType(q)==="completion"&&<div className="stepResults">{q.response.blanks.map(blank=><div key={blank.id} className={answer?.[blank.id]===blank.correct?"correct":"incorrect"}><div><b>{blank.label}</b><small>A tua escolha: {blank.options[answer?.[blank.id]]??"Sem resposta"}</small><small>Resposta correta: {blank.options[blank.correct]}</small></div></div>)}</div>}
         {grade?.stepResults?.length
-          ?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.status==="needs_review"?`${row.maxPoints} pontos por verificar`:`${row.points}/${row.maxPoints} pontos`}</b><small>{row.status==="needs_review"?"Não foi possível confirmar esta etapa automaticamente. Isto não significa que esteja errada.":`Identificado na tua resolução: ${row.answer||"Não identificado"}`}</small>{!row.correct&&<small>Exemplo de resposta: {row.expected}</small>}</div></div>)}</div>
+          ?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.status==="needs_review"?`${row.maxPoints} pontos não avaliados`:`${row.points}/${row.maxPoints} pontos`}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo de resposta: {row.expected}</small>}</div></div>)}</div>
           :<div className="reviewAnswer correctAnswer"><small>Resposta correta</small><p>{expectedResponseLabel(q)}</p></div>}
         <div className="reviewResolution"><small>Resolução</small><p>{q.sol||"Ainda não existe uma resolução explicada para esta pergunta."}</p></div>
         <ReportButton item={q} s={s} setS={setS} compact/>
@@ -2550,7 +2550,7 @@ function Parent({s,setS,go}){
       <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · Matemática A</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
       <small className="parentFoot">* índice ainda parcial enquanto o perfil está a ser construído</small>
       <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{academicScopeThemes(s.profile).length}</b><span>áreas com evidência</span></div></div>
-      {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{examScoreLabel(s.lastExam)}</b><small>{s.lastExam.earnedPoints!==undefined?`${s.lastExam.earnedPoints}/${s.lastExam.maxPoints} pontos${s.lastExam.reviewRequired?" confirmados":""}`:`${s.lastExam.correctCount}/${s.lastExam.total} corretas`}</small></div>}
+      {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{examScoreLabel(s.lastExam)}</b><small>{s.lastExam.earnedPoints!==undefined?`${String(s.lastExam.earnedPoints).replace(".",",")}/${s.lastExam.maxPoints} pontos${s.lastExam.reviewRequired?" confirmados":""}`:`${s.lastExam.correctCount}/${s.lastExam.total} corretas`}</small></div>}
       <div className="notice"><b>O que os pais veem?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados de avaliações — não cada resposta individual.</span></div>
 
       {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}

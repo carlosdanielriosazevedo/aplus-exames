@@ -1,4 +1,4 @@
-import {equivalentPolynomial} from "./polynomial.js";
+import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
 const step=(id,label,type,points,expected)=>({id,label,type,points,...expected});
 
 export const CONSTRUCTED_RESPONSE_BANK=[
@@ -171,21 +171,53 @@ function stepwiseLines(answer){
   return [];
 }
 
+function constantValue(source){
+  const canonical=canonicalPolynomial(normalizedExpression(source));
+  if(!canonical||canonical.includes(","))return null;
+  const [n,d]=canonical.split("/").map(Number);
+  const value=n/d;return Number.isFinite(value)?value:null;
+}
+
 function gradeStepFromWorking(spec,lines,fullAnswer){
-  const candidates=[...lines];
-  if(spec.type!=="text")for(const line of lines){
+  const candidates=[...lines],explicit=[];
+  const expectedPrefix=String(spec.expected).includes("=")?String(spec.expected).split("=")[0]:null;
+  for(const line of lines){
     const parts=line.split("=").map(x=>x.trim());
-    // Only extract from an equation with the expected mathematical designation.
-    const expectedPrefix=String(spec.expected).split("=")[0];
-    if(parts.length>1&&[expectedPrefix,...(spec.prefixes||[])].some(prefix=>normalizedExpression(parts[0])===normalizedExpression(prefix)))candidates.push(...parts.slice(1));
+    const matches=parts.length>1&&[expectedPrefix,...(spec.prefixes||[])].filter(Boolean).some(prefix=>normalizedExpression(parts[0])===normalizedExpression(prefix));
+    if(matches){
+      candidates.push(...parts.slice(1));
+      if(["numeric","fraction"].includes(spec.type)){
+        const values=parts.slice(1).map(constantValue);
+        if(values.every(value=>value!==null)){
+          const target=spec.type==="numeric"?spec.value:spec.numerator/spec.denominator;
+          const tolerance=Math.max(0,Number(spec.tolerance)||0)+Number.EPSILON;
+          explicit.push({line,correct:values.every(value=>Math.abs(value-target)<=tolerance)});
+        }
+      }
+    }
+  }
+  const base=gradeStep(spec,"");
+  if(explicit.length){
+    const right=explicit.some(row=>row.correct),wrong=explicit.some(row=>!row.correct);
+    if(wrong)return {...base,status:right?"needs_review":"incorrect",reason:right?"conflicting_results":"calculation_error",answer:explicit.map(row=>row.line).join("\n")};
+    return {...base,status:"correct",correct:true,points:spec.points,reason:null,answer:explicit[0].line};
   }
   if(spec.type==="text"&&hasText(fullAnswer))candidates.push(fullAnswer);
   for(const candidate of candidates){
     const result=gradeStep(spec,candidate);
     if(result.correct)return result;
   }
-  const result=gradeStep(spec,"");
-  return fullAnswer.trim()?{...result,status:"needs_review",reason:"not_verified",answer:""}:result;
+  // This describes recognition, not a claim that unfamiliar mathematics is invalid.
+  const recognizable=lines.some(line=>canonicalPolynomial(normalizedExpression(line))!==null||/[=→∫√]/.test(line)||/[a-zÀ-ÿ]{3,}/i.test(line));
+  return fullAnswer.trim()?{...base,status:"needs_review",reason:recognizable?"not_verified":"no_recognizable_work",answer:""}:base;
+}
+
+export function stepFeedback(row){
+  if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Compara-o com a resolução abaixo.";
+  if(row.reason==="conflicting_results")return "Encontrámos resultados incompatíveis para a mesma grandeza. Não atribuímos estes pontos automaticamente.";
+  if(row.reason==="no_recognizable_work")return "Não identificámos cálculos ou uma explicação que permitam avaliar esta etapa.";
+  if(row.status==="needs_review")return "Não conseguimos confirmar esta etapa. Pode estar incompleta ou escrita de uma forma que o corretor ainda não reconhece.";
+  return `Identificado na tua resolução: ${row.answer||"Não identificado"}`;
 }
 
 export function expectedResponseLabel(question){
@@ -259,5 +291,5 @@ export function miniExamPointSummary(questions=[],answers=[]){
 
 export function examScoreLabel(result){
   const lower=String(result.score20).replace(".",",");
-  return result.reviewRequired?`${lower}–${String(result.score20Upper).replace(".",",")}/20 · provisório`:`${lower}/20`;
+  return result.reviewRequired?"Avaliação incompleta":`${lower}/20`;
 }
