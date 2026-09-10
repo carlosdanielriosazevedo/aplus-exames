@@ -11,6 +11,8 @@
 - Quatro perguntas com opções numericamente equivalentes foram corrigidas.
 - Foi feita uma passagem técnica focada por 372 itens de dificuldade 4 em probabilidades, logaritmos, derivadas e trigonometria.
 - Foi corrigida uma inconsistência real numa questão de independência: a resolução concluía `0,5`, mas a opção assinalada correspondia a `0,45`.
+- Vinte e duas resoluções de derivadas, trigonometria e cálculo integral foram reescritas para explicitar a regra, a simplificação e a resposta final.
+- Foi criado um banco compacto de 339 itens para Mini-exames: três itens independentes por cada uma das 113 submatérias, sem reutilizar os itens reservados ao Diagnóstico ou às Missões.
 
 ## Proteções acrescentadas
 
@@ -24,6 +26,8 @@ O auditor estrutural passa a bloquear:
 Além disso, passa a assinalar como aviso qualquer solução que se limite a repetir a opção certa, sem explicação.
 
 A deteção de equivalência numérica inclui um teste interno de regressão para frações e percentagens. A comparação entre resolução e opção certa cobre atualmente 169 itens cujo resultado final pode ser interpretado com segurança pelo auditor.
+
+O banco de Mini-exames é regenerado a partir das fontes editoriais e bloqueia a validação se ficar desatualizado. Os itens recebem IDs próprios, mantêm a referência à pergunta de origem e continuam indisponíveis em produção enquanto forem protótipos.
 
 ## Limite desta validação
 

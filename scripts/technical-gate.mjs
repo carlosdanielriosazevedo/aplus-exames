@@ -16,6 +16,7 @@ const checks=[
   ["Piloto vNext isolado","npm",["run","vnext-pilot:audit"]],
   ["Diagnóstico vNext completo","npm",["run","vnext-diagnostic:audit"]],
   ["Missões vNext 3–5 minutos","npm",["run","vnext-mission:audit"]],
+  ["Mini-exames vNext completos","npm",["run","vnext-exam:audit"]],
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
   ["Experiência do aluno","npm",["run","student-experience:audit"]],
   ["Identidade APProva+ e Apronso","npm",["run","apronso-brand:audit"]],

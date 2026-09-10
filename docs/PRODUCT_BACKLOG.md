@@ -6,7 +6,7 @@ This file records product commitments explicitly approved by the product owner b
 
 ### Português 639
 
-**Status:** fundação técnica e primeiro banco-piloto em curso
+**Status:** fundação técnica criada; expansão congelada até Matemática A atingir o Beta Candidate
 **Objetivo:** tornar Português a segunda disciplina da APProva+ sem reutilizar indevidamente a lógica de correção matemática.
 
 Condições de progressão:

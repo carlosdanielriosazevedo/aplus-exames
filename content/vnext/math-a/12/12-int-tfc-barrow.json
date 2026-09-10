@@ -916,7 +916,7 @@
         "2x sin(x²)."
       ],
       "a": 1,
-      "sol": "TFC + cadeia: cos(x²)·2x.",
+      "sol": "Pelo Teorema Fundamental do Cálculo e pela regra da cadeia, A'(x)=cos(x²)·(x²)'=2x cos(x²).",
       "hyp": "Pode esquecer o fator2x.",
       "contexts": [
         "mission",
@@ -943,7 +943,7 @@
         "x."
       ],
       "a": 2,
-      "sol": "f(e^x)e^x=(1/e^x)e^x=1; também A=x.",
+      "sol": "Pelo Teorema Fundamental do Cálculo e pela regra da cadeia, A'(x)=(1/e^x)·e^x=1. Equivalentemente, A(x)=ln(e^x)=x.",
       "hyp": "Pode esquecer derivar o limite.",
       "contexts": [
         "mission",

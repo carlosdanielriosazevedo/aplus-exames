@@ -781,7 +781,7 @@
         "e^x(x²+2)."
       ],
       "a": 0,
-      "sol": "Produto:2xe^x+x²e^x.",
+      "sol": "Pela regra do produto, (x²e^x)'=2xe^x+x²e^x=e^x(x²+2x).",
       "hyp": "Pode esquecer um dos termos.",
       "contexts": [
         "mission",

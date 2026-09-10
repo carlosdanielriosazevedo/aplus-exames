@@ -484,7 +484,7 @@
         "4(2x+1)^4."
       ],
       "a": 1,
-      "sol": "4(2x+1)^3×2.",
+      "sol": "Pela regra da cadeia, deriva-se a potência e multiplica-se pela derivada de 2x+1: 4(2x+1)^3×2=8(2x+1)^3.",
       "hyp": "Pode esquecer derivar a função interna.",
       "contexts": [
         "mission",
@@ -511,7 +511,7 @@
         "3x²(x²+1)^2."
       ],
       "a": 2,
-      "sol": "3(x²+1)^2·2x.",
+      "sol": "Pela regra da cadeia, 3(x²+1)^2 multiplica pela derivada 2x da função interior. Logo, a derivada é 6x(x²+1)^2.",
       "hyp": "Pode esquecer o fator2x.",
       "contexts": [
         "mission",
@@ -646,7 +646,7 @@
         "1/(x+1)−1/(x−1)."
       ],
       "a": 3,
-      "sol": "Usando propriedades: ln(x+1)−ln(x−1).",
+      "sol": "Primeiro, ln((x+1)/(x−1))=ln(x+1)−ln(x−1). Derivando no domínio, obtém-se 1/(x+1)−1/(x−1).",
       "hyp": "Pode trocar o sinal da diferença.",
       "contexts": [
         "mission",
@@ -754,7 +754,7 @@
         "2sin x cos x."
       ],
       "a": 3,
-      "sol": "É (sinx)^2:2sinx·cosx.",
+      "sol": "Escrevendo sin²x=(sin x)² e aplicando a regra da cadeia, a derivada é 2sin x·cos x.",
       "hyp": "Pode esquecer a cadeia.",
       "contexts": [
         "mission",
@@ -889,7 +889,7 @@
         "(1+x²)^{-2}."
       ],
       "a": 0,
-      "sol": "−(1+x²)^{-2}·2x.",
+      "sol": "Pela regra da cadeia, a derivada é −(1+x²)^{-2}·2x=−2x/(1+x²)^2.",
       "hyp": "Pode esquecer a cadeia.",
       "contexts": [
         "mission",
@@ -1294,7 +1294,7 @@
         "1/(3x^{2/3})."
       ],
       "a": 3,
-      "sol": "(1/3)x^{-2/3}.",
+      "sol": "Pela regra da potência, f'(x)=(1/3)x^{-2/3}=1/(3x^{2/3}), para x≠0.",
       "hyp": "Pode esquecer o fator1/3.",
       "contexts": [
         "mission",

@@ -862,7 +862,7 @@
         "1."
       ],
       "a": 3,
-      "sol": "1−cos²x=sin²x.",
+      "sol": "Pela identidade sin²x+cos²x=1, tem-se 1−cos²x=sin²x. Assim, sin²x/sin²x=1, quando a expressão está definida.",
       "hyp": "Pode não reconhecer a identidade.",
       "contexts": [
         "mission",
@@ -889,7 +889,7 @@
         "tan²x."
       ],
       "a": 0,
-      "sol": "1−cos²x=sin²x.",
+      "sol": "Pela identidade sin²x+cos²x=1, o denominador é sin²x. Logo, sin²x/(1−cos²x)=sin²x/sin²x=1, quando definida.",
       "hyp": "Pode esquecer as condições de definição.",
       "contexts": [
         "mission",
@@ -1240,7 +1240,7 @@
         "sin²x."
       ],
       "a": 1,
-      "sol": "1+tan²x=1/cos²x.",
+      "sol": "Como 1+tan²x=1/cos²x, o produto fica (1/cos²x)cos²x=1, para cos x≠0.",
       "hyp": "Pode expandir desnecessariamente.",
       "contexts": [
         "mission",

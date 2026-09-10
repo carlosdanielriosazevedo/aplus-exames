@@ -241,7 +241,7 @@
         "cos x+x sin x."
       ],
       "a": 0,
-      "sol": "Produto: cosx+x(−sinx).",
+      "sol": "Pela regra do produto, (x cos x)'=1·cos x+x(−sin x)=cos x−x sin x.",
       "hyp": "Pode perder o sinal do cosseno.",
       "contexts": [
         "mission",
@@ -268,7 +268,7 @@
         "e^x(2x+1)."
       ],
       "a": 1,
-      "sol": "Produto:2xe^x+(x²+1)e^x.",
+      "sol": "Pela regra do produto, a derivada é 2xe^x+(x²+1)e^x=e^x(x²+2x+1).",
       "hyp": "Pode esquecer um dos termos.",
       "contexts": [
         "mission",
@@ -349,7 +349,7 @@
         "sin x+e^x."
       ],
       "a": 0,
-      "sol": "Produto: e^x sinx+e^x cosx.",
+      "sol": "Pela regra do produto, (e^x sin x)'=e^x sin x+e^x cos x=e^x(sin x+cos x).",
       "hyp": "Pode derivar apenas um fator.",
       "contexts": [
         "mission",
@@ -376,7 +376,7 @@
         "e^x cos x."
       ],
       "a": 1,
-      "sol": "Produto: e^x cosx−e^x sinx.",
+      "sol": "Pela regra do produto, (e^x cos x)'=e^x cos x−e^x sin x=e^x(cos x−sin x).",
       "hyp": "Pode perder o sinal.",
       "contexts": [
         "mission",
@@ -538,7 +538,7 @@
         "10(2x−1)^4."
       ],
       "a": 3,
-      "sol": "Regra da cadeia:5(2x−1)^4·2.",
+      "sol": "Pela regra da cadeia, deriva-se a potência e multiplica-se pela derivada de 2x−1: 5(2x−1)^4·2=10(2x−1)^4.",
       "hyp": "Pode esquecer a derivada interna.",
       "contexts": [
         "mission",
@@ -808,7 +808,7 @@
         "cos x·e^x."
       ],
       "a": 1,
-      "sol": "Cadeia:cos(e^x)·e^x.",
+      "sol": "Pela regra da cadeia, a derivada de sin(e^x) é cos(e^x) vezes a derivada de e^x. Logo, é e^x cos(e^x).",
       "hyp": "Pode esquecer a derivada interna.",
       "contexts": [
         "mission",
@@ -916,7 +916,7 @@
         "sin x/x−ln x cos x."
       ],
       "a": 1,
-      "sol": "Produto: (1/x)sinx+lnx cosx.",
+      "sol": "Pela regra do produto, (ln x·sin x)'=(1/x)sin x+ln x·cos x.",
       "hyp": "Pode derivar apenas um fator.",
       "contexts": [
         "mission",
@@ -997,7 +997,7 @@
         "ln(2x+e^x)."
       ],
       "a": 0,
-      "sol": "g'/g com g'=2x+e^x.",
+      "sol": "Para g(x)=x²+e^x, tem-se g'(x)=2x+e^x. Como (ln g)'=g'/g, a derivada é (2x+e^x)/(x²+e^x).",
       "hyp": "Pode esquecer dividir pela função interna.",
       "contexts": [
         "mission",
@@ -1051,7 +1051,7 @@
         "x²."
       ],
       "a": 2,
-      "sol": "ln(e^{x²})=x².",
+      "sol": "Como ln(e^{x²})=x², no domínio considerado, a derivada é 2x.",
       "hyp": "Pode derivar sem simplificar e errar o cancelamento.",
       "contexts": [
         "mission",

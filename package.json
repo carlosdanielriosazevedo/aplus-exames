@@ -43,6 +43,8 @@
     "vnext-diagnostic:audit": "node scripts/vnext-diagnostic-audit.mjs",
     "vnext-mission:generate": "node scripts/generate-vnext-mission.mjs",
     "vnext-mission:audit": "node scripts/vnext-mission-audit.mjs",
+    "vnext-exam:generate": "node scripts/generate-vnext-exam.mjs",
+    "vnext-exam:audit": "node scripts/vnext-exam-audit.mjs",
     "subjects:audit": "node scripts/subjects-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs"
   },
