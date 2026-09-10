@@ -60,7 +60,8 @@ The mission assignment and resumed current exercise remain frozen as before.
 Free training replaces its last item with a matching constructed exercise (eight
 items total), with optional hints and feedback only after Responder. Basic difficulty
 is not filled with harder constructed questions. Existing drafts retain their items.
-This initial bank covers six focuses; other focuses retain their existing questions.
+The constructed-response bank now covers fourteen distinct focuses. Other focuses
+retain their existing questions until they receive purpose-built rubrics.
 No diagnostic selection changes. No unsupported answer is certified by the UI.
 Training with constructed practice does not produce automatic mastery-confirmation
 signals in this first release, since hints and partial results need a richer model.

@@ -18,12 +18,13 @@ assert.equal(gradeResponse(fraction,"-2/-4").correct,true);
 assert.equal(gradeResponse(fraction,"0,5").reason,"invalid_fraction_format");
 assert.equal(gradeResponse(fraction,"1/0").correct,false);
 
-assert.equal(CONSTRUCTED_RESPONSE_BANK.length,6);
+assert.equal(CONSTRUCTED_RESPONSE_BANK.length,14);
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.type==="stepwise"));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.length>=3));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.reduce((sum,row)=>sum+row.points,0)===q.points));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="text")),"O piloto deve avaliar justificação escrita.");
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="expression")),"O piloto deve avaliar expressões intermédias.");
+assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>q.focus)).size,14,"Cada pergunta construída deve alargar a cobertura a um foco distinto.");
 
 function answerFor(question){
   if(question.response.type==="completion")return Object.fromEntries(question.response.blanks.map(b=>[b.id,b.correct]));
@@ -152,3 +153,14 @@ assert.deepEqual(state.scores,emptyScores(),"Selection of practice never changes
 console.log("✓ mixed training, guided mission selection, focus, difficulty and editorial gates");
 
 assert.equal(gradeResponse(slopeQuestion,{steps:{deltaY:"Δy=2",deltaX:"Δx=4",slope:"m=1/2"}}).points,28);
+
+for(const question of CONSTRUCTED_RESPONSE_BANK){
+  const grade=gradeResponse(question,answerFor(question));
+  assert.equal(grade.correct,true,`${question.id} deve aceitar a resposta de referência completa`);
+  assert.equal(grade.points,35,`${question.id} deve totalizar 35 pontos`);
+}
+const finance=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10FIN-STEPS-1");
+assert.equal(gradeResponse(finance,{steps:{interest:"J=50",capital:"C=1050",conclusion:"Ao fim de um ano, o capital é 1050 €."}}).correct,true);
+const probability=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-12PROB-STEPS-1");
+assert.equal(gradeResponse(probability,{steps:{favourable:"3",possible:"5",probability:"6/10",conclusion:probability.response.steps[3].accepted[1]}}).correct,true);
+console.log("✓ second-wave reference answers and accepted equivalent formulations");
