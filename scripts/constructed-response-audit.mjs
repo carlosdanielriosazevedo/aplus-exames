@@ -5,7 +5,7 @@ import {
   CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,isConstructedResponse,
   isResponseAnswered,miniExamPointSummary,examScoreLabel,stepFeedback
 } from "../app/lib/constructedResponse.js";
-import {applyMiniExam,buildMiniExam,emptyScores,trainingQuestions,constructedPracticeQuestion} from "../app/lib/engine.js";
+import {applyMiniExam,buildMiniExam,emptyScores,trainingQuestions,constructedPracticeQuestion,missionPracticeQuestion} from "../app/lib/engine.js";
 
 const numeric={id:"test-num",points:35,response:{type:"numeric",value:2.5,tolerance:.01}};
 const fraction={id:"test-frac",points:35,response:{type:"fraction",numerator:1,denominator:2}};
@@ -18,13 +18,13 @@ assert.equal(gradeResponse(fraction,"-2/-4").correct,true);
 assert.equal(gradeResponse(fraction,"0,5").reason,"invalid_fraction_format");
 assert.equal(gradeResponse(fraction,"1/0").correct,false);
 
-assert.equal(CONSTRUCTED_RESPONSE_BANK.length,14);
+assert.equal(CONSTRUCTED_RESPONSE_BANK.length,22);
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.type==="stepwise"));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.length>=3));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.reduce((sum,row)=>sum+row.points,0)===q.points));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="text")),"O piloto deve avaliar justificação escrita.");
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="expression")),"O piloto deve avaliar expressões intermédias.");
-assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>q.focus)).size,14,"Cada pergunta construída deve alargar a cobertura a um foco distinto.");
+assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>`${q.themeId}:${q.microcompetencyId}`)).size,22,"Cada pergunta construída deve alargar a cobertura a uma competência distinta.");
 
 function answerFor(question){
   if(question.response.type==="completion")return Object.fromEntries(question.response.blanks.map(b=>[b.id,b.correct]));
@@ -150,6 +150,9 @@ const mixedTraining=trainingQuestions(state,practiceCfg,8);
 assert.equal(mixedTraining.length,8);
 assert.equal(mixedTraining.filter(q=>q.practiceOnly).length,1);
 assert.deepEqual(state.scores,emptyScores(),"Selection of practice never changes mastery");
+assert.equal(missionPracticeQuestion(state,{themeId:"10-fun",focus:"Domínio e zeros"},2,[]),null);
+assert.equal(missionPracticeQuestion(state,{themeId:"10-fun",focus:"Domínio e zeros"},3,[])?.id,guided.id);
+assert.equal(missionPracticeQuestion(state,{themeId:"10-fun",focus:"Domínio e zeros"},4,[guided.id]),null);
 console.log("✓ mixed training, guided mission selection, focus, difficulty and editorial gates");
 
 assert.equal(gradeResponse(slopeQuestion,{steps:{deltaY:"Δy=2",deltaX:"Δx=4",slope:"m=1/2"}}).points,28);
@@ -158,9 +161,18 @@ for(const question of CONSTRUCTED_RESPONSE_BANK){
   const grade=gradeResponse(question,answerFor(question));
   assert.equal(grade.correct,true,`${question.id} deve aceitar a resposta de referência completa`);
   assert.equal(grade.points,35,`${question.id} deve totalizar 35 pontos`);
+  const broadAnswer=question.response.steps.map(row=>row.expected).join("\n");
+  const broadGrade=gradeResponse(question,broadAnswer);
+  assert.equal(broadGrade.correct,true,`${question.id} deve ser corrigível numa única caixa ampla`);
 }
 const finance=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10FIN-STEPS-1");
 assert.equal(gradeResponse(finance,{steps:{interest:"J=50",capital:"C=1050",conclusion:"Ao fim de um ano, o capital é 1050 €."}}).correct,true);
 const probability=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-12PROB-STEPS-1");
 assert.equal(gradeResponse(probability,{steps:{favourable:"3",possible:"5",probability:"6/10",conclusion:probability.response.steps[3].accepted[1]}}).correct,true);
+const statistics=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10EST-STEPS-1");
+const ambiguousBareValue=gradeResponse(statistics,"4");
+assert.equal(ambiguousBareValue.points,8,"Uma única linha sem rótulo não pode pontuar duas etapas com o mesmo valor.");
+assert.equal(ambiguousBareValue.stepResults.filter(row=>row.correct).length,1);
+const labelledRepeatedValue=gradeResponse(statistics,"n=4\nmédia=4");
+assert.equal(labelledRepeatedValue.points,25,"Linhas distintas e identificadas podem demonstrar valores iguais em etapas diferentes.");
 console.log("✓ second-wave reference answers and accepted equivalent formulations");

@@ -10,7 +10,7 @@ import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
   selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
-  shouldEndMission,missionStopDecision,trainingQuestions,constructedPracticeQuestion,startingDifficulty,
+  shouldEndMission,missionStopDecision,trainingQuestions,missionPracticeQuestion,startingDifficulty,
   missionContentExhaustedDecision,canStartMissionDetour,estimateMissionSeconds,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,hasTrainingContent,hasGenerator,
@@ -1345,8 +1345,8 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       closeMission(nextState,finalDetour,newTargetCount,newTotal,stopDecision,newEstimatedSeconds);return;
     }
 
-    const practice=newTotal>=3?constructedPracticeQuestion(nextState,{themeId:targetId,focus:plan.focus},"mission"):null;
-    const nxt=practice&&!newUsed.includes(practice.id)?practice:selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    const practice=missionPracticeQuestion(nextState,plan,newTotal,newUsed);
+    const nxt=practice||selectQuestionForPlan(nextState,plan,newUsed,newSigs);
     if(!nxt){
       closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision(),newEstimatedSeconds);return
     }

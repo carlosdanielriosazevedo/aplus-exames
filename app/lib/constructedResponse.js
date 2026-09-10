@@ -185,6 +185,118 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     points:35,sol:"Como 8=2³, a equação fica 2ˣ=2³. Sendo as bases iguais, os expoentes são iguais, logo x=3.",
     hyp:"Pode existir dificuldade em escrever 8 como potência ou em usar a injetividade da exponencial.",
     contexts:["exam"],signature:"12-expl:Equações:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10FUN-EXT-STEPS-1",themeId:"10-fun",subtopicId:"10-fun-quadratica",
+    microcompetencyId:"mc-10-fun-monotonia-e-extremos",focus:"Monotonia e extremos",difficulty:3,cognitive:"Raciocínio",
+    q:"Considera f(x)=x²−4x+1. Determina o mínimo de f e o valor de x onde é atingido, apresentando os cálculos.",
+    response:{type:"stepwise",steps:[
+      step("form","1. Escrita na forma de vértice","expression",12,{accepted:["(x-2)^2-3","f(x)=(x-2)^2-3","(x−2)²−3"],expected:"f(x)=(x−2)²−3",placeholder:"Ex.: f(x)=(x−2)^2−3"}),
+      step("abscissa","2. Abscissa do vértice","numeric",8,{value:2,tolerance:0,expected:"x=2",placeholder:"Ex.: x=2"}),
+      step("minimum","3. Valor mínimo","numeric",8,{value:-3,tolerance:0,expected:"mínimo=−3",placeholder:"Ex.: mínimo=−3"}),
+      step("conclusion","4. Conclusão","text",7,{accepted:["O mínimo de f é −3 e é atingido em x=2.","A função atinge o mínimo −3 quando x=2."],expected:"O mínimo de f é −3 e é atingido em x=2.",placeholder:"Indica o mínimo e onde ocorre."})
+    ]},
+    points:35,sol:"f(x)=x²−4x+1=(x−2)²−3. Como (x−2)²≥0, o mínimo é −3 e ocorre quando x=2.",
+    hyp:"Pode existir dificuldade em completar o quadrado ou distinguir as coordenadas do vértice.",
+    contexts:["exam"],signature:"10-fun:Monotonia e extremos:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10GA-VET-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-vetores",
+    microcompetencyId:"mc-10-ga-vetores",focus:"Vetores",difficulty:2,cognitive:"Procedimento",
+    q:"Dados A(1,2) e B(4,6), determina o vetor AB e o seu comprimento.",
+    response:{type:"stepwise",steps:[
+      step("dx","1. Variação da primeira coordenada","numeric",7,{value:3,tolerance:0,expected:"Δx=3",placeholder:"Ex.: Δx=3"}),
+      step("dy","2. Variação da segunda coordenada","numeric",7,{value:4,tolerance:0,expected:"Δy=4",placeholder:"Ex.: Δy=4"}),
+      step("vector","3. Coordenadas do vetor AB","expression",10,{accepted:["(3,4)","ab=(3,4)","vetorab=(3,4)"],expected:"AB=(3,4)",placeholder:"Ex.: AB=(3,4)"}),
+      step("length","4. Comprimento do vetor","numeric",11,{value:5,tolerance:0,expected:"|AB|=5",placeholder:"Ex.: |AB|=5"})
+    ]},
+    points:35,sol:"AB=(4−1,6−2)=(3,4). O comprimento é √(3²+4²)=√25=5.",
+    hyp:"Pode existir dificuldade na ordem da subtração ou no cálculo da norma.",
+    contexts:["exam"],signature:"10-ga:Vetores:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-11CD-MON-STEPS-1",themeId:"11-cd",subtopicId:"11-cd-monotonia-otimizacao",
+    microcompetencyId:"mc-11-cd-monotonia-e-extremos",focus:"Monotonia e extremos",difficulty:3,cognitive:"Raciocínio",
+    q:"Estuda a monotonia de f(x)=x²−4x e identifica o extremo da função.",
+    response:{type:"stepwise",steps:[
+      step("derivative","1. Derivada de f","expression",10,{accepted:["f'(x)=2x-4","2x-4","f′(x)=2x−4"],expected:"f′(x)=2x−4",placeholder:"Ex.: f'(x)=2x−4"}),
+      step("critical","2. Ponto onde f′(x)=0","numeric",8,{value:2,tolerance:0,expected:"x=2",placeholder:"Ex.: x=2"}),
+      step("variation","3. Intervalos de monotonia","expression",10,{accepted:["decrescente em ]-infinito,2[ e crescente em ]2,+infinito[","decrescente em ]−∞,2[ e crescente em ]2,+∞[","f decresce se x<2 e cresce se x>2"],expected:"f decresce se x<2 e cresce se x>2",placeholder:"Indica onde decresce e onde cresce."}),
+      step("extreme","4. Extremo","text",7,{accepted:["f tem mínimo −4 em x=2.","A função atinge o mínimo −4 quando x=2."],expected:"f tem mínimo −4 em x=2.",placeholder:"Indica o tipo, valor e localização do extremo."})
+    ]},
+    points:35,sol:"f′(x)=2x−4, que se anula em x=2. A derivada é negativa antes de 2 e positiva depois de 2; f decresce e depois cresce, tendo mínimo f(2)=−4.",
+    hyp:"Pode existir dificuldade em relacionar o sinal da derivada com a monotonia e o extremo.",
+    contexts:["exam"],signature:"11-cd:Monotonia e extremos:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12FCD-CHAIN-STEPS-1",themeId:"12-fcd",subtopicId:"12-fcd-regras-cadeia",
+    microcompetencyId:"mc-12-fcd-regra-da-cadeia",focus:"Regra da cadeia",difficulty:3,cognitive:"Procedimento",
+    q:"Seja f(x)=(x²+1)³. Determina f′(x), explicitando a aplicação da regra da cadeia.",
+    response:{type:"stepwise",steps:[
+      step("inner","1. Função interior","expression",7,{accepted:["u=x^2+1","x^2+1","u=x²+1"],expected:"u=x²+1",placeholder:"Ex.: u=x^2+1"}),
+      step("outer","2. Derivada da função exterior","expression",8,{accepted:["3u^2","3u²"],expected:"3u²",placeholder:"Ex.: 3u^2"}),
+      step("innerDerivative","3. Derivada da função interior","expression",8,{accepted:["u'=2x","2x","u′=2x"],expected:"u′=2x",placeholder:"Ex.: u'=2x"}),
+      step("result","4. Derivada final","expression",12,{accepted:["f'(x)=6x(x^2+1)^2","6x(x^2+1)^2","f′(x)=6x(x²+1)²"],expected:"f′(x)=6x(x²+1)²",placeholder:"Ex.: f'(x)=6x(x^2+1)^2"})
+    ]},
+    points:35,sol:"Tomando u=x²+1, tem-se f=u³, logo f′=3u²×u′. Como u′=2x, resulta f′(x)=6x(x²+1)².",
+    hyp:"Pode existir dificuldade em multiplicar pela derivada da função interior.",
+    contexts:["exam"],signature:"12-fcd:Regra da cadeia:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12FCONT-ASS-STEPS-1",themeId:"12-fcont",subtopicId:"12-fcont-estudo-global",
+    microcompetencyId:"mc-12-fcont-assintotas",focus:"Assíntotas",difficulty:3,cognitive:"Raciocínio",
+    q:"Considera f(x)=(2x+1)/(x−3). Determina as assíntotas vertical e horizontal, justificando os valores obtidos.",
+    response:{type:"stepwise",steps:[
+      step("excluded","1. Zero do denominador","numeric",7,{value:3,tolerance:0,expected:"x=3",placeholder:"Ex.: x=3"}),
+      step("vertical","2. Assíntota vertical","expression",9,{accepted:["x=3"],expected:"x=3",placeholder:"Ex.: x=3"}),
+      step("ratio","3. Quociente dos coeficientes dominantes","numeric",8,{value:2,tolerance:0,expected:"2/1=2",placeholder:"Ex.: 2"}),
+      step("horizontal","4. Assíntota horizontal","expression",11,{accepted:["y=2"],expected:"y=2",placeholder:"Ex.: y=2"})
+    ]},
+    points:35,sol:"O denominador anula-se em x=3 e o numerador não, logo x=3 é assíntota vertical. Como numerador e denominador têm o mesmo grau, o limite no infinito é 2/1=2; portanto, y=2 é assíntota horizontal.",
+    hyp:"Pode existir dificuldade em distinguir a condição da assíntota vertical da comparação dos termos dominantes.",
+    contexts:["exam"],signature:"12-fcont:Assíntotas:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12RAE-STEPS-1",themeId:"12-rae",subtopicId:"12-rae-bolzano-localizacao",
+    microcompetencyId:"mc-12-rae-aproximacoes",focus:"Aproximações",difficulty:2,cognitive:"Validação",
+    q:"Mostra que √2 pertence ao intervalo ]1,41;1,42[, comparando os quadrados dos extremos com 2.",
+    response:{type:"stepwise",steps:[
+      step("lower","1. Quadrado do extremo inferior","numeric",10,{value:1.9881,tolerance:0.00001,expected:"1,41²=1,9881",placeholder:"Ex.: 1,9881"}),
+      step("upper","2. Quadrado do extremo superior","numeric",10,{value:2.0164,tolerance:0.00001,expected:"1,42²=2,0164",placeholder:"Ex.: 2,0164"}),
+      step("comparison","3. Comparação","expression",8,{accepted:["1.9881<2<2.0164","1,9881<2<2,0164"],expected:"1,9881<2<2,0164",placeholder:"Ex.: 1,9881<2<2,0164"}),
+      step("conclusion","4. Conclusão","text",7,{accepted:["Logo, 1,41<√2<1,42.","Conclui-se que √2 pertence a ]1,41;1,42[."],expected:"Logo, 1,41<√2<1,42.",placeholder:"Conclui a localização de √2."})
+    ]},
+    points:35,sol:"1,41²=1,9881<2 e 1,42²=2,0164>2. Como os números são positivos, conclui-se que 1,41<√2<1,42.",
+    hyp:"Pode existir dificuldade em usar os quadrados para justificar a localização da raiz.",
+    contexts:["exam"],signature:"12-rae:Aproximações:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12INT-AREA-STEPS-1",themeId:"12-int",subtopicId:"12-int-areas",
+    microcompetencyId:"mc-12-int-areas",focus:"Áreas",difficulty:2,cognitive:"Aplicação",
+    q:"Calcula a área limitada pelo gráfico de y=x, pelo eixo Ox e pelas retas x=0 e x=2.",
+    response:{type:"stepwise",steps:[
+      step("integral","1. Integral que representa a área","expression",10,{accepted:["integral_0^2 x dx","∫₀²x dx","∫₀² x dx"],expected:"∫₀² x dx",placeholder:"Ex.: ∫₀² x dx"}),
+      step("primitive","2. Primitiva usada","expression",8,{accepted:["x^2/2","x²/2"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
+      step("barrow","3. Aplicação nos extremos","expression",9,{accepted:["2^2/2-0^2/2","4/2-0"],expected:"2²/2−0²/2",placeholder:"Ex.: 2^2/2−0^2/2"}),
+      step("area","4. Valor da área","numeric",8,{value:2,tolerance:0,expected:"A=2",placeholder:"Ex.: A=2"})
+    ]},
+    points:35,sol:"Como x≥0 em [0,2], a área é ∫₀²x dx=[x²/2]₀²=2²/2−0²/2=2.",
+    hyp:"Pode existir dificuldade em traduzir a região para um integral ou em aplicar os extremos.",
+    contexts:["exam"],signature:"12-int:Áreas:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12CPLX-MOD-STEPS-1",themeId:"12-cplx",subtopicId:"12-cplx-conjugado-modulo",
+    microcompetencyId:"mc-12-cplx-modulo-e-argumento",focus:"Módulo e argumento",difficulty:2,cognitive:"Procedimento",
+    q:"Determina o módulo do número complexo z=3−4i, apresentando os cálculos.",
+    response:{type:"stepwise",steps:[
+      step("squares","1. Soma dos quadrados das componentes","expression",10,{accepted:["3^2+(-4)^2","3²+(−4)²","9+16"],expected:"3²+(−4)²",placeholder:"Ex.: 3^2+(−4)^2"}),
+      step("sum","2. Valor dentro da raiz","numeric",8,{value:25,tolerance:0,expected:"25",placeholder:"Ex.: 25"}),
+      step("root","3. Cálculo da raiz","expression",8,{accepted:["sqrt(25)=5","√25=5","raiz(25)=5"],expected:"√25=5",placeholder:"Ex.: √25=5"}),
+      step("modulus","4. Módulo de z","numeric",9,{value:5,tolerance:0,expected:"|z|=5",placeholder:"Ex.: |z|=5"})
+    ]},
+    points:35,sol:"|z|=√(3²+(−4)²)=√(9+16)=√25=5.",
+    hyp:"Pode existir dificuldade em usar ambas as componentes ou em tratar o quadrado da parte imaginária.",
+    contexts:["exam"],signature:"12-cplx:Módulo e argumento:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   }
 ];
 
@@ -252,7 +364,7 @@ function gradeStep(spec,value){
   }
   if(spec.type==="expression"){
     const input=normalizedExpression(value);
-    correct=hasText(value)&&(spec.accepted||[]).some(candidate=>{
+    correct=hasText(value)&&[spec.expected,...(spec.accepted||[])].filter(Boolean).some(candidate=>{
       const expected=normalizedExpression(candidate);
       if(expected===input)return true;
       const strip=s=>s.replace(/^f'\(x\)=/,"");
@@ -284,14 +396,15 @@ function constantValue(source){
   const value=n/d;return Number.isFinite(value)?value:null;
 }
 
-function gradeStepFromWorking(spec,lines,fullAnswer){
-  const candidates=[...lines],explicit=[];
+function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
+  const candidates=lines.map((value,index)=>({value,index,labelled:value.includes("=")})).filter(row=>row.labelled||!usedUnlabelled.has(row.index));
+  const explicit=[];
   const expectedPrefix=String(spec.expected).includes("=")?String(spec.expected).split("=")[0]:null;
-  for(const line of lines){
+  for(const [index,line] of lines.entries()){
     const parts=line.split("=").map(x=>x.trim());
     const matches=parts.length>1&&[expectedPrefix,...(spec.prefixes||[])].filter(Boolean).some(prefix=>normalizedExpression(parts[0])===normalizedExpression(prefix));
     if(matches){
-      candidates.push(...parts.slice(1));
+      candidates.push(...parts.slice(1).map(value=>({value,index,labelled:true})));
       if(["numeric","fraction"].includes(spec.type)){
         const values=parts.slice(1).map(constantValue);
         if(values.every(value=>value!==null)){
@@ -308,10 +421,10 @@ function gradeStepFromWorking(spec,lines,fullAnswer){
     if(wrong)return {...base,status:right?"needs_review":"incorrect",reason:right?"conflicting_results":"calculation_error",answer:explicit.map(row=>row.line).join("\n")};
     return {...base,status:"correct",correct:true,points:spec.points,reason:null,answer:explicit[0].line};
   }
-  if(spec.type==="text"&&hasText(fullAnswer))candidates.push(fullAnswer);
+  if(spec.type==="text"&&hasText(fullAnswer))candidates.push({value:fullAnswer,index:null,labelled:true});
   for(const candidate of candidates){
-    const result=gradeStep(spec,candidate);
-    if(result.correct)return result;
+    const result=gradeStep(spec,candidate.value);
+    if(result.correct)return {...result,matchedUnlabelledIndex:candidate.labelled?null:candidate.index};
   }
   // This describes recognition, not a claim that unfamiliar mathematics is invalid.
   const recognizable=lines.some(line=>canonicalPolynomial(normalizedExpression(line))!==null||/[=→∫√]/.test(line)||/[a-zÀ-ÿ]{3,}/i.test(line));
@@ -361,12 +474,15 @@ export function gradeResponse(question,answer){
   if(type==="stepwise"){
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";
+    const usedUnlabelled=new Set();
     const stepResults=question.response.steps.map(spec=>{
       if(hasText(answer?.steps?.[spec.id])){
         const result=gradeStep(spec,answer.steps[spec.id]);
         return !result.correct&&spec.type==="text"?{...result,status:"needs_review",reason:"not_verified"}:result;
       }
-      return gradeStepFromWorking(spec,lines,fullAnswer);
+      const result=gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled);
+      if(result.correct&&Number.isInteger(result.matchedUnlabelledIndex))usedUnlabelled.add(result.matchedUnlabelledIndex);
+      return result;
     });
     const points=stepResults.reduce((sum,row)=>sum+row.points,0),correct=points===maxPoints;
     const pendingPoints=stepResults.filter(row=>row.status==="needs_review").reduce((sum,row)=>sum+row.maxPoints,0);

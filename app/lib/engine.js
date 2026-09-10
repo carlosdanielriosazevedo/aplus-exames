@@ -484,6 +484,12 @@ export function constructedPracticeQuestion(s,{themeId,focus,level="auto"},conte
     .find(q=>isQuestionInAcademicScope(q,s.profile,context)&&isEligibleForContext(q,context,s.editorialOverrides||{},s.betaMode||"internal"))||null;
 }
 
+export function missionPracticeQuestion(s,plan,totalCount,usedIds=[]){
+  if(totalCount<3)return null;
+  const practice=constructedPracticeQuestion(s,{themeId:plan.themeId,focus:plan.focus},"mission");
+  return practice&&!usedIds.includes(practice.id)?practice:null;
+}
+
 export function trainingQuestions(s,{themeId,focus,level},limit=8){
   const focusLabel=microcompetencyLabel(focus)||focus;
   const selectedSubtopic=curriculumSubtopicForItem({

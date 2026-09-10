@@ -46,6 +46,9 @@ incomplete score labels and isolation from mastery updates, plus existing sessio
   independently recognized prior checkpoints can retain credit.
 - Conflicting evaluable lines for the same numeric quantity require verification;
   the checker does not cherry-pick the correct line or assume the last is a correction.
+- A bare, unlabelled line can satisfy only one rubric checkpoint. This prevents a
+  single value from earning two steps that happen to share the same result. Labelled
+  lines and equality chains can still support related checkpoints when appropriate.
 - This is not whole-proof contradiction detection. Unmatched prose and alternative
   methods remain unsupported; the recognition heuristic never awards points.
 - Stored completed exams keep their original grades; updated labels apply to them,
@@ -60,7 +63,7 @@ The mission assignment and resumed current exercise remain frozen as before.
 Free training replaces its last item with a matching constructed exercise (eight
 items total), with optional hints and feedback only after Responder. Basic difficulty
 is not filled with harder constructed questions. Existing drafts retain their items.
-The constructed-response bank now covers fourteen distinct focuses. Other focuses
+The constructed-response bank now covers twenty-two distinct competencies. Other focuses
 retain their existing questions until they receive purpose-built rubrics.
 No diagnostic selection changes. No unsupported answer is certified by the UI.
 Training with constructed practice does not produce automatic mastery-confirmation
