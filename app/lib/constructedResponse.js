@@ -297,6 +297,74 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     points:35,sol:"|z|=√(3²+(−4)²)=√(9+16)=√25=5.",
     hyp:"Pode existir dificuldade em usar ambas as componentes ou em tratar o quadrado da parte imaginária.",
     contexts:["exam"],signature:"12-cplx:Módulo e argumento:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10ELE-DHONDT-STEPS-1",themeId:"10-ele",subtopicId:"10-ele-dhondt",
+    microcompetencyId:"mc-10-ele-metodos-de-votacao",focus:"Método de D'Hondt",difficulty:3,cognitive:"Aplicação",
+    q:"As listas A, B e C obtiveram, respetivamente, 4800, 2800 e 1200 votos. Distribui quatro mandatos pelo método de D'Hondt, apresentando os quocientes decisivos.",
+    response:{type:"stepwise",steps:[
+      step("quotientsA","1. Quocientes relevantes da lista A","expression",10,{accepted:["A={4800;2400;1600;1200}"],expected:"A={4800;2400;1600;1200}",placeholder:"Ex.: A={4800;2400;1600;1200}"}),
+      step("ranking","2. Quatro maiores quocientes por ordem","expression",12,{accepted:["4800(A)>2800(B)>2400(A)>1600(A)"],expected:"4800(A)>2800(B)>2400(A)>1600(A)",placeholder:"Ordena os quatro quocientes decisivos."}),
+      step("allocation","3. Distribuição dos mandatos","expression",13,{accepted:["A=3;B=1;C=0","A:3;B:1;C:0"],expected:"A=3; B=1; C=0",placeholder:"Ex.: A=3; B=1; C=0"})
+    ]},
+    points:35,sol:"Os quatro maiores quocientes são 4800 (A), 2800 (B), 2400 (A) e 1600 (A). Assim, A recebe 3 mandatos, B recebe 1 e C não recebe mandatos.",
+    hyp:"Pode existir dificuldade em ordenar quocientes de listas diferentes ou em contar os mandatos atribuídos.",
+    contexts:["exam"],signature:"10-ele:D'Hondt:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10GS-BAR-STEPS-1",themeId:"10-gs",subtopicId:"10-gs-baricentro-medianas",
+    microcompetencyId:"mc-10-gs-raciocinio-geometrico",focus:"Baricentro",difficulty:2,cognitive:"Raciocínio",
+    q:"Num referencial, considera A(0,0), B(6,0) e C(0,3). Determina as coordenadas do baricentro G do triângulo ABC.",
+    response:{type:"stepwise",steps:[
+      step("formula","1. Aplicação da fórmula do baricentro","expression",8,{accepted:["G=((0+6+0)/3,(0+0+3)/3)"],expected:"G=((0+6+0)/3,(0+0+3)/3)",placeholder:"Escreve a média de cada coordenada."}),
+      step("xg","2. Abcissa do baricentro","numeric",9,{value:2,tolerance:0,expected:"xG=2",prefixes:["x_G","xg"],placeholder:"Ex.: xG=2"}),
+      step("yg","3. Ordenada do baricentro","numeric",9,{value:1,tolerance:0,expected:"yG=1",prefixes:["y_G","yg"],placeholder:"Ex.: yG=1"}),
+      step("point","4. Coordenadas de G","expression",9,{accepted:["G=(2,1)","(2,1)"],expected:"G=(2,1)",placeholder:"Ex.: G=(2,1)"})
+    ]},
+    points:35,sol:"As coordenadas do baricentro são as médias das coordenadas dos vértices: G=((0+6+0)/3,(0+0+3)/3)=(2,1).",
+    hyp:"Pode existir dificuldade em calcular separadamente a média das abcissas e a média das ordenadas.",
+    contexts:["exam"],signature:"10-gs:Baricentro:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-11FUN-RUFFINI-STEPS-1",themeId:"11-fun",subtopicId:"11-fun-divisao-polinomios",
+    microcompetencyId:"mc-11-fun-transformacoes",focus:"Divisão de polinómios",difficulty:3,cognitive:"Raciocínio",
+    q:"Considera P(x)=x³−4x²+x+6. Verifica que 2 é uma raiz e fatoriza completamente P.",
+    response:{type:"stepwise",steps:[
+      step("verification","1. Verificação de P(2)","expression",10,{accepted:["P(2)=8-16+2+6=0","8-16+2+6=0"],expected:"P(2)=8−16+2+6=0",placeholder:"Substitui x por 2."}),
+      step("quotient","2. Quociente da divisão por x−2","expression",12,{accepted:["x^2-2x-3","x²−2x−3"],expected:"x²−2x−3",placeholder:"Aplica Ruffini ou a divisão de polinómios."}),
+      step("factorization","3. Fatorização completa","expression",13,{accepted:["(x-2)(x-3)(x+1)","P(x)=(x-2)(x-3)(x+1)"],expected:"P(x)=(x−2)(x−3)(x+1)",placeholder:"Ex.: P(x)=(x−2)…"})
+    ]},
+    points:35,sol:"P(2)=8−16+2+6=0, logo x−2 é fator. A divisão dá x²−2x−3=(x−3)(x+1). Portanto, P(x)=(x−2)(x−3)(x+1).",
+    hyp:"Pode existir dificuldade em ligar o resto nulo ao fator x−2 ou em fatorizar o quociente.",
+    contexts:["exam"],signature:"11-fun:Ruffini:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12IE-IC-STEPS-1",themeId:"12-ie",subtopicId:"12-ie-intervalos-confianca",
+    microcompetencyId:"mc-12-ie-estimativas",focus:"Intervalos de confiança",difficulty:3,cognitive:"Interpretação",
+    q:"Uma estimativa para a média populacional é 50 e a margem de erro, a 95% de confiança, é 3. Constrói o intervalo de confiança e interpreta-o.",
+    response:{type:"stepwise",steps:[
+      step("lower","1. Limite inferior","numeric",8,{value:47,tolerance:0,expected:"LI=47",prefixes:["li"],placeholder:"Ex.: LI=47"}),
+      step("upper","2. Limite superior","numeric",8,{value:53,tolerance:0,expected:"LS=53",prefixes:["ls"],placeholder:"Ex.: LS=53"}),
+      step("interval","3. Intervalo de confiança","expression",9,{accepted:["IC95%=[47,53]","[47,53]"],expected:"IC95%=[47,53]",placeholder:"Ex.: IC95%=[47,53]"}),
+      step("interpretation","4. Interpretação","text",10,{accepted:["Com 95% de confiança, a média populacional encontra-se entre 47 e 53.","O intervalo [47,53] estima a média populacional com 95% de confiança."],expected:"Com 95% de confiança, a média populacional encontra-se entre 47 e 53.",placeholder:"Interpreta o intervalo no contexto da média populacional."})
+    ]},
+    points:35,sol:"O intervalo é 50±3, isto é, [47,53]. Interpreta-se que, com 95% de confiança, a média populacional se encontra entre 47 e 53.",
+    hyp:"Pode existir dificuldade em aplicar a margem de erro aos dois limites ou em interpretar o nível de confiança.",
+    contexts:["exam"],signature:"12-ie:Intervalos de confiança:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12MAT-PROD-STEPS-1",themeId:"12-mat",subtopicId:"12-mat-produto",
+    microcompetencyId:"mc-12-mat-operacoes",focus:"Produto de matrizes",difficulty:3,cognitive:"Aplicação",
+    q:"Considera A=[[1,2],[3,4]] e B=[[2,0],[1,2]]. Calcula AB e explica por que não se deve trocar a ordem dos fatores.",
+    response:{type:"stepwise",steps:[
+      step("row1","1. Primeira linha do produto","expression",10,{accepted:["(4,4)","[4,4]"],expected:"(4,4)",placeholder:"Calcula os produtos linha-coluna."}),
+      step("row2","2. Segunda linha do produto","expression",10,{accepted:["(10,8)","[10,8]"],expected:"(10,8)",placeholder:"Calcula os produtos linha-coluna."}),
+      step("product","3. Matriz AB","expression",10,{accepted:["AB=[[4,4],[10,8]]","[[4,4],[10,8]]"],expected:"AB=[[4,4],[10,8]]",placeholder:"Ex.: AB=[[…],[…]]"}),
+      step("order","4. Justificação sobre a ordem","text",5,{accepted:["Em geral, o produto de matrizes não é comutativo, pelo que AB pode ser diferente de BA.","O produto de matrizes não é comutativo: em geral, AB≠BA."],expected:"Em geral, o produto de matrizes não é comutativo, pelo que AB pode ser diferente de BA.",placeholder:"Refere a não comutatividade do produto."})
+    ]},
+    points:35,sol:"AB=[[1×2+2×1,1×0+2×2],[3×2+4×1,3×0+4×2]]=[[4,4],[10,8]]. Em geral, o produto de matrizes não é comutativo, por isso AB pode diferir de BA.",
+    hyp:"Pode existir dificuldade em combinar linhas com colunas ou assumir incorretamente que AB=BA.",
+    contexts:["exam"],signature:"12-mat:Produto de matrizes:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   }
 ];
 

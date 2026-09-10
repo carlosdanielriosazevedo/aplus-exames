@@ -14,6 +14,7 @@
 - Vinte e duas resoluções de derivadas, trigonometria e cálculo integral foram reescritas para explicitar a regra, a simplificação e a resposta final.
 - Foi criado um banco compacto de 339 itens para Mini-exames: três itens independentes por cada uma das 113 submatérias, sem reutilizar os itens reservados ao Diagnóstico ou às Missões.
 - A seleção dos 339 itens passou a penalizar resoluções curtas e opções certas visualmente denunciadas: a resolução mais curta tem 31 caracteres, os 34 desequilíbrios de comprimento detetados caíram para zero e cada submatéria apresenta pelo menos dois tipos cognitivos.
+- O banco de resposta construída passou de 22 para 27 problemas e cobre os 21 temas de Matemática A, incluindo agora Método de D'Hondt, baricentro, divisão de polinómios, intervalos de confiança e produto de matrizes.
 
 ## Proteções acrescentadas
 

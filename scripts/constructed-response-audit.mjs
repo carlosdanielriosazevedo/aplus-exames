@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {canonicalPolynomial,equivalentPolynomial} from "../app/lib/polynomial.js";
 import {insertMathText} from "../app/lib/mathInput.js";
+import {TAXONOMY} from "../app/data/content.js";
 import {
   CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,isConstructedResponse,
   isResponseAnswered,miniExamPointSummary,examScoreLabel,stepFeedback
@@ -18,13 +19,18 @@ assert.equal(gradeResponse(fraction,"-2/-4").correct,true);
 assert.equal(gradeResponse(fraction,"0,5").reason,"invalid_fraction_format");
 assert.equal(gradeResponse(fraction,"1/0").correct,false);
 
-assert.equal(CONSTRUCTED_RESPONSE_BANK.length,22);
+assert.equal(CONSTRUCTED_RESPONSE_BANK.length,27);
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.type==="stepwise"));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.length>=3));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.reduce((sum,row)=>sum+row.points,0)===q.points));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="text")),"O piloto deve avaliar justificação escrita.");
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="expression")),"O piloto deve avaliar expressões intermédias.");
-assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>`${q.themeId}:${q.microcompetencyId}`)).size,22,"Cada pergunta construída deve alargar a cobertura a uma competência distinta.");
+assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>`${q.themeId}:${q.microcompetencyId}`)).size,27,"Cada pergunta construída deve alargar a cobertura a uma competência distinta.");
+assert.deepEqual(
+  [...new Set(CONSTRUCTED_RESPONSE_BANK.map(question=>question.themeId))].sort(),
+  TAXONOMY.map(theme=>theme.id).sort(),
+  "As respostas construídas devem cobrir todos os temas de Matemática A."
+);
 
 function answerFor(question){
   if(question.response.type==="completion")return Object.fromEntries(question.response.blanks.map(b=>[b.id,b.correct]));
