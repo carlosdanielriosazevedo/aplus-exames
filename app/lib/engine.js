@@ -474,6 +474,16 @@ export function shouldEndMission(args){
   return missionStopDecision(args).stop;
 }
 
+// Reuse original checkpoints as practice; preserve source editorial restrictions.
+export function constructedPracticeQuestion(s,{themeId,focus,level="auto"},context="training"){
+  const mc=microcompetencyId(themeId,focus);
+  const cap={basic:1,mid:2,adv:3,challenge:4}[level]||4;
+  return CONSTRUCTED_RESPONSE_BANK.map(source=>effectiveEditorialItem(source,s.editorialOverrides||{}))
+    .filter(q=>q.themeId===themeId&&(!focus||(mc?q.microcompetencyId===mc:q.focus===focus))&&q.difficulty<=cap)
+    .map(q=>({...q,contexts:[...q.contexts,context],practiceOnly:true}))
+    .find(q=>isQuestionInAcademicScope(q,s.profile,context)&&isEligibleForContext(q,context,s.editorialOverrides||{},s.betaMode||"internal"))||null;
+}
+
 export function trainingQuestions(s,{themeId,focus,level},limit=8){
   const focusLabel=microcompetencyLabel(focus)||focus;
   const selectedSubtopic=curriculumSubtopicForItem({
@@ -536,6 +546,8 @@ export function trainingQuestions(s,{themeId,focus,level},limit=8){
     usedCog.add(q.cognitive);
     usedSignatures.add(q.signature);
   }
+  const constructed=constructedPracticeQuestion(s,{themeId,focus,level});
+  if(constructed&&selected.length>=2)selected[selected.length-1]=constructed;
   return selected;
 }
 

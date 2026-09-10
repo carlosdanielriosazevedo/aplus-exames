@@ -50,3 +50,17 @@ incomplete score labels and isolation from mastery updates, plus existing sessio
   methods remain unsupported; the recognition heuristic never awards points.
 - Stored completed exams keep their original grades; updated labels apply to them,
   while new grading reasons apply to newly delivered exams.
+
+## Practice outside the mini-exam
+
+Missions select one guided constructed question after three interactions when an
+eligible checkpoint exercise matches the assigned focus. Guided practice is excluded
+from mastery evidence and causal probing, while counting toward session activity.
+The mission assignment and resumed current exercise remain frozen as before.
+Free training replaces its last item with a matching constructed exercise (eight
+items total), with optional hints and feedback only after Responder. Basic difficulty
+is not filled with harder constructed questions. Existing drafts retain their items.
+This initial bank covers six focuses; other focuses retain their existing questions.
+No diagnostic selection changes. No unsupported answer is certified by the UI.
+Training with constructed practice does not produce automatic mastery-confirmation
+signals in this first release, since hints and partial results need a richer model.

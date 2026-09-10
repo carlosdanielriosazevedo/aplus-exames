@@ -596,3 +596,5 @@ body{color:var(--app-navy);background:#fff}
   .diagApronsoHero{grid-template-columns:1fr}.diagApronsoHero>.apronso{float:none;width:104px;height:118px;margin:4px auto 0}.diagApronsoHero h1{padding-right:0}.diagPurposeHero{clear:both}
   .progressHero{grid-template-columns:1fr}.progressHero>.apronso{grid-column:1;grid-row:auto;width:120px;min-height:120px;height:120px;justify-self:center;margin-top:0}
 }
+
+.practiceFields{border:0;padding:0;margin:0;min-width:0}.practiceFields:disabled{opacity:1}.practiceFields textarea{width:100%;box-sizing:border-box;min-height:6rem}.practiceFields label{display:grid;gap:.5rem;margin-bottom:1rem}

@@ -5,7 +5,7 @@ import {
   CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,isConstructedResponse,
   isResponseAnswered,miniExamPointSummary,examScoreLabel,stepFeedback
 } from "../app/lib/constructedResponse.js";
-import {applyMiniExam,buildMiniExam,emptyScores,trainingQuestions} from "../app/lib/engine.js";
+import {applyMiniExam,buildMiniExam,emptyScores,trainingQuestions,constructedPracticeQuestion} from "../app/lib/engine.js";
 
 const numeric={id:"test-num",points:35,response:{type:"numeric",value:2.5,tolerance:.01}};
 const fraction={id:"test-frac",points:35,response:{type:"fraction",numerator:1,denominator:2}};
@@ -135,3 +135,20 @@ assert.equal(examScoreLabel({score20:3.3,score20Upper:17.3,reviewRequired:true})
 assert.equal(examScoreLabel({score20:15.5}),"15,5/20");
 assert.equal(gradeResponse(slopeQuestion,"").status,"unanswered");
 console.log("✓ recognition feedback, explicit arithmetic errors, conflicting results and incomplete score labels");
+
+const practiceCfg={themeId:"10-fun",focus:"Domínio e zeros",level:"auto"};
+const guided=constructedPracticeQuestion(state,practiceCfg,"mission");
+assert.ok(guided?.practiceOnly);
+assert.equal(guided.themeId,practiceCfg.themeId);
+assert.equal(constructedPracticeQuestion(state,{...practiceCfg,focus:"Inexistente"},"mission"),null);
+assert.equal(constructedPracticeQuestion(state,{...practiceCfg,level:"basic"}),null);
+const blockedPractice={...state,editorialOverrides:{[guided.id]:{status:"blocked"}}};
+assert.equal(constructedPracticeQuestion(blockedPractice,practiceCfg),null);
+assert.equal(constructedPracticeQuestion({...state,betaMode:"closed_beta"},practiceCfg),null);
+const mixedTraining=trainingQuestions(state,practiceCfg,8);
+assert.equal(mixedTraining.length,8);
+assert.equal(mixedTraining.filter(q=>q.practiceOnly).length,1);
+assert.deepEqual(state.scores,emptyScores(),"Selection of practice never changes mastery");
+console.log("✓ mixed training, guided mission selection, focus, difficulty and editorial gates");
+
+assert.equal(gradeResponse(slopeQuestion,{steps:{deltaY:"Δy=2",deltaX:"Δx=4",slope:"m=1/2"}}).points,28);

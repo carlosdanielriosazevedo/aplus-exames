@@ -116,7 +116,7 @@ function normalizedInput(value){return String(value??"").trim().replace(/−/g,"
 function normalizedExpression(value){return normalizedInput(value).toLowerCase().replace(/′/g,"'").replace(/²/g,"^2").replace(/³/g,"^3").replace(/[×·]/g,"*").replace(/:/g,"/")}
 function normalizedWords(value){return String(value??"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[−–—]/g,"-").replace(/\s+/g," ").trim()}
 
-function withoutPrefix(value){return normalizedInput(value).replace(/^[a-zA-ZÀ-ÿ′']+(?:\([^)]*\))?=/,"")}
+function withoutPrefix(value){return normalizedInput(value).replace(/^[\p{L}′']+(?:\([^)]*\))?=/u,"")}
 function parseNumeric(value){
   const input=withoutPrefix(value);
   if(!/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(input))return null;

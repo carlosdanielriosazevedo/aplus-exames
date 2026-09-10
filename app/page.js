@@ -10,7 +10,7 @@ import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
   selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
-  shouldEndMission,missionStopDecision,trainingQuestions,startingDifficulty,
+  shouldEndMission,missionStopDecision,trainingQuestions,constructedPracticeQuestion,startingDifficulty,
   missionContentExhaustedDecision,canStartMissionDetour,estimateMissionSeconds,
   dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
   buildMiniExam,applyMiniExam,hasTrainingContent,hasGenerator,
@@ -100,7 +100,7 @@ import {
 } from "./lib/competition";
 import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
-  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback
+  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
 } from "./lib/constructedResponse";
 
 const initial={
@@ -1176,7 +1176,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   }
 
   function answer(n){if(!fb)setSel(n)}
-  function submitAnswer(){if(!fb&&Number.isInteger(sel))setFb({correct:sel===current.a})}
+  function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(gradeResponse(current,sel))}
 
   function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
     if(completingRef.current)return;
@@ -1258,7 +1258,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   }
 
   function next(){
-    const correct=sel===current.a;
+    const correct=fb?.correct===true;
     const newUsed=[...usedIds,current.id];
     const newSigs=[...usedSignatures,current.signature||current.id];
     const newTotal=totalCount+1;
@@ -1318,7 +1318,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
         verdict
       });
       setDetour(finalDetour);setPendingError(null);
-    }else{
+    }else if(!current.practiceOnly){
       nextState.scores[targetId]=applyEvidence(nextState.scores[targetId],current,correct,"mission");
       newTargetCount=targetCount+1;
       newTargetItems=[...targetItems,current];
@@ -1345,11 +1345,12 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       closeMission(nextState,finalDetour,newTargetCount,newTotal,stopDecision,newEstimatedSeconds);return;
     }
 
-    const nxt=selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    const practice=newTotal>=3?constructedPracticeQuestion(nextState,{themeId:targetId,focus:plan.focus},"mission"):null;
+    const nxt=practice&&!newUsed.includes(practice.id)?practice:selectQuestionForPlan(nextState,plan,newUsed,newSigs);
     if(!nxt){
       closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision(),newEstimatedSeconds);return
     }
-    setCurrent({...nxt,sessionRole:"target"});setSel(null);setFb(null);
+    setCurrent({...nxt,sessionRole:nxt.practiceOnly?"guided":"target"});setSel(null);setFb(null);
   }
 
   if(!current)return <Shell><Back go={go}/><h1>Ainda não existem perguntas suficientes para esta Missão.</h1></Shell>;
@@ -1380,11 +1381,11 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
       <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a app vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
     </details>
     <h2>{current.q}</h2>
-    <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
+    {current.practiceOnly?<PracticeResponse question={current} value={sel} onChange={answer} feedback={fb} guided/>:<QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>}
 
-    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
+    {fb&&!current.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={current} s={s} setS={setS}/>}
-    {!fb?<button disabled={!Number.isInteger(sel)} className="primary" onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
+    {!fb?<button disabled={!isResponseAnswered(current,sel)} className="primary" onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
   </Shell>
 }
 
@@ -1656,9 +1657,9 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
-  function submitAnswer(){if(!fb&&Number.isInteger(sel))setFb({correct:sel===q.a})}
+  function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
   function next(){
-    const was=sel===q.a;
+    const was=fb?.correct===true;
     const newCorrect=correct+(was?1:0);
     if(was)setCorrect(newCorrect);
     if(i===questions.length-1){
@@ -1672,7 +1673,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       }
 
       const ratio=newCorrect/questions.length;
-      const potential=ratio>=.75 && cfg.level!=="basic";
+      const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
       setS(prev=>{
         const sessions=[...(prev.betaSessions||[])];
         const openIdx=[...sessions].map(x=>x.kind==="training"&&!x.finishedAt).lastIndexOf(true);
@@ -1715,9 +1716,9 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
 
   if(done){
     const ratio=correct/questions.length;
-    const potential=ratio>=.75 && cfg.level!=="basic";
+    const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
     return <Shell><div className="centered"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o treino concluído"/>
-      <p className="eyebrow">TREINO CONCLUÍDO</p><h1>{correct}/{questions.length} corretas</h1>
+      <p className="eyebrow">TREINO CONCLUÍDO</p><h1>{correct}/{questions.length} totalmente corretas</h1>
       <p className="muted">{theme(cfg.themeId).short} → {cfg.focus}</p></div>
       {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A app guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
       :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da app.</span></div>}
@@ -1735,10 +1736,10 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     <p className="questionContext">{theme(cfg.themeId).short}{q.focus&&<> · {q.focus}</>}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span>{q.generated&&<span>Variante validada · gerada por regras matemáticas fechadas · seed {q.variantSeed}</span>}</div></details>
     <h2>{q.q}</h2>
-    <QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>
-    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
+    {q.practiceOnly?<PracticeResponse question={q} value={sel} onChange={answer} feedback={fb}/>:<QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>}
+    {fb&&!q.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
     {fb&&<ReportButton item={q} s={s} setS={setS}/>}
-    {!fb?<button className="primary" disabled={!Number.isInteger(sel)} onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
+    {!fb?<button className="primary" disabled={!isResponseAnswered(q,sel)} onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
     <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
@@ -1865,6 +1866,27 @@ function MathWritingBar({inputRef,value,onChange,multiline=true}){
   }
   const keys=[["/","Fração"],["²","Quadrado"],["³","Cubo"],["^","Potência"],["√(","Raiz quadrada"],["π","Pi"],["(","Abrir parênteses"],[")","Fechar parênteses"],["×","Multiplicar"],["−","Subtrair"],["=","Igual"],["≠","Diferente"],["≤","Menor ou igual"],["≥","Maior ou igual"],["∞","Infinito"],["′","Derivada"],["\n","Nova linha"]];
   return <div className="mathWritingBar" role="group" aria-label="Símbolos matemáticos">{keys.filter(([symbol])=>multiline||symbol!=="\n").map(([symbol,label])=><button type="button" key={label} aria-label={label} title={label} onMouseDown={event=>event.preventDefault()} onClick={()=>insert(symbol)}>{symbol==="\n"?"↵":symbol}</button>)}</div>;
+}
+
+function PracticeResponse({question,value,onChange,feedback,guided=false}){
+  const steps=question.response.steps;
+  return <div className="practiceResponse">
+    <p className="muted">{guided?"Vamos construir a resolução por etapas. Este exercício guiado serve para praticar e não altera o teu domínio.":"Escreve a resolução ao teu ritmo. Podes pedir uma pista antes de responder."}</p>
+    <fieldset disabled={!!feedback} className="practiceFields">
+      {guided?<div className="constructedResponse">{steps.map(row=><label key={row.id} htmlFor={`practice-${question.id}-${row.id}`}>
+        <b>{row.label}</b>
+        <textarea id={`practice-${question.id}-${row.id}`} rows={2} maxLength={2000} value={value?.steps?.[row.id]||""} onChange={event=>onChange({steps:{...(value?.steps||{}),[row.id]:event.target.value}})} placeholder="Escreve esta etapa da resolução"/>
+      </label>)}</div>:<>
+        <ConstructedResponseField question={question} value={value} onChange={onChange}/>
+        {!feedback&&<details className="focusDisclosure"><summary>Preciso de uma pista</summary><p>Organiza o raciocínio nestes passos:</p><ol>{steps.map(row=><li key={row.id}>{row.label.replace(/^\d+\.\s*/,"")}</li>)}</ol></details>}
+      </>}
+    </fieldset>
+    {feedback&&<div className="notice"><b>{feedback.reviewRequired?"Avaliação incompleta":feedback.correct?"Muito bem!":feedback.points>0?"Tens etapas corretas":"Vamos rever a resolução"}</b>
+      <p>{feedback.points}/{feedback.maxPoints} pontos{feedback.reviewRequired?" confirmados":""}</p>
+      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
+      <p>{question.sol}</p>
+    </div>}
+  </div>;
 }
 
 function ConstructedResponseField({question,value,onChange}){
