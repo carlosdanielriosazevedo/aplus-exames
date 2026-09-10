@@ -8,6 +8,14 @@ const ROOT=path.resolve("content/vnext/math-a");
 const OUTPUT=path.resolve("app/data/vnextExam.js");
 const CHECK=process.argv.includes("--check");
 const TARGET_DIFFICULTIES=[3,4,2];
+const COGNITIVE_LABELS={
+  aplicacao:"Aplicação",
+  comparacao:"Comparação",
+  compreensao:"Compreensão",
+  interpretacao:"Interpretação",
+  modelacao:"Modelação",
+  raciocinio:"Raciocínio"
+};
 const reservedSourceIds=new Set([
   ...VNEXT_DIAGNOSTIC_QUESTIONS.map(question=>question.sourceQuestionId),
   ...VNEXT_MISSION_QUESTIONS.map(question=>question.sourceQuestionId)
@@ -18,6 +26,29 @@ for(const relative of fs.readdirSync(ROOT,{recursive:true}).filter(file=>file.en
   const document=JSON.parse(fs.readFileSync(path.join(ROOT,relative),"utf8"));
   sources.set(document.subtopicId,{document,relative});
 }
+function canonicalCognitive(value){
+  const key=String(value||"")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .toLocaleLowerCase("pt-PT")
+    .trim();
+  return COGNITIVE_LABELS[key]||String(value||"").trim();
+}
+function correctOptionLengthOutlier(question){
+  if(!Array.isArray(question.o)||question.o.length!==4||![0,1,2,3].includes(question.a))return true;
+  const lengths=question.o.map(option=>String(option).trim().length);
+  const correct=lengths[question.a];
+  const others=lengths.filter((_,index)=>index!==question.a);
+  const average=others.reduce((sum,length)=>sum+length,0)/others.length;
+  return correct>average*2.2||correct*2.2<average;
+}
+function qualityPenalty(question){
+  const solutionLength=String(question.sol||"").trim().length;
+  const questionLength=String(question.q||"").trim().length;
+  return Math.max(0,40-solutionLength)*8+
+    Math.max(0,24-questionLength)*3+
+    (correctOptionLengthOutlier(question)?120:0);
+}
 function chooseQuestions(questions){
   const selected=[];
   for(const target of TARGET_DIFFICULTIES){
@@ -26,7 +57,9 @@ function chooseQuestions(questions){
     const candidates=questions.filter(question=>!reservedSourceIds.has(question.id)&&!usedSignatures.has(question.signature));
     if(!candidates.length)throw new Error("Não existem três itens de exame independentes e não reservados.");
     candidates.sort((left,right)=>{
-      const score=question=>Math.abs(question.difficulty-target)*20+(usedCognitive.has(question.cognitive)?4:0);
+      const score=question=>Math.abs(question.difficulty-target)*1000+
+        (usedCognitive.has(canonicalCognitive(question.cognitive))?40:0)+
+        qualityPenalty(question);
       return score(left)-score(right)||left.id.localeCompare(right.id);
     });
     selected.push(candidates[0]);
@@ -41,7 +74,7 @@ function examItem(question,subtopic,sourceFile){
     subtopicId:question.subtopicId,
     year:question.year,
     difficulty:question.difficulty,
-    cognitive:question.cognitive,
+    cognitive:canonicalCognitive(question.cognitive),
     focus:subtopic.label,
     q:question.q,
     o:question.o,
