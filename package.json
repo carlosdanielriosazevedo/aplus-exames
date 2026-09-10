@@ -43,7 +43,8 @@
     "vnext-diagnostic:audit": "node scripts/vnext-diagnostic-audit.mjs",
     "vnext-mission:generate": "node scripts/generate-vnext-mission.mjs",
     "vnext-mission:audit": "node scripts/vnext-mission-audit.mjs",
-    "subjects:audit": "node scripts/subjects-audit.mjs"
+    "subjects:audit": "node scripts/subjects-audit.mjs",
+    "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs"
   },
   "dependencies": {
     "next": "14.2.5",

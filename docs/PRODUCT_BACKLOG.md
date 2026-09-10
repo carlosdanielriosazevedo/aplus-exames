@@ -4,6 +4,26 @@ This file records product commitments explicitly approved by the product owner b
 
 ## Pending
 
+### Português 639
+
+**Status:** fundação técnica e primeiro banco-piloto em curso
+**Objetivo:** tornar Português a segunda disciplina da APProva+ sem reutilizar indevidamente a lógica de correção matemática.
+
+Condições de progressão:
+
+1. **Piloto interno:** pelo menos 60 itens originais, cobrindo leitura, educação literária, gramática e escrita nos três anos.
+2. **Beta privado:** pelo menos 300 itens, diagnóstico e Missões próprios, revisão de textos e critérios por especialista de Português.
+3. **Disponibilização:** fluxos por disciplina isolados, progresso separado e correção de resposta restrita testada com respostas reais de alunos.
+
+Regras já decididas:
+
+- escolha múltipla e respostas curtas objetivas podem ter correção determinística;
+- respostas restritas recebem análise por critérios e resultado provisório;
+- a produção escrita extensa nunca recebe uma classificação final apresentada como certa apenas por IA;
+- todos os textos e itens são originais enquanto não existir autorização explícita para usar material oficial;
+- Oralidade faz parte do currículo, mas não deve ser confundida com os domínios do exame escrito 639.
+
+
 ### Contextual Apronso animations
 
 **Status:** approved and pending  

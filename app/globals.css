@@ -559,6 +559,7 @@ body{color:var(--app-navy);background:#fff}
 .studentNav button.active,.subjectCard.selected{background:var(--app-card-light)!important;border-color:var(--app-card-light-border)!important;color:var(--app-orange-dark)}
 .rankingTabs button.sel{background:var(--app-card-dark)!important;border-color:var(--app-orange)!important;color:#fff!important;font-weight:900;box-shadow:0 0 0 2px #f59e0b2e}
 .subjectCard,.subjectCard:disabled{background:var(--app-card-light);border-color:var(--app-card-light-border)}
+.subjectCard.preparing{border-style:dashed}.subjectCard.preparing .subjectStatus{color:var(--app-orange-dark)}
 .focusTrack i,.pathLine.active{background:var(--app-orange)}
 .pathNode.done>span,.pathNode.current.complete>span{background:var(--app-card-light);border-color:var(--app-orange);color:var(--app-orange-dark)}
 .pathNode.next>span{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}

@@ -5,7 +5,7 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
-import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel} from "./data/subjects";
+import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -507,7 +507,7 @@ function SubjectSelection({s,setS,go}){
 
     <div className="subjectSelectionSummary">
       <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
-      <strong>Matemática A disponível</strong>
+      <strong>Matemática A disponível · Português em preparação</strong>
     </div>
 
     <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
@@ -519,7 +519,7 @@ function SubjectSelection({s,setS,go}){
           return <button
             type="button"
             key={subject.id}
-            className={`subjectCard ${isSelected?"selected":""} ${subject.available?"available":"coming"}`}
+            className={`subjectCard ${isSelected?"selected":""} ${subject.available?"available":subject.releaseStage==="foundation"?"preparing":"coming"}`}
             disabled={!subject.available}
             aria-pressed={subject.available?isSelected:undefined}
             onClick={()=>toggleSubject(subject)}
@@ -529,13 +529,13 @@ function SubjectSelection({s,setS,go}){
               <b>{subject.shortName||subject.name}</b>
               <small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small>
             </span>
-            <span className="subjectStatus">{subject.available?(isSelected?"✓ Selecionada":"Selecionar"):"Brevemente"}</span>
+            <span className="subjectStatus">{subjectStatusLabel(subject,isSelected)}</span>
           </button>;
         })}</div>
       </section>;
     })}</div>
 
-    <div className="notice"><b>Começamos por uma disciplina</b><span>Nesta versão, apenas Matemática A está disponível. As restantes aparecem para mostrar como a app crescerá, mas ainda não podem ser selecionadas.</span></div>
+    <div className="notice"><b>Começamos por Matemática A</b><span>Português já está em preparação, mas continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis.</span></div>
     <button className="primary" disabled={!selected.length} onClick={save}>Continuar com Matemática A</button>
   </Shell>;
 }
