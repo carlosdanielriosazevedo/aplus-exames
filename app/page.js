@@ -1644,15 +1644,18 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const [sel,setSel]=useState(draft?.sel??null);
   const [fb,setFb]=useState(draft?.fb??null);
   const [correct,setCorrect]=useState(draft?.correct||0);
+  const [earnedPoints,setEarnedPoints]=useState(draft?.earnedPoints||0);
+  const [hasIncomplete,setHasIncomplete]=useState(draft?.hasIncomplete||false);
   const [done,setDone]=useState(false);
   const q=questions[i];
+  const maxPoints=questions.reduce((sum,item)=>sum+(Number(item.points)||5),0);
 
   useEffect(()=>{if(draft)onRecovered()},[]);
 
   useEffect(()=>{
     if(done || !questions.length)return;
-    saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct});
-  },[cfg,questions,i,sel,fb,correct,done]);
+    saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete});
+  },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
   if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
 
@@ -1661,7 +1664,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   function next(){
     const was=fb?.correct===true;
     const newCorrect=correct+(was?1:0);
+    const newEarnedPoints=earnedPoints+(Number(fb?.points)||0);
+    const newHasIncomplete=hasIncomplete||fb?.reviewRequired===true;
     if(was)setCorrect(newCorrect);
+    setEarnedPoints(newEarnedPoints);
+    setHasIncomplete(newHasIncomplete);
     if(i===questions.length-1){
       if(completingRef.current)return;
       completingRef.current=true;
@@ -1677,12 +1684,12 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
       setS(prev=>{
         const sessions=[...(prev.betaSessions||[])];
         const openIdx=[...sessions].map(x=>x.kind==="training"&&!x.finishedAt).lastIndexOf(true);
-        if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length});
+        if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete});
         const base={
           ...prev,
           xp:prev.xp+newCorrect*10,
           betaSessions:sessions,
-          betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length})],
+          betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete})],
           freeTrainingSignals:potential?[
             ...(prev.freeTrainingSignals||[]).filter(x=>!(x.themeId===cfg.themeId && x.focus===cfg.focus && !x.confirmed)),
             {
@@ -1719,6 +1726,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
     return <Shell><div className="centered"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o treino concluído"/>
       <p className="eyebrow">TREINO CONCLUÍDO</p><h1>{correct}/{questions.length} totalmente corretas</h1>
+      <p className="muted"><b>{String(earnedPoints).replace(".",",")}/{maxPoints} pontos{hasIncomplete?" confirmados":""}</b>{hasIncomplete?" · avaliação incompleta":""}</p>
       <p className="muted">{theme(cfg.themeId).short} → {cfg.focus}</p></div>
       {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A app guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
       :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da app.</span></div>}

@@ -68,3 +68,6 @@ retain their existing questions until they receive purpose-built rubrics.
 No diagnostic selection changes. No unsupported answer is certified by the UI.
 Training with constructed practice does not produce automatic mastery-confirmation
 signals in this first release, since hints and partial results need a richer model.
+The completed Free Training summary now retains confirmed rubric points and flags
+incomplete automatic evaluation, instead of reducing a multi-step answer to a binary
+correct/incorrect count. XP remains activity-based and mastery remains unchanged.
