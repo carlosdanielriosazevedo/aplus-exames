@@ -97,6 +97,7 @@ function numericOptionValue(value){
   let text=normalizedOptionText(value)
     .replace(/^x\s*=\s*/i,"")
     .replace(/\s+/g,"")
+    .replace(/−/g,"-")
     .replace(",",".");
   const percentage=text.endsWith("%");
   if(percentage)text=text.slice(0,-1);
@@ -109,6 +110,12 @@ function numericOptionValue(value){
   }
   if(!Number.isFinite(numeric))return null;
   return percentage?numeric/100:numeric;
+}
+function declaredSolutionValue(solution){
+  const match=String(solution??"").match(
+    /(?:=>|⇒|logo|portanto)\s*(?:[A-Za-z][A-Za-z0-9()]*\s*=\s*)?([−+\-]?\d+(?:[,.]\d+)?(?:\/[−+\-]?\d+(?:[,.]\d+)?)?%?)\s*[.;]?$/i
+  );
+  return match?numericOptionValue(match[1]):null;
 }
 function equivalentNumericOptionPairs(options){
   const values=options.map(numericOptionValue);
@@ -126,6 +133,11 @@ assert.deepEqual(
   equivalentNumericOptionPairs(["3/28.","6/56.","0,2.","20%."]),
   [[0,1],[2,3]],
   "A auditoria deve detetar frações e percentagens equivalentes entre opções."
+);
+assert.equal(
+  declaredSolutionValue("0,65=0,3+0,7p =>p=0,5."),
+  0.5,
+  "A auditoria deve reconhecer o valor final declarado numa resolução."
 );
 function dependencyFlags(text){
   return CONTEXT_DEPENDENCY_PATTERNS
@@ -191,6 +203,11 @@ for(const file of files){
       if(equivalentPairs.length){
         blockers.push({file:rel,id:q.id,code:"equivalent_numeric_options",detail:equivalentPairs});
       }
+      const hasQuestionOption=q.o.some(option=>/\?\s*$/.test(String(option)));
+      const asksToChooseQuestion=/qual (?:destas|das) perguntas/i.test(String(q.q));
+      if(hasQuestionOption&&!asksToChooseQuestion){
+        blockers.push({file:rel,id:q.id,code:"malformed_option_punctuation"});
+      }
     }
 
     if(![0,1,2,3].includes(q.a))blockers.push({file:rel,id:q.id,code:"answer_index",detail:q.a});
@@ -215,6 +232,11 @@ for(const file of files){
     const correctOption=Array.isArray(q.o)&&[0,1,2,3].includes(q.a)?q.o[q.a]:null;
     if(correctOption&&normalizedTerminalText(q.sol)===normalizedTerminalText(correctOption)){
       warnings.push({file:rel,id:q.id,code:"solution_repeats_answer_only"});
+    }
+    const correctNumericValue=correctOption?numericOptionValue(correctOption):null;
+    const declaredNumericValue=declaredSolutionValue(q.sol);
+    if(correctNumericValue!==null&&declaredNumericValue!==null&&Math.abs(correctNumericValue-declaredNumericValue)>1e-9){
+      blockers.push({file:rel,id:q.id,code:"solution_answer_numeric_mismatch",detail:{correctOption,declaredNumericValue}});
     }
   }
 }
