@@ -7,7 +7,7 @@ export async function GET(){
   const db=await databaseHealth();
   return NextResponse.json({
     ok:true,
-    app:"A+ Exames",
+    app:"APProva+ Exames",
     version:"2.3.0",
     persistence:"local-first",
     backendConfigured:db.configured,

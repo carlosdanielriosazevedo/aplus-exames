@@ -1,4 +1,5 @@
 export const BRAND = {
-  name: "A+",
+  name: "APProva+",
+  mascot: "Apronso",
   descriptor: "Preparação inteligente para exames nacionais"
 };

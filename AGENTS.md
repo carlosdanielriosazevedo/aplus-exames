@@ -9,7 +9,7 @@ Core principle:
 > O aluno não deve ter de saber o que precisa de estudar. A app deve perceber isso por ele e indicar qual é a melhor próxima ação.
 
 Student experience principles:
-> A A+ pensa muito e mostra pouco.
+> A APProva+ pensa muito e mostra pouco.
 
 > Cada ecrã do aluno deve ter uma ação visualmente dominante.
 
@@ -175,6 +175,13 @@ Highest priority is a real Beta Candidate for secondary-school students:
 - trustworthy analytics;
 - no dead ends;
 - no fake production claims.
+
+
+## Explicit deferred product commitments
+These decisions were approved by the product owner and must remain visible in future planning.
+Do not silently drop them when reprioritizing the Beta Candidate.
+
+- **Animate Apronso contextually (pending):** create real mascot animations for idle/soft breathing and blinking, thinking, celebrating a correct answer, and celebrating completion. Motion must be short, meaningful and suitable for students aged 14–18, without making the experience feel childish or visually noisy. Keep assets lightweight on mobile and respect `prefers-reduced-motion`. Until those assets exist, restrained whole-image CSS motion may be used only as a temporary fallback.
 
 Do not pivot into schools, payments, full social networking, native mobile or multi-subject expansion unless explicitly requested.
 

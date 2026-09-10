@@ -476,15 +476,15 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "As soluções de x²−4=0 em C são...",
+      "q": "Em C, qual é o conjunto-solução da equação x²−4=0?",
       "o": [
-        "±2i.",
-        "±2.",
-        "2i apenas.",
-        "não existem."
+        "{−2i,2i}.",
+        "{−2,2}.",
+        "{2i}.",
+        "∅."
       ],
       "a": 1,
-      "sol": "O alargamento a C conserva as soluções reais.",
+      "sol": "x²−4=(x−2)(x+2)=0, logo x=−2 ou x=2. Portanto, S={−2,2}.",
       "hyp": "Pode inserir i desnecessariamente.",
       "contexts": [
         "mission",

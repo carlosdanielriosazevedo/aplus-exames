@@ -611,7 +611,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "Uma rotação em torno da origem preserva...",
+      "q": "Uma reflexão relativamente ao eixo Ox preserva...",
       "o": [
         "apenas a coordenada x.",
         "apenas áreas, não comprimentos.",
@@ -619,8 +619,8 @@
         "a orientação de todos os vetores para o eixo Ox."
       ],
       "a": 2,
-      "sol": "Rotações são isometrias.",
-      "hyp": "Pode pensar que coordenadas mudarem implica comprimentos mudarem.",
+      "sol": "Uma reflexão é uma isometria: preserva distâncias e amplitudes de ângulos, embora altere a orientação.",
+      "hyp": "Pode pensar que a mudança do sinal da coordenada y altera comprimentos ou amplitudes.",
       "contexts": [
         "mission",
         "training",

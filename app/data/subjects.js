@@ -9,13 +9,13 @@ export const SUBJECT_CATALOG_YEAR=2026;
 export const SUBJECT_CATALOG_SOURCE="https://iave.pt/provas-e-exames/calendario/";
 
 export const SECONDARY_EXAM_SUBJECTS=[
-  {id:"math-a",name:"Matemática A",codes:["635"],examYear:"12.º",group:"math-science",icon:"∑",available:true},
+  {id:"math-a",name:"Matemática A",codes:["635"],examYear:"12.º",group:"math-science",icon:"∑",available:true,releaseStage:"beta"},
   {id:"math-b",name:"Matemática B",codes:["735"],examYear:"11.º",group:"math-science",icon:"ƒ"},
   {id:"macs",name:"Matemática Aplicada às Ciências Sociais",shortName:"MACS",codes:["835"],examYear:"11.º",group:"math-science",icon:"%"},
   {id:"physics-chemistry-a",name:"Física e Química A",codes:["715"],examYear:"11.º",group:"math-science",icon:"⚛"},
   {id:"biology-geology",name:"Biologia e Geologia",codes:["702"],examYear:"11.º",group:"math-science",icon:"⌁"},
 
-  {id:"portuguese",name:"Português",codes:["639"],examYear:"12.º",group:"languages",icon:"Aa"},
+  {id:"portuguese",name:"Português",codes:["639"],examYear:"12.º",group:"languages",icon:"Aa",releaseStage:"foundation"},
   {id:"portuguese-second-language",name:"Português Língua Segunda",codes:["138"],examYear:"12.º",group:"languages",icon:"PT"},
   {id:"portuguese-non-native",name:"Português Língua Não Materna",shortName:"PLNM",codes:["839"],examYear:"12.º",group:"languages",icon:"PT"},
   {id:"portuguese-literature",name:"Literatura Portuguesa",codes:["734"],examYear:"11.º",group:"languages",icon:"Li"},
@@ -42,4 +42,10 @@ export const AVAILABLE_SUBJECT_IDS=SECONDARY_EXAM_SUBJECTS.filter(subject=>subje
 
 export function examCodesLabel(subject){
   return subject.codes.join(" / ");
+}
+
+export function subjectStatusLabel(subject,isSelected=false){
+  if(subject.available)return isSelected?"✓ Selecionada":"Selecionar";
+  if(subject.releaseStage==="foundation")return "Em preparação";
+  return "Brevemente";
 }

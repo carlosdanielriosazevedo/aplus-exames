@@ -457,7 +457,7 @@
         "6π."
       ],
       "a": 0,
-      "sol": "2π/3.",
+      "sol": "O período de cos(kx) é 2π/|k|; para k=3, obtém-se 2π/3.",
       "hyp": "Pode multiplicar por 3.",
       "contexts": [
         "mission",

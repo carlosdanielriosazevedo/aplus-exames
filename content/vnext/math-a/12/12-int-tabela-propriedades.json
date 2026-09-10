@@ -71,7 +71,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "∫5 dx=",
+      "q": "Qual é a expressão geral das primitivas da função constante f(x)=5?",
       "o": [
         "5+C.",
         "x⁵+C.",
@@ -98,7 +98,7 @@
       "year": "12.º opcional",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "∫x⁴ dx=",
+      "q": "Qual é a expressão geral das primitivas de f(x)=x⁴?",
       "o": [
         "4x³+C.",
         "x⁵+C.",
@@ -260,7 +260,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "∫√x dx=",
+      "q": "Qual é a expressão geral das primitivas de f(x)=√x?",
       "o": [
         "(3/2)x^{1/2}+C.",
         "(2/3)x^{3/2}+C.",

@@ -422,7 +422,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Os vetores (1,2) e (2,−1) são...",
+      "q": "Os vetores (2,3) e (3,−2) são...",
       "o": [
         "paralelos.",
         "iguais.",
@@ -430,7 +430,7 @@
         "perpendiculares."
       ],
       "a": 3,
-      "sol": "1×2+2×(−1)=0.",
+      "sol": "O produto escalar é 2×3+3×(−2)=6−6=0; logo, os vetores são perpendiculares.",
       "hyp": "Pode olhar apenas para componentes.",
       "contexts": [
         "mission",

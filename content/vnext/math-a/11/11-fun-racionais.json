@@ -44,16 +44,16 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "O domínio de f(x)=1/(x−2) é...",
+      "q": "O domínio de f(x)=1/(x+3) é...",
       "o": [
         "R.",
-        "R\\{2}.",
-        "R\\{−2}.",
-        "]2,+∞[."
+        "R\\{−3}.",
+        "R\\{3}.",
+        "]−3,+∞[."
       ],
       "a": 1,
-      "sol": "O denominador não pode ser zero.",
-      "hyp": "Pode trocar o sinal da exclusão.",
+      "sol": "O denominador não pode ser zero: x+3≠0, logo x≠−3 e D_f=R\\{−3}.",
+      "hyp": "Pode excluir 3 em vez de −3 ao resolver x+3=0.",
       "contexts": [
         "mission",
         "training",

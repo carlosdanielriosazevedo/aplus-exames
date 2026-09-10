@@ -98,7 +98,7 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Em geral, f∘g e g∘f...",
+      "q": "Se f(x)=x+1 e g(x)=2x, então f∘g e g∘f...",
       "o": [
         "são sempre iguais.",
         "só diferem por uma constante.",
@@ -106,8 +106,8 @@
         "não são iguais."
       ],
       "a": 3,
-      "sol": "A composição não é comutativa em geral.",
-      "hyp": "Pode transferir a comutatividade da soma/produto.",
+      "sol": "Tem-se (f∘g)(x)=2x+1 e (g∘f)(x)=2x+2; portanto, as composições não são iguais.",
+      "hyp": "Pode admitir que a composição é comutativa sem calcular as duas expressões.",
       "contexts": [
         "mission",
         "training",
@@ -125,16 +125,16 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Se f(x)=x² e g(x)=x+1, então (f∘g)(x)=",
+      "q": "Se f(x)=2x e g(x)=x−3, então (f∘g)(x)=",
       "o": [
-        "(x+1)².",
-        "x²+1.",
-        "x²+x.",
-        "x+1²."
+        "2x−6.",
+        "2x−3.",
+        "x−6.",
+        "2x+6."
       ],
       "a": 0,
-      "sol": "f(g(x))=(x+1)².",
-      "hyp": "Pode elevar apenas x ao quadrado.",
+      "sol": "Substituindo g(x) em f, obtém-se f(g(x))=2(x−3)=2x−6.",
+      "hyp": "Pode esquecer distribuir o fator 2 pelo termo −3.",
       "contexts": [
         "mission",
         "training",
@@ -179,16 +179,16 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "Para x pertencer ao domínio de f∘g, é necessário que...",
+      "q": "Se f(x)=√x e g(x)=x−2, qual é o domínio de f∘g?",
       "o": [
-        "x pertença apenas ao domínio de f.",
-        "f(x) pertença ao domínio de g.",
-        "x pertença ao domínio de g e g(x) pertença ao domínio de f.",
-        "x pertença aos dois domínios, sempre."
+        "]−∞,2].",
+        "R.",
+        "[2,+∞[.",
+        "]2,+∞[."
       ],
       "a": 2,
-      "sol": "A composição exige que g esteja definida em x e que a sua imagem seja admissível em f.",
-      "hyp": "Pode intersectar domínios mecanicamente.",
+      "sol": "(f∘g)(x)=√(x−2) exige x−2≥0; logo, o domínio é [2,+∞[.",
+      "hyp": "Pode impor x−2>0 e excluir incorretamente x=2, ou inverter a desigualdade.",
       "contexts": [
         "mission",
         "training",

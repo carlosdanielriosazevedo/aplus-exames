@@ -17,7 +17,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f'(x)>0 num intervalo, f e",
+      "q": "Sabe-se que f'(x)>0 para todo o x de ]−2,3[. Como varia f nesse intervalo?",
       "o": [
         "crescente nesse intervalo",
         "decrescente",
@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f'(x)<0 num intervalo, f e",
+      "q": "Sabe-se que f'(x)<0 para todo o x de ]1,5[. Como varia f nesse intervalo?",
       "o": [
         "crescente",
         "decrescente nesse intervalo",

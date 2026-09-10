@@ -9,6 +9,7 @@ import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curri
 import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../data/vnextMission.js";
+import {CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,miniExamPointSummary} from "./constructedResponse.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
   refreshHypothesisLifecycle,hypothesisNeedsInvestigation,hypothesisView
@@ -21,7 +22,7 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
 
 // O runtime recebe o piloto de treino e um extrato diagnóstico compacto. As
 // restantes perguntas vNext continuam no repositório editorial e fora do bundle.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS];
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
@@ -88,11 +89,11 @@ export function certaintyLabel(value,evidenceCount=1){
 }
 
 export function certaintyHelp(value,evidenceCount=1){
-  if(!evidenceCount)return "A A+ ainda não recolheu evidência suficiente nesta área.";
-  if(value>=85)return "A A+ já tem evidência muito consistente, variada e recente.";
-  if(value>=65)return "A A+ tem evidência consistente, embora continue a recalibrar.";
-  if(value>=40)return "Já existem alguns sinais, mas a A+ ainda quer confirmar melhor.";
-  return "A A+ ainda tem pouca evidência e deverá voltar a testar esta área.";
+  if(!evidenceCount)return "A app ainda não recolheu evidência suficiente nesta área.";
+  if(value>=85)return "A app já tem evidência muito consistente, variada e recente.";
+  if(value>=65)return "A app tem evidência consistente, embora continue a recalibrar.";
+  if(value>=40)return "Já existem alguns sinais, mas a app ainda quer confirmar melhor.";
+  return "A app ainda tem pouca evidência e deverá voltar a testar esta área.";
 }
 
 function signalFor(item,correct){
@@ -390,7 +391,7 @@ export function missionStopDecision({
     return {
       stop:true,code:"session_cap",
       title:"Sessão curta concluída",
-      detail:"A Missão atingiu o seu limite útil. A A+ prefere distribuir novas observações por dias diferentes."
+      detail:"A Missão atingiu o seu limite útil. A app prefere distribuir novas observações por dias diferentes."
     };
   }
   if(totalCount<DAILY_MISSION_MIN_INTERACTIONS)return {stop:false,code:"minimum_not_reached"};
@@ -399,7 +400,7 @@ export function missionStopDecision({
     return {
       stop:true,code:"time_budget_reached",
       title:"Sessão curta concluída",
-      detail:"A Missão atingiu aproximadamente cinco minutos de trabalho útil."
+      detail:null
     };
   }
 
@@ -407,7 +408,7 @@ export function missionStopDecision({
     return {
       stop:true,code:"calibration_session_complete",
       title:"Primeira sessão de calibração concluída",
-      detail:"Já existem observações úteis para começar o mapa. A A+ voltará a esta área noutras Missões."
+      detail:"Já existem observações úteis para começar o mapa. A app voltará a esta área noutras Missões."
     };
   }
 
@@ -473,19 +474,52 @@ export function shouldEndMission(args){
   return missionStopDecision(args).stop;
 }
 
-export function trainingQuestions(s,{themeId,focus,level},limit=4){
-  let curated=eligibleQuestions(s,themeId,"training",focus);
-  if(!curated.length)curated=eligibleQuestions(s,themeId,"training");
+// Reuse original checkpoints as practice; preserve source editorial restrictions.
+export function constructedPracticeQuestion(s,{themeId,focus,level="auto"},context="training"){
+  const mc=microcompetencyId(themeId,focus);
+  const cap={basic:1,mid:2,adv:3,challenge:4}[level]||4;
+  return CONSTRUCTED_RESPONSE_BANK.map(source=>effectiveEditorialItem(source,s.editorialOverrides||{}))
+    .filter(q=>q.themeId===themeId&&(!focus||(mc?q.microcompetencyId===mc:q.focus===focus))&&q.difficulty<=cap)
+    .map(q=>({...q,contexts:[...q.contexts,context],practiceOnly:true}))
+    .find(q=>isQuestionInAcademicScope(q,s.profile,context)&&isEligibleForContext(q,context,s.editorialOverrides||{},s.betaMode||"internal"))||null;
+}
+
+export function missionPracticeQuestion(s,plan,totalCount,usedIds=[]){
+  if(totalCount<3)return null;
+  const practice=constructedPracticeQuestion(s,{themeId:plan.themeId,focus:plan.focus},"mission");
+  return practice&&!usedIds.includes(practice.id)?practice:null;
+}
+
+export function trainingQuestions(s,{themeId,focus,level},limit=8){
+  const focusLabel=microcompetencyLabel(focus)||focus;
+  const selectedSubtopic=curriculumSubtopicForItem({
+    themeId,
+    microcompetencyId:microcompetencyId(themeId,focus)
+  });
+  const exactTraining=eligibleQuestions(s,themeId,"training",focus);
+  const sameSubtopicPractice=eligibleQuestions(s,themeId,"mission")
+    .filter(q=>selectedSubtopic&&curriculumSubtopicForItem(q)===selectedSubtopic);
+  const themeTraining=eligibleQuestions(s,themeId,"training");
+  const themePractice=eligibleQuestions(s,themeId,"mission");
+  let curated=[...new Map(
+    [...exactTraining,...sameSubtopicPractice,...themeTraining,...themePractice]
+      .map(q=>[q.id,q])
+  ).values()];
+  const exactIds=new Set(exactTraining.map(q=>q.id));
+  const sameSubtopicIds=new Set(sameSubtopicPractice.map(q=>q.id));
 
   const map={basic:1,mid:2,adv:3,challenge:4};
   const target=level==="auto"?desiredDifficulty(s.scores[themeId],s.goal):(map[level]||2);
 
   const generated=(s.betaMode||"internal")==="internal"?generateVariants({
     themeId,
-    focus,
+    focus:focusLabel,
     difficulty:target,
     count:Math.max(limit,5),
     salt:`training|${themeId}|${focus}|${level}|${Date.now()}`
+  }).map(q=>{
+    const generatedMicrocompetencyId=microcompetencyId(q.themeId,q.focus);
+    return {...q,microcompetencyId:generatedMicrocompetencyId,subtopicId:curriculumSubtopicForItem({...q,microcompetencyId:generatedMicrocompetencyId})};
   }):[];
 
   let candidates=[...generated,...curated];
@@ -507,6 +541,7 @@ export function trainingQuestions(s,{themeId,focus,level},limit=4){
   while(pool.length && selected.length<limit){
     pool.sort((a,b)=>{
       const score=q=>Math.abs(q.difficulty-target)*3
+        +(q.generated||exactIds.has(q.id)?0:sameSubtopicIds.has(q.id)?1:6)
         +(usedCog.has(q.cognitive)?1.5:0)
         +(usedSignatures.has(q.signature)?3.5:0)
         +(q.generated?0:0.25);
@@ -517,6 +552,8 @@ export function trainingQuestions(s,{themeId,focus,level},limit=4){
     usedCog.add(q.cognitive);
     usedSignatures.add(q.signature);
   }
+  const constructed=constructedPracticeQuestion(s,{themeId,focus,level});
+  if(constructed&&selected.length>=2)selected[selected.length-1]=constructed;
   return selected;
 }
 
@@ -839,7 +876,7 @@ export function seenQuestionIds(s){
 }
 
 function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds=new Set()){
-  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!usedSessionIds.has(q.id));
+  const all=eligibleQuestions(s,themeId,"exam").filter(q=>!q.response||q.response.type==="choice").filter(q=>!usedSessionIds.has(q.id));
   if(!all.length)return null;
   const unseen=all.filter(q=>!seenIds.has(q.id));
   const pool=unseen.length?unseen:all;
@@ -853,19 +890,21 @@ function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds
 }
 
 export function buildMiniExam(s,count=8){
+  const constructedTarget=count>=4?Math.min(2,count-2):0;
+  const choiceTarget=count-constructedTarget;
   const seen=seenQuestionIds(s);
   const usedCognitive=new Set();
   const usedSessionIds=new Set();
   const selected=[];
   const usedThemes=new Set();
   const scopedThemes=academicScopeThemes(s?.profile)
-    .filter(t=>eligibleQuestions(s,t.id,"exam").length);
+    .filter(t=>eligibleQuestions(s,t.id,"exam").some(q=>!q.response||q.response.type==="choice"));
 
   const availableYears=["10.º","11.º","12.º"].filter(year=>scopedThemes.some(t=>t.year===year));
   if(!availableYears.length)return [];
 
-  const base=Math.floor(count/availableYears.length);
-  let remainder=count%availableYears.length;
+  const base=Math.floor(choiceTarget/availableYears.length);
+  let remainder=choiceTarget%availableYears.length;
   const targets=availableYears.map(year=>({year,n:base+(remainder-->0?1:0)}));
 
   for(const group of targets){
@@ -876,7 +915,7 @@ export function buildMiniExam(s,count=8){
         return (b.relevance-a.relevance) || (ac-bc);
       });
     for(const t of candidates){
-      if(selected.length>=count)break;
+      if(selected.length>=choiceTarget)break;
       const inYear=selected.filter(q=>theme(q.themeId)?.year===group.year).length;
       if(inYear>=group.n)break;
       if(usedThemes.has(t.id))continue;
@@ -887,12 +926,12 @@ export function buildMiniExam(s,count=8){
     }
   }
 
-  if(selected.length<count){
+  if(selected.length<choiceTarget){
     const themes=scopedThemes
       .filter(t=>!usedThemes.has(t.id))
       .sort((a,b)=>b.relevance-a.relevance);
     for(const t of themes){
-      if(selected.length>=count)break;
+      if(selected.length>=choiceTarget)break;
       const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
       if(q){selected.push(q);usedThemes.add(t.id);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive)}
     }
@@ -901,23 +940,38 @@ export function buildMiniExam(s,count=8){
   // Um scope pode ter menos temas live do que questões pedidas. Repetimos
   // temas, nunca itens, em vez de saltar para matéria de um ano futuro.
   let progress=true;
-  while(selected.length<count && progress){
+  while(selected.length<choiceTarget && progress){
     progress=false;
     for(const t of [...scopedThemes].sort((a,b)=>b.relevance-a.relevance)){
-      if(selected.length>=count)break;
+      if(selected.length>=choiceTarget)break;
       const q=bestExamQuestionForTheme(s,t.id,seen,usedCognitive,usedSessionIds);
       if(!q)continue;
       selected.push(q);usedSessionIds.add(q.id);usedCognitive.add(q.cognitive);progress=true;
     }
   }
 
-  return selected.slice(0,count);
+  const constructed=CONSTRUCTED_RESPONSE_BANK
+    .filter(q=>isQuestionInAcademicScope(q,s?.profile,"exam"))
+    .filter(q=>isEligibleForContext(q,"exam",s?.editorialOverrides||{},s?.betaMode||"internal"))
+    .sort((a,b)=>{
+      const unseenA=seen.has(a.id)?1:0,unseenB=seen.has(b.id)?1:0;
+      const yearA=Number(theme(a.themeId)?.year?.slice(0,2))||0;
+      const yearB=Number(theme(b.themeId)?.year?.slice(0,2))||0;
+      return unseenA-unseenB||yearB-yearA||b.difficulty-a.difficulty;
+    })
+    .slice(0,constructedTarget);
+  const choices=selected.slice(0,choiceTarget).map(q=>({...q,response:{type:"choice"},points:5}));
+  const completion=COMPLETION_RESPONSE_BANK.find(q=>isQuestionInAcademicScope(q,s?.profile,"exam")&&isEligibleForContext(q,"exam",s?.editorialOverrides||{},s?.betaMode||"internal"));
+  const replaceIndex=completion?choices.findIndex(q=>q.themeId===completion.themeId):-1;
+  if(count>=4&&replaceIndex>=0)choices[replaceIndex]=completion;
+  if(constructed.length<constructedTarget)return choices;
+  const mixed=[...choices];
+  constructed.forEach((q,index)=>mixed.splice(index===0?Math.min(2,mixed.length):mixed.length,0,q));
+  return mixed.slice(0,count);
 }
 
 export function miniExamScore20(questions,answers){
-  if(!questions.length)return 0;
-  const correct=questions.reduce((n,q,i)=>n+(answers[i]===q.a?1:0),0);
-  return Math.round((correct/questions.length)*200)/10;
+  return miniExamPointSummary(questions,answers).score20;
 }
 
 export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
@@ -930,16 +984,19 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
   });
 
   const scores={...s.scores};
+  const pointSummary=miniExamPointSummary(questions,answers);
   questions.forEach((q,i)=>{
-    const answered=answers[i]!==null && answers[i]!==undefined;
-    const correct=answered && answers[i]===q.a;
+    const grade=gradeResponse(q,answers[i]);
+    // A partial or unverified resolution is not evidence of a wholly wrong answer.
+    if(grade.reviewRequired||grade.status==="partial")return;
+    const answered=grade.status!=="unanswered";
+    const correct=grade.correct;
     // Em prova, uma não-resposta conta para o resultado, mas recebe peso
     // pedagógico ligeiramente menor do que uma resposta explicitamente errada.
     scores[q.themeId]=applyEvidence(scores[q.themeId],q,correct,"exam",answered?1:.65);
   });
 
-  const correctCount=questions.reduce((n,q,i)=>n+(answers[i]===q.a?1:0),0);
-  const score20=miniExamScore20(questions,answers);
+  const {correctCount,score20,earnedPoints,maxPoints,results:itemResults}=pointSummary;
   const changes=Object.keys(before).map(themeId=>({
     themeId,
     before:before[themeId],
@@ -957,9 +1014,15 @@ export function applyMiniExam(s,questions,answers,elapsedSeconds=0){
     elapsedSeconds,
     questionIds:questions.map(q=>q.id),
     answers,
+    itemResults,
     correctCount,
     total:questions.length,
+    earnedPoints,
+    maxPoints,
     score20,
+    pendingPoints:pointSummary.pendingPoints,
+    reviewRequired:pointSummary.reviewRequired,
+    score20Upper:pointSummary.score20Upper,
     changes
   };
 
@@ -1126,9 +1189,9 @@ export function humanMissionReasons(t,s){
   }
 
   if(b.health?.contradictory){
-    rows.push({kind:"certainty",title:"Os sinais recentes não são totalmente consistentes",detail:"A A+ prefere voltar a medir antes de assumir que houve melhoria ou regressão."});
+    rows.push({kind:"certainty",title:"Os sinais recentes não são totalmente consistentes",detail:"A app prefere voltar a medir antes de assumir que houve melhoria ou regressão."});
   }else if((v.conf||0)<50){
-    rows.push({kind:"certainty",title:"A estimativa ainda precisa de confirmação",detail:`Certeza da A+: ${certaintyLabel(v.conf,v.evidence?.length||0)}.`});
+    rows.push({kind:"certainty",title:"A estimativa ainda precisa de confirmação",detail:`Certeza da app: ${certaintyLabel(v.conf,v.evidence?.length||0)}.`});
   }
 
   if(b.dependents.length){

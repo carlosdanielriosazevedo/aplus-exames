@@ -1,0 +1,218 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "sourcePolicy": "original-only",
+  "editorialStatus": "prototype",
+  "productionEligible": false,
+  "items": [
+    {
+      "id": "PT639-FND-001",
+      "year": "10.º",
+      "domain": "leitura",
+      "responseType": "multiple-choice",
+      "cognitive": "interpretar",
+      "stimulus": "Uma biblioteca municipal prolongou o horário até às vinte e duas horas, mas, no primeiro mês, a frequência quase não mudou. Um questionário revelou que muitos estudantes desconheciam a alteração. Depois de a biblioteca divulgar o novo horário nas escolas, o número de utilizadores ao fim da tarde duplicou. A medida não falhara; faltara torná-la conhecida.",
+      "prompt": "Qual é a conclusão central do texto?",
+      "options": [
+        "Os estudantes deixaram de frequentar bibliotecas municipais.",
+        "O horário anterior respondia melhor às necessidades dos estudantes.",
+        "Uma medida útil pode ter pouco efeito quando não é comunicada adequadamente.",
+        "Os questionários são a principal razão para aumentar a frequência de uma biblioteca."
+      ],
+      "answerIndex": 2,
+      "explanation": "A alteração produziu efeito quando passou a ser conhecida; o problema inicial era de comunicação, não da medida.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-002",
+      "year": "11.º",
+      "domain": "leitura",
+      "responseType": "multiple-choice",
+      "cognitive": "interpretar",
+      "stimulus": "Limitar o uso do telemóvel durante uma aula pode reduzir distrações, mas uma proibição isolada não ensina ninguém a gerir a atenção. A escola deve estabelecer regras claras e, ao mesmo tempo, explicar por que razão certos momentos exigem concentração prolongada.",
+      "prompt": "No texto, a palavra «mas» introduz",
+      "options": [
+        "uma causa que confirma totalmente a primeira ideia.",
+        "um contraste que limita o alcance da primeira ideia.",
+        "uma conclusão sem relação com a primeira ideia.",
+        "um exemplo que repete a primeira ideia."
+      ],
+      "answerIndex": 1,
+      "explanation": "O conector contrapõe à vantagem da limitação a insuficiência de uma proibição usada sem educação para a atenção.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-003",
+      "year": "12.º",
+      "domain": "leitura",
+      "responseType": "short-answer",
+      "cognitive": "reconhecer",
+      "stimulus": "A associação publicou ontem um relatório sobre os transportes locais. Este documento reúne dados recolhidos durante seis meses.",
+      "prompt": "Indica o referente da expressão «Este documento».",
+      "acceptedAnswers": ["o relatório","relatório","um relatório sobre os transportes locais","o relatório sobre os transportes locais"],
+      "explanation": "A expressão demonstrativa retoma «um relatório sobre os transportes locais».",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-004",
+      "year": "10.º",
+      "domain": "educacao-literaria",
+      "responseType": "multiple-choice",
+      "cognitive": "interpretar",
+      "stimulus": "Na gaveta dorme o mapa; / quando a janela se abre, / a estrada acorda devagar.",
+      "prompt": "O recurso expressivo dominante em «a estrada acorda» é",
+      "options": ["a comparação.","a personificação.","a hipérbole.","a enumeração."],
+      "answerIndex": 1,
+      "explanation": "Atribui-se à estrada uma ação própria de um ser animado: acordar.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-005",
+      "year": "11.º",
+      "domain": "educacao-literaria",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "A casa permanecia silenciosa. Só o relógio, teimoso, parecia discutir com a noite, repetindo a cada segundo que o tempo não esperava por ninguém.",
+      "prompt": "Explica de que modo o relógio contribui para o sentido do excerto. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {"id":"conteudo","label":"Relaciona a personificação do relógio com a passagem inevitável do tempo.","points":8},
+          {"id":"discurso","label":"Apresenta uma explicação coerente e diretamente apoiada no excerto.","points":3},
+          {"id":"lingua","label":"Escreve com correção linguística suficiente para não comprometer o sentido.","points":2}
+        ]
+      },
+      "referenceAnswer": "A personificação transforma o relógio numa presença insistente que quebra o silêncio da casa. A repetição dos segundos recorda que o tempo continua a avançar, independentemente da vontade das personagens, reforçando uma ideia de inevitabilidade.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {"min":40,"max":70}
+    },
+    {
+      "id": "PT639-FND-006",
+      "year": "12.º",
+      "domain": "educacao-literaria",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Guardei a tarde numa fotografia, / mas foi a fotografia que me guardou: / sempre que a encontro, volto a ser / quem já não sou.",
+      "prompt": "Interpreta a relação entre memória e identidade construída no poema. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {"id":"conteudo","label":"Explica que a fotografia preserva a memória e confronta o sujeito com uma identidade passada.","points":8},
+          {"id":"discurso","label":"Articula a interpretação com elementos concretos do poema.","points":3},
+          {"id":"lingua","label":"Escreve com correção linguística suficiente para não comprometer o sentido.","points":2}
+        ]
+      },
+      "referenceAnswer": "A fotografia conserva uma tarde passada, mas também conserva uma versão antiga do sujeito. Ao reencontrá-la, ele reconhece-se e, simultaneamente, percebe a distância entre aquilo que foi e aquilo que é, ligando a memória à transformação da identidade.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {"min":40,"max":70}
+    },
+    {
+      "id": "PT639-FND-007",
+      "year": "10.º",
+      "domain": "gramatica",
+      "responseType": "multiple-choice",
+      "cognitive": "reconhecer",
+      "stimulus": "Embora estivesse cansada, a aluna concluiu o trabalho.",
+      "prompt": "A oração «Embora estivesse cansada» é uma oração subordinada adverbial",
+      "options": ["causal.","concessiva.","condicional.","consecutiva."],
+      "answerIndex": 1,
+      "explanation": "A oração introduz uma circunstância que poderia impedir a ação, mas não a impede; tem valor concessivo.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-008",
+      "year": "11.º",
+      "domain": "gramatica",
+      "responseType": "short-answer",
+      "cognitive": "reconhecer",
+      "stimulus": "Os alunos disseram que entregariam o trabalho no dia seguinte.",
+      "prompt": "Classifica a oração «que entregariam o trabalho no dia seguinte».",
+      "acceptedAnswers": ["oração subordinada substantiva completiva","subordinada substantiva completiva","oração completiva","completiva"],
+      "explanation": "A oração é selecionada pelo verbo «disseram» e completa o seu sentido.",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-009",
+      "year": "12.º",
+      "domain": "gramatica",
+      "responseType": "short-answer",
+      "cognitive": "reconhecer",
+      "stimulus": "A diretora entregou-lhes os certificados no final da cerimónia.",
+      "prompt": "Indica a função sintática desempenhada pelo pronome «lhes».",
+      "acceptedAnswers": ["complemento indireto","complemento indirecto"],
+      "explanation": "O pronome substitui o destinatário introduzível por «a»: a diretora entregou os certificados aos alunos.",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-010",
+      "year": "10.º",
+      "domain": "escrita",
+      "responseType": "restricted-response",
+      "cognitive": "criar",
+      "stimulus": "Uma biblioteca pública oferece acesso a livros, informação, espaços de estudo e atividades culturais, mesmo a quem não pode comprar esses recursos.",
+      "prompt": "Explica a importância das bibliotecas públicas para uma comunidade. Escreve um texto de 80 a 120 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {"id":"conteudo","label":"Desenvolve pelo menos duas funções sociais relevantes das bibliotecas.","points":6},
+          {"id":"estrutura","label":"Organiza as ideias com progressão e ligação entre frases.","points":4},
+          {"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}
+        ]
+      },
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {"min":80,"max":120}
+    },
+    {
+      "id": "PT639-FND-011",
+      "year": "11.º",
+      "domain": "escrita",
+      "responseType": "restricted-response",
+      "cognitive": "criar",
+      "stimulus": "Há quem defenda que todas as tarefas escolares deveriam ser realizadas em formato digital. Outros lembram que escrever à mão pode favorecer a atenção e a memorização.",
+      "prompt": "Apresenta uma posição fundamentada sobre o uso exclusivo de meios digitais nas tarefas escolares. Escreve entre 100 e 150 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {"id":"argumentacao","label":"Formula uma posição clara e sustenta-a com razões pertinentes.","points":6},
+          {"id":"estrutura","label":"Organiza introdução, desenvolvimento e conclusão de forma proporcional.","points":4},
+          {"id":"lingua","label":"Usa conectores e linguagem adequada com correção.","points":3}
+        ]
+      },
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {"min":100,"max":150}
+    },
+    {
+      "id": "PT639-FND-012",
+      "year": "12.º",
+      "domain": "escrita",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Numa época em que quase tudo pode ser registado e partilhado, escolher o que não publicar também pode ser uma forma de liberdade.",
+      "prompt": "Escreve um texto de opinião bem estruturado, com 200 a 350 palavras, sobre a importância de preservar espaços de privacidade na vida contemporânea. Fundamenta o teu ponto de vista e inclui, pelo menos, um exemplo pertinente.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {"id":"genero-tema","label":"Cumpre o género solicitado e desenvolve o tema sem desvios relevantes.","points":10},
+          {"id":"coerencia","label":"Organiza o texto com progressão, coesão e parágrafos funcionais.","points":10},
+          {"id":"argumentacao","label":"Defende uma posição com argumentos e exemplo pertinentes.","points":10},
+          {"id":"correcao-linguistica","label":"Demonstra domínio lexical, sintático, ortográfico e de pontuação.","points":14}
+        ]
+      },
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {"min":200,"max":350}
+    }
+  ]
+}

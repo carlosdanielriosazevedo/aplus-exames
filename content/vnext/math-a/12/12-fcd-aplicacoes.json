@@ -862,7 +862,7 @@
         "e^{-x}(1−x)."
       ],
       "a": 3,
-      "sol": "Produto: e^{-x}−xe^{-x}.",
+      "sol": "Pela regra do produto, f'(x)=e^{-x}+x(−e^{-x})=e^{-x}−xe^{-x}=e^{-x}(1−x).",
       "hyp": "Pode esquecer a derivada de e^{-x}.",
       "contexts": [
         "mission",

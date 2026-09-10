@@ -781,7 +781,7 @@
         "3."
       ],
       "a": 0,
-      "sol": "4×3.",
+      "sol": "Pela regra do produto, existem 4×3=12 estados possíveis.",
       "hyp": "Pode somar atributos simultâneos.",
       "contexts": [
         "mission",

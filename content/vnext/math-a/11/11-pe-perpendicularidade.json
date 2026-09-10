@@ -341,16 +341,16 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Uma reta horizontal é perpendicular a...",
+      "q": "Qual das retas seguintes é perpendicular à reta de equação y=4?",
       "o": [
-        "uma reta vertical.",
-        "outra horizontal.",
-        "qualquer reta de declive 1.",
-        "nenhuma reta."
+        "x=2.",
+        "y=−1.",
+        "y=x.",
+        "y=4x."
       ],
       "a": 0,
-      "sol": "Horizontal e vertical formam ângulo reto.",
-      "hyp": "Pode tentar usar declive infinito como número.",
+      "sol": "A reta y=4 é horizontal; qualquer reta vertical, como x=2, é-lhe perpendicular.",
+      "hyp": "Pode escolher outra reta horizontal por confundir paralelismo com perpendicularidade.",
       "contexts": [
         "mission",
         "training",

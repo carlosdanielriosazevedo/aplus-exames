@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "3! é...",
+      "q": "Qual é o valor de 3!?",
       "o": [
         "3.",
         "9.",
@@ -98,7 +98,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "5! é...",
+      "q": "Qual é o valor de 5!?",
       "o": [
         "25.",
         "60.",
@@ -125,7 +125,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "1! é...",
+      "q": "Qual é o valor de 1!?",
       "o": [
         "1.",
         "0.",
@@ -152,7 +152,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "6! é...",
+      "q": "Qual é o valor de 6!?",
       "o": [
         "360.",
         "720.",

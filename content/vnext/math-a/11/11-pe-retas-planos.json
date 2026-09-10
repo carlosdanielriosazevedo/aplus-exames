@@ -125,7 +125,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
-      "q": "Dois planos são perpendiculares quando os seus vetores normais são...",
+      "q": "Os planos α e β têm vetores normais (1,0,1) e (1,0,−1). Como se classificam os planos?",
       "o": [
         "perpendiculares.",
         "paralelos.",
@@ -133,8 +133,8 @@
         "opostos."
       ],
       "a": 0,
-      "sol": "O ângulo diedro agudo entre os planos é o ângulo entre as normais.",
-      "hyp": "Pode trocar as condições de paralelismo e perpendicularidade.",
+      "sol": "O produto escalar das normais é 1×1+0×0+1×(−1)=0; por isso, os planos são perpendiculares.",
+      "hyp": "Pode olhar apenas para a primeira componente e concluir incorretamente que os planos são paralelos.",
       "contexts": [
         "mission",
         "training",
