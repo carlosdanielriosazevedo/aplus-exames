@@ -395,7 +395,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "k(A+B)=",
+      "q": "Qual das expressões é sempre igual a k(A+B), para matrizes A e B da mesma ordem?",
       "o": [
         "kA+B.",
         "A+kB.",
@@ -422,7 +422,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "(k+l)A=",
+      "q": "Qual das expressões é sempre igual a (k+l)A?",
       "o": [
         "klA.",
         "k(A+l).",
@@ -449,7 +449,7 @@
       "year": "12.º opcional",
       "difficulty": 2,
       "cognitive": "Compreensão",
-      "q": "k(lA)=",
+      "q": "Qual das expressões é sempre igual a k(lA)?",
       "o": [
         "(kl)A.",
         "(k+l)A.",
@@ -719,7 +719,7 @@
       "year": "12.º opcional",
       "difficulty": 3,
       "cognitive": "Compreensão",
-      "q": "(kA)^T=",
+      "q": "Qual das expressões é sempre igual à transposta de kA?",
       "o": [
         "−kA^T.",
         "A^T/k.",

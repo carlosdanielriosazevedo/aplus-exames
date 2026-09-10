@@ -6738,7 +6738,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensao",
     "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)<0 num intervalo, f e",
+    "q": "Sabe-se que f'(x)<0 para todo o x de ]1,5[. Como varia f nesse intervalo?",
     "o": [
       "crescente",
       "decrescente nesse intervalo",
@@ -8420,7 +8420,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Fatorial e contagens elementares",
-    "q": "6! é...",
+    "q": "Qual é o valor de 6!?",
     "o": [
       "360.",
       "720.",
@@ -8478,7 +8478,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Fatorial e contagens elementares",
-    "q": "1! é...",
+    "q": "Qual é o valor de 1!?",
     "o": [
       "1.",
       "0.",
@@ -9580,16 +9580,16 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Funções racionais",
-    "q": "O domínio de f(x)=1/(x−2) é...",
+    "q": "O domínio de f(x)=1/(x+3) é...",
     "o": [
       "R.",
-      "R\\{2}.",
-      "R\\{−2}.",
-      "]2,+∞[."
+      "R\\{−3}.",
+      "R\\{3}.",
+      "]−3,+∞[."
     ],
     "a": 1,
-    "sol": "O denominador não pode ser zero.",
-    "hyp": "Pode trocar o sinal da exclusão.",
+    "sol": "O denominador não pode ser zero: x+3≠0, logo x≠−3 e D_f=R\\{−3}.",
+    "hyp": "Pode excluir 3 em vez de −3 ao resolver x+3=0.",
     "contexts": [
       "mission"
     ],
@@ -10189,7 +10189,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Declive e inclinação",
-    "q": "Qual é o declive da reta que passa por (0,0) e (2,6)?",
+    "q": "Qual é o declive da reta que passa por (1,2) e (3,8)?",
     "o": [
       "2.",
       "3.",
@@ -10197,7 +10197,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "1/3."
     ],
     "a": 1,
-    "sol": "m=(6−0)/(2−0)=3.",
+    "sol": "m=(8−2)/(3−1)=6/2=3.",
     "hyp": "Pode usar Δx/Δy.",
     "contexts": [
       "mission"
@@ -14300,30 +14300,30 @@ export const VNEXT_MISSION_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "MS-VN12CPLX-OA-016",
+    "id": "MS-VN12CPLX-OA-013",
     "themeId": "12-cplx",
     "subtopicId": "12-cplx-operacoes-algebricas",
     "year": "12.º",
     "difficulty": 2,
-    "cognitive": "Compreensão",
+    "cognitive": "Aplicação",
     "focus": "Operações na forma algébrica",
-    "q": "Para dividir por c+di≠0, é útil multiplicar por...",
+    "q": "Qual é o resultado de desenvolver e simplificar (2+i)²?",
     "o": [
-      "o oposto −c−di.",
-      "i.",
-      "o módulo apenas.",
-      "o conjugado c−di."
+      "3+4i.",
+      "5+4i.",
+      "3+2i.",
+      "4+4i."
     ],
-    "a": 3,
-    "sol": "O produto com o conjugado torna o denominador real.",
-    "hyp": "Pode usar o oposto, que não elimina i.",
+    "a": 0,
+    "sol": "4+4i+i²=3+4i.",
+    "hyp": "Pode esquecer o termo cruzado.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-operacoes-algebricas:12-cplx-operacoes-algebricas:divisao-conjugado",
+    "signature": "mission:12-cplx-operacoes-algebricas:12-cplx-operacoes-algebricas:quadrado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12CPLX-OA-016",
+    "sourceQuestionId": "VN12CPLX-OA-013",
     "sourceFile": "content/vnext/math-a/12/12-cplx-operacoes-algebricas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -15322,20 +15322,20 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Função inversa e raízes",
-    "q": "Restringindo f(x)=x² a [0,+∞[, a inversa é...",
+    "q": "Sendo f(x)=x³, definida em R, qual é a expressão de f⁻¹(x)?",
     "o": [
-      "x².",
-      "−√x.",
-      "1/x².",
-      "√x."
+      "x³.",
+      "−∛x.",
+      "1/x³.",
+      "∛x."
     ],
     "a": 3,
-    "sol": "Em x≥0, y=x² equivale a x=√y.",
-    "hyp": "Pode manter as duas raízes±√x, o que não definiria uma função inversa.",
+    "sol": "A função cúbica é bijetiva em R. De y=x³ resulta x=∛y, logo f⁻¹(x)=∛x.",
+    "hyp": "Pode confundir a função inversa com o inverso multiplicativo 1/x³.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-inversa-raizes:12-expl-inversa-raizes:sqrt-8",
+    "signature": "mission:12-expl-inversa-raizes:12-expl-inversa-raizes:cubica-8",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-IR-008",
@@ -16076,7 +16076,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensão",
     "focus": "Função composta e domínio",
-    "q": "Em geral, f∘g e g∘f...",
+    "q": "Se f(x)=x+1 e g(x)=2x, então f∘g e g∘f...",
     "o": [
       "são sempre iguais.",
       "só diferem por uma constante.",
@@ -16084,8 +16084,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "não são iguais."
     ],
     "a": 3,
-    "sol": "A composição não é comutativa em geral.",
-    "hyp": "Pode transferir a comutatividade da soma/produto.",
+    "sol": "Tem-se (f∘g)(x)=2x+1 e (g∘f)(x)=2x+2; portanto, as composições não são iguais.",
+    "hyp": "Pode admitir que a composição é comutativa sem calcular as duas expressões.",
     "contexts": [
       "mission"
     ],
@@ -19288,59 +19288,59 @@ export const VNEXT_MISSION_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "MS-VN12INT-TP-013",
+    "id": "MS-VN12INT-TP-010",
     "themeId": "12-int",
     "subtopicId": "12-int-tabela-propriedades",
     "year": "12.º opcional",
     "difficulty": 2,
-    "cognitive": "Compreensão",
+    "cognitive": "Aplicação",
     "focus": "Primitivas imediatas e propriedades",
-    "q": "Se F é primitiva de f e G de g, então F−G é primitiva de...",
+    "q": "Qual é a expressão geral das primitivas de f(x)=√x?",
     "o": [
-      "f−g.",
-      "fg.",
-      "f/g.",
-      "f+g."
+      "(3/2)x^{1/2}+C.",
+      "(2/3)x^{3/2}+C.",
+      "2√x+C.",
+      "x^{3/2}+C."
     ],
-    "a": 0,
-    "sol": "Derivar F−G dá f−g.",
-    "hyp": "Pode confundir linearidade e produto.",
+    "a": 1,
+    "sol": "x^{1/2} integra para x^{3/2}/(3/2).",
+    "hyp": "Pode inverter 2/3.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-tabela-propriedades:12-int-tabela-propriedades:linearidade-diferenca",
+    "signature": "mission:12-int-tabela-propriedades:12-int-tabela-propriedades:raiz",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12INT-TP-013",
+    "sourceQuestionId": "VN12INT-TP-010",
     "sourceFile": "content/vnext/math-a/12/12-int-tabela-propriedades.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
-    "id": "MS-VN12INT-TP-003",
+    "id": "MS-VN12INT-TP-002",
     "themeId": "12-int",
     "subtopicId": "12-int-tabela-propriedades",
     "year": "12.º opcional",
     "difficulty": 1,
-    "cognitive": "Aplicação",
+    "cognitive": "Compreensão",
     "focus": "Primitivas imediatas e propriedades",
-    "q": "∫5 dx=",
+    "q": "Para constante k, ∫k f(x)dx=",
     "o": [
-      "5+C.",
-      "x⁵+C.",
-      "5x+C.",
-      "x/5+C."
+      "∫f(x)dx/k.",
+      "k∫f(x)dx.",
+      "k+∫f(x)dx.",
+      "∫f(kx)dx."
     ],
-    "a": 2,
-    "sol": "A primitiva de uma constante k é kx.",
-    "hyp": "Pode deixar a constante sem multiplicar por x.",
+    "a": 1,
+    "sol": "A constante pode ser colocada fora da integral.",
+    "hyp": "Pode alterar o argumento da função.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-tabela-propriedades:12-int-tabela-propriedades:constante",
+    "signature": "mission:12-int-tabela-propriedades:12-int-tabela-propriedades:linearidade-constante",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12INT-TP-003",
+    "sourceQuestionId": "VN12INT-TP-002",
     "sourceFile": "content/vnext/math-a/12/12-int-tabela-propriedades.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -19433,30 +19433,30 @@ export const VNEXT_MISSION_QUESTIONS=[
     "productionEligible": false
   },
   {
-    "id": "MS-VN12INT-TP-002",
+    "id": "MS-VN12INT-TP-003",
     "themeId": "12-int",
     "subtopicId": "12-int-tabela-propriedades",
     "year": "12.º opcional",
     "difficulty": 1,
-    "cognitive": "Compreensão",
+    "cognitive": "Aplicação",
     "focus": "Primitivas imediatas e propriedades",
-    "q": "Para constante k, ∫k f(x)dx=",
+    "q": "Qual é a expressão geral das primitivas da função constante f(x)=5?",
     "o": [
-      "∫f(x)dx/k.",
-      "k∫f(x)dx.",
-      "k+∫f(x)dx.",
-      "∫f(kx)dx."
+      "5+C.",
+      "x⁵+C.",
+      "5x+C.",
+      "x/5+C."
     ],
-    "a": 1,
-    "sol": "A constante pode ser colocada fora da integral.",
-    "hyp": "Pode alterar o argumento da função.",
+    "a": 2,
+    "sol": "A primitiva de uma constante k é kx.",
+    "hyp": "Pode deixar a constante sem multiplicar por x.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-tabela-propriedades:12-int-tabela-propriedades:linearidade-constante",
+    "signature": "mission:12-int-tabela-propriedades:12-int-tabela-propriedades:constante",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
-    "sourceQuestionId": "VN12INT-TP-002",
+    "sourceQuestionId": "VN12INT-TP-003",
     "sourceFile": "content/vnext/math-a/12/12-int-tabela-propriedades.json",
     "optionOrderVersion": 1,
     "productionEligible": false
@@ -20571,7 +20571,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Interpretação",
     "focus": "Transformações geométricas com matrizes",
-    "q": "Uma rotação em torno da origem preserva...",
+    "q": "Uma reflexão relativamente ao eixo Ox preserva...",
     "o": [
       "apenas a coordenada x.",
       "apenas áreas, não comprimentos.",
@@ -20579,8 +20579,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "a orientação de todos os vetores para o eixo Ox."
     ],
     "a": 2,
-    "sol": "Rotações são isometrias.",
-    "hyp": "Pode pensar que coordenadas mudarem implica comprimentos mudarem.",
+    "sol": "Uma reflexão é uma isometria: preserva distâncias e amplitudes de ângulos, embora altere a orientação.",
+    "hyp": "Pode pensar que a mudança do sinal da coordenada y altera comprimentos ou amplitudes.",
     "contexts": [
       "mission"
     ],
@@ -21387,7 +21387,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "5%.",
       "95%.",
-      "2,5%?",
+      "97,5%.",
       "2,5%."
     ],
     "a": 3,

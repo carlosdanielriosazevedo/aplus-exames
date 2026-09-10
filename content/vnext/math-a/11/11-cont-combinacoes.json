@@ -368,7 +368,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "C(9,2)=",
+      "q": "Quantos subconjuntos de 2 elementos se podem escolher de um conjunto com 9 elementos?",
       "o": [
         "72.",
         "36.",
@@ -395,7 +395,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "C(9,7)=",
+      "q": "Quantos grupos de 7 elementos se podem escolher de um conjunto com 9 elementos?",
       "o": [
         "72.",
         "84.",
@@ -530,7 +530,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "C(7,3)=",
+      "q": "Quantos grupos de 3 elementos se podem escolher de um conjunto com 7 elementos?",
       "o": [
         "21.",
         "210.",

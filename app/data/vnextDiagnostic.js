@@ -2021,7 +2021,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Compreensao",
     "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)>0 num intervalo, f e",
+    "q": "Sabe-se que f'(x)>0 para todo o x de ]−2,3[. Como varia f nesse intervalo?",
     "o": [
       "crescente nesse intervalo",
       "decrescente",
@@ -4931,16 +4931,16 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Aplicação",
     "focus": "Operações entre derivadas e regra da cadeia",
-    "q": "A derivada de x e^x é...",
+    "q": "Qual é a derivada de f(x)=x²e^x?",
     "o": [
-      "xe^x.",
-      "e^x(x+1).",
-      "e^{x+1}.",
-      "x e^{x−1}."
+      "2xe^x.",
+      "e^x(x²+2x).",
+      "x²e^{x−1}.",
+      "e^x(x²+2)."
     ],
     "a": 1,
-    "sol": "Produto:1·e^x+x·e^x.",
-    "hyp": "Pode derivar apenas um fator.",
+    "sol": "Pela regra do produto, f'(x)=2xe^x+x²e^x=e^x(x²+2x).",
+    "hyp": "Pode derivar apenas x² ou apenas e^x, omitindo um dos termos da regra do produto.",
     "contexts": [
       "diagnostic"
     ],

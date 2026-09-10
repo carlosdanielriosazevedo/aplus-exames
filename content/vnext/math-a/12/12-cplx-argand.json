@@ -1105,7 +1105,7 @@
         "uma circunferência."
       ],
       "a": 0,
-      "sol": "x=y.",
+      "sol": "Escrevendo z=x+iy, a condição Re(z)=Im(z) equivale a x=y, isto é, à reta y=x.",
       "hyp": "Pode trocar igualdade com oposição.",
       "contexts": [
         "mission",

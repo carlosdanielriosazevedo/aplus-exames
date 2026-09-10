@@ -98,7 +98,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensao",
-      "q": "Se f'(a)=0, a tangente e",
+      "q": "Num ponto de abcissa a, tem-se f'(a)=0. Qual é a posição da tangente relativamente ao eixo Ox?",
       "o": [
         "vertical",
         "sempre y=0",

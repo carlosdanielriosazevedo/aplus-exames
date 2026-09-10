@@ -341,7 +341,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "(2+i)²=",
+      "q": "Qual é o resultado de desenvolver e simplificar (2+i)²?",
       "o": [
         "3+4i.",
         "5+4i.",
@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "(3−i)²=",
+      "q": "Qual é o resultado de desenvolver e simplificar (3−i)²?",
       "o": [
         "10−6i.",
         "8−6i.",

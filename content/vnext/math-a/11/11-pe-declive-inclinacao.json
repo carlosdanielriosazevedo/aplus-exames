@@ -44,7 +44,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Qual é o declive da reta que passa por (0,0) e (2,6)?",
+      "q": "Qual é o declive da reta que passa por (1,2) e (3,8)?",
       "o": [
         "2.",
         "3.",
@@ -52,7 +52,7 @@
         "1/3."
       ],
       "a": 1,
-      "sol": "m=(6−0)/(2−0)=3.",
+      "sol": "m=(8−2)/(3−1)=6/2=3.",
       "hyp": "Pode usar Δx/Δy.",
       "contexts": [
         "mission",
@@ -71,7 +71,7 @@
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "Qual é o declive da reta que passa por (1,4) e (3,0)?",
+      "q": "Qual é o declive da reta que passa por (−1,5) e (2,−1)?",
       "o": [
         "2.",
         "−1/2.",
@@ -79,7 +79,7 @@
         "1/2."
       ],
       "a": 2,
-      "sol": "m=(0−4)/(3−1)=−2.",
+      "sol": "m=(−1−5)/(2−(−1))=−6/3=−2.",
       "hyp": "Pode perder o sinal negativo.",
       "contexts": [
         "mission",
@@ -449,15 +449,15 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Uma reta de declive −3 é perpendicular a uma de declive...",
+      "q": "Uma reta de declive −4 é perpendicular a uma reta de declive...",
       "o": [
-        "1/3.",
-        "−1/3.",
-        "3.",
-        "−3."
+        "1/4.",
+        "−1/4.",
+        "4.",
+        "−4."
       ],
       "a": 0,
-      "sol": "(−3)(1/3)=−1.",
+      "sol": "Os declives de retas perpendiculares têm produto −1: (−4)(1/4)=−1.",
       "hyp": "Pode perder a troca de sinal.",
       "contexts": [
         "mission",

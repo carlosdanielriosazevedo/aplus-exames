@@ -78,6 +78,55 @@ function duplicateValues(values){
   }
   return [...dups];
 }
+function normalizedTerminalText(value){
+  return String(value??"")
+    .normalize("NFKC")
+    .toLocaleLowerCase("pt-PT")
+    .replace(/[.?…]+$/g,"")
+    .replace(/\s+/g," ")
+    .trim();
+}
+function normalizedOptionText(value){
+  return String(value??"")
+    .normalize("NFKC")
+    .replace(/[.?…]+$/g,"")
+    .replace(/\s+/g," ")
+    .trim();
+}
+function numericOptionValue(value){
+  let text=normalizedOptionText(value)
+    .replace(/^x\s*=\s*/i,"")
+    .replace(/\s+/g,"")
+    .replace(",",".");
+  const percentage=text.endsWith("%");
+  if(percentage)text=text.slice(0,-1);
+  let numeric=null;
+  if(/^[-+]?\d+(?:\.\d+)?$/.test(text)){
+    numeric=Number(text);
+  }else{
+    const fraction=text.match(/^([-+]?\d+(?:\.\d+)?)\/([-+]?\d+(?:\.\d+)?)$/);
+    if(fraction&&Number(fraction[2])!==0)numeric=Number(fraction[1])/Number(fraction[2]);
+  }
+  if(!Number.isFinite(numeric))return null;
+  return percentage?numeric/100:numeric;
+}
+function equivalentNumericOptionPairs(options){
+  const values=options.map(numericOptionValue);
+  const pairs=[];
+  for(let left=0;left<values.length;left++){
+    for(let right=left+1;right<values.length;right++){
+      if(values[left]!==null&&values[right]!==null&&Math.abs(values[left]-values[right])<1e-12){
+        pairs.push([left,right]);
+      }
+    }
+  }
+  return pairs;
+}
+assert.deepEqual(
+  equivalentNumericOptionPairs(["3/28.","6/56.","0,2.","20%."]),
+  [[0,1],[2,3]],
+  "A auditoria deve detetar frações e percentagens equivalentes entre opções."
+);
 function dependencyFlags(text){
   return CONTEXT_DEPENDENCY_PATTERNS
     .filter(re=>re.test(String(text||"")))
@@ -135,6 +184,13 @@ for(const file of files){
       blockers.push({file:rel,id:q.id,code:"option_count",detail:Array.isArray(q.o)?q.o.length:"not_array"});
     }else if(new Set(q.o.map(String)).size!==4){
       blockers.push({file:rel,id:q.id,code:"duplicate_options"});
+    }else if(new Set(q.o.map(normalizedOptionText)).size!==4){
+      blockers.push({file:rel,id:q.id,code:"duplicate_options_normalized"});
+    }else{
+      const equivalentPairs=equivalentNumericOptionPairs(q.o);
+      if(equivalentPairs.length){
+        blockers.push({file:rel,id:q.id,code:"equivalent_numeric_options",detail:equivalentPairs});
+      }
     }
 
     if(![0,1,2,3].includes(q.a))blockers.push({file:rel,id:q.id,code:"answer_index",detail:q.a});
@@ -156,6 +212,10 @@ for(const file of files){
 
     if(String(q.q||"").trim().length<8)warnings.push({file:rel,id:q.id,code:"very_short_question"});
     if(String(q.sol||"").trim().length<5)warnings.push({file:rel,id:q.id,code:"very_short_solution"});
+    const correctOption=Array.isArray(q.o)&&[0,1,2,3].includes(q.a)?q.o[q.a]:null;
+    if(correctOption&&normalizedTerminalText(q.sol)===normalizedTerminalText(correctOption)){
+      warnings.push({file:rel,id:q.id,code:"solution_repeats_answer_only"});
+    }
   }
 }
 
@@ -172,7 +232,7 @@ for(const id of duplicateValues(allIds))blockers.push({code:"duplicate_id_global
 
 const normalized=new Map();
 for(const q of allQuestions){
-  const key=String(q.text||"").trim().replace(/\s+/g," ").toLocaleLowerCase("pt-PT");
+  const key=normalizedTerminalText(q.text);
   if(!key)continue;
   if(normalized.has(key)){
     warnings.push({code:"duplicate_question_global",detail:[normalized.get(key),q]});

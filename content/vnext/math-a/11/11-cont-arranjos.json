@@ -314,7 +314,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "A(7,2)=",
+      "q": "Quantas sequências ordenadas de 2 elementos distintos se podem formar a partir de 7 elementos?",
       "o": [
         "21.",
         "49.",
@@ -341,7 +341,7 @@
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "A(9,3)=",
+      "q": "Quantas sequências ordenadas de 3 elementos distintos se podem formar a partir de 9 elementos?",
       "o": [
         "504.",
         "84.",
