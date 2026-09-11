@@ -1,15 +1,18 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const mainPage=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
+const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
+const page=[welcome,mainPage,chrome].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const agents=readFileSync(new URL("../AGENTS.md",import.meta.url),"utf8");
 
 assert.match(agents,/A APProva\+ pensa muito e mostra pouco/);
 assert.match(agents,/Cada ecrã do aluno deve ter uma ação visualmente dominante/);
-assert.match(page,/const STUDENT_NAV=\[\["home","⌂","Aprender"\],\["train","◎","Treinar"\],\["ranking","△","Ranking"\],\["progress","◫","Progresso"\]\]/);
+assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","⌂","Aprender"\],\["train","◎","Treinar"\],\["ranking","△","Ranking"\],\["progress","◫","Progresso"\]\]/);
 assert.equal((page.match(/<StudentNav active=/g)||[]).length,4,"exactly four primary student surfaces need navigation");
-assert.doesNotMatch(page,/STUDENT_NAV[\s\S]{0,300}(?:Exames|Pais|Conta)/);
+assert.doesNotMatch(chrome,/STUDENT_NAV[\s\S]{0,300}(?:Exames|Pais|Conta)/);
 assert.match(page,/className="adaptivePath"/);
 assert.match(page,/MISSÃO DE HOJE/);
 assert.match(page,/const PRE_DIAGNOSTIC_TOUR_STEPS=\[[\s\S]*?PASSO 1 DE 2[\s\S]*?PASSO 2 DE 2[\s\S]*?\];/);
@@ -33,11 +36,11 @@ assert.match(diagnosticIntroSource,/Que matéria entra no diagnóstico\?[\s\S]*?
 assert.match(missionModalSource,/Matéria desta Missão:[\s\S]*?submatérias já lecionadas no teu ano[\s\S]*?matéria dos anos anteriores/);
 assert.doesNotMatch(curriculumPickerSource,/Diagnóstico, Missões e Mini-exames|<b>Treino Livre<\/b>/);
 assert.match(page,/function FriendsBetaRibbon\(\{s\}\)[\s\S]*?useEffect\(\(\)=>setQueryActive\(friendsBetaRequested\(window\.location\.search\)\),\[\]\)/);
-assert.match(page,/function Welcome\(\{s,setS,go\}\)\{\s*const requested=isFriendsBeta\(s\)/);
-assert.match(page,/PUBLIC_ENTRY_SEGMENTS\.map/);
-assert.match(page,/segment==="parent"\?"parent":"student"/);
-assert.match(page,/segment==="parent"\?"parent":"subjectOnboard"/);
-const welcomeSource=page.slice(page.indexOf("function Welcome("),page.indexOf("\nfunction SubjectSelection("));
+assert.match(welcome,/function Welcome\(\{s,\s*setS,\s*go\}\)[\s\S]*?const friends = isFriendsBeta\(s\)/);
+assert.match(welcome,/PUBLIC_ENTRY_SEGMENTS\.map/);
+assert.match(welcome,/segment === "parent" \? "parent" : "student"/);
+assert.match(welcome,/segment === "parent" \? "parent" : "subjectOnboard"/);
+const welcomeSource=welcome;
 assert.doesNotMatch(welcomeSource,/recent_student|observer/);
 assert.match(page,/friendsBetaInfo/);
 assert.match(page,/Informação do teste/);
