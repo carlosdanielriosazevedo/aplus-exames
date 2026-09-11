@@ -8,7 +8,7 @@ export async function GET(){
   return NextResponse.json({
     ok:true,
     app:"APProva+ Exames",
-    version:"2.3.0",
+    version:"5.5.0",
     persistence:"local-first",
     backendConfigured:db.configured,
     backendReachable:db.reachable,

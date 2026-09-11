@@ -3,6 +3,7 @@ import {readFileSync} from "node:fs";
 
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
 const mobileMarker="/* v5.6 — Beta Candidate mobile-first e legibilidade do fluxo do aluno */";
 const mobileCss=css.slice(css.indexOf(mobileMarker));
@@ -26,8 +27,8 @@ assert.match(css,/\.dailyMissionContent\{[^}]*overflow-y:auto/);
 assert.match(mobileCss,/\.dailyMissionActions\{[^}]*flex:0 0 auto/);
 assert.match(page,/className="dailyMissionActions"/);
 assert.doesNotMatch(page,/<section className="leagueMini"[^>]*onClick/);
-assert.match(page,/<nav className="studentNav" aria-label="Navegação principal">/);
-const studentNav=page.match(/<nav className="studentNav"[\s\S]*?<\/nav>/)?.[0]||"";
+assert.match(chrome,/<nav className="studentNav" aria-label="Navegação principal">/);
+const studentNav=chrome.match(/<nav className="studentNav"[\s\S]*?<\/nav>/)?.[0]||"";
 assert.match(studentNav,/<button type="button"/);
 assert.doesNotMatch(studentNav,/<(?:div|h[1-6]|p|section|article)\b/,"navigation button descendants must remain phrasing content");
 assert.match(mobileCss,/\.studentNav\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)[^}]*gap:2px/);

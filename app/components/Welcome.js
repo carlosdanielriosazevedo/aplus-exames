@@ -11,8 +11,7 @@ import {Logo,Apronso,BrandName} from "./chrome";
 // Ecrã inicial (Welcome), extraído de app/page.js. Depende de vários módulos
 // lib/*; mantém o mesmo comportamento, sem alterações de lógica.
 export function Welcome({s, setS, go}){
-  const requested = isFriendsBeta(s);
-  const friends = requested || isFriendsBeta(s);
+  const friends = isFriendsBeta(s);
   const savedSegment = currentTesterSegment(s);
   const [segment, setSegment] = useState(PUBLIC_ENTRY_SEGMENTS.includes(savedSegment) ? savedSegment : null);
 
@@ -46,7 +45,7 @@ export function Welcome({s, setS, go}){
       <div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div>
     </div>
     {friends ? <><p className="eyebrow">🧪 BETA PRIVADA · TESTE DE EXPERIÊNCIA</p>
-      <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está a ser revisto por professor, por isso não uses os resultados como avaliação real do teu nível.</span></div>
+      <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está em validação, por isso não uses os resultados como avaliação real do teu nível.</span></div>
       <div className="testerSegmentPicker"><b>Como vais usar a <BrandName/>?</b>
         <span>Escolhe o tipo de acesso para abrirmos a experiência certa.</span>
         <div>{PUBLIC_ENTRY_SEGMENTS.map(key => [key, TESTER_SEGMENTS[key]]).map(([key, item]) => <button key={key} className={segment === key ? "selected" : ""} onClick={() => setSegment(key)}>
