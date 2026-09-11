@@ -5,6 +5,8 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav} from "./components/chrome";
+import {Welcome} from "./components/Welcome";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -314,19 +316,6 @@ export default function App(){
   }}/>;
 }
 
-const BrandName=({className=""})=> <span className={`brandName ${className}`.trim()} aria-label="APProva+"><span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span></span>;
-const Logo=()=> <div className="logo"><BrandName/></div>;
-function Apronso({pose="welcome",className="",alt=""}){
-  return <img className={`apronso ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>;
-}
-function ApronsoNudge({pose="thinking",tone="light",children}){
-  return <aside className={`apronsoNudge ${tone}`}><Apronso pose={pose} alt=""/><p>{children}</p></aside>;
-}
-const Back=({go,to="home"})=> <button className="back" onClick={()=>go(to)}>← Voltar</button>;
-const STUDENT_NAV=[["home","⌂","Aprender"],["train","◎","Treinar"],["ranking","△","Ranking"],["progress","◫","Progresso"]];
-function StudentNav({active,go}){
-  return <nav className="studentNav" aria-label="Navegação principal">{STUDENT_NAV.map(([id,icon,label])=><button type="button" key={id} className={active===id?"active":""} aria-current={active===id?"page":undefined} onClick={()=>go(id)}><span aria-hidden="true">{icon}</span><b>{label}</b></button>)}</nav>;
-}
 function StudentTop({s,go,children}){
   const daily=engagementSummary(s);
   return <header className="studentTop"><Logo/><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
@@ -424,57 +413,6 @@ function CompetitionXpNote({s}){
 }
 
 const Shell=({children})=> <main className="light"><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
-
-function Welcome({s,setS,go}){
-  const requested=isFriendsBeta(s);
-  const friends=requested||isFriendsBeta(s);
-  const savedSegment=currentTesterSegment(s);
-  const [segment,setSegment]=useState(PUBLIC_ENTRY_SEGMENTS.includes(savedSegment)?savedSegment:null);
-
-  function start(){
-    if(friends){
-      if(!segment)return;
-      setS(prev=>{
-        const next={...markFriendsBetaConsent(prev,{segment}),identity:demoIdentity(segment==="parent"?"parent":"student")};
-        const already=(next.betaEvents||[]).some(e=>e.type==="friends_beta_started");
-        return already?next:{
-          ...next,
-          betaEvents:[...(next.betaEvents||[]),betaEvent("friends_beta_started",{
-            participantCode:next.betaParticipant?.code||null,
-            purpose:"ux_experience",
-            testerSegment:segment,
-            testerGroup:testerSegmentInfo(segment).group
-          })]
-        };
-      });
-    }
-    setS(prev=>recordMilestone(prev,"onboarding_started",{
-      testerSegment:friends?segment:null
-    }));
-    go(friends&&segment==="parent"?"parent":"subjectOnboard");
-  }
-
-  return <main className="dark center"><section className="hero">
-    <Logo/>
-    <div className="welcomeApronso">
-      <Apronso pose="welcome" alt="Apronso, a mascote da APProva+"/>
-      <div><small>OLÁ, EU SOU O APRONSO</small><b>O teu parceiro de estudo.</b><span>Vou ajudar-te a perceber o que estudar, explicar dificuldades e celebrar cada conquista.</span></div>
-    </div>
-    {friends?<><p className="eyebrow">🧪 BETA PRIVADA · TESTE DE EXPERIÊNCIA</p>
-      <div className="friendsWelcome"><b>Estás a ver uma versão ainda em construção.</b><span>Queremos perceber se a app é clara, útil e motivadora. O conteúdo ainda está a ser revisto por professor, por isso não uses os resultados como avaliação real do teu nível.</span></div>
-      <div className="testerSegmentPicker"><b>Como vais usar a <BrandName/>?</b>
-        <span>Escolhe o tipo de acesso para abrirmos a experiência certa.</span>
-        <div>{PUBLIC_ENTRY_SEGMENTS.map(key=>[key,TESTER_SEGMENTS[key]]).map(([key,item])=><button key={key} className={segment===key?"selected":""} onClick={()=>setSegment(key)}>
-          <strong>{item.label}</strong><small>{item.description}</small>
-        </button>)}</div>
-      </div>
-    </>:<p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>}
-    <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
-    <p>A <BrandName/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
-    <button disabled={friends&&!segment} onClick={start}>{friends?(segment?"Continuar →":"Escolhe primeiro o teu perfil"):"Descobrir o meu nível →"}</button>
-    <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends?"🧪 Feedback importante":"📈 Progresso real"}</span></div>
-  </section></main>
-}
 
 function SubjectSelection({s,setS,go}){
   const [selected,setSelected]=useState(()=>{
