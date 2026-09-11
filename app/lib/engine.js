@@ -9,6 +9,7 @@ import {CURRICULUM_SUBTOPIC_BY_ID,curriculumSubtopicForItem} from "../data/curri
 import {VNEXT_PILOT_QUESTIONS} from "../data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../data/vnextMission.js";
+import {VNEXT_EXAM_QUESTIONS} from "../data/vnextExam.js";
 import {CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK,gradeResponse,miniExamPointSummary} from "./constructedResponse.js";
 import {
   HYPOTHESIS_STATUS,applyHypothesisObservation,normalizeLearningHypothesis,
@@ -20,9 +21,9 @@ export const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{
   return acc;
 },{});
 
-// O runtime recebe o piloto de treino e um extrato diagnóstico compacto. As
-// restantes perguntas vNext continuam no repositório editorial e fora do bundle.
-export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
+// O runtime recebe os bancos vNext que alimentam os fluxos ativos da beta.
+// Os protótipos continuam bloqueados fora dos modos interno/amigos pela política editorial.
+export const RUNTIME_QUESTION_BANK=[...QUESTION_BANK,...VNEXT_PILOT_QUESTIONS,...VNEXT_DIAGNOSTIC_QUESTIONS,...VNEXT_MISSION_QUESTIONS,...VNEXT_EXAM_QUESTIONS,...CONSTRUCTED_RESPONSE_BANK,...COMPLETION_RESPONSE_BANK];
 export const questionById=id=>RUNTIME_QUESTION_BANK.find(q=>q.id===id)||null;
 
 export const theme=id=>TAXONOMY.find(t=>t.id===id);
