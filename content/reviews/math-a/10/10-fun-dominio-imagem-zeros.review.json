@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "year": "10.º",
+  "themeId": "10-fun",
+  "subtopicId": "10-fun-dominio-imagem-zeros",
+  "sourcePath": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+  "sourceBlobSha": "96b4ab19594dff63ea3c427a870ce6f0df44e486",
+  "reviewedAt": "2026-09-12",
+  "reviewType": "editorial_math_pass",
+  "status": "complete",
+  "criteria": [
+    "correção matemática",
+    "adequação ao foco da submatéria",
+    "clareza do enunciado",
+    "qualidade dos distratores",
+    "coerência entre resposta e resolução",
+    "hipótese de erro útil",
+    "dificuldade plausível",
+    "independência da questão"
+  ],
+  "summary": {
+    "questionsReviewed": 50,
+    "approved": 48,
+    "approvedWithOverride": 2,
+    "unresolved": 0
+  },
+  "decisions": [
+    {"id":"VN10FUN-DIZ-001","status":"approved"},
+    {"id":"VN10FUN-DIZ-002","status":"approved"},
+    {"id":"VN10FUN-DIZ-003","status":"approved"},
+    {"id":"VN10FUN-DIZ-004","status":"approved"},
+    {"id":"VN10FUN-DIZ-005","status":"approved"},
+    {"id":"VN10FUN-DIZ-006","status":"approved"},
+    {"id":"VN10FUN-DIZ-007","status":"approved"},
+    {"id":"VN10FUN-DIZ-008","status":"approved"},
+    {"id":"VN10FUN-DIZ-009","status":"approved"},
+    {"id":"VN10FUN-DIZ-010","status":"approved"},
+    {"id":"VN10FUN-DIZ-011","status":"approved"},
+    {"id":"VN10FUN-DIZ-012","status":"approved"},
+    {"id":"VN10FUN-DIZ-013","status":"approved"},
+    {"id":"VN10FUN-DIZ-014","status":"approved"},
+    {"id":"VN10FUN-DIZ-015","status":"approved"},
+    {"id":"VN10FUN-DIZ-016","status":"approved"},
+    {"id":"VN10FUN-DIZ-017","status":"approved"},
+    {"id":"VN10FUN-DIZ-018","status":"approved"},
+    {"id":"VN10FUN-DIZ-019","status":"approved"},
+    {"id":"VN10FUN-DIZ-020","status":"approved"},
+    {"id":"VN10FUN-DIZ-021","status":"approved"},
+    {"id":"VN10FUN-DIZ-022","status":"approved"},
+    {"id":"VN10FUN-DIZ-023","status":"approved"},
+    {"id":"VN10FUN-DIZ-024","status":"approved"},
+    {"id":"VN10FUN-DIZ-025","status":"approved"},
+    {"id":"VN10FUN-DIZ-026","status":"approved"},
+    {"id":"VN10FUN-DIZ-027","status":"approved"},
+    {"id":"VN10FUN-DIZ-028","status":"approved"},
+    {
+      "id":"VN10FUN-DIZ-029",
+      "status":"approved_with_override",
+      "rationale":"A opção correta anterior dizia «cruza ou toca» apesar de os dados apenas garantirem o ponto (2,0) e a mudança de sinal; a nova formulação evita sugerir uma propriedade geométrica não demonstrada sem hipótese de continuidade.",
+      "override": {
+        "o": [
+          "passa pelo ponto (2,0) e há mudança de sinal em x=2.",
+          "nunca encontra o eixo Ox.",
+          "tem zero em x=0.",
+          "é necessariamente crescente."
+        ],
+        "a": 0,
+        "sol": "Como f(2)=0, o ponto (2,0) pertence ao gráfico. Além disso, f é positiva à esquerda de 2 e negativa à direita de 2, logo há mudança de sinal em x=2.",
+        "hyp": "Pode confundir mudança de sinal com monotonia ou concluir propriedades de continuidade que não foram dadas."
+      }
+    },
+    {
+      "id":"VN10FUN-DIZ-030",
+      "status":"approved_with_override",
+      "rationale":"A resolução anterior introduzia multiplicidade par sem necessidade. O exemplo explícito torna a justificação autocontida e adequada ao nível.",
+      "override": {
+        "sol": "É possível tocar no eixo Ox sem mudar de sinal. Por exemplo, f(x)=(x−1)² é positiva para x≠1 e vale 0 em x=1.",
+        "hyp": "Pode pensar que todo zero obriga o gráfico a atravessar o eixo Ox ou a mudar de sinal."
+      }
+    },
+    {"id":"VN10FUN-DIZ-031","status":"approved"},
+    {"id":"VN10FUN-DIZ-032","status":"approved"},
+    {"id":"VN10FUN-DIZ-033","status":"approved"},
+    {"id":"VN10FUN-DIZ-034","status":"approved"},
+    {"id":"VN10FUN-DIZ-035","status":"approved"},
+    {"id":"VN10FUN-DIZ-036","status":"approved"},
+    {"id":"VN10FUN-DIZ-037","status":"approved"},
+    {"id":"VN10FUN-DIZ-038","status":"approved"},
+    {"id":"VN10FUN-DIZ-039","status":"approved"},
+    {"id":"VN10FUN-DIZ-040","status":"approved"},
+    {"id":"VN10FUN-DIZ-041","status":"approved"},
+    {"id":"VN10FUN-DIZ-042","status":"approved"},
+    {"id":"VN10FUN-DIZ-043","status":"approved"},
+    {"id":"VN10FUN-DIZ-044","status":"approved"},
+    {"id":"VN10FUN-DIZ-045","status":"approved"},
+    {"id":"VN10FUN-DIZ-046","status":"approved"},
+    {"id":"VN10FUN-DIZ-047","status":"approved"},
+    {"id":"VN10FUN-DIZ-048","status":"approved"},
+    {"id":"VN10FUN-DIZ-049","status":"approved"},
+    {"id":"VN10FUN-DIZ-050","status":"approved"}
+  ]
+}

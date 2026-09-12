@@ -7,7 +7,8 @@ const root=path.resolve(".");
 const mainPage=fs.readFileSync("app/page.js","utf8");
 const welcome=fs.readFileSync("app/components/Welcome.js","utf8");
 const chrome=fs.readFileSync("app/components/chrome.js","utf8");
-const page=[welcome,mainPage,chrome].join("\n");
+const reviewerDashboard=fs.readFileSync("app/components/ReviewerDashboard.js","utf8");
+const page=[welcome,mainPage,chrome,reviewerDashboard].join("\n");
 const pkg=JSON.parse(fs.readFileSync("package.json","utf8"));
 
 const forbidden=[

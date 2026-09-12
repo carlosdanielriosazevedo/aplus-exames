@@ -7,6 +7,7 @@ const checks=[
   ["Fundação de Português 639","npm",["run","portuguese-foundation:audit"]],
   ["IDs pedagógicos","npm",["run","competency-id:audit"]],
   ["Validação matemática","npm",["run","math-validation:audit"]],
+  ["Revisão editorial Matemática","npm",["run","math-editorial:audit"]],
   ["Engagement diário","npm",["run","engagement:audit"]],
   ["Rankings e divisões","npm",["run","competition:audit"]],
   ["Missão de Hoje","npm",["run","daily-mission:audit"]],
