@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "year": "10.º",
+  "reviewedAt": "2026-09-12",
+  "reviewType": "editorial_math_annual_pass",
+  "status": "complete",
+  "method": "assistant_editorial_pass_with_deterministic_audits",
+  "note": "Passagem editorial interna da APProva+. Não equivale a certificação por professor externo nem, por si só, desbloqueia produção comercial.",
+  "criteria": [
+    "correção matemática e consistência interna",
+    "adequação ao foco da submatéria",
+    "clareza e autonomia do enunciado",
+    "qualidade e unicidade dos distratores",
+    "coerência entre resposta e resolução",
+    "hipótese de erro útil",
+    "dificuldade plausível",
+    "linguagem PT-PT e ausência de pressupostos não declarados"
+  ],
+  "defaultDecision": "approved",
+  "sources": [
+    {"sourcePath":"content/vnext/math-a/10/10-ele-borda.json","sourceBlobSha":"c7f174f6671d8cb166fa21f5686beeabb5c60ae6"},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-dhondt.json","sourceBlobSha":"32fff79c48971e80333dd949d70ac267266c9dac"},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-majorias.json","sourceBlobSha":"4deb48a07c8017a6057d52b187d21f9a231d6505"},
+    {"sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json","sourceBlobSha":"219bc363256aeb490f12f17c83f507cec15c0ce0"},
+    {"sourcePath":"content/vnext/math-a/10/10-est-amostragem.json","sourceBlobSha":"7928f999899764b785491240b8bd3158ac44f862"},
+    {"sourcePath":"content/vnext/math-a/10/10-est-bivariados-regressao.json","sourceBlobSha":"d030b25f0768fc28f4f78b71e45172ef81e101e2"},
+    {"sourcePath":"content/vnext/math-a/10/10-est-dispersao.json","sourceBlobSha":"ad2370cdfc545b13ede54329f8f5049210f2994e"},
+    {"sourcePath":"content/vnext/math-a/10/10-est-localizacao.json","sourceBlobSha":"d53a448dab1865f7f848a54c059b8c1b0cd67cd4"},
+    {"sourcePath":"content/vnext/math-a/10/10-est-problema-pop-amostra.json","sourceBlobSha":"17a74cbec6cba01f9ef8cbc9ba9bb5a9c0db5124"},
+    {"sourcePath":"content/vnext/math-a/10/10-est-univariados-representacoes.json","sourceBlobSha":"59aed7296681abfd1dbf2f8da163102e6d2f6892"},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-bruto-liquido.json","sourceBlobSha":"40b030fa7ee06bb15f5f096153a3732069450ba3"},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-irs.json","sourceBlobSha":"7072db91a57083ab24331d78133fb30f6df8d9b8"},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-juro-composto-credito.json","sourceBlobSha":"686883ebe459821ff3b891943f1048fa90c5376d"},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-juro-simples.json","sourceBlobSha":"4e11f6f05dc0bfaeec93071f720345b2e3f01143"},
+    {"sourcePath":"content/vnext/math-a/10/10-fin-salarios.json","sourceBlobSha":"6a2851c4ff1185cd2805f74be3cc71cc7bdbef20"},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-afim.json","sourceBlobSha":"c1e675d9d4d218f52418aa1650f345ad1536f77a"},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-conceito-representacoes.json","sourceBlobSha":"18b904e0ddd519a0efd5bd18849c979bb0220fb2"},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-quadratica.json","sourceBlobSha":"285bea11abac54e55e077f3fc07bfc2f7d935ac2"},
+    {"sourcePath":"content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json","sourceBlobSha":"256c3f8952895c476af5c05fb2c4f0c51b6c12b3"},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-colinearidade-retas.json","sourceBlobSha":"5a229dbea42c020d7147dac94bf5979b5db79525"},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-coordenadas-transformacoes.json","sourceBlobSha":"87ada16ba3240eb9295c90e3a8a6dd450ed5f3af"},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-distancias-ponto-medio.json","sourceBlobSha":"66ebe96461a650a5764caee26fbb9655eba227e3"},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-espaco.json","sourceBlobSha":"9691c1e596fdd91a37b95e6ef8d1c006dc62b884"},
+    {"sourcePath":"content/vnext/math-a/10/10-ga-lugares-geometricos.json","sourceBlobSha":"ab964504323f234de4cc1b7c08319b1a93dba460"},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-baricentro-medianas.json","sourceBlobSha":"84e6b4b44c78748e02ab61a889fb8823b6d712cc"},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-circuncentro-incentro.json","sourceBlobSha":"94972ac030cc0b701bc59a585d57df38f701f316"},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-euler-nove-pontos.json","sourceBlobSha":"838703f65653818ce04f638e91866eb50be382a6"},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-ortocentro.json","sourceBlobSha":"c9a5d5217fccc0683c7e83217d5eae2da6a10a35"},
+    {"sourcePath":"content/vnext/math-a/10/10-gs-propriedades-construcoes.json","sourceBlobSha":"640d4d1690e2a2a2fda79fa2a3b5e33c771bddd4"}
+  ],
+  "overrides": [
+    {
+      "id":"VN10ELE-STL-023",
+      "sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json",
+      "status":"approved_with_override",
+      "rationale":"Com 500,400,200, o 4.º mandato de D'Hondt tem empate exato entre B/2 e C/1. Ajustar B para 410 remove a ambiguidade e preserva a comparação pedagógica pretendida.",
+      "override": {
+        "q":"Com A=500, B=410, C=200 e 4 mandatos, qual comparação é correta?",
+        "o":["D'Hondt: 2-1-1; St. Laguë: 2-2-0.","Ambos: 2-2-0.","D'Hondt: 2-2-0; St. Laguë: 2-1-1.","Ambos: 2-1-1."],
+        "a":2,
+        "sol":"D'Hondt seleciona 500(A), 410(B), 250(A) e 205(B), dando 2-2-0. St. Laguë seleciona 500(A), 410(B), 200(C) e 166,67...(A), dando 2-1-1.",
+        "hyp":"Pode não verificar empates exatos nos quocientes ou transferir automaticamente a distribuição de um método para o outro."
+      }
+    },
+    {
+      "id":"VN10ELE-STL-025",
+      "sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json",
+      "status":"approved_with_override",
+      "rationale":"No perfil original 600,400,300, D'Hondt tem empate no último lugar entre A/3 e B/2. A=610 elimina o empate sem alterar o objetivo didático.",
+      "override": {
+        "q":"Com 5 mandatos e votos A=610, B=400, C=300, qual é a comparação correta?",
+        "o":["D'Hondt: 3-1-1; St. Laguë: 2-2-1.","D'Hondt: 2-2-1; St. Laguë: 3-1-1.","Ambos: 3-1-1.","Ambos: 2-2-1."],
+        "a":0,
+        "sol":"D'Hondt seleciona 610(A), 400(B), 305(A), 300(C) e 203,33...(A), dando 3-1-1. St. Laguë seleciona 610(A), 400(B), 300(C), 203,33...(A) e 133,33...(B), dando 2-2-1.",
+        "hyp":"Pode ignorar um empate no quociente decisivo ou aplicar os divisores do método errado."
+      }
+    },
+    {
+      "id":"VN10ELE-STL-026",
+      "sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json",
+      "status":"approved_with_override",
+      "rationale":"No perfil original 600,500,400, D'Hondt tem empate no 6.º lugar entre A/3 e C/2. A=610 torna a resposta unívoca.",
+      "override": {
+        "q":"Com 6 mandatos e votos A=610, B=500, C=400, qual é a distribuição em cada método?",
+        "o":["D'Hondt 2-2-2; St. Laguë 3-2-1.","D'Hondt 3-2-1; St. Laguë 2-2-2.","Ambos 3-2-1.","Ambos 2-2-2."],
+        "a":1,
+        "sol":"D'Hondt seleciona 610(A), 500(B), 400(C), 305(A), 250(B) e 203,33...(A), dando 3-2-1. St. Laguë seleciona 610(A), 500(B), 400(C), 203,33...(A), 166,67...(B) e 133,33...(C), dando 2-2-2.",
+        "hyp":"Pode não detetar um empate no último quociente ou assumir que métodos diferentes dão sempre a mesma partilha."
+      }
+    },
+    {
+      "id":"VN10ELE-STL-043",
+      "sourcePath":"content/vnext/math-a/10/10-ele-stlague-comparacao.json",
+      "status":"approved_with_override",
+      "rationale":"A versão original dependia do «mesmo caso» e repetia o empate de D'Hondt do perfil 500,400,200. O novo enunciado é autocontido e unívoco.",
+      "override": {
+        "q":"Uma cooperativa tem grupos com 500, 410 e 200 votos e vai distribuir 4 lugares. Se usar D'Hondt em vez de St. Laguë, qual é a diferença?",
+        "o":["A perderia um lugar para C.","Nada mudaria.","C perderia o seu lugar e B passaria de 1 para 2; A manteria 2.","B perderia um lugar para A."],
+        "a":2,
+        "sol":"St. Laguë dá 2-1-1; D'Hondt dá 2-2-0. Assim, relativamente a St. Laguë, C perde um lugar e B ganha um, mantendo A dois lugares.",
+        "hyp":"Pode depender de um exemplo anterior ou não recalcular os quocientes concretos de cada método."
+      }
+    },
+    {
+      "id":"VN10EST-AMO-019",
+      "sourcePath":"content/vnext/math-a/10/10-est-amostragem.json",
+      "status":"approved_with_override",
+      "rationale":"Correção linguística em PT-PT: «inquiri» é forma verbal inadequada neste enunciado; deve ser «inquire».",
+      "override": {
+        "q":"Uma cidade seleciona aleatoriamente 5 escolas e inquire todos os alunos dessas 5 escolas. Isto aproxima-se de..."
+      }
+    }
+  ]
+}
