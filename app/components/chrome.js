@@ -1,5 +1,8 @@
 // Componentes de apresentação extraídos de app/page.js (sem estado próprio,
 // sem lógica de negócio). Primeiro passo de divisão do monólito.
+import {useState, useEffect} from "react";
+import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
+
 export const BrandName = ({className=""}) => (
   <span className={`brandName ${className}`.trim()} aria-label="APProva+">
     <span className="brandAP">AP</span><span className="brandProva">Prova</span><span className="brandPlus">+</span>
@@ -31,3 +34,13 @@ export function StudentNav({active, go}){
     </nav>
   );
 }
+
+export function FriendsBetaRibbon({s}){
+  const [queryActive, setQueryActive] = useState(false);
+  useEffect(() => setQueryActive(friendsBetaRequested(window.location.search)), []);
+  if(!(isFriendsBeta(s) || queryActive)) return null;
+  return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>;
+}
+
+export const Shell = ({children}) => <main className="light"><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
+
