@@ -35,7 +35,9 @@ assert.match(trainHubSource,/Mini-exame[\s\S]*?submatérias já lecionadas no te
 assert.match(diagnosticIntroSource,/Que matéria entra no diagnóstico\?[\s\S]*?submatérias que assinalaste como já lecionadas[\s\S]*?matéria dos anos anteriores/);
 assert.match(missionModalSource,/Matéria desta Missão:[\s\S]*?submatérias já lecionadas no teu ano[\s\S]*?matéria dos anos anteriores/);
 assert.doesNotMatch(curriculumPickerSource,/Diagnóstico, Missões e Mini-exames|<b>Treino Livre<\/b>/);
-assert.match(page,/function FriendsBetaRibbon\(\{s\}\)[\s\S]*?useEffect\(\(\)=>setQueryActive\(friendsBetaRequested\(window\.location\.search\)\),\[\]\)/);
+assert.match(chrome,/function FriendsBetaRibbon\(\{s\}\)/);
+assert.match(chrome,/friendsBetaRequested\(window\.location\.search\)/);
+assert.match(chrome,/isFriendsBeta\(s\)\s*\|\|\s*queryActive/);
 assert.match(welcome,/function Welcome\(\{s,\s*setS,\s*go\}\)[\s\S]*?const friends = isFriendsBeta\(s\)/);
 assert.match(welcome,/PUBLIC_ENTRY_SEGMENTS\.map/);
 assert.match(welcome,/segment === "parent" \? "parent" : "student"/);
