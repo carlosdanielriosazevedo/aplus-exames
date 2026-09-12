@@ -19,6 +19,7 @@
     "competency-id:audit": "node scripts/competency-id-audit.mjs",
     "friends-beta:audit": "node scripts/friends-beta-audit.mjs",
     "math-validation:audit": "node scripts/math-validation-audit.mjs",
+    "math-editorial:audit": "node scripts/math-editorial-review-audit.mjs",
     "engagement:audit": "node scripts/engagement-audit.mjs",
     "competition:audit": "node scripts/competition-audit.mjs",
     "daily-mission:audit": "node scripts/daily-mission-audit.mjs",
