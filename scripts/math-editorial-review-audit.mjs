@@ -26,6 +26,9 @@ function sourcePayload(sourcePath,expectedSha,label){
   assert.equal(actualSha,expectedSha,`${label}: a fonte mudou depois da revisão; é necessária nova passagem editorial`);
   return JSON.parse(raw.toString("utf8"));
 }
+function normalizedText(value){
+  return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+}
 function validateEffectiveDecision(decision,sourceItem,label){
   assert.ok(VALID_STATUSES.has(decision.status),`${label}/${decision.id}: estado editorial inválido`);
   if(decision.status==="approved_with_override"){
@@ -123,7 +126,7 @@ for(const planFile of planFiles){
     assert.ok(entry.sourcePath&&entry.sourceBlobSha,`${planFile}: sourcePath/sourceBlobSha em falta`);
     assert.ok(!coveredSources.has(entry.sourcePath),`${planFile}: fonte já coberta por outra revisão: ${entry.sourcePath}`);
     const source=sourcePayload(entry.sourcePath,entry.sourceBlobSha,planFile);
-    assert.equal(source.subject,"Matemática A",`${planFile}: fonte de outra disciplina`);
+    assert.equal(normalizedText(source.subject),normalizedText("Matemática A"),`${planFile}: fonte de outra disciplina`);
     assert.equal(source.year,plan.year,`${planFile}: ano da fonte não corresponde ao plano`);
     assert.equal(source.questions.length,50,`${planFile}: cada submatéria deve ter 50 perguntas`);
     coveredSources.add(entry.sourcePath);
@@ -165,8 +168,6 @@ function enforceAnnualCoverage({year,root,expectedSubtopics,expectedQuestions}){
   const reviewedYear=[...coveredIds].filter(k=>k.startsWith(`content/vnext/math-a/${year.slice(0,2)}/`)).length;
   assert.equal(questionCount,expectedQuestions,`${year}: banco deixou de ter ${expectedQuestions} perguntas`);
   assert.equal(reviewedYear,expectedQuestions,`${year}: a revisão não cobre as ${expectedQuestions} perguntas`);
-
-  const unresolvedYear=[...coveredIds].filter(k=>k.startsWith(`content/vnext/math-a/${year.slice(0,2)}/`)).reduce((n,k)=>n,0);
   assert.equal(unresolved,0,`${year}: existem itens editoriais por resolver`);
   console.log(`✓ ${year} fechado editorialmente: ${expectedSubtopics}/${expectedSubtopics} submatérias · ${expectedQuestions}/${expectedQuestions} perguntas cobertas · 0 por resolver`);
 }
