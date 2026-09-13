@@ -11,6 +11,7 @@
     "reliability:audit": "node scripts/reliability-audit.mjs",
     "diagnostic-recovery:audit": "node scripts/diagnostic-recovery-audit.mjs",
     "content:readiness": "node scripts/content-readiness.mjs",
+    "student-pilot:audit": "node scripts/student-pilot-readiness-audit.mjs",
     "review:roadmap": "node scripts/review-roadmap.mjs",
     "teacher-review:audit": "node scripts/teacher-review-audit.mjs",
     "teacher-review:pack": "node scripts/teacher-review-pack.mjs",
