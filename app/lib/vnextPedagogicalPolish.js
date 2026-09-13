@@ -76,14 +76,53 @@ function solutionGuide(item){
   return "Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido.";
 }
 
+function whyGuide(item){
+  const id=item.subtopicId||"";
+  const theme=item.themeId||"";
+  if(/dhondt|stlague/.test(id))return "Porquê: nestes métodos, são os quocientes ordenados — e não apenas os votos iniciais — que determinam a atribuição dos mandatos.";
+  if(/borda/.test(id))return "Porquê: no método de Borda, cada posição recebe uma pontuação definida; somar corretamente esses pontos é o que permite comparar as preferências globais.";
+  if(/maiorias/.test(id))return "Porquê: maioria simples compara os votos obtidos, enquanto maioria absoluta exige ultrapassar metade dos votos válidos; distinguir os dois critérios decide a conclusão.";
+  if(/amostragem|pop-amostra|inferencia|estimacao|intervalos|tlc/.test(id))return "Porquê: uma conclusão sobre a população só é justificável quando a informação da amostra é interpretada de acordo com o método de amostragem e com a incerteza associada.";
+  if(/regressao|dispersao|localizacao|univariados/.test(id))return "Porquê: a medida ou representação estatística escolhida tem de corresponder ao tipo de dados e ao aspeto que se pretende descrever; é essa correspondência que valida a interpretação.";
+  if(theme==="10-fin")return "Porquê: taxas, descontos e juros aplicam-se sempre a uma base concreta; identificar essa base e a ordem das operações evita aplicar percentagens ao valor errado.";
+  if(theme==="10-fun")return "Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.";
+  if(theme==="10-ga"||theme==="10-gs"||theme==="11-pe")return "Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.";
+  if(theme==="11-cd"||theme==="12-fcd")return "Porquê: a derivada mede a taxa de variação local; aplicar a regra de derivação adequada e interpretar o sinal ou o valor obtido liga o cálculo ao comportamento da função.";
+  if(theme==="11-cont")return "Porquê: numa contagem, a ordem e a possibilidade de repetição determinam o modelo correto; escolher o princípio, arranjo, permutação ou combinação adequado evita contar casos a mais ou a menos.";
+  if(theme==="11-fun")return "Porquê: operações, raízes e comportamento gráfico de funções obedecem às respetivas condições algébricas; confirmar essas condições é o que torna a conclusão válida.";
+  if(theme==="11-suc")return "Porquê: uma sucessão fica determinada pela sua lei de formação; identificar se o crescimento é aditivo, multiplicativo ou recorrente permite escolher a fórmula e interpretar o termo pedido.";
+  if(theme==="11-trig")return "Porquê: seno, cosseno e tangente dependem do ângulo e do quadrante; respeitar as identidades, o sinal e o domínio garante que a solução escolhida é compatível com o círculo trigonométrico.";
+  if(theme==="12-cplx")return "Porquê: nos números complexos, parte real, parte imaginária, módulo e argumento obedecem a relações próprias; manter essas componentes consistentes justifica a forma final obtida.";
+  if(theme==="12-expl")return "Porquê: exponenciais e logaritmos são funções inversas e têm condições de domínio específicas; usar essas propriedades permite transformar a expressão sem alterar o conjunto de soluções válido.";
+  if(theme==="12-fcont")return "Porquê: continuidade, limites e derivabilidade descrevem comportamentos locais relacionados mas distintos; verificar a condição certa no ponto em estudo é o que sustenta a conclusão.";
+  if(theme==="12-prob")return "Porquê: a probabilidade resulta do espaço de resultados, das condições impostas e das relações entre acontecimentos; organizar esses elementos antes de calcular evita misturar casos incompatíveis.";
+  if(theme==="12-rae")return "Porquê: os métodos numéricos aproximam raízes sob condições próprias; controlar o intervalo, a iteração e o erro é o que permite confiar na aproximação obtida.";
+  if(theme==="12-int")return "Porquê: primitivas e integrais ligam taxa de variação e acumulação; aplicar a propriedade adequada e respeitar os limites de integração dá significado ao valor calculado.";
+  if(theme==="12-mat")return "Porquê: as operações com matrizes dependem das dimensões e da ordem dos fatores; verificar compatibilidade e posição dos elementos é essencial para obter e interpretar o resultado correto.";
+  return "Porquê: a resposta correta não depende apenas do valor final; depende de aplicar a definição ou propriedade adequada aos dados e de verificar que a conclusão satisfaz todas as condições do enunciado.";
+}
+
+export function solutionPedagogicalSignals(item){
+  const text=String(item?.sol||"");
+  const compact=normalized(text);
+  const reasoning=/(porque|pois|logo|portanto|assim|dai|por isso|uma vez que|dado que|corresponde|implica|obtem-se|resulta|significa|equivale)/.test(compact);
+  const method=/(=|÷|×|\+|−|-|calcula|divide|multiplica|soma|subtrai|substitui|aplica|ordena|compara|simplifica|deriva|integra|resolve|fatora|conta|seleciona|determina|identifica|verifica)/.test(compact);
+  const conclusion=/(logo|portanto|assim|dai|resultado|opcao|conclui|obtem-se|fica|corresponde|temos|distribuicao|solucao)/.test(compact);
+  const explicitWhy=/(porquê:|porque|pois|uma vez que|dado que|por isso)/.test(compact);
+  return {length:compact.length,reasoning,method,conclusion,explicitWhy,score:[reasoning,method,conclusion,explicitWhy].filter(Boolean).length};
+}
+
 function enrichSolution(item,solution){
-  const base=sentence(solution);
-  if(!base)return base;
-  const compact=normalized(base);
-  if(compact.length>=42)return base;
+  let text=sentence(solution);
+  if(!text)return text;
   const answer=Array.isArray(item.o)&&Number.isInteger(item.a)?item.o[item.a]:null;
-  const confirmation=answer?` A opção obtida deve coincidir com “${typographicPolish(answer)}”.`:"";
-  return `${base} ${solutionGuide(item)}${confirmation}`;
+  if(normalized(text).length<42){
+    const confirmation=answer?` A opção obtida deve coincidir com “${typographicPolish(answer)}”.`:"";
+    text=`${text} ${solutionGuide(item)}${confirmation}`;
+  }
+  const sig=solutionPedagogicalSignals({...item,sol:text});
+  if(!sig.explicitWhy||sig.score<3||sig.length<80)text=`${text} ${whyGuide(item)}`;
+  return sentence(text);
 }
 
 export function polishVnextItem(item){
