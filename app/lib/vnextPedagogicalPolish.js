@@ -102,12 +102,19 @@ function whyGuide(item){
   return "Porquê: a resposta correta não depende apenas do valor final; depende de aplicar a definição ou propriedade adequada aos dados e de verificar que a conclusão satisfaz todas as condições do enunciado.";
 }
 
+function methodConclusionGuide(item){
+  const theme=item.themeId||"";
+  if(theme==="11-fun")return "Método: identifica a condição algébrica relevante — domínio, raiz, fatorização, operação ou comportamento gráfico —, aplica-a à expressão dada e compara com as condições do enunciado. Assim, a conclusão correta é a que satisfaz simultaneamente essas condições.";
+  if(theme==="12-rae")return "Método: verifica primeiro as condições do método numérico, executa a aproximação ou a partição pedida e compara o valor obtido com o intervalo ou erro admissível. Assim, a conclusão correta é a aproximação que respeita esse critério.";
+  return "Método: identifica a propriedade relevante, aplica-a aos dados do enunciado e verifica o resultado obtido. Assim, a conclusão fica justificada pelo procedimento e não apenas pelo valor final.";
+}
+
 export function solutionPedagogicalSignals(item){
   const text=String(item?.sol||"");
   const compact=normalized(text);
   const reasoning=/(porque|pois|logo|portanto|assim|dai|por isso|uma vez que|dado que|corresponde|implica|obtem-se|resulta|significa|equivale)/.test(compact);
-  const method=/(=|÷|×|\+|−|-|calcula|divide|multiplica|soma|subtrai|substitui|aplica|ordena|compara|simplifica|deriva|integra|resolve|fatora|conta|seleciona|determina|identifica|verifica)/.test(compact);
-  const conclusion=/(logo|portanto|assim|dai|resultado|opcao|conclui|obtem-se|fica|corresponde|temos|distribuicao|solucao)/.test(compact);
+  const method=/(=|÷|×|\+|−|-|calcula|divide|multiplica|soma|subtrai|substitui|aplica|ordena|compara|simplifica|deriva|integra|resolve|fatora|conta|seleciona|determina|identifica|verifica|metodo)/.test(compact);
+  const conclusion=/(logo|portanto|assim|dai|resultado|opcao|conclui|conclusao|obtem-se|fica|corresponde|temos|distribuicao|solucao)/.test(compact);
   const explicitWhy=/(porquê:|porque|pois|uma vez que|dado que|por isso)/.test(compact);
   return {length:compact.length,reasoning,method,conclusion,explicitWhy,score:[reasoning,method,conclusion,explicitWhy].filter(Boolean).length};
 }
@@ -120,8 +127,10 @@ function enrichSolution(item,solution){
     const confirmation=answer?` A opção obtida deve coincidir com “${typographicPolish(answer)}”.`:"";
     text=`${text} ${solutionGuide(item)}${confirmation}`;
   }
-  const sig=solutionPedagogicalSignals({...item,sol:text});
+  let sig=solutionPedagogicalSignals({...item,sol:text});
   if(!sig.explicitWhy||sig.score<3||sig.length<80)text=`${text} ${whyGuide(item)}`;
+  sig=solutionPedagogicalSignals({...item,sol:text});
+  if(sig.score<3)text=`${text} ${methodConclusionGuide(item)}`;
   return sentence(text);
 }
 
