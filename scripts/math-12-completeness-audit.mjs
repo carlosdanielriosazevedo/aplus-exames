@@ -5,8 +5,8 @@ import {createHash} from "node:crypto";
 
 const YEAR_ROOT=path.resolve("content/vnext/math-a/12");
 const PLAN_SPECS=[
-  {path:path.resolve("content/reviews/math-a/12/12-complete.review-plan.json"),year:"12.º",expectedSubtopics:35,expectedQuestions:1750},
-  {path:path.resolve("content/reviews/math-a/12/12-optional-complex.review-plan.json"),year:"12.º opcional",expectedSubtopics:12,expectedQuestions:600}
+  {path:path.resolve("content/reviews/math-a/12/12-complete.review-plan.json"),year:"12.º",expectedSubtopics:25,expectedQuestions:1250},
+  {path:path.resolve("content/reviews/math-a/12/12-optional-complex.review-plan.json"),year:"12.º opcional",expectedSubtopics:22,expectedQuestions:1100}
 ];
 const EXPECTED_SUBTOPICS=47;
 const EXPECTED_QUESTIONS=2350;
@@ -72,4 +72,4 @@ for(const {spec,plan} of plans){
 
 assert.equal(total,EXPECTED_QUESTIONS,"12.º ano: total de perguntas inesperado");
 assert.equal(ids.size,EXPECTED_QUESTIONS,"12.º ano: IDs únicos não totalizam 2350");
-console.log(`✓ 12.º ano fechado no gate interno: 35 regulares + 12 opcionais · ${EXPECTED_SUBTOPICS}/${EXPECTED_SUBTOPICS} submatérias · ${EXPECTED_QUESTIONS}/${EXPECTED_QUESTIONS} perguntas · 0 por resolver`);
+console.log(`✓ 12.º ano fechado no gate interno: 25 regulares + 22 opcionais · ${EXPECTED_SUBTOPICS}/${EXPECTED_SUBTOPICS} submatérias · ${EXPECTED_QUESTIONS}/${EXPECTED_QUESTIONS} perguntas · 0 por resolver`);
