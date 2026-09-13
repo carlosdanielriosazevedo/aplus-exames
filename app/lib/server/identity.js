@@ -1,5 +1,7 @@
-// APProva+ v2.4 — autorização server-side
-// NÃO é autenticação. Recebe uma identidade já autenticada e valida permissões da APProva+.
+// APProva+ — autorização server-side.
+//
+// Este módulo NÃO transforma identidade demo numa fronteira de segurança.
+// Só `auth_user_id` validado pelo fornecedor + RLS/servidor pode autorizar dados reais.
 
 const ROLE_CAPABILITIES={
   student:new Set(["study","progress","exams","manage_parent_link"]),
@@ -23,9 +25,18 @@ export function assertRoleCapability(role,capability){
 }
 
 export function authConfiguration(){
+  const authUrl=process.env.NEXT_PUBLIC_NEON_AUTH_URL||process.env.NEON_AUTH_URL||null;
+  const dataApiUrl=process.env.NEXT_PUBLIC_NEON_DATA_API_URL||null;
+  const serverSessionSecret=process.env.NEON_AUTH_COOKIE_SECRET||null;
+  const serverSessionEnforced=false; // só passa a true quando as rotas privadas validarem sessão no servidor.
   return {
-    configured:!!process.env.NEON_AUTH_URL,
     provider:"neon-auth",
-    strategy:"managed-auth-plus-app-rbac"
+    strategy:"managed-auth-plus-app-rbac",
+    authProviderConfigured:!!authUrl,
+    dataApiConfigured:!!dataApiUrl,
+    serverSessionConfigured:!!serverSessionSecret,
+    serverSessionEnforced,
+    rowLevelSecurityExpected:true,
+    realUserReady:!!authUrl && !!dataApiUrl && serverSessionEnforced
   };
 }
