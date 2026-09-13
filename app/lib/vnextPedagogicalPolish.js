@@ -55,6 +55,37 @@ function typographicPolish(value){
     .trim();
 }
 
+function sentence(value){
+  const text=typographicPolish(value);
+  if(!text)return text;
+  return /[.!?]$/.test(text)?text:`${text}.`;
+}
+
+function solutionGuide(item){
+  const subtopic=item.subtopicId||"";
+  if(subtopic==="11-cont-fatorial")return "Passo-chave: usa a definição e as propriedades do fatorial, simplificando fatores comuns antes de efetuar cálculos desnecessários.";
+  if(subtopic==="12-cplx-operacoes-algebricas")return "Passo-chave: trabalha separadamente as partes real e imaginária e, no fim, reúne o resultado na forma algébrica a+bi.";
+  if(subtopic.includes("prob")||subtopic.includes("combin"))return "Passo-chave: identifica primeiro o espaço de resultados e os casos favoráveis; só depois efetua a contagem ou calcula a probabilidade.";
+  if(subtopic.includes("deriv"))return "Passo-chave: identifica a regra de derivação adequada, calcula com cuidado e interpreta o valor obtido no contexto pedido.";
+  if(subtopic.includes("func")||subtopic.includes("graf"))return "Passo-chave: traduz os dados para propriedades da função ou do gráfico e verifica qual opção satisfaz simultaneamente essas condições.";
+  if(subtopic.includes("geo")||subtopic.includes("vet"))return "Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar.";
+  if(subtopic.includes("trig"))return "Passo-chave: escolhe a relação trigonométrica adequada, mantém o controlo dos sinais e confirma o resultado no domínio indicado.";
+  if(subtopic.includes("log")||subtopic.includes("exp"))return "Passo-chave: aplica as propriedades algébricas adequadas antes de isolar a incógnita e confirma as condições de existência.";
+  if(subtopic.includes("lim"))return "Passo-chave: analisa primeiro a forma do limite e só depois escolhe a transformação algébrica ou propriedade que permite calculá-lo.";
+  if(subtopic.includes("seq")||subtopic.includes("sucess"))return "Passo-chave: identifica a lei da sucessão e usa-a diretamente no termo ou propriedade pedido, verificando no fim a coerência do resultado.";
+  return "Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido.";
+}
+
+function enrichSolution(item,solution){
+  const base=sentence(solution);
+  if(!base)return base;
+  const compact=normalized(base);
+  if(compact.length>=42)return base;
+  const answer=Array.isArray(item.o)&&Number.isInteger(item.a)?item.o[item.a]:null;
+  const confirmation=answer?` A opção obtida deve coincidir com “${typographicPolish(answer)}”.`:"";
+  return `${base} ${solutionGuide(item)}${confirmation}`;
+}
+
 export function polishVnextItem(item){
   if(!item)return item;
   const sourceId=item.sourceQuestionId||item.id||"";
@@ -79,6 +110,7 @@ export function polishVnextItem(item){
     next.signature="12-cplx-operacoes-algebricas:modelacao-soma";
   }
 
+  next.sol=enrichSolution(next,next.sol);
   return next;
 }
 

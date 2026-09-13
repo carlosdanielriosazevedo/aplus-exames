@@ -32,6 +32,7 @@ const warnings=[];
 const blockers=[];
 let normalizedCognitive=0;
 let enrichedPrompts=0;
+let enrichedSolutions=0;
 let polishedMetadata=0;
 
 for(const file of files){
@@ -43,18 +44,19 @@ for(const file of files){
   const answers=[0,0,0,0];
   const templateCounts=new Map();
   let shortPromptCount=0;
-  let shortSolutionCount=0;
 
   for(const raw of items){
     const q=polishVnextItem(raw);
     if(q.cognitive!==raw.cognitive)normalizedCognitive++;
     if(q.q!==raw.q)enrichedPrompts++;
+    if(q.sol!==String(raw.sol||"").replace(/\s+/g," ").trim())enrichedSolutions++;
     if(q.hyp!==raw.hyp||q.signature!==raw.signature)polishedMetadata++;
     if(!q?.id||idSet.has(q.id))blockers.push(`${file}: ID ausente ou repetido (${q?.id||"sem ID"})`);
     idSet.add(q.id);
     if(!CANONICAL.has(q.cognitive))blockers.push(`${q.id}: categoria cognitiva não canónica (${q.cognitive||"em falta"})`);
     const p=cleanText(q.q);
     if(!p)blockers.push(`${q.id}: enunciado vazio`);
+    if(cleanText(q.sol).length<42)blockers.push(`${q.id}: resolução efetiva demasiado curta (${cleanText(q.sol).length} caracteres)`);
     const existing=exactPromptMap.get(p)||[];
     existing.push({id:q.id,file});
     exactPromptMap.set(p,existing);
@@ -64,7 +66,6 @@ for(const file of files){
     cognitives.set(String(q.cognitive??"?"),(cognitives.get(String(q.cognitive??"?"))||0)+1);
     if([0,1,2,3].includes(q.a))answers[q.a]++;
     if(cleanText(q.q).length<28)shortPromptCount++;
-    if(cleanText(q.sol).length<18)shortSolutionCount++;
     all.push({...q,__file:file,__subtopic:data.subtopic,__year:data.year});
   }
 
@@ -80,7 +81,6 @@ for(const file of files){
   if(difficultyCategories<2)localWarnings.push(`apenas ${difficultyCategories} nível de dificuldade`);
   if(maxAnswer>Math.ceil(items.length*0.45))localWarnings.push(`posição de resposta demasiado concentrada (${maxAnswer}/${items.length})`);
   if(shortPromptCount>Math.ceil(items.length*0.60))localWarnings.push(`${shortPromptCount}/${items.length} enunciados muito curtos`);
-  if(shortSolutionCount>Math.ceil(items.length*0.50))localWarnings.push(`${shortSolutionCount}/${items.length} resoluções muito curtas`);
   if(localWarnings.length)warnings.push({file,subtopic:data.subtopic,warnings:localWarnings});
 }
 
@@ -103,7 +103,7 @@ console.log("\n=== Passagem pedagógica transversal — Matemática A ===");
 console.log(`Banco: ${files.length} submatérias · ${all.length} perguntas`);
 console.log(`Duplicados exatos de enunciado: ${exactDuplicates.length} grupos`);
 console.log(`Submatérias com sinais de baixa variedade/calibração: ${warnings.length}`);
-console.log(`Correções efetivas: ${normalizedCognitive} etiquetas cognitivas normalizadas · ${enrichedPrompts} enunciados polidos · ${polishedMetadata} metadados corrigidos`);
+console.log(`Correções efetivas: ${normalizedCognitive} etiquetas cognitivas normalizadas · ${enrichedPrompts} enunciados polidos · ${enrichedSolutions} resoluções enriquecidas · ${polishedMetadata} metadados corrigidos`);
 console.log(`Distribuição de dificuldade: ${JSON.stringify(totalDifficulty)}`);
 console.log(`Distribuição cognitiva: ${JSON.stringify(totalCognitive)}`);
 console.log(`Posição das respostas A/B/C/D: ${totalAnswer.join("/")}`);
@@ -121,4 +121,4 @@ if(blockers.length){
   process.exit(1);
 }
 console.log("\nPEDAGOGICAL QUALITY GATE: GO estrutural");
-console.log("A análise usa a camada de polimento editorial efetiva: acentuação cognitiva canónica, enunciados menos telegráficos nas duas submatérias sinalizadas e metadados corrigidos.");
+console.log("A análise usa a camada de polimento editorial efetiva: acentuação cognitiva canónica, enunciados menos telegráficos, resoluções curtas enriquecidas com um passo-chave e metadados corrigidos.");
