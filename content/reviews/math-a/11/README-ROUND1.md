@@ -1,0 +1,1 @@
+Primeiro lote: `11-cd-derivada-ponto` (50 questões). Foram aprovadas 47 sem alterações e 3 com correções editoriais: interpretação rigorosa de derivada positiva num ponto, reformulação de «derivada muito positiva» e substituição da notação dx/df não definida por incrementos Δx/Δf.

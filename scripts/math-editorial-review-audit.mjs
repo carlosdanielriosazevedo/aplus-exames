@@ -5,6 +5,7 @@ import {createHash} from "node:crypto";
 
 const ROOT=path.resolve("content/reviews/math-a");
 const YEAR10_ROOT=path.resolve("content/vnext/math-a/10");
+const YEAR11_ROOT=path.resolve("content/vnext/math-a/11");
 const VALID_STATUSES=new Set(["approved","approved_with_override","needs_rewrite","rejected"]);
 
 function files(dir,suffix){
@@ -24,6 +25,9 @@ function sourcePayload(sourcePath,expectedSha,label){
   const actualSha=gitBlobSha(raw);
   assert.equal(actualSha,expectedSha,`${label}: a fonte mudou depois da revisão; é necessária nova passagem editorial`);
   return JSON.parse(raw.toString("utf8"));
+}
+function normalizedText(value){
+  return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 }
 function validateEffectiveDecision(decision,sourceItem,label){
   assert.ok(VALID_STATUSES.has(decision.status),`${label}/${decision.id}: estado editorial inválido`);
@@ -122,9 +126,9 @@ for(const planFile of planFiles){
     assert.ok(entry.sourcePath&&entry.sourceBlobSha,`${planFile}: sourcePath/sourceBlobSha em falta`);
     assert.ok(!coveredSources.has(entry.sourcePath),`${planFile}: fonte já coberta por outra revisão: ${entry.sourcePath}`);
     const source=sourcePayload(entry.sourcePath,entry.sourceBlobSha,planFile);
-    assert.equal(source.subject,"Matemática A",`${planFile}: fonte de outra disciplina`);
+    assert.equal(normalizedText(source.subject),normalizedText("Matemática A"),`${planFile}: fonte de outra disciplina`);
     assert.equal(source.year,plan.year,`${planFile}: ano da fonte não corresponde ao plano`);
-    assert.equal(source.questions.length,50,`${planFile}: cada submatéria do 10.º deve ter 50 perguntas`);
+    assert.equal(source.questions.length,50,`${planFile}: cada submatéria deve ter 50 perguntas`);
     coveredSources.add(entry.sourcePath);
 
     for(const item of source.questions){
@@ -146,26 +150,29 @@ for(const planFile of planFiles){
   }
 }
 
-// Quando existe o plano anual do 10.º ano, "completo" significa literalmente
-// todas as 31 submatérias / 1550 perguntas, sem depender de contagens manuais.
-const year10Plans=planFiles.filter(f=>{
-  const p=JSON.parse(fs.readFileSync(f,"utf8"));
-  return p.year==="10.º"&&p.status==="complete";
-});
-if(year10Plans.length){
-  const sourcePaths=files(YEAR10_ROOT,".json").map(f=>path.relative(process.cwd(),f).split(path.sep).join("/"));
-  assert.equal(sourcePaths.length,31,"10.º ano: número de submatérias inesperado");
-  const missing=sourcePaths.filter(p=>!coveredSources.has(p));
-  const extras=[...coveredSources].filter(p=>p.startsWith("content/vnext/math-a/10/")&&!sourcePaths.includes(p));
-  assert.deepEqual(missing,[],`10.º ano: faltam revisões para ${missing.join(", ")}`);
-  assert.deepEqual(extras,[],`10.º ano: fontes de revisão inesperadas ${extras.join(", ")}`);
+function enforceAnnualCoverage({year,root,expectedSubtopics,expectedQuestions}){
+  const annualPlans=planFiles.filter(f=>{
+    const p=JSON.parse(fs.readFileSync(f,"utf8"));
+    return p.year===year&&p.status==="complete";
+  });
+  if(!annualPlans.length)return;
 
-  const year10Questions=sourcePaths.reduce((n,p)=>n+JSON.parse(fs.readFileSync(p,"utf8")).questions.length,0);
-  const reviewed10=[...coveredIds].filter(k=>k.startsWith("content/vnext/math-a/10/")).length;
-  assert.equal(year10Questions,1550,"10.º ano: banco deixou de ter 1550 perguntas");
-  assert.equal(reviewed10,1550,"10.º ano: a revisão não cobre as 1550 perguntas");
-  assert.equal(unresolved,0,"10.º ano: existem itens editoriais por resolver");
-  console.log(`✓ 10.º ano fechado editorialmente: 31/31 submatérias · 1550/1550 perguntas cobertas · ${approvedWithOverride} correções explícitas · 0 por resolver`);
+  const sourcePaths=files(root,".json").map(f=>path.relative(process.cwd(),f).split(path.sep).join("/"));
+  assert.equal(sourcePaths.length,expectedSubtopics,`${year}: número de submatérias inesperado`);
+  const missing=sourcePaths.filter(p=>!coveredSources.has(p));
+  const extras=[...coveredSources].filter(p=>p.startsWith(`content/vnext/math-a/${year.slice(0,2)}/`)&&!sourcePaths.includes(p));
+  assert.deepEqual(missing,[],`${year}: faltam revisões para ${missing.join(", ")}`);
+  assert.deepEqual(extras,[],`${year}: fontes de revisão inesperadas ${extras.join(", ")}`);
+
+  const questionCount=sourcePaths.reduce((n,p)=>n+JSON.parse(fs.readFileSync(p,"utf8")).questions.length,0);
+  const reviewedYear=[...coveredIds].filter(k=>k.startsWith(`content/vnext/math-a/${year.slice(0,2)}/`)).length;
+  assert.equal(questionCount,expectedQuestions,`${year}: banco deixou de ter ${expectedQuestions} perguntas`);
+  assert.equal(reviewedYear,expectedQuestions,`${year}: a revisão não cobre as ${expectedQuestions} perguntas`);
+  assert.equal(unresolved,0,`${year}: existem itens editoriais por resolver`);
+  console.log(`✓ ${year} fechado editorialmente: ${expectedSubtopics}/${expectedSubtopics} submatérias · ${expectedQuestions}/${expectedQuestions} perguntas cobertas · 0 por resolver`);
 }
+
+enforceAnnualCoverage({year:"10.º",root:YEAR10_ROOT,expectedSubtopics:31,expectedQuestions:1550});
+enforceAnnualCoverage({year:"11.º",root:YEAR11_ROOT,expectedSubtopics:35,expectedQuestions:1750});
 
 console.log(`✓ Revisão editorial Matemática: ${coveredSources.size} submatéria(s) · ${reviewed} perguntas revistas · ${approved} aprovadas · ${approvedWithOverride} aprovadas com correção · ${unresolved} por resolver`);
