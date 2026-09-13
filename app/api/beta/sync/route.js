@@ -1,11 +1,21 @@
 import {NextResponse} from "next/server";
 import {ingestBetaEnvelope,validateSyncEnvelope} from "../../../lib/server/beta-ingest";
 import {databaseConfigured} from "../../../lib/server/db";
+import {authErrorResponse,requireSession} from "../../../lib/server/identity";
 
 export const runtime="nodejs";
+export const dynamic="force-dynamic";
 const MAX_BYTES=1_500_000;
 
 export async function POST(request){
+  let authenticated;
+  try{
+    authenticated=await requireSession();
+  }catch(error){
+    const failure=authErrorResponse(error);
+    return NextResponse.json(failure.body,{status:failure.status,headers:{"Cache-Control":"no-store"}});
+  }
+
   if(!databaseConfigured()){
     return NextResponse.json({
       ok:false,
@@ -27,9 +37,19 @@ export async function POST(request){
   const valid=validateSyncEnvelope(payload);
   if(!valid.ok)return NextResponse.json(valid,{status:400});
 
+  // Nunca confiar no código de participante enviado pelo browser como fronteira de identidade.
+  // A chave persistida é derivada exclusivamente da sessão validada pelo Neon Auth.
+  const authenticatedPayload={
+    ...payload,
+    participant:{
+      ...(payload.participant||{}),
+      code:`auth:${authenticated.authUserId}`
+    }
+  };
+
   try{
-    const result=await ingestBetaEnvelope(payload,raw);
-    return NextResponse.json(result,{status:result.ok?200:400});
+    const result=await ingestBetaEnvelope(authenticatedPayload,raw);
+    return NextResponse.json({...result,authBound:true},{status:result.ok?200:400});
   }catch(error){
     console.error("A+ beta sync failed",error);
     return NextResponse.json({
