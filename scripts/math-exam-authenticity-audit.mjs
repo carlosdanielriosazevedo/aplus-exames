@@ -10,19 +10,22 @@ const EXPECTED_FILES=113;
 const EXPECTED_QUESTIONS=5650;
 const EXPECTED_EXAM=339;
 
-function norm(v){return String(v||"").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase().replace(/\s+/g," ").trim();}
+function norm(v){return String(v||"").normalize("NFD").replace(/[\u0300\u0301\u0302\u0303\u0308\u0327]/g,"").toLowerCase().replace(/\s+/g," ").trim();}
 function pct(n,d){return d?100*n/d:0;}
 function signals(q){
   const prompt=String(q.q||"").trim();
   const p=norm(prompt);
   const opts=Array.isArray(q.o)?q.o.map(x=>String(x||"").trim()):[];
   const uniqueOpts=new Set(opts.map(norm));
-  const task=/\?|determina|calcula|resolve|indica|seleciona|identifica|qual|quais|quantos|como|compara|conclui|mostra|verifica|simplifica|escreve|estuda|analisa/.test(p);
-  const math=/\d|[=<>+−×÷√π]|\bf\(|\bp\(|\bsen\b|\bcos\b|\btg\b|\blog\b|\bln\b|\bvetor\b|\bmatriz\b|\bprobabilidade\b|\bderivad|\bfuncao\b|\bsucessao\b|\bcomplex/.test(p);
+  const completionStem=/\.\.\.$/.test(prompt);
+  const task=completionStem||/\?|determina|calcula|resolve|indica|seleciona|identifica|qual|quais|quantos|como|compara|conclui|mostra|verifica|simplifica|escreve|estuda|analisa/.test(p);
+  const focusMath=norm(q.focus).length>=4;
+  const explicitMath=/\d|[=<>+−×÷√π≠]|\bf\(|\bp\(|\bsen\b|\bcos\b|\btg\b|\blog\b|\bln\b|\bvetor\b|\bmatriz\b|\bprobabilidade\b|\bderivad|\bfuncao\b|\bsucessao\b|\bcomplex|\btriangulo\b|\breta\b|\bintegral\b|\bprimitiv/.test(p);
+  const math=explicitMath||focusMath;
   const depth=Number(q.difficulty)>=2||!/^compreensao$/i.test(norm(q.cognitive));
   const distractors=opts.length===4&&uniqueOpts.size===4&&opts.every(x=>norm(x).length>0)&&!opts.some(x=>/todas as anteriores|nenhuma das anteriores/.test(norm(x)));
   const examContext=Array.isArray(q.contexts)&&q.contexts.includes("exam");
-  const context=prompt.length>=38||math;
+  const context=prompt.length>=38||explicitMath||focusMath;
   return {prompt,p,opts,uniqueOpts,task,math,depth,distractors,examContext,context,score:[task,math,depth,distractors,examContext,context].filter(Boolean).length};
 }
 
