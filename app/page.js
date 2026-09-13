@@ -1562,14 +1562,14 @@ function Train({s,setS,go,start}){
 
 function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const completingRef=useRef(false);
-  if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
-  const draft=recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null);
+  const draft=cfg ? (recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null)) : null;
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
   const questions=useMemo(()=>{
+    if(!cfg)return [];
     const fresh=trainingQuestions(s,cfg,8);
     if(!draft?.questions?.length)return fresh;
     return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,8);
-  },[]);
+  },[cfg]);
   const [i,setI]=useState(draft?.i||0);
   const [sel,setSel]=useState(draft?.sel??null);
   const [fb,setFb]=useState(draft?.fb??null);
@@ -1583,10 +1583,11 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   useEffect(()=>{if(draft)onRecovered()},[]);
 
   useEffect(()=>{
-    if(done || !questions.length)return;
+    if(!cfg || done || !questions.length)return;
     saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete});
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
+  if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
   if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
