@@ -23,6 +23,7 @@
     "math-editorial:audit": "node scripts/math-editorial-review-audit.mjs && node scripts/math-12-completeness-audit.mjs",
     "math-pedagogical:audit": "node scripts/math-pedagogical-quality-audit.mjs",
     "math-solutions:audit": "node scripts/math-solution-quality-audit.mjs",
+    "math-exam:audit": "node scripts/math-exam-authenticity-audit.mjs",
     "engagement:audit": "node scripts/engagement-audit.mjs",
     "competition:audit": "node scripts/competition-audit.mjs",
     "daily-mission:audit": "node scripts/daily-mission-audit.mjs",

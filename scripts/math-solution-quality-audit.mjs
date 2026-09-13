@@ -59,14 +59,15 @@ console.log(`Resoluções exatamente repetidas em ≥5 itens: ${repeated.length}
 console.log("Cobertura forte por tema:");
 for(const [theme,row] of [...byTheme.entries()].sort())console.log(`- ${theme}: ${row.strong}/${row.total}`);
 if(repeated.length){
-  console.log("\nRepetições exatas a vigiar (amostra):");
+  console.log("\nRepetições exatas bloqueantes:");
   for(const row of repeated.slice(0,10))console.log(`- ${row.count}× ${row.ids.slice(0,6).join(", ")} :: ${row.text.slice(0,120)}`);
+  blockers.push(`${repeated.length} grupo(s) de resoluções exatamente repetidas em 5 ou mais itens`);
 }
 
 if(blockers.length){
-  console.error(`\nSOLUTION QUALITY GATE: NO-GO — ${blockers.length} resolução(ões) ainda demasiado frágeis`);
+  console.error(`\nSOLUTION QUALITY GATE: NO-GO — ${blockers.length} problema(s)`);
   for(const row of blockers.slice(0,40))console.error(`- ${row}`);
   process.exit(1);
 }
 console.log("\nSOLUTION QUALITY GATE: GO");
-console.log("Cada resolução efetiva tem desenvolvimento mínimo e pelo menos três sinais pedagógicos entre raciocínio, método, conclusão e explicação explícita do porquê.");
+console.log("Cada resolução efetiva tem desenvolvimento mínimo, pelo menos três sinais pedagógicos e não existem blocos de 5+ resoluções exatamente repetidas.");
