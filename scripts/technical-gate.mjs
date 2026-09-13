@@ -8,6 +8,7 @@ const checks=[
   ["IDs pedagógicos","npm",["run","competency-id:audit"]],
   ["Validação matemática","npm",["run","math-validation:audit"]],
   ["Revisão editorial Matemática","npm",["run","math-editorial:audit"]],
+  ["Qualidade pedagógica transversal Matemática","npm",["run","math-pedagogical:audit"]],
   ["Engagement diário","npm",["run","engagement:audit"]],
   ["Rankings e divisões","npm",["run","competition:audit"]],
   ["Missão de Hoje","npm",["run","daily-mission:audit"]],
