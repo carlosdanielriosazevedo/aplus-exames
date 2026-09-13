@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "year": "12.º",
+  "subtopicsTotal": 47,
+  "questionsTotal": 2350,
+  "subtopicsCompleted": 47,
+  "questionsReviewed": 2350,
+  "explicitCorrections": 0,
+  "unresolved": 0,
+  "completedSubtopics": "all",
+  "nextSubtopic": null,
+  "status": "complete_internal_editorial_pass",
+  "updatedAt": "2026-09-13"
+}
