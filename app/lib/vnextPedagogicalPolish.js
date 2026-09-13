@@ -109,6 +109,14 @@ function methodConclusionGuide(item){
   return "Método: identifica a propriedade relevante, aplica-a aos dados do enunciado e verifica o resultado obtido. Assim, a conclusão fica justificada pelo procedimento e não apenas pelo valor final.";
 }
 
+function itemSpecificGuide(item){
+  if(item.subtopicId!=="11-cd-monotonia-otimizacao")return "";
+  const answer=Array.isArray(item.o)&&Number.isInteger(item.a)?typographicPolish(item.o[item.a]):"";
+  const prompt=typographicPolish(item.q);
+  if(!answer||!prompt)return "";
+  return `Neste item, aplica esse critério aos dados “${prompt}” e confirma especificamente a conclusão “${answer}”.`;
+}
+
 export function solutionPedagogicalSignals(item){
   const text=String(item?.sol||"");
   const compact=normalized(text);
@@ -131,6 +139,8 @@ function enrichSolution(item,solution){
   if(!sig.explicitWhy||sig.score<3||sig.length<80)text=`${text} ${whyGuide(item)}`;
   sig=solutionPedagogicalSignals({...item,sol:text});
   if(sig.score<3)text=`${text} ${methodConclusionGuide(item)}`;
+  const specific=itemSpecificGuide(item);
+  if(specific)text=`${text} ${specific}`;
   return sentence(text);
 }
 
