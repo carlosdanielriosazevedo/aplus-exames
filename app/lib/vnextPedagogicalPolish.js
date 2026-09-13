@@ -47,6 +47,16 @@ function enrichComplexPrompt(prompt){
   return `Efetua a operação com números complexos e seleciona o resultado correto. ${q}`;
 }
 
+function enrichIntegralPrompt(prompt){
+  const q=cleanPrompt(prompt);
+  if(normalized(q).length>=28)return q;
+  if(/^∫/.test(q)){
+    const expr=q.replace(/\s*=\s*$/,"").trim();
+    return `Determina uma primitiva correspondente à expressão ${expr} e seleciona a opção correta.`;
+  }
+  return q;
+}
+
 function typographicPolish(value){
   return String(value||"")
     .replace(/\s+/g," ")
@@ -158,6 +168,7 @@ export function polishVnextItem(item){
 
   if(item.subtopicId==="11-cont-fatorial")next.q=enrichFactorialPrompt(next.q);
   if(item.subtopicId==="12-cplx-operacoes-algebricas")next.q=enrichComplexPrompt(next.q);
+  if(item.subtopicId==="12-int-tabela-propriedades")next.q=enrichIntegralPrompt(next.q);
 
   if(sourceId==="VN12CPLX-OA-048"){
     next.hyp="Pode multiplicar apenas a parte real ou apenas a parte imaginária pelo escalar.";
