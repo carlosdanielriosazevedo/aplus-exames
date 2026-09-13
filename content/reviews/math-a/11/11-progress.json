@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "year": "11.º",
+  "subtopicsTotal": 35,
+  "questionsTotal": 1750,
+  "subtopicsCompleted": 1,
+  "questionsReviewed": 50,
+  "explicitCorrections": 3,
+  "unresolved": 0,
+  "completedSubtopics": ["11-cd-derivada-ponto"],
+  "nextSubtopic": "11-cd-funcao-derivada",
+  "updatedAt": "2026-09-13"
+}
