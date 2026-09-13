@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "subject": "Matemática A",
+  "year": "11.º",
+  "themeId": "11-cd",
+  "subtopicId": "11-cd-derivada-ponto",
+  "sourcePath": "content/vnext/math-a/11/11-cd-derivada-ponto.json",
+  "sourceBlobSha": "6b20e58ea69f43d1235df2da40c6f0e2573a3614",
+  "reviewedAt": "2026-09-13",
+  "reviewType": "editorial_math_pass",
+  "status": "complete",
+  "criteria": [
+    "correção matemática",
+    "adequação ao foco da submatéria",
+    "clareza do enunciado",
+    "qualidade dos distratores",
+    "coerência entre resposta e resolução",
+    "hipótese de erro útil",
+    "dificuldade plausível",
+    "independência da questão"
+  ],
+  "summary": {
+    "questionsReviewed": 50,
+    "approved": 47,
+    "approvedWithOverride": 3,
+    "unresolved": 0
+  },
+  "decisions": [
+    {"id":"VN11CD-DP-001","status":"approved"},
+    {"id":"VN11CD-DP-002","status":"approved"},
+    {"id":"VN11CD-DP-003","status":"approved"},
+    {
+      "id":"VN11CD-DP-004",
+      "status":"approved_with_override",
+      "rationale":"A formulação original sugere monotonia numa vizinhança a partir apenas do sinal da derivada num ponto. É mais rigoroso interpretar f'(a)>0 como declive positivo da tangente em a.",
+      "override": {
+        "q":"Se f'(a)>0, o que se pode afirmar sobre a reta tangente ao gráfico de f no ponto de abcissa a?",
+        "o":["Tem declive positivo.","É horizontal.","Tem declive negativo.","É necessariamente vertical."],
+        "a":0,
+        "sol":"Como f'(a) é o declive da reta tangente ao gráfico em x=a, f'(a)>0 significa que essa tangente tem declive positivo.",
+        "hyp":"Pode confundir o sinal da derivada num ponto com uma afirmação global de monotonia da função."
+      }
+    },
+    {"id":"VN11CD-DP-005","status":"approved"},
+    {"id":"VN11CD-DP-006","status":"approved"},
+    {"id":"VN11CD-DP-007","status":"approved"},
+    {"id":"VN11CD-DP-008","status":"approved"},
+    {"id":"VN11CD-DP-009","status":"approved"},
+    {"id":"VN11CD-DP-010","status":"approved"},
+    {"id":"VN11CD-DP-011","status":"approved"},
+    {"id":"VN11CD-DP-012","status":"approved"},
+    {"id":"VN11CD-DP-013","status":"approved"},
+    {"id":"VN11CD-DP-014","status":"approved"},
+    {"id":"VN11CD-DP-015","status":"approved"},
+    {"id":"VN11CD-DP-016","status":"approved"},
+    {"id":"VN11CD-DP-017","status":"approved"},
+    {"id":"VN11CD-DP-018","status":"approved"},
+    {"id":"VN11CD-DP-019","status":"approved"},
+    {"id":"VN11CD-DP-020","status":"approved"},
+    {"id":"VN11CD-DP-021","status":"approved"},
+    {"id":"VN11CD-DP-022","status":"approved"},
+    {"id":"VN11CD-DP-023","status":"approved"},
+    {"id":"VN11CD-DP-024","status":"approved"},
+    {"id":"VN11CD-DP-025","status":"approved"},
+    {"id":"VN11CD-DP-026","status":"approved"},
+    {"id":"VN11CD-DP-027","status":"approved"},
+    {"id":"VN11CD-DP-028","status":"approved"},
+    {"id":"VN11CD-DP-029","status":"approved"},
+    {"id":"VN11CD-DP-030","status":"approved"},
+    {"id":"VN11CD-DP-031","status":"approved"},
+    {"id":"VN11CD-DP-032","status":"approved"},
+    {"id":"VN11CD-DP-033","status":"approved"},
+    {"id":"VN11CD-DP-034","status":"approved"},
+    {"id":"VN11CD-DP-035","status":"approved"},
+    {"id":"VN11CD-DP-036","status":"approved"},
+    {"id":"VN11CD-DP-037","status":"approved"},
+    {"id":"VN11CD-DP-038","status":"approved"},
+    {"id":"VN11CD-DP-039","status":"approved"},
+    {"id":"VN11CD-DP-040","status":"approved"},
+    {"id":"VN11CD-DP-041","status":"approved"},
+    {"id":"VN11CD-DP-042","status":"approved"},
+    {"id":"VN11CD-DP-043","status":"approved"},
+    {"id":"VN11CD-DP-044","status":"approved"},
+    {"id":"VN11CD-DP-045","status":"approved"},
+    {"id":"VN11CD-DP-046","status":"approved"},
+    {"id":"VN11CD-DP-047","status":"approved"},
+    {"id":"VN11CD-DP-048","status":"approved"},
+    {
+      "id":"VN11CD-DP-049",
+      "status":"approved_with_override",
+      "rationale":"«Uma derivada muito positiva» é uma formulação vaga. A revisão torna explícito que se fala do valor numérico de f'(a) e da inclinação da tangente.",
+      "override": {
+        "q":"Se f'(a) é positivo e tem valor numérico elevado, qual é a interpretação geométrica mais adequada?",
+        "o":["A reta tangente em a tem declive positivo acentuado.","O valor f(a) é necessariamente elevado.","A função é positiva em todo o domínio.","A área sob o gráfico é necessariamente grande."],
+        "a":0,
+        "sol":"O valor de f'(a) mede o declive da reta tangente em a. Um valor positivo elevado corresponde a uma inclinação local positiva acentuada.",
+        "hyp":"Pode confundir o valor da derivada, que mede inclinação local, com a altura do gráfico ou com valores globais da função."
+      }
+    },
+    {
+      "id":"VN11CD-DP-050",
+      "status":"approved_with_override",
+      "rationale":"A versão original introduz dx e df sem os definir. Para o nível em causa, é mais claro usar incrementos Δx e Δf e explicitar a aproximação linear local.",
+      "override": {
+        "q":"Se f'(a)=-4 e Δx é um pequeno incremento positivo de x, qual é a melhor aproximação para a variação correspondente Δf?",
+        "o":["Δf≈4Δx","Δf≈-4Δx","Δf≈-Δx/4","Δf≈0"],
+        "a":1,
+        "sol":"Para pequenos incrementos, a aproximação linear dá Δf≈f'(a)Δx. Como f'(a)=-4, resulta Δf≈-4Δx.",
+        "hyp":"Pode inverter a taxa de variação, perder o sinal negativo ou confundir a aproximação local com uma igualdade válida para qualquer incremento."
+      }
+    }
+  ]
+}
