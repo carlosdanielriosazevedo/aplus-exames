@@ -4,6 +4,16 @@ import {authErrorResponse,requireSession} from "../../../lib/server/identity";
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 
+function safeError(value){
+  if(!value || typeof value!=="object")return null;
+  return {
+    message:value.message||null,
+    code:value.code||null,
+    details:value.details||null,
+    hint:value.hint||null
+  };
+}
+
 export async function POST(request){
   try{
     const session=await requireSession();
@@ -18,6 +28,14 @@ export async function POST(request){
       targetProfileVisible:Boolean(body?.targetProfileVisible),
       reviewerAllowed:Boolean(body?.reviewerAllowed),
       reviewerStatus:Number(body?.reviewerStatus)||0,
+      authSessionStatus:Number(body?.authSessionStatus)||0,
+      jwtPresent:Boolean(body?.jwtPresent),
+      jwtSub:body?.jwtSub?String(body.jwtSub):null,
+      jwtRole:body?.jwtRole?String(body.jwtRole):null,
+      selfQueryError:safeError(body?.selfQueryError),
+      targetQueryError:safeError(body?.targetQueryError),
+      rolesQueryError:safeError(body?.rolesQueryError),
+      targetProfileQueryError:safeError(body?.targetProfileQueryError),
       at:new Date().toISOString()
     };
     console.log("SECURITY_AB_PROBE",JSON.stringify(report));
