@@ -37,10 +37,9 @@ async function currentDataApiJwt(){
   const authClient=getCloudAuthClient();
   if(!authClient?.auth)return null;
   try{
-    // Better Auth's JWT plugin exposes a dedicated /token endpoint. This token is
-    // JWKS-verifiable and is the credential the Neon Data API/RLS expects.
-    const result=await authClient.auth.token();
-    return result?.data?.token||result?.token||null;
+    // neon-js exposes the JWKS-verifiable auth JWT through getJWTToken().
+    // Do not reuse Better Auth's opaque session token as a Data API bearer token.
+    return await authClient.auth.getJWTToken();
   }catch{
     return null;
   }
