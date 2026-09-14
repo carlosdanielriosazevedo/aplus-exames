@@ -2,7 +2,8 @@
 
 import {createClient} from "@neondatabase/neon-js";
 
-let singleton=null;
+let authSingleton=null;
+let dataSingleton=null;
 
 export function cloudConfiguration(){
   const authUrl=process.env.NEXT_PUBLIC_NEON_AUTH_URL;
@@ -19,17 +20,43 @@ function browserAuthUrl(fallback){
   return `${window.location.origin}/api/auth`;
 }
 
-export function getCloudClient(){
+export function getCloudAuthClient(){
   const cfg=cloudConfiguration();
   if(!cfg.configured)return null;
-  if(singleton)return singleton;
-  singleton=createClient({
+  if(authSingleton)return authSingleton;
+  authSingleton=createClient({
     // Keep the browser session on the APProva+ origin so private server routes
-    // can validate the same cookie. The server handler proxies Neon Auth.
+    // can validate the same cookie.
     auth:{url:browserAuthUrl(cfg.authUrl)},
     dataApi:{url:cfg.dataApiUrl}
   });
-  return singleton;
+  return authSingleton;
+}
+
+async function currentDataApiJwt(){
+  const authClient=getCloudAuthClient();
+  if(!authClient?.auth)return null;
+  try{
+    // Better Auth's JWT plugin exposes a dedicated /token endpoint. This token is
+    // JWKS-verifiable and is the credential the Neon Data API/RLS expects.
+    const result=await authClient.auth.token();
+    return result?.data?.token||result?.token||null;
+  }catch{
+    return null;
+  }
+}
+
+export function getCloudClient(){
+  const cfg=cloudConfiguration();
+  if(!cfg.configured)return null;
+  if(dataSingleton)return dataSingleton;
+  dataSingleton=createClient({
+    dataApi:{
+      url:cfg.dataApiUrl,
+      getToken:currentDataApiJwt
+    }
+  });
+  return dataSingleton;
 }
 
 function unwrap(result){
@@ -56,7 +83,7 @@ async function provisionServerIdentity(){
 }
 
 export async function getCloudSession(){
-  const client=getCloudClient();
+  const client=getCloudAuthClient();
   if(!client)return {configured:false,user:null,error:null};
   try{
     const raw=await client.auth.getSession();
@@ -70,7 +97,7 @@ export async function getCloudSession(){
 }
 
 export async function cloudSignIn({email,password}){
-  const client=getCloudClient();
+  const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await client.auth.signIn.email({email,password});
   if(result?.error)throw new Error(result.error.message||"Não foi possível iniciar sessão.");
@@ -79,7 +106,7 @@ export async function cloudSignIn({email,password}){
 }
 
 export async function cloudSignUp({name,email,password}){
-  const client=getCloudClient();
+  const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await client.auth.signUp.email({name,email,password});
   if(result?.error)throw new Error(result.error.message||"Não foi possível criar a conta.");
@@ -88,7 +115,7 @@ export async function cloudSignUp({name,email,password}){
 }
 
 export async function cloudSignOut(){
-  const client=getCloudClient();
+  const client=getCloudAuthClient();
   if(!client)return;
   return client.auth.signOut();
 }
