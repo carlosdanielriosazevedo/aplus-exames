@@ -31,6 +31,23 @@ function unwrap(result){
   return result;
 }
 
+async function provisionServerIdentity(){
+  try{
+    const response=await fetch("/api/auth/session",{
+      method:"GET",
+      credentials:"include",
+      cache:"no-store"
+    });
+    if(!response.ok){
+      const body=await response.json().catch(()=>null);
+      return {ok:false,status:response.status,error:body?.error||"IDENTITY_PROVISION_FAILED"};
+    }
+    return await response.json();
+  }catch(error){
+    return {ok:false,status:0,error:String(error?.message||error)};
+  }
+}
+
 export async function getCloudSession(){
   const client=getCloudClient();
   if(!client)return {configured:false,user:null,error:null};
@@ -38,7 +55,8 @@ export async function getCloudSession(){
     const raw=await client.auth.getSession();
     const data=unwrap(raw);
     const user=data?.user || raw?.data?.user || null;
-    return {configured:true,user,error:raw?.error||null,raw};
+    const identity=user ? await provisionServerIdentity() : null;
+    return {configured:true,user,error:raw?.error||null,raw,identity};
   }catch(error){
     return {configured:true,user:null,error:String(error?.message||error)};
   }
@@ -49,6 +67,7 @@ export async function cloudSignIn({email,password}){
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await client.auth.signIn.email({email,password});
   if(result?.error)throw new Error(result.error.message||"Não foi possível iniciar sessão.");
+  await provisionServerIdentity();
   return result;
 }
 
@@ -57,6 +76,7 @@ export async function cloudSignUp({name,email,password}){
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
   const result=await client.auth.signUp.email({name,email,password});
   if(result?.error)throw new Error(result.error.message||"Não foi possível criar a conta.");
+  await provisionServerIdentity();
   return result;
 }
 
@@ -123,7 +143,6 @@ export function mergeStudentCloudState(local,remote){
     pedagogicalMemoryVersion:remote.pedagogicalMemoryVersion??local.pedagogicalMemoryVersion??2
   };
 }
-
 
 function cloudSchemaOutdated(error){
   const message=String(error?.message||error||"");
@@ -193,9 +212,6 @@ export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,
     updated_at:new Date().toISOString()
   };
 
-  // Revisão 0 pode significar duas coisas:
-  // (a) este dispositivo nunca viu qualquer linha -> INSERT seguro;
-  // (b) carregou uma linha legacy/migrada que ainda está na revisão 0 -> UPDATE CAS.
   if((Number(expectedRevision)||0)===0 && !knownRemote){
     const existing=await currentRemoteRow(client,session.user.id);
     if(existing){
@@ -217,8 +233,6 @@ export async function saveStudentCloudState(s,{expectedRevision=0,deviceId=null,
     return {ok:true,conflict:false,data:inserted?.data||row};
   }
 
-  // Compare-and-swap: só atualiza se a revisão remota ainda for exatamente a
-  // versão que este dispositivo tinha carregado/guardado, incluindo revision=0.
   const updated=await client
     .from("student_cloud_state")
     .update(row)
