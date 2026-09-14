@@ -3,6 +3,27 @@
 import {useEffect,useState} from "react";
 import {getCloudClient,getCloudSession} from "../lib/cloud";
 
+function decodeJwtClaims(token){
+  if(!token || typeof token!=="string")return null;
+  try{
+    const part=token.split(".")[1];
+    if(!part)return null;
+    const normalized=part.replace(/-/g,"+").replace(/_/g,"/");
+    const padded=normalized+"=".repeat((4-normalized.length%4)%4);
+    return JSON.parse(atob(padded));
+  }catch{return null;}
+}
+
+function errorSummary(error){
+  if(!error)return null;
+  return {
+    message:error.message||String(error),
+    code:error.code||null,
+    details:error.details||null,
+    hint:error.hint||null
+  };
+}
+
 export default function SecurityProbePage(){
   const [result,setResult]=useState({status:"A iniciar teste..."});
 
@@ -17,6 +38,14 @@ export default function SecurityProbePage(){
         const session=await getCloudSession();
         if(!session?.user?.id){setResult({status:"Sem sessão autenticada."});return;}
         const selfId=String(session.user.id);
+
+        const rawSessionResponse=await fetch("/api/auth/get-session",{credentials:"include",cache:"no-store"});
+        const responseJwt=rawSessionResponse.headers.get("set-auth-jwt");
+        const responseClaims=decodeJwtClaims(responseJwt);
+        const rawSessionBody=await rawSessionResponse.json().catch(()=>null);
+        const bodyToken=rawSessionBody?.session?.token||rawSessionBody?.data?.session?.token||null;
+        const bodyClaims=decodeJwtClaims(bodyToken);
+        const jwtClaims=responseClaims||bodyClaims;
 
         const selfQ=await client.from("app_users").select("id,auth_user_id,email_snapshot").eq("auth_user_id",selfId).maybeSingle();
         const targetQ=targetAuthUserId
@@ -36,7 +65,15 @@ export default function SecurityProbePage(){
           visibleRoleCount:Array.isArray(rolesQ?.data)?rolesQ.data.length:0,
           targetProfileVisible:Boolean(targetProfileQ?.data),
           reviewerAllowed:Boolean(reviewerBody?.allowed),
-          reviewerStatus:reviewerResponse.status
+          reviewerStatus:reviewerResponse.status,
+          authSessionStatus:rawSessionResponse.status,
+          jwtPresent:Boolean(responseJwt||bodyToken),
+          jwtSub:jwtClaims?.sub||null,
+          jwtRole:jwtClaims?.role||null,
+          selfQueryError:errorSummary(selfQ?.error),
+          targetQueryError:errorSummary(targetQ?.error),
+          rolesQueryError:errorSummary(rolesQ?.error),
+          targetProfileQueryError:errorSummary(targetProfileQ?.error)
         };
 
         await fetch("/api/security/probe-report",{
