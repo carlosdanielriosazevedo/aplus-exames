@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {authErrorResponse,loadAppIdentity,requireSession} from "../../../lib/server/identity";
+import {authErrorResponse,ensureAppIdentity,requireSession} from "../../../lib/server/identity";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
@@ -7,7 +7,7 @@ export const dynamic="force-dynamic";
 export async function GET(){
   try{
     const session=await requireSession();
-    const identity=await loadAppIdentity(session.authUserId);
+    const identity=await ensureAppIdentity(session);
     return NextResponse.json({
       ok:true,
       user:{id:session.authUserId,email:session.user?.email||null,name:session.user?.name||null},
