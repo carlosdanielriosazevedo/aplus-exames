@@ -14,12 +14,19 @@ export function cloudConfiguration(){
   };
 }
 
+function browserAuthUrl(fallback){
+  if(typeof window==="undefined")return fallback;
+  return `${window.location.origin}/api/auth`;
+}
+
 export function getCloudClient(){
   const cfg=cloudConfiguration();
   if(!cfg.configured)return null;
   if(singleton)return singleton;
   singleton=createClient({
-    auth:{url:cfg.authUrl},
+    // Keep the browser session on the APProva+ origin so private server routes
+    // can validate the same cookie. The server handler proxies Neon Auth.
+    auth:{url:browserAuthUrl(cfg.authUrl)},
     dataApi:{url:cfg.dataApiUrl}
   });
   return singleton;
