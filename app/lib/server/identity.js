@@ -49,6 +49,24 @@ export async function requireSession(){
   };
 }
 
+export async function ensureAppUser(authenticated){
+  if(!databaseConfigured())throw securityError("Database not configured",503,"DATABASE_NOT_CONFIGURED");
+  if(!authenticated?.authUserId)throw securityError("Unauthorized",401,"UNAUTHORIZED");
+  const sql=getSql();
+  const displayName=authenticated.user?.name?String(authenticated.user.name).slice(0,200):null;
+  const emailSnapshot=authenticated.user?.email?String(authenticated.user.email).slice(0,320):null;
+  const rows=await sql`
+    insert into app_users (auth_user_id,display_name,email_snapshot)
+    values (${authenticated.authUserId},${displayName},${emailSnapshot})
+    on conflict (auth_user_id) do update set
+      display_name=excluded.display_name,
+      email_snapshot=excluded.email_snapshot,
+      updated_at=now()
+    returning id,auth_user_id,display_name,email_snapshot
+  `;
+  return rows[0]||null;
+}
+
 export async function loadAppIdentity(authUserId){
   if(!databaseConfigured())throw securityError("Database not configured",503,"DATABASE_NOT_CONFIGURED");
   const sql=getSql();
@@ -69,9 +87,21 @@ export async function loadAppIdentity(authUserId){
   return {appUser,roles:rows.map(row=>row.role)};
 }
 
+export async function ensureAppIdentity(authenticated){
+  const appUser=await ensureAppUser(authenticated);
+  const sql=getSql();
+  const rows=await sql`
+    select role
+    from app_user_roles
+    where user_id=${appUser.id}
+    order by role
+  `;
+  return {appUser,roles:rows.map(row=>row.role)};
+}
+
 export async function requireCapability(capability){
   const authenticated=await requireSession();
-  const identity=await loadAppIdentity(authenticated.authUserId);
+  const identity=await ensureAppIdentity(authenticated);
   const allowed=identity.roles.some(role=>roleAllows(role,capability));
   if(!allowed)throw securityError("Forbidden",403,"FORBIDDEN");
   return {...authenticated,...identity};
