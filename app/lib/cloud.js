@@ -1,8 +1,10 @@
 "use client";
 
 import {createClient} from "@neondatabase/neon-js";
+import {createInternalNeonAuth} from "@neondatabase/neon-js/auth";
+import {BetterAuthReactAdapter} from "@neondatabase/neon-js/auth/react/adapters";
 
-let authSingleton=null;
+let authInternalSingleton=null;
 let dataSingleton=null;
 
 export function cloudConfiguration(){
@@ -20,26 +22,28 @@ function browserAuthUrl(fallback){
   return `${window.location.origin}/api/auth`;
 }
 
-export function getCloudAuthClient(){
+function getInternalAuth(){
   const cfg=cloudConfiguration();
   if(!cfg.configured)return null;
-  if(authSingleton)return authSingleton;
-  authSingleton=createClient({
-    // Keep the browser session on the APProva+ origin so private server routes
-    // can validate the same cookie.
-    auth:{url:browserAuthUrl(cfg.authUrl)},
-    dataApi:{url:cfg.dataApiUrl}
+  if(authInternalSingleton)return authInternalSingleton;
+  authInternalSingleton=createInternalNeonAuth(browserAuthUrl(cfg.authUrl),{
+    adapter:BetterAuthReactAdapter()
   });
-  return authSingleton;
+  return authInternalSingleton;
+}
+
+export function getCloudAuthClient(){
+  return getInternalAuth()?.adapter||null;
 }
 
 async function currentDataApiJwt(){
-  const authClient=getCloudAuthClient();
-  if(!authClient?.auth)return null;
+  const auth=getInternalAuth();
+  if(!auth)return null;
   try{
-    // neon-js exposes the JWKS-verifiable auth JWT through getJWTToken().
-    // Do not reuse Better Auth's opaque session token as a Data API bearer token.
-    return await authClient.auth.getJWTToken();
+    // The internal Neon Auth wrapper owns the JWT helper. The public Better Auth
+    // adapter does not expose this method, so calling client.auth.getJWTToken()
+    // silently produced no token for Data API requests.
+    return await auth.getJWTToken();
   }catch{
     return null;
   }
@@ -85,7 +89,7 @@ export async function getCloudSession(){
   const client=getCloudAuthClient();
   if(!client)return {configured:false,user:null,error:null};
   try{
-    const raw=await client.auth.getSession();
+    const raw=await client.getSession();
     const data=unwrap(raw);
     const user=data?.user || raw?.data?.user || null;
     const identity=user ? await provisionServerIdentity() : null;
@@ -98,7 +102,7 @@ export async function getCloudSession(){
 export async function cloudSignIn({email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.auth.signIn.email({email,password});
+  const result=await client.signIn.email({email,password});
   if(result?.error)throw new Error(result.error.message||"Não foi possível iniciar sessão.");
   await provisionServerIdentity();
   return result;
@@ -107,7 +111,7 @@ export async function cloudSignIn({email,password}){
 export async function cloudSignUp({name,email,password}){
   const client=getCloudAuthClient();
   if(!client)throw new Error("Neon Auth ainda não está configurado.");
-  const result=await client.auth.signUp.email({name,email,password});
+  const result=await client.signUp.email({name,email,password});
   if(result?.error)throw new Error(result.error.message||"Não foi possível criar a conta.");
   await provisionServerIdentity();
   return result;
@@ -116,7 +120,7 @@ export async function cloudSignUp({name,email,password}){
 export async function cloudSignOut(){
   const client=getCloudAuthClient();
   if(!client)return;
-  return client.auth.signOut();
+  return client.signOut();
 }
 
 export function studentStateForCloud(s){
