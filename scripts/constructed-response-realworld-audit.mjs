@@ -41,11 +41,15 @@ assert.equal(wrongQuantity.points,0);
 assert.equal(wrongQuantity.correct,false);
 assert.equal(wrongQuantity.reviewRequired,true);
 
-// 5) Um número solto não pode ser reutilizado para várias etapas com o mesmo valor.
+// 5) Num item por etapas, um número isolado e ambíguo que coincide com o resultado final vale zero.
+//    Se o aluno identificar explicitamente uma etapa intermédia, essa etapa pode ser pontuada.
 const statistics=byId("CRV2-10EST-STEPS-1");
 const bareFour=gradeResponse(statistics,"4");
-assert.equal(bareFour.points,8,"O valor 4 isolado só pode preencher uma etapa não identificada.");
-assert.equal(bareFour.stepResults.filter(row=>row.correct).length,1);
+assert.equal(bareFour.points,0,"IAVE: um resultado final isolado num item por etapas não recebe cotação.");
+assert.equal(bareFour.reason,"final_result_only");
+const labelledCount=gradeResponse(statistics,"n=4");
+assert.equal(labelledCount.points,8,"Uma etapa intermédia explicitamente identificada mantém a respetiva cotação.");
+assert.equal(labelledCount.stepResults.filter(row=>row.correct).length,1);
 
 // 6) Texto/símbolos aleatórios não podem gerar pontuação acidental.
 const junk=gradeResponse(slope,"−†×−³");
@@ -131,4 +135,4 @@ const chained=gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=3*2²-2=10");
 assert.equal(chained.correct,true);
 assert.equal(chained.points,35);
 
-console.log("✓ real-world constructed-response audit: natural paraphrases, negation safety, partial credit, contradictions, equivalence, rounding, fractions and conservative mastery updates validated");
+console.log("✓ real-world constructed-response audit: IAVE staged-final rule, natural paraphrases, negation safety, partial credit, contradictions, equivalence, rounding, fractions and conservative mastery updates validated");
