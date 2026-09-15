@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
+    "prebuild": "node scripts/upgrade-constructed-response-grader.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
     "build": "next build",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
