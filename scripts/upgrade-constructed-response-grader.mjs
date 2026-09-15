@@ -34,7 +34,7 @@ function optionalUnitOmissionMatches(input,candidate){
   return withoutUnit!==normalizedCandidate&&input.replace(/[.!]$/g,"")===withoutUnit;
 }`;
 
-if(source.includes(oldNormalizer))source=source.replace(oldNormalizer,newNormalizer);
+if(source.includes(oldNormalizer))source=source.replace(oldNormalizer,()=>newNormalizer);
 else if(!source.includes("function conceptGroupsMatch(spec,input)"))throw new Error("constructedResponse normalizer anchor not found");
 
 const oldText=`  if(spec.type==="text"){
@@ -62,8 +62,8 @@ const newText=`  if(spec.type==="text"){
     if(!input)reason="empty_justification";
   }`;
 
-if(source.includes(oldText))source=source.replace(oldText,newText);
-else if(source.includes(oldTextAlreadyPatched))source=source.replace(oldTextAlreadyPatched,newText);
+if(source.includes(oldText))source=source.replace(oldText,()=>newText);
+else if(source.includes(oldTextAlreadyPatched))source=source.replace(oldTextAlreadyPatched,()=>newText);
 else if(!source.includes("optionalUnitOmissionMatches(input,candidate)"))throw new Error("constructedResponse text grading anchor not found");
 
 const stepwiseAnchor=`function stepwiseLines(answer){
@@ -86,7 +86,7 @@ function presentsOnlyFinalResult(question,answer){
   const finalSpec=question.response.steps.at(-1);
   return gradeStep(finalSpec,line).correct;
 }`;
-if(source.includes(stepwiseAnchor))source=source.replace(stepwiseAnchor,stepwiseReplacement);
+if(source.includes(stepwiseAnchor))source=source.replace(stepwiseAnchor,()=>stepwiseReplacement);
 else if(!source.includes("function presentsOnlyFinalResult(question,answer)"))throw new Error("stepwise final-result anchor not found");
 
 const gradeAnchor=`  if(type==="stepwise"){
@@ -97,7 +97,7 @@ const gradeReplacement=`  if(type==="stepwise"){
     if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only"};
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";`;
-if(source.includes(gradeAnchor))source=source.replace(gradeAnchor,gradeReplacement);
+if(source.includes(gradeAnchor))source=source.replace(gradeAnchor,()=>gradeReplacement);
 else if(!source.includes('reason:"final_result_only"'))throw new Error("stepwise grade anchor not found");
 
 const feedbackAnchor=`export function stepFeedback(row){
@@ -105,7 +105,7 @@ const feedbackAnchor=`export function stepFeedback(row){
 const feedbackReplacement=`export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
   if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Compara-o com a resolução abaixo.";`;
-if(source.includes(feedbackAnchor))source=source.replace(feedbackAnchor,feedbackReplacement);
+if(source.includes(feedbackAnchor))source=source.replace(feedbackAnchor,()=>feedbackReplacement);
 
 fs.writeFileSync(path,source);
 console.log("✓ constructed-response grader upgraded: IAVE staged-item rules + conservative natural-language matching enabled");
