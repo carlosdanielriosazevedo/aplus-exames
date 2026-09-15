@@ -3,6 +3,10 @@ import fs from "node:fs";
 const path=new URL("../app/lib/constructedResponse.js",import.meta.url);
 let source=fs.readFileSync(path,"utf8");
 
+const importAnchor=`import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";`;
+const importReplacement=`import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";\nimport {scoreIaveStep,iaveSituationLabel} from "./iaveScoring.js";`;
+if(source.includes(importAnchor)&&!source.includes('from "./iaveScoring.js"'))source=source.replace(importAnchor,()=>importReplacement);
+
 const oldNormalizer=`function normalizedWords(value){return String(value??"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[−–—]/g,"-").replace(/\\s+/g," ").trim()}`;
 const newNormalizer=`function normalizedWords(value){
   const base=String(value??"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[−–—]/g,"-").replace(/\\s+/g," ").trim();
@@ -89,12 +93,35 @@ function presentsOnlyFinalResult(question,answer){
 if(source.includes(stepwiseAnchor))source=source.replace(stepwiseAnchor,()=>stepwiseReplacement);
 else if(!source.includes("function presentsOnlyFinalResult(question,answer)"))throw new Error("stepwise final-result anchor not found");
 
+const explicitAnchor=`          explicit.push({line,correct:values.every(value=>Math.abs(value-target)<=tolerance)});`;
+const explicitReplacement=`          explicit.push({line,parts,values,target,tolerance,correct:values.every(value=>Math.abs(value-target)<=tolerance)});`;
+if(source.includes(explicitAnchor))source=source.replace(explicitAnchor,()=>explicitReplacement);
+
+const wrongAnchor=`    if(wrong)return {...base,status:right?"needs_review":"incorrect",reason:right?"conflicting_results":"calculation_error",answer:explicit.map(row=>row.line).join("\\n")};`;
+const wrongReplacement=`    if(wrong){
+      // IAVE 2026, situação 8: só classificamos automaticamente como erro ocasional
+      // quando a própria cadeia mostra uma expressão correta e apenas o cálculo final falha.
+      const row=explicit.length===1?explicit[0]:null;
+      const previousPart=row?.parts?.at(-2)||"";
+      const finalPart=row?.parts?.at(-1)||"";
+      const previousValue=row?.values?.at(-2);
+      const finalValue=row?.values?.at(-1);
+      const arithmeticSlip=!!row&&row.values.length>=2&&/[+\\-*/^]/.test(previousPart)&&parseNumeric(finalPart)!==null&&Math.abs(previousValue-row.target)<=row.tolerance&&Math.abs(finalValue-row.target)>row.tolerance;
+      if(arithmeticSlip){
+        const reason="occasional_calculation_error";
+        return {...base,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",answer:row.line};
+      }
+      return {...base,status:right?"needs_review":"incorrect",reason:right?"conflicting_results":"calculation_error",classificationConfidence:right?"unknown":"low",answer:explicit.map(row=>row.line).join("\\n")};
+    }`;
+if(source.includes(wrongAnchor))source=source.replace(wrongAnchor,()=>wrongReplacement);
+else if(!source.includes('reason="occasional_calculation_error"'))throw new Error("IAVE arithmetic classification anchor not found");
+
 const gradeAnchor=`  if(type==="stepwise"){
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";`;
 const gradeReplacement=`  if(type==="stepwise"){
     // IAVE 2026, situação 3: num item por etapas, apresentar apenas o resultado final vale 0 pontos.
-    if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only"};
+    if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only",iaveSituation:iaveSituationLabel("final_result_only"),classificationConfidence:"high"};
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";`;
 if(source.includes(gradeAnchor))source=source.replace(gradeAnchor,()=>gradeReplacement);
@@ -104,8 +131,9 @@ const feedbackAnchor=`export function stepFeedback(row){
   if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Compara-o com a resolução abaixo.";`;
 const feedbackReplacement=`export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
-  if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Compara-o com a resolução abaixo.";`;
+  if(row.reason==="occasional_calculation_error")return "O processo identificado está correto, mas há uma falha ocasional no cálculo final desta etapa. Aplicámos a desvalorização prevista nos critérios IAVE.";
+  if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Como não é seguro concluir automaticamente que se trata apenas de uma falha ocasional, esta classificação não é inferida sem evidência suficiente.";`;
 if(source.includes(feedbackAnchor))source=source.replace(feedbackAnchor,()=>feedbackReplacement);
 
 fs.writeFileSync(path,source);
-console.log("✓ constructed-response grader upgraded: IAVE staged-item rules + conservative natural-language matching enabled");
+console.log("✓ constructed-response grader upgraded: IAVE staged-item rules + high-confidence error classification enabled");
