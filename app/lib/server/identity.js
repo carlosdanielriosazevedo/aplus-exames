@@ -117,7 +117,7 @@ export function authConfiguration(){
   const authUrl=process.env.NEON_AUTH_BASE_URL||process.env.NEXT_PUBLIC_NEON_AUTH_URL||process.env.NEON_AUTH_URL||null;
   const dataApiUrl=process.env.NEXT_PUBLIC_NEON_DATA_API_URL||null;
   const serverSessionSecret=process.env.NEON_AUTH_COOKIE_SECRET||null;
-  const serverSessionEnforced=false; // só muda após verificação end-to-end independente das rotas privadas.
+  const serverSessionEnforced=true;
   return {
     provider:"neon-auth",
     strategy:"managed-auth-plus-app-rbac",
