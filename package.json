@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/apply-vnext-runtime-polish.mjs",
+    "prebuild": "node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
     "build": "next build",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -32,6 +32,7 @@
     "student-experience:audit": "node scripts/student-experience-audit.mjs",
     "apronso-brand:audit": "node scripts/apronso-brand-audit.mjs",
     "constructed-response:audit": "node scripts/constructed-response-audit.mjs",
+    "constructed-response:realworld-audit": "node scripts/constructed-response-realworld-audit.mjs",
     "mini-exam:audit": "node scripts/mini-exam-flow-audit.mjs",
     "pedagogical-memory:audit": "node scripts/pedagogical-memory-audit.mjs",
     "cloud-reliability:audit": "node scripts/cloud-reliability-audit.mjs",
