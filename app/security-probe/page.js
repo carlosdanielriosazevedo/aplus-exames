@@ -57,6 +57,17 @@ export default function SecurityProbePage(){
         const targetProfileQ=profileLookupId
           ? await client.from("student_profiles").select("user_id,school_year,recent_grade,goal").eq("user_id",profileLookupId).maybeSingle()
           : {data:null,error:null};
+
+        let targetProfileWriteQ={data:null,error:null};
+        if(profileLookupId && targetProfileQ?.data){
+          targetProfileWriteQ=await client
+            .from("student_profiles")
+            .update({school_year:targetProfileQ.data.school_year??null})
+            .eq("user_id",profileLookupId)
+            .select("user_id")
+            .maybeSingle();
+        }
+
         const reviewerResponse=await fetch("/api/security/reviewer-probe",{credentials:"include",cache:"no-store"});
         const reviewerBody=await reviewerResponse.json().catch(()=>({}));
 
@@ -67,6 +78,8 @@ export default function SecurityProbePage(){
           targetVisible:Boolean(targetQ?.data),
           visibleRoleCount:Array.isArray(rolesQ?.data)?rolesQ.data.length:0,
           targetProfileVisible:Boolean(targetProfileQ?.data),
+          targetProfileWriteAllowed:Boolean(targetProfileWriteQ?.data),
+          targetProfileWriteDenied:!targetProfileWriteQ?.data,
           reviewerAllowed:Boolean(reviewerBody?.allowed),
           reviewerStatus:reviewerResponse.status,
           authSessionStatus:rawSessionResponse.status,
@@ -76,7 +89,8 @@ export default function SecurityProbePage(){
           selfQueryError:errorSummary(selfQ?.error),
           targetQueryError:errorSummary(targetQ?.error),
           rolesQueryError:errorSummary(rolesQ?.error),
-          targetProfileQueryError:errorSummary(targetProfileQ?.error)
+          targetProfileQueryError:errorSummary(targetProfileQ?.error),
+          targetProfileWriteError:errorSummary(targetProfileWriteQ?.error)
         };
 
         await fetch("/api/security/probe-report",{
