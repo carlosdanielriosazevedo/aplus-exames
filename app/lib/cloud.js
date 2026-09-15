@@ -37,13 +37,17 @@ export function getCloudAuthClient(){
 }
 
 async function currentDataApiJwt(){
-  const auth=getInternalAuth();
-  if(!auth)return null;
+  if(typeof window==="undefined")return null;
   try{
-    // The internal Neon Auth wrapper owns the JWT helper. The public Better Auth
-    // adapter does not expose this method, so calling client.auth.getJWTToken()
-    // silently produced no token for Data API requests.
-    return await auth.getJWTToken();
+    const response=await fetch("/api/auth/token",{
+      method:"GET",
+      credentials:"include",
+      cache:"no-store"
+    });
+    if(!response.ok)return null;
+    const body=await response.json().catch(()=>null);
+    const token=body?.token||body?.data?.token||null;
+    return typeof token==="string" && token.split(".").length===3 ? token : null;
   }catch{
     return null;
   }
