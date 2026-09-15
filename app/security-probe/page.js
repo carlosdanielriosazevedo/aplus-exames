@@ -32,6 +32,7 @@ export default function SecurityProbePage(){
     async function run(){
       const params=new URLSearchParams(window.location.search);
       const targetAuthUserId=params.get("target")||"";
+      const targetAppUserId=params.get("targetApp")||"";
       const client=getCloudClient();
       if(!client){setResult({status:"Cloud não configurada."});return;}
       try{
@@ -52,14 +53,16 @@ export default function SecurityProbePage(){
           ? await client.from("app_users").select("id,auth_user_id,email_snapshot").eq("auth_user_id",targetAuthUserId).maybeSingle()
           : {data:null,error:null};
         const rolesQ=await client.from("app_user_roles").select("user_id,role");
-        const targetProfileQ=targetAuthUserId
-          ? await client.from("student_profiles").select("user_id,school_year,recent_grade,goal").eq("user_id",targetQ?.data?.id||"00000000-0000-0000-0000-000000000000").maybeSingle()
+        const profileLookupId=targetAppUserId||targetQ?.data?.id||"";
+        const targetProfileQ=profileLookupId
+          ? await client.from("student_profiles").select("user_id,school_year,recent_grade,goal").eq("user_id",profileLookupId).maybeSingle()
           : {data:null,error:null};
         const reviewerResponse=await fetch("/api/security/reviewer-probe",{credentials:"include",cache:"no-store"});
         const reviewerBody=await reviewerResponse.json().catch(()=>({}));
 
         const report={
           targetAuthUserId,
+          targetAppUserId:targetAppUserId||null,
           selfVisible:Boolean(selfQ?.data),
           targetVisible:Boolean(targetQ?.data),
           visibleRoleCount:Array.isArray(rolesQ?.data)?rolesQ.data.length:0,
