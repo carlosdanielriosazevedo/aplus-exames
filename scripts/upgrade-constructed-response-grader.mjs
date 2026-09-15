@@ -9,14 +9,14 @@ const newNormalizer=`function normalizedWords(value){
   const numberWords={zero:"0",um:"1",uma:"1",dois:"2",duas:"2",tres:"3",quatro:"4",cinco:"5",seis:"6",sete:"7",oito:"8",nove:"9",dez:"10"};
   return base.replace(/\\b(zero|um|uma|dois|duas|tres|quatro|cinco|seis|sete|oito|nove|dez)\\b/g,word=>numberWords[word]||word);
 }
-function escapeRegex(value){return String(value).replace(/[.*+?^\\${}()|[\\]\\\\]/g,"\\\\$&")}
+function escapeRegex(value){return String(value).replace(/[.*+?^$()|[\\]\\\\{}]/g,"\\\\$&")}
 function conceptPresent(input,candidate){
   const concept=normalizedWords(candidate);
   if(!concept)return false;
-  if(new RegExp(\`(?:^|\\\\b)\${escapeRegex(concept)}(?:\\\\b|$)\`,"u").test(input))return true;
+  if(new RegExp("(?:^|\\\\b)"+escapeRegex(concept)+"(?:\\\\b|$)","u").test(input))return true;
   if(concept.endsWith("r")&&concept.length>=6){
     const stem=concept.slice(0,-1);
-    return new RegExp(\`\\\\b\${escapeRegex(stem)}[a-z]*\\\\b\`,"u").test(input);
+    return new RegExp("\\\\b"+escapeRegex(stem)+"[a-z]*\\\\b","u").test(input);
   }
   return false;
 }
@@ -81,7 +81,6 @@ function presentsOnlyFinalResult(question,answer){
   const lines=stepwiseLines(answer);
   if(lines.length!==1||question?.response?.type!=="stepwise"||question.response.steps.length<2)return false;
   const line=lines[0];
-  // Uma cadeia de cálculo numa única linha é resolução, não "apenas resultado final".
   const equalityCount=(line.match(/=/g)||[]).length;
   if(equalityCount>1||/[→⇒]/u.test(line))return false;
   const finalSpec=question.response.steps.at(-1);
