@@ -82,4 +82,36 @@ assert.equal(summary.pendingPoints,10);
 assert.equal(summary.reviewRequired,true);
 assert.ok(summary.score20Upper>summary.score20);
 
-console.log("✓ real-world constructed-response audit: partial credit, contradictions, wrong quantities, free prose and conservative mastery updates validated");
+// 11) Ordem das linhas: uma resolução correta continua válida mesmo quando o aluno escreve a conclusão antes da derivação.
+const reorderedDerivative=gradeResponse(derivative,"f'(2)=10\nf'(x)=-2+3*x*x\n3*2^2-2");
+assert.equal(reorderedDerivative.correct,true,"A ordem física das linhas não deve anular matemática correta e identificável.");
+assert.equal(reorderedDerivative.points,35);
+
+// 12) Expressões polinomiais equivalentes devem ser aceites, não apenas a grafia da solução-modelo.
+const equivalentDerivative=gradeResponse(derivative,"f'(x)=-2+3*x*x\n3*2^2-2\nf'(2)=10");
+assert.equal(equivalentDerivative.correct,true,"Formas polinomiais equivalentes devem valer o mesmo.");
+assert.equal(equivalentDerivative.points,35);
+
+// 13) Separador decimal português e tolerância de arredondamento.
+const numeric={id:"realworld-num",points:10,response:{type:"numeric",value:2.5,tolerance:.01}};
+assert.equal(gradeResponse(numeric,"2,50").correct,true);
+assert.equal(gradeResponse(numeric,"2,509").correct,true,"Um arredondamento dentro da tolerância deve ser aceite.");
+assert.equal(gradeResponse(numeric,"2,52").correct,false,"Um valor fora da tolerância não deve ser aceite.");
+
+// 14) Frações equivalentes, incluindo sinais, devem ser reconhecidas matematicamente.
+const fraction={id:"realworld-frac",points:10,response:{type:"fraction",numerator:1,denominator:2}};
+assert.equal(gradeResponse(fraction,"2/4").correct,true);
+assert.equal(gradeResponse(fraction,"-2/-4").correct,true);
+assert.equal(gradeResponse(fraction,"1/0").correct,false);
+
+// 15) Valores iguais em etapas distintas só contam duas vezes se estiverem explicitamente identificados.
+const labelledRepeated=gradeResponse(statistics,"n=4\nmédia=4");
+assert.equal(labelledRepeated.points,25);
+assert.equal(labelledRepeated.stepResults.filter(row=>row.correct).length,2);
+
+// 16) Uma cadeia de cálculo correta e explicitamente identificada deve ser validada até ao resultado final.
+const chained=gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=3*2²-2=10");
+assert.equal(chained.correct,true);
+assert.equal(chained.points,35);
+
+console.log("✓ real-world constructed-response audit: partial credit, contradictions, equivalence, rounding, fractions, reordered work and conservative mastery updates validated");
