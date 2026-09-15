@@ -27,6 +27,11 @@ function conceptGroupsMatch(spec,input){
   const explicitNegation=allCandidates.some(candidate=>candidate.includes("nao")&&conceptPresent(input,candidate));
   if(/\\b(?:nao|nunca|jamais)\\b/u.test(input)&&!explicitNegation)return false;
   return groups.every(group=>group.some(candidate=>conceptPresent(input,candidate)));
+}
+function optionalUnitOmissionMatches(input,candidate){
+  const normalizedCandidate=normalizedWords(candidate).replace(/[.!]$/g,"");
+  const withoutUnit=normalizedCandidate.replace(/\\s*(?:€|eur|euros?|%|º|graus?|mm|cm|dm|km|m|mg|g|kg|ml|cl|dl|l)\\s*$/u,"").trim();
+  return withoutUnit!==normalizedCandidate&&input.replace(/[.!]$/g,"")===withoutUnit;
 }`;
 
 if(source.includes(oldNormalizer))source=source.replace(oldNormalizer,newNormalizer);
@@ -39,16 +44,69 @@ const oldText=`  if(spec.type==="text"){
     correct=hasText(value)&&accepted.includes(input.replace(/[.!]$/g,""));
     if(!input)reason="empty_justification";
   }`;
-const newText=`  if(spec.type==="text"){
+const oldTextAlreadyPatched=`  if(spec.type==="text"){
     const input=normalizedWords(value);
     const accepted=[spec.expected,...(spec.accepted||[])].map(candidate=>normalizedWords(candidate).replace(/[.!]$/g,""));
     correct=hasText(value)&&accepted.includes(input.replace(/[.!]$/g,""));
     if(!correct&&hasText(value)&&conceptGroupsMatch(spec,input))correct=true;
     if(!input)reason="empty_justification";
   }`;
+const newText=`  if(spec.type==="text"){
+    const input=normalizedWords(value);
+    const candidates=[spec.expected,...(spec.accepted||[])].filter(Boolean);
+    const accepted=candidates.map(candidate=>normalizedWords(candidate).replace(/[.!]$/g,""));
+    correct=hasText(value)&&accepted.includes(input.replace(/[.!]$/g,""));
+    // IAVE 2026, situação 16: a omissão da unidade no resultado final não desvaloriza.
+    if(!correct&&hasText(value))correct=candidates.some(candidate=>optionalUnitOmissionMatches(input,candidate));
+    if(!correct&&hasText(value)&&conceptGroupsMatch(spec,input))correct=true;
+    if(!input)reason="empty_justification";
+  }`;
 
 if(source.includes(oldText))source=source.replace(oldText,newText);
-else if(!source.includes("conceptGroupsMatch(spec,input)"))throw new Error("constructedResponse text grading anchor not found");
+else if(source.includes(oldTextAlreadyPatched))source=source.replace(oldTextAlreadyPatched,newText);
+else if(!source.includes("optionalUnitOmissionMatches(input,candidate)"))throw new Error("constructedResponse text grading anchor not found");
+
+const stepwiseAnchor=`function stepwiseLines(answer){
+  if(typeof answer==="string")return answer.split(/\\r?\\n/).map(row=>row.trim()).filter(Boolean);
+  if(hasText(answer?.working))return answer.working.split(/\\r?\\n/).map(row=>row.trim()).filter(Boolean);
+  return [];
+}`;
+const stepwiseReplacement=`function stepwiseLines(answer){
+  if(typeof answer==="string")return answer.split(/\\r?\\n/).map(row=>row.trim()).filter(Boolean);
+  if(hasText(answer?.working))return answer.working.split(/\\r?\\n/).map(row=>row.trim()).filter(Boolean);
+  return [];
+}
+function presentsOnlyFinalResult(question,answer){
+  if(answer&&typeof answer==="object"&&Object.values(answer.steps||{}).some(hasText))return false;
+  const lines=stepwiseLines(answer);
+  if(lines.length!==1||question?.response?.type!=="stepwise"||question.response.steps.length<2)return false;
+  const line=lines[0];
+  // Uma cadeia de cálculo numa única linha é resolução, não "apenas resultado final".
+  const equalityCount=(line.match(/=/g)||[]).length;
+  if(equalityCount>1||/[→⇒]/u.test(line))return false;
+  const finalSpec=question.response.steps.at(-1);
+  return gradeStep(finalSpec,line).correct;
+}`;
+if(source.includes(stepwiseAnchor))source=source.replace(stepwiseAnchor,stepwiseReplacement);
+else if(!source.includes("function presentsOnlyFinalResult(question,answer)"))throw new Error("stepwise final-result anchor not found");
+
+const gradeAnchor=`  if(type==="stepwise"){
+    const lines=stepwiseLines(answer);
+    const fullAnswer=typeof answer==="string"?answer:answer?.working||"";`;
+const gradeReplacement=`  if(type==="stepwise"){
+    // IAVE 2026, situação 3: num item por etapas, apresentar apenas o resultado final vale 0 pontos.
+    if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only"};
+    const lines=stepwiseLines(answer);
+    const fullAnswer=typeof answer==="string"?answer:answer?.working||"";`;
+if(source.includes(gradeAnchor))source=source.replace(gradeAnchor,gradeReplacement);
+else if(!source.includes('reason:"final_result_only"'))throw new Error("stepwise grade anchor not found");
+
+const feedbackAnchor=`export function stepFeedback(row){
+  if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Compara-o com a resolução abaixo.";`;
+const feedbackReplacement=`export function stepFeedback(row){
+  if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
+  if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Compara-o com a resolução abaixo.";`;
+if(source.includes(feedbackAnchor))source=source.replace(feedbackAnchor,feedbackReplacement);
 
 fs.writeFileSync(path,source);
-console.log("✓ constructed-response grader upgraded: conservative concept-group matching enabled");
+console.log("✓ constructed-response grader upgraded: IAVE staged-item rules + conservative natural-language matching enabled");
