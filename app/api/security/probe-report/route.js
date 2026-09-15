@@ -22,10 +22,13 @@ export async function POST(request){
       actor:session.user?.email||session.authUserId,
       actorAuthUserId:session.authUserId,
       targetAuthUserId:body?.targetAuthUserId||null,
+      targetAppUserId:body?.targetAppUserId||null,
       selfVisible:Boolean(body?.selfVisible),
       targetVisible:Boolean(body?.targetVisible),
       visibleRoleCount:Number(body?.visibleRoleCount)||0,
       targetProfileVisible:Boolean(body?.targetProfileVisible),
+      targetProfileWriteAllowed:Boolean(body?.targetProfileWriteAllowed),
+      targetProfileWriteDenied:Boolean(body?.targetProfileWriteDenied),
       reviewerAllowed:Boolean(body?.reviewerAllowed),
       reviewerStatus:Number(body?.reviewerStatus)||0,
       authSessionStatus:Number(body?.authSessionStatus)||0,
@@ -36,6 +39,7 @@ export async function POST(request){
       targetQueryError:safeError(body?.targetQueryError),
       rolesQueryError:safeError(body?.rolesQueryError),
       targetProfileQueryError:safeError(body?.targetProfileQueryError),
+      targetProfileWriteError:safeError(body?.targetProfileWriteError),
       at:new Date().toISOString()
     };
     console.log("SECURITY_AB_PROBE",JSON.stringify(report));
