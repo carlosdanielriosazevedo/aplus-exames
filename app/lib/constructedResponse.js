@@ -35,9 +35,13 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-11-cd-derivadas",focus:"Derivadas",difficulty:3,cognitive:"Raciocínio",
     q:"Seja f(x)=x³−2x. Calcula f′(2), apresentando todas as etapas.",
     response:{type:"stepwise",steps:[
-      step("derivative","1. Expressão de f′(x)","expression",15,{accepted:["f'(x)=3x^2-2","3x^2-2","f′(x)=3x^2-2"],expected:"f′(x)=3x²−2",placeholder:"Ex.: 3x^2−2"}),
-      step("substitution","2. Substituição de x=2","expression",8,{prefixes:["f'(2)"],accepted:["3*2^2-2","3x2^2-2","3·2^2-2","3(2)^2-2"],expected:"3×2²−2",placeholder:"Ex.: 3×2^2−2"}),
-      step("value","3. Valor de f′(2)","numeric",12,{value:10,tolerance:0,expected:"f′(2)=10",placeholder:"Ex.: 10"})
+      step("derivative","1. Expressão de f′(x)","expression",15,{accepted:["f'(x)=3x^2-2","3x^2-2","f′(x)=3x^2-2"],conceptualErrorAccepted:["f'(x)=3x^2","3x^2"],expected:"f′(x)=3x²−2",placeholder:"Ex.: 3x^2−2"}),
+      step("substitution","2. Substituição de x=2","expression",8,{prefixes:["f'(2)"],accepted:["3*2^2-2","3x2^2-2","3·2^2-2","3(2)^2-2"],errorEffects:[
+        {from:"derivative",reasons:["conceptual_error"],accepted:["3*2^2","3×2²","3(2)^2"],difficultyReduced:true}
+      ],expected:"3×2²−2",placeholder:"Ex.: 3×2^2−2"}),
+      step("value","3. Valor de f′(2)","numeric",12,{value:10,tolerance:0,errorEffects:[
+        {from:"derivative",reasons:["conceptual_error"],accepted:["12","f'(2)=12","f′(2)=12"],difficultyReduced:true}
+      ],expected:"f′(2)=10",placeholder:"Ex.: 10"})
     ]},
     points:35,sol:"f′(x)=3x²−2. Logo, f′(2)=3×2²−2=10.",
     hyp:"Pode existir dificuldade na regra da potência, na substituição ou no cálculo final.",
@@ -74,9 +78,13 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-12-int-integral-definido",focus:"Integral definido",difficulty:3,cognitive:"Raciocínio",
     q:"Calcula ∫₀¹ x dx, apresentando a primitiva e a aplicação da regra de Barrow.",
     response:{type:"stepwise",steps:[
-      step("primitive","1. Uma primitiva de x","expression",15,{accepted:["x^2/2","(x^2)/2","1/2x^2","x²/2"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
-      step("barrow","2. Aplicação nos extremos","expression",10,{accepted:["1^2/2-0^2/2","(1^2)/2-(0^2)/2","1/2-0"],expected:"1²/2−0²/2",placeholder:"Ex.: 1^2/2−0^2/2"}),
-      step("value","3. Valor exato do integral","fraction",10,{numerator:1,denominator:2,expected:"1/2",placeholder:"Ex.: 1/2"})
+      step("primitive","1. Uma primitiva de x","expression",15,{accepted:["x^2/2","(x^2)/2","1/2x^2","x²/2"],conceptualErrorAccepted:["x^2","x²"],expected:"x²/2",placeholder:"Ex.: x^2/2"}),
+      step("barrow","2. Aplicação nos extremos","expression",10,{accepted:["1^2/2-0^2/2","(1^2)/2-(0^2)/2","1/2-0"],errorEffects:[
+        {from:"primitive",reasons:["conceptual_error"],accepted:["1^2-0^2","1²−0²"],difficultyReduced:false}
+      ],expected:"1²/2−0²/2",placeholder:"Ex.: 1^2/2−0^2/2"}),
+      step("value","3. Valor exato do integral","fraction",10,{numerator:1,denominator:2,errorEffects:[
+        {from:"primitive",reasons:["conceptual_error"],accepted:["1"],difficultyReduced:false}
+      ],expected:"1/2",placeholder:"Ex.: 1/2"})
     ]},
     points:35,sol:"Uma primitiva de x é x²/2. Pela regra de Barrow, [x²/2]₀¹=1²/2−0²/2=1/2.",
     hyp:"Pode existir dificuldade em determinar a primitiva, aplicar os extremos ou manter o valor exato.",
@@ -139,9 +147,13 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     microcompetencyId:"mc-11-suc-progressoes",focus:"Progressões",difficulty:2,cognitive:"Aplicação",
     q:"Numa progressão aritmética, u₁=3 e a razão é 2. Determina u₁₀, apresentando a expressão usada.",
     response:{type:"stepwise",steps:[
-      step("formula","1. Expressão do termo geral","expression",12,{accepted:["u_n=3+(n-1)*2","un=3+(n-1)*2","3+(n-1)*2","u_n=3+2(n-1)"],expected:"uₙ=3+2(n−1)",placeholder:"Ex.: u_n=3+2(n−1)"}),
-      step("substitution","2. Substituição de n=10","expression",10,{accepted:["3+2*(10-1)","3+2(10-1)","3+(10-1)*2"],expected:"3+2(10−1)",placeholder:"Ex.: 3+2(10−1)"}),
-      step("value","3. Valor de u₁₀","numeric",13,{value:21,tolerance:0,expected:"u₁₀=21",placeholder:"Ex.: u₁₀=21"})
+      step("formula","1. Expressão do termo geral","expression",12,{accepted:["u_n=3+(n-1)*2","un=3+(n-1)*2","3+(n-1)*2","u_n=3+2(n-1)"],conceptualErrorAccepted:["u_n=3+2n","un=3+2n","3+2n"],expected:"uₙ=3+2(n−1)",placeholder:"Ex.: u_n=3+2(n−1)"}),
+      step("substitution","2. Substituição de n=10","expression",10,{accepted:["3+2*(10-1)","3+2(10-1)","3+(10-1)*2"],errorEffects:[
+        {from:"formula",reasons:["conceptual_error"],accepted:["3+2*10","3+2(10)","3+20"],difficultyReduced:false}
+      ],expected:"3+2(10−1)",placeholder:"Ex.: 3+2(10−1)"}),
+      step("value","3. Valor de u₁₀","numeric",13,{value:21,tolerance:0,errorEffects:[
+        {from:"formula",reasons:["conceptual_error"],accepted:["23","u_10=23","u₁₀=23"],difficultyReduced:false}
+      ],expected:"u₁₀=21",placeholder:"Ex.: u₁₀=21"})
     ]},
     points:35,sol:"Numa progressão aritmética, uₙ=u₁+(n−1)r. Logo, u₁₀=3+(10−1)×2=21.",
     hyp:"Pode existir dificuldade em usar n−1 ou em substituir corretamente o índice.",
