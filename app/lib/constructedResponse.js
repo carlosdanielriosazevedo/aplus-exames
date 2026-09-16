@@ -264,7 +264,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("lower","1. Quadrado do extremo inferior","numeric",10,{value:1.9881,tolerance:0.00001,expected:"1,41²=1,9881",placeholder:"Ex.: 1,9881"}),
       step("upper","2. Quadrado do extremo superior","numeric",10,{value:2.0164,tolerance:0.00001,expected:"1,42²=2,0164",placeholder:"Ex.: 2,0164"}),
-      step("comparison","3. Comparação","expression",8,{accepted:["1.9881<2<2.0164","1,9881<2<2,0164"],expected:"1,9881<2<2,0164",placeholder:"Ex.: 1,9881<2<2,0164"}),
+      step("comparison","3. Comparação","expression",8,{accepted:["1.9881<2<2.0164","1,9881<2<2,0164"],incompleteAccepted:[
+        {value:"1,9881<2<1,42²",missingOnlyFinalPassage:true},
+        {value:"1,9881<2",missingOnlyFinalPassage:false}
+      ],expected:"1,9881<2<2,0164",placeholder:"Ex.: 1,9881<2<2,0164"}),
       step("conclusion","4. Conclusão","text",7,{accepted:["Logo, 1,41<√2<1,42.","Conclui-se que √2 pertence a ]1,41;1,42[."],expected:"Logo, 1,41<√2<1,42.",placeholder:"Conclui a localização de √2."})
     ]},
     points:35,sol:"1,41²=1,9881<2 e 1,42²=2,0164>2. Como os números são positivos, conclui-se que 1,41<√2<1,42.",
@@ -305,7 +308,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     q:"As listas A, B e C obtiveram, respetivamente, 4800, 2800 e 1200 votos. Distribui quatro mandatos pelo método de D'Hondt, apresentando os quocientes decisivos.",
     response:{type:"stepwise",steps:[
       step("quotientsA","1. Quocientes relevantes da lista A","expression",10,{accepted:["A={4800;2400;1600;1200}"],expected:"A={4800;2400;1600;1200}",placeholder:"Ex.: A={4800;2400;1600;1200}"}),
-      step("ranking","2. Quatro maiores quocientes por ordem","expression",12,{accepted:["4800(A)>2800(B)>2400(A)>1600(A)"],expected:"4800(A)>2800(B)>2400(A)>1600(A)",placeholder:"Ordena os quatro quocientes decisivos."}),
+      step("ranking","2. Quatro maiores quocientes por ordem","expression",12,{accepted:["4800(A)>2800(B)>2400(A)>1600(A)"],incompleteAccepted:[
+        {value:"4800(A)>2800(B)>2400(A)",missingOnlyFinalPassage:true},
+        {value:"4800(A)>2800(B)",missingOnlyFinalPassage:false}
+      ],expected:"4800(A)>2800(B)>2400(A)>1600(A)",placeholder:"Ordena os quatro quocientes decisivos."}),
       step("allocation","3. Distribuição dos mandatos","expression",13,{accepted:["A=3;B=1;C=0","A:3;B:1;C:0"],expected:"A=3; B=1; C=0",placeholder:"Ex.: A=3; B=1; C=0"})
     ]},
     points:35,sol:"Os quatro maiores quocientes são 4800 (A), 2800 (B), 2400 (A) e 1600 (A). Assim, A recebe 3 mandatos, B recebe 1 e C não recebe mandatos.",
@@ -333,7 +339,10 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     response:{type:"stepwise",steps:[
       step("verification","1. Verificação de P(2)","expression",10,{accepted:["P(2)=8-16+2+6=0","8-16+2+6=0"],expected:"P(2)=8−16+2+6=0",placeholder:"Substitui x por 2."}),
       step("quotient","2. Quociente da divisão por x−2","expression",12,{accepted:["x^2-2x-3","x²−2x−3"],expected:"x²−2x−3",placeholder:"Aplica Ruffini ou a divisão de polinómios."}),
-      step("factorization","3. Fatorização completa","expression",13,{accepted:["(x-2)(x-3)(x+1)","P(x)=(x-2)(x-3)(x+1)"],expected:"P(x)=(x−2)(x−3)(x+1)",placeholder:"Ex.: P(x)=(x−2)…"})
+      step("factorization","3. Fatorização completa","expression",13,{accepted:["(x-2)(x-3)(x+1)","P(x)=(x-2)(x-3)(x+1)"],incompleteAccepted:[
+        {value:"P(x)=(x−2)(x²−2x−3)",missingOnlyFinalPassage:true},
+        {value:"P(x)=(x−2)Q(x)",missingOnlyFinalPassage:false}
+      ],expected:"P(x)=(x−2)(x−3)(x+1)",placeholder:"Ex.: P(x)=(x−2)…"})
     ]},
     points:35,sol:"P(2)=8−16+2+6=0, logo x−2 é fator. A divisão dá x²−2x−3=(x−3)(x+1). Portanto, P(x)=(x−2)(x−3)(x+1).",
     hyp:"Pode existir dificuldade em ligar o resto nulo ao fator x−2 ou em fatorizar o quociente.",
