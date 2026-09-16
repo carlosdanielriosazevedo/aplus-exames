@@ -51,6 +51,38 @@ assert.notEqual(ambiguousValue?.reason,"copied_number_or_sign_error");
 assert.notEqual(ambiguousValue?.reason,"occasional_calculation_error");
 assert.notEqual(ambiguousValue?.classificationConfidence,"high");
 
+// Situação 10: a aplicação automática exige variantes de incompletude declaradas pelo item.
+const incompleteQuestion={
+  id:"AUDIT-IAVE-10",points:20,
+  response:{type:"stepwise",steps:[
+    {id:"work",label:"1. Resolução",type:"expression",points:10,expected:"x=4",accepted:["x=4"],incompleteAccepted:[
+      {value:"2x=8",missingOnlyFinalPassage:true},
+      {value:"2x",missingOnlyFinalPassage:false}
+    ]},
+    {id:"check",label:"2. Verificação",type:"numeric",points:10,value:4,tolerance:0,expected:"y=4"}
+  ]}
+};
+const missingOnlyFinalPassage=gradeResponse(incompleteQuestion,{steps:{work:"2x=8",check:"y=4"}});
+const missingFinalWork=missingOnlyFinalPassage.stepResults.find(row=>row.stepId==="work");
+assert.equal(missingFinalWork?.reason,"incomplete_step");
+assert.equal(missingFinalWork?.iaveSituation,"Situação 10");
+assert.equal(missingFinalWork?.classificationConfidence,"high");
+assert.equal(missingFinalWork?.missingOnlyFinalPassage,true);
+assert.equal(missingFinalWork?.points,9,"Situação 10: se falta apenas a passagem final, retira 1 ponto.");
+assert.equal(missingOnlyFinalPassage.points,19);
+
+const deeperIncomplete=gradeResponse(incompleteQuestion,{steps:{work:"2x",check:"y=4"}});
+const deeperWork=deeperIncomplete.stepResults.find(row=>row.stepId==="work");
+assert.equal(deeperWork?.reason,"incomplete_step");
+assert.equal(deeperWork?.missingOnlyFinalPassage,false);
+assert.equal(deeperWork?.points,5,"Situação 10: nas restantes resoluções incompletas, a etapa fica limitada a metade.");
+assert.equal(deeperIncomplete.points,15);
+
+const undeclaredIncomplete=gradeResponse(incompleteQuestion,{steps:{work:"x=5",check:"y=4"}});
+const undeclaredWork=undeclaredIncomplete.stepResults.find(row=>row.stepId==="work");
+assert.notEqual(undeclaredWork?.reason,"incomplete_step","Uma resposta não declarada não pode ser rotulada automaticamente como resolução incompleta.");
+assert.notEqual(undeclaredWork?.classificationConfidence,"high");
+
 const integral=byId("CRV2-12INT-STEPS-1");
 const wrongFinalForm=gradeResponse(integral,{steps:{primitive:"x²/2",barrow:"1²/2−0²/2",value:"0,5"}});
 const finalFormValue=wrongFinalForm.stepResults.find(row=>row.stepId==="value");
@@ -127,6 +159,34 @@ const unclearRounding=notClearlyRounding.stepResults.find(row=>row.stepId==="rou
 assert.notEqual(unclearRounding?.reason,"wrong_final_rounding");
 assert.notEqual(unclearRounding?.classificationConfidence,"high");
 
+// Nota 2 dos critérios gerais: uma etapa posterior só recebe teto automático se o item
+// declarar o efeito concreto do erro anterior e se esse efeito reduzir a dificuldade.
+const dependentErrorQuestion={
+  id:"AUDIT-IAVE-NOTE-2",points:19,
+  response:{type:"stepwise",steps:[
+    {id:"source",label:"1. Valor de q",type:"numeric",points:10,value:4,tolerance:0,expected:"q=4"},
+    {id:"downstream",label:"2. Etapa dependente",type:"numeric",points:9,value:8,tolerance:0,expected:"r=8",errorEffects:[
+      {from:"source",reasons:["copied_number_or_sign_error"],accepted:["r=10"],difficultyReduced:true}
+    ]}
+  ]}
+};
+const reducedDifficulty=gradeResponse(dependentErrorQuestion,{working:"q=2+2=4=5",steps:{downstream:"r=10"}});
+const reducedSource=reducedDifficulty.stepResults.find(row=>row.stepId==="source");
+const reducedDownstream=reducedDifficulty.stepResults.find(row=>row.stepId==="downstream");
+assert.equal(reducedSource?.reason,"copied_number_or_sign_error");
+assert.equal(reducedSource?.points,9);
+assert.equal(reducedDownstream?.reason,"upstream_error_effect");
+assert.equal(reducedDownstream?.iaveRule,"Nota 2");
+assert.equal(reducedDownstream?.classificationConfidence,"high");
+assert.equal(reducedDownstream?.difficultyReduced,true);
+assert.equal(reducedDownstream?.points,4,"Nota 2: se o erro anterior reduz a dificuldade, a etapa dependente fica limitada à parte inteira de metade.");
+assert.equal(reducedDifficulty.points,13);
+
+const undeclaredDependentEffect=gradeResponse(dependentErrorQuestion,{working:"q=2+2=4=5",steps:{downstream:"r=9"}});
+const undeclaredDownstream=undeclaredDependentEffect.stepResults.find(row=>row.stepId==="downstream");
+assert.notEqual(undeclaredDownstream?.reason,"upstream_error_effect","Sem resultado propagado explicitamente declarado, o corretor não deve inventar uma relação causal entre os erros.");
+assert.notEqual(undeclaredDownstream?.classificationConfidence,"high");
+
 const alternative=gradeResponse(derivative,"Usei uma resolução cientificamente válida, mas escrita por um processo não reconhecido automaticamente.");
 assert.equal(alternative.reviewRequired,true,"IAVE situação 1: um processo alternativo não deve ser automaticamente rejeitado; quando o motor não o certifica, fica por rever.");
 
@@ -139,4 +199,4 @@ const wrongUnit=gradeResponse(finance,{steps:{interest:"J=50",capital:"C=1050",c
 assert.equal(wrongUnit.points,27,"Uma unidade errada não deve ser confundida com simples omissão da unidade.");
 assert.equal(wrongUnit.reviewRequired,true);
 
-console.log("✓ IAVE 2026 scoring policy audit: situações 3, 7, 8, 12, 13, 14, 15 e 16 + conservative ambiguity handling validated");
+console.log("✓ IAVE 2026 scoring policy audit: situações 3, 7, 8, 10, 12, 13, 14, 15 e 16 + Nota 2 dependente e ambiguidade conservadora validadas");
