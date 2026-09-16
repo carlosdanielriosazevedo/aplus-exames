@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
-  PORTUGUESE_COMPETENCIES,PORTUGUESE_DOMAINS,PORTUGUESE_REFERENCE_SOURCES,PORTUGUESE_RELEASE_POLICY,
+  PORTUGUESE_COMPETENCIES,PORTUGUESE_CURRICULUM_GOVERNANCE,PORTUGUESE_DOMAINS,PORTUGUESE_REFERENCE_SOURCES,PORTUGUESE_RELEASE_POLICY,
   PORTUGUESE_RESPONSE_TYPES,PORTUGUESE_YEAR_FOCUS
 } from "../app/data/portugueseFoundation.js";
 import {SECONDARY_EXAM_SUBJECTS,subjectStatusLabel} from "../app/data/subjects.js";
@@ -34,8 +34,21 @@ for(const competency of PORTUGUESE_COMPETENCIES){
   assert.equal(competency.writtenExam,domain.writtenExam,`${competency.id}: incoerência entre competência e domínio escrito.`);
 }
 assert.deepEqual(PORTUGUESE_YEAR_FOCUS.map(focus=>focus.year),["10.º","11.º","12.º"]);
-assert.equal(PORTUGUESE_REFERENCE_SOURCES.length,4);
-for(const source of PORTUGUESE_REFERENCE_SOURCES)assert.match(source.url,/^https:\/\/(?:www\.dge\.mec\.pt|iave\.pt)\//);
+assert.equal(PORTUGUESE_REFERENCE_SOURCES.length,5);
+assert.equal(PORTUGUESE_REFERENCE_SOURCES.filter(source=>source.status==="in-force").length,4);
+assert.equal(PORTUGUESE_REFERENCE_SOURCES.find(source=>source.id==="ae-revision-2026").status,"consultation");
+for(const source of PORTUGUESE_REFERENCE_SOURCES)assert.match(source.url,/^https:\/\/(?:www\.dge\.mec\.pt|eduqa\.pt|iave\.pt)\//);
+for(const focus of PORTUGUESE_YEAR_FOCUS){
+  const source=PORTUGUESE_REFERENCE_SOURCES.find(candidate=>candidate.id===focus.sourceId);
+  assert.equal(source?.status,"in-force",`${focus.year}: o mapa curricular só pode usar uma fonte em vigor.`);
+  assert.equal(focus.curriculumStatus,"in-force");
+  assert.ok(focus.readingGenres.length>=2);
+  assert.ok(focus.writingGenres.length>=3);
+  assert.ok(focus.literatureCorpus.length>=5);
+  assert.ok(focus.grammarFocus.length>=6);
+}
+assert.equal(PORTUGUESE_CURRICULUM_GOVERNANCE.verifiedOn,"2026-09-16");
+assert.match(PORTUGUESE_CURRICULUM_GOVERNANCE.rule,/não substitui/);
 
 const responseTypes=new Map(PORTUGUESE_RESPONSE_TYPES.map(type=>[type.id,type]));
 assert.equal(responseTypes.size,4);
