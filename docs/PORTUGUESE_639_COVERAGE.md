@@ -1,0 +1,32 @@
+# Cobertura de Português 639
+
+> Relatório estrutural gerado por `npm run portuguese-coverage`. Não representa validação humana nem autoriza publicação.
+
+## Estado geral
+
+- **12** itens originais em protótipo.
+- **9/16** competências do exame escrito com pelo menos um item.
+- **7** competências do exame escrito ainda sem item.
+- **4** competências de oralidade mapeadas separadamente e excluídas do exame escrito.
+- Produção escrita extensa mantém avaliação provisória por grelha; não existe nota final automática.
+
+## Matriz
+
+| Domínio | Competência | Itens | Estado |
+|---|---|---:|---|
+| Leitura | `pt-leitura-informacao` — Informação explícita e ideia central | 1 | iniciada |
+| Leitura | `pt-leitura-inferencia` — Inferência e interpretação | 0 | lacuna |
+| Leitura | `pt-leitura-coesao` — Coesão, referência e conectores | 2 | iniciada |
+| Leitura | `pt-leitura-organizacao` — Organização e intenção do texto | 0 | lacuna |
+| Educação Literária | `pt-literatura-recursos` — Recursos expressivos e efeitos de sentido | 1 | iniciada |
+| Educação Literária | `pt-literatura-temas` — Temas, símbolos e sentido global | 2 | iniciada |
+| Educação Literária | `pt-literatura-voz` — Voz, perspetiva e construção das personagens | 0 | lacuna |
+| Educação Literária | `pt-literatura-forma` — Relação entre forma, estrutura e conteúdo | 0 | lacuna |
+| Escrita | `pt-escrita-exposicao` — Exposição e explicação | 1 | iniciada |
+| Escrita | `pt-escrita-argumentacao` — Argumentação e fundamentação | 1 | iniciada |
+| Escrita | `pt-escrita-opiniao` — Texto de opinião extenso | 1 | iniciada |
+| Escrita | `pt-escrita-revisao` — Planificação, revisão e aperfeiçoamento | 0 | lacuna |
+| Gramática | `pt-gramatica-sintaxe` — Funções sintáticas | 1 | iniciada |
+| Gramática | `pt-gramatica-oracoes` — Coordenação e subordinação | 2 | iniciada |
+| Gramática | `pt-gramatica-coesao` — Coesão referencial e valor de conectores | 0 | lacuna |
+| Gramática | `pt-gramatica-morfologia-semantica` — Morfologia, modalidade e valores semânticos | 0 | lacuna |
