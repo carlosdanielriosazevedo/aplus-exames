@@ -448,6 +448,62 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     points:35,sol:"P(5)=1000×1,07⁵=1402,5517307… Como a primeira casa decimal é 5, arredonda-se às unidades: P(5)≈1403.",
     hyp:"Pode arredondar prematuramente ou aplicar incorretamente a regra de arredondamento final.",
     contexts:["exam"],signature:"12-expl:Modelação:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10FUN-MOD-STEPS-1",themeId:"10-fun",subtopicId:"10-fun-transformacoes-ramos-modulo",
+    microcompetencyId:"mc-10-fun-transformacoes-modulo",focus:"Transformações e módulo",difficulty:3,cognitive:"Raciocínio",
+    q:"Considera f(x)=|x−2|−1. Indica o vértice do gráfico e determina os zeros de f, apresentando a resolução.",
+    response:{type:"stepwise",steps:[
+      step("vertex","1. Vértice do gráfico","expression",9,{accepted:["V=(2,-1)","(2,-1)","V(2,-1)"],expected:"V=(2,−1)",placeholder:"Ex.: V=(2,−1)"}),
+      step("equation","2. Equação para determinar os zeros","expression",9,{accepted:["|x-2|=1","abs(x-2)=1"],expected:"|x−2|=1",placeholder:"Ex.: |x−2|=1"}),
+      step("branches","3. Separação nos dois casos","expression",9,{accepted:["x-2=1 ou x-2=-1","x−2=1 ou x−2=−1","x-2=+-1"],expected:"x−2=1 ou x−2=−1",placeholder:"Apresenta os dois casos."}),
+      step("zeros","4. Zeros da função","expression",8,{accepted:["x=1 ou x=3","{1,3}","Z={1,3}"],expected:"Z={1,3}",placeholder:"Ex.: Z={1,3}"})
+    ]},
+    points:35,sol:"O gráfico de |x| foi transladado 2 unidades para a direita e 1 para baixo, logo o vértice é (2,−1). Para os zeros, |x−2|−1=0, isto é, |x−2|=1. Assim, x−2=1 ou x−2=−1, donde x=3 ou x=1.",
+    hyp:"Pode trocar o sentido das translações ou considerar apenas um dos ramos da equação modular.",
+    contexts:["exam"],signature:"10-fun:Transformações e módulo:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-11CD-TAN-STEPS-1",themeId:"11-cd",subtopicId:"11-cd-tangente",
+    microcompetencyId:"mc-11-cd-tangente",focus:"Reta tangente",difficulty:3,cognitive:"Aplicação",
+    q:"Considera f(x)=x². Determina uma equação da reta tangente ao gráfico de f no ponto de abcissa 1.",
+    response:{type:"stepwise",steps:[
+      step("point","1. Ponto de tangência","expression",7,{accepted:["P=(1,1)","(1,1)","P(1,1)"],expected:"P=(1,1)",placeholder:"Calcula f(1)."}),
+      step("derivative","2. Função derivada","expression",9,{accepted:["f'(x)=2x","2x","f′(x)=2x"],expected:"f′(x)=2x",placeholder:"Ex.: f'(x)=2x"}),
+      step("slope","3. Declive da tangente","numeric",8,{value:2,tolerance:0,expected:"m=f′(1)=2",placeholder:"Ex.: m=2"}),
+      step("line","4. Equação da reta tangente","expression",11,{accepted:["y=2x-1","y-1=2(x-1)","2x-y-1=0"],expected:"y=2x−1",placeholder:"Ex.: y=2x−1"})
+    ]},
+    points:35,sol:"O ponto de tangência é (1,f(1))=(1,1). Como f′(x)=2x, o declive é f′(1)=2. Pela forma ponto-declive, y−1=2(x−1), ou seja, y=2x−1.",
+    hyp:"Pode confundir o valor da função com o declive ou escrever uma reta que não passa pelo ponto de tangência.",
+    contexts:["exam"],signature:"11-cd:Reta tangente:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12CPLX-TRIG-STEPS-1",themeId:"12-cplx",subtopicId:"12-cplx-forma-trig",
+    microcompetencyId:"mc-12-cplx-forma-trigonometrica",focus:"Forma trigonométrica",difficulty:3,cognitive:"Aplicação",
+    q:"Escreve o número complexo z=−1+√3i na forma trigonométrica, usando um argumento pertencente a [0,2π[.",
+    response:{type:"stepwise",steps:[
+      step("modulus","1. Módulo de z","expression",9,{accepted:["|z|=2","sqrt((-1)^2+(sqrt(3))^2)=2","√((-1)²+(√3)²)=2"],expected:"|z|=2",placeholder:"Calcula o módulo."}),
+      step("quadrant","2. Quadrante do afixo","text",7,{accepted:["O afixo pertence ao segundo quadrante.","Segundo quadrante.","2.º quadrante."],expected:"O afixo pertence ao segundo quadrante.",placeholder:"Identifica o quadrante."}),
+      step("argument","3. Argumento em [0,2π[","expression",9,{accepted:["arg(z)=2pi/3","2pi/3","arg(z)=2π/3"],expected:"arg(z)=2π/3",placeholder:"Ex.: arg(z)=2π/3"}),
+      step("trig","4. Forma trigonométrica","expression",10,{accepted:["z=2(cos(2pi/3)+i sin(2pi/3))","2(cos(2pi/3)+i sin(2pi/3))","z=2(cos(2π/3)+i sin(2π/3))"],expected:"z=2(cos(2π/3)+i sin(2π/3))",placeholder:"Escreve z=r(cos θ+i sin θ)."})
+    ]},
+    points:35,sol:"Tem-se |z|=√((-1)²+(√3)²)=2. O afixo está no segundo quadrante e o ângulo de referência é π/3, logo um argumento em [0,2π[ é 2π/3. Portanto, z=2(cos(2π/3)+i sin(2π/3)).",
+    hyp:"Pode escolher o argumento do primeiro quadrante ou omitir o módulo na forma trigonométrica.",
+    contexts:["exam"],signature:"12-cplx:Forma trigonométrica:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12EXPL-LOG-STEPS-1",themeId:"12-expl",subtopicId:"12-expl-logaritmica",
+    microcompetencyId:"mc-12-expl-logaritmos",focus:"Função logarítmica",difficulty:3,cognitive:"Raciocínio",
+    q:"Resolve, em ℝ, a equação log₂(x−1)=3, indicando a condição de existência.",
+    response:{type:"stepwise",steps:[
+      step("domain","1. Condição de existência","expression",8,{accepted:["x-1>0","x>1","CE:x>1"],expected:"x−1>0 ⇔ x>1",placeholder:"Indica a condição de existência."}),
+      step("exponential","2. Passagem para a forma exponencial","expression",10,{accepted:["x-1=2^3","x−1=2³"],expected:"x−1=2³",placeholder:"Usa a definição de logaritmo."}),
+      step("solution","3. Resolução da equação","expression",9,{accepted:["x-1=8 => x=9","x−1=8 ⇔ x=9","x=9"],expected:"x−1=8 ⇔ x=9",placeholder:"Resolve em ordem a x."}),
+      step("check","4. Verificação da condição e conjunto-solução","text",8,{accepted:["Como 9>1, a solução é S={9}.","9 satisfaz a condição x>1, logo S={9}.","S={9}, pois 9>1."],expected:"Como 9>1, a solução é S={9}.",placeholder:"Confirma a condição e conclui."})
+    ]},
+    points:35,sol:"A condição de existência é x−1>0, ou seja, x>1. Pela definição de logaritmo, x−1=2³=8, pelo que x=9. Como 9>1, a solução é S={9}.",
+    hyp:"Pode ignorar a condição de existência ou trocar a base pelo expoente na passagem à forma exponencial.",
+    contexts:["exam"],signature:"12-expl:Função logarítmica:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   }
 ];
 
