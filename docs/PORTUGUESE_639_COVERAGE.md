@@ -1,6 +1,8 @@
 # Cobertura de Português 639
 
 > Relatório estrutural gerado por `npm run portuguese-coverage`. Não representa validação humana nem autoriza publicação.
+>
+> Esta matriz de competências é provisória até ficar cruzada, por ano, com as Aprendizagens Essenciais da DGE e com a informação-prova e os critérios IAVE em vigor.
 
 ## Estado geral
 
