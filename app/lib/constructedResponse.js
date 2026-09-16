@@ -671,9 +671,11 @@ function presentsOnlyFinalResult(question,answer){
   if(lines.length!==1||question?.response?.type!=="stepwise"||question.response.steps.length<2)return false;
   const line=lines[0];
   const equalityCount=(line.match(/=/g)||[]).length;
-  if(equalityCount>1||/[→⇒]/u.test(line))return false;
+  if(/[→⇒]/u.test(line))return false;
+  if(equalityCount>1&&!line.includes(";"))return false;
   const finalSpec=question.response.steps.at(-1);
-  return gradeStep(finalSpec,line).correct;
+  if(gradeStep(finalSpec,line).correct)return true;
+  return gradeStepFromWorking(finalSpec,[line],line,new Set()).correct;
 }
 
 function constantValue(source){
