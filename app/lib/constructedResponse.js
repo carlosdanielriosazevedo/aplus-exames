@@ -1,5 +1,5 @@
 import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
-import {scoreIaveStep,iaveSituationLabel,dependentStepCap} from "./iaveScoring.js";
+import {scoreIaveStep,iaveSituationLabel,dependentStepCap,applyIaveGlobalPenalties} from "./iaveScoring.js";
 const step=(id,label,type,points,expected)=>({id,label,type,points,...expected});
 
 export const CONSTRUCTED_RESPONSE_BANK=[
@@ -505,6 +505,11 @@ function declaredIncompleteStep(spec,value){
   const actual=normalizedDeclaredStepValue(spec,value);
   return spec.incompleteAccepted.find(entry=>entry&&typeof entry==="object"&&hasText(entry.value)&&typeof entry.missingOnlyFinalPassage==="boolean"&&normalizedDeclaredStepValue(spec,entry.value)===actual)||null;
 }
+function declaredIntermediateRounding(spec,value){
+  if(!hasText(value)||!Array.isArray(spec?.intermediateRoundingAccepted))return null;
+  const actual=normalizedDeclaredStepValue(spec,value);
+  return spec.intermediateRoundingAccepted.find(entry=>hasText(entry)&&normalizedDeclaredStepValue(spec,entry)===actual)||null;
+}
 function declaredUpstreamErrorEffect(spec,value,stepResults){
   if(!hasText(value)||!Array.isArray(spec?.errorEffects))return null;
   const actual=normalizedDeclaredStepValue(spec,value);
@@ -568,6 +573,10 @@ function gradeStep(spec,value){
     if(incomplete){
       reason="incomplete_step";
       return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason,missingOnlyFinalPassage:incomplete.missingOnlyFinalPassage}),maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",missingOnlyFinalPassage:incomplete.missingOnlyFinalPassage};
+    }
+    if(declaredIntermediateRounding(spec,value)){
+      reason="intermediate_rounding";
+      return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:spec.points,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",globalPenalty:1};
     }
   }
   return {stepId:spec.id,label:spec.label,status:correct?"correct":"incorrect",correct,points:correct?spec.points:0,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason:correct?null:reason};
@@ -656,6 +665,7 @@ export function stepFeedback(row){
   if(row.reason==="copied_number_or_sign_error")return "A cadeia mostra o valor correto e uma troca isolada de algarismo ou sinal na sua transcrição. Aplicámos apenas a desvalorização prevista para esta situação.";
   if(row.reason==="occasional_calculation_error")return "O processo identificado está correto, mas há uma falha ocasional no cálculo final desta etapa. Aplicámos a desvalorização prevista nos critérios IAVE.";
   if(row.reason==="incomplete_step")return row.missingOnlyFinalPassage?"A etapa está correta até à última passagem necessária. Foi aplicada apenas a desvalorização prevista para essa omissão final.":"A etapa está incompleta segundo o critério específico do item. Foi aplicado o limite de cotação previsto nos critérios IAVE.";
+  if(row.reason==="intermediate_rounding")return "Foi identificado um cálculo intermédio com número de casas decimais diferente do solicitado ou um arredondamento intermédio incorreto. A regra geral IAVE retira um ponto à soma das pontuações da resposta.";
   if(row.reason==="upstream_error_effect")return row.difficultyReduced?"Esta etapa segue corretamente o erro anterior, mas esse erro tornou a etapa mais fácil. Aplicámos o limite de metade da cotação previsto na Nota 2 dos critérios IAVE.":"Esta etapa segue corretamente o erro anterior sem redução de dificuldade e foi classificada pelo critério específico adaptado.";
   if(row.reason==="wrong_final_form")return "O valor é matematicamente equivalente, mas não está apresentado na forma final pedida. Aplicámos a desvalorização prevista nos critérios IAVE.";
   if(row.reason==="approximate_instead_of_exact")return "Foi apresentado um valor aproximado quando era exigido um valor exato. Aplicámos a desvalorização prevista nos critérios IAVE.";
@@ -732,9 +742,12 @@ export function gradeResponse(question,answer){
       const points=effect.difficultyReduced?dependentStepCap(spec.points,{upstreamDifficultyReduced:true}):spec.points;
       return {...result,status:points===spec.points?"correct":"partial",correct:points===spec.points,points,reason:"upstream_error_effect",classificationConfidence:"high",iaveRule:"Nota 2",sourceStepId:effect.from,difficultyReduced:effect.difficultyReduced};
     });
-    const points=stepResults.reduce((sum,row)=>sum+row.points,0),correct=points===maxPoints;
+    const stepPoints=stepResults.reduce((sum,row)=>sum+row.points,0);
+    const globalReasons=stepResults.some(row=>row.reason==="intermediate_rounding")?[{reason:"intermediate_rounding"}]:[];
+    const points=applyIaveGlobalPenalties(stepPoints,globalReasons),globalPenalty=stepPoints-points,correct=points===maxPoints;
     const pendingPoints=stepResults.filter(row=>row.status==="needs_review").reduce((sum,row)=>sum+row.maxPoints,0);
-    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,reason:pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect"};
+    const globalPenalties=globalReasons.map(item=>({reason:item.reason,iaveSituation:iaveSituationLabel(item.reason),points:1,classificationConfidence:"high"}));
+    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason:pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect"};
   }
   let correct=false,reason="incorrect";
   if(type==="choice")correct=answer===question.a;
