@@ -4,11 +4,11 @@
 
 ## Estado geral
 
-- **35** itens de resposta construída em **35/113** submatérias.
-- **78** submatérias ainda sem resposta construída: **43 críticas** e **35 de prioridade alta**.
+- **41** itens de resposta construída em **41/113** submatérias.
+- **72** submatérias ainda sem resposta construída: **37 críticas** e **35 de prioridade alta**.
 - **1** item de completamento estruturado, contabilizado separadamente.
-- Cobertura por ano: 10.º **11/31** · 11.º **9/35** · 12.º **15/47**.
-- Capacidades materializadas em itens reais: texto/justificação **14** · propagação de erro **5** · redução de dificuldade **2** · resolução incompleta **3** · arredondamento explícito **1**.
+- Cobertura por ano: 10.º **12/31** · 11.º **11/35** · 12.º **18/47**.
+- Capacidades materializadas em itens reais: texto/justificação **17** · propagação de erro **5** · redução de dificuldade **2** · resolução incompleta **3** · arredondamento explícito **1**.
 
 A prioridade **crítica** significa apenas: submatéria sem resposta construída dentro de um tema com relevância ou poder de bloqueio elevados. Não significa que todas precisem imediatamente de propagação de erro, arredondamento ou outro critério que não se aplique matematicamente.
 
@@ -40,7 +40,7 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 10.º | Geometria analítica | `10-ga-coordenadas-transformacoes` | Coordenadas e transformações no plano | 0 | — | — | — | — | — | — | — | crítica |
 | 10.º | Geometria analítica | `10-ga-distancias-ponto-medio` | Distâncias e ponto médio | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 10.º | Geometria analítica | `10-ga-espaco` | Coordenadas, vetores e relações geométricas no espaço | 0 | — | — | — | — | — | — | — | crítica |
-| 10.º | Geometria analítica | `10-ga-lugares-geometricos` | Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica | 0 | — | — | — | — | — | — | — | crítica |
+| 10.º | Geometria analítica | `10-ga-lugares-geometricos` | Mediatriz, plano mediador, circunferência, círculo, esfera e superfície esférica | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 10.º | Geometria analítica | `10-ga-vetores` | Vetores, coordenadas, norma e operações | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 10.º | Geometria sintética | `10-gs-baricentro-medianas` | Baricentro e propriedades das medianas | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 10.º | Geometria sintética | `10-gs-circuncentro-incentro` | Circuncentro e incentro | 0 | — | — | — | — | — | — | — | alta |
@@ -58,7 +58,7 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 11.º | Contagem | `11-cont-combinacoes` | Combinações e escolha sem ordem | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 11.º | Contagem | `11-cont-diagramas` | Diagramas, tabelas e organização de casos | 0 | — | — | — | — | — | — | — | crítica |
 | 11.º | Contagem | `11-cont-fatorial` | Fatorial e contagens elementares | 0 | — | — | — | — | — | — | — | crítica |
-| 11.º | Contagem | `11-cont-permutacoes` | Permutações | 0 | — | — | — | — | — | — | — | crítica |
+| 11.º | Contagem | `11-cont-permutacoes` | Permutações | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 11.º | Funções — 11.º | `11-fun-assintotas-modelacao` | Assíntotas, interpretação e modelação | 0 | — | — | — | — | — | — | — | crítica |
 | 11.º | Funções — 11.º | `11-fun-cubicas-quarticas` | Famílias cúbicas/quárticas e comportamento gráfico | 0 | — | — | — | — | — | — | — | crítica |
 | 11.º | Funções — 11.º | `11-fun-divisao-polinomios` | Divisão de polinómios, Ruffini/Horner | 1 | ✓ | ✓ | — | — | — | ✓ | — | aprofundar |
@@ -80,14 +80,14 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 11.º | Trigonometria | `11-trig-circulo` | Círculo trigonométrico e redução | 0 | — | — | — | — | — | — | — | crítica |
 | 11.º | Trigonometria | `11-trig-equacoes` | Equações trigonométricas | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 11.º | Trigonometria | `11-trig-funcoes` | Funções seno e cosseno | 0 | — | — | — | — | — | — | — | crítica |
-| 11.º | Trigonometria | `11-trig-modelacao` | Resolução de triângulos e modelação periódica | 0 | — | — | — | — | — | — | — | crítica |
+| 11.º | Trigonometria | `11-trig-modelacao` | Resolução de triângulos e modelação periódica | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 11.º | Trigonometria | `11-trig-relacoes` | Relações e identidades trigonométricas fundamentais | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Números complexos | `12-cplx-argand` | Plano de Argand-Gauss e interpretação geométrica | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Números complexos | `12-cplx-conjugado-modulo` | Conjugado e módulo | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Números complexos | `12-cplx-forma-algebrica` | Forma algébrica, parte real/imaginária e igualdade | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Números complexos | `12-cplx-forma-trig` | Forma trigonométrica, módulo e argumento | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 12.º | Números complexos | `12-cplx-operacoes-algebricas` | Operações na forma algébrica | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
-| 12.º | Números complexos | `12-cplx-operacoes-trig` | Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas | 0 | — | — | — | — | — | — | — | crítica |
+| 12.º | Números complexos | `12-cplx-operacoes-trig` | Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Números complexos | `12-cplx-unidade-equacoes` | Unidade imaginária, conjunto C e equações de 2.º grau | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Exponenciais e logaritmos | `12-expl-equacoes` | Equações exponenciais/logarítmicas e problemas | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Exponenciais e logaritmos | `12-expl-exponencial` | Função exponencial | 0 | — | — | — | — | — | — | — | crítica |
@@ -103,7 +103,7 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 12.º | Continuidade e derivabilidade | `12-fcont-estudo-global` | Monotonia, extremos e estudo global de funções | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Continuidade e derivabilidade | `12-fcont-limites-continuidade` | Limite intuitivo e continuidade | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 12.º | Continuidade e derivabilidade | `12-fcont-operacoes` | Operações com funções contínuas | 0 | — | — | — | — | — | — | — | crítica |
-| 12.º | Probabilidades | `12-prob-condicionada` | Probabilidade condicionada | 0 | — | — | — | — | — | — | — | crítica |
+| 12.º | Probabilidades | `12-prob-condicionada` | Probabilidade condicionada | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 12.º | Probabilidades | `12-prob-contingencia-independencia` | Tabelas de contingência e independência | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Probabilidades | `12-prob-fenomeno-acontecimentos` | Fenómeno aleatório, espaço de resultados e acontecimentos | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Probabilidades | `12-prob-normal` | Valor médio/dispersão de modelos e Modelo Normal | 0 | — | — | — | — | — | — | — | crítica |
@@ -123,7 +123,7 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 12.º opcional | Primitivas e integrais | `12-int-integral-definido` | Integral definido | 1 | ✓ | ✓ | — | ✓ | — | — | — | aprofundar |
 | 12.º opcional | Primitivas e integrais | `12-int-primitiva` | Conceito de primitiva/antiderivada | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º opcional | Primitivas e integrais | `12-int-tabela-propriedades` | Primitivas imediatas e propriedades | 0 | — | — | — | — | — | — | — | crítica |
-| 12.º opcional | Primitivas e integrais | `12-int-tfc-barrow` | Teorema Fundamental do Cálculo / Fórmula de Barrow | 0 | — | — | — | — | — | — | — | crítica |
+| 12.º opcional | Primitivas e integrais | `12-int-tfc-barrow` | Teorema Fundamental do Cálculo / Fórmula de Barrow | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º opcional | Matrizes | `12-mat-adicao-escalar` | Adição, subtração e multiplicação por escalar | 0 | — | — | — | — | — | — | — | alta |
 | 12.º opcional | Matrizes | `12-mat-modelacao` | Modelação e aplicações | 0 | — | — | — | — | — | — | — | alta |
 | 12.º opcional | Matrizes | `12-mat-produto` | Produto de matrizes, compatibilidade e não comutatividade | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |

@@ -504,6 +504,91 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     points:35,sol:"A condição de existência é x−1>0, ou seja, x>1. Pela definição de logaritmo, x−1=2³=8, pelo que x=9. Como 9>1, a solução é S={9}.",
     hyp:"Pode ignorar a condição de existência ou trocar a base pelo expoente na passagem à forma exponencial.",
     contexts:["exam"],signature:"12-expl:Função logarítmica:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10GA-LG-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-lugares-geometricos",
+    microcompetencyId:"mc-10-ga-lugares-geometricos",focus:"Circunferência",difficulty:3,cognitive:"Aplicação",
+    q:"Determina uma equação da circunferência de centro C(2,−1) que passa pelo ponto P(5,3).",
+    response:{type:"stepwise",steps:[
+      step("dx","1. Diferença das abcissas entre P e C","numeric",7,{value:3,tolerance:0,expected:"Δx=3",placeholder:"Ex.: Δx=5−2"}),
+      step("dy","2. Diferença das ordenadas entre P e C","numeric",7,{value:4,tolerance:0,expected:"Δy=4",placeholder:"Ex.: Δy=3−(−1)"}),
+      step("radius","3. Raio da circunferência","numeric",9,{value:5,tolerance:0,expected:"r=√(3²+4²)=5",placeholder:"Calcula a distância CP."}),
+      step("equation","4. Equação da circunferência","expression",12,{accepted:["(x-2)^2+(y+1)^2=25","(x−2)²+(y+1)²=25"],expected:"(x−2)²+(y+1)²=25",placeholder:"Usa o centro e o raio."})
+    ]},
+    points:35,sol:"Entre C e P, as diferenças são 3 e 4. Logo, r=CP=√(3²+4²)=5. A circunferência tem equação (x−2)²+(y+1)²=25.",
+    hyp:"Pode trocar os sinais das coordenadas do centro ou usar r em vez de r² no segundo membro.",
+    contexts:["exam"],signature:"10-ga:Circunferência:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-11CONT-PERM-STEPS-1",themeId:"11-cont",subtopicId:"11-cont-permutacoes",
+    microcompetencyId:"mc-11-cont-permutacoes",focus:"Permutações",difficulty:3,cognitive:"Raciocínio",
+    q:"Cinco livros distintos vão ser colocados numa prateleira. De quantas formas podem ser ordenados se dois livros específicos, A e B, tiverem de ficar juntos?",
+    response:{type:"stepwise",steps:[
+      step("block","1. Tratamento de A e B como bloco","text",8,{accepted:["Consideram-se A e B como um único bloco.","A e B formam um bloco."],expected:"Consideram-se A e B como um único bloco.",placeholder:"Explica como tratas A e B."}),
+      step("objects","2. Número de objetos a ordenar","numeric",7,{value:4,tolerance:0,expected:"n=4",placeholder:"Conta o bloco e os restantes livros."}),
+      step("orders","3. Ordens dos quatro objetos","expression",8,{accepted:["4!","4!=24","24"],expected:"4!=24",placeholder:"Usa uma permutação."}),
+      step("internal","4. Ordens internas do bloco","numeric",5,{value:2,tolerance:0,expected:"ordens internas=2",placeholder:"Conta AB e BA."}),
+      step("total","5. Número total de ordenações","numeric",7,{value:48,tolerance:0,expected:"2×4!=48",placeholder:"Combina os dois fatores."})
+    ]},
+    points:35,sol:"Tratando A e B como um bloco, ordenam-se quatro objetos de 4!=24 formas. Dentro do bloco, A e B podem aparecer como AB ou BA. Portanto, existem 2×24=48 ordenações.",
+    hyp:"Pode esquecer a ordem interna do bloco ou contar A e B como objetos separados depois de impor a adjacência.",
+    contexts:["exam"],signature:"11-cont:Permutações com restrição:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-11TRIG-MOD-STEPS-1",themeId:"11-trig",subtopicId:"11-trig-modelacao",
+    microcompetencyId:"mc-11-trig-modelacao",focus:"Modelação trigonométrica",difficulty:3,cognitive:"Modelação",
+    q:"A partir de um ponto situado a 20 m da base de uma torre, observa-se o topo sob um ângulo de elevação de 45°. Admitindo terreno horizontal, determina a altura da torre.",
+    response:{type:"stepwise",steps:[
+      step("ratio","1. Razão trigonométrica adequada","text",8,{accepted:["Usa-se a tangente porque relaciona o cateto oposto com o adjacente.","A razão adequada é a tangente."],expected:"Usa-se a tangente porque relaciona o cateto oposto com o adjacente.",placeholder:"Identifica a razão trigonométrica."}),
+      step("model","2. Equação do problema","expression",10,{accepted:["tan(45)=h/20","tan(45°)=h/20","h=20tan(45)"],expected:"tan(45°)=h/20",placeholder:"Representa a altura por h."}),
+      step("value","3. Valor trigonométrico","numeric",7,{value:1,tolerance:0,expected:"valor da tangente=1",placeholder:"Indica o valor exato."}),
+      step("height","4. Altura da torre","numeric",10,{value:20,tolerance:0,expected:"h=20",placeholder:"Conclui: h=20 m."})
+    ]},
+    points:35,sol:"No triângulo retângulo, tan(45°)=h/20. Como tan(45°)=1, resulta h/20=1 e, portanto, h=20 m.",
+    hyp:"Pode usar seno ou cosseno sem identificar a hipotenusa, ou inverter os catetos na razão tangente.",
+    contexts:["exam"],signature:"11-trig:Modelação de altura:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12CPLX-POW-STEPS-1",themeId:"12-cplx",subtopicId:"12-cplx-operacoes-trig",
+    microcompetencyId:"mc-12-cplx-operacoes-trig",focus:"Potenciação na forma trigonométrica",difficulty:3,cognitive:"Aplicação",
+    q:"Considera z=2(cos(π/6)+i sin(π/6)). Determina z³ na forma algébrica.",
+    response:{type:"stepwise",steps:[
+      step("modulus","1. Módulo de z³","numeric",7,{value:8,tolerance:0,expected:"|z³|=2³=8",placeholder:"Eleva o módulo ao cubo."}),
+      step("argument","2. Argumento de z³","expression",8,{accepted:["3*pi/6=pi/2","3π/6=π/2","pi/2"],expected:"3×π/6=π/2",placeholder:"Multiplica o argumento por 3."}),
+      step("trig","3. Forma trigonométrica de z³","expression",10,{accepted:["z^3=8(cos(pi/2)+i sin(pi/2))","8(cos(pi/2)+i sin(pi/2))","z³=8(cos(π/2)+i sin(π/2))"],expected:"z³=8(cos(π/2)+i sin(π/2))",placeholder:"Aplica a fórmula de Moivre."}),
+      step("algebraic","4. Forma algébrica","expression",10,{accepted:["z^3=8i","8i","z³=8i"],expected:"z³=8i",placeholder:"Usa cos(π/2) e sin(π/2)."})
+    ]},
+    points:35,sol:"Pela fórmula de Moivre, z³=2³(cos(3π/6)+i sin(3π/6))=8(cos(π/2)+i sin(π/2))=8i.",
+    hyp:"Pode manter o módulo igual a 2 ou elevar incorretamente o argumento em vez de o multiplicar por 3.",
+    contexts:["exam"],signature:"12-cplx:Potenciação trigonométrica:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12PROB-COND-STEPS-1",themeId:"12-prob",subtopicId:"12-prob-condicionada",
+    microcompetencyId:"mc-12-prob-condicionada",focus:"Probabilidade condicionada",difficulty:3,cognitive:"Raciocínio",
+    q:"Numa turma de 30 alunos, 18 praticam desporto, 12 estudam música e 6 fazem ambas as atividades. Escolhe-se ao acaso um aluno que pratica desporto. Determina a probabilidade de esse aluno também estudar música.",
+    response:{type:"stepwise",steps:[
+      step("events","1. Identificação dos valores relevantes","text",7,{accepted:["Há 18 alunos no acontecimento condicionado e 6 na interseção.","Dos 18 que praticam desporto, 6 também estudam música."],expected:"Dos 18 que praticam desporto, 6 também estudam música.",placeholder:"Identifica o universo condicionado e a interseção."}),
+      step("formula","2. Fórmula da probabilidade condicionada","expression",9,{accepted:["P(M|D)=P(M∩D)/P(D)","P(M|D)=6/18"],expected:"P(M|D)=P(M∩D)/P(D)",placeholder:"Escreve a fórmula."}),
+      step("fraction","3. Fração obtida","fraction",9,{numerator:6,denominator:18,expected:"P(M|D)=6/18",placeholder:"Usa os alunos que praticam desporto como denominador."}),
+      step("result","4. Probabilidade simplificada","fraction",10,{numerator:1,denominator:3,expected:"P(M|D)=1/3",placeholder:"Simplifica a fração."})
+    ]},
+    points:35,sol:"Sabendo que o aluno pratica desporto, o universo fica reduzido aos 18 praticantes. Destes, 6 também estudam música. Assim, P(M|D)=6/18=1/3.",
+    hyp:"Pode usar os 30 alunos como denominador e ignorar que o universo foi condicionado.",
+    contexts:["exam"],signature:"12-prob:Probabilidade condicionada:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12INT-BARROW-STEPS-1",themeId:"12-int",subtopicId:"12-int-tfc-barrow",
+    microcompetencyId:"mc-12-int-tfc-barrow",focus:"Fórmula de Barrow",difficulty:3,cognitive:"Aplicação",
+    q:"Calcula o integral definido ∫₀²(3x²+1)dx, apresentando a primitiva usada e a aplicação da fórmula de Barrow.",
+    response:{type:"stepwise",steps:[
+      step("primitive","1. Primitiva do integrando","expression",10,{accepted:["F(x)=x^3+x","x^3+x","F(x)=x³+x"],expected:"F(x)=x³+x",placeholder:"Determina uma primitiva."}),
+      step("barrow","2. Aplicação da fórmula de Barrow","expression",9,{accepted:["[x^3+x]_0^2","F(2)-F(0)","(2^3+2)-(0^3+0)"],expected:"[x³+x]₀²=F(2)−F(0)",placeholder:"Substitui os limites."}),
+      step("values","3. Cálculo nos extremos","expression",8,{accepted:["(8+2)-0","10-0","F(2)=10 e F(0)=0"],expected:"F(2)−F(0)=10−0",placeholder:"Calcula F(2) e F(0)."}),
+      step("result","4. Valor do integral","numeric",8,{value:10,tolerance:0,expected:"∫₀²(3x²+1)dx=10",placeholder:"Indica o resultado final."})
+    ]},
+    points:35,sol:"Uma primitiva de 3x²+1 é F(x)=x³+x. Pela fórmula de Barrow, ∫₀²(3x²+1)dx=F(2)−F(0)=(8+2)−0=10.",
+    hyp:"Pode esquecer a primitiva da constante ou somar, em vez de subtrair, os valores nos extremos.",
+    contexts:["exam"],signature:"12-int:Fórmula de Barrow:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   }
 ];
 

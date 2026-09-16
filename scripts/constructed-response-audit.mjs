@@ -19,13 +19,13 @@ assert.equal(gradeResponse(fraction,"-2/-4").correct,true);
 assert.equal(gradeResponse(fraction,"0,5").reason,"invalid_fraction_format");
 assert.equal(gradeResponse(fraction,"1/0").correct,false);
 
-assert.equal(CONSTRUCTED_RESPONSE_BANK.length,35);
+assert.equal(CONSTRUCTED_RESPONSE_BANK.length,41);
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.type==="stepwise"));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.length>=3));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.every(q=>q.response.steps.reduce((sum,row)=>sum+row.points,0)===q.points));
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="text")),"O piloto deve avaliar justificação escrita.");
 assert.ok(CONSTRUCTED_RESPONSE_BANK.some(q=>q.response.steps.some(row=>row.type==="expression")),"O piloto deve avaliar expressões intermédias.");
-assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>`${q.themeId}:${q.microcompetencyId}`)).size,35,"Cada pergunta construída deve alargar a cobertura a uma competência distinta.");
+assert.equal(new Set(CONSTRUCTED_RESPONSE_BANK.map(q=>`${q.themeId}:${q.microcompetencyId}`)).size,41,"Cada pergunta construída deve alargar a cobertura a uma competência distinta.");
 assert.deepEqual(
   [...new Set(CONSTRUCTED_RESPONSE_BANK.map(question=>question.themeId))].sort(),
   TAXONOMY.map(theme=>theme.id).sort(),
