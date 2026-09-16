@@ -20,6 +20,29 @@ export const PORTUGUESE_RESPONSE_TYPES=[
   {id:"extended-writing",label:"Produção escrita extensa",gradingMode:"rubric-assisted-provisional"}
 ];
 
+export const PORTUGUESE_COMPETENCIES=[
+  {id:"pt-oral-compreensao",domain:"oralidade",label:"Compreensão de discursos orais",writtenExam:false},
+  {id:"pt-oral-expressao",domain:"oralidade",label:"Expressão oral planificada",writtenExam:false},
+  {id:"pt-oral-argumentacao",domain:"oralidade",label:"Argumentação e interação oral",writtenExam:false},
+  {id:"pt-oral-escuta-critica",domain:"oralidade",label:"Escuta crítica e tomada de notas",writtenExam:false},
+  {id:"pt-leitura-informacao",domain:"leitura",label:"Informação explícita e ideia central",writtenExam:true},
+  {id:"pt-leitura-inferencia",domain:"leitura",label:"Inferência e interpretação",writtenExam:true},
+  {id:"pt-leitura-coesao",domain:"leitura",label:"Coesão, referência e conectores",writtenExam:true},
+  {id:"pt-leitura-organizacao",domain:"leitura",label:"Organização e intenção do texto",writtenExam:true},
+  {id:"pt-literatura-recursos",domain:"educacao-literaria",label:"Recursos expressivos e efeitos de sentido",writtenExam:true},
+  {id:"pt-literatura-temas",domain:"educacao-literaria",label:"Temas, símbolos e sentido global",writtenExam:true},
+  {id:"pt-literatura-voz",domain:"educacao-literaria",label:"Voz, perspetiva e construção das personagens",writtenExam:true},
+  {id:"pt-literatura-forma",domain:"educacao-literaria",label:"Relação entre forma, estrutura e conteúdo",writtenExam:true},
+  {id:"pt-escrita-exposicao",domain:"escrita",label:"Exposição e explicação",writtenExam:true},
+  {id:"pt-escrita-argumentacao",domain:"escrita",label:"Argumentação e fundamentação",writtenExam:true},
+  {id:"pt-escrita-opiniao",domain:"escrita",label:"Texto de opinião extenso",writtenExam:true},
+  {id:"pt-escrita-revisao",domain:"escrita",label:"Planificação, revisão e aperfeiçoamento",writtenExam:true},
+  {id:"pt-gramatica-sintaxe",domain:"gramatica",label:"Funções sintáticas",writtenExam:true},
+  {id:"pt-gramatica-oracoes",domain:"gramatica",label:"Coordenação e subordinação",writtenExam:true},
+  {id:"pt-gramatica-coesao",domain:"gramatica",label:"Coesão referencial e valor de conectores",writtenExam:true},
+  {id:"pt-gramatica-morfologia-semantica",domain:"gramatica",label:"Morfologia, modalidade e valores semânticos",writtenExam:true}
+];
+
 export const PORTUGUESE_YEAR_FOCUS=[
   {
     year:"10.º",
