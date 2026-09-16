@@ -21,14 +21,12 @@ const worked=gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=3×2²-2=10");
 assert.equal(worked.points,35,"Uma resolução completa e cientificamente correta mantém a cotação prevista.");
 assert.equal(worked.correct,true);
 
-// Situação 7 só é inferida quando a própria cadeia já contém o valor correto e,
-// imediatamente depois, surge uma única troca de algarismo ou sinal na sua transcrição.
 const transcriptionSlip=gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=3×2²-2=10=11");
 const transcriptionValue=transcriptionSlip.stepResults.find(row=>row.stepId==="value");
 assert.equal(transcriptionValue?.reason,"copied_number_or_sign_error");
 assert.equal(transcriptionValue?.iaveSituation,"Situação 7");
 assert.equal(transcriptionValue?.classificationConfidence,"high");
-assert.equal(transcriptionValue?.points,11,"Situação 7: uma transcrição objetiva sem redução de dificuldade retira 1 ponto.");
+assert.equal(transcriptionValue?.points,11);
 assert.equal(transcriptionSlip.points,34);
 assert.equal(transcriptionSlip.reviewRequired,false);
 
@@ -38,38 +36,31 @@ assert.equal(signValue?.reason,"copied_number_or_sign_error");
 assert.equal(signValue?.iaveSituation,"Situação 7");
 assert.equal(signValue?.classificationConfidence,"high");
 
-// Situação 8 só é inferida quando a própria cadeia torna o erro ocasional inequívoco:
-// a expressão imediatamente anterior calcula corretamente 10, mas o aluno escreve 11 no fim.
 const arithmeticSlip=gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=3×2²-2=11");
 const arithmeticValue=arithmeticSlip.stepResults.find(row=>row.stepId==="value");
 assert.equal(arithmeticValue?.reason,"occasional_calculation_error");
 assert.equal(arithmeticValue?.iaveSituation,"Situação 8");
 assert.equal(arithmeticValue?.classificationConfidence,"high");
-assert.equal(arithmeticValue?.points,11,"Situação 8: uma falha ocasional de cálculo retira 1 ponto na etapa de 12 pontos.");
+assert.equal(arithmeticValue?.points,11);
 assert.equal(arithmeticSlip.points,34);
 assert.equal(arithmeticSlip.reviewRequired,false);
 
-// Um cálculo apenas errado, sem uma cadeia que prove a natureza ocasional da falha,
-// NÃO pode ser automaticamente promovido a situação 7 ou 8.
 const ambiguousCalculation=gradeResponse(derivative,"f'(x)=3x²-2\nf'(2)=11");
 const ambiguousValue=ambiguousCalculation.stepResults.find(row=>row.stepId==="value");
 assert.notEqual(ambiguousValue?.reason,"copied_number_or_sign_error");
 assert.notEqual(ambiguousValue?.reason,"occasional_calculation_error");
 assert.notEqual(ambiguousValue?.classificationConfidence,"high");
 
-// Situação 12: o valor é exatamente equivalente, mas não está na forma final pedida.
 const integral=byId("CRV2-12INT-STEPS-1");
 const wrongFinalForm=gradeResponse(integral,{steps:{primitive:"x²/2",barrow:"1²/2−0²/2",value:"0,5"}});
 const finalFormValue=wrongFinalForm.stepResults.find(row=>row.stepId==="value");
 assert.equal(finalFormValue?.reason,"wrong_final_form");
 assert.equal(finalFormValue?.iaveSituation,"Situação 12");
 assert.equal(finalFormValue?.classificationConfidence,"high");
-assert.equal(finalFormValue?.points,9,"Situação 12: forma final incorreta retira 1 ponto.");
+assert.equal(finalFormValue?.points,9);
 assert.equal(wrongFinalForm.points,34);
 assert.equal(wrongFinalForm.reviewRequired,false);
 
-// Situação 13: aproximação decimal apenas quando o valor exato pedido é uma fração
-// e o decimal cabe inequivocamente no arredondamento indicado pelo próprio número de casas.
 const exactThird={
   id:"AUDIT-EXACT-THIRD",points:10,
   response:{type:"stepwise",steps:[
@@ -82,33 +73,70 @@ const approximateFinal=approximateExact.stepResults.find(row=>row.stepId==="fina
 assert.equal(approximateFinal?.reason,"approximate_instead_of_exact");
 assert.equal(approximateFinal?.iaveSituation,"Situação 13");
 assert.equal(approximateFinal?.classificationConfidence,"high");
-assert.equal(approximateFinal?.points,4,"Situação 13: usar aproximação em vez do valor exato retira 1 ponto.");
+assert.equal(approximateFinal?.points,4);
 assert.equal(approximateExact.points,9);
 
-// Um decimal próximo mas fora da margem de arredondamento não pode ser rotulado automaticamente como situação 13.
 const notClearlyApproximation=gradeResponse(exactThird,{steps:{setup:"1/3",final:"0,34"}});
 const unclearApproximation=notClearlyApproximation.stepResults.find(row=>row.stepId==="final");
 assert.notEqual(unclearApproximation?.reason,"approximate_instead_of_exact");
 assert.notEqual(unclearApproximation?.classificationConfidence,"high");
 
+// Situação 14: só se aplica automaticamente quando o item declara qual a etapa exata
+// de que depende e qual o resultado que decorre inequivocamente da aproximação usada.
+const propagatedApproximationQuestion={
+  id:"AUDIT-IAVE-14",points:20,
+  response:{type:"stepwise",steps:[
+    {id:"ratio",label:"1. Valor exato",type:"fraction",points:10,numerator:1,denominator:3,expected:"r=1/3"},
+    {id:"double",label:"2. Dobro do valor exato",type:"fraction",points:10,numerator:2,denominator:3,expected:"s=2/3",approximationDependsOn:"ratio",propagatedApproximationValues:[0.66]}
+  ]}
+};
+const propagatedApproximation=gradeResponse(propagatedApproximationQuestion,{steps:{ratio:"r=0,33",double:"s=0,66"}});
+const propagatedRatio=propagatedApproximation.stepResults.find(row=>row.stepId==="ratio");
+const propagatedDouble=propagatedApproximation.stepResults.find(row=>row.stepId==="double");
+assert.equal(propagatedRatio?.reason,"approximate_instead_of_exact");
+assert.equal(propagatedDouble?.reason,"approximate_used_instead_of_exact");
+assert.equal(propagatedDouble?.iaveSituation,"Situação 14");
+assert.equal(propagatedDouble?.classificationConfidence,"high");
+assert.equal(propagatedDouble?.points,5,"Situação 14: a etapa fica limitada a metade da cotação quando usa a aproximação em vez do valor exato.");
+assert.equal(propagatedApproximation.points,14);
+
+const noDeclaredPropagation=gradeResponse(propagatedApproximationQuestion,{steps:{ratio:"r=0,33",double:"s=0,65"}});
+const noPropagationDouble=noDeclaredPropagation.stepResults.find(row=>row.stepId==="double");
+assert.notEqual(noPropagationDouble?.reason,"approximate_used_instead_of_exact");
+assert.notEqual(noPropagationDouble?.classificationConfidence,"high");
+
+// Situação 15: o arredondamento só é classificado automaticamente quando a cadeia
+// contém explicitamente o valor não arredondado correto e o item declara as casas pedidas.
+const finalRoundingQuestion={
+  id:"AUDIT-IAVE-15",points:15,
+  response:{type:"stepwise",steps:[
+    {id:"source",label:"1. Valor antes de arredondar",type:"numeric",points:5,value:2.345,tolerance:0,expected:"x=2,345"},
+    {id:"rounded",label:"2. Arredondamento às centésimas",type:"numeric",points:10,value:2.35,tolerance:0,expected:"y=2,35",rounding:{sourceValue:2.345,decimals:2}}
+  ]}
+};
+const wrongFinalRounding=gradeResponse(finalRoundingQuestion,"x=2,345\ny=2,345=2,34");
+const roundedStep=wrongFinalRounding.stepResults.find(row=>row.stepId==="rounded");
+assert.equal(roundedStep?.reason,"wrong_final_rounding");
+assert.equal(roundedStep?.iaveSituation,"Situação 15");
+assert.equal(roundedStep?.classificationConfidence,"high");
+assert.equal(roundedStep?.points,9,"Situação 15: arredondamento final incorreto retira 1 ponto.");
+assert.equal(wrongFinalRounding.points,14);
+
+const notClearlyRounding=gradeResponse(finalRoundingQuestion,"x=2,345\ny=2,345=2,33");
+const unclearRounding=notClearlyRounding.stepResults.find(row=>row.stepId==="rounded");
+assert.notEqual(unclearRounding?.reason,"wrong_final_rounding");
+assert.notEqual(unclearRounding?.classificationConfidence,"high");
+
 const alternative=gradeResponse(derivative,"Usei uma resolução cientificamente válida, mas escrita por um processo não reconhecido automaticamente.");
 assert.equal(alternative.reviewRequired,true,"IAVE situação 1: um processo alternativo não deve ser automaticamente rejeitado; quando o motor não o certifica, fica por rever.");
 
 const finance=byId("CRV2-10FIN-STEPS-1");
-const noUnit=gradeResponse(finance,{steps:{
-  interest:"J=50",
-  capital:"C=1050",
-  conclusion:"O capital ao fim de um ano é 1050"
-}});
+const noUnit=gradeResponse(finance,{steps:{interest:"J=50",capital:"C=1050",conclusion:"O capital ao fim de um ano é 1050"}});
 assert.equal(noUnit.points,35,"IAVE situação 16: omitir a unidade no resultado final não desvaloriza a etapa.");
 assert.equal(noUnit.correct,true);
 
-const wrongUnit=gradeResponse(finance,{steps:{
-  interest:"J=50",
-  capital:"C=1050",
-  conclusion:"O capital ao fim de um ano é 1050 kg"
-}});
+const wrongUnit=gradeResponse(finance,{steps:{interest:"J=50",capital:"C=1050",conclusion:"O capital ao fim de um ano é 1050 kg"}});
 assert.equal(wrongUnit.points,27,"Uma unidade errada não deve ser confundida com simples omissão da unidade.");
 assert.equal(wrongUnit.reviewRequired,true);
 
-console.log("✓ IAVE 2026 scoring policy audit: situações 3, 7, 8, 12, 13 e 16 + conservative ambiguity handling validated");
+console.log("✓ IAVE 2026 scoring policy audit: situações 3, 7, 8, 12, 13, 14, 15 e 16 + conservative ambiguity handling validated");
