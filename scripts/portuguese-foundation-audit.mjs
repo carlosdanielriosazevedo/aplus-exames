@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
-  PORTUGUESE_DOMAINS,PORTUGUESE_REFERENCE_SOURCES,PORTUGUESE_RELEASE_POLICY,
+  PORTUGUESE_COMPETENCIES,PORTUGUESE_DOMAINS,PORTUGUESE_REFERENCE_SOURCES,PORTUGUESE_RELEASE_POLICY,
   PORTUGUESE_RESPONSE_TYPES,PORTUGUESE_YEAR_FOCUS
 } from "../app/data/portugueseFoundation.js";
 import {SECONDARY_EXAM_SUBJECTS,subjectStatusLabel} from "../app/data/subjects.js";
@@ -25,6 +25,14 @@ assert.ok(PORTUGUESE_RELEASE_POLICY.minimumBetaItems>=PORTUGUESE_RELEASE_POLICY.
 assert.deepEqual(PORTUGUESE_DOMAINS.map(domain=>domain.id),["oralidade","leitura","educacao-literaria","escrita","gramatica"]);
 assert.equal(PORTUGUESE_DOMAINS.find(domain=>domain.id==="oralidade").writtenExam,false,"A oralidade curricular não deve ser confundida com o exame escrito 639.");
 assert.equal(PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).length,4);
+assert.equal(PORTUGUESE_COMPETENCIES.length,20);
+assert.equal(PORTUGUESE_COMPETENCIES.filter(competency=>competency.writtenExam).length,16);
+assert.equal(new Set(PORTUGUESE_COMPETENCIES.map(competency=>competency.id)).size,PORTUGUESE_COMPETENCIES.length);
+for(const competency of PORTUGUESE_COMPETENCIES){
+  const domain=PORTUGUESE_DOMAINS.find(candidate=>candidate.id===competency.domain);
+  assert.ok(domain,`${competency.id}: domínio desconhecido.`);
+  assert.equal(competency.writtenExam,domain.writtenExam,`${competency.id}: incoerência entre competência e domínio escrito.`);
+}
 assert.deepEqual(PORTUGUESE_YEAR_FOCUS.map(focus=>focus.year),["10.º","11.º","12.º"]);
 assert.equal(PORTUGUESE_REFERENCE_SOURCES.length,4);
 for(const source of PORTUGUESE_REFERENCE_SOURCES)assert.match(source.url,/^https:\/\/(?:www\.dge\.mec\.pt|iave\.pt)\//);
@@ -51,6 +59,11 @@ for(const item of pilot.items){
   assert.match(item.id,/^PT639-FND-\d{3}$/);
   assert.ok(["10.º","11.º","12.º"].includes(item.year));
   assert.ok(PORTUGUESE_DOMAINS.some(domain=>domain.id===item.domain&&domain.writtenExam),`${item.id}: domínio inválido para o piloto escrito.`);
+  const competency=PORTUGUESE_COMPETENCIES.find(candidate=>candidate.id===item.competencyId);
+  assert.ok(competency?.writtenExam,`${item.id}: competência inválida para o exame escrito.`);
+  assert.equal(competency.domain,item.domain,`${item.id}: a competência não pertence ao domínio declarado.`);
+  assert.equal(item.sourceOrigin,"original",`${item.id}: a fundação não pode misturar conteúdo oficial.`);
+  assert.equal(item.reviewStatus,"prototype",`${item.id}: a fundação deve permanecer em protótipo.`);
   assert.ok(responseTypes.has(item.responseType),`${item.id}: formato de resposta desconhecido.`);
   assert.ok(["reconhecer","interpretar","raciocinar","criar"].includes(item.cognitive));
   assert.ok(item.stimulus.length>=40,`${item.id}: estímulo demasiado curto.`);
