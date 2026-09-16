@@ -120,4 +120,78 @@ const noEffectStep=noEffectMetadata.stepResults.find(row=>row.stepId==="next");
 assert.notEqual(noEffectStep?.reason,"upstream_error_effect","Sem metadados de dependência, o corretor não inventa propagação de erro.");
 assert.notEqual(noEffectStep?.classificationConfidence,"high");
 
-console.log("✓ conservative IAVE classification audit: situação 10, situação 11 e Nota 2 exigem evidência declarada e não são inferidas por aproximação");
+const copiedDataQuestion={
+  id:"AUDIT-IAVE-6",points:20,
+  response:{type:"stepwise",steps:[
+    {id:"copy",label:"1. Aplicação com dado copiado",type:"expression",points:10,expected:"2x=8",copiedDataAccepted:[
+      {value:"2x=6",difficultyReduced:false}
+    ]},
+    {id:"finish",label:"2. Resultado independente",type:"numeric",points:10,value:4,tolerance:0,expected:"x=4"}
+  ]}
+};
+const copiedData=gradeResponse(copiedDataQuestion,{steps:{copy:"2x=6",finish:"x=4"}});
+const copiedDataStep=copiedData.stepResults.find(row=>row.stepId==="copy");
+assert.equal(copiedDataStep?.reason,"copied_data_error");
+assert.equal(copiedDataStep?.iaveSituation,"Situação 6");
+assert.equal(copiedDataStep?.classificationConfidence,"high");
+assert.equal(copiedDataStep?.difficultyReduced,false);
+assert.equal(copiedData.globalPenalty,1,"Situação 6: erro de cópia sem redução de dificuldade retira 1 ponto global.");
+assert.equal(copiedData.points,19);
+
+const undeclaredCopiedData={
+  ...copiedDataQuestion,
+  id:"AUDIT-IAVE-6-NEGATIVE",
+  response:{...copiedDataQuestion.response,steps:[{...copiedDataQuestion.response.steps[0],copiedDataAccepted:undefined},copiedDataQuestion.response.steps[1]]}
+};
+const noCopiedDataMetadata=gradeResponse(undeclaredCopiedData,{steps:{copy:"2x=6",finish:"x=4"}});
+assert.notEqual(noCopiedDataMetadata.stepResults.find(row=>row.stepId==="copy")?.reason,"copied_data_error");
+
+const conceptualQuestion={
+  id:"AUDIT-IAVE-9",points:12,
+  response:{type:"stepwise",steps:[
+    {id:"concept",label:"1. Conceito",type:"expression",points:9,expected:"x^2",conceptualErrorAccepted:["2x"]},
+    {id:"finish",label:"2. Conclusão",type:"numeric",points:3,value:1,tolerance:0,expected:"y=1"}
+  ]}
+};
+const conceptual=gradeResponse(conceptualQuestion,{steps:{concept:"2x",finish:"y=1"}});
+const conceptualStep=conceptual.stepResults.find(row=>row.stepId==="concept");
+assert.equal(conceptualStep?.reason,"conceptual_error");
+assert.equal(conceptualStep?.iaveSituation,"Situação 9");
+assert.equal(conceptualStep?.classificationConfidence,"high");
+assert.equal(conceptualStep?.points,4,"Situação 9: erro conceptual limita a etapa à parte inteira de metade da cotação.");
+
+const excessQuestion={
+  id:"AUDIT-IAVE-17",points:20,
+  response:{type:"stepwise",steps:[
+    {id:"set",label:"1. Conjunto pedido",type:"expression",points:10,expected:"{1,2}",excessElementsAccepted:[
+      {value:"{1,2,3}",affectsPerformance:true}
+    ]},
+    {id:"finish",label:"2. Confirmação",type:"numeric",points:10,value:2,tolerance:0,expected:"n=2"}
+  ]}
+};
+const excess=gradeResponse(excessQuestion,{steps:{set:"{1,2,3}",finish:"n=2"}});
+const excessStep=excess.stepResults.find(row=>row.stepId==="set");
+assert.equal(excessStep?.reason,"excess_elements");
+assert.equal(excessStep?.iaveSituation,"Situação 17");
+assert.equal(excessStep?.affectsPerformance,true);
+assert.equal(excess.globalPenalty,2,"Situação 17: elementos em excesso que afetam o desempenho retiram 2 pontos globais.");
+assert.equal(excess.points,18);
+
+const notationQuestion={
+  id:"AUDIT-IAVE-18",points:20,
+  response:{type:"stepwise",steps:[
+    {id:"notation",label:"1. Notação formal",type:"expression",points:10,expected:"x∈[0,1]",formalNotationAccepted:[
+      {value:"x=[0,1]",onlyZeroPointSteps:false}
+    ]},
+    {id:"finish",label:"2. Confirmação",type:"numeric",points:10,value:1,tolerance:0,expected:"b=1"}
+  ]}
+};
+const notation=gradeResponse(notationQuestion,{steps:{notation:"x=[0,1]",finish:"b=1"}});
+const notationStep=notation.stepResults.find(row=>row.stepId==="notation");
+assert.equal(notationStep?.reason,"formal_notation_error");
+assert.equal(notationStep?.iaveSituation,"Situação 18");
+assert.equal(notationStep?.onlyZeroPointSteps,false);
+assert.equal(notation.globalPenalty,1,"Situação 18: simbologia formal incorreta em etapa pontuada retira 1 ponto global.");
+assert.equal(notation.points,19);
+
+console.log("✓ conservative IAVE classification audit: situações 6, 9, 10, 11, 17, 18 e Nota 2 exigem evidência declarada e não são inferidas por aproximação");
