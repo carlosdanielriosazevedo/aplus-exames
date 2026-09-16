@@ -443,6 +443,29 @@ function parseFraction(value){
   if(!Number.isSafeInteger(numerator)||!Number.isSafeInteger(denominator)||denominator===0)return null;
   return {numerator,denominator};
 }
+function decimalExactness(value,target){
+  const input=withoutPrefix(value);
+  const match=input.match(/^([+-]?(?:\d+\.\d+|\.\d+))$/);
+  if(!match)return null;
+  const parsed=Number(match[1]);
+  if(!Number.isFinite(parsed))return null;
+  const decimals=(match[1].split(".")[1]||"").length;
+  const exactTolerance=Number.EPSILON*Math.max(1,Math.abs(target))*4;
+  return {parsed,decimals,exact:Math.abs(parsed-target)<=exactTolerance,looksRounded:Math.abs(parsed-target)<=0.5*Math.pow(10,-decimals)+Number.EPSILON};
+}
+function highConfidenceTranscriptionSlip(previousPart,finalPart,target,tolerance){
+  const previous=parseNumeric(previousPart),final=parseNumeric(finalPart);
+  if(previous===null||final===null||Math.abs(previous-target)>tolerance||Math.abs(final-target)<=tolerance)return false;
+  const a=normalizedInput(previousPart).replace(/^\+/,"");
+  const b=normalizedInput(finalPart).replace(/^\+/,"");
+  const unsignedA=a.replace(/^[+-]/,"");
+  const unsignedB=b.replace(/^[+-]/,"");
+  if(unsignedA===unsignedB&&a!==b)return true;
+  if(a.length!==b.length)return false;
+  let changes=0;
+  for(let i=0;i<a.length;i++)if(a[i]!==b[i])changes++;
+  return changes===1;
+}
 
 function gradeStep(spec,value){
   let correct=false,reason="incorrect";
@@ -456,8 +479,20 @@ function gradeStep(spec,value){
   }
   if(spec.type==="fraction"){
     const parsed=parseFraction(value);
+    const target=spec.numerator/spec.denominator;
     correct=!!parsed&&parsed.numerator*spec.denominator===spec.numerator*parsed.denominator;
-    if(!parsed)reason="invalid_fraction_format";
+    if(!parsed){
+      const decimal=decimalExactness(value,target);
+      if(decimal?.exact){
+        reason="wrong_final_form";
+        return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};
+      }
+      if(decimal?.looksRounded){
+        reason="approximate_instead_of_exact";
+        return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};
+      }
+      reason="invalid_fraction_format";
+    }
   }
   if(spec.type==="expression"){
     const input=normalizedExpression(value);
@@ -529,13 +564,20 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
   if(explicit.length){
     const right=explicit.some(row=>row.correct),wrong=explicit.some(row=>!row.correct);
     if(wrong){
-      // IAVE 2026, situação 8: só classificamos automaticamente como erro ocasional
-      // quando a própria cadeia mostra uma expressão correta e apenas o cálculo final falha.
       const row=explicit.length===1?explicit[0]:null;
       const previousPart=row?.parts?.at(-2)||"";
       const finalPart=row?.parts?.at(-1)||"";
       const previousValue=row?.values?.at(-2);
       const finalValue=row?.values?.at(-1);
+      // IAVE 2026, situação 7: só inferimos transcrição quando a cadeia mostra primeiro
+      // o valor correto e o repete imediatamente com uma única troca de algarismo/sinal.
+      const transcriptionSlip=!!row&&row.values.length>=2&&highConfidenceTranscriptionSlip(previousPart,finalPart,row.target,row.tolerance);
+      if(transcriptionSlip){
+        const reason="copied_number_or_sign_error";
+        return {...base,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",answer:row.line};
+      }
+      // IAVE 2026, situação 8: só classificamos automaticamente como erro ocasional
+      // quando a própria cadeia mostra uma expressão correta e apenas o cálculo final falha.
       const arithmeticSlip=!!row&&row.values.length>=2&&/[+\-*/^]/.test(previousPart)&&parseNumeric(finalPart)!==null&&Math.abs(previousValue-row.target)<=row.tolerance&&Math.abs(finalValue-row.target)>row.tolerance;
       if(arithmeticSlip){
         const reason="occasional_calculation_error";
@@ -548,7 +590,7 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
   if(spec.type==="text"&&hasText(fullAnswer))candidates.push({value:fullAnswer,index:null,labelled:true});
   for(const candidate of candidates){
     const result=gradeStep(spec,candidate.value);
-    if(result.correct)return {...result,matchedUnlabelledIndex:candidate.labelled?null:candidate.index};
+    if(result.correct||result.status==="partial")return {...result,matchedUnlabelledIndex:candidate.labelled?null:candidate.index};
   }
   // This describes recognition, not a claim that unfamiliar mathematics is invalid.
   const recognizable=lines.some(line=>canonicalPolynomial(normalizedExpression(line))!==null||/[=→∫√]/.test(line)||/[a-zÀ-ÿ]{3,}/i.test(line));
@@ -557,7 +599,10 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
 
 export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
+  if(row.reason==="copied_number_or_sign_error")return "A cadeia mostra o valor correto e uma troca isolada de algarismo ou sinal na sua transcrição. Aplicámos apenas a desvalorização prevista para esta situação.";
   if(row.reason==="occasional_calculation_error")return "O processo identificado está correto, mas há uma falha ocasional no cálculo final desta etapa. Aplicámos a desvalorização prevista nos critérios IAVE.";
+  if(row.reason==="wrong_final_form")return "O valor é matematicamente equivalente, mas não está apresentado na forma final pedida. Aplicámos a desvalorização prevista nos critérios IAVE.";
+  if(row.reason==="approximate_instead_of_exact")return "Foi apresentado um valor aproximado quando era exigido um valor exato. Aplicámos a desvalorização prevista nos critérios IAVE.";
   if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Como não é seguro concluir automaticamente que se trata apenas de uma falha ocasional, esta classificação não é inferida sem evidência suficiente.";
   if(row.reason==="conflicting_results")return "Encontrámos resultados incompatíveis para a mesma grandeza. Não atribuímos estes pontos automaticamente.";
   if(row.reason==="no_recognizable_work")return "Não identificámos cálculos ou uma explicação que permitam avaliar esta etapa.";
@@ -606,10 +651,10 @@ export function gradeResponse(question,answer){
     const stepResults=question.response.steps.map(spec=>{
       if(hasText(answer?.steps?.[spec.id])){
         const result=gradeStep(spec,answer.steps[spec.id]);
-        return !result.correct&&spec.type==="text"?{...result,status:"needs_review",reason:"not_verified"}:result;
+        return !result.correct&&result.status!=="partial"&&spec.type==="text"?{...result,status:"needs_review",reason:"not_verified"}:result;
       }
       const result=gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled);
-      if(result.correct&&Number.isInteger(result.matchedUnlabelledIndex))usedUnlabelled.add(result.matchedUnlabelledIndex);
+      if((result.correct||result.status==="partial")&&Number.isInteger(result.matchedUnlabelledIndex))usedUnlabelled.add(result.matchedUnlabelledIndex);
       return result;
     });
     const points=stepResults.reduce((sum,row)=>sum+row.points,0),correct=points===maxPoints;
