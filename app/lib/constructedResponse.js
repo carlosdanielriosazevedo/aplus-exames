@@ -1,5 +1,5 @@
 import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
-import {scoreIaveStep,iaveSituationLabel,dependentStepCap,applyIaveGlobalPenalties} from "./iaveScoring.js";
+import {scoreIaveStep,iaveSituationLabel,dependentStepCap,applyIaveGlobalPenalties,iaveGlobalPenalty} from "./iaveScoring.js";
 const step=(id,label,type,points,expected)=>({id,label,type,points,...expected});
 
 export const CONSTRUCTED_RESPONSE_BANK=[
@@ -500,6 +500,11 @@ function normalizedDeclaredStepValue(spec,value){
   if(spec?.type==="expression")return normalizedExpression(value);
   return normalizedInput(value);
 }
+function declaredExactIssue(spec,value,key){
+  if(!hasText(value)||!Array.isArray(spec?.[key]))return null;
+  const actual=normalizedDeclaredStepValue(spec,value);
+  return spec[key].map(entry=>typeof entry==="string"?{value:entry}:entry).find(entry=>entry&&hasText(entry.value)&&normalizedDeclaredStepValue(spec,entry.value)===actual)||null;
+}
 function declaredIncompleteStep(spec,value){
   if(!hasText(value)||!Array.isArray(spec?.incompleteAccepted))return null;
   const actual=normalizedDeclaredStepValue(spec,value);
@@ -569,6 +574,26 @@ function gradeStep(spec,value){
     if(!input)reason="empty_justification";
   }
   if(!correct&&hasText(value)){
+    const copiedData=declaredExactIssue(spec,value,"copiedDataAccepted");
+    if(copiedData&&typeof copiedData.difficultyReduced==="boolean"){
+      reason="copied_data_error";
+      return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:spec.points,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",difficultyReduced:copiedData.difficultyReduced};
+    }
+    const conceptual=declaredExactIssue(spec,value,"conceptualErrorAccepted");
+    if(conceptual){
+      reason="conceptual_error";
+      return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};
+    }
+    const excess=declaredExactIssue(spec,value,"excessElementsAccepted");
+    if(excess&&typeof excess.affectsPerformance==="boolean"){
+      reason="excess_elements";
+      return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:spec.points,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",affectsPerformance:excess.affectsPerformance};
+    }
+    const formal=declaredExactIssue(spec,value,"formalNotationAccepted");
+    if(formal&&typeof formal.onlyZeroPointSteps==="boolean"){
+      reason="formal_notation_error";
+      return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:spec.points,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",onlyZeroPointSteps:formal.onlyZeroPointSteps};
+    }
     const incomplete=declaredIncompleteStep(spec,value);
     if(incomplete){
       reason="incomplete_step";
@@ -662,8 +687,10 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
 
 export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
+  if(row.reason==="copied_data_error")return row.difficultyReduced?"Foi identificado um erro de cópia de dados que altera a dificuldade. O corretor mantém essa origem explícita para aplicar corretamente os limites nas etapas dependentes.":"Foi identificado um erro de cópia de dados sem redução de dificuldade. Aplicámos a desvalorização global prevista nos critérios IAVE.";
   if(row.reason==="copied_number_or_sign_error")return "A cadeia mostra o valor correto e uma troca isolada de algarismo ou sinal na sua transcrição. Aplicámos apenas a desvalorização prevista para esta situação.";
   if(row.reason==="occasional_calculation_error")return "O processo identificado está correto, mas há uma falha ocasional no cálculo final desta etapa. Aplicámos a desvalorização prevista nos critérios IAVE.";
+  if(row.reason==="conceptual_error")return "O item identifica esta resposta como um erro conceptual específico. A etapa ficou limitada à parte inteira de metade da cotação, de acordo com os critérios IAVE.";
   if(row.reason==="incomplete_step")return row.missingOnlyFinalPassage?"A etapa está correta até à última passagem necessária. Foi aplicada apenas a desvalorização prevista para essa omissão final.":"A etapa está incompleta segundo o critério específico do item. Foi aplicado o limite de cotação previsto nos critérios IAVE.";
   if(row.reason==="intermediate_rounding")return "Foi identificado um cálculo intermédio com número de casas decimais diferente do solicitado ou um arredondamento intermédio incorreto. A regra geral IAVE retira um ponto à soma das pontuações da resposta.";
   if(row.reason==="upstream_error_effect")return row.difficultyReduced?"Esta etapa segue corretamente o erro anterior, mas esse erro tornou a etapa mais fácil. Aplicámos o limite de metade da cotação previsto na Nota 2 dos critérios IAVE.":"Esta etapa segue corretamente o erro anterior sem redução de dificuldade e foi classificada pelo critério específico adaptado.";
@@ -671,6 +698,8 @@ export function stepFeedback(row){
   if(row.reason==="approximate_instead_of_exact")return "Foi apresentado um valor aproximado quando era exigido um valor exato. Aplicámos a desvalorização prevista nos critérios IAVE.";
   if(row.reason==="approximate_used_instead_of_exact")return "Uma aproximação anterior foi usada num cálculo seguinte em vez do valor exato. Aplicámos o limite de cotação previsto nos critérios IAVE.";
   if(row.reason==="wrong_final_rounding")return "A cadeia mostra o valor não arredondado correto, mas o arredondamento final indicado está incorreto. Aplicámos a desvalorização prevista nos critérios IAVE.";
+  if(row.reason==="excess_elements")return row.affectsPerformance?"Foram identificados elementos em excesso que afetam o desempenho pedido. Aplicámos a desvalorização global prevista nos critérios IAVE.":"Foram identificados elementos em excesso, mas sem efeito no desempenho pedido; não houve desvalorização automática.";
+  if(row.reason==="formal_notation_error")return row.onlyZeroPointSteps?"Foi identificada uma incorreção de simbologia apenas em etapas sem pontuação; não houve desvalorização global.":"Foi identificada uma incorreção de simbologia formal numa etapa pontuada. Aplicámos a desvalorização global prevista nos critérios IAVE.";
   if(row.reason==="calculation_error")return "O cálculo identificado não dá o valor esperado. Como não é seguro concluir automaticamente que se trata apenas de uma falha ocasional, esta classificação não é inferida sem evidência suficiente.";
   if(row.reason==="conflicting_results")return "Encontrámos resultados incompatíveis para a mesma grandeza. Não atribuímos estes pontos automaticamente.";
   if(row.reason==="no_recognizable_work")return "Não identificámos cálculos ou uma explicação que permitam avaliar esta etapa.";
@@ -743,10 +772,16 @@ export function gradeResponse(question,answer){
       return {...result,status:points===spec.points?"correct":"partial",correct:points===spec.points,points,reason:"upstream_error_effect",classificationConfidence:"high",iaveRule:"Nota 2",sourceStepId:effect.from,difficultyReduced:effect.difficultyReduced};
     });
     const stepPoints=stepResults.reduce((sum,row)=>sum+row.points,0);
-    const globalReasons=stepResults.some(row=>row.reason==="intermediate_rounding")?[{reason:"intermediate_rounding"}]:[];
+    const globalReasons=[];
+    if(stepResults.some(row=>row.reason==="intermediate_rounding"))globalReasons.push({reason:"intermediate_rounding"});
+    for(const row of stepResults){
+      if(row.reason==="copied_data_error")globalReasons.push({reason:row.reason,difficultyReduced:row.difficultyReduced});
+      if(row.reason==="excess_elements")globalReasons.push({reason:row.reason,affectsPerformance:row.affectsPerformance});
+      if(row.reason==="formal_notation_error")globalReasons.push({reason:row.reason,onlyZeroPointSteps:row.onlyZeroPointSteps});
+    }
     const points=applyIaveGlobalPenalties(stepPoints,globalReasons),globalPenalty=stepPoints-points,correct=points===maxPoints;
     const pendingPoints=stepResults.filter(row=>row.status==="needs_review").reduce((sum,row)=>sum+row.maxPoints,0);
-    const globalPenalties=globalReasons.map(item=>({reason:item.reason,iaveSituation:iaveSituationLabel(item.reason),points:1,classificationConfidence:"high"}));
+    const globalPenalties=globalReasons.map(item=>({reason:item.reason,iaveSituation:iaveSituationLabel(item.reason),points:iaveGlobalPenalty(item.reason,item),classificationConfidence:"high"})).filter(item=>item.points>0);
     return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason:pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect"};
   }
   let correct=false,reason="incorrect";
