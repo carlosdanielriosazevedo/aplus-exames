@@ -83,6 +83,44 @@ const undeclaredWork=undeclaredIncomplete.stepResults.find(row=>row.stepId==="wo
 assert.notEqual(undeclaredWork?.reason,"incomplete_step","Uma resposta não declarada não pode ser rotulada automaticamente como resolução incompleta.");
 assert.notEqual(undeclaredWork?.classificationConfidence,"high");
 
+// Situação 10 materializada em perguntas reais do Mini-exame. O inventário é
+// deliberadamente curto: só entram variantes cuja incompletude é inequívoca.
+const realIncompleteCases=[
+  {
+    question:"CRV2-10ELE-DHONDT-STEPS-1",step:"ranking",
+    final:"4800(A)>2800(B)>2400(A)",finalPoints:11,
+    deeper:"4800(A)>2800(B)",deeperPoints:6
+  },
+  {
+    question:"CRV2-12RAE-STEPS-1",step:"comparison",
+    final:"1,9881<2<1,42²",finalPoints:7,
+    deeper:"1,9881<2",deeperPoints:4
+  },
+  {
+    question:"CRV2-11FUN-RUFFINI-STEPS-1",step:"factorization",
+    final:"P(x)=(x−2)(x²−2x−3)",finalPoints:12,
+    deeper:"P(x)=(x−2)Q(x)",deeperPoints:6
+  }
+];
+for(const testCase of realIncompleteCases){
+  const question=byId(testCase.question);
+  const finalResult=gradeResponse(question,{steps:{[testCase.step]:testCase.final}}).stepResults.find(row=>row.stepId===testCase.step);
+  assert.equal(finalResult?.reason,"incomplete_step",`${testCase.question}: a omissão da passagem final deve ativar a Situação 10.`);
+  assert.equal(finalResult?.missingOnlyFinalPassage,true);
+  assert.equal(finalResult?.points,testCase.finalPoints);
+  assert.equal(finalResult?.classificationConfidence,"high");
+
+  const deeperResult=gradeResponse(question,{steps:{[testCase.step]:testCase.deeper}}).stepResults.find(row=>row.stepId===testCase.step);
+  assert.equal(deeperResult?.reason,"incomplete_step",`${testCase.question}: a resolução declarada como mais incompleta deve ativar a Situação 10.`);
+  assert.equal(deeperResult?.missingOnlyFinalPassage,false);
+  assert.equal(deeperResult?.points,testCase.deeperPoints);
+  assert.equal(deeperResult?.classificationConfidence,"high");
+}
+
+const materializedIncomplete=CONSTRUCTED_RESPONSE_BANK.flatMap(question=>question.response?.steps||[]).filter(step=>Array.isArray(step.incompleteAccepted));
+assert.equal(materializedIncomplete.length,3,"O inventário conservador da Situação 10 deve permanecer explícito e auditável.");
+assert.equal(materializedIncomplete.reduce((sum,step)=>sum+step.incompleteAccepted.length,0),6);
+
 const integral=byId("CRV2-12INT-STEPS-1");
 const wrongFinalForm=gradeResponse(integral,{steps:{primitive:"x²/2",barrow:"1²/2−0²/2",value:"0,5"}});
 const finalFormValue=wrongFinalForm.stepResults.find(row=>row.stepId==="value");
