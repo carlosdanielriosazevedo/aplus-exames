@@ -498,16 +498,6 @@ function presentsOnlyFinalResult(question,answer){
   const finalSpec=question.response.steps.at(-1);
   return gradeStep(finalSpec,line).correct;
 }
-function presentsOnlyFinalResult(question,answer){
-  if(answer&&typeof answer==="object"&&Object.values(answer.steps||{}).some(hasText))return false;
-  const lines=stepwiseLines(answer);
-  if(lines.length!==1||question?.response?.type!=="stepwise"||question.response.steps.length<2)return false;
-  const line=lines[0];
-  const equalityCount=(line.match(/=/g)||[]).length;
-  if(equalityCount>1||/[→⇒]/u.test(line))return false;
-  const finalSpec=question.response.steps.at(-1);
-  return gradeStep(finalSpec,line).correct;
-}
 
 function constantValue(source){
   const canonical=canonicalPolynomial(normalizedExpression(source));
