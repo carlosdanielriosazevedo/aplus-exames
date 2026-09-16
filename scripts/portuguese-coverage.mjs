@@ -15,6 +15,8 @@ const lines=[
   "# Cobertura de Português 639",
   "",
   "> Relatório estrutural gerado por `npm run portuguese-coverage`. Não representa validação humana nem autoriza publicação.",
+  ">",
+  "> As competências estão cruzadas com as Aprendizagens Essenciais em vigor. A conformidade fina com a informação-prova e os critérios IAVE continua a ser verificada separadamente.",
   "",
   "## Estado geral",
   "",
