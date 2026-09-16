@@ -261,8 +261,8 @@ for(const row of undeclaredRealPropagation.stepResults.slice(1)){
 }
 
 const materializedErrorEffects=CONSTRUCTED_RESPONSE_BANK.flatMap(question=>question.response?.steps||[]).filter(step=>Array.isArray(step.errorEffects));
-assert.equal(materializedErrorEffects.length,6,"O inventário real deve conter duas etapas dependentes em cada uma das três cadeias conservadoras.");
-assert.equal(materializedErrorEffects.reduce((sum,step)=>sum+step.errorEffects.length,0),6);
+assert.equal(materializedErrorEffects.length,10,"O inventário real deve conter dez etapas dependentes em cinco cadeias conservadoras.");
+assert.equal(materializedErrorEffects.reduce((sum,step)=>sum+step.errorEffects.length,0),10);
 
 const alternative=gradeResponse(derivative,"Usei uma resolução cientificamente válida, mas escrita por um processo não reconhecido automaticamente.");
 assert.equal(alternative.reviewRequired,true,"IAVE situação 1: um processo alternativo não deve ser automaticamente rejeitado; quando o motor não o certifica, fica por rever.");
