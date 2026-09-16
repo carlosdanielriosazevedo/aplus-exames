@@ -9,12 +9,12 @@ const incompleteFinalPassage={
   id:"AUDIT-IAVE-10-FINAL",points:10,
   response:{type:"stepwise",steps:[
     {id:"solve",label:"1. Resolver",type:"expression",points:8,expected:"x=4",incompleteAccepted:[
-      {value:"x+1=5",missingOnlyFinalPassage:true}
+      {value:"2x=8",missingOnlyFinalPassage:true}
     ]},
     {id:"check",label:"2. Verificação",type:"numeric",points:2,value:4,tolerance:0,expected:"x=4"}
   ]}
 };
-const incompleteFinal=gradeResponse(incompleteFinalPassage,{steps:{solve:"x+1=5",check:"x=4"}});
+const incompleteFinal=gradeResponse(incompleteFinalPassage,{steps:{solve:"2x=8",check:"x=4"}});
 const incompleteFinalStep=incompleteFinal.stepResults.find(row=>row.stepId==="solve");
 assert.equal(incompleteFinalStep?.reason,"incomplete_step");
 assert.equal(incompleteFinalStep?.iaveSituation,"Situação 10");
@@ -26,14 +26,14 @@ assert.equal(incompleteFinal.points,9);
 const incompleteSubstantial={
   id:"AUDIT-IAVE-10-HALF",points:12,
   response:{type:"stepwise",steps:[
-    {id:"factor",label:"1. Fatorizar",type:"expression",points:9,expected:"(x-2)(x+2)",incompleteAccepted:[
-      {value:"x^2-4",missingOnlyFinalPassage:false}
+    {id:"solve",label:"1. Resolver",type:"expression",points:9,expected:"x=4",incompleteAccepted:[
+      {value:"2x",missingOnlyFinalPassage:false}
     ]},
-    {id:"finish",label:"2. Concluir",type:"numeric",points:3,value:2,tolerance:0,expected:"x=2"}
+    {id:"finish",label:"2. Concluir",type:"numeric",points:3,value:4,tolerance:0,expected:"x=4"}
   ]}
 };
-const incompleteHalf=gradeResponse(incompleteSubstantial,{steps:{factor:"x^2-4",finish:"x=2"}});
-const incompleteHalfStep=incompleteHalf.stepResults.find(row=>row.stepId==="factor");
+const incompleteHalf=gradeResponse(incompleteSubstantial,{steps:{solve:"2x",finish:"x=4"}});
+const incompleteHalfStep=incompleteHalf.stepResults.find(row=>row.stepId==="solve");
 assert.equal(incompleteHalfStep?.reason,"incomplete_step");
 assert.equal(incompleteHalfStep?.iaveSituation,"Situação 10");
 assert.equal(incompleteHalfStep?.points,4,"Situação 10: restante resolução incompleta fica limitada à parte inteira de metade da etapa.");
@@ -45,7 +45,7 @@ const noDeclaredIncomplete={
     {id:"check",label:"2. Verificação",type:"numeric",points:2,value:4,tolerance:0,expected:"x=4"}
   ]}
 };
-const undeclaredIncomplete=gradeResponse(noDeclaredIncomplete,{steps:{solve:"x+1=5",check:"x=4"}});
+const undeclaredIncomplete=gradeResponse(noDeclaredIncomplete,{steps:{solve:"2x",check:"x=4"}});
 const undeclaredIncompleteStep=undeclaredIncomplete.stepResults.find(row=>row.stepId==="solve");
 assert.notEqual(undeclaredIncompleteStep?.reason,"incomplete_step","Sem metadados específicos, o motor não inventa Situação 10.");
 assert.notEqual(undeclaredIncompleteStep?.classificationConfidence,"high");
