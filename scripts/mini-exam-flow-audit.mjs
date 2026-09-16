@@ -6,6 +6,15 @@ import {
   miniExamPointSummary,examScoreLabel
 } from "../app/lib/constructedResponse.js";
 import {applyMiniExam,buildMiniExam,emptyScores} from "../app/lib/engine.js";
+import {draftScreen,loadSessionDraftStatus,saveSessionDraft} from "../app/lib/sessionDraft.js";
+import {claimSessionCompletion,clearCompletionRegistry,wasSessionCompleted} from "../app/lib/reliability.js";
+
+const stored=new Map();
+globalThis.localStorage={
+  getItem:key=>stored.has(key)?stored.get(key):null,
+  setItem:(key,value)=>stored.set(key,String(value)),
+  removeItem:key=>stored.delete(key)
+};
 
 const state={
   goal:17,xp:0,betaMode:"friends_beta",editorialOverrides:{},scores:emptyScores(),
@@ -83,4 +92,23 @@ const wrongSummary=miniExamPointSummary(exam,wrong);
 assert.equal(wrongSummary.results[firstChoiceIndex].status,"incorrect");
 assert.equal(wrongSummary.earnedPoints,95,"Uma escolha múltipla errada deve retirar apenas a respetiva cotação de 5 pontos.");
 
-console.log("✓ mini-exam: 8 questões, ponderação 30/70, 100 pontos, revisão final, não-respostas e segurança pedagógica validadas");
+const sessionId="mini-exam-flow-audit";
+const draft={
+  kind:"mini_exam",betaMode:"friends_beta",sessionId,screen:"miniExamRun",
+  questions:exam,answers:[answers[0],answers[1],answers[2],...Array(5).fill(null)],
+  current:3,startedAt:Date.now()-120_000
+};
+assert.equal(saveSessionDraft(draft),true,"A sessão em curso deve ser guardada.");
+const recovered=loadSessionDraftStatus("friends_beta");
+assert.equal(recovered.error,false);
+assert.equal(recovered.draft.sessionId,sessionId);
+assert.equal(recovered.draft.current,3,"A recuperação deve retomar na quarta questão.");
+assert.deepEqual(recovered.draft.answers.slice(0,3),answers.slice(0,3),"As respostas anteriores devem sobreviver à recarga.");
+assert.equal(draftScreen(recovered.draft),"miniExamRun");
+
+clearCompletionRegistry();
+assert.equal(claimSessionCompletion(sessionId),true,"A primeira entrega deve ser aceite.");
+assert.equal(wasSessionCompleted(sessionId),true);
+assert.equal(claimSessionCompletion(sessionId),false,"Uma segunda entrega da mesma sessão deve ser rejeitada.");
+
+console.log("✓ mini-exam: 8 questões, ponderação 30/70, recuperação 4/8, entrega idempotente, revisão final e segurança pedagógica validadas");
