@@ -4,11 +4,11 @@
 
 ## Estado geral
 
-- **31** itens de resposta construída em **31/113** submatérias.
-- **82** submatérias ainda sem resposta construída: **47 críticas** e **35 de prioridade alta**.
+- **35** itens de resposta construída em **35/113** submatérias.
+- **78** submatérias ainda sem resposta construída: **43 críticas** e **35 de prioridade alta**.
 - **1** item de completamento estruturado, contabilizado separadamente.
-- Cobertura por ano: 10.º **10/31** · 11.º **8/35** · 12.º **13/47**.
-- Capacidades materializadas em itens reais: texto/justificação **12** · propagação de erro **5** · redução de dificuldade **2** · resolução incompleta **3** · arredondamento explícito **1**.
+- Cobertura por ano: 10.º **11/31** · 11.º **9/35** · 12.º **15/47**.
+- Capacidades materializadas em itens reais: texto/justificação **14** · propagação de erro **5** · redução de dificuldade **2** · resolução incompleta **3** · arredondamento explícito **1**.
 
 A prioridade **crítica** significa apenas: submatéria sem resposta construída dentro de um tema com relevância ou poder de bloqueio elevados. Não significa que todas precisem imediatamente de propagação de erro, arredondamento ou outro critério que não se aplique matematicamente.
 
@@ -35,7 +35,7 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 10.º | Funções | `10-fun-conceito-representacoes` | Conceito de função e representações | 0 | — | — | — | — | — | — | — | crítica |
 | 10.º | Funções | `10-fun-dominio-imagem-zeros` | Domínio, contradomínio/imagem, zeros e sinal | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 10.º | Funções | `10-fun-quadratica` | Função quadrática, zeros, extremos e problemas | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
-| 10.º | Funções | `10-fun-transformacoes-ramos-modulo` | Transformações de gráficos, funções por ramos e módulo | 0 | — | — | — | — | — | — | — | crítica |
+| 10.º | Funções | `10-fun-transformacoes-ramos-modulo` | Transformações de gráficos, funções por ramos e módulo | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 10.º | Geometria analítica | `10-ga-colinearidade-retas` | Colinearidade e equações de retas | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 10.º | Geometria analítica | `10-ga-coordenadas-transformacoes` | Coordenadas e transformações no plano | 0 | — | — | — | — | — | — | — | crítica |
 | 10.º | Geometria analítica | `10-ga-distancias-ponto-medio` | Distâncias e ponto médio | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
@@ -51,7 +51,7 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 11.º | Cálculo diferencial | `11-cd-funcao-derivada` | Funcao derivada | 1 | ✓ | ✓ | — | ✓ | ✓ | — | — | aprofundar |
 | 11.º | Cálculo diferencial | `11-cd-monotonia-otimizacao` | Monotonia, extremos e otimizacao | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 11.º | Cálculo diferencial | `11-cd-regras` | Regras de derivacao | 0 | — | — | — | — | — | — | — | crítica |
-| 11.º | Cálculo diferencial | `11-cd-tangente` | Reta tangente e interpretacao geometrica | 0 | — | — | — | — | — | — | — | crítica |
+| 11.º | Cálculo diferencial | `11-cd-tangente` | Reta tangente e interpretacao geometrica | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 11.º | Cálculo diferencial | `11-cd-taxa-media` | Taxa media de variacao | 0 | — | — | — | — | — | — | — | crítica |
 | 11.º | Contagem | `11-cont-adicao-multiplicacao` | Princípios da adição e multiplicação | 0 | — | — | — | — | — | — | — | crítica |
 | 11.º | Contagem | `11-cont-arranjos` | Arranjos | 0 | — | — | — | — | — | — | — | crítica |
@@ -85,14 +85,14 @@ A prioridade **crítica** significa apenas: submatéria sem resposta construída
 | 12.º | Números complexos | `12-cplx-argand` | Plano de Argand-Gauss e interpretação geométrica | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Números complexos | `12-cplx-conjugado-modulo` | Conjugado e módulo | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Números complexos | `12-cplx-forma-algebrica` | Forma algébrica, parte real/imaginária e igualdade | 0 | — | — | — | — | — | — | — | crítica |
-| 12.º | Números complexos | `12-cplx-forma-trig` | Forma trigonométrica, módulo e argumento | 0 | — | — | — | — | — | — | — | crítica |
+| 12.º | Números complexos | `12-cplx-forma-trig` | Forma trigonométrica, módulo e argumento | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 12.º | Números complexos | `12-cplx-operacoes-algebricas` | Operações na forma algébrica | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Números complexos | `12-cplx-operacoes-trig` | Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Números complexos | `12-cplx-unidade-equacoes` | Unidade imaginária, conjunto C e equações de 2.º grau | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Exponenciais e logaritmos | `12-expl-equacoes` | Equações exponenciais/logarítmicas e problemas | 1 | ✓ | ✓ | — | — | — | — | — | aprofundar |
 | 12.º | Exponenciais e logaritmos | `12-expl-exponencial` | Função exponencial | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Exponenciais e logaritmos | `12-expl-inversa-raizes` | Função inversa e raízes | 0 | — | — | — | — | — | — | — | crítica |
-| 12.º | Exponenciais e logaritmos | `12-expl-logaritmica` | Função logarítmica e propriedades | 0 | — | — | — | — | — | — | — | crítica |
+| 12.º | Exponenciais e logaritmos | `12-expl-logaritmica` | Função logarítmica e propriedades | 1 | ✓ | ✓ | ✓ | — | — | — | — | aprofundar |
 | 12.º | Exponenciais e logaritmos | `12-expl-modelacao` | Crescimento/decrescimento exponencial e modelação | 1 | ✓ | ✓ | — | — | — | — | ✓ | aprofundar |
 | 12.º | Função composta e derivadas | `12-fcd-aplicacoes` | Estudo de funções, modelação e otimização | 0 | — | — | — | — | — | — | — | crítica |
 | 12.º | Função composta e derivadas | `12-fcd-composicao` | Função composta e domínio | 0 | — | — | — | — | — | — | — | crítica |
