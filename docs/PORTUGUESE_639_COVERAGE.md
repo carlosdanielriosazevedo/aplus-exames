@@ -2,7 +2,7 @@
 
 > Relatório estrutural gerado por `npm run portuguese-coverage`. Não representa validação humana nem autoriza publicação.
 >
-> Esta matriz de competências é provisória até ficar cruzada, por ano, com as Aprendizagens Essenciais da DGE e com a informação-prova e os critérios IAVE em vigor.
+> As competências estão cruzadas com as Aprendizagens Essenciais em vigor. A conformidade fina com a informação-prova e os critérios IAVE continua a ser verificada separadamente.
 
 ## Estado geral
 
