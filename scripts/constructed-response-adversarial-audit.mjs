@@ -18,7 +18,7 @@ const baseState={
 const alternative="Apresentei uma resolução matemática alternativa que o corretor automático ainda não reconhece.";
 let checked=0;
 
-assert.equal(CONSTRUCTED_RESPONSE_BANK.length,31,"A matriz adversarial deve cobrir as 31 respostas construídas reais.");
+assert.equal(CONSTRUCTED_RESPONSE_BANK.length,35,"A matriz adversarial deve cobrir as 35 respostas construídas reais.");
 
 for(const question of CONSTRUCTED_RESPONSE_BANK){
   const reference=answerFor(question);
@@ -77,4 +77,4 @@ for(const question of CONSTRUCTED_RESPONSE_BANK){
 }
 assert.ok(conflicts>=20,`A matriz deve cobrir pelo menos 20 conflitos explícitos; cobriu ${conflicts}.`);
 
-console.log(`✓ adversarial constructed responses: ${checked} cenários base + ${conflicts} contradições explícitas cobrem 31/31 perguntas sem pontuação indevida nem contaminação de Domínio/Certeza`);
+console.log(`✓ adversarial constructed responses: ${checked} cenários base + ${conflicts} contradições explícitas cobrem 35/35 perguntas sem pontuação indevida nem contaminação de Domínio/Certeza`);

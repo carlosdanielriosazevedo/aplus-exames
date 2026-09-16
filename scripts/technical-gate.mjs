@@ -28,6 +28,7 @@ const checks=[
   ["Resposta construída adversarial","npm",["run","constructed-response:adversarial-audit"]],
   ["Cobertura de resposta construída","npm",["run","math-constructed:coverage-audit"]],
   ["Primeira vaga de resposta construída","npm",["run","math-constructed:wave1-audit"]],
+  ["Segunda vaga de resposta construída","npm",["run","math-constructed:wave2-audit"]],
   ["Memória pedagógica","npm",["run","pedagogical-memory:audit"]],
   ["Cloud reliability","npm",["run","cloud-reliability:audit"]],
   ["Funil e retenção","npm",["run","retention:audit"]],
