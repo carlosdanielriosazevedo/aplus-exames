@@ -387,6 +387,67 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     points:35,sol:"AB=[[1×2+2×1,1×0+2×2],[3×2+4×1,3×0+4×2]]=[[4,4],[10,8]]. Em geral, o produto de matrizes não é comutativo, por isso AB pode diferir de BA.",
     hyp:"Pode existir dificuldade em combinar linhas com colunas ou assumir incorretamente que AB=BA.",
     contexts:["exam"],signature:"12-mat:Produto de matrizes:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10FUN-AFIM-STEPS-1",themeId:"10-fun",subtopicId:"10-fun-afim",
+    microcompetencyId:"mc-10-fun-representacoes",focus:"Função afim e modelação",difficulty:2,cognitive:"Modelação",
+    q:"Um serviço de entregas cobra 4 € de taxa fixa e 1,50 € por quilómetro. Escreve a função custo C(x) e determina o preço de uma entrega de 10 km.",
+    response:{type:"stepwise",steps:[
+      step("model","1. Modelo do custo em função da distância","expression",12,{accepted:["C(x)=4+1.5x","4+1.5x","C(x)=1.5x+4"],conceptualErrorAccepted:["C(x)=4x+1.5","4x+1.5"],expected:"C(x)=4+1,5x",placeholder:"Ex.: C(x)=4+1,5x"}),
+      step("substitution","2. Substituição de x=10","expression",10,{accepted:["C(10)=4+1.5*10","4+1.5*10","4+1,5×10"],errorEffects:[
+        {from:"model",reasons:["conceptual_error"],accepted:["C(10)=4*10+1.5","4*10+1.5","4×10+1,5"],difficultyReduced:false}
+      ],expected:"C(10)=4+1,5×10",placeholder:"Ex.: C(10)=4+1,5×10"}),
+      step("value","3. Preço da entrega","numeric",13,{value:19,tolerance:0,errorEffects:[
+        {from:"model",reasons:["conceptual_error"],accepted:["41.5","41,5","C(10)=41,5"],difficultyReduced:false}
+      ],expected:"C(10)=19",placeholder:"Ex.: 19"})
+    ]},
+    points:35,sol:"A taxa fixa é o termo independente e o preço por quilómetro é o declive: C(x)=4+1,5x. Assim, C(10)=4+1,5×10=19 €.",
+    hyp:"Pode trocar a taxa fixa pelo coeficiente da distância ou não interpretar corretamente o valor obtido.",
+    contexts:["exam"],signature:"10-fun:Função afim e modelação:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-10GA-DIST-STEPS-1",themeId:"10-ga",subtopicId:"10-ga-distancias-ponto-medio",
+    microcompetencyId:"mc-10-ga-coordenadas",focus:"Distâncias e ponto médio",difficulty:2,cognitive:"Aplicação",
+    q:"Considera os pontos A(−1,2) e B(3,5). Determina a distância AB, apresentando os cálculos.",
+    response:{type:"stepwise",steps:[
+      step("dx","1. Diferença das abcissas","numeric",7,{value:4,tolerance:0,expected:"Δx=4",placeholder:"Ex.: Δx=4"}),
+      step("dy","2. Diferença das ordenadas","numeric",7,{value:3,tolerance:0,expected:"Δy=3",placeholder:"Ex.: Δy=3"}),
+      step("formula","3. Aplicação da fórmula da distância","expression",11,{accepted:["sqrt(4^2+3^2)","√(4²+3²)","sqrt((3-(-1))^2+(5-2)^2)"],expected:"AB=√(4²+3²)",placeholder:"Ex.: AB=√(4²+3²)"}),
+      step("distance","4. Distância entre os pontos","numeric",10,{value:5,tolerance:0,expected:"AB=5",placeholder:"Ex.: AB=5"})
+    ]},
+    points:35,sol:"Δx=3−(−1)=4 e Δy=5−2=3. Logo, AB=√(4²+3²)=√25=5.",
+    hyp:"Pode errar a diferença com a abcissa negativa ou somar as diferenças sem aplicar Pitágoras.",
+    contexts:["exam"],signature:"10-ga:Distâncias e ponto médio:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-11CD-TV-STEPS-1",themeId:"11-cd",subtopicId:"11-cd-funcao-derivada",
+    microcompetencyId:"mc-11-cd-taxa-de-variacao",focus:"Taxa de variação",difficulty:3,cognitive:"Raciocínio",
+    q:"A posição de uma partícula é s(t)=t²+3t. Determina a velocidade instantânea no instante t=2.",
+    response:{type:"stepwise",steps:[
+      step("derivative","1. Derivada da função posição","expression",12,{accepted:["s'(t)=2t+3","2t+3","s′(t)=2t+3"],conceptualErrorAccepted:["s'(t)=2t","2t","s′(t)=2t"],expected:"s′(t)=2t+3",placeholder:"Ex.: s'(t)=2t+3"}),
+      step("substitution","2. Substituição de t=2","expression",10,{accepted:["s'(2)=2*2+3","2*2+3","2×2+3"],errorEffects:[
+        {from:"derivative",reasons:["conceptual_error"],accepted:["s'(2)=2*2","2*2","2×2"],difficultyReduced:true}
+      ],expected:"s′(2)=2×2+3",placeholder:"Ex.: s'(2)=2×2+3"}),
+      step("velocity","3. Velocidade instantânea","numeric",13,{value:7,tolerance:0,errorEffects:[
+        {from:"derivative",reasons:["conceptual_error"],accepted:["4","s'(2)=4","s′(2)=4"],difficultyReduced:true}
+      ],expected:"s′(2)=7",placeholder:"Ex.: 7"})
+    ]},
+    points:35,sol:"A velocidade instantânea é a derivada da posição. Como s′(t)=2t+3, resulta s′(2)=2×2+3=7.",
+    hyp:"Pode omitir a derivada do termo 3t; esse erro simplifica as etapas seguintes e deve ser propagado conservadoramente.",
+    contexts:["exam"],signature:"11-cd:Taxa de variação:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+  },
+  {
+    id:"CRV2-12EXPL-MOD-STEPS-1",themeId:"12-expl",subtopicId:"12-expl-modelacao",
+    microcompetencyId:"mc-12-expl-modelacao",focus:"Modelação",difficulty:3,cognitive:"Modelação",
+    q:"Uma população é modelada por P(t)=1000×1,07ᵗ, com t em anos. Estima P(5), arredondando o resultado final às unidades.",
+    response:{type:"stepwise",steps:[
+      step("substitution","1. Substituição de t=5","expression",10,{accepted:["P(5)=1000*1.07^5","1000*1.07^5","1000×1,07^5"],expected:"P(5)=1000×1,07⁵",placeholder:"Ex.: P(5)=1000×1,07^5"}),
+      step("raw","2. Valor antes do arredondamento","numeric",12,{value:1402.5517307,tolerance:0.0001,expected:"Valor não arredondado=1402,5517307",placeholder:"Ex.: 1402,5517307"}),
+      step("rounded","3. Resultado arredondado às unidades","numeric",13,{value:1403,tolerance:0,rounding:{sourceValue:1402.5517307,decimals:0},expected:"Resultado=1403",placeholder:"Ex.: 1403"})
+    ]},
+    points:35,sol:"P(5)=1000×1,07⁵=1402,5517307… Como a primeira casa decimal é 5, arredonda-se às unidades: P(5)≈1403.",
+    hyp:"Pode arredondar prematuramente ou aplicar incorretamente a regra de arredondamento final.",
+    contexts:["exam"],signature:"12-expl:Modelação:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   }
 ];
 
