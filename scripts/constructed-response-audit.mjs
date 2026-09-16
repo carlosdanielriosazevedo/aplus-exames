@@ -133,8 +133,8 @@ assert.ok(stepFeedback(randomGrade.stepResults[0]).includes("Não identificámos
 const arithmetic=gradeResponse(slopeQuestion,"Δy=4−2=2\nΔx=5−1=4\nm=2/4=0,5");
 assert.equal(arithmetic.points,28);
 const wrongFinal=gradeResponse(derivative,"f'(x)=3x^2-2\nf'(2)=3*2^2-2=11");
-assert.equal(wrongFinal.points,23);
-assert.equal(wrongFinal.stepResults[2].reason,"calculation_error");
+assert.equal(wrongFinal.points,34);
+assert.equal(wrongFinal.stepResults[2].reason,"occasional_calculation_error");
 const conflicting=gradeResponse(derivative,"f'(2)=10\nf'(2)=11");
 assert.equal(conflicting.stepResults[2].reason,"conflicting_results");
 assert.equal(conflicting.stepResults[2].points,0);
@@ -177,8 +177,8 @@ const probability=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-12PROB-STEPS-1"
 assert.equal(gradeResponse(probability,{steps:{favourable:"3",possible:"5",probability:"6/10",conclusion:probability.response.steps[3].accepted[1]}}).correct,true);
 const statistics=CONSTRUCTED_RESPONSE_BANK.find(q=>q.id==="CRV2-10EST-STEPS-1");
 const ambiguousBareValue=gradeResponse(statistics,"4");
-assert.equal(ambiguousBareValue.points,8,"Uma única linha sem rótulo não pode pontuar duas etapas com o mesmo valor.");
-assert.equal(ambiguousBareValue.stepResults.filter(row=>row.correct).length,1);
+assert.equal(ambiguousBareValue.points,0,"Um resultado final isolado num item por etapas não recebe cotação.");
+assert.equal(ambiguousBareValue.reason,"final_result_only");
 const labelledRepeatedValue=gradeResponse(statistics,"n=4\nmédia=4");
 assert.equal(labelledRepeatedValue.points,25,"Linhas distintas e identificadas podem demonstrar valores iguais em etapas diferentes.");
 console.log("✓ second-wave reference answers and accepted equivalent formulations");
