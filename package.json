@@ -33,6 +33,8 @@
     "apronso-brand:audit": "node scripts/apronso-brand-audit.mjs",
     "constructed-response:audit": "node scripts/constructed-response-audit.mjs",
     "constructed-response:realworld-audit": "node scripts/constructed-response-realworld-audit.mjs",
+    "math-constructed:coverage": "node scripts/math-constructed-coverage.mjs --write",
+    "math-constructed:coverage-audit": "node scripts/math-constructed-coverage.mjs --check",
     "constructed-response:adversarial-audit": "node scripts/constructed-response-adversarial-audit.mjs",
     "iave-scoring:audit": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs",
     "mini-exam:audit": "node scripts/mini-exam-flow-audit.mjs",
