@@ -1,5 +1,5 @@
 import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
-import {scoreIaveStep,iaveSituationLabel} from "./iaveScoring.js";
+import {scoreIaveStep,iaveSituationLabel,dependentStepCap} from "./iaveScoring.js";
 const step=(id,label,type,points,expected)=>({id,label,type,points,...expected});
 
 export const CONSTRUCTED_RESPONSE_BANK=[
@@ -495,6 +495,26 @@ function matchesPropagatedApproximation(spec,value){
   if(parsed===null||!Array.isArray(spec?.propagatedApproximationValues))return false;
   return spec.propagatedApproximationValues.some(candidate=>Number.isFinite(Number(candidate))&&Math.abs(parsed-Number(candidate))<=Number.EPSILON*Math.max(1,Math.abs(parsed),Math.abs(Number(candidate)))*16);
 }
+function normalizedDeclaredStepValue(spec,value){
+  if(spec?.type==="text")return normalizedWords(value).replace(/[.!]$/g,"");
+  if(spec?.type==="expression")return normalizedExpression(value);
+  return normalizedInput(value);
+}
+function declaredIncompleteStep(spec,value){
+  if(!hasText(value)||!Array.isArray(spec?.incompleteAccepted))return null;
+  const actual=normalizedDeclaredStepValue(spec,value);
+  return spec.incompleteAccepted.find(entry=>entry&&typeof entry==="object"&&hasText(entry.value)&&typeof entry.missingOnlyFinalPassage==="boolean"&&normalizedDeclaredStepValue(spec,entry.value)===actual)||null;
+}
+function declaredUpstreamErrorEffect(spec,value,stepResults){
+  if(!hasText(value)||!Array.isArray(spec?.errorEffects))return null;
+  const actual=normalizedDeclaredStepValue(spec,value);
+  return spec.errorEffects.find(effect=>{
+    if(!effect||typeof effect.from!=="string"||typeof effect.difficultyReduced!=="boolean"||!Array.isArray(effect.reasons)||!effect.reasons.length||!Array.isArray(effect.accepted)||!effect.accepted.length)return false;
+    const upstream=stepResults.find(row=>row.stepId===effect.from);
+    if(!upstream||!effect.reasons.includes(upstream.reason))return false;
+    return effect.accepted.some(candidate=>hasText(candidate)&&normalizedDeclaredStepValue(spec,candidate)===actual);
+  })||null;
+}
 
 function gradeStep(spec,value){
   let correct=false,reason="incorrect";
@@ -542,6 +562,13 @@ function gradeStep(spec,value){
     if(!correct&&hasText(value))correct=candidates.some(candidate=>optionalUnitOmissionMatches(input,candidate));
     if(!correct&&hasText(value)&&conceptGroupsMatch(spec,input))correct=true;
     if(!input)reason="empty_justification";
+  }
+  if(!correct&&hasText(value)){
+    const incomplete=declaredIncompleteStep(spec,value);
+    if(incomplete){
+      reason="incomplete_step";
+      return {stepId:spec.id,label:spec.label,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason,missingOnlyFinalPassage:incomplete.missingOnlyFinalPassage}),maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",missingOnlyFinalPassage:incomplete.missingOnlyFinalPassage};
+    }
   }
   return {stepId:spec.id,label:spec.label,status:correct?"correct":"incorrect",correct,points:correct?spec.points:0,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason:correct?null:reason};
 }
@@ -597,9 +624,6 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
       const finalPart=row?.parts?.at(-1)||"";
       const previousValue=row?.values?.at(-2);
       const finalValue=row?.values?.at(-1);
-      // IAVE 2026, situação 15: só inferimos arredondamento final incorreto quando
-      // o item declara o valor não arredondado e o número de casas exigidas, e a
-      // própria cadeia mostra esse valor imediatamente antes da resposta final.
       if(highConfidenceWrongFinalRounding(spec,row)){
         const reason="wrong_final_rounding";
         return {...base,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",answer:row.line};
@@ -631,6 +655,8 @@ export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
   if(row.reason==="copied_number_or_sign_error")return "A cadeia mostra o valor correto e uma troca isolada de algarismo ou sinal na sua transcrição. Aplicámos apenas a desvalorização prevista para esta situação.";
   if(row.reason==="occasional_calculation_error")return "O processo identificado está correto, mas há uma falha ocasional no cálculo final desta etapa. Aplicámos a desvalorização prevista nos critérios IAVE.";
+  if(row.reason==="incomplete_step")return row.missingOnlyFinalPassage?"A etapa está correta até à última passagem necessária. Foi aplicada apenas a desvalorização prevista para essa omissão final.":"A etapa está incompleta segundo o critério específico do item. Foi aplicado o limite de cotação previsto nos critérios IAVE.";
+  if(row.reason==="upstream_error_effect")return row.difficultyReduced?"Esta etapa segue corretamente o erro anterior, mas esse erro tornou a etapa mais fácil. Aplicámos o limite de metade da cotação previsto na Nota 2 dos critérios IAVE.":"Esta etapa segue corretamente o erro anterior sem redução de dificuldade e foi classificada pelo critério específico adaptado.";
   if(row.reason==="wrong_final_form")return "O valor é matematicamente equivalente, mas não está apresentado na forma final pedida. Aplicámos a desvalorização prevista nos critérios IAVE.";
   if(row.reason==="approximate_instead_of_exact")return "Foi apresentado um valor aproximado quando era exigido um valor exato. Aplicámos a desvalorização prevista nos critérios IAVE.";
   if(row.reason==="approximate_used_instead_of_exact")return "Uma aproximação anterior foi usada num cálculo seguinte em vez do valor exato. Aplicámos o limite de cotação previsto nos critérios IAVE.";
@@ -688,10 +714,7 @@ export function gradeResponse(question,answer){
       if((result.correct||result.status==="partial")&&Number.isInteger(result.matchedUnlabelledIndex))usedUnlabelled.add(result.matchedUnlabelledIndex);
       return result;
     });
-    // IAVE 2026, situação 14: só propagamos uma aproximação quando o próprio item
-    // declara a dependência e os resultados que correspondem inequivocamente a usar
-    // essa aproximação. Sem essa metainformação, o corretor não tenta adivinhar.
-    const stepResults=rawStepResults.map((result,index)=>{
+    const approximationAdjustedResults=rawStepResults.map((result,index)=>{
       const spec=question.response.steps[index];
       if(result.correct||!spec?.approximationDependsOn||!matchesPropagatedApproximation(spec,answer?.steps?.[spec.id]))return result;
       const upstreamIds=Array.isArray(spec.approximationDependsOn)?spec.approximationDependsOn:[spec.approximationDependsOn];
@@ -699,6 +722,15 @@ export function gradeResponse(question,answer){
       if(!upstreamApproximation)return result;
       const reason="approximate_used_instead_of_exact";
       return {...result,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};
+    });
+    const stepResults=approximationAdjustedResults.map((result,index)=>{
+      const spec=question.response.steps[index];
+      const directValue=answer?.steps?.[spec.id];
+      if(result.correct||result.status==="partial"||!hasText(directValue))return result;
+      const effect=declaredUpstreamErrorEffect(spec,directValue,approximationAdjustedResults);
+      if(!effect)return result;
+      const points=effect.difficultyReduced?dependentStepCap(spec.points,{upstreamDifficultyReduced:true}):spec.points;
+      return {...result,status:points===spec.points?"correct":"partial",correct:points===spec.points,points,reason:"upstream_error_effect",classificationConfidence:"high",iaveRule:"Nota 2",sourceStepId:effect.from,difficultyReduced:effect.difficultyReduced};
     });
     const points=stepResults.reduce((sum,row)=>sum+row.points,0),correct=points===maxPoints;
     const pendingPoints=stepResults.filter(row=>row.status==="needs_review").reduce((sum,row)=>sum+row.maxPoints,0);
