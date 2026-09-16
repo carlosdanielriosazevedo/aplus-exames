@@ -225,6 +225,45 @@ const undeclaredDownstream=undeclaredDependentEffect.stepResults.find(row=>row.s
 assert.notEqual(undeclaredDownstream?.reason,"upstream_error_effect","Sem resultado propagado explicitamente declarado, o corretor não deve inventar uma relação causal entre os erros.");
 assert.notEqual(undeclaredDownstream?.classificationConfidence,"high");
 
+// Nota 2 materializada em perguntas reais do Mini-exame. Cada cadeia declara
+// resultados concretos; outros erros continuam sem inferência automática.
+const derivativePropagation=gradeResponse(derivative,{steps:{
+  derivative:"f'(x)=3x^2",substitution:"3*2^2",value:"f'(2)=12"
+}});
+assert.equal(derivativePropagation.points,17);
+assert.deepEqual(
+  derivativePropagation.stepResults.map(row=>[row.reason,row.points,row.difficultyReduced]),
+  [["conceptual_error",7,undefined],["upstream_error_effect",4,true],["upstream_error_effect",6,true]],
+  "A omissão de −2 simplifica as etapas seguintes e deve limitar cada etapa dependente a metade."
+);
+
+const integralPropagation=gradeResponse(integral,{steps:{primitive:"x^2",barrow:"1^2-0^2",value:"1"}});
+assert.equal(integralPropagation.points,27);
+assert.deepEqual(
+  integralPropagation.stepResults.map(row=>[row.reason,row.points,row.difficultyReduced]),
+  [["conceptual_error",7,undefined],["upstream_error_effect",10,false],["upstream_error_effect",10,false]],
+  "A aplicação coerente da primitiva errada mantém a cotação das etapas que não ficaram mais fáceis."
+);
+
+const progression=byId("CRV2-11SUC-STEPS-1");
+const progressionPropagation=gradeResponse(progression,{steps:{formula:"u_n=3+2n",substitution:"3+2*10",value:"u_10=23"}});
+assert.equal(progressionPropagation.points,29);
+assert.deepEqual(
+  progressionPropagation.stepResults.map(row=>[row.reason,row.points,row.difficultyReduced]),
+  [["conceptual_error",6,undefined],["upstream_error_effect",10,false],["upstream_error_effect",13,false]],
+  "Usar n em vez de n−1 não reduz a dificuldade da substituição nem do cálculo coerente seguintes."
+);
+
+const undeclaredRealPropagation=gradeResponse(progression,{steps:{formula:"u_n=3+2n",substitution:"3+2*11",value:"25"}});
+for(const row of undeclaredRealPropagation.stepResults.slice(1)){
+  assert.notEqual(row.reason,"upstream_error_effect","Uma consequência não declarada não pode ser classificada automaticamente como propagação de erro.");
+  assert.notEqual(row.classificationConfidence,"high");
+}
+
+const materializedErrorEffects=CONSTRUCTED_RESPONSE_BANK.flatMap(question=>question.response?.steps||[]).filter(step=>Array.isArray(step.errorEffects));
+assert.equal(materializedErrorEffects.length,6,"O inventário real deve conter duas etapas dependentes em cada uma das três cadeias conservadoras.");
+assert.equal(materializedErrorEffects.reduce((sum,step)=>sum+step.errorEffects.length,0),6);
+
 const alternative=gradeResponse(derivative,"Usei uma resolução cientificamente válida, mas escrita por um processo não reconhecido automaticamente.");
 assert.equal(alternative.reviewRequired,true,"IAVE situação 1: um processo alternativo não deve ser automaticamente rejeitado; quando o motor não o certifica, fica por rever.");
 
