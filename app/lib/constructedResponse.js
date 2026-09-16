@@ -337,7 +337,7 @@ export const CONSTRUCTED_RESPONSE_BANK=[
     ]},
     points:35,sol:"P(2)=8−16+2+6=0, logo x−2 é fator. A divisão dá x²−2x−3=(x−3)(x+1). Portanto, P(x)=(x−2)(x−3)(x+1).",
     hyp:"Pode existir dificuldade em ligar o resto nulo ao fator x−2 ou em fatorizar o quociente.",
-    contexts:["exam"],signature:"11-fun:Ruffini:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
+    contexts:["exam"],signature:"11-fun:Ruffini:Divisão de polinómios:constructed-v2-1",reviewStatus:"prototype",origin:"constructed_v2"
   },
   {
     id:"CRV2-12IE-IC-STEPS-1",themeId:"12-ie",subtopicId:"12-ie-intervalos-confianca",
@@ -525,9 +525,41 @@ function declaredUpstreamErrorEffect(spec,value,stepResults){
     return effect.accepted.some(candidate=>hasText(candidate)&&normalizedDeclaredStepValue(spec,candidate)===actual);
   })||null;
 }
+function declaredInstructionViolation(spec,value){
+  const issue=declaredExactIssue(spec,value,"instructionViolationAccepted");
+  if(!issue||!Array.isArray(issue.dependentStepIds))return null;
+  const dependentStepIds=issue.dependentStepIds.filter(id=>typeof id==="string"&&id.length>0);
+  return {...issue,dependentStepIds};
+}
+function declaredImplicitRule(spec){
+  const rule=spec?.implicitNonCalculation;
+  if(!rule||!Array.isArray(rule.evidence)||!Array.isArray(rule.dependentStepIds))return null;
+  const validEvidence=rule.evidence.filter(entry=>entry&&typeof entry.from==="string"&&Array.isArray(entry.accepted)&&entry.accepted.some(hasText));
+  if(!validEvidence.length)return null;
+  return {...rule,evidence:validEvidence,dependentStepIds:rule.dependentStepIds.filter(id=>typeof id==="string"&&id.length>0)};
+}
+function implicitEvidenceMatches(question,answer,rule){
+  return rule.evidence.some(entry=>{
+    const sourceSpec=question.response.steps.find(stepSpec=>stepSpec.id===entry.from);
+    const sourceValue=answer?.steps?.[entry.from];
+    if(!sourceSpec||!hasText(sourceValue))return false;
+    const actual=normalizedDeclaredStepValue(sourceSpec,sourceValue);
+    return entry.accepted.some(candidate=>hasText(candidate)&&normalizedDeclaredStepValue(sourceSpec,candidate)===actual);
+  });
+}
 
 function gradeStep(spec,value){
   let correct=false,reason="incorrect";
+  const instructionViolation=declaredInstructionViolation(spec,value);
+  if(instructionViolation){
+    reason="instruction_violation";
+    return {stepId:spec.id,label:spec.label,status:"incorrect",correct:false,points:0,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",dependentStepIds:instructionViolation.dependentStepIds};
+  }
+  const missingRequiredWork=declaredExactIssue(spec,value,"missingRequiredWorkAccepted");
+  if(missingRequiredWork){
+    reason="missing_required_work";
+    return {stepId:spec.id,label:spec.label,status:"incorrect",correct:false,points:0,maxPoints:spec.points,expected:spec.expected,answer:value??"",reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};
+  }
   const typedPrefix=String(value??"").includes("=")?String(value).split("=")[0]:null;
   const expectedPrefix=String(spec.expected).includes("=")?String(spec.expected).split("=")[0]:null;
   if(["numeric","fraction"].includes(spec.type)&&typedPrefix&&expectedPrefix&&normalizedExpression(typedPrefix)!==normalizedExpression(expectedPrefix))return {stepId:spec.id,label:spec.label,status:"incorrect",correct:false,points:0,maxPoints:spec.points,expected:spec.expected,answer:value,reason:"wrong_quantity"};
@@ -687,6 +719,10 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
 
 export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
+  if(row.reason==="instruction_violation")return "Foi usado um processo que o enunciado excluía explicitamente. Esta etapa e apenas as etapas declaradas como dependentes recebem zero, de acordo com os critérios IAVE.";
+  if(row.reason==="missing_required_work")return "Faltam os cálculos ou a justificação que o critério exige nesta etapa; por isso, esta etapa recebe zero pontos.";
+  if(row.reason==="implicit_non_calculation_step")return row.implicitTraversal?"A etapa não foi escrita isoladamente, mas a resolução posterior prova inequivocamente que foi percorrida; foi atribuída a cotação prevista.":"A etapa não foi apresentada e a resolução não prova inequivocamente que foi percorrida; esta etapa e as dependentes declaradas recebem zero.";
+  if(row.reason==="dependent_zero_due_to_iave")return "Esta etapa depende de uma etapa anterior que, pelos critérios IAVE, obriga a cotação zero nas etapas dependentes.";
   if(row.reason==="copied_data_error")return row.difficultyReduced?"Foi identificado um erro de cópia de dados que altera a dificuldade. O corretor mantém essa origem explícita para aplicar corretamente os limites nas etapas dependentes.":"Foi identificado um erro de cópia de dados sem redução de dificuldade. Aplicámos a desvalorização global prevista nos critérios IAVE.";
   if(row.reason==="copied_number_or_sign_error")return "A cadeia mostra o valor correto e uma troca isolada de algarismo ou sinal na sua transcrição. Aplicámos apenas a desvalorização prevista para esta situação.";
   if(row.reason==="occasional_calculation_error")return "O processo identificado está correto, mas há uma falha ocasional no cálculo final desta etapa. Aplicámos a desvalorização prevista nos critérios IAVE.";
@@ -753,20 +789,34 @@ export function gradeResponse(question,answer){
       if((result.correct||result.status==="partial")&&Number.isInteger(result.matchedUnlabelledIndex))usedUnlabelled.add(result.matchedUnlabelledIndex);
       return result;
     });
-    const approximationAdjustedResults=rawStepResults.map((result,index)=>{
+    const implicitAdjustedResults=rawStepResults.map((result,index)=>{
+      const spec=question.response.steps[index];
+      const rule=declaredImplicitRule(spec);
+      if(!rule||hasText(answer?.steps?.[spec.id]))return result;
+      const implicitTraversal=implicitEvidenceMatches(question,answer,rule);
+      const reason="implicit_non_calculation_step";
+      return {...result,status:implicitTraversal?"correct":"incorrect",correct:implicitTraversal,points:implicitTraversal?spec.points:0,reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high",implicitTraversal,dependentStepIds:rule.dependentStepIds};
+    });
+    const approximationAdjustedResults=implicitAdjustedResults.map((result,index)=>{
       const spec=question.response.steps[index];
       if(result.correct||!spec?.approximationDependsOn||!matchesPropagatedApproximation(spec,answer?.steps?.[spec.id]))return result;
       const upstreamIds=Array.isArray(spec.approximationDependsOn)?spec.approximationDependsOn:[spec.approximationDependsOn];
-      const upstreamApproximation=rawStepResults.some(row=>upstreamIds.includes(row.stepId)&&row.reason==="approximate_instead_of_exact");
+      const upstreamApproximation=implicitAdjustedResults.some(row=>upstreamIds.includes(row.stepId)&&row.reason==="approximate_instead_of_exact");
       if(!upstreamApproximation)return result;
       const reason="approximate_used_instead_of_exact";
       return {...result,status:"partial",correct:false,points:scoreIaveStep({maxPoints:spec.points,basePoints:spec.points,reason}),reason,iaveSituation:iaveSituationLabel(reason),classificationConfidence:"high"};
     });
-    const stepResults=approximationAdjustedResults.map((result,index)=>{
+    const dependencySources=approximationAdjustedResults.filter(row=>(row.reason==="instruction_violation"||(row.reason==="implicit_non_calculation_step"&&!row.implicitTraversal))&&Array.isArray(row.dependentStepIds));
+    const zeroedByDependency=approximationAdjustedResults.map(result=>{
+      const source=dependencySources.find(row=>row.dependentStepIds.includes(result.stepId));
+      if(!source||result.stepId===source.stepId)return result;
+      return {...result,status:"incorrect",correct:false,points:0,reason:"dependent_zero_due_to_iave",classificationConfidence:"high",sourceStepId:source.stepId,iaveRule:source.iaveSituation};
+    });
+    const stepResults=zeroedByDependency.map((result,index)=>{
       const spec=question.response.steps[index];
       const directValue=answer?.steps?.[spec.id];
       if(result.correct||result.status==="partial"||!hasText(directValue))return result;
-      const effect=declaredUpstreamErrorEffect(spec,directValue,approximationAdjustedResults);
+      const effect=declaredUpstreamErrorEffect(spec,directValue,zeroedByDependency);
       if(!effect)return result;
       const points=effect.difficultyReduced?dependentStepCap(spec.points,{upstreamDifficultyReduced:true}):spec.points;
       return {...result,status:points===spec.points?"correct":"partial",correct:points===spec.points,points,reason:"upstream_error_effect",classificationConfidence:"high",iaveRule:"Nota 2",sourceStepId:effect.from,difficultyReduced:effect.difficultyReduced};
