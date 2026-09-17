@@ -63,6 +63,7 @@
     "subjects:audit": "node scripts/subjects-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
     "portuguese-engine:audit": "node scripts/portuguese-engine-audit.mjs",
+    "subject-progress:audit": "node scripts/subject-progress-audit.mjs",
     "portuguese-coverage": "node scripts/portuguese-coverage.mjs --write",
     "portuguese-coverage:audit": "node scripts/portuguese-coverage.mjs --check"
   },

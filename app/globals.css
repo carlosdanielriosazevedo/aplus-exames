@@ -604,3 +604,4 @@ body{color:var(--app-navy);background:#fff}
 }
 
 .practiceFields{border:0;padding:0;margin:0;min-width:0}.practiceFields:disabled{opacity:1}.practiceFields textarea{width:100%;box-sizing:border-box;min-height:6rem}.practiceFields label{display:grid;gap:.5rem;margin-bottom:1rem}
+.portugueseProgressCard{margin:24px 0;padding:18px;border:1px solid #e5e8ef;border-radius:16px;background:#fff}.portugueseProgressCard h2{margin-top:0;font-size:16px}.portugueseProgressCard>div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #eef0f4}.portugueseProgressCard>div span{color:#697389}.portugueseProgressCard>div b{color:#8d4b00}.portugueseProgressCard small{display:block;margin-top:10px;color:#7c8598}.portugueseReset{margin-top:12px}
