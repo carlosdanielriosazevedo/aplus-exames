@@ -7,7 +7,9 @@ import {
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
 const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
-const items=[...pilot.items,...wave1.items];
+const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
+const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
+const items=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
 const byId=id=>items.find(item=>item.id===id);
 
 assert.equal(normalizePortugueseAnswer("  ORAÇÃO «completiva». "),"oracao completiva");
@@ -30,9 +32,9 @@ assert.ok(restricted.criteria.every(criterion=>criterion.status==="pending"));
 
 const coverage=portugueseCoverage(items);
 assert.equal(coverage.diagnosticReady,true,"o piloto suporta um diagnóstico interno equilibrado");
-assert.equal(coverage.total,29);
+assert.equal(coverage.total,60);
 assert.equal(coverage.missionReady,true,"cada domínio deve ter sete itens realmente elegíveis para missões");
-assert.equal(coverage.pilotReady,false,"a disciplina deve permanecer abaixo do gate de 60 itens");
+assert.equal(coverage.pilotReady,true,"a terceira vaga deve atingir o gate quantitativo de piloto");
 assert.equal(coverage.productionEligible,false);
 
 const diagnostic=buildPortugueseDiagnostic(items);

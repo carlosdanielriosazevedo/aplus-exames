@@ -1,0 +1,126 @@
+{
+  "subjectId":"portuguese",
+  "examCode":"639",
+  "version":1,
+  "wave":2,
+  "sourcePolicy":"original-only",
+  "editorialStatus":"prototype",
+  "productionEligible":false,
+  "items":[
+    {
+      "id":"PT639-FND-030","year":"11.º","domain":"leitura","competencyId":"pt-leitura-informacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "stimulus":"Durante três meses, uma escola testou a abertura da sala de estudo ao sábado. Dos 180 alunos inscritos, 126 utilizaram o espaço pelo menos uma vez e 72 compareceram em quatro ou mais sábados.",
+      "prompt":"De acordo com o texto, quantos alunos utilizaram a sala pelo menos uma vez?",
+      "options":["72 alunos.","126 alunos.","180 alunos.","306 alunos."],"answerIndex":1,
+      "explanation":"O texto indica explicitamente que 126 dos 180 alunos inscritos utilizaram o espaço pelo menos uma vez.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-031","year":"12.º","domain":"leitura","competencyId":"pt-leitura-inferencia","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
+      "stimulus":"O museu substituiu as legendas longas por textos breves e acrescentou códigos que permitiam aprofundar a informação no telemóvel. As visitas demoraram menos, mas mais visitantes regressaram às salas para observar obras que tinham passado depressa na primeira vez.",
+      "prompt":"Explica a aparente contradição entre a menor duração das visitas e o regresso às salas. Responde em 40 a 70 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica que a informação breve agiliza a visita inicial e o aprofundamento posterior estimula nova observação.","points":8},{"id":"fundamentacao","label":"Relaciona a explicação com dados concretos do texto.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"As legendas breves tornam a primeira visita mais rápida, enquanto os códigos permitem aprofundar a informação de forma autónoma. Esse conhecimento adicional pode despertar curiosidade ou revelar aspetos antes ignorados, levando os visitantes a regressar às salas para observar novamente determinadas obras.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+    },
+    {
+      "id":"PT639-FND-032","year":"10.º","domain":"leitura","competencyId":"pt-leitura-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"O bairro ganhou novas árvores e zonas de sombra. Além disso, foram instalados bancos junto aos percursos pedonais. Estas medidas tornaram as deslocações a pé mais confortáveis.",
+      "prompt":"A expressão «Estas medidas» retoma",
+      "options":["apenas a instalação de bancos.","as deslocações realizadas a pé.","a plantação de árvores e a instalação de bancos.","somente as zonas de sombra."],"answerIndex":2,
+      "explanation":"O demonstrativo resume as duas intervenções anteriormente apresentadas: árvores e zonas de sombra, bem como bancos.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-033","year":"10.º","domain":"leitura","competencyId":"pt-leitura-organizacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"interpretar",
+      "stimulus":"O artigo começa por definir desperdício alimentar, apresenta depois números relativos às famílias portuguesas e termina com cinco sugestões práticas para reduzir o problema em casa.",
+      "prompt":"Indica as três etapas da organização do artigo.",
+      "acceptedAnswers":["definição, apresentação de dados e sugestões práticas","definir o problema, apresentar números e propor soluções","definição do desperdício, dados sobre as famílias e sugestões para o reduzir"],
+      "explanation":"A descrição explicita uma sequência em três momentos: definição, dados quantitativos e propostas práticas.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-034","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-recursos","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Esperei um século junto à porta, / embora o relógio jurasse / que tinham passado cinco minutos.",
+      "prompt":"A expressão «Esperei um século» constitui uma",
+      "options":["metáfora.","enumeração.","hipérbole.","antítese."],"answerIndex":2,
+      "explanation":"O tempo de espera é exagerado intencionalmente para traduzir a perceção subjetiva de demora.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-035","year":"11.º","domain":"educacao-literaria","competencyId":"pt-literatura-temas","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
+      "stimulus":"Todos os anos pintava a porta de azul. A madeira apodrecia por dentro, mas da rua a casa parecia sempre pronta para uma fotografia.",
+      "prompt":"Interpreta o contraste entre a aparência da casa e o seu estado interior. Responde em 40 a 70 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica a oposição entre preservação da aparência e degradação escondida.","points":8},{"id":"fundamentacao","label":"Mobiliza a pintura exterior e o apodrecimento interior.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"A pintura anual mantém uma imagem exterior cuidada, adequada a ser vista e fotografada, mas esconde a degradação da madeira. O contraste sugere uma preocupação com as aparências que não resolve o problema real e interior da casa.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+    },
+    {
+      "id":"PT639-FND-036","year":"10.º","domain":"educacao-literaria","competencyId":"pt-literatura-voz","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"interpretar",
+      "stimulus":"Não me perguntes por que voltei. A rua reconheceu os meus passos antes de eu reconhecer as suas janelas.",
+      "prompt":"Indica uma marca textual da presença do destinatário.",
+      "acceptedAnswers":["Não me perguntes","a forma verbal perguntes","o uso da segunda pessoa em perguntes","perguntes"],
+      "explanation":"A forma verbal «perguntes», na segunda pessoa, evidencia que o sujeito se dirige diretamente a um destinatário.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-037","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-forma","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
+      "stimulus":"Se digo casa, digo distância. / Se digo nome, digo ausência. / Se fico em silêncio, / escuto tudo o que perdi.",
+      "prompt":"Explica como o paralelismo contribui para a construção do sentido. Responde em 40 a 70 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Relaciona a repetição de «Se digo» com a associação progressiva entre linguagem, distância e perda.","points":8},{"id":"forma","label":"Articula o paralelismo com a rutura introduzida pelo silêncio final.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"O paralelismo de «Se digo» organiza duas associações entre palavras e perda, criando um ritmo insistente. A mudança para «Se fico em silêncio» quebra essa repetição e mostra que nem a ausência de palavras elimina a memória: o silêncio torna a perda ainda mais presente.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+    },
+    {
+      "id":"PT639-FND-038","year":"10.º","domain":"escrita","competencyId":"pt-escrita-exposicao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
+      "stimulus":"Um orçamento pessoal regista rendimentos e despesas, ajuda a antecipar pagamentos e permite distinguir necessidades de compras adiáveis.",
+      "prompt":"Explica a utilidade de um orçamento pessoal para um jovem. Escreve entre 80 e 120 palavras e desenvolve duas vantagens.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica duas vantagens distintas e adequadas ao contexto.","points":6},{"id":"estrutura","label":"Organiza as ideias com progressão e ligação entre frases.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":80,"max":120}
+    },
+    {
+      "id":"PT639-FND-039","year":"11.º","domain":"escrita","competencyId":"pt-escrita-argumentacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
+      "stimulus":"Há municípios que disponibilizam gratuitamente bicicletas por períodos curtos, enquanto outros defendem que o investimento deveria concentrar-se nos transportes públicos coletivos.",
+      "prompt":"Defende uma posição sobre o investimento municipal em bicicletas partilhadas. Escreve entre 100 e 150 palavras e considera um possível contra-argumento.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"argumentacao","label":"Formula uma posição e desenvolve argumentos pertinentes, considerando uma objeção.","points":6},{"id":"estrutura","label":"Organiza introdução, desenvolvimento e conclusão com progressão.","points":4},{"id":"lingua","label":"Usa conectores e correção linguística adequados.","points":3}]},
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
+    },
+    {
+      "id":"PT639-FND-040","year":"12.º","domain":"escrita","competencyId":"pt-escrita-opiniao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
+      "stimulus":"A possibilidade de responder imediatamente a qualquer mensagem criou a expectativa de que todas as pessoas devem estar permanentemente disponíveis.",
+      "prompt":"Apresenta uma opinião fundamentada sobre o direito a períodos de indisponibilidade digital. Escreve entre 100 e 150 palavras e inclui um exemplo pertinente.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"posicao","label":"Formula uma posição clara e desenvolve-a sem desvio temático.","points":6},{"id":"fundamentacao","label":"Apresenta razões e um exemplo pertinente, organizados com coerência.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
+    },
+    {
+      "id":"PT639-FND-041","year":"11.º","domain":"escrita","competencyId":"pt-escrita-revisao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Rascunho: «A exposição recebeu muitos visitantes. Ou seja, o horário foi prolongado por mais uma semana.»",
+      "prompt":"Que conector exprime corretamente a relação entre as duas frases?",
+      "options":["Ainda assim.","Porém.","Entretanto.","Por isso."],"answerIndex":3,
+      "explanation":"O prolongamento é apresentado como consequência da elevada afluência; «Por isso» exprime essa relação.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-042","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "stimulus":"Os técnicos permaneceram na sala durante toda a manhã.",
+      "prompt":"Indica a função sintática da expressão «na sala».",
+      "acceptedAnswers":["predicativo do sujeito","predicativo do sujeito locativo","predicativo do sujeito com valor locativo"],
+      "explanation":"Com o verbo copulativo «permanecer», a expressão localiza o sujeito e desempenha a função de predicativo do sujeito.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-043","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-oracoes","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "stimulus":"Quem concluir a inscrição receberá uma mensagem de confirmação.",
+      "prompt":"A oração «Quem concluir a inscrição» é subordinada substantiva",
+      "options":["relativa sem antecedente.","completiva.","adverbial condicional.","relativa com antecedente expresso."],"answerIndex":0,
+      "explanation":"A oração é introduzida por «Quem», não tem antecedente expresso e ocupa a posição de sujeito da frase.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-044","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "stimulus":"A comissão analisou duas propostas. A primeira reduzia os custos; a segunda, porém, diminuía o tempo de execução.",
+      "prompt":"Indica o valor do conector «porém» no contexto.",
+      "acceptedAnswers":["valor adversativo","contraste","oposição","valor de contraste","valor de oposição"],
+      "explanation":"O conector contrapõe a vantagem da segunda proposta à característica anteriormente atribuída à primeira.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-045","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-morfologia-semantica","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "stimulus":"Infelizmente, a sessão terminou antes do debate final.",
+      "prompt":"A palavra «Infelizmente» exprime uma modalidade",
+      "options":["deôntica de permissão.","apreciativa negativa.","epistémica de possibilidade.","deôntica de obrigação."],"answerIndex":1,
+      "explanation":"O advérbio manifesta uma avaliação negativa do enunciador relativamente ao fim antecipado da sessão.","gradingMode":"deterministic","maxPoints":13
+    }
+  ]
+}
