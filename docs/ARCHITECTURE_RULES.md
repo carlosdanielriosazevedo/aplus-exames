@@ -12,4 +12,4 @@ Esta regra é transversal ao projeto e não está limitada a Português ou Matem
 - Uma alteração que dependa de uma frase, import, bloco JSX ou marcador CSS existir exatamente para conseguir compilar é considerada um patch frágil e não deve entrar no repositório.
 - Em revisão de código, qualquer nova escrita programática sobre source versionado deve ser tratada como alteração de arquitetura, não como simples detalhe de build.
 
-A regra é validada por `npm run source-rewrite:audit` e faz parte do Technical Gate. Qualquer nova exceção exige alterar explicitamente esta política e o respetivo audit; não deve ser contornada por mudar o nome do script ou esconder a escrita noutro passo do build.
+A regra é validada por `npm run source-rewrite:audit` e faz parte do Technical Gate. O audit inspeciona os scripts do repositório e bloqueia escrita sobre `app/page.js`/`app/globals.css` e patches textuais sobre ficheiros de código versionados. Qualquer nova exceção exige alterar explicitamente esta política e o respetivo audit; não deve ser contornada por mudar o nome do script ou esconder a escrita noutro passo do build.
