@@ -78,6 +78,7 @@ assert.equal(wave2.sourcePolicy,"original-only");
 assert.equal(wave2.productionEligible,false);
 assert.equal(wave3.items.length,15);
 assert.equal(wave3.wave,3);
+assert.equal(wave3.bankSizeAfterWave,60);
 assert.equal(wave3.subjectId,"portuguese");
 assert.equal(wave3.examCode,"639");
 assert.equal(wave3.sourcePolicy,"original-only");
