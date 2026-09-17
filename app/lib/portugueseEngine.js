@@ -4,6 +4,35 @@ const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).m
 const RESPONSE_PRIORITY={"multiple-choice":0,"short-answer":1,"restricted-response":2,"extended-writing":3};
 const STRUCTURAL_CHALLENGE={reconhecer:1,interpretar:2,raciocinar:3,criar:4};
 
+export const PORTUGUESE_RUBRIC_EVIDENCE=[
+  {id:"observed",label:"Encontro claramente",description:"Consigo localizar este elemento na minha resposta."},
+  {id:"partial",label:"Encontro em parte",description:"O elemento aparece, mas está incompleto ou pouco claro."},
+  {id:"not-observed",label:"Não encontro",description:"Este elemento não aparece na minha resposta."},
+  {id:"unsure",label:"Não tenho a certeza",description:"Preciso de revisão para decidir com segurança."}
+];
+const RUBRIC_EVIDENCE_IDS=new Set(PORTUGUESE_RUBRIC_EVIDENCE.map(option=>option.id));
+
+function rubricIdFor(item){
+  const signature=(item.rubric?.criteria||[]).map(criterion=>`${criterion.id}:${criterion.points}:${criterion.label}`).join("|");
+  let fingerprint=2166136261;
+  for(let index=0;index<signature.length;index++)fingerprint=Math.imul(fingerprint^signature.charCodeAt(index),16777619);
+  return `${item.id}:rubric-v1:${(fingerprint>>>0).toString(36)}`;
+}
+
+export function assessPortugueseRubricCriterion(result,criterionId,evidence){
+  if(!result||result.final||result.status==="unanswered")return result;
+  if(!RUBRIC_EVIDENCE_IDS.has(evidence))throw new Error(`Unsupported rubric evidence: ${evidence}`);
+  if(!result.criteria?.some(criterion=>criterion.id===criterionId))throw new Error(`Unknown rubric criterion: ${criterionId}`);
+  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence}:criterion);
+  const rubricCompleted=criteria.every(criterion=>RUBRIC_EVIDENCE_IDS.has(criterion.status));
+  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric"};
+}
+
+export function rubricEvidenceSnapshot(result){
+  if(!result||result.final)return [];
+  return (result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:RUBRIC_EVIDENCE_IDS.has(criterion.status)?criterion.status:"pending"}));
+}
+
 export function normalizePortugueseAnswer(value){
   return String(value??"")
     .normalize("NFD")
@@ -46,9 +75,11 @@ export function gradePortugueseResponse(item,response){
       points:null,
       maxPoints:item.maxPoints,
       gradingMode:"rubric-assisted-provisional",
+      rubricId:rubricIdFor(item),
+      rubricCompleted:false,
       wordCount:words,
       wordLimit:{min,max,within:answered&&words>=min&&words<=max},
-      criteria:(item.rubric?.criteria||[]).map(criterion=>({...criterion,status:"pending"}))
+      criteria:(item.rubric?.criteria||[]).map(criterion=>({...criterion,status:"pending",observable:true}))
     };
   }
   throw new Error(`Unsupported Portuguese response type: ${item.responseType}`);
