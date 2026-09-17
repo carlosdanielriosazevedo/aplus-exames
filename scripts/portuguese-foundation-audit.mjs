@@ -154,7 +154,7 @@ assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a cor
 assert.match(page,/preview==="portuguese"/,"O laboratório de Português deve exigir um preview interno explícito.");
 assert.match(page,/function PortugueseLab\(/,"O banco de Português deve estar ligado a um fluxo interno executável.");
 assert.match(page,/buildPortugueseDiagnostic\(PORTUGUESE_ITEMS\)/);
-assert.match(page,/portugueseMissionPool\(PORTUGUESE_ITEMS/);
+assert.match(page,/buildAdaptivePortugueseMission\(PORTUGUESE_ITEMS/);
 assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d)\.json/g)||[]).length,4,"O runtime deve agregar os quatro pacotes do piloto.");
 assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 
