@@ -15,16 +15,17 @@ const items=[
   {id:"pt-2",domain:"escrita",competencyId:"pt-escrita-argumentacao"}
 ];
 state=beginSubjectSession(state,{subjectId:"portuguese",kind:"diagnostic",label:"Diagnóstico",items,startedAt:100});
-state=advanceSubjectSession(state,"portuguese",{current:1,results:[{status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"}],currentResult:{status:"awaiting-rubric",final:false,points:null,maxPoints:13,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",criteria:[{id:"argumentacao",status:"observed"},{id:"lingua",status:"pending"}]},updatedAt:110});
+state=advanceSubjectSession(state,"portuguese",{current:1,results:[{status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"}],currentResult:{status:"awaiting-rubric",final:false,points:null,maxPoints:13,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",criteria:[{id:"argumentacao",status:"partial",observations:[{id:"argumentacao-1",status:"observed"},{id:"argumentacao-2",status:"not-observed"}]},{id:"lingua",status:"pending",observations:[{id:"lingua-1",status:"pending"}]}]},updatedAt:110});
 assert.equal(subjectProgressFor(state,"portuguese").lastPosition.current,1,"A posição de retoma deve avançar.");
-assert.deepEqual(subjectProgressFor(state,"portuguese").lastPosition.currentResult.rubricEvidence,[{criterionId:"argumentacao",evidence:"observed"},{criterionId:"lingua",evidence:"pending"}],"A retoma deve preservar a autoavaliação parcial sem guardar a resposta.");
+assert.deepEqual(subjectProgressFor(state,"portuguese").lastPosition.currentResult.rubricEvidence,[{criterionId:"argumentacao",evidence:"partial"},{criterionId:"lingua",evidence:"pending"}],"A retoma deve preservar a síntese por critério sem guardar a resposta.");
+assert.deepEqual(subjectProgressFor(state,"portuguese").lastPosition.currentResult.rubricObservationEvidence,[{criterionId:"argumentacao",observationId:"argumentacao-1",evidence:"observed"},{criterionId:"argumentacao",observationId:"argumentacao-2",evidence:"not-observed"},{criterionId:"lingua",observationId:"lingua-1",evidence:"pending"}],"A retoma deve preservar a evidência atómica.");
 assert.equal("response" in subjectProgressFor(state,"portuguese").lastPosition.currentResult,false);
 
 state=recordSubjectSession(state,{
   subjectId:"portuguese",kind:"diagnostic",label:"Diagnóstico",items,completedAt:120,
   results:[
     {status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"},
-    {status:"self-assessed-awaiting-review",final:false,correct:null,points:null,maxPoints:20,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",rubricCompleted:true,criteria:[{id:"argumentacao",status:"observed"},{id:"lingua",status:"unsure"}]}
+    {status:"self-assessed-awaiting-review",final:false,correct:null,points:null,maxPoints:20,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",rubricCompleted:true,criteria:[{id:"argumentacao",status:"observed",observations:[{id:"argumentacao-1",status:"observed"}]},{id:"lingua",status:"unsure",observations:[{id:"lingua-1",status:"unsure"}]}]}
   ]
 });
 const portuguese=subjectProgressFor(state,"portuguese");
@@ -38,6 +39,7 @@ assert.deepEqual(state.scores,mathScores,"Português não pode alterar domínio 
 assert.deepEqual(state.missionHistory,[{id:"math-mission"}],"O histórico global legado de Matemática A deve permanecer intacto.");
 assert.equal("response" in portuguese.sessions[0].results[1],false,"O histórico não deve guardar texto livre do aluno.");
 assert.deepEqual(portuguese.sessions[0].results[1].rubricEvidence,[{criterionId:"argumentacao",evidence:"observed"},{criterionId:"lingua",evidence:"unsure"}],"A evidência estruturada deve persistir por critério.");
+assert.deepEqual(portuguese.sessions[0].results[1].rubricObservationEvidence,[{criterionId:"argumentacao",observationId:"argumentacao-1",evidence:"observed"},{criterionId:"lingua",observationId:"lingua-1",evidence:"unsure"}],"A evidência estruturada deve persistir por observação.");
 assert.equal(portuguese.sessions[0].results[1].points,null,"A autoavaliação não pode criar pontuação.");
 
 state={...state,subjectProgress:{...state.subjectProgress,"math-a":{subjectId:"math-a",sessions:[{id:"keep"}]}}};

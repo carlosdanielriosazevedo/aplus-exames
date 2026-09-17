@@ -1,15 +1,16 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
-  PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
-  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseRubricGuidance,portugueseStructuralChallenge,portugueseWordCount,restorePortugueseRubricEvidence,rubricEvidenceSnapshot
+  PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
+  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseRubricGuidance,portugueseStructuralChallenge,portugueseWordCount,restorePortugueseRubricEvidence,rubricEvidenceSnapshot,rubricObservationEvidenceSnapshot
 } from "../app/lib/portugueseEngine.js";
+import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
 const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
 const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
 const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
-const items=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
+const items=applyPortugueseRubricObservations([...pilot.items,...wave1.items,...wave2.items,...wave3.items]);
 const byId=id=>items.find(item=>item.id===id);
 
 assert.equal(normalizePortugueseAnswer("  ORAÇÃO «completiva». "),"oracao completiva");
@@ -30,15 +31,20 @@ assert.equal(restricted.points,null);
 assert.equal(restricted.status,"awaiting-rubric");
 assert.ok(restricted.criteria.every(criterion=>criterion.status==="pending"));
 assert.ok(restricted.criteria.every(criterion=>criterion.observable===true));
+assert.ok(restricted.criteria.flatMap(criterion=>criterion.observations).every(observation=>observation.status==="pending"));
 assert.equal(PORTUGUESE_RUBRIC_EVIDENCE.length,4);
 let guided=restricted;
-for(const criterion of restricted.criteria)guided=assessPortugueseRubricCriterion(guided,criterion.id,criterion.id==="conteudo"?"observed":"unsure");
+for(const criterion of restricted.criteria){
+  for(const observation of criterion.observations)guided=assessPortugueseRubricObservation(guided,criterion.id,observation.id,criterion.id==="conteudo"?"observed":"unsure");
+}
 assert.equal(guided.status,"self-assessed-awaiting-review");
 assert.equal(guided.rubricCompleted,true);
 assert.equal(guided.final,false);
 assert.equal(guided.points,null,"a autoavaliação nunca pode produzir uma classificação final");
-const restored=restorePortugueseRubricEvidence(byId("PT639-FND-005"),{rubricId:guided.rubricId,rubricEvidence:rubricEvidenceSnapshot(guided)});
-assert.deepEqual(rubricEvidenceSnapshot(restored),rubricEvidenceSnapshot(guided),"a evidência por critério deve sobreviver à retoma");
+const restored=restorePortugueseRubricEvidence(items.find(item=>item.id==="PT639-FND-005"),{rubricId:guided.rubricId,rubricEvidence:rubricEvidenceSnapshot(guided),rubricObservationEvidence:rubricObservationEvidenceSnapshot(guided)});
+assert.deepEqual(rubricObservationEvidenceSnapshot(restored),rubricObservationEvidenceSnapshot(guided),"a evidência por observação deve sobreviver à retoma");
+const legacy=restorePortugueseRubricEvidence(items.find(item=>item.id==="PT639-FND-005"),{rubricId:guided.rubricId,rubricEvidence:rubricEvidenceSnapshot(guided)});
+assert.deepEqual(rubricEvidenceSnapshot(legacy),rubricEvidenceSnapshot(guided),"sessões antigas com evidência apenas por critério devem continuar recuperáveis");
 assert.equal(restorePortugueseRubricEvidence(byId("PT639-FND-005"),{rubricId:"stale",rubricEvidence:[]}),null,"uma grelha editorial alterada invalida a evidência antiga");
 const guidance=portugueseRubricGuidance(guided);
 assert.equal(guidance.complete,true);
@@ -47,6 +53,7 @@ assert.equal(guidance.observed.length,1);
 assert.equal(guidance.uncertain.length,2);
 assert.match(guidance.nextAction,/resposta de referência/);
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"inexistente","observed"));
+assert.throws(()=>assessPortugueseRubricObservation(restricted,"conteudo","inexistente","observed"));
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automatic-score"));
 
 const coverage=portugueseCoverage(items);
