@@ -73,14 +73,14 @@
       "answerIndex":0,"explanation":"«Talvez» apresenta a conclusão do projeto como possível, não como certa ou obrigatória.","gradingMode":"deterministic","maxPoints":13
     },
     {
-      "id":"PT639-FND-022","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "id":"PT639-FND-022","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"interpretar",
       "stimulus":"A Leonor encontrou a Marta junto à estação. Esta trazia o livro que ambas procuravam.",
       "prompt":"Indica o referente do pronome demonstrativo «Esta».",
       "acceptedAnswers":["a Marta","Marta"],
       "explanation":"Pela regra de proximidade e pela concordância no feminino singular, «Esta» retoma «a Marta».","gradingMode":"deterministic-with-equivalents","maxPoints":13
     },
     {
-      "id":"PT639-FND-023","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "id":"PT639-FND-023","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
       "stimulus":"Os voluntários consideraram a iniciativa muito útil.",
       "prompt":"A expressão «muito útil» desempenha a função sintática de",
       "options":["complemento direto.","modificador do grupo verbal.","predicativo do complemento direto.","complemento oblíquo."],

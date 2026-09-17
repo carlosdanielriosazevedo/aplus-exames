@@ -112,7 +112,7 @@ export function portugueseCompetencePriorities(items,progress,{domain=null}={}){
 }
 
 export function portugueseStructuralChallenge(item){
-  return STRUCTURAL_CHALLENGE[item?.cognitive]||2;
+  return item?.difficulty?.level||STRUCTURAL_CHALLENGE[item?.cognitive]||2;
 }
 
 export function buildAdaptivePortugueseMission(items,{progress,domain=null,years=["10.º","11.º","12.º"],size=7}={}){
@@ -150,7 +150,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     items:selected,
     priorities,
     targetCompetencyIds:priorities.slice(0,4).map(row=>row.competencyId),
-    challengeSource:"structural-proxy",
+    challengeSource:selected.every(item=>item.difficulty?.status==="editorial-provisional")?"editorial-provisional":"structural-proxy",
     recentItemsAvoided:selected.filter(item=>!recentIds.has(item.id)).length
   };
 }

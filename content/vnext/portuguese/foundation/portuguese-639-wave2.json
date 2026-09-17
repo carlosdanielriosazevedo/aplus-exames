@@ -95,14 +95,15 @@
       "explanation":"O prolongamento é apresentado como consequência da elevada afluência; «Por isso» exprime essa relação.","gradingMode":"deterministic","maxPoints":13
     },
     {
-      "id":"PT639-FND-042","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "id":"PT639-FND-042","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
       "stimulus":"Os técnicos permaneceram na sala durante toda a manhã.",
-      "prompt":"Indica a função sintática da expressão «na sala».",
-      "acceptedAnswers":["predicativo do sujeito","predicativo do sujeito locativo","predicativo do sujeito com valor locativo"],
-      "explanation":"Com o verbo copulativo «permanecer», a expressão localiza o sujeito e desempenha a função de predicativo do sujeito.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+      "prompt":"Identifica a função sintática da expressão «na sala» e justifica-a atendendo ao valor do verbo «permanecer». Responde em 30 a 55 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"funcao","label":"Identifica «na sala» como predicativo do sujeito.","points":5},{"id":"justificacao","label":"Explica que «permanecer» funciona como verbo copulativo e que a expressão atribui ao sujeito uma localização ou estado locativo.","points":6},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"A expressão «na sala» desempenha a função de predicativo do sujeito. Neste contexto, «permanecer» funciona como verbo copulativo: liga o sujeito «Os técnicos» à expressão que indica a localização em que eles se mantiveram.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":30,"max":55}
     },
     {
-      "id":"PT639-FND-043","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-oracoes","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "id":"PT639-FND-043","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-oracoes","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
       "stimulus":"Quem concluir a inscrição receberá uma mensagem de confirmação.",
       "prompt":"A oração «Quem concluir a inscrição» é subordinada substantiva",
       "options":["relativa sem antecedente.","completiva.","adverbial condicional.","relativa com antecedente expresso."],"answerIndex":0,
