@@ -62,6 +62,7 @@
     "vnext-exam:audit": "node scripts/vnext-exam-audit.mjs",
     "subjects:audit": "node scripts/subjects-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
+    "portuguese-engine:audit": "node scripts/portuguese-engine-audit.mjs",
     "portuguese-coverage": "node scripts/portuguese-coverage.mjs --write",
     "portuguese-coverage:audit": "node scripts/portuguese-coverage.mjs --check"
   },
