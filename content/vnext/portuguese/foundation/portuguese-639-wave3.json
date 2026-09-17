@@ -1,5 +1,5 @@
 {
-  "subjectId":"portuguese","examCode":"639","version":1,"wave":3,"sourcePolicy":"original-only","editorialStatus":"prototype","productionEligible":false,
+  "subjectId":"portuguese","examCode":"639","version":1,"wave":3,"bankSizeAfterWave":60,"sourcePolicy":"original-only","editorialStatus":"prototype","productionEligible":false,
   "items":[
     {
       "id":"PT639-FND-046","year":"10.º","domain":"leitura","competencyId":"pt-leitura-informacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
