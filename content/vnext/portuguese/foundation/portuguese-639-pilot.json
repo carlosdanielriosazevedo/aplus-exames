@@ -102,7 +102,7 @@
           {"id":"lingua","label":"Escreve com correção linguística suficiente para não comprometer o sentido.","points":2}
         ]
       },
-      "referenceAnswer": "A personificação transforma o relógio numa presença insistente que quebra o silêncio da casa. A repetição dos segundos recorda que o tempo continua a avançar, independentemente da vontade das personagens, reforçando uma ideia de inevitabilidade.",
+      "referenceAnswer": "A personificação transforma o relógio numa presença insistente que quebra o silêncio da casa. A repetição dos segundos recorda que o tempo continua a avançar, independentemente da vontade das personagens, reforçando uma ideia de inevitabilidade que domina todo o ambiente noturno.",
       "gradingMode": "rubric-assisted-provisional",
       "maxPoints": 13,
       "wordLimit": {"min":40,"max":70}
@@ -126,7 +126,7 @@
           {"id":"lingua","label":"Escreve com correção linguística suficiente para não comprometer o sentido.","points":2}
         ]
       },
-      "referenceAnswer": "A fotografia conserva uma tarde passada, mas também conserva uma versão antiga do sujeito. Ao reencontrá-la, ele reconhece-se e, simultaneamente, percebe a distância entre aquilo que foi e aquilo que é, ligando a memória à transformação da identidade.",
+      "referenceAnswer": "A fotografia conserva uma tarde passada, mas também conserva uma versão antiga do sujeito. Ao reencontrá-la, ele reconhece-se e, simultaneamente, percebe a distância entre aquilo que foi e aquilo que é agora no presente, ligando a memória à transformação da identidade.",
       "gradingMode": "rubric-assisted-provisional",
       "maxPoints": 13,
       "wordLimit": {"min":40,"max":70}
@@ -199,6 +199,7 @@
           {"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}
         ]
       },
+      "referenceAnswer": "As bibliotecas públicas são essenciais porque garantem acesso gratuito a livros, informação e recursos digitais, incluindo a pessoas que não os poderiam comprar. Desse modo, reduzem desigualdades e criam oportunidades de aprendizagem ao longo da vida. Além disso, oferecem espaços tranquilos para estudar, trabalhar ou procurar apoio, o que beneficia estudantes e outros membros da comunidade. As atividades culturais, como clubes de leitura, exposições e encontros com autores, também aproximam pessoas de idades e experiências diferentes. Assim, uma biblioteca não é apenas um local de empréstimo: é um serviço público de conhecimento, inclusão e participação cultural.",
       "gradingMode": "rubric-assisted-provisional",
       "maxPoints": 13,
       "wordLimit": {"min":80,"max":120}
@@ -222,6 +223,7 @@
           {"id":"lingua","label":"Usa conectores e linguagem adequada com correção.","points":3}
         ]
       },
+      "referenceAnswer": "Não considero vantajoso que todas as tarefas escolares sejam realizadas exclusivamente em formato digital. Os meios digitais facilitam a pesquisa, a organização de ficheiros e a colaboração à distância, pelo que devem fazer parte do trabalho escolar. Contudo, escrever à mão pode favorecer a concentração e obrigar o aluno a selecionar melhor a informação, em vez de a copiar rapidamente. Além disso, alternar suportes reduz a dependência de equipamentos, bateria e ligação à Internet. Uma solução equilibrada será escolher o formato segundo o objetivo da tarefa: usar ferramentas digitais para pesquisar, apresentar ou colaborar e recorrer à escrita manual para tomar notas, planificar ideias ou treinar procedimentos. A escola deve ensinar a usar ambos os meios de forma consciente, e não substituir um pelo outro.",
       "gradingMode": "rubric-assisted-provisional",
       "maxPoints": 13,
       "wordLimit": {"min":100,"max":150}
@@ -246,6 +248,7 @@
           {"id":"correcao-linguistica","label":"Demonstra domínio lexical, sintático, ortográfico e de pontuação.","points":14}
         ]
       },
+      "referenceAnswer": "Preservar espaços de privacidade é essencial numa sociedade em que publicar se tornou quase automático. A possibilidade de partilhar experiências aproxima pessoas, mas não significa que todos os momentos devam ficar disponíveis para uma audiência permanente. Quando alguém decide o que revela e o que conserva para si, mantém controlo sobre a própria identidade e evita que um registo isolado seja interpretado fora do contexto.\n\nA privacidade também protege relações e momentos que perdem significado quando são transformados em conteúdo. Uma conversa entre amigos, por exemplo, pode ser sincera precisamente porque nenhum participante espera vê-la reproduzida numa rede social. Se essa expectativa desaparecer, as pessoas passam a representar uma versão de si próprias, em vez de viverem a experiência com liberdade.\n\nÉ verdade que a partilha pública pode dar visibilidade a causas importantes e criar comunidades de apoio. No entanto, esse benefício exige consentimento e escolha informada. Publicar fotografias de outras pessoas sem autorização ou divulgar rotinas em tempo real pode expô-las a riscos que não aceitaram.\n\nPor isso, a educação digital não deve ensinar apenas a comunicar mais, mas também a reconhecer quando o silêncio é responsável. Poder desligar, apagar ou simplesmente não publicar não é rejeitar a tecnologia. É usá-la sem entregar a terceiros todas as dimensões da vida pessoal. A liberdade contemporânea inclui o direito de participar no espaço público e, ao mesmo tempo, de manter zonas que não precisam de audiência.",
       "gradingMode": "rubric-assisted-provisional",
       "maxPoints": 44,
       "wordLimit": {"min":200,"max":350}
