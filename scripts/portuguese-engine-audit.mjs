@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
   PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
-  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseStructuralChallenge,portugueseWordCount,restorePortugueseRubricEvidence,rubricEvidenceSnapshot
+  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseRubricGuidance,portugueseStructuralChallenge,portugueseWordCount,restorePortugueseRubricEvidence,rubricEvidenceSnapshot
 } from "../app/lib/portugueseEngine.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
@@ -40,6 +40,12 @@ assert.equal(guided.points,null,"a autoavaliação nunca pode produzir uma class
 const restored=restorePortugueseRubricEvidence(byId("PT639-FND-005"),{rubricId:guided.rubricId,rubricEvidence:rubricEvidenceSnapshot(guided)});
 assert.deepEqual(rubricEvidenceSnapshot(restored),rubricEvidenceSnapshot(guided),"a evidência por critério deve sobreviver à retoma");
 assert.equal(restorePortugueseRubricEvidence(byId("PT639-FND-005"),{rubricId:"stale",rubricEvidence:[]}),null,"uma grelha editorial alterada invalida a evidência antiga");
+const guidance=portugueseRubricGuidance(guided);
+assert.equal(guidance.complete,true);
+assert.equal(guidance.finalScore,null,"a orientação nunca pode ser convertida numa nota");
+assert.equal(guidance.observed.length,1);
+assert.equal(guidance.uncertain.length,2);
+assert.match(guidance.nextAction,/resposta de referência/);
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"inexistente","observed"));
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automatic-score"));
 
