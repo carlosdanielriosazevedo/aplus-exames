@@ -12,6 +12,20 @@ export const PORTUGUESE_RUBRIC_EVIDENCE=[
 ];
 const RUBRIC_EVIDENCE_IDS=new Set(PORTUGUESE_RUBRIC_EVIDENCE.map(option=>option.id));
 
+function criterionStatus(observations=[]){
+  const statuses=observations.map(observation=>observation.status);
+  if(!statuses.length||statuses.some(status=>!RUBRIC_EVIDENCE_IDS.has(status)))return "pending";
+  if(statuses.every(status=>status==="observed"))return "observed";
+  if(statuses.every(status=>status==="not-observed"))return "not-observed";
+  if(statuses.some(status=>status==="unsure"))return "unsure";
+  return "partial";
+}
+
+function withRubricCompletion(result,criteria){
+  const rubricCompleted=criteria.length>0&&criteria.every(criterion=>criterion.observations?.length>0&&criterion.observations.every(observation=>RUBRIC_EVIDENCE_IDS.has(observation.status)));
+  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric"};
+}
+
 function rubricIdFor(item){
   const signature=(item.rubric?.criteria||[]).map(criterion=>`${criterion.id}:${criterion.points}:${criterion.label}:${(criterion.observations||[]).map(observation=>`${observation.id}=${observation.label}`).join(";")}`).join("|");
   let fingerprint=2166136261;
@@ -23,9 +37,22 @@ export function assessPortugueseRubricCriterion(result,criterionId,evidence){
   if(!result||result.final||result.status==="unanswered")return result;
   if(!RUBRIC_EVIDENCE_IDS.has(evidence))throw new Error(`Unsupported rubric evidence: ${evidence}`);
   if(!result.criteria?.some(criterion=>criterion.id===criterionId))throw new Error(`Unknown rubric criterion: ${criterionId}`);
-  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence}:criterion);
-  const rubricCompleted=criteria.every(criterion=>RUBRIC_EVIDENCE_IDS.has(criterion.status));
-  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric"};
+  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence}))}:criterion);
+  return withRubricCompletion(result,criteria);
+}
+
+export function assessPortugueseRubricObservation(result,criterionId,observationId,evidence){
+  if(!result||result.final||result.status==="unanswered")return result;
+  if(!RUBRIC_EVIDENCE_IDS.has(evidence))throw new Error(`Unsupported rubric evidence: ${evidence}`);
+  const criterion=result.criteria?.find(row=>row.id===criterionId);
+  if(!criterion)throw new Error(`Unknown rubric criterion: ${criterionId}`);
+  if(!criterion.observations?.some(observation=>observation.id===observationId))throw new Error(`Unknown rubric observation: ${criterionId}/${observationId}`);
+  const criteria=result.criteria.map(row=>{
+    if(row.id!==criterionId)return row;
+    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence}:observation);
+    return {...row,observations,status:criterionStatus(observations)};
+  });
+  return withRubricCompletion(result,criteria);
 }
 
 export function rubricEvidenceSnapshot(result){
@@ -33,12 +60,26 @@ export function rubricEvidenceSnapshot(result){
   return (result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:RUBRIC_EVIDENCE_IDS.has(criterion.status)?criterion.status:"pending"}));
 }
 
+export function rubricObservationEvidenceSnapshot(result){
+  if(!result||result.final)return [];
+  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending"})));
+}
+
 export function restorePortugueseRubricEvidence(item,snapshot){
   if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
   let result=gradePortugueseResponse(item,"resposta submetida");
-  for(const row of snapshot.rubricEvidence||[]){
-    if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&result.criteria.some(criterion=>criterion.id===row.criterionId)){
-      result=assessPortugueseRubricCriterion(result,row.criterionId,row.evidence);
+  if(Array.isArray(snapshot.rubricObservationEvidence)){
+    for(const row of snapshot.rubricObservationEvidence){
+      const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
+      if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&criterion?.observations.some(observation=>observation.id===row.observationId)){
+        result=assessPortugueseRubricObservation(result,row.criterionId,row.observationId,row.evidence);
+      }
+    }
+  }else{
+    for(const row of snapshot.rubricEvidence||[]){
+      if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&result.criteria.some(criterion=>criterion.id===row.criterionId)){
+        result=assessPortugueseRubricCriterion(result,row.criterionId,row.evidence);
+      }
     }
   }
   return result;
@@ -108,7 +149,7 @@ export function gradePortugueseResponse(item,response){
       rubricCompleted:false,
       wordCount:words,
       wordLimit:{min,max,within:answered&&words>=min&&words<=max},
-      criteria:(item.rubric?.criteria||[]).map(criterion=>({...criterion,status:"pending",observable:true}))
+      criteria:(item.rubric?.criteria||[]).map(criterion=>({...criterion,status:"pending",observable:true,observations:(criterion.observations||[]).map(observation=>({...observation,status:"pending"}))}))
     };
   }
   throw new Error(`Unsupported Portuguese response type: ${item.responseType}`);

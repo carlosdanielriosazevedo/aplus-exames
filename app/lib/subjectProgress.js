@@ -25,7 +25,7 @@ function compactResult(result){
   if(!result)return null;
   const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,gradingMode:result.gradingMode||null};
   if(result.final)return compact;
-  return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"}))};
+  return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending"})))};
 }
 
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,startedAt=Date.now()}){
