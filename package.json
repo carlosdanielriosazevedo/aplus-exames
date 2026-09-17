@@ -63,6 +63,7 @@
     "subjects:audit": "node scripts/subjects-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
     "portuguese-engine:audit": "node scripts/portuguese-engine-audit.mjs",
+    "portuguese-wave4:audit": "node scripts/portuguese-wave4-audit.mjs",
     "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
     "portuguese-rubric-scenarios:audit": "node scripts/portuguese-rubric-scenarios-audit.mjs",
     "portuguese-rubric-text-calibration:audit": "node scripts/portuguese-rubric-text-calibration-audit.mjs",
