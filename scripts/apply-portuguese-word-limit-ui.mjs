@@ -34,3 +34,4 @@ if(!css.includes(marker)){
 writeFileSync(pagePath,page);
 writeFileSync(cssPath,css);
 console.log("✓ Portuguese word-limit UI applied: below / within / above states with content warning");
+await import("./apply-portuguese-observation-guidance-ui.mjs");
