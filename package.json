@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs && node scripts/apply-portuguese-word-limit-ui.mjs",
+    "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
     "build": "next build",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -17,6 +17,7 @@
     "teacher-review:pack": "node scripts/teacher-review-pack.mjs",
     "syntax:audit": "node scripts/syntax-audit.cjs",
     "source:hygiene": "node scripts/source-hygiene-audit.mjs",
+    "source-rewrite:audit": "node scripts/source-rewrite-policy-audit.mjs",
     "technical:gate": "node scripts/technical-gate.mjs",
     "competency-id:audit": "node scripts/competency-id-audit.mjs",
     "friends-beta:audit": "node scripts/friends-beta-audit.mjs",
