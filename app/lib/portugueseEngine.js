@@ -44,6 +44,24 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   return result;
 }
 
+export function portugueseRubricGuidance(result){
+  const criteria=result?.criteria||[];
+  const byStatus=status=>criteria.filter(criterion=>criterion.status===status).map(criterion=>({id:criterion.id,label:criterion.label}));
+  const observed=byStatus("observed");
+  const partial=byStatus("partial");
+  const missing=byStatus("not-observed");
+  const uncertain=byStatus("unsure");
+  const needsReview=[...missing,...partial];
+  const nextAction=missing.length
+    ?"Acrescenta à resposta os elementos que não conseguiste localizar."
+    :partial.length
+      ?"Completa ou torna mais explícitos os elementos que encontraste apenas em parte."
+      :uncertain.length
+        ?"Compara as tuas dúvidas com a resposta de referência antes de rever o texto."
+        :"Os critérios estão identificáveis. Confirma apenas se cada ideia está apoiada no texto ou no enunciado.";
+  return {observed,partial,missing,uncertain,needsReview,nextAction,complete:criteria.length>0&&criteria.every(criterion=>RUBRIC_EVIDENCE_IDS.has(criterion.status)),finalScore:null};
+}
+
 export function normalizePortugueseAnswer(value){
   return String(value??"")
     .normalize("NFD")
