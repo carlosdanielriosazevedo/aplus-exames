@@ -42,7 +42,7 @@
       "stimulus":"Plantou a árvore no dia em que o filho partiu. Anos depois, media o tempo não pelo calendário, mas pela sombra que já alcançava a janela.",
       "prompt":"Interpreta a relação entre a árvore e a passagem do tempo. Responde em 40 a 70 palavras.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica que o crescimento da árvore materializa o tempo decorrido desde a partida.","points":8},{"id":"fundamentacao","label":"Relaciona a interpretação com a sombra que alcança a janela.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
-      "referenceAnswer":"A árvore funciona como medida viva do tempo passado desde a partida do filho. O seu crescimento, visível na sombra que finalmente chega à janela, substitui o calendário e transforma a ausência numa realidade progressivamente inscrita no espaço familiar.",
+      "referenceAnswer":"A árvore funciona como medida viva do tempo passado desde a partida do filho. O seu crescimento, visível na sombra que finalmente chega à janela, substitui o calendário e transforma a ausência numa realidade progressivamente inscrita no próprio espaço familiar.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
     },
     {
@@ -94,6 +94,7 @@
       "stimulus":"Uma aplicação de transporte pode informar os passageiros sobre atrasos, percursos alternativos, lotação prevista e acessibilidade das paragens.",
       "prompt":"Explica duas formas pelas quais a informação em tempo real melhora uma viagem. Escreve entre 80 e 120 palavras.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica duas vantagens distintas da informação em tempo real.","points":6},{"id":"estrutura","label":"Organiza as ideias com progressão e ligação entre frases.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"A informação em tempo real melhora uma viagem porque permite reagir a imprevistos. Se a aplicação indicar um atraso ou uma interrupção, o passageiro pode escolher outro percurso antes de perder tempo na paragem. Além disso, conhecer a lotação prevista ajuda a decidir se é preferível aguardar o veículo seguinte, sobretudo para quem viaja com crianças, bagagem ou mobilidade reduzida. Dados sobre elevadores e acessibilidade também evitam chegar a uma paragem inadequada. Assim, a informação atualizada reduz a incerteza e permite planear a deslocação de acordo com as necessidades concretas de cada pessoa.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":80,"max":120}
     },
     {
@@ -101,6 +102,7 @@
       "stimulus":"Algumas bibliotecas começaram a emprestar instrumentos musicais e equipamentos digitais, para além de livros e filmes.",
       "prompt":"Defende uma posição sobre o alargamento dos objetos emprestados pelas bibliotecas. Escreve entre 100 e 150 palavras e apresenta dois argumentos.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"argumentacao","label":"Formula uma posição clara e desenvolve dois argumentos pertinentes.","points":6},{"id":"estrutura","label":"Organiza o texto com progressão e conclusão coerentes.","points":4},{"id":"lingua","label":"Usa conectores, vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"Sou favorável ao empréstimo de instrumentos musicais e equipamentos digitais pelas bibliotecas. Em primeiro lugar, esse serviço reduz desigualdades, pois permite experimentar recursos caros antes de uma família decidir comprá-los. Um jovem pode, por exemplo, descobrir interesse pela música através de uma guitarra emprestada. Em segundo lugar, a medida aproveita a experiência das bibliotecas na gestão de bens partilhados e reforça o seu papel como espaços de aprendizagem. O alargamento não deve diminuir o investimento em livros nem avançar sem regras de manutenção, cauções adequadas e formação básica para os utilizadores. Com essas condições, a biblioteca oferece novos caminhos de acesso à cultura e à tecnologia sem abandonar a sua missão principal.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
     },
     {
@@ -108,6 +110,7 @@
       "stimulus":"Avaliações públicas permitem conhecer experiências de outros consumidores, mas podem também reduzir uma pessoa ou organização a uma classificação numérica.",
       "prompt":"Apresenta uma opinião fundamentada sobre o impacto das avaliações públicas nas decisões. Escreve entre 100 e 150 palavras e inclui um exemplo.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"posicao","label":"Formula uma posição clara e pondera vantagens ou riscos relevantes.","points":6},{"id":"fundamentacao","label":"Apresenta razões e um exemplo pertinente, organizados com coerência.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"As avaliações públicas podem apoiar decisões, mas não devem ser tratadas como medidas objetivas e completas. Ler várias experiências ajuda um consumidor a identificar problemas recorrentes, comparar alternativas e evitar escolhas pouco adequadas. No entanto, uma classificação média esconde diferenças de contexto e pode ser manipulada por comentários falsos ou reações impulsivas. Por exemplo, um restaurante pode receber uma nota baixa devido a um atraso excecional, embora a maioria dos clientes valorize a qualidade do serviço. Por isso, é preferível ler avaliações recentes, procurar padrões e considerar a resposta da organização, em vez de confiar apenas no número apresentado. As plataformas também devem verificar abusos e permitir contraditório. A avaliação é útil como indício, não como sentença definitiva sobre uma pessoa ou instituição.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
     }
   ]

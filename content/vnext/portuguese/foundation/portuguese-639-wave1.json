@@ -105,6 +105,7 @@
       "stimulus":"Uma comunidade de partilha permite emprestar objetos pouco usados, como ferramentas, máquinas de costura ou equipamentos de campismo.",
       "prompt":"Explica duas vantagens de uma comunidade local de partilha. Escreve entre 80 e 120 palavras.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica duas vantagens distintas e pertinentes.","points":6},{"id":"estrutura","label":"Organiza e liga as ideias com progressão clara.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"Uma comunidade local de partilha permite, em primeiro lugar, poupar dinheiro, porque cada pessoa pode pedir emprestado um objeto de uso ocasional em vez de o comprar. Uma máquina de costura ou uma tenda, por exemplo, pode servir várias famílias ao longo do ano. Em segundo lugar, a partilha reduz o consumo de matérias-primas e a quantidade de objetos guardados sem utilização. Ao prolongar a vida útil dos equipamentos, a comunidade produz menos resíduos. Este sistema pode ainda aproximar vizinhos, mas exige regras claras sobre prazos, conservação e responsabilidade por eventuais danos.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":80,"max":120}
     },
     {
@@ -112,6 +113,7 @@
       "stimulus":"Algumas escolas reservam semanalmente um período sem telemóveis para atividades de leitura, conversa ou trabalho colaborativo.",
       "prompt":"Defende uma posição sobre a criação desse período semanal. Escreve entre 100 e 150 palavras e apresenta pelo menos dois argumentos.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"argumentacao","label":"Formula uma posição clara e desenvolve dois argumentos pertinentes.","points":6},{"id":"estrutura","label":"Organiza o texto com progressão e conclusão coerentes.","points":4},{"id":"lingua","label":"Usa conectores, vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"Concordo com a criação de um período semanal sem telemóveis na escola. Em primeiro lugar, afastar temporariamente as notificações facilita a concentração em atividades que exigem atenção contínua, como a leitura ou a resolução de um problema em grupo. Em segundo lugar, esse período pode melhorar a comunicação presencial, porque os alunos precisam de ouvir, explicar ideias e responder diretamente aos colegas. A medida não deve apresentar o telemóvel como um inimigo nem impedir o seu uso pedagógico noutros momentos. Deve antes criar um espaço previsível para experimentar formas diferentes de aprender e conviver. Se as atividades forem bem planeadas e o objetivo for explicado, uma pausa curta e regular pode ensinar autorregulação sem impor uma proibição permanente.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
     },
     {
@@ -126,6 +128,7 @@
       "stimulus":"As cidades podem usar sistemas automáticos para ajustar iluminação, trânsito e consumo de água. Essa eficiência depende, porém, da recolha contínua de dados sobre o espaço público.",
       "prompt":"Apresenta uma opinião fundamentada sobre o equilíbrio entre eficiência urbana e proteção de dados. Escreve entre 100 e 150 palavras.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"posicao","label":"Formula uma posição clara e considera os dois valores em tensão.","points":6},{"id":"fundamentacao","label":"Apresenta razões ou exemplos pertinentes e organiza-os com coerência.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"As cidades devem usar dados para melhorar serviços, mas apenas dentro de limites transparentes. Ajustar a iluminação ou o trânsito em tempo real pode reduzir desperdícios, tempos de espera e emissões. Contudo, essa eficiência não justifica recolher informação que permita seguir pessoas individualmente sem necessidade. Os sistemas devem usar o mínimo de dados possível, privilegiar informação anónima e definir prazos curtos de conservação. A população também deve saber quem recolhe os dados, para que finalidade e como pode contestar abusos. Por exemplo, contar veículos numa avenida é diferente de guardar matrículas e percursos durante meses. A inovação urbana é legítima quando resolve um problema concreto sem transformar o espaço público num mecanismo permanente de vigilância.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
     }
   ]

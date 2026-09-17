@@ -48,7 +48,7 @@
       "stimulus":"Todos os anos pintava a porta de azul. A madeira apodrecia por dentro, mas da rua a casa parecia sempre pronta para uma fotografia.",
       "prompt":"Interpreta o contraste entre a aparência da casa e o seu estado interior. Responde em 40 a 70 palavras.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica a oposição entre preservação da aparência e degradação escondida.","points":8},{"id":"fundamentacao","label":"Mobiliza a pintura exterior e o apodrecimento interior.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
-      "referenceAnswer":"A pintura anual mantém uma imagem exterior cuidada, adequada a ser vista e fotografada, mas esconde a degradação da madeira. O contraste sugere uma preocupação com as aparências que não resolve o problema real e interior da casa.",
+      "referenceAnswer":"A pintura anual mantém uma imagem exterior cuidada, adequada a ser vista e fotografada, mas esconde a degradação da madeira. O contraste sugere uma preocupação excessiva com as aparências públicas que não resolve o problema real e interior da casa.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
     },
     {
@@ -71,6 +71,7 @@
       "stimulus":"Um orçamento pessoal regista rendimentos e despesas, ajuda a antecipar pagamentos e permite distinguir necessidades de compras adiáveis.",
       "prompt":"Explica a utilidade de um orçamento pessoal para um jovem. Escreve entre 80 e 120 palavras e desenvolve duas vantagens.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica duas vantagens distintas e adequadas ao contexto.","points":6},{"id":"estrutura","label":"Organiza as ideias com progressão e ligação entre frases.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"Um orçamento pessoal ajuda um jovem, primeiro, a perceber para onde vai o dinheiro. Ao registar transportes, alimentação, lazer e outras despesas, torna-se mais fácil distinguir necessidades de compras que podem ser adiadas. Em segundo lugar, permite antecipar pagamentos e definir uma poupança realista. Se o jovem souber quanto recebe e quais são os encargos do mês, pode reservar uma pequena quantia antes de gastar o restante. O orçamento não serve para eliminar todo o lazer, mas para tomar decisões conscientes e evitar que uma despesa inesperada obrigue a pedir dinheiro emprestado.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":80,"max":120}
     },
     {
@@ -78,6 +79,7 @@
       "stimulus":"Há municípios que disponibilizam gratuitamente bicicletas por períodos curtos, enquanto outros defendem que o investimento deveria concentrar-se nos transportes públicos coletivos.",
       "prompt":"Defende uma posição sobre o investimento municipal em bicicletas partilhadas. Escreve entre 100 e 150 palavras e considera um possível contra-argumento.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"argumentacao","label":"Formula uma posição e desenvolve argumentos pertinentes, considerando uma objeção.","points":6},{"id":"estrutura","label":"Organiza introdução, desenvolvimento e conclusão com progressão.","points":4},{"id":"lingua","label":"Usa conectores e correção linguística adequados.","points":3}]},
+      "referenceAnswer":"Defendo que os municípios devem investir em bicicletas partilhadas, desde que integrem essa solução numa rede de mobilidade mais ampla. As bicicletas resolvem deslocações curtas, ocupam pouco espaço e podem substituir viagens de automóvel, reduzindo ruído e emissões. Também permitem ligar uma estação de transporte público ao destino final. É verdade que autocarros e outros meios coletivos transportam mais pessoas e devem receber prioridade nos percursos principais. Porém, as duas opções não são rivais: uma bicicleta pode complementar uma viagem de comboio ou autocarro. O investimento só será eficaz se incluir ciclovias seguras, manutenção e distribuição adequada das estações. Assim, as bicicletas partilhadas alargam as escolhas sem retirar aos transportes coletivos o seu papel central.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
     },
     {
@@ -85,6 +87,7 @@
       "stimulus":"A possibilidade de responder imediatamente a qualquer mensagem criou a expectativa de que todas as pessoas devem estar permanentemente disponíveis.",
       "prompt":"Apresenta uma opinião fundamentada sobre o direito a períodos de indisponibilidade digital. Escreve entre 100 e 150 palavras e inclui um exemplo pertinente.",
       "rubric":{"maxPoints":13,"criteria":[{"id":"posicao","label":"Formula uma posição clara e desenvolve-a sem desvio temático.","points":6},{"id":"fundamentacao","label":"Apresenta razões e um exemplo pertinente, organizados com coerência.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "referenceAnswer":"Todas as pessoas devem poder ter períodos de indisponibilidade digital sem que isso seja interpretado como falta de respeito. A comunicação imediata é útil em situações urgentes, mas a expectativa de resposta permanente interrompe o descanso, o estudo e a convivência presencial. Por exemplo, um aluno que recebe mensagens de vários grupos enquanto prepara um teste dificilmente mantém a atenção, mesmo que responda apenas durante alguns segundos. Definir horários sem notificações permite recuperar concentração e responder mais tarde com maior cuidado. Naturalmente, responsabilidades profissionais ou familiares podem exigir canais para emergências. Ainda assim, esses casos não justificam disponibilidade constante para qualquer assunto. Respeitar limites claros melhora a qualidade da comunicação e protege o tempo necessário para descansar e realizar tarefas exigentes.",
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
     },
     {

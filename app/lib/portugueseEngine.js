@@ -13,7 +13,7 @@ export const PORTUGUESE_RUBRIC_EVIDENCE=[
 const RUBRIC_EVIDENCE_IDS=new Set(PORTUGUESE_RUBRIC_EVIDENCE.map(option=>option.id));
 
 function rubricIdFor(item){
-  const signature=(item.rubric?.criteria||[]).map(criterion=>`${criterion.id}:${criterion.points}:${criterion.label}`).join("|");
+  const signature=(item.rubric?.criteria||[]).map(criterion=>`${criterion.id}:${criterion.points}:${criterion.label}:${(criterion.observations||[]).map(observation=>`${observation.id}=${observation.label}`).join(";")}`).join("|");
   let fingerprint=2166136261;
   for(let index=0;index<signature.length;index++)fingerprint=Math.imul(fingerprint^signature.charCodeAt(index),16777619);
   return `${item.id}:rubric-v1:${(fingerprint>>>0).toString(36)}`;

@@ -5,6 +5,7 @@ const checks=[
   ["Disciplinas do secundário","npm",["run","subjects:audit"]],
   ["Fundação de Português 639","npm",["run","portuguese-foundation:audit"]],
   ["Motor de Português 639","npm",["run","portuguese-engine:audit"]],
+  ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Dificuldade editorial de Português","npm",["run","portuguese-difficulty:audit"]],
   ["Progresso isolado por disciplina","npm",["run","subject-progress:audit"]],
   ["Cobertura de Português 639","npm",["run","portuguese-coverage:audit"]],

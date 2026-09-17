@@ -63,6 +63,7 @@
     "subjects:audit": "node scripts/subjects-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
     "portuguese-engine:audit": "node scripts/portuguese-engine-audit.mjs",
+    "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
     "portuguese-difficulty:generate": "node scripts/generate-portuguese-difficulty.mjs",
     "portuguese-difficulty:audit": "node scripts/portuguese-difficulty-audit.mjs",
     "subject-progress:audit": "node scripts/subject-progress-audit.mjs",
