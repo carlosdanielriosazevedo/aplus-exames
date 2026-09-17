@@ -2,6 +2,7 @@ import {PORTUGUESE_DOMAINS,PORTUGUESE_RELEASE_POLICY} from "../data/portugueseFo
 
 const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=>domain.id);
 const RESPONSE_PRIORITY={"multiple-choice":0,"short-answer":1,"restricted-response":2,"extended-writing":3};
+const STRUCTURAL_CHALLENGE={reconhecer:1,interpretar:2,raciocinar:3,criar:4};
 
 export function normalizePortugueseAnswer(value){
   return String(value??"")
@@ -95,4 +96,61 @@ export function portugueseMissionPool(items,{domain,years=["10.º","11.º","12.�
   const allowed=new Set(years);
   const pool=items.filter(item=>item.domain===domain&&allowed.has(item.year)&&item.responseType!=="extended-writing");
   return {domain,items:pool,ready:pool.length>=PORTUGUESE_RELEASE_POLICY.minimumMissionItemsPerDomain,required:PORTUGUESE_RELEASE_POLICY.minimumMissionItemsPerDomain};
+}
+
+export function portugueseCompetencePriorities(items,progress,{domain=null}={}){
+  const competenceIds=[...new Set(items.filter(item=>!domain||item.domain===domain).map(item=>item.competencyId))];
+  return competenceIds.map(id=>{
+    const evidence=progress?.competence?.[id]||{};
+    const attempts=evidence.deterministicAttempts||0;
+    const correct=evidence.correct||0;
+    const accuracy=attempts?correct/attempts:null;
+    const evidenceGap=1-Math.min(attempts/3,1);
+    const need=accuracy===null ? .7 : ((1-accuracy)*.8+evidenceGap*.2);
+    return {competencyId:id,attempts,correct,accuracy,need,pendingRubrics:evidence.pendingRubrics||0};
+  }).sort((a,b)=>b.need-a.need||a.attempts-b.attempts||a.competencyId.localeCompare(b.competencyId));
+}
+
+export function portugueseStructuralChallenge(item){
+  return STRUCTURAL_CHALLENGE[item?.cognitive]||2;
+}
+
+export function buildAdaptivePortugueseMission(items,{progress,domain=null,years=["10.º","11.º","12.º"],size=7}={}){
+  const allowedYears=new Set(years);
+  const eligible=items.filter(item=>(!domain||item.domain===domain)&&allowedYears.has(item.year)&&item.responseType!=="extended-writing");
+  if(eligible.length<size)throw new Error(`Insufficient adaptive Portuguese mission coverage${domain?` for ${domain}`:""}.`);
+  const priorities=portugueseCompetencePriorities(eligible,progress,{domain});
+  const needById=new Map(priorities.map(row=>[row.competencyId,row.need]));
+  const recentIds=new Set((progress?.missionHistory||[]).slice(-3).flatMap(session=>session.itemIds||[]));
+  const targetChallenges=[1,2,2,3,3,4,2];
+  const selected=[];
+  const domainCounts={};
+  let openCount=0;
+
+  for(let slot=0;slot<size;slot++){
+    const target=targetChallenges[slot%targetChallenges.length];
+    const candidates=eligible.filter(item=>!selected.includes(item)).filter(item=>{
+      if(item.responseType==="restricted-response"&&openCount>=2)return false;
+      if(!domain&&(domainCounts[item.domain]||0)>=3)return false;
+      return true;
+    });
+    const pool=candidates.length?candidates:eligible.filter(item=>!selected.includes(item));
+    pool.sort((a,b)=>{
+      const score=item=>(needById.get(item.competencyId)||0)-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0);
+      return score(b)-score(a)||a.id.localeCompare(b.id);
+    });
+    const chosen=pool[0];
+    if(!chosen)break;
+    selected.push(chosen);
+    domainCounts[chosen.domain]=(domainCounts[chosen.domain]||0)+1;
+    if(chosen.responseType==="restricted-response")openCount++;
+  }
+
+  return {
+    items:selected,
+    priorities,
+    targetCompetencyIds:priorities.slice(0,4).map(row=>row.competencyId),
+    challengeSource:"structural-proxy",
+    recentItemsAvoided:selected.filter(item=>!recentIds.has(item.id)).length
+  };
 }

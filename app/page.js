@@ -10,7 +10,7 @@ import {Welcome} from "./components/Welcome";
 import {ReviewerDashboard} from "./components/ReviewerDashboard";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
-import {buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseMissionPool} from "./lib/portugueseEngine";
+import {buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage} from "./lib/portugueseEngine";
 import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -550,8 +550,13 @@ function PortugueseLab({s,setS,go}){
   }
 
   function startMission(domain){
-    const pool=portugueseMissionPool(PORTUGUESE_ITEMS,{domain});
-    start("mission",pool.items.slice(0,7),`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
+    const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress,domain});
+    start("mission",mission.items,`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
+  }
+
+  function startRecommendedMission(){
+    const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress});
+    start("mission",mission.items,"Missão recomendada");
   }
 
   function resume(){
@@ -577,7 +582,8 @@ function PortugueseLab({s,setS,go}){
     <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
     {progress.lastPosition&&<section className="portugueseLabSection"><h2>Continuar</h2><button className="portugueseLabAction featured" onClick={resume}><b>Retomar {progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></button></section>}
     <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>{progress.diagnosticDone?"Repetir diagnóstico":"Testar diagnóstico"}</b><span>{progress.diagnosticDone?"Concluído · nova tentativa mantém o histórico":"8 itens · 2 por domínio · sem produção extensa"}</span></button></section>
-    <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens · feedback imediato</span></button>)}</div></section>
+    <section className="portugueseLabSection"><h2>Missão adaptativa</h2><button className="portugueseLabAction featured" onClick={startRecommendedMission}><b>Treinar o que mais precisa</b><span>7 itens · competências prioritárias · evita repetição recente</span></button><small className="portugueseMethodNote">O nível de desafio é ainda estrutural e provisório; não é apresentado como dificuldade calibrada.</small></section>
+    <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
     {(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><h2>Progresso de Português</h2><div><span>Respostas determinísticas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas pendentes de grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div><small>O texto livre das respostas não é guardado neste histórico.</small></section>}
     <div className="notice"><b>Gate quantitativo atingido, publicação bloqueada</b><span>Os 60 itens permitem testar os fluxos. Não substituem revisão editorial, calibração de dificuldade nem validação da correção aberta.</span></div>
     {(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}

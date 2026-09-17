@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
-  buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
-  portugueseCoverage,portugueseMissionPool,portugueseWordCount
+  buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
+  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseStructuralChallenge,portugueseWordCount
 } from "../app/lib/portugueseEngine.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
@@ -52,4 +52,32 @@ for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   assert.ok(mission.items.length>=7);
 }
 
-console.log("✓ Portuguese engine: deterministic answers, conservative open-response grading, balanced diagnostic and release gates validated");
+const adaptiveProgress={
+  competence:{
+    "pt-leitura-informacao":{deterministicAttempts:3,correct:3},
+    "pt-leitura-inferencia":{deterministicAttempts:3,correct:0},
+    "pt-gramatica-oracoes":{deterministicAttempts:2,correct:0}
+  },
+  missionHistory:[{itemIds:["PT639-FND-001","PT639-FND-002","PT639-FND-003"]}]
+};
+const priorities=portugueseCompetencePriorities(items,adaptiveProgress);
+assert.ok(priorities.findIndex(row=>row.competencyId==="pt-leitura-inferencia")<priorities.findIndex(row=>row.competencyId==="pt-leitura-informacao"),"uma fragilidade confirmada deve preceder uma competência dominada");
+
+const adaptive=buildAdaptivePortugueseMission(items,{progress:adaptiveProgress});
+assert.equal(adaptive.items.length,7);
+assert.equal(new Set(adaptive.items.map(item=>item.id)).size,7);
+assert.equal(adaptive.challengeSource,"structural-proxy","o nível provisório não pode ser confundido com dificuldade calibrada");
+assert.ok(adaptive.targetCompetencyIds.includes("pt-leitura-inferencia"));
+assert.ok(adaptive.items.filter(item=>item.responseType==="restricted-response").length<=2,"uma missão curta não deve acumular respostas abertas por corrigir");
+for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
+  assert.ok(adaptive.items.filter(item=>item.domain===domain).length<=3,"a missão recomendada não deve ficar monopolizada por um domínio");
+}
+assert.ok(adaptive.recentItemsAvoided>=4,"o motor deve evitar repetição recente quando existe alternativa");
+assert.equal(portugueseStructuralChallenge({cognitive:"reconhecer"}),1);
+assert.equal(portugueseStructuralChallenge({cognitive:"criar"}),4);
+
+const grammarMission=buildAdaptivePortugueseMission(items,{progress:adaptiveProgress,domain:"gramatica"});
+assert.ok(grammarMission.items.every(item=>item.domain==="gramatica"));
+assert.equal(grammarMission.items.length,7);
+
+console.log("✓ Portuguese engine: deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated");
