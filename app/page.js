@@ -10,7 +10,7 @@ import {Welcome} from "./components/Welcome";
 import {ReviewerDashboard} from "./components/ReviewerDashboard";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
-import {buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage} from "./lib/portugueseEngine";
+import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage} from "./lib/portugueseEngine";
 import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -612,6 +612,7 @@ function PortugueseLab({s,setS,go}){
   }
 
   function next(){
+    if(feedback&&!feedback.final&&!feedback.rubricCompleted)return;
     const nextResults=[...results,feedback];
     if(session.current===session.items.length-1){
       setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
@@ -628,11 +629,12 @@ function PortugueseLab({s,setS,go}){
       :isShort?<input className="portugueseShortAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve uma resposta curta"/>
       :<><textarea className="portugueseOpenAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve a tua resposta…" rows={9}/><small className="portugueseWordCount">{String(answer??"").trim()?String(answer).trim().split(/\s+/).length:0} palavras · recomendado: {item.wordLimit.min}–{item.wordLimit.max}</small></>}
     </article>
-    {feedback&&<div className={`portugueseFeedback ${feedback.final?(feedback.correct?"correct":"incorrect"):"provisional"}`}><b>{feedback.final?(feedback.correct?"Resposta correta":"Resposta incorreta"):"Resposta guardada — correção provisória"}</b>
+    {feedback&&<div className={`portugueseFeedback ${feedback.final?(feedback.correct?"correct":"incorrect"):"provisional"}`}><b>{feedback.final?(feedback.correct?"Resposta correta":"Resposta incorreta"):feedback.rubricCompleted?"Autoavaliação guardada — aguarda revisão":"Agora revê a tua resposta"}</b>
       {feedback.final&&<span>{item.explanation}</span>}
-      {!feedback.final&&<><span>A app não atribuiu pontuação automática. Confere a tua resposta com os critérios:</span><ul>{feedback.criteria.map(criterion=><li key={criterion.id}>{criterion.label} <b>{criterion.points} pt</b></li>)}</ul>{item.referenceAnswer&&<details><summary>Ver resposta de referência</summary><p>{item.referenceAnswer}</p></details>}</>}
+      {!feedback.final&&!feedback.rubricCompleted&&(()=>{const criterion=feedback.criteria.find(row=>row.status==="pending");const index=feedback.criteria.findIndex(row=>row.id===criterion?.id);return criterion?<div className="guidedRubric"><div className="guidedRubricProgress"><span>Critério {index+1} de {feedback.criteria.length}</span><span>Peso na grelha: {criterion.points} pt</span></div><p>{criterion.label}</p><span className="guidedRubricPrompt">Na tua resposta, que evidência encontras deste critério?</span><div className="guidedRubricChoices">{PORTUGUESE_RUBRIC_EVIDENCE.map(option=><button type="button" key={option.id} onClick={()=>setFeedback(current=>assessPortugueseRubricCriterion(current,criterion.id,option.id))}><b>{option.label}</b><small>{option.description}</small></button>)}</div></div>:null})()}
+      {!feedback.final&&feedback.rubricCompleted&&<><span>A tua leitura ficou registada por critério. Isto não é uma classificação nem altera o teu nível.</span><ul className="rubricEvidenceSummary">{feedback.criteria.map(criterion=>{const option=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===criterion.status);return <li key={criterion.id}><span>{criterion.label}</span><b>{option?.label||"Pendente"}</b></li>})}</ul>{item.referenceAnswer&&<details><summary>Comparar com uma resposta de referência</summary><p>{item.referenceAnswer}</p></details>}</>}
     </div>}
-    {!feedback?<button className="primary" disabled={!answered} onClick={submit}>Responder</button>:<button className="primary" onClick={next}>{session.current===session.items.length-1?"Ver resultado":"Próxima pergunta"}</button>}
+    {!feedback?<button className="primary" disabled={!answered} onClick={submit}>Responder</button>:<button className="primary" disabled={!feedback.final&&!feedback.rubricCompleted} onClick={next}>{!feedback.final&&!feedback.rubricCompleted?"Avalia todos os critérios":session.current===session.items.length-1?"Ver resultado":"Próxima pergunta"}</button>}
   </Shell>;
 }
 

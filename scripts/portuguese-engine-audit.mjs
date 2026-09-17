@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
-  buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
+  PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
   portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseStructuralChallenge,portugueseWordCount
 } from "../app/lib/portugueseEngine.js";
 
@@ -29,6 +29,16 @@ assert.equal(restricted.final,false,"respostas abertas nunca recebem classifica�
 assert.equal(restricted.points,null);
 assert.equal(restricted.status,"awaiting-rubric");
 assert.ok(restricted.criteria.every(criterion=>criterion.status==="pending"));
+assert.ok(restricted.criteria.every(criterion=>criterion.observable===true));
+assert.equal(PORTUGUESE_RUBRIC_EVIDENCE.length,4);
+let guided=restricted;
+for(const criterion of restricted.criteria)guided=assessPortugueseRubricCriterion(guided,criterion.id,criterion.id==="conteudo"?"observed":"unsure");
+assert.equal(guided.status,"self-assessed-awaiting-review");
+assert.equal(guided.rubricCompleted,true);
+assert.equal(guided.final,false);
+assert.equal(guided.points,null,"a autoavaliação nunca pode produzir uma classificação final");
+assert.throws(()=>assessPortugueseRubricCriterion(restricted,"inexistente","observed"));
+assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automatic-score"));
 
 const coverage=portugueseCoverage(items);
 assert.equal(coverage.diagnosticReady,true,"o piloto suporta um diagnóstico interno equilibrado");

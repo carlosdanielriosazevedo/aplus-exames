@@ -22,7 +22,7 @@ state=recordSubjectSession(state,{
   subjectId:"portuguese",kind:"diagnostic",label:"Diagnóstico",items,completedAt:120,
   results:[
     {status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"},
-    {status:"awaiting-rubric",final:false,correct:null,points:null,maxPoints:20,gradingMode:"rubric-assisted-provisional"}
+    {status:"self-assessed-awaiting-review",final:false,correct:null,points:null,maxPoints:20,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",rubricCompleted:true,criteria:[{id:"argumentacao",status:"observed"},{id:"lingua",status:"unsure"}]}
   ]
 });
 const portuguese=subjectProgressFor(state,"portuguese");
@@ -35,6 +35,8 @@ assert.equal(state.diagnosticDone,false,"Português não pode concluir o diagnó
 assert.deepEqual(state.scores,mathScores,"Português não pode alterar domínio de Matemática A.");
 assert.deepEqual(state.missionHistory,[{id:"math-mission"}],"O histórico global legado de Matemática A deve permanecer intacto.");
 assert.equal("response" in portuguese.sessions[0].results[1],false,"O histórico não deve guardar texto livre do aluno.");
+assert.deepEqual(portuguese.sessions[0].results[1].rubricEvidence,[{criterionId:"argumentacao",evidence:"observed"},{criterionId:"lingua",evidence:"unsure"}],"A evidência estruturada deve persistir por critério.");
+assert.equal(portuguese.sessions[0].results[1].points,null,"A autoavaliação não pode criar pontuação.");
 
 state={...state,subjectProgress:{...state.subjectProgress,"math-a":{subjectId:"math-a",sessions:[{id:"keep"}]}}};
 state=resetSubjectProgress(state,"portuguese");
