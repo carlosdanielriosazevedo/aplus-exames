@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
   PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
-  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseStructuralChallenge,portugueseWordCount
+  portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseStructuralChallenge,portugueseWordCount,restorePortugueseRubricEvidence,rubricEvidenceSnapshot
 } from "../app/lib/portugueseEngine.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
@@ -37,6 +37,9 @@ assert.equal(guided.status,"self-assessed-awaiting-review");
 assert.equal(guided.rubricCompleted,true);
 assert.equal(guided.final,false);
 assert.equal(guided.points,null,"a autoavaliação nunca pode produzir uma classificação final");
+const restored=restorePortugueseRubricEvidence(byId("PT639-FND-005"),{rubricId:guided.rubricId,rubricEvidence:rubricEvidenceSnapshot(guided)});
+assert.deepEqual(rubricEvidenceSnapshot(restored),rubricEvidenceSnapshot(guided),"a evidência por critério deve sobreviver à retoma");
+assert.equal(restorePortugueseRubricEvidence(byId("PT639-FND-005"),{rubricId:"stale",rubricEvidence:[]}),null,"uma grelha editorial alterada invalida a evidência antiga");
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"inexistente","observed"));
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automatic-score"));
 

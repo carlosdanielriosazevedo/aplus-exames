@@ -33,6 +33,17 @@ export function rubricEvidenceSnapshot(result){
   return (result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:RUBRIC_EVIDENCE_IDS.has(criterion.status)?criterion.status:"pending"}));
 }
 
+export function restorePortugueseRubricEvidence(item,snapshot){
+  if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
+  let result=gradePortugueseResponse(item,"resposta submetida");
+  for(const row of snapshot.rubricEvidence||[]){
+    if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&result.criteria.some(criterion=>criterion.id===row.criterionId)){
+      result=assessPortugueseRubricCriterion(result,row.criterionId,row.evidence);
+    }
+  }
+  return result;
+}
+
 export function normalizePortugueseAnswer(value){
   return String(value??"")
     .normalize("NFD")
