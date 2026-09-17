@@ -8,6 +8,8 @@ const checks=[
   ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Cenários adversariais das grelhas de Português","npm",["run","portuguese-rubric-scenarios:audit"]],
   ["Calibração textual das grelhas de Português","npm",["run","portuguese-rubric-text-calibration:audit"]],
+  ["Casos-limite de extensão e conteúdo em Português","npm",["run","portuguese-boundary-cases:audit"]],
+  ["Feedback visual do limite de palavras em Português","npm",["run","portuguese-word-limit-ui:audit"]],
   ["Dificuldade editorial de Português","npm",["run","portuguese-difficulty:audit"]],
   ["Progresso isolado por disciplina","npm",["run","subject-progress:audit"]],
   ["Cobertura de Português 639","npm",["run","portuguese-coverage:audit"]],

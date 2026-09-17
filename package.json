@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
+    "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs && node scripts/apply-portuguese-word-limit-ui.mjs",
     "build": "next build",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -66,6 +66,8 @@
     "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
     "portuguese-rubric-scenarios:audit": "node scripts/portuguese-rubric-scenarios-audit.mjs",
     "portuguese-rubric-text-calibration:audit": "node scripts/portuguese-rubric-text-calibration-audit.mjs",
+    "portuguese-boundary-cases:audit": "node scripts/portuguese-boundary-cases-audit.mjs",
+    "portuguese-word-limit-ui:audit": "node scripts/portuguese-word-limit-ui-audit.mjs",
     "portuguese-difficulty:generate": "node scripts/generate-portuguese-difficulty.mjs",
     "portuguese-difficulty:audit": "node scripts/portuguese-difficulty-audit.mjs",
     "subject-progress:audit": "node scripts/subject-progress-audit.mjs",
