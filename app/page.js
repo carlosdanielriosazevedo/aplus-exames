@@ -106,6 +106,19 @@ import {
   expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
 } from "./lib/constructedResponse";
 
+const DEFAULT_SUBJECT_ID="math-a";
+
+function subjectById(id){
+  return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===DEFAULT_SUBJECT_ID);
+}
+
+function normalizeSubjectWorkspace(state){
+  const selected=[...new Set((state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id)))];
+  if(!selected.length)selected.push(DEFAULT_SUBJECT_ID);
+  const active=selected.includes(state.activeSubjectId)?state.activeSubjectId:selected[0];
+  return {...state,selectedSubjectIds:selected,activeSubjectId:active};
+}
+
 const initial={
   goal:17,
   xp:0,
@@ -176,7 +189,8 @@ export default function App(){
     const base=x
       ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)}))))))
       :migrateProductAnalytics(migrateCloudSync(initial));
-    const betaState=requested?activateFriendsBeta(base):base;
+    const subjectReady=normalizeSubjectWorkspace(base);
+    const betaState=requested?activateFriendsBeta(subjectReady):subjectReady;
     const next=recordAppOpen(betaState,{source:"initial_load"});
     const draftStatus=loadSessionDraftStatus(next.betaMode||"internal");
     if(draftStatus.error){setScreen("storageRecoveryError");return}
@@ -267,6 +281,7 @@ export default function App(){
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
+  if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
@@ -319,7 +334,8 @@ export default function App(){
 
 function StudentTop({s,go,children}){
   const daily=engagementSummary(s);
-  return <header className="studentTop"><Logo/><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
+  const subject=subjectById(s.activeSubjectId);
+  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
 }
 function FriendsBetaDisclaimer({s,compact=false}){
   if(!isFriendsBeta(s))return null;
@@ -467,6 +483,36 @@ function SubjectSelection({s,setS,go}){
 
     <div className="notice"><b>Começamos por Matemática A</b><span>Português já está em preparação, mas continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis.</span></div>
     <button className="primary" disabled={!selected.length} onClick={save}>Continuar com Matemática A</button>
+  </Shell>;
+}
+
+
+function SubjectManager({s,setS,go}){
+  const selected=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
+  const active=subjectById(s.activeSubjectId);
+
+  function activate(subject){
+    if(!subject.available)return;
+    setS(prev=>normalizeSubjectWorkspace({
+      ...prev,
+      selectedSubjectIds:[...(prev.selectedSubjectIds||[]),subject.id],
+      activeSubjectId:subject.id
+    }));
+    go("home");
+  }
+
+  return <Shell><Back go={go}/><p className="eyebrow">AS TUAS DISCIPLINAS</p><h1>O que queres estudar?</h1>
+    <p className="muted">A sequência e o XP são globais. Quando adicionarmos novas disciplinas, cada uma terá diagnóstico, domínio, missões e exames próprios.</p>
+    <section className="subjectManagerSection"><h2>Disciplina atual</h2>
+      <button type="button" className="subjectWorkspaceCard current" onClick={()=>go("home")}>
+        <span className="subjectIcon" aria-hidden="true">{active.icon}</span><span><b>{active.name}</b><small>Continuar onde ficaste</small></span><strong>Ativa</strong>
+      </button>
+    </section>
+    {selected.length>1&&<section className="subjectManagerSection"><h2>As tuas disciplinas</h2>{selected.filter(id=>id!==active.id).map(id=>{const subject=subjectById(id);return <button type="button" key={id} className="subjectWorkspaceCard" onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>Abrir plano de estudo</small></span><strong>Mudar</strong></button>})}</section>}
+    <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
+      {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
+    </section>
+    <div className="notice"><b>Português está a ser preparado</b><span>Fica visível para mostrar o próximo passo, mas só será desbloqueado quando diagnóstico, treino e correção escrita cumprirem os critérios de qualidade.</span></div>
   </Shell>;
 }
 
