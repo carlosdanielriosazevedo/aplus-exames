@@ -5,7 +5,6 @@ import path from "node:path";
 const root=path.resolve(new URL("..",import.meta.url).pathname);
 const scriptsDir=path.join(root,"scripts");
 const scriptNames=readdirSync(scriptsDir).filter(name=>/\.(?:mjs|cjs|js)$/u.test(name));
-const violations=[];
 
 const WRITE_FUNCTIONS=new Map([
   ["writeFileSync",0],
@@ -43,7 +42,7 @@ function scanArguments(source,openParen){
       current+=ch;
       if(escaped){escaped=false;continue}
       if(ch==="\\"){escaped=true;continue}
-      if(ch===quote){quote=null}
+      if(ch===quote)quote=null;
       continue;
     }
     if(ch==='"'||ch==="'"||ch==='`'){quote=ch;current+=ch;continue}
@@ -123,16 +122,12 @@ function resolveTarget(expr,source,seen=new Set()){
   if(direct)return normalizeRepoPath(direct[2]);
 
   const urlMatch=/new\s+URL\s*\(\s*(["'])(.*?)\1\s*,\s*import\.meta\.url\s*\)/u.exec(trimmed);
-  if(urlMatch){
-    const absolute=path.resolve(scriptsDir,urlMatch[2]);
-    return normalizeRepoPath(absolute);
-  }
+  if(urlMatch)return normalizeRepoPath(path.resolve(scriptsDir,urlMatch[2]));
 
   if(/\bpath\.(?:join|resolve)\s*\(/u.test(trimmed)){
     const parts=stringLiterals(trimmed);
     if(!parts.length)return null;
-    const combined=parts.join("/");
-    return normalizeRepoPath(combined);
+    return normalizeRepoPath(parts.join("/"));
   }
 
   return null;
@@ -157,11 +152,8 @@ function isSourceTarget(target){
   return !!target&&SOURCE_EXT.test(target)&&SOURCE_ROOT.test(target);
 }
 
-for(const name of scriptNames){
-  if(name==="source-rewrite-policy-audit.mjs")continue;
-  const full=path.join(scriptsDir,name);
-  const source=readFileSync(full,"utf8");
-
+function auditScript(name,source){
+  const violations=[];
   for(const call of writeCalls(source)){
     const targetIndex=WRITE_FUNCTIONS.get(call.fn);
     const targetExpr=call.args[targetIndex];
@@ -174,16 +166,55 @@ for(const name of scriptNames){
     }
 
     if(!isSourceTarget(target))continue;
-
-    // write/append recebem o conteúdo no argumento seguinte ao caminho. Para copy/rename
-    // não existe transformação textual do conteúdo, pelo que só a regra dos alvos
-    // absolutamente protegidos acima se aplica.
     if(!/^(?:writeFileSync|writeFile|appendFileSync|appendFile)$/u.test(call.fn))continue;
+
     const contentExpr=call.args[targetIndex+1];
     if(contentUsesTextMatching(contentExpr,source)){
       violations.push(`${name}: ${call.fn} reescreve ${target} a partir de correspondência textual`);
     }
   }
+  return violations;
+}
+
+// Regressões da própria política: relatórios podem mencionar paths/source e usar
+// includes/replace noutras operações; o alvo real da escrita decide se existe risco.
+const reportFixture=`
+  const reportPath=path.resolve("reports","coverage.md");
+  const sourcePath="app/page.js";
+  const ok=sourcePath.includes("app/");
+  const markdown=ok?"# relatório":"# vazio";
+  writeFileSync(reportPath,markdown);
+`;
+assert.deepEqual(auditScript("fixture-report.mjs",reportFixture),[]);
+
+const protectedFixture=`
+  const pagePath=new URL("../app/page.js",import.meta.url);
+  let page=readFileSync(pagePath,"utf8");
+  page=page.replace("antes","depois");
+  writeFileSync(pagePath,page);
+`;
+assert.equal(auditScript("fixture-page-patch.mjs",protectedFixture).length,1);
+
+const genericSourceFixture=`
+  const target=path.resolve("app","lib","feature.js");
+  let code=readFileSync(target,"utf8");
+  code=code.replace("antes","depois");
+  writeFileSync(target,code);
+`;
+assert.equal(auditScript("fixture-source-patch.mjs",genericSourceFixture).length,1);
+
+const generatedSourceFixture=`
+  const target=path.resolve("app","data","generated.js");
+  const payload="export const DATA="+JSON.stringify(rows)+";";
+  writeFileSync(target,payload);
+`;
+assert.deepEqual(auditScript("fixture-generated-source.mjs",generatedSourceFixture),[]);
+
+const violations=[];
+for(const name of scriptNames){
+  if(name==="source-rewrite-policy-audit.mjs")continue;
+  const full=path.join(scriptsDir,name);
+  violations.push(...auditScript(name,readFileSync(full,"utf8")));
 }
 
 assert.equal(
@@ -192,4 +223,4 @@ assert.equal(
   `Política de arquitetura violada:\n- ${violations.join("\n- ")}`
 );
 
-console.log(`✓ source rewrite policy: ${scriptNames.length} scripts inspecionados · alvos de escrita analisados por argumento · zero patches textuais sobre código versionado`);
+console.log(`✓ source rewrite policy: ${scriptNames.length} scripts inspecionados · alvos reais de escrita analisados · regressões anti-falso-positivo/anti-bypass OK`);
