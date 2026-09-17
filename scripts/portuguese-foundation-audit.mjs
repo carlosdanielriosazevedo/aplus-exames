@@ -8,7 +8,9 @@ import {SECONDARY_EXAM_SUBJECTS,subjectStatusLabel} from "../app/data/subjects.j
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
 const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
-const allItems=[...pilot.items,...wave1.items];
+const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
+const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
+const allItems=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 
 const portuguese=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
@@ -21,7 +23,7 @@ assert.equal(subjectStatusLabel(portuguese),"Em preparação");
 assert.equal(PORTUGUESE_RELEASE_POLICY.selectable,false);
 assert.equal(PORTUGUESE_RELEASE_POLICY.productionEligible,false);
 assert.equal(PORTUGUESE_RELEASE_POLICY.extendedWritingFinalAutoGrade,false);
-assert.ok(PORTUGUESE_RELEASE_POLICY.minimumPilotItems>allItems.length,"O piloto não pode desbloquear prematuramente a disciplina.");
+assert.equal(allItems.length,PORTUGUESE_RELEASE_POLICY.minimumPilotItems,"A terceira vaga deve atingir exatamente o gate quantitativo do piloto.");
 assert.ok(PORTUGUESE_RELEASE_POLICY.minimumBetaItems>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems*5,"O beta precisa de profundidade muito superior ao piloto interno.");
 
 assert.deepEqual(PORTUGUESE_DOMAINS.map(domain=>domain.id),["oralidade","leitura","educacao-literaria","escrita","gramatica"]);
@@ -68,6 +70,18 @@ assert.equal(wave1.examCode,"639");
 assert.equal(wave1.wave,1);
 assert.equal(wave1.sourcePolicy,"original-only");
 assert.equal(wave1.productionEligible,false);
+assert.equal(wave2.items.length,16);
+assert.equal(wave2.wave,2);
+assert.equal(wave2.subjectId,"portuguese");
+assert.equal(wave2.examCode,"639");
+assert.equal(wave2.sourcePolicy,"original-only");
+assert.equal(wave2.productionEligible,false);
+assert.equal(wave3.items.length,15);
+assert.equal(wave3.wave,3);
+assert.equal(wave3.subjectId,"portuguese");
+assert.equal(wave3.examCode,"639");
+assert.equal(wave3.sourcePolicy,"original-only");
+assert.equal(wave3.productionEligible,false);
 assert.equal(new Set(allItems.map(item=>item.id)).size,allItems.length,"Os IDs de Português devem ser únicos.");
 assert.equal(new Set(allItems.map(item=>item.stimulus)).size,allItems.length,"Os estímulos devem ser originais e não repetidos.");
 assert.equal(new Set(allItems.map(item=>item.prompt)).size,allItems.length,"Os enunciados devem ser distintos.");
@@ -125,9 +139,15 @@ for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
 }
 assert.equal(new Set(allItems.map(item=>item.competencyId)).size,16,"A primeira vaga deve cobrir todas as competências do exame escrito.");
 const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
-assert.deepEqual(answerPositions,[3,3,3,3],"As respostas corretas A/B/C/D devem ficar equilibradas para não criar pistas artificiais.");
+assert.deepEqual(answerPositions,[6,6,6,6],"As respostas corretas A/B/C/D devem ficar exatamente equilibradas para não criar pistas artificiais.");
+for(const competency of PORTUGUESE_COMPETENCIES.filter(item=>item.writtenExam)){
+  assert.ok(allItems.filter(item=>item.competencyId===competency.id).length>=2,`${competency.id}: a segunda vaga deve garantir profundidade mínima de dois itens.`);
+}
+for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
+  assert.equal(allItems.filter(item=>item.domain===domain).length,15,`${domain}: o piloto deve ter exatamente quinze itens por domínio escrito.`);
+}
 
 assert.match(page,/Português em preparação/);
 assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis/);
 
-console.log("✓ Portuguese 639 foundation: 5 curricular domains · 16 written competencies · 4 response formats · 29 original prototype items · release remains locked");
+console.log("✓ Portuguese 639 foundation: 5 curricular domains · 16 written competencies with depth ≥2 · 15 items/domain · 60 original prototype items · release remains locked");
