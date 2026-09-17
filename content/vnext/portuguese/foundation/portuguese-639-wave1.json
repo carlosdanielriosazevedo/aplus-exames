@@ -1,0 +1,132 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "wave": 1,
+  "sourcePolicy": "original-only",
+  "editorialStatus": "prototype",
+  "productionEligible": false,
+  "items": [
+    {
+      "id":"PT639-FND-013","year":"10.º","domain":"leitura","competencyId":"pt-leitura-inferencia","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Quando a pequena mercearia passou a fechar mais tarde, os moradores elogiaram a mudança. Contudo, ao fim de dois meses, o proprietário retomou o horário antigo: depois das vinte horas, entravam sobretudo pessoas que perguntavam preços e raramente compravam.",
+      "prompt":"Que conclusão pode inferir-se da decisão do proprietário?",
+      "options":["O horário alargado não gerava vendas suficientes para se justificar.","Os moradores tinham deixado de conhecer os preços.","A mercearia passou a vender apenas depois das vinte horas.","O proprietário recusava atender novos clientes."],
+      "answerIndex":0,"explanation":"O texto contrapõe o elogio dos moradores à ausência de compras suficientes no período alargado, o que explica o regresso ao horário anterior.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-014","year":"11.º","domain":"leitura","competencyId":"pt-leitura-organizacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Primeiro, a autora apresenta o crescimento das hortas urbanas. Em seguida, descreve dois projetos desenvolvidos em bairros distintos. Por fim, questiona se estas iniciativas bastam para alterar os hábitos alimentares de uma cidade.",
+      "prompt":"A organização do texto progride de",
+      "options":["uma tese para a sua repetição sem exemplos.","uma conclusão para dados que a contradizem.","um relato pessoal para uma definição técnica.","uma descrição geral para exemplos e, depois, para uma problematização."],
+      "answerIndex":3,"explanation":"A sequência indicada passa do fenómeno geral aos casos concretos e termina numa pergunta crítica sobre o seu alcance.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-015","year":"12.º","domain":"leitura","competencyId":"pt-leitura-informacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "stimulus":"O município instalou sensores para medir o ruído em seis ruas. Os dados serão publicados mensalmente e servirão para avaliar futuras alterações ao trânsito.",
+      "prompt":"Indica a finalidade atribuída no texto aos dados recolhidos.",
+      "acceptedAnswers":["avaliar futuras alterações ao trânsito","avaliar alterações futuras ao trânsito","servir para avaliar futuras alterações ao trânsito"],
+      "explanation":"O segundo período declara explicitamente que os dados servirão para avaliar futuras alterações ao trânsito.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-016","year":"12.º","domain":"leitura","competencyId":"pt-leitura-inferencia","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
+      "stimulus":"A plataforma anunciava que aproximaria leitores e livros. Um ano depois, recomendava a cada utilizador títulos quase idênticos aos que já tinha lido. A escolha tornara-se mais rápida, mas o encontro com o inesperado era cada vez mais raro.",
+      "prompt":"Explica a crítica implícita no texto. Responde em 40 a 70 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica que a personalização facilita a escolha, mas reduz a diversidade e a descoberta.","points":8},{"id":"fundamentacao","label":"Relaciona a interpretação com elementos concretos do texto.","points":3},{"id":"lingua","label":"Escreve com correção linguística suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"O texto critica uma personalização que, embora torne a escolha mais rápida, limita o contacto com obras diferentes. Ao recomendar apenas títulos semelhantes aos já lidos, a plataforma contradiz parcialmente a promessa de aproximar leitores e livros, porque reduz a descoberta do inesperado.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+    },
+    {
+      "id":"PT639-FND-017","year":"10.º","domain":"educacao-literaria","competencyId":"pt-literatura-voz","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Disseram que a praça estava vazia. Eu vi, porém, as janelas inclinadas sobre cada passo e ouvi o silêncio seguir-me até casa.",
+      "prompt":"A presença da primeira pessoa contribui para",
+      "options":["apresentar os acontecimentos como uma lei universal.","eliminar qualquer emoção da descrição.","construir uma perceção subjetiva e inquieta do espaço.","substituir a praça por uma personagem histórica."],
+      "answerIndex":2,"explanation":"As formas «Eu vi», «ouvi» e «seguir-me» filtram o espaço pela perceção pessoal e inquieta do sujeito.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-018","year":"11.º","domain":"educacao-literaria","competencyId":"pt-literatura-forma","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Partiu. / A cadeira ficou diante da mesa. / O chá arrefeceu. / Ninguém terminou a frase.",
+      "prompt":"As frases curtas e a fragmentação formal reforçam sobretudo",
+      "options":["a rapidez festiva do reencontro.","a descrição detalhada da divisão.","a comicidade da conversa interrompida.","a suspensão e o vazio deixados pela partida."],
+      "answerIndex":3,"explanation":"A brevidade e as interrupções reproduzem formalmente a ausência, o silêncio e a sensação de algo inacabado.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-019","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-recursos","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
+      "stimulus":"A cidade mastigava as horas / e devolvia às ruas / apenas o cansaço.",
+      "prompt":"Analisa o efeito da personificação na representação da cidade. Responde em 40 a 70 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Relaciona as ações atribuídas à cidade com desgaste, consumo do tempo e cansaço coletivo.","points":8},{"id":"fundamentacao","label":"Mobiliza elementos concretos dos versos.","points":3},{"id":"lingua","label":"Escreve com correção linguística suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"A personificação apresenta a cidade como um organismo que consome o tempo dos habitantes. Ao «mastigar» as horas e devolver apenas cansaço, o espaço urbano surge como força desgastante, capaz de transformar a passagem do tempo numa experiência coletiva de exaustão.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+    },
+    {
+      "id":"PT639-FND-020","year":"10.º","domain":"educacao-literaria","competencyId":"pt-literatura-temas","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"interpretar",
+      "stimulus":"Na mochila levou apenas uma chave da casa antiga. Não abria porta alguma na cidade nova, mas todas as noites a pousava sobre a mesa.",
+      "prompt":"Indica o valor simbólico da chave no excerto.",
+      "acceptedAnswers":["memória da casa antiga","lembrança da casa antiga","ligação à casa antiga","vínculo ao passado","ligação ao passado"],
+      "explanation":"Sem função prática na cidade nova, a chave conserva uma ligação afetiva à casa anterior e ao passado da personagem.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-021","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-morfologia-semantica","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "stimulus":"Talvez a equipa conclua o projeto ainda hoje.",
+      "prompt":"A palavra «Talvez» exprime um valor de modalidade",
+      "options":["epistémica de possibilidade.","deôntica de obrigação.","apreciativa negativa.","epistémica de certeza."],
+      "answerIndex":0,"explanation":"«Talvez» apresenta a conclusão do projeto como possível, não como certa ou obrigatória.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-022","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "stimulus":"A Leonor encontrou a Marta junto à estação. Esta trazia o livro que ambas procuravam.",
+      "prompt":"Indica o referente do pronome demonstrativo «Esta».",
+      "acceptedAnswers":["a Marta","Marta"],
+      "explanation":"Pela regra de proximidade e pela concordância no feminino singular, «Esta» retoma «a Marta».","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-023","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
+      "stimulus":"Os voluntários consideraram a iniciativa muito útil.",
+      "prompt":"A expressão «muito útil» desempenha a função sintática de",
+      "options":["complemento direto.","modificador do grupo verbal.","predicativo do complemento direto.","complemento oblíquo."],
+      "answerIndex":2,"explanation":"A expressão atribui uma propriedade ao complemento direto «a iniciativa», funcionando como seu predicativo.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-024","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-oracoes","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "stimulus":"A investigadora reviu os dados para que o relatório não contivesse erros.",
+      "prompt":"Classifica a oração «para que o relatório não contivesse erros».",
+      "acceptedAnswers":["oração subordinada adverbial final","subordinada adverbial final","oração final","final"],
+      "explanation":"A oração introduz a finalidade da revisão dos dados e é iniciada pela locução «para que».","gradingMode":"deterministic-with-equivalents","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-025","year":"10.º","domain":"escrita","competencyId":"pt-escrita-revisao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Rascunho: «A ciclovia é usada por muitas pessoas. A ciclovia precisa de manutenção. A ciclovia liga o centro à estação.»",
+      "prompt":"Qual das revisões melhora a coesão sem alterar a informação?",
+      "options":["A ciclovia é usada por muitas pessoas, precisa de manutenção e liga o centro à estação.","A ciclovia liga o centro à estação porque ninguém a utiliza.","Muitas pessoas precisam da estação, mas a manutenção usa a ciclovia.","A manutenção da estação é uma ciclovia usada pelo centro."],
+      "answerIndex":0,"explanation":"A primeira opção elimina repetições por coordenação e omissão controlada do sujeito, preservando as três informações.","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-026","year":"10.º","domain":"escrita","competencyId":"pt-escrita-exposicao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
+      "stimulus":"Uma comunidade de partilha permite emprestar objetos pouco usados, como ferramentas, máquinas de costura ou equipamentos de campismo.",
+      "prompt":"Explica duas vantagens de uma comunidade local de partilha. Escreve entre 80 e 120 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica duas vantagens distintas e pertinentes.","points":6},{"id":"estrutura","label":"Organiza e liga as ideias com progressão clara.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":80,"max":120}
+    },
+    {
+      "id":"PT639-FND-027","year":"11.º","domain":"escrita","competencyId":"pt-escrita-argumentacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
+      "stimulus":"Algumas escolas reservam semanalmente um período sem telemóveis para atividades de leitura, conversa ou trabalho colaborativo.",
+      "prompt":"Defende uma posição sobre a criação desse período semanal. Escreve entre 100 e 150 palavras e apresenta pelo menos dois argumentos.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"argumentacao","label":"Formula uma posição clara e desenvolve dois argumentos pertinentes.","points":6},{"id":"estrutura","label":"Organiza o texto com progressão e conclusão coerentes.","points":4},{"id":"lingua","label":"Usa conectores, vocabulário adequado e correção linguística.","points":3}]},
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
+    },
+    {
+      "id":"PT639-FND-028","year":"12.º","domain":"escrita","competencyId":"pt-escrita-revisao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
+      "stimulus":"Rascunho: «O projeto reduziu o desperdício da cantina. Por exemplo, os alunos passaram a escolher antecipadamente as refeições. Portanto, ainda é necessário avaliar os resultados durante mais tempo.»",
+      "prompt":"Que alteração torna a relação entre as ideias mais adequada?",
+      "options":["Substituir «Por exemplo» por «Contudo».","Eliminar «os alunos» e manter apenas «passaram».","Substituir «durante» por «apesar de».","Substituir «Portanto» por «Ainda assim»."],
+      "answerIndex":3,"explanation":"A última frase introduz uma reserva à conclusão positiva; «Ainda assim» exprime melhor esse contraste do que «Portanto».","gradingMode":"deterministic","maxPoints":13
+    },
+    {
+      "id":"PT639-FND-029","year":"12.º","domain":"escrita","competencyId":"pt-escrita-opiniao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
+      "stimulus":"As cidades podem usar sistemas automáticos para ajustar iluminação, trânsito e consumo de água. Essa eficiência depende, porém, da recolha contínua de dados sobre o espaço público.",
+      "prompt":"Apresenta uma opinião fundamentada sobre o equilíbrio entre eficiência urbana e proteção de dados. Escreve entre 100 e 150 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"posicao","label":"Formula uma posição clara e considera os dois valores em tensão.","points":6},{"id":"fundamentacao","label":"Apresenta razões ou exemplos pertinentes e organiza-os com coerência.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
+    }
+  ]
+}

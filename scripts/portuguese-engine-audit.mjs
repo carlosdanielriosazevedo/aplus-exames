@@ -6,7 +6,8 @@ import {
 } from "../app/lib/portugueseEngine.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
-const items=pilot.items;
+const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
+const items=[...pilot.items,...wave1.items];
 const byId=id=>items.find(item=>item.id===id);
 
 assert.equal(normalizePortugueseAnswer("  ORAÇÃO «completiva». "),"oracao completiva");
@@ -29,7 +30,8 @@ assert.ok(restricted.criteria.every(criterion=>criterion.status==="pending"));
 
 const coverage=portugueseCoverage(items);
 assert.equal(coverage.diagnosticReady,true,"o piloto suporta um diagnóstico interno equilibrado");
-assert.equal(coverage.missionReady,false,"12 itens não podem fingir profundidade suficiente para missões");
+assert.equal(coverage.total,29);
+assert.equal(coverage.missionReady,true,"cada domínio deve ter sete itens realmente elegíveis para missões");
 assert.equal(coverage.pilotReady,false,"a disciplina deve permanecer abaixo do gate de 60 itens");
 assert.equal(coverage.productionEligible,false);
 
@@ -43,8 +45,9 @@ assert.ok(diagnostic.every(item=>item.responseType!=="extended-writing"),"o diag
 
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   const mission=portugueseMissionPool(items,{domain});
-  assert.equal(mission.ready,false,`${domain}: o piloto ainda não deve libertar missões`);
+  assert.equal(mission.ready,true,`${domain}: a primeira vaga deve completar o mínimo estrutural de missão`);
   assert.equal(mission.required,7);
+  assert.ok(mission.items.length>=7);
 }
 
 console.log("✓ Portuguese engine: deterministic answers, conservative open-response grading, balanced diagnostic and release gates validated");

@@ -55,11 +55,13 @@ export function gradePortugueseResponse(item,response){
 
 export function portugueseCoverage(items){
   const byDomain=Object.fromEntries(WRITTEN_DOMAIN_IDS.map(domain=>[domain,items.filter(item=>item.domain===domain).length]));
+  const missionEligibleByDomain=Object.fromEntries(WRITTEN_DOMAIN_IDS.map(domain=>[domain,items.filter(item=>item.domain===domain&&item.responseType!=="extended-writing").length]));
   return {
     total:items.length,
     byDomain,
+    missionEligibleByDomain,
     diagnosticReady:WRITTEN_DOMAIN_IDS.every(domain=>byDomain[domain]>=PORTUGUESE_RELEASE_POLICY.minimumDiagnosticItemsPerDomain),
-    missionReady:WRITTEN_DOMAIN_IDS.every(domain=>byDomain[domain]>=PORTUGUESE_RELEASE_POLICY.minimumMissionItemsPerDomain),
+    missionReady:WRITTEN_DOMAIN_IDS.every(domain=>missionEligibleByDomain[domain]>=PORTUGUESE_RELEASE_POLICY.minimumMissionItemsPerDomain),
     pilotReady:items.length>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems,
     productionEligible:false
   };

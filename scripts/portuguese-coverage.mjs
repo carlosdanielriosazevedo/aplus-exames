@@ -3,10 +3,12 @@ import {readFileSync,writeFileSync} from "node:fs";
 import {PORTUGUESE_COMPETENCIES,PORTUGUESE_DOMAINS} from "../app/data/portugueseFoundation.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
+const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
+const items=[...pilot.items,...wave1.items];
 const outputUrl=new URL("../docs/PORTUGUESE_639_COVERAGE.md",import.meta.url);
 
 const counts=new Map();
-for(const item of pilot.items)counts.set(item.competencyId,(counts.get(item.competencyId)||0)+1);
+for(const item of items)counts.set(item.competencyId,(counts.get(item.competencyId)||0)+1);
 const written=PORTUGUESE_COMPETENCIES.filter(row=>row.writtenExam);
 const covered=written.filter(row=>counts.has(row.id));
 const missing=written.filter(row=>!counts.has(row.id));
@@ -20,7 +22,7 @@ const lines=[
   "",
   "## Estado geral",
   "",
-  `- **${pilot.items.length}** itens originais em protótipo.`,
+  `- **${items.length}** itens originais em protótipo.`,
   `- **${covered.length}/${written.length}** competências do exame escrito com pelo menos um item.`,
   `- **${missing.length}** competências do exame escrito ainda sem item.`,
   `- **${PORTUGUESE_COMPETENCIES.filter(row=>!row.writtenExam).length}** competências de oralidade mapeadas separadamente e excluídas do exame escrito.`,
@@ -48,5 +50,5 @@ if(process.argv.includes("--write")){
   console.log("✓ matriz escrita em docs/PORTUGUESE_639_COVERAGE.md");
 }else{
   assert.equal(readFileSync(outputUrl,"utf8"),report,"A matriz de Português está desatualizada; execute npm run portuguese-coverage.");
-  console.log(`✓ Portuguese 639 coverage: ${pilot.items.length} itens · ${covered.length}/${written.length} competências escritas · release bloqueado`);
+  console.log(`✓ Portuguese 639 coverage: ${items.length} itens · ${covered.length}/${written.length} competências escritas · release bloqueado`);
 }

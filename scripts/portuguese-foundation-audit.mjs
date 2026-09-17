@@ -7,6 +7,8 @@ import {
 import {SECONDARY_EXAM_SUBJECTS,subjectStatusLabel} from "../app/data/subjects.js";
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
+const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
+const allItems=[...pilot.items,...wave1.items];
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 
 const portuguese=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
@@ -19,7 +21,7 @@ assert.equal(subjectStatusLabel(portuguese),"Em preparação");
 assert.equal(PORTUGUESE_RELEASE_POLICY.selectable,false);
 assert.equal(PORTUGUESE_RELEASE_POLICY.productionEligible,false);
 assert.equal(PORTUGUESE_RELEASE_POLICY.extendedWritingFinalAutoGrade,false);
-assert.ok(PORTUGUESE_RELEASE_POLICY.minimumPilotItems>pilot.items.length,"O piloto não pode desbloquear prematuramente a disciplina.");
+assert.ok(PORTUGUESE_RELEASE_POLICY.minimumPilotItems>allItems.length,"O piloto não pode desbloquear prematuramente a disciplina.");
 assert.ok(PORTUGUESE_RELEASE_POLICY.minimumBetaItems>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems*5,"O beta precisa de profundidade muito superior ao piloto interno.");
 
 assert.deepEqual(PORTUGUESE_DOMAINS.map(domain=>domain.id),["oralidade","leitura","educacao-literaria","escrita","gramatica"]);
@@ -60,12 +62,20 @@ assert.equal(pilot.sourcePolicy,"original-only");
 assert.equal(pilot.editorialStatus,"prototype");
 assert.equal(pilot.productionEligible,false);
 assert.equal(pilot.items.length,12);
-assert.equal(new Set(pilot.items.map(item=>item.id)).size,pilot.items.length,"Os IDs do piloto devem ser únicos.");
+assert.equal(wave1.items.length,17);
+assert.equal(wave1.subjectId,"portuguese");
+assert.equal(wave1.examCode,"639");
+assert.equal(wave1.wave,1);
+assert.equal(wave1.sourcePolicy,"original-only");
+assert.equal(wave1.productionEligible,false);
+assert.equal(new Set(allItems.map(item=>item.id)).size,allItems.length,"Os IDs de Português devem ser únicos.");
+assert.equal(new Set(allItems.map(item=>item.stimulus)).size,allItems.length,"Os estímulos devem ser originais e não repetidos.");
+assert.equal(new Set(allItems.map(item=>item.prompt)).size,allItems.length,"Os enunciados devem ser distintos.");
 
 const years=new Set();
 const domains=new Set();
 const usedTypes=new Set();
-for(const item of pilot.items){
+for(const item of allItems){
   years.add(item.year);
   domains.add(item.domain);
   usedTypes.add(item.responseType);
@@ -109,7 +119,15 @@ const extended=pilot.items.filter(item=>item.responseType==="extended-writing");
 assert.equal(extended.length,1);
 assert.equal(extended[0].maxPoints,44,"O piloto preserva a escala de 44 pontos usada na produção escrita de 2025.");
 
+for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
+  const missionEligible=allItems.filter(item=>item.domain===domain&&item.responseType!=="extended-writing");
+  assert.ok(missionEligible.length>=7,`${domain}: a primeira vaga deve garantir sete itens elegíveis para missão.`);
+}
+assert.equal(new Set(allItems.map(item=>item.competencyId)).size,16,"A primeira vaga deve cobrir todas as competências do exame escrito.");
+const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
+assert.deepEqual(answerPositions,[3,3,3,3],"As respostas corretas A/B/C/D devem ficar equilibradas para não criar pistas artificiais.");
+
 assert.match(page,/Português em preparação/);
 assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis/);
 
-console.log("✓ Portuguese 639 foundation: 5 curricular domains · 4 written-exam domains · 4 response formats · 12 original prototype items · release remains locked");
+console.log("✓ Portuguese 639 foundation: 5 curricular domains · 16 written competencies · 4 response formats · 29 original prototype items · release remains locked");
