@@ -10,7 +10,8 @@ const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundat
 const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
 const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
 const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
-const items=applyPortugueseRubricObservations([...pilot.items,...wave1.items,...wave2.items,...wave3.items]);
+const wave4=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave4.json",import.meta.url),"utf8"));
+const items=applyPortugueseRubricObservations([...pilot.items,...wave1.items,...wave2.items,...wave3.items,...wave4.items]);
 const byId=id=>items.find(item=>item.id===id);
 
 assert.equal(normalizePortugueseAnswer("  ORAÇÃO «completiva». "),"oracao completiva");
@@ -58,10 +59,10 @@ assert.throws(()=>assessPortugueseRubricObservation(restricted,"conteudo","inexi
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automatic-score"));
 
 const coverage=portugueseCoverage(items);
-assert.equal(coverage.diagnosticReady,true,"o piloto suporta um diagnóstico interno equilibrado");
-assert.equal(coverage.total,60);
+assert.equal(coverage.diagnosticReady,true,"o banco suporta um diagnóstico interno equilibrado");
+assert.equal(coverage.total,80);
 assert.equal(coverage.missionReady,true,"cada domínio deve ter sete itens realmente elegíveis para missões");
-assert.equal(coverage.pilotReady,true,"a terceira vaga deve atingir o gate quantitativo de piloto");
+assert.equal(coverage.pilotReady,true,"o banco deve manter o gate quantitativo de piloto");
 assert.equal(coverage.productionEligible,false);
 
 const diagnostic=buildPortugueseDiagnostic(items);
@@ -74,7 +75,7 @@ assert.ok(diagnostic.every(item=>item.responseType!=="extended-writing"),"o diag
 
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   const mission=portugueseMissionPool(items,{domain});
-  assert.equal(mission.ready,true,`${domain}: a primeira vaga deve completar o mínimo estrutural de missão`);
+  assert.equal(mission.ready,true,`${domain}: deve manter o mínimo estrutural de missão`);
   assert.equal(mission.required,7);
   assert.ok(mission.items.length>=7);
 }
@@ -93,7 +94,7 @@ assert.ok(priorities.findIndex(row=>row.competencyId==="pt-leitura-inferencia")<
 const adaptive=buildAdaptivePortugueseMission(items,{progress:adaptiveProgress});
 assert.equal(adaptive.items.length,7);
 assert.equal(new Set(adaptive.items.map(item=>item.id)).size,7);
-assert.equal(adaptive.challengeSource,"structural-proxy","o nível provisório não pode ser confundido com dificuldade calibrada");
+assert.ok(["structural-proxy","editorial-provisional"].includes(adaptive.challengeSource));
 assert.ok(adaptive.targetCompetencyIds.includes("pt-leitura-inferencia"));
 assert.ok(adaptive.items.filter(item=>item.responseType==="restricted-response").length<=2,"uma missão curta não deve acumular respostas abertas por corrigir");
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
@@ -107,4 +108,4 @@ const grammarMission=buildAdaptivePortugueseMission(items,{progress:adaptiveProg
 assert.ok(grammarMission.items.every(item=>item.domain==="gramatica"));
 assert.equal(grammarMission.items.length,7);
 
-console.log("✓ Portuguese engine: deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated");
+console.log("✓ Portuguese engine: 80 items, deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated");

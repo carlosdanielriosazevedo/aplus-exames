@@ -6,7 +6,8 @@ const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundat
 const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
 const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
 const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
-const items=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
+const wave4=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave4.json",import.meta.url),"utf8"));
+const items=[...pilot.items,...wave1.items,...wave2.items,...wave3.items,...wave4.items];
 const outputUrl=new URL("../docs/PORTUGUESE_639_COVERAGE.md",import.meta.url);
 
 const counts=new Map();
@@ -45,6 +46,7 @@ const report=lines.join("\n");
 
 assert.equal(pilot.productionEligible,false);
 assert.equal(pilot.sourcePolicy,"original-only");
+assert.equal(wave4.bankSizeAfterWave,80);
 assert.equal([...counts.keys()].every(id=>written.some(row=>row.id===id)),true,"Existem itens fora das competências escritas mapeadas.");
 
 if(process.argv.includes("--write")){
