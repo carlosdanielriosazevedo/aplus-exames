@@ -9,6 +9,8 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRib
 import {Welcome} from "./components/Welcome";
 import {ReviewerDashboard} from "./components/ReviewerDashboard";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
+import {PORTUGUESE_ITEMS} from "./data/portugueseContent";
+import {buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseMissionPool} from "./lib/portugueseEngine";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -236,6 +238,8 @@ export default function App(){
     const preview=typeof window!=="undefined"?new URLSearchParams(window.location.search).get("preview"):null;
     if(preview==="subjects"){
       setScreen("subjectOnboard");
+    }else if(preview==="portuguese"){
+      setScreen("portugueseLab");
     }else if(recoveryError){
       setScreen("diagRecoveryError");
     }else if(recoveredCompletion){
@@ -282,6 +286,7 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
+  if(screen==="portugueseLab")return <PortugueseLab go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
@@ -513,6 +518,82 @@ function SubjectManager({s,setS,go}){
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
     <div className="notice"><b>Português está a ser preparado</b><span>Fica visível para mostrar o próximo passo, mas só será desbloqueado quando diagnóstico, treino e correção escrita cumprirem os critérios de qualidade.</span></div>
+  </Shell>;
+}
+
+const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
+
+function PortugueseLab({go}){
+  const [session,setSession]=useState(null);
+  const [answer,setAnswer]=useState(null);
+  const [feedback,setFeedback]=useState(null);
+  const [results,setResults]=useState([]);
+  const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
+
+  function start(kind,items,label){
+    setSession({kind,label,items,current:0});
+    setAnswer(null);setFeedback(null);setResults([]);
+  }
+
+  function startDiagnostic(){
+    start("diagnostic",buildPortugueseDiagnostic(PORTUGUESE_ITEMS),"Diagnóstico interno");
+  }
+
+  function startMission(domain){
+    const pool=portugueseMissionPool(PORTUGUESE_ITEMS,{domain});
+    start("mission",pool.items.slice(0,7),`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`);
+  }
+
+  if(!session)return <Shell><Back go={go}/><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">LABORATÓRIO INTERNO</p><h1>Português · Prova 639</h1></div></div>
+    <div className="notice warning"><b>Não disponível para alunos</b><span>Este ambiente serve para testar seleção, resposta e correção antes de desbloquear a disciplina.</span></div>
+    <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>16/16</b><span>competências</span></div><div><b>4</b><span>domínios escritos</span></div></div>
+    <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>Testar diagnóstico</b><span>8 itens · 2 por domínio · sem produção extensa</span></button></section>
+    <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens · feedback imediato</span></button>)}</div></section>
+    <div className="notice"><b>Gate quantitativo atingido, publicação bloqueada</b><span>Os 60 itens permitem testar os fluxos. Não substituem revisão editorial, calibração de dificuldade nem validação da correção aberta.</span></div>
+  </Shell>;
+
+  if(session.finished){
+    const finalResults=results;
+    const deterministic=finalResults.filter(result=>result.final&&result.status!=="unanswered");
+    const correct=deterministic.filter(result=>result.correct).length;
+    const awaiting=finalResults.filter(result=>!result.final&&result.status!=="unanswered").length;
+    return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>
+      <div className="portugueseLabStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
+      {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
+      <button className="primary" onClick={()=>setSession(null)}>Voltar ao laboratório</button>
+    </Shell>;
+  }
+
+  const item=session.items[session.current];
+  const isChoice=item.responseType==="multiple-choice";
+  const isShort=item.responseType==="short-answer";
+  const answered=isChoice?Number.isInteger(answer):String(answer??"").trim().length>0;
+
+  function submit(){
+    if(!answered||feedback)return;
+    setFeedback(gradePortugueseResponse(item,answer));
+  }
+
+  function next(){
+    const nextResults=[...results,feedback];
+    if(session.current===session.items.length-1){
+      setResults(nextResults);setSession(current=>({...current,finished:true}));return;
+    }
+    setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);
+  }
+
+  return <Shell><button className="back" onClick={()=>setSession(null)}>← Sair da sessão</button><div className="portugueseRunTop"><div><small>{session.label}</small><b>{PORTUGUESE_DOMAIN_LABELS[item.domain]} · {item.year}</b></div><span>{session.current+1}/{session.items.length}</span></div>
+    <div className="bar portugueseRunBar"><i style={{width:`${((session.current+1)/session.items.length)*100}%`}}/></div>
+    <article className="portugueseQuestion"><div className="portugueseStimulus">{item.stimulus}</div><h2>{item.prompt}</h2>
+      {isChoice?<div className="portugueseOptions">{item.options.map((option,index)=><button type="button" disabled={!!feedback} key={option} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>
+      :isShort?<input className="portugueseShortAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve uma resposta curta"/>
+      :<><textarea className="portugueseOpenAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve a tua resposta…" rows={9}/><small className="portugueseWordCount">{String(answer??"").trim()?String(answer).trim().split(/\s+/).length:0} palavras · recomendado: {item.wordLimit.min}–{item.wordLimit.max}</small></>}
+    </article>
+    {feedback&&<div className={`portugueseFeedback ${feedback.final?(feedback.correct?"correct":"incorrect"):"provisional"}`}><b>{feedback.final?(feedback.correct?"Resposta correta":"Resposta incorreta"):"Resposta guardada — correção provisória"}</b>
+      {feedback.final&&<span>{item.explanation}</span>}
+      {!feedback.final&&<><span>A app não atribuiu pontuação automática. Confere a tua resposta com os critérios:</span><ul>{feedback.criteria.map(criterion=><li key={criterion.id}>{criterion.label} <b>{criterion.points} pt</b></li>)}</ul>{item.referenceAnswer&&<details><summary>Ver resposta de referência</summary><p>{item.referenceAnswer}</p></details>}</>}
+    </div>}
+    {!feedback?<button className="primary" disabled={!answered} onClick={submit}>Responder</button>:<button className="primary" onClick={next}>{session.current===session.items.length-1?"Ver resultado":"Próxima pergunta"}</button>}
   </Shell>;
 }
 

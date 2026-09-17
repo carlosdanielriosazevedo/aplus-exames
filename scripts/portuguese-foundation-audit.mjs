@@ -12,6 +12,7 @@ const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundat
 const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
 const allItems=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 
 const portuguese=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
 assert.ok(portuguese,"Português deve existir no catálogo de disciplinas.");
@@ -150,5 +151,11 @@ for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
 
 assert.match(page,/Português em preparação/);
 assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis/);
+assert.match(page,/preview==="portuguese"/,"O laboratório de Português deve exigir um preview interno explícito.");
+assert.match(page,/function PortugueseLab\(/,"O banco de Português deve estar ligado a um fluxo interno executável.");
+assert.match(page,/buildPortugueseDiagnostic\(PORTUGUESE_ITEMS\)/);
+assert.match(page,/portugueseMissionPool\(PORTUGUESE_ITEMS/);
+assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d)\.json/g)||[]).length,4,"O runtime deve agregar os quatro pacotes do piloto.");
+assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 
 console.log("✓ Portuguese 639 foundation: 5 curricular domains · 16 written competencies with depth ≥2 · 15 items/domain · 60 original prototype items · release remains locked");
