@@ -25,10 +25,14 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.meta.url),"utf8");
 assert.match(page,/if\(screen==="subjectOnboard"\)/);
+assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject manager must have a guarded route");
 assert.match(page,/if\(preview==="subjects"\)/);
 assert.match(welcome,/segment === "parent" \? "parent" : "subjectOnboard"/);
 assert.match(page,/disabled=\{!subject\.available\}/);
 assert.match(page,/Continuar com Matemática A/);
+assert.match(page,/className="subjectSwitcher"/,"the student header must expose the active subject switcher");
+assert.match(page,/normalizeSubjectWorkspace\(base\)/,"legacy saved state must receive a safe active-subject default");
+assert.match(page,/Português está a ser preparado/,"Portuguese must remain visible but explicitly unavailable");
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);
 
-console.log("✓ subjects: official 2026 catalog, one available MVP subject and onboarding route guarded");
+console.log("✓ subjects: official 2026 catalog, persistent switcher, legacy migration and unavailable subjects guarded");
