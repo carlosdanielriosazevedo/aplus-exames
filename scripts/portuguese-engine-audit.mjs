@@ -11,7 +11,8 @@ const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundat
 const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
 const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
 const wave4=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave4.json",import.meta.url),"utf8"));
-const items=applyPortugueseRubricObservations([...pilot.items,...wave1.items,...wave2.items,...wave3.items,...wave4.items]);
+const wave5=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave5.json",import.meta.url),"utf8"));
+const items=applyPortugueseRubricObservations([...pilot.items,...wave1.items,...wave2.items,...wave3.items,...wave4.items,...wave5.items]);
 const byId=id=>items.find(item=>item.id===id);
 
 assert.equal(normalizePortugueseAnswer("  ORAÇÃO «completiva». "),"oracao completiva");
@@ -60,7 +61,7 @@ assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automat
 
 const coverage=portugueseCoverage(items);
 assert.equal(coverage.diagnosticReady,true,"o banco suporta um diagnóstico interno equilibrado");
-assert.equal(coverage.total,80);
+assert.equal(coverage.total,100);
 assert.equal(coverage.missionReady,true,"cada domínio deve ter sete itens realmente elegíveis para missões");
 assert.equal(coverage.pilotReady,true,"o banco deve manter o gate quantitativo de piloto");
 assert.equal(coverage.productionEligible,false);
@@ -108,4 +109,4 @@ const grammarMission=buildAdaptivePortugueseMission(items,{progress:adaptiveProg
 assert.ok(grammarMission.items.every(item=>item.domain==="gramatica"));
 assert.equal(grammarMission.items.length,7);
 
-console.log("✓ Portuguese engine: 80 items, deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated");
+console.log("✓ Portuguese engine: 100 items, deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated");
