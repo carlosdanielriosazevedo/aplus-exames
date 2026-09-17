@@ -61,11 +61,12 @@
       "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
     },
     {
-      "id":"PT639-FND-054","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "id":"PT639-FND-054","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
       "stimulus":"A direção nomeou a Beatriz representante da turma.",
-      "prompt":"Indica a função sintática de «representante da turma».",
-      "acceptedAnswers":["predicativo do complemento direto","predicativo do complemento directo","predicativo do objeto direto"],
-      "explanation":"A expressão atribui uma propriedade ao complemento direto «a Beatriz» e funciona como seu predicativo.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+      "prompt":"Identifica a função sintática de «representante da turma» e explica a relação que estabelece com «a Beatriz». Responde em 30 a 55 palavras.",
+      "rubric":{"maxPoints":13,"criteria":[{"id":"funcao","label":"Identifica «representante da turma» como predicativo do complemento direto.","points":5},{"id":"justificacao","label":"Explica que a expressão atribui uma propriedade ou função ao complemento direto «a Beatriz».","points":6},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
+      "referenceAnswer":"A expressão «representante da turma» é predicativo do complemento direto. O grupo nominal «a Beatriz» funciona como complemento direto de «nomeou», e «representante da turma» atribui-lhe a função resultante dessa nomeação.",
+      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":30,"max":55}
     },
     {
       "id":"PT639-FND-055","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-oracoes","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
@@ -75,7 +76,7 @@
       "explanation":"A locução «Assim que» localiza temporalmente o regresso dos atletas ao campo.","gradingMode":"deterministic","maxPoints":13
     },
     {
-      "id":"PT639-FND-056","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
+      "id":"PT639-FND-056","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"interpretar",
       "stimulus":"O regulamento previa uma exceção. Todavia, ninguém conseguiu demonstrar que aquele caso a justificava.",
       "prompt":"Indica o valor do conector «Todavia».",
       "acceptedAnswers":["valor adversativo","contraste","oposição","valor de contraste","valor de oposição"],
