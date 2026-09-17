@@ -4,7 +4,9 @@ import {PORTUGUESE_COMPETENCIES,PORTUGUESE_DOMAINS} from "../app/data/portuguese
 
 const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
 const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
-const items=[...pilot.items,...wave1.items];
+const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
+const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
+const items=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
 const outputUrl=new URL("../docs/PORTUGUESE_639_COVERAGE.md",import.meta.url);
 
 const counts=new Map();
