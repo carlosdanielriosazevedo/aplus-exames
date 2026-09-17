@@ -33,10 +33,10 @@ export function beginSubjectSession(state,{subjectId,kind,label,domain=null,item
   return putProgress(state,subjectId,{...progress,lastPosition:{kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
-export function advanceSubjectSession(state,subjectId,{current,results,updatedAt=Date.now()}){
+export function advanceSubjectSession(state,subjectId,{current,results,currentResult=null,updatedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   if(!progress.lastPosition)return state;
-  return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),updatedAt},lastActivityAt:updatedAt});
+  return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),updatedAt},lastActivityAt:updatedAt});
 }
 
 export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,completedAt=Date.now()}){

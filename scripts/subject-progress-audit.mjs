@@ -15,8 +15,10 @@ const items=[
   {id:"pt-2",domain:"escrita",competencyId:"pt-escrita-argumentacao"}
 ];
 state=beginSubjectSession(state,{subjectId:"portuguese",kind:"diagnostic",label:"Diagnóstico",items,startedAt:100});
-state=advanceSubjectSession(state,"portuguese",{current:1,results:[{status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"}],updatedAt:110});
+state=advanceSubjectSession(state,"portuguese",{current:1,results:[{status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"}],currentResult:{status:"awaiting-rubric",final:false,points:null,maxPoints:13,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",criteria:[{id:"argumentacao",status:"observed"},{id:"lingua",status:"pending"}]},updatedAt:110});
 assert.equal(subjectProgressFor(state,"portuguese").lastPosition.current,1,"A posição de retoma deve avançar.");
+assert.deepEqual(subjectProgressFor(state,"portuguese").lastPosition.currentResult.rubricEvidence,[{criterionId:"argumentacao",evidence:"observed"},{criterionId:"lingua",evidence:"pending"}],"A retoma deve preservar a autoavaliação parcial sem guardar a resposta.");
+assert.equal("response" in subjectProgressFor(state,"portuguese").lastPosition.currentResult,false);
 
 state=recordSubjectSession(state,{
   subjectId:"portuguese",kind:"diagnostic",label:"Diagnóstico",items,completedAt:120,
