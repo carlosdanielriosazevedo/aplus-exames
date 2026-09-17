@@ -51,6 +51,7 @@ assert.equal(guidance.complete,true);
 assert.equal(guidance.finalScore,null,"a orientação nunca pode ser convertida numa nota");
 assert.equal(guidance.observed.length,1);
 assert.equal(guidance.uncertain.length,2);
+assert.equal(guidance.reviewObservations.length,5,"a orientação deve enumerar observações concretas por rever");
 assert.match(guidance.nextAction,/resposta de referência/);
 assert.throws(()=>assessPortugueseRubricCriterion(restricted,"inexistente","observed"));
 assert.throws(()=>assessPortugueseRubricObservation(restricted,"conteudo","inexistente","observed"));

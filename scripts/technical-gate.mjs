@@ -7,6 +7,7 @@ const checks=[
   ["Motor de Português 639","npm",["run","portuguese-engine:audit"]],
   ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Cenários adversariais das grelhas de Português","npm",["run","portuguese-rubric-scenarios:audit"]],
+  ["Calibração textual das grelhas de Português","npm",["run","portuguese-rubric-text-calibration:audit"]],
   ["Dificuldade editorial de Português","npm",["run","portuguese-difficulty:audit"]],
   ["Progresso isolado por disciplina","npm",["run","subject-progress:audit"]],
   ["Cobertura de Português 639","npm",["run","portuguese-coverage:audit"]],
