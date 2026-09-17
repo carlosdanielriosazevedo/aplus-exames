@@ -54,6 +54,7 @@ const checks=[
   ["Revisões editoriais","npm",["run","editorial-revisions:audit"]],
   ["Pré-revisão QA","npm",["run","pre-review-qa:audit"]],
   ["Validação híbrida","npm",["run","hybrid-validation:audit"]],
+  ["Política de source sem patches textuais","npm",["run","source-rewrite:audit"]],
   ["Higiene do source","npm",["run","source:hygiene"]]
 ];
 
