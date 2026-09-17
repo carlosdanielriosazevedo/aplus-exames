@@ -9,8 +9,9 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRib
 import {Welcome} from "./components/Welcome";
 import {ReviewerDashboard} from "./components/ReviewerDashboard";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
-import {PORTUGUESE_ITEMS} from "./data/portugueseContent";
+import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
 import {buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseMissionPool} from "./lib/portugueseEngine";
+import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -118,7 +119,7 @@ function normalizeSubjectWorkspace(state){
   const selected=[...new Set((state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id)))];
   if(!selected.length)selected.push(DEFAULT_SUBJECT_ID);
   const active=selected.includes(state.activeSubjectId)?state.activeSubjectId:selected[0];
-  return {...state,selectedSubjectIds:selected,activeSubjectId:active};
+  return migrateSubjectProgress({...state,selectedSubjectIds:selected,activeSubjectId:active});
 }
 
 const initial={
@@ -161,6 +162,8 @@ const initial={
   pedagogicalMemoryVersion:2,
   selectedSubjectIds:[],
   activeSubjectId:null,
+  subjectProgress:{},
+  subjectProgressModelVersion:1,
   firstUseTourCompleted:false,
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]}
@@ -286,7 +289,7 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
-  if(screen==="portugueseLab")return <PortugueseLab go={go}/>;
+  if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
@@ -523,16 +526,23 @@ function SubjectManager({s,setS,go}){
 
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
-function PortugueseLab({go}){
+function PortugueseLab({s,setS,go}){
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
   const [results,setResults]=useState([]);
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
+  const progress=subjectProgressFor(s,"portuguese");
+  const competenceRows=Object.entries(progress.competence);
+  const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
+  const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
+  const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
 
-  function start(kind,items,label){
-    setSession({kind,label,items,current:0});
+  function start(kind,items,label,domain=null){
+    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
+    setSession({kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setResults([]);
+    setS(prev=>beginSubjectSession(prev,{subjectId:"portuguese",kind,label,domain,items}));
   }
 
   function startDiagnostic(){
@@ -541,15 +551,36 @@ function PortugueseLab({go}){
 
   function startMission(domain){
     const pool=portugueseMissionPool(PORTUGUESE_ITEMS,{domain});
-    start("mission",pool.items.slice(0,7),`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`);
+    start("mission",pool.items.slice(0,7),`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
+  }
+
+  function resume(){
+    const saved=progress.lastPosition;
+    if(!saved)return;
+    const items=saved.itemIds.map(portugueseItemById).filter(Boolean);
+    if(items.length!==saved.itemIds.length){
+      setS(prev=>resetSubjectProgress(prev,"portuguese"));
+      return;
+    }
+    setSession({kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
+    setResults(saved.results||[]);setAnswer(null);setFeedback(null);
+  }
+
+  function resetPortuguese(){
+    if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
+    setS(prev=>resetSubjectProgress(prev,"portuguese"));
+    setSession(null);setResults([]);setAnswer(null);setFeedback(null);
   }
 
   if(!session)return <Shell><Back go={go}/><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">LABORATÓRIO INTERNO</p><h1>Português · Prova 639</h1></div></div>
     <div className="notice warning"><b>Não disponível para alunos</b><span>Este ambiente serve para testar seleção, resposta e correção antes de desbloquear a disciplina.</span></div>
-    <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>16/16</b><span>competências</span></div><div><b>4</b><span>domínios escritos</span></div></div>
-    <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>Testar diagnóstico</b><span>8 itens · 2 por domínio · sem produção extensa</span></button></section>
+    <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
+    {progress.lastPosition&&<section className="portugueseLabSection"><h2>Continuar</h2><button className="portugueseLabAction featured" onClick={resume}><b>Retomar {progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></button></section>}
+    <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>{progress.diagnosticDone?"Repetir diagnóstico":"Testar diagnóstico"}</b><span>{progress.diagnosticDone?"Concluído · nova tentativa mantém o histórico":"8 itens · 2 por domínio · sem produção extensa"}</span></button></section>
     <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens · feedback imediato</span></button>)}</div></section>
+    {(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><h2>Progresso de Português</h2><div><span>Respostas determinísticas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas pendentes de grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div><small>O texto livre das respostas não é guardado neste histórico.</small></section>}
     <div className="notice"><b>Gate quantitativo atingido, publicação bloqueada</b><span>Os 60 itens permitem testar os fluxos. Não substituem revisão editorial, calibração de dificuldade nem validação da correção aberta.</span></div>
+    {(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}
   </Shell>;
 
   if(session.finished){
@@ -577,8 +608,10 @@ function PortugueseLab({go}){
   function next(){
     const nextResults=[...results,feedback];
     if(session.current===session.items.length-1){
+      setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
       setResults(nextResults);setSession(current=>({...current,finished:true}));return;
     }
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current+1,results:nextResults}));
     setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);
   }
 
