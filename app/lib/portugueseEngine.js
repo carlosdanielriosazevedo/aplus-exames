@@ -93,6 +93,9 @@ export function portugueseRubricGuidance(result){
   const missing=byStatus("not-observed");
   const uncertain=byStatus("unsure");
   const needsReview=[...missing,...partial];
+  const reviewObservations=criteria.flatMap(criterion=>(criterion.observations||[])
+    .filter(observation=>observation.status!=="observed")
+    .map(observation=>({criterionId:criterion.id,criterionLabel:criterion.label,id:observation.id,label:observation.label,status:observation.status})));
   const nextAction=missing.length
     ?"Acrescenta à resposta os elementos que não conseguiste localizar."
     :partial.length
@@ -100,7 +103,7 @@ export function portugueseRubricGuidance(result){
       :uncertain.length
         ?"Compara as tuas dúvidas com a resposta de referência antes de rever o texto."
         :"Os critérios estão identificáveis. Confirma apenas se cada ideia está apoiada no texto ou no enunciado.";
-  return {observed,partial,missing,uncertain,needsReview,nextAction,complete:criteria.length>0&&criteria.every(criterion=>RUBRIC_EVIDENCE_IDS.has(criterion.status)),finalScore:null};
+  return {observed,partial,missing,uncertain,needsReview,reviewObservations,nextAction,complete:criteria.length>0&&criteria.every(criterion=>RUBRIC_EVIDENCE_IDS.has(criterion.status)),finalScore:null};
 }
 
 export function normalizePortugueseAnswer(value){
