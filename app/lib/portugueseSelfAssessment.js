@@ -4,6 +4,9 @@ export const PORTUGUESE_SELF_ASSESSMENT_LEVELS=[
   {id:"not-yet",label:"Ainda não",tone:"attention"}
 ];
 
+const STATUS_RANK={"not-yet":0,partial:1,met:2};
+const STATUS_LABEL={"not-yet":"Ainda não",partial:"Parcial",met:"Cumpri"};
+
 export function criterionFeedback({criterion,status,evidence}){
   const label=String(criterion?.label||"").trim();
   const text=String(evidence||"").trim();
@@ -23,4 +26,42 @@ export function selfAssessmentSummary(criteria=[],assessment={}){
   }
   const next=rows.find(({entry})=>entry.status==="not-yet")||rows.find(({entry})=>entry.status==="partial")||rows.find(({entry})=>!entry.status)||null;
   return {counts,total:rows.length,nextCriterion:next?.criterion||null,complete:rows.length>0&&counts.pending===0};
+}
+
+export function snapshotSelfAssessment(criteria=[],assessment={}){
+  return Object.fromEntries(criteria.map(criterion=>{
+    const entry=assessment?.[criterion.id]||{};
+    return [criterion.id,{status:entry.status||null,evidence:String(entry.evidence||"").trim()}];
+  }));
+}
+
+export function selfAssessmentProgress(criteria=[],before={},after={}){
+  const upgraded=[];
+  const reconsidered=[];
+  const newlyAssessed=[];
+  const evidenceAdded=[];
+  const evidenceChanged=[];
+  const stillNeedsWork=[];
+
+  for(const criterion of criteria){
+    const previous=before?.[criterion.id]||{};
+    const current=after?.[criterion.id]||{};
+    const previousStatus=previous.status||null;
+    const currentStatus=current.status||null;
+    const previousEvidence=String(previous.evidence||"").trim();
+    const currentEvidence=String(current.evidence||"").trim();
+    const base={id:criterion.id,label:criterion.label};
+
+    if(!previousStatus&&currentStatus)newlyAssessed.push({...base,to:STATUS_LABEL[currentStatus]||currentStatus});
+    if(previousStatus&&currentStatus&&STATUS_RANK[currentStatus]>STATUS_RANK[previousStatus])upgraded.push({...base,from:STATUS_LABEL[previousStatus]||previousStatus,to:STATUS_LABEL[currentStatus]||currentStatus});
+    if(previousStatus&&currentStatus&&STATUS_RANK[currentStatus]<STATUS_RANK[previousStatus])reconsidered.push({...base,from:STATUS_LABEL[previousStatus]||previousStatus,to:STATUS_LABEL[currentStatus]||currentStatus});
+    if(!previousEvidence&&currentEvidence)evidenceAdded.push(base);
+    else if(previousEvidence&&currentEvidence&&previousEvidence!==currentEvidence)evidenceChanged.push(base);
+    if(["partial","not-yet"].includes(currentStatus))stillNeedsWork.push({...base,status:STATUS_LABEL[currentStatus]||currentStatus});
+  }
+
+  return {
+    upgraded,reconsidered,newlyAssessed,evidenceAdded,evidenceChanged,stillNeedsWork,
+    changed:upgraded.length+reconsidered.length+newlyAssessed.length+evidenceAdded.length+evidenceChanged.length>0
+  };
 }
