@@ -1,7 +1,7 @@
 "use client";
 
 import {useMemo,useState} from "react";
-import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary} from "../lib/portugueseSelfAssessment";
+import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -38,22 +38,33 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
 
   const setAnswer=value=>setAnswers(current=>({...current,[item.id]:value}));
   const goTo=next=>{setIndex(Math.max(0,Math.min(exam.items.length-1,next)));setMobileTextOpen(false);window.scrollTo?.({top:0,behavior:"smooth"});};
-  const updateCriterion=(itemId,criterionId,patch)=>setSelfAssessment(current=>({
-    ...current,
-    [itemId]:{
-      ...(current[itemId]||{}),
-      [criterionId]:{...(current[itemId]?.[criterionId]||{}),...patch}
-    }
-  }));
+  const updateCriterion=(row,criterionId,patch)=>{
+    const itemId=row.id;
+    const criteria=row.rubric?.criteria||[];
+    const nextItemAssessment={
+      ...(selfAssessment[itemId]||{}),
+      [criterionId]:{...(selfAssessment[itemId]?.[criterionId]||{}),...patch}
+    };
+    setSelfAssessment(current=>({...current,[itemId]:nextItemAssessment}));
+    setRevisions(current=>{
+      const history=current[itemId]||[];
+      if(!history.length)return current;
+      const next=[...history];
+      next[next.length-1]={...next.at(-1),assessmentAfter:snapshotSelfAssessment(criteria,nextItemAssessment)};
+      return {...current,[itemId]:next};
+    });
+  };
   const startRevision=row=>setRevisionDrafts(current=>({...current,[row.id]:String(answers[row.id]||"")}));
   const cancelRevision=itemId=>setRevisionDrafts(current=>{const next={...current};delete next[itemId];return next;});
   const saveRevision=row=>{
     const before=String(answers[row.id]||"").trim();
     const after=String(revisionDrafts[row.id]||"").trim();
     if(!after||after===before)return;
+    const criteria=row.rubric?.criteria||[];
     const assessment=selfAssessment[row.id]||{};
-    const targetedCriterionIds=revisionTargets(row.rubric?.criteria||[],assessment);
-    const revision={before,after,targetedCriterionIds,sequence:(revisions[row.id]||[]).length+1};
+    const assessmentSnapshot=snapshotSelfAssessment(criteria,assessment);
+    const targetedCriterionIds=revisionTargets(criteria,assessment);
+    const revision={before,after,targetedCriterionIds,assessmentBefore:assessmentSnapshot,assessmentAfter:assessmentSnapshot,sequence:(revisions[row.id]||[]).length+1};
     setAnswers(current=>({...current,[row.id]:after}));
     setRevisions(current=>({...current,[row.id]:[...(current[row.id]||[]),revision]}));
     cancelRevision(row.id);
@@ -100,10 +111,10 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                     return <div className="ptx-criterion" key={criterion.id}>
                       <div className="ptx-criterion-copy"><strong>{criterion.label}</strong><span>{criterion.points} pts na grelha editorial</span></div>
                       <div className="ptx-criterion-levels" role="group" aria-label={`Avaliar critério ${criterion.label}`}>
-                        {PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row.id,criterion.id,{status:level.id})}>{level.label}</button>)}
+                        {PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row,criterion.id,{status:level.id})}>{level.label}</button>)}
                       </div>
                       <label className="ptx-evidence-label">Onde está a evidência na tua resposta?
-                        <textarea rows={2} value={evidence.evidence||""} onChange={event=>updateCriterion(row.id,criterion.id,{evidence:event.target.value})} placeholder="Ex.: no 2.º período relacionei a permanência na praça com os encontros e as esplanadas." />
+                        <textarea rows={2} value={evidence.evidence||""} onChange={event=>updateCriterion(row,criterion.id,{evidence:event.target.value})} placeholder="Ex.: no 2.º período relacionei a permanência na praça com os encontros e as esplanadas." />
                       </label>
                       <div className={`ptx-criterion-feedback is-${feedback.kind}`}><strong>{feedback.title}</strong><p>{feedback.message}</p></div>
                     </div>;
@@ -115,14 +126,30 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                   </div>}
                 </section>
                 <section className="ptx-revision-loop" aria-label={`Melhoria da resposta ${row.id}`}>
-                  <div className="ptx-revision-head"><div><span>Segunda versão</span><h4>Melhora a resposta com base na tua autoavaliação</h4></div>{!editing&&<button className="ptx-primary" onClick={()=>startRevision(row)}>Melhorar resposta</button>}</div>
+                  <div className="ptx-revision-head"><div><span>Nova versão</span><h4>Melhora a resposta com base na tua autoavaliação</h4></div>{!editing&&<button className="ptx-primary" onClick={()=>startRevision(row)}>Melhorar resposta</button>}</div>
                   {editing&&<div className="ptx-revision-editor"><textarea rows={7} value={revisionDrafts[row.id]} onChange={event=>setRevisionDrafts(current=>({...current,[row.id]:event.target.value}))}/><div className="ptx-revision-actions"><button className="ptx-ghost" onClick={()=>cancelRevision(row.id)}>Cancelar</button><button className="ptx-primary" disabled={!String(revisionDrafts[row.id]||"").trim()||String(revisionDrafts[row.id]||"").trim()===String(value||"").trim()} onClick={()=>saveRevision(row)}>Guardar nova versão</button></div></div>}
-                  {rowRevisions.map(revision=><div className="ptx-revision-compare" key={revision.sequence}>
-                    <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
-                    <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
-                  </div>)}
+                  {rowRevisions.map(revision=>{
+                    const progress=selfAssessmentProgress(criteria,revision.assessmentBefore||{},revision.assessmentAfter||{});
+                    return <div className="ptx-revision-record" key={revision.sequence}>
+                      <div className="ptx-revision-compare">
+                        <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
+                        <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
+                      </div>
+                      <div className={`ptx-improvement-insight ${progress.changed?"has-change":""}`}>
+                        <strong>O que mudou na tua autoavaliação</strong>
+                        {!progress.changed?<p>Agora volta aos critérios acima e reavalia a nova versão. A app compara a tua própria avaliação antes e depois, sem transformar essa evolução numa nota.</p>:<>
+                          {progress.upgraded.length>0&&<p><b>Critérios que assinalaste como melhores:</b> {progress.upgraded.map(entry=>`${entry.label} (${entry.from} → ${entry.to})`).join(" · ")}</p>}
+                          {progress.newlyAssessed.length>0&&<p><b>Critérios avaliados depois da revisão:</b> {progress.newlyAssessed.map(entry=>`${entry.label} → ${entry.to}`).join(" · ")}</p>}
+                          {progress.evidenceAdded.length>0&&<p><b>Nova evidência identificada:</b> {progress.evidenceAdded.map(entry=>entry.label).join(" · ")}</p>}
+                          {progress.evidenceChanged.length>0&&<p><b>Evidência reformulada:</b> {progress.evidenceChanged.map(entry=>entry.label).join(" · ")}</p>}
+                          {progress.reconsidered.length>0&&<p><b>Critérios que reavaliaste de forma mais exigente:</b> {progress.reconsidered.map(entry=>`${entry.label} (${entry.from} → ${entry.to})`).join(" · ")}</p>}
+                          {progress.stillNeedsWork.length>0&&<p><b>Ainda a trabalhar:</b> {progress.stillNeedsWork.map(entry=>`${entry.label} (${entry.status})`).join(" · ")}</p>}
+                        </>}
+                      </div>
+                    </div>;
+                  })}
                 </section>
-                <p className="ptx-pending-note">A autoavaliação e as versões ficam guardadas nesta tentativa, mas não produzem classificação automática final.</p>
+                <p className="ptx-pending-note">A autoavaliação, a comparação entre versões e a evolução assinalada ficam guardadas nesta tentativa, mas não produzem classificação automática final.</p>
               </>}
             </article>;
           })}

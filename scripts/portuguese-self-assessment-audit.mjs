@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {criterionFeedback,selfAssessmentSummary,PORTUGUESE_SELF_ASSESSMENT_LEVELS} from "../app/lib/portugueseSelfAssessment.js";
+import {criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress,PORTUGUESE_SELF_ASSESSMENT_LEVELS} from "../app/lib/portugueseSelfAssessment.js";
 
 assert.deepEqual(PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=>level.id),["met","partial","not-yet"],"os três estados de autoavaliação devem permanecer estáveis");
 
@@ -34,9 +34,31 @@ assert.equal(summary.counts.withEvidence,1);
 assert.equal(summary.complete,true);
 assert.equal(summary.nextCriterion.id,"fundamentacao","deve priorizar primeiro um critério ainda não demonstrado");
 
+const before=snapshotSelfAssessment(criteria,{
+  conteudo:{status:"partial",evidence:"Identifiquei a intervenção."},
+  fundamentacao:{status:"not-yet",evidence:""}
+});
+const after=snapshotSelfAssessment(criteria,{
+  conteudo:{status:"met",evidence:"Liguei a intervenção à conclusão no segundo período."},
+  fundamentacao:{status:"partial",evidence:"Acrescentei um elemento textual, falta o segundo."}
+});
+const progress=selfAssessmentProgress(criteria,before,after);
+assert.equal(progress.changed,true,"uma revisão com alterações de estado/evidência deve ser reconhecida");
+assert.deepEqual(progress.upgraded.map(entry=>entry.id),["conteudo","fundamentacao"],"a evolução deve refletir apenas mudanças declaradas pelo aluno");
+assert.deepEqual(progress.evidenceAdded.map(entry=>entry.id),["fundamentacao"],"nova evidência deve ser distinguida de evidência reformulada");
+assert.deepEqual(progress.evidenceChanged.map(entry=>entry.id),["conteudo"],"evidência já existente mas alterada deve ficar registada separadamente");
+assert.deepEqual(progress.stillNeedsWork.map(entry=>entry.id),["fundamentacao"],"a síntese deve manter visível o critério ainda parcial");
+
+const stricter=selfAssessmentProgress(criteria,after,{
+  conteudo:{status:"partial",evidence:"Liguei a intervenção à conclusão no segundo período."},
+  fundamentacao:{status:"partial",evidence:"Acrescentei um elemento textual, falta o segundo."}
+});
+assert.equal(stricter.reconsidered.length,1,"uma autoavaliação mais exigente não pode ser apresentada como melhoria automática");
+assert.equal(stricter.reconsidered[0].id,"conteudo");
+
 for(const feedback of [pending,metWithoutEvidence,metWithEvidence,partial,missing]){
   const text=`${feedback.title} ${feedback.message}`.toLowerCase();
   assert.doesNotMatch(text,/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|\b[0-9]+\s*(?:pts|pontos)\b/u,"o feedback pedagógico não deve transformar autoavaliação em classificação");
 }
 
-console.log("✓ autoavaliação Português: estados estáveis · feedback localizado por critério · evidência valorizada · próximo passo priorizado · zero nota automática");
+console.log("✓ autoavaliação Português: estados estáveis · feedback localizado · evolução antes/depois rastreada · evidência nova/reformulada distinguida · reavaliações mais exigentes preservadas · zero nota automática");
