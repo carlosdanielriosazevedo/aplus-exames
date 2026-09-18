@@ -160,7 +160,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                     return <div className="ptx-revision-record" key={revision.sequence}>
                       <div className="ptx-revision-compare">
                         <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
-                        <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id)?.label||id).join(" · "):"revisão geral"}</small>
+                        <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
                       </div>
                       <div className={`ptx-improvement-insight ${progress.changed?"has-change":""}`}>
                         <strong>O que mudou na tua autoavaliação</strong>
