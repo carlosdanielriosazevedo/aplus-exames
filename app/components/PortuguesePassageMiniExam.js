@@ -2,8 +2,8 @@
 
 import {useEffect,useMemo,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
-import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile,writingMemoryPreAnswerFocus} from "../lib/portugueseWritingMemory";
-import {writingResolvedAttentions} from "../lib/portugueseWritingProgress";
+import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
+import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -42,7 +42,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
   const writingProfile=useMemo(()=>writingMemoryProfile(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const writingProgress=useMemo(()=>writingResolvedAttentions(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
-  const activeWritingFocus=useMemo(()=>writingMemoryPreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
+  const activeWritingFocus=useMemo(()=>writingActivePreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
 
   useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
 
@@ -209,7 +209,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
         {item.responseType==="multiple-choice"?<div className="ptx-options">{item.options.map((option,optionIndex)=><button key={optionIndex} className={answers[item.id]===optionIndex?"is-selected":""} onClick={()=>setAnswer(optionIndex)}><span>{String.fromCharCode(65+optionIndex)}</span>{option}</button>)}</div>:<div className="ptx-open-editor">
           {activeWritingFocus.available&&!dismissedWritingFocus[item.id]&&<aside className="ptx-memory-focus" aria-label="Foco antes de responder">
             <div className="ptx-memory-focus-head"><div><span>Memória de escrita</span><strong>Antes de responder, escolhe 1–2 pontos para vigiar</strong></div><button type="button" onClick={()=>setDismissedWritingFocus(current=>({...current,[item.id]:true}))}>Ocultar</button></div>
-            <p>Este lembrete vem apenas das tuas autoavaliações anteriores no mesmo domínio. Não prevê a qualidade desta resposta nem atribui nota.</p>
+            <p>Este lembrete vem apenas das tuas autoavaliações anteriores no mesmo domínio. Pontos que deixaram de ser atenção recorrente nas tentativas recentes deixam de aparecer aqui. Não prevê a qualidade desta resposta nem atribui nota.</p>
             <ul>{activeWritingFocus.rows.map(focus=><li key={focus.criterionId}><b>{focus.prompt}</b><span>{focus.message}</span></li>)}</ul>
           </aside>}
           <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p></div>}
