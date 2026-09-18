@@ -81,6 +81,7 @@
     "portuguese-observation-guidance:audit": "node scripts/portuguese-observation-guidance-audit.mjs",
     "portuguese-boundary-cases:audit": "node scripts/portuguese-boundary-cases-audit.mjs",
     "portuguese-word-limit-ui:audit": "node scripts/portuguese-word-limit-ui-audit.mjs",
+    "portuguese-writing-cycle:audit": "node scripts/portuguese-writing-cycle-all.mjs && node scripts/portuguese-writing-cycle-boundary-audit.mjs && node scripts/portuguese-writing-cycle-copy-audit.mjs && node scripts/portuguese-writing-cycle-integration-audit.mjs && node scripts/portuguese-writing-cycle-readiness.mjs && node scripts/portuguese-writing-cycle-status-audit.mjs",
     "portuguese-difficulty:generate": "node scripts/generate-portuguese-difficulty.mjs",
     "portuguese-difficulty:audit": "node scripts/portuguese-difficulty-audit.mjs",
     "subject-progress:audit": "node scripts/subject-progress-audit.mjs",
