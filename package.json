@@ -70,6 +70,7 @@
     "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
     "portuguese-rubric-scenarios:audit": "node scripts/portuguese-rubric-scenarios-audit.mjs",
     "portuguese-rubric-text-calibration:audit": "node scripts/portuguese-rubric-text-calibration-audit.mjs",
+    "portuguese-observation-guidance:audit": "node scripts/portuguese-observation-guidance-audit.mjs",
     "portuguese-boundary-cases:audit": "node scripts/portuguese-boundary-cases-audit.mjs",
     "portuguese-word-limit-ui:audit": "node scripts/portuguese-word-limit-ui-audit.mjs",
     "portuguese-difficulty:generate": "node scripts/generate-portuguese-difficulty.mjs",

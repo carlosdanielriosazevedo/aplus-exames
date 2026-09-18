@@ -1,6 +1,23 @@
 import assert from "node:assert/strict";
-import {PORTUGUESE_ITEMS} from "../app/data/portugueseContent.js";
+import {readFileSync,readdirSync} from "node:fs";
+import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {portugueseObservationGuidance} from "../app/lib/portugueseObservationGuidance.js";
+
+// Carrega os JSON como dados, sem depender de import assertions de JSON do runtime ESM.
+// Isto mantém o audit executável em Node 20, a mesma versão usada no CI.
+const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const packFiles=readdirSync(contentDir)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
+const rawItems=packFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")).items);
+const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(rawItems);
+
+assert.equal(packFiles.length,6,`esperados 6 pacotes de Português; encontrados ${packFiles.length}`);
+assert.equal(PORTUGUESE_ITEMS.length,100,`esperados 100 itens de Português; encontrados ${PORTUGUESE_ITEMS.length}`);
 
 const openItems=PORTUGUESE_ITEMS.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 let observations=0;
@@ -36,7 +53,9 @@ assert.equal(specificContent,contentObservations,"cobertura específica de conte
 assert.ok(specific>=40,`esperados pelo menos 40 microexemplos específicos; encontrados ${specific}`);
 
 const syntaxItem=PORTUGUESE_ITEMS.find(item=>item.id==="PT639-FND-042");
+assert.ok(syntaxItem,"PT639-FND-042 deve existir no banco");
 const syntaxCriterion=syntaxItem.rubric.criteria.find(criterion=>criterion.id==="funcao");
+assert.ok(syntaxCriterion,"PT639-FND-042 deve manter o critério funcao");
 const syntaxObservation=syntaxCriterion.observations[0];
 const syntaxGuidance=portugueseObservationGuidance(syntaxItem,syntaxCriterion,syntaxObservation);
 assert.equal(syntaxGuidance.specific,true,"o caso sintático deve usar orientação específica");
@@ -44,6 +63,7 @@ assert.match(syntaxGuidance.counts,/predicativo do sujeito/i,"o caso sintático 
 assert.match(syntaxGuidance.notEnough,/complemento oblíquo/i,"o caso sintático deve explicitar uma confusão plausível que não conta");
 
 const writingItem=PORTUGUESE_ITEMS.find(item=>item.id==="PT639-FND-012");
+assert.ok(writingItem,"PT639-FND-012 deve existir no banco");
 for(const criterion of writingItem.rubric.criteria){
   for(const observation of criterion.observations){
     const guidance=portugueseObservationGuidance(writingItem,criterion,observation);
@@ -51,4 +71,4 @@ for(const criterion of writingItem.rubric.criteria){
   }
 }
 
-console.log(`✓ orientação das grelhas de Português: ${openItems.length} perguntas abertas · ${observations} observações · ${specific} microexemplos específicos · conteúdo crítico 100% coberto · zero classificação automática`);
+console.log(`✓ orientação das grelhas de Português: ${packFiles.length} pacotes · ${PORTUGUESE_ITEMS.length} itens · ${openItems.length} perguntas abertas · ${observations} observações · ${specific} microexemplos específicos · conteúdo crítico 100% coberto · zero classificação automática`);
