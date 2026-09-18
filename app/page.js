@@ -11,11 +11,10 @@ import {ReviewerDashboard} from "./components/ReviewerDashboard";
 import PortuguesePassageMiniExam from "./components/PortuguesePassageMiniExam";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
-import portuguesePassageDocument from "../content/vnext/portuguese/portuguese-639-passage-prototypes.json";
+import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence} from "./lib/portugueseEngine";
 import {portugueseObservationGuidance} from "./lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "./lib/portugueseWordLimit";
-import {buildPortuguesePassagePrototypeExam} from "./lib/portuguesePassages";
 import "./portugues-mini-exame/passage-mini-exam.css";
 import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {
@@ -296,7 +295,7 @@ export default function App(){
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
   if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go}/>;
-  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExam exam={buildPortuguesePassagePrototypeExam(portuguesePassageDocument)} onExit={()=>go("portugueseLab")}/>;
+  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExam exam={PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} onExit={()=>go("portugueseLab")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
