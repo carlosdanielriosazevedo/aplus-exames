@@ -8,6 +8,7 @@ const checks=[
   ["Quarta vaga de Português","npm",["run","portuguese-wave4:audit"]],
   ["Quinta vaga de Português","npm",["run","portuguese-wave5:audit"]],
   ["Qualidade global do banco de Português","npm",["run","portuguese-bank-quality:audit"]],
+  ["Forma pedagógica do banco de Português","npm",["run","portuguese-bank-shape:audit"]],
   ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Cenários adversariais das grelhas de Português","npm",["run","portuguese-rubric-scenarios:audit"]],
   ["Calibração textual das grelhas de Português","npm",["run","portuguese-rubric-text-calibration:audit"]],
