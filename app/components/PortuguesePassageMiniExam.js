@@ -1,6 +1,7 @@
 "use client";
 
 import {useMemo,useState} from "react";
+import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary} from "../lib/portugueseSelfAssessment";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -11,12 +12,6 @@ function resultFor(item,value){
   if(item.responseType!=="multiple-choice")return {final:false,correct:null};
   return {final:true,correct:Number.isInteger(value)&&value===item.answerIndex};
 }
-
-const SELF_LEVELS=[
-  {id:"met",label:"Cumpri"},
-  {id:"partial",label:"Parcial"},
-  {id:"not-yet",label:"Ainda não"}
-];
 
 export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const [index,setIndex]=useState(0);
@@ -30,7 +25,6 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const deterministicItems=exam.items.filter(row=>row.responseType==="multiple-choice");
   const deterministicCorrect=deterministicItems.filter(row=>resultFor(row,answers[row.id]).correct).length;
   const openItems=exam.items.filter(row=>row.responseType==="restricted-response");
-  const openPending=openItems.filter(row=>answerFilled(row,answers[row.id])).length;
   const rubricCriteria=openItems.flatMap(row=>(row.rubric?.criteria||[]).map(criterion=>({itemId:row.id,criterionId:criterion.id})));
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
 
@@ -62,6 +56,8 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
             const value=answers[row.id];
             const result=resultFor(row,value);
             const criteria=row.rubric?.criteria||[];
+            const itemAssessment=selfAssessment[row.id]||{};
+            const summary=selfAssessmentSummary(criteria,itemAssessment);
             return <article className="ptx-review-item" key={row.id}>
               <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className="is-pending">Autoavaliação guiada</strong>}</div>
               <h3>{row.prompt}</h3>
@@ -75,17 +71,24 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                 <section className="ptx-self-assessment" aria-label={`Autoavaliação de ${row.id}`}>
                   <div className="ptx-self-head"><div><span>Autoavaliação por critérios</span><h4>Compara a tua resposta com a grelha</h4></div><small>Sem nota automática</small></div>
                   {criteria.map(criterion=>{
-                    const evidence=selfAssessment[row.id]?.[criterion.id]||{};
+                    const evidence=itemAssessment[criterion.id]||{};
+                    const feedback=criterionFeedback({criterion,status:evidence.status,evidence:evidence.evidence});
                     return <div className="ptx-criterion" key={criterion.id}>
                       <div className="ptx-criterion-copy"><strong>{criterion.label}</strong><span>{criterion.points} pts na grelha editorial</span></div>
                       <div className="ptx-criterion-levels" role="group" aria-label={`Avaliar critério ${criterion.label}`}>
-                        {SELF_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row.id,criterion.id,{status:level.id})}>{level.label}</button>)}
+                        {PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row.id,criterion.id,{status:level.id})}>{level.label}</button>)}
                       </div>
                       <label className="ptx-evidence-label">Onde está a evidência na tua resposta?
                         <textarea rows={2} value={evidence.evidence||""} onChange={event=>updateCriterion(row.id,criterion.id,{evidence:event.target.value})} placeholder="Ex.: no 2.º período relacionei a permanência na praça com os encontros e as esplanadas." />
                       </label>
+                      <div className={`ptx-criterion-feedback is-${feedback.kind}`}><strong>{feedback.title}</strong><p>{feedback.message}</p></div>
                     </div>;
                   })}
+                  {criteria.length>0&&<div className="ptx-next-step">
+                    <strong>{summary.complete?"Autoavaliação concluída":"Próximo passo sugerido"}</strong>
+                    <p>{summary.complete?`Revê sobretudo os critérios marcados como “Parcial” (${summary.counts.partial}) ou “Ainda não” (${summary.counts["not-yet"]}) e melhora apenas essas partes da resposta.`:summary.nextCriterion?`Continua pelo critério: ${summary.nextCriterion.label}`:"Continua a comparar a tua resposta com a grelha."}</p>
+                    <span>{summary.counts.withEvidence}/{summary.total} critérios com evidência escrita</span>
+                  </div>}
                 </section>
                 <p className="ptx-pending-note">A autoavaliação fica guardada por critério nesta tentativa, mas não produz classificação automática final.</p>
               </>}
