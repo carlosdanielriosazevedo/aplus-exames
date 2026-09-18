@@ -3,6 +3,24 @@ export function portuguesePassageId(item){
   return id||null;
 }
 
+export function materializePortuguesePassageItems(document){
+  const passages=document?.passages||[];
+  return passages.flatMap(passage=>{
+    const passageId=String(passage?.passageId||"").trim();
+    const passageTitle=String(passage?.title||"").trim();
+    const passageText=String(passage?.text||"").trim();
+    if(!passageId)throw new Error("Passage prototype sem passageId.");
+    if(!passageText)throw new Error(`${passageId}: texto partilhado vazio.`);
+    return (passage.items||[]).map(item=>({
+      ...item,
+      passageId,
+      passageTitle,
+      passageText,
+      stimulus:null
+    }));
+  });
+}
+
 export function validatePortugueseSharedPassages(items){
   const groups=new Map();
   for(const item of items||[]){
