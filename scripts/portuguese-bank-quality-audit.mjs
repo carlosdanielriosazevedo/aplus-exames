@@ -55,7 +55,6 @@ for(const item of items){
   assert(["10.º","11.º","12.º"].includes(item.year),`${item.id}: ano inválido ${item.year}.`);
   assert(typeof item.prompt==="string"&&item.prompt.trim().length>=10,`${item.id}: enunciado demasiado curto/vazio.`);
   assert(typeof item.stimulus==="string"&&item.stimulus.trim().length>=8,`${item.id}: estímulo demasiado curto/vazio.`);
-  assert(typeof item.explanation==="string"&&item.explanation.trim().length>=25,`${item.id}: explicação demasiado curta/vazia.`);
 
   const promptKey=normalize(item.prompt);
   if(prompts.has(promptKey)) fail.push(`Enunciado duplicado: ${item.id} e ${prompts.get(promptKey)}.`);
@@ -63,6 +62,7 @@ for(const item of items){
 
   if(item.responseType==="multiple-choice"){
     multipleChoice++;
+    assert(typeof item.explanation==="string"&&item.explanation.trim().length>=25,`${item.id}: escolha múltipla sem explicação pedagógica suficiente.`);
     assert(Array.isArray(item.options)&&item.options.length===4,`${item.id}: escolha múltipla deve ter exatamente 4 opções.`);
     assert(Number.isInteger(item.answerIndex)&&item.answerIndex>=0&&item.answerIndex<4,`${item.id}: answerIndex inválido.`);
     if(Array.isArray(item.options)){
@@ -86,6 +86,7 @@ for(const item of items){
     currentRunLength=0;
     if(item.responseType==="short-answer"){
       shortAnswer++;
+      assert(typeof item.explanation==="string"&&item.explanation.trim().length>=25,`${item.id}: resposta curta sem explicação pedagógica suficiente.`);
       assert(Array.isArray(item.acceptedAnswers)&&item.acceptedAnswers.length>=1,`${item.id}: short-answer sem equivalentes aceites.`);
       if(Array.isArray(item.acceptedAnswers)){
         const normalized=item.acceptedAnswers.map(normalize);
