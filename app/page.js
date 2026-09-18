@@ -8,11 +8,15 @@ import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculu
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./components/chrome";
 import {Welcome} from "./components/Welcome";
 import {ReviewerDashboard} from "./components/ReviewerDashboard";
+import PortuguesePassageMiniExam from "./components/PortuguesePassageMiniExam";
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
+import portuguesePassageDocument from "../content/vnext/portuguese/portuguese-639-passage-prototypes.json";
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence} from "./lib/portugueseEngine";
 import {portugueseObservationGuidance} from "./lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "./lib/portugueseWordLimit";
+import {buildPortuguesePassagePrototypeExam} from "./lib/portuguesePassages";
+import "./portugues-mini-exame/passage-mini-exam.css";
 import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -292,6 +296,7 @@ export default function App(){
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
   if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go}/>;
+  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExam exam={buildPortuguesePassagePrototypeExam(portuguesePassageDocument)} onExit={()=>go("portugueseLab")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
@@ -589,7 +594,8 @@ function PortugueseLab({s,setS,go}){
     <section className="portugueseLabSection"><h2>Missão adaptativa</h2><button className="portugueseLabAction featured" onClick={startRecommendedMission}><b>Treinar o que mais precisa</b><span>7 itens · competências prioritárias · evita repetição recente</span></button><small className="portugueseMethodNote">A dificuldade é uma classificação editorial provisória. Só será considerada calibrada depois de existirem dados suficientes de alunos.</small></section>
     <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
     {(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><h2>Progresso de Português</h2><div><span>Respostas determinísticas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas pendentes de grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div><small>O texto livre das respostas não é guardado neste histórico.</small></section>}
-    <div className="notice"><b>Gate quantitativo atingido, publicação bloqueada</b><span>Os 60 itens permitem testar os fluxos. Não substituem revisão editorial, calibração de dificuldade nem validação da correção aberta.</span></div>
+    <section className="portugueseLabSection"><h2>Mini-exame</h2><button className="portugueseLabAction featured" onClick={()=>go("portugueseMiniExam")}><b>Testar mini-exame com texto partilhado</b><span>2 textos · 6 questões · leitura e educação literária · revisão no fim</span></button><small className="portugueseMethodNote">Protótipo interno: o texto permanece associado ao grupo de perguntas e as respostas abertas não recebem classificação automática final.</small></section>
+    <div className="notice"><b>Gate quantitativo atingido, publicação bloqueada</b><span>Os 120 itens permitem testar os fluxos. Não substituem revisão editorial, calibração de dificuldade nem validação da correção aberta.</span></div>
     {(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}
   </Shell>;
 
@@ -1938,6 +1944,7 @@ function Progress({s,go}){
 }
 
 function Exams({s,go,startMini}){
+  if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
   const last=s.lastExam;
   const miniQuestions=buildMiniExam(s,8);
   const miniAvailable=miniQuestions.length;
