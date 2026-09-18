@@ -36,6 +36,7 @@ assert.match(component,/const \[revisions,setRevisions\]=useState\(\{\}\)/u,"o h
 assert.match(component,/function revisionTargets/u,"a revisão deve associar a nova versão aos critérios que o aluno tentou melhorar");
 assert.match(component,/\["partial","not-yet"\]/u,"lacunas e cumprimento parcial devem ter prioridade como alvos de melhoria");
 assert.match(component,/targetedCriterionIds/u,"cada revisão deve guardar os critérios trabalhados");
+assert.match(component,/criteria\.find\(criterion=>criterion\.id===id\)\?\.label/u,"o histórico deve resolver o rótulo pelo ID exato do critério trabalhado");
 assert.match(component,/before,after/u,"cada revisão deve preservar explicitamente versões antes e depois");
 assert.match(component,/Melhorar resposta/u,"a revisão deve oferecer uma ação explícita de melhoria");
 assert.match(component,/Guardar nova versão/u,"a nova redação deve ser confirmada antes de substituir a resposta atual");
@@ -45,6 +46,14 @@ assert.match(component,/respostas abertas melhoradas/u,"o resumo deve tornar vis
 assert.match(css,/\.ptx-revision-compare\{[^}]*grid-template-columns:1fr 1fr/u,"desktop deve comparar antes/depois lado a lado");
 assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-revision-compare\{grid-template-columns:1fr\}/u,"mobile deve empilhar a comparação antes/depois");
 
+assert.match(component,/writingMemoryProfile/u,"a revisão deve consumir o perfil agregado da memória de escrita");
+assert.match(component,/excludeAttemptId:attemptId/u,"a tentativa atual não pode fabricar o seu próprio padrão histórico");
+assert.match(component,/Padrões de escrita que tens assinalado/u,"o aluno deve conseguir ver um resumo explícito dos padrões autoassinalados");
+assert.match(component,/Padrão transversal/u,"a UI deve distinguir padrões sustentados em mais de um domínio");
+assert.match(component,/Padrão do domínio/u,"a UI deve distinguir padrões ainda específicos de um domínio");
+assert.match(component,/Só aparece após repetição suficiente/u,"a UI deve explicar o limiar conservador do resumo");
+assert.match(component,/não é uma classificação nem um diagnóstico automático/u,"o perfil agregado deve explicitar que não é nota nem diagnóstico");
+
 assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
@@ -53,4 +62,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
 
-console.log("✓ fluxo Mini-exame Português: autoavaliação por critérios · feedback localizado · ciclo antes/depois com alvos de melhoria · histórico preservado · foundation · zero nota automática");
+console.log("✓ fluxo Mini-exame Português: autoavaliação por critérios · feedback localizado · ciclo antes/depois · memória por domínio + perfil transversal conservador · foundation · zero nota automática");
