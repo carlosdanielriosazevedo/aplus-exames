@@ -1,0 +1,39 @@
+name: Fix Portuguese Wave6 Equivalents
+
+on:
+  push:
+    branches:
+      - codex/portuguese-wave6-balanced
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/portuguese-wave6-balanced
+      - name: Fix normalized duplicate equivalents
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const path='content/vnext/portuguese/foundation/portuguese-639-wave6.json';
+          const data=JSON.parse(fs.readFileSync(path,'utf8'));
+          const byId=id=>data.items.find(item=>item.id===id);
+          byId('PT639-FND-108').acceptedAnswers=['hipérbole','uma hipérbole'];
+          byId('PT639-FND-116').acceptedAnswers=['complemento oblíquo','função de complemento oblíquo'];
+          fs.writeFileSync(path,JSON.stringify(data,null,2)+'\n');
+          NODE
+      - name: Commit fix
+        run: |
+          if git diff --quiet -- content/vnext/portuguese/foundation/portuguese-639-wave6.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/vnext/portuguese/foundation/portuguese-639-wave6.json
+          git commit -m "Corrigir equivalentes normalizados da sexta vaga"
+          git push origin HEAD:codex/portuguese-wave6-balanced
