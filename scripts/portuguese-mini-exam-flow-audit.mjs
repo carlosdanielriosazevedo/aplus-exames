@@ -21,7 +21,7 @@ assert.match(page,/Os 120 itens permitem testar os fluxos/u,"a UI interna não p
 assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null\}\)/u,"o componente deve aceitar saída opcional para integração no fluxo principal");
 assert.match(component,/Sair do mini-exame/u,"a revisão deve permitir sair do fluxo integrado");
 assert.match(component,/>Sair<\/button>/u,"a execução deve permitir sair do fluxo integrado");
-assert.match(component,/não recebe classificação automática final/u,"a integração não pode transformar resposta aberta em nota automática");
+assert.match(component,/não atribui automaticamente uma classificação final/u,"a execução não pode transformar resposta aberta em nota automática");
 assert.match(component,/const \[selfAssessment,setSelfAssessment\]=useState\(\{\}\)/u,"a revisão deve guardar a autoavaliação por critério na tentativa");
 assert.match(component,/SELF_LEVELS/u,"a autoavaliação deve usar estados explícitos e não uma nota automática");
 assert.match(component,/Cumpri/u,"a grelha deve permitir marcar um critério como cumprido");
