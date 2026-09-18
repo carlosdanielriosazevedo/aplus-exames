@@ -29,7 +29,7 @@ jobs:
             git commit -m "Regenerar dificuldade de Português para 100 itens"
             git push
           fi
-      - run: npm ci
+      - run: npm install --no-audit --no-fund
       - name: Capture technical gate
         shell: bash
         run: |
