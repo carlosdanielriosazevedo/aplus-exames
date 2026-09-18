@@ -6,6 +6,7 @@ const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExa
 const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
 const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"utf8");
 const prototypeModule=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
+const progressModule=readFileSync(new URL("../app/lib/portugueseWritingProgress.js",import.meta.url),"utf8");
 
 assert.match(page,/import PortuguesePassageMiniExam from "\.\/components\/PortuguesePassageMiniExam"/u,"o fluxo principal deve importar a experiência dedicada de Português");
 assert.match(page,/PORTUGUESE_PASSAGE_PROTOTYPE_EXAM/u,"o router deve consumir o protótipo através da camada de dados da app");
@@ -62,6 +63,15 @@ assert.match(component,/>Ocultar<\/button>/u,"o foco pedagógico deve ser dispen
 assert.match(css,/\.ptx-memory-focus\{/u,"o foco pré-resposta deve ter apresentação própria e não parecer uma correção final");
 assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-memory-focus-head\{flex-direction:column\}/u,"o foco pré-resposta deve adaptar-se ao mobile");
 
+assert.match(component,/writingResolvedAttentions/u,"a revisão deve consumir a evolução temporal das atenções recorrentes");
+assert.match(component,/const writingProgress=useMemo/u,"a evolução deve ser derivada da memória existente e não guardada como conclusão separada");
+assert.match(component,/Boa evolução nas tuas autoavaliações/u,"a UI deve tornar visível quando uma atenção deixa de ser recorrente nas tentativas recentes");
+assert.match(component,/não uma conclusão definitiva/u,"a UI deve deixar explícito que a evolução recente é reversível");
+assert.match(progressModule,/deixou de aparecer como atenção recorrente por agora/u,"o motor deve usar linguagem reversível em vez de declarar um problema resolvido");
+assert.doesNotMatch(progressModule,/problema resolvido/iu,"o motor não deve declarar a escrita definitivamente resolvida");
+assert.match(css,/\.ptx-progress-story\{/u,"a evolução recente deve ter apresentação própria na revisão");
+assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-progress-story-list\{grid-template-columns:1fr\}/u,"o resumo de evolução deve adaptar-se ao mobile");
+
 assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
@@ -70,4 +80,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
 
-console.log("✓ fluxo Mini-exame Português: foco pré-resposta a partir de atenção recorrente · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
+console.log("✓ fluxo Mini-exame Português: foco pré-resposta · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
