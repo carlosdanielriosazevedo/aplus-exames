@@ -1864,13 +1864,13 @@
         "rubric": 0,
         "wordLimit": 0,
         "stimulusWords": 26,
-        "promptWords": 9
+        "promptWords": 8
       },
       "rationale": [
         "operação cognitiva: reconhecer",
         "formato: multiple-choice",
         "estímulo: 26 palavras",
-        "instrução: 9 palavras"
+        "instrução: 8 palavras"
       ]
     },
     {
