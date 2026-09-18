@@ -1,0 +1,42 @@
+name: Temp isolate Portuguese passage data
+
+on:
+  push:
+    branches:
+      - codex/portuguese-mini-exam-flow
+    paths:
+      - .github/workflows/temp-isolate-portuguese-passage-data.yml
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/portuguese-mini-exam-flow
+      - name: Remove direct editorial source dependency from app router
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const path='app/page.js';
+          let s=fs.readFileSync(path,'utf8');
+          const changes=[
+            ['import portuguesePassageDocument from "../content/vnext/portuguese/portuguese-639-passage-prototypes.json";\n','import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";\n'],
+            ['import {buildPortuguesePassagePrototypeExam} from "./lib/portuguesePassages";\n',''],
+            ['<PortuguesePassageMiniExam exam={buildPortuguesePassagePrototypeExam(portuguesePassageDocument)} onExit={()=>go("portugueseLab")}/>','<PortuguesePassageMiniExam exam={PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} onExit={()=>go("portugueseLab")}/>']
+          ];
+          for(const [from,to] of changes){
+            const n=s.split(from).length-1;
+            if(n!==1)throw new Error(`esperado 1 match para ${from.slice(0,70)}, obtidos ${n}`);
+            s=s.replace(from,to);
+          }
+          fs.writeFileSync(path,s);
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/page.js
+          git commit -m "Isolar fonte editorial do router principal"
+          git push origin HEAD:codex/portuguese-mini-exam-flow
