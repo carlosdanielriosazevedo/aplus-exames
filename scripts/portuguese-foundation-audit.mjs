@@ -156,7 +156,7 @@ const domainCounts=Object.fromEntries(["leitura","educacao-literaria","escrita",
 assert.deepEqual(domainCounts,{leitura:24,"educacao-literaria":24,escrita:28,gramatica:24},"distribuição por domínio desatualizada para o banco de 100 itens");
 
 const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
-assert.deepEqual(answerPositions,[27,17,8,6],"a distribuição atual das respostas corretas A/B/C/D deve ficar explícita enquanto o banco não é reequilibrado editorialmente");
+assert.deepEqual(answerPositions,[17,19,12,10],"a distribuição editorial equilibrada das respostas corretas A/B/C/D deve permanecer explícita e protegida");
 
 assert.match(page,/Português em preparação/);
 assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis/);
