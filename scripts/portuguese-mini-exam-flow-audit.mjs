@@ -45,7 +45,7 @@ assert.match(component,/respostas abertas melhoradas/u,"o resumo deve tornar vis
 assert.match(css,/\.ptx-revision-compare\{[^}]*grid-template-columns:1fr 1fr/u,"desktop deve comparar antes/depois lado a lado");
 assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-revision-compare\{grid-template-columns:1fr\}/u,"mobile deve empilhar a comparação antes/depois");
 
-assert.match(component,/não produzem classificação automática final/u,"autoavaliação e revisões não podem ser convertidas numa classificação final");
+assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
 const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";
