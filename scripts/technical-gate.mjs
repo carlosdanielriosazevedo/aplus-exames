@@ -7,6 +7,7 @@ const checks=[
   ["Motor de Português 639","npm",["run","portuguese-engine:audit"]],
   ["Quarta vaga de Português","npm",["run","portuguese-wave4:audit"]],
   ["Quinta vaga de Português","npm",["run","portuguese-wave5:audit"]],
+  ["Qualidade global do banco de Português","npm",["run","portuguese-bank-quality:audit"]],
   ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Cenários adversariais das grelhas de Português","npm",["run","portuguese-rubric-scenarios:audit"]],
   ["Calibração textual das grelhas de Português","npm",["run","portuguese-rubric-text-calibration:audit"]],
