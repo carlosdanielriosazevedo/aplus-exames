@@ -86,7 +86,9 @@
     "portuguese-difficulty:audit": "node scripts/portuguese-difficulty-audit.mjs",
     "subject-progress:audit": "node scripts/subject-progress-audit.mjs",
     "portuguese-coverage": "node scripts/portuguese-coverage.mjs --write",
-    "portuguese-coverage:audit": "node scripts/portuguese-coverage.mjs --check"
+    "portuguese-coverage:audit": "node scripts/portuguese-coverage.mjs --check",
+    "portuguese-content:coverage": "node scripts/portuguese-content-coverage.mjs",
+    "portuguese-content:priority": "node scripts/portuguese-content-priority.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
