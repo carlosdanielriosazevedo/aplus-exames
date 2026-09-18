@@ -10,8 +10,11 @@ assert.match(component,/exam\.blocks\.find/u,"a questão ativa deve recuperar o 
 assert.match(component,/answers\[row\.id\]/u,"as respostas devem ser persistidas por item durante a navegação");
 assert.match(component,/Rever o exame/u,"o fim do fluxo deve conduzir à revisão, não à correção imediata");
 assert.match(component,/Autoavaliação guiada/u,"respostas abertas devem conduzir à autoavaliação guiada por critérios");
-assert.match(component,/não produz classificação automática final/u,"a UI deve dizer que a autoavaliação não produz nota automática final");
+assert.match(component,/não (?:produz|produzem)[^\n]*classificação automática final/u,"a UI deve dizer que autoavaliação e revisão não produzem nota automática final");
 assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve pedir evidência explícita por critério");
+assert.match(component,/Melhorar resposta/u,"a revisão deve permitir criar uma nova versão depois da autoavaliação");
+assert.match(component,/Antes · versão/u,"a UI deve preservar visualmente a versão anterior");
+assert.match(component,/Depois · versão/u,"a UI deve mostrar a versão melhorada");
 assert.match(component,/Ver texto-base/u,"em ecrãs pequenos deve existir acesso persistente ao texto-base");
 assert.match(component,/Questão \{index\+1\}/u,"a UI deve mostrar a posição da questão");
 assert.match(component,/ptx-question-nav/u,"deve existir navegação direta entre questões");
@@ -25,5 +28,6 @@ assert.match(css,/@media\(max-width:820px\)/u,"deve existir comportamento respon
 assert.match(css,/\.ptx-mobile-text-toggle\{display:block;position:sticky/u,"no mobile o acesso ao texto-base deve permanecer visível");
 assert.match(css,/\.ptx-workspace\{display:grid;grid-template-columns/u,"desktop deve separar texto e questão em duas colunas");
 assert.match(css,/\.ptx-self-assessment\{/u,"a autoavaliação guiada deve ter uma área visual própria");
+assert.match(css,/\.ptx-revision-loop\{/u,"o ciclo de melhoria deve ter uma área visual própria");
 
-console.log("✓ UI texto partilhado Português: texto sticky desktop · acesso sticky mobile · navegação 6 questões · respostas preservadas · autoavaliação guiada com evidência · zero nota automática nas abertas");
+console.log("✓ UI texto partilhado Português: texto sticky · navegação 6 questões · autoavaliação guiada · revisão antes/depois · zero nota automática nas abertas");
