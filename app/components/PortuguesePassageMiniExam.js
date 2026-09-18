@@ -13,12 +13,19 @@ function resultFor(item,value){
   return {final:true,correct:Number.isInteger(value)&&value===item.answerIndex};
 }
 
+function revisionTargets(criteria,assessment){
+  const marked=criteria.filter(criterion=>["partial","not-yet"].includes(assessment[criterion.id]?.status));
+  return (marked.length?marked:criteria.filter(criterion=>!assessment[criterion.id]?.status)).map(criterion=>criterion.id);
+}
+
 export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const [index,setIndex]=useState(0);
   const [answers,setAnswers]=useState({});
   const [review,setReview]=useState(false);
   const [mobileTextOpen,setMobileTextOpen]=useState(false);
   const [selfAssessment,setSelfAssessment]=useState({});
+  const [revisionDrafts,setRevisionDrafts]=useState({});
+  const [revisions,setRevisions]=useState({});
   const item=exam.items[index];
   const block=exam.blocks.find(candidate=>candidate.itemIds.includes(item.id));
   const answeredCount=useMemo(()=>exam.items.filter(row=>answerFilled(row,answers[row.id])).length,[answers,exam.items]);
@@ -27,6 +34,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const openItems=exam.items.filter(row=>row.responseType==="restricted-response");
   const rubricCriteria=openItems.flatMap(row=>(row.rubric?.criteria||[]).map(criterion=>({itemId:row.id,criterionId:criterion.id})));
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
+  const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
 
   const setAnswer=value=>setAnswers(current=>({...current,[item.id]:value}));
   const goTo=next=>{setIndex(Math.max(0,Math.min(exam.items.length-1,next)));setMobileTextOpen(false);window.scrollTo?.({top:0,behavior:"smooth"});};
@@ -37,6 +45,19 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
       [criterionId]:{...(current[itemId]?.[criterionId]||{}),...patch}
     }
   }));
+  const startRevision=row=>setRevisionDrafts(current=>({...current,[row.id]:String(answers[row.id]||"")}));
+  const cancelRevision=itemId=>setRevisionDrafts(current=>{const next={...current};delete next[itemId];return next;});
+  const saveRevision=row=>{
+    const before=String(answers[row.id]||"").trim();
+    const after=String(revisionDrafts[row.id]||"").trim();
+    if(!after||after===before)return;
+    const assessment=selfAssessment[row.id]||{};
+    const targetedCriterionIds=revisionTargets(row.rubric?.criteria||[],assessment);
+    const revision={before,after,targetedCriterionIds,sequence:(revisions[row.id]||[]).length+1};
+    setAnswers(current=>({...current,[row.id]:after}));
+    setRevisions(current=>({...current,[row.id]:[...(current[row.id]||[]),revision]}));
+    cancelRevision(row.id);
+  };
 
   if(review){
     return <main className="ptx-shell">
@@ -48,6 +69,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
         <div><strong>{deterministicCorrect}/{deterministicItems.length}</strong><span>certas nas escolhas múltiplas</span></div>
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
+        <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
       <div className="ptx-review-list">
         {exam.blocks.map((reviewBlock,blockIndex)=><section className="ptx-review-block" key={reviewBlock.key}>
@@ -58,6 +80,8 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
             const criteria=row.rubric?.criteria||[];
             const itemAssessment=selfAssessment[row.id]||{};
             const summary=selfAssessmentSummary(criteria,itemAssessment);
+            const rowRevisions=revisions[row.id]||[];
+            const editing=Object.prototype.hasOwnProperty.call(revisionDrafts,row.id);
             return <article className="ptx-review-item" key={row.id}>
               <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className="is-pending">Autoavaliação guiada</strong>}</div>
               <h3>{row.prompt}</h3>
@@ -66,7 +90,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                 {!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}
                 <p className="ptx-explanation">{row.explanation}</p>
               </>:<>
-                <p className="ptx-open-answer"><b>A tua resposta:</b> {String(value||"").trim()||"—"}</p>
+                <p className="ptx-open-answer"><b>A tua resposta atual:</b> {String(value||"").trim()||"—"}</p>
                 <details><summary>Ver resposta de referência</summary><p>{row.referenceAnswer}</p></details>
                 <section className="ptx-self-assessment" aria-label={`Autoavaliação de ${row.id}`}>
                   <div className="ptx-self-head"><div><span>Autoavaliação por critérios</span><h4>Compara a tua resposta com a grelha</h4></div><small>Sem nota automática</small></div>
@@ -90,7 +114,15 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                     <span>{summary.counts.withEvidence}/{summary.total} critérios com evidência escrita</span>
                   </div>}
                 </section>
-                <p className="ptx-pending-note">A autoavaliação fica guardada por critério nesta tentativa, mas não produz classificação automática final.</p>
+                <section className="ptx-revision-loop" aria-label={`Melhoria da resposta ${row.id}`}>
+                  <div className="ptx-revision-head"><div><span>Segunda versão</span><h4>Melhora a resposta com base na tua autoavaliação</h4></div>{!editing&&<button className="ptx-primary" onClick={()=>startRevision(row)}>Melhorar resposta</button>}</div>
+                  {editing&&<div className="ptx-revision-editor"><textarea rows={7} value={revisionDrafts[row.id]} onChange={event=>setRevisionDrafts(current=>({...current,[row.id]:event.target.value}))}/><div className="ptx-revision-actions"><button className="ptx-ghost" onClick={()=>cancelRevision(row.id)}>Cancelar</button><button className="ptx-primary" disabled={!String(revisionDrafts[row.id]||"").trim()||String(revisionDrafts[row.id]||"").trim()===String(value||"").trim()} onClick={()=>saveRevision(row)}>Guardar nova versão</button></div></div>}
+                  {rowRevisions.map(revision=><div className="ptx-revision-compare" key={revision.sequence}>
+                    <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
+                    <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
+                  </div>)}
+                </section>
+                <p className="ptx-pending-note">A autoavaliação e as versões ficam guardadas nesta tentativa, mas não produzem classificação automática final.</p>
               </>}
             </article>;
           })}
@@ -105,35 +137,14 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
       <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
-
-    <nav className="ptx-question-nav" aria-label="Navegação entre questões">
-      {exam.items.map((row,rowIndex)=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para questão ${rowIndex+1}`}>{rowIndex+1}</button>)}
-    </nav>
-
+    <nav className="ptx-question-nav" aria-label="Navegação entre questões">{exam.items.map((row,rowIndex)=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para questão ${rowIndex+1}`}>{rowIndex+1}</button>)}</nav>
     <button className="ptx-mobile-text-toggle" onClick={()=>setMobileTextOpen(current=>!current)}>{mobileTextOpen?"Fechar texto":"Ver texto-base"}</button>
-
     <div className="ptx-workspace">
-      <aside className={`ptx-passage ${mobileTextOpen?"is-mobile-open":""}`}>
-        <span className="ptx-passage-label">Texto-base · questões {exam.items.indexOf(block.items[0])+1}–{exam.items.indexOf(block.items.at(-1))+1}</span>
-        <h2>{block.title}</h2>
-        <p>{block.passageText}</p>
-      </aside>
-
+      <aside className={`ptx-passage ${mobileTextOpen?"is-mobile-open":""}`}><span className="ptx-passage-label">Texto-base · questões {exam.items.indexOf(block.items[0])+1}–{exam.items.indexOf(block.items.at(-1))+1}</span><h2>{block.title}</h2><p>{block.passageText}</p></aside>
       <section className="ptx-question-card">
-        <div className="ptx-question-meta"><span>Questão {index+1}</span><span>{item.responseType==="multiple-choice"?"Escolha múltipla":"Resposta restrita"}</span></div>
-        <h2>{item.prompt}</h2>
-        {item.responseType==="multiple-choice"?<div className="ptx-options">
-          {item.options.map((option,optionIndex)=><button key={optionIndex} className={answers[item.id]===optionIndex?"is-selected":""} onClick={()=>setAnswer(optionIndex)}><span>{String.fromCharCode(65+optionIndex)}</span>{option}</button>)}
-        </div>:<div className="ptx-open-editor">
-          <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9} />
-          <div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div>
-          <p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p>
-        </div>}
-
-        <div className="ptx-actions">
-          <button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>
-          {index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setReview(true)}>Rever o exame</button>}
-        </div>
+        <div className="ptx-question-meta"><span>Questão {index+1}</span><span>{item.responseType==="multiple-choice"?"Escolha múltipla":"Resposta restrita"}</span></div><h2>{item.prompt}</h2>
+        {item.responseType==="multiple-choice"?<div className="ptx-options">{item.options.map((option,optionIndex)=><button key={optionIndex} className={answers[item.id]===optionIndex?"is-selected":""} onClick={()=>setAnswer(optionIndex)}><span>{String.fromCharCode(65+optionIndex)}</span>{option}</button>)}</div>:<div className="ptx-open-editor"><textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p></div>}
+        <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setReview(true)}>Rever o exame</button>}</div>
       </section>
     </div>
     <footer className="ptx-footer-note">Protótipo editorial · {answeredCount} de {exam.itemCount} questões respondidas · não altera ainda o banco live de Português.</footer>
