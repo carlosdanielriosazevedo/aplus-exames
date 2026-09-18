@@ -1,0 +1,35 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
+    {
+      "passageId": "PT639-PASSAGE-LEITURA-001",
+      "year": "12.º",
+      "domain": "leitura",
+      "title": "Quando a cidade aprende a esperar",
+      "sourceOrigin": "original",
+      "text": "Durante anos, a pequena praça junto à estação foi tratada como um lugar de passagem. Os bancos eram poucos, a sombra quase inexistente e quem saía do comboio atravessava o espaço sem motivo para ficar. Quando o município decidiu remodelá-la, a primeira proposta previa mais estacionamento. Um grupo de moradores sugeriu outra solução: reduzir a circulação automóvel, plantar árvores e criar zonas onde fosse possível sentar, ler ou simplesmente esperar. A mudança foi recebida com desconfiança por alguns comerciantes, que temiam perder clientes. Nos primeiros meses, porém, aconteceu o contrário. As pessoas começaram a permanecer mais tempo na praça e vários estabelecimentos passaram a colocar pequenas esplanadas no exterior. O efeito mais interessante não foi apenas económico. A praça tornou-se um ponto de encontro entre moradores que antes se cruzavam sem parar. Também surgiram pequenas iniciativas culturais, organizadas por associações locais, que usavam o espaço sem necessidade de grandes estruturas. A remodelação não resolveu todos os problemas da zona, mas alterou uma ideia antiga: a de que um espaço público é eficiente apenas quando permite circular depressa. Às vezes, uma cidade funciona melhor quando cria condições para que alguém possa ficar.",
+      "plannedItems": [
+        {"id":"PT639-PASSAGE-LEITURA-001-Q1","competencyId":"pt-leitura-informacao","responseType":"multiple-choice","cognitive":"reconhecer"},
+        {"id":"PT639-PASSAGE-LEITURA-001-Q2","competencyId":"pt-leitura-inferencia","responseType":"multiple-choice","cognitive":"interpretar"},
+        {"id":"PT639-PASSAGE-LEITURA-001-Q3","competencyId":"pt-leitura-organizacao","responseType":"restricted-response","cognitive":"raciocinar"}
+      ]
+    },
+    {
+      "passageId": "PT639-PASSAGE-LIT-001",
+      "year": "12.º",
+      "domain": "educacao-literaria",
+      "title": "A casa que ficava para trás",
+      "sourceOrigin": "original",
+      "text": "Quando fechou a porta pela última vez, Inês não olhou imediatamente para a rua. Ficou com a mão na maçaneta, como se ainda esperasse que a casa lhe devolvesse alguma coisa. Durante vinte anos, aquela entrada fora o começo de todos os regressos: o som das chaves, a luz do corredor, a voz da mãe vinda da cozinha. Agora havia caixas vazias e marcas claras nas paredes onde antes estiveram fotografias. O comprador chegaria na manhã seguinte. Inês desceu dois degraus, voltou a subir um e sorriu da própria hesitação. Tinha passado semanas a dizer que vender era apenas uma decisão prática. A casa era grande, exigia obras, ficava longe do trabalho. Todas as razões estavam certas, mas nenhuma explicava o peso daquela chave no bolso. Antes de entrar no carro, reparou numa janela do primeiro andar. O vidro refletia o céu e, por um instante, pareceu-lhe que a casa já não a reconhecia. Não era tristeza exatamente. Era a sensação desconfortável de perceber que um lugar pode continuar no mesmo sítio depois de deixar de nos pertencer. Inês arrancou devagar. No espelho retrovisor, a fachada diminuiu até caber entre duas árvores e depois desapareceu.",
+      "plannedItems": [
+        {"id":"PT639-PASSAGE-LIT-001-Q1","competencyId":"pt-literatura-voz","responseType":"multiple-choice","cognitive":"interpretar"},
+        {"id":"PT639-PASSAGE-LIT-001-Q2","competencyId":"pt-literatura-temas","responseType":"restricted-response","cognitive":"raciocinar"},
+        {"id":"PT639-PASSAGE-LIT-001-Q3","competencyId":"pt-literatura-forma","responseType":"multiple-choice","cognitive":"interpretar"}
+      ]
+    }
+  ]
+}
