@@ -1,0 +1,29 @@
+name: Diagnose Technical Gate Once
+on:
+  push:
+    branches:
+      - codex/portuguese-wave5-balanced-main
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Capture technical gate
+        shell: bash
+        run: |
+          set +e
+          npm run technical:gate > technical-gate.log 2>&1
+          code=$?
+          echo "$code" > technical-gate-exit.txt
+          exit 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: technical-gate-diagnostic
+          path: |
+            technical-gate.log
+            technical-gate-exit.txt
