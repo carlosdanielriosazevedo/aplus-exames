@@ -20,10 +20,10 @@
       "stimulus": "O centro de ciência abre às nove horas durante a semana e às dez ao fim de semana. A última entrada é permitida uma hora antes do encerramento.",
       "prompt": "Que informação é apresentada explicitamente no texto?",
       "options": [
-        "O centro abre mais cedo ao fim de semana.",
+        "O centro abre às nove horas todos os dias.",
         "A última entrada acontece uma hora antes do encerramento.",
-        "O centro encerra sempre às dez horas.",
-        "A entrada é gratuita durante a semana."
+        "Ao fim de semana, a última entrada acontece às nove horas.",
+        "Durante a semana, o centro encerra às dez horas."
       ],
       "answerIndex": 1,
       "explanation": "O texto afirma diretamente que a última entrada é permitida uma hora antes do encerramento.",
@@ -126,13 +126,13 @@
       "stimulus": "O artigo apresenta primeiro o crescimento do consumo de água numa região, compara depois os setores que mais contribuem para esse aumento e termina discutindo duas medidas de redução do desperdício.",
       "prompt": "A organização do artigo contribui para",
       "options": [
-        "substituir dados por uma narrativa pessoal.",
-        "apresentar apenas consequências sem explicar o problema.",
-        "evitar qualquer relação entre diagnóstico e solução.",
-        "passar do diagnóstico do problema para a comparação de causas e para possíveis respostas."
+        "passar diretamente do problema para soluções, sem analisar os fatores que o explicam.",
+        "organizar a informação apenas por ordem cronológica, sem relacionar causas e respostas.",
+        "apresentar primeiro as medidas e só depois identificar o problema que pretendem resolver.",
+        "passar do diagnóstico do problema para a comparação de fatores e para possíveis respostas."
       ],
       "answerIndex": 3,
-      "explanation": "A progressão organiza o texto do problema inicial para a análise dos contributos e, por fim, para medidas de resposta.",
+      "explanation": "A sequência parte do crescimento do consumo, compara os setores que contribuem para ele e termina em medidas, ligando diagnóstico, análise e resposta.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
@@ -149,9 +149,9 @@
       "prompt": "Em «A noite engoliu as últimas vozes», o recurso expressivo dominante é",
       "options": [
         "a personificação.",
-        "a enumeração.",
+        "a hipérbole.",
         "a comparação.",
-        "a anáfora."
+        "a aliteração."
       ],
       "answerIndex": 0,
       "explanation": "A noite recebe uma ação humana ou animada — «engoliu» —, o que constrói uma personificação.",
@@ -211,10 +211,10 @@
       "stimulus": "Todos os anos regressava à casa vazia para abrir as janelas. Dizia que era para arejar os quartos, mas ficava sempre alguns minutos diante da porta do quarto do pai.",
       "prompt": "O comportamento da personagem revela sobretudo",
       "options": [
-        "indiferença perante a casa e o passado.",
-        "interesse exclusivo pela manutenção do edifício.",
+        "uma preocupação sobretudo prática com a conservação da casa.",
+        "uma tentativa de recuperar exatamente os hábitos familiares do passado.",
         "uma ligação afetiva persistente à memória do pai.",
-        "vontade de vender imediatamente a casa."
+        "um desconforto que leva a personagem a evitar qualquer contacto com recordações."
       ],
       "answerIndex": 2,
       "explanation": "A permanência diante do quarto do pai sugere que o regresso não é apenas prático, mas está ligado à memória afetiva.",
@@ -276,10 +276,10 @@
       "stimulus": "Um texto expositivo sobre alimentação escolar apresenta três benefícios de uma refeição equilibrada, mas mistura exemplos de cada benefício em parágrafos diferentes.",
       "prompt": "Que revisão melhoraria mais a clareza da exposição?",
       "options": [
-        "Eliminar todos os exemplos.",
+        "Reunir todos os exemplos num parágrafo final, separados dos benefícios a que dizem respeito.",
         "Agrupar cada benefício com os exemplos que o explicam.",
-        "Acrescentar opiniões pessoais sem relação com o tema.",
-        "Repetir os três benefícios no fim de cada frase."
+        "Ordenar os exemplos apenas pelo comprimento, mantendo-os afastados das ideias que ilustram.",
+        "Substituir os exemplos por repetições dos benefícios já apresentados."
       ],
       "answerIndex": 1,
       "explanation": "Agrupar cada ideia com os respetivos exemplos torna a progressão expositiva mais clara e facilita a compreensão.",
@@ -298,13 +298,13 @@
       "stimulus": "Tese: «As escolas devem criar mais zonas verdes nos recreios.»",
       "prompt": "Qual opção apresenta uma relação argumentativa mais completa?",
       "options": [
-        "As plantas existem em muitas cores.",
-        "Os recreios são usados durante os intervalos.",
+        "As zonas verdes podem tornar o recreio visualmente mais agradável.",
+        "Várias escolas já têm árvores e canteiros junto aos recreios.",
         "Mais sombra e vegetação podem reduzir o calor e criar espaços de descanso mais confortáveis para os alunos.",
-        "Algumas escolas têm edifícios com vários pisos."
+        "Os recreios são usados por muitos alunos durante os intervalos."
       ],
       "answerIndex": 2,
-      "explanation": "A opção liga diretamente a medida defendida a efeitos relevantes e explicita por que razão esses efeitos sustentam a tese.",
+      "explanation": "A opção correta estabelece uma cadeia explícita entre a medida proposta, os seus efeitos e uma consequência relevante para os alunos; as restantes são observações relacionadas, mas fundamentam a tese de forma incompleta.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
@@ -401,14 +401,11 @@
       "stimulus": "O relatório é breve; ainda assim, apresenta todos os dados essenciais.",
       "prompt": "Indica o valor semântico da expressão «ainda assim».",
       "acceptedAnswers": [
-        "contraste",
-        "valor adversativo",
-        "adversativo",
         "concessão",
         "valor concessivo",
         "concessivo"
       ],
-      "explanation": "A expressão introduz uma ideia que se verifica apesar da expectativa criada pela brevidade do relatório.",
+      "explanation": "A expressão introduz uma ideia que se verifica apesar da expectativa criada pela brevidade do relatório, assumindo valor concessivo.",
       "gradingMode": "deterministic-with-equivalents",
       "maxPoints": 13
     },
