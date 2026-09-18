@@ -1,0 +1,47 @@
+name: Portuguese Authenticity Fix Temp
+
+on:
+  push:
+    branches:
+      - codex/portuguese-authenticity-pass
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/portuguese-authenticity-pass
+      - name: Refine two distractor sets
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const edits=[
+            ['content/vnext/portuguese/foundation/portuguese-639-wave4.json','PT639-FND-078',item=>{
+              item.options[1]='A segunda frase introduz uma ideia diferente da primeira e torna a conclusão menos previsível.';
+              item.options[2]='O problema decorre da repetição de uma ideia secundária, e não da relação lógica entre as frases.';
+            }],
+            ['content/vnext/portuguese/foundation/portuguese-639-wave5.json','PT639-FND-094',item=>{
+              item.options[1]='Mesmo quando distraem, os telemóveis devem substituir outros recursos pedagógicos por serem mais familiares aos alunos.';
+              item.options[2]='Apesar de poderem apoiar algumas atividades, a possibilidade de distração leva a defender a sua retirada das aulas, incluindo atividades pedagógicas orientadas.';
+            }]
+          ];
+          for(const [file,id,edit] of edits){
+            const data=JSON.parse(fs.readFileSync(file,'utf8'));
+            const item=data.items.find(row=>row.id===id);
+            if(!item) throw new Error(`Missing ${id}`);
+            edit(item);
+            fs.writeFileSync(file,JSON.stringify(data,null,2)+'\n');
+          }
+          NODE
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/vnext/portuguese/foundation/portuguese-639-wave4.json content/vnext/portuguese/foundation/portuguese-639-wave5.json
+          git commit -m 'Remover sinais linguísticos denunciadores em Português'
+          git push
