@@ -9,6 +9,7 @@ const byId=id=>{
   assert.ok(item,`${id}: item revisto em falta`);
   return item;
 };
+const wordCount=text=>String(text).trim().split(/\s+/u).filter(Boolean).length;
 
 const revisedIds=[
   "PT639-FND-013","PT639-FND-014","PT639-FND-017","PT639-FND-018","PT639-FND-025","PT639-FND-028",
@@ -32,13 +33,18 @@ for(const id of revisedIds){
     assert.equal(item.options.length,4,`${id}: escolha múltipla deve manter quatro opções`);
     assert.equal(new Set(item.options.map(option=>option.trim().toLocaleLowerCase("pt-PT"))).size,4,`${id}: opções devem ser distintas`);
     assert.ok(Number.isInteger(item.answerIndex)&&item.answerIndex>=0&&item.answerIndex<4,`${id}: answerIndex inválido`);
-    if(longFormCompetencies.has(item.competencyId)){
+
+    const optionWordCounts=item.options.map(wordCount);
+    const labelStyle=optionWordCounts.every(count=>count<=3);
+    if(longFormCompetencies.has(item.competencyId)&&!labelStyle){
       const distractors=item.options.filter((_,index)=>index!==item.answerIndex);
-      assert.ok(distractors.every(option=>option.split(/\s+/u).filter(Boolean).length>=4),`${id}: distrator discursivo demasiado curto/caricatural`);
+      assert.ok(distractors.every(option=>wordCount(option)>=4),`${id}: distrator discursivo demasiado curto/caricatural`);
     }
   }
 }
 
+const connectorLabels=byId("PT639-FND-041").options;
+assert.ok(connectorLabels.every(option=>wordCount(option)<=3),"PT639-FND-041 deve permanecer um item legítimo de rótulos breves");
 assert.deepEqual(byId("PT639-FND-079").acceptedAnswers,[
   "ordenação temporal","sequência temporal","organização temporal","sequenciação temporal",
   "ordenação cronológica","sequência cronológica","organização cronológica","sequenciação cronológica"
@@ -51,4 +57,4 @@ assert.match(byId("PT639-FND-094").options[3],/Embora possam causar distração/
 assert.equal(byId("PT639-FND-096").answerIndex,2);
 assert.match(byId("PT639-FND-096").options[2],/Repete a mesma ideia/u);
 
-console.log(`✓ revisão editorial legado Português: ${revisedIds.length} itens protegidos nas vagas 1–5; distratores discursivos e equivalentes cronológicos validados`);
+console.log(`✓ revisão editorial legado Português: ${revisedIds.length} itens protegidos nas vagas 1–5; rótulos breves distinguidos de distratores discursivos e equivalentes cronológicos validados`);
