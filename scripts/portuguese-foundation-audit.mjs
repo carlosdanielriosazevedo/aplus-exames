@@ -1,18 +1,27 @@
 import assert from "node:assert/strict";
-import {readFileSync} from "node:fs";
+import {readFileSync,readdirSync} from "node:fs";
 import {
   PORTUGUESE_COMPETENCIES,PORTUGUESE_CURRICULUM_GOVERNANCE,PORTUGUESE_DOMAINS,PORTUGUESE_REFERENCE_SOURCES,PORTUGUESE_RELEASE_POLICY,
   PORTUGUESE_RESPONSE_TYPES,PORTUGUESE_YEAR_FOCUS
 } from "../app/data/portugueseFoundation.js";
 import {SECONDARY_EXAM_SUBJECTS,subjectStatusLabel} from "../app/data/subjects.js";
 
-const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
-const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
-const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
-const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
-const allItems=[...pilot.items,...wave1.items,...wave2.items,...wave3.items];
+const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const packFiles=readdirSync(contentDir)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
+const packs=packFiles.map(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")));
+const [pilot,wave1,wave2,wave3,wave4,wave5]=packs;
+const allItems=packs.flatMap(pack=>pack.items);
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
+
+assert.equal(packFiles.length,6,"o runtime atual de Português deve ter piloto + cinco vagas");
+assert.equal(allItems.length,100,"o banco agregado de Português deve conter 100 itens");
 
 const portuguese=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
 assert.ok(portuguese,"Português deve existir no catálogo de disciplinas.");
@@ -24,7 +33,7 @@ assert.equal(subjectStatusLabel(portuguese),"Em preparação");
 assert.equal(PORTUGUESE_RELEASE_POLICY.selectable,false);
 assert.equal(PORTUGUESE_RELEASE_POLICY.productionEligible,false);
 assert.equal(PORTUGUESE_RELEASE_POLICY.extendedWritingFinalAutoGrade,false);
-assert.equal(allItems.length,PORTUGUESE_RELEASE_POLICY.minimumPilotItems,"A terceira vaga deve atingir exatamente o gate quantitativo do piloto.");
+assert.ok(allItems.length>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems,"o banco atual já deve ultrapassar o gate quantitativo mínimo do piloto");
 assert.ok(PORTUGUESE_RELEASE_POLICY.minimumBetaItems>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems*5,"O beta precisa de profundidade muito superior ao piloto interno.");
 
 assert.deepEqual(PORTUGUESE_DOMAINS.map(domain=>domain.id),["oralidade","leitura","educacao-literaria","escrita","gramatica"]);
@@ -65,25 +74,23 @@ assert.equal(pilot.sourcePolicy,"original-only");
 assert.equal(pilot.editorialStatus,"prototype");
 assert.equal(pilot.productionEligible,false);
 assert.equal(pilot.items.length,12);
-assert.equal(wave1.items.length,17);
-assert.equal(wave1.subjectId,"portuguese");
-assert.equal(wave1.examCode,"639");
-assert.equal(wave1.wave,1);
-assert.equal(wave1.sourcePolicy,"original-only");
-assert.equal(wave1.productionEligible,false);
-assert.equal(wave2.items.length,16);
-assert.equal(wave2.wave,2);
-assert.equal(wave2.subjectId,"portuguese");
-assert.equal(wave2.examCode,"639");
-assert.equal(wave2.sourcePolicy,"original-only");
-assert.equal(wave2.productionEligible,false);
-assert.equal(wave3.items.length,15);
-assert.equal(wave3.wave,3);
-assert.equal(wave3.bankSizeAfterWave,60);
-assert.equal(wave3.subjectId,"portuguese");
-assert.equal(wave3.examCode,"639");
-assert.equal(wave3.sourcePolicy,"original-only");
-assert.equal(wave3.productionEligible,false);
+
+for(const [pack,index,expectedItems,bankSize] of [
+  [wave1,1,17,29],
+  [wave2,2,16,45],
+  [wave3,3,15,60],
+  [wave4,4,20,80],
+  [wave5,5,20,100]
+]){
+  assert.equal(pack.wave,index);
+  assert.equal(pack.items.length,expectedItems,`wave${index}: dimensão inesperada`);
+  assert.equal(pack.bankSizeAfterWave,bankSize,`wave${index}: bankSizeAfterWave desatualizado`);
+  assert.equal(pack.subjectId,"portuguese");
+  assert.equal(pack.examCode,"639");
+  assert.equal(pack.sourcePolicy,"original-only");
+  assert.equal(pack.productionEligible,false);
+}
+
 assert.equal(new Set(allItems.map(item=>item.id)).size,allItems.length,"Os IDs de Português devem ser únicos.");
 assert.equal(new Set(allItems.map(item=>item.stimulus)).size,allItems.length,"Os estímulos devem ser originais e não repetidos.");
 assert.equal(new Set(allItems.map(item=>item.prompt)).size,allItems.length,"Os enunciados devem ser distintos.");
@@ -131,23 +138,25 @@ for(const item of allItems){
 assert.deepEqual([...years].sort(),["10.º","11.º","12.º"]);
 assert.deepEqual([...domains].sort(),["educacao-literaria","escrita","gramatica","leitura"]);
 assert.deepEqual([...usedTypes].sort(),["extended-writing","multiple-choice","restricted-response","short-answer"]);
-const extended=pilot.items.filter(item=>item.responseType==="extended-writing");
+const extended=allItems.filter(item=>item.responseType==="extended-writing");
 assert.equal(extended.length,1);
-assert.equal(extended[0].maxPoints,44,"O piloto preserva a escala de 44 pontos usada na produção escrita de 2025.");
+assert.equal(extended[0].maxPoints,44,"O banco preserva a escala de 44 pontos usada na produção escrita de 2025.");
 
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   const missionEligible=allItems.filter(item=>item.domain===domain&&item.responseType!=="extended-writing");
-  assert.ok(missionEligible.length>=7,`${domain}: a primeira vaga deve garantir sete itens elegíveis para missão.`);
+  assert.ok(missionEligible.length>=7,`${domain}: deve existir profundidade suficiente para missões.`);
 }
-assert.equal(new Set(allItems.map(item=>item.competencyId)).size,16,"A primeira vaga deve cobrir todas as competências do exame escrito.");
-const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
-assert.deepEqual(answerPositions,[6,6,6,6],"As respostas corretas A/B/C/D devem ficar exatamente equilibradas para não criar pistas artificiais.");
+assert.equal(new Set(allItems.map(item=>item.competencyId)).size,16,"O banco deve cobrir todas as competências do exame escrito.");
 for(const competency of PORTUGUESE_COMPETENCIES.filter(item=>item.writtenExam)){
-  assert.ok(allItems.filter(item=>item.competencyId===competency.id).length>=2,`${competency.id}: a segunda vaga deve garantir profundidade mínima de dois itens.`);
+  assert.ok(allItems.filter(item=>item.competencyId===competency.id).length>=6,`${competency.id}: o banco de 100 itens deve manter pelo menos seis itens por competência escrita.`);
 }
-for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
-  assert.equal(allItems.filter(item=>item.domain===domain).length,15,`${domain}: o piloto deve ter exatamente quinze itens por domínio escrito.`);
-}
+const domainCounts=Object.fromEntries(["leitura","educacao-literaria","escrita","gramatica"].map(domain=>[domain,allItems.filter(item=>item.domain===domain).length]));
+assert.deepEqual(domainCounts,{leitura:24,"educacao-literaria":24,escrita:28,gramatica:24},"distribuição por domínio desatualizada para o banco de 100 itens");
+
+const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
+const maxAnswerPosition=Math.max(...answerPositions);
+const minAnswerPosition=Math.min(...answerPositions);
+assert.ok(maxAnswerPosition-minAnswerPosition<=1,`As respostas corretas A/B/C/D devem permanecer equilibradas; distribuição atual ${answerPositions.join("/")}`);
 
 assert.match(page,/Português em preparação/);
 assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis/);
@@ -155,7 +164,7 @@ assert.match(page,/preview==="portuguese"/,"O laboratório de Português deve ex
 assert.match(page,/function PortugueseLab\(/,"O banco de Português deve estar ligado a um fluxo interno executável.");
 assert.match(page,/buildPortugueseDiagnostic\(PORTUGUESE_ITEMS\)/);
 assert.match(page,/buildAdaptivePortugueseMission\(PORTUGUESE_ITEMS/);
-assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d)\.json/g)||[]).length,4,"O runtime deve agregar os quatro pacotes do piloto.");
+assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d)\.json/g)||[]).length,6,"O runtime deve agregar piloto + cinco vagas.");
 assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 
-console.log("✓ Portuguese 639 foundation: 5 curricular domains · 16 written competencies with depth ≥2 · 15 items/domain · 60 original prototype items · release remains locked");
+console.log(`✓ Portuguese 639 foundation: 6 pacotes · 5 domínios curriculares · 16 competências escritas com profundidade ≥6 · 100 itens originais · respostas A/B/C/D equilibradas (${answerPositions.join("/")}) · release bloqueado`);
