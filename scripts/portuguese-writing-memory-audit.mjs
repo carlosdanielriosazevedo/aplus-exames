@@ -9,7 +9,7 @@ import {
   writingMemoryProfile,
   assessmentMovement
 } from "../app/lib/portugueseWritingMemory.js";
-import {writingAttentionEvolution,writingResolvedAttentions} from "../app/lib/portugueseWritingProgress.js";
+import {writingAttentionEvolution,writingResolvedAttentions,writingActivePreAnswerFocus} from "../app/lib/portugueseWritingProgress.js";
 
 const item={
   id:"PT-MEM-1",domain:"leitura",competencyId:"pt-leitura-organizacao",responseType:"restricted-response",
@@ -112,6 +112,24 @@ const resolutionSummary=writingResolvedAttentions(recoveryMemory,{domain:"leitur
 assert.equal(resolutionSummary.resolved.length,1,"o resumo deve separar atenções que deixaram de ser recorrentes das que continuam ativas");
 assert.equal(resolutionSummary.stillAttention.length,0);
 
+let resolvedFocusMemory=[];
+for(const [index,status,evidence] of [
+  [0,"not-yet",""],
+  [1,"partial","um elemento"],
+  [2,"partial","outro elemento"],
+  [3,"met","duas passagens concretas"],
+  [4,"met","evidência completa"]
+]){
+  resolvedFocusMemory=recordPortugueseWritingMemory(resolvedFocusMemory,{attemptId:`rf${index+1}`,item:{...item,id:`RF-${index+1}`},at:index+1,assessment:{fundamentacao:{status,evidence}}});
+}
+assert.equal(writingMemoryPreAnswerFocus(resolvedFocusMemory,item).available,true,"o histórico agregado ainda pode parecer atenção quando o passado pesa mais do que as duas melhorias recentes");
+const quietFocus=writingActivePreAnswerFocus(resolvedFocusMemory,item);
+assert.equal(quietFocus.available,false,"um critério que deixou de ser atenção recorrente não deve continuar a surgir antes de responder");
+assert.equal(quietFocus.suppressedResolved.length,1,"a supressão deve ser explícita e auditável");
+assert.equal(quietFocus.suppressedResolved[0].criterionId,"fundamentacao");
+resolvedFocusMemory=recordPortugueseWritingMemory(resolvedFocusMemory,{attemptId:"rf6",item:{...item,id:"RF-6"},at:6,assessment:{fundamentacao:{status:"partial",evidence:"um elemento"}}});
+assert.equal(writingActivePreAnswerFocus(resolvedFocusMemory,item).available,true,"se a atenção reaparecer numa tentativa recente, o lembrete deve poder regressar");
+
 const movement=assessmentMovement({conteudo:{status:"not-yet"},fundamentacao:{status:"met"}},{conteudo:{status:"partial"},fundamentacao:{status:"partial"}});
 assert.equal(movement.find(row=>row.criterionId==="conteudo").direction,"up");
 assert.equal(movement.find(row=>row.criterionId==="fundamentacao").direction,"down");
@@ -128,4 +146,4 @@ for(const text of [
   assert.doesNotMatch(String(text||"").toLowerCase(),/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|diagnóstico automático|\b[0-9]+\s*(?:pts|pontos)\b/u,"a memória pedagógica não deve transformar autoavaliações em classificação");
 }
 
-console.log("✓ memória de escrita Português: foco pré-resposta · perfil transversal · atenção pode deixar de ser recorrente só após 2 Cumpri consecutivos com evidência · zero nota automática");
+console.log("✓ memória de escrita Português: foco pré-resposta · atenção resolvida deixa de gerar lembrete e pode regressar se o padrão reaparecer · perfil transversal · zero nota automática");

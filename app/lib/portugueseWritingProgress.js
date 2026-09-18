@@ -1,4 +1,4 @@
-import {normalizePortugueseWritingMemory} from "./portugueseWritingMemory.js";
+import {normalizePortugueseWritingMemory,writingMemoryPreAnswerFocus} from "./portugueseWritingMemory.js";
 
 const STATUS_RANK={"not-yet":0,partial:1,met:2};
 
@@ -69,5 +69,20 @@ export function writingResolvedAttentions(memory,{domain=null,excludeAttemptId=n
     rows:rowsByCriterion,
     resolved:rowsByCriterion.filter(result=>result.resolved),
     stillAttention:rowsByCriterion.filter(result=>!result.resolved)
+  };
+}
+
+export function writingActivePreAnswerFocus(memory,item,{excludeAttemptId=null,minObservations=2,maxRows=2,minAttentionAttempts=2,recentWindow=2}={}){
+  const focus=writingMemoryPreAnswerFocus(memory,item,{excludeAttemptId,minObservations,maxRows});
+  if(!focus.available)return {...focus,suppressedResolved:[]};
+  const progress=writingResolvedAttentions(memory,{domain:item?.domain||null,excludeAttemptId,minAttentionAttempts,recentWindow});
+  const resolvedIds=new Set(progress.resolved.map(row=>row.criterionId));
+  const suppressedResolved=focus.rows.filter(row=>resolvedIds.has(row.criterionId));
+  const rows=focus.rows.filter(row=>!resolvedIds.has(row.criterionId));
+  return {
+    ...focus,
+    available:rows.length>0,
+    rows,
+    suppressedResolved
   };
 }
