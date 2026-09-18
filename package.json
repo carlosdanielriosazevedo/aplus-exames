@@ -71,6 +71,7 @@
     "portuguese-bank-shape:audit": "node scripts/portuguese-bank-shape-audit.mjs",
     "portuguese-editorial-depth:audit": "node scripts/portuguese-editorial-depth-audit.mjs",
     "portuguese-editorial-legacy:audit": "node scripts/portuguese-editorial-legacy-audit.mjs",
+    "portuguese-exam-authenticity:audit": "node scripts/portuguese-exam-authenticity-audit.mjs",
     "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
     "portuguese-rubric-scenarios:audit": "node scripts/portuguese-rubric-scenarios-audit.mjs",
     "portuguese-rubric-text-calibration:audit": "node scripts/portuguese-rubric-text-calibration-audit.mjs",
