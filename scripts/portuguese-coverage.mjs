@@ -1,14 +1,18 @@
 import assert from "node:assert/strict";
-import {readFileSync,writeFileSync} from "node:fs";
+import {readFileSync,readdirSync,writeFileSync} from "node:fs";
 import {PORTUGUESE_COMPETENCIES,PORTUGUESE_DOMAINS} from "../app/data/portugueseFoundation.js";
 
-const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
-const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
-const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
-const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
-const wave4=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave4.json",import.meta.url),"utf8"));
-const wave5=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave5.json",import.meta.url),"utf8"));
-const items=[...pilot.items,...wave1.items,...wave2.items,...wave3.items,...wave4.items,...wave5.items];
+const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const packFiles=readdirSync(contentDir)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
+const packs=packFiles.map(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")));
+const items=packs.flatMap(pack=>pack.items);
+const latestDeclared=[...packs].reverse().find(pack=>Number.isInteger(pack.bankSizeAfterWave))?.bankSizeAfterWave||items.length;
 const outputUrl=new URL("../docs/PORTUGUESE_639_COVERAGE.md",import.meta.url);
 
 const counts=new Map();
@@ -45,10 +49,9 @@ const lines=[
 ];
 const report=lines.join("\n");
 
-assert.equal(pilot.productionEligible,false);
-assert.equal(pilot.sourcePolicy,"original-only");
-assert.equal(wave4.bankSizeAfterWave,80);
-assert.equal(wave5.bankSizeAfterWave,100);
+assert.equal(packs[0]?.productionEligible,false);
+assert.equal(packs[0]?.sourcePolicy,"original-only");
+assert.equal(items.length,latestDeclared,"o tamanho agregado deve coincidir com bankSizeAfterWave da vaga mais recente");
 assert.equal([...counts.keys()].every(id=>written.some(row=>row.id===id)),true,"Existem itens fora das competências escritas mapeadas.");
 
 if(process.argv.includes("--write")){

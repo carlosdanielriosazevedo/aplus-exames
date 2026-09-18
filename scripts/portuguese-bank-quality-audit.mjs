@@ -1,15 +1,14 @@
-import {readFileSync} from "node:fs";
+import {readFileSync,readdirSync} from "node:fs";
 import {join} from "node:path";
 
 const root="content/vnext/portuguese/foundation";
-const files=[
-  "portuguese-639-pilot.json",
-  "portuguese-639-wave1.json",
-  "portuguese-639-wave2.json",
-  "portuguese-639-wave3.json",
-  "portuguese-639-wave4.json",
-  "portuguese-639-wave5.json"
-];
+const files=readdirSync(root)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
 
 const normalize=value=>String(value??"")
   .normalize("NFD")
@@ -21,11 +20,12 @@ const normalize=value=>String(value??"")
 
 const packages=files.map(name=>({name,data:JSON.parse(readFileSync(join(root,name),"utf8"))}));
 const items=packages.flatMap(({name,data})=>data.items.map(item=>({...item,__file:name})));
+const expectedSize=[...packages].reverse().find(({data})=>Number.isInteger(data.bankSizeAfterWave))?.data.bankSizeAfterWave||items.length;
 const fail=[];
 const assert=(condition,message)=>{if(!condition)fail.push(message);};
 
-assert(packages.length===6,`Esperados 6 pacotes, encontrados ${packages.length}.`);
-assert(items.length===100,`Esperados 100 itens, encontrados ${items.length}.`);
+assert(packages.length>=1,`Nenhum pacote de Português encontrado.`);
+assert(items.length===expectedSize,`O último pacote declara ${expectedSize} itens, encontrados ${items.length}.`);
 for(const {name,data} of packages){
   assert(data.subjectId==="portuguese",`${name}: subjectId inválido.`);
   assert(data.examCode==="639",`${name}: examCode inválido.`);
@@ -36,7 +36,6 @@ for(const {name,data} of packages){
 
 const ids=new Map();
 const prompts=new Map();
-const optionRuns=[];
 const answerPositionCounts=[0,0,0,0];
 const answerPositionByFile=new Map();
 let currentRun=null;
@@ -79,7 +78,6 @@ for(const item of items){
       if(currentRun===item.answerIndex) currentRunLength++;
       else { currentRun=item.answerIndex; currentRunLength=1; }
       longestRun=Math.max(longestRun,currentRunLength);
-      optionRuns.push({id:item.id,index:item.answerIndex,run:currentRunLength});
     }
   }else{
     currentRun=null;
@@ -103,7 +101,7 @@ for(const item of items){
   }
 }
 
-assert(ids.size===100,`IDs únicos: esperados 100, encontrados ${ids.size}.`);
+assert(ids.size===items.length,`IDs únicos: esperados ${items.length}, encontrados ${ids.size}.`);
 
 if(multipleChoice){
   const max=Math.max(...answerPositionCounts);

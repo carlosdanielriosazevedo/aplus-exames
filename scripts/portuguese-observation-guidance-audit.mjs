@@ -13,11 +13,12 @@ const packFiles=readdirSync(contentDir)
     if(b.includes("pilot"))return 1;
     return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
   });
-const rawItems=packFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")).items);
+const packs=packFiles.map(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")));
+const rawItems=packs.flatMap(pack=>pack.items);
 const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(rawItems);
+const expectedTotal=[...packs].reverse().find(pack=>Number.isInteger(pack.bankSizeAfterWave))?.bankSizeAfterWave||PORTUGUESE_ITEMS.length;
 
-assert.equal(packFiles.length,6,`esperados 6 pacotes de Português; encontrados ${packFiles.length}`);
-assert.equal(PORTUGUESE_ITEMS.length,100,`esperados 100 itens de Português; encontrados ${PORTUGUESE_ITEMS.length}`);
+assert.equal(PORTUGUESE_ITEMS.length,expectedTotal,`o audit deve cobrir o banco completo: esperado ${expectedTotal}, encontrado ${PORTUGUESE_ITEMS.length}`);
 
 const openItems=PORTUGUESE_ITEMS.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 let observations=0;
@@ -46,7 +47,7 @@ for(const item of openItems){
   }
 }
 
-assert.equal(openItems.length,24,`esperadas 24 perguntas abertas; encontradas ${openItems.length}`);
+assert.equal(openItems.length,24,`a sexta vaga é determinística; esperadas 24 perguntas abertas já calibradas, encontradas ${openItems.length}`);
 assert.ok(observations>=100,`cobertura insuficiente de observações: ${observations}`);
 assert.equal(missingCritical.length,0,`todas as observações de conteúdo devem ter microexemplos específicos: ${missingCritical.join(", ")}`);
 assert.equal(specificContent,contentObservations,"cobertura específica de conteúdo deve ser total");

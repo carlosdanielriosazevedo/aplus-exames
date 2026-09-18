@@ -1,15 +1,14 @@
-import {readFileSync} from "node:fs";
+import {readFileSync,readdirSync} from "node:fs";
 import {join} from "node:path";
 
 const root="content/vnext/portuguese/foundation";
-const files=[
-  "portuguese-639-pilot.json",
-  "portuguese-639-wave1.json",
-  "portuguese-639-wave2.json",
-  "portuguese-639-wave3.json",
-  "portuguese-639-wave4.json",
-  "portuguese-639-wave5.json"
-];
+const files=readdirSync(root)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
 const packs=files.map(name=>JSON.parse(readFileSync(join(root,name),"utf8")));
 const items=packs.flatMap(pack=>pack.items);
 const difficulty=JSON.parse(readFileSync(join(root,"portuguese-639-difficulty.json"),"utf8"));

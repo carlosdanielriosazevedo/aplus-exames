@@ -1,20 +1,26 @@
 import assert from "node:assert/strict";
-import {readFileSync} from "node:fs";
+import {readFileSync,readdirSync} from "node:fs";
 import {
   PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricCriterion,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,normalizePortugueseAnswer,
   portugueseCompetencePriorities,portugueseCoverage,portugueseMissionPool,portugueseRubricGuidance,portugueseStructuralChallenge,portugueseWordCount,restorePortugueseRubricEvidence,rubricEvidenceSnapshot,rubricObservationEvidenceSnapshot
 } from "../app/lib/portugueseEngine.js";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 
-const pilot=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-pilot.json",import.meta.url),"utf8"));
-const wave1=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave1.json",import.meta.url),"utf8"));
-const wave2=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave2.json",import.meta.url),"utf8"));
-const wave3=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave3.json",import.meta.url),"utf8"));
-const wave4=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave4.json",import.meta.url),"utf8"));
-const wave5=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/foundation/portuguese-639-wave5.json",import.meta.url),"utf8"));
-const items=applyPortugueseRubricObservations([...pilot.items,...wave1.items,...wave2.items,...wave3.items,...wave4.items,...wave5.items]);
+const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const packFiles=readdirSync(contentDir)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
+const packs=packFiles.map(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")));
+const rawItems=packs.flatMap(pack=>pack.items);
+const expectedTotal=[...packs].reverse().find(pack=>Number.isInteger(pack.bankSizeAfterWave))?.bankSizeAfterWave||rawItems.length;
+const items=applyPortugueseRubricObservations(rawItems);
 const byId=id=>items.find(item=>item.id===id);
 
+assert.equal(items.length,expectedTotal,"o motor deve receber o banco completo declarado pela vaga mais recente");
 assert.equal(normalizePortugueseAnswer("  ORAÇÃO «completiva». "),"oracao completiva");
 assert.equal(portugueseWordCount("Uma resposta com cinco palavras."),5);
 
@@ -61,7 +67,7 @@ assert.throws(()=>assessPortugueseRubricCriterion(restricted,"conteudo","automat
 
 const coverage=portugueseCoverage(items);
 assert.equal(coverage.diagnosticReady,true,"o banco suporta um diagnóstico interno equilibrado");
-assert.equal(coverage.total,100);
+assert.equal(coverage.total,expectedTotal);
 assert.equal(coverage.missionReady,true,"cada domínio deve ter sete itens realmente elegíveis para missões");
 assert.equal(coverage.pilotReady,true,"o banco deve manter o gate quantitativo de piloto");
 assert.equal(coverage.productionEligible,false);
@@ -109,4 +115,4 @@ const grammarMission=buildAdaptivePortugueseMission(items,{progress:adaptiveProg
 assert.ok(grammarMission.items.every(item=>item.domain==="gramatica"));
 assert.equal(grammarMission.items.length,7);
 
-console.log("✓ Portuguese engine: 100 items, deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated");
+console.log(`✓ Portuguese engine: ${expectedTotal} items, deterministic answers, conservative open-response grading, balanced diagnostic, adaptive missions and release gates validated`);

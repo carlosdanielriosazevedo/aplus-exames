@@ -15,13 +15,13 @@ const contentFiles=readdirSync(contentDir)
   });
 const rawItems=contentFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")).items);
 const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(rawItems);
+const expectedTotal=JSON.parse(readFileSync(new URL(contentFiles.at(-1),contentDir),"utf8")).bankSizeAfterWave||PORTUGUESE_ITEMS.length;
 
 const openItems=PORTUGUESE_ITEMS.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 const cases=buildPortugueseBoundaryCases(PORTUGUESE_ITEMS);
-assert.equal(contentFiles.length,6,"os casos-limite devem ser verificados sobre piloto + cinco vagas");
-assert.equal(PORTUGUESE_ITEMS.length,100,"os casos-limite devem partir do banco atual de 100 itens");
+assert.equal(PORTUGUESE_ITEMS.length,expectedTotal,"os casos-limite devem partir do banco completo declarado pela vaga mais recente");
 assert.equal(cases.length,openItems.length,"todas as respostas abertas devem ter casos-limite");
-assert.equal(cases.length,24,"as vagas 4 e 5 são determinísticas; o universo aberto mantém 24 itens calibrados");
+assert.equal(cases.length,24,"a sexta vaga é determinística; o universo aberto mantém 24 itens calibrados");
 
 const substantiveIds=new Set(["conteudo","fundamentacao","argumentacao","posicao","funcao","justificacao","genero-tema"]);
 const uniqueFormal=new Set();

@@ -5,7 +5,13 @@ import {portugueseDifficultyProfile} from "../app/lib/portugueseDifficulty.js";
 
 const root=dirname(fileURLToPath(import.meta.url));
 const contentDir=join(root,"../content/vnext/portuguese/foundation");
-const files=readdirSync(contentDir).filter(file=>/^portuguese-639-(?:pilot|wave\d+)\.json$/.test(file)).sort();
+const files=readdirSync(contentDir)
+  .filter(file=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(file))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
 const items=files.flatMap(file=>JSON.parse(readFileSync(join(contentDir,file),"utf8")).items);
 const matrix={
   modelVersion:1,
