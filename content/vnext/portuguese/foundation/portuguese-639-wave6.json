@@ -41,7 +41,11 @@
       "cognitive": "reconhecer",
       "stimulus": "A campanha começou em março. Em abril, as escolas receberam os primeiros materiais e, em maio, realizaram-se as sessões abertas às famílias.",
       "prompt": "Indica em que mês as escolas receberam os primeiros materiais.",
-      "acceptedAnswers": ["abril", "em abril", "no mês de abril"],
+      "acceptedAnswers": [
+        "abril",
+        "em abril",
+        "no mês de abril"
+      ],
       "explanation": "O texto situa explicitamente em abril a chegada dos primeiros materiais às escolas.",
       "gradingMode": "deterministic-with-equivalents",
       "maxPoints": 13
@@ -143,7 +147,12 @@
       "cognitive": "interpretar",
       "stimulus": "A noite engoliu as últimas vozes da praça e deixou apenas o som distante de uma janela a fechar-se.",
       "prompt": "Em «A noite engoliu as últimas vozes», o recurso expressivo dominante é",
-      "options": ["a personificação.", "a enumeração.", "a comparação.", "a anáfora."],
+      "options": [
+        "a personificação.",
+        "a enumeração.",
+        "a comparação.",
+        "a anáfora."
+      ],
       "answerIndex": 0,
       "explanation": "A noite recebe uma ação humana ou animada — «engoliu» —, o que constrói uma personificação.",
       "gradingMode": "deterministic",
@@ -160,7 +169,10 @@
       "cognitive": "reconhecer",
       "stimulus": "Esperei uma eternidade junto à porta, embora o relógio marcasse apenas cinco minutos.",
       "prompt": "Identifica o recurso expressivo presente em «Esperei uma eternidade».",
-      "acceptedAnswers": ["hipérbole", "uma hipérbole", "hiperbole"],
+      "acceptedAnswers": [
+        "hipérbole",
+        "uma hipérbole"
+      ],
       "explanation": "A duração é exagerada de forma deliberada: cinco minutos são apresentados como uma eternidade.",
       "gradingMode": "deterministic-with-equivalents",
       "maxPoints": 13
@@ -326,7 +338,10 @@
       "cognitive": "interpretar",
       "stimulus": "Os alunos confiaram no professor durante a atividade.",
       "prompt": "Indica a função sintática de «no professor».",
-      "acceptedAnswers": ["complemento oblíquo", "complemento obliquo"],
+      "acceptedAnswers": [
+        "complemento oblíquo",
+        "função de complemento oblíquo"
+      ],
       "explanation": "O verbo «confiar», neste uso, seleciona um complemento introduzido por «em», realizado aqui por «no professor».",
       "gradingMode": "deterministic-with-equivalents",
       "maxPoints": 13
@@ -342,7 +357,12 @@
       "cognitive": "reconhecer",
       "stimulus": "Se o tempo melhorar, faremos a atividade no exterior.",
       "prompt": "A oração «Se o tempo melhorar» é subordinada adverbial",
-      "options": ["causal.", "concessiva.", "condicional.", "consecutiva."],
+      "options": [
+        "causal.",
+        "concessiva.",
+        "condicional.",
+        "consecutiva."
+      ],
       "answerIndex": 2,
       "explanation": "A oração introduz a condição necessária para a realização da atividade no exterior.",
       "gradingMode": "deterministic",
