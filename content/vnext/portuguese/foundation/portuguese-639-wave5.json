@@ -216,7 +216,7 @@
       "stimulus": "Parágrafo expositivo: «As árvores urbanas reduzem a temperatura das ruas. Também melhoram a qualidade do ar. Por exemplo, a sombra diminui a exposição direta ao sol.»",
       "prompt": "Qual alteração melhoraria a organização do parágrafo?",
       "options": [
-        "Apresentar os dois benefícios numa frase inicial e desenvolver cada um com o respetivo exemplo.",
+        "Apresentar os dois benefícios numa frase inicial, mas conservar os exemplos separados das ideias que ilustram.",
         "Manter a ordem atual, mas deslocar o exemplo para antes dos dois benefícios.",
         "Agrupar os dois benefícios no fim e deixar os exemplos num parágrafo separado.",
         "Apresentar primeiro a ideia geral e agrupar depois exemplos associados a cada benefício."
