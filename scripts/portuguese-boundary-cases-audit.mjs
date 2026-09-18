@@ -1,55 +1,73 @@
 import assert from "node:assert/strict";
-import {PORTUGUESE_ITEMS} from "../app/data/portugueseContent.js";
+import {readFileSync,readdirSync} from "node:fs";
+import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {buildPortugueseBoundaryCases} from "../app/data/portugueseBoundaryCases.js";
 import {gradePortugueseResponse,portugueseWordCount} from "../app/lib/portugueseEngine.js";
 import {portugueseObservationGuidance} from "../app/lib/portugueseObservationGuidance.js";
 
+const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const contentFiles=readdirSync(contentDir)
+  .filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name))
+  .sort((a,b)=>{
+    if(a.includes("pilot"))return -1;
+    if(b.includes("pilot"))return 1;
+    return Number(a.match(/wave(\d+)/u)?.[1]||0)-Number(b.match(/wave(\d+)/u)?.[1]||0);
+  });
+const rawItems=contentFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")).items);
+const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(rawItems);
+
 const openItems=PORTUGUESE_ITEMS.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 const cases=buildPortugueseBoundaryCases(PORTUGUESE_ITEMS);
-let guidedObservations=0;
-
+assert.equal(contentFiles.length,6,"os casos-limite devem ser verificados sobre piloto + cinco vagas");
+assert.equal(PORTUGUESE_ITEMS.length,100,"os casos-limite devem partir do banco atual de 100 itens");
 assert.equal(cases.length,openItems.length,"todas as respostas abertas devem ter casos-limite");
-assert.ok(cases.length>0,"devem existir casos-limite de Português");
+assert.ok(cases.length>0);
 
-for(const testCase of cases){
-  const item=openItems.find(row=>row.id===testCase.itemId);
-  assert.ok(item,`item em falta: ${testCase.itemId}`);
+const substantiveIds=new Set(["conteudo","fundamentacao","argumentacao","posicao","funcao","justificacao","genero-tema"]);
+const uniqueFormal=new Set();
+let guidedObservations=0;
+for(const entry of cases){
+  const item=PORTUGUESE_ITEMS.find(row=>row.id===entry.id);
+  assert.ok(item,`${entry.id}: item em falta`);
 
-  const contradictoryText=testCase.contradictory.response.trim();
-  assert.ok(contradictoryText.length>0,`${item.id}: caso contraditório vazio`);
-  assert.ok(Object.values(testCase.contradictory.expected).some(status=>status==="not-observed"||status==="partial"),`${item.id}: caso contraditório sem falha editorial esperada`);
+  const contradictory=entry.cases.contradictory;
+  assert.ok(contradictory.response.trim().length>0,`${entry.id}: falta resposta contraditória`);
+  assert.ok(contradictory.expected.criteria.some(row=>["partial","not-observed"].includes(row.status)),`${entry.id}: o caso contraditório deve falhar pelo menos um critério`);
 
-  const formal=testCase.formalContentFailure;
-  const words=portugueseWordCount(formal.response);
-  assert.equal(words,formal.wordCount,`${item.id}: contagem de palavras inconsistente`);
-  assert.ok(words>=item.wordLimit.min&&words<=item.wordLimit.max,`${item.id}: resposta formal fora do limite ${item.wordLimit.min}-${item.wordLimit.max}`);
-  assert.ok(Object.entries(formal.expected).some(([criterion,status])=>!["lingua","correcao-linguistica","estrutura","coerencia","discurso"].includes(criterion)&&status==="not-observed"),`${item.id}: falta um critério de conteúdo explicitamente não observado`);
+  const formal=entry.cases.formalContentFailure;
+  const count=portugueseWordCount(formal.response);
+  assert.ok(count>=item.wordLimit.min&&count<=item.wordLimit.max,`${entry.id}: a resposta formal deve cumprir exatamente o intervalo de palavras`);
+  uniqueFormal.add(formal.response);
+  const substantiveFailure=formal.expected.criteria.find(row=>substantiveIds.has(row.id)&&row.status==="not-observed");
+  assert.ok(substantiveFailure,`${entry.id}: cumprir palavras sem conteúdo deve deixar um critério substantivo por observar`);
 
-  const result=gradePortugueseResponse(item,formal.response);
-  assert.equal(result.final,false,`${item.id}: cumprir a extensão nunca pode produzir classificação final automática`);
-  assert.equal(result.points,null,`${item.id}: cumprir a extensão nunca pode atribuir pontos automaticamente`);
-  assert.equal(result.correct,null,`${item.id}: cumprir a extensão nunca pode marcar a resposta como correta`);
-  assert.equal(result.wordLimit.within,true,`${item.id}: o motor deve reconhecer apenas a conformidade formal da extensão`);
+  const grade=gradePortugueseResponse(item,formal.response);
+  assert.equal(grade.final,false,`${entry.id}: resposta aberta não pode receber decisão final automática`);
+  assert.equal(grade.points,null,`${entry.id}: resposta aberta não pode receber pontos automáticos`);
+  assert.equal(grade.correct,null,`${entry.id}: resposta aberta não pode receber correto/incorreto automático`);
+  assert.equal(grade.wordLimit.within,true,`${entry.id}: o caso formal deve ser reconhecido como dentro do limite`);
 
-  for(const criterion of item.rubric?.criteria||[]){
-    for(const observation of criterion.observations||[]){
-      guidedObservations++;
+  for(const criterion of grade.criteria){
+    for(const observation of criterion.observations){
       const guidance=portugueseObservationGuidance(item,criterion,observation);
-      assert.ok(guidance.counts?.length>=30,`${item.id}/${observation.id}: exemplo positivo demasiado vago`);
-      assert.ok(guidance.notEnough?.length>=30,`${item.id}/${observation.id}: exemplo negativo demasiado vago`);
-      assert.notEqual(guidance.counts,guidance.notEnough,`${item.id}/${observation.id}: exemplos positivo e negativo não podem coincidir`);
+      assert.ok(guidance.counts.length>=30,`${entry.id}/${criterion.id}/${observation.id}: falta orientação positiva concreta`);
+      assert.ok(guidance.notEnough.length>=30,`${entry.id}/${criterion.id}/${observation.id}: falta orientação negativa concreta`);
+      assert.notEqual(guidance.counts,guidance.notEnough,`${entry.id}/${criterion.id}/${observation.id}: exemplos positivos e negativos não podem ser iguais`);
+      guidedObservations++;
     }
   }
 }
 
-const uniqueFormal=new Set(cases.map(row=>row.formalContentFailure.response));
-assert.ok(uniqueFormal.size>=1,"devem existir respostas formais de controlo");
-assert.ok(guidedObservations>=100,`cobertura insuficiente de observações guiadas: ${guidedObservations}`);
+assert.equal(cases.length,24,"as vagas 4 e 5 são determinísticas; as 24 respostas abertas calibradas mantêm-se como universo dos casos-limite");
+assert.equal(uniqueFormal.size,cases.length,"cada pergunta aberta deve ter um caso formal de conteúdo insuficiente próprio");
+assert.ok(guidedObservations>=100,"a orientação deve cobrir todas as observações atómicas do banco aberto");
 
-const syntaxItem=PORTUGUESE_ITEMS.find(item=>item.id==="PT639-FND-042");
-const syntaxCriterion=syntaxItem.rubric.criteria.find(criterion=>criterion.id==="funcao");
-const syntaxGuidance=portugueseObservationGuidance(syntaxItem,syntaxCriterion,syntaxCriterion.observations[0]);
+const syntax=PORTUGUESE_ITEMS.find(item=>item.id==="PT639-FND-042");
+const syntaxGrade=gradePortugueseResponse(syntax,"resposta de teste");
+const syntaxCriterion=syntaxGrade.criteria.find(criterion=>criterion.id==="funcao");
+const syntaxObservation=syntaxCriterion.observations[0];
+const syntaxGuidance=portugueseObservationGuidance(syntax,syntaxCriterion,syntaxObservation);
 assert.match(syntaxGuidance.counts,/predicativo do sujeito/i);
 assert.match(syntaxGuidance.notEnough,/complemento oblíquo/i);
 
-console.log(`✓ casos-limite de Português: ${cases.length}/${openItems.length} perguntas abertas · ${guidedObservations} observações guiadas · extensão separada do conteúdo · zero nota automática`);
+console.log(`✓ casos-limite Português: ${contentFiles.length} pacotes · ${PORTUGUESE_ITEMS.length} itens totais · ${cases.length} respostas abertas · ${guidedObservations} observações guiadas · extensão separada de conteúdo · zero classificação automática`);
