@@ -23,6 +23,13 @@ jobs:
           echo "$?" > boundary-cases-exit.txt
           cat boundary-cases.log
           exit 0
+      - name: Upload boundary diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: portuguese-boundary-diagnostic
+          path: |
+            boundary-cases.log
+            boundary-cases-exit.txt
       - name: Regenerate Portuguese difficulty matrix
         run: node scripts/generate-portuguese-difficulty.mjs
       - name: Commit generated matrix if needed
@@ -47,13 +54,12 @@ jobs:
           echo "$code" > technical-gate-exit.txt
           cat technical-gate.log
           exit 0
-      - uses: actions/upload-artifact@v4
+      - name: Upload gate diagnostic
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: technical-gate-diagnostic
           path: |
-            boundary-cases.log
-            boundary-cases-exit.txt
             technical-gate.log
             technical-gate-exit.txt
           if-no-files-found: ignore
