@@ -1,117 +1,459 @@
 {
-  "subjectId":"portuguese","examCode":"639","version":1,"wave":3,"bankSizeAfterWave":60,"sourcePolicy":"original-only","editorialStatus":"prototype","productionEligible":false,
-  "items":[
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "wave": 3,
+  "bankSizeAfterWave": 60,
+  "sourcePolicy": "original-only",
+  "editorialStatus": "prototype",
+  "productionEligible": false,
+  "items": [
     {
-      "id":"PT639-FND-046","year":"10.º","domain":"leitura","competencyId":"pt-leitura-informacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
-      "stimulus":"A nova linha de autocarro circula de segunda a sexta-feira, entre as sete e as vinte horas. Aos sábados, realiza apenas quatro viagens, e não funciona aos domingos.",
-      "prompt":"Qual das afirmações está de acordo com o texto?",
-      "options":["A linha não circula ao domingo.","A linha realiza quatro viagens todos os dias.","O serviço termina às sete horas.","Ao sábado, o horário é igual ao dos dias úteis."],"answerIndex":0,
-      "explanation":"O texto afirma explicitamente que a linha não funciona aos domingos.","gradingMode":"deterministic","maxPoints":13
+      "id": "PT639-FND-046",
+      "year": "10.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-informacao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "multiple-choice",
+      "cognitive": "reconhecer",
+      "stimulus": "A nova linha de autocarro circula de segunda a sexta-feira, entre as sete e as vinte horas. Aos sábados, realiza apenas quatro viagens, e não funciona aos domingos.",
+      "prompt": "Qual das afirmações está de acordo com o texto?",
+      "options": [
+        "A linha não circula ao domingo.",
+        "Aos sábados, mantém o mesmo número de viagens dos dias úteis.",
+        "Nos dias úteis, o serviço começa às vinte horas.",
+        "Ao sábado, o serviço funciona apenas entre as sete e as vinte horas."
+      ],
+      "answerIndex": 0,
+      "explanation": "O texto afirma explicitamente que a linha não funciona aos domingos.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-047","year":"12.º","domain":"leitura","competencyId":"pt-leitura-inferencia","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
-      "stimulus":"A empresa colocou recipientes de reciclagem em todos os corredores. Um mês depois, recolhia mais embalagens recicláveis, mas também encontrava resíduos orgânicos em quase metade dos recipientes. A infraestrutura mudara mais depressa do que os hábitos.",
-      "prompt":"Explica o sentido da última frase do texto. Responde em 40 a 70 palavras.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica que disponibilizar recipientes aumentou a reciclagem, mas não garantiu a separação correta.","points":8},{"id":"fundamentacao","label":"Relaciona a explicação com a presença de resíduos orgânicos.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
-      "referenceAnswer":"A empresa alterou rapidamente as condições materiais ao instalar recipientes, o que aumentou a recolha de embalagens. Contudo, muitos utilizadores ainda não separavam corretamente os resíduos, como mostra a presença de matéria orgânica. A mudança de comportamento não acompanhou a mudança da infraestrutura.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+      "id": "PT639-FND-047",
+      "year": "12.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-inferencia",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "A empresa colocou recipientes de reciclagem em todos os corredores. Um mês depois, recolhia mais embalagens recicláveis, mas também encontrava resíduos orgânicos em quase metade dos recipientes. A infraestrutura mudara mais depressa do que os hábitos.",
+      "prompt": "Explica o sentido da última frase do texto. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Explica que disponibilizar recipientes aumentou a reciclagem, mas não garantiu a separação correta.",
+            "points": 8
+          },
+          {
+            "id": "fundamentacao",
+            "label": "Relaciona a explicação com a presença de resíduos orgânicos.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção suficiente para preservar o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A empresa alterou rapidamente as condições materiais ao instalar recipientes, o que aumentou a recolha de embalagens. Contudo, muitos utilizadores ainda não separavam corretamente os resíduos, como mostra a presença de matéria orgânica. A mudança de comportamento não acompanhou a mudança da infraestrutura.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
     },
     {
-      "id":"PT639-FND-048","year":"11.º","domain":"leitura","competencyId":"pt-leitura-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"reconhecer",
-      "stimulus":"A equipa propôs reduzir o número de reuniões. Essa solução libertaria tempo para concluir as tarefas pendentes.",
-      "prompt":"Indica o referente da expressão «Essa solução».",
-      "acceptedAnswers":["reduzir o número de reuniões","a redução do número de reuniões","a proposta de reduzir o número de reuniões"],
-      "explanation":"A expressão demonstrativa retoma a proposta apresentada na frase anterior: reduzir o número de reuniões.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+      "id": "PT639-FND-048",
+      "year": "11.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "short-answer",
+      "cognitive": "reconhecer",
+      "stimulus": "A equipa propôs reduzir o número de reuniões. Essa solução libertaria tempo para concluir as tarefas pendentes.",
+      "prompt": "Indica o referente da expressão «Essa solução».",
+      "acceptedAnswers": [
+        "reduzir o número de reuniões",
+        "a redução do número de reuniões",
+        "a proposta de reduzir o número de reuniões"
+      ],
+      "explanation": "A expressão demonstrativa retoma a proposta apresentada na frase anterior: reduzir o número de reuniões.",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-049","year":"12.º","domain":"leitura","competencyId":"pt-leitura-organizacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
-      "stimulus":"Depois de apresentar as vantagens do trabalho remoto, o autor analisa os seus riscos e termina propondo um modelo que combina dias em casa e dias presenciais.",
-      "prompt":"A estrutura argumentativa do texto assenta em",
-      "options":["repetição da mesma vantagem em três momentos.","enumeração de riscos sem qualquer proposta.","negação das vantagens inicialmente apresentadas.","apresentação de benefícios e riscos seguida de uma solução conciliadora."],"answerIndex":3,
-      "explanation":"O texto pondera dois lados do problema e conclui com uma proposta que procura conciliá-los.","gradingMode":"deterministic","maxPoints":13
+      "id": "PT639-FND-049",
+      "year": "12.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-organizacao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "multiple-choice",
+      "cognitive": "interpretar",
+      "stimulus": "Depois de apresentar as vantagens do trabalho remoto, o autor analisa os seus riscos e termina propondo um modelo que combina dias em casa e dias presenciais.",
+      "prompt": "A estrutura argumentativa do texto assenta em",
+      "options": [
+        "apresentação de vantagens seguida de riscos, terminando sem qualquer proposta.",
+        "apresentação dos riscos como refutação total das vantagens iniciais.",
+        "apresentação de uma solução híbrida antes da análise dos dois modelos.",
+        "apresentação de benefícios e riscos seguida de uma solução conciliadora."
+      ],
+      "answerIndex": 3,
+      "explanation": "O texto pondera dois lados do problema e conclui com uma proposta que procura conciliá-los.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-050","year":"10.º","domain":"educacao-literaria","competencyId":"pt-literatura-recursos","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
-      "stimulus":"O quarto era um porto fechado / onde os retratos esperavam / navios que não regressavam.",
-      "prompt":"A expressão «O quarto era um porto fechado» constitui uma",
-      "options":["metáfora.","aliteração.","enumeração.","ironia."],"answerIndex":0,
-      "explanation":"O quarto é identificado figuradamente com um porto fechado, sem recurso a uma palavra comparativa.","gradingMode":"deterministic","maxPoints":13
+      "id": "PT639-FND-050",
+      "year": "10.º",
+      "domain": "educacao-literaria",
+      "competencyId": "pt-literatura-recursos",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "multiple-choice",
+      "cognitive": "interpretar",
+      "stimulus": "O quarto era um porto fechado / onde os retratos esperavam / navios que não regressavam.",
+      "prompt": "A expressão «O quarto era um porto fechado» constitui uma",
+      "options": [
+        "metáfora.",
+        "aliteração.",
+        "enumeração.",
+        "ironia."
+      ],
+      "answerIndex": 0,
+      "explanation": "O quarto é identificado figuradamente com um porto fechado, sem recurso a uma palavra comparativa.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-051","year":"11.º","domain":"educacao-literaria","competencyId":"pt-literatura-temas","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
-      "stimulus":"Plantou a árvore no dia em que o filho partiu. Anos depois, media o tempo não pelo calendário, mas pela sombra que já alcançava a janela.",
-      "prompt":"Interpreta a relação entre a árvore e a passagem do tempo. Responde em 40 a 70 palavras.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica que o crescimento da árvore materializa o tempo decorrido desde a partida.","points":8},{"id":"fundamentacao","label":"Relaciona a interpretação com a sombra que alcança a janela.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
-      "referenceAnswer":"A árvore funciona como medida viva do tempo passado desde a partida do filho. O seu crescimento, visível na sombra que finalmente chega à janela, substitui o calendário e transforma a ausência numa realidade progressivamente inscrita no próprio espaço familiar.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+      "id": "PT639-FND-051",
+      "year": "11.º",
+      "domain": "educacao-literaria",
+      "competencyId": "pt-literatura-temas",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Plantou a árvore no dia em que o filho partiu. Anos depois, media o tempo não pelo calendário, mas pela sombra que já alcançava a janela.",
+      "prompt": "Interpreta a relação entre a árvore e a passagem do tempo. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Explica que o crescimento da árvore materializa o tempo decorrido desde a partida.",
+            "points": 8
+          },
+          {
+            "id": "fundamentacao",
+            "label": "Relaciona a interpretação com a sombra que alcança a janela.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção suficiente para preservar o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A árvore funciona como medida viva do tempo passado desde a partida do filho. O seu crescimento, visível na sombra que finalmente chega à janela, substitui o calendário e transforma a ausência numa realidade progressivamente inscrita no próprio espaço familiar.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
     },
     {
-      "id":"PT639-FND-052","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-voz","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar",
-      "stimulus":"Talvez eu exagere, leitor, mas naquela manhã até as paredes pareciam escutar a discussão.",
-      "prompt":"A interpelação «leitor» estabelece",
-      "options":["uma descrição objetiva das paredes.","uma mudança para discurso indireto.","a ausência completa de narrador.","uma relação direta entre o narrador e o destinatário."],"answerIndex":3,
-      "explanation":"O vocativo dirige explicitamente o discurso ao leitor e torna visível a relação comunicativa com o narrador.","gradingMode":"deterministic","maxPoints":13
+      "id": "PT639-FND-052",
+      "year": "12.º",
+      "domain": "educacao-literaria",
+      "competencyId": "pt-literatura-voz",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "multiple-choice",
+      "cognitive": "interpretar",
+      "stimulus": "Talvez eu exagere, leitor, mas naquela manhã até as paredes pareciam escutar a discussão.",
+      "prompt": "A interpelação «leitor» estabelece",
+      "options": [
+        "uma tentativa de reforçar a objetividade do relato perante o leitor.",
+        "um afastamento do narrador em relação ao destinatário.",
+        "uma transferência da voz narrativa para as paredes personificadas.",
+        "uma relação direta entre o narrador e o destinatário."
+      ],
+      "answerIndex": 3,
+      "explanation": "O vocativo dirige explicitamente o discurso ao leitor e torna visível a relação comunicativa com o narrador.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-053","year":"10.º","domain":"educacao-literaria","competencyId":"pt-literatura-forma","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
-      "stimulus":"Volto à ponte. / Volto ao rio. / Não volto ao rapaz / que os atravessou.",
-      "prompt":"Explica o efeito da repetição e da quebra final. Responde em 40 a 70 palavras.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Relaciona a repetição de «Volto» com o regresso aos lugares e a quebra final com a impossibilidade de recuperar a identidade passada.","points":8},{"id":"forma","label":"Distingue o paralelismo inicial da negação final.","points":3},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
-      "referenceAnswer":"A repetição de «Volto» cria paralelismo e insiste na possibilidade de regressar aos espaços do passado. A negação do último verso rompe esse movimento: o sujeito pode reencontrar a ponte e o rio, mas não recuperar a versão de si próprio que os atravessou.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":40,"max":70}
+      "id": "PT639-FND-053",
+      "year": "10.º",
+      "domain": "educacao-literaria",
+      "competencyId": "pt-literatura-forma",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Volto à ponte. / Volto ao rio. / Não volto ao rapaz / que os atravessou.",
+      "prompt": "Explica o efeito da repetição e da quebra final. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Relaciona a repetição de «Volto» com o regresso aos lugares e a quebra final com a impossibilidade de recuperar a identidade passada.",
+            "points": 8
+          },
+          {
+            "id": "forma",
+            "label": "Distingue o paralelismo inicial da negação final.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção suficiente para preservar o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A repetição de «Volto» cria paralelismo e insiste na possibilidade de regressar aos espaços do passado. A negação do último verso rompe esse movimento: o sujeito pode reencontrar a ponte e o rio, mas não recuperar a versão de si próprio que os atravessou.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
     },
     {
-      "id":"PT639-FND-054","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-sintaxe","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar",
-      "stimulus":"A direção nomeou a Beatriz representante da turma.",
-      "prompt":"Identifica a função sintática de «representante da turma» e explica a relação que estabelece com «a Beatriz». Responde em 30 a 55 palavras.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"funcao","label":"Identifica «representante da turma» como predicativo do complemento direto.","points":5},{"id":"justificacao","label":"Explica que a expressão atribui uma propriedade ou função ao complemento direto «a Beatriz».","points":6},{"id":"lingua","label":"Escreve com correção suficiente para preservar o sentido.","points":2}]},
-      "referenceAnswer":"A expressão «representante da turma» é predicativo do complemento direto. O grupo nominal «a Beatriz» funciona como complemento direto de «nomeou», e «representante da turma» atribui-lhe a função resultante dessa nomeação.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":30,"max":55}
+      "id": "PT639-FND-054",
+      "year": "11.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-sintaxe",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "A direção nomeou a Beatriz representante da turma.",
+      "prompt": "Identifica a função sintática de «representante da turma» e explica a relação que estabelece com «a Beatriz». Responde em 30 a 55 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "funcao",
+            "label": "Identifica «representante da turma» como predicativo do complemento direto.",
+            "points": 5
+          },
+          {
+            "id": "justificacao",
+            "label": "Explica que a expressão atribui uma propriedade ou função ao complemento direto «a Beatriz».",
+            "points": 6
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção suficiente para preservar o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A expressão «representante da turma» é predicativo do complemento direto. O grupo nominal «a Beatriz» funciona como complemento direto de «nomeou», e «representante da turma» atribui-lhe a função resultante dessa nomeação.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 30,
+        "max": 55
+      }
     },
     {
-      "id":"PT639-FND-055","year":"10.º","domain":"gramatica","competencyId":"pt-gramatica-oracoes","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
-      "stimulus":"Assim que a chuva terminou, os atletas regressaram ao campo.",
-      "prompt":"A oração «Assim que a chuva terminou» é subordinada adverbial",
-      "options":["causal.","temporal.","final.","consecutiva."],"answerIndex":1,
-      "explanation":"A locução «Assim que» localiza temporalmente o regresso dos atletas ao campo.","gradingMode":"deterministic","maxPoints":13
+      "id": "PT639-FND-055",
+      "year": "10.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-oracoes",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "multiple-choice",
+      "cognitive": "reconhecer",
+      "stimulus": "Assim que a chuva terminou, os atletas regressaram ao campo.",
+      "prompt": "A oração «Assim que a chuva terminou» é subordinada adverbial",
+      "options": [
+        "causal.",
+        "temporal.",
+        "final.",
+        "consecutiva."
+      ],
+      "answerIndex": 1,
+      "explanation": "A locução «Assim que» localiza temporalmente o regresso dos atletas ao campo.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-056","year":"12.º","domain":"gramatica","competencyId":"pt-gramatica-coesao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"short-answer","cognitive":"interpretar",
-      "stimulus":"O regulamento previa uma exceção. Todavia, ninguém conseguiu demonstrar que aquele caso a justificava.",
-      "prompt":"Indica o valor do conector «Todavia».",
-      "acceptedAnswers":["valor adversativo","contraste","oposição","valor de contraste","valor de oposição"],
-      "explanation":"«Todavia» introduz uma oposição entre a existência da exceção e a impossibilidade de a aplicar ao caso.","gradingMode":"deterministic-with-equivalents","maxPoints":13
+      "id": "PT639-FND-056",
+      "year": "12.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "short-answer",
+      "cognitive": "interpretar",
+      "stimulus": "O regulamento previa uma exceção. Todavia, ninguém conseguiu demonstrar que aquele caso a justificava.",
+      "prompt": "Indica o valor do conector «Todavia».",
+      "acceptedAnswers": [
+        "valor adversativo",
+        "contraste",
+        "oposição",
+        "valor de contraste",
+        "valor de oposição"
+      ],
+      "explanation": "«Todavia» introduz uma oposição entre a existência da exceção e a impossibilidade de a aplicar ao caso.",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-057","year":"11.º","domain":"gramatica","competencyId":"pt-gramatica-morfologia-semantica","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer",
-      "stimulus":"Os participantes devem entregar o formulário até sexta-feira.",
-      "prompt":"A forma verbal «devem» exprime modalidade",
-      "options":["epistémica de certeza.","apreciativa positiva.","deôntica de obrigação.","epistémica de possibilidade."],"answerIndex":2,
-      "explanation":"Neste contexto, «devem» apresenta a entrega do formulário como uma obrigação dos participantes.","gradingMode":"deterministic","maxPoints":13
+      "id": "PT639-FND-057",
+      "year": "11.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-morfologia-semantica",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "multiple-choice",
+      "cognitive": "reconhecer",
+      "stimulus": "Os participantes devem entregar o formulário até sexta-feira.",
+      "prompt": "A forma verbal «devem» exprime modalidade",
+      "options": [
+        "epistémica de certeza.",
+        "apreciativa positiva.",
+        "deôntica de obrigação.",
+        "epistémica de possibilidade."
+      ],
+      "answerIndex": 2,
+      "explanation": "Neste contexto, «devem» apresenta a entrega do formulário como uma obrigação dos participantes.",
+      "gradingMode": "deterministic",
+      "maxPoints": 13
     },
     {
-      "id":"PT639-FND-058","year":"10.º","domain":"escrita","competencyId":"pt-escrita-exposicao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
-      "stimulus":"Uma aplicação de transporte pode informar os passageiros sobre atrasos, percursos alternativos, lotação prevista e acessibilidade das paragens.",
-      "prompt":"Explica duas formas pelas quais a informação em tempo real melhora uma viagem. Escreve entre 80 e 120 palavras.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"conteudo","label":"Explica duas vantagens distintas da informação em tempo real.","points":6},{"id":"estrutura","label":"Organiza as ideias com progressão e ligação entre frases.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
-      "referenceAnswer":"A informação em tempo real melhora uma viagem porque permite reagir a imprevistos. Se a aplicação indicar um atraso ou uma interrupção, o passageiro pode escolher outro percurso antes de perder tempo na paragem. Além disso, conhecer a lotação prevista ajuda a decidir se é preferível aguardar o veículo seguinte, sobretudo para quem viaja com crianças, bagagem ou mobilidade reduzida. Dados sobre elevadores e acessibilidade também evitam chegar a uma paragem inadequada. Assim, a informação atualizada reduz a incerteza e permite planear a deslocação de acordo com as necessidades concretas de cada pessoa.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":80,"max":120}
+      "id": "PT639-FND-058",
+      "year": "10.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-exposicao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "criar",
+      "stimulus": "Uma aplicação de transporte pode informar os passageiros sobre atrasos, percursos alternativos, lotação prevista e acessibilidade das paragens.",
+      "prompt": "Explica duas formas pelas quais a informação em tempo real melhora uma viagem. Escreve entre 80 e 120 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Explica duas vantagens distintas da informação em tempo real.",
+            "points": 6
+          },
+          {
+            "id": "estrutura",
+            "label": "Organiza as ideias com progressão e ligação entre frases.",
+            "points": 4
+          },
+          {
+            "id": "lingua",
+            "label": "Usa vocabulário adequado e correção linguística.",
+            "points": 3
+          }
+        ]
+      },
+      "referenceAnswer": "A informação em tempo real melhora uma viagem porque permite reagir a imprevistos. Se a aplicação indicar um atraso ou uma interrupção, o passageiro pode escolher outro percurso antes de perder tempo na paragem. Além disso, conhecer a lotação prevista ajuda a decidir se é preferível aguardar o veículo seguinte, sobretudo para quem viaja com crianças, bagagem ou mobilidade reduzida. Dados sobre elevadores e acessibilidade também evitam chegar a uma paragem inadequada. Assim, a informação atualizada reduz a incerteza e permite planear a deslocação de acordo com as necessidades concretas de cada pessoa.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 80,
+        "max": 120
+      }
     },
     {
-      "id":"PT639-FND-059","year":"11.º","domain":"escrita","competencyId":"pt-escrita-argumentacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
-      "stimulus":"Algumas bibliotecas começaram a emprestar instrumentos musicais e equipamentos digitais, para além de livros e filmes.",
-      "prompt":"Defende uma posição sobre o alargamento dos objetos emprestados pelas bibliotecas. Escreve entre 100 e 150 palavras e apresenta dois argumentos.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"argumentacao","label":"Formula uma posição clara e desenvolve dois argumentos pertinentes.","points":6},{"id":"estrutura","label":"Organiza o texto com progressão e conclusão coerentes.","points":4},{"id":"lingua","label":"Usa conectores, vocabulário adequado e correção linguística.","points":3}]},
-      "referenceAnswer":"Sou favorável ao empréstimo de instrumentos musicais e equipamentos digitais pelas bibliotecas. Em primeiro lugar, esse serviço reduz desigualdades, pois permite experimentar recursos caros antes de uma família decidir comprá-los. Um jovem pode, por exemplo, descobrir interesse pela música através de uma guitarra emprestada. Em segundo lugar, a medida aproveita a experiência das bibliotecas na gestão de bens partilhados e reforça o seu papel como espaços de aprendizagem. O alargamento não deve diminuir o investimento em livros nem avançar sem regras de manutenção, cauções adequadas e formação básica para os utilizadores. Com essas condições, a biblioteca oferece novos caminhos de acesso à cultura e à tecnologia sem abandonar a sua missão principal.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
+      "id": "PT639-FND-059",
+      "year": "11.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-argumentacao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "criar",
+      "stimulus": "Algumas bibliotecas começaram a emprestar instrumentos musicais e equipamentos digitais, para além de livros e filmes.",
+      "prompt": "Defende uma posição sobre o alargamento dos objetos emprestados pelas bibliotecas. Escreve entre 100 e 150 palavras e apresenta dois argumentos.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "argumentacao",
+            "label": "Formula uma posição clara e desenvolve dois argumentos pertinentes.",
+            "points": 6
+          },
+          {
+            "id": "estrutura",
+            "label": "Organiza o texto com progressão e conclusão coerentes.",
+            "points": 4
+          },
+          {
+            "id": "lingua",
+            "label": "Usa conectores, vocabulário adequado e correção linguística.",
+            "points": 3
+          }
+        ]
+      },
+      "referenceAnswer": "Sou favorável ao empréstimo de instrumentos musicais e equipamentos digitais pelas bibliotecas. Em primeiro lugar, esse serviço reduz desigualdades, pois permite experimentar recursos caros antes de uma família decidir comprá-los. Um jovem pode, por exemplo, descobrir interesse pela música através de uma guitarra emprestada. Em segundo lugar, a medida aproveita a experiência das bibliotecas na gestão de bens partilhados e reforça o seu papel como espaços de aprendizagem. O alargamento não deve diminuir o investimento em livros nem avançar sem regras de manutenção, cauções adequadas e formação básica para os utilizadores. Com essas condições, a biblioteca oferece novos caminhos de acesso à cultura e à tecnologia sem abandonar a sua missão principal.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 100,
+        "max": 150
+      }
     },
     {
-      "id":"PT639-FND-060","year":"12.º","domain":"escrita","competencyId":"pt-escrita-opiniao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"criar",
-      "stimulus":"Avaliações públicas permitem conhecer experiências de outros consumidores, mas podem também reduzir uma pessoa ou organização a uma classificação numérica.",
-      "prompt":"Apresenta uma opinião fundamentada sobre o impacto das avaliações públicas nas decisões. Escreve entre 100 e 150 palavras e inclui um exemplo.",
-      "rubric":{"maxPoints":13,"criteria":[{"id":"posicao","label":"Formula uma posição clara e pondera vantagens ou riscos relevantes.","points":6},{"id":"fundamentacao","label":"Apresenta razões e um exemplo pertinente, organizados com coerência.","points":4},{"id":"lingua","label":"Usa vocabulário adequado e correção linguística.","points":3}]},
-      "referenceAnswer":"As avaliações públicas podem apoiar decisões, mas não devem ser tratadas como medidas objetivas e completas. Ler várias experiências ajuda um consumidor a identificar problemas recorrentes, comparar alternativas e evitar escolhas pouco adequadas. No entanto, uma classificação média esconde diferenças de contexto e pode ser manipulada por comentários falsos ou reações impulsivas. Por exemplo, um restaurante pode receber uma nota baixa devido a um atraso excecional, embora a maioria dos clientes valorize a qualidade do serviço. Por isso, é preferível ler avaliações recentes, procurar padrões e considerar a resposta da organização, em vez de confiar apenas no número apresentado. As plataformas também devem verificar abusos e permitir contraditório. A avaliação é útil como indício, não como sentença definitiva sobre uma pessoa ou instituição.",
-      "gradingMode":"rubric-assisted-provisional","maxPoints":13,"wordLimit":{"min":100,"max":150}
+      "id": "PT639-FND-060",
+      "year": "12.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-opiniao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "criar",
+      "stimulus": "Avaliações públicas permitem conhecer experiências de outros consumidores, mas podem também reduzir uma pessoa ou organização a uma classificação numérica.",
+      "prompt": "Apresenta uma opinião fundamentada sobre o impacto das avaliações públicas nas decisões. Escreve entre 100 e 150 palavras e inclui um exemplo.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "posicao",
+            "label": "Formula uma posição clara e pondera vantagens ou riscos relevantes.",
+            "points": 6
+          },
+          {
+            "id": "fundamentacao",
+            "label": "Apresenta razões e um exemplo pertinente, organizados com coerência.",
+            "points": 4
+          },
+          {
+            "id": "lingua",
+            "label": "Usa vocabulário adequado e correção linguística.",
+            "points": 3
+          }
+        ]
+      },
+      "referenceAnswer": "As avaliações públicas podem apoiar decisões, mas não devem ser tratadas como medidas objetivas e completas. Ler várias experiências ajuda um consumidor a identificar problemas recorrentes, comparar alternativas e evitar escolhas pouco adequadas. No entanto, uma classificação média esconde diferenças de contexto e pode ser manipulada por comentários falsos ou reações impulsivas. Por exemplo, um restaurante pode receber uma nota baixa devido a um atraso excecional, embora a maioria dos clientes valorize a qualidade do serviço. Por isso, é preferível ler avaliações recentes, procurar padrões e considerar a resposta da organização, em vez de confiar apenas no número apresentado. As plataformas também devem verificar abusos e permitir contraditório. A avaliação é útil como indício, não como sentença definitiva sobre uma pessoa ou instituição.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 100,
+        "max": 150
+      }
     }
   ]
 }
