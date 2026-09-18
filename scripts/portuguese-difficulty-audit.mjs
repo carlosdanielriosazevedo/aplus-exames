@@ -12,26 +12,30 @@ const matrix=JSON.parse(readFileSync(join(contentDir,"portuguese-639-difficulty.
 const runtime=readFileSync(join(root,"../app/data/portugueseContent.js"),"utf8");
 const engine=readFileSync(join(root,"../app/lib/portugueseEngine.js"),"utf8");
 
+assert.equal(sourceFiles.length,6,"a dificuldade deve cobrir piloto + cinco vagas");
+assert.equal(items.length,100,"o banco atual de Português deve conter 100 itens");
 assert.equal(matrix.modelVersion,1);
 assert.equal(matrix.status,"editorial-provisional");
 assert.equal(matrix.calibrated,false,"a matriz não pode afirmar calibração sem dados de alunos");
 assert.match(matrix.calibrationNote,/alunos reais/);
-assert.equal(matrix.items.length,60);
-assert.equal(new Set(matrix.items.map(row=>row.id)).size,60);
+assert.equal(matrix.items.length,100,"a matriz de dificuldade deve acompanhar os 100 itens atuais");
+assert.equal(new Set(matrix.items.map(row=>row.id)).size,100);
 assert.deepEqual(new Set(matrix.items.map(row=>row.id)),new Set(items.map(item=>item.id)));
 
 const byId=new Map(items.map(item=>[item.id,item]));
 for(const row of matrix.items){
   const item=byId.get(row.id);
   const expected=portugueseDifficultyProfile(item);
-  assert.deepEqual(row, {id:item.id,...expected},`${item.id}: a matriz deve ser integralmente reproduzível`);
+  assert.deepEqual(row,{id:item.id,...expected},`${item.id}: a matriz deve ser integralmente reproduzível`);
   assert.equal(portugueseDifficultyProfile({...item,maxPoints:999}).level,row.level,`${item.id}: a cotação não pode determinar dificuldade`);
   assert.equal(row.rationale.length,4);
   assert.ok(row.level>=1&&row.level<=4);
 }
 
 const distribution=matrix.items.reduce((counts,row)=>{counts[row.level]=(counts[row.level]||0)+1;return counts;},{});
-assert.deepEqual(distribution,{1:12,2:24,3:12,4:12},"os quatro patamares devem permanecer representados sem colapsar níveis");
+assert.equal(Object.values(distribution).reduce((sum,count)=>sum+count,0),100,"a distribuição deve contabilizar os 100 itens");
+assert.deepEqual(Object.keys(distribution).map(Number).sort((a,b)=>a-b),[1,2,3,4],"os quatro patamares devem permanecer representados sem colapsar níveis");
+for(const level of [1,2,3,4])assert.ok(distribution[level]>=10,`nível ${level}: representação insuficiente no banco de 100 itens`);
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   const domainLevels=new Set(matrix.items.filter(row=>byId.get(row.id).domain===domain).map(row=>row.level));
   assert.ok(domainLevels.size>=2,`${domain}: um domínio não pode ficar reduzido a um único nível`);
