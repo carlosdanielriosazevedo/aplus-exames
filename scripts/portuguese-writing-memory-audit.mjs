@@ -9,6 +9,7 @@ import {
   writingMemoryProfile,
   assessmentMovement
 } from "../app/lib/portugueseWritingMemory.js";
+import {writingAttentionEvolution,writingResolvedAttentions} from "../app/lib/portugueseWritingProgress.js";
 
 const item={
   id:"PT-MEM-1",domain:"leitura",competencyId:"pt-leitura-organizacao",responseType:"restricted-response",
@@ -81,6 +82,36 @@ assert.equal(strength.kind,"strength","um padrão repetido de Cumpri pode ser ap
 assert.equal(strength.evidenceAttention,false);
 assert.equal(writingMemoryPreAnswerFocus(strengthMemory,item).available,false,"um padrão positivo não deve transformar-se num aviso de dificuldade antes de responder");
 
+let recoveryMemory=[];
+for(const [index,status,evidence] of [
+  [0,"not-yet",""],
+  [1,"partial","um elemento"],
+  [2,"met","dois elementos concretos"],
+  [3,"met","duas passagens localizadas"]
+]){
+  recoveryMemory=recordPortugueseWritingMemory(recoveryMemory,{attemptId:`r${index+1}`,item:{...item,id:`R-${index+1}`},at:index+1,assessment:{fundamentacao:{status,evidence}}});
+}
+const recovered=writingAttentionEvolution(recoveryMemory,{criterionId:"fundamentacao",domain:"leitura"});
+assert.equal(recovered.available,true,"o motor deve reconhecer que existiu atenção recorrente antes da melhoria recente");
+assert.equal(recovered.resolved,true,"duas tentativas recentes em Cumpri com evidência devem permitir marcar a atenção como não recorrente por agora");
+assert.equal(recovered.recent.length,2);
+assert.match(recovered.message,/deixou de aparecer como atenção recorrente por agora/u,"a linguagem deve ser prudente e reversível");
+
+let fragileRecovery=[];
+for(const [index,status,evidence] of [
+  [0,"not-yet",""],
+  [1,"partial","um elemento"],
+  [2,"met",""],
+  [3,"met","duas passagens"]
+]){
+  fragileRecovery=recordPortugueseWritingMemory(fragileRecovery,{attemptId:`f${index+1}`,item:{...item,id:`F-${index+1}`},at:index+1,assessment:{fundamentacao:{status,evidence}}});
+}
+assert.equal(writingAttentionEvolution(fragileRecovery,{criterionId:"fundamentacao",domain:"leitura"}).resolved,false,"Cumpri sem evidência em uma das tentativas recentes não deve apagar uma atenção recorrente");
+
+const resolutionSummary=writingResolvedAttentions(recoveryMemory,{domain:"leitura"});
+assert.equal(resolutionSummary.resolved.length,1,"o resumo deve separar atenções que deixaram de ser recorrentes das que continuam ativas");
+assert.equal(resolutionSummary.stillAttention.length,0);
+
 const movement=assessmentMovement({conteudo:{status:"not-yet"},fundamentacao:{status:"met"}},{conteudo:{status:"partial"},fundamentacao:{status:"partial"}});
 assert.equal(movement.find(row=>row.criterionId==="conteudo").direction,"up");
 assert.equal(movement.find(row=>row.criterionId==="fundamentacao").direction,"down");
@@ -91,9 +122,10 @@ assert.equal(normalizePortugueseWritingMemory(noisy).length,PORTUGUESE_WRITING_M
 for(const text of [
   ...insight.rows.map(row=>`${row.label} ${row.message}`),
   ...focus.rows.flatMap(row=>[row.prompt,row.message]),
-  ...profile.patterns.flatMap(row=>[row.label,row.headline,row.message,row.evidenceMessage||""])
+  ...profile.patterns.flatMap(row=>[row.label,row.headline,row.message,row.evidenceMessage||""]),
+  recovered.message
 ]){
-  assert.doesNotMatch(text.toLowerCase(),/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|diagnóstico automático|\b[0-9]+\s*(?:pts|pontos)\b/u,"a memória pedagógica não deve transformar autoavaliações em classificação");
+  assert.doesNotMatch(String(text||"").toLowerCase(),/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|diagnóstico automático|\b[0-9]+\s*(?:pts|pontos)\b/u,"a memória pedagógica não deve transformar autoavaliações em classificação");
 }
 
-console.log("✓ memória de escrita Português: memória local limitada · foco pré-resposta só com atenção recorrente · perfil transversal só após 3 tentativas únicas · domínios e evidência distinguidos · zero nota automática");
+console.log("✓ memória de escrita Português: foco pré-resposta · perfil transversal · atenção pode deixar de ser recorrente só após 2 Cumpri consecutivos com evidência · zero nota automática");
