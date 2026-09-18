@@ -15,6 +15,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Report duplicate Portuguese prompts
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE' > portuguese-duplicate-prompts.log
+          import {readdirSync,readFileSync} from 'node:fs';
+          const dir='content/vnext/portuguese/foundation';
+          const files=readdirSync(dir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/.test(name));
+          const items=files.flatMap(name=>JSON.parse(readFileSync(`${dir}/${name}`,'utf8')).items);
+          const byPrompt=new Map();
+          for(const item of items){
+            const rows=byPrompt.get(item.prompt)||[];
+            rows.push(item.id);
+            byPrompt.set(item.prompt,rows);
+          }
+          for(const [prompt,ids] of byPrompt){
+            if(ids.length>1)console.log(`${ids.join(', ')} :: ${prompt}`);
+          }
+          NODE
+          cat portuguese-duplicate-prompts.log
       - name: Check Portuguese boundary cases directly
         shell: bash
         run: |
@@ -23,11 +42,12 @@ jobs:
           echo "$?" > boundary-cases-exit.txt
           cat boundary-cases.log
           exit 0
-      - name: Upload boundary diagnostic
+      - name: Upload early Portuguese diagnostics
         uses: actions/upload-artifact@v4
         with:
-          name: portuguese-boundary-diagnostic
+          name: portuguese-early-diagnostic
           path: |
+            portuguese-duplicate-prompts.log
             boundary-cases.log
             boundary-cases-exit.txt
       - name: Regenerate Portuguese difficulty matrix
