@@ -1,7 +1,8 @@
 "use client";
 
-import {useMemo,useState} from "react";
+import {useEffect,useMemo,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
+import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight} from "../lib/portugueseWritingMemory";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -26,6 +27,8 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const [selfAssessment,setSelfAssessment]=useState({});
   const [revisionDrafts,setRevisionDrafts]=useState({});
   const [revisions,setRevisions]=useState({});
+  const [writingMemory,setWritingMemory]=useState([]);
+  const [attemptId]=useState(()=>`ptx-${Date.now()}-${Math.random().toString(36).slice(2,8)}`);
   const item=exam.items[index];
   const block=exam.blocks.find(candidate=>candidate.itemIds.includes(item.id));
   const answeredCount=useMemo(()=>exam.items.filter(row=>answerFilled(row,answers[row.id])).length,[answers,exam.items]);
@@ -36,6 +39,13 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
   const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
 
+  useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
+
+  const rememberAssessment=(row,assessment)=>setWritingMemory(current=>{
+    const next=recordPortugueseWritingMemory(current,{attemptId,item:row,assessment});
+    savePortugueseWritingMemory(next);
+    return next;
+  });
   const setAnswer=value=>setAnswers(current=>({...current,[item.id]:value}));
   const goTo=next=>{setIndex(Math.max(0,Math.min(exam.items.length-1,next)));setMobileTextOpen(false);window.scrollTo?.({top:0,behavior:"smooth"});};
   const updateCriterion=(row,criterionId,patch)=>{
@@ -46,6 +56,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
       [criterionId]:{...(selfAssessment[itemId]?.[criterionId]||{}),...patch}
     };
     setSelfAssessment(current=>({...current,[itemId]:nextItemAssessment}));
+    if(Object.prototype.hasOwnProperty.call(patch,"status"))rememberAssessment(row,nextItemAssessment);
     setRevisions(current=>{
       const history=current[itemId]||[];
       if(!history.length)return current;
@@ -67,6 +78,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
     const revision={before,after,targetedCriterionIds,assessmentBefore:assessmentSnapshot,assessmentAfter:assessmentSnapshot,sequence:(revisions[row.id]||[]).length+1};
     setAnswers(current=>({...current,[row.id]:after}));
     setRevisions(current=>({...current,[row.id]:[...(current[row.id]||[]),revision]}));
+    rememberAssessment(row,assessment);
     cancelRevision(row.id);
   };
 
@@ -93,6 +105,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
             const summary=selfAssessmentSummary(criteria,itemAssessment);
             const rowRevisions=revisions[row.id]||[];
             const editing=Object.prototype.hasOwnProperty.call(revisionDrafts,row.id);
+            const priorPattern=writingMemoryInsight(writingMemory,row,{excludeAttemptId:attemptId});
             return <article className="ptx-review-item" key={row.id}>
               <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className="is-pending">Autoavaliação guiada</strong>}</div>
               <h3>{row.prompt}</h3>
@@ -103,6 +116,11 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
               </>:<>
                 <p className="ptx-open-answer"><b>A tua resposta atual:</b> {String(value||"").trim()||"—"}</p>
                 <details><summary>Ver resposta de referência</summary><p>{row.referenceAnswer}</p></details>
+                {priorPattern.available&&<div className="ptx-improvement-insight">
+                  <strong>Lembra-te do padrão das tentativas anteriores</strong>
+                  <p>Este aviso usa apenas as tuas próprias autoavaliações anteriores em respostas do mesmo domínio. Não é uma classificação nem um diagnóstico automático.</p>
+                  {priorPattern.rows.map(memoryRow=><p key={memoryRow.criterionId}><b>{memoryRow.label}</b> — {memoryRow.message}</p>)}
+                </div>}
                 <section className="ptx-self-assessment" aria-label={`Autoavaliação de ${row.id}`}>
                   <div className="ptx-self-head"><div><span>Autoavaliação por critérios</span><h4>Compara a tua resposta com a grelha</h4></div><small>Sem nota automática</small></div>
                   {criteria.map(criterion=>{
@@ -149,7 +167,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                     </div>;
                   })}
                 </section>
-                <p className="ptx-pending-note">A autoavaliação, a comparação entre versões e a evolução assinalada ficam guardadas nesta tentativa, mas não produzem classificação automática final.</p>
+                <p className="ptx-pending-note">A autoavaliação, a comparação entre versões e a evolução assinalada ficam guardadas nesta tentativa; o padrão entre tentativas é guardado apenas no dispositivo e não produz classificação automática final.</p>
               </>}
             </article>;
           })}
