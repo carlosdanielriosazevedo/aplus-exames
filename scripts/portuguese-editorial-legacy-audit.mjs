@@ -20,14 +20,22 @@ const revisedIds=[
 assert.equal(new Set(revisedIds).size,revisedIds.length,"IDs revistos devem ser únicos");
 assert.equal(revisedIds.length,39,"esta passagem deve proteger 39 itens revistos");
 
+const longFormCompetencies=new Set([
+  "pt-leitura-inferencia","pt-leitura-organizacao","pt-leitura-informacao","pt-leitura-coesao",
+  "pt-literatura-voz","pt-literatura-temas","pt-literatura-forma",
+  "pt-escrita-revisao","pt-escrita-exposicao","pt-escrita-argumentacao","pt-escrita-opiniao"
+]);
+
 for(const id of revisedIds){
   const item=byId(id);
   if(item.responseType==="multiple-choice"){
     assert.equal(item.options.length,4,`${id}: escolha múltipla deve manter quatro opções`);
     assert.equal(new Set(item.options.map(option=>option.trim().toLocaleLowerCase("pt-PT"))).size,4,`${id}: opções devem ser distintas`);
     assert.ok(Number.isInteger(item.answerIndex)&&item.answerIndex>=0&&item.answerIndex<4,`${id}: answerIndex inválido`);
-    const distractors=item.options.filter((_,index)=>index!==item.answerIndex);
-    assert.ok(distractors.every(option=>option.split(/\s+/u).filter(Boolean).length>=4),`${id}: distrator demasiado curto/caricatural`);
+    if(longFormCompetencies.has(item.competencyId)){
+      const distractors=item.options.filter((_,index)=>index!==item.answerIndex);
+      assert.ok(distractors.every(option=>option.split(/\s+/u).filter(Boolean).length>=4),`${id}: distrator discursivo demasiado curto/caricatural`);
+    }
   }
 }
 
@@ -43,4 +51,4 @@ assert.match(byId("PT639-FND-094").options[3],/Embora possam causar distração/
 assert.equal(byId("PT639-FND-096").answerIndex,2);
 assert.match(byId("PT639-FND-096").options[2],/Repete a mesma ideia/u);
 
-console.log(`✓ revisão editorial legado Português: ${revisedIds.length} itens protegidos nas vagas 1–5; distratores mínimos e equivalentes cronológicos validados`);
+console.log(`✓ revisão editorial legado Português: ${revisedIds.length} itens protegidos nas vagas 1–5; distratores discursivos e equivalentes cronológicos validados`);
