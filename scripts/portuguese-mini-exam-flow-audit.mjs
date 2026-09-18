@@ -55,10 +55,12 @@ assert.match(component,/Padrão do domínio/u,"a UI deve distinguir padrões ain
 assert.match(component,/Só aparece após repetição suficiente/u,"a UI deve explicar o limiar conservador do resumo");
 assert.match(component,/não é uma classificação nem um diagnóstico automático/u,"o perfil agregado deve explicitar que não é nota nem diagnóstico");
 
-assert.match(component,/writingMemoryPreAnswerFocus/u,"a execução deve conseguir transformar atenção recorrente num foco pré-resposta");
+assert.match(component,/writingActivePreAnswerFocus/u,"a execução deve usar apenas atenções ainda ativas no foco pré-resposta");
+assert.match(progressModule,/writingActivePreAnswerFocus/u,"o motor temporal deve filtrar do foco as atenções que deixaram de ser recorrentes");
+assert.match(progressModule,/suppressedResolved/u,"a supressão de um lembrete resolvido deve ficar explícita e auditável");
 assert.match(component,/const \[dismissedWritingFocus,setDismissedWritingFocus\]=useState\(\{\}\)/u,"o aluno deve poder ocultar um lembrete pré-resposta sem apagar a memória");
 assert.match(component,/Antes de responder, escolhe 1–2 pontos para vigiar/u,"o foco deve surgir antes da escrita, não apenas na correção");
-assert.match(component,/Este lembrete vem apenas das tuas autoavaliações anteriores no mesmo domínio/u,"a origem do lembrete deve ficar explícita");
+assert.match(component,/Pontos que deixaram de ser atenção recorrente nas tentativas recentes deixam de aparecer aqui/u,"a UI deve explicar porque um lembrete pode desaparecer com evolução sustentada");
 assert.match(component,/>Ocultar<\/button>/u,"o foco pedagógico deve ser dispensável pelo aluno");
 assert.match(css,/\.ptx-memory-focus\{/u,"o foco pré-resposta deve ter apresentação própria e não parecer uma correção final");
 assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-memory-focus-head\{flex-direction:column\}/u,"o foco pré-resposta deve adaptar-se ao mobile");
@@ -80,4 +82,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
 
-console.log("✓ fluxo Mini-exame Português: foco pré-resposta · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
+console.log("✓ fluxo Mini-exame Português: foco pré-resposta só com atenções ativas · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
