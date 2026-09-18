@@ -3,6 +3,7 @@
 import {useEffect,useMemo,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile,writingMemoryPreAnswerFocus} from "../lib/portugueseWritingMemory";
+import {writingResolvedAttentions} from "../lib/portugueseWritingProgress";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -40,6 +41,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
   const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
   const writingProfile=useMemo(()=>writingMemoryProfile(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
+  const writingProgress=useMemo(()=>writingResolvedAttentions(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const activeWritingFocus=useMemo(()=>writingMemoryPreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
 
   useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
@@ -97,6 +99,11 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
+      {writingProgress.resolved.length>0&&<section className="ptx-progress-story" aria-label="Evolução recente nas autoavaliações de escrita">
+        <span>Evolução recente</span><h2>Boa evolução nas tuas autoavaliações</h2>
+        <p>Estes pontos tiveram atenção recorrente no teu histórico e deixaram de a mostrar nas tentativas mais recentes. É um sinal para manteres o cuidado, não uma conclusão definitiva sobre a tua escrita.</p>
+        <div className="ptx-progress-story-list">{writingProgress.resolved.slice(0,3).map(progress=><article key={progress.criterionId}><strong>{progress.label}</strong><p>{progress.message}</p></article>)}</div>
+      </section>}
       {writingProfile.available&&<section className="ptx-improvement-insight" aria-label="Padrões de escrita autoassinalados">
         <strong>Padrões de escrita que tens assinalado</strong>
         <p>Resumo baseado apenas nas tuas autoavaliações de {writingProfile.attempts} tentativas anteriores. Só aparece após repetição suficiente e não é uma classificação nem um diagnóstico automático.</p>
