@@ -54,6 +54,14 @@ assert.match(component,/Padrão do domínio/u,"a UI deve distinguir padrões ain
 assert.match(component,/Só aparece após repetição suficiente/u,"a UI deve explicar o limiar conservador do resumo");
 assert.match(component,/não é uma classificação nem um diagnóstico automático/u,"o perfil agregado deve explicitar que não é nota nem diagnóstico");
 
+assert.match(component,/writingMemoryPreAnswerFocus/u,"a execução deve conseguir transformar atenção recorrente num foco pré-resposta");
+assert.match(component,/const \[dismissedWritingFocus,setDismissedWritingFocus\]=useState\(\{\}\)/u,"o aluno deve poder ocultar um lembrete pré-resposta sem apagar a memória");
+assert.match(component,/Antes de responder, escolhe 1–2 pontos para vigiar/u,"o foco deve surgir antes da escrita, não apenas na correção");
+assert.match(component,/Este lembrete vem apenas das tuas autoavaliações anteriores no mesmo domínio/u,"a origem do lembrete deve ficar explícita");
+assert.match(component,/>Ocultar<\/button>/u,"o foco pedagógico deve ser dispensável pelo aluno");
+assert.match(css,/\.ptx-memory-focus\{/u,"o foco pré-resposta deve ter apresentação própria e não parecer uma correção final");
+assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-memory-focus-head\{flex-direction:column\}/u,"o foco pré-resposta deve adaptar-se ao mobile");
+
 assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
@@ -62,4 +70,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
 
-console.log("✓ fluxo Mini-exame Português: autoavaliação por critérios · feedback localizado · ciclo antes/depois · memória por domínio + perfil transversal conservador · foundation · zero nota automática");
+console.log("✓ fluxo Mini-exame Português: foco pré-resposta a partir de atenção recorrente · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");

@@ -60,6 +60,21 @@ export function writingMemoryInsight(memory,item,{excludeAttemptId=null,minObser
   return {available:insights.length>0,rows:insights,observationCount:rows.length};
 }
 
+export function writingMemoryPreAnswerFocus(memory,item,{excludeAttemptId=null,minObservations=2,maxRows=2}={}){
+  if(item?.responseType!=="restricted-response")return {available:false,rows:[],observationCount:0};
+  const insight=writingMemoryInsight(memory,item,{excludeAttemptId,minObservations});
+  const rows=insight.rows
+    .filter(row=>row.tone==="attention")
+    .map(row=>({
+      ...row,
+      needsWork:row.counts.partial+row.counts["not-yet"],
+      prompt:`Antes de terminares, confirma este ponto: ${row.label}`
+    }))
+    .sort((a,b)=>b.needsWork-a.needsWork||b.observations-a.observations||a.label.localeCompare(b.label,"pt"))
+    .slice(0,Math.max(1,maxRows));
+  return {available:rows.length>0,rows,observationCount:insight.observationCount};
+}
+
 function profileObservationForAttempt(rows,criterionId){
   const entries=rows.map(row=>({entry:row.assessment?.[criterionId],row})).filter(x=>x.entry?.status);
   if(!entries.length)return null;
