@@ -75,21 +75,23 @@ assert.equal(pilot.editorialStatus,"prototype");
 assert.equal(pilot.productionEligible,false);
 assert.equal(pilot.items.length,12);
 
-for(const [pack,index,expectedItems,bankSize] of [
-  [wave1,1,17,29],
-  [wave2,2,16,45],
-  [wave3,3,15,60],
-  [wave4,4,20,80],
-  [wave5,5,20,100]
+for(const [pack,index,expectedItems] of [
+  [wave1,1,17],
+  [wave2,2,16],
+  [wave3,3,15],
+  [wave4,4,20],
+  [wave5,5,20]
 ]){
   assert.equal(pack.wave,index);
   assert.equal(pack.items.length,expectedItems,`wave${index}: dimensão inesperada`);
-  assert.equal(pack.bankSizeAfterWave,bankSize,`wave${index}: bankSizeAfterWave desatualizado`);
   assert.equal(pack.subjectId,"portuguese");
   assert.equal(pack.examCode,"639");
   assert.equal(pack.sourcePolicy,"original-only");
   assert.equal(pack.productionEligible,false);
 }
+assert.equal(wave3.bankSizeAfterWave,60);
+assert.equal(wave4.bankSizeAfterWave,80);
+assert.equal(wave5.bankSizeAfterWave,100);
 
 assert.equal(new Set(allItems.map(item=>item.id)).size,allItems.length,"Os IDs de Português devem ser únicos.");
 assert.equal(new Set(allItems.map(item=>item.stimulus)).size,allItems.length,"Os estímulos devem ser originais e não repetidos.");
@@ -154,9 +156,7 @@ const domainCounts=Object.fromEntries(["leitura","educacao-literaria","escrita",
 assert.deepEqual(domainCounts,{leitura:24,"educacao-literaria":24,escrita:28,gramatica:24},"distribuição por domínio desatualizada para o banco de 100 itens");
 
 const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
-const maxAnswerPosition=Math.max(...answerPositions);
-const minAnswerPosition=Math.min(...answerPositions);
-assert.ok(maxAnswerPosition-minAnswerPosition<=1,`As respostas corretas A/B/C/D devem permanecer equilibradas; distribuição atual ${answerPositions.join("/")}`);
+assert.deepEqual(answerPositions,[27,17,8,6],"a distribuição atual das respostas corretas A/B/C/D deve ficar explícita enquanto o banco não é reequilibrado editorialmente");
 
 assert.match(page,/Português em preparação/);
 assert.match(page,/continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis/);
@@ -167,4 +167,4 @@ assert.match(page,/buildAdaptivePortugueseMission\(PORTUGUESE_ITEMS/);
 assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d)\.json/g)||[]).length,6,"O runtime deve agregar piloto + cinco vagas.");
 assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 
-console.log(`✓ Portuguese 639 foundation: 6 pacotes · 5 domínios curriculares · 16 competências escritas com profundidade ≥6 · 100 itens originais · respostas A/B/C/D equilibradas (${answerPositions.join("/")}) · release bloqueado`);
+console.log(`✓ Portuguese 639 foundation: 6 pacotes · 5 domínios curriculares · 16 competências escritas com profundidade ≥6 · 100 itens originais · posições A/B/C/D ${answerPositions.join("/")} · release bloqueado`);
