@@ -2,7 +2,7 @@
 
 import {useEffect,useMemo,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
-import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight} from "../lib/portugueseWritingMemory";
+import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -38,6 +38,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const rubricCriteria=openItems.flatMap(row=>(row.rubric?.criteria||[]).map(criterion=>({itemId:row.id,criterionId:criterion.id})));
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
   const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
+  const writingProfile=useMemo(()=>writingMemoryProfile(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
 
   useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
 
@@ -94,6 +95,14 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
+      {writingProfile.available&&<section className="ptx-improvement-insight" aria-label="Padrões de escrita autoassinalados">
+        <strong>Padrões de escrita que tens assinalado</strong>
+        <p>Resumo baseado apenas nas tuas autoavaliações de {writingProfile.attempts} tentativas anteriores. Só aparece após repetição suficiente e não é uma classificação nem um diagnóstico automático.</p>
+        {writingProfile.patterns.slice(0,3).map(pattern=><div key={pattern.criterionId}>
+          <p><b>{pattern.transversal?"Padrão transversal":"Padrão do domínio"} · {pattern.headline}:</b> {pattern.label} — {pattern.message}</p>
+          {pattern.evidenceAttention&&<p><b>Evidência:</b> {pattern.evidenceMessage}</p>}
+        </div>)}
+      </section>}
       <div className="ptx-review-list">
         {exam.blocks.map((reviewBlock,blockIndex)=><section className="ptx-review-block" key={reviewBlock.key}>
           {reviewBlock.type==="shared-passage"&&<div className="ptx-review-passage"><span>Texto {blockIndex+1}</span><h2>{reviewBlock.title}</h2><p>{reviewBlock.passageText}</p></div>}
@@ -151,7 +160,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                     return <div className="ptx-revision-record" key={revision.sequence}>
                       <div className="ptx-revision-compare">
                         <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
-                        <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
+                        <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id)?.label||id).join(" · "):"revisão geral"}</small>
                       </div>
                       <div className={`ptx-improvement-insight ${progress.changed?"has-change":""}`}>
                         <strong>O que mudou na tua autoavaliação</strong>
