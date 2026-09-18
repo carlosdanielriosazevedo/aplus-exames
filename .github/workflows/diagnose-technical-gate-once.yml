@@ -15,6 +15,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Check Portuguese boundary cases directly
+        shell: bash
+        run: |
+          set +e
+          node scripts/portuguese-boundary-cases-audit.mjs > boundary-cases.log 2>&1
+          echo "$?" > boundary-cases-exit.txt
+          cat boundary-cases.log
+          exit 0
       - name: Regenerate Portuguese difficulty matrix
         run: node scripts/generate-portuguese-difficulty.mjs
       - name: Commit generated matrix if needed
@@ -40,8 +48,12 @@ jobs:
           cat technical-gate.log
           exit 0
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: technical-gate-diagnostic
           path: |
+            boundary-cases.log
+            boundary-cases-exit.txt
             technical-gate.log
             technical-gate-exit.txt
+          if-no-files-found: ignore
