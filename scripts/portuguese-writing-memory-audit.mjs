@@ -5,12 +5,13 @@ import {
   normalizePortugueseWritingMemory,
   recordPortugueseWritingMemory,
   writingMemoryInsight,
+  writingMemoryPreAnswerFocus,
   writingMemoryProfile,
   assessmentMovement
 } from "../app/lib/portugueseWritingMemory.js";
 
 const item={
-  id:"PT-MEM-1",domain:"leitura",competencyId:"pt-leitura-organizacao",
+  id:"PT-MEM-1",domain:"leitura",competencyId:"pt-leitura-organizacao",responseType:"restricted-response",
   rubric:{criteria:[
     {id:"conteudo",label:"Explica a progressão do texto."},
     {id:"fundamentacao",label:"Mobiliza dois elementos pertinentes."}
@@ -32,11 +33,20 @@ assert.equal(insight.available,true,"duas tentativas anteriores devem permitir p
 assert.equal(insight.rows.length,2,"os dois critérios recorrentes devem ser analisados");
 assert.match(insight.rows.find(row=>row.criterionId==="fundamentacao").message,/Parcial|Ainda não/u,"um padrão de dificuldade autoassinalada deve ser descrito sem diagnosticar");
 
+const focus=writingMemoryPreAnswerFocus(memory,item,{excludeAttemptId:"a3"});
+assert.equal(focus.available,true,"uma atenção recorrente deve poder gerar um lembrete antes da próxima resposta aberta");
+assert.equal(focus.rows.length,1,"o lembrete pré-resposta deve excluir padrões neutros ou positivos");
+assert.equal(focus.rows[0].criterionId,"fundamentacao","o foco deve priorizar o critério com dificuldade autoassinalada recorrente");
+assert.match(focus.rows[0].prompt,/Antes de terminares/u);
+assert.equal(writingMemoryPreAnswerFocus(memory,{...item,responseType:"multiple-choice"}).available,false,"o foco de escrita não deve aparecer em escolha múltipla");
+
 const oneAttempt=writingMemoryInsight(memory,item,{excludeAttemptId:"a2"});
 assert.equal(oneAttempt.available,false,"uma só observação anterior não deve gerar padrão por tarefa");
+assert.equal(writingMemoryPreAnswerFocus(memory,item,{excludeAttemptId:"a2"}).available,false,"uma só observação anterior também não deve gerar foco pré-resposta");
 
 const otherDomain={...item,id:"PT-MEM-2",domain:"educacao-literaria"};
 assert.equal(writingMemoryInsight(memory,otherDomain,{excludeAttemptId:"a3"}).available,false,"a memória por tarefa deve respeitar o domínio");
+assert.equal(writingMemoryPreAnswerFocus(memory,otherDomain,{excludeAttemptId:"a3"}).available,false,"o lembrete pré-resposta não deve importar padrões de outro domínio");
 
 memory=recordPortugueseWritingMemory(memory,{attemptId:"a3",item:{...item,id:"PT-MEM-3"},at:4,assessment:{conteudo:{status:"partial",evidence:""},fundamentacao:{status:"not-yet",evidence:""}}});
 const literatureItem={
@@ -69,6 +79,7 @@ const strengthMemory=["s1","s2","s3"].reduce((rows,attemptId,index)=>recordPortu
 const strength=writingMemoryProfile(strengthMemory).patterns.find(row=>row.criterionId==="conteudo");
 assert.equal(strength.kind,"strength","um padrão repetido de Cumpri pode ser apresentado como consistência autoassinalada, sem o converter em domínio medido");
 assert.equal(strength.evidenceAttention,false);
+assert.equal(writingMemoryPreAnswerFocus(strengthMemory,item).available,false,"um padrão positivo não deve transformar-se num aviso de dificuldade antes de responder");
 
 const movement=assessmentMovement({conteudo:{status:"not-yet"},fundamentacao:{status:"met"}},{conteudo:{status:"partial"},fundamentacao:{status:"partial"}});
 assert.equal(movement.find(row=>row.criterionId==="conteudo").direction,"up");
@@ -79,9 +90,10 @@ assert.equal(normalizePortugueseWritingMemory(noisy).length,PORTUGUESE_WRITING_M
 
 for(const text of [
   ...insight.rows.map(row=>`${row.label} ${row.message}`),
+  ...focus.rows.flatMap(row=>[row.prompt,row.message]),
   ...profile.patterns.flatMap(row=>[row.label,row.headline,row.message,row.evidenceMessage||""])
 ]){
   assert.doesNotMatch(text.toLowerCase(),/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|diagnóstico automático|\b[0-9]+\s*(?:pts|pontos)\b/u,"a memória pedagógica não deve transformar autoavaliações em classificação");
 }
 
-console.log("✓ memória de escrita Português: memória local limitada · padrões por tarefa após 2 observações · perfil transversal só após 3 tentativas únicas · domínios e evidência distinguidos · zero nota automática");
+console.log("✓ memória de escrita Português: memória local limitada · foco pré-resposta só com atenção recorrente · perfil transversal só após 3 tentativas únicas · domínios e evidência distinguidos · zero nota automática");
