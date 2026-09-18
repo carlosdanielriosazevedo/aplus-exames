@@ -1,0 +1,18 @@
+{
+  "feature": "portuguese-writing-cycle-v2",
+  "baseMain": "22c46b66db67286bf4274920192dcd86388b18a0",
+  "phase": "engine-and-ui-ready-for-integration",
+  "studentLive": false,
+  "automaticGrade": false,
+  "integrationPending": true,
+  "checks": [
+    "engine",
+    "unit-tests",
+    "pedagogical-scenarios",
+    "boundary-cases",
+    "ui-component",
+    "responsive-css",
+    "no-auto-grade-contract",
+    "copy-safety"
+  ]
+}
