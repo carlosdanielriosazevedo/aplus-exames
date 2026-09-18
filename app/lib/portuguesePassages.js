@@ -73,3 +73,22 @@ export function portugueseExamReadingLoad(items){
     return total+words(block.items[0]?.stimulus);
   },0);
 }
+
+export function buildPortuguesePassagePrototypeExam(document){
+  if(document?.status!=="prototype-not-live")throw new Error("O construtor de protótipo só aceita documentos prototype-not-live.");
+  const items=materializePortuguesePassageItems(document);
+  const blocks=buildPortugueseExamBlocks(items);
+  const maxPoints=items.reduce((sum,item)=>sum+(Number(item.maxPoints)||0),0);
+  const responseTypes=items.reduce((counts,item)=>({...counts,[item.responseType]:(counts[item.responseType]||0)+1}),{});
+  return {
+    status:"prototype-not-live",
+    subjectId:document.subjectId,
+    examCode:document.examCode,
+    items,
+    blocks,
+    itemCount:items.length,
+    maxPoints,
+    readingWords:portugueseExamReadingLoad(items),
+    responseTypes
+  };
+}
