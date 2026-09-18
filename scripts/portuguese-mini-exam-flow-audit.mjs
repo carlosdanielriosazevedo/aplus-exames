@@ -36,6 +36,7 @@ assert.match(component,/const \[revisions,setRevisions\]=useState\(\{\}\)/u,"o h
 assert.match(component,/function revisionTargets/u,"a revisão deve associar a nova versão aos critérios que o aluno tentou melhorar");
 assert.match(component,/\["partial","not-yet"\]/u,"lacunas e cumprimento parcial devem ter prioridade como alvos de melhoria");
 assert.match(component,/targetedCriterionIds/u,"cada revisão deve guardar os critérios trabalhados");
+assert.match(component,/criteria\.find\(criterion=>criterion\.id===id\)\?\.label/u,"o histórico deve resolver o rótulo pelo ID exato do critério trabalhado");
 assert.match(component,/before,after/u,"cada revisão deve preservar explicitamente versões antes e depois");
 assert.match(component,/Melhorar resposta/u,"a revisão deve oferecer uma ação explícita de melhoria");
 assert.match(component,/Guardar nova versão/u,"a nova redação deve ser confirmada antes de substituir a resposta atual");
