@@ -66,6 +66,7 @@
     "portuguese-engine:audit": "node scripts/portuguese-engine-audit.mjs",
     "portuguese-wave4:audit": "node scripts/portuguese-wave4-audit.mjs",
     "portuguese-wave5:audit": "node scripts/portuguese-wave5-audit.mjs",
+    "portuguese-wave6:audit": "node scripts/portuguese-wave6-audit.mjs",
     "portuguese-bank-quality:audit": "node scripts/portuguese-bank-quality-audit.mjs",
     "portuguese-bank-shape:audit": "node scripts/portuguese-bank-shape-audit.mjs",
     "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
