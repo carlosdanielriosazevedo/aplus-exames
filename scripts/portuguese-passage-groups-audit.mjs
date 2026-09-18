@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {buildPortugueseExamBlocks,materializePortuguesePassageItems,portugueseExamReadingLoad,validatePortugueseSharedPassages} from "../app/lib/portuguesePassages.js";
+import {buildPortugueseExamBlocks,buildPortuguesePassagePrototypeExam,materializePortuguesePassageItems,portugueseExamReadingLoad,validatePortugueseSharedPassages} from "../app/lib/portuguesePassages.js";
 import {gradePortugueseResponse} from "../app/lib/portugueseEngine.js";
 
 const prototype=JSON.parse(readFileSync(new URL("../content/vnext/portuguese/portuguese-639-passage-prototypes.json",import.meta.url),"utf8"));
@@ -36,6 +36,13 @@ const blocks=buildPortugueseExamBlocks(materialized);
 assert.equal(blocks.length,2,"seis itens devem renderizar como dois blocos de texto");
 assert.ok(blocks.every(block=>block.type==="shared-passage"&&block.items.length===3),"cada texto deve aparecer uma vez e servir três perguntas");
 assert.equal(portugueseExamReadingLoad(materialized),prototype.passages.reduce((sum,passage)=>sum+words(passage.text),0),"carga de leitura deve contar cada texto uma única vez");
+
+const exam=buildPortuguesePassagePrototypeExam(prototype);
+assert.equal(exam.itemCount,6,"o protótipo de mini-exame deve ter seis itens");
+assert.equal(exam.blocks.length,2,"o protótipo deve apresentar dois blocos de texto");
+assert.equal(exam.maxPoints,78,"seis itens de 13 pontos devem totalizar 78 pontos nesta unidade protótipo");
+assert.deepEqual(exam.responseTypes,{"multiple-choice":4,"restricted-response":2},"mistura de formatos inesperada");
+assert.ok(exam.readingWords>=360&&exam.readingWords<=640,"carga de leitura do protótipo fora do intervalo previsto para dois textos");
 
 const multipleChoice=materialized.filter(item=>item.responseType==="multiple-choice");
 const restricted=materialized.filter(item=>item.responseType==="restricted-response");
@@ -77,5 +84,6 @@ assert.throws(()=>validatePortugueseSharedPassages([
 ]),/passageText diferente/u,"um passageId não pode apontar para textos diferentes");
 
 assert.throws(()=>validatePortugueseSharedPassages([{id:"A",passageId:"P"}]),/exige passageText/u,"passageId sem texto deve falhar");
+assert.throws(()=>buildPortuguesePassagePrototypeExam({...prototype,status:"live"}),/prototype-not-live/u,"construtor de protótipo não deve aceitar conteúdo live por acidente");
 
-console.log(`✓ grupos de texto Português: ${prototype.passages.length} textos originais · ${materialized.length} itens completos · 4 seleção + 2 construção · renderização sem duplicação validada`);
+console.log(`✓ grupos de texto Português: ${prototype.passages.length} textos originais · ${materialized.length} itens completos · mini-exame 78 pontos · 4 seleção + 2 construção · renderização sem duplicação validada`);
