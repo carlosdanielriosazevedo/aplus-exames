@@ -74,6 +74,7 @@
     "portuguese-exam-authenticity:audit": "node scripts/portuguese-exam-authenticity-audit.mjs",
     "portuguese-passage-groups:audit": "node scripts/portuguese-passage-groups-audit.mjs",
     "portuguese-passage-ui:audit": "node scripts/portuguese-passage-ui-audit.mjs",
+    "portuguese-mini-exam-flow:audit": "node scripts/portuguese-mini-exam-flow-audit.mjs",
     "portuguese-rubric:audit": "node scripts/portuguese-rubric-audit.mjs",
     "portuguese-rubric-scenarios:audit": "node scripts/portuguese-rubric-scenarios-audit.mjs",
     "portuguese-rubric-text-calibration:audit": "node scripts/portuguese-rubric-text-calibration-audit.mjs",
