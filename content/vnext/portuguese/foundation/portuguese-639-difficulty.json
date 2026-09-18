@@ -1389,6 +1389,926 @@
         "estímulo: 20 palavras",
         "instrução: 22 palavras"
       ]
+    },
+    {
+      "id": "PT639-FND-061",
+      "level": 1,
+      "score": 1,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 23,
+        "promptWords": 9
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: multiple-choice",
+        "estímulo: 23 palavras",
+        "instrução: 9 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-062",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 20,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 20 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-063",
+      "level": 1,
+      "score": 1.15,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0.15,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 16,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: short-answer",
+        "estímulo: 16 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-064",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 26,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 26 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-065",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 30,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 30 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-066",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 14,
+        "promptWords": 12
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 14 palavras",
+        "instrução: 12 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-067",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 22,
+        "promptWords": 5
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 22 palavras",
+        "instrução: 5 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-068",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 18,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 18 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-069",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 15,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 15 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-070",
+      "level": 1,
+      "score": 1.15,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0.15,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 10,
+        "promptWords": 9
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: short-answer",
+        "estímulo: 10 palavras",
+        "instrução: 9 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-071",
+      "level": 1,
+      "score": 1,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 7,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: multiple-choice",
+        "estímulo: 7 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-072",
+      "level": 1,
+      "score": 1,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 8,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: multiple-choice",
+        "estímulo: 8 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-073",
+      "level": 2,
+      "score": 2.15,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0.15,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 16,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: short-answer",
+        "estímulo: 16 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-074",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 8,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 8 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-075",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 6,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 6 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-076",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 20,
+        "promptWords": 11
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 20 palavras",
+        "instrução: 11 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-077",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 13,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 13 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-078",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 22,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 22 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-079",
+      "level": 1,
+      "score": 1.15,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0.15,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 13,
+        "promptWords": 11
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: short-answer",
+        "estímulo: 13 palavras",
+        "instrução: 11 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-080",
+      "level": 4,
+      "score": 4,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 4,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 15,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: criar",
+        "formato: multiple-choice",
+        "estímulo: 15 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-081",
+      "level": 1,
+      "score": 1,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 26,
+        "promptWords": 9
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: multiple-choice",
+        "estímulo: 26 palavras",
+        "instrução: 9 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-082",
+      "level": 1,
+      "score": 1.15,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 1,
+        "response": 0.15,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 13,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: reconhecer",
+        "formato: short-answer",
+        "estímulo: 13 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-083",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 25,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 25 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-084",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 25,
+        "promptWords": 9
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 25 palavras",
+        "instrução: 9 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-085",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 17,
+        "promptWords": 4
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 17 palavras",
+        "instrução: 4 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-086",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 21,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 21 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-087",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 16,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 16 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-088",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 22,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 22 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-089",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 23,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 23 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-090",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 26,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 26 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-091",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 21,
+        "promptWords": 7
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 21 palavras",
+        "instrução: 7 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-092",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 11,
+        "promptWords": 10
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 11 palavras",
+        "instrução: 10 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-093",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 26,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 26 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-094",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 15,
+        "promptWords": 11
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 15 palavras",
+        "instrução: 11 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-095",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 12,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 12 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-096",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 22,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 22 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-097",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 12,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 12 palavras",
+        "instrução: 8 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-098",
+      "level": 2,
+      "score": 2.15,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0.15,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 10,
+        "promptWords": 11
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: short-answer",
+        "estímulo: 10 palavras",
+        "instrução: 11 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-099",
+      "level": 2,
+      "score": 2,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 8,
+        "promptWords": 6
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: multiple-choice",
+        "estímulo: 8 palavras",
+        "instrução: 6 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-100",
+      "level": 3,
+      "score": 3,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 9,
+        "promptWords": 8
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: multiple-choice",
+        "estímulo: 9 palavras",
+        "instrução: 8 palavras"
+      ]
     }
   ]
 }
