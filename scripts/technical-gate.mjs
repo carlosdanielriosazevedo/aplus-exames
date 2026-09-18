@@ -14,6 +14,7 @@ const checks=[
   ["Revisão editorial das vagas 1 a 5 de Português","npm",["run","portuguese-editorial-legacy:audit"]],
   ["Autenticidade estrutural do exame Português 639","npm",["run","portuguese-exam-authenticity:audit"]],
   ["Grupos de texto partilhado Português 639","npm",["run","portuguese-passage-groups:audit"]],
+  ["Interface de texto partilhado Português 639","npm",["run","portuguese-passage-ui:audit"]],
   ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Cenários adversariais das grelhas de Português","npm",["run","portuguese-rubric-scenarios:audit"]],
   ["Calibração textual das grelhas de Português","npm",["run","portuguese-rubric-text-calibration:audit"]],
