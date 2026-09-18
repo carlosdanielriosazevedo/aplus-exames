@@ -3,6 +3,7 @@ import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
+const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
 const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"utf8");
 const prototypeModule=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
 
@@ -29,12 +30,27 @@ assert.match(component,/selfAssessmentSummary/u,"a revisão deve calcular o pró
 assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve recolher evidência textual por critério");
 assert.match(component,/row\.rubric\?\.criteria/u,"os critérios apresentados devem vir da grelha editorial do item");
 assert.match(component,/critérios com evidência escrita/u,"a revisão deve tornar visível o progresso de evidência");
-assert.match(component,/não produz classificação automática final/u,"a autoavaliação não pode ser convertida numa classificação final");
-assert.doesNotMatch(component,/set.*points/iu,"a UI de autoavaliação não deve escrever pontuação automática");
+
+assert.match(component,/const \[revisionDrafts,setRevisionDrafts\]=useState\(\{\}\)/u,"o aluno deve poder preparar uma nova versão sem destruir a anterior");
+assert.match(component,/const \[revisions,setRevisions\]=useState\(\{\}\)/u,"o histórico de revisões deve ficar separado da resposta atual");
+assert.match(component,/function revisionTargets/u,"a revisão deve associar a nova versão aos critérios que o aluno tentou melhorar");
+assert.match(component,/\["partial","not-yet"\]/u,"lacunas e cumprimento parcial devem ter prioridade como alvos de melhoria");
+assert.match(component,/targetedCriterionIds/u,"cada revisão deve guardar os critérios trabalhados");
+assert.match(component,/before,after/u,"cada revisão deve preservar explicitamente versões antes e depois");
+assert.match(component,/Melhorar resposta/u,"a revisão deve oferecer uma ação explícita de melhoria");
+assert.match(component,/Guardar nova versão/u,"a nova redação deve ser confirmada antes de substituir a resposta atual");
+assert.match(component,/Antes · versão/u,"o histórico deve mostrar a versão anterior");
+assert.match(component,/Depois · versão/u,"o histórico deve mostrar a versão melhorada");
+assert.match(component,/respostas abertas melhoradas/u,"o resumo deve tornar visível quantas respostas foram efetivamente revistas");
+assert.match(css,/\.ptx-revision-compare\{[^}]*grid-template-columns:1fr 1fr/u,"desktop deve comparar antes/depois lado a lado");
+assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-revision-compare\{grid-template-columns:1fr\}/u,"mobile deve empilhar a comparação antes/depois");
+
+assert.match(component,/não produzem classificação automática final/u,"autoavaliação e revisões não podem ser convertidas numa classificação final");
+assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
 const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";
 assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas");
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
 
-console.log("✓ fluxo Mini-exame Português: integrado no router interno · autoavaliação com estados partilhados · feedback e próximo passo por critério · evidência preservada · Português continua bloqueado · zero nota automática");
+console.log("✓ fluxo Mini-exame Português: autoavaliação por critérios · feedback localizado · ciclo antes/depois com alvos de melhoria · histórico preservado · foundation · zero nota automática");
