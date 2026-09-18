@@ -12,20 +12,37 @@ function resultFor(item,value){
   return {final:true,correct:Number.isInteger(value)&&value===item.answerIndex};
 }
 
+const SELF_LEVELS=[
+  {id:"met",label:"Cumpri"},
+  {id:"partial",label:"Parcial"},
+  {id:"not-yet",label:"Ainda não"}
+];
+
 export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const [index,setIndex]=useState(0);
   const [answers,setAnswers]=useState({});
   const [review,setReview]=useState(false);
   const [mobileTextOpen,setMobileTextOpen]=useState(false);
+  const [selfAssessment,setSelfAssessment]=useState({});
   const item=exam.items[index];
   const block=exam.blocks.find(candidate=>candidate.itemIds.includes(item.id));
   const answeredCount=useMemo(()=>exam.items.filter(row=>answerFilled(row,answers[row.id])).length,[answers,exam.items]);
   const deterministicItems=exam.items.filter(row=>row.responseType==="multiple-choice");
   const deterministicCorrect=deterministicItems.filter(row=>resultFor(row,answers[row.id]).correct).length;
-  const openPending=exam.items.filter(row=>row.responseType==="restricted-response"&&answerFilled(row,answers[row.id])).length;
+  const openItems=exam.items.filter(row=>row.responseType==="restricted-response");
+  const openPending=openItems.filter(row=>answerFilled(row,answers[row.id])).length;
+  const rubricCriteria=openItems.flatMap(row=>(row.rubric?.criteria||[]).map(criterion=>({itemId:row.id,criterionId:criterion.id})));
+  const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
 
   const setAnswer=value=>setAnswers(current=>({...current,[item.id]:value}));
   const goTo=next=>{setIndex(Math.max(0,Math.min(exam.items.length-1,next)));setMobileTextOpen(false);window.scrollTo?.({top:0,behavior:"smooth"});};
+  const updateCriterion=(itemId,criterionId,patch)=>setSelfAssessment(current=>({
+    ...current,
+    [itemId]:{
+      ...(current[itemId]||{}),
+      [criterionId]:{...(current[itemId]?.[criterionId]||{}),...patch}
+    }
+  }));
 
   if(review){
     return <main className="ptx-shell">
@@ -36,7 +53,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
       <section className="ptx-summary">
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
         <div><strong>{deterministicCorrect}/{deterministicItems.length}</strong><span>certas nas escolhas múltiplas</span></div>
-        <div><strong>{openPending}</strong><span>respostas abertas para rever</span></div>
+        <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
       </section>
       <div className="ptx-review-list">
         {exam.blocks.map((reviewBlock,blockIndex)=><section className="ptx-review-block" key={reviewBlock.key}>
@@ -44,8 +61,9 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
           {reviewBlock.items.map((row)=>{
             const value=answers[row.id];
             const result=resultFor(row,value);
+            const criteria=row.rubric?.criteria||[];
             return <article className="ptx-review-item" key={row.id}>
-              <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className="is-pending">Autoavaliação necessária</strong>}</div>
+              <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className="is-pending">Autoavaliação guiada</strong>}</div>
               <h3>{row.prompt}</h3>
               {row.responseType==="multiple-choice"?<>
                 <p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"—"}</p>
@@ -54,7 +72,22 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
               </>:<>
                 <p className="ptx-open-answer"><b>A tua resposta:</b> {String(value||"").trim()||"—"}</p>
                 <details><summary>Ver resposta de referência</summary><p>{row.referenceAnswer}</p></details>
-                <p className="ptx-pending-note">Esta resposta não recebe classificação automática final.</p>
+                <section className="ptx-self-assessment" aria-label={`Autoavaliação de ${row.id}`}>
+                  <div className="ptx-self-head"><div><span>Autoavaliação por critérios</span><h4>Compara a tua resposta com a grelha</h4></div><small>Sem nota automática</small></div>
+                  {criteria.map(criterion=>{
+                    const evidence=selfAssessment[row.id]?.[criterion.id]||{};
+                    return <div className="ptx-criterion" key={criterion.id}>
+                      <div className="ptx-criterion-copy"><strong>{criterion.label}</strong><span>{criterion.points} pts na grelha editorial</span></div>
+                      <div className="ptx-criterion-levels" role="group" aria-label={`Avaliar critério ${criterion.label}`}>
+                        {SELF_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row.id,criterion.id,{status:level.id})}>{level.label}</button>)}
+                      </div>
+                      <label className="ptx-evidence-label">Onde está a evidência na tua resposta?
+                        <textarea rows={2} value={evidence.evidence||""} onChange={event=>updateCriterion(row.id,criterion.id,{evidence:event.target.value})} placeholder="Ex.: no 2.º período relacionei a permanência na praça com os encontros e as esplanadas." />
+                      </label>
+                    </div>;
+                  })}
+                </section>
+                <p className="ptx-pending-note">A autoavaliação fica guardada por critério nesta tentativa, mas não produz classificação automática final.</p>
               </>}
             </article>;
           })}

@@ -21,11 +21,20 @@ assert.match(page,/Os 120 itens permitem testar os fluxos/u,"a UI interna não p
 assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null\}\)/u,"o componente deve aceitar saída opcional para integração no fluxo principal");
 assert.match(component,/Sair do mini-exame/u,"a revisão deve permitir sair do fluxo integrado");
 assert.match(component,/>Sair<\/button>/u,"a execução deve permitir sair do fluxo integrado");
-assert.match(component,/não recebe classificação automática final/u,"a integração não pode transformar resposta aberta em nota automática");
+assert.match(component,/não atribui automaticamente uma classificação final/u,"a execução não pode transformar resposta aberta em nota automática");
+assert.match(component,/const \[selfAssessment,setSelfAssessment\]=useState\(\{\}\)/u,"a revisão deve guardar a autoavaliação por critério na tentativa");
+assert.match(component,/SELF_LEVELS/u,"a autoavaliação deve usar estados explícitos e não uma nota automática");
+assert.match(component,/Cumpri/u,"a grelha deve permitir marcar um critério como cumprido");
+assert.match(component,/Parcial/u,"a grelha deve permitir marcar cumprimento parcial");
+assert.match(component,/Ainda não/u,"a grelha deve permitir marcar um critério como ainda não cumprido");
+assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve recolher evidência textual por critério");
+assert.match(component,/row\.rubric\?\.criteria/u,"os critérios apresentados devem vir da grelha editorial do item");
+assert.match(component,/não produz classificação automática final/u,"a autoavaliação não pode ser convertida numa classificação final");
+assert.doesNotMatch(component,/set.*points/iu,"a UI de autoavaliação não deve escrever pontuação automática");
 
 const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";
 assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas");
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
 
-console.log("✓ fluxo Mini-exame Português: integrado no router interno · fonte editorial isolada na camada de dados · acesso pelo laboratório · área Exames preparada por disciplina · Português continua bloqueado em foundation · respostas abertas sem nota automática");
+console.log("✓ fluxo Mini-exame Português: integrado no router interno · fonte editorial isolada · autoavaliação guiada por critérios com evidência · Português continua bloqueado em foundation · respostas abertas sem nota automática");
