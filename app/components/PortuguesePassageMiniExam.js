@@ -12,7 +12,7 @@ function resultFor(item,value){
   return {final:true,correct:Number.isInteger(value)&&value===item.answerIndex};
 }
 
-export default function PortuguesePassageMiniExam({exam}){
+export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const [index,setIndex]=useState(0);
   const [answers,setAnswers]=useState({});
   const [review,setReview]=useState(false);
@@ -31,7 +31,7 @@ export default function PortuguesePassageMiniExam({exam}){
     return <main className="ptx-shell">
       <header className="ptx-header">
         <div><span className="ptx-kicker">Português 639 · protótipo</span><h1>Rever o mini-exame</h1></div>
-        <button className="ptx-ghost" onClick={()=>setReview(false)}>Voltar às respostas</button>
+        <div className="ptx-header-actions"><button className="ptx-ghost" onClick={()=>setReview(false)}>Voltar às respostas</button>{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair do mini-exame</button>}</div>
       </header>
       <section className="ptx-summary">
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
@@ -66,7 +66,7 @@ export default function PortuguesePassageMiniExam({exam}){
   return <main className="ptx-shell">
     <header className="ptx-header">
       <div><span className="ptx-kicker">Português 639 · experiência de mini-exame</span><h1>Texto + várias questões</h1></div>
-      <div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div>
+      <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
 
