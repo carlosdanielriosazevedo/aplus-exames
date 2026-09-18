@@ -3,6 +3,24 @@ export function portuguesePassageId(item){
   return id||null;
 }
 
+export function materializePortuguesePassageItems(document){
+  const passages=document?.passages||[];
+  return passages.flatMap(passage=>{
+    const passageId=String(passage?.passageId||"").trim();
+    const passageTitle=String(passage?.title||"").trim();
+    const passageText=String(passage?.text||"").trim();
+    if(!passageId)throw new Error("Passage prototype sem passageId.");
+    if(!passageText)throw new Error(`${passageId}: texto partilhado vazio.`);
+    return (passage.items||[]).map(item=>({
+      ...item,
+      passageId,
+      passageTitle,
+      passageText,
+      stimulus:null
+    }));
+  });
+}
+
 export function validatePortugueseSharedPassages(items){
   const groups=new Map();
   for(const item of items||[]){
@@ -54,4 +72,23 @@ export function portugueseExamReadingLoad(items){
     if(block.type==="shared-passage")return total+words(block.passageText);
     return total+words(block.items[0]?.stimulus);
   },0);
+}
+
+export function buildPortuguesePassagePrototypeExam(document){
+  if(document?.status!=="prototype-not-live")throw new Error("O construtor de protótipo só aceita documentos prototype-not-live.");
+  const items=materializePortuguesePassageItems(document);
+  const blocks=buildPortugueseExamBlocks(items);
+  const maxPoints=items.reduce((sum,item)=>sum+(Number(item.maxPoints)||0),0);
+  const responseTypes=items.reduce((counts,item)=>({...counts,[item.responseType]:(counts[item.responseType]||0)+1}),{});
+  return {
+    status:"prototype-not-live",
+    subjectId:document.subjectId,
+    examCode:document.examCode,
+    items,
+    blocks,
+    itemCount:items.length,
+    maxPoints,
+    readingWords:portugueseExamReadingLoad(items),
+    responseTypes
+  };
 }

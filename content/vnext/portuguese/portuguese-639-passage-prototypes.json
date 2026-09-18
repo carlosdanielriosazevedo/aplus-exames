@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 2,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -12,10 +12,70 @@
       "title": "Quando a cidade aprende a esperar",
       "sourceOrigin": "original",
       "text": "Durante anos, a pequena praça junto à estação foi tratada como um lugar de passagem. Os bancos eram poucos, a sombra quase inexistente e quem saía do comboio atravessava o espaço sem motivo para ficar. Quando o município decidiu remodelá-la, a primeira proposta previa mais estacionamento. Um grupo de moradores sugeriu outra solução: reduzir a circulação automóvel, plantar árvores e criar zonas onde fosse possível sentar, ler ou simplesmente esperar. A mudança foi recebida com desconfiança por alguns comerciantes, que temiam perder clientes. Nos primeiros meses, porém, aconteceu o contrário. As pessoas começaram a permanecer mais tempo na praça e vários estabelecimentos passaram a colocar pequenas esplanadas no exterior. O efeito mais interessante não foi apenas económico. A praça tornou-se um ponto de encontro entre moradores que antes se cruzavam sem parar. Também surgiram pequenas iniciativas culturais, organizadas por associações locais, que usavam o espaço sem necessidade de grandes estruturas. A remodelação não resolveu todos os problemas da zona, mas alterou uma ideia antiga: a de que um espaço público é eficiente apenas quando permite circular depressa. Às vezes, uma cidade funciona melhor quando cria condições para que alguém possa ficar.",
-      "plannedItems": [
-        {"id":"PT639-PASSAGE-LEITURA-001-Q1","competencyId":"pt-leitura-informacao","responseType":"multiple-choice","cognitive":"reconhecer"},
-        {"id":"PT639-PASSAGE-LEITURA-001-Q2","competencyId":"pt-leitura-inferencia","responseType":"multiple-choice","cognitive":"interpretar"},
-        {"id":"PT639-PASSAGE-LEITURA-001-Q3","competencyId":"pt-leitura-organizacao","responseType":"restricted-response","cognitive":"raciocinar"}
+      "items": [
+        {
+          "id": "PT639-PASSAGE-LEITURA-001-Q1",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-informacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "reconhecer",
+          "prompt": "Segundo o texto, que alteração ocorreu nos primeiros meses após a remodelação?",
+          "options": [
+            "Os comerciantes retiraram as esplanadas por falta de clientes.",
+            "As pessoas passaram a permanecer mais tempo na praça.",
+            "O município recuperou a proposta inicial de aumentar o estacionamento.",
+            "As associações deixaram de utilizar o espaço por falta de estruturas."
+          ],
+          "answerIndex": 1,
+          "explanation": "O texto afirma explicitamente que, nos primeiros meses, as pessoas começaram a permanecer mais tempo na praça.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LEITURA-001-Q2",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-inferencia",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A evolução descrita no texto permite concluir sobretudo que",
+          "options": [
+            "a redução do trânsito afastou definitivamente os comerciantes da praça.",
+            "o aumento das esplanadas foi a única consequência relevante da intervenção.",
+            "a criação de condições de permanência favoreceu usos sociais e económicos do espaço.",
+            "a remodelação resolveu os principais problemas urbanos da zona envolvente."
+          ],
+          "answerIndex": 2,
+          "explanation": "A permanência mais longa das pessoas surge associada tanto às esplanadas como aos encontros e iniciativas culturais, sustentando uma transformação social e económica do espaço.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LEITURA-001-Q3",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-organizacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica de que modo a organização do texto conduz da situação inicial à ideia apresentada na última frase. Fundamenta a resposta em dois momentos do texto.",
+          "referenceAnswer": "O texto começa por apresentar a praça como um lugar pensado sobretudo para a passagem rápida, com poucas condições para permanecer. Depois contrapõe a proposta de mais estacionamento à intervenção que favorece a estadia e mostra os seus efeitos: maior permanência, esplanadas, encontros e iniciativas culturais. Esta progressão sustenta a conclusão de que a eficiência de um espaço público não depende apenas da rapidez da circulação e de que permitir ficar também pode melhorar o funcionamento da cidade.",
+          "wordLimit": {"min": 60, "max": 110},
+          "rubric": {
+            "criteria": [
+              {"id": "conteudo", "label": "Explica a progressão entre a situação inicial, a intervenção e a conclusão.", "points": 9},
+              {"id": "fundamentacao", "label": "Mobiliza dois elementos pertinentes do texto.", "points": 4}
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
       ]
     },
     {
@@ -25,10 +85,70 @@
       "title": "A casa que ficava para trás",
       "sourceOrigin": "original",
       "text": "Quando fechou a porta pela última vez, Inês não olhou imediatamente para a rua. Ficou com a mão na maçaneta, como se ainda esperasse que a casa lhe devolvesse alguma coisa. Durante vinte anos, aquela entrada fora o começo de todos os regressos: o som das chaves, a luz do corredor, a voz da mãe vinda da cozinha. Agora havia caixas vazias e marcas claras nas paredes onde antes estiveram fotografias. O comprador chegaria na manhã seguinte. Inês desceu dois degraus, voltou a subir um e sorriu da própria hesitação. Tinha passado semanas a dizer que vender era apenas uma decisão prática. A casa era grande, exigia obras, ficava longe do trabalho. Todas as razões estavam certas, mas nenhuma explicava o peso daquela chave no bolso. Antes de entrar no carro, reparou numa janela do primeiro andar. O vidro refletia o céu e, por um instante, pareceu-lhe que a casa já não a reconhecia. Não era tristeza exatamente. Era a sensação desconfortável de perceber que um lugar pode continuar no mesmo sítio depois de deixar de nos pertencer. Inês arrancou devagar. No espelho retrovisor, a fachada diminuiu até caber entre duas árvores e depois desapareceu.",
-      "plannedItems": [
-        {"id":"PT639-PASSAGE-LIT-001-Q1","competencyId":"pt-literatura-voz","responseType":"multiple-choice","cognitive":"interpretar"},
-        {"id":"PT639-PASSAGE-LIT-001-Q2","competencyId":"pt-literatura-temas","responseType":"restricted-response","cognitive":"raciocinar"},
-        {"id":"PT639-PASSAGE-LIT-001-Q3","competencyId":"pt-literatura-forma","responseType":"multiple-choice","cognitive":"interpretar"}
+      "items": [
+        {
+          "id": "PT639-PASSAGE-LIT-001-Q1",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-voz",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A focalização narrativa permite sobretudo",
+          "options": [
+            "acompanhar a hesitação de Inês e o modo como ela interpreta a separação da casa.",
+            "conhecer diretamente os pensamentos do comprador que chegará no dia seguinte.",
+            "observar apenas os movimentos exteriores de Inês, sem acesso à sua experiência interior.",
+            "alternar continuamente entre a perspetiva de Inês e a da mãe."
+          ],
+          "answerIndex": 0,
+          "explanation": "A narração acompanha de perto a perceção e a experiência interior de Inês, incluindo a hesitação, as memórias e a interpretação afetiva da despedida.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LIT-001-Q2",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-temas",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica a importância da casa na construção do conflito vivido por Inês. Apoia a resposta em dois elementos do excerto.",
+          "referenceAnswer": "A casa representa simultaneamente um bem que Inês decidiu vender por razões práticas e um lugar onde se concentram memórias ligadas à família e à própria identidade. A recordação dos regressos, da voz da mãe e das fotografias contrasta com as caixas vazias e com a venda iminente. Por isso, embora Inês reconheça as razões para partir, a chave e a fachada que desaparece no espelho tornam visível a dificuldade de aceitar que aquele lugar continue a existir sem já lhe pertencer.",
+          "wordLimit": {"min": 60, "max": 110},
+          "rubric": {
+            "criteria": [
+              {"id": "conteudo", "label": "Explica a casa como espaço de memória e como objeto de separação.", "points": 9},
+              {"id": "fundamentacao", "label": "Mobiliza dois elementos pertinentes do excerto.", "points": 4}
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LIT-001-Q3",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-forma",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "No final do excerto, a redução progressiva da fachada no espelho retrovisor contribui para",
+          "options": [
+            "transformar a despedida numa descrição neutra do percurso automóvel.",
+            "sugerir que a casa se aproxima de Inês à medida que ela parte.",
+            "materializar visualmente o afastamento e o encerramento daquele vínculo espacial.",
+            "anular a tensão construída anteriormente entre razões práticas e memória afetiva."
+          ],
+          "answerIndex": 2,
+          "explanation": "A fachada que diminui e desaparece converte o afastamento físico numa imagem do processo de separação que estrutura o excerto.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        }
       ]
     }
   ]
