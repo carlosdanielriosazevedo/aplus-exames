@@ -16,6 +16,7 @@ const checks=[
   ["Grupos de texto partilhado Português 639","npm",["run","portuguese-passage-groups:audit"]],
   ["Interface de texto partilhado Português 639","npm",["run","portuguese-passage-ui:audit"]],
   ["Fluxo integrado de Mini-exame Português 639","npm",["run","portuguese-mini-exam-flow:audit"]],
+  ["Feedback pedagógico da autoavaliação de Português","node",["scripts/portuguese-self-assessment-audit.mjs"]],
   ["Grelhas observáveis de Português","npm",["run","portuguese-rubric:audit"]],
   ["Cenários adversariais das grelhas de Português","npm",["run","portuguese-rubric-scenarios:audit"]],
   ["Calibração textual das grelhas de Português","npm",["run","portuguese-rubric-text-calibration:audit"]],
