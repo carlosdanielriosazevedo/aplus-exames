@@ -15,9 +15,9 @@ const items=packs.flatMap(pack=>pack.items);
 const deterministic=items.filter(item=>["multiple-choice","short-answer"].includes(item.responseType));
 const open=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 
-assert.equal(items.length,120,"a passagem editorial deve cobrir os 120 itens atuais");
-assert.equal(deterministic.length,96,"o banco atual deve manter 96 itens determinísticos");
-assert.equal(open.length,24,"a passagem editorial não deve alterar as 24 respostas abertas sem nova calibração");
+assert.equal(items.length,300,"a passagem editorial deve cobrir os 300 itens atuais");
+assert.equal(deterministic.length,276,"o banco atual deve manter 276 itens determinísticos");
+assert.equal(open.length,24,"a passagem editorial deve manter as 24 respostas abertas");
 
 const weakSignals=[];
 const lengthSkew=[];
@@ -82,8 +82,8 @@ for(const item of items){
   }
 }
 
-assert.equal(checkedMultipleChoice,70);
-assert.equal(checkedShortAnswers,26);
+assert.equal(checkedMultipleChoice,199);
+assert.equal(checkedShortAnswers,77);
 assert.ok(lengthSkew.length<=8,`demasiadas respostas corretas denunciam-se pelo comprimento: ${lengthSkew.join(" | ")}`);
 assert.equal(weakSignals.length,0,`distratores linguisticamente denunciadores: ${weakSignals.join(" | ")}`);
 
