@@ -63,7 +63,7 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Explica que a objeção introduz uma dificuldade ou perspetiva contrária e que a resposta permite desenvolver ou limitar a posição.",
+            "label": "Explica a função da objeção na construção do raciocínio.",
             "points": 8
           },
           {
