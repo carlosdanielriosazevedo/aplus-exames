@@ -236,9 +236,9 @@
       "stimulus": "O autor afirma que a medida pode trazer benefícios, mas acrescenta que os resultados dependem da forma como for aplicada.",
       "prompt": "Que posição do autor é mais adequadamente caracterizada?",
       "options": [
-        "É totalmente contrário à medida.",
-        "Considera que os resultados são sempre negativos.",
-        "Recusa avaliar qualquer consequência da medida.",
+        "É contrário à medida.",
+        "Considera que os resultados são geralmente negativos.",
+        "Recusa avaliar as consequências da medida.",
         "É favorável, mas condiciona os benefícios à implementação da medida."
       ],
       "answerIndex": 3,
