@@ -94,7 +94,18 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   return result;
 }
 
-export function portugueseRevisionCompare(previous,current){\n  const before=String(previous||"").trim();\n  const after=String(current||"").trim();\n  const beforeWords=before?before.split(/\s+/u).filter(Boolean):[];\n  const afterWords=after?after.split(/\s+/u).filter(Boolean):[];\n  const beforeSet=new Set(beforeWords.map(word=>word.toLocaleLowerCase("pt-PT")));\n  const afterSet=new Set(afterWords.map(word=>word.toLocaleLowerCase("pt-PT")));\n  const added=afterWords.filter(word=>!beforeSet.has(word.toLocaleLowerCase("pt-PT"))).length;\n  const removed=beforeWords.filter(word=>!afterSet.has(word.toLocaleLowerCase("pt-PT"))).length;\n  return {beforeWords:beforeWords.length,afterWords:afterWords.length,addedWords:added,removedWords:removed,changed:before!==after};\n}\nexport function portugueseObservationAction(observation){
+export function portugueseRevisionCompare(previous,current){
+  const before=String(previous||"").trim();
+  const after=String(current||"").trim();
+  const beforeWords=before?before.split(/\s+/u).filter(Boolean):[];
+  const afterWords=after?after.split(/\s+/u).filter(Boolean):[];
+  const beforeSet=new Set(beforeWords.map(word=>word.toLocaleLowerCase("pt-PT")));
+  const afterSet=new Set(afterWords.map(word=>word.toLocaleLowerCase("pt-PT")));
+  const added=afterWords.filter(word=>!beforeSet.has(word.toLocaleLowerCase("pt-PT"))).length;
+  const removed=beforeWords.filter(word=>!afterSet.has(word.toLocaleLowerCase("pt-PT"))).length;
+  return {beforeWords:beforeWords.length,afterWords:afterWords.length,addedWords:added,removedWords:removed,changed:before!==after};
+}
+export function portugueseObservationAction(observation){
   const status=observation?.status;
   if(status==="not-observed")return {
     title:"Falta tornar este elemento visível",
