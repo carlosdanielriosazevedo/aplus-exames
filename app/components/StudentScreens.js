@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import {insertMathText} from "../lib/mathInput";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {insertMathText} from "../lib/mathInput";
 import {
