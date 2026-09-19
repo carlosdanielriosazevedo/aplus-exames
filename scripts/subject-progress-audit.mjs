@@ -39,7 +39,7 @@ assert.deepEqual(state.scores,mathScores,"Português não pode alterar domínio 
 assert.deepEqual(state.missionHistory,[{id:"math-mission"}],"O histórico global legado de Matemática A deve permanecer intacto.");
 assert.equal("response" in portuguese.sessions[0].results[1],false,"O histórico não deve guardar texto livre do aluno.");
 assert.deepEqual(portuguese.sessions[0].results[1].rubricEvidence,[{criterionId:"argumentacao",evidence:"observed"},{criterionId:"lingua",evidence:"unsure"}],"A evidência estruturada deve persistir por critério.");
-assert.deepEqual(portuguese.sessions[0].results[1].rubricObservationEvidence,[{criterionId:"argumentacao",observationId:"argumentacao-1",evidence:"observed"},{criterionId:"lingua",observationId:"lingua-1",evidence:"unsure"}],"A evidência estruturada deve persistir por observação.");
+assert.deepEqual(portuguese.sessions[0].results[1].rubricObservationEvidence,[{criterionId:"argumentacao",observationId:"argumentacao-1",evidence:"observed",studentEvidence:[]},{criterionId:"lingua",observationId:"lingua-1",evidence:"unsure",studentEvidence:[]}],"A evidência estruturada deve persistir por observação e a studentEvidence.");
 assert.equal(portuguese.sessions[0].results[1].points,null,"A autoavaliação não pode criar pontuação.");
 
 state={...state,subjectProgress:{...state.subjectProgress,"math-a":{subjectId:"math-a",sessions:[{id:"keep"}]}}};
