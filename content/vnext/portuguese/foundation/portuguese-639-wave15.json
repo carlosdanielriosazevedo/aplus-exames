@@ -351,7 +351,7 @@
           },
           {
             "id": "correcao-linguistica",
-            "label": "Demonstra correção lexical, sintática, ortográfica.",
+            "label": "Demonstra correção lexical e sintática.",
             "points": 14
           }
         ]
