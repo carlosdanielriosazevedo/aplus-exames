@@ -1,23 +1,23 @@
 "use client";
 import dynamic from "next/dynamic";
 import {useEffect,useMemo,useRef,useState} from "react";
-import {insertMathText} from "./lib/mathInput";
+import {insertMathText} from "../lib/mathInput";
 import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
-} from "./data/content";
-import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
-import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./components/chrome";
-import {Welcome} from "./components/Welcome";
+} from "../data/content";
+import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "../data/curriculumVnext";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./chrome";
+import {Welcome} from "./Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const PortuguesePassageMiniExam=dynamic(()=>import("./components/PortuguesePassageMiniExam"),{ssr:false});
-import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
-import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
-import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";
-import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare} from "./lib/portugueseEngine";
-import {portugueseObservationGuidance} from "./lib/portugueseObservationGuidance";
-import {portugueseWordLimitFeedback} from "./lib/portugueseWordLimit";
-import "./portugues-mini-exame/passage-mini-exam.css";
-import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
+import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "../data/subjects";
+import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
+import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "../data/portuguesePassagePrototype";
+import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare} from "../lib/portugueseEngine";
+import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
+import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
+import "../portugues-mini-exame/passage-mini-exam.css";
+import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -31,89 +31,89 @@ import {
   selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
   allLearningHypotheses,refreshLearningHypotheses,
   recalibrateAllScores,migratePedagogicalIds,scopedThemeScore,questionById
-} from "./lib/engine";
+} from "../lib/engine";
 import {
   allFocusRows,qualitySnapshot,
   editorialQueue,editorialStats,makeReviewBatch,
   applyEditorialDecision,bumpEditorialVersion,urgentReviewItems,
   eligibilitySummary,betaContentReadiness,prioritizedReviewQueue,reviewPackRows,
   minimumReviewRoadmap,reviewRoadmapProgress
-} from "./lib/quality";
+} from "../lib/quality";
 import {
   buildTeacherReviewPack,buildTeacherReviewBatches,teacherReviewOperationsSummary,
   serializeSemicolonCsv,parseSemicolonCsv,
   validateTeacherReviewImport,applyTeacherReviewImport,teacherReviewInstructions
-} from "./lib/teacherReview";
+} from "../lib/teacherReview";
 import {
   revisionCandidateFromItem,validateRevisionCandidate,applyContentRevision,
   revertLastContentRevision,editorialRevisionSummary
-} from "./lib/editorialRevisions";
-import {qaForItemId} from "./lib/preReviewQa";
+} from "../lib/editorialRevisions";
+import {qaForItemId} from "../lib/preReviewQa";
 import {
   hybridValidationPlan,hybridValidationSummary,hybridBetaReadiness,hybridLaneForItem
-} from "./lib/hybridValidation";
-import {buildHybridTeacherBatches} from "./lib/hybridTeacherReview";
-import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "./lib/beta";
+} from "../lib/hybridValidation";
+import {buildHybridTeacherBatches} from "../lib/hybridTeacherReview";
+import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "../lib/beta";
 import {
   migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent,
   retentionSummary,funnelSummary,activationSummary
-} from "./lib/productAnalytics";
-import {engineAuditSummary,engineAuditLabel} from "./lib/engineAudit";
+} from "../lib/productAnalytics";
+import {engineAuditSummary,engineAuditLabel} from "../lib/engineAudit";
 import {
   loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
   backendHealth,syncStateToBackend
-} from "./lib/persistence";
+} from "../lib/persistence";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
-} from "./lib/sessionDraft";
+} from "../lib/sessionDraft";
 import {
   createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
   transactDiagnosticAnswer
-} from "./lib/diagnosticRecovery";
+} from "../lib/diagnosticRecovery";
 import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
-} from "./lib/curriculumScope";
+} from "../lib/curriculumScope";
 import {
   claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
-} from "./lib/reliability";
+} from "../lib/reliability";
 import {
   ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,
   activeParentLink,requestLinkRemoval,confirmLinkRemoval,demoIdentity
-} from "./lib/identity";
+} from "../lib/identity";
 import {
   cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,
   loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
-} from "./lib/cloud";
+} from "../lib/cloud";
 import {
   getOrCreateDeviceId,shortDeviceId,cloudSyncMeta,migrateCloudSync,
   markCloudLoaded,markCloudSaved,cloudConflict,saveLocalSnapshot,
   listLocalSnapshots,queueCloudSave,listPendingCloudSaves,removePendingCloudSave,
   safeCloudMerge
-} from "./lib/cloudReliability";
+} from "../lib/cloudReliability";
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
   isTargetStudentTester,friendsFeedbackSummary,aggregateFriendsBetaReports
-} from "./lib/friendsBeta";
+} from "../lib/friendsBeta";
 import {
   emptyEngagement,recordStudyActivity,engagementSummary,migrateEngagement,
   missionCompletedToday,todayMissionRecord
-} from "./lib/engagement";
+} from "../lib/engagement";
 import {
   emptyDailyMission,ensureDailyMissionAssignment,missionPlanForToday,
   markDailyMissionPromptShown,dismissDailyMissionPrompt,markDailyMissionStarted,
   dailyMissionPromptDecision,migrateDailyMission
-} from "./lib/dailyMission";
+} from "../lib/dailyMission";
 import {
   emptyCompetition,recordCompetitiveActivity,competitionSummary,latestCompetitiveActivity,demoLeaderboard,
   leaderboardAroundUser,leagueProjection,updateCompetitionProfile,scopeAvailability,
   PORTUGAL_REGIONS,DIVISIONS,PROMOTION_COUNT,DEMOTION_COUNT,
   SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS,migrateCompetition
-} from "./lib/competition";
+} from "../lib/competition";
 import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
   expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
-} from "./lib/constructedResponse";
+} from "../lib/constructedResponse";
 
 
 const ReviewerDashboard=dynamic(()=>import("./ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
