@@ -28,6 +28,7 @@ for(const item of items){
   assert.equal(submitted.final,false,`${item.id}: nem a resposta-modelo pode ser classificada automaticamente`);
   assert.equal(submitted.points,null,`${item.id}: a grelha assistida não pode produzir pontos`);
   assert.ok(submitted.criteria.flatMap(criterion=>criterion.observations).length>=submitted.criteria.length,`${item.id}: faltam observações testáveis`);
+  assert.equal(submitted.responseText,item.referenceAnswer,`${item.id}: a resposta submetida não ficou disponível para feedback/evidência`);
 
   const strong=assessScenario(item,()=>"observed");
   assert.equal(strong.rubricCompleted,true,`${item.id}: cenário forte não concluiu a grelha`);
@@ -39,6 +40,7 @@ for(const item of items){
   assert.equal(partial.rubricCompleted,true,`${item.id}: cenário parcial não concluiu a grelha`);
   assert.ok(partial.criteria.some(criterion=>criterion.status!=="observed"),`${item.id}: cenário parcial foi confundido com resposta forte`);
   assert.ok(portugueseRubricGuidance(partial).needsReview.length>0,`${item.id}: cenário parcial não gerou orientação de revisão`);
+  assert.match(portugueseObservationAction({status:"partial"}).action,/Reescreve|desenvolve/i,`${item.id}: falta feedback acionável para observação parcial`);
 
   const missing=assessScenario(item,()=>"not-observed");
   assert.ok(missing.criteria.every(criterion=>criterion.status==="not-observed"),`${item.id}: ausência total não foi reconhecida`);
