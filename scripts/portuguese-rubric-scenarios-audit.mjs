@@ -58,6 +58,10 @@ for(const item of items){
   assert.equal(revised.rubricCompleted,false,`${item.id}: a revisão deve reiniciar a autoavaliação`);
   assert.equal(revised.revisionHistory?.length,1,`${item.id}: histórico da revisão não foi preservado`);
   assert.equal(revised.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: histórico não contém a resposta anterior`);
+  const revisedTwice=revisePortugueseResponse(item,revised,revised.responseText+" segunda revisão");
+  assert.equal(revisedTwice.revisionCount,2,`${item.id}: segunda revisão não incrementou o contador`);
+  assert.equal(revisedTwice.revisionHistory?.length,2,`${item.id}: segunda revisão não acumulou o histórico`);
+  assert.equal(revisedTwice.revisionHistory?.[1]?.responseText,revised.responseText,`${item.id}: histórico não guardou a primeira revisão`);
   const snapshot={rubricId:partial.rubricId,responseText:partial.responseText,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
   const restored=restorePortugueseRubricEvidence(item,snapshot);
   assert.equal(restored.responseText,snapshot.responseText,`${item.id}: o texto da resposta perdeu-se na retoma`);
