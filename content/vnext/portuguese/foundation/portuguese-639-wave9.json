@@ -481,9 +481,9 @@
       "prompt": "Qual versão está corretamente pontuada?",
       "options": [
         "Quando terminou a aula, os alunos saíram para o intervalo.",
-        "Quando, terminou a aula os alunos saíram para o intervalo.",
-        "Quando terminou, a aula os alunos, saíram para o intervalo.",
-        "Quando terminou a aula os alunos, saíram para o intervalo."
+        "Quando terminou a aula os alunos, saíram para o intervalo.",
+        "Quando terminou, a aula os alunos saíram para o intervalo.",
+        "Quando terminou a aula os alunos saíram, para o intervalo."
       ],
       "answerIndex": 0,
       "explanation": "A oração subordinada adverbial anteposta é separada da oração principal por vírgula.",
