@@ -64,10 +64,10 @@
       "stimulus": "A autarquia deve ampliar a rede de ciclovias, pois trajetos seguros podem incentivar deslocações de bicicleta em percursos curtos.",
       "prompt": "Que relação existe entre a segunda parte e a primeira?",
       "options": [
-        "Contradiz totalmente a proposta.",
+        "Contraria a proposta apresentada.",
         "Muda para um assunto sem relação.",
         "Apresenta uma razão que sustenta a proposta.",
-        "Apresenta apenas uma definição."
+        "Apresenta uma definição da medida."
       ],
       "answerIndex": 2,
       "explanation": "A segunda parte funciona como argumento a favor da ampliação da rede de ciclovias.",
@@ -132,8 +132,8 @@
       "options": [
         "uma analepse, ao recuperar um acontecimento anterior.",
         "uma antecipação do futuro.",
-        "apenas tempo presente.",
-        "uma descrição sem qualquer relação temporal."
+        "uma descrição centrada nas características da praça.",
+        "uma descrição do espaço sem progressão temporal."
       ],
       "answerIndex": 0,
       "explanation": "A narrativa recua da situação de regresso para uma memória anterior.",
@@ -437,9 +437,9 @@
       "prompt": "O uso da primeira pessoa permite conhecer diretamente",
       "options": [
         "as dúvidas do narrador.",
-        "os pensamentos de todas as personagens.",
-        "apenas características físicas do espaço.",
-        "uma perspetiva totalmente impessoal."
+        "os pensamentos das restantes personagens.",
+        "a localização e as características físicas do espaço.",
+        "uma perspetiva baseada apenas em dados objetivos."
       ],
       "answerIndex": 0,
       "explanation": "O narrador explicita a sua própria dúvida e reflexão.",
