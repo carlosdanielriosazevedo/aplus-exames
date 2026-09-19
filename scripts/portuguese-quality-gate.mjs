@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
-import {PORTUGUESE_ITEMS} from "../app/data/portugueseContent.js";
+import {readFileSync,readdirSync} from "node:fs";
 import {PORTUGUESE_YEAR_FOCUS,PORTUGUESE_COMPETENCIES} from "../app/data/portugueseFoundation.js";
+import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {PORTUGUESE_ASSESSMENT_POLICY,buildPortugueseCriterionEvidence,summarizePortugueseCriterionEvidence} from "../app/data/portugueseAssessmentPolicy.js";
+
+const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const packFiles=readdirSync(contentDir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
+const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(packFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")).items));
 
 assert.equal(PORTUGUESE_ITEMS.length,200,"O runtime de Português deve carregar os 200 itens foundation.");
 assert.equal(new Set(PORTUGUESE_ITEMS.map(item=>item.id)).size,200,"Os IDs devem ser únicos.");
@@ -29,4 +34,4 @@ for(const item of PORTUGUESE_ITEMS){
 
 assert.equal(PORTUGUESE_ASSESSMENT_POLICY.authority,"IAVE");
 assert.equal(PORTUGUESE_ASSESSMENT_POLICY.finalAutoGradeForOpenResponses,false);
-console.log("✓ Portuguese quality gate: 200 itens no runtime · 3 anos · 4 domínios escritos · respostas abertas com evidência por critério e sem nota final automática");
+console.log("✓ Portuguese quality gate: 200 itens · 3 anos · 4 domínios escritos · evidência por critério sem nota final automática");
