@@ -12,7 +12,7 @@ const latestDeclared=[...packs].reverse().find(pack=>Number.isInteger(pack.bankS
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 
-assert.equal(packFiles.length,11,"o runtime atual de Português deve ter piloto + doze vagas");
+assert.equal(packFiles.length,13,"o runtime atual de Português deve ter piloto + doze vagas");
 assert.equal(allItems.length,latestDeclared,"o banco agregado deve coincidir com o tamanho declarado pela vaga mais recente");
 assert.equal(latestDeclared,250,"a décima vaga deve elevar o banco para 200 itens");
 
