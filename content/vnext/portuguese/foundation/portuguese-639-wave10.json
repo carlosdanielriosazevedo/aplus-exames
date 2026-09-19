@@ -42,12 +42,12 @@
       "stimulus": "A escola deveria disponibilizar bebedouros em mais zonas do recinto, porque isso facilitaria o acesso à água durante os intervalos.",
       "prompt": "A expressão introduzida por «porque» funciona como",
       "options": [
-        "justificação da proposta.",
         "exemplo sem relação.",
+        "justificação da proposta.",
         "conclusão contrária.",
         "definição de escola."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "Apresenta uma razão que sustenta a proposta formulada.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -64,12 +64,12 @@
       "stimulus": "Às oito horas, todas as mesas da esplanada estavam molhadas, mas o céu já estava limpo e ninguém usava guarda-chuva.",
       "prompt": "É plausível inferir que",
       "options": [
-        "tinha chovido pouco antes.",
         "estava a nevar intensamente.",
         "a esplanada nunca abrira.",
+        "tinha chovido pouco antes.",
         "era meia-noite."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "As mesas molhadas, apesar do céu já limpo, permitem inferir chuva recente.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -86,12 +86,12 @@
       "stimulus": "Mesmo depois de todos desistirem, Inês voltou a tentar resolver o problema.",
       "prompt": "A atitude de Inês revela sobretudo",
       "options": [
-        "persistência.",
         "indiferença.",
         "distração.",
-        "vaidade."
+        "vaidade.",
+        "persistência."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "Continuar a tentar perante a desistência dos restantes evidencia persistência.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -152,12 +152,12 @@
       "stimulus": "Todos partiram para cidades diferentes, mas todos os anos regressavam à mesma mesa no primeiro domingo de agosto.",
       "prompt": "Que tema é sugerido?",
       "options": [
-        "A preservação dos laços apesar da distância.",
         "A rivalidade política.",
+        "A preservação dos laços apesar da distância.",
         "A investigação científica.",
         "O medo de viajar."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "O reencontro periódico simboliza a continuidade dos vínculos apesar da separação geográfica.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -174,12 +174,12 @@
       "stimulus": "Pretendes escrever um texto de opinião sobre a utilização de inteligência artificial no estudo.",
       "prompt": "Antes da redação, é mais útil",
       "options": [
-        "definir a tese e selecionar argumentos e exemplos relevantes.",
         "escrever frases aleatórias até ocupar espaço.",
         "escolher apenas palavras difíceis.",
+        "definir a tese e selecionar argumentos e exemplos relevantes.",
         "redigir a conclusão sem decidir uma posição."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "A planificação de um texto de opinião exige posição, argumentos e exemplos coerentes.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -196,12 +196,12 @@
       "stimulus": "Contexto: mensagem formal para solicitar esclarecimentos a uma instituição.",
       "prompt": "Qual despedida é mais adequada?",
       "options": [
-        "Com os melhores cumprimentos,",
         "Falamos depois!",
         "Vá, abraço!",
-        "Até já, malta!"
+        "Até já, malta!",
+        "Com os melhores cumprimentos,"
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "A fórmula é adequada a comunicação formal de caráter institucional.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -240,12 +240,12 @@
       "stimulus": "Alguns alunos chegaram cedo.",
       "prompt": "Na frase, «Alguns» é um",
       "options": [
-        "quantificador.",
         "verbo.",
+        "quantificador.",
         "advérbio.",
         "nome próprio."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "«Alguns» quantifica o nome «alunos».",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -262,12 +262,12 @@
       "stimulus": "Os participantes permaneceram atentos durante a sessão.",
       "prompt": "A palavra «atentos» desempenha a função de",
       "options": [
-        "predicativo do sujeito.",
         "complemento direto.",
         "vocativo.",
+        "predicativo do sujeito.",
         "complemento indireto."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "Com o verbo copulativo «permanecer», «atentos» atribui uma propriedade ao sujeito.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -284,12 +284,12 @@
       "stimulus": "Estudou bastante para que pudesse melhorar o resultado.",
       "prompt": "A oração «para que pudesse melhorar o resultado» exprime",
       "options": [
-        "finalidade.",
         "causa.",
         "concessão.",
-        "tempo."
+        "tempo.",
+        "finalidade."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "A oração apresenta a finalidade associada ao ato de estudar.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -328,12 +328,12 @@
       "stimulus": "É possível que a reunião termine mais cedo.",
       "prompt": "A expressão «É possível que» introduz uma modalidade de",
       "options": [
-        "epistémica, com valor de possibilidade.",
         "deôntica, com valor de obrigação.",
+        "epistémica, com valor de possibilidade.",
         "deôntica, com valor de proibição.",
         "apreciativa, com valor de beleza."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "«É possível que» avalia o grau de certeza do conteúdo, marcando possibilidade.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -350,12 +350,12 @@
       "stimulus": "A escola abriu uma nova sala de estudo. Esta ficará disponível até às 19 horas.",
       "prompt": "O pronome «Esta» retoma",
       "options": [
-        "a nova sala de estudo.",
         "a escola.",
         "a hora de encerramento.",
+        "a nova sala de estudo.",
         "uma pessoa não mencionada."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "O demonstrativo retoma o referente nominal imediatamente relevante: a sala de estudo.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -372,12 +372,12 @@
       "stimulus": "O primeiro parágrafo apresenta a questão. Os dois seguintes discutem posições diferentes. O último sintetiza os principais pontos.",
       "prompt": "Qual é a função do último parágrafo?",
       "options": [
-        "Síntese.",
         "Introdução de um novo tema sem relação.",
         "Descrição de uma personagem.",
-        "Apresentação exclusiva de dados brutos."
+        "Apresentação exclusiva de dados brutos.",
+        "Síntese."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "O último parágrafo reúne os principais elementos anteriormente discutidos.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -416,12 +416,12 @@
       "stimulus": "Contexto: email a um professor para pedir confirmação de uma data.",
       "prompt": "Qual formulação é adequada?",
       "options": [
-        "Poderia, por favor, confirmar a data de entrega do trabalho?",
         "Ó prof, diz lá quando é para entregar isso.",
+        "Poderia, por favor, confirmar a data de entrega do trabalho?",
         "Manda aí a data.",
         "Então, quando é isso, pá?"
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "A formulação respeita o destinatário e utiliza um registo apropriado.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -438,12 +438,12 @@
       "stimulus": "Frase: «Joana que chegou primeiro abriu a sala.»",
       "prompt": "Se a informação «que chegou primeiro» for explicativa, qual é a pontuação adequada?",
       "options": [
-        "Joana, que chegou primeiro, abriu a sala.",
         "Joana que, chegou primeiro abriu a sala.",
         "Joana que chegou, primeiro abriu a sala.",
+        "Joana, que chegou primeiro, abriu a sala.",
         "Joana que chegou primeiro abriu, a sala."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "Uma oração relativa explicativa é delimitada por vírgulas.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -460,12 +460,12 @@
       "stimulus": "Versão inicial: «O projeto foi um sucesso muito bem-sucedido.»",
       "prompt": "Qual revisão elimina a redundância?",
       "options": [
-        "O projeto foi um sucesso.",
         "O projeto foi um sucesso bem-sucedido de sucesso.",
         "O projeto sucesso foi muito bem sucesso.",
-        "O sucesso do projeto foi um sucesso bem-sucedido."
+        "O sucesso do projeto foi um sucesso bem-sucedido.",
+        "O projeto foi um sucesso."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "«Sucesso» já contém a ideia de resultado bem-sucedido.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -504,12 +504,12 @@
       "stimulus": "Naquela tarde ainda não sabia que, meses depois, voltaria ao mesmo lugar para começar de novo.",
       "prompt": "A referência a «meses depois» constitui",
       "options": [
-        "uma antecipação de um acontecimento futuro.",
         "um recuo para um passado anterior.",
+        "uma antecipação de um acontecimento futuro.",
         "uma suspensão de qualquer referência temporal.",
         "uma descrição espacial."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "O narrador antecipa um acontecimento posterior ao momento narrado.",
       "gradingMode": "deterministic",
       "maxPoints": 13
