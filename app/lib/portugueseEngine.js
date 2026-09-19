@@ -111,6 +111,13 @@ export function portugueseObservationAction(observation){
   };
 }
 
+export function revisePortugueseResponse(item,previousResult,response){
+  if(!previousResult||previousResult.final)throw new Error("Only rubric-assisted responses can be revised.");
+  const revised=gradePortugueseResponse(item,response);
+  if(revised.final)return revised;
+  return {...revised,revisionCount:(previousResult.revisionCount||0)+1,previousResponseText:String(previousResult.responseText||"")};
+}
+
 export function portugueseRubricGuidance(result){
   const criteria=result?.criteria||[];
   const byStatus=status=>criteria.filter(criterion=>criterion.status===status).map(criterion=>({id:criterion.id,label:criterion.label}));
