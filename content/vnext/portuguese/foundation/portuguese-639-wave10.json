@@ -438,10 +438,10 @@
       "stimulus": "Frase: «Joana que chegou primeiro abriu a sala.»",
       "prompt": "Se a informação «que chegou primeiro» for explicativa, qual é a pontuação adequada?",
       "options": [
-        "Joana que, chegou primeiro abriu a sala.",
-        "Joana que chegou, primeiro abriu a sala.",
         "Joana, que chegou primeiro, abriu a sala.",
-        "Joana que chegou primeiro abriu, a sala."
+        "Joana, que chegou atrasada, fechou a sala.",
+        "Joana, que chegou primeiro, esperou no corredor.",
+        "Joana, que chegou depois, encontrou a sala fechada."
       ],
       "answerIndex": 2,
       "explanation": "Uma oração relativa explicativa é delimitada por vírgulas.",
