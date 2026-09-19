@@ -7097,24 +7097,24 @@
     {
       "id": "PT639-FND-309",
       "level": 4,
-      "score": 4.8,
+      "score": 4.88,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
         "cognitive": 4,
         "response": 0.6,
         "stimulus": 0,
-        "prompt": 0,
+        "prompt": 0.08,
         "rubric": 0,
         "wordLimit": 0.2,
         "stimulusWords": 21,
-        "promptWords": 15
+        "promptWords": 20
       },
       "rationale": [
         "operação cognitiva: criar",
         "formato: extended-writing",
         "estímulo: 21 palavras",
-        "instrução: 15 palavras"
+        "instrução: 20 palavras"
       ]
     },
     {
@@ -7131,13 +7131,13 @@
         "rubric": 0,
         "wordLimit": 0.2,
         "stimulusWords": 22,
-        "promptWords": 17
+        "promptWords": 22
       },
       "rationale": [
         "operação cognitiva: criar",
         "formato: extended-writing",
         "estímulo: 22 palavras",
-        "instrução: 17 palavras"
+        "instrução: 22 palavras"
       ]
     }
   ]
