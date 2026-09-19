@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
-import {PORTUGUESE_YEAR_FOCUS,PORTUGUESE_COMPETENCIES} from "../app/data/portugueseFoundation.js";
+import {PORTUGUESE_YEAR_FOCUS,PORTUGUESE_COMPETENCIES,resolvePortugueseCompetencyId} from "../app/data/portugueseFoundation.js";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {PORTUGUESE_ASSESSMENT_POLICY,buildPortugueseCriterionEvidence,summarizePortugueseCriterionEvidence} from "../app/data/portugueseAssessmentPolicy.js";
 
@@ -20,7 +20,7 @@ for(const year of ["10.º","11.º","12.º"]){
   for(const domain of writtenDomains)assert.ok(yearItems.some(item=>item.domain===domain),year+": falta "+domain+".");
 }
 for(const item of PORTUGUESE_ITEMS){
-  assert.ok(PORTUGUESE_COMPETENCIES.some(c=>c.id===item.competencyId&&c.writtenExam),item.id+": competência fora do exame escrito.");
+  assert.ok(PORTUGUESE_COMPETENCIES.some(c=>c.id===resolvePortugueseCompetencyId(item.competencyId)&&c.writtenExam),item.id+": competência fora do exame escrito.");
   if(["restricted-response","extended-writing"].includes(item.responseType)){
     assert.equal(item.gradingMode,"rubric-assisted-provisional",item.id+": resposta aberta não pode ter nota final automática.");
     const evidence=buildPortugueseCriterionEvidence(item);
