@@ -10,7 +10,7 @@ const target=300;
 
 const rows=[];
 for(const competency of written){
-  const relevant=items.filter(item=>item.competencyId===competency.id);
+  const relevant=items.filter(item=>resolvePortugueseCompetencyId(item.competencyId)===competency.id);
   const byYear=Object.fromEntries(years.map(year=>[year,relevant.filter(item=>item.year===year).length]));
   const minYear=Math.min(...Object.values(byYear));
   const responseTypes=new Set(relevant.map(item=>item.responseType));
