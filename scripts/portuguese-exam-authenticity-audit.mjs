@@ -5,7 +5,7 @@ const dir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
 const files=readdirSync(dir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
 const items=files.flatMap(name=>JSON.parse(readFileSync(new URL(name,dir),"utf8")).items);
 
-assert.equal(items.length,120,"o banco de Português deve manter os 120 itens atuais");
+assert.equal(items.length,300,"o banco de Português deve manter os 300 itens atuais");
 assert.ok(items.every(item=>item.sourceOrigin==="original"),"o banco deve continuar original-only; este audit não autoriza cópia de itens IAVE");
 assert.ok(items.every(item=>item.reviewStatus==="prototype"),"Português continua em protótipo");
 
