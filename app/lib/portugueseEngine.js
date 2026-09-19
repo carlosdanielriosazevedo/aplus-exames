@@ -115,7 +115,11 @@ export function revisePortugueseResponse(item,previousResult,response){
   if(!previousResult||previousResult.final)throw new Error("Only rubric-assisted responses can be revised.");
   const revised=gradePortugueseResponse(item,response);
   if(revised.final)return revised;
-  return {...revised,revisionCount:(previousResult.revisionCount||0)+1,previousResponseText:String(previousResult.responseText||"")};
+  const previousText=String(previousResult.responseText||"");
+  const revisionCount=(previousResult.revisionCount||0)+1;
+  const revisionHistory=[...(previousResult.revisionHistory||[])];
+  if(previousText) revisionHistory.push({revision:revisionCount-1,responseText:previousText});
+  return {...revised,revisionCount,previousResponseText:previousText,revisionHistory};
 }
 
 export function portugueseRubricGuidance(result){
