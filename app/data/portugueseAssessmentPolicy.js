@@ -11,9 +11,9 @@ export const PORTUGUESE_ASSESSMENT_POLICY={
     "A aplicação apresenta evidência por critério e uma indicação provisória; não inventa uma classificação final quando o juízo humano é necessário."
   ],
   selfAssessmentStates:[
-    {id:"met",label:"Cumpri",description:"A resposta contém evidência clara para este critério."},
-    {id:"partial",label:"Parcialmente",description:"Há evidência, mas está incompleta ou pouco desenvolvida."},
-    {id:"not-met",label:"Ainda não",description:"Não há evidência suficiente para este critério."},
+    {id:"observed",label:"Encontro claramente",description:"Consigo localizar evidência clara desta observação na minha resposta."},
+    {id:"partial",label:"Encontro em parte",description:"Há evidência, mas está incompleta ou pouco clara."},
+    {id:"not-observed",label:"Não encontro",description:"Não há evidência suficiente desta observação na minha resposta."},
     {id:"unsure",label:"Não tenho a certeza",description:"O aluno pede ajuda para verificar este critério."}
   ],
   evidencePolicy:{
