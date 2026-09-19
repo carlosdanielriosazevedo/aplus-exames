@@ -17,7 +17,7 @@ const open=items.filter(item=>["restricted-response","extended-writing"].include
 
 assert.equal(items.length,310,"a passagem editorial deve cobrir os 310 itens atuais");
 assert.equal(deterministic.length,276,"o banco atual deve manter 276 itens determinísticos");
-assert.equal(open.length,33,"a passagem editorial deve manter as 34 respostas abertas");
+assert.equal(open.length,34,"a passagem editorial deve manter as 34 respostas abertas");
 
 const weakSignals=[];
 const lengthSkew=[];
