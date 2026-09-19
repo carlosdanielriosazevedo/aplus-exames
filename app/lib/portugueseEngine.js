@@ -49,7 +49,7 @@ export function assessPortugueseRubricObservation(result,criterionId,observation
   if(!criterion.observations?.some(observation=>observation.id===observationId))throw new Error(`Unknown rubric observation: ${criterionId}/${observationId}`);
   const criteria=result.criteria.map(row=>{
     if(row.id!==criterionId)return row;
-    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence,evidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}:observation);
+    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence,studentEvidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}:observation);
     return {...row,observations,status:criterionStatus(observations)};
   });
   return withRubricCompletion(result,criteria);
@@ -81,7 +81,7 @@ export function restorePortugueseRubricEvidence(item,snapshot){
       const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
       if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&criterion?.observations.some(observation=>observation.id===row.observationId)){
         result=assessPortugueseRubricObservation(result,row.criterionId,row.observationId,row.evidence);
-        if(Array.isArray(row.studentEvidence)) result={...result,criteria:result.criteria.map(candidate=>candidate.id===row.criterionId?{...candidate,observations:candidate.observations.map(observation=>observation.id===row.observationId?{...observation,evidence:row.studentEvidence.slice(0,3)}:observation)}:candidate)};
+        if(Array.isArray(row.studentEvidence)) result={...result,criteria:result.criteria.map(candidate=>candidate.id===row.criterionId?{...candidate,observations:candidate.observations.map(observation=>observation.id===row.observationId?{...observation,studentEvidence:row.studentEvidence.slice(0,3)}:observation)}:candidate)};
       }
     }
   }else{
