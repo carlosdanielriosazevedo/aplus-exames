@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useMemo,useRef,useState} from "react";
+import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
 import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
@@ -7,8 +8,8 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./components/chrome";
 import {Welcome} from "./components/Welcome";
-import {ReviewerDashboard} from "./components/ReviewerDashboard";
-import PortuguesePassageMiniExam from "./components/PortuguesePassageMiniExam";
+const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
+const PortuguesePassageMiniExam=dynamic(()=>import("./components/PortuguesePassageMiniExam"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
 import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";
