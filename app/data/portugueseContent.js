@@ -9,6 +9,9 @@ import difficulty from "../../content/vnext/portuguese/foundation/portuguese-639
 import {applyPortugueseDifficulty} from "../lib/portugueseDifficulty.js";
 import {applyPortugueseRubricObservations} from "./portugueseRubrics.js";
 
+// Only content that has completed the full editorial/calibration pipeline is exposed
+// to the runtime. Waves 7 and 8 deliberately remain candidate packs until their
+// difficulty, rubric and boundary-case gates are green.
 export const PORTUGUESE_CONTENT_PACKS=[pilot,wave1,wave2,wave3,wave4,wave5,wave6];
 export const PORTUGUESE_DIFFICULTY_MATRIX=difficulty;
 export const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(applyPortugueseDifficulty(PORTUGUESE_CONTENT_PACKS.flatMap(pack=>pack.items),difficulty));
