@@ -6,7 +6,7 @@ assert.equal(pack.wave,14); assert.equal(pack.bankSizeAfterWave,300); assert.equ
 assert.equal(pack.sourcePolicy,"original-only"); assert.equal(pack.editorialStatus,"prototype"); assert.equal(pack.productionEligible,false);
 const ids=new Set(),stimuli=new Set();
 for(const item of pack.items){
- assert.match(item.id,/^PT639-FND-3dd$/u); assert.equal(ids.has(item.id),false,item.id+": ID duplicado."); ids.add(item.id);
+ assert.match(item.id,/^PT639-FND-3\\d{2}$/u); assert.equal(ids.has(item.id),false,item.id+": ID duplicado."); ids.add(item.id);
  assert.equal(stimuli.has(item.stimulus),false,item.id+": estímulo duplicado."); stimuli.add(item.stimulus);
  assert.ok(["10.º","11.º","12.º"].includes(item.year));
  const c=PORTUGUESE_COMPETENCIES.find(row=>row.id===item.competencyId); assert.ok(c?.writtenExam,item.id+": competência inválida."); assert.equal(c.domain,item.domain);
