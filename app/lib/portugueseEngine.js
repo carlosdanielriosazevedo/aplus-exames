@@ -37,7 +37,7 @@ export function assessPortugueseRubricCriterion(result,criterionId,evidence){
   if(!result||result.final||result.status==="unanswered")return result;
   if(!RUBRIC_EVIDENCE_IDS.has(evidence))throw new Error(`Unsupported rubric evidence: ${evidence}`);
   if(!result.criteria?.some(criterion=>criterion.id===criterionId))throw new Error(`Unknown rubric criterion: ${criterionId}`);
-  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence,evidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}))}:criterion);
+  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence,studentEvidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}))}:criterion);
   return withRubricCompletion(result,criteria);
 }
 
@@ -62,7 +62,7 @@ export function rubricEvidenceSnapshot(result){
 
 export function rubricObservationEvidenceSnapshot(result){
   if(!result||result.final)return [];
-  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending",studentEvidence:Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})));
+  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})));
 }
 
 export function restorePortugueseRubricEvidence(item,snapshot){
