@@ -1,0 +1,108 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "wave": 7,
+  "bankSizeAfterWave": 136,
+  "sourcePolicy": "original-only",
+  "editorialStatus": "prototype",
+  "productionEligible": false,
+  "items": [
+    {
+      "id": "PT639-FND-121", "year": "10.º", "domain": "leitura", "competencyId": "pt-leitura-coesao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "interpretar",
+      "stimulus": "A biblioteca prolongou o horário durante a época de exames. Essa alteração permitiu que mais alunos estudassem depois das aulas.",
+      "prompt": "A expressão «Essa alteração» retoma", "options": ["a época de exames.", "o prolongamento do horário da biblioteca.", "o estudo depois das aulas.", "o número de alunos."], "answerIndex": 1,
+      "explanation": "O demonstrativo retoma a alteração mencionada na frase anterior: o prolongamento do horário.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-122", "year": "11.º", "domain": "leitura", "competencyId": "pt-leitura-organizacao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "interpretar",
+      "stimulus": "Primeiro, o relatório descreve o problema do desperdício alimentar. Depois, apresenta três medidas aplicadas pela escola e termina comparando os resultados obtidos.",
+      "prompt": "Como se organiza globalmente o texto?", "options": ["Definição, narração e diálogo.", "Problema, medidas e comparação de resultados.", "Opinião, contra-argumento e conclusão literária.", "Descrição de espaço, personagem e ação."], "answerIndex": 1,
+      "explanation": "A sequência indicada no estímulo é problema, medidas adotadas e comparação dos resultados.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-123", "year": "12.º", "domain": "literatura", "competencyId": "pt-literatura-voz", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "interpretar",
+      "stimulus": "Entrei na estação quando o relógio marcou seis horas. Não sabia ainda que aquela viagem mudaria a forma como via a minha cidade.",
+      "prompt": "Que efeito produz a narração na primeira pessoa?", "options": ["Elimina qualquer perspetiva subjetiva.", "Aproxima o leitor da experiência e da reflexão do narrador.", "Transforma o narrador numa personagem ausente.", "Impede a referência a acontecimentos passados."], "answerIndex": 1,
+      "explanation": "A primeira pessoa dá acesso direto à experiência e à avaliação do narrador-personagem.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-124", "year": "10.º", "domain": "literatura", "competencyId": "pt-literatura-forma", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "short-answer", "cognitive": "interpretar",
+      "stimulus": "Chove.\nA rua cala-se.\nUma janela acende-se.\nE alguém espera.",
+      "prompt": "Explica, numa frase, um efeito produzido pelos versos curtos.", "acceptedAnswers": ["criam um ritmo pausado", "criam ritmo pausado", "reforçam a sensação de pausa", "destacam cada imagem", "dão destaque a cada imagem"],
+      "explanation": "A fragmentação em versos muito curtos abranda o ritmo e isola as imagens sucessivas.", "gradingMode": "deterministic-with-equivalents", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-125", "year": "11.º", "domain": "escrita", "competencyId": "pt-escrita-exposicao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "aplicar",
+      "stimulus": "Um aluno prepara um texto expositivo sobre os benefícios da leitura regular.",
+      "prompt": "Qual é o início mais adequado a um texto expositivo?", "options": ["Ler regularmente pode contribuir para ampliar o vocabulário e desenvolver a compreensão textual.", "Toda a gente sabe que quem não lê está completamente errado.", "Era uma vez um aluno que entrou numa biblioteca misteriosa.", "Leiam mais, porque eu mando e não há nada a discutir."], "answerIndex": 0,
+      "explanation": "A opção apresenta o tema de forma objetiva e adequada à exposição de informação.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-126", "year": "12.º", "domain": "escrita", "competencyId": "pt-escrita-opiniao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "short-answer", "cognitive": "aplicar",
+      "stimulus": "Tema: As escolas devem reservar diariamente um período sem telemóveis?",
+      "prompt": "Formula uma tese clara que possa orientar um texto de opinião sobre o tema.", "acceptedAnswers": ["as escolas devem reservar diariamente um período sem telemóveis", "defendo que as escolas devem reservar diariamente um período sem telemóveis", "as escolas não devem reservar diariamente um período sem telemóveis", "defendo que as escolas não devem reservar diariamente um período sem telemóveis"],
+      "explanation": "Uma tese deve assumir uma posição explícita e discutível perante o tema proposto.", "gradingMode": "deterministic-with-equivalents", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-127", "year": "10.º", "domain": "gramatica", "competencyId": "pt-gramatica-coesao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "aplicar",
+      "stimulus": "A turma preparou o debate com cuidado. ___, vários alunos consultaram fontes diferentes.",
+      "prompt": "Que conector exprime adequadamente uma relação de exemplificação?", "options": ["Por exemplo", "Contudo", "Portanto", "Apesar disso"], "answerIndex": 0,
+      "explanation": "«Por exemplo» introduz um caso que concretiza a preparação cuidadosa referida antes.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-128", "year": "11.º", "domain": "gramatica", "competencyId": "pt-gramatica-morfologia-semantica", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "analisar",
+      "stimulus": "Talvez a equipa termine o projeto amanhã.",
+      "prompt": "O advérbio «Talvez» exprime sobretudo", "options": ["certeza.", "possibilidade.", "obrigação.", "ordem."], "answerIndex": 1,
+      "explanation": "«Talvez» marca uma atitude modal de possibilidade ou incerteza perante o conteúdo da frase.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-129", "year": "12.º", "domain": "leitura", "competencyId": "pt-leitura-coesao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "short-answer", "cognitive": "analisar",
+      "stimulus": "O projeto recebeu mais inscrições do que o previsto. Por isso, a organização abriu uma segunda sessão.",
+      "prompt": "Indica a relação de sentido estabelecida por «Por isso».", "acceptedAnswers": ["consequência", "conclusão", "relação de consequência", "valor consecutivo"],
+      "explanation": "A abertura da segunda sessão é apresentada como consequência do elevado número de inscrições.", "gradingMode": "deterministic-with-equivalents", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-130", "year": "10.º", "domain": "leitura", "competencyId": "pt-leitura-organizacao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "analisar",
+      "stimulus": "Num artigo sobre mobilidade, o primeiro parágrafo apresenta dados sobre o trânsito; o segundo explica duas causas; o terceiro propõe alternativas de transporte.",
+      "prompt": "Qual é a função principal do terceiro parágrafo?", "options": ["Apresentar soluções ou alternativas.", "Repetir os dados iniciais.", "Narrar um episódio pessoal.", "Definir o conceito de trânsito."], "answerIndex": 0,
+      "explanation": "O terceiro parágrafo desloca o texto da explicação das causas para a apresentação de alternativas.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-131", "year": "11.º", "domain": "literatura", "competencyId": "pt-literatura-voz", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "analisar",
+      "stimulus": "Marta fechou o livro. Para ela, aquela história tinha chegado tarde demais; ninguém na sala, porém, percebeu a razão do seu silêncio.",
+      "prompt": "O narrador permite ao leitor conhecer", "options": ["apenas ações observáveis.", "a perspetiva interior de Marta.", "os pensamentos de todas as personagens.", "somente o espaço onde decorre a ação."], "answerIndex": 1,
+      "explanation": "A referência ao modo como Marta interpreta a história dá acesso à sua perspetiva interior.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-132", "year": "12.º", "domain": "literatura", "competencyId": "pt-literatura-forma", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "interpretar",
+      "stimulus": "No início do texto, a frase «A porta continuava fechada» surge isolada. No final, a mesma frase reaparece depois de a personagem desistir de esperar.",
+      "prompt": "A repetição da frase contribui sobretudo para", "options": ["criar uma estrutura circular e reforçar a ideia de impasse.", "introduzir uma nova personagem.", "eliminar a relação entre início e fim.", "transformar o texto numa descrição científica."], "answerIndex": 0,
+      "explanation": "A repetição liga formalmente início e fim e intensifica a permanência do obstáculo.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-133", "year": "10.º", "domain": "escrita", "competencyId": "pt-escrita-opiniao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "aplicar",
+      "stimulus": "Tese: A escola deve disponibilizar mais espaços de estudo informal.",
+      "prompt": "Qual dos argumentos sustenta diretamente a tese?", "options": ["Esses espaços permitem estudar ou colaborar nos intervalos sem ocupar salas de aula.", "A escola foi construída há vinte anos.", "Alguns alunos preferem canetas azuis.", "O edifício tem três entradas."], "answerIndex": 0,
+      "explanation": "O argumento apresenta uma vantagem diretamente relacionada com a criação de espaços de estudo informal.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-134", "year": "11.º", "domain": "escrita", "competencyId": "pt-escrita-exposicao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "revisar",
+      "stimulus": "Frase de um texto expositivo: «A reciclagem é importante. A reciclagem permite reduzir resíduos. A reciclagem também favorece a reutilização de materiais.»",
+      "prompt": "Qual revisão melhora a coesão sem alterar o sentido?", "options": ["A reciclagem é importante, pois permite reduzir resíduos e também favorece a reutilização de materiais.", "A reciclagem é importante. Ontem choveu bastante. Os materiais existem.", "A reciclagem, reciclagem, reciclagem é muito importante e pronto.", "Talvez a reciclagem seja uma personagem que reduz resíduos."], "answerIndex": 0,
+      "explanation": "A reformulação elimina repetições desnecessárias e explicita a relação entre as ideias.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-135", "year": "12.º", "domain": "gramatica", "competencyId": "pt-gramatica-coesao", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "analisar",
+      "stimulus": "O plano era exigente; contudo, a equipa decidiu avançar.",
+      "prompt": "O conector «contudo» estabelece uma relação de", "options": ["adição.", "contraste.", "causa.", "finalidade."], "answerIndex": 1,
+      "explanation": "«Contudo» introduz uma ideia contrastante com a expectativa criada pela exigência do plano.", "gradingMode": "deterministic", "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-136", "year": "10.º", "domain": "gramatica", "competencyId": "pt-gramatica-morfologia-semantica", "sourceOrigin": "original", "reviewStatus": "prototype", "responseType": "multiple-choice", "cognitive": "analisar",
+      "stimulus": "Os alunos certamente compreenderam a instrução.",
+      "prompt": "Na frase, «certamente» exprime", "options": ["um elevado grau de certeza do enunciador.", "uma ordem dirigida aos alunos.", "uma condição necessária.", "uma dúvida forte."], "answerIndex": 0,
+      "explanation": "O advérbio modal «certamente» marca um elevado grau de certeza relativamente ao enunciado.", "gradingMode": "deterministic", "maxPoints": 13
+    }
+  ]
+}
