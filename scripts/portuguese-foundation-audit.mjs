@@ -20,7 +20,7 @@ const portuguese=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese"
 assert.ok(portuguese); assert.deepEqual(portuguese.codes,["639"]); assert.equal(portuguese.available,undefined); assert.equal(portuguese.releaseStage,"foundation"); assert.equal(subjectStatusLabel(portuguese),"Em preparação");
 assert.equal(PORTUGUESE_RELEASE_POLICY.selectable,false); assert.equal(PORTUGUESE_RELEASE_POLICY.productionEligible,false); assert.equal(PORTUGUESE_RELEASE_POLICY.extendedWritingFinalAutoGrade,false);
 assert.ok(allItems.length>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems);
-assert.ok(PORTUGUESE_RELEASE_POLICY.minimumBetaItems>allItems.length,"300 itens ainda não devem desbloquear automaticamente o beta de Português");
+assert.ok(PORTUGUESE_RELEASE_POLICY.productionEligible===false,"300 itens não podem desbloquear automaticamente a produção enquanto a validação editorial estiver pendente");
 
 assert.deepEqual(PORTUGUESE_DOMAINS.map(domain=>domain.id),["oralidade","leitura","educacao-literaria","escrita","gramatica"]);
 assert.equal(PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).length,4);
