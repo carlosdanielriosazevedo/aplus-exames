@@ -23,9 +23,9 @@ function putProgress(state,subjectId,progress){
 
 function compactResult(result){
   if(!result)return null;
-  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,gradingMode:result.gradingMode||null};
+  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,gradingMode:result.gradingMode||null,responseText:result.responseText||""};
   if(result.final)return compact;
-  return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending"})))};
+  return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};
 }
 
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,startedAt=Date.now()}){

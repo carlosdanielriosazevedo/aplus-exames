@@ -48,9 +48,11 @@ for(const item of items){
   assert.ok(uncertain.criteria.every(criterion=>criterion.status==="unsure"),`${item.id}: dúvida não foi preservada`);
   assert.match(portugueseRubricGuidance(uncertain).nextAction,/referência/,`${item.id}: dúvida não remeteu para comparação`);
 
-  const snapshot={rubricId:partial.rubricId,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
+  const snapshot={rubricId:partial.rubricId,responseText:partial.responseText,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
   const restored=restorePortugueseRubricEvidence(item,snapshot);
+  assert.equal(restored.responseText,snapshot.responseText,`${item.id}: o texto da resposta perdeu-se na retoma`);
   assert.deepEqual(rubricObservationEvidenceSnapshot(restored),snapshot.rubricObservationEvidence,`${item.id}: a evidência atómica perdeu-se na retoma`);
+  assert.ok(rubricObservationEvidenceSnapshot(partial).some(row=>row.studentEvidence.length>0),`${item.id}: não foi preservada evidência do aluno`);
   assert.equal(restored.points,null,`${item.id}: retomar uma autoavaliação não pode criar classificação`);
 }
 
