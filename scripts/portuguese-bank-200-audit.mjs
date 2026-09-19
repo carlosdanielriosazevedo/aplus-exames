@@ -14,11 +14,11 @@ const writtenCompetencies=new Map(PORTUGUESE_COMPETENCIES.filter(item=>item.writ
 const responseTypes=new Set(PORTUGUESE_RESPONSE_TYPES.map(type=>type.id));
 
 assert.equal(files.length,11,"Português deve agregar piloto + waves 1-10.");
-assert.equal(packs.at(-1)?.wave,11);
-assert.equal(packs.at(-1)?.bankSizeAfterWave,225);
-assert.equal(items.length,225,"O banco foundation deve conter exatamente 200 itens.");
-assert.equal(new Set(items.map(item=>item.id)).size,225,"IDs duplicados no banco de Português.");
-assert.equal(new Set(items.map(item=>item.stimulus)).size,225,"Existem estímulos repetidos.");
+assert.equal(packs.at(-1)?.wave,12);
+assert.equal(packs.at(-1)?.bankSizeAfterWave,250);
+assert.equal(items.length,250,"O banco foundation deve conter exatamente 200 itens.");
+assert.equal(new Set(items.map(item=>item.id)).size,250,"IDs duplicados no banco de Português.");
+assert.equal(new Set(items.map(item=>item.stimulus)).size,250,"Existem estímulos repetidos.");
 
 const counts={};
 for(const item of items){
@@ -42,7 +42,7 @@ assert.equal(Object.keys(counts).length,16,"As 16 competências escritas devem e
 for(const [id,count] of Object.entries(counts)) assert.ok(count>=7,`${id}: profundidade insuficiente (${count}).`);
 
 const runtime=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
-for(let wave=1;wave<=11;wave++) assert.match(runtime,new RegExp(`portuguese-639-wave${wave}\\.json`),`wave${wave} não está ligada ao runtime.`);
-assert.equal((runtime.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,12,"Runtime deve carregar os 11 pacotes foundation.");
+for(let wave=1;wave<=12;wave++) assert.match(runtime,new RegExp(`portuguese-639-wave${wave}\\.json`),`wave${wave} não está ligada ao runtime.`);
+assert.equal((runtime.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,13,"Runtime deve carregar os 11 pacotes foundation.");
 
-console.log(`✓ Portuguese 639: ${items.length} itens · 16 competências escritas cobertas · waves 1-11 ligadas ao runtime · original-only · sem IDs/estímulos duplicados`);
+console.log(`✓ Portuguese 639: ${items.length} itens · 16 competências escritas cobertas · waves 1-12 ligadas ao runtime · original-only · sem IDs/estímulos duplicados`);
