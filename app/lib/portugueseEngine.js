@@ -69,6 +69,13 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
   const responseText=snapshot.responseText||"resposta submetida";
   let result=gradePortugueseResponse(item,responseText);
+  if(!result.final){
+    result={...result,
+      revisionCount:Number.isFinite(snapshot.revisionCount)?snapshot.revisionCount:0,
+      previousResponseText:String(snapshot.previousResponseText||""),
+      revisionHistory:Array.isArray(snapshot.revisionHistory)?snapshot.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):[]})):[]})):[]
+    };
+  }
   if(Array.isArray(snapshot.rubricObservationEvidence)){
     for(const row of snapshot.rubricObservationEvidence){
       const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
@@ -87,6 +94,37 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   return result;
 }
 
+export function portugueseRevisionCompare(previous,current){
+  const before=String(previous||"").trim();
+  const after=String(current||"").trim();
+  const beforeWords=before?before.split(/\s+/u).filter(Boolean):[];
+  const afterWords=after?after.split(/\s+/u).filter(Boolean):[];
+  const beforeSet=new Set(beforeWords.map(word=>word.toLocaleLowerCase("pt-PT")));
+  const afterSet=new Set(afterWords.map(word=>word.toLocaleLowerCase("pt-PT")));
+  const added=afterWords.filter(word=>!beforeSet.has(word.toLocaleLowerCase("pt-PT"))).length;
+  const removed=beforeWords.filter(word=>!afterSet.has(word.toLocaleLowerCase("pt-PT"))).length;
+  return {beforeWords:beforeWords.length,afterWords:afterWords.length,addedWords:added,removedWords:removed,changed:before!==after};
+}
+
+export function portugueseRevisionEvidenceCompare(previousSnapshot=[],currentResult){
+  const previous=new Map((Array.isArray(previousSnapshot)?previousSnapshot:[]).map(row=>[
+    `${row?.criterionId}::${row?.observationId}`,
+    RUBRIC_EVIDENCE_IDS.has(row?.evidence)?row.evidence:"pending"
+  ]));
+  const current=new Map(rubricObservationEvidenceSnapshot(currentResult).map(row=>[
+    `${row.criterionId}::${row.observationId}`,
+    RUBRIC_EVIDENCE_IDS.has(row.evidence)?row.evidence:"pending"
+  ]));
+  const rank={pending:0,"not-observed":1,unsure:2,partial:3,observed:4};
+  const labels=Object.fromEntries(PORTUGUESE_RUBRIC_EVIDENCE.map(option=>[option.id,option.label]));
+  return [...new Set([...previous.keys(),...current.keys()])].map(key=>{
+    const [criterionId,observationId]=key.split("::");
+    const before=previous.get(key)||"pending";
+    const after=current.get(key)||"pending";
+    const direction=before===after?"same":rank[after]>rank[before]?"improved":"changed";
+    return {criterionId,observationId,before,after,beforeLabel:labels[before]||"Ainda não assinalado",afterLabel:labels[after]||"Ainda não assinalado",direction};
+  });
+}
 export function portugueseObservationAction(observation){
   const status=observation?.status;
   if(status==="not-observed")return {
@@ -115,7 +153,16 @@ export function revisePortugueseResponse(item,previousResult,response){
   if(!previousResult||previousResult.final)throw new Error("Only rubric-assisted responses can be revised.");
   const revised=gradePortugueseResponse(item,response);
   if(revised.final)return revised;
-  return {...revised,revisionCount:(previousResult.revisionCount||0)+1,previousResponseText:String(previousResult.responseText||"")};
+  const previousText=String(previousResult.responseText||"");
+  const revisionCount=(previousResult.revisionCount||0)+1;
+  const revisionHistory=[...(previousResult.revisionHistory||[])];
+  if(previousText) revisionHistory.push({
+    revision:revisionCount-1,
+    responseText:previousText,
+    rubricCompleted:!!previousResult.rubricCompleted,
+    rubricObservationEvidence:rubricObservationEvidenceSnapshot(previousResult)
+  });
+  return {...revised,revisionCount,previousResponseText:previousText,revisionHistory};
 }
 
 export function portugueseRubricGuidance(result){
