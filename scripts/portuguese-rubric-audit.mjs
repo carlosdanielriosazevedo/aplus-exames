@@ -9,9 +9,11 @@ const sourceItems=readdirSync(directory)
 const items=applyPortugueseRubricObservations(sourceItems);
 const openItems=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 
-assert.equal(openItems.length,24,"o banco atual deve ter 24 respostas abertas com grelha explícita");
+assert.ok(openItems.length>=24,"o banco candidato não pode perder respostas abertas já validadas");
 for(const item of openItems){
-  const referenceWords=(item.referenceAnswer||"").trim().split(/\s+/u).filter(Boolean).length;
+  assert.ok(item.rubric?.criteria?.length,`${item.id}: resposta aberta sem grelha explícita`);
+  assert.ok(item.wordLimit&&Number.isFinite(item.wordLimit.min)&&Number.isFinite(item.wordLimit.max),`${item.id}: resposta aberta sem intervalo de palavras`);
+  const referenceWords=(item.referenceAnswer||item.answerReference||"").trim().split(/\s+/u).filter(Boolean).length;
   assert.ok(referenceWords>=item.wordLimit.min&&referenceWords<=item.wordLimit.max,`${item.id}: resposta de referência com ${referenceWords} palavras fora do intervalo ${item.wordLimit.min}–${item.wordLimit.max}`);
   assert.equal(item.rubric.criteria.reduce((sum,criterion)=>sum+criterion.points,0),item.maxPoints,`${item.id}: pesos da grelha incoerentes`);
   const ids=new Set();
@@ -25,5 +27,4 @@ for(const item of openItems){
     }
   }
 }
-
-console.log(`✓ grelhas de Português: ${openItems.length} respostas abertas · critérios decompostos em observações atómicas · versões editoriais protegidas`);
+console.log(`✓ grelhas de Português: ${openItems.length} respostas abertas candidatas verificadas · critérios decompostos em observações atómicas`);
