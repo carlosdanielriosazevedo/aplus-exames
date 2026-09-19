@@ -23,7 +23,7 @@ function criterionStatus(observations=[]){
 
 function withRubricCompletion(result,criteria){
   const rubricCompleted=criteria.length>0&&criteria.every(criterion=>criterion.observations?.length>0&&criterion.observations.every(observation=>RUBRIC_EVIDENCE_IDS.has(observation.status)));
-  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric"};
+  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric",finalScore:null};
 }
 
 function rubricIdFor(item){
@@ -37,7 +37,7 @@ export function assessPortugueseRubricCriterion(result,criterionId,evidence){
   if(!result||result.final||result.status==="unanswered")return result;
   if(!RUBRIC_EVIDENCE_IDS.has(evidence))throw new Error(`Unsupported rubric evidence: ${evidence}`);
   if(!result.criteria?.some(criterion=>criterion.id===criterionId))throw new Error(`Unknown rubric criterion: ${criterionId}`);
-  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence}))}:criterion);
+  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence,evidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}))}:criterion);
   return withRubricCompletion(result,criteria);
 }
 
@@ -49,7 +49,7 @@ export function assessPortugueseRubricObservation(result,criterionId,observation
   if(!criterion.observations?.some(observation=>observation.id===observationId))throw new Error(`Unknown rubric observation: ${criterionId}/${observationId}`);
   const criteria=result.criteria.map(row=>{
     if(row.id!==criterionId)return row;
-    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence}:observation);
+    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence,evidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}:observation);
     return {...row,observations,status:criterionStatus(observations)};
   });
   return withRubricCompletion(result,criteria);
