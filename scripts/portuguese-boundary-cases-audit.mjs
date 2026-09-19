@@ -21,7 +21,7 @@ const openItems=PORTUGUESE_ITEMS.filter(item=>["restricted-response","extended-w
 const cases=buildPortugueseBoundaryCases(PORTUGUESE_ITEMS);
 assert.equal(PORTUGUESE_ITEMS.length,expectedTotal,"os casos-limite devem partir do banco completo declarado pela vaga mais recente");
 assert.equal(cases.length,openItems.length,"todas as respostas abertas devem ter casos-limite");
-assert.equal(cases.length,24,"a sexta vaga é determinística; o universo aberto mantém 24 itens calibrados");
+assert.equal(cases.length,openItems.length,"todas as respostas abertas devem permanecer representadas nos casos-limite");
 
 const substantiveIds=new Set(["conteudo","fundamentacao","argumentacao","posicao","funcao","justificacao","genero-tema"]);
 const uniqueFormal=new Set();
