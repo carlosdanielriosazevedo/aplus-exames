@@ -9,7 +9,7 @@ const sourceItems=readdirSync(directory)
 const items=applyPortugueseRubricObservations(sourceItems);
 const openItems=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 
-assert.equal(openItems.length,33,"o banco atual deve ter 33 respostas abertas com grelha explícita");
+assert.equal(openItems.length,34,"o banco atual deve ter 34 respostas abertas com grelha explícita");
 for(const item of openItems){
   const referenceWords=(item.referenceAnswer||"").trim().split(/\s+/u).filter(Boolean).length;
   assert.ok(referenceWords>=item.wordLimit.min&&referenceWords<=item.wordLimit.max,`${item.id}: resposta de referência com ${referenceWords} palavras fora do intervalo ${item.wordLimit.min}–${item.wordLimit.max}`);
