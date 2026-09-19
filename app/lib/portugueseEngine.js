@@ -62,7 +62,7 @@ export function rubricEvidenceSnapshot(result){
 
 export function rubricObservationEvidenceSnapshot(result){
   if(!result||result.final)return [];
-  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending"})));
+  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending",studentEvidence:Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})));
 }
 
 export function restorePortugueseRubricEvidence(item,snapshot){
@@ -74,6 +74,7 @@ export function restorePortugueseRubricEvidence(item,snapshot){
       const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
       if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&criterion?.observations.some(observation=>observation.id===row.observationId)){
         result=assessPortugueseRubricObservation(result,row.criterionId,row.observationId,row.evidence);
+        if(Array.isArray(row.studentEvidence)) result={...result,criteria:result.criteria.map(candidate=>candidate.id===row.criterionId?{...candidate,observations:candidate.observations.map(observation=>observation.id===row.observationId?{...observation,evidence:row.studentEvidence.slice(0,3)}:observation)}:candidate)};
       }
     }
   }else{
