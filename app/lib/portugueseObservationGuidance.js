@@ -67,6 +67,7 @@ export function portugueseObservationGuidance(item,criterion,observation){
   const key=`${item?.id}:${observation?.id}`;
   const specific=SPECIFIC[key];
   if(specific)return {...specific,specific:true,key};
+  if(String(item?.id||"").match(/^PT639-FND-(?:30[1-9]|310)$/u)&&criterion?.id==="conteudo")return {counts:"Ex.: responder explicitamente ao ponto observado — "+String(observation?.label||"elemento pedido")+" — e ligá-lo ao estímulo.",notEnough:"Ex.: mencionar o tema de forma genérica sem tornar visível o elemento observado: "+String(observation?.label||"elemento pedido")+" .",specific:true,key};
   const generic=GENERIC_GUIDANCE[criterion?.id]||{
     counts:"Evidência explícita, pertinente e suficientemente desenvolvida para satisfazer esta observação.",
     notEnough:"Uma referência vaga, implícita ou apenas formal que não demonstre o elemento pedido."
