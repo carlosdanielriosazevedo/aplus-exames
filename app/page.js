@@ -7,7 +7,11 @@ import {emptyScores,recalibrateAllScores,migratePedagogicalIds} from "./lib/engi
 import {loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {saveSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen} from "./lib/sessionDraft";
 import {recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions} from "./lib/diagnosticRecovery";
-import {migrateProductAnalytics,recordAppOpen} from "./lib/productAnalytics";
+import {migrateProductAnalytics,recordAppOpen,recordMilestone} from "./lib/productAnalytics";
+import {betaEvent} from "./lib/beta";
+import {recordStudyActivity,recordCompetitiveActivity} from "./lib/engagement";
+import {refreshLearningHypotheses} from "./lib/engine";
+import {demoIdentity} from "./lib/identity";
 import {migrateCloudSync} from "./lib/cloudReliability";
 import {friendsBetaRequested,activateFriendsBeta,isFriendsBeta} from "./lib/friendsBeta";
 import {emptyEngagement,migrateEngagement} from "./lib/engagement";
@@ -74,6 +78,33 @@ const initial={
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]}
 };
+
+function ensureDiagnosticStarted(state,draft){
+  const matching=(state.betaSessions||[]).filter(x=>x.id===draft.sessionId&&x.kind==="diagnostic");
+  const otherOpen=(state.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
+  if(otherOpen.length||matching.length>1||matching.some(x=>x.finishedAt))return {ok:false,reason:"ambiguous_session"};
+  if(matching.length===1)return {ok:true,state};
+  const eventExists=(state.betaEvents||[]).some(e=>e.type==="diagnostic_started"&&e.payload?.sessionId===draft.sessionId);
+  const base={...state,betaSessions:[...(state.betaSessions||[]),draft.session],
+    betaEvents:eventExists?(state.betaEvents||[]):[...(state.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:draft.sessionId})]};
+  return {ok:true,state:recordMilestone(base,"diagnostic_started",{sessionId:draft.sessionId})};
+}
+function finalizeDiagnosticState(nextState,draft){
+  if(nextState.diagnosticDone&&(nextState.betaSessions||[]).some(x=>x.id===draft.sessionId&&x.kind==="diagnostic"&&x.finishedAt))return {ok:true,state:nextState};
+  const matching=(nextState.betaSessions||[]).map((x,index)=>({x,index})).filter(({x})=>x.id===draft.sessionId&&x.kind==="diagnostic"&&!x.finishedAt);
+  const otherOpen=(nextState.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
+  if(matching.length!==1||otherOpen.length)return {ok:false,reason:"ambiguous_session"};
+  const at=draft.completionAt||Date.now(),sessions=[...(nextState.betaSessions||[])],idx=matching[0].index;
+  sessions[idx]={...sessions[idx],finishedAt:at,durationSeconds:Math.max(1,Math.round((at-sessions[idx].startedAt)/1000)),meta:{...(sessions[idx].meta||{}),answers:nextState.diagnosticAnswers}};
+  const eventExists=(nextState.betaEvents||[]).some(e=>e.type==="diagnostic_finished"&&e.payload?.sessionId===draft.sessionId);
+  let completed={...nextState,diagnosticDone:true,betaSessions:sessions,
+    betaEvents:eventExists?(nextState.betaEvents||[]):[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId})]};
+  completed=recordStudyActivity(completed,{kind:"diagnostic",xpEarned:0,sessionId:draft.sessionId,at});
+  completed=recordCompetitiveActivity(completed,{kind:"diagnostic",sessionId:draft.sessionId,at});
+  completed=refreshLearningHypotheses(completed,at);
+  completed=recordMilestone(completed,"diagnostic_completed",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId},{at});
+  return {ok:true,state:completed};
+}
 
 export default function App(){
   const [s,setS]=useState(initial);
