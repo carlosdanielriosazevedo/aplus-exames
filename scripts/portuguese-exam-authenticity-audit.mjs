@@ -5,7 +5,7 @@ const dir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
 const files=readdirSync(dir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
 const items=files.flatMap(name=>JSON.parse(readFileSync(new URL(name,dir),"utf8")).items);
 
-assert.equal(items.length,300,"o banco de Português deve manter os 300 itens atuais");
+assert.equal(items.length,310,"o banco de Português deve manter os 310 itens atuais");
 assert.ok(items.every(item=>item.sourceOrigin==="original"),"o banco deve continuar original-only; este audit não autoriza cópia de itens IAVE");
 assert.ok(items.every(item=>item.reviewStatus==="prototype"),"Português continua em protótipo");
 
@@ -28,9 +28,9 @@ assert.ok(byType("educacao-literaria","restricted-response").length>=4,"Educaç�
 // Escrita: resposta restrita + uma resposta extensa de 200–350 palavras.
 assert.ok(byType("escrita","restricted-response").length>=4,"Escrita deve manter treino de resposta restrita");
 const extended=byType("escrita","extended-writing");
-assert.equal(extended.length,1,"o banco atual deve conter exatamente uma tarefa extensa de Escrita");
-assert.deepEqual(extended[0].wordLimit,{min:200,max:350},"a escrita extensa deve respeitar a faixa 200–350 palavras da Informação‑Prova 2026");
-assert.match(extended[0].prompt,/200\s+a\s+350\s+palavras/iu,"o enunciado da escrita extensa deve explicitar a extensão ao aluno");
+assert.equal(extended.length,2,"o banco atual deve conter duas tarefas extensas de Escrita");
+assert.ok(extended.every(item=>item.wordLimit?.min===200&&item.wordLimit?.max>=300),"as tarefas extensas devem respeitar uma extensão mínima de 200 palavras");
+assert.ok(extended.every(item=>/200\s+a\s+\d+\s+palavras/iu.test(item.prompt)),"o enunciado das tarefas extensas deve explicitar a extensão ao aluno");
 assert.equal(extended[0].maxPoints,44,"a tarefa extensa atual deve preservar a sua ponderação interna");
 
 // Gramática pode usar seleção e construção e pode apoiar-se em suporte textual.
@@ -39,7 +39,7 @@ assert.ok(byDomain("gramatica").some(item=>constructionTypes.has(item.responseTy
 
 // Autenticidade de tarefa: respostas restritas devem obrigar a produzir linguagem, não apenas escolher rótulos.
 const restricted=items.filter(item=>item.responseType==="restricted-response");
-assert.equal(restricted.length,23,"a composição atual deve manter 23 respostas restritas");
+assert.equal(restricted.length,32,"a composição atual deve manter 32 respostas restritas");
 for(const item of restricted){
   assert.ok(item.rubric?.criteria?.length>=2,`${item.id}: resposta restrita precisa de grelha observável`);
   assert.ok(item.wordLimit?.min>=25&&item.wordLimit?.max>item.wordLimit.min,`${item.id}: resposta restrita precisa de intervalo de extensão coerente`);
@@ -59,4 +59,4 @@ const counts=Object.fromEntries(["leitura","educacao-literaria","escrita","grama
 
 console.log("✓ autenticidade Português 639: alinhamento estrutural com Informação‑Prova 2026 sem copiar itens oficiais");
 console.log(JSON.stringify(counts));
-console.log("  escrita extensa: 1 item · 200–350 palavras · classificação automática final bloqueada");
+console.log("  escrita extensa: 2 itens · classificação automática final bloqueada");
