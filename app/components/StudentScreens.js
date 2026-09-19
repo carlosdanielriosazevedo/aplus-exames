@@ -2913,4 +2913,3 @@ export default function StudentScreens({s,setS,screen,go,trainingCfg,setTraining
     setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
   }}/>;
 }
-}
