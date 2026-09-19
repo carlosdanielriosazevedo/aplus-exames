@@ -7073,11 +7073,12 @@
     },
     {
       "id": "PT639-FND-308",
-      "level": 4,
-      "score": null,
+      "level": 2,
+      "score": 2.43,
       "status": "editorial-provisional",
       "calibrated": false,
       "signals": {
+        "cognitive": 2,
         "response": 0.35,
         "stimulus": 0,
         "prompt": 0.08,
