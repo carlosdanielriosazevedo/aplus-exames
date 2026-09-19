@@ -59,10 +59,13 @@ for(const item of items){
   assert.equal(revised.rubricCompleted,false,`${item.id}: a revisão deve reiniciar a autoavaliação`);
   assert.equal(revised.revisionHistory?.length,1,`${item.id}: histórico da revisão não foi preservado`);
   assert.equal(revised.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: histórico não contém a resposta anterior`);
+  assert.equal(revised.revisionHistory?.[0]?.rubricCompleted,true,`${item.id}: histórico não guardou o estado da grelha da versão anterior`);
+  assert.deepEqual(revised.revisionHistory?.[0]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(partial),`${item.id}: histórico não guardou a evidência da versão anterior`);
   const revisedTwice=revisePortugueseResponse(item,revised,revised.responseText+" segunda revisão");
   assert.equal(revisedTwice.revisionCount,2,`${item.id}: segunda revisão não incrementou o contador`);
   assert.equal(revisedTwice.revisionHistory?.length,2,`${item.id}: segunda revisão não acumulou o histórico`);
   assert.equal(revisedTwice.revisionHistory?.[1]?.responseText,revised.responseText,`${item.id}: histórico não guardou a primeira revisão`);
+  assert.deepEqual(revisedTwice.revisionHistory?.[1]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(revised),`${item.id}: histórico não guardou a evidência da primeira revisão`);
   const snapshot={rubricId:partial.rubricId,responseText:partial.responseText,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
   const restored=restorePortugueseRubricEvidence(item,snapshot);
   assert.equal(restored.responseText,snapshot.responseText,`${item.id}: o texto da resposta perdeu-se na retoma`);
@@ -76,6 +79,8 @@ for(const item of items){
   assert.equal(persisted.revisionHistory?.length,2,`${item.id}: progresso não guardou o histórico completo`);
   assert.equal(persisted.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: progresso perdeu a resposta inicial`);
   assert.equal(persisted.revisionHistory?.[1]?.responseText,revised.responseText,`${item.id}: progresso perdeu a primeira revisão`);
+  assert.deepEqual(persisted.revisionHistory?.[0]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(partial),`${item.id}: progresso perdeu a evidência da resposta inicial`);
+  assert.deepEqual(persisted.revisionHistory?.[1]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(revised),`${item.id}: progresso perdeu a evidência da primeira revisão`);
   const restoredRevision=restorePortugueseRubricEvidence(item,{...persisted,rubricObservationEvidence:rubricObservationEvidenceSnapshot(revisedTwice)});
   assert.equal(restoredRevision.revisionCount,2,`${item.id}: retoma perdeu o contador de revisões`);
   assert.deepEqual(restoredRevision.revisionHistory,persisted.revisionHistory,`${item.id}: retoma perdeu o histórico completo`);
