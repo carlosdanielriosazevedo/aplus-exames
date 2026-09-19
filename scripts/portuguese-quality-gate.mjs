@@ -8,7 +8,7 @@ const contentDir=new URL("../content/vnext/portuguese/foundation/",import.meta.u
 const packFiles=readdirSync(contentDir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
 const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(packFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,contentDir),"utf8")).items));
 
-assert.equal(PORTUGUESE_ITEMS.length,250,"O runtime de Português deve carregar os 250 itens foundation.");
+assert.equal(PORTUGUESE_ITEMS.length,300,"O runtime de Português deve carregar os 300 itens foundation.");
 assert.equal(new Set(PORTUGUESE_ITEMS.map(item=>item.id)).size,300,"Os IDs devem ser únicos.");
 assert.deepEqual(PORTUGUESE_YEAR_FOCUS.map(f=>f.year),["10.º","11.º","12.º"]);
 assert.equal(PORTUGUESE_COMPETENCIES.filter(c=>c.writtenExam).length,16);
@@ -32,4 +32,4 @@ for(const item of PORTUGUESE_ITEMS){
 }
 assert.equal(PORTUGUESE_ASSESSMENT_POLICY.authority,"IAVE");
 assert.equal(PORTUGUESE_ASSESSMENT_POLICY.finalAutoGradeForOpenResponses,false);
-console.log("✓ Portuguese quality gate: 250 itens · 3 anos · 4 domínios escritos · evidência por critério sem nota final automática");
+console.log("✓ Portuguese quality gate: 300 itens · 3 anos · 4 domínios escritos · evidência por critério sem nota final automática");
