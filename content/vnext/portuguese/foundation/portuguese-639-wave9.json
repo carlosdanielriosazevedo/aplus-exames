@@ -42,12 +42,12 @@
       "stimulus": "Inscreve-te até sexta-feira e participa na recolha de livros para a biblioteca comunitária.",
       "prompt": "A intenção comunicativa predominante é",
       "options": [
-        "incentivar à participação.",
         "narrar um acontecimento passado.",
+        "incentivar à participação.",
         "descrever uma personagem.",
         "explicar uma teoria científica."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "O imperativo e o convite procuram levar o destinatário a participar.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -64,12 +64,12 @@
       "stimulus": "A autarquia deve ampliar a rede de ciclovias, pois trajetos seguros podem incentivar deslocações de bicicleta em percursos curtos.",
       "prompt": "Que relação existe entre a segunda parte e a primeira?",
       "options": [
-        "Apresenta uma razão que sustenta a proposta.",
         "Contradiz totalmente a proposta.",
         "Muda para um assunto sem relação.",
+        "Apresenta uma razão que sustenta a proposta.",
         "Apresenta apenas uma definição."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "A segunda parte funciona como argumento a favor da ampliação da rede de ciclovias.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -86,12 +86,12 @@
       "stimulus": "O corredor estreito, quase sem luz, terminava numa porta que ninguém abria havia anos.",
       "prompt": "O espaço contribui sobretudo para criar uma atmosfera de",
       "options": [
-        "mistério e inquietação.",
         "celebração festiva.",
         "neutralidade científica.",
-        "humor explícito."
+        "humor explícito.",
+        "mistério e inquietação."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "A falta de luz e a porta fechada há anos sugerem mistério e tensão.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -152,12 +152,12 @@
       "stimulus": "Tema: vantagens e limites do trabalho de grupo.",
       "prompt": "Qual plano é mais adequado?",
       "options": [
-        "Apresentar o tema; desenvolver vantagens e limites com exemplos; concluir sintetizando a posição.",
         "Escrever ideias aleatórias sem relação entre si.",
+        "Apresentar o tema; desenvolver vantagens e limites com exemplos; concluir sintetizando a posição.",
         "Repetir o título em todos os parágrafos.",
         "Começar pela conclusão e omitir o desenvolvimento."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "O plano organiza introdução, desenvolvimento equilibrado e conclusão.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -174,12 +174,12 @@
       "stimulus": "O projeto teve poucos recursos. ___, a equipa conseguiu cumprir os objetivos principais.",
       "prompt": "Seleciona o conector mais adequado.",
       "options": [
-        "Ainda assim",
         "Por exemplo",
         "Isto é",
+        "Ainda assim",
         "Além disso"
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "«Ainda assim» estabelece contraste entre a limitação e o resultado alcançado.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -218,12 +218,12 @@
       "stimulus": "Aquela equipa trabalhou cuidadosamente.",
       "prompt": "A palavra «cuidadosamente» pertence à classe dos",
       "options": [
-        "advérbios.",
         "nomes.",
         "determinantes.",
-        "pronomes."
+        "pronomes.",
+        "advérbios."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "«Cuidadosamente» modifica o verbo e é um advérbio de modo.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -262,12 +262,12 @@
       "stimulus": "Se terminares o relatório hoje, poderás revê-lo amanhã.",
       "prompt": "A oração iniciada por «Se» é subordinada adverbial",
       "options": [
-        "condicional.",
         "causal.",
+        "condicional.",
         "consecutiva.",
         "comparativa."
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "A oração apresenta uma condição para a realização do conteúdo da oração principal.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -304,12 +304,12 @@
       "stimulus": "A equipa recolheu os dados. Em seguida, analisou-os e publicou as conclusões.",
       "prompt": "O pronome «-os» retoma",
       "options": [
-        "os dados.",
         "a equipa.",
         "as conclusões.",
+        "os dados.",
         "a publicação."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "O pronome substitui o grupo nominal «os dados».",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -326,12 +326,12 @@
       "stimulus": "Esperei um século por aqueles cinco minutos.",
       "prompt": "O recurso expressivo dominante é",
       "options": [
-        "hipérbole.",
         "eufemismo.",
         "enumeração.",
-        "onomatopeia."
+        "onomatopeia.",
+        "hipérbole."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "O tempo de espera é exagerado intencionalmente para intensificar a perceção de demora.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -370,12 +370,12 @@
       "stimulus": "Contexto: pedido formal enviado à direção da escola.",
       "prompt": "Qual formulação é mais adequada?",
       "options": [
-        "Venho solicitar informação sobre o calendário previsto para a atividade.",
         "Então, malta, quando é que isso acontece?",
+        "Venho solicitar informação sobre o calendário previsto para a atividade.",
         "Diz aí quando vai ser.",
         "Quero saber isso já, ok?"
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "A formulação usa um registo formal adequado ao destinatário institucional.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -392,12 +392,12 @@
       "stimulus": "Parágrafo sobre hábitos de leitura: «Ler regularmente amplia o contacto com diferentes textos. Esse hábito pode enriquecer o vocabulário. Os vulcões podem ser ativos ou extintos. Por isso, reservar tempo para ler é útil.»",
       "prompt": "Que frase prejudica a coerência temática?",
       "options": [
-        "Os vulcões podem ser ativos ou extintos.",
         "Ler regularmente amplia o contacto com diferentes textos.",
         "Esse hábito pode enriquecer o vocabulário.",
+        "Os vulcões podem ser ativos ou extintos.",
         "Por isso, reservar tempo para ler é útil."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "A referência aos vulcões não se relaciona com o tópico do parágrafo.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -414,12 +414,12 @@
       "stimulus": "O texto começa por definir desperdício alimentar, apresenta depois dados nacionais e termina propondo três formas de redução.",
       "prompt": "A parte final do texto tem como função principal",
       "options": [
-        "apresentar propostas de solução.",
         "definir o conceito inicial.",
         "repetir os dados sem alteração.",
-        "introduzir uma personagem."
+        "introduzir uma personagem.",
+        "apresentar propostas de solução."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "O final apresenta medidas para responder ao problema anteriormente caracterizado.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -458,12 +458,12 @@
       "stimulus": "O estudo apresenta resultados relevantes. ___, a amostra utilizada é reduzida.",
       "prompt": "Qual conector introduz adequadamente uma ressalva?",
       "options": [
-        "No entanto",
         "Por conseguinte",
+        "No entanto",
         "Por exemplo",
         "Assim"
       ],
-      "answerIndex": 0,
+      "answerIndex": 1,
       "explanation": "«No entanto» introduz uma limitação que contrasta com a avaliação positiva anterior.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -480,12 +480,12 @@
       "stimulus": "Frase a pontuar: «Quando terminou a aula os alunos saíram para o intervalo».",
       "prompt": "Qual versão está corretamente pontuada?",
       "options": [
-        "Quando terminou a aula, os alunos saíram para o intervalo.",
         "Quando terminou a aula os alunos, saíram para o intervalo.",
         "Quando terminou, a aula os alunos saíram para o intervalo.",
+        "Quando terminou a aula, os alunos saíram para o intervalo.",
         "Quando terminou a aula os alunos saíram, para o intervalo."
       ],
-      "answerIndex": 0,
+      "answerIndex": 2,
       "explanation": "A oração subordinada adverbial anteposta é separada da oração principal por vírgula.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -502,12 +502,12 @@
       "stimulus": "A resposta foi apenas razoável.",
       "prompt": "No contexto, «razoável» significa mais aproximadamente",
       "options": [
-        "aceitável, mas não excelente.",
         "impossível de compreender.",
         "obrigatória.",
-        "muito rápida."
+        "muito rápida.",
+        "aceitável, mas não excelente."
       ],
-      "answerIndex": 0,
+      "answerIndex": 3,
       "explanation": "Neste contexto avaliativo, «razoável» indica qualidade suficiente ou aceitável, sem excelência.",
       "gradingMode": "deterministic",
       "maxPoints": 13
