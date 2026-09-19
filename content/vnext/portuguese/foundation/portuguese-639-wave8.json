@@ -342,8 +342,8 @@
       "prompt": "Porque é este argumento pertinente?",
       "options": [
         "Porque muda o tema para a história dos automóveis.",
-        "Porque repete a tese sem apresentar qualquer razão.",
-        "Porque descreve apenas a cor das ruas.",
+        "Porque repete a tese sem a relacionar com consequências.",
+        "Porque descreve a cor e o aspeto das ruas.",
         "Porque apresenta consequências diretamente relacionadas com a medida defendida."
       ],
       "answerIndex": 3,
