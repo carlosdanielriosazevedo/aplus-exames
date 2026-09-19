@@ -67,7 +67,8 @@ export function rubricObservationEvidenceSnapshot(result){
 
 export function restorePortugueseRubricEvidence(item,snapshot){
   if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
-  let result=gradePortugueseResponse(item,"resposta submetida");
+  const responseText=snapshot.responseText||"resposta submetida";
+  let result=gradePortugueseResponse(item,responseText);
   if(Array.isArray(snapshot.rubricObservationEvidence)){
     for(const row of snapshot.rubricObservationEvidence){
       const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
