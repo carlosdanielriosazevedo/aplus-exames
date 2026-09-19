@@ -13,10 +13,10 @@ const items=packs.flatMap(pack=>pack.items);
 const writtenCompetencies=new Map(PORTUGUESE_COMPETENCIES.filter(item=>item.writtenExam).map(item=>[item.id,item]));
 const responseTypes=new Set(PORTUGUESE_RESPONSE_TYPES.map(type=>type.id));
 
-assert.equal(files.length,13,"Português deve agregar piloto + waves 1-14.");
+assert.equal(files.length,15,"Português deve agregar piloto + waves 1-14.");
 assert.equal(packs.at(-1)?.wave,14);
 assert.equal(packs.at(-1)?.bankSizeAfterWave,300);
-assert.equal(items.length,300,"O banco foundation deve conter exatamente 250 itens.");
+assert.equal(items.length,300,"O banco foundation deve conter exatamente 300 itens.");
 assert.equal(new Set(items.map(item=>item.id)).size,300,"IDs duplicados no banco de Português.");
 assert.equal(new Set(items.map(item=>item.stimulus)).size,300,"Existem estímulos repetidos.");
 
@@ -43,6 +43,6 @@ for(const [id,count] of Object.entries(counts)) assert.ok(count>=7,`${id}: profu
 
 const runtime=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 for(let wave=1;wave<=14;wave++) assert.match(runtime,new RegExp(`portuguese-639-wave${wave}\\.json`),`wave${wave} não está ligada ao runtime.`);
-assert.equal((runtime.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,14,"Runtime deve carregar os 11 pacotes foundation.");
+assert.equal((runtime.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,15,"Runtime deve carregar os 15 pacotes foundation.");
 
 console.log(`✓ Portuguese 639: ${items.length} itens · 16 competências escritas cobertas · waves 1-14 ligadas ao runtime · original-only · sem IDs/estímulos duplicados`);
