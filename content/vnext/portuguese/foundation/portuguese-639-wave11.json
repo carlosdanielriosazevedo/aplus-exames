@@ -516,8 +516,7 @@
       "prompt": "Se o discurso passar para discurso indireto, indica uma possibilidade de reformulação adequada.",
       "acceptedAnswers": [
         "O diretor afirmou que a reunião seria no dia seguinte.",
-        "O diretor afirmou que a reunião seria no dia seguinte",
-        "O diretor afirmou que a reunião seria no dia seguinte."
+        "O diretor declarou que a reunião seria no dia seguinte."
       ],
       "explanation": "Na passagem para discurso indireto, é possível ajustar os tempos e referências deícticas ao novo contexto; «seria no dia seguinte» é uma reformulação adequada.",
       "gradingMode": "deterministic-with-equivalents",
