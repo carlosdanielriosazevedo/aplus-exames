@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
+import {advanceSubjectSession,beginSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
 import {
-  assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,
-  restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot
+  assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,portugueseObservationAction,revisePortugueseResponse,
+  restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot,portugueseRevisionEvidenceCompare
 } from "../app/lib/portugueseEngine.js";
 
 const directory=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
@@ -28,6 +29,7 @@ for(const item of items){
   assert.equal(submitted.final,false,`${item.id}: nem a resposta-modelo pode ser classificada automaticamente`);
   assert.equal(submitted.points,null,`${item.id}: a grelha assistida não pode produzir pontos`);
   assert.ok(submitted.criteria.flatMap(criterion=>criterion.observations).length>=submitted.criteria.length,`${item.id}: faltam observações testáveis`);
+  assert.equal(submitted.responseText,item.referenceAnswer,`${item.id}: a resposta submetida não ficou disponível para feedback/evidência`);
 
   const strong=assessScenario(item,()=>"observed");
   assert.equal(strong.rubricCompleted,true,`${item.id}: cenário forte não concluiu a grelha`);
@@ -39,19 +41,53 @@ for(const item of items){
   assert.equal(partial.rubricCompleted,true,`${item.id}: cenário parcial não concluiu a grelha`);
   assert.ok(partial.criteria.some(criterion=>criterion.status!=="observed"),`${item.id}: cenário parcial foi confundido com resposta forte`);
   assert.ok(portugueseRubricGuidance(partial).needsReview.length>0,`${item.id}: cenário parcial não gerou orientação de revisão`);
+  assert.match(portugueseObservationAction({status:"partial"}).action,/Reescreve|desenvolve/i,`${item.id}: falta feedback acionável para observação parcial`);
 
   const missing=assessScenario(item,()=>"not-observed");
   assert.ok(missing.criteria.every(criterion=>criterion.status==="not-observed"),`${item.id}: ausência total não foi reconhecida`);
   assert.match(portugueseRubricGuidance(missing).nextAction,/Acrescenta/,`${item.id}: ausência total não gerou ação concreta`);
+  assert.match(portugueseObservationAction({status:"not-observed"}).action,/acrescenta/i,`${item.id}: falta feedback acionável para observação ausente`);
 
   const uncertain=assessScenario(item,()=>"unsure");
   assert.ok(uncertain.criteria.every(criterion=>criterion.status==="unsure"),`${item.id}: dúvida não foi preservada`);
   assert.match(portugueseRubricGuidance(uncertain).nextAction,/referência/,`${item.id}: dúvida não remeteu para comparação`);
 
-  const snapshot={rubricId:partial.rubricId,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
+  const revised=revisePortugueseResponse(item,partial,partial.responseText+" revisão");
+  assert.equal(revised.final,false,`${item.id}: revisão aberta não pode criar classificação automática`);
+  assert.equal(revised.revisionCount,1,`${item.id}: a revisão não incrementou o contador`);
+  assert.equal(revised.previousResponseText,partial.responseText,`${item.id}: a resposta anterior não foi preservada`);
+  assert.equal(revised.rubricCompleted,false,`${item.id}: a revisão deve reiniciar a autoavaliação`);
+  assert.equal(revised.revisionHistory?.length,1,`${item.id}: histórico da revisão não foi preservado`);
+  assert.equal(revised.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: histórico não contém a resposta anterior`);
+  assert.equal(revised.revisionHistory?.[0]?.rubricCompleted,true,`${item.id}: histórico não guardou o estado da grelha da versão anterior`);
+  assert.deepEqual(revised.revisionHistory?.[0]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(partial),`${item.id}: histórico não guardou a evidência da versão anterior`);
+  const evidenceEvolution=portugueseRevisionEvidenceCompare(rubricObservationEvidenceSnapshot(partial),revised);
+  assert.ok(evidenceEvolution.length>0,item.id+": a comparação de evidência não produziu transições por observação");
+  assert.ok(evidenceEvolution.some(row=>row.after==="pending"&&row.direction==="changed"),item.id+": a revisão não reiniciou a evidência para nova autoavaliação");
+  const revisedTwice=revisePortugueseResponse(item,revised,revised.responseText+" segunda revisão");
+  assert.equal(revisedTwice.revisionCount,2,`${item.id}: segunda revisão não incrementou o contador`);
+  assert.equal(revisedTwice.revisionHistory?.length,2,`${item.id}: segunda revisão não acumulou o histórico`);
+  assert.equal(revisedTwice.revisionHistory?.[1]?.responseText,revised.responseText,`${item.id}: histórico não guardou a primeira revisão`);
+  assert.deepEqual(revisedTwice.revisionHistory?.[1]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(revised),`${item.id}: histórico não guardou a evidência da primeira revisão`);
+  const snapshot={rubricId:partial.rubricId,responseText:partial.responseText,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
   const restored=restorePortugueseRubricEvidence(item,snapshot);
+  assert.equal(restored.responseText,snapshot.responseText,`${item.id}: o texto da resposta perdeu-se na retoma`);
   assert.deepEqual(rubricObservationEvidenceSnapshot(restored),snapshot.rubricObservationEvidence,`${item.id}: a evidência atómica perdeu-se na retoma`);
+  assert.ok(rubricObservationEvidenceSnapshot(partial).some(row=>row.studentEvidence.length>0),`${item.id}: não foi preservada evidência do aluno`);
   assert.equal(restored.points,null,`${item.id}: retomar uma autoavaliação não pode criar classificação`);
+  let progressState=beginSubjectSession({}, {subjectId:"portuguese",kind:"mission",label:"Auditoria",items:[item]});
+  progressState=advanceSubjectSession(progressState,"portuguese",{current:0,results:[],currentResult:revisedTwice});
+  const persisted=subjectProgressFor(progressState,"portuguese").lastPosition.currentResult;
+  assert.equal(persisted.revisionCount,2,`${item.id}: progresso não guardou o contador completo de revisões`);
+  assert.equal(persisted.revisionHistory?.length,2,`${item.id}: progresso não guardou o histórico completo`);
+  assert.equal(persisted.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: progresso perdeu a resposta inicial`);
+  assert.equal(persisted.revisionHistory?.[1]?.responseText,revised.responseText,`${item.id}: progresso perdeu a primeira revisão`);
+  assert.deepEqual(persisted.revisionHistory?.[0]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(partial),`${item.id}: progresso perdeu a evidência da resposta inicial`);
+  assert.deepEqual(persisted.revisionHistory?.[1]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(revised),`${item.id}: progresso perdeu a evidência da primeira revisão`);
+  const restoredRevision=restorePortugueseRubricEvidence(item,{...persisted,rubricObservationEvidence:rubricObservationEvidenceSnapshot(revisedTwice)});
+  assert.equal(restoredRevision.revisionCount,2,`${item.id}: retoma perdeu o contador de revisões`);
+  assert.deepEqual(restoredRevision.revisionHistory,persisted.revisionHistory,`${item.id}: retoma perdeu o histórico completo`);
+  assert.equal(restoredRevision.responseText,revisedTwice.responseText,`${item.id}: retoma perdeu a versão atual da resposta`);
 }
 
 console.log(`✓ cenários adversariais de Português: ${items.length} grelhas · forte, parcial, ausente e incerto · persistência atómica · zero classificação automática`);

@@ -44,6 +44,27 @@ export const PORTUGUESE_COMPETENCIES=[
   {id:"pt-gramatica-morfologia-semantica",domain:"gramatica",label:"Morfologia, modalidade e valores semânticos",writtenExam:true}
 ];
 
+export const PORTUGUESE_COMPETENCY_ALIASES={
+  "pt-leitura-intencao":"pt-leitura-organizacao",
+  "pt-leitura-argumentacao":"pt-leitura-inferencia",
+  "pt-literatura-espaco":"pt-literatura-forma",
+  "pt-literatura-personagem":"pt-literatura-voz",
+  "pt-literatura-tempo":"pt-literatura-forma",
+  "pt-escrita-planificacao":"pt-escrita-revisao",
+  "pt-escrita-coesao":"pt-escrita-revisao",
+  "pt-escrita-registo":"pt-escrita-revisao",
+  "pt-escrita-coerencia":"pt-escrita-revisao",
+  "pt-escrita-pontuacao":"pt-escrita-revisao",
+  "pt-gramatica-classes":"pt-gramatica-morfologia-semantica",
+  "pt-gramatica-funcoes":"pt-gramatica-sintaxe",
+  "pt-gramatica-semantica":"pt-gramatica-morfologia-semantica",
+  "pt-gramatica-modalidade":"pt-gramatica-morfologia-semantica"
+};
+
+export function resolvePortugueseCompetencyId(id){
+  return PORTUGUESE_COMPETENCY_ALIASES[id]||id;
+}
+
 export const PORTUGUESE_YEAR_FOCUS=[
   {
     year:"10.º",

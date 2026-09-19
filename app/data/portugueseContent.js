@@ -9,11 +9,15 @@ import wave7 from "../../content/vnext/portuguese/foundation/portuguese-639-wave
 import wave8 from "../../content/vnext/portuguese/foundation/portuguese-639-wave8.json";
 import wave9 from "../../content/vnext/portuguese/foundation/portuguese-639-wave9.json";
 import wave10 from "../../content/vnext/portuguese/foundation/portuguese-639-wave10.json";
+import wave11 from "../../content/vnext/portuguese/foundation/portuguese-639-wave11.json";
+import wave12 from "../../content/vnext/portuguese/foundation/portuguese-639-wave12.json";
+import wave13 from "../../content/vnext/portuguese/foundation/portuguese-639-wave13.json";
+import wave14 from "../../content/vnext/portuguese/foundation/portuguese-639-wave14.json";
 import difficulty from "../../content/vnext/portuguese/foundation/portuguese-639-difficulty.json";
 import {applyPortugueseDifficulty} from "../lib/portugueseDifficulty.js";
 import {applyPortugueseRubricObservations} from "./portugueseRubrics.js";
 
-export const PORTUGUESE_CONTENT_PACKS=[pilot,wave1,wave2,wave3,wave4,wave5,wave6,wave7,wave8,wave9,wave10];
+export const PORTUGUESE_CONTENT_PACKS=[pilot,wave1,wave2,wave3,wave4,wave5,wave6,wave7,wave8,wave9,wave10,wave11,wave12,wave13,wave14];
 export const PORTUGUESE_DIFFICULTY_MATRIX=difficulty;
 export const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(applyPortugueseDifficulty(PORTUGUESE_CONTENT_PACKS.flatMap(pack=>pack.items),difficulty));
 

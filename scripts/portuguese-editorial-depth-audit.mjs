@@ -15,9 +15,9 @@ const items=packs.flatMap(pack=>pack.items);
 const deterministic=items.filter(item=>["multiple-choice","short-answer"].includes(item.responseType));
 const open=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 
-assert.equal(items.length,120,"a passagem editorial deve cobrir os 120 itens atuais");
-assert.equal(deterministic.length,96,"o banco atual deve manter 96 itens determinísticos");
-assert.equal(open.length,24,"a passagem editorial não deve alterar as 24 respostas abertas sem nova calibração");
+assert.equal(items.length,300,"a passagem editorial deve cobrir os 300 itens atuais");
+assert.equal(deterministic.length,276,"o banco atual deve manter 276 itens determinísticos");
+assert.equal(open.length,24,"a passagem editorial deve manter as 24 respostas abertas");
 
 const weakSignals=[];
 const lengthSkew=[];
@@ -82,17 +82,17 @@ for(const item of items){
   }
 }
 
-assert.equal(checkedMultipleChoice,70);
-assert.equal(checkedShortAnswers,26);
+assert.equal(checkedMultipleChoice,199);
+assert.equal(checkedShortAnswers,77);
 assert.ok(lengthSkew.length<=8,`demasiadas respostas corretas denunciam-se pelo comprimento: ${lengthSkew.join(" | ")}`);
 assert.equal(weakSignals.length,0,`distratores linguisticamente denunciadores: ${weakSignals.join(" | ")}`);
 
 const latest=packs.at(-1);
-assert.equal(latest.wave,6);
+assert.equal(latest.wave,14);
 for(const id of ["PT639-FND-101","PT639-FND-106","PT639-FND-107","PT639-FND-110","PT639-FND-113","PT639-FND-114","PT639-FND-119"]){
-  assert.ok(latest.items.some(item=>item.id===id),`${id}: item revisto deve permanecer na sexta vaga`);
+  assert.ok(items.some(item=>item.id===id),`${id}: item revisto deve permanecer no banco integrado`);
 }
-const concession=latest.items.find(item=>item.id==="PT639-FND-119");
+const concession=items.find(item=>item.id==="PT639-FND-119");
 assert.deepEqual(concession.acceptedAnswers,["concessão","valor concessivo","concessivo"],"PT639-FND-119 deve exigir valor concessivo, não um rótulo genérico de contraste");
 
 console.log(`✓ profundidade editorial Português: ${items.length} itens · ${checkedMultipleChoice} MC verificados opção a opção · ${checkedShortAnswers} respostas curtas testadas em todos os equivalentes · ${open.length} abertas protegidas`);

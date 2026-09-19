@@ -23,7 +23,7 @@ function criterionStatus(observations=[]){
 
 function withRubricCompletion(result,criteria){
   const rubricCompleted=criteria.length>0&&criteria.every(criterion=>criterion.observations?.length>0&&criterion.observations.every(observation=>RUBRIC_EVIDENCE_IDS.has(observation.status)));
-  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric"};
+  return {...result,criteria,rubricCompleted,status:rubricCompleted?"self-assessed-awaiting-review":"awaiting-rubric",finalScore:null};
 }
 
 function rubricIdFor(item){
@@ -37,7 +37,7 @@ export function assessPortugueseRubricCriterion(result,criterionId,evidence){
   if(!result||result.final||result.status==="unanswered")return result;
   if(!RUBRIC_EVIDENCE_IDS.has(evidence))throw new Error(`Unsupported rubric evidence: ${evidence}`);
   if(!result.criteria?.some(criterion=>criterion.id===criterionId))throw new Error(`Unknown rubric criterion: ${criterionId}`);
-  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence}))}:criterion);
+  const criteria=result.criteria.map(criterion=>criterion.id===criterionId?{...criterion,status:evidence,observations:(criterion.observations||[]).map(observation=>({...observation,status:evidence,studentEvidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}))}:criterion);
   return withRubricCompletion(result,criteria);
 }
 
@@ -49,7 +49,7 @@ export function assessPortugueseRubricObservation(result,criterionId,observation
   if(!criterion.observations?.some(observation=>observation.id===observationId))throw new Error(`Unknown rubric observation: ${criterionId}/${observationId}`);
   const criteria=result.criteria.map(row=>{
     if(row.id!==criterionId)return row;
-    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence}:observation);
+    const observations=row.observations.map(observation=>observation.id===observationId?{...observation,status:evidence,studentEvidence:evidence==="observed"||evidence==="partial"?[String(result.responseText||"")].filter(Boolean):[]}:observation);
     return {...row,observations,status:criterionStatus(observations)};
   });
   return withRubricCompletion(result,criteria);
@@ -62,17 +62,26 @@ export function rubricEvidenceSnapshot(result){
 
 export function rubricObservationEvidenceSnapshot(result){
   if(!result||result.final)return [];
-  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending"})));
+  return (result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:RUBRIC_EVIDENCE_IDS.has(observation.status)?observation.status:"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})));
 }
 
 export function restorePortugueseRubricEvidence(item,snapshot){
   if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
-  let result=gradePortugueseResponse(item,"resposta submetida");
+  const responseText=snapshot.responseText||"resposta submetida";
+  let result=gradePortugueseResponse(item,responseText);
+  if(!result.final){
+    result={...result,
+      revisionCount:Number.isFinite(snapshot.revisionCount)?snapshot.revisionCount:0,
+      previousResponseText:String(snapshot.previousResponseText||""),
+      revisionHistory:Array.isArray(snapshot.revisionHistory)?snapshot.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):[]})):[]})):[]
+    };
+  }
   if(Array.isArray(snapshot.rubricObservationEvidence)){
     for(const row of snapshot.rubricObservationEvidence){
       const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
       if(RUBRIC_EVIDENCE_IDS.has(row.evidence)&&criterion?.observations.some(observation=>observation.id===row.observationId)){
         result=assessPortugueseRubricObservation(result,row.criterionId,row.observationId,row.evidence);
+        if(Array.isArray(row.studentEvidence)) result={...result,criteria:result.criteria.map(candidate=>candidate.id===row.criterionId?{...candidate,observations:candidate.observations.map(observation=>observation.id===row.observationId?{...observation,studentEvidence:row.studentEvidence.slice(0,3)}:observation)}:candidate)};
       }
     }
   }else{
@@ -85,6 +94,77 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   return result;
 }
 
+export function portugueseRevisionCompare(previous,current){
+  const before=String(previous||"").trim();
+  const after=String(current||"").trim();
+  const beforeWords=before?before.split(/\s+/u).filter(Boolean):[];
+  const afterWords=after?after.split(/\s+/u).filter(Boolean):[];
+  const beforeSet=new Set(beforeWords.map(word=>word.toLocaleLowerCase("pt-PT")));
+  const afterSet=new Set(afterWords.map(word=>word.toLocaleLowerCase("pt-PT")));
+  const added=afterWords.filter(word=>!beforeSet.has(word.toLocaleLowerCase("pt-PT"))).length;
+  const removed=beforeWords.filter(word=>!afterSet.has(word.toLocaleLowerCase("pt-PT"))).length;
+  return {beforeWords:beforeWords.length,afterWords:afterWords.length,addedWords:added,removedWords:removed,changed:before!==after};
+}
+
+export function portugueseRevisionEvidenceCompare(previousSnapshot=[],currentResult){
+  const previous=new Map((Array.isArray(previousSnapshot)?previousSnapshot:[]).map(row=>[
+    `${row?.criterionId}::${row?.observationId}`,
+    RUBRIC_EVIDENCE_IDS.has(row?.evidence)?row.evidence:"pending"
+  ]));
+  const current=new Map(rubricObservationEvidenceSnapshot(currentResult).map(row=>[
+    `${row.criterionId}::${row.observationId}`,
+    RUBRIC_EVIDENCE_IDS.has(row.evidence)?row.evidence:"pending"
+  ]));
+  const rank={pending:0,"not-observed":1,unsure:2,partial:3,observed:4};
+  const labels=Object.fromEntries(PORTUGUESE_RUBRIC_EVIDENCE.map(option=>[option.id,option.label]));
+  return [...new Set([...previous.keys(),...current.keys()])].map(key=>{
+    const [criterionId,observationId]=key.split("::");
+    const before=previous.get(key)||"pending";
+    const after=current.get(key)||"pending";
+    const direction=before===after?"same":rank[after]>rank[before]?"improved":"changed";
+    return {criterionId,observationId,before,after,beforeLabel:labels[before]||"Ainda não assinalado",afterLabel:labels[after]||"Ainda não assinalado",direction};
+  });
+}
+export function portugueseObservationAction(observation){
+  const status=observation?.status;
+  if(status==="not-observed")return {
+    title:"Falta tornar este elemento visível",
+    action:"Volta à tua resposta e acrescenta uma formulação que responda diretamente a este ponto.",
+    hint:"Não precisas de copiar a resposta de referência: mostra, com as tuas palavras, onde este elemento fica demonstrado."
+  };
+  if(status==="partial")return {
+    title:"Este elemento está incompleto",
+    action:"Reescreve ou desenvolve a parte da resposta que corresponde a este ponto, tornando a ideia mais explícita.",
+    hint:"Procura uma afirmação concreta e verifica se explicas o suficiente para o leitor perceber a relação."
+  };
+  if(status==="unsure")return {
+    title:"Vale a pena confirmar",
+    action:"Relê o enunciado e a tua resposta e procura uma frase que demonstre claramente este ponto.",
+    hint:"Se continuares com dúvidas, compara depois com a resposta de referência e identifica a diferença."
+  };
+  return {
+    title:"Elemento identificado",
+    action:"Mantém esta parte da resposta e confirma que a formulação está suficientemente clara.",
+    hint:"A evidência deve estar na tua própria resposta."
+  };
+}
+
+export function revisePortugueseResponse(item,previousResult,response){
+  if(!previousResult||previousResult.final)throw new Error("Only rubric-assisted responses can be revised.");
+  const revised=gradePortugueseResponse(item,response);
+  if(revised.final)return revised;
+  const previousText=String(previousResult.responseText||"");
+  const revisionCount=(previousResult.revisionCount||0)+1;
+  const revisionHistory=[...(previousResult.revisionHistory||[])];
+  if(previousText) revisionHistory.push({
+    revision:revisionCount-1,
+    responseText:previousText,
+    rubricCompleted:!!previousResult.rubricCompleted,
+    rubricObservationEvidence:rubricObservationEvidenceSnapshot(previousResult)
+  });
+  return {...revised,revisionCount,previousResponseText:previousText,revisionHistory};
+}
+
 export function portugueseRubricGuidance(result){
   const criteria=result?.criteria||[];
   const byStatus=status=>criteria.filter(criterion=>criterion.status===status).map(criterion=>({id:criterion.id,label:criterion.label}));
@@ -95,7 +175,7 @@ export function portugueseRubricGuidance(result){
   const needsReview=[...missing,...partial];
   const reviewObservations=criteria.flatMap(criterion=>(criterion.observations||[])
     .filter(observation=>observation.status!=="observed")
-    .map(observation=>({criterionId:criterion.id,criterionLabel:criterion.label,id:observation.id,label:observation.label,status:observation.status})));
+    .map(observation=>({criterionId:criterion.id,criterionLabel:criterion.label,id:observation.id,label:observation.label,status:observation.status,action:portugueseObservationAction(observation)})));
   const nextAction=missing.length
     ?"Acrescenta à resposta os elementos que não conseguiste localizar."
     :partial.length
@@ -144,6 +224,7 @@ export function gradePortugueseResponse(item,response){
     return {
       status:answered?"awaiting-rubric":"unanswered",
       final:false,
+      responseText:String(response??""),
       correct:null,
       points:null,
       maxPoints:item.maxPoints,

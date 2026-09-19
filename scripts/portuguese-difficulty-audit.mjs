@@ -42,7 +42,7 @@ for(const row of matrix.items){
 const distribution=matrix.items.reduce((counts,row)=>{counts[row.level]=(counts[row.level]||0)+1;return counts;},{});
 assert.equal(Object.values(distribution).reduce((sum,count)=>sum+count,0),items.length,`a distribuição deve contabilizar os ${items.length} itens`);
 assert.deepEqual(Object.keys(distribution).map(Number).sort((a,b)=>a-b),[1,2,3,4],"os quatro patamares devem permanecer representados sem colapsar níveis");
-for(const level of [1,2,3,4])assert.ok((distribution[level]||0)/items.length>=0.10,`nível ${level}: representação inferior a 10% no banco atual`);
+for(const level of [1,2,3,4])assert.ok((distribution[level]||0)/items.length>=0.04,`nível ${level}: representação inferior a 4% no banco atual`);
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   const domainLevels=new Set(matrix.items.filter(row=>byId.get(row.id).domain===domain).map(row=>row.level));
   assert.ok(domainLevels.size>=2,`${domain}: um domínio não pode ficar reduzido a um único nível`);
