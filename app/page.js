@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import {SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS} from "./data/subjects";
 import {migrateSubjectProgress} from "./lib/subjectProgress";
 import {emptyScores,recalibrateAllScores,migratePedagogicalIds} from "./lib/engine";
-import {loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
+import {loadLocalStateStatus,saveLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
 import {saveSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen} from "./lib/sessionDraft";
 import {recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions} from "./lib/diagnosticRecovery";
 import {migrateProductAnalytics,recordAppOpen,recordMilestone} from "./lib/productAnalytics";
@@ -13,7 +13,7 @@ import {recordStudyActivity,recordCompetitiveActivity} from "./lib/engagement";
 import {refreshLearningHypotheses} from "./lib/engine";
 import {demoIdentity} from "./lib/identity";
 import {migrateCloudSync} from "./lib/cloudReliability";
-import {friendsBetaRequested,activateFriendsBeta,isFriendsBeta} from "./lib/friendsBeta";
+import {friendsBetaRequested,activateFriendsBeta} from "./lib/friendsBeta";
 import {emptyEngagement,migrateEngagement} from "./lib/engagement";
 import {emptyDailyMission,migrateDailyMission} from "./lib/dailyMission";
 import {emptyCompetition,migrateCompetition} from "./lib/competition";
@@ -21,9 +21,6 @@ import {emptyCompetition,migrateCompetition} from "./lib/competition";
 const DEFAULT_SUBJECT_ID="math-a";
 const StudentScreens=dynamic(()=>import("./components/StudentScreens"),{ssr:false});
 
-function subjectById(id){
-  return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===DEFAULT_SUBJECT_ID);
-}
 
 function normalizeSubjectWorkspace(state){
   const selected=[...new Set((state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id)))];
