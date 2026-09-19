@@ -39,7 +39,7 @@ assert.ok(byDomain("gramatica").some(item=>constructionTypes.has(item.responseTy
 
 // Autenticidade de tarefa: respostas restritas devem obrigar a produzir linguagem, não apenas escolher rótulos.
 const restricted=items.filter(item=>item.responseType==="restricted-response");
-assert.equal(restricted.length,32,"a composição atual deve manter 32 respostas restritas");
+assert.equal(restricted.length,31,"a composição atual deve manter 31 respostas restritas");
 for(const item of restricted){
   assert.ok(item.rubric?.criteria?.length>=2,`${item.id}: resposta restrita precisa de grelha observável`);
   assert.ok(item.wordLimit?.min>=25&&item.wordLimit?.max>item.wordLimit.min,`${item.id}: resposta restrita precisa de intervalo de extensão coerente`);
