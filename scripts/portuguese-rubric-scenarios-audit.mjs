@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {
-  assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,
+  assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,portugueseObservationAction,
   restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot
 } from "../app/lib/portugueseEngine.js";
 
@@ -43,6 +43,7 @@ for(const item of items){
   const missing=assessScenario(item,()=>"not-observed");
   assert.ok(missing.criteria.every(criterion=>criterion.status==="not-observed"),`${item.id}: ausência total não foi reconhecida`);
   assert.match(portugueseRubricGuidance(missing).nextAction,/Acrescenta/,`${item.id}: ausência total não gerou ação concreta`);
+  assert.match(portugueseObservationAction({status:"not-observed"}).action,/acrescenta/i,`${item.id}: falta feedback acionável para observação ausente`);
 
   const uncertain=assessScenario(item,()=>"unsure");
   assert.ok(uncertain.criteria.every(criterion=>criterion.status==="unsure"),`${item.id}: dúvida não foi preservada`);
