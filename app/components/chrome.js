@@ -11,8 +11,45 @@ export const BrandName = ({className=""}) => (
 
 export const Logo = () => <div className="logo"><BrandName/></div>;
 
+const APRONSO_MOTION_CSS = `
+@keyframes apronsoIdle {
+  0%,100% { transform: translate3d(0,0,0) rotate(0deg); }
+  50% { transform: translate3d(0,-2px,0) rotate(-0.35deg); }
+}
+@keyframes apronsoThink {
+  0%,100% { transform: translate3d(0,0,0) rotate(0deg); }
+  25% { transform: translate3d(0,-2px,0) rotate(-2deg); }
+  55% { transform: translate3d(0,-1px,0) rotate(2deg); }
+  75% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+@keyframes apronsoCelebrate {
+  0%,100% { transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+  20% { transform: translate3d(0,-7px,0) rotate(-2deg) scale(1.01); }
+  40% { transform: translate3d(0,0,0) rotate(2deg) scale(1); }
+  60% { transform: translate3d(0,-5px,0) rotate(-1deg) scale(1.01); }
+  80% { transform: translate3d(0,0,0) rotate(1deg) scale(1); }
+}
+.apronso-motion-idle { animation: apronsoIdle 3.8s ease-in-out infinite; transform-origin: 50% 90%; }
+.apronso-motion-thinking { animation: apronsoThink 1.8s ease-in-out infinite; transform-origin: 50% 90%; }
+.apronso-motion-celebrate { animation: apronsoCelebrate 1.15s ease-out 1; transform-origin: 50% 90%; }
+@media (prefers-reduced-motion: reduce) {
+  .apronso-motion-idle,
+  .apronso-motion-thinking,
+  .apronso-motion-celebrate { animation: none !important; }
+}
+`;
+
+function apronsoMotionClass(pose){
+  if(pose==="celebrate") return "apronso-motion-celebrate";
+  if(pose==="thinking") return "apronso-motion-thinking";
+  return "apronso-motion-idle";
+}
+
 export function Apronso({pose="welcome", className="", alt=""}){
-  return <img className={`apronso ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>;
+  return <>
+    <style>{APRONSO_MOTION_CSS}</style>
+    <img className={`apronso ${apronsoMotionClass(pose)} ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>
+  </>;
 }
 
 export function ApronsoNudge({pose="thinking", tone="light", children}){
@@ -43,4 +80,3 @@ export function FriendsBetaRibbon({s}){
 }
 
 export const Shell = ({children}) => <main className="light"><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
-
