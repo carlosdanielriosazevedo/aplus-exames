@@ -297,7 +297,7 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Identifica os valores causal e concessivo.",
+            "label": "Identifica corretamente os valores causal/concessivo.",
             "points": 8
           },
           {
