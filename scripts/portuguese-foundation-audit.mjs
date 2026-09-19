@@ -12,7 +12,7 @@ const latestDeclared=[...packs].reverse().find(pack=>Number.isInteger(pack.bankS
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 
-assert.equal(packFiles.length,13,"o runtime atual de Português deve ter piloto + doze vagas");
+assert.equal(packFiles.length,15,"o runtime atual de Português deve ter piloto + catorze vagas");
 assert.equal(allItems.length,latestDeclared,"o banco agregado deve coincidir com o tamanho declarado pela vaga mais recente");
 assert.equal(latestDeclared,300,"a décima quarta vaga deve elevar o banco para 300 itens");
 
@@ -50,5 +50,5 @@ for(const year of ["10.º","11.º","12.º"])assert.ok(allItems.filter(item=>item
 const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
 const mcTotal=answerPositions.reduce((sum,n)=>sum+n,0); for(const n of answerPositions)assert.ok(n/mcTotal>=0.12&&n/mcTotal<=0.40,`posição correta demasiado concentrada: ${answerPositions.join("/")}`);
 assert.match(page,/Português em preparação/); assert.match(page,/preview==="portuguese"/); assert.match(page,/function PortugueseLab\(/);
-assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,11,"O runtime deve agregar piloto + doze vagas."); assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
+assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,15,"O runtime deve agregar piloto + catorze vagas."); assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 console.log(`✓ Portuguese 639 foundation: 15 pacotes · 300 itens · 16 competências escritas · distribuição por domínio ${JSON.stringify(domainCounts)} · release ainda bloqueado`);
