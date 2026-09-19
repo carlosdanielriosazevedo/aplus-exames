@@ -125,7 +125,12 @@ export function revisePortugueseResponse(item,previousResult,response){
   const previousText=String(previousResult.responseText||"");
   const revisionCount=(previousResult.revisionCount||0)+1;
   const revisionHistory=[...(previousResult.revisionHistory||[])];
-  if(previousText) revisionHistory.push({revision:revisionCount-1,responseText:previousText});
+  if(previousText) revisionHistory.push({
+    revision:revisionCount-1,
+    responseText:previousText,
+    rubricCompleted:!!previousResult.rubricCompleted,
+    rubricObservationEvidence:rubricObservationEvidenceSnapshot(previousResult)
+  });
   return {...revised,revisionCount,previousResponseText:previousText,revisionHistory};
 }
 
