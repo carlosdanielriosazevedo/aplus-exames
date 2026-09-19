@@ -4,6 +4,7 @@ import {useEffect,useMemo,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
+import PortugueseWritingCycleSummary from "./PortugueseWritingCycleSummary";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -167,6 +168,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
                   {rowRevisions.map(revision=>{
                     const progress=selfAssessmentProgress(criteria,revision.assessmentBefore||{},revision.assessmentAfter||{});
                     return <div className="ptx-revision-record" key={revision.sequence}>
+                      <PortugueseWritingCycleSummary criteria={criteria} before={revision.assessmentBefore||{}} after={revision.assessmentAfter||{}} revisionCount={revision.sequence}/>
                       <div className="ptx-revision-compare">
                         <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
                         <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
