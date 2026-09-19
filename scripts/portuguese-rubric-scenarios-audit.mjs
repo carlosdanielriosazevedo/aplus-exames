@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
+import {advanceSubjectSession,beginSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
 import {
   assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,portugueseObservationAction,revisePortugueseResponse,
   restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot
@@ -68,6 +69,17 @@ for(const item of items){
   assert.deepEqual(rubricObservationEvidenceSnapshot(restored),snapshot.rubricObservationEvidence,`${item.id}: a evidência atómica perdeu-se na retoma`);
   assert.ok(rubricObservationEvidenceSnapshot(partial).some(row=>row.studentEvidence.length>0),`${item.id}: não foi preservada evidência do aluno`);
   assert.equal(restored.points,null,`${item.id}: retomar uma autoavaliação não pode criar classificação`);
+  let progressState=beginSubjectSession({}, {subjectId:"portuguese",kind:"mission",label:"Auditoria",items:[item]});
+  progressState=advanceSubjectSession(progressState,"portuguese",{current:0,results:[],currentResult:revisedTwice});
+  const persisted=subjectProgressFor(progressState,"portuguese").lastPosition.currentResult;
+  assert.equal(persisted.revisionCount,2,`${item.id}: progresso não guardou o contador completo de revisões`);
+  assert.equal(persisted.revisionHistory?.length,2,`${item.id}: progresso não guardou o histórico completo`);
+  assert.equal(persisted.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: progresso perdeu a resposta inicial`);
+  assert.equal(persisted.revisionHistory?.[1]?.responseText,revised.responseText,`${item.id}: progresso perdeu a primeira revisão`);
+  const restoredRevision=restorePortugueseRubricEvidence(item,{...persisted,rubricObservationEvidence:rubricObservationEvidenceSnapshot(revisedTwice)});
+  assert.equal(restoredRevision.revisionCount,2,`${item.id}: retoma perdeu o contador de revisões`);
+  assert.deepEqual(restoredRevision.revisionHistory,persisted.revisionHistory,`${item.id}: retoma perdeu o histórico completo`);
+  assert.equal(restoredRevision.responseText,revisedTwice.responseText,`${item.id}: retoma perdeu a versão atual da resposta`);
 }
 
 console.log(`✓ cenários adversariais de Português: ${items.length} grelhas · forte, parcial, ausente e incerto · persistência atómica · zero classificação automática`);
