@@ -576,7 +576,7 @@ function PortugueseLab({s,setS,go}){
     }
     const current=Math.min(saved.current,items.length-1);
     setSession({kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
-    setResults(saved.results||[]);setAnswer(null);setFeedback(restorePortugueseRubricEvidence(items[current],saved.currentResult));setEditingCriterionId(null);
+    setResults(saved.results||[]);const restored=restorePortugueseRubricEvidence(items[current],saved.currentResult);setAnswer(restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);
   }
 
   function resetPortuguese(){
