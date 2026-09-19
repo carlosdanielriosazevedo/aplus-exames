@@ -47,7 +47,7 @@ for(const item of openItems){
   }
 }
 
-assert.equal(openItems.length,24,`a sexta vaga é determinística; esperadas 24 perguntas abertas já calibradas, encontradas ${openItems.length}`);
+assert.equal(openItems.length,33,`a vaga atual deve manter 33 perguntas abertas calibradas, encontradas ${openItems.length}`);
 assert.ok(observations>=100,`cobertura insuficiente de observações: ${observations}`);
 assert.equal(missingCritical.length,0,`todas as observações de conteúdo devem ter microexemplos específicos: ${missingCritical.join(", ")}`);
 assert.equal(specificContent,contentObservations,"cobertura específica de conteúdo deve ser total");
