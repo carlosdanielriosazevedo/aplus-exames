@@ -4,7 +4,7 @@ import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.j
 import {advanceSubjectSession,beginSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
 import {
   assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,portugueseObservationAction,revisePortugueseResponse,
-  restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot
+  restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot,portugueseRevisionEvidenceCompare
 } from "../app/lib/portugueseEngine.js";
 
 const directory=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
@@ -61,6 +61,9 @@ for(const item of items){
   assert.equal(revised.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: histórico não contém a resposta anterior`);
   assert.equal(revised.revisionHistory?.[0]?.rubricCompleted,true,`${item.id}: histórico não guardou o estado da grelha da versão anterior`);
   assert.deepEqual(revised.revisionHistory?.[0]?.rubricObservationEvidence,rubricObservationEvidenceSnapshot(partial),`${item.id}: histórico não guardou a evidência da versão anterior`);
+  const evidenceEvolution=portugueseRevisionEvidenceCompare(rubricObservationEvidenceSnapshot(partial),revised);
+  assert.ok(evidenceEvolution.some(row=>row.direction==="same"||row.direction==="improved"),item.id+": a comparação de evidência não produziu transições por observação");
+  assert.ok(evidenceEvolution.some(row=>row.before==="observed"&&row.after==="not-observed"&&row.direction==="changed"),item.id+": a comparação não detetou uma regressão explícita de evidência");
   const revisedTwice=revisePortugueseResponse(item,revised,revised.responseText+" segunda revisão");
   assert.equal(revisedTwice.revisionCount,2,`${item.id}: segunda revisão não incrementou o contador`);
   assert.equal(revisedTwice.revisionHistory?.length,2,`${item.id}: segunda revisão não acumulou o histórico`);
