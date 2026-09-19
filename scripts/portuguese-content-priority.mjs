@@ -1,5 +1,5 @@
 import {readFileSync,readdirSync} from 'node:fs';
-import {PORTUGUESE_COMPETENCIES} from '../app/data/portugueseFoundation.js';
+import {PORTUGUESE_COMPETENCIES,resolvePortugueseCompetencyId} from '../app/data/portugueseFoundation.js';
 
 const contentDir=new URL('../content/vnext/portuguese/foundation/',import.meta.url);
 const files=readdirSync(contentDir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
