@@ -88,11 +88,11 @@ assert.ok(lengthSkew.length<=8,`demasiadas respostas corretas denunciam-se pelo 
 assert.equal(weakSignals.length,0,`distratores linguisticamente denunciadores: ${weakSignals.join(" | ")}`);
 
 const latest=packs.at(-1);
-assert.equal(latest.wave,6);
+assert.equal(latest.wave,14);
 for(const id of ["PT639-FND-101","PT639-FND-106","PT639-FND-107","PT639-FND-110","PT639-FND-113","PT639-FND-114","PT639-FND-119"]){
-  assert.ok(latest.items.some(item=>item.id===id),`${id}: item revisto deve permanecer na sexta vaga`);
+  assert.ok(items.some(item=>item.id===id),`${id}: item revisto deve permanecer no banco integrado`);
 }
-const concession=latest.items.find(item=>item.id==="PT639-FND-119");
+const concession=items.find(item=>item.id==="PT639-FND-119");
 assert.deepEqual(concession.acceptedAnswers,["concessão","valor concessivo","concessivo"],"PT639-FND-119 deve exigir valor concessivo, não um rótulo genérico de contraste");
 
 console.log(`✓ profundidade editorial Português: ${items.length} itens · ${checkedMultipleChoice} MC verificados opção a opção · ${checkedShortAnswers} respostas curtas testadas em todos os equivalentes · ${open.length} abertas protegidas`);
