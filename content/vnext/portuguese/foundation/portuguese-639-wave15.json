@@ -330,7 +330,7 @@
       "responseType": "extended-writing",
       "cognitive": "criar",
       "stimulus": "Uma comunidade pretende transformar um edifício devoluto num espaço cultural com sala de leitura, exposições e atividades abertas a diferentes idades.",
-      "prompt": "Escreve um texto de opinião sobre a importância de reutilizar espaços existentes para fins culturais.",
+      "prompt": "Escreve um texto de opinião sobre a importância de reutilizar espaços existentes para fins culturais. Escreve 200 a 300 palavras.",
       "rubric": {
         "maxPoints": 44,
         "criteria": [
@@ -374,7 +374,7 @@
       "responseType": "extended-writing",
       "cognitive": "criar",
       "stimulus": "Uma escola pretende divulgar um projeto de leitura que inclui empréstimo de livros, encontros de leitores e uma sessão mensal de recomendações.",
-      "prompt": "Escreve um texto expositivo em que apresentes as principais componentes do projeto e expliques a sua finalidade.",
+      "prompt": "Escreve um texto expositivo em que apresentes as principais componentes do projeto e expliques a sua finalidade. Escreve 200 a 300 palavras.",
       "rubric": {
         "maxPoints": 44,
         "criteria": [
