@@ -6909,6 +6909,235 @@
         "estímulo: 12 palavras",
         "instrução: 10 palavras"
       ]
+    },
+    {
+      "id": "PT639-FND-301",
+      "level": 3,
+      "score": 3.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 28,
+        "promptWords": 23
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: restricted-response",
+        "estímulo: 28 palavras",
+        "instrução: 23 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-302",
+      "level": 3,
+      "score": 3.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 27,
+        "promptWords": 17
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: restricted-response",
+        "estímulo: 27 palavras",
+        "instrução: 17 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-303",
+      "level": 3,
+      "score": 3.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 29,
+        "promptWords": 18
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: restricted-response",
+        "estímulo: 29 palavras",
+        "instrução: 18 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-304",
+      "level": 2,
+      "score": 2.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 2,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 27,
+        "promptWords": 17
+      },
+      "rationale": [
+        "operação cognitiva: interpretar",
+        "formato: restricted-response",
+        "estímulo: 27 palavras",
+        "instrução: 17 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-305",
+      "level": 3,
+      "score": 3.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 26,
+        "promptWords": 20
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: restricted-response",
+        "estímulo: 26 palavras",
+        "instrução: 20 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-306",
+      "level": 3,
+      "score": 3.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 31,
+        "promptWords": 16
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: restricted-response",
+        "estímulo: 31 palavras",
+        "instrução: 16 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-307",
+      "level": 3,
+      "score": 3.43,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 3,
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 26,
+        "promptWords": 17
+      },
+      "rationale": [
+        "operação cognitiva: raciocinar",
+        "formato: restricted-response",
+        "estímulo: 26 palavras",
+        "instrução: 17 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-308",
+      "level": 4,
+      "score": null,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "response": 0.35,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0,
+        "stimulusWords": 18,
+        "promptWords": 16
+      },
+      "rationale": [
+        "operação cognitiva: analisar",
+        "formato: restricted-response",
+        "estímulo: 18 palavras",
+        "instrução: 16 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-309",
+      "level": 4,
+      "score": 4.8,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 4,
+        "response": 0.6,
+        "stimulus": 0,
+        "prompt": 0,
+        "rubric": 0,
+        "wordLimit": 0.2,
+        "stimulusWords": 21,
+        "promptWords": 15
+      },
+      "rationale": [
+        "operação cognitiva: criar",
+        "formato: extended-writing",
+        "estímulo: 21 palavras",
+        "instrução: 15 palavras"
+      ]
+    },
+    {
+      "id": "PT639-FND-310",
+      "level": 4,
+      "score": 4.88,
+      "status": "editorial-provisional",
+      "calibrated": false,
+      "signals": {
+        "cognitive": 4,
+        "response": 0.6,
+        "stimulus": 0,
+        "prompt": 0.08,
+        "rubric": 0,
+        "wordLimit": 0.2,
+        "stimulusWords": 22,
+        "promptWords": 17
+      },
+      "rationale": [
+        "operação cognitiva: criar",
+        "formato: extended-writing",
+        "estímulo: 22 palavras",
+        "instrução: 17 palavras"
+      ]
     }
   ]
 }
