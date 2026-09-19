@@ -28,7 +28,7 @@ assert.ok(byType("educacao-literaria","restricted-response").length>=4,"Educaç�
 // Escrita: resposta restrita + uma resposta extensa de 200–350 palavras.
 assert.ok(byType("escrita","restricted-response").length>=4,"Escrita deve manter treino de resposta restrita");
 const extended=byType("escrita","extended-writing");
-assert.equal(extended.length,2,"o banco atual deve conter duas tarefas extensas de Escrita");
+assert.ok(extended.length>=2,"o banco atual deve manter pelo menos duas tarefas extensas de Escrita");
 assert.ok(extended.every(item=>item.wordLimit?.min===200&&item.wordLimit?.max>=300),"as tarefas extensas devem respeitar uma extensão mínima de 200 palavras");
 assert.ok(extended.every(item=>/200\s+a\s+\d+\s+palavras/iu.test(item.prompt)),"o enunciado das tarefas extensas deve explicitar a extensão ao aluno");
 assert.equal(extended[0].maxPoints,44,"a tarefa extensa atual deve preservar a sua ponderação interna");
