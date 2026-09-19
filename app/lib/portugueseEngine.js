@@ -73,7 +73,7 @@ export function restorePortugueseRubricEvidence(item,snapshot){
     result={...result,
       revisionCount:Number.isFinite(snapshot.revisionCount)?snapshot.revisionCount:0,
       previousResponseText:String(snapshot.previousResponseText||""),
-      revisionHistory:Array.isArray(snapshot.revisionHistory)?snapshot.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||"")})):[]
+      revisionHistory:Array.isArray(snapshot.revisionHistory)?snapshot.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):[]})):[]})):[]
     };
   }
   if(Array.isArray(snapshot.rubricObservationEvidence)){
