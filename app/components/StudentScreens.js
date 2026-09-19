@@ -1,6 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-import {insertMathText} from "../lib/mathInput";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {insertMathText} from "../lib/mathInput";
 import {
@@ -9,8 +8,8 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "../data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./chrome";
 import {Welcome} from "./Welcome";
-const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
-const PortuguesePassageMiniExam=dynamic(()=>import("./components/PortuguesePassageMiniExam"),{ssr:false});
+const ReviewerDashboard=dynamic(()=>import("./ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
+const PortuguesePassageMiniExam=dynamic(()=>import("./PortuguesePassageMiniExam"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "../data/subjects";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
 import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "../data/portuguesePassagePrototype";
