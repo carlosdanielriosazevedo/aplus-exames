@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {
-  assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,portugueseObservationAction,
+  assessPortugueseRubricObservation,gradePortugueseResponse,portugueseRubricGuidance,portugueseObservationAction,revisePortugueseResponse,
   restorePortugueseRubricEvidence,rubricObservationEvidenceSnapshot
 } from "../app/lib/portugueseEngine.js";
 
@@ -51,6 +51,11 @@ for(const item of items){
   assert.ok(uncertain.criteria.every(criterion=>criterion.status==="unsure"),`${item.id}: dúvida não foi preservada`);
   assert.match(portugueseRubricGuidance(uncertain).nextAction,/referência/,`${item.id}: dúvida não remeteu para comparação`);
 
+  const revised=revisePortugueseResponse(item,partial,partial.responseText+" revisão");
+  assert.equal(revised.final,false,`${item.id}: revisão aberta não pode criar classificação automática`);
+  assert.equal(revised.revisionCount,1,`${item.id}: a revisão não incrementou o contador`);
+  assert.equal(revised.previousResponseText,partial.responseText,`${item.id}: a resposta anterior não foi preservada`);
+  assert.equal(revised.rubricCompleted,false,`${item.id}: a revisão deve reiniciar a autoavaliação`);
   const snapshot={rubricId:partial.rubricId,responseText:partial.responseText,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
   const restored=restorePortugueseRubricEvidence(item,snapshot);
   assert.equal(restored.responseText,snapshot.responseText,`${item.id}: o texto da resposta perdeu-se na retoma`);
