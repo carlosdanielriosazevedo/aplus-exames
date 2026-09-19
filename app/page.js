@@ -536,7 +536,8 @@ function PortugueseLab({s,setS,go}){
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
-  const [editingCriterionId,setEditingCriterionId]=useState(null);\n  const [revisionEditing,setRevisionEditing]=useState(false);
+  const [editingCriterionId,setEditingCriterionId]=useState(null);
+  const [revisionEditing,setRevisionEditing]=useState(false);
   const [results,setResults]=useState([]);
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
   const progress=subjectProgressFor(s,"portuguese");
