@@ -56,6 +56,8 @@ for(const item of items){
   assert.equal(revised.revisionCount,1,`${item.id}: a revisão não incrementou o contador`);
   assert.equal(revised.previousResponseText,partial.responseText,`${item.id}: a resposta anterior não foi preservada`);
   assert.equal(revised.rubricCompleted,false,`${item.id}: a revisão deve reiniciar a autoavaliação`);
+  assert.equal(revised.revisionHistory?.length,1,`${item.id}: histórico da revisão não foi preservado`);
+  assert.equal(revised.revisionHistory?.[0]?.responseText,partial.responseText,`${item.id}: histórico não contém a resposta anterior`);
   const snapshot={rubricId:partial.rubricId,responseText:partial.responseText,rubricObservationEvidence:rubricObservationEvidenceSnapshot(partial)};
   const restored=restorePortugueseRubricEvidence(item,snapshot);
   assert.equal(restored.responseText,snapshot.responseText,`${item.id}: o texto da resposta perdeu-se na retoma`);
