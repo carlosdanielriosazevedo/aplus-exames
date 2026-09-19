@@ -29,7 +29,7 @@
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a explicação com progressão clara.",
+            "label": "Organiza a explicação com progressão clara.",
             "points": 3
           },
           {
@@ -68,7 +68,7 @@
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a explicação com progressão clara.",
+            "label": "Organiza a explicação com progressão clara.",
             "points": 3
           },
           {
@@ -102,12 +102,12 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Relaciona a imagem do manto e o desaparecimento gradual das vozes com a criação do ambiente.",
+            "label": "Relaciona a imagem do manto com a criação do ambiente.",
             "points": 8
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a explicação com progressão clara.",
+            "label": "Organiza a explicação com progressão clara.",
             "points": 3
           },
           {
@@ -141,12 +141,12 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Relaciona a chave com uma ligação ao passado e com o encerramento de uma etapa.",
+            "label": "Relaciona a chave com uma ligação ao passado.",
             "points": 8
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a interpretação com progressão clara.",
+            "label": "Organiza a interpretação com progressão clara.",
             "points": 3
           },
           {
@@ -180,12 +180,12 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Relaciona caracterização indireta e contraste entre ações e palavras com a inferência do leitor.",
+            "label": "Relaciona a caracterização indireta com a inferência do leitor.",
             "points": 8
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a explicação com progressão clara.",
+            "label": "Organiza a explicação com progressão clara.",
             "points": 3
           },
           {
@@ -219,12 +219,12 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Explica a unidade estrutural e a alteração de sentido produzida pelo desenvolvimento do poema.",
+            "label": "Explica a alteração de sentido produzida pelo desenvolvimento do poema.",
             "points": 8
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a explicação com progressão clara.",
+            "label": "Organiza a explicação com progressão clara.",
             "points": 3
           },
           {
@@ -258,12 +258,12 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Identifica a redundância e propõe maior precisão informativa.",
+            "label": "Identifica a redundância com precisão.",
             "points": 8
           },
           {
             "id": "discurso",
-            "label": "Apresenta intervenções concretas e adequadas.",
+            "label": "Apresenta uma intervenção de revisão adequada.",
             "points": 3
           },
           {
@@ -297,17 +297,17 @@
         "criteria": [
           {
             "id": "conteudo",
-            "label": "Identifica corretamente os valores causal e concessivo e explica a relação com a oração principal.",
+            "label": "Identifica os valores causal e concessivo.",
             "points": 8
           },
           {
             "id": "discurso",
-            "label": "Organiza e fundamenta a classificação com progressão clara.",
+            "label": "Organiza a classificação com progressão clara.",
             "points": 3
           },
           {
             "id": "lingua",
-            "label": "Usa terminologia gramatical adequada e escreve com correção.",
+            "label": "Usa terminologia gramatical adequada com correção.",
             "points": 2
           }
         ]
@@ -341,17 +341,17 @@
           },
           {
             "id": "coerencia",
-            "label": "Organiza o texto com progressão, coesão e parágrafos funcionais.",
+            "label": "Organiza o texto com progressão funcional.",
             "points": 10
           },
           {
             "id": "argumentacao",
-            "label": "Apresenta razões, relações ou exemplos pertinentes e fundamentados.",
+            "label": "Apresenta razões ou exemplos pertinentes.",
             "points": 10
           },
           {
             "id": "correcao-linguistica",
-            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "label": "Demonstra correção lexical, sintática, ortográfica.",
             "points": 14
           }
         ]
@@ -385,17 +385,17 @@
           },
           {
             "id": "coerencia",
-            "label": "Organiza o texto com progressão, coesão e parágrafos funcionais.",
+            "label": "Organiza o texto com progressão funcional.",
             "points": 10
           },
           {
             "id": "argumentacao",
-            "label": "Apresenta razões, relações ou exemplos pertinentes e fundamentados.",
+            "label": "Apresenta razões ou exemplos pertinentes.",
             "points": 10
           },
           {
             "id": "correcao-linguistica",
-            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "label": "Demonstra correção lexical, sintática, ortográfica.",
             "points": 14
           }
         ]
