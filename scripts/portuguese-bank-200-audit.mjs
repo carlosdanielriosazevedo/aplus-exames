@@ -13,10 +13,10 @@ const items=packs.flatMap(pack=>pack.items);
 const writtenCompetencies=new Map(PORTUGUESE_COMPETENCIES.filter(item=>item.writtenExam).map(item=>[item.id,item]));
 const responseTypes=new Set(PORTUGUESE_RESPONSE_TYPES.map(type=>type.id));
 
-assert.equal(files.length,11,"Português deve agregar piloto + waves 1-10.");
+assert.equal(files.length,13,"Português deve agregar piloto + waves 1-12.");
 assert.equal(packs.at(-1)?.wave,12);
 assert.equal(packs.at(-1)?.bankSizeAfterWave,250);
-assert.equal(items.length,250,"O banco foundation deve conter exatamente 200 itens.");
+assert.equal(items.length,250,"O banco foundation deve conter exatamente 250 itens.");
 assert.equal(new Set(items.map(item=>item.id)).size,250,"IDs duplicados no banco de Português.");
 assert.equal(new Set(items.map(item=>item.stimulus)).size,250,"Existem estímulos repetidos.");
 
