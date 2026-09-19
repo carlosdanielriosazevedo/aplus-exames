@@ -1,0 +1,32 @@
+import assert from "node:assert/strict";
+import {PORTUGUESE_ITEMS} from "../app/data/portugueseContent.js";
+import {PORTUGUESE_YEAR_FOCUS,PORTUGUESE_COMPETENCIES} from "../app/data/portugueseFoundation.js";
+import {PORTUGUESE_ASSESSMENT_POLICY,buildPortugueseCriterionEvidence,summarizePortugueseCriterionEvidence} from "../app/data/portugueseAssessmentPolicy.js";
+
+assert.equal(PORTUGUESE_ITEMS.length,200,"O runtime de Português deve carregar os 200 itens foundation.");
+assert.equal(new Set(PORTUGUESE_ITEMS.map(item=>item.id)).size,200,"Os IDs devem ser únicos.");
+assert.deepEqual(PORTUGUESE_YEAR_FOCUS.map(f=>f.year),["10.º","11.º","12.º"]);
+assert.equal(PORTUGUESE_COMPETENCIES.filter(c=>c.writtenExam).length,16);
+
+const writtenDomains=["leitura","educacao-literaria","escrita","gramatica"];
+for(const year of ["10.º","11.º","12.º"]){
+  const yearItems=PORTUGUESE_ITEMS.filter(item=>item.year===year);
+  assert.ok(yearItems.length>=50,`${year}: profundidade insuficiente.`);
+  for(const domain of writtenDomains)assert.ok(yearItems.some(item=>item.domain===domain),`${year}: falta ${domain}.`);
+}
+
+for(const item of PORTUGUESE_ITEMS){
+  assert.ok(PORTUGUESE_COMPETENCIES.some(c=>c.id===item.competencyId&&c.writtenExam),`${item.id}: competência fora do exame escrito.`);
+  if(["restricted-response","extended-writing"].includes(item.responseType)){
+    assert.equal(item.gradingMode,"rubric-assisted-provisional",`${item.id}: resposta aberta não pode ter nota final automática.`);
+    const evidence=buildPortugueseCriterionEvidence(item);
+    assert.ok(evidence.length>0,`${item.id}: falta decomposição por critérios observáveis.`);
+    const summary=summarizePortugueseCriterionEvidence(evidence);
+    assert.equal(summary.finalGrade,null);
+    assert.equal(summary.provisional,true);
+  }
+}
+
+assert.equal(PORTUGUESE_ASSESSMENT_POLICY.authority,"IAVE");
+assert.equal(PORTUGUESE_ASSESSMENT_POLICY.finalAutoGradeForOpenResponses,false);
+console.log("✓ Portuguese quality gate: 200 itens no runtime · 3 anos · 4 domínios escritos · respostas abertas com evidência por critério e sem nota final automática");
