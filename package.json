@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
+    "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/portuguese-quality-gate.mjs && node scripts/portuguese-curriculum-alignment-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
     "build": "next build",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -88,7 +88,8 @@
     "portuguese-coverage": "node scripts/portuguese-coverage.mjs --write",
     "portuguese-coverage:audit": "node scripts/portuguese-coverage.mjs --check",
     "portuguese-content:coverage": "node scripts/portuguese-content-coverage.mjs",
-    "portuguese-content:priority": "node scripts/portuguese-content-priority.mjs"
+    "portuguese-content:priority": "node scripts/portuguese-content-priority.mjs",
+    "portuguese-quality:audit": "node scripts/portuguese-quality-gate.mjs && node scripts/portuguese-curriculum-alignment-audit.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
