@@ -14,7 +14,7 @@ const byType=(domain,type)=>byDomain(domain).filter(item=>item.responseType===ty
 const constructionTypes=new Set(["short-answer","restricted-response","extended-writing"]);
 
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
-  assert.equal(byDomain(domain).length,30,`${domain}: o banco equilibrado deve manter 30 itens`);
+  assert.ok(byDomain(domain).length>=40,`${domain}: o banco deve manter massa crítica suficiente`);
 }
 
 // Informação‑Prova 639/2026: Leitura pode usar seleção e construção; exigimos ambos no banco.
