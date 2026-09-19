@@ -168,10 +168,10 @@
       "stimulus": "Eu sabia que a decisão parecia absurda, mas naquela manhã não conseguia imaginar outra saída.",
       "prompt": "A presença da primeira pessoa contribui sobretudo para",
       "options": [
-        "eliminar qualquer avaliação da situação.",
-        "apresentar exclusivamente informações objetivas.",
-        "impedir o acesso aos pensamentos da personagem.",
-        "aproximar o leitor da perspetiva subjetiva do narrador."
+        "aproximar o leitor da perspetiva subjetiva do narrador.",
+        "eliminar a avaliação da situação.",
+        "apresentar informações objetivas sobre os acontecimentos.",
+        "impedir o acesso aos pensamentos da personagem."
       ],
       "answerIndex": 3,
       "explanation": "A primeira pessoa permite apresentar acontecimentos a partir da perspetiva e da experiência subjetiva do narrador.",
@@ -213,9 +213,9 @@
       "prompt": "O episódio pode ser interpretado sobretudo como representação",
       "options": [
         "de uma escolha que articula mudança e ligação ao passado.",
-        "de uma rejeição completa das relações familiares.",
-        "de uma viagem sem qualquer dimensão emocional.",
-        "de uma impossibilidade de tomar qualquer decisão."
+        "de uma rejeição das relações familiares.",
+        "de uma viagem sem dimensão emocional.",
+        "de uma dificuldade em tomar uma decisão."
       ],
       "answerIndex": 0,
       "explanation": "A partida implica mudança, enquanto a fotografia simboliza a manutenção de um vínculo com o passado.",
