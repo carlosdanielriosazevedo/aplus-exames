@@ -87,6 +87,30 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   return result;
 }
 
+export function portugueseObservationAction(observation){
+  const status=observation?.status;
+  if(status==="not-observed")return {
+    title:"Falta tornar este elemento visível",
+    action:"Volta à tua resposta e acrescenta uma formulação que responda diretamente a este ponto.",
+    hint:"Não precisas de copiar a resposta de referência: mostra, com as tuas palavras, onde este elemento fica demonstrado."
+  };
+  if(status==="partial")return {
+    title:"Este elemento está incompleto",
+    action:"Reescreve ou desenvolve a parte da resposta que corresponde a este ponto, tornando a ideia mais explícita.",
+    hint:"Procura uma afirmação concreta e verifica se explicas o suficiente para o leitor perceber a relação."
+  };
+  if(status==="unsure")return {
+    title:"Vale a pena confirmar",
+    action:"Relê o enunciado e a tua resposta e procura uma frase que demonstre claramente este ponto.",
+    hint:"Se continuares com dúvidas, compara depois com a resposta de referência e identifica a diferença."
+  };
+  return {
+    title:"Elemento identificado",
+    action:"Mantém esta parte da resposta e confirma que a formulação está suficientemente clara.",
+    hint:"A evidência deve estar na tua própria resposta."
+  };
+}
+
 export function portugueseRubricGuidance(result){
   const criteria=result?.criteria||[];
   const byStatus=status=>criteria.filter(criterion=>criterion.status===status).map(criterion=>({id:criterion.id,label:criterion.label}));
@@ -97,7 +121,7 @@ export function portugueseRubricGuidance(result){
   const needsReview=[...missing,...partial];
   const reviewObservations=criteria.flatMap(criterion=>(criterion.observations||[])
     .filter(observation=>observation.status!=="observed")
-    .map(observation=>({criterionId:criterion.id,criterionLabel:criterion.label,id:observation.id,label:observation.label,status:observation.status})));
+    .map(observation=>({criterionId:criterion.id,criterionLabel:criterion.label,id:observation.id,label:observation.label,status:observation.status,action:portugueseObservationAction(observation)})));
   const nextAction=missing.length
     ?"Acrescenta à resposta os elementos que não conseguiste localizar."
     :partial.length
@@ -146,6 +170,7 @@ export function gradePortugueseResponse(item,response){
     return {
       status:answered?"awaiting-rubric":"unanswered",
       final:false,
+      responseText:String(response??""),
       correct:null,
       points:null,
       maxPoints:item.maxPoints,
