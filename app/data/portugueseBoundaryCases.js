@@ -31,9 +31,9 @@ function contentFailureExpected(item){
 
 export function buildPortugueseBoundaryCases(items=[]){
   return items
-    .filter(item=>["restricted-response","extended-writing"].includes(item.responseType)&&item.wordLimit&&PORTUGUESE_RUBRIC_CALIBRATION[item.id])
+    .filter(item=>["restricted-response","extended-writing"].includes(item.responseType)&&item.wordLimit)
     .map(item=>{
-      const calibration=PORTUGUESE_RUBRIC_CALIBRATION[item.id];
+      const calibration=PORTUGUESE_RUBRIC_CALIBRATION[item.id]||{fluentWrong:{response:"A resposta fala genericamente sobre o tema, mas não demonstra a relação pedida com o estímulo.",expected:contentFailureExpected(item)}};
       const formalSeed="Esta resposta cumpre apenas a extensão pedida e apresenta frases completas. Não responde, porém, ao problema colocado nem demonstra compreensão do conteúdo solicitado.";
       const formalResponse=fitWithinLimit(formalSeed,item.wordLimit);
       return {
