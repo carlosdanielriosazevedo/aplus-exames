@@ -69,6 +69,13 @@ export function restorePortugueseRubricEvidence(item,snapshot){
   if(!snapshot||snapshot.rubricId!==rubricIdFor(item))return null;
   const responseText=snapshot.responseText||"resposta submetida";
   let result=gradePortugueseResponse(item,responseText);
+  if(!result.final){
+    result={...result,
+      revisionCount:Number.isFinite(snapshot.revisionCount)?snapshot.revisionCount:0,
+      previousResponseText:String(snapshot.previousResponseText||""),
+      revisionHistory:Array.isArray(snapshot.revisionHistory)?snapshot.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||"")})):[]
+    };
+  }
   if(Array.isArray(snapshot.rubricObservationEvidence)){
     for(const row of snapshot.rubricObservationEvidence){
       const criterion=result.criteria.find(candidate=>candidate.id===row.criterionId);
