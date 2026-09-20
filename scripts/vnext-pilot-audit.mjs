@@ -10,6 +10,7 @@ import {CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK} from "../app/lib/con
 import {curriculumSubtopicForItem} from "../app/data/curriculumVnext.js";
 import {RUNTIME_QUESTION_BANK,eligibleQuestions,questionById} from "../app/lib/engine.js";
 import {isEligibleForContext} from "../app/lib/quality.js";
+import {polishVnextItem} from "../app/lib/vnextPedagogicalPolish.js";
 
 const SPECS={
   "10-fun-dominio-imagem-zeros":{
@@ -38,13 +39,15 @@ for(const meta of VNEXT_PILOT_META){
   const pilot=VNEXT_PILOT_QUESTIONS.filter(q=>q.subtopicId===meta.subtopicId);
   assert.equal(source.questions.length,50);
   assert.equal(pilot.length,50);
-  assert.deepEqual(pilot.map(q=>{
-    const {microcompetencyId,pilotStatus,productionEligible,...original}=q;
-    assert.equal(microcompetencyId,spec.microcompetencyId);
-    assert.equal(pilotStatus,"machine_prechecked");
-    assert.equal(productionEligible,false);
-    return original;
-  }),source.questions);
+  assert.equal(pilot.length,source.questions.length);
+  for(const [index,sourceQuestion] of source.questions.entries()){
+    const actual=pilot[index];
+    const {microcompetencyId,pilotStatus,productionEligible,...original}=actual;
+    assert.equal(microcompetencyId,spec.microcompetencyId,`${meta.subtopicId}:${sourceQuestion.id}: microcompetencyId divergente`);
+    assert.equal(pilotStatus,"machine_prechecked",`${meta.subtopicId}:${sourceQuestion.id}: pilotStatus divergente`);
+    assert.equal(productionEligible,false,`${meta.subtopicId}:${sourceQuestion.id}: productionEligible divergente`);
+    assert.deepEqual(original,polishVnextItem(sourceQuestion),`${meta.subtopicId}:${sourceQuestion.id}: runtime não coincide com o fixture polido atual`);
+  }
 }
 
 for(const q of VNEXT_PILOT_QUESTIONS){
