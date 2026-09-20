@@ -87,8 +87,25 @@ for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
   assert.ok(mission.items.length>=7);
 }
 
+const evidenceTargetItem=items.find(item=>item.responseType==="restricted-response"&&item.rubric?.criteria?.some(criterion=>(criterion.observations||[]).length>0));
+assert.ok(evidenceTargetItem,"o banco deve conter pelo menos uma resposta aberta com observações rubricadas");
+const evidenceTargetObservation=evidenceTargetItem.rubric.criteria.flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,...observation}))).find(Boolean);
+assert.ok(evidenceTargetObservation,"o alvo de evidência deve ter uma observação concreta");
+
 const adaptiveProgress={
   competence:{
+    [evidenceTargetItem.competencyId]:{
+      deterministicAttempts:0,
+      correct:0,
+      rubricReviews:1,
+      rubricNeedsReview:1,
+      rubricEvidenceByObservation:{
+        [evidenceTargetObservation.id]:{
+          status:"partial",
+          studentEvidence:["evidência de teste"]
+        }
+      }
+    },
     "pt-leitura-informacao":{deterministicAttempts:3,correct:3},
     "pt-leitura-inferencia":{deterministicAttempts:3,correct:0},
     "pt-gramatica-oracoes":{deterministicAttempts:2,correct:0}
@@ -100,6 +117,8 @@ assert.ok(priorities.findIndex(row=>row.competencyId==="pt-leitura-inferencia")<
 
 const adaptive=buildAdaptivePortugueseMission(items,{progress:adaptiveProgress});
 assert.equal(adaptive.items.length,7);
+assert.ok(adaptive.targetEvidenceObservations.some(row=>row.observationId===evidenceTargetObservation.id),"a missão deve identificar a observação que ficou parcial");
+assert.ok(adaptive.items.some(item=>(item.rubric?.criteria||[]).some(criterion=>(criterion.observations||[]).some(observation=>observation.id===evidenceTargetObservation.id))),"uma evidência parcial deve orientar efetivamente a seleção de pelo menos um item com a mesma observação");
 assert.equal(new Set(adaptive.items.map(item=>item.id)).size,7);
 assert.ok(["structural-proxy","editorial-provisional"].includes(adaptive.challengeSource));
 assert.ok(adaptive.targetCompetencyIds.includes("pt-leitura-inferencia"));
