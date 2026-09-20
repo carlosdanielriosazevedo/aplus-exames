@@ -12,6 +12,7 @@ const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").the
 const PortuguesePassageMiniExam=dynamic(()=>import("./components/PortuguesePassageMiniExam"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress} from "./lib/subjectProgress";
+import "./portugues-mini-exame/passage-mini-exam.css";
 import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
