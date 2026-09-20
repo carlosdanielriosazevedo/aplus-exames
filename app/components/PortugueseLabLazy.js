@@ -36,13 +36,13 @@ function PortugueseLab({s,setS,go}){
 
   function startMission(domain){
     const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress,domain});
-    setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],label:PORTUGUESE_DOMAIN_LABELS[domain]});
+    setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],targetEvidenceObservations:mission.targetEvidenceObservations||[],label:PORTUGUESE_DOMAIN_LABELS[domain]});
     start("mission",mission.items,`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
   }
 
   function startRecommendedMission(){
     const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress});
-    setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],label:"Missão recomendada"});
+    setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],targetEvidenceObservations:mission.targetEvidenceObservations||[],label:"Missão recomendada"});
     start("mission",mission.items,"Missão recomendada");
   }
 
@@ -94,7 +94,7 @@ function PortugueseLab({s,setS,go}){
         <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null)}}>Voltar ao laboratório</button>
       </Shell>;
     }
-    return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>{missionFocus?.targetEvidenceCompetencyIds?.length>0&&<div className="notice"><b>Esta missão foi ajustada ao teu histórico</b><span>Incluiu competências em que a evidência das respostas abertas anteriores mostrou pontos a rever. Na próxima sessão, esta informação continuará a influenciar a prioridade.</span></div>}
+    return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>{missionEvidenceFocus.length>0&&<div className="notice"><b>Esta missão foi ajustada ao teu histórico</b><span>Incluiu critérios que assinalaste anteriormente como “em parte”, “não identificados” ou “por confirmar”. Isto orienta o treino, mas não é uma nota.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label}</li>)}</ul></div>}
       <div className="portugueseLabStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
       {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
       <button className="primary" onClick={()=>setSession(null)}>Voltar ao laboratório</button>
@@ -149,8 +149,10 @@ function PortugueseLab({s,setS,go}){
     setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);
   }
 
+  const missionEvidenceFocus=missionFocus?.targetEvidenceObservations||[];
   return <Shell><button className="back" onClick={()=>setSession(null)}>← Sair da sessão</button><div className="portugueseRunTop"><div><small>{session.label}</small><b>{PORTUGUESE_DOMAIN_LABELS[item.domain]} · {item.year}</b></div><span>{session.current+1}/{session.items.length}</span></div>
     <div className="bar portugueseRunBar"><i style={{width:`${((session.current+1)/session.items.length)*100}%`}}/></div>
+    {session.kind==="mission"&&missionEvidenceFocus.length>0&&session.current===0&&<section className="notice" aria-label="Foco desta missão"><b>Foco desta missão</b><span>Vamos dar atenção extra a pontos que assinalaste como precisando de revisão em respostas anteriores.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label} <small>· {row.status==="partial"?"em parte":row.status==="not-observed"?"não identificado":"por confirmar"}</small></li>)}</ul></section>}
     <article className="portugueseQuestion"><div className="portugueseStimulus">{item.stimulus}</div><h2>{item.prompt}</h2>
       {isChoice?<div className="portugueseOptions">{item.options.map((option,index)=><button type="button" disabled={!!feedback} key={option} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>
       :isShort?<input className="portugueseShortAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve uma resposta curta"/>
