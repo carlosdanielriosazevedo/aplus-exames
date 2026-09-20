@@ -312,6 +312,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
   if(eligible.length<size)throw new Error(`Insufficient adaptive Portuguese mission coverage${domain?` for ${domain}`:""}.`);
   const priorities=portugueseCompetencePriorities(eligible,progress,{domain});
   const needById=new Map(priorities.map(row=>[row.competencyId,row.need]));
+  const targetObservationIds=new Set(uniqueEvidenceObservations.map(row=>row.observationId));
   const recentIds=new Set((progress?.missionHistory||[]).slice(-3).flatMap(session=>session.itemIds||[]));
   const targetChallenges=[1,2,2,3,3,4,2];
   const selected=[];
@@ -327,7 +328,11 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     });
     const pool=candidates.length?candidates:eligible.filter(item=>!selected.includes(item));
     pool.sort((a,b)=>{
-      const score=item=>(needById.get(item.competencyId)||0)-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0);
+      const score=item=>{
+        const observationMatch=(item.rubric?.criteria||[]).some(criterion=>(criterion.observations||[]).some(observation=>targetObservationIds.has(observation.id)));
+        const matchBoost=observationMatch?1.15:0;
+        return (needById.get(item.competencyId)||0)+matchBoost-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0);
+      };
       return score(b)-score(a)||a.id.localeCompare(b.id);
     });
     const chosen=pool[0];
