@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
-const portugueseLab=readFileSync(new URL("../app/components/PortugueseLab.js",import.meta.url),"utf8");
+const portugueseLab=readFileSync(new URL("../app/components/PortugueseLabLazy.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
 const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"utf8");

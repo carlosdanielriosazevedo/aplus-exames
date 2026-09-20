@@ -10,7 +10,7 @@ const pilot=packs[0];
 const allItems=packs.flatMap(pack=>pack.items);
 const latestDeclared=[...packs].reverse().find(pack=>Number.isInteger(pack.bankSizeAfterWave))?.bankSizeAfterWave||allItems.length;
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
-const portugueseLab=readFileSync(new URL("../app/components/PortugueseLab.js",import.meta.url),"utf8");
+const portugueseLab=readFileSync(new URL("../app/components/PortugueseLabLazy.js",import.meta.url),"utf8");
 const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 
 assert.equal(packFiles.length,16,"o runtime atual de Português deve ter piloto + quinze vagas");
