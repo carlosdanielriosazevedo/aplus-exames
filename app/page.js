@@ -1,26 +1,125 @@
 "use client";
-import {useEffect,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import dynamic from "next/dynamic";
-import {SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS} from "./data/subjects";
-import {migrateSubjectProgress} from "./lib/subjectProgress";
-import {emptyScores,recalibrateAllScores,migratePedagogicalIds} from "./lib/engine";
-import {loadLocalStateStatus,saveLocalState,FRIENDS_STORAGE_KEY} from "./lib/persistence";
-import {saveSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen} from "./lib/sessionDraft";
-import {recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions} from "./lib/diagnosticRecovery";
-import {migrateProductAnalytics,recordAppOpen,recordMilestone} from "./lib/productAnalytics";
-import {betaEvent} from "./lib/beta";
-import {recordStudyActivity,recordCompetitiveActivity} from "./lib/engagement";
-import {refreshLearningHypotheses} from "./lib/engine";
-import {demoIdentity} from "./lib/identity";
-import {migrateCloudSync} from "./lib/cloudReliability";
-import {friendsBetaRequested,activateFriendsBeta} from "./lib/friendsBeta";
-import {emptyEngagement,migrateEngagement} from "./lib/engagement";
-import {emptyDailyMission,migrateDailyMission} from "./lib/dailyMission";
-import {emptyCompetition,migrateCompetition} from "./lib/competition";
+import {insertMathText} from "./lib/mathInput";
+import {
+  TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
+} from "./data/content";
+import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./components/chrome";
+import {Welcome} from "./components/Welcome";
+const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
+const PortuguesePassageMiniExam=dynamic(()=>import("./components/PortuguesePassageMiniExam"),{ssr:false});
+import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
+import {PORTUGUESE_ITEMS,portugueseItemById} from "./data/portugueseContent";
+import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";
+import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare} from "./lib/portugueseEngine";
+import {portugueseObservationGuidance} from "./lib/portugueseObservationGuidance";
+import {portugueseWordLimitFeedback} from "./lib/portugueseWordLimit";
+import "./portugues-mini-exame/passage-mini-exam.css";
+import {advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
+import {
+  emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
+  certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
+  selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
+  shouldEndMission,missionStopDecision,trainingQuestions,missionPracticeQuestion,startingDifficulty,
+  missionContentExhaustedDecision,canStartMissionDetour,estimateMissionSeconds,
+  dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
+  buildMiniExam,applyMiniExam,hasTrainingContent,hasGenerator,
+  eligibleQuestions,eligibleCount,rankedStudyPriorities,
+  focusScore,focusRows,competenceMap,
+  selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
+  allLearningHypotheses,refreshLearningHypotheses,
+  recalibrateAllScores,migratePedagogicalIds,scopedThemeScore,questionById
+} from "./lib/engine";
+import {
+  allFocusRows,qualitySnapshot,
+  editorialQueue,editorialStats,makeReviewBatch,
+  applyEditorialDecision,bumpEditorialVersion,urgentReviewItems,
+  eligibilitySummary,betaContentReadiness,prioritizedReviewQueue,reviewPackRows,
+  minimumReviewRoadmap,reviewRoadmapProgress
+} from "./lib/quality";
+import {
+  buildTeacherReviewPack,buildTeacherReviewBatches,teacherReviewOperationsSummary,
+  serializeSemicolonCsv,parseSemicolonCsv,
+  validateTeacherReviewImport,applyTeacherReviewImport,teacherReviewInstructions
+} from "./lib/teacherReview";
+import {
+  revisionCandidateFromItem,validateRevisionCandidate,applyContentRevision,
+  revertLastContentRevision,editorialRevisionSummary
+} from "./lib/editorialRevisions";
+import {qaForItemId} from "./lib/preReviewQa";
+import {
+  hybridValidationPlan,hybridValidationSummary,hybridBetaReadiness,hybridLaneForItem
+} from "./lib/hybridValidation";
+import {buildHybridTeacherBatches} from "./lib/hybridTeacherReview";
+import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "./lib/beta";
+import {
+  migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent,
+  retentionSummary,funnelSummary,activationSummary
+} from "./lib/productAnalytics";
+import {engineAuditSummary,engineAuditLabel} from "./lib/engineAudit";
+import {
+  loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
+  backendHealth,syncStateToBackend
+} from "./lib/persistence";
+import {
+  saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
+} from "./lib/sessionDraft";
+import {
+  createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
+  transactDiagnosticAnswer
+} from "./lib/diagnosticRecovery";
+import {
+  academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
+} from "./lib/curriculumScope";
+import {
+  claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
+} from "./lib/reliability";
+import {
+  ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,
+  activeParentLink,requestLinkRemoval,confirmLinkRemoval,demoIdentity
+} from "./lib/identity";
+import {
+  cloudConfiguration,getCloudSession,cloudSignIn,cloudSignUp,cloudSignOut,
+  loadStudentCloudState,saveStudentCloudState,overwriteStudentCloudState,mergeStudentCloudState
+} from "./lib/cloud";
+import {
+  getOrCreateDeviceId,shortDeviceId,cloudSyncMeta,migrateCloudSync,
+  markCloudLoaded,markCloudSaved,cloudConflict,saveLocalSnapshot,
+  listLocalSnapshots,queueCloudSave,listPendingCloudSaves,removePendingCloudSave,
+  safeCloudMerge
+} from "./lib/cloudReliability";
+import {
+  TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
+  isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
+  isTargetStudentTester,friendsFeedbackSummary,aggregateFriendsBetaReports
+} from "./lib/friendsBeta";
+import {
+  emptyEngagement,recordStudyActivity,engagementSummary,migrateEngagement,
+  missionCompletedToday,todayMissionRecord
+} from "./lib/engagement";
+import {
+  emptyDailyMission,ensureDailyMissionAssignment,missionPlanForToday,
+  markDailyMissionPromptShown,dismissDailyMissionPrompt,markDailyMissionStarted,
+  dailyMissionPromptDecision,migrateDailyMission
+} from "./lib/dailyMission";
+import {
+  emptyCompetition,recordCompetitiveActivity,competitionSummary,latestCompetitiveActivity,demoLeaderboard,
+  leaderboardAroundUser,leagueProjection,updateCompetitionProfile,scopeAvailability,
+  PORTUGAL_REGIONS,DIVISIONS,PROMOTION_COUNT,DEMOTION_COUNT,
+  SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS,migrateCompetition
+} from "./lib/competition";
+import {
+  responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
+  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
+} from "./lib/constructedResponse";
 
 const DEFAULT_SUBJECT_ID="math-a";
-const StudentScreens=dynamic(()=>import("./components/StudentScreens"),{ssr:false});
 
+function subjectById(id){
+  return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===DEFAULT_SUBJECT_ID);
+}
 
 function normalizeSubjectWorkspace(state){
   const selected=[...new Set((state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id)))];
@@ -75,33 +174,6 @@ const initial={
   parentInvites:[],
   profile:{schoolYear:"12.º",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]}
 };
-
-function ensureDiagnosticStarted(state,draft){
-  const matching=(state.betaSessions||[]).filter(x=>x.id===draft.sessionId&&x.kind==="diagnostic");
-  const otherOpen=(state.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
-  if(otherOpen.length||matching.length>1||matching.some(x=>x.finishedAt))return {ok:false,reason:"ambiguous_session"};
-  if(matching.length===1)return {ok:true,state};
-  const eventExists=(state.betaEvents||[]).some(e=>e.type==="diagnostic_started"&&e.payload?.sessionId===draft.sessionId);
-  const base={...state,betaSessions:[...(state.betaSessions||[]),draft.session],
-    betaEvents:eventExists?(state.betaEvents||[]):[...(state.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:draft.sessionId})]};
-  return {ok:true,state:recordMilestone(base,"diagnostic_started",{sessionId:draft.sessionId})};
-}
-function finalizeDiagnosticState(nextState,draft){
-  if(nextState.diagnosticDone&&(nextState.betaSessions||[]).some(x=>x.id===draft.sessionId&&x.kind==="diagnostic"&&x.finishedAt))return {ok:true,state:nextState};
-  const matching=(nextState.betaSessions||[]).map((x,index)=>({x,index})).filter(({x})=>x.id===draft.sessionId&&x.kind==="diagnostic"&&!x.finishedAt);
-  const otherOpen=(nextState.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
-  if(matching.length!==1||otherOpen.length)return {ok:false,reason:"ambiguous_session"};
-  const at=draft.completionAt||Date.now(),sessions=[...(nextState.betaSessions||[])],idx=matching[0].index;
-  sessions[idx]={...sessions[idx],finishedAt:at,durationSeconds:Math.max(1,Math.round((at-sessions[idx].startedAt)/1000)),meta:{...(sessions[idx].meta||{}),answers:nextState.diagnosticAnswers}};
-  const eventExists=(nextState.betaEvents||[]).some(e=>e.type==="diagnostic_finished"&&e.payload?.sessionId===draft.sessionId);
-  let completed={...nextState,diagnosticDone:true,betaSessions:sessions,
-    betaEvents:eventExists?(nextState.betaEvents||[]):[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId})]};
-  completed=recordStudyActivity(completed,{kind:"diagnostic",xpEarned:0,sessionId:draft.sessionId,at});
-  completed=recordCompetitiveActivity(completed,{kind:"diagnostic",sessionId:draft.sessionId,at});
-  completed=refreshLearningHypotheses(completed,at);
-  completed=recordMilestone(completed,"diagnostic_completed",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId},{at});
-  return {ok:true,state:completed};
-}
 
 export default function App(){
   const [s,setS]=useState(initial);
@@ -220,5 +292,2798 @@ export default function App(){
 
   const go=x=>setScreen(x);
 
-  return <StudentScreens s={s} setS={setS} screen={screen} go={go} trainingCfg={trainingCfg} setTrainingCfg={setTrainingCfg} examSession={examSession} setExamSession={setExamSession} recoveredSession={recoveredSession} setRecoveredSession={setRecoveredSession} initial={initial}/>;
+  if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
+  if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
+  if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
+  if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go}/>;
+  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExam exam={PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} onExit={()=>go("portugueseLab")}/>;
+  if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
+  if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
+  if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
+  if(screen==="curriculumSettings")return <TaughtCurriculum s={s} setS={setS} go={go}/>;
+  if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
+  if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
+  if(screen==="apronsoIntro")return <ApronsoIntro setS={setS} go={go}/>;
+  if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
+  if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
+  if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
+  if(screen==="diagRun")return <DiagRun s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="diagnostic"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
+  if(screen==="diagResult")return <DiagResult s={s} setS={setS} go={go}/>;
+  if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
+  if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
+  if(screen==="train")return <TrainHub s={s} go={go}/>;
+  if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
+  if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
+  if(screen==="progress")return <Progress s={s} go={go}/>;
+  if(screen==="ranking")return <Ranking s={s} setS={setS} go={go}/>;
+  if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
+    clearSessionDraft(s.betaMode||"internal");
+    setRecoveredSession(null);
+    const questions=buildMiniExam(s,8);
+    const ses=sessionStart("mini_exam",{questionCount:questions.length});
+    setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mini_exam_started",{sessionId:ses.id,questionCount:questions.length})]}));
+    setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
+    go("miniExamIntro");
+  }}/>;
+  if(screen==="miniExamIntro")return <MiniExamIntro session={examSession} go={go}/>;
+  if(screen==="miniExamRun")return <MiniExamRun session={examSession} setSession={setExamSession} go={go}/>;
+  if(screen==="miniExamReview")return <MiniExamReview session={examSession} setSession={setExamSession} s={s} setS={setS} go={go}/>;
+  if(screen==="miniExamResult")return <MiniExamResult s={s} setS={setS} go={go}/>;
+  if(screen==="miniExamCompletedReview")return <MiniExamCompletedReview s={s} setS={setS} go={go}/>;
+  if(screen==="qa")return <QualityPanel s={s} setS={setS} go={go}/>;
+  if(screen==="review")return <ReviewerDashboard s={s} setS={setS} go={go}/>;
+  if(screen==="beta")return <BetaDashboard s={s} setS={setS} go={go}/>;
+  if(screen==="identity")return <IdentityLab s={s} setS={setS} go={go}/>;
+  if(screen==="account")return <AccountCloud s={s} setS={setS} go={go}/>;
+  if(screen==="parent")return <Parent s={s} setS={setS} go={go}/>;
+  if(screen==="friendsBetaInfo")return <FriendsBetaInfo s={s} go={go}/>;
 
+  return <Home s={s} setS={setS} go={go} reset={()=>{
+    clearLocalState(s.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:undefined);
+    clearSessionDraft(s.betaMode||"internal");
+    clearCompletionRegistry();
+    setRecoveredSession(null);
+    setS(isFriendsBeta(s)?activateFriendsBeta(initial):initial);go("welcome");
+  }}/>;
+}
+
+function StudentTop({s,go,children}){
+  const daily=engagementSummary(s);
+  const subject=subjectById(s.activeSubjectId);
+  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
+}
+function FriendsBetaDisclaimer({s,compact=false}){
+  if(!isFriendsBeta(s))return null;
+  return <div className={"friendsBetaDisclaimer "+(compact?"compact":"")}>
+    <b>Teste de experiência — não é uma avaliação real do teu nível.</b>
+    <span>Estamos a testar a app com conteúdo ainda em revisão pedagógica. Índice, Domínio, Certeza e notas servem para avaliar o funcionamento da experiência e podem mudar.</span>
+  </div>;
+}
+
+function FriendsBetaPanel({s}){
+  if(!isFriendsBeta(s))return null;
+  const sum=betaSummary(s);
+  const segment=testerSegmentInfo(currentTesterSegment(s));
+  const fx=friendsFeedbackSummary(s);
+
+  function downloadReport(){
+    const payload=friendsBetaReport(s);
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=`teste-amigos-${s.betaParticipant?.code||"participante"}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return <div className="friendsBetaPanel">
+    <div className="friendsBetaPanelHead"><div><small>BETA PRIVADA · EXPERIÊNCIA</small><b>Código {s.betaParticipant?.code||"—"}</b></div><span>{sum.sessions} sessões</span></div>
+    <div className="testerSegmentTag"><b>{segment.short}</b><span>{segment.group==="target"?"Público-alvo":segment.group==="near_target"?"Próximo do público-alvo":segment.group==="buyer"?"Perspetiva de compra":"Observador"}</span></div>
+    <p>Testa como aluno normal e diz-nos onde ficaste confuso, aborrecido ou surpreendido. Os resultados académicos desta versão são provisórios.</p>
+    <div className="friendsBetaPanelMeta"><span>{sum.feedbackCount} feedbacks</span><span>{sum.reports} perguntas reportadas</span><span>{sum.completionRate}% conclusão</span></div>
+    {(fx.personalization!==null||fx.returnIntent!==null)&&<div className="friendExperienceNumbers">
+      <div><span>Personalização</span><b>{fx.personalization??"—"}/5</b></div>
+      <div><span>{isTargetStudentTester(s)?"Vontade de voltar amanhã":"Potencial de regresso"}</span><b>{fx.returnIntent??"—"}/5</b></div>
+    </div>}
+    <button onClick={downloadReport}>Exportar relatório do teste</button>
+    <small>No fim, envia este ficheiro a quem te deu o link. Não inclui nome nem email.</small>
+  </div>;
+}
+
+function FriendsBetaInfo({s,go}){
+  return <Shell><Back go={go}/><p className="eyebrow">TESTE PRIVADO</p><h1>Informação do teste</h1><FriendsBetaPanel s={s}/></Shell>;
+}
+
+
+function DailyEngagementCard({s}){
+  const e=engagementSummary(s);
+  const pct=Math.min(100,Math.round((e.xpToday/Math.max(1,e.dailyGoalXp))*100));
+  return <section className={"dailyEngagement "+e.nudge.state}>
+    <div className="dailyEngagementHead">
+      <div><small>RITMO DIÁRIO</small><h3>{e.nudge.title}</h3><p>{e.nudge.detail}</p></div>
+      <div className="streakOrb"><b>🔥 {e.streak}</b><span>{e.streak===1?"dia":"dias"}</span></div>
+    </div>
+    <div className="dailyGoalLine"><div><span>Objetivo diário</span><b>{e.dailyGoalComplete?"Concluído":`${e.xpToday}/${e.dailyGoalXp} XP`}</b></div>
+      <div className="dailyGoalBar"><i style={{width:(e.dailyGoalComplete?100:pct)+"%"}}/></div>
+      <small>Uma Missão, Mini-exame ou Diagnóstico completa o objetivo; em Treino Livre podes completá-lo com {e.dailyGoalXp} XP.</small>
+    </div>
+    <div className="weekRhythm">{e.last7.map(d=>{
+      const label=new Date(`${d.key}T12:00:00`).toLocaleDateString("pt-PT",{weekday:"short"}).replace(".","");
+      return <div key={d.key} className={d.goalComplete?"goal":d.active?"active":""}><span>{label}</span><b>{d.goalComplete?"✓":d.active?"•":"·"}</b></div>;
+    })}</div>
+    <div className="dailyStats"><span>Melhor sequência: <b>{e.longestStreak}</b></span><span>Dias ativos: <b>{e.activeDays}</b></span><span>Objetivos cumpridos: <b>{e.goalDays}</b></span></div>
+  </section>;
+}
+
+function DailyCompletionNote({s}){
+  const e=engagementSummary(s);
+  if(!e.activeToday)return null;
+  return <div className={"dailyCompletionNote "+(e.dailyGoalComplete?"done":"partial")}>
+    <b>{e.dailyGoalComplete?"🔥 Objetivo diário concluído":`🔥 Sequência de ${e.streak} ${e.streak===1?"dia":"dias"} protegida`}</b>
+    <span>{e.dailyGoalComplete
+      ?"Hoje já fizeste o essencial. Podes continuar a treinar, mas não precisas de “farmar” exercícios para manter a sequência."
+      :`Já conta como dia de estudo. Se quiseres completar também o objetivo diário, faltam ${e.xpRemaining} XP ou uma Missão.`}</span>
+  </div>;
+}
+
+
+function CompetitionXpNote({s}){
+  const row=latestCompetitiveActivity(s);
+  if(!row)return null;
+  return <div className="competitionXpNote">
+    <div><small>🏆 XP COMPETITIVO · ESTA SEMANA</small><b>+{row.rankedXp} XP</b></div>
+    <span>{row.reason}</span>
+  </div>;
+}
+
+function SubjectSelection({s,setS,go}){
+  const [selected,setSelected]=useState(()=>{
+    const saved=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
+    return saved;
+  });
+
+  function toggleSubject(subject){
+    if(!subject.available)return;
+    setSelected(current=>current.includes(subject.id)
+      ?current.filter(id=>id!==subject.id)
+      :[...current,subject.id]);
+  }
+
+  function save(){
+    if(!selected.length)return;
+    setS(prev=>recordMilestone({
+      ...prev,
+      selectedSubjectIds:selected,
+      activeSubjectId:selected[0]
+    },"subjects_selected",{subjectIds:selected}));
+    go("onboard");
+  }
+
+  return <Shell><Logo/>
+    <p className="eyebrow">O TEU PLANO DE ESTUDO</p>
+    <h1>Que disciplinas queres preparar?</h1>
+    <p className="muted">Escolhe os exames em que queres melhorar. Cada disciplina terá o seu diagnóstico, objetivo e plano de estudo.</p>
+    <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>
+
+    <div className="subjectSelectionSummary">
+      <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
+      <strong>Matemática A disponível · Português em preparação</strong>
+    </div>
+
+    <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
+      const subjects=SECONDARY_EXAM_SUBJECTS.filter(subject=>subject.group===group.id);
+      return <section key={group.id} className="subjectGroup" aria-labelledby={`subject-group-${group.id}`}>
+        <h2 id={`subject-group-${group.id}`}>{group.label}</h2>
+        <div>{subjects.map(subject=>{
+          const isSelected=selected.includes(subject.id);
+          return <button
+            type="button"
+            key={subject.id}
+            className={`subjectCard ${isSelected?"selected":""} ${subject.available?"available":subject.releaseStage==="foundation"?"preparing":"coming"}`}
+            disabled={!subject.available}
+            aria-pressed={subject.available?isSelected:undefined}
+            onClick={()=>toggleSubject(subject)}
+          >
+            <span className="subjectIcon" aria-hidden="true">{subject.icon}</span>
+            <span className="subjectInfo">
+              <b>{subject.shortName||subject.name}</b>
+              <small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small>
+            </span>
+            <span className="subjectStatus">{subjectStatusLabel(subject,isSelected)}</span>
+          </button>;
+        })}</div>
+      </section>;
+    })}</div>
+
+    <div className="notice"><b>Começamos por Matemática A</b><span>Português já está em preparação, mas continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis.</span></div>
+    <button className="primary" disabled={!selected.length} onClick={save}>Continuar com Matemática A</button>
+  </Shell>;
+}
+
+
+function SubjectManager({s,setS,go}){
+  const selected=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
+  const active=subjectById(s.activeSubjectId);
+
+  function activate(subject){
+    if(!subject.available)return;
+    setS(prev=>normalizeSubjectWorkspace({
+      ...prev,
+      selectedSubjectIds:[...(prev.selectedSubjectIds||[]),subject.id],
+      activeSubjectId:subject.id
+    }));
+    go("home");
+  }
+
+  return <Shell><Back go={go}/><p className="eyebrow">AS TUAS DISCIPLINAS</p><h1>O que queres estudar?</h1>
+    <p className="muted">A sequência e o XP são globais. Quando adicionarmos novas disciplinas, cada uma terá diagnóstico, domínio, missões e exames próprios.</p>
+    <section className="subjectManagerSection"><h2>Disciplina atual</h2>
+      <button type="button" className="subjectWorkspaceCard current" onClick={()=>go("home")}>
+        <span className="subjectIcon" aria-hidden="true">{active.icon}</span><span><b>{active.name}</b><small>Continuar onde ficaste</small></span><strong>Ativa</strong>
+      </button>
+    </section>
+    {selected.length>1&&<section className="subjectManagerSection"><h2>As tuas disciplinas</h2>{selected.filter(id=>id!==active.id).map(id=>{const subject=subjectById(id);return <button type="button" key={id} className="subjectWorkspaceCard" onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>Abrir plano de estudo</small></span><strong>Mudar</strong></button>})}</section>}
+    <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
+      {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
+    </section>
+    <div className="notice"><b>Português está a ser preparado</b><span>Fica visível para mostrar o próximo passo, mas só será desbloqueado quando diagnóstico, treino e correção escrita cumprirem os critérios de qualidade.</span></div>
+  </Shell>;
+}
+
+const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
+
+function PortugueseLab({s,setS,go}){
+  const [session,setSession]=useState(null);
+  const [answer,setAnswer]=useState(null);
+  const [feedback,setFeedback]=useState(null);
+  const [editingCriterionId,setEditingCriterionId]=useState(null);
+  const [revisionEditing,setRevisionEditing]=useState(false);
+  const [results,setResults]=useState([]);
+  const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
+  const progress=subjectProgressFor(s,"portuguese");
+  const competenceRows=Object.entries(progress.competence);
+  const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
+  const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
+  const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
+
+  function start(kind,items,label,domain=null){
+    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
+    setSession({kind,label,domain,items,current:0});
+    setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setResults([]);
+    setS(prev=>beginSubjectSession(prev,{subjectId:"portuguese",kind,label,domain,items}));
+  }
+
+  function startDiagnostic(){
+    start("diagnostic",buildPortugueseDiagnostic(PORTUGUESE_ITEMS),"Diagnóstico interno");
+  }
+
+  function startMission(domain){
+    const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress,domain});
+    start("mission",mission.items,`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
+  }
+
+  function startRecommendedMission(){
+    const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress});
+    start("mission",mission.items,"Missão recomendada");
+  }
+
+  function resume(){
+    const saved=progress.lastPosition;
+    if(!saved)return;
+    const items=saved.itemIds.map(portugueseItemById).filter(Boolean);
+    if(items.length!==saved.itemIds.length){
+      setS(prev=>resetSubjectProgress(prev,"portuguese"));
+      return;
+    }
+    const current=Math.min(saved.current,items.length-1);
+    setSession({kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
+    setResults(saved.results||[]);const restored=restorePortugueseRubricEvidence(items[current],saved.currentResult);setAnswer(restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);setRevisionEditing(false);
+  }
+
+  function resetPortuguese(){
+    if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
+    setS(prev=>resetSubjectProgress(prev,"portuguese"));
+    setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);
+  }
+
+  if(!session)return <Shell><Back go={go}/><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">LABORATÓRIO INTERNO</p><h1>Português · Prova 639</h1></div></div>
+    <div className="notice warning"><b>Não disponível para alunos</b><span>Este ambiente serve para testar seleção, resposta e correção antes de desbloquear a disciplina.</span></div>
+    <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
+    {progress.lastPosition&&<section className="portugueseLabSection"><h2>Continuar</h2><button className="portugueseLabAction featured" onClick={resume}><b>Retomar {progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></button></section>}
+    <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>{progress.diagnosticDone?"Repetir diagnóstico":"Testar diagnóstico"}</b><span>{progress.diagnosticDone?"Concluído · nova tentativa mantém o histórico":"8 itens · 2 por domínio · sem produção extensa"}</span></button></section>
+    <section className="portugueseLabSection"><h2>Missão adaptativa</h2><button className="portugueseLabAction featured" onClick={startRecommendedMission}><b>Treinar o que mais precisa</b><span>7 itens · competências prioritárias · evita repetição recente</span></button><small className="portugueseMethodNote">A dificuldade é uma classificação editorial provisória. Só será considerada calibrada depois de existirem dados suficientes de alunos.</small></section>
+    <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
+    {(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><h2>Progresso de Português</h2><div><span>Respostas determinísticas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas pendentes de grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div><small>O texto livre das respostas não é guardado neste histórico.</small></section>}
+    <section className="portugueseLabSection"><h2>Mini-exame</h2><button className="portugueseLabAction featured" onClick={()=>go("portugueseMiniExam")}><b>Testar mini-exame com texto partilhado</b><span>2 textos · 6 questões · leitura e educação literária · revisão no fim</span></button><small className="portugueseMethodNote">Protótipo interno: o texto permanece associado ao grupo de perguntas e as respostas abertas não recebem classificação automática final.</small></section>
+    <div className="notice"><b>Gate quantitativo atingido, publicação bloqueada</b><span>Os 120 itens permitem testar os fluxos. Não substituem revisão editorial, calibração de dificuldade nem validação da correção aberta.</span></div>
+    {(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}
+  </Shell>;
+
+  if(session.finished){
+    const finalResults=results;
+    const deterministic=finalResults.filter(result=>result.final&&result.status!=="unanswered");
+    const correct=deterministic.filter(result=>result.correct).length;
+    const awaiting=finalResults.filter(result=>!result.final&&result.status!=="unanswered").length;
+    return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>
+      <div className="portugueseLabStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
+      {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
+      <button className="primary" onClick={()=>setSession(null)}>Voltar ao laboratório</button>
+    </Shell>;
+  }
+
+  const item=session.items[session.current];
+  const isChoice=item.responseType==="multiple-choice";
+  const isShort=item.responseType==="short-answer";
+  const answered=isChoice?Number.isInteger(answer):String(answer??"").trim().length>0;
+  const rubricGuidance=feedback&&!feedback.final&&feedback.rubricCompleted?portugueseRubricGuidance(feedback):null;
+  const wordLimitFeedback=!isChoice&&!isShort?portugueseWordLimitFeedback(item,answer):null;
+
+  function submit(){
+    if(!answered||feedback)return;
+    const nextFeedback=gradePortugueseResponse(item,answer);
+    setFeedback(nextFeedback);
+    if(!nextFeedback.final)setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback}));
+  }
+
+  function recordRubricEvidence(criterionId,observationId,evidence){
+    const nextFeedback=assessPortugueseRubricObservation(feedback,criterionId,observationId,evidence);
+    setFeedback(nextFeedback);setEditingCriterionId(null);
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback}));
+  }
+
+  function startRevision(){
+    if(!feedback||feedback.final)return;
+    setAnswer(feedback.responseText||"");
+    setRevisionEditing(true);
+    setEditingCriterionId(null);
+  }
+
+  function saveRevision(){
+    if(!revisionEditing||!feedback||feedback.final)return;
+    if(!String(answer??"").trim())return;
+    const nextFeedback=revisePortugueseResponse(item,feedback,answer);
+    setFeedback(nextFeedback);
+    setRevisionEditing(false);
+    setEditingCriterionId(null);
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback}));
+  }
+
+  function next(){
+    if(feedback&&!feedback.final&&!feedback.rubricCompleted)return;
+    const nextResults=[...results,feedback];
+    if(session.current===session.items.length-1){
+      setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
+      setResults(nextResults);setSession(current=>({...current,finished:true}));return;
+    }
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current+1,results:nextResults}));
+    setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);
+  }
+
+  return <Shell><button className="back" onClick={()=>setSession(null)}>← Sair da sessão</button><div className="portugueseRunTop"><div><small>{session.label}</small><b>{PORTUGUESE_DOMAIN_LABELS[item.domain]} · {item.year}</b></div><span>{session.current+1}/{session.items.length}</span></div>
+    <div className="bar portugueseRunBar"><i style={{width:`${((session.current+1)/session.items.length)*100}%`}}/></div>
+    <article className="portugueseQuestion"><div className="portugueseStimulus">{item.stimulus}</div><h2>{item.prompt}</h2>
+      {isChoice?<div className="portugueseOptions">{item.options.map((option,index)=><button type="button" disabled={!!feedback} key={option} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>
+      :isShort?<input className="portugueseShortAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve uma resposta curta"/>
+      :feedback&&answer===null?<div className="rubricRecoveryNote"><b>Resposta já submetida</b><span>A resposta foi recuperada juntamente com a evidência assinalada na grelha.</span></div>:<><textarea className="portugueseOpenAnswer" disabled={!!feedback&&!revisionEditing} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve a tua resposta…" rows={9}/><div className={`portugueseWordCount ${wordLimitFeedback.status}`}><b>{wordLimitFeedback.label}</b><span>{wordLimitFeedback.count} palavras · pedido: {wordLimitFeedback.min}–{wordLimitFeedback.max}</span>{wordLimitFeedback.caution&&<small>{wordLimitFeedback.caution}</small>}</div></>}
+    </article>
+    {feedback&&<div className={`portugueseFeedback ${feedback.final?(feedback.correct?"correct":"incorrect"):"provisional"}`}><b>{feedback.final?(feedback.correct?"Resposta correta":"Resposta incorreta"):feedback.rubricCompleted?"Autoavaliação guardada — sem classificação automática":"Agora revê a tua resposta"}</b>
+      {feedback.final&&<span>{item.explanation}</span>}
+      {!feedback.final&&(!feedback.rubricCompleted||editingCriterionId)&&(()=>{const observations=feedback.criteria.flatMap(criterion=>criterion.observations.map(observation=>({criterion,observation})));const selected=observations.find(row=>row.observation.id===editingCriterionId)||observations.find(row=>row.observation.status==="pending");if(!selected)return null;const {criterion,observation}=selected;const index=observations.indexOf(selected);return <div className="guidedRubric"><div className="guidedRubricProgress"><span>Verificação {index+1} de {observations.length}</span><span>{criterion.label} · {criterion.points} pt na grelha</span></div><p>{observation.label}</p><span className="guidedRubricPrompt">Na tua resposta, que evidência encontras desta observação?</span>{(()=>{const guidance=portugueseObservationGuidance(item,criterion,observation);return <div className="rubricEvidenceGuide"><div><b>Conta como evidência</b><span>{guidance.counts}</span></div><div><b>Não chega</b><span>{guidance.notEnough}</span></div></div>})()}<div className="guidedRubricChoices">{PORTUGUESE_RUBRIC_EVIDENCE.map(option=><button type="button" className={observation.status===option.id?"selected":""} key={option.id} onClick={()=>recordRubricEvidence(criterion.id,observation.id,option.id)}><b>{option.label}</b><small>{option.description}</small></button>)}</div></div>})()}
+      {!feedback.final&&feedback.rubricCompleted&&!editingCriterionId&&<><span>A tua leitura ficou registada por observação. Isto não é uma classificação nem altera o teu nível.</span><ul className="rubricEvidenceSummary">{feedback.criteria.map(criterion=>{const option=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===criterion.status);return <li key={criterion.id}><span>{criterion.label}</span><b>{option?.label||"Pendente"}</b><ul className="rubricObservationSummary">{criterion.observations.map(observation=>{const observationOption=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===observation.status);return <li key={observation.id}><span>{observation.label}</span><b>{observationOption?.label||"Pendente"}</b><button type="button" onClick={()=>setEditingCriterionId(observation.id)}>Alterar</button></li>})}</ul></li>})}</ul><div className="rubricGuidance"><b>Próximo passo</b><p>{rubricGuidance.nextAction}</p>{rubricGuidance.reviewObservations.length>0&&<ul className="rubricGuidanceTargets">{rubricGuidance.reviewObservations.map(observation=><li key={`${observation.criterionId}:${observation.id}`}><span><b>{observation.action.title}</b><small>{observation.label}</small><em>{observation.action.action}</em><i>{observation.action.hint}</i></span><button type="button" onClick={()=>setEditingCriterionId(observation.id)}>Rever</button></li>)}</ul>}<button type="button" className="rubricRevisionButton" onClick={startRevision}>Reescrever a resposta</button><div><span><strong>{rubricGuidance.observed.length}</strong> critérios sólidos</span><span><strong>{rubricGuidance.needsReview.length}</strong> a rever</span><span><strong>{rubricGuidance.uncertain.length}</strong> dúvidas</span></div></div>{feedback.revisionHistory?.length>0&&<details><summary>Ver histórico de revisões</summary><div className="rubricRevisionHistory">{feedback.revisionHistory.map((row,index)=>{const next=feedback.revisionHistory[index+1]?.responseText??feedback.responseText;const delta=portugueseRevisionCompare(row.responseText,next);const evidenceRows=Array.isArray(row.rubricObservationEvidence)?row.rubricObservationEvidence:[];const nextEvidence=feedback.revisionHistory[index+1]?.rubricObservationEvidence??rubricObservationEvidenceSnapshot(feedback);const evidenceEvolution=portugueseRevisionEvidenceCompare(evidenceRows,{criteria:nextEvidence.map(evidence=>({id:evidence.criterionId,observations:[{id:evidence.observationId,status:evidence.evidence,evidence:evidence.studentEvidence||[]}]}))});return <div key={row.revision}><b>{row.revision===0?"Resposta inicial":`Revisão ${row.revision}`}</b><p>{row.responseText}</p>{delta.changed&&<small>Evolução para a versão seguinte: {delta.afterWords} palavras · {delta.addedWords} palavras novas · {delta.removedWords} removidas.</small>}{evidenceRows.length>0&&<div className="rubricRevisionEvidence"><span>Evidência desta versão</span><ul>{evidenceRows.map(evidence=>{const criterion=feedback.criteria.find(row=>row.id===evidence.criterionId);const observation=criterion?.observations?.find(row=>row.id===evidence.observationId);const option=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===evidence.evidence);return <li key={`${evidence.criterionId}:${evidence.observationId}`}><b>{observation?.label||evidence.observationId}</b><span>{criterion?.label||evidence.criterionId} · {option?.label||"Pendente"}</span></li>})}</ul>{evidenceEvolution.some(evidence=>evidence.direction!=="same")&&<div className="rubricRevisionTransitions"><span>Evolução por critério</span><ul>{evidenceEvolution.filter(evidence=>evidence.direction!=="same").map(evidence=><li key={`${evidence.criterionId}:${evidence.observationId}`}><b>{evidence.beforeLabel} → {evidence.afterLabel}</b><span>{feedback.criteria.find(criterion=>criterion.id===evidence.criterionId)?.observations?.find(observation=>observation.id===evidence.observationId)?.label||evidence.observationId}</span></li>)}</ul></div>}</div>}</div>})}</div></details>}{item.referenceAnswer&&<details><summary>Comparar com uma resposta de referência</summary><p>{item.referenceAnswer}</p></details>}</>}
+    </div>}
+    {revisionEditing&&<div className="rubricRevisionActions"><span>Revisão {((feedback?.revisionCount||0)+1)} · melhora a resposta e volta a verificar a grelha.</span><div><button type="button" className="secondary" onClick={()=>{setRevisionEditing(false);setAnswer(feedback?.responseText||"")}}>Cancelar</button><button type="button" className="primary" disabled={!String(answer??"").trim()} onClick={saveRevision}>Guardar revisão</button></div></div>}
+    {!feedback?<button className="primary" disabled={!answered} onClick={submit}>Responder</button>:revisionEditing?null:<button className="primary" disabled={!feedback.final&&!feedback.rubricCompleted} onClick={next}>{!feedback.final&&!feedback.rubricCompleted?"Avalia todas as observações":session.current===session.items.length-1?"Ver resultado":"Próxima pergunta"}</button>}
+  </Shell>;
+}
+
+function suggestedExamTimingForYear(year,current){
+  if(year==="10.º")return "twoYears";
+  if(year==="11.º")return "nextYear";
+  if(year==="12.º")return "thisYear";
+  if(year==="Já terminei o secundário")return "unsure";
+  return current||"unsure";
+}
+
+function StudentProfile({s,setS,go,editing=false}){
+  const [p,setP]=useState(s.profile||initial.profile);
+  function save(){
+    if(editing){
+      setS(prev=>migrateDailyMission({...prev,profile:p}));
+      go("curriculumSettings");
+      return;
+    }
+    setS(prev=>recordMilestone({...prev,profile:p},"profile_completed",{
+      schoolYear:p.schoolYear||null,
+      examTiming:p.examTiming||null
+    }));
+    go("curriculumOnboard");
+  }
+  return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":"ANTES DO DIAGNÓSTICO"}</p>
+    <h1>{editing?"Atualiza o que estás a estudar.":<>Ajuda a <BrandName/> a começar no sítio certo.</>}</h1>
+    <p className="muted">{editing
+      ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a app ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
+      :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
+
+    <h3>Em que ano estás?</h3>
+    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div>
+
+    {p.schoolYear==="12.º"&&<>
+      <h3>Que tema opcional está a tua turma a estudar?</h3>
+      <p className="muted">Seleciona apenas o que já foi escolhido na tua turma. Podes selecionar mais do que um se for esse o caso. Se ainda não sabes, deixa vazio.</p>
+      <div className="stackChoices">{[
+        ["inferencia","Inferência estatística"],
+        ["integrais","Primitivas e integrais"],
+        ["matrizes","Matrizes"]
+      ].map(([v,l])=>{
+        const selected=(p.optionalTopics||[]).includes(v);
+        return <button key={v} className={selected?"sel":""} onClick={()=>setP({...p,optionalTopics:selected?(p.optionalTopics||[]).filter(x=>x!==v):[...(p.optionalTopics||[]),v]})}>{l}</button>;
+      })}</div>
+    </>}
+
+    <h3>{p.schoolYear==="Já terminei o secundário"?"Que nota tinhas aproximadamente a Matemática?":"Que nota tens tido aproximadamente a Matemática?"}</h3>
+    <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
+      const raw=e.target.value.replace(/[^0-9]/g,"");
+      const n=raw===""?"":Math.max(0,Math.min(20,Number(raw)));
+      setP({...p,recentGrade:n});
+    }}/><span>/20</span></div>
+
+    <h3>Quando pretendes fazer o exame?</h3>
+    <div className="stackChoices">
+      {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
+    </div>
+
+    <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
+    <button className="primary" onClick={save}>{editing?"Guardar percurso":"Continuar"}</button>
+  </Shell>
+}
+
+function TaughtCurriculum({s,setS,go,onboarding=false}){
+  const themes=currentYearThemes(s.profile);
+  const subtopicsByTheme=new Map(themes.map(t=>[t.id,curriculumSubtopicsForTheme(t.id)]));
+  const valid=new Set([...subtopicsByTheme.values()].flat().map(row=>row.id));
+  const [selected,setSelected]=useState(()=>normalizeTaughtSubtopics(s.profile));
+  const selectedSet=new Set(selected);
+  const finished=s.profile?.schoolYear==="Já terminei o secundário";
+
+  function toggle(id){
+    if(selectedSet.has(id)){
+      const hasEvidence=Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>(e.subtopicId||curriculumSubtopicId(e.themeId,e.microcompetencyId||e.focus))===id));
+      if(hasEvidence&&!window.confirm("Já existem resultados nesta submatéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
+    }
+    setSelected(rows=>rows.includes(id)?rows.filter(x=>x!==id):[...rows,id]);
+  }
+  function toggleTheme(t){
+    const ids=(subtopicsByTheme.get(t.id)||[]).map(row=>row.id);
+    const all=ids.every(id=>selectedSet.has(id));
+    const hasEvidence=all&&Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>ids.includes(e.subtopicId||curriculumSubtopicId(e.themeId,e.microcompetencyId||e.focus))));
+    if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
+    setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
+  }
+  function save(){
+    const clean=selected.filter(id=>valid.has(id));
+    clearSessionDraft(s.betaMode||"internal");
+    setS(prev=>{
+      const at=Date.now();
+      const betaSessions=(prev.betaSessions||[]).map(session=>session.finishedAt||!["diagnostic","mission","mini_exam"].includes(session.kind)?session:{...session,finishedAt:at,durationSeconds:Math.max(1,Math.round((at-(session.startedAt||at))/1000)),meta:{...(session.meta||{}),recoveryStatus:"scope_changed",abandonedAt:at}});
+      return migrateDailyMission({...prev,betaSessions,profile:{...prev.profile,taughtSubtopicIds:clean}});
+    });
+    go(onboarding?"goalOnboard":"progress");
+  }
+
+  if(finished){
+    return <Shell><Logo/><p className="eyebrow">MATÉRIA DADA NA ESCOLA</p><h1>O programa completo fica disponível.</h1>
+      <p className="muted">Como já terminaste o secundário, a app pode usar matéria do 10.º, 11.º e 12.º anos.</p>
+      <button className="primary" onClick={save}>Continuar</button></Shell>;
+  }
+
+  return <Shell>{!onboarding&&<Back go={go} to="progress"/>}<Logo/>
+    <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p>
+    <h1>O que já deste no {s.profile?.schoolYear}?</h1>
+    <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
+    <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
+    <div className="curriculumPicker">{themes.map(t=>{
+      const rows=subtopicsByTheme.get(t.id)||[];
+      const ids=rows.map(row=>row.id);
+      const count=ids.filter(id=>selectedSet.has(id)).length;
+      return <details key={t.id} open={count>0}>
+        <summary><div><b>{t.short}</b><small>{count}/{ids.length} selecionadas</small></div><span>⌄</span></summary>
+        <button type="button" className="selectTheme" onClick={()=>toggleTheme(t)}>{count===ids.length?"Desmarcar esta matéria":"Selecionar toda esta matéria"}</button>
+        <div>{rows.map(row=><label key={row.id}><input type="checkbox" checked={selectedSet.has(row.id)} onChange={()=>toggle(row.id)}/><span>{row.label}</span></label>)}</div>
+      </details>;
+    })}</div>
+    {selected.length===0&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>A app usará apenas matéria de anos anteriores. No 10.º ano, o Diagnóstico ficará indisponível até assinalares pelo menos uma submatéria.</span></div>}
+    <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
+    <div className="notice"><b>Conteúdo em validação</b><span>A seleção representa o que já aprendeste, mesmo que algumas submatérias ainda não tenham perguntas validadas. A app nunca usa automaticamente as 5.650 perguntas protótipo.</span></div>
+    <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>
+  </Shell>;
+}
+
+function GoalScreen({s,setS,go,onboarding=false}){
+  const [goal,setGoal]=useState(s.goal);
+  function save(){
+    setS(prev=>{
+      const next={...prev,goal};
+      return onboarding
+        ?recordMilestone(next,"goal_completed",{goal})
+        :next;
+    });
+    go(onboarding?"apronsoIntro":"home");
+  }
+  return <Shell><Logo/>
+    <p className="eyebrow">{onboarding?"O TEU OBJETIVO":"AJUSTAR OBJETIVO"}</p>
+    <h1>Que nota queres alcançar?</h1>
+    <p className="muted">{onboarding
+      ?"Isto ajusta a exigência das Missões. Não é uma previsão da tua nota."
+      :"Podes alterar o objetivo quando quiseres. A app adapta as decisões seguintes sem apagar o teu histórico."}</p>
+    <div className="goalHero"><strong>{goal}</strong><span>valores</span></div>
+    <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
+    <input aria-label="Nota objetivo" className="goalSlider" type="range" min="10" max="20" step="1" value={goal} onChange={e=>setGoal(Number(e.target.value))}/>
+    <div className="goalMessage"><b>{goal>=18?"Objetivo muito exigente":goal>=16?"Objetivo ambicioso":"Objetivo sólido"}</b>
+      <span>A dificuldade e profundidade do plano serão ajustadas progressivamente a este objetivo.</span></div>
+    <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar novo objetivo"}</button>
+    {!onboarding&&<button className="secondary" onClick={()=>go("home")}>Cancelar</button>}
+  </Shell>
+}
+
+const PRE_DIAGNOSTIC_TOUR_STEPS=[
+  {mascot:"welcome",eyebrow:"PASSO 1 DE 2",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
+  {mascot:"thinking",eyebrow:"PASSO 2 DE 2",title:"Primeiro, quero conhecer-te",text:"Não te vou avaliar. O diagnóstico serve apenas para perceber por onde devemos começar e adaptar o teu plano."}
+];
+
+function ApronsoIntro({setS,go}){
+  function finish(skipped=false){
+    setS(prev=>recordMilestone(prev,"apronso_intro_completed",{skipped,steps:skipped?null:PRE_DIAGNOSTIC_TOUR_STEPS.length}));
+    go("diag");
+  }
+  return <FirstUseTour
+    steps={PRE_DIAGNOSTIC_TOUR_STEPS}
+    ariaLabel="Conhece o Apronso antes do diagnóstico"
+    finalLabel="Ir para o diagnóstico →"
+    onComplete={()=>finish(false)}
+    onSkip={()=>finish(true)}
+  />;
+}
+
+function ensureDiagnosticStarted(state,draft){
+  const matching=(state.betaSessions||[]).filter(x=>x.id===draft.sessionId&&x.kind==="diagnostic");
+  const otherOpen=(state.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
+  if(otherOpen.length||matching.length>1||matching.some(x=>x.finishedAt))return {ok:false,reason:"ambiguous_session"};
+  if(matching.length===1)return {ok:true,state};
+  const eventExists=(state.betaEvents||[]).some(e=>e.type==="diagnostic_started"&&e.payload?.sessionId===draft.sessionId);
+  const base={...state,betaSessions:[...(state.betaSessions||[]),draft.session],
+    betaEvents:eventExists?(state.betaEvents||[]):[...(state.betaEvents||[]),betaEvent("diagnostic_started",{sessionId:draft.sessionId})]};
+  return {ok:true,state:recordMilestone(base,"diagnostic_started",{sessionId:draft.sessionId})};
+}
+
+function finalizeDiagnosticState(nextState,draft){
+  if(nextState.diagnosticDone&&(nextState.betaSessions||[]).some(x=>x.id===draft.sessionId&&x.kind==="diagnostic"&&x.finishedAt))return {ok:true,state:nextState};
+  const matching=(nextState.betaSessions||[]).map((x,index)=>({x,index})).filter(({x})=>x.id===draft.sessionId&&x.kind==="diagnostic"&&!x.finishedAt);
+  const otherOpen=(nextState.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
+  if(matching.length!==1||otherOpen.length)return {ok:false,reason:"ambiguous_session"};
+  const at=draft.completionAt||Date.now(),sessions=[...(nextState.betaSessions||[])],idx=matching[0].index;
+  sessions[idx]={...sessions[idx],finishedAt:at,durationSeconds:Math.max(1,Math.round((at-sessions[idx].startedAt)/1000)),meta:{...(sessions[idx].meta||{}),answers:nextState.diagnosticAnswers}};
+  const eventExists=(nextState.betaEvents||[]).some(e=>e.type==="diagnostic_finished"&&e.payload?.sessionId===draft.sessionId);
+  let completed={...nextState,diagnosticDone:true,betaSessions:sessions,
+    betaEvents:eventExists?(nextState.betaEvents||[]):[...(nextState.betaEvents||[]),betaEvent("diagnostic_finished",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId})]};
+  completed=recordStudyActivity(completed,{kind:"diagnostic",xpEarned:0,sessionId:draft.sessionId,at});
+  completed=recordCompetitiveActivity(completed,{kind:"diagnostic",sessionId:draft.sessionId,at});
+  completed=refreshLearningHypotheses(completed,at);
+  completed=recordMilestone(completed,"diagnostic_completed",{answers:nextState.diagnosticAnswers,sessionId:draft.sessionId},{at});
+  return {ok:true,state:completed};
+}
+
+function DiagIntro({s,setS,go}){
+  const [saveError,setSaveError]=useState(false);
+  const difficulty=startingDifficulty(s.profile,s.goal);
+  const hasIndicatedScope=academicScopeThemes(s.profile).length>0;
+  const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
+  const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
+  const gated=blueprint.length===0;
+  return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não te vou avaliar. Só te quero conhecer um pouco melhor para saber por onde começarmos.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+    <h2>Poucas perguntas. Muita informação.</h2>
+    <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
+    <div className="diagIntroGrid">
+      <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se a evidência for consistente.</small></div>
+      <div><span>🎯</span><b>Direto ao ponto</b><small>Não existe uma pergunta obrigatória para cada tema.</small></div>
+      <div><span>🧠</span><b>Continua depois</b><small>O perfil é afinado nas Missões dos primeiros dias.</small></div>
+    </div>
+    {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
+    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
+      ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
+      :hasIndicatedScope
+        ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
+        :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
+    {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
+    <div className="notice"><b>Que matéria entra no diagnóstico?</b><span>No teu ano atual, apenas as submatérias que assinalaste como já lecionadas. A matéria dos anos anteriores fica automaticamente incluída.</span></div>
+    <button className="primary" disabled={gated} onClick={()=>{
+      const existing=loadSessionDraft(s.betaMode||"internal");
+      const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
+      if(existing?.kind==="diagnostic"){go("diagRun");return}
+      if(open.length){setSaveError(true);return}
+      const ses=sessionStart("diagnostic",{goal:s?.goal||null});
+      const current=diagnosticAnchor(blueprint[0],difficulty,s);
+      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty,blueprint});
+      if(!saveSessionDraft(draft)){setSaveError(true);return}
+      const started=ensureDiagnosticStarted(s,draft);
+      if(!started.ok||!saveLocalState(started.state)){setSaveError(true);return}
+      setSaveError(false);
+      setS(started.state);
+      go("diagRun");
+    }}>Começar diagnóstico</button>
+  </Shell>
+}
+
+
+function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
+  const [draft,setDraft]=useState(()=>recoveredDraft||loadSessionDraft(s.betaMode||"internal"));
+  const [saveError,setSaveError]=useState(false);
+  const [ready,setReady]=useState(false);
+  function retryRecovery(){
+    const result=recoverDiagnosticTransaction({state:s,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+      clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});
+    if(!result.ok){setReady(false);setSaveError(true);setDraft(result.draft);return}
+    setReady(true);setSaveError(false);setS(result.state);setDraft(result.draft);
+    if(result.completed)go("diagResult");
+  }
+  useEffect(()=>{onRecovered();retryRecovery()},[]);
+  const current=draft.current,sel=draft.sel,fb=draft.fb,difficulty=draft.difficulty;
+  const anchorResults=draft.anchorResults,probeCount=draft.probeCount;
+
+  const anchorsDone=anchorResults.length;
+  const blueprintLength=Math.max(1,draft.blueprint?.length||DIAGNOSTIC_BLUEPRINT.length);
+  const estimate=Math.min(94,Math.round(((anchorsDone+Math.min(probeCount,1)*.5)/blueprintLength)*100));
+
+  function answer(n){
+    if(!ready||fb||draft.pendingResponse)return;
+    const selected={...draft,sel:n,fb:null};
+    if(!saveSessionDraft(selected)){setSaveError(true);return}
+    setSaveError(false);setDraft(selected);
+  }
+
+  function submitAnswer(){
+    if(!ready||sel===null||fb||draft.pendingResponse)return;
+    const submitted={...draft,fb:{correct:sel===current.a}};
+    if(!saveSessionDraft(submitted)){setSaveError(true);return}
+    setSaveError(false);setDraft(submitted);
+  }
+
+  function finish(nextState,nextDraft){
+    const final=finalizeDiagnosticState(nextState,nextDraft);
+    if(!final.ok||!saveLocalState(final.state)){setSaveError(true);setDraft(nextDraft);return}
+    clearSessionDraft(s.betaMode||"internal");setS(final.state);go("diagResult");
+  }
+
+  function next(){
+    if(draft.pendingResponse||draft.phase==="completion_pending"){retryRecovery();return}
+    if(!fb)return;
+    const result=transactDiagnosticAnswer({state:s,draft,sel,saveDraft:saveSessionDraft,saveState:saveLocalState});
+    if(!result.ok){setReady(false);setSaveError(true);setDraft(result.draft);return}
+    setSaveError(false);setS(result.state);setDraft(result.draft);
+    if(result.completed)finish(result.state,result.draft);
+  }
+
+  if(draft.phase==="completion_pending")return <Shell><div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+    <div className="notice"><b>A concluir com segurança</b><span>O teu progresso está guardado.</span></div>
+    {saveError&&<div className="notice warning"><b>Não foi possível concluir agora</b><span>Tenta novamente sem fechar esta página.</span></div>}
+    <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
+
+  if(!ready)return <Shell><div className="topline"><Logo/><span>Diagnóstico em progresso</span></div>
+    <div className="notice warning"><b>Estamos a confirmar o teu progresso</b><span>Nenhuma resposta será repetida enquanto a sessão não estiver segura.</span></div>
+    <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
+
+  return <Shell>
+    <div className="focusTop"><button type="button" onClick={()=>go("diag")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.max(8,estimate)}%`}}/></div><span>Diagnóstico</span></div>
+    {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
+    <p className="questionContext">{theme(current.themeId).short}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
+      <div className="questionMeta"><span>{current.role==="probe"?"Pergunta de aprofundamento":"Pergunta-âncora"}</span><span>{current.cognitive} · nível {current.difficulty}</span><span>{anchorsDone?`${anchorsDone} áreas-âncora já observadas`:"A construir o primeiro mapa"}</span><span>Dificuldade atual: {difficulty===1?"base":difficulty===2?"intermédia":"elevada"}</span></div>
+      {current.role==="probe"&&<div className="branchNote"><span>A resposta anterior deixou dúvidas. Esta pergunta mais simples ajuda a distinguir uma lacuna de base de um erro pontual.</span></div>}
+    </details>
+    <h2>{current.q}</h2>
+    <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
+    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
+    {!fb
+      ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
+      :<button className="primary" onClick={next}>Próxima pergunta →</button>}
+  </Shell>
+}
+
+function DiagResult({s,setS,go}){
+  const measured=measuredThemes(s);
+  const scopedTotal=academicScopeThemes(s.profile).length;
+  const priority=selectMissionTheme(s);
+  const index=prepIndex(s);
+  const ranked=[...measured].sort((a,b)=>(s.scores[a.id].domain??100)-(s.scores[b.id].domain??100)).slice(0,4);
+
+  return <Shell><div className="centered"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o diagnóstico concluído"/>
+    <p className="eyebrow">JÁ TEMOS INFORMAÇÃO SUFICIENTE</p>
+    <h1>Podemos criar o teu primeiro plano.</h1>
+    <div className="indexCircle"><strong>{index}</strong><span>/100</span></div>
+    <p className="indexQualifier">Índice inicial parcial · {measured.length}/{scopedTotal} áreas do teu percurso com evidência</p>
+    <p className="muted">Não é uma fotografia completa da Matemática A. A app vai preencher as áreas em falta e recalibrar as restantes durante as próximas Missões.</p>
+  </div>
+
+  {priority&&<div className="notice"><b>Primeira prioridade: {priority.short}</b>
+    <span>A escolha combina Domínio, certeza da app, relevância para o exame e pré-requisitos. Não é simplesmente “o score mais baixo”.</span></div>}
+
+  <div className="resultSkills">{ranked.map(t=>{
+    const v=s.scores[t.id];
+    return <div className="resultSkill" key={t.id}><div><b>{t.short}</b><small>Domínio estimado: {v.domain}/100</small></div>
+      <div className="certainty"><span>Certeza da app</span><strong>{certaintyLabel(v.conf,v.evidence.length)}</strong></div></div>
+  })}</div>
+
+  <div className="notice"><b>Domínio ≠ Certeza da app</b>
+    <span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza da app</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>
+
+  <FriendsBetaDisclaimer s={s}/>
+  <DailyCompletionNote s={s}/>
+  <CompetitionXpNote s={s}/>
+  {isFriendsBeta(s)&&<BetaSessionFeedback s={s} setS={setS} kind="diagnostic"/>}
+  <button className="primary" onClick={()=>{
+    setS(prev=>recordMilestone(prev,"first_plan_viewed",{
+      measuredThemes:measured.length,
+      firstPriority:priority?.id||null
+    }));
+    go("home");
+  }}>Ver o meu primeiro plano</button>
+  </Shell>
+}
+
+
+
+function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
+  if(!plan||plan.type==="blocked")return null;
+  const t=plan.themeId?theme(plan.themeId):null;
+  const typeMeta={
+    priority:{icon:"🎯",label:"Prioridade"},
+    calibration:{icon:"🧭",label:"Calibração"},
+    confirmation:{icon:"✅",label:"Confirmação"},
+    investigation:{icon:"🔎",label:"Investigação"}
+  }[plan.type]||{icon:"🎯",label:"Missão"};
+  const duration="~3–5 min";
+  const daily=engagementSummary(s);
+
+  return <div className="dailyMissionOverlay" role="dialog" aria-modal="true" aria-label="Missão de Hoje">
+    <section className="dailyMissionModal">
+      <div className="dailyMissionContent">
+      <div className="dailyMissionModalTop">
+        <small>{mode==="resume"?"MISSÃO EM PAUSA":"NOVA MISSÃO DISPONÍVEL"}</small>
+        <span>🔥 {daily.streak} {daily.streak===1?"dia":"dias"}</span>
+      </div>
+      <div className="dailyMissionHero">
+        <div className="dailyMissionTitle">
+          <span>{typeMeta.icon}</span>
+          <div><small>A TUA MISSÃO DE HOJE · {typeMeta.label.toUpperCase()}</small>
+            <h2>{mode==="resume"?"Continuamos de onde ficaste?":t?.short||"Missão de Hoje"}</h2>
+            {plan.focus&&<b>{plan.focus}</b>}
+          </div>
+        </div>
+        <Apronso pose="thinking" className="dailyMissionApronso" alt="Apronso apresenta a Missão de hoje"/>
+      </div>
+
+      <p className="dailyMissionReason">{mode==="resume"
+        ?"O teu progresso ficou guardado. Não começamos outra Missão: continuas exatamente a Missão de hoje."
+        :plan.reason}</p>
+
+      <p className="dailyMissionScope"><b>Matéria desta Missão:</b> apenas submatérias já lecionadas no teu ano, incluindo automaticamente a matéria dos anos anteriores.</p>
+
+      {plan.reasons?.length>0&&mode!=="resume"&&<div className="dailyMissionWhy">
+        <small>PORQUE ESTA MISSÃO?</small>
+        {plan.reasons.slice(0,2).map((r,i)=><div key={`${r.kind||"reason"}-${i}`}><span>✓</span><p><b>{r.title}</b><small>{r.detail}</small></p></div>)}
+      </div>}
+
+      <div className="dailyMissionRewards">
+        <div><span>⏱</span><b>{duration}</b><small>duração estimada</small></div>
+        <div><span>🏆</span><b>+50 XP</b><small>competitivo</small></div>
+        <div><span>🔥</span><b>{daily.streak?`Dia ${daily.streak+1}`:"Começar"}</b><small>{daily.streak?"se mantiveres amanhã":"a tua sequência"}</small></div>
+      </div>
+      </div>
+
+      <div className="dailyMissionActions">
+        <button className="dailyMissionStart" onClick={onStart}>{mode==="resume"?"Continuar Missão →":"Começar Missão →"}</button>
+        <button className="dailyMissionLater" onClick={onDismiss}>Agora não · ver a Home</button>
+        <small className="dailyMissionFoot">Existe apenas uma Missão principal por dia. Depois podes continuar com Treino Livre ou Mini-exames.</small>
+      </div>
+    </section>
+  </div>;
+}
+
+const FIRST_USE_TOUR_STEPS=[
+  {mascot:"thinking",eyebrow:"PASSO 1 DE 2",title:"Onde encontras o Apronso",text:"Estou contigo na Missão diária, onde a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
+  {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:"Em Praticar escolhes qualquer matéria. No Mini-exame treinas matéria já lecionada; em Progresso vês o teu Domínio e a certeza da app."}
+];
+
+function FirstUseTour({onComplete,onSkip,steps=FIRST_USE_TOUR_STEPS,ariaLabel="Como funciona a APProva+",finalLabel="Começar →"}){
+  const [step,setStep]=useState(0);
+  const item=steps[step];
+  const last=step===steps.length-1;
+  return <div className="dailyMissionOverlay firstUseTourOverlay" role="dialog" aria-modal="true" aria-label={ariaLabel}>
+    <section className="firstUseTourModal">
+      <div className="firstUseTourProgress" aria-label={`Passo ${step+1} de ${steps.length}`}>
+        {steps.map((_,i)=><i key={i} className={i<=step?"active":""}/>) }
+      </div>
+      <Apronso pose={item.mascot} className="firstUseTourMascot" alt=""/>
+      <small>{item.eyebrow}</small>
+      <h2>{item.title}</h2>
+      <p>{item.text}</p>
+      <button className="firstUseTourNext" onClick={()=>last?onComplete():setStep(current=>current+1)}>{last?finalLabel:"Seguinte →"}</button>
+      <button className="firstUseTourSkip" onClick={onSkip}>Saltar explicação</button>
+    </section>
+  </div>;
+}
+
+
+function Home({s,setS,go,reset}){
+  const missionDone=missionCompletedToday(s);
+  const completedMission=todayMissionRecord(s);
+  const devView=typeof window!=="undefined" && new URLSearchParams(window.location.search).get("dev")==="1";
+  const computedPlan=dailyMissionPlan(s);
+  const persistedPlan=missionPlanForToday(s,null);
+  const [pausedDraft,setPausedDraft]=useState(()=>typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null);
+  const plan=pausedDraft?.kind==="mission"&&pausedDraft.plan
+    ?pausedDraft.plan
+    :(persistedPlan||computedPlan);
+  const t=plan.themeId?theme(plan.themeId):null;
+  const ranked=rankedStudyPriorities(s,4);
+  const [showMissionModal,setShowMissionModal]=useState(false);
+  const [missionModalMode,setMissionModalMode]=useState("new");
+  const showFirstUseTour=s.diagnosticDone&&s.firstUseTourCompleted!==true;
+
+  useEffect(()=>{
+    if(typeof window==="undefined"||missionDone||showFirstUseTour)return;
+
+    const assignmentPlan=pausedDraft?.kind==="mission"&&pausedDraft.plan
+      ?pausedDraft.plan
+      :(persistedPlan||computedPlan);
+
+    if(!s.diagnosticDone||!assignmentPlan||assignmentPlan.type==="blocked")return;
+    if(pausedDraft&&pausedDraft.kind!=="mission")return;
+
+    if(!persistedPlan){
+      setS(prev=>ensureDailyMissionAssignment(prev,assignmentPlan));
+    }
+
+    const decision=dailyMissionPromptDecision(s,{
+      plan:assignmentPlan,
+      diagnosticDone:s.diagnosticDone,
+      pausedDraft
+    });
+    if(!decision.show)return;
+
+    if(decision.mode==="resume"){
+      const resumeKey=`a25-daily-mission-resume:${decision.sessionId||"unknown"}`;
+      if(sessionStorage.getItem(resumeKey))return;
+      sessionStorage.setItem(resumeKey,"1");
+      setMissionModalMode("resume");
+      setShowMissionModal(true);
+      setS(prev=>{
+        let next=ensureDailyMissionAssignment(prev,decision.plan||assignmentPlan);
+        next=markDailyMissionPromptShown(next);
+        next=recordMilestone(next,"first_daily_mission_prompt_shown",{
+          mode:"resume",
+          themeId:decision.plan?.themeId||assignmentPlan.themeId
+        });
+        return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_shown",{
+          mode:"resume",sessionId:decision.sessionId||null,
+          themeId:decision.plan?.themeId||assignmentPlan.themeId,
+          focus:decision.plan?.focus||assignmentPlan.focus||null
+        })]};
+      });
+      return;
+    }
+
+    setMissionModalMode("new");
+    setShowMissionModal(true);
+    setS(prev=>{
+      let next=ensureDailyMissionAssignment(prev,decision.plan||assignmentPlan);
+      next=markDailyMissionPromptShown(next);
+      next=recordMilestone(next,"first_daily_mission_prompt_shown",{
+        mode:"new",themeId:assignmentPlan.themeId,type:assignmentPlan.type
+      });
+      return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_shown",{
+        mode:"new",themeId:assignmentPlan.themeId,focus:assignmentPlan.focus||null,
+        type:assignmentPlan.type
+      })]};
+    });
+  },[s.firstUseTourCompleted]);
+
+  function finishFirstUseTour(skipped=false){
+    setS(prev=>recordMilestone({...prev,firstUseTourCompleted:true},"first_use_tour_completed",{skipped,steps:skipped?null:FIRST_USE_TOUR_STEPS.length}));
+  }
+
+  function startDailyMission(source="home_card"){
+    if(missionDone||plan.type==="blocked")return;
+    setShowMissionModal(false);
+
+    if(pausedDraft?.kind==="mission"){
+      setS(prev=>{
+        let next=markDailyMissionStarted(prev);
+        next=recordMilestone(next,"first_mission_started",{
+          source,sessionId:pausedDraft.sessionId||null,themeId:plan.themeId,resumed:true
+        });
+        return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_resumed",{
+          source,sessionId:pausedDraft.sessionId||null,themeId:plan.themeId,focus:plan.focus||null
+        })]};
+      });
+      go("mission");
+      return;
+    }
+
+    const ses=sessionStart("mission",{
+      type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
+      microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
+      decisionSource:plan.decisionMeta?.source||null,
+      dailyMission:true
+    });
+    setS(prev=>{
+      let next=ensureDailyMissionAssignment(prev,plan);
+      next=markDailyMissionStarted(next);
+      next=recordMilestone(next,"first_mission_started",{
+        source,sessionId:ses.id,themeId:plan.themeId
+      });
+      return {...next,
+        betaSessions:[...(next.betaSessions||[]),ses],
+        betaEvents:[...(next.betaEvents||[]),betaEvent("mission_started",{
+          sessionId:ses.id,type:plan.type,themeId:plan.themeId,focus:plan.focus||null,
+          microcompetencyId:plan.microcompetencyId||microcompetencyId(plan.themeId,plan.focus)||null,
+          decisionSource:plan.decisionMeta?.source||null,
+          source,dailyMission:true
+        })]
+      };
+    });
+    go("mission");
+  }
+
+  function dismissMissionModal(){
+    setShowMissionModal(false);
+    setS(prev=>{
+      const next=dismissDailyMissionPrompt(prev);
+      return {...next,betaEvents:[...(next.betaEvents||[]),betaEvent("daily_mission_prompt_dismissed",{
+        mode:missionModalMode,themeId:plan.themeId,focus:plan.focus||null
+      })]};
+    });
+  }
+
+  const probableNext=ranked[0]?.theme;
+  return <main className="dark learnHome">
+    {showFirstUseTour
+      ?<FirstUseTour onComplete={()=>finishFirstUseTour(false)} onSkip={()=>finishFirstUseTour(true)}/>
+      :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
+    <section className="wrap studentSurface">
+    <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
+    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
+    <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Posso ajudar-te a escolher o próximo treino.":"Já analisei o teu percurso. Esta é a ação que mais vale a pena fazer agora."}</ApronsoNudge>
+
+    {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
+      if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
+      else if(pausedDraft.kind==="training")go("trainingRun");
+      else go("mission");
+    }}>Continuar →</button></div>}
+
+    <section className="adaptivePath" aria-label="Caminho adaptativo">
+      <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
+      <div className="pathLine active"/>
+      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><p>{missionDone?"A recomendação principal de hoje está feita.":"Uma sessão curta escolhida pela app para ti."}</p><em>~3–5 min</em>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className="pathLine"/>
+      <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
+    </section>
+    <StudentNav active="home" go={go}/>
+  </section></main>
+}
+
+
+function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
+  const completingRef=useRef(false);
+  const draft=recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null);
+  const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"mission"));
+  const [plan]=useState(()=>draft?.plan||missionPlanForToday(s,dailyMissionPlan(s)));
+  const targetId=plan.themeId;
+  const [before]=useState(()=>draft?.before||scopedThemeScore(s,targetId));
+  const [beforeFocus]=useState(()=>draft?.beforeFocus??(plan.focus?focusScore(s,targetId,plan.focus):null));
+  const [current,setCurrent]=useState(()=>draft?.current||({...selectQuestionForPlan(s,plan,[],[]),sessionRole:"target"}));
+  const [sel,setSel]=useState(draft?.sel??null);
+  const [fb,setFb]=useState(draft?.fb??null);
+  const [usedIds,setUsedIds]=useState(draft?.usedIds||[]);
+  const [usedSignatures,setUsedSignatures]=useState(draft?.usedSignatures||[]);
+  const [targetItems,setTargetItems]=useState(draft?.targetItems||[]);
+  const [targetCount,setTargetCount]=useState(draft?.targetCount||0);
+  const [totalCount,setTotalCount]=useState(draft?.totalCount||0);
+  const [estimatedSeconds,setEstimatedSeconds]=useState(draft?.estimatedSeconds||0);
+  const [pendingError,setPendingError]=useState(draft?.pendingError||null);
+  const [detour,setDetour]=useState(draft?.detour||null);
+
+  useEffect(()=>{
+    if(draft)onRecovered();
+  },[]);
+
+  useEffect(()=>{
+    if(!targetId || !current)return;
+    saveSessionDraft({
+      kind:"mission",betaMode:s.betaMode||"internal",sessionId,plan,before,beforeFocus,current,sel,fb,
+      usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour,estimatedSeconds
+    });
+  },[plan,current,sel,fb,usedIds,usedSignatures,targetItems,targetCount,totalCount,pendingError,detour,estimatedSeconds]);
+
+  if(missionCompletedToday(s) && !draft){
+    return <Shell><Back go={go}/><div className="centered"><div className="check">✓</div><p className="eyebrow">MISSÃO DE HOJE CONCLUÍDA</p>
+      <h1>Volta amanhã para uma nova Missão.</h1><p className="muted">Hoje podes continuar com Treino Livre ou Mini-exames. O que fizeres será tido em conta quando o motor preparar a próxima Missão.</p></div>
+      <button className="primary" onClick={()=>go("train")}>Treino Livre</button><button className="secondary" onClick={()=>go("exams")}>Mini-exame</button></Shell>;
+  }
+
+  function answer(n){if(!fb)setSel(n)}
+  function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(gradeResponse(current,sel))}
+
+  function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
+    if(completingRef.current)return;
+    completingRef.current=true;
+
+    if(!claimSessionCompletion(sessionId)){
+      clearSessionDraft(s.betaMode||"internal");
+      go("missionResult");
+      return;
+    }
+
+    const now=finalState.scores[targetId];
+    const afterFocus=plan.focus?focusScore(finalState,targetId,plan.focus):null;
+    const historyItem={
+      type:plan.type,themeId:targetId,focus:plan.focus||null,
+      microcompetencyId:plan.microcompetencyId||microcompetencyId(targetId,plan.focus)||null,
+      at:Date.now(),
+      completionId:sessionId||null,
+      beforeDomain:before.domain,afterDomain:now.domain,
+      beforeConf:before.conf,afterConf:now.conf,
+      beforeFocusDomain:beforeFocus?.domain??null,afterFocusDomain:afterFocus?.domain??null,
+      beforeFocusConf:beforeFocus?.conf??0,afterFocusConf:afterFocus?.conf??0,
+      beforeFocusEvidence:beforeFocus?.evidence?.length||0,afterFocusEvidence:afterFocus?.evidence?.length||0,
+      totalCount:newTotal,interactionCount:newTotal,
+      estimatedSeconds:newEstimatedSeconds,
+      stopCode:stopDecision?.code||"unknown",
+      stopTitle:stopDecision?.title||null,
+      stopDetail:stopDecision?.detail||null,
+      decisionSource:plan.decisionMeta?.source||null,
+      decisionUtility:plan.decisionMeta?.utility??null,
+      alternatives:plan.alternatives||[]
+    };
+    const sessions=[...(finalState.betaSessions||[])];
+    const openIdx=[...sessions].map(x=>x.kind==="mission"&&!x.finishedAt).lastIndexOf(true);
+    if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:targetId,focus:plan.focus||null,type:plan.type,totalCount:newTotal});
+
+    const baseFinished={...finalState,
+      betaSessions:sessions,
+      betaEvents:[...(finalState.betaEvents||[]),betaEvent("mission_finished",{
+        sessionId:sessionId||null,themeId:targetId,focus:plan.focus||null,
+        microcompetencyId:plan.microcompetencyId||microcompetencyId(targetId,plan.focus)||null,
+        type:plan.type,totalCount:newTotal
+      })],
+      missionHistory:[...(finalState.missionHistory||[]),historyItem],
+      freeTrainingSignals:plan.type==="confirmation"
+        ? markTrainingSignalConfirmed(finalState.freeTrainingSignals,plan.signal)
+        : finalState.freeTrainingSignals,
+      lastMission:{
+        ...historyItem,
+        planReason:plan.reason,
+        targetCount:newTargetCount,
+        detour:finalDetour,
+        signal:plan.signal||null
+      }
+    };
+    const activityAt=Date.now();
+    let finished=recordStudyActivity(baseFinished,{
+      kind:"mission",
+      xpEarned:newTotal*25,
+      sessionId:sessionId||historyItem.completionId,
+      at:activityAt
+    });
+    finished=recordCompetitiveActivity(finished,{
+      kind:"mission",
+      total:newTotal,
+      focusKey:plan.microcompetencyId||microcompetencyId(targetId,plan.focus)||`${targetId}:${plan.focus||""}`,
+      sessionId:sessionId||historyItem.completionId,
+      at:activityAt
+    });
+    finished=refreshLearningHypotheses(finished,activityAt);
+    finished=recordMilestone(finished,"first_mission_completed",{
+      sessionId:sessionId||historyItem.completionId,
+      themeId:targetId,
+      type:plan.type,
+      totalCount:newTotal
+    },{at:activityAt});
+    clearSessionDraft(s.betaMode||"internal");
+    setS(finished);go("missionResult");
+  }
+
+  function next(){
+    const correct=fb?.correct===true;
+    const newUsed=[...usedIds,current.id];
+    const newSigs=[...usedSignatures,current.signature||current.id];
+    const newTotal=totalCount+1;
+    const newEstimatedSeconds=estimatedSeconds+estimateMissionSeconds(current);
+    setUsedIds(newUsed);setUsedSignatures(newSigs);setTotalCount(newTotal);
+    setEstimatedSeconds(newEstimatedSeconds);
+
+    if(current.sessionRole==="target" && !correct && !detour && plan.type!=="calibration"
+      && canStartMissionDetour(newTotal)){
+      const probe=selectCausalProbe(s,targetId,current.focus||plan.focus,newUsed,newSigs);
+      if(probe?.question){
+        setS(prev=>({...prev,xp:prev.xp+25}));
+        setPendingError(current);
+        setDetour({
+          preId:probe.question.themeId,
+          preFocus:probe.dependency.focus||probe.question.focus||null,
+          targetFocus:current.focus||plan.focus||null,
+          dependency:probe.dependency,
+          result:null,
+          verdict:null
+        });
+        setCurrent({...probe.question,sessionRole:"prereq"});
+        setSel(null);setFb(null);
+        return;
+      }
+    }
+
+    let nextState={...s,scores:{...s.scores},xp:s.xp+25};
+    let newTargetCount=targetCount;
+    let newTargetItems=[...targetItems];
+    let finalDetour=detour;
+
+    if(current.sessionRole==="prereq"){
+      nextState.scores[current.themeId]=applyEvidence(nextState.scores[current.themeId],current,correct,"mission");
+
+      const verdict=causalVerdict({
+        probeCorrect:correct,
+        targetThemeId:targetId,
+        targetFocus:pendingError?.focus||plan.focus||null,
+        dependency:detour?.dependency
+      });
+
+      if(pendingError){
+        nextState.scores[targetId]=applyEvidence(
+          nextState.scores[targetId],pendingError,false,"mission",verdict?.targetStrength??1
+        );
+        newTargetCount=targetCount+1;
+        newTargetItems=[...targetItems,pendingError];
+        setTargetCount(newTargetCount);setTargetItems(newTargetItems);
+      }
+
+      finalDetour={...detour,result:correct,verdict};
+      nextState.learningHypotheses=recordLearningHypothesis(nextState.learningHypotheses,{
+        targetThemeId:targetId,
+        targetFocus:pendingError?.focus||plan.focus||null,
+        dependency:detour?.dependency,
+        verdict
+      });
+      setDetour(finalDetour);setPendingError(null);
+    }else if(!current.practiceOnly){
+      nextState.scores[targetId]=applyEvidence(nextState.scores[targetId],current,correct,"mission");
+      newTargetCount=targetCount+1;
+      newTargetItems=[...targetItems,current];
+      setTargetCount(newTargetCount);setTargetItems(newTargetItems);
+    }
+
+    setS(nextState);
+
+    const targetScore=nextState.scores[targetId];
+    const currentFocusScore=plan.focus?focusScore(nextState,targetId,plan.focus):null;
+    const stopDecision=missionStopDecision({
+      missionType:plan.type,
+      targetCount:newTargetCount,
+      totalCount:newTotal,
+      beforeConf:before.conf,
+      currentScore:targetScore,
+      sessionTargetItems:newTargetItems,
+      beforeFocusConf:beforeFocus?.conf??null,
+      currentFocusScore,
+      estimatedSeconds:newEstimatedSeconds
+    });
+
+    if(stopDecision.stop){
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,stopDecision,newEstimatedSeconds);return;
+    }
+
+    const practice=missionPracticeQuestion(nextState,plan,newTotal,newUsed);
+    const nxt=practice||selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    if(!nxt){
+      closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision(),newEstimatedSeconds);return
+    }
+    setCurrent({...nxt,sessionRole:nxt.practiceOnly?"guided":"target"});setSel(null);setFb(null);
+  }
+
+  if(!current)return <Shell><Back go={go}/><h1>Ainda não existem perguntas suficientes para esta Missão.</h1></Shell>;
+
+  const missionStage=totalCount===0?"A começar":totalCount<3?"A aprofundar":"Quase concluída";
+  return <Shell>
+    <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.min(88,22+totalCount*22)}%`}}/></div><span>{missionStage}</span></div>
+    {draft&&<div className="resumeBanner"><b>↻ Sessão retomada</b><span>Continuaste exatamente no ponto onde tinhas ficado.</span></div>}
+    <p className="questionContext">{theme(current.themeId).short}{current.focus&&<> · {current.focus}</>}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
+      <div className="questionMeta"><span>{current.cognitive} · nível {current.difficulty}</span><span>{current.sessionRole==="prereq"?"Verificação de pré-requisito":`Foco da Missão: ${plan.focus||theme(targetId).short}`}</span><span>{missionStage} · sessão curta</span>{current.generated&&<span>Variante validada · resposta calculada por regras matemáticas fechadas · seed {current.variantSeed}</span>}</div>
+      {plan.type==="confirmation"&&current.sessionRole==="target"&&<div className="notice"><b>Porque estamos aqui?</b>
+      <span>Treinaste {plan.focus}. O desempenho foi promissor, mas o Treino Livre não altera o Domínio. Esta Missão serve para confirmar se a evolução se mantém.</span></div>}
+
+    {plan.type==="calibration"&&<div className="notice"><b>Missão de calibração</b>
+      <span>A app ainda conhece pouco esta área. Uma pequena sequência de interações úteis ajuda a começar o mapa sem transformar a Missão num teste.</span></div>}
+
+      {plan.type==="investigation"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque estamos a voltar a esta competência?</b>
+      {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
+      <footer>A app não assume que a hipótese anterior estava certa. Esta Missão existe precisamente para tentar confirmá-la ou enfraquecê-la.</footer>
+    </div>}
+
+      {plan.type==="priority"&&current.sessionRole==="target"&&<div className="decisionExplain"><b>Porque é esta a próxima melhor ação?</b>
+      {(plan.reasons||[]).map((r,i)=><div key={`${r.kind}-${i}`}><span>{i+1}</span><p><strong>{r.title}</strong><small>{r.detail}</small></p></div>)}
+      {plan.unlocks?.length>0&&<footer>Se melhorares esta base, o motor poderá avançar com mais segurança para <b>{plan.unlocks.slice(0,2).map(x=>x.label).join(" e ")}</b>.</footer>}
+      </div>}
+      {current.sessionRole==="prereq"&&<div className="branchNote strong"><b>↳ Verificação rápida da causa</b>
+      <span>Antes de concluir que a dificuldade está em <b>{detour?.targetFocus||theme(targetId).short}</b>, a app vai testar <b>{detour?.preFocus||theme(current.themeId).short}</b>. Uma pergunta não prova a causa — apenas torna uma hipótese mais ou menos provável.</span></div>}
+    </details>
+    <h2>{current.q}</h2>
+    {current.practiceOnly?<PracticeResponse question={current} value={sel} onChange={answer} feedback={fb} guided/>:<QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>}
+
+    {fb&&!current.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
+    {fb&&<ReportButton item={current} s={s} setS={setS}/>}
+    {!fb?<button disabled={!isResponseAnswered(current,sel)} className="primary" onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
+  </Shell>
+}
+
+
+function MissionResult({s,setS,go}){
+  const m=s.lastMission;
+  if(!m)return <Shell><Back go={go}/><h1>Missão concluída.</h1></Shell>;
+  const t=theme(m.themeId);
+  const now=scopedThemeScore(s,m.themeId);
+  const delta=(m.afterDomain??0)-(m.beforeDomain??0);
+  const typeName=m.type==="confirmation"?"Confirmação concluída":m.type==="calibration"?"Calibração concluída":"Missão concluída";
+
+  return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra a missão concluída"/>
+    <p className="eyebrow">{typeName.toUpperCase()}</p><h1>Missão concluída</h1><h2>Hoje reforçaste {m.focus||t.short}.</h2>
+    {m.stopCode!=="time_budget_reached"&&<p className="muted">{m.stopDetail
+      ?m.stopDetail
+      :m.type==="calibration"
+        ?"A app já tem primeiras observações nesta área. Ainda é cedo para tratar esta estimativa como robusta."
+        :`A sessão terminou após ${m.interactionCount||m.totalCount} interações úteis.`}</p>}</div>
+
+    <details className="resultDetails"><summary>Ver detalhes do progresso</summary>
+    {m.stopTitle&&m.stopDetail&&<div className="stopReason"><small>PORQUE TERMINOU AGORA?</small><b>{m.stopTitle}</b><span>{m.stopDetail}</span></div>}
+
+    {m.focus&&<div className="competenceOutcome"><small>COMPETÊNCIA TRABALHADA</small><h2>{m.focus}</h2><div>
+      <p><span>Domínio</span><b>{m.beforeFocusDomain??"—"} → {m.afterFocusDomain??"—"}/100</b></p>
+      <p><span>Certeza da app</span><b>{certaintyLabel(m.beforeFocusConf,m.beforeFocusEvidence)} → {certaintyLabel(m.afterFocusConf,m.afterFocusEvidence)}</b></p>
+    </div></div>}
+    <div className="missionOutcome">
+      <div><span>{m.focus?"Tema — visão agregada":"Domínio estimado"}</span><b>{m.beforeDomain??"—"} → {m.afterDomain}/100</b><small>{m.beforeDomain===null?"primeira estimativa":delta>0?`+${delta}`:delta===0?"sem alteração":delta}</small></div>
+      <div><span>Certeza do tema</span><b>{certaintyLabel(m.beforeConf,m.beforeDomain===null?0:1)} → {certaintyLabel(now.conf,now.evidence.length)}</b><small>O tema agrega evidência de várias competências.</small></div>
+    </div>
+
+    {m.type==="confirmation"&&<div className="notice"><b>Sinal do Treino Livre confirmado</b>
+      <span>O resultado deixou de ser apenas prática livre e passou a contar como evidência avaliativa desta competência.</span></div>}
+
+    {m.detour?.verdict&&<div className={"causeCard "+(m.detour.verdict.code==="prerequisite_suspected"?"suspect":"clear")}>
+      <small>CAUSA PROVÁVEL · AINDA NÃO É UMA CONCLUSÃO</small>
+      <h3>{m.detour.verdict.title}</h3>
+      <p>{m.detour.verdict.detail}</p>
+      <span>{m.detour.verdict.code==="prerequisite_suspected"
+        ?`Por isso, o erro anterior em ${m.detour.targetFocus||t.short} teve peso reduzido. A base será observada novamente noutra evidência independente.`
+        :"O erro do foco principal manteve o seu peso normal, porque a verificação da base não revelou a mesma dificuldade."}</span>
+    </div>}
+
+    <div className="notice"><b>Porque mudou?</b>
+      <span>O Domínio reage ao desempenho. A certeza da app cresce sobretudo com evidências independentes, tipos de raciocínio diferentes e contextos avaliativos.</span></div>
+    <div className="notice"><b>O plano vai ser recalculado agora</b><span>A próxima Missão não está pré-programada. O motor volta a comparar dificuldades, certeza, pré-requisitos, relevância, recência e objetivo com esta nova evidência.</span></div></details>
+
+    <FriendsBetaDisclaimer s={s}/>
+    <DailyCompletionNote s={s}/>
+    <CompetitionXpNote s={s}/>
+    <BetaSessionFeedback s={s} setS={setS} kind="mission"/>
+    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="secondary" onClick={()=>go("progress")}>Ver progresso detalhado</button>
+  </Shell>
+}
+
+
+function Ranking({s,setS,go}){
+  const summary=competitionSummary(s);
+  const projection=leagueProjection(s);
+  const profile=summary.profile||{};
+  const [scope,setScope]=useState("league");
+  const [nickname,setNickname]=useState(profile.nickname||"");
+  const [region,setRegion]=useState(profile.region||"");
+  const [school,setSchool]=useState(profile.school||"");
+  const [schoolYear,setSchoolYear]=useState(s.profile?.schoolYear||"");
+  const [districtOptIn,setDistrictOptIn]=useState(!!profile.districtOptIn);
+  const [schoolOptIn,setSchoolOptIn]=useState(!!profile.schoolOptIn);
+  const availability=scopeAvailability(s,scope);
+  const allRows=availability.available?demoLeaderboard(s,{scope}):[];
+  const rows=scope==="league"?allRows:leaderboardAroundUser(allRows,3);
+  const self=allRows.find(x=>x.self);
+  const latest=latestCompetitiveActivity(s);
+
+  const scopeLabel={
+    league:`Divisão ${summary.division.label}`,
+    general:"Geral",
+    year:s.profile?.schoolYear||"Meu ano",
+    district:profile.region||"Distrito/Região",
+    school:profile.school||"Escola"
+  }[scope];
+
+  function saveProfile(){
+    setS(prev=>updateCompetitionProfile({
+      ...prev,
+      profile:{...prev.profile,schoolYear:schoolYear||prev.profile?.schoolYear||null}
+    },{
+      nickname,
+      region:region||null,
+      school:school.trim()||null,
+      districtOptIn,
+      schoolOptIn
+    }));
+  }
+
+  return <Shell><StudentTop s={s} go={go}/>
+    <ApronsoNudge pose="welcome">Eu trato das contas. Tu só precisas de estudar — o ranking mede esforço, nunca conhecimento.</ApronsoNudge>
+    <div className="rankingHero">
+      <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
+        <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
+      <div className="divisionBadge"><span>{summary.division.icon}</span><b>{summary.division.label}</b><small>{summary.weekXp} XP esta semana</small></div>
+    </div>
+
+    <div className="demoRankingWarning"><b>DEMONSTRAÇÃO LOCAL</b><span>Os outros nomes e XP desta versão são simulados para testarmos a experiência. O ranking real só será ligado quando existir backend multiutilizador.</span></div>
+
+    <div className="rankingTabs">
+      {[["league","Divisão"],["general","Geral"],["year","Ano"],["district","Distrito"],["school","Escola"]].map(([id,label])=>
+        <button key={id} className={scope===id?"sel":""} onClick={()=>setScope(id)}>{label}</button>
+      )}
+    </div>
+
+    {scope==="league"&&<section className="leagueStatus">
+      <div><small>DIVISÃO ATUAL</small><h3>{summary.division.icon} {summary.division.label}</h3><p>{projection?.message}</p></div>
+      <div><b>#{projection?.position||"—"}</b><span>de {allRows.length||20}</span></div>
+      <footer><span>↑ Top {PROMOTION_COUNT} sobem</span><span>↓ Últimos {DEMOTION_COUNT} descem</span><span>Termina em ~{summary.daysRemaining} d</span></footer>
+    </section>}
+
+    {!availability.available?<div className="rankingLocked">
+      <b>{scope==="district"?"Ranking de distrito/região ainda não ativo":"Ranking de escola ainda não ativo"}</b>
+      <span>{availability.reason}</span>
+      <small>{scope==="school"
+        ?`No ranking real, só abriremos uma tabela de escola com pelo menos ${SCHOOL_MIN_PARTICIPANTS} participantes elegíveis, para reduzir risco de identificação.`
+        :`No ranking real, o distrito/região terá um limiar mínimo de ${DISTRICT_MIN_PARTICIPANTS} participantes.`}</small>
+    </div>:<section className="leaderboard">
+      <div className="leaderboardHead"><div><small>RANKING SEMANAL · {scopeLabel?.toUpperCase()}</small><h3>{scope==="league"?"A tua liga":scopeLabel}</h3></div><span>{self?`Tu: #${self.position}`:"—"}</span></div>
+      <div className="leaderboardRows">{rows.map(row=>{
+        const promote=scope==="league"&&row.position<=PROMOTION_COUNT;
+        const demote=scope==="league"&&row.position>allRows.length-DEMOTION_COUNT;
+        return <div key={row.id} className={(row.self?"self ":"")+(promote?"promote ":demote?"demote ":"")}>
+          <b className="rankPos">{row.position}</b>
+          <span className="rankAvatar">{row.self?"🙂":row.position===1?"🥇":row.position===2?"🥈":row.position===3?"🥉":"●"}</span>
+          <div><strong>{row.nickname}{row.self?" · TU":""}</strong><small>{row.demo?"tester simulado":"o teu perfil"}</small></div>
+          <em>{row.xp} XP</em>
+        </div>
+      })}</div>
+      {scope!=="league"&&<small className="aroundYouNote">Em rankings muito grandes, a experiência deverá privilegiar a tua posição e quem está imediatamente acima/abaixo — não uma lista infinita.</small>}
+    </section>}
+
+    <section className="xpRules">
+      <div><small>COMO GANHAS XP COMPETITIVO</small><h3>Mais estudo útil, menos farming.</h3></div>
+      <div className="xpRuleGrid">
+        <div><b>🎯 +50</b><span>Missão diária</span><small>Uma única Missão por dia.</small></div>
+        <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
+        <div><b>📝 até +80</b><span>Mini-exame</span><small>XP pela atividade concluída, não pela nota.</small></div>
+        <div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Conta uma vez.</small></div>
+      </div>
+      {latest&&<div className="lastRankXp"><b>Último ganho: +{latest.rankedXp} XP</b><span>{latest.reason}</span></div>}
+      <p className="muted">O teu <b>XP total</b> continua acumulado para sempre. O <b>XP competitivo</b> reinicia semanalmente para que um aluno novo possa competir desde a primeira semana.</p>
+    </section>
+
+    <section className="divisionLadder">
+      <small>DIVISÕES</small>
+      <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===summary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
+      <p>Em produção, cada liga terá um pequeno grupo de alunos com atividade comparável. No final da semana, os primeiros sobem e os últimos podem descer.</p>
+    </section>
+
+    <section className="rankingProfile">
+      <div><small>PERFIL PÚBLICO DO RANKING</small><h3>Nickname, nunca nota.</h3>
+        <p>O ano já faz parte do teu perfil académico. Para entrares no ranking da escola, indica o ano, a escola e ativa a participação. O nome da escola serve apenas para agrupar resultados e nunca aparece publicamente.</p></div>
+      <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
+      <label>Distrito/Região<select value={region} onChange={e=>setRegion(e.target.value)}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
+      <label>Ano para o ranking<select value={schoolYear} onChange={e=>setSchoolYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
+      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Nome da escola (opcional)"/></label>
+      <label className="rankConsent"><input type="checkbox" checked={districtOptIn} onChange={e=>setDistrictOptIn(e.target.checked)}/><span>Participar no ranking do meu distrito/região.</span></label>
+      <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
+      <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
+      <small className="privacyRankNote">Nunca entram no ranking: Domínio, Certeza, Índice de Preparação, nota objetivo, resultados de exame ou número de erros.</small>
+    </section>
+    <StudentNav active="ranking" go={go}/>
+  </Shell>;
+}
+
+function TrainHub({s,go}){
+  return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
+    <ApronsoNudge pose="thinking">Queres praticar um tema específico ou testar várias matérias? Escolhe o formato e eu acompanho-te.</ApronsoNudge>
+    <div className="trainChoices">
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Usa as submatérias já lecionadas no teu ano e inclui automaticamente a matéria dos anos anteriores. Recebes o feedback no fim.</small></div><em>→</em></button>
+      <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos estão a ser preparados.</small></div><em>Em breve</em></button>
+    </div><StudentNav active="train" go={go}/>
+  </Shell>;
+}
+
+
+function Train({s,setS,go,start}){
+  const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
+  const [year,setYear]=useState(preferredYear);
+  const themes=byYear(year);
+  const [themeId,setThemeId]=useState(themes[0].id);
+  const current=theme(themeId)||themes[0];
+  const [focus,setFocus]=useState(current.focus[0]);
+  const [level,setLevel]=useState("auto");
+
+  function changeYear(y){
+    const first=byYear(y)[0];setYear(y);setThemeId(first.id);setFocus(first.focus[0]);
+  }
+  function changeTheme(id){
+    const t=theme(id);setThemeId(id);setFocus(t.focus[0]);
+  }
+
+  const curatedAvailable=eligibleQuestions(s,themeId,"training").length;
+  const generatedAvailable=(s.betaMode||"internal")==="internal" && hasGenerator(themeId);
+  const available=hasTrainingContent(themeId,focus,s);
+  const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
+  const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
+
+  return <Shell><Back go={go} to="train"/>
+    <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
+    <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
+
+    <h3>1. Ano</h3><div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>changeYear(y)}>{y}</button>)}</div>
+    <h3>2. Tema</h3><div className="themeGrid">{themes.map(t=>{
+      const count=eligibleQuestions(s,t.id,"training").length;
+      const generated=(s.betaMode||"internal")==="internal" && hasGenerator(t.id);
+      return <button key={t.id} className={themeId===t.id?"sel":""} onClick={()=>changeTheme(t.id)}>{t.short}{generated?<small> · variantes validadas</small>:count?<small> · banco disponível</small>:<small> · em construção</small>}</button>
+    })}</div>
+
+    <h3>3. Em que queres focar-te?</h3><div className="chips">{current.focus.map(x=>{
+      const count=eligibleQuestions(s,themeId,"training",x).filter(q=>q.focus===x).length;
+      const generated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,x);
+      return <button key={x} className={focus===x?"sel":""} onClick={()=>setFocus(x)}>{x}{generated?" · ∞":count?` (${count})`:""}</button>
+    })}</div>
+
+    <h3>4. Nível</h3><div className="levelGrid">{[
+      ["auto","✨","Adaptado ao meu nível"],["basic","🟢","Básico"],["mid","🔵","Intermédio"],["adv","🟣","Avançado"],["challenge","🔥","Desafio"]
+    ].map(x=><button key={x[0]} className={level===x[0]?"sel":""} onClick={()=>setLevel(x[0])}><span>{x[1]}</span><b>{x[2]}</b></button>)}</div>
+
+    {available
+      ? <div className="trainingSummary"><b>{current.short} → {focus}</b><span>{exactGenerated
+        ?"Este foco já tem variantes paramétricas validadas: os números mudam, mas a resposta é calculada por regras determinísticas."
+        :exactCurated
+        ?`${exactCurated} questões curadas correspondem diretamente a este foco.`
+        :"A app usará perguntas próximas do mesmo tema enquanto este foco é expandido."}</span></div>
+      : <div className="notice"><b>Conteúdo ainda em construção</b><span>A taxonomia já contém esta área, mas o banco de perguntas desta versão ainda não tem itens suficientes para a treinar de forma honesta.</span></div>}
+
+    <button className="primary" disabled={!available} onClick={()=>{
+      const ses=sessionStart("training",{themeId,focus,level});
+      setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("training_started",{sessionId:ses.id,themeId,focus,level})]}));
+      start({themeId,focus,level});
+    }}>Começar treino</button>
+  </Shell>
+}
+
+function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
+  const completingRef=useRef(false);
+  const draft=cfg ? (recoveredDraft || (typeof window!=="undefined" ? loadSessionDraft(s.betaMode||"internal") : null)) : null;
+  const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
+  const questions=useMemo(()=>{
+    if(!cfg)return [];
+    const fresh=trainingQuestions(s,cfg,8);
+    if(!draft?.questions?.length)return fresh;
+    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,8);
+  },[cfg]);
+  const [i,setI]=useState(draft?.i||0);
+  const [sel,setSel]=useState(draft?.sel??null);
+  const [fb,setFb]=useState(draft?.fb??null);
+  const [correct,setCorrect]=useState(draft?.correct||0);
+  const [earnedPoints,setEarnedPoints]=useState(draft?.earnedPoints||0);
+  const [hasIncomplete,setHasIncomplete]=useState(draft?.hasIncomplete||false);
+  const [done,setDone]=useState(false);
+  const q=questions[i];
+  const maxPoints=questions.reduce((sum,item)=>sum+(Number(item.points)||5),0);
+
+  useEffect(()=>{if(draft)onRecovered()},[]);
+
+  useEffect(()=>{
+    if(!cfg || done || !questions.length)return;
+    saveSessionDraft({kind:"training",betaMode:s.betaMode||"internal",sessionId,cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete});
+  },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
+
+  if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
+  if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
+
+  function answer(n){if(!fb)setSel(n)}
+  function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
+  function next(){
+    const was=fb?.correct===true;
+    const newCorrect=correct+(was?1:0);
+    const newEarnedPoints=earnedPoints+(Number(fb?.points)||0);
+    const newHasIncomplete=hasIncomplete||fb?.reviewRequired===true;
+    if(was)setCorrect(newCorrect);
+    setEarnedPoints(newEarnedPoints);
+    setHasIncomplete(newHasIncomplete);
+    if(i===questions.length-1){
+      if(completingRef.current)return;
+      completingRef.current=true;
+
+      if(!claimSessionCompletion(sessionId)){
+        clearSessionDraft(s.betaMode||"internal");
+        setDone(true);
+        return;
+      }
+
+      const ratio=newCorrect/questions.length;
+      const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
+      setS(prev=>{
+        const sessions=[...(prev.betaSessions||[])];
+        const openIdx=[...sessions].map(x=>x.kind==="training"&&!x.finishedAt).lastIndexOf(true);
+        if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete});
+        const base={
+          ...prev,
+          xp:prev.xp+newCorrect*10,
+          betaSessions:sessions,
+          betaEvents:[...(prev.betaEvents||[]),betaEvent("training_finished",{sessionId:sessionId||null,themeId:cfg.themeId,focus:cfg.focus,correct:newCorrect,total:questions.length,earnedPoints:newEarnedPoints,maxPoints,reviewRequired:newHasIncomplete})],
+          freeTrainingSignals:potential?[
+            ...(prev.freeTrainingSignals||[]).filter(x=>!(x.themeId===cfg.themeId && x.focus===cfg.focus && !x.confirmed)),
+            {
+              themeId:cfg.themeId,focus:cfg.focus,
+              microcompetencyId:microcompetencyId(cfg.themeId,cfg.focus)||null,
+              ratio,at:Date.now(),confirmed:false,originSessionId:sessionId||null
+            }
+          ]:(prev.freeTrainingSignals||[])
+        };
+        const activityAt=Date.now();
+        let completed=recordStudyActivity(base,{
+          kind:"training",
+          xpEarned:newCorrect*10,
+          sessionId:sessionId||null,
+          at:activityAt
+        });
+        completed=recordCompetitiveActivity(completed,{
+          kind:"training",
+          total:questions.length,
+          focusKey:microcompetencyId(cfg.themeId,cfg.focus)||`${cfg.themeId}:${cfg.focus||""}`,
+          sessionId:sessionId||null,
+          at:activityAt
+        });
+        return completed;
+      });
+      clearSessionDraft(s.betaMode||"internal");
+      setDone(true);return;
+    }
+    setI(i+1);setSel(null);setFb(null);
+  }
+
+  if(done){
+    const ratio=correct/questions.length;
+    const potential=ratio>=.75 && cfg.level!=="basic" && !questions.some(item=>item.practiceOnly);
+    return <Shell><div className="centered"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o treino concluído"/>
+      <p className="eyebrow">TREINO CONCLUÍDO</p><h1>{correct}/{questions.length} totalmente corretas</h1>
+      <p className="muted"><b>{String(earnedPoints).replace(".",",")}/{maxPoints} pontos{hasIncomplete?" confirmados":""}</b>{hasIncomplete?" · avaliação incompleta":""}</p>
+      <p className="muted">{theme(cfg.themeId).short} → {cfg.focus}</p></div>
+      {potential?<div className="notice"><b>Possível evolução detetada</b><span>O Treino Livre não altera o teu Domínio. A app guardou apenas um sinal e tentará confirmá-lo numa próxima Missão ou avaliação.</span></div>
+      :<div className="notice"><b>Treino registado</b><span>Ganhaste XP pela prática, mas esta sessão não altera a avaliação pedagógica da app.</span></div>}
+      <FriendsBetaDisclaimer s={s}/>
+      <DailyCompletionNote s={s}/>
+      <CompetitionXpNote s={s}/>
+      <BetaSessionFeedback s={s} setS={setS} kind="training"/>
+      <button className="primary" onClick={()=>go("home")}>Voltar à Home</button>
+      <button className="secondary" onClick={()=>go("train")}>Treinar outra coisa</button>
+    </Shell>
+  }
+
+  return <Shell><div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/questions.length)*100}%`}}/></div><span>{i+1}/{questions.length}</span></div>
+    {draft&&<div className="resumeBanner"><b>↻ Treino retomado</b><span>As respostas anteriores desta sessão foram preservadas.</span></div>}
+    <p className="questionContext">{theme(cfg.themeId).short}{q.focus&&<> · {q.focus}</>}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span>{q.generated&&<span>Variante validada · gerada por regras matemáticas fechadas · seed {q.variantSeed}</span>}</div></details>
+    <h2>{q.q}</h2>
+    {q.practiceOnly?<PracticeResponse question={q} value={sel} onChange={answer} feedback={fb}/>:<QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>}
+    {fb&&!q.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
+    {fb&&<ReportButton item={q} s={s} setS={setS}/>}
+    {!fb?<button className="primary" disabled={!isResponseAnswered(q,sel)} onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
+  </Shell>
+}
+
+function Progress({s,go}){
+  const scopedThemes=academicScopeThemes(s.profile);
+  const allowedYears=["10.º","11.º","12.º"].filter(y=>scopedThemes.some(t=>t.year===y));
+  const preferredYear=["10.º","11.º","12.º"].includes(s.profile?.schoolYear)&&allowedYears.includes(s.profile.schoolYear)
+    ?s.profile.schoolYear
+    :(allowedYears.at(-1)||"10.º");
+  const [year,setYear]=useState(preferredYear);
+  useEffect(()=>{if(!allowedYears.includes(year))setYear(preferredYear)},[s.profile?.schoolYear]);
+  const scopeIds=new Set(scopedThemes.map(t=>t.id));
+  const hypotheses=allLearningHypotheses(s,8).filter(h=>scopeIds.has(h.targetThemeId));
+  const activeHypotheses=hypotheses.filter(h=>h.active);
+  const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
+  const overview=measuredThemes(s).sort((a,b)=>(scopedThemeScore(s,b.id).domain??0)-(scopedThemeScore(s,a.id).domain??0)).slice(0,5);
+  const index=prepIndex(s);
+  return <Shell><StudentTop s={s} go={go}/><p className="eyebrow">PROGRESSO</p>
+    <h1>Como estás a evoluir.</h1>
+    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+    <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
+    <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
+    <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
+    <FriendsBetaDisclaimer s={s} compact/>
+    <details className="progressDetails"><summary>Ver mapa completo →</summary>
+    <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
+    <div className="chips">{allowedYears.map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
+
+    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
+      {activeHypotheses.length>0?<>{activeHypotheses.slice(0,5).map(h=><div className={"hypothesisRow lifecycle-"+h.lifecycleStatus} key={h.key}>
+        <span>{h.icon}</span>
+        <div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{
+          h.lifecycleStatus==="probable_prerequisite"
+            ?`Base provável: ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short}. Vamos confirmar se continua a bloquear esta competência.`
+            :h.lifecycleStatus==="probable_target"
+              ?`A base ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short} tem respondido melhor; a dificuldade parece mais específica do alvo.`
+              :h.lifecycleStatus==="ambiguous"
+                ?"A evidência aponta em direções diferentes. A app não vai fingir que já sabe a causa."
+                :`Ainda estamos a investigar se ${h.prerequisiteFocus||theme(h.prerequisiteThemeId)?.short} explica parte da dificuldade.`
+        }</small><em className="hypothesisLifecycleLabel">{h.label}</em></div>
+        <em>{h.observations} {h.observations===1?"verificação":"verificações"}</em>
+      </div>)}</>:<div className="memoryQuiet"><b>Sem hipóteses ativas neste momento.</b><span>A app continua a observar o teu desempenho e reabre uma hipótese se surgirem novas contradições.</span></div>}
+
+      {closedHypotheses.length>0&&<details className="closedHypotheses"><summary>Ver memória recente resolvida/desatualizada ({closedHypotheses.length})</summary>
+        {closedHypotheses.map(h=><div className={"hypothesisRow closed lifecycle-"+h.lifecycleStatus} key={h.key}>
+          <span>{h.icon}</span><div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{h.lifecycleStatus==="resolved"
+            ?(h.resolutionReason||"A evidência recente permitiu fechar esta hipótese.")
+            :"Passou demasiado tempo sem nova evidência causal. Não influencia a Missão até surgir um novo sinal."}</small><em className="hypothesisLifecycleLabel">{h.label}</em></div>
+          <em>{h.reopenCount?`${h.reopenCount} reab.`:""}</em>
+        </div>)}
+      </details>}
+
+      <p>Uma hipótese pode ganhar força, tornar-se ambígua, ser resolvida ou ficar desatualizada. Se aparecer nova evidência contraditória, pode ser reaberta. <b>Hipótese não é diagnóstico definitivo.</b></p>
+    </div>}
+
+    {scopedThemes.filter(t=>t.year===year).map(t=>{
+      const v=scopedThemeScore(s,t.id),has=v.domain!==null;
+      return <div className={"prog "+(!has?"unmeasured":"")} key={t.id}>
+        <div className="progHead"><b>{t.short}</b><small>{t.name}</small></div>
+        {has?<>
+          <span>Domínio estimado: {v.domain}/100</span><div className="bar"><i style={{width:v.domain+"%"}}/></div>
+          <div className="certaintyRow"><span>Certeza da app</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
+          <div className="evidenceMeta">{new Set(v.evidence.map(e=>e.signature)).size} evidências independentes · {new Set(v.evidence.map(e=>e.cognitive)).size} tipos de raciocínio</div>
+          <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).filter(f=>f.questionCount>0).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
+        </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A app vai recolher evidência quando esta área se tornar relevante.</span></div>}
+      </div>
+    })}</details>
+    <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary>
+      <div className="notice"><b>Domínio ≠ Certeza da app</b><span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza da app</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
+      <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a app reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
+    </details>
+    <StudentNav active="progress" go={go}/>
+  </Shell>
+}
+
+function Exams({s,go,startMini}){
+  if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
+  const last=s.lastExam;
+  const miniQuestions=buildMiniExam(s,8);
+  const miniAvailable=miniQuestions.length;
+  const miniReady=miniAvailable>=8;
+  const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
+  const miniSelection=miniQuestions.length-miniConstructed;
+  const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
+  return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
+    <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
+    <FriendsBetaDisclaimer s={s} compact/>
+    <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
+      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~15–20 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+    </button>
+    {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
+    {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
+    <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
+    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
+    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div>
+  </Shell>
+}
+
+function MiniExamIntro({session,go}){
+  if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Ainda não existem perguntas suficientes.</h1></Shell>;
+  const years=[...new Set(session.questions.map(q=>theme(q.themeId).year))];
+  const constructed=session.questions.filter(isConstructedResponse).length;
+  const selection=session.questions.length-constructed;
+  const maxPoints=session.questions.reduce((sum,q)=>sum+(q.points||0),0);
+  return <Shell><Back go={go} to="exams"/><Logo/><p className="eyebrow">MINI-EXAME <BrandName/></p>
+    <h1>Agora é prova. O feedback fica para o fim.</h1>
+    <p className="muted">Este Mini-exame combina seleção e resposta construída, aproximando o treino do formato real da prova.</p>
+    <div className="examIntroGrid">
+      <div><span>📝</span><b>{selection} seleção + {constructed} construção</b><small>{maxPoints} pontos · ponderação 30/70</small></div>
+      <div><span>⏱</span><b>~15–20 min</b><small>Podes avançar ao teu ritmo</small></div>
+      <div><span>📚</span><b>{years.join(' · ')}</b><small>Cobertura transversal</small></div>
+    </div>
+    <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas respostas construídas, desenvolve a resolução etapa a etapa: cada uma tem cotação própria. Não mostramos a correção durante a prova.</span></div>
+    <button className="primary" onClick={()=>go("miniExamRun")}>Começar Mini-exame</button>
+  </Shell>
+}
+
+function MathWritingBar({inputRef,value,onChange,multiline=true}){
+  function insert(text){
+    const field=inputRef.current;if(!field)return;
+    const next=insertMathText(value,field.selectionStart,field.selectionEnd,text);
+    onChange(next.value);
+    window.requestAnimationFrame(()=>{field.focus();field.setSelectionRange(next.cursor,next.cursor);});
+  }
+  const keys=[["/","Fração"],["²","Quadrado"],["³","Cubo"],["^","Potência"],["√(","Raiz quadrada"],["π","Pi"],["(","Abrir parênteses"],[")","Fechar parênteses"],["×","Multiplicar"],["−","Subtrair"],["=","Igual"],["≠","Diferente"],["≤","Menor ou igual"],["≥","Maior ou igual"],["∞","Infinito"],["′","Derivada"],["\n","Nova linha"]];
+  return <div className="mathWritingBar" role="group" aria-label="Símbolos matemáticos">{keys.filter(([symbol])=>multiline||symbol!=="\n").map(([symbol,label])=><button type="button" key={label} aria-label={label} title={label} onMouseDown={event=>event.preventDefault()} onClick={()=>insert(symbol)}>{symbol==="\n"?"↵":symbol}</button>)}</div>;
+}
+
+function PracticeResponse({question,value,onChange,feedback,guided=false}){
+  const steps=question.response.steps;
+  return <div className="practiceResponse">
+    <p className="muted">{guided?"Vamos construir a resolução por etapas. Este exercício guiado serve para praticar e não altera o teu domínio.":"Escreve a resolução ao teu ritmo. Podes pedir uma pista antes de responder."}</p>
+    <fieldset disabled={!!feedback} className="practiceFields">
+      {guided?<div className="constructedResponse">{steps.map(row=><label key={row.id} htmlFor={`practice-${question.id}-${row.id}`}>
+        <b>{row.label}</b>
+        <textarea id={`practice-${question.id}-${row.id}`} rows={2} maxLength={2000} value={value?.steps?.[row.id]||""} onChange={event=>onChange({steps:{...(value?.steps||{}),[row.id]:event.target.value}})} placeholder="Escreve esta etapa da resolução"/>
+      </label>)}</div>:<>
+        <ConstructedResponseField question={question} value={value} onChange={onChange}/>
+        {!feedback&&<details className="focusDisclosure"><summary>Preciso de uma pista</summary><p>Organiza o raciocínio nestes passos:</p><ol>{steps.map(row=><li key={row.id}>{row.label.replace(/^\d+\.\s*/,"")}</li>)}</ol></details>}
+      </>}
+    </fieldset>
+    {feedback&&<div className="notice"><b>{feedback.reviewRequired?"Avaliação incompleta":feedback.correct?"Muito bem!":feedback.points>0?"Tens etapas corretas":"Vamos rever a resolução"}</b>
+      <p>{feedback.points}/{feedback.maxPoints} pontos{feedback.reviewRequired?" confirmados":""}</p>
+      <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
+      <p>{question.sol}</p>
+    </div>}
+  </div>;
+}
+
+function ConstructedResponseField({question,value,onChange}){
+  const inputRef=useRef(null);
+  const spec=question.response;
+  if(spec.type==="completion")return <div className="completionResponse">
+    <p className="muted">Cada espaço tem o mesmo peso. Podes mudar ou limpar as escolhas até entregares.</p>
+    {spec.blanks.map(blank=><label key={blank.id} htmlFor={`${question.id}-${blank.id}`}>
+      <span>{blank.label}</span>
+      <select id={`${question.id}-${blank.id}`} value={Number.isInteger(value?.[blank.id])?value[blank.id]:""} onChange={event=>{
+        const next={...(value&&typeof value==="object"?value:{})};
+        if(event.target.value==="")delete next[blank.id];else next[blank.id]=Number(event.target.value);
+        onChange(next);
+      }}>
+        <option value="">Escolhe uma opção</option>
+        {blank.options.map((option,index)=><option key={index} value={index}>{option}</option>)}
+      </select>
+    </label>)}
+    <small>{completionFilledCount(question,value)}/{spec.blanks.length} espaços preenchidos · {question.points} pontos</small>
+  </div>;
+  if(spec.type==="stepwise"){
+    const legacySteps=value&&typeof value==="object"?spec.steps.map(row=>value.steps?.[row.id]).filter(Boolean).join("\n"):"";
+    const answer=typeof value==="string"?value:typeof value?.working==="string"?value.working:legacySteps;
+    return <div className="constructedResponse stepwiseResponse">
+      <div className="constructedHeading"><b>Resolução por etapas</b><span>{question.points} pontos · pontuação parcial</span></div>
+      <label htmlFor={`working-${question.id}`}><b>Escreve a tua resolução completa</b></label>
+      <textarea
+        ref={inputRef}
+        maxLength={8000}
+        id={`working-${question.id}`}
+        value={answer}
+        placeholder={"Apresenta os cálculos e a conclusão.\nUsa uma linha nova para cada etapa."}
+        onChange={event=>onChange(event.target.value)}
+        aria-describedby={`working-help-${question.id}`}
+      />
+      <MathWritingBar inputRef={inputRef} value={answer} onChange={onChange}/>
+      <small id={`working-help-${question.id}`} className="workingHint"><b>Dica de escrita:</b> carrega em Enter sempre que avançares para uma nova etapa. Assim conseguimos analisar melhor o teu raciocínio e atribuir pontuação parcial.</small>
+    </div>;
+  }
+  return <div className="constructedResponse">
+    <label htmlFor={`response-${question.id}`}><b>{spec.label}</b><span>{question.points} pontos · resposta construída</span></label>
+    <input
+      ref={inputRef}
+      id={`response-${question.id}`}
+      inputMode={spec.type==="numeric"?"decimal":"text"}
+      autoComplete="off"
+      value={typeof value==="string"?value:""}
+      placeholder={spec.placeholder}
+      onChange={event=>onChange(event.target.value)}
+      aria-describedby={`response-help-${question.id}`}
+    />
+    <MathWritingBar inputRef={inputRef} value={typeof value==="string"?value:""} onChange={onChange} multiline={false}/>
+    <small id={`response-help-${question.id}`}>{spec.type==="fraction"?"Escreve uma fração, por exemplo 1/2. Frações equivalentes são corrigidas matematicamente.":"Podes usar vírgula ou ponto nos números decimais."}</small>
+  </div>;
+}
+
+function MiniExamRun({session,setSession,go}){
+  if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
+  const i=session.current||0,q=session.questions[i],answer=session.answers[i];
+  function setAnswer(value){
+    const answers=[...session.answers];answers[i]=value;setSession({...session,answers});
+  }
+  function move(n){setSession({...session,current:Math.max(0,Math.min(session.questions.length-1,n))})}
+  return <Shell>
+    <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/session.questions.length)*100}%`}}/></div><span>{i+1}/{session.questions.length}</span></div>
+    <p className="questionContext">{theme(q.themeId).short}</p>
+    <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span><span>{q.points} pontos · {isConstructedResponse(q)?"resposta construída":"seleção"}</span></div></details>
+    <h2>{q.q}</h2>
+    {responseType(q)==="choice"
+      ?<div className="opts examOpts">{q.o.map((x,n)=><button key={`${q.id}-${n}`} className={answer===n?"sel":""} onClick={()=>setAnswer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
+      :<ConstructedResponseField question={q} value={answer} onChange={setAnswer}/>}
+    <div className="examNav">
+      <button className="secondary small" disabled={i===0} onClick={()=>move(i-1)}>← Anterior</button>
+      <button className="primary small" disabled={!isResponseAnswered(q,answer)} onClick={()=>i<session.questions.length-1?move(i+1):go("miniExamReview")}>Responder</button>
+    </div>
+    {i<session.questions.length-1&&<button className="pauseLink" onClick={()=>move(i+1)}>Saltar por agora</button>}
+    <button className="reviewLink" onClick={()=>go("miniExamReview")}>Ver mapa de respostas</button>
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
+  </Shell>
+}
+
+function MiniExamReview({session,setSession,s,setS,go}){
+  const submittingRef=useRef(false);
+  if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
+  const unanswered=session.questions.filter((q,i)=>!isResponseAnswered(q,session.answers[i])).length;
+  function jump(i){setSession({...session,current:i});go("miniExamRun")}
+  function submit(){
+    if(submittingRef.current)return;
+    submittingRef.current=true;
+
+    if(!claimSessionCompletion(session.sessionId)){
+      clearSessionDraft(s.betaMode||"internal");
+      go("miniExamResult");
+      return;
+    }
+
+    const elapsed=Math.max(1,Math.round((Date.now()-session.startedAt)/1000));
+    let updated=applyMiniExam(s,session.questions,session.answers,elapsed);
+    const sessions=[...(updated.betaSessions||[])];
+    const openIdx=[...sessions].map(x=>x.kind==="mini_exam"&&!x.finishedAt).lastIndexOf(true);
+    if(openIdx>=0)sessions[openIdx]=sessionFinish(sessions[openIdx],{score20:updated.lastExam?.score20,total:session.questions.length});
+    updated={
+      ...updated,
+      lastExam:updated.lastExam?{...updated.lastExam,completionId:session.sessionId||null}:updated.lastExam,
+      examHistory:(updated.examHistory||[]).map((x,i,arr)=>i===arr.length-1?{...x,completionId:session.sessionId||null}:x),
+      betaSessions:sessions,
+      betaEvents:[...(updated.betaEvents||[]),betaEvent("mini_exam_finished",{sessionId:session.sessionId||null,score20:updated.lastExam?.score20,total:session.questions.length})]
+    };
+    const activityAt=Date.now();
+    updated=recordStudyActivity(updated,{
+      kind:"mini_exam",
+      xpEarned:(updated.lastExam?.correctCount||0)*18,
+      sessionId:session.sessionId||updated.lastExam?.completionId||null,
+      at:activityAt
+    });
+    updated=recordCompetitiveActivity(updated,{
+      kind:"mini_exam",
+      total:session.questions.length,
+      sessionId:session.sessionId||updated.lastExam?.completionId||null,
+      at:activityAt
+    });
+    updated=refreshLearningHypotheses(updated,activityAt);
+    clearSessionDraft(s.betaMode||"internal");
+    setS(updated);go("miniExamResult");
+  }
+  return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
+    <p className="muted">Ainda podes voltar a qualquer questão. A correção só acontece quando entregares.</p>
+    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{responseType(q)==="completion"?`${completionFilledCount(q,session.answers[i])}/${q.response.blanks.length} espaços preenchidos`:answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Resolução escrita":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    {session.questions.some((q,i)=>responseType(q)==="completion"&&completionFilledCount(q,session.answers[i])<q.response.blanks.length)&&<p className="notice warning">Há espaços por preencher nas perguntas de completamento. Podes voltar à pergunta ou entregar com esses espaços em branco.</p>}
+    {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
+    <button className="primary" onClick={submit}>Entregar Mini-exame</button>
+  </Shell>
+}
+
+function MiniExamResult({s,setS,go}){
+  const r=s.lastExam;
+  if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há resultado.</h1></Shell>;
+  const questions=r.questionIds.map(questionById).filter(Boolean);
+  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  const itemResults=r.itemResults||fallbackSummary.results;
+  const earnedPoints=r.earnedPoints??fallbackSummary.earnedPoints;
+  const maxPoints=r.maxPoints??fallbackSummary.maxPoints;
+  const mins=Math.floor(r.elapsedSeconds/60),secs=r.elapsedSeconds%60;
+  return <Shell><div className="centered completionMoment"><Logo/><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o Mini-exame concluído"/><p className="eyebrow">MINI-EXAME CONCLUÍDO</p>
+    <h1>{examScoreLabel(r)}</h1>
+    {r.reviewRequired&&<p className="notice warning">Avaliação incompleta: {r.pendingPoints} pontos não puderam ser verificados automaticamente. A nota final não está disponível. Consulta os pontos confirmados e a resolução de cada pergunta; as respostas não verificadas não alteraram o teu domínio.</p>}
+    <p className="muted"><b>{String(earnedPoints).replace(".",",")}/{maxPoints} pontos{r.reviewRequired?" confirmados":""}</b> · {r.correctCount}/{r.total} itens totalmente corretos · {mins}:{String(secs).padStart(2,'0')}</p>
+    <small className="resultDisclaimer">Resultado deste Mini-exame <BrandName/> — não é uma previsão da nota do Exame Nacional.</small></div>
+    <FriendsBetaDisclaimer s={s}/>
+    <DailyCompletionNote s={s}/>
+    <CompetitionXpNote s={s}/>
+    <button className="primary" onClick={()=>go("miniExamCompletedReview")}>Rever o Mini-exame</button>
+
+    <div className="examChanges"><h3>O que mudou no teu mapa?</h3>{r.changes.map(c=>{
+      const t=theme(c.themeId);
+      const beforeLabel=certaintyLabel(c.before.conf,c.before.evidenceCount);
+      const afterLabel=certaintyLabel(c.after.conf,c.after.evidenceCount);
+      return <div className="examChange" key={c.themeId}><div><b>{t.short}</b><small>Domínio {c.before.domain??'—'} → {c.after.domain}/100</small></div><div><span>Certeza da app</span><strong>{beforeLabel} → {afterLabel}</strong></div></div>
+    })}</div>
+
+    <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>
+
+    <BetaSessionFeedback s={s} setS={setS} kind="mini_exam"/>
+    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
+  </Shell>
+}
+
+function MiniExamCompletedReview({s,setS,go}){
+  const r=s.lastExam;
+  if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há um Mini-exame para rever.</h1></Shell>;
+  const questions=r.questionIds.map(questionById).filter(Boolean);
+  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  const itemResults=r.itemResults||fallbackSummary.results;
+  const rows=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]||fallbackSummary.results[i]}));
+  const statusLabel=status=>status==="needs_review"?"Avaliação incompleta":status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
+  return <Shell><Back go={go} to="miniExamResult"/><Logo/><p className="eyebrow">REVISÃO DO MINI-EXAME</p>
+    <h1>Revê as tuas respostas.</h1>
+    <p className="muted">O Mini-exame já terminou e as respostas estão bloqueadas. Aqui podes perceber o que acertaste, o que falhou e como resolver cada pergunta.</p>
+    {r.reviewRequired&&<p className="notice warning">A app não conseguiu avaliar toda a resolução. Os pontos apresentados são apenas os confirmados, sem estimativa de nota final. Compara as etapas com a resolução abaixo; não há uma revisão humana pendente.</p>}
+    <div className="completedExamSummary"><b>{examScoreLabel(r)}</b><span>{String(r.earnedPoints??fallbackSummary.earnedPoints).replace(".",",")}/{r.maxPoints??fallbackSummary.maxPoints} pontos{r.reviewRequired?" confirmados":""}</span></div>
+    <div className="completedExamReview">{rows.map(({q,i,answer,grade})=><details key={q.id} open={grade?.status!=="correct"} className={`reviewItem ${grade?.status||"unanswered"}`}>
+      <summary><span>Questão {i+1} · {theme(q.themeId).short}</span><strong>{statusLabel(grade?.status)} · {String(grade?.points||0).replace(".",",")}/{grade?.maxPoints||q.points} pontos</strong></summary>
+      <div className="reviewItemBody"><h2>{q.q}</h2>
+        <div className="reviewAnswer"><small>A tua resposta</small><p>{studentResponseLabel(q,answer)}</p></div>
+        {responseType(q)==="completion"&&<div className="stepResults">{q.response.blanks.map(blank=><div key={blank.id} className={answer?.[blank.id]===blank.correct?"correct":"incorrect"}><div><b>{blank.label}</b><small>A tua escolha: {blank.options[answer?.[blank.id]]??"Sem resposta"}</small><small>Resposta correta: {blank.options[blank.correct]}</small></div></div>)}</div>}
+        {grade?.stepResults?.length
+          ?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.status==="needs_review"?`${row.maxPoints} pontos não avaliados`:`${row.points}/${row.maxPoints} pontos`}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo de resposta: {row.expected}</small>}</div></div>)}</div>
+          :<div className="reviewAnswer correctAnswer"><small>Resposta correta</small><p>{expectedResponseLabel(q)}</p></div>}
+        <div className="reviewResolution"><small>Resolução</small><p>{q.sol||"Ainda não existe uma resolução explicada para esta pergunta."}</p></div>
+        <ReportButton item={q} s={s} setS={setS} compact/>
+      </div>
+    </details>)}</div>
+    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
+  </Shell>;
+}
+
+function AccountCloud({s,setS,go}){
+  const cfg=cloudConfiguration();
+  const [mode,setMode]=useState("signin");
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+  const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
+  const [rankingSchool,setRankingSchool]=useState(s.competition?.profile?.school||"");
+  const [rankingSchoolOptIn,setRankingSchoolOptIn]=useState(!!s.competition?.profile?.schoolOptIn);
+  const [session,setSession]=useState({loading:true,user:null,error:null});
+  const [busy,setBusy]=useState(false);
+  const [message,setMessage]=useState(null);
+  const [conflictRemote,setConflictRemote]=useState(null);
+  const [pending,setPending]=useState([]);
+  const [snapshots,setSnapshots]=useState([]);
+
+  const sync=cloudSyncMeta(s);
+  const deviceId=sync.deviceId||getOrCreateDeviceId();
+
+  function refreshLocalSafety(){
+    setPending(listPendingCloudSaves());
+    setSnapshots(listLocalSnapshots());
+  }
+
+  useEffect(()=>{refreshLocalSafety()},[]);
+
+  async function refreshSession(){
+    if(!cfg.configured){
+      setSession({loading:false,user:null,error:null});
+      return;
+    }
+    const result=await getCloudSession();
+    setSession({loading:false,user:result.user||null,error:result.error||null});
+    if(result.user){
+      setS(prev=>({...migrateCloudSync(prev),identity:{
+        mode:"authenticated",
+        authUserId:result.user.id,
+        displayName:result.user.name||result.user.email?.split("@")[0]||"Aluno",
+        email:result.user.email||"",
+        roles:["student"],
+        activeRole:"student"
+      }}));
+    }
+  }
+
+  useEffect(()=>{refreshSession()},[]);
+
+  function normalizeAfterCloud(base){
+    return migrateCloudSync(
+      migrateDailyMission(
+        migrateCompetition(
+          migrateEngagement(
+            migratePedagogicalIds({
+              ...base,
+              scores:recalibrateAllScores(base.scores)
+            })
+          )
+        )
+      )
+    );
+  }
+
+  async function submit(){
+    setBusy(true);setMessage(null);
+    try{
+      if(mode==="signup"){
+        await cloudSignUp({name:name.trim()||"Aluno",email:email.trim(),password});
+        setMessage({ok:true,text:"Conta criada. Se a verificação de email estiver ativa no Neon, confirma o email antes de entrar."});
+      }else{
+        await cloudSignIn({email:email.trim(),password});
+        setMessage({ok:true,text:"Sessão iniciada."});
+      }
+      await refreshSession();
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  function saveRankingIdentity(){
+    setS(prev=>updateCompetitionProfile({
+      ...prev,
+      profile:{...prev.profile,schoolYear:rankingYear||prev.profile?.schoolYear||null}
+    },{
+      school:rankingSchool.trim()||null,
+      schoolOptIn:rankingSchoolOptIn
+    }));
+    setMessage({ok:true,text:"Dados do ranking guardados neste dispositivo. A escola só será usada se a participação estiver ativa."});
+  }
+
+  async function signout(){
+    setBusy(true);setMessage(null);
+    try{
+      await cloudSignOut();
+      setS(prev=>({...prev,identity:demoIdentity("student")}));
+      setSession({loading:false,user:null,error:null});
+      setConflictRemote(null);
+      setMessage({ok:true,text:"Sessão terminada. O progresso local continua neste dispositivo."});
+    }catch(error){setMessage({ok:false,text:String(error?.message||error)})}
+    finally{setBusy(false)}
+  }
+
+  function registerConflict(remote){
+    setConflictRemote(remote||null);
+    setS(prev=>cloudConflict(prev,{
+      remoteRevision:remote?.revision,
+      remoteDeviceId:remote?.last_device_id,
+      remoteUpdatedAt:remote?.updated_at,
+      remoteState:remote?.state_json
+    }));
+    setMessage({ok:false,text:"A cloud tem uma versão mais recente. Não substituímos nada automaticamente."});
+  }
+
+  async function saveCloud(){
+    setBusy(true);setMessage(null);setConflictRemote(null);
+    const currentSync=cloudSyncMeta(s);
+    try{
+      const result=await saveStudentCloudState(s,{
+        expectedRevision:currentSync.baseRevision,
+        deviceId,
+        knownRemote:!!currentSync.baseFingerprint
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);return;
+      }
+
+      const now=Date.now();
+      const revision=Number(result?.data?.revision)||currentSync.baseRevision+1;
+      setS(prev=>{
+        let next=markCloudSaved(prev,{revision,deviceId,savedState:prev,at:now});
+        return {...next,cloudMeta:{...(next.cloudMeta||{}),lastSavedAt:now,lastRemoteUpdatedAt:result?.data?.updated_at||new Date(now).toISOString()}};
+      });
+      setMessage({ok:true,text:`Progresso guardado com segurança na cloud · revisão ${revision}.`});
+    }catch(error){
+      if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
+        setMessage({ok:false,text:"Falta aplicar a migration v4.9 da cloud. O progresso local não foi alterado."});
+      }else{
+        queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision});
+        refreshLocalSafety();
+        setMessage({ok:false,text:"Não foi possível chegar à cloud. Guardámos uma tentativa local para poderes repetir mais tarde; o estudo continua seguro neste dispositivo."});
+      }
+    }finally{setBusy(false)}
+  }
+
+  async function loadCloud(){
+    setBusy(true);setMessage(null);setConflictRemote(null);
+    try{
+      const row=await loadStudentCloudState();
+      if(!row?.state_json){
+        setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado na cloud. O primeiro Guardar criará a revisão 1."});
+      }else{
+        saveLocalSnapshot(s,{label:"Antes de carregar da cloud"});
+        const merged=mergeStudentCloudState(s,row.state_json);
+        let recalibrated=normalizeAfterCloud(merged);
+        recalibrated=markCloudLoaded(recalibrated,{
+          revision:row.revision,
+          remoteDeviceId:row.last_device_id,
+          remoteState:row.state_json
+        });
+        setS({...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
+        refreshLocalSafety();
+        setMessage({ok:true,text:`Cloud carregada · revisão ${row.revision}. Criámos um snapshot local antes da substituição.`});
+      }
+    }catch(error){
+      setMessage({ok:false,text:error?.code==="CLOUD_SCHEMA_OUTDATED"
+        ?"Falta aplicar a migration v4.9 da cloud. Não carregámos nem alterámos o progresso local."
+        :String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  async function resolveKeepRemote(){
+    if(!conflictRemote?.state_json)return;
+    setBusy(true);setMessage(null);
+    try{
+      saveLocalSnapshot(s,{label:"Conflito · antes de manter a cloud"});
+      const merged=mergeStudentCloudState(s,conflictRemote.state_json);
+      let next=normalizeAfterCloud(merged);
+      next=markCloudLoaded(next,{
+        revision:conflictRemote.revision,
+        remoteDeviceId:conflictRemote.last_device_id,
+        remoteState:conflictRemote.state_json
+      });
+      setS(next);
+      setConflictRemote(null);
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Mantivemos a revisão ${conflictRemote.revision} da cloud. A versão local anterior ficou num snapshot.`});
+    }finally{setBusy(false)}
+  }
+
+  async function resolveKeepLocal(){
+    if(!conflictRemote)return;
+    setBusy(true);setMessage(null);
+    try{
+      saveLocalSnapshot(s,{label:"Conflito · antes de substituir a cloud"});
+      const result=await overwriteStudentCloudState(s,{
+        remoteRevision:conflictRemote.revision,
+        deviceId
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);
+        setMessage({ok:false,text:"A cloud mudou novamente enquanto resolvias o conflito. Voltámos a bloquear a escrita."});
+        return;
+      }
+      const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
+      setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:prev}));
+      setConflictRemote(null);
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Mantivemos este dispositivo e criámos a revisão ${revision}. O estado anterior foi preservado num snapshot.`});
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  async function resolveMerge(){
+    if(!conflictRemote?.state_json)return;
+    setBusy(true);setMessage(null);
+    try{
+      saveLocalSnapshot(s,{label:"Conflito · antes de combinar"});
+      const combined=safeCloudMerge(s,conflictRemote.state_json);
+      let next=normalizeAfterCloud(combined);
+      next=markCloudLoaded(next,{
+        revision:conflictRemote.revision,
+        remoteDeviceId:conflictRemote.last_device_id,
+        remoteState:conflictRemote.state_json
+      });
+
+      const result=await overwriteStudentCloudState(next,{
+        remoteRevision:conflictRemote.revision,
+        deviceId
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);
+        setMessage({ok:false,text:"A cloud mudou novamente antes de concluirmos a combinação. Nada foi sobrescrito."});
+        return;
+      }
+
+      const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
+      next=markCloudSaved(next,{revision,deviceId,savedState:next});
+      setS(next);
+      setConflictRemote(null);
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Combinámos atividade independente dos dois dispositivos e guardámos a revisão ${revision}.`});
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  async function retryPending(){
+    const item=pending[0];
+    if(!item)return;
+    setBusy(true);setMessage(null);
+    try{
+      const result=await saveStudentCloudState(item.state,{
+        expectedRevision:item.expectedRevision,
+        deviceId:item.deviceId||deviceId,
+        knownRemote:!!item.knownRemote
+      });
+      if(result?.conflict){
+        registerConflict(result.remote);return;
+      }
+      removePendingCloudSave(item.id);
+      const revision=Number(result?.data?.revision)||item.expectedRevision+1;
+      setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:item.state}));
+      refreshLocalSafety();
+      setMessage({ok:true,text:`Tentativa pendente sincronizada · revisão ${revision}.`});
+    }catch(error){
+      setMessage({ok:false,text:String(error?.message||error)});
+    }finally{setBusy(false)}
+  }
+
+  const user=session.user;
+  const localIndex=prepIndex(s);
+  const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
+
+  return <Shell><Back go={go}/><p className="eyebrow">CONTA <BrandName/> · CLOUD SEGURA</p>
+    <h1>O teu progresso, sem sobrescritas silenciosas.</h1>
+    <p className="muted">A app continua local-first. A v4.9 passa a tratar cada gravação cloud como uma revisão: se outro dispositivo avançou entretanto, a escrita é bloqueada e és tu que decides o que fazer.</p>
+
+    {!cfg.configured&&<div className="cloudUnavailable">
+      <b>○ Neon Auth/Data API ainda não ativados</b>
+      <span>A arquitetura de conflitos já está pronta, mas nenhum serviço externo foi ativado por esta versão. O estudo continua integralmente local.</span>
+    </div>}
+
+    {cfg.configured&&session.loading&&<div className="cloudLoading">A verificar sessão…</div>}
+
+    {cfg.configured&&!session.loading&&!user&&<>
+      <div className="authTabs"><button className={mode==="signin"?"sel":""} onClick={()=>setMode("signin")}>Entrar</button><button className={mode==="signup"?"sel":""} onClick={()=>setMode("signup")}>Criar conta</button></div>
+      <div className="realAuthForm">
+        {mode==="signup"&&<label>Nome<input value={name} onChange={e=>setName(e.target.value)} placeholder="Nome"/></label>}
+        <label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="nome@email.pt"/></label>
+        <label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
+        <button disabled={busy||!email.trim()||password.length<8} onClick={submit}>{busy?"A processar…":mode==="signup"?"Criar conta":"Entrar"}</button>
+      </div>
+      <small className="cloudPrivacy">A password é tratada pelo Neon Auth. A app não guarda passwords na base de dados de progresso.</small>
+    </>}
+
+    {cfg.configured&&!session.loading&&user&&<>
+      <div className="signedAccount">
+        <div><span>Conta autenticada</span><b>{user.name||"Aluno"}</b><small>{user.email}</small></div><strong>● online</strong>
+      </div>
+
+      <div className="rankingIdentityCard">
+        <div><small>DADOS PARA O RANKING</small><b>Indica o teu ano e escola</b><span>O login continua disponível sem estes dados. Para aderires ao ranking da escola, precisamos do ano, da escola e da tua autorização explícita.</span></div>
+        <label>Ano<select value={rankingYear} onChange={e=>setRankingYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
+        <label>Escola<input value={rankingSchool} onChange={e=>setRankingSchool(e.target.value)} placeholder="Nome da escola"/></label>
+        <label className="rankConsent"><input type="checkbox" checked={rankingSchoolOptIn} onChange={e=>setRankingSchoolOptIn(e.target.checked)}/><span>Quero participar no ranking da minha escola.</span></label>
+        <button onClick={saveRankingIdentity}>Guardar dados do ranking</button>
+        <small className="privacyRankNote">A escola é usada apenas para agrupar o ranking e não é mostrada no teu perfil público. Podes retirar a autorização a qualquer momento.</small>
+      </div>
+
+      <div className="cloudProgressCard">
+        <div><span>Progresso local atual</span><b>{localIndex??"—"}<small>/100 índice parcial</small></b></div>
+        <div><span>XP</span><b>{s.xp}</b></div>
+        <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{academicScopeThemes(s.profile).length}</b></div>
+      </div>
+
+      <div className="cloudRevisionCard">
+        <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Revisão conhecida: {sync.baseRevision}</span></div>
+        <div><small>ÚLTIMA CLOUD CONHECIDA</small><b>rev. {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>
+        <div><small>REDE DE SEGURANÇA</small><b>{snapshots.length} snapshots</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>
+      </div>
+
+      <div className="syncActions">
+        <button onClick={saveCloud} disabled={busy}>↑ Guardar com controlo de revisão</button>
+        <button onClick={loadCloud} disabled={busy}>↓ Carregar cloud com snapshot</button>
+      </div>
+
+      {pending.length>0&&<div className="pendingCloudSave">
+        <div><b>⟳ Há uma gravação por repetir</b><span>Falhou anteriormente sem apagar o progresso local.</span></div>
+        <button onClick={retryPending} disabled={busy}>Tentar novamente</button>
+      </div>}
+
+      {conflictRemote&&<div className="cloudConflictCard">
+        <div className="cloudConflictHead"><span>⚠</span><div><b>Conflito detetado — nada foi sobrescrito</b>
+          <small>Este dispositivo conhecia a revisão {sync.baseRevision}; a cloud está na revisão {conflictRemote.revision}.</small></div></div>
+        <p>Escolhe conscientemente. Antes de qualquer substituição ou combinação criamos um snapshot local.</p>
+        <div className="conflictChoices">
+          <button onClick={resolveKeepRemote} disabled={busy}><b>Manter cloud</b><span>Usar a versão mais recente que já está online.</span></button>
+          <button onClick={resolveMerge} disabled={busy}><b>Combinar atividade</b><span>Unir evidências, Missões e exames independentes e recalibrar.</span></button>
+          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Substituir a cloud apenas se ela não tiver mudado outra vez.</span></button>
+        </div>
+      </div>}
+
+      <div className="notice"><b>Porque ainda não sincronizamos silenciosamente?</b><span>Agora já detetamos conflitos e temos mecanismos de recuperação. A sincronização automática só deve ser ligada depois de testarmos estes fluxos com duas contas/dispositivos reais e a migration v4.9 aplicada.</span></div>
+
+      <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
+    </>}
+
+    {message&&<div className={"cloudMessage "+(message.ok?"ok":"bad")}><b>{message.ok?"✓":"!"}</b><span>{message.text}</span></div>}
+
+    <div className="securityBox">
+      <b>🔐 Duas proteções diferentes</b>
+      <span><b>RLS</b> impede um utilizador de ler/escrever o progresso de outra conta. <b>Revisões otimistas</b> impedem dois dispositivos da mesma conta de se sobrescreverem sem aviso.</span>
+    </div>
+  </Shell>
+}
+
+function IdentityLab({s,setS,go}){
+  const identity=normalizeIdentity(s.identity);
+  const [authState,setAuthState]=useState({loading:true,authConfigured:false});
+
+  useEffect(()=>{
+    let alive=true;
+    fetch("/api/auth/capabilities",{cache:"no-store"})
+      .then(r=>r.json()).then(x=>{if(alive)setAuthState({loading:false,...x})})
+      .catch(()=>{if(alive)setAuthState({loading:false,authConfigured:false})});
+    return ()=>{alive=false};
+  },[]);
+
+  function switchDemo(role){
+    const next=demoIdentity(role);
+    setS(prev=>({...prev,identity:next}));
+  }
+
+  function openRole(){
+    go(defaultScreenForRole(normalizeIdentity(s.identity).activeRole));
+  }
+
+  function simulateParentAccept(){
+    const pending=[...(s.parentInvites||[])].reverse().find(x=>x.status==="pending");
+    if(!pending)return;
+    const parent=demoIdentity("parent");
+    if(pending.email)parent.email=pending.email;
+    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===pending.id?{
+      ...x,status:"accepted",acceptedAt:Date.now(),parentEmail:parent.email,parentName:"Pai/Mãe Demo"
+    }:x)}));
+  }
+
+  function confirmRemovalAsParent(){
+    const link=activeParentLink(s.parentInvites||[]);
+    if(!link?.removal)return;
+    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?confirmLinkRemoval(x,"parent"):x)}));
+  }
+
+  return <Shell><Back go={go}/><p className="eyebrow">PAINEL INTERNO · IDENTIDADE & PERMISSÕES</p>
+    <h1>Uma identidade. Papéis diferentes.</h1>
+    <p className="muted">Nesta versão não criamos passwords. O modo abaixo serve apenas para testar a experiência dos vários papéis antes de ligarmos a sessão real do Neon Auth.</p>
+
+    <div className={"authStatus "+(authState.authConfigured?"online":"demo")}>
+      <span>{authState.authConfigured?"●":"○"}</span>
+      <div><b>{authState.authConfigured?"Neon Auth disponível no ambiente":"Modo demo local"}</b>
+        <small>{authState.authConfigured?"A infraestrutura existe; falta ligar a sessão real à interface.":"Sem autenticação real. Seguro para prototipagem, não para produção."}</small></div>
+    </div>
+
+    <div className="identityCard">
+      <div><span>Pessoa ativa</span><b>{identity.displayName}</b><small>{identity.email}</small></div>
+      <strong>{ROLES[identity.activeRole]?.icon} {ROLES[identity.activeRole]?.label}</strong>
+    </div>
+
+    <h3>Simular papel</h3>
+    <div className="roleGrid">{Object.entries(ROLES).map(([role,meta])=><button key={role} className={identity.activeRole===role?"sel":""} onClick={()=>switchDemo(role)}>
+      <span>{meta.icon}</span><b>{meta.label}</b>
+      <small>{role==="student"?"Estudo, progresso e convites parentais":role==="parent"?"Acompanhamento do aluno":role==="reviewer"?"Revisão pedagógica":"Qualidade, beta e gestão"}</small>
+    </button>)}</div>
+
+    <button className="primary" onClick={openRole}>Abrir experiência de {ROLES[identity.activeRole]?.label}</button>
+    <button className="secondary" onClick={()=>go("account")}>Conta <BrandName/> &amp; Progresso na Cloud →</button>
+
+    <div className="permissionMatrix"><h3>Permissões principais</h3>
+      {[
+        ["study","Estudar / fazer Missões"],
+        ["parent_dashboard","Área parental"],
+        ["review_content","Rever conteúdo"],
+        ["beta_admin","Administrar beta"]
+      ].map(([cap,label])=><div key={cap}><span>{label}</span><b className={can(identity,cap)?"allowed":"denied"}>{can(identity,cap)?"✓ Permitido":"— Não permitido"}</b></div>)}
+    </div>
+
+    <div className="demoActions"><h3>Teste rápido da ligação parental</h3>
+      <button onClick={()=>go("parent")}>1. Criar convite como aluno →</button>
+      <button disabled={!(s.parentInvites||[]).some(x=>x.status==="pending")} onClick={simulateParentAccept}>2. Simular aceitação pelo Pai/Mãe</button>
+      <button disabled={!activeParentLink(s.parentInvites||[])?.removal} onClick={confirmRemovalAsParent}>3. Simular confirmação de remoção pelo Pai/Mãe</button>
+    </div>
+
+    <div className="notice"><b>Regra de segurança</b><span>Os papéis <b>Professor Revisor</b> e <b>Admin</b> nunca serão escolhidos no registo pelo próprio utilizador. Serão concedidos apenas por uma conta administrativa autorizada.</span></div>
+    <div className="notice"><b>Sem pesquisa pública</b><span>Um Pai/Mãe não procura o nome do filho na plataforma. O aluno cria um convite privado, de utilização única e com validade limitada.</span></div>
+  </Shell>
+}
+
+function Parent({s,setS,go}){
+  const index=prepIndex(s),measured=measuredThemes(s);
+  const identity=normalizeIdentity(s.identity);
+  const link=activeParentLink(s.parentInvites||[]);
+  const [email,setEmail]=useState("");
+  const [copied,setCopied]=useState(false);
+  const parentAccess=identity.activeRole==="parent";
+
+  function createInvite(){
+    if(!email.trim())return;
+    const invite=createParentInvite({studentName:identity.displayName,email});
+    setS(prev=>({...prev,parentInvites:[...(prev.parentInvites||[]),invite]}));
+    setEmail("");
+  }
+
+  function copyInvite(invite){
+    const url=`https://aplus-exames.vercel.app/convite/${invite.token}`;
+    if(navigator?.clipboard)navigator.clipboard.writeText(url);
+    setCopied(true);setTimeout(()=>setCopied(false),1400);
+  }
+
+  function requestRemoval(){
+    if(!link)return;
+    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?requestLinkRemoval(x,"student"):x)}));
+  }
+
+  return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
+    <h1>Acompanhar progresso, não vigiar respostas.</h1>
+
+    {!link&&parentAccess&&<div className="parentConnect">
+      <b>Ainda não tens um aluno ligado</b>
+      <span>Por segurança, não existe pesquisa pública de alunos. A ligação começa sempre através de um convite privado criado pelo aluno.</span>
+      <span><b>Como funciona?</b> O aluno envia-te um convite. Depois de o aceitares com a tua conta, o progresso autorizado passa a aparecer aqui.</span>
+    </div>}
+
+    {!link&&!parentAccess&&<div className="parentConnect">
+      <b>Ligar Pai/Mãe ou Encarregado de Educação</b>
+      <span>Não existe pesquisa pública de utilizadores. A ligação nasce sempre de um convite privado criado pelo aluno.</span>
+      <div><input type="email" placeholder="email do encarregado" value={email} onChange={e=>setEmail(e.target.value)}/><button disabled={!email.trim()} onClick={createInvite}>Criar convite</button></div>
+      {(s.parentInvites||[]).filter(x=>x.status==="pending").slice(-3).reverse().map(inv=><div className="pendingInvite" key={inv.id}>
+        <div><b>{inv.email}</b><small>Expira em 7 dias · uso único</small></div>
+        <button onClick={()=>copyInvite(inv)}>{copied?"Copiado ✓":"Copiar link demo"}</button>
+      </div>)}
+      <small className="parentFoot">O convite é privado, de utilização única e com validade limitada.</small>
+    </div>}
+
+    {link&&<>
+      <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · Matemática A</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
+      <small className="parentFoot">* índice ainda parcial enquanto o perfil está a ser construído</small>
+      <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{academicScopeThemes(s.profile).length}</b><span>áreas com evidência</span></div></div>
+      {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{examScoreLabel(s.lastExam)}</b><small>{s.lastExam.earnedPoints!==undefined?`${String(s.lastExam.earnedPoints).replace(".",",")}/${s.lastExam.maxPoints} pontos${s.lastExam.reviewRequired?" confirmados":""}`:`${s.lastExam.correctCount}/${s.lastExam.total} corretas`}</small></div>}
+      <div className="notice"><b>O que os pais veem?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados de avaliações — não cada resposta individual.</span></div>
+
+      {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}
+      {link.removal?.status==="awaiting_other_party"&&<div className="notice warning"><b>Remoção pendente de confirmação</b><span>O aluno pediu a remoção. A ligação mantém-se ativa até a outra parte confirmar. Este comportamento evita uma desvinculação silenciosa e unilateral.</span></div>}
+    </>}
+  </Shell>
+}
+
+
+
+function BetaDashboard({s,setS,go}){
+  const sum=betaSummary(s);
+  const retention=retentionSummary(s);
+  const funnel=funnelSummary(s);
+  const activation=activationSummary(s);
+  const engineAudit=engineAuditSummary(s);
+  const integrityAudit=dataIntegrityAudit(s);
+  const contentReadiness=betaContentReadiness(s.editorialOverrides||{},s.contentReports||[]);
+  const reviewRoadmap=reviewRoadmapProgress(s.editorialOverrides||{},s.contentReports||[]);
+  const eligibility=eligibilitySummary(QUESTION_BANK,s.editorialOverrides||{},s.betaMode||"internal");
+  const [code,setCode]=useState(s.betaParticipant?.code||"");
+  const [cohort,setCohort]=useState(s.betaParticipant?.cohort||"Piloto Matemática A");
+  const [infra,setInfra]=useState({loading:true,configured:false});
+  const [syncing,setSyncing]=useState(false);
+  const [syncMessage,setSyncMessage]=useState("");
+  const [externalReports,setExternalReports]=useState([]);
+  const [externalReportMessage,setExternalReportMessage]=useState("");
+
+  useEffect(()=>{
+    let live=true;
+    backendHealth().then(x=>{if(live)setInfra({loading:false,...x})});
+    return ()=>{live=false};
+  },[]);
+
+  function saveParticipant(){
+    setS(prev=>({...prev,betaParticipant:{code,cohort}}));
+  }
+
+  async function syncNow(){
+    setSyncing(true);setSyncMessage("");
+    const attemptedAt=Date.now();
+    const result=await syncStateToBackend({...s,betaParticipant:{code,cohort}});
+    setS(prev=>({...prev,syncMeta:{
+      ...(prev.syncMeta||{}),
+      lastAttemptAt:attemptedAt,
+      lastSuccessAt:result.ok?Date.now():(prev.syncMeta?.lastSuccessAt||null),
+      lastStatus:result.ok?"synced":(result.code||"failed")
+    }}));
+    setSyncMessage(result.ok?"Sincronização concluída.":(["BACKEND_NOT_CONFIGURED","DATABASE_NOT_CONFIGURED"].includes(result.code)?"Neon ainda não está ligado — os dados continuam seguros neste navegador.":"Não foi possível sincronizar. Os dados locais não foram apagados."));
+    setSyncing(false);
+  }
+
+  function download(){
+    const payload=exportBetaPayload(s);
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=`aplus-beta-${s.betaParticipant?.code||"participante"}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async function importFriendReports(files){
+    const list=[...(files||[])];
+    if(!list.length)return;
+    const parsed=[];
+    let rejected=0;
+    for(const file of list){
+      try{
+        const data=JSON.parse(await file.text());
+        if(["aplus-friends-beta-v2","aplus-friends-beta-v3"].includes(data?.schema))parsed.push(data);
+        else rejected++;
+      }catch{rejected++}
+    }
+    setExternalReports(prev=>{
+      const byCode=new Map();
+      [...prev,...parsed].forEach(r=>byCode.set(r?.participant?.code||`${r?.exportedAt}-${Math.random()}`,r));
+      return [...byCode.values()];
+    });
+    setExternalReportMessage(`${parsed.length} relatório(s) válido(s) importado(s)${rejected?` · ${rejected} rejeitado(s)`:""}.`);
+  }
+
+  const externalAggregate=aggregateFriendsBetaReports(externalReports);
+
+  return <Shell><Back go={go}/><p className="eyebrow">PAINEL INTERNO · BETA PILOTO</p>
+    <h1>Medir antes de escalar.</h1>
+    <p className="muted">Este painel permite testar a experiência num único dispositivo. Numa beta real, estes dados serão agregados num backend.</p>
+
+    <div className="betaIdentity">
+      <label>Código do participante<input value={code} onChange={e=>setCode(e.target.value)}/></label>
+      <label>Coorte<input value={cohort} onChange={e=>setCohort(e.target.value)}/></label>
+      <button onClick={saveParticipant}>Guardar</button>
+    </div>
+
+    <section className="backendCard">
+      <div className="backendHead"><div><small>INFRAESTRUTURA DE DADOS</small><b>{infra.loading?"A verificar…":infra.backendConfigured?(infra.backendReachable?"Neon Postgres ligado":"Neon configurado · ligação por verificar"):"Local-first · Neon ainda não ligado"}</b></div><span className={infra.backendConfigured&&infra.backendReachable?"online":"local"}>{infra.backendConfigured?(infra.backendReachable?"● online":"● configuração"):"● local"}</span></div>
+      <p>A aplicação grava sempre primeiro neste dispositivo. Quando o backend estiver configurado, o mesmo estado pode ser sincronizado através da API server-side sem expor credenciais no browser.</p>
+      <div className="backendNumbers"><span>{(s.betaEvents||[]).length} eventos</span><span>{(s.betaSessions||[]).length} sessões</span><span>{(s.contentReports||[]).length} reports</span></div>
+      <button disabled={syncing} onClick={syncNow}>{syncing?"A sincronizar…":"Sincronizar agora"}</button>
+      {syncMessage&&<small className="syncMessage">{syncMessage}</small>}
+      {s.syncMeta?.lastAttemptAt&&<small className="syncMeta">Última tentativa: {new Date(s.syncMeta.lastAttemptAt).toLocaleString("pt-PT")} · {s.syncMeta.lastStatus}</small>}
+    </section>
+
+    <div className="qaMetrics betaMetrics">
+      <div><span>Sessões concluídas</span><b>{sum.sessions}</b><small>neste dispositivo</small></div>
+      <div><span>Conclusão</span><b>{sum.completionRate}%</b><small>inícios → fins</small></div>
+      <div><span>Feedbacks</span><b>{sum.feedbackCount}</b><small>qualitativos</small></div>
+      <div><span>Reports</span><b>{sum.reports}</b><small>problemas de conteúdo</small></div>
+    </div>
+
+    <section className="qaSection retentionPanel">
+      <div className="externalBetaHead"><div><small>FUNIL + RETENÇÃO</small><h3>A experiência cria hábito ou só uma boa primeira impressão?</h3></div><span>{retention.activeDays} dia{retention.activeDays===1?"":"s"} ativo{retention.activeDays===1?"":"s"}</span></div>
+      <p>Estes números vêm de aberturas reais desta instalação, não da pergunta “voltarias amanhã?”. D1/D3/D7 só entram no denominador quando já passou tempo suficiente.</p>
+
+      <div className="retentionCards">
+        {[
+          ["D1",retention.d1],
+          ["D3",retention.d3],
+          ["D7",retention.d7]
+        ].map(([label,r])=><div key={label} className={r.eligible?(r.retained?"retained":"missed"):"waiting"}>
+          <span>{label}</span><b>{!r.eligible?"…":r.retained?"✓":"×"}</b>
+          <small>{!r.eligible?"Ainda não elegível":r.retained?"Regressou nesse dia":"Não abriu nesse dia"}</small>
+        </div>)}
+        <div className={activation.activated?"retained":"waiting"}><span>Ativação</span><b>{activation.activated?"✓":"…"}</b><small>{activation.activated?`Diagnóstico + 1.ª Missão${activation.minutesToActivation!==null?` · ${activation.minutesToActivation} min`:""}`:"Falta concluir diagnóstico + 1.ª Missão"}</small></div>
+      </div>
+
+      <div className="funnelRows">{funnel.map((step,i)=><div key={step.id} className={step.reached?"reached":"pending"}>
+        <b>{i+1}</b><span>{step.label}</span><em>{step.reached?"✓":"—"}</em>
+      </div>)}</div>
+
+      <small className="auditFoot">Retenção mede abertura da app, enquanto streak mede estudo efetivo. São métricas diferentes de propósito.</small>
+    </section>
+
+    <section className="externalBetaReports">
+      <div className="externalBetaHead"><div><small>RELATÓRIOS DOS TESTERS</small><h3>Separar alunos de observadores</h3></div><span>{externalAggregate.validReports} testers</span></div>
+      <p>Importa aqui os JSON enviados pelos testers. Os ficheiros são analisados apenas neste browser e os resultados são separados pelo tipo de tester.</p>
+      <label className="externalReportUpload">Importar relatórios JSON<input type="file" accept=".json,application/json" multiple onChange={e=>importFriendReports(e.target.files)}/></label>
+      {externalReportMessage&&<small className="externalReportMessage">{externalReportMessage}</small>}
+      {externalAggregate.validReports>0&&<>
+        <div className="testerGroupCards">
+          {[
+            ["target","Alunos atuais"],
+            ["near_target","Ex-alunos recentes"],
+            ["buyer","Pais / mães"],
+            ["observer","Observadores adultos"]
+          ].map(([key,label])=>{
+            const g=externalAggregate.byFit[key];
+            return <div key={key} className={key==="target"?"targetGroup":""}>
+              <span>{label}</span><b>{g.testers}</b><small>{g.sessionsPerTester} sessões/tester</small>
+              <em>Intenção de voltar: {g.returnIntent??"—"}/5</em>
+              <em>D1 real: {g.d1?.rate??"—"}% ({g.d1?.eligible||0} eleg.)</em>
+              <em>Ativação: {g.activation?.rate??"—"}%</em>
+              <em>Personalização: {g.personalization??"—"}/5</em>
+            </div>
+          })}
+        </div>
+        <div className="targetSignalCard">
+          <b>{externalAggregate.byFit.target.testers>=5?"Já há um pequeno sinal do público-alvo":"Ainda precisamos de mais alunos reais"}</b>
+          <span>{externalAggregate.byFit.target.testers
+            ?`${externalAggregate.byFit.target.testers} aluno(s) atual(is) · ativação ${externalAggregate.byFit.target.activation?.rate??"—"}% · D1 real ${externalAggregate.byFit.target.d1?.rate??"—"}% (${externalAggregate.byFit.target.d1?.eligible||0} elegíveis) · intenção declarada ${externalAggregate.byFit.target.returnIntent??"—"}/5.`
+            :"Os elogios de adultos continuam úteis para UX/conceito, mas esta caixa só começa a validar adesão quando entram alunos do secundário."}</span>
+        </div>
+      </>}
+    </section>
+
+    <section className="qaSection betaGoNoGo">
+      <div className="engineHealthHead"><div><small>GO / NO-GO DA BETA</small><h3>Conteúdo pronto para beta pedagógica fechada?</h3></div><span className={contentReadiness.canClosedBeta?"healthy":"attention"}>{contentReadiness.canClosedBeta?"GO":"NO-GO"}</span></div>
+      <div className="betaGoScore"><b>{contentReadiness.score}%</b><div className="readinessBar"><i style={{width:contentReadiness.score+"%"}}/></div></div>
+      <p>{contentReadiness.canClosedBeta
+        ?"Os critérios mínimos de conteúdo revisto estão cumpridos. Ainda é necessário confirmar infraestrutura e QA da versão a distribuir."
+        :"A beta de experiência com amigos pode testar UX, clareza e engagement, mas ainda não devemos interpretar esses resultados académicos como pedagogicamente fiáveis enquanto estes bloqueios não forem resolvidos."}</p>
+      {!contentReadiness.canClosedBeta&&<div className="readinessBlockers">{contentReadiness.blockers.slice(0,4).map((x,i)=><span key={i}>• {x}</span>)}</div>}
+      {!contentReadiness.canClosedBeta&&<div className="goRoadmapSummary"><b>{reviewRoadmap.approvalsNeeded} aprovações no caminho mínimo</b><span>≈ {reviewRoadmap.estimatedHours} h de revisão a 5 min/questão</span></div>}
+    </section>
+
+    <section className="qaSection engineHealth"><div className="engineHealthHead"><div><small>AUDITORIA DO ORQUESTRADOR</small><h3>Saúde do motor</h3></div><span className={engineAudit.status}>{engineAuditLabel(engineAudit.status)}</span></div>
+      <div className="perceptionGrid">
+        <div><span>Maior sequência no mesmo tema</span><b>{engineAudit.maxSameThemeRun||0}</b></div>
+        <div><span>Calibração</span><b>{engineAudit.calibrationRate}%</b></div>
+        <div><span>Fim por pouca informação</span><b>{engineAudit.lowInfoRate}%</b></div>
+      </div>
+      {engineAudit.missions<5
+        ?<div className="qaEmpty">Precisamos de pelo menos 5 Missões para avaliar padrões do motor.</div>
+        :engineAudit.warnings.length===0
+          ?<div className="engineHealthy">✓ Não foram detetados padrões problemáticos no histórico atual.</div>
+          :<div className="engineWarnings">{engineAudit.warnings.map(w=><div key={w.code} className={w.severity}><b>{w.title}</b><span>{w.detail}</span></div>)}</div>}
+      <small className="auditFoot">Esta auditoria não altera o plano do aluno. Serve apenas para detetar comportamentos anómalos durante desenvolvimento e beta.</small>
+    </section>
+
+    <section className="qaSection integrityHealth">
+      <div className="engineHealthHead"><div><small>INTEGRIDADE DOS DADOS</small><h3>Sessões sem duplicação</h3></div><span className={integrityAudit.status}>{integrityAudit.status==="healthy"?"Saudável":integrityAudit.status==="attention"?"Requer atenção":"A observar"}</span></div>
+      <div className="perceptionGrid">
+        <div><span>Conclusões duplicadas</span><b>{integrityAudit.duplicateCompletions}</b></div>
+        <div><span>IDs duplicados</span><b>{integrityAudit.duplicateSessionIds+integrityAudit.duplicateEventIds}</b></div>
+        <div><span>Sessões ainda abertas</span><b>{integrityAudit.openSessions}</b></div>
+      </div>
+      {integrityAudit.issues.length===0
+        ?<div className="engineHealthy">✓ Não foram encontrados sinais de dupla contabilização ou telemetria inconsistente.</div>
+        :<div className="engineWarnings">{integrityAudit.issues.map(x=><div key={x.code} className={x.severity}><b>{x.title}</b><span>{x.detail}</span></div>)}</div>}
+      <small className="auditFoot">As conclusões de Missão, Treino e Mini-exame usam agora uma chave de idempotência local antes de alterar o progresso.</small>
+    </section>
+
+    <section className="qaSection"><h3>Perceção dos alunos</h3>
+      <div className="perceptionGrid">
+        <div><span>Clareza</span><b>{sum.avgClarity??"—"}/5</b></div>
+        <div><span>Dificuldade adequada</span><b>{sum.avgDifficultyFit??"—"}/5</b></div>
+        <div><span>Utilidade</span><b>{sum.avgUsefulness??"—"}/5</b></div>
+      </div>
+    </section>
+
+    <section className="qaSection"><h3>Duração por tipo de sessão</h3>
+      <div className="sessionRows">{Object.entries(sum.byKind).length===0?<div className="qaEmpty">Ainda sem sessões concluídas.</div>:
+        Object.entries(sum.byKind).map(([kind,v])=><div key={kind}><b>{kind}</b><span>{v.count} sessões</span><small>média {Math.round(v.totalSeconds/v.count/60*10)/10} min</small></div>)}
+      </div>
+    </section>
+
+    <section className="qaSection"><h3>Modo de conteúdo</h3>
+      <div className="betaModeChoices">
+        {[
+          ["internal","Interno","Pode usar conteúdo protótipo; serve para desenvolvimento."],
+          ["closed_beta","Beta fechada","Os gates são aplicados pelo motor: Diagnóstico/Missões/Exames exigem conteúdo revisto."],
+          ["production","Produção","O motor só seleciona conteúdo formalmente revisto."]
+        ].map(([v,l,d])=><button key={v} className={(s.betaMode||"internal")===v?"sel":""} onClick={()=>setS(prev=>({...prev,betaMode:v}))}><b>{l}</b><span>{d}</span></button>)}
+      </div>
+      <div className="eligibilityTable">
+        {["diagnostic","mission","training","exam"].map(ctx=><div key={ctx}><b>{ctx}</b><span>{eligibility[ctx].eligible}/{eligibility[ctx].total} elegíveis</span><small>{eligibility[ctx].blocked} bloqueados pelo gate</small></div>)}
+      </div>
+    </section>
+
+    {(s.betaMode||"internal")!=="internal" && eligibility.diagnostic.eligible===0&&<div className="notice warning"><b>Gate de publicação aplicado pelo motor</b><span>Neste momento não existem questões de Diagnóstico formalmente revistas suficientes para este modo. O motor deixa de as selecionar — não é apenas um aviso visual.</span></div>}
+
+    <section className="qaSection"><h3>Últimos feedbacks</h3>
+      {(s.betaFeedback||[]).length===0?<div className="qaEmpty">Ainda sem feedback.</div>:<div className="feedbackRows">{[...(s.betaFeedback||[])].reverse().slice(0,12).map(f=><div key={f.id}><div><b>{f.kind}</b><small>{new Date(f.at).toLocaleString("pt-PT")}</small></div><span>Clareza {f.clarity}/5 · dificuldade {f.difficultyFit}/5 · utilidade {f.usefulness}/5</span>{f.comment&&<em>{f.comment}</em>}</div>)}</div>}
+    </section>
+
+    <div className="notice"><b>Backend Ready</b><span>A v2.3 já escreve diretamente em Neon Postgres através da API server-side. Sem `DATABASE_URL`, a app continua local-first e nunca perde os dados do navegador.</span></div>
+    <button className="exportBeta" onClick={download}>Exportar dados deste participante (.json)</button>
+    <div className="notice"><b>Privacidade na beta real</b><span>Devemos recolher apenas o necessário, informar os participantes do que é medido e evitar dados pessoais desnecessários. O código de participante pode ser pseudónimo.</span></div>
+  </Shell>
+}
+
+function BetaSessionFeedback({s,setS,kind}){
+  const [done,setDone]=useState(false);
+  const [clarity,setClarity]=useState(4);
+  const [difficultyFit,setDifficultyFit]=useState(4);
+  const [usefulness,setUsefulness]=useState(4);
+  const [personalization,setPersonalization]=useState(4);
+  const [returnIntent,setReturnIntent]=useState(4);
+  const [comment,setComment]=useState("");
+  const friends=isFriendsBeta(s);
+  const segment=currentTesterSegment(s);
+  const target=isTargetStudentTester(s);
+  const showExperience=friends&&["diagnostic","mission","mini_exam"].includes(kind);
+
+  if(done)return <div className="betaThanks">✓ Feedback guardado. Obrigado por ajudares a melhorar a <BrandName/>.</div>;
+
+  function save(){
+    const row={
+      id:`fb-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      kind,at:Date.now(),clarity,difficultyFit,usefulness,comment,
+      testerSegment:segment||null,
+      testerGroup:testerSegmentInfo(segment).group,
+      targetTester:target,
+      personalization:showExperience?personalization:null,
+      returnIntent:showExperience?returnIntent:null
+    };
+    setS(prev=>({...prev,
+      betaFeedback:[...(prev.betaFeedback||[]),row],
+      betaEvents:[...(prev.betaEvents||[]),betaEvent("beta_feedback",{
+        kind,clarity,difficultyFit,usefulness,
+        testerSegment:segment||null,
+        targetTester:target,
+        personalization:showExperience?personalization:null,
+        returnIntent:showExperience?returnIntent:null
+      })]
+    }));
+    setDone(true);
+  }
+
+  return <div className="betaFeedback"><b>{friends?"Ajuda-nos a perceber a experiência":"Ajuda-nos a calibrar a beta"}</b>
+    <span>1 = fraco · 5 = excelente</span>
+    <label>As perguntas foram claras?<input type="range" min="1" max="5" value={clarity} onChange={e=>setClarity(Number(e.target.value))}/><em>{clarity}/5</em></label>
+    <label>A dificuldade pareceu adequada?<input type="range" min="1" max="5" value={difficultyFit} onChange={e=>setDifficultyFit(Number(e.target.value))}/><em>{difficultyFit}/5</em></label>
+    <label>Esta sessão foi útil?<input type="range" min="1" max="5" value={usefulness} onChange={e=>setUsefulness(Number(e.target.value))}/><em>{usefulness}/5</em></label>
+    {showExperience&&<>
+      <label>Sentiste que a app reagiu ao que tinhas feito antes?<input type="range" min="1" max="5" value={personalization} onChange={e=>setPersonalization(Number(e.target.value))}/><em>{personalization}/5</em></label>
+      <label>{target?"Se estivesses a estudar para o exame, voltarias amanhã?":"Se fosses aluno hoje, achas que isto daria vontade de voltar no dia seguinte?"}<input type="range" min="1" max="5" value={returnIntent} onChange={e=>setReturnIntent(Number(e.target.value))}/><em>{returnIntent}/5</em></label>
+    </>}
+    <textarea placeholder={friends?"O que te fez gostar, hesitar ou ter vontade de sair?":"Comentário opcional"} value={comment} onChange={e=>setComment(e.target.value)}/>
+    <button onClick={save}>Enviar feedback</button>
+  </div>
+}
+
+function ReportButton({item,s,setS,compact=false}){
+  const [open,setOpen]=useState(false),[sent,setSent]=useState(false);
+  const categories=[
+    ["wrong","A resposta parece errada"],
+    ["unclear","Enunciado confuso"],
+    ["difficulty","Dificuldade desajustada"],
+    ["typo","Erro/typo"],
+    ["other","Outro problema"]
+  ];
+  function send(category,label){
+    const report={
+      id:`rep-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      itemId:item.id,templateId:item.templateId||null,generated:!!item.generated,
+      themeId:item.themeId,focus:item.focus||null,category,label,at:Date.now()
+    };
+    setS(prev=>({...prev,contentReports:[...(prev.contentReports||[]),report]}));
+    setSent(true);setOpen(false);
+  }
+  if(sent)return <div className="reportThanks">✓ Obrigado. Ficou sinalizado para revisão.</div>;
+  return <div className={"reportBox "+(compact?"compact":"")}>
+    <button className="reportToggle" onClick={()=>setOpen(!open)}>⚑ Reportar problema nesta pergunta</button>
+    {open&&<div className="reportChoices">{categories.map(([v,l])=><button key={v} onClick={()=>send(v,l)}>{l}</button>)}</div>}
+  </div>
+}
+
+function QualityPanel({s,setS,go}){
+  const snapshot=qualitySnapshot(s.contentReports||[]),rows=allFocusRows();
+  const gaps=rows.filter(r=>r.status==="gap"),covered=rows.filter(r=>r.status==="covered"),reports=s.contentReports||[];
+  return <Shell><Back go={go}/><p className="eyebrow">PAINEL INTERNO · QUALIDADE & BETA</p>
+    <h1>O conteúdo tem de ser auditável.</h1>
+    <button className="reviewShortcut" onClick={()=>go("review")}>Abrir workflow de revisão pedagógica →</button>
+    <p className="muted">Este ecrã é de desenvolvimento. Não faz parte da experiência normal do aluno numa versão pública.</p>
+    <div className="qaMetrics">
+      <div><span>Cobertura inicial</span><b>{snapshot.coverage.coveragePct}%</b><small>{snapshot.coverage.covered}/{snapshot.coverage.totalFocus} focos</small></div>
+      <div><span>Erros automáticos</span><b>{snapshot.errors}</b><small>devem ser 0</small></div>
+      <div><span>Validação matemática</span><b>{snapshot.mathValidation.failed}</b><small>falhas em {snapshot.mathValidation.samples} variantes-amostra</small></div>
+      <div><span>Reports</span><b>{snapshot.reports}</b><small>neste dispositivo</small></div>
+    </div>
+    <div className="notice"><b>Validação matemática ≠ revisão pedagógica</b><span>Uma variante automática só entra no motor se um validador independente do template recalcular a resposta e concordar com a opção marcada. Isso continua sem provar que o enunciado, dificuldade ou distratores são pedagogicamente bons — essa autoridade continua a ser do professor.</span></div>
+    <section className="qaSection mathValidationSection"><h3>Pipeline matemático dos geradores</h3>
+      <div className="mathValidationSummary"><div><span>Templates</span><b>{snapshot.mathValidation.templates}</b></div><div><span>Amostras</span><b>{snapshot.mathValidation.samples}</b></div><div><span>Validadas</span><b>{snapshot.mathValidation.passed}</b></div><div><span>Conflitos</span><b>{snapshot.mathValidation.failed}</b></div></div>
+      <p className="muted">O pipeline já está preparado para uma segunda validação externa. Se no futuro um motor como Wolfram discordar do nosso cálculo local, a questão passa automaticamente a bloqueada para revisão humana.</p>
+    </section>
+
+    <section className="qaSection"><h3>Validações automáticas</h3>
+      {snapshot.checks.length===0?<div className="qaOk">✓ Nenhum problema estrutural detetado no banco atual.</div>
+      :<div className="qaIssues">{snapshot.checks.slice(0,25).map((x,i)=><div className={x.severity} key={`${x.itemId}-${i}`}><b>{x.severity==="error"?"ERRO":"AVISO"}</b><span>{x.itemId}: {x.message}</span></div>)}</div>}
+    </section>
+
+    <section className="qaSection"><h3>Focos ainda sem conteúdo</h3>
+      {gaps.length===0?<div className="qaOk">✓ Todos os focos têm conteúdo curado ou gerador.</div>
+      :<div className="gapGrid">{gaps.slice(0,30).map(r=><div key={`${r.themeId}-${r.focus}`}><small>{r.year} · {r.theme}</small><b>{r.focus}</b></div>)}</div>}
+      {gaps.length>30&&<small className="moreRows">+ {gaps.length-30} focos adicionais</small>}
+    </section>
+
+    <section className="qaSection"><h3>Amostra de cobertura</h3><div className="coverageTable">
+      {covered.slice(0,25).map(r=><div className="coverageRow" key={`${r.themeId}-${r.focus}`}><div><small>{r.year} · {r.theme}</small><b>{r.focus}</b></div><span>{r.curatedCount} curadas</span><span>{r.generatorCount} geradores</span><span>{r.reviewedCount} revistas</span></div>)}
+    </div></section>
+
+    <section className="qaSection"><h3>Problemas sinalizados por utilizadores</h3>
+      {reports.length===0?<div className="qaEmpty">Ainda não existem reports neste dispositivo.</div>
+      :<div className="reportList">{[...reports].reverse().slice(0,30).map(r=><div key={r.id}><div><b>{r.label}</b><small>{r.itemId} · {theme(r.themeId)?.short}</small></div><span>{r.generated?"Variante gerada":"Questão curada"}</span></div>)}</div>}
+    </section>
+    <div className="notice"><b>Limite do protótipo</b><span>Os reports estão apenas em localStorage. Numa beta real têm de ir para backend/base de dados para compararmos vários alunos.</span></div>
+  </Shell>
+}
+
+function QuestionOptions({q,sel,fb,answer}){
+  return <div className="opts">{q.o.map((x,n)=><button key={`${q.id}-${n}`}
+    className={(sel===n?"sel ":"")+(fb&&n===q.a?"correct ":"")+(fb&&sel===n&&n!==q.a?"wrong":"")}
+    disabled={!!fb}
+    onClick={()=>answer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
+}
