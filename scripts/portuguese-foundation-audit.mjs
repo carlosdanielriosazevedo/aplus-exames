@@ -10,6 +10,7 @@ const pilot=packs[0];
 const allItems=packs.flatMap(pack=>pack.items);
 const latestDeclared=[...packs].reverse().find(pack=>Number.isInteger(pack.bankSizeAfterWave))?.bankSizeAfterWave||allItems.length;
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const portugueseLab=readFileSync(new URL("../app/components/PortugueseLabLazy.js",import.meta.url),"utf8");
 const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 
 assert.equal(packFiles.length,16,"o runtime atual de Português deve ter piloto + quinze vagas");
@@ -49,6 +50,6 @@ for(const year of ["10.º","11.º","12.º"])assert.ok(allItems.filter(item=>item
 
 const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
 const mcTotal=answerPositions.reduce((sum,n)=>sum+n,0); for(const n of answerPositions)assert.ok(n/mcTotal>=0.12&&n/mcTotal<=0.40,`posição correta demasiado concentrada: ${answerPositions.join("/")}`);
-assert.match(page,/Português em preparação/); assert.match(page,/preview==="portuguese"/); assert.match(page,/function PortugueseLab\(/);
+assert.match(page,/Português em preparação/); assert.match(page,/preview==="portuguese"/); assert.match(portugueseLab,/function PortugueseLab\(/);
 assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,16,"O runtime deve agregar piloto + quinze vagas."); assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 console.log(`✓ Portuguese 639 foundation: 16 pacotes · 310 itens · 16 competências escritas · distribuição por domínio ${JSON.stringify(domainCounts)} · release ainda bloqueado`);

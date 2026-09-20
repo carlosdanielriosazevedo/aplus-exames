@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const portugueseLab=readFileSync(new URL("../app/components/PortugueseLabLazy.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
 const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"utf8");
@@ -15,10 +16,10 @@ assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camad
 assert.match(prototypeModule,/buildPortuguesePassagePrototypeExam/u,"a camada de dados deve construir o mini-exame com o builder canónico");
 assert.match(page,/screen==="portugueseMiniExam"/u,"deve existir um ecrã interno dedicado ao mini-exame de Português");
 assert.match(page,/onExit=\{\(\)=>go\("portugueseLab"\)\}/u,"o mini-exame interno deve regressar ao laboratório de Português");
-assert.match(page,/Testar mini-exame com texto partilhado/u,"o laboratório interno deve dar acesso explícito ao mini-exame");
+assert.match(portugueseLab,/Testar mini-exame com texto partilhado/u,"o laboratório interno deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(page,/go\("portugueseMiniExam"\)/u,"a área de exames deve encaminhar Português para o mini-exame integrado");
-assert.match(page,/Os 120 itens permitem testar os fluxos/u,"a UI interna não pode continuar a declarar a contagem antiga de 60 itens");
+assert.match(portugueseLab,/Os 120 itens permitem testar os fluxos/u,"a UI interna não pode continuar a declarar a contagem antiga de 60 itens");
 
 assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null\}\)/u,"o componente deve aceitar saída opcional para integração no fluxo principal");
 assert.match(component,/Sair do mini-exame/u,"a revisão deve permitir sair do fluxo integrado");
