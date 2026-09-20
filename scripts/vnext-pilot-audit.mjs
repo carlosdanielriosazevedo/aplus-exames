@@ -10,6 +10,7 @@ import {CONSTRUCTED_RESPONSE_BANK,COMPLETION_RESPONSE_BANK} from "../app/lib/con
 import {curriculumSubtopicForItem} from "../app/data/curriculumVnext.js";
 import {RUNTIME_QUESTION_BANK,eligibleQuestions,questionById} from "../app/lib/engine.js";
 import {isEligibleForContext} from "../app/lib/quality.js";
+import {polishVnextItem} from "../app/lib/vnextPedagogicalPolish.js";
 
 const SPECS={
   "10-fun-dominio-imagem-zeros":{
@@ -44,7 +45,7 @@ for(const meta of VNEXT_PILOT_META){
     assert.equal(pilotStatus,"machine_prechecked");
     assert.equal(productionEligible,false);
     return original;
-  }),source.questions);
+  }),source.questions.map(question=>polishVnextItem(question)));
 }
 
 for(const q of VNEXT_PILOT_QUESTIONS){
