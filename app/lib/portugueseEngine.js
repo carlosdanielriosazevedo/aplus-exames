@@ -337,11 +337,26 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     if(chosen.responseType==="restricted-response")openCount++;
   }
 
+  const evidencePriorityIds=new Set(priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId));
+  const targetEvidenceObservations=[];
+  for(const item of eligible){
+    if(!evidencePriorityIds.has(item.competencyId))continue;
+    for(const criterion of item.rubric?.criteria||[]){
+      for(const observation of criterion.observations||[]){
+        const stored=progress?.competence?.[item.competencyId]?.rubricEvidenceByObservation?.[observation.id];
+        if(["partial","not-observed","unsure"].includes(stored?.status)){
+          targetEvidenceObservations.push({competencyId:item.competencyId,criterionId:criterion.id,observationId:observation.id,label:observation.label,status:stored.status});
+        }
+      }
+    }
+  }
+  const uniqueEvidenceObservations=[...new Map(targetEvidenceObservations.map(row=>[row.competencyId+":"+row.observationId,row])).values()].slice(0,4);
   return {
     items:selected,
     priorities,
     targetCompetencyIds:priorities.slice(0,4).map(row=>row.competencyId),
-    targetEvidenceCompetencyIds:priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId),
+    targetEvidenceCompetencyIds:[...evidencePriorityIds],
+    targetEvidenceObservations:uniqueEvidenceObservations,
     challengeSource:selected.every(item=>item.difficulty?.status==="editorial-provisional")?"editorial-provisional":"structural-proxy",
     recentItemsAvoided:selected.filter(item=>!recentIds.has(item.id)).length
   };
