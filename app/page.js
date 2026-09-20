@@ -9,11 +9,10 @@ import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculu
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./components/chrome";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
-const PortuguesePassageMiniExam=dynamic(()=>import("./components/PortuguesePassageMiniExam"),{ssr:false});
+const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress} from "./lib/subjectProgress";
 import "./portugues-mini-exame/passage-mini-exam.css";
-import {PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} from "./data/portuguesePassagePrototype";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
   certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
@@ -292,7 +291,7 @@ export default function App(){
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
   if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go}/>;
-  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExam exam={PORTUGUESE_PASSAGE_PROTOTYPE_EXAM} onExit={()=>go("portugueseLab")}/>;
+  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute onExit={()=>go("portugueseLab")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
