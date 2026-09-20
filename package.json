@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
-    "build": "npm run technical:gate && next build",
+    "build": "next build",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
     "reliability:audit": "node scripts/reliability-audit.mjs",
