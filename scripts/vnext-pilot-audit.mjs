@@ -43,10 +43,10 @@ for(const meta of VNEXT_PILOT_META){
   for(const [index,sourceQuestion] of source.questions.entries()){
     const actual=pilot[index];
     const {microcompetencyId,pilotStatus,productionEligible,...original}=actual;
-    assert.equal(microcompetencyId,spec.microcompetencyId,\`${meta.subtopicId}:${sourceQuestion.id}: microcompetencyId divergente\`);
-    assert.equal(pilotStatus,"machine_prechecked",\`${meta.subtopicId}:${sourceQuestion.id}: pilotStatus divergente\`);
-    assert.equal(productionEligible,false,\`${meta.subtopicId}:${sourceQuestion.id}: productionEligible divergente\`);
-    assert.deepEqual(original,polishVnextItem(sourceQuestion),\`${meta.subtopicId}:${sourceQuestion.id}: runtime não coincide com o fixture polido atual\`);
+    assert.equal(microcompetencyId,spec.microcompetencyId,`${meta.subtopicId}:${sourceQuestion.id}: microcompetencyId divergente`);
+    assert.equal(pilotStatus,"machine_prechecked",`${meta.subtopicId}:${sourceQuestion.id}: pilotStatus divergente`);
+    assert.equal(productionEligible,false,`${meta.subtopicId}:${sourceQuestion.id}: productionEligible divergente`);
+    assert.deepEqual(original,polishVnextItem(sourceQuestion),`${meta.subtopicId}:${sourceQuestion.id}: runtime não coincide com o fixture polido atual`);
   }
 }
 
