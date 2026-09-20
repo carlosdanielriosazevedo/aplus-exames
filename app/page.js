@@ -527,7 +527,7 @@ function SubjectManager({s,setS,go}){
   </Shell>;
 }
 
-const PortugueseLab=dynamic(()=>import("./components/PortugueseLab"),{ssr:false});
+const PortugueseLab=dynamic(()=>import("./components/PortugueseLabLazy"),{ssr:false});
 
 function suggestedExamTimingForYear(year,current){
   if(year==="10.º")return "twoYears";
