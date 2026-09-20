@@ -1,7 +1,5 @@
 import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
 import {scoreIaveStep,iaveSituationLabel,dependentStepCap,applyIaveGlobalPenalties,iaveGlobalPenalty} from "./iaveScoring.js";
-import {CONSTRUCTED_RESPONSE_BANK} from "./constructedResponseBank";
-
 export function responseType(question){return question?.response?.type||"choice"}
 export function isConstructedResponse(question){return !["choice","completion"].includes(responseType(question))}
 export function completionFilledCount(question,answer){
