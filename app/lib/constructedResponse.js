@@ -1,4 +1,6 @@
 import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
+export {CONSTRUCTED_RESPONSE_BANK} from "./constructedResponseBank";
+export {COMPLETION_RESPONSE_BANK} from "./completionResponseBank";
 import {scoreIaveStep,iaveSituationLabel,dependentStepCap,applyIaveGlobalPenalties,iaveGlobalPenalty} from "./iaveScoring.js";
 export function responseType(question){return question?.response?.type||"choice"}
 export function isConstructedResponse(question){return !["choice","completion"].includes(responseType(question))}
@@ -479,29 +481,3 @@ export function examScoreLabel(result){
   const lower=String(result.score20).replace(".",",");
   return result.reviewRequired?"Avaliação incompleta":`${lower}/20`;
 }
-import {CONSTRUCTED_RESPONSE_BANK} from "./constructedResponseBank";
-import {COMPLETION_RESPONSE_BANK} from "./completionResponseBank";
-
-
-function normalizedInput(value){return String(value??"").trim().replace(/−/g,"-").replace(/\s+/g,"").replace(",", ".")}
-function normalizedExpression(value){return normalizedInput(value).toLowerCase().replace(/′/g,"'").replace(/²/g,"^2").replace(/³/g,"^3").replace(/[×·]/g,"*").replace(/:/g,"/")}
-function normalizedWords(value){
-  const base=String(value??"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[−–—]/g,"-").replace(/\s+/g," ").trim();
-  const numberWords={zero:"0",um:"1",uma:"1",dois:"2",duas:"2",tres:"3",quatro:"4",cinco:"5",seis:"6",sete:"7",oito:"8",nove:"9",dez:"10"};
-  return base.replace(/\b(zero|um|uma|dois|duas|tres|quatro|cinco|seis|sete|oito|nove|dez)\b/g,word=>numberWords[word]||word);
-}
-function escapeRegex(value){return String(value).replace(/[.*+?^$()|[\]\\{}]/g,"\\$&")}
-function conceptPresent(input,candidate){
-  const concept=normalizedWords(candidate);
-  if(!concept)return false;
-  if(new RegExp("(?:^|\\b)"+escapeRegex(concept)+"(?:\\b|$)","u").test(input))return true;
-  if(concept.endsWith("r")&&concept.length>=6){
-    const stem=concept.slice(0,-1);
-    return new RegExp("\\b"+escapeRegex(stem)+"[a-z]*\\b","u").test(input);
-  }
-  return false;
-}
-function conceptGroupsMatch(spec,input){
-  const groups=Array.isArray(spec?.conceptGroups)?spec.conceptGroups:[];
-  if(!groups.length||!input)return false;
-  const allCandidates=groups.flat().map(normalizedWords).filter(Boolean);
