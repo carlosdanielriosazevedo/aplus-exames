@@ -116,9 +116,6 @@ import {
 } from "../lib/constructedResponse";
 
 
-const ReviewerDashboard=dynamic(()=>import("./ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
-const PortuguesePassageMiniExam=dynamic(()=>import("./PortuguesePassageMiniExam"),{ssr:false});
-
 function subjectById(id){return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="math-a");}
 function normalizeSubjectWorkspace(state){const selected=[...new Set((state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id)))];if(!selected.length)selected.push("math-a");const active=selected.includes(state.activeSubjectId)?state.activeSubjectId:selected[0];return migrateSubjectProgress({...state,selectedSubjectIds:selected,activeSubjectId:active});}
 function StudentTop({s,go,children}){
