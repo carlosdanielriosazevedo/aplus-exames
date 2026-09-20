@@ -24,7 +24,8 @@ const SPECIAL_OBSERVATIONS={
   "PT639-FND-012:coerencia":["Organiza as ideias com progressão.","Usa mecanismos de coesão entre frases e parágrafos.","Constrói parágrafos com funções reconhecíveis."],
   "PT639-FND-012:argumentacao":["Apresenta uma posição clara.","Desenvolve argumentos pertinentes.","Inclui pelo menos um exemplo que apoia a posição."],
   "PT639-FND-012:correcao-linguistica":["Usa vocabulário adequado e preciso.","Constrói frases sintaticamente claras.","Respeita a ortografia.","Usa a pontuação de forma funcional."],
-  "PT639-FND-309:correcao-linguistica":["Usa vocabulário adequado e preciso.","Constrói frases sintaticamente corretas.","Respeita a ortografia e a pontuação de forma funcional."]
+  "PT639-FND-309:correcao-linguistica":["Usa vocabulário adequado e preciso.","Constrói frases sintaticamente corretas.","Respeita a ortografia e a pontuação de forma funcional."],
+  "PT639-FND-310:correcao-linguistica":["Usa vocabulário adequado e preciso.","Constrói frases sintaticamente corretas.","Respeita a ortografia.","Usa a pontuação de forma funcional."]
 };
 
 function genericObservations(item,criterion){
