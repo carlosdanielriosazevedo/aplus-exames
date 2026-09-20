@@ -291,8 +291,14 @@ export function portugueseCompetencePriorities(items,progress,{domain=null}={}){
     const correct=evidence.correct||0;
     const accuracy=attempts?correct/attempts:null;
     const evidenceGap=1-Math.min(attempts/3,1);
-    const need=accuracy===null ? .7 : ((1-accuracy)*.8+evidenceGap*.2);
-    return {competencyId:id,attempts,correct,accuracy,need,pendingRubrics:evidence.pendingRubrics||0};
+    const pendingRubrics=evidence.pendingRubrics||0;
+    const rubricReviews=evidence.rubricReviews||0;
+    const rubricNeedsReview=evidence.rubricNeedsReview||0;
+    const reviewRate=rubricReviews?Math.min(rubricNeedsReview/(rubricReviews*4),1):0;
+    const rubricNeed=Math.min(1,reviewRate*.75+(pendingRubrics>0?.25:0));
+    const baseNeed=accuracy===null ? .7 : ((1-accuracy)*.8+evidenceGap*.2);
+    const need=Math.min(1,baseNeed*.72+rubricNeed*.28);
+    return {competencyId:id,attempts,correct,accuracy,need,pendingRubrics,rubricReviews,rubricNeedsReview,rubricNeed};
   }).sort((a,b)=>b.need-a.need||a.attempts-b.attempts||a.competencyId.localeCompare(b.competencyId));
 }
 
@@ -335,6 +341,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     items:selected,
     priorities,
     targetCompetencyIds:priorities.slice(0,4).map(row=>row.competencyId),
+    targetEvidenceCompetencyIds:priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId),
     challengeSource:selected.every(item=>item.difficulty?.status==="editorial-provisional")?"editorial-provisional":"structural-proxy",
     recentItemsAvoided:selected.filter(item=>!recentIds.has(item.id)).length
   };
