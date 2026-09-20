@@ -19,7 +19,7 @@ assert.match(page,/onExit=\{\(\)=>go\("portugueseLab"\)\}/u,"o mini-exame intern
 assert.match(portugueseLab,/Testar mini-exame com texto partilhado/u,"o laboratório interno deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(page,/go\("portugueseMiniExam"\)/u,"a área de exames deve encaminhar Português para o mini-exame integrado");
-assert.match(page,/Os 120 itens permitem testar os fluxos/u,"a UI interna não pode continuar a declarar a contagem antiga de 60 itens");
+assert.match(portugueseLab,/Os 120 itens permitem testar os fluxos/u,"a UI interna não pode continuar a declarar a contagem antiga de 60 itens");
 
 assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null\}\)/u,"o componente deve aceitar saída opcional para integração no fluxo principal");
 assert.match(component,/Sair do mini-exame/u,"a revisão deve permitir sair do fluxo integrado");
