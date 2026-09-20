@@ -31,7 +31,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "o conjunto dos zeros apenas."
     ],
     "a": 0,
-    "sol": "O domínio reúne os valores que podem ser usados como argumentos.",
+    "sol": "O domínio reúne os valores que podem ser usados como argumentos. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir domínio com imagem.",
     "contexts": [
       "mission",
@@ -61,7 +61,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "o contradomínio sempre por definição."
     ],
     "a": 1,
-    "sol": "A imagem contém as saídas que a função realmente assume.",
+    "sol": "A imagem contém as saídas que a função realmente assume. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir imagem com domínio ou contradomínio.",
     "contexts": [
       "mission",
@@ -91,7 +91,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "f(x)=1."
     ],
     "a": 2,
-    "sol": "Os zeros são as preimagens de 0.",
+    "sol": "Os zeros são as preimagens de 0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “f(x)=0.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode achar que zero da função significa apenas x=0.",
     "contexts": [
       "mission",
@@ -121,7 +121,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "3"
     ],
     "a": 3,
-    "sol": "x−3=0 => x=3.",
+    "sol": "x−3=0 ⇒ x=3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “3”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode trocar sinal.",
     "contexts": [
       "mission",
@@ -151,7 +151,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "4"
     ],
     "a": 0,
-    "sol": "2x+4=0 => x=−2.",
+    "sol": "2x+4=0 ⇒ x=−2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “−2”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode dividir incorretamente.",
     "contexts": [
       "mission",
@@ -181,7 +181,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "tem sempre máximo."
     ],
     "a": 1,
-    "sol": "Nesses pontos y=0.",
+    "sol": "Nesses pontos y=0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “interseta ou toca o eixo Ox.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir eixo Ox com Oy.",
     "contexts": [
       "mission",
@@ -211,7 +211,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "apenas 4."
     ],
     "a": 2,
-    "sol": "As abcissas das interseções com Ox são os zeros.",
+    "sol": "As abcissas das interseções com Ox são os zeros. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode usar ordenadas em vez de abcissas.",
     "contexts": [
       "mission",
@@ -241,7 +241,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "acima do eixo Ox."
     ],
     "a": 3,
-    "sol": "f(x)>0 significa ordenada positiva.",
+    "sol": "f(x)>0 significa ordenada positiva. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “acima do eixo Ox.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode associar positividade a x>0.",
     "contexts": [
       "mission",
@@ -271,7 +271,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "sempre no terceiro quadrante."
     ],
     "a": 0,
-    "sol": "f(x)<0 corresponde a ordenada negativa.",
+    "sol": "f(x)<0 corresponde a ordenada negativa. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “abaixo do eixo Ox.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir sinal de x com sinal de f(x).",
     "contexts": [
       "mission",
@@ -301,7 +301,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "x<0"
     ],
     "a": 1,
-    "sol": "x−5>0 => x>5.",
+    "sol": "x−5>0 ⇒ x>5. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “x>5”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode inverter desigualdade sem razão.",
     "contexts": [
       "mission",
@@ -331,7 +331,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "x>0"
     ],
     "a": 2,
-    "sol": "2−x>0 => x<2.",
+    "sol": "2−x>0 ⇒ x<2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “x<2”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer o sinal negativo de x.",
     "contexts": [
       "mission",
@@ -361,7 +361,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "x<−2"
     ],
     "a": 3,
-    "sol": "3x+6<0 => x<−2.",
+    "sol": "3x+6<0 ⇒ x<−2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “x<−2”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode trocar o sinal do zero.",
     "contexts": [
       "mission",
@@ -391,7 +391,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−∞,0]."
     ],
     "a": 0,
-    "sol": "Não se pode dividir por zero.",
+    "sol": "Não se pode dividir por zero. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “R\\{0}.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer a restrição do denominador.",
     "contexts": [
       "mission",
@@ -421,7 +421,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[2,+∞[."
     ],
     "a": 1,
-    "sol": "x−2 não pode ser zero, logo x≠2.",
+    "sol": "x−2 não pode ser zero, logo x≠2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “R\\{2}.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode resolver x−2=0 com sinal errado.",
     "contexts": [
       "mission",
@@ -451,7 +451,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R\\{0}."
     ],
     "a": 2,
-    "sol": "A raiz quadrada real exige x≥0.",
+    "sol": "A raiz quadrada real exige x≥0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[0,+∞[.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode pensar que raiz quadrada aceita qualquer real.",
     "contexts": [
       "mission",
@@ -481,7 +481,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[3,+∞[."
     ],
     "a": 3,
-    "sol": "x−3≥0 => x≥3.",
+    "sol": "x−3≥0 ⇒ x≥3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[3,+∞[.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode impor apenas x≠3.",
     "contexts": [
       "mission",
@@ -511,7 +511,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R."
     ],
     "a": 0,
-    "sol": "5−x≥0 => x≤5.",
+    "sol": "5−x≥0 ⇒ x≤5. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “]−∞,5].”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode inverter a desigualdade de forma errada.",
     "contexts": [
       "mission",
@@ -541,7 +541,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−∞,0[."
     ],
     "a": 1,
-    "sol": "É preciso x≥0 para a raiz e, por estar no denominador, √x≠0; logo x>0.",
+    "sol": "É preciso x≥0 para a raiz e, por estar no denominador, √x≠0; logo x>0. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode permitir x=0.",
     "contexts": [
       "mission",
@@ -571,7 +571,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "a função vale zero fora desse intervalo."
     ],
     "a": 2,
-    "sol": "O domínio refere-se às entradas possíveis.",
+    "sol": "O domínio refere-se às entradas possíveis. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir domínio com imagem ou zeros.",
     "contexts": [
       "mission",
@@ -601,7 +601,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "os valores assumidos por f ficam entre 1 e 4."
     ],
     "a": 3,
-    "sol": "Imagem refere-se às saídas realmente atingidas.",
+    "sol": "Imagem refere-se às saídas realmente atingidas. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode trocar domínio e imagem.",
     "contexts": [
       "mission",
@@ -631,7 +631,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R\\{0}."
     ],
     "a": 0,
-    "sol": "Quadrados reais são não negativos e qualquer valor não negativo é atingido.",
+    "sol": "Quadrados reais são não negativos e qualquer valor não negativo é atingido. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode achar que a imagem é R.",
     "contexts": [
       "mission",
@@ -661,7 +661,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[−2,+∞[."
     ],
     "a": 1,
-    "sol": "Como x²≥0, x²+2≥2, e 2 é atingido em x=0.",
+    "sol": "Como x²≥0, x²+2≥2, e 2 é atingido em x=0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[2,+∞[.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode deslocar a imagem para o lado errado.",
     "contexts": [
       "mission",
@@ -691,7 +691,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[0,5]."
     ],
     "a": 2,
-    "sol": "−x²≤0, logo f(x)≤5, e 5 é atingido em x=0.",
+    "sol": "−x²≤0, logo f(x)≤5, e 5 é atingido em x=0. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir máximo com mínimo.",
     "contexts": [
       "mission",
@@ -721,7 +721,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[0,+∞[."
     ],
     "a": 3,
-    "sol": "O valor absoluto nunca é negativo e assume todos os valores não negativos.",
+    "sol": "O valor absoluto nunca é negativo e assume todos os valores não negativos. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode tratar |x| como x.",
     "contexts": [
       "mission",
@@ -751,7 +751,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "apenas 2."
     ],
     "a": 0,
-    "sol": "x²−4=0 => x²=4 => x=±2.",
+    "sol": "x²−4=0 ⇒ x²=4 ⇒ x=±2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “−2 e 2.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer uma das raízes.",
     "contexts": [
       "mission",
@@ -781,7 +781,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "−1 e −3."
     ],
     "a": 1,
-    "sol": "Cada fator pode ser zero: x=1 ou x=−3.",
+    "sol": "Cada fator pode ser zero: x=1 ou x=−3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “1 e −3.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode trocar sinais dos fatores.",
     "contexts": [
       "mission",
@@ -811,7 +811,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "0 apenas."
     ],
     "a": 2,
-    "sol": "Produto zero quando x=0 ou x−5=0.",
+    "sol": "Produto zero quando x=0 ou x−5=0. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “0 e 5.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer o fator x.",
     "contexts": [
       "mission",
@@ -841,7 +841,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "não interseta o eixo Ox."
     ],
     "a": 3,
-    "sol": "Não ter zeros significa não ter pontos com y=0; pode estar acima, abaixo ou em regiões separadas.",
+    "sol": "Não ter zeros significa não ter pontos com y=0; pode estar acima, abaixo ou em regiões separadas. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode concluir sinal positivo sem dados suficientes.",
     "contexts": [
       "mission",
@@ -871,7 +871,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "é sempre crescente."
     ],
     "a": 0,
-    "sol": "x=2 é zero e o sinal muda de positivo para negativo.",
+    "sol": "x=2 é zero e o sinal muda de positivo para negativo. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir mudança de sinal com monotonia.",
     "contexts": [
       "mission",
@@ -901,7 +901,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "deixar de ser função."
     ],
     "a": 1,
-    "sol": "Um zero de multiplicidade par, por exemplo, pode tocar sem mudar de sinal.",
+    "sol": "Um zero de multiplicidade par, por exemplo, pode tocar sem mudar de sinal. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode achar que todo zero implica mudança de sinal.",
     "contexts": [
       "mission",
@@ -931,7 +931,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−1,+∞[."
     ],
     "a": 2,
-    "sol": "Entre os zeros −1 e 2, os fatores têm sinais opostos, logo o produto é negativo.",
+    "sol": "Entre os zeros −1 e 2, os fatores têm sinais opostos, logo o produto é negativo. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode não fazer quadro de sinais.",
     "contexts": [
       "mission",
@@ -961,7 +961,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−∞,−1[∪]2,+∞[."
     ],
     "a": 3,
-    "sol": "Fora dos zeros, os fatores têm o mesmo sinal.",
+    "sol": "Fora dos zeros, os fatores têm o mesmo sinal. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode trocar interior e exterior.",
     "contexts": [
       "mission",
@@ -991,7 +991,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−2,+∞[."
     ],
     "a": 0,
-    "sol": "(x−1)(x+2) é negativo entre −2 e 1; o sinal menos torna f positiva aí.",
+    "sol": "(x−1)(x+2) é negativo entre −2 e 1; o sinal menos torna f positiva aí. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer o sinal global negativo.",
     "contexts": [
       "mission",
@@ -1021,7 +1021,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "Não se pode dizer que −1 e 2 pertençam ao domínio."
     ],
     "a": 1,
-    "sol": "Ambos pertencem ao domínio e foram explicitamente dados como zeros.",
+    "sol": "Ambos pertencem ao domínio e foram explicitamente dados como zeros. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir quantidade de zeros com extensão do domínio.",
     "contexts": [
       "mission",
@@ -1051,7 +1051,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "Só se for negativo."
     ],
     "a": 2,
-    "sol": "Um zero é, por definição, um elemento do domínio onde f(x)=0.",
+    "sol": "Um zero é, por definição, um elemento do domínio onde f(x)=0. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode resolver uma equação sem verificar se a solução pertence ao domínio.",
     "contexts": [
       "mission",
@@ -1081,7 +1081,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "x=−1 apenas."
     ],
     "a": 3,
-    "sol": "O numerador zera em ±1, mas x=1 não pertence ao domínio; resta x=−1.",
+    "sol": "O numerador zera em ±1, mas x=1 não pertence ao domínio; resta x=−1. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode aceitar raiz anulada pelo denominador.",
     "contexts": [
       "mission",
@@ -1111,7 +1111,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]−2,+∞[."
     ],
     "a": 0,
-    "sol": "É necessário x+2≥0 e x≠3.",
+    "sol": "É necessário x+2≥0 e x≠3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[−2,+∞[\\{3}.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer uma das duas restrições.",
     "contexts": [
       "mission",
@@ -1141,7 +1141,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R\\{4}."
     ],
     "a": 1,
-    "sol": "É preciso 4−x>0 porque a raiz está no denominador; logo x<4.",
+    "sol": "É preciso 4−x>0 porque a raiz está no denominador; logo x<4. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode permitir x=4 ou inverter desigualdade.",
     "contexts": [
       "mission",
@@ -1171,7 +1171,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[−3,3]."
     ],
     "a": 2,
-    "sol": "x²−9=0 em x=±3, que devem ser excluídos.",
+    "sol": "x²−9=0 em x=±3, que devem ser excluídos. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “R\\{−3,3}.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer a raiz negativa.",
     "contexts": [
       "mission",
@@ -1201,7 +1201,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[−3,3]."
     ],
     "a": 3,
-    "sol": "9−x²≥0 => x²≤9 => −3≤x≤3.",
+    "sol": "9−x²≥0 ⇒ x²≤9 ⇒ −3≤x≤3. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[−3,3].”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode aceitar apenas x≥0 ou excluir extremos.",
     "contexts": [
       "mission",
@@ -1231,7 +1231,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "]2,+∞[."
     ],
     "a": 0,
-    "sol": "√x≥0 e vale 0 em x=0, logo f≥2 e 2 é atingido.",
+    "sol": "√x≥0 e vale 0 em x=0, logo f≥2 e 2 é atingido. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer a translação vertical.",
     "contexts": [
       "mission",
@@ -1261,7 +1261,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "[0,3]."
     ],
     "a": 1,
-    "sol": "|x|≥0, então 3−|x|≤3 e pode descer sem limite.",
+    "sol": "|x|≥0, então 3−|x|≤3 e pode descer sem limite. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode assumir imagem não negativa por causa do módulo.",
     "contexts": [
       "mission",
@@ -1291,7 +1291,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "a função é crescente."
     ],
     "a": 2,
-    "sol": "A imagem não contém valores acima de 5 e contém 5.",
+    "sol": "A imagem não contém valores acima de 5 e contém 5. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir extremo da imagem com extremo do domínio.",
     "contexts": [
       "mission",
@@ -1321,7 +1321,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "um valor mínimo assumido pela função."
     ],
     "a": 3,
-    "sol": "É o menor valor pertencente à imagem.",
+    "sol": "É o menor valor pertencente à imagem. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “um valor mínimo assumido pela função.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir valor mínimo com zero.",
     "contexts": [
       "mission",
@@ -1351,7 +1351,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R."
     ],
     "a": 0,
-    "sol": "x²−1≤0 => x²≤1 => −1≤x≤1.",
+    "sol": "x²−1≤0 ⇒ x²≤1 ⇒ −1≤x≤1. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[−1,1].”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode trocar sinal ou excluir os zeros.",
     "contexts": [
       "mission",
@@ -1381,7 +1381,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R\\{0}."
     ],
     "a": 1,
-    "sol": "x²>4 => |x|>2.",
+    "sol": "x²>4 ⇒ |x|>2. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “]−∞,−2[∪]2,+∞[.”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode escolher o intervalo entre as raízes.",
     "contexts": [
       "mission",
@@ -1411,7 +1411,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "R."
     ],
     "a": 2,
-    "sol": "−x²+9≥0 => x²≤9.",
+    "sol": "−x²+9≥0 ⇒ x²≤9. Passo-chave: identifica a propriedade ou definição central do enunciado, aplica-a aos dados e confirma que o resultado obtido satisfaz o que foi pedido. A opção obtida deve coincidir com “[−3,3].”. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode esquecer que a parábola abre para baixo.",
     "contexts": [
       "mission",
@@ -1441,7 +1441,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "Não."
     ],
     "a": 3,
-    "sol": "Conhecer domínio e imagem não diz em que entrada o máximo 7 ocorre.",
+    "sol": "Conhecer domínio e imagem não diz em que entrada o máximo 7 ocorre. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode emparelhar extremos sem justificação.",
     "contexts": [
       "mission",
@@ -1471,7 +1471,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "a imagem é apenas {0}."
     ],
     "a": 0,
-    "sol": "0 estar na imagem significa existir algum x do domínio com f(x)=0.",
+    "sol": "0 estar na imagem significa existir algum x do domínio com f(x)=0. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode confundir entrada zero com saída zero.",
     "contexts": [
       "mission",
@@ -1501,7 +1501,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "Domínio [−4,0] e zero t=−4."
     ],
     "a": 1,
-    "sol": "20−5t=0 dá t=4; fisicamente considera-se desde t=0 até esse instante.",
+    "sol": "20−5t=0 dá t=4; fisicamente considera-se desde t=0 até esse instante. Porquê: uma propriedade da função tem de ser coerente ao mesmo tempo com a expressão, o domínio e o gráfico; a opção correta é a que respeita essas condições em conjunto.",
     "hyp": "Pode ignorar o contexto ao definir o domínio.",
     "contexts": [
       "mission",
@@ -1531,7 +1531,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "apenas um comprimento."
     ],
     "a": 0,
-    "sol": "No plano, um vetor tem componentes horizontal e vertical.",
+    "sol": "No plano, um vetor tem componentes horizontal e vertical. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir ponto com comprimento escalar.",
     "contexts": [
       "mission",
@@ -1561,7 +1561,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "ponto médio de A e B."
     ],
     "a": 1,
-    "sol": "AB=(xB−xA,yB−yA).",
+    "sol": "AB=(xB−xA,yB−yA). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “B−A coordenada a coordenada.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode inverter a ordem.",
     "contexts": [
       "mission",
@@ -1591,7 +1591,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(2,3)."
     ],
     "a": 2,
-    "sol": "(4−1,6−2)=(3,4).",
+    "sol": "(4−1,6−2)=(3,4). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(3,4).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar coordenadas ou inverter o sentido.",
     "contexts": [
       "mission",
@@ -1621,7 +1621,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(3,−4)."
     ],
     "a": 3,
-    "sol": "(1−(−2),−1−3)=(3,−4).",
+    "sol": "(1−(−2),−1−3)=(3,−4). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(3,−4).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode errar sinais.",
     "contexts": [
       "mission",
@@ -1651,7 +1651,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "ab."
     ],
     "a": 0,
-    "sol": "A norma é o comprimento do vetor.",
+    "sol": "A norma é o comprimento do vetor. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “√(a²+b²).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir norma com soma das componentes.",
     "contexts": [
       "mission",
@@ -1681,7 +1681,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "25"
     ],
     "a": 1,
-    "sol": "√(9+16)=5.",
+    "sol": "√(9+16)=5. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “5”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar 3+4 ou esquecer a raiz.",
     "contexts": [
       "mission",
@@ -1711,7 +1711,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "169"
     ],
     "a": 2,
-    "sol": "√(25+144)=13.",
+    "sol": "√(25+144)=13. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “13”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode deixar o sinal negativo influenciar o quadrado.",
     "contexts": [
       "mission",
@@ -1741,7 +1741,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(0,0)."
     ],
     "a": 3,
-    "sol": "Tem ambas as componentes nulas.",
+    "sol": "Tem ambas as componentes nulas. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(0,0).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir com vetor unitário.",
     "contexts": [
       "mission",
@@ -1771,7 +1771,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(a,−b)."
     ],
     "a": 0,
-    "sol": "O vetor oposto tem mesma norma e direção, mas sentido contrário.",
+    "sol": "O vetor oposto tem mesma norma e direção, mas sentido contrário. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode mudar só uma componente.",
     "contexts": [
       "mission",
@@ -1801,7 +1801,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(7,−2)."
     ],
     "a": 1,
-    "sol": "Mudam os sinais das duas componentes.",
+    "sol": "Mudam os sinais das duas componentes. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(−2,7).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode trocar coordenadas em vez de sinais.",
     "contexts": [
       "mission",
@@ -1831,7 +1831,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(a+d,b+c)."
     ],
     "a": 2,
-    "sol": "Soma-se componente a componente.",
+    "sol": "Soma-se componente a componente. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(a+c,b+d).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode misturar componentes.",
     "contexts": [
       "mission",
@@ -1861,7 +1861,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(1,7)."
     ],
     "a": 3,
-    "sol": "(2−1,3+4)=(1,7).",
+    "sol": "(2−1,3+4)=(1,7). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(1,7).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode multiplicar em vez de somar.",
     "contexts": [
       "mission",
@@ -1891,7 +1891,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(2,3)."
     ],
     "a": 0,
-    "sol": "(5−3,−2−1)=(2,−3).",
+    "sol": "(5−3,−2−1)=(2,−3). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(2,−3).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode esquecer subtrair a segunda componente.",
     "contexts": [
       "mission",
@@ -1921,7 +1921,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(kb,ka)."
     ],
     "a": 1,
-    "sol": "A multiplicação escalar atua em todas as componentes.",
+    "sol": "A multiplicação escalar atua em todas as componentes. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir com translação.",
     "contexts": [
       "mission",
@@ -1951,7 +1951,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(3,−1)."
     ],
     "a": 2,
-    "sol": "Multiplicam-se ambas as componentes por 3.",
+    "sol": "Multiplicam-se ambas as componentes por 3. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode errar o sinal.",
     "contexts": [
       "mission",
@@ -1981,7 +1981,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(6,−8)."
     ],
     "a": 3,
-    "sol": "−2×−3=6 e −2×4=−8.",
+    "sol": "−2×−3=6 e −2×4=−8. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(6,−8).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode perder um dos sinais.",
     "contexts": [
       "mission",
@@ -2011,7 +2011,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "não relacionados."
     ],
     "a": 0,
-    "sol": "Um múltiplo escalar positivo preserva direção e sentido.",
+    "sol": "Um múltiplo escalar positivo preserva direção e sentido. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir colinearidade com igualdade.",
     "contexts": [
       "mission",
@@ -2041,7 +2041,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "sentido igual."
     ],
     "a": 1,
-    "sol": "Múltiplo negativo inverte o sentido.",
+    "sol": "Múltiplo negativo inverte o sentido. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “mesma direção e sentidos opostos.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode ignorar o sinal do escalar.",
     "contexts": [
       "mission",
@@ -2071,7 +2071,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "dependente do quadrante."
     ],
     "a": 2,
-    "sol": "Por definição, vetor unitário tem comprimento 1.",
+    "sol": "Por definição, vetor unitário tem comprimento 1. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir com vetor nulo.",
     "contexts": [
       "mission",
@@ -2101,7 +2101,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(1,0)."
     ],
     "a": 3,
-    "sol": "||(1,0)||=1.",
+    "sol": "||(1,0)||=1. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(1,0).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode escolher vetor com componentes pequenas sem calcular norma.",
     "contexts": [
       "mission",
@@ -2131,7 +2131,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "k=1."
     ],
     "a": 0,
-    "sol": "k²+16=25 => k²=9 => k=±3.",
+    "sol": "k²+16=25 ⇒ k²=9 ⇒ k=±3. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “k=−3 ou 3.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode esquecer uma solução.",
     "contexts": [
       "mission",
@@ -2161,7 +2161,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "16"
     ],
     "a": 1,
-    "sol": "36+k²=100 => k²=64 => k=8.",
+    "sol": "36+k²=100 ⇒ k²=64 ⇒ k=8. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “8”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode esquecer a condição k>0.",
     "contexts": [
       "mission",
@@ -2191,7 +2191,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "5"
     ],
     "a": 2,
-    "sol": "2+x=5 => x=3.",
+    "sol": "2+x=5 ⇒ x=3. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “3”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode usar a segunda componente para x.",
     "contexts": [
       "mission",
@@ -2221,7 +2221,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(3,−4)."
     ],
     "a": 3,
-    "sol": "Divide-se cada componente por 2.",
+    "sol": "Divide-se cada componente por 2. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(3,−4).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode multiplicar novamente.",
     "contexts": [
       "mission",
@@ -2251,7 +2251,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(−1,3)."
     ],
     "a": 0,
-    "sol": "2u=(2,4); 2u−v=(−1,5).",
+    "sol": "2u=(2,4); 2u−v=(−1,5). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(−1,5).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode fazer v−2u ou esquecer multiplicar.",
     "contexts": [
       "mission",
@@ -2281,7 +2281,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(0,5)."
     ],
     "a": 1,
-    "sol": "2v=(−4,6); soma=(0,7).",
+    "sol": "2v=(−4,6); soma=(0,7). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(0,7).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode multiplicar apenas uma componente.",
     "contexts": [
       "mission",
@@ -2311,7 +2311,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "as primeiras componentes são iguais."
     ],
     "a": 2,
-    "sol": "Proporcionalidade das componentes caracteriza direção comum.",
+    "sol": "Proporcionalidade das componentes caracteriza direção comum. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir mesma norma com mesma direção.",
     "contexts": [
       "mission",
@@ -2341,7 +2341,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "colineares."
     ],
     "a": 3,
-    "sol": "v=2u.",
+    "sol": "v=2u. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “colineares.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode olhar apenas para componentes diferentes.",
     "contexts": [
       "mission",
@@ -2371,7 +2371,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "sentido igual."
     ],
     "a": 0,
-    "sol": "v=−2u.",
+    "sol": "v=−2u. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “mesma direção e sentidos opostos.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode ignorar o fator negativo.",
     "contexts": [
       "mission",
@@ -2401,7 +2401,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "Só se forem pontos."
     ],
     "a": 1,
-    "sol": "4/2=2, mas 5/3≠2.",
+    "sol": "4/2=2, mas 5/3≠2. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “Não.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode verificar apenas uma componente.",
     "contexts": [
       "mission",
@@ -2431,7 +2431,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "12"
     ],
     "a": 2,
-    "sol": "(k,6)=2(2,3), logo k=4.",
+    "sol": "(k,6)=2(2,3), logo k=4. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “4”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode usar 6/2 em vez da razão correta.",
     "contexts": [
       "mission",
@@ -2461,7 +2461,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "−6"
     ],
     "a": 3,
-    "sol": "4=(−2)(−2), portanto k=(−2)×3=−6.",
+    "sol": "4=(−2)(−2), portanto k=(−2)×3=−6. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “−6”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode perder o sinal.",
     "contexts": [
       "mission",
@@ -2491,7 +2491,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "OP=(y,x)."
     ],
     "a": 0,
-    "sol": "Da origem ao ponto, as componentes coincidem com as coordenadas de P.",
+    "sol": "Da origem ao ponto, as componentes coincidem com as coordenadas de P. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode inverter o sentido.",
     "contexts": [
       "mission",
@@ -2521,7 +2521,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(−5,3)."
     ],
     "a": 1,
-    "sol": "As componentes do vetor posição são as coordenadas do ponto.",
+    "sol": "As componentes do vetor posição são as coordenadas do ponto. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode trocar componentes.",
     "contexts": [
       "mission",
@@ -2551,7 +2551,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(−1,5)."
     ],
     "a": 2,
-    "sol": "OB=OA+AB=(5,−3).",
+    "sol": "OB=OA+AB=(5,−3). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(5,−3).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode subtrair em vez de somar.",
     "contexts": [
       "mission",
@@ -2581,7 +2581,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "relação de Chasles."
     ],
     "a": 3,
-    "sol": "A soma de deslocamentos consecutivos dá o deslocamento total.",
+    "sol": "A soma de deslocamentos consecutivos dá o deslocamento total. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode associar soma vetorial a outro teorema.",
     "contexts": [
       "mission",
@@ -2611,7 +2611,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(5,4)."
     ],
     "a": 0,
-    "sol": "AB+BC=AC=(−1−1,3−2)=(−2,1).",
+    "sol": "AB+BC=AC=(−1−1,3−2)=(−2,1). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(−2,1).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode calcular dois vetores e somar com erro em vez de usar Chasles.",
     "contexts": [
       "mission",
@@ -2641,7 +2641,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(−2,3)."
     ],
     "a": 1,
-    "sol": "AB+BC=AC => BC=AC−AB=(−4,3).",
+    "sol": "AB+BC=AC ⇒ BC=AC−AB=(−4,3). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(−4,3).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode fazer AB−AC.",
     "contexts": [
       "mission",
@@ -2671,7 +2671,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "100."
     ],
     "a": 2,
-    "sol": "||2u||=2||u||=20.",
+    "sol": "||2u||=2||u||=20. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “20.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode elevar ao quadrado o fator.",
     "contexts": [
       "mission",
@@ -2701,7 +2701,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "21."
     ],
     "a": 3,
-    "sol": "Norma usa o módulo do escalar: 3×7=21.",
+    "sol": "Norma usa o módulo do escalar: 3×7=21. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “21.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode dar norma negativa.",
     "contexts": [
       "mission",
@@ -2731,7 +2731,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "u e v são perpendiculares."
     ],
     "a": 0,
-    "sol": "A soma nula significa que os vetores são opostos.",
+    "sol": "A soma nula significa que os vetores são opostos. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode concluir que ambos têm de ser zero.",
     "contexts": [
       "mission",
@@ -2761,7 +2761,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "0"
     ],
     "a": 1,
-    "sol": "u=−v=(3,2), logo x=3.",
+    "sol": "u=−v=(3,2), logo x=3. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “3”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode igualar u a v.",
     "contexts": [
       "mission",
@@ -2791,7 +2791,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(−2/√29,−5/√29)."
     ],
     "a": 2,
-    "sol": "Divide-se o vetor pela sua norma √29.",
+    "sol": "Divide-se o vetor pela sua norma √29. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(2/√29,5/√29).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode dividir por a norma ao quadrado ou inverter o sentido.",
     "contexts": [
       "mission",
@@ -2821,7 +2821,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "dividi-lo pela sua norma."
     ],
     "a": 3,
-    "sol": "O resultado tem norma 1 e conserva direção e sentido.",
+    "sol": "O resultado tem norma 1 e conserva direção e sentido. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode confundir normalização com translação.",
     "contexts": [
       "mission",
@@ -2851,7 +2851,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(−6,−8)."
     ],
     "a": 0,
-    "sol": "u tem norma 5; multiplicar por 2 dá norma 10.",
+    "sol": "u tem norma 5; multiplicar por 2 dá norma 10. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode escolher vetor de norma 10 sem respeitar direção.",
     "contexts": [
       "mission",
@@ -2881,7 +2881,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "4"
     ],
     "a": 1,
-    "sol": "||v||=|−2|×4=8.",
+    "sol": "||v||=|−2|×4=8. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “8”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode dar comprimento negativo.",
     "contexts": [
       "mission",
@@ -2911,7 +2911,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "60 m."
     ],
     "a": 2,
-    "sol": "A norma de (5,12) é 13.",
+    "sol": "A norma de (5,12) é 13. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “13 m.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar as componentes.",
     "contexts": [
       "mission",
@@ -2941,7 +2941,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(2,7)."
     ],
     "a": 3,
-    "sol": "u+v=(2,7).",
+    "sol": "u+v=(2,7). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(2,7).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar apenas módulos.",
     "contexts": [
       "mission",
@@ -2971,7 +2971,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "53."
     ],
     "a": 0,
-    "sol": "√(4+49)=√53.",
+    "sol": "√(4+49)=√53. Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “√53.”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode somar 2+7 ou esquecer a raiz.",
     "contexts": [
       "mission",
@@ -3001,7 +3001,7 @@ export const VNEXT_PILOT_QUESTIONS=[
       "(6,4)."
     ],
     "a": 1,
-    "sol": "Multiplicar por 1/2 dá (3,4).",
+    "sol": "Multiplicar por 1/2 dá (3,4). Passo-chave: organiza os dados geométricos ou vetoriais numa relação matemática antes de substituir valores e simplificar. A opção obtida deve coincidir com “(3,4).”. Porquê: as relações geométricas podem ser traduzidas por coordenadas, vetores, distâncias ou perpendicularidade; verificar essa relação algébrica confirma a conclusão geométrica.",
     "hyp": "Pode reduzir só uma componente ou inverter sentido.",
     "contexts": [
       "mission",
@@ -3017,4 +3017,3 @@ export const VNEXT_PILOT_QUESTIONS=[
     "productionEligible": false
   }
 ];
-
