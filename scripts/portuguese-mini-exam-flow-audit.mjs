@@ -8,7 +8,7 @@ const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"
 const prototypeModule=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
 const progressModule=readFileSync(new URL("../app/lib/portugueseWritingProgress.js",import.meta.url),"utf8");
 
-assert.match(page,/(?:import PortuguesePassageMiniExam from "\.\/components\/PortuguesePassageMiniExam"|dynamic\\(\\(\\)=>import\\("\.\/components\/PortuguesePassageMiniExam"\\)(?:,\\{[^}]*\\})?\\))/u,"o fluxo principal deve carregar a experiência dedicada de Português, por import estático ou dynamic import");
+assert.match(page,/(?:import PortuguesePassageMiniExam from "\.\/components\/PortuguesePassageMiniExam"|dynamic\(\(\)=>import\("\.\/components\/PortuguesePassageMiniExam"\)(?:,\{[^}]*\})?\))/u,"o fluxo principal deve carregar a experiência dedicada de Português, por import estático ou dynamic import");
 assert.match(page,/PORTUGUESE_PASSAGE_PROTOTYPE_EXAM/u,"o router deve consumir o protótipo através da camada de dados da app");
 assert.doesNotMatch(page,/content\/vnext/u,"o router principal não deve depender diretamente de fontes editoriais vNext");
 assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camada de dados deve consumir o documento canónico de textos partilhados");
