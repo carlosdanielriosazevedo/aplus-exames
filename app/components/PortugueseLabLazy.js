@@ -15,6 +15,7 @@ function PortugueseLab({s,setS,go}){
   const [editingCriterionId,setEditingCriterionId]=useState(null);
   const [revisionEditing,setRevisionEditing]=useState(false);
   const [results,setResults]=useState([]);
+  const [missionFocus,setMissionFocus]=useState(null);
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
   const progress=subjectProgressFor(s,"portuguese");
   const competenceRows=Object.entries(progress.competence);
@@ -35,11 +36,13 @@ function PortugueseLab({s,setS,go}){
 
   function startMission(domain){
     const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress,domain});
+    setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],label:PORTUGUESE_DOMAIN_LABELS[domain]});
     start("mission",mission.items,`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
   }
 
   function startRecommendedMission(){
     const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress});
+    setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],label:"Missão recomendada"});
     start("mission",mission.items,"Missão recomendada");
   }
 
@@ -59,7 +62,7 @@ function PortugueseLab({s,setS,go}){
   function resetPortuguese(){
     if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
     setS(prev=>resetSubjectProgress(prev,"portuguese"));
-    setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);
+    setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setMissionFocus(null);
   }
 
   if(!session)return <Shell><Back go={go}/><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">PILOTO CONTROLADO</p><h1>Português · Prova 639</h1></div></div>
@@ -67,7 +70,7 @@ function PortugueseLab({s,setS,go}){
     <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
     {progress.lastPosition&&<section className="portugueseLabSection"><h2>Continuar</h2><button className="portugueseLabAction featured" onClick={resume}><b>Retomar {progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></button></section>}
     <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>{progress.diagnosticDone?"Repetir diagnóstico":"Testar diagnóstico"}</b><span>{progress.diagnosticDone?"Concluído · nova tentativa mantém o histórico":"8 itens · 2 por domínio · sem produção extensa"}</span></button></section>
-    <section className="portugueseLabSection"><h2>Missão adaptativa</h2><button className="portugueseLabAction featured" onClick={startRecommendedMission}><b>Treinar o que mais precisa</b><span>7 itens · competências prioritárias · evita repetição recente</span></button><small className="portugueseMethodNote">A dificuldade é uma classificação editorial provisória. Só será considerada calibrada depois de existirem dados suficientes de alunos.</small></section>
+    <section className="portugueseLabSection"><h2>Missão adaptativa</h2><button className="portugueseLabAction featured" onClick={startRecommendedMission}><b>Treinar o que mais precisa</b><span>7 itens · competências prioritárias · evita repetição recente</span></button><small className="portugueseMethodNote">A missão usa também a evidência das respostas abertas já autoavaliadas para dar mais prioridade ao que ficou “a rever”. A app não transforma essa evidência numa nota.</small><small className="portugueseMethodNote">A dificuldade é uma classificação editorial provisória. Só será considerada calibrada depois de existirem dados suficientes de alunos.</small></section>
     <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
     {(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><h2>Progresso de Português</h2><div><span>Respostas determinísticas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas pendentes de grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div><small>O texto livre das respostas não é guardado neste histórico.</small></section>}
     <section className="portugueseLabSection"><h2>Mini-exame</h2><button className="portugueseLabAction featured" onClick={()=>go("portugueseMiniExam")}><b>Testar mini-exame com texto partilhado</b><span>2 textos · 6 questões · leitura e educação literária · revisão no fim</span></button><small className="portugueseMethodNote">Protótipo interno: o texto permanece associado ao grupo de perguntas e as respostas abertas não recebem classificação automática final.</small></section>
@@ -91,7 +94,7 @@ function PortugueseLab({s,setS,go}){
         <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null)}}>Voltar ao laboratório</button>
       </Shell>;
     }
-    return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>
+    return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>{missionFocus?.targetEvidenceCompetencyIds?.length>0&&<div className="notice"><b>Esta missão foi ajustada ao teu histórico</b><span>Incluiu competências em que a evidência das respostas abertas anteriores mostrou pontos a rever. Na próxima sessão, esta informação continuará a influenciar a prioridade.</span></div>}
       <div className="portugueseLabStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
       {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
       <button className="primary" onClick={()=>setSession(null)}>Voltar ao laboratório</button>
