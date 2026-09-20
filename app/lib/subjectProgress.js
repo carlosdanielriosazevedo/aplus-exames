@@ -1,5 +1,22 @@
-const MODEL_VERSION=1;
+const MODEL_VERSION=2;
 const MAX_SESSIONS=100;
+
+function normalizeCompetenceRow(row){
+  const source=row&&typeof row==="object"?row:{};
+  return {
+    attempts:Number.isFinite(source.attempts)?source.attempts:0,
+    correct:Number.isFinite(source.correct)?source.correct:0,
+    deterministicAttempts:Number.isFinite(source.deterministicAttempts)?source.deterministicAttempts:0,
+    points:Number.isFinite(source.points)?source.points:0,
+    maxPoints:Number.isFinite(source.maxPoints)?source.maxPoints:0,
+    pendingRubrics:Number.isFinite(source.pendingRubrics)?source.pendingRubrics:0,
+    rubricReviews:Number.isFinite(source.rubricReviews)?source.rubricReviews:0,
+    rubricNeedsReview:Number.isFinite(source.rubricNeedsReview)?source.rubricNeedsReview:0,
+    rubricObserved:Number.isFinite(source.rubricObserved)?source.rubricObserved:0,
+    rubricEvidenceByObservation:source.rubricEvidenceByObservation&&typeof source.rubricEvidenceByObservation==="object"?source.rubricEvidenceByObservation:{},
+    lastAnsweredAt:source.lastAnsweredAt||null
+  };
+}
 
 export function emptySubjectProgress(subjectId){
   return {subjectId,version:MODEL_VERSION,diagnosticDone:false,diagnosticCompletedAt:null,sessions:[],missionHistory:[],competence:{},lastPosition:null,lastActivityAt:null};
@@ -7,7 +24,8 @@ export function emptySubjectProgress(subjectId){
 
 function normalizeProgress(progress,subjectId){
   const empty=emptySubjectProgress(subjectId);
-  return {...empty,...(progress||{}),subjectId,version:MODEL_VERSION,sessions:Array.isArray(progress?.sessions)?progress.sessions.slice(-MAX_SESSIONS):[],missionHistory:Array.isArray(progress?.missionHistory)?progress.missionHistory.slice(-MAX_SESSIONS):[],competence:progress?.competence&&typeof progress.competence==="object"?progress.competence:{},lastPosition:progress?.lastPosition||null};
+  const competence=Object.fromEntries(Object.entries(progress?.competence&&typeof progress.competence==="object"?progress.competence:{}).map(([id,row])=>[id,normalizeCompetenceRow(row)]));
+  return {...empty,...(progress||{}),subjectId,version:MODEL_VERSION,sessions:Array.isArray(progress?.sessions)?progress.sessions.slice(-MAX_SESSIONS):[],missionHistory:Array.isArray(progress?.missionHistory)?progress.missionHistory.slice(-MAX_SESSIONS):[],competence,lastPosition:progress?.lastPosition||null};
 }
 
 export function migrateSubjectProgress(state){
@@ -25,7 +43,19 @@ function compactResult(result){
   if(!result)return null;
   const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,gradingMode:result.gradingMode||null,responseText:result.responseText||""};
   if(result.final)return compact;
-  return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,revisionCount:Number.isFinite(result.revisionCount)?result.revisionCount:0,previousResponseText:result.previousResponseText||"",revisionHistory:Array.isArray(result.revisionHistory)?result.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})):[]})):[],rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};
+  return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,revisionCount:Number.isFinite(result.revisionCount)?result.revisionCount:0,previousResponseText:result.previousResponseText||"",revisionHistory:Array.isArray(result.revisionHistory)?result.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})):[]})):[],rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};}
+
+function recordRubricEvidence(previous,result,completedAt){
+  const observations=(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,status:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):[]})));
+  const nextMap={...(previous.rubricEvidenceByObservation||{})};
+  let observed=0;
+  let needsReview=0;
+  observations.forEach(observation=>{
+    if(observation.status==="observed")observed+=1;
+    if(["partial","not-observed","unsure"].includes(observation.status))needsReview+=1;
+    nextMap[observation.observationId]={criterionId:observation.criterionId,status:observation.status,studentEvidence:observation.studentEvidence,lastSeenAt:completedAt};
+  });
+  return {observed,needsReview,rubricEvidenceByObservation:nextMap};
 }
 
 export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,startedAt=Date.now()}){
@@ -46,10 +76,22 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     const result=results[index];
     if(!result||result.status==="unanswered")return;
     const id=item.competencyId||`${item.domain}:general`;
-    const previous=competence[id]||{attempts:0,correct:0,deterministicAttempts:0,points:0,maxPoints:0,pendingRubrics:0,lastAnsweredAt:null};
-    competence[id]=result.final
-      ?{...previous,attempts:previous.attempts+1,correct:previous.correct+(result.correct?1:0),deterministicAttempts:previous.deterministicAttempts+1,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt}
-      :{...previous,attempts:previous.attempts+1,pendingRubrics:previous.pendingRubrics+1,lastAnsweredAt:completedAt};
+    const previous=normalizeCompetenceRow(competence[id]);
+    if(result.final){
+      competence[id]={...previous,attempts:previous.attempts+1,correct:previous.correct+(result.correct?1:0),deterministicAttempts:previous.deterministicAttempts+1,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt};
+      return;
+    }
+    const evidence=recordRubricEvidence(previous,result,completedAt);
+    competence[id]={
+      ...previous,
+      attempts:previous.attempts+1,
+      pendingRubrics:result.rubricCompleted?previous.pendingRubrics:previous.pendingRubrics+1,
+      rubricReviews:previous.rubricReviews+(result.rubricCompleted?1:0),
+      rubricNeedsReview:previous.rubricNeedsReview+evidence.needsReview,
+      rubricObserved:previous.rubricObserved+evidence.observed,
+      rubricEvidenceByObservation:evidence.rubricEvidenceByObservation,
+      lastAnsweredAt:completedAt
+    };
   });
   const session={kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
   return putProgress(state,subjectId,{...progress,diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,lastPosition:null,lastActivityAt:completedAt});
