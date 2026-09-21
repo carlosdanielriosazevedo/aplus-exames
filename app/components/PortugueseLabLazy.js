@@ -1,6 +1,8 @@
 "use client";
 import {useState} from "react";
-import {Back,Shell} from "./chrome";
+import {Back,Shell,Logo,StudentNav} from "./chrome";
+import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
+import {engagementSummary} from "../lib/engagement";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
@@ -8,7 +10,7 @@ import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
 import {advanceSubjectSession,beginSubjectSession,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
-function PortugueseLab({s,setS,go}){
+function PortugueseLab({s,setS,go,view="home"}){
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
@@ -22,6 +24,11 @@ function PortugueseLab({s,setS,go}){
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
+  const activeSubject=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
+  const daily=engagementSummary(s);
+  const sharedTop=<header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label="Mudar de disciplina"><span aria-hidden="true">{activeSubject.icon}</span><b>{activeSubject.shortName||activeSubject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label="Sequência">🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label="XP">🏆 <b>{s.xp}</b></button></div></header>;
+  const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
+  function sharedShell(content){return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;}
 
   function start(kind,items,label,domain=null){
     if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
