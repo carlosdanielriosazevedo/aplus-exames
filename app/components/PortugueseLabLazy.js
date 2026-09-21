@@ -72,6 +72,26 @@ function PortugueseLab({s,setS,go,view="home"}){
     setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setMissionFocus(null);
   }
 
+  if(!session&&view!=="home"){
+    const title=view==="train"?"Treinar":"Mini-exames";
+    if(view==="progress")return sharedShell(<>
+      <div className="learnIntro"><p>O teu percurso em Português.</p><h1>Progresso.</h1></div>
+      <section className="portugueseProgressCard"><h2>Domínio e prática</h2><div className="portugueseLabStats"><div><b>{deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):"—"}{deterministicAttempts?"%":""}</b><span>respostas objetivas corretas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div><div><b>{pendingRubrics}</b><span>respostas a rever</span></div></div></section>
+      <section className="portugueseProgressCard"><h2>Competências observadas</h2><div className="portugueseMissionGrid">{competenceRows.length?competenceRows.slice(0,16).map(([id,row])=><article className="portugueseLabAction" key={id}><b>{row.label||id}</b><span>{row.deterministicAttempts?(row.correct||0)+"/"+row.deterministicAttempts+" corretas":"Ainda sem evidência objetiva"}</span></article>):<p className="muted">Ainda não existem respostas suficientes para mostrar evolução por competência.</p>}</div></section>
+      <section className="notice"><b>A+ certainty</b><span>A evidência de respostas objetivas e das grelhas de respostas abertas é guardada separadamente. A app não transforma a autoavaliação numa nota automática.</span></section>
+    </>);
+    if(view==="exams")return sharedShell(<>
+      <div className="learnIntro"><p>Treino próximo da prova.</p><h1>Mini-exames.</h1></div>
+      <section className="portugueseProgressCard"><h2>Português · Prova 639</h2><p className="muted">Sessões com leitura, educação literária e escrita, mantendo as respostas abertas e a revisão no fim.</p><button className="primary" onClick={()=>go("portugueseMiniExam")}>Começar mini-exame →</button></section>
+      <section className="notice"><b>Revisão no fim</b><span>As respostas abertas não recebem uma classificação automática final. O objetivo é guardar evidência observável para a revisão.</span></section>
+    </>);
+    return sharedShell(<>
+      <div className="learnIntro"><p>Prática adaptativa.</p><h1>{title}.</h1></div>
+      <section className="portugueseProgressCard"><h2>O que vale a pena praticar agora</h2><p className="muted">A missão usa o teu histórico de respostas e a evidência das grelhas para escolher competências prioritárias.</p><button className="primary" onClick={startRecommendedMission}>Começar missão recomendada →</button></section>
+      <section className="portugueseLabSection"><h2>Escolher domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
+    </>);
+  }
+
   if(!session)return sharedShell(<><div className="portugueseSharedHeading"><p className="eyebrow">ESPAÇO DE ESTUDO · PORTUGUÊS</p><h1>{view==="train"?"Treinar Português":view==="exams"?"Mini-exames de Português":view==="progress"?"Progresso de Português":"Plano de Português"}</h1><p className="muted">A navegação, topo e posição das ações são os mesmos da Matemática A. Só o conteúdo muda.</p></div><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">PILOTO CONTROLADO</p><h1>Português · Prova 639</h1></div></div>
     <div className="notice warning"><b>Piloto controlado — ainda não conta para o plano académico</b><span>Podes testar diagnóstico, missões e correção assistida com o conteúdo atual. O resultado é provisório e não altera o teu nível de Matemática A.</span></div>
     <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
