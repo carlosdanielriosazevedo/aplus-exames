@@ -73,26 +73,44 @@ function PortugueseLab({s,setS,go,view="home"}){
     setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setMissionFocus(null);
   }
 
-  if(!session&&view!=="home"){
-    const title=view==="train"?"Treinar":"Mini-exames";
-    if(view==="progress")return sharedShell(<>
-      <div className="learnIntro"><p>O teu percurso em Português.</p><h1>Progresso.</h1></div>
-      <section className="portugueseProgressCard"><h2>Domínio e prática</h2><div className="portugueseLabStats"><div><b>{deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):"—"}{deterministicAttempts?"%":""}</b><span>respostas objetivas corretas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div><div><b>{pendingRubrics}</b><span>respostas a rever</span></div></div></section>
-      <section className="portugueseProgressCard"><h2>Competências observadas</h2><div className="portugueseMissionGrid">{competenceRows.length?competenceRows.slice(0,16).map(([id,row])=><article className="portugueseLabAction" key={id}><b>{row.label||id}</b><span>{row.deterministicAttempts?(row.correct||0)+"/"+row.deterministicAttempts+" corretas":"Ainda sem evidência objetiva"}</span></article>):<p className="muted">Ainda não existem respostas suficientes para mostrar evolução por competência.</p>}</div></section>
-      <section className="notice"><b>A+ certainty</b><span>A evidência de respostas objetivas e das grelhas de respostas abertas é guardada separadamente. A app não transforma a autoavaliação numa nota automática.</span></section>
-    </>);
-    if(view==="exams")return sharedShell(<>
-      <div className="learnIntro"><p>Treino próximo da prova.</p><h1>Mini-exames.</h1></div>
-      <section className="portugueseProgressCard"><h2>Português · Prova 639</h2><p className="muted">Sessões com leitura, educação literária e escrita, mantendo as respostas abertas e a revisão no fim.</p><button className="primary" onClick={()=>go("portugueseMiniExam")}>Começar mini-exame →</button></section>
-      <section className="notice"><b>Revisão no fim</b><span>As respostas abertas não recebem uma classificação automática final. O objetivo é guardar evidência observável para a revisão.</span></section>
-    </>);
+  if(!session&&view==="train")return sharedShell(<>
+    <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
+    <ApronsoNudge pose="thinking">Queres praticar um domínio específico ou deixar a app escolher o próximo passo com base no teu percurso.</ApronsoNudge>
+    <div className="trainChoices">
+      <button onClick={()=>startRecommendedMission()}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar ou deixa a missão adaptar-se à tua evidência. O treino não altera diretamente o Domínio.</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
+      <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos de Português serão acrescentados aqui.</small></div><em>Em breve</em></button>
+    </div>
+  </>);
+
+  if(!session&&view==="progress"){
+    const overview=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{
+      const rows=competenceRows.filter(([,row])=>row.domain===domain||row.domainId===domain);
+      const attempts=rows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
+      const correct=rows.reduce((sum,[,row])=>sum+(row.correct||0),0);
+      return {domain,label,attempts,correct,percent:attempts?Math.round(correct/attempts*100):null};
+    });
+    const overall=deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):null;
     return sharedShell(<>
-      <div className="learnIntro"><p>Prática adaptativa.</p><h1>{title}.</h1></div>
-      <section className="portugueseProgressCard"><h2>O que vale a pena praticar agora</h2><p className="muted">A missão usa o teu histórico de respostas e a evidência das grelhas para escolher competências prioritárias.</p><button className="primary" onClick={startRecommendedMission}>Começar missão recomendada →</button></section>
-      <section className="portugueseLabSection"><h2>Escolher domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
+      <p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+      <div className="progressOverview">{overview.map(row=><div key={row.domain}><span>{row.label}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
+      <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
+      <details className="progressDetails" open><summary>Ver mapa completo →</summary><p className="muted">Explora domínios, competências, evidência e o estado das respostas abertas.</p>
+      {overview.map(row=><div className={"prog "+(row.percent===null?"unmeasured":"")} key={row.domain}><div className="progHead"><b>{row.label}</b><small>Domínio de Português</small></div>{row.percent===null?<div className="noEvidence"><b>Ainda sem estimativa</b><span>A app vai recolher evidência quando praticares esta área.</span></div>:<><span>Domínio estimado: {row.percent}/100</span><div className="bar"><i style={{width:row.percent+"%"}}/></div><div className="certaintyRow"><span>Evidência da app</span><b>{row.attempts} respostas objetivas</b><small>As respostas abertas são acompanhadas por critérios observáveis e não recebem uma classificação automática final.</small></div><div className="focusMap"><b>Competências dentro deste domínio</b>{competenceRows.filter(([,r])=>r.domain===row.domain||r.domainId===row.domain).map(([id,r])=><div key={id}><span>{r.label||id}</span><div className="focusMiniBar"><i style={{width:(r.deterministicAttempts?Math.round((r.correct||0)/r.deterministicAttempts*100):0)+"%"}}/></div><strong>{r.deterministicAttempts?Math.round((r.correct||0)/r.deterministicAttempts*100):"—"}</strong><small>{r.deterministicAttempts?(r.correct||0)+"/"+r.deterministicAttempts+" corretas":"Sem evidência"}</small></div>)}</div></>}</div>)}</details>
+      <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary><div className="notice"><b>Domínio ≠ certeza da app</b><span>O Domínio resume a evidência disponível. A app mantém separadas as respostas objetivas e a evidência das grelhas de respostas abertas.</span></div><div className="notice"><b>Respostas abertas</b><span>A autoavaliação serve para orientar o treino e guardar evidência por critério; não é convertida automaticamente numa nota final.</span></div></details>
     </>);
   }
 
+  if(!session&&view==="exams")return sharedShell(<>
+    <p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
+    <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
+    <button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
+    <div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"Sessão disponível":"Ainda não realizado"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico desta disciplina fica separado do de Matemática A.":"Começa o primeiro mini-exame para criar histórico."}</span></div>
+    <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o Mini-exame.</span></div>
+    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
+    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis.</span></div>
+  </>);
   if(!session)return sharedShell(<><div className="portugueseSharedHeading"><p className="eyebrow">ESPAÇO DE ESTUDO · PORTUGUÊS</p><h1>{view==="train"?"Treinar Português":view==="exams"?"Mini-exames de Português":view==="progress"?"Progresso de Português":"Plano de Português"}</h1><p className="muted">A navegação, topo e posição das ações são os mesmos da Matemática A. Só o conteúdo muda.</p></div><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">PILOTO CONTROLADO</p><h1>Português · Prova 639</h1></div></div>
     <div className="notice warning"><b>Piloto controlado — ainda não conta para o plano académico</b><span>Podes testar diagnóstico, missões e correção assistida com o conteúdo atual. O resultado é provisório e não altera o teu nível de Matemática A.</span></div>
     <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
