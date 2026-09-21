@@ -18,8 +18,8 @@ assert.equal(allItems.length,latestDeclared,"o banco agregado deve coincidir com
 assert.equal(latestDeclared,310,"a décima quinta vaga deve elevar o banco para 310 itens");
 
 const portuguese=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
-assert.ok(portuguese); assert.deepEqual(portuguese.codes,["639"]); assert.equal(portuguese.available,undefined); assert.equal(portuguese.releaseStage,"foundation"); assert.equal(subjectStatusLabel(portuguese),"Em preparação");
-assert.equal(PORTUGUESE_RELEASE_POLICY.selectable,false); assert.equal(PORTUGUESE_RELEASE_POLICY.productionEligible,false); assert.equal(PORTUGUESE_RELEASE_POLICY.extendedWritingFinalAutoGrade,false);
+assert.ok(portuguese); assert.deepEqual(portuguese.codes,["639"]); assert.equal(portuguese.available,true); assert.equal(portuguese.releaseStage,"foundation"); assert.equal(subjectStatusLabel(portuguese),"Selecionar");
+assert.equal(PORTUGUESE_RELEASE_POLICY.selectable,true); assert.equal(PORTUGUESE_RELEASE_POLICY.productionEligible,false); assert.equal(PORTUGUESE_RELEASE_POLICY.extendedWritingFinalAutoGrade,false);
 assert.ok(allItems.length>=PORTUGUESE_RELEASE_POLICY.minimumPilotItems);
 assert.ok(PORTUGUESE_RELEASE_POLICY.productionEligible===false,"310 itens não podem desbloquear automaticamente a produção enquanto a validação editorial estiver pendente");
 
