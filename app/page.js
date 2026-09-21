@@ -500,6 +500,7 @@ function SubjectSelection({s,setS,go}){
 function SubjectManager({s,setS,go}){
   const selected=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
   const active=subjectById(s.activeSubjectId);
+  const subjectHomeScreen=id=>id==="portuguese"?"portugueseLab":"home";
 
   function activate(subject){
     if(!subject.available)return;
@@ -508,13 +509,13 @@ function SubjectManager({s,setS,go}){
       selectedSubjectIds:[...(prev.selectedSubjectIds||[]),subject.id],
       activeSubjectId:subject.id
     }));
-    go("home");
+    go(subjectHomeScreen(subject.id));
   }
 
-  return <Shell><Back go={go}/><p className="eyebrow">AS TUAS DISCIPLINAS</p><h1>O que queres estudar?</h1>
+  return <Shell><Back go={go} to={subjectHomeScreen(active.id)}/><p className="eyebrow">AS TUAS DISCIPLINAS</p><h1>O que queres estudar?</h1>
     <p className="muted">A sequência e o XP são globais. Quando adicionarmos novas disciplinas, cada uma terá diagnóstico, domínio, missões e exames próprios.</p>
     <section className="subjectManagerSection"><h2>Disciplina atual</h2>
-      <button type="button" className="subjectWorkspaceCard current" onClick={()=>go("home")}>
+      <button type="button" className="subjectWorkspaceCard current" onClick={()=>go(subjectHomeScreen(active.id))}>
         <span className="subjectIcon" aria-hidden="true">{active.icon}</span><span><b>{active.name}</b><small>Continuar onde ficaste</small></span><strong>Ativa</strong>
       </button>
     </section>
