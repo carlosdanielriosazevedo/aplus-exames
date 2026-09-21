@@ -18,6 +18,7 @@ function PortugueseLab({s,setS,go,view="home"}){
   const [revisionEditing,setRevisionEditing]=useState(false);
   const [results,setResults]=useState([]);
   const [missionFocus,setMissionFocus]=useState(null);
+  const missionEvidenceFocus=missionFocus?.targetEvidenceObservations||[];
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
   const progress=subjectProgressFor(s,"portuguese");
   const competenceRows=Object.entries(progress.competence);
@@ -174,7 +175,6 @@ function PortugueseLab({s,setS,go,view="home"}){
     setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);
   }
 
-  const missionEvidenceFocus=missionFocus?.targetEvidenceObservations||[];
   return <Shell><button className="back" onClick={()=>setSession(null)}>← Sair da sessão</button><div className="portugueseRunTop"><div><small>{session.label}</small><b>{PORTUGUESE_DOMAIN_LABELS[item.domain]} · {item.year}</b></div><span>{session.current+1}/{session.items.length}</span></div>
     <div className="bar portugueseRunBar"><i style={{width:`${((session.current+1)/session.items.length)*100}%`}}/></div>
     {session.kind==="mission"&&missionEvidenceFocus.length>0&&session.current===0&&<section className="notice" aria-label="Foco desta missão"><b>Foco desta missão</b><span>Vamos dar atenção extra a pontos que assinalaste como precisando de revisão em respostas anteriores.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label} <small>· {row.status==="partial"?"em parte":row.status==="not-observed"?"não identificado":"por confirmar"}</small></li>)}</ul></section>}
