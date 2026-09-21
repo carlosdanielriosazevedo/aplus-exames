@@ -253,6 +253,8 @@ export default function App(){
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
+    }else if(recoveredState.activeSubjectId==="portuguese"){
+      setScreen("portugueseLab");
     }else setScreen(recoveredState.diagnosticDone?"home":"welcome");
     setHydrated(true);
   },[]);
