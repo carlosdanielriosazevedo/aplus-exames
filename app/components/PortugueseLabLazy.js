@@ -1,6 +1,6 @@
 "use client";
 import {useState} from "react";
-import {Back,Shell,Logo,StudentNav} from "./chrome";
+import {Apronso,Back,Shell,Logo,StudentNav} from "./chrome";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
 import {engagementSummary} from "../lib/engagement";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
