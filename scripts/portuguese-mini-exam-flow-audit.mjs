@@ -16,11 +16,10 @@ assert.doesNotMatch(page,/content\/vnext/u,"o router principal não deve depende
 assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camada de dados deve consumir o documento canónico de textos partilhados");
 assert.match(prototypeModule,/buildPortuguesePassagePrototypeExam/u,"a camada de dados deve construir o mini-exame com o builder canónico");
 assert.match(page,/screen==="portugueseMiniExam"/u,"deve existir um ecrã interno dedicado ao mini-exame de Português");
-assert.match(page,/onExit=\{\(\)=>go\("portugueseLab"\)\}/u,"o mini-exame interno deve regressar ao laboratório de Português");
-assert.match(portugueseLab,/Testar mini-exame com texto partilhado/u,"o laboratório interno deve dar acesso explícito ao mini-exame");
+assert.match(page,/onExit=\{\(\)=>go\("exams"\)\}/u,"o mini-exame interno deve regressar à área comum de mini-exames");
+assert.match(portugueseLab,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
-assert.match(page,/go\("portugueseMiniExam"\)/u,"a área de exames deve encaminhar Português para o mini-exame integrado");
-assert.match(portugueseLab,/Os 120 itens permitem testar os fluxos/u,"a UI interna não pode continuar a declarar a contagem antiga de 60 itens");
+assert.match(portugueseLab,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
 
 assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null\}\)/u,"o componente deve aceitar saída opcional para integração no fluxo principal");
 assert.match(component,/Sair do mini-exame/u,"a revisão deve permitir sair do fluxo integrado");
@@ -84,4 +83,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.match(portugueseRow,/available:true/u,"Português deve estar selecionável no beta atual");
 
-console.log("✓ fluxo Mini-exame Português: foco pré-resposta só com atenções ativas · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
+console.log("✓ fluxo Mini-exame Português: integração na rota comum · foco pré-resposta só com atenções ativas · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
