@@ -292,6 +292,7 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
+  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseLab s={s} setS={setS} go={go} view={screen}/>;
   if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go} view="home"/>;
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
@@ -522,11 +523,11 @@ function SubjectManager({s,setS,go}){
       </button>
     </section>
     {selected.length>1&&<section className="subjectManagerSection"><h2>As tuas disciplinas</h2>{selected.filter(id=>id!==active.id).map(id=>{const subject=subjectById(id);return <button type="button" key={id} className="subjectWorkspaceCard" onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>Abrir plano de estudo</small></span><strong>Mudar</strong></button>})}</section>}
-    <section className="subjectManagerSection"><h2>Piloto controlado</h2><button type="button" className="subjectWorkspaceCard" onClick={()=>go("portugueseLab")}><span className="subjectIcon" aria-hidden="true">Aa</span><span><b>Português · Prova 639</b><small>300 itens · diagnóstico, missões e correção assistida</small></span><strong>Testar</strong></button><small className="muted">Português está a ser preparado para integração no plano académico normal. Entretanto, o piloto usa conteúdo real de trabalho, mas permanece separado enquanto terminamos a calibração.</small></section>
+    <section className="subjectManagerSection"><h2>Português</h2><button type="button" className="subjectWorkspaceCard" onClick={()=>{const subject=subjectById("portuguese");if(subject?.available){setS(prev=>normalizeSubjectWorkspace({...prev,selectedSubjectIds:[...(prev.selectedSubjectIds||[]), "portuguese"],activeSubjectId:"portuguese"}));go("home")}}}><span className="subjectIcon" aria-hidden="true">Aa</span><span><b>Português · Prova 639</b><small>Diagnóstico · Treinar · Mini-exames · Progresso</small></span><strong>Abrir</strong></button><small className="muted">Português usa agora o mesmo espaço de estudo da Matemática A. O conteúdo continua em validação pedagógica, mas a navegação e a estrutura são comuns.</small></section>
     <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
-    <div className="notice"><b>Português continua fora do plano normal</b><span>O piloto já permite testar diagnóstico, treino e correção assistida. O desbloqueio geral fica para depois da calibração editorial e com respostas reais de alunos.</span></div>
+    <div className="notice"><b>Conteúdo de Português em validação</b><span>A estrutura da disciplina já é a mesma do workspace principal. O conteúdo e a correção escrita continuam em validação antes de serem considerados resultados académicos de produção.</span></div>
   </Shell>;
 }
 
