@@ -75,7 +75,7 @@ function PortugueseLab({s,setS,go,view="home"}){
 
   if(!session&&view==="train")return sharedShell(<>
     <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <ApronsoNudge pose="thinking">Queres praticar um domínio específico ou deixar a app escolher o próximo passo com base no teu percurso.</ApronsoNudge>
+    <div className="notice"><b>Praticar</b><span>Queres praticar um domínio específico ou deixar a app escolher o próximo passo com base no teu percurso.</span></div>
     <div className="trainChoices">
       <button onClick={()=>startRecommendedMission()}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar ou deixa a missão adaptar-se à tua evidência. O treino não altera diretamente o Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
@@ -93,7 +93,7 @@ function PortugueseLab({s,setS,go,view="home"}){
     const overall=deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):null;
     return sharedShell(<>
       <p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1>
-      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><div className="progressMascot" aria-hidden="true">🦉</div></div>
       <div className="progressOverview">{overview.map(row=><div key={row.domain}><span>{row.label}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
       <details className="progressDetails" open><summary>Ver mapa completo →</summary><p className="muted">Explora domínios, competências, evidência e o estado das respostas abertas.</p>
@@ -104,7 +104,7 @@ function PortugueseLab({s,setS,go,view="home"}){
 
   if(!session&&view==="exams")return sharedShell(<>
     <p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
-    <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
+    <div className="notice"><b>Mini-exame</b><span>Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</span></div>
     <button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
     <div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"Sessão disponível":"Ainda não realizado"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico desta disciplina fica separado do de Matemática A.":"Começa o primeiro mini-exame para criar histórico."}</span></div>
     <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o Mini-exame.</span></div>
