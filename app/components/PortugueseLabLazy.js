@@ -170,3 +170,5 @@ function PortugueseLab({s,setS,go}){
 
 
 export default PortugueseLab;
+
+export default PortugueseLab;
