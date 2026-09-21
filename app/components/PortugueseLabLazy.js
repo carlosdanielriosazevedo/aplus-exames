@@ -168,3 +168,5 @@ function PortugueseLab({s,setS,go}){
   </Shell>;
 }
 
+
+export default PortugueseLab;
