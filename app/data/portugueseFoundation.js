@@ -129,7 +129,7 @@ export const PORTUGUESE_RELEASE_POLICY={
   subjectId:"portuguese",
   examCode:"639",
   stage:"foundation",
-  selectable:false,
+  selectable:true,
   productionEligible:false,
   minimumPilotItems:60,
   minimumBetaItems:300,

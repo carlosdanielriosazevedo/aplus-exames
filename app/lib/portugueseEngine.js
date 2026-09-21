@@ -312,6 +312,21 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
   if(eligible.length<size)throw new Error(`Insufficient adaptive Portuguese mission coverage${domain?` for ${domain}`:""}.`);
   const priorities=portugueseCompetencePriorities(eligible,progress,{domain});
   const needById=new Map(priorities.map(row=>[row.competencyId,row.need]));
+  const evidencePriorityIds=new Set(priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId));
+  const targetEvidenceObservations=[];
+  for(const item of eligible){
+    if(!evidencePriorityIds.has(item.competencyId))continue;
+    for(const criterion of item.rubric?.criteria||[]){
+      for(const observation of criterion.observations||[]){
+        const stored=progress?.competence?.[item.competencyId]?.rubricEvidenceByObservation?.[observation.id];
+        if(["partial","not-observed","unsure"].includes(stored?.status)){
+          targetEvidenceObservations.push({competencyId:item.competencyId,criterionId:criterion.id,observationId:observation.id,label:observation.label,status:stored.status});
+        }
+      }
+    }
+  }
+  const uniqueEvidenceObservations=[...new Map(targetEvidenceObservations.map(row=>[row.competencyId+":"+row.observationId,row])).values()].slice(0,4);
+  const targetObservationIds=new Set(uniqueEvidenceObservations.map(row=>row.observationId));
   const recentIds=new Set((progress?.missionHistory||[]).slice(-3).flatMap(session=>session.itemIds||[]));
   const targetChallenges=[1,2,2,3,3,4,2];
   const selected=[];
@@ -327,7 +342,11 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     });
     const pool=candidates.length?candidates:eligible.filter(item=>!selected.includes(item));
     pool.sort((a,b)=>{
-      const score=item=>(needById.get(item.competencyId)||0)-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0);
+      const score=item=>{
+        const observationMatch=(item.rubric?.criteria||[]).some(criterion=>(criterion.observations||[]).some(observation=>targetObservationIds.has(observation.id)));
+        const matchBoost=observationMatch?1.15:0;
+        return (needById.get(item.competencyId)||0)+matchBoost-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0);
+      };
       return score(b)-score(a)||a.id.localeCompare(b.id);
     });
     const chosen=pool[0];
@@ -337,20 +356,6 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     if(chosen.responseType==="restricted-response")openCount++;
   }
 
-  const evidencePriorityIds=new Set(priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId));
-  const targetEvidenceObservations=[];
-  for(const item of eligible){
-    if(!evidencePriorityIds.has(item.competencyId))continue;
-    for(const criterion of item.rubric?.criteria||[]){
-      for(const observation of criterion.observations||[]){
-        const stored=progress?.competence?.[item.competencyId]?.rubricEvidenceByObservation?.[observation.id];
-        if(["partial","not-observed","unsure"].includes(stored?.status)){
-          targetEvidenceObservations.push({competencyId:item.competencyId,criterionId:criterion.id,observationId:observation.id,label:observation.label,status:stored.status});
-        }
-      }
-    }
-  }
-  const uniqueEvidenceObservations=[...new Map(targetEvidenceObservations.map(row=>[row.competencyId+":"+row.observationId,row])).values()].slice(0,4);
   return {
     items:selected,
     priorities,
