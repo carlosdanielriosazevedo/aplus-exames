@@ -9,7 +9,7 @@ assert.equal(SUBJECT_CATALOG_YEAR,2026);
 assert.match(SUBJECT_CATALOG_SOURCE,/^https:\/\/iave\.pt\//);
 assert.equal(SECONDARY_EXAM_SUBJECTS.length,24,"the 2026 catalog must contain 24 distinct disciplines");
 assert.equal(new Set(SECONDARY_EXAM_SUBJECTS.map(subject=>subject.id)).size,24,"subject IDs must be unique");
-assert.deepEqual(AVAILABLE_SUBJECT_IDS,["math-a"],"only Matemática A may be selectable in the current MVP");
+assert.deepEqual(AVAILABLE_SUBJECT_IDS,["math-a","portuguese"],"Matemática A e Português devem ser selecionáveis no beta atual");
 
 const expectedCodes=["138","501","517","547","550","623","635","639","702","706","708","712","714","715","719","723","724","732","734","735","835","839","847","848","849"];
 const catalogCodes=SECONDARY_EXAM_SUBJECTS.flatMap(subject=>subject.codes).sort();
@@ -32,7 +32,7 @@ assert.match(page,/disabled=\{!subject\.available\}/);
 assert.match(page,/Continuar com Matemática A/);
 assert.match(page,/className="subjectSwitcher"/,"the student header must expose the active subject switcher");
 assert.match(page,/normalizeSubjectWorkspace\(base\)/,"legacy saved state must receive a safe active-subject default");
-assert.match(page,/Português está a ser preparado/,"Portuguese must remain visible but explicitly unavailable");
+assert.match(page,/Português continua fora do plano normal/,"Portuguese remains explicitly identified as beta outside the normal academic plan");
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);
 
 console.log("✓ subjects: official 2026 catalog, persistent switcher, legacy migration and unavailable subjects guarded");
