@@ -35,6 +35,8 @@ assert.match(page,/const subjectHomeScreen=id=>id==="portuguese"\?"portugueseLab
 assert.match(page,/go\(subjectHomeScreen\(subject\.id\)\)/,"switching subjects must open the matching workspace");
 assert.match(page,/onClick=\{\(\)=>go\(subjectHomeScreen\(active\.id\)\)\}/,"the current-subject card must not send Portuguese back to the Math-only home");
 assert.match(page,/normalizeSubjectWorkspace\(base\)/,"legacy saved state must receive a safe active-subject default");
+assert.match(page,/recoveredState\.activeSubjectId==="portuguese"/,"a saved Portuguese workspace must reopen in the Portuguese lab after reload");
+assert.match(page,/setScreen\("portugueseLab"\)/,"saved Portuguese state must not fall through to the Math-only home");
 assert.match(page,/Português continua fora do plano normal/,"Portuguese remains explicitly identified as beta outside the normal academic plan");
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);
 
