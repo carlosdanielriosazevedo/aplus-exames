@@ -292,8 +292,8 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
-  if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go}/>;
-  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute onExit={()=>go("portugueseLab")}/>;
+  if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go} view="home"/>;
+  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
@@ -502,7 +502,7 @@ function SubjectSelection({s,setS,go}){
 function SubjectManager({s,setS,go}){
   const selected=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
   const active=subjectById(s.activeSubjectId);
-  const subjectHomeScreen=id=>id==="portuguese"?"portugueseLab":"home";
+  const subjectHomeScreen=id=>"home";
 
   function activate(subject){
     if(!subject.available)return;
