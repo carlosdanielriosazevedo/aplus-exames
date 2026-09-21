@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - work/finish-portuguese-workspace
+      - fix/portuguese-production-build
   workflow_dispatch:
 
 permissions:
@@ -11,7 +12,7 @@ permissions:
 
 jobs:
   migrate:
-    if: github.event_name == 'push' && github.event.head_commit.message != 'Apply shared Portuguese workspace migration'
+    if: github.event_name == 'push' && github.ref_name == 'work/finish-portuguese-workspace' && github.event.head_commit.message != 'Apply shared Portuguese workspace migration'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,8 +31,28 @@ jobs:
           git commit -m "Apply shared Portuguese workspace migration"
           git push
 
+  fix-build:
+    if: github.event_name == 'push' && github.ref_name == 'fix/portuguese-production-build' && github.event.head_commit.message != 'Fix Apronso import in Portuguese workspace'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/portuguese-production-build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/fix-portuguese-apronso-import.mjs
+      - name: Commit fix if needed
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/PortugueseLabLazy.js
+          git commit -m "Fix Apronso import in Portuguese workspace"
+          git push
+
   validate:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Apply shared Portuguese workspace migration'
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Apply shared Portuguese workspace migration' || github.event.head_commit.message == 'Fix Apronso import in Portuguese workspace'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
