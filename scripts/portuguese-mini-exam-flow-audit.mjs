@@ -82,6 +82,6 @@ assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuaç�
 const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";
 assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas");
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
-assert.doesNotMatch(portugueseRow,/available:true/u,"esta integração interna não pode desbloquear Português para alunos");
+assert.match(portugueseRow,/available:true/u,"Português deve estar selecionável no beta atual");
 
 console.log("✓ fluxo Mini-exame Português: foco pré-resposta só com atenções ativas · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
