@@ -243,7 +243,9 @@ export default function App(){
     if(preview==="subjects"){
       setScreen("subjectOnboard");
     }else if(preview==="portuguese"){
-      setScreen("portugueseLab");
+      recoveredState=normalizeSubjectWorkspace({...recoveredState,selectedSubjectIds:[...(recoveredState.selectedSubjectIds||[]),"portuguese"],activeSubjectId:"portuguese"});
+      setS(recoveredState);
+      setScreen("home");
     }else if(recoveryError){
       setScreen("diagRecoveryError");
     }else if(recoveredCompletion){
@@ -253,8 +255,6 @@ export default function App(){
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
-    }else if(recoveredState.activeSubjectId==="portuguese"){
-      setScreen("portugueseLab");
     }else setScreen(recoveredState.diagnosticDone?"home":"welcome");
     setHydrated(true);
   },[]);
