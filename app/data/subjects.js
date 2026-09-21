@@ -15,7 +15,7 @@ export const SECONDARY_EXAM_SUBJECTS=[
   {id:"physics-chemistry-a",name:"Física e Química A",codes:["715"],examYear:"11.º",group:"math-science",icon:"⚛"},
   {id:"biology-geology",name:"Biologia e Geologia",codes:["702"],examYear:"11.º",group:"math-science",icon:"⌁"},
 
-  {id:"portuguese",name:"Português",codes:["639"],examYear:"12.º",group:"languages",icon:"Aa",available:true,releaseStage:"beta"},
+  {id:"portuguese",name:"Português",codes:["639"],examYear:"12.º",group:"languages",icon:"Aa",available:true,releaseStage:"foundation"},
   {id:"portuguese-second-language",name:"Português Língua Segunda",codes:["138"],examYear:"12.º",group:"languages",icon:"PT"},
   {id:"portuguese-non-native",name:"Português Língua Não Materna",shortName:"PLNM",codes:["839"],examYear:"12.º",group:"languages",icon:"PT"},
   {id:"portuguese-literature",name:"Literatura Portuguesa",codes:["734"],examYear:"11.º",group:"languages",icon:"Li"},
