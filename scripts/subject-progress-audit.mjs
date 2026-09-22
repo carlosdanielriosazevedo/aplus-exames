@@ -44,6 +44,14 @@ assert.deepEqual(portuguese.sessions[0].results[1].rubricEvidence,[{criterionId:
 assert.deepEqual(portuguese.sessions[0].results[1].rubricObservationEvidence,[{criterionId:"argumentacao",observationId:"argumentacao-1",evidence:"observed",studentEvidence:[]},{criterionId:"lingua",observationId:"lingua-1",evidence:"unsure",studentEvidence:[]}],"A evidência estruturada deve persistir por observação e a studentEvidence.");
 assert.equal(portuguese.sessions[0].results[1].points,null,"A autoavaliação não pode criar pontuação.");
 
+const competenceBeforeTraining=structuredClone(portuguese.competence);
+state=recordSubjectSession(state,{
+  subjectId:"portuguese",kind:"training",label:"Treino Livre",items:[items[0]],completedAt:130,
+  results:[{status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"}]
+});
+assert.deepEqual(subjectProgressFor(state,"portuguese").competence,competenceBeforeTraining,"O Treino Livre deve ficar no histórico sem alterar a evidência académica.");
+assert.equal(subjectProgressFor(state,"portuguese").sessions.at(-1).kind,"training");
+
 state={...state,subjectProgress:{...state.subjectProgress,"math-a":{subjectId:"math-a",sessions:[{id:"keep"}]}}};
 state=resetSubjectProgress(state,"portuguese");
 assert.equal(state.subjectProgress.portuguese,undefined,"A reposição deve apagar apenas Português.");

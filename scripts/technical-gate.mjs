@@ -3,6 +3,7 @@ import {spawnSync} from "node:child_process";
 const checks=[
   ["Syntax/JSX","npm",["run","syntax:audit"]],
   ["Disciplinas do secundário","npm",["run","subjects:audit"]],
+  ["Workspace e migração de disciplinas","npm",["run","subject-workspace:audit"]],
   ["Fundação de Português 639","npm",["run","portuguese-foundation:audit"]],
   ["Motor de Português 639","npm",["run","portuguese-engine:audit"]],
   ["Quarta vaga de Português","npm",["run","portuguese-wave4:audit"]],

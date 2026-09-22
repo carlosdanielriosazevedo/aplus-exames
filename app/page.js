@@ -6,12 +6,13 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
-import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,Shell,FriendsBetaRibbon} from "./components/chrome";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon} from "./components/chrome";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
-import {migrateSubjectProgress} from "./lib/subjectProgress";
+import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
+import {normalizeSubjectWorkspaceState,uniqueSubjectIds} from "./lib/subjectWorkspace";
 import "./portugues-mini-exame/passage-mini-exam.css";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -117,10 +118,11 @@ function subjectById(id){
 }
 
 function normalizeSubjectWorkspace(state){
-  const selected=[...new Set((state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id)))];
-  if(!selected.length)selected.push(DEFAULT_SUBJECT_ID);
-  const active=selected.includes(state.activeSubjectId)?state.activeSubjectId:selected[0];
-  return migrateSubjectProgress({...state,selectedSubjectIds:selected,activeSubjectId:active});
+  return migrateSubjectProgress(normalizeSubjectWorkspaceState(state,AVAILABLE_SUBJECT_IDS,DEFAULT_SUBJECT_ID));
+}
+
+function activeSubjectDiagnosticDone(state){
+  return state.activeSubjectId==="portuguese"?subjectProgressFor(state,"portuguese").diagnosticDone:!!state.diagnosticDone;
 }
 
 const initial={
@@ -255,7 +257,7 @@ export default function App(){
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
-    }else setScreen(recoveredState.diagnosticDone?"home":"welcome");
+    }else setScreen(activeSubjectDiagnosticDone(recoveredState)?"home":"welcome");
     setHydrated(true);
   },[]);
 
@@ -292,16 +294,18 @@ export default function App(){
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
-  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseLab s={s} setS={setS} go={go} view={screen}/>;
-  if(screen==="portugueseLab")return <PortugueseLab s={s} setS={setS} go={go} view="home"/>;
-  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute onExit={()=>go("exams")}/>;
+  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view={screen}/>;
+  if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
+  if(screen==="curriculumOnboard"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
+  if(screen==="curriculumSettings"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculum"/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
   if(screen==="curriculumSettings")return <TaughtCurriculum s={s} setS={setS} go={go}/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="apronsoIntro")return <ApronsoIntro setS={setS} go={go}/>;
+  if(screen==="diag"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="diagnostic"/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
   if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
@@ -310,6 +314,7 @@ export default function App(){
   if(screen==="mission")return <Mission s={s} setS={setS} go={go} recoveredDraft={recoveredSession?.kind==="mission"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
   if(screen==="train")return <TrainHub s={s} go={go}/>;
+  if(screen==="trainingSetup"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="trainingSetup"/>;
   if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
@@ -345,11 +350,6 @@ export default function App(){
   }}/>;
 }
 
-function StudentTop({s,go,children}){
-  const daily=engagementSummary(s);
-  const subject=subjectById(s.activeSubjectId);
-  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
-}
 function FriendsBetaDisclaimer({s,compact=false}){
   if(!isFriendsBeta(s))return null;
   return <div className={"friendsBetaDisclaimer "+(compact?"compact":"")}>
@@ -466,7 +466,7 @@ function SubjectSelection({s,setS,go}){
 
     <div className="subjectSelectionSummary">
       <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
-      <strong>Matemática A disponível · Português em preparação</strong>
+      <strong>Matemática A e Português disponíveis</strong>
     </div>
 
     <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
@@ -494,14 +494,14 @@ function SubjectSelection({s,setS,go}){
       </section>;
     })}</div>
 
-    <div className="notice"><b>Começamos por Matemática A</b><span>Português já está em preparação, mas continuará bloqueado até o diagnóstico, os treinos e a correção escrita serem suficientemente fiáveis.</span></div>
-    <button className="primary" disabled={!selected.length} onClick={save}>Continuar com Matemática A</button>
+    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A e Português usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>
+    <button className="primary" disabled={!selected.length} onClick={save}>Continuar</button>
   </Shell>;
 }
 
 
 function SubjectManager({s,setS,go}){
-  const selected=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
+  const selected=uniqueSubjectIds(s.selectedSubjectIds||[],AVAILABLE_SUBJECT_IDS);
   const active=subjectById(s.activeSubjectId);
   const subjectHomeScreen=id=>"home";
 
@@ -523,7 +523,6 @@ function SubjectManager({s,setS,go}){
       </button>
     </section>
     {selected.length>1&&<section className="subjectManagerSection"><h2>As tuas disciplinas</h2>{selected.filter(id=>id!==active.id).map(id=>{const subject=subjectById(id);return <button type="button" key={id} className="subjectWorkspaceCard" onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>Abrir plano de estudo</small></span><strong>Mudar</strong></button>})}</section>}
-    <section className="subjectManagerSection"><h2>Português</h2><button type="button" className="subjectWorkspaceCard" onClick={()=>{const subject=subjectById("portuguese");if(subject?.available){setS(prev=>normalizeSubjectWorkspace({...prev,selectedSubjectIds:[...(prev.selectedSubjectIds||[]), "portuguese"],activeSubjectId:"portuguese"}));go("home")}}}><span className="subjectIcon" aria-hidden="true">Aa</span><span><b>Português · Prova 639</b><small>Diagnóstico · Treinar · Mini-exames · Progresso</small></span><strong>Abrir</strong></button><small className="muted">Português usa agora o mesmo espaço de estudo da Matemática A. O conteúdo continua em validação pedagógica, mas a navegação e a estrutura são comuns.</small></section>
     <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
@@ -531,7 +530,7 @@ function SubjectManager({s,setS,go}){
   </Shell>;
 }
 
-const PortugueseLab=dynamic(()=>import("./components/PortugueseLabLazy"),{ssr:false});
+const PortugueseSubject=dynamic(()=>import("./components/PortugueseSubject"),{ssr:false});
 
 function suggestedExamTimingForYear(year,current){
   if(year==="10.º")return "twoYears";
@@ -543,6 +542,7 @@ function suggestedExamTimingForYear(year,current){
 
 function StudentProfile({s,setS,go,editing=false}){
   const [p,setP]=useState(s.profile||initial.profile);
+  const activeSubject=subjectById(s.activeSubjectId);
   function save(){
     if(editing){
       setS(prev=>migrateDailyMission({...prev,profile:p}));
@@ -564,7 +564,7 @@ function StudentProfile({s,setS,go,editing=false}){
     <h3>Em que ano estás?</h3>
     <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div>
 
-    {p.schoolYear==="12.º"&&<>
+    {activeSubject.id==="math-a"&&p.schoolYear==="12.º"&&<>
       <h3>Que tema opcional está a tua turma a estudar?</h3>
       <p className="muted">Seleciona apenas o que já foi escolhido na tua turma. Podes selecionar mais do que um se for esse o caso. Se ainda não sabes, deixa vazio.</p>
       <div className="stackChoices">{[
@@ -577,7 +577,7 @@ function StudentProfile({s,setS,go,editing=false}){
       })}</div>
     </>}
 
-    <h3>{p.schoolYear==="Já terminei o secundário"?"Que nota tinhas aproximadamente a Matemática?":"Que nota tens tido aproximadamente a Matemática?"}</h3>
+    <h3>{p.schoolYear==="Já terminei o secundário"?`Que nota tinhas aproximadamente a ${activeSubject.name}?`:`Que nota tens tido aproximadamente a ${activeSubject.name}?`}</h3>
     <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
       const raw=e.target.value.replace(/[^0-9]/g,"");
       const n=raw===""?"":Math.max(0,Math.min(20,Number(raw)));

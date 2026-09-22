@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect,useMemo,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
@@ -21,7 +21,7 @@ function revisionTargets(criteria,assessment){
   return (marked.length?marked:criteria.filter(criterion=>!assessment[criterion.id]?.status)).map(criterion=>criterion.id);
 }
 
-export default function PortuguesePassageMiniExam({exam,onExit=null}){
+export default function PortuguesePassageMiniExam({exam,onExit=null,onComplete=null}){
   const [index,setIndex]=useState(0);
   const [answers,setAnswers]=useState({});
   const [review,setReview]=useState(false);
@@ -32,6 +32,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
   const [writingMemory,setWritingMemory]=useState([]);
   const [dismissedWritingFocus,setDismissedWritingFocus]=useState({});
   const [attemptId]=useState(()=>`ptx-${Date.now()}-${Math.random().toString(36).slice(2,8)}`);
+  const completedRef=useRef(false);
   const item=exam.items[index];
   const block=exam.blocks.find(candidate=>candidate.itemIds.includes(item.id));
   const answeredCount=useMemo(()=>exam.items.filter(row=>answerFilled(row,answers[row.id])).length,[answers,exam.items]);
@@ -88,11 +89,34 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
     cancelRevision(row.id);
   };
 
+  const buildResults=()=>exam.items.map(row=>{
+    const value=answers[row.id];
+    if(row.responseType==="multiple-choice"){
+      const result=resultFor(row,value);
+      return {status:answerFilled(row,value)?"final":"unanswered",final:true,correct:answerFilled(row,value)?result.correct:null,points:result.correct?row.maxPoints:0,maxPoints:row.maxPoints,gradingMode:row.gradingMode};
+    }
+    const criteria=(row.rubric?.criteria||[]).map(criterion=>{
+      const entry=selfAssessment[row.id]?.[criterion.id]||{};
+      const status=entry.status==="met"?"observed":entry.status==="not-yet"?"not-observed":entry.status||"pending";
+      return {...criterion,status,observations:[]};
+    });
+    const answered=answerFilled(row,value);
+    return {status:answered?"self-assessed-awaiting-review":"unanswered",final:false,correct:null,points:null,maxPoints:row.maxPoints,gradingMode:row.gradingMode,responseText:String(value||""),rubricCompleted:criteria.length>0&&criteria.every(criterion=>criterion.status!=="pending"),criteria};
+  });
+
+  const completeAndExit=()=>{
+    if(!completedRef.current){
+      completedRef.current=true;
+      onComplete?.({items:exam.items,results:buildResults(),answers});
+    }
+    onExit?.();
+  };
+
   if(review){
     return <main className="ptx-shell">
       <header className="ptx-header">
         <div><span className="ptx-kicker">Português 639 · protótipo</span><h1>Rever o mini-exame</h1></div>
-        <div className="ptx-header-actions"><button className="ptx-ghost" onClick={()=>setReview(false)}>Voltar às respostas</button>{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair do mini-exame</button>}</div>
+        <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={completeAndExit}>Guardar revisão e voltar aos mini-exames</button>}</div>
       </header>
       <section className="ptx-summary">
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
@@ -215,7 +239,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null}){
             <ul>{activeWritingFocus.rows.map(focus=><li key={focus.criterionId}><b>{focus.prompt}</b><span>{focus.message}</span></li>)}</ul>
           </aside>}
           <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p></div>}
-        <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setReview(true)}>Rever o exame</button>}</div>
+        <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setReview(true)}>Terminar e rever o exame</button>}</div>
       </section>
     </div>
     <footer className="ptx-footer-note">Protótipo editorial · {answeredCount} de {exam.itemCount} questões respondidas · não altera ainda o banco live de Português.</footer>

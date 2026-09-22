@@ -61,6 +61,7 @@
     "vnext-exam:generate": "node scripts/generate-vnext-exam.mjs",
     "vnext-exam:audit": "node scripts/vnext-exam-audit.mjs",
     "subjects:audit": "node scripts/subjects-audit.mjs",
+    "subject-workspace:audit": "node scripts/subject-workspace-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
     "portuguese-engine:audit": "node scripts/portuguese-engine-audit.mjs",
     "portuguese-wave4:audit": "node scripts/portuguese-wave4-audit.mjs",

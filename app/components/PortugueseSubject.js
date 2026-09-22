@@ -1,16 +1,22 @@
 "use client";
 import {useState} from "react";
-import {Apronso,Back,Shell,Logo,StudentNav} from "./chrome";
-import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
-import {engagementSummary} from "../lib/engagement";
+import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop} from "./chrome";
+import {PORTUGUESE_DOMAINS} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
-import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare} from "../lib/portugueseEngine";
+import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
 import {advanceSubjectSession,beginSubjectSession,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
-function PortugueseLab({s,setS,go,view="home"}){
+const SCHOOL_YEARS=["10.º","11.º","12.º"];
+
+function yearsThrough(year){
+  const index=SCHOOL_YEARS.indexOf(year);
+  return index<0?SCHOOL_YEARS:SCHOOL_YEARS.slice(0,index+1);
+}
+
+function PortugueseSubject({s,setS,go,view="home"}){
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
@@ -19,17 +25,27 @@ function PortugueseLab({s,setS,go,view="home"}){
   const [results,setResults]=useState([]);
   const [missionFocus,setMissionFocus]=useState(null);
   const missionEvidenceFocus=missionFocus?.targetEvidenceObservations||[];
+  const currentYear=SCHOOL_YEARS.includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
+  const savedScope=s.subjectSettings?.portuguese?.taughtDomains;
+  const taughtDomains=Array.isArray(savedScope)?savedScope:Object.keys(PORTUGUESE_DOMAIN_LABELS);
+  const [scopeDraft,setScopeDraft]=useState(taughtDomains);
+  const allowedYears=yearsThrough(currentYear);
+  const scopedItems=PORTUGUESE_ITEMS.filter(item=>allowedYears.includes(item.year)&&(item.year!==currentYear||taughtDomains.includes(item.domain)));
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
+  const scopedCoverage=portugueseCoverage(scopedItems);
   const progress=subjectProgressFor(s,"portuguese");
   const competenceRows=Object.entries(progress.competence);
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
-  const activeSubject=SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id==="portuguese");
-  const daily=engagementSummary(s);
-  const sharedTop=<header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label="Mudar de disciplina"><span aria-hidden="true">{activeSubject.icon}</span><b>{activeSubject.shortName||activeSubject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label="Sequência">🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label="XP">🏆 <b>{s.xp}</b></button></div></header>;
+  const todayKey=new Date().toLocaleDateString("en-CA");
+  const missionDone=progress.missionHistory.some(row=>new Date(row.completedAt).toLocaleDateString("en-CA")===todayKey);
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button></div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
-  function sharedShell(content){return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;}
+  function sharedShell(content){
+    if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;
+    return <Shell>{sharedTop}{content}{sharedNav}</Shell>;
+  }
 
   function start(kind,items,label,domain=null){
     if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
@@ -39,19 +55,24 @@ function PortugueseLab({s,setS,go,view="home"}){
   }
 
   function startDiagnostic(){
-    start("diagnostic",buildPortugueseDiagnostic(PORTUGUESE_ITEMS),"Diagnóstico interno");
+    start("diagnostic",buildPortugueseDiagnostic(scopedItems),"Diagnóstico");
   }
 
   function startMission(domain){
-    const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress,domain});
+    const mission=buildAdaptivePortugueseMission(scopedItems,{progress,domain});
     setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],targetEvidenceObservations:mission.targetEvidenceObservations||[],label:PORTUGUESE_DOMAIN_LABELS[domain]});
     start("mission",mission.items,`Missão · ${PORTUGUESE_DOMAIN_LABELS[domain]}`,domain);
   }
 
   function startRecommendedMission(){
-    const mission=buildAdaptivePortugueseMission(PORTUGUESE_ITEMS,{progress});
+    const mission=buildAdaptivePortugueseMission(scopedItems,{progress});
     setMissionFocus({targetEvidenceCompetencyIds:mission.targetEvidenceCompetencyIds||[],targetEvidenceObservations:mission.targetEvidenceObservations||[],label:"Missão recomendada"});
     start("mission",mission.items,"Missão recomendada");
+  }
+
+  function startPractice(domain=null){
+    const mission=buildAdaptivePortugueseMission(scopedItems,{progress,domain});
+    start("training",mission.items,domain?`Praticar · ${PORTUGUESE_DOMAIN_LABELS[domain]}`:"Praticar Português",domain);
   }
 
   function resume(){
@@ -73,11 +94,39 @@ function PortugueseLab({s,setS,go,view="home"}){
     setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setMissionFocus(null);
   }
 
+  if(!session&&view==="diagnostic")return <Shell>
+    <p className="eyebrow">AVALIAÇÃO INICIAL</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não te vou avaliar. Só te quero conhecer um pouco melhor para saber por onde começarmos.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+    <h2>Poucas perguntas. Muita informação.</h2>
+    <p className="muted">São 8 perguntas originais: duas por domínio escrito. Escolhes ou escreves a resposta, carregas em “Responder” e só depois vês o feedback e a correção.</p>
+    {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Primeiro atualiza a matéria dada</b><span>O diagnóstico não usa áreas que ainda não deste no teu ano atual.</span></div>}
+    <button className="primary" disabled={!scopedCoverage.diagnosticReady} onClick={startDiagnostic}>Começar diagnóstico</button>
+    {!scopedCoverage.diagnosticReady&&<button className="secondary" onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button>}
+  </Shell>;
+
+  if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
+    {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+    <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p><h1>O que já deste no {currentYear}?</h1>
+    <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as áreas que a escola já trabalhou; o diagnóstico e as recomendações deixam de usar matéria que ainda não deste.</p>
+    <div className="curriculumPicker">{PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=><label key={domain.id}><input type="checkbox" checked={scopeDraft.includes(domain.id)} onChange={()=>setScopeDraft(current=>current.includes(domain.id)?current.filter(id=>id!==domain.id):[...current,domain.id])}/><span>{domain.label}</span></label>)}</div>
+    {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste matéria deste ano</b><span>A app usará apenas matéria dos anos anteriores. No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma área.</span></div>}
+    <div className="notice"><b>O histórico fica guardado</b><span>Desmarcar uma área não apaga respostas nem sessões anteriores; apenas a retira das próximas recomendações.</span></div>
+    <button className="primary" onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtDomains:scopeDraft}}}));go(view==="curriculumOnboard"?"goalOnboard":"progress")}}>{view==="curriculumOnboard"?"Continuar":"Guardar matéria dada"}</button>
+  </Shell>;
+
+  if(!session&&view==="trainingSetup")return <Shell>
+    <button className="back" onClick={()=>go("train")}>← Voltar</button>
+    <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
+    <p className="muted">O Treino Livre não sobe nem desce diretamente o teu Domínio. Serve para trabalhar uma área sem alterar a avaliação académica.</p>
+    <div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=scopedCoverage.missionEligibleByDomain[domain]>=7;return <button key={domain} disabled={!available} onClick={()=>startPractice(domain)}>{label}<small>{available?" · 7 perguntas adaptadas":" · fora da matéria dada"}</small></button>})}</div>
+    <button className="primary" disabled={scopedItems.length<7} onClick={()=>startPractice()}>Praticar várias áreas</button>
+  </Shell>;
+
   if(!session&&view==="train")return sharedShell(<>
     <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
     <div className="notice"><b>Praticar</b><span>Queres praticar um domínio específico ou deixar a app escolher o próximo passo com base no teu percurso.</span></div>
     <div className="trainChoices">
-      <button onClick={()=>startRecommendedMission()}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar ou deixa a missão adaptar-se à tua evidência. O treino não altera diretamente o Domínio.</small></div><em>→</em></button>
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
       <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos de Português serão acrescentados aqui.</small></div><em>Em breve</em></button>
     </div>
@@ -111,17 +160,19 @@ function PortugueseLab({s,setS,go,view="home"}){
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis.</span></div>
   </>);
-  if(!session)return sharedShell(<><div className="portugueseLabHead"><span>Aa</span><div><p className="eyebrow">PORTUGUÊS</p><h1>Português · Prova 639</h1></div></div>
-    
-    <div className="portugueseLabStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>
-    {progress.lastPosition&&<section className="portugueseLabSection"><h2>Continuar</h2><button className="portugueseLabAction featured" onClick={resume}><b>Retomar {progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></button></section>}
-    <section className="portugueseLabSection"><h2>Fluxo de diagnóstico</h2><button className="portugueseLabAction featured" onClick={startDiagnostic}><b>{progress.diagnosticDone?"Repetir diagnóstico":"Testar diagnóstico"}</b><span>{progress.diagnosticDone?"Concluído · nova tentativa mantém o histórico":"8 itens · 2 por domínio · sem produção extensa"}</span></button></section>
-    <section className="portugueseLabSection"><h2>Missão adaptativa</h2><button className="portugueseLabAction featured" onClick={startRecommendedMission}><b>Treinar o que mais precisa</b><span>7 itens · competências prioritárias · evita repetição recente</span></button><small className="portugueseMethodNote">A missão usa também a evidência das respostas abertas já autoavaliadas para dar mais prioridade ao que ficou “a rever”. A app não transforma essa evidência numa nota.</small><small className="portugueseMethodNote">A dificuldade é uma classificação editorial provisória. Só será considerada calibrada depois de existirem dados suficientes de alunos.</small></section>
-    <section className="portugueseLabSection"><h2>Missões por domínio</h2><div className="portugueseMissionGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([id,label])=><button key={id} className="portugueseLabAction" onClick={()=>startMission(id)}><b>{label}</b><span>7 itens adaptados ao progresso</span></button>)}</div></section>
-    {(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><h2>Progresso de Português</h2><div><span>Respostas determinísticas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas pendentes de grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div><small>O texto livre das respostas não é guardado neste histórico.</small></section>}
-    <section className="portugueseLabSection"><h2>Mini-exame</h2><button className="portugueseLabAction featured" onClick={()=>go("portugueseMiniExam")}><b>Testar mini-exame com texto partilhado</b><span>2 textos · 6 questões · leitura e educação literária · revisão no fim</span></button><small className="portugueseMethodNote">Protótipo interno: o texto permanece associado ao grupo de perguntas e as respostas abertas não recebem classificação automática final.</small></section>
-    
-    {(()=>{const lastDiagnostic=[...progress.sessions].reverse().find(row=>row.kind==="diagnostic");if(!lastDiagnostic)return null;const rows=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const ids=lastDiagnostic.itemIds.filter(id=>portugueseItemById(id)?.domain===domain);const domainResults=ids.map((id,index)=>lastDiagnostic.results[index]).filter(Boolean);const deterministic=domainResults.filter(row=>row.final);const correct=deterministic.filter(row=>row.correct).length;return {domain,label,total:ids.length,correct,pending:domainResults.filter(row=>!row.final).length,percent:deterministic.length?Math.round(correct/deterministic.length*100):null};});return <section className="portugueseProgressCard"><h2>O teu ponto de partida</h2><p>O diagnóstico não é uma nota. Serve para decidir onde vale a pena começares a praticar.</p><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseLabAction" key={row.domain}><b>{row.label}</b><span>{row.percent===null?"A aguardar grelha":`${row.correct}/${row.total} corretas · ${row.percent}%`}</span>{row.pending>0&&<small>{row.pending} resposta(s) por autoavaliação</small>}</article>)}</div><button className="primary" onClick={startRecommendedMission}>Começar a missão recomendada</button></section>})()}{(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}
+  if(!session)return sharedShell(<>
+    <div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
+    <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Podes praticar outra área ou rever o teu progresso.":progress.diagnosticDone?"Já analisei o teu percurso em Português. Esta é a ação que mais vale a pena fazer agora.":"Primeiro quero perceber o teu ponto de partida em Português. Não é uma nota."}</ApronsoNudge>
+    {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
+    <section className="adaptivePath" aria-label="Caminho adaptativo de Português">
+      <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>DIAGNÓSTICO</small><b>{progress.diagnosticDone?"Ponto de partida concluído":"Conhecer o teu nível atual"}</b></div></div>
+      <div className="pathLine active"/>
+      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><p>{progress.diagnosticDone?"7 perguntas escolhidas pela app, normalmente em 3–5 minutos.":"8 perguntas, duas por domínio, com feedback apenas depois de responderes."}</p><em>{progress.diagnosticDone?"~3–5 min":"ponto de partida"}</em><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className="pathLine"/>
+      <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
+    </section>
+    {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
+    <details className="progressDetails"><summary>Ver detalhes da disciplina →</summary><div className="portugueseSubjectStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>{(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><div><span>Respostas objetivas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas por grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div></section>}{(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}</details>
   </>);
 
   if(session.finished){
@@ -133,17 +184,17 @@ function PortugueseLab({s,setS,go,view="home"}){
       const rows=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const domainRows=session.items.map((item,index)=>({item,result:finalResults[index]})).filter(row=>row.item.domain===domain&&row.result?.status!=="unanswered");const d=domainRows.filter(row=>row.result?.final);const c=d.filter(row=>row.result.correct).length;return {domain,label,total:domainRows.length,correct:c,pending:domainRows.filter(row=>!row.result.final).length,percent:d.length?Math.round(c/d.length*100):null};});
       const priority=[...rows].sort((a,b)=>(a.percent===null?-1:a.percent)-(b.percent===null?-1:b.percent))[0];
       return <Shell><p className="eyebrow">Diagnóstico interno</p><h1>Já temos um ponto de partida</h1><p className="portugueseMethodNote">Isto não é uma nota. É uma fotografia inicial para escolher o próximo treino.</p>
-        <div className="portugueseLabStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
-        <section className="portugueseProgressCard"><h2>O que vimos por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseLabAction" key={row.domain}><b>{row.label}</b><span>{row.percent===null?"Ainda sem leitura objetiva":`${row.correct}/${row.total} · ${row.percent}%`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aguardam autoavaliação</small>}</article>)}</div></section>
+        <div className="portugueseSubjectStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
+        <section className="portugueseProgressCard"><h2>O que vimos por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><b>{row.label}</b><span>{row.percent===null?"Ainda sem leitura objetiva":`${row.correct}/${row.total} · ${row.percent}%`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aguardam autoavaliação</small>}</article>)}</div></section>
         {priority&&<div className="notice"><b>Próximo foco: {priority.label}</b><span>Vamos começar por aqui e ajustar a missão àquilo que já respondeste, evitando repetir conteúdo sem necessidade.</span></div>}
         <button className="primary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);setTimeout(()=>startRecommendedMission(),0)}}>Começar a missão recomendada</button>
-        <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null)}}>Voltar ao laboratório</button>
+        <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);go("home")}}>Voltar ao plano de estudo</button>
       </Shell>;
     }
     return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>{missionEvidenceFocus.length>0&&<div className="notice"><b>Esta missão foi ajustada ao teu histórico</b><span>Incluiu critérios que assinalaste anteriormente como “em parte”, “não identificados” ou “por confirmar”. Isto orienta o treino, mas não é uma nota.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label}</li>)}</ul></div>}
-      <div className="portugueseLabStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
+      <div className="portugueseSubjectStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
       {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
-      <button className="primary" onClick={()=>setSession(null)}>Voltar ao laboratório</button>
+      <button className="primary" onClick={()=>{setSession(null);go("home")}}>Voltar ao plano de estudo</button>
     </Shell>;
   }
 
@@ -214,4 +265,4 @@ function PortugueseLab({s,setS,go,view="home"}){
 }
 
 
-export default PortugueseLab;
+export default PortugueseSubject;

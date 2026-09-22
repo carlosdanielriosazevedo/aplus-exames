@@ -8,7 +8,9 @@ const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.cs
 assert.match(component,/"use client"/u,"a experiência deve preservar estado de respostas no cliente");
 assert.match(component,/exam\.blocks\.find/u,"a questão ativa deve recuperar o respetivo bloco de texto partilhado");
 assert.match(component,/answers\[row\.id\]/u,"as respostas devem ser persistidas por item durante a navegação");
-assert.match(component,/Rever o exame/u,"o fim do fluxo deve conduzir à revisão, não à correção imediata");
+assert.match(component,/onClick=\{\(\)=>setReview\(true\)\}>Terminar e rever o exame/u,"o fim do fluxo deve conduzir explicitamente à revisão");
+assert.doesNotMatch(component,/>Corrigir</u,"um exame terminado não deve voltar a apresentar uma ação de correção");
+assert.doesNotMatch(component,/Voltar às respostas/u,"depois de terminado, o exame deve permanecer no fluxo de revisão");
 assert.match(component,/Autoavaliação guiada/u,"respostas abertas devem conduzir à autoavaliação guiada por critérios");
 assert.match(component,/não (?:produz|produzem)[^\n]*classificação automática final/u,"a UI deve dizer que autoavaliação e revisão não produzem nota automática final");
 assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve pedir evidência explícita por critério");
