@@ -15,7 +15,7 @@ export default function PortugueseLearnPanel({schoolYear="12.º",onPractice}){
   return <section id="portugueseLearn" className="progressDetails" aria-label="Aprender Português">
     <div className="sectionIntro"><p className="eyebrow">APRENDER</p><h2>Matéria de Português, organizada para estudar.</h2></div>
     <p className="muted">Escolhe o ano e abre uma unidade. Esta primeira versão liga o mapa curricular a explicações curtas e ao treino da competência correspondente.</p>
-    <div className="curriculumPicker">{years.map(row=><button type="button" key={row.year} className={year===row.year?"selected":""} onClick={()=>{setYear(row.year);setUnitId(null)}}>{row.label}</button>)}</div>
+    <div className="chips" aria-label="Escolher ano de Português">{years.map(row=><button type="button" key={row.year} className={year===row.year?"sel":""} aria-pressed={year===row.year} onClick={()=>{setYear(row.year);setUnitId(null)}}>{row.label}</button>)}</div>
     {yearRow&&<>
       <div className="notice"><b>{yearRow.period}</b><span>O mapa inclui também leitura, escrita e gramática do {yearRow.year}.</span></div>
       {!unit?<div className="themeGrid">{yearRow.units.map(row=><button type="button" key={row.id} onClick={()=>setUnitId(row.id)}><b>{row.title}</b><small>{DOMAIN_LABELS[row.domain]} · {row.kind==="obra"?"obra/conjunto de textos":"competência"}</small></button>)}</div>
