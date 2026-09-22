@@ -1,6 +1,7 @@
 "use client";
 import {useState} from "react";
 import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop} from "./chrome";
+import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import {PORTUGUESE_DOMAINS} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
@@ -75,6 +76,11 @@ function PortugueseSubject({s,setS,go,view="home"}){
     start("training",mission.items,domain?`Praticar · ${PORTUGUESE_DOMAIN_LABELS[domain]}`:"Praticar Português",domain);
   }
 
+  function selectMiniExam(id){
+    setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:id}}}));
+    go("portugueseMiniExam");
+  }
+
   function resume(){
     const saved=progress.lastPosition;
     if(!saved)return;
@@ -124,12 +130,13 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="train")return sharedShell(<>
     <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <div className="notice"><b>Praticar</b><span>Queres praticar um domínio específico ou deixar a app escolher o próximo passo com base no teu percurso.</span></div>
+    <div className="notice"><b>Praticar</b><span>Queres praticar um domínio específico, fazer um mini-exame ou rever matéria antes de responder.</span></div>
     <div className="trainChoices">
       <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
-      <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos de Português serão acrescentados aqui.</small></div><em>Em breve</em></button>
+      <button onClick={()=>document.getElementById("portugueseLearn")?.scrollIntoView({behavior:"smooth",block:"start"})}><span>📚</span><div><b>Aprender</b><small>Revê obras, leitura, escrita e gramática organizadas por ano e liga a explicação ao treino.</small></div><em>→</em></button>
     </div>
+    <PortugueseLearnPanel schoolYear={currentYear} onPractice={startPractice}/>
   </>);
 
   if(!session&&view==="progress"){
@@ -153,10 +160,11 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="exams")return sharedShell(<>
     <p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
-    <div className="notice"><b>Mini-exame</b><span>Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</span></div>
-    <button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
-    <div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"Sessão disponível":"Ainda não realizado"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico desta disciplina fica separado do de Matemática A.":"Começa o primeiro mini-exame para criar histórico."}</span></div>
-    <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o Mini-exame.</span></div>
+    <div className="notice"><b>Mini-exames</b><span>Sem pistas durante as perguntas. No fim, revês escolhas e respostas abertas por critérios observáveis.</span></div>
+    <button className="exam examAction" onClick={()=>selectMiniExam("mini-1")}><div><b>⚡ Mini-exame 1 · Espaço e memória</b><span>2 textos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
+    <button className="exam examAction" onClick={()=>selectMiniExam("mini-2")}><div><b>⚡ Mini-exame 2 · Escolha e despedida</b><span>2 textos novos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
+    <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico identifica cada mini-exame e continua separado do de Matemática A.":"Escolhe um dos dois mini-exames para criar histórico."}</span></div>
+    <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos os Mini-exames.</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis.</span></div>
   </>);
@@ -169,10 +177,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <div className="pathLine active"/>
       <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><p>{progress.diagnosticDone?"7 perguntas escolhidas pela app, normalmente em 3–5 minutos.":"8 perguntas, duas por domínio, com feedback apenas depois de responderes."}</p><em>{progress.diagnosticDone?"~3–5 min":"ponto de partida"}</em><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
       <div className="pathLine"/>
-      <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
+      <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar, Aprender ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
     </section>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
-    <details className="progressDetails"><summary>Ver detalhes da disciplina →</summary><div className="portugueseSubjectStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>{(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><div><span>Respostas objetivas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas por grelha</span><b>{pendingRubrics}</b></div><div><span>Sessões concluídas</span><b>{progress.sessions.length}</b></div></section>}{(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}</details>
+    <details className="progressDetails"><summary>Ver detalhes da disciplina →</summary><div className="portugueseSubjectStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>{(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><div><span>Respostas objetivas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas por grelha</span><b>{pendingRubrics}</b></div><div><b>{progress.sessions.length}</b><span>Sessões concluídas</span></div></section>}{(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}</details>
   </>);
 
   if(session.finished){
