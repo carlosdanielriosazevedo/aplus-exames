@@ -1,9 +1,13 @@
-const MODEL_VERSION=2;
+import {canonicalSubjectId} from "./subjectWorkspace.js";
+
+const MODEL_VERSION=3;
 const MAX_SESSIONS=100;
 
 function normalizeCompetenceRow(row){
   const source=row&&typeof row==="object"?row:{};
   return {
+    domainId:source.domainId||source.domain||null,
+    label:source.label||null,
     attempts:Number.isFinite(source.attempts)?source.attempts:0,
     correct:Number.isFinite(source.correct)?source.correct:0,
     deterministicAttempts:Number.isFinite(source.deterministicAttempts)?source.deterministicAttempts:0,
@@ -22,6 +26,57 @@ export function emptySubjectProgress(subjectId){
   return {subjectId,version:MODEL_VERSION,diagnosticDone:false,diagnosticCompletedAt:null,sessions:[],missionHistory:[],competence:{},lastPosition:null,lastActivityAt:null};
 }
 
+function rowKey(row){
+  return [row?.kind,row?.label,row?.completedAt,(row?.itemIds||[]).join(",")].join("|");
+}
+
+function mergeUniqueRows(left=[],right=[]){
+  const rows=new Map();
+  [...left,...right].forEach(row=>rows.set(rowKey(row),row));
+  return [...rows.values()].sort((a,b)=>(a?.completedAt||0)-(b?.completedAt||0)).slice(-MAX_SESSIONS);
+}
+
+function mergeCompetenceRows(left={},right={}){
+  const merged={...left};
+  for(const [id,row] of Object.entries(right)){
+    const a=normalizeCompetenceRow(merged[id]);
+    const b=normalizeCompetenceRow(row);
+    merged[id]={
+      ...a,
+      domainId:b.domainId||a.domainId,
+      label:b.label||a.label,
+      attempts:Math.max(a.attempts,b.attempts),
+      correct:Math.max(a.correct,b.correct),
+      deterministicAttempts:Math.max(a.deterministicAttempts,b.deterministicAttempts),
+      points:Math.max(a.points,b.points),
+      maxPoints:Math.max(a.maxPoints,b.maxPoints),
+      pendingRubrics:Math.max(a.pendingRubrics,b.pendingRubrics),
+      rubricReviews:Math.max(a.rubricReviews,b.rubricReviews),
+      rubricNeedsReview:Math.max(a.rubricNeedsReview,b.rubricNeedsReview),
+      rubricObserved:Math.max(a.rubricObserved,b.rubricObserved),
+      rubricEvidenceByObservation:{...a.rubricEvidenceByObservation,...b.rubricEvidenceByObservation},
+      lastAnsweredAt:Math.max(a.lastAnsweredAt||0,b.lastAnsweredAt||0)||null
+    };
+  }
+  return merged;
+}
+
+function mergeProgress(left,right,subjectId){
+  if(!left)return normalizeProgress(right,subjectId);
+  const a=normalizeProgress(left,subjectId),b=normalizeProgress(right,subjectId);
+  const newest=(a.lastActivityAt||0)>=(b.lastActivityAt||0)?a:b;
+  return normalizeProgress({
+    ...newest,
+    diagnosticDone:a.diagnosticDone||b.diagnosticDone,
+    diagnosticCompletedAt:Math.max(a.diagnosticCompletedAt||0,b.diagnosticCompletedAt||0)||null,
+    sessions:mergeUniqueRows(a.sessions,b.sessions),
+    missionHistory:mergeUniqueRows(a.missionHistory,b.missionHistory),
+    competence:mergeCompetenceRows(a.competence,b.competence),
+    lastPosition:newest.lastPosition||a.lastPosition||b.lastPosition||null,
+    lastActivityAt:Math.max(a.lastActivityAt||0,b.lastActivityAt||0)||null
+  },subjectId);
+}
+
 function normalizeProgress(progress,subjectId){
   const empty=emptySubjectProgress(subjectId);
   const competence=Object.fromEntries(Object.entries(progress?.competence&&typeof progress.competence==="object"?progress.competence:{}).map(([id,row])=>[id,normalizeCompetenceRow(row)]));
@@ -30,7 +85,12 @@ function normalizeProgress(progress,subjectId){
 
 export function migrateSubjectProgress(state){
   const rows=state?.subjectProgress&&typeof state.subjectProgress==="object"?state.subjectProgress:{};
-  return {...state,subjectProgress:Object.fromEntries(Object.entries(rows).map(([id,progress])=>[id,normalizeProgress(progress,id)])),subjectProgressModelVersion:MODEL_VERSION};
+  const normalized={};
+  for(const [storedId,progress] of Object.entries(rows)){
+    const id=canonicalSubjectId(storedId);
+    normalized[id]=mergeProgress(normalized[id],progress,id);
+  }
+  return {...state,subjectProgress:normalized,subjectProgressModelVersion:MODEL_VERSION};
 }
 
 export function subjectProgressFor(state,subjectId){return normalizeProgress(state?.subjectProgress?.[subjectId],subjectId)}
@@ -72,18 +132,22 @@ export function advanceSubjectSession(state,subjectId,{current,results,currentRe
 export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
   const competence={...progress.competence};
+  const recordsAcademicEvidence=kind!=="training";
   items.forEach((item,index)=>{
+    if(!recordsAcademicEvidence)return;
     const result=results[index];
     if(!result||result.status==="unanswered")return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
     if(result.final){
-      competence[id]={...previous,attempts:previous.attempts+1,correct:previous.correct+(result.correct?1:0),deterministicAttempts:previous.deterministicAttempts+1,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt};
+      competence[id]={...previous,domainId:item.domain||previous.domainId,label:item.competencyLabel||previous.label,attempts:previous.attempts+1,correct:previous.correct+(result.correct?1:0),deterministicAttempts:previous.deterministicAttempts+1,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt};
       return;
     }
     const evidence=recordRubricEvidence(previous,result,completedAt);
     competence[id]={
       ...previous,
+      domainId:item.domain||previous.domainId,
+      label:item.competencyLabel||previous.label,
       attempts:previous.attempts+1,
       pendingRubrics:result.rubricCompleted?previous.pendingRubrics:previous.pendingRubrics+1,
       rubricReviews:previous.rubricReviews+(result.rubricCompleted?1:0),

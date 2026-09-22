@@ -307,9 +307,10 @@ export function portugueseStructuralChallenge(item){
 }
 
 export function buildAdaptivePortugueseMission(items,{progress,domain=null,years=["10.º","11.º","12.º"],size=7}={}){
+  const missionSize=Math.max(7,Math.min(10,Number.isInteger(size)?size:7));
   const allowedYears=new Set(years);
   const eligible=items.filter(item=>(!domain||item.domain===domain)&&allowedYears.has(item.year)&&item.responseType!=="extended-writing");
-  if(eligible.length<size)throw new Error(`Insufficient adaptive Portuguese mission coverage${domain?` for ${domain}`:""}.`);
+  if(eligible.length<missionSize)throw new Error(`Insufficient adaptive Portuguese mission coverage${domain?` for ${domain}`:""}.`);
   const priorities=portugueseCompetencePriorities(eligible,progress,{domain});
   const needById=new Map(priorities.map(row=>[row.competencyId,row.need]));
   const evidencePriorityIds=new Set(priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId));
@@ -333,7 +334,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
   const domainCounts={};
   let openCount=0;
 
-  for(let slot=0;slot<size;slot++){
+  for(let slot=0;slot<missionSize;slot++){
     const target=targetChallenges[slot%targetChallenges.length];
     const candidates=eligible.filter(item=>!selected.includes(item)).filter(item=>{
       if(item.responseType==="restricted-response"&&openCount>=2)return false;
@@ -356,6 +357,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,years
     if(chosen.responseType==="restricted-response")openCount++;
   }
 
+  if(selected.length<5)throw new Error("A Portuguese daily mission must contain at least five pedagogically useful interactions.");
   return {
     items:selected,
     priorities,

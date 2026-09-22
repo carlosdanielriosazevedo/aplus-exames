@@ -22,6 +22,7 @@ for(const subject of SECONDARY_EXAM_SUBJECTS){
 }
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.meta.url),"utf8");
 assert.match(page,/if\(screen==="subjectOnboard"\)/);
@@ -29,14 +30,14 @@ assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject mana
 assert.match(page,/if\(preview==="subjects"\)/);
 assert.match(welcome,/segment === "parent" \? "parent" : "subjectOnboard"/);
 assert.match(page,/disabled=\{!subject\.available\}/);
-assert.match(page,/Continuar com Matemática A/);
-assert.match(page,/className="subjectSwitcher"/,"the student header must expose the active subject switcher");
+assert.match(page,/Matemática A e Português disponíveis/);
+assert.match(chrome,/className="subjectSwitcher"/,"the shared student header must expose the active subject switcher");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="portuguese"/,"Portuguese must use the same semantic workspace destinations as Mathematics A");
 assert.match(page,/go\("home"\)/,"subject switching must be able to open the shared home destination");
 assert.match(page,/normalizeSubjectWorkspace\(base\)/,"legacy saved state must receive a safe active-subject default");
-assert.match(page,/recoveredState\.activeSubjectId==="portuguese"/,"a saved Portuguese workspace must be recognized after reload");
-assert.match(page,/setScreen\("portugueseLab"\)/,"legacy Portuguese state remains recoverable while the shared workspace migration is completed");
-assert.match(page,/Português usa agora o mesmo espaço de estudo da Matemática A/,"Portuguese must be identified as part of the shared study workspace");
+assert.match(page,/normalizeSubjectWorkspaceState/,"saved subject aliases must be normalized through the shared migration");
+assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u,"the legacy Portuguese lab route must no longer exist");
+assert.equal((page.match(/subjectById\("portuguese"\)/gu)||[]).length,0,"Português must not be injected manually into the subject manager");
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);
 
 console.log("✓ subjects: official 2026 catalog, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded");

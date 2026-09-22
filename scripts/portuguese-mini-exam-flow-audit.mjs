@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
-const portugueseLab=readFileSync(new URL("../app/components/PortugueseLabLazy.js",import.meta.url),"utf8");
+const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
 const route=readFileSync(new URL("../app/components/PortuguesePassageMiniExamRoute.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
@@ -17,13 +17,15 @@ assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camad
 assert.match(prototypeModule,/buildPortuguesePassagePrototypeExam/u,"a camada de dados deve construir o mini-exame com o builder canónico");
 assert.match(page,/screen==="portugueseMiniExam"/u,"deve existir um ecrã interno dedicado ao mini-exame de Português");
 assert.match(page,/onExit=\{\(\)=>go\("exams"\)\}/u,"o mini-exame interno deve regressar à área comum de mini-exames");
-assert.match(portugueseLab,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
+assert.match(portugueseSubject,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
-assert.match(portugueseLab,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
+assert.match(portugueseSubject,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
 
-assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null\}\)/u,"o componente deve aceitar saída opcional para integração no fluxo principal");
-assert.match(component,/Sair do mini-exame/u,"a revisão deve permitir sair do fluxo integrado");
-assert.match(component,/>Sair<\/button>/u,"a execução deve permitir sair do fluxo integrado");
+assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null,onComplete=null\}\)/u,"o componente deve aceitar saída e conclusão para integração no fluxo principal");
+assert.match(component,/Guardar revisão e voltar aos mini-exames/u,"a revisão concluída deve ser guardada antes de regressar à área comum");
+assert.match(component,/Terminar e rever o exame/u,"o fim deve encaminhar diretamente para a revisão");
+assert.doesNotMatch(component,/Voltar às respostas/u,"um exame já terminado não deve regressar ao fluxo de resposta");
+assert.match(route,/recordSubjectSession/u,"a conclusão deve ficar no progresso canónico da disciplina");
 assert.match(component,/não atribui automaticamente uma classificação final/u,"a execução não pode transformar resposta aberta em nota automática");
 assert.match(component,/const \[selfAssessment,setSelfAssessment\]=useState\(\{\}\)/u,"a revisão deve guardar a autoavaliação por critério na tentativa");
 assert.match(component,/PORTUGUESE_SELF_ASSESSMENT_LEVELS/u,"a autoavaliação deve consumir estados explícitos da camada pedagógica");

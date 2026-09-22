@@ -2,6 +2,8 @@
 // sem lógica de negócio). Primeiro passo de divisão do monólito.
 import {useState, useEffect} from "react";
 import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
+import {engagementSummary} from "../lib/engagement";
+import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
 
 export const BrandName = ({className=""}) => (
   <span className={`brandName ${className}`.trim()} aria-label="APProva+">
@@ -70,6 +72,12 @@ export function StudentNav({active, go}){
       ))}
     </nav>
   );
+}
+
+export function StudentTop({s,go,children}){
+  const daily=engagementSummary(s);
+  const subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id===s.activeSubjectId)||SECONDARY_EXAM_SUBJECTS[0];
+  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
 }
 
 export function FriendsBetaRibbon({s}){

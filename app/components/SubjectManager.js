@@ -1,4 +1,5 @@
 "use client";
+import {uniqueSubjectIds} from "../lib/subjectWorkspace";
 
 /**
  * Regras partilhadas do seletor de disciplinas.
@@ -6,7 +7,7 @@
  * disciplina passa de piloto para disciplina ativa.
  */
 export function uniqueSelectedSubjectIds(ids=[], availableIds=[]){
-  return [...new Set(ids)].filter(id=>availableIds.includes(id));
+  return uniqueSubjectIds(ids,availableIds);
 }
 
 export function subjectsNotSelected(subjects=[], selectedIds=[]){
