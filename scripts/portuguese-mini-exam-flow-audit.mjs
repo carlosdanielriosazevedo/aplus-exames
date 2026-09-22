@@ -3,6 +3,8 @@ import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
+const learnPanel=readFileSync(new URL("../app/components/PortugueseLearnPanel.js",import.meta.url),"utf8");
+const taxonomy=readFileSync(new URL("../app/data/portugueseTaxonomy.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
 const route=readFileSync(new URL("../app/components/PortuguesePassageMiniExamRoute.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
@@ -11,15 +13,37 @@ const prototypeModule=readFileSync(new URL("../app/data/portuguesePassagePrototy
 const progressModule=readFileSync(new URL("../app/lib/portugueseWritingProgress.js",import.meta.url),"utf8");
 
 assert.match(page,/dynamic\(\(\)=>import\("\.\/components\/PortuguesePassageMiniExamRoute"\)(?:,\{[^}]*\})?\)/u,"o fluxo principal deve carregar a experiência dedicada de Português por dynamic import");
-assert.match(route,/PORTUGUESE_PASSAGE_PROTOTYPE_EXAM/u,"a rota lazy deve consumir o protótipo através da camada de dados da app");
+assert.match(route,/portuguesePassagePrototypeExam/u,"a rota lazy deve consumir o catálogo de protótipos através da camada de dados da app");
+assert.match(route,/selectedMiniExamId/u,"a rota deve respeitar o mini-exame escolhido no estado da disciplina");
+assert.match(route,/examId==="mini-2"/u,"a rota deve distinguir explicitamente o histórico do segundo mini-exame");
 assert.doesNotMatch(page,/content\/vnext/u,"o router principal não deve depender diretamente de fontes editoriais vNext");
-assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camada de dados deve consumir o documento canónico de textos partilhados");
-assert.match(prototypeModule,/buildPortuguesePassagePrototypeExam/u,"a camada de dados deve construir o mini-exame com o builder canónico");
+assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camada de dados deve consumir o primeiro documento canónico de textos partilhados");
+assert.match(prototypeModule,/portuguese-639-passage-prototypes-2\.json/u,"a camada de dados deve consumir o segundo documento canónico de textos partilhados");
+assert.match(prototypeModule,/PORTUGUESE_PASSAGE_PROTOTYPE_EXAMS/u,"a camada de dados deve expor um catálogo único de mini-exames");
+assert.match(prototypeModule,/"mini-1":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM/u,"o catálogo deve incluir o mini-exame 1");
+assert.match(prototypeModule,/"mini-2":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2/u,"o catálogo deve incluir o mini-exame 2");
+assert.match(prototypeModule,/buildPortuguesePassagePrototypeExam/u,"a camada de dados deve construir os mini-exames com o builder canónico");
 assert.match(page,/screen==="portugueseMiniExam"/u,"deve existir um ecrã interno dedicado ao mini-exame de Português");
 assert.match(page,/onExit=\{\(\)=>go\("exams"\)\}/u,"o mini-exame interno deve regressar à área comum de mini-exames");
 assert.match(portugueseSubject,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(portugueseSubject,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
+assert.match(portugueseSubject,/selectMiniExam\("mini-1"\)/u,"a área de exames deve permitir iniciar o mini-exame 1");
+assert.match(portugueseSubject,/selectMiniExam\("mini-2"\)/u,"a área de exames deve permitir iniciar o mini-exame 2");
+
+assert.match(portugueseSubject,/PortugueseLearnPanel/u,"o workspace de Português deve integrar Aprender sem criar uma aplicação paralela");
+assert.match(portugueseSubject,/>Aprender<\/b>/u,"o hub de treino deve expor Aprender como ação real");
+assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Aprender não pode continuar como placeholder bloqueado");
+assert.match(learnPanel,/portugueseTaxonomyForYear/u,"Aprender deve respeitar o ano escolar e os anos anteriores");
+assert.match(learnPanel,/unit\.keyPoints\.map/u,"cada unidade de Aprender deve apresentar pontos essenciais acionáveis");
+assert.match(learnPanel,/onPractice\?\.\(unit\.domain\)/u,"Aprender deve ligar a revisão ao treino do domínio correspondente");
+assert.match(taxonomy,/year:"10\.º"/u,"a taxonomia deve cobrir o 10.º ano");
+assert.match(taxonomy,/year:"11\.º"/u,"a taxonomia deve cobrir o 11.º ano");
+assert.match(taxonomy,/year:"12\.º"/u,"a taxonomia deve cobrir o 12.º ano");
+for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
+  assert.match(taxonomy,new RegExp(`domain:\"${domain}\"`,"u"),`a taxonomia deve incluir o domínio ${domain}`);
+}
+assert.match(taxonomy,/PORTUGUESE_TAXONOMY_VERSION/u,"a taxonomia deve ter versão editorial explícita");
 
 assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null,onComplete=null\}\)/u,"o componente deve aceitar saída e conclusão para integração no fluxo principal");
 assert.match(component,/Guardar revisão e voltar aos mini-exames/u,"a revisão concluída deve ser guardada antes de regressar à área comum");
@@ -85,4 +109,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.match(portugueseRow,/available:true/u,"Português deve estar selecionável no beta atual");
 
-console.log("✓ fluxo Mini-exame Português: integração na rota comum · foco pré-resposta só com atenções ativas · evolução recente reversível · autoavaliação por critérios · ciclo antes/depois · perfil transversal conservador · foundation · zero nota automática");
+console.log("✓ Português integrado: Aprender por ano/unidade · dois mini-exames no mesmo motor · revisão e memória conservadoras · foundation · zero nota automática");
