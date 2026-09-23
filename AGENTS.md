@@ -146,7 +146,18 @@ Default rule:
 **If a decision is technical, reversible and confined to the repository, decide and execute autonomously. If it affects product, pedagogy, legal, costs, personal data or production, ask first.**
 
 ## Development workflow
-For meaningful work, prefer branch/PR workflow using branches such as codex/<task-name>.
+Use a **single rolling integration branch** for normal repository work: `codex/integration-next`.
+
+Do not create a new task branch for every small feature, content wave, bug fix or polish pass. Reset/update `codex/integration-next` to current `main`, accumulate the next coherent batch there, open one PR, merge it, then reuse the same branch for the following batch.
+
+Create another branch only when there is a concrete isolation reason, such as:
+- a long-running experiment that must coexist with the integration flow;
+- a security migration that needs independent review;
+- a release/hotfix that cannot wait for the current integration batch;
+- genuinely parallel work with a separate active PR.
+
+Closed/merged task branches are disposable. The branch-hygiene workflow removes stale closed-PR branches automatically while preserving `main`, `codex/integration-next` and heads of open PRs.
+
 
 Before coding:
 1. Read AGENTS.md.
@@ -162,6 +173,8 @@ Before declaring completion:
 5. Report anything that could not be run; never pretend it passed.
 
 Do not delete valid failing tests merely to get a green gate.
+
+Automated-testing direction is documented in `docs/testing-strategy.md`. Keep custom audits for architecture/content invariants, but progressively move behavioural correctness into Vitest/React Testing Library/Playwright and isolated database/RLS integration tests.
 
 ## Current priority
 Do not add major features indiscriminately.
