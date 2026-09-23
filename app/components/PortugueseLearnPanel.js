@@ -12,8 +12,8 @@ export default function PortugueseLearnPanel({schoolYear="12.º",onPractice}){
   const yearRow=PORTUGUESE_TAXONOMY.find(row=>row.year===year)||years.at(-1);
   const unit=yearRow?.units.find(row=>row.id===unitId)||null;
 
-  return <section id="portugueseLearn" className="progressDetails" aria-label="Aprender Português">
-    <div className="sectionIntro"><p className="eyebrow">APRENDER</p><h2>Matéria de Português, organizada para estudar.</h2></div>
+  return <section id="portugueseLearn" className="progressDetails" aria-label="Rever matéria de Português">
+    <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h2>Matéria de Português, organizada para estudar.</h2></div>
     <p className="muted">Escolhe o ano e abre uma unidade. Esta primeira versão liga o mapa curricular a explicações curtas e ao treino da competência correspondente.</p>
     <div className="chips" aria-label="Escolher ano de Português">{years.map(row=><button type="button" key={row.year} className={year===row.year?"sel":""} aria-pressed={year===row.year} onClick={()=>{setYear(row.year);setUnitId(null)}}>{row.label}</button>)}</div>
     {yearRow&&<>

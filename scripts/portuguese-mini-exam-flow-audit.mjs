@@ -36,10 +36,14 @@ assert.match(portugueseSubject,/PortugueseLearnPanel/u,"o workspace de Portuguê
 assert.match(portugueseSubject,/<ApronsoNudge pose="thinking">Queres praticar/u,"o hub de treino de Português deve usar o mesmo bloco com Apronso que Matemática A");
 assert.match(portugueseSubject,/>Rever matéria<\/b>/u,"o terceiro cartão do hub de treino deve usar a mesma nomenclatura de Matemática A");
 assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever matéria em Português deve continuar funcional e não pode regressar a placeholder bloqueado");
-assert.match(portugueseSubject,/document\.getElementById\("portugueseLearn"\)/u,"Rever matéria deve continuar ligado ao painel funcional de Português");
+assert.match(portugueseSubject,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio em vez de expandir conteúdo no hub de Treinar");
+assert.match(page,/screen==="reviewMatter"&&s\.activeSubjectId==="portuguese"/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
+assert.match(portugueseSubject,/view==="reviewMatter"/u,"Português deve renderizar Rever matéria como ecrã próprio");
+assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>\n  <\/>\);\n\n  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
 assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
-assert.match(learnPanel,/portugueseTaxonomyForYear/u,"Aprender deve respeitar o ano escolar e os anos anteriores");
+assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
+assert.match(learnPanel,/portugueseTaxonomyForYear/u,"Rever matéria deve respeitar o ano escolar e os anos anteriores");
 assert.match(learnPanel,/unit\.keyPoints\.map/u,"cada unidade de Aprender deve apresentar pontos essenciais acionáveis");
 assert.match(learnPanel,/onPractice\?\.\(unit\.domain\)/u,"Aprender deve ligar a revisão ao treino do domínio correspondente");
 assert.match(taxonomy,/year:"10\.º"/u,"a taxonomia deve cobrir o 10.º ano");
