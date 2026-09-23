@@ -134,13 +134,13 @@ function PortugueseSubject({s,setS,go,view="home"}){
     <div className="trainChoices">
       <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
-      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Revê obras, leitura, escrita e gramática organizadas por ano e liga a explicação ao treino.</small></div><em>→</em></button>
+      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Estuda obras, leitura, escrita e gramática sem perguntas nem avaliação.</small></div><em>→</em></button>
     </div>
   </>);
 
   if(!session&&view==="reviewMatter")return sharedShell(<>
     <button className="back" onClick={()=>go("train")}>← Voltar</button>
-    <PortugueseLearnPanel schoolYear={currentYear} onPractice={startPractice}/>
+    <PortugueseLearnPanel schoolYear={currentYear}/>
   </>);
 
   if(!session&&view==="progress"){

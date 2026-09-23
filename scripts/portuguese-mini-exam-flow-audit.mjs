@@ -45,7 +45,8 @@ assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;alig
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
 assert.match(learnPanel,/portugueseTaxonomyForYear/u,"Rever matéria deve respeitar o ano escolar e os anos anteriores");
 assert.match(learnPanel,/unit\.keyPoints\.map/u,"cada unidade de Aprender deve apresentar pontos essenciais acionáveis");
-assert.match(learnPanel,/onPractice\?\.\(unit\.domain\)/u,"Aprender deve ligar a revisão ao treino do domínio correspondente");
+assert.doesNotMatch(learnPanel,/onPractice|startPractice|trainingRun|go\("training/u,"Rever matéria de Português deve ser estudo passivo, sem iniciar treino");
+assert.match(learnPanel,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria deve explicar claramente a diferença face a Praticar");
 assert.match(taxonomy,/year:"10\.º"/u,"a taxonomia deve cobrir o 10.º ano");
 assert.match(taxonomy,/year:"11\.º"/u,"a taxonomia deve cobrir o 11.º ano");
 assert.match(taxonomy,/year:"12\.º"/u,"a taxonomia deve cobrir o 12.º ano");
