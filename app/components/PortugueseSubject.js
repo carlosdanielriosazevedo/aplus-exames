@@ -130,11 +130,11 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="train")return sharedShell(<>
     <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <div className="notice"><b>Praticar</b><span>Queres praticar um domínio específico, fazer um mini-exame ou rever matéria antes de responder.</span></div>
+    <ApronsoNudge pose="thinking">Queres praticar um domínio específico, fazer um mini-exame ou rever matéria antes de responder. Escolhe o formato e eu acompanho-te.</ApronsoNudge>
     <div className="trainChoices">
       <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
-      <button onClick={()=>document.getElementById("portugueseLearn")?.scrollIntoView({behavior:"smooth",block:"start"})}><span>📚</span><div><b>Aprender</b><small>Revê obras, leitura, escrita e gramática organizadas por ano e liga a explicação ao treino.</small></div><em>→</em></button>
+      <button onClick={()=>document.getElementById("portugueseLearn")?.scrollIntoView({behavior:"smooth",block:"start"})}><span>📚</span><div><b>Rever matéria</b><small>Revê obras, leitura, escrita e gramática organizadas por ano e liga a explicação ao treino.</small></div><em>→</em></button>
     </div>
     <PortugueseLearnPanel schoolYear={currentYear} onPractice={startPractice}/>
   </>);
@@ -149,7 +149,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     const overall=deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):null;
     return sharedShell(<>
       <p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1>
-      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><div className="progressMascot"><Apronso expression="happy" size={108}/></div></div>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
       <div className="progressOverview">{overview.map(row=><div key={row.domain}><span>{row.label}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
       <details className="progressDetails" open><summary>Ver mapa completo →</summary><p className="muted">Explora domínios, competências, evidência e o estado das respostas abertas.</p>
@@ -177,7 +177,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <div className="pathLine active"/>
       <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><p>{progress.diagnosticDone?"7 perguntas escolhidas pela app, normalmente em 3–5 minutos.":"8 perguntas, duas por domínio, com feedback apenas depois de responderes."}</p><em>{progress.diagnosticDone?"~3–5 min":"ponto de partida"}</em><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
       <div className="pathLine"/>
-      <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar, Aprender ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
+      <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar, rever matéria ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
     </section>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
     <details className="progressDetails"><summary>Ver detalhes da disciplina →</summary><div className="portugueseSubjectStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>{(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><div><span>Respostas objetivas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas por grelha</span><b>{pendingRubrics}</b></div><div><b>{progress.sessions.length}</b><span>Sessões concluídas</span></div></section>}{(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}</details>
