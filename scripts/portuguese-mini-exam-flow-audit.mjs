@@ -8,6 +8,7 @@ const taxonomy=readFileSync(new URL("../app/data/portugueseTaxonomy.js",import.m
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
 const route=readFileSync(new URL("../app/components/PortuguesePassageMiniExamRoute.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
+const globalCss=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"utf8");
 const prototypeModule=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
 const progressModule=readFileSync(new URL("../app/lib/portugueseWritingProgress.js",import.meta.url),"utf8");
@@ -32,8 +33,12 @@ assert.match(portugueseSubject,/selectMiniExam\("mini-1"\)/u,"a área de exames 
 assert.match(portugueseSubject,/selectMiniExam\("mini-2"\)/u,"a área de exames deve permitir iniciar o mini-exame 2");
 
 assert.match(portugueseSubject,/PortugueseLearnPanel/u,"o workspace de Português deve integrar Aprender sem criar uma aplicação paralela");
-assert.match(portugueseSubject,/>Aprender<\/b>/u,"o hub de treino deve expor Aprender como ação real");
-assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Aprender não pode continuar como placeholder bloqueado");
+assert.match(portugueseSubject,/<ApronsoNudge pose="thinking">Queres praticar/u,"o hub de treino de Português deve usar o mesmo bloco com Apronso que Matemática A");
+assert.match(portugueseSubject,/>Rever matéria<\/b>/u,"o terceiro cartão do hub de treino deve usar a mesma nomenclatura de Matemática A");
+assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever matéria em Português deve continuar funcional e não pode regressar a placeholder bloqueado");
+assert.match(portugueseSubject,/document\.getElementById\("portugueseLearn"\)/u,"Rever matéria deve continuar ligado ao painel funcional de Português");
+assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
+assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/portugueseTaxonomyForYear/u,"Aprender deve respeitar o ano escolar e os anos anteriores");
 assert.match(learnPanel,/unit\.keyPoints\.map/u,"cada unidade de Aprender deve apresentar pontos essenciais acionáveis");
 assert.match(learnPanel,/onPractice\?\.\(unit\.domain\)/u,"Aprender deve ligar a revisão ao treino do domínio correspondente");

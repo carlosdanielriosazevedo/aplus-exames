@@ -627,3 +627,7 @@ body{color:var(--app-navy);background:#fff}
 
 /* Portuguese revision history */
 .rubricRevisionHistory{display:grid;gap:8px;margin-top:10px}.rubricRevisionHistory>div{padding:10px 12px;border:1px solid #e1e6ef;border-radius:10px;background:#f8f9fb}.rubricRevisionHistory b{font-size:12px;color:#59677c}.rubricRevisionHistory p{margin:5px 0 0;white-space:pre-line;line-height:1.5;font-size:13px;color:#25344c}
+
+
+/* v6.0 — feedback visual: centralização do cartão semanal */
+.divisionBadge{display:flex;flex-direction:column;align-items:center;justify-content:center}
