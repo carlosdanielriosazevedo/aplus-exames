@@ -7,6 +7,7 @@ import {
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon} from "./components/chrome";
+import MathReviewMatter from "./components/MathReviewMatter";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
@@ -296,6 +297,7 @@ export default function App(){
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
   if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view={screen}/>;
   if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="reviewMatter"/>;
+  if(screen==="reviewMatter")return <MathReviewMatter s={s} go={go}/>;
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
@@ -1559,7 +1561,7 @@ function TrainHub({s,go}){
     <div className="trainChoices">
       <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Usa as submatérias já lecionadas no teu ano e inclui automaticamente a matéria dos anos anteriores. Recebes o feedback no fim.</small></div><em>→</em></button>
-      <button className="comingSoon" disabled><span>📚</span><div><b>Rever matéria</b><small>Explicações e resumos estão a ser preparados.</small></div><em>Em breve</em></button>
+      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Estuda conceitos, fórmulas e relações sem perguntas nem avaliação.</small></div><em>→</em></button>
     </div><StudentNav active="train" go={go}/>
   </Shell>;
 }
