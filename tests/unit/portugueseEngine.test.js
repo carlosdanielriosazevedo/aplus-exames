@@ -154,7 +154,7 @@ describe("respostas abertas e grelha",()=>{
   it("produz snapshots de critérios e observações",()=>{
     let result=gradePortugueseResponse(restricted,"Uma resposta suficientemente longa para ficar guardada.");
     result=assessPortugueseRubricObservation(result,"c1","o1","observed");
-    expect(rubricEvidenceSnapshot(result)).toContainEqual({criterionId:"c1",evidence:"partial"});
+    expect(rubricEvidenceSnapshot(result)).toContainEqual({criterionId:"c1",evidence:"pending"});
     expect(rubricObservationEvidenceSnapshot(result)).toContainEqual(expect.objectContaining({
       criterionId:"c1",observationId:"o1",evidence:"observed"
     }));
