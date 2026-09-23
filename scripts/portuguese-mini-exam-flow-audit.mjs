@@ -37,9 +37,9 @@ assert.match(portugueseSubject,/<ApronsoNudge pose="thinking">Queres praticar/u,
 assert.match(portugueseSubject,/>Rever matéria<\/b>/u,"o terceiro cartão do hub de treino deve usar a mesma nomenclatura de Matemática A");
 assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever matéria em Português deve continuar funcional e não pode regressar a placeholder bloqueado");
 assert.match(portugueseSubject,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio em vez de expandir conteúdo no hub de Treinar");
-assert.match(page,/\["home","train","progress","exams","reviewMatter"\]/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
+assert.match(page,/screen==="reviewMatter"&&s\.activeSubjectId==="portuguese"/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
 assert.match(portugueseSubject,/view==="reviewMatter"/u,"Português deve renderizar Rever matéria como ecrã próprio");
-assert.doesNotMatch(portugueseSubject,/view==="train"[\s\S]{0,1200}<PortugueseLearnPanel/u,"o hub de Treinar deve terminar nos três cartões, como em Matemática A");
+assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>\n  <\/>\);\n\n  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
 assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
