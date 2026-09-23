@@ -176,11 +176,14 @@ export function portugueseRubricGuidance(result){
   const reviewObservations=criteria.flatMap(criterion=>(criterion.observations||[])
     .filter(observation=>observation.status!=="observed")
     .map(observation=>({criterionId:criterion.id,criterionLabel:criterion.label,id:observation.id,label:observation.label,status:observation.status,action:portugueseObservationAction(observation)})));
-  const nextAction=missing.length
+  const missingObservations=reviewObservations.filter(observation=>observation.status==="not-observed");
+  const partialObservations=reviewObservations.filter(observation=>observation.status==="partial");
+  const uncertainObservations=reviewObservations.filter(observation=>observation.status==="unsure");
+  const nextAction=missingObservations.length
     ?"Acrescenta à resposta os elementos que não conseguiste localizar."
-    :partial.length
+    :partialObservations.length
       ?"Completa ou torna mais explícitos os elementos que encontraste apenas em parte."
-      :uncertain.length
+      :uncertainObservations.length
         ?"Compara as tuas dúvidas com a resposta de referência antes de rever o texto."
         :"Os critérios estão identificáveis. Confirma apenas se cada ideia está apoiada no texto ou no enunciado.";
   return {observed,partial,missing,uncertain,needsReview,reviewObservations,nextAction,complete:criteria.length>0&&criteria.every(criterion=>RUBRIC_EVIDENCE_IDS.has(criterion.status)),finalScore:null};
