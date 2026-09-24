@@ -63,6 +63,33 @@ export const PORTUGUESE_LITERARY_WORKS=[
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
   },
   {
+    id:"viagens-minha-terra",
+    year:"11.º",
+    title:"Viagens na Minha Terra",
+    author:"Almeida Garrett",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Viagem e reflexão","Carlos e Joaninha","Liberalismo e identidade nacional","Narrador interventivo e digressivo"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"a-abobada",
+    year:"11.º",
+    title:"A Abóbada",
+    author:"Alexandre Herculano",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Mestre Afonso Domingues","Honra e reconhecimento","Conflito entre mérito e poder","Historicidade e dramatização"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"amor-perdicao",
+    year:"11.º",
+    title:"Amor de Perdição",
+    author:"Camilo Castelo Branco",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Amor e fatalidade","Simão e Teresa","Conflito familiar","Narrador e intensidade romântica"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
     id:"os-maias",
     year:"11.º",
     title:"Os Maias",
