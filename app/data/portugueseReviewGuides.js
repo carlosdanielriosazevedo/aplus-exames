@@ -21,7 +21,7 @@ const DOMAIN_STUDY_GUIDES={
       "Separa informação explícita de inferências e confirma cada inferência com pistas concretas."
     ],
     pitfalls:[
-      "Responder pelo conhecimento geral do tema em vez de pelo que o texto permite concluir.",
+      "Interpretar pelo conhecimento geral do tema em vez de pelo que o texto permite concluir.",
       "Confundir exemplo com argumento, ou opinião com facto.",
       "Ignorar conectores, títulos, imagens ou outros elementos que orientam a interpretação."
     ],
