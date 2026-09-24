@@ -7,6 +7,7 @@ const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url)
 const page=[welcome,mainPage,chrome].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const agents=readFileSync(new URL("../AGENTS.md",import.meta.url),"utf8");
+const studyModeCopy=readFileSync(new URL("../app/lib/studyModeCopy.js",import.meta.url),"utf8");
 
 assert.match(agents,/A APProva\+ pensa muito e mostra pouco/);
 assert.match(agents,/Cada ecrã do aluno deve ter uma ação visualmente dominante/);
@@ -25,14 +26,14 @@ assert.match(page,/firstUseTourCompleted:true/);
 assert.match(page,/PRÓXIMO PASSO PROVÁVEL/);
 assert.match(page,/function TrainHub/);
 assert.match(page,/Rever matéria/);
-assert.match(page,/Estuda conceitos, fórmulas e relações sem perguntas nem avaliação/);
+assert.match(studyModeCopy,/Estuda e consolida conteúdos sem perguntas nem avaliação\./);
 assert.match(page,/if\(screen==="reviewMatter"\)return <MathReviewMatter/u,"Rever matéria de Matemática A deve estar funcional");
 const trainHubSource=page.slice(page.indexOf("function TrainHub("),page.indexOf("\nfunction Train(",page.indexOf("function TrainHub(")));
 const diagnosticIntroSource=page.slice(page.indexOf("function DiagIntro("),page.indexOf("\nfunction DiagRun("));
 const missionModalSource=page.slice(page.indexOf("function DailyMissionModal("),page.indexOf("\nfunction Home("));
 const curriculumPickerSource=page.slice(page.indexOf("function TaughtCurriculum("),page.indexOf("\nfunction GoalScreen("));
-assert.match(trainHubSource,/Praticar[\s\S]*?qualquer matéria ou submatéria[\s\S]*?não altera diretamente o teu Domínio/);
-assert.match(trainHubSource,/Mini-exame[\s\S]*?submatérias já lecionadas no teu ano[\s\S]*?matéria dos anos anteriores/);
+assert.match(trainHubSource,/practiceModeCopy\("math-a"\)/);
+assert.match(trainHubSource,/STUDY_MODE_COPY\.miniExam/);
 assert.match(diagnosticIntroSource,/Que matéria entra no diagnóstico\?[\s\S]*?submatérias que assinalaste como já lecionadas[\s\S]*?matéria dos anos anteriores/);
 assert.match(missionModalSource,/Matéria desta Missão:[\s\S]*?submatérias já lecionadas no teu ano[\s\S]*?matéria dos anos anteriores/);
 assert.doesNotMatch(curriculumPickerSource,/Diagnóstico, Missões e Mini-exames|<b>Treino Livre<\/b>/);
