@@ -13,19 +13,19 @@ const COMPETENCIES=[
 describe("Portuguese work-specific literary bank",()=>{
   it("maps literary practice across 10th, 11th and 12th year",()=>{
     expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual([
-      "poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","os-lusiadas-reflexoes",
-      "sermao-santo-antonio","frei-luis-de-sousa","antero-sonetos","cesario-ocidental",
-      "pessoa-ortonimo","pessoa-heteronimos","mensagem","memorial-do-convento"
+      "poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","camoes-rimas","os-lusiadas-reflexoes",
+      "sermao-santo-antonio","frei-luis-de-sousa","os-maias","ilustre-casa-ramires","antero-sonetos","cesario-ocidental",
+      "pessoa-ortonimo","pessoa-heteronimos","mensagem","ano-morte-ricardo-reis","memorial-do-convento"
     ]);
     expect(portugueseLiteraryWorkById("frei-luis-de-sousa")).toMatchObject({year:"11.º",author:"Almeida Garrett"});
     expect(portugueseLiteraryWorkById("mensagem")).toMatchObject({year:"12.º",author:"Fernando Pessoa"});
-    expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","os-lusiadas-reflexoes"]);
-    expect(portugueseLiteraryWorksForYear("11.º").map(work=>work.id)).toEqual(["sermao-santo-antonio","frei-luis-de-sousa","antero-sonetos","cesario-ocidental"]);
-    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(4);
+    expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","camoes-rimas","os-lusiadas-reflexoes"]);
+    expect(portugueseLiteraryWorksForYear("11.º").map(work=>work.id)).toEqual(["sermao-santo-antonio","frei-luis-de-sousa","os-maias","ilustre-casa-ramires","antero-sonetos","cesario-ocidental"]);
+    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(5);
   });
 
   it("contains explicit original banks for every listed work",()=>{
-    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(196);
+    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(252);
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
       expect(items).toHaveLength(work.readyCompetencyIds.length*7);
@@ -99,7 +99,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("uses unique IDs and unique stimuli",()=>{
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(196);
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(196);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(252);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(252);
   });
 });

@@ -27,6 +27,15 @@ export const PORTUGUESE_LITERARY_WORKS=[
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
   },
   {
+    id:"camoes-rimas",
+    year:"10.º",
+    title:"Camões · Rimas",
+    author:"Luís de Camões",
+    curriculumLabel:"seleção prescrita",
+    focus:["Experiência amorosa","Mudança e desconcerto","Natureza e memória","Forma lírica e progressão do pensamento"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
+  },
+  {
     id:"os-lusiadas-reflexoes",
     year:"10.º",
     title:"Os Lusíadas · Reflexões do Poeta",
@@ -52,6 +61,24 @@ export const PORTUGUESE_LITERARY_WORKS=[
     curriculumLabel:"leitura integral",
     focus:["Conflito trágico e fatalidade","Identidade, passado e regresso","Personagens, espaço e símbolos","Estrutura dramática e progressão da ação"],
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
+  },
+  {
+    id:"os-maias",
+    year:"11.º",
+    title:"Os Maias",
+    author:"Eça de Queirós",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Representação social","Carlos da Maia e Ega","Ironia e crítica","Espaços e relações"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"ilustre-casa-ramires",
+    year:"11.º",
+    title:"A Ilustre Casa de Ramires",
+    author:"Eça de Queirós",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Gonçalo Mendes Ramires","Memória familiar","Ironia e identidade","Relação entre passado e presente"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
   },
   {
     id:"antero-sonetos",
@@ -97,6 +124,15 @@ export const PORTUGUESE_LITERARY_WORKS=[
     curriculumLabel:"seleção prescrita",
     focus:["Mito e História","Sebastianismo e Quinto Império","Símbolos e missão coletiva","Estrutura tripartida e construção épico-lírica"],
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
+  },
+  {
+    id:"ano-morte-ricardo-reis",
+    year:"12.º",
+    title:"O Ano da Morte de Ricardo Reis",
+    author:"José Saramago",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Ricardo Reis personagem","Lisboa de 1936","História e ficção","Narrador, ironia e diálogo com Pessoa"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
   },
   {
     id:"memorial-do-convento",
