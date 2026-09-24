@@ -33,7 +33,7 @@ assert.match(portugueseSubject,/selectMiniExam\("mini-1"\)/u,"a área de exames 
 assert.match(portugueseSubject,/selectMiniExam\("mini-2"\)/u,"a área de exames deve permitir iniciar o mini-exame 2");
 
 assert.match(portugueseSubject,/PortugueseLearnPanel/u,"o workspace de Português deve integrar Aprender sem criar uma aplicação paralela");
-assert.match(portugueseSubject,/<ApronsoNudge pose="thinking">Queres praticar/u,"o hub de treino de Português deve usar o mesmo bloco com Apronso que Matemática A");
+assert.match(portugueseSubject,/STUDY_MODE_COPY\.nudge/u,"o hub de treino de Português deve consumir a copy partilhada com Matemática A");
 assert.match(portugueseSubject,/>Rever matéria<\/b>/u,"o terceiro cartão do hub de treino deve usar a mesma nomenclatura de Matemática A");
 assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever matéria em Português deve continuar funcional e não pode regressar a placeholder bloqueado");
 assert.match(portugueseSubject,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio em vez de expandir conteúdo no hub de Treinar");
