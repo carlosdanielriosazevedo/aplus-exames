@@ -309,11 +309,11 @@ export function portugueseStructuralChallenge(item){
   return item?.difficulty?.level||STRUCTURAL_CHALLENGE[item?.cognitive]||2;
 }
 
-export function buildAdaptivePortugueseMission(items,{progress,domain=null,years=["10.º","11.º","12.º"],size=7}={}){
+export function buildAdaptivePortugueseMission(items,{progress,domain=null,competencyId=null,years=["10.º","11.º","12.º"],size=7}={}){
   const missionSize=Math.max(7,Math.min(10,Number.isInteger(size)?size:7));
   const allowedYears=new Set(years);
-  const eligible=items.filter(item=>(!domain||item.domain===domain)&&allowedYears.has(item.year)&&item.responseType!=="extended-writing");
-  if(eligible.length<missionSize)throw new Error(`Insufficient adaptive Portuguese mission coverage${domain?` for ${domain}`:""}.`);
+  const eligible=items.filter(item=>(!domain||item.domain===domain)&&(!competencyId||item.competencyId===competencyId)&&allowedYears.has(item.year)&&item.responseType!=="extended-writing");
+  if(eligible.length<missionSize)throw new Error(`Insufficient adaptive Portuguese mission coverage${competencyId?` for ${competencyId}`:domain?` for ${domain}`:""}.`);
   const priorities=portugueseCompetencePriorities(eligible,progress,{domain});
   const needById=new Map(priorities.map(row=>[row.competencyId,row.need]));
   const evidencePriorityIds=new Set(priorities.filter(row=>row.rubricNeed>0).slice(0,3).map(row=>row.competencyId));
