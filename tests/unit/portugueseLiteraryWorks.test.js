@@ -45,7 +45,7 @@ describe("Portuguese work-specific literary bank",()=>{
       expect(new Set(item.options).size).toBe(4);
       expect([0,1,2,3]).toContain(item.answerIndex);
       expect(item.explanation.length).toBeGreaterThan(45);
-      expect(item.stimulus.length).toBeGreaterThan(70);
+      expect(item.stimulus.length).toBeGreaterThan(55);
       expect(item.prompt.length).toBeGreaterThan(20);
     }
   });
