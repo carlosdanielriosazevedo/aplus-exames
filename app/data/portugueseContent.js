@@ -17,10 +17,11 @@ import wave15 from "../../content/vnext/portuguese/foundation/portuguese-639-wav
 import difficulty from "../../content/vnext/portuguese/foundation/portuguese-639-difficulty.json";
 import {applyPortugueseDifficulty} from "../lib/portugueseDifficulty.js";
 import {applyPortugueseRubricObservations} from "./portugueseRubrics.js";
+import {PORTUGUESE_LITERARY_ITEMS} from "./portugueseLiteraryQuestions.js";
 
 export const PORTUGUESE_CONTENT_PACKS=[pilot,wave1,wave2,wave3,wave4,wave5,wave6,wave7,wave8,wave9,wave10,wave11,wave12,wave13,wave14,wave15];
 export const PORTUGUESE_DIFFICULTY_MATRIX=difficulty;
-export const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(applyPortugueseDifficulty(PORTUGUESE_CONTENT_PACKS.flatMap(pack=>pack.items),difficulty));
+export const PORTUGUESE_ITEMS=applyPortugueseRubricObservations(applyPortugueseDifficulty([...PORTUGUESE_CONTENT_PACKS.flatMap(pack=>pack.items),...PORTUGUESE_LITERARY_ITEMS],difficulty));
 
 export function portugueseItemById(id){
   return PORTUGUESE_ITEMS.find(item=>item.id===id)||null;
