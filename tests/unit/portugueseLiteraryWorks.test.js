@@ -11,19 +11,23 @@ const COMPETENCIES=[
 ];
 
 describe("Portuguese work-specific literary bank",()=>{
-  it("has two explicitly mapped literary works",()=>{
-    expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual(["os-lusiadas-reflexoes","frei-luis-de-sousa","pessoa-ortonimo","mensagem"]);
+  it("maps literary practice across 10th, 11th and 12th year",()=>{
+    expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual([
+      "poesia-trovadoresca","os-lusiadas-reflexoes","sermao-santo-antonio","frei-luis-de-sousa",
+      "pessoa-ortonimo","pessoa-heteronimos","mensagem","memorial-do-convento"
+    ]);
     expect(portugueseLiteraryWorkById("frei-luis-de-sousa")).toMatchObject({year:"11.º",author:"Almeida Garrett"});
     expect(portugueseLiteraryWorkById("mensagem")).toMatchObject({year:"12.º",author:"Fernando Pessoa"});
-    expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["os-lusiadas-reflexoes"]);
+    expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["poesia-trovadoresca","os-lusiadas-reflexoes"]);
+    expect(portugueseLiteraryWorksForYear("11.º").map(work=>work.id)).toEqual(["sermao-santo-antonio","frei-luis-de-sousa"]);
+    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(4);
   });
 
   it("contains explicit original banks for every listed work",()=>{
-    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(84);
-    const expectedCounts={"os-lusiadas-reflexoes":14,"frei-luis-de-sousa":28,"pessoa-ortonimo":14,"mensagem":28};
+    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(140);
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
-      expect(items).toHaveLength(expectedCounts[work.id]);
+      expect(items).toHaveLength(work.readyCompetencyIds.length*7);
       expect(items.every(item=>item.literaryWorkId===work.id&&item.year===work.year&&item.domain==="educacao-literaria")).toBe(true);
     }
   });
@@ -94,7 +98,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("uses unique IDs and unique stimuli",()=>{
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(84);
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(84);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(140);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(140);
   });
 });
