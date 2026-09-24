@@ -15,17 +15,17 @@ describe("Portuguese work-specific literary bank",()=>{
     expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual([
       "poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","camoes-rimas","os-lusiadas-reflexoes",
       "sermao-santo-antonio","frei-luis-de-sousa","viagens-minha-terra","a-abobada","amor-perdicao","os-maias","ilustre-casa-ramires","antero-sonetos","cesario-ocidental",
-      "pessoa-ortonimo","pessoa-heteronimos","mensagem","ano-morte-ricardo-reis","memorial-do-convento"
+      "sempre-e-uma-companhia","george","familias-desavindas","pessoa-ortonimo","pessoa-heteronimos","mensagem","ano-morte-ricardo-reis","memorial-do-convento"
     ]);
     expect(portugueseLiteraryWorkById("frei-luis-de-sousa")).toMatchObject({year:"11.º",author:"Almeida Garrett"});
     expect(portugueseLiteraryWorkById("mensagem")).toMatchObject({year:"12.º",author:"Fernando Pessoa"});
     expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","camoes-rimas","os-lusiadas-reflexoes"]);
     expect(portugueseLiteraryWorksForYear("11.º").map(work=>work.id)).toEqual(["sermao-santo-antonio","frei-luis-de-sousa","viagens-minha-terra","a-abobada","amor-perdicao","os-maias","ilustre-casa-ramires","antero-sonetos","cesario-ocidental"]);
-    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(5);
+    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(8);
   });
 
   it("contains explicit original banks for every listed work",()=>{
-    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(322);
+    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(406);
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
       expect(items).toHaveLength(work.readyCompetencyIds.length*7);
@@ -99,7 +99,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("uses unique IDs and unique stimuli",()=>{
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(322);
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(322);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(406);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(406);
   });
 });
