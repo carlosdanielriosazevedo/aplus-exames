@@ -24,7 +24,7 @@ describe("Portuguese practice year scope",()=>{
   it("mission pool respects a single selected year",()=>{
     const pool=portugueseMissionPool(ITEMS,{domain:"gramatica",years:["11.º"]});
     expect(pool.ready).toBe(true);
-    expect(pool.items).toHaveLength(8);
+    expect(pool.items).toHaveLength(16);
     expect(pool.items.every(row=>row.year==="11.º")).toBe(true);
   });
 
