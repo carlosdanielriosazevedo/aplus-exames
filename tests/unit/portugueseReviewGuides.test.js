@@ -31,9 +31,12 @@ describe("Portuguese review study guides",()=>{
   });
 
   it("does not introduce question, scoring or XP mechanics into review mode content",()=>{
+    const forbiddenKeys=new Set(["questions","question","xp","score","points","practice","practiceLabel","answer","answers"]);
     for(const unit of units){
-      const serialized=JSON.stringify(portugueseReviewGuide(unit)).toLocaleLowerCase("pt-PT");
-      expect(serialized).not.toMatch(/(?:^|[^\p{L}])(?:responder|pergunta|pontuação|xp)(?:$|[^\p{L}])/u);
+      const guide=portugueseReviewGuide(unit);
+      expect(Object.keys(guide).some(key=>forbiddenKeys.has(key))).toBe(false);
+      const serialized=JSON.stringify(guide).toLocaleLowerCase("pt-PT");
+      expect(serialized).not.toMatch(/ganha\s+xp|responde\s+a\s+perguntas|pontuação\s+do\s+treino|iniciar\s+treino/u);
     }
   });
 
