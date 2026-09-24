@@ -30,6 +30,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const savedScope=s.subjectSettings?.portuguese?.taughtDomains;
   const taughtDomains=Array.isArray(savedScope)?savedScope:Object.keys(PORTUGUESE_DOMAIN_LABELS);
   const [scopeDraft,setScopeDraft]=useState(taughtDomains);
+  const [practiceYear,setPracticeYear]=useState(currentYear);
   const allowedYears=yearsThrough(currentYear);
   const scopedItems=PORTUGUESE_ITEMS.filter(item=>allowedYears.includes(item.year)&&(item.year!==currentYear||taughtDomains.includes(item.domain)));
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
@@ -71,9 +72,11 @@ function PortugueseSubject({s,setS,go,view="home"}){
     start("mission",mission.items,"Missão recomendada");
   }
 
-  function startPractice(domain=null){
-    const mission=buildAdaptivePortugueseMission(scopedItems,{progress,domain});
-    start("training",mission.items,domain?`Praticar · ${PORTUGUESE_DOMAIN_LABELS[domain]}`:"Praticar Português",domain);
+  function startPractice(domain=null,year=null){
+    const years=year?[year]:allowedYears;
+    const mission=buildAdaptivePortugueseMission(scopedItems,{progress,domain,years});
+    const labelParts=["Praticar",domain?PORTUGUESE_DOMAIN_LABELS[domain]:null,year].filter(Boolean);
+    start("training",mission.items,labelParts.join(" · "),domain);
   }
 
   function selectMiniExam(id){
@@ -120,13 +123,19 @@ function PortugueseSubject({s,setS,go,view="home"}){
     <button className="primary" onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtDomains:scopeDraft}}}));go(view==="curriculumOnboard"?"goalOnboard":"progress")}}>{view==="curriculumOnboard"?"Continuar":"Guardar matéria dada"}</button>
   </Shell>;
 
-  if(!session&&view==="trainingSetup")return <Shell>
-    <button className="back" onClick={()=>go("train")}>← Voltar</button>
-    <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
-    <p className="muted">O Treino Livre não sobe nem desce diretamente o teu Domínio. Serve para trabalhar uma área sem alterar a avaliação académica.</p>
-    <div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=scopedCoverage.missionEligibleByDomain[domain]>=7;return <button key={domain} disabled={!available} onClick={()=>startPractice(domain)}>{label}<small>{available?" · 7 perguntas adaptadas":" · fora da matéria dada"}</small></button>})}</div>
-    <button className="primary" disabled={scopedItems.length<7} onClick={()=>startPractice()}>Praticar várias áreas</button>
-  </Shell>;
+  if(!session&&view==="trainingSetup"){
+    const practiceYearItems=scopedItems.filter(item=>item.year===practiceYear);
+    const practiceYearCoverage=portugueseCoverage(practiceYearItems);
+    return <Shell>
+      <button className="back" onClick={()=>go("train")}>← Voltar</button>
+      <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
+      <p className="muted">Escolhe primeiro o ano e depois a área. O treino usa apenas perguntas desse ano e não sobe nem desce diretamente o teu Domínio.</p>
+      <div className="chips" aria-label="Escolher ano para praticar Português">{allowedYears.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>setPracticeYear(year)}>{year}</button>)}</div>
+      <div className="notice"><b>Português · {practiceYear}</b><span>As perguntas seguintes ficam limitadas ao ano escolhido. Educação Literária treina, por enquanto, competências literárias do ano; não atribuímos perguntas a uma obra específica sem essa associação editorial.</span></div>
+      <div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=practiceYearCoverage.missionEligibleByDomain[domain]>=7;return <button key={domain} disabled={!available} onClick={()=>startPractice(domain,practiceYear)}>{label}<small>{available?` · 7 perguntas adaptadas · ${practiceYear}`:" · cobertura insuficiente neste ano"}</small></button>})}</div>
+      <button className="primary" disabled={practiceYearItems.filter(item=>item.responseType!=="extended-writing").length<7} onClick={()=>startPractice(null,practiceYear)}>Praticar várias áreas · {practiceYear}</button>
+    </Shell>;
+  }
 
   if(!session&&view==="train")return sharedShell(<>
     <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
