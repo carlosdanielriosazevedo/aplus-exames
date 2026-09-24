@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
 import {conciseMathExplanation} from "./lib/feedbackCopy";
+import {STUDY_MODE_COPY,practiceModeCopy} from "./lib/studyModeCopy";
 import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
@@ -1558,11 +1559,11 @@ function Ranking({s,setS,go}){
 
 function TrainHub({s,go}){
   return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <ApronsoNudge pose="thinking">Escolhe como queres estudar. Podes praticar uma matéria específica, fazer um Mini-exame ou rever conteúdos.</ApronsoNudge>
+    <ApronsoNudge pose="thinking">{STUDY_MODE_COPY.nudge}</ApronsoNudge>
     <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o ano, matéria e submatéria que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina num formato próximo do exame e revê as respostas no final.</small></div><em>→</em></button>
-      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Estuda e consolida conteúdos sem perguntas nem avaliação.</small></div><em>→</em></button>
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy("math-a")}</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>{STUDY_MODE_COPY.miniExam}</small></div><em>→</em></button>
+      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>{STUDY_MODE_COPY.review}</small></div><em>→</em></button>
     </div><StudentNav active="train" go={go}/>
   </Shell>;
 }
