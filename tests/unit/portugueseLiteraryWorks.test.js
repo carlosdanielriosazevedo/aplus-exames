@@ -12,26 +12,30 @@ const COMPETENCIES=[
 
 describe("Portuguese work-specific literary bank",()=>{
   it("has two explicitly mapped literary works",()=>{
-    expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual(["frei-luis-de-sousa","mensagem"]);
+    expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual(["os-lusiadas-reflexoes","frei-luis-de-sousa","pessoa-ortonimo","mensagem"]);
     expect(portugueseLiteraryWorkById("frei-luis-de-sousa")).toMatchObject({year:"11.º",author:"Almeida Garrett"});
     expect(portugueseLiteraryWorkById("mensagem")).toMatchObject({year:"12.º",author:"Fernando Pessoa"});
-    expect(portugueseLiteraryWorksForYear("10.º")).toEqual([]);
+    expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["os-lusiadas-reflexoes"]);
   });
 
-  it("contains 28 original items per work and 56 overall",()=>{
-    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(56);
+  it("contains explicit original banks for every listed work",()=>{
+    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(84);
+    const expectedCounts={"os-lusiadas-reflexoes":14,"frei-luis-de-sousa":28,"pessoa-ortonimo":14,"mensagem":28};
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
-      expect(items).toHaveLength(28);
+      expect(items).toHaveLength(expectedCounts[work.id]);
       expect(items.every(item=>item.literaryWorkId===work.id&&item.year===work.year&&item.domain==="educacao-literaria")).toBe(true);
     }
   });
 
-  it("provides a seven-item training floor for every literary competency in each work",()=>{
+  it("provides a seven-item training floor for every competency declared ready in each work",()=>{
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
-      for(const competencyId of COMPETENCIES){
+      for(const competencyId of work.readyCompetencyIds){
         expect(items.filter(item=>item.competencyId===competencyId)).toHaveLength(7);
+      }
+      for(const competencyId of COMPETENCIES.filter(id=>!work.readyCompetencyIds.includes(id))){
+        expect(items.filter(item=>item.competencyId===competencyId)).toHaveLength(0);
       }
     }
   });
@@ -90,7 +94,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("uses unique IDs and unique stimuli",()=>{
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(56);
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(56);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(84);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(84);
   });
 });
