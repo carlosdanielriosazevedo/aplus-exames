@@ -45,7 +45,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
   const todayKey=new Date().toLocaleDateString("en-CA");
   const missionDone=progress.missionHistory.some(row=>new Date(row.completedAt).toLocaleDateString("en-CA")===todayKey);
-  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button></div></details></StudentTop>;
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
     if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;
@@ -166,11 +166,11 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="train")return sharedShell(<>
     <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <ApronsoNudge pose="thinking">Queres praticar um domínio específico, fazer um mini-exame ou rever matéria antes de responder. Escolhe o formato e eu acompanho-te.</ApronsoNudge>
+    <ApronsoNudge pose="thinking">Escolhe como queres estudar. Podes praticar uma matéria específica, fazer um Mini-exame ou rever conteúdos.</ApronsoNudge>
     <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o domínio que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina leitura, educação literária e escrita num formato próximo da prova, com revisão no fim.</small></div><em>→</em></button>
-      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Estuda obras, leitura, escrita e gramática sem perguntas nem avaliação.</small></div><em>→</em></button>
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe o ano, área, obra ou competência que queres trabalhar. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Treina num formato próximo do exame e revê as respostas no final.</small></div><em>→</em></button>
+      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Estuda e consolida conteúdos sem perguntas nem avaliação.</small></div><em>→</em></button>
     </div>
   </>);
 
@@ -220,7 +220,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar, rever matéria ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
     </section>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
-    <details className="progressDetails"><summary>Ver detalhes da disciplina →</summary><div className="portugueseSubjectStats"><div><b>{coverage.total}</b><span>itens originais</span></div><div><b>{competenceRows.length}/16</b><span>competências observadas</span></div><div><b>{progress.missionHistory.length}</b><span>missões concluídas</span></div></div>{(deterministicAttempts>0||pendingRubrics>0)&&<section className="portugueseProgressCard"><div><span>Respostas objetivas</span><b>{correctAnswers}/{deterministicAttempts}</b></div><div><span>Respostas por grelha</span><b>{pendingRubrics}</b></div><div><b>{progress.sessions.length}</b><span>Sessões concluídas</span></div></section>}{(progress.sessions.length>0||progress.lastPosition)&&<button className="secondary portugueseReset" onClick={resetPortuguese}>Repor apenas progresso de Português</button>}</details>
+    
   </>);
 
   if(session.finished){
@@ -298,7 +298,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     <div className="bar portugueseRunBar"><i style={{width:`${((session.current+1)/session.items.length)*100}%`}}/></div>
     {session.kind==="mission"&&missionEvidenceFocus.length>0&&session.current===0&&<section className="notice" aria-label="Foco desta missão"><b>Foco desta missão</b><span>Vamos dar atenção extra a pontos que assinalaste como precisando de revisão em respostas anteriores.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label} <small>· {row.status==="partial"?"em parte":row.status==="not-observed"?"não identificado":"por confirmar"}</small></li>)}</ul></section>}
     <article className="portugueseQuestion"><div className="portugueseStimulus">{item.stimulus}</div><h2>{item.prompt}</h2>
-      {isChoice?<div className="portugueseOptions">{item.options.map((option,index)=><button type="button" disabled={!!feedback} key={option} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>
+      {isChoice?<div className="portugueseOptions">{item.options.map((option,index)=>{const stateClass=feedback?.final?(index===item.answerIndex?"correct":answer===index?"incorrect":""):answer===index?"selected":"";return <button type="button" disabled={!!feedback} key={option} className={stateClass} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>})}</div>
       :isShort?<input className="portugueseShortAnswer" disabled={!!feedback} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve uma resposta curta"/>
       :feedback&&answer===null?<div className="rubricRecoveryNote"><b>Resposta já submetida</b><span>A resposta foi recuperada juntamente com a evidência assinalada na grelha.</span></div>:<><textarea className="portugueseOpenAnswer" disabled={!!feedback&&!revisionEditing} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve a tua resposta…" rows={9}/><div className={`portugueseWordCount ${wordLimitFeedback.status}`}><b>{wordLimitFeedback.label}</b><span>{wordLimitFeedback.count} palavras · pedido: {wordLimitFeedback.min}–{wordLimitFeedback.max}</span>{wordLimitFeedback.caution&&<small>{wordLimitFeedback.caution}</small>}</div></>}
     </article>
