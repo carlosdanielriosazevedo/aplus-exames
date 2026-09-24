@@ -9,6 +9,7 @@ import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdapti
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
 import {advanceSubjectSession,beginSubjectSession,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
+import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
@@ -41,13 +42,14 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
   const scopedCoverage=portugueseCoverage(scopedItems);
   const progress=subjectProgressFor(s,"portuguese");
+  const miniExamDraft=s.subjectSettings?.portuguese?.miniExamDraft||null;
   const competenceRows=Object.entries(progress.competence);
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
   const todayKey=new Date().toLocaleDateString("en-CA");
   const missionDone=progress.missionHistory.some(row=>new Date(row.completedAt).toLocaleDateString("en-CA")===todayKey);
-  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
     if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;
@@ -55,10 +57,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
   }
 
   function start(kind,items,label,domain=null){
-    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
+    if((progress.lastPosition||miniExamDraft)&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
     setSession({kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setResults([]);
-    setS(prev=>beginSubjectSession(prev,{subjectId:"portuguese",kind,label,domain,items}));
+    setS(prev=>beginSubjectSession(clearPortugueseMiniExamDraft(prev),{subjectId:"portuguese",kind,label,domain,items}));
   }
 
   function startDiagnostic(){
@@ -87,7 +89,13 @@ function PortugueseSubject({s,setS,go,view="home"}){
   }
 
   function selectMiniExam(id){
-    setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:id}}}));
+    if(progress.lastPosition&&!window.confirm("Tens uma sessão de Português em pausa. Começar o Mini-exame substitui essa retoma. Queres continuar?"))return;
+    if(miniExamDraft&&miniExamDraft.examId!==id&&!window.confirm("Tens outro Mini-exame em pausa. Começar este substitui essa retoma. Queres continuar?"))return;
+    setS(prev=>{
+      const base=miniExamDraft&&miniExamDraft.examId!==id?clearPortugueseMiniExamDraft(prev):prev;
+      const subjectProgress={...(base.subjectProgress||{}),portuguese:{...subjectProgressFor(base,"portuguese"),lastPosition:null}};
+      return {...base,subjectProgress,subjectSettings:{...(base.subjectSettings||{}),portuguese:{...(base.subjectSettings?.portuguese||{}),selectedMiniExamId:id}}};
+    });
     go("portugueseMiniExam");
   }
 
@@ -101,12 +109,14 @@ function PortugueseSubject({s,setS,go,view="home"}){
     }
     const current=Math.min(saved.current,items.length-1);
     setSession({kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
-    setResults(saved.results||[]);const restored=restorePortugueseRubricEvidence(items[current],saved.currentResult);setAnswer(restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);setRevisionEditing(false);
+    setResults(saved.results||[]);
+    const restored=saved.currentResult?.final?saved.currentResult:restorePortugueseRubricEvidence(items[current],saved.currentResult);
+    setAnswer(saved.currentAnswer??restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);setRevisionEditing(false);
   }
 
   function resetPortuguese(){
     if(!window.confirm("Repor apenas o progresso de Português? O progresso de Matemática A não será alterado."))return;
-    setS(prev=>resetSubjectProgress(prev,"portuguese"));
+    setS(prev=>clearPortugueseMiniExamDraft(resetSubjectProgress(prev,"portuguese")));
     setSession(null);setResults([]);setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setMissionFocus(null);
   }
 
@@ -214,6 +224,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     <div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
     <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Podes praticar outra área ou rever o teu progresso.":progress.diagnosticDone?"Já analisei o teu percurso em Português. Esta é a ação que mais vale a pena fazer agora.":"Primeiro quero perceber o teu ponto de partida em Português. Não é uma nota."}</ApronsoNudge>
     {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
+    {!progress.lastPosition&&miniExamDraft&&<div className="pausedSession"><div><small>MINI-EXAME EM PAUSA</small><b>{miniExamDraft.examId==="mini-2"?"Mini-exame de Português 2":"Mini-exame de Português 1"}</b><span>{miniExamDraft.review?"Revisão em curso":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Português">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>DIAGNÓSTICO</small><b>{progress.diagnosticDone?"Ponto de partida concluído":"Conhecer o teu nível atual"}</b></div></div>
       <div className="pathLine active"/>
@@ -259,13 +270,13 @@ function PortugueseSubject({s,setS,go,view="home"}){
     if(!answered||feedback)return;
     const nextFeedback=gradePortugueseResponse(item,answer);
     setFeedback(nextFeedback);
-    if(!nextFeedback.final)setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback,currentAnswer:answer}));
   }
 
   function recordRubricEvidence(criterionId,observationId,evidence){
     const nextFeedback=assessPortugueseRubricObservation(feedback,criterionId,observationId,evidence);
     setFeedback(nextFeedback);setEditingCriterionId(null);
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback,currentAnswer:nextFeedback.responseText}));
   }
 
   function startRevision(){
@@ -282,7 +293,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     setFeedback(nextFeedback);
     setRevisionEditing(false);
     setEditingCriterionId(null);
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback,currentAnswer:nextFeedback.responseText}));
   }
 
   function next(){
@@ -292,7 +303,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
       setResults(nextResults);setSession(current=>({...current,finished:true}));return;
     }
-    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current+1,results:nextResults}));
+    setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current+1,results:nextResults,currentAnswer:null}));
     setResults(nextResults);setSession(current=>({...current,current:current.current+1}));setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);
   }
 

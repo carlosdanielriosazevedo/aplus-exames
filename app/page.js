@@ -260,7 +260,13 @@ export default function App(){
     }else if(canRecover){
       setRecoveredSession(validDraft);
       setScreen(recovered);
-    }else setScreen(activeSubjectDiagnosticDone(recoveredState)?"home":"welcome");
+    }else{
+      const portuguesePaused=recoveredState.activeSubjectId==="portuguese"&&(
+        !!subjectProgressFor(recoveredState,"portuguese").lastPosition||
+        !!recoveredState.subjectSettings?.portuguese?.miniExamDraft
+      );
+      setScreen(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused?"home":"welcome");
+    }
     setHydrated(true);
   },[]);
 
