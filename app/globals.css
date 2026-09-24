@@ -631,3 +631,16 @@ body{color:var(--app-navy);background:#fff}
 
 /* v6.0 — feedback visual: centralização do cartão semanal */
 .divisionBadge{display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* v6.x — shared copy polish and answer-state parity */
+.firstUseTourText{width:100%;text-align:left;margin:0 0 18px}
+.firstUseTourText p{margin:0 0 10px;line-height:1.55}
+.firstUseTourText p:last-child{margin-bottom:0}
+.portugueseOptions button.correct{border-color:#61c99a;background:#f0fbf6;color:#173a2c}
+.portugueseOptions button.correct>span{background:#61c99a;color:#0d2c20}
+.portugueseOptions button.incorrect{border-color:#ef8f8f;background:#fff4f4;color:#5d2727}
+.portugueseOptions button.incorrect>span{background:#ef8f8f;color:#4e1818}
+.portugueseOptions button.correct:disabled,.portugueseOptions button.incorrect:disabled{opacity:1}
+.reviewSummary{background:#fffaf0}
+.reviewSummary>b,.reviewSummary>span{display:block}
+.reviewSummary>span{margin-top:6px;line-height:1.6}
