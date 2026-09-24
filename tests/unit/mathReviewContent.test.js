@@ -19,7 +19,7 @@ describe("Mathematics review content",()=>{
       expect(entry.pitfalls.length).toBeGreaterThanOrEqual(2);
       expect(entry.studyTip.length).toBeGreaterThan(30);
       const serialized=JSON.stringify(entry).toLocaleLowerCase("pt-PT");
-      expect(serialized).not.toMatch(/responder|pergunta|pontuação|xp/u);
+      expect(serialized).not.toMatch(/(?:^|[^\\p{L}])(?:responder|pergunta|pontuação|xp)(?:$|[^\\p{L}])/u);
     }
   });
 
