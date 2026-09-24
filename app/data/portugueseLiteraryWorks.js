@@ -126,13 +126,40 @@ export const PORTUGUESE_LITERARY_WORKS=[
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
   },
   {
+    id:"sempre-e-uma-companhia",
+    year:"12.º",
+    title:"Sempre é uma companhia",
+    author:"Manuel da Fonseca",
+    curriculumLabel:"opção de conto",
+    focus:["Solidão e comunidade","Batola","Chegada da telefonia","Transformação do quotidiano rural"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"george",
+    year:"12.º",
+    title:"George",
+    author:"Maria Judite de Carvalho",
+    curriculumLabel:"opção de conto",
+    focus:["Identidade e tempo","George/Gi/Gina","Memória e envelhecimento","Focalização e ambiguidade"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"familias-desavindas",
+    year:"12.º",
+    title:"Famílias desavindas",
+    author:"Mário de Carvalho",
+    curriculumLabel:"opção de conto",
+    focus:["Conflito e absurdo","Humor e ironia","Herança familiar","Construção narrativa"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
     id:"pessoa-ortonimo",
     year:"12.º",
     title:"Fernando Pessoa · Ortónimo",
     author:"Fernando Pessoa",
     curriculumLabel:"seleção prescrita",
     focus:["Fingimento artístico","Dor de pensar e consciência","Sonho e realidade","Identidade e fragmentação do sujeito"],
-    readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
   },
   {
     id:"pessoa-heteronimos",
@@ -141,7 +168,7 @@ export const PORTUGUESE_LITERARY_WORKS=[
     author:"Alberto Caeiro, Ricardo Reis e Álvaro de Campos",
     curriculumLabel:"seleção prescrita",
     focus:["Poéticas distintas","Sensação, razão e modernidade","Tempo, destino e consciência","Comparação sustentada por marcas textuais"],
-    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
   },
   {
     id:"mensagem",
@@ -159,7 +186,7 @@ export const PORTUGUESE_LITERARY_WORKS=[
     author:"José Saramago",
     curriculumLabel:"opção de leitura integral",
     focus:["Ricardo Reis personagem","Lisboa de 1936","História e ficção","Narrador, ironia e diálogo com Pessoa"],
-    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
   },
   {
     id:"memorial-do-convento",
