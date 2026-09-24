@@ -126,6 +126,33 @@ export const PORTUGUESE_LITERARY_WORKS=[
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
   },
   {
+    id:"jorge-sena-poesia",
+    year:"12.º",
+    title:"Poesia contemporânea · Jorge de Sena",
+    author:"Jorge de Sena",
+    curriculumLabel:"contrato de leitura · seleção inicial",
+    focus:["Testemunho e responsabilidade","História e memória","Arte e consciência crítica","Voz ética e interventiva"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"eugenio-andrade-poesia",
+    year:"12.º",
+    title:"Poesia contemporânea · Eugénio de Andrade",
+    author:"Eugénio de Andrade",
+    curriculumLabel:"contrato de leitura · seleção inicial",
+    focus:["Corpo e natureza","Luz, água e matéria","Concisão e musicalidade","Imagem sensorial"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-recursos"]
+  },
+  {
+    id:"ana-luisa-amaral-poesia",
+    year:"12.º",
+    title:"Poesia contemporânea · Ana Luísa Amaral",
+    author:"Ana Luísa Amaral",
+    curriculumLabel:"contrato de leitura · seleção inicial",
+    focus:["Quotidiano e experiência","Identidade e género","Tradição e reescrita","Voz íntima, irónica e crítica"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
     id:"sempre-e-uma-companhia",
     year:"12.º",
     title:"Sempre é uma companhia",

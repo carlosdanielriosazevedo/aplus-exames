@@ -10,22 +10,28 @@ const COMPETENCIES=[
   "pt-literatura-recursos"
 ];
 
+const CONTEMPORARY_POETRY_WORK_IDS=[
+  "jorge-sena-poesia",
+  "eugenio-andrade-poesia",
+  "ana-luisa-amaral-poesia"
+];
+
 describe("Portuguese work-specific literary bank",()=>{
   it("maps literary practice across 10th, 11th and 12th year",()=>{
     expect(PORTUGUESE_LITERARY_WORKS.map(work=>work.id)).toEqual([
       "poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","camoes-rimas","os-lusiadas-reflexoes",
       "sermao-santo-antonio","frei-luis-de-sousa","viagens-minha-terra","a-abobada","amor-perdicao","os-maias","ilustre-casa-ramires","antero-sonetos","cesario-ocidental",
-      "sempre-e-uma-companhia","george","familias-desavindas","pessoa-ortonimo","pessoa-heteronimos","mensagem","ano-morte-ricardo-reis","memorial-do-convento"
+      "jorge-sena-poesia","eugenio-andrade-poesia","ana-luisa-amaral-poesia","sempre-e-uma-companhia","george","familias-desavindas","pessoa-ortonimo","pessoa-heteronimos","mensagem","ano-morte-ricardo-reis","memorial-do-convento"
     ]);
     expect(portugueseLiteraryWorkById("frei-luis-de-sousa")).toMatchObject({year:"11.º",author:"Almeida Garrett"});
     expect(portugueseLiteraryWorkById("mensagem")).toMatchObject({year:"12.º",author:"Fernando Pessoa"});
     expect(portugueseLiteraryWorksForYear("10.º").map(work=>work.id)).toEqual(["poesia-trovadoresca","fernao-lopes-djoao-i","gil-vicente-teatro","camoes-rimas","os-lusiadas-reflexoes"]);
     expect(portugueseLiteraryWorksForYear("11.º").map(work=>work.id)).toEqual(["sermao-santo-antonio","frei-luis-de-sousa","viagens-minha-terra","a-abobada","amor-perdicao","os-maias","ilustre-casa-ramires","antero-sonetos","cesario-ocidental"]);
-    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(8);
+    expect(portugueseLiteraryWorksForYear("12.º")).toHaveLength(11);
   });
 
   it("contains explicit original banks for every listed work",()=>{
-    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(406);
+    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(448);
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
       expect(items).toHaveLength(work.readyCompetencyIds.length*7);
@@ -42,6 +48,15 @@ describe("Portuguese work-specific literary bank",()=>{
       for(const competencyId of COMPETENCIES.filter(id=>!work.readyCompetencyIds.includes(id))){
         expect(items.filter(item=>item.competencyId===competencyId)).toHaveLength(0);
       }
+    }
+  });
+
+  it("keeps the initial contemporary-poetry selection separated and answer positions non-trivial",()=>{
+    for(const workId of CONTEMPORARY_POETRY_WORK_IDS){
+      const items=portugueseLiteraryItemsForWork(workId);
+      expect(items).toHaveLength(14);
+      expect(items.every(item=>item.year==="12.º"&&item.literaryWorkId===workId)).toBe(true);
+      expect(new Set(items.map(item=>item.answerIndex))).toEqual(new Set([0,1,2,3]));
     }
   });
 
@@ -99,7 +114,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("uses unique IDs and unique stimuli",()=>{
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(406);
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(406);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(448);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(448);
   });
 });

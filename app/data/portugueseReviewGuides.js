@@ -73,7 +73,7 @@ const SPECIAL_FOCUS={
   "pt12-pessoa-heteronimos":["Poéticas distintas","Relação com sensação e tempo","Comparação sustentada por marcas textuais"],
   "pt12-mensagem":["Mito e História","Símbolos","Projeto de renovação"],
   "pt12-conto":["Narrador e focalização","Conflito","Símbolos e desfecho"],
-  "pt12-poesia-contemporanea":["Voz poética","Imagem e forma","Comparação entre textos"],
+  "pt12-poesia-contemporanea":["Contrato de leitura: seis poemas de pelo menos três poetas","Jorge de Sena: testemunho, História e responsabilidade","Eugénio de Andrade: corpo, natureza, concisão e musicalidade","Ana Luísa Amaral: quotidiano, identidade, tradição e reescrita","Comparação entre vozes, imagens e formas"],
   "pt12-saramago":["História e ficção","Narrador e ironia","Personagens e símbolos"]
 };
 
