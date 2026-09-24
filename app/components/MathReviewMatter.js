@@ -27,14 +27,14 @@ export default function MathReviewMatter({s,go}){
     <button className="back" onClick={()=>go("train")}>← Voltar</button>
     <section className="progressDetails" aria-label="Rever matéria de Matemática A">
       <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Matemática A para estudar com calma.</h1></div>
-      <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe uma matéria para recordar os conceitos e a estrutura que deves dominar.</p>
+      <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe uma matéria para ler um resumo, recordar conceitos, fórmulas e os erros que deves evitar.</p>
       <div className="notice"><b>Modo de estudo</b><span>Rever matéria serve apenas para ler e organizar ideias. Quando quiseres testar-te, usa “Praticar”.</span></div>
       <div className="chips" aria-label="Escolher ano de Matemática A">{years.map(row=><button type="button" key={row} className={year===row?"sel":""} aria-pressed={year===row} onClick={()=>{setYear(row);setThemeId(null)}}>{row}</button>)}</div>
       {!selected?<div className="themeGrid">{themes.map(row=><button type="button" key={row.id} onClick={()=>setThemeId(row.id)}><b>{row.short}</b><small>{row.name}</small></button>)}</div>
       :<article className="portugueseProgressCard">
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
         <p className="eyebrow">MATEMÁTICA A · {year}</p><h2>{selected.name}</h2>
-        <p>{study?.summary||"Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais."}</p>
+        <div className="notice reviewSummary"><b>Resumo da matéria</b><span>{study?.summary||"Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais."}</span></div>
         <div className="notice"><b>Conceitos essenciais</b><ul>{(study?.keyIdeas||selected.focus).map(point=><li key={point}>{point}</li>)}</ul></div>
         {study?.formulas?.length>0&&<div className="notice"><b>Relações e fórmulas a recordar</b><ul>{study.formulas.map(point=><li key={point}>{point}</li>)}</ul></div>}
         {subtopics.length>0&&<div className="notice"><b>Conteúdos a rever</b><ul>{subtopics.map(row=><li key={row.id}>{row.label}</li>)}</ul></div>}

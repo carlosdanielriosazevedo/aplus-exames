@@ -2,6 +2,8 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
+import {answerOptionState,conciseMathExplanation} from "./lib/feedbackCopy";
+import {STUDY_MODE_COPY,practiceModeCopy} from "./lib/studyModeCopy";
 import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
@@ -842,7 +844,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     </details>
     <h2>{current.q}</h2>
     <QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>
-    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
+    {fb&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?conciseMathExplanation(current.sol):<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{conciseMathExplanation(current.sol)}</small>}</>}</span></div>}
     {!fb
       ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
       :<button className="primary" onClick={next}>Próxima pergunta →</button>}
@@ -951,7 +953,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 
 const FIRST_USE_TOUR_STEPS=[
   {mascot:"thinking",eyebrow:"PASSO 1 DE 2",title:"Onde encontras o Apronso",text:"Estou contigo na Missão diária, onde a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
-  {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:"Em Praticar escolhes qualquer matéria. No Mini-exame treinas matéria já lecionada; em Progresso vês o teu Domínio e a certeza da app."}
+  {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:["Em Praticar escolhes qualquer matéria.","No Mini-exame treinas matéria já lecionada.","Em Progresso vês o teu Domínio e a certeza da app."]}
 ];
 
 function FirstUseTour({onComplete,onSkip,steps=FIRST_USE_TOUR_STEPS,ariaLabel="Como funciona a APProva+",finalLabel="Começar →"}){
@@ -966,7 +968,7 @@ function FirstUseTour({onComplete,onSkip,steps=FIRST_USE_TOUR_STEPS,ariaLabel="C
       <Apronso pose={item.mascot} className="firstUseTourMascot" alt=""/>
       <small>{item.eyebrow}</small>
       <h2>{item.title}</h2>
-      <p>{item.text}</p>
+      {Array.isArray(item.text)?<div className="firstUseTourText">{item.text.map(line=><p key={line}>{line}</p>)}</div>:<p>{item.text}</p>}
       <button className="firstUseTourNext" onClick={()=>last?onComplete():setStep(current=>current+1)}>{last?finalLabel:"Seguinte →"}</button>
       <button className="firstUseTourSkip" onClick={onSkip}>Saltar explicação</button>
     </section>
@@ -1379,7 +1381,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <h2>{current.q}</h2>
     {current.practiceOnly?<PracticeResponse question={current} value={sel} onChange={answer} feedback={fb} guided/>:<QuestionOptions q={current} sel={sel} fb={fb} answer={answer}/>}
 
-    {fb&&!current.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?current.sol:<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{current.sol}</small>}</>}</span></div>}
+    {fb&&!current.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?conciseMathExplanation(current.sol):<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{conciseMathExplanation(current.sol)}</small>}</>}</span></div>}
     {fb&&<ReportButton item={current} s={s} setS={setS}/>}
     {!fb?<button disabled={!isResponseAnswered(current,sel)} className="primary" onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
   </Shell>
@@ -1557,11 +1559,11 @@ function Ranking({s,setS,go}){
 
 function TrainHub({s,go}){
   return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <ApronsoNudge pose="thinking">Queres praticar um tema específico ou testar várias matérias? Escolhe o formato e eu acompanho-te.</ApronsoNudge>
+    <ApronsoNudge pose="thinking">{STUDY_MODE_COPY.nudge}</ApronsoNudge>
     <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>Escolhe qualquer matéria ou submatéria, mesmo que ainda não a tenhas dado. O Treino Livre não altera diretamente o teu Domínio.</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>Usa as submatérias já lecionadas no teu ano e inclui automaticamente a matéria dos anos anteriores. Recebes o feedback no fim.</small></div><em>→</em></button>
-      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>Estuda conceitos, fórmulas e relações sem perguntas nem avaliação.</small></div><em>→</em></button>
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy("math-a")}</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>{STUDY_MODE_COPY.miniExam}</small></div><em>→</em></button>
+      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>{STUDY_MODE_COPY.review}</small></div><em>→</em></button>
     </div><StudentNav active="train" go={go}/>
   </Shell>;
 }
@@ -1742,7 +1744,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span>{q.generated&&<span>Variante validada · gerada por regras matemáticas fechadas · seed {q.variantSeed}</span>}</div></details>
     <h2>{q.q}</h2>
     {q.practiceOnly?<PracticeResponse question={q} value={sel} onChange={answer} feedback={fb}/>:<QuestionOptions q={q} sel={sel} fb={fb} answer={answer}/>}
-    {fb&&!q.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?q.sol:<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{q.sol}</small>}</>}</span></div>}
+    {fb&&!q.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?conciseMathExplanation(q.sol):<>A resposta correta é:<strong>{q.o[q.a]}</strong>{q.sol&&<small>{conciseMathExplanation(q.sol)}</small>}</>}</span></div>}
     {fb&&<ReportButton item={q} s={s} setS={setS}/>}
     {!fb?<button className="primary" disabled={!isResponseAnswered(q,sel)} onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
     <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
@@ -2942,7 +2944,7 @@ function QualityPanel({s,setS,go}){
 
 function QuestionOptions({q,sel,fb,answer}){
   return <div className="opts">{q.o.map((x,n)=><button key={`${q.id}-${n}`}
-    className={(sel===n?"sel ":"")+(fb&&n===q.a?"correct ":"")+(fb&&sel===n&&n!==q.a?"wrong":"")}
+    className={answerOptionState({index:n,selectedIndex:sel,correctIndex:q.a,submitted:!!fb})}
     disabled={!!fb}
     onClick={()=>answer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
 }
