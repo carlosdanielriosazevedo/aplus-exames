@@ -2,6 +2,7 @@
 import {useMemo,useState} from "react";
 import {TAXONOMY} from "../data/content";
 import {curriculumSubtopicsForTheme} from "../data/curriculumVnext";
+import {mathReviewContentFor} from "../data/mathReviewContent";
 import {Shell,StudentNav,StudentTop} from "./chrome";
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
@@ -19,6 +20,7 @@ export default function MathReviewMatter({s,go}){
   const themes=TAXONOMY.filter(row=>row.year===year);
   const selected=themes.find(row=>row.id===themeId)||null;
   const subtopics=selected?curriculumSubtopicsForTheme(selected.id):[];
+  const study=selected?mathReviewContentFor(selected.id):null;
 
   return <Shell>
     <StudentTop s={s} go={go}/>
@@ -32,10 +34,12 @@ export default function MathReviewMatter({s,go}){
       :<article className="portugueseProgressCard">
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
         <p className="eyebrow">MATEMÁTICA A · {year}</p><h2>{selected.name}</h2>
-        <p>Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais. Depois confirma se consegues reconhecer cada ideia nas diferentes representações e contextos.</p>
-        <div className="notice"><b>Conceitos essenciais</b><ul>{selected.focus.map(point=><li key={point}>{point}</li>)}</ul></div>
+        <p>{study?.summary||"Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais."}</p>
+        <div className="notice"><b>Conceitos essenciais</b><ul>{(study?.keyIdeas||selected.focus).map(point=><li key={point}>{point}</li>)}</ul></div>
+        {study?.formulas?.length>0&&<div className="notice"><b>Relações e fórmulas a recordar</b><ul>{study.formulas.map(point=><li key={point}>{point}</li>)}</ul></div>}
         {subtopics.length>0&&<div className="notice"><b>Conteúdos a rever</b><ul>{subtopics.map(row=><li key={row.id}>{row.label}</li>)}</ul></div>}
-        <div className="notice"><b>Como estudar esta matéria</b><span>Lê os conceitos, identifica fórmulas e relações importantes e tenta explicar cada ponto por palavras tuas. Quando quiseres responder a exercícios, regressa ao menu e escolhe “Praticar”.</span></div>
+        {study?.pitfalls?.length>0&&<div className="notice"><b>Erros frequentes</b><ul>{study.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
+        <div className="notice"><b>Como estudar esta matéria</b><span>{study?.studyTip||"Lê os conceitos e tenta explicar cada ponto por palavras tuas."} Quando quiseres responder a exercícios, regressa ao menu e escolhe “Praticar”.</span></div>
       </article>}
     </section>
     <StudentNav active="train" go={go}/>
