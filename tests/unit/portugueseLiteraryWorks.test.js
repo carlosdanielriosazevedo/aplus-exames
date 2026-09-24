@@ -25,7 +25,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("contains explicit original banks for every listed work",()=>{
-    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(294);
+    expect(PORTUGUESE_LITERARY_ITEMS).toHaveLength(322);
     for(const work of PORTUGUESE_LITERARY_WORKS){
       const items=portugueseLiteraryItemsForWork(work.id);
       expect(items).toHaveLength(work.readyCompetencyIds.length*7);
@@ -99,7 +99,7 @@ describe("Portuguese work-specific literary bank",()=>{
   });
 
   it("uses unique IDs and unique stimuli",()=>{
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(294);
-    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(294);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.id)).size).toBe(322);
+    expect(new Set(PORTUGUESE_LITERARY_ITEMS.map(item=>item.stimulus)).size).toBe(322);
   });
 });
