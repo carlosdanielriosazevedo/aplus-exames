@@ -9,3 +9,10 @@ export function conciseMathExplanation(value){
   }
   return text.slice(0,cut).trim();
 }
+
+export function answerOptionState({index,selectedIndex,correctIndex,submitted=false}){
+  if(!submitted)return index===selectedIndex?"selected":"";
+  if(index===correctIndex)return "correct";
+  if(index===selectedIndex)return "wrong";
+  return "";
+}
