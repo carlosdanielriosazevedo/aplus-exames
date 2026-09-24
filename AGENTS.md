@@ -145,6 +145,15 @@ Default rule:
 
 **If a decision is technical, reversible and confined to the repository, decide and execute autonomously. If it affects product, pedagogy, legal, costs, personal data or production, ask first.**
 
+## Standing merge authorization
+The product owner has granted standing authorization for Codex to merge APProva+ pull requests into `main` without asking again when all of the following are true:
+- the work is confined to this repository and within an already requested direction;
+- required CI checks, relevant tests and the production build are green;
+- the pull request has no unresolved conflicts or blocking review findings;
+- the change does not cross any product, pedagogy, legal/licensing, cost, privacy, credentials or external-service boundary that otherwise requires confirmation.
+
+This standing authorization covers normal integration work, bug fixes, content batches and technical improvements. It does not authorize bypassing failed checks, force-pushing `main`, or making decisions in the protected categories above.
+
 ## Development workflow
 Use a **single rolling integration branch** for normal repository work: `codex/integration-next`.
 
