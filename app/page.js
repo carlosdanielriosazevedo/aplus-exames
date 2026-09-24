@@ -2,7 +2,7 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import dynamic from "next/dynamic";
 import {insertMathText} from "./lib/mathInput";
-import {conciseMathExplanation} from "./lib/feedbackCopy";
+import {answerOptionState,conciseMathExplanation} from "./lib/feedbackCopy";
 import {STUDY_MODE_COPY,practiceModeCopy} from "./lib/studyModeCopy";
 import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
@@ -2944,7 +2944,7 @@ function QualityPanel({s,setS,go}){
 
 function QuestionOptions({q,sel,fb,answer}){
   return <div className="opts">{q.o.map((x,n)=><button key={`${q.id}-${n}`}
-    className={(sel===n?"sel ":"")+(fb&&n===q.a?"correct ":"")+(fb&&sel===n&&n!==q.a?"wrong":"")}
+    className={answerOptionState({index:n,selectedIndex:sel,correctIndex:q.a,submitted:!!fb})}
     disabled={!!fb}
     onClick={()=>answer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
 }
