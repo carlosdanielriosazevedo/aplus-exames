@@ -9,6 +9,24 @@ export const PORTUGUESE_LITERARY_WORKS=[
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
   },
   {
+    id:"fernao-lopes-djoao-i",
+    year:"10.º",
+    title:"Fernão Lopes · Crónica de D. João I",
+    author:"Fernão Lopes",
+    curriculumLabel:"excertos prescritos",
+    focus:["Construção da narrativa histórica","Caracterização coletiva","Dinamismo da ação","Valorização do povo"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+  },
+  {
+    id:"gil-vicente-teatro",
+    year:"10.º",
+    title:"Gil Vicente · Teatro",
+    author:"Gil Vicente",
+    curriculumLabel:"opção de leitura integral",
+    focus:["Comicidade","Crítica de costumes","Tipos sociais","Diálogo e progressão dramática"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
+  },
+  {
     id:"os-lusiadas-reflexoes",
     year:"10.º",
     title:"Os Lusíadas · Reflexões do Poeta",
@@ -34,6 +52,24 @@ export const PORTUGUESE_LITERARY_WORKS=[
     curriculumLabel:"leitura integral",
     focus:["Conflito trágico e fatalidade","Identidade, passado e regresso","Personagens, espaço e símbolos","Estrutura dramática e progressão da ação"],
     readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
+  },
+  {
+    id:"antero-sonetos",
+    year:"11.º",
+    title:"Antero de Quental · Sonetos",
+    author:"Antero de Quental",
+    curriculumLabel:"dois sonetos prescritos",
+    focus:["Conflito interior","Reflexão existencial","Progressão do pensamento","Estrutura do soneto"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
+  },
+  {
+    id:"cesario-ocidental",
+    year:"11.º",
+    title:"O Sentimento dum Ocidental",
+    author:"Cesário Verde",
+    curriculumLabel:"leitura integral",
+    focus:["Deambulação urbana","Contrastes sociais","Imagética e sensação","Progressão espacial e temporal"],
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-forma"]
   },
   {
     id:"pessoa-ortonimo",
