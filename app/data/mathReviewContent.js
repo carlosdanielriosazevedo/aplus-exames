@@ -32,7 +32,7 @@ export const MATH_REVIEW_CONTENT={
     keyIdeas:["Determinar domínio, imagem e zeros.","Interpretar crescimento, decrescimento e extremos no gráfico.","Passar entre representações algébricas e gráficas."],
     formulas:["Zero de f: resolver f(x)=0.","Numa função afim f(x)=mx+b, m é o declive e b a ordenada na origem."],
     pitfalls:["Confundir domínio com imagem.","Ler um extremo local como se fosse necessariamente absoluto."],
-    studyTip:"Para cada função, tenta responder sem calcular: onde existe, onde vale zero, onde cresce e onde atinge extremos."
+    studyTip:"Para cada função, tenta identificar sem calcular: onde existe, onde vale zero, onde cresce e onde atinge extremos."
   },
   "10-ga":{
     summary:"A geometria analítica traduz problemas geométricos para coordenadas, vetores e equações. O objetivo é usar a álgebra para descrever posições, distâncias e direções.",
@@ -56,7 +56,7 @@ export const MATH_REVIEW_CONTENT={
     studyTip:"Quando aparecer perpendicularidade, pensa imediatamente em produto escalar igual a zero."
   },
   "11-cont":{
-    summary:"A contagem procura determinar quantas possibilidades existem sem as enumerar uma a uma. A pergunta-chave é sempre: a ordem importa? Há repetição? As escolhas são independentes?",
+    summary:"A contagem procura determinar quantas possibilidades existem sem as enumerar uma a uma. A decisão-chave é sempre perceber se a ordem importa, se há repetição e se as escolhas são independentes.",
     keyIdeas:["Aplicar princípios da adição e multiplicação.","Distinguir permutações, arranjos e combinações.","Organizar casos com tabelas ou diagramas quando necessário."],
     formulas:["n!=n(n-1)…1.","Combinações: C(n,k)=n!/[k!(n-k)!]."],
     pitfalls:["Usar combinações quando a ordem altera o resultado.","Somar casos que não são mutuamente exclusivos."],
