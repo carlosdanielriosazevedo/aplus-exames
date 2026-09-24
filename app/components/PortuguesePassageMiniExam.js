@@ -4,6 +4,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
+import {portugueseMiniExamDraftSnapshot} from "../lib/portugueseMiniExamDraft";
 import PortugueseWritingCycleSummary from "./PortugueseWritingCycleSummary";
 
 function answerFilled(item,value){
@@ -21,17 +22,17 @@ function revisionTargets(criteria,assessment){
   return (marked.length?marked:criteria.filter(criterion=>!assessment[criterion.id]?.status)).map(criterion=>criterion.id);
 }
 
-export default function PortuguesePassageMiniExam({exam,onExit=null,onComplete=null}){
-  const [index,setIndex]=useState(0);
-  const [answers,setAnswers]=useState({});
-  const [review,setReview]=useState(false);
+export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialDraft=null,onDraftChange=null,onExit=null,onComplete=null}){
+  const [index,setIndex]=useState(()=>initialDraft?.index||0);
+  const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
+  const [review,setReview]=useState(()=>!!initialDraft?.review);
   const [mobileTextOpen,setMobileTextOpen]=useState(false);
-  const [selfAssessment,setSelfAssessment]=useState({});
-  const [revisionDrafts,setRevisionDrafts]=useState({});
-  const [revisions,setRevisions]=useState({});
+  const [selfAssessment,setSelfAssessment]=useState(()=>initialDraft?.selfAssessment||{});
+  const [revisionDrafts,setRevisionDrafts]=useState(()=>initialDraft?.revisionDrafts||{});
+  const [revisions,setRevisions]=useState(()=>initialDraft?.revisions||{});
   const [writingMemory,setWritingMemory]=useState([]);
-  const [dismissedWritingFocus,setDismissedWritingFocus]=useState({});
-  const [attemptId]=useState(()=>`ptx-${Date.now()}-${Math.random().toString(36).slice(2,8)}`);
+  const [dismissedWritingFocus,setDismissedWritingFocus]=useState(()=>initialDraft?.dismissedWritingFocus||{});
+  const [attemptId]=useState(()=>initialDraft?.attemptId||`ptx-${Date.now()}-${Math.random().toString(36).slice(2,8)}`);
   const completedRef=useRef(false);
   const item=exam.items[index];
   const block=exam.blocks.find(candidate=>candidate.itemIds.includes(item.id));
@@ -47,6 +48,12 @@ export default function PortuguesePassageMiniExam({exam,onExit=null,onComplete=n
   const activeWritingFocus=useMemo(()=>writingActivePreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
 
   useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
+  useEffect(()=>{
+    if(!onDraftChange||completedRef.current)return;
+    onDraftChange(portugueseMiniExamDraftSnapshot({
+      examId,itemIds:exam.items.map(row=>row.id),index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId
+    }));
+  },[answers,attemptId,dismissedWritingFocus,exam,examId,index,onDraftChange,review,revisionDrafts,revisions,selfAssessment]);
 
   const rememberAssessment=(row,assessment)=>setWritingMemory(current=>{
     const next=recordPortugueseWritingMemory(current,{attemptId,item:row,assessment});
@@ -115,7 +122,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null,onComplete=n
   if(review){
     return <main className="ptx-shell">
       <header className="ptx-header">
-        <div><span className="ptx-kicker">Português 639 · protótipo</span><h1>Rever o mini-exame</h1></div>
+        <div><span className="ptx-kicker">Português 639 · Mini-exame</span><h1>Rever o mini-exame</h1></div>
         <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={completeAndExit}>Guardar revisão e voltar aos mini-exames</button>}</div>
       </header>
       <section className="ptx-summary">
@@ -222,7 +229,7 @@ export default function PortuguesePassageMiniExam({exam,onExit=null,onComplete=n
 
   return <main className="ptx-shell">
     <header className="ptx-header">
-      <div><span className="ptx-kicker">Português 639 · experiência de mini-exame</span><h1>Texto + várias questões</h1></div>
+      <div><span className="ptx-kicker">Português 639 · Mini-exame</span><h1>Texto + várias questões</h1></div>
       <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
@@ -242,6 +249,6 @@ export default function PortuguesePassageMiniExam({exam,onExit=null,onComplete=n
         <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setReview(true)}>Terminar e rever o exame</button>}</div>
       </section>
     </div>
-    <footer className="ptx-footer-note">Protótipo editorial · {answeredCount} de {exam.itemCount} questões respondidas · não altera ainda o banco live de Português.</footer>
+    <footer className="ptx-footer-note">{answeredCount} de {exam.itemCount} questões respondidas · o progresso desta tentativa fica guardado neste dispositivo.</footer>
   </main>;
 }

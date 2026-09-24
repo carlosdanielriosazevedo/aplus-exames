@@ -12,6 +12,7 @@ const globalCss=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8
 const subjects=readFileSync(new URL("../app/data/subjects.js",import.meta.url),"utf8");
 const prototypeModule=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
 const progressModule=readFileSync(new URL("../app/lib/portugueseWritingProgress.js",import.meta.url),"utf8");
+const draftModule=readFileSync(new URL("../app/lib/portugueseMiniExamDraft.js",import.meta.url),"utf8");
 
 assert.match(page,/dynamic\(\(\)=>import\("\.\/components\/PortuguesePassageMiniExamRoute"\)(?:,\{[^}]*\})?\)/u,"o fluxo principal deve carregar a experiência dedicada de Português por dynamic import");
 assert.match(route,/portuguesePassagePrototypeExam/u,"a rota lazy deve consumir o catálogo de protótipos através da camada de dados da app");
@@ -55,13 +56,13 @@ for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
 }
 assert.match(taxonomy,/PORTUGUESE_TAXONOMY_VERSION/u,"a taxonomia deve ter versão editorial explícita");
 
-assert.match(component,/PortuguesePassageMiniExam\(\{exam,onExit=null,onComplete=null\}\)/u,"o componente deve aceitar saída e conclusão para integração no fluxo principal");
+assert.match(component,/PortuguesePassageMiniExam\(\{exam,[^}]*onExit=null,onComplete=null\}\)/u,"o componente deve aceitar saída e conclusão para integração no fluxo principal");
 assert.match(component,/Guardar revisão e voltar aos mini-exames/u,"a revisão concluída deve ser guardada antes de regressar à área comum");
 assert.match(component,/Terminar e rever o exame/u,"o fim deve encaminhar diretamente para a revisão");
 assert.doesNotMatch(component,/Voltar às respostas/u,"um exame já terminado não deve regressar ao fluxo de resposta");
 assert.match(route,/recordSubjectSession/u,"a conclusão deve ficar no progresso canónico da disciplina");
 assert.match(component,/não atribui automaticamente uma classificação final/u,"a execução não pode transformar resposta aberta em nota automática");
-assert.match(component,/const \[selfAssessment,setSelfAssessment\]=useState\(\{\}\)/u,"a revisão deve guardar a autoavaliação por critério na tentativa");
+assert.match(component,/const \[selfAssessment,setSelfAssessment\]=useState\(\(\)=>initialDraft\?\.selfAssessment\|\|\{\}\)/u,"a revisão deve recuperar e guardar a autoavaliação por critério na tentativa");
 assert.match(component,/PORTUGUESE_SELF_ASSESSMENT_LEVELS/u,"a autoavaliação deve consumir estados explícitos da camada pedagógica");
 assert.match(component,/criterionFeedback/u,"a revisão deve produzir feedback pedagógico por critério");
 assert.match(component,/selfAssessmentSummary/u,"a revisão deve calcular o próximo passo sem produzir nota");
@@ -69,8 +70,8 @@ assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão 
 assert.match(component,/row\.rubric\?\.criteria/u,"os critérios apresentados devem vir da grelha editorial do item");
 assert.match(component,/critérios com evidência escrita/u,"a revisão deve tornar visível o progresso de evidência");
 
-assert.match(component,/const \[revisionDrafts,setRevisionDrafts\]=useState\(\{\}\)/u,"o aluno deve poder preparar uma nova versão sem destruir a anterior");
-assert.match(component,/const \[revisions,setRevisions\]=useState\(\{\}\)/u,"o histórico de revisões deve ficar separado da resposta atual");
+assert.match(component,/const \[revisionDrafts,setRevisionDrafts\]=useState\(\(\)=>initialDraft\?\.revisionDrafts\|\|\{\}\)/u,"o aluno deve poder recuperar e preparar uma nova versão sem destruir a anterior");
+assert.match(component,/const \[revisions,setRevisions\]=useState\(\(\)=>initialDraft\?\.revisions\|\|\{\}\)/u,"o histórico de revisões deve ficar separado da resposta atual e sobreviver a interrupções");
 assert.match(component,/function revisionTargets/u,"a revisão deve associar a nova versão aos critérios que o aluno tentou melhorar");
 assert.match(component,/\["partial","not-yet"\]/u,"lacunas e cumprimento parcial devem ter prioridade como alvos de melhoria");
 assert.match(component,/targetedCriterionIds/u,"cada revisão deve guardar os critérios trabalhados");
@@ -95,7 +96,7 @@ assert.match(component,/não é uma classificação nem um diagnóstico automát
 assert.match(component,/writingActivePreAnswerFocus/u,"a execução deve usar apenas atenções ainda ativas no foco pré-resposta");
 assert.match(progressModule,/writingActivePreAnswerFocus/u,"o motor temporal deve filtrar do foco as atenções que deixaram de ser recorrentes");
 assert.match(progressModule,/suppressedResolved/u,"a supressão de um lembrete resolvido deve ficar explícita e auditável");
-assert.match(component,/const \[dismissedWritingFocus,setDismissedWritingFocus\]=useState\(\{\}\)/u,"o aluno deve poder ocultar um lembrete pré-resposta sem apagar a memória");
+assert.match(component,/const \[dismissedWritingFocus,setDismissedWritingFocus\]=useState\(\(\)=>initialDraft\?\.dismissedWritingFocus\|\|\{\}\)/u,"o aluno deve poder ocultar um lembrete pré-resposta sem apagar a memória nem perder o estado numa interrupção");
 assert.match(component,/Antes de responder, escolhe 1–2 pontos para vigiar/u,"o foco deve surgir antes da escrita, não apenas na correção");
 assert.match(component,/Pontos que deixaram de ser atenção recorrente nas tentativas recentes deixam de aparecer aqui/u,"a UI deve explicar porque um lembrete pode desaparecer com evolução sustentada");
 assert.match(component,/>Ocultar<\/button>/u,"o foco pedagógico deve ser dispensável pelo aluno");
@@ -108,6 +109,13 @@ assert.match(component,/Boa evolução nas tuas autoavaliações/u,"a UI deve to
 assert.match(component,/não uma conclusão definitiva/u,"a UI deve deixar explícito que a evolução recente é reversível");
 assert.match(progressModule,/deixou de aparecer como atenção recorrente por agora/u,"o motor deve usar linguagem reversível em vez de declarar um problema resolvido");
 assert.doesNotMatch(progressModule,/problema resolvido/iu,"o motor não deve declarar a escrita definitivamente resolvida");
+
+assert.match(route,/normalizePortugueseMiniExamDraft/u,"a rota deve validar o rascunho antes de o recuperar");
+assert.match(route,/savePortugueseMiniExamDraft/u,"cada alteração relevante do mini-exame deve ser persistida");
+assert.match(route,/clearPortugueseMiniExamDraft/u,"a conclusão deve remover a retoma já consumida");
+assert.match(component,/portugueseMiniExamDraftSnapshot/u,"a tentativa deve guardar questão, respostas, revisão e autoavaliação");
+assert.match(draftModule,/draft\.examId!==examId/u,"um rascunho de outro mini-exame não pode ser recuperado");
+assert.match(draftModule,/allowed\.has\(id\)/u,"dados de perguntas alheias ao mini-exame devem ser removidos");
 assert.match(css,/\.ptx-progress-story\{/u,"a evolução recente deve ter apresentação própria na revisão");
 assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-progress-story-list\{grid-template-columns:1fr\}/u,"o resumo de evolução deve adaptar-se ao mobile");
 
