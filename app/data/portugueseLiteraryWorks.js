@@ -96,7 +96,7 @@ export const PORTUGUESE_LITERARY_WORKS=[
     author:"Eça de Queirós",
     curriculumLabel:"opção de leitura integral",
     focus:["Representação social","Carlos da Maia e Ega","Ironia e crítica","Espaços e relações"],
-    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
   },
   {
     id:"ilustre-casa-ramires",
@@ -168,7 +168,7 @@ export const PORTUGUESE_LITERARY_WORKS=[
     author:"José Saramago",
     curriculumLabel:"opção de leitura integral",
     focus:["História e ficção","Baltasar e Blimunda","Narrador e ironia","Poder, construção e sonho"],
-    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz"]
+    readyCompetencyIds:["pt-literatura-temas","pt-literatura-voz","pt-literatura-forma","pt-literatura-recursos"]
   }
 ];
 
