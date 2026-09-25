@@ -26,6 +26,8 @@ const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url)
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.meta.url),"utf8");
 const mathReview=readFileSync(new URL("../app/components/MathReviewMatter.js",import.meta.url),"utf8");
+const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
+const globalCss=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 assert.match(page,/if\(screen==="subjectOnboard"\)/);
 assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject manager must have a guarded route");
 assert.match(page,/if\(preview==="subjects"\)/);
@@ -40,7 +42,13 @@ assert.match(page,/subjectOnboardingStep/u,"o onboarding deve percorrer todas as
 assert.match(page,/if\(screen==="reviewMatter"\)return <MathReviewMatter/u,"Matemática A deve ter um ecrã próprio de Rever matéria");
 assert.match(page,/onClick=\{\(\)=>go\("reviewMatter"\)\}[\s\S]{0,180}<b>Rever matéria<\/b>/u,"o cartão Rever matéria de Matemática A deve estar ativo");
 assert.match(mathReview,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria de Matemática A deve ser claramente um modo de estudo");
+assert.match(mathReview,/reviewChapter/u,"Rever matéria deve organizar o conteúdo em capítulos legíveis");
 assert.doesNotMatch(mathReview,/Responder|startPractice|trainingRun|QUESTION_BANK/u,"Rever matéria de Matemática A não deve iniciar perguntas nem treino");
+assert.match(portugueseSubject,/taughtUnitIds/u,"Português deve guardar a matéria dada por obra ou conteúdo, não apenas por domínio");
+assert.match(portugueseSubject,/literaryWorkId/u,"perguntas de obras não lecionadas devem ficar fora do âmbito do aluno");
+assert.match(portugueseSubject,/Resposta certa: /u,"o feedback de Português deve identificar explicitamente a resposta certa");
+assert.match(globalCss,/\.opts button\.selected/u,"a opção escolhida em Matemática deve permanecer visualmente selecionada antes da resposta");
+assert.match(globalCss,/\.portugueseProgressCard>\.portugueseMissionGrid\{display:grid\}/u,"o resumo de Português não pode ser comprimido pela regra flex do cartão");
 assert.match(page,/normalizeSubjectWorkspace\(base\)/,"legacy saved state must receive a safe active-subject default");
 assert.match(page,/normalizeSubjectWorkspaceState/,"saved subject aliases must be normalized through the shared migration");
 assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u,"the legacy Portuguese lab route must no longer exist");
