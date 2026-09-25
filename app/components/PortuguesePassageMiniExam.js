@@ -60,19 +60,23 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const isFullExam=exam.kind==="practice-exam";
   const baseDurationSeconds=(exam.durationMinutes||0)*60;
   const toleranceSeconds=(exam.toleranceMinutes||0)*60;
-  const durationSeconds=baseDurationSeconds+toleranceSeconds;
-  const remainingSeconds=durationSeconds?Math.max(0,durationSeconds-Math.floor((now-startedAt)/1000)):null;
-  const inTolerance=isFullExam&&toleranceSeconds>0&&remainingSeconds!==null&&remainingSeconds<=toleranceSeconds;
+  const elapsedSeconds=Math.max(0,Math.floor((now-startedAt)/1000));
+  const hasTimer=baseDurationSeconds>0;
+  const inTolerance=isFullExam&&toleranceSeconds>0&&elapsedSeconds>=baseDurationSeconds;
+  const remainingSeconds=!hasTimer?null:inTolerance
+    ?Math.max(0,toleranceSeconds-(elapsedSeconds-baseDurationSeconds))
+    :Math.max(0,baseDurationSeconds-elapsedSeconds);
+  const examTimeExpired=hasTimer&&elapsedSeconds>=baseDurationSeconds+toleranceSeconds;
 
   useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
   useEffect(()=>{
-    if(!durationSeconds||review)return undefined;
+    if(!hasTimer||review)return undefined;
     const timer=window.setInterval(()=>setNow(Date.now()),1000);
     return ()=>window.clearInterval(timer);
-  },[durationSeconds,review]);
+  },[hasTimer,review]);
   useEffect(()=>{
-    if(durationSeconds&&remainingSeconds===0&&!review)setReview(true);
-  },[durationSeconds,remainingSeconds,review]);
+    if(examTimeExpired&&!review)setReview(true);
+  },[examTimeExpired,review]);
   useEffect(()=>{
     if(!onDraftChange||completedRef.current)return;
     onDraftChange(portugueseMiniExamDraftSnapshot({
@@ -138,6 +142,11 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
 
   const currentResults=buildResults();
   const fullClassification=isFullExam?classifyPortugueseFullExamResults(currentResults):null;
+  const fullItemLabel=id=>{
+    const row=exam.items.find(candidate=>candidate.id===id);
+    const group=String(row?.passageTitle||"").split("—")[0].trim()||"Item";
+    return `${group} · ${row?.groupItemNumber??"—"}`;
+  };
 
   const completeAndExit=()=>{
     if(!completedRef.current){
@@ -159,7 +168,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
-      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do simulado"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.selectedOptionalItemIds.length===3?`Opcionais atualmente selecionados: ${fullClassification.selectedOptionalItemIds.map(id=>exam.items.find(item=>item.id===id)?.groupItemNumber).join(", ")}.`:"A seleção dos 3 opcionais é atualizada à medida que respondes."}</span></section>}
+      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do simulado"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
       {writingProgress.resolved.length>0&&<section className="ptx-progress-story" aria-label="Evolução recente nas autoavaliações de escrita">
         <span>Evolução recente</span><h2>Boa evolução nas tuas autoavaliações</h2>
         <p>Estes pontos tiveram atenção recorrente no teu histórico e deixaram de a mostrar nas tentativas mais recentes. É um sinal para manteres o cuidado, não uma conclusão definitiva sobre a tua escrita.</p>
@@ -259,7 +268,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   return <main className="ptx-shell">
     <header className="ptx-header">
       <div><span className="ptx-kicker">Português 639 · {isFullExam?"Simulado original":"Mini-exame"}</span><h1>{isFullExam?exam.title:"Texto + várias questões"}</h1>{isFullExam&&<p className="ptx-exam-disclaimer">Treino original APProva+ · não é uma prova oficial do IAVE.</p>}</div>
-      <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""} ${inTolerance?"is-tolerance":""}`} aria-live="polite"><span>{inTolerance?"Tolerância":"Tempo restante"}</span><strong>{formatRemainingTime(remainingSeconds)}</strong>{isFullExam&&<small>120 min + 30 min</small>}</div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
+      <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""} ${inTolerance?"is-tolerance":""}`} aria-live="polite"><span>{inTolerance?"Tolerância":"Tempo de prova"}</span><strong>{formatRemainingTime(remainingSeconds)}</strong>{isFullExam&&<small>{inTolerance?"tolerância em curso":"depois: +30 min de tolerância"}</small>}</div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
     <nav className="ptx-question-nav" aria-label="Navegação entre questões">{exam.items.map((row,rowIndex)=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para questão ${rowIndex+1}`}>{rowIndex+1}</button>)}</nav>
