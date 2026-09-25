@@ -22,7 +22,7 @@
 @media(max-width:760px){.examIntroGrid{grid-template-columns:1fr}.answerMap{grid-template-columns:repeat(4,1fr)}.examChange{align-items:flex-start}.examAction{align-items:flex-start}.examNav{grid-template-columns:1fr 1fr}}
 
 /* A+ v1.8 — variantes paramétricas */
-.validatedVariant{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 11px;background:#eefaf4;border:1px solid #ccebdc;border-radius:10px;margin:12px 0}.validatedVariant b{font-size:9px;color:#25845d}.validatedVariant span{font-size:7px;color:#759484;text-align:right}.chips button{white-space:normal}
+.validatedVariant{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 11px;background:#eefaf4;border:1px solid #ccebdc;border-radius:10px;margin:12px 0}.validatedVariant b{font-size:9px;color:#25845d}.validatedVariant span{font-size:7px;color:#759484;text-align:right}.chips button{white-space:normal}.yearSelector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}.yearSelector button{width:100%;font-weight:850;text-align:center}
 @media(max-width:760px){.validatedVariant{align-items:flex-start;flex-direction:column}.validatedVariant span{text-align:left}}
 
 /* A+ v1.9 — Qualidade & Beta */

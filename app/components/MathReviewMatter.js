@@ -1,5 +1,5 @@
 "use client";
-import {useMemo,useState} from "react";
+import {useState} from "react";
 import {TAXONOMY} from "../data/content";
 import {curriculumSubtopicsForTheme} from "../data/curriculumVnext";
 import {mathReviewContentFor} from "../data/mathReviewContent";
@@ -7,15 +7,9 @@ import {Shell,StudentNav,StudentTop} from "./chrome";
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
 
-function yearsThrough(year){
-  const index=SCHOOL_YEARS.indexOf(year);
-  return index<0?SCHOOL_YEARS:SCHOOL_YEARS.slice(0,index+1);
-}
-
 export default function MathReviewMatter({s,go}){
   const currentYear=SCHOOL_YEARS.includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
-  const years=useMemo(()=>yearsThrough(currentYear),[currentYear]);
-  const [year,setYear]=useState(years.at(-1)||"12.º");
+  const [year,setYear]=useState(currentYear);
   const [themeId,setThemeId]=useState(null);
   const themes=TAXONOMY.filter(row=>row.year===year);
   const selected=themes.find(row=>row.id===themeId)||null;
@@ -29,7 +23,7 @@ export default function MathReviewMatter({s,go}){
       <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Matemática A para estudar com calma.</h1></div>
       <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe uma matéria para ler um resumo, recordar conceitos, fórmulas e os erros que deves evitar.</p>
       <div className="notice"><b>Modo de estudo</b><span>Rever matéria serve apenas para ler e organizar ideias. Quando quiseres testar-te, usa “Praticar”.</span></div>
-      <div className="chips" aria-label="Escolher ano de Matemática A">{years.map(row=><button type="button" key={row} className={year===row?"sel":""} aria-pressed={year===row} onClick={()=>{setYear(row);setThemeId(null)}}>{row}</button>)}</div>
+      <div className="chips yearSelector" aria-label="Escolher ano de Matemática A">{SCHOOL_YEARS.map(row=><button type="button" key={row} className={year===row?"sel":""} aria-pressed={year===row} onClick={()=>{setYear(row);setThemeId(null)}}>{row}</button>)}</div>
       {!selected?<div className="themeGrid">{themes.map(row=><button type="button" key={row.id} onClick={()=>setThemeId(row.id)}><b>{row.short}</b><small>{row.name}</small></button>)}</div>
       :<article className="portugueseProgressCard">
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
