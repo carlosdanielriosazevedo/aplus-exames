@@ -37,6 +37,7 @@ export function classifyPortugueseFullExamResults(results=[]){
   }).sort((a,b)=>b.points-a.points||a.index-b.index);
   const selectedOptional=rankedOptional.slice(0,exam.scoringPolicy.optionalBestCount);
   const selectedIds=new Set(selectedOptional.map(row=>row.item.id));
+  const answeredOptionalCount=optional.filter(item=>(resultById.get(item.id)||{}).status!=="unanswered").length;
   const selectedItems=[...mandatory,...selectedOptional.map(row=>row.item)];
   const knownPoints=selectedItems.reduce((sum,item)=>{
     const result=resultById.get(item.id)||{};
@@ -48,6 +49,7 @@ export function classifyPortugueseFullExamResults(results=[]){
     optionalItemIds:optional.map(item=>item.id),
     selectedOptionalItemIds:optional.filter(item=>selectedIds.has(item.id)).map(item=>item.id),
     excludedOptionalItemIds:optional.filter(item=>!selectedIds.has(item.id)).map(item=>item.id),
+    answeredOptionalCount,
     knownPoints,
     pendingItemIds:pendingItems.map(item=>item.id),
     maxPoints:exam.maxPoints
