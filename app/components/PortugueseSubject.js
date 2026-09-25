@@ -13,6 +13,7 @@ import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
+import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
@@ -44,6 +45,8 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const scopedCoverage=portugueseCoverage(scopedItems);
   const progress=subjectProgressFor(s,"portuguese");
   const miniExamDraft=s.subjectSettings?.portuguese?.miniExamDraft||null;
+  const onboardingStep=subjectOnboardingStep(s,"portuguese");
+  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
   const competenceRows=Object.entries(progress.competence);
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
@@ -133,12 +136,12 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
     {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
-    <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p><h1>O que já deste no {currentYear}?</h1>
+    <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p><h1>O que já deste no {currentYear}?</h1>
     <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as áreas que a escola já trabalhou; o diagnóstico e as recomendações deixam de usar matéria que ainda não deste.</p>
     <div className="curriculumPicker">{PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=><label key={domain.id}><input type="checkbox" checked={scopeDraft.includes(domain.id)} onChange={()=>setScopeDraft(current=>current.includes(domain.id)?current.filter(id=>id!==domain.id):[...current,domain.id])}/><span>{domain.label}</span></label>)}</div>
     {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste matéria deste ano</b><span>A app usará apenas matéria dos anos anteriores. No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma área.</span></div>}
     <div className="notice"><b>O histórico fica guardado</b><span>Desmarcar uma área não apaga respostas nem sessões anteriores; apenas a retira das próximas recomendações.</span></div>
-    <button className="primary" onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtDomains:scopeDraft}}}));go(view==="curriculumOnboard"?"goalOnboard":"progress")}}>{view==="curriculumOnboard"?"Continuar":"Guardar matéria dada"}</button>
+    <button className="primary" onClick={()=>{setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtDomains:scopeDraft,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
   </Shell>;
 
   if(!session&&view==="trainingSetup"){

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {AVAILABLE_SUBJECT_IDS} from "../app/data/subjects.js";
-import {canonicalSubjectId,normalizeSubjectWorkspaceState,uniqueSubjectIds} from "../app/lib/subjectWorkspace.js";
+import {activateSubjectState,canonicalSubjectId,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectOnboardingStep,uniqueSubjectIds} from "../app/lib/subjectWorkspace.js";
 import {migrateSubjectProgress,subjectProgressFor} from "../app/lib/subjectProgress.js";
 
 for(const legacy of ["portugueseLab","portuguese-lab","portuguese_lab","portuguesePilot","portuguese-pilot","portuguese_pilot","portuguese-639","pt-639-pilot","pt639"]){
@@ -12,6 +12,20 @@ assert.deepEqual(uniqueSubjectIds(["math-a","portugueseLab","portuguese","portug
 const workspace=normalizeSubjectWorkspaceState({selectedSubjectIds:["portugueseLab","portuguese"],activeSubjectId:"portuguese-pilot"},AVAILABLE_SUBJECT_IDS);
 assert.deepEqual(workspace.selectedSubjectIds,["portuguese"]);
 assert.equal(workspace.activeSubjectId,"portuguese");
+
+const onboarding={selectedSubjectIds:["math-a","portuguese"],activeSubjectId:"math-a",profile:{schoolYear:"12.º",recentGrade:15,examTiming:"thisYear"},subjectSettings:{math:{ignored:true},"math-a":{profileConfigured:true,recentGrade:16,examTiming:"thisYear"},portuguese:{profileConfigured:true,recentGrade:14,examTiming:"nextYear"}}};
+assert.deepEqual(subjectOnboardingStep(onboarding,"math-a"),{ids:["math-a","portuguese"],index:0,position:1,total:2,firstId:"math-a",nextId:"portuguese"});
+assert.deepEqual(subjectOnboardingStep(onboarding,"portuguese"),{ids:["math-a","portuguese"],index:1,position:2,total:2,firstId:"math-a",nextId:null});
+const portugueseActive=activateSubjectState(onboarding,"portuguese");
+assert.equal(portugueseActive.activeSubjectId,"portuguese");
+assert.equal(portugueseActive.profile.recentGrade,14,"Ao mudar de disciplina, a nota recente deve acompanhar a disciplina ativa.");
+assert.equal(portugueseActive.profile.schoolYear,"12.º","O ano escolar deve continuar partilhado entre disciplinas.");
+const added={...onboarding,onboardingSubjectIds:["portuguese"],onboardingReturnSubjectId:"portuguese",subjectOnboardingMode:"add"};
+assert.deepEqual(subjectOnboardingStep(added,"portuguese"),{ids:["portuguese"],index:0,position:1,total:1,firstId:"portuguese",nextId:null},"Uma disciplina adicionada mais tarde deve configurar apenas essa disciplina.");
+const finishedAdded=finishSubjectOnboardingState(added,"portuguese");
+assert.equal(finishedAdded.activeSubjectId,"portuguese");
+assert.deepEqual(finishedAdded.onboardingSubjectIds,[]);
+assert.equal(finishedAdded.subjectOnboardingMode,null);
 
 const migrated=migrateSubjectProgress({subjectProgress:{
   portuguese:{diagnosticDone:true,sessions:[{kind:"diagnostic",label:"Diagnóstico",completedAt:10,itemIds:["A"]}],competence:{x:{attempts:2,correct:1}},lastActivityAt:10},
@@ -32,6 +46,7 @@ assert.doesNotMatch(subject,/PortugueseLab|portugueseLab|laboratório/iu);
 assert.match(subject,/StudentTop/u);
 assert.match(subject,/StudentNav/u);
 assert.match(subject,/view==="curriculum"/u);
+assert.match(subject,/onboardingStep\.nextId/u,"Português deve encaminhar a configuração para a disciplina seguinte selecionada");
 assert.match(subject,/view==="trainingSetup"/u);
 assert.match(subject,/>Responder</u,"Português deve exigir confirmação explícita da resposta");
 assert.match(subject,/feedback\.final/u,"o feedback só deve ser renderizado depois da submissão");
