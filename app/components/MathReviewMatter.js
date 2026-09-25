@@ -34,12 +34,12 @@ export default function MathReviewMatter({s,go}){
       :<article className="portugueseProgressCard">
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
         <p className="eyebrow">MATEMÁTICA A · {year}</p><h2>{selected.name}</h2>
-        <div className="notice reviewSummary"><b>Resumo da matéria</b><span>{study?.summary||"Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais."}</span></div>
-        <div className="notice"><b>Conceitos essenciais</b><ul>{(study?.keyIdeas||selected.focus).map(point=><li key={point}>{point}</li>)}</ul></div>
-        {study?.formulas?.length>0&&<div className="notice"><b>Relações e fórmulas a recordar</b><ul>{study.formulas.map(point=><li key={point}>{point}</li>)}</ul></div>}
-        {subtopics.length>0&&<div className="notice"><b>Conteúdos a rever</b><ul>{subtopics.map(row=><li key={row.id}>{row.label}</li>)}</ul></div>}
-        {study?.pitfalls?.length>0&&<div className="notice"><b>Erros frequentes</b><ul>{study.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
-        <div className="notice"><b>Como estudar esta matéria</b><span>{study?.studyTip||"Lê os conceitos e tenta explicar cada ponto por palavras tuas."} Quando quiseres responder a exercícios, regressa ao menu e escolhe “Praticar”.</span></div>
+        <div className="reviewChapter"><small>1 · VISÃO GLOBAL</small><h3>O que esta matéria explica</h3><p>{study?.summary||"Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais."}</p></div>
+        <div className="reviewChapter"><small>2 · IDEIAS FUNDAMENTAIS</small><h3>O que tens mesmo de compreender</h3><ol>{(study?.keyIdeas||selected.focus).map(point=><li key={point}>{point}</li>)}</ol></div>
+        {study?.formulas?.length>0&&<div className="reviewChapter formulaChapter"><small>3 · FERRAMENTAS</small><h3>Relações e fórmulas a recordar</h3><ul>{study.formulas.map(point=><li key={point}>{point}</li>)}</ul><p className="reviewCallout">Não basta decorar: confirma sempre as condições em que cada relação pode ser usada.</p></div>}
+        {subtopics.length>0&&<div className="reviewChapter"><small>4 · MAPA DA MATÉRIA</small><h3>Conteúdos desta unidade</h3><div className="reviewCheckGrid">{subtopics.map(row=><span key={row.id}>✓ {row.label}</span>)}</div></div>}
+        {study?.pitfalls?.length>0&&<div className="reviewChapter warningChapter"><small>5 · ARMADILHAS</small><h3>Erros frequentes e como os evitar</h3><ul>{study.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
+        <div className="reviewChapter reviewStudyPlan"><small>6 · PLANO DE REVISÃO</small><h3>Como estudar esta matéria</h3><p>{study?.studyTip||"Lê os conceitos e tenta explicar cada ponto por palavras tuas."}</p><ol><li>Lê a visão global sem fazer contas.</li><li>Explica cada ideia por palavras tuas.</li><li>Reescreve as fórmulas e identifica quando se aplicam.</li><li>Só depois regressa ao menu e escolhe “Praticar”.</li></ol></div>
       </article>}
     </section>
     <StudentNav active="train" go={go}/>

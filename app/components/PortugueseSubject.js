@@ -2,7 +2,7 @@
 import {useState} from "react";
 import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
-import {PORTUGUESE_COMPETENCIES,PORTUGUESE_DOMAINS} from "../data/portugueseFoundation";
+import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
 import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data/portugueseLiteraryWorks";
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
@@ -14,6 +14,7 @@ import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
+import {portugueseTaxonomyForYear} from "../data/portugueseTaxonomy";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
@@ -21,6 +22,32 @@ const SCHOOL_YEARS=["10.º","11.º","12.º"];
 function yearsThrough(year){
   const index=SCHOOL_YEARS.indexOf(year);
   return index<0?SCHOOL_YEARS:SCHOOL_YEARS.slice(0,index+1);
+}
+
+function portugueseScopeRows(year){
+  const general=(portugueseTaxonomyForYear(year,{includePrevious:false})[0]?.units||[])
+    .filter(unit=>unit.domain!=="educacao-literaria")
+    .map(unit=>({id:`domain:${unit.domain}`,label:unit.title.replace(/^.*? · /u,""),detail:PORTUGUESE_DOMAIN_LABELS[unit.domain]}));
+  const literature=portugueseLiteraryWorksForYear(year)
+    .map(work=>({id:`work:${work.id}`,label:work.title,detail:`${work.author} · ${work.curriculumLabel}`}));
+  return [
+    {id:"educacao-literaria",label:"Educação Literária",rows:literature},
+    {id:"competencias",label:"Leitura, Escrita e Gramática",rows:general}
+  ];
+}
+
+function initialPortugueseScope(settings,year){
+  const all=portugueseScopeRows(year).flatMap(group=>group.rows.map(row=>row.id));
+  if(Array.isArray(settings?.taughtUnitIds))return settings.taughtUnitIds.filter(id=>all.includes(id));
+  if(Array.isArray(settings?.taughtDomains))return all.filter(id=>id.startsWith("work:")?settings.taughtDomains.includes("educacao-literaria"):settings.taughtDomains.includes(id.slice(7)));
+  return [];
+}
+
+function portugueseItemInScope(item,currentYear,scopeIds){
+  if(item.year!==currentYear)return true;
+  if(item.literaryWorkId)return scopeIds.includes(`work:${item.literaryWorkId}`);
+  if(item.domain==="educacao-literaria")return scopeIds.some(id=>id.startsWith("work:"));
+  return scopeIds.includes(`domain:${item.domain}`);
 }
 
 function PortugueseSubject({s,setS,go,view="home"}){
@@ -33,14 +60,14 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const [missionFocus,setMissionFocus]=useState(null);
   const missionEvidenceFocus=missionFocus?.targetEvidenceObservations||[];
   const currentYear=SCHOOL_YEARS.includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
-  const savedScope=s.subjectSettings?.portuguese?.taughtDomains;
-  const taughtDomains=Array.isArray(savedScope)?savedScope:Object.keys(PORTUGUESE_DOMAIN_LABELS);
-  const [scopeDraft,setScopeDraft]=useState(taughtDomains);
+  const portugueseSettings=s.subjectSettings?.portuguese||{};
+  const taughtUnitIds=initialPortugueseScope(portugueseSettings,currentYear);
+  const [scopeDraft,setScopeDraft]=useState(taughtUnitIds);
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(null);
   const [practiceLiteraryWorkId,setPracticeLiteraryWorkId]=useState(null);
   const allowedYears=yearsThrough(currentYear);
-  const scopedItems=PORTUGUESE_ITEMS.filter(item=>allowedYears.includes(item.year)&&(item.year!==currentYear||taughtDomains.includes(item.domain)));
+  const scopedItems=PORTUGUESE_ITEMS.filter(item=>allowedYears.includes(item.year)&&portugueseItemInScope(item,currentYear,taughtUnitIds));
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
   const scopedCoverage=portugueseCoverage(scopedItems);
   const progress=subjectProgressFor(s,"portuguese");
@@ -137,11 +164,16 @@ function PortugueseSubject({s,setS,go,view="home"}){
   if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
     {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p><h1>O que já deste no {currentYear}?</h1>
-    <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as áreas que a escola já trabalhou; o diagnóstico e as recomendações deixam de usar matéria que ainda não deste.</p>
-    <div className="curriculumPicker">{PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=><label key={domain.id}><input type="checkbox" checked={scopeDraft.includes(domain.id)} onChange={()=>setScopeDraft(current=>current.includes(domain.id)?current.filter(id=>id!==domain.id):[...current,domain.id])}/><span>{domain.label}</span></label>)}</div>
+    <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as obras e os conteúdos que a escola já trabalhou. Assim, a app não te pergunta sobre uma leitura que ainda não deste.</p>
+    <div className="scopeCounter"><b>{scopeDraft.length}</b><span>de {portugueseScopeRows(currentYear).flatMap(group=>group.rows).length} conteúdos assinalados</span></div>
+    <div className="curriculumPicker portugueseCurriculumPicker">{portugueseScopeRows(currentYear).map(group=>{const ids=group.rows.map(row=>row.id);const count=ids.filter(id=>scopeDraft.includes(id)).length;const all=count===ids.length&&ids.length>0;return <details key={group.id} open={count>0}>
+      <summary><div><b>{group.label}</b><small>{count}/{ids.length} selecionados</small></div><span>⌄</span></summary>
+      <button type="button" className="selectTheme" onClick={()=>setScopeDraft(current=>all?current.filter(id=>!ids.includes(id)):[...new Set([...current,...ids])])}>{all?"Desmarcar este grupo":"Selecionar este grupo"}</button>
+      <div>{group.rows.map(row=><label key={row.id}><input type="checkbox" checked={scopeDraft.includes(row.id)} onChange={()=>setScopeDraft(current=>current.includes(row.id)?current.filter(id=>id!==row.id):[...current,row.id])}/><span><b>{row.label}</b><small>{row.detail}</small></span></label>)}</div>
+    </details>})}</div>
     {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste matéria deste ano</b><span>A app usará apenas matéria dos anos anteriores. No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma área.</span></div>}
     <div className="notice"><b>O histórico fica guardado</b><span>Desmarcar uma área não apaga respostas nem sessões anteriores; apenas a retira das próximas recomendações.</span></div>
-    <button className="primary" onClick={()=>{setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtDomains:scopeDraft,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
+    <button className="primary" onClick={()=>{setS(prev=>{const domains=[...new Set(scopeDraft.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:scopeDraft,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
   </Shell>;
 
   if(!session&&view==="trainingSetup"){
@@ -249,10 +281,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
     if(session.kind==="diagnostic"){
       const rows=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const domainRows=session.items.map((item,index)=>({item,result:finalResults[index]})).filter(row=>row.item.domain===domain&&row.result?.status!=="unanswered");const d=domainRows.filter(row=>row.result?.final);const c=d.filter(row=>row.result.correct).length;return {domain,label,total:domainRows.length,correct:c,pending:domainRows.filter(row=>!row.result.final).length,percent:d.length?Math.round(c/d.length*100):null};});
       const priority=[...rows].sort((a,b)=>(a.percent===null?-1:a.percent)-(b.percent===null?-1:b.percent))[0];
-      return <Shell><p className="eyebrow">Diagnóstico interno</p><h1>Já temos um ponto de partida</h1><p className="portugueseMethodNote">Isto não é uma nota. É uma fotografia inicial para escolher o próximo treino.</p>
+      return <Shell><p className="eyebrow">DIAGNÓSTICO CONCLUÍDO · PORTUGUÊS</p><h1>Já temos um ponto de partida.</h1><p className="portugueseMethodNote">Isto não é uma nota. É uma primeira leitura do teu desempenho para escolher o próximo treino.</p>
         <div className="portugueseSubjectStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
-        <div className={`dailyCompletionNote ${daily.dailyGoalComplete?"done":"partial"}`}><b>{daily.dailyGoalComplete?"Objetivo de hoje concluído":"Diagnóstico registado"}</b><span>{daily.dailyGoalComplete?"A tua sequência está protegida por hoje.":`Faltam ${daily.xpRemaining} XP para completares o objetivo diário.`}</span></div>
-        <section className="portugueseProgressCard"><h2>O que vimos por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><b>{row.label}</b><span>{row.percent===null?"Ainda sem leitura objetiva":`${row.correct}/${row.total} · ${row.percent}%`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aguardam autoavaliação</small>}</article>)}</div></section>
+        <div className="notice"><b>Como ler este resultado</b><span>As respostas objetivas dão uma indicação inicial. As respostas abertas permanecem separadas e dependem da grelha de autoavaliação; não são transformadas automaticamente numa nota.</span></div>
+        <section className="portugueseProgressCard diagnosticDomainSummary"><h2>Primeira leitura por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><div><b>{row.label}</b><strong>{row.percent===null?"—":`${row.percent}%`}</strong></div><span>{row.percent===null?"Ainda sem respostas objetivas suficientes":`${row.correct} certas em ${row.total} respostas objetivas`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aberta(s) aguardam autoavaliação</small>}</article>)}</div></section>
         {priority&&<div className="notice"><b>Próximo foco: {priority.label}</b><span>Vamos começar por aqui e ajustar a missão àquilo que já respondeste, evitando repetir conteúdo sem necessidade.</span></div>}
         <button className="primary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);setTimeout(()=>startRecommendedMission(),0)}}>Começar a missão recomendada</button>
         <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);go("home")}}>Voltar ao plano de estudo</button>
@@ -323,7 +355,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       :feedback&&answer===null?<div className="rubricRecoveryNote"><b>Resposta já submetida</b><span>A resposta foi recuperada juntamente com a evidência assinalada na grelha.</span></div>:<><textarea className="portugueseOpenAnswer" disabled={!!feedback&&!revisionEditing} value={answer??""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve a tua resposta…" rows={9}/><div className={`portugueseWordCount ${wordLimitFeedback.status}`}><b>{wordLimitFeedback.label}</b><span>{wordLimitFeedback.count} palavras · pedido: {wordLimitFeedback.min}–{wordLimitFeedback.max}</span>{wordLimitFeedback.caution&&<small>{wordLimitFeedback.caution}</small>}</div></>}
     </article>
     {feedback&&<div className={`portugueseFeedback ${feedback.final?(feedback.correct?"correct":"incorrect"):"provisional"}`}><b>{feedback.final?(feedback.correct?"Resposta correta":"Resposta incorreta"):feedback.rubricCompleted?"Autoavaliação guardada — sem classificação automática":"Agora revê a tua resposta"}</b>
-      {feedback.final&&<><span className="portugueseCorrectAnswer"><b>Resposta certa</b><span>{isChoice?item.options[item.answerIndex]:isShort?(item.acceptedAnswers?.[0]||""):item.referenceAnswer||""}</span></span><span>{item.explanation}</span></>}
+      {feedback.final&&<><span className="portugueseCorrectAnswer"><b>Resposta certa: {isChoice?`${String.fromCharCode(65+item.answerIndex)} — ${item.options[item.answerIndex]}`:isShort?(item.acceptedAnswers?.[0]||""):item.referenceAnswer||""}</b></span><span className="portugueseAnswerExplanation">{item.explanation}</span></>}
       {!feedback.final&&(!feedback.rubricCompleted||editingCriterionId)&&(()=>{const observations=feedback.criteria.flatMap(criterion=>criterion.observations.map(observation=>({criterion,observation})));const selected=observations.find(row=>row.observation.id===editingCriterionId)||observations.find(row=>row.observation.status==="pending");if(!selected)return null;const {criterion,observation}=selected;const index=observations.indexOf(selected);return <div className="guidedRubric"><div className="guidedRubricProgress"><span>Verificação {index+1} de {observations.length}</span><span>{criterion.label} · {criterion.points} pt na grelha</span></div><p>{observation.label}</p><span className="guidedRubricPrompt">Na tua resposta, que evidência encontras desta observação?</span>{(()=>{const guidance=portugueseObservationGuidance(item,criterion,observation);return <div className="rubricEvidenceGuide"><div><b>Conta como evidência</b><span>{guidance.counts}</span></div><div><b>Não chega</b><span>{guidance.notEnough}</span></div></div>})()}<div className="guidedRubricChoices">{PORTUGUESE_RUBRIC_EVIDENCE.map(option=><button type="button" className={observation.status===option.id?"selected":""} key={option.id} onClick={()=>recordRubricEvidence(criterion.id,observation.id,option.id)}><b>{option.label}</b><small>{option.description}</small></button>)}</div></div>})()}
       {!feedback.final&&feedback.rubricCompleted&&!editingCriterionId&&<><span>A tua leitura ficou registada por observação. Isto não é uma classificação nem altera o teu nível.</span><ul className="rubricEvidenceSummary">{feedback.criteria.map(criterion=>{const option=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===criterion.status);return <li key={criterion.id}><span>{criterion.label}</span><b>{option?.label||"Pendente"}</b><ul className="rubricObservationSummary">{criterion.observations.map(observation=>{const observationOption=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===observation.status);return <li key={observation.id}><span>{observation.label}</span><b>{observationOption?.label||"Pendente"}</b><button type="button" onClick={()=>setEditingCriterionId(observation.id)}>Alterar</button></li>})}</ul></li>})}</ul><div className="rubricGuidance"><b>Próximo passo</b><p>{rubricGuidance.nextAction}</p>{rubricGuidance.reviewObservations.length>0&&<ul className="rubricGuidanceTargets">{rubricGuidance.reviewObservations.map(observation=><li key={`${observation.criterionId}:${observation.id}`}><span><b>{observation.action.title}</b><small>{observation.label}</small><em>{observation.action.action}</em><i>{observation.action.hint}</i></span><button type="button" onClick={()=>setEditingCriterionId(observation.id)}>Rever</button></li>)}</ul>}<button type="button" className="rubricRevisionButton" onClick={startRevision}>Reescrever a resposta</button><div><span><strong>{rubricGuidance.observed.length}</strong> critérios sólidos</span><span><strong>{rubricGuidance.needsReview.length}</strong> a rever</span><span><strong>{rubricGuidance.uncertain.length}</strong> dúvidas</span></div></div>{feedback.revisionHistory?.length>0&&<details><summary>Ver histórico de revisões</summary><div className="rubricRevisionHistory">{feedback.revisionHistory.map((row,index)=>{const next=feedback.revisionHistory[index+1]?.responseText??feedback.responseText;const delta=portugueseRevisionCompare(row.responseText,next);const evidenceRows=Array.isArray(row.rubricObservationEvidence)?row.rubricObservationEvidence:[];const nextEvidence=feedback.revisionHistory[index+1]?.rubricObservationEvidence??rubricObservationEvidenceSnapshot(feedback);const evidenceEvolution=portugueseRevisionEvidenceCompare(evidenceRows,{criteria:nextEvidence.map(evidence=>({id:evidence.criterionId,observations:[{id:evidence.observationId,status:evidence.evidence,evidence:evidence.studentEvidence||[]}]}))});return <div key={row.revision}><b>{row.revision===0?"Resposta inicial":`Revisão ${row.revision}`}</b><p>{row.responseText}</p>{delta.changed&&<small>Evolução para a versão seguinte: {delta.afterWords} palavras · {delta.addedWords} palavras novas · {delta.removedWords} removidas.</small>}{evidenceRows.length>0&&<div className="rubricRevisionEvidence"><span>Evidência desta versão</span><ul>{evidenceRows.map(evidence=>{const criterion=feedback.criteria.find(row=>row.id===evidence.criterionId);const observation=criterion?.observations?.find(row=>row.id===evidence.observationId);const option=PORTUGUESE_RUBRIC_EVIDENCE.find(row=>row.id===evidence.evidence);return <li key={`${evidence.criterionId}:${evidence.observationId}`}><b>{observation?.label||evidence.observationId}</b><span>{criterion?.label||evidence.criterionId} · {option?.label||"Pendente"}</span></li>})}</ul>{evidenceEvolution.some(evidence=>evidence.direction!=="same")&&<div className="rubricRevisionTransitions"><span>Evolução por critério</span><ul>{evidenceEvolution.filter(evidence=>evidence.direction!=="same").map(evidence=><li key={`${evidence.criterionId}:${evidence.observationId}`}><b>{evidence.beforeLabel} → {evidence.afterLabel}</b><span>{feedback.criteria.find(criterion=>criterion.id===evidence.criterionId)?.observations?.find(observation=>observation.id===evidence.observationId)?.label||evidence.observationId}</span></li>)}</ul></div>}</div>}</div>})}</div></details>}{item.referenceAnswer&&<details><summary>Comparar com uma resposta de referência</summary><p>{item.referenceAnswer}</p></details>}</>}
     </div>}

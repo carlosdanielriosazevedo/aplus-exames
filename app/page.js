@@ -606,7 +606,10 @@ function StudentProfile({s,setS,go,editing=false}){
 
     {!sharedProfileDone&&<><h3>Em que ano estás?</h3>
     <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div></>}
-    {sharedProfileDone&&<div className="notice"><b>Ano escolar: {p.schoolYear}</b><span>Esta informação é comum a todas as disciplinas e não precisa de ser repetida.</span></div>}
+    {sharedProfileDone&&<>
+      <div className="subjectConfigBanner" aria-label={`A configurar ${activeSubject.name}`}><span>{activeSubject.icon||"Aa"}</span><div><small>DISCIPLINA EM CONFIGURAÇÃO</small><b>{activeSubject.name}</b><p>A nota recente, a data do exame e a matéria dada serão guardadas apenas nesta disciplina.</p></div></div>
+      <div className="notice"><b>Ano escolar: {p.schoolYear}</b><span>Esta informação é comum a todas as disciplinas e não precisa de ser repetida.</span></div>
+    </>}
 
     {activeSubject.id==="math-a"&&p.schoolYear==="12.º"&&<>
       <h3>Que tema opcional está a tua turma a estudar?</h3>
