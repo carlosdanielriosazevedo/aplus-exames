@@ -35,6 +35,8 @@ assert.match(page,/Matemática A e Português disponíveis/);
 assert.match(chrome,/className="subjectSwitcher"/,"the shared student header must expose the active subject switcher");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="portuguese"/,"Portuguese must use the same semantic workspace destinations as Mathematics A");
 assert.match(page,/go\("home"\)/,"subject switching must be able to open the shared home destination");
+assert.match(page,/go\(isNew\?"onboard":subjectHomeScreen\(subject\.id\)\)/,"uma disciplina adicionada mais tarde deve passar pela configuração antes de abrir a Home");
+assert.match(page,/subjectOnboardingStep/u,"o onboarding deve percorrer todas as disciplinas selecionadas");
 assert.match(page,/if\(screen==="reviewMatter"\)return <MathReviewMatter/u,"Matemática A deve ter um ecrã próprio de Rever matéria");
 assert.match(page,/onClick=\{\(\)=>go\("reviewMatter"\)\}[\s\S]{0,180}<b>Rever matéria<\/b>/u,"o cartão Rever matéria de Matemática A deve estar ativo");
 assert.match(mathReview,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria de Matemática A deve ser claramente um modo de estudo");

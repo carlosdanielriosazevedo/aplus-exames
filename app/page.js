@@ -15,7 +15,7 @@ const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").the
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
-import {normalizeSubjectWorkspaceState,uniqueSubjectIds} from "./lib/subjectWorkspace";
+import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
 import "./portugues-mini-exame/passage-mini-exam.css";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -461,11 +461,16 @@ function SubjectSelection({s,setS,go}){
 
   function save(){
     if(!selected.length)return;
+    const ordered=AVAILABLE_SUBJECT_IDS.filter(id=>selected.includes(id));
     setS(prev=>recordMilestone({
       ...prev,
-      selectedSubjectIds:selected,
-      activeSubjectId:selected[0]
-    },"subjects_selected",{subjectIds:selected}));
+      selectedSubjectIds:ordered,
+      activeSubjectId:ordered[0],
+      onboardingSharedProfileDone:false,
+      onboardingSubjectIds:ordered,
+      onboardingReturnSubjectId:ordered[0],
+      subjectOnboardingMode:"initial"
+    },"subjects_selected",{subjectIds:ordered}));
     go("onboard");
   }
 
@@ -518,12 +523,14 @@ function SubjectManager({s,setS,go}){
 
   function activate(subject){
     if(!subject.available)return;
-    setS(prev=>normalizeSubjectWorkspace({
+    const isNew=!selected.includes(subject.id);
+    setS(prev=>activateSubjectState(normalizeSubjectWorkspace({
       ...prev,
       selectedSubjectIds:[...(prev.selectedSubjectIds||[]),subject.id],
-      activeSubjectId:subject.id
-    }));
-    go(subjectHomeScreen(subject.id));
+      activeSubjectId:subject.id,
+      ...(isNew?{onboardingSubjectIds:[subject.id],onboardingReturnSubjectId:subject.id,subjectOnboardingMode:"add"}:{})
+    }),subject.id));
+    go(isNew?"onboard":subjectHomeScreen(subject.id));
   }
 
   return <Shell><Back go={go} to={subjectHomeScreen(active.id)}/><p className="eyebrow">AS TUAS DISCIPLINAS</p><h1>O que queres estudar?</h1>
@@ -552,28 +559,54 @@ function suggestedExamTimingForYear(year,current){
 }
 
 function StudentProfile({s,setS,go,editing=false}){
-  const [p,setP]=useState(s.profile||initial.profile);
   const activeSubject=subjectById(s.activeSubjectId);
+  const subjectSettings=s.subjectSettings?.[activeSubject.id]||{};
+  const sharedProfileDone=!editing&&s.onboardingSharedProfileDone===true;
+  const onboardingStep=subjectOnboardingStep(s,activeSubject.id);
+  const [p,setP]=useState(()=>({
+    ...(s.profile||initial.profile),
+    recentGrade:subjectSettings.profileConfigured?subjectSettings.recentGrade??"":editing?(s.profile?.recentGrade??""):"",
+    examTiming:subjectSettings.profileConfigured?subjectSettings.examTiming||"unsure":editing?(s.profile?.examTiming||"unsure"):suggestedExamTimingForYear(s.profile?.schoolYear,s.profile?.examTiming)
+  }));
   function save(){
+    const saveProfile=prev=>{
+      const next={
+        ...prev,
+        profile:p,
+        onboardingSharedProfileDone:true,
+        subjectSettings:{
+          ...(prev.subjectSettings||{}),
+          [activeSubject.id]:{
+            ...(prev.subjectSettings?.[activeSubject.id]||{}),
+            recentGrade:p.recentGrade,
+            examTiming:p.examTiming,
+            profileConfigured:true
+          }
+        }
+      };
+      return sharedProfileDone||editing?next:recordMilestone(next,"profile_completed",{
+        schoolYear:p.schoolYear||null,
+        subjectId:activeSubject.id,
+        examTiming:p.examTiming||null
+      });
+    };
     if(editing){
-      setS(prev=>migrateDailyMission({...prev,profile:p}));
+      setS(prev=>migrateDailyMission(saveProfile(prev)));
       go("curriculumSettings");
       return;
     }
-    setS(prev=>recordMilestone({...prev,profile:p},"profile_completed",{
-      schoolYear:p.schoolYear||null,
-      examTiming:p.examTiming||null
-    }));
+    setS(saveProfile);
     go("curriculumOnboard");
   }
-  return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":"ANTES DO DIAGNÓSTICO"}</p>
+  return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":`CONFIGURAÇÃO ${onboardingStep.position} DE ${onboardingStep.total} · ${activeSubject.name.toUpperCase()}`}</p>
     <h1>{editing?"Atualiza o que estás a estudar.":<>Ajuda a <BrandName/> a começar no sítio certo.</>}</h1>
     <p className="muted">{editing
       ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a app ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
       :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
 
-    <h3>Em que ano estás?</h3>
-    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div>
+    {!sharedProfileDone&&<><h3>Em que ano estás?</h3>
+    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div></>}
+    {sharedProfileDone&&<div className="notice"><b>Ano escolar: {p.schoolYear}</b><span>Esta informação é comum a todas as disciplinas e não precisa de ser repetida.</span></div>}
 
     {activeSubject.id==="math-a"&&p.schoolYear==="12.º"&&<>
       <h3>Que tema opcional está a tua turma a estudar?</h3>
@@ -601,11 +634,13 @@ function StudentProfile({s,setS,go,editing=false}){
     </div>
 
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
-    <button className="primary" onClick={save}>{editing?"Guardar percurso":"Continuar"}</button>
+    <button className="primary" onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
   </Shell>
 }
 
 function TaughtCurriculum({s,setS,go,onboarding=false}){
+  const onboardingStep=subjectOnboardingStep(s,"math-a");
+  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
   const themes=currentYearThemes(s.profile);
   const subtopicsByTheme=new Map(themes.map(t=>[t.id,curriculumSubtopicsForTheme(t.id)]));
   const valid=new Set([...subtopicsByTheme.values()].flat().map(row=>row.id));
@@ -633,9 +668,12 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
     setS(prev=>{
       const at=Date.now();
       const betaSessions=(prev.betaSessions||[]).map(session=>session.finishedAt||!["diagnostic","mission","mini_exam"].includes(session.kind)?session:{...session,finishedAt:at,durationSeconds:Math.max(1,Math.round((at-(session.startedAt||at))/1000)),meta:{...(session.meta||{}),recoveryStatus:"scope_changed",abandonedAt:at}});
-      return migrateDailyMission({...prev,betaSessions,profile:{...prev.profile,taughtSubtopicIds:clean}});
+      const configured=migrateDailyMission({...prev,betaSessions,profile:{...prev.profile,taughtSubtopicIds:clean},subjectSettings:{...(prev.subjectSettings||{}),"math-a":{...(prev.subjectSettings?.["math-a"]||{}),curriculumConfigured:true}}});
+      return onboarding&&onboardingStep.nextId
+        ?activateSubjectState(configured,onboardingStep.nextId)
+        :onboarding?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
     });
-    go(onboarding?"goalOnboard":"progress");
+    go(onboarding?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress");
   }
 
   if(finished){
@@ -645,7 +683,7 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
   }
 
   return <Shell>{!onboarding&&<Back go={go} to="progress"/>}<Logo/>
-    <p className="eyebrow">MATÉRIA DADA NA ESCOLA</p>
+    <p className="eyebrow">{onboarding?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · MATEMÁTICA A`:"MATÉRIA DADA NA ESCOLA"}</p>
     <h1>O que já deste no {s.profile?.schoolYear}?</h1>
     <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
     <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
