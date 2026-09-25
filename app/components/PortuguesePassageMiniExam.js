@@ -114,7 +114,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const completeAndExit=()=>{
     if(!completedRef.current){
       completedRef.current=true;
-      onComplete?.({items:exam.items,results:buildResults(),answers});
+      onComplete?.({items:exam.items,results:buildResults(),answers,sessionId:attemptId});
     }
     onExit?.();
   };

@@ -1,4 +1,6 @@
 import {canonicalSubjectId} from "./subjectWorkspace.js";
+import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
+import {recordCompetitiveActivity} from "./competition.js";
 
 const MODEL_VERSION=3;
 const MAX_SESSIONS=100;
@@ -27,7 +29,7 @@ export function emptySubjectProgress(subjectId){
 }
 
 function rowKey(row){
-  return [row?.kind,row?.label,row?.completedAt,(row?.itemIds||[]).join(",")].join("|");
+  return row?.sessionId||[row?.kind,row?.label,row?.completedAt,(row?.itemIds||[]).join(",")].join("|");
 }
 
 function mergeUniqueRows(left=[],right=[]){
@@ -118,9 +120,14 @@ function recordRubricEvidence(previous,result,completedAt){
   return {observed,needsReview,rubricEvidenceByObservation:nextMap};
 }
 
-export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,startedAt=Date.now()}){
+export function createSubjectSessionId(subjectId,kind,at=Date.now()){
+  return `ses-${subjectId}-${kind}-${at}-${Math.random().toString(16).slice(2)}`;
+}
+
+export function beginSubjectSession(state,{subjectId,kind,label,domain=null,items,sessionId=null,startedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
-  return putProgress(state,subjectId,{...progress,lastPosition:{kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
+  const id=sessionId||createSubjectSessionId(subjectId,kind,startedAt);
+  return putProgress(state,subjectId,{...progress,lastPosition:{sessionId:id,kind,label,domain,itemIds:items.map(item=>item.id),current:0,results:[],startedAt,updatedAt:startedAt},lastActivityAt:startedAt});
 }
 
 export function advanceSubjectSession(state,subjectId,{current,results,currentResult=null,currentAnswer=null,updatedAt=Date.now()}){
@@ -129,8 +136,18 @@ export function advanceSubjectSession(state,subjectId,{current,results,currentRe
   return putProgress(state,subjectId,{...progress,lastPosition:{...progress.lastPosition,current,results:results.map(compactResult),currentResult:compactResult(currentResult),currentAnswer,updatedAt},lastActivityAt:updatedAt});
 }
 
-export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,completedAt=Date.now()}){
+function subjectSessionXp(kind,results=[]){
+  const deterministicCorrect=results.filter(result=>result?.final&&result?.correct===true).length;
+  if(kind==="mission")return results.length*25;
+  if(kind==="training")return deterministicCorrect*10;
+  if(kind==="mini_exam")return deterministicCorrect*18;
+  return 0;
+}
+
+export function recordSubjectSession(state,{subjectId,kind,label,domain=null,items,results,sessionId=null,completedAt=Date.now()}){
   const progress=subjectProgressFor(state,subjectId);
+  const completionId=sessionId||progress.lastPosition?.sessionId||null;
+  if(completionId&&progress.sessions.some(row=>row.sessionId===completionId))return state;
   const competence={...progress.competence};
   const recordsAcademicEvidence=kind!=="training";
   items.forEach((item,index)=>{
@@ -157,8 +174,15 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
       lastAnsweredAt:completedAt
     };
   });
-  const session={kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
-  return putProgress(state,subjectId,{...progress,diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,lastPosition:null,lastActivityAt:completedAt});
+  const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
+  let completed=putProgress(state,subjectId,{...progress,diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,lastPosition:null,lastActivityAt:completedAt});
+  const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
+  const activityKind=alreadyCompletedMission?"training":kind;
+  const xpEarned=subjectSessionXp(activityKind,results);
+  completed={...completed,xp:(Number(completed.xp)||0)+xpEarned};
+  completed=recordStudyActivity(completed,{kind:activityKind,xpEarned,sessionId:completionId,activityId:completionId||undefined,at:completedAt});
+  completed=recordCompetitiveActivity(completed,{kind:activityKind,total:items.length,focusKey:`${subjectId}:${domain||label||"general"}`,sessionId:completionId,activityId:completionId||undefined,at:completedAt});
+  return completed;
 }
 
 export function resetSubjectProgress(state,subjectId){

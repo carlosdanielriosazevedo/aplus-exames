@@ -8,8 +8,9 @@ import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data
 import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,revisePortugueseResponse,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
-import {advanceSubjectSession,beginSubjectSession,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
+import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
@@ -47,8 +48,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
-  const todayKey=new Date().toLocaleDateString("en-CA");
-  const missionDone=progress.missionHistory.some(row=>new Date(row.completedAt).toLocaleDateString("en-CA")===todayKey);
+  const missionDone=missionCompletedToday(s);
   const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
@@ -58,9 +58,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   function start(kind,items,label,domain=null){
     if((progress.lastPosition||miniExamDraft)&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Português. Queres continuar?"))return;
-    setSession({kind,label,domain,items,current:0});
+    const sessionId=createSubjectSessionId("portuguese",kind);
+    setSession({sessionId,kind,label,domain,items,current:0});
     setAnswer(null);setFeedback(null);setEditingCriterionId(null);setRevisionEditing(false);setResults([]);
-    setS(prev=>beginSubjectSession(clearPortugueseMiniExamDraft(prev),{subjectId:"portuguese",kind,label,domain,items}));
+    setS(prev=>beginSubjectSession(clearPortugueseMiniExamDraft(prev),{subjectId:"portuguese",sessionId,kind,label,domain,items}));
   }
 
   function startDiagnostic(){
@@ -108,7 +109,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       return;
     }
     const current=Math.min(saved.current,items.length-1);
-    setSession({kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
+    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current});
     setResults(saved.results||[]);
     const restored=saved.currentResult?.final?saved.currentResult:restorePortugueseRubricEvidence(items[current],saved.currentResult);
     setAnswer(saved.currentAnswer??restored?.responseText??null);setFeedback(restored);setEditingCriterionId(null);setRevisionEditing(false);
@@ -238,6 +239,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(session.finished){
     const finalResults=results;
+    const daily=engagementSummary(s);
     const deterministic=finalResults.filter(result=>result.final&&result.status!=="unanswered");
     const correct=deterministic.filter(result=>result.correct).length;
     const awaiting=finalResults.filter(result=>!result.final&&result.status!=="unanswered").length;
@@ -246,6 +248,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       const priority=[...rows].sort((a,b)=>(a.percent===null?-1:a.percent)-(b.percent===null?-1:b.percent))[0];
       return <Shell><p className="eyebrow">Diagnóstico interno</p><h1>Já temos um ponto de partida</h1><p className="portugueseMethodNote">Isto não é uma nota. É uma fotografia inicial para escolher o próximo treino.</p>
         <div className="portugueseSubjectStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
+        <div className={`dailyCompletionNote ${daily.dailyGoalComplete?"done":"partial"}`}><b>{daily.dailyGoalComplete?"Objetivo de hoje concluído":"Diagnóstico registado"}</b><span>{daily.dailyGoalComplete?"A tua sequência está protegida por hoje.":`Faltam ${daily.xpRemaining} XP para completares o objetivo diário.`}</span></div>
         <section className="portugueseProgressCard"><h2>O que vimos por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><b>{row.label}</b><span>{row.percent===null?"Ainda sem leitura objetiva":`${row.correct}/${row.total} · ${row.percent}%`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aguardam autoavaliação</small>}</article>)}</div></section>
         {priority&&<div className="notice"><b>Próximo foco: {priority.label}</b><span>Vamos começar por aqui e ajustar a missão àquilo que já respondeste, evitando repetir conteúdo sem necessidade.</span></div>}
         <button className="primary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);setTimeout(()=>startRecommendedMission(),0)}}>Começar a missão recomendada</button>
@@ -254,6 +257,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     }
     return <Shell><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>{missionEvidenceFocus.length>0&&<div className="notice"><b>Esta missão foi ajustada ao teu histórico</b><span>Incluiu critérios que assinalaste anteriormente como “em parte”, “não identificados” ou “por confirmar”. Isto orienta o treino, mas não é uma nota.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label}</li>)}</ul></div>}
       <div className="portugueseSubjectStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
+      <div className={`dailyCompletionNote ${daily.dailyGoalComplete?"done":"partial"}`}><b>{daily.dailyGoalComplete?"Objetivo de hoje concluído":"Sessão registada"}</b><span>{daily.dailyGoalComplete?"A tua sequência está protegida por hoje.":`Faltam ${daily.xpRemaining} XP para completares o objetivo diário.`}</span></div>
       {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
       <button className="primary" onClick={()=>{setSession(null);go("home")}}>Voltar ao plano de estudo</button>
     </Shell>;
@@ -300,7 +304,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     if(feedback&&!feedback.final&&!feedback.rubricCompleted)return;
     const nextResults=[...results,feedback];
     if(session.current===session.items.length-1){
-      setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
+      setS(prev=>recordSubjectSession(prev,{subjectId:"portuguese",sessionId:session.sessionId,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:nextResults}));
       setResults(nextResults);setSession(current=>({...current,finished:true}));return;
     }
     setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current+1,results:nextResults,currentAnswer:null}));

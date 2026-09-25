@@ -12,6 +12,6 @@ export default function PortuguesePassageMiniExamRoute({s,setS,onExit}){
   const itemIds=exam.items.map(item=>item.id);
   const draft=normalizePortugueseMiniExamDraft(s?.subjectSettings?.portuguese?.miniExamDraft,{examId,itemIds});
   const saveDraft=useCallback(nextDraft=>setS(prev=>savePortugueseMiniExamDraft(prev,nextDraft)),[setS]);
-  const complete=useCallback(({items,results})=>setS(prev=>recordSubjectSession(clearPortugueseMiniExamDraft(prev),{subjectId:"portuguese",kind:"mini_exam",label,items,results})),[label,setS]);
+  const complete=useCallback(({items,results,sessionId})=>setS(prev=>recordSubjectSession(clearPortugueseMiniExamDraft(prev),{subjectId:"portuguese",kind:"mini_exam",label,items,results,sessionId})),[label,setS]);
   return <PortuguesePassageMiniExam exam={exam} examId={examId} initialDraft={draft} onDraftChange={saveDraft} onExit={onExit} onComplete={complete}/>;
 }
