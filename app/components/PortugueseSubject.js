@@ -68,6 +68,9 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const [practiceLiteraryWorkId,setPracticeLiteraryWorkId]=useState(null);
   const allowedYears=yearsThrough(currentYear);
   const scopedItems=PORTUGUESE_ITEMS.filter(item=>allowedYears.includes(item.year)&&portugueseItemInScope(item,currentYear,taughtUnitIds));
+  // O diagnóstico e as missões respeitam o percurso e a matéria dada. O Treino
+  // Livre é uma escolha explícita do aluno, por isso deixa consultar os três anos.
+  const practiceItems=PORTUGUESE_ITEMS;
   const coverage=portugueseCoverage(PORTUGUESE_ITEMS);
   const scopedCoverage=portugueseCoverage(scopedItems);
   const progress=subjectProgressFor(s,"portuguese");
@@ -111,8 +114,8 @@ function PortugueseSubject({s,setS,go,view="home"}){
   }
 
   function startPractice(domain=null,year=null,competencyId=null,literaryWorkId=null){
-    const years=year?[year]:allowedYears;
-    const mission=buildAdaptivePortugueseMission(scopedItems,{progress,domain,competencyId,literaryWorkId,years});
+    const years=year?[year]:SCHOOL_YEARS;
+    const mission=buildAdaptivePortugueseMission(practiceItems,{progress,domain,competencyId,literaryWorkId,years});
     const competencyLabel=PORTUGUESE_COMPETENCIES.find(row=>row.id===competencyId)?.label;
     const workLabel=portugueseLiteraryWorkById(literaryWorkId)?.title;
     const labelParts=["Praticar",workLabel,competencyLabel||(!workLabel&&domain?PORTUGUESE_DOMAIN_LABELS[domain]:null),year].filter(Boolean);
@@ -177,7 +180,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   </Shell>;
 
   if(!session&&view==="trainingSetup"){
-    const practiceYearItems=scopedItems.filter(item=>item.year===practiceYear);
+    const practiceYearItems=practiceItems.filter(item=>item.year===practiceYear);
     const practiceYearCoverage=portugueseCoverage(practiceYearItems);
     const literaryWorks=portugueseLiteraryWorksForYear(practiceYear).map(work=>({
       ...work,
@@ -193,7 +196,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <button className="back" onClick={()=>go("train")}>← Voltar</button>
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
       <p className="muted">Escolhe primeiro o ano e depois a área. O treino usa apenas perguntas desse ano e não sobe nem desce diretamente o teu Domínio.</p>
-      <div className="chips" aria-label="Escolher ano para praticar Português">{allowedYears.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
+      <div className="chips yearSelector" aria-label="Escolher ano para praticar Português">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
       <div className="notice"><b>Português · {practiceYear}</b><span>As perguntas seguintes ficam limitadas ao ano escolhido. Em Educação Literária, uma obra só aparece quando já existe um banco explicitamente associado a essa obra.</span></div>
       {!practiceDomain?<>
         <div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=practiceYearCoverage.missionEligibleByDomain[domain]>=7;return <button key={domain} disabled={!available} onClick={()=>{setPracticeDomain(domain);setPracticeLiteraryWorkId(null)}}>{label}<small>{available?` · escolher competência · ${practiceYear}`:" · cobertura insuficiente neste ano"}</small></button>})}</div>
@@ -239,8 +242,9 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1>
       <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
       <div className="progressOverview">{overview.map(row=><div key={row.domain}><span>{row.label}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
+      <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
       <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
-      <details className="progressDetails" open><summary>Ver mapa completo →</summary><p className="muted">Explora domínios, competências, evidência e o estado das respostas abertas.</p>
+      <details className="progressDetails"><summary>Ver mapa completo →</summary><p className="muted">Explora domínios, competências, evidência e o estado das respostas abertas.</p>
       {overview.map(row=><div className={"prog "+(row.percent===null?"unmeasured":"")} key={row.domain}><div className="progHead"><b>{row.label}</b><small>Domínio de Português</small></div>{row.percent===null?<div className="noEvidence"><b>Ainda sem estimativa</b><span>A app vai recolher evidência quando praticares esta área.</span></div>:<><span>Domínio estimado: {row.percent}/100</span><div className="bar"><i style={{width:row.percent+"%"}}/></div><div className="certaintyRow"><span>Evidência da app</span><b>{row.attempts} respostas objetivas</b><small>As respostas abertas são acompanhadas por critérios observáveis e não recebem uma classificação automática final.</small></div><div className="focusMap"><b>Competências dentro deste domínio</b>{competenceRows.filter(([,r])=>r.domain===row.domain||r.domainId===row.domain).map(([id,r])=><div key={id}><span>{r.label||id}</span><div className="focusMiniBar"><i style={{width:(r.deterministicAttempts?Math.round((r.correct||0)/r.deterministicAttempts*100):0)+"%"}}/></div><strong>{r.deterministicAttempts?Math.round((r.correct||0)/r.deterministicAttempts*100):"—"}</strong><small>{r.deterministicAttempts?(r.correct||0)+"/"+r.deterministicAttempts+" corretas":"Sem evidência"}</small></div>)}</div></>}</div>)}</details>
       <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary><div className="notice"><b>Domínio ≠ certeza da app</b><span>O Domínio resume a evidência disponível. A app mantém separadas as respostas objetivas e a evidência das grelhas de respostas abertas.</span></div><div className="notice"><b>Respostas abertas</b><span>A autoavaliação serve para orientar o treino e guardar evidência por critério; não é convertida automaticamente numa nota final.</span></div></details>
     </>);
