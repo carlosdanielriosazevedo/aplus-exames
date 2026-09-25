@@ -151,7 +151,13 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const completeAndExit=()=>{
     if(!completedRef.current){
       completedRef.current=true;
-      onComplete?.({items:exam.items,results:buildResults(),answers,sessionId:attemptId});
+      let results=buildResults();
+      if(isFullExam){
+        const classification=classifyPortugueseFullExamResults(results);
+        const selected=new Set([...classification.mandatoryItemIds,...classification.selectedOptionalItemIds]);
+        results=results.map(result=>({...result,countsForExamScore:selected.has(result.itemId)}));
+      }
+      onComplete?.({items:exam.items,results,answers,sessionId:attemptId});
     }
     onExit?.();
   };
@@ -168,7 +174,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
-      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do simulado"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
+      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do simulado"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount===0?"Ainda não respondeste a nenhum dos 5 itens opcionais.":fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
       {writingProgress.resolved.length>0&&<section className="ptx-progress-story" aria-label="Evolução recente nas autoavaliações de escrita">
         <span>Evolução recente</span><h2>Boa evolução nas tuas autoavaliações</h2>
         <p>Estes pontos tiveram atenção recorrente no teu histórico e deixaram de a mostrar nas tentativas mais recentes. É um sinal para manteres o cuidado, não uma conclusão definitiva sobre a tua escrita.</p>
