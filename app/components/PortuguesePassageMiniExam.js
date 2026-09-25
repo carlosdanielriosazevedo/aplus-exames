@@ -5,6 +5,7 @@ import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummar
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
 import {portugueseMiniExamDraftSnapshot} from "../lib/portugueseMiniExamDraft";
+import {classifyPortugueseFullExamResults} from "../data/portuguesePassagePrototype";
 import PortugueseWritingCycleSummary from "./PortugueseWritingCycleSummary";
 
 function answerFilled(item,value){
@@ -57,18 +58,25 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const writingProgress=useMemo(()=>writingResolvedAttentions(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const activeWritingFocus=useMemo(()=>writingActivePreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
   const isFullExam=exam.kind==="practice-exam";
-  const durationSeconds=(exam.durationMinutes||0)*60;
-  const remainingSeconds=durationSeconds?Math.max(0,durationSeconds-Math.floor((now-startedAt)/1000)):null;
+  const baseDurationSeconds=(exam.durationMinutes||0)*60;
+  const toleranceSeconds=(exam.toleranceMinutes||0)*60;
+  const elapsedSeconds=Math.max(0,Math.floor((now-startedAt)/1000));
+  const hasTimer=baseDurationSeconds>0;
+  const inTolerance=isFullExam&&toleranceSeconds>0&&elapsedSeconds>=baseDurationSeconds;
+  const remainingSeconds=!hasTimer?null:inTolerance
+    ?Math.max(0,toleranceSeconds-(elapsedSeconds-baseDurationSeconds))
+    :Math.max(0,baseDurationSeconds-elapsedSeconds);
+  const examTimeExpired=hasTimer&&elapsedSeconds>=baseDurationSeconds+toleranceSeconds;
 
   useEffect(()=>{setWritingMemory(loadPortugueseWritingMemory())},[]);
   useEffect(()=>{
-    if(!durationSeconds||review)return undefined;
+    if(!hasTimer||review)return undefined;
     const timer=window.setInterval(()=>setNow(Date.now()),1000);
     return ()=>window.clearInterval(timer);
-  },[durationSeconds,review]);
+  },[hasTimer,review]);
   useEffect(()=>{
-    if(durationSeconds&&remainingSeconds===0&&!review)setReview(true);
-  },[durationSeconds,remainingSeconds,review]);
+    if(examTimeExpired&&!review)setReview(true);
+  },[examTimeExpired,review]);
   useEffect(()=>{
     if(!onDraftChange||completedRef.current)return;
     onDraftChange(portugueseMiniExamDraftSnapshot({
@@ -121,7 +129,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     const value=answers[row.id];
     if(row.responseType==="multiple-choice"){
       const result=resultFor(row,value);
-      return {status:answerFilled(row,value)?"final":"unanswered",final:true,correct:answerFilled(row,value)?result.correct:null,points:result.correct?row.maxPoints:0,maxPoints:row.maxPoints,gradingMode:row.gradingMode};
+      return {itemId:row.id,status:answerFilled(row,value)?"final":"unanswered",final:true,correct:answerFilled(row,value)?result.correct:null,points:result.correct?row.maxPoints:0,maxPoints:row.maxPoints,gradingMode:row.gradingMode,classificationMode:row.classificationMode||null};
     }
     const criteria=(row.rubric?.criteria||[]).map(criterion=>{
       const entry=selfAssessment[row.id]?.[criterion.id]||{};
@@ -129,13 +137,27 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       return {...criterion,status,observations:[]};
     });
     const answered=answerFilled(row,value);
-    return {status:answered?"self-assessed-awaiting-review":"unanswered",final:false,correct:null,points:null,maxPoints:row.maxPoints,gradingMode:row.gradingMode,responseText:String(value||""),rubricCompleted:criteria.length>0&&criteria.every(criterion=>criterion.status!=="pending"),criteria};
+    return {itemId:row.id,status:answered?"self-assessed-awaiting-review":"unanswered",final:false,correct:null,points:null,maxPoints:row.maxPoints,gradingMode:row.gradingMode,classificationMode:row.classificationMode||null,responseText:String(value||""),rubricCompleted:criteria.length>0&&criteria.every(criterion=>criterion.status!=="pending"),criteria};
   });
+
+  const currentResults=buildResults();
+  const fullClassification=isFullExam?classifyPortugueseFullExamResults(currentResults):null;
+  const fullItemLabel=id=>{
+    const row=exam.items.find(candidate=>candidate.id===id);
+    const group=String(row?.passageTitle||"").split("—")[0].trim()||"Item";
+    return `${group} · ${row?.groupItemNumber??"—"}`;
+  };
 
   const completeAndExit=()=>{
     if(!completedRef.current){
       completedRef.current=true;
-      onComplete?.({items:exam.items,results:buildResults(),answers,sessionId:attemptId});
+      let results=buildResults();
+      if(isFullExam){
+        const classification=classifyPortugueseFullExamResults(results);
+        const selected=new Set([...classification.mandatoryItemIds,...classification.selectedOptionalItemIds]);
+        results=results.map(result=>({...result,countsForExamScore:selected.has(result.itemId)}));
+      }
+      onComplete?.({items:exam.items,results,answers,sessionId:attemptId});
     }
     onExit?.();
   };
@@ -152,6 +174,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
+      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do simulado"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount===0?"Ainda não respondeste a nenhum dos 5 itens opcionais.":fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
       {writingProgress.resolved.length>0&&<section className="ptx-progress-story" aria-label="Evolução recente nas autoavaliações de escrita">
         <span>Evolução recente</span><h2>Boa evolução nas tuas autoavaliações</h2>
         <p>Estes pontos tiveram atenção recorrente no teu histórico e deixaram de a mostrar nas tentativas mais recentes. É um sinal para manteres o cuidado, não uma conclusão definitiva sobre a tua escrita.</p>
@@ -251,7 +274,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   return <main className="ptx-shell">
     <header className="ptx-header">
       <div><span className="ptx-kicker">Português 639 · {isFullExam?"Simulado original":"Mini-exame"}</span><h1>{isFullExam?exam.title:"Texto + várias questões"}</h1>{isFullExam&&<p className="ptx-exam-disclaimer">Treino original APProva+ · não é uma prova oficial do IAVE.</p>}</div>
-      <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""}`} aria-live="polite"><span>Tempo restante</span><strong>{formatRemainingTime(remainingSeconds)}</strong></div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
+      <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""} ${inTolerance?"is-tolerance":""}`} aria-live="polite"><span>{inTolerance?"Tolerância":"Tempo de prova"}</span><strong>{formatRemainingTime(remainingSeconds)}</strong>{isFullExam&&<small>{inTolerance?"tolerância em curso":"depois: +30 min de tolerância"}</small>}</div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
     <nav className="ptx-question-nav" aria-label="Navegação entre questões">{exam.items.map((row,rowIndex)=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para questão ${rowIndex+1}`}>{rowIndex+1}</button>)}</nav>
@@ -259,7 +282,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     <div className="ptx-workspace">
       <aside className={`ptx-passage ${mobileTextOpen?"is-mobile-open":""}`}><span className="ptx-passage-label">Texto-base · questões {exam.items.indexOf(block.items[0])+1}–{exam.items.indexOf(block.items.at(-1))+1}</span><h2>{block.title}</h2><p>{block.passageText}</p></aside>
       <section className="ptx-question-card">
-        <div className="ptx-question-meta"><span>Questão {index+1}</span><span>{item.responseType==="multiple-choice"?"Escolha múltipla":item.responseType==="extended-writing"?"Produção escrita":"Resposta restrita"}</span></div><h2>{item.prompt}</h2>
+        <div className="ptx-question-meta"><span>Questão {index+1}</span><span>{item.responseType==="multiple-choice"?"Escolha múltipla":item.responseType==="extended-writing"?"Produção escrita":"Resposta restrita"}</span></div>{isFullExam&&<div className={`ptx-classification-badge ${item.classificationMode==="best-of-five"?"is-optional":"is-mandatory"}`}>{item.classificationMode==="best-of-five"?"Item opcional · contam os 3 melhores de 5":"Item obrigatório"}</div>}<h2>{item.prompt}</h2>
         {item.responseType==="multiple-choice"?<div className="ptx-options">{item.options.map((option,optionIndex)=><button key={optionIndex} className={answers[item.id]===optionIndex?"is-selected":""} onClick={()=>setAnswer(optionIndex)}><span>{String.fromCharCode(65+optionIndex)}</span>{option}</button>)}</div>:<div className="ptx-open-editor">
           {activeWritingFocus.available&&!dismissedWritingFocus[item.id]&&<aside className="ptx-memory-focus" aria-label="Foco antes de responder">
             <div className="ptx-memory-focus-head"><div><span>Memória de escrita</span><strong>Antes de responder, escolhe 1–2 pontos para vigiar</strong></div><button type="button" onClick={()=>setDismissedWritingFocus(current=>({...current,[item.id]:true}))}>Ocultar</button></div>
