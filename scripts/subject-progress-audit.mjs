@@ -3,6 +3,8 @@ import {
   advanceSubjectSession,beginSubjectSession,migrateSubjectProgress,
   recordSubjectSession,resetSubjectProgress,subjectProgressFor
 } from "../app/lib/subjectProgress.js";
+import {engagementSummary,missionCompletedToday} from "../app/lib/engagement.js";
+import {weeklyCompetitiveXp} from "../app/lib/competition.js";
 
 const mathScores={functions:{mastery:.72}};
 const legacy={scores:mathScores,diagnosticDone:false,missionHistory:[{id:"math-mission"}]};
@@ -15,6 +17,7 @@ const items=[
   {id:"pt-2",domain:"escrita",competencyId:"pt-escrita-argumentacao"}
 ];
 state=beginSubjectSession(state,{subjectId:"portuguese",kind:"diagnostic",label:"Diagnóstico",items,startedAt:100});
+assert.match(subjectProgressFor(state,"portuguese").lastPosition.sessionId,/^ses-portuguese-diagnostic-/,"Cada sessão deve nascer com um identificador estável para retoma e idempotência.");
 state=advanceSubjectSession(state,"portuguese",{current:1,results:[{status:"final",final:true,correct:true,points:13,maxPoints:13,gradingMode:"deterministic"}],currentResult:{status:"awaiting-rubric",final:false,points:null,maxPoints:13,gradingMode:"rubric-assisted-provisional",rubricId:"pt-2:rubric-v1:test",criteria:[{id:"argumentacao",status:"partial",observations:[{id:"argumentacao-1",status:"observed",studentEvidence:["evidência observada no texto"]},{id:"argumentacao-2",status:"not-observed",studentEvidence:[]}]},{id:"lingua",status:"pending",observations:[{id:"lingua-1",status:"pending"}]}]},currentAnswer:"resposta em curso",updatedAt:110});
 assert.equal(subjectProgressFor(state,"portuguese").lastPosition.current,1,"A posição de retoma deve avançar.");
 assert.equal(subjectProgressFor(state,"portuguese").lastPosition.currentAnswer,"resposta em curso","A resposta da pergunta atual deve sobreviver a uma interrupção até a sessão terminar.");
@@ -53,6 +56,26 @@ state=recordSubjectSession(state,{
 assert.deepEqual(subjectProgressFor(state,"portuguese").competence,competenceBeforeTraining,"O Treino Livre deve ficar no histórico sem alterar a evidência académica.");
 assert.equal(subjectProgressFor(state,"portuguese").sessions.at(-1).kind,"training");
 
+const missionAt=new Date(2026,8,25,12).getTime();
+const missionItems=Array.from({length:7},(_,index)=>({id:`pt-mission-${index}`,domain:"leitura",competencyId:`pt-leitura-${index}`}));
+const missionResults=missionItems.map(()=>({status:"final",final:true,correct:false,points:0,maxPoints:1,gradingMode:"deterministic"}));
+const xpBeforeMission=state.xp||0;
+state=beginSubjectSession(state,{subjectId:"portuguese",kind:"mission",label:"Missão recomendada",items:missionItems,sessionId:"pt-mission-session",startedAt:missionAt-1000});
+state=recordSubjectSession(state,{subjectId:"portuguese",kind:"mission",label:"Missão recomendada",items:missionItems,results:missionResults,sessionId:"pt-mission-session",completedAt:missionAt});
+const afterMission=structuredClone(state);
+state=recordSubjectSession(state,{subjectId:"portuguese",kind:"mission",label:"Missão recomendada",items:missionItems,results:missionResults,sessionId:"pt-mission-session",completedAt:missionAt});
+assert.deepEqual(state,afterMission,"Repetir a conclusão com o mesmo sessionId não pode duplicar histórico, XP ou evidência.");
+assert.equal(missionCompletedToday(state,missionAt),true,"Uma Missão de Português deve fechar a Missão diária global.");
+assert.equal(engagementSummary(state,missionAt).streak,1,"Uma sessão de Português deve proteger a sequência diária.");
+assert.equal(weeklyCompetitiveXp(state,missionAt),50,"A primeira Missão diária de Português deve atribuir 50 XP competitivo.");
+assert.equal(state.xp,xpBeforeMission+175,"O XP pessoal da Missão deve refletir as sete interações, não o número de respostas certas.");
+
+const secondMissionItems=missionItems.map(item=>({...item,id:`${item.id}-second`}));
+state=recordSubjectSession(state,{subjectId:"portuguese",kind:"mission",label:"Missão adicional",items:secondMissionItems,results:missionResults,sessionId:"pt-mission-session-2",completedAt:missionAt+1000});
+assert.equal(weeklyCompetitiveXp(state,missionAt),90,"Uma segunda conclusão no mesmo dia deve ser tratada como treino, não como outra Missão principal.");
+assert.equal(engagementSummary(state,missionAt).today.activities.mission,1,"Só pode existir uma atividade principal de Missão por dia.");
+assert.equal(engagementSummary(state,missionAt).today.activities.training,1,"A atividade adicional deve continuar a contar como estudo livre.");
+
 state={...state,subjectProgress:{...state.subjectProgress,"math-a":{subjectId:"math-a",sessions:[{id:"keep"}]}}};
 state=resetSubjectProgress(state,"portuguese");
 assert.equal(state.subjectProgress.portuguese,undefined,"A reposição deve apagar apenas Português.");
@@ -62,3 +85,4 @@ assert.deepEqual(state.scores,mathScores);
 console.log("✓ progresso académico isolado por disciplina");
 console.log("✓ diagnóstico, competências, retoma e histórico de Português persistem sem texto livre");
 console.log("✓ reposição de Português preserva integralmente Matemática A");
+console.log("✓ XP, streak e ranking incluem Português com conclusão idempotente e uma única Missão diária");
