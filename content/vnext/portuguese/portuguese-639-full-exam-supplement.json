@@ -1,0 +1,117 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
+    {
+      "passageId": "PT639-FULL-GRAMATICA-001",
+      "year": "12.º",
+      "domain": "gramatica",
+      "title": "Gramática em contexto",
+      "sourceOrigin": "original",
+      "text": "Quando a biblioteca reabriu, os leitores encontraram um espaço diferente. As mesas que antes ocupavam a sala central foram distribuídas por zonas mais pequenas, para que cada pessoa pudesse escolher o ambiente de trabalho. Embora alguns utilizadores receassem perder o silêncio habitual, depressa perceberam que a reorganização reduzia o ruído. A diretora explicou-lhes que a mudança seria avaliada ao fim de três meses.",
+      "items": [
+        {
+          "id": "PT639-FULL-GRAMATICA-001-Q1",
+          "year": "12.º",
+          "domain": "gramatica",
+          "competencyId": "pt-gramatica-sintaxe",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "aplicar",
+          "prompt": "Na frase «Quando a biblioteca reabriu, os leitores encontraram um espaço diferente», a oração iniciada por «Quando» é",
+          "options": ["subordinada adverbial temporal.", "subordinada adjetiva relativa restritiva.", "subordinada substantiva completiva.", "coordenada explicativa."],
+          "answerIndex": 0,
+          "explanation": "A oração localiza temporalmente a ação expressa em «os leitores encontraram um espaço diferente» e é introduzida pela conjunção subordinativa temporal «quando».",
+          "gradingMode": "deterministic",
+          "maxPoints": 5
+        },
+        {
+          "id": "PT639-FULL-GRAMATICA-001-Q2",
+          "year": "12.º",
+          "domain": "gramatica",
+          "competencyId": "pt-gramatica-sintaxe",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "aplicar",
+          "prompt": "No segmento «As mesas que antes ocupavam a sala central», a palavra «que» desempenha a função sintática de",
+          "options": ["complemento direto.", "sujeito.", "predicativo do sujeito.", "complemento oblíquo."],
+          "answerIndex": 1,
+          "explanation": "Na oração relativa, «que» retoma «As mesas» e é o sujeito da forma verbal «ocupavam».",
+          "gradingMode": "deterministic",
+          "maxPoints": 5
+        },
+        {
+          "id": "PT639-FULL-GRAMATICA-001-Q3",
+          "year": "12.º",
+          "domain": "gramatica",
+          "competencyId": "pt-gramatica-pragmatica",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "O pronome «lhes», em «A diretora explicou-lhes», refere-se a",
+          "options": ["«As mesas».", "«zonas mais pequenas».", "«alguns utilizadores».", "«três meses»."],
+          "answerIndex": 2,
+          "explanation": "O pronome pessoal «lhes» retoma os utilizadores a quem a diretora deu a explicação.",
+          "gradingMode": "deterministic",
+          "maxPoints": 5
+        },
+        {
+          "id": "PT639-FULL-GRAMATICA-001-Q4",
+          "year": "12.º",
+          "domain": "gramatica",
+          "competencyId": "pt-gramatica-sintaxe",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "aplicar",
+          "prompt": "A oração «Embora alguns utilizadores receassem perder o silêncio habitual» exprime uma relação de",
+          "options": ["causa.", "condição.", "concessão.", "consequência."],
+          "answerIndex": 2,
+          "explanation": "A conjunção «embora» introduz uma circunstância que poderia contrariar o que se afirma depois, estabelecendo uma relação concessiva.",
+          "gradingMode": "deterministic",
+          "maxPoints": 5
+        }
+      ]
+    },
+    {
+      "passageId": "PT639-FULL-ESCRITA-001",
+      "year": "12.º",
+      "domain": "escrita",
+      "title": "Produção escrita",
+      "sourceOrigin": "original",
+      "text": "Num quotidiano marcado pela rapidez, esperar é frequentemente entendido como tempo perdido. No entanto, a espera também pode criar espaço para observar, refletir e decidir com maior atenção.",
+      "items": [
+        {
+          "id": "PT639-FULL-ESCRITA-001-Q1",
+          "year": "12.º",
+          "domain": "escrita",
+          "competencyId": "pt-escrita-argumentacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "extended-writing",
+          "cognitive": "criar",
+          "prompt": "Escreve um texto de opinião bem estruturado em que defendas um ponto de vista sobre a importância de saber esperar numa sociedade orientada para resultados imediatos. Apresenta, pelo menos, dois argumentos e exemplos pertinentes.",
+          "referenceAnswer": "Uma resposta adequada formula uma posição inequívoca, desenvolve pelo menos dois argumentos distintos — por exemplo, a espera como condição de reflexão e como treino de tolerância à frustração —, concretiza-os com exemplos pertinentes, articula introdução, desenvolvimento e conclusão e usa mecanismos de coesão e correção linguística compatíveis com o género pedido.",
+          "wordLimit": {"min": 200, "max": 350},
+          "rubric": {
+            "criteria": [
+              {"id": "genero", "label": "Respeita o género de texto de opinião e formula uma posição clara.", "points": 5},
+              {"id": "argumentacao", "label": "Desenvolve dois argumentos distintos, pertinentes e sustentados por exemplos.", "points": 8},
+              {"id": "organizacao", "label": "Organiza o texto com progressão, parágrafos e conclusão coerente.", "points": 5},
+              {"id": "coesao", "label": "Usa mecanismos de coesão adequados entre frases e partes do texto.", "points": 3},
+              {"id": "correcao", "label": "Mantém correção sintática, lexical, ortográfica e de pontuação.", "points": 3}
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 24
+        }
+      ]
+    }
+  ]
+}

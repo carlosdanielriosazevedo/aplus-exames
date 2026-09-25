@@ -1,11 +1,12 @@
-const DRAFT_VERSION=1;
+const DRAFT_VERSION=2;
+const SUPPORTED_DRAFT_VERSIONS=new Set([1,2]);
 
 function objectOrEmpty(value){
   return value&&typeof value==="object"&&!Array.isArray(value)?value:{};
 }
 
 export function normalizePortugueseMiniExamDraft(draft,{examId,itemIds}){
-  if(!draft||draft.examId!==examId||draft.version!==DRAFT_VERSION)return null;
+  if(!draft||draft.examId!==examId||!SUPPORTED_DRAFT_VERSIONS.has(draft.version))return null;
   const allowed=new Set(itemIds);
   const filterByItem=source=>Object.fromEntries(Object.entries(objectOrEmpty(source)).filter(([id])=>allowed.has(id)));
   const index=Math.max(0,Math.min(itemIds.length-1,Number.isInteger(draft.index)?draft.index:0));
@@ -21,13 +22,14 @@ export function normalizePortugueseMiniExamDraft(draft,{examId,itemIds}){
     revisions:filterByItem(draft.revisions),
     dismissedWritingFocus:filterByItem(draft.dismissedWritingFocus),
     attemptId:typeof draft.attemptId==="string"&&draft.attemptId?draft.attemptId:null,
+    startedAt:Number.isFinite(draft.startedAt)?draft.startedAt:(Number.isFinite(draft.updatedAt)?draft.updatedAt:null),
     updatedAt:Number.isFinite(draft.updatedAt)?draft.updatedAt:null
   };
 }
 
-export function portugueseMiniExamDraftSnapshot({examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,updatedAt=Date.now()}){
+export function portugueseMiniExamDraftSnapshot({examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt,updatedAt=Date.now()}){
   return normalizePortugueseMiniExamDraft({
-    version:DRAFT_VERSION,examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,updatedAt
+    version:DRAFT_VERSION,examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt,updatedAt
   },{examId,itemIds});
 }
 
