@@ -14,11 +14,16 @@ describe("Portuguese mini-exam recovery",()=>{
       ...scope,index:2,review:true,answers:{q1:1,q2:"resposta"},
       selfAssessment:{q2:{criterion:{status:"partial"}}},
       revisionDrafts:{q2:"nova versão"},revisions:{q2:[{sequence:1}]},
-      dismissedWritingFocus:{q2:true},attemptId:"attempt-1",updatedAt:123
+      dismissedWritingFocus:{q2:true},attemptId:"attempt-1",startedAt:100,updatedAt:123
     });
-    expect(draft).toMatchObject({examId:"mini-1",index:2,review:true,attemptId:"attempt-1",updatedAt:123});
+    expect(draft).toMatchObject({version:2,examId:"mini-1",index:2,review:true,attemptId:"attempt-1",startedAt:100,updatedAt:123});
     expect(draft.answers).toEqual({q1:1,q2:"resposta"});
     expect(draft.selfAssessment.q2.criterion.status).toBe("partial");
+  });
+
+  it("migrates a version 1 draft without losing its session clock anchor",()=>{
+    const draft=normalizePortugueseMiniExamDraft({version:1,examId:"mini-1",index:1,updatedAt:456,answers:{q1:0}},scope);
+    expect(draft).toMatchObject({version:2,examId:"mini-1",index:1,startedAt:456,updatedAt:456});
   });
 
   it("rejects another exam and removes unknown item data",()=>{
