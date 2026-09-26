@@ -77,11 +77,6 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const subtopicLabel=physicsChemistrySubtopicById(practiceSubtopic)?.label;
     start("training",built.items,"Praticar · "+[domainLabel,subtopicLabel].filter(Boolean).join(" · "),practiceDomain);
   }
-  function startMiniExam(){
-    const ten=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,year:"10.º",size:7}).items.slice(0,6);
-    const eleven=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,year:"11.º",size:7}).items.slice(0,6);
-    start("mini_exam",[...ten,...eleven],"Mini-exame · Modelo 1");
-  }
 
   function answerReady(item){
     if(item.responseType==="multiple-choice")return Number.isInteger(answer);
@@ -200,7 +195,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   if(view==="exams")return <Shell className="wideStudentShell">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o simulado completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <div className="trainChoices">
-      <button onClick={startMiniExam}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · treino interno equilibrado entre 10.º e 11.º</small></div><em>→</em></button>
+      <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
+      <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryExam")}><span>⏱️</span><div><b>Simulado completo · 715</b><small>23 itens · 200 pontos · 120 min + 30 min de tolerância</small></div><em>→</em></button>
     </div>{sharedNav}</Shell>;
 
