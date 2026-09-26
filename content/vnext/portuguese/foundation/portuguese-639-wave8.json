@@ -212,16 +212,16 @@
       "reviewStatus": "prototype",
       "responseType": "multiple-choice",
       "cognitive": "analisar",
-      "stimulus": "Os alunos entregaram o relatório ao professor ontem.",
-      "prompt": "Que função sintática desempenha «ao professor»?",
+      "stimulus": "A direção nomeou a Sofia representante da turma.",
+      "prompt": "Que função sintática desempenha «representante da turma»?",
       "options": [
         "Complemento direto.",
-        "Predicativo do sujeito.",
-        "Vocativo.",
-        "Complemento indireto."
+        "Predicativo do complemento direto.",
+        "Complemento indireto.",
+        "Modificador do nome."
       ],
-      "answerIndex": 3,
-      "explanation": "O constituinte introduzido por «a» designa o destinatário de «entregaram» e funciona como complemento indireto.",
+      "answerIndex": 1,
+      "explanation": "«Representante da turma» atribui uma propriedade ou estatuto ao complemento direto «a Sofia», funcionando como predicativo do complemento direto.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
@@ -234,16 +234,16 @@
       "reviewStatus": "prototype",
       "responseType": "multiple-choice",
       "cognitive": "analisar",
-      "stimulus": "Embora estivesse cansada, a atleta terminou o treino.",
-      "prompt": "A oração «Embora estivesse cansada» apresenta valor adverbial de",
+      "stimulus": "Se a previsão se confirmar, a organização transferirá a atividade para o interior.",
+      "prompt": "A oração «Se a previsão se confirmar» apresenta valor adverbial de",
       "options": [
-        "concessiva.",
-        "causal.",
-        "final.",
-        "temporal."
+        "condição.",
+        "concessão.",
+        "causa.",
+        "tempo."
       ],
       "answerIndex": 0,
-      "explanation": "«Embora» introduz uma circunstância que poderia impedir o facto principal, mas não o impede, exprimindo concessão.",
+      "explanation": "A oração introduz a condição necessária para que se realize a ação expressa na oração principal.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
