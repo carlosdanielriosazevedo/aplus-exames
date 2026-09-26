@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 2,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -24,15 +24,16 @@
           "cognitive": "interpretar",
           "prompt": "Os dois exemplos iniciais têm como função principal",
           "options": [
-            "mostrar que qualquer medição é inútil.",
+            "mostrar que medir resultados pode alterar o comportamento das pessoas avaliadas.",
             "ilustrar como um indicador pode incentivar comportamentos que não correspondem totalmente ao objetivo.",
-            "defender que escolas e empresas não devem recolher dados.",
-            "provar que quantidade e qualidade são sempre incompatíveis."
+            "mostrar que a comparação entre resultados depende da escolha de indicadores equivalentes.",
+            "sugerir que um indicador perde utilidade quando não mede diretamente a qualidade."
           ],
           "answerIndex": 1,
           "explanation": "Os exemplos mostram que otimizar a medida pode não significar melhorar o objetivo mais amplo que ela procura representar.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LEITURA-002-Q2",
@@ -46,14 +47,15 @@
           "prompt": "A pergunta colocada perto do final do texto funciona sobretudo como",
           "options": [
             "uma síntese do critério usado para avaliar a qualidade do indicador.",
-            "uma mudança para um tema sem relação com os exemplos.",
-            "uma conclusão de que todos os indicadores devem ser abandonados.",
-            "uma pergunta sem resposta possível."
+            "uma objeção à ideia de que os indicadores podem influenciar comportamentos.",
+            "uma passagem dos exemplos concretos para uma defesa da recolha de mais dados.",
+            "uma reformulação do problema que desloca a atenção da medição para os resultados."
           ],
           "answerIndex": 0,
           "explanation": "A pergunta condensa o princípio defendido no texto: verificar se a medida continua a representar o objetivo que se quer melhorar.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LEITURA-002-Q3",
@@ -85,7 +87,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     },
@@ -108,15 +111,16 @@
           "cognitive": "interpretar",
           "prompt": "A abertura da sala leva Miguel sobretudo a",
           "options": [
-            "descobrir um segredo familiar decisivo.",
+            "confirmar que as histórias ouvidas sobre a casa correspondiam ao que imaginara.",
             "substituir uma construção imaginada por uma relação mais concreta com o passado.",
-            "concluir que os objetos antigos não têm valor.",
-            "decidir abandonar imediatamente a casa."
+            "perceber que a importância da sala dependia mais do segredo do que dos objetos encontrados.",
+            "reconhecer que a curiosidade criada ao longo dos anos era mais significativa do que a descoberta."
           ],
           "answerIndex": 1,
           "explanation": "A sala imaginada durante anos revela-se comum, e Miguel passa a relacionar-se com o passado através de objetos concretos e não do mistério da porta.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LIT-002-Q2",
@@ -129,15 +133,16 @@
           "cognitive": "interpretar",
           "prompt": "A frase final — «A sala parecia menor aberta, mas a casa, estranhamente, parecia maior» — sugere que",
           "options": [
-            "a arquitetura da casa se alterou fisicamente.",
+            "a abertura da sala altera a perceção física do espaço e reduz o peso das histórias familiares.",
             "o desaparecimento do mistério reduz uma divisão, mas amplia a compreensão que Miguel tem da casa e do passado.",
-            "Miguel pretende aumentar a área da casa.",
-            "a sala passa a conter mais objetos."
+            "a perda de expectativa torna a sala menos importante, ao mesmo tempo que valoriza o resto da casa.",
+            "a descoberta confirma que a dimensão simbólica da casa depende daquilo que permanece inacessível."
           ],
           "answerIndex": 1,
           "explanation": "O contraste exprime uma mudança de perceção: a sala perde a dimensão imaginária, mas a casa ganha profundidade ao integrar uma parte antes desconhecida.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-PASSAGE-11-LIT-002-Q3",
@@ -169,7 +174,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     }
