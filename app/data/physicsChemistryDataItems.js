@@ -42,6 +42,13 @@ export const PHYSICS_CHEMISTRY_A_DATA_ITEMS=[
     answerIndex:2,explanation:"A condição C melhora o rendimento face a A com aumento energético muito menor do que B; é o melhor compromisso entre os dois critérios apresentados."
   },
   {
+    id:"FQA-DATA-WAV-02",year:"11.º",domain:"f11-waves",competencyId:"fqa-data",responseType:"multiple-choice",gradingMode:"deterministic",difficultyTarget:2,maxPoints:10,
+    prompt:"A tabela apresenta frequências de três radiações eletromagnéticas. Qual delas tem maior energia por fotão?",
+    stimulus:{type:"table",columns:["Radiação","A","B","C"],rows:[["f / Hz","5,0×10¹⁴","7,5×10¹⁴","1,0×10¹⁵"]]},
+    options:["A","B","C","Têm todas a mesma energia."],
+    answerIndex:2,explanation:"A energia de um fotão é E=hf; a maior frequência corresponde à maior energia."
+  },
+  {
     id:"FQA-DATA-AQ-01",year:"11.º",domain:"q11-aqueous",competencyId:"fqa-data",responseType:"multiple-choice",gradingMode:"deterministic",difficultyTarget:3,maxPoints:10,
     prompt:"A solubilidade de um sal foi medida a diferentes temperaturas. Qual afirmação é suportada pelos resultados?",
     stimulus:{type:"table",columns:["T / °C","20","30","40","50"],rows:[["Solubilidade / g por 100 g H₂O","18","22","27","33"]]},
