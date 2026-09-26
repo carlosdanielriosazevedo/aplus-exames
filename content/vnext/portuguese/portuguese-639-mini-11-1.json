@@ -1,0 +1,177 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
+    {
+      "passageId": "PT639-PASSAGE-11-LEITURA-001",
+      "year": "11.º",
+      "domain": "leitura",
+      "title": "A utilidade de discordar",
+      "sourceOrigin": "original",
+      "text": "Discordar é muitas vezes confundido com impedir uma decisão. Numa reunião, quem levanta uma objeção pode parecer menos colaborativo do que quem aceita rapidamente a proposta dominante. No entanto, uma discordância bem formulada pode ter a função contrária: melhorar a decisão antes de ela se tornar difícil de alterar. Para isso, não basta dizer que uma ideia está errada. É preciso identificar o ponto concreto de dúvida, apresentar razões e, sempre que possível, sugerir uma alternativa verificável. Também importa distinguir objeção de oposição permanente. Se alguém rejeita todas as propostas sem critério, o grupo deixa de conseguir perceber quais são as reservas realmente importantes. Uma cultura de discussão útil depende, por isso, de duas responsabilidades: quem discorda deve fundamentar; quem propõe deve aceitar que uma pergunta difícil não é necessariamente um ataque. Quando estas duas condições existem, o desacordo deixa de ser um travão e passa a funcionar como teste de qualidade.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-11-LEITURA-001-Q1",
+          "year": "11.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-organizacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A organização do texto desenvolve-se sobretudo através de",
+          "options": [
+            "uma definição inicial seguida de condições para que a discordância seja útil.",
+            "uma narrativa cronológica sobre várias reuniões.",
+            "uma enumeração de regras sem relação entre si.",
+            "uma descrição neutra de diferentes profissões."
+          ],
+          "answerIndex": 0,
+          "explanation": "O texto parte de uma ideia comum sobre discordância e depois define condições que transformam o desacordo num instrumento de qualidade.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-11-LEITURA-001-Q2",
+          "year": "11.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-coesao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "Na frase “Para isso, não basta dizer que uma ideia está errada”, a expressão “Para isso” retoma",
+          "options": [
+            "a intenção de melhorar a decisão através de uma discordância bem formulada.",
+            "a necessidade de terminar a reunião rapidamente.",
+            "a rejeição de todas as propostas apresentadas.",
+            "a ideia de que discordar impede sempre uma decisão."
+          ],
+          "answerIndex": 0,
+          "explanation": "A expressão retoma a função positiva atribuída à discordância bem formulada: melhorar a decisão.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-11-LEITURA-001-Q3",
+          "year": "11.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-inferencia",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica porque é que o texto atribui responsabilidades tanto a quem discorda como a quem apresenta uma proposta. Fundamenta a resposta em dois elementos do texto.",
+          "referenceAnswer": "O texto considera que uma discussão útil depende dos dois lados. Quem discorda deve indicar o problema concreto, apresentar razões e evitar uma oposição sistemática que torne todas as objeções equivalentes. Quem apresenta uma proposta, por sua vez, deve aceitar perguntas difíceis sem as interpretar automaticamente como ataques. Assim, a qualidade do desacordo depende simultaneamente da fundamentação da crítica e da abertura de quem a recebe.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica as responsabilidades complementares de quem discorda e de quem propõe.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do texto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    },
+    {
+      "passageId": "PT639-PASSAGE-11-LIT-001",
+      "year": "11.º",
+      "domain": "educacao-literaria",
+      "title": "O retrato no patamar",
+      "sourceOrigin": "original",
+      "text": "O retrato estava pendurado no patamar desde antes de Tomás nascer. Mostrava um homem de casaco escuro, uma mão apoiada numa cadeira e a outra escondida atrás das costas. A família chamava-lhe simplesmente o bisavô. Quando havia visitas, alguém contava que fora severo, trabalhador e incapaz de faltar a uma promessa. Tomás ouviu essa história tantas vezes que deixou de perguntar como sabiam. Anos mais tarde, durante obras na casa, o retrato foi retirado da parede. Atrás da moldura apareceu uma folha dobrada, presa com fita antiga. Era uma carta curta, escrita pelo homem do retrato, em que pedia desculpa ao irmão por uma dívida que não conseguira pagar. Tomás leu-a duas vezes. Nada na carta destruía a história da família; também não a confirmava como antes. Naquela noite, ao voltar a pendurar o retrato, reparou que a mão escondida atrás das costas lhe parecia diferente. Não porque tivesse mudado, mas porque agora cabia nela uma coisa que a narrativa familiar nunca tinha contado: a possibilidade de falhar.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-11-LIT-001-Q1",
+          "year": "11.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-temas",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A descoberta da carta leva Tomás sobretudo a",
+          "options": [
+            "substituir uma imagem idealizada por uma visão mais complexa do bisavô.",
+            "concluir que toda a memória familiar era falsa.",
+            "decidir destruir o retrato.",
+            "provar que a dívida tinha sido paga."
+          ],
+          "answerIndex": 0,
+          "explanation": "A carta não destrói a narrativa familiar, mas introduz falha e vulnerabilidade numa imagem antes muito estável.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-11-LIT-001-Q2",
+          "year": "11.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-recursos",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "No final, a mão escondida atrás das costas ganha um novo valor porque",
+          "options": [
+            "o retrato foi fisicamente alterado durante as obras.",
+            "passa a simbolizar aquilo que uma memória familiar pode ocultar ou simplificar.",
+            "Tomás descobre que o bisavô segurava dinheiro.",
+            "a cadeira deixa de fazer parte do retrato."
+          ],
+          "answerIndex": 1,
+          "explanation": "A mão escondida passa a funcionar como imagem simbólica da parte não contada ou simplificada pela narrativa familiar.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-11-LIT-001-Q3",
+          "year": "11.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-voz",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica como a perspetiva de Tomás evolui ao longo do excerto. Relaciona essa evolução com dois elementos da narrativa.",
+          "referenceAnswer": "No início, Tomás recebe passivamente uma imagem familiar repetida do bisavô como homem severo, trabalhador e infalível. A carta introduz um dado concreto de falha e arrependimento, levando-o a questionar a simplicidade dessa imagem. No final, ao olhar novamente para o retrato, vê o mesmo objeto de modo diferente: passa a admitir que a identidade do bisavô inclui também vulnerabilidade e erro.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica a passagem de uma imagem herdada e estável para uma leitura mais complexa.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Relaciona a evolução com dois elementos da narrativa.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    }
+  ]
+}
