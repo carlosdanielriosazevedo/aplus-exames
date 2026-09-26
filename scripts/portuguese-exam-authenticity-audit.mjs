@@ -73,6 +73,12 @@ for(const name of miniFiles){
     assert.ok(item.wordLimit?.min>=60&&item.wordLimit?.max>=100,`${name} / ${item.id}: resposta restrita deve exigir desenvolvimento real`);
     assert.ok(item.rubric?.criteria?.length>=2,`${name} / ${item.id}: resposta restrita precisa de grelha observável`);
     assert.ok(String(item.referenceAnswer||"").trim().length>=180,`${name} / ${item.id}: resposta de referência demasiado curta`);
+    assert.ok(item.rubric.criteria.every(criterion=>Array.isArray(criterion.observations)&&criterion.observations.length>=1),`${name} / ${item.id}: cada critério precisa de observações atómicas`);
+    assert.ok(item.rubric.criteria.flatMap(criterion=>criterion.observations).every(observation=>String(observation.label||"").length>=25),`${name} / ${item.id}: observações demasiado vagas`);
+    assert.ok(item.scoringGuidance?.strong&&item.scoringGuidance?.partial&&item.scoringGuidance?.insufficient,`${name} / ${item.id}: faltam âncoras forte/parcial/insuficiente`);
+    assert.ok(item.scoringGuidance?.acceptableVariants?.length>=3,`${name} / ${item.id}: política de variantes aceitáveis insuficiente`);
+    assert.ok(item.scoringGuidance?.commonPitfalls?.length>=3,`${name} / ${item.id}: faltam erros típicos para feedback`);
+    assert.match(item.scoringGuidance.acceptableVariants.join(" "),/semanticamente equivalentes/iu,`${name} / ${item.id}: referência não pode funcionar como resposta única obrigatória`);
   }
 }
 
@@ -124,7 +130,13 @@ assert.equal(writing.maxPoints,44,"Escrita do simulado deve valer 44 pontos");
 assert.deepEqual(writing.rubric.criteria.map(criterion=>criterion.points),[10,10,10,14],"rubrica de escrita deve refletir 30 pontos temático-discursivos + 14 de correção linguística");
 assert.equal(writing.wordLimit?.min,200,"Escrita deve começar nas 200 palavras");
 assert.equal(writing.wordLimit?.max,350,"Escrita deve terminar nas 350 palavras");
+for(const item of fullItems.filter(item=>["restricted-response","extended-writing"].includes(item.responseType))){
+  assert.ok(item.rubric?.criteria?.every(criterion=>criterion.observations?.length>=1),`${item.id}: simulado precisa de observações atómicas por critério`);
+  assert.ok(item.scoringGuidance?.strong&&item.scoringGuidance?.partial&&item.scoringGuidance?.insufficient,`${item.id}: simulado precisa de âncoras de desempenho`);
+  assert.ok(item.scoringGuidance?.acceptableVariants?.length>=3,`${item.id}: simulado precisa de variantes aceitáveis`);
+  assert.ok(item.scoringGuidance?.commonPitfalls?.length>=3,`${item.id}: simulado precisa de erros típicos para revisão`);
+}
 
 console.log("✓ autenticidade Português 639: banco, mini-exames e simulado coerentes com a estrutura oficial de 2026 sem copiar itens");
 console.log("  mini-exames: 10 itens em runtime · dificuldade editorial calibrada · respostas A/B/C/D equilibradas");
-console.log("  simulado: Grupo I 5 construção + 2 seleção · Grupo II 7 seleção · Grupo III 44 pts");
+console.log("  simulado: respostas construídas com observações atómicas + âncoras forte/parcial/insuficiente");
