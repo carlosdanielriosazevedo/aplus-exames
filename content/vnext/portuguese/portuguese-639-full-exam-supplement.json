@@ -200,11 +200,11 @@
           "prompt": "A passagem «Sabia que o edifício estava vazio [...] Mesmo assim» estabelece uma relação de",
           "options": [
             "contraste entre a explicação racional da luz e a tentativa de confirmar uma recordação.",
-            "concessão entre o conhecimento da realidade e a imaginação momentânea.",
+            "consequência entre o conhecimento das obras e a evocação involuntária da infância.",
             "condição entre a existência da luz e a possibilidade de Rui reconstruir a cena passada.",
-            "consequência entre o conhecimento das obras e a evocação involuntária da infância."
+            "concessão entre o conhecimento da realidade e a imaginação momentânea."
           ],
-          "answerIndex": 1,
+          "answerIndex": 3,
           "explanation": "Rui conhece a explicação objetiva para a luz, mas esse conhecimento não impede a evocação imaginativa do passado; a relação é concessiva.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -311,12 +311,12 @@
           "groupItemNumber": 2,
           "classificationMode": "mandatory",
           "options": [
-            "defender que o valor de uma pausa depende sobretudo da sua duração.",
             "limitar a tese, reconhecendo que só alguns intervalos favorecem operações mentais relevantes.",
+            "defender que o valor de uma pausa depende sobretudo da sua duração.",
             "substituir o argumento sobre a atenção por uma distinção entre trabalho individual e comunicação.",
             "concluir que a eficiência só é desejável quando não reduz o tempo disponível para refletir."
           ],
-          "answerIndex": 1,
+          "answerIndex": 0,
           "explanation": "A distinção evita idealizar toda a espera: o texto valoriza apenas intervalos que criam condições para reorganizar a atenção, interpretar ou decidir melhor.",
           "difficultyTarget": 3
         },
@@ -331,12 +331,12 @@
           "cognitive": "interpretar",
           "prompt": "Na frase «enquanto outra tarefa ainda está em curso», a oração introduzida por «enquanto» exprime",
           "options": [
-            "tempo.",
             "causa.",
+            "tempo.",
             "condição.",
             "finalidade."
           ],
-          "answerIndex": 0,
+          "answerIndex": 1,
           "explanation": "«Enquanto» introduz uma relação temporal de simultaneidade com a ação principal.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -356,11 +356,11 @@
           "prompt": "Em «uma pausa breve pode cumprir funções importantes», o grupo «funções importantes» desempenha a função sintática de",
           "options": [
             "sujeito.",
-            "complemento direto.",
+            "complemento oblíquo.",
             "predicativo do sujeito.",
-            "complemento oblíquo."
+            "complemento direto."
           ],
-          "answerIndex": 1,
+          "answerIndex": 3,
           "explanation": "O grupo nominal completa diretamente o sentido do verbo transitivo «cumprir», sem preposição, funcionando como complemento direto.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -379,12 +379,12 @@
           "cognitive": "interpretar",
           "prompt": "No segmento «talvez a pergunta útil não seja», o advérbio «talvez» exprime um valor de",
           "options": [
-            "certeza.",
-            "obrigação.",
             "possibilidade.",
+            "obrigação.",
+            "certeza.",
             "frequência."
           ],
-          "answerIndex": 2,
+          "answerIndex": 0,
           "explanation": "«Talvez» modaliza o enunciado, apresentando-o como possibilidade e não como certeza absoluta.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -403,12 +403,12 @@
           "cognitive": "interpretar",
           "prompt": "A expressão «Por isso», no último período, estabelece com o que antecede uma relação de",
           "options": [
-            "conclusão.",
-            "oposição.",
             "exemplificação.",
+            "oposição.",
+            "conclusão.",
             "condição."
           ],
-          "answerIndex": 0,
+          "answerIndex": 2,
           "explanation": "«Por isso» introduz a consequência/conclusão decorrente do argumento desenvolvido anteriormente.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
