@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 2,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -24,15 +24,16 @@
           "cognitive": "reconhecer",
           "prompt": "Segundo o texto, porque é que nenhum mapa consegue mostrar tudo?",
           "options": [
-            "Porque os símbolos cartográficos são sempre imprecisos.",
+            "Porque a leitura de um mapa exige interpretar símbolos que podem ter significados diferentes.",
             "Porque um mapa precisa de selecionar informação e reduzir a complexidade.",
-            "Porque os mapas atuais mostram apenas estradas.",
-            "Porque a leitura de mapas depende exclusivamente da memória."
+            "Porque a utilidade de um mapa depende sobretudo da quantidade de elementos representados.",
+            "Porque a representação cartográfica procura substituir a observação direta do território."
           ],
           "answerIndex": 1,
           "explanation": "O texto afirma que a utilidade do mapa depende de reduzir a complexidade através de uma seleção de informação.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 1
         },
         {
           "id": "PT639-PASSAGE-10-LEITURA-001-Q2",
@@ -45,15 +46,16 @@
           "cognitive": "interpretar",
           "prompt": "A comparação entre um mapa só com estradas e outro com árvores, escolas e percursos pedonais mostra que",
           "options": [
-            "todos os mapas devem incluir exatamente os mesmos elementos.",
+            "a utilidade de um mapa aumenta quando representa o maior número possível de elementos.",
             "a seleção de informação influencia a forma como interpretamos e usamos um território.",
-            "as estradas deixaram de ter utilidade nos mapas.",
-            "os mapas de transportes são menos rigorosos do que os restantes."
+            "a inclusão de equipamentos urbanos torna qualquer mapa mais objetivo.",
+            "a função principal dos mapas urbanos é comparar diferentes modos de deslocação."
           ],
           "answerIndex": 1,
           "explanation": "A comparação mostra que diferentes seleções tornam visíveis diferentes usos e leituras da cidade.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-10-LEITURA-001-Q3",
@@ -85,7 +87,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     },
@@ -109,14 +112,15 @@
           "prompt": "O desaparecimento do vaso funciona sobretudo como",
           "options": [
             "um sinal de transformação que leva Rui a reconhecer uma presença antes anónima.",
-            "prova de que Rui conhecia profundamente os moradores da casa.",
-            "um episódio sem consequências na perceção da rua.",
-            "uma explicação para a mudança do horário escolar."
+            "um indício de que a relação de Rui com a rua dependia apenas da rotina visual.",
+            "uma rutura que confirma que Rui conhecia melhor os moradores do que supunha.",
+            "um acontecimento que desloca a atenção de Rui da casa para a mudança da própria rua."
           ],
           "answerIndex": 0,
           "explanation": "A ausência do vaso torna visível, por contraste, a presença quotidiana e anónima que Rui tinha naturalizado.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-10-LIT-001-Q2",
@@ -130,14 +134,15 @@
           "prompt": "A repetição do gesto de Rui levantar os olhos para a janela contribui para",
           "options": [
             "mostrar que a rotina criou uma ligação silenciosa com aquele lugar.",
-            "provar que Rui queria comprar a casa.",
-            "introduzir comicidade na narrativa.",
-            "indicar que o vaso era propriedade de Rui."
+            "sugerir que Rui procurava descobrir a identidade de quem vivia na casa.",
+            "acentuar a curiosidade de Rui perante uma alteração que não compreende.",
+            "mostrar que o vaso passou a funcionar como o único elemento estável da rua."
           ],
           "answerIndex": 0,
           "explanation": "O gesto repetido materializa a rotina e a ligação criada sem contacto direto com quem vivia na casa.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-10-LIT-001-Q3",
@@ -169,7 +174,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     }
