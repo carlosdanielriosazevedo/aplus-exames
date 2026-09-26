@@ -654,3 +654,121 @@ body{color:var(--app-navy);background:#fff}
 .portugueseProgressCard>.notice{display:block}.portugueseProgressCard>.portugueseMissionGrid{display:grid}.diagnosticDomainSummary .portugueseSubjectAction>div{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0;border:0}.diagnosticDomainSummary .portugueseSubjectAction strong{flex:0 0 auto;color:var(--app-orange-dark);font-size:20px}.diagnosticDomainSummary .portugueseSubjectAction small{margin-top:7px;font-size:11px;line-height:1.4}.portugueseCorrectAnswer>b{font-size:15px;line-height:1.5}.portugueseAnswerExplanation{padding-top:10px;border-top:1px solid #edcaca}
 .reviewChapter{display:block!important;margin:14px 0;padding:18px;border:1px solid var(--app-card-light-border);border-radius:16px;background:var(--app-card-light);color:var(--app-navy)}.reviewChapter>small{display:block;margin:0 0 5px;color:var(--app-orange-dark);font-size:11px;font-weight:950;letter-spacing:.08em}.reviewChapter h3{margin:0 0 10px;font-size:19px}.reviewChapter p,.reviewChapter li{font-size:15px;line-height:1.65}.reviewChapter ul,.reviewChapter ol{margin:8px 0 0;padding-left:22px}.reviewChapter li+li{margin-top:8px}.formulaChapter{background:#fffaf0}.warningChapter{border-color:#efd1bf;background:#fff8f3}.reviewCallout{margin:14px 0 0;padding:11px 13px;border-left:3px solid var(--app-orange);background:#fff}.reviewCheckGrid{display:grid!important;grid-template-columns:1fr 1fr;gap:8px;padding:0!important;border:0!important}.reviewCheckGrid>span{padding:10px 11px;border-radius:10px;background:#fff;font-size:13px;line-height:1.4}.reviewStudyPlan{background:#f3f8f5}
 @media(max-width:760px){.subjectConfigBanner{grid-template-columns:44px minmax(0,1fr);padding:14px}.subjectConfigBanner>span{width:44px;height:44px}.subjectConfigBanner b{font-size:19px}.portugueseMissionGrid{grid-template-columns:1fr!important}.reviewCheckGrid{grid-template-columns:1fr}.reviewChapter{padding:16px}.reviewChapter h3{font-size:18px}.reviewChapter p,.reviewChapter li{font-size:14px}}
+
+
+/* APProva+ Design System v1 — 2026-09 */
+:root{
+  --app-navy:#102b42;
+  --app-navy-strong:#0a2033;
+  --app-navy-soft:#173d5b;
+  --app-orange:#ffb224;
+  --app-orange-dark:#a85d00;
+  --app-orange-soft:#fff1d6;
+  --app-ink:#13263a;
+  --app-muted:#667789;
+  --app-muted-2:#8d99a6;
+  --app-surface:#ffffff;
+  --app-canvas:#f5f7f8;
+  --app-border:#e3e9ed;
+  --app-border-strong:#ccd7de;
+  --app-success:#27835d;
+  --app-success-soft:#edf8f2;
+  --app-danger:#b34f4f;
+  --app-danger-soft:#fff1f1;
+  --app-warning:#8a5a0a;
+  --app-warning-soft:#fff6e5;
+  --app-radius-sm:12px;
+  --app-radius-md:18px;
+  --app-radius-lg:24px;
+  --app-shadow-sm:0 8px 24px rgba(16,43,66,.07);
+  --app-shadow-md:0 18px 48px rgba(16,43,66,.12);
+  --app-focus:0 0 0 4px rgba(255,178,36,.22);
+}
+
+body{background:var(--app-canvas);color:var(--app-ink)}
+.light{background:var(--app-canvas)}
+.panel{color:var(--app-ink);box-shadow:var(--app-shadow-md)}
+.eyebrow{color:var(--app-orange-dark);letter-spacing:.075em;font-weight:950}
+.muted,.sectionLead{color:var(--app-muted)}
+.sectionLead{max-width:680px;margin:8px 0 0;font-size:15px;line-height:1.55}
+.primary{background:var(--app-navy);color:#fff;border-radius:var(--app-radius-sm);box-shadow:none}
+.primary:hover:not(:disabled){background:var(--app-navy-soft)}
+.primary:focus-visible,.secondary:focus-visible,.studentNav button:focus-visible,.subjectSwitcher:focus-visible,.trainChoices>button:focus-visible,.chips button:focus-visible{outline:none;box-shadow:var(--app-focus)}
+.secondary{border-color:var(--app-border);color:var(--app-ink);border-radius:var(--app-radius-sm)}
+.secondary:hover{border-color:var(--app-border-strong);background:#fafcfc}
+.sel{border-color:var(--app-orange)!important;background:var(--app-orange-soft)!important;color:var(--app-ink)!important}
+.notice,.goalMessage,.trainingSummary{background:#f7fafb;border:1px solid var(--app-border);border-radius:var(--app-radius-sm)}
+.notice.warning{background:var(--app-warning-soft);border-color:#efd8aa}
+.good{background:var(--app-success-soft);color:#176b4a}.bad{background:var(--app-danger-soft);color:#8f3f3f}
+.bar i,.progress i{background:var(--app-orange)}
+.bar.green i{background:var(--app-success)}
+
+.studentTop{margin-bottom:30px}
+.subjectSwitcher{border-color:var(--app-border);border-radius:var(--app-radius-sm)}
+.subjectSwitcher span{background:var(--app-orange-soft);color:var(--app-orange-dark)}
+.studentTopActions>button,.studentMenu>summary{border-color:var(--app-border)}
+.studentMenu>div{border-color:var(--app-border);box-shadow:var(--app-shadow-md)}
+
+.studentNav{width:min(760px,100%);height:78px;border-color:var(--app-border);box-shadow:0 -12px 34px rgba(16,43,66,.09)}
+.studentNav button{color:#7a8793;border-radius:14px;transition:background .18s ease,color .18s ease,transform .12s ease}
+.studentNav button>span.studentNavIcon{width:24px;height:24px;display:grid;place-items:center}
+.studentNavIcon svg{width:23px;height:23px;display:block}
+.studentNav button>b{font-size:11px;font-weight:850;letter-spacing:.01em}
+.studentNav button.active{color:var(--app-navy);background:var(--app-orange-soft)}
+.studentNav button.active .studentNavIcon{color:var(--app-orange-dark)}
+
+.learnHome{background:radial-gradient(circle at 50% -10%,#1d4d6c 0,var(--app-navy-strong) 46%,#071725 78%)}
+.learnIntro p{color:#b4c4cf}.learnIntro h1{letter-spacing:-1.4px}
+.apronsoNudge{border-radius:var(--app-radius-md)}
+.pathLine.active{background:linear-gradient(var(--app-success),var(--app-orange))}
+.pathNode.current>span{background:var(--app-orange);border-color:#ffd174;color:var(--app-navy);box-shadow:0 0 0 7px rgba(255,178,36,.17)}
+.pathNode.current article{border:1px solid rgba(255,255,255,.6);border-radius:var(--app-radius-lg);box-shadow:0 20px 52px rgba(0,0,0,.26)}
+.pathNode.current article small{color:var(--app-orange-dark)}
+.pathNode.current button{background:var(--app-navy);color:#fff;border-radius:14px}
+.pathNode.current summary{color:var(--app-orange-dark)}
+
+.wideStudentShell{align-items:start;padding:32px 24px 118px}
+.wideStudentShell>.panel{width:min(1040px,100%);padding:38px 44px}
+.trainHub .sectionIntro,.progressPage .sectionIntro{margin-bottom:24px}
+.trainChoices{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.trainChoices>button{min-height:178px;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;padding:22px;border-color:var(--app-border);border-radius:var(--app-radius-md);box-shadow:var(--app-shadow-sm)}
+.trainChoices>button>span{grid-column:1 / -1;width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:var(--app-orange-soft);font-size:25px}
+.trainChoices>button>div{align-self:start}.trainChoices b{font-size:21px}.trainChoices small{font-size:14px}
+.trainChoices em{color:var(--app-orange-dark);align-self:end}
+.trainChoices>button:hover{border-color:#efc46d;box-shadow:var(--app-shadow-md)}
+
+.progressHero{grid-template-columns:minmax(0,1.35fr) minmax(0,.95fr) 126px;align-items:stretch;gap:12px;margin:18px 0}
+.progressHero>div,.progressHero>p{background:#f7fafb;border:1px solid var(--app-border);border-radius:var(--app-radius-md);padding:22px}
+.progressHero>.apronso{width:126px;height:100%;max-height:150px;align-self:end;object-fit:contain}
+.progressHero>div>b{color:var(--app-navy);font-size:42px}.progressHero>p>b{color:var(--app-navy)}
+.progressOverview{padding:8px 16px;background:#fff;border:1px solid var(--app-border);border-radius:var(--app-radius-md);box-shadow:var(--app-shadow-sm)}
+.progressOverview>div+div{border-top:1px solid #edf1f3}
+.progressActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.progressActions .secondary{margin:0}
+.progressDetails>summary{color:var(--app-navy);border-color:var(--app-border);background:#fff}
+.progressDetails[open]>summary{border-color:#f1ca80;background:var(--app-orange-soft)}
+.progressHelp>summary,.focusDisclosure>summary,.resultDetails>summary{color:var(--app-navy)}
+.questionContext,.certainty strong,.certaintyRow b,.reviewLink{color:var(--app-orange-dark)}
+.focusTrack i{background:linear-gradient(90deg,var(--app-orange),var(--app-success))}
+.questionMeta>span{background:#f4f7f8;color:var(--app-muted)}
+.resultDetails>summary{border-color:var(--app-border)}
+
+@media(max-width:900px){
+  .wideStudentShell>.panel{width:min(760px,100%)}
+  .trainChoices{grid-template-columns:1fr}
+  .trainChoices>button{min-height:104px;grid-template-columns:48px minmax(0,1fr) auto;grid-template-rows:1fr;padding:18px}
+  .trainChoices>button>span{grid-column:auto;width:44px;height:44px}
+  .progressHero{grid-template-columns:1.2fr .9fr}
+  .progressHero>.apronso{display:none}
+}
+@media(max-width:760px){
+  .wideStudentShell{padding:0}
+  .wideStudentShell>.panel{width:100%;padding:25px 20px}
+  .studentTop{margin-bottom:24px}
+  .sectionIntro h1{font-size:34px}
+  .sectionLead{font-size:14px}
+  .progressHero{grid-template-columns:1fr}
+  .progressHero>div,.progressHero>p{padding:18px}
+  .progressActions{grid-template-columns:1fr}
+  .progressOverview{padding:6px 12px}
+}

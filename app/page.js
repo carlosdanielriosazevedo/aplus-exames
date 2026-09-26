@@ -1161,7 +1161,7 @@ function Home({s,setS,go,reset}){
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
-    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
+    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div>
     <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Posso ajudar-te a escolher o próximo treino.":"Já analisei o teu percurso. Esta é a ação que mais vale a pena fazer agora."}</ApronsoNudge>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
@@ -1605,10 +1605,10 @@ function Ranking({s,setS,go}){
 }
 
 function TrainHub({s,go}){
-  return <Shell><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
+  return <Shell className="wideStudentShell trainHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
     <ApronsoNudge pose="thinking">{STUDY_MODE_COPY.nudge}</ApronsoNudge>
     <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy("math-a")}</small></div><em>→</em></button>
+      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy(s.activeSubjectId||"math-a")}</small></div><em>→</em></button>
       <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>{STUDY_MODE_COPY.miniExam}</small></div><em>→</em></button>
       <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>{STUDY_MODE_COPY.review}</small></div><em>→</em></button>
     </div><StudentNav active="train" go={go}/>
@@ -1812,12 +1812,10 @@ function Progress({s,go}){
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
   const overview=measuredThemes(s).sort((a,b)=>(scopedThemeScore(s,b.id).domain??0)-(scopedThemeScore(s,a.id).domain??0)).slice(0,5);
   const index=prepIndex(s);
-  return <Shell><StudentTop s={s} go={go}/><p className="eyebrow">PROGRESSO</p>
-    <h1>Como estás a evoluir.</h1>
+  return <Shell className="wideStudentShell progressPage"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1><p className="sectionLead">Primeiro, vê o essencial. O detalhe pedagógico fica disponível quando quiseres perceber o porquê.</p></div>
     <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
     <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
-    <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
-    <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
+    <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
     <FriendsBetaDisclaimer s={s} compact/>
     <details className="progressDetails"><summary>Ver mapa completo →</summary>
     <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
