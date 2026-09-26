@@ -16,6 +16,7 @@ const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").the
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
+import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
 import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
 import "./portugues-mini-exame/passage-mini-exam.css";
 import {
@@ -334,7 +335,7 @@ export default function App(){
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
     clearSessionDraft(s.betaMode||"internal");
     setRecoveredSession(null);
-    const questions=buildMiniExam(s,12);
+    const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
     setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mini_exam_started",{sessionId:ses.id,questionCount:questions.length})]}));
     setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
@@ -1671,7 +1672,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
   const questions=useMemo(()=>{
     if(!cfg)return [];
-    const fresh=trainingQuestions(s,cfg,8);
+    const fresh=trainingQuestions(s,cfg,DEFAULT_TRAINING_QUESTIONS);
     if(!draft?.questions?.length)return fresh;
     return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,10);
   },[cfg]);
@@ -1693,7 +1694,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
-  if(questions.length<7)return <Shell><Back go={go} to="train"/><h1>Ainda não há 7 perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
+  if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
   function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
