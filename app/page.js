@@ -1161,8 +1161,7 @@ function Home({s,setS,go,reset}){
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
-    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div>
-    <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Posso ajudar-te a escolher o próximo treino.":"Já analisei o teu percurso. Esta é a ação que mais vale a pena fazer agora."}</ApronsoNudge>
+    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
       if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
@@ -1173,7 +1172,7 @@ function Home({s,setS,go,reset}){
     <section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><p>{missionDone?"A recomendação principal de hoje está feita.":"Uma sessão curta escolhida pela app para ti."}</p><em>~3–5 min</em>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta"><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
@@ -1812,16 +1811,16 @@ function Progress({s,go}){
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
   const overview=measuredThemes(s).sort((a,b)=>(scopedThemeScore(s,b.id).domain??0)-(scopedThemeScore(s,a.id).domain??0)).slice(0,5);
   const index=prepIndex(s);
-  return <Shell className="wideStudentShell progressPage"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1><p className="sectionLead">Primeiro, vê o essencial. O detalhe pedagógico fica disponível quando quiseres perceber o porquê.</p></div>
-    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+  return <Shell className="wideStudentShell progressPage"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
+    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
     <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
     <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
     <FriendsBetaDisclaimer s={s} compact/>
-    <details className="progressDetails"><summary>Ver mapa completo →</summary>
-    <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
+    <details className="progressDetails"><summary>Ver detalhe por matéria →</summary>
+    <p className="muted">Consulta Domínio, Certeza e evidência quando precisares de perceber melhor o resultado.</p>
     <div className="chips">{allowedYears.map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
 
-    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
+    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>O QUE A APP ESTÁ A ACOMPANHAR</small><h3>Pontos a confirmar</h3></div>
       {activeHypotheses.length>0?<>{activeHypotheses.slice(0,5).map(h=><div className={"hypothesisRow lifecycle-"+h.lifecycleStatus} key={h.key}>
         <span>{h.icon}</span>
         <div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{
@@ -1845,7 +1844,7 @@ function Progress({s,go}){
         </div>)}
       </details>}
 
-      <p>Uma hipótese pode ganhar força, tornar-se ambígua, ser resolvida ou ficar desatualizada. Se aparecer nova evidência contraditória, pode ser reaberta. <b>Hipótese não é diagnóstico definitivo.</b></p>
+      <p>Estes sinais podem mudar com novas respostas. <b>Não são conclusões definitivas.</b></p>
     </div>}
 
     {scopedThemes.filter(t=>t.year===year).map(t=>{
