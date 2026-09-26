@@ -1,5 +1,6 @@
 import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "./physicsChemistryConstructed.js";
 import {PHYSICS_CHEMISTRY_A_DATA_ITEMS} from "./physicsChemistryDataItems.js";
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1} from "./physicsChemistryCoverageWave1.js";
 import {physicsChemistrySubtopicIdForItem} from "./physicsChemistryTaxonomy.js";
 
 export const PHYSICS_CHEMISTRY_A_VERSION="2026.09-foundation-v1";
@@ -109,8 +110,9 @@ const PHYSICS_CHEMISTRY_A_SELECTION_ITEMS=raw.map(([id,year,domain,competencyId,
 export const PHYSICS_CHEMISTRY_A_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_SELECTION_ITEMS,
   ...PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.map(item=>({...item,sourceOrigin:"original",reviewStatus:"prototype"})),
-  ...PHYSICS_CHEMISTRY_A_DATA_ITEMS
-].map(item=>({...item,subtopicId:physicsChemistrySubtopicIdForItem(item)}));
+  ...PHYSICS_CHEMISTRY_A_DATA_ITEMS,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1
+].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)}));
 
 export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id)||null}
 export function physicsChemistryDomainById(id){return PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===id)||null}
