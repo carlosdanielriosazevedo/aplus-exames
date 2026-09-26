@@ -891,3 +891,46 @@ body{background:var(--app-canvas);color:var(--app-ink)}
 .learnHome .homeScopeWarning{margin:18px 0 0;background:#fff6e5!important;border-color:#efd8aa!important;color:var(--app-navy)!important}
 .learnHome .homeScopeWarning span{color:#6f6657!important}
 .learnHome .homeScopeWarning button{margin-top:10px;border:0;background:transparent;color:var(--app-orange-dark);font-weight:900;padding:0}
+
+
+/* Paridade de estudo — Treinar / Rever / Progresso / Exames */
+.trainingSetupPage>.panel,.examHub>.panel{width:min(1040px,100%)}
+.trainingSetupPage .back,.examHub .back{margin-bottom:18px}
+.trainingSetupPage> .panel > .muted,.trainingSetupPage .panel>.muted{max-width:760px}
+.trainingSetupPage h3{margin:24px 0 10px;font-size:15px;color:var(--app-navy)}
+.trainingSetupPage .yearSelector{max-width:560px}
+.trainingScopeNote{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin:12px 0 18px;padding:12px 0;border-top:1px solid var(--app-border);border-bottom:1px solid var(--app-border)}
+.trainingScopeNote b{font-size:13px;color:var(--app-navy)}
+.trainingScopeNote span{max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}
+.sectionIntro.compact{margin:16px 0 14px}.sectionIntro.compact h2{font-size:24px;margin:3px 0}
+.examHub .apronsoNudge{margin-bottom:16px}
+.examHub .exam{margin:10px 0}
+.examHub .lastExam{margin:14px 0}
+.examHub .notice{margin-top:12px}
+.reviewStudyPage #portugueseLearn>.muted{max-width:760px}
+.reviewStudyPage #portugueseLearn>.notice{max-width:760px}
+.reviewStudyPage #portugueseLearn>.notice+ .yearSelector{margin-top:18px}
+
+@media(max-width:760px){
+  .trainingSetupPage,.examHub{padding:0}
+  .trainingSetupPage>.panel,.examHub>.panel{width:100%;padding:25px 20px 104px}
+  .trainingSetupPage h1,.examHub .sectionIntro h1,.reviewStudyPage .sectionIntro h1{font-size:32px;line-height:1.12}
+  .trainingSetupPage .themeGrid{grid-template-columns:1fr}
+  .trainingSetupPage .levelGrid{grid-template-columns:1fr 1fr}
+  .trainingScopeNote{display:block}
+  .trainingScopeNote span{display:block;margin-top:5px}
+  .examHub .examAction{min-height:96px;padding:16px}
+  .examHub .examAction>div span{font-size:13px;line-height:1.4}
+  .examHub .lastExam{grid-template-columns:1fr}
+  .progressPage .progressOverview>div{grid-template-columns:minmax(100px,1fr) 1fr 32px;gap:8px}
+  .progressPage .progressDetails .focusMap>div{grid-template-columns:minmax(110px,1fr) 1fr 32px}
+}
+@media(max-width:430px){
+  .trainingSetupPage .levelGrid{grid-template-columns:1fr}
+  .trainingSetupPage .chips.yearSelector{grid-template-columns:repeat(3,1fr)}
+  .examHub .apronsoNudge{grid-template-columns:64px minmax(0,1fr)}
+  .examHub .apronsoNudge .apronso{width:64px;height:72px}
+  .progressPage .progressHero{grid-template-columns:1fr}
+  .progressPage .progressOverview>div{grid-template-columns:minmax(92px,1fr) .8fr 30px}
+  .reviewStudyPage .reviewChapter{padding:16px}
+}

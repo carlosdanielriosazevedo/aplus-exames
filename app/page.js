@@ -10,6 +10,7 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon} from "./components/chrome";
 import MathReviewMatter from "./components/MathReviewMatter";
+import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
@@ -1599,14 +1600,7 @@ function Ranking({s,setS,go}){
 }
 
 function TrainHub({s,go}){
-  return <Shell className="wideStudentShell trainHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <ApronsoNudge pose="thinking">{STUDY_MODE_COPY.nudge}</ApronsoNudge>
-    <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy(s.activeSubjectId||"math-a")}</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>{STUDY_MODE_COPY.miniExam}</small></div><em>→</em></button>
-      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>{STUDY_MODE_COPY.review}</small></div><em>→</em></button>
-    </div><StudentNav active="train" go={go}/>
-  </Shell>;
+  return <Shell className="wideStudentShell trainHub"><StudentTop s={s} go={go}/><StudyModeHub subjectId={s.activeSubjectId||"math-a"} go={go}/><StudentNav active="train" go={go}/></Shell>;
 }
 
 
@@ -1632,11 +1626,11 @@ function Train({s,setS,go,start}){
   const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
   const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
 
-  return <Shell><Back go={go} to="train"/>
+  return <Shell className="wideStudentShell trainingSetupPage"><Back go={go} to="train"/>
     <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
     <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
 
-    <h3>1. Ano</h3><div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>changeYear(y)}>{y}</button>)}</div>
+    <h3>1. Ano</h3><div className="chips yearSelector">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>changeYear(y)}>{y}</button>)}</div>
     <h3>2. Tema</h3><div className="themeGrid">{themes.map(t=>{
       const count=eligibleQuestions(s,t.id,"training").length;
       const generated=(s.betaMode||"internal")==="internal" && hasGenerator(t.id);
@@ -1871,7 +1865,7 @@ function Exams({s,go,startMini}){
   const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
-  return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
+  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><Back go={go} to="train"/><div className="sectionIntro"><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
@@ -1881,7 +1875,7 @@ function Exams({s,go,startMini}){
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
     <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
-    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div>
+    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div><StudentNav active="train" go={go}/>
   </Shell>
 }
 

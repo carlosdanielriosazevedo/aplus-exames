@@ -2,6 +2,7 @@
 import {useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
+import StudyModeHub from "./StudyModeHub";
 import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
 import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data/portugueseLiteraryWorks";
@@ -206,43 +207,32 @@ function PortugueseSubject({s,setS,go,view="home"}){
     const practiceCompetencies=PORTUGUESE_COMPETENCIES
       .filter(row=>row.writtenExam&&row.domain===practiceDomain)
       .map(row=>({...row,count:competencySourceItems.filter(item=>item.competencyId===row.id&&item.responseType!=="extended-writing").length}));
-    return <Shell>
+    return <Shell className="wideStudentShell trainingSetupPage">
       <button className="back" onClick={()=>go("train")}>← Voltar</button>
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
-      <p className="muted">Escolhe primeiro o ano e depois a área. O treino usa apenas perguntas desse ano e não sobe nem desce diretamente o teu Domínio.</p>
-      <div className="chips yearSelector" aria-label="Escolher ano para praticar Português">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
-      <div className="notice"><b>Português · {practiceYear}</b><span>As perguntas seguintes ficam limitadas ao ano escolhido. Em Educação Literária, uma obra só aparece quando já existe um banco explicitamente associado a essa obra.</span></div>
-      {!practiceDomain?<>
+      <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano e depois a área que queres trabalhar.</p>
+      <h3>1. Ano</h3><div className="chips yearSelector" aria-label="Escolher ano para praticar Português">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
+      <div className="trainingScopeNote"><b>Português · {practiceYear}</b><span>As perguntas ficam limitadas ao ano escolhido. Em Educação Literária, uma obra só aparece quando já existe banco próprio suficiente.</span></div>
+      {!practiceDomain?<><h3>2. Área</h3>
         <div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=practiceYearCoverage.missionEligibleByDomain[domain]>=7;return <button key={domain} disabled={!available} onClick={()=>{setPracticeDomain(domain);setPracticeLiteraryWorkId(null)}}>{label}<small>{available?` · escolher competência · ${practiceYear}`:" · cobertura insuficiente neste ano"}</small></button>})}</div>
         <button className="primary" disabled={practiceYearItems.filter(item=>item.responseType!=="extended-writing").length<7} onClick={()=>startPractice(null,practiceYear)}>Praticar várias áreas · {practiceYear}</button>
       </>:practiceDomain==="educacao-literaria"&&!practiceLiteraryWorkId?<>
         <button type="button" className="back" onClick={()=>setPracticeDomain(null)}>← Todas as áreas</button>
-        <div className="sectionIntro"><p className="eyebrow">Educação Literária · {practiceYear}</p><h2>Que obra queres praticar?</h2></div>
+        <div className="sectionIntro compact"><p className="eyebrow">EDUCAÇÃO LITERÁRIA · {practiceYear}</p><h2>3. Que obra queres praticar?</h2></div>
         {literaryWorks.length?<div className="themeGrid">{literaryWorks.map(work=><button key={work.id} disabled={work.count<7} onClick={()=>setPracticeLiteraryWorkId(work.id)}><b>{work.title}</b><small>{work.author} · {work.count>=7?`${work.count} perguntas próprias`:`cobertura insuficiente · ${work.count}/7`}</small></button>)}</div>:<div className="notice warning"><b>Ainda sem banco específico por obra neste ano</b><span>Podes praticar competências gerais de Educação Literária enquanto preparamos perguntas editorialmente ligadas às obras.</span></div>}
         <button className="secondary" disabled={practiceYearCoverage.missionEligibleByDomain[practiceDomain]<7} onClick={()=>startPractice(practiceDomain,practiceYear)}>Praticar competências gerais de Educação Literária</button>
       </>:<>
         <button type="button" className="back" onClick={()=>{if(practiceLiteraryWorkId)setPracticeLiteraryWorkId(null);else setPracticeDomain(null)}}>← {practiceLiteraryWorkId?"Todas as obras":"Todas as áreas"}</button>
-        <div className="sectionIntro"><p className="eyebrow">{practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:PORTUGUESE_DOMAIN_LABELS[practiceDomain]} · {practiceYear}</p><h2>Que competência queres trabalhar?</h2></div>
+        <div className="sectionIntro compact"><p className="eyebrow">{practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:PORTUGUESE_DOMAIN_LABELS[practiceDomain]} · {practiceYear}</p><h2>3. Que competência queres trabalhar?</h2></div>
         <div className="themeGrid">{practiceCompetencies.map(row=><button key={row.id} disabled={row.count<7} onClick={()=>startPractice(practiceDomain,practiceYear,row.id,practiceLiteraryWorkId)}><b>{row.label}</b><small>{row.count>=7?`7 perguntas adaptadas · ${row.count} disponíveis`:`Cobertura insuficiente · ${row.count}/7`}</small></button>)}</div>
         <button className="primary" disabled={(practiceLiteraryWorkId?competencySourceItems.filter(item=>item.responseType!=="extended-writing").length:practiceYearCoverage.missionEligibleByDomain[practiceDomain])<7} onClick={()=>startPractice(practiceDomain,practiceYear,null,practiceLiteraryWorkId)}>Praticar {practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:`toda a área · ${PORTUGUESE_DOMAIN_LABELS[practiceDomain]}`}</button>
       </>}
     </Shell>;
   }
 
-  if(!session&&view==="train")return sharedShell(<>
-    <div className="sectionIntro"><p className="eyebrow">TREINAR</p><h1>O que queres fazer?</h1></div>
-    <ApronsoNudge pose="thinking">{STUDY_MODE_COPY.nudge}</ApronsoNudge>
-    <div className="trainChoices">
-      <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy("portuguese")}</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>{STUDY_MODE_COPY.miniExam}</small></div><em>→</em></button>
-      <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>{STUDY_MODE_COPY.review}</small></div><em>→</em></button>
-    </div>
-  </>);
+  if(!session&&view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId="portuguese" go={go}/>{sharedNav}</Shell>;
 
-  if(!session&&view==="reviewMatter")return sharedShell(<>
-    <button className="back" onClick={()=>go("train")}>← Voltar</button>
-    <PortugueseLearnPanel schoolYear={currentYear}/>
-  </>);
+  if(!session&&view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PortugueseLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
   if(!session&&view==="progress"){
     const overview=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{
@@ -252,28 +242,27 @@ function PortugueseSubject({s,setS,go,view="home"}){
       return {domain,label,attempts,correct,percent:attempts?Math.round(correct/attempts*100):null};
     });
     const overall=deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):null;
-    return sharedShell(<>
-      <p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1>
-      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"%":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice de Português baseado na evidência disponível nesta disciplina.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>O progresso de Português é separado do de Matemática A.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+    return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
       <div className="progressOverview">{overview.map(row=><div key={row.domain}><span>{row.label}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
-      <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
-      <button className="secondary" onClick={()=>go("profileSettings")}>Atualizar ano e percurso escolar</button>
-      <details className="progressDetails"><summary>Ver mapa completo →</summary><p className="muted">Explora domínios, competências, evidência e o estado das respostas abertas.</p>
+      <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
+      <details className="progressDetails"><summary>Ver detalhe por matéria →</summary><p className="muted">Consulta domínio, evidência e respostas abertas quando precisares de perceber melhor o resultado.</p>
       {overview.map(row=><div className={"prog "+(row.percent===null?"unmeasured":"")} key={row.domain}><div className="progHead"><b>{row.label}</b><small>Domínio de Português</small></div>{row.percent===null?<div className="noEvidence"><b>Ainda sem estimativa</b><span>A app vai recolher evidência quando praticares esta área.</span></div>:<><span>Domínio estimado: {row.percent}/100</span><div className="bar"><i style={{width:row.percent+"%"}}/></div><div className="certaintyRow"><span>Evidência da app</span><b>{row.attempts} respostas objetivas</b><small>As respostas abertas são acompanhadas por critérios observáveis e não recebem uma classificação automática final.</small></div><div className="focusMap"><b>Competências dentro deste domínio</b>{competenceRows.filter(([,r])=>r.domain===row.domain||r.domainId===row.domain).map(([id,r])=><div key={id}><span>{r.label||id}</span><div className="focusMiniBar"><i style={{width:(r.deterministicAttempts?Math.round((r.correct||0)/r.deterministicAttempts*100):0)+"%"}}/></div><strong>{r.deterministicAttempts?Math.round((r.correct||0)/r.deterministicAttempts*100):"—"}</strong><small>{r.deterministicAttempts?(r.correct||0)+"/"+r.deterministicAttempts+" corretas":"Sem evidência"}</small></div>)}</div></>}</div>)}</details>
-      <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary><div className="notice"><b>Domínio ≠ certeza da app</b><span>O Domínio resume a evidência disponível. A app mantém separadas as respostas objetivas e a evidência das grelhas de respostas abertas.</span></div><div className="notice"><b>Respostas abertas</b><span>A autoavaliação serve para orientar o treino e guardar evidência por critério; não é convertida automaticamente numa nota final.</span></div></details>
-    </>);
+      <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary><div className="notice"><b>Domínio ≠ certeza da app</b><span>O Domínio resume a evidência disponível. A app mantém separadas as respostas objetivas e a evidência das grelhas de respostas abertas.</span></div><div className="notice"><b>Respostas abertas</b><span>A autoavaliação serve para orientar o treino e guardar evidência por critério; não é convertida automaticamente numa nota final.</span></div></details>{sharedNav}</Shell>;
   }
 
-  if(!session&&view==="exams")return sharedShell(<>
-    <p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1>
-    <div className="notice"><b>Mini-exames</b><span>Sem pistas durante as perguntas. No fim, revês escolhas e respostas abertas por critérios observáveis.</span></div>
-    <button className="exam examAction" onClick={()=>selectMiniExam("mini-1")}><div><b>⚡ Mini-exame 1 · Espaço e memória</b><span>2 textos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
-    <button className="exam examAction" onClick={()=>selectMiniExam("mini-2")}><div><b>⚡ Mini-exame 2 · Escolha e despedida</b><span>2 textos novos · 6 questões · seleção + resposta restrita · revisão no fim</span></div><strong>Começar →</strong></button>
-    <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico identifica cada mini-exame e continua separado do de Matemática A.":"Escolhe um dos dois mini-exames para criar histórico."}</span></div>
-    {currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Simulado completo · Modelo 1</b><span>Simulado original · 150 min · 17 questões · 200 pontos · quatro domínios</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Simulado completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>}
+  if(!session&&view==="exams")return <Shell className="wideStudentShell examHub">
+    {sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button>
+    <div className="sectionIntro"><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1></div>
+    <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
+    <button className="exam examAction" onClick={()=>selectMiniExam("mini-1")}><div><b>⚡ Mini-exame 1 · Espaço e memória</b><span>2 textos · 6 questões · seleção + resposta restrita</span></div><strong>Começar →</strong></button>
+    <button className="exam examAction" onClick={()=>selectMiniExam("mini-2")}><div><b>⚡ Mini-exame 2 · Escolha e despedida</b><span>2 textos · 6 questões · seleção + resposta restrita</span></div><strong>Começar →</strong></button>
+    <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico de Português fica separado das restantes disciplinas.":"Escolhe um mini-exame para criar histórico."}</span></div>
+    {currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Simulado completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Simulado completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>}
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
-    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis.</span></div>
-  </>);
+    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis, sem atribuição automática de uma classificação final.</span></div>
+    {sharedNav}
+  </Shell>;
   if(!session)return sharedShell(<>
     <div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
