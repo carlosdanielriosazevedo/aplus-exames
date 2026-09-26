@@ -4,6 +4,7 @@ import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,Study
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
+import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
@@ -33,6 +34,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(null);
+  const [practiceSubtopic,setPracticeSubtopic]=useState(null);
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
@@ -67,8 +69,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     start("mission",built.items,domain?"Missão · "+(physicsChemistryDomainById(domain)?.shortTitle||domain):"Missão recomendada",domain);
   }
   function startPractice(){
-    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,year:practiceYear,size:8});
-    start("training",built.items,"Praticar · "+(physicsChemistryDomainById(practiceDomain)?.shortTitle||practiceYear),practiceDomain);
+    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,subtopicId:practiceSubtopic,year:practiceYear,size:8});
+    const domainLabel=physicsChemistryDomainById(practiceDomain)?.shortTitle||practiceYear;
+    const subtopicLabel=physicsChemistrySubtopicById(practiceSubtopic)?.label;
+    start("training",built.items,"Praticar · "+[domainLabel,subtopicLabel].filter(Boolean).join(" · "),practiceDomain);
   }
   function startMiniExam(){
     const ten=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,year:"10.º",size:7}).items.slice(0,6);
@@ -130,6 +134,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       <h1>{domain?.shortTitle||"Física e Química A"}</h1>
       <div className="trainingScopeNote"><b>{item.year+" · "+domain?.area}</b><span>{domain?.title}</span></div>
       <div className="questionCard">
+        {item.stimulus?.type==="table"&&<div className="fqaStimulus"><table><thead><tr>{item.stimulus.columns.map(column=><th key={column}>{column}</th>)}</tr></thead><tbody>{item.stimulus.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>}
         <h2>{item.prompt}</h2>
         {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>}
         {item.responseType==="stepwise"&&<div className="fqaStepwise">
@@ -174,12 +179,16 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   if(view==="trainingSetup"){
     const rows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===practiceYear);
+    const subtopics=practiceDomain?physicsChemistrySubtopicsForDomain(practiceDomain):[];
+    const availableInSelection=practiceSubtopic?coverage.bySubtopic[practiceSubtopic]||0:practiceDomain?coverage.byDomain[practiceDomain]||0:0;
     return <Shell className="wideStudentShell trainingSetupPage">
       <button className="back" onClick={()=>go("train")}>← Voltar</button>
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
-      <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null)}}>{year}</button>)}</div>
-      <h3>2. Matéria</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>setPracticeDomain(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+coverage.byDomain[row.id]+" perguntas iniciais"}</small></button>)}</div>
-      <button className="primary" disabled={!practiceDomain||coverage.byDomain[practiceDomain]<7} onClick={startPractice}>Começar treino · 8 perguntas</button>
+      <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeSubtopic(null)}}>{year}</button>)}</div>
+      <h3>2. Matéria</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>{setPracticeDomain(row.id);setPracticeSubtopic(null)}}><b>{row.shortTitle}</b><small>{row.area+" · "+coverage.byDomain[row.id]+" perguntas"}</small></button>)}</div>
+      {practiceDomain&&<><h3>3. Submatéria</h3><div className="chips fqaSubtopicChips"><button type="button" className={!practiceSubtopic?"sel":""} onClick={()=>setPracticeSubtopic(null)}>Misturar matéria</button>{subtopics.map(row=><button type="button" key={row.id} className={practiceSubtopic===row.id?"sel":""} onClick={()=>setPracticeSubtopic(row.id)}>{row.label} · {coverage.bySubtopic[row.id]||0}</button>)}</div></>}
+      {practiceSubtopic&&availableInSelection<7&&<div className="notice"><b>Banco desta submatéria ainda em expansão</b><span>Podes treiná-la quando tiver pelo menos 7 perguntas diferentes; entretanto usa “Misturar matéria”.</span></div>}
+      <button className="primary" disabled={!practiceDomain||availableInSelection<7} onClick={startPractice}>Começar treino · 8 perguntas</button>
     </Shell>;
   }
 
