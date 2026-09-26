@@ -71,6 +71,8 @@ for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS){
 
 
 assert.equal(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.examYear,2026);
+assert.deepEqual(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.historicalComparison.years,[2024,2025,2026]);
+assert.ok(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.historicalComparison.stablePatterns.length>=4,"A política deve comparar padrões recorrentes dos três exames mais recentes.");
 assert.equal(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.totalPoints,200);
 assert.deepEqual(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.itemSelectionPolicy,{mandatoryItems:15,optionalItems:8,optionalCounted:4,mandatorySubtotal:160,optionalCountedSubtotal:40});
 assert.equal(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.durationMinutes,120);
