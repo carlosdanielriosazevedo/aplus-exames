@@ -1864,9 +1864,9 @@ function Progress({s,go}){
 function Exams({s,go,startMini}){
   if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
   const last=s.lastExam;
-  const miniQuestions=buildMiniExam(s,8);
+  const miniQuestions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
   const miniAvailable=miniQuestions.length;
-  const miniReady=miniAvailable>=8;
+  const miniReady=miniAvailable>=MATH_MINI_EXAM_QUESTIONS;
   const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
@@ -1874,9 +1874,9 @@ function Exams({s,go,startMini}){
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~15–20 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
-    {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
+    {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
     <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
@@ -1895,7 +1895,7 @@ function MiniExamIntro({session,go}){
     <p className="muted">Este Mini-exame combina seleção e resposta construída, aproximando o treino do formato real da prova.</p>
     <div className="examIntroGrid">
       <div><span>📝</span><b>{selection} seleção + {constructed} construção</b><small>{maxPoints} pontos · ponderação 30/70</small></div>
-      <div><span>⏱</span><b>~15–20 min</b><small>Podes avançar ao teu ritmo</small></div>
+      <div><span>⏱</span><b>~25–30 min</b><small>12 itens · podes avançar ao teu ritmo</small></div>
       <div><span>📚</span><b>{years.join(' · ')}</b><small>Cobertura transversal</small></div>
     </div>
     <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas respostas construídas, desenvolve a resolução etapa a etapa: cada uma tem cotação própria. Não mostramos a correção durante a prova.</span></div>
