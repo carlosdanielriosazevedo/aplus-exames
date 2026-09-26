@@ -878,7 +878,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     <button className="primary" onClick={retryRecovery}>Tentar novamente</button></Shell>;
 
   return <Shell>
-    <div className="focusTop"><button type="button" onClick={()=>go("diag")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.max(8,estimate)}%`}}/></div><span>Diagnóstico</span></div>
+    <StudySessionHeader progress={Math.max(8,estimate)} label="Diagnóstico" onExit={()=>go("diag")}/>
     {saveError&&<div className="notice warning"><b>Estamos a conservar o teu progresso</b><span>Tenta continuar novamente. A resposta guardada não será repetida.</span></div>}
     <p className="questionContext">{theme(current.themeId).short}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
@@ -891,6 +891,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {!fb
       ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
       :<button className="primary" onClick={next}>Próxima pergunta →</button>}
+    <button className="pauseLink" onClick={()=>go("diag")}>Guardar e continuar depois</button>
   </Shell>
 }
 
