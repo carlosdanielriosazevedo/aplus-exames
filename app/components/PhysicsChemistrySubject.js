@@ -76,9 +76,15 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     start("mini_exam",[...ten,...eleven],"Mini-exame · Modelo 1");
   }
 
+  function answerReady(item){
+    if(item.responseType==="multiple-choice")return Number.isInteger(answer);
+    if(item.responseType==="stepwise")return Object.values(answer?.steps||{}).some(value=>String(value??"").trim().length>0);
+    return String(answer??"").trim().length>0;
+  }
+
   function submit(){
     const item=session.items[session.current];
-    if(!Number.isInteger(answer))return;
+    if(!answerReady(item))return;
     const result=gradePhysicsChemistryResponse(item,answer);
     const nextResults=[...results,result];
     setFeedback(result);setResults(nextResults);
@@ -125,8 +131,18 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       <div className="trainingScopeNote"><b>{item.year+" · "+domain?.area}</b><span>{domain?.title}</span></div>
       <div className="questionCard">
         <h2>{item.prompt}</h2>
-        <div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>
-        {!feedback?<button className="primary" disabled={!Number.isInteger(answer)} onClick={submit}>Responder</button>:<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span><button className="primary" onClick={next}>{position===session.items.length?"Terminar":"Seguinte"}</button></div>}
+        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>}
+        {item.responseType==="stepwise"&&<div className="fqaStepwise">
+          <div className="notice"><b>Resposta construída por etapas</b><span>No exame nacional, apresentar apenas o resultado final pode não ser suficiente. Regista o teu raciocínio etapa a etapa.</span></div>
+          {item.steps.map((step,index)=><label className="fqaStep" key={step.id}><span><b>{"Etapa "+(index+1)+" · "+step.label}</b><small>{step.unit?"Unidade esperada: "+step.unit:"Escreve a relação ou resultado pedido."}</small></span><input disabled={!!feedback} value={answer?.steps?.[step.id]||""} onChange={event=>setAnswer(current=>({...(current&&typeof current==="object"?current:{}),steps:{...(current?.steps||{}),[step.id]:event.target.value}}))} placeholder={step.type==="numeric"?"Valor numérico":"Expressão ou relação"}/></label>)}
+        </div>}
+        {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
+        {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
+          {item.responseType==="multiple-choice"&&<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span></div>}
+          {item.responseType==="stepwise"&&<div className="fqaConstructedReview"><div className="notice"><b>{"Correção provisória · "+feedback.provisionalPoints+"/"+feedback.maxPoints+" pontos de treino"}</b><span>{feedback.note}</span></div>{feedback.steps.map((step,index)=><div className={"fqaStepReview "+(step.correct?"ok":"review")} key={step.id}><b>{"Etapa "+(index+1)+" · "+(step.correct?"correta":"a rever")}</b><span>{"Referência: "+step.expected}</span></div>)}<p className="muted">No exame oficial são aceites processos cientificamente corretos alternativos e aplicam-se regras próprias a erros numéricos, analíticos, unidades e dependência entre etapas.</p></div>}
+          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><ul>{(item.criteria||[]).map(criterion=><li key={criterion}>{criterion}</li>)}</ul><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
+          <button className="primary" onClick={next}>{position===session.items.length?"Terminar":"Seguinte"}</button>
+        </>}
       </div>
     </Shell>;
   }
