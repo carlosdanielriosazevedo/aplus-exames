@@ -563,7 +563,17 @@ const FAM=[
   mc({id:"PT639-LIT-FAM-014",year:"12.º",work:"familias-desavindas",competencyId:"pt-literatura-voz",stimulus:"O conto usa economia narrativa para construir uma situação coletiva complexa sem depender de grande extensão.",prompt:"Que característica do género conto se evidencia?",options:["Concentração de personagens, conflito e efeito.","Necessidade de múltiplos volumes.","Ausência de desfecho.","Eliminação de qualquer contexto."],answerIndex:0,explanation:"A concentração formal permite desenvolver rapidamente uma situação significativa e conduzi-la a um efeito crítico e humorístico."})
 ];
 
-export const PORTUGUESE_LITERARY_ITEMS=[...TROV,...FERN,...GIL,...CAM,...LUS,...VIE,...FLS,...VMT,...ABO,...AP,...MAI,...MAI_PLUS,...RAM,...ANT,...CES,...JSN,...EAN,...ALA,...SEC,...GEO,...FAM,...PES,...PES_PLUS,...HET,...HET_PLUS,...MSG,...RRE,...RRE_PLUS,...MEM,...MEM_PLUS];
+function balancedLiteraryOptions(item){
+  if(item.responseType!=="multiple-choice"||!Array.isArray(item.options)||item.options.length!==4)return item;
+  const seed=[...String(item.id)].reduce((sum,char)=>sum+char.charCodeAt(0),0);
+  const shift=seed%4;
+  if(shift===0)return item;
+  const correct=item.options[item.answerIndex];
+  const options=item.options.map((_,index)=>item.options[(index+shift)%4]);
+  return {...item,options,answerIndex:options.indexOf(correct)};
+}
+
+export const PORTUGUESE_LITERARY_ITEMS=[...TROV,...FERN,...GIL,...CAM,...LUS,...VIE,...FLS,...VMT,...ABO,...AP,...MAI,...MAI_PLUS,...RAM,...ANT,...CES,...JSN,...EAN,...ALA,...SEC,...GEO,...FAM,...PES,...PES_PLUS,...HET,...HET_PLUS,...MSG,...RRE,...RRE_PLUS,...MEM,...MEM_PLUS].map(balancedLiteraryOptions);
 
 export function portugueseLiteraryItemsForWork(workId){
   return PORTUGUESE_LITERARY_ITEMS.filter(item=>item.literaryWorkId===workId);
