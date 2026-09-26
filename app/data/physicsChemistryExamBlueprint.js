@@ -4,7 +4,7 @@ const itemById=id=>PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id);
 
 const mandatory=[
   ["FQA-AUTH-ELEM-G1",10],["FQA-C-ELEM-01",12],["FQA-AUTH-MAT-D1",10],["FQA-R-MAT-01",14],
-  ["FQA-AUTH-ENE-G1",10],["FQA-C-ENE-01",10],["FQA-W2Q10-THERM-01",10],
+  ["FQA-AUTH-ENE-G1",10],["FQA-C-ENE-01",10],["FQA-DATA-ENE-01",10],
   ["FQA-AUTH-MEC-D1",10],["FQA-C-MEC-01",10],["FQA-AUTH-WAV-G1",10],["FQA-R-WAV-01",14],
   ["FQA-AUTH-EQ-G1",10],["FQA-C-EQ-01",10],["FQA-AUTH-AQ-D1",10],["FQA-R-AQ-01",10]
 ];
