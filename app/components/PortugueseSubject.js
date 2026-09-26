@@ -127,6 +127,14 @@ function PortugueseSubject({s,setS,go,view="home"}){
     start("training",mission.items,labelParts.join(" · "),domain);
   }
 
+  function startWritingTask(year,competencyId=null){
+    const candidates=practiceItems.filter(item=>item.year===year&&item.domain==="escrita"&&item.responseType==="extended-writing"&&(!competencyId||item.competencyId===competencyId));
+    if(!candidates.length)return;
+    const recentIds=new Set((progress.sessions||[]).slice(-4).flatMap(row=>row.itemIds||[]));
+    const item=candidates.find(row=>!recentIds.has(row.id))||candidates[0];
+    start("practice",[item],"Produção escrita longa · "+year,"escrita");
+  }
+
   function selectMiniExam(id){
     const sessionName=id==="full-1"?"simulado completo":"Mini-exame";
     if(progress.lastPosition&&!window.confirm(`Tens uma sessão de Português em pausa. Começar o ${sessionName} substitui essa retoma. Queres continuar?`))return;
@@ -198,6 +206,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   if(!session&&view==="trainingSetup"){
     const practiceYearItems=practiceItems.filter(item=>item.year===practiceYear);
     const practiceYearCoverage=portugueseCoverage(practiceYearItems);
+    const writingTasks=practiceYearItems.filter(item=>item.domain==="escrita"&&item.responseType==="extended-writing");
     const literaryWorks=portugueseLiteraryWorksForYear(practiceYear).map(work=>({
       ...work,
       count:practiceYearItems.filter(item=>item.literaryWorkId===work.id&&item.responseType!=="extended-writing").length
@@ -225,6 +234,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       </>:<>
         <button type="button" className="back" onClick={()=>{if(practiceLiteraryWorkId)setPracticeLiteraryWorkId(null);else setPracticeDomain(null)}}>← {practiceLiteraryWorkId?"Todas as obras":"Todas as áreas"}</button>
         <div className="sectionIntro compact"><p className="eyebrow">{practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:PORTUGUESE_DOMAIN_LABELS[practiceDomain]} · {practiceYear}</p><h2>3. Que competência queres trabalhar?</h2></div>
+        {practiceDomain==="escrita"&&writingTasks.length>0&&<button type="button" className="writingPracticeAction" onClick={()=>startWritingTask(practiceYear)}><span>✍️</span><div><b>Produção escrita longa</b><small>{writingTasks.length} propostas · 200–300 palavras · revisão por critérios</small></div><em>→</em></button>}
         <div className="themeGrid">{practiceCompetencies.map(row=><button key={row.id} disabled={row.count<7} onClick={()=>startPractice(practiceDomain,practiceYear,row.id,practiceLiteraryWorkId)}><b>{row.label}</b><small>{row.count>=7?`7 perguntas adaptadas · ${row.count} disponíveis`:`Cobertura insuficiente · ${row.count}/7`}</small></button>)}</div>
         <button className="primary" disabled={(practiceLiteraryWorkId?competencySourceItems.filter(item=>item.responseType!=="extended-writing").length:practiceYearCoverage.missionEligibleByDomain[practiceDomain])<7} onClick={()=>startPractice(practiceDomain,practiceYear,null,practiceLiteraryWorkId)}>Praticar {practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:`toda a área · ${PORTUGUESE_DOMAIN_LABELS[practiceDomain]}`}</button>
       </>}
