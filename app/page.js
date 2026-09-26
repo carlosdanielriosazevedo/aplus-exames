@@ -12,6 +12,7 @@ import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,Fri
 import MathReviewMatter from "./components/MathReviewMatter";
 import PhysicsChemistrySubject from "./components/PhysicsChemistrySubject";
 import PhysicsChemistryExam from "./components/PhysicsChemistryExam";
+import PhysicsChemistryMiniExam from "./components/PhysicsChemistryMiniExam";
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
@@ -313,6 +314,8 @@ export default function App(){
   if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="reviewMatter"/>;
   if(screen==="reviewMatter"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="reviewMatter"/>;
   if(screen==="physicsChemistryExam"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryExam s={s} setS={setS} go={go}/>;
+  if(screen==="physicsChemistryMini1"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryMiniExam modelId="fqa-mini-1" s={s} setS={setS} go={go}/>;
+  if(screen==="physicsChemistryMini2"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryMiniExam modelId="fqa-mini-2" s={s} setS={setS} go={go}/>;
   if(screen==="reviewMatter")return <MathReviewMatter s={s} go={go}/>;
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
