@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useMemo,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
@@ -34,6 +34,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   const [review,setReview]=useState(false);
   const [startedAt]=useState(Date.now);
   const [now,setNow]=useState(Date.now);
+  const recordedRef=useRef(false);
   const item=exam.items[index];
   const answeredCount=exam.items.filter(row=>filled(row,answers[row.id])).length;
   const elapsed=Math.floor((now-startedAt)/1000);
@@ -44,7 +45,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     const timer=window.setInterval(()=>setNow(Date.now()),1000);
     return ()=>window.clearInterval(timer);
   },[review]);
-  useEffect(()=>{if(remaining===0&&!review)setReview(true)},[remaining,review]);
+  useEffect(()=>{if(remaining===0&&!review)finish()},[remaining,review]);
 
   const results=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
   const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");
@@ -59,6 +60,8 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   }
   function finish(){
     setReview(true);
+    if(recordedRef.current)return;
+    recordedRef.current=true;
     setS(prev=>recordSubjectSession(prev,{
       subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+Date.now()
     }));
