@@ -17,8 +17,8 @@ export default function PortugueseLearnPanel({schoolYear="12.º"}){
   const guide=unit?.guide||null;
 
   return <section id="portugueseLearn" className="progressDetails" aria-label="Rever matéria de Português">
-    <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h2>Matéria de Português, organizada para estudar.</h2></div>
-    <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe o ano e abre exatamente a obra ou competência que queres consolidar.</p>
+    <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Português para estudar com calma.</h1></div>
+    <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe uma matéria para ler, consolidar ideias e preparar respostas com mais segurança.</p>
     <div className="notice"><b>Modo de estudo</b><span>Rever matéria serve apenas para ler e consolidar conteúdos. Quando quiseres testar-te, regressa ao menu e escolhe “Praticar”.</span></div>
     <div className="chips yearSelector" aria-label="Escolher ano de Português">{years.map(row=><button type="button" key={row.year} className={year===row.year?"sel":""} aria-pressed={year===row.year} onClick={()=>{setYear(row.year);setUnitId(null)}}>{row.label}</button>)}</div>
     {yearRow&&<>
