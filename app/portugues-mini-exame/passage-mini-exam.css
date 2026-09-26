@@ -8,3 +8,53 @@
 .ptx-exam-disclaimer{margin:7px 0 0;color:#68758a;font-size:13px;line-height:1.4}.ptx-timer{display:grid;gap:2px;min-width:126px;padding:9px 12px;border:1px solid #d7dde5;border-radius:12px;background:#fff;text-align:center}.ptx-timer span{font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#68758a}.ptx-timer strong{font-variant-numeric:tabular-nums;font-size:18px}.ptx-timer.is-warning{border-color:#cf8e80;background:#fff0ed;color:#9a3826}.ptx-timer.is-warning span{color:#9a3826}@media(max-width:820px){.ptx-header{flex-direction:column}.ptx-header-actions{width:100%;flex-wrap:wrap}.ptx-timer{flex:1;text-align:left}.ptx-progress-copy{margin-left:auto}}
 
 .ptx-exam-policy{margin:16px 0;padding:14px 16px;border:1px solid #f1c66e;border-radius:14px;background:#fff8df;display:grid;gap:5px}.ptx-exam-policy strong{font-size:14px}.ptx-exam-policy p,.ptx-exam-policy span{margin:0;color:#5f6672;font-size:13px;line-height:1.45}.ptx-classification-badge{display:inline-flex;width:max-content;margin:0 0 10px;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.02em}.ptx-classification-badge.is-mandatory{background:#eef4ff;color:#264f8f}.ptx-classification-badge.is-optional{background:#fff3cf;color:#8a5b00}.ptx-timer small{font-size:9px;color:#7b8492}.ptx-timer.is-tolerance{border-color:#e2ad43;background:#fff8df}.ptx-timer.is-tolerance span,.ptx-timer.is-tolerance small{color:#8a5b00}
+
+
+/* APProva+ Design System v1.1 — Português em contexto de prova */
+.ptx-shell{background:#f5f7f8;color:#13263a;max-width:1440px;padding:28px 32px 42px}
+.ptx-kicker{color:#a85d00}
+.ptx-progress{background:#e7ecef}.ptx-progress span{background:#ffb224}
+.ptx-header h1{color:#102b42}
+.ptx-question-nav{display:flex;align-items:flex-end;gap:14px;margin:18px 0 24px;padding:12px 14px;border:1px solid #e3e9ed;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(16,43,66,.05)}
+.ptx-nav-group{display:grid;gap:6px}.ptx-nav-group-label{font-size:10px;font-weight:950;letter-spacing:.07em;text-transform:uppercase;color:#7a8793}
+.ptx-nav-group>div{display:flex;gap:6px;flex-wrap:wrap}
+.ptx-question-nav button{border-color:#dce4e8;background:#fff;color:#24384a;border-radius:10px}
+.ptx-question-nav button.is-answered{border-color:#e6b653;background:#fff5dd}
+.ptx-question-nav button.is-active{outline:3px solid rgba(255,178,36,.35);background:#102b42;color:#fff}
+.ptx-question-nav button.is-optional:not(.is-active){border-style:dashed}
+.ptx-question-nav button.is-optional::after{content:"";display:block;width:4px;height:4px;border-radius:50%;background:#a85d00;margin:2px auto 0}
+.ptx-passage{top:18px;background:#fff;border-color:#e3e9ed;border-radius:20px;box-shadow:0 12px 32px rgba(16,43,66,.08)}
+.ptx-passage::before{content:"TEXTO";display:block;font-size:10px;font-weight:950;letter-spacing:.1em;color:#8d99a6;margin-bottom:8px}
+.ptx-passage-label{color:#a85d00}.ptx-passage p{color:#263b4c}
+.ptx-question-card{border-color:#e3e9ed;border-radius:20px;box-shadow:0 12px 32px rgba(16,43,66,.08)}
+.ptx-question-meta{color:#68798a}.ptx-question-meta span:first-child{color:#102b42}
+.ptx-options button{border-color:#dfe6ea}.ptx-options button.is-selected{border-color:#ffb224;background:#fff7e6;box-shadow:0 0 0 2px rgba(255,178,36,.15)}
+.ptx-options button.is-selected span{background:#ffb224;color:#102b42}
+.ptx-primary{border-color:#102b42;background:#102b42;color:#fff}.ptx-primary:hover:not(:disabled){background:#173d5b}
+.ptx-ghost{border-color:#d7e0e5;color:#102b42}
+.ptx-classification-badge.is-mandatory{background:#eef3f6;color:#29465d}.ptx-classification-badge.is-optional{background:#fff1d6;color:#865000}
+.ptx-summary{gap:0;border:1px solid #e3e9ed;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 8px 24px rgba(16,43,66,.05)}
+.ptx-summary div{border:0;border-radius:0;border-left:1px solid #e8edef;background:transparent}
+.ptx-summary div:first-child{border-left:0}.ptx-summary strong{color:#102b42}
+.ptx-review-block{border-color:#e3e9ed}.ptx-review-passage{background:#f7fafb;border-bottom:1px solid #e3e9ed}
+.ptx-self-assessment{border-color:#e3e9ed;background:#f8fafb}
+.ptx-exam-policy{border-color:#eed08f;background:#fff8e8}
+.ptx-timer{border-color:#dce4e8}
+@media(min-width:1100px){
+  .ptx-workspace{grid-template-columns:minmax(420px,.9fr) minmax(520px,1.1fr);gap:28px}
+  .ptx-question-card{position:sticky;top:18px}
+}
+@media(max-width:820px){
+  .ptx-shell{padding:14px;background:#fff}
+  .ptx-question-nav{align-items:flex-start;overflow-x:auto;flex-wrap:nowrap;padding:10px;margin:14px 0 18px}
+  .ptx-nav-group{flex:0 0 auto}
+  .ptx-question-nav button{width:34px;height:36px}
+  .ptx-summary{grid-template-columns:1fr 1fr}
+  .ptx-summary div{border-left:0;border-top:1px solid #e8edef}
+  .ptx-summary div:nth-child(-n+2){border-top:0}
+}
+@media(max-width:480px){
+  .ptx-summary{grid-template-columns:1fr}
+  .ptx-summary div,.ptx-summary div:nth-child(-n+2){border-top:1px solid #e8edef}
+  .ptx-summary div:first-child{border-top:0}
+}

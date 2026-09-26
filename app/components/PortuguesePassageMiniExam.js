@@ -142,6 +142,18 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
 
   const currentResults=buildResults();
   const fullClassification=isFullExam?classifyPortugueseFullExamResults(currentResults):null;
+  const navigationGroups=useMemo(()=>{
+    const groups=[];
+    exam.items.forEach((row,rowIndex)=>{
+      const raw=String(row.passageTitle||"").split("—")[0].trim();
+      const label=isFullExam?(raw||"Prova"):"Questões";
+      const last=groups.at(-1);
+      if(last?.label===label)last.items.push({row,rowIndex});
+      else groups.push({label,items:[{row,rowIndex}]});
+    });
+    return groups;
+  },[exam.items,isFullExam]);
+
   const fullItemLabel=id=>{
     const row=exam.items.find(candidate=>candidate.id===id);
     const group=String(row?.passageTitle||"").split("—")[0].trim()||"Item";
@@ -277,12 +289,12 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""} ${inTolerance?"is-tolerance":""}`} aria-live="polite"><span>{inTolerance?"Tolerância":"Tempo de prova"}</span><strong>{formatRemainingTime(remainingSeconds)}</strong>{isFullExam&&<small>{inTolerance?"tolerância em curso":"depois: +30 min de tolerância"}</small>}</div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
-    <nav className="ptx-question-nav" aria-label="Navegação entre questões">{exam.items.map((row,rowIndex)=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para questão ${rowIndex+1}`}>{rowIndex+1}</button>)}</nav>
+    <nav className={`ptx-question-nav ${isFullExam?"is-full-exam":""}`} aria-label="Navegação entre questões">{navigationGroups.map(group=><div className="ptx-nav-group" key={group.label}><span className="ptx-nav-group-label">{group.label}</span><div>{group.items.map(({row,rowIndex})=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""} ${isFullExam&&row.classificationMode==="best-of-five"?"is-optional":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para ${isFullExam?`${group.label}, item ${row.groupItemNumber??rowIndex+1}`:`questão ${rowIndex+1}`}`}>{isFullExam?(row.groupItemNumber??rowIndex+1):(rowIndex+1)}</button>)}</div></div>)}</nav>
     <button className="ptx-mobile-text-toggle" onClick={()=>setMobileTextOpen(current=>!current)}>{mobileTextOpen?"Fechar texto":"Ver texto-base"}</button>
     <div className="ptx-workspace">
-      <aside className={`ptx-passage ${mobileTextOpen?"is-mobile-open":""}`}><span className="ptx-passage-label">Texto-base · questões {exam.items.indexOf(block.items[0])+1}–{exam.items.indexOf(block.items.at(-1))+1}</span><h2>{block.title}</h2><p>{block.passageText}</p></aside>
+      <aside className={`ptx-passage ${mobileTextOpen?"is-mobile-open":""}`}><span className="ptx-passage-label">{isFullExam?`${String(item.passageTitle||"").split("—")[0].trim()} · texto-base`:`Texto-base · questões ${exam.items.indexOf(block.items[0])+1}–${exam.items.indexOf(block.items.at(-1))+1}`}</span><h2>{block.title}</h2><p>{block.passageText}</p></aside>
       <section className="ptx-question-card">
-        <div className="ptx-question-meta"><span>Questão {index+1}</span><span>{item.responseType==="multiple-choice"?"Escolha múltipla":item.responseType==="extended-writing"?"Produção escrita":"Resposta restrita"}</span></div>{isFullExam&&<div className={`ptx-classification-badge ${item.classificationMode==="best-of-five"?"is-optional":"is-mandatory"}`}>{item.classificationMode==="best-of-five"?"Item opcional · contam os 3 melhores de 5":"Item obrigatório"}</div>}<h2>{item.prompt}</h2>
+        <div className="ptx-question-meta"><span>{isFullExam?`${String(item.passageTitle||"").split("—")[0].trim()} · Item ${item.groupItemNumber??index+1}`:`Questão ${index+1}`}</span><span>{item.responseType==="multiple-choice"?"Escolha múltipla":item.responseType==="extended-writing"?"Produção escrita":"Resposta restrita"}</span></div>{isFullExam&&<div className={`ptx-classification-badge ${item.classificationMode==="best-of-five"?"is-optional":"is-mandatory"}`}>{item.classificationMode==="best-of-five"?"Item opcional · contam os 3 melhores de 5":"Item obrigatório"}</div>}<h2>{item.prompt}</h2>
         {item.responseType==="multiple-choice"?<div className="ptx-options">{item.options.map((option,optionIndex)=><button key={optionIndex} className={answers[item.id]===optionIndex?"is-selected":""} onClick={()=>setAnswer(optionIndex)}><span>{String.fromCharCode(65+optionIndex)}</span>{option}</button>)}</div>:<div className="ptx-open-editor">
           {activeWritingFocus.available&&!dismissedWritingFocus[item.id]&&<aside className="ptx-memory-focus" aria-label="Foco antes de responder">
             <div className="ptx-memory-focus-head"><div><span>Memória de escrita</span><strong>Antes de responder, escolhe 1–2 pontos para vigiar</strong></div><button type="button" onClick={()=>setDismissedWritingFocus(current=>({...current,[item.id]:true}))}>Ocultar</button></div>
