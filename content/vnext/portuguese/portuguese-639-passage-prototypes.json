@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 3,
+  "version": 4,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -77,18 +77,53 @@
               {
                 "id": "conteudo",
                 "label": "Explica a progressão entre a situação inicial, a intervenção e a conclusão.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica a progressão entre a situação inicial, a intervenção e a conclusão."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois elementos pertinentes do texto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
-          "difficultyTarget": 3
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     },
@@ -142,18 +177,53 @@
               {
                 "id": "conteudo",
                 "label": "Explica a casa como espaço de memória e como objeto de separação.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica a casa como espaço de memória e como objeto de separação."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois elementos pertinentes do excerto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
-          "difficultyTarget": 3
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         },
         {
           "id": "PT639-PASSAGE-LIT-001-Q3",
