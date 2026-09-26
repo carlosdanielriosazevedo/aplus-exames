@@ -9,6 +9,74 @@ const WORK_UNIT_IDS={
 };
 
 const DEEP_DIVES={
+  "poesia-trovadoresca":{
+    overview:"A poesia trovadoresca deve ser lida como uma situação de voz e relação: quem fala, a quem fala, em que circunstância e com que efeito. A forma repetitiva não é decorativa; refrão e paralelismo organizam emoção, insistência e expectativa.",
+    connections:["Nas cantigas de amigo, observar a voz feminina construída e a relação com amigas, mãe, natureza ou amado ausente.","Nas cantigas de amor, relacionar submissão amorosa, distância e idealização com a posição do sujeito.","Nas cantigas de escárnio e maldizer, distinguir ironia indireta de ataque explícito e ligar linguagem a intenção crítica."]
+  },
+  "fernao-lopes-djoao-i":{
+    overview:"Na Crónica de D. João I, Fernão Lopes transforma acontecimentos históricos em narrativa viva. A atenção ao povo, à ação coletiva e ao movimento das cenas permite perceber como a História é construída por indivíduos e comunidades.",
+    connections:["Distinguir informação histórica de processos narrativos que intensificam a cena.","Observar enumeração, discurso direto, ritmo e detalhe sensorial na criação de vivacidade.","Relacionar representação do povo com legitimidade política e memória coletiva."]
+  },
+  "gil-vicente-teatro":{
+    overview:"No teatro vicentino, o cómico serve frequentemente para tornar visíveis vícios, interesses e contradições sociais. As personagens funcionam como indivíduos em cena, mas também como tipos reconhecíveis por linguagem, comportamento e estatuto.",
+    connections:["Distinguir cómico de caráter, situação e linguagem a partir do efeito produzido.","Relacionar o percurso das personagens com crítica de costumes e valores sociais.","Ler diálogo, entradas, saídas e didascálias como elementos da construção dramática."]
+  },
+  "camoes-rimas":{
+    overview:"Nas Rimas, a experiência amorosa cruza-se com consciência da mudança, desconcerto e instabilidade. A forma lírica organiza o pensamento: contrastes, paradoxos, imagens e progressão argumentativa tornam visível a tensão entre desejo e limite.",
+    connections:["Relacionar amor idealizado, ausência e conflito interior sem reduzir o poema a autobiografia.","Observar antíteses e paradoxos como formas de pensar mudança e contradição.","Ligar organização estrófica e sintática ao desenvolvimento do raciocínio poético."]
+  },
+  "os-lusiadas-reflexoes":{
+    overview:"As reflexões do Poeta interrompem a ação épica para avaliar mérito, ambição, risco, reconhecimento e experiência humana. A obra celebra feitos, mas não elimina a crítica: é precisamente essa tensão que torna a visão épica mais complexa.",
+    connections:["Distinguir episódio narrado de comentário reflexivo do Poeta.","Relacionar experiência, esforço e glória com os custos humanos da ação.","Explicar como interpelações, perguntas e generalizações reforçam a dimensão ética e cívica."]
+  },
+  "sermao-santo-antonio":{
+    overview:"O Sermão de Santo António aos Peixes constrói uma argumentação alegórica: falar dos peixes permite criticar comportamentos humanos. A eficácia depende da progressão entre louvor, censura, exemplos e recursos retóricos.",
+    connections:["Identificar tese, sequência argumentativa e função de exemplos.","Relacionar características dos peixes com os comportamentos humanos criticados.","Explicar efeitos de apóstrofe, interrogação, antítese e repetição na persuasão."]
+  },
+  "frei-luis-de-sousa":{
+    overview:"Frei Luís de Sousa concentra a ação num conflito familiar em que o passado regressa e destrói a estabilidade do presente. Presságios, espaços, memória e revelações estreitam progressivamente as possibilidades das personagens até ao desfecho trágico.",
+    connections:["Relacionar Madalena, Manuel, Maria, Telmo e D. João com formas diferentes de viver o passado e a identidade.","Observar presságios, datas, retratos e mudanças de espaço como elementos de antecipação e simbolização.","Explicar como contexto histórico, unidade da ação e reconhecimento do Romeiro intensificam a dimensão trágica."]
+  },
+  "viagens-minha-terra":{
+    overview:"Em Viagens na Minha Terra, a viagem real convive com digressões, comentário político e narrativa sentimental. O narrador intervém, conversa com o leitor e usa a deslocação pelo país como ponto de partida para pensar identidade e sociedade.",
+    connections:["Distinguir relato de viagem, digressão e narrativa de Carlos e Joaninha.","Relacionar narrador interventivo com ironia e comentário político-cultural.","Ler espaço e deslocação como formas de pensar Portugal e os seus conflitos."]
+  },
+  "a-abobada":{
+    overview:"A Abóbada dramatiza o conflito entre mérito, autoria e poder através de Mestre Afonso Domingues. O episódio histórico é trabalhado como confronto entre reconhecimento pessoal, honra e autoridade.",
+    connections:["Caracterizar Afonso Domingues pela relação entre competência, orgulho e dignidade.","Relacionar a abóbada com prova de mérito e reconhecimento.","Distinguir historicidade de dramatização literária do episódio."]
+  },
+  "amor-perdicao":{
+    overview:"Amor de Perdição constrói uma paixão submetida a conflito familiar, honra e fatalidade. A intensidade emocional nasce tanto das escolhas das personagens como de uma estrutura narrativa que estreita progressivamente as possibilidades de saída.",
+    connections:["Relacionar Simão e Teresa com conflito entre vontade individual e ordem familiar.","Observar o papel de Mariana na complexificação afetiva e ética do romance.","Analisar narrador, antecipação e concentração temporal na construção da fatalidade."]
+  },
+  "os-maias":{
+    overview:"Os Maias articula drama familiar e crítica da sociedade portuguesa oitocentista. Personagens, espaços, episódios sociais e ironia constroem um retrato de hábitos, ambições e fracassos individuais e coletivos.",
+    connections:["Relacionar Carlos, Ega e outras figuras com ambientes e valores sociais.","Ler espaços como o Ramalhete e os salões como elementos simbólicos e sociais.","Identificar ironia do narrador e contraste entre projeto, aparência e resultado."]
+  },
+  "ilustre-casa-ramires":{
+    overview:"A Ilustre Casa de Ramires confronta Gonçalo com a memória da linhagem e com as exigências do presente. A escrita de uma narrativa histórica dentro do romance permite comparar heroísmo ancestral, fragilidade individual e construção de identidade.",
+    connections:["Relacionar Gonçalo com contradições entre ambição, hesitação e desejo de reconhecimento.","Observar o contraste entre passado glorioso e presente problemático.","Analisar ironia e narrativa encaixada como instrumentos de leitura da personagem."]
+  },
+  "antero-sonetos":{
+    overview:"Nos sonetos de Antero, o pensamento avança por tensão, pergunta e procura de resposta. O conflito interior e existencial organiza-se formalmente: a estrutura do soneto acompanha muitas vezes uma mudança de perspetiva ou tentativa de conclusão.",
+    connections:["Relacionar conflito interior com procura de sentido e consciência do limite.","Observar como quartetos e tercetos organizam desenvolvimento e viragem do pensamento.","Explicar o efeito de personificação, antítese e abstração filosófica no poema."]
+  },
+  "cesario-ocidental":{
+    overview:"O Sentimento dum Ocidental acompanha uma deambulação por Lisboa em que espaço, luz, corpos e atividade urbana se transformam em experiência sensorial e crítica social. O sujeito observa a cidade e, ao observá-la, revela também o seu estado interior.",
+    connections:["Seguir a progressão espacial e temporal ao longo das quatro partes.","Relacionar imagens urbanas com contraste social, doença, trabalho e desejo de evasão.","Observar enumeração, sinestesia e detalhe visual como base da imagética cesariana."]
+  },
+  "jorge-sena-poesia":{
+    overview:"Na poesia de Jorge de Sena, experiência pessoal, História e responsabilidade ética podem coexistir no mesmo gesto poético. A voz não se fecha no íntimo: interroga o mundo e a posição do sujeito perante ele.",
+    connections:["Relacionar memória individual com experiência histórica e coletiva.","Observar tom reflexivo e interventivo sem reduzir o poema a mensagem política.","Explicar como imagens e referências culturais alargam o campo de sentido."]
+  },
+  "eugenio-andrade-poesia":{
+    overview:"A poesia de Eugénio de Andrade procura intensidade através da depuração. Corpo, água, luz, matéria e natureza surgem em imagens sensoriais concisas, onde som, ritmo e escolha lexical têm um peso decisivo.",
+    connections:["Ler imagens sensoriais sem as transformar imediatamente em símbolos fixos.","Relacionar concisão verbal com intensidade emocional.","Observar musicalidade, repetição e associação de elementos naturais na construção do poema."]
+  },
+  "ana-luisa-amaral-poesia":{
+    overview:"Na poesia de Ana Luísa Amaral, o quotidiano pode abrir-se a questões de identidade, tradição, género e memória. A voz poética combina intimidade, inteligência crítica, ironia e diálogo com outros textos.",
+    connections:["Relacionar objetos e cenas quotidianas com questões mais amplas de identidade e experiência.","Observar ironia e mudança de tom como formas de questionar expectativas.","Reconhecer reescrita e intertextualidade sem depender de identificar uma referência externa para interpretar o poema."]
+  },
   "pessoa-ortonimo":{
     overview:"No Pessoa ortónimo, o poema encena uma consciência que se observa a sentir e a pensar. O fingimento não significa falsidade: é transformação estética da experiência, construída pela linguagem e pela forma.",
     connections:["Distinguir o eu biográfico da voz construída no poema.","Relacionar a dor de pensar com divisão, lucidez e perda da espontaneidade.","Ler sonho, infância e nostalgia como respostas à tensão entre consciência e felicidade."]
