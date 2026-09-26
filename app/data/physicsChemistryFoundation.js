@@ -1,3 +1,8 @@
+import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "./physicsChemistryConstructed.js";
+import {PHYSICS_CHEMISTRY_A_DATA_ITEMS} from "./physicsChemistryDataItems.js";
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1} from "./physicsChemistryCoverageWave1.js";
+import {physicsChemistrySubtopicIdForItem} from "./physicsChemistryTaxonomy.js";
+
 export const PHYSICS_CHEMISTRY_A_VERSION="2026.09-foundation-v1";
 
 export const PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES=[
@@ -96,11 +101,18 @@ const raw=[
 ["FQA-AQ-08","11.º","q11-aqueous","fqa-experimental","Numa titulação, enxaguar a bureta com a própria solução titulante antes de a encher ajuda a:",["evitar diluição indesejada do titulante por água residual","aumentar arbitrariamente a concentração","mudar o ponto de equivalência químico","eliminar a necessidade de ler volumes"],0,"O enxaguamento com titulante reduz a alteração da sua concentração por água residual na bureta."]
 ];
 
-export const PHYSICS_CHEMISTRY_A_ITEMS=raw.map(([id,year,domain,competencyId,prompt,options,answerIndex,explanation],index)=>({
+const PHYSICS_CHEMISTRY_A_SELECTION_ITEMS=raw.map(([id,year,domain,competencyId,prompt,options,answerIndex,explanation],index)=>({
   id,year,domain,competencyId,prompt,options,answerIndex,explanation,
   responseType:"multiple-choice",gradingMode:"deterministic",sourceOrigin:"original",reviewStatus:"prototype",
   difficultyTarget:1+(index%3),maxPoints:10
 }));
+
+export const PHYSICS_CHEMISTRY_A_ITEMS=[
+  ...PHYSICS_CHEMISTRY_A_SELECTION_ITEMS,
+  ...PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.map(item=>({...item,sourceOrigin:"original",reviewStatus:"prototype"})),
+  ...PHYSICS_CHEMISTRY_A_DATA_ITEMS,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1
+].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)}));
 
 export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id)||null}
 export function physicsChemistryDomainById(id){return PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===id)||null}
