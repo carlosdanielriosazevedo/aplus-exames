@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 2,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -25,14 +25,15 @@
           "prompt": "No quarto período, a expressão “Esse hábito” retoma sobretudo",
           "options": [
             "a associação entre rapidez de resposta e eficiência.",
-            "a criação de equipas com horários diferentes.",
-            "a necessidade de eliminar todas as urgências.",
-            "a organização de mensagens mais longas."
+            "a disponibilidade permanente criada pelas notificações.",
+            "a expectativa de responder a todas as mensagens assim que chegam.",
+            "a transformação da caixa de entrada num espaço presente ao longo de todo o dia."
           ],
           "answerIndex": 0,
           "explanation": "A expressão retoma a prática descrita imediatamente antes: responder rapidamente como sinal de eficiência.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-LEITURA-003-Q2",
@@ -45,15 +46,16 @@
           "cognitive": "interpretar",
           "prompt": "A referência a profissões em que esperar tem custos reais serve para",
           "options": [
-            "anular a proposta apresentada no texto.",
+            "mostrar que o modelo descrito depende de profissões em que a resposta pode ser adiada.",
             "reconhecer um limite e evitar generalizar a mesma solução a todos os contextos.",
-            "mostrar que as notificações devem ser obrigatórias em todas as equipas.",
-            "provar que a rapidez de resposta é sempre superior."
+            "distinguir situações em que a rapidez é necessária daquelas em que apenas parece eficiente.",
+            "reforçar que a organização da comunicação deve variar consoante o custo de esperar."
           ],
           "answerIndex": 1,
           "explanation": "O texto introduz uma concessão: a proposta pode ser útil sem ser universalmente aplicável.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-LEITURA-003-Q3",
@@ -85,7 +87,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     },
@@ -109,14 +112,15 @@
           "prompt": "A focalização narrativa permite sobretudo",
           "options": [
             "acompanhar a forma como Leonor reconhece distância entre a identidade presente e a jovem que escreveu o caderno.",
-            "conhecer diretamente o pensamento de várias personagens ausentes.",
-            "observar apenas ações exteriores sem acesso à interpretação de Leonor.",
-            "transformar o caderno num narrador autónomo."
+            "contrastar diretamente a perspetiva atual de Leonor com a voz da jovem através de dois narradores.",
+            "mostrar a distância temporal sem revelar a interpretação que Leonor faz das próprias palavras.",
+            "aproximar a leitura do caderno de uma reconstrução objetiva do passado da personagem."
           ],
           "answerIndex": 0,
           "explanation": "A narração acompanha a perceção de Leonor e a sua leitura do próprio passado, tornando central a distância entre duas versões de si.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-LIT-003-Q2",
@@ -129,15 +133,16 @@
           "cognitive": "interpretar",
           "prompt": "A imagem da chuva que “riscava o vidro em linhas oblíquas” contribui sobretudo para",
           "options": [
-            "introduzir um dado meteorológico sem relação com a cena.",
+            "criar uma imagem de instabilidade que contrasta com a permanência material do caderno.",
             "criar uma imagem de inscrição e passagem que dialoga com o gesto de escrever no caderno.",
-            "provar que Leonor pretende destruir o caderno.",
-            "indicar que a ação decorre durante uma tempestade violenta."
+            "sugerir que a chuva apaga simbolicamente as certezas presentes nas páginas antigas.",
+            "aproximar a paisagem exterior da hesitação de Leonor antes de retomar a escrita."
           ],
           "answerIndex": 1,
           "explanation": "As linhas da chuva aproximam visualmente o vidro de uma superfície escrita e reforçam a relação entre memória, inscrição e novo começo.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-PASSAGE-LIT-003-Q3",
@@ -169,7 +174,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     }
