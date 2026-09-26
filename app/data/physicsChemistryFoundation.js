@@ -1,3 +1,6 @@
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q11} from "./physicsChemistryCoverageWave2Q11.js";
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_F11} from "./physicsChemistryCoverageWave2F11.js";
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q10} from "./physicsChemistryCoverageWave2Q10.js";
 import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "./physicsChemistryConstructed.js";
 import {PHYSICS_CHEMISTRY_A_DATA_ITEMS} from "./physicsChemistryDataItems.js";
 import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1} from "./physicsChemistryCoverageWave1.js";
@@ -107,12 +110,24 @@ const PHYSICS_CHEMISTRY_A_SELECTION_ITEMS=raw.map(([id,year,domain,competencyId,
   difficultyTarget:1+(index%3),maxPoints:10
 }));
 
+function balancePhysicsChemistryChoicePosition(item){
+  if(item.responseType!=="multiple-choice"||!Array.isArray(item.options)||item.options.length!==4)return item;
+  const shift=[...String(item.id)].reduce((sum,char)=>sum+char.charCodeAt(0),0)%4;
+  if(shift===0)return item;
+  const correct=item.options[item.answerIndex];
+  const options=item.options.map((_,index)=>item.options[(index+shift)%4]);
+  return {...item,options,answerIndex:options.indexOf(correct)};
+}
+
 export const PHYSICS_CHEMISTRY_A_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_SELECTION_ITEMS,
   ...PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.map(item=>({...item,sourceOrigin:"original",reviewStatus:"prototype"})),
   ...PHYSICS_CHEMISTRY_A_DATA_ITEMS,
-  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1
-].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)}));
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q10,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_F11,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q11
+].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)})).map(balancePhysicsChemistryChoicePosition);
 
 export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id)||null}
 export function physicsChemistryDomainById(id){return PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===id)||null}
