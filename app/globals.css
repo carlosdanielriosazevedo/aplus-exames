@@ -804,3 +804,84 @@ body{background:var(--app-canvas);color:var(--app-ink)}
   .reviewStudyPage .progressDetails>.notice{font-size:14px}
   .reviewStudyPage .reviewChapter{padding:18px}
 }
+
+
+/* Design System v1.2 — hierarquia Home + Progresso */
+.learnIntro{margin:8px 0 16px}
+.learnIntro span{display:block;max-width:560px;margin-top:7px;color:#b7c5cf;font-size:14px;line-height:1.45}
+.adaptivePath{max-width:720px}
+.pathNode.current article>p{display:none}
+.missionCardMeta{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 2px}
+.missionCardMeta span{padding:6px 8px;border-radius:999px;background:#f3f6f7;color:#596b78;font-size:11px;font-weight:850}
+.pathNode.current article{padding:22px}
+.pathNode.current article h2{margin-bottom:4px}
+.pathNode.current details{margin-top:8px}
+.pathNode.current details summary{min-height:36px}
+.pathNode.next p{margin-top:2px}
+.pausedSession{border:1px solid rgba(255,255,255,.12);box-shadow:none}
+
+.progressPage .sectionIntro{margin-bottom:14px}
+.progressPage .progressHero{margin-top:10px}
+.progressHero>p small{font-size:11px;font-weight:950;letter-spacing:.06em;color:#7f8b96}
+.progressHero>p>b{font-size:28px}
+.progressHero>p span{margin-top:5px}
+.progressOverview{margin-top:12px}
+.progressOverview>div{min-height:44px}
+.progressActions{margin-top:10px}
+.progressDetails{margin-top:14px}
+.progressDetails>summary{min-height:50px;font-weight:900}
+.progressDetails>.muted{max-width:700px;margin:0 0 14px;font-size:13px}
+.progressDetails .hypothesisPanel{margin-top:18px;padding:18px;border:1px solid var(--app-border);background:#fff}
+.progressDetails .hypothesisPanel>div:first-child small{color:var(--app-orange-dark)}
+.progressDetails .hypothesisPanel>p{margin-bottom:0;color:var(--app-muted)}
+.progressHelp{margin-top:4px}
+.progressHelp>summary{color:var(--app-muted);font-size:12px}
+.progressHelp .notice{background:#fff;border-color:var(--app-border)}
+
+@media(max-width:760px){
+  .learnIntro span{font-size:13px}
+  .pathNode.current article{padding:18px}
+  .progressHero>p>b{font-size:24px}
+}
+
+
+/* Design System v1.3 — paridade de onboarding + contraste Home */
+.completedCurriculumHero{display:grid;grid-template-columns:54px minmax(0,1fr);gap:16px;align-items:start;margin:22px 0;padding:22px;border:1px solid var(--app-border);border-radius:var(--app-radius-md);background:#fff;box-shadow:var(--app-shadow-sm)}
+.completedCurriculumHero>span{display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:var(--app-orange-soft);color:var(--app-orange-dark);font-size:26px;font-weight:950}
+.completedCurriculumHero small{display:block;margin:2px 0 5px;color:var(--app-orange-dark);font-size:11px;font-weight:950;letter-spacing:.07em}
+.completedCurriculumHero h1{margin:0 0 8px;font-size:clamp(26px,5vw,36px);line-height:1.15}
+.completedCurriculumHero p{margin:0;color:var(--app-muted);font-size:15px;line-height:1.55}
+
+.diagPurposeHero{padding:20px 22px}
+.diagPurposeHero small{letter-spacing:.07em}
+.diagPurposeHero strong{line-height:1.35}
+.diagIntroGrid{margin-top:18px}
+
+/* Home dark surface must explicitly own all text colours. Legacy light rules must not leak in. */
+.learnHome,.learnHome .studentSurface{color:#fff}
+.learnHome .learnIntro h1{color:#fff!important}
+.learnHome .learnIntro p,.learnHome .learnIntro span{color:#b9c9d4!important}
+.learnHome .pathNode>div>b,.learnHome .pathNode>div>small,.learnHome .pathNode>div>p{color:inherit}
+.learnHome .pathNode.done>div b,.learnHome .pathNode.next>div b{color:#f4f8fb!important}
+.learnHome .pathNode.done>div small,.learnHome .pathNode.next>div small{color:#95a9b8!important}
+.learnHome .pathNode.next>div p{color:#afbec8!important}
+.learnHome .pathNode.current article{background:#123952!important;color:#fff!important;border-color:#a8bdc9}
+.learnHome .pathNode.current article h2{color:#fff!important}
+.learnHome .pathNode.current article small{color:#d98a11!important}
+.learnHome .pathNode.current article details summary{color:#ffd58a!important}
+.learnHome .pathNode.current article details p{display:block;color:#d4e0e7!important}
+.learnHome .missionCardMeta span{background:#edf2f4;color:#536673}
+.learnHome .studentTopIdentity,.learnHome .studentTopActions{color:#fff}
+.learnHome .subjectSwitcher b,.learnHome .studentTopActions>button,.learnHome .studentMenu>summary{color:#fff}
+.learnHome .subjectSwitcher{background:#102f48;border-color:#ffffff22}
+.learnHome .studentTopActions>button,.learnHome .studentMenu>summary{background:#102f48;border-color:#ffffff22}
+.learnHome .pathLine{background:#476377}
+.learnHome .pathNode.next>span{background:#123952;border-color:#315b76;color:#eaf1f5}
+.learnHome .pathNode.done>span,.learnHome .pathNode.current.complete>span{background:#fff8e8;border-color:var(--app-orange);color:var(--app-orange-dark)}
+
+@media(max-width:760px){
+  .completedCurriculumHero{grid-template-columns:44px minmax(0,1fr);padding:18px}
+  .completedCurriculumHero>span{width:44px;height:44px;border-radius:13px;font-size:21px}
+  .completedCurriculumHero p{font-size:14px}
+  .diagPurposeHero{padding:18px}
+}

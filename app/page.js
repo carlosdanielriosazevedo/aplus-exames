@@ -604,12 +604,10 @@ function StudentProfile({s,setS,go,editing=false}){
       ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a app ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
       :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
 
+    {!editing&&<div className="subjectConfigBanner" aria-label={`A configurar ${activeSubject.name}`}><span>{activeSubject.icon||"Aa"}</span><div><small>DISCIPLINA EM CONFIGURAÇÃO</small><b>{activeSubject.name}</b><p>A nota recente, a data do exame e a matéria dada serão guardadas apenas nesta disciplina.</p></div></div>}
     {!sharedProfileDone&&<><h3>Em que ano estás?</h3>
     <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div></>}
-    {sharedProfileDone&&<>
-      <div className="subjectConfigBanner" aria-label={`A configurar ${activeSubject.name}`}><span>{activeSubject.icon||"Aa"}</span><div><small>DISCIPLINA EM CONFIGURAÇÃO</small><b>{activeSubject.name}</b><p>A nota recente, a data do exame e a matéria dada serão guardadas apenas nesta disciplina.</p></div></div>
-      <div className="notice"><b>Ano escolar: {p.schoolYear}</b><span>Esta informação é comum a todas as disciplinas e não precisa de ser repetida.</span></div>
-    </>}
+    {sharedProfileDone&&<div className="notice"><b>Ano escolar: {p.schoolYear}</b><span>Esta informação é comum a todas as disciplinas e não precisa de ser repetida.</span></div>}
 
     {activeSubject.id==="math-a"&&p.schoolYear==="12.º"&&<>
       <h3>Que tema opcional está a tua turma a estudar?</h3>
@@ -666,7 +664,7 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
     setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
   }
   function save(){
-    const clean=selected.filter(id=>valid.has(id));
+    const clean=finished?[...valid]:selected.filter(id=>valid.has(id));
     clearSessionDraft(s.betaMode||"internal");
     setS(prev=>{
       const at=Date.now();
@@ -680,9 +678,9 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
   }
 
   if(finished){
-    return <Shell><Logo/><p className="eyebrow">MATÉRIA DADA NA ESCOLA</p><h1>O programa completo fica disponível.</h1>
-      <p className="muted">Como já terminaste o secundário, a app pode usar matéria do 10.º, 11.º e 12.º anos.</p>
-      <button className="primary" onClick={save}>Continuar</button></Shell>;
+    return <Shell><Logo/><p className="eyebrow">{onboarding?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · MATEMÁTICA A`:"MATÉRIA DADA NA ESCOLA"}</p>
+      <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Matemática A fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente a matéria do 10.º, 11.º e 12.º anos. Podes alterar esta informação mais tarde nas definições de matéria dada.</p></div></div>
+      <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar"}</button></Shell>;
   }
 
   return <Shell>{!onboarding&&<Back go={go} to="progress"/>}<Logo/>
@@ -789,13 +787,11 @@ function DiagIntro({s,setS,go}){
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
   return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL</p>
-    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não te vou avaliar. Só te quero conhecer um pouco melhor para saber por onde começarmos.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
-    <h2>Poucas perguntas. Muita informação.</h2>
-    <p className="muted">O diagnóstico usa apenas matéria que já pertence ao teu percurso escolar. Não vais ser avaliado por conteúdos de anos futuros. Começa por perguntas-âncora e só aprofunda quando precisa de localizar melhor uma dificuldade.</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
-      <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se a evidência for consistente.</small></div>
-      <div><span>🎯</span><b>Direto ao ponto</b><small>Não existe uma pergunta obrigatória para cada tema.</small></div>
-      <div><span>🧠</span><b>Continua depois</b><small>O perfil é afinado nas Missões dos primeiros dias.</small></div>
+      <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se já houver evidência suficiente.</small></div>
+      <div><span>🎯</span><b>Só o necessário</b><small>As perguntas adaptam-se ao que vais respondendo.</small></div>
+      <div><span>🧠</span><b>Sem nota final</b><small>O perfil continua a ser afinado nas Missões seguintes.</small></div>
     </div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
     {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
@@ -1161,8 +1157,7 @@ function Home({s,setS,go,reset}){
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
     <section className="wrap studentSurface">
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
-    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1></div>
-    <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Posso ajudar-te a escolher o próximo treino.":"Já analisei o teu percurso. Esta é a ação que mais vale a pena fazer agora."}</ApronsoNudge>
+    <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
     {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
       if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
@@ -1173,7 +1168,7 @@ function Home({s,setS,go,reset}){
     <section className="adaptivePath" aria-label="Caminho adaptativo">
       <div className="pathNode done"><span>✓</span><div><small>ÚLTIMO PASSO</small><b>{completedMission?.focus||theme(completedMission?.themeId)?.short||"Diagnóstico concluído"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><p>{missionDone?"A recomendação principal de hoje está feita.":"Uma sessão curta escolhida pela app para ti."}</p><em>~3–5 min</em>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
+      <div className={"pathNode current "+(missionDone?"complete":"")}><span>{missionDone?"✓":"●"}</span><article><small>{missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"}</small><h2>{missionDone?(completedMission?.focus||theme(completedMission?.themeId)?.short||"Bom trabalho"):(plan.focus||t?.short||"Conteúdo protegido")}</h2><div className="missionCardMeta"><span>~3–5 min</span>{!missionDone&&t?.year&&<span>{t.year}</span>}</div>{missionDone?<button onClick={()=>go("train")}>Continuar a estudar</button>:<button disabled={plan.type==="blocked"} onClick={()=>startDailyMission("home_card")}>{plan.type==="blocked"?"Indisponível":pausedDraft?.kind==="mission"?"Continuar Missão":"Começar Missão"}</button>}{!missionDone&&plan.reasons?.length>0&&<details><summary>Porque esta Missão?</summary><p>{plan.reason}</p></details>}</article></div>
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{probableNext?.short||"A definir após esta sessão"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
@@ -1812,16 +1807,16 @@ function Progress({s,go}){
   const closedHypotheses=hypotheses.filter(h=>!h.active).slice(0,3);
   const overview=measuredThemes(s).sort((a,b)=>(scopedThemeScore(s,b.id).domain??0)-(scopedThemeScore(s,a.id).domain??0)).slice(0,5);
   const index=prepIndex(s);
-  return <Shell className="wideStudentShell progressPage"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1><p className="sectionLead">Primeiro, vê o essencial. O detalhe pedagógico fica disponível quando quiseres perceber o porquê.</p></div>
-    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial — não é uma previsão da nota do exame.</span></div><p>O teu objetivo: <b>{s.goal} valores</b><span>Estás a aproximar a tua preparação do nível de exigência do teu objetivo.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+  return <Shell className="wideStudentShell progressPage"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
+    <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{index??"—"}<em>/100</em></b><div className="bar"><i style={{width:(index??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
     <div className="progressOverview">{overview.map(t=>{const score=scopedThemeScore(s,t.id);return <div key={t.id}><span>{t.short}</span><div className="bar"><i style={{width:(score.domain??0)+"%"}}/></div><b>{score.domain??"—"}</b></div>})}</div>
     <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
     <FriendsBetaDisclaimer s={s} compact/>
-    <details className="progressDetails"><summary>Ver mapa completo →</summary>
-    <p className="muted">Explora temas, competências, Domínio, Certeza e evidência quando precisares.</p>
+    <details className="progressDetails"><summary>Ver detalhe por matéria →</summary>
+    <p className="muted">Consulta Domínio, Certeza e evidência quando precisares de perceber melhor o resultado.</p>
     <div className="chips">{allowedYears.map(y=><button key={y} className={year===y?"sel":""} onClick={()=>setYear(y)}>{y}</button>)}</div>
 
-    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>MEMÓRIA PEDAGÓGICA · CICLO DE VIDA</small><h3>O que a app está a acompanhar</h3></div>
+    {hypotheses.length>0&&<div className="hypothesisPanel"><div><small>O QUE A APP ESTÁ A ACOMPANHAR</small><h3>Pontos a confirmar</h3></div>
       {activeHypotheses.length>0?<>{activeHypotheses.slice(0,5).map(h=><div className={"hypothesisRow lifecycle-"+h.lifecycleStatus} key={h.key}>
         <span>{h.icon}</span>
         <div><b>{h.targetFocus||theme(h.targetThemeId)?.short}</b><small>{
@@ -1845,7 +1840,7 @@ function Progress({s,go}){
         </div>)}
       </details>}
 
-      <p>Uma hipótese pode ganhar força, tornar-se ambígua, ser resolvida ou ficar desatualizada. Se aparecer nova evidência contraditória, pode ser reaberta. <b>Hipótese não é diagnóstico definitivo.</b></p>
+      <p>Estes sinais podem mudar com novas respostas. <b>Não são conclusões definitivas.</b></p>
     </div>}
 
     {scopedThemes.filter(t=>t.year===year).map(t=>{
