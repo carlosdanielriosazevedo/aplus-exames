@@ -12,7 +12,7 @@ export const SECONDARY_EXAM_SUBJECTS=[
   {id:"math-a",name:"Matemática A",codes:["635"],examYear:"12.º",group:"math-science",icon:"∑",available:true,releaseStage:"foundation"},
   {id:"math-b",name:"Matemática B",codes:["735"],examYear:"11.º",group:"math-science",icon:"ƒ"},
   {id:"macs",name:"Matemática Aplicada às Ciências Sociais",shortName:"MACS",codes:["835"],examYear:"11.º",group:"math-science",icon:"%"},
-  {id:"physics-chemistry-a",name:"Física e Química A",codes:["715"],examYear:"11.º",group:"math-science",icon:"⚛"},
+  {id:"physics-chemistry-a",name:"Física e Química A",codes:["715"],examYear:"11.º",group:"math-science",icon:"⚛",available:true,releaseStage:"foundation"},
   {id:"biology-geology",name:"Biologia e Geologia",codes:["702"],examYear:"11.º",group:"math-science",icon:"⌁"},
 
   {id:"portuguese",name:"Português",codes:["639"],examYear:"12.º",group:"languages",icon:"Aa",available:true,releaseStage:"foundation"},
