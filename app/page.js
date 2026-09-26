@@ -1388,7 +1388,9 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     }
 
     const practice=missionPracticeQuestion(nextState,plan,newTotal,newUsed);
-    const nxt=practice||selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    const planned=selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    const minimumFallback=newTotal<STUDY_SESSION_MIN_QUESTIONS?selectMissionQuestion(nextState,targetId,newUsed,newSigs):null;
+    const nxt=practice||planned||minimumFallback;
     if(!nxt){
       closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision(),newEstimatedSeconds);return
     }
