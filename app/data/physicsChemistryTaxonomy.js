@@ -84,6 +84,7 @@ const explicit={
   "FQA-DATA-ENE-01":"f10-thermal-radiation",
   "FQA-DATA-MEC-01":"f11-interactions",
   "FQA-DATA-WAV-01":"f11-fields",
+  "FQA-DATA-WAV-02":"f11-em-waves",
   "FQA-DATA-EQ-01":"q11-green-industry",
   "FQA-DATA-AQ-01":"q11-solubility"
 };
