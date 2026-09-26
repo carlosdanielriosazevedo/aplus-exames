@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 2,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -25,14 +25,15 @@
           "prompt": "A organização do texto desenvolve-se sobretudo através de",
           "options": [
             "uma definição inicial seguida de condições para que a discordância seja útil.",
-            "uma narrativa cronológica sobre várias reuniões.",
-            "uma enumeração de regras sem relação entre si.",
-            "uma descrição neutra de diferentes profissões."
+            "uma comparação entre diferentes formas de discordar, organizada por grau de eficácia.",
+            "uma sequência de exemplos que conduz à rejeição da discordância como método de decisão.",
+            "uma oposição entre rapidez de decisão e participação de várias pessoas numa reunião."
           ],
           "answerIndex": 0,
           "explanation": "O texto parte de uma ideia comum sobre discordância e depois define condições que transformam o desacordo num instrumento de qualidade.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LEITURA-001-Q2",
@@ -46,14 +47,15 @@
           "prompt": "Na frase “Para isso, não basta dizer que uma ideia está errada”, a expressão “Para isso” retoma",
           "options": [
             "a intenção de melhorar a decisão através de uma discordância bem formulada.",
-            "a necessidade de terminar a reunião rapidamente.",
-            "a rejeição de todas as propostas apresentadas.",
-            "a ideia de que discordar impede sempre uma decisão."
+            "a necessidade de justificar qualquer discordância antes de formular uma alternativa.",
+            "a importância de separar a crítica à ideia da avaliação da pessoa que a apresenta.",
+            "a vantagem de adiar uma decisão quando existem posições incompatíveis."
           ],
           "answerIndex": 0,
           "explanation": "A expressão retoma a função positiva atribuída à discordância bem formulada: melhorar a decisão.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LEITURA-001-Q3",
@@ -85,7 +87,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     },
@@ -109,14 +112,15 @@
           "prompt": "A descoberta da carta leva Tomás sobretudo a",
           "options": [
             "substituir uma imagem idealizada por uma visão mais complexa do bisavô.",
-            "concluir que toda a memória familiar era falsa.",
-            "decidir destruir o retrato.",
-            "provar que a dívida tinha sido paga."
+            "reinterpretar a história familiar sem abandonar a admiração que sentia pelo bisavô.",
+            "perceber que os objetos familiares podem preservar versões contraditórias do passado.",
+            "questionar se a memória transmitida pela família depende demasiado de documentos escritos."
           ],
           "answerIndex": 0,
           "explanation": "A carta não destrói a narrativa familiar, mas introduz falha e vulnerabilidade numa imagem antes muito estável.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LIT-001-Q2",
@@ -129,15 +133,16 @@
           "cognitive": "interpretar",
           "prompt": "No final, a mão escondida atrás das costas ganha um novo valor porque",
           "options": [
-            "o retrato foi fisicamente alterado durante as obras.",
+            "o retrato passa a ser lido como prova de que faltava informação sobre o momento representado.",
             "passa a simbolizar aquilo que uma memória familiar pode ocultar ou simplificar.",
-            "Tomás descobre que o bisavô segurava dinheiro.",
-            "a cadeira deixa de fazer parte do retrato."
+            "o gesto da figura no retrato passa a sugerir uma intenção que Tomás já conhecia pela carta.",
+            "a posição da mão reforça a ideia de que o retrato preserva uma versão incompleta mas fiel do bisavô."
           ],
           "answerIndex": 1,
           "explanation": "A mão escondida passa a funcionar como imagem simbólica da parte não contada ou simplificada pela narrativa familiar.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-PASSAGE-11-LIT-001-Q3",
@@ -169,7 +174,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     }
