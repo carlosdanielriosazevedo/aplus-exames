@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
+import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
 import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
@@ -136,7 +137,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       <h1>{domain?.shortTitle||"Física e Química A"}</h1>
       <div className="trainingScopeNote"><b>{item.year+" · "+domain?.area}</b><span>{domain?.title}</span></div>
       <div className="questionCard">
-        {item.stimulus?.type==="table"&&<div className="fqaStimulus"><table><thead><tr>{item.stimulus.columns.map(column=><th key={column}>{column}</th>)}</tr></thead><tbody>{item.stimulus.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>}
+        <PhysicsChemistryStimulus item={item}/>
         <h2>{item.prompt}</h2>
         {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>}
         {item.responseType==="stepwise"&&<div className="fqaStepwise">

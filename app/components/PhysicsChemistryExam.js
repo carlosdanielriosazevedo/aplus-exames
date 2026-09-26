@@ -1,6 +1,7 @@
 "use client";
 import {useMemo,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
+import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
@@ -24,10 +25,7 @@ function examPointsFor(item,result){
   return {points:0,provisional:false,pending:true};
 }
 
-function Stimulus({item}){
-  if(item.stimulus?.type!=="table")return null;
-  return <div className="fqaStimulus"><table><thead><tr>{item.stimulus.columns.map(column=><th key={column}>{column}</th>)}</tr></thead><tbody>{item.stimulus.rows.map((row,index)=><tr key={index}>{row.map((cell,cellIndex)=><td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
-}
+function Stimulus({item}){return <PhysicsChemistryStimulus item={item}/>;}
 
 function ResponseEditor({item,value,onChange,disabled=false}){
   if(item.responseType==="multiple-choice")return <div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={disabled} className={value===index?"selected":""} onClick={()=>onChange(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>;

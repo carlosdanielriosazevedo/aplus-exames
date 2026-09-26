@@ -1119,3 +1119,17 @@ button,input,select,textarea{max-width:100%}
   .fqaExamDots{grid-column:1/-1;grid-row:1}
   .fqaExamScoreGrid{grid-template-columns:1fr}
 }
+
+
+.fqaChartStimulus,.fqaDiagramStimulus{margin:14px 0 18px;padding:14px;border:1px solid #e2e7eb;border-radius:14px;background:#fff;overflow-x:auto}
+.fqaChartStimulus figcaption,.fqaDiagramStimulus figcaption{font-size:13px;color:#667085;margin-bottom:10px}
+.fqaChartStimulus svg{width:100%;min-width:460px;display:block}
+.fqaChartStimulus .axis{stroke:currentColor;stroke-width:1.4}
+.fqaChartStimulus .dataLine{stroke:currentColor;stroke-width:2.3}
+.fqaChartStimulus .dataPoint{fill:currentColor}
+.fqaChartStimulus text{fill:currentColor;font-size:12px}
+.fqaChartStimulus .axisLabel{font-weight:700}
+.fqaDiagramFlow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.fqaDiagramNode{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #dfe4ea;border-radius:12px;background:#f9fafb;min-width:130px}
+.fqaDiagramNode small{color:#667085}.fqaDiagramNode span{font-size:18px;font-weight:700}
+@media(max-width:820px){.fqaChartStimulus svg{min-width:420px}.fqaDiagramNode{min-width:100%}}
