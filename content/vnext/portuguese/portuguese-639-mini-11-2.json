@@ -46,12 +46,12 @@
           "cognitive": "interpretar",
           "prompt": "A pergunta colocada perto do final do texto funciona sobretudo como",
           "options": [
-            "uma síntese do critério usado para avaliar a qualidade do indicador.",
+            "uma reformulação do problema que desloca a atenção da medição para os resultados.",
             "uma objeção à ideia de que os indicadores podem influenciar comportamentos.",
             "uma passagem dos exemplos concretos para uma defesa da recolha de mais dados.",
-            "uma reformulação do problema que desloca a atenção da medição para os resultados."
+            "uma síntese do critério usado para avaliar a qualidade do indicador."
           ],
-          "answerIndex": 0,
+          "answerIndex": 3,
           "explanation": "A pergunta condensa o princípio defendido no texto: verificar se a medida continua a representar o objetivo que se quer melhorar.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -111,12 +111,12 @@
           "cognitive": "interpretar",
           "prompt": "A abertura da sala leva Miguel sobretudo a",
           "options": [
-            "confirmar que as histórias ouvidas sobre a casa correspondiam ao que imaginara.",
             "substituir uma construção imaginada por uma relação mais concreta com o passado.",
+            "confirmar que as histórias ouvidas sobre a casa correspondiam ao que imaginara.",
             "perceber que a importância da sala dependia mais do segredo do que dos objetos encontrados.",
             "reconhecer que a curiosidade criada ao longo dos anos era mais significativa do que a descoberta."
           ],
-          "answerIndex": 1,
+          "answerIndex": 0,
           "explanation": "A sala imaginada durante anos revela-se comum, e Miguel passa a relacionar-se com o passado através de objetos concretos e não do mistério da porta.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -134,11 +134,11 @@
           "prompt": "A frase final — «A sala parecia menor aberta, mas a casa, estranhamente, parecia maior» — sugere que",
           "options": [
             "a abertura da sala altera a perceção física do espaço e reduz o peso das histórias familiares.",
-            "o desaparecimento do mistério reduz uma divisão, mas amplia a compreensão que Miguel tem da casa e do passado.",
             "a perda de expectativa torna a sala menos importante, ao mesmo tempo que valoriza o resto da casa.",
+            "o desaparecimento do mistério reduz uma divisão, mas amplia a compreensão que Miguel tem da casa e do passado.",
             "a descoberta confirma que a dimensão simbólica da casa depende daquilo que permanece inacessível."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "O contraste exprime uma mudança de perceção: a sala perde a dimensão imaginária, mas a casa ganha profundidade ao integrar uma parte antes desconhecida.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
