@@ -360,7 +360,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,compe
     if(chosen.responseType==="restricted-response")openCount++;
   }
 
-  if(selected.length<5)throw new Error("A Portuguese daily mission must contain at least five pedagogically useful interactions.");
+  if(selected.length<7)throw new Error("A Portuguese mission or training session must contain at least seven pedagogically useful interactions.");
   return {
     items:selected,
     priorities,
