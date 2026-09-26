@@ -10,6 +10,13 @@ assert.equal(blueprint.mandatoryItems.reduce((sum,item)=>sum+item.examPoints,0),
 assert.equal(blueprint.optionalItems.reduce((sum,item)=>sum+item.examPoints,0),80);
 assert.equal(blueprint.durationMinutes,120);
 assert.equal(blueprint.toleranceMinutes,30);
+const allExamItems=[...blueprint.mandatoryItems,...blueprint.optionalItems];
+assert.ok(allExamItems.some(item=>item.stimulus?.type==="table"),"o simulado deve conter pelo menos uma tabela.");
+assert.ok(allExamItems.some(item=>item.stimulus?.type==="line-chart"),"o simulado deve conter pelo menos um gráfico quantitativo.");
+assert.ok(allExamItems.some(item=>item.stimulus?.type==="diagram"),"o simulado deve conter pelo menos um diagrama científico.");
+for(const domain of new Set(allExamItems.map(item=>item.domain))){
+  assert.ok(allExamItems.filter(item=>item.domain===domain).length>=2,domain+": o simulado deve representar cada grande domínio com pelo menos dois itens.");
+}
 
 const perfect=physicsChemistryExamScore({
   mandatoryResults:blueprint.mandatoryItems.map(item=>({points:item.examPoints})),
@@ -48,4 +55,4 @@ assert.match(component,/gradePhysicsChemistryResponse/u,"o simulado deve reutili
 assert.match(component,/recordSubjectSession/u,"o simulado deve entrar no progresso partilhado");
 assert.doesNotMatch(component,/Resposta certa:[\s\S]{0,120}Seguinte/u,"não deve haver correção imediata antes do fim");
 
-console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · fim automático · sem feedback durante a prova · revisão conservadora");
+console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · tabela + gráficos + diagramas · 120+30 min · fim automático · revisão conservadora");
