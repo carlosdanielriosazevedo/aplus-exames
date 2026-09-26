@@ -1,0 +1,676 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "wave": 16,
+  "bankSizeAfterWave": 328,
+  "sourcePolicy": "original-only",
+  "editorialStatus": "prototype",
+  "productionEligible": false,
+  "items": [
+    {
+      "id": "PT639-FND-311",
+      "year": "12.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-exposicao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Um texto sobre mobilidade sustentável apresenta primeiro o problema do excesso de automóveis, depois explica duas alternativas e termina com condições para a sua aplicação.",
+      "prompt": "Explica como esta organização favorece a clareza de um texto expositivo. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Relaciona problema, explicação de alternativas e conclusão com a clareza expositiva.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A organização cria uma progressão reconhecível: começa por definir o problema, desenvolve alternativas concretas e termina com condições de aplicação. Essa sequência ajuda o leitor a perceber a relação entre as partes e evita uma enumeração solta de informação.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-312",
+      "year": "12.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-exposicao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Versão A: «As hortas urbanas são boas.» Versão B: «As hortas urbanas podem aumentar áreas verdes, criar espaços de aprendizagem e aproximar moradores.»",
+      "prompt": "Explica por que razão a versão B é mais adequada a uma exposição informativa. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Distingue avaliação genérica de informação desenvolvida e objetiva.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A versão A limita-se a uma avaliação vaga. A versão B apresenta efeitos concretos e distintos, oferecendo informação que pode ser desenvolvida e explicada. Num texto expositivo, essa precisão ajuda a informar em vez de apenas emitir uma opinião.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-313",
+      "year": "11.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-opiniao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Num artigo de opinião, o autor afirma que as bibliotecas escolares devem ter horário mais alargado e apresenta como razões o apoio ao estudo e o acesso de alunos que não dispõem de espaço adequado em casa.",
+      "prompt": "Explica como estas razões contribuem para a defesa da posição. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Relaciona razões concretas com a sustentação da tese.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "As razões mostram benefícios diretamente ligados à proposta: mais tempo de estudo e maior igualdade de acesso. Ao explicar consequências concretas do horário alargado, o autor transforma uma preferência numa posição fundamentada.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-314",
+      "year": "11.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-opiniao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Um texto defende a criação de mais zonas pedonais, mas limita-se a repetir que «seria melhor para todos» em vários parágrafos.",
+      "prompt": "Explica duas alterações necessárias para tornar a argumentação mais convincente. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Identifica a necessidade de diversificar argumentos e de os desenvolver com exemplos ou relações causais.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "O texto deve substituir a repetição por argumentos diferentes, por exemplo segurança, qualidade do espaço público ou comércio local. Deve também explicar como cada argumento sustenta a proposta, podendo acrescentar exemplos ou consequências concretas.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-315",
+      "year": "10.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«A escola criou uma horta. Esta iniciativa passou a envolver várias turmas e, por isso, foi alargada a um segundo espaço.»",
+      "prompt": "Explica a função de «Esta iniciativa» e de «por isso» na coesão do excerto. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Explica referência anafórica e relação de consequência.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Esta iniciativa» retoma a criação da horta e evita repetir toda a informação anterior. «Por isso» introduz uma consequência do envolvimento de várias turmas, ligando logicamente as duas frases e tornando a progressão mais clara.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-316",
+      "year": "10.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "short-answer",
+      "cognitive": "analisar",
+      "stimulus": "«A equipa apresentou duas propostas. A segunda foi escolhida por exigir menos recursos.»",
+      "prompt": "A expressão «A segunda» retoma que elemento?",
+      "acceptedAnswers": [
+        "a segunda proposta",
+        "segunda proposta",
+        "a proposta apresentada em segundo lugar"
+      ],
+      "explanation": "A expressão funciona anaforicamente e retoma a segunda das duas propostas mencionadas na frase anterior.",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-317",
+      "year": "10.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«Marta entregou o relatório a Leonor depois de o rever cuidadosamente.»",
+      "prompt": "Explica a que se refere o pronome «o» e como essa referência contribui para a coesão da frase. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Identifica o antecedente e explica a função coesiva do pronome.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "O pronome «o» retoma «o relatório». Essa substituição evita repetir o nome e mantém a ligação entre a ação de entregar e a ação anterior de rever o mesmo objeto.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-318",
+      "year": "11.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "short-answer",
+      "cognitive": "analisar",
+      "stimulus": "«O projeto foi adiado. Ainda assim, a equipa manteve a preparação.»",
+      "prompt": "Que relação discursiva é introduzida por «Ainda assim»?",
+      "acceptedAnswers": [
+        "concessão",
+        "valor concessivo",
+        "contraste concessivo"
+      ],
+      "explanation": "«Ainda assim» introduz uma relação concessiva: apesar do adiamento, a preparação continuou.",
+      "gradingMode": "deterministic-with-equivalents",
+      "maxPoints": 13
+    },
+    {
+      "id": "PT639-FND-319",
+      "year": "10.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-sintaxe",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«Os alunos consideraram a proposta útil para a comunidade.»",
+      "prompt": "Identifica e explica a função sintática de «útil para a comunidade». Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Identifica o predicativo do complemento direto e relaciona-o com «a proposta».",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Útil para a comunidade» desempenha a função de predicativo do complemento direto, porque atribui uma propriedade ao complemento direto «a proposta» através do verbo «consideraram».",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-320",
+      "year": "11.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-sintaxe",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«A direção informou os alunos da alteração do horário.»",
+      "prompt": "Explica as funções sintáticas de «os alunos» e «da alteração do horário». Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Distingue complemento direto de complemento oblíquo no contexto do verbo informar.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Os alunos» é complemento direto, pois designa quem recebe a informação. «Da alteração do horário» é complemento oblíquo, introduzido pela preposição exigida nesta construção do verbo «informar».",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-321",
+      "year": "12.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-sintaxe",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«Foi entregue aos participantes um guia detalhado no início da sessão.»",
+      "prompt": "Explica a função sintática de «aos participantes» e de «um guia detalhado». Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Identifica complemento indireto e sujeito numa construção passiva.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Aos participantes» é complemento indireto, indicando o destinatário. «Um guia detalhado» é o sujeito da construção passiva, concordando com a forma verbal «foi entregue».",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-322",
+      "year": "10.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-oracoes",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«Quando a chuva terminou, os alunos retomaram a atividade que tinha sido interrompida.»",
+      "prompt": "Classifica e explica o valor das duas orações subordinadas. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Identifica oração temporal e oração relativa restritiva.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Quando a chuva terminou» é uma oração subordinada adverbial temporal, situando a ação principal no tempo. «Que tinha sido interrompida» é uma oração subordinada adjetiva relativa restritiva, que delimita a atividade referida.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-323",
+      "year": "12.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-oracoes",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«Embora o prazo fosse curto, a equipa concluiu o relatório antes que a reunião começasse.»",
+      "prompt": "Explica o valor das duas orações subordinadas introduzidas por «Embora» e «antes que». Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Identifica valor concessivo e temporal.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Embora o prazo fosse curto» é uma subordinada adverbial concessiva: apresenta uma dificuldade que não impede a ação principal. «Antes que a reunião começasse» é uma subordinada adverbial temporal, situando a conclusão do relatório antes de outro acontecimento.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-324",
+      "year": "12.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-revisao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Versão inicial: «O projeto teve bons resultados. O projeto teve participação elevada. O projeto vai continuar no próximo ano.»",
+      "prompt": "Explica duas intervenções de revisão que melhorem coesão e fluidez. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Propõe substituição de repetições e articulação lógica entre frases.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "Pode substituir-se a repetição de «o projeto» por pronomes ou elipse e articular as ideias com conectores. Por exemplo, a participação elevada pode ser apresentada como um dos resultados e a continuidade como consequência desse balanço positivo.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-325",
+      "year": "11.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-revisao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Um parágrafo apresenta três argumentos válidos, mas muda de assunto em cada frase sem conectores nem explicação da relação entre as ideias.",
+      "prompt": "Explica como reorganizarias o parágrafo para melhorar a coerência. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Propõe ordenação das ideias e explicitação das relações entre argumentos.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "Os argumentos devem ser organizados segundo uma lógica reconhecível, por exemplo do mais geral para o mais específico. Entre eles, é necessário explicitar relações de adição, contraste ou consequência, usando conectores e frases de transição quando necessário.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-326",
+      "year": "10.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-exposicao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "Uma exposição sobre desperdício alimentar apresenta definição do problema, causas, consequências e duas medidas de redução.",
+      "prompt": "Explica por que razão esta sequência é adequada ao objetivo de informar. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Relaciona sequência lógica com compreensão do tema.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "A sequência ajuda o leitor a construir o tema por etapas: primeiro compreende o problema, depois as suas causas e consequências e, por fim, medidas possíveis. A organização evita saltos e torna as relações entre informação mais fáceis de acompanhar.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-327",
+      "year": "12.º",
+      "domain": "leitura",
+      "competencyId": "pt-leitura-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«A proposta recebeu críticas. Apesar disso, manteve dois princípios que já tinham sido defendidos no relatório inicial.»",
+      "prompt": "Explica como «Apesar disso» e «que» estabelecem relações entre as informações do excerto. Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Explica contraste concessivo e referência relativa.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Apesar disso» introduz contraste concessivo entre as críticas e a manutenção dos princípios. O pronome relativo «que» retoma «dois princípios» e liga-os à informação de que já tinham sido defendidos anteriormente.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    },
+    {
+      "id": "PT639-FND-328",
+      "year": "11.º",
+      "domain": "gramatica",
+      "competencyId": "pt-gramatica-coesao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "restricted-response",
+      "cognitive": "raciocinar",
+      "stimulus": "«A associação apresentou um plano. Esse documento previa três fases; contudo, a última dependia de financiamento externo.»",
+      "prompt": "Explica a função coesiva de «Esse documento» e de «contudo». Responde em 40 a 70 palavras.",
+      "rubric": {
+        "maxPoints": 13,
+        "criteria": [
+          {
+            "id": "conteudo",
+            "label": "Explica retoma nominal e relação adversativa.",
+            "points": 8
+          },
+          {
+            "id": "discurso",
+            "label": "Organiza a resposta com progressão clara.",
+            "points": 3
+          },
+          {
+            "id": "lingua",
+            "label": "Escreve com correção linguística suficiente para não comprometer o sentido.",
+            "points": 2
+          }
+        ]
+      },
+      "referenceAnswer": "«Esse documento» retoma «um plano» por substituição nominal, mantendo o referente ativo no texto. «Contudo» introduz uma relação adversativa, assinalando uma limitação relativamente à organização apresentada nas três fases.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 13,
+      "wordLimit": {
+        "min": 40,
+        "max": 70
+      }
+    }
+  ]
+}

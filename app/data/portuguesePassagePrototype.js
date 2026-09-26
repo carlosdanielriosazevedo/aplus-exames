@@ -3,6 +3,8 @@ import portuguesePassageDocument2 from "../../content/vnext/portuguese/portugues
 import portuguesePassageDocument3 from "../../content/vnext/portuguese/portuguese-639-passage-prototypes-3.json";
 import portugueseMini10Document from "../../content/vnext/portuguese/portuguese-639-mini-10-1.json";
 import portugueseMini11Document from "../../content/vnext/portuguese/portuguese-639-mini-11-1.json";
+import portugueseMini10Document2 from "../../content/vnext/portuguese/portuguese-639-mini-10-2.json";
+import portugueseMini11Document2 from "../../content/vnext/portuguese/portuguese-639-mini-11-2.json";
 import portugueseFullExamDocument from "../../content/vnext/portuguese/portuguese-639-full-exam-supplement.json";
 import {buildPortuguesePassagePrototypeExam} from "../lib/portuguesePassages";
 
@@ -11,6 +13,8 @@ export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2=buildPortuguesePassagePrototype
 export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_3=buildPortuguesePassagePrototypeExam(portuguesePassageDocument3);
 export const PORTUGUESE_MINI_EXAM_10_1=buildPortuguesePassagePrototypeExam(portugueseMini10Document);
 export const PORTUGUESE_MINI_EXAM_11_1=buildPortuguesePassagePrototypeExam(portugueseMini11Document);
+export const PORTUGUESE_MINI_EXAM_10_2=buildPortuguesePassagePrototypeExam(portugueseMini10Document2);
+export const PORTUGUESE_MINI_EXAM_11_2=buildPortuguesePassagePrototypeExam(portugueseMini11Document2);
 const fullExamBase=buildPortuguesePassagePrototypeExam(portugueseFullExamDocument);
 export const PORTUGUESE_FULL_PRACTICE_EXAM={
   ...fullExamBase,
@@ -64,7 +68,9 @@ export function classifyPortugueseFullExamResults(results=[]){
 
 export const PORTUGUESE_MINI_EXAM_CATALOG=[
   {id:"mini-10-1",year:"10.º",title:"Mini-exame · 10.º ano · Modelo 1",shortTitle:"Mapas e presença",description:"2 textos · 6 questões · leitura e educação literária",exam:PORTUGUESE_MINI_EXAM_10_1},
+  {id:"mini-10-2",year:"10.º",title:"Mini-exame · 10.º ano · Modelo 2",shortTitle:"Espaço e expectativa",description:"2 textos · 6 questões · inferência, coesão e interpretação",exam:PORTUGUESE_MINI_EXAM_10_2},
   {id:"mini-11-1",year:"11.º",title:"Mini-exame · 11.º ano · Modelo 1",shortTitle:"Discordância e memória",description:"2 textos · 6 questões · argumentação e interpretação",exam:PORTUGUESE_MINI_EXAM_11_1},
+  {id:"mini-11-2",year:"11.º",title:"Mini-exame · 11.º ano · Modelo 2",shortTitle:"Indicadores e passado",description:"2 textos · 6 questões · organização, coesão e interpretação",exam:PORTUGUESE_MINI_EXAM_11_2},
   {id:"mini-1",year:"12.º",title:"Mini-exame 1 · Espaço e memória",shortTitle:"Espaço e memória",description:"2 textos · 6 questões · seleção + resposta restrita",exam:PORTUGUESE_PASSAGE_PROTOTYPE_EXAM},
   {id:"mini-2",year:"12.º",title:"Mini-exame 2 · Escolha e despedida",shortTitle:"Escolha e despedida",description:"2 textos · 6 questões · seleção + resposta restrita",exam:PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2},
   {id:"mini-3",year:"12.º",title:"Mini-exame 3 · Atenção e memória",shortTitle:"Atenção e memória",description:"2 textos · 6 questões · coesão, inferência e interpretação",exam:PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_3}
@@ -80,7 +86,9 @@ export function portugueseMiniExamMeta(id){
 
 export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAMS={
   "mini-10-1":PORTUGUESE_MINI_EXAM_10_1,
+  "mini-10-2":PORTUGUESE_MINI_EXAM_10_2,
   "mini-11-1":PORTUGUESE_MINI_EXAM_11_1,
+  "mini-11-2":PORTUGUESE_MINI_EXAM_11_2,
   "mini-1":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM,
   "mini-2":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2,
   "mini-3":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_3,

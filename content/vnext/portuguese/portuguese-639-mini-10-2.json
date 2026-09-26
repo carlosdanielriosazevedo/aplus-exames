@@ -1,0 +1,177 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
+    {
+      "passageId": "PT639-PASSAGE-10-LEITURA-002",
+      "year": "10.º",
+      "domain": "leitura",
+      "title": "O banco vazio",
+      "sourceOrigin": "original",
+      "text": "Num jardim junto a uma escola, havia um banco que quase ninguém usava. Ficava numa zona de passagem, sem sombra, voltado para um muro. Quando a autarquia renovou o espaço, deslocou-o alguns metros, colocou-o debaixo de duas árvores e orientou-o para a zona onde as crianças brincavam. O banco era o mesmo, mas a utilização mudou. De manhã, alguns pais esperavam ali pela abertura dos portões. Ao fim da tarde, alunos sentavam-se para conversar. Aos fins de semana, apareciam pessoas que liam ou descansavam. A alteração parece pequena porque não acrescentou um novo equipamento. Mudou apenas a relação entre o objeto e o espaço. Este caso mostra que a utilidade de um elemento urbano não depende só da sua existência. Depende também de onde está, do que permite observar, do conforto que oferece e da forma como se liga aos percursos das pessoas.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-10-LEITURA-002-Q1",
+          "year": "10.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-informacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "reconhecer",
+          "prompt": "Que alteração foi feita ao banco durante a renovação?",
+          "options": [
+            "Foi substituído por vários bancos novos.",
+            "Foi deslocado e orientado para outra zona do jardim.",
+            "Foi retirado do espaço por falta de utilização.",
+            "Foi colocado dentro da escola."
+          ],
+          "answerIndex": 1,
+          "explanation": "O texto afirma que o banco foi deslocado, colocado à sombra e orientado para a zona de brincadeira.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LEITURA-002-Q2",
+          "year": "10.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-inferencia",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "O exemplo do banco permite concluir sobretudo que",
+          "options": [
+            "a qualidade de um espaço depende sempre de equipamentos novos.",
+            "a localização e a relação com o espaço podem alterar a utilidade de um objeto.",
+            "os bancos devem ficar sempre junto a escolas.",
+            "a sombra é o único fator que determina a utilização."
+          ],
+          "answerIndex": 1,
+          "explanation": "O texto mostra que o mesmo banco ganhou novos usos ao mudar de posição e relação com o espaço envolvente.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LEITURA-002-Q3",
+          "year": "10.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-coesao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica como a expressão «O banco era o mesmo, mas a utilização mudou» organiza o contraste central do texto. Apoia a resposta em dois elementos.",
+          "referenceAnswer": "A frase contrapõe permanência e mudança: o objeto físico não foi substituído, mas passou a ser usado de formas diferentes. Antes estava numa zona de passagem, sem sombra e voltado para um muro; depois ficou junto a árvores e orientado para uma área frequentada. O contraste sustenta a ideia de que a utilidade depende também da localização e do contexto.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica o contraste entre permanência do objeto e mudança de utilização.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do texto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    },
+    {
+      "passageId": "PT639-PASSAGE-10-LIT-002",
+      "year": "10.º",
+      "domain": "educacao-literaria",
+      "title": "A carta por abrir",
+      "sourceOrigin": "original",
+      "text": "A carta chegou numa terça-feira e ficou três dias em cima da mesa. Tinha o nome de Helena escrito à mão e um remetente que ela reconheceu imediatamente. Não abriu o envelope. Na quarta-feira, mudou-o para junto dos livros. Na quinta, levou-o para o quarto e deixou-o na gaveta. Sempre que passava por ele, pensava que uma carta fechada ainda podia conter qualquer coisa. Depois de aberta, teria apenas aquilo que estivesse escrito. Na sexta-feira à noite, sentou-se na cama com o envelope entre as mãos. O papel parecia mais pesado do que no dia em que chegara. Helena riu-se dessa ideia. Sabia que não tinha mudado de peso. Tinha mudado apenas o tempo durante o qual ela imaginara o conteúdo. Rasgou finalmente a margem do envelope. Antes de retirar a folha, ficou alguns segundos a olhar para a abertura estreita. Era o último instante em que todas as hipóteses ainda cabiam ali dentro.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-10-LIT-002-Q1",
+          "year": "10.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-temas",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "O conflito vivido por Helena centra-se sobretudo",
+          "options": [
+            "na dificuldade de escolher onde guardar a carta.",
+            "na tensão entre imaginar possibilidades e conhecer o conteúdo real.",
+            "na decisão de responder imediatamente ao remetente.",
+            "no receio de perder fisicamente o envelope."
+          ],
+          "answerIndex": 1,
+          "explanation": "Enquanto a carta permanece fechada, Helena conserva várias hipóteses; abrir implica substituir possibilidades pelo conteúdo real.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LIT-002-Q2",
+          "year": "10.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-recursos",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A ideia de que o papel parecia «mais pesado» funciona como",
+          "options": [
+            "descrição literal de uma mudança física.",
+            "imagem do peso emocional criado pela espera e pela imaginação.",
+            "prova de que o envelope continha vários objetos.",
+            "indicação de que Helena queria devolver a carta."
+          ],
+          "answerIndex": 1,
+          "explanation": "O peso é figurado e traduz a carga emocional acumulada durante os dias em que Helena adiou a abertura.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LIT-002-Q3",
+          "year": "10.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-forma",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica como a passagem do tempo contribui para aumentar a tensão no excerto. Apoia a resposta em dois momentos.",
+          "referenceAnswer": "A narrativa marca sucessivamente terça, quarta, quinta e sexta-feira, mostrando que Helena adia repetidamente a abertura. A carta muda de lugar e ganha importância à medida que o tempo passa. Quando finalmente rasga o envelope, a demora acumulada torna o momento mais tenso, porque todas as hipóteses imaginadas estão prestes a desaparecer.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica a relação entre adiamento temporal e crescimento da tensão.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois momentos pertinentes do excerto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    }
+  ]
+}
