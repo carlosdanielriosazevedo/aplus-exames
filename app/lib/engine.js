@@ -297,7 +297,7 @@ export function desiredDifficulty(score,goal=16){
   return target;
 }
 
-export const DAILY_MISSION_MIN_INTERACTIONS=5;
+export const DAILY_MISSION_MIN_INTERACTIONS=7;
 export const DAILY_MISSION_MAX_INTERACTIONS=10;
 export const DAILY_MISSION_MIN_SECONDS=180;
 export const DAILY_MISSION_MAX_SECONDS=300;
@@ -386,7 +386,7 @@ export function missionStopDecision({
     sessionTargetItems.map(x=>x.difficulty).filter(x=>x!==undefined)
   ).size;
 
-  // Cinco perguntas é o mínimo absoluto. Depois disso, a sessão termina por
+  // Sete perguntas é o mínimo absoluto. Depois disso, a sessão termina por
   // valor pedagógico ou por orçamento temporal, nunca apenas por contagem fixa.
   if(totalCount>=DAILY_MISSION_MAX_INTERACTIONS){
     return {
@@ -492,6 +492,7 @@ export function missionPracticeQuestion(s,plan,totalCount,usedIds=[]){
 }
 
 export function trainingQuestions(s,{themeId,focus,level},limit=8){
+  const boundedLimit=Math.max(7,Math.min(10,Number.isInteger(limit)?limit:8));
   const focusLabel=microcompetencyLabel(focus)||focus;
   const selectedSubtopic=curriculumSubtopicForItem({
     themeId,
@@ -516,7 +517,7 @@ export function trainingQuestions(s,{themeId,focus,level},limit=8){
     themeId,
     focus:focusLabel,
     difficulty:target,
-    count:Math.max(limit,5),
+    count:Math.max(boundedLimit,7),
     salt:`training|${themeId}|${focus}|${level}|${Date.now()}`
   }).map(q=>{
     const generatedMicrocompetencyId=microcompetencyId(q.themeId,q.focus);
@@ -528,7 +529,7 @@ export function trainingQuestions(s,{themeId,focus,level},limit=8){
     candidates=(s.betaMode||"internal")==="internal"?generateVariants({
       themeId,
       difficulty:target,
-      count:Math.max(limit,5),
+      count:Math.max(boundedLimit,7),
       salt:`training-fallback|${themeId}|${level}|${Date.now()}`
     }):[];
   }
@@ -539,7 +540,7 @@ export function trainingQuestions(s,{themeId,focus,level},limit=8){
   const usedSignatures=new Set();
   const pool=[...candidates];
 
-  while(pool.length && selected.length<limit){
+  while(pool.length && selected.length<boundedLimit){
     pool.sort((a,b)=>{
       const score=q=>Math.abs(q.difficulty-target)*3
         +(q.generated||exactIds.has(q.id)?0:sameSubtopicIds.has(q.id)?1:6)
@@ -890,9 +891,10 @@ function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds
   })[0];
 }
 
-export function buildMiniExam(s,count=8){
-  const constructedTarget=count>=4?Math.min(2,count-2):0;
-  const choiceTarget=count-constructedTarget;
+export function buildMiniExam(s,count=12){
+  const examCount=Math.max(10,Math.min(14,Number.isInteger(count)?count:12));
+  const constructedTarget=examCount>=4?Math.min(2,examCount-2):0;
+  const choiceTarget=examCount-constructedTarget;
   const seen=seenQuestionIds(s);
   const usedCognitive=new Set();
   const usedSessionIds=new Set();
@@ -961,14 +963,15 @@ export function buildMiniExam(s,count=8){
       return unseenA-unseenB||yearB-yearA||b.difficulty-a.difficulty;
     })
     .slice(0,constructedTarget);
-  const choices=selected.slice(0,choiceTarget).map(q=>({...q,response:{type:"choice"},points:5}));
+  const selectionPoints=choiceTarget?30/choiceTarget:0;
+  const choices=selected.slice(0,choiceTarget).map(q=>({...q,response:{type:"choice"},points:selectionPoints}));
   const completion=COMPLETION_RESPONSE_BANK.find(q=>isQuestionInAcademicScope(q,s?.profile,"exam")&&isEligibleForContext(q,"exam",s?.editorialOverrides||{},s?.betaMode||"internal"));
   const replaceIndex=completion?choices.findIndex(q=>q.themeId===completion.themeId):-1;
-  if(count>=4&&replaceIndex>=0)choices[replaceIndex]=completion;
+  if(examCount>=4&&replaceIndex>=0)choices[replaceIndex]={...completion,points:selectionPoints};
   if(constructed.length<constructedTarget)return choices;
   const mixed=[...choices];
-  constructed.forEach((q,index)=>mixed.splice(index===0?Math.min(2,mixed.length):mixed.length,0,q));
-  return mixed.slice(0,count);
+  constructed.forEach((q,index)=>mixed.splice(index===0?Math.min(3,mixed.length):mixed.length,0,{...q,points:35}));
+  return mixed.slice(0,examCount);
 }
 
 export function miniExamScore20(questions,answers){
