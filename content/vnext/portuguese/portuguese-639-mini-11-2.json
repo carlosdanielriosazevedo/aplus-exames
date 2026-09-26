@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 3,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -24,15 +24,16 @@
           "cognitive": "interpretar",
           "prompt": "Os dois exemplos iniciais têm como função principal",
           "options": [
-            "mostrar que qualquer medição é inútil.",
+            "mostrar que medir resultados pode alterar o comportamento das pessoas avaliadas.",
             "ilustrar como um indicador pode incentivar comportamentos que não correspondem totalmente ao objetivo.",
-            "defender que escolas e empresas não devem recolher dados.",
-            "provar que quantidade e qualidade são sempre incompatíveis."
+            "mostrar que a comparação entre resultados depende da escolha de indicadores equivalentes.",
+            "sugerir que um indicador perde utilidade quando não mede diretamente a qualidade."
           ],
           "answerIndex": 1,
           "explanation": "Os exemplos mostram que otimizar a medida pode não significar melhorar o objetivo mais amplo que ela procura representar.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LEITURA-002-Q2",
@@ -45,15 +46,16 @@
           "cognitive": "interpretar",
           "prompt": "A pergunta colocada perto do final do texto funciona sobretudo como",
           "options": [
-            "uma síntese do critério usado para avaliar a qualidade do indicador.",
-            "uma mudança para um tema sem relação com os exemplos.",
-            "uma conclusão de que todos os indicadores devem ser abandonados.",
-            "uma pergunta sem resposta possível."
+            "uma reformulação do problema que desloca a atenção da medição para os resultados.",
+            "uma objeção à ideia de que os indicadores podem influenciar comportamentos.",
+            "uma passagem dos exemplos concretos para uma defesa da recolha de mais dados.",
+            "uma síntese do critério usado para avaliar a qualidade do indicador."
           ],
-          "answerIndex": 0,
+          "answerIndex": 3,
           "explanation": "A pergunta condensa o princípio defendido no texto: verificar se a medida continua a representar o objetivo que se quer melhorar.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LEITURA-002-Q3",
@@ -75,17 +77,53 @@
               {
                 "id": "conteudo",
                 "label": "Explica a reformulação entre crítica aos efeitos e defesa de um uso cuidadoso dos indicadores.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica a reformulação entre crítica aos efeitos e defesa de um uso cuidadoso dos indicadores."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois elementos pertinentes do texto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     },
@@ -108,15 +146,16 @@
           "cognitive": "interpretar",
           "prompt": "A abertura da sala leva Miguel sobretudo a",
           "options": [
-            "descobrir um segredo familiar decisivo.",
             "substituir uma construção imaginada por uma relação mais concreta com o passado.",
-            "concluir que os objetos antigos não têm valor.",
-            "decidir abandonar imediatamente a casa."
+            "confirmar que as histórias ouvidas sobre a casa correspondiam ao que imaginara.",
+            "perceber que a importância da sala dependia mais do segredo do que dos objetos encontrados.",
+            "reconhecer que a curiosidade criada ao longo dos anos era mais significativa do que a descoberta."
           ],
-          "answerIndex": 1,
+          "answerIndex": 0,
           "explanation": "A sala imaginada durante anos revela-se comum, e Miguel passa a relacionar-se com o passado através de objetos concretos e não do mistério da porta.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-11-LIT-002-Q2",
@@ -129,15 +168,16 @@
           "cognitive": "interpretar",
           "prompt": "A frase final — «A sala parecia menor aberta, mas a casa, estranhamente, parecia maior» — sugere que",
           "options": [
-            "a arquitetura da casa se alterou fisicamente.",
+            "a abertura da sala altera a perceção física do espaço e reduz o peso das histórias familiares.",
+            "a perda de expectativa torna a sala menos importante, ao mesmo tempo que valoriza o resto da casa.",
             "o desaparecimento do mistério reduz uma divisão, mas amplia a compreensão que Miguel tem da casa e do passado.",
-            "Miguel pretende aumentar a área da casa.",
-            "a sala passa a conter mais objetos."
+            "a descoberta confirma que a dimensão simbólica da casa depende daquilo que permanece inacessível."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "O contraste exprime uma mudança de perceção: a sala perde a dimensão imaginária, mas a casa ganha profundidade ao integrar uma parte antes desconhecida.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-PASSAGE-11-LIT-002-Q3",
@@ -159,17 +199,53 @@
               {
                 "id": "conteudo",
                 "label": "Relaciona a perspetiva de Miguel com o contraste entre imaginação e realidade.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Relaciona a perspetiva de Miguel com o contraste entre imaginação e realidade."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois elementos pertinentes do excerto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     }

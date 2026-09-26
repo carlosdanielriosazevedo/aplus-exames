@@ -1,34 +1,252 @@
 {
-  "subjectId":"portuguese",
-  "examCode":"639",
-  "version":1,
-  "status":"prototype-not-live",
-  "sourcePolicy":"original-only",
-  "passages":[
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 3,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
     {
-      "passageId":"PT639-PASSAGE-LEITURA-002",
-      "year":"12.º",
-      "domain":"leitura",
-      "title":"O valor de reparar",
-      "sourceOrigin":"original",
-      "text":"Durante muito tempo, substituir pareceu mais simples do que reparar. Um aparelho avariado saía de casa e outro ocupava o seu lugar, muitas vezes antes de alguém perguntar se o problema tinha solução. Nos últimos anos, porém, oficinas comunitárias e encontros de reparação voltaram a atrair pessoas. Quem participa leva uma torradeira, uma bicicleta ou uma peça de roupa e tenta recuperá-la com a ajuda de voluntários. O objetivo não é transformar todos em técnicos. É mostrar que um objeto pode ser compreendido antes de ser descartado. Há também uma dimensão social: pessoas de idades diferentes trocam conhecimentos que raramente encontrariam espaço numa compra rápida. Reparar exige tempo e nem sempre compensa em termos económicos. Algumas peças são caras, certos produtos foram desenhados de modo a dificultar a desmontagem e há avarias que tornam a substituição inevitável. Ainda assim, a prática altera a relação com os objetos. Quando alguém descobre por que razão uma peça deixou de funcionar e consegue prolongar-lhe a vida, o consumo deixa de ser apenas uma sequência de aquisições. Passa também a incluir cuidado, conhecimento e escolha.",
-      "items":[
-        {"id":"PT639-PASSAGE-LEITURA-002-Q1","year":"12.º","domain":"leitura","competencyId":"pt-leitura-informacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"reconhecer","prompt":"Segundo o texto, qual é um dos objetivos dos encontros de reparação?","options":["Garantir que todas as reparações ficam mais baratas do que comprar novo.","Formar profissionalmente todos os participantes como técnicos.","Ajudar as pessoas a compreender um objeto antes de o descartarem.","Eliminar a necessidade de substituir qualquer produto avariado."],"answerIndex":2,"explanation":"O texto afirma que o objetivo é mostrar que um objeto pode ser compreendido antes de ser descartado.","gradingMode":"deterministic","maxPoints":13},
-        {"id":"PT639-PASSAGE-LEITURA-002-Q2","year":"12.º","domain":"leitura","competencyId":"pt-leitura-inferencia","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar","prompt":"A referência às limitações da reparação serve sobretudo para","options":["contradizer a ideia de que reparar pode alterar hábitos de consumo.","tornar o argumento mais equilibrado, reconhecendo situações em que reparar não é viável.","provar que os encontros comunitários têm pouca utilidade prática.","defender que apenas produtos antigos devem ser reparados."],"answerIndex":1,"explanation":"O texto reconhece custos, desenho dos produtos e avarias irrecuperáveis sem abandonar a ideia central; essa concessão torna a argumentação mais equilibrada.","gradingMode":"deterministic","maxPoints":13},
-        {"id":"PT639-PASSAGE-LEITURA-002-Q3","year":"12.º","domain":"leitura","competencyId":"pt-leitura-organizacao","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar","prompt":"Explica como o último parágrafo reformula a ideia de consumo apresentada no início. Fundamenta a resposta em dois elementos do texto.","referenceAnswer":"No início, o consumo surge associado à substituição rápida: um objeto avariado é descartado e outro ocupa o seu lugar. No final, depois de apresentar a experiência da reparação, o texto propõe uma relação mais consciente com os objetos, em que compreender a avaria e prolongar a vida útil introduz cuidado, conhecimento e escolha. Assim, consumir deixa de significar apenas adquirir e substituir.","wordLimit":{"min":60,"max":110},"rubric":{"criteria":[{"id":"conteudo","label":"Explica o contraste entre substituição rápida e relação mais consciente com os objetos.","points":9},{"id":"fundamentacao","label":"Mobiliza dois elementos pertinentes do texto.","points":4}]},"gradingMode":"rubric-assisted-provisional","maxPoints":13}
+      "passageId": "PT639-PASSAGE-LEITURA-002",
+      "year": "12.º",
+      "domain": "leitura",
+      "title": "O valor de reparar",
+      "sourceOrigin": "original",
+      "text": "Durante muito tempo, substituir pareceu mais simples do que reparar. Um aparelho avariado saía de casa e outro ocupava o seu lugar, muitas vezes antes de alguém perguntar se o problema tinha solução. Nos últimos anos, porém, oficinas comunitárias e encontros de reparação voltaram a atrair pessoas. Quem participa leva uma torradeira, uma bicicleta ou uma peça de roupa e tenta recuperá-la com a ajuda de voluntários. O objetivo não é transformar todos em técnicos. É mostrar que um objeto pode ser compreendido antes de ser descartado. Há também uma dimensão social: pessoas de idades diferentes trocam conhecimentos que raramente encontrariam espaço numa compra rápida. Reparar exige tempo e nem sempre compensa em termos económicos. Algumas peças são caras, certos produtos foram desenhados de modo a dificultar a desmontagem e há avarias que tornam a substituição inevitável. Ainda assim, a prática altera a relação com os objetos. Quando alguém descobre por que razão uma peça deixou de funcionar e consegue prolongar-lhe a vida, o consumo deixa de ser apenas uma sequência de aquisições. Passa também a incluir cuidado, conhecimento e escolha.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-LEITURA-002-Q1",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-informacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "reconhecer",
+          "prompt": "Segundo o texto, qual é um dos objetivos dos encontros de reparação?",
+          "options": [
+            "Ajudar as pessoas a compreender um objeto antes de o descartarem.",
+            "Ensinar procedimentos técnicos suficientes para evitar futuras avarias.",
+            "Mostrar que reparar pode ser economicamente preferível em todos os casos.",
+            "Criar alternativas comunitárias à compra de produtos tecnologicamente mais recentes."
+          ],
+          "answerIndex": 0,
+          "explanation": "O texto afirma que o objetivo é mostrar que um objeto pode ser compreendido antes de ser descartado.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13,
+          "difficultyTarget": 1
+        },
+        {
+          "id": "PT639-PASSAGE-LEITURA-002-Q2",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-inferencia",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A referência às limitações da reparação serve sobretudo para",
+          "options": [
+            "mostrar que a reparação só produz efeitos relevantes quando também é economicamente vantajosa.",
+            "delimitar a proposta, defendendo a reparação apenas para produtos fáceis de desmontar.",
+            "sugerir que a dimensão social da reparação é mais importante do que prolongar a vida dos objetos.",
+            "tornar o argumento mais equilibrado, reconhecendo situações em que reparar não é viável."
+          ],
+          "answerIndex": 3,
+          "explanation": "O texto reconhece custos, desenho dos produtos e avarias irrecuperáveis sem abandonar a ideia central; essa concessão torna a argumentação mais equilibrada.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13,
+          "difficultyTarget": 2
+        },
+        {
+          "id": "PT639-PASSAGE-LEITURA-002-Q3",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-organizacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica como o último parágrafo reformula a ideia de consumo apresentada no início. Fundamenta a resposta em dois elementos do texto.",
+          "referenceAnswer": "No início, o consumo surge associado à substituição rápida: um objeto avariado é descartado e outro ocupa o seu lugar. No final, depois de apresentar a experiência da reparação, o texto propõe uma relação mais consciente com os objetos, em que compreender a avaria e prolongar a vida útil introduz cuidado, conhecimento e escolha. Assim, consumir deixa de significar apenas adquirir e substituir.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica o contraste entre substituição rápida e relação mais consciente com os objetos.",
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica o contraste entre substituição rápida e relação mais consciente com os objetos."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do texto.",
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13,
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
+        }
       ]
     },
     {
-      "passageId":"PT639-PASSAGE-LIT-002",
-      "year":"12.º",
-      "domain":"educacao-literaria",
-      "title":"A luz do corredor",
-      "sourceOrigin":"original",
-      "text":"O relógio da sala tinha parado às três e dez, mas Marta só reparou nisso quando regressou para buscar o casaco. A casa da avó estava quase vazia. De manhã tinham levado a mesa grande; à tarde, as caixas com livros. Restavam duas cadeiras, o relógio imóvel e uma lâmpada acesa no corredor. Marta sabia que ninguém a deixara ligada de propósito. Mesmo assim, não a apagou. Durante a infância, aquela luz aparecia sempre antes de ela adormecer no quarto de visitas. A avó dizia que o corredor não precisava de ficar iluminado, mas deixava a lâmpada acesa até ouvir o silêncio definitivo da casa. Marta vestiu o casaco e aproximou-se do interruptor. Pensou na conta da eletricidade, na porta que tinha de fechar e no agente imobiliário que chegaria cedo. Sorriu: eram argumentos razoáveis para uma lâmpada que já não servia a ninguém. Ficou alguns segundos com o dedo sobre o interruptor. Depois saiu sem lhe tocar. Ao fechar a porta, viu a faixa de luz desaparecer lentamente até restar apenas uma linha fina junto ao chão. Só então percebeu que não tinha deixado uma lâmpada acesa. Tinha adiado, por mais alguns minutos, o momento de aceitar que já não havia ninguém à sua espera naquele corredor.",
-      "items":[
-        {"id":"PT639-PASSAGE-LIT-002-Q1","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-temas","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar","prompt":"A lâmpada acesa adquire no excerto sobretudo o valor de","options":["prova de que a casa ainda está habitada.","recordação concreta do cuidado da avó e resistência à despedida.","sinal de descuido que Marta decide corrigir imediatamente.","indício de que o relógio voltará a funcionar."],"answerIndex":1,"explanation":"A luz liga-se à memória da avó e ao adiamento emocional da despedida, como a frase final explicita.","gradingMode":"deterministic","maxPoints":13},
-        {"id":"PT639-PASSAGE-LIT-002-Q2","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-forma","sourceOrigin":"original","reviewStatus":"prototype","responseType":"multiple-choice","cognitive":"interpretar","prompt":"O contraste entre os “argumentos razoáveis” e a decisão de Marta evidencia","options":["a incapacidade de Marta compreender as consequências práticas da venda.","a oposição entre uma decisão racional e o significado afetivo atribuído à luz.","a certeza de que a avó regressará à casa.","a intenção de Marta de impedir a chegada do agente imobiliário."],"answerIndex":1,"explanation":"Os motivos práticos para apagar a luz entram em tensão com o seu valor afetivo e memorial.","gradingMode":"deterministic","maxPoints":13},
-        {"id":"PT639-PASSAGE-LIT-002-Q3","year":"12.º","domain":"educacao-literaria","competencyId":"pt-literatura-voz","sourceOrigin":"original","reviewStatus":"prototype","responseType":"restricted-response","cognitive":"raciocinar","prompt":"Explica de que modo a focalização em Marta contribui para o sentido da última frase. Apoia a resposta em dois elementos do excerto.","referenceAnswer":"A focalização acompanha a perceção e as memórias de Marta, permitindo que o leitor compreenda gradualmente que a luz não tem apenas uma função prática. A recordação da avó que a deixava acesa e a hesitação diante do interruptor mostram o valor afetivo do gesto. Por isso, a última frase funciona como tomada de consciência da própria personagem: manter a luz acesa significa adiar a aceitação da ausência da avó.","wordLimit":{"min":60,"max":110},"rubric":{"criteria":[{"id":"conteudo","label":"Relaciona a focalização em Marta com a tomada de consciência final.","points":9},{"id":"fundamentacao","label":"Mobiliza dois elementos pertinentes do excerto.","points":4}]},"gradingMode":"rubric-assisted-provisional","maxPoints":13}
+      "passageId": "PT639-PASSAGE-LIT-002",
+      "year": "12.º",
+      "domain": "educacao-literaria",
+      "title": "A luz do corredor",
+      "sourceOrigin": "original",
+      "text": "O relógio da sala tinha parado às três e dez, mas Marta só reparou nisso quando regressou para buscar o casaco. A casa da avó estava quase vazia. De manhã tinham levado a mesa grande; à tarde, as caixas com livros. Restavam duas cadeiras, o relógio imóvel e uma lâmpada acesa no corredor. Marta sabia que ninguém a deixara ligada de propósito. Mesmo assim, não a apagou. Durante a infância, aquela luz aparecia sempre antes de ela adormecer no quarto de visitas. A avó dizia que o corredor não precisava de ficar iluminado, mas deixava a lâmpada acesa até ouvir o silêncio definitivo da casa. Marta vestiu o casaco e aproximou-se do interruptor. Pensou na conta da eletricidade, na porta que tinha de fechar e no agente imobiliário que chegaria cedo. Sorriu: eram argumentos razoáveis para uma lâmpada que já não servia a ninguém. Ficou alguns segundos com o dedo sobre o interruptor. Depois saiu sem lhe tocar. Ao fechar a porta, viu a faixa de luz desaparecer lentamente até restar apenas uma linha fina junto ao chão. Só então percebeu que não tinha deixado uma lâmpada acesa. Tinha adiado, por mais alguns minutos, o momento de aceitar que já não havia ninguém à sua espera naquele corredor.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-LIT-002-Q1",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-temas",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A lâmpada acesa adquire no excerto sobretudo o valor de",
+          "options": [
+            "um sinal de que a casa continua simbolicamente ocupada apesar da ausência da avó.",
+            "recordação concreta do cuidado da avó e resistência à despedida.",
+            "um gesto de continuidade doméstica que Marta tenta preservar de forma consciente.",
+            "um elemento que transforma a venda da casa numa decisão que Marta ainda pretende rever."
+          ],
+          "answerIndex": 1,
+          "explanation": "A luz liga-se à memória da avó e ao adiamento emocional da despedida, como a frase final explicita.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13,
+          "difficultyTarget": 2
+        },
+        {
+          "id": "PT639-PASSAGE-LIT-002-Q2",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-forma",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "O contraste entre os “argumentos razoáveis” e a decisão de Marta evidencia",
+          "options": [
+            "a dificuldade de Marta em distinguir uma decisão prática de uma escolha definitiva sobre a casa.",
+            "o conflito entre respeitar os hábitos da avó e preparar a casa para o novo proprietário.",
+            "a oposição entre uma decisão racional e o significado afetivo atribuído à luz.",
+            "a tentativa de Marta de justificar emocionalmente uma decisão que sabe ser pouco razoável."
+          ],
+          "answerIndex": 2,
+          "explanation": "Os motivos práticos para apagar a luz entram em tensão com o seu valor afetivo e memorial.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13,
+          "difficultyTarget": 2
+        },
+        {
+          "id": "PT639-PASSAGE-LIT-002-Q3",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-voz",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica de que modo a focalização em Marta contribui para o sentido da última frase. Apoia a resposta em dois elementos do excerto.",
+          "referenceAnswer": "A focalização acompanha a perceção e as memórias de Marta, permitindo que o leitor compreenda gradualmente que a luz não tem apenas uma função prática. A recordação da avó que a deixava acesa e a hesitação diante do interruptor mostram o valor afetivo do gesto. Por isso, a última frase funciona como tomada de consciência da própria personagem: manter a luz acesa significa adiar a aceitação da ausência da avó.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Relaciona a focalização em Marta com a tomada de consciência final.",
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Relaciona a focalização em Marta com a tomada de consciência final."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do excerto.",
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13,
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
+        }
       ]
     }
   ]

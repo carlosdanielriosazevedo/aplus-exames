@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 1,
+  "version": 3,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -24,15 +24,16 @@
           "cognitive": "reconhecer",
           "prompt": "Que alteração foi feita ao banco durante a renovação?",
           "options": [
-            "Foi substituído por vários bancos novos.",
+            "Foi mantido no mesmo local, mas recebeu sombra e uma nova estrutura de apoio.",
+            "Foi substituído por um equipamento semelhante numa zona mais frequentada.",
             "Foi deslocado e orientado para outra zona do jardim.",
-            "Foi retirado do espaço por falta de utilização.",
-            "Foi colocado dentro da escola."
+            "Foi aproximado da escola para ficar associado sobretudo aos horários de entrada e saída."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "O texto afirma que o banco foi deslocado, colocado à sombra e orientado para a zona de brincadeira.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 1
         },
         {
           "id": "PT639-PASSAGE-10-LEITURA-002-Q2",
@@ -45,15 +46,16 @@
           "cognitive": "interpretar",
           "prompt": "O exemplo do banco permite concluir sobretudo que",
           "options": [
-            "a qualidade de um espaço depende sempre de equipamentos novos.",
             "a localização e a relação com o espaço podem alterar a utilidade de um objeto.",
-            "os bancos devem ficar sempre junto a escolas.",
-            "a sombra é o único fator que determina a utilização."
+            "a utilidade de um espaço depende sobretudo da quantidade de equipamentos disponíveis.",
+            "a frequência de um lugar é determinada principalmente pela proximidade de uma escola.",
+            "o conforto físico é o fator decisivo para transformar a utilização de um espaço."
           ],
-          "answerIndex": 1,
+          "answerIndex": 0,
           "explanation": "O texto mostra que o mesmo banco ganhou novos usos ao mudar de posição e relação com o espaço envolvente.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-10-LEITURA-002-Q3",
@@ -75,17 +77,53 @@
               {
                 "id": "conteudo",
                 "label": "Explica o contraste entre permanência do objeto e mudança de utilização.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica o contraste entre permanência do objeto e mudança de utilização."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois elementos pertinentes do texto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     },
@@ -108,15 +146,16 @@
           "cognitive": "interpretar",
           "prompt": "O conflito vivido por Helena centra-se sobretudo",
           "options": [
-            "na dificuldade de escolher onde guardar a carta.",
-            "na tensão entre imaginar possibilidades e conhecer o conteúdo real.",
-            "na decisão de responder imediatamente ao remetente.",
-            "no receio de perder fisicamente o envelope."
+            "na dificuldade de interpretar a intenção do remetente antes de ler a carta.",
+            "na tentativa de prolongar uma expectativa que já considera pouco provável.",
+            "na oposição entre guardar a carta e decidir se deve responder-lhe.",
+            "na tensão entre imaginar possibilidades e conhecer o conteúdo real."
           ],
-          "answerIndex": 1,
+          "answerIndex": 3,
           "explanation": "Enquanto a carta permanece fechada, Helena conserva várias hipóteses; abrir implica substituir possibilidades pelo conteúdo real.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-10-LIT-002-Q2",
@@ -129,15 +168,16 @@
           "cognitive": "interpretar",
           "prompt": "A ideia de que o papel parecia «mais pesado» funciona como",
           "options": [
-            "descrição literal de uma mudança física.",
+            "um modo de mostrar que a carta ganhou importância objetiva ao longo dos dias.",
             "imagem do peso emocional criado pela espera e pela imaginação.",
-            "prova de que o envelope continha vários objetos.",
-            "indicação de que Helena queria devolver a carta."
+            "uma antecipação de que o conteúdo da carta será mais grave do que Helena espera.",
+            "uma forma de sugerir que o tempo altera a perceção concreta dos objetos."
           ],
           "answerIndex": 1,
           "explanation": "O peso é figurado e traduz a carga emocional acumulada durante os dias em que Helena adiou a abertura.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-10-LIT-002-Q3",
@@ -159,17 +199,53 @@
               {
                 "id": "conteudo",
                 "label": "Explica a relação entre adiamento temporal e crescimento da tensão.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica a relação entre adiamento temporal e crescimento da tensão."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois momentos pertinentes do excerto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     }
