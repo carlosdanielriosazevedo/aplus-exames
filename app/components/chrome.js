@@ -60,14 +60,22 @@ export function ApronsoNudge({pose="thinking", tone="light", children}){
 
 export const Back = ({go, to="home"}) => <button className="back" onClick={()=>go(to)}>← Voltar</button>;
 
-export const STUDENT_NAV = [["home","⌂","Aprender"],["train","◎","Treinar"],["ranking","△","Ranking"],["progress","◫","Progresso"]];
+export const STUDENT_NAV = [["home","Aprender"],["train","Treinar"],["ranking","Ranking"],["progress","Progresso"]];
+
+function NavIcon({name}){
+  const common={viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"1.9",strokeLinecap:"round",strokeLinejoin:"round","aria-hidden":"true"};
+  if(name==="home")return <svg {...common}><path d="M3.5 10.5 12 3.8l8.5 6.7"/><path d="M5.5 9.8v10h13v-10"/><path d="M9.5 19.8v-6h5v6"/></svg>;
+  if(name==="train")return <svg {...common}><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="m15.2 8.8 4.3-4.3"/><path d="M16.5 4.5h3v3"/></svg>;
+  if(name==="ranking")return <svg {...common}><path d="M8 20v-6H4.5v6"/><path d="M13.75 20V9H10.25v11"/><path d="M19.5 20V4h-3.5v16"/></svg>;
+  return <svg {...common}><path d="M4 18.5V13"/><path d="M9.3 18.5V9.5"/><path d="M14.7 18.5V6"/><path d="M20 18.5V3.5"/><path d="M3.5 20.5h17"/></svg>;
+}
 
 export function StudentNav({active, go}){
   return (
     <nav className="studentNav" aria-label="Navegação principal">
-      {STUDENT_NAV.map(([id,icon,label]) => (
+      {STUDENT_NAV.map(([id,label]) => (
         <button type="button" key={id} className={active===id?"active":""} aria-current={active===id?"page":undefined} onClick={()=>go(id)}>
-          <span aria-hidden="true">{icon}</span><b>{label}</b>
+          <span className="studentNavIcon"><NavIcon name={id}/></span><b>{label}</b>
         </button>
       ))}
     </nav>
@@ -87,4 +95,4 @@ export function FriendsBetaRibbon({s}){
   return <div className="friendsBetaRibbon"><b>🧪 TESTE PRIVADO</b><span>Conteúdo ainda em revisão · resultados provisórios</span></div>;
 }
 
-export const Shell = ({children}) => <main className="light"><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
+export const Shell = ({children,className=""}) => <main className={`light ${className}`.trim()}><FriendsBetaRibbon/><section className="panel">{children}</section></main>;
