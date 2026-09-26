@@ -47,11 +47,11 @@
           "prompt": "A comparação entre um mapa só com estradas e outro com árvores, escolas e percursos pedonais mostra que",
           "options": [
             "a utilidade de um mapa aumenta quando representa o maior número possível de elementos.",
-            "a seleção de informação influencia a forma como interpretamos e usamos um território.",
             "a inclusão de equipamentos urbanos torna qualquer mapa mais objetivo.",
+            "a seleção de informação influencia a forma como interpretamos e usamos um território.",
             "a função principal dos mapas urbanos é comparar diferentes modos de deslocação."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "A comparação mostra que diferentes seleções tornam visíveis diferentes usos e leituras da cidade.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -133,12 +133,12 @@
           "cognitive": "interpretar",
           "prompt": "A repetição do gesto de Rui levantar os olhos para a janela contribui para",
           "options": [
-            "mostrar que a rotina criou uma ligação silenciosa com aquele lugar.",
+            "mostrar que o vaso passou a funcionar como o único elemento estável da rua.",
             "sugerir que Rui procurava descobrir a identidade de quem vivia na casa.",
             "acentuar a curiosidade de Rui perante uma alteração que não compreende.",
-            "mostrar que o vaso passou a funcionar como o único elemento estável da rua."
+            "mostrar que a rotina criou uma ligação silenciosa com aquele lugar."
           ],
-          "answerIndex": 0,
+          "answerIndex": 3,
           "explanation": "O gesto repetido materializa a rotina e a ligação criada sem contacto direto com quem vivia na casa.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
