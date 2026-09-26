@@ -46,12 +46,12 @@
           "cognitive": "interpretar",
           "prompt": "Na frase “Para isso, não basta dizer que uma ideia está errada”, a expressão “Para isso” retoma",
           "options": [
-            "a intenção de melhorar a decisão através de uma discordância bem formulada.",
-            "a necessidade de justificar qualquer discordância antes de formular uma alternativa.",
             "a importância de separar a crítica à ideia da avaliação da pessoa que a apresenta.",
+            "a necessidade de justificar qualquer discordância antes de formular uma alternativa.",
+            "a intenção de melhorar a decisão através de uma discordância bem formulada.",
             "a vantagem de adiar uma decisão quando existem posições incompatíveis."
           ],
-          "answerIndex": 0,
+          "answerIndex": 2,
           "explanation": "A expressão retoma a função positiva atribuída à discordância bem formulada: melhorar a decisão.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -111,12 +111,12 @@
           "cognitive": "interpretar",
           "prompt": "A descoberta da carta leva Tomás sobretudo a",
           "options": [
-            "substituir uma imagem idealizada por uma visão mais complexa do bisavô.",
+            "questionar se a memória transmitida pela família depende demasiado de documentos escritos.",
             "reinterpretar a história familiar sem abandonar a admiração que sentia pelo bisavô.",
             "perceber que os objetos familiares podem preservar versões contraditórias do passado.",
-            "questionar se a memória transmitida pela família depende demasiado de documentos escritos."
+            "substituir uma imagem idealizada por uma visão mais complexa do bisavô."
           ],
-          "answerIndex": 0,
+          "answerIndex": 3,
           "explanation": "A carta não destrói a narrativa familiar, mas introduz falha e vulnerabilidade numa imagem antes muito estável.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
