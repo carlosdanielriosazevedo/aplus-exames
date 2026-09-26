@@ -800,7 +800,6 @@ function DiagIntro({s,setS,go}){
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
     {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
-    <div className="notice"><b>Que matéria entra no diagnóstico?</b><span>No teu ano atual, apenas as submatérias que assinalaste como já lecionadas. A matéria dos anos anteriores fica automaticamente incluída.</span></div>
     <button className="primary" disabled={gated} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
       const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
