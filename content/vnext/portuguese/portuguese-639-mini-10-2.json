@@ -25,11 +25,11 @@
           "prompt": "Que alteração foi feita ao banco durante a renovação?",
           "options": [
             "Foi mantido no mesmo local, mas recebeu sombra e uma nova estrutura de apoio.",
-            "Foi deslocado e orientado para outra zona do jardim.",
             "Foi substituído por um equipamento semelhante numa zona mais frequentada.",
+            "Foi deslocado e orientado para outra zona do jardim.",
             "Foi aproximado da escola para ficar associado sobretudo aos horários de entrada e saída."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "O texto afirma que o banco foi deslocado, colocado à sombra e orientado para a zona de brincadeira.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -46,12 +46,12 @@
           "cognitive": "interpretar",
           "prompt": "O exemplo do banco permite concluir sobretudo que",
           "options": [
-            "a utilidade de um espaço depende sobretudo da quantidade de equipamentos disponíveis.",
             "a localização e a relação com o espaço podem alterar a utilidade de um objeto.",
+            "a utilidade de um espaço depende sobretudo da quantidade de equipamentos disponíveis.",
             "a frequência de um lugar é determinada principalmente pela proximidade de uma escola.",
             "o conforto físico é o fator decisivo para transformar a utilização de um espaço."
           ],
-          "answerIndex": 1,
+          "answerIndex": 0,
           "explanation": "O texto mostra que o mesmo banco ganhou novos usos ao mudar de posição e relação com o espaço envolvente.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -112,11 +112,11 @@
           "prompt": "O conflito vivido por Helena centra-se sobretudo",
           "options": [
             "na dificuldade de interpretar a intenção do remetente antes de ler a carta.",
-            "na tensão entre imaginar possibilidades e conhecer o conteúdo real.",
+            "na tentativa de prolongar uma expectativa que já considera pouco provável.",
             "na oposição entre guardar a carta e decidir se deve responder-lhe.",
-            "na tentativa de prolongar uma expectativa que já considera pouco provável."
+            "na tensão entre imaginar possibilidades e conhecer o conteúdo real."
           ],
-          "answerIndex": 1,
+          "answerIndex": 3,
           "explanation": "Enquanto a carta permanece fechada, Helena conserva várias hipóteses; abrir implica substituir possibilidades pelo conteúdo real.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
