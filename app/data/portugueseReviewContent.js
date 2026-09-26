@@ -33,6 +33,10 @@ const DEEP_DIVES={
     overview:"O Sermão de Santo António aos Peixes constrói uma argumentação alegórica: falar dos peixes permite criticar comportamentos humanos. A eficácia depende da progressão entre louvor, censura, exemplos e recursos retóricos.",
     connections:["Identificar tese, sequência argumentativa e função de exemplos.","Relacionar características dos peixes com os comportamentos humanos criticados.","Explicar efeitos de apóstrofe, interrogação, antítese e repetição na persuasão."]
   },
+  "frei-luis-de-sousa":{
+    overview:"Frei Luís de Sousa concentra a ação num conflito familiar em que o passado regressa e destrói a estabilidade do presente. Presságios, espaços, memória e revelações estreitam progressivamente as possibilidades das personagens até ao desfecho trágico.",
+    connections:["Relacionar Madalena, Manuel, Maria, Telmo e D. João com formas diferentes de viver o passado e a identidade.","Observar presságios, datas, retratos e mudanças de espaço como elementos de antecipação e simbolização.","Explicar como contexto histórico, unidade da ação e reconhecimento do Romeiro intensificam a dimensão trágica."]
+  },
   "viagens-minha-terra":{
     overview:"Em Viagens na Minha Terra, a viagem real convive com digressões, comentário político e narrativa sentimental. O narrador intervém, conversa com o leitor e usa a deslocação pelo país como ponto de partida para pensar identidade e sociedade.",
     connections:["Distinguir relato de viagem, digressão e narrativa de Carlos e Joaninha.","Relacionar narrador interventivo com ironia e comentário político-cultural.","Ler espaço e deslocação como formas de pensar Portugal e os seus conflitos."]
