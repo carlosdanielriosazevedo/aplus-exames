@@ -58,6 +58,12 @@ for(const name of miniFiles){
   assert.ok(baseItems.filter(item=>item.cognitive==="raciocinar").length>=2,`${name}: precisa de pelo menos dois itens de raciocínio`);
   assert.ok(doc.passages.every(passage=>passage.sourceOrigin==="original"),`${name}: textos devem ser originais`);
   assert.ok(doc.passages.every(passage=>String(passage.text||"").trim().split(/\s+/u).length>=90),`${name}: textos-base demasiado curtos`);
+  assert.ok(baseItems.every(item=>Number.isInteger(item.difficultyTarget)&&item.difficultyTarget>=1&&item.difficultyTarget<=4),`${name}: todos os itens precisam de difficultyTarget editorial 1–4`);
+  const averageDifficulty=baseItems.reduce((sum,item)=>sum+item.difficultyTarget,0)/baseItems.length;
+  assert.ok(averageDifficulty>=2.1&&averageDifficulty<=3.1,`${name}: dificuldade média fora do intervalo editorial (${averageDifficulty.toFixed(2)})`);
+  assert.ok(baseItems.some(item=>item.difficultyTarget>=3),`${name}: mini-exame precisa de pelo menos um item exigente`);
+  const correctPositions=baseItems.filter(item=>item.responseType==="multiple-choice").map(item=>item.answerIndex).sort((a,b)=>a-b);
+  assert.deepEqual(correctPositions,[0,1,2,3],`${name}: posições corretas devem ficar equilibradas entre A/B/C/D`);
   for(const item of baseItems.filter(item=>item.responseType==="multiple-choice")){
     assert.equal(item.options?.length,4,`${name} / ${item.id}: escolha múltipla precisa de quatro opções`);
     assert.equal(new Set(item.options).size,4,`${name} / ${item.id}: opções duplicadas`);
@@ -82,6 +88,14 @@ assert.equal(fullItems.length,15,"simulado completo deve ter 15 itens");
 assert.equal(fullItems.filter(item=>item.classificationMode==="mandatory").length,10,"simulado deve ter 10 itens obrigatórios");
 assert.equal(fullItems.filter(item=>item.classificationMode==="best-of-five").length,5,"simulado deve ter 5 itens opcionais");
 assert.ok(fullItems.every(item=>item.sourceOrigin==="original"),"simulado deve continuar original-only");
+assert.ok(fullItems.every(item=>Number.isInteger(item.difficultyTarget)&&item.difficultyTarget>=1&&item.difficultyTarget<=4),"simulado: todos os itens precisam de difficultyTarget editorial 1–4");
+const fullAverageDifficulty=fullItems.reduce((sum,item)=>sum+item.difficultyTarget,0)/fullItems.length;
+assert.ok(fullAverageDifficulty>=2.7&&fullAverageDifficulty<=3.3,`simulado: dificuldade média fora do intervalo editorial (${fullAverageDifficulty.toFixed(2)})`);
+assert.ok(fullItems.some(item=>item.difficultyTarget===4),"simulado deve incluir pelo menos um item de dificuldade editorial 4");
+const fullMc=fullItems.filter(item=>item.responseType==="multiple-choice");
+const fullPositionCounts=[0,0,0,0];
+for(const item of fullMc)fullPositionCounts[item.answerIndex]++;
+assert.ok(Math.max(...fullPositionCounts)-Math.min(...fullPositionCounts)<=1,`simulado: posições corretas desequilibradas (${fullPositionCounts.join("/")})`);
 
 const group1=full.passages.filter(passage=>passage.passageId.startsWith("PT639-FULL-G1")).flatMap(passage=>passage.items);
 const group2=full.passages.find(passage=>passage.passageId==="PT639-FULL-G2-001")?.items||[];
@@ -112,5 +126,5 @@ assert.equal(writing.wordLimit?.min,200,"Escrita deve começar nas 200 palavras"
 assert.equal(writing.wordLimit?.max,350,"Escrita deve terminar nas 350 palavras");
 
 console.log("✓ autenticidade Português 639: banco, mini-exames e simulado coerentes com a estrutura oficial de 2026 sem copiar itens");
-console.log("  mini-exames: 10 itens em runtime · 2 textos + Gramática + Escrita · 45 min");
+console.log("  mini-exames: 10 itens em runtime · dificuldade editorial calibrada · respostas A/B/C/D equilibradas");
 console.log("  simulado: Grupo I 5 construção + 2 seleção · Grupo II 7 seleção · Grupo III 44 pts");
