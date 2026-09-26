@@ -1626,11 +1626,11 @@ function Train({s,setS,go,start}){
   const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
   const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
 
-  return <Shell><Back go={go} to="train"/>
+  return <Shell className="wideStudentShell trainingSetupPage"><Back go={go} to="train"/>
     <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
     <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
 
-    <h3>1. Ano</h3><div className="chips">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>changeYear(y)}>{y}</button>)}</div>
+    <h3>1. Ano</h3><div className="chips yearSelector">{["10.º","11.º","12.º"].map(y=><button key={y} className={year===y?"sel":""} onClick={()=>changeYear(y)}>{y}</button>)}</div>
     <h3>2. Tema</h3><div className="themeGrid">{themes.map(t=>{
       const count=eligibleQuestions(s,t.id,"training").length;
       const generated=(s.betaMode||"internal")==="internal" && hasGenerator(t.id);
