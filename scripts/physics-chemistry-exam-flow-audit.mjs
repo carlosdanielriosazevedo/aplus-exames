@@ -32,6 +32,13 @@ assert.match(subject,/Simulado completo · 715/u,"o hub de exames deve disponibi
 assert.match(subject,/23 itens · 200 pontos · 120 min \+ 30 min de tolerância/u,"o hub deve comunicar a estrutura atual");
 assert.match(component,/Durante o simulado não mostramos correções/u,"o exame não deve dar feedback questão a questão");
 assert.match(component,/Podes voltar atrás e alterar respostas/u,"o aluno deve poder rever respostas antes de terminar");
+assert.match(component,/Tolerância ·/u,"o simulado deve distinguir visualmente os 30 minutos de tolerância.");
+assert.match(component,/ao esgotar a tolerância, a prova termina automaticamente/u,"o fim da tolerância deve fechar automaticamente o simulado.");
+assert.match(component,/blueprint\.durationMinutes\*60/u,"o cronómetro deve usar a duração do blueprint.");
+assert.match(component,/blueprint\.toleranceMinutes\*60/u,"o cronómetro deve usar a tolerância do blueprint.");
+assert.match(component,/setInterval/u,"o cronómetro deve atualizar em tempo real.");
+assert.match(component,/timeExpired/u,"o fluxo deve detetar o fim do tempo total.");
+assert.match(component,/recordedRef/u,"o fim manual ou automático não pode gravar a sessão duas vezes.");
 assert.match(component,/Terminar e rever/u,"o fluxo deve terminar em revisão");
 assert.match(component,/Contam os 4 melhores/u,"a revisão deve explicar a regra dos opcionais");
 assert.match(component,/Subtotal já corrigível/u,"respostas abertas não podem gerar uma falsa nota final");
@@ -41,4 +48,4 @@ assert.match(component,/gradePhysicsChemistryResponse/u,"o simulado deve reutili
 assert.match(component,/recordSubjectSession/u,"o simulado deve entrar no progresso partilhado");
 assert.doesNotMatch(component,/Resposta certa:[\s\S]{0,120}Seguinte/u,"não deve haver correção imediata antes do fim");
 
-console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · 200 pontos · sem feedback durante a prova · revisão conservadora");
+console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · fim automático · sem feedback durante a prova · revisão conservadora");
