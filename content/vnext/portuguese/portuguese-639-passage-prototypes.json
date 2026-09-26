@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 2,
+  "version": 3,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "passages": [
@@ -24,15 +24,16 @@
           "cognitive": "reconhecer",
           "prompt": "Segundo o texto, que alteração ocorreu nos primeiros meses após a remodelação?",
           "options": [
-            "Os comerciantes retiraram as esplanadas por falta de clientes.",
+            "Os comerciantes passaram a usar a praça sobretudo fora do horário comercial.",
             "As pessoas passaram a permanecer mais tempo na praça.",
-            "O município recuperou a proposta inicial de aumentar o estacionamento.",
-            "As associações deixaram de utilizar o espaço por falta de estruturas."
+            "O município reduziu novamente a área pedonal depois das primeiras críticas.",
+            "As associações começaram a substituir as esplanadas por atividades culturais."
           ],
           "answerIndex": 1,
           "explanation": "O texto afirma explicitamente que, nos primeiros meses, as pessoas começaram a permanecer mais tempo na praça.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 1
         },
         {
           "id": "PT639-PASSAGE-LEITURA-001-Q2",
@@ -45,15 +46,16 @@
           "cognitive": "interpretar",
           "prompt": "A evolução descrita no texto permite concluir sobretudo que",
           "options": [
-            "a redução do trânsito afastou definitivamente os comerciantes da praça.",
-            "o aumento das esplanadas foi a única consequência relevante da intervenção.",
+            "a redução do trânsito teve um efeito inicial negativo, compensado depois pela atividade comercial.",
+            "o aumento das esplanadas foi o principal mecanismo responsável pela mudança do espaço.",
             "a criação de condições de permanência favoreceu usos sociais e económicos do espaço.",
-            "a remodelação resolveu os principais problemas urbanos da zona envolvente."
+            "a remodelação alterou sobretudo a circulação, mantendo semelhantes os restantes usos da praça."
           ],
           "answerIndex": 2,
           "explanation": "A permanência mais longa das pessoas surge associada tanto às esplanadas como aos encontros e iniciativas culturais, sustentando uma transformação social e económica do espaço.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-LEITURA-001-Q3",
@@ -66,15 +68,27 @@
           "cognitive": "raciocinar",
           "prompt": "Explica de que modo a organização do texto conduz da situação inicial à ideia apresentada na última frase. Fundamenta a resposta em dois momentos do texto.",
           "referenceAnswer": "O texto começa por apresentar a praça como um lugar pensado sobretudo para a passagem rápida, com poucas condições para permanecer. Depois contrapõe a proposta de mais estacionamento à intervenção que favorece a estadia e mostra os seus efeitos: maior permanência, esplanadas, encontros e iniciativas culturais. Esta progressão sustenta a conclusão de que a eficiência de um espaço público não depende apenas da rapidez da circulação e de que permitir ficar também pode melhorar o funcionamento da cidade.",
-          "wordLimit": {"min": 60, "max": 110},
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
           "rubric": {
             "criteria": [
-              {"id": "conteudo", "label": "Explica a progressão entre a situação inicial, a intervenção e a conclusão.", "points": 9},
-              {"id": "fundamentacao", "label": "Mobiliza dois elementos pertinentes do texto.", "points": 4}
+              {
+                "id": "conteudo",
+                "label": "Explica a progressão entre a situação inicial, a intervenção e a conclusão.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do texto.",
+                "points": 4
+              }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     },
@@ -98,14 +112,15 @@
           "prompt": "A focalização narrativa permite sobretudo",
           "options": [
             "acompanhar a hesitação de Inês e o modo como ela interpreta a separação da casa.",
-            "conhecer diretamente os pensamentos do comprador que chegará no dia seguinte.",
-            "observar apenas os movimentos exteriores de Inês, sem acesso à sua experiência interior.",
-            "alternar continuamente entre a perspetiva de Inês e a da mãe."
+            "contrastar o que Inês pensa com a perspetiva do comprador que chegará no dia seguinte.",
+            "limitar a narrativa às ações de Inês, deixando a interpretação da despedida exclusivamente ao leitor.",
+            "alternar entre a perceção presente de Inês e recordações apresentadas por um narrador exterior."
           ],
           "answerIndex": 0,
           "explanation": "A narração acompanha de perto a perceção e a experiência interior de Inês, incluindo a hesitação, as memórias e a interpretação afetiva da despedida.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-PASSAGE-LIT-001-Q2",
@@ -118,15 +133,27 @@
           "cognitive": "raciocinar",
           "prompt": "Explica a importância da casa na construção do conflito vivido por Inês. Apoia a resposta em dois elementos do excerto.",
           "referenceAnswer": "A casa representa simultaneamente um bem que Inês decidiu vender por razões práticas e um lugar onde se concentram memórias ligadas à família e à própria identidade. A recordação dos regressos, da voz da mãe e das fotografias contrasta com as caixas vazias e com a venda iminente. Por isso, embora Inês reconheça as razões para partir, a chave e a fachada que desaparece no espelho tornam visível a dificuldade de aceitar que aquele lugar continue a existir sem já lhe pertencer.",
-          "wordLimit": {"min": 60, "max": 110},
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
           "rubric": {
             "criteria": [
-              {"id": "conteudo", "label": "Explica a casa como espaço de memória e como objeto de separação.", "points": 9},
-              {"id": "fundamentacao", "label": "Mobiliza dois elementos pertinentes do excerto.", "points": 4}
+              {
+                "id": "conteudo",
+                "label": "Explica a casa como espaço de memória e como objeto de separação.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do excerto.",
+                "points": 4
+              }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-PASSAGE-LIT-001-Q3",
@@ -139,15 +166,16 @@
           "cognitive": "interpretar",
           "prompt": "No final do excerto, a redução progressiva da fachada no espelho retrovisor contribui para",
           "options": [
-            "transformar a despedida numa descrição neutra do percurso automóvel.",
-            "sugerir que a casa se aproxima de Inês à medida que ela parte.",
+            "converter a partida numa imagem objetiva que reduz a importância emocional da casa.",
+            "sugerir que a distância física torna a presença da casa mais intensa na memória de Inês.",
             "materializar visualmente o afastamento e o encerramento daquele vínculo espacial.",
-            "anular a tensão construída anteriormente entre razões práticas e memória afetiva."
+            "mostrar que a decisão prática de partir elimina progressivamente a memória afetiva."
           ],
           "answerIndex": 2,
           "explanation": "A fachada que diminui e desaparece converte o afastamento físico numa imagem do processo de separação que estrutura o excerto.",
           "gradingMode": "deterministic",
-          "maxPoints": 13
+          "maxPoints": 13,
+          "difficultyTarget": 3
         }
       ]
     }
