@@ -1,6 +1,7 @@
 "use client";
 import {useState} from "react";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation";
+import {physicsChemistryPracticalActivitiesForDomain} from "../data/physicsChemistryPracticalActivities";
 
 export default function PhysicsChemistryLearnPanel({schoolYear="11.º"}){
   const defaultYear=schoolYear==="10.º"?"10.º":"11.º";
@@ -11,7 +12,11 @@ export default function PhysicsChemistryLearnPanel({schoolYear="11.º"}){
     <div className="chips yearSelector" aria-label="Escolher ano">{["10.º","11.º"].map(value=><button type="button" key={value} className={year===value?"sel":""} aria-pressed={year===value} onClick={()=>setYear(value)}>{value}</button>)}</div>
     <div className="reviewChapterList">{rows.map(row=><details className="reviewChapter" key={row.id}>
       <summary><div><small>{row.area.toUpperCase()} · {row.year}</small><b>{row.title}</b></div><span>⌄</span></summary>
-      <div className="reviewChapterBody"><p>Conteúdos nucleares deste domínio:</p><ul>{row.subtopics.map(topic=><li key={topic}>{topic}</li>)}</ul></div>
+      <div className="reviewChapterBody">
+        <p>Conteúdos nucleares deste domínio:</p><ul>{row.subtopics.map(topic=><li key={topic}>{topic}</li>)}</ul>
+        <p><b>Trabalho prático associado nas AE:</b></p>
+        <ul>{physicsChemistryPracticalActivitiesForDomain(row.id).map(activity=><li key={activity.id}><b>{activity.label}</b> — {activity.focus.join(" · ")}</li>)}</ul>
+      </div>
     </details>)}</div>
   </>;
 }
