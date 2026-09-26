@@ -7,7 +7,7 @@ import {
 } from "../app/data/physicsChemistryFoundation.js";
 import {physicsChemistryCoverage,buildPhysicsChemistryDiagnostic,buildAdaptivePhysicsChemistryMission} from "../app/lib/physicsChemistryEngine.js";
 import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS} from "../app/data/subjects.js";
-import {PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY,PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY} from "../app/data/physicsChemistryAssessmentPolicy.js";
+import {PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY,PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY,PHYSICS_CHEMISTRY_A_DGE_ASSESSMENT_DOMAINS} from "../app/data/physicsChemistryAssessmentPolicy.js";
 
 const years=new Set(PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.year));
 assert.deepEqual([...years].sort(),["10.º","11.º"],"FQ A deve cobrir 10.º e 11.º anos.");
@@ -72,6 +72,7 @@ assert.equal(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.officialPrinciples.oneErrorTy
 assert.equal(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.officialPrinciples.multipleErrorType2Penalty,4);
 assert.equal(PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY.appPolicy.openScientificTextFinalAutoGrade,false);
 assert.equal(PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY.version,"AE-marco-2026");
+assert.deepEqual(PHYSICS_CHEMISTRY_A_DGE_ASSESSMENT_DOMAINS.map(row=>row.label),["Conhecimento Científico","Trabalho Prático","Resolução de Problemas","Comunicação Científica"]);
 assert.equal(PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY.practicalExperimentalIsCore,true);
 
 const subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id==="physics-chemistry-a");
