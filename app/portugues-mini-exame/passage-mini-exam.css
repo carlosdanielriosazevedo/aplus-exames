@@ -58,3 +58,44 @@
   .ptx-summary div,.ptx-summary div:nth-child(-n+2){border-top:1px solid #e8edef}
   .ptx-summary div:first-child{border-top:0}
 }
+
+
+/* Mobile final audit — provas de Português */
+@media(max-width:820px){
+  .ptx-shell{max-width:100%;overflow-x:hidden;padding:12px 12px 28px}
+  .ptx-header{display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
+  .ptx-header h1{font-size:30px;line-height:1.12}
+  .ptx-header-actions{width:100%}
+  .ptx-header-actions button{width:100%;min-height:46px}
+  .ptx-timer{width:100%;justify-content:space-between}
+  .ptx-progress{margin-top:10px}
+  .ptx-question-nav{max-width:100%;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .ptx-workspace{display:block}
+  .ptx-passage{position:static;max-height:none;margin-bottom:14px}
+  .ptx-mobile-text-toggle{position:sticky;top:8px;z-index:35;width:100%;min-height:46px}
+  .ptx-question-card{padding:18px}
+  .ptx-question-card h2{font-size:20px;line-height:1.35}
+  .ptx-options button{min-height:54px}
+  .ptx-open-response textarea,.ptx-evidence-label textarea,.ptx-revision-editor textarea{font-size:16px}
+  .ptx-actions,.ptx-revision-actions{display:grid;grid-template-columns:1fr;gap:8px}
+  .ptx-actions button,.ptx-revision-actions button{width:100%;min-height:48px}
+  .ptx-summary{grid-template-columns:1fr 1fr}
+  .ptx-review-item{padding:16px}
+  .ptx-review-top{gap:8px;align-items:flex-start}
+  .ptx-review-top strong{white-space:normal;text-align:right}
+  .ptx-criterion-levels{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+  .ptx-shell{padding-left:10px;padding-right:10px}
+  .ptx-header h1{font-size:27px}
+  .ptx-question-nav{margin-left:-2px;margin-right:-2px}
+  .ptx-nav-group-label{font-size:9px}
+  .ptx-question-card{padding:15px;border-radius:16px}
+  .ptx-passage{padding:16px;border-radius:16px}
+  .ptx-summary{grid-template-columns:1fr}
+  .ptx-summary div{border-left:0;border-top:1px solid #e8edef}
+  .ptx-summary div:first-child{border-top:0}
+  .ptx-exam-policy,.ptx-progress-story,.ptx-improvement-insight{padding:14px}
+  .ptx-self-assessment,.ptx-revision-loop{padding:14px}
+}
