@@ -128,7 +128,8 @@ function normalizeSubjectWorkspace(state){
 }
 
 function activeSubjectDiagnosticDone(state){
-  return state.activeSubjectId==="portuguese"?subjectProgressFor(state,"portuguese").diagnosticDone:!!state.diagnosticDone;
+  if(["portuguese","physics-chemistry-a"].includes(state.activeSubjectId))return subjectProgressFor(state,state.activeSubjectId).diagnosticDone;
+  return !!state.diagnosticDone;
 }
 
 const initial={
@@ -491,7 +492,7 @@ function SubjectSelection({s,setS,go}){
 
     <div className="subjectSelectionSummary">
       <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
-      <strong>Matemática A e Português disponíveis</strong>
+      <strong>Matemática A, Português e Física e Química A disponíveis</strong>
     </div>
 
     <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
@@ -519,7 +520,7 @@ function SubjectSelection({s,setS,go}){
       </section>;
     })}</div>
 
-    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A e Português usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>
+    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A, Português e Física e Química A usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>
     <button className="primary" disabled={!selected.length} onClick={save}>Continuar</button>
   </Shell>;
 }
@@ -553,7 +554,7 @@ function SubjectManager({s,setS,go}){
     <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
-    <div className="notice"><b>Conteúdo de Português em validação</b><span>A estrutura da disciplina já é a mesma do workspace principal. O conteúdo e a correção escrita continuam em validação antes de serem considerados resultados académicos de produção.</span></div>
+    <div className="notice"><b>Uma estrutura comum para todas as disciplinas</b><span>Cada disciplina usa o mesmo workspace e mantém progresso próprio. O conteúdo e os motores de resposta são validados separadamente antes de cada disciplina sair da fase foundation.</span></div>
   </Shell>;
 }
 
