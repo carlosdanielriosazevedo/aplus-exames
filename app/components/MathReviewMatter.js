@@ -16,7 +16,7 @@ export default function MathReviewMatter({s,go}){
   const subtopics=selected?curriculumSubtopicsForTheme(selected.id):[];
   const study=selected?mathReviewContentFor(selected.id):null;
 
-  return <Shell>
+  return <Shell className="wideStudentShell reviewStudyPage">
     <StudentTop s={s} go={go}/>
     <button className="back" onClick={()=>go("train")}>← Voltar</button>
     <section className="progressDetails" aria-label="Rever matéria de Matemática A">
