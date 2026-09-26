@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 4,
+  "version": 5,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "alignmentNote": "Modelo original APProva+ alinhado estruturalmente com a Prova 639 de 2026: Grupo I com 5 itens de construção e 2 de seleção, incluindo mobilização de leitura; Grupo II com 7 itens de seleção; Grupo III com resposta extensa; 15 itens; 10 obrigatórios; dos restantes 5 contam os 3 melhores; 200 pontos; 120 minutos + 30 minutos de tolerância.",
@@ -34,12 +34,32 @@
               {
                 "id": "conteudo",
                 "label": "Explica o contraste entre discurso racional e experiência emocional.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "conteudo-1",
+                    "label": "Explica o contraste entre discurso racional e experiência emocional."
+                  },
+                  {
+                    "id": "conteudo-2",
+                    "label": "Desenvolve a relação pedida no enunciado, evitando uma paráfrase meramente descritiva do texto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Mobiliza dois elementos pertinentes do excerto.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
@@ -47,7 +67,22 @@
           "maxPoints": 13,
           "groupItemNumber": 1,
           "classificationMode": "mandatory",
-          "difficultyTarget": 3
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         },
         {
           "id": "PT639-FULL-G1-Q2",
@@ -73,16 +108,51 @@
               {
                 "id": "interpretacao",
                 "label": "Explica a mudança entre o discurso anterior e a experiência emocional posterior.",
-                "points": 8
+                "points": 8,
+                "observations": [
+                  {
+                    "id": "interpretacao-1",
+                    "label": "Explica a mudança entre o discurso anterior e a experiência emocional posterior."
+                  },
+                  {
+                    "id": "interpretacao-2",
+                    "label": "Justifica a interpretação através do funcionamento do elemento no sentido global do excerto."
+                  }
+                ]
               },
               {
                 "id": "fundamentacao",
                 "label": "Relaciona a interpretação com dois sinais pertinentes do comportamento de Leonor.",
-                "points": 5
+                "points": 5,
+                "observations": [
+                  {
+                    "id": "fundamentacao-1",
+                    "label": "Seleciona dois elementos concretos e pertinentes do texto ou excerto."
+                  },
+                  {
+                    "id": "fundamentacao-2",
+                    "label": "Explica a relação entre esses elementos e a interpretação apresentada, sem apenas os enumerar."
+                  }
+                ]
               }
             ]
           },
-          "difficultyTarget": 3
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         },
         {
           "id": "PT639-FULL-G1-Q3",
@@ -138,12 +208,32 @@
               {
                 "id": "interpretacao",
                 "label": "Interpreta a distinção entre recordar e desejar regressar.",
-                "points": 9
+                "points": 9,
+                "observations": [
+                  {
+                    "id": "interpretacao-1",
+                    "label": "Interpreta a distinção entre recordar e desejar regressar."
+                  },
+                  {
+                    "id": "interpretacao-2",
+                    "label": "Justifica a interpretação através do funcionamento do elemento no sentido global do excerto."
+                  }
+                ]
               },
               {
                 "id": "relacao",
                 "label": "Relaciona essa ideia com a atitude de Rui perante a escola.",
-                "points": 4
+                "points": 4,
+                "observations": [
+                  {
+                    "id": "relacao-1",
+                    "label": "Relaciona essa ideia com a atitude de Rui perante a escola."
+                  },
+                  {
+                    "id": "relacao-2",
+                    "label": "Torna explícita a ligação causal, contrastiva ou simbólica pedida, em vez de apresentar ideias isoladas."
+                  }
+                ]
               }
             ]
           },
@@ -151,7 +241,22 @@
           "maxPoints": 13,
           "groupItemNumber": 4,
           "classificationMode": "mandatory",
-          "difficultyTarget": 3
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         },
         {
           "id": "PT639-FULL-G1-Q5",
@@ -177,16 +282,51 @@
               {
                 "id": "simbolo",
                 "label": "Explica o valor simbólico da janela iluminada.",
-                "points": 8
+                "points": 8,
+                "observations": [
+                  {
+                    "id": "simbolo-1",
+                    "label": "Explica o valor simbólico da janela iluminada."
+                  },
+                  {
+                    "id": "simbolo-2",
+                    "label": "Justifica a interpretação através do funcionamento do elemento no sentido global do excerto."
+                  }
+                ]
               },
               {
                 "id": "articulacao",
                 "label": "Relaciona esse valor com o presente da personagem e a memória da infância.",
-                "points": 5
+                "points": 5,
+                "observations": [
+                  {
+                    "id": "articulacao-1",
+                    "label": "Relaciona esse valor com o presente da personagem e a memória da infância."
+                  },
+                  {
+                    "id": "articulacao-2",
+                    "label": "Torna explícita a ligação causal, contrastiva ou simbólica pedida, em vez de apresentar ideias isoladas."
+                  }
+                ]
               }
             ]
           },
-          "difficultyTarget": 3
+          "difficultyTarget": 3,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         },
         {
           "id": "PT639-FULL-G1-Q6",
@@ -242,17 +382,43 @@
               {
                 "id": "obra-tema",
                 "label": "Identifica a obra e formula uma leitura pertinente do tema proposto.",
-                "points": 5
+                "points": 5,
+                "observations": [
+                  {
+                    "id": "obra-tema-1",
+                    "label": "Identifica inequivocamente uma obra estudada e a personagem ou situação relevante."
+                  },
+                  {
+                    "id": "obra-tema-2",
+                    "label": "Formula uma leitura orientadora diretamente relacionada com mudança, perda, conflito ou transformação."
+                  }
+                ]
               },
               {
                 "id": "desenvolvimento",
                 "label": "Desenvolve dois momentos ou aspetos significativos da obra e relaciona-os com a interpretação.",
-                "points": 6
+                "points": 6,
+                "observations": [
+                  {
+                    "id": "desenvolvimento-1",
+                    "label": "Seleciona dois momentos ou aspetos efetivamente distintos e pertinentes da obra."
+                  },
+                  {
+                    "id": "desenvolvimento-2",
+                    "label": "Explica de que modo cada momento sustenta a leitura proposta, sem se limitar ao resumo da ação."
+                  }
+                ]
               },
               {
                 "id": "organizacao",
                 "label": "Organiza a breve exposição com progressão e clareza.",
-                "points": 2
+                "points": 2,
+                "observations": [
+                  {
+                    "id": "organizacao-1",
+                    "label": "Organiza a exposição com uma ideia orientadora, desenvolvimento dos exemplos e fecho coerente."
+                  }
+                ]
               }
             ]
           },
@@ -260,7 +426,22 @@
           "maxPoints": 13,
           "groupItemNumber": 7,
           "classificationMode": "mandatory",
-          "difficultyTarget": 4
+          "difficultyTarget": 4,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     },
@@ -472,28 +653,83 @@
               {
                 "id": "genero-formato",
                 "label": "Respeita o género/formato pedido, explicita um ponto de vista e desenvolve a estrutura argumentativa solicitada.",
-                "points": 10
+                "points": 10,
+                "observations": [
+                  {
+                    "id": "genero-formato-1",
+                    "label": "Assume inequivocamente uma posição e mantém o texto dentro do género de opinião solicitado."
+                  },
+                  {
+                    "id": "genero-formato-2",
+                    "label": "Respeita a extensão e apresenta uma estrutura argumentativa reconhecível."
+                  }
+                ]
               },
               {
                 "id": "tema-pertinencia",
                 "label": "Trata o tema sem desvios relevantes, mobilizando argumentos e exemplos diversificados e pertinentes.",
-                "points": 10
+                "points": 10,
+                "observations": [
+                  {
+                    "id": "tema-pertinencia-1",
+                    "label": "Desenvolve dois argumentos distintos diretamente relacionados com o tema."
+                  },
+                  {
+                    "id": "tema-pertinencia-2",
+                    "label": "Usa exemplos concretos que sustentam os argumentos, em vez de apenas os ilustrar superficialmente."
+                  }
+                ]
               },
               {
                 "id": "organizacao-coesao",
                 "label": "Organiza o texto com progressão coerente e usa adequadamente mecanismos de coesão textual.",
-                "points": 10
+                "points": 10,
+                "observations": [
+                  {
+                    "id": "organizacao-coesao-1",
+                    "label": "Faz progredir as ideias entre introdução, desenvolvimento e conclusão sem repetições circulares."
+                  },
+                  {
+                    "id": "organizacao-coesao-2",
+                    "label": "Usa mecanismos de coesão adequados para ligar argumentos, exemplos e conclusão."
+                  }
+                ]
               },
               {
                 "id": "correcao-linguistica",
                 "label": "Mantém correção sintática, lexical, ortográfica e de pontuação ao longo do texto.",
-                "points": 14
+                "points": 14,
+                "observations": [
+                  {
+                    "id": "correcao-linguistica-1",
+                    "label": "Constrói frases sintaticamente corretas e claras, com vocabulário adequado e preciso."
+                  },
+                  {
+                    "id": "correcao-linguistica-2",
+                    "label": "Mantém ortografia e pontuação suficientemente corretas para não perturbar a leitura nem o sentido."
+                  }
+                ]
               }
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 44,
-          "difficultyTarget": 4
+          "difficultyTarget": 4,
+          "scoringGuidance": {
+            "strong": "Responde integralmente ao que é pedido, estabelece as relações essenciais e sustenta a leitura com evidência pertinente; a formulação pode diferir da resposta de referência.",
+            "partial": "Identifica a ideia central ou parte da relação pedida, mas deixa por desenvolver uma ligação, um exemplo, uma etapa do raciocínio ou a fundamentação textual.",
+            "insufficient": "Limita-se a resumir/parafrasear, apresenta informação vaga ou irrelevante, contradiz o texto/obra, ou não estabelece a relação solicitada.",
+            "acceptableVariants": [
+              "Aceitar formulações semanticamente equivalentes que demonstrem a mesma compreensão.",
+              "Aceitar outros elementos do texto ou da obra quando forem pertinentes e corretamente relacionados com a interpretação.",
+              "Não exigir palavras-chave, citações literais nem coincidência verbal com a resposta de referência."
+            ],
+            "commonPitfalls": [
+              "Enumerar exemplos sem explicar a sua função na resposta.",
+              "Confundir resumo do conteúdo com interpretação ou análise.",
+              "Apresentar uma conclusão plausível sem a fundamentar no texto, excerto ou obra."
+            ]
+          }
         }
       ]
     }
