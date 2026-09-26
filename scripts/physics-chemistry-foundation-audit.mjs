@@ -48,7 +48,7 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 }
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
-assert.equal(coverage.total,70);
+assert.equal(coverage.total,78);
 assert.equal(coverage.missionReady,true,"Todos os grandes domínios devem suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
