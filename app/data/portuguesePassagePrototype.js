@@ -1,10 +1,12 @@
 import portuguesePassageDocument from "../../content/vnext/portuguese/portuguese-639-passage-prototypes.json";
 import portuguesePassageDocument2 from "../../content/vnext/portuguese/portuguese-639-passage-prototypes-2.json";
+import portuguesePassageDocument3 from "../../content/vnext/portuguese/portuguese-639-passage-prototypes-3.json";
 import portugueseFullExamDocument from "../../content/vnext/portuguese/portuguese-639-full-exam-supplement.json";
 import {buildPortuguesePassagePrototypeExam} from "../lib/portuguesePassages";
 
 export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAM=buildPortuguesePassagePrototypeExam(portuguesePassageDocument);
 export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2=buildPortuguesePassagePrototypeExam(portuguesePassageDocument2);
+export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_3=buildPortuguesePassagePrototypeExam(portuguesePassageDocument3);
 const fullExamBase=buildPortuguesePassagePrototypeExam(portugueseFullExamDocument);
 export const PORTUGUESE_FULL_PRACTICE_EXAM={
   ...fullExamBase,
@@ -59,6 +61,7 @@ export function classifyPortugueseFullExamResults(results=[]){
 export const PORTUGUESE_PASSAGE_PROTOTYPE_EXAMS={
   "mini-1":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM,
   "mini-2":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2,
+  "mini-3":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_3,
   "full-1":PORTUGUESE_FULL_PRACTICE_EXAM
 };
 
