@@ -1,0 +1,276 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "wave": 17,
+  "bankSizeAfterWave": 334,
+  "sourcePolicy": "original-only",
+  "editorialStatus": "prototype",
+  "productionEligible": false,
+  "items": [
+    {
+      "id": "PT639-FND-329",
+      "year": "10.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-exposicao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Uma escola vai criar uma semana dedicada à ciência, com oficinas, demonstrações, visitas a laboratórios e encontros com investigadores.",
+      "prompt": "Escreve um texto expositivo, com 200 a 300 palavras, em que apresentes as principais componentes da iniciativa e expliques de que modo podem contribuir para aproximar os alunos da ciência.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {
+            "id": "genero-tema",
+            "label": "Responde ao tema e respeita o género solicitado.",
+            "points": 10
+          },
+          {
+            "id": "coerencia",
+            "label": "Organiza o texto com progressão clara e coerente.",
+            "points": 10
+          },
+          {
+            "id": "desenvolvimento",
+            "label": "Desenvolve ideias, razões ou exemplos pertinentes.",
+            "points": 10
+          },
+          {
+            "id": "correcao-linguistica",
+            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "points": 14
+          }
+        ]
+      },
+      "referenceAnswer": "A semana da ciência reúne atividades diferentes que podem complementar-se. As oficinas permitem experimentar procedimentos e resolver problemas de forma prática. As demonstrações tornam visíveis fenómenos que, numa aula apenas teórica, podem ser mais difíceis de compreender. As visitas a laboratórios dão contacto com espaços e equipamentos de investigação, enquanto os encontros com investigadores permitem conhecer percursos profissionais e perceber como se formulam perguntas científicas. Em conjunto, estas atividades podem aproximar os alunos da ciência porque mostram que o conhecimento científico não se reduz à memorização de conceitos. Envolve observação, experimentação, dúvida, comunicação e revisão de ideias. Para que a iniciativa cumpra esse objetivo, é importante que as atividades sejam adequadas à idade dos participantes e que exista tempo para fazer perguntas e relacionar as experiências com conteúdos estudados. Também pode ser útil incluir momentos de síntese, nos quais os alunos expliquem o que observaram ou aprenderam. Assim, a semana da ciência pode funcionar como extensão do trabalho realizado nas aulas e como oportunidade de contacto com práticas científicas reais. Mais do que apresentar resultados prontos, a iniciativa pode ajudar a compreender como se constrói conhecimento e porque é importante testar explicações com evidência.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {
+        "min": 200,
+        "max": 300
+      }
+    },
+    {
+      "id": "PT639-FND-330",
+      "year": "10.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-revisao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Uma turma escreveu vários textos para apresentar um projeto ambiental da escola. Os textos têm informação correta, mas repetem ideias, mudam frequentemente de assunto e usam frases demasiado longas.",
+      "prompt": "Escreve um texto, com 200 a 300 palavras, em que expliques um plano de revisão que permita melhorar clareza, organização e correção desses textos.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {
+            "id": "genero-tema",
+            "label": "Responde ao tema e respeita o género solicitado.",
+            "points": 10
+          },
+          {
+            "id": "coerencia",
+            "label": "Organiza o texto com progressão clara e coerente.",
+            "points": 10
+          },
+          {
+            "id": "desenvolvimento",
+            "label": "Desenvolve ideias, razões ou exemplos pertinentes.",
+            "points": 10
+          },
+          {
+            "id": "correcao-linguistica",
+            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "points": 14
+          }
+        ]
+      },
+      "referenceAnswer": "A revisão deve começar pela organização global e só depois avançar para problemas de frase. Primeiro, é necessário identificar a ideia principal de cada texto e verificar se todos os parágrafos contribuem para esse objetivo. Ideias repetidas podem ser eliminadas ou reunidas, e mudanças bruscas de assunto devem ser corrigidas através de uma ordem mais lógica. Depois, importa rever a ligação entre parágrafos, acrescentando conectores apenas quando ajudam a explicitar relações de causa, contraste, sequência ou conclusão. Numa segunda passagem, devem ser analisadas as frases demasiado longas. Algumas podem ser divididas para evitar ambiguidades e facilitar a leitura, sem transformar o texto numa sucessão de frases curtas e desligadas. Só depois desta revisão estrutural faz sentido concentrar a atenção em pontuação, concordância, ortografia e precisão vocabular. Também é útil ler o texto em voz baixa ou pedir a outro colega que o leia, porque um leitor externo pode detetar saltos de raciocínio que o autor já não percebe. Assim, rever não significa apenas corrigir erros ortográficos: implica melhorar a forma como as ideias são selecionadas, organizadas, ligadas e expressas.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {
+        "min": 200,
+        "max": 300
+      }
+    },
+    {
+      "id": "PT639-FND-331",
+      "year": "11.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-opiniao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Algumas escolas ponderam limitar o uso de telemóveis durante os intervalos, mantendo exceções para situações justificadas.",
+      "prompt": "Escreve um texto de opinião, com 200 a 300 palavras, em que tomes uma posição sobre esta medida e a fundamentes com argumentos e exemplos pertinentes.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {
+            "id": "genero-tema",
+            "label": "Responde ao tema e respeita o género solicitado.",
+            "points": 10
+          },
+          {
+            "id": "coerencia",
+            "label": "Organiza o texto com progressão clara e coerente.",
+            "points": 10
+          },
+          {
+            "id": "desenvolvimento",
+            "label": "Desenvolve ideias, razões ou exemplos pertinentes.",
+            "points": 10
+          },
+          {
+            "id": "correcao-linguistica",
+            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "points": 14
+          }
+        ]
+      },
+      "referenceAnswer": "Limitar o uso de telemóveis durante os intervalos pode ser uma medida útil, desde que seja aplicada com regras claras e exceções razoáveis. O intervalo é um dos poucos momentos do dia escolar em que os alunos podem conversar livremente, movimentar-se e descansar da concentração exigida nas aulas. Quando grande parte desse tempo é ocupada por ecrãs, essas oportunidades podem diminuir. Uma limitação pode, por isso, favorecer interação presencial e diversificar formas de ocupar o tempo. No entanto, proibir de forma absoluta seria excessivo. Há alunos que precisam de contactar familiares, consultar informação relacionada com transportes ou tratar de situações inesperadas. A escola deve ainda explicar os objetivos da medida e avaliar os seus efeitos, em vez de apresentar a regra apenas como punição. Também é importante criar alternativas: espaços agradáveis, jogos, atividades ou condições para conversar e descansar. Assim, a limitação dos telemóveis pode fazer sentido se procurar melhorar a qualidade dos intervalos e não apenas controlar comportamentos. Uma política equilibrada deve combinar períodos de menor uso, exceções justificadas e participação dos alunos na avaliação da regra.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {
+        "min": 200,
+        "max": 300
+      }
+    },
+    {
+      "id": "PT639-FND-332",
+      "year": "11.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-argumentacao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Uma biblioteca municipal pretende deixar de cobrar multas por atrasos na devolução de livros e substituí-las por lembretes e suspensão temporária de novos empréstimos em casos repetidos.",
+      "prompt": "Escreve um texto argumentativo, com 200 a 300 palavras, em que defendas ou contestes esta alteração, considerando vantagens, riscos e condições para a sua aplicação.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {
+            "id": "genero-tema",
+            "label": "Responde ao tema e respeita o género solicitado.",
+            "points": 10
+          },
+          {
+            "id": "coerencia",
+            "label": "Organiza o texto com progressão clara e coerente.",
+            "points": 10
+          },
+          {
+            "id": "desenvolvimento",
+            "label": "Desenvolve ideias, razões ou exemplos pertinentes.",
+            "points": 10
+          },
+          {
+            "id": "correcao-linguistica",
+            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "points": 14
+          }
+        ]
+      },
+      "referenceAnswer": "Substituir multas por lembretes e suspensão temporária de empréstimos pode tornar a biblioteca mais acessível sem eliminar a responsabilidade de devolver os livros. As multas financeiras podem afastar utilizadores com menos recursos, sobretudo quando pequenas dívidas se acumulam e transformam uma utilização normal da biblioteca numa barreira. Um sistema de lembretes permite avisar antes de aplicar consequências, enquanto a suspensão temporária mantém uma relação direta entre atraso e acesso a novos empréstimos. Contudo, a medida só funcionará se a biblioteca acompanhar os prazos e agir de forma consistente. A ausência de qualquer consequência poderia aumentar atrasos e reduzir a disponibilidade dos livros para outros leitores. Por isso, deve existir uma sequência clara: lembrete antes da data, aviso após o atraso e suspensão apenas quando o problema persiste. Casos de perda de livros ou danos exigem regras próprias. A alteração pode ser positiva se distinguir dificuldade ocasional de incumprimento repetido e se preservar a circulação do acervo. O objetivo não deve ser punir, mas garantir que os livros regressam e permanecem disponíveis para toda a comunidade.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {
+        "min": 200,
+        "max": 300
+      }
+    },
+    {
+      "id": "PT639-FND-333",
+      "year": "12.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-exposicao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Uma cidade está a criar uma rede de refúgios climáticos em bibliotecas, jardins, piscinas e outros espaços públicos para utilização durante períodos de calor extremo.",
+      "prompt": "Escreve um texto expositivo, com 200 a 300 palavras, em que expliques o que pode caracterizar uma rede deste tipo, quem pode beneficiar e que condições são necessárias para que seja eficaz.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {
+            "id": "genero-tema",
+            "label": "Responde ao tema e respeita o género solicitado.",
+            "points": 10
+          },
+          {
+            "id": "coerencia",
+            "label": "Organiza o texto com progressão clara e coerente.",
+            "points": 10
+          },
+          {
+            "id": "desenvolvimento",
+            "label": "Desenvolve ideias, razões ou exemplos pertinentes.",
+            "points": 10
+          },
+          {
+            "id": "correcao-linguistica",
+            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "points": 14
+          }
+        ]
+      },
+      "referenceAnswer": "Uma rede de refúgios climáticos é constituída por espaços acessíveis que oferecem condições mais seguras durante períodos de calor extremo. Pode incluir bibliotecas e outros edifícios climatizados, jardins com sombra e água, piscinas ou equipamentos públicos preparados para receber pessoas durante as horas de maior temperatura. Esta rede pode beneficiar toda a população, mas é especialmente relevante para idosos, crianças, pessoas com doenças crónicas, trabalhadores expostos ao calor e habitantes de casas com fraco isolamento térmico. Para ser eficaz, não basta identificar locais num mapa. Os espaços devem ter horários adequados, acesso a água, informação clara e condições de acessibilidade. A rede precisa ainda de ser divulgada antes e durante as ondas de calor, através de canais que cheguem a diferentes grupos da população. A distribuição geográfica também é importante: um refúgio demasiado distante pode ser pouco útil para quem tem mobilidade reduzida ou depende de transportes públicos. Por fim, a cidade deve avaliar a utilização dos espaços e ajustar a rede com base na procura e nas condições de cada bairro. Assim, os refúgios climáticos podem funcionar como medida de adaptação ao calor quando combinam infraestrutura, proximidade, comunicação e acompanhamento.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {
+        "min": 200,
+        "max": 300
+      }
+    },
+    {
+      "id": "PT639-FND-334",
+      "year": "12.º",
+      "domain": "escrita",
+      "competencyId": "pt-escrita-opiniao",
+      "sourceOrigin": "original",
+      "reviewStatus": "prototype",
+      "responseType": "extended-writing",
+      "cognitive": "criar",
+      "stimulus": "Algumas instituições culturais disponibilizam gratuitamente online parte das suas coleções, incluindo imagens em alta resolução, visitas virtuais e materiais explicativos.",
+      "prompt": "Escreve um texto de opinião, com 200 a 300 palavras, sobre a importância de tornar património cultural acessível em formato digital. Fundamenta a tua posição e considera pelo menos uma limitação.",
+      "rubric": {
+        "maxPoints": 44,
+        "criteria": [
+          {
+            "id": "genero-tema",
+            "label": "Responde ao tema e respeita o género solicitado.",
+            "points": 10
+          },
+          {
+            "id": "coerencia",
+            "label": "Organiza o texto com progressão clara e coerente.",
+            "points": 10
+          },
+          {
+            "id": "desenvolvimento",
+            "label": "Desenvolve ideias, razões ou exemplos pertinentes.",
+            "points": 10
+          },
+          {
+            "id": "correcao-linguistica",
+            "label": "Demonstra correção lexical, sintática, ortográfica e de pontuação.",
+            "points": 14
+          }
+        ]
+      },
+      "referenceAnswer": "Disponibilizar património cultural em formato digital é importante porque amplia o acesso a obras, documentos e espaços que muitas pessoas não conseguem visitar presencialmente. Uma coleção online pode ser consultada por estudantes, professores, investigadores ou simples curiosos, independentemente da distância geográfica. Imagens em alta resolução e materiais explicativos também permitem observar detalhes e contextualizar peças de forma útil para estudo. Além disso, o acesso digital pode despertar interesse por uma visita presencial futura, em vez de a substituir. No entanto, existem limitações. Ver uma obra num ecrã não reproduz completamente escala, textura, espaço ou experiência física de um museu. Também persistem desigualdades no acesso à internet e na literacia digital. Por isso, a digitalização deve ser entendida como complemento e não como solução única. As instituições devem procurar disponibilizar materiais com boa qualidade, contexto fiável e interfaces acessíveis, preservando simultaneamente a experiência presencial. Quando bem feita, a abertura digital das coleções democratiza o contacto com o património, apoia a educação e aumenta as possibilidades de investigação e descoberta.",
+      "gradingMode": "rubric-assisted-provisional",
+      "maxPoints": 44,
+      "wordLimit": {
+        "min": 200,
+        "max": 300
+      }
+    }
+  ]
+}
