@@ -16,9 +16,15 @@ export const PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY={
     information:"https://iave.pt/wp-content/uploads/2025/11/IP-EX-FQA715-2026.pdf",
     examPhase1:"https://iave.pt/wp-content/uploads/2026/06/EX-FQA715-F1-2026-V1_net.pdf",
     criteriaPhase1:"https://iave.pt/wp-content/uploads/2026/06/EX-FQA715-F1-2026-CC-VT_net.pdf",
-    comparisonCriteria2025:"https://iave.pt/wp-content/uploads/2025/07/EX-FQA715-F1-2025-CC-VD_net.pdf"
+    comparisonCriteria2025:"https://iave.pt/wp-content/uploads/2025/07/EX-FQA715-F1-2025-CC-VD_net.pdf",
+    comparisonCriteria2024:"https://iave.pt/wp-content/uploads/2024/06/EX-FQA715-F1-2024-CC-VT_net.pdf",
+    information2024:"https://iave.pt/wp-content/uploads/2023/10/IP-EX-FQA715-2024-1.pdf"
   },
-  comparisonNote:"As regras gerais de itens de seleção, níveis de desempenho e resolução por etapas foram comparadas com os critérios definitivos de 2025; a política da app usa 2026 como referência principal.",
+  historicalComparison:{
+    years:[2024,2025,2026],
+    stablePatterns:["itens de seleção e de construção","construção por níveis de desempenho ou por etapas","mobilização da dimensão prático-experimental","uso de suportes como textos, tabelas, gráficos, esquemas e figuras"],
+    note:"2026 é a referência operacional principal; 2024 e 2025 servem para confirmar padrões recorrentes de avaliação, não para substituir os critérios do ano atual."
+  },
   responseFamilies:[
     {id:"selection",label:"Seleção",examples:["escolha múltipla","completamento por seleção"],scoring:"dicotómico ou por níveis, conforme o item"},
     {id:"stepwise",label:"Construção por etapas",examples:["cálculo","determinação quantitativa"],scoring:"soma das etapas, com tratamento explícito de erros"},
