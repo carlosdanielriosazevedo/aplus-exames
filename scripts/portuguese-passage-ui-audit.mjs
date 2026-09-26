@@ -22,7 +22,7 @@ assert.match(component,/Melhorar resposta/u,"a revisão deve permitir criar uma 
 assert.match(component,/Antes · versão/u,"a UI deve preservar visualmente a versão anterior");
 assert.match(component,/Depois · versão/u,"a UI deve mostrar a versão melhorada");
 assert.match(component,/Ver texto-base/u,"em ecrãs pequenos deve existir acesso persistente ao texto-base");
-assert.match(component,/Questão \{index\+1\}/u,"a UI deve mostrar a posição da questão");
+assert.match(component,/Questão \$\{index\+1\}/u,"a UI deve mostrar a posição da questão");
 assert.match(component,/ptx-question-nav/u,"deve existir navegação direta entre questões");
 
 assert.match(route,/buildPortuguesePassagePrototypeExam/u,"a rota deve consumir o construtor canónico do protótipo");
