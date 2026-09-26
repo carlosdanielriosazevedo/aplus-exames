@@ -1,0 +1,195 @@
+"use client";
+import {useState} from "react";
+import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import StudyModeHub from "./StudyModeHub";
+import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
+import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
+import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
+import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
+import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
+import {missionCompletedToday} from "../lib/engagement";
+
+const SUBJECT_ID="physics-chemistry-a";
+const SCHOOL_YEARS=["10.º","11.º"];
+
+function curriculumYear(profileYear){
+  return profileYear==="10.º"?"10.º":"11.º";
+}
+
+function allDomainIdsForYear(year){
+  return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).map(row=>row.id);
+}
+
+function initialTaught(settings,year){
+  const allowed=new Set(allDomainIdsForYear(year));
+  return Array.isArray(settings?.taughtUnitIds)?settings.taughtUnitIds.filter(id=>allowed.has(id)):[];
+}
+
+export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
+  const currentYear=curriculumYear(s.profile?.schoolYear);
+  const settings=s.subjectSettings?.[SUBJECT_ID]||{};
+  const taughtUnitIds=initialTaught(settings,currentYear);
+  const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";
+  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
+  const [practiceYear,setPracticeYear]=useState(currentYear);
+  const [practiceDomain,setPracticeDomain]=useState(null);
+  const [session,setSession]=useState(null);
+  const [answer,setAnswer]=useState(null);
+  const [feedback,setFeedback]=useState(null);
+  const [results,setResults]=useState([]);
+  const progress=subjectProgressFor(s,SUBJECT_ID);
+  const scopedItems=physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
+  const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
+  const scopedCoverage=physicsChemistryCoverage(scopedItems);
+  const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);
+  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
+  const missionDone=missionCompletedToday(s);
+
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div>
+    <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>
+    <button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button>
+    <button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>
+    {(progress.sessions.length>0||progress.lastPosition)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}
+  </div></details></StudentTop>;
+  const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
+
+  function start(kind,items,label,domain=null){
+    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;
+    const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
+    setSession({sessionId,kind,label,domain,items,current:0});
+    setAnswer(null);setFeedback(null);setResults([]);
+    setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items}));
+  }
+
+  function startDiagnostic(){start("diagnostic",buildPhysicsChemistryDiagnostic(scopedItems),"Diagnóstico")}
+  function startMission(domain=null){
+    const built=buildAdaptivePhysicsChemistryMission(scopedItems,{progress,domain,size:7});
+    start("mission",built.items,domain?"Missão · "+(physicsChemistryDomainById(domain)?.shortTitle||domain):"Missão recomendada",domain);
+  }
+  function startPractice(){
+    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,year:practiceYear,size:8});
+    start("training",built.items,"Praticar · "+(physicsChemistryDomainById(practiceDomain)?.shortTitle||practiceYear),practiceDomain);
+  }
+  function startMiniExam(){
+    const ten=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,year:"10.º",size:7}).items.slice(0,6);
+    const eleven=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,year:"11.º",size:7}).items.slice(0,6);
+    start("mini_exam",[...ten,...eleven],"Mini-exame · Modelo 1");
+  }
+
+  function submit(){
+    const item=session.items[session.current];
+    if(!Number.isInteger(answer))return;
+    const result=gradePhysicsChemistryResponse(item,answer);
+    const nextResults=[...results,result];
+    setFeedback(result);setResults(nextResults);
+    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
+  }
+
+  function next(){
+    if(!feedback)return;
+    if(session.current>=session.items.length-1){
+      setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results,sessionId:session.sessionId}));
+      const kind=session.kind;
+      setSession(null);setAnswer(null);setFeedback(null);setResults([]);
+      go(kind==="diagnostic"?"progress":"home");
+      return;
+    }
+    const current=session.current+1;
+    setSession(prev=>({...prev,current}));
+    setAnswer(null);setFeedback(null);
+    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));
+  }
+
+  function resume(){
+    const saved=progress.lastPosition;
+    if(!saved)return;
+    const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);
+    if(items.length!==saved.itemIds.length){resetPhysicsChemistry();return}
+    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
+    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
+  }
+
+  function resetPhysicsChemistry(){
+    if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
+    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);
+  }
+
+  if(session){
+    const item=session.items[session.current];
+    const domain=physicsChemistryDomainById(item.domain);
+    const position=session.current+1;
+    return <Shell className="wideStudentShell">
+      <StudySessionHeader progress={position/session.items.length*100} label={position+"/"+session.items.length} onExit={()=>{setSession(null);go("home")}}/>
+      <p className="eyebrow">{session.label.toUpperCase()}</p>
+      <h1>{domain?.shortTitle||"Física e Química A"}</h1>
+      <div className="trainingScopeNote"><b>{item.year+" · "+domain?.area}</b><span>{domain?.title}</span></div>
+      <div className="questionCard">
+        <h2>{item.prompt}</h2>
+        <div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>
+        {!feedback?<button className="primary" disabled={!Number.isInteger(answer)} onClick={submit}>Responder</button>:<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span><button className="primary" onClick={next}>{position===session.items.length?"Terminar":"Seguinte"}</button></div>}
+      </div>
+    </Shell>;
+  }
+
+  if(view==="curriculumOnboard"||view==="curriculum"){
+    const rows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
+    return <Shell className="wideStudentShell">
+      {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+      <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
+      <h1>O que já deste no {currentYear}?</h1>
+      <p className="muted">A matéria do ano anterior fica disponível. No ano atual, assinala apenas os grandes domínios que a tua turma já trabalhou.</p>
+      <div className="curriculumPicker">{rows.map(row=><label key={row.id}><input type="checkbox" checked={scopeDraft.includes(row.id)} onChange={()=>setScopeDraft(current=>current.includes(row.id)?current.filter(id=>id!==row.id):[...current,row.id])}/><span><b>{row.title}</b><small>{row.area+" · "+row.subtopics.length+" subtemas"}</small></span></label>)}</div>
+      <button className="primary" onClick={()=>{
+        setS(prev=>{
+          const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:scopeDraft,curriculumConfigured:true}}};
+          return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
+        });
+        go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress");
+      }}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
+    </Shell>;
+  }
+
+  if(view==="diagnostic")return <Shell>
+    <p className="eyebrow">AVALIAÇÃO INICIAL</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>FÍSICA E QUÍMICA A</small><strong>8 perguntas para localizar o ponto de partida, usando apenas matéria do teu percurso.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+    {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Primeiro atualiza a matéria dada</b><span>O diagnóstico precisa de cobertura suficiente dos domínios já lecionados.</span></div>}
+    <button className="primary" disabled={!scopedCoverage.diagnosticReady} onClick={startDiagnostic}>Começar diagnóstico</button>
+  </Shell>;
+
+  if(view==="trainingSetup"){
+    const rows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===practiceYear);
+    return <Shell className="wideStudentShell trainingSetupPage">
+      <button className="back" onClick={()=>go("train")}>← Voltar</button>
+      <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
+      <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null)}}>{year}</button>)}</div>
+      <h3>2. Matéria</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>setPracticeDomain(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+coverage.byDomain[row.id]+" perguntas iniciais"}</small></button>)}</div>
+      <button className="primary" disabled={!practiceDomain||coverage.byDomain[practiceDomain]<7} onClick={startPractice}>Começar treino · 8 perguntas</button>
+    </Shell>;
+  }
+
+  if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go}/>{sharedNav}</Shell>;
+  if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
+
+  if(view==="exams")return <Shell className="wideStudentShell">{sharedTop}<div className="sectionIntro"><p className="eyebrow">MINI-EXAME</p><h1>Física e Química A · 715</h1><p className="muted">Primeiro modelo interno: 12 itens, equilibrado entre 10.º e 11.º anos. O simulado completo será construído separadamente segundo a estrutura oficial.</p></div><button className="primary" onClick={startMiniExam}>Começar mini-exame · Modelo 1</button>{sharedNav}</Shell>;
+
+  if(view==="progress"){
+    const rows=PHYSICS_CHEMISTRY_A_DOMAINS.map(domain=>{
+      const competence=Object.values(progress.competence).filter(row=>row.domainId===domain.id);
+      const attempts=competence.reduce((sum,row)=>sum+(row.deterministicAttempts||0),0);
+      const correct=competence.reduce((sum,row)=>sum+(row.correct||0),0);
+      return {...domain,attempts,percent:attempts?Math.round(correct/attempts*100):null};
+    });
+    return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
+      <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
+      <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
+      {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
+  }
+
+  const currentRows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
+  return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
+    <div className="sectionIntro"><p className="eyebrow">FÍSICA E QUÍMICA A · 715</p><h1>Hoje, trabalha ciência com método.</h1><p className="muted">Mesma estrutura da APProva+: matéria dada, missão, treino, mini-exame, revisão e progresso por competência.</p></div>
+    <ApronsoNudge pose="thinking">Começa por uma missão curta. A app vai usar o teu histórico para dar prioridade ao que precisa de mais trabalho.</ApronsoNudge>
+    <div className="missionHero"><div><small>MISSÃO RECOMENDADA</small><h2>{missionDone?"Missão diária concluída":"7 perguntas · Física e Química"}</h2><p>Questões originais sobre os domínios já disponíveis no teu percurso.</p></div><button className="primary" disabled={!scopedCoverage.missionReady} onClick={()=>startMission()}>{missionDone?"Treinar mais":"Começar missão"}</button></div>
+    <div className="themeGrid">{currentRows.map(row=><button key={row.id} disabled={!scopedCoverage.missionEligibleByDomain[row.id]} onClick={()=>startMission(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+scopedCoverage.byDomain[row.id]+" disponíveis"}</small></button>)}</div>
+    {sharedNav}</section></main>;
+}
