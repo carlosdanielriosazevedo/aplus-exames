@@ -232,16 +232,16 @@
       "reviewStatus": "prototype",
       "responseType": "multiple-choice",
       "cognitive": "reconhecer",
-      "stimulus": "Os alunos entregaram o relatório ao professor.",
-      "prompt": "A expressão «ao professor» desempenha a função de",
+      "stimulus": "Os participantes permaneceram atentos durante toda a apresentação.",
+      "prompt": "Na frase, a expressão «atentos» desempenha a função de",
       "options": [
-        "sujeito.",
         "complemento direto.",
-        "complemento indireto.",
-        "predicativo do sujeito."
+        "predicativo do sujeito.",
+        "complemento oblíquo.",
+        "modificador do grupo verbal."
       ],
-      "answerIndex": 2,
-      "explanation": "A expressão introduz o destinatário da ação e é complemento indireto.",
+      "answerIndex": 1,
+      "explanation": "«Atentos» atribui uma propriedade ao sujeito «Os participantes» através do verbo copulativo «permaneceram», funcionando como predicativo do sujeito.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
@@ -254,16 +254,16 @@
       "reviewStatus": "prototype",
       "responseType": "multiple-choice",
       "cognitive": "reconhecer",
-      "stimulus": "Embora estivesse cansada, a Marta terminou o relatório.",
-      "prompt": "A oração «Embora estivesse cansada» é subordinada adverbial",
+      "stimulus": "Mesmo que o prazo seja curto, a equipa apresentará uma versão revista do projeto.",
+      "prompt": "A oração «Mesmo que o prazo seja curto» exprime uma relação de",
       "options": [
-        "concessiva.",
-        "causal.",
-        "final.",
-        "comparativa."
+        "concessão.",
+        "causa.",
+        "finalidade.",
+        "consequência."
       ],
       "answerIndex": 0,
-      "explanation": "«Embora» introduz uma concessão: o cansaço não impede a ação principal.",
+      "explanation": "A expressão «Mesmo que» introduz uma circunstância que poderia dificultar a ação principal, mas não a impede; por isso, o valor é concessivo.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
