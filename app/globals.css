@@ -934,3 +934,18 @@ body{background:var(--app-canvas);color:var(--app-ink)}
   .progressPage .progressOverview>div{grid-template-columns:minmax(92px,1fr) .8fr 30px}
   .reviewStudyPage .reviewChapter{padding:16px}
 }
+
+
+/* Paridade de sessão — cabeçalho, contexto e pausa */
+.studySessionShell>.panel{max-width:760px}
+.sessionTop{margin-bottom:14px}
+.sessionContext{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin:2px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--app-border)}
+.sessionContext small{font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--app-orange-dark)}
+.sessionContext b{font-size:13px;color:var(--app-navy)}
+.studySessionShell .pauseLink{margin-top:10px}
+@media(max-width:600px){
+  .sessionTop{grid-template-columns:42px minmax(0,1fr) auto;gap:9px}
+  .sessionContext{display:block}
+  .sessionContext b{display:block;margin-top:4px}
+  .studySessionShell>.panel{padding-bottom:56px}
+}
