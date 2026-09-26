@@ -18,6 +18,15 @@ const normalize=value=>String(value??"")
   .replace(/\s+/g," ")
   .trim();
 
+const tokenSet=value=>new Set(normalize(value).split(" ").filter(token=>token.length>=4));
+const jaccard=(left,right)=>{
+  const a=tokenSet(left),b=tokenSet(right);
+  if(!a.size||!b.size)return 0;
+  let intersection=0;
+  for(const token of a)if(b.has(token))intersection++;
+  return intersection/(a.size+b.size-intersection);
+};
+
 const packages=files.map(name=>({name,data:JSON.parse(readFileSync(join(root,name),"utf8"))}));
 const items=packages.flatMap(({name,data})=>data.items.map(item=>({...item,__file:name})));
 const expectedSize=[...packages].reverse().find(({data})=>Number.isInteger(data.bankSizeAfterWave))?.data.bankSizeAfterWave||items.length;
@@ -97,6 +106,18 @@ for(const item of items){
       assert(item.gradingMode!=="deterministic",`${item.id}: resposta aberta não pode usar correção determinística final.`);
     }else{
       fail.push(`${item.id}: responseType desconhecido ${item.responseType}.`);
+    }
+  }
+}
+
+
+for(let left=0;left<items.length;left++){
+  for(let right=left+1;right<items.length;right++){
+    const a=items[left],b=items[right];
+    const promptSimilarity=jaccard(a.prompt,b.prompt);
+    const stimulusSimilarity=jaccard(a.stimulus,b.stimulus);
+    if(promptSimilarity>=0.82&&stimulusSimilarity>=0.72){
+      fail.push(`Itens demasiado semelhantes: ${a.id} / ${b.id} (prompt=${promptSimilarity.toFixed(2)}, estímulo=${stimulusSimilarity.toFixed(2)}).`);
     }
   }
 }
