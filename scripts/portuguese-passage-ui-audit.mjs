@@ -14,6 +14,10 @@ assert.doesNotMatch(component,/Voltar às respostas/u,"depois de terminado, o ex
 assert.match(component,/Autoavaliação guiada/u,"respostas abertas devem conduzir à autoavaliação guiada por critérios");
 assert.match(component,/não (?:produz|produzem)[^\n]*classificação automática final/u,"a UI deve dizer que autoavaliação e revisão não produzem nota automática final");
 assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve pedir evidência explícita por critério");
+assert.match(component,/Como distinguir uma resposta forte de uma resposta parcial/u,"a revisão deve mostrar âncoras de qualidade para respostas construídas");
+assert.match(component,/Também pode estar correta se/u,"a revisão deve explicitar variantes semanticamente aceitáveis");
+assert.match(component,/Erros frequentes/u,"a revisão deve mostrar erros típicos que distinguem resumo de análise");
+assert.match(component,/ptx-criterion-observations/u,"a revisão deve tornar visíveis as observações atómicas de cada critério");
 assert.match(component,/Melhorar resposta/u,"a revisão deve permitir criar uma nova versão depois da autoavaliação");
 assert.match(component,/Antes · versão/u,"a UI deve preservar visualmente a versão anterior");
 assert.match(component,/Depois · versão/u,"a UI deve mostrar a versão melhorada");
@@ -31,5 +35,7 @@ assert.match(css,/\.ptx-mobile-text-toggle\{display:block;position:sticky/u,"no 
 assert.match(css,/\.ptx-workspace\{display:grid;grid-template-columns/u,"desktop deve separar texto e questão em duas colunas");
 assert.match(css,/\.ptx-self-assessment\{/u,"a autoavaliação guiada deve ter uma área visual própria");
 assert.match(css,/\.ptx-revision-loop\{/u,"o ciclo de melhoria deve ter uma área visual própria");
+assert.match(css,/\.ptx-quality-levels\{/u,"as âncoras forte/parcial/insuficiente devem ter estrutura visual própria");
+assert.match(css,/\.ptx-criterion-observations/u,"as observações atómicas devem ter estilo dedicado e legível");
 
-console.log("✓ UI texto partilhado Português: texto sticky · navegação 6 questões · autoavaliação guiada · revisão antes/depois · zero nota automática nas abertas");
+console.log("✓ UI Português: texto sticky · autoavaliação guiada · observações atómicas · âncoras forte/parcial/insuficiente · revisão antes/depois");
