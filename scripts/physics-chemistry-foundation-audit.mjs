@@ -10,6 +10,7 @@ import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS} from "../app/data/subject
 import {PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY,PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY,PHYSICS_CHEMISTRY_A_DGE_ASSESSMENT_DOMAINS} from "../app/data/physicsChemistryAssessmentPolicy.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../app/data/physicsChemistryTaxonomy.js";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT,physicsChemistryExamScore} from "../app/data/physicsChemistryExamBlueprint.js";
+import {PHYSICS_CHEMISTRY_A_PRACTICAL_ACTIVITIES} from "../app/data/physicsChemistryPracticalActivities.js";
 
 const years=new Set(PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.year));
 assert.deepEqual([...years].sort(),["10.º","11.º"],"FQ A deve cobrir 10.º e 11.º anos.");
@@ -83,6 +84,17 @@ assert.deepEqual(PHYSICS_CHEMISTRY_A_DGE_ASSESSMENT_DOMAINS.map(row=>row.label),
 assert.equal(PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY.practicalExperimentalIsCore,true);
 
 
+
+assert.equal(PHYSICS_CHEMISTRY_A_PRACTICAL_ACTIVITIES.length,21,"As AE atuais devem ter um mapa explícito das atividades prático-experimentais prioritárias.");
+for(const activity of PHYSICS_CHEMISTRY_A_PRACTICAL_ACTIVITIES){
+  assert.ok(PHYSICS_CHEMISTRY_A_DOMAINS.some(domain=>domain.id===activity.domain),activity.id+": domínio prático desconhecido.");
+  assert.ok(PHYSICS_CHEMISTRY_A_SUBTOPICS.some(subtopic=>subtopic.id===activity.subtopicId),activity.id+": submatéria prática desconhecida.");
+  assert.ok(activity.focus.length>=3,activity.id+": cada atividade prática deve explicitar pelo menos três focos.");
+}
+for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS){
+  assert.ok(PHYSICS_CHEMISTRY_A_PRACTICAL_ACTIVITIES.some(activity=>activity.domain===domain.id),domain.id+": cada domínio deve ter trabalho prático mapeado.");
+}
+
 const blueprint=PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT;
 assert.equal(blueprint.mandatoryItems.length,15,"O simulado deve ter 15 itens obrigatórios.");
 assert.equal(blueprint.optionalItems.length,8,"O simulado deve ter 8 itens opcionais.");
@@ -129,6 +141,7 @@ assert.match(component,/Resposta científica/u,"FQ A deve suportar respostas cie
 assert.match(component,/Correção provisória/u,"A pontuação automática das etapas não pode ser apresentada como nota oficial.");
 assert.match(component,/Uma formulação diferente pode estar correta/u,"Respostas abertas devem aceitar formulações cientificamente equivalentes.");
 assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria deve ser estudo passivo.");
+assert.match(learn,/Trabalho prático associado nas AE/u,"Rever Matéria deve tornar visível o trabalho prático previsto nas AE.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · Prova 715/2026 · 7 domínios · 43 submatérias · 78 itens originais · blueprint 15+8/4 · dados + seleção + construção");
+console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 78 itens · blueprint 715 15+8/4 · critérios oficiais protegidos");
