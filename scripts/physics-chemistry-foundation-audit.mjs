@@ -153,8 +153,8 @@ assert.match(component,/Submatéria/u,"Treino Livre deve permitir escolher subma
 assert.match(component,/Misturar matéria/u,"O aluno deve poder treinar o domínio inteiro quando a submatéria ainda não tem banco suficiente.");
 assert.match(component,/fqaStimulus/u,"A UI deve renderizar estímulos tabulares.");
 assert.match(component,/7 perguntas · Física e Química/u,"Missão deve usar o contrato 7–10.");
-assert.match(component,/Primeiro modelo interno: 12 itens/u,"O mini-exame inicial deve ser explicitamente identificado como modelo interno.");
-assert.match(component,/simulado completo será construído separadamente/u,"A fundação não deve fingir que já tem um simulado completo.");
+assert.match(component,/Mini-exame · Modelo 1/u,"O mini-exame inicial deve continuar identificado como modelo próprio.");
+assert.match(component,/Simulado completo · 715/u,"FQ A deve expor o simulado completo depois de este estar implementado.");
 assert.match(component,/Resposta construída por etapas/u,"FQ A deve suportar problemas por etapas.");
 assert.match(component,/Resposta científica/u,"FQ A deve suportar respostas científicas abertas.");
 assert.match(component,/Correção provisória/u,"A pontuação automática das etapas não pode ser apresentada como nota oficial.");
