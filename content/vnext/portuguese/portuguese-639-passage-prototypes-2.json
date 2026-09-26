@@ -24,12 +24,12 @@
           "cognitive": "reconhecer",
           "prompt": "Segundo o texto, qual é um dos objetivos dos encontros de reparação?",
           "options": [
-            "Mostrar que reparar pode ser economicamente preferível em todos os casos.",
-            "Ensinar procedimentos técnicos suficientes para evitar futuras avarias.",
             "Ajudar as pessoas a compreender um objeto antes de o descartarem.",
+            "Ensinar procedimentos técnicos suficientes para evitar futuras avarias.",
+            "Mostrar que reparar pode ser economicamente preferível em todos os casos.",
             "Criar alternativas comunitárias à compra de produtos tecnologicamente mais recentes."
           ],
-          "answerIndex": 2,
+          "answerIndex": 0,
           "explanation": "O texto afirma que o objetivo é mostrar que um objeto pode ser compreendido antes de ser descartado.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -47,11 +47,11 @@
           "prompt": "A referência às limitações da reparação serve sobretudo para",
           "options": [
             "mostrar que a reparação só produz efeitos relevantes quando também é economicamente vantajosa.",
-            "tornar o argumento mais equilibrado, reconhecendo situações em que reparar não é viável.",
+            "delimitar a proposta, defendendo a reparação apenas para produtos fáceis de desmontar.",
             "sugerir que a dimensão social da reparação é mais importante do que prolongar a vida dos objetos.",
-            "delimitar a proposta, defendendo a reparação apenas para produtos fáceis de desmontar."
+            "tornar o argumento mais equilibrado, reconhecendo situações em que reparar não é viável."
           ],
-          "answerIndex": 1,
+          "answerIndex": 3,
           "explanation": "O texto reconhece custos, desenho dos produtos e avarias irrecuperáveis sem abandonar a ideia central; essa concessão torna a argumentação mais equilibrada.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -134,11 +134,11 @@
           "prompt": "O contraste entre os “argumentos razoáveis” e a decisão de Marta evidencia",
           "options": [
             "a dificuldade de Marta em distinguir uma decisão prática de uma escolha definitiva sobre a casa.",
-            "a oposição entre uma decisão racional e o significado afetivo atribuído à luz.",
             "o conflito entre respeitar os hábitos da avó e preparar a casa para o novo proprietário.",
+            "a oposição entre uma decisão racional e o significado afetivo atribuído à luz.",
             "a tentativa de Marta de justificar emocionalmente uma decisão que sabe ser pouco razoável."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "Os motivos práticos para apagar a luz entram em tensão com o seu valor afetivo e memorial.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
