@@ -11,6 +11,7 @@ import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculu
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
 import MathReviewMatter from "./components/MathReviewMatter";
 import PhysicsChemistrySubject from "./components/PhysicsChemistrySubject";
+import PhysicsChemistryExam from "./components/PhysicsChemistryExam";
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
@@ -311,6 +312,7 @@ export default function App(){
   if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view={screen}/>;
   if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="reviewMatter"/>;
   if(screen==="reviewMatter"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="reviewMatter"/>;
+  if(screen==="physicsChemistryExam"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryExam s={s} setS={setS} go={go}/>;
   if(screen==="reviewMatter")return <MathReviewMatter s={s} go={go}/>;
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
