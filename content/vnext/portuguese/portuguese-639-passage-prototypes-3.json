@@ -24,12 +24,12 @@
           "cognitive": "interpretar",
           "prompt": "No quarto período, a expressão “Esse hábito” retoma sobretudo",
           "options": [
-            "a associação entre rapidez de resposta e eficiência.",
+            "a transformação da caixa de entrada num espaço presente ao longo de todo o dia.",
             "a disponibilidade permanente criada pelas notificações.",
             "a expectativa de responder a todas as mensagens assim que chegam.",
-            "a transformação da caixa de entrada num espaço presente ao longo de todo o dia."
+            "a associação entre rapidez de resposta e eficiência."
           ],
-          "answerIndex": 0,
+          "answerIndex": 3,
           "explanation": "A expressão retoma a prática descrita imediatamente antes: responder rapidamente como sinal de eficiência.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -134,11 +134,11 @@
           "prompt": "A imagem da chuva que “riscava o vidro em linhas oblíquas” contribui sobretudo para",
           "options": [
             "criar uma imagem de instabilidade que contrasta com a permanência material do caderno.",
-            "criar uma imagem de inscrição e passagem que dialoga com o gesto de escrever no caderno.",
             "sugerir que a chuva apaga simbolicamente as certezas presentes nas páginas antigas.",
+            "criar uma imagem de inscrição e passagem que dialoga com o gesto de escrever no caderno.",
             "aproximar a paisagem exterior da hesitação de Leonor antes de retomar a escrita."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "As linhas da chuva aproximam visualmente o vidro de uma superfície escrita e reforçam a relação entre memória, inscrição e novo começo.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
