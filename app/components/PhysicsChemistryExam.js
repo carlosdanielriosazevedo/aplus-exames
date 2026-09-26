@@ -5,6 +5,7 @@ import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
+import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -36,10 +37,13 @@ function ResponseEditor({item,value,onChange,disabled=false}){
 export default function PhysicsChemistryExam({s,setS,go}){
   const blueprint=PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT;
   const rows=useMemo(()=>[...blueprint.mandatoryItems,...blueprint.optionalItems],[]);
-  const [current,setCurrent]=useState(0);
-  const [answers,setAnswers]=useState({});
+  const examId="fqa-full-715";
+  const itemIds=useMemo(()=>rows.map(row=>row.id),[rows]);
+  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(examId,rows.map(row=>row.id)));
+  const [current,setCurrent]=useState(()=>Math.max(0,Math.min(rows.length-1,initialDraft?.index||0)));
+  const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(false);
-  const [startedAt]=useState(Date.now);
+  const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
   const item=rows[current];
@@ -70,9 +74,14 @@ export default function PhysicsChemistryExam({s,setS,go}){
   },[review]);
 
   useEffect(()=>{if(timeExpired&&!review)finish()},[timeExpired,review]);
+  useEffect(()=>{
+    if(review)return;
+    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review});
+  },[answers,current,examId,itemIds,review,startedAt]);
 
   function finish(){
     setReview(true);
+    clearPhysicsChemistryExamDraft(examId);
     if(recordedRef.current)return;
     recordedRef.current=true;
     setS(prev=>recordSubjectSession(prev,{
@@ -108,7 +117,8 @@ export default function PhysicsChemistryExam({s,setS,go}){
   </Shell>;
 
   return <Shell className="wideStudentShell fqaFullExamPage">
-    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>go("exams")} exitLabel="Sair do simulado"/>
+    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>{savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt});go("exams")}} exitLabel="Guardar e sair"/>
+    {initialDraft&&<div className="notice"><b>Rascunho retomado</b><span>As respostas e o tempo de início foram recuperados deste dispositivo.</span></div>}
     <div className="fqaExamMeta"><span>{item.examSection==="mandatory"?"ITEM OBRIGATÓRIO":"ITEM OPCIONAL"}</span><b>{item.examPoints} pontos</b><small>{item.year}</small><strong className={inTolerance?"is-tolerance":""}>{inTolerance?"Tolerância · ":"Tempo · "}{String(Math.floor(remainingSeconds/60)).padStart(2,"0")}:{String(remainingSeconds%60).padStart(2,"0")}</strong></div>
     <Stimulus item={item}/>
     <div className="questionCard">

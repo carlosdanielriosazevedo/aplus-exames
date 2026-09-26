@@ -5,6 +5,7 @@ import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
+import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -29,10 +30,12 @@ function formatTime(seconds){
 
 export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go}){
   const exam=physicsChemistryMiniExamById(modelId);
-  const [index,setIndex]=useState(0);
-  const [answers,setAnswers]=useState({});
+  const itemIds=useMemo(()=>exam.items.map(row=>row.id),[exam.items]);
+  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(exam.id,exam.items.map(row=>row.id)));
+  const [index,setIndex]=useState(()=>Math.max(0,Math.min(exam.items.length-1,initialDraft?.index||0)));
+  const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(false);
-  const [startedAt]=useState(Date.now);
+  const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
   const item=exam.items[index];
@@ -46,6 +49,10 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     return ()=>window.clearInterval(timer);
   },[review]);
   useEffect(()=>{if(remaining===0&&!review)finish()},[remaining,review]);
+  useEffect(()=>{
+    if(review)return;
+    savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review});
+  },[answers,exam.id,index,itemIds,review,startedAt]);
 
   const results=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
   const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");
@@ -60,6 +67,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   }
   function finish(){
     setReview(true);
+    clearPhysicsChemistryExamDraft(exam.id);
     if(recordedRef.current)return;
     recordedRef.current=true;
     setS(prev=>recordSubjectSession(prev,{
@@ -89,7 +97,8 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   </Shell>;
 
   return <Shell className="wideStudentShell fqaMiniExamPage">
-    <StudySessionHeader progress={(index+1)/exam.items.length*100} label={(index+1)+"/"+exam.items.length} onExit={()=>go("exams")} exitLabel="Sair do mini-exame"/>
+    <StudySessionHeader progress={(index+1)/exam.items.length*100} label={(index+1)+"/"+exam.items.length} onExit={()=>{savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt});go("exams")}} exitLabel="Guardar e sair"/>
+    {initialDraft&&<div className="notice"><b>Rascunho retomado</b><span>As respostas e o tempo de início foram recuperados deste dispositivo.</span></div>}
     <div className="fqaExamMeta"><span>MINI-EXAME</span><b>{exam.label.replace("Mini-exame · ","")}</b><small>{formatTime(remaining)}</small></div>
     <PhysicsChemistryStimulus item={item}/>
     <div className="questionCard">
