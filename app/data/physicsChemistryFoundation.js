@@ -1,3 +1,6 @@
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q11} from "./physicsChemistryCoverageWave2Q11.js";
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_F11} from "./physicsChemistryCoverageWave2F11.js";
+import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q10} from "./physicsChemistryCoverageWave2Q10.js";
 import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "./physicsChemistryConstructed.js";
 import {PHYSICS_CHEMISTRY_A_DATA_ITEMS} from "./physicsChemistryDataItems.js";
 import {PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1} from "./physicsChemistryCoverageWave1.js";
@@ -111,7 +114,10 @@ export const PHYSICS_CHEMISTRY_A_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_SELECTION_ITEMS,
   ...PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.map(item=>({...item,sourceOrigin:"original",reviewStatus:"prototype"})),
   ...PHYSICS_CHEMISTRY_A_DATA_ITEMS,
-  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE1,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q10,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_F11,
+  ...PHYSICS_CHEMISTRY_A_COVERAGE_WAVE2_Q11
 ].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)}));
 
 export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id)||null}
