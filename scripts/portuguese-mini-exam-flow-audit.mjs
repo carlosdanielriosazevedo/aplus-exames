@@ -17,21 +17,23 @@ const draftModule=readFileSync(new URL("../app/lib/portugueseMiniExamDraft.js",i
 assert.match(page,/dynamic\(\(\)=>import\("\.\/components\/PortuguesePassageMiniExamRoute"\)(?:,\{[^}]*\})?\)/u,"o fluxo principal deve carregar a experiência dedicada de Português por dynamic import");
 assert.match(route,/portuguesePassagePrototypeExam/u,"a rota lazy deve consumir o catálogo de protótipos através da camada de dados da app");
 assert.match(route,/selectedMiniExamId/u,"a rota deve respeitar o mini-exame escolhido no estado da disciplina");
-assert.match(route,/examId==="mini-2"/u,"a rota deve distinguir explicitamente o histórico do segundo mini-exame");
+assert.match(route,/portugueseMiniExamsForYear\(currentYear\)/u,"a rota deve escolher mini-exames pelo ano escolar atual");
 assert.doesNotMatch(page,/content\/vnext/u,"o router principal não deve depender diretamente de fontes editoriais vNext");
 assert.match(prototypeModule,/portuguese-639-passage-prototypes\.json/u,"a camada de dados deve consumir o primeiro documento canónico de textos partilhados");
 assert.match(prototypeModule,/portuguese-639-passage-prototypes-2\.json/u,"a camada de dados deve consumir o segundo documento canónico de textos partilhados");
 assert.match(prototypeModule,/PORTUGUESE_PASSAGE_PROTOTYPE_EXAMS/u,"a camada de dados deve expor um catálogo único de mini-exames");
-assert.match(prototypeModule,/"mini-1":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM/u,"o catálogo deve incluir o mini-exame 1");
-assert.match(prototypeModule,/"mini-2":PORTUGUESE_PASSAGE_PROTOTYPE_EXAM_2/u,"o catálogo deve incluir o mini-exame 2");
+assert.match(prototypeModule,/PORTUGUESE_MINI_EXAM_CATALOG/u,"a camada de dados deve expor o catálogo editorial de mini-exames");
+for(const id of ["mini-10-1","mini-10-2","mini-11-1","mini-11-2","mini-1","mini-2","mini-3"]){
+  assert.match(prototypeModule,new RegExp(`id:"${id}"`,"u"),`o catálogo deve incluir ${id}`);
+}
 assert.match(prototypeModule,/buildPortuguesePassagePrototypeExam/u,"a camada de dados deve construir os mini-exames com o builder canónico");
 assert.match(page,/screen==="portugueseMiniExam"/u,"deve existir um ecrã interno dedicado ao mini-exame de Português");
 assert.match(page,/onExit=\{\(\)=>go\("exams"\)\}/u,"o mini-exame interno deve regressar à área comum de mini-exames");
 assert.match(portugueseSubject,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(portugueseSubject,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
-assert.match(portugueseSubject,/selectMiniExam\("mini-1"\)/u,"a área de exames deve permitir iniciar o mini-exame 1");
-assert.match(portugueseSubject,/selectMiniExam\("mini-2"\)/u,"a área de exames deve permitir iniciar o mini-exame 2");
+assert.match(portugueseSubject,/PORTUGUESE_MINI_EXAM_CATALOG/u,"a área de exames deve consumir o catálogo comum de mini-exames");
+assert.match(portugueseSubject,/selectMiniExam\(row\.id\)/u,"a área de exames deve iniciar qualquer modelo disponível no catálogo");
 
 assert.match(portugueseSubject,/PortugueseLearnPanel/u,"o workspace de Português deve integrar Aprender sem criar uma aplicação paralela");
 assert.match(portugueseSubject,/STUDY_MODE_COPY\.nudge/u,"o hub de treino de Português deve consumir a copy partilhada com Matemática A");
@@ -127,4 +129,4 @@ assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas")
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.match(portugueseRow,/available:true/u,"Português deve estar selecionável no beta atual");
 
-console.log("✓ Português integrado: Aprender por ano/unidade · dois mini-exames no mesmo motor · revisão e memória conservadoras · foundation · zero nota automática");
+console.log("✓ Português integrado: Aprender por ano/unidade · 7 mini-exames por ano no mesmo motor · revisão e memória conservadoras · foundation · zero nota automática");

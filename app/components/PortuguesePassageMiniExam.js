@@ -222,6 +222,17 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
               </>:<>
                 <p className="ptx-open-answer"><b>A tua resposta atual:</b> {String(value||"").trim()||"—"}</p>
                 <details><summary>Ver resposta de referência</summary><p>{row.referenceAnswer}</p></details>
+                {row.scoringGuidance&&<details className="ptx-quality-guide"><summary>Como distinguir uma resposta forte de uma resposta parcial</summary>
+                  <div className="ptx-quality-levels">
+                    <div><b>Resposta forte</b><p>{row.scoringGuidance.strong}</p></div>
+                    <div><b>Resposta parcial</b><p>{row.scoringGuidance.partial}</p></div>
+                    <div><b>Resposta insuficiente</b><p>{row.scoringGuidance.insufficient}</p></div>
+                  </div>
+                  <div className="ptx-quality-notes">
+                    <div><b>Também pode estar correta se...</b><ul>{(row.scoringGuidance.acceptableVariants||[]).map(note=><li key={note}>{note}</li>)}</ul></div>
+                    <div><b>Erros frequentes</b><ul>{(row.scoringGuidance.commonPitfalls||[]).map(note=><li key={note}>{note}</li>)}</ul></div>
+                  </div>
+                </details>}
                 {priorPattern.available&&<div className="ptx-improvement-insight">
                   <strong>Lembra-te do padrão das tentativas anteriores</strong>
                   <p>Este aviso usa apenas as tuas próprias autoavaliações anteriores em respostas do mesmo domínio. Não é uma classificação nem um diagnóstico automático.</p>
@@ -234,6 +245,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                     const feedback=criterionFeedback({criterion,status:evidence.status,evidence:evidence.evidence});
                     return <div className="ptx-criterion" key={criterion.id}>
                       <div className="ptx-criterion-copy"><strong>{criterion.label}</strong><span>{criterion.points} pts na grelha editorial</span></div>
+                      {criterion.observations?.length>0&&<ul className="ptx-criterion-observations">{criterion.observations.map(observation=><li key={observation.id}>{observation.label}</li>)}</ul>}
                       <div className="ptx-criterion-levels" role="group" aria-label={`Avaliar critério ${criterion.label}`}>
                         {PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row,criterion.id,{status:level.id})}>{level.label}</button>)}
                       </div>
