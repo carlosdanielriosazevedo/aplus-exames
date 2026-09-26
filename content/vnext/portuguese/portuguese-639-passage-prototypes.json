@@ -25,11 +25,11 @@
           "prompt": "Segundo o texto, que alteração ocorreu nos primeiros meses após a remodelação?",
           "options": [
             "Os comerciantes passaram a usar a praça sobretudo fora do horário comercial.",
-            "As pessoas passaram a permanecer mais tempo na praça.",
             "O município reduziu novamente a área pedonal depois das primeiras críticas.",
+            "As pessoas passaram a permanecer mais tempo na praça.",
             "As associações começaram a substituir as esplanadas por atividades culturais."
           ],
-          "answerIndex": 1,
+          "answerIndex": 2,
           "explanation": "O texto afirma explicitamente que, nos primeiros meses, as pessoas começaram a permanecer mais tempo na praça.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -46,12 +46,12 @@
           "cognitive": "interpretar",
           "prompt": "A evolução descrita no texto permite concluir sobretudo que",
           "options": [
-            "a redução do trânsito teve um efeito inicial negativo, compensado depois pela atividade comercial.",
-            "o aumento das esplanadas foi o principal mecanismo responsável pela mudança do espaço.",
             "a criação de condições de permanência favoreceu usos sociais e económicos do espaço.",
+            "o aumento das esplanadas foi o principal mecanismo responsável pela mudança do espaço.",
+            "a redução do trânsito teve um efeito inicial negativo, compensado depois pela atividade comercial.",
             "a remodelação alterou sobretudo a circulação, mantendo semelhantes os restantes usos da praça."
           ],
-          "answerIndex": 2,
+          "answerIndex": 0,
           "explanation": "A permanência mais longa das pessoas surge associada tanto às esplanadas como aos encontros e iniciativas culturais, sustentando uma transformação social e económica do espaço.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -111,12 +111,12 @@
           "cognitive": "interpretar",
           "prompt": "A focalização narrativa permite sobretudo",
           "options": [
-            "acompanhar a hesitação de Inês e o modo como ela interpreta a separação da casa.",
+            "alternar entre a perceção presente de Inês e recordações apresentadas por um narrador exterior.",
             "contrastar o que Inês pensa com a perspetiva do comprador que chegará no dia seguinte.",
             "limitar a narrativa às ações de Inês, deixando a interpretação da despedida exclusivamente ao leitor.",
-            "alternar entre a perceção presente de Inês e recordações apresentadas por um narrador exterior."
+            "acompanhar a hesitação de Inês e o modo como ela interpreta a separação da casa."
           ],
-          "answerIndex": 0,
+          "answerIndex": 3,
           "explanation": "A narração acompanha de perto a perceção e a experiência interior de Inês, incluindo a hesitação, as memórias e a interpretação afetiva da despedida.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
@@ -167,11 +167,11 @@
           "prompt": "No final do excerto, a redução progressiva da fachada no espelho retrovisor contribui para",
           "options": [
             "converter a partida numa imagem objetiva que reduz a importância emocional da casa.",
-            "sugerir que a distância física torna a presença da casa mais intensa na memória de Inês.",
             "materializar visualmente o afastamento e o encerramento daquele vínculo espacial.",
+            "sugerir que a distância física torna a presença da casa mais intensa na memória de Inês.",
             "mostrar que a decisão prática de partir elimina progressivamente a memória afetiva."
           ],
-          "answerIndex": 2,
+          "answerIndex": 1,
           "explanation": "A fachada que diminui e desaparece converte o afastamento físico numa imagem do processo de separação que estrutura o excerto.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
