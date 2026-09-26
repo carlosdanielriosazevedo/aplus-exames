@@ -1,10 +1,10 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 2,
+  "version": 3,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
-  "alignmentNote": "Modelo original APProva+ alinhado estruturalmente com a Prova 639 de 2026: 15 itens; 10 obrigatórios; dos restantes 5 contam os 3 melhores; 200 pontos; 120 minutos + 30 minutos de tolerância.",
+  "alignmentNote": "Modelo original APProva+ alinhado estruturalmente com a Prova 639 de 2026: Grupo I com 5 itens de construção e 2 de seleção, incluindo mobilização de leitura; Grupo II com 7 itens de seleção; Grupo III com resposta extensa; 15 itens; 10 obrigatórios; dos restantes 5 contam os 3 melhores; 200 pontos; 120 minutos + 30 minutos de tolerância.",
   "passages": [
     {
       "passageId": "PT639-FULL-G1A-001",
@@ -55,21 +55,32 @@
           "competencyId": "pt-literatura-forma",
           "sourceOrigin": "original",
           "reviewStatus": "prototype",
-          "responseType": "multiple-choice",
-          "cognitive": "interpretar",
-          "prompt": "A frase «essas palavras pareciam pertencer a outra pessoa» evidencia sobretudo",
-          "options": [
-            "a perda de memória de Leonor.",
-            "o afastamento entre o que Leonor dissera e o que sente depois da partida.",
-            "a intenção de Leonor de abandonar definitivamente a família.",
-            "a convicção de que o irmão regressará de imediato."
-          ],
-          "answerIndex": 1,
-          "explanation": "A formulação assinala o contraste entre a segurança do discurso anterior e a experiência emocional posterior à partida.",
-          "gradingMode": "deterministic",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica a mudança no modo como Leonor interpreta as palavras que dissera ao irmão antes da partida. Relaciona essa mudança com dois sinais do comportamento da personagem no cais.",
+          "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
           "groupItemNumber": 2,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "referenceAnswer": "Antes da partida, Leonor repetira que a mudança seria positiva, mas, depois de o comboio partir, já não se reconhece plenamente nesse discurso. A permanência no cais sem necessidade prática e a incapacidade de deitar fora o bilhete mostram que a experiência emocional da despedida contradiz a segurança racional que procurara transmitir ao irmão.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "interpretacao",
+                "label": "Explica a mudança entre o discurso anterior e a experiência emocional posterior.",
+                "points": 8
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Relaciona a interpretação com dois sinais pertinentes do comportamento de Leonor.",
+                "points": 5
+              }
+            ]
+          }
         },
         {
           "id": "PT639-FULL-G1-Q3",
@@ -145,21 +156,32 @@
           "competencyId": "pt-literatura-recursos",
           "sourceOrigin": "original",
           "reviewStatus": "prototype",
-          "responseType": "multiple-choice",
-          "cognitive": "interpretar",
-          "prompt": "A imagem do «retângulo amarelo» contribui para",
-          "options": [
-            "transformar a janela num foco visual que desencadeia a memória da escola.",
-            "demonstrar que o edifício voltou a funcionar como escola.",
-            "provar que Rui desconhece a existência das obras.",
-            "eliminar o contraste entre presente e passado."
-          ],
-          "answerIndex": 0,
-          "explanation": "A luz da janela destaca-se na paisagem noturna e funciona como estímulo concreto para a evocação das memórias escolares.",
-          "gradingMode": "deterministic",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Analisa o valor simbólico da janela iluminada no excerto, mostrando como esse elemento articula o presente de Rui com a memória da infância.",
+          "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
           "groupItemNumber": 5,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "referenceAnswer": "A janela iluminada funciona como um sinal material que liga o presente de Rui à antiga escola e desencadeia a evocação da professora e dos colegas. Embora ele saiba que a luz resulta de uma instalação automática, o foco luminoso permite que o espaço continue a acolher a memória sem transformar a recordação num desejo de regressar à infância.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "simbolo",
+                "label": "Explica o valor simbólico da janela iluminada.",
+                "points": 8
+              },
+              {
+                "id": "articulacao",
+                "label": "Relaciona esse valor com o presente da personagem e a memória da infância.",
+                "points": 5
+              }
+            ]
+          }
         },
         {
           "id": "PT639-FULL-G1-Q6",
@@ -183,33 +205,48 @@
           "maxPoints": 13,
           "groupItemNumber": 6,
           "classificationMode": "best-of-five"
-        },
+        }
+      ]
+    },
+    {
+      "passageId": "PT639-FULL-G1C-001",
+      "year": "12.º",
+      "domain": "educacao-literaria",
+      "title": "Grupo I · Parte C — Mobilização de leitura",
+      "sourceOrigin": "original",
+      "text": "Nesta parte, mobiliza conhecimentos de uma obra estudada no ensino secundário. Não é necessário reproduzir citações; valoriza-se a seleção de situações pertinentes e a explicação da sua relação com o tema proposto.",
+      "items": [
         {
           "id": "PT639-FULL-G1-Q7",
           "year": "12.º",
           "domain": "educacao-literaria",
-          "competencyId": "pt-literatura-forma",
+          "competencyId": "pt-literatura-temas",
           "sourceOrigin": "original",
           "reviewStatus": "prototype",
           "responseType": "restricted-response",
           "cognitive": "raciocinar",
-          "prompt": "Explica o efeito do contraste entre a partida de Rui e a permanência da janela acesa na última frase.",
-          "referenceAnswer": "Rui retoma o movimento e afasta-se, enquanto a janela permanece iluminada. O contraste concretiza a ideia anterior: a personagem segue a sua vida, mas o lugar que sustenta a memória continua a existir, sem exigir um regresso ao passado.",
+          "prompt": "Escreve uma breve exposição sobre a forma como uma obra estudada representa uma personagem confrontada com mudança, perda, conflito ou transformação. Identifica a obra escolhida e desenvolve dois momentos ou aspetos significativos que sustentem a tua leitura.",
+          "referenceAnswer": "Uma resposta adequada identifica inequivocamente uma obra estudada, apresenta uma ideia orientadora sobre a transformação ou o conflito vivido por uma personagem e desenvolve dois momentos ou aspetos pertinentes da obra. A exposição deve articular os exemplos com a interpretação proposta e apresentar introdução, desenvolvimento e conclusão breves.",
           "wordLimit": {
-            "min": 60,
-            "max": 110
+            "min": 120,
+            "max": 180
           },
           "rubric": {
             "criteria": [
               {
-                "id": "efeito",
-                "label": "Explica o contraste entre movimento da personagem e permanência do lugar.",
-                "points": 9
+                "id": "obra-tema",
+                "label": "Identifica a obra e formula uma leitura pertinente do tema proposto.",
+                "points": 5
               },
               {
-                "id": "sentido",
-                "label": "Relaciona esse contraste com o sentido global do excerto.",
-                "points": 4
+                "id": "desenvolvimento",
+                "label": "Desenvolve dois momentos ou aspetos significativos da obra e relaciona-os com a interpretação.",
+                "points": 6
+              },
+              {
+                "id": "organizacao",
+                "label": "Organiza a breve exposição com progressão e clareza.",
+                "points": 2
               }
             ]
           },
@@ -258,32 +295,21 @@
           "competencyId": "pt-leitura-inferencia",
           "sourceOrigin": "original",
           "reviewStatus": "prototype",
-          "responseType": "restricted-response",
-          "cognitive": "raciocinar",
-          "prompt": "Explica a distinção estabelecida entre uma pausa útil e um atraso evitável e mostra por que razão essa distinção é importante para a tese do texto.",
-          "referenceAnswer": "A pausa útil cria condições para reorganizar a atenção, interpretar informação ou comparar alternativas; o atraso evitável resulta de desorganização e apenas desperdiça tempo. A distinção impede que o texto idealize qualquer espera e torna a tese mais precisa: algumas pausas têm valor porque melhoram a qualidade da ação seguinte.",
-          "wordLimit": {
-            "min": 60,
-            "max": 110
-          },
-          "rubric": {
-            "criteria": [
-              {
-                "id": "distincao",
-                "label": "Explica corretamente a diferença entre pausa útil e atraso evitável.",
-                "points": 8
-              },
-              {
-                "id": "tese",
-                "label": "Relaciona a distinção com a tese defendida.",
-                "points": 5
-              }
-            ]
-          },
-          "gradingMode": "rubric-assisted-provisional",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A distinção entre «pausa útil» e «atraso evitável» permite ao autor",
+          "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 2,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "options": [
+            "defender que qualquer forma de espera melhora necessariamente a qualidade do trabalho.",
+            "limitar a tese, reconhecendo que só alguns intervalos favorecem operações mentais relevantes.",
+            "substituir o argumento sobre a atenção por uma crítica exclusiva às aplicações digitais.",
+            "concluir que a eficiência deve deixar de ser considerada em qualquer atividade."
+          ],
+          "answerIndex": 1,
+          "explanation": "A distinção evita idealizar toda a espera: o texto valoriza apenas intervalos que criam condições para reorganizar a atenção, interpretar ou decidir melhor."
         },
         {
           "id": "PT639-FULL-G2-Q3",
@@ -430,29 +456,24 @@
           "rubric": {
             "criteria": [
               {
-                "id": "genero-tema",
-                "label": "Respeita o género de texto de opinião e desenvolve o tema proposto.",
-                "points": 8
+                "id": "genero-formato",
+                "label": "Respeita o género/formato pedido, explicita um ponto de vista e desenvolve a estrutura argumentativa solicitada.",
+                "points": 10
               },
               {
-                "id": "argumentacao",
-                "label": "Formula uma posição clara e desenvolve argumentos pertinentes e sustentados.",
-                "points": 12
+                "id": "tema-pertinencia",
+                "label": "Trata o tema sem desvios relevantes, mobilizando argumentos e exemplos diversificados e pertinentes.",
+                "points": 10
               },
               {
-                "id": "organizacao",
-                "label": "Organiza o texto com progressão coerente e articulação entre partes.",
-                "points": 8
+                "id": "organizacao-coesao",
+                "label": "Organiza o texto com progressão coerente e usa adequadamente mecanismos de coesão textual.",
+                "points": 10
               },
               {
-                "id": "coesao",
-                "label": "Usa mecanismos de coesão adequados e variados.",
-                "points": 8
-              },
-              {
-                "id": "correcao",
-                "label": "Mantém correção sintática, lexical, ortográfica e de pontuação.",
-                "points": 8
+                "id": "correcao-linguistica",
+                "label": "Mantém correção sintática, lexical, ortográfica e de pontuação ao longo do texto.",
+                "points": 14
               }
             ]
           },

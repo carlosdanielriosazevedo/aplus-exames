@@ -53,9 +53,21 @@ for(const name of miniFiles){
   const baseItems=doc.passages.flatMap(passage=>passage.items);
   assert.equal(doc.passages.length,2,`${name}: base deve ter dois textos partilhados`);
   assert.equal(baseItems.length,6,`${name}: base textual deve manter seis itens antes da expansão integrada`);
-  assert.ok(baseItems.some(item=>item.responseType==="multiple-choice"),`${name}: precisa de seleção`);
-  assert.ok(baseItems.some(item=>item.responseType==="restricted-response"),`${name}: precisa de resposta restrita`);
+  assert.equal(baseItems.filter(item=>item.responseType==="multiple-choice").length,4,`${name}: base deve ter quatro itens de seleção`);
+  assert.equal(baseItems.filter(item=>item.responseType==="restricted-response").length,2,`${name}: base deve ter duas respostas restritas`);
+  assert.ok(baseItems.filter(item=>item.cognitive==="raciocinar").length>=2,`${name}: precisa de pelo menos dois itens de raciocínio`);
   assert.ok(doc.passages.every(passage=>passage.sourceOrigin==="original"),`${name}: textos devem ser originais`);
+  assert.ok(doc.passages.every(passage=>String(passage.text||"").trim().split(/\s+/u).length>=90),`${name}: textos-base demasiado curtos`);
+  for(const item of baseItems.filter(item=>item.responseType==="multiple-choice")){
+    assert.equal(item.options?.length,4,`${name} / ${item.id}: escolha múltipla precisa de quatro opções`);
+    assert.equal(new Set(item.options).size,4,`${name} / ${item.id}: opções duplicadas`);
+    assert.ok(Number.isInteger(item.answerIndex)&&item.answerIndex>=0&&item.answerIndex<4,`${name} / ${item.id}: resposta correta inválida`);
+  }
+  for(const item of baseItems.filter(item=>item.responseType==="restricted-response")){
+    assert.ok(item.wordLimit?.min>=60&&item.wordLimit?.max>=100,`${name} / ${item.id}: resposta restrita deve exigir desenvolvimento real`);
+    assert.ok(item.rubric?.criteria?.length>=2,`${name} / ${item.id}: resposta restrita precisa de grelha observável`);
+    assert.ok(String(item.referenceAnswer||"").trim().length>=180,`${name} / ${item.id}: resposta de referência demasiado curta`);
+  }
 }
 
 const prototypeSource=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
@@ -69,10 +81,36 @@ const fullItems=full.passages.flatMap(passage=>passage.items);
 assert.equal(fullItems.length,15,"simulado completo deve ter 15 itens");
 assert.equal(fullItems.filter(item=>item.classificationMode==="mandatory").length,10,"simulado deve ter 10 itens obrigatórios");
 assert.equal(fullItems.filter(item=>item.classificationMode==="best-of-five").length,5,"simulado deve ter 5 itens opcionais");
-assert.equal(fullItems.filter(item=>item.responseType==="extended-writing").length,1,"simulado deve ter uma tarefa extensa");
-assert.equal(fullItems.find(item=>item.responseType==="extended-writing")?.maxPoints,44,"Escrita do simulado deve valer 44 pontos");
 assert.ok(fullItems.every(item=>item.sourceOrigin==="original"),"simulado deve continuar original-only");
+
+const group1=full.passages.filter(passage=>passage.passageId.startsWith("PT639-FULL-G1")).flatMap(passage=>passage.items);
+const group2=full.passages.find(passage=>passage.passageId==="PT639-FULL-G2-001")?.items||[];
+const group3=full.passages.find(passage=>passage.passageId==="PT639-FULL-G3-001")?.items||[];
+
+assert.equal(group1.length,7,"Grupo I deve ter 7 itens");
+assert.equal(group1.filter(item=>item.responseType==="restricted-response").length,5,"Grupo I deve privilegiar construção: 5 respostas restritas");
+assert.equal(group1.filter(item=>item.responseType==="multiple-choice").length,2,"Grupo I deve manter 2 itens de seleção");
+assert.equal(group1.filter(item=>item.classificationMode==="mandatory").length,5,"Grupo I deve ter 5 itens obrigatórios");
+assert.equal(group1.filter(item=>item.classificationMode==="best-of-five").length,2,"Grupo I deve ter 2 itens opcionais");
+assert.ok(full.passages.some(passage=>passage.passageId==="PT639-FULL-G1C-001"),"Grupo I precisa de Parte C autónoma");
+const literaryMobilization=group1.find(item=>item.id==="PT639-FULL-G1-Q7");
+assert.equal(literaryMobilization?.responseType,"restricted-response","Parte C deve ser resposta construída");
+assert.ok(literaryMobilization?.wordLimit?.min>=120,"Parte C deve exigir breve exposição desenvolvida");
+assert.ok(/obra estudada/iu.test(literaryMobilization?.prompt||""),"Parte C deve mobilizar leitura de uma obra estudada");
+
+assert.equal(group2.length,7,"Grupo II deve ter 7 itens");
+assert.ok(group2.every(item=>item.responseType==="multiple-choice"),"Grupo II deve ser integralmente de seleção no modelo 2026");
+assert.equal(group2.filter(item=>item.classificationMode==="mandatory").length,4,"Grupo II deve ter 4 itens obrigatórios");
+assert.equal(group2.filter(item=>item.classificationMode==="best-of-five").length,3,"Grupo II deve ter 3 itens opcionais");
+
+assert.equal(group3.length,1,"Grupo III deve ter uma única tarefa extensa");
+const writing=group3[0];
+assert.equal(writing.responseType,"extended-writing","Grupo III deve ser resposta extensa");
+assert.equal(writing.maxPoints,44,"Escrita do simulado deve valer 44 pontos");
+assert.deepEqual(writing.rubric.criteria.map(criterion=>criterion.points),[10,10,10,14],"rubrica de escrita deve refletir 30 pontos temático-discursivos + 14 de correção linguística");
+assert.equal(writing.wordLimit?.min,200,"Escrita deve começar nas 200 palavras");
+assert.equal(writing.wordLimit?.max,350,"Escrita deve terminar nas 350 palavras");
 
 console.log("✓ autenticidade Português 639: banco, mini-exames e simulado coerentes com a estrutura oficial de 2026 sem copiar itens");
 console.log("  mini-exames: 10 itens em runtime · 2 textos + Gramática + Escrita · 45 min");
-console.log("  simulado: 15 itens · 10 obrigatórios + 5 opcionais (contam 3) · escrita 44 pontos");
+console.log("  simulado: Grupo I 5 construção + 2 seleção · Grupo II 7 seleção · Grupo III 44 pts");
