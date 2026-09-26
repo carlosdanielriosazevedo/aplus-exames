@@ -334,7 +334,7 @@ export default function App(){
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
     clearSessionDraft(s.betaMode||"internal");
     setRecoveredSession(null);
-    const questions=buildMiniExam(s,8);
+    const questions=buildMiniExam(s,12);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
     setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mini_exam_started",{sessionId:ses.id,questionCount:questions.length})]}));
     setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
@@ -1673,7 +1673,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     if(!cfg)return [];
     const fresh=trainingQuestions(s,cfg,8);
     if(!draft?.questions?.length)return fresh;
-    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,8);
+    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,10);
   },[cfg]);
   const [i,setI]=useState(draft?.i||0);
   const [sel,setSel]=useState(draft?.sel??null);
@@ -1693,7 +1693,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
-  if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
+  if(questions.length<7)return <Shell><Back go={go} to="train"/><h1>Ainda não há 7 perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
   function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
