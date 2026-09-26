@@ -1479,7 +1479,7 @@ function MissionResult({s,setS,go}){
     <DailyCompletionNote s={s}/>
     <CompetitionXpNote s={s}/>
     <BetaSessionFeedback s={s} setS={setS} kind="mission"/>
-    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="primary" onClick={()=>go("home")}>Voltar à Home</button>
     <button className="secondary" onClick={()=>go("progress")}>Ver progresso detalhado</button>
   </Shell>
 }
@@ -2092,7 +2092,7 @@ function MiniExamResult({s,setS,go}){
     <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>
 
     <BetaSessionFeedback s={s} setS={setS} kind="mini_exam"/>
-    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="primary" onClick={()=>go("home")}>Voltar à Home</button>
     <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
   </Shell>
 }
@@ -2122,7 +2122,7 @@ function MiniExamCompletedReview({s,setS,go}){
         <ReportButton item={q} s={s} setS={setS} compact/>
       </div>
     </details>)}</div>
-    <button className="primary" onClick={()=>go("home")}>Voltar ao plano</button>
+    <button className="primary" onClick={()=>go("home")}>Voltar à Home</button>
     <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
   </Shell>;
 }
