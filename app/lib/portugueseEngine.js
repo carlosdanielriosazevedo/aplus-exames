@@ -1,3 +1,4 @@
+import {DEFAULT_MISSION_QUESTIONS,clampStudySessionSize,STUDY_SESSION_MIN_QUESTIONS} from "./sessionPolicy.js";
 import {PORTUGUESE_DOMAINS,PORTUGUESE_RELEASE_POLICY} from "../data/portugueseFoundation.js";
 
 const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=>domain.id);
@@ -309,8 +310,8 @@ export function portugueseStructuralChallenge(item){
   return item?.difficulty?.level||STRUCTURAL_CHALLENGE[item?.cognitive]||2;
 }
 
-export function buildAdaptivePortugueseMission(items,{progress,domain=null,competencyId=null,literaryWorkId=null,years=["10.º","11.º","12.º"],size=7}={}){
-  const missionSize=Math.max(7,Math.min(10,Number.isInteger(size)?size:7));
+export function buildAdaptivePortugueseMission(items,{progress,domain=null,competencyId=null,literaryWorkId=null,years=["10.º","11.º","12.º"],size=DEFAULT_MISSION_QUESTIONS}={}){
+  const missionSize=clampStudySessionSize(size);
   const allowedYears=new Set(years);
   const eligible=items.filter(item=>(!domain||item.domain===domain)&&(!competencyId||item.competencyId===competencyId)&&(!literaryWorkId||item.literaryWorkId===literaryWorkId)&&allowedYears.has(item.year)&&item.responseType!=="extended-writing");
   if(eligible.length<missionSize)throw new Error(`Insufficient adaptive Portuguese mission coverage${literaryWorkId?` for ${literaryWorkId}`:competencyId?` for ${competencyId}`:domain?` for ${domain}`:""}.`);
@@ -360,7 +361,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,compe
     if(chosen.responseType==="restricted-response")openCount++;
   }
 
-  if(selected.length<7)throw new Error("A Portuguese mission or training session must contain at least seven pedagogically useful interactions.");
+  if(selected.length<STUDY_SESSION_MIN_QUESTIONS)throw new Error(`A Portuguese mission or training session must contain at least ${STUDY_SESSION_MIN_QUESTIONS} pedagogically useful interactions.`);
   return {
     items:selected,
     priorities,
