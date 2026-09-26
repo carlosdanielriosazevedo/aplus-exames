@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
+import {PORTUGUESE_FULL_PRACTICE_EXAM,PORTUGUESE_MINI_EXAM_CATALOG} from "../app/data/portuguesePassagePrototype.js";
+import {PORTUGUESE_MINI_EXAM_QUESTIONS} from "../app/lib/sessionPolicy.js";
 
 const dir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
 const files=readdirSync(dir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
 const items=files.flatMap(name=>JSON.parse(readFileSync(new URL(name,dir),"utf8")).items);
 
-assert.equal(items.length,310,"o banco de Português deve manter os 310 itens atuais");
+assert.equal(items.length,334,"o banco de Português deve manter os 334 itens atuais");
 assert.ok(items.every(item=>item.sourceOrigin==="original"),"o banco deve continuar original-only; este audit não autoriza cópia de itens IAVE");
 assert.ok(items.every(item=>item.reviewStatus==="prototype"),"Português continua em protótipo");
 
@@ -28,10 +30,10 @@ assert.ok(byType("educacao-literaria","restricted-response").length>=4,"Educaç�
 // Escrita: resposta restrita + uma resposta extensa de 200–350 palavras.
 assert.ok(byType("escrita","restricted-response").length>=4,"Escrita deve manter treino de resposta restrita");
 const extended=byType("escrita","extended-writing");
-assert.ok(extended.length>=2,"o banco atual deve manter pelo menos duas tarefas extensas de Escrita");
+assert.ok(extended.length>=9,"o banco atual deve manter massa crítica de tarefas extensas de Escrita");
 assert.ok(extended.every(item=>item.wordLimit?.min===200&&item.wordLimit?.max>=300),"as tarefas extensas devem respeitar uma extensão mínima de 200 palavras");
 assert.ok(extended.every(item=>/200\s+a\s+\d+\s+palavras/iu.test(item.prompt)),"o enunciado das tarefas extensas deve explicitar a extensão ao aluno");
-assert.equal(extended[0].maxPoints,44,"a tarefa extensa atual deve preservar a sua ponderação interna");
+assert.ok(extended.every(item=>item.maxPoints===44),"as tarefas extensas devem preservar a ponderação interna de 44 pontos");
 
 // Gramática pode usar seleção e construção e pode apoiar-se em suporte textual.
 assert.ok(byType("gramatica","multiple-choice").length>=8,"Gramática precisa de massa crítica de seleção");
@@ -39,7 +41,7 @@ assert.ok(byDomain("gramatica").some(item=>constructionTypes.has(item.responseTy
 
 // Autenticidade de tarefa: respostas restritas devem obrigar a produzir linguagem, não apenas escolher rótulos.
 const restricted=items.filter(item=>item.responseType==="restricted-response");
-assert.equal(restricted.length,31,"a composição atual deve manter 31 respostas restritas");
+assert.ok(restricted.length>=47,"a composição atual deve manter pelo menos 47 respostas restritas");
 for(const item of restricted){
   assert.ok(item.rubric?.criteria?.length>=2,`${item.id}: resposta restrita precisa de grelha observável`);
   assert.ok(item.wordLimit?.min>=25&&item.wordLimit?.max>item.wordLimit.min,`${item.id}: resposta restrita precisa de intervalo de extensão coerente`);
@@ -59,4 +61,19 @@ const counts=Object.fromEntries(["leitura","educacao-literaria","escrita","grama
 
 console.log("✓ autenticidade Português 639: alinhamento estrutural com Informação‑Prova 2026 sem copiar itens oficiais");
 console.log(JSON.stringify(counts));
-console.log("  escrita extensa: 2 itens · classificação automática final bloqueada");
+for(const mini of PORTUGUESE_MINI_EXAM_CATALOG){
+  assert.equal(mini.exam.itemCount,PORTUGUESE_MINI_EXAM_QUESTIONS,`${mini.id}: mini-exame deve ter ${PORTUGUESE_MINI_EXAM_QUESTIONS} itens`);
+  assert.equal(mini.exam.durationMinutes,45,`${mini.id}: mini-exame deve ter duração orientadora de 45 minutos`);
+  assert.deepEqual(new Set(mini.exam.miniExamDomains),new Set(["leitura","educacao-literaria","gramatica","escrita"]),`${mini.id}: mini-exame deve cobrir os quatro domínios`);
+}
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.itemCount,15,"o simulado completo deve manter 15 itens");
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.durationMinutes,120);
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.toleranceMinutes,30);
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.maxPoints,200);
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.scoringPolicy.mandatoryCount,10);
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.scoringPolicy.optionalCount,5);
+assert.equal(PORTUGUESE_FULL_PRACTICE_EXAM.scoringPolicy.optionalBestCount,3);
+
+console.log(`  escrita extensa: ${extended.length} itens · classificação automática final bloqueada`);
+console.log(`  mini-exames: ${PORTUGUESE_MINI_EXAM_CATALOG.length} modelos · ${PORTUGUESE_MINI_EXAM_QUESTIONS} itens · 4 domínios · 45 min`);
+console.log("  simulado: 15 itens · 120+30 min · 10 obrigatórios + melhores 3 de 5 opcionais");
