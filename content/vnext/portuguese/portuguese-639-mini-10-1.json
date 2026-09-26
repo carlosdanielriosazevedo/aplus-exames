@@ -1,0 +1,177 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
+    {
+      "passageId": "PT639-PASSAGE-10-LEITURA-001",
+      "year": "10.º",
+      "domain": "leitura",
+      "title": "Quando um mapa deixa de ser apenas um mapa",
+      "sourceOrigin": "original",
+      "text": "Durante muito tempo, os mapas foram vistos sobretudo como instrumentos para chegar a um lugar. Hoje continuam a cumprir essa função, mas fazem também outras coisas. Um mapa de transportes mostra ligações; um mapa de ruído revela zonas mais expostas; um mapa de árvores pode ajudar a perceber onde existe sombra suficiente no verão. Em todos estes casos, escolher o que aparece e o que fica de fora altera a forma como vemos um território. Se um mapa assinala apenas estradas, a cidade parece feita para circular. Se acrescenta bancos, árvores, escolas e percursos pedonais, torna visíveis outras formas de a usar. Por isso, ler um mapa não é apenas seguir símbolos. É perguntar que realidade foi selecionada, para que objetivo e para quem. Nenhum mapa consegue mostrar tudo. A sua utilidade depende precisamente de reduzir a complexidade. Mas essa redução nunca é neutra: aquilo que escolhemos representar ajuda também a decidir aquilo a que prestamos atenção.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-10-LEITURA-001-Q1",
+          "year": "10.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-informacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "reconhecer",
+          "prompt": "Segundo o texto, porque é que nenhum mapa consegue mostrar tudo?",
+          "options": [
+            "Porque os símbolos cartográficos são sempre imprecisos.",
+            "Porque um mapa precisa de selecionar informação e reduzir a complexidade.",
+            "Porque os mapas atuais mostram apenas estradas.",
+            "Porque a leitura de mapas depende exclusivamente da memória."
+          ],
+          "answerIndex": 1,
+          "explanation": "O texto afirma que a utilidade do mapa depende de reduzir a complexidade através de uma seleção de informação.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LEITURA-001-Q2",
+          "year": "10.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-inferencia",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A comparação entre um mapa só com estradas e outro com árvores, escolas e percursos pedonais mostra que",
+          "options": [
+            "todos os mapas devem incluir exatamente os mesmos elementos.",
+            "a seleção de informação influencia a forma como interpretamos e usamos um território.",
+            "as estradas deixaram de ter utilidade nos mapas.",
+            "os mapas de transportes são menos rigorosos do que os restantes."
+          ],
+          "answerIndex": 1,
+          "explanation": "A comparação mostra que diferentes seleções tornam visíveis diferentes usos e leituras da cidade.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LEITURA-001-Q3",
+          "year": "10.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-organizacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica como os exemplos apresentados no texto sustentam a ideia de que representar também é escolher. Fundamenta a resposta em dois elementos do texto.",
+          "referenceAnswer": "O texto apresenta vários mapas que selecionam realidades diferentes, como transportes, ruído ou árvores, mostrando que cada um responde a um objetivo específico. Depois compara uma representação centrada em estradas com outra que inclui bancos, árvores, escolas e percursos pedonais. Esses exemplos demonstram que o mapa não reproduz toda a realidade: escolhe elementos e, ao fazê-lo, orienta a atenção e a interpretação do território.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica a relação entre seleção de elementos e interpretação do território.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do texto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    },
+    {
+      "passageId": "PT639-PASSAGE-10-LIT-001",
+      "year": "10.º",
+      "domain": "educacao-literaria",
+      "title": "A janela ao fim da rua",
+      "sourceOrigin": "original",
+      "text": "Todas as tardes, quando regressava da escola, Rui passava pela mesma janela. Ficava no primeiro andar de uma casa estreita e tinha um vaso de manjerico no parapeito. Nunca vira quem o regava. Ainda assim, nos dias mais quentes, a terra aparecia escura e as folhas mantinham-se erguidas. Durante meses, aquela pequena regularidade pareceu-lhe tão certa como a curva da rua ou o sino das seis. Um dia, o vaso desapareceu. Rui continuou a levantar os olhos, primeiro por hábito, depois por uma espécie de esperança sem objeto. A janela permanecia fechada. Na semana seguinte, colocaram uma placa de venda na porta. Foi então que percebeu que não sabia nada sobre quem ali vivera. Não sabia um nome, uma idade ou uma história. Sabia apenas que alguém tinha cuidado todos os dias de uma planta que ele nunca tocara. E, estranhamente, isso bastou para sentir que a rua estava diferente.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-10-LIT-001-Q1",
+          "year": "10.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-temas",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "O desaparecimento do vaso funciona sobretudo como",
+          "options": [
+            "um sinal de transformação que leva Rui a reconhecer uma presença antes anónima.",
+            "prova de que Rui conhecia profundamente os moradores da casa.",
+            "um episódio sem consequências na perceção da rua.",
+            "uma explicação para a mudança do horário escolar."
+          ],
+          "answerIndex": 0,
+          "explanation": "A ausência do vaso torna visível, por contraste, a presença quotidiana e anónima que Rui tinha naturalizado.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LIT-001-Q2",
+          "year": "10.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-recursos",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A repetição do gesto de Rui levantar os olhos para a janela contribui para",
+          "options": [
+            "mostrar que a rotina criou uma ligação silenciosa com aquele lugar.",
+            "provar que Rui queria comprar a casa.",
+            "introduzir comicidade na narrativa.",
+            "indicar que o vaso era propriedade de Rui."
+          ],
+          "answerIndex": 0,
+          "explanation": "O gesto repetido materializa a rotina e a ligação criada sem contacto direto com quem vivia na casa.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-10-LIT-001-Q3",
+          "year": "10.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-forma",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica de que modo a oposição entre presença e ausência organiza o sentido do excerto. Apoia a resposta em dois momentos do texto.",
+          "referenceAnswer": "Enquanto o vaso está presente, Rui integra-o na rotina e quase não pensa na pessoa que cuida dele. Quando o vaso desaparece e a janela fica fechada, essa ausência faz Rui reconhecer a existência de uma presença humana que nunca conheceu. A placa de venda reforça a rutura e permite-lhe perceber que uma pequena rotina anónima fazia parte da identidade da rua.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica como a ausência torna visível uma presença antes naturalizada.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois momentos pertinentes do excerto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    }
+  ]
+}
