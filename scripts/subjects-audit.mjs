@@ -9,7 +9,7 @@ assert.equal(SUBJECT_CATALOG_YEAR,2026);
 assert.match(SUBJECT_CATALOG_SOURCE,/^https:\/\/iave\.pt\//);
 assert.equal(SECONDARY_EXAM_SUBJECTS.length,24,"the 2026 catalog must contain 24 distinct disciplines");
 assert.equal(new Set(SECONDARY_EXAM_SUBJECTS.map(subject=>subject.id)).size,24,"subject IDs must be unique");
-assert.deepEqual(AVAILABLE_SUBJECT_IDS,["math-a","portuguese"],"Matemática A e Português devem ser selecionáveis no beta atual");
+assert.deepEqual(AVAILABLE_SUBJECT_IDS,["math-a","physics-chemistry-a","portuguese"],"Matemática A, Física e Química A e Português devem ser selecionáveis no beta atual");
 
 const expectedCodes=["138","501","517","547","550","623","635","639","702","706","708","712","714","715","719","723","724","732","734","735","835","839","847","848","849"];
 const catalogCodes=SECONDARY_EXAM_SUBJECTS.flatMap(subject=>subject.codes).sort();
@@ -34,9 +34,10 @@ assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject mana
 assert.match(page,/if\(preview==="subjects"\)/);
 assert.match(welcome,/segment === "parent" \? "parent" : "subjectOnboard"/);
 assert.match(page,/disabled=\{!subject\.available\}/);
-assert.match(page,/Matemática A e Português disponíveis/);
+assert.match(page,/Matemática A, Português e Física e Química A disponíveis/);
 assert.match(chrome,/className="subjectSwitcher"/,"the shared student header must expose the active subject switcher");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="portuguese"/,"Portuguese must use the same semantic workspace destinations as Mathematics A");
+assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="physics-chemistry-a"/,"Física e Química A must use the same semantic workspace destinations as Mathematics A");
 assert.match(page,/go\("home"\)/,"subject switching must be able to open the shared home destination");
 assert.match(page,/go\(isNew\?"onboard":subjectHomeScreen\(subject\.id\)\)/,"uma disciplina adicionada mais tarde deve passar pela configuração antes de abrir a Home");
 assert.match(page,/subjectOnboardingStep/u,"o onboarding deve percorrer todas as disciplinas selecionadas");
@@ -61,4 +62,4 @@ assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u,"the legacy Portuguese l
 assert.equal((page.match(/subjectById\("portuguese"\)/gu)||[]).length,0,"Português must not be injected manually into the subject manager");
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);
 
-console.log("✓ subjects: official 2026 catalog, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded");
+console.log("✓ subjects: official 2026 catalog, 3 available subjects, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded");

@@ -10,6 +10,7 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
 import MathReviewMatter from "./components/MathReviewMatter";
+import PhysicsChemistrySubject from "./components/PhysicsChemistrySubject";
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
@@ -127,7 +128,8 @@ function normalizeSubjectWorkspace(state){
 }
 
 function activeSubjectDiagnosticDone(state){
-  return state.activeSubjectId==="portuguese"?subjectProgressFor(state,"portuguese").diagnosticDone:!!state.diagnosticDone;
+  if(["portuguese","physics-chemistry-a"].includes(state.activeSubjectId))return subjectProgressFor(state,state.activeSubjectId).diagnosticDone;
+  return !!state.diagnosticDone;
 }
 
 const initial={
@@ -306,19 +308,24 @@ export default function App(){
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
   if(screen==="subjectManager")return <SubjectManager s={s} setS={setS} go={go}/>;
   if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view={screen}/>;
+  if(["home","train","progress","exams"].includes(screen)&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view={screen}/>;
   if(screen==="reviewMatter"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="reviewMatter"/>;
+  if(screen==="reviewMatter"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="reviewMatter"/>;
   if(screen==="reviewMatter")return <MathReviewMatter s={s} go={go}/>;
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
   if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
   if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
   if(screen==="curriculumOnboard"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
+  if(screen==="curriculumOnboard"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
   if(screen==="curriculumSettings"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculum"/>;
+  if(screen==="curriculumSettings"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="curriculum"/>;
   if(screen==="curriculumOnboard")return <TaughtCurriculum s={s} setS={setS} go={go} onboarding/>;
   if(screen==="curriculumSettings")return <TaughtCurriculum s={s} setS={setS} go={go}/>;
   if(screen==="goalOnboard")return <GoalScreen s={s} setS={setS} go={go} onboarding/>;
   if(screen==="goalSettings")return <GoalScreen s={s} setS={setS} go={go}/>;
   if(screen==="apronsoIntro")return <ApronsoIntro setS={setS} go={go}/>;
   if(screen==="diag"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="diagnostic"/>;
+  if(screen==="diag"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="diagnostic"/>;
   if(screen==="diag")return <DiagIntro s={s} setS={setS} go={go}/>;
   if(screen==="diagRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível recuperar esta sessão</b><span>O estado académico não foi alterado. O progresso guardado foi conservado para uma nova tentativa.</span></div></Shell>;
   if(screen==="storageRecoveryError")return <Shell><Logo/><div className="notice warning"><b>Não foi possível ler o progresso guardado</b><span>Nenhum dado foi substituído. Reabre a app para tentar novamente.</span></div></Shell>;
@@ -328,6 +335,7 @@ export default function App(){
   if(screen==="missionResult")return <MissionResult s={s} setS={setS} go={go}/>;
   if(screen==="train")return <TrainHub s={s} go={go}/>;
   if(screen==="trainingSetup"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="trainingSetup"/>;
+  if(screen==="trainingSetup"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="trainingSetup"/>;
   if(screen==="trainingSetup")return <Train s={s} setS={setS} go={go} start={cfg=>{setTrainingCfg(cfg);go("trainingRun")}}/>;
   if(screen==="trainingRun")return <TrainingRun s={s} setS={setS} go={go} cfg={trainingCfg} recoveredDraft={recoveredSession?.kind==="training"?recoveredSession:null} onRecovered={()=>setRecoveredSession(null)}/>;
   if(screen==="progress")return <Progress s={s} go={go}/>;
@@ -484,7 +492,7 @@ function SubjectSelection({s,setS,go}){
 
     <div className="subjectSelectionSummary">
       <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
-      <strong>Matemática A e Português disponíveis</strong>
+      <strong>Matemática A, Português e Física e Química A disponíveis</strong>
     </div>
 
     <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
@@ -512,7 +520,7 @@ function SubjectSelection({s,setS,go}){
       </section>;
     })}</div>
 
-    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A e Português usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>
+    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A, Português e Física e Química A usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>
     <button className="primary" disabled={!selected.length} onClick={save}>Continuar</button>
   </Shell>;
 }
@@ -546,7 +554,7 @@ function SubjectManager({s,setS,go}){
     <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
-    <div className="notice"><b>Conteúdo de Português em validação</b><span>A estrutura da disciplina já é a mesma do workspace principal. O conteúdo e a correção escrita continuam em validação antes de serem considerados resultados académicos de produção.</span></div>
+    <div className="notice"><b>Uma estrutura comum para todas as disciplinas</b><span>Cada disciplina usa o mesmo workspace e mantém progresso próprio. O conteúdo e os motores de resposta são validados separadamente antes de cada disciplina sair da fase foundation.</span></div>
   </Shell>;
 }
 
