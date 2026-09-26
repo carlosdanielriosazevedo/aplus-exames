@@ -1,3 +1,4 @@
+import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,clampStudySessionSize} from "./sessionPolicy.js";
 import {
   TAXONOMY,PREREQUISITES,FOCUS_PREREQUISITES,MICRO_PREREQUISITES,
   QUESTION_BANK,microcompetencyFor,microcompetencyId,microcompetencyLabel
@@ -297,8 +298,8 @@ export function desiredDifficulty(score,goal=16){
   return target;
 }
 
-export const DAILY_MISSION_MIN_INTERACTIONS=7;
-export const DAILY_MISSION_MAX_INTERACTIONS=10;
+export const DAILY_MISSION_MIN_INTERACTIONS=STUDY_SESSION_MIN_QUESTIONS;
+export const DAILY_MISSION_MAX_INTERACTIONS=STUDY_SESSION_MAX_QUESTIONS;
 export const DAILY_MISSION_MIN_SECONDS=180;
 export const DAILY_MISSION_MAX_SECONDS=300;
 
@@ -491,8 +492,8 @@ export function missionPracticeQuestion(s,plan,totalCount,usedIds=[]){
   return practice&&!usedIds.includes(practice.id)?practice:null;
 }
 
-export function trainingQuestions(s,{themeId,focus,level},limit=8){
-  const boundedLimit=Math.max(7,Math.min(10,Number.isInteger(limit)?limit:8));
+export function trainingQuestions(s,{themeId,focus,level},limit=DEFAULT_TRAINING_QUESTIONS){
+  const boundedLimit=clampStudySessionSize(limit);
   const focusLabel=microcompetencyLabel(focus)||focus;
   const selectedSubtopic=curriculumSubtopicForItem({
     themeId,
@@ -891,8 +892,8 @@ function bestExamQuestionForTheme(s,themeId,seenIds,usedCognitive,usedSessionIds
   })[0];
 }
 
-export function buildMiniExam(s,count=12){
-  const examCount=Math.max(10,Math.min(14,Number.isInteger(count)?count:12));
+export function buildMiniExam(s,count=MATH_MINI_EXAM_QUESTIONS){
+  const examCount=Math.max(10,Math.min(14,Number.isInteger(count)?count:MATH_MINI_EXAM_QUESTIONS));
   const constructedTarget=examCount>=4?Math.min(2,examCount-2):0;
   const choiceTarget=examCount-constructedTarget;
   const seen=seenQuestionIds(s);
