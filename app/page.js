@@ -8,7 +8,7 @@ import {
   TAXONOMY,PREREQUISITES,QUESTION_BANK,DIAGNOSTIC_BLUEPRINT,microcompetencyId
 } from "./data/content";
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
-import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon} from "./components/chrome";
+import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
 import MathReviewMatter from "./components/MathReviewMatter";
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
@@ -1397,7 +1397,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   const missionStage=totalCount===0?"A começar":totalCount<3?"A aprofundar":"Quase concluída";
   return <Shell>
-    <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${Math.min(88,22+totalCount*22)}%`}}/></div><span>{missionStage}</span></div>
+    <StudySessionHeader progress={Math.min(88,22+totalCount*22)} label={missionStage} onExit={()=>go("home")}/>
     {draft&&<div className="resumeBanner"><b>↻ Sessão retomada</b><span>Continuaste exatamente no ponto onde tinhas ficado.</span></div>}
     <p className="questionContext">{theme(current.themeId).short}{current.focus&&<> · {current.focus}</>}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary>
@@ -1426,6 +1426,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {fb&&!current.practiceOnly&&<div className={"feedback answerFeedback "+(fb.correct?"good":"bad")}><b>{fb.correct?"✓ Muito bem!":"Não é essa."}</b><span>{fb.correct?conciseMathExplanation(current.sol):<>A resposta correta é:<strong>{current.o[current.a]}</strong>{current.sol&&<small>{conciseMathExplanation(current.sol)}</small>}</>}</span></div>}
     {fb&&<ReportButton item={current} s={s} setS={setS}/>}
     {!fb?<button disabled={!isResponseAnswered(current,sel)} className="primary" onClick={submitAnswer}>Responder</button>:<button className="primary" onClick={next}>Próxima pergunta</button>}
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
@@ -1773,7 +1774,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
     </Shell>
   }
 
-  return <Shell><div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/questions.length)*100}%`}}/></div><span>{i+1}/{questions.length}</span></div>
+  return <Shell><StudySessionHeader progress={((i+1)/questions.length)*100} label={`${i+1}/${questions.length}`} onExit={()=>go("home")}/>
     {draft&&<div className="resumeBanner"><b>↻ Treino retomado</b><span>As respostas anteriores desta sessão foram preservadas.</span></div>}
     <p className="questionContext">{theme(cfg.themeId).short}{q.focus&&<> · {q.focus}</>}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span>{q.generated&&<span>Variante validada · gerada por regras matemáticas fechadas · seed {q.variantSeed}</span>}</div></details>
@@ -1992,7 +1993,7 @@ function MiniExamRun({session,setSession,go}){
   }
   function move(n){setSession({...session,current:Math.max(0,Math.min(session.questions.length-1,n))})}
   return <Shell>
-    <div className="focusTop"><button type="button" onClick={()=>go("home")} aria-label="Guardar e sair">×</button><div className="focusTrack"><i style={{width:`${((i+1)/session.questions.length)*100}%`}}/></div><span>{i+1}/{session.questions.length}</span></div>
+    <StudySessionHeader progress={((i+1)/session.questions.length)*100} label={`${i+1}/${session.questions.length}`} onExit={()=>go("home")}/>
     <p className="questionContext">{theme(q.themeId).short}</p>
     <details className="focusDisclosure"><summary>ⓘ Sobre esta pergunta</summary><div className="questionMeta"><span>{q.cognitive} · nível {q.difficulty}</span><span>{q.points} pontos · {isConstructedResponse(q)?"resposta construída":"seleção"}</span></div></details>
     <h2>{q.q}</h2>
