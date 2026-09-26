@@ -1,7 +1,7 @@
 {
   "subjectId": "portuguese",
   "examCode": "639",
-  "version": 3,
+  "version": 4,
   "status": "prototype-not-live",
   "sourcePolicy": "original-only",
   "alignmentNote": "Modelo original APProva+ alinhado estruturalmente com a Prova 639 de 2026: Grupo I com 5 itens de construção e 2 de seleção, incluindo mobilização de leitura; Grupo II com 7 itens de seleção; Grupo III com resposta extensa; 15 itens; 10 obrigatórios; dos restantes 5 contam os 3 melhores; 200 pontos; 120 minutos + 30 minutos de tolerância.",
@@ -46,7 +46,8 @@
           "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
           "groupItemNumber": 1,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-FULL-G1-Q2",
@@ -80,7 +81,8 @@
                 "points": 5
               }
             ]
-          }
+          },
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-FULL-G1-Q3",
@@ -93,17 +95,18 @@
           "cognitive": "interpretar",
           "prompt": "O gesto final de guardar o bilhete funciona sobretudo como",
           "options": [
-            "prova de que Leonor pretende reutilizá-lo numa nova viagem.",
+            "um gesto de preservação consciente de uma lembrança que Leonor pretende conservar.",
             "sinal de adiamento da separação emocional associada à partida.",
-            "indício de que o bilhete ainda pode ser reembolsado.",
-            "forma de ocultar do funcionário a presença no cais."
+            "uma forma de manter uma ligação prática com a viagem do irmão depois da despedida.",
+            "um indício de que Leonor ainda não decidiu se concorda com a mudança do irmão."
           ],
           "answerIndex": 1,
           "explanation": "Embora racionalmente inútil, o bilhete conserva momentaneamente o vínculo com a despedida, mostrando que Leonor ainda não consegue descartá-lo.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 3,
-          "classificationMode": "best-of-five"
+          "classificationMode": "best-of-five",
+          "difficultyTarget": 3
         }
       ]
     },
@@ -147,7 +150,8 @@
           "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
           "groupItemNumber": 4,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-FULL-G1-Q5",
@@ -181,7 +185,8 @@
                 "points": 5
               }
             ]
-          }
+          },
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-FULL-G1-Q6",
@@ -194,17 +199,18 @@
           "cognitive": "interpretar",
           "prompt": "A passagem «Sabia que o edifício estava vazio [...] Mesmo assim» estabelece uma relação de",
           "options": [
-            "causa entre a informação racional e a recordação.",
+            "contraste entre a explicação racional da luz e a tentativa de confirmar uma recordação.",
             "concessão entre o conhecimento da realidade e a imaginação momentânea.",
-            "condição para Rui poder regressar à escola.",
-            "consequência inevitável das obras realizadas."
+            "condição entre a existência da luz e a possibilidade de Rui reconstruir a cena passada.",
+            "consequência entre o conhecimento das obras e a evocação involuntária da infância."
           ],
           "answerIndex": 1,
           "explanation": "Rui conhece a explicação objetiva para a luz, mas esse conhecimento não impede a evocação imaginativa do passado; a relação é concessiva.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 6,
-          "classificationMode": "best-of-five"
+          "classificationMode": "best-of-five",
+          "difficultyTarget": 3
         }
       ]
     },
@@ -253,7 +259,8 @@
           "gradingMode": "rubric-assisted-provisional",
           "maxPoints": 13,
           "groupItemNumber": 7,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "difficultyTarget": 4
         }
       ]
     },
@@ -276,17 +283,18 @@
           "cognitive": "interpretar",
           "prompt": "A progressão do texto organiza-se principalmente através de",
           "options": [
-            "uma enumeração de tecnologias seguida da rejeição total da eficiência.",
-            "uma tese inicial sobre atrasos, sem apresentação de contra-argumentos.",
+            "uma crítica inicial à eficiência seguida de exemplos que a rejeitam parcialmente.",
+            "uma tese sobre a importância das pausas desenvolvida sem reconhecer limites à sua aplicação.",
             "um problema, a apresentação de funções úteis das pausas e uma distinção que limita a tese.",
-            "uma narrativa cronológica sobre a evolução das aplicações digitais."
+            "uma comparação entre hábitos digitais e processos de decisão para provar que produzem o mesmo efeito."
           ],
           "answerIndex": 2,
           "explanation": "O texto parte da eliminação de tempos mortos, apresenta benefícios cognitivos das pausas e depois distingue pausas úteis de atrasos evitáveis.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 1,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-FULL-G2-Q2",
@@ -303,13 +311,14 @@
           "groupItemNumber": 2,
           "classificationMode": "mandatory",
           "options": [
-            "defender que qualquer forma de espera melhora necessariamente a qualidade do trabalho.",
+            "defender que o valor de uma pausa depende sobretudo da sua duração.",
             "limitar a tese, reconhecendo que só alguns intervalos favorecem operações mentais relevantes.",
-            "substituir o argumento sobre a atenção por uma crítica exclusiva às aplicações digitais.",
-            "concluir que a eficiência deve deixar de ser considerada em qualquer atividade."
+            "substituir o argumento sobre a atenção por uma distinção entre trabalho individual e comunicação.",
+            "concluir que a eficiência só é desejável quando não reduz o tempo disponível para refletir."
           ],
           "answerIndex": 1,
-          "explanation": "A distinção evita idealizar toda a espera: o texto valoriza apenas intervalos que criam condições para reorganizar a atenção, interpretar ou decidir melhor."
+          "explanation": "A distinção evita idealizar toda a espera: o texto valoriza apenas intervalos que criam condições para reorganizar a atenção, interpretar ou decidir melhor.",
+          "difficultyTarget": 3
         },
         {
           "id": "PT639-FULL-G2-Q3",
@@ -332,7 +341,8 @@
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 3,
-          "classificationMode": "best-of-five"
+          "classificationMode": "best-of-five",
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-FULL-G2-Q4",
@@ -355,7 +365,8 @@
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 4,
-          "classificationMode": "best-of-five"
+          "classificationMode": "best-of-five",
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-FULL-G2-Q5",
@@ -378,7 +389,8 @@
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 5,
-          "classificationMode": "best-of-five"
+          "classificationMode": "best-of-five",
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-FULL-G2-Q6",
@@ -401,7 +413,8 @@
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 6,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "difficultyTarget": 2
         },
         {
           "id": "PT639-FULL-G2-Q7",
@@ -414,17 +427,18 @@
           "cognitive": "interpretar",
           "prompt": "A última pergunta do texto tem como principal função",
           "options": [
-            "pedir ao leitor uma informação que o autor desconhece.",
+            "pedir ao leitor que decida em que situações deve aceitar ou recusar uma pausa.",
             "reformular a tese em termos práticos, orientando a reflexão sobre o valor das pausas.",
-            "anular a distinção entre pausas úteis e atrasos evitáveis.",
-            "defender que todas as pausas devem ser prolongadas."
+            "transformar a distinção anterior numa oposição entre produtividade e reflexão.",
+            "introduzir uma conclusão provisória que deixa em aberto se todas as pausas têm utilidade."
           ],
           "answerIndex": 1,
           "explanation": "A pergunta final converte a tese num critério prático: avaliar quais as pausas que melhoram o desempenho seguinte.",
           "gradingMode": "deterministic",
           "maxPoints": 13,
           "groupItemNumber": 7,
-          "classificationMode": "mandatory"
+          "classificationMode": "mandatory",
+          "difficultyTarget": 3
         }
       ]
     },
@@ -478,7 +492,8 @@
             ]
           },
           "gradingMode": "rubric-assisted-provisional",
-          "maxPoints": 44
+          "maxPoints": 44,
+          "difficultyTarget": 4
         }
       ]
     }
