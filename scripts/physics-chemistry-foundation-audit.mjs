@@ -9,6 +9,7 @@ import {physicsChemistryCoverage,buildPhysicsChemistryDiagnostic,buildAdaptivePh
 import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS} from "../app/data/subjects.js";
 import {PHYSICS_CHEMISTRY_A_ASSESSMENT_POLICY,PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY,PHYSICS_CHEMISTRY_A_DGE_ASSESSMENT_DOMAINS} from "../app/data/physicsChemistryAssessmentPolicy.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../app/data/physicsChemistryTaxonomy.js";
+import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT,physicsChemistryExamScore} from "../app/data/physicsChemistryExamBlueprint.js";
 
 const years=new Set(PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.year));
 assert.deepEqual([...years].sort(),["10.º","11.º"],"FQ A deve cobrir 10.º e 11.º anos.");
@@ -81,6 +82,24 @@ assert.equal(PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY.version,"AE-marco-2026");
 assert.deepEqual(PHYSICS_CHEMISTRY_A_DGE_ASSESSMENT_DOMAINS.map(row=>row.label),["Conhecimento Científico","Trabalho Prático","Resolução de Problemas","Comunicação Científica"]);
 assert.equal(PHYSICS_CHEMISTRY_A_CURRICULUM_POLICY.practicalExperimentalIsCore,true);
 
+
+const blueprint=PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT;
+assert.equal(blueprint.mandatoryItems.length,15,"O simulado deve ter 15 itens obrigatórios.");
+assert.equal(blueprint.optionalItems.length,8,"O simulado deve ter 8 itens opcionais.");
+assert.equal(blueprint.optionalCounted,4,"Devem contar apenas os 4 melhores itens opcionais.");
+assert.equal(blueprint.mandatoryItems.reduce((sum,item)=>sum+item.examPoints,0),160,"Os itens obrigatórios devem totalizar 160 pontos.");
+assert.equal(blueprint.optionalItems.every(item=>item.examPoints===10),true,"Cada item opcional deve valer 10 pontos.");
+assert.equal(blueprint.totalPoints,200);
+assert.ok(blueprint.mandatoryItems.some(item=>item.responseType==="stepwise"),"O simulado deve conter construção por etapas.");
+assert.ok(blueprint.mandatoryItems.some(item=>item.responseType==="restricted-response"),"O simulado deve conter resposta científica aberta.");
+assert.ok(blueprint.mandatoryItems.some(item=>item.stimulus?.type==="table"),"O simulado deve conter interpretação de dados.");
+assert.ok(new Set([...blueprint.mandatoryItems,...blueprint.optionalItems].map(item=>item.id)).size===23,"O simulado não deve repetir itens.");
+const demoScore=physicsChemistryExamScore({
+  mandatoryResults:blueprint.mandatoryItems.map(item=>({points:item.examPoints})),
+  optionalResults:blueprint.optionalItems.map((item,index)=>({points:index<4?10:2}))
+});
+assert.equal(demoScore.total,200,"O algoritmo do simulado deve contar os 4 melhores opcionais e permitir 200 pontos.");
+
 const subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id==="physics-chemistry-a");
 assert.ok(subject?.available,"Física e Química A deve estar selecionável.");
 assert.equal(subject?.releaseStage,"foundation","Física e Química A deve continuar marcada como foundation.");
@@ -112,4 +131,4 @@ assert.match(component,/Uma formulação diferente pode estar correta/u,"Respost
 assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria deve ser estudo passivo.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · Prova 715/2026 · 7 domínios · 43 submatérias · 78 itens originais · dados + seleção + etapas + resposta científica");
+console.log("✓ FQ A: AE março 2026 · Prova 715/2026 · 7 domínios · 43 submatérias · 78 itens originais · blueprint 15+8/4 · dados + seleção + construção");
