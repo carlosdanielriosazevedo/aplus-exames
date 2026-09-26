@@ -1133,3 +1133,9 @@ button,input,select,textarea{max-width:100%}
 .fqaDiagramNode{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #dfe4ea;border-radius:12px;background:#f9fafb;min-width:130px}
 .fqaDiagramNode small{color:#667085}.fqaDiagramNode span{font-size:18px;font-weight:700}
 @media(max-width:820px){.fqaChartStimulus svg{min-width:420px}.fqaDiagramNode{min-width:100%}}
+
+
+.fqaMiniAnswerActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.fqaMiniExamPage .questionCard{margin-top:12px}
+.fqaMiniReviewPage .reviewChapterBody ul{display:grid;gap:6px;padding-left:22px}
+@media(max-width:820px){.fqaMiniAnswerActions>*{flex:1 1 100%}}
