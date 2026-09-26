@@ -1,5 +1,5 @@
 "use client";
-import {useMemo,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
@@ -39,6 +39,9 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const [current,setCurrent]=useState(0);
   const [answers,setAnswers]=useState({});
   const [review,setReview]=useState(false);
+  const [startedAt]=useState(Date.now);
+  const [now,setNow]=useState(Date.now);
+  const recordedRef=useRef(false);
   const item=rows[current];
   const filled=rows.filter(row=>answered(row,answers[row.id])).length;
 
@@ -51,9 +54,27 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const optionalKnown=bestOptional.reduce((sum,row)=>sum+row.points,0);
   const pendingOpen=scored.filter(row=>row.pending).length;
   const hasProvisional=scored.some(row=>row.provisional);
+  const baseSeconds=blueprint.durationMinutes*60;
+  const toleranceSeconds=blueprint.toleranceMinutes*60;
+  const elapsedSeconds=Math.max(0,Math.floor((now-startedAt)/1000));
+  const inTolerance=elapsedSeconds>=baseSeconds&&elapsedSeconds<baseSeconds+toleranceSeconds;
+  const timeExpired=elapsedSeconds>=baseSeconds+toleranceSeconds;
+  const remainingSeconds=inTolerance
+    ?Math.max(0,toleranceSeconds-(elapsedSeconds-baseSeconds))
+    :Math.max(0,baseSeconds-elapsedSeconds);
+
+  useEffect(()=>{
+    if(review)return undefined;
+    const timer=window.setInterval(()=>setNow(Date.now()),1000);
+    return ()=>window.clearInterval(timer);
+  },[review]);
+
+  useEffect(()=>{if(timeExpired&&!review)finish()},[timeExpired,review]);
 
   function finish(){
     setReview(true);
+    if(recordedRef.current)return;
+    recordedRef.current=true;
     setS(prev=>recordSubjectSession(prev,{
       subjectId:SUBJECT_ID,
       kind:"full_exam",
@@ -88,7 +109,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
 
   return <Shell className="wideStudentShell fqaFullExamPage">
     <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>go("exams")} exitLabel="Sair do simulado"/>
-    <div className="fqaExamMeta"><span>{item.examSection==="mandatory"?"ITEM OBRIGATÓRIO":"ITEM OPCIONAL"}</span><b>{item.examPoints} pontos</b><small>{item.year}</small></div>
+    <div className="fqaExamMeta"><span>{item.examSection==="mandatory"?"ITEM OBRIGATÓRIO":"ITEM OPCIONAL"}</span><b>{item.examPoints} pontos</b><small>{item.year}</small><strong className={inTolerance?"is-tolerance":""}>{inTolerance?"Tolerância · ":"Tempo · "}{String(Math.floor(remainingSeconds/60)).padStart(2,"0")}:{String(remainingSeconds%60).padStart(2,"0")}</strong></div>
     <Stimulus item={item}/>
     <div className="questionCard">
       <h2>{item.prompt}</h2>
@@ -99,6 +120,6 @@ export default function PhysicsChemistryExam({s,setS,go}){
       <div className="fqaExamDots">{rows.map((row,index)=><button type="button" key={row.id} className={(index===current?"current ":"")+(answered(row,answers[row.id])?"done":"")} onClick={()=>setCurrent(index)} aria-label={"Questão "+(index+1)}>{index+1}</button>)}</div>
       {current<rows.length-1?<button className="primary" onClick={()=>setCurrent(value=>value+1)}>Seguinte →</button>:<button className="primary" onClick={finish}>Terminar e rever</button>}
     </div>
-    <p className="muted fqaExamRule">Durante o simulado não mostramos correções. Podes voltar atrás e alterar respostas antes de terminar.</p>
+    <p className="muted fqaExamRule">{inTolerance?"Entraste nos 30 minutos de tolerância. ":""}Durante o simulado não mostramos correções. Podes voltar atrás e alterar respostas antes de terminar; ao esgotar a tolerância, a prova termina automaticamente.</p>
   </Shell>;
 }
