@@ -1,5 +1,6 @@
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
+import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
 
 function normalizeScientificNumber(value){
   const normalized=String(value??"").trim().replace(",",".").replace(/[×·]10\^?/iu,"e").replace(/\s+/g,"");
@@ -53,10 +54,12 @@ export function gradePhysicsChemistryResponse(item,value){
 export function physicsChemistryCoverage(items=[]){
   const byDomain=Object.fromEntries(PHYSICS_CHEMISTRY_A_DOMAINS.map(domain=>[domain.id,items.filter(item=>item.domain===domain.id).length]));
   const byYear=Object.fromEntries(["10.º","11.º"].map(year=>[year,items.filter(item=>item.year===year).length]));
+  const bySubtopic=Object.fromEntries(PHYSICS_CHEMISTRY_A_SUBTOPICS.map(row=>[row.id,items.filter(item=>item.subtopicId===row.id).length]));
   return {
     total:items.length,
     byDomain,
     byYear,
+    bySubtopic,
     missionEligibleByDomain:Object.fromEntries(Object.entries(byDomain).map(([id,count])=>[id,count>=STUDY_SESSION_MIN_QUESTIONS])),
     diagnosticReady:byYear["10.º"]>=4&&byYear["11.º"]>=4,
     missionReady:Object.values(byDomain).every(count=>count>=STUDY_SESSION_MIN_QUESTIONS)
@@ -83,9 +86,9 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
   return selected.slice(0,8);
 }
 
-export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,year=null,size=DEFAULT_MISSION_QUESTIONS}={}){
+export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,subtopicId=null,year=null,size=DEFAULT_MISSION_QUESTIONS}={}){
   const bounded=Math.max(STUDY_SESSION_MIN_QUESTIONS,Math.min(STUDY_SESSION_MAX_QUESTIONS,size));
-  let pool=items.filter(item=>(!domain||item.domain===domain)&&(!year||item.year===year));
+  let pool=items.filter(item=>(!domain||item.domain===domain)&&(!subtopicId||item.subtopicId===subtopicId)&&(!year||item.year===year));
   const recent=new Set((progress.sessions||[]).slice(-4).flatMap(row=>row.itemIds||[]));
   const fresh=pool.filter(item=>!recent.has(item.id));
   if(fresh.length>=bounded)pool=fresh;
@@ -113,7 +116,7 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
       if(!selected.some(row=>row.id===item.id))selected.push(item);
     }
   }
-  return {items:selected,targetDomain:domain||null,year:year||null};
+  return {items:selected,targetDomain:domain||null,targetSubtopicId:subtopicId||null,year:year||null};
 }
 
 export function physicsChemistryScope(items,currentYear,taughtDomainIds=[]){
