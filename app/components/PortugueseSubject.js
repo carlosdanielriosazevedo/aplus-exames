@@ -62,7 +62,9 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const currentYear=SCHOOL_YEARS.includes(s.profile?.schoolYear)?s.profile.schoolYear:"12.º";
   const portugueseSettings=s.subjectSettings?.portuguese||{};
   const taughtUnitIds=initialPortugueseScope(portugueseSettings,currentYear);
-  const [scopeDraft,setScopeDraft]=useState(taughtUnitIds);
+  const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário";
+  const allCurrentScopeIds=portugueseScopeRows(currentYear).flatMap(group=>group.rows.map(row=>row.id));
+  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allCurrentScopeIds:taughtUnitIds);
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(null);
   const [practiceLiteraryWorkId,setPracticeLiteraryWorkId]=useState(null);
@@ -157,12 +159,22 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="diagnostic")return <Shell>
     <p className="eyebrow">AVALIAÇÃO INICIAL</p>
-    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>O objetivo do diagnóstico</small><strong>Não te vou avaliar. Só te quero conhecer um pouco melhor para saber por onde começarmos.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
-    <h2>Poucas perguntas. Muita informação.</h2>
-    <p className="muted">São 8 perguntas originais: duas por domínio escrito. Escolhes ou escreves a resposta, carregas em “Responder” e só depois vês o feedback e a correção.</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e, em 8 perguntas, procura perceber onde faz mais sentido começares.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+    <div className="diagIntroGrid">
+      <div><span>⏱</span><b>8 perguntas</b><small>Duas por domínio escrito nesta versão inicial.</small></div>
+      <div><span>🎯</span><b>Só matéria dada</b><small>Não aparecem obras ou conteúdos que ainda não estudaste.</small></div>
+      <div><span>🧠</span><b>Sem nota final</b><small>Vês feedback depois de responder e o perfil continua a evoluir.</small></div>
+    </div>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Primeiro atualiza a matéria dada</b><span>O diagnóstico não usa áreas que ainda não deste no teu ano atual.</span></div>}
     <button className="primary" disabled={!scopedCoverage.diagnosticReady} onClick={startDiagnostic}>Começar diagnóstico</button>
     {!scopedCoverage.diagnosticReady&&<button className="secondary" onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button>}
+  </Shell>;
+
+  if(!session&&["curriculum","curriculumOnboard"].includes(view)&&finishedSecondary)return <Shell>
+    {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+    <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p>
+    <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Português fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente as obras e os conteúdos do 10.º, 11.º e 12.º anos. Podes alterar esta informação mais tarde nas definições de matéria dada.</p></div></div>
+    <button className="primary" onClick={()=>{const domains=[...new Set(allCurrentScopeIds.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:allCurrentScopeIds,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
   </Shell>;
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
