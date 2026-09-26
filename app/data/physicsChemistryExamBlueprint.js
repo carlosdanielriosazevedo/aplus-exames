@@ -3,15 +3,15 @@ import {PHYSICS_CHEMISTRY_A_ITEMS} from "./physicsChemistryFoundation.js";
 const itemById=id=>PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id);
 
 const mandatory=[
-  ["FQA-ELEM-04",10],["FQA-C-ELEM-01",12],["FQA-DATA-MAT-01",10],["FQA-R-MAT-01",14],
-  ["FQA-ENE-03",10],["FQA-DATA-ENE-01",10],["FQA-C-ENE-01",10],
-  ["FQA-MEC-08",10],["FQA-C-MEC-01",10],["FQA-DATA-WAV-02",10],["FQA-R-WAV-01",14],
-  ["FQA-EQ-04",10],["FQA-C-EQ-01",10],["FQA-DATA-AQ-01",10],["FQA-R-AQ-01",10]
+  ["FQA-AUTH-ELEM-G1",10],["FQA-C-ELEM-01",12],["FQA-AUTH-MAT-D1",10],["FQA-R-MAT-01",14],
+  ["FQA-AUTH-ENE-G1",10],["FQA-C-ENE-01",10],["FQA-DATA-ENE-01",10],
+  ["FQA-AUTH-MEC-D1",10],["FQA-C-MEC-01",10],["FQA-AUTH-WAV-G1",10],["FQA-R-WAV-01",14],
+  ["FQA-AUTH-EQ-G1",10],["FQA-C-EQ-01",10],["FQA-AUTH-AQ-D1",10],["FQA-R-AQ-01",10]
 ];
 
 const optional=[
-  ["FQA-ELEM-06",10],["FQA-MAT-02",10],["FQA-ENE-08",10],["FQA-MEC-06",10],
-  ["FQA-DATA-WAV-01",10],["FQA-EQ-08",10],["FQA-AQ-04",10],["FQA-AQ-06",10]
+  ["FQA-AUTH-ELEM-D1",10],["FQA-AUTH-MAT-G1",10],["FQA-AUTH-ENE-D1",10],["FQA-AUTH-MEC-G1",10],
+  ["FQA-AUTH-WAV-D1",10],["FQA-AUTH-EQ-D1",10],["FQA-AUTH-AQ-G1",10],["FQA-AQ-04",10]
 ];
 
 function buildRows(source,kind){
