@@ -1,6 +1,6 @@
 "use client";
 import {useState} from "react";
-import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop} from "./chrome";
+import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
@@ -15,6 +15,7 @@ import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {portugueseTaxonomyForYear} from "../data/portugueseTaxonomy";
+import {isFriendsBeta} from "../lib/friendsBeta";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
@@ -84,10 +85,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
   const missionDone=missionCompletedToday(s);
-  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
-    if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;
+    if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>{content}{sharedNav}</section></main>;
     return <Shell>{sharedTop}{content}{sharedNav}</Shell>;
   }
 
