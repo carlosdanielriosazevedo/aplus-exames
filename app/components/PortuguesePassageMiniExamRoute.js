@@ -7,7 +7,10 @@ import {clearPortugueseMiniExamDraft,normalizePortugueseMiniExamDraft,savePortug
 
 export default function PortuguesePassageMiniExamRoute({s,setS,onExit}){
   const currentYear=["10.º","11.º","12.º"].includes(s?.profile?.schoolYear)?s.profile.schoolYear:"12.º";
-  const examId=s?.subjectSettings?.portuguese?.selectedMiniExamId||portugueseMiniExamsForYear(currentYear)[0]?.id||"mini-1";
+  const savedExamId=s?.subjectSettings?.portuguese?.selectedMiniExamId||null;
+  const savedMeta=portugueseMiniExamMeta(savedExamId);
+  const savedAllowed=savedExamId==="full-1"?currentYear==="12.º":savedMeta?.year===currentYear;
+  const examId=(savedAllowed?savedExamId:null)||portugueseMiniExamsForYear(currentYear)[0]?.id||"mini-1";
   const exam=portuguesePassagePrototypeExam(examId);
   const label=examId==="full-1"?"Simulado completo de Português":(portugueseMiniExamMeta(examId)?.title||"Mini-exame de Português");
   const itemIds=exam.items.map(item=>item.id);
