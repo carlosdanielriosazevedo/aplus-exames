@@ -1,11 +1,53 @@
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 
+function normalizeScientificNumber(value){
+  const normalized=String(value??"").trim().replace(",",".").replace(/[×·]10\^?/iu,"e").replace(/\s+/g,"");
+  const parsed=Number(normalized);
+  return Number.isFinite(parsed)?parsed:null;
+}
+
+function stepAnswered(step,value){
+  return step.type==="numeric"?normalizeScientificNumber(value)!==null:String(value??"").trim().length>0;
+}
+
+function gradeStructuredStep(step,value){
+  if(!stepAnswered(step,value))return {id:step.id,status:"unanswered",points:0,maxPoints:step.points,expected:step.expected};
+  if(step.type==="numeric"){
+    const parsed=normalizeScientificNumber(value);
+    const correct=Math.abs(parsed-Number(step.value))<=Math.max(0,Number(step.tolerance)||0);
+    return {id:step.id,status:correct?"correct":"incorrect",correct,points:correct?step.points:0,maxPoints:step.points,expected:step.expected,answer:value};
+  }
+  const input=String(value).trim().toLowerCase().replace(/\s+/g,"");
+  const accepted=[step.expected,...(step.accepted||[])].map(row=>String(row).toLowerCase().replace(/\s+/g,""));
+  const correct=accepted.includes(input);
+  return {id:step.id,status:correct?"correct":"incorrect",correct,points:correct?step.points:0,maxPoints:step.points,expected:step.expected,answer:value};
+}
+
 export function gradePhysicsChemistryResponse(item,value){
-  if(value===null||value===undefined||value==="")return {status:"unanswered",final:true,correct:null,points:0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
-  if(item.responseType!=="multiple-choice")return {status:"awaiting-rubric",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
-  const correct=Number(value)===item.answerIndex;
-  return {status:"final",final:true,correct,points:correct?(item.maxPoints||10):0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
+  if(item.responseType==="multiple-choice"){
+    if(!Number.isInteger(value))return {status:"unanswered",final:true,correct:null,points:0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
+    const correct=Number(value)===item.answerIndex;
+    return {status:"final",final:true,correct,points:correct?(item.maxPoints||10):0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
+  }
+  if(item.responseType==="stepwise"){
+    const answers=value?.steps&&typeof value.steps==="object"?value.steps:{};
+    const steps=item.steps.map(step=>gradeStructuredStep(step,answers[step.id]));
+    if(!steps.some(step=>step.status!=="unanswered"))return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,steps};
+    const provisionalPoints=steps.reduce((sum,step)=>sum+step.points,0);
+    return {
+      status:"provisional-review",final:false,correct:null,points:null,provisionalPoints,maxPoints:item.maxPoints||10,
+      gradingMode:item.gradingMode,steps,
+      note:"Pontuação de treino provisória: o exame oficial aceita processos cientificamente corretos alternativos e aplica regras próprias de erros e dependência entre etapas."
+    };
+  }
+  const text=String(value??"").trim();
+  if(!text)return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
+  return {
+    status:"awaiting-rubric",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,
+    responseText:text,criteria:(item.criteria||[]).map((label,index)=>({id:"criterion-"+(index+1),label,status:"pending"})),
+    note:"Resposta aberta: compara a tua resposta com os critérios. A app não atribui automaticamente uma classificação final."
+  };
 }
 
 export function physicsChemistryCoverage(items=[]){
@@ -33,8 +75,8 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
     ["11.º","f11-mechanics"],["11.º","f11-waves"],["11.º","q11-equilibrium"],["11.º","q11-aqueous"]
   ];
   for(const [year,domain] of plan){
-    const pool=items.filter(item=>item.year===year&&item.domain===domain&&!selected.some(row=>row.id===item.id));
-    const fallback=items.filter(item=>item.year===year&&!selected.some(row=>row.id===item.id));
+    const pool=items.filter(item=>item.responseType==="multiple-choice"&&item.year===year&&item.domain===domain&&!selected.some(row=>row.id===item.id));
+    const fallback=items.filter(item=>item.responseType==="multiple-choice"&&item.year===year&&!selected.some(row=>row.id===item.id));
     const next=(pool[0]||fallback[0]);
     if(next)selected.push(next);
   }
@@ -61,6 +103,8 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
     if(selected.length>=bounded)break;
     const sameDomain=selected.filter(row=>row.domain===item.domain).length;
     if(!domain&&sameDomain>=3)continue;
+    const constructed=selected.filter(row=>row.responseType!=="multiple-choice").length;
+    if(item.responseType!=="multiple-choice"&&constructed>=2)continue;
     selected.push(item);
   }
   if(selected.length<bounded){
