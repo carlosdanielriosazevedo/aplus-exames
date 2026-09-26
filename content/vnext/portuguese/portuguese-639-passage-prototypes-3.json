@@ -1,0 +1,177 @@
+{
+  "subjectId": "portuguese",
+  "examCode": "639",
+  "version": 1,
+  "status": "prototype-not-live",
+  "sourcePolicy": "original-only",
+  "passages": [
+    {
+      "passageId": "PT639-PASSAGE-LEITURA-003",
+      "year": "12.º",
+      "domain": "leitura",
+      "title": "O tempo de não responder",
+      "sourceOrigin": "original",
+      "text": "Durante muitos anos, a rapidez de resposta foi tratada como sinal de eficiência. Uma mensagem chegava e, quanto mais depressa fosse respondida, mais competente parecia quem a recebia. Esse hábito tornou-se ainda mais visível com as notificações permanentes: a caixa de entrada deixou de ser um lugar que se visita e passou a acompanhar cada momento do dia. Algumas equipas começaram, porém, a experimentar o contrário. Em vez de exigir disponibilidade contínua, definem períodos sem notificações e janelas específicas para responder. A mudança não elimina urgências, mas obriga a distinguir o que é realmente urgente do que apenas chegou agora. Os defensores desta prática dizem que o principal ganho não é trabalhar menos. É conseguir manter atenção suficiente numa tarefa para a terminar com qualidade. Há também um efeito sobre a comunicação: quando uma resposta não precisa de ser imediata, quem escreve tende a organizar melhor a informação e a explicitar o que precisa. Naturalmente, o modelo não serve de forma idêntica para todas as profissões. Há contextos em que esperar pode ter custos reais. Ainda assim, a experiência deixa uma pergunta útil: responder depressa é sempre responder melhor, ou apenas responder antes?",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-LEITURA-003-Q1",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-coesao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "No quarto período, a expressão “Esse hábito” retoma sobretudo",
+          "options": [
+            "a associação entre rapidez de resposta e eficiência.",
+            "a criação de equipas com horários diferentes.",
+            "a necessidade de eliminar todas as urgências.",
+            "a organização de mensagens mais longas."
+          ],
+          "answerIndex": 0,
+          "explanation": "A expressão retoma a prática descrita imediatamente antes: responder rapidamente como sinal de eficiência.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LEITURA-003-Q2",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-inferencia",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A referência a profissões em que esperar tem custos reais serve para",
+          "options": [
+            "anular a proposta apresentada no texto.",
+            "reconhecer um limite e evitar generalizar a mesma solução a todos os contextos.",
+            "mostrar que as notificações devem ser obrigatórias em todas as equipas.",
+            "provar que a rapidez de resposta é sempre superior."
+          ],
+          "answerIndex": 1,
+          "explanation": "O texto introduz uma concessão: a proposta pode ser útil sem ser universalmente aplicável.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LEITURA-003-Q3",
+          "year": "12.º",
+          "domain": "leitura",
+          "competencyId": "pt-leitura-organizacao",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica como o texto passa de uma prática habitual para uma pergunta crítica no final. Fundamenta a resposta em dois momentos do texto.",
+          "referenceAnswer": "O texto começa por apresentar como habitual a associação entre responder rapidamente e ser eficiente. Depois introduz equipas que limitam notificações e mostra efeitos dessa mudança na atenção e na qualidade da comunicação, reconhecendo também que nem todos os contextos permitem esperar. Esta progressão conduz à pergunta final, que põe em causa a equivalência entre rapidez e qualidade da resposta.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Explica a progressão entre prática habitual, alternativa e questionamento final.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Mobiliza dois elementos pertinentes do texto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    },
+    {
+      "passageId": "PT639-PASSAGE-LIT-003",
+      "year": "12.º",
+      "domain": "educacao-literaria",
+      "title": "O caderno azul",
+      "sourceOrigin": "original",
+      "text": "Durante anos, o caderno azul ficou na última gaveta da secretária. Leonor sabia o que continha, mas não o abria. Tinha começado a escrevê-lo aos dezassete anos, quando acreditava que uma frase guardava para sempre o que lhe tinha acontecido. Agora, aos quarenta, desconfiava dessa certeza. Numa tarde de chuva, procurava um recibo e encontrou-o de novo. A capa estava mais desbotada do que na memória. Abriu numa página ao acaso e reconheceu a letra antes de reconhecer a pessoa que a tinha escrito. As frases eram intensas, definitivas, cheias de palavras como “nunca” e “sempre”. Leonor sorriu, depois fechou o caderno. Não sentiu vergonha. Sentiu apenas a estranheza de encontrar alguém que tinha sido ela e que já não sabia ser. Levou o caderno para a sala e pousou-o junto à janela. A chuva riscava o vidro em linhas oblíquas. Durante alguns minutos, não leu nem escreveu. Ficou apenas a olhar para aquela capa azul entre as mãos. Quando voltou a abrir o caderno, não procurou corrigir nenhuma frase antiga. Na página seguinte, escreveu a data daquele dia.",
+      "items": [
+        {
+          "id": "PT639-PASSAGE-LIT-003-Q1",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-voz",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A focalização narrativa permite sobretudo",
+          "options": [
+            "acompanhar a forma como Leonor reconhece distância entre a identidade presente e a jovem que escreveu o caderno.",
+            "conhecer diretamente o pensamento de várias personagens ausentes.",
+            "observar apenas ações exteriores sem acesso à interpretação de Leonor.",
+            "transformar o caderno num narrador autónomo."
+          ],
+          "answerIndex": 0,
+          "explanation": "A narração acompanha a perceção de Leonor e a sua leitura do próprio passado, tornando central a distância entre duas versões de si.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LIT-003-Q2",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-recursos",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "multiple-choice",
+          "cognitive": "interpretar",
+          "prompt": "A imagem da chuva que “riscava o vidro em linhas oblíquas” contribui sobretudo para",
+          "options": [
+            "introduzir um dado meteorológico sem relação com a cena.",
+            "criar uma imagem de inscrição e passagem que dialoga com o gesto de escrever no caderno.",
+            "provar que Leonor pretende destruir o caderno.",
+            "indicar que a ação decorre durante uma tempestade violenta."
+          ],
+          "answerIndex": 1,
+          "explanation": "As linhas da chuva aproximam visualmente o vidro de uma superfície escrita e reforçam a relação entre memória, inscrição e novo começo.",
+          "gradingMode": "deterministic",
+          "maxPoints": 13
+        },
+        {
+          "id": "PT639-PASSAGE-LIT-003-Q3",
+          "year": "12.º",
+          "domain": "educacao-literaria",
+          "competencyId": "pt-literatura-forma",
+          "sourceOrigin": "original",
+          "reviewStatus": "prototype",
+          "responseType": "restricted-response",
+          "cognitive": "raciocinar",
+          "prompt": "Explica o significado do gesto final de Leonor. Relaciona-o com duas etapas anteriores do excerto.",
+          "referenceAnswer": "Ao escrever a data atual numa nova página, Leonor não apaga nem corrige a voz do passado; acrescenta-lhe uma nova posição no tempo. Antes, reconhece a letra mas estranha a pessoa que escreveu frases absolutas e decide não corrigir essas páginas. O gesto final mostra aceitação da distância entre identidades passadas e presente e transforma o caderno de arquivo fechado em espaço de continuidade.",
+          "wordLimit": {
+            "min": 60,
+            "max": 110
+          },
+          "rubric": {
+            "criteria": [
+              {
+                "id": "conteudo",
+                "label": "Interpreta o gesto final como continuidade sem apagamento do passado.",
+                "points": 9
+              },
+              {
+                "id": "fundamentacao",
+                "label": "Relaciona o gesto com dois momentos anteriores do excerto.",
+                "points": 4
+              }
+            ]
+          },
+          "gradingMode": "rubric-assisted-provisional",
+          "maxPoints": 13
+        }
+      ]
+    }
+  ]
+}
