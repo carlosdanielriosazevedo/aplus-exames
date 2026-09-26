@@ -57,7 +57,7 @@ for(const name of miniFiles){
   assert.equal(baseItems.filter(item=>item.responseType==="restricted-response").length,2,`${name}: base deve ter duas respostas restritas`);
   assert.ok(baseItems.filter(item=>item.cognitive==="raciocinar").length>=2,`${name}: precisa de pelo menos dois itens de raciocínio`);
   assert.ok(doc.passages.every(passage=>passage.sourceOrigin==="original"),`${name}: textos devem ser originais`);
-  assert.ok(doc.passages.every(passage=>String(passage.text||"").trim().split(/\\s+/u).length>=90),`${name}: textos-base demasiado curtos`);
+  assert.ok(doc.passages.every(passage=>String(passage.text||"").trim().split(/\s+/u).length>=90),`${name}: textos-base demasiado curtos`);
   for(const item of baseItems.filter(item=>item.responseType==="multiple-choice")){
     assert.equal(item.options?.length,4,`${name} / ${item.id}: escolha múltipla precisa de quatro opções`);
     assert.equal(new Set(item.options).size,4,`${name} / ${item.id}: opções duplicadas`);
