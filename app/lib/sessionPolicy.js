@@ -1,0 +1,11 @@
+export const STUDY_SESSION_MIN_QUESTIONS=7;
+export const STUDY_SESSION_MAX_QUESTIONS=10;
+export const DEFAULT_TRAINING_QUESTIONS=8;
+export const DEFAULT_MISSION_QUESTIONS=7;
+export const MATH_MINI_EXAM_QUESTIONS=12;
+export const PORTUGUESE_MINI_EXAM_QUESTIONS=10;
+
+export function clampStudySessionSize(size=DEFAULT_MISSION_QUESTIONS){
+  const parsed=Number.isInteger(size)?size:DEFAULT_MISSION_QUESTIONS;
+  return Math.max(STUDY_SESSION_MIN_QUESTIONS,Math.min(STUDY_SESSION_MAX_QUESTIONS,parsed));
+}

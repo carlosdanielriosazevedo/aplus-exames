@@ -38,15 +38,15 @@ function answerFor(question){
   return null;
 }
 
-const exam=buildMiniExam(state,8);
-assert.equal(exam.length,8,"O Mini-exame deve ter 8 questões elegíveis.");
-assert.equal(new Set(exam.map(question=>question.id)).size,8,"Não pode repetir a mesma questão na mesma prova.");
+const exam=buildMiniExam(state,12);
+assert.equal(exam.length,12,"O Mini-exame deve ter 12 questões elegíveis.");
+assert.equal(new Set(exam.map(question=>question.id)).size,12,"Não pode repetir a mesma questão na mesma prova.");
 assert.ok(exam.every(question=>TAXONOMY.some(theme=>theme.id===question.themeId)),"Todas as questões devem pertencer à taxonomia de Matemática A.");
 
 const constructed=exam.filter(isConstructedResponse);
 const selection=exam.filter(question=>!isConstructedResponse(question));
 assert.equal(constructed.length,2,"O Mini-exame deve conter 2 respostas construídas.");
-assert.equal(selection.length,6,"O Mini-exame deve conter 6 itens de seleção/completamento.");
+assert.equal(selection.length,10,"O Mini-exame deve conter 10 itens de seleção/completamento.");
 assert.equal(constructed.reduce((sum,question)=>sum+question.points,0),70,"As respostas construídas devem valer 70% da cotação.");
 assert.equal(selection.reduce((sum,question)=>sum+question.points,0),30,"A seleção/completamento deve valer 30% da cotação.");
 assert.equal(exam.reduce((sum,question)=>sum+question.points,0),100,"A prova deve totalizar 100 pontos.");
@@ -90,12 +90,12 @@ const choice=exam[firstChoiceIndex];
 wrong[firstChoiceIndex]=(choice.a+1)%choice.o.length;
 const wrongSummary=miniExamPointSummary(exam,wrong);
 assert.equal(wrongSummary.results[firstChoiceIndex].status,"incorrect");
-assert.equal(wrongSummary.earnedPoints,95,"Uma escolha múltipla errada deve retirar apenas a respetiva cotação de 5 pontos.");
+assert.equal(wrongSummary.earnedPoints,97,"Uma escolha múltipla errada deve retirar apenas a respetiva cotação de 3 pontos.");
 
 const sessionId="mini-exam-flow-audit";
 const draft={
   kind:"mini_exam",betaMode:"friends_beta",sessionId,screen:"miniExamRun",
-  questions:exam,answers:[answers[0],answers[1],answers[2],...Array(5).fill(null)],
+  questions:exam,answers:[answers[0],answers[1],answers[2],...Array(9).fill(null)],
   current:3,startedAt:Date.now()-120_000
 };
 assert.equal(saveSessionDraft(draft),true,"A sessão em curso deve ser guardada.");
@@ -111,4 +111,4 @@ assert.equal(claimSessionCompletion(sessionId),true,"A primeira entrega deve ser
 assert.equal(wasSessionCompleted(sessionId),true);
 assert.equal(claimSessionCompletion(sessionId),false,"Uma segunda entrega da mesma sessão deve ser rejeitada.");
 
-console.log("✓ mini-exam: 8 questões, ponderação 30/70, recuperação 4/8, entrega idempotente, revisão final e segurança pedagógica validadas");
+console.log("✓ mini-exam: 12 questões, ponderação 30/70, recuperação, entrega idempotente, revisão final e segurança pedagógica validadas");

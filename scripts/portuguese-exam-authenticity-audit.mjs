@@ -1,62 +1,78 @@
 import assert from "node:assert/strict";
 import {readFileSync,readdirSync} from "node:fs";
 
-const dir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
-const files=readdirSync(dir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
-const items=files.flatMap(name=>JSON.parse(readFileSync(new URL(name,dir),"utf8")).items);
+const foundationDir=new URL("../content/vnext/portuguese/foundation/",import.meta.url);
+const foundationFiles=readdirSync(foundationDir).filter(name=>/^portuguese-639-(?:pilot|wave\d+)\.json$/u.test(name));
+const items=foundationFiles.flatMap(name=>JSON.parse(readFileSync(new URL(name,foundationDir),"utf8")).items);
 
-assert.equal(items.length,310,"o banco de Português deve manter os 310 itens atuais");
-assert.ok(items.every(item=>item.sourceOrigin==="original"),"o banco deve continuar original-only; este audit não autoriza cópia de itens IAVE");
-assert.ok(items.every(item=>item.reviewStatus==="prototype"),"Português continua em protótipo");
+assert.equal(items.length,334,"o banco de Português deve manter os 334 itens atuais");
+assert.ok(items.every(item=>item.sourceOrigin==="original"),"o banco deve continuar original-only");
+assert.ok(items.every(item=>item.reviewStatus==="prototype"),"Português continua em protótipo editorial");
 
 const byDomain=domain=>items.filter(item=>item.domain===domain);
 const byType=(domain,type)=>byDomain(domain).filter(item=>item.responseType===type);
 const constructionTypes=new Set(["short-answer","restricted-response","extended-writing"]);
 
 for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
-  assert.ok(byDomain(domain).length>=40,`${domain}: o banco deve manter massa crítica suficiente`);
+  assert.ok(byDomain(domain).length>=70,`${domain}: o banco deve manter massa crítica suficiente`);
 }
 
-// Informação‑Prova 639/2026: Leitura pode usar seleção e construção; exigimos ambos no banco.
-assert.ok(byType("leitura","multiple-choice").length>=8,"Leitura precisa de massa crítica de seleção");
-assert.ok(byDomain("leitura").some(item=>constructionTypes.has(item.responseType)),"Leitura deve incluir itens de construção");
+assert.ok(byType("leitura","multiple-choice").length>=20,"Leitura precisa de massa crítica de seleção");
+assert.ok(byDomain("leitura").some(item=>constructionTypes.has(item.responseType)),"Leitura deve incluir construção");
+assert.ok(byType("educacao-literaria","restricted-response").length>=8,"Educação Literária deve ter resposta restrita material");
+assert.ok(byType("escrita","restricted-response").length>=8,"Escrita deve ter resposta restrita material");
 
-// Educação Literária é preferencialmente avaliada por resposta restrita; no banco de treino
-// deve existir presença material desse formato, sem transformar esta regra num espelho rígido de uma prova concreta.
-assert.ok(byType("educacao-literaria","restricted-response").length>=4,"Educação Literária deve manter respostas restritas suficientes");
-
-// Escrita: resposta restrita + uma resposta extensa de 200–350 palavras.
-assert.ok(byType("escrita","restricted-response").length>=4,"Escrita deve manter treino de resposta restrita");
 const extended=byType("escrita","extended-writing");
-assert.ok(extended.length>=2,"o banco atual deve manter pelo menos duas tarefas extensas de Escrita");
-assert.ok(extended.every(item=>item.wordLimit?.min===200&&item.wordLimit?.max>=300),"as tarefas extensas devem respeitar uma extensão mínima de 200 palavras");
-assert.ok(extended.every(item=>/200\s+a\s+\d+\s+palavras/iu.test(item.prompt)),"o enunciado das tarefas extensas deve explicitar a extensão ao aluno");
-assert.equal(extended[0].maxPoints,44,"a tarefa extensa atual deve preservar a sua ponderação interna");
+assert.equal(extended.length,9,"o banco deve manter 9 tarefas extensas de Escrita");
+assert.ok(extended.every(item=>item.wordLimit?.min===200&&item.wordLimit?.max>=300&&item.wordLimit.max<=350),"Escrita extensa deve ficar dentro do intervalo 200–350");
+assert.ok(extended.every(item=>item.maxPoints===44),"as tarefas extensas devem preservar 44 pontos internos");
+assert.ok(extended.every(item=>/200\s+a\s+\d+\s+palavras/iu.test(item.prompt)),"a extensão deve estar explícita");
 
-// Gramática pode usar seleção e construção e pode apoiar-se em suporte textual.
-assert.ok(byType("gramatica","multiple-choice").length>=8,"Gramática precisa de massa crítica de seleção");
-assert.ok(byDomain("gramatica").some(item=>constructionTypes.has(item.responseType)),"Gramática deve incluir itens de construção");
+assert.ok(byType("gramatica","multiple-choice").length>=20,"Gramática precisa de massa crítica de seleção");
+assert.ok(byDomain("gramatica").some(item=>constructionTypes.has(item.responseType)),"Gramática deve incluir construção");
 
-// Autenticidade de tarefa: respostas restritas devem obrigar a produzir linguagem, não apenas escolher rótulos.
 const restricted=items.filter(item=>item.responseType==="restricted-response");
-assert.equal(restricted.length,31,"a composição atual deve manter 31 respostas restritas");
+assert.ok(restricted.length>=47,"o banco deve manter pelo menos 47 respostas restritas");
 for(const item of restricted){
   assert.ok(item.rubric?.criteria?.length>=2,`${item.id}: resposta restrita precisa de grelha observável`);
-  assert.ok(item.wordLimit?.min>=25&&item.wordLimit?.max>item.wordLimit.min,`${item.id}: resposta restrita precisa de intervalo de extensão coerente`);
-  assert.ok(item.referenceAnswer?.trim().length>=80,`${item.id}: resposta restrita precisa de referência suficientemente desenvolvida`);
+  assert.ok(item.wordLimit?.min>=25&&item.wordLimit?.max>item.wordLimit.min,`${item.id}: intervalo de extensão inválido`);
+  assert.ok(item.referenceAnswer?.trim().length>=80,`${item.id}: referência demasiado curta`);
 }
-
-// A prova real não exige formulações literais dos critérios. O nosso banco também não deve tratar
-// texto aberto como correção determinística automática.
 for(const item of items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType))){
-  assert.match(item.gradingMode,/provisional/u,`${item.id}: resposta aberta não pode ficar marcada como classificação final automática`);
+  assert.match(item.gradingMode,/provisional/u,`${item.id}: resposta aberta não pode ter classificação final automática`);
 }
 
-const counts=Object.fromEntries(["leitura","educacao-literaria","escrita","gramatica"].map(domain=>[
-  domain,
-  Object.fromEntries(["multiple-choice","short-answer","restricted-response","extended-writing"].map(type=>[type,byType(domain,type).length]))
-]));
+const miniFiles=[
+  "portuguese-639-mini-10-1.json","portuguese-639-mini-10-2.json",
+  "portuguese-639-mini-11-1.json","portuguese-639-mini-11-2.json",
+  "portuguese-639-passage-prototypes.json","portuguese-639-passage-prototypes-2.json","portuguese-639-passage-prototypes-3.json"
+];
+const miniDir=new URL("../content/vnext/portuguese/",import.meta.url);
+for(const name of miniFiles){
+  const doc=JSON.parse(readFileSync(new URL(name,miniDir),"utf8"));
+  const baseItems=doc.passages.flatMap(passage=>passage.items);
+  assert.equal(doc.passages.length,2,`${name}: base deve ter dois textos partilhados`);
+  assert.equal(baseItems.length,6,`${name}: base textual deve manter seis itens antes da expansão integrada`);
+  assert.ok(baseItems.some(item=>item.responseType==="multiple-choice"),`${name}: precisa de seleção`);
+  assert.ok(baseItems.some(item=>item.responseType==="restricted-response"),`${name}: precisa de resposta restrita`);
+  assert.ok(doc.passages.every(passage=>passage.sourceOrigin==="original"),`${name}: textos devem ser originais`);
+}
 
-console.log("✓ autenticidade Português 639: alinhamento estrutural com Informação‑Prova 2026 sem copiar itens oficiais");
-console.log(JSON.stringify(counts));
-console.log("  escrita extensa: 2 itens · classificação automática final bloqueada");
+const prototypeSource=readFileSync(new URL("../app/data/portuguesePassagePrototype.js",import.meta.url),"utf8");
+assert.match(prototypeSource,/PORTUGUESE_MINI_EXAM_QUESTIONS/u,"runtime deve usar política central de 10 itens");
+assert.match(prototypeSource,/const domains=\["gramatica","escrita"\]/u,"mini-exame deve acrescentar Gramática e Escrita");
+assert.match(prototypeSource,/durationMinutes:45/u,"mini-exame deve usar 45 minutos");
+assert.equal((prototypeSource.match(/\{id:"mini-/gu)||[]).length,7,"catálogo deve manter sete mini-exames");
+
+const full=JSON.parse(readFileSync(new URL("portuguese-639-full-exam-supplement.json",miniDir),"utf8"));
+const fullItems=full.passages.flatMap(passage=>passage.items);
+assert.equal(fullItems.length,15,"simulado completo deve ter 15 itens");
+assert.equal(fullItems.filter(item=>item.classificationMode==="mandatory").length,10,"simulado deve ter 10 itens obrigatórios");
+assert.equal(fullItems.filter(item=>item.classificationMode==="best-of-five").length,5,"simulado deve ter 5 itens opcionais");
+assert.equal(fullItems.filter(item=>item.responseType==="extended-writing").length,1,"simulado deve ter uma tarefa extensa");
+assert.equal(fullItems.find(item=>item.responseType==="extended-writing")?.maxPoints,44,"Escrita do simulado deve valer 44 pontos");
+assert.ok(fullItems.every(item=>item.sourceOrigin==="original"),"simulado deve continuar original-only");
+
+console.log("✓ autenticidade Português 639: banco, mini-exames e simulado coerentes com a estrutura oficial de 2026 sem copiar itens");
+console.log("  mini-exames: 10 itens em runtime · 2 textos + Gramática + Escrita · 45 min");
+console.log("  simulado: 15 itens · 10 obrigatórios + 5 opcionais (contam 3) · escrita 44 pontos");

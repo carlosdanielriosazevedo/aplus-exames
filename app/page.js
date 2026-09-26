@@ -16,6 +16,7 @@ const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").the
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
+import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
 import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
 import "./portugues-mini-exame/passage-mini-exam.css";
 import {
@@ -334,7 +335,7 @@ export default function App(){
   if(screen==="exams")return <Exams s={s} go={go} startMini={()=>{
     clearSessionDraft(s.betaMode||"internal");
     setRecoveredSession(null);
-    const questions=buildMiniExam(s,8);
+    const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
     setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mini_exam_started",{sessionId:ses.id,questionCount:questions.length})]}));
     setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
@@ -1387,7 +1388,9 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     }
 
     const practice=missionPracticeQuestion(nextState,plan,newTotal,newUsed);
-    const nxt=practice||selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    const planned=selectQuestionForPlan(nextState,plan,newUsed,newSigs);
+    const minimumFallback=newTotal<STUDY_SESSION_MIN_QUESTIONS?selectMissionQuestion(nextState,targetId,newUsed,newSigs):null;
+    const nxt=practice||planned||minimumFallback;
     if(!nxt){
       closeMission(nextState,finalDetour,newTargetCount,newTotal,missionContentExhaustedDecision(),newEstimatedSeconds);return
     }
@@ -1671,9 +1674,9 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   const [sessionId]=useState(()=>draft?.sessionId||latestOpenSessionId(s,"training"));
   const questions=useMemo(()=>{
     if(!cfg)return [];
-    const fresh=trainingQuestions(s,cfg,8);
+    const fresh=trainingQuestions(s,cfg,DEFAULT_TRAINING_QUESTIONS);
     if(!draft?.questions?.length)return fresh;
-    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,8);
+    return [...new Map([...draft.questions,...fresh].map(q=>[q.id,q])).values()].slice(0,10);
   },[cfg]);
   const [i,setI]=useState(draft?.i||0);
   const [sel,setSel]=useState(draft?.sel??null);
@@ -1693,7 +1696,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   },[cfg,questions,i,sel,fb,correct,earnedPoints,hasIncomplete,done]);
 
   if(!cfg)return <Shell><Back go={go} to="train"/><h1>Escolhe primeiro o que queres treinar.</h1></Shell>;
-  if(!questions.length)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas suficientes neste foco.</h1></Shell>;
+  if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
   function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
@@ -1859,11 +1862,11 @@ function Progress({s,go}){
 }
 
 function Exams({s,go,startMini}){
-  if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>2 textos · 6 questões · seleção + resposta restrita</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
+  if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>10 itens · 4 domínios · ~45 min</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
   const last=s.lastExam;
-  const miniQuestions=buildMiniExam(s,8);
+  const miniQuestions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
   const miniAvailable=miniQuestions.length;
-  const miniReady=miniAvailable>=8;
+  const miniReady=miniAvailable>=MATH_MINI_EXAM_QUESTIONS;
   const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
@@ -1871,9 +1874,9 @@ function Exams({s,go,startMini}){
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
-      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~15–20 min · ${miniYears.join(" · ")}`:`${miniAvailable}/8 questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
+      <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
-    {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou 8 questões elegíveis segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
+    {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
     <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
@@ -1892,7 +1895,7 @@ function MiniExamIntro({session,go}){
     <p className="muted">Este Mini-exame combina seleção e resposta construída, aproximando o treino do formato real da prova.</p>
     <div className="examIntroGrid">
       <div><span>📝</span><b>{selection} seleção + {constructed} construção</b><small>{maxPoints} pontos · ponderação 30/70</small></div>
-      <div><span>⏱</span><b>~15–20 min</b><small>Podes avançar ao teu ritmo</small></div>
+      <div><span>⏱</span><b>~25–30 min</b><small>12 itens · podes avançar ao teu ritmo</small></div>
       <div><span>📚</span><b>{years.join(' · ')}</b><small>Cobertura transversal</small></div>
     </div>
     <div className="notice"><b>Regras do Mini-exame</b><span>Podes voltar atrás e alterar respostas antes de entregar. Nas respostas construídas, desenvolve a resolução etapa a etapa: cada uma tem cotação própria. Não mostramos a correção durante a prova.</span></div>

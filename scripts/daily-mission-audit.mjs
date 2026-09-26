@@ -112,17 +112,17 @@ const stop=(missionType,totalCount,targetCount=totalCount,items=targetItems.slic
   missionType,totalCount,targetCount,beforeConf:20,currentScore:{conf:60},sessionTargetItems:items,estimatedSeconds
 });
 
-// Nenhuma Missão termina antes de cinco interações.
-assert.equal(DAILY_MISSION_MIN_INTERACTIONS,5);
-for(let count=1;count<5;count++)assert.equal(stop("calibration",count).stop,false);
-assert.equal(stop("calibration",5).code,"calibration_session_complete");
+// Nenhuma Missão termina antes de sete interações.
+assert.equal(DAILY_MISSION_MIN_INTERACTIONS,7);
+for(let count=1;count<7;count++)assert.equal(stop("calibration",count).stop,false);
+assert.equal(stop("calibration",7,5,targetItems,240).code,"calibration_session_complete");
 for(const type of ["priority","confirmation","investigation"]){
-  for(let count=1;count<5;count++)assert.equal(stop(type,count).stop,false);
+  for(let count=1;count<7;count++)assert.equal(stop(type,count).stop,false);
 }
 
-// Cinco interações podem conter apenas duas evidências independentes do alvo (as restantes são detours).
+// Sete interações podem conter apenas duas evidências independentes do alvo (as restantes são detours).
 const twoTargetItems=targetItems.slice(0,2);
-const afterDetour=stop("priority",5,2,twoTargetItems);
+const afterDetour=stop("priority",7,2,twoTargetItems);
 assert.equal(new Set(twoTargetItems.map(x=>x.signature)).size,2);
 assert.equal(afterDetour.stop,false);assert.equal(afterDetour.code,"continue");
 
@@ -149,8 +149,8 @@ assert.equal(missionContentExhaustedDecision().code,"content_exhausted");
 
 // O cap mantém a sessão curta para todos os tipos.
 assert.equal(DAILY_MISSION_MIN_SECONDS,180);assert.equal(DAILY_MISSION_MAX_SECONDS,300);
-assert.equal(stop("calibration",5,5,targetItems,170).code,"time_budget_not_reached");
-assert.equal(stop("calibration",5,5,targetItems,300).code,"time_budget_reached");
+assert.equal(stop("calibration",7,5,targetItems,170).code,"time_budget_not_reached");
+assert.equal(stop("calibration",7,5,targetItems,300).code,"time_budget_reached");
 assert.equal(DAILY_MISSION_MAX_INTERACTIONS,10);
 for(const type of ["priority","calibration","confirmation","investigation"]){
   const capped=stop(type,DAILY_MISSION_MAX_INTERACTIONS,3,targetItems);
@@ -183,4 +183,4 @@ activityState=recordCompetitiveActivity(activityState,{kind:"mission",sessionId:
 const competition=normalizeCompetition(activityState),week=Object.values(competition.weeks)[0];
 assert.equal(week.activities.filter(x=>x.kind==="mission").length,1);assert.equal(week.xp,50);
 
-console.log("✓ daily mission: assignment, minimum 5 interactions, 3–5 minute budget, detour, recovery and idempotency validated");
+console.log("✓ daily mission: assignment, minimum 7 interactions, 3–5 minute budget, detour, recovery and idempotency validated");
