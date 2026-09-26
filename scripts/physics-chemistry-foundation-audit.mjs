@@ -23,7 +23,7 @@ const authorities=new Set(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.map(row=>row.aut
 assert.ok(authorities.has("DGE")&&authorities.has("IAVE"),"A fundação deve distinguir currículo DGE de referência IAVE.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.filter(row=>row.authority==="DGE").every(row=>row.status==="in-force"),"As fontes curriculares DGE devem estar marcadas como vigentes.");
 
-assert.equal(PHYSICS_CHEMISTRY_A_ITEMS.length,78,"A fundação atual deve ter 78 itens originais: 56 de seleção base, 14 de construção e 8 de interpretação de dados.");
+assert.equal(PHYSICS_CHEMISTRY_A_ITEMS.length,132,"A fundação atual deve ter 132 itens originais após a primeira vaga de cobertura por submatéria.");
 assert.equal(new Set(PHYSICS_CHEMISTRY_A_ITEMS.map(item=>item.id)).size,PHYSICS_CHEMISTRY_A_ITEMS.length,"IDs de FQ A devem ser únicos.");
 for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
   const domain=PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===item.domain);
@@ -49,12 +49,12 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 }
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
-assert.equal(coverage.total,78);
+assert.equal(coverage.total,132);
 assert.equal(coverage.missionReady,true,"Todos os grandes domínios devem suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
-  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=1,subtopic.id+": cada submatéria deve ter pelo menos um item explicitamente etiquetado.");
+  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=3,subtopic.id+": cada submatéria deve ter pelo menos três itens explicitamente etiquetados.");
 }
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="table").length>=8,"FQ A deve conter pelo menos oito itens com tabelas/dados nesta tranche.");
 const diagnostic=buildPhysicsChemistryDiagnostic(PHYSICS_CHEMISTRY_A_ITEMS);
@@ -146,4 +146,4 @@ assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Reve
 assert.match(learn,/Trabalho prático associado nas AE/u,"Rever Matéria deve tornar visível o trabalho prático previsto nas AE.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 78 itens · blueprint 715 15+8/4 · critérios oficiais protegidos");
+console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 132 itens · mínimo 3/submatéria · blueprint 715 15+8/4");
