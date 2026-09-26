@@ -1,6 +1,6 @@
 "use client";
 import {useState} from "react";
-import {Apronso,ApronsoNudge,Shell,StudentNav,StudentTop} from "./chrome";
+import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop} from "./chrome";
 import PortugueseLearnPanel from "./PortugueseLearnPanel";
 import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
@@ -15,6 +15,7 @@ import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {portugueseTaxonomyForYear} from "../data/portugueseTaxonomy";
+import {isFriendsBeta} from "../lib/friendsBeta";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
@@ -84,10 +85,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
   const missionDone=missionCompletedToday(s);
-  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
-    if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}{content}{sharedNav}</section></main>;
+    if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>{content}{sharedNav}</section></main>;
     return <Shell>{sharedTop}{content}{sharedNav}</Shell>;
   }
 
@@ -188,7 +189,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <div>{group.rows.map(row=><label key={row.id}><input type="checkbox" checked={scopeDraft.includes(row.id)} onChange={()=>setScopeDraft(current=>current.includes(row.id)?current.filter(id=>id!==row.id):[...current,row.id])}/><span><b>{row.label}</b><small>{row.detail}</small></span></label>)}</div>
     </details>})}</div>
     {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste matéria deste ano</b><span>A app usará apenas matéria dos anos anteriores. No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma área.</span></div>}
-    <div className="notice"><b>O histórico fica guardado</b><span>Desmarcar uma área não apaga respostas nem sessões anteriores; apenas a retira das próximas recomendações.</span></div>
+    <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma área, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
     <button className="primary" onClick={()=>{setS(prev=>{const domains=[...new Set(scopeDraft.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:scopeDraft,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
   </Shell>;
 
@@ -274,19 +275,17 @@ function PortugueseSubject({s,setS,go,view="home"}){
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis.</span></div>
   </>);
   if(!session)return sharedShell(<>
-    <div className="learnIntro"><p>Boa noite 👋</p><h1>O teu próximo passo.</h1></div>
-    <ApronsoNudge pose={missionDone?"celebrate":"thinking"}>{missionDone?"Boa! A Missão de hoje está feita. Podes praticar outra área ou rever o teu progresso.":progress.diagnosticDone?"Já analisei o teu percurso em Português. Esta é a ação que mais vale a pena fazer agora.":"Primeiro quero perceber o teu ponto de partida em Português. Não é uma nota."}</ApronsoNudge>
+    <div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
     {!progress.lastPosition&&miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.examId==="full-1"?"SIMULADO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Simulado completo de Português":miniExamDraft.examId==="mini-2"?"Mini-exame de Português 2":"Mini-exame de Português 1"}</b><span>{miniExamDraft.review?"Revisão em curso":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Português">
-      <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>DIAGNÓSTICO</small><b>{progress.diagnosticDone?"Ponto de partida concluído":"Conhecer o teu nível atual"}</b></div></div>
+      <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>
-      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><p>{progress.diagnosticDone?"7 perguntas escolhidas pela app, normalmente em 3–5 minutos.":"8 perguntas, duas por domínio, com feedback apenas depois de responderes."}</p><em>{progress.diagnosticDone?"~3–5 min":"ponto de partida"}</em><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Português adaptado ao teu percurso":"Diagnóstico de Português"}</h2><div className="missionCardMeta"><span>{progress.diagnosticDone?"~3–5 min":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&scopedItems.length<7)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?startRecommendedMission:startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
       <div className="pathLine"/>
-      <div className="pathNode next"><span>○</span><div><small>DEPOIS</small><b>Praticar, rever matéria ou fazer Mini-exame</b><p>A recomendação seguinte muda com a nova evidência.</p></div></div>
+      <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer Mini-exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
-    {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
-    
+    {!scopedCoverage.diagnosticReady&&<div className="notice warning homeScopeWarning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
   </>);
 
   if(session.finished){

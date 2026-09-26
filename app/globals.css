@@ -885,3 +885,9 @@ body{background:var(--app-canvas);color:var(--app-ink)}
   .completedCurriculumHero p{font-size:14px}
   .diagPurposeHero{padding:18px}
 }
+
+
+/* Paridade Matemática A / Português — Home */
+.learnHome .homeScopeWarning{margin:18px 0 0;background:#fff6e5!important;border-color:#efd8aa!important;color:var(--app-navy)!important}
+.learnHome .homeScopeWarning span{color:#6f6657!important}
+.learnHome .homeScopeWarning button{margin-top:10px;border:0;background:transparent;color:var(--app-orange-dark);font-weight:900;padding:0}
