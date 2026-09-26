@@ -29,7 +29,7 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 
 assert.match(page,/screen==="physicsChemistryExam"/u,"o router deve expor o simulado completo apenas dentro de FQ A");
 assert.match(subject,/Simulado completo · 715/u,"o hub de exames deve disponibilizar o simulado completo");
-assert.match(subject,/23 itens · 200 pontos · 120 min + 30 min de tolerância/u,"o hub deve comunicar a estrutura atual");
+assert.match(subject,/23 itens · 200 pontos · 120 min \+ 30 min de tolerância/u,"o hub deve comunicar a estrutura atual");
 assert.match(component,/Durante o simulado não mostramos correções/u,"o exame não deve dar feedback questão a questão");
 assert.match(component,/Podes voltar atrás e alterar respostas/u,"o aluno deve poder rever respostas antes de terminar");
 assert.match(component,/Terminar e rever/u,"o fluxo deve terminar em revisão");
