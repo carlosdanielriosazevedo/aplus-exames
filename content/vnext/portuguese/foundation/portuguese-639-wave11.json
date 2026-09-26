@@ -166,15 +166,15 @@
       "responseType": "multiple-choice",
       "cognitive": "analisar",
       "stimulus": "Eu sabia que a decisão parecia absurda, mas naquela manhã não conseguia imaginar outra saída.",
-      "prompt": "A presença da primeira pessoa contribui sobretudo para",
+      "prompt": "A formulação «não conseguia imaginar outra saída» mostra sobretudo que",
       "options": [
-        "aproximar o leitor da perspetiva subjetiva do narrador.",
-        "eliminar a avaliação da situação.",
-        "apresentar informações objetivas sobre os acontecimentos.",
-        "impedir o acesso aos pensamentos da personagem."
+        "a interpretação dos acontecimentos está condicionada pela perspetiva do narrador naquele momento.",
+        "o narrador conhece todas as alternativas possíveis e rejeita-as objetivamente.",
+        "a decisão é apresentada como inevitável por uma voz exterior à personagem.",
+        "o relato elimina qualquer acesso à experiência interior do narrador."
       ],
-      "answerIndex": 3,
-      "explanation": "A primeira pessoa permite apresentar acontecimentos a partir da perspetiva e da experiência subjetiva do narrador.",
+      "answerIndex": 0,
+      "explanation": "A primeira pessoa expõe os limites da perceção do narrador naquele momento: ele não afirma que não existiam alternativas, mas que não conseguia imaginá-las.",
       "gradingMode": "deterministic",
       "maxPoints": 13
     },
