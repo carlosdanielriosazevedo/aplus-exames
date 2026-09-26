@@ -949,3 +949,123 @@ body{background:var(--app-canvas);color:var(--app-ink)}
   .sessionContext b{display:block;margin-top:4px}
   .studySessionShell>.panel{padding-bottom:56px}
 }
+
+
+/* Mobile final audit — shared student experience */
+html,body{max-width:100%;overflow-x:hidden}
+button,input,select,textarea{max-width:100%}
+.studentNav button.active{color:var(--app-navy)!important;background:var(--app-orange-soft)!important}
+.studentNavIcon{color:currentColor}
+.studentMenu div button:hover{background:var(--app-orange-soft)}
+.studentSurface,.panel{overflow-wrap:anywhere}
+.portugueseQuestion,.reviewChapter,.exam,.notice,.progressHero,.progressDetails,.subjectConfigBanner{min-width:0}
+
+@media(max-width:760px){
+  .studentSurface,.panel:has(.studentNav){padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+  .studentTop{gap:8px;margin-bottom:22px}
+  .studentTopIdentity{gap:8px;min-width:0;flex:1}
+  .subjectSwitcher{min-width:0;max-width:min(220px,58vw);padding:6px 8px}
+  .subjectSwitcher span{width:25px;height:25px;flex-basis:25px}
+  .subjectSwitcher b{font-size:12px}
+  .studentTopActions{gap:5px;flex:0 0 auto}
+  .studentTopActions>button,.studentMenu>summary{min-width:42px;width:42px;height:42px;padding:0}
+  .studentMenu>div{position:fixed;z-index:80;top:70px;right:12px;left:12px;width:auto;max-height:calc(100dvh - 92px);overflow:auto}
+  .studentMenu div button{min-height:48px;font-size:14px}
+  .studentNav{height:auto;min-height:72px;padding:6px max(6px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))}
+  .studentNav button{min-height:54px;padding:4px 1px}
+  .studentNav button>b{font-size:11px}
+  .studentNavIcon svg{width:20px;height:20px}
+
+  .subjectConfigBanner{grid-template-columns:44px minmax(0,1fr);gap:12px;padding:16px}
+  .subjectConfigBanner>span{width:44px;height:44px;border-radius:13px}
+  .subjectConfigBanner b{font-size:18px}
+  .subjectConfigBanner p{font-size:12px;line-height:1.45}
+
+  .diagApronsoHero{grid-template-columns:minmax(0,1fr) 76px;gap:10px}
+  .diagApronsoHero .apronso{width:76px;height:auto;align-self:end}
+  .diagPurposeHero{margin:10px 0 16px;padding:16px}
+  .diagPurposeHero strong{font-size:16px}
+  .diagIntroGrid{grid-template-columns:1fr;margin:14px 0 20px}
+  .diagIntroGrid div{display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:10px;padding:13px 14px}
+  .diagIntroGrid div>span{grid-row:1/3;align-self:center;font-size:20px}
+  .diagIntroGrid div>b{margin:0;font-size:13px}
+  .diagIntroGrid div>small{margin-top:2px;font-size:11px}
+
+  .pausedSession{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:15px}
+  .pausedSession button{width:100%}
+  .adaptivePath{padding-right:0}
+  .pathNode{grid-template-columns:38px minmax(0,1fr)}
+  .pathNode>span{width:38px;height:38px}
+  .pathLine{margin-left:18px}
+  .pathNode.current article{padding:17px}
+  .pathNode.current article h2{font-size:22px;line-height:1.16}
+  .missionCardMeta{margin-bottom:4px}
+
+  .trainChoices{grid-template-columns:1fr}
+  .trainChoices button{min-height:88px;padding:14px}
+  .trainChoices button>span{width:48px;height:48px;font-size:22px}
+  .trainChoices button b{font-size:16px}
+  .trainChoices button small{font-size:12px;line-height:1.35}
+
+  .progressActions{grid-template-columns:1fr}
+  .progressHero{grid-template-columns:1fr!important;gap:10px}
+  .progressHero .apronso{display:none}
+  .progressOverview>div,.progressPage .progressOverview>div{grid-template-columns:minmax(94px,1fr) minmax(72px,.8fr) 30px;gap:7px}
+  .progressOverview>div>span{font-size:12px}
+  .focusMap>div,.progressPage .progressDetails .focusMap>div{grid-template-columns:minmax(105px,1fr) minmax(64px,.7fr) 28px;gap:6px}
+  .focusMap>div small{grid-column:1/-1;margin-top:-2px}
+  .hypothesisRow{grid-template-columns:28px minmax(0,1fr);gap:8px}
+  .hypothesisRow>em{grid-column:2;font-size:10px}
+
+  .focusTop,.sessionTop{position:sticky;top:0;z-index:30;margin:0 -20px 14px;padding:10px 20px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--app-border)}
+  .focusTop>button,.sessionTop>button{width:40px;height:40px}
+  .focusTop>span,.sessionTop>span{font-size:11px;white-space:nowrap}
+  .questionContext{font-size:12px}
+  .focusDisclosure>summary{min-height:42px}
+  .opts button,.portugueseOptions button{min-height:54px}
+  .primary,.secondary{min-height:50px}
+  .pauseLink,.reviewLink{min-height:44px;padding:11px 6px}
+  .feedback,.portugueseFeedback{font-size:14px;line-height:1.45}
+
+  textarea,.portugueseOpenAnswer,.portugueseShortAnswer,input,select{font-size:16px!important}
+  .portugueseOpenAnswer{min-height:180px}
+  .guidedRubricChoices{grid-template-columns:1fr}
+  .rubricRevisionActions>div{display:grid;grid-template-columns:1fr;gap:8px}
+  .rubricEvidenceSummary li{min-width:0}
+  .rubricGuidanceTargets li{grid-template-columns:minmax(0,1fr)}
+
+  .examAction{display:grid!important;grid-template-columns:minmax(0,1fr);gap:10px}
+  .examAction strong{justify-self:start}
+  .answerMap{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+@media(max-width:430px){
+  .wrap,.panel{padding-left:16px;padding-right:16px}
+  .studentTop{margin-left:0;margin-right:0}
+  .subjectSwitcher{max-width:56vw}
+  .subjectSwitcher i{display:none}
+  .studentTopActions>button:not(:last-child){display:none}
+  .studentMenu>div{left:8px;right:8px}
+  .learnIntro h1,.sectionIntro h1,.panel h1{font-size:29px}
+  .learnIntro span{max-width:100%}
+  .yearSelector,.trainingSetupPage .chips.yearSelector{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .chips button{min-width:0;padding-left:8px;padding-right:8px}
+  .completedCurriculumHero{grid-template-columns:1fr}
+  .completedCurriculumHero>span{margin-bottom:2px}
+  .diagApronsoHero{grid-template-columns:minmax(0,1fr) 62px}
+  .diagApronsoHero .apronso{width:62px}
+  .progressOverview>div,.progressPage .progressOverview>div{grid-template-columns:minmax(82px,1fr) minmax(56px,.7fr) 28px}
+  .focusMap>div,.progressPage .progressDetails .focusMap>div{grid-template-columns:minmax(90px,1fr) minmax(50px,.65fr) 26px}
+  .answerMap{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .examNav{grid-template-columns:1fr}
+  .completionMoment h1{font-size:30px}
+  .resultApronso{max-width:112px}
+}
+
+@media(max-width:360px){
+  .subjectSwitcher{max-width:52vw}
+  .subjectSwitcher b{font-size:11px}
+  .studentNav button>b{font-size:10px}
+  .studentNavIcon svg{width:18px;height:18px}
+  .answerMap{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
