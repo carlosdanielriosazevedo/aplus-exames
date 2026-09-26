@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/study-session-length-audit.mjs && node scripts/portuguese-exam-authenticity-audit.mjs && node scripts/portuguese-passage-ui-audit.mjs && node scripts/mini-exam-flow-audit.mjs && node scripts/daily-mission-audit.mjs && node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
+    "prebuild": "node scripts/study-session-length-audit.mjs && node scripts/portuguese-exam-authenticity-audit.mjs && node scripts/portuguese-passage-ui-audit.mjs && node scripts/portuguese-literary-coverage-audit.mjs && node scripts/mini-exam-flow-audit.mjs && node scripts/daily-mission-audit.mjs && node scripts/iave-scoring-policy-audit.mjs && node scripts/iave-situation11-audit.mjs && node scripts/iave-conservative-classification-audit.mjs && node scripts/iave-zero-penalty-branches-audit.mjs && node scripts/iave-situations-2-4-5-audit.mjs && node scripts/iave-situation-matrix-audit.mjs && node scripts/constructed-response-realworld-audit.mjs && node scripts/apply-vnext-runtime-polish.mjs",
     "build": "next build && npm run performance:baseline",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -97,7 +97,8 @@
     "vnext-pilot:generate": "node scripts/generate-vnext-pilot.mjs",
     "performance:baseline": "node scripts/performance-baseline.mjs",
     "test:unit": "vitest run",
-    "study-session-length:audit": "node scripts/study-session-length-audit.mjs"
+    "study-session-length:audit": "node scripts/study-session-length-audit.mjs",
+    "portuguese-literary-coverage:audit": "node scripts/portuguese-literary-coverage-audit.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
