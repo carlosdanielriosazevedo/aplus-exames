@@ -89,7 +89,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   </Shell>;
 
   return <Shell className="wideStudentShell fqaFullExamPage">
-    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>go("exams")} exitLabel="Guardar e sair"/>
+    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>go("exams")} exitLabel="Sair do simulado"/>
     <div className="fqaExamMeta"><span>{item.examSection==="mandatory"?"ITEM OBRIGATÓRIO":"ITEM OPCIONAL"}</span><b>{item.examPoints} pontos</b><small>{item.year}</small></div>
     <Stimulus item={item}/>
     <div className="questionCard">
