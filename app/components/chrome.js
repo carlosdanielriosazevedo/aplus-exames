@@ -60,6 +60,12 @@ export function ApronsoNudge({pose="thinking", tone="light", children}){
 
 export const Back = ({go, to="home"}) => <button className="back" onClick={()=>go(to)}>← Voltar</button>;
 
+export function StudySessionHeader({progress=0,label="",onExit,exitLabel="Guardar e sair"}){
+  const width=Math.max(0,Math.min(100,Number(progress)||0));
+  return <div className="focusTop sessionTop"><button type="button" onClick={onExit} aria-label={exitLabel}>×</button><div className="focusTrack"><i style={{width:`${width}%`}}/></div><span>{label}</span></div>;
+}
+
+
 export const STUDENT_NAV = [["home","Aprender"],["train","Treinar"],["ranking","Ranking"],["progress","Progresso"]];
 
 function NavIcon({name}){
