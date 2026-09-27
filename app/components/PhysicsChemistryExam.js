@@ -106,14 +106,14 @@ export default function PhysicsChemistryExam({s,setS,go}){
     go("exams");
   }
 
-  const openReviewProgress=physicsChemistryOpenReviewProgress(rows,answers,rubricAssessments);
+  const openReviewProgress=physicsChemistryOpenReviewProgress(rows,answers,rubricAssessments);\n  function goToNextPendingReview(){\n    const target=openReviewProgress.pendingRows[0];\n    if(!target)return;\n    const node=document.getElementById("fqa-review-"+target.item.id);\n    if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}\n  }
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
     <h1>Revisão do Exame Completo</h1>
     <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{openReviewProgress.pending?openReviewProgress.pending+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
-    <PhysicsChemistryReviewProgress items={rows} answers={answers} assessments={rubricAssessments}/>
+    <PhysicsChemistryReviewProgress items={rows} answers={answers} assessments={rubricAssessments} onNextPending={goToNextPendingReview}/>
     <div className="fqaExamScoreGrid">
       <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>
       <div><small>Opcionais</small><b>{optionalKnown.toFixed(1)} / 40</b><span>Contam os 4 melhores.</span></div>
@@ -123,7 +123,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
     <div className="fqaExamReviewList">{rows.map((row,index)=>{
       const result=results[index],score=scored[index],value=answers[row.id];
       const openStatus=physicsChemistryOpenReviewStatus(row,value,rubricAssessments[row.id]||{});
-      return <details key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:score.provisional?"Provisório":result.correct?"Correto":"A rever"}</span></summary><div className="reviewChapterBody">
+      return <details id={"fqa-review-"+row.id} key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:score.provisional?"Provisório":result.correct?"Correto":"A rever"}</span></summary><div className="reviewChapterBody">
         <Stimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
