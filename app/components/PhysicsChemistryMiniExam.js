@@ -2,10 +2,12 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
+import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
+import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -35,6 +37,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   const [index,setIndex]=useState(()=>Math.max(0,Math.min(exam.items.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(false);
+  const [rubricAssessments,setRubricAssessments]=useState({});
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
@@ -54,7 +57,10 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review});
   },[answers,exam.id,index,itemIds,review,startedAt]);
 
-  const results=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
+  const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
+  const results=useMemo(()=>exam.items.map((row,index)=>row.responseType==="restricted-response"&&filled(row,answers[row.id])
+    ?physicsChemistryRubricResult(row,answers[row.id],rubricAssessments[row.id]||{})
+    :baseResults[index]),[exam.items,answers,baseResults,rubricAssessments]);
   const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");
   const deterministicCorrect=deterministic.filter(row=>row.result.correct).length;
   const provisional=results.filter(row=>row.status==="provisional-review").length;
@@ -68,15 +74,20 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   function finish(){
     setReview(true);
     clearPhysicsChemistryExamDraft(exam.id);
-    if(recordedRef.current)return;
-    recordedRef.current=true;
-    setS(prev=>recordSubjectSession(prev,{
-      subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+Date.now()
-    }));
+  }
+
+  function saveReviewAndExit(){
+    if(!recordedRef.current){
+      recordedRef.current=true;
+      setS(prev=>recordSubjectSession(prev,{
+        subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+startedAt
+      }));
+    }
+    go("exams");
   }
 
   if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">
-    <button className="back" onClick={()=>go("exams")}>← Voltar aos exames</button>
+    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">FÍSICA E QUÍMICA A · MINI-EXAME</p>
     <h1>Rever o mini-exame</h1>
     <div className="fqaExamScoreGrid">
@@ -91,9 +102,10 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
         <PhysicsChemistryStimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<>{result.steps?.map((step,stepIndex)=><p key={step.id}><b>{"Etapa "+(stepIndex+1)+": "}</b>{step.status==="unanswered"?"Sem resposta":step.answer+" → referência: "+step.expected}</p>)}<p className="muted">{result.note}</p></>}
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><p><b>Critérios a verificar:</b></p><ul>{(row.criteria||[]).map(criterion=><li key={criterion}>{criterion}</li>)}</ul><p className="muted">Uma formulação cientificamente equivalente pode ser válida mesmo que não coincida palavra por palavra com uma referência.</p></>}
+        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/><p className="muted">Uma formulação cientificamente equivalente pode ser válida mesmo que não coincida palavra por palavra com uma referência.</p></>}
       </div></details>;
     })}</div>
+    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 
   return <Shell className="wideStudentShell fqaMiniExamPage">
