@@ -8,6 +8,7 @@ import {
 import {applyMiniExam,buildMiniExam,emptyScores} from "../app/lib/engine.js";
 import {draftScreen,loadSessionDraftStatus,saveSessionDraft} from "../app/lib/sessionDraft.js";
 import {claimSessionCompletion,clearCompletionRegistry,wasSessionCompleted} from "../app/lib/reliability.js";
+import {readFileSync} from "node:fs";
 
 const stored=new Map();
 globalThis.localStorage={
@@ -105,6 +106,12 @@ assert.equal(recovered.draft.sessionId,sessionId);
 assert.equal(recovered.draft.current,3,"A recuperação deve retomar na quarta questão.");
 assert.deepEqual(recovered.draft.answers.slice(0,3),answers.slice(0,3),"As respostas anteriores devem sobreviver à recarga.");
 assert.equal(draftScreen(recovered.draft),"miniExamRun");
+
+const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+assert.match(page,/<p className="eyebrow">EXAMES<\/p><h1>Matemática A · 635<\/h1>/u,"a área de Matemática A deve usar o mesmo cabeçalho de Exames das restantes disciplinas.");
+assert.match(page,/📝 Exame Completo/u,"a prova longa deve usar a nomenclatura Exame Completo.");
+assert.match(page,/MINI-EXAME EM PAUSA/u,"um Mini-exame guardado deve ficar visível na própria área de Exames.");
+assert.match(page,/pausedExamDraft\?\.kind==="mini_exam"/u,"o cartão de retoma só deve aparecer para uma prova realmente em pausa.");
 
 clearCompletionRegistry();
 assert.equal(claimSessionCompletion(sessionId),true,"A primeira entrega deve ser aceite.");
