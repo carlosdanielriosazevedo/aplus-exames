@@ -26,7 +26,7 @@ export const PHYSICS_CHEMISTRY_A_STEPWISE_POLICIES={
   "FQA-C-MAT-01":{
     steps:{
       n:{acceptedRelations:["n=cV","c*V","c×V","0.0800*0.2500","0,0800×0,2500"]},
-      V:{acceptedRelations:["V=n/c","n/c","c1V1=c2V2","c₁V₁=c₂V₂"],followThrough:{from:"n",kind:"divide",factor:0.500},final:true,acceptedUnits:["dm3","dm³","L","l","mL","ml"]}
+      V:{acceptedRelations:["V=n/c","n/c","c1V1=c2V2","c₁V₁=c₂V₂"],followThrough:{from:"n",kind:"divide",factor:0.500},final:true,acceptedUnits:["dm3","dm³","L","l","mL","ml"],unitScales:{"ml":0.001,"l":1,"dm3":1}}
     }
   },
   "FQA-C-ENE-01":{
