@@ -2,6 +2,7 @@ import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
 import {physicsChemistryRubricFor} from "./physicsChemistryRubric.js";
+import {gradePhysicsChemistryStepwise} from "./physicsChemistryStepwiseGrader.js";
 
 function normalizeScientificNumber(value){
   const normalized=String(value??"").trim().replace(",",".").replace(/[×·]10\^?/iu,"e").replace(/\s+/g,"");
@@ -32,17 +33,7 @@ export function gradePhysicsChemistryResponse(item,value){
     const correct=Number(value)===item.answerIndex;
     return {status:"final",final:true,correct,points:correct?(item.maxPoints||10):0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
   }
-  if(item.responseType==="stepwise"){
-    const answers=value?.steps&&typeof value.steps==="object"?value.steps:{};
-    const steps=item.steps.map(step=>gradeStructuredStep(step,answers[step.id]));
-    if(!steps.some(step=>step.status!=="unanswered"))return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,steps};
-    const provisionalPoints=steps.reduce((sum,step)=>sum+step.points,0);
-    return {
-      status:"provisional-review",final:false,correct:null,points:null,provisionalPoints,maxPoints:item.maxPoints||10,
-      gradingMode:item.gradingMode,steps,
-      note:"Pontuação de treino provisória: o exame oficial aceita processos cientificamente corretos alternativos e aplica regras próprias de erros e dependência entre etapas."
-    };
-  }
+  if(item.responseType==="stepwise")return gradePhysicsChemistryStepwise(item,value);
   const text=String(value??"").trim();
   if(!text)return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
   return {
