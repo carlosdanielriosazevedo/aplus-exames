@@ -108,8 +108,8 @@ export default function PhysicsChemistryExam({s,setS,go}){
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
-    <p className="eyebrow">SIMULADO COMPLETO · PROVA 715</p>
-    <h1>Revisão do simulado</h1>
+    <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
+    <h1>Revisão do Exame Completo</h1>
     <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
     <div className="fqaExamScoreGrid">
       <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>
@@ -143,6 +143,6 @@ export default function PhysicsChemistryExam({s,setS,go}){
       <div className="fqaExamDots">{rows.map((row,index)=><button type="button" key={row.id} className={(index===current?"current ":"")+(answered(row,answers[row.id])?"done":"")} onClick={()=>setCurrent(index)} aria-label={"Questão "+(index+1)}>{index+1}</button>)}</div>
       {current<rows.length-1?<button className="primary" onClick={()=>setCurrent(value=>value+1)}>Seguinte →</button>:<button className="primary" onClick={finish}>Terminar e rever</button>}
     </div>
-    <p className="muted fqaExamRule">{inTolerance?"Entraste nos 30 minutos de tolerância. ":""}Durante o simulado não mostramos correções. Podes voltar atrás e alterar respostas antes de terminar; ao esgotar a tolerância, a prova termina automaticamente.</p>
+    <p className="muted fqaExamRule">{inTolerance?"Entraste nos 30 minutos de tolerância. ":""}Durante o Exame Completo não mostramos correções. Podes voltar atrás e alterar respostas antes de terminar; ao esgotar a tolerância, a prova termina automaticamente.</p>
   </Shell>;
 }
