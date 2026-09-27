@@ -24,7 +24,7 @@ function buildRows(source,kind){
 
 export const PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT={
   id:"fqa-715-sim-1",
-  label:"Simulado completo · Modelo 1",
+  label:"Exame Completo · Modelo 1",
   status:"editorial-prototype",
   officialStructureReference:"Prova 715 · 2026",
   durationMinutes:120,

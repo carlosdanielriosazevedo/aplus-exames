@@ -136,7 +136,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   }
 
   function selectMiniExam(id){
-    const sessionName=id==="full-1"?"simulado completo":"Mini-exame";
+    const sessionName=id==="full-1"?"Exame Completo":"Mini-exame";
     if(progress.lastPosition&&!window.confirm(`Tens uma sessão de Português em pausa. Começar o ${sessionName} substitui essa retoma. Queres continuar?`))return;
     if(miniExamDraft&&miniExamDraft.examId!==id&&!window.confirm(`Tens outra prova em pausa. Começar este ${sessionName} substitui essa retoma. Queres continuar?`))return;
     setS(prev=>{
@@ -268,7 +268,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {portugueseMiniExamsForYear(currentYear).map(exam=><button key={exam.id} className="exam examAction" onClick={()=>selectMiniExam(exam.id)}><div><b>⚡ {exam.title}</b><span>{exam.description}</span></div><strong>Começar →</strong></button>)}
     <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico de Português fica separado das restantes disciplinas.":"Escolhe um mini-exame para criar histórico."}</span></div>
-    {currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Simulado completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Simulado completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>}
+    {currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Exame Completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Exame Completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>}
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
     <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis, sem atribuição automática de uma classificação final.</span></div>
     {sharedNav}
@@ -276,7 +276,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   if(!session)return sharedShell(<>
     <div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
     {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
-    {!progress.lastPosition&&miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.examId==="full-1"?"SIMULADO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Simulado completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><span>{miniExamDraft.review?"Revisão em curso":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
+    {!progress.lastPosition&&miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.examId==="full-1"?"EXAME COMPLETO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><span>{miniExamDraft.review?"Revisão em curso":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
     <section className="adaptivePath" aria-label="Caminho adaptativo de Português">
       <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
       <div className="pathLine active"/>

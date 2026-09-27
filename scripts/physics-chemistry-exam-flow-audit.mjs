@@ -11,11 +11,11 @@ assert.equal(blueprint.optionalItems.reduce((sum,item)=>sum+item.examPoints,0),8
 assert.equal(blueprint.durationMinutes,120);
 assert.equal(blueprint.toleranceMinutes,30);
 const allExamItems=[...blueprint.mandatoryItems,...blueprint.optionalItems];
-assert.ok(allExamItems.some(item=>item.stimulus?.type==="table"),"o simulado deve conter pelo menos uma tabela.");
-assert.ok(allExamItems.some(item=>item.stimulus?.type==="line-chart"),"o simulado deve conter pelo menos um gráfico quantitativo.");
-assert.ok(allExamItems.some(item=>item.stimulus?.type==="diagram"),"o simulado deve conter pelo menos um diagrama científico.");
+assert.ok(allExamItems.some(item=>item.stimulus?.type==="table"),"o Exame Completo deve conter pelo menos uma tabela.");
+assert.ok(allExamItems.some(item=>item.stimulus?.type==="line-chart"),"o Exame Completo deve conter pelo menos um gráfico quantitativo.");
+assert.ok(allExamItems.some(item=>item.stimulus?.type==="diagram"),"o Exame Completo deve conter pelo menos um diagrama científico.");
 for(const domain of new Set(allExamItems.map(item=>item.domain))){
-  assert.ok(allExamItems.filter(item=>item.domain===domain).length>=2,domain+": o simulado deve representar cada grande domínio com pelo menos dois itens.");
+  assert.ok(allExamItems.filter(item=>item.domain===domain).length>=2,domain+": o Exame Completo deve representar cada grande domínio com pelo menos dois itens.");
 }
 
 const perfect=physicsChemistryExamScore({
@@ -34,13 +34,13 @@ const component=readFileSync(new URL("../app/components/PhysicsChemistryExam.js"
 const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 
-assert.match(page,/screen==="physicsChemistryExam"/u,"o router deve expor o simulado completo apenas dentro de FQ A");
-assert.match(subject,/Simulado completo · 715/u,"o hub de exames deve disponibilizar o simulado completo");
+assert.match(page,/screen==="physicsChemistryExam"/u,"o router deve expor o Exame Completo apenas dentro de FQ A");
+assert.match(subject,/Exame Completo · 715/u,"o hub de exames deve disponibilizar o Exame Completo");
 assert.match(subject,/23 itens · 200 pontos · 120 min \+ 30 min de tolerância/u,"o hub deve comunicar a estrutura atual");
-assert.match(component,/Durante o simulado não mostramos correções/u,"o exame não deve dar feedback questão a questão");
+assert.match(component,/Durante o Exame Completo não mostramos correções/u,"o exame não deve dar feedback questão a questão");
 assert.match(component,/Podes voltar atrás e alterar respostas/u,"o aluno deve poder rever respostas antes de terminar");
-assert.match(component,/Tolerância ·/u,"o simulado deve distinguir visualmente os 30 minutos de tolerância.");
-assert.match(component,/ao esgotar a tolerância, a prova termina automaticamente/u,"o fim da tolerância deve fechar automaticamente o simulado.");
+assert.match(component,/Tolerância ·/u,"o Exame Completo deve distinguir visualmente os 30 minutos de tolerância.");
+assert.match(component,/ao esgotar a tolerância, a prova termina automaticamente/u,"o fim da tolerância deve fechar automaticamente o Exame Completo.");
 assert.match(component,/blueprint\.durationMinutes\*60/u,"o cronómetro deve usar a duração do blueprint.");
 assert.match(component,/blueprint\.toleranceMinutes\*60/u,"o cronómetro deve usar a tolerância do blueprint.");
 assert.match(component,/setInterval/u,"o cronómetro deve atualizar em tempo real.");
@@ -51,8 +51,8 @@ assert.match(component,/Contam os 4 melhores/u,"a revisão deve explicar a regra
 assert.match(component,/Subtotal já corrigível/u,"respostas abertas não podem gerar uma falsa nota final");
 assert.match(component,/não é apresentado como classificação oficial/u,"o subtotal automático deve ser explicitamente não oficial");
 assert.match(component,/resposta\(s\) científica\(s\) aberta\(s\) continuam pendentes/u,"a revisão deve preservar correção humana/guiada das abertas");
-assert.match(component,/gradePhysicsChemistryResponse/u,"o simulado deve reutilizar o motor específico da disciplina");
-assert.match(component,/recordSubjectSession/u,"o simulado deve entrar no progresso partilhado");
+assert.match(component,/gradePhysicsChemistryResponse/u,"o Exame Completo deve reutilizar o motor específico da disciplina");
+assert.match(component,/recordSubjectSession/u,"o Exame Completo deve entrar no progresso partilhado");
 assert.doesNotMatch(component,/Resposta certa:[\s\S]{0,120}Seguinte/u,"não deve haver correção imediata antes do fim");
 
 console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · tabela + gráficos + diagramas · 120+30 min · fim automático · revisão conservadora");
