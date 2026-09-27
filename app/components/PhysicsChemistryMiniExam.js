@@ -56,7 +56,6 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   },[review]);
   useEffect(()=>{if(remaining===0&&!review)finish()},[remaining,review]);
   useEffect(()=>{
-    if(review)return;
     savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments});
   },[answers,exam.id,index,itemIds,review,rubricAssessments,startedAt]);
 
