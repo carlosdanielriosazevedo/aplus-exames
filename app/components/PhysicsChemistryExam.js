@@ -106,7 +106,13 @@ export default function PhysicsChemistryExam({s,setS,go}){
     go("exams");
   }
 
-  const openReviewProgress=physicsChemistryOpenReviewProgress(rows,answers,rubricAssessments);\n  function goToNextPendingReview(){\n    const target=openReviewProgress.pendingRows[0];\n    if(!target)return;\n    const node=document.getElementById("fqa-review-"+target.item.id);\n    if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}\n  }
+  const openReviewProgress=physicsChemistryOpenReviewProgress(rows,answers,rubricAssessments);
+  function goToNextPendingReview(){
+    const target=openReviewProgress.pendingRows[0];
+    if(!target)return;
+    const node=document.getElementById("fqa-review-"+target.item.id);
+    if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}
+  }
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
