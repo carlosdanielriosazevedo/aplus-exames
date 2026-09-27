@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
+import ExamSubmissionCheck from "./ExamSubmissionCheck";
 import PhysicsChemistryReviewProgress from "./PhysicsChemistryReviewProgress";
 import {physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "../lib/physicsChemistryReviewProgress";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
@@ -48,6 +49,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const [current,setCurrent]=useState(()=>Math.max(0,Math.min(rows.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(()=>!!initialDraft?.review);
+  const [submitCheck,setSubmitCheck]=useState(false);
   const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
@@ -82,12 +84,12 @@ export default function PhysicsChemistryExam({s,setS,go}){
     return ()=>window.clearInterval(timer);
   },[review]);
 
-  useEffect(()=>{if(timeExpired&&!review)finish()},[timeExpired,review]);
+  useEffect(()=>{if(timeExpired&&!review)finish({force:true})},[timeExpired,review]);
   useEffect(()=>{
     savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments});
   },[answers,current,examId,itemIds,review,rubricAssessments,startedAt]);
 
-  function finish(){setReview(true);}
+  function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
     if(openReviewProgress.pending>0){
@@ -117,6 +119,18 @@ export default function PhysicsChemistryExam({s,setS,go}){
     const node=document.getElementById("fqa-review-"+target.item.id);
     if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}
   }
+
+  if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">
+    <ExamSubmissionCheck
+      items={rows}
+      answers={answers}
+      isAnswered={answered}
+      isRequired={row=>row.examSection==="mandatory"}
+      onBack={()=>setSubmitCheck(false)}
+      onJump={next=>{setSubmitCheck(false);setCurrent(next)}}
+      onConfirm={()=>{setSubmitCheck(false);setReview(true)}}
+    />
+  </Shell>;
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
     <button className="back" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"← Guardar com "+openReviewProgress.pending+" por rever e voltar aos exames":"← Guardar revisão e voltar aos exames"}</button>
@@ -156,7 +170,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
     <div className="fqaExamNavigation">
       <button className="secondary" disabled={current===0} onClick={()=>setCurrent(value=>value-1)}>← Anterior</button>
       <div className="fqaExamDots">{rows.map((row,index)=><button type="button" key={row.id} className={(index===current?"current ":"")+(answered(row,answers[row.id])?"done":"")} onClick={()=>setCurrent(index)} aria-label={"Questão "+(index+1)}>{index+1}</button>)}</div>
-      {current<rows.length-1?<button className="primary" onClick={()=>setCurrent(value=>value+1)}>Seguinte →</button>:<button className="primary" onClick={finish}>Terminar e rever</button>}
+      {current<rows.length-1?<button className="primary" onClick={()=>setCurrent(value=>value+1)}>Seguinte →</button>:<button className="primary" onClick={()=>finish()}>Terminar e rever</button>}
     </div>
     <p className="muted fqaExamRule">{inTolerance?"Entraste nos 30 minutos de tolerância. ":""}Durante o Exame Completo não mostramos correções. Podes voltar atrás e alterar respostas antes de terminar; ao esgotar a tolerância, a prova termina automaticamente.</p>
   </Shell>;
