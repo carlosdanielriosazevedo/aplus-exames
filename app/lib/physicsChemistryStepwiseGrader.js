@@ -35,10 +35,21 @@ function relationAccepted(work,accepted=[]){
   });
 }
 
+function normalizeUnit(unit){
+  return normalizeText(unit).replace(/\^/g,"").replace(/³/g,"3");
+}
+
 function unitAccepted(unit,accepted=[]){
   if(!accepted.length)return true;
-  const normalized=normalizeText(unit).replace(/\^/g,"");
-  return accepted.some(candidate=>normalizeText(candidate).replace(/\^/g,"")===normalized);
+  const normalized=normalizeUnit(unit);
+  return accepted.some(candidate=>normalizeUnit(candidate)===normalized);
+}
+
+function numericInExpectedUnit(value,unit,policy){
+  const normalized=normalizeUnit(unit);
+  const scales=policy?.unitScales||{};
+  if(Object.prototype.hasOwnProperty.call(scales,normalized))return value*Number(scales[normalized]);
+  return value;
 }
 
 function closeEnough(value,target,tolerance){
@@ -69,13 +80,15 @@ export function gradePhysicsChemistryStepwise(item,value){
   const policy=physicsChemistryStepwisePolicyFor(item);
   const answers=value?.steps&&typeof value.steps==="object"?value.steps:{};
   const numericValues={};
+  const traversed={};
   const steps=[];
   let type1Count=0,type2Count=0,requiresReview=false;
 
   for(const step of item.steps||[]){
     const row=normalizedStepAnswer(answers[step.id]);
     const stepPolicy=policy.steps?.[step.id]||{};
-    const numeric=step.type==="numeric"?numberFrom(row.result):null;
+    const rawNumeric=step.type==="numeric"?numberFrom(row.result):null;
+    const numeric=rawNumeric===null?null:numericInExpectedUnit(rawNumeric,row.unit,stepPolicy);
     if(step.type==="numeric"&&numeric!==null)numericValues[step.id]=numeric;
     const anyInput=Boolean(row.work.trim()||row.result.trim()||row.unit.trim());
     if(!anyInput){
@@ -94,6 +107,7 @@ export function gradePhysicsChemistryStepwise(item,value){
       steps.push({id:step.id,status:"alternative-method-review",points:null,maxPoints:step.points,expected:step.expected,answer:row,errorType:null,note:"A relação/processo não coincide com os modelos reconhecidos. Pode ser cientificamente válido e precisa de revisão."});
       continue;
     }
+    traversed[step.id]=true;
 
     if(step.type==="text"){
       const input=normalizeText(row.result||row.work);
@@ -117,7 +131,7 @@ export function gradePhysicsChemistryStepwise(item,value){
     const direct=closeEnough(numeric,step.value,step.tolerance);
     if(!direct){
       const ft=stepPolicy.followThrough;
-      const previous=ft?numericValues[ft.from]:null;
+      const previous=ft&&traversed[ft.from]?numericValues[ft.from]:null;
       const propagated=followThroughValue(ft,previous);
       if(propagated!==null&&closeEnough(numeric,propagated,Math.max(Number(step.tolerance)||0,Math.abs(propagated)*0.002))){
         status="follow-through";
