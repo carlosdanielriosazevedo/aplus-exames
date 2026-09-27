@@ -15,13 +15,13 @@ export function PhysicsChemistryStepwiseEditor({item,value,onChange,disabled=fal
     });
   }
   return <div className="fqaStepwise">
-    <div className="notice"><b>Resposta construída por etapas</b><span>Mostra o processo. No exame, apresentar apenas o resultado final pode não ser suficiente para obter pontuação.</span></div>
+    <div className="notice fqaConstructedIntro"><div><b>Resposta construída por etapas</b><span>Mostra o processo. No exame, apresentar apenas o resultado final pode não ser suficiente para obter pontuação.</span></div><strong>{item.steps.length+" etapas"}</strong></div>
     {item.steps.map((step,index)=>{
       const row=rowFor(value,step.id);
       return <section className="fqaStep" key={step.id}>
-        <span><b>{"Etapa "+(index+1)+" · "+step.label}</b><small>{step.type==="numeric"?"Escreve a relação/processo e depois o resultado.":"Explicita a relação ou expressão usada."}</small></span>
+        <header className="fqaStepHead"><span>{String(index+1).padStart(2,"0")}</span><div><b>{step.label}</b><small>{step.type==="numeric"?"Escreve a relação/processo e depois o resultado.":"Explicita a relação ou expressão usada."}</small></div></header>
         <label>Relação / processo
-          <input disabled={disabled} value={row.work} onChange={event=>update(step.id,{work:event.target.value})} placeholder={step.type==="numeric"?"Ex.: v = fλ":"Ex.: Kc = [B]²/[A]"}/>
+          <input disabled={disabled} value={row.work} onChange={event=>update(step.id,{work:event.target.value})} placeholder={step.type==="numeric"?"Ex.: v = fλ":"Ex.: Kc = [B]²/[A]"} autoComplete="off"/>
         </label>
         {step.type==="numeric"&&<div className="fqaStepResultRow">
           <label>Resultado
