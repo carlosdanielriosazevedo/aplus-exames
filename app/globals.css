@@ -1233,3 +1233,20 @@ button,input,select,textarea{max-width:100%}
 .fqaReviewProgress.has-pending>strong{background:#fff4dd;color:#805b14}.fqaReviewProgress.is-complete>strong{background:#edf8f1;color:#2f7650}
 .fqaExamReviewList .reviewChapter>summary>span{min-width:max-content}
 @media(max-width:620px){.fqaReviewProgress{display:grid;padding:14px}.fqaReviewProgress>strong{justify-self:start}}
+
+
+/* Revisão pós-exame · atalho partilhado entre disciplinas */
+.fqaReviewProgressActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.fqaReviewProgressActions .secondary{margin:0;white-space:nowrap}
+.ptx-review-progress{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:16px 0 22px;padding:16px 18px;border:1px solid #e2e7ec;border-radius:16px;background:#fff}
+.ptx-review-progress>div{display:grid;gap:4px}.ptx-review-progress>div>span{font-size:10px;font-weight:900;letter-spacing:.08em;color:#7c8495}
+.ptx-review-progress>div>strong{font-size:16px}.ptx-review-progress p{margin:0;font-size:12px;line-height:1.45;color:#667085}
+.ptx-review-progress .ptx-ghost{flex:0 0 auto;margin:0}
+.ptx-review-progress.has-pending{border-color:#ead7ad;background:#fffdf7}.ptx-review-progress.is-complete{border-color:#cfe7d8;background:#f8fcfa}
+.ptx-review-item{scroll-margin-top:18px}
+@media(max-width:620px){
+  .fqaReviewProgressActions{justify-content:flex-start}
+  .fqaReviewProgressActions .secondary{width:100%;white-space:normal}
+  .ptx-review-progress{display:grid;padding:14px}
+  .ptx-review-progress .ptx-ghost{width:100%}
+}
