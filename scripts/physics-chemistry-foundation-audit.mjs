@@ -164,7 +164,7 @@ assert.match(component,/Misturar matéria/u,"O aluno deve poder treinar o domín
 assert.match(component,/PhysicsChemistryStimulus/u,"A UI deve reutilizar o renderer de estímulos científicos.");
 assert.match(component,/7 perguntas · Física e Química/u,"Missão deve usar o contrato 7–10.");
 assert.match(component,/Mini-exame · Modelo 1/u,"O mini-exame inicial deve continuar identificado como modelo próprio.");
-assert.match(component,/Simulado completo · 715/u,"FQ A deve expor o simulado completo depois de este estar implementado.");
+assert.match(component,/Exame Completo · 715/u,"FQ A deve expor o Exame Completo depois de este estar implementado.");
 assert.match(component,/PhysicsChemistryStepwiseEditor/u,"FQ A deve suportar problemas por etapas através do componente partilhado.");
 assert.match(stepwise,/Resposta construída por etapas/u,"O editor partilhado deve explicar a resposta construída por etapas.");
 assert.match(component,/Resposta científica/u,"FQ A deve suportar respostas científicas abertas.");
