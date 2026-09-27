@@ -37,10 +37,10 @@ for(const [label,source] of [["Mini-exame",mini],["Exame Completo",full]]){
   assert.match(source,/Guardar com /u,label+": deve avisar quando o aluno termina com respostas por rever.");
   assert.match(source,/rubricAssessments/u,label+": deve preservar a grelha de revisão por resposta.");
   assert.match(source,/goToNextPendingReview/u,label+": deve permitir saltar diretamente para a próxima resposta por rever.");
-  assert.match(source,/fqa-review-/u,label+": cada item da revisão deve ter âncora navegável.");
+  assert.match(source,/fqa-review-/u,label+": cada item da revisão deve ter âncora navegável.");\n  assert.match(source,/openReviewProgress\.pending>0/u,label+": sair com pendências deve guardar a revisão sem a finalizar.");
 }
 assert.match(draft,/review:!!review/u,"o rascunho deve guardar se o aluno já entrou na revisão.");
-assert.match(draft,/rubricAssessments/u,"o rascunho deve guardar o progresso da revisão por critérios.");
+assert.match(draft,/rubricAssessments/u,"o rascunho deve guardar o progresso da revisão por critérios.");\nassert.match(draft,/review:!!review/u,"o rascunho deve persistir explicitamente a fase de revisão.");
 assert.doesNotMatch(draft,/if\(!store\|\|review\)return/u,"entrar na revisão não pode deixar de guardar o rascunho.");
 assert.match(css,/fqaReviewProgress/u,"a revisão deve ter resumo visual próprio.");
 assert.match(css,/fqaReviewProgressActions/u,"o atalho de próxima revisão deve adaptar-se ao layout.");
