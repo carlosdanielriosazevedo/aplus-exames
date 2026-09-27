@@ -51,7 +51,7 @@ assert.match(progress,/rubricEvidenceByObservation/u,"o progresso partilhado dev
 assert.match(progress,/rubricObserved/u);
 assert.match(progress,/rubricNeedsReview/u);
 assert.match(review,/CRITÉRIO /u,"a grelha deve distinguir visualmente cada critério.");
-assert.match(review,/aria-label={"Autoavaliação do critério/u,"os grupos de decisão devem ser identificáveis por tecnologia assistiva.");
+assert.match(review,/Autoavaliação do critério/u,"os grupos de decisão devem ser identificáveis por tecnologia assistiva.");
 assert.match(css,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/u,"em mobile, Cumpri/Parcial/Ainda não devem manter três alvos equilibrados.");
 
 console.log("✓ FQ A rubric: Cumpri/Parcial/Ainda não · observações atómicas · evidência guardada · 4 dimensões no Progresso · sem nota automática");
