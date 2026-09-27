@@ -1250,3 +1250,29 @@ button,input,select,textarea{max-width:100%}
   .ptx-review-progress{display:grid;padding:14px}
   .ptx-review-progress .ptx-ghost{width:100%}
 }
+
+
+/* Checkpoint comum antes de entregar Mini-exames e Exames Completos */
+.examSubmitCheck{display:grid;gap:18px;max-width:980px;margin:0 auto}
+.examSubmitCheckHead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.examSubmitCheckHead>div{min-width:0}.examSubmitCheckHead h1{margin-bottom:7px}
+.examSubmitCheckHead>.secondary{flex:0 0 auto;margin:0}
+.examSubmitSummary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.examSubmitSummary>div{display:grid;gap:4px;padding:14px 16px;border:1px solid #e4e8ed;border-radius:14px;background:#fff}
+.examSubmitSummary small{font-size:9px;font-weight:900;letter-spacing:.08em;color:#7c8495}
+.examSubmitSummary b{font-size:20px}
+.examSubmitMap{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:8px}
+.examSubmitMap button{display:grid;gap:3px;text-align:left;padding:10px 11px;border:1px solid #e1e5ea;border-radius:12px;background:#fff}
+.examSubmitMap button b{font-size:14px}.examSubmitMap button span{font-size:10px;color:#667085}
+.examSubmitMap button.is-answered{border-color:#cde5d6;background:#f7fcf9}
+.examSubmitMap button.is-empty.is-required{border-color:#ead5a5;background:#fffaf0}
+.examSubmitMap button.is-optional{border-style:dashed}
+.examSubmitMap button:focus-visible{outline:3px solid rgba(239,167,35,.22);outline-offset:1px}
+.fqaSubmitCheckPage{padding-bottom:36px}
+@media(max-width:620px){
+  .examSubmitCheckHead{display:grid}
+  .examSubmitCheckHead>.secondary{justify-self:start}
+  .examSubmitSummary{grid-template-columns:1fr}
+  .examSubmitMap{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .examSubmitMap button{padding:9px}
+}
