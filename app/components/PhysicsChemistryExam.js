@@ -90,6 +90,11 @@ export default function PhysicsChemistryExam({s,setS,go}){
   function finish(){setReview(true);}
 
   function saveReviewAndExit(){
+    if(openReviewProgress.pending>0){
+      savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review:true,rubricAssessments});
+      go("exams");
+      return;
+    }
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
