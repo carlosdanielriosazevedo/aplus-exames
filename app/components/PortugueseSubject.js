@@ -264,14 +264,14 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="exams")return <Shell className="wideStudentShell examHub">
     {sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button>
-    <div className="sectionIntro"><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1></div>
+    <div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Português · 639</h1><p className="muted">Escolhe um Mini-exame para uma sessão mais curta ou o Exame Completo quando estiver disponível no teu percurso.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.review?"REVISÃO EM PAUSA":miniExamDraft.examId==="full-1"?"EXAME COMPLETO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><span>{miniExamDraft.review?"Retoma a revisão por critérios.":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
     {portugueseMiniExamsForYear(currentYear).map(exam=><button key={exam.id} className="exam examAction" onClick={()=>selectMiniExam(exam.id)}><div><b>⚡ {exam.title}</b><span>{exam.description}</span></div><strong>Começar →</strong></button>)}
     <div className="lastExam"><div><small>MINI-EXAMES REALIZADOS</small><b>{progress.sessions.filter(row=>row.kind==="mini_exam").length||"Ainda nenhum"}</b></div><span>{progress.sessions.filter(row=>row.kind==="mini_exam").length?"O histórico de Português fica separado das restantes disciplinas.":"Escolhe um mini-exame para criar histórico."}</span></div>
     {currentYear==="12.º"?<button className="exam examAction" onClick={()=>selectMiniExam("full-1")}><div><b>📝 Exame Completo · Modelo 1</b><span>15 itens · 120 min + 30 min de tolerância · 200 pontos classificáveis</span></div><strong>Começar →</strong></button>:<div className="exam locked"><b>📝 Exame Completo</b><span>Disponível no percurso do 12.º ano, para preparação do exame nacional.</span></div>}
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Aguardam validação de conteúdos oficiais.</span></div>
-    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis, sem atribuição automática de uma classificação final.</span></div>
+    <div className="notice"><b>O que muda num exame?</b><span>Não há feedback pergunta a pergunta. O resultado aparece no fim e as respostas abertas são revistas por critérios observáveis, sem atribuição automática de uma classificação final.</span></div>
     {sharedNav}
   </Shell>;
   if(!session)return sharedShell(<>
