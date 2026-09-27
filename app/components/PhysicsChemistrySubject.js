@@ -1,5 +1,5 @@
 "use client";
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
@@ -8,11 +8,14 @@ import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
 import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
+import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
+import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
 import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
+import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -44,6 +47,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [feedback,setFeedback]=useState(null);
   const [results,setResults]=useState([]);
   const [rubricAssessment,setRubricAssessment]=useState({});
+  const [examDrafts,setExamDrafts]=useState([]);
   const progress=subjectProgressFor(s,SUBJECT_ID);
   const scopedItems=physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
@@ -51,6 +55,21 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);
   const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
   const missionDone=missionCompletedToday(s);
+  useEffect(()=>{
+    if(view!=="exams")return;
+    const mini1=physicsChemistryMiniExamById("fqa-mini-1");
+    const mini2=physicsChemistryMiniExamById("fqa-mini-2");
+    const fullRows=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems];
+    const candidates=[
+      {id:mini1.id,title:mini1.label,route:"physicsChemistryMini1",itemIds:mini1.items.map(row=>row.id)},
+      {id:mini2.id,title:mini2.label,route:"physicsChemistryMini2",itemIds:mini2.items.map(row=>row.id)},
+      {id:"fqa-full-715",title:"Exame Completo · 715",route:"physicsChemistryExam",itemIds:fullRows.map(row=>row.id)}
+    ];
+    setExamDrafts(candidates.map(candidate=>{
+      const draft=loadPhysicsChemistryExamDraft(candidate.id,candidate.itemIds);
+      return draft?{...candidate,draft}:null;
+    }).filter(Boolean));
+  },[view]);
 
   const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div>
     <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>
@@ -201,6 +220,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
   if(view==="exams")return <Shell className="wideStudentShell">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o exame completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
+    {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
     <div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>

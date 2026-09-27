@@ -54,6 +54,13 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const rubricCriteria=openItems.flatMap(row=>(row.rubric?.criteria||[]).map(criterion=>({itemId:row.id,criterionId:criterion.id})));
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
   const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
+  const openReviewRows=openItems.map(row=>{
+    const criteria=row.rubric?.criteria||[];
+    const summary=selfAssessmentSummary(criteria,selfAssessment[row.id]||{});
+    return {row,index:exam.items.findIndex(item=>item.id===row.id),answered:answerFilled(row,answers[row.id]),summary};
+  });
+  const pendingOpenReviewRows=openReviewRows.filter(entry=>entry.answered&&!entry.summary.complete);
+  const completedOpenReviews=openReviewRows.filter(entry=>entry.answered&&entry.summary.complete).length;
   const writingProfile=useMemo(()=>writingMemoryProfile(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const writingProgress=useMemo(()=>writingResolvedAttentions(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const activeWritingFocus=useMemo(()=>writingActivePreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
@@ -160,7 +167,20 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     return `${group} · ${row?.groupItemNumber??"—"}`;
   };
 
+  const goToNextPendingReview=()=>{
+    const target=pendingOpenReviewRows[0];
+    if(!target)return;
+    document.getElementById("ptx-review-"+target.row.id)?.scrollIntoView({behavior:"smooth",block:"start"});
+  };
+
   const completeAndExit=()=>{
+    if(pendingOpenReviewRows.length>0){
+      onDraftChange?.(portugueseMiniExamDraftSnapshot({
+        examId,itemIds:exam.items.map(row=>row.id),index,review:true,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt
+      }));
+      onExit?.();
+      return;
+    }
     if(!completedRef.current){
       completedRef.current=true;
       let results=buildResults();
@@ -177,8 +197,8 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   if(review){
     return <main className="ptx-shell">
       <header className="ptx-header">
-        <div><span className="ptx-kicker">Português 639 · {isFullExam?"Simulado original":"Mini-exame"}</span><h1>{isFullExam?"Rever o simulado":"Rever o mini-exame"}</h1></div>
-        <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={completeAndExit}>{isFullExam?"Guardar revisão e terminar":"Guardar revisão e voltar aos mini-exames"}</button>}</div>
+        <div><span className="ptx-kicker">Português 639 · {isFullExam?"Exame Completo":"Mini-exame"}</span><h1>{isFullExam?"Rever o Exame Completo":"Rever o mini-exame"}</h1></div>
+        <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={completeAndExit}>{pendingOpenReviewRows.length>0?"Guardar com "+pendingOpenReviewRows.length+" por rever":isFullExam?"Guardar revisão e terminar":"Guardar revisão e voltar aos mini-exames"}</button>}</div>
       </header>
       <section className="ptx-summary">
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
@@ -186,7 +206,15 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
-      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do simulado"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount===0?"Ainda não respondeste a nenhum dos 5 itens opcionais.":fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
+      <section className={"ptx-review-progress "+(pendingOpenReviewRows.length?"has-pending":"is-complete")} aria-label="Progresso da revisão das respostas abertas">
+        <div>
+          <span>REVISÃO POR CRITÉRIOS</span>
+          <strong>{completedOpenReviews+" de "+openReviewRows.filter(entry=>entry.answered).length+" concluída"+(openReviewRows.filter(entry=>entry.answered).length===1?"":"s")}</strong>
+          <p>{pendingOpenReviewRows.length?pendingOpenReviewRows.length+" resposta"+(pendingOpenReviewRows.length===1?"":"s")+" ainda por rever. Quest"+(pendingOpenReviewRows.length===1?"ão ":"ões ")+pendingOpenReviewRows.map(entry=>entry.index+1).join(", ")+".":"Todas as respostas abertas respondidas já foram revistas."}</p>
+        </div>
+        {pendingOpenReviewRows.length>0&&<button type="button" className="ptx-ghost" onClick={goToNextPendingReview}>Ir para a próxima por rever</button>}
+      </section>
+      {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do Exame Completo"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount===0?"Ainda não respondeste a nenhum dos 5 itens opcionais.":fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
       {writingProgress.resolved.length>0&&<section className="ptx-progress-story" aria-label="Evolução recente nas autoavaliações de escrita">
         <span>Evolução recente</span><h2>Boa evolução nas tuas autoavaliações</h2>
         <p>Estes pontos tiveram atenção recorrente no teu histórico e deixaram de a mostrar nas tentativas mais recentes. É um sinal para manteres o cuidado, não uma conclusão definitiva sobre a tua escrita.</p>
@@ -212,8 +240,9 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
             const rowRevisions=revisions[row.id]||[];
             const editing=Object.prototype.hasOwnProperty.call(revisionDrafts,row.id);
             const priorPattern=writingMemoryInsight(writingMemory,row,{excludeAttemptId:attemptId});
-            return <article className="ptx-review-item" key={row.id}>
-              <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className="is-pending">Autoavaliação guiada</strong>}</div>
+            const openStatus=row.responseType==="multiple-choice"?null:!answerFilled(row,value)?"Sem resposta":summary.complete?"Revisão concluída":"Por rever";
+            return <article id={"ptx-review-"+row.id} className="ptx-review-item" key={row.id}>
+              <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className={summary.complete?"is-correct":"is-pending"}>{openStatus}</strong>}</div>
               {reviewBlock.type==="single-item"&&row.stimulus&&<p className="ptx-review-stimulus">{row.stimulus}</p>}<h3>{row.prompt}</h3>
               {row.responseType==="multiple-choice"?<>
                 <p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"—"}</p>
@@ -297,7 +326,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
 
   return <main className="ptx-shell">
     <header className="ptx-header">
-      <div><span className="ptx-kicker">Português 639 · {isFullExam?"Simulado original":"Mini-exame"}</span><h1>{isFullExam?exam.title:"Texto + várias questões"}</h1>{isFullExam&&<p className="ptx-exam-disclaimer">Treino original APProva+ · não é uma prova oficial do IAVE.</p>}</div>
+      <div><span className="ptx-kicker">Português 639 · {isFullExam?"Exame Completo":"Mini-exame"}</span><h1>{isFullExam?exam.title:"Texto + várias questões"}</h1>{isFullExam&&<p className="ptx-exam-disclaimer">Treino original APProva+ · não é uma prova oficial do IAVE.</p>}</div>
       <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""} ${inTolerance?"is-tolerance":""}`} aria-live="polite"><span>{inTolerance?"Tolerância":"Tempo de prova"}</span><strong>{formatRemainingTime(remainingSeconds)}</strong>{isFullExam&&<small>{inTolerance?"tolerância em curso":"depois: +30 min de tolerância"}</small>}</div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>

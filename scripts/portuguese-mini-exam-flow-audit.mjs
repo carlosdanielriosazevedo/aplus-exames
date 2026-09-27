@@ -32,6 +32,7 @@ assert.match(page,/onExit=\{\(\)=>go\("exams"\)\}/u,"o mini-exame interno deve r
 assert.match(portugueseSubject,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(portugueseSubject,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
+assert.match(portugueseSubject,/REVISÃO EM PAUSA/u,"a área de exames de Português deve tornar a revisão guardada facilmente retomável.");
 assert.match(portugueseSubject,/PORTUGUESE_MINI_EXAM_CATALOG/u,"a área de exames deve consumir o catálogo comum de mini-exames");
 assert.match(portugueseSubject,/selectMiniExam\(row\.id\)/u,"a área de exames deve iniciar qualquer modelo disponível no catálogo");
 
@@ -42,7 +43,10 @@ assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Re
 assert.match(portugueseSubject,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio em vez de expandir conteúdo no hub de Treinar");
 assert.match(page,/screen==="reviewMatter"&&s\.activeSubjectId==="portuguese"/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
 assert.match(portugueseSubject,/view==="reviewMatter"/u,"Português deve renderizar Rever matéria como ecrã próprio");
-assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>\n  <\/>\);\n\n  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
+assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>
+  <\/>\);
+
+  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
 assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
@@ -71,6 +75,14 @@ assert.match(component,/selfAssessmentSummary/u,"a revisão deve calcular o pró
 assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve recolher evidência textual por critério");
 assert.match(component,/row\.rubric\?\.criteria/u,"os critérios apresentados devem vir da grelha editorial do item");
 assert.match(component,/critérios com evidência escrita/u,"a revisão deve tornar visível o progresso de evidência");
+assert.match(component,/pendingOpenReviewRows/u,"Português deve distinguir respostas abertas concluídas das ainda por rever.");
+assert.match(component,/Ir para a próxima por rever/u,"Português deve ter o mesmo atalho de revisão usado em FQ A.");
+assert.match(component,/Revisão concluída/u,"cada resposta aberta deve mostrar quando a revisão por critérios terminou.");
+assert.match(component,/Por rever/u,"cada resposta aberta incompleta deve mostrar estado pendente.");
+assert.match(component,/ptx-review-/u,"cada resposta aberta deve ter uma âncora navegável na revisão.");
+assert.match(component,/Exame Completo/u,"a nomenclatura do exame longo deve estar alinhada entre disciplinas.");
+assert.match(globalCss,/\.ptx-review-progress\{/u,"Português deve mostrar um resumo visual da revisão por critérios.");
+assert.match(component,/pendingOpenReviewRows\.length>0/u,"Português deve guardar e sair sem finalizar quando a revisão ainda tem pendências.");
 
 assert.match(component,/const \[revisionDrafts,setRevisionDrafts\]=useState\(\(\)=>initialDraft\?\.revisionDrafts\|\|\{\}\)/u,"o aluno deve poder recuperar e preparar uma nova versão sem destruir a anterior");
 assert.match(component,/const \[revisions,setRevisions\]=useState\(\(\)=>initialDraft\?\.revisions\|\|\{\}\)/u,"o histórico de revisões deve ficar separado da resposta atual e sobreviver a interrupções");
@@ -124,7 +136,8 @@ assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-progress-story-list\{gri
 assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
-const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";
+const portugueseRow=subjects.match(/\{id:"portuguese"[^
+]+\}/u)?.[0]||"";
 assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas");
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.match(portugueseRow,/available:true/u,"Português deve estar selecionável no beta atual");
