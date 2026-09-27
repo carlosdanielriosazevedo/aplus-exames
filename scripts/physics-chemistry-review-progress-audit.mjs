@@ -30,6 +30,7 @@ const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",
 const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const draft=readFileSync(new URL("../app/lib/physicsChemistryExamDraft.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
+const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 
 for(const [label,source] of [["Mini-exame",mini],["Exame Completo",full]]){
   assert.match(source,/PhysicsChemistryReviewProgress/u,label+": deve mostrar o progresso global da revisão.");
@@ -46,6 +47,8 @@ assert.match(draft,/review:!!review/u,"o rascunho deve persistir explicitamente 
 assert.doesNotMatch(draft,/if\(!store\|\|review\)return/u,"entrar na revisão não pode deixar de guardar o rascunho.");
 assert.match(css,/fqaReviewProgress/u,"a revisão deve ter resumo visual próprio.");
 assert.match(css,/fqaReviewProgressActions/u,"o atalho de próxima revisão deve adaptar-se ao layout.");
+assert.match(subject,/REVISÃO EM PAUSA/u,"a área de exames deve tornar uma revisão guardada facilmente retomável.");
+assert.match(subject,/loadPhysicsChemistryExamDraft/u,"o hub de exames deve ler os rascunhos dos dois mini-exames e do Exame Completo.");
 assert.equal(PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems.length,15);
 
 console.log("✓ FQ A review progress: estado por resposta · progresso global · próxima por rever · revisão persistente · saída explícita com pendentes");
