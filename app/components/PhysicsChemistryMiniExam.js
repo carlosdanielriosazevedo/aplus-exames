@@ -87,7 +87,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     go("exams");
   }
 
-  const openReviewProgress=physicsChemistryOpenReviewProgress(exam.items,answers,rubricAssessments);
+  const openReviewProgress=physicsChemistryOpenReviewProgress(exam.items,answers,rubricAssessments);\n  function goToNextPendingReview(){\n    const target=openReviewProgress.pendingRows[0];\n    if(!target)return;\n    const node=document.getElementById("fqa-review-"+target.item.id);\n    if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}\n  }
 
   if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
@@ -99,11 +99,11 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
       <div><small>Construídas</small><b>{provisional+openPending}</b><span>{openPending?"inclui respostas por rever":"correção provisória"}</span></div>
     </div>
     <div className="notice"><b>Sem nota automática final</b><span>As respostas por etapas são apenas provisórias e as respostas científicas abertas são revistas por critérios.</span></div>
-    <PhysicsChemistryReviewProgress items={exam.items} answers={answers} assessments={rubricAssessments}/>
+    <PhysicsChemistryReviewProgress items={exam.items} answers={answers} assessments={rubricAssessments} onNextPending={goToNextPendingReview}/>
     <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{
       const value=answers[row.id],result=results[rowIndex];
       const openStatus=physicsChemistryOpenReviewStatus(row,value,rubricAssessments[row.id]||{});
-      return <details className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="provisional-review"?"Provisório":"A rever"}</span></summary><div className="reviewChapterBody">
+      return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="provisional-review"?"Provisório":"A rever"}</span></summary><div className="reviewChapterBody">
         <PhysicsChemistryStimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
