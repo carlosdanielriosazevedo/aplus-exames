@@ -25,10 +25,10 @@ export function PhysicsChemistryStepwiseEditor({item,value,onChange,disabled=fal
         </label>
         {step.type==="numeric"&&<div className="fqaStepResultRow">
           <label>Resultado
-            <input disabled={disabled} value={row.result} onChange={event=>update(step.id,{result:event.target.value})} placeholder="Valor numérico"/>
+            <input disabled={disabled} value={row.result} onChange={event=>update(step.id,{result:event.target.value})} placeholder="Valor numérico" inputMode="decimal" autoComplete="off"/>
           </label>
           {step.unit&&<label>Unidade
-            <input disabled={disabled} value={row.unit} onChange={event=>update(step.id,{unit:event.target.value})} placeholder={step.unit}/>
+            <input disabled={disabled} value={row.unit} onChange={event=>update(step.id,{unit:event.target.value})} placeholder={step.unit} autoComplete="off"/>
           </label>}
         </div>}
       </section>;
