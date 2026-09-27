@@ -174,6 +174,13 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   };
 
   const completeAndExit=()=>{
+    if(pendingOpenReviewRows.length>0){
+      onDraftChange?.(portugueseMiniExamDraftSnapshot({
+        examId,itemIds:exam.items.map(row=>row.id),index,review:true,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt
+      }));
+      onExit?.();
+      return;
+    }
     if(!completedRef.current){
       completedRef.current=true;
       let results=buildResults();
