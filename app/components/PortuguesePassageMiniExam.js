@@ -7,6 +7,7 @@ import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/port
 import {portugueseMiniExamDraftSnapshot} from "../lib/portugueseMiniExamDraft";
 import {classifyPortugueseFullExamResults} from "../data/portuguesePassagePrototype";
 import PortugueseWritingCycleSummary from "./PortugueseWritingCycleSummary";
+import ExamSubmissionCheck from "./ExamSubmissionCheck";
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
@@ -35,6 +36,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const [index,setIndex]=useState(()=>initialDraft?.index||0);
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(()=>!!initialDraft?.review);
+  const [submitCheck,setSubmitCheck]=useState(false);
   const [mobileTextOpen,setMobileTextOpen]=useState(false);
   const [selfAssessment,setSelfAssessment]=useState(()=>initialDraft?.selfAssessment||{});
   const [revisionDrafts,setRevisionDrafts]=useState(()=>initialDraft?.revisionDrafts||{});
@@ -194,6 +196,20 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     onExit?.();
   };
 
+  if(submitCheck&&!review){
+    return <main className="ptx-shell">
+      <ExamSubmissionCheck
+        items={exam.items}
+        answers={answers}
+        isAnswered={answerFilled}
+        isRequired={row=>!isFullExam||row.classificationMode!=="best-of-five"}
+        onBack={()=>setSubmitCheck(false)}
+        onJump={next=>{setSubmitCheck(false);goTo(next)}}
+        onConfirm={()=>{setSubmitCheck(false);setReview(true)}}
+      />
+    </main>;
+  }
+
   if(review){
     return <main className="ptx-shell">
       <header className="ptx-header">
@@ -343,7 +359,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
             <ul>{activeWritingFocus.rows.map(focus=><li key={focus.criterionId}><b>{focus.prompt}</b><span>{focus.message}</span></li>)}</ul>
           </aside>}
           <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p></div>}
-        <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setReview(true)}>Terminar e rever o exame</button>}</div>
+        <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setSubmitCheck(true)}>Terminar e rever o exame</button>}</div>
       </section>
     </div>
     <footer className="ptx-footer-note">{answeredCount} de {exam.itemCount} questões respondidas · o progresso desta tentativa fica guardado neste dispositivo.</footer>
