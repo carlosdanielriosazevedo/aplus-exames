@@ -115,7 +115,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   }
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
-    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
+    <button className="back" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"← Guardar com "+openReviewProgress.pending+" por rever e voltar aos exames":"← Guardar revisão e voltar aos exames"}</button>
     <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
     <h1>Revisão do Exame Completo</h1>
     <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{openReviewProgress.pending?openReviewProgress.pending+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
