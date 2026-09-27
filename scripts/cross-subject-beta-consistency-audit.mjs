@@ -19,8 +19,9 @@ for(const [label,source,code] of [
   assert.match(source,/EXAMES/u,label+": deve identificar a área como Exames.");
   assert.ok(source.includes(code),label+": deve mostrar disciplina e código da prova.");
   assert.match(source,/examHub/u,label+": deve usar a superfície visual comum de exames.");
-  assert.match(source,/← Voltar/u,label+": deve permitir regressar ao hub de treino.");
 }
+assert.match(math,/<Back go=\{go\} to="train"\/>/u,"Matemática A deve regressar ao hub de treino pelo componente Back comum.");
+for(const [label,source] of [["Português",portuguese],["FQ A",fqa]])assert.match(source,/← Voltar/u,label+": deve permitir regressar ao hub de treino.");
 
 for(const [label,source] of [["Português",portuguese],["FQ A",fqa]]){
   assert.match(source,/StudyModeHub/u,label+": deve reutilizar o hub comum.");
