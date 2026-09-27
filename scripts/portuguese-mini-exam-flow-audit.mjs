@@ -32,6 +32,7 @@ assert.match(page,/onExit=\{\(\)=>go\("exams"\)\}/u,"o mini-exame interno deve r
 assert.match(portugueseSubject,/Mini-exame/u,"o workspace de Português deve dar acesso explícito ao mini-exame");
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(portugueseSubject,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
+assert.match(portugueseSubject,/REVISÃO EM PAUSA/u,"a área de exames de Português deve tornar a revisão guardada facilmente retomável.");
 assert.match(portugueseSubject,/PORTUGUESE_MINI_EXAM_CATALOG/u,"a área de exames deve consumir o catálogo comum de mini-exames");
 assert.match(portugueseSubject,/selectMiniExam\(row\.id\)/u,"a área de exames deve iniciar qualquer modelo disponível no catálogo");
 
