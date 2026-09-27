@@ -80,7 +80,7 @@ assert.match(component,/Revisão concluída/u,"cada resposta aberta deve mostrar
 assert.match(component,/Por rever/u,"cada resposta aberta incompleta deve mostrar estado pendente.");
 assert.match(component,/ptx-review-/u,"cada resposta aberta deve ter uma âncora navegável na revisão.");
 assert.match(component,/Exame Completo/u,"a nomenclatura do exame longo deve estar alinhada entre disciplinas.");
-assert.match(globalCss,/\.ptx-review-progress\{/u,"Português deve mostrar um resumo visual da revisão por critérios.");
+assert.match(globalCss,/\.ptx-review-progress\{/u,"Português deve mostrar um resumo visual da revisão por critérios.");\nassert.match(component,/pendingOpenReviewRows\.length>0/u,"Português deve guardar e sair sem finalizar quando a revisão ainda tem pendências.");
 
 assert.match(component,/const \[revisionDrafts,setRevisionDrafts\]=useState\(\(\)=>initialDraft\?\.revisionDrafts\|\|\{\}\)/u,"o aluno deve poder recuperar e preparar uma nova versão sem destruir a anterior");
 assert.match(component,/const \[revisions,setRevisions\]=useState\(\(\)=>initialDraft\?\.revisions\|\|\{\}\)/u,"o histórico de revisões deve ficar separado da resposta atual e sobreviver a interrupções");
