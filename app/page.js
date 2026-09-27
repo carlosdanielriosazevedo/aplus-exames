@@ -1876,6 +1876,7 @@ function Progress({s,go}){
 
 function Exams({s,go,startMini}){
   if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>10 itens · 4 domínios · ~45 min</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
+  const pausedExamDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
   const last=s.lastExam;
   const miniQuestions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
   const miniAvailable=miniQuestions.length;
@@ -1883,9 +1884,10 @@ function Exams({s,go,startMini}){
   const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
-  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><Back go={go} to="train"/><div className="sectionIntro"><p className="eyebrow">MINI-EXAME</p><h1>Avaliação em contexto de prova.</h1></div>
+  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><Back go={go} to="train"/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
+    {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><small>MINI-EXAME EM PAUSA</small><b>Mini-exame de Matemática A</b><span>O teu progresso ficou guardado neste dispositivo.</span></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar →</button></div>}
     <button className="exam examAction" disabled={!miniReady} onClick={()=>miniReady&&startMini()}>
       <div><b>⚡ Mini-exame misto</b><span>{miniReady?`${miniSelection} seleção + ${miniConstructed} construção · ~25–30 min · ${miniYears.join(" · ")}`:`${miniAvailable}/${MATH_MINI_EXAM_QUESTIONS} questões elegíveis neste modo`}</span></div><strong>{miniReady?"Começar →":"🔒"}</strong>
     </button>
