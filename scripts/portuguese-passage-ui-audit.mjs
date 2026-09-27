@@ -13,7 +13,7 @@ assert.match(component,/ExamSubmissionCheck/u,"Português deve reutilizar o chec
 assert.match(component,/onConfirm=\{\(\)=>\{setSubmitCheck\(false\);setReview\(true\)\}\}/u,"só a confirmação explícita deve abrir a revisão.");
 assert.doesNotMatch(component,/>Corrigir</u,"um exame terminado não deve voltar a apresentar uma ação de correção");
 assert.doesNotMatch(component,/Voltar às respostas/u,"depois de terminado, o exame deve permanecer no fluxo de revisão");
-assert.match(component,/Autoavaliação guiada/u,"respostas abertas devem conduzir à autoavaliação guiada por critérios");
+assert.match(component,/Autoavaliação por critérios/u,"respostas abertas devem conduzir à autoavaliação guiada por critérios");
 assert.match(component,/não (?:produz|produzem)[^\n]*classificação automática final/u,"a UI deve dizer que autoavaliação e revisão não produzem nota automática final");
 assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve pedir evidência explícita por critério");
 assert.match(component,/Como distinguir uma resposta forte de uma resposta parcial/u,"a revisão deve mostrar âncoras de qualidade para respostas construídas");
