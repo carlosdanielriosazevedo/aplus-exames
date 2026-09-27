@@ -23,7 +23,7 @@ const authorities=new Set(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.map(row=>row.aut
 assert.ok(authorities.has("DGE")&&authorities.has("IAVE"),"A fundação deve distinguir currículo DGE de referência IAVE.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.filter(row=>row.authority==="DGE").every(row=>row.status==="in-force"),"As fontes curriculares DGE devem estar marcadas como vigentes.");
 
-assert.equal(PHYSICS_CHEMISTRY_A_ITEMS.length,318,"O banco atual deve ter 318 itens originais após a vaga de autenticidade com gráficos e diagramas.");
+assert.equal(PHYSICS_CHEMISTRY_A_ITEMS.length,339,"O banco atual deve ter 339 itens originais após as vagas de autenticidade, gráficos, dados e respostas construídas.");
 assert.equal(new Set(PHYSICS_CHEMISTRY_A_ITEMS.map(item=>item.id)).size,PHYSICS_CHEMISTRY_A_ITEMS.length,"IDs de FQ A devem ser únicos.");
 for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
   const domain=PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===item.domain);
@@ -49,14 +49,21 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 }
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
-assert.equal(coverage.total,318);
+assert.equal(coverage.total,339);
 assert.equal(coverage.missionReady,true,"Todos os grandes domínios devem suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
   assert.ok((coverage.bySubtopic[subtopic.id]||0)>=7,subtopic.id+": cada submatéria deve ter pelo menos sete itens, permitindo treino específico de 7–10 perguntas.");
 }
-assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="table").length>=8,"FQ A deve conter pelo menos oito itens com tabelas/dados.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="table").length>=15,"FQ A deve conter pelo menos quinze itens com tabelas/dados.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="stepwise").length>=14,"FQ A deve conter pelo menos catorze problemas por etapas.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="restricted-response").length>=14,"FQ A deve conter pelo menos catorze respostas científicas/experimentais abertas.");
+for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS){
+  assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.some(item=>item.domain===domain.id&&item.responseType==="stepwise"),domain.id+": deve existir pelo menos um problema por etapas.");
+  assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.some(item=>item.domain===domain.id&&item.responseType==="restricted-response"),domain.id+": deve existir pelo menos uma resposta aberta.");
+  assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.some(item=>item.domain===domain.id&&item.stimulus?.type==="table"),domain.id+": deve existir pelo menos um item de interpretação de dados.");
+}
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="line-chart").length>=7,"FQ A deve conter gráficos quantitativos em todos os grandes domínios.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="diagram").length>=7,"FQ A deve conter diagramas científicos em todos os grandes domínios.");
 const choiceItems=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="multiple-choice");
@@ -167,4 +174,4 @@ assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Reve
 assert.match(learn,/Trabalho prático associado nas AE/u,"Rever Matéria deve tornar visível o trabalho prático previsto nas AE.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 318 itens · tabelas + gráficos + diagramas · mínimo 7/submatéria · blueprint 715 15+8/4");
+console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 339 itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");
