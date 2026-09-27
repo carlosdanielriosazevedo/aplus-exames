@@ -2,10 +2,12 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
+import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
+import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -43,13 +45,17 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const [current,setCurrent]=useState(()=>Math.max(0,Math.min(rows.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(false);
+  const [rubricAssessments,setRubricAssessments]=useState({});
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
   const item=rows[current];
   const filled=rows.filter(row=>answered(row,answers[row.id])).length;
 
-  const results=useMemo(()=>rows.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[rows,answers]);
+  const baseResults=useMemo(()=>rows.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[rows,answers]);
+  const results=useMemo(()=>rows.map((row,index)=>row.responseType==="restricted-response"&&answered(row,answers[row.id])
+    ?physicsChemistryRubricResult(row,answers[row.id],rubricAssessments[row.id]||{})
+    :baseResults[index]),[rows,answers,baseResults,rubricAssessments]);
   const scored=useMemo(()=>rows.map((row,index)=>({...examPointsFor(row,results[index]),item:row,result:results[index]})),[rows,results]);
   const mandatory=scored.slice(0,blueprint.mandatoryItems.length);
   const optional=scored.slice(blueprint.mandatoryItems.length);
@@ -82,20 +88,25 @@ export default function PhysicsChemistryExam({s,setS,go}){
   function finish(){
     setReview(true);
     clearPhysicsChemistryExamDraft(examId);
-    if(recordedRef.current)return;
-    recordedRef.current=true;
-    setS(prev=>recordSubjectSession(prev,{
-      subjectId:SUBJECT_ID,
-      kind:"full_exam",
-      label:blueprint.label,
-      items:rows,
-      results,
-      sessionId:"fqa-full-"+Date.now()
-    }));
+  }
+
+  function saveReviewAndExit(){
+    if(!recordedRef.current){
+      recordedRef.current=true;
+      setS(prev=>recordSubjectSession(prev,{
+        subjectId:SUBJECT_ID,
+        kind:"full_exam",
+        label:blueprint.label,
+        items:rows,
+        results,
+        sessionId:"fqa-full-"+startedAt
+      }));
+    }
+    go("exams");
   }
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
-    <button className="back" onClick={()=>go("exams")}>← Voltar aos exames</button>
+    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">SIMULADO COMPLETO · PROVA 715</p>
     <h1>Revisão do simulado</h1>
     <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
@@ -111,9 +122,10 @@ export default function PhysicsChemistryExam({s,setS,go}){
         <Stimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<>{result.steps.map((step,stepIndex)=><p key={step.id}><b>{"Etapa "+(stepIndex+1)+": "}</b>{step.status==="unanswered"?"Sem resposta":step.answer+" → referência: "+step.expected}</p>)}<p><b>Indicação provisória:</b> {score.points} / {row.examPoints} pts.</p></>}
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><p><b>Critérios a verificar:</b></p><ul>{(row.criteria||[]).map(criterion=><li key={criterion}>{criterion}</li>)}</ul></>}
+        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/></>}
       </div></details>;
     })}</div>
+    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 
   return <Shell className="wideStudentShell fqaFullExamPage">

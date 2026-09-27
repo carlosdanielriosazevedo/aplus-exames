@@ -4,12 +4,14 @@ import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,Study
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
+import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
 import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
+import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -40,6 +42,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
   const [results,setResults]=useState([]);
+  const [rubricAssessment,setRubricAssessment]=useState({});
   const progress=subjectProgressFor(s,SUBJECT_ID);
   const scopedItems=physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
@@ -60,7 +63,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     setSession({sessionId,kind,label,domain,items,current:0});
-    setAnswer(null);setFeedback(null);setResults([]);
+    setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
     setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items}));
   }
 
@@ -98,13 +101,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     if(session.current>=session.items.length-1){
       setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results,sessionId:session.sessionId}));
       const kind=session.kind;
-      setSession(null);setAnswer(null);setFeedback(null);setResults([]);
+      setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
       go(kind==="diagnostic"?"progress":"home");
       return;
     }
     const current=session.current+1;
     setSession(prev=>({...prev,current}));
-    setAnswer(null);setFeedback(null);
+    setAnswer(null);setFeedback(null);setRubricAssessment({});
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));
   }
 
@@ -119,7 +122,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   function resetPhysicsChemistry(){
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
-    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);
+    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
   }
 
   if(session){
@@ -143,7 +146,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
           {item.responseType==="multiple-choice"&&<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span></div>}
           {item.responseType==="stepwise"&&<div className="fqaConstructedReview"><div className="notice"><b>{"Correção provisória · "+feedback.provisionalPoints+"/"+feedback.maxPoints+" pontos de treino"}</b><span>{feedback.note}</span></div>{feedback.steps.map((step,index)=><div className={"fqaStepReview "+(step.correct?"ok":"review")} key={step.id}><b>{"Etapa "+(index+1)+" · "+(step.correct?"correta":"a rever")}</b><span>{"Referência: "+step.expected}</span></div>)}<p className="muted">No exame oficial são aceites processos cientificamente corretos alternativos e aplicam-se regras próprias a erros numéricos, analíticos, unidades e dependência entre etapas.</p></div>}
-          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><ul>{(item.criteria||[]).map(criterion=><li key={criterion}>{criterion}</li>)}</ul><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
+          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><PhysicsChemistryRubricReview item={item} assessment={rubricAssessment} onChange={nextAssessment=>{
+            setRubricAssessment(nextAssessment);
+            const nextFeedback=physicsChemistryRubricResult(item,answer,nextAssessment);
+            setFeedback(nextFeedback);
+            setResults(current=>{const next=[...current];next[next.length-1]=nextFeedback;return next});
+            setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:[...results.slice(0,-1),nextFeedback],currentResult:nextFeedback,currentAnswer:answer}));
+          }}/><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
           <button className="primary" onClick={next}>{position===session.items.length?"Terminar":"Seguinte"}</button>
         </>}
       </div>
@@ -207,8 +216,28 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       const correct=competence.reduce((sum,row)=>sum+(row.correct||0),0);
       return {...domain,attempts,percent:attempts?Math.round(correct/attempts*100):null};
     });
+    const dimensions=[
+      {id:"knowledge",label:"Conhecimento científico",competencies:["fqa-concepts","fqa-data"],note:"Inclui interpretação de dados, gráficos e modelos."},
+      {id:"practical",label:"Trabalho prático",competencies:["fqa-experimental"],note:"Procedimentos, variáveis, incerteza e análise experimental."},
+      {id:"problems",label:"Resolução de problemas",competencies:["fqa-problems"],note:"Estratégia, relações quantitativas e coerência do resultado."},
+      {id:"communication",label:"Comunicação científica",competencies:["fqa-communication"],note:"Explicações, justificações e conclusões cientificamente rigorosas."}
+    ].map(dimension=>{
+      const evidence=dimension.competencies.map(id=>progress.competence[id]).filter(Boolean);
+      const deterministic=evidence.reduce((sum,row)=>sum+(row.deterministicAttempts||0),0);
+      const correct=evidence.reduce((sum,row)=>sum+(row.correct||0),0);
+      const observed=evidence.reduce((sum,row)=>sum+(row.rubricObserved||0),0);
+      const needsReview=evidence.reduce((sum,row)=>sum+(row.rubricNeedsReview||0),0);
+      const reviewed=evidence.reduce((sum,row)=>sum+(row.rubricReviews||0),0);
+      const totalSignals=deterministic+observed+needsReview;
+      const positive=correct+observed;
+      return {...dimension,deterministic,correct,observed,needsReview,reviewed,percent:totalSignals?Math.round(positive/totalSignals*100):null};
+    });
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
       <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
+      <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
+        <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
+        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.needsReview} a rever</span></footer></article>)}</div>
+      </section>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
   }
