@@ -226,15 +226,18 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       const observed=evidence.reduce((sum,row)=>sum+(row.rubricObserved||0),0);
       const needsReview=evidence.reduce((sum,row)=>sum+(row.rubricNeedsReview||0),0);
       const reviewed=evidence.reduce((sum,row)=>sum+(row.rubricReviews||0),0);
-      const totalSignals=deterministic+observed+needsReview;
-      const positive=correct+observed;
-      return {...dimension,deterministic,correct,observed,needsReview,reviewed,percent:totalSignals?Math.round(positive/totalSignals*100):null};
+      const structuredScored=evidence.reduce((sum,row)=>sum+(row.structuredScoredAttempts||0),0);
+      const structuredEarned=evidence.reduce((sum,row)=>sum+(row.structuredNormalizedEarned||0),0);
+      const structuredNeedsReview=evidence.reduce((sum,row)=>sum+(row.structuredNeedsReview||0),0);
+      const totalSignals=deterministic+structuredScored+observed+needsReview;
+      const positive=correct+structuredEarned+observed;
+      return {...dimension,deterministic,correct,observed,needsReview,reviewed,structuredScored,structuredEarned,structuredNeedsReview,percent:totalSignals?Math.round(positive/totalSignals*100):null};
     });
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
       <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
       <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
         <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
-        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.needsReview} a rever</span></footer></article>)}</div>
+        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.structuredScored} problemas por etapas</span><span>{row.needsReview+row.structuredNeedsReview} a rever</span></footer></article>)}</div>
       </section>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
