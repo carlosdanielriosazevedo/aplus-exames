@@ -351,7 +351,7 @@ export default function App(){
     const questions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
     const ses=sessionStart("mini_exam",{questionCount:questions.length});
     setS(prev=>({...prev,betaSessions:[...(prev.betaSessions||[]),ses],betaEvents:[...(prev.betaEvents||[]),betaEvent("mini_exam_started",{sessionId:ses.id,questionCount:questions.length})]}));
-    setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),current:0,startedAt:Date.now()});
+    setExamSession({sessionId:ses.id,questions,answers:Array(questions.length).fill(null),markedForReview:[],current:0,startedAt:Date.now()});
     go("miniExamIntro");
   }}/>;
   if(screen==="miniExamIntro")return <MiniExamIntro session={examSession} go={go}/>;
@@ -2009,6 +2009,7 @@ function MiniExamRun({session,setSession,go}){
     const answers=[...session.answers];answers[i]=value;setSession({...session,answers});
   }
   function move(n){setSession({...session,current:Math.max(0,Math.min(session.questions.length-1,n))})}
+  function toggleMarked(){const marked=session.markedForReview||[];setSession({...session,markedForReview:marked.includes(q.id)?marked.filter(id=>id!==q.id):[...marked,q.id]})}
   return <Shell>
     <StudySessionHeader progress={((i+1)/session.questions.length)*100} label={`${i+1}/${session.questions.length}`} onExit={()=>go("home")}/>
     <p className="questionContext">{theme(q.themeId).short}</p>
@@ -2017,6 +2018,7 @@ function MiniExamRun({session,setSession,go}){
     {responseType(q)==="choice"
       ?<div className="opts examOpts">{q.o.map((x,n)=><button key={`${q.id}-${n}`} className={answer===n?"sel":""} onClick={()=>setAnswer(n)}><b>{String.fromCharCode(65+n)}</b>{x}</button>)}</div>
       :<ConstructedResponseField question={q} value={answer} onChange={setAnswer}/>}
+    <button type="button" className={"examMarkButton "+((session.markedForReview||[]).includes(q.id)?"is-marked":"")} onClick={toggleMarked}>{(session.markedForReview||[]).includes(q.id)?"★ Marcada para rever":"☆ Marcar para rever"}</button>
     <div className="examNav">
       <button className="secondary small" disabled={i===0} onClick={()=>move(i-1)}>← Anterior</button>
       <button className="primary small" disabled={!isResponseAnswered(q,answer)} onClick={()=>i<session.questions.length-1?move(i+1):go("miniExamReview")}>Responder</button>
@@ -2031,6 +2033,7 @@ function MiniExamReview({session,setSession,s,setS,go}){
   const submittingRef=useRef(false);
   if(!session?.questions?.length)return <Shell><Back go={go} to="exams"/><h1>Sessão indisponível.</h1></Shell>;
   const unanswered=session.questions.filter((q,i)=>!isResponseAnswered(q,session.answers[i])).length;
+  const markedForReview=session.markedForReview||[];
   function jump(i){setSession({...session,current:i});go("miniExamRun")}
   function submit(){
     if(submittingRef.current)return;
@@ -2073,7 +2076,8 @@ function MiniExamReview({session,setSession,s,setS,go}){
   }
   return <Shell><Back go={go} to="miniExamRun"/><p className="eyebrow">REVER ANTES DE ENTREGAR</p><h1>Confirma as tuas respostas.</h1>
     <p className="muted">Ainda podes voltar a qualquer questão. A correção só acontece quando entregares.</p>
-    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]);return <button key={q.id} className={answered?"answered":"empty"} onClick={()=>jump(i)}><b>{i+1}</b><span>{responseType(q)==="completion"?`${completionFilledCount(q,session.answers[i])}/${q.response.blanks.length} espaços preenchidos`:answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Resolução escrita":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    <div className="answerMap">{session.questions.map((q,i)=>{const answered=isResponseAnswered(q,session.answers[i]),marked=markedForReview.includes(q.id);return <button key={q.id} className={(answered?"answered ":"empty ")+(marked?"marked":"")} onClick={()=>jump(i)}><b>{i+1}</b><span>{marked?"Marcada para rever":responseType(q)==="completion"?`${completionFilledCount(q,session.answers[i])}/${q.response.blanks.length} espaços preenchidos`:answered?(isConstructedResponse(q)?responseType(q)==="stepwise"?"Resolução escrita":String(session.answers[i]).trim().slice(0,14):String.fromCharCode(65+session.answers[i])):"Por responder"}</span></button>})}</div>
+    {markedForReview.length>0&&<div className="notice"><b>{markedForReview.length} {markedForReview.length===1?"questão marcada para rever":"questões marcadas para rever"}</b><span>Usa o mapa para voltar a elas antes de entregar.</span></div>}
     {session.questions.some((q,i)=>responseType(q)==="completion"&&completionFilledCount(q,session.answers[i])<q.response.blanks.length)&&<p className="notice warning">Há espaços por preencher nas perguntas de completamento. Podes voltar à pergunta ou entregar com esses espaços em branco.</p>}
     {unanswered>0&&<div className="notice warning"><b>{unanswered} {unanswered===1?"questão por responder":"questões por responder"}</b><span>Podes entregar assim, mas as não-respostas contam para o resultado. Pedagogicamente recebem um peso ligeiramente menor do que uma resposta explicitamente errada.</span></div>}
     <button className="primary" onClick={submit}>Entregar Mini-exame</button>
