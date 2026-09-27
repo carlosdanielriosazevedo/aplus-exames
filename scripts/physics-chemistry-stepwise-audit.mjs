@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "../app/data/physicsChemistryConstructed.js";
 import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
+import {readFileSync} from "node:fs";
 import {PHYSICS_CHEMISTRY_A_STEPWISE_RULES,PHYSICS_CHEMISTRY_A_STEPWISE_SOURCE,physicsChemistryStepwisePolicyFor} from "../app/data/physicsChemistryStepwisePolicy.js";
 
 const byId=id=>PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.find(item=>item.id===id);
@@ -61,4 +62,21 @@ const ml=gradePhysicsChemistryResponse(dilution,{steps:{
 }});
 assert.equal(ml.provisionalPoints,12,"uma unidade final equivalente deve ser convertida antes da comparação numérica.");
 
-console.log("✓ FQ A stepwise: processo + resultado + unidade · tipo 1/2 · follow-through · processos alternativos em revisão · unidades equivalentes");
+const editor=readFileSync(new URL("../app/components/PhysicsChemistryStepwise.js",import.meta.url),"utf8");
+const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
+const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
+const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
+const progress=readFileSync(new URL("../app/lib/subjectProgress.js",import.meta.url),"utf8");
+
+assert.match(editor,/Relação \/ processo/u,"o aluno deve explicitar o processo em cada etapa.");
+assert.match(editor,/Erro tipo/u,"a revisão deve tornar visível a classificação provisória do erro.");
+assert.match(editor,/Processo alternativo · rever/u,"processos alternativos não reconhecidos não podem ser marcados automaticamente como errados.");
+assert.match(subject,/PhysicsChemistryStepwiseEditor/u,"treino deve usar o editor por etapas.");
+assert.match(mini,/PhysicsChemistryStepwiseEditor/u,"mini-exame deve usar o editor por etapas.");
+assert.match(full,/PhysicsChemistryStepwiseEditor/u,"simulado deve usar o editor por etapas.");
+assert.match(progress,/structuredScoredAttempts/u,"o progresso deve guardar tentativas por etapas com pontuação provisória reconhecida.");
+assert.match(progress,/structuredNormalizedEarned/u,"o progresso deve guardar desempenho normalizado sem o transformar em nota oficial.");
+assert.match(progress,/structuredNeedsReview/u,"processos alternativos devem permanecer sinalizados para revisão.");
+assert.match(subject,/problemas por etapas/u,"o progresso de FQ A deve tornar visível a evidência dos problemas por etapas.");
+
+console.log("✓ FQ A stepwise: processo + resultado + unidade · tipo 1/2 · follow-through · processos alternativos em revisão · evidência no Progresso");
