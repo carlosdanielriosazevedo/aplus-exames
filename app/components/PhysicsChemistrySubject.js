@@ -216,8 +216,28 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       const correct=competence.reduce((sum,row)=>sum+(row.correct||0),0);
       return {...domain,attempts,percent:attempts?Math.round(correct/attempts*100):null};
     });
+    const dimensions=[
+      {id:"knowledge",label:"Conhecimento científico",competencies:["fqa-concepts","fqa-data"],note:"Inclui interpretação de dados, gráficos e modelos."},
+      {id:"practical",label:"Trabalho prático",competencies:["fqa-experimental"],note:"Procedimentos, variáveis, incerteza e análise experimental."},
+      {id:"problems",label:"Resolução de problemas",competencies:["fqa-problems"],note:"Estratégia, relações quantitativas e coerência do resultado."},
+      {id:"communication",label:"Comunicação científica",competencies:["fqa-communication"],note:"Explicações, justificações e conclusões cientificamente rigorosas."}
+    ].map(dimension=>{
+      const evidence=dimension.competencies.map(id=>progress.competence[id]).filter(Boolean);
+      const deterministic=evidence.reduce((sum,row)=>sum+(row.deterministicAttempts||0),0);
+      const correct=evidence.reduce((sum,row)=>sum+(row.correct||0),0);
+      const observed=evidence.reduce((sum,row)=>sum+(row.rubricObserved||0),0);
+      const needsReview=evidence.reduce((sum,row)=>sum+(row.rubricNeedsReview||0),0);
+      const reviewed=evidence.reduce((sum,row)=>sum+(row.rubricReviews||0),0);
+      const totalSignals=deterministic+observed+needsReview;
+      const positive=correct+observed;
+      return {...dimension,deterministic,correct,observed,needsReview,reviewed,percent:totalSignals?Math.round(positive/totalSignals*100):null};
+    });
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
       <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
+      <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
+        <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
+        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.needsReview} a rever</span></footer></article>)}</div>
+      </section>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
   }
