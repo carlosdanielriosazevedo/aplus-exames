@@ -34,13 +34,13 @@ for(const exam of PHYSICS_CHEMISTRY_A_MINI_EXAMS){
   assert.ok(exam.items.some(item=>["table","line-chart","diagram"].includes(item.stimulus?.type)),exam.id+": falta suporte científico.");
 }
 
-assert.equal(allExamItems.length,23,"O simulado 715 deve manter 23 itens.");
+assert.equal(allExamItems.length,23,"O Exame Completo 715 deve manter 23 itens.");
 assert.equal(PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems.length,15);
 assert.equal(PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems.length,8);
 assert.equal(PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalCounted,4);
-assert.equal(new Set(allExamItems.map(item=>item.domain)).size,7,"O simulado deve representar os sete grandes domínios.");
-assert.ok(allExamItems.some(item=>item.responseType==="stepwise"),"O simulado deve incluir resposta por etapas.");
-assert.ok(allExamItems.some(item=>item.responseType==="restricted-response"),"O simulado deve incluir resposta científica aberta.");
+assert.equal(new Set(allExamItems.map(item=>item.domain)).size,7,"O Exame Completo deve representar os sete grandes domínios.");
+assert.ok(allExamItems.some(item=>item.responseType==="stepwise"),"O Exame Completo deve incluir resposta por etapas.");
+assert.ok(allExamItems.some(item=>item.responseType==="restricted-response"),"O Exame Completo deve incluir resposta científica aberta.");
 
 const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
@@ -49,7 +49,7 @@ const learn=readFileSync(new URL("../app/components/PhysicsChemistryLearnPanel.j
 const stepwise=readFileSync(new URL("../app/components/PhysicsChemistryStepwise.js",import.meta.url),"utf8");
 const rubric=readFileSync(new URL("../app/components/PhysicsChemistryRubricReview.js",import.meta.url),"utf8");
 
-for(const [label,source] of [["Treino/Missão",subject],["Mini-exame",mini],["Simulado",full]]){
+for(const [label,source] of [["Treino/Missão",subject],["Mini-exame",mini],["Exame Completo",full]]){
   assert.match(source,/PhysicsChemistryStepwiseEditor/u,label+": deve reutilizar o editor partilhado por etapas.");
   assert.match(source,/PhysicsChemistryRubricReview/u,label+": deve reutilizar a grelha partilhada de respostas abertas.");
 }
@@ -63,7 +63,7 @@ assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Reve
 assert.match(stepwise,/Indicação provisória/u,"Problemas por etapas não podem apresentar a classificação como oficial.");
 assert.match(rubric,/Não atribui nota automática/u,"Respostas científicas abertas não podem ser auto-classificadas como nota final.");
 assert.match(mini,/não mostra a correção durante o mini-exame/u,"Mini-exame não deve revelar feedback imediato.");
-assert.match(full,/Durante o simulado não mostramos correções/u,"Simulado não deve revelar feedback imediato.");
-assert.match(full,/Subtotal já corrigível/u,"Simulado deve distinguir subtotal automático de classificação final.");
+assert.match(full,/Durante o Exame Completo não mostramos correções/u,"Exame Completo não deve revelar feedback imediato.");
+assert.match(full,/Subtotal já corrigível/u,"Exame Completo deve distinguir subtotal automático de classificação final.");
 
-console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 339+ itens · 7+ por submatéria · 2 mini-exames · simulado 715 · componentes partilhados · correção conservadora");
+console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 339+ itens · 7+ por submatéria · 2 mini-exames · Exame Completo 715 · componentes partilhados · correção conservadora");
