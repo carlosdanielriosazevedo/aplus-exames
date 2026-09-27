@@ -25,16 +25,16 @@ export default function PhysicsChemistryRubricReview({item,assessment={},onChang
       <span>{summary.complete?"Concluída":summary.counts.pending+" por avaliar"}</span>
     </div>
     <p className="muted">Não atribui nota automática. Marca o que está efetivamente demonstrado na tua resposta.</p>
-    {rubric.map(criterion=>{
+    {rubric.map((criterion,criterionIndex)=>{
       const evidence=assessment[criterion.id]||{};
       return <article className="fqaRubricCriterion" key={criterion.id}>
-        <div className="fqaRubricCriterionTop"><b>{criterion.label}</b><div className="fqaRubricLevels">
+        <div className="fqaRubricCriterionTop"><div className="fqaRubricCriterionLabel"><small>{"CRITÉRIO "+(criterionIndex+1)}</small><b>{criterion.label}</b></div><div className="fqaRubricLevels" aria-label={"Autoavaliação do critério "+(criterionIndex+1)}>
           {PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS.map(level=><button type="button" key={level.id} className={evidence.status===level.id?"is-"+level.id:""} onClick={()=>update(criterion.id,{status:level.id})}>{level.label}</button>)}
         </div></div>
         <ul>{(criterion.observations||[]).map(observation=>{
           const row=evidence.observations?.[observation.id]||{};
           return <li key={observation.id}>
-            <span>{observation.label}</span>
+            <span><i aria-hidden="true">•</i>{observation.label}</span>
             <div className="fqaObservationLevels">{PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS.map(level=><button type="button" key={level.id} className={row.status===level.id?"is-"+level.id:""} onClick={()=>updateObservation(criterion.id,observation.id,{status:level.id})} aria-label={level.label+" — "+observation.label}>{level.label}</button>)}</div>
           </li>;
         })}</ul>
