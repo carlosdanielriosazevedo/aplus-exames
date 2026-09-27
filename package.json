@@ -107,7 +107,8 @@
     "physics-chemistry-rubric:audit": "node scripts/physics-chemistry-rubric-audit.mjs",
     "physics-chemistry-stepwise:audit": "node scripts/physics-chemistry-stepwise-audit.mjs",
     "physics-chemistry-beta:audit": "node scripts/physics-chemistry-beta-readiness-audit.mjs",
-    "physics-chemistry-review:audit": "node scripts/physics-chemistry-review-progress-audit.mjs"
+    "physics-chemistry-review:audit": "node scripts/physics-chemistry-review-progress-audit.mjs",
+    "exam-submission-check:audit": "node scripts/exam-submission-check-audit.mjs"
   },
   "dependencies": {
     "next": "15.5.24",
