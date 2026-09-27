@@ -1891,9 +1891,9 @@ function Exams({s,go,startMini}){
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
-    <div className="exam locked"><b>📝 Exame de treino</b><span>Prova completa · próxima etapa após validarmos o motor do Mini-exame</span></div>
+    <div className="exam locked"><b>📝 Exame Completo</b><span>Prova completa · disponível quando o motor de exame estiver validado.</span></div>
     <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
-    <div className="notice"><b>O que muda num Mini-exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div><StudentNav active="train" go={go}/>
+    <div className="notice"><b>O que muda num exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div><StudentNav active="train" go={go}/>
   </Shell>
 }
 
