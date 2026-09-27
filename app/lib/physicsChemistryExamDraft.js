@@ -18,10 +18,10 @@ export function loadPhysicsChemistryExamDraft(examId,itemIds=[]){
   }catch{return null}
 }
 
-export function savePhysicsChemistryExamDraft(examId,{itemIds,index,answers,startedAt,review=false,rubricAssessments={}}){
+export function savePhysicsChemistryExamDraft(examId,{itemIds,index,answers,startedAt,review=false,rubricAssessments={},markedForReview=[]}){
   const store=storage();
   if(!store)return;
-  const payload={version:1,examId,itemIds,index,answers,startedAt,review:!!review,rubricAssessments,updatedAt:Date.now()};
+  const payload={version:1,examId,itemIds,index,answers,startedAt,review:!!review,rubricAssessments,markedForReview:Array.from(new Set(markedForReview)).filter(id=>itemIds.includes(id)),updatedAt:Date.now()};
   try{store.setItem(PREFIX+examId,JSON.stringify(payload))}catch{}
 }
 
