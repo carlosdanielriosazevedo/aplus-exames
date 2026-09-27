@@ -1,13 +1,15 @@
 "use client";
 
 export default function ExamSubmissionCheck({
-  items=[],answers={},isAnswered,isRequired=()=>true,onJump,onConfirm,onBack,
+  items=[],answers={},isAnswered,isRequired=()=>true,markedIds=[],onJump,onConfirm,onBack,
   eyebrow="REVER ANTES DE ENTREGAR",title="Confirma as tuas respostas."
 }){
+  const marked=new Set(markedIds||[]);
   const rows=items.map((item,index)=>({
     item,index,
     answered:!!isAnswered?.(item,answers[item.id]),
-    required:!!isRequired(item)
+    required:!!isRequired(item),
+    marked:marked.has(item.id)
   }));
   const requiredRows=rows.filter(row=>row.required);
   const requiredMissing=requiredRows.filter(row=>!row.answered);
@@ -22,11 +24,12 @@ export default function ExamSubmissionCheck({
     <div className="examSubmitSummary">
       <div><small>RESPONDIDAS</small><b>{rows.filter(row=>row.answered).length}/{rows.length}</b></div>
       <div><small>OBRIGATÓRIAS EM BRANCO</small><b>{requiredMissing.length}</b></div>
+      <div><small>MARCADAS PARA REVER</small><b>{rows.filter(row=>row.marked).length}</b></div>
       {optionalRows.length>0&&<div><small>OPCIONAIS RESPONDIDAS</small><b>{optionalAnswered}/{optionalRows.length}</b></div>}
     </div>
     <div className="examSubmitMap" aria-label="Mapa de respostas antes da entrega">
-      {rows.map(row=><button type="button" key={row.item.id} className={(row.answered?"is-answered ":"is-empty ")+(row.required?"is-required":"is-optional")} onClick={()=>onJump?.(row.index)} aria-label={"Ir para a questão "+(row.index+1)+(row.answered?", respondida":", por responder")}>
-        <b>{row.index+1}</b><span>{row.answered?"Respondida":row.required?"Por responder":"Opcional"}</span>
+      {rows.map(row=><button type="button" key={row.item.id} className={(row.answered?"is-answered ":"is-empty ")+(row.required?"is-required ":"is-optional ")+(row.marked?"is-marked":"")} onClick={()=>onJump?.(row.index)} aria-label={"Ir para a questão "+(row.index+1)+(row.answered?", respondida":", por responder")}>
+        <b>{row.index+1}</b><span>{row.marked?"Marcada para rever":row.answered?"Respondida":row.required?"Por responder":"Opcional"}</span>
       </button>)}
     </div>
     {requiredMissing.length>0&&<div className="notice warning"><b>{requiredMissing.length+" "+(requiredMissing.length===1?"questão obrigatória por responder":"questões obrigatórias por responder")}</b><span>Podes entregar assim, mas estas respostas ficam em branco. Usa o mapa para voltar diretamente a uma delas.</span></div>}
