@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
+import PhysicsChemistryReviewProgress,{physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "./PhysicsChemistryReviewProgress";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
@@ -45,8 +46,8 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(examId,rows.map(row=>row.id)));
   const [current,setCurrent]=useState(()=>Math.max(0,Math.min(rows.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
-  const [review,setReview]=useState(false);
-  const [rubricAssessments,setRubricAssessments]=useState({});
+  const [review,setReview]=useState(()=>!!initialDraft?.review);
+  const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
@@ -83,13 +84,10 @@ export default function PhysicsChemistryExam({s,setS,go}){
   useEffect(()=>{if(timeExpired&&!review)finish()},[timeExpired,review]);
   useEffect(()=>{
     if(review)return;
-    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review});
-  },[answers,current,examId,itemIds,review,startedAt]);
+    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments});
+  },[answers,current,examId,itemIds,review,rubricAssessments,startedAt]);
 
-  function finish(){
-    setReview(true);
-    clearPhysicsChemistryExamDraft(examId);
-  }
+  function finish(){setReview(true);}
 
   function saveReviewAndExit(){
     if(!recordedRef.current){
@@ -103,14 +101,18 @@ export default function PhysicsChemistryExam({s,setS,go}){
         sessionId:"fqa-full-"+startedAt
       }));
     }
+    clearPhysicsChemistryExamDraft(examId);
     go("exams");
   }
+
+  const openReviewProgress=physicsChemistryOpenReviewProgress(rows,answers,rubricAssessments);
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
     <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
     <h1>Revisão do Exame Completo</h1>
-    <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
+    <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{openReviewProgress.pending?openReviewProgress.pending+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
+    <PhysicsChemistryReviewProgress items={rows} answers={answers} assessments={rubricAssessments}/>
     <div className="fqaExamScoreGrid">
       <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>
       <div><small>Opcionais</small><b>{optionalKnown.toFixed(1)} / 40</b><span>Contam os 4 melhores.</span></div>
@@ -119,18 +121,20 @@ export default function PhysicsChemistryExam({s,setS,go}){
     <p className="muted">Este subtotal não é apresentado como classificação oficial enquanto existirem respostas abertas ou etapas com correção provisória.</p>
     <div className="fqaExamReviewList">{rows.map((row,index)=>{
       const result=results[index],score=scored[index],value=answers[row.id];
-      return <details key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{score.pending?"Por rever":score.provisional?"Provisório":result.correct?"Correto":"A rever"}</span></summary><div className="reviewChapterBody">
+      const openStatus=physicsChemistryOpenReviewStatus(row,value,rubricAssessments[row.id]||{});
+      return <details key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:score.provisional?"Provisório":result.correct?"Correto":"A rever"}</span></summary><div className="reviewChapterBody">
         <Stimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
         {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/></>}
       </div></details>;
     })}</div>
-    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
+    {openReviewProgress.pending>0&&<div className="notice warning"><b>A revisão ainda não está completa</b><span>Podes guardar e sair na mesma, mas ficam {openReviewProgress.pending} resposta(s) aberta(s) por rever.</span></div>}
+    <button className="primary" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"Guardar com "+openReviewProgress.pending+" por rever":"Guardar revisão e terminar"}</button>
   </Shell>;
 
   return <Shell className="wideStudentShell fqaFullExamPage">
-    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>{savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt});go("exams")}} exitLabel="Guardar e sair"/>
+    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>{savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments});go("exams")}} exitLabel="Guardar e sair"/>
     {initialDraft&&<div className="notice"><b>Rascunho retomado</b><span>As respostas e o tempo de início foram recuperados deste dispositivo.</span></div>}
     <div className="fqaExamMeta"><span>{item.examSection==="mandatory"?"ITEM OBRIGATÓRIO":"ITEM OPCIONAL"}</span><b>{item.examPoints} pontos</b><small>{item.year}</small><strong className={inTolerance?"is-tolerance":""}>{inTolerance?"Tolerância · ":"Tempo · "}{String(Math.floor(remainingSeconds/60)).padStart(2,"0")}:{String(remainingSeconds%60).padStart(2,"0")}</strong></div>
     <Stimulus item={item}/>
