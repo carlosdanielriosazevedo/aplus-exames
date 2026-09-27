@@ -53,7 +53,14 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const openItems=exam.items.filter(row=>row.responseType!=="multiple-choice");
   const rubricCriteria=openItems.flatMap(row=>(row.rubric?.criteria||[]).map(criterion=>({itemId:row.id,criterionId:criterion.id})));
   const reviewedCriteria=rubricCriteria.filter(({itemId,criterionId})=>selfAssessment[itemId]?.[criterionId]?.status).length;
-  const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;\n  const openReviewRows=openItems.map(row=>{\n    const criteria=row.rubric?.criteria||[];\n    const summary=selfAssessmentSummary(criteria,selfAssessment[row.id]||{});\n    return {row,index:exam.items.findIndex(item=>item.id===row.id),answered:answerFilled(row,answers[row.id]),summary};\n  });\n  const pendingOpenReviewRows=openReviewRows.filter(entry=>entry.answered&&!entry.summary.complete);\n  const completedOpenReviews=openReviewRows.filter(entry=>entry.answered&&entry.summary.complete).length;
+  const revisedOpenItems=openItems.filter(row=>(revisions[row.id]||[]).length>0).length;
+  const openReviewRows=openItems.map(row=>{
+    const criteria=row.rubric?.criteria||[];
+    const summary=selfAssessmentSummary(criteria,selfAssessment[row.id]||{});
+    return {row,index:exam.items.findIndex(item=>item.id===row.id),answered:answerFilled(row,answers[row.id]),summary};
+  });
+  const pendingOpenReviewRows=openReviewRows.filter(entry=>entry.answered&&!entry.summary.complete);
+  const completedOpenReviews=openReviewRows.filter(entry=>entry.answered&&entry.summary.complete).length;
   const writingProfile=useMemo(()=>writingMemoryProfile(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const writingProgress=useMemo(()=>writingResolvedAttentions(writingMemory,{excludeAttemptId:attemptId}),[writingMemory,attemptId]);
   const activeWritingFocus=useMemo(()=>writingActivePreAnswerFocus(writingMemory,item,{excludeAttemptId:attemptId}),[writingMemory,item,attemptId]);
@@ -160,7 +167,13 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     return `${group} · ${row?.groupItemNumber??"—"}`;
   };
 
-  const goToNextPendingReview=()=>{\n    const target=pendingOpenReviewRows[0];\n    if(!target)return;\n    document.getElementById("ptx-review-"+target.row.id)?.scrollIntoView({behavior:"smooth",block:"start"});\n  };\n\n  const completeAndExit=()=>{
+  const goToNextPendingReview=()=>{
+    const target=pendingOpenReviewRows[0];
+    if(!target)return;
+    document.getElementById("ptx-review-"+target.row.id)?.scrollIntoView({behavior:"smooth",block:"start"});
+  };
+
+  const completeAndExit=()=>{
     if(!completedRef.current){
       completedRef.current=true;
       let results=buildResults();
@@ -185,6 +198,14 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         <div><strong>{deterministicCorrect}/{deterministicItems.length}</strong><span>certas nas escolhas múltiplas</span></div>
         <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
+      </section>
+      <section className={"ptx-review-progress "+(pendingOpenReviewRows.length?"has-pending":"is-complete")} aria-label="Progresso da revisão das respostas abertas">
+        <div>
+          <span>REVISÃO POR CRITÉRIOS</span>
+          <strong>{completedOpenReviews+" de "+openReviewRows.filter(entry=>entry.answered).length+" concluída"+(openReviewRows.filter(entry=>entry.answered).length===1?"":"s")}</strong>
+          <p>{pendingOpenReviewRows.length?pendingOpenReviewRows.length+" resposta"+(pendingOpenReviewRows.length===1?"":"s")+" ainda por rever. Quest"+(pendingOpenReviewRows.length===1?"ão ":"ões ")+pendingOpenReviewRows.map(entry=>entry.index+1).join(", ")+".":"Todas as respostas abertas respondidas já foram revistas."}</p>
+        </div>
+        {pendingOpenReviewRows.length>0&&<button type="button" className="ptx-ghost" onClick={goToNextPendingReview}>Ir para a próxima por rever</button>}
       </section>
       {isFullExam&&<section className="ptx-exam-policy" aria-label="Regra de classificação do Exame Completo"><strong>Modelo de classificação 2026</strong><p>Contam sempre 10 itens. Dos outros 5, entram automaticamente os 3 com melhor pontuação. A produção escrita vale 44 pontos.</p><span>{fullClassification.answeredOptionalCount===0?"Ainda não respondeste a nenhum dos 5 itens opcionais.":fullClassification.answeredOptionalCount<5?`Seleção provisória com ${fullClassification.answeredOptionalCount}/5 opcionais respondidos: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`:`Opcionais que contam para a classificação: ${fullClassification.selectedOptionalItemIds.map(fullItemLabel).join(" · ")}.`}</span></section>}
       {writingProgress.resolved.length>0&&<section className="ptx-progress-story" aria-label="Evolução recente nas autoavaliações de escrita">
@@ -212,7 +233,8 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
             const rowRevisions=revisions[row.id]||[];
             const editing=Object.prototype.hasOwnProperty.call(revisionDrafts,row.id);
             const priorPattern=writingMemoryInsight(writingMemory,row,{excludeAttemptId:attemptId});
-            const openStatus=row.responseType==="multiple-choice"?null:!answerFilled(row,value)?"Sem resposta":summary.complete?"Revisão concluída":"Por rever";\n            return <article id={"ptx-review-"+row.id} className="ptx-review-item" key={row.id}>
+            const openStatus=row.responseType==="multiple-choice"?null:!answerFilled(row,value)?"Sem resposta":summary.complete?"Revisão concluída":"Por rever";
+            return <article id={"ptx-review-"+row.id} className="ptx-review-item" key={row.id}>
               <div className="ptx-review-top"><span>{row.id.split("-").at(-1)}</span>{row.responseType==="multiple-choice"?<strong className={result.correct?"is-correct":"is-wrong"}>{answerFilled(row,value)?(result.correct?"Correta":"A rever"):"Sem resposta"}</strong>:<strong className={summary.complete?"is-correct":"is-pending"}>{openStatus}</strong>}</div>
               {reviewBlock.type==="single-item"&&row.stimulus&&<p className="ptx-review-stimulus">{row.stimulus}</p>}<h3>{row.prompt}</h3>
               {row.responseType==="multiple-choice"?<>
