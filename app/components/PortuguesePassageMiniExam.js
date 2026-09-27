@@ -191,7 +191,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     return <main className="ptx-shell">
       <header className="ptx-header">
         <div><span className="ptx-kicker">Português 639 · {isFullExam?"Exame Completo":"Mini-exame"}</span><h1>{isFullExam?"Rever o Exame Completo":"Rever o mini-exame"}</h1></div>
-        <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={completeAndExit}>{isFullExam?"Guardar revisão e terminar":"Guardar revisão e voltar aos mini-exames"}</button>}</div>
+        <div className="ptx-header-actions">{onExit&&<button className="ptx-ghost" onClick={completeAndExit}>{pendingOpenReviewRows.length>0?"Guardar com "+pendingOpenReviewRows.length+" por rever":isFullExam?"Guardar revisão e terminar":"Guardar revisão e voltar aos mini-exames"}</button>}</div>
       </header>
       <section className="ptx-summary">
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
