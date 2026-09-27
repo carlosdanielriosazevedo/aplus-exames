@@ -43,6 +43,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   const [review,setReview]=useState(()=>!!initialDraft?.review);
   const [submitCheck,setSubmitCheck]=useState(false);
   const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
+  const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
@@ -58,8 +59,8 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   },[review]);
   useEffect(()=>{if(remaining===0&&!review)finish({force:true})},[remaining,review]);
   useEffect(()=>{
-    savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments});
-  },[answers,exam.id,index,itemIds,review,rubricAssessments,startedAt]);
+    savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});
+  },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
   const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
   const results=useMemo(()=>exam.items.map((row,index)=>row.responseType==="restricted-response"&&filled(row,answers[row.id])
@@ -75,11 +76,12 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     if(!filled(item,answers[item.id]))return;
     if(index<exam.items.length-1)setIndex(value=>value+1);
   }
+  function toggleMarked(id){setMarkedForReview(current=>current.includes(id)?current.filter(row=>row!==id):[...current,id]);}
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
     if(openReviewProgress.pending>0){
-      savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review:true,rubricAssessments});
+      savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review:true,rubricAssessments,markedForReview});
       go("exams");
       return;
     }
@@ -106,6 +108,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
       items={exam.items}
       answers={answers}
       isAnswered={filled}
+      markedIds={markedForReview}
       onBack={()=>setSubmitCheck(false)}
       onJump={next=>{setSubmitCheck(false);setIndex(next)}}
       onConfirm={()=>{setSubmitCheck(false);setReview(true)}}
@@ -138,13 +141,14 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   </Shell>;
 
   return <Shell className="wideStudentShell fqaMiniExamPage">
-    <StudySessionHeader progress={(index+1)/exam.items.length*100} label={(index+1)+"/"+exam.items.length} onExit={()=>{savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments});go("exams")}} exitLabel="Guardar e sair"/>
+    <StudySessionHeader progress={(index+1)/exam.items.length*100} label={(index+1)+"/"+exam.items.length} onExit={()=>{savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});go("exams")}} exitLabel="Guardar e sair"/>
     {initialDraft&&<div className="notice"><b>Rascunho retomado</b><span>As respostas e o tempo de início foram recuperados deste dispositivo.</span></div>}
     <div className="fqaExamMeta"><span>MINI-EXAME</span><b>{exam.label.replace("Mini-exame · ","")}</b><small>{formatTime(remaining)}</small></div>
     <PhysicsChemistryStimulus item={item}/>
     <div className="questionCard">
       <h2>{item.prompt}</h2>
       <Editor item={item} value={answers[item.id]} onChange={answer}/>
+      <button type="button" className={"examMarkButton "+(markedForReview.includes(item.id)?"is-marked":"")} onClick={()=>toggleMarked(item.id)}>{markedForReview.includes(item.id)?"★ Marcada para rever":"☆ Marcar para rever"}</button>
       <div className="fqaMiniAnswerActions">
         <button className="primary" disabled={!filled(item,answers[item.id])} onClick={respond}>Responder</button>
         {index===exam.items.length-1&&<button className="secondary" onClick={()=>finish()}>Terminar e rever</button>}
@@ -152,7 +156,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     </div>
     <div className="fqaExamNavigation">
       <button className="secondary" disabled={index===0} onClick={()=>setIndex(value=>value-1)}>← Anterior</button>
-      <div className="fqaExamDots">{exam.items.map((row,rowIndex)=><button type="button" key={row.id} className={(rowIndex===index?"current ":"")+(filled(row,answers[row.id])?"done":"")} onClick={()=>setIndex(rowIndex)} aria-label={"Questão "+(rowIndex+1)}>{rowIndex+1}</button>)}</div>
+      <div className="fqaExamDots">{exam.items.map((row,rowIndex)=><button type="button" key={row.id} className={(rowIndex===index?"current ":"")+(filled(row,answers[row.id])?"done ":"")+(markedForReview.includes(row.id)?"marked":"")} onClick={()=>setIndex(rowIndex)} aria-label={"Questão "+(rowIndex+1)}>{rowIndex+1}</button>)}</div>
       <button className="secondary" disabled={index===exam.items.length-1} onClick={()=>setIndex(value=>value+1)}>Seguinte →</button>
     </div>
     <p className="muted fqaExamRule">O botão “Responder” confirma a resposta atual, mas não mostra a correção durante o mini-exame. Podes voltar atrás antes de terminar.</p>
