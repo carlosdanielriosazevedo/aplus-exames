@@ -4,12 +4,14 @@ import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,Study
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
+import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
 import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
+import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -40,6 +42,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
   const [results,setResults]=useState([]);
+  const [rubricAssessment,setRubricAssessment]=useState({});
   const progress=subjectProgressFor(s,SUBJECT_ID);
   const scopedItems=physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
@@ -60,7 +63,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;
     const sessionId=createSubjectSessionId(SUBJECT_ID,kind);
     setSession({sessionId,kind,label,domain,items,current:0});
-    setAnswer(null);setFeedback(null);setResults([]);
+    setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
     setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items}));
   }
 
@@ -98,13 +101,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     if(session.current>=session.items.length-1){
       setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results,sessionId:session.sessionId}));
       const kind=session.kind;
-      setSession(null);setAnswer(null);setFeedback(null);setResults([]);
+      setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
       go(kind==="diagnostic"?"progress":"home");
       return;
     }
     const current=session.current+1;
     setSession(prev=>({...prev,current}));
-    setAnswer(null);setFeedback(null);
+    setAnswer(null);setFeedback(null);setRubricAssessment({});
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));
   }
 
@@ -119,7 +122,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   function resetPhysicsChemistry(){
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
-    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);
+    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
   }
 
   if(session){
@@ -143,7 +146,13 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
           {item.responseType==="multiple-choice"&&<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span></div>}
           {item.responseType==="stepwise"&&<div className="fqaConstructedReview"><div className="notice"><b>{"Correção provisória · "+feedback.provisionalPoints+"/"+feedback.maxPoints+" pontos de treino"}</b><span>{feedback.note}</span></div>{feedback.steps.map((step,index)=><div className={"fqaStepReview "+(step.correct?"ok":"review")} key={step.id}><b>{"Etapa "+(index+1)+" · "+(step.correct?"correta":"a rever")}</b><span>{"Referência: "+step.expected}</span></div>)}<p className="muted">No exame oficial são aceites processos cientificamente corretos alternativos e aplicam-se regras próprias a erros numéricos, analíticos, unidades e dependência entre etapas.</p></div>}
-          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><ul>{(item.criteria||[]).map(criterion=><li key={criterion}>{criterion}</li>)}</ul><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
+          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><PhysicsChemistryRubricReview item={item} assessment={rubricAssessment} onChange={nextAssessment=>{
+            setRubricAssessment(nextAssessment);
+            const nextFeedback=physicsChemistryRubricResult(item,answer,nextAssessment);
+            setFeedback(nextFeedback);
+            setResults(current=>{const next=[...current];next[next.length-1]=nextFeedback;return next});
+            setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:[...results.slice(0,-1),nextFeedback],currentResult:nextFeedback,currentAnswer:answer}));
+          }}/><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
           <button className="primary" onClick={next}>{position===session.items.length?"Terminar":"Seguinte"}</button>
         </>}
       </div>
