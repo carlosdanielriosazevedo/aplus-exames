@@ -1,6 +1,7 @@
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
+import {physicsChemistryRubricFor} from "./physicsChemistryRubric.js";
 
 function normalizeScientificNumber(value){
   const normalized=String(value??"").trim().replace(",",".").replace(/[×·]10\^?/iu,"e").replace(/\s+/g,"");
@@ -46,8 +47,8 @@ export function gradePhysicsChemistryResponse(item,value){
   if(!text)return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
   return {
     status:"awaiting-rubric",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,
-    responseText:text,criteria:(item.criteria||[]).map((label,index)=>({id:"criterion-"+(index+1),label,status:"pending"})),
-    note:"Resposta aberta: compara a tua resposta com os critérios. A app não atribui automaticamente uma classificação final."
+    responseText:text,criteria:physicsChemistryRubricFor(item).map(criterion=>({...criterion,status:"pending",studentEvidence:[],observations:(criterion.observations||[]).map(observation=>({...observation,status:"pending",studentEvidence:[]}))})),
+    note:"Resposta aberta: compara a tua resposta com os critérios observáveis. A app não atribui automaticamente uma classificação final."
   };
 }
 
