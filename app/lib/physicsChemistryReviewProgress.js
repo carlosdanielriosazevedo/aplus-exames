@@ -9,9 +9,9 @@ export function physicsChemistryOpenReviewStatus(item,value,assessment={}){
 
 export function physicsChemistryOpenReviewProgress(items=[],answers={},assessments={}){
   const rows=items
-    .filter(item=>item.responseType==="restricted-response")
-    .map(item=>({item,status:physicsChemistryOpenReviewStatus(item,answers[item.id],assessments[item.id]||{})}))
+    .map((item,index)=>({item,index,status:physicsChemistryOpenReviewStatus(item,answers[item.id],assessments[item.id]||{})}))
     .filter(row=>row.status?.answered);
   const complete=rows.filter(row=>row.status.complete).length;
-  return {total:rows.length,complete,pending:rows.length-complete,rows};
+  const pendingRows=rows.filter(row=>!row.status.complete);
+  return {total:rows.length,complete,pending:pendingRows.length,rows,pendingRows,pendingQuestionNumbers:pendingRows.map(row=>row.index+1)};
 }
