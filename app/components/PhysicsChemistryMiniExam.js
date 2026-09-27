@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
+import ExamSubmissionCheck from "./ExamSubmissionCheck";
 import PhysicsChemistryReviewProgress from "./PhysicsChemistryReviewProgress";
 import {physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "../lib/physicsChemistryReviewProgress";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
@@ -40,6 +41,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   const [index,setIndex]=useState(()=>Math.max(0,Math.min(exam.items.length-1,initialDraft?.index||0)));
   const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});
   const [review,setReview]=useState(()=>!!initialDraft?.review);
+  const [submitCheck,setSubmitCheck]=useState(false);
   const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
@@ -54,7 +56,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     const timer=window.setInterval(()=>setNow(Date.now()),1000);
     return ()=>window.clearInterval(timer);
   },[review]);
-  useEffect(()=>{if(remaining===0&&!review)finish()},[remaining,review]);
+  useEffect(()=>{if(remaining===0&&!review)finish({force:true})},[remaining,review]);
   useEffect(()=>{
     savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments});
   },[answers,exam.id,index,itemIds,review,rubricAssessments,startedAt]);
@@ -73,7 +75,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     if(!filled(item,answers[item.id]))return;
     if(index<exam.items.length-1)setIndex(value=>value+1);
   }
-  function finish(){setReview(true);}
+  function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
     if(openReviewProgress.pending>0){
@@ -98,6 +100,17 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     const node=document.getElementById("fqa-review-"+target.item.id);
     if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}
   }
+
+  if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">
+    <ExamSubmissionCheck
+      items={exam.items}
+      answers={answers}
+      isAnswered={filled}
+      onBack={()=>setSubmitCheck(false)}
+      onJump={next=>{setSubmitCheck(false);setIndex(next)}}
+      onConfirm={()=>{setSubmitCheck(false);setReview(true)}}
+    />
+  </Shell>;
 
   if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">
     <button className="back" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"← Guardar com "+openReviewProgress.pending+" por rever e voltar aos exames":"← Guardar revisão e voltar aos exames"}</button>
@@ -134,7 +147,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
       <Editor item={item} value={answers[item.id]} onChange={answer}/>
       <div className="fqaMiniAnswerActions">
         <button className="primary" disabled={!filled(item,answers[item.id])} onClick={respond}>Responder</button>
-        {index===exam.items.length-1&&<button className="secondary" onClick={finish}>Terminar e rever</button>}
+        {index===exam.items.length-1&&<button className="secondary" onClick={()=>finish()}>Terminar e rever</button>}
       </div>
     </div>
     <div className="fqaExamNavigation">
