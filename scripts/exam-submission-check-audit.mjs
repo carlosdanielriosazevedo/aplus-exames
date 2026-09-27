@@ -20,9 +20,9 @@ for(const [label,source] of [["Mini-exame FQ A",fqaMini],["Exame Completo FQ A",
 }
 assert.match(fqaFull,/row=>row.examSection==="mandatory"/u,"FQ A deve distinguir obrigatórios de opcionais no Exame Completo.");
 assert.match(portuguese,/row=>!isFullExam||row.classificationMode!=="best-of-five"/u,"Português deve distinguir obrigatórios de opcionais no Exame Completo.");
-assert.match(fqaFull,/finish({force:true})/u,"quando o tempo termina, FQ A deve entrar na revisão sem permitir continuar a responder.");
-assert.match(fqaMini,/finish({force:true})/u,"quando o tempo termina, o Mini-exame FQ A deve entrar na revisão sem permitir continuar a responder.");
-assert.match(portuguese,/if(examTimeExpired&&!review)setReview(true)/u,"quando o tempo termina, Português deve entrar diretamente na revisão.");
+assert.match(fqaFull,/finish\(\{force:true\}\)/u,"quando o tempo termina, FQ A deve entrar na revisão sem permitir continuar a responder.");
+assert.match(fqaMini,/finish\(\{force:true\}\)/u,"quando o tempo termina, o Mini-exame FQ A deve entrar na revisão sem permitir continuar a responder.");
+assert.match(portuguese,/if\(examTimeExpired&&!review\)setReview\(true\)/u,"quando o tempo termina, Português deve entrar diretamente na revisão.");
 assert.match(math,/REVER ANTES DE ENTREGAR/u,"Matemática A deve manter o checkpoint já existente antes da entrega.");
 assert.match(math,/Confirma as tuas respostas/u,"Matemática A deve continuar a permitir rever respostas antes de entregar.");
 assert.match(css,/\.examSubmitCheck\{/u,"o checkpoint partilhado deve ter layout próprio.");
