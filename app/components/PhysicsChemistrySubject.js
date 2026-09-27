@@ -200,11 +200,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go}/>{sharedNav}</Shell>;
   if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
-  if(view==="exams")return <Shell className="wideStudentShell">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o simulado completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
+  if(view==="exams")return <Shell className="wideStudentShell">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o exame completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
       <button onClick={()=>go("physicsChemistryMini2")}><span>🧪</span><div><b>Mini-exame · Modelo 2</b><small>12 itens · 45 min · combinação diferente de 10.º e 11.º</small></div><em>→</em></button>
-      <button onClick={()=>go("physicsChemistryExam")}><span>⏱️</span><div><b>Simulado completo · 715</b><small>23 itens · 200 pontos · 120 min + 30 min de tolerância</small></div><em>→</em></button>
+      <button onClick={()=>go("physicsChemistryExam")}><span>⏱️</span><div><b>Exame Completo · 715</b><small>23 itens · 200 pontos · 120 min + 30 min de tolerância</small></div><em>→</em></button>
     </div>{sharedNav}</Shell>;
 
   if(view==="progress"){
