@@ -23,14 +23,14 @@ export function PhysicsChemistryStepwiseEditor({item,value,onChange,disabled=fal
         <label>Relação / processo
           <input disabled={disabled} value={row.work} onChange={event=>update(step.id,{work:event.target.value})} placeholder={step.type==="numeric"?"Ex.: v = fλ":"Ex.: Kc = [B]²/[A]"}/>
         </label>
-        <div className="fqaStepResultRow">
+        {step.type==="numeric"&&<div className="fqaStepResultRow">
           <label>Resultado
-            <input disabled={disabled} value={row.result} onChange={event=>update(step.id,{result:event.target.value})} placeholder={step.type==="numeric"?"Valor numérico":"Expressão / resultado"}/>
+            <input disabled={disabled} value={row.result} onChange={event=>update(step.id,{result:event.target.value})} placeholder="Valor numérico"/>
           </label>
-          {step.type==="numeric"&&step.unit&&<label>Unidade
+          {step.unit&&<label>Unidade
             <input disabled={disabled} value={row.unit} onChange={event=>update(step.id,{unit:event.target.value})} placeholder={step.unit}/>
           </label>}
-        </div>
+        </div>}
       </section>;
     })}
   </div>;
