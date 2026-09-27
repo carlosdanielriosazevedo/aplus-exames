@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {PHYSICS_CHEMISTRY_A_MINI_EXAMS} from "../app/data/physicsChemistryMiniExams.js";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../app/data/physicsChemistryExamBlueprint.js";
-import {physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "../app/components/PhysicsChemistryReviewProgress.js";
+import {physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "../app/lib/physicsChemistryReviewProgress.js";
 
 const openItem=PHYSICS_CHEMISTRY_A_MINI_EXAMS.flatMap(exam=>exam.items).find(item=>item.responseType==="restricted-response");
 assert.ok(openItem,"deve existir pelo menos uma resposta aberta num mini-exame.");
