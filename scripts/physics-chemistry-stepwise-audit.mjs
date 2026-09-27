@@ -67,6 +67,7 @@ const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js
 const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
 const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const progress=readFileSync(new URL("../app/lib/subjectProgress.js",import.meta.url),"utf8");
+const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 
 assert.match(editor,/Relação \/ processo/u,"o aluno deve explicitar o processo em cada etapa.");
 assert.match(editor,/Erro tipo/u,"a revisão deve tornar visível a classificação provisória do erro.");
@@ -78,5 +79,10 @@ assert.match(progress,/structuredScoredAttempts/u,"o progresso deve guardar tent
 assert.match(progress,/structuredNormalizedEarned/u,"o progresso deve guardar desempenho normalizado sem o transformar em nota oficial.");
 assert.match(progress,/structuredNeedsReview/u,"processos alternativos devem permanecer sinalizados para revisão.");
 assert.match(subject,/problemas por etapas/u,"o progresso de FQ A deve tornar visível a evidência dos problemas por etapas.");
+assert.match(editor,/fqaConstructedIntro/u,"o editor deve ter cabeçalho compacto comum.");
+assert.match(editor,/fqaStepHead/u,"cada etapa deve ter hierarquia visual própria.");
+assert.match(editor,/inputMode="decimal"/u,"resultados numéricos devem abrir teclado adequado em mobile.");
+assert.match(css,/fqaRubricLevels button:focus-visible/u,"os controlos construídos devem ter foco de teclado visível.");
+assert.match(css,/@media\(max-width:430px\)/u,"o polimento deve contemplar ecrãs móveis estreitos.");
 
 console.log("✓ FQ A stepwise: processo + resultado + unidade · tipo 1/2 · follow-through · processos alternativos em revisão · evidência no Progresso");
