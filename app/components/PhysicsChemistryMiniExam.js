@@ -76,6 +76,11 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   function finish(){setReview(true);}
 
   function saveReviewAndExit(){
+    if(openReviewProgress.pending>0){
+      savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review:true,rubricAssessments});
+      go("exams");
+      return;
+    }
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
