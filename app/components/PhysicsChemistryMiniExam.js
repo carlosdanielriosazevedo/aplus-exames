@@ -96,7 +96,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   }
 
   if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">
-    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
+    <button className="back" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"← Guardar com "+openReviewProgress.pending+" por rever e voltar aos exames":"← Guardar revisão e voltar aos exames"}</button>
     <p className="eyebrow">FÍSICA E QUÍMICA A · MINI-EXAME</p>
     <h1>Rever o mini-exame</h1>
     <div className="fqaExamScoreGrid">
