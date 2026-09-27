@@ -84,7 +84,6 @@ export default function PhysicsChemistryExam({s,setS,go}){
 
   useEffect(()=>{if(timeExpired&&!review)finish()},[timeExpired,review]);
   useEffect(()=>{
-    if(review)return;
     savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments});
   },[answers,current,examId,itemIds,review,rubricAssessments,startedAt]);
 
