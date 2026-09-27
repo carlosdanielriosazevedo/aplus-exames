@@ -43,6 +43,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const [revisions,setRevisions]=useState(()=>initialDraft?.revisions||{});
   const [writingMemory,setWritingMemory]=useState([]);
   const [dismissedWritingFocus,setDismissedWritingFocus]=useState(()=>initialDraft?.dismissedWritingFocus||{});
+  const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);
   const [attemptId]=useState(()=>initialDraft?.attemptId||`ptx-${Date.now()}-${Math.random().toString(36).slice(2,8)}`);
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
@@ -89,9 +90,9 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   useEffect(()=>{
     if(!onDraftChange||completedRef.current)return;
     onDraftChange(portugueseMiniExamDraftSnapshot({
-      examId,itemIds:exam.items.map(row=>row.id),index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt
+      examId,itemIds:exam.items.map(row=>row.id),index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,markedForReview,attemptId,startedAt
     }));
-  },[answers,attemptId,dismissedWritingFocus,exam,examId,index,onDraftChange,review,revisionDrafts,revisions,selfAssessment,startedAt]);
+  },[answers,attemptId,dismissedWritingFocus,exam,examId,index,markedForReview,onDraftChange,review,revisionDrafts,revisions,selfAssessment,startedAt]);
 
   const rememberAssessment=(row,assessment)=>setWritingMemory(current=>{
     const next=recordPortugueseWritingMemory(current,{attemptId,item:row,assessment});
@@ -99,6 +100,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
     return next;
   });
   const setAnswer=value=>setAnswers(current=>({...current,[item.id]:value}));
+  const toggleMarked=itemId=>setMarkedForReview(current=>current.includes(itemId)?current.filter(id=>id!==itemId):[...current,itemId]);
   const goTo=next=>{setIndex(Math.max(0,Math.min(exam.items.length-1,next)));setMobileTextOpen(false);window.scrollTo?.({top:0,behavior:"smooth"});};
   const updateCriterion=(row,criterionId,patch)=>{
     const itemId=row.id;
@@ -178,7 +180,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   const completeAndExit=()=>{
     if(pendingOpenReviewRows.length>0){
       onDraftChange?.(portugueseMiniExamDraftSnapshot({
-        examId,itemIds:exam.items.map(row=>row.id),index,review:true,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt
+        examId,itemIds:exam.items.map(row=>row.id),index,review:true,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,markedForReview,attemptId,startedAt
       }));
       onExit?.();
       return;
@@ -202,6 +204,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         items={exam.items}
         answers={answers}
         isAnswered={answerFilled}
+        markedIds={markedForReview}
         isRequired={row=>!isFullExam||row.classificationMode!=="best-of-five"}
         onBack={()=>setSubmitCheck(false)}
         onJump={next=>{setSubmitCheck(false);goTo(next)}}
@@ -346,7 +349,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       <div className="ptx-header-actions">{remainingSeconds!==null&&<div className={`ptx-timer ${remainingSeconds<=600?"is-warning":""} ${inTolerance?"is-tolerance":""}`} aria-live="polite"><span>{inTolerance?"Tolerância":"Tempo de prova"}</span><strong>{formatRemainingTime(remainingSeconds)}</strong>{isFullExam&&<small>{inTolerance?"tolerância em curso":"depois: +30 min de tolerância"}</small>}</div>}{onExit&&<button className="ptx-ghost" onClick={onExit}>Sair</button>}<div className="ptx-progress-copy"><strong>{index+1}</strong> / {exam.itemCount}</div></div>
     </header>
     <div className="ptx-progress" aria-label={`Questão ${index+1} de ${exam.itemCount}`}><span style={{width:`${((index+1)/exam.itemCount)*100}%`}} /></div>
-    <nav className={`ptx-question-nav ${isFullExam?"is-full-exam":""}`} aria-label="Navegação entre questões">{navigationGroups.map(group=><div className="ptx-nav-group" key={group.label}><span className="ptx-nav-group-label">{group.label}</span><div>{group.items.map(({row,rowIndex})=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""} ${isFullExam&&row.classificationMode==="best-of-five"?"is-optional":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para ${isFullExam?`${group.label}, item ${row.groupItemNumber??rowIndex+1}`:`questão ${rowIndex+1}`}`}>{isFullExam?(row.groupItemNumber??rowIndex+1):(rowIndex+1)}</button>)}</div></div>)}</nav>
+    <nav className={`ptx-question-nav ${isFullExam?"is-full-exam":""}`} aria-label="Navegação entre questões">{navigationGroups.map(group=><div className="ptx-nav-group" key={group.label}><span className="ptx-nav-group-label">{group.label}</span><div>{group.items.map(({row,rowIndex})=><button key={row.id} className={`${rowIndex===index?"is-active":""} ${answerFilled(row,answers[row.id])?"is-answered":""} ${markedForReview.includes(row.id)?"is-marked":""} ${isFullExam&&row.classificationMode==="best-of-five"?"is-optional":""}`} onClick={()=>goTo(rowIndex)} aria-label={`Ir para ${isFullExam?`${group.label}, item ${row.groupItemNumber??rowIndex+1}`:`questão ${rowIndex+1}`}`}>{isFullExam?(row.groupItemNumber??rowIndex+1):(rowIndex+1)}</button>)}</div></div>)}</nav>
     <button className="ptx-mobile-text-toggle" onClick={()=>setMobileTextOpen(current=>!current)}>{mobileTextOpen?"Fechar texto":"Ver texto-base"}</button>
     <div className="ptx-workspace">
       <aside className={`ptx-passage ${mobileTextOpen?"is-mobile-open":""}`}><span className="ptx-passage-label">{block.type==="shared-passage"?(isFullExam?`${String(item.passageTitle||"").split("—")[0].trim()} · texto-base`:`Texto-base · questões ${exam.items.indexOf(block.items[0])+1}–${exam.items.indexOf(block.items.at(-1))+1}`):"Suporte da questão"}</span><h2>{block.type==="shared-passage"?block.title:(item.passageTitle||"Item autónomo")}</h2><p>{block.type==="shared-passage"?block.passageText:item.stimulus}</p></aside>
@@ -359,6 +362,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
             <ul>{activeWritingFocus.rows.map(focus=><li key={focus.criterionId}><b>{focus.prompt}</b><span>{focus.message}</span></li>)}</ul>
           </aside>}
           <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p></div>}
+        <button type="button" className={"examMarkButton "+(markedForReview.includes(item.id)?"is-marked":"")} onClick={()=>toggleMarked(item.id)}>{markedForReview.includes(item.id)?"★ Marcada para rever":"☆ Marcar para rever"}</button>
         <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setSubmitCheck(true)}>Terminar e rever o exame</button>}</div>
       </section>
     </div>
