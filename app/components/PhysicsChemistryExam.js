@@ -51,6 +51,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const [review,setReview]=useState(()=>!!initialDraft?.review);
   const [submitCheck,setSubmitCheck]=useState(false);
   const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});
+  const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);
   const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());
   const [now,setNow]=useState(Date.now);
   const recordedRef=useRef(false);
@@ -86,14 +87,15 @@ export default function PhysicsChemistryExam({s,setS,go}){
 
   useEffect(()=>{if(timeExpired&&!review)finish({force:true})},[timeExpired,review]);
   useEffect(()=>{
-    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments});
-  },[answers,current,examId,itemIds,review,rubricAssessments,startedAt]);
+    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments,markedForReview});
+  },[answers,current,examId,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
+  function toggleMarked(id){setMarkedForReview(current=>current.includes(id)?current.filter(row=>row!==id):[...current,id]);}
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
     if(openReviewProgress.pending>0){
-      savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review:true,rubricAssessments});
+      savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review:true,rubricAssessments,markedForReview});
       go("exams");
       return;
     }
@@ -125,6 +127,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
       items={rows}
       answers={answers}
       isAnswered={answered}
+      markedIds={markedForReview}
       isRequired={row=>row.examSection==="mandatory"}
       onBack={()=>setSubmitCheck(false)}
       onJump={next=>{setSubmitCheck(false);setCurrent(next)}}
@@ -159,17 +162,18 @@ export default function PhysicsChemistryExam({s,setS,go}){
   </Shell>;
 
   return <Shell className="wideStudentShell fqaFullExamPage">
-    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>{savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments});go("exams")}} exitLabel="Guardar e sair"/>
+    <StudySessionHeader progress={(current+1)/rows.length*100} label={(current+1)+"/"+rows.length} onExit={()=>{savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments,markedForReview});go("exams")}} exitLabel="Guardar e sair"/>
     {initialDraft&&<div className="notice"><b>Rascunho retomado</b><span>As respostas e o tempo de início foram recuperados deste dispositivo.</span></div>}
     <div className="fqaExamMeta"><span>{item.examSection==="mandatory"?"ITEM OBRIGATÓRIO":"ITEM OPCIONAL"}</span><b>{item.examPoints} pontos</b><small>{item.year}</small><strong className={inTolerance?"is-tolerance":""}>{inTolerance?"Tolerância · ":"Tempo · "}{String(Math.floor(remainingSeconds/60)).padStart(2,"0")}:{String(remainingSeconds%60).padStart(2,"0")}</strong></div>
     <Stimulus item={item}/>
     <div className="questionCard">
       <h2>{item.prompt}</h2>
       <ResponseEditor item={item} value={answers[item.id]} onChange={value=>setAnswers(prev=>({...prev,[item.id]:value}))}/>
+      <button type="button" className={"examMarkButton "+(markedForReview.includes(item.id)?"is-marked":"")} onClick={()=>toggleMarked(item.id)}>{markedForReview.includes(item.id)?"★ Marcada para rever":"☆ Marcar para rever"}</button>
     </div>
     <div className="fqaExamNavigation">
       <button className="secondary" disabled={current===0} onClick={()=>setCurrent(value=>value-1)}>← Anterior</button>
-      <div className="fqaExamDots">{rows.map((row,index)=><button type="button" key={row.id} className={(index===current?"current ":"")+(answered(row,answers[row.id])?"done":"")} onClick={()=>setCurrent(index)} aria-label={"Questão "+(index+1)}>{index+1}</button>)}</div>
+      <div className="fqaExamDots">{rows.map((row,index)=><button type="button" key={row.id} className={(index===current?"current ":"")+(answered(row,answers[row.id])?"done ":"")+(markedForReview.includes(row.id)?"marked":"")} onClick={()=>setCurrent(index)} aria-label={"Questão "+(index+1)}>{index+1}</button>)}</div>
       {current<rows.length-1?<button className="primary" onClick={()=>setCurrent(value=>value+1)}>Seguinte →</button>:<button className="primary" onClick={()=>finish()}>Terminar e rever</button>}
     </div>
     <p className="muted fqaExamRule">{inTolerance?"Entraste nos 30 minutos de tolerância. ":""}Durante o Exame Completo não mostramos correções. Podes voltar atrás e alterar respostas antes de terminar; ao esgotar a tolerância, a prova termina automaticamente.</p>

@@ -1276,3 +1276,14 @@ button,input,select,textarea{max-width:100%}
   .examSubmitMap{grid-template-columns:repeat(3,minmax(0,1fr))}
   .examSubmitMap button{padding:9px}
 }
+
+
+/* Questões marcadas para rever · comportamento comum entre disciplinas */
+.examMarkButton{margin-top:12px;border:1px solid #d9dee5;background:#fff;border-radius:12px;padding:9px 12px;font-weight:800;font-size:12px;color:#596273}
+.examMarkButton.is-marked{border-color:#e3b85f;background:#fff8e8;color:#765314}
+.examMarkButton:focus-visible{outline:3px solid rgba(239,167,35,.22);outline-offset:1px}
+.fqaExamDots button.marked,.ptx-question-nav button.is-marked,.answerMap button.marked,.examSubmitMap button.is-marked{box-shadow:inset 0 0 0 2px #d8a43f}
+.fqaExamDots button.marked::after{content:"★";font-size:8px;line-height:1;margin-left:2px}
+.ptx-question-nav button.is-marked::after{content:"★";font-size:8px;line-height:1;margin-left:2px}
+.answerMap button.marked,.examSubmitMap button.is-marked{background:#fff8e8;border-color:#e3b85f}
+@media(max-width:620px){.examMarkButton{width:100%}}
