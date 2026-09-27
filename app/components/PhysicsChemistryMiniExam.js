@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
+import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
@@ -13,13 +14,13 @@ const SUBJECT_ID="physics-chemistry-a";
 
 function filled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
-  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>String(row??"").trim());
+  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>row&&typeof row==="object"?Object.values(row).some(part=>String(part??"").trim()):String(row??"").trim());
   return String(value??"").trim().length>0;
 }
 
 function Editor({item,value,onChange}){
   if(item.responseType==="multiple-choice")return <div className="opts">{item.options.map((option,index)=><button type="button" key={option} className={value===index?"selected":""} onClick={()=>onChange(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>;
-  if(item.responseType==="stepwise")return <div className="fqaStepwise">{item.steps.map((step,index)=><label className="fqaStep" key={step.id}><span><b>{"Etapa "+(index+1)+" · "+step.label}</b><small>{step.unit?"Unidade esperada: "+step.unit:"Expressão/relação pedida"}</small></span><input value={value?.steps?.[step.id]||""} onChange={event=>onChange({...(value&&typeof value==="object"?value:{}),steps:{...(value?.steps||{}),[step.id]:event.target.value}})}/></label>)}</div>;
+  if(item.responseType==="stepwise")return <PhysicsChemistryStepwiseEditor item={item} value={value} onChange={onChange}/>;
   return <textarea className="fqaExamText" rows={8} value={typeof value==="string"?value:""} onChange={event=>onChange(event.target.value)} placeholder="Escreve a tua resposta científica..."/>;
 }
 
@@ -101,7 +102,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
       return <details className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="provisional-review"?"Provisório":"Por rever"}</span></summary><div className="reviewChapterBody">
         <PhysicsChemistryStimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
-        {row.responseType==="stepwise"&&<>{result.steps?.map((step,stepIndex)=><p key={step.id}><b>{"Etapa "+(stepIndex+1)+": "}</b>{step.status==="unanswered"?"Sem resposta":step.answer+" → referência: "+step.expected}</p>)}<p className="muted">{result.note}</p></>}
+        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
         {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/><p className="muted">Uma formulação cientificamente equivalente pode ser válida mesmo que não coincida palavra por palavra com uma referência.</p></>}
       </div></details>;
     })}</div>

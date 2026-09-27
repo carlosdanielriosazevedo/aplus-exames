@@ -5,6 +5,7 @@ import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
+import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
 import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
@@ -83,7 +84,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   function answerReady(item){
     if(item.responseType==="multiple-choice")return Number.isInteger(answer);
-    if(item.responseType==="stepwise")return Object.values(answer?.steps||{}).some(value=>String(value??"").trim().length>0);
+    if(item.responseType==="stepwise")return Object.values(answer?.steps||{}).some(value=>value&&typeof value==="object"?Object.values(value).some(part=>String(part??"").trim().length>0):String(value??"").trim().length>0);
     return String(answer??"").trim().length>0;
   }
 
@@ -138,14 +139,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         <PhysicsChemistryStimulus item={item}/>
         <h2>{item.prompt}</h2>
         {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>}
-        {item.responseType==="stepwise"&&<div className="fqaStepwise">
-          <div className="notice"><b>Resposta construída por etapas</b><span>No exame nacional, apresentar apenas o resultado final pode não ser suficiente. Regista o teu raciocínio etapa a etapa.</span></div>
-          {item.steps.map((step,index)=><label className="fqaStep" key={step.id}><span><b>{"Etapa "+(index+1)+" · "+step.label}</b><small>{step.unit?"Unidade esperada: "+step.unit:"Escreve a relação ou resultado pedido."}</small></span><input disabled={!!feedback} value={answer?.steps?.[step.id]||""} onChange={event=>setAnswer(current=>({...(current&&typeof current==="object"?current:{}),steps:{...(current?.steps||{}),[step.id]:event.target.value}}))} placeholder={step.type==="numeric"?"Valor numérico":"Expressão ou relação"}/></label>)}
-        </div>}
+        {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseEditor item={item} value={answer} onChange={setAnswer} disabled={!!feedback}/>} 
         {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
           {item.responseType==="multiple-choice"&&<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span></div>}
-          {item.responseType==="stepwise"&&<div className="fqaConstructedReview"><div className="notice"><b>{"Correção provisória · "+feedback.provisionalPoints+"/"+feedback.maxPoints+" pontos de treino"}</b><span>{feedback.note}</span></div>{feedback.steps.map((step,index)=><div className={"fqaStepReview "+(step.correct?"ok":"review")} key={step.id}><b>{"Etapa "+(index+1)+" · "+(step.correct?"correta":"a rever")}</b><span>{"Referência: "+step.expected}</span></div>)}<p className="muted">No exame oficial são aceites processos cientificamente corretos alternativos e aplicam-se regras próprias a erros numéricos, analíticos, unidades e dependência entre etapas.</p></div>}
+          {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={item} result={feedback}/>} 
           {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><PhysicsChemistryRubricReview item={item} assessment={rubricAssessment} onChange={nextAssessment=>{
             setRubricAssessment(nextAssessment);
             const nextFeedback=physicsChemistryRubricResult(item,answer,nextAssessment);
@@ -228,15 +226,18 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       const observed=evidence.reduce((sum,row)=>sum+(row.rubricObserved||0),0);
       const needsReview=evidence.reduce((sum,row)=>sum+(row.rubricNeedsReview||0),0);
       const reviewed=evidence.reduce((sum,row)=>sum+(row.rubricReviews||0),0);
-      const totalSignals=deterministic+observed+needsReview;
-      const positive=correct+observed;
-      return {...dimension,deterministic,correct,observed,needsReview,reviewed,percent:totalSignals?Math.round(positive/totalSignals*100):null};
+      const structuredScored=evidence.reduce((sum,row)=>sum+(row.structuredScoredAttempts||0),0);
+      const structuredEarned=evidence.reduce((sum,row)=>sum+(row.structuredNormalizedEarned||0),0);
+      const structuredNeedsReview=evidence.reduce((sum,row)=>sum+(row.structuredNeedsReview||0),0);
+      const totalSignals=deterministic+structuredScored+observed+needsReview;
+      const positive=correct+structuredEarned+observed;
+      return {...dimension,deterministic,correct,observed,needsReview,reviewed,structuredScored,structuredEarned,structuredNeedsReview,percent:totalSignals?Math.round(positive/totalSignals*100):null};
     });
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
       <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
       <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
         <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
-        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.needsReview} a rever</span></footer></article>)}</div>
+        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.structuredScored} problemas por etapas</span><span>{row.needsReview+row.structuredNeedsReview} a rever</span></footer></article>)}</div>
       </section>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;

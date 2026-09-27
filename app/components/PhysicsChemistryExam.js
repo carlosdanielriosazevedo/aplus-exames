@@ -3,6 +3,7 @@ import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
 import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
+import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
@@ -13,7 +14,7 @@ const SUBJECT_ID="physics-chemistry-a";
 
 function answered(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
-  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>String(row??"").trim());
+  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>row&&typeof row==="object"?Object.values(row).some(part=>String(part??"").trim()):String(row??"").trim());
   return String(value??"").trim().length>0;
 }
 
@@ -32,7 +33,7 @@ function Stimulus({item}){return <PhysicsChemistryStimulus item={item}/>;}
 
 function ResponseEditor({item,value,onChange,disabled=false}){
   if(item.responseType==="multiple-choice")return <div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={disabled} className={value===index?"selected":""} onClick={()=>onChange(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>;
-  if(item.responseType==="stepwise")return <div className="fqaStepwise">{item.steps.map((step,index)=><label className="fqaStep" key={step.id}><span><b>{"Etapa "+(index+1)+" · "+step.label}</b><small>{step.unit?"Unidade esperada: "+step.unit:"Expressão/relação pedida"}</small></span><input disabled={disabled} value={value?.steps?.[step.id]||""} onChange={event=>onChange({...(value&&typeof value==="object"?value:{}),steps:{...(value?.steps||{}),[step.id]:event.target.value}})} /></label>)}</div>;
+  if(item.responseType==="stepwise")return <PhysicsChemistryStepwiseEditor item={item} value={value} onChange={onChange} disabled={disabled}/>;
   return <textarea className="fqaExamText" disabled={disabled} rows={9} value={typeof value==="string"?value:""} onChange={event=>onChange(event.target.value)} placeholder="Escreve a tua resposta científica..."/>;
 }
 
@@ -121,7 +122,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
       return <details key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{score.pending?"Por rever":score.provisional?"Provisório":result.correct?"Correto":"A rever"}</span></summary><div className="reviewChapterBody">
         <Stimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
-        {row.responseType==="stepwise"&&<>{result.steps.map((step,stepIndex)=><p key={step.id}><b>{"Etapa "+(stepIndex+1)+": "}</b>{step.status==="unanswered"?"Sem resposta":step.answer+" → referência: "+step.expected}</p>)}<p><b>Indicação provisória:</b> {score.points} / {row.examPoints} pts.</p></>}
+        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
         {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/></>}
       </div></details>;
     })}</div>
