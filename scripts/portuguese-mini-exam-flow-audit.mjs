@@ -44,10 +44,7 @@ assert.doesNotMatch(studyModeHub,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever m
 assert.match(studyModeHub,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio a partir do hub comum.");
 assert.match(page,/screen==="reviewMatter"&&s\.activeSubjectId==="portuguese"/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
 assert.match(portugueseSubject,/view==="reviewMatter"/u,"Português deve renderizar Rever matéria como ecrã próprio");
-assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>
-  <\/>\);
-
-  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
+assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>\n  <\/>\);\n\n  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
 assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
