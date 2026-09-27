@@ -8,7 +8,9 @@ const css=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.cs
 assert.match(component,/"use client"/u,"a experiência deve preservar estado de respostas no cliente");
 assert.match(component,/exam\.blocks\.find/u,"a questão ativa deve recuperar o respetivo bloco de texto partilhado");
 assert.match(component,/answers\[row\.id\]/u,"as respostas devem ser persistidas por item durante a navegação");
-assert.match(component,/onClick=\{\(\)=>setReview\(true\)\}>Terminar e rever o exame/u,"o fim do fluxo deve conduzir explicitamente à revisão");
+assert.match(component,/onClick=\{\(\)=>setSubmitCheck\(true\)\}>Terminar e rever o exame/u,"o fim do fluxo deve passar pelo checkpoint antes da revisão.");
+assert.match(component,/ExamSubmissionCheck/u,"Português deve reutilizar o checkpoint pré-entrega partilhado.");
+assert.match(component,/onConfirm=\{\(\)=>\{setSubmitCheck\(false\);setReview\(true\)\}\}/u,"só a confirmação explícita deve abrir a revisão.");
 assert.doesNotMatch(component,/>Corrigir</u,"um exame terminado não deve voltar a apresentar uma ação de correção");
 assert.doesNotMatch(component,/Voltar às respostas/u,"depois de terminado, o exame deve permanecer no fluxo de revisão");
 assert.match(component,/Autoavaliação guiada/u,"respostas abertas devem conduzir à autoavaliação guiada por critérios");
