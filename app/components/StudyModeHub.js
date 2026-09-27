@@ -8,7 +8,7 @@ export default function StudyModeHub({subjectId="math-a",go}){
     <ApronsoNudge pose="thinking">{STUDY_MODE_COPY.nudge}</ApronsoNudge>
     <div className="trainChoices">
       <button onClick={()=>go("trainingSetup")}><span>🎯</span><div><b>Praticar</b><small>{practiceModeCopy(subjectId)}</small></div><em>→</em></button>
-      <button onClick={()=>go("exams")}><span>📝</span><div><b>Mini-exame</b><small>{STUDY_MODE_COPY.miniExam}</small></div><em>→</em></button>
+      <button onClick={()=>go("exams")}><span>📝</span><div><b>Exames</b><small>{STUDY_MODE_COPY.exams}</small></div><em>→</em></button>
       <button onClick={()=>go("reviewMatter")}><span>📚</span><div><b>Rever matéria</b><small>{STUDY_MODE_COPY.review}</small></div><em>→</em></button>
     </div>
   </>;
