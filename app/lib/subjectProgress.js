@@ -13,6 +13,12 @@ function normalizeCompetenceRow(row){
     attempts:Number.isFinite(source.attempts)?source.attempts:0,
     correct:Number.isFinite(source.correct)?source.correct:0,
     deterministicAttempts:Number.isFinite(source.deterministicAttempts)?source.deterministicAttempts:0,
+    structuredAttempts:Number.isFinite(source.structuredAttempts)?source.structuredAttempts:0,
+    structuredScoredAttempts:Number.isFinite(source.structuredScoredAttempts)?source.structuredScoredAttempts:0,
+    structuredNormalizedEarned:Number.isFinite(source.structuredNormalizedEarned)?source.structuredNormalizedEarned:0,
+    structuredNeedsReview:Number.isFinite(source.structuredNeedsReview)?source.structuredNeedsReview:0,
+    structuredType1:Number.isFinite(source.structuredType1)?source.structuredType1:0,
+    structuredType2:Number.isFinite(source.structuredType2)?source.structuredType2:0,
     points:Number.isFinite(source.points)?source.points:0,
     maxPoints:Number.isFinite(source.maxPoints)?source.maxPoints:0,
     pendingRubrics:Number.isFinite(source.pendingRubrics)?source.pendingRubrics:0,
@@ -50,6 +56,12 @@ function mergeCompetenceRows(left={},right={}){
       attempts:Math.max(a.attempts,b.attempts),
       correct:Math.max(a.correct,b.correct),
       deterministicAttempts:Math.max(a.deterministicAttempts,b.deterministicAttempts),
+      structuredAttempts:Math.max(a.structuredAttempts,b.structuredAttempts),
+      structuredScoredAttempts:Math.max(a.structuredScoredAttempts,b.structuredScoredAttempts),
+      structuredNormalizedEarned:Math.max(a.structuredNormalizedEarned,b.structuredNormalizedEarned),
+      structuredNeedsReview:Math.max(a.structuredNeedsReview,b.structuredNeedsReview),
+      structuredType1:Math.max(a.structuredType1,b.structuredType1),
+      structuredType2:Math.max(a.structuredType2,b.structuredType2),
       points:Math.max(a.points,b.points),
       maxPoints:Math.max(a.maxPoints,b.maxPoints),
       pendingRubrics:Math.max(a.pendingRubrics,b.pendingRubrics),
@@ -103,8 +115,9 @@ function putProgress(state,subjectId,progress){
 
 function compactResult(result){
   if(!result)return null;
-  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,gradingMode:result.gradingMode||null,classificationMode:result.classificationMode||null,countsForExamScore:typeof result.countsForExamScore==="boolean"?result.countsForExamScore:null,responseText:result.responseText||""};
+  const compact={status:result.status,final:!!result.final,correct:result.correct??null,points:Number.isFinite(result.points)?result.points:null,maxPoints:Number.isFinite(result.maxPoints)?result.maxPoints:null,provisionalPoints:Number.isFinite(result.provisionalPoints)?result.provisionalPoints:null,penalty:Number.isFinite(result.penalty)?result.penalty:0,type1Count:Number.isFinite(result.type1Count)?result.type1Count:0,type2Count:Number.isFinite(result.type2Count)?result.type2Count:0,requiresReview:!!result.requiresReview,gradingMode:result.gradingMode||null,classificationMode:result.classificationMode||null,countsForExamScore:typeof result.countsForExamScore==="boolean"?result.countsForExamScore:null,responseText:result.responseText||""};
   if(result.final)return compact;
+  if(result.gradingMode==="structured-provisional")return {...compact,steps:Array.isArray(result.steps)?result.steps.map(step=>({id:step.id,status:step.status,points:Number.isFinite(step.points)?step.points:null,maxPoints:Number.isFinite(step.maxPoints)?step.maxPoints:null,errorType:step.errorType||null})):[]};
   return {...compact,rubricId:result.rubricId||null,rubricCompleted:!!result.rubricCompleted,revisionCount:Number.isFinite(result.revisionCount)?result.revisionCount:0,previousResponseText:result.previousResponseText||"",revisionHistory:Array.isArray(result.revisionHistory)?result.revisionHistory.map(row=>({revision:Number.isFinite(row?.revision)?row.revision:0,responseText:String(row?.responseText||""),rubricCompleted:!!row?.rubricCompleted,rubricObservationEvidence:Array.isArray(row?.rubricObservationEvidence)?row.rubricObservationEvidence.map(observation=>({criterionId:observation.criterionId,observationId:observation.observationId,evidence:observation.evidence||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})):[]})):[],rubricEvidence:(result.criteria||[]).map(criterion=>({criterionId:criterion.id,evidence:criterion.status||"pending"})),rubricObservationEvidence:(result.criteria||[]).flatMap(criterion=>(criterion.observations||[]).map(observation=>({criterionId:criterion.id,observationId:observation.id,evidence:observation.status||"pending",studentEvidence:Array.isArray(observation.studentEvidence)?observation.studentEvidence.slice(0,3):Array.isArray(observation.evidence)?observation.evidence.slice(0,3):[]})))};}
 
 function recordRubricEvidence(previous,result,completedAt){
@@ -158,6 +171,23 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     const previous=normalizeCompetenceRow(competence[id]);
     if(result.final){
       competence[id]={...previous,domainId:item.domain||previous.domainId,label:item.competencyLabel||previous.label,attempts:previous.attempts+1,correct:previous.correct+(result.correct?1:0),deterministicAttempts:previous.deterministicAttempts+1,points:previous.points+(Number.isFinite(result.points)?result.points:0),maxPoints:previous.maxPoints+(Number.isFinite(result.maxPoints)?result.maxPoints:0),lastAnsweredAt:completedAt};
+      return;
+    }
+    if(result.gradingMode==="structured-provisional"){
+      const scorable=Number.isFinite(result.provisionalPoints)&&Number(result.maxPoints)>0;
+      competence[id]={
+        ...previous,
+        domainId:item.domain||previous.domainId,
+        label:item.competencyLabel||previous.label,
+        attempts:previous.attempts+1,
+        structuredAttempts:previous.structuredAttempts+1,
+        structuredScoredAttempts:previous.structuredScoredAttempts+(scorable?1:0),
+        structuredNormalizedEarned:previous.structuredNormalizedEarned+(scorable?Math.max(0,Math.min(1,result.provisionalPoints/result.maxPoints)):0),
+        structuredNeedsReview:previous.structuredNeedsReview+(result.requiresReview?1:0),
+        structuredType1:previous.structuredType1+(result.type1Count||0),
+        structuredType2:previous.structuredType2+(result.type2Count||0),
+        lastAnsweredAt:completedAt
+      };
       return;
     }
     const evidence=recordRubricEvidence(previous,result,completedAt);
