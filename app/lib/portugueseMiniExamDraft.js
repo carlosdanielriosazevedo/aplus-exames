@@ -21,15 +21,16 @@ export function normalizePortugueseMiniExamDraft(draft,{examId,itemIds}){
     revisionDrafts:filterByItem(draft.revisionDrafts),
     revisions:filterByItem(draft.revisions),
     dismissedWritingFocus:filterByItem(draft.dismissedWritingFocus),
+    markedForReview:Array.isArray(draft.markedForReview)?draft.markedForReview.filter(id=>allowed.has(id)):[],
     attemptId:typeof draft.attemptId==="string"&&draft.attemptId?draft.attemptId:null,
     startedAt:Number.isFinite(draft.startedAt)?draft.startedAt:(Number.isFinite(draft.updatedAt)?draft.updatedAt:null),
     updatedAt:Number.isFinite(draft.updatedAt)?draft.updatedAt:null
   };
 }
 
-export function portugueseMiniExamDraftSnapshot({examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt,updatedAt=Date.now()}){
+export function portugueseMiniExamDraftSnapshot({examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,markedForReview=[],attemptId,startedAt,updatedAt=Date.now()}){
   return normalizePortugueseMiniExamDraft({
-    version:DRAFT_VERSION,examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,attemptId,startedAt,updatedAt
+    version:DRAFT_VERSION,examId,itemIds,index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,markedForReview,attemptId,startedAt,updatedAt
   },{examId,itemIds});
 }
 
