@@ -30,6 +30,7 @@ const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js
 const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
 const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const progress=readFileSync(new URL("../app/lib/subjectProgress.js",import.meta.url),"utf8");
+const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 
 assert.match(review,/Cumpri/u);
 assert.match(review,/Parcial/u);
@@ -49,5 +50,8 @@ assert.match(full,/Guardar revisão e terminar/u,"simulado completo deve guardar
 assert.match(progress,/rubricEvidenceByObservation/u,"o progresso partilhado deve persistir evidência por observação.");
 assert.match(progress,/rubricObserved/u);
 assert.match(progress,/rubricNeedsReview/u);
+assert.match(review,/CRITÉRIO /u,"a grelha deve distinguir visualmente cada critério.");
+assert.match(review,/Autoavaliação do critério/u,"os grupos de decisão devem ser identificáveis por tecnologia assistiva.");
+assert.match(css,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/u,"em mobile, Cumpri/Parcial/Ainda não devem manter três alvos equilibrados.");
 
 console.log("✓ FQ A rubric: Cumpri/Parcial/Ainda não · observações atómicas · evidência guardada · 4 dimensões no Progresso · sem nota automática");

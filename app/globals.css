@@ -1194,3 +1194,33 @@ button,input,select,textarea{max-width:100%}
 .fqaErrorSummary{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;border:1px dashed #d7dde4;border-radius:12px;background:#fafbfc}
 .fqaErrorSummary span,.fqaErrorSummary b{font-size:12px}
 @media(max-width:820px){.fqaStepResultRow{grid-template-columns:1fr}.fqaStepReview>div{display:grid}}
+
+
+/* FQ A · polimento final de respostas construídas */
+.fqaConstructedIntro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0}
+.fqaConstructedIntro>div{min-width:0}.fqaConstructedIntro strong{flex:0 0 auto;padding:6px 9px;border-radius:999px;background:#fff;border:1px solid #dddfe7;font-size:11px;color:#4f5b70}
+.fqaStepwise .fqaStep{align-items:stretch}
+.fqaStepHead{display:flex;gap:11px;align-items:flex-start}
+.fqaStepHead>span{flex:0 0 30px;width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#fff4d8;color:#7e5b12;font-size:11px;font-weight:900}
+.fqaStepHead>div{display:grid;gap:4px;min-width:0}.fqaStepHead b{font-size:14px;line-height:1.35}.fqaStepHead small{font-size:12px;line-height:1.45}
+.fqaStepwise .fqaStep input:focus,.fqaRubricEvidence textarea:focus{outline:3px solid rgba(239,167,35,.18);border-color:#d49a2f}
+.fqaStepwise .fqaStep input:disabled{background:#f5f6f8;color:#667085;cursor:not-allowed}
+.fqaRubricCriterionLabel{display:grid;gap:3px;min-width:0}.fqaRubricCriterionLabel small{font-size:9px;letter-spacing:.08em;color:#8a6a28;font-weight:900}.fqaRubricCriterionLabel b{line-height:1.35}
+.fqaRubricCriterion li>span{display:flex;gap:7px;align-items:flex-start;line-height:1.45}.fqaRubricCriterion li>span i{font-style:normal;color:#d39a31;font-weight:900}
+.fqaRubricLevels button:focus-visible,.fqaObservationLevels button:focus-visible{outline:3px solid rgba(239,167,35,.22);outline-offset:1px}
+@media(max-width:820px){
+  .fqaConstructedIntro{align-items:flex-start}
+  .fqaStepwise .fqaStep{padding:13px}
+  .fqaRubricCriterion{padding:13px}
+  .fqaRubricLevels,.fqaObservationLevels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+  .fqaRubricLevels button,.fqaObservationLevels button{width:100%;padding:9px 6px}
+  .fqaRubricCriterionTop{gap:10px}
+  .fqaRubricCriterion li{gap:8px;padding-top:4px}
+}
+@media(max-width:430px){
+  .fqaConstructedIntro{display:grid}.fqaConstructedIntro strong{justify-self:start}
+  .fqaStepHead>span{width:28px;height:28px;flex-basis:28px}
+  .fqaStepResultRow{gap:8px}
+  .fqaRubricReview{padding:13px}
+  .fqaRubricLevels button,.fqaObservationLevels button{font-size:11px;padding:9px 4px}
+}
