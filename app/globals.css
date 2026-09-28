@@ -1287,3 +1287,40 @@ button,input,select,textarea{max-width:100%}
 .ptx-question-nav button.is-marked::after{content:"★";font-size:8px;line-height:1;margin-left:2px}
 .answerMap button.marked,.examSubmitMap button.is-marked{background:#fff8e8;border-color:#e3b85f}
 @media(max-width:620px){.examMarkButton{width:100%}}
+
+
+/* Desktop pass — APProva+ */
+@media(min-width:1100px){
+  .wideStudentShell{padding:42px 32px 118px}
+  .wideStudentShell>.panel,.trainingSetupPage>.panel,.examHub>.panel{width:min(1180px,calc(100vw - 64px));padding:42px 50px}
+  .learnHome .wrap{max-width:1040px;padding:0 28px}
+  .learnHome .adaptivePath{max-width:820px}
+  .learnHome .learnIntro{max-width:820px;margin-left:auto;margin-right:auto}
+  .studentTop{margin-bottom:30px}
+  .studentNav{
+    bottom:18px;
+    width:min(760px,calc(100vw - 80px));
+    height:70px;
+    padding:7px;
+    border:1px solid #e2e6ed;
+    border-radius:22px;
+    box-shadow:0 14px 42px #10182f24;
+  }
+  .studentNav button{min-height:54px}
+  .studentSurface,.panel:has(.studentNav){padding-bottom:112px}
+  .trainChoices{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .trainChoices>button{min-height:190px}
+  .progressHero{grid-template-columns:minmax(0,1.45fr) minmax(0,.9fr) 138px}
+  .progressHero>.apronso{width:138px;max-height:164px}
+  .progressOverview{padding:12px 20px}
+  .progressDetails>.muted,.reviewStudyPage .progressDetails>.muted,.reviewStudyPage .progressDetails>.notice{max-width:820px}
+  .reviewStudyPage .portugueseProgressCard{max-width:1020px}
+  .reviewStudyPage .themeGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .trainingSetupPage .themeGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .trainingSetupPage .yearSelector{max-width:620px}
+  .trainingSetupPage> .panel > .muted,.trainingSetupPage .panel>.muted{max-width:820px}
+  .examHub .trainChoices{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .examHub .sectionIntro,.trainingSetupPage .sectionIntro{max-width:880px}
+  .questionCard{max-width:920px;margin-left:auto;margin-right:auto}
+  .completionMoment{max-width:860px;margin-left:auto;margin-right:auto}
+}
