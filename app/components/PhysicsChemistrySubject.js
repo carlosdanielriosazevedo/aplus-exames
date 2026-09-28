@@ -32,9 +32,24 @@ function allDomainIds(){
   return PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.id);
 }
 
+function allSubtopicIdsForYear(year){
+  return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).flatMap(row=>physicsChemistrySubtopicsForDomain(row.id).map(topic=>topic.id));
+}
+
+function allSubtopicIds(){
+  return PHYSICS_CHEMISTRY_A_DOMAINS.flatMap(row=>physicsChemistrySubtopicsForDomain(row.id).map(topic=>topic.id));
+}
+
 function initialTaught(settings,year){
-  const allowed=new Set(allDomainIdsForYear(year));
-  return Array.isArray(settings?.taughtUnitIds)?settings.taughtUnitIds.filter(id=>allowed.has(id)):[];
+  const allowedSubtopics=new Set(allSubtopicIdsForYear(year));
+  const allowedDomains=new Set(allDomainIdsForYear(year));
+  const saved=Array.isArray(settings?.taughtUnitIds)?settings.taughtUnitIds:[];
+  const expanded=[];
+  for(const id of saved){
+    if(allowedSubtopics.has(id))expanded.push(id);
+    else if(allowedDomains.has(id))expanded.push(...physicsChemistrySubtopicsForDomain(id).map(topic=>topic.id));
+  }
+  return [...new Set(expanded)];
 }
 
 export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
@@ -42,7 +57,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const settings=s.subjectSettings?.[SUBJECT_ID]||{};
   const taughtUnitIds=initialTaught(settings,currentYear);
   const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";
-  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allDomainIds():taughtUnitIds);
+  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allSubtopicIds():taughtUnitIds);
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(null);
   const [practiceSubtopic,setPracticeSubtopic]=useState(null);
@@ -215,19 +230,27 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Física e Química A fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente a matéria do 10.º e 11.º anos, incluindo Física, Química e trabalho prático.</p></div></div>
         <button className="primary" onClick={()=>{
           setS(prev=>{
-            const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:allDomainIds(),curriculumConfigured:true}}};
+            const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:allSubtopicIds(),curriculumConfigured:true}}};
             return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
           });
           go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress");
         }}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
       </Shell>;
     }
+    const totalSubtopics=rows.flatMap(row=>physicsChemistrySubtopicsForDomain(row.id)).length;
     return <Shell className="wideStudentShell">
       
       <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
       <h1>O que já deste no {currentYear}?</h1>
-      <p className="muted">A matéria do ano anterior fica disponível. No ano atual, assinala apenas os grandes domínios que a tua turma já trabalhou.</p>
-      <div className="curriculumPicker">{rows.map(row=><label key={row.id}><input type="checkbox" checked={scopeDraft.includes(row.id)} onChange={()=>setScopeDraft(current=>current.includes(row.id)?current.filter(id=>id!==row.id):[...current,row.id])}/><span><b>{row.title}</b><small>{row.area+" · "+row.subtopics.length+" subtemas"}</small></span></label>)}</div>
+      <p className="muted">A matéria do ano anterior fica disponível. No ano atual, abre cada matéria e assinala apenas as submatérias que a tua turma já trabalhou.</p>
+      <div className="scopeCounter"><b>{scopeDraft.length}</b><span>de {totalSubtopics} submatérias assinaladas</span></div>
+      <div className="curriculumPicker fqaCurriculumPicker">{rows.map(row=>{const topics=physicsChemistrySubtopicsForDomain(row.id);const ids=topics.map(topic=>topic.id);const count=ids.filter(id=>scopeDraft.includes(id)).length;const all=count===ids.length&&ids.length>0;return <details key={row.id} open={count>0}>
+        <summary><div><b>{row.title}</b><small>{row.area} · {count}/{ids.length} selecionadas</small></div><span>⌄</span></summary>
+        <button type="button" className="selectTheme" onClick={()=>setScopeDraft(current=>all?current.filter(id=>!ids.includes(id)):[...new Set([...current,...ids])])}>{all?"Desmarcar esta matéria":"Selecionar toda esta matéria"}</button>
+        <div>{topics.map(topic=><label key={topic.id}><input type="checkbox" checked={scopeDraft.includes(topic.id)} onChange={()=>setScopeDraft(current=>current.includes(topic.id)?current.filter(id=>id!==topic.id):[...current,topic.id])}/><span>{topic.label}</span></label>)}</div>
+      </details>})}</div>
+      {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma submatéria. Podes voltar aqui sempre que começares matéria nova.</span></div>}
+      <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
       <button className="primary" onClick={()=>{
         setS(prev=>{
           const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:scopeDraft,curriculumConfigured:true}}};
