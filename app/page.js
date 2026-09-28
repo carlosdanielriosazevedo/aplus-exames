@@ -632,7 +632,7 @@ function StudentProfile({s,setS,go,editing=false}){
     setS(saveProfile);
     go("curriculumOnboard");
   }
-  return <Shell>{editing&&<Back go={go} to="progress"/>}<Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":`CONFIGURAÇÃO ${onboardingStep.position} DE ${onboardingStep.total} · ${activeSubject.name.toUpperCase()}`}</p>
+  return <Shell><Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":`CONFIGURAÇÃO ${onboardingStep.position} DE ${onboardingStep.total} · ${activeSubject.name.toUpperCase()}`}</p>
     <h1>{editing?"Atualiza o que estás a estudar.":<>Ajuda a <BrandName/> a começar no sítio certo.</>}</h1>
     <p className="muted">{editing
       ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a app ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
@@ -725,7 +725,7 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
       <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar"}</button></Shell>;
   }
 
-  return <Shell>{!onboarding&&<Back go={go} to="progress"/>}<Logo/>
+  return <Shell><Logo/>
     <p className="eyebrow">{onboarding?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · MATEMÁTICA A`:"MATÉRIA DADA NA ESCOLA"}</p>
     <h1>O que já deste no {s.profile?.schoolYear}?</h1>
     <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
@@ -771,7 +771,6 @@ function GoalScreen({s,setS,go,onboarding=false}){
     <div className="goalMessage"><b>{goal>=18?"Objetivo muito exigente":goal>=16?"Objetivo ambicioso":"Objetivo sólido"}</b>
       <span>A dificuldade e profundidade do plano serão ajustadas progressivamente a este objetivo.</span></div>
     <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar novo objetivo"}</button>
-    {!onboarding&&<button className="secondary" onClick={()=>go("home")}>Cancelar</button>}
   </Shell>
 }
 
@@ -1674,7 +1673,7 @@ function Train({s,setS,go,start}){
   const exactCurated=eligibleQuestions(s,themeId,"training",focus).filter(q=>q.focus===focus).length;
   const exactGenerated=(s.betaMode||"internal")==="internal" && hasGenerator(themeId,focus);
 
-  return <Shell className="wideStudentShell trainingSetupPage"><Back go={go} to="train"/>
+  return <Shell className="wideStudentShell trainingSetupPage">
     <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
     <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
 
@@ -1913,7 +1912,7 @@ function Exams({s,go,startMini}){
   const miniConstructed=miniQuestions.filter(isConstructedResponse).length;
   const miniSelection=miniQuestions.length-miniConstructed;
   const miniYears=[...new Set(miniQuestions.map(q=>theme(q.themeId)?.year).filter(Boolean))];
-  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><Back go={go} to="train"/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
+  return <Shell className="wideStudentShell examHub"><StudentTop s={s} go={go}/><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Matemática A · 635</h1><p className="muted">Escolhe um Mini-exame para uma sessão curta em contexto de prova. O Exame Completo ficará disponível quando o respetivo motor estiver validado.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, volto para te ajudar a perceber o resultado.</ApronsoNudge>
     <FriendsBetaDisclaimer s={s} compact/>
     {pausedExamDraft?.kind==="mini_exam"&&<div className="pausedSession"><div><small>MINI-EXAME EM PAUSA</small><b>Mini-exame de Matemática A</b><span>O teu progresso ficou guardado neste dispositivo.</span></div><button onClick={()=>go(draftScreen(pausedExamDraft)||"miniExamRun")}>Continuar →</button></div>}
