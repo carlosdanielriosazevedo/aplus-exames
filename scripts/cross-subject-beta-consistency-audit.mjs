@@ -20,8 +20,8 @@ for(const [label,source,code] of [
   assert.ok(source.includes(code),label+": deve mostrar disciplina e código da prova.");
   assert.match(source,/examHub/u,label+": deve usar a superfície visual comum de exames.");
 }
-assert.match(math,/<Back go=\{go\} to="train"\/>/u,"Matemática A deve regressar ao hub de treino pelo componente Back comum.");
-for(const [label,source] of [["Português",portuguese],["FQ A",fqa]])assert.match(source,/← Voltar/u,label+": deve permitir regressar ao hub de treino.");
+assert.match(math,/window\.history\.pushState/u,"a navegação transversal deve usar histórico nativo do browser.");
+for(const [label,source] of [["Português",portuguese],["FQ A",fqa]])assert.doesNotMatch(source,/className="back"[^>]*>← Voltar/u,label+": não deve duplicar o retroceder nativo em ecrãs normais.");
 
 for(const [label,source] of [["Português",portuguese],["FQ A",fqa]]){
   assert.match(source,/StudyModeHub/u,label+": deve reutilizar o hub comum.");
