@@ -14,7 +14,7 @@ import {clearPortugueseMiniExamDraft} from "../lib/portugueseMiniExamDraft";
 import {engagementSummary,missionCompletedToday} from "../lib/engagement";
 import {STUDY_MODE_COPY,practiceModeCopy} from "../lib/studyModeCopy";
 import {answerOptionState} from "../lib/feedbackCopy";
-import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
+import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {portugueseTaxonomyForYear} from "../data/portugueseTaxonomy";
 import {portugueseMiniExamMeta,portugueseMiniExamsForYear} from "../data/portuguesePassagePrototype";
 import {isFriendsBeta} from "../lib/friendsBeta";
@@ -81,16 +81,16 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const progress=subjectProgressFor(s,"portuguese");
   const miniExamDraft=s.subjectSettings?.portuguese?.miniExamDraft||null;
   const onboardingStep=subjectOnboardingStep(s,"portuguese");
-  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
+  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";
   const competenceRows=Object.entries(progress.competence);
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);
   const pendingRubrics=competenceRows.reduce((sum,[,row])=>sum+(row.pendingRubrics||0),0);
   const missionDone=missionCompletedToday(s);
-  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
+  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {subjectGoal(s,"portuguese")} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso na cloud</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{(progress.sessions.length>0||progress.lastPosition||miniExamDraft)&&<button onClick={resetPortuguese}>Repor progresso de Português</button>}</div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
   function sharedShell(content){
-    if(view==="home")return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>{content}{sharedNav}</section></main>;
+    if(view==="home")return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>{content}{sharedNav}</section></main>;
     return <Shell>{sharedTop}{content}{sharedNav}</Shell>;
   }
 
@@ -254,7 +254,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     });
     const overall=deterministicAttempts?Math.round(correctAnswers/deterministicAttempts*100):null;
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
-      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{subjectGoal(s,"portuguese")} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
       <div className="progressOverview">{overview.map(row=><div key={row.domain}><span>{row.label}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
       <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
       <details className="progressDetails"><summary>Ver detalhe por matéria →</summary><p className="muted">Consulta domínio, evidência e respostas abertas quando precisares de perceber melhor o resultado.</p>
