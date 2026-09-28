@@ -119,10 +119,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   function next(){
     if(!feedback)return;
     if(session.current>=session.items.length-1){
-      setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results,sessionId:session.sessionId}));
-      const kind=session.kind;
-      setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});
-      go(kind==="diagnostic"?"progress":"home");
+      const finalResults=results;
+      setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:finalResults,sessionId:session.sessionId}));
+      setSession(current=>({...current,finished:true}));
       return;
     }
     const current=session.current+1;
@@ -143,6 +142,33 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   function resetPhysicsChemistry(){
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;
     setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});
+  }
+
+  if(session?.finished){
+    const deterministic=results.filter(result=>result?.final===true&&typeof result.correct==="boolean");
+    const correct=deterministic.filter(result=>result.correct).length;
+    const pending=results.filter(result=>result&&result.final!==true&&result.status!=="unanswered").length;
+    const unanswered=results.filter(result=>result?.status==="unanswered").length;
+    const title=session.kind==="mission"?"Missão concluída":session.kind==="diagnostic"?"Diagnóstico concluído":"Treino concluído";
+    const primaryLabel=session.kind==="diagnostic"?"Ver progresso":"Voltar à Home";
+    const primaryTarget=session.kind==="diagnostic"?"progress":"home";
+    return <Shell>
+      <div className="centered completionMoment">
+        <Apronso pose="celebrate" className="resultApronso" alt={"Apronso celebra: "+title}/>
+        <p className="eyebrow">{session.label.toUpperCase()}</p>
+        <h1>{title}</h1>
+        <p className="muted">{session.kind==="training"?"O Treino Livre serviu para praticar e não altera diretamente o teu Domínio.":"A sessão ficou guardada no teu progresso de Física e Química A."}</p>
+      </div>
+      <div className="subjectStats">
+        <div><b>{session.items.length}</b><span>itens</span></div>
+        <div><b>{deterministic.length?correct+"/"+deterministic.length:"—"}</b><span>respostas objetivas corretas</span></div>
+        <div><b>{pending}</b><span>respostas ainda por critérios</span></div>
+      </div>
+      {pending>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas científicas abertas ou por etapas mantêm avaliação separada. Não são transformadas automaticamente numa nota final.</span></div>}
+      {unanswered>0&&<div className="notice"><b>{unanswered+" "+(unanswered===1?"resposta em branco":"respostas em branco")}</b><span>Ficam registadas como ausência de resposta, sem inventar evidência de domínio.</span></div>}
+      <button className="primary" onClick={()=>{setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(primaryTarget)}}>{primaryLabel}</button>
+      {session.kind!=="diagnostic"&&<button className="secondary" onClick={()=>{const kind=session.kind;setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>}
+    </Shell>;
   }
 
   if(session){
