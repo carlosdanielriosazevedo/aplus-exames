@@ -182,7 +182,6 @@ function PortugueseSubject({s,setS,go,view="home"}){
   </Shell>;
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view)&&finishedSecondary)return <Shell>
-    {view==="curriculum"&&}
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p>
     <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Português fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente as obras e os conteúdos do 10.º, 11.º e 12.º anos. Podes alterar esta informação mais tarde nas definições de matéria dada.</p></div></div>
     <button className="primary" onClick={()=>{const domains=[...new Set(allCurrentScopeIds.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:allCurrentScopeIds,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
