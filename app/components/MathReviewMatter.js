@@ -18,7 +18,7 @@ export default function MathReviewMatter({s,go}){
 
   return <Shell className="wideStudentShell reviewStudyPage">
     <StudentTop s={s} go={go}/>
-    <button className="back" onClick={()=>go("train")}>← Voltar</button>
+    
     <section className="progressDetails" aria-label="Rever matéria de Matemática A">
       <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Matemática A para estudar com calma.</h1></div>
       <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe uma matéria para ler um resumo, recordar conceitos, fórmulas e os erros que deves evitar.</p>
