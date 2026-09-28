@@ -1352,3 +1352,45 @@ button,input,select,textarea{max-width:100%}
   .progressDetails>.muted,.reviewStudyPage .progressDetails>.muted,.reviewStudyPage .progressDetails>.notice{max-width:860px}
   .examHub .sectionIntro,.trainingSetupPage .sectionIntro{max-width:920px}
 }
+
+
+/* Desktop pass 3 — provas, revisão e resultados */
+@media(min-width:1100px){
+  .fqaFullExamPage>.panel,.fqaMiniExamPage>.panel,.fqaExamReviewPage>.panel,.fqaMiniReviewPage>.panel,.fqaSubmitCheckPage>.panel{width:min(1120px,calc(100vw - 72px))}
+  .fqaFullExamPage .fqaStimulus,.fqaMiniExamPage .fqaStimulus{max-width:920px;margin-left:auto;margin-right:auto}
+  .fqaFullExamPage .fqaExamMeta,.fqaMiniExamPage .fqaExamMeta{max-width:920px;margin-left:auto;margin-right:auto}
+  .fqaFullExamPage .fqaExamNavigation,.fqaMiniExamPage .fqaExamNavigation{max-width:920px;margin-left:auto;margin-right:auto}
+  .fqaExamNavigation>.secondary{min-width:132px}
+  .fqaExamDots{max-width:620px;margin:0 auto}
+  .fqaExamDots button{width:36px;height:36px}
+  .fqaExamReviewPage> .panel > h1,.fqaMiniReviewPage> .panel > h1{max-width:820px}
+  .fqaExamScoreGrid{max-width:920px}
+  .fqaExamReviewList{max-width:980px}
+  .fqaExamReviewList .reviewChapter>summary{padding:16px 18px}
+  .fqaExamReviewList .reviewChapterBody{padding:8px 18px 20px}
+  .fqaSubmitCheckPage .examSubmitCheck{max-width:1040px}
+  .examSubmitMap{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+  .examSubmitMap button{min-height:68px}
+  .completedExamSummary,.completedExamReview,.reviewWrong,.examChanges{max-width:920px;margin-left:auto;margin-right:auto}
+  .completedExamReview{gap:14px}
+  .reviewItem>summary{min-height:64px;padding:16px 18px}
+  .reviewItemBody{padding:6px 18px 22px}
+  .reviewItemBody h2{max-width:820px}
+  .reviewAnswer,.reviewResolution{padding:15px 16px}
+  .examQuestionMeta{font-size:14px;padding:12px 14px}
+  .examQuestionMeta span{font-size:13px}.examQuestionMeta b{font-size:12px}
+  .answerMap{grid-template-columns:repeat(6,minmax(0,1fr));max-width:920px;margin-left:auto;margin-right:auto}
+  .answerMap button{min-height:64px}
+  .answerMap button span{font-size:11px}
+  .resultDisclaimer{font-size:12px;max-width:760px;line-height:1.5}
+  .examChanges h3,.reviewWrong h3{font-size:16px}
+  .examChange>div:first-child b{font-size:14px}.examChange>div:first-child small{font-size:12px}
+  .examChange>div:last-child span{font-size:11px}.examChange>div:last-child strong{font-size:13px}
+  .reviewWrong summary{font-size:13px}.wrongBody b{font-size:15px}.wrongBody span,.wrongBody small{font-size:13px}
+}
+@media(min-width:1440px){
+  .fqaFullExamPage>.panel,.fqaMiniExamPage>.panel,.fqaExamReviewPage>.panel,.fqaMiniReviewPage>.panel,.fqaSubmitCheckPage>.panel{width:min(1180px,calc(100vw - 100px))}
+  .fqaFullExamPage .fqaStimulus,.fqaMiniExamPage .fqaStimulus,.fqaFullExamPage .questionCard,.fqaMiniExamPage .questionCard,.fqaFullExamPage .fqaExamMeta,.fqaMiniExamPage .fqaExamMeta,.fqaFullExamPage .fqaExamNavigation,.fqaMiniExamPage .fqaExamNavigation{max-width:960px}
+  .fqaExamReviewList{max-width:1040px}
+  .completedExamSummary,.completedExamReview,.reviewWrong,.examChanges,.answerMap{max-width:960px}
+}
