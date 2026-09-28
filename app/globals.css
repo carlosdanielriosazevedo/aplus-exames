@@ -1453,3 +1453,46 @@ button,input,select,textarea{max-width:100%}
 .examHub .apronsoNudge.dark{background:var(--app-card-light);border:1px solid var(--app-card-light-border);color:var(--app-navy)}
 .examHub .apronsoNudge.dark b,.examHub .apronsoNudge.dark span{color:var(--app-navy)}
 .examHub .apronsoNudge.dark span{opacity:.78}
+
+
+/* Teste real — paridade da matéria dada + contraste definitivo da Home */
+.curriculumPicker details{border-color:#d9e0e6}
+.curriculumPicker summary{min-height:72px;padding:17px 18px}
+.curriculumPicker summary b{font-size:16px;color:var(--app-navy)}
+.curriculumPicker summary small{font-size:12px;line-height:1.4;color:var(--app-muted)}
+.curriculumPicker details>div{padding:0 18px 14px}
+.curriculumPicker label{align-items:flex-start;min-height:50px;padding:13px 2px}
+.curriculumPicker label>span{min-width:0;line-height:1.4;color:var(--app-navy)}
+.curriculumPicker label>span>b{display:block;font-size:14px}
+.curriculumPicker label>span>small{display:block;margin-top:3px;font-size:12px;line-height:1.45;color:var(--app-muted)}
+.curriculumPicker input{flex:0 0 20px;margin-top:1px;accent-color:var(--app-orange)}
+.selectTheme{background:var(--app-orange-soft);color:var(--app-orange-dark)}
+.fqaCurriculumPicker summary small,.portugueseCurriculumPicker summary small{font-weight:650}
+
+/* A Home é clara. Este bloco vem depois das regras legadas escuras de propósito. */
+.learnHome,.learnHome .studentSurface{background:linear-gradient(180deg,#f6f8f9 0%,#eef2f4 100%)!important;color:var(--app-navy)!important}
+.learnHome .learnIntro h1{color:var(--app-navy)!important}
+.learnHome .learnIntro p,.learnHome .learnIntro span{color:#657583!important}
+.learnHome .studentTopIdentity,.learnHome .studentTopActions{color:var(--app-navy)!important}
+.learnHome .subjectSwitcher{background:#fff!important;border-color:var(--app-border)!important;color:var(--app-navy)!important}
+.learnHome .subjectSwitcher b,.learnHome .studentTopActions>button,.learnHome .studentMenu>summary{color:var(--app-navy)!important}
+.learnHome .studentTopActions>button,.learnHome .studentMenu>summary{background:#fff!important;border-color:var(--app-border)!important}
+.learnHome .pathNode>div>b,.learnHome .pathNode.done>div b,.learnHome .pathNode.next>div b{color:var(--app-navy)!important}
+.learnHome .pathNode>div>small,.learnHome .pathNode.done>div small,.learnHome .pathNode.next>div small{color:#70808d!important}
+.learnHome .pathNode>div>p,.learnHome .pathNode.next>div p{color:#7c8994!important}
+.learnHome .pathLine{background:#cbd5dc!important}
+.learnHome .pathNode>span,.learnHome .pathNode.next>span{background:#fff!important;border-color:#c9d3da!important;color:#62727f!important}
+.learnHome .pathNode.done>span,.learnHome .pathNode.current.complete>span{background:#fff8e8!important;border-color:var(--app-orange)!important;color:var(--app-orange-dark)!important}
+.learnHome .pathNode.current article{background:#123952!important;color:#fff!important;border-color:#2c5871!important}
+.learnHome .pathNode.current article h2{color:#fff!important}
+.learnHome .pathNode.current article small{color:#ffb02e!important}
+.learnHome .pathNode.current article details summary{color:#ffd58a!important}
+.learnHome .pathNode.current article details p{color:#dce7ed!important}
+.learnHome .missionCardMeta span{background:#edf2f4!important;color:#536673!important}
+
+@media(max-width:760px){
+  .curriculumPicker summary{min-height:68px;padding:15px 16px}
+  .curriculumPicker summary b{font-size:15px}
+  .curriculumPicker details>div{padding:0 16px 12px}
+  .curriculumPicker label{padding:12px 0}
+}

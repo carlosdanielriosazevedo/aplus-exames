@@ -14,7 +14,7 @@ assert.match(page,/goal:p\.goal/u,"o perfil da disciplina deve guardar o objetiv
 assert.doesNotMatch(page,/subjectOnboardingMode==="add"\?"diag":"goalOnboard"/u,"o onboarding não deve criar um ecrã global de objetivo depois das disciplinas.");
 
 assert.match(fqa,/Todo o programa de Física e Química A fica disponível/u,"quem terminou o secundário deve receber o programa completo de FQ A.");
-assert.match(fqa,/taughtUnitIds:allDomainIds\(\)/u,"FQ A concluída deve guardar todos os domínios do 10.º e 11.º.");
+assert.match(fqa,/taughtUnitIds:allSubtopicIds\(\)/u,"FQ A concluída deve guardar todas as submatérias do 10.º e 11.º.");
 assert.match(fqa,/finishedSecondary\?PHYSICS_CHEMISTRY_A_ITEMS/u,"FQ A concluída deve disponibilizar todo o banco curricular.");
 
 assert.match(page,/PASSO 1 DE 4/u,"a apresentação do Apronso deve ser um único percurso.");

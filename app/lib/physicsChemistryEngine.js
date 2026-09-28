@@ -111,11 +111,15 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
   return {items:selected,targetDomain:domain||null,targetSubtopicId:subtopicId||null,year:year||null};
 }
 
-export function physicsChemistryScope(items,currentYear,taughtDomainIds=[]){
+export function physicsChemistryScope(items,currentYear,taughtUnitIds=[]){
   const allowedYears=currentYear==="10.º"?["10.º"]:["10.º","11.º"];
+  const selected=new Set(taughtUnitIds||[]);
   return items.filter(item=>{
     if(!allowedYears.includes(item.year))return false;
     if(item.year!==currentYear||currentYear==="12.º")return true;
-    return taughtDomainIds.includes(item.domain);
+    // Backward compatibility: older profiles stored whole-domain ids.
+    // New profiles store subtopic ids so the scope can match Matemática A's
+    // matéria → submatéria model without pretending an entire domain was taught.
+    return selected.has(item.domain)||selected.has(item.subtopicId);
   });
 }
