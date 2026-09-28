@@ -239,8 +239,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   }
 
   if(view==="diagnostic")return <Shell>
-    <p className="eyebrow">AVALIAÇÃO INICIAL</p>
-    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>FÍSICA E QUÍMICA A</small><strong>8 perguntas para localizar o ponto de partida, usando apenas matéria do teu percurso.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+    <p className="eyebrow">AVALIAÇÃO INICIAL · FÍSICA E QUÍMICA A · PROVA 715</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico de Física e Química A</h1><div className="diagPurposeHero"><small>8 PERGUNTAS · SÓ MATÉRIA DO TEU PERCURSO</small><strong>8 perguntas para localizar o ponto de partida, usando apenas matéria do teu percurso.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     {!scopedCoverage.diagnosticReady&&<div className="notice warning"><b>Primeiro atualiza a matéria dada</b><span>O diagnóstico precisa de cobertura suficiente dos domínios já lecionados.</span></div>}
     <button className="primary" disabled={!scopedCoverage.diagnosticReady} onClick={startDiagnostic}>Começar diagnóstico</button>
   </Shell>;

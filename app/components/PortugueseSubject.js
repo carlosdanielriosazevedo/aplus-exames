@@ -169,8 +169,8 @@ function PortugueseSubject({s,setS,go,view="home"}){
   }
 
   if(!session&&view==="diagnostic")return <Shell>
-    <p className="eyebrow">AVALIAÇÃO INICIAL</p>
-    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e, em 8 perguntas, procura perceber onde faz mais sentido começares.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+    <p className="eyebrow">AVALIAÇÃO INICIAL · PORTUGUÊS · PROVA 639</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico de Português</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e, em 8 perguntas, procura perceber onde faz mais sentido começares.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>8 perguntas</b><small>Duas por domínio escrito nesta versão inicial.</small></div>
       <div><span>🎯</span><b>Só matéria dada</b><small>Não aparecem obras ou conteúdos que ainda não estudaste.</small></div>
