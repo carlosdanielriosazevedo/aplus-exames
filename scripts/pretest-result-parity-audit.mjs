@@ -18,6 +18,7 @@ assert.match(fqa,/Resultado académico incompleto/u,"FQ A deve manter respostas 
 assert.match(fqa,/Treinar outra coisa/u,"o resultado de treino FQ A deve permitir continuar a praticar.");
 assert.match(fqa,/Ver progresso detalhado/u,"o resultado da Missão FQ A deve permitir abrir Progresso.");
 assert.match(fqa,/Ver resultado/u,"a última pergunta deve conduzir ao resultado, não saltar diretamente para Home.");
+assert.match(fqa,/const finalResults=feedback\?\[\.\.\.results\.slice\(0,-1\),feedback\]:results/u,"FQ A deve congelar também o último feedback antes de gravar a sessão.");
 assert.doesNotMatch(fqa,/setSession\(null\);setAnswer\(null\);setFeedback\(null\);setResults\(\[\]\);setRubricAssessment\(\{\}\);\s*go\(kind==="diagnostic"\?"progress":"home"\)/u,"FQ A não deve apagar a sessão antes de mostrar o resultado.");
 
 for(const [label,source] of [["Matemática A",math],["Português",portuguese],["FQ A",fqa]]){
