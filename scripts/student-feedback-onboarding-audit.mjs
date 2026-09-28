@@ -30,5 +30,8 @@ assert.match(css,/\.learnHome\{background:linear-gradient\(180deg,#f6f8f9/u,"a H
 assert.match(css,/\.examHub \.apronsoNudge\.dark\{background:var\(--app-card-light\)/u,"o bloco do Apronso nos Exames deve deixar de competir com os cartões de ação.");
 assert.match(portuguese,/className="learnHome"/u,"Português deve usar a Home clara comum.");
 assert.match(fqa,/className="learnHome"/u,"FQ A deve usar a Home clara comum.");
+assert.match(fqa,/progressHero[\s\S]*progressOverview[\s\S]*progressActions[\s\S]*progressDetails/u,"FQ A deve seguir a mesma ordem visual de Progresso: hero, resumo, ações e detalhe fechado.");
+assert.match(fqa,/<details className="progressDetails"><summary>Ver detalhe por matéria →<\/summary>/u,"FQ A deve esconder o detalhe académico até o aluno o abrir.");
+assert.match(fqa,/progressHelp/u,"FQ A deve incluir ajuda para interpretar o progresso.");
 
 console.log("✓ feedback do teste: FQ concluída, objetivo por disciplina, tour único, diagnóstico explícito, Home clara e histórico nativo");
