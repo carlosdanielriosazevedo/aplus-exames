@@ -20,7 +20,7 @@ const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/Portuguese
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
-import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
+import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectGoal,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
 import "./portugues-mini-exame/passage-mini-exam.css";
 import {
   emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
@@ -304,7 +304,23 @@ export default function App(){
     return ()=>window.cancelAnimationFrame(frame);
   },[screen]);
 
-  const go=x=>setScreen(x);
+  useEffect(()=>{
+    if(!hydrated||typeof window==="undefined")return;
+    window.history.replaceState({...window.history.state,approvaScreen:screen},"");
+    const onPopState=event=>{
+      const target=event.state?.approvaScreen;
+      if(typeof target==="string")setScreen(target);
+    };
+    window.addEventListener("popstate",onPopState);
+    return ()=>window.removeEventListener("popstate",onPopState);
+  },[hydrated]);
+
+  const go=x=>{
+    if(typeof window!=="undefined"&&hydrated&&window.history.state?.approvaScreen!==x){
+      window.history.pushState({...window.history.state,approvaScreen:x},"");
+    }
+    setScreen(x);
+  };
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
@@ -581,13 +597,15 @@ function StudentProfile({s,setS,go,editing=false}){
   const [p,setP]=useState(()=>({
     ...(s.profile||initial.profile),
     recentGrade:subjectSettings.profileConfigured?subjectSettings.recentGrade??"":editing?(s.profile?.recentGrade??""):"",
-    examTiming:subjectSettings.profileConfigured?subjectSettings.examTiming||"unsure":editing?(s.profile?.examTiming||"unsure"):suggestedExamTimingForYear(s.profile?.schoolYear,s.profile?.examTiming)
+    examTiming:subjectSettings.profileConfigured?subjectSettings.examTiming||"unsure":editing?(s.profile?.examTiming||"unsure"):suggestedExamTimingForYear(s.profile?.schoolYear,s.profile?.examTiming),
+    goal:subjectGoal(s,activeSubject.id)
   }));
   function save(){
     const saveProfile=prev=>{
       const next={
         ...prev,
         profile:p,
+        goal:p.goal,
         onboardingSharedProfileDone:true,
         subjectSettings:{
           ...(prev.subjectSettings||{}),
@@ -595,6 +613,7 @@ function StudentProfile({s,setS,go,editing=false}){
             ...(prev.subjectSettings?.[activeSubject.id]||{}),
             recentGrade:p.recentGrade,
             examTiming:p.examTiming,
+            goal:p.goal,
             profileConfigured:true
           }
         }
@@ -649,6 +668,14 @@ function StudentProfile({s,setS,go,editing=false}){
       {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
     </div>
 
+    <h3>Que nota queres alcançar a {activeSubject.name}?</h3>
+    <p className="muted">Este objetivo é específico desta disciplina. Ajusta a exigência das Missões e pode ser diferente nas outras disciplinas.</p>
+    <div className="goalInline">
+      <div className="goalHero compact"><strong>{p.goal}</strong><span>valores</span></div>
+      <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
+      <input aria-label={`Nota objetivo de ${activeSubject.name}`} className="goalSlider" type="range" min="10" max="20" step="1" value={p.goal} onChange={e=>setP({...p,goal:Number(e.target.value)})}/>
+    </div>
+
     <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
     <button className="primary" onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
   </Shell>
@@ -656,7 +683,7 @@ function StudentProfile({s,setS,go,editing=false}){
 
 function TaughtCurriculum({s,setS,go,onboarding=false}){
   const onboardingStep=subjectOnboardingStep(s,"math-a");
-  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
+  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";
   const themes=currentYearThemes(s.profile);
   const subtopicsByTheme=new Map(themes.map(t=>[t.id,curriculumSubtopicsForTheme(t.id)]));
   const valid=new Set([...subtopicsByTheme.values()].flat().map(row=>row.id));
@@ -721,25 +748,26 @@ function TaughtCurriculum({s,setS,go,onboarding=false}){
 }
 
 function GoalScreen({s,setS,go,onboarding=false}){
-  const [goal,setGoal]=useState(s.goal);
+  const activeSubject=subjectById(s.activeSubjectId);
+  const [goal,setGoal]=useState(()=>subjectGoal(s,activeSubject.id));
   function save(){
     setS(prev=>{
-      const next={...prev,goal};
+      const next={...prev,goal,subjectSettings:{...(prev.subjectSettings||{}),[activeSubject.id]:{...(prev.subjectSettings?.[activeSubject.id]||{}),goal}}};
       return onboarding
-        ?recordMilestone(next,"goal_completed",{goal})
+        ?recordMilestone(next,"goal_completed",{goal,subjectId:activeSubject.id})
         :next;
     });
     go(onboarding?"apronsoIntro":"home");
   }
   return <Shell><Logo/>
     <p className="eyebrow">{onboarding?"O TEU OBJETIVO":"AJUSTAR OBJETIVO"}</p>
-    <h1>Que nota queres alcançar?</h1>
+    <h1>Que nota queres alcançar a {activeSubject.name}?</h1>
     <p className="muted">{onboarding
       ?"Isto ajusta a exigência das Missões. Não é uma previsão da tua nota."
       :"Podes alterar o objetivo quando quiseres. A app adapta as decisões seguintes sem apagar o teu histórico."}</p>
     <div className="goalHero"><strong>{goal}</strong><span>valores</span></div>
     <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
-    <input aria-label="Nota objetivo" className="goalSlider" type="range" min="10" max="20" step="1" value={goal} onChange={e=>setGoal(Number(e.target.value))}/>
+    <input aria-label={`Nota objetivo de ${activeSubject.name}`} className="goalSlider" type="range" min="10" max="20" step="1" value={goal} onChange={e=>setGoal(Number(e.target.value))}/>
     <div className="goalMessage"><b>{goal>=18?"Objetivo muito exigente":goal>=16?"Objetivo ambicioso":"Objetivo sólido"}</b>
       <span>A dificuldade e profundidade do plano serão ajustadas progressivamente a este objetivo.</span></div>
     <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar novo objetivo"}</button>
@@ -748,13 +776,15 @@ function GoalScreen({s,setS,go,onboarding=false}){
 }
 
 const PRE_DIAGNOSTIC_TOUR_STEPS=[
-  {mascot:"welcome",eyebrow:"PASSO 1 DE 2",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
-  {mascot:"thinking",eyebrow:"PASSO 2 DE 2",title:"Primeiro, quero conhecer-te",text:"Não te vou avaliar. O diagnóstico serve apenas para perceber por onde devemos começar e adaptar o teu plano."}
+  {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
+  {mascot:"thinking",eyebrow:"PASSO 2 DE 4",title:"Primeiro, quero conhecer-te",text:"O diagnóstico não é uma nota. Serve para encontrar um bom ponto de partida em cada disciplina."},
+  {mascot:"thinking",eyebrow:"PASSO 3 DE 4",title:"Missões curtas e focadas",text:"Na Home vais encontrar uma Missão diária escolhida a partir do teu percurso e da evidência que fores criando."},
+  {mascot:"progress",eyebrow:"PASSO 4 DE 4",title:"Treinar, fazer exames e acompanhar a evolução",text:["Em Praticar escolhes matéria e submatéria.","Em Exames fazes Mini-exames e, quando disponível, o Exame Completo.","Em Progresso acompanhas a evolução de cada disciplina."]}
 ];
 
 function ApronsoIntro({setS,go}){
   function finish(skipped=false){
-    setS(prev=>recordMilestone(prev,"apronso_intro_completed",{skipped,steps:skipped?null:PRE_DIAGNOSTIC_TOUR_STEPS.length}));
+    setS(prev=>recordMilestone({...prev,firstUseTourCompleted:true},"apronso_intro_completed",{skipped,steps:skipped?null:PRE_DIAGNOSTIC_TOUR_STEPS.length}));
     go("diag");
   }
   return <FirstUseTour
@@ -801,8 +831,8 @@ function DiagIntro({s,setS,go}){
   const profileBlueprint=diagnosticBlueprintForProfile(s.profile);
   const blueprint=profileBlueprint.filter(themeId=>diagnosticAnchor(themeId,difficulty,s));
   const gated=blueprint.length===0;
-  return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL</p>
-    <div className="diagApronsoHero"><div><h1>Diagnóstico</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
+  return <Shell><Logo/><p className="eyebrow">AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635</p>
+    <div className="diagApronsoHero"><div><h1>Diagnóstico de Matemática A</h1><div className="diagPurposeHero"><small>PARA ENCONTRAR O MELHOR PONTO DE PARTIDA</small><strong>Não é uma avaliação. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade.</strong></div></div><Apronso pose="thinking" alt="Apronso a pensar"/></div>
     <div className="diagIntroGrid">
       <div><span>⏱</span><b>~10–20 min</b><small>Pode terminar mais cedo se já houver evidência suficiente.</small></div>
       <div><span>🎯</span><b>Só o necessário</b><small>As perguntas adaptam-se ao que vais respondendo.</small></div>
@@ -1166,7 +1196,7 @@ function Home({s,setS,go,reset}){
   }
 
   const probableNext=ranked[0]?.theme;
-  return <main className="dark learnHome">
+  return <main className="learnHome">
     {showFirstUseTour
       ?<FirstUseTour onComplete={()=>finishFirstUseTour(false)} onSkip={()=>finishFirstUseTour(true)}/>
       :showMissionModal&&<DailyMissionModal s={s} plan={plan} mode={missionModalMode} onStart={()=>startDailyMission("daily_modal")} onDismiss={dismissMissionModal}/>}
