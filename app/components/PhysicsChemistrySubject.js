@@ -223,7 +223,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       </Shell>;
     }
     return <Shell className="wideStudentShell">
-      {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+      {view==="curriculum"&&}
       <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
       <h1>O que já deste no {currentYear}?</h1>
       <p className="muted">A matéria do ano anterior fica disponível. No ano atual, assinala apenas os grandes domínios que a tua turma já trabalhou.</p>
@@ -250,7 +250,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const subtopics=practiceDomain?physicsChemistrySubtopicsForDomain(practiceDomain):[];
     const availableInSelection=practiceSubtopic?coverage.bySubtopic[practiceSubtopic]||0:practiceDomain?coverage.byDomain[practiceDomain]||0:0;
     return <Shell className="wideStudentShell trainingSetupPage">
-      <button className="back" onClick={()=>go("train")}>← Voltar</button>
+      
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
       <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano, a matéria e, se quiseres, uma submatéria.</p>
       <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeSubtopic(null)}}>{year}</button>)}</div>
@@ -262,9 +262,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   }
 
   if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go}/>{sharedNav}</Shell>;
-  if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
+  if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
-  if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
+  if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
     <div className="trainChoices">
