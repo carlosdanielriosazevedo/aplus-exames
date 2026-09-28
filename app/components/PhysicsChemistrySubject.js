@@ -56,7 +56,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
   const missionDone=missionCompletedToday(s);
   useEffect(()=>{
-    if(view!=="exams")return;
+    if(!["home","exams"].includes(view))return;
     const mini1=physicsChemistryMiniExamById("fqa-mini-1");
     const mini2=physicsChemistryMiniExamById("fqa-mini-2");
     const fullRows=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems];
@@ -208,6 +208,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     return <Shell className="wideStudentShell trainingSetupPage">
       <button className="back" onClick={()=>go("train")}>← Voltar</button>
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
+      <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano, a matéria e, se quiseres, uma submatéria.</p>
       <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeSubtopic(null)}}>{year}</button>)}</div>
       <h3>2. Matéria</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>{setPracticeDomain(row.id);setPracticeSubtopic(null)}}><b>{row.shortTitle}</b><small>{row.area+" · "+coverage.byDomain[row.id]+" perguntas"}</small></button>)}</div>
       {practiceDomain&&<><h3>3. Submatéria</h3><div className="chips fqaSubtopicChips"><button type="button" className={!practiceSubtopic?"sel":""} onClick={()=>setPracticeSubtopic(null)}>Misturar matéria</button>{subtopics.map(row=><button type="button" key={row.id} className={practiceSubtopic===row.id?"sel":""} onClick={()=>setPracticeSubtopic(row.id)}>{row.label} · {coverage.bySubtopic[row.id]||0}</button>)}</div></>}
@@ -254,7 +255,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       const positive=correct+structuredEarned+observed;
       return {...dimension,deterministic,correct,observed,needsReview,reviewed,structuredScored,structuredEarned,structuredNeedsReview,percent:totalSignals?Math.round(positive/totalSignals*100):null};
     });
+    const totalSignals=dimensions.reduce((sum,row)=>sum+row.deterministic+row.structuredScored+row.observed+row.needsReview,0);
+    const positiveSignals=dimensions.reduce((sum,row)=>sum+row.correct+row.structuredEarned+row.observed,0);
+    const overall=totalSignals?Math.round(positiveSignals/totalSignals*100):null;
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
       <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
       <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
         <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
@@ -268,7 +273,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
     <div className="sectionIntro"><p className="eyebrow">FÍSICA E QUÍMICA A · 715</p><h1>Hoje, trabalha ciência com método.</h1><p className="muted">Mesma estrutura da APProva+: matéria dada, missão, treino, exames, revisão e progresso por competência.</p></div>
     <ApronsoNudge pose="thinking">Começa por uma missão curta. A app vai usar o teu histórico para dar prioridade ao que precisa de mais trabalho.</ApronsoNudge>
-    <div className="missionHero"><div><small>MISSÃO RECOMENDADA</small><h2>{missionDone?"Missão diária concluída":"7 perguntas · Física e Química"}</h2><p>Questões originais sobre os domínios já disponíveis no teu percurso.</p></div><button className="primary" disabled={!scopedCoverage.missionReady} onClick={()=>startMission()}>{missionDone?"Treinar mais":"Começar missão"}</button></div>
-    <div className="themeGrid">{currentRows.map(row=><button key={row.id} disabled={!scopedCoverage.missionEligibleByDomain[row.id]} onClick={()=>startMission(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+scopedCoverage.byDomain[row.id]+" disponíveis"}</small></button>)}</div>
+    {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
+    {!progress.lastPosition&&examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={"home-"+id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
+    <div className="missionHero"><div><small>MISSÃO RECOMENDADA</small><h2>{missionDone?"Missão diária concluída":"7 perguntas · Física e Química"}</h2><p>{missionDone?"Hoje já concluíste a Missão principal. Podes continuar com Treino Livre, Rever matéria ou Exames.":"Questões originais sobre os domínios já disponíveis no teu percurso."}</p></div><button className="primary" disabled={!missionDone&&!scopedCoverage.missionReady} onClick={missionDone?()=>go("train"):()=>startMission()}>{missionDone?"Continuar a estudar":"Começar missão"}</button></div>
+    {!missionDone&&<div className="themeGrid">{currentRows.map(row=><button key={row.id} disabled={!scopedCoverage.missionEligibleByDomain[row.id]} onClick={()=>startMission(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+scopedCoverage.byDomain[row.id]+" disponíveis"}</small></button>)}</div>}
     {sharedNav}</section></main>;
 }
