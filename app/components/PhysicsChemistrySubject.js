@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
-import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import {Apronso,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
