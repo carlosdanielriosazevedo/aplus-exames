@@ -23,7 +23,7 @@ for(const item of PORTUGUESE_LITERARY_ITEMS){
 
 for(const work of PORTUGUESE_LITERARY_WORKS){
   const items=PORTUGUESE_LITERARY_ITEMS.filter(item=>item.literaryWorkId===work.id);
-  assert.ok(items.length>=7,`${work.id}: precisa de pelo menos 7 itens para permitir treino livre por obra`);
+  assert.ok(items.length>=14,`${work.id}: cada obra deve manter pelo menos 14 itens, permitindo duas sessões de 7 sem repetir perguntas`);
   const represented=new Set(items.map(item=>item.competencyId));
   for(const competencyId of work.readyCompetencyIds||[]){
     assert.ok(represented.has(competencyId),`${work.id}: falta a competência declarada ${competencyId}`);
