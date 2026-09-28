@@ -119,7 +119,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   function next(){
     if(!feedback)return;
     if(session.current>=session.items.length-1){
-      const finalResults=results;
+      const finalResults=feedback?[...results.slice(0,-1),feedback]:results;
+      setResults(finalResults);
       setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:finalResults,sessionId:session.sessionId}));
       setSession(current=>({...current,finished:true}));
       return;
