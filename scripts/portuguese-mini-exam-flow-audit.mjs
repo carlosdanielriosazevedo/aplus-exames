@@ -3,6 +3,7 @@ import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
+const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const learnPanel=readFileSync(new URL("../app/components/PortugueseLearnPanel.js",import.meta.url),"utf8");
 const taxonomy=readFileSync(new URL("../app/data/portugueseTaxonomy.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
@@ -33,20 +34,17 @@ assert.match(portugueseSubject,/Mini-exame/u,"o workspace de Português deve dar
 assert.match(page,/s\.activeSubjectId==="portuguese"/u,"a área normal de exames deve estar preparada para encaminhar Português pelo fluxo próprio");
 assert.match(portugueseSubject,/go\("portugueseMiniExam"\)/u,"a área de exames de Português deve encaminhar para o mini-exame integrado");
 assert.match(portugueseSubject,/REVISÃO EM PAUSA/u,"a área de exames de Português deve tornar a revisão guardada facilmente retomável.");
-assert.match(portugueseSubject,/PORTUGUESE_MINI_EXAM_CATALOG/u,"a área de exames deve consumir o catálogo comum de mini-exames");
-assert.match(portugueseSubject,/selectMiniExam\(row\.id\)/u,"a área de exames deve iniciar qualquer modelo disponível no catálogo");
+assert.match(portugueseSubject,/portugueseMiniExamsForYear/u,"a área de exames deve consumir o catálogo comum filtrado pelo ano.");
+assert.match(portugueseSubject,/selectMiniExam\(exam\.id\)/u,"a área de exames deve iniciar qualquer modelo disponível no catálogo.");
 
 assert.match(portugueseSubject,/PortugueseLearnPanel/u,"o workspace de Português deve integrar Aprender sem criar uma aplicação paralela");
-assert.match(portugueseSubject,/STUDY_MODE_COPY\.nudge/u,"o hub de treino de Português deve consumir a copy partilhada com Matemática A");
-assert.match(portugueseSubject,/>Rever matéria<\/b>/u,"o terceiro cartão do hub de treino deve usar a mesma nomenclatura de Matemática A");
-assert.doesNotMatch(portugueseSubject,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever matéria em Português deve continuar funcional e não pode regressar a placeholder bloqueado");
-assert.match(portugueseSubject,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio em vez de expandir conteúdo no hub de Treinar");
+assert.match(portugueseSubject,/StudyModeHub/u,"Português deve reutilizar o hub de treino partilhado.");
+assert.match(studyModeHub,/>Rever matéria<\/b>/u,"o terceiro cartão do hub comum deve manter a nomenclatura Rever matéria.");
+assert.doesNotMatch(studyModeHub,/Rever matéria[\s\S]{0,120}Em breve/u,"Rever matéria deve continuar funcional e não pode regressar a placeholder bloqueado.");
+assert.match(studyModeHub,/go\("reviewMatter"\)/u,"Rever matéria deve abrir um ecrã próprio a partir do hub comum.");
 assert.match(page,/screen==="reviewMatter"&&s\.activeSubjectId==="portuguese"/u,"o router comum deve reconhecer o ecrã dedicado de Rever matéria para Português");
 assert.match(portugueseSubject,/view==="reviewMatter"/u,"Português deve renderizar Rever matéria como ecrã próprio");
-assert.match(portugueseSubject,/view==="train"[\s\S]*?<\/div>
-  <\/>\);
-
-  if\(!session&&view==="reviewMatter"\)/u,"o hub de Treinar deve terminar nos três cartões antes de começar o ecrã Rever matéria");
+assert.match(portugueseSubject,/if\(!session&&view==="train"\)return[\s\S]{0,260}<StudyModeHub/u,"o hub de Treinar deve reutilizar o componente comum antes do ecrã Rever matéria");
 assert.match(portugueseSubject,/<Apronso pose="progress" alt="Apronso acompanha o teu progresso"\/>/u,"o progresso de Português deve reutilizar o mesmo Apronso e dimensionamento de Matemática A");
 assert.match(globalCss,/\.divisionBadge\{display:flex;flex-direction:column;align-items:center;justify-content:center\}/u,"o cartão semanal de XP deve centrar verticalmente medalha, divisão e XP");
 assert.match(learnPanel,/REVER MATÉRIA/u,"o ecrã dedicado deve usar a nomenclatura Rever matéria");
@@ -62,7 +60,7 @@ for(const domain of ["leitura","educacao-literaria","escrita","gramatica"]){
 }
 assert.match(taxonomy,/PORTUGUESE_TAXONOMY_VERSION/u,"a taxonomia deve ter versão editorial explícita");
 
-assert.match(component,/PortuguesePassageMiniExam\(\{exam,[^}]*onExit=null,onComplete=null\}\)/u,"o componente deve aceitar saída e conclusão para integração no fluxo principal");
+assert.match(component,/PortuguesePassageMiniExam\(\{exam,examId="mini-1",initialDraft=null,onDraftChange=null,onExit=null,onComplete=null\}\)/u,"o componente deve aceitar rascunho, saída e conclusão para integração no fluxo principal");
 assert.match(component,/Guardar revisão e voltar aos mini-exames/u,"a revisão concluída deve ser guardada antes de regressar à área comum");
 assert.match(component,/Terminar e rever o exame/u,"o fim deve encaminhar diretamente para a revisão");
 assert.doesNotMatch(component,/Voltar às respostas/u,"um exame já terminado não deve regressar ao fluxo de resposta");
@@ -136,8 +134,7 @@ assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-progress-story-list\{gri
 assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
-const portugueseRow=subjects.match(/\{id:"portuguese"[^
-]+\}/u)?.[0]||"";
+const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";
 assert.ok(portugueseRow,"Português deve continuar no catálogo de disciplinas");
 assert.match(portugueseRow,/releaseStage:"foundation"/u,"Português deve continuar marcado como foundation");
 assert.match(portugueseRow,/available:true/u,"Português deve estar selecionável no beta atual");

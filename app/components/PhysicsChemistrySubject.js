@@ -75,7 +75,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>
     <button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button>
     <button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>
-    {(progress.sessions.length>0||progress.lastPosition)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}
+    {(progress.sessions.length>0||progress.lastPosition||examDrafts.length>0)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}
   </div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
 
@@ -219,7 +219,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go}/>{sharedNav}</Shell>;
   if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
-  if(view==="exams")return <Shell className="wideStudentShell">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o exame completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
+  if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
+    <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
     <div className="trainChoices">
       <button onClick={()=>go("physicsChemistryMini1")}><span>📝</span><div><b>Mini-exame · Modelo 1</b><small>12 itens · 45 min · seleção, construção e suportes científicos</small></div><em>→</em></button>
@@ -254,7 +255,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       return {...dimension,deterministic,correct,observed,needsReview,reviewed,structuredScored,structuredEarned,structuredNeedsReview,percent:totalSignals?Math.round(positive/totalSignals*100):null};
     });
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
-      <button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada na escola</button>
+      <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
       <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
         <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
         <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.structuredScored} problemas por etapas</span><span>{row.needsReview+row.structuredNeedsReview} a rever</span></footer></article>)}</div>
