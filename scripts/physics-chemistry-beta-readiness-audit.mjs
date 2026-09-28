@@ -56,7 +56,7 @@ for(const [label,source] of [["Treino/Missão",subject],["Mini-exame",mini],["Ex
 assert.match(subject,/StudentTop/u,"FQ A deve permanecer no workspace comum.");
 assert.match(subject,/StudentNav/u,"FQ A deve manter a navegação comum.");
 assert.match(subject,/StudyModeHub/u,"FQ A deve reutilizar o hub comum de modos.");
-assert.match(subject,/7 perguntas · Física e Química/u,"Missão deve preservar sessões de pelo menos 7 perguntas.");
+assert.match(subject,/progress\.diagnosticDone\?"7 perguntas":"8 perguntas"/u,"A Home de FQ A deve preservar diagnóstico de 8 perguntas e missão de 7.");
 assert.match(subject,/Começar treino/u,"Treino Livre deve estar operacional.");
 assert.match(subject,/Atualizar matéria dada/u,"Progresso deve permitir atualizar matéria lecionada.");
 assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever Matéria deve permanecer estudo passivo.");
