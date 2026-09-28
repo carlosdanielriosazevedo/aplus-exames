@@ -182,14 +182,14 @@ function PortugueseSubject({s,setS,go,view="home"}){
   </Shell>;
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view)&&finishedSecondary)return <Shell>
-    {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+    {view==="curriculum"&&}
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p>
     <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Português fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente as obras e os conteúdos do 10.º, 11.º e 12.º anos. Podes alterar esta informação mais tarde nas definições de matéria dada.</p></div></div>
     <button className="primary" onClick={()=>{const domains=[...new Set(allCurrentScopeIds.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:allCurrentScopeIds,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
   </Shell>;
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
-    {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+    {view==="curriculum"&&}
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p><h1>O que já deste no {currentYear}?</h1>
     <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as obras e os conteúdos que a escola já trabalhou. Assim, a app não te pergunta sobre uma leitura que ainda não deste.</p>
     <div className="scopeCounter"><b>{scopeDraft.length}</b><span>de {portugueseScopeRows(currentYear).flatMap(group=>group.rows).length} conteúdos assinalados</span></div>
@@ -218,7 +218,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       .filter(row=>row.writtenExam&&row.domain===practiceDomain)
       .map(row=>({...row,count:competencySourceItems.filter(item=>item.competencyId===row.id&&item.responseType!=="extended-writing").length}));
     return <Shell className="wideStudentShell trainingSetupPage">
-      <button className="back" onClick={()=>go("train")}>← Voltar</button>
+      
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
       <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano e depois a área que queres trabalhar.</p>
       <h3>1. Ano</h3><div className="chips yearSelector" aria-label="Escolher ano para praticar Português">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
@@ -243,7 +243,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
   if(!session&&view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId="portuguese" go={go}/>{sharedNav}</Shell>;
 
-  if(!session&&view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PortugueseLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
+  if(!session&&view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<PortugueseLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
   if(!session&&view==="progress"){
     const overview=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{
@@ -263,7 +263,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   }
 
   if(!session&&view==="exams")return <Shell className="wideStudentShell examHub">
-    {sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button>
+    {sharedTop}
     <div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Português · 639</h1><p className="muted">Escolhe um Mini-exame para uma sessão mais curta ou o Exame Completo quando estiver disponível no teu percurso.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {miniExamDraft&&<div className="pausedSession"><div><small>{miniExamDraft.review?"REVISÃO EM PAUSA":miniExamDraft.examId==="full-1"?"EXAME COMPLETO EM PAUSA":"MINI-EXAME EM PAUSA"}</small><b>{miniExamDraft.examId==="full-1"?"Exame Completo de Português":(portugueseMiniExamMeta(miniExamDraft.examId)?.title||"Mini-exame de Português")}</b><span>{miniExamDraft.review?"Retoma a revisão por critérios.":`Pergunta ${miniExamDraft.index+1} de ${miniExamDraft.itemIds?.length||6}`}</span></div><button onClick={()=>{setS(prev=>({...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),selectedMiniExamId:miniExamDraft.examId}}}));go("portugueseMiniExam")}}>Continuar →</button></div>}
