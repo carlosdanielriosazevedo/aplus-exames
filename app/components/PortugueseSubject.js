@@ -188,7 +188,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   </Shell>;
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
-    {view==="curriculum"&&}
+    
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p><h1>O que já deste no {currentYear}?</h1>
     <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as obras e os conteúdos que a escola já trabalhou. Assim, a app não te pergunta sobre uma leitura que ainda não deste.</p>
     <div className="scopeCounter"><b>{scopeDraft.length}</b><span>de {portugueseScopeRows(currentYear).flatMap(group=>group.rows).length} conteúdos assinalados</span></div>
