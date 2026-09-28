@@ -23,7 +23,7 @@ const authorities=new Set(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.map(row=>row.aut
 assert.ok(authorities.has("DGE")&&authorities.has("IAVE"),"A fundação deve distinguir currículo DGE de referência IAVE.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.filter(row=>row.authority==="DGE").every(row=>row.status==="in-force"),"As fontes curriculares DGE devem estar marcadas como vigentes.");
 
-assert.equal(PHYSICS_CHEMISTRY_A_ITEMS.length,339,"O banco atual deve ter 339 itens originais após as vagas de autenticidade, gráficos, dados e respostas construídas.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=429,"O banco deve manter pelo menos 429 itens após a primeira vaga de profundidade de treino.");
 assert.equal(new Set(PHYSICS_CHEMISTRY_A_ITEMS.map(item=>item.id)).size,PHYSICS_CHEMISTRY_A_ITEMS.length,"IDs de FQ A devem ser únicos.");
 for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
   const domain=PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===item.domain);
@@ -49,13 +49,19 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 }
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
-assert.equal(coverage.total,339);
+assert.ok(coverage.total>=429);
 assert.equal(coverage.missionReady,true,"Todos os grandes domínios devem suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
-  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=7,subtopic.id+": cada submatéria deve ter pelo menos sete itens, permitindo treino específico de 7–10 perguntas.");
+  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=7,subtopic.id+": nenhuma submatéria pode recuar abaixo do mínimo operacional de sete itens.");
 }
+const depthWave=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V-"));
+assert.equal(depthWave.length,90,"A primeira vaga de profundidade deve acrescentar 90 variantes fechadas e determinísticas.");
+assert.equal(new Set(depthWave.map(item=>item.id)).size,depthWave.length,"As variantes de treino devem ter IDs únicos.");
+const deepenedSubtopics=new Set(depthWave.map(item=>item.subtopicId));
+assert.equal(deepenedSubtopics.size,15,"A primeira vaga deve aprofundar 15 submatérias quantitativas.");
+for(const id of deepenedSubtopics)assert.ok((coverage.bySubtopic[id]||0)>=13,id+": submatérias aprofundadas devem oferecer pelo menos 13 itens antes de repetir.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="table").length>=15,"FQ A deve conter pelo menos quinze itens com tabelas/dados.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="stepwise").length>=14,"FQ A deve conter pelo menos catorze problemas por etapas.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="restricted-response").length>=14,"FQ A deve conter pelo menos catorze respostas científicas/experimentais abertas.");
@@ -174,4 +180,4 @@ assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Reve
 assert.match(learn,/Trabalho prático associado nas AE/u,"Rever Matéria deve tornar visível o trabalho prático previsto nas AE.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 339 itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");
+console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 429+ itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");
