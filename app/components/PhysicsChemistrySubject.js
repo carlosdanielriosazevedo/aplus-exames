@@ -266,7 +266,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   const currentRows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
   return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
-    <div className="sectionIntro"><p className="eyebrow">FÍSICA E QUÍMICA A · 715</p><h1>Hoje, trabalha ciência com método.</h1><p className="muted">Mesma estrutura da APProva+: matéria dada, missão, treino, mini-exame, revisão e progresso por competência.</p></div>
+    <div className="sectionIntro"><p className="eyebrow">FÍSICA E QUÍMICA A · 715</p><h1>Hoje, trabalha ciência com método.</h1><p className="muted">Mesma estrutura da APProva+: matéria dada, missão, treino, exames, revisão e progresso por competência.</p></div>
     <ApronsoNudge pose="thinking">Começa por uma missão curta. A app vai usar o teu histórico para dar prioridade ao que precisa de mais trabalho.</ApronsoNudge>
     <div className="missionHero"><div><small>MISSÃO RECOMENDADA</small><h2>{missionDone?"Missão diária concluída":"7 perguntas · Física e Química"}</h2><p>Questões originais sobre os domínios já disponíveis no teu percurso.</p></div><button className="primary" disabled={!scopedCoverage.missionReady} onClick={()=>startMission()}>{missionDone?"Treinar mais":"Começar missão"}</button></div>
     <div className="themeGrid">{currentRows.map(row=><button key={row.id} disabled={!scopedCoverage.missionEligibleByDomain[row.id]} onClick={()=>startMission(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+scopedCoverage.byDomain[row.id]+" disponíveis"}</small></button>)}</div>

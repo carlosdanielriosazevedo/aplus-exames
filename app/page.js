@@ -1003,7 +1003,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
       <div className="dailyMissionActions">
         <button className="dailyMissionStart" onClick={onStart}>{mode==="resume"?"Continuar Missão →":"Começar Missão →"}</button>
         <button className="dailyMissionLater" onClick={onDismiss}>Agora não · ver a Home</button>
-        <small className="dailyMissionFoot">Existe apenas uma Missão principal por dia. Depois podes continuar com Treino Livre ou Mini-exames.</small>
+        <small className="dailyMissionFoot">Existe apenas uma Missão principal por dia. Depois podes continuar com Treino Livre ou Exames.</small>
       </div>
     </section>
   </div>;
@@ -1011,7 +1011,7 @@ function DailyMissionModal({s,plan,mode="new",onStart,onDismiss}){
 
 const FIRST_USE_TOUR_STEPS=[
   {mascot:"thinking",eyebrow:"PASSO 1 DE 2",title:"Onde encontras o Apronso",text:"Estou contigo na Missão diária, onde a app escolhe uma sessão curta com base no que será mais útil estudar a seguir."},
-  {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:["Em Praticar escolhes qualquer matéria.","No Mini-exame treinas matéria já lecionada.","Em Progresso vês o teu Domínio e a certeza da app."]}
+  {mascot:"progress",eyebrow:"PASSO 2 DE 2",title:"Treina e acompanha a evolução",text:["Em Praticar escolhes qualquer matéria.","Em Exames encontras Mini-exames e, quando disponível, o Exame Completo.","Em Progresso vês o teu Domínio e a certeza da app."]}
 ];
 
 function FirstUseTour({onComplete,onSkip,steps=FIRST_USE_TOUR_STEPS,ariaLabel="Como funciona a APProva+",finalLabel="Começar →"}){
@@ -1226,8 +1226,8 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
 
   if(missionCompletedToday(s) && !draft){
     return <Shell><Back go={go}/><div className="centered"><div className="check">✓</div><p className="eyebrow">MISSÃO DE HOJE CONCLUÍDA</p>
-      <h1>Volta amanhã para uma nova Missão.</h1><p className="muted">Hoje podes continuar com Treino Livre ou Mini-exames. O que fizeres será tido em conta quando o motor preparar a próxima Missão.</p></div>
-      <button className="primary" onClick={()=>go("train")}>Treino Livre</button><button className="secondary" onClick={()=>go("exams")}>Mini-exame</button></Shell>;
+      <h1>Volta amanhã para uma nova Missão.</h1><p className="muted">Hoje podes continuar com Treino Livre ou Exames. O que fizeres será tido em conta quando o motor preparar a próxima Missão.</p></div>
+      <button className="primary" onClick={()=>go("train")}>Treino Livre</button><button className="secondary" onClick={()=>go("exams")}>Exames</button></Shell>;
   }
 
   function answer(n){if(!fb)setSel(n)}
@@ -1875,7 +1875,6 @@ function Progress({s,go}){
 }
 
 function Exams({s,go,startMini}){
-  if(s.activeSubjectId==="portuguese")return <Shell><Back go={go} to="train"/><p className="eyebrow">MINI-EXAME · PORTUGUÊS 639</p><h1>Texto e questões em contexto de prova.</h1><ApronsoNudge pose="thinking" tone="dark">Num texto de exame, várias perguntas podem depender da mesma leitura. Vou manter o texto disponível enquanto respondes.</ApronsoNudge><button className="exam examAction" onClick={()=>go("portugueseMiniExam")}><div><b>⚡ Mini-exame com texto partilhado</b><span>10 itens · 4 domínios · ~45 min</span></div><strong>Começar →</strong></button><div className="notice warning"><b>Português continua em preparação</b><span>Este fluxo está integrado para validação interna, mas a disciplina permanece bloqueada para alunos até cumprir os critérios de beta.</span></div></Shell>;
   const pausedExamDraft=typeof window!=="undefined"?loadSessionDraft(s.betaMode||"internal"):null;
   const last=s.lastExam;
   const miniQuestions=buildMiniExam(s,MATH_MINI_EXAM_QUESTIONS);
