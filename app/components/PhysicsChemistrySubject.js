@@ -196,7 +196,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
             setResults(current=>{const next=[...current];next[next.length-1]=nextFeedback;return next});
             setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:[...results.slice(0,-1),nextFeedback],currentResult:nextFeedback,currentAnswer:answer}));
           }}/><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
-          <button className="primary" onClick={next}>{position===session.items.length?"Terminar":"Seguinte"}</button>
+          <button className="primary" onClick={next}>{position===session.items.length?"Ver resultado":"Seguinte"}</button>
         </>}
       </div>
     </Shell>;
