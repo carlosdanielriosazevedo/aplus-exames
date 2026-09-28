@@ -315,6 +315,13 @@ export default function App(){
     return ()=>window.removeEventListener("popstate",onPopState);
   },[hydrated]);
 
+  useEffect(()=>{
+    if(!hydrated||typeof window==="undefined")return;
+    if(window.history.state?.approvaScreen!==screen){
+      window.history.replaceState({...window.history.state,approvaScreen:screen},"");
+    }
+  },[hydrated,screen]);
+
   const go=x=>{
     if(typeof window!=="undefined"&&hydrated&&window.history.state?.approvaScreen!==x){
       window.history.pushState({...window.history.state,approvaScreen:x},"");
