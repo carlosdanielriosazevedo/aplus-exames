@@ -223,7 +223,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       </Shell>;
     }
     return <Shell className="wideStudentShell">
-      {view==="curriculum"&&}
+      
       <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
       <h1>O que já deste no {currentYear}?</h1>
       <p className="muted">A matéria do ano anterior fica disponível. No ano atual, assinala apenas os grandes domínios que a tua turma já trabalhou.</p>
