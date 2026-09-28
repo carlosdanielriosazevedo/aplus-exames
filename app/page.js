@@ -306,9 +306,13 @@ export default function App(){
 
   useEffect(()=>{
     if(!hydrated||typeof window==="undefined")return;
-    window.history.replaceState({...window.history.state,approvaScreen:screen},"");
+    window.history.replaceState({...window.history.state,approvaScreen:screen,approvaSubjectId:s.activeSubjectId||null},"");
     const onPopState=event=>{
       const target=event.state?.approvaScreen;
+      const targetSubjectId=event.state?.approvaSubjectId;
+      if(typeof targetSubjectId==="string"){
+        setS(prev=>(prev.selectedSubjectIds||[]).includes(targetSubjectId)?activateSubjectState(prev,targetSubjectId):prev);
+      }
       if(typeof target==="string")setScreen(target);
     };
     window.addEventListener("popstate",onPopState);
@@ -317,14 +321,14 @@ export default function App(){
 
   useEffect(()=>{
     if(!hydrated||typeof window==="undefined")return;
-    if(window.history.state?.approvaScreen!==screen){
-      window.history.replaceState({...window.history.state,approvaScreen:screen},"");
+    if(window.history.state?.approvaScreen!==screen||window.history.state?.approvaSubjectId!==(s.activeSubjectId||null)){
+      window.history.replaceState({...window.history.state,approvaScreen:screen,approvaSubjectId:s.activeSubjectId||null},"");
     }
-  },[hydrated,screen]);
+  },[hydrated,screen,s.activeSubjectId]);
 
   const go=x=>{
     if(typeof window!=="undefined"&&hydrated&&window.history.state?.approvaScreen!==x){
-      window.history.pushState({...window.history.state,approvaScreen:x},"");
+      window.history.pushState({...window.history.state,approvaScreen:x,approvaSubjectId:s.activeSubjectId||null},"");
     }
     setScreen(x);
   };
