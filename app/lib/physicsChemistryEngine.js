@@ -81,12 +81,18 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
 export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,subtopicId=null,year=null,size=DEFAULT_MISSION_QUESTIONS}={}){
   const bounded=Math.max(STUDY_SESSION_MIN_QUESTIONS,Math.min(STUDY_SESSION_MAX_QUESTIONS,size));
   let pool=items.filter(item=>(!domain||item.domain===domain)&&(!subtopicId||item.subtopicId===subtopicId)&&(!year||item.year===year));
-  const recent=new Set((progress.sessions||[]).slice(-4).flatMap(row=>row.itemIds||[]));
-  const fresh=pool.filter(item=>!recent.has(item.id));
-  if(fresh.length>=bounded)pool=fresh;
+  const sessions=progress.sessions||[];
+  const recent=new Set(sessions.slice(-4).flatMap(row=>row.itemIds||[]));
+  const exposure=new Map();
+  for(const id of sessions.flatMap(row=>row.itemIds||[]))exposure.set(id,(exposure.get(id)||0)+1);
+  const unseen=pool.filter(item=>(exposure.get(item.id)||0)===0);
+  if(unseen.length>=bounded)pool=unseen;
 
   const competence=progress.competence||{};
   pool=[...pool].sort((a,b)=>{
+    const seenA=exposure.get(a.id)||0,seenB=exposure.get(b.id)||0;
+    if(seenA!==seenB)return seenA-seenB;
+    if(recent.has(a.id)!==recent.has(b.id))return recent.has(a.id)?1:-1;
     const ra=competence[a.competencyId]||{},rb=competence[b.competencyId]||{};
     const aa=ra.deterministicAttempts||0,ab=rb.deterministicAttempts||0;
     const pa=aa?(ra.correct||0)/aa:0.5,pb=ab?(rb.correct||0)/ab:0.5;
