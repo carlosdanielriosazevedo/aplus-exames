@@ -28,14 +28,23 @@ function yearsThrough(year){
 }
 
 function portugueseScopeRows(year){
-  const general=(portugueseTaxonomyForYear(year,{includePrevious:false})[0]?.units||[])
+  const units=portugueseTaxonomyForYear(year,{includePrevious:false})[0]?.units||[];
+  const general=units
     .filter(unit=>unit.domain!=="educacao-literaria")
-    .map(unit=>({id:`domain:${unit.domain}`,label:unit.title.replace(/^.*? · /u,""),detail:PORTUGUESE_DOMAIN_LABELS[unit.domain]}));
+    .map(unit=>({
+      id:unit.domain,
+      label:PORTUGUESE_DOMAIN_LABELS[unit.domain],
+      rows:[{
+        id:`domain:${unit.domain}`,
+        label:unit.title.replace(/^.*? · /u,""),
+        detail:unit.summary
+      }]
+    }));
   const literature=portugueseLiteraryWorksForYear(year)
     .map(work=>({id:`work:${work.id}`,label:work.title,detail:`${work.author} · ${work.curriculumLabel}`}));
   return [
     {id:"educacao-literaria",label:"Educação Literária",rows:literature},
-    {id:"competencias",label:"Leitura, Escrita e Gramática",rows:general}
+    ...general
   ];
 }
 
@@ -191,10 +200,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
     
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p><h1>O que já deste no {currentYear}?</h1>
     <p className="muted">A matéria dos anos anteriores fica disponível. No teu ano atual, assinala as obras e os conteúdos que a escola já trabalhou. Assim, a app não te pergunta sobre uma leitura que ainda não deste.</p>
-    <div className="scopeCounter"><b>{scopeDraft.length}</b><span>de {portugueseScopeRows(currentYear).flatMap(group=>group.rows).length} conteúdos assinalados</span></div>
+    <div className="scopeCounter"><b>{scopeDraft.length}</b><span>de {portugueseScopeRows(currentYear).flatMap(group=>group.rows).length} matérias/submatérias assinaladas</span></div>
     <div className="curriculumPicker portugueseCurriculumPicker">{portugueseScopeRows(currentYear).map(group=>{const ids=group.rows.map(row=>row.id);const count=ids.filter(id=>scopeDraft.includes(id)).length;const all=count===ids.length&&ids.length>0;return <details key={group.id} open={count>0}>
       <summary><div><b>{group.label}</b><small>{count}/{ids.length} selecionados</small></div><span>⌄</span></summary>
-      <button type="button" className="selectTheme" onClick={()=>setScopeDraft(current=>all?current.filter(id=>!ids.includes(id)):[...new Set([...current,...ids])])}>{all?"Desmarcar este grupo":"Selecionar este grupo"}</button>
+      <button type="button" className="selectTheme" onClick={()=>setScopeDraft(current=>all?current.filter(id=>!ids.includes(id)):[...new Set([...current,...ids])])}>{all?"Desmarcar esta matéria":"Selecionar toda esta matéria"}</button>
       <div>{group.rows.map(row=><label key={row.id}><input type="checkbox" checked={scopeDraft.includes(row.id)} onChange={()=>setScopeDraft(current=>current.includes(row.id)?current.filter(id=>id!==row.id):[...current,row.id])}/><span><b>{row.label}</b><small>{row.detail}</small></span></label>)}</div>
     </details>})}</div>
     {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste matéria deste ano</b><span>A app usará apenas matéria dos anos anteriores. No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma área.</span></div>}
