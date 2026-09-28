@@ -1394,3 +1394,38 @@ button,input,select,textarea{max-width:100%}
   .fqaExamReviewList{max-width:1040px}
   .completedExamSummary,.completedExamReview,.reviewWrong,.examChanges,.answerMap{max-width:960px}
 }
+
+
+/* Desktop pass 4 — resultados, estados vazios e consistência final */
+.subjectStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+.subjectStats>div{padding:16px;border:1px solid var(--app-card-light-border);border-radius:14px;background:var(--app-card-light)}
+.subjectStats b,.subjectStats span{display:block}
+.subjectStats b{font-size:22px;color:var(--app-orange-dark)}
+.subjectStats span{margin-top:3px;color:var(--app-muted);font-size:12px;line-height:1.4}
+
+@media(min-width:1100px){
+  .completionMoment{padding-top:6px}
+  .completionMoment .resultApronso{max-height:180px}
+  .completionMoment h1{font-size:38px;line-height:1.08}
+  .completionMoment h2{max-width:760px;margin-left:auto;margin-right:auto;font-size:22px;line-height:1.4}
+  .subjectStats,.portugueseSubjectStats{max-width:860px;margin-left:auto;margin-right:auto}
+  .portugueseResultHero{margin:30px auto 24px;max-width:760px}
+  .portugueseResultHero b{font-size:62px}
+  .notice.warning{line-height:1.5}
+  .noEvidence{min-height:54px;padding:13px 0}
+  .noEvidence b{font-size:13px}.noEvidence span{font-size:12px;line-height:1.45}
+  .exam.locked{min-height:78px;padding:18px 20px;border-radius:16px}
+  .exam.locked b{font-size:15px}.exam.locked span{font-size:13px;line-height:1.45}
+  .rankingLocked{padding:16px 18px;border-radius:14px}
+  .rankingLocked b{font-size:14px}.rankingLocked span{font-size:13px;line-height:1.45}.rankingLocked small{font-size:12px}
+  .studentMenu div button{white-space:normal}
+  .studentMenu div button+button{border-top:1px solid #f0f2f4}
+}
+@media(min-width:1440px){
+  .completionMoment{max-width:920px}
+  .subjectStats,.portugueseSubjectStats{max-width:920px}
+  .portugueseResultHero{max-width:820px}
+}
+@media(max-width:760px){
+  .subjectStats{grid-template-columns:1fr}
+}
