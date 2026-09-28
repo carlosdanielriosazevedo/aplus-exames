@@ -12,7 +12,7 @@ import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
-import {activateSubjectState,finishSubjectOnboardingState,subjectOnboardingStep} from "../lib/subjectWorkspace";
+import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
 import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
@@ -28,6 +28,10 @@ function allDomainIdsForYear(year){
   return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).map(row=>row.id);
 }
 
+function allDomainIds(){
+  return PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.id);
+}
+
 function initialTaught(settings,year){
   const allowed=new Set(allDomainIdsForYear(year));
   return Array.isArray(settings?.taughtUnitIds)?settings.taughtUnitIds.filter(id=>allowed.has(id)):[];
@@ -38,7 +42,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const settings=s.subjectSettings?.[SUBJECT_ID]||{};
   const taughtUnitIds=initialTaught(settings,currentYear);
   const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";
-  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
+  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allDomainIds():taughtUnitIds);
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(null);
   const [practiceSubtopic,setPracticeSubtopic]=useState(null);
@@ -49,11 +53,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [rubricAssessment,setRubricAssessment]=useState({});
   const [examDrafts,setExamDrafts]=useState([]);
   const progress=subjectProgressFor(s,SUBJECT_ID);
-  const scopedItems=physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,finishedSecondary?allDomainIdsForYear(currentYear):taughtUnitIds);
+  const scopedItems=finishedSecondary?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
   const scopedCoverage=physicsChemistryCoverage(scopedItems);
   const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);
-  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"goalOnboard";
+  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";
   const missionDone=missionCompletedToday(s);
   useEffect(()=>{
     if(!["home","exams"].includes(view))return;
@@ -74,7 +78,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div>
     <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>
     <button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button>
-    <button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button>
+    <button onClick={()=>go("goalSettings")}>Objetivo: {subjectGoal(s,SUBJECT_ID)} valores</button>
     {(progress.sessions.length>0||progress.lastPosition||examDrafts.length>0)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}
   </div></details></StudentTop>;
   const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
@@ -205,8 +209,21 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   if(view==="curriculumOnboard"||view==="curriculum"){
     const rows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
+    if(finishedSecondary){
+      return <Shell className="wideStudentShell">
+        <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
+        <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Física e Química A fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente a matéria do 10.º e 11.º anos, incluindo Física, Química e trabalho prático.</p></div></div>
+        <button className="primary" onClick={()=>{
+          setS(prev=>{
+            const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:allDomainIds(),curriculumConfigured:true}}};
+            return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
+          });
+          go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress");
+        }}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
+      </Shell>;
+    }
     return <Shell className="wideStudentShell">
-      {view==="curriculum"&&<button className="back" onClick={()=>go("progress")}>← Voltar</button>}
+      
       <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
       <h1>O que já deste no {currentYear}?</h1>
       <p className="muted">A matéria do ano anterior fica disponível. No ano atual, assinala apenas os grandes domínios que a tua turma já trabalhou.</p>
@@ -233,7 +250,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const subtopics=practiceDomain?physicsChemistrySubtopicsForDomain(practiceDomain):[];
     const availableInSelection=practiceSubtopic?coverage.bySubtopic[practiceSubtopic]||0:practiceDomain?coverage.byDomain[practiceDomain]||0:0;
     return <Shell className="wideStudentShell trainingSetupPage">
-      <button className="back" onClick={()=>go("train")}>← Voltar</button>
+      
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
       <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano, a matéria e, se quiseres, uma submatéria.</p>
       <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeSubtopic(null)}}>{year}</button>)}</div>
@@ -245,9 +262,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   }
 
   if(view==="train")return <Shell className="wideStudentShell trainHub">{sharedTop}<StudyModeHub subjectId={SUBJECT_ID} go={go}/>{sharedNav}</Shell>;
-  if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
+  if(view==="reviewMatter")return <Shell className="wideStudentShell reviewStudyPage">{sharedTop}<PhysicsChemistryLearnPanel schoolYear={currentYear}/>{sharedNav}</Shell>;
 
-  if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<button className="back" onClick={()=>go("train")}>← Voltar</button><div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
+  if(view==="exams")return <Shell className="wideStudentShell examHub">{sharedTop}<div className="sectionIntro"><p className="eyebrow">EXAMES</p><h1>Física e Química A · 715</h1><p className="muted">Escolhe entre um treino mais curto e o Exame Completo com a estrutura 15 obrigatórios + 8 opcionais, contando os 4 melhores opcionais.</p></div>
     <ApronsoNudge pose="thinking" tone="dark">Aqui não dou pistas durante as perguntas. No fim, voltamos à prova para rever as tuas respostas.</ApronsoNudge>
     {examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
     <div className="trainChoices">
@@ -286,18 +303,23 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const positiveSignals=dimensions.reduce((sum,row)=>sum+row.correct+row.structuredEarned+row.observed,0);
     const overall=totalSignals?Math.round(positiveSignals/totalSignals*100):null;
     return <Shell className="wideStudentShell progressPage">{sharedTop}<div className="sectionIntro"><p className="eyebrow">PROGRESSO</p><h1>Como estás a evoluir.</h1></div>
-      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{s.goal} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
-      <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
-      <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
-        <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
-        <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.structuredScored} problemas por etapas</span><span>{row.needsReview+row.structuredNeedsReview} a rever</span></footer></article>)}</div>
-      </section>
+      <div className="progressHero"><div><small>PREPARAÇÃO</small><b>{overall??"—"}<em>{overall!==null?"/100":""}</em></b><div className="bar"><i style={{width:(overall??0)+"%"}}/></div><span>Índice parcial</span></div><p><small>OBJETIVO</small><b>{subjectGoal(s,SUBJECT_ID)} valores</b><span>O índice não prevê a tua nota de exame.</span></p><Apronso pose="progress" alt="Apronso acompanha o teu progresso"/></div>
       <div className="progressOverview">{rows.map(row=><div key={row.id}><span>{row.shortTitle}</span><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><b>{row.percent??"—"}</b></div>)}</div>
+      <div className="progressActions"><button className="secondary" onClick={()=>go("curriculumSettings")}>Atualizar matéria dada</button><button className="secondary" onClick={()=>go("profileSettings")}>Ano e percurso escolar</button></div>
+      <details className="progressDetails"><summary>Ver detalhe por matéria →</summary>
+        <p className="muted">Consulta domínio, evidência e competências científicas quando precisares de perceber melhor o resultado.</p>
+        <section className="fqaCompetencyProgress"><div className="fqaCompetencyProgressHead"><div><small>COMPETÊNCIAS DE FQ A</small><h2>O que o teu trabalho já mostra</h2></div><span>Não é uma nota.</span></div>
+          <p className="muted">Combina respostas objetivas com evidência que tu próprio assinalaste nas respostas científicas. “Parcial” e “Ainda não” ficam como pontos a rever, não como classificação automática.</p>
+          <div className="fqaCompetencyGrid">{dimensions.map(row=><article key={row.id}><div><b>{row.label}</b><small>{row.note}</small></div><strong>{row.percent===null?"—":row.percent+"%"}</strong><div className="bar"><i style={{width:(row.percent??0)+"%"}}/></div><footer><span>{row.observed} evidências cumpridas</span><span>{row.structuredScored} problemas por etapas</span><span>{row.needsReview+row.structuredNeedsReview} a rever</span></footer></article>)}</div>
+        </section>
+        {rows.map(row=><div className={"prog "+(row.percent===null?"unmeasured":"")} key={row.id}><div className="progHead"><b>{row.shortTitle}</b><small>{row.area} · {row.year}</small></div>{row.percent===null?<div className="noEvidence"><b>Ainda sem estimativa</b><span>A app vai recolher evidência quando praticares esta área.</span></div>:<><span>Domínio estimado: {row.percent}/100</span><div className="bar"><i style={{width:row.percent+"%"}}/></div><div className="certaintyRow"><span>Evidência objetiva</span><b>{row.attempts} respostas</b><small>As respostas científicas abertas e os problemas por etapas mantêm a sua evidência separada.</small></div></>}</div>)}
+      </details>
+      <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary><div className="notice"><b>Preparação ≠ nota de exame</b><span>O índice resume apenas a evidência disponível nesta disciplina e pode mudar com novas respostas.</span></div><div className="notice"><b>Respostas científicas</b><span>A evidência por critérios e os problemas por etapas não são convertidos automaticamente numa classificação final.</span></div></details>
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
   }
 
   const currentRows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
-  return <main className="dark learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
+  return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
     <div className="sectionIntro"><p className="eyebrow">FÍSICA E QUÍMICA A · 715</p><h1>Hoje, trabalha ciência com método.</h1><p className="muted">Mesma estrutura da APProva+: matéria dada, missão, treino, exames, revisão e progresso por competência.</p></div>
     <ApronsoNudge pose="thinking">Começa por uma missão curta. A app vai usar o teu histórico para dar prioridade ao que precisa de mais trabalho.</ApronsoNudge>
     {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}

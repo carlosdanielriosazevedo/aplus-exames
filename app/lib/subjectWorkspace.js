@@ -46,6 +46,14 @@ export function subjectOnboardingStep(state,currentSubjectId){
   };
 }
 
+export function subjectGoal(state,subjectId,fallback=14){
+  const id=canonicalSubjectId(subjectId);
+  const value=state?.subjectSettings?.[id]?.goal;
+  if(Number.isFinite(value))return Math.max(10,Math.min(20,Math.round(value)));
+  const legacy=state?.goal;
+  return Number.isFinite(legacy)?Math.max(10,Math.min(20,Math.round(legacy))):fallback;
+}
+
 export function activateSubjectState(state,subjectId){
   const id=canonicalSubjectId(subjectId);
   const settings=state?.subjectSettings?.[id];
@@ -53,6 +61,7 @@ export function activateSubjectState(state,subjectId){
   return {
     ...state,
     activeSubjectId:id,
+    goal:subjectGoal(state,id),
     profile:hasProfile?{
       ...(state.profile||{}),
       recentGrade:settings.recentGrade??"",
