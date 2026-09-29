@@ -45,7 +45,7 @@ function transferItem(source,index,workIndex){
     "Transferir uma interpretação exige preservar o princípio de leitura e renovar a evidência concreta que o sustenta.",
     (workIndex+index)%4,
     "analisar",
-    `pt-lit-transfer-v6-${source.templateId||source.id}`
+    `pt-lit-transfer-v6-${source.id}`
   );
 }
 function distractorItem(source,index,workIndex){
@@ -63,7 +63,7 @@ function distractorItem(source,index,workIndex){
     "O erro mais perigoso é a formulação aparentemente correta mas desligada do pedido ou sem sustentação textual.",
     (workIndex+index+2)%4,
     "avaliar",
-    `pt-lit-distractor-v6-${source.templateId||source.id}`
+    `pt-lit-distractor-v6-${source.id}`
   );
 }
 
