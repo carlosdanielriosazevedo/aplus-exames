@@ -42,6 +42,7 @@ function genericObservations(item,criterion){
   if(criterion.id==="posicao")return ["Formula uma posição clara.","Mantém o desenvolvimento centrado no tema e nos valores em discussão."];
   if(criterion.id==="genero-tema")return ["Responde diretamente ao tema definido no enunciado.","Respeita as características essenciais do género textual solicitado."];
   if(criterion.id==="desenvolvimento")return ["Desenvolve ideias ou razões pertinentes em vez de apenas as enunciar.","Integra exemplos, consequências ou explicações que tornam o desenvolvimento substantivo."];
+  if(criterion.id==="coerencia")return ["Organiza as ideias numa sequência reconhecível e sem contradições internas.","Liga frases e parágrafos de modo a tornar explícita a progressão do texto."];
   if(criterion.id==="correcao-linguistica")return ["Usa vocabulário adequado e suficientemente preciso.","Constrói frases sintaticamente claras.","Respeita ortografia e pontuação de forma funcional."];
   if(criterion.id==="discurso")return ["Apresenta uma explicação coerente.","Apoia diretamente a explicação em elementos do excerto."];
   if(criterion.id==="forma")return ["Identifica o recurso formal pedido.","Explica o efeito desse recurso na construção do sentido."];
