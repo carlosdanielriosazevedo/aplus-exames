@@ -42,7 +42,8 @@ assert.ok(
 );
 assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);
 assert.doesNotMatch(css,/\.diagApronsoHero>\.apronso\{[^}]*margin:-/);
-assert.ok((page.match(/<ApronsoNudge/g)||[]).length>=4,"Apronso must be present in the main navigation surfaces");
+assert.ok((mainPage.match(/<ApronsoNudge/g)||[]).length>=2,"Apronso must remain on the main student surfaces");
+assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"Apronso must remain on the shared study hub");
 
 for(const pose of poses){
   const asset=new URL(`../public/mascot/apronso-${pose}.webp`,import.meta.url);
