@@ -8,7 +8,7 @@ function rotate(correct,distractors,shift){
   const options=values.map((_,index)=>values[(index+shift)%4]);
   return {options,answerIndex:(4-(shift%4))%4};
 }
-function base(source,id,prompt,correct,distractors,explanation,shift,competencyId,templateId,difficultyTarget=3){
+function base(source,id,prompt,correct,distractors,shift,competencyId,templateId,difficultyTarget=3){
   return {
     id,
     year:source.year,
@@ -17,7 +17,7 @@ function base(source,id,prompt,correct,distractors,explanation,shift,competencyI
     competencyId:competencyId||source.competencyId||"fqa-problems",
     prompt,
     ...rotate(correct,distractors,shift),
-    explanation,
+    explanation:correct,
     responseType:"multiple-choice",
     gradingMode:"deterministic",
     sourceOrigin:"original",
