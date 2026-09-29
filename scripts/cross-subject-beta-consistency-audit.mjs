@@ -31,7 +31,7 @@ for(const [label,source] of [["Português",portuguese],["FQ A",fqa]]){
 assert.match(math,/Atualizar matéria dada/u,"Matemática A deve manter a mesma ação curricular no Progresso.");
 assert.match(math,/Ano e percurso escolar/u,"Matemática A deve manter a mesma ação de perfil no Progresso.");
 
-assert.match(fqa,/ApronsoNudge pose="thinking" tone="dark"/u,"FQ A deve ter a mesma orientação antes de entrar numa prova.");
+assert.match(fqa,/adaptivePath/u,"FQ A deve usar a mesma estrutura principal de Aprender das restantes disciplinas.");
 assert.match(fqa,/examDrafts\.length>0/u,"uma prova FQ A em pausa deve tornar disponível a ação de repor progresso.");
 
 console.log("✓ consistência transversal: Treinar → Exames, hubs 635/639/715, ações de Progresso e retoma alinhadas");
