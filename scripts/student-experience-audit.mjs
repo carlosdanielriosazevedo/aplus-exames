@@ -54,7 +54,7 @@ assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu 
 assert.ok((mainPage.match(/<ApronsoNudge/g)||[]).length>=2,"O Apronso deve acompanhar os principais ecrãs da experiência.");
 assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"O Apronso deve acompanhar o hub de estudo partilhado.");
 assert.match(page,/Índice parcial[\s\S]*?O índice não prevê a tua nota de exame\./);
-assert.match(page,/className="focusTop"/);
+assert.match(chrome,/function StudySessionHeader[\s\S]*?className="focusTop sessionTop"[\s\S]*?className="focusTrack"/);
 assert.match(page,/window\.history\.scrollRestoration="manual"/);
 assert.match(page,/requestAnimationFrame\(\(\)=>window\.scrollTo\(\{top:0,left:0,behavior:"auto"\}\)\)/);
 assert.equal((page.match(/<StudentNav active=/g)||[]).length,5,"focus sessions must remain outside the five navigable student surfaces");
@@ -64,7 +64,7 @@ for(const name of ["DiagRun","Mission","TrainingRun","MiniExamRun"]){
   assert.ok(start>=0,`${name} must exist`);
   const sessionSource=page.slice(start,end<0?page.length:end);
   assert.doesNotMatch(sessionSource,/<StudentNav/,`${name} must remain in focus mode`);
-  assert.equal((sessionSource.match(/className="focusTrack"/g)||[]).length,1,`${name} must expose one focus progress track`);
+  assert.equal((sessionSource.match(/<StudySessionHeader/g)||[]).length,1,`${name} must expose one shared focus progress header`);
   assert.match(sessionSource,/className="questionContext"/,`${name} must expose only a short question context by default`);
   assert.match(sessionSource,/className="focusDisclosure"><summary>ⓘ Sobre esta pergunta<\/summary>/,`${name} must keep engine detail behind progressive disclosure`);
 }
