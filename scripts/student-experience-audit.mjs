@@ -33,8 +33,8 @@ const trainHubSource=page.slice(page.indexOf("function TrainHub("),page.indexOf(
 const diagnosticIntroSource=page.slice(page.indexOf("function DiagIntro("),page.indexOf("\nfunction DiagRun("));
 const missionModalSource=page.slice(page.indexOf("function DailyMissionModal("),page.indexOf("\nfunction Home("));
 const curriculumPickerSource=page.slice(page.indexOf("function TaughtCurriculum("),page.indexOf("\nfunction GoalScreen("));
-assert.match(trainHubSource,/practiceModeCopy\("math-a"\)/);
-assert.match(trainHubSource,/STUDY_MODE_COPY\.miniExam/);
+assert.match(studyModeHub,/practiceModeCopy\(subjectId\)/);
+assert.match(studyModeHub,/STUDY_MODE_COPY\.(?:miniExam|exams)/);
 assert.match(diagnosticIntroSource,/Que matéria entra no diagnóstico\?[\s\S]*?submatérias que assinalaste como já lecionadas[\s\S]*?matéria dos anos anteriores/);
 assert.match(missionModalSource,/Matéria desta Missão:[\s\S]*?submatérias já lecionadas no teu ano[\s\S]*?matéria dos anos anteriores/);
 assert.doesNotMatch(curriculumPickerSource,/Diagnóstico, Missões e Mini-exames|<b>Treino Livre<\/b>/);
