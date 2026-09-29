@@ -8,6 +8,7 @@ const page=[welcome,mainPage,chrome].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const agents=readFileSync(new URL("../AGENTS.md",import.meta.url),"utf8");
 const studyModeCopy=readFileSync(new URL("../app/lib/studyModeCopy.js",import.meta.url),"utf8");
+const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 
 assert.match(agents,/A APProva\+ pensa muito e mostra pouco/);
 assert.match(agents,/Cada ecrã do aluno deve ter uma ação visualmente dominante/);
@@ -25,7 +26,7 @@ assert.match(page,/Apronso e como funciona a app/);
 assert.match(page,/firstUseTourCompleted:true/);
 assert.match(page,/PRÓXIMO PASSO PROVÁVEL/);
 assert.match(page,/function TrainHub/);
-assert.match(page,/Rever matéria/);
+assert.match(studyModeHub,/Rever matéria/);
 assert.match(studyModeCopy,/Estuda e consolida conteúdos sem perguntas nem avaliação\./);
 assert.match(page,/if\(screen==="reviewMatter"\)return <MathReviewMatter/u,"Rever matéria de Matemática A deve estar funcional");
 const trainHubSource=page.slice(page.indexOf("function TrainHub("),page.indexOf("\nfunction Train(",page.indexOf("function TrainHub(")));
