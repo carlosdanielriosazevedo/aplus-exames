@@ -31,7 +31,7 @@ describe("shared feedback and study copy",()=>{
   it("keeps common study-mode copy identical across subjects",()=>{
     expect(STUDY_MODE_COPY.nudge).toContain("fazer uma prova");
     expect(STUDY_MODE_COPY.review).toBe("Estuda e consolida conteúdos sem perguntas nem avaliação.");
-    expect(STUDY_MODE_COPY.miniExam).toBe("Treina num formato próximo do exame e revê as respostas no final.");
+    expect(STUDY_MODE_COPY.miniExam).toBe("Faz Mini-exames ou um Exame Completo, quando disponível, e revê as respostas no final.");
     expect(practiceModeCopy("math-a")).toContain("matéria e submatéria");
     expect(practiceModeCopy("portuguese")).toContain("área, obra ou competência");
   });
