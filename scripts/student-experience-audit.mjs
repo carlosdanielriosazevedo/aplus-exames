@@ -12,7 +12,7 @@ const studyModeCopy=readFileSync(new URL("../app/lib/studyModeCopy.js",import.me
 assert.match(agents,/A APProva\+ pensa muito e mostra pouco/);
 assert.match(agents,/Cada ecrã do aluno deve ter uma ação visualmente dominante/);
 assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\["ranking","Ranking"\],\["progress","Progresso"\]\]/);
-assert.equal((page.match(/<StudentNav active=/g)||[]).length,4,"exactly four primary student surfaces need navigation");
+assert.equal((page.match(/<StudentNav active=/g)||[]).length,5,"home, ranking, training, progress and exams hub need navigation");
 assert.doesNotMatch(chrome,/STUDENT_NAV[\s\S]{0,300}(?:Exames|Pais|Conta)/);
 assert.match(page,/className="adaptivePath"/);
 assert.match(page,/MISSÃO DE HOJE/);
@@ -55,7 +55,7 @@ assert.match(page,/Índice parcial — não é uma previsão da nota do exame/);
 assert.match(page,/className="focusTop"/);
 assert.match(page,/window\.history\.scrollRestoration="manual"/);
 assert.match(page,/requestAnimationFrame\(\(\)=>window\.scrollTo\(\{top:0,left:0,behavior:"auto"\}\)\)/);
-assert.equal((page.match(/<StudentNav active=/g)||[]).length,(page.match(/function StudentNav/g)||[]).length+3);
+assert.equal((page.match(/<StudentNav active=/g)||[]).length,5,"focus sessions must remain outside the five navigable student surfaces");
 for(const name of ["DiagRun","Mission","TrainingRun","MiniExamRun"]){
   const start=page.indexOf(`function ${name}(`);
   const end=page.indexOf("\nfunction ",start+10);
