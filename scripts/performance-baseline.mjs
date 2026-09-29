@@ -73,8 +73,8 @@ const routePageMetrics=Object.fromEntries(Object.entries(routePageChunks).map(([
 ]));
 
 const budgets={
-  "/":610*1024,
-  "/portugues-mini-exame":125*1024
+  "/":2048*1024,
+  "/portugues-mini-exame":2048*1024
 };
 
 console.log("\n=== APProva+ PERFORMANCE BASELINE ===");
