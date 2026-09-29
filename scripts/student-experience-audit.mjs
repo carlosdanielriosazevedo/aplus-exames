@@ -53,7 +53,7 @@ assert.match(page,/className="progressDetails"/);
 assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza da app[\s\S]*?Variantes não contam/);
 assert.ok((mainPage.match(/<ApronsoNudge/g)||[]).length>=2,"O Apronso deve acompanhar os principais ecrãs da experiência.");
 assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"O Apronso deve acompanhar o hub de estudo partilhado.");
-assert.match(page,/Índice parcial — não é uma previsão da nota do exame/);
+assert.match(page,/Índice parcial[\s\S]*?O índice não prevê a tua nota de exame\./);
 assert.match(page,/className="focusTop"/);
 assert.match(page,/window\.history\.scrollRestoration="manual"/);
 assert.match(page,/requestAnimationFrame\(\(\)=>window\.scrollTo\(\{top:0,left:0,behavior:"auto"\}\)\)/);
