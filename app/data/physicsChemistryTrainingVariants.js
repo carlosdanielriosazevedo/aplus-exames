@@ -3,8 +3,18 @@ function mc({id,year,domain,subtopicId,competencyId="fqa-problems",prompt,option
 }
 function n(x,d=2){return Number(x.toFixed(d))}
 function opts(correct,a,b,c,format=x=>String(x)){
-  const values=[correct,a,b,c].map(format);
-  if(new Set(values).size!==4)throw new Error("Duplicate FQ training variant option: "+values.join("|"));
+  const candidates=[correct,a,b,c];
+  const fallbacks=[correct*1.5,correct*.75,correct*2.5,correct+1,correct-1,-correct,0,2];
+  const values=[];
+  for(let index=0;index<candidates.length;index++){
+    let value=format(candidates[index]);
+    if(values.includes(value)){
+      const replacement=fallbacks.find(candidate=>!values.includes(format(candidate)));
+      if(replacement===undefined)throw new Error("Unable to build four distinct FQ training options.");
+      value=format(replacement);
+    }
+    values.push(value);
+  }
   return {options:values,answerIndex:0};
 }
 const rows=[];
