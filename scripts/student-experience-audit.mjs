@@ -35,7 +35,7 @@ const missionModalSource=page.slice(page.indexOf("function DailyMissionModal("),
 const curriculumPickerSource=page.slice(page.indexOf("function TaughtCurriculum("),page.indexOf("\nfunction GoalScreen("));
 assert.match(studyModeHub,/practiceModeCopy\(subjectId\)/);
 assert.match(studyModeHub,/STUDY_MODE_COPY\.(?:miniExam|exams)/);
-assert.match(diagnosticIntroSource,/Que matéria entra no diagnóstico\?[\s\S]*?submatérias que assinalaste como já lecionadas[\s\S]*?matéria dos anos anteriores/);
+assert.match(diagnosticIntroSource,/A app usa apenas matéria do teu percurso[\s\S]*?Não vamos avaliar matéria que a tua escola ainda não ensinou/);
 assert.match(missionModalSource,/Matéria desta Missão:[\s\S]*?submatérias já lecionadas no teu ano[\s\S]*?matéria dos anos anteriores/);
 assert.doesNotMatch(curriculumPickerSource,/Diagnóstico, Missões e Mini-exames|<b>Treino Livre<\/b>/);
 assert.match(chrome,/function FriendsBetaRibbon\(\{s\}\)/);
