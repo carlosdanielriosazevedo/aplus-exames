@@ -7,6 +7,18 @@ const portugueseMini=fs.readFileSync("app/components/PortuguesePassageMiniExam.j
 assert.doesNotMatch(page,/^import\s+\{[\s\S]*?\}\s+from\s+["\']\.\/lib\/engine["\'];?/m,"Mathematics engine must not be statically imported by app/page.js");
 assert.match(page,/import\("\.\/lib\/engine"\)/,"Mathematics engine must remain behind dynamic import()");
 
+assert.doesNotMatch(
+  page,
+  /^import\s+\{[\s\S]*?\}\s+from\s+["']\.\/lib\/diagnosticRecovery["'];?/m,
+  "Diagnostic recovery must not statically re-import the Mathematics engine into app/page.js."
+);
+assert.match(
+  page,
+  /import\("\.\/lib\/diagnosticRecovery"\)/,
+  "Diagnostic recovery must remain behind dynamic import()."
+);
+
+
 for(const name of ["PhysicsChemistrySubject","PhysicsChemistryExam","PhysicsChemistryMiniExam"]){
   assert.doesNotMatch(
     page,
