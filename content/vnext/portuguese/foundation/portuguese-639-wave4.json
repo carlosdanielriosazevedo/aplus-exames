@@ -43,11 +43,11 @@
       "prompt": "O comportamento dos alunos sugere que",
       "options": [
         "queriam mostrar à diretora que tinham concluído uma atividade no telemóvel.",
-        "antecipavam uma regra ou chamada de atenção relacionada com os telemóveis.",
         "interpretaram a entrada da diretora como sinal de que a aula tinha terminado.",
+        "antecipavam uma regra ou chamada de atenção relacionada com os telemóveis.",
         "estavam a preparar-se para usar os telemóveis numa tarefa orientada."
       ],
-      "answerIndex": 1,
+      "answerIndex": 2,
       "explanation": "O gesto imediato de pousar os telemóveis permite inferir que os alunos antecipavam uma regra ou repreensão ligada ao seu uso.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -85,11 +85,11 @@
       "prompt": "A organização do texto segue uma sequência de",
       "options": [
         "descrição de uma tendência, enumeração de vantagens e apresentação de uma conclusão sem medidas.",
-        "descrição de uma tendência, identificação de dificuldades e apresentação de soluções.",
         "identificação de dificuldades, apresentação de soluções e só depois descrição do aumento do uso.",
-        "descrição de uma tendência, apresentação de soluções e avaliação dos seus resultados."
+        "descrição de uma tendência, apresentação de soluções e avaliação dos seus resultados.",
+        "descrição de uma tendência, identificação de dificuldades e apresentação de soluções."
       ],
-      "answerIndex": 1,
+      "answerIndex": 3,
       "explanation": "O texto apresenta primeiro uma tendência, depois dificuldades e por fim soluções concretas.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -107,11 +107,11 @@
       "prompt": "A redução da fatura deve-se sobretudo",
       "options": [
         "à redução do tempo em que a loja esteve aberta.",
-        "ao uso de sensores que evitam iluminação desnecessária.",
         "a uma quebra de clientes ocorrida após a instalação dos sensores.",
+        "ao uso de sensores que evitam iluminação desnecessária.",
         "à substituição das lâmpadas por equipamento de menor potência."
       ],
-      "answerIndex": 1,
+      "answerIndex": 2,
       "explanation": "Como o horário não mudou, a redução resulta da eliminação de consumo desnecessário através dos sensores.",
       "gradingMode": "deterministic",
       "maxPoints": 13
@@ -173,11 +173,11 @@
       "prompt": "Neste excerto, a voz narrativa revela",
       "options": [
         "certeza inicial que o presente confirma sem reservas.",
-        "incerteza e consciência da própria parcialidade.",
         "distanciamento completo das emoções que condicionaram o julgamento.",
-        "conhecimento objetivo da verdade, apesar do desejo de não perdoar."
+        "conhecimento objetivo da verdade, apesar do desejo de não perdoar.",
+        "incerteza e consciência da própria parcialidade."
       ],
-      "answerIndex": 1,
+      "answerIndex": 3,
       "explanation": "O narrador questiona a própria interpretação e admite que o desejo pode influenciar o seu juízo.",
       "gradingMode": "deterministic",
       "maxPoints": 13
