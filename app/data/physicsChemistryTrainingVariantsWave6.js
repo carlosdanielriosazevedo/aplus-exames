@@ -6,7 +6,7 @@ function slug(value){
 function rotate(correct,distractors,shift){
   const values=[correct,...distractors.slice(0,3)];
   const options=values.map((_,index)=>values[(index+shift)%4]);
-  return {options,answerIndex:options.indexOf(correct)};
+  return {options,answerIndex:(4-(shift%4))%4};
 }
 function base(source,id,prompt,correct,distractors,explanation,shift,competencyId,templateId,difficultyTarget=3){
   return {
