@@ -5,7 +5,7 @@ import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummar
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
 import {portugueseMiniExamDraftSnapshot} from "../lib/portugueseMiniExamDraft";
-import {classifyPortugueseFullExamResults} from "../data/portuguesePassagePrototype";
+import {classifyPortugueseFullExamResults} from "../lib/portugueseFullExamClassification";
 import PortugueseWritingCycleSummary from "./PortugueseWritingCycleSummary";
 import ExamSubmissionCheck from "./ExamSubmissionCheck";
 
@@ -152,7 +152,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
   });
 
   const currentResults=buildResults();
-  const fullClassification=isFullExam?classifyPortugueseFullExamResults(currentResults):null;
+  const fullClassification=isFullExam?classifyPortugueseFullExamResults(exam,currentResults):null;
   const navigationGroups=useMemo(()=>{
     const groups=[];
     exam.items.forEach((row,rowIndex)=>{
@@ -189,7 +189,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       completedRef.current=true;
       let results=buildResults();
       if(isFullExam){
-        const classification=classifyPortugueseFullExamResults(results);
+        const classification=classifyPortugueseFullExamResults(exam,results);
         const selected=new Set([...classification.mandatoryItemIds,...classification.selectedOptionalItemIds]);
         results=results.map(result=>({...result,countsForExamScore:selected.has(result.itemId)}));
       }
