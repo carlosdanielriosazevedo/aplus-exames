@@ -4,7 +4,8 @@ import {readFileSync,statSync} from "node:fs";
 const mainPage=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
-const page=[welcome,mainPage,chrome].join("\n");
+const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
+const page=[welcome,mainPage,chrome,studyModeHub].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
 const poses=["welcome","thinking","celebrate","progress"];
@@ -14,7 +15,7 @@ assert.match(chrome,/aria-label="APProva\+"/);
 assert.doesNotMatch(page,/APPp/);
 assert.doesNotMatch(layout,/APPp/);
 assert.match(chrome,/className="brandAP">AP<\/span><span className="brandProva">Prova<\/span><span className="brandPlus">\+<\/span>/);
-assert.match(page,/Não te vou avaliar\. Só te quero conhecer um pouco melhor para saber por onde começarmos\./);
+assert.match(page,/Não é uma avaliação\. A app usa apenas matéria do teu percurso e aprofunda só quando precisa de perceber melhor uma dificuldade\./);
 assert.match(page,/Conhece o Apronso/);
 assert.match(page,/Onde encontras o Apronso/);
 assert.match(page,/const PRE_DIAGNOSTIC_TOUR_STEPS=/);
@@ -41,7 +42,8 @@ assert.ok(
 );
 assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);
 assert.doesNotMatch(css,/\.diagApronsoHero>\.apronso\{[^}]*margin:-/);
-assert.ok((page.match(/<ApronsoNudge/g)||[]).length>=4,"Apronso must be present in the main navigation surfaces");
+assert.ok((mainPage.match(/<ApronsoNudge/g)||[]).length>=2,"Apronso must remain on the main student surfaces");
+assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"Apronso must remain on the shared study hub");
 
 for(const pose of poses){
   const asset=new URL(`../public/mascot/apronso-${pose}.webp`,import.meta.url);

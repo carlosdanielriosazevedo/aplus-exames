@@ -12,6 +12,7 @@ import {PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE2} from "./physicsChemistryTra
 import {PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE3} from "./physicsChemistryTrainingVariantsWave3.js";
 import {PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE4} from "./physicsChemistryTrainingVariantsWave4.js";
 import {PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE5} from "./physicsChemistryTrainingVariantsWave5.js";
+import {PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE6} from "./physicsChemistryTrainingVariantsWave6.js";
 
 export const PHYSICS_CHEMISTRY_A_VERSION="2026.09-foundation-v1";
 
@@ -138,7 +139,7 @@ export const PHYSICS_CHEMISTRY_A_ITEMS=[
   ...PHYSICS_CHEMISTRY_A_AUTHENTICITY_WAVE3,
   ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS,
   ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE2,
-  ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE3,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE4,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE5
+  ...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE3,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE4,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE5,...PHYSICS_CHEMISTRY_A_TRAINING_VARIANTS_WAVE6
 ].map(item=>({...item,subtopicId:item.subtopicId||physicsChemistrySubtopicIdForItem(item)})).map(balancePhysicsChemistryChoicePosition);
 
 export function physicsChemistryItemById(id){return PHYSICS_CHEMISTRY_A_ITEMS.find(item=>item.id===id)||null}

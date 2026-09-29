@@ -28,6 +28,7 @@ const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.met
 const mathReview=readFileSync(new URL("../app/components/MathReviewMatter.js",import.meta.url),"utf8");
 const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const portugueseLearn=readFileSync(new URL("../app/components/PortugueseLearnPanel.js",import.meta.url),"utf8");
+const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const globalCss=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 assert.match(page,/if\(screen==="subjectOnboard"\)/);
 assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject manager must have a guarded route");
@@ -42,14 +43,14 @@ assert.match(page,/go\("home"\)/,"subject switching must be able to open the sha
 assert.match(page,/go\(isNew\?"onboard":subjectHomeScreen\(subject\.id\)\)/,"uma disciplina adicionada mais tarde deve passar pela configuração antes de abrir a Home");
 assert.match(page,/subjectOnboardingStep/u,"o onboarding deve percorrer todas as disciplinas selecionadas");
 assert.match(page,/if\(screen==="reviewMatter"\)return <MathReviewMatter/u,"Matemática A deve ter um ecrã próprio de Rever matéria");
-assert.match(page,/onClick=\{\(\)=>go\("reviewMatter"\)\}[\s\S]{0,180}<b>Rever matéria<\/b>/u,"o cartão Rever matéria de Matemática A deve estar ativo");
+assert.match(studyModeHub,/onClick=\{\(\)=>go\("reviewMatter"\)\}[\s\S]{0,220}<b>Rever matéria<\/b>/u,"o cartão Rever matéria partilhado deve estar ativo");
 assert.match(mathReview,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria de Matemática A deve ser claramente um modo de estudo");
 assert.match(mathReview,/reviewChapter/u,"Rever matéria deve organizar o conteúdo em capítulos legíveis");
 assert.match(mathReview,/SCHOOL_YEARS\.map/u,"Rever matéria de Matemática A deve permitir escolher explicitamente os três anos");
 assert.doesNotMatch(mathReview,/Responder|startPractice|trainingRun|QUESTION_BANK/u,"Rever matéria de Matemática A não deve iniciar perguntas nem treino");
 assert.match(portugueseLearn,/SCHOOL_YEARS\.includes/u,"Rever matéria de Português deve disponibilizar 10.º, 11.º e 12.º anos");
 assert.match(portugueseSubject,/SCHOOL_YEARS\.map\(year=>/u,"Praticar Português deve disponibilizar 10.º, 11.º e 12.º anos");
-assert.match(portugueseSubject,/Atualizar matéria dada na escola/u,"O Progresso de Português deve permitir atualizar a matéria dada");
+assert.match(portugueseSubject,/Atualizar matéria dada/u,"O Progresso de Português deve permitir atualizar a matéria dada");
 assert.doesNotMatch(portugueseSubject,/className="progressDetails" open/u,"O mapa completo de Português deve começar fechado");
 assert.match(portugueseSubject,/taughtUnitIds/u,"Português deve guardar a matéria dada por obra ou conteúdo, não apenas por domínio");
 assert.match(portugueseSubject,/literaryWorkId/u,"perguntas de obras não lecionadas devem ficar fora do âmbito do aluno");

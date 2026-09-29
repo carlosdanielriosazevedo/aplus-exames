@@ -64,8 +64,8 @@ const state={
   goal:17,betaMode:"friends_beta",editorialOverrides:{},scores,missionHistory:[],examHistory:[],
   profile:{schoolYear:"12.º",optionalTopics:["all"],taughtSubtopicIds:CURRICULUM_SUBTOPICS.map(subtopic=>subtopic.id)}
 };
-const exam=buildMiniExam(state,8);
-assert.equal(exam.length,8);
+const exam=buildMiniExam(state,10);
+assert.equal(exam.length,10);
 assert.ok(exam.some(question=>question.id.startsWith("EX-VN")),"O motor deve usar o novo banco quando os itens anteriores já foram vistos.");
 
 console.log(`✓ Mini-exames vNext: ${VNEXT_EXAM_QUESTIONS.length} itens · 3 por submatéria · sem reutilização do Diagnóstico/Missões · produção bloqueada`);

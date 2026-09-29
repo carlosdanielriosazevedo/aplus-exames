@@ -64,8 +64,8 @@ for(const ctx of ["diagnostic","mission","training","exam"]){
 assert.equal(betaContentReadiness({},[]).canClosedBeta,false);
 
 // Mini-exam can exercise the UX before teacher review.
-const exam=buildMiniExam(consent,8);
-assert.equal(exam.length,8);
+const exam=buildMiniExam(consent,10);
+assert.equal(exam.length,10);
 assert.ok(exam.every(q=>!q.generated),"Beta de amigos não deve usar variantes geradas.");
 
 // Treino also stays on curated questions only.

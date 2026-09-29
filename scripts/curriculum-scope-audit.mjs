@@ -45,7 +45,7 @@ assert.deepEqual(normalizeTaughtSubtopics({...partial10.profile,taughtSubtopicId
 assert.equal(CURRICULUM_SUBTOPICS.length,113);
 assert.equal(currentYearSubtopicIds(profile("10.º")).length,31);
 assert.equal(currentYearSubtopicIds(profile("11.º")).length,35);
-const currentQuestions=buildMiniExam(partial10,8);
+const currentQuestions=buildMiniExam(partial10,10);
 assert.ok(currentQuestions.every(q=>isQuestionInAcademicScope(q,partial10.profile,"exam")));
 const selectedQuestion=trainingQuestions(partial10,{themeId:"10-fun",focus:"mc-10-fun-dominio-e-zeros",level:"auto"},1)[0];
 const hiddenQuestion=trainingQuestions(partial10,{themeId:"10-fun",focus:"mc-10-fun-monotonia-e-extremos",level:"auto"},1)[0];
@@ -103,8 +103,8 @@ assert.ok(calibrationCandidates(s10).every(t=>t.year==="10.º"));
 
 // O Mini-exame nunca sobe para matéria futura.
 for(const [state,maxYear] of [[s10,10],[s11,11],[s12,12]]){
-  const exam=buildMiniExam(state,8);
-  assert.equal(exam.length,8);
+  const exam=buildMiniExam(state,10);
+  assert.equal(exam.length,10);
   for(const q of exam){
     const t=TAXONOMY.find(x=>x.id===q.themeId);
     const n=Number.parseInt(t.year,10);

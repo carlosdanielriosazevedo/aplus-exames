@@ -29,7 +29,7 @@ const SPECIAL_OBSERVATIONS={
 };
 
 function genericObservations(item,criterion){
-  if(criterion.id==="conteudo")return CONTENT_OBSERVATIONS[item.id]||[criterion.label];
+  if(criterion.id==="conteudo"){const specific=CONTENT_OBSERVATIONS[item.id];if(specific)return specific;if(/[;,]|\be\b/i.test(criterion.label))return [criterion.label,"Explica a relação entre os elementos identificados e o efeito, função ou consequência pedido no enunciado."];return [criterion.label];}
   if(criterion.id==="lingua")return ["Usa vocabulário adequado.","Constrói frases claras.","Evita erros que comprometam o sentido."];
   if(criterion.id==="estrutura")return ["Ordena as ideias com progressão.","Liga as frases com conectores ou outros mecanismos de coesão.","Fecha a resposta de forma coerente com o desenvolvimento."];
   if(criterion.id==="fundamentacao")return ["Apresenta uma razão, exemplo ou elemento concreto pertinente.","Liga esse elemento à interpretação ou posição defendida."];
@@ -40,6 +40,10 @@ function genericObservations(item,criterion){
     return observations;
   }
   if(criterion.id==="posicao")return ["Formula uma posição clara.","Mantém o desenvolvimento centrado no tema e nos valores em discussão."];
+  if(criterion.id==="genero-tema")return ["Responde diretamente ao tema definido no enunciado.","Respeita as características essenciais do género textual solicitado."];
+  if(criterion.id==="desenvolvimento")return ["Desenvolve ideias ou razões pertinentes em vez de apenas as enunciar.","Integra exemplos, consequências ou explicações que tornam o desenvolvimento substantivo."];
+  if(criterion.id==="coerencia")return ["Organiza as ideias numa sequência reconhecível e sem contradições internas.","Liga frases e parágrafos de modo a tornar explícita a progressão do texto."];
+  if(criterion.id==="correcao-linguistica")return ["Usa vocabulário adequado e suficientemente preciso.","Constrói frases sintaticamente claras.","Respeita ortografia e pontuação de forma funcional."];
   if(criterion.id==="discurso")return ["Apresenta uma explicação coerente.","Apoia diretamente a explicação em elementos do excerto."];
   if(criterion.id==="forma")return ["Identifica o recurso formal pedido.","Explica o efeito desse recurso na construção do sentido."];
   return [criterion.label];

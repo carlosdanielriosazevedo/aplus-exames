@@ -12,7 +12,7 @@ import {
 
 const generated=spawnSync(process.execPath,["scripts/generate-vnext-mission.mjs","--check"],{encoding:"utf8"});
 assert.equal(generated.status,0,generated.stderr||generated.stdout);
-assert.equal(DAILY_MISSION_MIN_INTERACTIONS,5);
+assert.equal(DAILY_MISSION_MIN_INTERACTIONS,7);
 assert.equal(DAILY_MISSION_MAX_INTERACTIONS,10);
 assert.equal(DAILY_MISSION_MIN_SECONDS,180);
 assert.equal(DAILY_MISSION_MAX_SECONDS,300);
@@ -51,9 +51,9 @@ for(const subtopic of CURRICULUM_SUBTOPICS){
     usedIds.push(item.id);usedSignatures.push(item.signature);items.push(item);seconds+=estimateMissionSeconds(item);
     decision=missionStopDecision({missionType:"calibration",targetCount:count,totalCount:count,beforeConf:0,currentScore:{conf:20},sessionTargetItems:items,estimatedSeconds:seconds});
     if(count<DAILY_MISSION_MIN_INTERACTIONS)assert.equal(decision.stop,false,`${subtopic.id}: terminou com ${count}`);
-    if(decision.stop){assert.ok(count>=5&&count<=10,subtopic.id);break}
+    if(decision.stop){assert.ok(count>=7&&count<=10,subtopic.id);break}
   }
   assert.equal(decision?.stop,true,`${subtopic.id}: não terminou dentro do limite`);
 }
 
-console.log(`✓ Missões vNext: 113 submatérias · 7 perguntas independentes cada · nunca menos de 5 · orçamento de 3–5 min`);
+console.log(`✓ Missões vNext: 113 submatérias · 7 perguntas independentes cada · nunca menos de 7 · orçamento de 3–5 min`);

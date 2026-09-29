@@ -15,9 +15,9 @@ const items=packs.flatMap(pack=>pack.items);
 const deterministic=items.filter(item=>["multiple-choice","short-answer"].includes(item.responseType));
 const open=items.filter(item=>["restricted-response","extended-writing"].includes(item.responseType));
 
-assert.equal(items.length,310,"a passagem editorial deve cobrir os 310 itens atuais");
-assert.equal(deterministic.length,276,"o banco atual deve manter 276 itens determinísticos");
-assert.equal(open.length,34,"a passagem editorial deve manter as 34 respostas abertas");
+assert.equal(items.length,334,"a passagem editorial deve cobrir os 334 itens atuais");
+assert.equal(deterministic.length,278,"o banco atual deve manter 278 itens determinísticos");
+assert.equal(open.length,56,"a passagem editorial deve manter as 56 respostas abertas");
 
 const weakSignals=[];
 const lengthSkew=[];
@@ -83,12 +83,12 @@ for(const item of items){
 }
 
 assert.equal(checkedMultipleChoice,199);
-assert.equal(checkedShortAnswers,77);
+assert.equal(checkedShortAnswers,79);
 assert.ok(lengthSkew.length<=8,`demasiadas respostas corretas denunciam-se pelo comprimento: ${lengthSkew.join(" | ")}`);
 assert.equal(weakSignals.length,0,`distratores linguisticamente denunciadores: ${weakSignals.join(" | ")}`);
 
 const latest=packs.at(-1);
-assert.equal(latest.wave,15);
+assert.equal(latest.wave,17);
 for(const id of ["PT639-FND-101","PT639-FND-106","PT639-FND-107","PT639-FND-110","PT639-FND-113","PT639-FND-114","PT639-FND-119"]){
   assert.ok(items.some(item=>item.id===id),`${id}: item revisto deve permanecer no banco integrado`);
 }
