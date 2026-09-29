@@ -1,13 +1,15 @@
 "use client";
 
 import {useEffect,useMemo,useRef,useState} from "react";
+import dynamic from "next/dynamic";
 import {PORTUGUESE_SELF_ASSESSMENT_LEVELS,criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress} from "../lib/portugueseSelfAssessment";
 import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortugueseWritingMemory,writingMemoryInsight,writingMemoryProfile} from "../lib/portugueseWritingMemory";
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
 import {portugueseMiniExamDraftSnapshot} from "../lib/portugueseMiniExamDraft";
 import {classifyPortugueseFullExamResults} from "../lib/portugueseFullExamClassification";
-import PortugueseWritingCycleSummary from "./PortugueseWritingCycleSummary";
-import ExamSubmissionCheck from "./ExamSubmissionCheck";
+
+const PortugueseWritingCycleSummary=dynamic(()=>import("./PortugueseWritingCycleSummary"),{ssr:false});
+const ExamSubmissionCheck=dynamic(()=>import("./ExamSubmissionCheck"),{ssr:false});
 
 function answerFilled(item,value){
   if(item.responseType==="multiple-choice")return Number.isInteger(value);
