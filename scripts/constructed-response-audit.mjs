@@ -83,7 +83,7 @@ const state={
   missionHistory:[],examHistory:[],
   profile:{schoolYear:"12.º",optionalTopics:[],taughtSubtopicIds:["12-fcont-limites-continuidade","12-int-integral-definido"]}
 };
-const exam=buildMiniExam(state,8);
+const exam=buildMiniExam(state,10);
 const completion=COMPLETION_RESPONSE_BANK[0];
 assert.ok(exam.some(q=>q.id===completion.id),"O Mini-exame deve incluir o completamento quando a matéria é elegível.");
 assert.equal(isConstructedResponse(completion),false);
@@ -93,9 +93,9 @@ assert.equal(gradeResponse(completion,{a:1}).points,1.25);
 assert.equal(gradeResponse(completion,{a:1,b:0,c:2}).status,"partial");
 assert.equal(gradeResponse(completion,answerFor(completion)).points,5);
 assert.deepEqual(gradeResponse(completion,JSON.parse(JSON.stringify(answerFor(completion)))),gradeResponse(completion,answerFor(completion)));
-assert.equal(exam.length,8);
+assert.equal(exam.length,10);
 assert.equal(exam.filter(isConstructedResponse).length,2);
-assert.equal(exam.filter(q=>!isConstructedResponse(q)).length,6);
+assert.equal(exam.filter(q=>!isConstructedResponse(q)).length,8);
 assert.equal(exam.filter(isConstructedResponse).reduce((sum,q)=>sum+q.points,0),70);
 assert.equal(exam.filter(q=>!isConstructedResponse(q)).reduce((sum,q)=>sum+q.points,0),30);
 
