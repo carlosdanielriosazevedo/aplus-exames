@@ -1284,7 +1284,7 @@ button,input,select,textarea{max-width:100%}
 .examMarkButton:focus-visible{outline:3px solid rgba(239,167,35,.22);outline-offset:1px}
 .fqaExamDots button.marked,.ptx-question-nav button.is-marked,.answerMap button.marked,.examSubmitMap button.is-marked{box-shadow:inset 0 0 0 2px #d8a43f}
 .fqaExamDots button.marked::after{content:"★";font-size:11px;line-height:1;margin-left:2px}
-.ptx-question-nav button.is-marked::after{content:"★";font-size:8px;line-height:1;margin-left:2px}
+.ptx-question-nav button.is-marked::after{content:"★";font-size:11px;line-height:1;margin-left:2px}
 .answerMap button.marked,.examSubmitMap button.is-marked{background:#fff8e8;border-color:#e3b85f}
 @media(max-width:620px){.examMarkButton{width:100%}}
 
@@ -1437,7 +1437,7 @@ button,input,select,textarea{max-width:100%}
 .goalInline .goalHero.compact strong{font-size:42px}
 .goalInline .goalHero.compact span{font-size:14px}
 .goalInline .sliderLabels{margin-top:0}
-.learnHome{background:linear-gradient(180deg,#f6f8f9 0,#eef2f4 100%);color:var(--app-navy)}
+.dark,.light,.learnHome{background:#fff;color:var(--app-navy)}
 .learnHome .learnIntro p{color:var(--app-muted)}
 .learnHome .learnIntro span{color:#6d7a86}
 .learnHome .learnIntro h1{color:var(--app-navy)}
