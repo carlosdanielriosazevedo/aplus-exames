@@ -334,7 +334,13 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,compe
   const targetObservationIds=new Set(uniqueEvidenceObservations.map(row=>row.observationId));
   const sessionRows=[...(progress?.sessions||[]),...(progress?.missionHistory||[])];
   const exposure=new Map();
-  for(const id of sessionRows.flatMap(session=>session.itemIds||[]))exposure.set(id,(exposure.get(id)||0)+1);
+  const itemById=new Map(items.map(item=>[item.id,item]));
+  const templateExposure=new Map();
+  for(const id of sessionRows.flatMap(session=>session.itemIds||[])){
+    exposure.set(id,(exposure.get(id)||0)+1);
+    const templateId=itemById.get(id)?.templateId;
+    if(templateId)templateExposure.set(templateId,(templateExposure.get(templateId)||0)+1);
+  }
   const recentIds=new Set(sessionRows.slice(-4).flatMap(session=>session.itemIds||[]));
   const targetChallenges=[1,2,2,3,3,4,2];
   const selected=[];
@@ -354,7 +360,8 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,compe
         const observationMatch=(item.rubric?.criteria||[]).some(criterion=>(criterion.observations||[]).some(observation=>targetObservationIds.has(observation.id)));
         const matchBoost=observationMatch?1.15:0;
         const repeatPenalty=(exposure.get(item.id)||0)*1.4;
-        return (needById.get(item.competencyId)||0)+matchBoost-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0)-repeatPenalty;
+        const familyPenalty=item.templateId?(templateExposure.get(item.templateId)||0)*.18:0;
+        return (needById.get(item.competencyId)||0)+matchBoost-Math.abs(portugueseStructuralChallenge(item)-target)*.12-(recentIds.has(item.id)?.65:0)-repeatPenalty-familyPenalty;
       };
       return score(b)-score(a)||a.id.localeCompare(b.id);
     });
