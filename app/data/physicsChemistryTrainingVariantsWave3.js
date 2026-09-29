@@ -43,7 +43,7 @@ addSet("EMWAVES","11.º","f11-em","f11-em-waves",[
 ]);
 
 addSet("OPTICS","11.º","f11-em","f11-optics",[
-  {prompt:"Na reflexão especular, o ângulo de reflexão é:",options:["igual ao ângulo de incidência","sempre 90°","metade do ângulo de incidência","independente da normal"],explanation:"A lei da reflexão estabelece igualdade entre os ângulos medidos relativamente à normal."},
+  {prompt:"Para um raio luminoso que sofre reflexão especular numa superfície plana, o ângulo refletido é:",options:["igual ao ângulo de incidência","sempre 90°","metade do ângulo de incidência","independente da normal"],explanation:"A lei da reflexão estabelece igualdade entre os ângulos medidos relativamente à normal."},
   {prompt:"Na refração, a mudança de direção da luz resulta da alteração da sua:",options:["velocidade de propagação","frequência da fonte","carga elétrica","massa"],explanation:"A velocidade muda entre meios, provocando refração; a frequência mantém-se."},
   {prompt:"Ao passar para um meio com maior índice de refração, um raio oblíquo aproxima-se em geral:",options:["da normal","da superfície","do eixo horizontal independentemente da interface","de um ângulo de 90° sempre"],explanation:"Para n maior, a velocidade diminui e o raio refratado aproxima-se da normal."},
   {prompt:"A reflexão total interna só pode ocorrer quando a luz passa:",options:["de um meio de maior índice para outro de menor índice","do ar para vidro em qualquer ângulo","entre meios de igual índice","apenas no vazio"],explanation:"É necessária passagem do meio opticamente mais denso para o menos denso e incidência acima do ângulo crítico."},
