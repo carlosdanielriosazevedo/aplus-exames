@@ -12,6 +12,7 @@ assert.match(page,/onClick=\{\(\)=>go\("exams"\)\}>Exames<\/button>/u,"atalhos q
 assert.match(page,/Treino Livre ou Exames/u,"a copy transversal pós-Missão deve apontar para a área Exames.");
 assert.match(page,/Em Exames fazes Mini-exames e, quando disponível, o Exame Completo/u,"o onboarding deve explicar corretamente o conteúdo da área.");
 assert.match(portuguese,/Praticar, rever matéria ou fazer um exame/u,"Português deve usar copy genérica quando não escolhe ainda um modelo específico.");
-assert.match(fqa,/matéria dada, missão, treino, exames, revisão e progresso por competência/u,"FQ A deve descrever a arquitetura comum com a nomenclatura atual.");
+assert.match(fqa,/Caminho adaptativo de Física e Química A/u,"FQ A deve usar o mesmo caminho adaptativo visual das restantes disciplinas.");
+assert.match(fqa,/Praticar, rever matéria ou fazer um exame/u,"FQ A deve usar a mesma copy de próximo passo das restantes disciplinas.");
 
 console.log("✓ navegação pré-teste: Exames é o destino comum e não existem fluxos paralelos mortos de Português");
