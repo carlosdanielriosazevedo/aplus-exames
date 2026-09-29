@@ -54,7 +54,7 @@ assert.ok(page.includes("Nunca entram no ranking: Domínio"),"Barreira de privac
 assert.ok(page.includes("A TUA MISSÃO DE HOJE"),"Modal automático da Missão de Hoje desapareceu.");
 assert.ok(page.includes("dailyMissionPromptDecision"),"Lógica automática da Missão de Hoje desapareceu.");
 assert.ok(page.includes("missionPlanForToday(s,dailyMissionPlan(s))"),"Missão diária deixou de usar a atribuição congelada.");
-assert.ok(page.includes("MEMÓRIA PEDAGÓGICA · CICLO DE VIDA"),"UI do ciclo de vida da memória pedagógica desapareceu.");
+assert.ok(page.includes("O QUE A APP ESTÁ A ACOMPANHAR")&&page.includes("Pontos a confirmar"),"UI da memória pedagógica desapareceu.");
 assert.ok(page.includes("refreshLearningHypotheses"),"Refresh da memória pedagógica após evidência desapareceu.");
 assert.ok(page.includes("Conflito detetado — nada foi sobrescrito"),"UI explícita de conflitos cloud desapareceu.");
 assert.ok(page.includes("Guardar com controlo de revisão"),"Save cloud deixou de indicar controlo de revisão.");
