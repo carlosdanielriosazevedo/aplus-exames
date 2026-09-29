@@ -57,7 +57,7 @@ describe("Portuguese full practice exam",()=>{
   });
 
   it("keeps open-answer grading conservative and gives writing 44 points",()=>{
-    expect(exam.responseTypes).toEqual({"restricted-response":4,"multiple-choice":10,"extended-writing":1});
+    expect(exam.responseTypes).toEqual({"restricted-response":5,"multiple-choice":9,"extended-writing":1});
     const objective=exam.items.filter(item=>item.responseType==="multiple-choice");
     const open=exam.items.filter(item=>item.responseType!=="multiple-choice");
     expect(objective.every(item=>item.gradingMode==="deterministic"&&Number.isInteger(item.answerIndex))).toBe(true);
