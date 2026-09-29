@@ -23,7 +23,7 @@ const authorities=new Set(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.map(row=>row.aut
 assert.ok(authorities.has("DGE")&&authorities.has("IAVE"),"A fundação deve distinguir currículo DGE de referência IAVE.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.filter(row=>row.authority==="DGE").every(row=>row.status==="in-force"),"As fontes curriculares DGE devem estar marcadas como vigentes.");
 
-assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=429,"O banco deve manter pelo menos 429 itens após a primeira vaga de profundidade de treino.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=513,"O banco deve manter pelo menos 513 itens após duas vagas de profundidade de treino.");
 assert.equal(new Set(PHYSICS_CHEMISTRY_A_ITEMS.map(item=>item.id)).size,PHYSICS_CHEMISTRY_A_ITEMS.length,"IDs de FQ A devem ser únicos.");
 for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
   const domain=PHYSICS_CHEMISTRY_A_DOMAINS.find(row=>row.id===item.domain);
@@ -49,7 +49,7 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 }
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
-assert.ok(coverage.total>=429);
+assert.ok(coverage.total>=513);
 assert.equal(coverage.missionReady,true,"Todos os grandes domínios devem suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
@@ -62,6 +62,14 @@ assert.equal(new Set(depthWave.map(item=>item.id)).size,depthWave.length,"As var
 const deepenedSubtopics=new Set(depthWave.map(item=>item.subtopicId));
 assert.equal(deepenedSubtopics.size,15,"A primeira vaga deve aprofundar 15 submatérias quantitativas.");
 for(const id of deepenedSubtopics)assert.ok((coverage.bySubtopic[id]||0)>=13,id+": submatérias aprofundadas devem oferecer pelo menos 13 itens antes de repetir.");
+const depthWave2=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.generated===true&&String(item.id).startsWith("FQA-V2-"));
+assert.equal(depthWave2.length,84,"A segunda vaga deve acrescentar 84 variantes fechadas e determinísticas.");
+assert.equal(new Set(depthWave2.map(item=>item.id)).size,depthWave2.length,"As variantes da segunda vaga devem ter IDs únicos.");
+const deepenedSubtopicsWave2=new Set(depthWave2.map(item=>item.subtopicId));
+assert.equal(deepenedSubtopicsWave2.size,14,"A segunda vaga deve aprofundar 14 submatérias adicionais.");
+for(const id of deepenedSubtopicsWave2)assert.ok((coverage.bySubtopic[id]||0)>=13,id+": submatérias da segunda vaga devem oferecer pelo menos 13 itens antes de repetir.");
+const allDeepened=new Set([...deepenedSubtopics,...deepenedSubtopicsWave2]);
+assert.equal(allDeepened.size,29,"As duas vagas devem aprofundar 29 submatérias distintas.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.stimulus?.type==="table").length>=15,"FQ A deve conter pelo menos quinze itens com tabelas/dados.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="stepwise").length>=14,"FQ A deve conter pelo menos catorze problemas por etapas.");
 assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.responseType==="restricted-response").length>=14,"FQ A deve conter pelo menos catorze respostas científicas/experimentais abertas.");
@@ -180,4 +188,4 @@ assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Reve
 assert.match(learn,/Trabalho prático associado nas AE/u,"Rever Matéria deve tornar visível o trabalho prático previsto nas AE.");
 assert.doesNotMatch(learn,/Responder|buildAdaptivePhysicsChemistryMission/u,"Rever matéria não deve iniciar treino.");
 
-console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 429+ itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");
+console.log("✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 513+ itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4");
