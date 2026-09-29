@@ -162,6 +162,15 @@ const MATH_ENGINE_SCREENS=new Set([
   "miniExamReview","miniExamResult","miniExamCompletedReview","parent"
 ]);
 
+function subjectDiagnosticDone(state,subjectId){
+  if(subjectId==="math-a")return !!state.diagnosticDone;
+  return !!subjectProgressFor(state,subjectId).diagnosticDone;
+}
+function hasPendingSelectedDiagnostics(state){
+  const selected=uniqueSubjectIds(state.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
+  return selected.length>1&&selected.some(id=>!subjectDiagnosticDone(state,id));
+}
+
 const DEFAULT_SUBJECT_ID="math-a";
 
 function subjectById(id){
@@ -1081,7 +1090,7 @@ function DiagResult({s,setS,go}){
       firstPriority:priority?.id||null
     }));
     go("home");
-  }}>Ver o meu primeiro plano</button>
+  }}>Ir para o menu inicial</button>
   </Shell>
 }
 
@@ -1184,9 +1193,10 @@ function Home({s,setS,go,reset}){
   const [showMissionModal,setShowMissionModal]=useState(false);
   const [missionModalMode,setMissionModalMode]=useState("new");
   const showFirstUseTour=s.diagnosticDone&&s.firstUseTourCompleted!==true;
+  const pendingSelectedDiagnostics=hasPendingSelectedDiagnostics(s);
 
   useEffect(()=>{
-    if(typeof window==="undefined"||missionDone||showFirstUseTour)return;
+    if(typeof window==="undefined"||missionDone||showFirstUseTour||pendingSelectedDiagnostics)return;
 
     const assignmentPlan=pausedDraft?.kind==="mission"&&pausedDraft.plan
       ?pausedDraft.plan
@@ -1241,7 +1251,7 @@ function Home({s,setS,go,reset}){
         type:assignmentPlan.type
       })]};
     });
-  },[s.firstUseTourCompleted]);
+  },[s.firstUseTourCompleted,pendingSelectedDiagnostics]);
 
   function finishFirstUseTour(skipped=false){
     setS(prev=>recordMilestone({...prev,firstUseTourCompleted:true},"first_use_tour_completed",{skipped,steps:skipped?null:FIRST_USE_TOUR_STEPS.length}));
