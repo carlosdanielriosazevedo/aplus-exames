@@ -4,6 +4,9 @@ import fs from "node:fs";
 const page=fs.readFileSync("app/page.js","utf8");
 const portugueseMini=fs.readFileSync("app/components/PortuguesePassageMiniExam.js","utf8");
 
+assert.doesNotMatch(page,/^import\s+\{[\s\S]*?\}\s+from\s+["\']\.\/lib\/engine["\'];?/m,"Mathematics engine must not be statically imported by app/page.js");
+assert.match(page,/import\("\.\/lib\/engine"\)/,"Mathematics engine must remain behind dynamic import()");
+
 for(const name of ["PhysicsChemistrySubject","PhysicsChemistryExam","PhysicsChemistryMiniExam"]){
   assert.doesNotMatch(
     page,
