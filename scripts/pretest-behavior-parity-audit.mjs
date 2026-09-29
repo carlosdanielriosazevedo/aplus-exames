@@ -14,9 +14,9 @@ assert.match(fqa,/Não sobe nem desce diretamente o teu Domínio/u,"FQ A deve ex
 
 assert.match(math,/missionDone\?<button onClick=\{\(\)=>go\("train"\)\}/u,"Matemática A deve encaminhar para treino depois da Missão diária.");
 assert.match(portuguese,/missionDone\?\(\)=>go\("train"\)/u,"Português deve encaminhar para treino depois da Missão diária.");
-assert.match(fqa,/onClick=\{missionDone\?\(\)=>go\("train"\):\(\)=>startMission\(\)\}/u,"FQ A não deve iniciar uma segunda Missão diária.");
-assert.match(fqa,/\{!missionDone&&<div className="themeGrid">/u,"atalhos por domínio de FQ A devem desaparecer depois da Missão diária.");
-assert.match(fqa,/Hoje já concluíste a Missão principal/u,"FQ A deve explicar ao aluno o que fazer depois da Missão.");
+assert.match(fqa,/missionDone\?\(\)=>go\("train"\):progress\.diagnosticDone\?\(\)=>startMission\(\):startDiagnostic/u,"FQ A deve usar o mesmo CTA adaptativo: diagnóstico, Missão e depois treino.");
+assert.match(fqa,/className="adaptivePath"/u,"FQ A deve usar o caminho adaptativo comum no Aprender.");
+assert.match(fqa,/Praticar, rever matéria ou fazer um exame/u,"FQ A deve apresentar o mesmo próximo passo provável das restantes disciplinas.");
 
 assert.match(fqa,/if\(!\["home","exams"\]\.includes\(view\)\)return/u,"FQ A deve carregar retomas de exame também no Home.");
 assert.match(fqa,/SESSÃO EM PAUSA/u,"o Home de FQ A deve mostrar sessões de estudo em pausa.");
@@ -31,4 +31,9 @@ for(const [label,source] of [["Matemática A",math],["Português",portuguese],["
 assert.match(fqa,/const overall=totalSignals\?Math\.round\(positiveSignals\/totalSignals\*100\):null/u,"o resumo de FQ A deve ser derivado da evidência disponível, não de uma nota inventada.");
 assert.match(fqa,/Não é uma nota/u,"as competências de FQ A devem continuar explicitamente separadas de uma classificação.");
 
-console.log("✓ percurso pré-teste: Missão única/dia · Treino 7–10 · retoma no Home · Progresso coerente nas três disciplinas");
+assert.match(math,/pendingSelectedDiagnostics/u,"Matemática A deve impedir o modal automático da Missão enquanto houver diagnósticos de outras disciplinas por concluir.");
+assert.match(math,/Ir para o menu inicial/u,"o pós-diagnóstico de Matemática A deve devolver explicitamente à Home.");
+assert.match(portuguese,/Ir para o menu inicial/u,"o pós-diagnóstico de Português deve devolver explicitamente à Home.");
+assert.match(fqa,/Ir para o menu inicial/u,"o pós-diagnóstico de FQ A deve devolver explicitamente à Home.");
+
+console.log("✓ percurso pré-teste: diagnósticos multi-disciplina antes de prompt automático · Missão única/dia · Treino 7–10 · retoma no Home · Progresso coerente");
