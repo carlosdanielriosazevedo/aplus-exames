@@ -45,7 +45,7 @@ assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u);
 assert.doesNotMatch(subject,/PortugueseLab|portugueseLab|laboratório/iu);
 assert.match(subject,/StudentTop/u);
 assert.match(subject,/StudentNav/u);
-assert.match(subject,/view==="curriculum"/u);
+assert.match(subject,/\["curriculum","curriculumOnboard"\]\.includes\(view\)/u);
 assert.match(subject,/onboardingStep\.nextId/u,"Português deve encaminhar a configuração para a disciplina seguinte selecionada");
 assert.match(subject,/view==="trainingSetup"/u);
 assert.match(subject,/>Responder</u,"Português deve exigir confirmação explícita da resposta");
