@@ -168,7 +168,7 @@ assert.match(component,/Começar treino/u,"Treino Livre deve usar o contrato 7�
 assert.match(component,/Submatéria/u,"Treino Livre deve permitir escolher submatéria.");
 assert.match(component,/Misturar matéria/u,"O aluno deve poder treinar o domínio inteiro quando a submatéria ainda não tem banco suficiente.");
 assert.match(component,/PhysicsChemistryStimulus/u,"A UI deve reutilizar o renderer de estímulos científicos.");
-assert.match(component,/7 perguntas · Física e Química/u,"Missão deve usar o contrato 7–10.");
+assert.match(component,/progress\.diagnosticDone\?"7 perguntas":"8 perguntas"/u,"A Home de FQ A deve expor 8 perguntas no diagnóstico e 7 na missão.");
 assert.match(component,/Mini-exame · Modelo 1/u,"O mini-exame inicial deve continuar identificado como modelo próprio.");
 assert.match(component,/Exame Completo · 715/u,"FQ A deve expor o Exame Completo depois de este estar implementado.");
 assert.match(component,/PhysicsChemistryStepwiseEditor/u,"FQ A deve suportar problemas por etapas através do componente partilhado.");
