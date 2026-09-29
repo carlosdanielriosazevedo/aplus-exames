@@ -29,7 +29,7 @@ const SPECIAL_OBSERVATIONS={
 };
 
 function genericObservations(item,criterion){
-  if(criterion.id==="conteudo")return CONTENT_OBSERVATIONS[item.id]||[criterion.label];
+  if(criterion.id==="conteudo"){const specific=CONTENT_OBSERVATIONS[item.id];if(specific)return specific;if(/[;,]|\be\b/i.test(criterion.label))return [criterion.label,"Explica a relação entre os elementos identificados e o efeito, função ou consequência pedido no enunciado."];return [criterion.label];}
   if(criterion.id==="lingua")return ["Usa vocabulário adequado.","Constrói frases claras.","Evita erros que comprometam o sentido."];
   if(criterion.id==="estrutura")return ["Ordena as ideias com progressão.","Liga as frases com conectores ou outros mecanismos de coesão.","Fecha a resposta de forma coerente com o desenvolvimento."];
   if(criterion.id==="fundamentacao")return ["Apresenta uma razão, exemplo ou elemento concreto pertinente.","Liga esse elemento à interpretação ou posição defendida."];
