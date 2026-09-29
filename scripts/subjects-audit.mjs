@@ -50,7 +50,7 @@ assert.match(mathReview,/SCHOOL_YEARS\.map/u,"Rever matéria de Matemática A de
 assert.doesNotMatch(mathReview,/Responder|startPractice|trainingRun|QUESTION_BANK/u,"Rever matéria de Matemática A não deve iniciar perguntas nem treino");
 assert.match(portugueseLearn,/SCHOOL_YEARS\.includes/u,"Rever matéria de Português deve disponibilizar 10.º, 11.º e 12.º anos");
 assert.match(portugueseSubject,/SCHOOL_YEARS\.map\(year=>/u,"Praticar Português deve disponibilizar 10.º, 11.º e 12.º anos");
-assert.match(portugueseSubject,/Atualizar matéria dada na escola/u,"O Progresso de Português deve permitir atualizar a matéria dada");
+assert.match(portugueseSubject,/Atualizar matéria dada/u,"O Progresso de Português deve permitir atualizar a matéria dada");
 assert.doesNotMatch(portugueseSubject,/className="progressDetails" open/u,"O mapa completo de Português deve começar fechado");
 assert.match(portugueseSubject,/taughtUnitIds/u,"Português deve guardar a matéria dada por obra ou conteúdo, não apenas por domínio");
 assert.match(portugueseSubject,/literaryWorkId/u,"perguntas de obras não lecionadas devem ficar fora do âmbito do aluno");
