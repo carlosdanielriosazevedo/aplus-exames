@@ -5,8 +5,9 @@ import {PORTUGUESE_LITERARY_TRAINING_VARIANTS} from "../app/data/portugueseLiter
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3} from "../app/data/portugueseLiteraryTrainingVariantsWave3.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4} from "../app/data/portugueseLiteraryTrainingVariantsWave4.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5} from "../app/data/portugueseLiteraryTrainingVariantsWave5.js";
+import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6} from "../app/data/portugueseLiteraryTrainingVariantsWave6.js";
 
-const LITERARY_POOL=[...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5];
+const LITERARY_POOL=[...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6];
 
 const workById=new Map(PORTUGUESE_LITERARY_WORKS.map(work=>[work.id,work]));
 const counts={};
@@ -29,7 +30,7 @@ for(const item of LITERARY_POOL){
 
 for(const work of PORTUGUESE_LITERARY_WORKS){
   const items=LITERARY_POOL.filter(item=>item.literaryWorkId===work.id);
-  assert.ok(items.length>=40,`${work.id}: cada obra deve manter pelo menos 40 itens, aproximando a profundidade da experiência de Matemática A`);
+  assert.ok(items.length>=50,`${work.id}: cada obra deve manter pelo menos 50 itens, alinhando a profundidade com a escala de Matemática A`);
   const represented=new Set(items.map(item=>item.competencyId));
   for(const competencyId of work.readyCompetencyIds||[]){
     assert.ok(represented.has(competencyId),`${work.id}: falta a competência declarada ${competencyId}`);
@@ -43,6 +44,11 @@ const wave5=PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE5;
 assert.equal(wave5.length,250,"A vaga 5 deve acrescentar 250 variantes literárias: 10 por cada uma das 25 obras.");
 assert.equal(new Set(wave5.map(item=>item.id)).size,wave5.length,"IDs da vaga 5 literária devem ser únicos.");
 assert.equal(new Set(wave5.map(item=>item.literaryWorkId)).size,25,"A vaga 5 deve cobrir as 25 obras.");
+const wave6=PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE6;
+assert.equal(wave6.length,250,"A vaga 6 deve acrescentar 250 variantes literárias: 10 por cada uma das 25 obras.");
+assert.equal(new Set(wave6.map(item=>item.id)).size,wave6.length,"IDs da vaga 6 literária devem ser únicos.");
+assert.equal(new Set(wave6.map(item=>item.literaryWorkId)).size,25,"A vaga 6 deve cobrir as 25 obras.");
+assert.equal(new Set(wave6.map(item=>item.templateId)).size,wave6.length,"A vaga 6 deve preservar famílias/templateId distintos.");
 
 const total=answerPositions.reduce((sum,count)=>sum+count,0);
 for(const count of answerPositions)assert.ok(count/total>=0.15,`posição correta sub-representada no banco literário: ${answerPositions.join("/")}`);
