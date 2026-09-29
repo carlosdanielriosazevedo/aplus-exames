@@ -36,10 +36,6 @@ import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
 } from "./lib/sessionDraft";
 import {
-  createDiagnosticDraft,recoverDiagnosticTransaction,recoverLegacyDiagnosticSessions,
-  transactDiagnosticAnswer
-} from "./lib/diagnosticRecovery";
-import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
 } from "./lib/curriculumScope";
 import {
@@ -92,6 +88,28 @@ function mathEngineFn(name){
     return mathEngineModule[name](...args);
   };
 }
+let diagnosticRecoveryModule=null;
+let diagnosticRecoveryPromise=null;
+function loadDiagnosticRecovery(){
+  if(diagnosticRecoveryModule)return Promise.resolve(diagnosticRecoveryModule);
+  if(!diagnosticRecoveryPromise)diagnosticRecoveryPromise=loadMathEngine()
+    .then(()=>import("./lib/diagnosticRecovery"))
+    .then(module=>{
+      diagnosticRecoveryModule=module;
+      return module;
+    });
+  return diagnosticRecoveryPromise;
+}
+function diagnosticRecoveryFn(name){
+  return (...args)=>{
+    if(!diagnosticRecoveryModule)throw new Error(`Recovery do diagnóstico ainda não carregado: ${name}`);
+    return diagnosticRecoveryModule[name](...args);
+  };
+}
+const createDiagnosticDraft=diagnosticRecoveryFn("createDiagnosticDraft");
+const recoverDiagnosticTransaction=diagnosticRecoveryFn("recoverDiagnosticTransaction");
+const recoverLegacyDiagnosticSessions=diagnosticRecoveryFn("recoverLegacyDiagnosticSessions");
+const transactDiagnosticAnswer=diagnosticRecoveryFn("transactDiagnosticAnswer");
 const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{acc[t.id]={domain:null,conf:0,evidence:[]};return acc;},{});
 const theme=id=>TAXONOMY.find(t=>t.id===id);
 const byYear=year=>TAXONOMY.filter(t=>t.year===year);
@@ -214,6 +232,7 @@ export default function App(){
   const [recoveredSession,setRecoveredSession]=useState(null);
   const [hydrated,setHydrated]=useState(false);
   const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
+  const [diagnosticRecoveryReady,setDiagnosticRecoveryReady]=useState(()=>!!diagnosticRecoveryModule);
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -261,6 +280,12 @@ export default function App(){
     let recoveredLegacy=false;
     const openDiagnostic=(next.betaSessions||[]).some(x=>x.kind==="diagnostic"&&!x.finishedAt);
     const legacyDiagnostic=openDiagnostic&&(!draft||(draft.kind==="diagnostic"&&![2,3].includes(draft.version)));
+    if(legacyDiagnostic||draft?.kind==="diagnostic"){
+      await loadDiagnosticRecovery();
+      if(!live)return;
+      setMathEngineReady(true);
+      setDiagnosticRecoveryReady(true);
+    }
     if(!next.diagnosticDone&&legacyDiagnostic){
       const recovery=recoverLegacyDiagnosticSessions({state:next,saveState:saveLocalState});
       if(recovery.ok){
@@ -326,14 +351,25 @@ export default function App(){
 
   useEffect(()=>{
     const mathActive=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
-    if(!hydrated||!mathActive||!MATH_ENGINE_SCREENS.has(screen)||mathEngineModule){
+    if(!hydrated||!mathActive||!MATH_ENGINE_SCREENS.has(screen)){
       if(mathEngineModule&&!mathEngineReady)setMathEngineReady(true);
       return;
     }
+    const needsRecovery=["diag","diagRun","diagResult"].includes(screen);
+    if(mathEngineModule&&(!needsRecovery||diagnosticRecoveryModule)){
+      if(!mathEngineReady)setMathEngineReady(true);
+      if(needsRecovery&&!diagnosticRecoveryReady)setDiagnosticRecoveryReady(true);
+      return;
+    }
     let live=true;
-    loadMathEngine().then(()=>{if(live)setMathEngineReady(true)});
+    const loader=needsRecovery?loadDiagnosticRecovery():loadMathEngine();
+    loader.then(()=>{
+      if(!live)return;
+      setMathEngineReady(true);
+      if(needsRecovery)setDiagnosticRecoveryReady(true);
+    });
     return ()=>{live=false};
-  },[hydrated,screen,s.activeSubjectId,mathEngineReady]);
+  },[hydrated,screen,s.activeSubjectId,mathEngineReady,diagnosticRecoveryReady]);
 
   useEffect(()=>{
     if(!hydrated||typeof document==="undefined")return;
@@ -389,7 +425,8 @@ export default function App(){
   };
 
   const mathSurface=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)))&&MATH_ENGINE_SCREENS.has(screen);
-  if(mathSurface&&!mathEngineReady)return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
+  const diagnosticSurface=["diag","diagRun","diagResult"].includes(screen)&&s.activeSubjectId==="math-a";
+  if(mathSurface&&(!mathEngineReady||(diagnosticSurface&&!diagnosticRecoveryReady)))return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
