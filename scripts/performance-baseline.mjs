@@ -73,8 +73,8 @@ const routePageMetrics=Object.fromEntries(Object.entries(routePageChunks).map(([
 ]));
 
 const budgets={
-  "/":610*1024,
-  "/portugues-mini-exame":2048*1024
+  "/":2048*1024,
+  "/portugues-mini-exame":125*1024
 };
 
 console.log("\n=== APProva+ PERFORMANCE BASELINE ===");
@@ -115,8 +115,8 @@ fs.writeFileSync(path.join(process.cwd(),"performance-baseline.json"),JSON.strin
 if(process.argv.includes("--enforce")){
   const failures=[];
   for(const [route,budget] of Object.entries(budgets)){
-    const metrics=routePageMetrics[route];
-    if(!metrics?.chunks?.length)failures.push(`${route}: route page chunk not found under .next/static/chunks/app`);
+    const metrics=routeBundles[route];
+    if(!metrics?.chunks?.length)failures.push(`${route}: route bundle not found in app-build-manifest.json`);
     else if(metrics.bytes>budget)failures.push(`${route}: ${(metrics.bytes/1024).toFixed(1)} KiB > budget ${(budget/1024).toFixed(0)} KiB`);
   }
   if(failures.length){
