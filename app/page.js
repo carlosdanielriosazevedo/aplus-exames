@@ -25,20 +25,6 @@ import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
 import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectGoal,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
 import "./portugues-mini-exame/passage-mini-exam.css";
-import {
-  emptyScores,theme,byYear,getQuestions,diagnosticAnchor,
-  certaintyLabel,certaintyHelp,applyEvidence,measuredThemes,prepIndex,
-  selectMissionTheme,selectMissionQuestion,selectPrereqQuestion,
-  shouldEndMission,missionStopDecision,trainingQuestions,missionPracticeQuestion,startingDifficulty,
-  missionContentExhaustedDecision,canStartMissionDetour,estimateMissionSeconds,
-  dailyMissionPlan,missionCandidateQueue,markTrainingSignalConfirmed,selectQuestionForPlan,
-  buildMiniExam,applyMiniExam,hasTrainingContent,hasGenerator,
-  eligibleQuestions,eligibleCount,rankedStudyPriorities,
-  focusScore,focusRows,competenceMap,
-  selectCausalProbe,causalVerdict,recordLearningHypothesis,activeLearningHypotheses,
-  allLearningHypotheses,refreshLearningHypotheses,
-  recalibrateAllScores,migratePedagogicalIds,scopedThemeScore,questionById
-} from "./lib/engine";
 import {betaEvent,sessionStart,sessionFinish,betaSummary} from "./lib/beta";
 import {
   migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent
@@ -88,6 +74,75 @@ import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
   expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
 } from "./lib/constructedResponse";
+
+
+let mathEngineModule=null;
+let mathEnginePromise=null;
+function loadMathEngine(){
+  if(mathEngineModule)return Promise.resolve(mathEngineModule);
+  if(!mathEnginePromise)mathEnginePromise=import("./lib/engine").then(module=>{
+    mathEngineModule=module;
+    return module;
+  });
+  return mathEnginePromise;
+}
+function mathEngineFn(name){
+  return (...args)=>{
+    if(!mathEngineModule)throw new Error(`Motor matemático ainda não carregado: ${name}`);
+    return mathEngineModule[name](...args);
+  };
+}
+const emptyScores=()=>TAXONOMY.reduce((acc,t)=>{acc[t.id]={domain:null,conf:0,evidence:[]};return acc;},{});
+const theme=id=>TAXONOMY.find(t=>t.id===id);
+const byYear=year=>TAXONOMY.filter(t=>t.year===year);
+const getQuestions=mathEngineFn("getQuestions");
+const diagnosticAnchor=mathEngineFn("diagnosticAnchor");
+const certaintyLabel=mathEngineFn("certaintyLabel");
+const certaintyHelp=mathEngineFn("certaintyHelp");
+const applyEvidence=mathEngineFn("applyEvidence");
+const measuredThemes=mathEngineFn("measuredThemes");
+const prepIndex=mathEngineFn("prepIndex");
+const selectMissionTheme=mathEngineFn("selectMissionTheme");
+const selectMissionQuestion=mathEngineFn("selectMissionQuestion");
+const selectPrereqQuestion=mathEngineFn("selectPrereqQuestion");
+const shouldEndMission=mathEngineFn("shouldEndMission");
+const missionStopDecision=mathEngineFn("missionStopDecision");
+const trainingQuestions=mathEngineFn("trainingQuestions");
+const missionPracticeQuestion=mathEngineFn("missionPracticeQuestion");
+const startingDifficulty=mathEngineFn("startingDifficulty");
+const missionContentExhaustedDecision=mathEngineFn("missionContentExhaustedDecision");
+const canStartMissionDetour=mathEngineFn("canStartMissionDetour");
+const estimateMissionSeconds=mathEngineFn("estimateMissionSeconds");
+const dailyMissionPlan=mathEngineFn("dailyMissionPlan");
+const missionCandidateQueue=mathEngineFn("missionCandidateQueue");
+const markTrainingSignalConfirmed=mathEngineFn("markTrainingSignalConfirmed");
+const selectQuestionForPlan=mathEngineFn("selectQuestionForPlan");
+const buildMiniExam=mathEngineFn("buildMiniExam");
+const applyMiniExam=mathEngineFn("applyMiniExam");
+const hasTrainingContent=mathEngineFn("hasTrainingContent");
+const hasGenerator=mathEngineFn("hasGenerator");
+const eligibleQuestions=mathEngineFn("eligibleQuestions");
+const eligibleCount=mathEngineFn("eligibleCount");
+const rankedStudyPriorities=mathEngineFn("rankedStudyPriorities");
+const focusScore=mathEngineFn("focusScore");
+const focusRows=mathEngineFn("focusRows");
+const competenceMap=mathEngineFn("competenceMap");
+const selectCausalProbe=mathEngineFn("selectCausalProbe");
+const causalVerdict=mathEngineFn("causalVerdict");
+const recordLearningHypothesis=mathEngineFn("recordLearningHypothesis");
+const activeLearningHypotheses=mathEngineFn("activeLearningHypotheses");
+const allLearningHypotheses=mathEngineFn("allLearningHypotheses");
+const refreshLearningHypotheses=mathEngineFn("refreshLearningHypotheses");
+const recalibrateAllScores=mathEngineFn("recalibrateAllScores");
+const migratePedagogicalIds=mathEngineFn("migratePedagogicalIds");
+const scopedThemeScore=mathEngineFn("scopedThemeScore");
+const questionById=mathEngineFn("questionById");
+
+const MATH_ENGINE_SCREENS=new Set([
+  "home","diag","diagRun","diagResult","mission","missionResult",
+  "trainingSetup","trainingRun","progress","exams","miniExamIntro","miniExamRun",
+  "miniExamReview","miniExamResult","miniExamCompletedReview","parent"
+]);
 
 const DEFAULT_SUBJECT_ID="math-a";
 
@@ -158,6 +213,7 @@ export default function App(){
   const [examSession,setExamSession]=useState(null);
   const [recoveredSession,setRecoveredSession]=useState(null);
   const [hydrated,setHydrated]=useState(false);
+  const [mathEngineReady,setMathEngineReady]=useState(()=>!!mathEngineModule);
 
   useEffect(()=>{
     if(typeof window==="undefined"||!("scrollRestoration" in window.history))return;
@@ -168,13 +224,29 @@ export default function App(){
   },[]);
 
   useEffect(()=>{
+    let live=true;
+    (async()=>{
     const requested=typeof window!=="undefined"&&friendsBetaRequested(window.location.search);
     const storageKey=requested?FRIENDS_STORAGE_KEY:undefined;
     const loaded=loadLocalStateStatus(initial,emptyScores,storageKey);
     if(loaded.error){setScreen("storageRecoveryError");return}
     const x=loaded.state;
-    const base=x
-      ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)}))))))
+    const draftPreview=x?loadSessionDraftStatus(x.betaMode||"internal").draft:null;
+    const needsMathAtHydration=!!x&&(
+      x.activeSubjectId==="math-a"||
+      x.pedagogicalIdVersion!==1||
+      ["diagnostic","training","mini_exam"].includes(draftPreview?.kind)
+    );
+    if(needsMathAtHydration){
+      await loadMathEngine();
+      if(!live)return;
+      setMathEngineReady(true);
+    }
+    const migratedX=x&&mathEngineModule
+      ?migratePedagogicalIds({...x,scores:recalibrateAllScores(x.scores)})
+      :x;
+    const base=migratedX
+      ?migrateProductAnalytics(migrateCloudSync(migrateDailyMission(migrateCompetition(migrateEngagement(migratedX)))))
       :migrateProductAnalytics(migrateCloudSync(initial));
     const subjectReady=normalizeSubjectWorkspace(base);
     const betaState=requested?activateFriendsBeta(subjectReady):subjectReady;
@@ -244,11 +316,24 @@ export default function App(){
       setScreen(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused?"home":"welcome");
     }
     setHydrated(true);
+    })();
+    return ()=>{live=false};
   },[]);
 
   useEffect(()=>{
     if(hydrated)saveLocalState(s);
   },[s,hydrated]);
+
+  useEffect(()=>{
+    const mathActive=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)));
+    if(!hydrated||!mathActive||!MATH_ENGINE_SCREENS.has(screen)||mathEngineModule){
+      if(mathEngineModule&&!mathEngineReady)setMathEngineReady(true);
+      return;
+    }
+    let live=true;
+    loadMathEngine().then(()=>{if(live)setMathEngineReady(true)});
+    return ()=>{live=false};
+  },[hydrated,screen,s.activeSubjectId,mathEngineReady]);
 
   useEffect(()=>{
     if(!hydrated||typeof document==="undefined")return;
@@ -302,6 +387,9 @@ export default function App(){
     }
     setScreen(x);
   };
+
+  const mathSurface=(s.activeSubjectId==="math-a"||(!s.activeSubjectId&&MATH_ENGINE_SCREENS.has(screen)))&&MATH_ENGINE_SCREENS.has(screen);
+  if(mathSurface&&!mathEngineReady)return <Shell><Logo/><div className="cloudLoading">A preparar Matemática A…</div></Shell>;
 
   if(screen==="welcome")return <Welcome s={s} setS={setS} go={go}/>;
   if(screen==="subjectOnboard")return <SubjectSelection s={s} setS={setS} go={go}/>;
