@@ -10,13 +10,13 @@ import {
 import {curriculumSubtopicsForTheme,curriculumSubtopicId} from "./data/curriculumVnext";
 import {BrandName,Logo,Apronso,ApronsoNudge,Back,StudentNav,StudentTop,Shell,FriendsBetaRibbon,StudySessionHeader} from "./components/chrome";
 import MathReviewMatter from "./components/MathReviewMatter";
-import PhysicsChemistrySubject from "./components/PhysicsChemistrySubject";
-import PhysicsChemistryExam from "./components/PhysicsChemistryExam";
-import PhysicsChemistryMiniExam from "./components/PhysicsChemistryMiniExam";
 import StudyModeHub from "./components/StudyModeHub";
 import {Welcome} from "./components/Welcome";
 const ReviewerDashboard=dynamic(()=>import("./components/ReviewerDashboard").then(module=>module.ReviewerDashboard),{ssr:false});
 const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/PortuguesePassageMiniExamRoute"),{ssr:false});
+const PhysicsChemistrySubject=dynamic(()=>import("./components/PhysicsChemistrySubject"),{ssr:false});
+const PhysicsChemistryExam=dynamic(()=>import("./components/PhysicsChemistryExam"),{ssr:false});
+const PhysicsChemistryMiniExam=dynamic(()=>import("./components/PhysicsChemistryMiniExam"),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
