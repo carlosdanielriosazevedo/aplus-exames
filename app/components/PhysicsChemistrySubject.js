@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
-import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
+import {Apronso,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
@@ -170,8 +170,8 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const pending=results.filter(result=>result&&result.final!==true&&result.status!=="unanswered").length;
     const unanswered=results.filter(result=>result?.status==="unanswered").length;
     const title=session.kind==="mission"?"Missão concluída":session.kind==="diagnostic"?"Diagnóstico concluído":"Treino concluído";
-    const primaryLabel=session.kind==="diagnostic"?"Ver progresso":"Voltar à Home";
-    const primaryTarget=session.kind==="diagnostic"?"progress":"home";
+    const primaryLabel=session.kind==="diagnostic"?"Voltar ao plano de estudo":"Voltar à Home";
+    const primaryTarget="home";
     return <Shell>
       <div className="centered completionMoment">
         <Apronso pose="celebrate" className="resultApronso" alt={"Apronso celebra: "+title}/>
@@ -341,13 +341,20 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       {progress.lastPosition&&<button className="primary" onClick={resume}>Retomar sessão em pausa</button>}{sharedNav}</Shell>;
   }
 
-  const currentRows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
   return <main className="learnHome"><section className="wrap studentSurface">{sharedTop}<FriendsBetaRibbon s={s}/>
-    <div className="sectionIntro"><p className="eyebrow">FÍSICA E QUÍMICA A · 715</p><h1>Hoje, trabalha ciência com método.</h1><p className="muted">Mesma estrutura da APProva+: matéria dada, missão, treino, exames, revisão e progresso por competência.</p></div>
-    <ApronsoNudge pose="thinking">Começa por uma missão curta. A app vai usar o teu histórico para dar prioridade ao que precisa de mais trabalho.</ApronsoNudge>
+    <div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":progress.diagnosticDone?"Uma recomendação curta, escolhida a partir do teu percurso.":"Primeiro, vamos encontrar o melhor ponto de partida."}</span></div>
+
     {progress.lastPosition&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{progress.lastPosition.label}</b><span>Pergunta {progress.lastPosition.current+1} de {progress.lastPosition.itemIds.length}</span></div><button onClick={resume}>Continuar →</button></div>}
     {!progress.lastPosition&&examDrafts.map(({id,title,route,draft})=><div className="pausedSession" key={"home-"+id}><div><small>{draft.review?"REVISÃO EM PAUSA":"PROVA EM PAUSA"}</small><b>{title}</b><span>{draft.review?"Retoma a revisão por critérios.":`Pergunta ${(draft.index||0)+1} de ${draft.itemIds?.length||0}`} · {physicsChemistryDraftAgeLabel(draft.updatedAt)}</span></div><button onClick={()=>go(route)}>Continuar →</button></div>)}
-    <div className="missionHero"><div><small>MISSÃO RECOMENDADA</small><h2>{missionDone?"Missão diária concluída":"7 perguntas · Física e Química"}</h2><p>{missionDone?"Hoje já concluíste a Missão principal. Podes continuar com Treino Livre, Rever matéria ou Exames.":"Questões originais sobre os domínios já disponíveis no teu percurso."}</p></div><button className="primary" disabled={!missionDone&&!scopedCoverage.missionReady} onClick={missionDone?()=>go("train"):()=>startMission()}>{missionDone?"Continuar a estudar":"Começar missão"}</button></div>
-    {!missionDone&&<div className="themeGrid">{currentRows.map(row=><button key={row.id} disabled={!scopedCoverage.missionEligibleByDomain[row.id]} onClick={()=>startMission(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+scopedCoverage.byDomain[row.id]+" disponíveis"}</small></button>)}</div>}
+
+    <section className="adaptivePath" aria-label="Caminho adaptativo de Física e Química A">
+      <div className={`pathNode ${progress.diagnosticDone?"done":"current"}`}><span>{progress.diagnosticDone?"✓":"●"}</span><div><small>{progress.diagnosticDone?"ÚLTIMO PASSO":"PRIMEIRO PASSO"}</small><b>{progress.diagnosticDone?"Diagnóstico concluído":"Conhecer o teu ponto de partida"}</b></div></div>
+      <div className="pathLine active"/>
+      <div className={`pathNode current ${missionDone?"complete":""}`}><span>{missionDone?"✓":"●"}</span><article><small>{progress.diagnosticDone?(missionDone?"MISSÃO CONCLUÍDA":"MISSÃO DE HOJE"):"PRÓXIMO PASSO"}</small><h2>{progress.diagnosticDone?"Física e Química A adaptada ao teu percurso":"Diagnóstico de Física e Química A"}</h2><div className="missionCardMeta"><span>{progress.diagnosticDone?"7 perguntas":"8 perguntas"}</span>{progress.diagnosticDone&&<span>{currentYear}</span>}</div><button disabled={!!progress.lastPosition||(!progress.diagnosticDone&&!scopedCoverage.diagnosticReady)||(!missionDone&&progress.diagnosticDone&&!scopedCoverage.missionReady)} onClick={missionDone?()=>go("train"):progress.diagnosticDone?()=>startMission():startDiagnostic}>{missionDone?"Continuar a estudar":progress.diagnosticDone?"Começar Missão":"Começar diagnóstico"}</button></article></div>
+      <div className="pathLine"/>
+      <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
+    </section>
+
+    {!progress.diagnosticDone&&!scopedCoverage.diagnosticReady&&<div className="notice warning homeScopeWarning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu percurso atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
     {sharedNav}</section></main>;
 }
