@@ -3,8 +3,9 @@ import {PORTUGUESE_LITERARY_WORKS} from "../app/data/portugueseLiteraryWorks.js"
 import {PORTUGUESE_LITERARY_ITEMS} from "../app/data/portugueseLiteraryQuestions.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS} from "../app/data/portugueseLiteraryTrainingVariants.js";
 import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3} from "../app/data/portugueseLiteraryTrainingVariantsWave3.js";
+import {PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4} from "../app/data/portugueseLiteraryTrainingVariantsWave4.js";
 
-const LITERARY_POOL=[...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3];
+const LITERARY_POOL=[...PORTUGUESE_LITERARY_ITEMS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE3,...PORTUGUESE_LITERARY_TRAINING_VARIANTS_WAVE4];
 
 const workById=new Map(PORTUGUESE_LITERARY_WORKS.map(work=>[work.id,work]));
 const counts={};
@@ -27,7 +28,7 @@ for(const item of LITERARY_POOL){
 
 for(const work of PORTUGUESE_LITERARY_WORKS){
   const items=LITERARY_POOL.filter(item=>item.literaryWorkId===work.id);
-  assert.ok(items.length>=24,`${work.id}: cada obra deve manter pelo menos 24 itens, permitindo várias sessões antes de repetir perguntas`);
+  assert.ok(items.length>=30,`${work.id}: cada obra deve manter pelo menos 30 itens, permitindo várias sessões antes de repetir perguntas`);
   const represented=new Set(items.map(item=>item.competencyId));
   for(const competencyId of work.readyCompetencyIds||[]){
     assert.ok(represented.has(competencyId),`${work.id}: falta a competência declarada ${competencyId}`);
