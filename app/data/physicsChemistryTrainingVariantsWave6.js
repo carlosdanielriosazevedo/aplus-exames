@@ -43,7 +43,7 @@ function modelVariant(source,index,subtopicIndex){
     ],
     (subtopicIndex+index)%4,
     source.competencyId||"fqa-problems",
-    `fqa-model-v6-${source.templateId||source.id}`
+    `fqa-model-v6-${source.id}`
   );
 }
 function transferVariant(source,index,subtopicIndex){
@@ -60,7 +60,7 @@ function transferVariant(source,index,subtopicIndex){
     ],
     (subtopicIndex+index+1)%4,
     source.competencyId||"fqa-concepts",
-    `fqa-transfer-v6-${source.templateId||source.id}`
+    `fqa-transfer-v6-${source.id}`
   );
 }
 function anomalyVariant(source,index,subtopicIndex){
@@ -77,7 +77,7 @@ function anomalyVariant(source,index,subtopicIndex){
     ],
     (subtopicIndex+index+2)%4,
     source.competencyId||"fqa-data",
-    `fqa-anomaly-v6-${source.templateId||source.id}`
+    `fqa-anomaly-v6-${source.id}`
   );
 }
 
