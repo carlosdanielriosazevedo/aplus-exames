@@ -38,36 +38,10 @@ import {
   allLearningHypotheses,refreshLearningHypotheses,
   recalibrateAllScores,migratePedagogicalIds,scopedThemeScore,questionById
 } from "./lib/engine";
+import {betaEvent,sessionStart,sessionFinish,betaSummary} from "./lib/beta";
+import {migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent} from "./lib/productAnalytics";
 import {
-  allFocusRows,qualitySnapshot,
-  editorialQueue,editorialStats,makeReviewBatch,
-  applyEditorialDecision,bumpEditorialVersion,urgentReviewItems,
-  eligibilitySummary,betaContentReadiness,prioritizedReviewQueue,reviewPackRows,
-  minimumReviewRoadmap,reviewRoadmapProgress
-} from "./lib/quality";
-import {
-  buildTeacherReviewPack,buildTeacherReviewBatches,teacherReviewOperationsSummary,
-  serializeSemicolonCsv,parseSemicolonCsv,
-  validateTeacherReviewImport,applyTeacherReviewImport,teacherReviewInstructions
-} from "./lib/teacherReview";
-import {
-  revisionCandidateFromItem,validateRevisionCandidate,applyContentRevision,
-  revertLastContentRevision,editorialRevisionSummary
-} from "./lib/editorialRevisions";
-import {qaForItemId} from "./lib/preReviewQa";
-import {
-  hybridValidationPlan,hybridValidationSummary,hybridBetaReadiness,hybridLaneForItem
-} from "./lib/hybridValidation";
-import {buildHybridTeacherBatches} from "./lib/hybridTeacherReview";
-import {betaEvent,sessionStart,sessionFinish,betaSummary,exportBetaPayload} from "./lib/beta";
-import {
-  migrateProductAnalytics,recordAppOpen,recordMilestone,recordProductEvent,
-  retentionSummary,funnelSummary,activationSummary
-} from "./lib/productAnalytics";
-import {engineAuditSummary,engineAuditLabel} from "./lib/engineAudit";
-import {
-  loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY,
-  backendHealth,syncStateToBackend
+  loadLocalStateStatus,saveLocalState,clearLocalState,FRIENDS_STORAGE_KEY
 } from "./lib/persistence";
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
@@ -80,7 +54,7 @@ import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
 } from "./lib/curriculumScope";
 import {
-  claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId,dataIntegrityAudit
+  claimSessionCompletion,clearCompletionRegistry,latestOpenSessionId
 } from "./lib/reliability";
 import {
   ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,
@@ -99,7 +73,7 @@ import {
 import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,friendsBetaRequested,activateFriendsBeta,markFriendsBetaConsent,
   isFriendsBeta,friendsBetaReport,testerSegmentInfo,currentTesterSegment,
-  isTargetStudentTester,friendsFeedbackSummary,aggregateFriendsBetaReports
+  isTargetStudentTester,friendsFeedbackSummary
 } from "./lib/friendsBeta";
 import {
   emptyEngagement,recordStudyActivity,engagementSummary,migrateEngagement,
