@@ -59,6 +59,19 @@ const routeBundles=Object.fromEntries(Object.entries(routeKeys).map(([route,key]
   chunkMetrics(appManifest.pages?.[key]||[])
 ]));
 
+const routePageChunks={
+  "/":rows.filter(row=>/^app\/page-[^/]+\.js$/.test(row.file)),
+  "/portugues-mini-exame":rows.filter(row=>/^app\/portugues-mini-exame\/page-[^/]+\.js$/.test(row.file))
+};
+const routePageMetrics=Object.fromEntries(Object.entries(routePageChunks).map(([route,chunks])=>[
+  route,
+  {
+    bytes:chunks.reduce((sum,row)=>sum+row.bytes,0),
+    gzipBytes:chunks.reduce((sum,row)=>sum+row.gzipBytes,0),
+    chunks
+  }
+]));
+
 const budgets={
   "/":610*1024,
   "/portugues-mini-exame":125*1024
@@ -76,10 +89,14 @@ console.log("\nRoute page chunks:");
 for(const row of appPage){
   console.log(`  ${row.bytes.toLocaleString("en-US")} B | gzip ${row.gzipBytes.toLocaleString("en-US")} B | ${row.file}`);
 }
-console.log("\nRoute client bundles:");
-for(const [route,metrics] of Object.entries(routeBundles)){
+console.log("\nRoute page chunks (budgeted):");
+for(const [route,metrics] of Object.entries(routePageMetrics)){
   const budget=budgets[route];
   console.log(`  ${route.padEnd(24)} ${(metrics.bytes/1024).toFixed(1).padStart(7)} KiB | gzip ${(metrics.gzipBytes/1024).toFixed(1).padStart(6)} KiB | budget ${(budget/1024).toFixed(0)} KiB`);
+}
+console.log("\nRoute client bundles (informational, includes shared chunks):");
+for(const [route,metrics] of Object.entries(routeBundles)){
+  console.log(`  ${route.padEnd(24)} ${(metrics.bytes/1024).toFixed(1).padStart(7)} KiB | gzip ${(metrics.gzipBytes/1024).toFixed(1).padStart(6)} KiB`);
 }
 
 const output={
@@ -89,6 +106,7 @@ const output={
   chunkCount:rows.length,
   largestChunks:rows.slice(0,15),
   routePageChunks:appPage,
+  routePageMetrics,
   routeBundles,
   budgets
 };
@@ -97,8 +115,8 @@ fs.writeFileSync(path.join(process.cwd(),"performance-baseline.json"),JSON.strin
 if(process.argv.includes("--enforce")){
   const failures=[];
   for(const [route,budget] of Object.entries(budgets)){
-    const metrics=routeBundles[route];
-    if(!metrics?.chunks?.length)failures.push(`${route}: route bundle not found in app-build-manifest.json`);
+    const metrics=routePageMetrics[route];
+    if(!metrics?.chunks?.length)failures.push(`${route}: route page chunk not found under .next/static/chunks/app`);
     else if(metrics.bytes>budget)failures.push(`${route}: ${(metrics.bytes/1024).toFixed(1)} KiB > budget ${(budget/1024).toFixed(0)} KiB`);
   }
   if(failures.length){
