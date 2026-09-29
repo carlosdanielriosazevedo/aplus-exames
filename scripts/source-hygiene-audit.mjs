@@ -8,7 +8,9 @@ const mainPage=fs.readFileSync("app/page.js","utf8");
 const welcome=fs.readFileSync("app/components/Welcome.js","utf8");
 const chrome=fs.readFileSync("app/components/chrome.js","utf8");
 const reviewerDashboard=fs.readFileSync("app/components/ReviewerDashboard.js","utf8");
-const page=[welcome,mainPage,chrome,reviewerDashboard].join("\n");
+const internalDashboards=fs.readFileSync("app/components/InternalDashboards.js","utf8");
+const accountCloud=fs.readFileSync("app/components/AccountCloud.js","utf8");
+const page=[welcome,mainPage,chrome,reviewerDashboard,internalDashboards,accountCloud].join("\n");
 const pkg=JSON.parse(fs.readFileSync("package.json","utf8"));
 
 const forbidden=[
