@@ -1,5 +1,5 @@
 function mc({id,year,domain,subtopicId,competencyId="fqa-problems",prompt,options,answerIndex,explanation,difficultyTarget=2}){
-  return {id,year,domain,subtopicId,competencyId,prompt,options,answerIndex,explanation,responseType:"multiple-choice",gradingMode:"deterministic",sourceOrigin:"original",reviewStatus:"prototype",difficultyTarget,maxPoints:10,generated:true,templateId:id.split("-V")[0]};
+  return {id,year,domain,subtopicId,competencyId,prompt,options,answerIndex,explanation,responseType:"multiple-choice",gradingMode:"deterministic",sourceOrigin:"original",reviewStatus:"prototype",difficultyTarget,maxPoints:10,generated:true,templateId:id.replace(/-V\\d+$/u,"")};
 }
 function n(x,d=2){return Number(x.toFixed(d))}
 function opts(correct,a,b,c,format=x=>String(x)){
