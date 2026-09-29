@@ -15,7 +15,7 @@ addSet("EXPMOT","11.º","f11-mechanics","f11-experimental-motion",[
   {prompt:"Ao comparar modelo e dados de movimento, uma conclusão cientificamente adequada deve:",options:["referir a tendência dos dados e as incertezas","ignorar pontos discrepantes sem justificação","usar apenas o valor mais conveniente","dispensar a representação gráfica"],explanation:"A conclusão deve apoiar-se nos dados observados e considerar a incerteza experimental."}
 ],"fqa-experimental");
 
-addSet("FIELDS","11.º","f11-em","f11-fields",[
+addSet("FIELDS","11.º","f11-waves","f11-fields",[
   {prompt:"No contexto de campos, uma carga elétrica positiva colocada num campo elétrico uniforme tende a sofrer força:",options:["no sentido do campo","sempre perpendicular ao campo","oposta ao campo em qualquer caso","nula por definição"],explanation:"Para q>0, F=qE tem o mesmo sentido do campo elétrico."},
   {prompt:"A intensidade do campo gravítico num ponto representa:",options:["força gravítica por unidade de massa","energia por unidade de tempo","massa por unidade de volume","velocidade por unidade de carga"],explanation:"Por definição, g=F_g/m."},
   {prompt:"As linhas de campo elétrico nunca se cruzam porque:",options:["o campo num ponto tem uma única direção","as cargas deixam de interagir","o campo é sempre nulo","as linhas são trajetórias materiais"],explanation:"Num ponto, o vetor campo tem uma direção única; linhas cruzadas implicariam duas direções."},
@@ -24,7 +24,7 @@ addSet("FIELDS","11.º","f11-em","f11-fields",[
   {prompt:"Uma superfície equipotencial é caracterizada por:",options:["mesmo potencial elétrico em todos os seus pontos","campo elétrico necessariamente nulo","mesma carga em todos os pontos","força sempre paralela à superfície"],explanation:"Por definição, todos os pontos de uma equipotencial têm o mesmo potencial."}
 ]);
 
-addSet("INDUCT","11.º","f11-em","f11-induction",[
+addSet("INDUCT","11.º","f11-waves","f11-induction",[
   {prompt:"Na indução eletromagnética, surge força eletromotriz quando ocorre:",options:["variação do fluxo magnético","campo magnético constante sem qualquer mudança geométrica","temperatura constante","massa variável do circuito"],explanation:"A lei de Faraday relaciona a fem induzida com a variação temporal do fluxo magnético."},
   {prompt:"Segundo a lei de Lenz, a corrente induzida cria um efeito que:",options:["se opõe à variação que lhe deu origem","reforça sempre a variação inicial","anula a resistência elétrica","elimina o campo magnético externo"],explanation:"O sentido da corrente induzida opõe-se à mudança de fluxo que a produz."},
   {prompt:"Mover um íman mais rapidamente em direção a uma bobina tende a produzir uma fem induzida:",options:["de maior módulo","sempre nula","de menor módulo obrigatoriamente","independente da rapidez"],explanation:"Uma variação de fluxo mais rápida aumenta o módulo da fem induzida."},
@@ -33,7 +33,7 @@ addSet("INDUCT","11.º","f11-em","f11-induction",[
   {prompt:"Aumentar o número de espiras de uma bobina, mantendo a mesma variação de fluxo por espira, tende a:",options:["aumentar a fem induzida","eliminar a indução","diminuir sempre a fem para zero","não ter qualquer efeito"],explanation:"A fem total é proporcional ao número de espiras."}
 ],"fqa-problems");
 
-addSet("EMWAVES","11.º","f11-em","f11-em-waves",[
+addSet("EMWAVES","11.º","f11-waves","f11-em-waves",[
   {prompt:"Uma onda eletromagnética no vazio propaga-se com velocidade:",options:["c","dependente da amplitude","igual à velocidade do som","nula sem matéria"],explanation:"Todas as ondas eletromagnéticas propagam-se no vazio à velocidade da luz c."},
   {prompt:"Numa onda eletromagnética, os campos elétrico e magnético são:",options:["perpendiculares entre si e à direção de propagação","paralelos entre si","sempre nulos","longitudinais à propagação"],explanation:"Ondas eletromagnéticas são transversais, com E e B perpendiculares."},
   {prompt:"No vazio, se a frequência de uma onda eletromagnética aumenta, o comprimento de onda:",options:["diminui","aumenta","fica constante","torna-se nulo em qualquer caso"],explanation:"Como c=λf, frequência e comprimento de onda são inversamente proporcionais."},
@@ -42,7 +42,7 @@ addSet("EMWAVES","11.º","f11-em","f11-em-waves",[
   {prompt:"Ao passar do vazio para um meio transparente onde a velocidade diminui, a frequência da luz:",options:["mantém-se","diminui sempre para metade","aumenta obrigatoriamente","torna-se zero"],explanation:"Na passagem de meio, a frequência é determinada pela fonte e mantém-se; muda o comprimento de onda."}
 ]);
 
-addSet("OPTICS","11.º","f11-em","f11-optics",[
+addSet("OPTICS","11.º","f11-waves","f11-optics",[
   {prompt:"Para um raio luminoso que sofre reflexão especular numa superfície plana, o ângulo refletido é:",options:["igual ao ângulo de incidência","sempre 90°","metade do ângulo de incidência","independente da normal"],explanation:"A lei da reflexão estabelece igualdade entre os ângulos medidos relativamente à normal."},
   {prompt:"Na refração, a mudança de direção da luz resulta da alteração da sua:",options:["velocidade de propagação","frequência da fonte","carga elétrica","massa"],explanation:"A velocidade muda entre meios, provocando refração; a frequência mantém-se."},
   {prompt:"Ao passar para um meio com maior índice de refração, um raio oblíquo aproxima-se em geral:",options:["da normal","da superfície","do eixo horizontal independentemente da interface","de um ângulo de 90° sempre"],explanation:"Para n maior, a velocidade diminui e o raio refratado aproxima-se da normal."},
