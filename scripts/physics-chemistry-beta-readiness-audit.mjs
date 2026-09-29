@@ -11,12 +11,12 @@ const allExamItems=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,..
 
 assert.equal(PHYSICS_CHEMISTRY_A_DOMAINS.length,7,"FQ A deve manter os sete grandes domínios curriculares.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"FQ A deve manter as 43 submatérias curriculares modeladas.");
-assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=597,"O banco beta deve manter pelo menos 513 itens originais após duas vagas de profundidade.");
+assert.ok(PHYSICS_CHEMISTRY_A_ITEMS.length>=855,"O banco beta deve manter pelo menos 855 itens originais após quatro vagas de profundidade.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.some(row=>row.authority==="DGE"&&row.status==="in-force"),"A disciplina deve manter referência curricular DGE vigente.");
 assert.ok(PHYSICS_CHEMISTRY_A_REFERENCE_SOURCES.some(row=>row.authority==="IAVE"),"A disciplina deve manter referência explícita ao IAVE.");
 
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
-  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=7,subtopic.id+": nenhuma submatéria pode entrar em beta com menos de 7 itens.");
+  assert.ok((coverage.bySubtopic[subtopic.id]||0)>=19,subtopic.id+": nenhuma submatéria pode entrar em beta com menos de 19 itens.");
 }
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS){
   const rows=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.domain===domain.id);
@@ -66,4 +66,4 @@ assert.match(mini,/não mostra a correção durante o mini-exame/u,"Mini-exame n
 assert.match(full,/Durante o Exame Completo não mostramos correções/u,"Exame Completo não deve revelar feedback imediato.");
 assert.match(full,/Subtotal já corrigível/u,"Exame Completo deve distinguir subtotal automático de classificação final.");
 
-console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 597+ itens · 7+ por submatéria · 2 mini-exames · Exame Completo 715 · componentes partilhados · correção conservadora");
+console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 855+ itens · 19+ por submatéria · 2 mini-exames · Exame Completo 715 · componentes partilhados · correção conservadora");
