@@ -206,7 +206,7 @@ assert.match(component,/>Responder</u,"FQ A deve preservar a confirmação expl�
 assert.match(component,/Começar treino/u,"Treino Livre deve usar o contrato 7–10.");
 assert.match(component,/physicsChemistrySubtopicsForDomain/u,"Treino Livre deve permitir escolher um foco/submatéria dentro do tema.");
 assert.match(component,/3\. Em que queres focar-te\?/u,"FQ A deve usar a mesma etapa de foco de Matemática A.");
-assert.match(component,/Misturar matéria/u,"O aluno deve poder treinar o domínio inteiro quando a submatéria ainda não tem banco suficiente.");
+assert.doesNotMatch(component,/Misturar matéria/u,"Com profundidade suficiente por submatéria, FQ A não deve precisar de um fallback que misture o tema.");
 assert.match(component,/PhysicsChemistryStimulus/u,"A UI deve reutilizar o renderer de estímulos científicos.");
 assert.match(component,/buildAdaptivePhysicsChemistryMission\(scopedItems,\{progress,domain,size:7\}\)/u,"Missão deve usar o contrato 7–10.");
 assert.match(component,/Mini-exame · Modelo 1/u,"O mini-exame inicial deve continuar identificado como modelo próprio.");
