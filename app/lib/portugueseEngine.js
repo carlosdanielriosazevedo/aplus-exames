@@ -1,6 +1,6 @@
 import {DEFAULT_MISSION_QUESTIONS,clampStudySessionSize,STUDY_SESSION_MIN_QUESTIONS} from "./sessionPolicy.js";
 import {PORTUGUESE_DOMAINS,PORTUGUESE_RELEASE_POLICY} from "../data/portugueseFoundation.js";
-import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary} from "./automaticEvidenceGrader.js";
+import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary,automaticFeedbackForCriteria} from "./automaticEvidenceGrader.js";
 import {portugueseObservationGuidance} from "./portugueseObservationGuidance.js";
 
 const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=>domain.id);
@@ -266,6 +266,7 @@ export function gradePortugueseResponse(item,response){
       return {...criterion,...aggregate,observations,observable:true,autoAssessed:true};
     });
     const summary=automaticRubricSummary(criteria,item.maxPoints||item.rubric?.maxPoints||0);
+    const feedbackSummary=automaticFeedbackForCriteria(criteria,responseText);
     return {
       status:"auto-assessed-provisional",
       final:false,
@@ -281,7 +282,7 @@ export function gradePortugueseResponse(item,response){
       autoAssessmentConfidence:summary.confidence,
       wordCount:words,
       wordLimit:{min,max,within:words>=min&&words<=max},
-      criteria,
+      criteria,feedbackSummary,
       note:"A app avaliou automaticamente a resposta por critérios. A classificação é provisória quando a interpretação não é totalmente determinística."
     };
   }
