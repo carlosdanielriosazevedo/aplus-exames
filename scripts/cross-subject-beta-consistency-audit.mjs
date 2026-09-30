@@ -31,6 +31,20 @@ for(const [label,source] of [["Português",portuguese],["FQ A",fqa]]){
 assert.match(math,/Atualizar matéria dada/u,"Matemática A deve manter a mesma ação curricular no Progresso.");
 assert.match(math,/Ano e percurso escolar/u,"Matemática A deve manter a mesma ação de perfil no Progresso.");
 
+for(const [label,source] of [["Português",portuguese],["FQ A",fqa]]){
+  assert.match(source,/1\. Ano/u,label+": Praticar deve começar pela seleção do ano.");
+  assert.match(source,/2\. Tema/u,label+": Praticar deve usar Tema como em Matemática A.");
+  assert.match(source,/3\. Em que queres focar-te\?/u,label+": Praticar deve ter a etapa de foco como em Matemática A.");
+  assert.match(source,/4\. Nível/u,label+": Praticar deve ter seleção de nível como em Matemática A.");
+  assert.match(source,/Adaptado ao meu nível/u,label+": Praticar deve oferecer nível adaptativo.");
+  assert.match(source,/Básico/u,label+": Praticar deve oferecer nível Básico.");
+  assert.match(source,/Intermédio/u,label+": Praticar deve oferecer nível Intermédio.");
+  assert.match(source,/Avançado/u,label+": Praticar deve oferecer nível Avançado.");
+  assert.match(source,/Desafio/u,label+": Praticar deve oferecer nível Desafio.");
+}
+assert.match(fqa,/answerOptionState/u,"FQ A deve usar os mesmos estados visuais de resposta correta/incorreta das restantes disciplinas.");
+assert.doesNotMatch(portuguese,/respostas por grelha/u,"Português não deve expor linguagem interna de correção ao aluno.");
+
 assert.match(fqa,/adaptivePath/u,"FQ A deve usar a mesma estrutura principal de Aprender das restantes disciplinas.");
 assert.match(fqa,/examDrafts\.length>0/u,"uma prova FQ A em pausa deve tornar disponível a ação de repor progresso.");
 
