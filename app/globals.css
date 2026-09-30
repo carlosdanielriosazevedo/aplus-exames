@@ -1584,3 +1584,30 @@ button,input,select,textarea{max-width:100%}
   .parentPlanList>div{grid-template-columns:32px minmax(0,1fr)}
   .parentPlanList strong{grid-column:2}
 }
+
+
+/* APProva+ — tendências e avaliações na área parental */
+.parentTrendSection{overflow:hidden}
+.parentTrendChart{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:end;min-height:190px;padding:10px 4px 2px}
+.parentTrendWeek{display:grid;grid-template-rows:120px auto auto auto;gap:3px;text-align:center;min-width:0}
+.parentTrendBarTrack{height:120px;display:flex;align-items:flex-end;justify-content:center;border-radius:10px;background:#f1f3f7;overflow:hidden}
+.parentTrendBarTrack>span{display:block;width:56%;min-height:8px;border-radius:8px 8px 0 0;background:#7052f5}
+.parentTrendWeek b{font-size:11px;color:#18223a}
+.parentTrendWeek small{font-size:8px;color:#7d8798;white-space:nowrap}
+.parentTrendWeek em{font-size:8px;color:#9a93b8;font-style:normal}
+.parentTrendNote{margin:12px 0 0;font-size:9px;line-height:1.5;color:#7c8597}
+.parentAssessmentList{display:grid;gap:8px}
+.parentAssessmentList>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:11px 12px;border:1px solid #e8ebf0;border-radius:11px;background:#fafbfc}
+.parentAssessmentList b,.parentAssessmentList span,.parentAssessmentList small{display:block}
+.parentAssessmentList b{font-size:11px;color:#1a243b}
+.parentAssessmentList span{font-size:8px;color:#81899a;margin-top:2px}
+.parentAssessmentList strong{font-size:11px;color:#24304a;text-align:right}
+.parentAssessmentList small{grid-column:1/-1;font-size:8px;color:#858e9f;line-height:1.45}
+@media(max-width:760px){
+  .parentTrendChart{gap:7px;min-height:170px}
+  .parentTrendWeek{grid-template-rows:100px auto auto auto}
+  .parentTrendBarTrack{height:100px}
+  .parentTrendWeek small{font-size:7px}
+  .parentAssessmentList>div{grid-template-columns:1fr}
+  .parentAssessmentList strong{text-align:left}
+}
