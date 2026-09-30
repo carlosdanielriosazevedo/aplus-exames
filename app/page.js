@@ -1085,7 +1085,7 @@ function DiagResult({s,setS,go}){
   <CompetitionXpNote s={s}/>
   {isFriendsBeta(s)&&<BetaSessionFeedback s={s} setS={setS} kind="diagnostic"/>}
   <button className="primary" onClick={()=>{
-    setS(prev=>recordMilestone(prev,"first_plan_viewed",{
+    setS(prev=>recordMilestone(dismissDailyMissionPrompt(prev),"first_plan_viewed",{
       measuredThemes:measured.length,
       firstPriority:priority?.id||null
     }));
