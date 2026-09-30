@@ -352,6 +352,6 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       <div className="pathLine"/>
       <div className="pathNode next"><span>○</span><div><small>PRÓXIMO PASSO PROVÁVEL</small><b>{progress.diagnosticDone?"Praticar, rever matéria ou fazer um exame":"Primeira Missão adaptada"}</b><p>Pode mudar com nova evidência.</p></div></div>
     </section>
-    {!scopedCoverage.diagnosticReady&&<div className="notice warning homeScopeWarning"><b>Atualiza a matéria dada</b><span>Não há matéria assinalada suficiente para um diagnóstico equilibrado no teu ano atual.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
+    {!scopedCoverage.diagnosticReady&&<div className="notice warning homeScopeWarning"><b>Atualiza a matéria dada</b><span>O diagnóstico precisa de 8 perguntas disponíveis dentro da matéria que assinalaste. Podes começar mesmo que ainda só tenhas dado uma pequena parte do programa.</span><button onClick={()=>go("curriculumSettings")}>Indicar matéria dada</button></div>}
     {sharedNav}</section></main>;
 }
