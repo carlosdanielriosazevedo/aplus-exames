@@ -59,9 +59,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const taughtUnitIds=initialTaught(settings,currentYear);
   const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";
   const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allSubtopicIds():taughtUnitIds);
+  const initialPracticeDomain=allDomainIdsForYear(currentYear)[0]||null;
   const [practiceYear,setPracticeYear]=useState(currentYear);
-  const [practiceDomain,setPracticeDomain]=useState(null);
-  const [practiceSubtopic,setPracticeSubtopic]=useState(null);
+  const [practiceDomain,setPracticeDomain]=useState(initialPracticeDomain);
+  const [practiceSubtopic,setPracticeSubtopic]=useState(()=>initialPracticeDomain?physicsChemistrySubtopicsForDomain(initialPracticeDomain)[0]?.id||null:null);
   const [practiceLevel,setPracticeLevel]=useState("auto");
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
@@ -281,7 +282,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
       <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
 
-      <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeSubtopic(null)}}>{year}</button>)}</div>
+      <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{const firstDomain=allDomainIdsForYear(year)[0]||null;setPracticeYear(year);setPracticeDomain(firstDomain);setPracticeSubtopic(firstDomain?physicsChemistrySubtopicsForDomain(firstDomain)[0]?.id||null:null)}}>{year}</button>)}</div>
 
       <h3>2. Tema</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>{setPracticeDomain(row.id);const first=physicsChemistrySubtopicsForDomain(row.id).find(topic=>(coverage.bySubtopic[topic.id]||0)>=7);setPracticeSubtopic(first?.id||null)}}><b>{row.shortTitle}</b><small>{row.area+" · banco disponível"}</small></button>)}</div>
 
