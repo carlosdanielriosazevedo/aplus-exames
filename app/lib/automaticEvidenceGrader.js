@@ -209,3 +209,42 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
     requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected)
   };
 }
+
+export function automaticFeedbackForCriteria(criteria=[],responseText=""){
+  const strengths=[];
+  const gaps=[];
+  const contradictions=[];
+  for(const criterion of criteria){
+    const evidence=(criterion.observations||[])
+      .flatMap(row=>Array.isArray(row.studentEvidence)?row.studentEvidence:[])
+      .map(row=>String(row||"").trim())
+      .filter(Boolean);
+    const base={id:criterion.id,label:criterion.label,evidence:evidence[0]||"",confidence:criterion.confidence??null};
+    if(criterion.contradictionDetected){
+      contradictions.push({...base,message:"A resposta contém uma ideia que entra em conflito com este critério."});
+      gaps.push({...base,message:"Revê este ponto: a formulação atual pode estar cientificamente ou conceptualmente incorreta."});
+      continue;
+    }
+    if(criterion.status==="observed"){
+      strengths.push({...base,message:evidence[0]?"A app encontrou evidência deste critério na tua resposta.":"Este critério está suficientemente demonstrado."});
+    }else if(criterion.status==="partial"){
+      gaps.push({...base,message:"A ideia aparece, mas falta torná-la mais explícita, completa ou bem ligada ao pedido."});
+    }else{
+      gaps.push({...base,message:"Este elemento ainda não foi encontrado com evidência suficiente na tua resposta."});
+    }
+  }
+  const foundCount=strengths.length;
+  const gapCount=gaps.length;
+  const nextAction=contradictions.length
+    ?"Corrige primeiro a ideia contraditória e volta a submeter a resposta."
+    :gapCount
+      ?(gapCount===1?"Melhora o ponto em falta sem apagar o que já está correto.":"Melhora os pontos em falta sem apagar o que já está correto.")
+      :"A resposta cobre os critérios principais. Revê apenas clareza, precisão e linguagem.";
+  return {
+    strengths,gaps,contradictions,
+    foundCount,gapCount,
+    nextAction,
+    hasEvidence:strengths.some(row=>row.evidence)||gaps.some(row=>row.evidence),
+    responseText:String(responseText||"")
+  };
+}
