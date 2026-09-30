@@ -6738,7 +6738,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma quantidade cresce50% em2 períodos, com fator constante por período. O fator b satisfaz...",
+    "q": "Uma quantidade cresce50% em 2 períodos, com fator constante por período. O fator b satisfaz...",
     "o": [
       "b²=1,5.",
       "2b=1,5.",
@@ -7007,7 +7007,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "uma raiz."
     ],
     "a": 0,
-    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em0.",
+    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em 0.",
     "hyp": "Pode confundir derivada nula com mínimo.",
     "contexts": [
       "exam"
@@ -7297,7 +7297,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "x<0."
     ],
     "a": 2,
-    "sol": "f'(x)=1/(2√x) requer x>0; em0 a derivada finita não existe.",
+    "sol": "f'(x)=1/(2√x) requer x>0; em 0 a derivada finita não existe.",
     "hyp": "Pode confundir domínio com domínio de derivabilidade.",
     "contexts": [
       "exam"
@@ -9435,7 +9435,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma condição rara ocorre em2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
+    "q": "Uma condição rara ocorre em 2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
     "o": [
       "0,117.",
       "0,105.",
