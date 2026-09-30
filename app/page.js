@@ -2450,6 +2450,64 @@ function Parent({s,setS,go}){
   });
   const strongest=[...evidenceRows].sort((a,b)=>b.value-a.value||b.attempts-a.attempts)[0]||null;
   const weakest=[...evidenceRows].sort((a,b)=>a.value-b.value||b.attempts-a.attempts)[0]||null;
+  function localStudyDayKey(at){
+    const d=new Date(at);
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  }
+
+  const engagementDays=s.engagement?.days||{};
+  const studyTrend=Array.from({length:4},(_,reverseIndex)=>{
+    const weeksAgo=3-reverseIndex;
+    let activeDays=0,xp=0;
+    for(let offset=0;offset<7;offset++){
+      const d=new Date();
+      d.setHours(12,0,0,0);
+      d.setDate(d.getDate()-(weeksAgo*7+6-offset));
+      const row=engagementDays[localStudyDayKey(d.getTime())];
+      if(row&&Object.values(row.activities||{}).some(value=>value>0))activeDays+=1;
+      xp+=Number(row?.xp)||0;
+    }
+    const end=new Date();end.setHours(12,0,0,0);end.setDate(end.getDate()-weeksAgo*7);
+    const start=new Date(end);start.setDate(start.getDate()-6);
+    return {
+      key:`week-${weeksAgo}`,activeDays,xp,
+      label:weeksAgo===0?"Esta semana":`${start.toLocaleDateString("pt-PT",{day:"2-digit",month:"2-digit"})}–${end.toLocaleDateString("pt-PT",{day:"2-digit",month:"2-digit"})}`
+    };
+  });
+  const maxTrendDays=Math.max(1,...studyTrend.map(row=>row.activeDays));
+
+  function sessionReviewSummary(session){
+    const results=Array.isArray(session?.results)?session.results:[];
+    const answered=results.filter(result=>result?.status&&result.status!=="unanswered").length;
+    const final=results.filter(result=>result?.final).length;
+    const pending=results.filter(result=>result?.requiresReview||(!result?.final&&result?.status&&result.status!=="unanswered")).length;
+    if(!results.length)return "Sessão concluída";
+    if(pending)return `${answered}/${results.length} respostas registadas · ${pending} por rever`;
+    if(final)return `${final}/${results.length} respostas com correção concluída`;
+    return `${answered}/${results.length} respostas registadas`;
+  }
+
+  const assessmentRows=[
+    ...(s.examHistory||[]).map(row=>({
+      id:row.id||`math-${row.at}`,subject:"Matemática A",kind:"Mini-exame",
+      at:row.at||0,
+      result:Number.isFinite(row.score20)?examScoreLabel(row):"Resultado registado",
+      detail:row.reviewRequired?"Há componentes que exigem confirmação da revisão.":`${row.correctCount??"—"}/${row.total??"—"} respostas corretas`
+    })),
+    ...visibleSubjectIds.filter(id=>id!==DEFAULT_SUBJECT_ID).flatMap(id=>{
+      const subject=subjectById(id)?.shortName||subjectById(id)?.name||id;
+      return (subjectProgressFor(s,id).sessions||[])
+        .filter(row=>["mini_exam","full_exam","practice_exam"].includes(row.kind))
+        .map(row=>({
+          id:row.sessionId||`${id}-${row.completedAt}`,subject,
+          kind:row.kind==="mini_exam"?"Mini-exame":"Exame Completo",
+          at:row.completedAt||0,
+          result:sessionReviewSummary(row),
+          detail:"Mostramos o estado da correção; não inventamos uma nota quando existem respostas abertas ou provisórias."
+        }));
+    })
+  ].sort((a,b)=>b.at-a.at).slice(0,6);
+
   const studentName=link?.studentName||"Aluno associado";
 
   return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
@@ -2504,6 +2562,15 @@ function Parent({s,setS,go}){
         <div><small>ATIVIDADE</small><b>{weeklyXp} XP</b><span>nos últimos 7 dias</span></div>
       </div>
 
+      <section className="parentDashboardSection parentTrendSection">
+        <div className="parentSectionHead"><div><small>EVOLUÇÃO</small><h3>Regularidade de estudo nas últimas 4 semanas</h3></div><span>dias ativos por semana</span></div>
+        <div className="parentTrendChart">{studyTrend.map(row=><div className="parentTrendWeek" key={row.key}>
+          <div className="parentTrendBarTrack"><span style={{height:`${Math.max(8,Math.round(row.activeDays/maxTrendDays*100))}%`}}/></div>
+          <b>{row.activeDays}/7</b><small>{row.label}</small><em>{row.xp} XP</em>
+        </div>)}</div>
+        <p className="parentTrendNote">Esta evolução mede consistência de estudo, não “qualidade” do aluno. Uma semana com menos dias pode resultar de férias, escola ou outros fatores que a app não conhece.</p>
+      </section>
+
       <section className="parentDashboardSection">
         <div className="parentSectionHead"><div><small>PREPARAÇÃO PARA OS EXAMES</small><h3>Estado por disciplina</h3></div><span>{subjectRows.length} {subjectRows.length===1?"disciplina":"disciplinas"}</span></div>
         <div className="parentSubjectGrid">{subjectRows.map(row=><div className="parentSubjectCard" key={row.id}>
@@ -2523,6 +2590,16 @@ function Parent({s,setS,go}){
           {weakest?<div className="parentInsight focus"><b>{weakest.subject}</b><strong>{weakest.label}</strong><span>É uma das áreas onde os resultados registados justificam mais prática.</span></div>:<div className="parentEmptyInsight">A prioridade aparecerá quando houver respostas suficientes para comparar áreas.</div>}
         </section>
       </div>
+
+      <section className="parentDashboardSection">
+        <div className="parentSectionHead"><div><small>AVALIAÇÕES</small><h3>Resultados recentes em contexto de prova</h3></div><span>até 6 registos</span></div>
+        {assessmentRows.length?<div className="parentAssessmentList">{assessmentRows.map(row=><div key={row.id}>
+          <div><b>{row.subject}</b><span>{row.kind}{row.at?` · ${new Date(row.at).toLocaleDateString("pt-PT")}`:""}</span></div>
+          <strong>{row.result}</strong>
+          <small>{row.detail}</small>
+        </div>)}</div>:<div className="parentEmptyInsight">Ainda não existem Mini-exames ou Exames Completos concluídos para mostrar.</div>}
+        <p className="parentTrendNote">Estes resultados servem para acompanhar evolução e hábitos de preparação. Não são uma previsão da classificação no Exame Nacional.</p>
+      </section>
 
       <section className="parentDashboardSection">
         <div className="parentSectionHead"><div><small>PLANO</small><h3>Próximos passos do aluno</h3></div></div>
