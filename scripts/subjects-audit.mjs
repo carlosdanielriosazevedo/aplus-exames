@@ -35,7 +35,7 @@ assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject mana
 assert.match(page,/if\(preview==="subjects"\)/);
 assert.match(welcome,/segment === "parent" \? "parent" : "subjectOnboard"/);
 assert.match(page,/disabled=\{!subject\.available\}/);
-assert.match(page,/Matemática A, Português e Física e Química A disponíveis/);
+assert.match(page,/Disponíveis agora: Matemática A, Português e Física e Química A\./u);
 assert.match(chrome,/className="subjectSwitcher"/,"the shared student header must expose the active subject switcher");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="portuguese"/,"Portuguese must use the same semantic workspace destinations as Mathematics A");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="physics-chemistry-a"/,"Física e Química A must use the same semantic workspace destinations as Mathematics A");
@@ -57,7 +57,9 @@ assert.match(portugueseSubject,/literaryWorkId/u,"perguntas de obras não lecion
 assert.match(portugueseSubject,/Resposta certa: /u,"o feedback de Português deve identificar explicitamente a resposta certa");
 assert.match(globalCss,/\.opts button\.selected/u,"a opção escolhida em Matemática deve permanecer visualmente selecionada antes da resposta");
 assert.match(globalCss,/\.portugueseProgressCard>\.portugueseMissionGrid\{display:grid\}/u,"o resumo de Português não pode ser comprimido pela regra flex do cartão");
-assert.match(page,/normalizeSubjectWorkspace\(base\)/,"legacy saved state must receive a safe active-subject default");
+assert.match(page,/normalizeSubjectWorkspace\(base\)/,"saved subject state must pass through the workspace migration");
+assert.match(page,/selectedSubjectIds:\[\]/u,"new students must start without a preselected subject");
+assert.match(page,/selected\.length===1\?"Disciplina selecionada":"Disciplinas selecionadas"/u,"the selection summary must use capitalized singular/plural copy");
 assert.match(page,/normalizeSubjectWorkspaceState/,"saved subject aliases must be normalized through the shared migration");
 assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u,"the legacy Portuguese lab route must no longer exist");
 assert.equal((page.match(/subjectById\("portuguese"\)/gu)||[]).length,0,"Português must not be injected manually into the subject manager");
