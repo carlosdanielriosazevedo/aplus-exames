@@ -45,6 +45,11 @@ for(const [label,source] of [["Português",portuguese],["FQ A",fqa]]){
 assert.match(fqa,/answerOptionState/u,"FQ A deve usar os mesmos estados visuais de resposta correta/incorreta das restantes disciplinas.");
 assert.doesNotMatch(portuguese,/respostas por grelha/u,"Português não deve expor linguagem interna de correção ao aluno.");
 
+assert.match(math,/const \[selected,setSelected\]=useState\(\[\]\)/u,"o onboarding inicial não deve pré-selecionar qualquer disciplina.");
+assert.match(math,/Nenhuma disciplina selecionada/u,"o resumo deve explicar claramente o estado inicial sem disciplinas.");
+assert.match(math,/Disciplina selecionada/u,"o singular deve começar por maiúscula.");
+assert.match(math,/Atualmente disponíveis: Matemática A, Português e Física e Química A/u,"a disponibilidade das três disciplinas deve aparecer como nota secundária.");
+
 assert.match(fqa,/adaptivePath/u,"FQ A deve usar a mesma estrutura principal de Aprender das restantes disciplinas.");
 assert.match(fqa,/examDrafts\.length>0/u,"uma prova FQ A em pausa deve tornar disponível a ação de repor progresso.");
 
