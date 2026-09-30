@@ -2,16 +2,12 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
-import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import ExamSubmissionCheck from "./ExamSubmissionCheck";
-import PhysicsChemistryReviewProgress from "./PhysicsChemistryReviewProgress";
-import {physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "../lib/physicsChemistryReviewProgress";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
-import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -24,12 +20,12 @@ function answered(item,value){
 function examPointsFor(item,result){
   if(!result||result.status==="unanswered")return {points:0,provisional:false,pending:false};
   if(item.responseType==="multiple-choice")return {points:result.correct?item.examPoints:0,provisional:false,pending:false};
-  if(item.responseType==="stepwise"){
+  if(["stepwise","restricted-response"].includes(item.responseType)){
     const raw=Number(result.provisionalPoints)||0;
     const max=Number(result.maxPoints)||1;
-    return {points:Math.round(raw/max*item.examPoints*10)/10,provisional:true,pending:false};
+    return {points:Math.round(raw/max*item.examPoints*10)/10,provisional:true,pending:!!result.requiresReview};
   }
-  return {points:0,provisional:false,pending:true};
+  return {points:0,provisional:true,pending:true};
 }
 
 function Stimulus({item}){return <PhysicsChemistryStimulus item={item}/>;}
@@ -59,9 +55,7 @@ export default function PhysicsChemistryExam({s,setS,go}){
   const filled=rows.filter(row=>answered(row,answers[row.id])).length;
 
   const baseResults=useMemo(()=>rows.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[rows,answers]);
-  const results=useMemo(()=>rows.map((row,index)=>row.responseType==="restricted-response"&&answered(row,answers[row.id])
-    ?physicsChemistryRubricResult(row,answers[row.id],rubricAssessments[row.id]||{})
-    :baseResults[index]),[rows,answers,baseResults,rubricAssessments]);
+  const results=baseResults;
   const scored=useMemo(()=>rows.map((row,index)=>({...examPointsFor(row,results[index]),item:row,result:results[index]})),[rows,results]);
   const mandatory=scored.slice(0,blueprint.mandatoryItems.length);
   const optional=scored.slice(blueprint.mandatoryItems.length);
@@ -94,11 +88,6 @@ export default function PhysicsChemistryExam({s,setS,go}){
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
-    if(openReviewProgress.pending>0){
-      savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review:true,rubricAssessments,markedForReview});
-      go("exams");
-      return;
-    }
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
@@ -112,14 +101,6 @@ export default function PhysicsChemistryExam({s,setS,go}){
     }
     clearPhysicsChemistryExamDraft(examId);
     go("exams");
-  }
-
-  const openReviewProgress=physicsChemistryOpenReviewProgress(rows,answers,rubricAssessments);
-  function goToNextPendingReview(){
-    const target=openReviewProgress.pendingRows[0];
-    if(!target)return;
-    const node=document.getElementById("fqa-review-"+target.item.id);
-    if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}
   }
 
   if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">
@@ -136,29 +117,28 @@ export default function PhysicsChemistryExam({s,setS,go}){
   </Shell>;
 
   if(review)return <Shell className="wideStudentShell fqaExamReviewPage">
-    <button className="back" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"← Guardar com "+openReviewProgress.pending+" por rever e voltar aos exames":"← Guardar revisão e voltar aos exames"}</button>
+    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>
     <h1>Revisão do Exame Completo</h1>
-    <div className="notice"><b>{"Subtotal já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{openReviewProgress.pending?openReviewProgress.pending+" resposta(s) científica(s) aberta(s) continuam pendentes de revisão por critérios. ":""}{hasProvisional?"Os problemas por etapas usam uma indicação provisória até validação completa do processo.":""}</span></div>
-    <PhysicsChemistryReviewProgress items={rows} answers={answers} assessments={rubricAssessments} onNextPending={goToNextPendingReview}/>
+    <div className="notice"><b>{"Subtotal provisório já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) aberta(s) têm confiança reduzida. ":""}{hasProvisional?"As respostas abertas e problemas por etapas usam classificação provisória quando a correção não é totalmente determinística.":""}</span></div>
     <div className="fqaExamScoreGrid">
       <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>
       <div><small>Opcionais</small><b>{optionalKnown.toFixed(1)} / 40</b><span>Contam os 4 melhores.</span></div>
       <div><small>Respondidas</small><b>{filled} / {rows.length}</b></div>
     </div>
-    <p className="muted">Este subtotal não é apresentado como classificação oficial enquanto existirem respostas abertas ou etapas com correção provisória.</p>
+    <p className="muted">Este subtotal é uma estimativa provisória sempre que inclui respostas abertas ou etapas cuja correção não é totalmente determinística.</p>
     <div className="fqaExamReviewList">{rows.map((row,index)=>{
       const result=results[index],score=scored[index],value=answers[row.id];
-      const openStatus=physicsChemistryOpenReviewStatus(row,value,rubricAssessments[row.id]||{});
-      return <details id={"fqa-review-"+row.id} key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:score.provisional?"Provisório":result.correct?"Correto":"A rever"}</span></summary><div className="reviewChapterBody">
+      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correto":"A rever"):result.status==="unanswered"?"Sem resposta":"Provisório";
+      return <details id={"fqa-review-"+row.id} key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">
         <Stimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/></>}
+        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos-base</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div></>}
       </div></details>;
     })}</div>
-    {openReviewProgress.pending>0&&<div className="notice warning"><b>A revisão ainda não está completa</b><span>Podes guardar e sair na mesma, mas ficam {openReviewProgress.pending} resposta(s) aberta(s) por rever.</span></div>}
-    <button className="primary" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"Guardar com "+openReviewProgress.pending+" por rever":"Guardar revisão e terminar"}</button>
+    {pendingOpen>0&&<div className="notice warning"><b>{pendingOpen} resposta(s) com confiança reduzida</b><span>A app já atribuiu uma estimativa provisória. Não é necessário o aluno preencher uma grelha de autoavaliação.</span></div>}
+    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 
   return <Shell className="wideStudentShell fqaFullExamPage">
