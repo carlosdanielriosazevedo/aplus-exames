@@ -17,6 +17,7 @@ const ptItem={
 
 const ptGood=gradePortugueseResponse(ptItem,"O relógio é personificado como uma presença humana e insistente. A repetição dos segundos mostra que o tempo continua a passar de forma inevitável, apesar da vontade das personagens.");
 const ptWeak=gradePortugueseResponse(ptItem,"O relógio aparece no texto e a noite é silenciosa.");
+const ptParaphrase=gradePortugueseResponse(ptItem,"O objeto é tratado como se tivesse comportamento humano e insiste em marcar os segundos. Assim, transmite a ideia de que o passar do tempo não para nem espera pelas personagens.");
 
 const fqItem={
   id:"FQA-R-EQ-01",responseType:"restricted-response",maxPoints:10,
@@ -29,14 +30,19 @@ const fqItem={
 };
 const fqGood=gradePhysicsChemistryResponse(fqItem,"Num equilíbrio exotérmico, aumentar a temperatura favorece o sentido endotérmico e altera a composição de equilíbrio. Um catalisador acelera os dois sentidos, mas não altera Kc nem a composição final.");
 const fqWeak=gradePhysicsChemistryResponse(fqItem,"A temperatura e o catalisador afetam a reação.");
+const fqParaphrase=gradePhysicsChemistryResponse(fqItem,"Ao fornecer calor, o sistema desloca-se na direção que absorve energia e as proporções no equilíbrio mudam. A catálise só faz chegar mais depressa ao equilíbrio: a constante e as quantidades relativas finais mantêm-se.");
+const fqContradiction=gradePhysicsChemistryResponse(fqItem,"O catalisador acelera a reação e aumenta Kc, alterando também a composição de equilíbrio.");
 
 const checks=[
   ["Portuguese open response is auto-assessed",ptGood.status==="auto-assessed-provisional"&&ptGood.rubricCompleted],
   ["Portuguese returns provisional points",Number.isFinite(ptGood.provisionalPoints)&&ptGood.provisionalPoints>0],
   ["Portuguese stronger answer scores above weak answer",(ptGood.provisionalPoints||0)>(ptWeak.provisionalPoints||0)],
+  ["Portuguese semantic paraphrase is recognised",(ptParaphrase.provisionalPoints||0)>(ptWeak.provisionalPoints||0)&&ptParaphrase.criteria?.[0]?.status!=="not-observed"],
   ["FQ A open response is auto-assessed",fqGood.status==="auto-assessed-provisional"&&fqGood.rubricCompleted],
   ["FQ A returns provisional points",Number.isFinite(fqGood.provisionalPoints)&&fqGood.provisionalPoints>0],
-  ["FQ A stronger answer scores above weak answer",(fqGood.provisionalPoints||0)>(fqWeak.provisionalPoints||0)]
+  ["FQ A stronger answer scores above weak answer",(fqGood.provisionalPoints||0)>(fqWeak.provisionalPoints||0)],
+  ["FQ A semantic paraphrase is recognised",(fqParaphrase.provisionalPoints||0)>(fqWeak.provisionalPoints||0)],
+  ["FQ A contradiction is not rewarded as a strong answer",(fqContradiction.provisionalPoints||0)<(fqGood.provisionalPoints||0)&&fqContradiction.requiresReview===true]
 ];
 
 const failed=checks.filter(([,ok])=>!ok);
