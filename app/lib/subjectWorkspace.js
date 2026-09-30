@@ -20,12 +20,22 @@ export function uniqueSubjectIds(ids=[],availableIds=[]){
   return [...new Set(ids.map(canonicalSubjectId))].filter(id=>available.has(id));
 }
 
+function hasLegacyMathActivity(state){
+  return state?.diagnosticDone===true
+    ||Number(state?.diagnosticAnswers||0)>0
+    ||(state?.missionHistory?.length||0)>0
+    ||(state?.examHistory?.length||0)>0
+    ||(state?.freeTrainingSignals?.length||0)>0
+    ||!!state?.lastMission
+    ||!!state?.lastExam;
+}
+
 export function normalizeSubjectWorkspaceState(state,availableIds=[],defaultSubjectId="math-a"){
   const selected=uniqueSubjectIds(state?.selectedSubjectIds||[],availableIds);
   const requested=canonicalSubjectId(state?.activeSubjectId);
   if(availableIds.includes(requested)&&!selected.includes(requested))selected.push(requested);
-  if(!selected.length)selected.push(defaultSubjectId);
-  const active=selected.includes(requested)?requested:selected[0];
+  if(!selected.length&&availableIds.includes(defaultSubjectId)&&hasLegacyMathActivity(state))selected.push(defaultSubjectId);
+  const active=selected.includes(requested)?requested:(selected[0]||null);
   return {...state,selectedSubjectIds:selected,activeSubjectId:active};
 }
 
