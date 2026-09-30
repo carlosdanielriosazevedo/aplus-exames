@@ -82,8 +82,10 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const allCurrentScopeIds=portugueseScopeRows(currentYear).flatMap(group=>group.rows.map(row=>row.id));
   const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allCurrentScopeIds:taughtUnitIds);
   const [practiceYear,setPracticeYear]=useState(currentYear);
-  const [practiceDomain,setPracticeDomain]=useState(null);
+  const [practiceDomain,setPracticeDomain]=useState("leitura");
+  const [practiceCompetencyId,setPracticeCompetencyId]=useState("pt-leitura-informacao");
   const [practiceLiteraryWorkId,setPracticeLiteraryWorkId]=useState(null);
+  const [practiceLevel,setPracticeLevel]=useState("auto");
   const allowedYears=yearsThrough(currentYear);
   const scopedItems=PORTUGUESE_ITEMS.filter(item=>allowedYears.includes(item.year)&&portugueseItemInScope(item,currentYear,taughtUnitIds));
   // O diagnóstico e as missões respeitam o percurso e a matéria dada. O Treino
@@ -131,9 +133,9 @@ function PortugueseSubject({s,setS,go,view="home"}){
     start("mission",mission.items,"Missão recomendada");
   }
 
-  function startPractice(domain=null,year=null,competencyId=null,literaryWorkId=null){
+  function startPractice(domain=null,year=null,competencyId=null,literaryWorkId=null,level="auto"){
     const years=year?[year]:SCHOOL_YEARS;
-    const mission=buildAdaptivePortugueseMission(practiceItems,{progress,domain,competencyId,literaryWorkId,years});
+    const mission=buildAdaptivePortugueseMission(practiceItems,{progress,domain,competencyId,literaryWorkId,years,level});
     const competencyLabel=PORTUGUESE_COMPETENCIES.find(row=>row.id===competencyId)?.label;
     const workLabel=portugueseLiteraryWorkById(literaryWorkId)?.title;
     const labelParts=["Praticar",workLabel,competencyLabel||(!workLabel&&domain?PORTUGUESE_DOMAIN_LABELS[domain]:null),year].filter(Boolean);
@@ -223,33 +225,61 @@ function PortugueseSubject({s,setS,go,view="home"}){
       ...work,
       count:practiceYearItems.filter(item=>item.literaryWorkId===work.id&&item.responseType!=="extended-writing").length
     }));
-    const competencySourceItems=practiceLiteraryWorkId
-      ?practiceYearItems.filter(item=>item.literaryWorkId===practiceLiteraryWorkId)
-      :practiceYearItems;
     const practiceCompetencies=PORTUGUESE_COMPETENCIES
       .filter(row=>row.writtenExam&&row.domain===practiceDomain)
-      .map(row=>({...row,count:competencySourceItems.filter(item=>item.competencyId===row.id&&item.responseType!=="extended-writing").length}));
+      .map(row=>({...row,count:practiceYearItems.filter(item=>item.competencyId===row.id&&item.responseType!=="extended-writing").length}));
+    const selectedCompetency=practiceCompetencies.find(row=>row.id===practiceCompetencyId)||null;
+    const selectedWork=literaryWorks.find(row=>row.id===practiceLiteraryWorkId)||null;
+    const selectedFocusCount=practiceDomain==="educacao-literaria"?(selectedWork?.count||0):(selectedCompetency?.count||0);
+    const selectedFocusLabel=practiceDomain==="educacao-literaria"?selectedWork?.title:selectedCompetency?.label;
+    const levelLabel={auto:"Adaptado ao meu nível",basic:"Básico",mid:"Intermédio",adv:"Avançado",challenge:"Desafio"}[practiceLevel];
+
+    function chooseDomain(domain){
+      setPracticeDomain(domain);
+      if(domain==="educacao-literaria"){
+        const first=literaryWorks.find(row=>row.count>=7);
+        setPracticeLiteraryWorkId(first?.id||null);
+        setPracticeCompetencyId(null);
+        return;
+      }
+      const first=PORTUGUESE_COMPETENCIES
+        .filter(row=>row.writtenExam&&row.domain===domain)
+        .map(row=>({...row,count:practiceYearItems.filter(item=>item.competencyId===row.id&&item.responseType!=="extended-writing").length}))
+        .find(row=>row.count>=7);
+      setPracticeCompetencyId(first?.id||null);
+      setPracticeLiteraryWorkId(null);
+    }
+
     return <Shell className="wideStudentShell trainingSetupPage">
-      
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
-      <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano e depois a área que queres trabalhar.</p>
-      <h3>1. Ano</h3><div className="chips yearSelector" aria-label="Escolher ano para praticar Português">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
-      <div className="trainingScopeNote"><b>Português · {practiceYear}</b><span>As perguntas ficam limitadas ao ano escolhido. Em Educação Literária, uma obra só aparece quando já existe banco próprio suficiente.</span></div>
-      {!practiceDomain?<><h3>2. Área</h3>
-        <div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=practiceYearCoverage.missionEligibleByDomain[domain]>=7;return <button key={domain} disabled={!available} onClick={()=>{setPracticeDomain(domain);setPracticeLiteraryWorkId(null)}}>{label}<small>{available?` · escolher competência · ${practiceYear}`:" · cobertura insuficiente neste ano"}</small></button>})}</div>
-        <button className="primary" disabled={practiceYearItems.filter(item=>item.responseType!=="extended-writing").length<7} onClick={()=>startPractice(null,practiceYear)}>Praticar várias áreas · {practiceYear}</button>
-      </>:practiceDomain==="educacao-literaria"&&!practiceLiteraryWorkId?<>
-        <button type="button" className="back" onClick={()=>setPracticeDomain(null)}>← Todas as áreas</button>
-        <div className="sectionIntro compact"><p className="eyebrow">EDUCAÇÃO LITERÁRIA · {practiceYear}</p><h2>3. Que obra queres praticar?</h2></div>
-        {literaryWorks.length?<div className="themeGrid">{literaryWorks.map(work=><button key={work.id} disabled={work.count<7} onClick={()=>setPracticeLiteraryWorkId(work.id)}><b>{work.title}</b><small>{work.author} · {work.count>=7?`${work.count} perguntas próprias`:`cobertura insuficiente · ${work.count}/7`}</small></button>)}</div>:<div className="notice warning"><b>Ainda sem banco específico por obra neste ano</b><span>Podes praticar competências gerais de Educação Literária enquanto preparamos perguntas editorialmente ligadas às obras.</span></div>}
-        <button className="secondary" disabled={practiceYearCoverage.missionEligibleByDomain[practiceDomain]<7} onClick={()=>startPractice(practiceDomain,practiceYear)}>Praticar competências gerais de Educação Literária</button>
-      </>:<>
-        <button type="button" className="back" onClick={()=>{if(practiceLiteraryWorkId)setPracticeLiteraryWorkId(null);else setPracticeDomain(null)}}>← {practiceLiteraryWorkId?"Todas as obras":"Todas as áreas"}</button>
-        <div className="sectionIntro compact"><p className="eyebrow">{practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:PORTUGUESE_DOMAIN_LABELS[practiceDomain]} · {practiceYear}</p><h2>3. Que competência queres trabalhar?</h2></div>
-        {practiceDomain==="escrita"&&writingTasks.length>0&&<button type="button" className="writingPracticeAction" onClick={()=>startWritingTask(practiceYear)}><span>✍️</span><div><b>Produção escrita longa</b><small>{writingTasks.length} propostas · 200–300 palavras · revisão por critérios</small></div><em>→</em></button>}
-        <div className="themeGrid">{practiceCompetencies.map(row=><button key={row.id} disabled={row.count<7} onClick={()=>startPractice(practiceDomain,practiceYear,row.id,practiceLiteraryWorkId)}><b>{row.label}</b><small>{row.count>=7?`7 perguntas adaptadas · ${row.count} disponíveis`:`Cobertura insuficiente · ${row.count}/7`}</small></button>)}</div>
-        <button className="primary" disabled={(practiceLiteraryWorkId?competencySourceItems.filter(item=>item.responseType!=="extended-writing").length:practiceYearCoverage.missionEligibleByDomain[practiceDomain])<7} onClick={()=>startPractice(practiceDomain,practiceYear,null,practiceLiteraryWorkId)}>Praticar {practiceLiteraryWorkId?portugueseLiteraryWorkById(practiceLiteraryWorkId)?.title:`toda a área · ${PORTUGUESE_DOMAIN_LABELS[practiceDomain]}`}</button>
+      <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
+
+      <h3>1. Ano</h3><div className="chips yearSelector" aria-label="Escolher ano para praticar Português">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} aria-pressed={practiceYear===year} onClick={()=>{setPracticeYear(year);setPracticeDomain("leitura");setPracticeCompetencyId("pt-leitura-informacao");setPracticeLiteraryWorkId(null)}}>{year}</button>)}</div>
+
+      <h3>2. Tema</h3><div className="themeGrid">{Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const available=practiceYearCoverage.missionEligibleByDomain[domain]>=7;return <button type="button" key={domain} className={practiceDomain===domain?"sel":""} disabled={!available} onClick={()=>chooseDomain(domain)}><b>{label}</b><small>{available?" · banco disponível":" · em construção"}</small></button>})}</div>
+
+      {practiceDomain&&<><h3>3. Em que queres focar-te?</h3>
+        <div className="chips">{practiceDomain==="educacao-literaria"
+          ?literaryWorks.map(work=><button type="button" key={work.id} disabled={work.count<7} className={practiceLiteraryWorkId===work.id?"sel":""} onClick={()=>{setPracticeLiteraryWorkId(work.id);setPracticeCompetencyId(null)}}>{work.title}{work.count>=7?` (${work.count})`:""}</button>)
+          :practiceCompetencies.map(row=><button type="button" key={row.id} disabled={row.count<7} className={practiceCompetencyId===row.id?"sel":""} onClick={()=>{setPracticeCompetencyId(row.id);setPracticeLiteraryWorkId(null)}}>{row.label}{row.count>=7?` (${row.count})`:""}</button>)}</div>
       </>}
+
+      {practiceDomain&&<><h3>4. Nível</h3><div className="levelGrid">{[
+        ["auto","✨","Adaptado ao meu nível"],["basic","🟢","Básico"],["mid","🔵","Intermédio"],["adv","🟣","Avançado"],["challenge","🔥","Desafio"]
+      ].map(row=><button type="button" key={row[0]} className={practiceLevel===row[0]?"sel":""} onClick={()=>setPracticeLevel(row[0])}><span>{row[1]}</span><b>{row[2]}</b></button>)}</div></>}
+
+      {practiceDomain&&selectedFocusCount>=7&&<div className="trainingSummary"><b>{PORTUGUESE_DOMAIN_LABELS[practiceDomain]} → {selectedFocusLabel}</b><span>{selectedFocusCount} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–10 perguntas e evita repetições recentes sempre que possível.</span></div>}
+      {practiceDomain&&selectedFocusCount<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Escolhe outro foco com banco suficiente para uma sessão completa.</span></div>}
+
+      {practiceDomain==="escrita"&&writingTasks.length>0&&<button type="button" className="writingPracticeAction" onClick={()=>startWritingTask(practiceYear,practiceCompetencyId)}><span>✍️</span><div><b>Produção escrita longa</b><small>{writingTasks.length} propostas · treino específico com revisão por critérios</small></div><em>→</em></button>}
+
+      <button className="primary" disabled={!practiceDomain||selectedFocusCount<7} onClick={()=>startPractice(
+        practiceDomain,
+        practiceYear,
+        practiceDomain==="educacao-literaria"?null:practiceCompetencyId,
+        practiceDomain==="educacao-literaria"?practiceLiteraryWorkId:null,
+        practiceLevel
+      )}>Começar treino</button>
     </Shell>;
   }
 
@@ -310,7 +340,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       const rows=Object.entries(PORTUGUESE_DOMAIN_LABELS).map(([domain,label])=>{const domainRows=session.items.map((item,index)=>({item,result:finalResults[index]})).filter(row=>row.item.domain===domain&&row.result?.status!=="unanswered");const d=domainRows.filter(row=>row.result?.final);const c=d.filter(row=>row.result.correct).length;return {domain,label,total:domainRows.length,correct:c,pending:domainRows.filter(row=>!row.result.final).length,percent:d.length?Math.round(c/d.length*100):null};});
       const priority=[...rows].sort((a,b)=>(a.percent===null?-1:a.percent)-(b.percent===null?-1:b.percent))[0];
       return <Shell><div className="centered completionMoment"><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o diagnóstico concluído"/><p className="eyebrow">DIAGNÓSTICO CONCLUÍDO · PORTUGUÊS</p><h1>Já temos um ponto de partida.</h1><p className="muted">Isto não é uma nota. É uma primeira leitura do teu desempenho para escolher o próximo treino.</p></div>
-        <div className="portugueseSubjectStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
+        <div className="portugueseSubjectStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas abertas por rever</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
         <div className="notice"><b>Como ler este resultado</b><span>As respostas objetivas dão uma indicação inicial. As respostas abertas permanecem separadas e dependem da grelha de autoavaliação; não são transformadas automaticamente numa nota.</span></div>
         <section className="portugueseProgressCard diagnosticDomainSummary"><h2>Primeira leitura por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><div><b>{row.label}</b><strong>{row.percent===null?"—":`${row.percent}%`}</strong></div><span>{row.percent===null?"Ainda sem respostas objetivas suficientes":`${row.correct} certas em ${row.total} respostas objetivas`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aberta(s) aguardam autoavaliação</small>}</article>)}</div></section>
         {priority&&<div className="notice"><b>Próximo foco: {priority.label}</b><span>Vamos começar por aqui e ajustar a missão àquilo que já respondeste, evitando repetir conteúdo sem necessidade.</span></div>}
@@ -319,7 +349,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       </Shell>;
     }
     return <Shell><div className="centered completionMoment"><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra a sessão concluída"/><p className="eyebrow">{session.label}</p><h1>Sessão concluída</h1></div><div className="portugueseResultHero"><b>{correct}/{deterministic.length}</b><span>respostas determinísticas corretas</span></div>{missionEvidenceFocus.length>0&&<div className="notice"><b>Esta missão foi ajustada ao teu histórico</b><span>Incluiu critérios que assinalaste anteriormente como “em parte”, “não identificados” ou “por confirmar”. Isto orienta o treino, mas não é uma nota.</span><ul>{missionEvidenceFocus.slice(0,3).map(row=><li key={row.competencyId+row.observationId}>{row.label}</li>)}</ul></div>}
-      <div className="portugueseSubjectStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas por grelha</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
+      <div className="portugueseSubjectStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas abertas por rever</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
       <div className={`dailyCompletionNote ${daily.dailyGoalComplete?"done":"partial"}`}><b>{daily.dailyGoalComplete?"Objetivo de hoje concluído":"Sessão registada"}</b><span>{daily.dailyGoalComplete?"A tua sequência está protegida por hoje.":`Faltam ${daily.xpRemaining} XP para completares o objetivo diário.`}</span></div>
       {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas abertas ficaram pendentes de aplicação da grelha. Não foram convertidas automaticamente numa nota.</span></div>}
       <button className="primary" onClick={()=>{setSession(null);go("home")}}>Voltar à Home</button><button className="secondary" onClick={()=>{setSession(null);go(session.kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>
