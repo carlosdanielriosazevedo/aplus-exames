@@ -103,7 +103,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     <div className="fqaExamScoreGrid">
       <div><small>Respondidas</small><b>{answeredCount} / {exam.itemCount}</b></div>
       <div><small>Escolha múltipla</small><b>{deterministicCorrect} / {deterministic.length}</b><span>corretas</span></div>
-      <div><small>Construídas</small><b>{provisional+openPending}</b><span>{openPending?"inclui respostas por rever":"correção provisória"}</span></div>
+      <div><small>Construídas</small><b>{provisional}</b><span>{openPending?"inclui avaliações de confiança reduzida":"correção provisória"}</span></div>
     </div>
     <div className="notice"><b>Correção automática maximizada</b><span>A app corrige escolhas, etapas e respostas científicas automaticamente sempre que consegue. Nas respostas abertas, a pontuação continua provisória quando a interpretação tem incerteza.</span></div>
     <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{
