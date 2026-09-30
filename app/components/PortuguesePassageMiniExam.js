@@ -275,6 +275,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
           {reviewBlock.items.map((row)=>{
             const value=answers[row.id];
             const result=resultFor(row,value);
+            const automaticResult=row.responseType==="multiple-choice"?null:gradePortugueseResponse(row,value);
             const criteria=row.rubric?.criteria||[];
             const itemAssessment=selfAssessment[row.id]||{};
             const summary=selfAssessmentSummary(criteria,itemAssessment);
@@ -291,6 +292,11 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                 <p className="ptx-explanation">{row.explanation}</p>
               </>:<>
                 <p className="ptx-open-answer"><b>A tua resposta atual:</b> {String(value||"").trim()||"—"}</p>
+                {automaticResult?.feedbackSummary&&<div className="automaticFeedbackPanel">
+                  {automaticResult.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{automaticResult.feedbackSummary.strengths.map(entry=><div key={entry.id}><strong>✓ {entry.label}</strong>{entry.evidence&&<blockquote>“{entry.evidence}”</blockquote>}<span>{entry.message}</span></div>)}</section>}
+                  {automaticResult.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{automaticResult.feedbackSummary.gaps.map(entry=><div key={entry.id}><strong>{entry.message}</strong><span>{entry.label}</span></div>)}</section>}
+                  <p className="automaticFeedbackNext"><b>Para melhorar:</b> {automaticResult.feedbackSummary.nextAction}</p>
+                </div>}
                 <details><summary>Ver resposta de referência</summary><p>{row.referenceAnswer}</p></details>
                 {row.scoringGuidance&&<details className="ptx-quality-guide"><summary>Como distinguir uma resposta forte de uma resposta parcial</summary>
                   <div className="ptx-quality-levels">
