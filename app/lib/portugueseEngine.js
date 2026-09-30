@@ -1,5 +1,7 @@
 import {DEFAULT_MISSION_QUESTIONS,clampStudySessionSize,STUDY_SESSION_MIN_QUESTIONS} from "./sessionPolicy.js";
 import {PORTUGUESE_DOMAINS,PORTUGUESE_RELEASE_POLICY} from "../data/portugueseFoundation.js";
+import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary} from "./automaticEvidenceGrader.js";
+import {portugueseObservationGuidance} from "./portugueseObservationGuidance.js";
 
 const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=>domain.id);
 const RESPONSE_PRIORITY={"multiple-choice":0,"short-answer":1,"restricted-response":2,"extended-writing":3};
@@ -221,23 +223,63 @@ export function gradePortugueseResponse(item,response){
     return {status:answered?"final":"unanswered",final:true,correct:answered?correct:null,points:answered?(correct?item.maxPoints:0):null,maxPoints:item.maxPoints,gradingMode:item.gradingMode};
   }
   if(["restricted-response","extended-writing"].includes(item.responseType)){
-    const words=portugueseWordCount(response);
+    const responseText=String(response??"");
+    const words=portugueseWordCount(responseText);
     const answered=words>0;
     const min=item.wordLimit?.min??0;
     const max=item.wordLimit?.max??Number.POSITIVE_INFINITY;
+    if(!answered)return {
+      status:"unanswered",final:false,responseText,correct:null,points:null,maxPoints:item.maxPoints,
+      gradingMode:"automatic-rubric-provisional",rubricId:rubricIdFor(item),rubricCompleted:false,
+      wordCount:words,wordLimit:{min,max,within:false},criteria:[]
+    };
+
+    const structuralAssessment=criterion=>{
+      const normalized=normalizePortugueseAnswer(responseText);
+      const sentenceCount=(responseText.match(/[.!?]+/gu)||[]).length;
+      const paragraphCount=responseText.split(/\n\s*\n/u).filter(row=>row.trim()).length;
+      const connectors=["porque","por isso","além disso","alem disso","assim","contudo","porém","porem","logo","portanto","embora","consequentemente","em conclusão","em conclusao"];
+      const connectorCount=connectors.filter(token=>normalized.includes(normalizePortugueseAnswer(token))).length;
+      if(["lingua","correcao-linguistica"].includes(criterion.id)){
+        const status=words>=Math.max(20,min*.55)?"observed":words>=10?"partial":"not-observed";
+        return {status,scoreRatio:status==="observed"?1:status==="partial"?.5:0,confidence:.48,observations:(criterion.observations||[]).map(observation=>({...observation,status,confidence:.48,studentEvidence:[]}))};
+      }
+      if(["estrutura","coerencia"].includes(criterion.id)){
+        const status=(sentenceCount>=3&&(connectorCount>=1||paragraphCount>=2))?"observed":sentenceCount>=2?"partial":"not-observed";
+        return {status,scoreRatio:status==="observed"?1:status==="partial"?.5:0,confidence:.55,observations:(criterion.observations||[]).map(observation=>({...observation,status,confidence:.55,studentEvidence:[]}))};
+      }
+      return null;
+    };
+
+    const criteria=(item.rubric?.criteria||[]).map(criterion=>{
+      const structural=structuralAssessment(criterion);
+      if(structural)return {...criterion,...structural,observable:true,autoAssessed:true};
+      const observations=(criterion.observations||[]).map(observation=>{
+        const guidance=portugueseObservationGuidance(item,criterion,observation);
+        const assessed=assessEvidence(responseText,observation.label,criterion.label,guidance.counts,item.referenceAnswer);
+        return {...observation,status:assessed.status,confidence:assessed.confidence,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
+      });
+      const aggregate=aggregateCriterionAssessment(observations);
+      return {...criterion,...aggregate,observations,observable:true,autoAssessed:true};
+    });
+    const summary=automaticRubricSummary(criteria,item.maxPoints||item.rubric?.maxPoints||0);
     return {
-      status:answered?"awaiting-rubric":"unanswered",
+      status:"auto-assessed-provisional",
       final:false,
-      responseText:String(response??""),
+      responseText,
       correct:null,
       points:null,
+      provisionalPoints:summary.provisionalPoints,
       maxPoints:item.maxPoints,
-      gradingMode:"rubric-assisted-provisional",
+      gradingMode:"automatic-rubric-provisional",
       rubricId:rubricIdFor(item),
-      rubricCompleted:false,
+      rubricCompleted:true,
+      requiresReview:summary.requiresReview,
+      autoAssessmentConfidence:summary.confidence,
       wordCount:words,
-      wordLimit:{min,max,within:answered&&words>=min&&words<=max},
-      criteria:(item.rubric?.criteria||[]).map(criterion=>({...criterion,status:"pending",observable:true,observations:(criterion.observations||[]).map(observation=>({...observation,status:"pending"}))}))
+      wordLimit:{min,max,within:words>=min&&words<=max},
+      criteria,
+      note:"A app avaliou automaticamente a resposta por critérios. A classificação é provisória quando a interpretação não é totalmente determinística."
     };
   }
   throw new Error(`Unsupported Portuguese response type: ${item.responseType}`);
