@@ -47,14 +47,16 @@ export function physicsChemistryCoverage(items=[]){
   const byDomain=Object.fromEntries(PHYSICS_CHEMISTRY_A_DOMAINS.map(domain=>[domain.id,items.filter(item=>item.domain===domain.id).length]));
   const byYear=Object.fromEntries(["10.º","11.º"].map(year=>[year,items.filter(item=>item.year===year).length]));
   const bySubtopic=Object.fromEntries(PHYSICS_CHEMISTRY_A_SUBTOPICS.map(row=>[row.id,items.filter(item=>item.subtopicId===row.id).length]));
+  const diagnosticEligible=items.filter(item=>item.responseType==="multiple-choice").length;
   return {
     total:items.length,
     byDomain,
     byYear,
     bySubtopic,
+    diagnosticEligible,
     missionEligibleByDomain:Object.fromEntries(Object.entries(byDomain).map(([id,count])=>[id,count>=STUDY_SESSION_MIN_QUESTIONS])),
-    diagnosticReady:byYear["10.º"]>=4&&byYear["11.º"]>=4,
-    missionReady:Object.values(byDomain).every(count=>count>=STUDY_SESSION_MIN_QUESTIONS)
+    diagnosticReady:diagnosticEligible>=8,
+    missionReady:items.length>=STUDY_SESSION_MIN_QUESTIONS
   };
 }
 
@@ -74,6 +76,19 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
     const fallback=items.filter(item=>item.responseType==="multiple-choice"&&item.year===year&&!selected.some(row=>row.id===item.id));
     const next=(pool[0]||fallback[0]);
     if(next)selected.push(next);
+  }
+
+  const eligible=items.filter(item=>item.responseType==="multiple-choice"&&!selected.some(row=>row.id===item.id));
+  const representedSubtopics=new Set(selected.map(item=>item.subtopicId).filter(Boolean));
+  for(const item of eligible){
+    if(selected.length>=8)break;
+    if(item.subtopicId&&representedSubtopics.has(item.subtopicId))continue;
+    selected.push(item);
+    if(item.subtopicId)representedSubtopics.add(item.subtopicId);
+  }
+  for(const item of eligible){
+    if(selected.length>=8)break;
+    if(!selected.some(row=>row.id===item.id))selected.push(item);
   }
   return selected.slice(0,8);
 }
