@@ -17,7 +17,7 @@ const SYNONYM_GROUPS=[
   ["reduzir","reducao","diminuir","menor","baixar","atenuar"],
   ["media","promedio","valor medio"],
   ["dispersao","variabilidade","espalhamento"],
-  ["rapidez","velocidade"],
+  ["rapidez","velocidade","mais depressa","mais rapidamente"],
   ["incerteza","erro","precisao","exatidao"],
   ["equivalencia","estequiometrico","estequiometria"],
   ["indicador","colorimetrico","mudanca de cor"],
@@ -41,10 +41,12 @@ const SYNONYM_GROUPS=[
   ["conclusao","concluir","final","fecho"],
   ["estrutura","organizacao","progressao","ordem"],
   ["coerencia","ligacao","articulacao","encadeamento"],
-  ["composicao","quantidade relativa","proporcao dos componentes"],
+  ["composicao","quantidade relativa","quantidades relativas","proporcao","proporcoes","proporcao dos componentes"],
   ["equilibrio","estado de equilibrio"],
+  ["kc","constante","constante de equilibrio"],
+  ["temperatura","calor","energia termica","fornecer calor","aquecer"],
   ["dois sentidos","sentido direto e inverso","reacao direta e inversa"],
-  ["nao altera","mantem","nao modifica","fica inalterado"],
+  ["nao altera","mantem","mantem-se","mantem se","nao modifica","fica inalterado","permanece igual"],
   ["deslocamento","variacao da posicao"],
   ["distancia","espaco percorrido","comprimento do percurso"],
   ["modulo","valor absoluto"],
@@ -219,7 +221,8 @@ function negationMismatchPenalty(response,texts){
     const overlap=sentenceTokens.filter(token=>evidenceContent.has(token)).length;
     if(overlap<2)continue;
     const hasNegation=/\bnao\b|\bsem\b|\binalterad/u.test(normalizeEvidenceText(sentence));
-    if(!hasNegation)return .18;
+    const hasEquivalentNonChange=hasAnyPhrase(sentence,["nao altera","mantem","mantem-se","mantem se","fica inalterado","permanece igual"]);
+    if(!hasNegation&&!hasEquivalentNonChange)return .18;
   }
   return 0;
 }
