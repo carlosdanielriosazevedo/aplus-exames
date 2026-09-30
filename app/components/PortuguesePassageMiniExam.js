@@ -108,7 +108,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         const existing=next[row.id]||{};
         const rowAssessment={...existing};
         for(const criterion of automatic.criteria||[]){
-          if(existing[criterion.id]?.status)continue;
+          if(existing[criterion.id]?.status&&existing[criterion.id]?.source!=="automatic")continue;
           const status=criterion.status==="observed"?"met":criterion.status==="partial"?"partial":"not-yet";
           const evidence=(criterion.observations||[]).flatMap(observation=>observation.studentEvidence||[]).filter(Boolean)[0]||"";
           rowAssessment[criterion.id]={status,evidence,source:"automatic",confidence:criterion.confidence??automatic.autoAssessmentConfidence??null};
