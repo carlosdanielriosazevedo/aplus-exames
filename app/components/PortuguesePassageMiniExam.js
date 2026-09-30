@@ -7,6 +7,7 @@ import {loadPortugueseWritingMemory,recordPortugueseWritingMemory,savePortuguese
 import {writingResolvedAttentions,writingActivePreAnswerFocus} from "../lib/portugueseWritingProgress";
 import {portugueseMiniExamDraftSnapshot} from "../lib/portugueseMiniExamDraft";
 import {classifyPortugueseFullExamResults} from "../lib/portugueseFullExamClassification";
+import {gradePortugueseResponse} from "../lib/portugueseEngine";
 
 const PortugueseWritingCycleSummary=dynamic(()=>import("./PortugueseWritingCycleSummary"),{ssr:false});
 const ExamSubmissionCheck=dynamic(()=>import("./ExamSubmissionCheck"),{ssr:false});
@@ -95,6 +96,30 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       examId,itemIds:exam.items.map(row=>row.id),index,review,answers,selfAssessment,revisionDrafts,revisions,dismissedWritingFocus,markedForReview,attemptId,startedAt
     }));
   },[answers,attemptId,dismissedWritingFocus,exam,examId,index,markedForReview,onDraftChange,review,revisionDrafts,revisions,selfAssessment,startedAt]);
+  useEffect(()=>{
+    if(!review)return;
+    setSelfAssessment(current=>{
+      let changed=false;
+      const next={...current};
+      for(const row of openItems){
+        if(!answerFilled(row,answers[row.id]))continue;
+        const automatic=gradePortugueseResponse(row,answers[row.id]);
+        if(!automatic?.rubricCompleted)continue;
+        const existing=next[row.id]||{};
+        const rowAssessment={...existing};
+        for(const criterion of automatic.criteria||[]){
+          if(existing[criterion.id]?.status)continue;
+          const status=criterion.status==="observed"?"met":criterion.status==="partial"?"partial":"not-yet";
+          const evidence=(criterion.observations||[]).flatMap(observation=>observation.studentEvidence||[]).filter(Boolean)[0]||"";
+          rowAssessment[criterion.id]={status,evidence,source:"automatic",confidence:criterion.confidence??automatic.autoAssessmentConfidence??null};
+          changed=true;
+        }
+        next[row.id]=rowAssessment;
+      }
+      return changed?next:current;
+    });
+  },[review,answers,openItems]);
+
 
   const rememberAssessment=(row,assessment)=>setWritingMemory(current=>{
     const next=recordPortugueseWritingMemory(current,{attemptId,item:row,assessment});
@@ -224,7 +249,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       <section className="ptx-summary">
         <div><strong>{answeredCount}/{exam.itemCount}</strong><span>respondidas</span></div>
         <div><strong>{deterministicCorrect}/{deterministicItems.length}</strong><span>certas nas escolhas múltiplas</span></div>
-        <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios autoavaliados</span></div>
+        <div><strong>{reviewedCriteria}/{rubricCriteria.length}</strong><span>critérios avaliados pela app</span></div>
         <div><strong>{revisedOpenItems}/{openItems.length}</strong><span>respostas abertas melhoradas</span></div>
       </section>
       <section className={"ptx-review-progress "+(pendingOpenReviewRows.length?"has-pending":"is-complete")} aria-label="Progresso da revisão das respostas abertas">
@@ -285,11 +310,11 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                 </details>}
                 {priorPattern.available&&<div className="ptx-improvement-insight">
                   <strong>Lembra-te do padrão das tentativas anteriores</strong>
-                  <p>Este aviso usa apenas as tuas próprias autoavaliações anteriores em respostas do mesmo domínio. Não é uma classificação nem um diagnóstico automático.</p>
+                  <p>Este aviso usa o histórico de avaliações automáticas e revisões anteriores no mesmo domínio. Não é uma classificação oficial.</p>
                   {priorPattern.rows.map(memoryRow=><p key={memoryRow.criterionId}><b>{memoryRow.label}</b> — {memoryRow.message}</p>)}
                 </div>}
-                <section className="ptx-self-assessment" aria-label={`Autoavaliação de ${row.id}`}>
-                  <div className="ptx-self-head"><div><span>Autoavaliação por critérios</span><h4>Compara a tua resposta com a grelha</h4></div><small>Sem nota automática</small></div>
+                <section className="ptx-self-assessment" aria-label={`Avaliação automática de ${row.id}`}>
+                  <div className="ptx-self-head"><div><span>Avaliação automática por critérios</span><h4>A app comparou a tua resposta com a grelha</h4></div><small>Provisório quando necessário</small></div>
                   {criteria.map(criterion=>{
                     const evidence=itemAssessment[criterion.id]||{};
                     const feedback=criterionFeedback({criterion,status:evidence.status,evidence:evidence.evidence});
@@ -299,20 +324,20 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                       <div className="ptx-criterion-levels" role="group" aria-label={`Avaliar critério ${criterion.label}`}>
                         {PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row,criterion.id,{status:level.id})}>{level.label}</button>)}
                       </div>
-                      <label className="ptx-evidence-label">Onde está a evidência na tua resposta?
+                      <label className="ptx-evidence-label">Evidência detetada na tua resposta
                         <textarea rows={2} value={evidence.evidence||""} onChange={event=>updateCriterion(row,criterion.id,{evidence:event.target.value})} placeholder="Ex.: no 2.º período relacionei a permanência na praça com os encontros e as esplanadas." />
                       </label>
                       <div className={`ptx-criterion-feedback is-${feedback.kind}`}><strong>{feedback.title}</strong><p>{feedback.message}</p></div>
                     </div>;
                   })}
                   {criteria.length>0&&<div className="ptx-next-step">
-                    <strong>{summary.complete?"Autoavaliação concluída":"Próximo passo sugerido"}</strong>
+                    <strong>{summary.complete?"Avaliação automática concluída":"Próximo passo sugerido"}</strong>
                     <p>{summary.complete?`Revê sobretudo os critérios marcados como “Parcial” (${summary.counts.partial}) ou “Ainda não” (${summary.counts["not-yet"]}) e melhora apenas essas partes da resposta.`:summary.nextCriterion?`Continua pelo critério: ${summary.nextCriterion.label}`:"Continua a comparar a tua resposta com a grelha."}</p>
                     <span>{summary.counts.withEvidence}/{summary.total} critérios com evidência escrita</span>
                   </div>}
                 </section>
                 <section className="ptx-revision-loop" aria-label={`Melhoria da resposta ${row.id}`}>
-                  <div className="ptx-revision-head"><div><span>Nova versão</span><h4>Melhora a resposta com base na tua autoavaliação</h4></div>{!editing&&<button className="ptx-primary" onClick={()=>startRevision(row)}>Melhorar resposta</button>}</div>
+                  <div className="ptx-revision-head"><div><span>Nova versão</span><h4>Melhora a resposta com base na avaliação da app</h4></div>{!editing&&<button className="ptx-primary" onClick={()=>startRevision(row)}>Melhorar resposta</button>}</div>
                   {editing&&<div className="ptx-revision-editor"><textarea rows={7} value={revisionDrafts[row.id]} onChange={event=>setRevisionDrafts(current=>({...current,[row.id]:event.target.value}))}/><div className="ptx-revision-actions"><button className="ptx-ghost" onClick={()=>cancelRevision(row.id)}>Cancelar</button><button className="ptx-primary" disabled={!String(revisionDrafts[row.id]||"").trim()||String(revisionDrafts[row.id]||"").trim()===String(value||"").trim()} onClick={()=>saveRevision(row)}>Guardar nova versão</button></div></div>}
                   {rowRevisions.map(revision=>{
                     const progress=selfAssessmentProgress(criteria,revision.assessmentBefore||{},revision.assessmentAfter||{});
@@ -323,8 +348,8 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                         <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
                       </div>
                       <div className={`ptx-improvement-insight ${progress.changed?"has-change":""}`}>
-                        <strong>O que mudou na tua autoavaliação</strong>
-                        {!progress.changed?<p>Agora volta aos critérios acima e reavalia a nova versão. A app compara a tua própria avaliação antes e depois, sem transformar essa evolução numa nota.</p>:<>
+                        <strong>O que mudou na avaliação</strong>
+                        {!progress.changed?<p>A app volta a avaliar a nova versão e compara os critérios automaticamente.</p>:<>
                           {progress.upgraded.length>0&&<p><b>Critérios que assinalaste como melhores:</b> {progress.upgraded.map(entry=>`${entry.label} (${entry.from} → ${entry.to})`).join(" · ")}</p>}
                           {progress.newlyAssessed.length>0&&<p><b>Critérios avaliados depois da revisão:</b> {progress.newlyAssessed.map(entry=>`${entry.label} → ${entry.to}`).join(" · ")}</p>}
                           {progress.evidenceAdded.length>0&&<p><b>Nova evidência identificada:</b> {progress.evidenceAdded.map(entry=>entry.label).join(" · ")}</p>}
@@ -336,7 +361,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                     </div>;
                   })}
                 </section>
-                <p className="ptx-pending-note">A autoavaliação, a comparação entre versões e a evolução assinalada ficam guardadas nesta tentativa; o padrão entre tentativas é guardado apenas no dispositivo e não produz classificação automática final.</p>
+                <p className="ptx-pending-note">A avaliação automática, a comparação entre versões e a evolução ficam guardadas nesta tentativa. Quando a correção não é determinística, a classificação mantém-se provisória.</p>
               </>}
             </article>;
           })}
@@ -360,10 +385,10 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
         {item.responseType==="multiple-choice"?<div className="ptx-options">{item.options.map((option,optionIndex)=><button key={optionIndex} className={answers[item.id]===optionIndex?"is-selected":""} onClick={()=>setAnswer(optionIndex)}><span>{String.fromCharCode(65+optionIndex)}</span>{option}</button>)}</div>:<div className="ptx-open-editor">
           {activeWritingFocus.available&&!dismissedWritingFocus[item.id]&&<aside className="ptx-memory-focus" aria-label="Foco antes de responder">
             <div className="ptx-memory-focus-head"><div><span>Memória de escrita</span><strong>Antes de responder, escolhe 1–2 pontos para vigiar</strong></div><button type="button" onClick={()=>setDismissedWritingFocus(current=>({...current,[item.id]:true}))}>Ocultar</button></div>
-            <p>Este lembrete vem apenas das tuas autoavaliações anteriores no mesmo domínio. Pontos que deixaram de ser atenção recorrente nas tentativas recentes deixam de aparecer aqui. Não prevê a qualidade desta resposta nem atribui nota.</p>
+            <p>Este lembrete vem do histórico de avaliações e revisões anteriores no mesmo domínio. Pontos que deixaram de ser atenção recorrente nas tentativas recentes deixam de aparecer aqui.</p>
             <ul>{activeWritingFocus.rows.map(focus=><li key={focus.criterionId}><b>{focus.prompt}</b><span>{focus.message}</span></li>)}</ul>
           </aside>}
-          <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app guarda evidência e permite autoavaliação; não atribui automaticamente uma classificação final.</p></div>}
+          <textarea value={answers[item.id]||""} onChange={event=>setAnswer(event.target.value)} placeholder="Escreve aqui a tua resposta…" rows={9}/><div className="ptx-word-row"><span>{String(answers[item.id]||"").trim()?String(answers[item.id]).trim().split(/\s+/u).length:0} palavras</span><span>Objetivo: {item.wordLimit?.min}–{item.wordLimit?.max}</span></div><p>Nas respostas abertas, a app tenta corrigir e avaliar automaticamente por critérios. Quando não consegue ter confiança suficiente, o resultado fica identificado como provisório.</p></div>}
         <button type="button" className={"examMarkButton "+(markedForReview.includes(item.id)?"is-marked":"")} onClick={()=>toggleMarked(item.id)}>{markedForReview.includes(item.id)?"★ Marcada para rever":"☆ Marcar para rever"}</button>
         <div className="ptx-actions"><button className="ptx-ghost" onClick={()=>goTo(index-1)} disabled={index===0}>Anterior</button>{index<exam.itemCount-1?<button className="ptx-primary" onClick={()=>goTo(index+1)}>Seguinte</button>:<button className="ptx-primary" onClick={()=>setSubmitCheck(true)}>Terminar e rever o exame</button>}</div>
       </section>
