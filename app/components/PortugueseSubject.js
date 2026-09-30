@@ -220,7 +220,6 @@ function PortugueseSubject({s,setS,go,view="home"}){
   if(!session&&view==="trainingSetup"){
     const practiceYearItems=practiceItems.filter(item=>item.year===practiceYear);
     const practiceYearCoverage=portugueseCoverage(practiceYearItems);
-    const writingTasks=practiceYearItems.filter(item=>item.domain==="escrita"&&item.responseType==="extended-writing");
     const literaryWorks=portugueseLiteraryWorksForYear(practiceYear).map(work=>({
       ...work,
       count:practiceYearItems.filter(item=>item.literaryWorkId===work.id&&item.responseType!=="extended-writing").length
@@ -270,8 +269,6 @@ function PortugueseSubject({s,setS,go,view="home"}){
 
       {practiceDomain&&selectedFocusCount>=7&&<div className="trainingSummary"><b>{PORTUGUESE_DOMAIN_LABELS[practiceDomain]} → {selectedFocusLabel}</b><span>{selectedFocusCount} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–10 perguntas e evita repetições recentes sempre que possível.</span></div>}
       {practiceDomain&&selectedFocusCount<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Escolhe outro foco com banco suficiente para uma sessão completa.</span></div>}
-
-      {practiceDomain==="escrita"&&writingTasks.length>0&&<button type="button" className="writingPracticeAction" onClick={()=>startWritingTask(practiceYear,practiceCompetencyId)}><span>✍️</span><div><b>Produção escrita longa</b><small>{writingTasks.length} propostas · treino específico com revisão por critérios</small></div><em>→</em></button>}
 
       <button className="primary" disabled={!practiceDomain||selectedFocusCount<7} onClick={()=>startPractice(
         practiceDomain,
