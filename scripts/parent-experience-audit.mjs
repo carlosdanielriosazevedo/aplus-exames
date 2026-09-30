@@ -13,8 +13,11 @@ const checks=[
   ["parent has two clear entry choices",page.includes("Associar um aluno")&&page.includes("Criar perfil do aluno")],
   ["parent dashboard is per subject",page.includes("Estado por disciplina")&&page.includes("parentSubjectGrid")],
   ["parent dashboard includes weekly activity",page.includes("dias com estudo esta semana")&&page.includes("weeklyXp")],
+  ["parent dashboard includes four-week consistency trend",page.includes("Regularidade de estudo nas últimas 4 semanas")&&page.includes("parentTrendChart")],
+  ["parent dashboard includes recent assessment context",page.includes("Resultados recentes em contexto de prova")&&page.includes("assessmentRows")],
+  ["parent assessments avoid false grades for open responses",page.includes("não inventamos uma nota")&&page.includes("não são uma previsão da classificação no Exame Nacional")],
   ["privacy boundary is explicit",page.includes("Não vê cada resposta individual")],
-  ["parent dashboard styles exist",css.includes("/* APProva+ — área parental v1 */")&&css.includes(".parentDashboardHero")]
+  ["parent dashboard styles exist",css.includes("/* APProva+ — área parental v1 */")&&css.includes(".parentDashboardHero")&&css.includes(".parentTrendChart")&&css.includes(".parentAssessmentList")]
 ];
 
 const failed=checks.filter(([,ok])=>!ok);
