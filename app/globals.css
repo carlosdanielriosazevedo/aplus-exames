@@ -1496,3 +1496,91 @@ button,input,select,textarea{max-width:100%}
   .curriculumPicker details>div{padding:0 16px 12px}
   .curriculumPicker label{padding:12px 0}
 }
+
+
+/* APProva+ — área parental v1 */
+.parentEntryChoices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 14px}
+.parentEntryChoices button{display:grid;grid-template-columns:44px minmax(0,1fr);gap:3px 12px;align-items:center;text-align:left;padding:16px;border:2px solid #e5e8ef;border-radius:14px;background:#fff;color:#17213a;cursor:pointer}
+.parentEntryChoices button:hover{border-color:#c9bff7}
+.parentEntryChoices button.selected{border-color:#7052f5;background:#f7f5ff}
+.parentEntryChoices button>span{grid-row:1/3;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#eef0f5;font-size:19px;font-weight:950}
+.parentEntryChoices button.selected>span{background:#7052f5;color:#fff}
+.parentEntryChoices b,.parentEntryChoices small{display:block}
+.parentEntryChoices b{font-size:14px}
+.parentEntryChoices small{font-size:11px;color:#7b8293;line-height:1.4}
+.parentEntryPanel{border:1px solid #e3e6ec;background:#fbfbfc}
+.parentPrivacyHint{padding:16px;border-radius:13px;background:#f8f9fb;border:1px solid #e7eaf0;margin:14px 0 20px}
+.parentPrivacyHint b,.parentPrivacyHint span{display:block}
+.parentPrivacyHint b{font-size:12px}
+.parentPrivacyHint span{margin-top:4px;color:#737d91;font-size:11px;line-height:1.55}
+
+.parentDashboardHero{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:22px 0 12px;padding:20px;border:1px solid #e1e5ec;border-radius:17px;background:#fff}
+.parentDashboardHero small,.parentDashboardHero h2,.parentDashboardHero span{display:block;margin:0}
+.parentDashboardHero small{font-size:9px;font-weight:900;letter-spacing:.08em;color:#8a92a3}
+.parentDashboardHero h2{font-size:24px;margin-top:4px;color:#14213b}
+.parentDashboardHero>div>span{font-size:11px;color:#69758a;margin-top:5px}
+.parentWeekBadge{min-width:150px;padding:12px 14px;border-radius:13px;background:#f4f1ff;text-align:center}
+.parentWeekBadge b,.parentWeekBadge span{display:block}
+.parentWeekBadge b{font-size:24px;color:#5f49cb}
+.parentWeekBadge span{font-size:9px;color:#706f81;margin-top:2px}
+
+.parentWeeklyGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 20px}
+.parentWeeklyGrid>div{padding:15px;border:1px solid #e6e9ef;border-radius:13px;background:#f9fafb}
+.parentWeeklyGrid small,.parentWeeklyGrid b,.parentWeeklyGrid span{display:block}
+.parentWeeklyGrid small{font-size:8px;font-weight:900;letter-spacing:.07em;color:#9299a8}
+.parentWeeklyGrid b{font-size:20px;color:#17213a;margin-top:3px}
+.parentWeeklyGrid span{font-size:9px;color:#7a8497;margin-top:2px}
+
+.parentDashboardSection{margin:14px 0;padding:17px;border:1px solid #e4e7ed;border-radius:15px;background:#fff}
+.parentSectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px}
+.parentSectionHead small,.parentSectionHead h3{display:block;margin:0}
+.parentSectionHead small{font-size:8px;font-weight:900;letter-spacing:.08em;color:#9299a8}
+.parentSectionHead h3{font-size:15px;color:#19233b;margin-top:3px}
+.parentSectionHead>span{font-size:9px;color:#81899a}
+
+.parentSubjectGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.parentSubjectCard{padding:14px;border:1px solid #e6e9ef;border-radius:13px;background:#fafbfc}
+.parentSubjectTitle{display:flex;align-items:center;gap:10px}
+.parentSubjectTitle .subjectIcon{flex:none;width:38px;height:38px}
+.parentSubjectTitle b,.parentSubjectTitle small{display:block}
+.parentSubjectTitle b{font-size:12px;color:#17213a}
+.parentSubjectTitle small{font-size:9px;color:#7d879a;margin-top:2px}
+.parentSubjectCard>strong{display:inline-flex;margin:11px 0 8px;padding:5px 8px;border-radius:999px;font-size:8px}
+.parentSubjectCard>strong.done{background:#ecf8f1;color:#27714f}
+.parentSubjectCard>strong.pending{background:#fff5e8;color:#8a5a1c}
+.parentSubjectMeta{display:grid;gap:3px}
+.parentSubjectMeta span{font-size:9px;color:#747e91}
+
+.parentInsightGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.parentInsight{padding:13px;border-radius:12px}
+.parentInsight.good{background:#eef8f3;color:#1f5d43}
+.parentInsight.focus{background:#fff6e9;color:#764d17}
+.parentInsight b,.parentInsight strong,.parentInsight span{display:block}
+.parentInsight b{font-size:8px;text-transform:uppercase;letter-spacing:.05em;opacity:.75}
+.parentInsight strong{font-size:13px;margin-top:3px}
+.parentInsight span{font-size:9px;line-height:1.45;margin-top:4px}
+.parentEmptyInsight{padding:13px;border-radius:12px;background:#f8f9fb;color:#7b8495;font-size:10px;line-height:1.5}
+
+.parentPlanList{display:grid;gap:7px}
+.parentPlanList>div{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid #edf0f4}
+.parentPlanList>div:first-child{border-top:0}
+.parentPlanList>div>span{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#eef0f5}
+.parentPlanList b,.parentPlanList small{display:block}
+.parentPlanList b{font-size:11px;color:#1c263d}
+.parentPlanList small{font-size:9px;color:#7c8597;line-height:1.4;margin-top:2px}
+.parentPlanList strong{font-size:8px;color:#6c7485;white-space:nowrap}
+
+.parentPrivacyNotice{padding:15px 16px;margin:16px 0;border-radius:13px;background:#f4f6f9;border:1px solid #e1e5eb}
+.parentPrivacyNotice b,.parentPrivacyNotice span{display:block}
+.parentPrivacyNotice b{font-size:11px;color:#202a40}
+.parentPrivacyNotice span{font-size:9px;line-height:1.55;color:#737d90;margin-top:4px}
+
+@media(max-width:760px){
+  .parentEntryChoices,.parentSubjectGrid,.parentInsightGrid,.parentWeeklyGrid{grid-template-columns:1fr}
+  .parentDashboardHero{align-items:flex-start;flex-direction:column}
+  .parentWeekBadge{width:100%;box-sizing:border-box}
+  .parentEntryChoices button{grid-template-columns:40px minmax(0,1fr)}
+  .parentEntryChoices button>span{width:40px;height:40px}
+  .parentPlanList>div{grid-template-columns:32px minmax(0,1fr)}
+  .parentPlanList strong{grid-column:2}
+}

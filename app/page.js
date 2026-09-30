@@ -2379,7 +2379,13 @@ function Parent({s,setS,go}){
   const link=activeParentLink(s.parentInvites||[]);
   const [email,setEmail]=useState("");
   const [copied,setCopied]=useState(false);
+  const [entryChoice,setEntryChoice]=useState(null);
   const parentAccess=identity.activeRole==="parent";
+  const weekly=engagementSummary(s);
+  const activeDaysWeek=weekly.last7.filter(day=>day.active).length;
+  const weeklyXp=weekly.last7.reduce((sum,day)=>sum+(day.xp||0),0);
+  const selectedSubjects=uniqueSubjectIds(s.selectedSubjectIds||[],AVAILABLE_SUBJECT_IDS);
+  const visibleSubjectIds=selectedSubjects.length?selectedSubjects:[DEFAULT_SUBJECT_ID];
 
   function createInvite(){
     if(!email.trim())return;
@@ -2396,17 +2402,84 @@ function Parent({s,setS,go}){
 
   function requestRemoval(){
     if(!link)return;
-    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?requestLinkRemoval(x,"student"):x)}));
+    const requestedBy=parentAccess?"parent":"student";
+    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?requestLinkRemoval(x,requestedBy):x)}));
   }
 
-  return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
-    <h1>Acompanhar progresso, não vigiar respostas.</h1>
+  function confirmRemoval(){
+    if(!link?.removal)return;
+    const confirmedBy=parentAccess?"parent":"student";
+    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?confirmLinkRemoval(x,confirmedBy):x)}));
+  }
 
-    {!link&&parentAccess&&<div className="parentConnect">
-      <b>Ainda não tens um aluno ligado</b>
-      <span>Por segurança, não existe pesquisa pública de alunos. A ligação começa sempre através de um convite privado criado pelo aluno.</span>
-      <span><b>Como funciona?</b> O aluno envia-te um convite. Depois de o aceitares com a tua conta, o progresso autorizado passa a aparecer aqui.</span>
-    </div>}
+  function subjectSnapshot(id){
+    const meta=subjectById(id);
+    if(id===DEFAULT_SUBJECT_ID){
+      const missionCount=(s.missionHistory||[]).length;
+      const examCount=(s.examHistory||[]).length;
+      return {
+        id,meta,goal:subjectGoal(s,id,s.goal||14),diagnosticDone:!!s.diagnosticDone,
+        sessions:missionCount+examCount,lastActivityAt:null,
+        detail:index===null?"Ainda sem indicador global":`Índice de preparação: ${index}/100`
+      };
+    }
+    const progress=subjectProgressFor(s,id);
+    return {
+      id,meta,goal:subjectGoal(s,id,s.goal||14),diagnosticDone:!!progress.diagnosticDone,
+      sessions:(progress.sessions||[]).length,lastActivityAt:progress.lastActivityAt||null,
+      detail:progress.diagnosticDone?"Diagnóstico concluído":"Diagnóstico por concluir"
+    };
+  }
+
+  const subjectRows=visibleSubjectIds.map(subjectSnapshot);
+
+  const evidenceRows=[];
+  measured.forEach(t=>{
+    const value=s.scores?.[t.id]?.domain;
+    if(Number.isFinite(value))evidenceRows.push({subject:"Matemática A",label:t.short||t.name,value,attempts:1});
+  });
+  visibleSubjectIds.filter(id=>id!==DEFAULT_SUBJECT_ID).forEach(id=>{
+    const progress=subjectProgressFor(s,id);
+    const subject=subjectById(id)?.shortName||subjectById(id)?.name||id;
+    Object.values(progress.competence||{}).forEach(row=>{
+      const attempts=Number(row.attempts)||0;
+      if(!attempts)return;
+      const correct=Number(row.correct)||0;
+      evidenceRows.push({subject,label:row.label||row.domainId||"Competência",value:Math.round(correct/attempts*100),attempts});
+    });
+  });
+  const strongest=[...evidenceRows].sort((a,b)=>b.value-a.value||b.attempts-a.attempts)[0]||null;
+  const weakest=[...evidenceRows].sort((a,b)=>a.value-b.value||b.attempts-a.attempts)[0]||null;
+  const studentName=link?.studentName||"Aluno associado";
+
+  return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
+    <h1>{parentAccess?"Acompanhar o estudo sem transformar progresso em vigilância.":"Partilha o progresso com quem te acompanha."}</h1>
+
+    {!link&&parentAccess&&<>
+      <p className="muted">Escolhe como queres começar. A conta do encarregado fica separada da área de estudo do aluno.</p>
+      <div className="parentEntryChoices">
+        <button className={entryChoice==="link"?"selected":""} onClick={()=>setEntryChoice("link")}>
+          <span>🔗</span><b>Associar um aluno</b><small>Para um aluno que já utiliza a APProva+.</small>
+        </button>
+        <button className={entryChoice==="create"?"selected":""} onClick={()=>setEntryChoice("create")}>
+          <span>＋</span><b>Criar perfil do aluno</b><small>Para começar a configuração em conjunto.</small>
+        </button>
+      </div>
+
+      {entryChoice==="link"&&<div className="parentConnect parentEntryPanel">
+        <b>Associar um aluno existente</b>
+        <span>Por segurança, não existe pesquisa pública de alunos. A ligação começa através de um convite privado criado pelo aluno.</span>
+        <span><b>Como funciona?</b> O aluno envia-te o convite; depois de o aceitares com a tua conta, apenas o progresso autorizado fica disponível aqui.</span>
+      </div>}
+
+      {entryChoice==="create"&&<div className="parentConnect parentEntryPanel">
+        <b>Criar um perfil acompanhado</b>
+        <span>O perfil do aluno será independente da conta do encarregado: disciplinas, diagnósticos e respostas pertencem ao aluno; o encarregado recebe apenas os indicadores de acompanhamento.</span>
+        <span>Nesta beta, o fluxo de ligação por convite já está ativo. A criação de subperfis familiares fica preparada como fluxo separado para não misturar identidades nem dados académicos.</span>
+      </div>}
+
+      {!entryChoice&&<div className="parentPrivacyHint"><b>O princípio é simples</b><span>O encarregado acompanha consistência, evolução, prioridades e resultados — não abre cada resposta dada pelo aluno.</span></div>}
+    </>}
 
     {!link&&!parentAccess&&<div className="parentConnect">
       <b>Ligar Pai/Mãe ou Encarregado de Educação</b>
@@ -2419,19 +2492,58 @@ function Parent({s,setS,go}){
       <small className="parentFoot">O convite é privado, de utilização única e com validade limitada.</small>
     </div>}
 
-    {link&&<>
-      <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · Matemática A</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
-      <small className="parentFoot">* índice ainda parcial enquanto o perfil está a ser construído</small>
-      <div className="metrics"><div><b>🔥 {s.streak}</b><span>dias</span></div><div><b>{s.diagnosticAnswers}</b><span>respostas no diagnóstico</span></div><div><b>{measured.length}/{academicScopeThemes(s.profile).length}</b><span>áreas com evidência</span></div></div>
-      {s.lastExam&&<div className="parentExam"><span>Último Mini-exame</span><b>{examScoreLabel(s.lastExam)}</b><small>{s.lastExam.earnedPoints!==undefined?`${String(s.lastExam.earnedPoints).replace(".",",")}/${s.lastExam.maxPoints} pontos${s.lastExam.reviewRequired?" confirmados":""}`:`${s.lastExam.correctCount}/${s.lastExam.total} corretas`}</small></div>}
-      <div className="notice"><b>O que os pais veem?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados de avaliações — não cada resposta individual.</span></div>
+    {link&&parentAccess&&<>
+      <div className="parentDashboardHero">
+        <div><small>ALUNO ASSOCIADO</small><h2>{studentName}</h2><span>{subjectRows.map(row=>row.meta?.shortName||row.meta?.name).join(" · ")}</span></div>
+        <div className="parentWeekBadge"><b>{activeDaysWeek}/7</b><span>dias com estudo esta semana</span></div>
+      </div>
+
+      <div className="parentWeeklyGrid">
+        <div><small>ESTA SEMANA</small><b>{activeDaysWeek}</b><span>{activeDaysWeek===1?"dia ativo":"dias ativos"}</span></div>
+        <div><small>RITMO ATUAL</small><b>🔥 {weekly.streak}</b><span>{weekly.streak===1?"dia em sequência":"dias em sequência"}</span></div>
+        <div><small>ATIVIDADE</small><b>{weeklyXp} XP</b><span>nos últimos 7 dias</span></div>
+      </div>
+
+      <section className="parentDashboardSection">
+        <div className="parentSectionHead"><div><small>PREPARAÇÃO PARA OS EXAMES</small><h3>Estado por disciplina</h3></div><span>{subjectRows.length} {subjectRows.length===1?"disciplina":"disciplinas"}</span></div>
+        <div className="parentSubjectGrid">{subjectRows.map(row=><div className="parentSubjectCard" key={row.id}>
+          <div className="parentSubjectTitle"><span className="subjectIcon">{row.meta?.icon}</span><div><b>{row.meta?.shortName||row.meta?.name}</b><small>Prova {examCodesLabel(row.meta)} · objetivo {row.goal} valores</small></div></div>
+          <strong className={row.diagnosticDone?"done":"pending"}>{row.diagnosticDone?"Diagnóstico concluído":"Diagnóstico por concluir"}</strong>
+          <div className="parentSubjectMeta"><span>{row.sessions} {row.sessions===1?"sessão registada":"sessões registadas"}</span><span>{row.detail}</span></div>
+        </div>)}</div>
+      </section>
+
+      <div className="parentInsightGrid">
+        <section className="parentDashboardSection">
+          <div className="parentSectionHead"><div><small>LEITURA RÁPIDA</small><h3>O que está a correr bem</h3></div></div>
+          {strongest?<div className="parentInsight good"><b>{strongest.subject}</b><strong>{strongest.label}</strong><span>É uma das áreas com evidência mais favorável neste momento.</span></div>:<div className="parentEmptyInsight">Ainda não existe evidência suficiente para destacar um ponto forte.</div>}
+        </section>
+        <section className="parentDashboardSection">
+          <div className="parentSectionHead"><div><small>PRIORIDADE</small><h3>Onde vale a pena reforçar</h3></div></div>
+          {weakest?<div className="parentInsight focus"><b>{weakest.subject}</b><strong>{weakest.label}</strong><span>É uma das áreas onde os resultados registados justificam mais prática.</span></div>:<div className="parentEmptyInsight">A prioridade aparecerá quando houver respostas suficientes para comparar áreas.</div>}
+        </section>
+      </div>
+
+      <section className="parentDashboardSection">
+        <div className="parentSectionHead"><div><small>PLANO</small><h3>Próximos passos do aluno</h3></div></div>
+        <div className="parentPlanList">{subjectRows.map(row=><div key={row.id}><span>{row.meta?.icon}</span><div><b>{row.meta?.shortName||row.meta?.name}</b><small>{row.diagnosticDone?"Continuar o plano adaptativo e cumprir as próximas sessões.":"Concluir primeiro o diagnóstico para a app poder personalizar o estudo."}</small></div><strong>{row.diagnosticDone?"Em curso":"Pendente"}</strong></div>)}</div>
+      </section>
+
+      <div className="parentPrivacyNotice"><b>🔒 O que o encarregado vê — e o que não vê</b><span>Vê consistência, evolução, prioridades, objetivos e resultados agregados. Não vê cada resposta individual nem transforma o histórico de estudo numa lista de erros para fiscalização.</span></div>
 
       {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}
-      {link.removal?.status==="awaiting_other_party"&&<div className="notice warning"><b>Remoção pendente de confirmação</b><span>O aluno pediu a remoção. A ligação mantém-se ativa até a outra parte confirmar. Este comportamento evita uma desvinculação silenciosa e unilateral.</span></div>}
+      {link.removal?.status==="awaiting_other_party"&&<div className="notice warning"><b>Remoção pendente de confirmação</b><span>A ligação mantém-se ativa até a outra parte confirmar.</span>{link.removal.requestedBy!=="parent"&&<button className="secondary" onClick={confirmRemoval}>Confirmar remoção</button>}</div>}
+    </>}
+
+    {link&&!parentAccess&&<>
+      <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · acesso de acompanhamento</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
+      <small className="parentFoot">* índice parcial enquanto o perfil académico está a ser construído</small>
+      <div className="notice"><b>O que partilhas?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados agregados — não cada resposta individual.</span></div>
+      {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}
+      {link.removal?.status==="awaiting_other_party"&&<div className="notice warning"><b>Remoção pendente de confirmação</b><span>A ligação mantém-se ativa até a outra parte confirmar.</span>{link.removal.requestedBy!=="student"&&<button className="secondary" onClick={confirmRemoval}>Confirmar remoção</button>}</div>}
     </>}
   </Shell>
 }
-
 
 
 
