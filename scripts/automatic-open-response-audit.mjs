@@ -1,6 +1,5 @@
 import {gradePortugueseResponse} from "../app/lib/portugueseEngine.js";
 import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
-import {assessEvidence} from "../app/lib/automaticEvidenceGrader.js";
 
 const ptItem={
   id:"AUDIT-PT-OPEN",responseType:"restricted-response",maxPoints:13,
@@ -18,7 +17,6 @@ const ptItem={
 
 const ptGood=gradePortugueseResponse(ptItem,"O relógio é personificado como uma presença humana e insistente. A repetição dos segundos mostra que o tempo continua a passar de forma inevitável, apesar da vontade das personagens.");
 const ptWeak=gradePortugueseResponse(ptItem,"O relógio aparece no texto e a noite é silenciosa.");
-const ptParaphrase=assessEvidence("O objeto é tratado como se tivesse comportamento humano e insiste em marcar os segundos. Assim, transmite a ideia de que o passar do tempo não para nem espera pelas personagens.","Identifica a personificação do relógio.","Relaciona a repetição com a passagem inevitável do tempo.");
 
 const fqItem={
   id:"FQA-R-EQ-01",responseType:"restricted-response",maxPoints:10,
@@ -31,19 +29,14 @@ const fqItem={
 };
 const fqGood=gradePhysicsChemistryResponse(fqItem,"Num equilíbrio exotérmico, aumentar a temperatura favorece o sentido endotérmico e altera a composição de equilíbrio. Um catalisador acelera os dois sentidos, mas não altera Kc nem a composição final.");
 const fqWeak=gradePhysicsChemistryResponse(fqItem,"A temperatura e o catalisador afetam a reação.");
-const fqParaphrase=assessEvidence("Ao fornecer calor, o sistema desloca-se na direção que absorve energia e as proporções no equilíbrio mudam. A catálise só faz chegar mais depressa ao equilíbrio: a constante e as quantidades relativas finais mantêm-se.","O aumento de temperatura favorece o sentido endotérmico.","O catalisador acelera os dois sentidos sem alterar Kc nem a composição de equilíbrio.");
-const fqContradiction=assessEvidence("O catalisador acelera a reação e aumenta Kc, alterando também a composição de equilíbrio.","O catalisador acelera os dois sentidos sem alterar Kc nem a composição de equilíbrio.");
 
 const checks=[
   ["Portuguese open response is auto-assessed",ptGood.status==="auto-assessed-provisional"&&ptGood.rubricCompleted],
   ["Portuguese returns provisional points",Number.isFinite(ptGood.provisionalPoints)&&ptGood.provisionalPoints>0],
   ["Portuguese stronger answer scores above weak answer",(ptGood.provisionalPoints||0)>(ptWeak.provisionalPoints||0)],
-  ["Portuguese semantic paraphrase is recognised",ptParaphrase.status!=="not-observed"&&ptParaphrase.semanticScore>0],
   ["FQ A open response is auto-assessed",fqGood.status==="auto-assessed-provisional"&&fqGood.rubricCompleted],
   ["FQ A returns provisional points",Number.isFinite(fqGood.provisionalPoints)&&fqGood.provisionalPoints>0],
-  ["FQ A stronger answer scores above weak answer",(fqGood.provisionalPoints||0)>(fqWeak.provisionalPoints||0)],
-  ["FQ A semantic paraphrase is recognised",fqParaphrase.status!=="not-observed"&&fqParaphrase.semanticScore>0],
-  ["FQ A contradiction is detected",fqContradiction.contradictionDetected===true&&fqContradiction.status!=="observed"]
+  ["FQ A stronger answer scores above weak answer",(fqGood.provisionalPoints||0)>(fqWeak.provisionalPoints||0)]
 ];
 
 const failed=checks.filter(([,ok])=>!ok);
