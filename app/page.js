@@ -627,9 +627,9 @@ function SubjectSelection({s,setS,go}){
     <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>
 
     <div className="subjectSelectionSummary">
-      <div><span>{selected.length}</span><p><b>disciplina selecionada</b><small>Podes adicionar outras mais tarde.</small></p></div>
-      <strong>Matemática A, Português e Física e Química A disponíveis</strong>
+      <div><span>{selected.length}</span><p><b>{selected.length===1?"Disciplina selecionada":"Disciplinas selecionadas"}</b><small>Podes adicionar outras mais tarde.</small></p></div>
     </div>
+    <p className="subjectAvailabilityNote">Disponíveis agora: Matemática A, Português e Física e Química A.</p>
 
     <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
       const subjects=SECONDARY_EXAM_SUBJECTS.filter(subject=>subject.group===group.id);
