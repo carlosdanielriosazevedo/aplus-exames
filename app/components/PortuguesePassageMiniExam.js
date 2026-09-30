@@ -169,13 +169,8 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
       const result=resultFor(row,value);
       return {itemId:row.id,status:answerFilled(row,value)?"final":"unanswered",final:true,correct:answerFilled(row,value)?result.correct:null,points:result.correct?row.maxPoints:0,maxPoints:row.maxPoints,gradingMode:row.gradingMode,classificationMode:row.classificationMode||null};
     }
-    const criteria=(row.rubric?.criteria||[]).map(criterion=>{
-      const entry=selfAssessment[row.id]?.[criterion.id]||{};
-      const status=entry.status==="met"?"observed":entry.status==="not-yet"?"not-observed":entry.status||"pending";
-      return {...criterion,status,observations:[]};
-    });
-    const answered=answerFilled(row,value);
-    return {itemId:row.id,status:answered?"self-assessed-awaiting-review":"unanswered",final:false,correct:null,points:null,maxPoints:row.maxPoints,gradingMode:row.gradingMode,classificationMode:row.classificationMode||null,responseText:String(value||""),rubricCompleted:criteria.length>0&&criteria.every(criterion=>criterion.status!=="pending"),criteria};
+    const automatic=gradePortugueseResponse(row,value);
+    return {...automatic,itemId:row.id,classificationMode:row.classificationMode||null};
   });
 
   const currentResults=buildResults();
