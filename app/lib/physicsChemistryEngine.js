@@ -93,7 +93,7 @@ export function buildPhysicsChemistryDiagnostic(items=[]){
   return selected.slice(0,8);
 }
 
-export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,subtopicId=null,year=null,size=DEFAULT_MISSION_QUESTIONS}={}){
+export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domain=null,subtopicId=null,year=null,level="auto",size=DEFAULT_MISSION_QUESTIONS}={}){
   const bounded=Math.max(STUDY_SESSION_MIN_QUESTIONS,Math.min(STUDY_SESSION_MAX_QUESTIONS,size));
   let pool=items.filter(item=>(!domain||item.domain===domain)&&(!subtopicId||item.subtopicId===subtopicId)&&(!year||item.year===year));
   const sessions=progress.sessions||[];
@@ -110,6 +110,7 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
   if(unseen.length>=bounded)pool=unseen;
 
   const competence=progress.competence||{};
+  const explicitDifficulty={basic:1,mid:2,adv:3,challenge:4}[level]||null;
   pool=[...pool].sort((a,b)=>{
     const seenA=exposure.get(a.id)||0,seenB=exposure.get(b.id)||0;
     if(seenA!==seenB)return seenA-seenB;
@@ -117,6 +118,11 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
     const familyB=b.templateId?(templateExposure.get(b.templateId)||0):0;
     if(familyA!==familyB)return familyA-familyB;
     if(recent.has(a.id)!==recent.has(b.id))return recent.has(a.id)?1:-1;
+    if(explicitDifficulty){
+      const da=Math.abs((a.difficultyTarget||2)-explicitDifficulty);
+      const db=Math.abs((b.difficultyTarget||2)-explicitDifficulty);
+      if(da!==db)return da-db;
+    }
     const ra=competence[a.competencyId]||{},rb=competence[b.competencyId]||{};
     const aa=ra.deterministicAttempts||0,ab=rb.deterministicAttempts||0;
     const pa=aa?(ra.correct||0)/aa:0.5,pb=ab?(rb.correct||0)/ab:0.5;
