@@ -15,9 +15,11 @@ const checks=[
   ["parent dashboard includes weekly activity",page.includes("dias com estudo esta semana")&&page.includes("weeklyXp")],
   ["parent dashboard includes four-week consistency trend",page.includes("Regularidade de estudo nas últimas 4 semanas")&&page.includes("parentTrendChart")],
   ["parent dashboard includes recent assessment context",page.includes("Resultados recentes em contexto de prova")&&page.includes("assessmentRows")],
+  ["parent dashboard shows subject-by-subject evolution",page.includes("EVOLUÇÃO POR DISCIPLINA")&&page.includes("subjectEvolution")&&page.includes("parentSubjectEvolutionGrid")],
+  ["subject evolution avoids false academic trends",page.includes("não mostra uma tendência académica sem avaliações objetivas comparáveis suficientes")&&page.includes("respostas abertas ou provisórias ficam de fora")],
   ["parent assessments avoid false grades for open responses",page.includes("não inventamos uma nota")&&page.includes("Não são uma previsão da classificação no Exame Nacional")],
   ["privacy boundary is explicit",page.includes("Não vê cada resposta individual")],
-  ["parent dashboard styles exist",css.includes("/* APProva+ — área parental v1 */")&&css.includes(".parentDashboardHero")&&css.includes(".parentTrendChart")&&css.includes(".parentAssessmentList")]
+  ["parent dashboard styles exist",css.includes("/* APProva+ — área parental v1 */")&&css.includes(".parentDashboardHero")&&css.includes(".parentTrendChart")&&css.includes(".parentAssessmentList")&&css.includes(".parentSubjectEvolutionGrid")]
 ];
 
 const failed=checks.filter(([,ok])=>!ok);
