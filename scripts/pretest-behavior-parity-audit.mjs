@@ -33,6 +33,7 @@ assert.match(fqa,/Não é uma nota/u,"as competências de FQ A devem continuar e
 
 assert.match(math,/pendingSelectedDiagnostics/u,"Matemática A deve impedir o modal automático da Missão enquanto houver diagnósticos de outras disciplinas por concluir.");
 assert.match(math,/Ir para o menu inicial/u,"o pós-diagnóstico de Matemática A deve devolver explicitamente à Home.");
+assert.match(math,/recordMilestone\(dismissDailyMissionPrompt\(prev\),"first_plan_viewed"/u,"ao sair do diagnóstico de Matemática A, a Home deve abrir sem modal automático da Missão.");
 assert.match(portuguese,/Ir para o menu inicial/u,"o pós-diagnóstico de Português deve devolver explicitamente à Home.");
 assert.match(fqa,/Ir para o menu inicial/u,"o pós-diagnóstico de FQ A deve devolver explicitamente à Home.");
 
