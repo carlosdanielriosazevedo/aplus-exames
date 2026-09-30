@@ -52,7 +52,7 @@
         "verdadeiro para qualquer função por ramos."
       ],
       "a": 1,
-      "sol": "Por exemplo, |x| é contínua mas não derivável em0.",
+      "sol": "Por exemplo, |x| é contínua mas não derivável em 0.",
       "hyp": "Pode confundir implicação com equivalência.",
       "contexts": [
         "mission",
@@ -71,9 +71,9 @@
       "year": "12.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
-      "q": "A função |x| é derivável em0?",
+      "q": "A função |x| é derivável em 0?",
       "o": [
-        "Sim, com derivada0.",
+        "Sim, com derivada 0.",
         "Sim, com derivada1.",
         "Não.",
         "Sim, com derivada−1."
@@ -128,7 +128,7 @@
       "q": "Uma tangente vertical num ponto pode corresponder a...",
       "o": [
         "derivada infinita/não derivabilidade finita.",
-        "derivada0.",
+        "derivada 0.",
         "continuidade impossível.",
         "máximo obrigatório."
       ],
@@ -187,7 +187,7 @@
         "x<0."
       ],
       "a": 2,
-      "sol": "f'(x)=1/(2√x) requer x>0; em0 a derivada finita não existe.",
+      "sol": "f'(x)=1/(2√x) requer x>0; em 0 a derivada finita não existe.",
       "hyp": "Pode confundir domínio com domínio de derivabilidade.",
       "contexts": [
         "mission",
@@ -206,12 +206,12 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "√x é contínua em0 mas...",
+      "q": "√x é contínua em 0 mas...",
       "o": [
-        "é descontínua em0.",
-        "tem derivada0.",
+        "é descontínua em 0.",
+        "tem derivada 0.",
         "tem derivada1.",
-        "não é derivável em0 com derivada real finita."
+        "não é derivável em 0 com derivada real finita."
       ],
       "a": 3,
       "sol": "O quociente incremental é1/√h→+∞ pela direita.",
@@ -233,7 +233,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=|x|, a derivada lateral esquerda em0 é...",
+      "q": "Para f(x)=|x|, a derivada lateral esquerda em 0 é...",
       "o": [
         "−1.",
         "1.",
@@ -260,7 +260,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=|x|, a derivada lateral direita em0 é...",
+      "q": "Para f(x)=|x|, a derivada lateral direita em 0 é...",
       "o": [
         "−1.",
         "1.",
@@ -292,7 +292,7 @@
         "é derivável com média das duas.",
         "é necessariamente descontínua.",
         "não é derivável em a.",
-        "tem derivada0."
+        "tem derivada 0."
       ],
       "a": 2,
       "sol": "A derivada bilateral exige igualdade dos limites laterais.",
@@ -346,7 +346,7 @@
         "não é derivável nesse ponto.",
         "pode ser derivável.",
         "tem derivada infinita apenas.",
-        "tem derivada0."
+        "tem derivada 0."
       ],
       "a": 0,
       "sol": "Como derivabilidade implica continuidade, a contrapartida é válida.",
@@ -457,7 +457,7 @@
         "0."
       ],
       "a": 0,
-      "sol": "Fazendo h→0 em2a+h obtém-se2a.",
+      "sol": "Fazendo h→0 em 2a+h obtém-se2a.",
       "hyp": "Pode manter h no resultado.",
       "contexts": [
         "mission",
@@ -484,7 +484,7 @@
         "f(a)=0."
       ],
       "a": 1,
-      "sol": "Por exemplo, x³ tem derivada0 em0 sem extremo.",
+      "sol": "Por exemplo, x³ tem derivada 0 em 0 sem extremo.",
       "hyp": "Pode confundir ponto crítico com extremo.",
       "contexts": [
         "mission",
@@ -530,7 +530,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
-      "q": "Apesar de f'(0)=0 para x³, em0 há...",
+      "q": "Apesar de f'(0)=0 para x³, em 0 há...",
       "o": [
         "máximo.",
         "mínimo.",
@@ -638,7 +638,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=x+1 para x<0 e f(x)=x²+1 para x≥0, f é contínua em0?",
+      "q": "Se f(x)=x+1 para x<0 e f(x)=x²+1 para x≥0, f é contínua em 0?",
       "o": [
         "Não.",
         "Só pela direita.",
@@ -646,7 +646,7 @@
         "Sim."
       ],
       "a": 3,
-      "sol": "Ambos os ramos tendem e valem1 em0.",
+      "sol": "Ambos os ramos tendem e valem 1 em 0.",
       "hyp": "Pode confundir mudança de fórmula com descontinuidade.",
       "contexts": [
         "mission",
@@ -665,10 +665,10 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "Se f(x)=x+1 para x<0 e f(x)=x²+1 para x≥0, a função é derivável em0?",
+      "q": "Se f(x)=x+1 para x<0 e f(x)=x²+1 para x≥0, a função é derivável em 0?",
       "o": [
         "Não.",
-        "Sim, com derivada0.",
+        "Sim, com derivada 0.",
         "Sim, com derivada1.",
         "Sim, com derivada1/2."
       ],
@@ -746,7 +746,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A derivada lateral esquerda de |x−2| em2 é...",
+      "q": "A derivada lateral esquerda de |x−2| em 2 é...",
       "o": [
         "1.",
         "0.",
@@ -773,7 +773,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A derivada lateral direita de |x−2| em2 é...",
+      "q": "A derivada lateral direita de |x−2| em 2 é...",
       "o": [
         "1.",
         "−1.",
@@ -827,15 +827,15 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função f(x)=x^{2/3} é contínua em0 e...",
+      "q": "A função f(x)=x^{2/3} é contínua em 0 e...",
       "o": [
-        "tem derivada0.",
+        "tem derivada 0.",
         "tem derivada2/3.",
-        "não tem derivada finita em0.",
+        "não tem derivada finita em 0.",
         "é descontínua."
       ],
       "a": 2,
-      "sol": "f'(x)=(2/3)x^{-1/3}, que se torna ilimitada em0.",
+      "sol": "f'(x)=(2/3)x^{-1/3}, que se torna ilimitada em 0.",
       "hyp": "Pode aplicar a fórmula substituindo x=0 sem notar o expoente negativo.",
       "contexts": [
         "mission",
@@ -854,7 +854,7 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
-      "q": "O gráfico de x^{2/3} em0 apresenta...",
+      "q": "O gráfico de x^{2/3} em 0 apresenta...",
       "o": [
         "um salto.",
         "um máximo suave.",
@@ -881,10 +881,10 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função f(x)=x^{1/3} é contínua em0 e...",
+      "q": "A função f(x)=x^{1/3} é contínua em 0 e...",
       "o": [
-        "não tem derivada real finita em0.",
-        "tem derivada0.",
+        "não tem derivada real finita em 0.",
+        "tem derivada 0.",
         "é descontínua.",
         "tem derivada1/3."
       ],
@@ -916,7 +916,7 @@
         "Só se a função for racional."
       ],
       "a": 1,
-      "sol": "Exemplo: x^{1/3} em0.",
+      "sol": "Exemplo: x^{1/3} em 0.",
       "hyp": "Pode achar que tangente vertical implica assíntota vertical.",
       "contexts": [
         "mission",
@@ -989,7 +989,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, f é contínua em0 porque...",
+      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, f é contínua em 0 porque...",
       "o": [
         "|x sin(1/x)|≤|x|→0.",
         "sin(1/x) tem limite0.",
@@ -1016,7 +1016,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, o quociente incremental em0 é...",
+      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, o quociente incremental em 0 é...",
       "o": [
         "h sin(1/h).",
         "sin(1/h).",
@@ -1043,11 +1043,11 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
-      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, o quociente incremental em0 é sin(1/h). Como este não tem limite quando h→0, a função...",
+      "q": "Para f(x)=x sin(1/x), x≠0, e f(0)=0, o quociente incremental em 0 é sin(1/h). Como este não tem limite quando h→0, a função...",
       "o": [
-        "é derivável com derivada0.",
-        "é descontínua em0.",
-        "não é derivável em0.",
+        "é derivável com derivada 0.",
+        "é descontínua em 0.",
+        "não é derivável em 0.",
         "tem derivada1."
       ],
       "a": 2,
@@ -1205,7 +1205,7 @@
       "year": "12.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
-      "q": "Para f(x)=e^x, a linearização em0 é...",
+      "q": "Para f(x)=e^x, a linearização em 0 é...",
       "o": [
         "L(x)=1+x.",
         "L(x)=x.",
