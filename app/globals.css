@@ -1611,3 +1611,22 @@ button,input,select,textarea{max-width:100%}
   .parentAssessmentList>div{grid-template-columns:1fr}
   .parentAssessmentList strong{text-align:left}
 }
+
+
+/* APProva+ — avaliação automática de respostas abertas */
+.autoAssessmentScore{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0;padding:12px 14px;border:1px solid #dfe4eb;border-radius:12px;background:#f8f9fb}
+.autoAssessmentScore b{font-size:15px;color:#19243b}
+.autoAssessmentScore small{font-size:9px;color:#7d8798;text-align:right}
+.automaticCriteriaList{display:grid;gap:8px;margin:10px 0}
+.automaticCriterion{padding:11px 12px;border:1px solid #e6e9ef;border-radius:11px;background:#fff}
+.automaticCriterion>div{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.automaticCriterion b{font-size:10px;color:#202a40}
+.automaticCriterion span{font-size:8px;font-weight:900;white-space:nowrap}
+.automaticCriterion>small{display:block;margin-top:5px;font-size:8px;line-height:1.4;color:#7e8797}
+.automaticCriterion.observed{border-color:#cfe8da;background:#f4fbf7}
+.automaticCriterion.observed span{color:#26724f}
+.automaticCriterion.partial{border-color:#f1dfb8;background:#fffbf2}
+.automaticCriterion.partial span{color:#8a611f}
+.automaticCriterion.not-observed{border-color:#ead8d8;background:#fff8f8}
+.automaticCriterion.not-observed span{color:#955454}
+@media(max-width:760px){.autoAssessmentScore{align-items:flex-start;flex-direction:column}.autoAssessmentScore small{text-align:left}.automaticCriterion>div{flex-direction:column;gap:4px}}

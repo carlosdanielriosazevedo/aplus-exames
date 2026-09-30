@@ -1,3 +1,4 @@
+import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary} from "./automaticEvidenceGrader.js";
 export const PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS=[
   {id:"observed",label:"Cumpri"},
   {id:"partial",label:"Parcial"},
@@ -107,6 +108,31 @@ export function physicsChemistryRubricFor(item){
     label,
     observations:[{id:"criterion-"+(index+1)+"-evidence",label}]
   }));
+}
+
+
+export function automaticPhysicsChemistryRubricResult(item,responseText){
+  const text=String(responseText||"").trim();
+  if(!text)return {
+    status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,
+    gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:false,criteria:[]
+  };
+  const criteria=physicsChemistryRubricFor(item).map(criterion=>{
+    const observations=(criterion.observations||[]).map(observation=>{
+      const assessed=assessEvidence(text,observation.label,criterion.label,...(item.criteria||[]));
+      return {...observation,status:assessed.status,confidence:assessed.confidence,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
+    });
+    const aggregate=aggregateCriterionAssessment(observations);
+    return {...criterion,...aggregate,observations,autoAssessed:true};
+  });
+  const summary=automaticRubricSummary(criteria,item.maxPoints||10);
+  return {
+    status:"auto-assessed-provisional",final:false,correct:null,points:null,
+    provisionalPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,
+    gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:true,
+    requiresReview:summary.requiresReview,autoAssessmentConfidence:summary.confidence,criteria,
+    note:"A app avaliou automaticamente a resposta científica por critérios. O resultado é provisório quando a interpretação não é totalmente determinística."
+  };
 }
 
 export function physicsChemistryRubricResult(item,responseText,assessment={}){

@@ -1,7 +1,7 @@
 import {STUDY_SESSION_MIN_QUESTIONS,STUDY_SESSION_MAX_QUESTIONS,DEFAULT_MISSION_QUESTIONS} from "./sessionPolicy.js";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js";
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
-import {physicsChemistryRubricFor} from "./physicsChemistryRubric.js";
+import {automaticPhysicsChemistryRubricResult,physicsChemistryRubricFor} from "./physicsChemistryRubric.js";
 import {gradePhysicsChemistryStepwise} from "./physicsChemistryStepwiseGrader.js";
 
 function normalizeScientificNumber(value){
@@ -36,11 +36,7 @@ export function gradePhysicsChemistryResponse(item,value){
   if(item.responseType==="stepwise")return gradePhysicsChemistryStepwise(item,value);
   const text=String(value??"").trim();
   if(!text)return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
-  return {
-    status:"awaiting-rubric",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode,
-    responseText:text,criteria:physicsChemistryRubricFor(item).map(criterion=>({...criterion,status:"pending",studentEvidence:[],observations:(criterion.observations||[]).map(observation=>({...observation,status:"pending",studentEvidence:[]}))})),
-    note:"Resposta aberta: compara a tua resposta com os critérios observáveis. A app não atribui automaticamente uma classificação final."
-  };
+  return automaticPhysicsChemistryRubricResult(item,text);
 }
 
 export function physicsChemistryCoverage(items=[]){
