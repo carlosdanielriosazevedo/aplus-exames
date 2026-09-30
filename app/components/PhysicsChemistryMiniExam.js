@@ -2,16 +2,12 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import {Shell,StudySessionHeader} from "./chrome";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
-import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import ExamSubmissionCheck from "./ExamSubmissionCheck";
-import PhysicsChemistryReviewProgress from "./PhysicsChemistryReviewProgress";
-import {physicsChemistryOpenReviewProgress,physicsChemistryOpenReviewStatus} from "../lib/physicsChemistryReviewProgress";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";
 import {recordSubjectSession} from "../lib/subjectProgress";
 import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";
 import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";
-import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 
 const SUBJECT_ID="physics-chemistry-a";
 
@@ -63,13 +59,11 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);
 
   const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);
-  const results=useMemo(()=>exam.items.map((row,index)=>row.responseType==="restricted-response"&&filled(row,answers[row.id])
-    ?physicsChemistryRubricResult(row,answers[row.id],rubricAssessments[row.id]||{})
-    :baseResults[index]),[exam.items,answers,baseResults,rubricAssessments]);
+  const results=baseResults;
   const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");
   const deterministicCorrect=deterministic.filter(row=>row.result.correct).length;
-  const provisional=results.filter(row=>row.status==="provisional-review").length;
-  const openPending=results.filter(row=>row.status==="awaiting-rubric").length;
+  const provisional=results.filter(row=>["structured-provisional","auto-assessed-provisional"].includes(row.gradingMode)||row.status==="auto-assessed-provisional").length;
+  const openPending=results.filter(row=>row.requiresReview).length;
 
   function answer(value){setAnswers(current=>({...current,[item.id]:value}))}
   function respond(){
@@ -80,11 +74,6 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}
 
   function saveReviewAndExit(){
-    if(openReviewProgress.pending>0){
-      savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review:true,rubricAssessments,markedForReview});
-      go("exams");
-      return;
-    }
     if(!recordedRef.current){
       recordedRef.current=true;
       setS(prev=>recordSubjectSession(prev,{
@@ -93,14 +82,6 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
     }
     clearPhysicsChemistryExamDraft(exam.id);
     go("exams");
-  }
-
-  const openReviewProgress=physicsChemistryOpenReviewProgress(exam.items,answers,rubricAssessments);
-  function goToNextPendingReview(){
-    const target=openReviewProgress.pendingRows[0];
-    if(!target)return;
-    const node=document.getElementById("fqa-review-"+target.item.id);
-    if(node){node.open=true;node.scrollIntoView({behavior:"smooth",block:"start"});}
   }
 
   if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">
@@ -116,7 +97,7 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
   </Shell>;
 
   if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">
-    <button className="back" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"← Guardar com "+openReviewProgress.pending+" por rever e voltar aos exames":"← Guardar revisão e voltar aos exames"}</button>
+    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>
     <p className="eyebrow">FÍSICA E QUÍMICA A · MINI-EXAME</p>
     <h1>Rever o mini-exame</h1>
     <div className="fqaExamScoreGrid">
@@ -124,20 +105,19 @@ export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go
       <div><small>Escolha múltipla</small><b>{deterministicCorrect} / {deterministic.length}</b><span>corretas</span></div>
       <div><small>Construídas</small><b>{provisional+openPending}</b><span>{openPending?"inclui respostas por rever":"correção provisória"}</span></div>
     </div>
-    <div className="notice"><b>Sem nota automática final</b><span>As respostas por etapas são apenas provisórias e as respostas científicas abertas são revistas por critérios.</span></div>
-    <PhysicsChemistryReviewProgress items={exam.items} answers={answers} assessments={rubricAssessments} onNextPending={goToNextPendingReview}/>
+    <div className="notice"><b>Correção automática maximizada</b><span>A app corrige escolhas, etapas e respostas científicas automaticamente sempre que consegue. Nas respostas abertas, a pontuação continua provisória quando a interpretação tem incerteza.</span></div>
     <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{
       const value=answers[row.id],result=results[rowIndex];
-      const openStatus=physicsChemistryOpenReviewStatus(row,value,rubricAssessments[row.id]||{});
-      return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{openStatus?openStatus.label:row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="provisional-review"?"Provisório":"A rever"}</span></summary><div className="reviewChapterBody">
+      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="unanswered"?"Sem resposta":"Avaliação automática";
+      return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">
         <PhysicsChemistryStimulus item={row}/>
         {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}
         {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} 
-        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p><PhysicsChemistryRubricReview item={row} assessment={rubricAssessments[row.id]||{}} onChange={assessment=>setRubricAssessments(current=>({...current,[row.id]:assessment}))}/><p className="muted">Uma formulação cientificamente equivalente pode ser válida mesmo que não coincida palavra por palavra com uma referência.</p></>}
+        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div><p className="muted">Uma formulação cientificamente equivalente pode ser válida. O aluno não precisa de preencher uma autoavaliação.</p></>}
       </div></details>;
     })}</div>
-    {openReviewProgress.pending>0&&<div className="notice warning"><b>A revisão ainda não está completa</b><span>Podes guardar e sair na mesma, mas ficam {openReviewProgress.pending} resposta(s) aberta(s) por rever.</span></div>}
-    <button className="primary" onClick={saveReviewAndExit}>{openReviewProgress.pending>0?"Guardar com "+openReviewProgress.pending+" por rever":"Guardar revisão e terminar"}</button>
+    {openPending>0&&<div className="notice warning"><b>{openPending} avaliação(ões) com confiança reduzida</b><span>A app já as avaliou provisoriamente; não precisas de completar nenhuma grelha manual.</span></div>}
+    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>
   </Shell>;
 
   return <Shell className="wideStudentShell fqaMiniExamPage">
