@@ -56,7 +56,7 @@ const SYNONYM_GROUPS=[
 ];
 
 const SYNONYM_MAP=new Map();
-SYNONYM_GROUPS.forEach((group,index)=>group.forEach(term=>SYNONYM_MAP.set(normalizeEvidenceText(term),"g"+index)));
+SYNONYM_GROUPS.forEach((group,index)=>group.forEach(term=>SYNONYM_MAP.set(normalizeEvidenceText(term),"concept"+index)));
 
 const CONTRADICTION_PAIRS=[
   {anchor:["catalisador","catalise"],forbidden:["altera kc","muda kc","modifica kc","aumenta kc","diminui kc"],expected:["nao altera kc","mantem kc","kc inalterado"]},
@@ -99,8 +99,20 @@ function stem(token){
     .slice(0,9);
 }
 
+function canonicalizeConceptPhrases(value){
+  let normalized=normalizeEvidenceText(value);
+  SYNONYM_GROUPS.forEach((group,index)=>{
+    const canonical="concept"+index;
+    [...group].sort((a,b)=>normalizeEvidenceText(b).length-normalizeEvidenceText(a).length).forEach(term=>{
+      const needle=normalizeEvidenceText(term);
+      if(needle&&normalized.includes(needle))normalized=normalized.replaceAll(needle,canonical);
+    });
+  });
+  return normalized;
+}
+
 function tokens(value){
-  return normalizeEvidenceText(value).split(" ").filter(Boolean)
+  return canonicalizeConceptPhrases(value).split(" ").filter(Boolean)
     .filter(token=>token.length>=3&&!STOPWORDS.has(token))
     .map(stem).filter(Boolean);
 }
