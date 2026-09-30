@@ -254,7 +254,10 @@ export function gradePortugueseResponse(item,response){
     const criteria=(item.rubric?.criteria||[]).map(criterion=>{
       const structural=structuralAssessment(criterion);
       if(structural)return {...criterion,...structural,observable:true,autoAssessed:true};
-      const observations=(criterion.observations||[]).map(observation=>{
+      const sourceObservations=(criterion.observations||[]).length
+        ?criterion.observations
+        :[{id:criterion.id+"-auto",label:criterion.label}];
+      const observations=sourceObservations.map(observation=>{
         const guidance=portugueseObservationGuidance(item,criterion,observation);
         const assessed=assessEvidence(responseText,observation.label,criterion.label,guidance.counts,item.referenceAnswer);
         return {...observation,status:assessed.status,confidence:assessed.confidence,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
