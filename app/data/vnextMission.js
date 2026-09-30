@@ -15699,7 +15699,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma população passa de500 para605 em2 anos com taxa anual constante. O fator anual é...",
+    "q": "Uma população passa de500 para605 em 2 anos com taxa anual constante. O fator anual é...",
     "o": [
       "1,1.",
       "1,21.",
@@ -15815,7 +15815,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Um investimento passa de1000€ para1210€ em2 anos, com taxa anual constante. A taxa anual é...",
+    "q": "Um investimento passa de1000€ para1210€ em 2 anos, com taxa anual constante. A taxa anual é...",
     "o": [
       "21%.",
       "10%.",
@@ -16896,7 +16896,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "verdadeiro para qualquer função por ramos."
     ],
     "a": 1,
-    "sol": "Por exemplo, |x| é contínua mas não derivável em0.",
+    "sol": "Por exemplo, |x| é contínua mas não derivável em 0.",
     "hyp": "Pode confundir implicação com equivalência.",
     "contexts": [
       "mission"
@@ -16946,12 +16946,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Interpretação",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "√x é contínua em0 mas...",
+    "q": "√x é contínua em 0 mas...",
     "o": [
-      "é descontínua em0.",
-      "tem derivada0.",
+      "é descontínua em 0.",
+      "tem derivada 0.",
       "tem derivada1.",
-      "não é derivável em0 com derivada real finita."
+      "não é derivável em 0 com derivada real finita."
     ],
     "a": 3,
     "sol": "O quociente incremental é1/√h→+∞ pela direita.",
@@ -17004,9 +17004,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 1,
     "cognitive": "Aplicação",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "A função |x| é derivável em0?",
+    "q": "A função |x| é derivável em 0?",
     "o": [
-      "Sim, com derivada0.",
+      "Sim, com derivada 0.",
       "Sim, com derivada1.",
       "Não.",
       "Sim, com derivada−1."
@@ -17157,7 +17157,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "pode não ser extremo."
     ],
     "a": 3,
-    "sol": "Por exemplo x³ em0.",
+    "sol": "Por exemplo x³ em 0.",
     "hyp": "Pode assumir que todo ponto crítico é extremo.",
     "contexts": [
       "mission"
@@ -17323,10 +17323,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "difficulty": 3,
     "cognitive": "Raciocínio",
     "focus": "Limite intuitivo e continuidade",
-    "q": "A função f(x)=|x| é contínua em0?",
+    "q": "A função f(x)=|x| é contínua em 0?",
     "o": [
       "Sim.",
-      "Não, porque não é derivável em0.",
+      "Não, porque não é derivável em 0.",
       "Só pela direita.",
       "Só pela esquerda."
     ],
@@ -17442,12 +17442,12 @@ export const VNEXT_MISSION_QUESTIONS=[
     "q": "A função f(x)=1/(x−2) é contínua em x=2?",
     "o": [
       "Sim.",
-      "Não, nem está definida em2.",
+      "Não, nem está definida em 2.",
       "Sim, porque há assíntota.",
       "Só se definirmos f(2)=0."
     ],
     "a": 1,
-    "sol": "O denominador anula-se em2.",
+    "sol": "O denominador anula-se em 2.",
     "hyp": "Pode pensar que uma assíntota é continuidade 'infinita'.",
     "contexts": [
       "mission"
@@ -19535,7 +19535,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2."
     ],
     "a": 2,
-    "sol": "Uma primitiva é x²/2; em1 menos em0 dá1/2.",
+    "sol": "Uma primitiva é x²/2; em1 menos em 0 dá1/2.",
     "hyp": "Pode usar f(1)−f(0).",
     "contexts": [
       "mission"
