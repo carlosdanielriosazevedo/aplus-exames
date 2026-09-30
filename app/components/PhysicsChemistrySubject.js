@@ -4,7 +4,6 @@ import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,Study
 import StudyModeHub from "./StudyModeHub";
 import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";
 import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";
-import PhysicsChemistryRubricReview from "./PhysicsChemistryRubricReview";
 import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";
 import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";
 import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";
@@ -14,7 +13,6 @@ import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gra
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
 import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";
 import {missionCompletedToday} from "../lib/engagement";
-import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
 import {answerOptionState} from "../lib/feedbackCopy";
 
@@ -187,7 +185,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         <div><b>{deterministic.length?correct+"/"+deterministic.length:"—"}</b><span>respostas objetivas corretas</span></div>
         <div><b>{pending}</b><span>respostas ainda por critérios</span></div>
       </div>
-      {pending>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>As respostas científicas abertas ou por etapas mantêm avaliação separada. Não são transformadas automaticamente numa nota final.</span></div>}
+      {pending>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>A app avaliou automaticamente o que conseguiu nas respostas abertas e por etapas. Os resultados não determinísticos mantêm indicação provisória e de confiança.</span></div>}
       {unanswered>0&&<div className="notice"><b>{unanswered+" "+(unanswered===1?"resposta em branco":"respostas em branco")}</b><span>Ficam registadas como ausência de resposta, sem inventar evidência de domínio.</span></div>}
       <button className="primary" onClick={()=>{setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(primaryTarget)}}>{primaryLabel}</button>
       {session.kind!=="diagnostic"&&<button className="secondary" onClick={()=>{const kind=session.kind;setSession(null);setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});go(kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>}
@@ -212,13 +210,12 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
           {item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
           {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={item} result={feedback}/>} 
-          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><PhysicsChemistryRubricReview item={item} assessment={rubricAssessment} onChange={nextAssessment=>{
-            setRubricAssessment(nextAssessment);
-            const nextFeedback=physicsChemistryRubricResult(item,answer,nextAssessment);
-            setFeedback(nextFeedback);
-            setResults(current=>{const next=[...current];next[next.length-1]=nextFeedback;return next});
-            setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:[...results.slice(0,-1),nextFeedback],currentResult:nextFeedback,currentAnswer:answer}));
-          }}/><p className="muted">Uma formulação diferente pode estar correta se for cientificamente válida, adequada ao pedido e bem articulada.</p></div>}
+          {item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
+            <div className="notice"><b>Avaliação automática provisória</b><span>{feedback.note}</span></div>
+            {Number.isFinite(feedback.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(feedback.provisionalPoints).replace(".",",")} / {feedback.maxPoints} pontos</b><small>estimativa provisória · confiança {feedback.autoAssessmentConfidence??"—"}%</small></div>}
+            <div className="automaticCriteriaList">{(feedback.criteria||[]).map(criterion=><div key={criterion.id} className={"automaticCriterion "+criterion.status}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div>{(criterion.observations||[]).map(observation=><small key={observation.id}>{observation.status==="observed"?"✓":observation.status==="partial"?"◐":"○"} {observation.label}</small>)}</div>)}</div>
+            <p className="muted">A app tenta corrigir sem te pedir que te avalies. Uma formulação diferente pode estar correta; por isso, respostas abertas continuam assinaladas como provisórias quando a confiança não é suficiente.</p>
+          </div>}
           <button className="primary" onClick={next}>{position===session.items.length?"Ver resultado":"Seguinte"}</button>
         </>}
       </div>
