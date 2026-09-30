@@ -4991,7 +4991,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Para f(x)=|x|, a derivada lateral esquerda em0 é...",
+    "q": "Para f(x)=|x|, a derivada lateral esquerda em 0 é...",
     "o": [
       "−1.",
       "1.",
@@ -5176,11 +5176,11 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
       "composição de funções contínuas.",
       "produto de funções descontínuas.",
       "quociente com denominador zero.",
-      "derivabilidade em0."
+      "derivabilidade em 0."
     ],
     "a": 0,
     "sol": "x² é contínua e √· é contínua em [0,+∞[.",
-    "hyp": "Pode usar derivabilidade em0, que é falsa.",
+    "hyp": "Pode usar derivabilidade em 0, que é falsa.",
     "contexts": [
       "diagnostic"
     ],
