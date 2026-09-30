@@ -2508,6 +2508,51 @@ function Parent({s,setS,go}){
     })
   ].sort((a,b)=>b.at-a.at).slice(0,6);
 
+  function weekIndexFor(at){
+    if(!at)return null;
+    const days=Math.floor((Date.now()-at)/(24*60*60*1000));
+    if(days<0||days>=28)return null;
+    return 3-Math.floor(days/7);
+  }
+
+  function numericAssessmentValue(id,row){
+    if(id===DEFAULT_SUBJECT_ID)return Number.isFinite(row?.score20)?row.score20/20*100:null;
+    const results=Array.isArray(row?.results)?row.results:[];
+    const final=results.filter(result=>result?.final&&result?.status!=="unanswered");
+    if(final.length<3)return null;
+    const correct=final.filter(result=>result.correct).length;
+    return Math.round(correct/final.length*100);
+  }
+
+  const subjectEvolution=visibleSubjectIds.map(id=>{
+    const meta=subjectById(id);
+    const sessions=id===DEFAULT_SUBJECT_ID
+      ?[
+          ...(s.missionHistory||[]).map(row=>({kind:"mission",at:row.at||0})),
+          ...(s.examHistory||[]).map(row=>({kind:"mini_exam",at:row.at||0,score20:row.score20}))
+        ]
+      :(subjectProgressFor(s,id).sessions||[]).map(row=>({...row,at:row.completedAt||0}));
+    const weeklySessions=[0,0,0,0];
+    sessions.forEach(row=>{
+      const index=weekIndexFor(row.at);
+      if(index!==null)weeklySessions[index]+=1;
+    });
+    const assessments=sessions
+      .filter(row=>["mini_exam","full_exam","practice_exam"].includes(row.kind))
+      .map(row=>({at:row.at,value:numericAssessmentValue(id,row)}))
+      .filter(row=>Number.isFinite(row.value))
+      .sort((a,b)=>a.at-b.at);
+    const recent=assessments.slice(-2);
+    const previous=assessments.slice(-4,-2);
+    const avg=rows=>rows.length?Math.round(rows.reduce((sum,row)=>sum+row.value,0)/rows.length):null;
+    return {
+      id,meta,weeklySessions,
+      recentAverage:avg(recent),previousAverage:avg(previous),
+      assessmentCount:assessments.length
+    };
+  });
+  const maxSubjectSessions=Math.max(1,...subjectEvolution.flatMap(row=>row.weeklySessions));
+
   const studentName=link?.studentName||"Aluno associado";
 
   return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
@@ -2578,6 +2623,20 @@ function Parent({s,setS,go}){
           <strong className={row.diagnosticDone?"done":"pending"}>{row.diagnosticDone?"Diagnóstico concluído":"Diagnóstico por concluir"}</strong>
           <div className="parentSubjectMeta"><span>{row.sessions} {row.sessions===1?"sessão registada":"sessões registadas"}</span><span>{row.detail}</span></div>
         </div>)}</div>
+      </section>
+
+      <section className="parentDashboardSection">
+        <div className="parentSectionHead"><div><small>EVOLUÇÃO POR DISCIPLINA</small><h3>Como tem variado a atividade e a evidência recente</h3></div><span>últimas 4 semanas</span></div>
+        <div className="parentSubjectEvolutionGrid">{subjectEvolution.map(row=><div className="parentSubjectEvolutionCard" key={row.id}>
+          <div className="parentSubjectEvolutionHead"><span className="subjectIcon">{row.meta?.icon}</span><div><b>{row.meta?.shortName||row.meta?.name}</b><small>Sessões concluídas por semana</small></div></div>
+          <div className="parentMiniBars">{row.weeklySessions.map((count,index)=><div key={index}><span><i style={{height:`${Math.max(6,Math.round(count/maxSubjectSessions*100))}%`}}/></span><b>{count}</b></div>)}</div>
+          <div className="parentSubjectEvolutionEvidence">
+            {row.recentAverage!==null&&row.previousAverage!==null?<><small>Comparação objetiva de avaliações</small><strong>{row.previousAverage}% → {row.recentAverage}%</strong><span>Média das duas avaliações anteriores vs. média das duas mais recentes, apenas quando existe correção objetiva comparável.</span></>
+              :row.recentAverage!==null?<><small>Evidência objetiva recente</small><strong>{row.recentAverage}%</strong><span>Ainda não há avaliações comparáveis suficientes para mostrar evolução.</span></>
+              :<><small>Evidência académica</small><strong>Ainda insuficiente</strong><span>A app não mostra uma tendência académica sem avaliações objetivas comparáveis suficientes.</span></>}
+          </div>
+        </div>)}</div>
+        <p className="parentTrendNote">As barras mostram atividade, não domínio da matéria. A comparação percentual só aparece quando existem resultados objetivos comparáveis; respostas abertas ou provisórias ficam de fora.</p>
       </section>
 
       <div className="parentInsightGrid">
