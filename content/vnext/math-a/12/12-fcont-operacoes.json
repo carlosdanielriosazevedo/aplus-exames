@@ -346,11 +346,11 @@
         "composição de funções contínuas.",
         "produto de funções descontínuas.",
         "quociente com denominador zero.",
-        "derivabilidade em0."
+        "derivabilidade em 0."
       ],
       "a": 0,
       "sol": "x² é contínua e √· é contínua em [0,+∞[.",
-      "hyp": "Pode usar derivabilidade em0, que é falsa.",
+      "hyp": "Pode usar derivabilidade em 0, que é falsa.",
       "contexts": [
         "mission",
         "training",
@@ -368,7 +368,7 @@
       "year": "12.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
-      "q": "Se f é contínua em2 e f(2)=3, então lim_{x→2}[2f(x)+1]=",
+      "q": "Se f é contínua em 2 e f(2)=3, então lim_{x→2}[2f(x)+1]=",
       "o": [
         "6.",
         "7.",
@@ -998,7 +998,7 @@
       ],
       "a": 0,
       "sol": "É um limite fundamental ligado à derivada de ln em1.",
-      "hyp": "Pode substituir e parar em0/0.",
+      "hyp": "Pode substituir e parar em 0/0.",
       "contexts": [
         "mission",
         "training",
@@ -1024,7 +1024,7 @@
         "não existe."
       ],
       "a": 1,
-      "sol": "É o limite fundamental associado à derivada de e^x em0.",
+      "sol": "É o limite fundamental associado à derivada de e^x em 0.",
       "hyp": "Pode substituir e concluir0/0.",
       "contexts": [
         "mission",
