@@ -260,7 +260,7 @@ export function gradePortugueseResponse(item,response){
       const observations=sourceObservations.map(observation=>{
         const guidance=portugueseObservationGuidance(item,criterion,observation);
         const assessed=assessEvidence(responseText,observation.label,criterion.label,guidance.counts,item.referenceAnswer);
-        return {...observation,status:assessed.status,confidence:assessed.confidence,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
+        return {...observation,status:assessed.status,confidence:assessed.confidence,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
       });
       const aggregate=aggregateCriterionAssessment(observations);
       return {...criterion,...aggregate,observations,observable:true,autoAssessed:true};
