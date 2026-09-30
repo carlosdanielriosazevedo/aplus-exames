@@ -12,6 +12,12 @@ assert.deepEqual(uniqueSubjectIds(["math-a","portugueseLab","portuguese","portug
 const workspace=normalizeSubjectWorkspaceState({selectedSubjectIds:["portugueseLab","portuguese"],activeSubjectId:"portuguese-pilot"},AVAILABLE_SUBJECT_IDS);
 assert.deepEqual(workspace.selectedSubjectIds,["portuguese"]);
 assert.equal(workspace.activeSubjectId,"portuguese");
+const freshWorkspace=normalizeSubjectWorkspaceState({selectedSubjectIds:[],activeSubjectId:null,diagnosticDone:false,missionHistory:[],examHistory:[]},AVAILABLE_SUBJECT_IDS);
+assert.deepEqual(freshWorkspace.selectedSubjectIds,[],"um aluno novo não deve receber Matemática A automaticamente.");
+assert.equal(freshWorkspace.activeSubjectId,null,"um aluno novo só deve ter disciplina ativa depois da sua escolha.");
+const legacyMathWorkspace=normalizeSubjectWorkspaceState({selectedSubjectIds:[],activeSubjectId:null,diagnosticDone:true},AVAILABLE_SUBJECT_IDS);
+assert.deepEqual(legacyMathWorkspace.selectedSubjectIds,["math-a"],"progresso legado real de Matemática A deve ser preservado.");
+assert.equal(legacyMathWorkspace.activeSubjectId,"math-a");
 
 const onboarding={selectedSubjectIds:["math-a","portuguese"],activeSubjectId:"math-a",profile:{schoolYear:"12.º",recentGrade:15,examTiming:"thisYear"},subjectSettings:{math:{ignored:true},"math-a":{profileConfigured:true,recentGrade:16,examTiming:"thisYear"},portuguese:{profileConfigured:true,recentGrade:14,examTiming:"nextYear"}}};
 assert.deepEqual(subjectOnboardingStep(onboarding,"math-a"),{ids:["math-a","portuguese"],index:0,position:1,total:2,firstId:"math-a",nextId:"portuguese"});
