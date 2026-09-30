@@ -593,10 +593,7 @@ function CompetitionXpNote({s}){
 }
 
 function SubjectSelection({s,setS,go}){
-  const [selected,setSelected]=useState(()=>{
-    const saved=(s.selectedSubjectIds||[]).filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
-    return saved;
-  });
+  const [selected,setSelected]=useState([]);
 
   function toggleSubject(subject){
     if(!subject.available)return;
@@ -627,9 +624,9 @@ function SubjectSelection({s,setS,go}){
     <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>
 
     <div className="subjectSelectionSummary">
-      <div><span>{selected.length}</span><p><b>{selected.length===1?"Disciplina selecionada":"Disciplinas selecionadas"}</b><small>Podes adicionar outras mais tarde.</small></p></div>
+      <div><span>{selected.length}</span><p><b>{selected.length===0?"Nenhuma disciplina selecionada":selected.length===1?"Disciplina selecionada":"Disciplinas selecionadas"}</b><small>{selected.length?"Podes adicionar outras mais tarde.":"Seleciona pelo menos uma disciplina para continuar."}</small></p></div>
     </div>
-    <p className="subjectAvailabilityNote">Disponíveis agora: Matemática A, Português e Física e Química A.</p>
+    <p className="subjectAvailabilityNote">Atualmente disponíveis: Matemática A, Português e Física e Química A.</p>
 
     <div className="subjectCatalog">{SUBJECT_GROUPS.map(group=>{
       const subjects=SECONDARY_EXAM_SUBJECTS.filter(subject=>subject.group===group.id);
