@@ -158,8 +158,10 @@ export function assessEvidence(response,...evidenceTexts){
   const semanticScore=Math.max(0,Math.min(1,ratio*.72+relation*.28-(contradiction?.36:0)));
   const wordCount=normalizeEvidenceText(response).split(" ").filter(Boolean).length;
 
+  const uniqueContentTokens=new Set(responseTokens).size;
+  const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5;
   let status="not-observed";
-  if((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44))status="observed";
+  if(substantiveResponse&&((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44)))status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
   if(contradiction&&status==="observed")status="partial";
 
@@ -174,6 +176,7 @@ export function assessEvidence(response,...evidenceTexts){
     semanticScore:Math.round(semanticScore*100)/100,
     relationScore:Math.round(relation*100)/100,
     contradictionDetected:contradiction,
+    substantiveResponse,
     matchedCount:matched.length,cueCount:cues.length,
     evidence:matched.length?bestSentence(response,matched):"",
     matched
