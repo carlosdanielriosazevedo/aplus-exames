@@ -310,7 +310,7 @@ export function portugueseStructuralChallenge(item){
   return item?.difficulty?.level||STRUCTURAL_CHALLENGE[item?.cognitive]||2;
 }
 
-export function buildAdaptivePortugueseMission(items,{progress,domain=null,competencyId=null,literaryWorkId=null,years=["10.º","11.º","12.º"],size=DEFAULT_MISSION_QUESTIONS}={}){
+export function buildAdaptivePortugueseMission(items,{progress,domain=null,competencyId=null,literaryWorkId=null,years=["10.º","11.º","12.º"],level="auto",size=DEFAULT_MISSION_QUESTIONS}={}){
   const missionSize=clampStudySessionSize(size);
   const allowedYears=new Set(years);
   const eligible=items.filter(item=>(!domain||item.domain===domain)&&(!competencyId||item.competencyId===competencyId)&&(!literaryWorkId||item.literaryWorkId===literaryWorkId)&&allowedYears.has(item.year)&&item.responseType!=="extended-writing");
@@ -342,7 +342,7 @@ export function buildAdaptivePortugueseMission(items,{progress,domain=null,compe
     if(templateId)templateExposure.set(templateId,(templateExposure.get(templateId)||0)+1);
   }
   const recentIds=new Set(sessionRows.slice(-4).flatMap(session=>session.itemIds||[]));
-  const targetChallenges=[1,2,2,3,3,4,2];
+  const targetChallenges=level==="basic"?[1,1,2]:level==="mid"?[2,2,3]:level==="adv"?[3,3,4]:level==="challenge"?[4,4,3]:[1,2,2,3,3,4,2];
   const selected=[];
   const domainCounts={};
   let openCount=0;
