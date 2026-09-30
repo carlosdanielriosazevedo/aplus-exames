@@ -22,6 +22,10 @@ const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educaç�
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
 
+function capitalizeScopeLabel(value=""){
+  return value?value.charAt(0).toLocaleUpperCase("pt-PT")+value.slice(1):value;
+}
+
 function yearsThrough(year){
   const index=SCHOOL_YEARS.indexOf(year);
   return index<0?SCHOOL_YEARS:SCHOOL_YEARS.slice(0,index+1);
@@ -36,7 +40,7 @@ function portugueseScopeRows(year){
       label:PORTUGUESE_DOMAIN_LABELS[unit.domain],
       rows:[{
         id:`domain:${unit.domain}`,
-        label:unit.title.replace(/^.*? · /u,""),
+        label:capitalizeScopeLabel(unit.title.replace(/^.*? · /u,"")),
         detail:unit.summary
       }]
     }));
