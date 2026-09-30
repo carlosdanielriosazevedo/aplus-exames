@@ -16,6 +16,7 @@ import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnb
 import {missionCompletedToday} from "../lib/engagement";
 import {physicsChemistryRubricResult} from "../lib/physicsChemistryRubric";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
+import {answerOptionState} from "../lib/feedbackCopy";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -61,6 +62,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(null);
   const [practiceSubtopic,setPracticeSubtopic]=useState(null);
+  const [practiceLevel,setPracticeLevel]=useState("auto");
   const [session,setSession]=useState(null);
   const [answer,setAnswer]=useState(null);
   const [feedback,setFeedback]=useState(null);
@@ -114,7 +116,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   function startPractice(){
     const available=practiceSubtopic?(coverage.bySubtopic[practiceSubtopic]||0):(coverage.byDomain[practiceDomain]||0);
     const size=Math.max(7,Math.min(8,available));
-    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,subtopicId:practiceSubtopic,year:practiceYear,size});
+    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,subtopicId:practiceSubtopic,year:practiceYear,level:practiceLevel,size});
     const domainLabel=physicsChemistryDomainById(practiceDomain)?.shortTitle||practiceYear;
     const subtopicLabel=physicsChemistrySubtopicById(practiceSubtopic)?.label;
     start("training",built.items,"Praticar · "+[domainLabel,subtopicLabel].filter(Boolean).join(" · "),practiceDomain);
@@ -203,11 +205,11 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
       <div className="questionCard">
         <PhysicsChemistryStimulus item={item}/>
         <h2>{item.prompt}</h2>
-        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answer===index?"selected":""} onClick={()=>setAnswer(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>}
+        {item.responseType==="multiple-choice"&&<div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={!!feedback} className={answerOptionState({index,selectedIndex:answer,correctIndex:item.answerIndex,submitted:!!feedback?.final})} onClick={()=>setAnswer(index)}><b>{String.fromCharCode(65+index)}</b>{option}</button>)}</div>}
         {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseEditor item={item} value={answer} onChange={setAnswer} disabled={!!feedback}/>} 
         {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
-          {item.responseType==="multiple-choice"&&<div className={"notice "+(feedback.correct?"success":"warning")}><b>{feedback.correct?"Correto":"A rever"}</b><span>{feedback.correct?item.explanation:"Resposta certa: "+item.options[item.answerIndex]+". "+item.explanation}</span></div>}
+          {item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
           {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={item} result={feedback}/>} 
           {item.responseType==="restricted-response"&&<div className="fqaConstructedReview"><div className="notice"><b>Revê por critérios</b><span>{feedback.note}</span></div><PhysicsChemistryRubricReview item={item} assessment={rubricAssessment} onChange={nextAssessment=>{
             setRubricAssessment(nextAssessment);
@@ -271,16 +273,28 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   if(view==="trainingSetup"){
     const rows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===practiceYear);
     const subtopics=practiceDomain?physicsChemistrySubtopicsForDomain(practiceDomain):[];
-    const availableInSelection=practiceSubtopic?coverage.bySubtopic[practiceSubtopic]||0:practiceDomain?coverage.byDomain[practiceDomain]||0:0;
+    const availableInSelection=practiceSubtopic?(coverage.bySubtopic[practiceSubtopic]||0):practiceDomain?(coverage.byDomain[practiceDomain]||0):0;
+    const selectedDomain=physicsChemistryDomainById(practiceDomain);
+    const selectedSubtopic=physicsChemistrySubtopicById(practiceSubtopic);
+    const levelLabel={auto:"Adaptado ao meu nível",basic:"Básico",mid:"Intermédio",adv:"Avançado",challenge:"Desafio"}[practiceLevel];
     return <Shell className="wideStudentShell trainingSetupPage">
-      
       <p className="eyebrow">TREINO LIVRE</p><h1>O que queres praticar?</h1>
-      <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Escolhe o ano, a matéria e, se quiseres, uma submatéria.</p>
+      <p className="muted">O Treino Livre serve para praticar. <b>Não sobe nem desce diretamente o teu Domínio.</b> Um bom desempenho pode gerar um sinal para confirmar mais tarde numa Missão ou Exame.</p>
+
       <h3>1. Ano</h3><div className="chips yearSelector">{SCHOOL_YEARS.map(year=><button type="button" key={year} className={practiceYear===year?"sel":""} onClick={()=>{setPracticeYear(year);setPracticeDomain(null);setPracticeSubtopic(null)}}>{year}</button>)}</div>
-      <h3>2. Matéria</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>{setPracticeDomain(row.id);setPracticeSubtopic(null)}}><b>{row.shortTitle}</b><small>{row.area+" · "+coverage.byDomain[row.id]+" perguntas"}</small></button>)}</div>
-      {practiceDomain&&<><h3>3. Submatéria</h3><div className="chips fqaSubtopicChips"><button type="button" className={!practiceSubtopic?"sel":""} onClick={()=>setPracticeSubtopic(null)}>Misturar matéria</button>{subtopics.map(row=><button type="button" key={row.id} className={practiceSubtopic===row.id?"sel":""} onClick={()=>setPracticeSubtopic(row.id)}>{row.label} · {coverage.bySubtopic[row.id]||0}</button>)}</div></>}
-      {practiceSubtopic&&availableInSelection<7&&<div className="notice"><b>Banco desta submatéria ainda em expansão</b><span>Podes treiná-la quando tiver pelo menos 7 perguntas diferentes; entretanto usa “Misturar matéria”.</span></div>}
-      <button className="primary" disabled={!practiceDomain||availableInSelection<7} onClick={startPractice}>Começar treino · {Math.min(8,availableInSelection)} perguntas</button>
+
+      <h3>2. Tema</h3><div className="themeGrid">{rows.map(row=><button type="button" key={row.id} className={practiceDomain===row.id?"sel":""} onClick={()=>{setPracticeDomain(row.id);const first=physicsChemistrySubtopicsForDomain(row.id).find(topic=>(coverage.bySubtopic[topic.id]||0)>=7);setPracticeSubtopic(first?.id||null)}}><b>{row.shortTitle}</b><small>{row.area+" · banco disponível"}</small></button>)}</div>
+
+      {practiceDomain&&<><h3>3. Em que queres focar-te?</h3><div className="chips fqaSubtopicChips">{subtopics.map(row=><button type="button" key={row.id} className={practiceSubtopic===row.id?"sel":""} onClick={()=>setPracticeSubtopic(row.id)}>{row.label}{(coverage.bySubtopic[row.id]||0)?` (${coverage.bySubtopic[row.id]})`:""}</button>)}</div></>}
+
+      {practiceDomain&&<><h3>4. Nível</h3><div className="levelGrid">{[
+        ["auto","✨","Adaptado ao meu nível"],["basic","🟢","Básico"],["mid","🔵","Intermédio"],["adv","🟣","Avançado"],["challenge","🔥","Desafio"]
+      ].map(row=><button type="button" key={row[0]} className={practiceLevel===row[0]?"sel":""} onClick={()=>setPracticeLevel(row[0])}><span>{row[1]}</span><b>{row[2]}</b></button>)}</div></>}
+
+      {practiceDomain&&practiceSubtopic&&availableInSelection>=7&&<div className="trainingSummary"><b>{selectedDomain?.shortTitle} → {selectedSubtopic?.label}</b><span>{availableInSelection} perguntas disponíveis neste foco · nível: {levelLabel}. A sessão escolhe 7–8 perguntas e evita repetições recentes sempre que possível.</span></div>}
+      {practiceSubtopic&&availableInSelection<7&&<div className="notice"><b>Conteúdo ainda em construção</b><span>Esta submatéria ainda não tem perguntas suficientes para uma sessão completa.</span></div>}
+
+      <button className="primary" disabled={!practiceDomain||!practiceSubtopic||availableInSelection<7} onClick={startPractice}>Começar treino</button>
     </Shell>;
   }
 
