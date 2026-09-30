@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/physics-chemistry-foundation-audit.mjs && node scripts/portuguese-literary-coverage-audit.mjs && node scripts/parent-experience-audit.mjs",
+    "prebuild": "node scripts/physics-chemistry-foundation-audit.mjs && node scripts/portuguese-literary-coverage-audit.mjs && node scripts/parent-experience-audit.mjs && node scripts/automatic-open-response-audit.mjs",
     "build": "next build && npm run performance:budget",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -61,6 +61,7 @@
     "vnext-exam:generate": "node scripts/generate-vnext-exam.mjs",
     "vnext-exam:audit": "node scripts/vnext-exam-audit.mjs",
     "subjects:audit": "node scripts/subjects-audit.mjs",
+    "automatic-open-response:audit": "node scripts/automatic-open-response-audit.mjs",
     "parent-experience:audit": "node scripts/parent-experience-audit.mjs",
     "subject-workspace:audit": "node scripts/subject-workspace-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
