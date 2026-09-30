@@ -50,7 +50,7 @@ for(const item of PHYSICS_CHEMISTRY_A_ITEMS){
 
 const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
 assert.ok(coverage.total>=2145);
-assert.equal(coverage.missionReady,true,"Todos os grandes domínios devem suportar uma missão de pelo menos 7 perguntas.");
+assert.equal(coverage.missionReady,true,"O banco global deve suportar uma missão de pelo menos 7 perguntas.");
 for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS)assert.ok(coverage.byDomain[domain.id]>=11,domain.id+": cada grande domínio deve ter pelo menos 11 itens após a vaga de dados.");
 assert.equal(PHYSICS_CHEMISTRY_A_SUBTOPICS.length,43,"A taxonomia deve representar 43 submatérias curriculares.");
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
@@ -117,9 +117,16 @@ for(const domain of PHYSICS_CHEMISTRY_A_DOMAINS){
   assert.ok(Math.max(...positions)/total<0.42,domain.id+": posição correta demasiado previsível ("+positions.join("/")+")");
 }
 for(const subtopic of PHYSICS_CHEMISTRY_A_SUBTOPICS){
-  const mission=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{subtopicId:subtopic.id,size:7});
+  const scoped=PHYSICS_CHEMISTRY_A_ITEMS.filter(item=>item.subtopicId===subtopic.id);
+  const scopedCoverage=physicsChemistryCoverage(scoped);
+  const mission=buildAdaptivePhysicsChemistryMission(scoped,{subtopicId:subtopic.id,size:7});
+  const scopedDiagnostic=buildPhysicsChemistryDiagnostic(scoped);
   assert.equal(mission.items.length,7,subtopic.id+": cada submatéria deve gerar uma sessão específica de 7 perguntas.");
   assert.ok(mission.items.every(item=>item.subtopicId===subtopic.id),subtopic.id+": treino específico não pode misturar outras submatérias.");
+  assert.equal(scopedCoverage.missionReady,true,subtopic.id+": uma única submatéria com banco suficiente deve permitir Missão.");
+  assert.equal(scopedCoverage.diagnosticReady,true,subtopic.id+": uma única submatéria com banco suficiente deve permitir diagnóstico.");
+  assert.equal(scopedDiagnostic.length,8,subtopic.id+": o diagnóstico deve conseguir gerar 8 perguntas apenas nesta submatéria.");
+  assert.ok(scopedDiagnostic.every(item=>item.subtopicId===subtopic.id&&item.responseType==="multiple-choice"),subtopic.id+": diagnóstico restrito deve respeitar a submatéria e manter correção determinística.");
 }
 const diagnostic=buildPhysicsChemistryDiagnostic(PHYSICS_CHEMISTRY_A_ITEMS);
 assert.equal(diagnostic.length,8,"O diagnóstico inicial deve ter 8 perguntas.");
