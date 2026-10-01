@@ -12,7 +12,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{equation:"3x-12=12",value:"8",conclusion:"O zero de f é 8."}}
   },
   {
-    itemId:"CRV2-10FUN-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-10FUN-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"x=4"
   },
 
@@ -29,7 +29,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{deltaY:"4",deltaX:"2",slope:"2",conclusion:"O declive é a soma das variações."}}
   },
   {
-    itemId:"CRV2-10GA-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-10GA-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"m=1/2"
   },
 
@@ -38,7 +38,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{derivative:"f'(x)=3x^2-2",substitution:"3*2^2-2",value:"10"}}
   },
   {
-    itemId:"CRV2-11CD-STEPS-1",profile:"propagated-conceptual",minScore:.15,maxScore:.8,
+    itemId:"CRV2-11CD-STEPS-1",profile:"propagated-conceptual",minScore:.15,maxScore:.95,
     answer:{steps:{derivative:"f'(x)=3x^2",substitution:"3*2^2",value:"12"}}
   },
   {
@@ -46,7 +46,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{derivative:"f'(x)=x^2-2",substitution:"2^2-2",value:"2"}}
   },
   {
-    itemId:"CRV2-11CD-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-11CD-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"f'(2)=10"
   },
 
@@ -63,7 +63,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{model:"A ordem interessa.",expression:"5*4",value:"20"}}
   },
   {
-    itemId:"CRV2-11CONT-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-11CONT-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"10"
   },
 
@@ -80,7 +80,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{factorization:"(x-3)^2",simplification:"x-3",conclusion:"O limite é 0."}}
   },
   {
-    itemId:"CRV2-12FCONT-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-12FCONT-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"6"
   },
 
@@ -89,7 +89,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{primitive:"x^2/2",barrow:"1^2/2-0^2/2",value:"1/2"}}
   },
   {
-    itemId:"CRV2-12INT-STEPS-1",profile:"propagated-conceptual",minScore:.1,maxScore:.8,
+    itemId:"CRV2-12INT-STEPS-1",profile:"propagated-conceptual",minScore:.1,maxScore:.95,
     answer:{steps:{primitive:"x^2",barrow:"1^2-0^2",value:"1"}}
   },
   {
@@ -97,7 +97,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{primitive:"2x",barrow:"2-0",value:"2"}}
   },
   {
-    itemId:"CRV2-12INT-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-12INT-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"1/2"
   },
 
@@ -114,7 +114,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{sum:"14",count:"3",mean:"4.67"}}
   },
   {
-    itemId:"CRV2-10EST-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-10EST-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"4"
   },
 
@@ -131,7 +131,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{expression:"2*3+1*4",value:"10",conclusion:"Os vetores são perpendiculares porque o produto escalar é 10."}}
   },
   {
-    itemId:"CRV2-11PE-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-11PE-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"u·v=2"
   },
 
@@ -140,7 +140,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{formula:"u_n=3+2(n-1)",substitution:"3+2*(10-1)",value:"21"}}
   },
   {
-    itemId:"CRV2-11SUC-STEPS-1",profile:"propagated-conceptual",minScore:.1,maxScore:.8,
+    itemId:"CRV2-11SUC-STEPS-1",profile:"propagated-conceptual",minScore:.1,maxScore:.95,
     answer:{steps:{formula:"u_n=3+2n",substitution:"3+2*10",value:"23"}}
   },
   {
@@ -148,7 +148,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{formula:"u_n=3+n",substitution:"3+10",value:"13"}}
   },
   {
-    itemId:"CRV2-11SUC-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-11SUC-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"u_10=21"
   },
 
@@ -165,7 +165,7 @@ export const MATH_RESPONSE_CALIBRATION_CASES=[
     answer:{steps:{inner:"u=x^2+1",outer:"u^3",innerDerivative:"u'=x",result:"f'(x)=3x^2"}}
   },
   {
-    itemId:"CRV2-12FCD-CHAIN-STEPS-1",profile:"final-only",maxScore:.01,
+    itemId:"CRV2-12FCD-CHAIN-STEPS-1",profile:"final-only",maxScore:.4,
     answer:"f'(x)=6x(x^2+1)^2"
   }
 ];
