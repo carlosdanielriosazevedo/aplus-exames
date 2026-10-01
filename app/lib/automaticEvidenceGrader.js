@@ -157,10 +157,11 @@ function contradictionDetected(response,evidenceTexts=[]){
   const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
-    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc"].some(row=>normalized.includes(row));
+    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
     const wrongComposition=["altera a composicao","muda a composicao","modifica a composicao"].some(row=>normalized.includes(row));
     const protectsKc=["nao altera kc","nao modifica kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
-    if((wrongKc||wrongComposition)&&!protectsKc)return true;
+    const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos")||normalized.includes("nao acelera os dois sentidos");
+    if(((wrongKc||wrongComposition)&&!protectsKc)||deniesTwoDirections)return true;
   }
 
   if(expected.includes("aceleracao")&&expected.includes("declive")){
