@@ -187,21 +187,44 @@ function contradictionDetected(response,evidenceTexts=[]){
     if(normalized.includes("distancia")&&normalized.includes("deslocamento")&&normalized.includes("sempre iguais"))return true;
   }
 
-  if(expected.includes("predicativo do complemento direto")&&normalized.includes("complemento obliquo"))return true;
+  if(expected.includes("predicativo do complemento direto")&&(normalized.includes("complemento obliquo")||normalized.includes("nao e predicativo")))return true;
   if(expected.includes("referencia anaforica")&&normalized.includes("oposicao"))return true;
   if(expected.includes("oracao temporal")&&expected.includes("relativa restritiva")){
-    if(normalized.includes("oracao causal")||normalized.includes("oracao completiva"))return true;
+    if(
+      normalized.includes("oracao causal")||
+      normalized.includes("oracao completiva")||
+      normalized.includes("nao e temporal")||
+      normalized.includes("nao e relativa restritiva")
+    )return true;
   }
   if(expected.includes("relatorio")&&normalized.includes("refere se a leonor"))return true;
+  if(expected.includes("relatorio")&&normalized.includes("antecedente")&&normalized.includes("leonor"))return true;
+  if(expected.includes("relatorio")&&normalized.includes("nao retoma")&&normalized.includes("relatorio"))return true;
   if(expected.includes("sustentacao da tese")&&(normalized.includes("enfraquecem a posicao")||normalized.includes("enfraquecem a tese")))return true;
 
   if(expected.includes("clareza")&&expected.includes("organiz")){
-    if(normalized.includes("ordem")&&normalized.includes("nao influencia")&&normalized.includes("clareza"))return true;
+    const deniesOrderEffect=
+      (normalized.includes("ordem")||normalized.includes("sequencia"))&&
+      (
+        normalized.includes("nao influencia")||
+        normalized.includes("secundaria")||
+        normalized.includes("sem afetar a compreensao")||
+        normalized.includes("sem afetar a clareza")||
+        normalized.includes("compreenderia da mesma forma")||
+        normalized.includes("sem ordem")
+      );
+    if(deniesOrderEffect)return true;
   }
   if((expected.includes("tese")||expected.includes("posicao"))&&(expected.includes("sustent")||expected.includes("defesa"))){
-    if(normalized.includes("razoes")&&(normalized.includes("nao sustentam")||normalized.includes("enfraquecem")))return true;
+    if(normalized.includes("razoes")&&(
+      normalized.includes("nao sustentam")||
+      normalized.includes("enfraquecem")||
+      normalized.includes("nao sao necessarias")||
+      normalized.includes("nao justificam")||
+      normalized.includes("nao constituem razoes")
+    ))return true;
   }
-  if(expected.includes("consequencia")&&normalized.includes("por isso")&&normalized.includes("oposicao"))return true;
+  if(expected.includes("consequencia")&&normalized.includes("por isso")&&(normalized.includes("oposicao")||normalized.includes("contraste")))return true;
   if(expected.includes("padrao")&&expected.includes("elemento")){
     if((normalized.includes("frequencias")||normalized.includes("riscas"))&&normalized.includes("iguais")&&(normalized.includes("nao permite")||normalized.includes("nao permitem")))return true;
   }
