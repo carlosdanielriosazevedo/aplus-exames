@@ -288,11 +288,15 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
     points+=ratio*weight;
     confidenceWeight+=(criterion.confidence||.5)*weight;
   }
+  const contradictionDetected=criteria.some(row=>row.contradictionDetected);
+  const rawProvisional=points/totalWeight*maxPoints;
+  const provisionalPoints=contradictionDetected?Math.min(rawProvisional,maxPoints*.6):rawProvisional;
   return {
-    provisionalPoints:Math.round(points/totalWeight*maxPoints*10)/10,
+    provisionalPoints:Math.round(provisionalPoints*10)/10,
     maxPoints,
     confidence:Math.round(confidenceWeight/totalWeight*100),
-    requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected)
+    requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected),
+    contradictionDetected
   };
 }
 
