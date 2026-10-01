@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/physics-chemistry-foundation-audit.mjs && node scripts/portuguese-literary-coverage-audit.mjs && node scripts/parent-experience-audit.mjs && node scripts/automatic-open-response-audit.mjs && node scripts/open-response-calibration-audit.mjs && node scripts/explanatory-feedback-audit.mjs",
+    "prebuild": "node scripts/physics-chemistry-foundation-audit.mjs && node scripts/portuguese-literary-coverage-audit.mjs && node scripts/parent-experience-audit.mjs && node scripts/automatic-open-response-audit.mjs && node scripts/open-response-calibration-audit.mjs && node scripts/explanatory-feedback-audit.mjs && node scripts/submitted-answer-lock-audit.mjs",
     "build": "next build && npm run performance:budget",
     "start": "next start",
     "engine:audit": "node scripts/engine-audit.mjs",
@@ -64,6 +64,7 @@
     "automatic-open-response:audit": "node scripts/automatic-open-response-audit.mjs",
     "open-response-calibration:audit": "node scripts/open-response-calibration-audit.mjs",
     "explanatory-feedback:audit": "node scripts/explanatory-feedback-audit.mjs",
+    "submitted-answer-lock:audit": "node scripts/submitted-answer-lock-audit.mjs",
     "parent-experience:audit": "node scripts/parent-experience-audit.mjs",
     "subject-workspace:audit": "node scripts/subject-workspace-audit.mjs",
     "portuguese-foundation:audit": "node scripts/portuguese-foundation-audit.mjs",
