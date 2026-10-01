@@ -232,8 +232,7 @@ export function assessEvidence(response,...evidenceTexts){
   const uniqueContentTokens=new Set(responseTokens).size;
   const normalizedResponse=normalizeEvidenceText(response);
   const relationMarkers=["porque","por isso","logo","assim","quando","como","que","mas","porem","contudo","embora","permite","evita","resulta","corresponde","indica","mostra","favorece","altera","mantem","aumenta","diminui","retoma","atribui","liga","mede","calcula","compara","transfere","completa","homogeneiza"];
-  const verbLike=/\b[a-z]{4,}(?:a|e|i|am|em|ou|ava|iam|aria|eria|iria|ado|ido)\b/u.test(normalizedResponse);
-  const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||verbLike||/[.!?;:]/u.test(String(response||""));
+  const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(String(response||""));
   const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
   let status="not-observed";
   if(substantiveResponse&&((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44)))status="observed";
