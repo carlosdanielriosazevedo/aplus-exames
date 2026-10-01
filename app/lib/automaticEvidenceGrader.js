@@ -189,6 +189,32 @@ function contradictionDetected(response,evidenceTexts=[]){
   if(expected.includes("relatorio")&&normalized.includes("refere se a leonor"))return true;
   if(expected.includes("sustentacao da tese")&&(normalized.includes("enfraquecem a posicao")||normalized.includes("enfraquecem a tese")))return true;
 
+  if(expected.includes("clareza")&&expected.includes("organiz")){
+    if(normalized.includes("ordem")&&normalized.includes("nao influencia")&&normalized.includes("clareza"))return true;
+  }
+  if((expected.includes("tese")||expected.includes("posicao"))&&(expected.includes("sustent")||expected.includes("defesa"))){
+    if(normalized.includes("razoes")&&(normalized.includes("nao sustentam")||normalized.includes("enfraquecem")))return true;
+  }
+  if(expected.includes("consequencia")&&normalized.includes("por isso")&&normalized.includes("oposicao"))return true;
+  if(expected.includes("padrao")&&expected.includes("elemento")){
+    if((normalized.includes("frequencias")||normalized.includes("riscas"))&&normalized.includes("iguais")&&(normalized.includes("nao permite")||normalized.includes("nao permitem")))return true;
+  }
+  if(expected.includes("traco")||expected.includes("menisco")){
+    if(normalized.includes("ultrapassar")&&normalized.includes("traco"))return true;
+  }
+  if(expected.includes("homogene")){
+    if(normalized.includes("nao e necessario homogeneizar")||normalized.includes("nao e preciso homogeneizar"))return true;
+  }
+  if(expected.includes("incerteza experimental")){
+    if(normalized.includes("incerteza")&&(normalized.includes("deve ser ignorada")||normalized.includes("deve ignorar")))return true;
+  }
+  if(expected.includes("aumentar a distancia")||expected.includes("distancia de propagacao")){
+    if((normalized.includes("menor distancia")||normalized.includes("diminuir a distancia"))&&normalized.includes("incerteza"))return true;
+  }
+  if(expected.includes("proporcao estequiometrica")||expected.includes("equivalencia")){
+    if(normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
+  }
+
   return false;
 }
 
@@ -204,7 +230,11 @@ export function assessEvidence(response,...evidenceTexts){
   const wordCount=normalizeEvidenceText(response).split(" ").filter(Boolean).length;
 
   const uniqueContentTokens=new Set(responseTokens).size;
-  const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5;
+  const normalizedResponse=normalizeEvidenceText(response);
+  const relationMarkers=["porque","por isso","logo","assim","quando","como","que","mas","porem","contudo","embora","permite","evita","resulta","corresponde","indica","mostra","favorece","altera","mantem","aumenta","diminui","retoma","atribui","liga","mede","calcula","compara","transfere","completa","homogeneiza"];
+  const verbLike=/\b[a-z]{4,}(?:a|e|i|am|em|ou|ava|iam|aria|eria|iria|ado|ido)\b/u.test(normalizedResponse);
+  const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||verbLike||/[.!?;:]/u.test(String(response||""));
+  const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
   let status="not-observed";
   if(substantiveResponse&&((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44)))status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
@@ -215,11 +245,13 @@ export function assessEvidence(response,...evidenceTexts){
     :status==="partial"
       ?Math.min(.78,.42+semanticScore*.55)
       :wordCount>=8?.56:.68;
-  const scoreRatio=status==="observed"
+  let scoreRatio=status==="observed"
     ?Math.min(1,.62+semanticScore*.38)
     :status==="partial"
       ?Math.min(.58,.2+semanticScore*.5)
       :0;
+  if(!coherentProse)scoreRatio=Math.min(scoreRatio,.35);
+  if(contradiction)scoreRatio=Math.min(scoreRatio,.35);
 
   return {
     status,confidence:Math.round(confidence*100)/100,
@@ -227,7 +259,7 @@ export function assessEvidence(response,...evidenceTexts){
     semanticScore:Math.round(semanticScore*100)/100,
     relationScore:Math.round(relation*100)/100,
     contradictionDetected:contradiction,
-    substantiveResponse,
+    substantiveResponse,coherentProse,
     matchedCount:matched.length,cueCount:cues.length,
     evidence:matched.length?bestSentence(response,matched):"",
     matched
