@@ -63,10 +63,9 @@ for(const [key,list] of groups){
   if(by.wrong.score>=.62)wrongInflation++;
   if(by.vague.score>=.68)vagueInflation++;
 
-  const ordered=CALIBRATION_CATEGORY_ORDER.map(category=>by[category].score);
-  for(let i=1;i<ordered.length;i++){
-    if(ordered[i]+.12<ordered[i-1])orderingViolations++;
-  }
+  if(by.partial.score+.12<by.vague.score)orderingViolations++;
+  if(by.paraphrase.score+.12<by.partial.score)orderingViolations++;
+  if(by.excellent.score+.12<by.paraphrase.score)orderingViolations++;
 
   console.log("\n"+key);
   for(const category of [...CALIBRATION_CATEGORY_ORDER].reverse()){
@@ -106,7 +105,7 @@ if(metrics.paraphraseRecognitionRate<.75)failures.push("paraphrase recognition b
 if(metrics.excellentRecognitionRate<.85)failures.push("excellent-answer recognition below 85%");
 if(metrics.wrongInflationRate>.2)failures.push("wrong-answer inflation above 20%");
 if(metrics.vagueInflationRate>.3)failures.push("vague-answer inflation above 30%");
-if(metrics.orderingViolations>Math.ceil(totalItems*.35))failures.push("too many category-order inversions");
+if(metrics.orderingViolations>Math.ceil(totalItems*.25))failures.push("too many meaningful quality-order inversions");
 
 const eqRows=rows.filter(row=>row.itemId==="FQA-R-EQ-01");
 const eqWrong=eqRows.find(row=>row.category==="wrong");
@@ -132,8 +131,9 @@ fs.mkdirSync(new URL("../public/",import.meta.url),{recursive:true});
 fs.writeFileSync(new URL("../public/calibration-report.json",import.meta.url),JSON.stringify(report,null,2));
 
 if(failures.length){
-  console.warn("\nOPEN-RESPONSE CALIBRATION NEEDS TUNING");
-  failures.forEach(row=>console.warn("! "+row));
+  console.error("\nOPEN-RESPONSE CALIBRATION FAILED");
+  failures.forEach(row=>console.error("✗ "+row));
+  process.exitCode=1;
 }else{
   console.log("\nOPEN-RESPONSE CALIBRATION PASSED");
 }
