@@ -1,11 +1,10 @@
-import {OPEN_RESPONSE_CALIBRATION_CASES,CALIBRATION_CATEGORY_ORDER} from "../app/data/openResponseCalibrationBank.js";
-import {portugueseItemById} from "../app/data/portugueseContent.js";
+import {OPEN_RESPONSE_CALIBRATION_CASES,CALIBRATION_CATEGORY_ORDER,portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
 import {gradePortugueseResponse} from "../app/lib/portugueseEngine.js";
 import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
 
 function itemFor(row){
-  return row.subject==="portuguese"?portugueseItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
+  return row.subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
 }
 function grade(row){
   const item=itemFor(row);
