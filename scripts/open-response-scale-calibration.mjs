@@ -127,8 +127,7 @@ const report={
     review:Object.fromEntries(list.map(row=>[row.category,!!row.result.requiresReview]))
   }))
 };
-fs.mkdirSync(new URL("../public/",import.meta.url),{recursive:true});
-fs.writeFileSync(new URL("../public/calibration-report.json",import.meta.url),JSON.stringify(report,null,2));
+fs.writeFileSync(new URL("../calibration-report.json",import.meta.url),JSON.stringify(report,null,2));
 
 if(failures.length){
   console.error("\nOPEN-RESPONSE CALIBRATION FAILED");
