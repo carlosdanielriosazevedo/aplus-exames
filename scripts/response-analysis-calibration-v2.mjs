@@ -90,11 +90,11 @@ const report={
 };
 await import("node:fs").then(({writeFileSync})=>writeFileSync(new URL("../response-analysis-calibration-v2.json",import.meta.url),JSON.stringify(report,null,2)));
 
-const enforcedFailures=failures.filter(row=>row.startsWith("physics-chemistry-a/")&&row.includes("< min"));
+const enforcedFailures=failures.filter(row=>row.startsWith("physics-chemistry-a/")&&row.includes("should require review"));
 if(enforcedFailures.length){
   console.error("\nOPEN-RESPONSE ADVERSARIAL CALIBRATION FAILED ("+enforcedFailures.length+" issues)");
   enforcedFailures.slice(0,40).forEach(row=>console.error("✗ "+row));
   if(enforcedFailures.length>40)console.error("… "+(enforcedFailures.length-40)+" more");
   process.exit(1);
 }
-console.log("\nFQ A UNDER-CREDIT GATE PASSED.");
+console.log("\nFQ A CONTRADICTION-REVIEW GATE PASSED.");
