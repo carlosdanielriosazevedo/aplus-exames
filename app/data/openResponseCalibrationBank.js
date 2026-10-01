@@ -96,3 +96,71 @@ export const CALIBRATION_CATEGORY_ORDER=["wrong","vague","partial","paraphrase",
 export function calibrationCasesFor(subject,itemId){
   return OPEN_RESPONSE_CALIBRATION_CASES.filter(row=>(!subject||row.subject===subject)&&(!itemId||row.itemId===itemId));
 }
+
+
+export const PORTUGUESE_CALIBRATION_ITEMS=[
+  {
+    id:"PT639-FND-311",year:"12.º",domain:"escrita",competencyId:"pt-escrita-exposicao",responseType:"restricted-response",
+    rubric:{maxPoints:13,criteria:[
+      {id:"conteudo",label:"Relaciona problema, explicação de alternativas e conclusão com a clareza expositiva.",points:8},
+      {id:"discurso",label:"Organiza a resposta com progressão clara.",points:3},
+      {id:"lingua",label:"Escreve com correção linguística suficiente para não comprometer o sentido.",points:2}
+    ]},
+    referenceAnswer:"A organização cria uma progressão reconhecível: começa por definir o problema, desenvolve alternativas concretas e termina com condições de aplicação. Essa sequência ajuda o leitor a perceber a relação entre as partes e evita uma enumeração solta de informação. Esta articulação entre ideias torna a explicação mais precisa e permite ao leitor acompanhar o raciocínio sem depender de afirmações vagas.",
+    gradingMode:"rubric-assisted-provisional",maxPoints:13,wordLimit:{min:40,max:70}
+  },
+  {
+    id:"PT639-FND-313",year:"11.º",domain:"escrita",competencyId:"pt-escrita-opiniao",responseType:"restricted-response",
+    rubric:{maxPoints:13,criteria:[
+      {id:"conteudo",label:"Relaciona razões concretas com a sustentação da tese.",points:8},
+      {id:"discurso",label:"Organiza a resposta com progressão clara.",points:3},
+      {id:"lingua",label:"Escreve com correção linguística suficiente para não comprometer o sentido.",points:2}
+    ]},
+    referenceAnswer:"As razões mostram benefícios diretamente ligados à proposta: mais tempo de estudo e maior igualdade de acesso. Ao explicar consequências concretas do horário alargado, o autor transforma uma preferência numa posição fundamentada. Esta articulação entre ideias torna a explicação mais precisa e permite ao leitor acompanhar o raciocínio sem depender de afirmações vagas.",
+    gradingMode:"rubric-assisted-provisional",maxPoints:13,wordLimit:{min:40,max:70}
+  },
+  {
+    id:"PT639-FND-315",year:"10.º",domain:"leitura",competencyId:"pt-leitura-coesao",responseType:"restricted-response",
+    rubric:{maxPoints:13,criteria:[
+      {id:"conteudo",label:"Explica referência anafórica e relação de consequência.",points:8},
+      {id:"discurso",label:"Organiza a resposta com progressão clara.",points:3},
+      {id:"lingua",label:"Escreve com correção linguística suficiente para não comprometer o sentido.",points:2}
+    ]},
+    referenceAnswer:"«Esta iniciativa» retoma a criação da horta e evita repetir toda a informação anterior. «Por isso» introduz uma consequência do envolvimento de várias turmas, ligando logicamente as duas frases e tornando a progressão mais clara. Assim, os mecanismos referidos contribuem para a continuidade do texto e para uma progressão lógica e facilmente reconhecível da informação.",
+    gradingMode:"rubric-assisted-provisional",maxPoints:13,wordLimit:{min:40,max:70}
+  },
+  {
+    id:"PT639-FND-317",year:"10.º",domain:"gramatica",competencyId:"pt-gramatica-coesao",responseType:"restricted-response",
+    rubric:{maxPoints:13,criteria:[
+      {id:"conteudo",label:"Identifica o antecedente e explica a função coesiva do pronome.",points:8},
+      {id:"discurso",label:"Organiza a resposta com progressão clara.",points:3},
+      {id:"lingua",label:"Escreve com correção linguística suficiente para não comprometer o sentido.",points:2}
+    ]},
+    referenceAnswer:"O pronome «o» retoma «o relatório». Essa substituição evita repetir o nome e mantém a ligação entre a ação de entregar e a ação anterior de rever o mesmo objeto. A explicação deve ligar a designação gramatical ao comportamento concreto dos constituintes na frase, e não limitar-se a nomear a função.",
+    gradingMode:"rubric-assisted-provisional",maxPoints:13,wordLimit:{min:40,max:70}
+  },
+  {
+    id:"PT639-FND-319",year:"10.º",domain:"gramatica",competencyId:"pt-gramatica-sintaxe",responseType:"restricted-response",
+    rubric:{maxPoints:13,criteria:[
+      {id:"conteudo",label:"Identifica o predicativo do complemento direto e relaciona-o com «a proposta».",points:8},
+      {id:"discurso",label:"Organiza a resposta com progressão clara.",points:3},
+      {id:"lingua",label:"Escreve com correção linguística suficiente para não comprometer o sentido.",points:2}
+    ]},
+    referenceAnswer:"«Útil para a comunidade» desempenha a função de predicativo do complemento direto, porque atribui uma propriedade ao complemento direto «a proposta» através do verbo «consideraram». A explicação deve ligar a designação gramatical ao comportamento concreto dos constituintes na frase, e não limitar-se a nomear a função.",
+    gradingMode:"rubric-assisted-provisional",maxPoints:13,wordLimit:{min:40,max:70}
+  },
+  {
+    id:"PT639-FND-322",year:"10.º",domain:"gramatica",competencyId:"pt-gramatica-oracoes",responseType:"restricted-response",
+    rubric:{maxPoints:13,criteria:[
+      {id:"conteudo",label:"Identifica oração temporal e oração relativa restritiva.",points:8},
+      {id:"discurso",label:"Organiza a resposta com progressão clara.",points:3},
+      {id:"lingua",label:"Escreve com correção linguística suficiente para não comprometer o sentido.",points:2}
+    ]},
+    referenceAnswer:"«Quando a chuva terminou» é uma oração subordinada adverbial temporal, situando a ação principal no tempo. «Que tinha sido interrompida» é uma oração subordinada adjetiva relativa restritiva, que delimita a atividade referida. A explicação deve ligar a designação gramatical ao comportamento concreto dos constituintes na frase, e não limitar-se a nomear a função.",
+    gradingMode:"rubric-assisted-provisional",maxPoints:13,wordLimit:{min:40,max:70}
+  }
+];
+
+export function portugueseCalibrationItemById(id){
+  return PORTUGUESE_CALIBRATION_ITEMS.find(item=>item.id===id)||null;
+}
