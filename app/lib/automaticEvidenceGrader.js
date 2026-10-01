@@ -12,7 +12,7 @@ const SYNONYM_GROUPS=[
   ["transicao","salto"],
   ["nivel","camada"],
   ["frequencia","comprimento","onda"],
-  ["caracteristico","especifico","proprio","unico"],
+  ["caracteristico","especifico","proprio","unico","assinatura"],
   ["aumentar","aumento","maior","crescer","incrementar"],
   ["reduzir","reducao","diminuir","menor"],
   ["media","promedio"],
@@ -48,10 +48,11 @@ const SYNONYM_GROUPS=[
   ["humano","humana","humanizacao","personificacao"],
   ["rapidez","velocidade","depressa"],
   ["tese","posicao","opiniao","proposta"],
-  ["sustentacao","defesa","fundamentacao","justificacao"],
+  ["sustentacao","defesa","defender","defende","fundamentacao","justificacao","justifica"],
   ["beneficio","vantagem","efeito","consequencia"],
-  ["anaforica","anafora","retoma","retomar","referencia"],
+  ["anaforica","anafora","retoma","retomar","referencia","referente","antecedente"],
   ["clareza","claro","compreensao","perceber"],
+  ["coesao","continuidade","ligacao","articulacao"],
   ["temporal","tempo","momento"],
   ["restritiva","restringe","delimita","limita"]
 ];
@@ -219,12 +220,14 @@ export function assessEvidence(response,...evidenceTexts){
 export function aggregateCriterionAssessment(observations=[]){
   if(!observations.length)return {status:"not-observed",scoreRatio:0,confidence:.5};
   const weights={observed:1,partial:.5,"not-observed":0};
-  const scoreRatio=observations.reduce((sum,row)=>sum+(Number.isFinite(row.scoreRatio)?row.scoreRatio:(weights[row.status]??0)),0)/observations.length;
-  const status=observations.every(row=>row.status==="observed")?"observed"
-    :observations.some(row=>row.status==="observed"||row.status==="partial")?"partial"
-    :"not-observed";
-  const confidence=observations.reduce((sum,row)=>sum+(row.confidence||0),0)/observations.length;
+  const rawScoreRatio=observations.reduce((sum,row)=>sum+(Number.isFinite(row.scoreRatio)?row.scoreRatio:(weights[row.status]??0)),0)/observations.length;
   const contradictionDetected=observations.some(row=>row.contradictionDetected);
+  const scoreRatio=contradictionDetected?Math.min(rawScoreRatio,.35):rawScoreRatio;
+  const status=contradictionDetected?"partial"
+    :observations.every(row=>row.status==="observed")?"observed"
+      :observations.some(row=>row.status==="observed"||row.status==="partial")?"partial"
+      :"not-observed";
+  const confidence=observations.reduce((sum,row)=>sum+(row.confidence||0),0)/observations.length;
   return {status,scoreRatio:Math.round(scoreRatio*100)/100,confidence:Math.round(confidence*100)/100,contradictionDetected};
 }
 
@@ -271,9 +274,9 @@ export function automaticFeedbackForCriteria(criteria=[],responseText=""){
   const foundCount=strengths.length;
   const gapCount=gaps.length;
   const nextAction=contradictions.length
-    ?"Corrige primeiro a ideia contraditória e volta a submeter a resposta."
+    ?"Revê primeiro esta ideia na matéria: há uma contradição que deves conseguir evitar numa próxima questão."
     :gapCount
-      ?(gapCount===1?"Melhora o ponto em falta sem apagar o que já está correto.":"Melhora os pontos em falta sem apagar o que já está correto.")
+      ?(gapCount===1?"Revê o ponto em falta e procura demonstrá-lo melhor numa próxima questão.":"Revê os pontos em falta e procura demonstrá-los melhor nas próximas questões.")
       :"A resposta cobre os critérios principais. Revê apenas clareza, precisão e linguagem.";
   return {
     strengths,gaps,contradictions,
