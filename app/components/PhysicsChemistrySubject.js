@@ -136,14 +136,6 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));
   }
 
-  function reviseOpenResponse(){
-    if(!feedback||session?.items?.[session.current]?.responseType!=="restricted-response")return;
-    const kept=results.slice(0,-1);
-    setFeedback(null);
-    setResults(kept);
-    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:kept,currentResult:null,currentAnswer:answer}));
-  }
-
   function next(){
     if(!feedback)return;
     if(session.current>=session.items.length-1){
@@ -227,8 +219,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
               <p className="automaticFeedbackNext"><b>Para subir este resultado:</b> {feedback.feedbackSummary.nextAction}</p>
             </div>}
             <details className="automaticCriteriaDetails"><summary>Ver critérios detalhados</summary><div className="automaticCriteriaList">{(feedback.criteria||[]).map(criterion=><div key={criterion.id} className={"automaticCriterion "+criterion.status}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div>{(criterion.observations||[]).map(observation=><small key={observation.id}>{observation.status==="observed"?"✓":observation.status==="partial"?"◐":"○"} {observation.label}</small>)}</div>)}</div></details>
-            <button type="button" className="secondary automaticImproveButton" onClick={reviseOpenResponse}>Melhorar resposta</button>
-            <p className="muted">A app tenta corrigir sem te pedir que te avalies. Uma formulação diferente pode estar correta; por isso, respostas abertas continuam assinaladas como provisórias quando a confiança não é suficiente.</p>
+            <p className="muted">A resposta fica fechada depois de submetida. Lê a correção com atenção e usa o feedback para responder melhor numa próxima questão. Uma formulação diferente pode estar correta; por isso, respostas abertas continuam assinaladas como provisórias quando a confiança não é suficiente.</p>
           </div>}
           <button className="primary" onClick={next}>{position===session.items.length?"Ver resultado":"Seguinte"}</button>
         </>}
