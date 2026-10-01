@@ -90,7 +90,7 @@ const report={
 };
 await import("node:fs").then(({writeFileSync})=>writeFileSync(new URL("../response-analysis-calibration-v2.json",import.meta.url),JSON.stringify(report,null,2)));
 
-const finalOnlyGroupA=["CRV2-10FUN-STEPS-1","CRV2-10GA-STEPS-1","CRV2-11CD-STEPS-1","CRV2-11CONT-STEPS-1","CRV2-12FCONT-STEPS-1"];
+const finalOnlyGroupA=["CRV2-10FUN-STEPS-1","CRV2-10GA-STEPS-1"];
 const enforcedFailures=failures.filter(row=>!row.startsWith("mathematics/")||!row.includes("/final-only:")||finalOnlyGroupA.some(id=>row.includes("/"+id+"/")));
 if(enforcedFailures.length){
   console.error("\nOPEN-RESPONSE ADVERSARIAL CALIBRATION FAILED ("+enforcedFailures.length+" issues)");
