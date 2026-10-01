@@ -157,10 +157,11 @@ function contradictionDetected(response,evidenceTexts=[]){
   const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
-    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc"].some(row=>normalized.includes(row));
+    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
     const wrongComposition=["altera a composicao","muda a composicao","modifica a composicao"].some(row=>normalized.includes(row));
     const protectsKc=["nao altera kc","nao modifica kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
-    if((wrongKc||wrongComposition)&&!protectsKc)return true;
+    const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos")||normalized.includes("nao acelera os dois sentidos");
+    if(((wrongKc||wrongComposition)&&!protectsKc)||deniesTwoDirections)return true;
   }
 
   if(expected.includes("aceleracao")&&expected.includes("declive")){
@@ -187,21 +188,44 @@ function contradictionDetected(response,evidenceTexts=[]){
     if(normalized.includes("distancia")&&normalized.includes("deslocamento")&&normalized.includes("sempre iguais"))return true;
   }
 
-  if(expected.includes("predicativo do complemento direto")&&normalized.includes("complemento obliquo"))return true;
+  if(expected.includes("predicativo do complemento direto")&&(normalized.includes("complemento obliquo")||normalized.includes("nao e predicativo")))return true;
   if(expected.includes("referencia anaforica")&&normalized.includes("oposicao"))return true;
   if(expected.includes("oracao temporal")&&expected.includes("relativa restritiva")){
-    if(normalized.includes("oracao causal")||normalized.includes("oracao completiva"))return true;
+    if(
+      normalized.includes("oracao causal")||
+      normalized.includes("oracao completiva")||
+      normalized.includes("nao e temporal")||
+      normalized.includes("nao e relativa restritiva")
+    )return true;
   }
   if(expected.includes("relatorio")&&normalized.includes("refere se a leonor"))return true;
+  if(expected.includes("relatorio")&&normalized.includes("antecedente")&&normalized.includes("leonor"))return true;
+  if(expected.includes("relatorio")&&normalized.includes("nao retoma")&&normalized.includes("relatorio"))return true;
   if(expected.includes("sustentacao da tese")&&(normalized.includes("enfraquecem a posicao")||normalized.includes("enfraquecem a tese")))return true;
 
   if(expected.includes("clareza")&&expected.includes("organiz")){
-    if(normalized.includes("ordem")&&normalized.includes("nao influencia")&&normalized.includes("clareza"))return true;
+    const deniesOrderEffect=
+      (normalized.includes("ordem")||normalized.includes("sequencia"))&&
+      (
+        normalized.includes("nao influencia")||
+        normalized.includes("secundaria")||
+        normalized.includes("sem afetar a compreensao")||
+        normalized.includes("sem afetar a clareza")||
+        normalized.includes("compreenderia da mesma forma")||
+        normalized.includes("sem ordem")
+      );
+    if(deniesOrderEffect)return true;
   }
   if((expected.includes("tese")||expected.includes("posicao"))&&(expected.includes("sustent")||expected.includes("defesa"))){
-    if(normalized.includes("razoes")&&(normalized.includes("nao sustentam")||normalized.includes("enfraquecem")))return true;
+    if(normalized.includes("razoes")&&(
+      normalized.includes("nao sustentam")||
+      normalized.includes("enfraquecem")||
+      normalized.includes("nao sao necessarias")||
+      normalized.includes("nao justificam")||
+      normalized.includes("nao constituem razoes")
+    ))return true;
   }
-  if(expected.includes("consequencia")&&normalized.includes("por isso")&&normalized.includes("oposicao"))return true;
+  if(expected.includes("consequencia")&&normalized.includes("por isso")&&(normalized.includes("oposicao")||normalized.includes("contraste")))return true;
   if(expected.includes("padrao")&&expected.includes("elemento")){
     if((normalized.includes("frequencias")||normalized.includes("riscas"))&&normalized.includes("iguais")&&(normalized.includes("nao permite")||normalized.includes("nao permitem")))return true;
   }
@@ -219,7 +243,64 @@ function contradictionDetected(response,evidenceTexts=[]){
   }
   if(expected.includes("proporcao estequiometrica")||expected.includes("equivalencia")){
     if(normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
+    if(
+      normalized.includes("equivalencia nao corresponde")||
+      normalized.includes("nao corresponde a proporcao estequiometrica")||
+      normalized.includes("nao corresponde a proporcao")
+    )return true;
   }
+
+  if((expected.includes("transicao")||expected.includes("niveis"))&&(
+    normalized.includes("riscas nao resultam de transicoes")||
+    normalized.includes("riscas nao resultam de transicao")||
+    normalized.includes("nao resultam de transicoes entre niveis")
+  ))return true;
+
+  if((expected.includes("fotao")||expected.includes("energia"))&&(
+    normalized.includes("fotoes emitidos nao possuem energias")||
+    normalized.includes("fotoes nao possuem energias especificas")||
+    normalized.includes("nao possuem energias especificas")
+  ))return true;
+
+  if(expected.includes("pipeta")&&(
+    normalized.includes("nao e necessario usar pipeta")||
+    normalized.includes("nao e preciso usar pipeta")||
+    normalized.includes("sem usar pipeta")
+  ))return true;
+
+  if((expected.includes("menisco")||expected.includes("traco"))&&(
+    normalized.includes("nao e necessario ajustar o menisco")||
+    normalized.includes("nao e preciso ajustar o menisco")||
+    normalized.includes("nem ajustar o menisco")
+  ))return true;
+
+  if((expected.includes("velocidade")||expected.includes("altura"))&&(
+    normalized.includes("nao e preciso medir velocidade")||
+    normalized.includes("nao e necessario medir velocidade")||
+    normalized.includes("nao e preciso medir altura")||
+    normalized.includes("nao e necessario medir altura")
+  ))return true;
+
+  if(expected.includes("aceleracao")&&expected.includes("declive")&&(
+    normalized.includes("declive nao representa a aceleracao")||
+    normalized.includes("declive nao representa aceleracao")
+  ))return true;
+
+  if(expected.includes("deslocamento")&&expected.includes("area")&&(
+    normalized.includes("area algebrica nao representa o deslocamento")||
+    normalized.includes("area nao representa o deslocamento")||
+    normalized.includes("area algebrica nao representa deslocamento")
+  ))return true;
+
+  if((expected.includes("aumentar a distancia")||expected.includes("distancia de propagacao"))&&(
+    normalized.includes("aumentar a distancia nao reduz")||
+    normalized.includes("maior distancia nao reduz")
+  ))return true;
+
+  if((expected.includes("repet")||expected.includes("media")||expected.includes("dispersao"))&&(
+    normalized.includes("repetir medicoes nao melhora")||
+    normalized.includes("repetir as medicoes nao melhora")
+  ))return true;
 
   return false;
 }

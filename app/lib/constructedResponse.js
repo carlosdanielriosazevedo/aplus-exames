@@ -27,7 +27,13 @@ function escapeRegex(value){return String(value).replace(/[.*+?^$()|[\]\\{}]/g,"
 function conceptPresent(input,candidate){
   const concept=normalizedWords(candidate);
   if(!concept)return false;
-  if(new RegExp("(?:^|\\b)"+escapeRegex(concept)+"(?:\\b|$)","u").test(input))return true;
+  if(/^-?\\d+(?:[.,]\\d+)?$/u.test(concept)){
+    const escaped=escapeRegex(concept);
+    const pattern=concept.startsWith("-")
+      ?new RegExp("(?:^|[^0-9])"+escaped+"(?:$|[^0-9])","u")
+      :new RegExp("(?:^|[^0-9-])"+escaped+"(?:$|[^0-9])","u");
+    if(pattern.test(input))return true;
+  }else if(new RegExp("(?:^|\\b)"+escapeRegex(concept)+"(?:\\b|$)","u").test(input))return true;
   if(concept.endsWith("r")&&concept.length>=6){
     const stem=concept.slice(0,-1);
     return new RegExp("\\b"+escapeRegex(stem)+"[a-z]*\\b","u").test(input);
