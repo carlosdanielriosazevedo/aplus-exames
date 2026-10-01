@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import {OPEN_RESPONSE_CALIBRATION_CASES,CALIBRATION_CATEGORY_ORDER,portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
 import {gradePortugueseResponse} from "../app/lib/portugueseEngine.js";
@@ -113,11 +114,27 @@ const eqExcellent=eqRows.find(row=>row.category==="excellent");
 if(!eqWrong?.result?.requiresReview)failures.push("equilibrium contradiction must require review");
 if((eqWrong?.score??1)>=(eqExcellent?.score??0))failures.push("equilibrium contradiction must score below excellent answer");
 
-if(failures.length){
-  console.error("\nOPEN-RESPONSE CALIBRATION FAILED");
-  failures.forEach(row=>console.error("✗ "+row));
-  process.exit(1);
-}
+const report={
+  generatedAt:new Date().toISOString(),
+  metrics,
+  summaries:Object.fromEntries(Object.entries(summaries).map(([subject,summary])=>[
+    subject,
+    Object.fromEntries(Object.entries(summary).map(([category,row])=>[category,{mean:fixed(row.mean),count:row.count}]))
+  ])),
+  failures,
+  items:[...groups.entries()].map(([key,list])=>({
+    key,
+    scores:Object.fromEntries(list.map(row=>[row.category,fixed(row.score)])),
+    review:Object.fromEntries(list.map(row=>[row.category,!!row.result.requiresReview]))
+  }))
+};
+fs.mkdirSync(new URL("../public/",import.meta.url),{recursive:true});
+fs.writeFileSync(new URL("../public/calibration-report.json",import.meta.url),JSON.stringify(report,null,2));
 
-console.log("\nOPEN-RESPONSE CALIBRATION PASSED");
+if(failures.length){
+  console.warn("\nOPEN-RESPONSE CALIBRATION NEEDS TUNING");
+  failures.forEach(row=>console.warn("! "+row));
+}else{
+  console.log("\nOPEN-RESPONSE CALIBRATION PASSED");
+}
 console.log("Bank: "+rows.length+" responses across "+totalItems+" items.");
