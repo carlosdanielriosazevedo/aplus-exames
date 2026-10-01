@@ -6,7 +6,7 @@ import StudyModeHub from "./StudyModeHub";
 import {PORTUGUESE_COMPETENCIES} from "../data/portugueseFoundation";
 import {PORTUGUESE_ITEMS,portugueseItemById} from "../data/portugueseContent";
 import {portugueseLiteraryWorkById,portugueseLiteraryWorksForYear} from "../data/portugueseLiteraryWorks";
-import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
+import {PORTUGUESE_RUBRIC_EVIDENCE,assessPortugueseRubricObservation,buildAdaptivePortugueseMission,buildPortugueseDiagnostic,gradePortugueseResponse,portugueseCoverage,portugueseRubricGuidance,restorePortugueseRubricEvidence,portugueseRevisionCompare,portugueseRevisionEvidenceCompare,rubricObservationEvidenceSnapshot} from "../lib/portugueseEngine";
 import {portugueseObservationGuidance} from "../lib/portugueseObservationGuidance";
 import {portugueseWordLimitFeedback} from "../lib/portugueseWordLimit";
 import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";
