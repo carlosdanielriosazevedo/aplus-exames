@@ -86,7 +86,7 @@ await import("node:fs").then(({writeFileSync})=>writeFileSync(
   JSON.stringify(summary,null,2)
 ));
 
-const enforcedFailures=failures.filter(row=>row.startsWith("mathematics/")&&row.includes("/unsupported-answer:"));
+const enforcedFailures=failures;
 if(enforcedFailures.length){
   console.error("\nRESPONSE ANALYSIS CALIBRATION V3 FAILED ("+enforcedFailures.length+" issues)");
   enforcedFailures.forEach(row=>console.error("✗ "+row));
