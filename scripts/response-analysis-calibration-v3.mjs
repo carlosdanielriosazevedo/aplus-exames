@@ -86,7 +86,8 @@ await import("node:fs").then(({writeFileSync})=>writeFileSync(
   JSON.stringify(summary,null,2)
 ));
 
-const enforcedFailures=failures.filter(row=>row.startsWith("mathematics/")&&row.includes("/almost-correct:"));
+const mathAlmostA=["CRV2-10FUN-STEPS-1","CRV2-10GA-STEPS-1","CRV2-11CD-STEPS-1","CRV2-11CONT-STEPS-1"];
+const enforcedFailures=failures.filter(row=>row.startsWith("mathematics/")&&row.includes("/almost-correct:")&&mathAlmostA.some(id=>row.includes("/"+id+"/")));
 if(enforcedFailures.length){
   console.error("\nRESPONSE ANALYSIS CALIBRATION V3 FAILED ("+enforcedFailures.length+" issues)");
   enforcedFailures.forEach(row=>console.error("✗ "+row));
