@@ -119,8 +119,8 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
   };
   const criteria=physicsChemistryRubricFor(item).map(criterion=>{
     const observations=(criterion.observations||[]).map(observation=>{
-      const assessed=assessEvidence(text,observation.label,criterion.label,...(item.criteria||[]));
-      return {...observation,status:assessed.status,confidence:assessed.confidence,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
+      const assessed=assessEvidence(text,observation.label,criterion.label);
+      return {...observation,status:assessed.status,confidence:assessed.confidence,scoreRatio:assessed.scoreRatio,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
     });
     const aggregate=aggregateCriterionAssessment(observations);
     return {...criterion,...aggregate,observations,autoAssessed:true};

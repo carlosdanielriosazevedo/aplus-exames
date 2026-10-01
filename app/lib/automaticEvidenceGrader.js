@@ -46,7 +46,14 @@ const SYNONYM_GROUPS=[
   ["composicao","proporcao","proporcoes"],
   ["manter","mantem","inalterado"],
   ["humano","humana","humanizacao","personificacao"],
-  ["rapidez","velocidade","depressa"]
+  ["rapidez","velocidade","depressa"],
+  ["tese","posicao","opiniao","proposta"],
+  ["sustentacao","defesa","fundamentacao","justificacao"],
+  ["beneficio","vantagem","efeito","consequencia"],
+  ["anaforica","anafora","retoma","retomar","referencia"],
+  ["clareza","claro","compreensao","perceber"],
+  ["temporal","tempo","momento"],
+  ["restritiva","restringe","delimita","limita"]
 ];
 
 const PHRASE_EQUIVALENTS=[
@@ -135,8 +142,9 @@ function relationScore(response,cues){
   return best;
 }
 
-function contradictionDetected(response){
+function contradictionDetected(response,evidenceTexts=[]){
   const normalized=normalizeEvidenceText(response);
+  const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
     const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc"].some(row=>normalized.includes(row));
@@ -144,6 +152,25 @@ function contradictionDetected(response){
     const protectsKc=["nao altera kc","nao modifica kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
     if((wrongKc||wrongComposition)&&!protectsKc)return true;
   }
+
+  if(expected.includes("aceleracao")&&expected.includes("declive")){
+    if(/aceleracao (?:e|eh|igual a|corresponde a|obtem se pela?) (?:a )?area/u.test(normalized))return true;
+  }
+  if(expected.includes("deslocamento")&&expected.includes("area")){
+    if(/deslocamento (?:e|eh|igual a|corresponde a|obtem se pelo?) (?:o )?declive/u.test(normalized))return true;
+  }
+  if(expected.includes("distancia")&&expected.includes("deslocamento")){
+    if(normalized.includes("distancia e deslocamento continuam sempre iguais")||normalized.includes("distancia e deslocamento sao sempre iguais"))return true;
+  }
+
+  if(expected.includes("predicativo do complemento direto")&&normalized.includes("complemento obliquo"))return true;
+  if(expected.includes("referencia anaforica")&&normalized.includes("oposicao"))return true;
+  if(expected.includes("oracao temporal")&&expected.includes("relativa restritiva")){
+    if(normalized.includes("oracao causal")||normalized.includes("oracao completiva"))return true;
+  }
+  if(expected.includes("relatorio")&&normalized.includes("refere se a leonor"))return true;
+  if(expected.includes("sustentacao da tese")&&(normalized.includes("enfraquecem a posicao")||normalized.includes("enfraquecem a tese")))return true;
+
   return false;
 }
 
@@ -154,7 +181,7 @@ export function assessEvidence(response,...evidenceTexts){
   const matched=cues.filter(cue=>responseSet.has(cue));
   const ratio=cues.length?matched.length/cues.length:0;
   const relation=relationScore(response,cues);
-  const contradiction=contradictionDetected(response);
+  const contradiction=contradictionDetected(response,evidenceTexts.filter(Boolean));
   const semanticScore=Math.max(0,Math.min(1,ratio*.72+relation*.28-(contradiction?.36:0)));
   const wordCount=normalizeEvidenceText(response).split(" ").filter(Boolean).length;
 
@@ -170,9 +197,15 @@ export function assessEvidence(response,...evidenceTexts){
     :status==="partial"
       ?Math.min(.78,.42+semanticScore*.55)
       :wordCount>=8?.56:.68;
+  const scoreRatio=status==="observed"
+    ?Math.min(1,.62+semanticScore*.38)
+    :status==="partial"
+      ?Math.min(.58,.2+semanticScore*.5)
+      :0;
 
   return {
     status,confidence:Math.round(confidence*100)/100,
+    scoreRatio:Math.round(scoreRatio*100)/100,
     semanticScore:Math.round(semanticScore*100)/100,
     relationScore:Math.round(relation*100)/100,
     contradictionDetected:contradiction,
@@ -186,8 +219,10 @@ export function assessEvidence(response,...evidenceTexts){
 export function aggregateCriterionAssessment(observations=[]){
   if(!observations.length)return {status:"not-observed",scoreRatio:0,confidence:.5};
   const weights={observed:1,partial:.5,"not-observed":0};
-  const scoreRatio=observations.reduce((sum,row)=>sum+(weights[row.status]??0),0)/observations.length;
-  const status=scoreRatio>=.8?"observed":scoreRatio>=.25?"partial":"not-observed";
+  const scoreRatio=observations.reduce((sum,row)=>sum+(Number.isFinite(row.scoreRatio)?row.scoreRatio:(weights[row.status]??0)),0)/observations.length;
+  const status=observations.every(row=>row.status==="observed")?"observed"
+    :observations.some(row=>row.status==="observed"||row.status==="partial")?"partial"
+    :"not-observed";
   const confidence=observations.reduce((sum,row)=>sum+(row.confidence||0),0)/observations.length;
   const contradictionDetected=observations.some(row=>row.contradictionDetected);
   return {status,scoreRatio:Math.round(scoreRatio*100)/100,confidence:Math.round(confidence*100)/100,contradictionDetected};
