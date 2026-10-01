@@ -54,7 +54,10 @@ const SYNONYM_GROUPS=[
   ["clareza","claro","compreensao","perceber"],
   ["coesao","continuidade","ligacao","articulacao"],
   ["temporal","tempo","momento"],
-  ["restritiva","restringe","delimita","limita"]
+  ["restritiva","restringe","delimita","limita"],
+  ["comparar","compara","compatível","compativel","compatíveis","compativeis","confrontar"],
+  ["inicial","primeiro ponto","ponto inicial"],
+  ["final","segundo ponto","ponto final"]
 ];
 
 const PHRASE_EQUIVALENTS=[
@@ -76,7 +79,10 @@ const PHRASE_EQUIVALENTS=[
   ["medir varias vezes","concept-repetition"],
   ["emitem radiacao","concept-photon-emission"],
   ["emissao de fotao","concept-photon-emission"],
-  ["emissao de um fotao","concept-photon-emission"]
+  ["emissao de um fotao","concept-photon-emission"],
+  ["nos dois pontos","concept-two-points"],
+  ["em dois pontos","concept-two-points"],
+  ["em ambos","concept-two-points"]
 ];
 
 const SYNONYM_MAP=new Map();
