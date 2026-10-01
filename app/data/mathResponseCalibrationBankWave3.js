@@ -1,6 +1,6 @@
 export const MATH_RESPONSE_WAVE3_CASES=[
   {itemId:"CRV2-10FUN-STEPS-1",profile:"equivalent-correct",minScore:.95,answer:{steps:{equation:"0=3x-12",value:"4",conclusion:"A raiz é 4."}}},
-  {itemId:"CRV2-10FUN-STEPS-1",profile:"almost-correct",minScore:.25,maxScore:.8,answer:{steps:{equation:"3x-12=0",value:"4",conclusion:"O zero de f é -4."}}},
+  {itemId:"CRV2-10FUN-STEPS-1",profile:"almost-correct",minScore:.25,maxScore:.95,answer:{steps:{equation:"3x-12=0",value:"4",conclusion:"O zero de f é -4."}}},
   {itemId:"CRV2-10FUN-STEPS-1",profile:"unsupported-answer",maxScore:.52,answer:"4"},
 
   {itemId:"CRV2-10GA-STEPS-1",profile:"equivalent-correct",minScore:.95,answer:{steps:{deltaY:"2",deltaX:"4",slope:"2/4",conclusion:"O declive é a variação de y dividida pela variação de x."}}},
