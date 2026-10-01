@@ -296,7 +296,7 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
   }
   const contradictionDetected=criteria.some(row=>row.contradictionDetected);
   const rawProvisional=points/totalWeight*maxPoints;
-  const provisionalPoints=contradictionDetected?Math.min(rawProvisional,maxPoints*.6):rawProvisional;
+  const provisionalPoints=contradictionDetected?Math.min(rawProvisional,maxPoints*.5):rawProvisional;
   return {
     provisionalPoints:Math.round(provisionalPoints*10)/10,
     maxPoints,
