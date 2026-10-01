@@ -86,7 +86,8 @@ await import("node:fs").then(({writeFileSync})=>writeFileSync(
   JSON.stringify(summary,null,2)
 ));
 
-const enforcedFailures=failures.filter(row=>row.startsWith("physics-chemistry-a/FQA-R-EQ-01/negation-trap:"));
+const negationRemaining=["FQA-R-WAV-01","FQA-R-AQ-01"];
+const enforcedFailures=failures.filter(row=>row.startsWith("physics-chemistry-a/")&&row.includes("/negation-trap:")&&negationRemaining.some(id=>row.includes("/"+id+"/")));
 if(enforcedFailures.length){
   console.error("\nRESPONSE ANALYSIS CALIBRATION V3 FAILED ("+enforcedFailures.length+" issues)");
   enforcedFailures.forEach(row=>console.error("✗ "+row));
