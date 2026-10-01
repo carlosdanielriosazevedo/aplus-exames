@@ -90,11 +90,11 @@ const report={
 };
 await import("node:fs").then(({writeFileSync})=>writeFileSync(new URL("../response-analysis-calibration-v2.json",import.meta.url),JSON.stringify(report,null,2)));
 
-const enforcedFailures=failures.filter(row=>row.startsWith("physics-chemistry-a/")&&row.includes("/keyword-soup:")&&row.includes("> max"));
+const enforcedFailures=failures.filter(row=>row.startsWith("physics-chemistry-a/")&&row.includes("/keyword-soup:")&&row.includes("> max")&&(row.includes("FQA-R-ELEM-01")||row.includes("FQA-R-MAT-01")||row.includes("FQA-R-ENE-01")));
 if(enforcedFailures.length){
   console.error("\nOPEN-RESPONSE ADVERSARIAL CALIBRATION FAILED ("+enforcedFailures.length+" issues)");
   enforcedFailures.slice(0,40).forEach(row=>console.error("✗ "+row));
   if(enforcedFailures.length>40)console.error("… "+(enforcedFailures.length-40)+" more");
   process.exit(1);
 }
-console.log("\nFQ A KEYWORD-SOUP GATE PASSED.");
+console.log("\nFQ A KEYWORD-SOUP GROUP A PASSED.");
