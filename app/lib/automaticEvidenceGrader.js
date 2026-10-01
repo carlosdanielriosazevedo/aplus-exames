@@ -242,7 +242,64 @@ function contradictionDetected(response,evidenceTexts=[]){
   }
   if(expected.includes("proporcao estequiometrica")||expected.includes("equivalencia")){
     if(normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
+    if(
+      normalized.includes("equivalencia nao corresponde")||
+      normalized.includes("nao corresponde a proporcao estequiometrica")||
+      normalized.includes("nao corresponde a proporcao")
+    )return true;
   }
+
+  if((expected.includes("transicao")||expected.includes("niveis"))&&(
+    normalized.includes("riscas nao resultam de transicoes")||
+    normalized.includes("riscas nao resultam de transicao")||
+    normalized.includes("nao resultam de transicoes entre niveis")
+  ))return true;
+
+  if((expected.includes("fotao")||expected.includes("energia"))&&(
+    normalized.includes("fotoes emitidos nao possuem energias")||
+    normalized.includes("fotoes nao possuem energias especificas")||
+    normalized.includes("nao possuem energias especificas")
+  ))return true;
+
+  if(expected.includes("pipeta")&&(
+    normalized.includes("nao e necessario usar pipeta")||
+    normalized.includes("nao e preciso usar pipeta")||
+    normalized.includes("sem usar pipeta")
+  ))return true;
+
+  if((expected.includes("menisco")||expected.includes("traco"))&&(
+    normalized.includes("nao e necessario ajustar o menisco")||
+    normalized.includes("nao e preciso ajustar o menisco")||
+    normalized.includes("nem ajustar o menisco")
+  ))return true;
+
+  if((expected.includes("velocidade")||expected.includes("altura"))&&(
+    normalized.includes("nao e preciso medir velocidade")||
+    normalized.includes("nao e necessario medir velocidade")||
+    normalized.includes("nao e preciso medir altura")||
+    normalized.includes("nao e necessario medir altura")
+  ))return true;
+
+  if(expected.includes("aceleracao")&&expected.includes("declive")&&(
+    normalized.includes("declive nao representa a aceleracao")||
+    normalized.includes("declive nao representa aceleracao")
+  ))return true;
+
+  if(expected.includes("deslocamento")&&expected.includes("area")&&(
+    normalized.includes("area algebrica nao representa o deslocamento")||
+    normalized.includes("area nao representa o deslocamento")||
+    normalized.includes("area algebrica nao representa deslocamento")
+  ))return true;
+
+  if((expected.includes("aumentar a distancia")||expected.includes("distancia de propagacao"))&&(
+    normalized.includes("aumentar a distancia nao reduz")||
+    normalized.includes("maior distancia nao reduz")
+  ))return true;
+
+  if((expected.includes("repet")||expected.includes("media")||expected.includes("dispersao"))&&(
+    normalized.includes("repetir medicoes nao melhora")||
+    normalized.includes("repetir as medicoes nao melhora")
+  ))return true;
 
   return false;
 }
