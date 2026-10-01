@@ -90,7 +90,7 @@ const report={
 };
 await import("node:fs").then(({writeFileSync})=>writeFileSync(new URL("../response-analysis-calibration-v2.json",import.meta.url),JSON.stringify(report,null,2)));
 
-const enforcedFailures=failures.filter(row=>row.startsWith("mathematics/")&&row.includes("/full-correct:"));
+const enforcedFailures=failures;
 if(enforcedFailures.length){
   console.error("\nOPEN-RESPONSE ADVERSARIAL CALIBRATION FAILED ("+enforcedFailures.length+" issues)");
   enforcedFailures.slice(0,40).forEach(row=>console.error("✗ "+row));
