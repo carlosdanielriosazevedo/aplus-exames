@@ -73,7 +73,10 @@ const PHRASE_EQUIVALENTS=[
   ["comportamento humano","concept-personification"],
   ["tratado como humano","concept-personification"],
   ["varias medicoes","concept-repetition"],
-  ["medir varias vezes","concept-repetition"]
+  ["medir varias vezes","concept-repetition"],
+  ["emitem radiacao","concept-photon-emission"],
+  ["emissao de fotao","concept-photon-emission"],
+  ["emissao de um fotao","concept-photon-emission"]
 ];
 
 const SYNONYM_MAP=new Map();
@@ -155,10 +158,24 @@ function contradictionDetected(response,evidenceTexts=[]){
   }
 
   if(expected.includes("aceleracao")&&expected.includes("declive")){
-    if(/aceleracao (?:e|eh|igual a|corresponde a|obtem se pela?) (?:a )?area/u.test(normalized))return true;
+    const accelerationAsArea=[
+      "aceleracao e igual a area",
+      "aceleracao corresponde a area",
+      "aceleracao obtem se pela area",
+      "aceleracao e dada pela area",
+      "aceleracao calcula se pela area"
+    ].some(row=>normalized.includes(row));
+    if(accelerationAsArea)return true;
   }
   if(expected.includes("deslocamento")&&expected.includes("area")){
-    if(/deslocamento (?:e|eh|igual a|corresponde a|obtem se pelo?) (?:o )?declive/u.test(normalized))return true;
+    const displacementAsSlope=[
+      "deslocamento e igual ao declive",
+      "deslocamento corresponde ao declive",
+      "deslocamento obtem se pelo declive",
+      "deslocamento e dado pelo declive",
+      "deslocamento calcula se pelo declive"
+    ].some(row=>normalized.includes(row));
+    if(displacementAsSlope)return true;
   }
   if(expected.includes("distancia")&&expected.includes("deslocamento")){
     if(normalized.includes("distancia e deslocamento continuam sempre iguais")||normalized.includes("distancia e deslocamento sao sempre iguais"))return true;
