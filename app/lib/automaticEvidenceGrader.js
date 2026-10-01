@@ -178,7 +178,7 @@ function contradictionDetected(response,evidenceTexts=[]){
     if(displacementAsSlope)return true;
   }
   if(expected.includes("distancia")&&expected.includes("deslocamento")){
-    if(normalized.includes("distancia e deslocamento continuam sempre iguais")||normalized.includes("distancia e deslocamento sao sempre iguais"))return true;
+    if(normalized.includes("distancia")&&normalized.includes("deslocamento")&&normalized.includes("sempre iguais"))return true;
   }
 
   if(expected.includes("predicativo do complemento direto")&&normalized.includes("complemento obliquo"))return true;
