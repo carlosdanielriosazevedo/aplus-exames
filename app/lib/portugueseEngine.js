@@ -132,22 +132,22 @@ export function portugueseObservationAction(observation){
   const status=observation?.status;
   if(status==="not-observed")return {
     title:"Falta tornar este elemento visível",
-    action:"Volta à tua resposta e acrescenta uma formulação que responda diretamente a este ponto.",
+    action:"Revê este conteúdo e, numa próxima questão, inclui uma formulação que responda diretamente a este ponto.",
     hint:"Não precisas de copiar a resposta de referência: mostra, com as tuas palavras, onde este elemento fica demonstrado."
   };
   if(status==="partial")return {
     title:"Este elemento está incompleto",
-    action:"Reescreve ou desenvolve a parte da resposta que corresponde a este ponto, tornando a ideia mais explícita.",
+    action:"Revê este conteúdo e, numa próxima resposta, torna esta ideia mais explícita e desenvolvida.",
     hint:"Procura uma afirmação concreta e verifica se explicas o suficiente para o leitor perceber a relação."
   };
   if(status==="unsure")return {
     title:"Vale a pena confirmar",
-    action:"Relê o enunciado e a tua resposta e procura uma frase que demonstre claramente este ponto.",
+    action:"Relê o enunciado e a correção e confirma que sabes reconhecer este ponto numa próxima questão.",
     hint:"Se continuares com dúvidas, compara depois com a resposta de referência e identifica a diferença."
   };
   return {
     title:"Elemento identificado",
-    action:"Mantém esta parte da resposta e confirma que a formulação está suficientemente clara.",
+    action:"Mantém este princípio nas próximas respostas e procura formulá-lo com a mesma clareza.",
     hint:"A evidência deve estar na tua própria resposta."
   };
 }
@@ -262,7 +262,12 @@ export function gradePortugueseResponse(item,response){
         const assessed=assessEvidence(responseText,observation.label,criterion.label,guidance.counts,item.referenceAnswer);
         return {...observation,status:assessed.status,confidence:assessed.confidence,scoreRatio:assessed.scoreRatio,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
       });
-      const aggregate=aggregateCriterionAssessment(observations);
+      let aggregate=aggregateCriterionAssessment(observations);
+      if(criterion.id==="conteudo"&&Number.isFinite(min)&&min>0&&words<min){
+        const ratio=words/min;
+        const cap=ratio<.45?.45:ratio<.7?.62:.78;
+        aggregate={...aggregate,scoreRatio:Math.min(aggregate.scoreRatio,cap),status:aggregate.status==="observed"?"partial":aggregate.status};
+      }
       return {...criterion,...aggregate,observations,observable:true,autoAssessed:true};
     });
     const summary=automaticRubricSummary(criteria,item.maxPoints||item.rubric?.maxPoints||0);
