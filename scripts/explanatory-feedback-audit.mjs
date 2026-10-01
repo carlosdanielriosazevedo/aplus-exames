@@ -11,7 +11,7 @@ const checks=[
   ["shared explanatory feedback helper exists",grader.includes("automaticFeedbackForCriteria")&&grader.includes("strengths")&&grader.includes("gaps")],
   ["Portuguese mission shows strengths and gaps",pt.includes("O que fizeste bem")&&pt.includes("O que falta melhorar")],
   ["FQ A mission shows strengths and gaps",fq.includes("O que fizeste bem")&&fq.includes("O que falta melhorar")],
-  ["FQ A mission offers answer improvement",fq.includes("Melhorar resposta")&&fq.includes("reviseOpenResponse")],
+  ["FQ A mission keeps explanatory feedback without post-correction rewriting",fq.includes("O que fizeste bem")&&fq.includes("O que falta melhorar")&&!fq.includes("Melhorar resposta")&&!fq.includes("reviseOpenResponse")],
   ["Portuguese exam review explains open answers",ptx.includes("automaticResult?.feedbackSummary")&&ptx.includes("O que faltou")],
   ["FQ A mini-exam review explains open answers",fqMini.includes("result.feedbackSummary")&&fqMini.includes("O que faltou")],
   ["FQ A full-exam review explains open answers",fqExam.includes("result.feedbackSummary")&&fqExam.includes("O que faltou")]

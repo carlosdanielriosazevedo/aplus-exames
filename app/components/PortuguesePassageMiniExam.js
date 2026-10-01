@@ -315,54 +315,26 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                   {priorPattern.rows.map(memoryRow=><p key={memoryRow.criterionId}><b>{memoryRow.label}</b> — {memoryRow.message}</p>)}
                 </div>}
                 <section className="ptx-self-assessment" aria-label={`Avaliação automática de ${row.id}`}>
-                  <div className="ptx-self-head"><div><span>Avaliação automática por critérios</span><h4>A app comparou a tua resposta com a grelha</h4></div><small>Provisório quando necessário</small></div>
+                  <div className="ptx-self-head"><div><span>Avaliação automática por critérios</span><h4>A app comparou a tua resposta com a grelha</h4></div><small>Resposta fechada</small></div>
                   {criteria.map(criterion=>{
                     const evidence=itemAssessment[criterion.id]||{};
                     const feedback=criterionFeedback({criterion,status:evidence.status,evidence:evidence.evidence});
+                    const level=PORTUGUESE_SELF_ASSESSMENT_LEVELS.find(entry=>entry.id===evidence.status);
                     return <div className="ptx-criterion" key={criterion.id}>
                       <div className="ptx-criterion-copy"><strong>{criterion.label}</strong><span>{criterion.points} pts na grelha editorial</span></div>
                       {criterion.observations?.length>0&&<ul className="ptx-criterion-observations">{criterion.observations.map(observation=><li key={observation.id}>{observation.label}</li>)}</ul>}
-                      <div className="ptx-criterion-levels" role="group" aria-label={`Avaliar critério ${criterion.label}`}>
-                        {PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=><button key={level.id} className={evidence.status===level.id?`is-${level.id}`:""} onClick={()=>updateCriterion(row,criterion.id,{status:level.id})}>{level.label}</button>)}
-                      </div>
-                      <label className="ptx-evidence-label">Evidência detetada na tua resposta
-                        <textarea rows={2} value={evidence.evidence||""} onChange={event=>updateCriterion(row,criterion.id,{evidence:event.target.value})} placeholder="Ex.: no 2.º período relacionei a permanência na praça com os encontros e as esplanadas." />
-                      </label>
+                      <div className="ptx-criterion-levels is-locked"><span className={evidence.status?`is-${evidence.status}`:""}>{level?.label||"Por confirmar"}</span></div>
+                      {evidence.evidence&&<div className="ptx-evidence-label"><span>Evidência detetada na tua resposta</span><p>“{evidence.evidence}”</p></div>}
                       <div className={`ptx-criterion-feedback is-${feedback.kind}`}><strong>{feedback.title}</strong><p>{feedback.message}</p></div>
                     </div>;
                   })}
                   {criteria.length>0&&<div className="ptx-next-step">
-                    <strong>{summary.complete?"Avaliação automática concluída":"Próximo passo sugerido"}</strong>
-                    <p>{summary.complete?`Revê sobretudo os critérios marcados como “Parcial” (${summary.counts.partial}) ou “Ainda não” (${summary.counts["not-yet"]}) e melhora apenas essas partes da resposta.`:summary.nextCriterion?`Continua pelo critério: ${summary.nextCriterion.label}`:"Continua a comparar a tua resposta com a grelha."}</p>
-                    <span>{summary.counts.withEvidence}/{summary.total} critérios com evidência escrita</span>
+                    <strong>Resposta submetida e fechada</strong>
+                    <p>Lê a correção e revê os critérios em falta. Esta tentativa não pode ser alterada depois de veres a avaliação.</p>
+                    <span>{summary.counts.withEvidence}/{summary.total} critérios com evidência detetada</span>
                   </div>}
                 </section>
-                <section className="ptx-revision-loop" aria-label={`Melhoria da resposta ${row.id}`}>
-                  <div className="ptx-revision-head"><div><span>Nova versão</span><h4>Melhora a resposta com base na avaliação da app</h4></div>{!editing&&<button className="ptx-primary" onClick={()=>startRevision(row)}>Melhorar resposta</button>}</div>
-                  {editing&&<div className="ptx-revision-editor"><textarea rows={7} value={revisionDrafts[row.id]} onChange={event=>setRevisionDrafts(current=>({...current,[row.id]:event.target.value}))}/><div className="ptx-revision-actions"><button className="ptx-ghost" onClick={()=>cancelRevision(row.id)}>Cancelar</button><button className="ptx-primary" disabled={!String(revisionDrafts[row.id]||"").trim()||String(revisionDrafts[row.id]||"").trim()===String(value||"").trim()} onClick={()=>saveRevision(row)}>Guardar nova versão</button></div></div>}
-                  {rowRevisions.map(revision=>{
-                    const progress=selfAssessmentProgress(criteria,revision.assessmentBefore||{},revision.assessmentAfter||{});
-                    return <div className="ptx-revision-record" key={revision.sequence}>
-                      <PortugueseWritingCycleSummary criteria={criteria} before={revision.assessmentBefore||{}} after={revision.assessmentAfter||{}} revisionCount={revision.sequence}/>
-                      <div className="ptx-revision-compare">
-                        <div><span>Antes · versão {revision.sequence}</span><p>{revision.before}</p></div><div><span>Depois · versão {revision.sequence}</span><p>{revision.after}</p></div>
-                        <small>Critérios trabalhados: {revision.targetedCriterionIds.length?revision.targetedCriterionIds.map(id=>criteria.find(criterion=>criterion.id===id)?.label||id).join(" · "):"revisão geral"}</small>
-                      </div>
-                      <div className={`ptx-improvement-insight ${progress.changed?"has-change":""}`}>
-                        <strong>O que mudou na avaliação</strong>
-                        {!progress.changed?<p>A app volta a avaliar a nova versão e compara os critérios automaticamente.</p>:<>
-                          {progress.upgraded.length>0&&<p><b>Critérios que assinalaste como melhores:</b> {progress.upgraded.map(entry=>`${entry.label} (${entry.from} → ${entry.to})`).join(" · ")}</p>}
-                          {progress.newlyAssessed.length>0&&<p><b>Critérios avaliados depois da revisão:</b> {progress.newlyAssessed.map(entry=>`${entry.label} → ${entry.to}`).join(" · ")}</p>}
-                          {progress.evidenceAdded.length>0&&<p><b>Nova evidência identificada:</b> {progress.evidenceAdded.map(entry=>entry.label).join(" · ")}</p>}
-                          {progress.evidenceChanged.length>0&&<p><b>Evidência reformulada:</b> {progress.evidenceChanged.map(entry=>entry.label).join(" · ")}</p>}
-                          {progress.reconsidered.length>0&&<p><b>Critérios que reavaliaste de forma mais exigente:</b> {progress.reconsidered.map(entry=>`${entry.label} (${entry.from} → ${entry.to})`).join(" · ")}</p>}
-                          {progress.stillNeedsWork.length>0&&<p><b>Ainda a trabalhar:</b> {progress.stillNeedsWork.map(entry=>`${entry.label} (${entry.status})`).join(" · ")}</p>}
-                        </>}
-                      </div>
-                    </div>;
-                  })}
-                </section>
-                <p className="ptx-pending-note">A avaliação automática, a comparação entre versões e a evolução ficam guardadas nesta tentativa. Quando a correção não é determinística, a classificação mantém-se provisória.</p>
+                <p className="ptx-pending-note">A resposta fica guardada tal como foi submetida. Quando a correção não é determinística, a classificação mantém-se provisória.</p>
               </>}
             </article>;
           })}
