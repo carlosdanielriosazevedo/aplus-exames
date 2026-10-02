@@ -45,7 +45,18 @@ for(const row of rows.filter(row=>["excellent","paraphrase"].includes(row.catego
   if(!pairGroups.has(key))pairGroups.set(key,{});
   pairGroups.get(key)[row.category]=row;
 }
-const paraphrasePairs=[...pairGroups.entries()].flatMap(([key,pair])=>pair.excellent&&pair.paraphrase?[{key,delta:Math.abs(pair.excellent.score-pair.paraphrase.score),excellent:pair.excellent.score,paraphrase:pair.paraphrase.score}]:[]);
+const paraphrasePairs=[...pairGroups.entries()].flatMap(([key,pair])=>pair.excellent&&pair.paraphrase?[{
+  key,
+  subject:pair.excellent.subject,
+  itemId:pair.excellent.itemId,
+  delta:Math.abs(pair.excellent.score-pair.paraphrase.score),
+  excellent:pair.excellent.score,
+  paraphrase:pair.paraphrase.score,
+  excellentReview:pair.excellent.review,
+  paraphraseReview:pair.paraphrase.review,
+  excellentDiagnosis:pair.excellent.diagnosis,
+  paraphraseDiagnosis:pair.paraphrase.diagnosis
+}]:[]);
 const unstableParaphrases=paraphrasePairs.filter(row=>row.delta>.22);
 
 const diagnosticCases=[
@@ -87,6 +98,7 @@ const metrics={
   unstableParaphraseRate:pct(unstableParaphrases.length/Math.max(1,paraphrasePairs.length)),
   diagnosticCases:diagnosticRows.length,
   diagnosticAccuracy:pct(diagnosticRows.filter(row=>row.pass).length/diagnosticRows.length),
+  paraphrasePairs:paraphrasePairs.map(row=>({...row,delta:pct(row.delta),excellent:pct(row.excellent),paraphrase:pct(row.paraphrase)})),
   failures:{
     strongUndercredited:strongUndercredited.map(row=>`${row.subject}/${row.itemId}/${row.category}`),
     wrongOvercredited:wrongOvercredited.map(row=>`${row.subject}/${row.itemId}/${row.category}`),
@@ -106,6 +118,12 @@ console.log(`Paraphrase mean score delta: ${metrics.meanParaphraseScoreDelta}pp`
 console.log(`Unstable paraphrases: ${metrics.unstableParaphraseRate}%`);
 console.log(`Diagnostic accuracy: ${metrics.diagnosticAccuracy}% (${diagnosticRows.filter(row=>row.pass).length}/${diagnosticRows.length})`);
 console.log("Human agreement: NOT MEASURED (requires independent teacher labels)");
+if(unstableParaphrases.length){
+  console.log("Unstable excellent↔paraphrase pairs:");
+  for(const row of unstableParaphrases){
+    console.log(`  ${row.key}: excellent ${pct(row.excellent)}% · paraphrase ${pct(row.paraphrase)}% · Δ ${pct(row.delta)}pp · review ${row.excellentReview}/${row.paraphraseReview} · diagnosis ${row.excellentDiagnosis||"—"}/${row.paraphraseDiagnosis||"—"}`);
+  }
+}
 
 writeFileSync(new URL("../grader-quality-report.json",import.meta.url),JSON.stringify(metrics,null,2));
 
