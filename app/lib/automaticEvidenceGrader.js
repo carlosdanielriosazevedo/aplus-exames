@@ -196,7 +196,7 @@ function contradictionDetected(response,evidenceTexts=[]){
   if(catalyst){
     const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","aumenta o valor de kc","diminui o valor de kc","altera o valor de kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
     const wrongComposition=["altera a composicao","muda a composicao","modifica a composicao"].some(row=>normalized.includes(row));
-    const protectsKc=["nao altera kc","nao modifica kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
+    const protectsKc=["nao altera kc","nao modifica kc","nao muda kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
     const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos")||normalized.includes("nao acelera os dois sentidos");
     if(((wrongKc||wrongComposition)&&!protectsKc)||deniesTwoDirections)return true;
   }
