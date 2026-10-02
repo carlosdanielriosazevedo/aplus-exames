@@ -10,6 +10,8 @@ const contradiction=diagnoseOpenResponseError([
   {id:"c2",status:"observed",contradictionDetected:false}
 ],"Resposta longa com uma ideia correta e outra contraditória.");
 check(contradiction.code==="conceptual_contradiction","Open response: contradiction should diagnose conceptual_contradiction");
+check(contradiction.primaryCriterion?.id==="c1","Open response: diagnosis should identify the affected criterion");
+check(contradiction.grounding?.source==="student-response","Open response: diagnosis should be grounded in the student response");
 
 const nonresponsive=diagnoseOpenResponseError([
   {id:"c1",status:"not-observed",contradictionDetected:false},
@@ -39,10 +41,12 @@ check(resultOnly.errorDiagnosis?.code==="result_only","Mathematics: result-only 
 
 const localSlip=gradeMathResponse(fullItem,{steps:{derivative:"f'(x)=3x^2-2",substitution:"3*2^2-2",value:"11"}});
 check(["calculation_error","calculation_slip","mixed_error"].includes(localSlip.errorDiagnosis?.code),"Mathematics: local slip should expose a calculation diagnosis");
+check(localSlip.errorDiagnosis?.primaryStep?.id,"Mathematics: diagnosis should identify the affected step");
+check(localSlip.errorDiagnosis?.grounding?.source==="student-working","Mathematics: diagnosis should be grounded in student working");
 
 console.log("=== ERROR DIAGNOSIS AUDIT ===");
-console.log("Open-response diagnosis taxonomy: 4 core cases checked");
-console.log("Mathematics diagnosis taxonomy: correct, result-only and local-slip checked");
+console.log("Open-response diagnosis taxonomy: 4 core cases + criterion grounding checked");
+console.log("Mathematics diagnosis taxonomy: correct, result-only, local-slip + step grounding checked");
 
 if(failures.length){
   console.error("\nERROR DIAGNOSIS AUDIT FAILED ("+failures.length+" issues)");
