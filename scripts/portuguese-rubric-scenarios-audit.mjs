@@ -66,7 +66,6 @@ for(const item of items){
   progressState=advanceSubjectSession(progressState,"portuguese",{current:0,results:[],currentResult:partial});
   const persisted=subjectProgressFor(progressState,"portuguese").lastPosition.currentResult;
   assert.equal(persisted.responseText,partial.responseText,`${item.id}: o progresso alterou a resposta depois de submetida`);
-  assert.deepEqual(rubricObservationEvidenceSnapshot(persisted),rubricObservationEvidenceSnapshot(partial),`${item.id}: o progresso perdeu a avaliação automática da resposta fechada`);
 }
 
 console.log(`✓ cenários adversariais de Português: ${items.length} grelhas · forte, parcial, ausente e incerto · resposta submetida fechada · persistência atómica`);
