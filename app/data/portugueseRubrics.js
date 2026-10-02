@@ -12,7 +12,16 @@ const CONTENT_OBSERVATIONS={
   "PT639-FND-047":["Explica que a disponibilização de recipientes aumentou a reciclagem.","Distingue esse aumento da separação correta dos resíduos."],
   "PT639-FND-051":["Relaciona o crescimento da árvore com o tempo decorrido desde a partida.","Explica o valor da sombra que já alcança a janela."],
   "PT639-FND-053":["Relaciona a repetição de «Volto» com o regresso aos lugares.","Explica como a quebra final mostra a impossibilidade de recuperar a identidade passada."],
-  "PT639-FND-058":["Explica uma vantagem da informação em tempo real.","Explica uma segunda vantagem distinta da primeira."]
+  "PT639-FND-058":["Explica uma vantagem da informação em tempo real.","Explica uma segunda vantagem distinta da primeira."],
+  "PT639-FND-311":["Problema ou dificuldade inicial.","Alternativas ou soluções possíveis.","Condições necessárias para as soluções funcionarem.","Sequência das ideias torna o raciocínio claro."],
+  "PT639-FND-313":["Consequências ou benefícios concretos da proposta.","Esses efeitos apoiam a posição defendida."],
+  "PT639-FND-315":["Identifica a horta como referente de «Esta iniciativa».","Explica que a expressão retoma ou recupera esse referente e evita repetição.","Explica que «por isso» introduz uma consequência.","Relaciona «por isso» com a ligação lógica entre as frases."],
+  "PT639-FND-317":["O pronome «o» representa ou retoma «o relatório».","Evita repetir ou voltar a escrever o nome e mantém o mesmo objeto ou referente entre as duas ações."],
+  "PT639-FND-322":["Identifica a primeira oração como temporal.","Explica que a primeira oração indica o momento da ação principal.","Identifica a segunda oração como relativa restritiva.","Explica que a segunda oração limita ou identifica mais precisamente a atividade referida."]
+};
+
+const LOCAL_CRITERION_LABELS={
+  "PT639-FND-317:conteudo":"O pronome «o» retoma «o relatório» e evita repetir o nome."
 };
 
 const SPECIAL_OBSERVATIONS={
@@ -52,6 +61,7 @@ function genericObservations(item,criterion){
 export function applyPortugueseRubricObservations(items){
   return items.map(item=>item.rubric?{...item,rubric:{...item.rubric,criteria:item.rubric.criteria.map(criterion=>{
     const labels=SPECIAL_OBSERVATIONS[`${item.id}:${criterion.id}`]||genericObservations(item,criterion);
-    return {...criterion,observations:labels.map((label,index)=>({id:`${criterion.id}-${index+1}`,label}))};
+    const localLabel=LOCAL_CRITERION_LABELS[`${item.id}:${criterion.id}`]||criterion.label;
+    return {...criterion,label:localLabel,observations:labels.map((label,index)=>({id:`${criterion.id}-${index+1}`,label}))};
   })}}:item);
 }

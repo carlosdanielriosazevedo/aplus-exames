@@ -29,6 +29,9 @@ jobs:
       - name: Technical gate
         run: npm run technical:gate
 
+      - name: Grader quality report
+        run: node scripts/grader-quality-report.mjs
+
       - name: Content readiness report
         run: npm run content:readiness
 
