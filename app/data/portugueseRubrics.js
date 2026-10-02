@@ -13,10 +13,10 @@ const CONTENT_OBSERVATIONS={
   "PT639-FND-051":["Relaciona o crescimento da árvore com o tempo decorrido desde a partida.","Explica o valor da sombra que já alcança a janela."],
   "PT639-FND-053":["Relaciona a repetição de «Volto» com o regresso aos lugares.","Explica como a quebra final mostra a impossibilidade de recuperar a identidade passada."],
   "PT639-FND-058":["Explica uma vantagem da informação em tempo real.","Explica uma segunda vantagem distinta da primeira."],
-  "PT639-FND-311":["Identifica um problema ou dificuldade como ponto de partida da exposição.","Identifica alternativas ou soluções apresentadas em seguida.","Identifica condições necessárias para concretizar essas soluções.","Relaciona a progressão das ideias com a clareza e a compreensão do leitor."],
-  "PT639-FND-313":["Apresenta efeitos concretos da proposta, como mais tempo de estudo ou apoio a quem não consegue estudar bem em casa.","Liga esses efeitos concretos à posição defendida, mostrando como a sustentam."],
+  "PT639-FND-311":["Problema ou dificuldade inicial.","Alternativas ou soluções possíveis.","Condições necessárias para as soluções funcionarem.","Sequência das ideias torna o raciocínio claro."],
+  "PT639-FND-313":["Consequências ou benefícios concretos da proposta.","Esses efeitos apoiam a posição defendida."],
   "PT639-FND-315":["Identifica a horta como referente de «Esta iniciativa».","Explica que a expressão retoma ou recupera esse referente e evita repetição.","Explica que «por isso» introduz uma consequência.","Relaciona «por isso» com a ligação lógica entre as frases."],
-  "PT639-FND-317":["Identifica «o relatório» como o objeto ou referente retomado pelo pronome «o».","Explica que o pronome evita repetir o nome e mantém a ligação entre as duas ações."],
+  "PT639-FND-317":["O pronome «o» representa ou retoma «o relatório».","Evita repetir o nome e liga as duas ações ao mesmo objeto."],
   "PT639-FND-322":["Identifica a primeira oração como temporal.","Explica que a primeira oração indica o momento da ação principal.","Identifica a segunda oração como relativa restritiva.","Explica que a segunda oração limita ou identifica mais precisamente a atividade referida."]
 };
 
