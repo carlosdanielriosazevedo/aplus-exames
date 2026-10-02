@@ -93,7 +93,7 @@ const metrics={
   partialExtremeRate:pct(partialExtremes.length/Math.max(1,partial.length)),
   vagueOvercreditRate:pct(vagueOvercredited.length/Math.max(1,vague.length)),
   reviewRate:pct(reviewRate),
-  paraphrasePairs:paraphrasePairs.length,
+  paraphrasePairCount:paraphrasePairs.length,
   meanParaphraseScoreDelta:pct(mean(paraphrasePairs.map(row=>row.delta))),
   unstableParaphraseRate:pct(unstableParaphrases.length/Math.max(1,paraphrasePairs.length)),
   diagnosticCases:diagnosticRows.length,
