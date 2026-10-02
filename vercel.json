@@ -1,8 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npx next build && npm run performance:budget",
   "git": {
     "deploymentEnabled": {
       "main": true,
+      "codex/integration-next": false,
+      "codex/*": false,
+      "chore/*": false,
       "*": false
     }
   }
