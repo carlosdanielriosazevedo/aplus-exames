@@ -35,7 +35,7 @@ assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject mana
 assert.match(page,/if\(preview==="subjects"\)/);
 assert.match(welcome,/segment === "parent" \? "parent" : "subjectOnboard"/);
 assert.match(page,/disabled=\{!subject\.available\}/);
-assert.match(page,/Disponíveis agora: Matemática A, Português e Física e Química A\./u);
+assert.match(page,/Atualmente disponíveis: Matemática A, Português e Física e Química A\./u);
 assert.match(chrome,/className="subjectSwitcher"/,"the shared student header must expose the active subject switcher");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="portuguese"/,"Portuguese must use the same semantic workspace destinations as Mathematics A");
 assert.match(page,/\["home","train","progress","exams"\]\.includes\(screen\)&&s\.activeSubjectId==="physics-chemistry-a"/,"Física e Química A must use the same semantic workspace destinations as Mathematics A");

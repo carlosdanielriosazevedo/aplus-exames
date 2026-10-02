@@ -107,12 +107,13 @@ describe("respostas abertas e grelha",()=>{
     const result=gradePortugueseResponse(restricted,"Esta resposta apresenta uma ideia central clara.");
     expect(result).toMatchObject({
       final:false,
-      status:"awaiting-rubric",
+      status:"auto-assessed-provisional",
       points:null,
       correct:null,
-      gradingMode:"rubric-assisted-provisional",
-      rubricCompleted:false
+      gradingMode:"automatic-rubric-provisional",
+      rubricCompleted:true
     });
+    expect(result.feedbackSummary?.errorDiagnosis).toBeTruthy();
   });
 
   it("regista cumprimento do limite de palavras sem o converter em nota",()=>{
@@ -132,11 +133,12 @@ describe("respostas abertas e grelha",()=>{
     expect(result.finalScore).toBeNull();
   });
 
-  it("só marca a grelha concluída quando todas as observações têm estado válido",()=>{
+  it("mantém a grelha automática concluída quando o aluno revê observações",()=>{
     let result=gradePortugueseResponse(restricted,"A resposta apresenta a ideia central e usa evidência.");
+    expect(result.rubricCompleted).toBe(true);
     result=assessPortugueseRubricObservation(result,"c1","o1","observed");
     result=assessPortugueseRubricObservation(result,"c1","o2","observed");
-    expect(result.rubricCompleted).toBe(false);
+    expect(result.rubricCompleted).toBe(true);
     result=assessPortugueseRubricObservation(result,"c2","o3","partial");
     expect(result.rubricCompleted).toBe(true);
     expect(result.status).toBe("self-assessed-awaiting-review");
@@ -154,7 +156,7 @@ describe("respostas abertas e grelha",()=>{
   it("produz snapshots de critérios e observações",()=>{
     let result=gradePortugueseResponse(restricted,"Uma resposta suficientemente longa para ficar guardada.");
     result=assessPortugueseRubricObservation(result,"c1","o1","observed");
-    expect(rubricEvidenceSnapshot(result)).toContainEqual({criterionId:"c1",evidence:"pending"});
+    expect(rubricEvidenceSnapshot(result)).toContainEqual({criterionId:"c1",evidence:"partial"});
     expect(rubricObservationEvidenceSnapshot(result)).toContainEqual(expect.objectContaining({
       criterionId:"c1",observationId:"o1",evidence:"observed"
     }));

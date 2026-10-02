@@ -41,7 +41,7 @@ const SYNONYM_GROUPS=[
   ["conclusao","concluir","final"],
   ["estrutura","organizacao","progressao"],
   ["coerencia","ligacao","articulacao"],
-  ["temperatura","calor","aquecimento"],
+  ["temperatura","calor","aquecimento","aquecer","aquecido","aquecida"],
   ["kc","constante"],
   ["composicao","proporcao","proporcoes"],
   ["manter","mantem","inalterado"],
@@ -63,13 +63,19 @@ const SYNONYM_GROUPS=[
 const PHRASE_EQUIVALENTS=[
   ["nao altera","concept-nonchange"],
   ["nao modifica","concept-nonchange"],
+  ["nao muda","concept-nonchange"],
+  ["nao muda","concept-nonchange"],
   ["fica inalterado","concept-nonchange"],
   ["mantem se","concept-nonchange"],
   ["permanece igual","concept-nonchange"],
   ["sentido direto e inverso","concept-two-directions"],
   ["dois sentidos","concept-two-directions"],
+  ["ida+volta","concept-two-directions"],
+  ["ida volta","concept-two-directions"],
   ["quantidades relativas","concept-composition"],
   ["proporcao dos componentes","concept-composition"],
+  ["composicao final","concept-composition"],
+  ["composicao de equilibrio","concept-composition"],
   ["passagem do tempo","concept-time-passing"],
   ["nao para","concept-time-passing"],
   ["nao espera","concept-time-passing"],
@@ -82,7 +88,10 @@ const PHRASE_EQUIVALENTS=[
   ["emissao de um fotao","concept-photon-emission"],
   ["nos dois pontos","concept-two-points"],
   ["em dois pontos","concept-two-points"],
-  ["em ambos","concept-two-points"]
+  ["em ambos","concept-two-points"],
+  ["ida+volta","concept-two-directions"],
+  ["ida e volta","concept-two-directions"],
+  ["m h e v","massa altura velocidade"]
 ];
 
 const SYNONYM_MAP=new Map();
@@ -152,14 +161,42 @@ function relationScore(response,cues){
   return best;
 }
 
+function responseAfterExplicitCorrection(response){
+  const raw=String(response??"");
+  const normalized=normalizeEvidenceText(raw);
+  const markers=[
+    "corrigindo",
+    "corrijo",
+    "correcao",
+    "retifico",
+    "retificando",
+    "na verdade",
+    "pensando melhor",
+    "melhor dizendo"
+  ];
+  let bestIndex=-1;
+  let bestMarker="";
+  for(const marker of markers){
+    const index=normalized.lastIndexOf(marker);
+    if(index>bestIndex){
+      bestIndex=index;
+      bestMarker=marker;
+    }
+  }
+  if(bestIndex<0)return raw;
+  const tail=normalized.slice(bestIndex+bestMarker.length).trim();
+  if(tail.split(" ").filter(Boolean).length<4)return raw;
+  return tail;
+}
+
 function contradictionDetected(response,evidenceTexts=[]){
-  const normalized=normalizeEvidenceText(response);
+  const normalized=normalizeEvidenceText(responseAfterExplicitCorrection(response));
   const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
-    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
+    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","aumenta o valor de kc","diminui o valor de kc","altera o valor de kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
     const wrongComposition=["altera a composicao","muda a composicao","modifica a composicao"].some(row=>normalized.includes(row));
-    const protectsKc=["nao altera kc","nao modifica kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
+    const protectsKc=["nao altera kc","nao modifica kc","nao muda kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
     const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos")||normalized.includes("nao acelera os dois sentidos");
     if(((wrongKc||wrongComposition)&&!protectsKc)||deniesTwoDirections)return true;
   }
@@ -182,7 +219,16 @@ function contradictionDetected(response,evidenceTexts=[]){
       "deslocamento e dado pelo declive",
       "deslocamento calcula se pelo declive"
     ].some(row=>normalized.includes(row));
-    if(displacementAsSlope)return true;
+    const algebraicAreaAsDistance=
+      (normalized.includes("area algebrica")||normalized.includes("area"))&&
+      normalized.includes("distancia")&&
+      (
+        normalized.includes("representa a distancia")||
+        normalized.includes("corresponde a distancia")||
+        normalized.includes("da a distancia")||
+        normalized.includes("distancia total")
+      );
+    if(displacementAsSlope||algebraicAreaAsDistance)return true;
   }
   if(expected.includes("distancia")&&expected.includes("deslocamento")){
     if(normalized.includes("distancia")&&normalized.includes("deslocamento")&&normalized.includes("sempre iguais"))return true;
@@ -222,12 +268,14 @@ function contradictionDetected(response,evidenceTexts=[]){
       normalized.includes("enfraquecem")||
       normalized.includes("nao sao necessarias")||
       normalized.includes("nao justificam")||
-      normalized.includes("nao constituem razoes")
+      normalized.includes("nao constituem razoes")||
+      normalized.includes("nao funcionam como razoes")
     ))return true;
   }
   if(expected.includes("consequencia")&&normalized.includes("por isso")&&(normalized.includes("oposicao")||normalized.includes("contraste")))return true;
   if(expected.includes("padrao")&&expected.includes("elemento")){
     if((normalized.includes("frequencias")||normalized.includes("riscas"))&&normalized.includes("iguais")&&(normalized.includes("nao permite")||normalized.includes("nao permitem")))return true;
+    if(normalized.includes("mesmo conjunto de energias")||normalized.includes("energias emitidas sao iguais")||normalized.includes("energias iguais para todos"))return true;
   }
   if(expected.includes("traco")||expected.includes("menisco")){
     if(normalized.includes("ultrapassar")&&normalized.includes("traco"))return true;
@@ -242,7 +290,8 @@ function contradictionDetected(response,evidenceTexts=[]){
     if((normalized.includes("menor distancia")||normalized.includes("diminuir a distancia"))&&normalized.includes("incerteza"))return true;
   }
   if(expected.includes("proporcao estequiometrica")||expected.includes("equivalencia")){
-    if(normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
+    const rejectsUniversalPh7=normalized.includes("nao e sempre ph 7")||normalized.includes("nem sempre ph 7")||normalized.includes("nao ocorre sempre a ph 7");
+    if(!rejectsUniversalPh7&&normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
     if(
       normalized.includes("equivalencia nao corresponde")||
       normalized.includes("nao corresponde a proporcao estequiometrica")||
@@ -286,6 +335,10 @@ function contradictionDetected(response,evidenceTexts=[]){
     normalized.includes("declive nao representa aceleracao")
   ))return true;
 
+  if(
+    normalized.includes("area algebrica representa a distancia total")||
+    normalized.includes("area representa a distancia total")
+  )return true;
   if(expected.includes("deslocamento")&&expected.includes("area")&&(
     normalized.includes("area algebrica nao representa o deslocamento")||
     normalized.includes("area nao representa o deslocamento")||
@@ -387,6 +440,47 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
   };
 }
 
+export function diagnoseOpenResponseError(criteria=[],responseText=""){
+  const normalized=normalizeEvidenceText(responseText);
+  const contradictions=criteria.filter(row=>row.contradictionDetected);
+  const observed=criteria.filter(row=>row.status==="observed");
+  const partial=criteria.filter(row=>row.status==="partial");
+  const missing=criteria.filter(row=>row.status==="not-observed");
+  const wordCount=normalized.split(" ").filter(Boolean).length;
+
+  let code="correct_or_near_correct";
+  let label="Resposta essencialmente correta";
+  let message="A resposta cobre os elementos principais pedidos.";
+
+  if(contradictions.length){
+    code="conceptual_contradiction";
+    label="Contradição conceptual";
+    message="Há uma ideia na resposta que entra em conflito com o conceito esperado. Revê essa relação antes da próxima questão.";
+  }else if(observed.length===0&&partial.length===0&&wordCount>=8){
+    code="related_but_nonresponsive";
+    label="Resposta relacionada, mas não suficiente";
+    message="A resposta fala do tema, mas não demonstra diretamente o que a pergunta pede.";
+  }else if(missing.length&&observed.length){
+    code="incomplete_answer";
+    label="Resposta incompleta";
+    message="Parte do raciocínio está correta, mas falta pelo menos um elemento necessário para fechar a resposta.";
+  }else if(partial.length){
+    code="insufficient_justification";
+    label="Justificação insuficiente";
+    message="A ideia principal aparece, mas precisa de ser explicada ou ligada melhor ao pedido.";
+  }else if(wordCount>0&&wordCount<8){
+    code="too_terse";
+    label="Resposta demasiado curta";
+    message="A resposta pode estar no caminho certo, mas falta explicitar o raciocínio necessário para o corretor o confirmar com segurança.";
+  }
+
+  return {
+    code,label,message,
+    confidence:contradictions.length?"high":observed.length||partial.length?"medium":"low",
+    affectedCriteria:[...contradictions,...missing,...partial].map(row=>row.id).filter(Boolean)
+  };
+}
+
 export function automaticFeedbackForCriteria(criteria=[],responseText=""){
   const strengths=[];
   const gaps=[];
@@ -417,10 +511,12 @@ export function automaticFeedbackForCriteria(criteria=[],responseText=""){
     :gapCount
       ?(gapCount===1?"Revê o ponto em falta e procura demonstrá-lo melhor numa próxima questão.":"Revê os pontos em falta e procura demonstrá-los melhor nas próximas questões.")
       :"A resposta cobre os critérios principais. Revê apenas clareza, precisão e linguagem.";
+  const errorDiagnosis=diagnoseOpenResponseError(criteria,responseText);
   return {
     strengths,gaps,contradictions,
     foundCount,gapCount,
     nextAction,
+    errorDiagnosis,
     hasEvidence:strengths.some(row=>row.evidence)||gaps.some(row=>row.evidence),
     responseText:String(responseText||"")
   };

@@ -65,14 +65,14 @@ assert.match(component,/Guardar revisão e voltar aos mini-exames/u,"a revisão 
 assert.match(component,/Terminar e rever o exame/u,"o fim deve encaminhar diretamente para a revisão");
 assert.doesNotMatch(component,/Voltar às respostas/u,"um exame já terminado não deve regressar ao fluxo de resposta");
 assert.match(route,/recordSubjectSession/u,"a conclusão deve ficar no progresso canónico da disciplina");
-assert.match(component,/não atribui automaticamente uma classificação final/u,"a execução não pode transformar resposta aberta em nota automática");
+assert.match(component,/classificação mantém-se provisória/u,"a execução deve explicar quando a classificação automática continua provisória");
 assert.match(component,/const \[selfAssessment,setSelfAssessment\]=useState\(\(\)=>initialDraft\?\.selfAssessment\|\|\{\}\)/u,"a revisão deve recuperar e guardar a autoavaliação por critério na tentativa");
 assert.match(component,/PORTUGUESE_SELF_ASSESSMENT_LEVELS/u,"a autoavaliação deve consumir estados explícitos da camada pedagógica");
 assert.match(component,/criterionFeedback/u,"a revisão deve produzir feedback pedagógico por critério");
 assert.match(component,/selfAssessmentSummary/u,"a revisão deve calcular o próximo passo sem produzir nota");
-assert.match(component,/Onde está a evidência na tua resposta\?/u,"a revisão deve recolher evidência textual por critério");
+assert.match(component,/Evidência detetada na tua resposta/u,"a revisão deve mostrar a evidência textual detetada pelo corretor");
 assert.match(component,/row\.rubric\?\.criteria/u,"os critérios apresentados devem vir da grelha editorial do item");
-assert.match(component,/critérios com evidência escrita/u,"a revisão deve tornar visível o progresso de evidência");
+assert.match(component,/critérios com evidência detetada/u,"a revisão deve tornar visível o progresso de evidência");
 assert.match(component,/pendingOpenReviewRows/u,"Português deve distinguir respostas abertas concluídas das ainda por rever.");
 assert.match(component,/Ir para a próxima por rever/u,"Português deve ter o mesmo atalho de revisão usado em FQ A.");
 assert.match(component,/Revisão concluída/u,"cada resposta aberta deve mostrar quando a revisão por critérios terminou.");
@@ -82,20 +82,11 @@ assert.match(component,/Exame Completo/u,"a nomenclatura do exame longo deve est
 assert.match(globalCss,/\.ptx-review-progress\{/u,"Português deve mostrar um resumo visual da revisão por critérios.");
 assert.match(component,/pendingOpenReviewRows\.length>0/u,"Português deve guardar e sair sem finalizar quando a revisão ainda tem pendências.");
 
-assert.match(component,/const \[revisionDrafts,setRevisionDrafts\]=useState\(\(\)=>initialDraft\?\.revisionDrafts\|\|\{\}\)/u,"o aluno deve poder recuperar e preparar uma nova versão sem destruir a anterior");
-assert.match(component,/const \[revisions,setRevisions\]=useState\(\(\)=>initialDraft\?\.revisions\|\|\{\}\)/u,"o histórico de revisões deve ficar separado da resposta atual e sobreviver a interrupções");
-assert.match(component,/function revisionTargets/u,"a revisão deve associar a nova versão aos critérios que o aluno tentou melhorar");
-assert.match(component,/\["partial","not-yet"\]/u,"lacunas e cumprimento parcial devem ter prioridade como alvos de melhoria");
-assert.match(component,/targetedCriterionIds/u,"cada revisão deve guardar os critérios trabalhados");
-assert.match(component,/criteria\.find\(criterion=>criterion\.id===id\)\?\.label/u,"o histórico deve resolver o rótulo pelo ID exato do critério trabalhado");
-assert.match(component,/before,after/u,"cada revisão deve preservar explicitamente versões antes e depois");
-assert.match(component,/Melhorar resposta/u,"a revisão deve oferecer uma ação explícita de melhoria");
-assert.match(component,/Guardar nova versão/u,"a nova redação deve ser confirmada antes de substituir a resposta atual");
-assert.match(component,/Antes · versão/u,"o histórico deve mostrar a versão anterior");
-assert.match(component,/Depois · versão/u,"o histórico deve mostrar a versão melhorada");
-assert.match(component,/respostas abertas melhoradas/u,"o resumo deve tornar visível quantas respostas foram efetivamente revistas");
-assert.match(css,/\.ptx-revision-compare\{[^}]*grid-template-columns:1fr 1fr/u,"desktop deve comparar antes/depois lado a lado");
-assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-revision-compare\{grid-template-columns:1fr\}/u,"mobile deve empilhar a comparação antes/depois");
+assert.match(component,/Resposta submetida e fechada/u,"a revisão deve deixar explícito que a tentativa não pode ser alterada depois da correção");
+assert.match(component,/Esta tentativa não pode ser alterada depois de veres a avaliação/u,"a regra de resposta fechada deve ser explicada ao aluno");
+assert.match(component,/ptx-criterion-levels is-locked/u,"a avaliação por critérios deve estar bloqueada na revisão");
+assert.doesNotMatch(component,/>Melhorar resposta</u,"a revisão não deve oferecer uma segunda tentativa depois de mostrar a correção");
+assert.doesNotMatch(component,/>Guardar nova versão</u,"a revisão não deve permitir substituir a resposta submetida");
 
 assert.match(component,/writingMemoryProfile/u,"a revisão deve consumir o perfil agregado da memória de escrita");
 assert.match(component,/excludeAttemptId:attemptId/u,"a tentativa atual não pode fabricar o seu próprio padrão histórico");
@@ -131,7 +122,7 @@ assert.match(draftModule,/allowed\.has\(id\)/u,"dados de perguntas alheias ao mi
 assert.match(css,/\.ptx-progress-story\{/u,"a evolução recente deve ter apresentação própria na revisão");
 assert.match(css,/@media\(max-width:820px\)[\s\S]*\.ptx-progress-story-list\{grid-template-columns:1fr\}/u,"o resumo de evolução deve adaptar-se ao mobile");
 
-assert.match(component,/não produz(?:em)? classificação automática final/u,"autoavaliação, revisões e memória não podem ser convertidas numa classificação final");
+assert.match(component,/classificação mantém-se provisória/u,"respostas não determinísticas devem manter a classificação identificada como provisória");
 assert.doesNotMatch(component,/set.*points/iu,"a UI não deve escrever pontuação automática");
 
 const portugueseRow=subjects.match(/\{id:"portuguese"[^\n]+\}/u)?.[0]||"";

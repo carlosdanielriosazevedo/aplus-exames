@@ -557,10 +557,10 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função f(x)=|x| é contínua em0?",
+      "q": "A função f(x)=|x| é contínua em 0?",
       "o": [
         "Sim.",
-        "Não, porque não é derivável em0.",
+        "Não, porque não é derivável em 0.",
         "Só pela direita.",
         "Só pela esquerda."
       ],
@@ -587,12 +587,12 @@
       "q": "A função f(x)=1/(x−2) é contínua em x=2?",
       "o": [
         "Sim.",
-        "Não, nem está definida em2.",
+        "Não, nem está definida em 2.",
         "Sim, porque há assíntota.",
         "Só se definirmos f(2)=0."
       ],
       "a": 1,
-      "sol": "O denominador anula-se em2.",
+      "sol": "O denominador anula-se em 2.",
       "hyp": "Pode pensar que uma assíntota é continuidade 'infinita'.",
       "contexts": [
         "mission",

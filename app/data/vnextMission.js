@@ -19535,7 +19535,7 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2."
     ],
     "a": 2,
-    "sol": "Uma primitiva é x²/2; em1 menos em 0 dá1/2.",
+    "sol": "Uma primitiva é x²/2; em 1 menos em 0 dá1/2.",
     "hyp": "Pode usar f(1)−f(0).",
     "contexts": [
       "mission"

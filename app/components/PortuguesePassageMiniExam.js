@@ -295,6 +295,7 @@ export default function PortuguesePassageMiniExam({exam,examId="mini-1",initialD
                 {automaticResult?.feedbackSummary&&<div className="automaticFeedbackPanel">
                   {automaticResult.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{automaticResult.feedbackSummary.strengths.map(entry=><div key={entry.id}><strong>✓ {entry.label}</strong>{entry.evidence&&<blockquote>“{entry.evidence}”</blockquote>}<span>{entry.message}</span></div>)}</section>}
                   {automaticResult.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{automaticResult.feedbackSummary.gaps.map(entry=><div key={entry.id}><strong>{entry.message}</strong><span>{entry.label}</span></div>)}</section>}
+                  {automaticResult.feedbackSummary.errorDiagnosis&&feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{automaticResult.feedbackSummary.errorDiagnosis.label}:</b> {automaticResult.feedbackSummary.errorDiagnosis.message}</p>}
                   <p className="automaticFeedbackNext"><b>Para melhorar:</b> {automaticResult.feedbackSummary.nextAction}</p>
                 </div>}
                 <details><summary>Ver resposta de referência</summary><p>{row.referenceAnswer}</p></details>

@@ -132,12 +132,12 @@ export function portugueseObservationAction(observation){
   const status=observation?.status;
   if(status==="not-observed")return {
     title:"Falta tornar este elemento visível",
-    action:"Revê este conteúdo e, numa próxima questão, inclui uma formulação que responda diretamente a este ponto.",
+    action:"Acrescenta numa próxima resposta uma formulação que responda diretamente a este ponto, depois de reveres este conteúdo.",
     hint:"Não precisas de copiar a resposta de referência: mostra, com as tuas palavras, onde este elemento fica demonstrado."
   };
   if(status==="partial")return {
     title:"Este elemento está incompleto",
-    action:"Revê este conteúdo e, numa próxima resposta, torna esta ideia mais explícita e desenvolvida.",
+    action:"Desenvolve melhor esta ideia numa próxima resposta: torna-a mais explícita e liga-a diretamente ao que foi pedido.",
     hint:"Procura uma afirmação concreta e verifica se explicas o suficiente para o leitor perceber a relação."
   };
   if(status==="unsure")return {

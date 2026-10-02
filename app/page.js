@@ -2085,6 +2085,7 @@ function PracticeResponse({question,value,onChange,feedback,guided=false}){
     </fieldset>
     {feedback&&<div className="notice"><b>{feedback.reviewRequired?"Avaliação incompleta":feedback.correct?"Muito bem!":feedback.points>0?"Tens etapas corretas":"Vamos rever a resolução"}</b>
       <p>{feedback.points}/{feedback.maxPoints} pontos{feedback.reviewRequired?" confirmados":""}</p>
+      {feedback.errorDiagnosis&&feedback.errorDiagnosis.code!=="correct_or_near_correct"&&<p><b>{feedback.errorDiagnosis.label}:</b> {feedback.errorDiagnosis.message}</p>}
       <div className="stepResults">{feedback.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo: {row.expected}</small>}</div></div>)}</div>
       <p>{question.sol}</p>
     </div>}
@@ -2279,6 +2280,7 @@ function MiniExamCompletedReview({s,setS,go}){
       <div className="reviewItemBody"><h2>{q.q}</h2>
         <div className="reviewAnswer"><small>A tua resposta</small><p>{studentResponseLabel(q,answer)}</p></div>
         {responseType(q)==="completion"&&<div className="stepResults">{q.response.blanks.map(blank=><div key={blank.id} className={answer?.[blank.id]===blank.correct?"correct":"incorrect"}><div><b>{blank.label}</b><small>A tua escolha: {blank.options[answer?.[blank.id]]??"Sem resposta"}</small><small>Resposta correta: {blank.options[blank.correct]}</small></div></div>)}</div>}
+        {grade?.errorDiagnosis&&grade.errorDiagnosis.code!=="correct_or_near_correct"&&<div className="notice"><b>{grade.errorDiagnosis.label}</b><span>{grade.errorDiagnosis.message}</span></div>}
         {grade?.stepResults?.length
           ?<div className="stepResults">{grade.stepResults.map(row=><div key={row.stepId} className={row.status==="needs_review"?"unverified":row.correct?"correct":"incorrect"}><span>{row.status==="needs_review"?"?":row.correct?"✓":"×"}</span><div><b>{row.label} · {row.status==="needs_review"?`${row.maxPoints} pontos não avaliados`:`${row.points}/${row.maxPoints} pontos`}</b><small>{stepFeedback(row)}</small>{!row.correct&&<small>Exemplo de resposta: {row.expected}</small>}</div></div>)}</div>
           :<div className="reviewAnswer correctAnswer"><small>Resposta correta</small><p>{expectedResponseLabel(q)}</p></div>}
