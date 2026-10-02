@@ -60,16 +60,16 @@ const RUBRICS={
   ],
   "FQA-R-WAV-01":[
     {id:"distance",label:"Reduz a incerteza relativa temporal",observations:[
-      {id:"distance-longer",label:"Propõe aumentar a distância de propagação quando o equipamento o permite."},
-      {id:"distance-rationale",label:"Explica que um tempo maior reduz a influência relativa da resolução temporal."}
+      {id:"distance-longer",label:"Usa uma distância maior de propagação."},
+      {id:"distance-rationale",label:"O erro temporal tem menor peso relativo num tempo total maior."}
     ]},
     {id:"repeat",label:"Trata a variabilidade aleatória",observations:[
-      {id:"repeat-many",label:"Propõe várias medições."},
-      {id:"repeat-analysis",label:"Refere média e/ou dispersão dos resultados."}
+      {id:"repeat-many",label:"Repete o ensaio várias vezes."},
+      {id:"repeat-analysis",label:"Compara resultados usando média e/ou dispersão."}
     ]},
     {id:"control",label:"Controla fontes sistemáticas",observations:[
-      {id:"control-delay",label:"Considera atrasos instrumentais."},
-      {id:"control-medium",label:"Controla condições do meio relevantes para a velocidade do som."}
+      {id:"control-delay",label:"Estima ou considera atrasos dos sensores/equipamento."},
+      {id:"control-medium",label:"Mantém controladas as condições ambientais do meio."}
     ]}
   ],
   "FQA-R-EQ-01":[
