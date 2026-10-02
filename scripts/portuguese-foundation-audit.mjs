@@ -50,6 +50,6 @@ for(const year of ["10.º","11.º","12.º"])assert.ok(allItems.filter(item=>item
 
 const answerPositions=allItems.filter(item=>item.responseType==="multiple-choice").reduce((counts,item)=>{counts[item.answerIndex]+=1;return counts;},[0,0,0,0]);
 const mcTotal=answerPositions.reduce((sum,n)=>sum+n,0); for(const n of answerPositions)assert.ok(n/mcTotal>=0.12&&n/mcTotal<=0.40,`posição correta demasiado concentrada: ${answerPositions.join("/")}`);
-assert.match(page,/Disponíveis agora: Matemática A, Português e Física e Química A\./u); assert.match(page,/preview==="portuguese"/); assert.match(portugueseSubject,/function PortugueseSubject\(/);
+assert.match(page,/Atualmente disponíveis: Matemática A, Português e Física e Química A\\./u); assert.match(page,/preview==="portuguese"/); assert.match(portugueseSubject,/function PortugueseSubject\(/);
 assert.equal((runtimeContent.match(/portuguese-639-(?:pilot|wave\d+)\.json/g)||[]).length,18,"O runtime deve agregar piloto + dezassete vagas."); assert.match(runtimeContent,/flatMap\(pack=>pack\.items\)/);
 console.log(`✓ Portuguese 639 foundation: 18 pacotes · 334 itens · 16 competências escritas · distribuição por domínio ${JSON.stringify(domainCounts)} · release ainda bloqueado`);
