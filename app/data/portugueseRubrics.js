@@ -16,7 +16,7 @@ const CONTENT_OBSERVATIONS={
   "PT639-FND-311":["Problema ou dificuldade inicial.","Alternativas ou soluções possíveis.","Condições necessárias para as soluções funcionarem.","Sequência das ideias torna o raciocínio claro."],
   "PT639-FND-313":["Consequências ou benefícios concretos da proposta.","Esses efeitos apoiam a posição defendida."],
   "PT639-FND-315":["Identifica a horta como referente de «Esta iniciativa».","Explica que a expressão retoma ou recupera esse referente e evita repetição.","Explica que «por isso» introduz uma consequência.","Relaciona «por isso» com a ligação lógica entre as frases."],
-  "PT639-FND-317":["O pronome «o» representa ou retoma «o relatório».","Evita repetir o nome e liga as duas ações ao mesmo objeto."],
+  "PT639-FND-317":["O pronome «o» representa ou retoma «o relatório».","Evita repetir ou voltar a escrever o nome e mantém o mesmo objeto ou referente entre as duas ações."],
   "PT639-FND-322":["Identifica a primeira oração como temporal.","Explica que a primeira oração indica o momento da ação principal.","Identifica a segunda oração como relativa restritiva.","Explica que a segunda oração limita ou identifica mais precisamente a atividade referida."]
 };
 
