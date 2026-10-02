@@ -75,8 +75,15 @@ const header=`// Gerado por scripts/generate-vnext-mission.mjs. Não editar manu
 const output=`${header}export const VNEXT_MISSION_QUESTIONS=${JSON.stringify(rows,null,2)};\n`;
 
 if(CHECK){
-  if(!fs.existsSync(OUTPUT)||fs.readFileSync(OUTPUT,"utf8")!==output){
+  const current=fs.existsSync(OUTPUT)?fs.readFileSync(OUTPUT,"utf8"):"";
+  if(current!==output){
+    let mismatch=0;
+    while(mismatch<current.length&&mismatch<output.length&&current[mismatch]===output[mismatch])mismatch++;
+    const from=Math.max(0,mismatch-160),to=mismatch+320;
     console.error("app/data/vnextMission.js está desatualizado. Executa npm run vnext-mission:generate.");
+    console.error("Primeira diferença no offset "+mismatch);
+    console.error("ATUAL:\n"+current.slice(from,to));
+    console.error("ESPERADO:\n"+output.slice(from,to));
     process.exit(1);
   }
   console.log(`✓ banco de Missões sincronizado: ${rows.length} perguntas · ${CURRICULUM_SUBTOPICS.length} submatérias`);
