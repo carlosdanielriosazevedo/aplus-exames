@@ -4,6 +4,8 @@ import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.j
 import {gradePhysicsChemistryStepwise} from "../app/lib/physicsChemistryStepwiseGrader.js";
 import {portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
+import {gradeResponse as gradeMathResponse} from "../app/lib/constructedResponse.js";
+import {CONSTRUCTED_RESPONSE_BANK} from "../app/lib/constructedResponseBank.js";
 
 function ratio(result){
   if(Number.isFinite(result?.provisionalPoints)&&Number(result?.maxPoints)>0)return result.provisionalPoints/result.maxPoints;
@@ -83,11 +85,33 @@ const alternative=gradePhysicsChemistryStepwise(dilution,{steps:{
 check(alternative.requiresReview===true,"FQ A stepwise: unknown plausible method should require review");
 check(alternative.steps.some(row=>row.status==="alternative-method-review"),"FQ A stepwise: alternative method should be labelled for review");
 
+
+// 5) Matemática: formas equivalentes pouco convencionais devem manter o crédito quando são matematicamente equivalentes.
+const slopeItem=CONSTRUCTED_RESPONSE_BANK.find(row=>row.id==="CRV2-10GA-STEPS-1");
+if(!slopeItem)throw new Error("Missing Mathematics slope fixture");
+const slopeEquivalent=gradeMathResponse(slopeItem,{steps:{
+  deltaY:"2,0",
+  deltaX:"4,00",
+  slope:"4/8",
+  conclusion:"O declive é a variação de y dividida pela variação de x."
+}});
+check(slopeEquivalent.correct===true||slopeEquivalent.status==="correct","Matemática: equivalent unsimplified fraction and decimal-comma inputs should be accepted");
+
+const derivativeItem=CONSTRUCTED_RESPONSE_BANK.find(row=>row.id==="CRV2-11CD-STEPS-1");
+if(!derivativeItem)throw new Error("Missing Mathematics derivative fixture");
+const derivativeEquivalent=gradeMathResponse(derivativeItem,{steps:{
+  derivative:"-2+3x^2",
+  substitution:"3(2)^2-2",
+  value:"10,0"
+}});
+check(derivativeEquivalent.correct===true||derivativeEquivalent.status==="correct","Matemática: algebraically equivalent reordered polynomial should be accepted");
+
 console.log("=== RESPONSE ANALYSIS CALIBRATION V7 · TOLERANCE + PRUDENCE ===");
 console.log("✓ spelling-noise resilience checked in Portuguese and FQ A");
 console.log("✓ genuine ambiguity routes to review");
 console.log("✓ equivalent units accepted and missing final unit penalized");
 console.log("✓ alternative scientific method routes to review instead of automatic rejection");
+console.log("✓ unconventional but equivalent Mathematics forms preserve credit");
 
 if(failures.length){
   console.error("\nRESPONSE ANALYSIS CALIBRATION V7 FAILED ("+failures.length+" issues)");
