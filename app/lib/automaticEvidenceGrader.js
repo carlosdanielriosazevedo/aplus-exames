@@ -64,13 +64,18 @@ const PHRASE_EQUIVALENTS=[
   ["nao altera","concept-nonchange"],
   ["nao modifica","concept-nonchange"],
   ["nao muda","concept-nonchange"],
+  ["nao muda","concept-nonchange"],
   ["fica inalterado","concept-nonchange"],
   ["mantem se","concept-nonchange"],
   ["permanece igual","concept-nonchange"],
   ["sentido direto e inverso","concept-two-directions"],
   ["dois sentidos","concept-two-directions"],
+  ["ida+volta","concept-two-directions"],
+  ["ida volta","concept-two-directions"],
   ["quantidades relativas","concept-composition"],
   ["proporcao dos componentes","concept-composition"],
+  ["composicao final","concept-composition"],
+  ["composicao de equilibrio","concept-composition"],
   ["passagem do tempo","concept-time-passing"],
   ["nao para","concept-time-passing"],
   ["nao espera","concept-time-passing"],
@@ -214,7 +219,16 @@ function contradictionDetected(response,evidenceTexts=[]){
       "deslocamento e dado pelo declive",
       "deslocamento calcula se pelo declive"
     ].some(row=>normalized.includes(row));
-    if(displacementAsSlope)return true;
+    const algebraicAreaAsDistance=
+      (normalized.includes("area algebrica")||normalized.includes("area"))&&
+      normalized.includes("distancia")&&
+      (
+        normalized.includes("representa a distancia")||
+        normalized.includes("corresponde a distancia")||
+        normalized.includes("da a distancia")||
+        normalized.includes("distancia total")
+      );
+    if(displacementAsSlope||algebraicAreaAsDistance)return true;
   }
   if(expected.includes("distancia")&&expected.includes("deslocamento")){
     if(normalized.includes("distancia")&&normalized.includes("deslocamento")&&normalized.includes("sempre iguais"))return true;
