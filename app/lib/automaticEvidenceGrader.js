@@ -152,8 +152,36 @@ function relationScore(response,cues){
   return best;
 }
 
+function responseAfterExplicitCorrection(response){
+  const raw=String(response??"");
+  const normalized=normalizeEvidenceText(raw);
+  const markers=[
+    "corrigindo",
+    "corrijo",
+    "correcao",
+    "retifico",
+    "retificando",
+    "na verdade",
+    "pensando melhor",
+    "melhor dizendo"
+  ];
+  let bestIndex=-1;
+  let bestMarker="";
+  for(const marker of markers){
+    const index=normalized.lastIndexOf(marker);
+    if(index>bestIndex){
+      bestIndex=index;
+      bestMarker=marker;
+    }
+  }
+  if(bestIndex<0)return raw;
+  const tail=normalized.slice(bestIndex+bestMarker.length).trim();
+  if(tail.split(" ").filter(Boolean).length<4)return raw;
+  return tail;
+}
+
 function contradictionDetected(response,evidenceTexts=[]){
-  const normalized=normalizeEvidenceText(response);
+  const normalized=normalizeEvidenceText(responseAfterExplicitCorrection(response));
   const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
