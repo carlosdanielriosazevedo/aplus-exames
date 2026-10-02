@@ -370,6 +370,8 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
 
 function mathLearningErrorDiagnosis(stepResults=[],overallReason=null){
   const reasons=stepResults.map(row=>row.reason).filter(Boolean);
+  const correctSteps=stepResults.filter(row=>row.correct||row.status==="correct");
+  const problemSteps=stepResults.filter(row=>row.reason&&row.reason!=="upstream_error_effect");
   const firstByPriority=[
     "conceptual_error",
     "conflicting_results",
@@ -405,10 +407,25 @@ function mathLearningErrorDiagnosis(stepResults=[],overallReason=null){
     calculation_error:{code:"calculation_error",label:"Erro de cálculo",message:"O cálculo apresentado não conduz ao valor esperado e não há evidência suficiente para o tratar como um simples lapso."},
     not_verified:{code:"unverified_method",label:"Método não reconhecido com segurança",message:"A resolução pode conter trabalho relevante, mas o corretor não consegue validá-lo com confiança suficiente."}
   };
-  return map[firstByPriority]||{
+  const base=map[firstByPriority]||{
     code:reasons.length?"mixed_error":"correct_or_near_correct",
     label:reasons.length?"Erro misto":"Resposta essencialmente correta",
     message:reasons.length?"Existem vários pontos a rever na resolução.":"A resolução cobre corretamente as etapas principais."
+  };
+  const mainProblem=problemSteps.find(row=>row.reason===firstByPriority)||problemSteps[0]||null;
+  const masteredLabels=correctSteps.map(row=>row.label).filter(Boolean);
+  return {
+    ...base,
+    whatWasCorrect:masteredLabels.length?masteredLabels.slice(0,2):[],
+    whereItFailed:mainProblem?.label||"",
+    studentWork:mainProblem?.answer||"",
+    expected:mainProblem?.expected||"",
+    preserveCorrectWork:correctSteps.length>0,
+    nextAction:base.code==="correct_or_near_correct"
+      ?"Mantém este processo numa próxima questão."
+      :correctSteps.length
+        ?"Mantém as etapas já corretas e corrige apenas o ponto identificado."
+        :"Revê o conceito ou processo identificado e volta a aplicá-lo numa nova questão."
   };
 }
 
