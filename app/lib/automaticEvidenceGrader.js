@@ -129,6 +129,40 @@ function tokens(value){
     .map(stem).filter(Boolean);
 }
 
+function oneEditApart(a,b){
+  if(a===b)return true;
+  if(Math.abs(a.length-b.length)>1)return false;
+  let i=0,j=0,edits=0;
+  while(i<a.length&&j<b.length){
+    if(a[i]===b[j]){i++;j++;continue;}
+    edits++;
+    if(edits>1)return false;
+    if(a.length>b.length)i++;
+    else if(b.length>a.length)j++;
+    else{i++;j++;}
+  }
+  if(i<a.length||j<b.length)edits++;
+  return edits<=1;
+}
+
+function cueMatched(cue,responseTokens){
+  if(responseTokens.includes(cue))return true;
+  if(cue.length<6)return false;
+  return responseTokens.some(token=>
+    token.length>=6&&
+    token.length===cue.length-1&&
+    cue.slice(0,4)===token.slice(0,4)&&
+    oneEditApart(cue,token)
+  );
+}
+
+function semanticAmbiguityDetected(response){
+  const normalized=normalizeEvidenceText(response);
+  const alternatives=/\b(?:talvez|acho que|pode ser|nao sei se|duvido entre)\b[\s\S]{0,80}\bou\b/u.test(normalized)
+    ||/\b(?:ou talvez|ou entao)\b/u.test(normalized);
+  return alternatives;
+}
+
 function distinctiveCues(texts){
   const all=texts.flatMap(tokens);
   const counts=new Map();
@@ -143,8 +177,8 @@ function bestSentence(response,cues){
   const rows=String(response||"").split(/(?<=[.!?;])\s+|\n+/u).map(row=>row.trim()).filter(Boolean);
   let best={text:"",hits:0};
   for(const row of rows){
-    const set=new Set(tokens(row));
-    const hits=cues.filter(cue=>set.has(cue)).length;
+    const rowTokens=tokens(row);
+    const hits=cues.filter(cue=>cueMatched(cue,rowTokens)).length;
     if(hits>best.hits)best={text:row,hits};
   }
   return best.text;
@@ -154,8 +188,8 @@ function relationScore(response,cues){
   const rows=String(response||"").split(/(?<=[.!?;])\s+|\n+/u).map(row=>row.trim()).filter(Boolean);
   let best=0;
   for(const row of rows){
-    const set=new Set(tokens(row));
-    const hits=cues.filter(cue=>set.has(cue)).length;
+    const rowTokens=tokens(row);
+    const hits=cues.filter(cue=>cueMatched(cue,rowTokens)).length;
     best=Math.max(best,cues.length?hits/Math.min(cues.length,6):0);
   }
   return best;
@@ -365,12 +399,12 @@ function contradictionDetected(response,evidenceTexts=[]){
 
 export function assessEvidence(response,...evidenceTexts){
   const responseTokens=tokens(response);
-  const responseSet=new Set(responseTokens);
   const cues=distinctiveCues(evidenceTexts.filter(Boolean));
-  const matched=cues.filter(cue=>responseSet.has(cue));
+  const matched=cues.filter(cue=>cueMatched(cue,responseTokens));
   const ratio=cues.length?matched.length/cues.length:0;
   const relation=relationScore(response,cues);
   const contradiction=contradictionDetected(response,evidenceTexts.filter(Boolean));
+  const ambiguityDetected=semanticAmbiguityDetected(response);
   const semanticScore=Math.max(0,Math.min(1,ratio*.72+relation*.28-(contradiction?.36:0)));
   const wordCount=normalizeEvidenceText(response).split(" ").filter(Boolean).length;
 
@@ -411,6 +445,7 @@ export function assessEvidence(response,...evidenceTexts){
     semanticScore:Math.round(semanticScore*100)/100,
     relationScore:Math.round(relation*100)/100,
     contradictionDetected:contradiction,
+    ambiguityDetected,
     substantiveResponse,coherentProse,
     matchedCount:matched.length,cueCount:cues.length,
     evidence:matched.length?bestSentence(response,matched):"",
@@ -423,13 +458,14 @@ export function aggregateCriterionAssessment(observations=[]){
   const weights={observed:1,partial:.5,"not-observed":0};
   const rawScoreRatio=observations.reduce((sum,row)=>sum+(Number.isFinite(row.scoreRatio)?row.scoreRatio:(weights[row.status]??0)),0)/observations.length;
   const contradictionDetected=observations.some(row=>row.contradictionDetected);
+  const ambiguityDetected=observations.some(row=>row.ambiguityDetected);
   const scoreRatio=contradictionDetected?Math.min(rawScoreRatio,.35):rawScoreRatio;
   const status=contradictionDetected?"partial"
     :observations.every(row=>row.status==="observed")?"observed"
       :observations.some(row=>row.status==="observed"||row.status==="partial")?"partial"
       :"not-observed";
   const confidence=observations.reduce((sum,row)=>sum+(row.confidence||0),0)/observations.length;
-  return {status,scoreRatio:Math.round(scoreRatio*100)/100,confidence:Math.round(confidence*100)/100,contradictionDetected};
+  return {status,scoreRatio:Math.round(scoreRatio*100)/100,confidence:Math.round(confidence*100)/100,contradictionDetected,ambiguityDetected};
 }
 
 export function automaticRubricSummary(criteria=[],maxPoints=0){
@@ -448,8 +484,9 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
     provisionalPoints:Math.round(provisionalPoints*10)/10,
     maxPoints,
     confidence:Math.round(confidenceWeight/totalWeight*100),
-    requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected),
-    contradictionDetected
+    requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected||row.ambiguityDetected),
+    contradictionDetected,
+    ambiguityDetected:criteria.some(row=>row.ambiguityDetected)
   };
 }
 
@@ -465,7 +502,11 @@ export function diagnoseOpenResponseError(criteria=[],responseText=""){
   let label="Resposta essencialmente correta";
   let message="A resposta cobre os elementos principais pedidos.";
 
-  if(contradictions.length){
+  if(criteria.some(row=>row.ambiguityDetected)){
+    code="ambiguous_answer";
+    label="Resposta ambígua";
+    message="A resposta apresenta alternativas incompatíveis ou deixa a conclusão em aberto. O corretor não deve escolher por ti qual delas pretendias assumir.";
+  }else if(contradictions.length){
     code="conceptual_contradiction";
     label="Contradição conceptual";
     message="Há uma ideia na resposta que entra em conflito com o conceito esperado. Revê essa relação antes da próxima questão.";
@@ -534,12 +575,14 @@ export function automaticFeedbackForCriteria(criteria=[],responseText=""){
   }
   const foundCount=strengths.length;
   const gapCount=gaps.length;
-  const nextAction=contradictions.length
-    ?"Mantém o que já está correto e revê apenas a ideia contraditória antes de uma próxima questão do mesmo tipo."
-    :gapCount
-      ?(gapCount===1?"Mantém o raciocínio já correto e acrescenta, numa próxima questão, o único elemento que ficou por demonstrar.":"Mantém os pontos já corretos e concentra a revisão apenas nos elementos que ficaram por demonstrar.")
-      :"A resposta cobre os critérios principais. Numa próxima questão, procura apenas manter a mesma precisão e clareza.";
   const errorDiagnosis=diagnoseOpenResponseError(criteria,responseText);
+  const nextAction=errorDiagnosis.code==="ambiguous_answer"
+    ?"Escolhe uma única conclusão, elimina a alternativa incompatível e justifica claramente essa opção numa próxima questão."
+    :contradictions.length
+      ?"Mantém o que já está correto e revê apenas a ideia contraditória antes de uma próxima questão do mesmo tipo."
+      :gapCount
+        ?(gapCount===1?"Mantém o raciocínio já correto e acrescenta, numa próxima questão, o único elemento que ficou por demonstrar.":"Mantém os pontos já corretos e concentra a revisão apenas nos elementos que ficaram por demonstrar.")
+        :"A resposta cobre os critérios principais. Numa próxima questão, procura apenas manter a mesma precisão e clareza.";
   const strongest=strengths[0]||null;
   const mainGap=contradictions[0]||gaps[0]||null;
   const diagnosticCard={
