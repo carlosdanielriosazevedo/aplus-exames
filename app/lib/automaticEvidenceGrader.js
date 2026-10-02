@@ -82,7 +82,10 @@ const PHRASE_EQUIVALENTS=[
   ["emissao de um fotao","concept-photon-emission"],
   ["nos dois pontos","concept-two-points"],
   ["em dois pontos","concept-two-points"],
-  ["em ambos","concept-two-points"]
+  ["em ambos","concept-two-points"],
+  ["ida+volta","concept-two-directions"],
+  ["ida e volta","concept-two-directions"],
+  ["m h e v","massa altura velocidade"]
 ];
 
 const SYNONYM_MAP=new Map();
@@ -185,7 +188,7 @@ function contradictionDetected(response,evidenceTexts=[]){
   const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
-    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
+    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","aumenta o valor de kc","diminui o valor de kc","altera o valor de kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
     const wrongComposition=["altera a composicao","muda a composicao","modifica a composicao"].some(row=>normalized.includes(row));
     const protectsKc=["nao altera kc","nao modifica kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
     const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos")||normalized.includes("nao acelera os dois sentidos");
@@ -250,12 +253,14 @@ function contradictionDetected(response,evidenceTexts=[]){
       normalized.includes("enfraquecem")||
       normalized.includes("nao sao necessarias")||
       normalized.includes("nao justificam")||
-      normalized.includes("nao constituem razoes")
+      normalized.includes("nao constituem razoes")||
+      normalized.includes("nao funcionam como razoes")
     ))return true;
   }
   if(expected.includes("consequencia")&&normalized.includes("por isso")&&(normalized.includes("oposicao")||normalized.includes("contraste")))return true;
   if(expected.includes("padrao")&&expected.includes("elemento")){
     if((normalized.includes("frequencias")||normalized.includes("riscas"))&&normalized.includes("iguais")&&(normalized.includes("nao permite")||normalized.includes("nao permitem")))return true;
+    if(normalized.includes("mesmo conjunto de energias")||normalized.includes("energias emitidas sao iguais")||normalized.includes("energias iguais para todos"))return true;
   }
   if(expected.includes("traco")||expected.includes("menisco")){
     if(normalized.includes("ultrapassar")&&normalized.includes("traco"))return true;
@@ -270,7 +275,8 @@ function contradictionDetected(response,evidenceTexts=[]){
     if((normalized.includes("menor distancia")||normalized.includes("diminuir a distancia"))&&normalized.includes("incerteza"))return true;
   }
   if(expected.includes("proporcao estequiometrica")||expected.includes("equivalencia")){
-    if(normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
+    const rejectsUniversalPh7=normalized.includes("nao e sempre ph 7")||normalized.includes("nem sempre ph 7")||normalized.includes("nao ocorre sempre a ph 7");
+    if(!rejectsUniversalPh7&&normalized.includes("sempre")&&normalized.includes("ph 7"))return true;
     if(
       normalized.includes("equivalencia nao corresponde")||
       normalized.includes("nao corresponde a proporcao estequiometrica")||
@@ -317,7 +323,9 @@ function contradictionDetected(response,evidenceTexts=[]){
   if(expected.includes("deslocamento")&&expected.includes("area")&&(
     normalized.includes("area algebrica nao representa o deslocamento")||
     normalized.includes("area nao representa o deslocamento")||
-    normalized.includes("area algebrica nao representa deslocamento")
+    normalized.includes("area algebrica nao representa deslocamento")||
+    normalized.includes("area algebrica representa a distancia total")||
+    normalized.includes("area representa a distancia total")
   ))return true;
 
   if((expected.includes("aumentar a distancia")||expected.includes("distancia de propagacao"))&&(
