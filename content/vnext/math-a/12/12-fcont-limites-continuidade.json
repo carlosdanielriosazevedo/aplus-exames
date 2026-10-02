@@ -587,12 +587,12 @@
       "q": "A função f(x)=1/(x−2) é contínua em x=2?",
       "o": [
         "Sim.",
-        "Não, nem está definida em2.",
+        "Não, nem está definida em 2.",
         "Sim, porque há assíntota.",
         "Só se definirmos f(2)=0."
       ],
       "a": 1,
-      "sol": "O denominador anula-se em2.",
+      "sol": "O denominador anula-se em 2.",
       "hyp": "Pode pensar que uma assíntota é continuidade 'infinita'.",
       "contexts": [
         "mission",
