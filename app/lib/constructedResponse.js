@@ -172,7 +172,28 @@ function implicitEvidenceMatches(question,answer,rule){
   });
 }
 
+function correctedStepValue(value){
+  const raw=String(value??"");
+  const parts=raw.split(/\b(?:corrigindo|corrijo|retifico|retificando|na verdade|pensando melhor|melhor dizendo)\b\s*:?\s*/iu);
+  if(parts.length<2)return value;
+  const tail=parts.at(-1)?.trim();
+  return tail||value;
+}
+
+function textFinalNumberContradictsExpected(spec,value){
+  const expectedNumbers=String(spec?.expected??"").replace(",",".").match(/-?\d+(?:\.\d+)?/g)||[];
+  if(!expectedNumbers.length)return false;
+  const expectedFinal=Number(expectedNumbers.at(-1));
+  if(!Number.isFinite(expectedFinal))return false;
+  const normalized=normalizedWords(value).replace(",",".");
+  const claimMatches=[...normalized.matchAll(/(?:limite|zero|media|mínimo|minimo|capital|valor|resultado)\s+(?:e|é|vale|=)\s*(-?\d+(?:\.\d+)?)/gu)];
+  if(!claimMatches.length)return false;
+  const claimed=Number(claimMatches.at(-1)?.[1]);
+  return Number.isFinite(claimed)&&Math.abs(claimed-expectedFinal)>Number.EPSILON;
+}
+
 function gradeStep(spec,value){
+  value=correctedStepValue(value);
   let correct=false,reason="incorrect";
   const instructionViolation=declaredInstructionViolation(spec,value);
   if(instructionViolation){
@@ -227,6 +248,10 @@ function gradeStep(spec,value){
     correct=hasText(value)&&accepted.includes(input.replace(/[.!]$/g,""));
     if(!correct&&hasText(value))correct=candidates.some(candidate=>optionalUnitOmissionMatches(input,candidate));
     if(!correct&&hasText(value)&&conceptGroupsMatch(spec,input))correct=true;
+    if(correct&&textFinalNumberContradictsExpected(spec,value)){
+      correct=false;
+      reason="conflicting_results";
+    }
     if(!input)reason="empty_justification";
   }
   if(!correct&&hasText(value)){
