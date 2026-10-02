@@ -415,6 +415,47 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
   };
 }
 
+export function diagnoseOpenResponseError(criteria=[],responseText=""){
+  const normalized=normalizeEvidenceText(responseText);
+  const contradictions=criteria.filter(row=>row.contradictionDetected);
+  const observed=criteria.filter(row=>row.status==="observed");
+  const partial=criteria.filter(row=>row.status==="partial");
+  const missing=criteria.filter(row=>row.status==="not-observed");
+  const wordCount=normalized.split(" ").filter(Boolean).length;
+
+  let code="correct_or_near_correct";
+  let label="Resposta essencialmente correta";
+  let message="A resposta cobre os elementos principais pedidos.";
+
+  if(contradictions.length){
+    code="conceptual_contradiction";
+    label="Contradição conceptual";
+    message="Há uma ideia na resposta que entra em conflito com o conceito esperado. Revê essa relação antes da próxima questão.";
+  }else if(observed.length===0&&partial.length===0&&wordCount>=8){
+    code="related_but_nonresponsive";
+    label="Resposta relacionada, mas não suficiente";
+    message="A resposta fala do tema, mas não demonstra diretamente o que a pergunta pede.";
+  }else if(missing.length&&observed.length){
+    code="incomplete_answer";
+    label="Resposta incompleta";
+    message="Parte do raciocínio está correta, mas falta pelo menos um elemento necessário para fechar a resposta.";
+  }else if(partial.length){
+    code="insufficient_justification";
+    label="Justificação insuficiente";
+    message="A ideia principal aparece, mas precisa de ser explicada ou ligada melhor ao pedido.";
+  }else if(wordCount>0&&wordCount<8){
+    code="too_terse";
+    label="Resposta demasiado curta";
+    message="A resposta pode estar no caminho certo, mas falta explicitar o raciocínio necessário para o corretor o confirmar com segurança.";
+  }
+
+  return {
+    code,label,message,
+    confidence:contradictions.length?"high":observed.length||partial.length?"medium":"low",
+    affectedCriteria:[...contradictions,...missing,...partial].map(row=>row.id).filter(Boolean)
+  };
+}
+
 export function automaticFeedbackForCriteria(criteria=[],responseText=""){
   const strengths=[];
   const gaps=[];
@@ -445,10 +486,12 @@ export function automaticFeedbackForCriteria(criteria=[],responseText=""){
     :gapCount
       ?(gapCount===1?"Revê o ponto em falta e procura demonstrá-lo melhor numa próxima questão.":"Revê os pontos em falta e procura demonstrá-los melhor nas próximas questões.")
       :"A resposta cobre os critérios principais. Revê apenas clareza, precisão e linguagem.";
+  const errorDiagnosis=diagnoseOpenResponseError(criteria,responseText);
   return {
     strengths,gaps,contradictions,
     foundCount,gapCount,
     nextAction,
+    errorDiagnosis,
     hasEvidence:strengths.some(row=>row.evidence)||gaps.some(row=>row.evidence),
     responseText:String(responseText||"")
   };
