@@ -24,10 +24,10 @@ export const MATH_RESPONSE_WAVE4_CASES=[
   {itemId:"CRV2-11PE-STEPS-1",profile:"correct-work-false-conclusion",minScore:.2,maxScore:.85,answer:{steps:{expression:"2*3+(-1)*4",value:"2",conclusion:"Como o produto escalar é 2, os vetores são perpendiculares."}}},
 
   {itemId:"CRV2-11SUC-STEPS-1",profile:"right-method-local-slip",minScore:.2,maxScore:.85,answer:{steps:{formula:"3+2(n-1)",substitution:"3+2(10-1)",value:"22"}}},
-  {itemId:"CRV2-10FIN-STEPS-1",profile:"correct-work-false-conclusion-2",minScore:.2,maxScore:.85,answer:{steps:{interest:"50",capital:"1050",conclusion:"Ao fim de um ano, o capital é 950 €."}}},
+  {itemId:"CRV2-10FIN-STEPS-1",profile:"correct-work-false-conclusion",minScore:.2,maxScore:.85,answer:{steps:{interest:"50",capital:"1050",conclusion:"Ao fim de um ano, o capital é 950 €."}}},
 
   {itemId:"CRV2-12FCD-CHAIN-STEPS-1",profile:"right-method-local-slip",minScore:.2,maxScore:.85,answer:{steps:{inner:"u=x^2+1",outer:"3u^2",innerDerivative:"u'=2x",result:"f'(x)=3x(x^2+1)^2"}}},
-  {itemId:"CRV2-10FUN-EXT-STEPS-1",profile:"correct-work-false-conclusion-2",minScore:.2,maxScore:.85,answer:{steps:{form:"(x-2)^2-3",abscissa:"2",minimum:"-3",conclusion:"A função atinge o mínimo 3 quando x=2."}}}
+  {itemId:"CRV2-10FUN-EXT-STEPS-1",profile:"correct-work-false-conclusion",minScore:.2,maxScore:.85,answer:{steps:{form:"(x-2)^2-3",abscissa:"2",minimum:"-3",conclusion:"A função atinge o mínimo 3 quando x=2."}}}
 ];
 
 export const MATH_RESPONSE_WAVE4_PROFILES=["right-method-local-slip","correct-work-false-conclusion"];
