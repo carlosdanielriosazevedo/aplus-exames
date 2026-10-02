@@ -492,31 +492,44 @@ export function automaticFeedbackForCriteria(criteria=[],responseText=""){
       .filter(Boolean);
     const base={id:criterion.id,label:criterion.label,evidence:evidence[0]||"",confidence:criterion.confidence??null};
     if(criterion.contradictionDetected){
-      contradictions.push({...base,message:"A resposta contém uma ideia que entra em conflito com este critério."});
-      gaps.push({...base,message:"Revê este ponto: a formulação atual pode estar cientificamente ou conceptualmente incorreta."});
+      contradictions.push({...base,message:"A tua resposta mostra este ponto, mas também inclui uma afirmação incompatível com ele."});
+      gaps.push({...base,message:"Corrige a relação conceptual deste critério; não precisas de reescrever o resto da resposta."});
       continue;
     }
     if(criterion.status==="observed"){
-      strengths.push({...base,message:evidence[0]?"A app encontrou evidência deste critério na tua resposta.":"Este critério está suficientemente demonstrado."});
+      strengths.push({...base,message:evidence[0]?"Este critério está demonstrado na tua própria resposta.":"Este critério está suficientemente demonstrado."});
     }else if(criterion.status==="partial"){
-      gaps.push({...base,message:"A ideia aparece, mas falta torná-la mais explícita, completa ou bem ligada ao pedido."});
+      gaps.push({...base,message:"Já há evidência deste ponto, mas falta completar a ligação ao que a pergunta pede."});
     }else{
-      gaps.push({...base,message:"Este elemento ainda não foi encontrado com evidência suficiente na tua resposta."});
+      gaps.push({...base,message:"Este é o principal elemento que ainda falta demonstrar de forma explícita."});
     }
   }
   const foundCount=strengths.length;
   const gapCount=gaps.length;
   const nextAction=contradictions.length
-    ?"Revê primeiro esta ideia na matéria: há uma contradição que deves conseguir evitar numa próxima questão."
+    ?"Mantém o que já está correto e revê apenas a ideia contraditória antes de uma próxima questão do mesmo tipo."
     :gapCount
-      ?(gapCount===1?"Revê o ponto em falta e procura demonstrá-lo melhor numa próxima questão.":"Revê os pontos em falta e procura demonstrá-los melhor nas próximas questões.")
-      :"A resposta cobre os critérios principais. Revê apenas clareza, precisão e linguagem.";
+      ?(gapCount===1?"Mantém o raciocínio já correto e acrescenta, numa próxima questão, o único elemento que ficou por demonstrar.":"Mantém os pontos já corretos e concentra a revisão apenas nos elementos que ficaram por demonstrar.")
+      :"A resposta cobre os critérios principais. Numa próxima questão, procura apenas manter a mesma precisão e clareza.";
   const errorDiagnosis=diagnoseOpenResponseError(criteria,responseText);
+  const strongest=strengths[0]||null;
+  const mainGap=contradictions[0]||gaps[0]||null;
+  const diagnosticCard={
+    title:errorDiagnosis.label,
+    summary:errorDiagnosis.message,
+    whatYouKnow:strongest?strongest.label:(foundCount?"Há critérios já demonstrados na resposta.":"Ainda não há evidência suficiente para confirmar um ponto sólido."),
+    evidence:strongest?.evidence||mainGap?.evidence||"",
+    focus:mainGap?.label||"",
+    fixNext:nextAction,
+    preserveCorrectWork:foundCount>0,
+    confidence:errorDiagnosis.confidence
+  };
   return {
     strengths,gaps,contradictions,
     foundCount,gapCount,
     nextAction,
     errorDiagnosis,
+    diagnosticCard,
     hasEvidence:strengths.some(row=>row.evidence)||gaps.some(row=>row.evidence),
     responseText:String(responseText||"")
   };
