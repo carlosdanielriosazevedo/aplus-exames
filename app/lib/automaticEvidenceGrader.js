@@ -501,6 +501,10 @@ export function diagnoseOpenResponseError(criteria=[],responseText=""){
     code="conceptual_contradiction";
     label="Contradição conceptual";
     message="Há uma ideia na resposta que entra em conflito com o conceito esperado. Revê essa relação antes da próxima questão.";
+  }else if(criteria.some(row=>row.ambiguityDetected)){
+    code="ambiguous_answer";
+    label="Resposta ambígua";
+    message="A resposta apresenta alternativas incompatíveis ou deixa a conclusão em aberto. O corretor não deve escolher por ti qual delas pretendias assumir.";
   }else if(observed.length===0&&partial.length===0&&wordCount>=8){
     code="related_but_nonresponsive";
     label="Resposta relacionada, mas não suficiente";
