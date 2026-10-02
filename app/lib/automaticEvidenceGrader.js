@@ -474,10 +474,25 @@ export function diagnoseOpenResponseError(criteria=[],responseText=""){
     message="A resposta pode estar no caminho certo, mas falta explicitar o raciocínio necessário para o corretor o confirmar com segurança.";
   }
 
+  const affected=[...contradictions,...missing,...partial]
+    .filter((row,index,all)=>row?.id&&all.findIndex(candidate=>candidate?.id===row.id)===index)
+    .map(row=>({
+      id:row.id,
+      label:row.label||row.id,
+      status:row.status||"not-observed",
+      contradictionDetected:!!row.contradictionDetected,
+      evidence:(row.observations||[])
+        .flatMap(observation=>Array.isArray(observation.studentEvidence)?observation.studentEvidence:[])
+        .map(value=>String(value||"").trim())
+        .find(Boolean)||""
+    }));
+  const primary=affected[0]||null;
   return {
     code,label,message,
     confidence:contradictions.length?"high":observed.length||partial.length?"medium":"low",
-    affectedCriteria:[...contradictions,...missing,...partial].map(row=>row.id).filter(Boolean)
+    affectedCriteria:affected.map(row=>row.id),
+    primaryCriterion:primary,
+    grounding:{criterionIds:affected.map(row=>row.id),evidence:affected.map(row=>row.evidence).filter(Boolean),source:"student-response"}
   };
 }
 
