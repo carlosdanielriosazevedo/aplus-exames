@@ -20,6 +20,10 @@ const CONTENT_OBSERVATIONS={
   "PT639-FND-322":["Identifica a primeira oração como temporal.","Explica que a primeira oração indica o momento da ação principal.","Identifica a segunda oração como relativa restritiva.","Explica que a segunda oração limita ou identifica mais precisamente a atividade referida."]
 };
 
+const LOCAL_CRITERION_LABELS={
+  "PT639-FND-317:conteudo":"O pronome «o» retoma «o relatório» e evita repetir o nome."
+};
+
 const SPECIAL_OBSERVATIONS={
   "PT639-FND-042:funcao":["Identifica «na sala» como predicativo do sujeito."],
   "PT639-FND-042:justificacao":["Reconhece «permanecer» como verbo copulativo.","Explica que «na sala» atribui ao sujeito uma localização ou estado locativo."],
@@ -57,6 +61,7 @@ function genericObservations(item,criterion){
 export function applyPortugueseRubricObservations(items){
   return items.map(item=>item.rubric?{...item,rubric:{...item.rubric,criteria:item.rubric.criteria.map(criterion=>{
     const labels=SPECIAL_OBSERVATIONS[`${item.id}:${criterion.id}`]||genericObservations(item,criterion);
-    return {...criterion,observations:labels.map((label,index)=>({id:`${criterion.id}-${index+1}`,label}))};
+    const localLabel=LOCAL_CRITERION_LABELS[`${item.id}:${criterion.id}`]||criterion.label;
+    return {...criterion,label:localLabel,observations:labels.map((label,index)=>({id:`${criterion.id}-${index+1}`,label}))};
   })}}:item);
 }
