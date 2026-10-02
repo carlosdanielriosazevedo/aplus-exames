@@ -54,6 +54,7 @@ const ptAmbiguous=gradePortugueseResponse(pt,
   "A expressão «por isso» pode ser consequência ou talvez contraste; não sei qual das duas relações é a correta.");
 check(ptAmbiguous.requiresReview===true,"Português: ambiguous alternative should require review");
 check(diagnosis(ptAmbiguous)?.code==="ambiguous_answer","Português: ambiguous alternative should be diagnosed as ambiguous_answer");
+check(/Escolhe uma única conclusão/u.test(ptAmbiguous.feedbackSummary?.nextAction||""),"Português: ambiguous answer should receive a targeted next action");
 
 const fq=physicsChemistryConstructedItemById("FQA-R-EQ-01");
 const fqAmbiguous=gradePhysicsChemistryResponse(fq,
