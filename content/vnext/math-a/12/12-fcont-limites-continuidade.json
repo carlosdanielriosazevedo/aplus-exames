@@ -557,10 +557,10 @@
       "year": "12.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
-      "q": "A função f(x)=|x| é contínua em0?",
+      "q": "A função f(x)=|x| é contínua em 0?",
       "o": [
         "Sim.",
-        "Não, porque não é derivável em0.",
+        "Não, porque não é derivável em 0.",
         "Só pela direita.",
         "Só pela esquerda."
       ],
