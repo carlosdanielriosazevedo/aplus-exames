@@ -343,6 +343,50 @@ function gradeStepFromWorking(spec,lines,fullAnswer,usedUnlabelled=new Set()){
   return fullAnswer.trim()?{...base,status:"needs_review",reason:recognizable?"not_verified":"no_recognizable_work",answer:""}:base;
 }
 
+function mathLearningErrorDiagnosis(stepResults=[],overallReason=null){
+  const reasons=stepResults.map(row=>row.reason).filter(Boolean);
+  const firstByPriority=[
+    "conceptual_error",
+    "conflicting_results",
+    "occasional_calculation_error",
+    "copied_number_or_sign_error",
+    "wrong_final_rounding",
+    "intermediate_rounding",
+    "wrong_final_form",
+    "approximate_instead_of_exact",
+    "approximate_used_instead_of_exact",
+    "incomplete_step",
+    "missing_required_work",
+    "final_result_only",
+    "formal_notation_error",
+    "calculation_error",
+    "not_verified"
+  ].find(reason=>reasons.includes(reason))||overallReason;
+
+  const map={
+    conceptual_error:{code:"conceptual_error",label:"Erro conceptual",message:"O método usado revela uma ideia matemática incorreta. Revê o conceito antes de repetir um exercício semelhante."},
+    conflicting_results:{code:"internal_contradiction",label:"Resultados contraditórios",message:"A resolução apresenta resultados incompatíveis para a mesma grandeza. Confirma qual é a conclusão final."},
+    occasional_calculation_error:{code:"calculation_slip",label:"Erro de cálculo pontual",message:"O método está essencialmente correto, mas houve uma falha num cálculo intermédio ou final."},
+    copied_number_or_sign_error:{code:"transcription_slip",label:"Erro de transcrição",message:"O raciocínio estava no caminho certo, mas um número ou sinal foi copiado incorretamente."},
+    wrong_final_rounding:{code:"rounding_error",label:"Erro de arredondamento",message:"O valor antes do arredondamento está correto, mas a apresentação final foi arredondada incorretamente."},
+    intermediate_rounding:{code:"rounding_error",label:"Arredondamento intermédio inadequado",message:"Foi arredondado um valor demasiado cedo ou com precisão diferente da pedida."},
+    wrong_final_form:{code:"presentation_error",label:"Forma final incorreta",message:"O valor é equivalente, mas não está apresentado na forma exigida pelo enunciado."},
+    approximate_instead_of_exact:{code:"exactness_error",label:"Valor aproximado em vez de exato",message:"Era pedido um valor exato, mas foi apresentada uma aproximação."},
+    approximate_used_instead_of_exact:{code:"propagated_approximation",label:"Aproximação propagada",message:"Uma aproximação anterior foi reutilizada quando o cálculo seguinte exigia o valor exato."},
+    incomplete_step:{code:"incomplete_reasoning",label:"Raciocínio incompleto",message:"O processo está parcialmente construído, mas falta uma passagem necessária para justificar a conclusão."},
+    missing_required_work:{code:"missing_work",label:"Falta de desenvolvimento",message:"A resposta não mostra os cálculos ou a justificação que o item exige."},
+    final_result_only:{code:"result_only",label:"Resultado sem desenvolvimento",message:"O resultado final isolado não demonstra o processo pedido neste item."},
+    formal_notation_error:{code:"notation_error",label:"Erro de notação",message:"A matemática pode estar próxima do correto, mas a simbologia usada não está formalmente correta."},
+    calculation_error:{code:"calculation_error",label:"Erro de cálculo",message:"O cálculo apresentado não conduz ao valor esperado e não há evidência suficiente para o tratar como um simples lapso."},
+    not_verified:{code:"unverified_method",label:"Método não reconhecido com segurança",message:"A resolução pode conter trabalho relevante, mas o corretor não consegue validá-lo com confiança suficiente."}
+  };
+  return map[firstByPriority]||{
+    code:reasons.length?"mixed_error":"correct_or_near_correct",
+    label:reasons.length?"Erro misto":"Resposta essencialmente correta",
+    message:reasons.length?"Existem vários pontos a rever na resolução.":"A resolução cobre corretamente as etapas principais."
+  };
+}
+
 export function stepFeedback(row){
   if(row.reason==="final_result_only")return "Nos itens de construção por etapas, o resultado final isolado não é pontuado: apresenta os cálculos e justificações necessários.";
   if(row.reason==="instruction_violation")return "Foi usado um processo que o enunciado excluía explicitamente. Esta etapa e apenas as etapas declaradas como dependentes recebem zero, de acordo com os critérios IAVE.";
@@ -402,7 +446,7 @@ export function gradeResponse(question,answer){
     return {status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults:[],blankResults};
   }
   if(type==="stepwise"){
-    if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only",iaveSituation:iaveSituationLabel("final_result_only"),classificationConfidence:"high"};
+    if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only",iaveSituation:iaveSituationLabel("final_result_only"),classificationConfidence:"high",errorDiagnosis:mathLearningErrorDiagnosis([],"final_result_only")};
     const lines=stepwiseLines(answer);
     const fullAnswer=typeof answer==="string"?answer:answer?.working||"";
     const usedUnlabelled=new Set();
@@ -458,7 +502,9 @@ export function gradeResponse(question,answer){
     const points=applyIaveGlobalPenalties(stepPoints,globalReasons),globalPenalty=stepPoints-points,correct=points===maxPoints;
     const pendingPoints=stepResults.filter(row=>row.status==="needs_review").reduce((sum,row)=>sum+row.maxPoints,0);
     const globalPenalties=globalReasons.map(item=>({reason:item.reason,iaveSituation:iaveSituationLabel(item.reason),points:iaveGlobalPenalty(item.reason,item),classificationConfidence:"high"})).filter(item=>item.points>0);
-    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason:pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect"};
+    const reason=pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect";
+    const errorDiagnosis=mathLearningErrorDiagnosis(stepResults,reason);
+    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason,errorDiagnosis};
   }
   let correct=false,reason="incorrect";
   if(type==="choice")correct=answer===question.a;
