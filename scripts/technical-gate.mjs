@@ -55,6 +55,7 @@ const checks=[
   ["Torture test do corretor v5","npm",["run","response-analysis-calibration:v5"]],
   ["Diagnóstico pedagógico do erro","npm",["run","error-diagnosis:audit"]],
   ["Feedback individualizado por erro","npm",["run","learning-feedback:audit"]],
+  ["Pares mínimos do diagnóstico","npm",["run","diagnostic-minimal-pairs:audit"]],
   ["Diagnóstico pedagógico visível","node",["scripts/error-diagnosis-ui-audit.mjs"]],
   ["Cobertura de resposta construída","npm",["run","math-constructed:coverage-audit"]],
   ["Primeira vaga de resposta construída","npm",["run","math-constructed:wave1-audit"]],
