@@ -14,9 +14,9 @@ const CONTENT_OBSERVATIONS={
   "PT639-FND-053":["Relaciona a repetição de «Volto» com o regresso aos lugares.","Explica como a quebra final mostra a impossibilidade de recuperar a identidade passada."],
   "PT639-FND-058":["Explica uma vantagem da informação em tempo real.","Explica uma segunda vantagem distinta da primeira."],
   "PT639-FND-311":["Identifica um problema ou dificuldade como ponto de partida da exposição.","Identifica alternativas ou soluções apresentadas em seguida.","Identifica condições necessárias para concretizar essas soluções.","Relaciona a progressão das ideias com a clareza e a compreensão do leitor."],
-  "PT639-FND-313":["Identifica efeitos ou benefícios concretos da proposta.","Reconhece exemplos como mais tempo de estudo ou apoio a alunos sem local adequado.","Explica que esses efeitos justificam, sustentam ou dão força à posição defendida."],
+  "PT639-FND-313":["Apresenta efeitos concretos da proposta, como mais tempo de estudo ou apoio a quem não consegue estudar bem em casa.","Liga esses efeitos concretos à posição defendida, mostrando como a sustentam."],
   "PT639-FND-315":["Identifica a horta como referente de «Esta iniciativa».","Explica que a expressão retoma ou recupera esse referente e evita repetição.","Explica que «por isso» introduz uma consequência.","Relaciona «por isso» com a ligação lógica entre as frases."],
-  "PT639-FND-317":["Identifica «o relatório» como referente do pronome «o».","Explica que o pronome retoma ou recupera o mesmo objeto.","Relaciona o pronome com a redução da repetição e a continuidade entre as ações."],
+  "PT639-FND-317":["Identifica «o relatório» como o objeto ou referente retomado pelo pronome «o».","Explica que o pronome evita repetir o nome e mantém a ligação entre as duas ações."],
   "PT639-FND-322":["Identifica a primeira oração como temporal.","Explica que a primeira oração indica o momento da ação principal.","Identifica a segunda oração como relativa restritiva.","Explica que a segunda oração limita ou identifica mais precisamente a atividade referida."]
 };
 
