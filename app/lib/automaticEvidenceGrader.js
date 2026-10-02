@@ -570,12 +570,14 @@ export function automaticFeedbackForCriteria(criteria=[],responseText=""){
   }
   const foundCount=strengths.length;
   const gapCount=gaps.length;
-  const nextAction=contradictions.length
-    ?"Mantém o que já está correto e revê apenas a ideia contraditória antes de uma próxima questão do mesmo tipo."
-    :gapCount
-      ?(gapCount===1?"Mantém o raciocínio já correto e acrescenta, numa próxima questão, o único elemento que ficou por demonstrar.":"Mantém os pontos já corretos e concentra a revisão apenas nos elementos que ficaram por demonstrar.")
-      :"A resposta cobre os critérios principais. Numa próxima questão, procura apenas manter a mesma precisão e clareza.";
   const errorDiagnosis=diagnoseOpenResponseError(criteria,responseText);
+  const nextAction=errorDiagnosis.code==="ambiguous_answer"
+    ?"Escolhe uma única conclusão, elimina a alternativa incompatível e justifica claramente essa opção numa próxima questão."
+    :contradictions.length
+      ?"Mantém o que já está correto e revê apenas a ideia contraditória antes de uma próxima questão do mesmo tipo."
+      :gapCount
+        ?(gapCount===1?"Mantém o raciocínio já correto e acrescenta, numa próxima questão, o único elemento que ficou por demonstrar.":"Mantém os pontos já corretos e concentra a revisão apenas nos elementos que ficaram por demonstrar.")
+        :"A resposta cobre os critérios principais. Numa próxima questão, procura apenas manter a mesma precisão e clareza.";
   const strongest=strengths[0]||null;
   const mainGap=contradictions[0]||gaps[0]||null;
   const diagnosticCard={
