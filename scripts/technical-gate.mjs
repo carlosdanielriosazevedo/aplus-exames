@@ -54,6 +54,7 @@ const checks=[
   ["Calibração transversal de respostas v4","npm",["run","response-analysis-calibration:v4"]],
   ["Torture test do corretor v5","npm",["run","response-analysis-calibration:v5"]],
   ["Diagnóstico pedagógico do erro","npm",["run","error-diagnosis:audit"]],
+  ["Diagnóstico pedagógico visível","node",["scripts/error-diagnosis-ui-audit.mjs"]],
   ["Cobertura de resposta construída","npm",["run","math-constructed:coverage-audit"]],
   ["Primeira vaga de resposta construída","npm",["run","math-constructed:wave1-audit"]],
   ["Segunda vaga de resposta construída","npm",["run","math-constructed:wave2-audit"]],
