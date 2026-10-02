@@ -212,6 +212,7 @@ function gradeStep(spec,value){
     const parsed=parseNumeric(value),tolerance=Math.max(0,Number(spec.tolerance)||0);
     correct=parsed!==null&&Math.abs(parsed-Number(spec.value))<=tolerance+Number.EPSILON;
     if(parsed===null)reason="invalid_numeric_format";
+    else if(!correct)reason="calculation_error";
   }
   if(spec.type==="fraction"){
     const parsed=parseFraction(value);
