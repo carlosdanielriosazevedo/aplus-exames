@@ -137,7 +137,7 @@ export function portugueseObservationAction(observation){
   };
   if(status==="partial")return {
     title:"Este elemento está incompleto",
-    action:"Revê este conteúdo e, numa próxima resposta, torna esta ideia mais explícita e desenvolvida.",
+    action:"Desenvolve melhor esta ideia numa próxima resposta: torna-a mais explícita e liga-a diretamente ao que foi pedido.",
     hint:"Procura uma afirmação concreta e verifica se explicas o suficiente para o leitor perceber a relação."
   };
   if(status==="unsure")return {
