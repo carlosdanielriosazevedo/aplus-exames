@@ -214,7 +214,7 @@
         "pode não ser extremo."
       ],
       "a": 3,
-      "sol": "Por exemplo x³ em0.",
+      "sol": "Por exemplo x³ em 0.",
       "hyp": "Pode assumir que todo ponto crítico é extremo.",
       "contexts": [
         "mission",
