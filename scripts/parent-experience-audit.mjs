@@ -9,7 +9,7 @@ const checks=[
   ["zero-selection state is explicit",page.includes('"Nenhuma disciplina selecionada"')],
   ["availability note is secondary",page.includes('className="subjectAvailabilityNote"')],
   ["continue is blocked with zero subjects",page.includes('disabled={!selected.length} onClick={save}')],
-  ["diagnostic typography has spacing",diagnostic.includes('a derivada lateral esquerda no ponto 0 é...')&&!diagnostic.includes("esquerda em0")],
+  ["diagnostic typography has spacing",diagnostic.includes('a derivada lateral esquerda em 0 é...')&&!diagnostic.includes("esquerda em0")],
   ["parent has two clear entry choices",page.includes("Associar um aluno")&&page.includes("Criar perfil do aluno")],
   ["parent dashboard is per subject",page.includes("Estado por disciplina")&&page.includes("parentSubjectGrid")],
   ["parent dashboard includes weekly activity",page.includes("dias com estudo esta semana")&&page.includes("weeklyXp")],
