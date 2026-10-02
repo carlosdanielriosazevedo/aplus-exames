@@ -148,7 +148,11 @@ function oneEditApart(a,b){
 function cueMatched(cue,responseTokens){
   if(responseTokens.includes(cue))return true;
   if(cue.length<6)return false;
-  return responseTokens.some(token=>token.length>=6&&oneEditApart(cue,token));
+  return responseTokens.some(token=>
+    token.length>=6&&
+    cue.slice(0,4)===token.slice(0,4)&&
+    oneEditApart(cue,token)
+  );
 }
 
 function semanticAmbiguityDetected(response){
@@ -497,14 +501,14 @@ export function diagnoseOpenResponseError(criteria=[],responseText=""){
   let label="Resposta essencialmente correta";
   let message="A resposta cobre os elementos principais pedidos.";
 
-  if(contradictions.length){
-    code="conceptual_contradiction";
-    label="Contradição conceptual";
-    message="Há uma ideia na resposta que entra em conflito com o conceito esperado. Revê essa relação antes da próxima questão.";
-  }else if(criteria.some(row=>row.ambiguityDetected)){
+  if(criteria.some(row=>row.ambiguityDetected)){
     code="ambiguous_answer";
     label="Resposta ambígua";
     message="A resposta apresenta alternativas incompatíveis ou deixa a conclusão em aberto. O corretor não deve escolher por ti qual delas pretendias assumir.";
+  }else if(contradictions.length){
+    code="conceptual_contradiction";
+    label="Contradição conceptual";
+    message="Há uma ideia na resposta que entra em conflito com o conceito esperado. Revê essa relação antes da próxima questão.";
   }else if(observed.length===0&&partial.length===0&&wordCount>=8){
     code="related_but_nonresponsive";
     label="Resposta relacionada, mas não suficiente";
