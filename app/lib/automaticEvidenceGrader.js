@@ -194,11 +194,16 @@ function contradictionDetected(response,evidenceTexts=[]){
   const expected=normalizeEvidenceText(evidenceTexts.join(" "));
   const catalyst=normalized.includes("catalisador")||normalized.includes("catalise");
   if(catalyst){
-    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","aumenta o valor de kc","diminui o valor de kc","altera o valor de kc","altera a constante","muda a constante","modifica a constante"].some(row=>normalized.includes(row));
+    const protectedKc=[
+      "nao aumenta kc","nao diminui kc","nao altera kc","nao modifica kc","nao muda kc",
+      "kc inalterado","constante mantem se"
+    ];
+    let kcScan=normalized;
+    for(const phrase of protectedKc)kcScan=kcScan.split(phrase).join("kc estavel");
+    const wrongKc=["aumenta kc","diminui kc","altera kc","muda kc","modifica kc","aumenta o valor de kc","diminui o valor de kc","altera o valor de kc","altera a constante","muda a constante","modifica a constante"].some(row=>kcScan.includes(row));
     const wrongComposition=["altera a composicao","muda a composicao","modifica a composicao"].some(row=>normalized.includes(row));
-    const protectsKc=["nao altera kc","nao modifica kc","nao muda kc","kc inalterado","constante mantem se"].some(row=>normalized.includes(row));
-    const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos")||normalized.includes("nao acelera os dois sentidos");
-    if(((wrongKc||wrongComposition)&&!protectsKc)||deniesTwoDirections)return true;
+    const deniesTwoDirections=normalized.includes("nao acelera ambos os sentidos")||normalized.includes("nao acelera os dois sentidos");
+    if(wrongKc||wrongComposition||deniesTwoDirections)return true;
   }
 
   if(expected.includes("aceleracao")&&expected.includes("declive")){
@@ -371,8 +376,16 @@ export function assessEvidence(response,...evidenceTexts){
 
   const uniqueContentTokens=new Set(responseTokens).size;
   const normalizedResponse=normalizeEvidenceText(response);
-  const relationMarkers=["porque","por isso","logo","assim","quando","como","que","mas","porem","contudo","embora","permite","evita","resulta","corresponde","indica","mostra","favorece","altera","mantem","aumenta","diminui","retoma","atribui","liga","mede","calcula","compara","transfere","completa","homogeneiza"];
-  const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(String(response||""));
+  const relationMarkers=[
+    "porque","por isso","logo","assim","quando","como","que","mas","porem","contudo","embora",
+    "permite","evita","resulta","corresponde","indica","mostra","favorece","favorecer","altera","mantem",
+    "aumenta","diminui","retoma","atribui","liga","mede","medir","calcula","calcular","compara","comparar",
+    "transfere","transferir","completa","completar","homogeneiza","homogeneizar","repete","repetir","reduz","reduzir",
+    "soma","somar","acelera","acelerar"
+  ];
+  const rawResponse=String(response||"");
+  const symbolicStructure=/(?:->|→|=>|=|\/|\+)/u.test(rawResponse);
+  const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(rawResponse)||symbolicStructure;
   const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
   let status="not-observed";
   if(substantiveResponse&&((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44)))status="observed";
@@ -474,10 +487,25 @@ export function diagnoseOpenResponseError(criteria=[],responseText=""){
     message="A resposta pode estar no caminho certo, mas falta explicitar o raciocínio necessário para o corretor o confirmar com segurança.";
   }
 
+  const affected=[...contradictions,...missing,...partial]
+    .filter((row,index,all)=>row?.id&&all.findIndex(candidate=>candidate?.id===row.id)===index)
+    .map(row=>({
+      id:row.id,
+      label:row.label||row.id,
+      status:row.status||"not-observed",
+      contradictionDetected:!!row.contradictionDetected,
+      evidence:(row.observations||[])
+        .flatMap(observation=>Array.isArray(observation.studentEvidence)?observation.studentEvidence:[])
+        .map(value=>String(value||"").trim())
+        .find(Boolean)||""
+    }));
+  const primary=affected[0]||null;
   return {
     code,label,message,
     confidence:contradictions.length?"high":observed.length||partial.length?"medium":"low",
-    affectedCriteria:[...contradictions,...missing,...partial].map(row=>row.id).filter(Boolean)
+    affectedCriteria:affected.map(row=>row.id),
+    primaryCriterion:primary,
+    grounding:{criterionIds:affected.map(row=>row.id),evidence:affected.map(row=>row.evidence).filter(Boolean),source:"student-response"}
   };
 }
 

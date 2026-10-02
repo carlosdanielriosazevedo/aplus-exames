@@ -53,6 +53,7 @@ const checks=[
   ["Resposta construída adversarial","npm",["run","constructed-response:adversarial-audit"]],
   ["Calibração transversal de respostas v4","npm",["run","response-analysis-calibration:v4"]],
   ["Torture test do corretor v5","npm",["run","response-analysis-calibration:v5"]],
+  ["Invariantes semânticos do corretor v6","npm",["run","response-analysis-calibration:v6"]],
   ["Diagnóstico pedagógico do erro","npm",["run","error-diagnosis:audit"]],
   ["Feedback individualizado por erro","npm",["run","learning-feedback:audit"]],
   ["Pares mínimos do diagnóstico","npm",["run","diagnostic-minimal-pairs:audit"]],
