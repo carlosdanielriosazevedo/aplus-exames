@@ -41,7 +41,7 @@ const SYNONYM_GROUPS=[
   ["conclusao","concluir","final"],
   ["estrutura","organizacao","progressao"],
   ["coerencia","ligacao","articulacao"],
-  ["temperatura","calor","aquecimento"],
+  ["temperatura","calor","aquecimento","aquecer","aquecido","aquecida"],
   ["kc","constante"],
   ["composicao","proporcao","proporcoes"],
   ["manter","mantem","inalterado"],
@@ -63,6 +63,7 @@ const SYNONYM_GROUPS=[
 const PHRASE_EQUIVALENTS=[
   ["nao altera","concept-nonchange"],
   ["nao modifica","concept-nonchange"],
+  ["nao muda","concept-nonchange"],
   ["fica inalterado","concept-nonchange"],
   ["mantem se","concept-nonchange"],
   ["permanece igual","concept-nonchange"],
@@ -320,12 +321,14 @@ function contradictionDetected(response,evidenceTexts=[]){
     normalized.includes("declive nao representa aceleracao")
   ))return true;
 
+  if(
+    normalized.includes("area algebrica representa a distancia total")||
+    normalized.includes("area representa a distancia total")
+  )return true;
   if(expected.includes("deslocamento")&&expected.includes("area")&&(
     normalized.includes("area algebrica nao representa o deslocamento")||
     normalized.includes("area nao representa o deslocamento")||
-    normalized.includes("area algebrica nao representa deslocamento")||
-    normalized.includes("area algebrica representa a distancia total")||
-    normalized.includes("area representa a distancia total")
+    normalized.includes("area algebrica nao representa deslocamento")
   ))return true;
 
   if((expected.includes("aumentar a distancia")||expected.includes("distancia de propagacao"))&&(
