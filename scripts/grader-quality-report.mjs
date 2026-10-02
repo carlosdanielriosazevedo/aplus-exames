@@ -1,5 +1,6 @@
 import {OPEN_RESPONSE_CALIBRATION_CASES,portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
+import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
 import {gradePortugueseResponse} from "../app/lib/portugueseEngine.js";
 import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
 import {gradeResponse as gradeMathResponse} from "../app/lib/constructedResponse.js";
@@ -17,8 +18,9 @@ function review(result){return !!result?.requiresReview||result?.status==="needs
 function pct(value){return Math.round(value*1000)/10}
 function mean(values){return values.length?values.reduce((a,b)=>a+b,0)/values.length:0}
 function gradeOpen(row){
-  const item=row.subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
+  let item=row.subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
   if(!item)throw new Error(`Missing benchmark item ${row.subject}/${row.itemId}`);
+  if(row.subject==="portuguese")item=applyPortugueseRubricObservations([item])[0];
   return row.subject==="portuguese"?gradePortugueseResponse(item,row.response):gradePhysicsChemistryResponse(item,row.response);
 }
 
