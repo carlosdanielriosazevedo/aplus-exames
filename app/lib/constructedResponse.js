@@ -422,6 +422,8 @@ function mathLearningErrorDiagnosis(stepResults=[],overallReason=null){
     studentWork:mainProblem?.answer||"",
     expected:mainProblem?.expected||"",
     preserveCorrectWork:correctSteps.length>0,
+    primaryStep:mainProblem?{id:mainProblem.stepId||null,label:mainProblem.label||mainProblem.stepId||"Etapa",reason:mainProblem.reason||firstByPriority||null,answer:String(mainProblem.answer||"").trim(),expected:mainProblem.expected??null}:null,
+    grounding:{stepIds:problemSteps.map(row=>row.stepId).filter(Boolean),source:"student-working"},
     nextAction:base.code==="correct_or_near_correct"
       ?"Mantém este processo numa próxima questão."
       :correctSteps.length
