@@ -14,7 +14,7 @@ assert.match(component,/onConfirm=\{\(\)=>\{setSubmitCheck\(false\);setReview\(t
 assert.doesNotMatch(component,/>Corrigir</u,"um exame terminado não deve voltar a apresentar uma ação de correção");
 assert.doesNotMatch(component,/Voltar às respostas/u,"depois de terminado, o exame deve permanecer no fluxo de revisão");
 assert.match(component,/Avaliação automática por critérios/u,"respostas abertas devem mostrar a avaliação automática por critérios");
-assert.match(component,/não (?:produz|produzem)[^\n]*classificação automática final/u,"a UI deve dizer que autoavaliação e revisão não produzem nota automática final");
+assert.match(component,/classificação mantém-se provisória/u,"a UI deve explicar quando a avaliação automática continua provisória");
 assert.match(component,/Evidência detetada na tua resposta/u,"a revisão deve mostrar a evidência encontrada pelo corretor");
 assert.match(component,/Como distinguir uma resposta forte de uma resposta parcial/u,"a revisão deve mostrar âncoras de qualidade para respostas construídas");
 assert.match(component,/Também pode estar correta se/u,"a revisão deve explicitar variantes semanticamente aceitáveis");
