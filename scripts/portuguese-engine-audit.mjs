@@ -36,10 +36,12 @@ assert.equal(gradePortugueseResponse(byId("PT639-FND-008"),"oração subordinada
 const restricted=gradePortugueseResponse(byId("PT639-FND-005"),"A fotografia guarda uma memória e confronta a identidade atual com uma identidade passada.");
 assert.equal(restricted.final,false,"respostas abertas nunca recebem classificação final automática");
 assert.equal(restricted.points,null);
-assert.equal(restricted.status,"awaiting-rubric");
-assert.ok(restricted.criteria.every(criterion=>criterion.status==="pending"));
+assert.equal(restricted.status,"auto-assessed-provisional");
+assert.equal(restricted.rubricCompleted,true,"a grelha automática deve ficar preenchida provisoriamente");
+assert.ok(restricted.criteria.every(criterion=>["observed","partial","not-observed"].includes(criterion.status)));
 assert.ok(restricted.criteria.every(criterion=>criterion.observable===true));
-assert.ok(restricted.criteria.flatMap(criterion=>criterion.observations).every(observation=>observation.status==="pending"));
+assert.ok(restricted.criteria.flatMap(criterion=>criterion.observations).every(observation=>["observed","partial","not-observed"].includes(observation.status)));
+assert.ok(restricted.feedbackSummary?.errorDiagnosis,"a correção automática deve incluir diagnóstico pedagógico");
 assert.equal(PORTUGUESE_RUBRIC_EVIDENCE.length,4);
 let guided=restricted;
 for(const criterion of restricted.criteria){
