@@ -4991,7 +4991,7 @@ export const VNEXT_DIAGNOSTIC_QUESTIONS=[
     "difficulty": 2,
     "cognitive": "Raciocínio",
     "focus": "Derivabilidade e relação com continuidade",
-    "q": "Para f(x)=|x|, a derivada lateral esquerda no ponto 0 é...",
+    "q": "Para f(x)=|x|, a derivada lateral esquerda em 0 é...",
     "o": [
       "−1.",
       "1.",
