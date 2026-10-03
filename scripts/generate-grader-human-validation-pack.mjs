@@ -1,4 +1,5 @@
 import {writeFileSync} from "node:fs";
+import {pathToFileURL} from "node:url";
 import {OPEN_RESPONSE_CALIBRATION_CASES,portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
 import {MATH_RESPONSE_CALIBRATION_CASES} from "../app/data/mathResponseCalibrationBank.js";
@@ -51,9 +52,11 @@ export function buildGraderHumanValidationPack(){
   return rows;
 }
 
-const rows=buildGraderHumanValidationPack();
-const output=new URL("../grader-human-validation-pack.csv",import.meta.url);
-writeFileSync(output,serializeHumanValidationCsv(rows));
-console.log(`✓ ${GRADER_HUMAN_VALIDATION_SCHEMA}: ${rows.length} blind cases written to grader-human-validation-pack.csv`);
-console.log("  15 Matemática A · 15 Português · 15 FQ A");
-console.log("  The export intentionally excludes benchmark labels, answer keys, solutions, grader scores and grader diagnoses.");
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+  const rows=buildGraderHumanValidationPack();
+  const output=new URL("../grader-human-validation-pack.csv",import.meta.url);
+  writeFileSync(output,serializeHumanValidationCsv(rows));
+  console.log(`✓ ${GRADER_HUMAN_VALIDATION_SCHEMA}: ${rows.length} blind cases written to grader-human-validation-pack.csv`);
+  console.log("  15 Matemática A · 15 Português · 15 FQ A");
+  console.log("  The export intentionally excludes benchmark labels, answer keys, solutions, grader scores and grader diagnoses.");
+}
