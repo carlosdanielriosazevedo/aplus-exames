@@ -55,6 +55,7 @@ const checks=[
   ["Torture test do corretor v5","npm",["run","response-analysis-calibration:v5"]],
   ["Invariantes semânticos do corretor v6","npm",["run","response-analysis-calibration:v6"]],
   ["Tolerância e prudência do corretor v7","npm",["run","response-analysis-calibration:v7"]],
+  ["Validação humana cega do corretor","node",["scripts/grader-human-validation-audit.mjs"]],
   ["Diagnóstico pedagógico do erro","npm",["run","error-diagnosis:audit"]],
   ["Feedback individualizado por erro","npm",["run","learning-feedback:audit"]],
   ["Pares mínimos do diagnóstico","npm",["run","diagnostic-minimal-pairs:audit"]],
