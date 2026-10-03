@@ -68,9 +68,21 @@ import {
 } from "./lib/competition";
 import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
-  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
-} from "./lib/constructedResponse";
+  expectedResponseLabel,studentResponseLabel,examScoreLabel,stepFeedback
+} from "./lib/constructedResponseView";
 
+
+let constructedResponseGraderPromise=null;
+function loadConstructedResponseGrader(){
+  if(!constructedResponseGraderPromise)constructedResponseGraderPromise=import("./lib/constructedResponse");
+  return constructedResponseGraderPromise;
+}
+function gradeMathResponse(question,answer){
+  return loadConstructedResponseGrader().then(module=>module.gradeResponse(question,answer));
+}
+function legacyMiniExamPointSummary(questions,answers){
+  return loadConstructedResponseGrader().then(module=>module.miniExamPointSummary(questions,answers));
+}
 
 let mathEngineModule=null;
 let mathEnginePromise=null;
@@ -1373,7 +1385,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   }
 
   function answer(n){if(!fb)setSel(n)}
-  function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(gradeResponse(current,sel))}
+  async function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(await gradeMathResponse(current,sel))}
 
   function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
     if(completingRef.current)return;
@@ -1854,7 +1866,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
-  function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
+  async function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(await gradeMathResponse(q,sel))}
   function next(){
     const was=fb?.correct===true;
     const newCorrect=correct+(was?1:0);
@@ -2230,9 +2242,15 @@ function MiniExamReview({session,setSession,s,setS,go}){
 
 function MiniExamResult({s,setS,go}){
   const r=s.lastExam;
+  const [fallbackSummary,setFallbackSummary]=useState(null);
+  const questions=useMemo(()=>r?.questionIds?.map(questionById).filter(Boolean)||[],[r]);
+  useEffect(()=>{
+    let live=true;
+    if(r&&!r.itemResults)legacyMiniExamPointSummary(questions,r.answers).then(summary=>{if(live)setFallbackSummary(summary)});
+    return ()=>{live=false};
+  },[r,questions]);
   if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há resultado.</h1></Shell>;
-  const questions=r.questionIds.map(questionById).filter(Boolean);
-  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  if(!r.itemResults&&!fallbackSummary)return <Shell><Logo/><p className="muted">A recuperar a avaliação deste Mini-exame…</p></Shell>;
   const itemResults=r.itemResults||fallbackSummary.results;
   const earnedPoints=r.earnedPoints??fallbackSummary.earnedPoints;
   const maxPoints=r.maxPoints??fallbackSummary.maxPoints;
@@ -2264,9 +2282,15 @@ function MiniExamResult({s,setS,go}){
 
 function MiniExamCompletedReview({s,setS,go}){
   const r=s.lastExam;
+  const [fallbackSummary,setFallbackSummary]=useState(null);
+  const questions=useMemo(()=>r?.questionIds?.map(questionById).filter(Boolean)||[],[r]);
+  useEffect(()=>{
+    let live=true;
+    if(r&&!r.itemResults)legacyMiniExamPointSummary(questions,r.answers).then(summary=>{if(live)setFallbackSummary(summary)});
+    return ()=>{live=false};
+  },[r,questions]);
   if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há um Mini-exame para rever.</h1></Shell>;
-  const questions=r.questionIds.map(questionById).filter(Boolean);
-  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  if(!r.itemResults&&!fallbackSummary)return <Shell><Logo/><p className="muted">A recuperar a avaliação deste Mini-exame…</p></Shell>;
   const itemResults=r.itemResults||fallbackSummary.results;
   const rows=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]||fallbackSummary.results[i]}));
   const statusLabel=status=>status==="needs_review"?"Avaliação incompleta":status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
