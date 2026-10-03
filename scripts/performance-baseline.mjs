@@ -29,6 +29,13 @@ function chunkMetrics(files=[]){
   return {bytes,gzipBytes,chunks};
 }
 
+function routeText(metrics){
+  return (metrics?.chunks||[]).map(chunk=>{
+    const full=path.join(nextRoot,chunk.file);
+    return fs.existsSync(full)?fs.readFileSync(full,"utf8"):"";
+  }).join("\n");
+}
+
 walk(chunksRoot);rows.sort((a,b)=>b.bytes-a.bytes);
 const total=rows.reduce((n,r)=>n+r.bytes,0),totalGzip=rows.reduce((n,r)=>n+r.gzipBytes,0),appPage=rows.filter(r=>/^app\/page-[^/]+\.js$/.test(r.file));
 const appManifestPath=path.join(nextRoot,"app-build-manifest.json");
@@ -42,6 +49,18 @@ const routePageMetrics=Object.fromEntries(Object.entries(routePageChunks).map(([
 // last known healthy measurement (~627 KiB) and intentionally blocks regressions.
 const budgets={"/":650*1024,"/portugues-mini-exame":500*1024};
 
+const homeText=routeText(routeBundles["/"]);
+const homeSignatures={
+  physicsChemistryHeavy:["FQA-R-ELEM-01","PhysicsChemistrySubject","physicsChemistryConstructedItemById"],
+  constructedResponseGrader:["final_result_only","wrong_final_rounding","Identificado na tua resolução"],
+  constructedResponseBank:["CRV2-10FUN-STEPS-1","CRV2-12FCD-CHAIN-STEPS-1"],
+  portugueseHeavy:["PT639-FND-311","PortuguesePassageMiniExamRoute"]
+};
+const signaturePresence=Object.fromEntries(Object.entries(homeSignatures).map(([group,signatures])=>[group,{
+  matches:signatures.filter(signature=>homeText.includes(signature)),
+  present:signatures.some(signature=>homeText.includes(signature))
+}]));
+
 console.log("\n=== APProva+ PERFORMANCE BASELINE ===");
 console.log(`JS chunks: ${rows.length}`);console.log(`Total JS: ${total.toLocaleString("en-US")} B (${(total/1024).toFixed(1)} KiB)`);console.log(`Total gzip: ${totalGzip.toLocaleString("en-US")} B (${(totalGzip/1024).toFixed(1)} KiB)`);
 console.log("\nLargest chunks:");for(const row of rows.slice(0,15))console.log(`  ${row.bytes.toString().padStart(10)} B | gzip ${row.gzipBytes.toString().padStart(8)} B | ${row.file}`);
@@ -52,7 +71,10 @@ for(const [route,metrics] of Object.entries(routeBundles)){
   console.log(`  ${route.padEnd(24)} ${(metrics.bytes/1024).toFixed(1).padStart(7)} KiB | gzip ${(metrics.gzipBytes/1024).toFixed(1).padStart(6)} KiB | budget ${(budget/1024).toFixed(0)} KiB`);
   for(const chunk of metrics.chunks)console.log(`    ${(chunk.bytes/1024).toFixed(1).padStart(7)} KiB  ${chunk.file}`);
 }
-const output={generatedAt:new Date().toISOString(),totalJsBytes:total,totalGzipBytes:totalGzip,chunkCount:rows.length,largestChunks:rows.slice(0,15),routePageChunks:appPage,routePageMetrics,routeBundles,budgets};
+console.log("\nHome bundle signatures (diagnostic):");
+for(const [group,result] of Object.entries(signaturePresence))console.log(`  ${group.padEnd(28)} ${result.present?"PRESENT":"absent"}${result.matches.length?` · ${result.matches.join(", ")}`:""}`);
+
+const output={generatedAt:new Date().toISOString(),totalJsBytes:total,totalGzipBytes:totalGzip,chunkCount:rows.length,largestChunks:rows.slice(0,15),routePageChunks:appPage,routePageMetrics,routeBundles,budgets,homeBundleSignatures:signaturePresence};
 fs.writeFileSync(path.join(process.cwd(),"performance-baseline.json"),JSON.stringify(output,null,2)+"\n");
 if(process.argv.includes("--enforce")){
   const failures=[];
