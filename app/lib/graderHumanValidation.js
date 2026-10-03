@@ -71,7 +71,10 @@ export function validateHumanValidationRows(rows,packRows){
     const unique=`${row.case_id}::${reviewer.toLowerCase()}`;
     if(seen.has(unique)){invalid.push({rowNumber,caseId:row.case_id,reason:"avaliação duplicada pelo mesmo revisor"});continue}
     seen.add(unique);
-    if(String(row.case_fingerprint||"")!==String(base.case_fingerprint||"")){
+    const expectedFingerprint=String(base.case_fingerprint||"");
+    const submittedFingerprint=String(row.case_fingerprint||"");
+    const recomputedFingerprint=humanValidationFingerprint(row);
+    if(submittedFingerprint!==expectedFingerprint||recomputedFingerprint!==expectedFingerprint){
       invalid.push({rowNumber,caseId:row.case_id,reason:"conteúdo do caso foi alterado"});continue;
     }
     const score=Number(String(row.score_percent??"").replace(",","."));
