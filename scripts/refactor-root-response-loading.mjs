@@ -97,7 +97,8 @@ if(!source.includes(reviewBefore))throw new Error("MiniExamCompletedReview fallb
 source=source.replace(reviewBefore,reviewAfter);
 
 if(/from "\.\/lib\/constructedResponse";/.test(source))throw new Error("constructedResponse remains statically imported by app/page.js");
-if(/\bminiExamPointSummary\b/.test(source))throw new Error("miniExamPointSummary remains statically referenced in app/page.js");
+const lazyMiniUses=(source.match(/\bminiExamPointSummary\b/g)||[]).length;
+if(lazyMiniUses!==1||!source.includes("module.miniExamPointSummary(questions,answers)"))throw new Error("legacy mini-exam summary must remain only behind the dynamic grader module");
 const dynamicUses=(source.match(/gradeMathResponse\(/g)||[]).length;
 if(dynamicUses!==3)throw new Error(`unexpected gradeMathResponse occurrence count ${dynamicUses}`);
 
