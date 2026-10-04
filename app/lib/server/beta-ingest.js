@@ -36,7 +36,7 @@ export async function ingestBetaEnvelope(payload,rawText=""){
   `;
   const participantId=rows[0].id;
 
-  const counters={sessions:0,events:0,feedback:0,reports:0,results:0,editorial:0,batches:0};
+  const counters={sessions:0,events:0,feedback:0,analytics:0,reports:0,results:0,editorial:0,batches:0};
 
   for(const s of payload.beta?.sessions||[]){
     if(!s?.id || !iso(s.startedAt))continue;
@@ -59,6 +59,21 @@ export async function ingestBetaEnvelope(payload,rawText=""){
       on conflict (external_id) do nothing
     `;
     counters.events++;
+  }
+
+  const analytics=payload.beta?.productAnalytics;
+  if(analytics&&typeof analytics==="object"){
+    const analyticsAt=iso(analytics.lastSeenAt)||iso(payload.exportedAt)||new Date().toISOString();
+    const analyticsKey=`analytics:${participantId}:${analyticsAt}`;
+    await sql`
+      insert into beta_events (external_id,participant_id,event_type,occurred_at,payload)
+      values (${analyticsKey},${participantId},'product_analytics_snapshot',${analyticsAt},${json({
+        version:payload.beta?.productAnalyticsVersion||1,
+        ...analytics
+      })}::jsonb)
+      on conflict (external_id) do update set payload=excluded.payload
+    `;
+    counters.analytics++;
   }
 
   for(const f of payload.beta?.feedback||[]){
