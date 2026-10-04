@@ -31,6 +31,7 @@ const checks=[
   ["Cobertura de Português 639","npm",["run","portuguese-coverage:audit"]],
   ["Prontidão beta FQ A","node",["scripts/physics-chemistry-beta-readiness-audit.mjs"]],
   ["Prontidão beta FQ A 11.º ano","node",["scripts/physics-chemistry-11-beta-audit.mjs"]],
+  ["Candidato a beta FQ A ponta a ponta","node",["scripts/fqa-beta-candidate-audit.mjs"]],
   ["Fluxo Exame Completo FQ A","npm",["run","physics-chemistry-exam-flow:audit"]],
   ["Mini-exame FQ A","npm",["run","physics-chemistry-mini-exam:audit"]],
   ["Correção FQ A","npm",["run","physics-chemistry-rubric:audit"]],
