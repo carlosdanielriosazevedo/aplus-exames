@@ -42,6 +42,35 @@
   }
 }
 
+/* The confidence model belongs to Apronso's guidance layer, not to an
+   impersonal "app" voice. FQ A currently explains a different concept
+   (Preparação ≠ nota de exame), so leave that discipline's first help card
+   unchanged. */
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child>b,
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child>span{
+  display:none;
+}
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child::before{
+  content:"Domínio ≠ Certeza do Apronso";
+  display:block;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child::after{
+  content:"O Domínio é quanto o Apronso estima que sabes. A Certeza do Apronso é a segurança que ele tem nessa estimativa — não mede a tua confiança em ti próprio.";
+  display:block;
+}
+
+/* The compact certainty label used in diagnostic/result cards follows the
+   same language. This keeps the wording consistent without changing scoring. */
+.resultSkills .certainty>span{
+  display:none;
+}
+.resultSkills .certainty::before{
+  content:"Certeza do Apronso";
+  display:block;
+}
+
 @media(max-width:520px){
   .learnIntro{
     min-height:118px;
