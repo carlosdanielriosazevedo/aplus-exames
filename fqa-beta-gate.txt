@@ -1,0 +1,951 @@
+=== FQ A foundation ===
+(node:2407) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/physicsChemistryEngine.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✓ FQ A: AE março 2026 · 21 atividades práticas · 43 submatérias · 2145+ itens · tabelas + gráficos + diagramas · ≥14 problemas por etapas · ≥14 respostas abertas · mínimo 7/submatéria · blueprint 715 15+8/4
+RESULT: PASS
+
+=== FQ A exam flow ===
+(node:2422) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryExamBlueprint.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: respostas abertas não podem gerar uma falsa nota final
+    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/physics-chemistry-exam-flow-audit.mjs:51:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '"use client";\n' +
+    'import {useEffect,useMemo,useRef,useState} from "react";\n' +
+    'import {Shell,StudySessionHeader} from "./chrome";\n' +
+    'import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";\n' +
+    'import ExamSubmissionCheck from "./ExamSubmissionCheck";\n' +
+    'import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";\n' +
+    'import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";\n' +
+    'import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";\n' +
+    'import {recordSubjectSession} from "../lib/subjectProgress";\n' +
+    'import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";\n' +
+    '\n' +
+    'const SUBJECT_ID="physics-chemistry-a";\n' +
+    '\n' +
+    'function answered(item,value){\n' +
+    '  if(item.responseType==="multiple-choice")return Number.isInteger(value);\n' +
+    '  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>row&&typeof row==="object"?Object.values(row).some(part=>String(part??"").trim()):String(row??"").trim());\n' +
+    '  return String(value??"").trim().length>0;\n' +
+    '}\n' +
+    '\n' +
+    'function examPointsFor(item,result){\n' +
+    '  if(!result||result.status==="unanswered")return {points:0,provisional:false,pending:false};\n' +
+    '  if(item.responseType==="multiple-choice")return {points:result.correct?item.examPoints:0,provisional:false,pending:false};\n' +
+    '  if(["stepwise","restricted-response"].includes(item.responseType)){\n' +
+    '    const raw=Number(result.provisionalPoints)||0;\n' +
+    '    const max=Number(result.maxPoints)||1;\n' +
+    '    return {points:Math.round(raw/max*item.examPoints*10)/10,provisional:true,pending:!!result.requiresReview};\n' +
+    '  }\n' +
+    '  return {points:0,provisional:true,pending:true};\n' +
+    '}\n' +
+    '\n' +
+    'function Stimulus({item}){return <PhysicsChemistryStimulus item={item}/>;}\n' +
+    '\n' +
+    'function ResponseEditor({item,value,onChange,disabled=false}){\n' +
+    '  if(item.responseType==="multiple-choice")return <div className="opts">{item.options.map((option,index)=><button type="button" key={option} disabled={disabled} className={value===index?"selected":""} onClick={()=>onChange(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>;\n' +
+    '  if(item.responseType==="stepwise")return <PhysicsChemistryStepwiseEditor item={item} value={value} onChange={onChange} disabled={disabled}/>;\n' +
+    '  return <textarea className="fqaExamText" disabled={disabled} rows={9} value={typeof value==="string"?value:""} onChange={event=>onChange(event.target.value)} placeholder="Escreve a tua resposta científica..."/>;\n' +
+    '}\n' +
+    '\n' +
+    'export default function PhysicsChemistryExam({s,setS,go}){\n' +
+    '  const blueprint=PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT;\n' +
+    '  const rows=useMemo(()=>[...blueprint.mandatoryItems,...blueprint.optionalItems],[]);\n' +
+    '  const examId="fqa-full-715";\n' +
+    '  const itemIds=useMemo(()=>rows.map(row=>row.id),[rows]);\n' +
+    '  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(examId,rows.map(row=>row.id)));\n' +
+    '  const [current,setCurrent]=useState(()=>Math.max(0,Math.min(rows.length-1,initialDraft?.index||0)));\n' +
+    '  const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});\n' +
+    '  const [review,setReview]=useState(()=>!!initialDraft?.review);\n' +
+    '  const [submitCheck,setSubmitCheck]=useState(false);\n' +
+    '  const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});\n' +
+    '  const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);\n' +
+    '  const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());\n' +
+    '  const [now,setNow]=useState(Date.now);\n' +
+    '  const recordedRef=useRef(false);\n' +
+    '  const item=rows[current];\n' +
+    '  const filled=rows.filter(row=>answered(row,answers[row.id])).length;\n' +
+    '\n' +
+    '  const baseResults=useMemo(()=>rows.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[rows,answers]);\n' +
+    '  const results=baseResults;\n' +
+    '  const scored=useMemo(()=>rows.map((row,index)=>({...examPointsFor(row,results[index]),item:row,result:results[index]})),[rows,results]);\n' +
+    '  const mandatory=scored.slice(0,blueprint.mandatoryItems.length);\n' +
+    '  const optional=scored.slice(blueprint.mandatoryItems.length);\n' +
+    '  const mandatoryKnown=mandatory.reduce((sum,row)=>sum+row.points,0);\n' +
+    '  const bestOptional=[...optional].sort((a,b)=>b.points-a.points).slice(0,blueprint.optionalCounted);\n' +
+    '  const optionalKnown=bestOptional.reduce((sum,row)=>sum+row.points,0);\n' +
+    '  const pendingOpen=scored.filter(row=>row.pending).length;\n' +
+    '  const hasProvisional=scored.some(row=>row.provisional);\n' +
+    '  const baseSeconds=blueprint.durationMinutes*60;\n' +
+    '  const toleranceSeconds=blueprint.toleranceMinutes*60;\n' +
+    '  const elapsedSeconds=Math.max(0,Math.floor((now-startedAt)/1000));\n' +
+    '  const inTolerance=elapsedSeconds>=baseSeconds&&elapsedSeconds<baseSeconds+toleranceSeconds;\n' +
+    '  const timeExpired=elapsedSeconds>=baseSeconds+toleranceSeconds;\n' +
+    '  const remainingSeconds=inTolerance\n' +
+    '    ?Math.max(0,toleranceSeconds-(elapsedSeconds-baseSeconds))\n' +
+    '    :Math.max(0,baseSeconds-elapsedSeconds);\n' +
+    '\n' +
+    '  useEffect(()=>{\n' +
+    '    if(review)return undefined;\n' +
+    '    const timer=window.setInterval(()=>setNow(Date.now()),1000);\n' +
+    '    return ()=>window.clearInterval(timer);\n' +
+    '  },[review]);\n' +
+    '\n' +
+    '  useEffect(()=>{if(timeExpired&&!review)finish({force:true})},[timeExpired,review]);\n' +
+    '  useEffect(()=>{\n' +
+    '    savePhysicsChemistryExamDraft(examId,{itemIds,index:current,answers,startedAt,review,rubricAssessments,markedForReview});\n' +
+    '  },[answers,current,examId,itemIds,markedForReview,review,rubricAssessments,startedAt]);\n' +
+    '\n' +
+    '  function toggleMarked(id){setMarkedForReview(current=>current.includes(id)?current.filter(row=>row!==id):[...current,id]);}\n' +
+    '  function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}\n' +
+    '\n' +
+    '  function saveReviewAndExit(){\n' +
+    '    if(!recordedRef.current){\n' +
+    '      recordedRef.current=true;\n' +
+    '      setS(prev=>recordSubjectSession(prev,{\n' +
+    '        subjectId:SUBJECT_ID,\n' +
+    '        kind:"full_exam",\n' +
+    '        label:blueprint.label,\n' +
+    '        items:rows,\n' +
+    '        results,\n' +
+    '        sessionId:"fqa-full-"+startedAt\n' +
+    '      }));\n' +
+    '    }\n' +
+    '    clearPhysicsChemistryExamDraft(examId);\n' +
+    '    go("exams");\n' +
+    '  }\n' +
+    '\n' +
+    '  if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">\n' +
+    '    <ExamSubmissionCheck\n' +
+    '      items={rows}\n' +
+    '      answers={answers}\n' +
+    '      isAnswered={answered}\n' +
+    '      markedIds={markedForReview}\n' +
+    '      isRequired={row=>row.examSection==="mandatory"}\n' +
+    '      onBack={()=>setSubmitCheck(false)}\n' +
+    '      onJump={next=>{setSubmitCheck(false);setCurrent(next)}}\n' +
+    '      onConfirm={()=>{setSubmitCheck(false);setReview(true)}}\n' +
+    '    />\n' +
+    '  </Shell>;\n' +
+    '\n' +
+    '  if(review)return <Shell className="wideStudentShell fqaExamReviewPage">\n' +
+    '    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>\n' +
+    '    <p className="eyebrow">EXAME COMPLETO · PROVA 715</p>\n' +
+    '    <h1>Revisão do Exame Completo</h1>\n' +
+    '    <div className="notice"><b>{"Subtotal provisório já corrigível: "+(mandatoryKnown+optionalKnown).toFixed(1)+" / 200"}</b><span>{pendingOpen?pendingOpen+" resposta(s) aberta(s) têm confiança reduzida. ":""}{hasProvisional?"As respostas abertas e problemas por etapas usam classificação provisória quando a correção não é totalmente determinística.":""}</span></div>\n' +
+    '    <div className="fqaExamScoreGrid">\n' +
+    '      <div><small>Obrigatórios</small><b>{mandatoryKnown.toFixed(1)} / 160</b></div>\n' +
+    '      <div><small>Opcionais</small><b>{optionalKnown.toFixed(1)} / 40</b><span>Contam os 4 melhores.</span></div>\n' +
+    '      <div><small>Respondidas</small><b>{filled} / {rows.length}</b></div>\n' +
+    '    </div>\n' +
+    '    <p className="muted">Este subtotal é uma estimativa provisória sempre que inclui respostas abertas ou etapas cuja correção não é totalmente determinística.</p>\n' +
+    '    <div className="fqaExamReviewList">{rows.map((row,index)=>{\n' +
+    '      const result=results[index],score=scored[index],value=answers[row.id];\n' +
+    '      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correto":"A rever"):result.status==="unanswered"?"Sem resposta":"Provisório";\n' +
+    '      return <details id={"fqa-review-"+row.id} key={row.id} className="reviewChapter"><summary><div><small>{row.examSection==="mandatory"?"OBRIGATÓRIO":"OPCIONAL"} · {row.examPoints} pts</small><b>{index+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">\n' +
+    '        <Stimulus item={row}/>\n' +
+    '        {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p><p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p><p>{row.explanation}</p></>}\n' +
+    '        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} \n' +
+    '        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos-base</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">\n' +
+    '    {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}\n' +
+    '    {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}\n' +
+    '    {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}\n' +
+    '    {result.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {result.feedbackSummary.diagnosticCard.whatYouKnow}</p>}\n' +
+    '    <p className="automaticFeedbackNext"><b>Próximo passo:</b> '... 3056 more characters,
+  expected: /Subtotal já corrigível/u,
+  operator: 'match'
+}
+
+Node.js v20.20.2
+RESULT: FAIL (1)
+
+=== FQ A exam authenticity ===
+(node:2437) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✓ FQ A authenticity: gráficos e diagramas presentes nos 7 domínios e partilhados entre treino/exame
+RESULT: PASS
+
+=== FQ A mini-exam ===
+(node:2452) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryMiniExams.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: respostas construídas não podem gerar nota final automática.
+    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/physics-chemistry-mini-exam-audit.mjs:30:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '"use client";\n' +
+    'import {useEffect,useMemo,useRef,useState} from "react";\n' +
+    'import {Shell,StudySessionHeader} from "./chrome";\n' +
+    'import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";\n' +
+    'import ExamSubmissionCheck from "./ExamSubmissionCheck";\n' +
+    'import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";\n' +
+    'import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";\n' +
+    'import {recordSubjectSession} from "../lib/subjectProgress";\n' +
+    'import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";\n' +
+    'import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";\n' +
+    '\n' +
+    'const SUBJECT_ID="physics-chemistry-a";\n' +
+    '\n' +
+    'function filled(item,value){\n' +
+    '  if(item.responseType==="multiple-choice")return Number.isInteger(value);\n' +
+    '  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>row&&typeof row==="object"?Object.values(row).some(part=>String(part??"").trim()):String(row??"").trim());\n' +
+    '  return String(value??"").trim().length>0;\n' +
+    '}\n' +
+    '\n' +
+    'function Editor({item,value,onChange}){\n' +
+    '  if(item.responseType==="multiple-choice")return <div className="opts">{item.options.map((option,index)=><button type="button" key={option} className={value===index?"selected":""} onClick={()=>onChange(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>;\n' +
+    '  if(item.responseType==="stepwise")return <PhysicsChemistryStepwiseEditor item={item} value={value} onChange={onChange}/>;\n' +
+    '  return <textarea className="fqaExamText" rows={8} value={typeof value==="string"?value:""} onChange={event=>onChange(event.target.value)} placeholder="Escreve a tua resposta científica..."/>;\n' +
+    '}\n' +
+    '\n' +
+    'function formatTime(seconds){\n' +
+    '  const safe=Math.max(0,seconds);\n' +
+    '  const minutes=Math.floor(safe/60);\n' +
+    '  const rest=safe%60;\n' +
+    '  return String(minutes).padStart(2,"0")+":"+String(rest).padStart(2,"0");\n' +
+    '}\n' +
+    '\n' +
+    'export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go}){\n' +
+    '  const exam=physicsChemistryMiniExamById(modelId);\n' +
+    '  const itemIds=useMemo(()=>exam.items.map(row=>row.id),[exam.items]);\n' +
+    '  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(exam.id,exam.items.map(row=>row.id)));\n' +
+    '  const [index,setIndex]=useState(()=>Math.max(0,Math.min(exam.items.length-1,initialDraft?.index||0)));\n' +
+    '  const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});\n' +
+    '  const [review,setReview]=useState(()=>!!initialDraft?.review);\n' +
+    '  const [submitCheck,setSubmitCheck]=useState(false);\n' +
+    '  const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});\n' +
+    '  const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);\n' +
+    '  const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());\n' +
+    '  const [now,setNow]=useState(Date.now);\n' +
+    '  const recordedRef=useRef(false);\n' +
+    '  const item=exam.items[index];\n' +
+    '  const answeredCount=exam.items.filter(row=>filled(row,answers[row.id])).length;\n' +
+    '  const elapsed=Math.floor((now-startedAt)/1000);\n' +
+    '  const remaining=Math.max(0,exam.durationMinutes*60-elapsed);\n' +
+    '\n' +
+    '  useEffect(()=>{\n' +
+    '    if(review)return undefined;\n' +
+    '    const timer=window.setInterval(()=>setNow(Date.now()),1000);\n' +
+    '    return ()=>window.clearInterval(timer);\n' +
+    '  },[review]);\n' +
+    '  useEffect(()=>{if(remaining===0&&!review)finish({force:true})},[remaining,review]);\n' +
+    '  useEffect(()=>{\n' +
+    '    savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});\n' +
+    '  },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);\n' +
+    '\n' +
+    '  const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);\n' +
+    '  const results=baseResults;\n' +
+    '  const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");\n' +
+    '  const deterministicCorrect=deterministic.filter(row=>row.result.correct).length;\n' +
+    '  const provisional=results.filter(row=>["structured-provisional","auto-assessed-provisional"].includes(row.gradingMode)||row.status==="auto-assessed-provisional").length;\n' +
+    '  const openPending=results.filter(row=>row.requiresReview).length;\n' +
+    '\n' +
+    '  function answer(value){setAnswers(current=>({...current,[item.id]:value}))}\n' +
+    '  function respond(){\n' +
+    '    if(!filled(item,answers[item.id]))return;\n' +
+    '    if(index<exam.items.length-1)setIndex(value=>value+1);\n' +
+    '  }\n' +
+    '  function toggleMarked(id){setMarkedForReview(current=>current.includes(id)?current.filter(row=>row!==id):[...current,id]);}\n' +
+    '  function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}\n' +
+    '\n' +
+    '  function saveReviewAndExit(){\n' +
+    '    if(!recordedRef.current){\n' +
+    '      recordedRef.current=true;\n' +
+    '      setS(prev=>recordSubjectSession(prev,{\n' +
+    '        subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+startedAt\n' +
+    '      }));\n' +
+    '    }\n' +
+    '    clearPhysicsChemistryExamDraft(exam.id);\n' +
+    '    go("exams");\n' +
+    '  }\n' +
+    '\n' +
+    '  if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">\n' +
+    '    <ExamSubmissionCheck\n' +
+    '      items={exam.items}\n' +
+    '      answers={answers}\n' +
+    '      isAnswered={filled}\n' +
+    '      markedIds={markedForReview}\n' +
+    '      onBack={()=>setSubmitCheck(false)}\n' +
+    '      onJump={next=>{setSubmitCheck(false);setIndex(next)}}\n' +
+    '      onConfirm={()=>{setSubmitCheck(false);setReview(true)}}\n' +
+    '    />\n' +
+    '  </Shell>;\n' +
+    '\n' +
+    '  if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">\n' +
+    '    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>\n' +
+    '    <p className="eyebrow">FÍSICA E QUÍMICA A · MINI-EXAME</p>\n' +
+    '    <h1>Rever o mini-exame</h1>\n' +
+    '    <div className="fqaExamScoreGrid">\n' +
+    '      <div><small>Respondidas</small><b>{answeredCount} / {exam.itemCount}</b></div>\n' +
+    '      <div><small>Escolha múltipla</small><b>{deterministicCorrect} / {deterministic.length}</b><span>corretas</span></div>\n' +
+    '      <div><small>Construídas</small><b>{provisional}</b><span>{openPending?"inclui avaliações de confiança reduzida":"correção provisória"}</span></div>\n' +
+    '    </div>\n' +
+    '    <div className="notice"><b>Correção automática maximizada</b><span>A app corrige escolhas, etapas e respostas científicas automaticamente sempre que consegue. Nas respostas abertas, a pontuação continua provisória quando a interpretação tem incerteza.</span></div>\n' +
+    '    <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{\n' +
+    '      const value=answers[row.id],result=results[rowIndex];\n' +
+    '      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="unanswered"?"Sem resposta":"Avaliação automática";\n' +
+    '      return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">\n' +
+    '        <PhysicsChemistryStimulus item={row}/>\n' +
+    '        {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}\n' +
+    '        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} \n' +
+    '        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">\n' +
+    '    {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}\n' +
+    '    {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}\n' +
+    '    {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}\n' +
+    '    {result.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {result.feedbackSummary.diagnosticCard.whatYouKnow}</p>}\n' +
+    '    <p className="automaticFeedbackNext"><b>Próximo passo:</b> {result.feedbackSummary.nextAction}</p>\n' +
+    '  </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div><p className="muted">Uma formulação cientificamente equivalente pode ser válida. O aluno não precisa de preencher uma autoavaliação.</p></>}\n' +
+    '      </div></details>;\n' +
+    '    })}</div>\n' +
+    '    {openPending>0&&<div className="notice warning"><b>{openPending} avaliação(ões) com confiança reduzida</b><span>A app já as avaliou provisoriamente; não precisas de completar nenhuma grelha manual.</span></div>}\n' +
+    '    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>\n' +
+    '  </Shell>;\n' +
+    '\n' +
+    '  return <Shell className="wideStudentShell fqaMiniExamPage">\n' +
+    '    <StudySessionHeader progress={(index+1)/exam.items.length*100} label={(index+1)+"/"+exam.items.length} onExit={()=>{savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});go("exams")}} exitLabel="Guardar e s'... 1852 more characters,
+  expected: /Sem nota automática final/u,
+  operator: 'match'
+}
+
+Node.js v20.20.2
+RESULT: FAIL (1)
+
+=== FQ A exam draft ===
+✓ FQ A drafts: simulado e mini-exames guardam respostas, posição e tempo de início e retomam no mesmo dispositivo
+RESULT: PASS
+
+=== FQ A rubric ===
+(node:2482) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: missões/treino devem usar a autoavaliação guiada.
+    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/physics-chemistry-rubric-audit.mjs:40:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '"use client";\n' +
+    'import {useEffect,useState} from "react";\n' +
+    'import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";\n' +
+    'import StudyModeHub from "./StudyModeHub";\n' +
+    'import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";\n' +
+    'import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";\n' +
+    'import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";\n' +
+    'import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";\n' +
+    'import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";\n' +
+    'import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";\n' +
+    'import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";\n' +
+    'import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";\n' +
+    'import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";\n' +
+    'import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";\n' +
+    'import {missionCompletedToday} from "../lib/engagement";\n' +
+    'import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";\n' +
+    'import {answerOptionState} from "../lib/feedbackCopy";\n' +
+    '\n' +
+    'const SUBJECT_ID="physics-chemistry-a";\n' +
+    'const SCHOOL_YEARS=["10.º","11.º"];\n' +
+    '\n' +
+    'function curriculumYear(profileYear){\n' +
+    '  return profileYear==="10.º"?"10.º":"11.º";\n' +
+    '}\n' +
+    '\n' +
+    'function allDomainIdsForYear(year){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).map(row=>row.id);\n' +
+    '}\n' +
+    '\n' +
+    'function allDomainIds(){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.id);\n' +
+    '}\n' +
+    '\n' +
+    'function allSubtopicIdsForYear(year){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).flatMap(row=>physicsChemistrySubtopicsForDomain(row.id).map(topic=>topic.id));\n' +
+    '}\n' +
+    '\n' +
+    'function allSubtopicIds(){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.flatMap(row=>physicsChemistrySubtopicsForDomain(row.id).map(topic=>topic.id));\n' +
+    '}\n' +
+    '\n' +
+    'function initialTaught(settings,year){\n' +
+    '  const allowedSubtopics=new Set(allSubtopicIdsForYear(year));\n' +
+    '  const allowedDomains=new Set(allDomainIdsForYear(year));\n' +
+    '  const saved=Array.isArray(settings?.taughtUnitIds)?settings.taughtUnitIds:[];\n' +
+    '  const expanded=[];\n' +
+    '  for(const id of saved){\n' +
+    '    if(allowedSubtopics.has(id))expanded.push(id);\n' +
+    '    else if(allowedDomains.has(id))expanded.push(...physicsChemistrySubtopicsForDomain(id).map(topic=>topic.id));\n' +
+    '  }\n' +
+    '  return [...new Set(expanded)];\n' +
+    '}\n' +
+    '\n' +
+    'export default function PhysicsChemistrySubject({s,setS,go,view="home"}){\n' +
+    '  const currentYear=curriculumYear(s.profile?.schoolYear);\n' +
+    '  const settings=s.subjectSettings?.[SUBJECT_ID]||{};\n' +
+    '  const taughtUnitIds=initialTaught(settings,currentYear);\n' +
+    '  const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";\n' +
+    '  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allSubtopicIds():taughtUnitIds);\n' +
+    '  const initialPracticeDomain=allDomainIdsForYear(currentYear)[0]||null;\n' +
+    '  const [practiceYear,setPracticeYear]=useState(currentYear);\n' +
+    '  const [practiceDomain,setPracticeDomain]=useState(initialPracticeDomain);\n' +
+    '  const [practiceSubtopic,setPracticeSubtopic]=useState(()=>initialPracticeDomain?physicsChemistrySubtopicsForDomain(initialPracticeDomain)[0]?.id||null:null);\n' +
+    '  const [practiceLevel,setPracticeLevel]=useState("auto");\n' +
+    '  const [session,setSession]=useState(null);\n' +
+    '  const [answer,setAnswer]=useState(null);\n' +
+    '  const [feedback,setFeedback]=useState(null);\n' +
+    '  const [results,setResults]=useState([]);\n' +
+    '  const [rubricAssessment,setRubricAssessment]=useState({});\n' +
+    '  const [examDrafts,setExamDrafts]=useState([]);\n' +
+    '  const progress=subjectProgressFor(s,SUBJECT_ID);\n' +
+    '  const scopedItems=finishedSecondary?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);\n' +
+    '  const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);\n' +
+    '  const scopedCoverage=physicsChemistryCoverage(scopedItems);\n' +
+    '  const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);\n' +
+    '  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";\n' +
+    '  const missionDone=missionCompletedToday(s);\n' +
+    '  useEffect(()=>{\n' +
+    '    if(!["home","exams"].includes(view))return;\n' +
+    '    const mini1=physicsChemistryMiniExamById("fqa-mini-1");\n' +
+    '    const mini2=physicsChemistryMiniExamById("fqa-mini-2");\n' +
+    '    const fullRows=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems];\n' +
+    '    const candidates=[\n' +
+    '      {id:mini1.id,title:mini1.label,route:"physicsChemistryMini1",itemIds:mini1.items.map(row=>row.id)},\n' +
+    '      {id:mini2.id,title:mini2.label,route:"physicsChemistryMini2",itemIds:mini2.items.map(row=>row.id)},\n' +
+    '      {id:"fqa-full-715",title:"Exame Completo · 715",route:"physicsChemistryExam",itemIds:fullRows.map(row=>row.id)}\n' +
+    '    ];\n' +
+    '    setExamDrafts(candidates.map(candidate=>{\n' +
+    '      const draft=loadPhysicsChemistryExamDraft(candidate.id,candidate.itemIds);\n' +
+    '      return draft?{...candidate,draft}:null;\n' +
+    '    }).filter(Boolean));\n' +
+    '  },[view]);\n' +
+    '\n' +
+    '  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div>\n' +
+    '    <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>\n' +
+    '    <button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button>\n' +
+    '    <button onClick={()=>go("goalSettings")}>Objetivo: {subjectGoal(s,SUBJECT_ID)} valores</button>\n' +
+    '    {(progress.sessions.length>0||progress.lastPosition||examDrafts.length>0)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}\n' +
+    '  </div></details></StudentTop>;\n' +
+    '  const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;\n' +
+    '\n' +
+    '  function start(kind,items,label,domain=null){\n' +
+    '    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;\n' +
+    '    const sessionId=createSubjectSessionId(SUBJECT_ID,kind);\n' +
+    '    setSession({sessionId,kind,label,domain,items,current:0});\n' +
+    '    setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});\n' +
+    '    setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items}));\n' +
+    '  }\n' +
+    '\n' +
+    '  function startDiagnostic(){start("diagnostic",buildPhysicsChemistryDiagnostic(scopedItems),"Diagnóstico")}\n' +
+    '  function startMission(domain=null){\n' +
+    '    const built=buildAdaptivePhysicsChemistryMission(scopedItems,{progress,domain,size:7});\n' +
+    '    start("mission",built.items,domain?"Missão · "+(physicsChemistryDomainById(domain)?.shortTitle||domain):"Missão recomendada",domain);\n' +
+    '  }\n' +
+    '  function startPractice(){\n' +
+    '    const available=practiceSubtopic?(coverage.bySubtopic[practiceSubtopic]||0):(coverage.byDomain[practiceDomain]||0);\n' +
+    '    const size=Math.max(7,Math.min(8,available));\n' +
+    '    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,subtopicId:practiceSubtopic,year:practiceYear,level:practiceLevel,size});\n' +
+    '    const domainLabel=physicsChemistryDomainById(practiceDomain)?.shortTitle||practiceYear;\n' +
+    '    const subtopicLabel=physicsChemistrySubtopicById(practiceSubtopic)?.label;\n' +
+    '    start("training",built.items,"Praticar · "+[domainLabel,subtopicLabel].filter(Boolean).join(" · "),practiceDomain);\n' +
+    '  }\n' +
+    '\n' +
+    '  function answerReady(item){\n' +
+    '    if(item.responseType==="multiple-choice")return Number.isInteger(answer);\n' +
+    '    if(item.responseType==="stepwise")return Object.values(answer?.steps||{}).some(value=>value&&typeof value==="object"?Object.values(value).some(part=>String(part??"").trim().length>0):String(value??"").trim().length>0);\n' +
+    '    return String(answer??"").trim().length>0;\n' +
+    '  }\n' +
+    '\n' +
+    '  function submit(){\n' +
+    '    const item=session.items[session.current];\n' +
+    '    if(!answerReady(item))return;\n' +
+    '    const result=gradePhysicsChemistryResponse(item,answer);\n' +
+    '    const nextResults=[...results,result];\n' +
+    '    setFeedback(result);setResults(nextResults);\n' +
+    '    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));\n' +
+    '  }\n' +
+    '\n' +
+    '  function next(){\n' +
+    '    if(!feedback)return;\n' +
+    '    if(session.current>=session.items.length-1){\n' +
+    '      const finalResults=feedback?[...results.slice(0,-1),feedback]:results;\n' +
+    '      setResults(finalResults);\n' +
+    '      setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:finalResults,sessionId:session.sessionId}));\n' +
+    '      setSession(current=>({...current,finished:true}));\n' +
+    '      return;\n' +
+    '    }\n' +
+    '    const current=session.current+1;\n' +
+    '    setSession(prev=>({...prev,current}));\n' +
+    '    setAnswer(null);setFeedback(null);setRubricAssessment({});\n' +
+    '    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));\n' +
+    '  }\n' +
+    '\n' +
+    '  function resume(){\n' +
+    '    const saved=progress.lastPosition;\n' +
+    '    if(!saved)return;\n' +
+    '    const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);\n' +
+    '    if(items.length!==saved.itemIds.length){resetPhysicsChemistry();return}\n' +
+    '    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});\n' +
+    '    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);\n' +
+    '  }\n' +
+    '\n' +
+    '  function resetPhysicsChemistry(){\n' +
+    '    if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;\n' +
+    '    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});\n' +
+    '  }\n' +
+    '\n' +
+    '  if(session?.finished){\n' +
+    '    const deterministic=results.f'... 27267 more characters,
+  expected: /PhysicsChemistryRubricReview/u,
+  operator: 'match'
+}
+
+Node.js v20.20.2
+RESULT: FAIL (1)
+
+=== FQ A stepwise responses ===
+(node:2497) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✓ FQ A stepwise: processo + resultado + unidade · tipo 1/2 · follow-through · processos alternativos em revisão · evidência no Progresso
+RESULT: PASS
+
+=== FQ A beta readiness ===
+(node:2512) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Treino/Missão: deve reutilizar a grelha partilhada de respostas abertas.
+    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/physics-chemistry-beta-readiness-audit.mjs:54:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '"use client";\n' +
+    'import {useEffect,useState} from "react";\n' +
+    'import {Apronso,ApronsoNudge,FriendsBetaRibbon,Shell,StudentNav,StudentTop,StudySessionHeader} from "./chrome";\n' +
+    'import StudyModeHub from "./StudyModeHub";\n' +
+    'import PhysicsChemistryLearnPanel from "./PhysicsChemistryLearnPanel";\n' +
+    'import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";\n' +
+    'import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";\n' +
+    'import {PHYSICS_CHEMISTRY_A_DOMAINS,PHYSICS_CHEMISTRY_A_ITEMS,physicsChemistryDomainById,physicsChemistryItemById} from "../data/physicsChemistryFoundation";\n' +
+    'import {physicsChemistrySubtopicById,physicsChemistrySubtopicsForDomain} from "../data/physicsChemistryTaxonomy";\n' +
+    'import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";\n' +
+    'import {PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT} from "../data/physicsChemistryExamBlueprint";\n' +
+    'import {buildAdaptivePhysicsChemistryMission,buildPhysicsChemistryDiagnostic,gradePhysicsChemistryResponse,physicsChemistryCoverage,physicsChemistryScope} from "../lib/physicsChemistryEngine";\n' +
+    'import {advanceSubjectSession,beginSubjectSession,createSubjectSessionId,recordSubjectSession,resetSubjectProgress,subjectProgressFor} from "../lib/subjectProgress";\n' +
+    'import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnboardingStep} from "../lib/subjectWorkspace";\n' +
+    'import {missionCompletedToday} from "../lib/engagement";\n' +
+    'import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";\n' +
+    'import {answerOptionState} from "../lib/feedbackCopy";\n' +
+    '\n' +
+    'const SUBJECT_ID="physics-chemistry-a";\n' +
+    'const SCHOOL_YEARS=["10.º","11.º"];\n' +
+    '\n' +
+    'function curriculumYear(profileYear){\n' +
+    '  return profileYear==="10.º"?"10.º":"11.º";\n' +
+    '}\n' +
+    '\n' +
+    'function allDomainIdsForYear(year){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).map(row=>row.id);\n' +
+    '}\n' +
+    '\n' +
+    'function allDomainIds(){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.map(row=>row.id);\n' +
+    '}\n' +
+    '\n' +
+    'function allSubtopicIdsForYear(year){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===year).flatMap(row=>physicsChemistrySubtopicsForDomain(row.id).map(topic=>topic.id));\n' +
+    '}\n' +
+    '\n' +
+    'function allSubtopicIds(){\n' +
+    '  return PHYSICS_CHEMISTRY_A_DOMAINS.flatMap(row=>physicsChemistrySubtopicsForDomain(row.id).map(topic=>topic.id));\n' +
+    '}\n' +
+    '\n' +
+    'function initialTaught(settings,year){\n' +
+    '  const allowedSubtopics=new Set(allSubtopicIdsForYear(year));\n' +
+    '  const allowedDomains=new Set(allDomainIdsForYear(year));\n' +
+    '  const saved=Array.isArray(settings?.taughtUnitIds)?settings.taughtUnitIds:[];\n' +
+    '  const expanded=[];\n' +
+    '  for(const id of saved){\n' +
+    '    if(allowedSubtopics.has(id))expanded.push(id);\n' +
+    '    else if(allowedDomains.has(id))expanded.push(...physicsChemistrySubtopicsForDomain(id).map(topic=>topic.id));\n' +
+    '  }\n' +
+    '  return [...new Set(expanded)];\n' +
+    '}\n' +
+    '\n' +
+    'export default function PhysicsChemistrySubject({s,setS,go,view="home"}){\n' +
+    '  const currentYear=curriculumYear(s.profile?.schoolYear);\n' +
+    '  const settings=s.subjectSettings?.[SUBJECT_ID]||{};\n' +
+    '  const taughtUnitIds=initialTaught(settings,currentYear);\n' +
+    '  const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";\n' +
+    '  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allSubtopicIds():taughtUnitIds);\n' +
+    '  const initialPracticeDomain=allDomainIdsForYear(currentYear)[0]||null;\n' +
+    '  const [practiceYear,setPracticeYear]=useState(currentYear);\n' +
+    '  const [practiceDomain,setPracticeDomain]=useState(initialPracticeDomain);\n' +
+    '  const [practiceSubtopic,setPracticeSubtopic]=useState(()=>initialPracticeDomain?physicsChemistrySubtopicsForDomain(initialPracticeDomain)[0]?.id||null:null);\n' +
+    '  const [practiceLevel,setPracticeLevel]=useState("auto");\n' +
+    '  const [session,setSession]=useState(null);\n' +
+    '  const [answer,setAnswer]=useState(null);\n' +
+    '  const [feedback,setFeedback]=useState(null);\n' +
+    '  const [results,setResults]=useState([]);\n' +
+    '  const [rubricAssessment,setRubricAssessment]=useState({});\n' +
+    '  const [examDrafts,setExamDrafts]=useState([]);\n' +
+    '  const progress=subjectProgressFor(s,SUBJECT_ID);\n' +
+    '  const scopedItems=finishedSecondary?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);\n' +
+    '  const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);\n' +
+    '  const scopedCoverage=physicsChemistryCoverage(scopedItems);\n' +
+    '  const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);\n' +
+    '  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";\n' +
+    '  const missionDone=missionCompletedToday(s);\n' +
+    '  useEffect(()=>{\n' +
+    '    if(!["home","exams"].includes(view))return;\n' +
+    '    const mini1=physicsChemistryMiniExamById("fqa-mini-1");\n' +
+    '    const mini2=physicsChemistryMiniExamById("fqa-mini-2");\n' +
+    '    const fullRows=[...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.mandatoryItems,...PHYSICS_CHEMISTRY_A_FULL_EXAM_BLUEPRINT.optionalItems];\n' +
+    '    const candidates=[\n' +
+    '      {id:mini1.id,title:mini1.label,route:"physicsChemistryMini1",itemIds:mini1.items.map(row=>row.id)},\n' +
+    '      {id:mini2.id,title:mini2.label,route:"physicsChemistryMini2",itemIds:mini2.items.map(row=>row.id)},\n' +
+    '      {id:"fqa-full-715",title:"Exame Completo · 715",route:"physicsChemistryExam",itemIds:fullRows.map(row=>row.id)}\n' +
+    '    ];\n' +
+    '    setExamDrafts(candidates.map(candidate=>{\n' +
+    '      const draft=loadPhysicsChemistryExamDraft(candidate.id,candidate.itemIds);\n' +
+    '      return draft?{...candidate,draft}:null;\n' +
+    '    }).filter(Boolean));\n' +
+    '  },[view]);\n' +
+    '\n' +
+    '  const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div>\n' +
+    '    <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>\n' +
+    '    <button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button>\n' +
+    '    <button onClick={()=>go("goalSettings")}>Objetivo: {subjectGoal(s,SUBJECT_ID)} valores</button>\n' +
+    '    {(progress.sessions.length>0||progress.lastPosition||examDrafts.length>0)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}\n' +
+    '  </div></details></StudentTop>;\n' +
+    '  const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;\n' +
+    '\n' +
+    '  function start(kind,items,label,domain=null){\n' +
+    '    if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;\n' +
+    '    const sessionId=createSubjectSessionId(SUBJECT_ID,kind);\n' +
+    '    setSession({sessionId,kind,label,domain,items,current:0});\n' +
+    '    setAnswer(null);setFeedback(null);setResults([]);setRubricAssessment({});\n' +
+    '    setS(prev=>beginSubjectSession(prev,{subjectId:SUBJECT_ID,sessionId,kind,label,domain,items}));\n' +
+    '  }\n' +
+    '\n' +
+    '  function startDiagnostic(){start("diagnostic",buildPhysicsChemistryDiagnostic(scopedItems),"Diagnóstico")}\n' +
+    '  function startMission(domain=null){\n' +
+    '    const built=buildAdaptivePhysicsChemistryMission(scopedItems,{progress,domain,size:7});\n' +
+    '    start("mission",built.items,domain?"Missão · "+(physicsChemistryDomainById(domain)?.shortTitle||domain):"Missão recomendada",domain);\n' +
+    '  }\n' +
+    '  function startPractice(){\n' +
+    '    const available=practiceSubtopic?(coverage.bySubtopic[practiceSubtopic]||0):(coverage.byDomain[practiceDomain]||0);\n' +
+    '    const size=Math.max(7,Math.min(8,available));\n' +
+    '    const built=buildAdaptivePhysicsChemistryMission(PHYSICS_CHEMISTRY_A_ITEMS,{progress,domain:practiceDomain,subtopicId:practiceSubtopic,year:practiceYear,level:practiceLevel,size});\n' +
+    '    const domainLabel=physicsChemistryDomainById(practiceDomain)?.shortTitle||practiceYear;\n' +
+    '    const subtopicLabel=physicsChemistrySubtopicById(practiceSubtopic)?.label;\n' +
+    '    start("training",built.items,"Praticar · "+[domainLabel,subtopicLabel].filter(Boolean).join(" · "),practiceDomain);\n' +
+    '  }\n' +
+    '\n' +
+    '  function answerReady(item){\n' +
+    '    if(item.responseType==="multiple-choice")return Number.isInteger(answer);\n' +
+    '    if(item.responseType==="stepwise")return Object.values(answer?.steps||{}).some(value=>value&&typeof value==="object"?Object.values(value).some(part=>String(part??"").trim().length>0):String(value??"").trim().length>0);\n' +
+    '    return String(answer??"").trim().length>0;\n' +
+    '  }\n' +
+    '\n' +
+    '  function submit(){\n' +
+    '    const item=session.items[session.current];\n' +
+    '    if(!answerReady(item))return;\n' +
+    '    const result=gradePhysicsChemistryResponse(item,answer);\n' +
+    '    const nextResults=[...results,result];\n' +
+    '    setFeedback(result);setResults(nextResults);\n' +
+    '    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current:session.current,results:nextResults,currentResult:result,currentAnswer:answer}));\n' +
+    '  }\n' +
+    '\n' +
+    '  function next(){\n' +
+    '    if(!feedback)return;\n' +
+    '    if(session.current>=session.items.length-1){\n' +
+    '      const finalResults=feedback?[...results.slice(0,-1),feedback]:results;\n' +
+    '      setResults(finalResults);\n' +
+    '      setS(prev=>recordSubjectSession(prev,{subjectId:SUBJECT_ID,kind:session.kind,label:session.label,domain:session.domain,items:session.items,results:finalResults,sessionId:session.sessionId}));\n' +
+    '      setSession(current=>({...current,finished:true}));\n' +
+    '      return;\n' +
+    '    }\n' +
+    '    const current=session.current+1;\n' +
+    '    setSession(prev=>({...prev,current}));\n' +
+    '    setAnswer(null);setFeedback(null);setRubricAssessment({});\n' +
+    '    setS(prev=>advanceSubjectSession(prev,SUBJECT_ID,{current,results,currentResult:null,currentAnswer:null}));\n' +
+    '  }\n' +
+    '\n' +
+    '  function resume(){\n' +
+    '    const saved=progress.lastPosition;\n' +
+    '    if(!saved)return;\n' +
+    '    const items=saved.itemIds.map(physicsChemistryItemById).filter(Boolean);\n' +
+    '    if(items.length!==saved.itemIds.length){resetPhysicsChemistry();return}\n' +
+    '    setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});\n' +
+    '    setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);\n' +
+    '  }\n' +
+    '\n' +
+    '  function resetPhysicsChemistry(){\n' +
+    '    if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;\n' +
+    '    setS(prev=>resetSubjectProgress(prev,SUBJECT_ID));setSession(null);setResults([]);setAnswer(null);setFeedback(null);setRubricAssessment({});\n' +
+    '  }\n' +
+    '\n' +
+    '  if(session?.finished){\n' +
+    '    const deterministic=results.f'... 27267 more characters,
+  expected: /PhysicsChemistryRubricReview/u,
+  operator: 'match'
+}
+
+Node.js v20.20.2
+RESULT: FAIL (1)
+
+=== FQ A review/progress ===
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Mini-exame: deve mostrar o progresso global da revisão.
+    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/physics-chemistry-review-progress-audit.mjs:18:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '"use client";\n' +
+    'import {useEffect,useMemo,useRef,useState} from "react";\n' +
+    'import {Shell,StudySessionHeader} from "./chrome";\n' +
+    'import PhysicsChemistryStimulus from "./PhysicsChemistryStimulus";\n' +
+    'import ExamSubmissionCheck from "./ExamSubmissionCheck";\n' +
+    'import {PhysicsChemistryStepwiseEditor,PhysicsChemistryStepwiseReview} from "./PhysicsChemistryStepwise";\n' +
+    'import {gradePhysicsChemistryResponse} from "../lib/physicsChemistryEngine";\n' +
+    'import {recordSubjectSession} from "../lib/subjectProgress";\n' +
+    'import {physicsChemistryMiniExamById} from "../data/physicsChemistryMiniExams";\n' +
+    'import {clearPhysicsChemistryExamDraft,loadPhysicsChemistryExamDraft,savePhysicsChemistryExamDraft} from "../lib/physicsChemistryExamDraft";\n' +
+    '\n' +
+    'const SUBJECT_ID="physics-chemistry-a";\n' +
+    '\n' +
+    'function filled(item,value){\n' +
+    '  if(item.responseType==="multiple-choice")return Number.isInteger(value);\n' +
+    '  if(item.responseType==="stepwise")return Object.values(value?.steps||{}).some(row=>row&&typeof row==="object"?Object.values(row).some(part=>String(part??"").trim()):String(row??"").trim());\n' +
+    '  return String(value??"").trim().length>0;\n' +
+    '}\n' +
+    '\n' +
+    'function Editor({item,value,onChange}){\n' +
+    '  if(item.responseType==="multiple-choice")return <div className="opts">{item.options.map((option,index)=><button type="button" key={option} className={value===index?"selected":""} onClick={()=>onChange(index)}><span>{String.fromCharCode(65+index)}</span>{option}</button>)}</div>;\n' +
+    '  if(item.responseType==="stepwise")return <PhysicsChemistryStepwiseEditor item={item} value={value} onChange={onChange}/>;\n' +
+    '  return <textarea className="fqaExamText" rows={8} value={typeof value==="string"?value:""} onChange={event=>onChange(event.target.value)} placeholder="Escreve a tua resposta científica..."/>;\n' +
+    '}\n' +
+    '\n' +
+    'function formatTime(seconds){\n' +
+    '  const safe=Math.max(0,seconds);\n' +
+    '  const minutes=Math.floor(safe/60);\n' +
+    '  const rest=safe%60;\n' +
+    '  return String(minutes).padStart(2,"0")+":"+String(rest).padStart(2,"0");\n' +
+    '}\n' +
+    '\n' +
+    'export default function PhysicsChemistryMiniExam({modelId="fqa-mini-1",s,setS,go}){\n' +
+    '  const exam=physicsChemistryMiniExamById(modelId);\n' +
+    '  const itemIds=useMemo(()=>exam.items.map(row=>row.id),[exam.items]);\n' +
+    '  const [initialDraft]=useState(()=>loadPhysicsChemistryExamDraft(exam.id,exam.items.map(row=>row.id)));\n' +
+    '  const [index,setIndex]=useState(()=>Math.max(0,Math.min(exam.items.length-1,initialDraft?.index||0)));\n' +
+    '  const [answers,setAnswers]=useState(()=>initialDraft?.answers||{});\n' +
+    '  const [review,setReview]=useState(()=>!!initialDraft?.review);\n' +
+    '  const [submitCheck,setSubmitCheck]=useState(false);\n' +
+    '  const [rubricAssessments,setRubricAssessments]=useState(()=>initialDraft?.rubricAssessments||{});\n' +
+    '  const [markedForReview,setMarkedForReview]=useState(()=>initialDraft?.markedForReview||[]);\n' +
+    '  const [startedAt]=useState(()=>initialDraft?.startedAt||Date.now());\n' +
+    '  const [now,setNow]=useState(Date.now);\n' +
+    '  const recordedRef=useRef(false);\n' +
+    '  const item=exam.items[index];\n' +
+    '  const answeredCount=exam.items.filter(row=>filled(row,answers[row.id])).length;\n' +
+    '  const elapsed=Math.floor((now-startedAt)/1000);\n' +
+    '  const remaining=Math.max(0,exam.durationMinutes*60-elapsed);\n' +
+    '\n' +
+    '  useEffect(()=>{\n' +
+    '    if(review)return undefined;\n' +
+    '    const timer=window.setInterval(()=>setNow(Date.now()),1000);\n' +
+    '    return ()=>window.clearInterval(timer);\n' +
+    '  },[review]);\n' +
+    '  useEffect(()=>{if(remaining===0&&!review)finish({force:true})},[remaining,review]);\n' +
+    '  useEffect(()=>{\n' +
+    '    savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});\n' +
+    '  },[answers,exam.id,index,itemIds,markedForReview,review,rubricAssessments,startedAt]);\n' +
+    '\n' +
+    '  const baseResults=useMemo(()=>exam.items.map(row=>gradePhysicsChemistryResponse(row,answers[row.id])),[exam.items,answers]);\n' +
+    '  const results=baseResults;\n' +
+    '  const deterministic=exam.items.map((row,i)=>({item:row,result:results[i]})).filter(row=>row.item.responseType==="multiple-choice");\n' +
+    '  const deterministicCorrect=deterministic.filter(row=>row.result.correct).length;\n' +
+    '  const provisional=results.filter(row=>["structured-provisional","auto-assessed-provisional"].includes(row.gradingMode)||row.status==="auto-assessed-provisional").length;\n' +
+    '  const openPending=results.filter(row=>row.requiresReview).length;\n' +
+    '\n' +
+    '  function answer(value){setAnswers(current=>({...current,[item.id]:value}))}\n' +
+    '  function respond(){\n' +
+    '    if(!filled(item,answers[item.id]))return;\n' +
+    '    if(index<exam.items.length-1)setIndex(value=>value+1);\n' +
+    '  }\n' +
+    '  function toggleMarked(id){setMarkedForReview(current=>current.includes(id)?current.filter(row=>row!==id):[...current,id]);}\n' +
+    '  function finish({force=false}={}){if(force){setReview(true);return;}setSubmitCheck(true);}\n' +
+    '\n' +
+    '  function saveReviewAndExit(){\n' +
+    '    if(!recordedRef.current){\n' +
+    '      recordedRef.current=true;\n' +
+    '      setS(prev=>recordSubjectSession(prev,{\n' +
+    '        subjectId:SUBJECT_ID,kind:"mini_exam",label:exam.label,items:exam.items,results,sessionId:exam.id+"-"+startedAt\n' +
+    '      }));\n' +
+    '    }\n' +
+    '    clearPhysicsChemistryExamDraft(exam.id);\n' +
+    '    go("exams");\n' +
+    '  }\n' +
+    '\n' +
+    '  if(submitCheck&&!review)return <Shell className="wideStudentShell fqaSubmitCheckPage">\n' +
+    '    <ExamSubmissionCheck\n' +
+    '      items={exam.items}\n' +
+    '      answers={answers}\n' +
+    '      isAnswered={filled}\n' +
+    '      markedIds={markedForReview}\n' +
+    '      onBack={()=>setSubmitCheck(false)}\n' +
+    '      onJump={next=>{setSubmitCheck(false);setIndex(next)}}\n' +
+    '      onConfirm={()=>{setSubmitCheck(false);setReview(true)}}\n' +
+    '    />\n' +
+    '  </Shell>;\n' +
+    '\n' +
+    '  if(review)return <Shell className="wideStudentShell fqaMiniReviewPage">\n' +
+    '    <button className="back" onClick={saveReviewAndExit}>← Guardar revisão e voltar aos exames</button>\n' +
+    '    <p className="eyebrow">FÍSICA E QUÍMICA A · MINI-EXAME</p>\n' +
+    '    <h1>Rever o mini-exame</h1>\n' +
+    '    <div className="fqaExamScoreGrid">\n' +
+    '      <div><small>Respondidas</small><b>{answeredCount} / {exam.itemCount}</b></div>\n' +
+    '      <div><small>Escolha múltipla</small><b>{deterministicCorrect} / {deterministic.length}</b><span>corretas</span></div>\n' +
+    '      <div><small>Construídas</small><b>{provisional}</b><span>{openPending?"inclui avaliações de confiança reduzida":"correção provisória"}</span></div>\n' +
+    '    </div>\n' +
+    '    <div className="notice"><b>Correção automática maximizada</b><span>A app corrige escolhas, etapas e respostas científicas automaticamente sempre que consegue. Nas respostas abertas, a pontuação continua provisória quando a interpretação tem incerteza.</span></div>\n' +
+    '    <div className="fqaExamReviewList">{exam.items.map((row,rowIndex)=>{\n' +
+    '      const value=answers[row.id],result=results[rowIndex];\n' +
+    '      const resultLabel=row.responseType==="multiple-choice"?(result.correct?"Correta":"A rever"):result.status==="unanswered"?"Sem resposta":"Avaliação automática";\n' +
+    '      return <details id={"fqa-review-"+row.id} className="reviewChapter" key={row.id}><summary><div><small>{row.year} · {row.responseType==="multiple-choice"?"SELEÇÃO":"CONSTRUÇÃO"}</small><b>{rowIndex+1}. {row.prompt}</b></div><span>{resultLabel}</span></summary><div className="reviewChapterBody">\n' +
+    '        <PhysicsChemistryStimulus item={row}/>\n' +
+    '        {row.responseType==="multiple-choice"&&<><p><b>A tua resposta:</b> {Number.isInteger(value)?row.options[value]:"Sem resposta"}</p>{!result.correct&&<p><b>Resposta correta:</b> {row.options[row.answerIndex]}</p>}<p>{row.explanation}</p></>}\n' +
+    '        {row.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={row} result={result}/>} \n' +
+    '        {row.responseType==="restricted-response"&&<><p><b>A tua resposta:</b> {value||"Sem resposta"}</p>{Number.isFinite(result.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(result.provisionalPoints).replace(".",",")} / {result.maxPoints} pontos</b><small>estimativa provisória · confiança {result.autoAssessmentConfidence??"—"}%</small></div>}{result.feedbackSummary&&<div className="automaticFeedbackPanel">\n' +
+    '    {result.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{result.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}</div>)}</section>}\n' +
+    '    {result.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que faltou</b>{result.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span></div>)}</section>}\n' +
+    '    {result.feedbackSummary.errorDiagnosis&&result.feedbackSummary.errorDiagnosis.code!=="correct_or_near_correct"&&<p className="automaticFeedbackNext"><b>{result.feedbackSummary.errorDiagnosis.label}:</b> {result.feedbackSummary.errorDiagnosis.message}</p>}\n' +
+    '    {result.feedbackSummary.diagnosticCard?.preserveCorrectWork&&<p className="automaticFeedbackNext"><b>Mantém:</b> {result.feedbackSummary.diagnosticCard.whatYouKnow}</p>}\n' +
+    '    <p className="automaticFeedbackNext"><b>Próximo passo:</b> {result.feedbackSummary.nextAction}</p>\n' +
+    '  </div>}<div className="automaticCriteriaList">{(result.criteria||[]).map(criterion=><div className={"automaticCriterion "+criterion.status} key={criterion.id}><div><b>{criterion.label}</b><span>{criterion.status==="observed"?"✓ Detetado":criterion.status==="partial"?"◐ Parcial":"○ Não detetado"}</span></div></div>)}</div><p className="muted">Uma formulação cientificamente equivalente pode ser válida. O aluno não precisa de preencher uma autoavaliação.</p></>}\n' +
+    '      </div></details>;\n' +
+    '    })}</div>\n' +
+    '    {openPending>0&&<div className="notice warning"><b>{openPending} avaliação(ões) com confiança reduzida</b><span>A app já as avaliou provisoriamente; não precisas de completar nenhuma grelha manual.</span></div>}\n' +
+    '    <button className="primary" onClick={saveReviewAndExit}>Guardar revisão e terminar</button>\n' +
+    '  </Shell>;\n' +
+    '\n' +
+    '  return <Shell className="wideStudentShell fqaMiniExamPage">\n' +
+    '    <StudySessionHeader progress={(index+1)/exam.items.length*100} label={(index+1)+"/"+exam.items.length} onExit={()=>{savePhysicsChemistryExamDraft(exam.id,{itemIds,index,answers,startedAt,review,rubricAssessments,markedForReview});go("exams")}} exitLabel="Guardar e s'... 1852 more characters,
+  expected: /PhysicsChemistryReviewProgress/u,
+  operator: 'match'
+}
+
+Node.js v20.20.2
+RESULT: FAIL (1)
+
+=== Automatic open responses ===
+(node:2542) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✓ Portuguese open response is auto-assessed
+✓ Portuguese returns provisional points
+✓ Portuguese stronger answer scores above weak answer
+✓ FQ A open response is auto-assessed
+✓ FQ A returns provisional points
+✓ FQ A stronger answer scores above weak answer
+
+Automatic open-response audit passed.
+RESULT: PASS
+
+=== Open-response calibration ===
+✓ Portuguese paraphrase receives meaningful credit
+✓ Portuguese keyword soup cannot receive full credit
+✓ Portuguese off-topic answer is not fully credited
+✓ FQ A paraphrase receives meaningful credit
+✓ FQ A scientific contradiction is detected
+✓ FQ A keyword soup cannot receive full credit
+
+Open-response calibration audit passed.
+(node:2557) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+RESULT: PASS
+
+=== Error diagnosis ===
+(node:2572) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+=== ERROR DIAGNOSIS AUDIT ===
+Open-response diagnosis taxonomy: 4 core cases + criterion grounding checked
+Mathematics diagnosis taxonomy: correct, result-only, local-slip + step grounding checked
+
+ERROR DIAGNOSIS AUDIT PASSED
+RESULT: PASS
+
+=== Learning feedback quality ===
+(node:2587) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✓ learning feedback: preserve-correct-work, focused gap, contradiction and Math first-error diagnosis validated
+RESULT: PASS
+
+=== Grader quality report ===
+(node:2602) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBank.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+=== GRADER QUALITY REPORT ===
+Curated open-response benchmark: 65 cases
+Strong undercredit: 0%
+Wrong overcredit: 0%
+Review rate: 86.2%
+Paraphrase mean score delta: 18.2pp
+Unstable paraphrases: 15.4%
+Diagnostic accuracy: 100% (8/8)
+Human agreement: NOT MEASURED (requires independent teacher labels)
+Unstable excellent↔paraphrase pairs:
+  portuguese::PT639-FND-311: excellent 84.6% · paraphrase 36.2% · Δ 48.5pp · review true/true · diagnosis correct_or_near_correct/incomplete_answer
+  portuguese::PT639-FND-313: excellent 67.7% · paraphrase 33.8% · Δ 33.8pp · review true/true · diagnosis insufficient_justification/incomplete_answer
+
+GRADER QUALITY REPORT PASSED
+RESULT: PASS
+
+TOTAL FAILURES: 5
