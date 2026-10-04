@@ -1,0 +1,112 @@
+/* Apronso visibility/parity across the three student workspaces. */
+.learnIntro{
+  position:relative;
+  min-height:138px;
+  padding-right:138px;
+}
+.learnIntro::after{
+  content:"";
+  position:absolute;
+  right:6px;
+  bottom:-2px;
+  width:126px;
+  height:142px;
+  background:url('/mascot/apronso-welcome.webp') center bottom/contain no-repeat;
+  pointer-events:none;
+}
+
+/* On tablet/mobile the previous design hid Apronso from Progresso. Keep him
+   visible and place him visually inside the PREPARAÇÃO card. */
+@media(max-width:900px){
+  .progressPage .progressHero{
+    position:relative;
+    grid-template-columns:1fr!important;
+  }
+  .progressPage .progressHero>div:first-child{
+    position:relative;
+    min-height:142px;
+    padding-right:118px;
+  }
+  .progressPage .progressHero>.apronso{
+    display:block!important;
+    position:absolute;
+    top:8px;
+    right:12px;
+    width:100px;
+    height:126px;
+    min-height:0!important;
+    max-height:none;
+    object-fit:contain;
+    z-index:1;
+    pointer-events:none;
+  }
+}
+
+/* The confidence model belongs to Apronso's guidance layer, not to an
+   impersonal "app" voice. FQ A currently explains a different concept
+   (Preparação ≠ nota de exame), so leave that discipline's first help card
+   unchanged. */
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child>b,
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child>span{
+  display:none;
+}
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child::before{
+  content:"Domínio ≠ Certeza do Apronso";
+  display:block;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.progressPage:not(:has(.fqaCompetencyGrid)) .progressHelp .notice:first-child::after{
+  content:"O Domínio é quanto o Apronso estima que sabes. A Certeza do Apronso é a segurança que ele tem nessa estimativa — não mede a tua confiança em ti próprio.";
+  display:block;
+}
+
+/* The compact certainty label used in diagnostic/result cards follows the
+   same language. This keeps the wording consistent without changing scoring. */
+.resultSkills .certainty>span{
+  display:none;
+}
+.resultSkills .certainty::before{
+  content:"Certeza do Apronso";
+  display:block;
+}
+
+@media(max-width:520px){
+  .learnIntro{
+    min-height:118px;
+    padding-right:104px;
+  }
+  .learnIntro::after{
+    width:98px;
+    height:118px;
+    right:0;
+  }
+  .progressPage .progressHero>div:first-child{
+    min-height:132px;
+    padding-right:102px;
+  }
+  .progressPage .progressHero>.apronso{
+    width:88px;
+    height:112px;
+    top:10px;
+    right:10px;
+  }
+}
+
+@media(max-width:360px){
+  .learnIntro{
+    min-height:106px;
+    padding-right:86px;
+  }
+  .learnIntro::after{
+    width:82px;
+    height:102px;
+  }
+  .progressPage .progressHero>div:first-child{
+    padding-right:88px;
+  }
+  .progressPage .progressHero>.apronso{
+    width:76px;
+    right:8px;
+  }
+}
