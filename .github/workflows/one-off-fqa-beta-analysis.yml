@@ -1,0 +1,73 @@
+name: One-off FQ A beta analysis
+
+on:
+  push:
+    branches:
+      - fix/enforce-total-client-bundle-budget
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/enforce-total-client-bundle-budget
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Analyze root function weight
+        run: node scripts/analyze-root-functions.mjs > root-function-analysis.txt
+      - name: Run FQ A closed-beta gates
+        shell: bash
+        run: |
+          set +e
+          : > fqa-beta-gate.txt
+          failures=0
+          run_audit() {
+            label="$1"
+            script="$2"
+            echo "=== $label ===" | tee -a fqa-beta-gate.txt
+            node "$script" >> fqa-beta-gate.txt 2>&1
+            code=$?
+            if [ $code -eq 0 ]; then
+              echo "RESULT: PASS" | tee -a fqa-beta-gate.txt
+            else
+              echo "RESULT: FAIL ($code)" | tee -a fqa-beta-gate.txt
+              failures=$((failures+1))
+            fi
+            echo "" >> fqa-beta-gate.txt
+          }
+          run_audit "FQ A foundation" scripts/physics-chemistry-foundation-audit.mjs
+          run_audit "FQ A exam flow" scripts/physics-chemistry-exam-flow-audit.mjs
+          run_audit "FQ A exam authenticity" scripts/physics-chemistry-authenticity-audit.mjs
+          run_audit "FQ A mini-exam" scripts/physics-chemistry-mini-exam-audit.mjs
+          run_audit "FQ A exam draft" scripts/physics-chemistry-exam-draft-audit.mjs
+          run_audit "FQ A rubric" scripts/physics-chemistry-rubric-audit.mjs
+          run_audit "FQ A stepwise responses" scripts/physics-chemistry-stepwise-audit.mjs
+          run_audit "FQ A beta readiness" scripts/physics-chemistry-beta-readiness-audit.mjs
+          run_audit "FQ A review/progress" scripts/physics-chemistry-review-progress-audit.mjs
+          run_audit "Automatic open responses" scripts/automatic-open-response-audit.mjs
+          run_audit "Open-response calibration" scripts/open-response-calibration-audit.mjs
+          run_audit "Error diagnosis" scripts/error-diagnosis-audit.mjs
+          run_audit "Learning feedback quality" scripts/learning-feedback-quality-audit.mjs
+          run_audit "Grader quality report" scripts/grader-quality-report.mjs
+          echo "TOTAL FAILURES: $failures" | tee -a fqa-beta-gate.txt
+          exit 0
+      - name: Commit analysis reports
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add root-function-analysis.txt fqa-beta-gate.txt
+          if git diff --cached --quiet; then
+            echo "No report changes"
+            exit 0
+          fi
+          git commit -m "chore: record FQ A closed-beta readiness analysis"
+          git push origin HEAD:fix/enforce-total-client-bundle-budget
