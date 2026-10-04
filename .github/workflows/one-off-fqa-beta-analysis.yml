@@ -22,6 +22,8 @@ jobs:
           node-version: 20
       - name: Split secondary screens out of the initial bundle
         run: node scripts/split-secondary-screens.mjs
+      - name: Split setup screens out of the initial bundle
+        run: node scripts/split-setup-screens.mjs
       - name: Analyze root function weight
         run: node scripts/analyze-root-functions.mjs > root-function-analysis.txt
       - name: Run FQ A closed-beta gates
@@ -64,10 +66,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add app/page.js app/components/SecondaryScreens.js root-function-analysis.txt fqa-beta-gate.txt
+          git add app/page.js app/components/SecondaryScreens.js app/components/SetupScreens.js root-function-analysis.txt fqa-beta-gate.txt
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0
           fi
-          git commit -m "perf: split secondary screens from initial client bundle"
+          git commit -m "perf: split setup screens from initial client bundle"
           git push origin HEAD:fix/enforce-total-client-bundle-budget
