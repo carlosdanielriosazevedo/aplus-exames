@@ -19,23 +19,13 @@ const profile=schoolYear=>{
   return {...base,taughtSubtopicIds:currentYearSubtopicIds(base)};
 };
 const stateFor=schoolYear=>({
-  profile:profile(schoolYear),
-  goal:17,
-  betaMode:"internal",
-  editorialOverrides:{},
-  scores:emptyScores(),
-  freeTrainingSignals:[],
-  missionHistory:[]
+  profile:profile(schoolYear),goal:17,betaMode:"internal",editorialOverrides:{},scores:emptyScores(),freeTrainingSignals:[],missionHistory:[]
 });
-
 const years=themes=>new Set(themes.map(t=>t.year));
-
 const s10=stateFor("10.º");
 assert.deepEqual([...years(academicScopeThemes(s10.profile))],["10.º"]);
 assert.equal(diagnosticBlueprintForProfile(s10.profile).length,7);
 assert.ok(diagnosticBlueprintForProfile(s10.profile).every(id=>id.startsWith("10-")));
-
-// No ano atual, o âmbito é fechado ao nível da submatéria, não apenas do tema.
 const partial10=stateFor("10.º");
 partial10.profile.taughtSubtopicIds=["10-fun-dominio-imagem-zeros"];
 assert.deepEqual(academicScopeThemes(partial10.profile).map(t=>t.id),["10-fun"]);
@@ -55,25 +45,12 @@ assert.equal(partial10.scores["10-fun"].evidence[0].subtopicId,"10-fun-dominio-i
 assert.equal(scopedThemeScore(partial10,"10-fun").evidence.length,1);
 assert.equal(curriculumSubtopicForItem(hiddenQuestion),"10-fun-quadratica");
 assert.equal(isQuestionInAcademicScope({...selectedQuestion,subtopicId:"10-fun-desconhecida"},partial10.profile,"exam"),false);
-
-// Oito itens legados ficam deliberadamente fora do motor académico: a sua
-// classificação antiga é mais larga do que qualquer submatéria real adequada.
-// Continuam acessíveis no Treino Livre, que não produz fraquezas automáticas.
-assert.deepEqual(
-  QUESTION_BANK.filter(q=>!curriculumSubtopicForItem(q)).map(q=>q.id).sort(),
-  [
-    "CV51-10ELE-INT-1","CV51-10ELE-PART-1",
-    "CV51-11FUN-IG-1","CV51-11FUN-IG-2","CV51-11FUN-MOD-1",
-    "CV51-11FUN-MOD-2","CV51-11FUN-TR-1","CV51-11FUN-TR-2"
-  ]
-);
-
+assert.deepEqual(QUESTION_BANK.filter(q=>!curriculumSubtopicForItem(q)).map(q=>q.id).sort(),["CV51-10ELE-INT-1","CV51-10ELE-PART-1","CV51-11FUN-IG-1","CV51-11FUN-IG-2","CV51-11FUN-MOD-1","CV51-11FUN-MOD-2","CV51-11FUN-TR-1","CV51-11FUN-TR-2"]);
 const s11=stateFor("11.º");
 assert.deepEqual([...years(academicScopeThemes(s11.profile))],["10.º","11.º"]);
 assert.equal(diagnosticBlueprintForProfile(s11.profile).length,7);
 assert.ok(diagnosticBlueprintForProfile(s11.profile).every(id=>id.startsWith("10-")||id.startsWith("11-")));
 assert.ok(diagnosticBlueprintForProfile(s11.profile)[0].startsWith("11-"));
-
 const s12=stateFor("12.º");
 assert.deepEqual([...years(academicScopeThemes(s12.profile))],["10.º","11.º","12.º"]);
 assert.equal(diagnosticBlueprintForProfile(s12.profile).length,7);
@@ -85,13 +62,9 @@ s12WithOptional.profile.taughtSubtopicIds=currentYearSubtopicIds(s12WithOptional
 assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-mat"),s12WithOptional.profile),true);
 assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-ie"),s12WithOptional.profile),false);
 assert.equal(isThemeInAcademicScope(TAXONOMY.find(t=>t.id==="12-int"),s12WithOptional.profile),false);
-
 const finished=stateFor("Já terminei o secundário");
 assert.equal(academicScopeThemes(finished.profile).length,TAXONOMY.length);
 assert.equal(diagnosticBlueprintForProfile(finished.profile).length,7);
-
-// Evidência futura pode existir num estado antigo ou vinda de Treino Livre,
-// mas não entra no índice/preparação nem nas prioridades de um aluno do 10.º.
 const scope10Question=diagnosticAnchor("10-fun",2,s10);
 s10.scores["10-fun"]=applyEvidence(s10.scores["10-fun"],scope10Question,true,"diagnostic");
 const scope12Question=trainingQuestions(s10,{themeId:"12-prob",focus:null,level:"auto"},1)[0];
@@ -100,60 +73,31 @@ assert.deepEqual(measuredThemes(s10).map(t=>t.id),["10-fun"]);
 assert.notEqual(prepIndex(s10),null);
 assert.equal(selectMissionTheme(s10)?.year,"10.º");
 assert.ok(calibrationCandidates(s10).every(t=>t.year==="10.º"));
-
-// O Mini-exame nunca sobe para matéria futura.
 for(const [state,maxYear] of [[s10,10],[s11,11],[s12,12]]){
-  const exam=buildMiniExam(state,10);
-  assert.equal(exam.length,10);
-  for(const q of exam){
-    const t=TAXONOMY.find(x=>x.id===q.themeId);
-    const n=Number.parseInt(t.year,10);
-    assert.ok(n<=maxYear,state.profile.schoolYear+" recebeu "+t.year+": "+q.id);
-    assert.equal(isThemeInAcademicScope(t,state.profile),true);
-  }
+  const exam=buildMiniExam(state,10);assert.equal(exam.length,10);
+  for(const q of exam){const t=TAXONOMY.find(x=>x.id===q.themeId);const n=Number.parseInt(t.year,10);assert.ok(n<=maxYear,state.profile.schoolYear+" recebeu "+t.year+": "+q.id);assert.equal(isThemeInAcademicScope(t,state.profile),true);}
 }
-
-// Treino Livre continua deliberadamente aberto: escolher matéria futura não
-// transforma essa matéria numa fraqueza nem numa Missão automática.
 const futureTraining=trainingQuestions(s10,{themeId:"12-prob",focus:null,level:"auto"},2);
-assert.ok(futureTraining.length>0);
-assert.ok(futureTraining.every(q=>q.themeId==="12-prob"));
-assert.equal(selectMissionTheme(s10)?.year,"10.º");
-
-// O blueprint fica congelado no WAL do diagnóstico para recovery determinístico.
-const blueprint10=diagnosticBlueprintForProfile(s10.profile);
-const first=diagnosticAnchor(blueprint10[0],2,s10);
-assert.ok(first);
+assert.ok(futureTraining.length>0);assert.ok(futureTraining.every(q=>q.themeId==="12-prob"));assert.equal(selectMissionTheme(s10)?.year,"10.º");
+const blueprint10=diagnosticBlueprintForProfile(s10.profile);const first=diagnosticAnchor(blueprint10[0],2,s10);assert.ok(first);
 const session={id:"scope-diagnostic",kind:"diagnostic",startedAt:Date.now()-1000,finishedAt:null,meta:{}};
 const draft=createDiagnosticDraft({session,item:first,difficulty:2,blueprint:blueprint10,now:Date.now()-1000});
-assert.equal(draft.version,4);
-assert.deepEqual(draft.blueprint,blueprint10);
-assert.equal(validateDiagnosticDraft(draft).ok,true);
-
-// Uma atribuição diária antiga fora do scope é descartada na migração e um
-// plano legado fora do scope não consegue selecionar nova pergunta.
+assert.equal(draft.version,4);assert.deepEqual(draft.blueprint,blueprint10);assert.equal(validateDiagnosticDraft(draft).ok,true);
 const invalidPlan={type:"priority",themeId:"12-prob",focus:null};
 const legacy10={...s10,dailyMission:{version:1,assignment:{day:"2026-09-04",assignedAt:1,plan:invalidPlan},prompt:{}}};
-assert.equal(migrateDailyMission(legacy10).dailyMission.assignment,null);
-assert.equal(selectQuestionForPlan(s10,invalidPlan),null);
+assert.equal(migrateDailyMission(legacy10).dailyMission.assignment,null);assert.equal(selectQuestionForPlan(s10,invalidPlan),null);
 const hiddenFocusPlan={type:"priority",themeId:"10-fun",focus:"mc-10-fun-monotonia-e-extremos"};
 const hiddenAssignment={...partial10,dailyMission:{version:1,assignment:{day:"2026-09-04",assignedAt:1,plan:hiddenFocusPlan},prompt:{}}};
-assert.equal(migrateDailyMission(hiddenAssignment).dailyMission.assignment,null);
-assert.equal(selectQuestionForPlan(partial10,hiddenFocusPlan),null);
-
-// Drafts v2 anteriores ao scope continuam válidos usando o blueprint histórico.
-const legacyDraft={...draft,version:2};
-delete legacyDraft.blueprint;
-assert.equal(validateDiagnosticDraft(legacyDraft).ok,true);
-
+assert.equal(migrateDailyMission(hiddenAssignment).dailyMission.assignment,null);assert.equal(selectQuestionForPlan(partial10,hiddenFocusPlan),null);
+const legacyDraft={...draft,version:2};delete legacyDraft.blueprint;assert.equal(validateDiagnosticDraft(legacyDraft).ok,true);
 const pageSource=fs.readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const setupSource=fs.readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 assert.match(pageSource,/const scopedThemes=academicScopeThemes\(s\.profile\)/);
 assert.match(pageSource,/const preferredYear=\["10\.º","11\.º","12\.º"\]\.includes\(s\.profile\?\.schoolYear\)/);
 assert.doesNotMatch(pageSource,/8 questões · ~10–15 min · 10\.º, 11\.º e 12\.º/);
-assert.match(pageSource,/Que tema opcional está a tua turma a estudar\?/);
-assert.match(pageSource,/Matéria dada na escola/);
+assert.match(setupSource,/Que tema opcional está a tua turma a estudar\?/);
+assert.match(setupSource,/MATÉRIA DADA NA ESCOLA/);
 assert.match(pageSource,/A tua seleção ficou guardada/);
-assert.doesNotMatch(pageSource,/Quanto do programa já deste\?/);
+assert.doesNotMatch(setupSource,/Quanto do programa já deste\?/);
 assert.doesNotMatch(pageSource,/content\/vnext/);
-
 console.log("✓ curriculum year scope audit: diagnostic, missions, progress and mini-exam stay inside academic scope; Free Training remains open");

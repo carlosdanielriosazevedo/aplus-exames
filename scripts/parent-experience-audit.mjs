@@ -1,3 +1,4 @@
+import "./fqa-beta-diagnosis.mjs";
 import fs from "node:fs";
 
 const page=fs.readFileSync("app/page.js","utf8");

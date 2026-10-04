@@ -48,11 +48,15 @@ assert.match(component,/timeExpired/u,"o fluxo deve detetar o fim do tempo total
 assert.match(component,/recordedRef/u,"o fim manual ou automático não pode gravar a sessão duas vezes.");
 assert.match(component,/Terminar e rever/u,"o fluxo deve terminar em revisão");
 assert.match(component,/Contam os 4 melhores/u,"a revisão deve explicar a regra dos opcionais");
-assert.match(component,/Subtotal já corrigível/u,"respostas abertas não podem gerar uma falsa nota final");
-assert.match(component,/não é apresentado como classificação oficial/u,"o subtotal automático deve ser explicitamente não oficial");
-assert.match(component,/resposta\(s\) científica\(s\) aberta\(s\) continuam pendentes/u,"a revisão deve preservar correção humana/guiada das abertas");
+assert.match(component,/Subtotal provisório já corrigível/u,"a revisão deve distinguir explicitamente a estimativa automática da classificação final");
+assert.match(component,/estimativa provisória/u,"a pontuação de respostas construídas deve ser apresentada como provisória");
+assert.match(component,/confiança reduzida/u,"o aluno deve ser avisado quando a interpretação automática é incerta");
+assert.match(component,/provisionalPoints/u,"respostas construídas devem aproveitar pontuação automática provisória");
+assert.match(component,/autoAssessmentConfidence/u,"a revisão deve expor a confiança da correção automática");
+assert.match(component,/feedbackSummary/u,"a revisão deve explicar forças, lacunas e próximo passo");
 assert.match(component,/gradePhysicsChemistryResponse/u,"o Exame Completo deve reutilizar o motor específico da disciplina");
 assert.match(component,/recordSubjectSession/u,"o Exame Completo deve entrar no progresso partilhado");
+assert.doesNotMatch(component,/PhysicsChemistryRubricReview/u,"o aluno não deve voltar a preencher uma grelha manual de autoavaliação");
 assert.doesNotMatch(component,/Resposta certa:[\s\S]{0,120}Seguinte/u,"não deve haver correção imediata antes do fim");
 
-console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · tabela + gráficos + diagramas · 120+30 min · fim automático · revisão conservadora");
+console.log("✓ FQ A exam flow: 23 itens · 15+8/4 · 120+30 min · revisão automática provisória · confiança explícita · sem feedback imediato");

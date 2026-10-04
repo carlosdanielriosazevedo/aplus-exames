@@ -47,23 +47,26 @@ const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",
 const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const learn=readFileSync(new URL("../app/components/PhysicsChemistryLearnPanel.js",import.meta.url),"utf8");
 const stepwise=readFileSync(new URL("../app/components/PhysicsChemistryStepwise.js",import.meta.url),"utf8");
-const rubric=readFileSync(new URL("../app/components/PhysicsChemistryRubricReview.js",import.meta.url),"utf8");
 
 for(const [label,source] of [["Treino/Missão",subject],["Mini-exame",mini],["Exame Completo",full]]){
   assert.match(source,/PhysicsChemistryStepwiseEditor/u,label+": deve reutilizar o editor partilhado por etapas.");
-  assert.match(source,/PhysicsChemistryRubricReview/u,label+": deve reutilizar a grelha partilhada de respostas abertas.");
+  assert.match(source,/gradePhysicsChemistryResponse/u,label+": deve usar o corretor automático específico de FQ A.");
+  assert.doesNotMatch(source,/PhysicsChemistryRubricReview/u,label+": a antiga autoavaliação manual não pode regressar.");
 }
 assert.match(subject,/StudentTop/u,"FQ A deve permanecer no workspace comum.");
 assert.match(subject,/StudentNav/u,"FQ A deve manter a navegação comum.");
 assert.match(subject,/StudyModeHub/u,"FQ A deve reutilizar o hub comum de modos.");
-assert.match(subject,/7 perguntas · Física e Química/u,"Missão deve preservar sessões de pelo menos 7 perguntas.");
+assert.match(subject,/size:7/u,"Missão deve preservar sessões de pelo menos 7 perguntas.");
 assert.match(subject,/Começar treino/u,"Treino Livre deve estar operacional.");
 assert.match(subject,/Atualizar matéria dada/u,"Progresso deve permitir atualizar matéria lecionada.");
 assert.match(learn,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever Matéria deve permanecer estudo passivo.");
 assert.match(stepwise,/Indicação provisória/u,"Problemas por etapas não podem apresentar a classificação como oficial.");
-assert.match(rubric,/Não atribui nota automática/u,"Respostas científicas abertas não podem ser auto-classificadas como nota final.");
+assert.match(subject,/feedbackSummary/u,"respostas abertas em treino/missão devem receber feedback pedagógico automático.");
+assert.match(mini,/Correção automática maximizada/u,"Mini-exame deve aplicar correção automática com incerteza explícita.");
+assert.match(mini,/autoAssessmentConfidence/u,"Mini-exame deve mostrar confiança nas respostas abertas.");
+assert.match(full,/autoAssessmentConfidence/u,"Exame Completo deve mostrar confiança nas respostas abertas.");
 assert.match(mini,/não mostra a correção durante o mini-exame/u,"Mini-exame não deve revelar feedback imediato.");
 assert.match(full,/Durante o Exame Completo não mostramos correções/u,"Exame Completo não deve revelar feedback imediato.");
-assert.match(full,/Subtotal já corrigível/u,"Exame Completo deve distinguir subtotal automático de classificação final.");
+assert.match(full,/Subtotal provisório já corrigível/u,"Exame Completo deve distinguir subtotal automático provisório de classificação final.");
 
-console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 2145+ itens · 49+ por submatéria · 2 mini-exames · Exame Completo 715 · componentes partilhados · correção conservadora");
+console.log("✓ FQ A beta readiness: 7 domínios · 43 submatérias · 2145+ itens · 49+ por submatéria · 2 mini-exames · Exame Completo 715 · correção automática provisória");

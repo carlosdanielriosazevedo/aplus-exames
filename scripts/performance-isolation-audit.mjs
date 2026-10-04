@@ -18,6 +18,21 @@ assert.match(
   "Diagnostic recovery must remain behind dynamic import()."
 );
 
+assert.doesNotMatch(
+  page,
+  /^import\s+\{[\s\S]*?\}\s+from\s+["']\.\/lib\/constructedResponse["'];?/m,
+  "Constructed-response grading must not be statically imported by app/page.js."
+);
+assert.match(
+  page,
+  /import\("\.\/lib\/constructedResponse"\)/,
+  "Constructed-response grading must remain behind dynamic import()."
+);
+assert.match(
+  page,
+  /from\s+["']\.\/lib\/constructedResponseView["'];?/,
+  "Root UI must use the lightweight constructed-response view helpers."
+);
 
 for(const name of ["PhysicsChemistrySubject","PhysicsChemistryExam","PhysicsChemistryMiniExam"]){
   assert.doesNotMatch(
@@ -43,4 +58,4 @@ assert.match(
   "Portuguese mini-exam must use the lightweight full-exam classifier."
 );
 
-console.log("✓ performance isolation: FQ A stays lazy on / and Portuguese mini-exam stays detached from the full content prototype");
+console.log("✓ performance isolation: heavy Math grading and FQ A stay lazy on /; Portuguese mini-exam stays detached from the full content prototype");

@@ -20,6 +20,12 @@ const PortuguesePassageMiniExamRoute=dynamic(()=>import("./components/Portuguese
 const PhysicsChemistrySubject=dynamic(()=>import("./components/PhysicsChemistrySubject"),{ssr:false});
 const PhysicsChemistryExam=dynamic(()=>import("./components/PhysicsChemistryExam"),{ssr:false});
 const PhysicsChemistryMiniExam=dynamic(()=>import("./components/PhysicsChemistryMiniExam"),{ssr:false});
+const Ranking=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.Ranking),{ssr:false});
+const IdentityLab=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.IdentityLab),{ssr:false});
+const Parent=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.Parent),{ssr:false});
+const StudentProfile=dynamic(()=>import("./components/SetupScreens").then(module=>module.StudentProfile),{ssr:false});
+const TaughtCurriculum=dynamic(()=>import("./components/SetupScreens").then(module=>module.TaughtCurriculum),{ssr:false});
+const GoalScreen=dynamic(()=>import("./components/SetupScreens").then(module=>module.GoalScreen),{ssr:false});
 import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
@@ -68,9 +74,21 @@ import {
 } from "./lib/competition";
 import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
-  expectedResponseLabel,studentResponseLabel,miniExamPointSummary,examScoreLabel,stepFeedback,gradeResponse
-} from "./lib/constructedResponse";
+  expectedResponseLabel,studentResponseLabel,examScoreLabel,stepFeedback
+} from "./lib/constructedResponseView";
 
+
+let constructedResponseGraderPromise=null;
+function loadConstructedResponseGrader(){
+  if(!constructedResponseGraderPromise)constructedResponseGraderPromise=import("./lib/constructedResponse");
+  return constructedResponseGraderPromise;
+}
+function gradeMathResponse(question,answer){
+  return loadConstructedResponseGrader().then(module=>module.gradeResponse(question,answer));
+}
+function legacyMiniExamPointSummary(questions,answers){
+  return loadConstructedResponseGrader().then(module=>module.miniExamPointSummary(questions,answers));
+}
 
 let mathEngineModule=null;
 let mathEnginePromise=null;
@@ -449,8 +467,8 @@ export default function App(){
   if(screen==="physicsChemistryMini2"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistryMiniExam modelId="fqa-mini-2" s={s} setS={setS} go={go}/>;
   if(screen==="reviewMatter")return <MathReviewMatter s={s} go={go}/>;
   if(screen==="portugueseMiniExam")return <PortuguesePassageMiniExamRoute s={s} setS={setS} go={go} onExit={()=>go("exams")}/>;
-  if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go}/>;
-  if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing/>;
+  if(screen==="onboard")return <StudentProfile s={s} setS={setS} go={go} initialProfile={initial.profile}/>;
+  if(screen==="profileSettings")return <StudentProfile s={s} setS={setS} go={go} editing initialProfile={initial.profile}/>;
   if(screen==="curriculumOnboard"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
   if(screen==="curriculumOnboard"&&s.activeSubjectId==="physics-chemistry-a")return <PhysicsChemistrySubject s={s} setS={setS} go={go} view="curriculumOnboard"/>;
   if(screen==="curriculumSettings"&&s.activeSubjectId==="portuguese")return <PortugueseSubject s={s} setS={setS} go={go} view="curriculum"/>;
@@ -495,7 +513,7 @@ export default function App(){
   if(screen==="beta")return <BetaDashboard s={s} setS={setS} go={go}/>;
   if(screen==="identity")return <IdentityLab s={s} setS={setS} go={go}/>;
   if(screen==="account")return <AccountCloud s={s} setS={setS} go={go}/>;
-  if(screen==="parent")return <Parent s={s} setS={setS} go={go}/>;
+  if(screen==="parent")return <Parent s={s} setS={setS} go={go} prepIndex={prepIndex} measuredThemes={measuredThemes}/>;
   if(screen==="friendsBetaInfo")return <FriendsBetaInfo s={s} go={go}/>;
 
   return <Home s={s} setS={setS} go={go} reset={()=>{
@@ -687,204 +705,11 @@ function SubjectManager({s,setS,go}){
     <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
-    <div className="notice"><b>Uma estrutura comum para todas as disciplinas</b><span>Cada disciplina usa o mesmo workspace e mantém progresso próprio. O conteúdo e os motores de resposta são validados separadamente antes de cada disciplina sair da fase foundation.</span></div>
+    <div className="notice"><b>Uma estrutura comum para todas as disciplinas</b><span>Cada disciplina usa o mesmo espaço de estudo e mantém progresso próprio. O conteúdo e os motores de resposta são validados separadamente antes de ficarem disponíveis para todos os alunos.</span></div>
   </Shell>;
 }
 
 const PortugueseSubject=dynamic(()=>import("./components/PortugueseSubject"),{ssr:false});
-
-function suggestedExamTimingForYear(year,current){
-  if(year==="10.º")return "twoYears";
-  if(year==="11.º")return "nextYear";
-  if(year==="12.º")return "thisYear";
-  if(year==="Já terminei o secundário")return "unsure";
-  return current||"unsure";
-}
-
-function StudentProfile({s,setS,go,editing=false}){
-  const activeSubject=subjectById(s.activeSubjectId);
-  const subjectSettings=s.subjectSettings?.[activeSubject.id]||{};
-  const sharedProfileDone=!editing&&s.onboardingSharedProfileDone===true;
-  const onboardingStep=subjectOnboardingStep(s,activeSubject.id);
-  const [p,setP]=useState(()=>({
-    ...(s.profile||initial.profile),
-    recentGrade:subjectSettings.profileConfigured?subjectSettings.recentGrade??"":editing?(s.profile?.recentGrade??""):"",
-    examTiming:subjectSettings.profileConfigured?subjectSettings.examTiming||"unsure":editing?(s.profile?.examTiming||"unsure"):suggestedExamTimingForYear(s.profile?.schoolYear,s.profile?.examTiming),
-    goal:subjectGoal(s,activeSubject.id)
-  }));
-  function save(){
-    const saveProfile=prev=>{
-      const next={
-        ...prev,
-        profile:p,
-        goal:p.goal,
-        onboardingSharedProfileDone:true,
-        subjectSettings:{
-          ...(prev.subjectSettings||{}),
-          [activeSubject.id]:{
-            ...(prev.subjectSettings?.[activeSubject.id]||{}),
-            recentGrade:p.recentGrade,
-            examTiming:p.examTiming,
-            goal:p.goal,
-            profileConfigured:true
-          }
-        }
-      };
-      return sharedProfileDone||editing?next:recordMilestone(next,"profile_completed",{
-        schoolYear:p.schoolYear||null,
-        subjectId:activeSubject.id,
-        examTiming:p.examTiming||null
-      });
-    };
-    if(editing){
-      setS(prev=>migrateDailyMission(saveProfile(prev)));
-      go("curriculumSettings");
-      return;
-    }
-    setS(saveProfile);
-    go("curriculumOnboard");
-  }
-  return <Shell><Logo/><p className="eyebrow">{editing?"PERCURSO ESCOLAR":`CONFIGURAÇÃO ${onboardingStep.position} DE ${onboardingStep.total} · ${activeSubject.name.toUpperCase()}`}</p>
-    <h1>{editing?"Atualiza o que estás a estudar.":<>Ajuda a <BrandName/> a começar no sítio certo.</>}</h1>
-    <p className="muted">{editing
-      ?"O teu histórico não é apagado. Ao mudares de ano ou de tema opcional, a app ajusta apenas o conteúdo que pode influenciar o plano a partir de agora."
-      :<>Estas respostas só definem o <b>ponto de partida</b> do diagnóstico. Nunca são usadas como se fossem prova do teu nível.</>}</p>
-
-    {!editing&&<div className="subjectConfigBanner" aria-label={`A configurar ${activeSubject.name}`}><span>{activeSubject.icon||"Aa"}</span><div><small>DISCIPLINA EM CONFIGURAÇÃO</small><b>{activeSubject.name}</b><p>A nota recente, a data do exame e a matéria dada serão guardadas apenas nesta disciplina.</p></div></div>}
-    {!sharedProfileDone&&<><h3>Em que ano estás?</h3>
-    <div className="chips">{["10.º","11.º","12.º","Já terminei o secundário"].map(x=><button key={x} className={p.schoolYear===x?"sel":""} onClick={()=>setP({...p,schoolYear:x,examTiming:suggestedExamTimingForYear(x,p.examTiming),optionalTopics:x==="12.º"?(p.optionalTopics||[]):[],taughtSubtopicIds:x===p.schoolYear?(p.taughtSubtopicIds||[]):[]})}>{x}</button>)}</div></>}
-    {sharedProfileDone&&<div className="notice"><b>Ano escolar: {p.schoolYear}</b><span>Esta informação é comum a todas as disciplinas e não precisa de ser repetida.</span></div>}
-
-    {activeSubject.id==="math-a"&&p.schoolYear==="12.º"&&<>
-      <h3>Que tema opcional está a tua turma a estudar?</h3>
-      <p className="muted">Seleciona apenas o que já foi escolhido na tua turma. Podes selecionar mais do que um se for esse o caso. Se ainda não sabes, deixa vazio.</p>
-      <div className="stackChoices">{[
-        ["inferencia","Inferência estatística"],
-        ["integrais","Primitivas e integrais"],
-        ["matrizes","Matrizes"]
-      ].map(([v,l])=>{
-        const selected=(p.optionalTopics||[]).includes(v);
-        return <button key={v} className={selected?"sel":""} onClick={()=>setP({...p,optionalTopics:selected?(p.optionalTopics||[]).filter(x=>x!==v):[...(p.optionalTopics||[]),v]})}>{l}</button>;
-      })}</div>
-    </>}
-
-    <h3>{p.schoolYear==="Já terminei o secundário"?`Que nota tinhas aproximadamente a ${activeSubject.name}?`:`Que nota tens tido aproximadamente a ${activeSubject.name}?`}</h3>
-    <div className="gradeInput"><input inputMode="numeric" min="0" max="20" placeholder="Ex.: 14" value={p.recentGrade} onChange={e=>{
-      const raw=e.target.value.replace(/[^0-9]/g,"");
-      const n=raw===""?"":Math.max(0,Math.min(20,Number(raw)));
-      setP({...p,recentGrade:n});
-    }}/><span>/20</span></div>
-
-    <h3>Quando pretendes fazer o exame?</h3>
-    <div className="stackChoices">
-      {[["thisYear","Este ano letivo"],["nextYear","No próximo ano"],["twoYears","Daqui a 2 anos"],["unsure","Ainda não sei"]].map(([v,l])=><button key={v} className={p.examTiming===v?"sel":""} onClick={()=>setP({...p,examTiming:v})}>{l}</button>)}
-    </div>
-
-    <h3>Que nota queres alcançar a {activeSubject.name}?</h3>
-    <p className="muted">Este objetivo é específico desta disciplina. Ajusta a exigência das Missões e pode ser diferente nas outras disciplinas.</p>
-    <div className="goalInline">
-      <div className="goalHero compact"><strong>{p.goal}</strong><span>valores</span></div>
-      <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
-      <input aria-label={`Nota objetivo de ${activeSubject.name}`} className="goalSlider" type="range" min="10" max="20" step="1" value={p.goal} onChange={e=>setP({...p,goal:Number(e.target.value)})}/>
-    </div>
-
-    <div className="notice"><b>Exemplo</b><span>Se tens tido 18 valores, a app não começa por perguntas demasiado elementares. Se a evidência contrariar essa indicação, adapta imediatamente.</span></div>
-    <button className="primary" onClick={save}>{editing?"Guardar percurso":`Continuar para a matéria de ${activeSubject.name}`}</button>
-  </Shell>
-}
-
-function TaughtCurriculum({s,setS,go,onboarding=false}){
-  const onboardingStep=subjectOnboardingStep(s,"math-a");
-  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";
-  const themes=currentYearThemes(s.profile);
-  const subtopicsByTheme=new Map(themes.map(t=>[t.id,curriculumSubtopicsForTheme(t.id)]));
-  const valid=new Set([...subtopicsByTheme.values()].flat().map(row=>row.id));
-  const [selected,setSelected]=useState(()=>normalizeTaughtSubtopics(s.profile));
-  const selectedSet=new Set(selected);
-  const finished=s.profile?.schoolYear==="Já terminei o secundário";
-
-  function toggle(id){
-    if(selectedSet.has(id)){
-      const hasEvidence=Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>(e.subtopicId||curriculumSubtopicId(e.themeId,e.microcompetencyId||e.focus))===id));
-      if(hasEvidence&&!window.confirm("Já existem resultados nesta submatéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
-    }
-    setSelected(rows=>rows.includes(id)?rows.filter(x=>x!==id):[...rows,id]);
-  }
-  function toggleTheme(t){
-    const ids=(subtopicsByTheme.get(t.id)||[]).map(row=>row.id);
-    const all=ids.every(id=>selectedSet.has(id));
-    const hasEvidence=all&&Object.values(s.scores||{}).some(score=>(score.evidence||[]).some(e=>ids.includes(e.subtopicId||curriculumSubtopicId(e.themeId,e.microcompetencyId||e.focus))));
-    if(hasEvidence&&!window.confirm("Já existem resultados nesta matéria. Queres retirá-la das recomendações sem apagar o histórico?"))return;
-    setSelected(rows=>all?rows.filter(id=>!ids.includes(id)):[...new Set([...rows,...ids])]);
-  }
-  function save(){
-    const clean=finished?[...valid]:selected.filter(id=>valid.has(id));
-    clearSessionDraft(s.betaMode||"internal");
-    setS(prev=>{
-      const at=Date.now();
-      const betaSessions=(prev.betaSessions||[]).map(session=>session.finishedAt||!["diagnostic","mission","mini_exam"].includes(session.kind)?session:{...session,finishedAt:at,durationSeconds:Math.max(1,Math.round((at-(session.startedAt||at))/1000)),meta:{...(session.meta||{}),recoveryStatus:"scope_changed",abandonedAt:at}});
-      const configured=migrateDailyMission({...prev,betaSessions,profile:{...prev.profile,taughtSubtopicIds:clean},subjectSettings:{...(prev.subjectSettings||{}),"math-a":{...(prev.subjectSettings?.["math-a"]||{}),curriculumConfigured:true}}});
-      return onboarding&&onboardingStep.nextId
-        ?activateSubjectState(configured,onboardingStep.nextId)
-        :onboarding?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured;
-    });
-    go(onboarding?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress");
-  }
-
-  if(finished){
-    return <Shell><Logo/><p className="eyebrow">{onboarding?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · MATEMÁTICA A`:"MATÉRIA DADA NA ESCOLA"}</p>
-      <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Matemática A fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente a matéria do 10.º, 11.º e 12.º anos. Podes alterar esta informação mais tarde nas definições de matéria dada.</p></div></div>
-      <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar"}</button></Shell>;
-  }
-
-  return <Shell><Logo/>
-    <p className="eyebrow">{onboarding?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · MATEMÁTICA A`:"MATÉRIA DADA NA ESCOLA"}</p>
-    <h1>O que já deste no {s.profile?.schoolYear}?</h1>
-    <p className="muted">A matéria dos anos anteriores já fica disponível. No teu ano atual, assinala apenas o que a escola já ensinou. Podes voltar aqui sempre que começares matéria nova.</p>
-    <div className="scopeCounter"><b>{selected.length}</b><span>de {valid.size} submatérias assinaladas</span></div>
-    <div className="curriculumPicker">{themes.map(t=>{
-      const rows=subtopicsByTheme.get(t.id)||[];
-      const ids=rows.map(row=>row.id);
-      const count=ids.filter(id=>selectedSet.has(id)).length;
-      return <details key={t.id} open={count>0}>
-        <summary><div><b>{t.short}</b><small>{count}/{ids.length} selecionadas</small></div><span>⌄</span></summary>
-        <button type="button" className="selectTheme" onClick={()=>toggleTheme(t)}>{count===ids.length?"Desmarcar esta matéria":"Selecionar toda esta matéria"}</button>
-        <div>{rows.map(row=><label key={row.id}><input type="checkbox" checked={selectedSet.has(row.id)} onChange={()=>toggle(row.id)}/><span>{row.label}</span></label>)}</div>
-      </details>;
-    })}</div>
-    {selected.length===0&&<div className="notice warning"><b>Ainda não assinalaste nenhuma submatéria deste ano</b><span>A app usará apenas matéria de anos anteriores. No 10.º ano, o Diagnóstico ficará indisponível até assinalares pelo menos uma submatéria.</span></div>}
-    <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma submatéria, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
-    <div className="notice"><b>Conteúdo em validação</b><span>A seleção representa o que já aprendeste, mesmo que algumas submatérias ainda não tenham perguntas validadas. A app nunca usa automaticamente as 5.650 perguntas protótipo.</span></div>
-    <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar matéria dada"}</button>
-  </Shell>;
-}
-
-function GoalScreen({s,setS,go,onboarding=false}){
-  const activeSubject=subjectById(s.activeSubjectId);
-  const [goal,setGoal]=useState(()=>subjectGoal(s,activeSubject.id));
-  function save(){
-    setS(prev=>{
-      const next={...prev,goal,subjectSettings:{...(prev.subjectSettings||{}),[activeSubject.id]:{...(prev.subjectSettings?.[activeSubject.id]||{}),goal}}};
-      return onboarding
-        ?recordMilestone(next,"goal_completed",{goal,subjectId:activeSubject.id})
-        :next;
-    });
-    go(onboarding?"apronsoIntro":"home");
-  }
-  return <Shell><Logo/>
-    <p className="eyebrow">{onboarding?"O TEU OBJETIVO":"AJUSTAR OBJETIVO"}</p>
-    <h1>Que nota queres alcançar a {activeSubject.name}?</h1>
-    <p className="muted">{onboarding
-      ?"Isto ajusta a exigência das Missões. Não é uma previsão da tua nota."
-      :"Podes alterar o objetivo quando quiseres. A app adapta as decisões seguintes sem apagar o teu histórico."}</p>
-    <div className="goalHero"><strong>{goal}</strong><span>valores</span></div>
-    <div className="sliderLabels"><span>10</span><span>15</span><span>20</span></div>
-    <input aria-label={`Nota objetivo de ${activeSubject.name}`} className="goalSlider" type="range" min="10" max="20" step="1" value={goal} onChange={e=>setGoal(Number(e.target.value))}/>
-    <div className="goalMessage"><b>{goal>=18?"Objetivo muito exigente":goal>=16?"Objetivo ambicioso":"Objetivo sólido"}</b>
-      <span>A dificuldade e profundidade do plano serão ajustadas progressivamente a este objetivo.</span></div>
-    <button className="primary" onClick={save}>{onboarding?"Continuar":"Guardar novo objetivo"}</button>
-  </Shell>
-}
 
 const PRE_DIAGNOSTIC_TOUR_STEPS=[
   {mascot:"welcome",eyebrow:"PASSO 1 DE 4",title:"Conhece o Apronso",text:<>Sou o teu parceiro de estudo na <BrandName/>. Vou ajudar-te a perceber o que estudar e acompanhar-te até aos exames.</>},
@@ -950,8 +775,8 @@ function DiagIntro({s,setS,go}){
       <div><span>🧠</span><b>Sem nota final</b><small>O perfil continua a ser afinado nas Missões seguintes.</small></div>
     </div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
-    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
-      ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
+    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Ainda não há perguntas suficientes para este diagnóstico":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
+      ?"Para não te avaliar com perguntas que ainda não passaram pela nossa revisão, este diagnóstico fica temporariamente indisponível com a matéria selecionada. Podes atualizar a matéria dada e tentar novamente."
       :hasIndicatedScope
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
@@ -1373,7 +1198,7 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   }
 
   function answer(n){if(!fb)setSel(n)}
-  function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(gradeResponse(current,sel))}
+  async function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(await gradeMathResponse(current,sel))}
 
   function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
     if(completingRef.current)return;
@@ -1644,121 +1469,6 @@ function MissionResult({s,setS,go}){
 }
 
 
-function Ranking({s,setS,go}){
-  const summary=competitionSummary(s);
-  const projection=leagueProjection(s);
-  const profile=summary.profile||{};
-  const [scope,setScope]=useState("league");
-  const [nickname,setNickname]=useState(profile.nickname||"");
-  const [region,setRegion]=useState(profile.region||"");
-  const [school,setSchool]=useState(profile.school||"");
-  const [schoolYear,setSchoolYear]=useState(s.profile?.schoolYear||"");
-  const [districtOptIn,setDistrictOptIn]=useState(!!profile.districtOptIn);
-  const [schoolOptIn,setSchoolOptIn]=useState(!!profile.schoolOptIn);
-  const availability=scopeAvailability(s,scope);
-  const allRows=availability.available?demoLeaderboard(s,{scope}):[];
-  const rows=scope==="league"?allRows:leaderboardAroundUser(allRows,3);
-  const self=allRows.find(x=>x.self);
-  const latest=latestCompetitiveActivity(s);
-
-  const scopeLabel={
-    league:`Divisão ${summary.division.label}`,
-    general:"Geral",
-    year:s.profile?.schoolYear||"Meu ano",
-    district:profile.region||"Distrito/Região",
-    school:profile.school||"Escola"
-  }[scope];
-
-  function saveProfile(){
-    setS(prev=>updateCompetitionProfile({
-      ...prev,
-      profile:{...prev.profile,schoolYear:schoolYear||prev.profile?.schoolYear||null}
-    },{
-      nickname,
-      region:region||null,
-      school:school.trim()||null,
-      districtOptIn,
-      schoolOptIn
-    }));
-  }
-
-  return <Shell><StudentTop s={s} go={go}/>
-    <ApronsoNudge pose="welcome">Eu trato das contas. Tu só precisas de estudar — o ranking mede esforço, nunca conhecimento.</ApronsoNudge>
-    <div className="rankingHero">
-      <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
-        <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
-      <div className="divisionBadge"><span>{summary.division.icon}</span><b>{summary.division.label}</b><small>{summary.weekXp} XP esta semana</small></div>
-    </div>
-
-    <div className="demoRankingWarning"><b>DEMONSTRAÇÃO LOCAL</b><span>Os outros nomes e XP desta versão são simulados para testarmos a experiência. O ranking real só será ligado quando existir backend multiutilizador.</span></div>
-
-    <div className="rankingTabs">
-      {[["league","Divisão"],["general","Geral"],["year","Ano"],["district","Distrito"],["school","Escola"]].map(([id,label])=>
-        <button key={id} className={scope===id?"sel":""} onClick={()=>setScope(id)}>{label}</button>
-      )}
-    </div>
-
-    {scope==="league"&&<section className="leagueStatus">
-      <div><small>DIVISÃO ATUAL</small><h3>{summary.division.icon} {summary.division.label}</h3><p>{projection?.message}</p></div>
-      <div><b>#{projection?.position||"—"}</b><span>de {allRows.length||20}</span></div>
-      <footer><span>↑ Top {PROMOTION_COUNT} sobem</span><span>↓ Últimos {DEMOTION_COUNT} descem</span><span>Termina em ~{summary.daysRemaining} d</span></footer>
-    </section>}
-
-    {!availability.available?<div className="rankingLocked">
-      <b>{scope==="district"?"Ranking de distrito/região ainda não ativo":"Ranking de escola ainda não ativo"}</b>
-      <span>{availability.reason}</span>
-      <small>{scope==="school"
-        ?`No ranking real, só abriremos uma tabela de escola com pelo menos ${SCHOOL_MIN_PARTICIPANTS} participantes elegíveis, para reduzir risco de identificação.`
-        :`No ranking real, o distrito/região terá um limiar mínimo de ${DISTRICT_MIN_PARTICIPANTS} participantes.`}</small>
-    </div>:<section className="leaderboard">
-      <div className="leaderboardHead"><div><small>RANKING SEMANAL · {scopeLabel?.toUpperCase()}</small><h3>{scope==="league"?"A tua liga":scopeLabel}</h3></div><span>{self?`Tu: #${self.position}`:"—"}</span></div>
-      <div className="leaderboardRows">{rows.map(row=>{
-        const promote=scope==="league"&&row.position<=PROMOTION_COUNT;
-        const demote=scope==="league"&&row.position>allRows.length-DEMOTION_COUNT;
-        return <div key={row.id} className={(row.self?"self ":"")+(promote?"promote ":demote?"demote ":"")}>
-          <b className="rankPos">{row.position}</b>
-          <span className="rankAvatar">{row.self?"🙂":row.position===1?"🥇":row.position===2?"🥈":row.position===3?"🥉":"●"}</span>
-          <div><strong>{row.nickname}{row.self?" · TU":""}</strong><small>{row.demo?"tester simulado":"o teu perfil"}</small></div>
-          <em>{row.xp} XP</em>
-        </div>
-      })}</div>
-      {scope!=="league"&&<small className="aroundYouNote">Em rankings muito grandes, a experiência deverá privilegiar a tua posição e quem está imediatamente acima/abaixo — não uma lista infinita.</small>}
-    </section>}
-
-    <section className="xpRules">
-      <div><small>COMO GANHAS XP COMPETITIVO</small><h3>Mais estudo útil, menos farming.</h3></div>
-      <div className="xpRuleGrid">
-        <div><b>🎯 +50</b><span>Missão diária</span><small>Uma única Missão por dia.</small></div>
-        <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
-        <div><b>📝 até +80</b><span>Mini-exame</span><small>XP pela atividade concluída, não pela nota.</small></div>
-        <div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Conta uma vez.</small></div>
-      </div>
-      {latest&&<div className="lastRankXp"><b>Último ganho: +{latest.rankedXp} XP</b><span>{latest.reason}</span></div>}
-      <p className="muted">O teu <b>XP total</b> continua acumulado para sempre. O <b>XP competitivo</b> reinicia semanalmente para que um aluno novo possa competir desde a primeira semana.</p>
-    </section>
-
-    <section className="divisionLadder">
-      <small>DIVISÕES</small>
-      <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===summary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
-      <p>Em produção, cada liga terá um pequeno grupo de alunos com atividade comparável. No final da semana, os primeiros sobem e os últimos podem descer.</p>
-    </section>
-
-    <section className="rankingProfile">
-      <div><small>PERFIL PÚBLICO DO RANKING</small><h3>Nickname, nunca nota.</h3>
-        <p>O ano já faz parte do teu perfil académico. Para entrares no ranking da escola, indica o ano, a escola e ativa a participação. O nome da escola serve apenas para agrupar resultados e nunca aparece publicamente.</p></div>
-      <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
-      <label>Distrito/Região<select value={region} onChange={e=>setRegion(e.target.value)}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
-      <label>Ano para o ranking<select value={schoolYear} onChange={e=>setSchoolYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
-      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Nome da escola (opcional)"/></label>
-      <label className="rankConsent"><input type="checkbox" checked={districtOptIn} onChange={e=>setDistrictOptIn(e.target.checked)}/><span>Participar no ranking do meu distrito/região.</span></label>
-      <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
-      <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
-      <small className="privacyRankNote">Nunca entram no ranking: Domínio, Certeza, Índice de Preparação, nota objetivo, resultados de exame ou número de erros.</small>
-    </section>
-    <StudentNav active="ranking" go={go}/>
-  </Shell>;
-}
-
 function TrainHub({s,go}){
   return <Shell className="wideStudentShell trainHub"><StudentTop s={s} go={go}/><StudyModeHub subjectId={s.activeSubjectId||"math-a"} go={go}/><StudentNav active="train" go={go}/></Shell>;
 }
@@ -1854,7 +1564,7 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
-  function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(gradeResponse(q,sel))}
+  async function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(await gradeMathResponse(q,sel))}
   function next(){
     const was=fb?.correct===true;
     const newCorrect=correct+(was?1:0);
@@ -2034,8 +1744,8 @@ function Exams({s,go,startMini}){
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
-    <div className="exam locked"><b>📝 Exame Completo</b><span>Prova completa · disponível quando o motor de exame estiver validado.</span></div>
-    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
+    <div className="exam locked"><b>📝 Exame Completo</b><span>Prova completa · ainda não disponível nesta versão de teste.</span></div>
+    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Ainda não disponível nesta versão de teste</span></div>
     <div className="notice"><b>O que muda num exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div><StudentNav active="train" go={go}/>
   </Shell>
 }
@@ -2230,9 +1940,15 @@ function MiniExamReview({session,setSession,s,setS,go}){
 
 function MiniExamResult({s,setS,go}){
   const r=s.lastExam;
+  const [fallbackSummary,setFallbackSummary]=useState(null);
+  const questions=useMemo(()=>r?.questionIds?.map(questionById).filter(Boolean)||[],[r]);
+  useEffect(()=>{
+    let live=true;
+    if(r&&!r.itemResults)legacyMiniExamPointSummary(questions,r.answers).then(summary=>{if(live)setFallbackSummary(summary)});
+    return ()=>{live=false};
+  },[r,questions]);
   if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há resultado.</h1></Shell>;
-  const questions=r.questionIds.map(questionById).filter(Boolean);
-  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  if(!r.itemResults&&!fallbackSummary)return <Shell><Logo/><p className="muted">A recuperar a avaliação deste Mini-exame…</p></Shell>;
   const itemResults=r.itemResults||fallbackSummary.results;
   const earnedPoints=r.earnedPoints??fallbackSummary.earnedPoints;
   const maxPoints=r.maxPoints??fallbackSummary.maxPoints;
@@ -2264,9 +1980,15 @@ function MiniExamResult({s,setS,go}){
 
 function MiniExamCompletedReview({s,setS,go}){
   const r=s.lastExam;
+  const [fallbackSummary,setFallbackSummary]=useState(null);
+  const questions=useMemo(()=>r?.questionIds?.map(questionById).filter(Boolean)||[],[r]);
+  useEffect(()=>{
+    let live=true;
+    if(r&&!r.itemResults)legacyMiniExamPointSummary(questions,r.answers).then(summary=>{if(live)setFallbackSummary(summary)});
+    return ()=>{live=false};
+  },[r,questions]);
   if(!r)return <Shell><Back go={go} to="exams"/><h1>Ainda não há um Mini-exame para rever.</h1></Shell>;
-  const questions=r.questionIds.map(questionById).filter(Boolean);
-  const fallbackSummary=miniExamPointSummary(questions,r.answers);
+  if(!r.itemResults&&!fallbackSummary)return <Shell><Logo/><p className="muted">A recuperar a avaliação deste Mini-exame…</p></Shell>;
   const itemResults=r.itemResults||fallbackSummary.results;
   const rows=questions.map((q,i)=>({q,i,answer:r.answers[i],grade:itemResults[i]||fallbackSummary.results[i]}));
   const statusLabel=status=>status==="needs_review"?"Avaliação incompleta":status==="correct"?"Certa":status==="partial"?"Parcial":status==="unanswered"?"Não respondida":"Errada";
@@ -2292,338 +2014,6 @@ function MiniExamCompletedReview({s,setS,go}){
     <button className="secondary" onClick={()=>go("exams")}>Área de Exames</button>
   </Shell>;
 }
-
-
-function IdentityLab({s,setS,go}){
-  const identity=normalizeIdentity(s.identity);
-  const [authState,setAuthState]=useState({loading:true,authConfigured:false});
-
-  useEffect(()=>{
-    let alive=true;
-    fetch("/api/auth/capabilities",{cache:"no-store"})
-      .then(r=>r.json()).then(x=>{if(alive)setAuthState({loading:false,...x})})
-      .catch(()=>{if(alive)setAuthState({loading:false,authConfigured:false})});
-    return ()=>{alive=false};
-  },[]);
-
-  function switchDemo(role){
-    const next=demoIdentity(role);
-    setS(prev=>({...prev,identity:next}));
-  }
-
-  function openRole(){
-    go(defaultScreenForRole(normalizeIdentity(s.identity).activeRole));
-  }
-
-  function simulateParentAccept(){
-    const pending=[...(s.parentInvites||[])].reverse().find(x=>x.status==="pending");
-    if(!pending)return;
-    const parent=demoIdentity("parent");
-    if(pending.email)parent.email=pending.email;
-    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===pending.id?{
-      ...x,status:"accepted",acceptedAt:Date.now(),parentEmail:parent.email,parentName:"Pai/Mãe Demo"
-    }:x)}));
-  }
-
-  function confirmRemovalAsParent(){
-    const link=activeParentLink(s.parentInvites||[]);
-    if(!link?.removal)return;
-    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?confirmLinkRemoval(x,"parent"):x)}));
-  }
-
-  return <Shell><Back go={go}/><p className="eyebrow">PAINEL INTERNO · IDENTIDADE & PERMISSÕES</p>
-    <h1>Uma identidade. Papéis diferentes.</h1>
-    <p className="muted">Nesta versão não criamos passwords. O modo abaixo serve apenas para testar a experiência dos vários papéis antes de ligarmos a sessão real do Neon Auth.</p>
-
-    <div className={"authStatus "+(authState.authConfigured?"online":"demo")}>
-      <span>{authState.authConfigured?"●":"○"}</span>
-      <div><b>{authState.authConfigured?"Neon Auth disponível no ambiente":"Modo demo local"}</b>
-        <small>{authState.authConfigured?"A infraestrutura existe; falta ligar a sessão real à interface.":"Sem autenticação real. Seguro para prototipagem, não para produção."}</small></div>
-    </div>
-
-    <div className="identityCard">
-      <div><span>Pessoa ativa</span><b>{identity.displayName}</b><small>{identity.email}</small></div>
-      <strong>{ROLES[identity.activeRole]?.icon} {ROLES[identity.activeRole]?.label}</strong>
-    </div>
-
-    <h3>Simular papel</h3>
-    <div className="roleGrid">{Object.entries(ROLES).map(([role,meta])=><button key={role} className={identity.activeRole===role?"sel":""} onClick={()=>switchDemo(role)}>
-      <span>{meta.icon}</span><b>{meta.label}</b>
-      <small>{role==="student"?"Estudo, progresso e convites parentais":role==="parent"?"Acompanhamento do aluno":role==="reviewer"?"Revisão pedagógica":"Qualidade, beta e gestão"}</small>
-    </button>)}</div>
-
-    <button className="primary" onClick={openRole}>Abrir experiência de {ROLES[identity.activeRole]?.label}</button>
-    <button className="secondary" onClick={()=>go("account")}>Conta <BrandName/> &amp; Progresso na Cloud →</button>
-
-    <div className="permissionMatrix"><h3>Permissões principais</h3>
-      {[
-        ["study","Estudar / fazer Missões"],
-        ["parent_dashboard","Área parental"],
-        ["review_content","Rever conteúdo"],
-        ["beta_admin","Administrar beta"]
-      ].map(([cap,label])=><div key={cap}><span>{label}</span><b className={can(identity,cap)?"allowed":"denied"}>{can(identity,cap)?"✓ Permitido":"— Não permitido"}</b></div>)}
-    </div>
-
-    <div className="demoActions"><h3>Teste rápido da ligação parental</h3>
-      <button onClick={()=>go("parent")}>1. Criar convite como aluno →</button>
-      <button disabled={!(s.parentInvites||[]).some(x=>x.status==="pending")} onClick={simulateParentAccept}>2. Simular aceitação pelo Pai/Mãe</button>
-      <button disabled={!activeParentLink(s.parentInvites||[])?.removal} onClick={confirmRemovalAsParent}>3. Simular confirmação de remoção pelo Pai/Mãe</button>
-    </div>
-
-    <div className="notice"><b>Regra de segurança</b><span>Os papéis <b>Professor Revisor</b> e <b>Admin</b> nunca serão escolhidos no registo pelo próprio utilizador. Serão concedidos apenas por uma conta administrativa autorizada.</span></div>
-    <div className="notice"><b>Sem pesquisa pública</b><span>Um Pai/Mãe não procura o nome do filho na plataforma. O aluno cria um convite privado, de utilização única e com validade limitada.</span></div>
-  </Shell>
-}
-
-function Parent({s,setS,go}){
-  const index=prepIndex(s),measured=measuredThemes(s);
-  const identity=normalizeIdentity(s.identity);
-  const link=activeParentLink(s.parentInvites||[]);
-  const [email,setEmail]=useState("");
-  const [copied,setCopied]=useState(false);
-  const [entryChoice,setEntryChoice]=useState(null);
-  const parentAccess=identity.activeRole==="parent";
-  const weekly=engagementSummary(s);
-  const activeDaysWeek=weekly.last7.filter(day=>day.active).length;
-  const weeklyXp=weekly.last7.reduce((sum,day)=>sum+(day.xp||0),0);
-  const selectedSubjects=uniqueSubjectIds(s.selectedSubjectIds||[],AVAILABLE_SUBJECT_IDS);
-  const visibleSubjectIds=selectedSubjects.length?selectedSubjects:[DEFAULT_SUBJECT_ID];
-
-  function createInvite(){
-    if(!email.trim())return;
-    const invite=createParentInvite({studentName:identity.displayName,email});
-    setS(prev=>({...prev,parentInvites:[...(prev.parentInvites||[]),invite]}));
-    setEmail("");
-  }
-
-  function copyInvite(invite){
-    const url=`https://aplus-exames.vercel.app/convite/${invite.token}`;
-    if(navigator?.clipboard)navigator.clipboard.writeText(url);
-    setCopied(true);setTimeout(()=>setCopied(false),1400);
-  }
-
-  function requestRemoval(){
-    if(!link)return;
-    const requestedBy=parentAccess?"parent":"student";
-    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?requestLinkRemoval(x,requestedBy):x)}));
-  }
-
-  function confirmRemoval(){
-    if(!link?.removal)return;
-    const confirmedBy=parentAccess?"parent":"student";
-    setS(prev=>({...prev,parentInvites:(prev.parentInvites||[]).map(x=>x.id===link.id?confirmLinkRemoval(x,confirmedBy):x)}));
-  }
-
-  function subjectSnapshot(id){
-    const meta=subjectById(id);
-    if(id===DEFAULT_SUBJECT_ID){
-      const missionCount=(s.missionHistory||[]).length;
-      const examCount=(s.examHistory||[]).length;
-      return {
-        id,meta,goal:subjectGoal(s,id,s.goal||14),diagnosticDone:!!s.diagnosticDone,
-        sessions:missionCount+examCount,lastActivityAt:null,
-        detail:index===null?"Ainda sem indicador global":`Índice de preparação: ${index}/100`
-      };
-    }
-    const progress=subjectProgressFor(s,id);
-    return {
-      id,meta,goal:subjectGoal(s,id,s.goal||14),diagnosticDone:!!progress.diagnosticDone,
-      sessions:(progress.sessions||[]).length,lastActivityAt:progress.lastActivityAt||null,
-      detail:progress.diagnosticDone?"Diagnóstico concluído":"Diagnóstico por concluir"
-    };
-  }
-
-  const subjectRows=visibleSubjectIds.map(subjectSnapshot);
-
-  const evidenceRows=[];
-  measured.forEach(t=>{
-    const value=s.scores?.[t.id]?.domain;
-    if(Number.isFinite(value))evidenceRows.push({subject:"Matemática A",label:t.short||t.name,value,attempts:1});
-  });
-  visibleSubjectIds.filter(id=>id!==DEFAULT_SUBJECT_ID).forEach(id=>{
-    const progress=subjectProgressFor(s,id);
-    const subject=subjectById(id)?.shortName||subjectById(id)?.name||id;
-    Object.values(progress.competence||{}).forEach(row=>{
-      const attempts=Number(row.attempts)||0;
-      if(!attempts)return;
-      const correct=Number(row.correct)||0;
-      evidenceRows.push({subject,label:row.label||row.domainId||"Competência",value:Math.round(correct/attempts*100),attempts});
-    });
-  });
-  const strongest=[...evidenceRows].sort((a,b)=>b.value-a.value||b.attempts-a.attempts)[0]||null;
-  const weakest=[...evidenceRows].sort((a,b)=>a.value-b.value||b.attempts-a.attempts)[0]||null;
-  function localStudyDayKey(at){
-    const d=new Date(at);
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-  }
-
-  const engagementDays=s.engagement?.days||{};
-  const studyTrend=Array.from({length:4},(_,reverseIndex)=>{
-    const weeksAgo=3-reverseIndex;
-    let activeDays=0,xp=0;
-    for(let offset=0;offset<7;offset++){
-      const d=new Date();
-      d.setHours(12,0,0,0);
-      d.setDate(d.getDate()-(weeksAgo*7+6-offset));
-      const row=engagementDays[localStudyDayKey(d.getTime())];
-      if(row&&Object.values(row.activities||{}).some(value=>value>0))activeDays+=1;
-      xp+=Number(row?.xp)||0;
-    }
-    const end=new Date();end.setHours(12,0,0,0);end.setDate(end.getDate()-weeksAgo*7);
-    const start=new Date(end);start.setDate(start.getDate()-6);
-    return {
-      key:`week-${weeksAgo}`,activeDays,xp,
-      label:weeksAgo===0?"Esta semana":`${start.toLocaleDateString("pt-PT",{day:"2-digit",month:"2-digit"})}–${end.toLocaleDateString("pt-PT",{day:"2-digit",month:"2-digit"})}`
-    };
-  });
-  const maxTrendDays=Math.max(1,...studyTrend.map(row=>row.activeDays));
-
-  function sessionReviewSummary(session){
-    const results=Array.isArray(session?.results)?session.results:[];
-    const answered=results.filter(result=>result?.status&&result.status!=="unanswered").length;
-    const final=results.filter(result=>result?.final).length;
-    const pending=results.filter(result=>result?.requiresReview||(!result?.final&&result?.status&&result.status!=="unanswered")).length;
-    if(!results.length)return "Sessão concluída";
-    if(pending)return `${answered}/${results.length} respostas registadas · ${pending} por rever`;
-    if(final)return `${final}/${results.length} respostas com correção concluída`;
-    return `${answered}/${results.length} respostas registadas`;
-  }
-
-  const assessmentRows=[
-    ...(s.examHistory||[]).map(row=>({
-      id:row.id||`math-${row.at}`,subject:"Matemática A",kind:"Mini-exame",
-      at:row.at||0,
-      result:Number.isFinite(row.score20)?examScoreLabel(row):"Resultado registado",
-      detail:row.reviewRequired?"Há componentes que exigem confirmação da revisão.":`${row.correctCount??"—"}/${row.total??"—"} respostas corretas`
-    })),
-    ...visibleSubjectIds.filter(id=>id!==DEFAULT_SUBJECT_ID).flatMap(id=>{
-      const subject=subjectById(id)?.shortName||subjectById(id)?.name||id;
-      return (subjectProgressFor(s,id).sessions||[])
-        .filter(row=>["mini_exam","full_exam","practice_exam"].includes(row.kind))
-        .map(row=>({
-          id:row.sessionId||`${id}-${row.completedAt}`,subject,
-          kind:row.kind==="mini_exam"?"Mini-exame":"Exame Completo",
-          at:row.completedAt||0,
-          result:sessionReviewSummary(row),
-          detail:"Mostramos o estado da correção; não inventamos uma nota quando existem respostas abertas ou provisórias."
-        }));
-    })
-  ].sort((a,b)=>b.at-a.at).slice(0,6);
-
-  const studentName=link?.studentName||"Aluno associado";
-
-  return <Shell><Back go={go} to={parentAccess?"welcome":"home"}/><p className="eyebrow">ÁREA DOS PAIS</p>
-    <h1>{parentAccess?"Acompanhar o estudo sem transformar progresso em vigilância.":"Partilha o progresso com quem te acompanha."}</h1>
-
-    {!link&&parentAccess&&<>
-      <p className="muted">Escolhe como queres começar. A conta do encarregado fica separada da área de estudo do aluno.</p>
-      <div className="parentEntryChoices">
-        <button className={entryChoice==="link"?"selected":""} onClick={()=>setEntryChoice("link")}>
-          <span>🔗</span><b>Associar um aluno</b><small>Para um aluno que já utiliza a APProva+.</small>
-        </button>
-        <button className={entryChoice==="create"?"selected":""} onClick={()=>setEntryChoice("create")}>
-          <span>＋</span><b>Criar perfil do aluno</b><small>Para começar a configuração em conjunto.</small>
-        </button>
-      </div>
-
-      {entryChoice==="link"&&<div className="parentConnect parentEntryPanel">
-        <b>Associar um aluno existente</b>
-        <span>Por segurança, não existe pesquisa pública de alunos. A ligação começa através de um convite privado criado pelo aluno.</span>
-        <span><b>Como funciona?</b> O aluno envia-te o convite; depois de o aceitares com a tua conta, apenas o progresso autorizado fica disponível aqui.</span>
-      </div>}
-
-      {entryChoice==="create"&&<div className="parentConnect parentEntryPanel">
-        <b>Criar um perfil acompanhado</b>
-        <span>O perfil do aluno será independente da conta do encarregado: disciplinas, diagnósticos e respostas pertencem ao aluno; o encarregado recebe apenas os indicadores de acompanhamento.</span>
-        <span>Nesta beta, o fluxo de ligação por convite já está ativo. A criação de subperfis familiares fica preparada como fluxo separado para não misturar identidades nem dados académicos.</span>
-      </div>}
-
-      {!entryChoice&&<div className="parentPrivacyHint"><b>O princípio é simples</b><span>O encarregado acompanha consistência, evolução, prioridades e resultados — não abre cada resposta dada pelo aluno.</span></div>}
-    </>}
-
-    {!link&&!parentAccess&&<div className="parentConnect">
-      <b>Ligar Pai/Mãe ou Encarregado de Educação</b>
-      <span>Não existe pesquisa pública de utilizadores. A ligação nasce sempre de um convite privado criado pelo aluno.</span>
-      <div><input type="email" placeholder="email do encarregado" value={email} onChange={e=>setEmail(e.target.value)}/><button disabled={!email.trim()} onClick={createInvite}>Criar convite</button></div>
-      {(s.parentInvites||[]).filter(x=>x.status==="pending").slice(-3).reverse().map(inv=><div className="pendingInvite" key={inv.id}>
-        <div><b>{inv.email}</b><small>Expira em 7 dias · uso único</small></div>
-        <button onClick={()=>copyInvite(inv)}>{copied?"Copiado ✓":"Copiar link demo"}</button>
-      </div>)}
-      <small className="parentFoot">O convite é privado, de utilização única e com validade limitada.</small>
-    </div>}
-
-    {link&&parentAccess&&<>
-      <div className="parentDashboardHero">
-        <div><small>ALUNO ASSOCIADO</small><h2>{studentName}</h2><span>{subjectRows.map(row=>row.meta?.shortName||row.meta?.name).join(" · ")}</span></div>
-        <div className="parentWeekBadge"><b>{activeDaysWeek}/7</b><span>dias com estudo esta semana</span></div>
-      </div>
-
-      <div className="parentWeeklyGrid">
-        <div><small>ESTA SEMANA</small><b>{activeDaysWeek}</b><span>{activeDaysWeek===1?"dia ativo":"dias ativos"}</span></div>
-        <div><small>RITMO ATUAL</small><b>🔥 {weekly.streak}</b><span>{weekly.streak===1?"dia em sequência":"dias em sequência"}</span></div>
-        <div><small>ATIVIDADE</small><b>{weeklyXp} XP</b><span>nos últimos 7 dias</span></div>
-      </div>
-
-      <section className="parentDashboardSection parentTrendSection">
-        <div className="parentSectionHead"><div><small>EVOLUÇÃO</small><h3>Regularidade de estudo nas últimas 4 semanas</h3></div><span>dias ativos por semana</span></div>
-        <div className="parentTrendChart">{studyTrend.map(row=><div className="parentTrendWeek" key={row.key}>
-          <div className="parentTrendBarTrack"><span style={{height:`${Math.max(8,Math.round(row.activeDays/maxTrendDays*100))}%`}}/></div>
-          <b>{row.activeDays}/7</b><small>{row.label}</small><em>{row.xp} XP</em>
-        </div>)}</div>
-        <p className="parentTrendNote">Esta evolução mede consistência de estudo, não “qualidade” do aluno. Uma semana com menos dias pode resultar de férias, escola ou outros fatores que a app não conhece.</p>
-      </section>
-
-      <section className="parentDashboardSection">
-        <div className="parentSectionHead"><div><small>PREPARAÇÃO PARA OS EXAMES</small><h3>Estado por disciplina</h3></div><span>{subjectRows.length} {subjectRows.length===1?"disciplina":"disciplinas"}</span></div>
-        <div className="parentSubjectGrid">{subjectRows.map(row=><div className="parentSubjectCard" key={row.id}>
-          <div className="parentSubjectTitle"><span className="subjectIcon">{row.meta?.icon}</span><div><b>{row.meta?.shortName||row.meta?.name}</b><small>Prova {examCodesLabel(row.meta)} · objetivo {row.goal} valores</small></div></div>
-          <strong className={row.diagnosticDone?"done":"pending"}>{row.diagnosticDone?"Diagnóstico concluído":"Diagnóstico por concluir"}</strong>
-          <div className="parentSubjectMeta"><span>{row.sessions} {row.sessions===1?"sessão registada":"sessões registadas"}</span><span>{row.detail}</span></div>
-        </div>)}</div>
-      </section>
-
-      <div className="parentInsightGrid">
-        <section className="parentDashboardSection">
-          <div className="parentSectionHead"><div><small>LEITURA RÁPIDA</small><h3>O que está a correr bem</h3></div></div>
-          {strongest?<div className="parentInsight good"><b>{strongest.subject}</b><strong>{strongest.label}</strong><span>É uma das áreas com evidência mais favorável neste momento.</span></div>:<div className="parentEmptyInsight">Ainda não existe evidência suficiente para destacar um ponto forte.</div>}
-        </section>
-        <section className="parentDashboardSection">
-          <div className="parentSectionHead"><div><small>PRIORIDADE</small><h3>Onde vale a pena reforçar</h3></div></div>
-          {weakest?<div className="parentInsight focus"><b>{weakest.subject}</b><strong>{weakest.label}</strong><span>É uma das áreas onde os resultados registados justificam mais prática.</span></div>:<div className="parentEmptyInsight">A prioridade aparecerá quando houver respostas suficientes para comparar áreas.</div>}
-        </section>
-      </div>
-
-      <section className="parentDashboardSection">
-        <div className="parentSectionHead"><div><small>AVALIAÇÕES</small><h3>Resultados recentes em contexto de prova</h3></div><span>até 6 registos</span></div>
-        {assessmentRows.length?<div className="parentAssessmentList">{assessmentRows.map(row=><div key={row.id}>
-          <div><b>{row.subject}</b><span>{row.kind}{row.at?` · ${new Date(row.at).toLocaleDateString("pt-PT")}`:""}</span></div>
-          <strong>{row.result}</strong>
-          <small>{row.detail}</small>
-        </div>)}</div>:<div className="parentEmptyInsight">Ainda não existem Mini-exames ou Exames Completos concluídos para mostrar.</div>}
-        <p className="parentTrendNote">Estes resultados servem para acompanhar evolução e hábitos de preparação. Não são uma previsão da classificação no Exame Nacional.</p>
-      </section>
-
-      <section className="parentDashboardSection">
-        <div className="parentSectionHead"><div><small>PLANO</small><h3>Próximos passos do aluno</h3></div></div>
-        <div className="parentPlanList">{subjectRows.map(row=><div key={row.id}><span>{row.meta?.icon}</span><div><b>{row.meta?.shortName||row.meta?.name}</b><small>{row.diagnosticDone?"Continuar o plano adaptativo e cumprir as próximas sessões.":"Concluir primeiro o diagnóstico para a app poder personalizar o estudo."}</small></div><strong>{row.diagnosticDone?"Em curso":"Pendente"}</strong></div>)}</div>
-      </section>
-
-      <div className="parentPrivacyNotice"><b>🔒 O que o encarregado vê — e o que não vê</b><span>Vê consistência, evolução, prioridades, objetivos e resultados agregados. Não vê cada resposta individual nem transforma o histórico de estudo numa lista de erros para fiscalização.</span></div>
-
-      {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}
-      {link.removal?.status==="awaiting_other_party"&&<div className="notice warning"><b>Remoção pendente de confirmação</b><span>A ligação mantém-se ativa até a outra parte confirmar.</span>{link.removal.requestedBy!=="parent"&&<button className="secondary" onClick={confirmRemoval}>Confirmar remoção</button>}</div>}
-    </>}
-
-    {link&&!parentAccess&&<>
-      <div className="parent"><div><b>{link.parentName||"Pai/Mãe ligado"}</b><span>{link.parentEmail||link.email} · acesso de acompanhamento</span></div><strong>{index??"—"}<small>/100*</small></strong></div>
-      <small className="parentFoot">* índice parcial enquanto o perfil académico está a ser construído</small>
-      <div className="notice"><b>O que partilhas?</b><span>Consistência, evolução, prioridades, tempo de estudo e resultados agregados — não cada resposta individual.</span></div>
-      {!link.removal&&<button className="secondary" onClick={requestRemoval}>Pedir remoção da ligação</button>}
-      {link.removal?.status==="awaiting_other_party"&&<div className="notice warning"><b>Remoção pendente de confirmação</b><span>A ligação mantém-se ativa até a outra parte confirmar.</span>{link.removal.requestedBy!=="student"&&<button className="secondary" onClick={confirmRemoval}>Confirmar remoção</button>}</div>}
-    </>}
-  </Shell>
-}
-
 
 
 function BetaSessionFeedback({s,setS,kind}){
