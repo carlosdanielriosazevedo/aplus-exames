@@ -11,15 +11,15 @@ const parityCss=readFileSync(new URL("../app/apronso-parity.css",import.meta.url
 // automaticamente para uma missão depois do diagnóstico.
 assert.match(subject,/O teu próximo passo\./u,"FQ A: Aprender deve apresentar um próximo passo claro.");
 assert.match(subject,/Conhecer o teu ponto de partida/u,"FQ A: antes do diagnóstico deve existir um ponto de partida explícito.");
-assert.match(subject,/progress\.diagnosticDone\?\"Começar Missão\":\"Começar diagnóstico\"/u,"FQ A: o CTA deve mudar de diagnóstico para missão apenas depois do diagnóstico.");
-assert.match(subject,/session\.kind===\"diagnostic\"\?\"Ir para o menu inicial\"/u,"FQ A: o fim do diagnóstico deve regressar ao menu inicial.");
-assert.match(subject,/const primaryTarget=\"home\"/u,"FQ A: o diagnóstico não deve abrir Progresso ou Missão automaticamente.");
+assert.match(subject,/progress\.diagnosticDone\?"Começar Missão":"Começar diagnóstico"/u,"FQ A: o CTA deve mudar de diagnóstico para missão apenas depois do diagnóstico.");
+assert.match(subject,/session\.kind==="diagnostic"\?"Ir para o menu inicial"/u,"FQ A: o fim do diagnóstico deve regressar ao menu inicial.");
+assert.match(subject,/const primaryTarget="home"/u,"FQ A: o diagnóstico não deve abrir Progresso ou Missão automaticamente.");
 
 // 2. Estudo diário: Missão, Praticar e Rever Matéria devem existir no mesmo workspace.
 assert.match(subject,/startMission/u,"FQ A: Missão deve estar operacional.");
-assert.match(subject,/view===\"trainingSetup\"/u,"FQ A: Praticar deve ter configuração própria.");
+assert.match(subject,/view==="trainingSetup"/u,"FQ A: Praticar deve ter configuração própria.");
 assert.match(subject,/Começar treino/u,"FQ A: Praticar deve permitir iniciar treino.");
-assert.match(subject,/view===\"reviewMatter\"/u,"FQ A: Rever Matéria deve estar disponível.");
+assert.match(subject,/view==="reviewMatter"/u,"FQ A: Rever Matéria deve estar disponível.");
 assert.match(subject,/StudyModeHub/u,"FQ A: os modos de estudo devem continuar no hub partilhado.");
 
 // 3. Avaliação: Mini-exame e Exame Completo devem estar ligados ao hub, guardar retoma
@@ -35,14 +35,14 @@ assert.match(full,/autoAssessmentConfidence/u,"FQ A: Exame Completo deve expor c
 
 // 4. Pós-prova e progresso: a beta precisa de revisão, progresso e distinção clara entre
 // preparação e nota de exame.
-assert.match(subject,/view===\"progress\"/u,"FQ A: Progresso deve estar operacional.");
+assert.match(subject,/view==="progress"/u,"FQ A: Progresso deve estar operacional.");
 assert.match(subject,/Preparação ≠ nota de exame/u,"FQ A: Progresso deve explicar que preparação não é nota de exame.");
 assert.match(subject,/Atualizar matéria dada/u,"FQ A: Progresso deve permitir atualizar matéria dada.");
 assert.match(subject,/fqaCompetencyGrid/u,"FQ A: Progresso deve manter detalhe por competências.");
 
 // 5. Navegação e mobile: Ranking e Apronso têm de sobreviver ao percurso completo.
 assert.match(chrome,/STUDENT_NAV\.map/u,"Navegação: Ranking não pode ser removido no teste privado.");
-assert.doesNotMatch(chrome,/filter\(\(\[id\]\)=>id!==\"ranking\"\)/u,"Navegação: não pode existir filtro que esconda Ranking.");
+assert.doesNotMatch(chrome,/filter\(\(\[id\]\)=>id!=="ranking"\)\)/u,"Navegação: não pode existir filtro que esconda Ranking.");
 assert.match(parityCss,/\.learnIntro::after/u,"Apronso deve continuar visível no Aprender.");
 assert.match(parityCss,/@media\(max-width:900px\)/u,"A presença do Apronso deve estar protegida em ecrãs menores.");
 assert.match(parityCss,/\.progressPage \.progressHero>\.apronso/u,"Apronso deve continuar visível no Progresso mobile.");
