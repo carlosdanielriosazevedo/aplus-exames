@@ -97,7 +97,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     <button onClick={()=>go("goalSettings")}>Objetivo: {subjectGoal(s,SUBJECT_ID)} valores</button>
     {(progress.sessions.length>0||progress.lastPosition||examDrafts.length>0)&&<button onClick={resetPhysicsChemistry}>Repor progresso de Física e Química A</button>}
   </div></details></StudentTop>;
-  const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go}/>;
+  const sharedNav=<StudentNav active={view==="home"?"home":view==="progress"?"progress":"train"} go={go} s={s}/>;
 
   function start(kind,items,label,domain=null){
     if(progress.lastPosition&&!window.confirm("Começar uma nova sessão substitui a retoma atual de Física e Química A. Queres continuar?"))return;

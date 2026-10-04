@@ -58,7 +58,7 @@ export function Ranking({s,setS,go}){
       <div className="divisionBadge"><span>{summary.division.icon}</span><b>{summary.division.label}</b><small>{summary.weekXp} XP esta semana</small></div>
     </div>
 
-    <div className="demoRankingWarning"><b>DEMONSTRAÇÃO LOCAL</b><span>Os outros nomes e XP desta versão são simulados para testarmos a experiência. O ranking real só será ligado quando existir backend multiutilizador.</span></div>
+    <div className="demoRankingWarning"><b>PRÉ-VISUALIZAÇÃO DO RANKING</b><span>Esta área usa participantes simulados e não faz parte do teste privado atual. Nenhum resultado aqui representa outros alunos reais.</span></div>
 
     <div className="rankingTabs">
       {[["league","Divisão"],["general","Geral"],["year","Ano"],["district","Distrito"],["school","Escola"]].map(([id,label])=>

@@ -76,10 +76,11 @@ function NavIcon({name}){
   return <svg {...common}><path d="M4 18.5V13"/><path d="M9.3 18.5V9.5"/><path d="M14.7 18.5V6"/><path d="M20 18.5V3.5"/><path d="M3.5 20.5h17"/></svg>;
 }
 
-export function StudentNav({active, go}){
+export function StudentNav({active, go, s=null}){
+  const rows=s&&isFriendsBeta(s)?STUDENT_NAV.filter(([id])=>id!=="ranking"):STUDENT_NAV;
   return (
     <nav className="studentNav" aria-label="Navegação principal">
-      {STUDENT_NAV.map(([id,label]) => (
+      {rows.map(([id,label]) => (
         <button type="button" key={id} className={active===id?"active":""} aria-current={active===id?"page":undefined} onClick={()=>go(id)}>
           <span className="studentNavIcon"><NavIcon name={id}/></span><b>{label}</b>
         </button>
@@ -91,7 +92,7 @@ export function StudentNav({active, go}){
 export function StudentTop({s,go,children}){
   const daily=engagementSummary(s);
   const subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id===s.activeSubjectId)||SECONDARY_EXAM_SUBJECTS[0];
-  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button><button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>{children}</div></header>;
+  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button>{!isFriendsBeta(s)&&<button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>}{children}</div></header>;
 }
 
 export function FriendsBetaRibbon({s}){

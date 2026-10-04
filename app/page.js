@@ -705,7 +705,7 @@ function SubjectManager({s,setS,go}){
     <section className="subjectManagerSection"><h2>Adicionar disciplina</h2>
       {SECONDARY_EXAM_SUBJECTS.filter(subject=>!selected.includes(subject.id)).map(subject=><button type="button" key={subject.id} className={`subjectWorkspaceCard ${subject.available?"":"unavailable"}`} disabled={!subject.available} onClick={()=>activate(subject)}><span className="subjectIcon" aria-hidden="true">{subject.icon}</span><span><b>{subject.name}</b><small>{subject.examYear} ano · Prova {examCodesLabel(subject)}</small></span><strong>{subjectStatusLabel(subject)}</strong></button>)}
     </section>
-    <div className="notice"><b>Uma estrutura comum para todas as disciplinas</b><span>Cada disciplina usa o mesmo workspace e mantém progresso próprio. O conteúdo e os motores de resposta são validados separadamente antes de cada disciplina sair da fase foundation.</span></div>
+    <div className="notice"><b>Uma estrutura comum para todas as disciplinas</b><span>Cada disciplina usa o mesmo espaço de estudo e mantém progresso próprio. O conteúdo e os motores de resposta são validados separadamente antes de ficarem disponíveis para todos os alunos.</span></div>
   </Shell>;
 }
 
@@ -775,8 +775,8 @@ function DiagIntro({s,setS,go}){
       <div><span>🧠</span><b>Sem nota final</b><small>O perfil continua a ser afinado nas Missões seguintes.</small></div>
     </div>
     {saveError&&<div className="notice warning"><b>Não foi possível guardar o progresso</b><span>Tenta novamente antes de começar.</span></div>}
-    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Diagnóstico bloqueado pelo gate editorial":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
-      ?"Este modo só permite conteúdo revisto e ainda não existem perguntas elegíveis suficientes. Volta ao modo Interno ou valida conteúdo no painel de revisão."
+    {gated&&<div className="notice warning"><b>{profileBlueprint.length?"Ainda não há perguntas suficientes para este diagnóstico":hasIndicatedScope?"As submatérias indicadas ainda não entram no diagnóstico":"Primeiro indica a matéria que já deste"}</b><span>{profileBlueprint.length
+      ?"Para não te avaliar com perguntas que ainda não passaram pela nossa revisão, este diagnóstico fica temporariamente indisponível com a matéria selecionada. Podes atualizar a matéria dada e tentar novamente."
       :hasIndicatedScope
         ?"A tua seleção ficou guardada. O diagnóstico inicial atual ainda não tem perguntas adequadas para essas submatérias; não precisas de voltar a indicá-las. Podes acrescentar outra matéria já lecionada para começares."
         :"Não vamos avaliar matéria que a tua escola ainda não ensinou. Assinala pelo menos uma submatéria do teu ano para começares."}</span></div>}
@@ -1744,8 +1744,8 @@ function Exams({s,go,startMini}){
     </button>
     {!miniReady&&<div className="notice warning"><b>Mini-exame protegido</b><span>O motor não encontrou perguntas elegíveis suficientes para completar este Mini-exame de 12 itens segundo o estado editorial atual. Não completa a prova com conteúdo não aprovado só para atingir o número pretendido.</span></div>}
     {last&&<div className="lastExam"><div><small>ÚLTIMO MINI-EXAME</small><b>{examScoreLabel(last)}</b></div><span>{last.earnedPoints!==undefined?`${String(last.earnedPoints).replace(".",",")}/${last.maxPoints} pontos${last.reviewRequired?" confirmados":""}`:`${last.correctCount}/${last.total} corretas`}</span></div>}
-    <div className="exam locked"><b>📝 Exame Completo</b><span>Prova completa · disponível quando o motor de exame estiver validado.</span></div>
-    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 A aguardar esclarecimento sobre utilização dos conteúdos oficiais</span></div>
+    <div className="exam locked"><b>📝 Exame Completo</b><span>Prova completa · ainda não disponível nesta versão de teste.</span></div>
+    <div className="exam locked"><b>🏛️ Exames oficiais</b><span>🔒 Ainda não disponível nesta versão de teste</span></div>
     <div className="notice"><b>O que muda num exame?</b><span>Não há feedback pergunta a pergunta. O resultado só aparece no fim e a evidência tem mais peso pedagógico do que numa Missão. O resultado desta prova não é uma previsão da tua nota no Exame Nacional.</span></div><StudentNav active="train" go={go}/>
   </Shell>
 }
