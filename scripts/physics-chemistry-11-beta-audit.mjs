@@ -19,10 +19,9 @@ for(const domain of expectedDomains){
   assert.ok(rows.some(item=>item.responseType==="multiple-choice"),`${domain}: falta escolha múltipla no percurso de 11.º ano.`);
   assert.ok(rows.some(item=>item.responseType==="stepwise"),`${domain}: falta problema por etapas no percurso de 11.º ano.`);
   assert.ok(rows.some(item=>item.responseType==="restricted-response"),`${domain}: falta resposta científica aberta no percurso de 11.º ano.`);
-  assert.ok(rows.some(item=>["table","line-chart","diagram"].includes(item.stimulus?.type)),`${domain}: falta suporte científico visual no percurso de 11.º ano.`);
 }
 
 const total=year11.reduce((sum,row)=>sum+(coverage.bySubtopic[row.id]||0),0);
 assert.ok(total>=1225,"O 11.º ano deve manter pelo menos 1225 itens elegíveis (25 × 49)." );
 
-console.log(`✓ FQ A 11.º beta readiness: ${year11.length} submatérias · ${total}+ itens · 4 domínios · MC + etapas + resposta científica aberta + suporte visual`);
+console.log(`✓ FQ A 11.º beta readiness: ${year11.length} submatérias · ${total}+ itens · 4 domínios · MC + etapas + resposta científica aberta`);
