@@ -76,11 +76,10 @@ function NavIcon({name}){
   return <svg {...common}><path d="M4 18.5V13"/><path d="M9.3 18.5V9.5"/><path d="M14.7 18.5V6"/><path d="M20 18.5V3.5"/><path d="M3.5 20.5h17"/></svg>;
 }
 
-export function StudentNav({active, go, s=null}){
-  const rows=s&&isFriendsBeta(s)?STUDENT_NAV.filter(([id])=>id!=="ranking"):STUDENT_NAV;
+export function StudentNav({active, go}){
   return (
     <nav className="studentNav" aria-label="Navegação principal">
-      {rows.map(([id,label]) => (
+      {STUDENT_NAV.map(([id,label]) => (
         <button type="button" key={id} className={active===id?"active":""} aria-current={active===id?"page":undefined} onClick={()=>go(id)}>
           <span className="studentNavIcon"><NavIcon name={id}/></span><b>{label}</b>
         </button>
