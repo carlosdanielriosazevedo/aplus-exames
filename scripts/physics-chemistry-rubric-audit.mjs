@@ -1,57 +1,33 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS} from "../app/data/physicsChemistryConstructed.js";
-import {PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS,physicsChemistryRubricFor,physicsChemistryRubricResult} from "../app/lib/physicsChemistryRubric.js";
-
-assert.deepEqual(PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS.map(row=>row.label),["Cumpri","Parcial","Ainda não"]);
+import {gradePhysicsChemistryResponse} from "../app/lib/physicsChemistryEngine.js";
 
 const openItems=PHYSICS_CHEMISTRY_A_CONSTRUCTED_ITEMS.filter(item=>item.responseType==="restricted-response");
-assert.equal(openItems.length,7,"A tranche atual deve cobrir as sete respostas científicas abertas de fundação.");
+assert.equal(openItems.length,7,"A tranche de fundação deve continuar a cobrir sete respostas científicas abertas.");
 for(const item of openItems){
-  const rubric=physicsChemistryRubricFor(item);
-  assert.ok(rubric.length>=2,item.id+": deve ter pelo menos dois critérios observáveis.");
-  assert.ok(rubric.every(criterion=>criterion.observations?.length>=1),item.id+": cada critério deve decompor-se em observações.");
-  assert.equal(new Set(rubric.flatMap(criterion=>criterion.observations.map(row=>row.id))).size,rubric.flatMap(criterion=>criterion.observations).length,item.id+": IDs de observações devem ser únicos.");
-  const assessment=Object.fromEntries(rubric.map(criterion=>[criterion.id,{
-    status:"observed",
-    evidence:"Trecho da minha resposta",
-    observations:Object.fromEntries(criterion.observations.map(observation=>[observation.id,{status:"observed",evidence:"evidência"}]))
-  }]));
-  const result=physicsChemistryRubricResult(item,"Resposta científica do aluno.",assessment);
-  assert.equal(result.final,false,item.id+": resposta aberta nunca deve produzir classificação final automática.");
-  assert.equal(result.points,null,item.id+": autoavaliação não pode atribuir pontos automaticamente.");
-  assert.equal(result.rubricCompleted,true,item.id+": grelha toda marcada deve ficar concluída.");
-  assert.ok(result.criteria.every(criterion=>criterion.status==="observed"),item.id+": estado por critério deve persistir.");
-  assert.ok(result.criteria.flatMap(criterion=>criterion.observations).every(observation=>observation.status==="observed"),item.id+": evidência por observação deve persistir.");
+  assert.ok(Array.isArray(item.criteria)&&item.criteria.length>=2,item.id+": deve manter pelo menos dois critérios científicos observáveis.");
+  const result=gradePhysicsChemistryResponse(item,item.referenceAnswer||item.explanation||item.criteria.join(" "));
+  assert.equal(result.final,false,item.id+": uma resposta aberta não pode ser apresentada como classificação final determinística.");
+  assert.ok(Number.isFinite(result.provisionalPoints),item.id+": o corretor deve produzir pontuação provisória automática.");
+  assert.ok(Array.isArray(result.criteria)&&result.criteria.length>=2,item.id+": o resultado deve explicar a avaliação critério a critério.");
+  assert.ok(Number.isFinite(result.autoAssessmentConfidence),item.id+": a correção automática deve expor confiança.");
 }
 
-const review=readFileSync(new URL("../app/components/PhysicsChemistryRubricReview.js",import.meta.url),"utf8");
 const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const mini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
 const full=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const progress=readFileSync(new URL("../app/lib/subjectProgress.js",import.meta.url),"utf8");
-const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 
-assert.match(review,/Cumpri/u);
-assert.match(review,/Parcial/u);
-assert.match(review,/Ainda não/u);
-assert.match(review,/Onde está a evidência na tua resposta/u);
-assert.match(review,/observations/u,"a UI deve mostrar observações atómicas por critério.");
-assert.match(subject,/PhysicsChemistryRubricReview/u,"missões/treino devem usar a autoavaliação guiada.");
-assert.match(subject,/Conhecimento científico/u);
-assert.match(subject,/Trabalho prático/u);
-assert.match(subject,/Resolução de problemas/u);
-assert.match(subject,/Comunicação científica/u);
-assert.match(subject,/Não é uma nota/u,"progresso por competências não deve ser apresentado como classificação.");
-assert.match(mini,/PhysicsChemistryRubricReview/u,"mini-exame deve rever respostas abertas por critérios.");
-assert.match(mini,/Guardar revisão e terminar/u,"mini-exame deve guardar a evidência depois da revisão.");
-assert.match(full,/PhysicsChemistryRubricReview/u,"simulado completo deve rever respostas abertas por critérios.");
-assert.match(full,/Guardar revisão e terminar/u,"simulado completo deve guardar a evidência depois da revisão.");
-assert.match(progress,/rubricEvidenceByObservation/u,"o progresso partilhado deve persistir evidência por observação.");
-assert.match(progress,/rubricObserved/u);
-assert.match(progress,/rubricNeedsReview/u);
-assert.match(review,/CRITÉRIO /u,"a grelha deve distinguir visualmente cada critério.");
-assert.match(review,/Autoavaliação do critério/u,"os grupos de decisão devem ser identificáveis por tecnologia assistiva.");
-assert.match(css,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/u,"em mobile, Cumpri/Parcial/Ainda não devem manter três alvos equilibrados.");
+for(const [label,source] of [["Treino/Missão",subject],["Mini-exame",mini],["Exame Completo",full]]){
+  assert.match(source,/gradePhysicsChemistryResponse/u,label+": deve usar o motor automático específico de FQ A.");
+  assert.doesNotMatch(source,/PhysicsChemistryRubricReview/u,label+": não deve pedir ao aluno a antiga grelha manual de autoavaliação.");
+}
+assert.match(subject,/feedbackSummary/u,"Treino/Missão deve devolver feedback pedagógico automático nas respostas abertas.");
+assert.match(mini,/result\.criteria/u,"Mini-exame deve explicar a avaliação automática por critérios.");
+assert.match(full,/result\.criteria/u,"Exame Completo deve explicar a avaliação automática por critérios.");
+assert.match(mini,/autoAssessmentConfidence/u,"Mini-exame deve mostrar confiança da avaliação.");
+assert.match(full,/autoAssessmentConfidence/u,"Exame Completo deve mostrar confiança da avaliação.");
+assert.match(progress,/requiresReview/u,"o progresso deve preservar sinalização de resultados que exigem revisão/confiança reduzida.");
 
-console.log("✓ FQ A rubric: Cumpri/Parcial/Ainda não · observações atómicas · evidência guardada · 4 dimensões no Progresso · sem nota automática");
+console.log("✓ FQ A automatic criteria: pontuação provisória · confiança · critérios explicados · sem autoavaliação manual");
