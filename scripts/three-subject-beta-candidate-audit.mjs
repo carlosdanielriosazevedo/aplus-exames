@@ -22,6 +22,7 @@ const checks=[
   ["Resultado do diagnóstico","npm",["run","pretest-result:audit"]],
   ["Rever Matéria após diagnóstico","npm",["run","pretest-review-matter:audit"]],
   ["Resposta submetida fica fechada","npm",["run","submitted-answer-lock:audit"]],
+  ["Feedback e analytics da beta","node",["scripts/beta-feedback-analytics-audit.mjs"]],
   ["Identidade APProva+ e Apronso","npm",["run","apronso-brand:audit"]]
 ];
 
