@@ -36,8 +36,11 @@ jobs:
         run: npm run content:readiness
 
       - name: Next.js production build
-        run: npm run build
+        run: npx next build
         env:
           DATABASE_URL: ""
           NEXT_PUBLIC_NEON_AUTH_URL: ""
           NEXT_PUBLIC_NEON_DATA_API_URL: ""
+
+      - name: Performance budget
+        run: npm run performance:budget
