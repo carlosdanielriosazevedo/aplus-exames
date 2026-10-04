@@ -10,7 +10,9 @@ const chrome=fs.readFileSync("app/components/chrome.js","utf8");
 const reviewerDashboard=fs.readFileSync("app/components/ReviewerDashboard.js","utf8");
 const internalDashboards=fs.readFileSync("app/components/InternalDashboards.js","utf8");
 const accountCloud=fs.readFileSync("app/components/AccountCloud.js","utf8");
-const page=[welcome,mainPage,chrome,reviewerDashboard,internalDashboards,accountCloud].join("\n");
+const secondaryScreens=fs.readFileSync("app/components/SecondaryScreens.js","utf8");
+const setupScreens=fs.readFileSync("app/components/SetupScreens.js","utf8");
+const page=[welcome,mainPage,chrome,reviewerDashboard,internalDashboards,accountCloud,secondaryScreens,setupScreens].join("\n");
 const pkg=JSON.parse(fs.readFileSync("package.json","utf8"));
 
 const forbidden=[
@@ -18,27 +20,10 @@ const forbidden=[
   {pattern:/postgres(?:ql)?:\/\/[^ \n"']+:[^ \n"']+@/i,label:"credenciais PostgreSQL em código"},
   {pattern:/NEXT_PUBLIC_NEON_AUTH_URL\s*=\s*https?:\/\//,label:"env público hardcoded em JS"},
 ];
-
 const scanFiles=[];
-function walk(dir){
-  for(const name of fs.readdirSync(dir)){
-    if(["node_modules",".next",".git"].includes(name))continue;
-    const full=path.join(dir,name);
-    const st=fs.statSync(full);
-    if(st.isDirectory())walk(full);
-    else if(/\.(js|mjs|cjs|json|md|env|example)$/.test(name) || name===".env.example")scanFiles.push(full);
-  }
-}
+function walk(dir){for(const name of fs.readdirSync(dir)){if(["node_modules",".next",".git"].includes(name))continue;const full=path.join(dir,name);const st=fs.statSync(full);if(st.isDirectory())walk(full);else if(/\.(js|mjs|cjs|json|md|env|example)$/.test(name)||name===".env.example")scanFiles.push(full);}}
 walk(root);
-
-for(const file of scanFiles){
-  if(file.endsWith(".env.example"))continue;
-  const txt=fs.readFileSync(file,"utf8");
-  for(const f of forbidden){
-    assert.ok(!f.pattern.test(txt),`${f.label}: ${path.relative(root,file)}`);
-  }
-}
-
+for(const file of scanFiles){if(file.endsWith(".env.example"))continue;const txt=fs.readFileSync(file,"utf8");for(const f of forbidden)assert.ok(!f.pattern.test(txt),`${f.label}: ${path.relative(root,file)}`);}
 assert.ok(!page.includes("MOTOR v3.2"),"Rótulo de motor antigo reapareceu na UI.");
 assert.ok(page.includes("devView"),"Ferramentas internas deixaram de estar protegidas pelo modo dev.");
 assert.ok(page.includes("PONTE COM PROFESSOR EXTERNO"),"Ponte de revisão externa desapareceu.");
@@ -83,5 +68,4 @@ assert.ok(page.includes("Exportar roteiro híbrido recomendado"),"Exportação d
 assert.ok(page.includes("Produção comercial:"),"Barreira entre beta híbrida e produção desapareceu.");
 assert.ok(page.includes("if(hydrated)saveLocalState(s)"),"Proteção de hidratação antes de persistir estado desapareceu.");
 assert.equal(pkg.version,"5.5.0");
-
 console.log(`✓ source hygiene: ${scanFiles.length} ficheiros verificados`);
