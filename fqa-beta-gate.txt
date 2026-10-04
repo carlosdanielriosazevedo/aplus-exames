@@ -1,5 +1,5 @@
 === FQ A foundation ===
-(node:2342) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2408) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/physicsChemistryEngine.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -7,7 +7,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 RESULT: PASS
 
 === FQ A exam flow ===
-(node:2357) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryExamBlueprint.js is not specified and it doesn't parse as CommonJS.
+(node:2423) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryExamBlueprint.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -15,7 +15,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 RESULT: PASS
 
 === FQ A exam authenticity ===
-(node:2372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2438) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -23,7 +23,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 RESULT: PASS
 
 === FQ A mini-exam ===
-(node:2387) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryMiniExams.js is not specified and it doesn't parse as CommonJS.
+(node:2453) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryMiniExams.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -35,7 +35,7 @@ RESULT: PASS
 RESULT: PASS
 
 === FQ A rubric ===
-(node:2417) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
+(node:2483) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -43,7 +43,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 RESULT: PASS
 
 === FQ A stepwise responses ===
-(node:2432) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
+(node:2498) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -51,7 +51,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 RESULT: PASS
 
 === FQ A beta readiness ===
-(node:2447) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2513) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -63,7 +63,7 @@ RESULT: PASS
 RESULT: PASS
 
 === Automatic open responses ===
-(node:2477) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
+(node:2543) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -86,14 +86,14 @@ RESULT: PASS
 ✓ FQ A keyword soup cannot receive full credit
 
 Open-response calibration audit passed.
-(node:2492) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+(node:2558) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
 RESULT: PASS
 
 === Error diagnosis ===
-(node:2507) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+(node:2573) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -105,7 +105,7 @@ ERROR DIAGNOSIS AUDIT PASSED
 RESULT: PASS
 
 === Learning feedback quality ===
-(node:2522) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+(node:2588) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -113,7 +113,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 RESULT: PASS
 
 === Grader quality report ===
-(node:2537) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBank.js is not specified and it doesn't parse as CommonJS.
+(node:2603) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/physicsChemistryConstructed.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
