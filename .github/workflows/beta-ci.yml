@@ -29,6 +29,9 @@ jobs:
       - name: Technical gate
         run: npm run technical:gate
 
+      - name: Three-subject beta candidate
+        run: node scripts/three-subject-beta-candidate-audit.mjs
+
       - name: Grader quality report
         run: node scripts/grader-quality-report.mjs
 
