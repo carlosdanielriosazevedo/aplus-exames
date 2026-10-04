@@ -25,7 +25,7 @@
 > node scripts/subjects-audit.mjs
 
 ✓ subjects: official 2026 catalog, 3 available subjects, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded
-(node:2256) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/subjects.js is not specified and it doesn't parse as CommonJS.
+(node:2269) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/subjects.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -36,7 +36,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 subject-workspace:audit
 > node scripts/subject-workspace-audit.mjs
 
-(node:2279) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/subjects.js is not specified and it doesn't parse as CommonJS.
+(node:2292) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/subjects.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -48,7 +48,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-foundation:audit
 > node scripts/portuguese-foundation-audit.mjs
 
-(node:2302) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2315) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -60,7 +60,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-engine:audit
 > node scripts/portuguese-engine-audit.mjs
 
-(node:2325) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
+(node:2338) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -73,7 +73,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-wave4-audit.mjs
 
 ✓ Portuguese wave 4: 20 itens originais · 5 por domínio · 100% determinísticos · banco total 80
-(node:2348) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2361) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -85,7 +85,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-wave5-audit.mjs
 
 ✓ quinta vaga de Português: 20 itens determinísticos · banco 100 · 16/16 competências com pelo menos 6 itens · release bloqueado
-(node:2372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2384) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -97,7 +97,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-wave6-audit.mjs
 
 ✓ sexta vaga de Português: 20 itens determinísticos · domínios 6/6/2/6 · formatos 12 MC + 8 curtas · posições A/B/C/D 3/3/4/2 · banco final 120
-(node:2395) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2407) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -151,7 +151,7 @@ Portuguese bank shape audit: PASS
 > aplus-exames@5.5.0 portuguese-editorial-depth:audit
 > node scripts/portuguese-editorial-depth-audit.mjs
 
-(node:2464) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
+(node:2477) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -182,7 +182,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-passage-groups:audit
 > node scripts/portuguese-passage-groups-audit.mjs
 
-(node:2534) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portuguesePassages.js is not specified and it doesn't parse as CommonJS.
+(node:2546) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portuguesePassages.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -207,14 +207,14 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 
 === Feedback pedagógico da autoavaliação de Português ===
 ✓ autoavaliação Português: estados estáveis · feedback localizado · evolução antes/depois rastreada · evidência nova/reformulada distinguida · reavaliações mais exigentes preservadas · zero nota automática
-(node:2591) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseSelfAssessment.js is not specified and it doesn't parse as CommonJS.
+(node:2603) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseSelfAssessment.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
 ✓ Feedback pedagógico da autoavaliação de Português
 
 === Memória de escrita entre tentativas de Português ===
-(node:2602) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseWritingMemory.js is not specified and it doesn't parse as CommonJS.
+(node:2614) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseWritingMemory.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -227,7 +227,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-rubric-audit.mjs
 
 ✓ grelhas de Português: 56 respostas abertas · critérios decompostos em observações atómicas · versões editoriais protegidas
-(node:2625) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
+(node:2637) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -238,7 +238,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-rubric-scenarios:audit
 > node scripts/portuguese-rubric-scenarios-audit.mjs
 
-(node:2648) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
+(node:2660) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/subjectProgress.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -250,7 +250,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-rubric-text-calibration:audit
 > node scripts/portuguese-rubric-text-calibration-audit.mjs
 
-(node:2671) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubricCalibration.js is not specified and it doesn't parse as CommonJS.
+(node:2683) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubricCalibration.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -262,7 +262,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-observation-guidance:audit
 > node scripts/portuguese-observation-guidance-audit.mjs
 
-(node:2694) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
+(node:2706) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -274,7 +274,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 portuguese-boundary-cases:audit
 > node scripts/portuguese-boundary-cases-audit.mjs
 
-(node:2717) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
+(node:2729) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseRubrics.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -287,7 +287,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-word-limit-ui-audit.mjs
 
 ✓ limite de palavras de Português: vazio / abaixo / dentro / acima distinguidos sem confundir extensão com conteúdo
-(node:2740) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseWordLimit.js is not specified and it doesn't parse as CommonJS.
+(node:2752) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseWordLimit.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -299,7 +299,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-difficulty-audit.mjs
 
 ✓ dificuldade de Português: 334 itens · níveis 35/221/57/21 · cotação excluída · calibração real ainda bloqueada
-(node:2763) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseDifficulty.js is not specified and it doesn't parse as CommonJS.
+(node:2775) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseDifficulty.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -310,7 +310,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 subject-progress:audit
 > node scripts/subject-progress-audit.mjs
 
-(node:2786) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/subjectProgress.js is not specified and it doesn't parse as CommonJS.
+(node:2798) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/engagement.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -326,7 +326,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/portuguese-coverage.mjs --check
 
 ✓ Portuguese 639 coverage: 334 itens · 16/16 competências escritas · release bloqueado
-(node:2809) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
+(node:2821) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/portugueseFoundation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -337,7 +337,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 competency-id:audit
 > node scripts/competency-id-audit.mjs
 
-(node:2832) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:2844) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -349,7 +349,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 math-validation:audit
 > node scripts/math-validation-audit.mjs
 
-(node:2855) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/generators.js is not specified and it doesn't parse as CommonJS.
+(node:2867) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -384,7 +384,7 @@ Posição das respostas A/B/C/D: 1469/1469/1356/1356
 
 PEDAGOGICAL QUALITY GATE: GO estrutural
 A análise usa a camada de polimento editorial efetiva: acentuação cognitiva canónica, enunciados menos telegráficos, resoluções curtas enriquecidas com um passo-chave e metadados corrigidos.
-(node:2912) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/vnextPedagogicalPolish.js is not specified and it doesn't parse as CommonJS.
+(node:2924) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/vnextPedagogicalPolish.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -429,7 +429,7 @@ Cobertura forte por tema:
 
 SOLUTION QUALITY GATE: GO
 Cada resolução efetiva tem desenvolvimento mínimo, pelo menos três sinais pedagógicos e não existem blocos de 5+ resoluções exatamente repetidas.
-(node:2935) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/vnextPedagogicalPolish.js is not specified and it doesn't parse as CommonJS.
+(node:2947) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/vnextPedagogicalPolish.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -440,7 +440,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 math-exam:audit
 > node scripts/math-exam-authenticity-audit.mjs
 
-(node:2958) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/vnextPedagogicalPolish.js is not specified and it doesn't parse as CommonJS.
+(node:2970) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/vnextPedagogicalPolish.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -489,7 +489,7 @@ Estrutura inválida: 0
 Itens de Mini-exame marcados productionEligible=true: 0
 Guardrail: este GO autoriza apenas validação controlada com alunos reais; não substitui revisão externa nem desbloqueia produção comercial.
 STUDENT PILOT READINESS: GO
-(node:2981) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/vnextExam.js is not specified and it doesn't parse as CommonJS.
+(node:2993) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/vnextExam.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -501,7 +501,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/engagement-audit.mjs
 
 ✓ engagement: daily streak, XP goal, mission goal, idempotency, reset and legacy migration validated
-(node:3004) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/engagement.js is not specified and it doesn't parse as CommonJS.
+(node:3016) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/engagement.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -512,7 +512,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 competition:audit
 > node scripts/competition-audit.mjs
 
-(node:3027) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/competition.js is not specified and it doesn't parse as CommonJS.
+(node:3039) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/competition.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -524,7 +524,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 daily-mission:audit
 > node scripts/daily-mission-audit.mjs
 
-(node:3050) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3062) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/dailyMission.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -536,7 +536,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 curriculum-scope:audit
 > node scripts/curriculum-scope-audit.mjs
 
-(node:3073) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3085) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/curriculumScope.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -951,7 +951,7 @@ Warnings: 0
 > aplus-exames@5.5.0 vnext-pilot:audit
 > node scripts/vnext-pilot-audit.mjs
 
-(node:3142) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3154) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -963,7 +963,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 vnext-diagnostic:audit
 > node scripts/vnext-diagnostic-audit.mjs
 
-(node:3165) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3177) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -975,7 +975,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 vnext-mission:audit
 > node scripts/vnext-mission-audit.mjs
 
-(node:3199) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3211) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -987,7 +987,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 vnext-exam:audit
 > node scripts/vnext-exam-audit.mjs
 
-(node:3233) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/curriculumVnext.js is not specified and it doesn't parse as CommonJS.
+(node:3245) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/quality.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1011,19 +1011,16 @@ node:internal/modules/run_main:123
     triggerUncaughtException(
     ^
 
-AssertionError [ERR_ASSERTION]: home, ranking, training, progress and exams hub need navigation
-
-4 !== 5
-
-    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/student-experience-audit.mjs:16:8
+AssertionError [ERR_ASSERTION]: O Apronso deve acompanhar os principais ecrãs da experiência.
+    at file:///home/runner/work/aplus-exames/aplus-exames/scripts/student-experience-audit.mjs:56:8
     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
   generatedMessage: false,
   code: 'ERR_ASSERTION',
-  actual: 4,
-  expected: 5,
-  operator: 'strictEqual'
+  actual: false,
+  expected: true,
+  operator: '=='
 }
 
 Node.js v20.20.2
@@ -1058,7 +1055,7 @@ Node.js v20.20.2
 > aplus-exames@5.5.0 constructed-response:audit
 > node scripts/constructed-response-audit.mjs
 
-(node:3326) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/polynomial.js is not specified and it doesn't parse as CommonJS.
+(node:3337) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/polynomial.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1073,7 +1070,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 constructed-response:adversarial-audit
 > node scripts/constructed-response-adversarial-audit.mjs
 
-(node:3349) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
+(node:3360) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1085,7 +1082,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 response-analysis-calibration:v4
 > node scripts/response-analysis-calibration-v4.mjs
 
-(node:3372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBankWave4.js is not specified and it doesn't parse as CommonJS.
+(node:3383) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBankWave4.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1109,7 +1106,7 @@ RESPONSE ANALYSIS CALIBRATION V4 PASSED
 > aplus-exames@5.5.0 response-analysis-calibration:v5
 > node scripts/response-analysis-calibration-v5.mjs
 
-(node:3395) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBankWave5.js is not specified and it doesn't parse as CommonJS.
+(node:3406) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBankWave5.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1131,7 +1128,7 @@ RESPONSE ANALYSIS CALIBRATION V5 PASSED
 > aplus-exames@5.5.0 response-analysis-calibration:v6
 > node scripts/response-analysis-calibration-v6.mjs
 
-(node:3418) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBankWave5.js is not specified and it doesn't parse as CommonJS.
+(node:3429) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBankWave5.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1161,7 +1158,7 @@ RESPONSE ANALYSIS CALIBRATION V6 PASSED
 > aplus-exames@5.5.0 response-analysis-calibration:v7
 > node scripts/response-analysis-calibration-v7.mjs
 
-(node:3441) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
+(node:3453) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1176,7 +1173,7 @@ RESPONSE ANALYSIS CALIBRATION V7 PASSED
 ✓ Tolerância e prudência do corretor v7
 
 === Validação humana cega do corretor ===
-(node:3452) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/graderHumanValidation.js is not specified and it doesn't parse as CommonJS.
+(node:3464) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/graderHumanValidation.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1196,7 +1193,7 @@ GRADER HUMAN VALIDATION AUDIT PASSED
 > aplus-exames@5.5.0 error-diagnosis:audit
 > node scripts/error-diagnosis-audit.mjs
 
-(node:3475) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+(node:3487) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1212,7 +1209,7 @@ ERROR DIAGNOSIS AUDIT PASSED
 > aplus-exames@5.5.0 learning-feedback:audit
 > node scripts/learning-feedback-quality-audit.mjs
 
-(node:3498) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
+(node:3510) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/automaticEvidenceGrader.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1224,7 +1221,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 diagnostic-minimal-pairs:audit
 > node scripts/diagnostic-minimal-pairs-audit.mjs
 
-(node:3521) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
+(node:3533) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/portugueseEngine.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -1246,7 +1243,7 @@ DIAGNOSTIC MINIMAL-PAIR CALIBRATION PASSED
 > aplus-exames@5.5.0 math-constructed:coverage-audit
 > node scripts/math-constructed-coverage.mjs
 
-(node:3555) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3567) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3410,7 +3407,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 math-constructed:wave1-audit
 > node scripts/math-constructed-wave1-audit.mjs
 
-(node:3578) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
+(node:3590) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3422,7 +3419,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 math-constructed:wave2-audit
 > node scripts/math-constructed-wave2-audit.mjs
 
-(node:3601) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
+(node:3613) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3434,7 +3431,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 math-constructed:wave3-audit
 > node scripts/math-constructed-wave3-audit.mjs
 
-(node:3624) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
+(node:3636) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/constructedResponse.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3446,7 +3443,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 pedagogical-memory:audit
 > node scripts/pedagogical-memory-audit.mjs
 
-(node:3647) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/engine.js is not specified and it doesn't parse as CommonJS.
+(node:3659) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/pedagogicalMemory.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3459,7 +3456,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > node scripts/cloud-reliability-audit.mjs
 
 ✓ cloud reliability: revisions, conflict detection, snapshots and safe activity merge validated
-(node:3670) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/cloudReliability.js is not specified and it doesn't parse as CommonJS.
+(node:3682) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/cloudReliability.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3470,7 +3467,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 retention:audit
 > node scripts/retention-funnel-audit.mjs
 
-(node:3694) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/productAnalytics.js is not specified and it doesn't parse as CommonJS.
+(node:3707) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/productAnalytics.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3482,7 +3479,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 content-coverage:audit
 > node scripts/content-coverage-v5-1-audit.mjs
 
-(node:3717) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3730) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3494,7 +3491,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 friends-beta:audit
 > node scripts/friends-beta-audit.mjs
 
-(node:3740) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/friendsBeta.js is not specified and it doesn't parse as CommonJS.
+(node:3753) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/friendsBeta.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3506,7 +3503,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 engine:audit
 > node scripts/engine-audit.mjs
 
-(node:3763) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/engine.js is not specified and it doesn't parse as CommonJS.
+(node:3776) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3526,7 +3523,7 @@ Engine audit concluído: 6 grupos de testes passaram.
 > node scripts/reliability-audit.mjs
 
 ✓ reliability audit: integrity rules passed
-(node:3787) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/reliability.js is not specified and it doesn't parse as CommonJS.
+(node:3802) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/reliability.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3537,7 +3534,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 diagnostic-recovery:audit
 > node scripts/diagnostic-recovery-audit.mjs
 
-(node:3810) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3825) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3549,7 +3546,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 review:roadmap
 > node scripts/review-roadmap.mjs
 
-(node:3833) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/quality.js is not specified and it doesn't parse as CommonJS.
+(node:3848) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/quality.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3566,7 +3563,7 @@ Roadmap reaches GO: yes
 > aplus-exames@5.5.0 teacher-review:audit
 > node scripts/teacher-review-audit.mjs
 
-(node:3856) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/teacherReview.js is not specified and it doesn't parse as CommonJS.
+(node:3871) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/teacherReview.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3578,7 +3575,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 editorial-revisions:audit
 > node scripts/editorial-revisions-audit.mjs
 
-(node:3880) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/lib/quality.js is not specified and it doesn't parse as CommonJS.
+(node:3894) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3590,7 +3587,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 pre-review-qa:audit
 > node scripts/pre-review-qa-audit.mjs
 
-(node:3903) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3917) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -3602,7 +3599,7 @@ To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exame
 > aplus-exames@5.5.0 hybrid-validation:audit
 > node scripts/hybrid-validation-audit.mjs
 
-(node:3926) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
+(node:3940) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/content.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
