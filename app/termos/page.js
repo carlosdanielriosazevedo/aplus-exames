@@ -9,7 +9,7 @@ export default function TermsPage(){
     <article style={{maxWidth:760,margin:"0 auto",lineHeight:1.65}}>
       <Link href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</Link>
       <h1 style={{fontSize:"clamp(2rem,6vw,3.2rem)",marginBottom:8}}>Termos de utilização</h1>
-      <p style={{color:"#cbd5e1"}}>Última atualização: 4 de outubro de 2026 · versão beta</p>
+      <p style={{color:"#cbd5e1"}}>Última atualização: 5 de outubro de 2026 · versão beta</p>
 
       <section style={section}>
         <h2>Uma ferramenta de preparação</h2>
@@ -19,11 +19,12 @@ export default function TermsPage(){
       <section style={section}>
         <h2>Resultados e correções</h2>
         <p>Diagnósticos, estimativas de domínio, feedback automático, classificações e outras indicações da aplicação destinam-se a apoiar o estudo. Não substituem a classificação oficial de uma prova, a avaliação de um professor ou uma decisão escolar.</p>
+        <p>Durante a beta, a correção de respostas abertas deve ser entendida como correção automática experimental. A APProva+ está a validar, por disciplina e tipo de resposta, em que situações o sistema pode decidir com fiabilidade suficiente e em que situações deve abster-se de apresentar uma decisão definitiva.</p>
       </section>
 
       <section style={section}>
         <h2>Versão beta</h2>
-        <p>A aplicação continua em desenvolvimento. Podem existir erros, alterações de conteúdo, interrupções temporárias ou diferenças entre uma correção automática e a avaliação que seria feita num contexto oficial. Durante a beta, o feedback dos utilizadores é usado para reduzir estes problemas.</p>
+        <p>A aplicação continua em desenvolvimento. Podem existir erros, alterações de conteúdo, interrupções temporárias ou diferenças entre uma correção automática e a avaliação que seria feita num contexto oficial. Durante a beta, o feedback dos utilizadores e, quando consentido, a comparação cega com avaliações independentes de professores são usados para reduzir estes problemas.</p>
       </section>
 
       <section style={section}>
