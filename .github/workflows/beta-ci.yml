@@ -29,6 +29,9 @@ jobs:
       - name: Technical gate
         run: npm run technical:gate
 
+      - name: Selective grader validation
+        run: node scripts/selective-grader-validation-audit.mjs
+
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
