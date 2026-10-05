@@ -9,7 +9,7 @@ export default function PrivacyPage(){
     <article style={{maxWidth:760,margin:"0 auto",lineHeight:1.65}}>
       <Link href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</Link>
       <h1 style={{fontSize:"clamp(2rem,6vw,3.2rem)",marginBottom:8}}>Privacidade</h1>
-      <p style={{color:"#cbd5e1"}}>Última atualização: 4 de outubro de 2026 · versão beta</p>
+      <p style={{color:"#cbd5e1"}}>Última atualização: 5 de outubro de 2026 · versão beta</p>
 
       <section style={section}>
         <h2>O que a APProva+ guarda</h2>
@@ -27,8 +27,14 @@ export default function PrivacyPage(){
       </section>
 
       <section style={section}>
+        <h2>Validação do corretor</h2>
+        <p>Durante uma fase controlada da beta, algumas respostas abertas podem ser usadas para comparar a correção automática com avaliações independentes de professores. Esta recolha deve ser ativada apenas com consentimento específico para validação. As respostas destinadas a este estudo ficam separadas do estado normal de progresso e os packs enviados aos professores não incluem a decisão do Apronso nem dados como nome ou email do aluno.</p>
+        <p>Os casos reservados para validação final são mantidos separados dos casos usados para calibrar o sistema, para evitar que a avaliação de qualidade seja feita sobre exemplos já usados no afinamento.</p>
+      </section>
+
+      <section style={section}>
         <h2>Armazenamento local e cloud</h2>
-        <p>Parte do estado pode ficar guardada no próprio browser. Quando o utilizador inicia sessão e a cloud está disponível, determinados dados de progresso e beta podem também ser sincronizados com a infraestrutura do projeto. A aplicação foi desenhada para não colocar palavras-passe dentro do estado de progresso.</p>
+        <p>Parte do estado pode ficar guardada no próprio browser. Quando o utilizador inicia sessão e a cloud está disponível, determinados dados de progresso e beta podem também ser sincronizados com a infraestrutura do projeto. A aplicação foi desenhada para não colocar palavras-passe dentro do estado de progresso. O conjunto específico de respostas usado para validação humana do corretor é tratado separadamente do progresso normal.</p>
       </section>
 
       <section style={section}>
