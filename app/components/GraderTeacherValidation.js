@@ -1,6 +1,7 @@
 "use client";
 
 import {useMemo,useState} from "react";
+import {graderValidationCaseFingerprint} from "../lib/graderValidationDataset";
 
 const DIAGNOSES=[
   ["correct_or_near_correct","Correta / quase correta"],
@@ -41,6 +42,8 @@ export default function GraderTeacherValidation(){
       if(data?.schema!=="aplus-grader-teacher-pack-v1"||data?.blind!==true||!Array.isArray(data.cases))throw new Error("Pack incompatível ou não cego.");
       const leaked=data.cases.some(x=>x.grader_snapshot||x.systemDecision||x.graderDecision||x.policyScore);
       if(leaked)throw new Error("O pack contém informação do corretor e não pode ser usado numa revisão cega.");
+      const modified=data.cases.some(x=>graderValidationCaseFingerprint(x)!==x.case_fingerprint);
+      if(modified)throw new Error("O conteúdo de pelo menos um caso foi alterado depois de o pack ser criado.");
       setPack(data);setIndex(0);setLabels({});setMessage(`${data.cases.length} casos carregados.`);
     }catch(error){setMessage(`Não foi possível importar: ${error.message}`)}
   }
