@@ -32,6 +32,9 @@ jobs:
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
+      - name: Public beta readiness
+        run: node scripts/public-beta-readiness-audit.mjs
+
       - name: Grader quality report
         run: node scripts/grader-quality-report.mjs
 

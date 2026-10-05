@@ -57,5 +57,9 @@ export function Welcome({s, setS, go}){
     <p>A <BrandName/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
     <button disabled={friends && !segment} onClick={start}>{friends ? (segment ? "Continuar →" : "Escolhe primeiro o teu perfil") : "Descobrir o meu nível →"}</button>
     <div className="features"><span>⚡ 10–20 min/dia</span><span>🎯 Adaptativo</span><span>{friends ? "🧪 Feedback importante" : "📈 Progresso real"}</span></div>
+    <div aria-label="Informação legal" style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap",marginTop:18,fontSize:13}}>
+      <a href="/privacidade" style={{color:"#cbd5e1"}}>Privacidade</a>
+      <a href="/termos" style={{color:"#cbd5e1"}}>Termos de utilização</a>
+    </div>
   </section></main>;
 }
