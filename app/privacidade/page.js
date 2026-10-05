@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata={title:"Privacidade · APProva+"};
 
 const section={marginTop:28};
@@ -5,7 +7,7 @@ const section={marginTop:28};
 export default function PrivacyPage(){
   return <main style={{minHeight:"100vh",background:"#0f172a",color:"#f8fafc",padding:"40px 20px"}}>
     <article style={{maxWidth:760,margin:"0 auto",lineHeight:1.65}}>
-      <a href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</a>
+      <Link href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</Link>
       <h1 style={{fontSize:"clamp(2rem,6vw,3.2rem)",marginBottom:8}}>Privacidade</h1>
       <p style={{color:"#cbd5e1"}}>Última atualização: 4 de outubro de 2026 · versão beta</p>
 
@@ -39,7 +41,7 @@ export default function PrivacyPage(){
         <p>Esta página descreve de forma transparente o funcionamento atual da beta. Não substitui uma revisão jurídica final. Antes do lançamento público serão acrescentados os dados formais do responsável pelo serviço e um canal de contacto para pedidos relativos a dados pessoais.</p>
       </section>
 
-      <p style={{marginTop:36}}><a href="/termos" style={{color:"#fdba74"}}>Ler também os Termos de utilização</a></p>
+      <p style={{marginTop:36}}><Link href="/termos" style={{color:"#fdba74"}}>Ler também os Termos de utilização</Link></p>
     </article>
   </main>;
 }
