@@ -2,12 +2,15 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const setup=readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const workspace=readFileSync(new URL("../app/lib/subjectWorkspace.js",import.meta.url),"utf8");
 
 assert.match(page,/Cada disciplina terá o seu diagnóstico, objetivo e plano de estudo/u,"a seleção inicial deve explicar que diagnóstico e objetivo são por disciplina.");
-assert.match(page,/Que nota queres alcançar a \{activeSubject\.name\}\?/u,"o objetivo deve aparecer dentro da configuração de cada disciplina.");
+assert.match(setup,/Que nota queres alcançar a \{activeSubject\.name\}\?/u,"o objetivo deve aparecer dentro da configuração de cada disciplina.");
+assert.match(setup,/Este objetivo é específico desta disciplina/u,"a configuração deve explicar que o objetivo é específico da disciplina.");
+assert.match(setup,/\[activeSubject\.id\]:\{[\s\S]*goal:p\.goal/u,"o objetivo configurado deve ser persistido no espaço da disciplina ativa.");
 assert.match(page,/Todo o programa de Matemática A fica disponível/u,"secundário concluído deve desbloquear Matemática A.");
 assert.match(portuguese,/Todo o programa de Português fica disponível/u,"secundário concluído deve desbloquear Português.");
 assert.match(fqa,/Todo o programa de Física e Química A fica disponível/u,"secundário concluído deve desbloquear FQ A.");
