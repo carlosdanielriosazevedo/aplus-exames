@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata={title:"Termos de utilização · APProva+"};
 
 const section={marginTop:28};
@@ -5,7 +7,7 @@ const section={marginTop:28};
 export default function TermsPage(){
   return <main style={{minHeight:"100vh",background:"#0f172a",color:"#f8fafc",padding:"40px 20px"}}>
     <article style={{maxWidth:760,margin:"0 auto",lineHeight:1.65}}>
-      <a href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</a>
+      <Link href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</Link>
       <h1 style={{fontSize:"clamp(2rem,6vw,3.2rem)",marginBottom:8}}>Termos de utilização</h1>
       <p style={{color:"#cbd5e1"}}>Última atualização: 4 de outubro de 2026 · versão beta</p>
 
@@ -39,7 +41,7 @@ export default function TermsPage(){
         <p>Estes termos são adequados ao funcionamento atual da closed beta, mas ainda não constituem a versão jurídica final para lançamento público. Antes dessa abertura serão acrescentados os dados formais do responsável pelo serviço, contacto e revisão final das condições aplicáveis.</p>
       </section>
 
-      <p style={{marginTop:36}}><a href="/privacidade" style={{color:"#fdba74"}}>Consultar a informação de Privacidade</a></p>
+      <p style={{marginTop:36}}><Link href="/privacidade" style={{color:"#fdba74"}}>Consultar a informação de Privacidade</Link></p>
     </article>
   </main>;
 }
