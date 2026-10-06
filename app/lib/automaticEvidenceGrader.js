@@ -511,8 +511,11 @@ export function assessEvidence(response,...evidenceTexts){
   const symbolicStructure=/(?:->|→|=>|=|\/|\+)/u.test(rawResponse);
   const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(rawResponse)||symbolicStructure;
   const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
+  const evidenceInstruction=normalizeEvidenceText(evidenceTexts.filter(Boolean).join(" "));
+  const directFactualCriterion=/\b(?:refere|indica|identifica|seleciona|menciona|nomeia)\b/u.test(evidenceInstruction);
   let status="not-observed";
   if(substantiveResponse&&semanticScore>=.40&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";
+  else if(substantiveResponse&&directFactualCriterion&&matched.length>=2&&semanticScore>=.3)status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
   if(contradiction&&status==="observed")status="partial";
 

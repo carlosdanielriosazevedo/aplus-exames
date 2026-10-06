@@ -235,6 +235,12 @@ export function gradePortugueseResponse(item,response){
       wordCount:words,wordLimit:{min,max,within:false},criteria:[]
     };
 
+    const semanticCriteria=(item.rubric?.criteria||[]).filter(criterion=>!["lingua","correcao-linguistica","estrutura","coerencia"].includes(criterion.id));
+    const relevantAssessment=semanticCriteria.length
+      ?assessEvidence(responseText,...semanticCriteria.map(criterion=>criterion.label),item.referenceAnswer)
+      :null;
+    const relevantResponseWords=portugueseWordCount(relevantAssessment?.evidence||responseText);
+
     const structuralAssessment=criterion=>{
       const normalized=normalizePortugueseAnswer(responseText);
       const sentenceCount=(responseText.match(/[.!?]+/gu)||[]).length;
@@ -242,7 +248,7 @@ export function gradePortugueseResponse(item,response){
       const connectors=["porque","por isso","além disso","alem disso","assim","contudo","porém","porem","logo","portanto","embora","consequentemente","em conclusão","em conclusao"];
       const connectorCount=connectors.filter(token=>normalized.includes(normalizePortugueseAnswer(token))).length;
       if(["lingua","correcao-linguistica"].includes(criterion.id)){
-        const status=words>=Math.max(20,min*.55)?"observed":words>=10?"partial":"not-observed";
+        const status=relevantResponseWords>=Math.max(20,min*.55)?"observed":relevantResponseWords>=10?"partial":"not-observed";
         return {status,scoreRatio:status==="observed"?1:status==="partial"?.5:0,confidence:.48,observations:(criterion.observations||[]).map(observation=>({...observation,status,confidence:.48,studentEvidence:[]}))};
       }
       if(["estrutura","coerencia"].includes(criterion.id)){
@@ -264,10 +270,14 @@ export function gradePortugueseResponse(item,response){
         return {...observation,status:assessed.status,confidence:assessed.confidence,scoreRatio:assessed.scoreRatio,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,ambiguityDetected:!!assessed.ambiguityDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
       });
       let aggregate=aggregateCriterionAssessment(observations);
-      if(criterion.id==="conteudo"&&Number.isFinite(min)&&min>0&&words<min){
-        const ratio=words/min;
-        const cap=ratio<.45?.45:ratio<.7?.62:.78;
-        aggregate={...aggregate,scoreRatio:Math.min(aggregate.scoreRatio,cap),status:aggregate.status==="observed"?"partial":aggregate.status};
+      if(criterion.id==="conteudo"&&Number.isFinite(min)&&min>0){
+        const evidenceText=[...new Set(observations.flatMap(observation=>observation.studentEvidence||[]).filter(Boolean))].join(" ");
+        const evidenceWords=portugueseWordCount(evidenceText||responseText);
+        if(evidenceWords<min){
+          const ratio=evidenceWords/min;
+          const cap=ratio<.45?.45:ratio<.7?.62:.78;
+          aggregate={...aggregate,scoreRatio:Math.min(aggregate.scoreRatio,cap),status:aggregate.status==="observed"?"partial":aggregate.status};
+        }
       }
       return {...criterion,...aggregate,observations,observable:true,autoAssessed:true};
     });
