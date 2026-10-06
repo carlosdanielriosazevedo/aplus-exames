@@ -1,0 +1,30 @@
+name: Apply final calibration fix
+
+on:
+  push:
+    branches: [codex/score-explainability-all-subjects]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[final-calibration-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/score-explainability-all-subjects
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/apply-final-calibration-fix.mjs
+      - name: Commit patched source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/lib/portugueseEngine.js app/lib/physicsChemistryRubric.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Stabilize final explainability calibration [final-calibration-applied]"
+          git push origin HEAD:codex/score-explainability-all-subjects
