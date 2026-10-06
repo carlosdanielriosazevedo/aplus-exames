@@ -6,7 +6,13 @@ import {
   validationSplitForRealResponse,
   capturePhysicsChemistryValidationCase
 } from "../app/lib/graderValidationCapture.js";
-import {GRADER_VALIDATION_STORAGE_KEY,loadLocalValidationDataset} from "../app/lib/graderValidationDataset.js";
+import {
+  GRADER_VALIDATION_STORAGE_KEY,
+  loadLocalValidationDataset,
+  exportValidationDataset,
+  importValidationExports,
+  exportBlindTeacherPack
+} from "../app/lib/graderValidationDataset.js";
 
 const store=new Map();
 global.localStorage={
@@ -40,6 +46,23 @@ assert.ok(!("name" in rows[0])&&!('email' in rows[0])&&!('profile' in rows[0]),"
 const duplicate=capturePhysicsChemistryValidationCase({item,response,result:{status:"partial",points:5,maxPoints:10}});
 assert.equal(duplicate.code,"ALREADY_CAPTURED","mesma resposta não deve duplicar");
 assert.equal(loadLocalValidationDataset().length,1);
+
+const exported=exportValidationDataset(rows);
+assert.equal(exported.cases.length,1,"exportação deve incluir o caso real");
+const merged=importValidationExports([exported,exported]);
+assert.equal(merged.rows.length,1,"agregação deve deduplicar o mesmo case_id");
+assert.equal(merged.invalid.length,0,"export válido não deve ser rejeitado");
+const blind=exportBlindTeacherPack(merged.rows);
+assert.equal(blind.blind,true);
+assert.equal(blind.cases.length,1);
+assert.ok(!("grader_snapshot" in blind.cases[0]),"pack do professor não pode conter snapshot do Apronso");
+assert.ok(!("policyScore" in blind.cases[0]),"pack do professor não pode conter policy score");
+
+const tampered=JSON.parse(JSON.stringify(exported));
+tampered.cases[0].student_response="Resposta alterada depois da exportação";
+const rejected=importValidationExports([tampered]);
+assert.equal(rejected.rows.length,0,"conteúdo alterado deve ser rejeitado pelo fingerprint");
+assert.equal(rejected.invalid[0].reason,"case_fingerprint_invalid");
 
 setGraderValidationConsent(false);
 const denied=capturePhysicsChemistryValidationCase({item:{...item,id:"fqa-denied"},response:"Outra resposta",result:{}});
