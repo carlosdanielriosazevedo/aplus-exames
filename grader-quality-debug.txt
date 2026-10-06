@@ -1,0 +1,26 @@
+(node:2342) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/runner/work/aplus-exames/aplus-exames/app/data/openResponseCalibrationBank.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/runner/work/aplus-exames/aplus-exames/app/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+=== GRADER QUALITY REPORT ===
+Curated open-response benchmark: 65 cases
+Strong undercredit: 0%
+Wrong overcredit: 0%
+Review rate: 86.2%
+Paraphrase mean score delta: 30.6pp
+Unstable paraphrases: 61.5%
+Diagnostic accuracy: 100% (8/8)
+Human agreement: NOT MEASURED (requires independent teacher labels)
+Unstable excellent↔paraphrase pairs:
+  portuguese::PT639-FND-311: excellent 69.2% · paraphrase 39.2% · Δ 30pp · review true/true · diagnosis insufficient_justification/insufficient_justification
+  portuguese::PT639-FND-317: excellent 85.4% · paraphrase 53.8% · Δ 31.5pp · review true/true · diagnosis insufficient_justification/incomplete_answer
+  portuguese::PT639-FND-322: excellent 100% · paraphrase 53.8% · Δ 46.2pp · review true/true · diagnosis correct_or_near_correct/insufficient_justification
+  physics-chemistry-a::FQA-R-ELEM-01: excellent 100% · paraphrase 41% · Δ 59pp · review false/false · diagnosis correct_or_near_correct/insufficient_justification
+  physics-chemistry-a::FQA-R-ENE-01: excellent 58.3% · paraphrase 35.8% · Δ 22.5pp · review true/true · diagnosis insufficient_justification/insufficient_justification
+  physics-chemistry-a::FQA-R-MEC-01: excellent 100% · paraphrase 61% · Δ 39pp · review false/false · diagnosis correct_or_near_correct/insufficient_justification
+  physics-chemistry-a::FQA-R-EQ-01: excellent 100% · paraphrase 39% · Δ 61pp · review false/true · diagnosis correct_or_near_correct/insufficient_justification
+  physics-chemistry-a::FQA-R-AQ-01: excellent 81% · paraphrase 40% · Δ 41pp · review true/true · diagnosis ambiguous_answer/ambiguous_answer
+
+GRADER QUALITY REPORT FAILED (1 quality regressions)
+✗ unstable paraphrase rate 61.5% > 20%
+exit_code=1
