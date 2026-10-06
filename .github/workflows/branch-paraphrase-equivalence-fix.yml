@@ -21,6 +21,8 @@ jobs:
           node-version: 20
       - run: node scripts/apply-paraphrase-equivalence-fix.mjs
       - run: node scripts/fqa-observed-threshold-audit.mjs
+      - name: Inspect patched paraphrases
+        run: node scripts/paraphrase-quality-debug.mjs
       - run: node scripts/grader-quality-report.mjs
       - name: Commit fix
         run: |
