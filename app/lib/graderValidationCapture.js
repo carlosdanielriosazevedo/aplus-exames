@@ -1,6 +1,7 @@
 import {appendClosedBetaValidationCase,loadLocalValidationDataset,makeGraderValidationCase} from "./graderValidationDataset.js";
 
 export const GRADER_VALIDATION_CONSENT_KEY="aplus-grader-validation-consent-v1";
+export const GRADER_VALIDATION_SUBJECTS=["mathematics","portuguese","physics-chemistry-a"];
 
 function hashText(text){
   let h=2166136261;
@@ -32,30 +33,65 @@ function alreadyCaptured({subject,itemId,response}){
   return loadLocalValidationDataset().some(row=>row.source==="closed_beta_real"&&row.subject===subject&&row.item_id===String(itemId)&&row.student_response===serialized);
 }
 
-export function capturePhysicsChemistryValidationCase({item,response,result}={}){
+function technicalSignals(result={}){
+  const keys=[
+    "semanticScore","relationScore","coherenceScore","ambiguityScore","substanceScore",
+    "matchedCriteriaCount","totalCriteriaCount","matchedEvidenceCount","expectedEvidenceCount",
+    "matchedCount","totalCount","contradiction","hasContradiction","requiresReview"
+  ];
+  return Object.fromEntries(keys.flatMap(key=>result?.[key]!==undefined?[[key,result[key]]]:[]));
+}
+
+function normalizeSnapshot(result,item){
+  return {
+    status:result?.status??null,
+    final:result?.final??null,
+    correct:result?.correct??null,
+    points:result?.points??result?.provisionalPoints??null,
+    maxPoints:result?.maxPoints??item?.maxPoints??item?.points??100,
+    gradingMode:result?.gradingMode??item?.gradingMode??null,
+    reviewRequired:result?.reviewRequired??result?.requiresReview??null,
+    diagnosis:result?.diagnosis??result?.errorDiagnosis?.code??result?.feedbackSummary?.errorDiagnosis?.code??null,
+    confidence:result?.autoAssessmentConfidence??result?.classificationConfidence??null,
+    ...technicalSignals(result)
+  };
+}
+
+export function captureRealValidationCase({subject,item,response,result,responseFamily=null,question=null,maxPoints=null}={}){
   if(!graderValidationConsent())return {ok:false,code:"VALIDATION_CONSENT_REQUIRED"};
-  if(!item||!["restricted-response","stepwise"].includes(item.responseType))return {ok:false,code:"NOT_OPEN_RESPONSE"};
-  if(alreadyCaptured({subject:"physics-chemistry-a",itemId:item.id,response}))return {ok:false,code:"ALREADY_CAPTURED"};
-  const split=validationSplitForRealResponse({subject:"physics-chemistry-a",itemId:item.id,response});
+  if(!GRADER_VALIDATION_SUBJECTS.includes(subject))return {ok:false,code:"VALIDATION_SUBJECT_INVALID"};
+  if(!item?.id)return {ok:false,code:"VALIDATION_ITEM_REQUIRED"};
+  const family=responseFamily||item.responseType||item.response?.type||"unknown";
+  const prompt=question||item.prompt||item.q||"";
+  const resolvedMaxPoints=maxPoints??item.maxPoints??item.points??result?.maxPoints??100;
+  if(alreadyCaptured({subject,itemId:item.id,response}))return {ok:false,code:"ALREADY_CAPTURED"};
+  const split=validationSplitForRealResponse({subject,itemId:item.id,response});
   const row=makeGraderValidationCase({
     source:"closed_beta_real",
     split,
-    subject:"physics-chemistry-a",
-    responseFamily:item.responseType,
+    subject,
+    responseFamily:family,
     itemId:item.id,
-    question:item.prompt,
+    question:prompt,
     response,
-    maxPoints:item.maxPoints||10,
-    graderSnapshot:{
-      status:result?.status??null,
-      final:result?.final??null,
-      correct:result?.correct??null,
-      points:result?.points??result?.provisionalPoints??null,
-      maxPoints:result?.maxPoints??item.maxPoints??10,
-      gradingMode:result?.gradingMode??item.gradingMode??null,
-      reviewRequired:result?.reviewRequired??result?.requiresReview??null,
-      diagnosis:result?.diagnosis??result?.errorDiagnosis?.code??null
-    }
+    maxPoints:resolvedMaxPoints,
+    graderSnapshot:normalizeSnapshot(result,{...item,maxPoints:resolvedMaxPoints})
   });
   return appendClosedBetaValidationCase(row,{consent:true});
+}
+
+export function capturePhysicsChemistryValidationCase({item,response,result}={}){
+  if(!item||!["restricted-response","stepwise"].includes(item.responseType))return {ok:false,code:"NOT_OPEN_RESPONSE"};
+  return captureRealValidationCase({subject:"physics-chemistry-a",item,response,result});
+}
+
+export function capturePortugueseValidationCase({item,response,result}={}){
+  if(!item||["multiple-choice","short-answer"].includes(item.responseType))return {ok:false,code:"NOT_OPEN_RESPONSE"};
+  return captureRealValidationCase({subject:"portuguese",item,response,result});
+}
+
+export function captureMathematicsValidationCase({item,response,result}={}){
+  const type=item?.response?.type||item?.responseType||"choice";
+  if(["choice","completion"].includes(type))return {ok:false,code:"NOT_OPEN_RESPONSE"};
+  return captureRealValidationCase({subject:"mathematics",item,response,result,responseFamily:type,question:item.q,maxPoints:item.points});
 }
