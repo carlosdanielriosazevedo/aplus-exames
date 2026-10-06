@@ -9,7 +9,7 @@ export default function PrivacyPage(){
     <article style={{maxWidth:760,margin:"0 auto",lineHeight:1.65}}>
       <Link href="/" style={{color:"#fdba74",textDecoration:"none"}}>← Voltar à APProva+</Link>
       <h1 style={{fontSize:"clamp(2rem,6vw,3.2rem)",marginBottom:8}}>Privacidade</h1>
-      <p style={{color:"#cbd5e1"}}>Última atualização: 5 de outubro de 2026 · versão beta</p>
+      <p style={{color:"#cbd5e1"}}>Última atualização: 6 de outubro de 2026 · versão beta</p>
 
       <section style={section}>
         <h2>O que a APProva+ guarda</h2>
@@ -28,8 +28,9 @@ export default function PrivacyPage(){
 
       <section style={section}>
         <h2>Validação do corretor</h2>
-        <p>Durante uma fase controlada da beta, algumas respostas abertas podem ser usadas para comparar a correção automática com avaliações independentes de professores. Esta recolha deve ser ativada apenas com consentimento específico para validação. As respostas destinadas a este estudo ficam separadas do estado normal de progresso e os packs enviados aos professores não incluem a decisão do Apronso nem dados como nome ou email do aluno.</p>
+        <p>Durante uma fase controlada da beta, algumas respostas abertas podem ser usadas para comparar a correção automática com avaliações independentes de professores. Esta recolha é ativada apenas com consentimento específico para validação. As respostas destinadas a este estudo ficam separadas do estado normal de progresso e os packs enviados aos professores não incluem a decisão do Apronso nem dados como nome ou email do aluno.</p>
         <p>Os casos reservados para validação final são mantidos separados dos casos usados para calibrar o sistema, para evitar que a avaliação de qualidade seja feita sobre exemplos já usados no afinamento.</p>
+        <p><Link href="/participar-validacao" style={{color:"#fdba74"}}>Gerir a participação na validação do corretor</Link></p>
       </section>
 
       <section style={section}>
