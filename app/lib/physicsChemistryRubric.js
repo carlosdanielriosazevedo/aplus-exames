@@ -1,4 +1,5 @@
 import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary,automaticFeedbackForCriteria} from "./automaticEvidenceGrader.js";
+import {captureRealGraderValidationCase} from "./graderValidationCapture.js";
 export const PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS=[
   {id:"observed",label:"Cumpri"},
   {id:"partial",label:"Parcial"},
@@ -110,7 +111,6 @@ export function physicsChemistryRubricFor(item){
   }));
 }
 
-
 export function automaticPhysicsChemistryRubricResult(item,responseText){
   const text=String(responseText||"").trim();
   if(!text)return {
@@ -127,13 +127,15 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
   });
   const summary=automaticRubricSummary(criteria,item.maxPoints||10);
   const feedbackSummary=automaticFeedbackForCriteria(criteria,text);
-  return {
+  const result={
     status:"auto-assessed-provisional",final:false,correct:null,points:null,
     provisionalPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,
     gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:true,
     requiresReview:summary.requiresReview,autoAssessmentConfidence:summary.confidence,criteria,feedbackSummary,
     note:"A app avaliou automaticamente a resposta científica por critérios. O resultado é provisório quando a interpretação não é totalmente determinística."
   };
+  void captureRealGraderValidationCase({subject:"physics-chemistry-a",item,response:text,graderResult:result,maxPoints:result.maxPoints});
+  return result;
 }
 
 export function physicsChemistryRubricResult(item,responseText,assessment={}){

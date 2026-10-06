@@ -1,9 +1,10 @@
-export const GRADER_VALIDATION_DATASET_SCHEMA="aplus-grader-validation-dataset-v1";
-export const GRADER_VALIDATION_STORAGE_KEY="aplus-grader-validation-local-v1";
+export const GRADER_VALIDATION_DATASET_SCHEMA="aplus-grader-validation-dataset-v2";
+export const GRADER_VALIDATION_STORAGE_KEY="aplus-grader-validation-local-v2";
 export const VALIDATION_SOURCES=["synthetic","closed_beta_real"];
 export const VALIDATION_SPLITS=["calibration","holdout"];
+export const REAL_VALIDATION_HOLDOUT_PERCENT=20;
 
-function hashText(text){
+export function hashValidationText(text){
   let h=2166136261;
   for(let i=0;i<String(text).length;i++){
     h^=String(text).charCodeAt(i);
@@ -14,27 +15,39 @@ function hashText(text){
 
 function cleanText(value,max=12000){return String(value??"").slice(0,max)}
 
+export function deterministicValidationSplit({participantId,subject,itemId,response}={}){
+  if(!participantId||!subject||!itemId)throw new Error("VALIDATION_SPLIT_IDENTITY_REQUIRED");
+  const bucket=parseInt(hashValidationText([participantId,subject,itemId,cleanText(response)].join("|")),16)%100;
+  return bucket<REAL_VALIDATION_HOLDOUT_PERCENT?"holdout":"calibration";
+}
+
 export function graderValidationCaseFingerprint(row){
-  return hashText([
-    row.schema,row.source,row.split,row.subject,row.response_family,row.item_id,
-    row.question,row.student_response,row.max_points
+  return hashValidationText([
+    row.schema,row.source,row.split,row.participant_id,row.subject,row.response_family,row.item_id,
+    row.question,row.student_response,row.max_points,row.consent_version
   ].join("|"));
 }
 
 export function makeGraderValidationCase({
-  source="closed_beta_real",split="calibration",subject,responseFamily,itemId,
-  question,response,maxPoints=100,graderSnapshot=null,occurredAt=Date.now()
+  source="closed_beta_real",split=null,participantId=null,subject,responseFamily,itemId,
+  question,response,maxPoints=100,graderSnapshot=null,occurredAt=Date.now(),consentVersion=null
 }={}){
   if(!VALIDATION_SOURCES.includes(source))throw new Error("VALIDATION_SOURCE_INVALID");
-  if(!VALIDATION_SPLITS.includes(split))throw new Error("VALIDATION_SPLIT_INVALID");
   if(!subject||!itemId)throw new Error("VALIDATION_CASE_IDENTITY_REQUIRED");
   const studentResponse=cleanText(typeof response==="string"?response:JSON.stringify(response));
-  const caseId=`gv-${subject}-${itemId}-${hashText(`${studentResponse}|${occurredAt}`)}`;
+  const real=source==="closed_beta_real";
+  if(real&&(!participantId||!consentVersion))throw new Error("REAL_VALIDATION_CONSENT_IDENTITY_REQUIRED");
+  const resolvedSplit=real
+    ?deterministicValidationSplit({participantId,subject,itemId,response:studentResponse})
+    :(VALIDATION_SPLITS.includes(split)?split:"calibration");
+  const stableIdentity=[participantId||"synthetic",subject,itemId,studentResponse].join("|");
+  const caseId=`gv-${subject}-${itemId}-${hashValidationText(stableIdentity)}`;
   const row={
     schema:GRADER_VALIDATION_DATASET_SCHEMA,
     case_id:caseId,
     source,
-    split,
+    split:resolvedSplit,
+    participant_id:real?String(participantId):null,
     subject,
     response_family:responseFamily||"unknown",
     item_id:String(itemId),
@@ -42,7 +55,8 @@ export function makeGraderValidationCase({
     student_response:studentResponse,
     max_points:Number(maxPoints)||100,
     occurred_at:new Date(occurredAt).toISOString(),
-    // Hidden from blind teacher exports. No name/email/profile is stored here.
+    consent_version:real?String(consentVersion):null,
+    // Hidden from blind teacher exports. Never put account name/email/profile in this dataset.
     grader_snapshot:graderSnapshot||null,
     case_fingerprint:""
   };
@@ -88,16 +102,22 @@ export function loadLocalValidationDataset(){
   }catch{return []}
 }
 
-export function appendClosedBetaValidationCase(row,{consent=false}={}){
-  if(!consent)return {ok:false,code:"VALIDATION_CONSENT_REQUIRED",count:loadLocalValidationDataset().length};
+export function appendClosedBetaValidationCase(row,{consent=false,consentVersion=null}={}){
+  if(!consent||!consentVersion)return {ok:false,code:"VALIDATION_CONSENT_REQUIRED",count:loadLocalValidationDataset().length};
   if(row?.source!=="closed_beta_real")return {ok:false,code:"REAL_BETA_SOURCE_REQUIRED",count:loadLocalValidationDataset().length};
+  if(row?.consent_version!==consentVersion)return {ok:false,code:"VALIDATION_CONSENT_VERSION_MISMATCH",count:loadLocalValidationDataset().length};
+  const expectedSplit=deterministicValidationSplit({participantId:row.participant_id,subject:row.subject,itemId:row.item_id,response:row.student_response});
+  if(row.split!==expectedSplit)return {ok:false,code:"VALIDATION_SPLIT_TAMPERED",count:loadLocalValidationDataset().length};
+  if(row.case_fingerprint!==graderValidationCaseFingerprint(row))return {ok:false,code:"VALIDATION_FINGERPRINT_INVALID",count:loadLocalValidationDataset().length};
   if(typeof localStorage==="undefined")return {ok:false,code:"LOCAL_STORAGE_UNAVAILABLE",count:0};
   const current=loadLocalValidationDataset();
+  const existing=current.find(x=>x.case_id===row.case_id);
+  if(existing&&existing.split!==row.split)return {ok:false,code:"VALIDATION_SPLIT_IMMUTABLE",count:current.length};
   const byId=new Map(current.map(x=>[x.case_id,x]));
-  byId.set(row.case_id,row);
+  byId.set(row.case_id,existing?{...row,split:existing.split,occurred_at:existing.occurred_at}:row);
   const next=[...byId.values()];
   localStorage.setItem(GRADER_VALIDATION_STORAGE_KEY,JSON.stringify(next));
-  return {ok:true,count:next.length};
+  return {ok:true,count:next.length,split:row.split,caseId:row.case_id};
 }
 
 export function clearLocalValidationDataset(){
@@ -109,6 +129,7 @@ export function clearLocalValidationDataset(){
 export function exportBlindTeacherPack(rows=[]){
   return {
     schema:"aplus-grader-teacher-pack-v1",
+    dataset_schema:GRADER_VALIDATION_DATASET_SCHEMA,
     exported_at:new Date().toISOString(),
     blind:true,
     cases:rows.map(blindTeacherCase)

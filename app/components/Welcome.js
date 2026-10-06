@@ -6,6 +6,7 @@ import {
   TESTER_SEGMENTS,PUBLIC_ENTRY_SEGMENTS,markFriendsBetaConsent,
   isFriendsBeta,testerSegmentInfo,currentTesterSegment
 } from "../lib/friendsBeta";
+import {currentGraderValidationConsent,setGraderValidationConsent} from "../lib/graderValidationConsent";
 import {Logo,Apronso,BrandName} from "./chrome";
 
 // Ecrã inicial (Welcome), extraído de app/page.js. Depende de vários módulos
@@ -14,6 +15,13 @@ export function Welcome({s, setS, go}){
   const friends = isFriendsBeta(s);
   const savedSegment = currentTesterSegment(s);
   const [segment, setSegment] = useState(PUBLIC_ENTRY_SEGMENTS.includes(savedSegment) ? savedSegment : null);
+  const [graderValidationConsent,setLocalGraderValidationConsent]=useState(()=>currentGraderValidationConsent().granted);
+
+  function toggleGraderValidationConsent(value){
+    const granted=value===true;
+    setGraderValidationConsent(granted);
+    setLocalGraderValidationConsent(granted);
+  }
 
   function start(){
     if(friends){
@@ -52,6 +60,10 @@ export function Welcome({s, setS, go}){
           <strong>{item.label}</strong><small>{item.description}</small>
         </button>)}</div>
       </div>
+      {segment&&segment!=="parent"&&<label style={{display:"flex",gap:10,textAlign:"left",alignItems:"flex-start",maxWidth:650,margin:"16px auto",padding:"14px 16px",border:"1px solid rgba(255,255,255,.18)",borderRadius:14}}>
+        <input type="checkbox" checked={graderValidationConsent} onChange={e=>toggleGraderValidationConsent(e.target.checked)} style={{marginTop:3}}/>
+        <span><b style={{display:"block"}}>Ajudar a validar o corretor automático (opcional)</b><small style={{display:"block",marginTop:4}}>Se ativares, as respostas abertas que deres durante esta beta podem ser guardadas com um identificador pseudónimo e revistas cegamente por professores para comparar a correção do Apronso. Isto não altera a tua nota, não guarda o teu nome/email neste conjunto e podes desligar a recolha quando quiseres.</small></span>
+      </label>}
     </> : <p className="eyebrow">PREPARAÇÃO INTELIGENTE PARA EXAMES NACIONAIS</p>}
     <h1>A tua melhor nota<br/><em>começa aqui.</em></h1>
     <p>A <BrandName/> descobre onde estás a perder pontos e decide o que vale mais a pena estudar hoje.</p>
