@@ -3,6 +3,7 @@ import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation.js
 import {PHYSICS_CHEMISTRY_A_SUBTOPICS} from "../data/physicsChemistryTaxonomy.js";
 import {automaticPhysicsChemistryRubricResult,physicsChemistryRubricFor} from "./physicsChemistryRubric.js";
 import {gradePhysicsChemistryStepwise} from "./physicsChemistryStepwiseGrader.js";
+import {capturePhysicsChemistryValidationCase} from "./graderValidationCapture.js";
 
 function normalizeScientificNumber(value){
   const normalized=String(value??"").trim().replace(",",".").replace(/[×·]10\^?/iu,"e").replace(/\s+/g,"");
@@ -33,10 +34,16 @@ export function gradePhysicsChemistryResponse(item,value){
     const correct=Number(value)===item.answerIndex;
     return {status:"final",final:true,correct,points:correct?(item.maxPoints||10):0,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
   }
-  if(item.responseType==="stepwise")return gradePhysicsChemistryStepwise(item,value);
+  if(item.responseType==="stepwise"){
+    const result=gradePhysicsChemistryStepwise(item,value);
+    capturePhysicsChemistryValidationCase({item,response:value,result});
+    return result;
+  }
   const text=String(value??"").trim();
   if(!text)return {status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,gradingMode:item.gradingMode};
-  return automaticPhysicsChemistryRubricResult(item,text);
+  const result=automaticPhysicsChemistryRubricResult(item,text);
+  capturePhysicsChemistryValidationCase({item,response:text,result});
+  return result;
 }
 
 export function physicsChemistryCoverage(items=[]){
@@ -44,16 +51,7 @@ export function physicsChemistryCoverage(items=[]){
   const byYear=Object.fromEntries(["10.º","11.º"].map(year=>[year,items.filter(item=>item.year===year).length]));
   const bySubtopic=Object.fromEntries(PHYSICS_CHEMISTRY_A_SUBTOPICS.map(row=>[row.id,items.filter(item=>item.subtopicId===row.id).length]));
   const diagnosticEligible=items.filter(item=>item.responseType==="multiple-choice").length;
-  return {
-    total:items.length,
-    byDomain,
-    byYear,
-    bySubtopic,
-    diagnosticEligible,
-    missionEligibleByDomain:Object.fromEntries(Object.entries(byDomain).map(([id,count])=>[id,count>=STUDY_SESSION_MIN_QUESTIONS])),
-    diagnosticReady:diagnosticEligible>=8,
-    missionReady:items.length>=STUDY_SESSION_MIN_QUESTIONS
-  };
+  return {total:items.length,byDomain,byYear,bySubtopic,diagnosticEligible,missionEligibleByDomain:Object.fromEntries(Object.entries(byDomain).map(([id,count])=>[id,count>=STUDY_SESSION_MIN_QUESTIONS])),diagnosticReady:diagnosticEligible>=8,missionReady:items.length>=STUDY_SESSION_MIN_QUESTIONS};
 }
 
 function stablePick(items,count,offset=0){
@@ -63,29 +61,17 @@ function stablePick(items,count,offset=0){
 
 export function buildPhysicsChemistryDiagnostic(items=[]){
   const selected=[];
-  const plan=[
-    ["10.º","q10-elements"],["10.º","q10-matter"],["10.º","f10-energy"],["10.º","q10-elements"],
-    ["11.º","f11-mechanics"],["11.º","f11-waves"],["11.º","q11-equilibrium"],["11.º","q11-aqueous"]
-  ];
+  const plan=[["10.º","q10-elements"],["10.º","q10-matter"],["10.º","f10-energy"],["10.º","q10-elements"],["11.º","f11-mechanics"],["11.º","f11-waves"],["11.º","q11-equilibrium"],["11.º","q11-aqueous"]];
   for(const [year,domain] of plan){
     const pool=items.filter(item=>item.responseType==="multiple-choice"&&item.year===year&&item.domain===domain&&!selected.some(row=>row.id===item.id));
     const fallback=items.filter(item=>item.responseType==="multiple-choice"&&item.year===year&&!selected.some(row=>row.id===item.id));
     const next=(pool[0]||fallback[0]);
     if(next)selected.push(next);
   }
-
   const eligible=items.filter(item=>item.responseType==="multiple-choice"&&!selected.some(row=>row.id===item.id));
   const representedSubtopics=new Set(selected.map(item=>item.subtopicId).filter(Boolean));
-  for(const item of eligible){
-    if(selected.length>=8)break;
-    if(item.subtopicId&&representedSubtopics.has(item.subtopicId))continue;
-    selected.push(item);
-    if(item.subtopicId)representedSubtopics.add(item.subtopicId);
-  }
-  for(const item of eligible){
-    if(selected.length>=8)break;
-    if(!selected.some(row=>row.id===item.id))selected.push(item);
-  }
+  for(const item of eligible){if(selected.length>=8)break;if(item.subtopicId&&representedSubtopics.has(item.subtopicId))continue;selected.push(item);if(item.subtopicId)representedSubtopics.add(item.subtopicId)}
+  for(const item of eligible){if(selected.length>=8)break;if(!selected.some(row=>row.id===item.id))selected.push(item)}
   return selected.slice(0,8);
 }
 
@@ -97,61 +83,19 @@ export function buildAdaptivePhysicsChemistryMission(items=[],{progress={},domai
   const exposure=new Map();
   const itemById=new Map(items.map(item=>[item.id,item]));
   const templateExposure=new Map();
-  for(const id of sessions.flatMap(row=>row.itemIds||[])){
-    exposure.set(id,(exposure.get(id)||0)+1);
-    const templateId=itemById.get(id)?.templateId;
-    if(templateId)templateExposure.set(templateId,(templateExposure.get(templateId)||0)+1);
-  }
-  const unseen=pool.filter(item=>(exposure.get(item.id)||0)===0);
-  if(unseen.length>=bounded)pool=unseen;
-
+  for(const id of sessions.flatMap(row=>row.itemIds||[])){exposure.set(id,(exposure.get(id)||0)+1);const templateId=itemById.get(id)?.templateId;if(templateId)templateExposure.set(templateId,(templateExposure.get(templateId)||0)+1)}
+  const unseen=pool.filter(item=>(exposure.get(item.id)||0)===0);if(unseen.length>=bounded)pool=unseen;
   const competence=progress.competence||{};
   const explicitDifficulty={basic:1,mid:2,adv:3,challenge:4}[level]||null;
-  pool=[...pool].sort((a,b)=>{
-    const seenA=exposure.get(a.id)||0,seenB=exposure.get(b.id)||0;
-    if(seenA!==seenB)return seenA-seenB;
-    const familyA=a.templateId?(templateExposure.get(a.templateId)||0):0;
-    const familyB=b.templateId?(templateExposure.get(b.templateId)||0):0;
-    if(familyA!==familyB)return familyA-familyB;
-    if(recent.has(a.id)!==recent.has(b.id))return recent.has(a.id)?1:-1;
-    if(explicitDifficulty){
-      const da=Math.abs((a.difficultyTarget||2)-explicitDifficulty);
-      const db=Math.abs((b.difficultyTarget||2)-explicitDifficulty);
-      if(da!==db)return da-db;
-    }
-    const ra=competence[a.competencyId]||{},rb=competence[b.competencyId]||{};
-    const aa=ra.deterministicAttempts||0,ab=rb.deterministicAttempts||0;
-    const pa=aa?(ra.correct||0)/aa:0.5,pb=ab?(rb.correct||0)/ab:0.5;
-    return pa-pb||aa-ab||String(a.id).localeCompare(String(b.id));
-  });
-
+  pool=[...pool].sort((a,b)=>{const seenA=exposure.get(a.id)||0,seenB=exposure.get(b.id)||0;if(seenA!==seenB)return seenA-seenB;const familyA=a.templateId?(templateExposure.get(a.templateId)||0):0;const familyB=b.templateId?(templateExposure.get(b.templateId)||0):0;if(familyA!==familyB)return familyA-familyB;if(recent.has(a.id)!==recent.has(b.id))return recent.has(a.id)?1:-1;if(explicitDifficulty){const da=Math.abs((a.difficultyTarget||2)-explicitDifficulty);const db=Math.abs((b.difficultyTarget||2)-explicitDifficulty);if(da!==db)return da-db}const ra=competence[a.competencyId]||{},rb=competence[b.competencyId]||{};const aa=ra.deterministicAttempts||0,ab=rb.deterministicAttempts||0,pa=aa?(ra.correct||0)/aa:0.5,pb=ab?(rb.correct||0)/ab:0.5;return pa-pb||aa-ab||String(a.id).localeCompare(String(b.id))});
   const selected=[];
-  for(const item of pool){
-    if(selected.length>=bounded)break;
-    const sameDomain=selected.filter(row=>row.domain===item.domain).length;
-    if(!domain&&sameDomain>=3)continue;
-    const constructed=selected.filter(row=>row.responseType!=="multiple-choice").length;
-    if(item.responseType!=="multiple-choice"&&constructed>=2)continue;
-    selected.push(item);
-  }
-  if(selected.length<bounded){
-    for(const item of pool){
-      if(selected.length>=bounded)break;
-      if(!selected.some(row=>row.id===item.id))selected.push(item);
-    }
-  }
+  for(const item of pool){if(selected.length>=bounded)break;const sameDomain=selected.filter(row=>row.domain===item.domain).length;if(!domain&&sameDomain>=3)continue;const constructed=selected.filter(row=>row.responseType!=="multiple-choice").length;if(item.responseType!=="multiple-choice"&&constructed>=2)continue;selected.push(item)}
+  if(selected.length<bounded){for(const item of pool){if(selected.length>=bounded)break;if(!selected.some(row=>row.id===item.id))selected.push(item)}}
   return {items:selected,targetDomain:domain||null,targetSubtopicId:subtopicId||null,year:year||null};
 }
 
 export function physicsChemistryScope(items,currentYear,taughtUnitIds=[]){
   const allowedYears=currentYear==="10.º"?["10.º"]:["10.º","11.º"];
   const selected=new Set(taughtUnitIds||[]);
-  return items.filter(item=>{
-    if(!allowedYears.includes(item.year))return false;
-    if(item.year!==currentYear||currentYear==="12.º")return true;
-    // Backward compatibility: older profiles stored whole-domain ids.
-    // New profiles store subtopic ids so the scope can match Matemática A's
-    // matéria → submatéria model without pretending an entire domain was taught.
-    return selected.has(item.domain)||selected.has(item.subtopicId);
-  });
+  return items.filter(item=>{if(!allowedYears.includes(item.year))return false;if(item.year!==currentYear||currentYear==="12.º")return true;return selected.has(item.domain)||selected.has(item.subtopicId)});
 }

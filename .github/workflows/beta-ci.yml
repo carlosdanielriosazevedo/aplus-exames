@@ -32,6 +32,9 @@ jobs:
       - name: Selective grader validation
         run: node scripts/selective-grader-validation-audit.mjs
 
+      - name: Real grader capture
+        run: node scripts/real-grader-capture-audit.mjs
+
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
