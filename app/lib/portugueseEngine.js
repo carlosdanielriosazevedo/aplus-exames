@@ -2,6 +2,7 @@ import {DEFAULT_MISSION_QUESTIONS,clampStudySessionSize,STUDY_SESSION_MIN_QUESTI
 import {PORTUGUESE_DOMAINS,PORTUGUESE_RELEASE_POLICY} from "../data/portugueseFoundation.js";
 import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary,automaticFeedbackForCriteria} from "./automaticEvidenceGrader.js";
 import {portugueseObservationGuidance} from "./portugueseObservationGuidance.js";
+import {buildScoreExplainability} from "./scoreExplainability.js";
 
 const WRITTEN_DOMAIN_IDS=PORTUGUESE_DOMAINS.filter(domain=>domain.writtenExam).map(domain=>domain.id);
 const RESPONSE_PRIORITY={"multiple-choice":0,"short-answer":1,"restricted-response":2,"extended-writing":3};
@@ -271,7 +272,10 @@ export function gradePortugueseResponse(item,response){
       return {...criterion,...aggregate,observations,observable:true,autoAssessed:true};
     });
     const summary=automaticRubricSummary(criteria,item.maxPoints||item.rubric?.maxPoints||0);
-    const feedbackSummary=automaticFeedbackForCriteria(criteria,responseText);
+    const pointMap=new Map(summary.criterionPoints.map(row=>[row.id,row]));
+    const scoredCriteria=criteria.map(criterion=>({...criterion,...(pointMap.get(criterion.id)||{})}));
+    const feedbackSummary=automaticFeedbackForCriteria(scoredCriteria,responseText);
+    const scoreExplainability=buildScoreExplainability({awardedPoints:summary.provisionalPoints,maxPoints:item.maxPoints,criteria:scoredCriteria,requiresReview:summary.requiresReview});
     return {
       status:"auto-assessed-provisional",
       final:false,
@@ -287,7 +291,7 @@ export function gradePortugueseResponse(item,response){
       autoAssessmentConfidence:summary.confidence,
       wordCount:words,
       wordLimit:{min,max,within:words>=min&&words<=max},
-      criteria,feedbackSummary,
+      criteria:scoredCriteria,feedbackSummary,scoreExplainability,
       note:"A app avaliou automaticamente a resposta por critérios. A classificação é provisória quando a interpretação não é totalmente determinística."
     };
   }

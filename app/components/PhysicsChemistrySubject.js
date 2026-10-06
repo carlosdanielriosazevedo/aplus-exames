@@ -15,6 +15,7 @@ import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnb
 import {missionCompletedToday} from "../lib/engagement";
 import {loadPhysicsChemistryExamDraft,physicsChemistryDraftAgeLabel} from "../lib/physicsChemistryExamDraft";
 import {answerOptionState} from "../lib/feedbackCopy";
+import ScoreLossExplanation from "./ScoreLossExplanation";
 
 const SUBJECT_ID="physics-chemistry-a";
 const SCHOOL_YEARS=["10.º","11.º"];
@@ -209,10 +210,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
         {item.responseType==="restricted-response"&&<div className="fqaRestricted"><div className="notice"><b>Resposta científica</b><span>Explica o raciocínio com linguagem científica e articula os elementos pedidos.</span></div><textarea disabled={!!feedback} value={typeof answer==="string"?answer:""} onChange={event=>setAnswer(event.target.value)} rows={8} placeholder="Escreve a tua resposta..."/></div>}
         {!feedback?<button className="primary" disabled={!answerReady(item)} onClick={submit}>Responder</button>:<>
           {item.responseType==="multiple-choice"&&<div className={"feedback answerFeedback "+(feedback.correct?"good":"bad")}><b>{feedback.correct?"✓ Muito bem!":"Não é essa."}</b><span>{feedback.correct?item.explanation:<>A resposta correta é:<strong>{item.options[item.answerIndex]}</strong>{item.explanation&&<small>{item.explanation}</small>}</>}</span></div>}
-          {item.responseType==="stepwise"&&<PhysicsChemistryStepwiseReview item={item} result={feedback}/>} 
+          {item.responseType==="stepwise"&&<><PhysicsChemistryStepwiseReview item={item} result={feedback}/><ScoreLossExplanation result={feedback}/></>} 
           {item.responseType==="restricted-response"&&<div className="fqaConstructedReview">
             <div className="notice"><b>Avaliação automática provisória</b><span>{feedback.note}</span></div>
-            {Number.isFinite(feedback.provisionalPoints)&&<div className="autoAssessmentScore"><b>{String(feedback.provisionalPoints).replace(".",",")} / {feedback.maxPoints} pontos</b><small>estimativa provisória · confiança {feedback.autoAssessmentConfidence??"—"}%</small></div>}
+            {Number.isFinite(feedback.provisionalPoints)&&<><div className="autoAssessmentScore"><b>{String(feedback.provisionalPoints).replace(".",",")} / {feedback.maxPoints} pontos</b><small>estimativa provisória · confiança {feedback.autoAssessmentConfidence??"—"}%</small></div><ScoreLossExplanation result={feedback}/></>}
             {feedback.feedbackSummary&&<div className="automaticFeedbackPanel">
               {feedback.feedbackSummary.strengths.length>0&&<section className="automaticFeedbackGood"><b>O que fizeste bem</b>{feedback.feedbackSummary.strengths.map(row=><div key={row.id}><strong>✓ {row.label}</strong>{row.evidence&&<blockquote>“{row.evidence}”</blockquote>}<span>{row.message}</span></div>)}</section>}
               {feedback.feedbackSummary.gaps.length>0&&<section className="automaticFeedbackImprove"><b>O que falta melhorar</b>{feedback.feedbackSummary.gaps.map(row=><div key={row.id}><strong>{row.message}</strong><span>{row.label}</span>{row.evidence&&<blockquote>Na tua resposta: “{row.evidence}”</blockquote>}</div>)}</section>}

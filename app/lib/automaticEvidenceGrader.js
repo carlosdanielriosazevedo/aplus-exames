@@ -473,16 +473,23 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
   let points=0,confidenceWeight=0;
   for(const criterion of criteria){
     const weight=Number(criterion.points)||1;
-    const ratio=Number.isFinite(criterion.scoreRatio)?criterion.scoreRatio:(criterion.status==="observed"?1:criterion.status==="partial"?.5:0);
+    const ratio=criterion.status==="observed"?1:Number.isFinite(criterion.scoreRatio)?criterion.scoreRatio:(criterion.status==="partial"?.5:0);
     points+=ratio*weight;
     confidenceWeight+=(criterion.confidence||.5)*weight;
   }
   const contradictionDetected=criteria.some(row=>row.contradictionDetected);
   const rawProvisional=points/totalWeight*maxPoints;
   const provisionalPoints=contradictionDetected?Math.min(rawProvisional,maxPoints*.5):rawProvisional;
+  const criterionPoints=criteria.map(criterion=>{
+    const weight=Number(criterion.points)||1;
+    const ratio=criterion.status==="observed"?1:Number.isFinite(criterion.scoreRatio)?criterion.scoreRatio:(criterion.status==="partial"?.5:0);
+    const criterionMax=maxPoints*(weight/totalWeight);
+    return {id:criterion.id,awardedPoints:Math.round(criterionMax*ratio*10)/10,maxPoints:Math.round(criterionMax*10)/10,lostPoints:Math.round(criterionMax*(1-ratio)*10)/10};
+  });
   return {
     provisionalPoints:Math.round(provisionalPoints*10)/10,
     maxPoints,
+    criterionPoints,
     confidence:Math.round(confidenceWeight/totalWeight*100),
     requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected||row.ambiguityDetected),
     contradictionDetected,

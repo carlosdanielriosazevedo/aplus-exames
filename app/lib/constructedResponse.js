@@ -2,6 +2,7 @@ import {canonicalPolynomial,equivalentPolynomial} from "./polynomial.js";
 export {CONSTRUCTED_RESPONSE_BANK} from "./constructedResponseBank.js";
 export {COMPLETION_RESPONSE_BANK} from "./completionResponseBank.js";
 import {scoreIaveStep,iaveSituationLabel,dependentStepCap,applyIaveGlobalPenalties,iaveGlobalPenalty} from "./iaveScoring.js";
+import {buildScoreExplainability} from "./scoreExplainability.js";
 export function responseType(question){return question?.response?.type||"choice"}
 export function isConstructedResponse(question){return !["choice","completion"].includes(responseType(question))}
 export function completionFilledCount(question,answer){
@@ -480,6 +481,14 @@ export function studentResponseLabel(question,answer){
   return String(answer).trim();
 }
 
+function withMathExplainability(result){
+  if(!result||!Number.isFinite(result.maxPoints))return result;
+  const awarded=Number.isFinite(result.points)?result.points:null;
+  if(awarded===null)return result;
+  const scoreExplainability=buildScoreExplainability({awardedPoints:awarded,maxPoints:result.maxPoints,steps:result.stepResults||[],globalPenalty:result.globalPenalty||0,requiresReview:result.reviewRequired});
+  return {...result,scoreExplainability,reviewRequired:result.reviewRequired||!!scoreExplainability.consistencyError};
+}
+
 export function gradeResponse(question,answer){
   const type=responseType(question),maxPoints=Number(question?.points)||(type==="choice"?5:35);
   if(!isResponseAnswered(question,answer))return {status:"unanswered",correct:false,points:0,maxPoints,stepResults:[]};
@@ -488,7 +497,7 @@ export function gradeResponse(question,answer){
     const blankResults=blanks.map(b=>({id:b.id,label:b.label,correct:answer?.[b.id]===b.correct,answer:b.options[answer?.[b.id]]??"Sem resposta",expected:b.options[b.correct]}));
     const correctCount=blankResults.filter(b=>b.correct).length;
     const points=maxPoints*correctCount/blanks.length,correct=correctCount===blanks.length;
-    return {status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults:[],blankResults};
+    return withMathExplainability({status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults:[],blankResults});
   }
   if(type==="stepwise"){
     if(presentsOnlyFinalResult(question,answer))return {status:"incorrect",correct:false,points:0,maxPoints,stepResults:[],pendingPoints:0,reviewRequired:false,reason:"final_result_only",iaveSituation:iaveSituationLabel("final_result_only"),classificationConfidence:"high",errorDiagnosis:mathLearningErrorDiagnosis([],"final_result_only")};
@@ -549,7 +558,7 @@ export function gradeResponse(question,answer){
     const globalPenalties=globalReasons.map(item=>({reason:item.reason,iaveSituation:iaveSituationLabel(item.reason),points:iaveGlobalPenalty(item.reason,item),classificationConfidence:"high"})).filter(item=>item.points>0);
     const reason=pendingPoints?"not_verified":correct?null:points>0?"partial_credit":"incorrect";
     const errorDiagnosis=mathLearningErrorDiagnosis(stepResults,reason);
-    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason,errorDiagnosis};
+    return withMathExplainability({status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason,errorDiagnosis});
   }
   let correct=false,reason="incorrect";
   if(type==="choice")correct=answer===question.a;
@@ -563,7 +572,7 @@ export function gradeResponse(question,answer){
     correct=!!parsed&&parsed.numerator*question.response.denominator===question.response.numerator*parsed.denominator;
     if(!parsed)reason="invalid_fraction_format";
   }
-  return {status:correct?"correct":"incorrect",correct,points:correct?maxPoints:0,maxPoints,stepResults:[],reason:correct?null:reason};
+  return withMathExplainability({status:correct?"correct":"incorrect",correct,points:correct?maxPoints:0,maxPoints,stepResults:[],reason:correct?null:reason});
 }
 
 export function miniExamPointSummary(questions=[],answers=[]){
