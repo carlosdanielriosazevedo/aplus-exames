@@ -1,5 +1,6 @@
 export const GRADER_VALIDATION_DATASET_SCHEMA="aplus-grader-validation-dataset-v1";
 export const GRADER_VALIDATION_STORAGE_KEY="aplus-grader-validation-local-v1";
+export const GRADER_VALIDATION_EXPORT_SCHEMA="aplus-grader-validation-export-v1";
 export const VALIDATION_SOURCES=["synthetic","closed_beta_real"];
 export const VALIDATION_SPLITS=["calibration","holdout"];
 
@@ -104,6 +105,40 @@ export function clearLocalValidationDataset(){
   if(typeof localStorage==="undefined")return false;
   localStorage.removeItem(GRADER_VALIDATION_STORAGE_KEY);
   return true;
+}
+
+export function exportValidationDataset(rows=[]){
+  return {
+    schema:GRADER_VALIDATION_EXPORT_SCHEMA,
+    exported_at:new Date().toISOString(),
+    cases:rows.filter(row=>row?.schema===GRADER_VALIDATION_DATASET_SCHEMA&&row?.source==="closed_beta_real")
+  };
+}
+
+export function importValidationExports(exports=[]){
+  const accepted=[];
+  const invalid=[];
+  for(const [exportIndex,payload] of (exports||[]).entries()){
+    if(payload?.schema!==GRADER_VALIDATION_EXPORT_SCHEMA||!Array.isArray(payload?.cases)){
+      invalid.push({exportIndex,reason:"export_schema_invalid"});
+      continue;
+    }
+    for(const row of payload.cases){
+      if(row?.schema!==GRADER_VALIDATION_DATASET_SCHEMA||row?.source!=="closed_beta_real"){
+        invalid.push({exportIndex,caseId:row?.case_id||null,reason:"case_schema_invalid"});
+        continue;
+      }
+      const expected=graderValidationCaseFingerprint(row);
+      if(!row.case_id||row.case_fingerprint!==expected){
+        invalid.push({exportIndex,caseId:row?.case_id||null,reason:"case_fingerprint_invalid"});
+        continue;
+      }
+      accepted.push(row);
+    }
+  }
+  const unique=new Map();
+  for(const row of accepted)unique.set(row.case_id,row);
+  return {rows:[...unique.values()],invalid};
 }
 
 export function exportBlindTeacherPack(rows=[]){
