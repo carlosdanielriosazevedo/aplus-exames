@@ -1,0 +1,36 @@
+name: Grader quality debug
+
+on:
+  push:
+    branches: [codex/score-explainability-all-subjects]
+
+permissions:
+  contents: write
+
+jobs:
+  debug:
+    if: ${{ !contains(github.event.head_commit.message, '[grader-quality-debug]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/score-explainability-all-subjects
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run grader quality and capture output
+        shell: bash
+        run: |
+          set +e
+          node scripts/grader-quality-report.mjs > grader-quality-debug.txt 2>&1
+          echo "exit_code=$?" >> grader-quality-debug.txt
+          exit 0
+      - name: Commit debug output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add grader-quality-debug.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "Capture grader quality debug output [grader-quality-debug]"
+          git push origin HEAD:codex/score-explainability-all-subjects
