@@ -208,12 +208,14 @@ function oneEditApart(a,b){
 function cueMatched(cue,responseTokens){
   if(responseTokens.includes(cue))return true;
   if(cue.length<6)return false;
-  return responseTokens.some(token=>
-    token.length>=6&&
-    Math.abs(token.length-cue.length)<=1&&
-    cue.slice(0,4)===token.slice(0,4)&&
-    oneEditApart(cue,token)
-  );
+  return responseTokens.some(token=>{
+    if(token.length<6||cue.slice(0,4)!==token.slice(0,4))return false;
+    const delta=Math.abs(token.length-cue.length);
+    if(delta<=1&&oneEditApart(cue,token))return true;
+    const shorter=token.length<=cue.length?token:cue;
+    const longer=token.length>cue.length?token:cue;
+    return delta<=2&&shorter.length>=6&&longer.startsWith(shorter.slice(0,6));
+  });
 }
 
 function semanticAmbiguityDetected(response){
@@ -245,12 +247,16 @@ function bestSentence(response,cues){
 }
 
 function relationScore(response,cues){
-  const rows=String(response||"").split(/(?<=[.!?;])\s+|\n+/u).map(row=>row.trim()).filter(Boolean);
+  const responseTokens=tokens(response);
+  if(!responseTokens.length)return 0;
+  const windowSize=Math.min(12,Math.max(6,cues.length*2));
   let best=0;
-  for(const row of rows){
-    const rowTokens=tokens(row);
+  for(let start=0;start<responseTokens.length;start++){
+    const rowTokens=responseTokens.slice(start,start+windowSize);
+    if(!rowTokens.length)break;
     const hits=cues.filter(cue=>cueMatched(cue,rowTokens)).length;
     best=Math.max(best,cues.length?hits/Math.min(cues.length,6):0);
+    if(start+windowSize>=responseTokens.length)break;
   }
   return best;
 }
