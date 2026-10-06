@@ -38,6 +38,9 @@ jobs:
       - name: Grader validation report
         run: node scripts/grader-validation-report-audit.mjs
 
+      - name: Score explainability
+        run: node scripts/score-explainability-audit.mjs
+
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
