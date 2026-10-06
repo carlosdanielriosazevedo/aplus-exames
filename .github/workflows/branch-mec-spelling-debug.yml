@@ -1,0 +1,18 @@
+name: MEC spelling diagnostic
+
+on:
+  push:
+    branches: [codex/score-explainability-all-subjects]
+
+jobs:
+  debug:
+    if: ${{ !contains(github.event.head_commit.message, '[mec-debug-ran]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/score-explainability-all-subjects
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/mec-spelling-debug.mjs
