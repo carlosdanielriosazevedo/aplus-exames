@@ -1,9 +1,0 @@
-import fs from "node:fs";
-const path="app/lib/physicsChemistryRubric.js";
-let source=fs.readFileSync(path,"utf8");
-const from=`    const observations=(criterion.observations||[]).map(observation=>{\n      const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);\n      return {...observation,status:assessed.status,confidence:assessed.confidence,scoreRatio:assessed.scoreRatio,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,ambiguityDetected:!!assessed.ambiguityDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};\n    });`;
-const to=`    const observations=(criterion.observations||[]).map(observation=>{\n      const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);\n      const normalizedText=text.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLocaleLowerCase("pt-PT");\n      const directDetection=observation.id==="detection-indicator"&&(/\\bindicador\\b/u.test(normalizedText)||/curva\\s+de\\s+ph/u.test(normalizedText));\n      const resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;\n      return {...observation,status:resolved.status,confidence:resolved.confidence,scoreRatio:resolved.scoreRatio,semanticScore:resolved.semanticScore,contradictionDetected:!!resolved.contradictionDetected,ambiguityDetected:!!resolved.ambiguityDetected,studentEvidence:resolved.evidence?[resolved.evidence]:[],autoAssessed:true};\n    });`;
-const count=source.split(from).length-1;
-if(count!==1)throw new Error(`expected 1 FQ observation anchor, found ${count}`);
-fs.writeFileSync(path,source.replace(from,to));
-console.log("FQA DETECTION CREDIT: GO");
