@@ -33,6 +33,15 @@ function alreadyCaptured({subject,itemId,response}){
   return loadLocalValidationDataset().some(row=>row.source==="closed_beta_real"&&row.subject===subject&&row.item_id===String(itemId)&&row.student_response===serialized);
 }
 
+function technicalSignals(result={}){
+  const keys=[
+    "semanticScore","relationScore","coherenceScore","ambiguityScore","substanceScore",
+    "matchedCriteriaCount","totalCriteriaCount","matchedEvidenceCount","expectedEvidenceCount",
+    "matchedCount","totalCount","contradiction","hasContradiction","requiresReview"
+  ];
+  return Object.fromEntries(keys.flatMap(key=>result?.[key]!==undefined?[[key,result[key]]]:[]));
+}
+
 function normalizeSnapshot(result,item){
   return {
     status:result?.status??null,
@@ -43,7 +52,8 @@ function normalizeSnapshot(result,item){
     gradingMode:result?.gradingMode??item?.gradingMode??null,
     reviewRequired:result?.reviewRequired??result?.requiresReview??null,
     diagnosis:result?.diagnosis??result?.errorDiagnosis?.code??result?.feedbackSummary?.errorDiagnosis?.code??null,
-    confidence:result?.autoAssessmentConfidence??result?.classificationConfidence??null
+    confidence:result?.autoAssessmentConfidence??result?.classificationConfidence??null,
+    ...technicalSignals(result)
   };
 }
 
