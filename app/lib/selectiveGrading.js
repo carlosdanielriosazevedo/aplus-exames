@@ -67,12 +67,13 @@ export function preCalibrationPolicyScore(result={}){
   const coherence=normPercent(result.coherenceScore??result.coherence??0.7);
   const ambiguity=normPercent(result.ambiguityScore??result.ambiguity);
   const coverage=evidenceCoverage(result);
-  const contradiction=result.contradiction===true||result.hasContradiction===true?1:0;
+  const contradiction=result.contradiction===true||result.hasContradiction===true||result.contradictionDetected===true?1:0;
+  const manipulation=result.manipulationDetected===true?1:0;
   const substance=normPercent(result.substanceScore??result.substance??0.7);
 
   // Deliberately does not use a model-declared confidence value.
   const positive=semantic*0.30+relation*0.18+coherence*0.14+coverage*0.20+substance*0.18;
-  const penalty=ambiguity*0.22+contradiction*0.08;
+  const penalty=ambiguity*0.22+contradiction*0.08+manipulation*0.25;
   return Math.round(clamp01(positive-penalty)*1000)/1000;
 }
 
@@ -101,11 +102,16 @@ export function selectiveGradingDecision({subject,question={},graderResult={},va
   const policyScore=preCalibrationPolicyScore(graderResult);
   const score=scorePercent(graderResult);
   const reasons=[];
+  const contradictionDetected=graderResult.contradiction===true||graderResult.hasContradiction===true||graderResult.contradictionDetected===true;
+  const ambiguityDetected=graderResult.ambiguityDetected===true||normPercent(graderResult.ambiguityScore??graderResult.ambiguity)>=0.45;
+  const manipulationDetected=graderResult.manipulationDetected===true;
 
   if(validationStatus!==SELECTIVE_STATUS.VALIDATED)reasons.push("NOT_HUMAN_CALIBRATED");
   if(family==="unknown")reasons.push("UNVALIDATED_RESPONSE_CLASS");
   if(graderResult.requiresReview===true)reasons.push("GRADER_REQUIRES_REVIEW");
-  if(normPercent(graderResult.ambiguityScore??graderResult.ambiguity)>=0.45)reasons.push("AMBIGUOUS_RESPONSE");
+  if(contradictionDetected)reasons.push("CONTRADICTORY_RESPONSE");
+  if(ambiguityDetected)reasons.push("AMBIGUOUS_RESPONSE");
+  if(manipulationDetected)reasons.push("MANIPULATION_DETECTED");
   if(policyScore<policy.minPolicyScore)reasons.push("LOW_EVIDENCE_STRENGTH");
   if(nearDecisionBoundary(score,policy.boundaryMargin))reasons.push("DECISION_BOUNDARY");
 
