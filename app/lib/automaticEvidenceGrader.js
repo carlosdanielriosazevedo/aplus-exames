@@ -57,7 +57,26 @@ const SYNONYM_GROUPS=[
   ["restritiva","restringe","delimita","limita"],
   ["comparar","compara","compatível","compativel","compatíveis","compativeis","confrontar"],
   ["inicial","primeiro ponto","ponto inicial"],
-  ["final","segundo ponto","ponto final"]
+  ["final","segundo ponto","ponto final"],
+  ["problema","dificuldade","obstaculo"],
+  ["alternativa","solucao","possibilidade"],
+  ["condicao","requisito","necessario","concretizar","funcionar"],
+  ["ordem","sequencia","progressao","avancar","avanca"],
+  ["representa","retoma","recupera","refere"],
+  ["objeto","referente","antecedente"],
+  ["transicao","salto","desce","descem","passagem"],
+  ["fotao","foton","quantum","radiacao"],
+  ["padrao","assinatura"],
+  ["identificar","reconhecer","distinguir"],
+  ["algebrica","sinal","assinada"],
+  ["modulo","absoluto","positivamente"],
+  ["percurso","distancia"],
+  ["viragem","indicador"],
+  ["razao","proporcao"],
+  ["incerteza","erro","precisao","variacao"],
+  ["atingir","alcancar","chegar"],
+  ["volumetrico","aferido","aferida"],
+  ["homogeneizar","misturar","mistura"]
 ];
 
 const PHRASE_EQUIVALENTS=[
@@ -91,7 +110,48 @@ const PHRASE_EQUIVALENTS=[
   ["em ambos","concept-two-points"],
   ["ida+volta","concept-two-directions"],
   ["ida e volta","concept-two-directions"],
-  ["m h e v","massa altura velocidade"]
+  ["m h e v","massa altura velocidade"],
+  ["niveis eletronicos especificos","niveis energia caracteristicos elemento"],
+  ["niveis especificos","niveis energia caracteristicos"],
+  ["assinatura unica","padrao caracteristico"],
+  ["reconhecer qual esta presente","identificar elemento"],
+  ["descem entre esses niveis","transicao entre niveis"],
+  ["descem entre os niveis","transicao entre niveis"],
+  ["emitem radiacao com energias determinadas","emissao fotao energia definida"],
+  ["area com sinal","area algebrica"],
+  ["sob a curva","sob grafico"],
+  ["variacao de posicao","deslocamento"],
+  ["essas areas podem compensar se","areas negativas deslocamento"],
+  ["areas podem compensar se","areas negativas deslocamento"],
+  ["distancia percorrida contam se todas positivamente","distancia soma modulos"],
+  ["contam se todas positivamente","soma modulos"],
+  ["lado que absorve calor","sentido endotermico"],
+  ["absorve calor","endotermico"],
+  ["proporcoes finais","composicao equilibrio"],
+  ["estado de equilibrio","equilibrio"],
+  ["alcancado em menos tempo","chegada equilibrio mais rapida"],
+  ["razao estequiometrica","proporcao estequiometrica"],
+  ["salto de ph","curva ph regiao equivalencia"],
+  ["leitura do menisco","leitura volume"],
+  ["identificacao da viragem","determinacao ponto final"],
+  ["balao aferido","balao volumetrico"],
+  ["ate a marca","ate traco afericao"],
+  ["completa se com agua ate a marca","completa solvente ate traco"],
+  ["mistura se cuidadosamente","homogeneizar solucao"],
+  ["solucao fique homogenea","homogeneizar solucao"],
+  ["aquilo que marta reviu e o mesmo que entregou","mantem mesmo objeto entre acoes"],
+  ["representa o relatorio","retoma relatorio"],
+  ["indica o momento","oracao temporal momento"],
+  ["identifica mais precisamente","restringe limita"],
+  ["comecar pela dificuldade","problema inicial"],
+  ["solucoes possiveis","alternativas solucoes"],
+  ["necessario para as concretizar","condicoes necessarias solucoes"],
+  ["ordem logica","sequencia progressao clara"],
+  ["ligar cada parte a seguinte","progressao ligacao"],
+  ["registaria a massa","mede massa"],
+  ["diferenca de altura","altura referencia"],
+  ["velocidade da esfera em dois pontos","velocidade dois pontos"],
+  ["iguais dentro da incerteza experimental","compara valores incerteza experimental"]
 ];
 
 const SYNONYM_MAP=new Map();
@@ -422,7 +482,7 @@ export function assessEvidence(response,...evidenceTexts){
   const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(rawResponse)||symbolicStructure;
   const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
   let status="not-observed";
-  if(substantiveResponse&&semanticScore>=.52&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";
+  if(substantiveResponse&&semanticScore>=.40&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
   if(contradiction&&status==="observed")status="partial";
 
