@@ -76,6 +76,7 @@ import {
   responseType,isConstructedResponse,isResponseAnswered,completionFilledCount,
   expectedResponseLabel,studentResponseLabel,examScoreLabel,stepFeedback
 } from "./lib/constructedResponseView";
+import {captureMathematicsValidationCase} from "./lib/graderValidationCapture";
 
 
 let constructedResponseGraderPromise=null;
@@ -1198,7 +1199,13 @@ function Mission({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   }
 
   function answer(n){if(!fb)setSel(n)}
-  async function submitAnswer(){if(!fb&&isResponseAnswered(current,sel))setFb(await gradeMathResponse(current,sel))}
+  async function submitAnswer(){
+    if(!fb&&isResponseAnswered(current,sel)){
+      const result=await gradeMathResponse(current,sel);
+      captureMathematicsValidationCase({item:current,response:sel,result});
+      setFb(result);
+    }
+  }
 
   function closeMission(finalState,finalDetour=detour,newTargetCount=targetCount,newTotal=totalCount+1,stopDecision=null,newEstimatedSeconds=estimatedSeconds){
     if(completingRef.current)return;
@@ -1564,7 +1571,13 @@ function TrainingRun({s,setS,go,cfg,recoveredDraft=null,onRecovered=()=>{}}){
   if(questions.length<STUDY_SESSION_MIN_QUESTIONS)return <Shell><Back go={go} to="train"/><h1>Ainda não há perguntas úteis suficientes neste foco.</h1><p className="muted">O treino só começa quando consegue garantir uma sessão completa entre 7 e 10 perguntas.</p></Shell>;
 
   function answer(n){if(!fb)setSel(n)}
-  async function submitAnswer(){if(!fb&&isResponseAnswered(q,sel))setFb(await gradeMathResponse(q,sel))}
+  async function submitAnswer(){
+    if(!fb&&isResponseAnswered(q,sel)){
+      const result=await gradeMathResponse(q,sel);
+      captureMathematicsValidationCase({item:q,response:sel,result});
+      setFb(result);
+    }
+  }
   function next(){
     const was=fb?.correct===true;
     const newCorrect=correct+(was?1:0);
