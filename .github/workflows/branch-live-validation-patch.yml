@@ -1,0 +1,30 @@
+name: Apply live validation hooks
+
+on:
+  push:
+    branches: [codex/live-real-validation-math-portuguese]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[live-hooks-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/live-real-validation-math-portuguese
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/apply-live-validation-hooks.mjs
+      - name: Commit patched files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/page.js app/components/PortugueseSubject.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Ligar validação live em Matemática e Português [live-hooks-applied]"
+          git push origin HEAD:codex/live-real-validation-math-portuguese
