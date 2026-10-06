@@ -1,0 +1,11 @@
+import fs from "node:fs";
+
+const path="app/lib/automaticEvidenceGrader.js";
+let source=fs.readFileSync(path,"utf8");
+const from=`const SYNONYM_MAP=new Map();\nSYNONYM_GROUPS.forEach((group,index)=>group.forEach(term=>SYNONYM_MAP.set(term,"g"+index)));\n\nexport function normalizeEvidenceText(value){\n  return String(value??"")\n    .normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")\n    .toLocaleLowerCase("pt-PT")\n    .replace(/[^a-z0-9%+\\- ]/g," ")\n    .replace(/\\s+/g," ").trim();\n}\n\nfunction stem(token){\n  const normalized=normalizeEvidenceText(token);\n  if(SYNONYM_MAP.has(normalized))return SYNONYM_MAP.get(normalized);`;
+const to=`const SYNONYM_MAP=new Map();\nSYNONYM_GROUPS.forEach((group,index)=>group.forEach(term=>SYNONYM_MAP.set(term,"g"+index)));\n\nexport function normalizeEvidenceText(value){\n  return String(value??"")\n    .normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")\n    .toLocaleLowerCase("pt-PT")\n    .replace(/[^a-z0-9%+\\- ]/g," ")\n    .replace(/\\s+/g," ").trim();\n}\n\nfunction nearSynonymGroup(normalized){\n  if(normalized.length<6)return null;\n  for(let groupIndex=0;groupIndex<SYNONYM_GROUPS.length;groupIndex++){\n    for(const rawTerm of SYNONYM_GROUPS[groupIndex]){\n      const term=normalizeEvidenceText(rawTerm);\n      if(term.length<6||Math.abs(term.length-normalized.length)>1||term.slice(0,4)!==normalized.slice(0,4))continue;\n      let i=0,j=0,edits=0;\n      while(i<term.length&&j<normalized.length){\n        if(term[i]===normalized[j]){i++;j++;continue;}\n        edits++;\n        if(edits>1)break;\n        if(term.length>normalized.length)i++;\n        else if(normalized.length>term.length)j++;\n        else{i++;j++;}\n      }\n      if(i<term.length||j<normalized.length)edits++;\n      if(edits<=1)return "g"+groupIndex;\n    }\n  }\n  return null;\n}\n\nfunction stem(token){\n  const normalized=normalizeEvidenceText(token);\n  if(SYNONYM_MAP.has(normalized))return SYNONYM_MAP.get(normalized);\n  const nearSynonym=nearSynonymGroup(normalized);\n  if(nearSynonym)return nearSynonym;`;
+const count=source.split(from).length-1;
+if(count!==1)throw new Error(`expected one synonym/stem anchor, found ${count}`);
+source=source.replace(from,to);
+fs.writeFileSync(path,source);
+console.log("PRECANONICAL TYPO FIX: GO");
