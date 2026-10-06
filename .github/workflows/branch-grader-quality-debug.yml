@@ -19,18 +19,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Run grader quality and capture output
+      - name: Capture grader diagnostics
         shell: bash
         run: |
           set +e
           node scripts/grader-quality-report.mjs > grader-quality-debug.txt 2>&1
-          echo "exit_code=$?" >> grader-quality-debug.txt
+          echo "quality_exit_code=$?" >> grader-quality-debug.txt
+          node scripts/paraphrase-quality-debug.mjs > paraphrase-quality-debug.txt 2>&1
+          echo "paraphrase_exit_code=$?" >> paraphrase-quality-debug.txt
           exit 0
       - name: Commit debug output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add grader-quality-debug.txt
+          git add grader-quality-debug.txt paraphrase-quality-debug.txt
           git diff --cached --quiet && exit 0
-          git commit -m "Capture grader quality debug output [grader-quality-debug]"
+          git commit -m "Capture paraphrase diagnostics [grader-quality-debug]"
           git push origin HEAD:codex/score-explainability-all-subjects
