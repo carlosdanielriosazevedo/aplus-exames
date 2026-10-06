@@ -1,4 +1,5 @@
 import {assessEvidence,aggregateCriterionAssessment,automaticRubricSummary,automaticFeedbackForCriteria} from "./automaticEvidenceGrader.js";
+import {buildScoreExplainability} from "./scoreExplainability.js";
 export const PHYSICS_CHEMISTRY_A_SELF_ASSESSMENT_LEVELS=[
   {id:"observed",label:"Cumpri"},
   {id:"partial",label:"Parcial"},
@@ -120,18 +121,24 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
   const criteria=physicsChemistryRubricFor(item).map((criterion,criterionIndex)=>{
     const observations=(criterion.observations||[]).map(observation=>{
       const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);
-      return {...observation,status:assessed.status,confidence:assessed.confidence,scoreRatio:assessed.scoreRatio,semanticScore:assessed.semanticScore,contradictionDetected:!!assessed.contradictionDetected,ambiguityDetected:!!assessed.ambiguityDetected,studentEvidence:assessed.evidence?[assessed.evidence]:[],autoAssessed:true};
+      const normalizedText=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
+      const directDetection=observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
+      const resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
+      return {...observation,status:resolved.status,confidence:resolved.confidence,scoreRatio:resolved.scoreRatio,semanticScore:resolved.semanticScore,contradictionDetected:!!resolved.contradictionDetected,ambiguityDetected:!!resolved.ambiguityDetected,studentEvidence:resolved.evidence?[resolved.evidence]:[],autoAssessed:true};
     });
     const aggregate=aggregateCriterionAssessment(observations);
     return {...criterion,...aggregate,observations,autoAssessed:true};
   });
   const summary=automaticRubricSummary(criteria,item.maxPoints||10);
-  const feedbackSummary=automaticFeedbackForCriteria(criteria,text);
+  const pointMap=new Map(summary.criterionPoints.map(row=>[row.id,row]));
+  const scoredCriteria=criteria.map(criterion=>({...criterion,...(pointMap.get(criterion.id)||{})}));
+  const feedbackSummary=automaticFeedbackForCriteria(scoredCriteria,text);
+  const scoreExplainability=buildScoreExplainability({awardedPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,criteria:scoredCriteria,requiresReview:summary.requiresReview});
   return {
     status:"auto-assessed-provisional",final:false,correct:null,points:null,
     provisionalPoints:summary.provisionalPoints,maxPoints:item.maxPoints||10,
     gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:true,
-    requiresReview:summary.requiresReview,autoAssessmentConfidence:summary.confidence,criteria,feedbackSummary,
+    requiresReview:summary.requiresReview,autoAssessmentConfidence:summary.confidence,criteria:scoredCriteria,feedbackSummary,scoreExplainability,
     note:"A app avaliou automaticamente a resposta científica por critérios. O resultado é provisório quando a interpretação não é totalmente determinística."
   };
 }

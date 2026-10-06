@@ -57,7 +57,26 @@ const SYNONYM_GROUPS=[
   ["restritiva","restringe","delimita","limita"],
   ["comparar","compara","compatível","compativel","compatíveis","compativeis","confrontar"],
   ["inicial","primeiro ponto","ponto inicial"],
-  ["final","segundo ponto","ponto final"]
+  ["final","segundo ponto","ponto final"],
+  ["problema","dificuldade","obstaculo"],
+  ["alternativa","solucao","possibilidade"],
+  ["condicao","requisito","necessario","concretizar","funcionar"],
+  ["ordem","sequencia","progressao","avancar","avanca"],
+  ["representa","retoma","recupera","refere"],
+  ["objeto","referente","antecedente"],
+  ["transicao","salto","desce","descem","passagem"],
+  ["fotao","foton","quantum","radiacao"],
+  ["padrao","assinatura"],
+  ["identificar","reconhecer","distinguir"],
+  ["algebrica","sinal","assinada"],
+  ["modulo","absoluto","positivamente"],
+  ["percurso","distancia"],
+  ["viragem","indicador"],
+  ["razao","proporcao"],
+  ["incerteza","erro","precisao","variacao"],
+  ["atingir","alcancar","chegar"],
+  ["volumetrico","aferido","aferida"],
+  ["homogeneizar","misturar","mistura"]
 ];
 
 const PHRASE_EQUIVALENTS=[
@@ -91,7 +110,48 @@ const PHRASE_EQUIVALENTS=[
   ["em ambos","concept-two-points"],
   ["ida+volta","concept-two-directions"],
   ["ida e volta","concept-two-directions"],
-  ["m h e v","massa altura velocidade"]
+  ["m h e v","massa altura velocidade"],
+  ["niveis eletronicos especificos","niveis energia caracteristicos elemento"],
+  ["niveis especificos","niveis energia caracteristicos"],
+  ["assinatura unica","padrao caracteristico"],
+  ["reconhecer qual esta presente","identificar elemento"],
+  ["descem entre esses niveis","transicao entre niveis"],
+  ["descem entre os niveis","transicao entre niveis"],
+  ["emitem radiacao com energias determinadas","emissao fotao energia definida"],
+  ["area com sinal","area algebrica"],
+  ["sob a curva","sob grafico"],
+  ["variacao de posicao","deslocamento"],
+  ["essas areas podem compensar se","areas negativas deslocamento"],
+  ["areas podem compensar se","areas negativas deslocamento"],
+  ["distancia percorrida contam se todas positivamente","distancia soma modulos"],
+  ["contam se todas positivamente","soma modulos"],
+  ["lado que absorve calor","sentido endotermico"],
+  ["absorve calor","endotermico"],
+  ["proporcoes finais","composicao equilibrio"],
+  ["estado de equilibrio","equilibrio"],
+  ["alcancado em menos tempo","chegada equilibrio mais rapida"],
+  ["razao estequiometrica","proporcao estequiometrica"],
+  ["salto de ph","curva ph regiao equivalencia"],
+  ["leitura do menisco","leitura volume"],
+  ["identificacao da viragem","determinacao ponto final"],
+  ["balao aferido","balao volumetrico"],
+  ["ate a marca","ate traco afericao"],
+  ["completa se com agua ate a marca","completa solvente ate traco"],
+  ["mistura se cuidadosamente","homogeneizar solucao"],
+  ["solucao fique homogenea","homogeneizar solucao"],
+  ["aquilo que marta reviu e o mesmo que entregou","mantem mesmo objeto entre acoes"],
+  ["representa o relatorio","retoma relatorio"],
+  ["indica o momento","oracao temporal momento"],
+  ["identifica mais precisamente","restringe limita"],
+  ["comecar pela dificuldade","problema inicial"],
+  ["solucoes possiveis","alternativas solucoes"],
+  ["necessario para as concretizar","condicoes necessarias solucoes"],
+  ["ordem logica","sequencia progressao clara"],
+  ["ligar cada parte a seguinte","progressao ligacao"],
+  ["registaria a massa","mede massa"],
+  ["diferenca de altura","altura referencia"],
+  ["velocidade da esfera em dois pontos","velocidade dois pontos"],
+  ["iguais dentro da incerteza experimental","compara valores incerteza experimental"]
 ];
 
 const SYNONYM_MAP=new Map();
@@ -105,9 +165,33 @@ export function normalizeEvidenceText(value){
     .replace(/\s+/g," ").trim();
 }
 
+function nearSynonymGroup(normalized){
+  if(normalized.length<6)return null;
+  for(let groupIndex=0;groupIndex<SYNONYM_GROUPS.length;groupIndex++){
+    for(const rawTerm of SYNONYM_GROUPS[groupIndex]){
+      const term=normalizeEvidenceText(rawTerm);
+      if(term.length<6||Math.abs(term.length-normalized.length)>1||term.slice(0,4)!==normalized.slice(0,4))continue;
+      let i=0,j=0,edits=0;
+      while(i<term.length&&j<normalized.length){
+        if(term[i]===normalized[j]){i++;j++;continue;}
+        edits++;
+        if(edits>1)break;
+        if(term.length>normalized.length)i++;
+        else if(normalized.length>term.length)j++;
+        else{i++;j++;}
+      }
+      if(i<term.length||j<normalized.length)edits++;
+      if(edits<=1)return "g"+groupIndex;
+    }
+  }
+  return null;
+}
+
 function stem(token){
   const normalized=normalizeEvidenceText(token);
   if(SYNONYM_MAP.has(normalized))return SYNONYM_MAP.get(normalized);
+  const nearSynonym=nearSynonymGroup(normalized);
+  if(nearSynonym)return nearSynonym;
   if(normalized.length<=4)return normalized;
   return normalized
     .replace(/(mente|coes|cao|sao|ico|ica|icos|icas|oso|osa|osos|osas)$/u,"")
@@ -148,12 +232,14 @@ function oneEditApart(a,b){
 function cueMatched(cue,responseTokens){
   if(responseTokens.includes(cue))return true;
   if(cue.length<6)return false;
-  return responseTokens.some(token=>
-    token.length>=6&&
-    token.length===cue.length-1&&
-    cue.slice(0,4)===token.slice(0,4)&&
-    oneEditApart(cue,token)
-  );
+  return responseTokens.some(token=>{
+    if(token.length<6||cue.slice(0,4)!==token.slice(0,4))return false;
+    const delta=Math.abs(token.length-cue.length);
+    if(delta<=1&&oneEditApart(cue,token))return true;
+    const shorter=token.length<=cue.length?token:cue;
+    const longer=token.length>cue.length?token:cue;
+    return delta<=2&&shorter.length>=6&&longer.startsWith(shorter.slice(0,6));
+  });
 }
 
 function semanticAmbiguityDetected(response){
@@ -185,12 +271,16 @@ function bestSentence(response,cues){
 }
 
 function relationScore(response,cues){
-  const rows=String(response||"").split(/(?<=[.!?;])\s+|\n+/u).map(row=>row.trim()).filter(Boolean);
+  const responseTokens=tokens(response);
+  if(!responseTokens.length)return 0;
+  const windowSize=Math.min(12,Math.max(6,cues.length*2));
   let best=0;
-  for(const row of rows){
-    const rowTokens=tokens(row);
+  for(let start=0;start<responseTokens.length;start++){
+    const rowTokens=responseTokens.slice(start,start+windowSize);
+    if(!rowTokens.length)break;
     const hits=cues.filter(cue=>cueMatched(cue,rowTokens)).length;
     best=Math.max(best,cues.length?hits/Math.min(cues.length,6):0);
+    if(start+windowSize>=responseTokens.length)break;
   }
   return best;
 }
@@ -421,8 +511,11 @@ export function assessEvidence(response,...evidenceTexts){
   const symbolicStructure=/(?:->|→|=>|=|\/|\+)/u.test(rawResponse);
   const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(rawResponse)||symbolicStructure;
   const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
+  const evidenceInstruction=normalizeEvidenceText(evidenceTexts.filter(Boolean).join(" "));
+  const directFactualCriterion=/\b(?:refere|indica|identifica|seleciona|menciona|nomeia)\b/u.test(evidenceInstruction);
   let status="not-observed";
-  if(substantiveResponse&&((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44)))status="observed";
+  if(substantiveResponse&&semanticScore>=.40&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";
+  else if(substantiveResponse&&directFactualCriterion&&matched.length>=2&&semanticScore>=.3)status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
   if(contradiction&&status==="observed")status="partial";
 
@@ -473,16 +566,23 @@ export function automaticRubricSummary(criteria=[],maxPoints=0){
   let points=0,confidenceWeight=0;
   for(const criterion of criteria){
     const weight=Number(criterion.points)||1;
-    const ratio=Number.isFinite(criterion.scoreRatio)?criterion.scoreRatio:(criterion.status==="observed"?1:criterion.status==="partial"?.5:0);
+    const ratio=criterion.status==="observed"?1:Number.isFinite(criterion.scoreRatio)?criterion.scoreRatio:(criterion.status==="partial"?.5:0);
     points+=ratio*weight;
     confidenceWeight+=(criterion.confidence||.5)*weight;
   }
   const contradictionDetected=criteria.some(row=>row.contradictionDetected);
   const rawProvisional=points/totalWeight*maxPoints;
   const provisionalPoints=contradictionDetected?Math.min(rawProvisional,maxPoints*.5):rawProvisional;
+  const criterionPoints=criteria.map(criterion=>{
+    const weight=Number(criterion.points)||1;
+    const ratio=criterion.status==="observed"?1:Number.isFinite(criterion.scoreRatio)?criterion.scoreRatio:(criterion.status==="partial"?.5:0);
+    const criterionMax=maxPoints*(weight/totalWeight);
+    return {id:criterion.id,awardedPoints:Math.round(criterionMax*ratio*10)/10,maxPoints:Math.round(criterionMax*10)/10,lostPoints:Math.round(criterionMax*(1-ratio)*10)/10};
+  });
   return {
     provisionalPoints:Math.round(provisionalPoints*10)/10,
     maxPoints,
+    criterionPoints,
     confidence:Math.round(confidenceWeight/totalWeight*100),
     requiresReview:criteria.some(row=>(row.confidence||0)<.6||row.contradictionDetected||row.ambiguityDetected),
     contradictionDetected,
