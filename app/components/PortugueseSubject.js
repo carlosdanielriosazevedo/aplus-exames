@@ -18,6 +18,7 @@ import {activateSubjectState,finishSubjectOnboardingState,subjectGoal,subjectOnb
 import {portugueseTaxonomyForYear} from "../data/portugueseTaxonomy";
 import {portugueseMiniExamMeta,portugueseMiniExamsForYear} from "../data/portuguesePassagePrototype";
 import {isFriendsBeta} from "../lib/friendsBeta";
+import {capturePortugueseValidationCase} from "../lib/graderValidationCapture";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
@@ -337,8 +338,8 @@ function PortugueseSubject({s,setS,go,view="home"}){
       const priority=[...rows].sort((a,b)=>(a.percent===null?-1:a.percent)-(b.percent===null?-1:b.percent))[0];
       return <Shell><div className="centered completionMoment"><Apronso pose="celebrate" className="resultApronso" alt="Apronso celebra o diagnóstico concluído"/><p className="eyebrow">DIAGNÓSTICO CONCLUÍDO · PORTUGUÊS</p><h1>Já temos um ponto de partida.</h1><p className="muted">Isto não é uma nota. É uma primeira leitura do teu desempenho para escolher o próximo treino.</p></div>
         <div className="portugueseSubjectStats"><div><b>{correct}/{deterministic.length}</b><span>respostas objetivas corretas</span></div><div><b>{awaiting}</b><span>respostas abertas por rever</span></div><div><b>{session.items.length}</b><span>itens diagnosticados</span></div></div>
-        <div className="notice"><b>Como ler este resultado</b><span>As respostas objetivas dão uma indicação inicial. As respostas abertas permanecem separadas e dependem da grelha de autoavaliação; não são transformadas automaticamente numa nota.</span></div>
-        <section className="portugueseProgressCard diagnosticDomainSummary"><h2>Primeira leitura por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><div><b>{row.label}</b><strong>{row.percent===null?"—":`${row.percent}%`}</strong></div><span>{row.percent===null?"Ainda sem respostas objetivas suficientes":`${row.correct} certas em ${row.total} respostas objetivas`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aberta(s) aguardam autoavaliação</small>}</article>)}</div></section>
+        <div className="notice"><b>Como ler este resultado</b><span>As respostas objetivas dão uma indicação inicial. As respostas abertas são avaliadas automaticamente por critérios; quando a app não tem evidência suficiente, mantém o resultado provisório em vez de fingir certeza.</span></div>
+        <section className="portugueseProgressCard diagnosticDomainSummary"><h2>Primeira leitura por domínio</h2><div className="portugueseMissionGrid">{rows.map(row=><article className="portugueseSubjectAction" key={row.domain}><div><b>{row.label}</b><strong>{row.percent===null?"—":`${row.percent}%`}</strong></div><span>{row.percent===null?"Ainda sem respostas objetivas suficientes":`${row.correct} certas em ${row.total} respostas objetivas`}</span>{row.pending>0&&<small>{row.pending} resposta(s) aberta(s) com avaliação provisória ou por confirmar</small>}</article>)}</div></section>
         {priority&&<div className="notice"><b>Próximo foco: {priority.label}</b><span>Vamos começar por aqui e ajustar a missão àquilo que já respondeste, evitando repetir conteúdo sem necessidade.</span></div>}
         <button className="primary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);setTimeout(()=>startRecommendedMission(),0)}}>Começar a missão recomendada</button>
         <button className="secondary" onClick={()=>{setSession(null);setResults([]);setAnswer(null);setFeedback(null);go("home")}}>Ir para o menu inicial</button>
@@ -362,6 +363,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   function submit(){
     if(!answered||feedback)return;
     const nextFeedback=gradePortugueseResponse(item,answer);
+    capturePortugueseValidationCase({item,response:answer,result:nextFeedback});
     setFeedback(nextFeedback);
     setS(prev=>advanceSubjectSession(prev,"portuguese",{current:session.current,results,currentResult:nextFeedback,currentAnswer:answer}));
   }
