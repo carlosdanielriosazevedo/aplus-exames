@@ -422,7 +422,7 @@ export function assessEvidence(response,...evidenceTexts){
   const coherentProse=relationMarkers.some(marker=>normalizedResponse.split(" ").includes(marker))||/[.!?;:]/u.test(rawResponse)||symbolicStructure;
   const substantiveResponse=wordCount>=8&&uniqueContentTokens>=5&&coherentProse;
   let status="not-observed";
-  if(substantiveResponse&&((matched.length>=3&&semanticScore>=.32)||(matched.length>=2&&semanticScore>=.44)))status="observed";
+  if(substantiveResponse&&semanticScore>=.52&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
   if(contradiction&&status==="observed")status="partial";
 
