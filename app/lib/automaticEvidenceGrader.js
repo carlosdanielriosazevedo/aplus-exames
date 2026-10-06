@@ -165,9 +165,33 @@ export function normalizeEvidenceText(value){
     .replace(/\s+/g," ").trim();
 }
 
+function nearSynonymGroup(normalized){
+  if(normalized.length<6)return null;
+  for(let groupIndex=0;groupIndex<SYNONYM_GROUPS.length;groupIndex++){
+    for(const rawTerm of SYNONYM_GROUPS[groupIndex]){
+      const term=normalizeEvidenceText(rawTerm);
+      if(term.length<6||Math.abs(term.length-normalized.length)>1||term.slice(0,4)!==normalized.slice(0,4))continue;
+      let i=0,j=0,edits=0;
+      while(i<term.length&&j<normalized.length){
+        if(term[i]===normalized[j]){i++;j++;continue;}
+        edits++;
+        if(edits>1)break;
+        if(term.length>normalized.length)i++;
+        else if(normalized.length>term.length)j++;
+        else{i++;j++;}
+      }
+      if(i<term.length||j<normalized.length)edits++;
+      if(edits<=1)return "g"+groupIndex;
+    }
+  }
+  return null;
+}
+
 function stem(token){
   const normalized=normalizeEvidenceText(token);
   if(SYNONYM_MAP.has(normalized))return SYNONYM_MAP.get(normalized);
+  const nearSynonym=nearSynonymGroup(normalized);
+  if(nearSynonym)return nearSynonym;
   if(normalized.length<=4)return normalized;
   return normalized
     .replace(/(mente|coes|cao|sao|ico|ica|icos|icas|oso|osa|osos|osas)$/u,"")
