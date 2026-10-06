@@ -1,8 +1,8 @@
-import {makeGraderValidationCase,appendClosedBetaValidationCase} from "./graderValidationDataset";
+import {makeGraderValidationCase,appendClosedBetaValidationCase} from "./graderValidationDataset.js";
 import {
   currentGraderValidationConsent,graderValidationParticipantId,GRADER_VALIDATION_CONSENT_VERSION
-} from "./graderValidationConsent";
-import {responseFamily,selectiveGradingDecision} from "./selectiveGrading";
+} from "./graderValidationConsent.js";
+import {responseFamily,selectiveGradingDecision} from "./selectiveGrading.js";
 
 const mean=values=>values.length?values.reduce((a,b)=>a+b,0)/values.length:null;
 const number=value=>Number.isFinite(Number(value))?Number(value):null;
