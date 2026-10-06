@@ -246,9 +246,10 @@ function cueMatched(cue,responseTokens){
 
 function semanticAmbiguityDetected(response){
   const normalized=normalizeEvidenceText(response);
-  const alternatives=/\b(?:talvez|acho que|pode ser|nao sei se|duvido entre)\b[\s\S]{0,80}\bou\b/u.test(normalized)
-    ||/\b(?:ou talvez|ou entao)\b/u.test(normalized);
-  return alternatives;
+  return /\bnao sei (?:se|qual)\b[\s\S]{0,100}\bou\b/u.test(normalized)
+    ||/\bduvido entre\b[\s\S]{0,100}\b(?:e|ou)\b/u.test(normalized)
+    ||/\btalvez\b[\s\S]{0,80}\bou talvez\b/u.test(normalized)
+    ||/\bpode ser\b[\s\S]{0,80}\b(?:ou pode ser|ou talvez)\b/u.test(normalized);
 }
 
 function distinctiveCues(texts){
@@ -521,7 +522,7 @@ export function assessEvidence(response,...evidenceTexts){
   if(substantiveResponse&&semanticScore>=.40&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";
   else if(substantiveResponse&&directFactualCriterion&&matched.length>=2&&semanticScore>=.3)status="observed";
   else if(matched.length>=1&&semanticScore>=.12)status="partial";
-  if((contradiction||ambiguityDetected||adversarial.manipulationDetected)&&status==="observed")status="partial";
+  if((contradiction||ambiguityDetected)&&status==="observed")status="partial";
 
   const confidence=status==="observed"
     ?Math.min(.96,.58+semanticScore*.5)
@@ -534,7 +535,7 @@ export function assessEvidence(response,...evidenceTexts){
       ?Math.min(.58,.2+semanticScore*.5)
       :0;
   if(!coherentProse)scoreRatio=Math.min(scoreRatio,.35);
-  if(contradiction||ambiguityDetected||adversarial.manipulationDetected)scoreRatio=Math.min(scoreRatio,.35);
+  if(contradiction||ambiguityDetected)scoreRatio=Math.min(scoreRatio,.35);
 
   return {
     status,confidence:Math.round(confidence*100)/100,
@@ -558,7 +559,7 @@ export function aggregateCriterionAssessment(observations=[]){
   const contradictionDetected=observations.some(row=>row.contradictionDetected);
   const ambiguityDetected=observations.some(row=>row.ambiguityDetected);
   const manipulationDetected=observations.some(row=>row.manipulationDetected);
-  const unsafe=contradictionDetected||ambiguityDetected||manipulationDetected;
+  const unsafe=contradictionDetected||ambiguityDetected;
   const scoreRatio=unsafe?Math.min(rawScoreRatio,.35):rawScoreRatio;
   const status=unsafe?"partial"
     :observations.every(row=>row.status==="observed")?"observed"
