@@ -14,7 +14,7 @@ replaceExact(
 );
 replaceExact(
 '  if(substantiveResponse&&semanticScore>=.52&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";',
-'  if(substantiveResponse&&semanticScore>=.45&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";',
+'  if(substantiveResponse&&semanticScore>=.40&&((matched.length>=3&&relation>=.18)||(matched.length>=2&&relation>=.3)))status="observed";',
 "observed threshold"
 );
 fs.writeFileSync(path,source);
