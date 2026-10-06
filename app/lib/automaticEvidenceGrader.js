@@ -150,7 +150,7 @@ function cueMatched(cue,responseTokens){
   if(cue.length<6)return false;
   return responseTokens.some(token=>
     token.length>=6&&
-    token.length===cue.length-1&&
+    Math.abs(token.length-cue.length)<=1&&
     cue.slice(0,4)===token.slice(0,4)&&
     oneEditApart(cue,token)
   );
