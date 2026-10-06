@@ -67,35 +67,26 @@ replaceExact(
 replaceExact(
   "app/lib/constructedResponse.js",
   'export function gradeResponse(question,answer){',
-  'function withMathExplainability(result){\n  if(!result||!Number.isFinite(result.maxPoints))return result;\n  const awarded=Number.isFinite(result.points)?result.points:null;\n  if(awarded===null)return result;\n  const scoreExplainability=buildScoreExplainability({awardedPoints:awarded,maxPoints:result.maxPoints,steps:result.stepResults||[],globalPenalty:result.globalPenalty||0,globalPenaltyReason:result.globalPenaltyReason,requiresReview:result.reviewRequired});\n  return {...result,scoreExplainability,reviewRequired:result.reviewRequired||!!scoreExplainability.consistencyError};\n}\n\nexport function gradeResponse(question,answer){',
+  'function withMathExplainability(result){\n  if(!result||!Number.isFinite(result.maxPoints))return result;\n  const awarded=Number.isFinite(result.points)?result.points:null;\n  if(awarded===null)return result;\n  const scoreExplainability=buildScoreExplainability({awardedPoints:awarded,maxPoints:result.maxPoints,steps:result.stepResults||[],globalPenalty:result.globalPenalty||0,requiresReview:result.reviewRequired});\n  return {...result,scoreExplainability,reviewRequired:result.reviewRequired||!!scoreExplainability.consistencyError};\n}\n\nexport function gradeResponse(question,answer){',
   "wrapper explainability matemática"
 );
-replaceExact(
-  "app/lib/constructedResponse.js",
-  '  if(type==="fraction"){\n    const parsed=parseFraction(answer);',
-  '  if(type==="fraction"){\n    const parsed=parseFraction(answer);',
-  "âncora matemática noop"
-);
-// Wrap the simple final return. Stepwise/completion returns are handled separately below.
-replaceExact(
-  "app/lib/constructedResponse.js",
-  '  return {status:correct?"correct":"incorrect",correct,points:correct?maxPoints:0,maxPoints,stepResults:[],reason:correct?null:reason};\n}',
-  '  return withMathExplainability({status:correct?"correct":"incorrect",correct,points:correct?maxPoints:0,maxPoints,stepResults:[],reason:correct?null:reason});\n}',
-  "retorno simples matemática"
-);
-// completion result
 replaceExact(
   "app/lib/constructedResponse.js",
   '    return {status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults:[],blankResults};',
   '    return withMathExplainability({status:correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults:[],blankResults});',
   "completion matemática"
 );
-// final stepwise return (unique characteristic errorDiagnosis)
 replaceExact(
   "app/lib/constructedResponse.js",
-  '    return {...scored,errorDiagnosis:mathLearningErrorDiagnosis(scored.stepResults,scored.reason)};',
-  '    return withMathExplainability({...scored,errorDiagnosis:mathLearningErrorDiagnosis(scored.stepResults,scored.reason)});',
+  '    return {status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason,errorDiagnosis};',
+  '    return withMathExplainability({status:pendingPoints?"needs_review":correct?"correct":points>0?"partial":"incorrect",correct,points,maxPoints,stepResults,pendingPoints,reviewRequired:pendingPoints>0,globalPenalty,globalPenalties,reason,errorDiagnosis});',
   "stepwise matemática"
+);
+replaceExact(
+  "app/lib/constructedResponse.js",
+  '  return {status:correct?"correct":"incorrect",correct,points:correct?maxPoints:0,maxPoints,stepResults:[],reason:correct?null:reason};\n}',
+  '  return withMathExplainability({status:correct?"correct":"incorrect",correct,points:correct?maxPoints:0,maxPoints,stepResults:[],reason:correct?null:reason});\n}',
+  "retorno simples matemática"
 );
 
 replaceExact(
