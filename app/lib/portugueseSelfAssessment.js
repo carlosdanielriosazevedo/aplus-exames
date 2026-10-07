@@ -1,19 +1,23 @@
-export const PORTUGUESE_SELF_ASSESSMENT_LEVELS=[
-  {id:"met",label:"Cumpri",tone:"positive"},
+export const PORTUGUESE_CRITERION_LEVELS=[
+  {id:"met",label:"Cumprido",tone:"positive"},
   {id:"partial",label:"Parcial",tone:"warning"},
-  {id:"not-yet",label:"Ainda não",tone:"attention"}
+  {id:"not-yet",label:"Não demonstrado",tone:"attention"}
 ];
 
+// Compatibility alias while persisted v1/v2 Portuguese drafts still use the historic field names.
+// Runtime authority is automatic: these levels describe the app's criterion assessment, not student self-scoring.
+export const PORTUGUESE_SELF_ASSESSMENT_LEVELS=PORTUGUESE_CRITERION_LEVELS;
+
 const STATUS_RANK={"not-yet":0,partial:1,met:2};
-const STATUS_LABEL={"not-yet":"Ainda não",partial:"Parcial",met:"Cumpri"};
+const STATUS_LABEL={"not-yet":"Não demonstrado",partial:"Parcial",met:"Cumprido"};
 
 export function criterionFeedback({criterion,status,evidence}){
   const label=String(criterion?.label||"").trim();
   const text=String(evidence||"").trim();
-  if(!status)return {kind:"pending",title:"Ainda por rever",message:`Compara a tua resposta com este critério${label?`: ${label}`:""} e identifica uma passagem concreta que mostre o que fizeste.`};
-  if(status==="met")return {kind:"positive",title:"Critério identificado como cumprido",message:text?"Mantém esta evidência: ela torna a tua autoavaliação verificável quando voltares à resposta.":"Assinalaste o critério como cumprido. Agora aponta a frase ou ideia da tua resposta que o demonstra."};
-  if(status==="partial")return {kind:"warning",title:"Há base, mas falta completar",message:text?"Usa a evidência que assinalaste para decidir o que falta acrescentar, tornar mais explícito ou fundamentar melhor.":"Localiza primeiro o que já está certo na tua resposta e depois acrescenta o elemento que falta para cumprir integralmente o critério."};
-  return {kind:"attention",title:"Critério ainda não demonstrado",message:"Volta ao enunciado e à resposta de referência e acrescenta conteúdo diretamente ligado a este critério. Evita reformular tudo: corrige apenas a lacuna identificada."};
+  if(!status)return {kind:"pending",title:"Ainda por confirmar",message:`O Apronso ainda não conseguiu confirmar este critério${label?`: ${label}`:""}. Revê a resposta de referência e verifica que elemento precisa de ficar explícito.`};
+  if(status==="met")return {kind:"positive",title:"Critério cumprido",message:text?"A tua resposta contém evidência clara para este critério.":"O corretor identificou este critério como cumprido na resposta submetida."};
+  if(status==="partial")return {kind:"warning",title:"Critério parcialmente cumprido",message:text?"Há evidência relevante na tua resposta, mas falta completar, tornar mais explícito ou fundamentar melhor este ponto.":"A resposta contém parte do que o critério exige, mas ainda não o demonstra integralmente."};
+  return {kind:"attention",title:"Critério não demonstrado",message:"A resposta submetida não contém evidência suficiente para este critério. Compara-a com a resposta de referência e identifica concretamente o elemento em falta."};
 }
 
 export function selfAssessmentSummary(criteria=[],assessment={}){

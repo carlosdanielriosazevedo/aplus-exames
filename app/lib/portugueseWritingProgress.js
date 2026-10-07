@@ -50,9 +50,9 @@ export function writingAttentionEvolution(memory,{criterionId,domain=null,exclud
     priorNeedsWork,
     recentWindow,
     message:resolved
-      ?`Nas ${recentWindow} tentativas mais recentes em que autoavaliaste este critério, marcaste “Cumpri” e registaste evidência concreta. Este ponto deixou de aparecer como atenção recorrente por agora.`
+      ?`Nas ${recentWindow} tentativas mais recentes, este critério ficou cumprido com evidência concreta. Este ponto deixou de aparecer como atenção recorrente por agora.`
       :attentionWasRecurring
-        ?`Este critério teve atenção recorrente no histórico e ainda não reúne ${recentWindow} tentativas recentes consecutivas em “Cumpri” com evidência.`
+        ?`Este critério teve atenção recorrente no histórico e ainda não reúne ${recentWindow} tentativas recentes consecutivas como cumprido, com evidência concreta.`
         :null
   };
 }

@@ -21,7 +21,11 @@ assert.match(component,/Também pode estar correta se/u,"a revisão deve explici
 assert.match(component,/Erros frequentes/u,"a revisão deve mostrar erros típicos que distinguem resumo de análise");
 assert.match(component,/ptx-criterion-observations/u,"a revisão deve tornar visíveis as observações atómicas de cada critério");
 assert.doesNotMatch(component,/>Melhorar resposta</u,"uma resposta submetida não deve poder ser alterada depois da correção");
+assert.doesNotMatch(component,/>Guardar nova versão</u,"a revisão não deve permitir substituir a resposta submetida");
+assert.doesNotMatch(component,/onClick=\{[^}]*updateCriterion/u,"a revisão não deve expor controlos de autoavaliação do aluno");
+assert.doesNotMatch(component,/onClick=\{[^}]*startRevision/u,"a revisão não deve expor um ciclo de reescrita após a correção");
 assert.match(component,/Resposta submetida e fechada/u,"a revisão deve explicar explicitamente que a tentativa ficou fechada");
+assert.match(component,/ptx-criterion-levels is-locked/u,"os estados por critério devem ser apresentados como avaliação bloqueada da app");
 assert.match(component,/Ver texto-base/u,"em ecrãs pequenos deve existir acesso persistente ao texto-base");
 assert.match(component,/Questão \$\{index\+1\}/u,"a UI deve mostrar a posição da questão");
 assert.match(component,/ptx-question-nav/u,"deve existir navegação direta entre questões");
@@ -34,9 +38,8 @@ assert.match(css,/\.ptx-passage\{[^}]*position:sticky/u,"no desktop o texto-base
 assert.match(css,/@media\(max-width:820px\)/u,"deve existir comportamento responsivo dedicado");
 assert.match(css,/\.ptx-mobile-text-toggle\{display:block;position:sticky/u,"no mobile o acesso ao texto-base deve permanecer visível");
 assert.match(css,/\.ptx-workspace\{display:grid;grid-template-columns/u,"desktop deve separar texto e questão em duas colunas");
-assert.match(css,/\.ptx-self-assessment\{/u,"a autoavaliação guiada deve ter uma área visual própria");
-assert.match(css,/\.ptx-revision-loop\{/u,"o ciclo de melhoria deve ter uma área visual própria");
+assert.match(css,/\.ptx-self-assessment\{/u,"a avaliação automática por critérios deve ter uma área visual própria");
 assert.match(css,/\.ptx-quality-levels\{/u,"as âncoras forte/parcial/insuficiente devem ter estrutura visual própria");
 assert.match(css,/\.ptx-criterion-observations/u,"as observações atómicas devem ter estilo dedicado e legível");
 
-console.log("✓ UI Português: texto sticky · autoavaliação guiada · observações atómicas · âncoras forte/parcial/insuficiente · revisão antes/depois");
+console.log("✓ UI Português: texto sticky · avaliação automática bloqueada · evidências por critério · âncoras forte/parcial/insuficiente · resposta submetida fechada");

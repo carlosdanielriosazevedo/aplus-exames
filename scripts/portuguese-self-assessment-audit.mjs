@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
-import {criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress,PORTUGUESE_SELF_ASSESSMENT_LEVELS} from "../app/lib/portugueseSelfAssessment.js";
+import {criterionFeedback,selfAssessmentSummary,snapshotSelfAssessment,selfAssessmentProgress,PORTUGUESE_CRITERION_LEVELS,PORTUGUESE_SELF_ASSESSMENT_LEVELS} from "../app/lib/portugueseSelfAssessment.js";
 
-assert.deepEqual(PORTUGUESE_SELF_ASSESSMENT_LEVELS.map(level=>level.id),["met","partial","not-yet"],"os três estados de autoavaliação devem permanecer estáveis");
+// Historic IDs remain stable so saved drafts can be resumed, but their runtime meaning is automatic criterion assessment.
+assert.deepEqual(PORTUGUESE_CRITERION_LEVELS.map(level=>level.id),["met","partial","not-yet"],"os três estados internos devem permanecer estáveis para compatibilidade");
+assert.equal(PORTUGUESE_SELF_ASSESSMENT_LEVELS,PORTUGUESE_CRITERION_LEVELS,"o nome histórico deve ser apenas um alias de compatibilidade");
+assert.deepEqual(PORTUGUESE_CRITERION_LEVELS.map(level=>level.label),["Cumprido","Parcial","Não demonstrado"],"a UI deve usar linguagem de avaliação automática e não de autoatribuição do aluno");
 
 const criterion={id:"conteudo",label:"Explica a progressão entre a situação inicial, a intervenção e a conclusão.",points:9};
 const pending=criterionFeedback({criterion});
@@ -11,14 +14,14 @@ const partial=criterionFeedback({criterion,status:"partial",evidence:"Identifiqu
 const missing=criterionFeedback({criterion,status:"not-yet",evidence:""});
 
 assert.equal(pending.kind,"pending");
-assert.match(pending.message,/identifica uma passagem concreta/u);
+assert.match(pending.message,/Apronso ainda não conseguiu confirmar/u,"estado pendente deve ser assumido como incerteza do corretor");
 assert.equal(metWithoutEvidence.kind,"positive");
-assert.match(metWithoutEvidence.message,/frase ou ideia/u,"cumprimento sem evidência deve pedir prova textual");
-assert.match(metWithEvidence.message,/torna a tua autoavaliação verificável/u,"evidência existente deve ser valorizada sem atribuir nota");
+assert.match(metWithoutEvidence.message,/corretor identificou este critério como cumprido/u,"critério cumprido deve ser atribuído pelo corretor");
+assert.match(metWithEvidence.message,/evidência clara/u,"evidência encontrada deve ser valorizada sem pedir autoavaliação");
 assert.equal(partial.kind,"warning");
-assert.match(partial.message,/o que falta acrescentar/u,"cumprimento parcial deve orientar melhoria localizada");
+assert.match(partial.message,/falta completar/u,"cumprimento parcial deve explicar que ainda falta conteúdo");
 assert.equal(missing.kind,"attention");
-assert.match(missing.message,/corrige apenas a lacuna identificada/u,"critério em falta deve orientar revisão focada");
+assert.match(missing.message,/não contém evidência suficiente/u,"critério em falta deve apontar insuficiência de evidência");
 
 const criteria=[criterion,{id:"fundamentacao",label:"Mobiliza dois elementos pertinentes do texto.",points:4}];
 let summary=selfAssessmentSummary(criteria,{});
@@ -34,6 +37,7 @@ assert.equal(summary.counts.withEvidence,1);
 assert.equal(summary.complete,true);
 assert.equal(summary.nextCriterion.id,"fundamentacao","deve priorizar primeiro um critério ainda não demonstrado");
 
+// Progress helpers remain for historic writing-memory data and must continue to be deterministic.
 const before=snapshotSelfAssessment(criteria,{
   conteudo:{status:"partial",evidence:"Identifiquei a intervenção."},
   fundamentacao:{status:"not-yet",evidence:""}
@@ -43,22 +47,24 @@ const after=snapshotSelfAssessment(criteria,{
   fundamentacao:{status:"partial",evidence:"Acrescentei um elemento textual, falta o segundo."}
 });
 const progress=selfAssessmentProgress(criteria,before,after);
-assert.equal(progress.changed,true,"uma revisão com alterações de estado/evidência deve ser reconhecida");
-assert.deepEqual(progress.upgraded.map(entry=>entry.id),["conteudo","fundamentacao"],"a evolução deve refletir apenas mudanças declaradas pelo aluno");
-assert.deepEqual(progress.evidenceAdded.map(entry=>entry.id),["fundamentacao"],"nova evidência deve ser distinguida de evidência reformulada");
-assert.deepEqual(progress.evidenceChanged.map(entry=>entry.id),["conteudo"],"evidência já existente mas alterada deve ficar registada separadamente");
-assert.deepEqual(progress.stillNeedsWork.map(entry=>entry.id),["fundamentacao"],"a síntese deve manter visível o critério ainda parcial");
+assert.equal(progress.changed,true,"alterações entre avaliações guardadas devem continuar rastreáveis");
+assert.deepEqual(progress.upgraded.map(entry=>entry.id),["conteudo","fundamentacao"]);
+assert.deepEqual(progress.evidenceAdded.map(entry=>entry.id),["fundamentacao"]);
+assert.deepEqual(progress.evidenceChanged.map(entry=>entry.id),["conteudo"]);
+assert.deepEqual(progress.stillNeedsWork.map(entry=>entry.id),["fundamentacao"]);
 
 const stricter=selfAssessmentProgress(criteria,after,{
   conteudo:{status:"partial",evidence:"Liguei a intervenção à conclusão no segundo período."},
   fundamentacao:{status:"partial",evidence:"Acrescentei um elemento textual, falta o segundo."}
 });
-assert.equal(stricter.reconsidered.length,1,"uma autoavaliação mais exigente não pode ser apresentada como melhoria automática");
+assert.equal(stricter.reconsidered.length,1,"uma avaliação posterior mais exigente deve continuar preservada no histórico");
 assert.equal(stricter.reconsidered[0].id,"conteudo");
 
 for(const feedback of [pending,metWithoutEvidence,metWithEvidence,partial,missing]){
-  const text=`${feedback.title} ${feedback.message}`.toLowerCase();
-  assert.doesNotMatch(text,/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|\b[0-9]+\s*(?:pts|pontos)\b/u,"o feedback pedagógico não deve transformar autoavaliação em classificação");
+  const text=`${feedback.title} ${feedback.message}`;
+  assert.doesNotMatch(text,/autoavalia|assinalaste|marcaste/iu,"feedback atual não pode devolver a classificação ao aluno");
+  assert.doesNotMatch(text,/(^|[\s:;,.!?])Cumpri([\s:;,.!?]|$)/iu,"o antigo rótulo de autoavaliação «Cumpri» não pode reaparecer");
+  assert.doesNotMatch(text,/(^|[\s:;,.!?])Ainda não([\s:;,.!?]|$)/u,"o antigo rótulo isolado «Ainda não» não pode reaparecer como estado de avaliação");
 }
 
-console.log("✓ autoavaliação Português: estados estáveis · feedback localizado · evolução antes/depois rastreada · evidência nova/reformulada distinguida · reavaliações mais exigentes preservadas · zero nota automática");
+console.log("✓ avaliação automática Português: estados compatíveis · linguagem do corretor · evidência por critério · histórico determinístico · zero autoatribuição pelo aluno");
