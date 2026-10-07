@@ -59,6 +59,9 @@ jobs:
       - name: Public beta readiness
         run: node scripts/public-beta-readiness-audit.mjs
 
+      - name: Desktop beta readiness
+        run: node scripts/desktop-beta-readiness-audit.mjs
+
       - name: Grader quality report
         run: node scripts/grader-quality-report.mjs
 
