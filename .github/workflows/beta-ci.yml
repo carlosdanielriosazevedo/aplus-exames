@@ -47,6 +47,9 @@ jobs:
       - name: Grader adversarial bank
         run: node scripts/grader-adversarial-bank.mjs
 
+      - name: Blind human validation campaign
+        run: node scripts/grader-human-validation-campaign-audit.mjs
+
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
