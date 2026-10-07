@@ -62,7 +62,9 @@ assert.equal(stricter.reconsidered[0].id,"conteudo");
 
 for(const feedback of [pending,metWithoutEvidence,metWithEvidence,partial,missing]){
   const text=`${feedback.title} ${feedback.message}`;
-  assert.doesNotMatch(text,/autoavalia|assinalaste|marcaste|Cumpri|Ainda não/iu,"feedback atual não pode devolver a classificação ao aluno");
+  assert.doesNotMatch(text,/autoavalia|assinalaste|marcaste/iu,"feedback atual não pode devolver a classificação ao aluno");
+  assert.doesNotMatch(text,/(^|[\s:;,.!?])Cumpri([\s:;,.!?]|$)/iu,"o antigo rótulo de autoavaliação «Cumpri» não pode reaparecer");
+  assert.doesNotMatch(text,/(^|[\s:;,.!?])Ainda não([\s:;,.!?]|$)/u,"o antigo rótulo isolado «Ainda não» não pode reaparecer como estado de avaliação");
 }
 
 console.log("✓ avaliação automática Português: estados compatíveis · linguagem do corretor · evidência por critério · histórico determinístico · zero autoatribuição pelo aluno");
