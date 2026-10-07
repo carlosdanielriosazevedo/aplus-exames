@@ -1,5 +1,6 @@
 import {readFileSync,writeFileSync} from "node:fs";
 import {resolve} from "node:path";
+import {pathToFileURL} from "node:url";
 import {OPEN_RESPONSE_CALIBRATION_CASES,portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
 import {applyPortugueseRubricObservations} from "../app/data/portugueseRubrics.js";
@@ -18,7 +19,7 @@ function takePerProfile(rows,key,profiles,count=3){
   return profiles.flatMap(profile=>rows.filter(row=>row[key]===profile).slice(0,count));
 }
 
-function parseDelimitedCsv(text){
+export function parseHumanValidationCsv(text){
   const rows=[];let row=[],cell="",quoted=false;
   const pushCell=()=>{row.push(cell);cell=""};
   const pushRow=()=>{if(row.length||cell){pushCell();rows.push(row)}row=[]};
@@ -89,32 +90,34 @@ export function buildHumanAgreementReport(reviewRows){
   return {...summary,invalidRows:checked.invalid,validLabels:checked.valid.length};
 }
 
-if(process.argv.length<3){
-  console.error("Uso: node scripts/report-grader-human-validation.mjs <csv-preenchido> [outro.csv ...]");
-  process.exit(2);
+function runCli(){
+  if(process.argv.length<3){
+    console.error("Uso: node scripts/report-grader-human-validation.mjs <csv-preenchido> [outro.csv ...]");
+    process.exit(2);
+  }
+  const files=process.argv.slice(2);
+  const reviewRows=files.flatMap(file=>parseHumanValidationCsv(readFileSync(resolve(file),"utf8")));
+  const report=buildHumanAgreementReport(reviewRows);
+  writeFileSync(resolve("grader-human-validation-report.json"),JSON.stringify(report,null,2));
+
+  console.log("=== APProva+ · HUMAN GRADER AGREEMENT ===");
+  console.log(`Ficheiros importados: ${files.length}`);
+  console.log(`Labels válidos: ${report.validLabels}`);
+  console.log(`Casos únicos: ${report.uniqueCases}/45`);
+  console.log(`Revisores: ${report.reviewers}`);
+  console.log(`Overlaps: ${report.overlapCases}/9`);
+  console.log(`Linhas inválidas: ${report.invalidRows.length}`);
+  if(report.invalidRows.length)report.invalidRows.forEach(row=>console.log(`  ✗ linha ${row.rowNumber}: ${row.reason}`));
+  console.log(`Human agreement measured: ${report.humanAgreementMeasured?"SIM":"NÃO"}`);
+  if(report.validLabels){
+    console.log(`Δ médio humano↔Apronso: ${report.overall.meanAbsoluteScoreDelta} pp`);
+    console.log(`Dentro de ±10 pp: ${report.overall.within10pp}%`);
+    console.log(`Concordância diagnóstico: ${report.overall.diagnosisAgreement}%`);
+    console.log(`Concordância revisão: ${report.overall.reviewAgreement}%`);
+    console.log(`Inter-revisor: ${report.interRater.pairs} pares · Δ médio ${report.interRater.meanAbsoluteScoreDelta??"—"} pp · diagnóstico ${report.interRater.diagnosisAgreement??"—"}%`);
+  }
+  console.log("Relatório: grader-human-validation-report.json");
+  if(report.invalidRows.length)process.exit(1);
 }
 
-const files=process.argv.slice(2);
-const reviewRows=files.flatMap(file=>parseDelimitedCsv(readFileSync(resolve(file),"utf8")));
-const report=buildHumanAgreementReport(reviewRows);
-writeFileSync(resolve("grader-human-validation-report.json"),JSON.stringify(report,null,2));
-
-console.log("=== APProva+ · HUMAN GRADER AGREEMENT ===");
-console.log(`Ficheiros importados: ${files.length}`);
-console.log(`Labels válidos: ${report.validLabels}`);
-console.log(`Casos únicos: ${report.uniqueCases}/45`);
-console.log(`Revisores: ${report.reviewers}`);
-console.log(`Overlaps: ${report.overlapCases}/9`);
-console.log(`Linhas inválidas: ${report.invalidRows.length}`);
-if(report.invalidRows.length)report.invalidRows.forEach(row=>console.log(`  ✗ linha ${row.rowNumber}: ${row.reason}`));
-console.log(`Human agreement measured: ${report.humanAgreementMeasured?"SIM":"NÃO"}`);
-if(report.validLabels){
-  console.log(`Δ médio humano↔Apronso: ${report.overall.meanAbsoluteScoreDelta} pp`);
-  console.log(`Dentro de ±10 pp: ${report.overall.within10pp}%`);
-  console.log(`Concordância diagnóstico: ${report.overall.diagnosisAgreement}%`);
-  console.log(`Concordância revisão: ${report.overall.reviewAgreement}%`);
-  console.log(`Inter-revisor: ${report.interRater.pairs} pares · Δ médio ${report.interRater.meanAbsoluteScoreDelta??"—"} pp · diagnóstico ${report.interRater.diagnosisAgreement??"—"}%`);
-}
-console.log("Relatório: grader-human-validation-report.json");
-
-if(report.invalidRows.length)process.exit(1);
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runCli();
