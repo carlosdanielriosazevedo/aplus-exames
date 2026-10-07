@@ -62,6 +62,9 @@ jobs:
       - name: Desktop beta readiness
         run: node scripts/desktop-beta-readiness-audit.mjs
 
+      - name: Cloud resume product contract
+        run: node scripts/cloud-resume-product-contract-audit.mjs
+
       - name: Grader quality report
         run: node scripts/grader-quality-report.mjs
 
