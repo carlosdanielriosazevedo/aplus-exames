@@ -29,6 +29,9 @@ jobs:
       - name: Technical gate
         run: npm run technical:gate
 
+      - name: Portuguese automatic grading contract
+        run: node scripts/portuguese-automatic-grading-contract-audit.mjs
+
       - name: Selective grader validation
         run: node scripts/selective-grader-validation-audit.mjs
 
