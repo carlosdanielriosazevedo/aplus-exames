@@ -1,4 +1,5 @@
 import {buildHumanValidationCampaign} from "./generate-grader-human-validation-campaign.mjs";
+import {currentGraderRowsForHumanValidation} from "./report-grader-human-validation.mjs";
 import {GRADER_HUMAN_VALIDATION_TARGET} from "../app/lib/graderHumanValidation.js";
 
 function assert(condition,message){if(!condition)throw new Error(message)}
@@ -24,10 +25,19 @@ for(const row of [...campaign.pack,...campaign.overlapRows]){
   assert(row.case_fingerprint,"each case must preserve immutable fingerprint");
 }
 
+const graderRows=currentGraderRowsForHumanValidation();
+const packIds=new Set(campaign.pack.map(row=>row.case_id));
+const graderIds=new Set(graderRows.map(row=>row.caseId));
+assert(graderRows.length===45,"runtime grader comparison must contain exactly 45 cases");
+assert(graderIds.size===45,"runtime grader comparison IDs must be unique");
+assert([...packIds].every(id=>graderIds.has(id))&&[...graderIds].every(id=>packIds.has(id)),"blind pack and runtime grader comparison must refer to the exact same 45 cases");
+assert(graderRows.every(row=>Number.isFinite(row.scorePercent)&&row.scorePercent>=0&&row.scorePercent<=100),"runtime grader scores must stay in 0–100");
+
 console.log("=== GRADER HUMAN VALIDATION CAMPAIGN AUDIT ===");
 console.log("✓ 45 primary cases split by subject: 15 Mathematics A · 15 Portuguese · 15 Physics & Chemistry A");
 console.log("✓ 9 deterministic overlap cases: 3 per subject");
 console.log("✓ reviewer labels start blank and grader outputs remain hidden");
 console.log("✓ overlap cases preserve the same immutable fingerprints as their primary copies");
+console.log("✓ report engine re-runs the current grader on the exact same 45 immutable cases");
 console.log("NOTE: this audit validates campaign mechanics only; human agreement remains NOT MEASURED until independent reviewer labels are imported.");
 console.log("GRADER HUMAN VALIDATION CAMPAIGN: GO");
