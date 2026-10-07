@@ -47,13 +47,13 @@ export function writingMemoryInsight(memory,item,{excludeAttemptId=null,minObser
     }
     const needsWork=counts.partial+counts["not-yet"];
     let tone="neutral";
-    let message=`Nas tuas ${observations.length} autoavaliações anteriores deste tipo de critério, marcaste “Cumpri” ${counts.met} vez(es), “Parcial” ${counts.partial} e “Ainda não” ${counts["not-yet"]}.`;
+    let message=`Nas ${observations.length} avaliações anteriores deste tipo de critério, ficou como cumprido ${counts.met} vez(es), parcial ${counts.partial} e não demonstrado ${counts["not-yet"]}.`;
     if(needsWork>=2&&needsWork>counts.met){
       tone="attention";
-      message=`Nas autoavaliações anteriores, este critério ficou em “Parcial” ou “Ainda não” ${needsWork} de ${observations.length} vezes. Nesta resposta, confirma cedo se o demonstraste de forma explícita.`;
+      message=`Nas avaliações anteriores, este critério ficou parcial ou não demonstrado ${needsWork} de ${observations.length} vezes. Nesta resposta, confirma cedo se o demonstraste de forma explícita.`;
     }else if(counts.met>=2&&counts.met>needsWork){
       tone="positive";
-      message=`Nas autoavaliações anteriores, marcaste este critério como “Cumpri” ${counts.met} de ${observations.length} vezes. Mantém a atenção à evidência concreta em vez de assumires que está demonstrado.`;
+      message=`Nas avaliações anteriores, este critério ficou cumprido ${counts.met} de ${observations.length} vezes. Mantém a atenção à evidência concreta em vez de assumires que está demonstrado.`;
     }
     insights.push({criterionId:criterion.id,label:criterion.label,observations:observations.length,counts,tone,message});
   }
@@ -111,21 +111,21 @@ export function writingMemoryProfile(memory,{excludeAttemptId=null,minAttempts=P
     const transversal=domains.size>=2;
     let kind="mixed";
     let headline="Padrão ainda misto";
-    let message=`Nas últimas ${attempts} tentativas em que autoavaliaste este critério, o padrão ainda não é suficientemente consistente para o tratar como ponto forte ou atenção recorrente.`;
+    let message=`Nas últimas ${attempts} tentativas em que este critério foi avaliado, o padrão ainda não é suficientemente consistente para o tratar como ponto forte ou atenção recorrente.`;
     if(needsWork>=Math.ceil(attempts*0.6)&&needsWork>counts.met){
       kind="attention";
       headline="Atenção recorrente";
-      message=`Em ${needsWork} de ${attempts} tentativas, marcaste este critério como “Parcial” ou “Ainda não”. Usa-o como ponto de verificação antes de terminares a próxima resposta.`;
+      message=`Em ${needsWork} de ${attempts} tentativas, este critério ficou parcial ou não demonstrado. Usa-o como ponto de verificação antes de terminares a próxima resposta.`;
     }else if(counts.met>=Math.ceil(attempts*0.6)&&counts.met>needsWork){
       kind="strength";
       headline="Padrão consistente";
-      message=`Em ${counts.met} de ${attempts} tentativas, marcaste este critério como “Cumpri”. Mantém esse cuidado, confirmando sempre a evidência concreta na resposta.`;
+      message=`Em ${counts.met} de ${attempts} tentativas, este critério ficou cumprido. Mantém esse cuidado, confirmando sempre a evidência concreta na resposta.`;
     }
     const evidenceAttention=counts.withoutEvidence>=Math.ceil(attempts*0.6)&&counts.withoutEvidence>counts.withEvidence;
     patterns.push({
       criterionId,label:observations.at(-1)?.label||fallbackCriterionLabel(criterionId),kind,headline,message,attempts,
       counts,domains:[...domains],transversal,evidenceAttention,
-      evidenceMessage:evidenceAttention?`Em ${counts.withoutEvidence} de ${attempts} tentativas não ficou registada evidência textual para este critério. Na próxima, identifica a frase ou passagem que sustenta a tua autoavaliação.`:null
+      evidenceMessage:evidenceAttention?`Em ${counts.withoutEvidence} de ${attempts} tentativas não ficou registada evidência textual para este critério. Na próxima, identifica a frase ou passagem que sustenta a avaliação.`:null
     });
   }
 
