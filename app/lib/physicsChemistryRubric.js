@@ -111,6 +111,9 @@ export function physicsChemistryRubricFor(item){
   }));
 }
 
+function explicitPhysicsChemistryAmbiguity(normalizedText){
+  return /\bacho que\b[\s\S]{0,100}\bou talvez\b/u.test(normalizedText);
+}
 
 export function automaticPhysicsChemistryRubricResult(item,responseText){
   const text=String(responseText||"").trim();
@@ -122,9 +125,30 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
     const observations=(criterion.observations||[]).map(observation=>{
       const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);
       const normalizedText=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
-      const directDetection=observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
-      const resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
-      return {...observation,status:resolved.status,confidence:resolved.confidence,scoreRatio:resolved.scoreRatio,semanticScore:resolved.semanticScore,contradictionDetected:!!resolved.contradictionDetected,ambiguityDetected:!!resolved.ambiguityDetected,studentEvidence:resolved.evidence?[resolved.evidence]:[],autoAssessed:true};
+      const explicitAmbiguity=!!assessed.ambiguityDetected||explicitPhysicsChemistryAmbiguity(normalizedText);
+      const unsafe=!!assessed.contradictionDetected||explicitAmbiguity||!!assessed.manipulationDetected;
+      const directDetection=!unsafe&&observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
+      let resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
+      if(explicitAmbiguity){
+        resolved={
+          ...resolved,
+          status:resolved.status==="observed"?"partial":resolved.status,
+          scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35),
+          ambiguityDetected:true
+        };
+      }
+      return {
+        ...observation,
+        status:resolved.status,
+        confidence:resolved.confidence,
+        scoreRatio:resolved.scoreRatio,
+        semanticScore:resolved.semanticScore,
+        contradictionDetected:!!resolved.contradictionDetected,
+        ambiguityDetected:!!resolved.ambiguityDetected,
+        manipulationDetected:!!resolved.manipulationDetected,
+        studentEvidence:resolved.evidence?[resolved.evidence]:[],
+        autoAssessed:true
+      };
     });
     const aggregate=aggregateCriterionAssessment(observations);
     return {...criterion,...aggregate,observations,autoAssessed:true};
