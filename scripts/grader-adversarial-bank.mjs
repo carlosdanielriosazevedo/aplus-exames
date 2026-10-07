@@ -38,7 +38,9 @@ const equilibriumEvidence='A diminuição da pressão desloca o equilíbrio no s
 
 {
   const response='Explica de que forma a diminuição da pressão afeta o equilíbrio e refere o maior número de partículas gasosas.';
+  const guard=inspectAdversarialResponse(response);
   const graded=assessEvidence(response,equilibriumEvidence);
+  check('FQA-COPY-00','FQ A','prompt_copying',guard.taskEchoDetected===true,'a reformulação do pedido não foi reconhecida como eco de enunciado');
   check('FQA-COPY-01','FQ A','prompt_copying',graded.status!=='observed','cópia/reformulação do pedido foi tratada como resposta demonstrada');
 }
 
@@ -95,10 +97,11 @@ const equilibriumEvidence='A diminuição da pressão desloca o equilíbrio no s
 }
 
 {
-  const evidence='A ordem dos argumentos contribui para a clareza e organização do texto.';
+  const criterion='A ordem dos argumentos contribui para a clareza e organização do texto.';
+  const acceptedAlternative='Uma progressão lógica entre a apresentação do problema, as soluções possíveis e as condições necessárias facilita a compreensão do texto.';
   const response='O autor começa por apresentar o problema, passa depois às soluções possíveis e termina com as condições necessárias, criando uma progressão lógica que facilita a compreensão.';
-  const graded=assessEvidence(response,evidence);
-  check('PT-ALT-01','Português','valid_alternative_interpretation',graded.status==='observed','interpretação alternativa válida e fundamentada foi rejeitada');
+  const graded=assessEvidence(response,criterion,acceptedAlternative);
+  check('PT-ALT-01','Português','valid_alternative_interpretation',graded.status==='observed','interpretação alternativa válida e fundamentada foi rejeitada apesar de estar ancorada numa evidência alternativa aceite');
 }
 
 {
