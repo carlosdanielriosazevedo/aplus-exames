@@ -44,6 +44,9 @@ jobs:
       - name: Strict observed classification
         run: node scripts/fqa-observed-threshold-audit.mjs
 
+      - name: Grader adversarial bank
+        run: node scripts/grader-adversarial-bank.mjs
+
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
