@@ -32,12 +32,12 @@ assert.equal(memory.at(-1).criterionLabels.fundamentacao,"Mobiliza dois elemento
 const insight=writingMemoryInsight(memory,item,{excludeAttemptId:"a3"});
 assert.equal(insight.available,true,"duas tentativas anteriores devem permitir padrão conservador por tarefa");
 assert.equal(insight.rows.length,2,"os dois critérios recorrentes devem ser analisados");
-assert.match(insight.rows.find(row=>row.criterionId==="fundamentacao").message,/Parcial|Ainda não/u,"um padrão de dificuldade autoassinalada deve ser descrito sem diagnosticar");
+assert.match(insight.rows.find(row=>row.criterionId==="fundamentacao").message,/parcial|não demonstrado/iu,"um padrão de dificuldade recorrente deve ser descrito sem devolver a classificação ao aluno");
 
 const focus=writingMemoryPreAnswerFocus(memory,item,{excludeAttemptId:"a3"});
 assert.equal(focus.available,true,"uma atenção recorrente deve poder gerar um lembrete antes da próxima resposta aberta");
 assert.equal(focus.rows.length,1,"o lembrete pré-resposta deve excluir padrões neutros ou positivos");
-assert.equal(focus.rows[0].criterionId,"fundamentacao","o foco deve priorizar o critério com dificuldade autoassinalada recorrente");
+assert.equal(focus.rows[0].criterionId,"fundamentacao","o foco deve priorizar o critério com dificuldade recorrente");
 assert.match(focus.rows[0].prompt,/Antes de terminares/u);
 assert.equal(writingMemoryPreAnswerFocus(memory,{...item,responseType:"multiple-choice"}).available,false,"o foco de escrita não deve aparecer em escolha múltipla");
 
@@ -68,9 +68,9 @@ const foundationPattern=profile.patterns.find(row=>row.criterionId==="fundamenta
 assert.ok(foundationPattern,"a fundamentação recorrente deve entrar no perfil");
 assert.equal(foundationPattern.attempts,3,"duas perguntas abertas na mesma tentativa não podem valer como duas tentativas independentes");
 assert.equal(foundationPattern.transversal,true,"um padrão sustentado em Leitura e Educação Literária deve ser marcado como transversal");
-assert.equal(foundationPattern.kind,"attention","três autoavaliações recorrentes abaixo de Cumpri devem gerar apenas uma atenção recorrente");
+assert.equal(foundationPattern.kind,"attention","três avaliações recorrentes abaixo de cumprido devem gerar apenas uma atenção recorrente");
 assert.equal(foundationPattern.evidenceAttention,true,"a ausência recorrente de evidência deve ser sinalizada separadamente do estado do critério");
-assert.match(foundationPattern.message,/marcaste|tentativas/u);
+assert.match(foundationPattern.message,/tentativas/u);
 assert.match(foundationPattern.evidenceMessage,/evidência textual/u);
 
 const insufficient=writingMemoryProfile(memory,{excludeAttemptId:"a3"});
@@ -78,7 +78,7 @@ assert.equal(insufficient.available,false,"o perfil agregado deve desaparecer se
 
 const strengthMemory=["s1","s2","s3"].reduce((rows,attemptId,index)=>recordPortugueseWritingMemory(rows,{attemptId,item:{...item,id:`S-${index}`},at:index+1,assessment:{conteudo:{status:"met",evidence:"passagem concreta"}}}),[]);
 const strength=writingMemoryProfile(strengthMemory).patterns.find(row=>row.criterionId==="conteudo");
-assert.equal(strength.kind,"strength","um padrão repetido de Cumpri pode ser apresentado como consistência autoassinalada, sem o converter em domínio medido");
+assert.equal(strength.kind,"strength","um padrão repetido de critério cumprido pode ser apresentado como consistência observada, sem o converter em domínio medido");
 assert.equal(strength.evidenceAttention,false);
 assert.equal(writingMemoryPreAnswerFocus(strengthMemory,item).available,false,"um padrão positivo não deve transformar-se num aviso de dificuldade antes de responder");
 
@@ -93,7 +93,7 @@ for(const [index,status,evidence] of [
 }
 const recovered=writingAttentionEvolution(recoveryMemory,{criterionId:"fundamentacao",domain:"leitura"});
 assert.equal(recovered.available,true,"o motor deve reconhecer que existiu atenção recorrente antes da melhoria recente");
-assert.equal(recovered.resolved,true,"duas tentativas recentes em Cumpri com evidência devem permitir marcar a atenção como não recorrente por agora");
+assert.equal(recovered.resolved,true,"duas tentativas recentes com critério cumprido e evidência devem permitir marcar a atenção como não recorrente por agora");
 assert.equal(recovered.recent.length,2);
 assert.match(recovered.message,/deixou de aparecer como atenção recorrente por agora/u,"a linguagem deve ser prudente e reversível");
 
@@ -106,7 +106,7 @@ for(const [index,status,evidence] of [
 ]){
   fragileRecovery=recordPortugueseWritingMemory(fragileRecovery,{attemptId:`f${index+1}`,item:{...item,id:`F-${index+1}`},at:index+1,assessment:{fundamentacao:{status,evidence}}});
 }
-assert.equal(writingAttentionEvolution(fragileRecovery,{criterionId:"fundamentacao",domain:"leitura"}).resolved,false,"Cumpri sem evidência em uma das tentativas recentes não deve apagar uma atenção recorrente");
+assert.equal(writingAttentionEvolution(fragileRecovery,{criterionId:"fundamentacao",domain:"leitura"}).resolved,false,"um critério cumprido sem evidência numa tentativa recente não deve apagar uma atenção recorrente");
 
 const resolutionSummary=writingResolvedAttentions(recoveryMemory,{domain:"leitura"});
 assert.equal(resolutionSummary.resolved.length,1,"o resumo deve separar atenções que deixaram de ser recorrentes das que continuam ativas");
@@ -143,7 +143,7 @@ for(const text of [
   ...profile.patterns.flatMap(row=>[row.label,row.headline,row.message,row.evidenceMessage||""]),
   recovered.message
 ]){
-  assert.doesNotMatch(String(text||"").toLowerCase(),/\bnota\b|classifica(?:ção|r)|pontua(?:ção|r)|diagnóstico automático|\b[0-9]+\s*(?:pts|pontos)\b/u,"a memória pedagógica não deve transformar autoavaliações em classificação");
+  assert.doesNotMatch(String(text||""),/autoavalia|assinalaste|marcaste|“Cumpri”|“Ainda não”/iu,"a memória atual não deve apresentar padrões como autoavaliação do aluno");
 }
 
-console.log("✓ memória de escrita Português: foco pré-resposta · atenção resolvida deixa de gerar lembrete e pode regressar se o padrão reaparecer · perfil transversal · zero nota automática");
+console.log("✓ memória de escrita Português: foco pré-resposta · atenção resolvida reversível · perfil transversal · linguagem neutra de avaliação anterior · zero autoatribuição pelo aluno");
