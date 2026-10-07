@@ -50,20 +50,27 @@ function scorePercent(result){
 function diagnosisCode(result){return result?.feedbackSummary?.errorDiagnosis?.code||result?.errorDiagnosis?.code||null}
 function requiresReview(result){return !!result?.requiresReview||result?.status==="needs_review"}
 
-function openGraderRows(){
-  return takePerProfile(OPEN_RESPONSE_CALIBRATION_CASES.filter(row=>["portuguese","physics-chemistry-a"].includes(row.subject)),"category",OPEN_CATEGORIES,3)
+function openGraderRowsForSubject(subject){
+  return takePerProfile(OPEN_RESPONSE_CALIBRATION_CASES.filter(row=>row.subject===subject),"category",OPEN_CATEGORIES,3)
     .map(row=>{
-      let item=row.subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
-      if(!item)throw new Error(`Missing ${row.subject} item ${row.itemId}`);
-      if(row.subject==="portuguese")item=applyPortugueseRubricObservations([item])[0];
-      const result=row.subject==="portuguese"?gradePortugueseResponse(item,row.response):gradePhysicsChemistryResponse(item,row.response);
+      let item=subject==="portuguese"?portugueseCalibrationItemById(row.itemId):physicsChemistryConstructedItemById(row.itemId);
+      if(!item)throw new Error(`Missing ${subject} item ${row.itemId}`);
+      if(subject==="portuguese")item=applyPortugueseRubricObservations([item])[0];
+      const result=subject==="portuguese"?gradePortugueseResponse(item,row.response):gradePhysicsChemistryResponse(item,row.response);
       return {
-        caseId:humanValidationCaseId(row.subject,row.itemId,row.response),
+        caseId:humanValidationCaseId(subject,row.itemId,row.response),
         scorePercent:scorePercent(result),
         diagnosis:diagnosisCode(result)||"other",
         requiresReview:requiresReview(result)
       };
     });
+}
+
+function openGraderRows(){
+  return [
+    ...openGraderRowsForSubject("portuguese"),
+    ...openGraderRowsForSubject("physics-chemistry-a")
+  ];
 }
 
 function mathGraderRows(){
