@@ -71,12 +71,56 @@ jobs:
       - name: Content readiness report
         run: npm run content:readiness
 
-      - name: Prebuild audits
-        run: npm run prebuild
-        env:
-          DATABASE_URL: ""
-          NEXT_PUBLIC_NEON_AUTH_URL: ""
-          NEXT_PUBLIC_NEON_DATA_API_URL: ""
+      - name: Prebuild — FQ A foundation
+        run: node scripts/physics-chemistry-foundation-audit.mjs
+
+      - name: Prebuild — Portuguese literary coverage
+        run: node scripts/portuguese-literary-coverage-audit.mjs
+
+      - name: Prebuild — Parent experience
+        run: node scripts/parent-experience-audit.mjs
+
+      - name: Prebuild — Automatic open response
+        run: node scripts/automatic-open-response-audit.mjs
+
+      - name: Prebuild — Open response calibration
+        run: node scripts/open-response-calibration-audit.mjs
+
+      - name: Prebuild — Explanatory feedback
+        run: node scripts/explanatory-feedback-audit.mjs
+
+      - name: Prebuild — Submitted answer lock
+        run: node scripts/submitted-answer-lock-audit.mjs
+
+      - name: Prebuild — Open response scale calibration
+        run: node scripts/open-response-scale-calibration.mjs
+
+      - name: Prebuild — Response analysis v2
+        run: node scripts/response-analysis-calibration-v2.mjs
+
+      - name: Prebuild — Response analysis v3
+        run: node scripts/response-analysis-calibration-v3.mjs
+
+      - name: Prebuild — Response analysis v4
+        run: node scripts/response-analysis-calibration-v4.mjs
+
+      - name: Prebuild — Response analysis v5
+        run: node scripts/response-analysis-calibration-v5.mjs
+
+      - name: Prebuild — Response analysis v6
+        run: node scripts/response-analysis-calibration-v6.mjs
+
+      - name: Prebuild — Response analysis v7
+        run: node scripts/response-analysis-calibration-v7.mjs
+
+      - name: Prebuild — Error diagnosis
+        run: node scripts/error-diagnosis-audit.mjs
+
+      - name: Prebuild — Learning feedback quality
+        run: node scripts/learning-feedback-quality-audit.mjs
+
+      - name: Prebuild — Diagnostic minimal pairs
+        run: node scripts/diagnostic-minimal-pairs-audit.mjs
 
       - name: Next production build
         run: npx next build
