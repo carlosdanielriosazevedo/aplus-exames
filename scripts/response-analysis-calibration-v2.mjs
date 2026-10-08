@@ -1,4 +1,5 @@
 import {OPEN_RESPONSE_ADVERSARIAL_CASES} from "../app/data/openResponseCalibrationBankWave2.js";
+import {OPEN_RESPONSE_CALIBRATION_CASES} from "../app/data/openResponseCalibrationBank.js";
 import {MATH_RESPONSE_CALIBRATION_CASES} from "../app/data/mathResponseCalibrationBank.js";
 import {portugueseCalibrationItemById} from "../app/data/openResponseCalibrationBank.js";
 import {physicsChemistryConstructedItemById} from "../app/data/physicsChemistryConstructed.js";
@@ -34,6 +35,15 @@ const mathRows=MATH_RESPONSE_CALIBRATION_CASES.map(row=>{
   return {...row,result,score:ratio(result)};
 });
 
+const fqaParaphraseRows=OPEN_RESPONSE_CALIBRATION_CASES
+  .filter(row=>row.subject==="physics-chemistry-a"&&row.category==="paraphrase")
+  .map(row=>{
+    const item=physicsChemistryConstructedItemById(row.itemId);
+    if(!item)throw new Error("Missing FQ A paraphrase item: "+row.itemId);
+    const result=gradePhysicsChemistryResponse(item,row.response);
+    return {...row,result,score:ratio(result)};
+  });
+
 const failures=[];
 for(const row of openRows){
   if(Number.isFinite(row.maxScore)&&row.score>row.maxScore+.001){
@@ -55,6 +65,17 @@ for(const row of mathRows){
   }
 }
 
+// Counter-regression: adversarial hardening must not reject legitimate scientific paraphrases.
+const paraphraseMean=mean(fqaParaphraseRows.map(row=>row.score));
+for(const row of fqaParaphraseRows){
+  if(row.score<.75-.001)failures.push(`physics-chemistry-a/${row.itemId}/legitimate-paraphrase: ${pct(row.score)} < min 75%`);
+}
+if(paraphraseMean<.88-.001)failures.push(`physics-chemistry-a/paraphrase-mean: ${pct(paraphraseMean)} < min 88%`);
+const wavParaphrase=fqaParaphraseRows.find(row=>row.itemId==="FQA-R-WAV-01");
+const aqParaphrase=fqaParaphraseRows.find(row=>row.itemId==="FQA-R-AQ-01");
+if(!wavParaphrase||wavParaphrase.score<.80-.001)failures.push(`physics-chemistry-a/FQA-R-WAV-01/legitimate-paraphrase: ${pct(wavParaphrase?.score||0)} < min 80%`);
+if(!aqParaphrase||aqParaphrase.score<.90-.001)failures.push(`physics-chemistry-a/FQA-R-AQ-01/legitimate-paraphrase: ${pct(aqParaphrase?.score||0)} < min 90%`);
+
 const openByProfile={};
 for(const profile of [...new Set(openRows.map(row=>row.profile))]){
   const rows=openRows.filter(row=>row.profile===profile);
@@ -66,11 +87,14 @@ for(const profile of [...new Set(mathRows.map(row=>row.profile))]){
   mathByProfile[profile]={count:rows.length,mean:round(mean(rows.map(row=>row.score)))};
 }
 
-const totalCases=65+openRows.length+mathRows.length;
+const totalCases=65+openRows.length+mathRows.length+fqaParaphraseRows.length;
 console.log("=== RESPONSE ANALYSIS CALIBRATION V2 ===");
 console.log("Total protected cases (including wave 1): "+totalCases);
 console.log("\nOpen-response adversarial profiles:");
 Object.entries(openByProfile).forEach(([profile,row])=>console.log("  "+profile.padEnd(20)+" "+pct(row.mean)+" · "+row.count+" cases"));
+console.log("\nFQ A legitimate paraphrase counter-regression:");
+fqaParaphraseRows.forEach(row=>console.log("  "+row.itemId.padEnd(14)+" "+pct(row.score)));
+console.log("  "+"mean".padEnd(14)+" "+pct(paraphraseMean));
 console.log("\nMathematics A constructed-response profiles:");
 Object.entries(mathByProfile).forEach(([profile,row])=>console.log("  "+profile.padEnd(20)+" "+pct(row.mean)+" · "+row.count+" cases"));
 
@@ -78,6 +102,11 @@ const report={
   totalProtectedCases:totalCases,
   wave2OpenCases:openRows.length,
   mathematicsCases:mathRows.length,
+  fqaLegitimateParaphrases:{
+    count:fqaParaphraseRows.length,
+    mean:round(paraphraseMean),
+    rows:fqaParaphraseRows.map(row=>({itemId:row.itemId,score:round(row.score),review:!!row.result.requiresReview}))
+  },
   openByProfile,
   mathByProfile,
   failures,
@@ -97,4 +126,4 @@ if(enforcedFailures.length){
   if(enforcedFailures.length>40)console.error("… "+(enforcedFailures.length-40)+" more");
   process.exit(1);
 }
-console.log("\nMATHEMATICS A FULL-CORRECT GATE PASSED.");
+console.log("\nADVERSARIAL + LEGITIMATE PARAPHRASE GATE PASSED.");
