@@ -101,6 +101,15 @@ jobs:
       - name: Prebuild — Response analysis v3
         run: node scripts/response-analysis-calibration-v3.mjs
 
+      - name: Capture response analysis v3 diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: response-analysis-v3-diagnostics
+          path: response-analysis-calibration-v3.json
+          if-no-files-found: error
+          retention-days: 1
+
       - name: Prebuild — Response analysis v4
         run: node scripts/response-analysis-calibration-v4.mjs
 
