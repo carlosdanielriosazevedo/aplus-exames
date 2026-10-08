@@ -127,12 +127,17 @@ function physicsChemistryKeywordSoupLike(text){
   return !finiteRelation.test(normalized);
 }
 
-function universalPh7Contradiction(item,criterionId,normalizedText){
-  if(item?.id!=="FQA-R-AQ-01"||!["equivalence","detection"].includes(criterionId))return false;
+function activeUniversalPh7Misconception(item,normalizedText){
+  if(item?.id!=="FQA-R-AQ-01")return false;
   const universal=/\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,45}\bph\s*7\b/u.test(normalizedText)
     ||/\bph\s*7\b[\s\S]{0,45}\b(?:sempre|necessariamente|obrigatoriamente)\b/u.test(normalizedText);
-  const rejection=/\b(?:nao|nem)\b[\s\S]{0,25}\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,35}\bph\s*7\b/u.test(normalizedText);
-  return universal&&!rejection;
+  if(!universal)return false;
+  const directRejection=/\b(?:nao|nem)\b[\s\S]{0,25}\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,35}\bph\s*7\b/u.test(normalizedText)
+    ||/\bph\s*7\b[\s\S]{0,35}\bnao\s+(?:e|eh)\s+universal\b/u.test(normalizedText);
+  const correctionMarker=/\b(?:corrigindo|retifico|retificando|pensando melhor|na verdade|ou melhor)\b/u.test(normalizedText);
+  const laterRejection=/\b(?:o\s+)?ph\b[\s\S]{0,30}\bnao\b[\s\S]{0,20}\b(?:universal|sempre|necessariamente|obrigatoriamente)\b/u.test(normalizedText)
+    ||/\bnao\b[\s\S]{0,20}\b(?:universal|sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,30}\bph\b/u.test(normalizedText);
+  return !(directRejection||(correctionMarker&&laterRejection));
 }
 
 export function automaticPhysicsChemistryRubricResult(item,responseText){
@@ -143,13 +148,15 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
   };
   const normalizedResponse=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
   const keywordSoupLike=physicsChemistryKeywordSoupLike(text);
+  const activeUniversalPh7=activeUniversalPh7Misconception(item,normalizedResponse);
   const criteria=physicsChemistryRubricFor(item).map((criterion,criterionIndex)=>{
-    const criterionContradiction=universalPh7Contradiction(item,criterion.id,normalizedResponse);
+    const criterionContradiction=activeUniversalPh7&&criterion.id==="equivalence";
     const observations=(criterion.observations||[]).map(observation=>{
       const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);
       const normalizedText=normalizedResponse;
       const explicitAmbiguity=!!assessed.ambiguityDetected||explicitPhysicsChemistryAmbiguity(normalizedText);
-      const contradictionDetected=!!assessed.contradictionDetected||criterionContradiction;
+      const observationContradiction=activeUniversalPh7&&observation.id==="detection-region";
+      const contradictionDetected=!!assessed.contradictionDetected||criterionContradiction||observationContradiction;
       const unsafe=contradictionDetected||explicitAmbiguity||!!assessed.manipulationDetected||keywordSoupLike;
       const directDetection=!unsafe&&observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
       let resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
@@ -160,7 +167,7 @@ export function automaticPhysicsChemistryRubricResult(item,responseText){
           scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35)
         };
       }
-      if(criterionContradiction){
+      if(criterionContradiction||observationContradiction){
         resolved={
           ...resolved,
           status:resolved.status==="observed"?"partial":resolved.status,
