@@ -128,7 +128,7 @@ function physicsChemistryKeywordSoupLike(text){
 }
 
 function universalPh7Contradiction(item,criterionId,normalizedText){
-  if(item?.id!=="FQA-R-AQ-01"||criterionId!=="equivalence")return false;
+  if(item?.id!=="FQA-R-AQ-01"||!["equivalence","detection"].includes(criterionId))return false;
   const universal=/\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,45}\bph\s*7\b/u.test(normalizedText)
     ||/\bph\s*7\b[\s\S]{0,45}\b(?:sempre|necessariamente|obrigatoriamente)\b/u.test(normalizedText);
   const rejection=/\b(?:nao|nem)\b[\s\S]{0,25}\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,35}\bph\s*7\b/u.test(normalizedText);
