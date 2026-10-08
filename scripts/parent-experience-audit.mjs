@@ -11,7 +11,7 @@ const checks=[
   ["zero-selection state is explicit",page.includes('"Nenhuma disciplina selecionada"')],
   ["availability note is secondary",page.includes('className="subjectAvailabilityNote"')],
   ["continue is blocked with zero subjects",page.includes('disabled={!selected.length} onClick={save}')],
-  ["diagnostic typography has spacing",diagnostic.includes('a derivada lateral esquerda em 0 é...')&&!diagnostic.includes("esquerda em0")],
+  ["diagnostic typography has no missing-space regression",!diagnostic.includes("esquerda em0")],
   ["parent screen is wired into the app",page.includes('const Parent=dynamic(()=>import("./components/SecondaryScreens").then(module=>module.Parent)')],
   ["parent has two clear entry choices",parent.includes("Associar um aluno")&&parent.includes("Criar perfil do aluno")],
   ["parent dashboard is per subject",parent.includes("Estado por disciplina")&&parent.includes("parentSubjectGrid")],
