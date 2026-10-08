@@ -71,9 +71,19 @@ jobs:
       - name: Content readiness report
         run: npm run content:readiness
 
-      - name: Full production build
-        run: npm run build
+      - name: Prebuild audits
+        run: npm run prebuild
         env:
           DATABASE_URL: ""
           NEXT_PUBLIC_NEON_AUTH_URL: ""
           NEXT_PUBLIC_NEON_DATA_API_URL: ""
+
+      - name: Next production build
+        run: npx next build
+        env:
+          DATABASE_URL: ""
+          NEXT_PUBLIC_NEON_AUTH_URL: ""
+          NEXT_PUBLIC_NEON_DATA_API_URL: ""
+
+      - name: Performance budget
+        run: npm run performance:budget
