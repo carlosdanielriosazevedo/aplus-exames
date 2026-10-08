@@ -129,11 +129,12 @@ function physicsChemistryKeywordSoupLike(text){
 
 function activeUniversalPh7Misconception(item,normalizedText){
   if(item?.id!=="FQA-R-AQ-01")return false;
-  const universal=/\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,45}\bph\s*7\b/u.test(normalizedText)
-    ||/\bph\s*7\b[\s\S]{0,45}\b(?:sempre|necessariamente|obrigatoriamente)\b/u.test(normalizedText);
+  const phSeven="\\bph\\s*(?:(?:e|eh|igual\\s+a)\\s*)?7\\b";
+  const universal=new RegExp("\\b(?:sempre|necessariamente|obrigatoriamente)\\b[\\s\\S]{0,45}"+phSeven,"u").test(normalizedText)
+    ||new RegExp(phSeven+"[\\s\\S]{0,45}\\b(?:sempre|necessariamente|obrigatoriamente)\\b","u").test(normalizedText);
   if(!universal)return false;
-  const directRejection=/\b(?:nao|nem)\b[\s\S]{0,25}\b(?:sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,35}\bph\s*7\b/u.test(normalizedText)
-    ||/\bph\s*7\b[\s\S]{0,35}\bnao\s+(?:e|eh)\s+universal\b/u.test(normalizedText);
+  const directRejection=new RegExp("\\b(?:nao|nem)\\b[\\s\\S]{0,25}\\b(?:sempre|necessariamente|obrigatoriamente)\\b[\\s\\S]{0,35}"+phSeven,"u").test(normalizedText)
+    ||new RegExp(phSeven+"[\\s\\S]{0,35}\\bnao\\s+(?:e|eh)\\s+universal\\b","u").test(normalizedText);
   const correctionMarker=/\b(?:corrigindo|retifico|retificando|pensando melhor|na verdade|ou melhor)\b/u.test(normalizedText);
   const laterRejection=/\b(?:o\s+)?ph\b[\s\S]{0,30}\bnao\b[\s\S]{0,20}\b(?:universal|sempre|necessariamente|obrigatoriamente)\b/u.test(normalizedText)
     ||/\bnao\b[\s\S]{0,20}\b(?:universal|sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,30}\bph\b/u.test(normalizedText);
