@@ -121,6 +121,8 @@ function physicsChemistryKeywordSoupLike(text){
   const words=normalized.match(/[a-z0-9%+\-]+/gu)||[];
   if(words.length<6)return false;
   if(/[.!?;:]/u.test(raw)||/(?:->|→|=>|=)/u.test(raw))return false;
+  const glueWords=normalized.match(/\b(?:a|o|as|os|de|do|da|dos|das|um|uma|que|para|com|e|se|quando|porque|entre|ao|aos|num|numa|na|no|nas|nos|como|por|em|tendo)\b/gu)||[];
+  if(glueWords.length>=2)return false;
   const finiteRelation=/\b(?:reduz|aumenta|diminui|permite|resulta|corresponde|indica|mostra|favorece|altera|mantem|repete|mede|calcula|compara|transfere|completa|homogeneiza|soma|acelera|ocorre|estao|fica|faz|introduz|representa|depende|funciona)\b/u;
   return !finiteRelation.test(normalized);
 }
