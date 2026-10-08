@@ -115,20 +115,67 @@ function explicitPhysicsChemistryAmbiguity(normalizedText){
   return /\bacho que\b[\s\S]{0,100}\bou talvez\b/u.test(normalizedText);
 }
 
+function physicsChemistryKeywordSoupLike(text){
+  const raw=String(text||"").trim();
+  const normalized=raw.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
+  const words=normalized.match(/[a-z0-9%+\-]+/gu)||[];
+  if(words.length<6)return false;
+  if(/[.!?;:]/u.test(raw)||/(?:->|→|=>|=)/u.test(raw))return false;
+  const glueWords=normalized.match(/\b(?:a|o|as|os|de|do|da|dos|das|um|uma|que|para|com|e|se|quando|porque|entre|ao|aos|num|numa|na|no|nas|nos|como|por|em|tendo)\b/gu)||[];
+  if(glueWords.length>=2)return false;
+  const finiteRelation=/\b(?:reduz|aumenta|diminui|permite|resulta|corresponde|indica|mostra|favorece|altera|mantem|repete|mede|calcula|compara|transfere|completa|homogeneiza|soma|acelera|ocorre|estao|fica|faz|introduz|representa|depende|funciona)\b/u;
+  return !finiteRelation.test(normalized);
+}
+
+function activeUniversalPh7Misconception(item,normalizedText){
+  if(item?.id!=="FQA-R-AQ-01")return false;
+  const phSeven="\\bph\\s*(?:(?:e|eh|igual\\s+a)\\s*)?7\\b";
+  const universal=new RegExp("\\b(?:sempre|necessariamente|obrigatoriamente)\\b[\\s\\S]{0,45}"+phSeven,"u").test(normalizedText)
+    ||new RegExp(phSeven+"[\\s\\S]{0,45}\\b(?:sempre|necessariamente|obrigatoriamente)\\b","u").test(normalizedText);
+  if(!universal)return false;
+  const directRejection=new RegExp("\\b(?:nao|nem)\\b[\\s\\S]{0,25}\\b(?:sempre|necessariamente|obrigatoriamente)\\b[\\s\\S]{0,35}"+phSeven,"u").test(normalizedText)
+    ||new RegExp(phSeven+"[\\s\\S]{0,35}\\bnao\\s+(?:e|eh)\\s+universal\\b","u").test(normalizedText);
+  const correctionMarker=/\b(?:corrigindo|retifico|retificando|pensando melhor|na verdade|ou melhor)\b/u.test(normalizedText);
+  const laterRejection=/\b(?:o\s+)?ph\b[\s\S]{0,30}\bnao\b[\s\S]{0,20}\b(?:universal|sempre|necessariamente|obrigatoriamente)\b/u.test(normalizedText)
+    ||/\bnao\b[\s\S]{0,20}\b(?:universal|sempre|necessariamente|obrigatoriamente)\b[\s\S]{0,30}\bph\b/u.test(normalizedText);
+  return !(directRejection||(correctionMarker&&laterRejection));
+}
+
 export function automaticPhysicsChemistryRubricResult(item,responseText){
   const text=String(responseText||"").trim();
   if(!text)return {
     status:"unanswered",final:false,correct:null,points:null,maxPoints:item.maxPoints||10,
     gradingMode:"automatic-rubric-provisional",responseText:text,rubricCompleted:false,criteria:[]
   };
+  const normalizedResponse=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
+  const keywordSoupLike=physicsChemistryKeywordSoupLike(text);
+  const activeUniversalPh7=activeUniversalPh7Misconception(item,normalizedResponse);
   const criteria=physicsChemistryRubricFor(item).map((criterion,criterionIndex)=>{
+    const criterionContradiction=activeUniversalPh7&&criterion.id==="equivalence";
     const observations=(criterion.observations||[]).map(observation=>{
       const assessed=assessEvidence(text,observation.label,criterion.label,item.criteria?.[criterionIndex]);
-      const normalizedText=text.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-PT");
+      const normalizedText=normalizedResponse;
       const explicitAmbiguity=!!assessed.ambiguityDetected||explicitPhysicsChemistryAmbiguity(normalizedText);
-      const unsafe=!!assessed.contradictionDetected||explicitAmbiguity||!!assessed.manipulationDetected;
+      const observationContradiction=activeUniversalPh7&&observation.id==="detection-region";
+      const contradictionDetected=!!assessed.contradictionDetected||criterionContradiction||observationContradiction;
+      const unsafe=contradictionDetected||explicitAmbiguity||!!assessed.manipulationDetected||keywordSoupLike;
       const directDetection=!unsafe&&observation.id==="detection-indicator"&&(/\bindicador\b/u.test(normalizedText)||/curva\s+de\s+ph/u.test(normalizedText));
       let resolved=directDetection?{...assessed,status:"observed",scoreRatio:1,confidence:Math.max(.88,assessed.confidence||0)}:assessed;
+      if(keywordSoupLike){
+        resolved={
+          ...resolved,
+          status:resolved.status==="observed"?"partial":resolved.status,
+          scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35)
+        };
+      }
+      if(criterionContradiction||observationContradiction){
+        resolved={
+          ...resolved,
+          status:resolved.status==="observed"?"partial":resolved.status,
+          scoreRatio:Math.min(.35,Number.isFinite(resolved.scoreRatio)?resolved.scoreRatio:.35),
+          contradictionDetected:true
+        };
+      }
       if(explicitAmbiguity){
         resolved={
           ...resolved,
