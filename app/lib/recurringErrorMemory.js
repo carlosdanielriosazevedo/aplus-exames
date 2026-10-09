@@ -9,7 +9,8 @@ const CATEGORY_RULES=[
   {id:"sign",terms:["sign","sinal","algebr"],label:"Sinais e sentido algébrico",message:"O sinal ou o sentido algébrico tem aparecido como fonte de perda de pontos.",global:true},
   {id:"rounding",terms:["round","arredond","approximate","aproxim"],label:"Arredondamentos e aproximações",message:"O arredondamento ou o uso de aproximações tem retirado precisão às respostas.",global:true},
   {id:"final_form",terms:["final_form","wrong_final_form","forma final"],label:"Forma final da resposta",message:"O raciocínio pode estar encaminhado, mas a forma final pedida nem sempre fica respeitada.",global:true},
-  {id:"missing_work",terms:["missing_required_work","final_result_only","missing_work","justifica","justification","fundament"],label:"Justificação insuficiente",message:"Tens chegado a respostas sem mostrar toda a justificação necessária para obter a pontuação completa.",global:true},
+  {id:"missing_work",terms:["missing_required_work","final_result_only","missing_work"],label:"Desenvolvimento obrigatório em falta",message:"Tens chegado ao resultado sem mostrar todo o desenvolvimento obrigatório para obter a pontuação completa.",global:true},
+  {id:"justification",terms:["justifica","justification","fundament","evidence","evidencia"],label:"Justificação insuficiente",message:"Nesta matéria, a justificação necessária para sustentar a resposta tem ficado incompleta.",global:false},
   {id:"instruction",terms:["instruction_violation","instruction","instru"],label:"Cumprimento do pedido",message:"Parte da pontuação tem sido perdida por não cumprir exatamente uma instrução do enunciado.",global:true},
   {id:"contradiction",terms:["contrad","incompat"],label:"Contradições na resposta",message:"Foram detetadas ideias incompatíveis dentro da mesma resposta.",global:true},
   {id:"wrong_quantity",terms:["wrong_quantity","grandeza errada"],label:"Grandeza ou relação escolhida",message:"Tens aplicado uma expressão ou relação a uma grandeza diferente da que o problema pede.",global:false},
@@ -68,7 +69,7 @@ export function extractErrorSignals(item,result={}){
     const raw=norm(candidate.code);
     if(!raw||GENERIC_CODES.has(raw))continue;
     const category=categoryFor(raw,candidate.label,candidate.message);
-    const categoryId=category?.id||(raw.startsWith("criterion ")||raw.startsWith("criterion:" )?raw.replace(/\s+/g,"_"):raw);
+    const categoryId=category?.id||(raw.startsWith("criterion ")||raw.startsWith("criterion:")?raw.replace(/\s+/g,"_"):raw);
     const scope=scopeFor(item,category);
     const key=`${scope}|${categoryId}`;
     if(byKey.has(key))continue;
