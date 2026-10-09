@@ -10,7 +10,7 @@ const fqaFull=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",i
 const hub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
-const cloud=readFileSync(new URL("../app/lib/cloudState.js",import.meta.url),"utf8");
+const cloud=readFileSync(new URL("../app/lib/cloud.js",import.meta.url),"utf8");
 
 // Shared release-candidate contract: the normal student journey must stay navigable.
 assert.match(chrome,/STUDENT_NAV\s*=\s*\[\["home","Aprender"\],\["train","Treinar"\],\["ranking","Ranking"\],\["progress","Progresso"\]\]/u,"RC: the four primary student areas must remain available.");
@@ -64,9 +64,12 @@ assert.match(css,/env\(safe-area-inset-bottom\)/u,"RC mobile: bottom safe-area s
 assert.match(css,/@media\(max-width:760px\)[\s\S]*button\{min-height:44px\}/u,"RC mobile: touch targets must remain at least 44px.");
 assert.match(css,/@media\(max-width:760px\)[\s\S]*input,select,textarea\{font-size:16px!important\}/u,"RC mobile: form controls must avoid mobile zoom regressions.");
 
-// Resume/switch-subject contract: cloud state must stay user-scoped and versioned.
-assert.match(cloud,/auth_user_id/u,"RC cloud: cloud state must stay user-scoped.");
-assert.match(cloud,/schemaVersion/u,"RC cloud: cloud state must remain explicitly versioned.");
-assert.match(cloud,/activeSubjectId/u,"RC cloud: active subject must remain part of resumable product state.");
+// Cross-device resume contract: state stays user-scoped, allowlisted, versioned and conflict-aware.
+assert.match(cloud,/schema:"aplus-student-state-v8"/u,"RC cloud: cloud state must remain explicitly versioned.");
+assert.match(cloud,/auth_user_id:session\.user\.id/u,"RC cloud: writes must stay scoped to the authenticated user.");
+assert.match(cloud,/\.eq\("auth_user_id",session\.user\.id\)/u,"RC cloud: reads/updates must stay scoped to the authenticated user.");
+assert.match(cloud,/studentStateForCloud\(s\)/u,"RC cloud: only the explicit student-state allowlist may be persisted.");
+assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"RC cloud: optimistic revision checks must protect cross-device writes.");
+assert.match(cloud,/conflict:true/u,"RC cloud: revision conflicts must stay explicit to the caller.");
 
 console.log("✓ release candidate journey: Matemática A, Português e FQ A preserve diagnóstico → Aprender → Praticar/Missão → exames → revisão → Progresso, with mobile and cloud-resume invariants");
