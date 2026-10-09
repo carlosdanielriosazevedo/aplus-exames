@@ -56,6 +56,9 @@ jobs:
       - name: Three-subject beta candidate
         run: node scripts/three-subject-beta-candidate-audit.mjs
 
+      - name: Release candidate journey
+        run: node scripts/release-candidate-journey-audit.mjs
+
       - name: Public beta readiness
         run: node scripts/public-beta-readiness-audit.mjs
 
