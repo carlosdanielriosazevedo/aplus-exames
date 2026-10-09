@@ -1,17 +1,87 @@
 import {createHash} from "crypto";
 import {getSql,databaseConfigured} from "./db";
 
+const MAX_SYNC_WRITE_OPS=2_500;
+const MAX_OVERRIDE_HISTORY=100;
+const MAX_BATCH_ITEM_IDS=1_000;
+
 const iso=value=>{
   if(value===null || value===undefined)return null;
   const d=new Date(value);
   return Number.isNaN(d.getTime())?null:d.toISOString();
 };
 const json=value=>JSON.stringify(value??{});
+const listLength=value=>Array.isArray(value)?value.length:0;
+
+function validateOptionalArray(value,code){
+  if(value===undefined || value===null)return null;
+  return Array.isArray(value)?null:{ok:false,code};
+}
+
+function syncWriteCount(payload){
+  let writes=2; // participant upsert + beta_sync_imports audit row
+  writes+=listLength(payload.beta?.sessions);
+  writes+=listLength(payload.beta?.events);
+  writes+=listLength(payload.beta?.feedback);
+  writes+=listLength(payload.contentReports);
+  writes+=listLength(payload.examHistory);
+  writes+=listLength(payload.missionHistory);
+  writes+=listLength(payload.editorial?.batches);
+  if(payload.beta?.productAnalytics&&typeof payload.beta.productAnalytics==="object")writes++;
+
+  const overrides=payload.editorial?.overrides;
+  if(overrides&&typeof overrides==="object"&&!Array.isArray(overrides)){
+    for(const ov of Object.values(overrides)){
+      writes++; // content_items upsert
+      writes+=listLength(ov?.history);
+    }
+  }
+  return writes;
+}
 
 export function validateSyncEnvelope(payload){
   if(payload?.schema!=="aplus-sync-v1")return {ok:false,code:"INVALID_SCHEMA"};
   if(!payload?.participant?.code)return {ok:false,code:"PARTICIPANT_CODE_REQUIRED"};
   if(String(payload.participant.code).length>80)return {ok:false,code:"PARTICIPANT_CODE_TOO_LONG"};
+
+  const arrayChecks=[
+    [payload.beta?.sessions,"INVALID_BETA_SESSIONS"],
+    [payload.beta?.events,"INVALID_BETA_EVENTS"],
+    [payload.beta?.feedback,"INVALID_BETA_FEEDBACK"],
+    [payload.contentReports,"INVALID_CONTENT_REPORTS"],
+    [payload.examHistory,"INVALID_EXAM_HISTORY"],
+    [payload.missionHistory,"INVALID_MISSION_HISTORY"],
+    [payload.editorial?.batches,"INVALID_EDITORIAL_BATCHES"]
+  ];
+  for(const [value,code] of arrayChecks){
+    const failure=validateOptionalArray(value,code);
+    if(failure)return failure;
+  }
+
+  const overrides=payload.editorial?.overrides;
+  if(overrides!==undefined&&overrides!==null&&(typeof overrides!=="object"||Array.isArray(overrides))){
+    return {ok:false,code:"INVALID_EDITORIAL_OVERRIDES"};
+  }
+  for(const ov of Object.values(overrides||{})){
+    const historyFailure=validateOptionalArray(ov?.history,"INVALID_EDITORIAL_HISTORY");
+    if(historyFailure)return historyFailure;
+    if(listLength(ov?.history)>MAX_OVERRIDE_HISTORY){
+      return {ok:false,code:"EDITORIAL_HISTORY_TOO_LARGE",limit:MAX_OVERRIDE_HISTORY};
+    }
+  }
+
+  for(const batch of payload.editorial?.batches||[]){
+    const itemIdsFailure=validateOptionalArray(batch?.itemIds,"INVALID_BATCH_ITEM_IDS");
+    if(itemIdsFailure)return itemIdsFailure;
+    if(listLength(batch?.itemIds)>MAX_BATCH_ITEM_IDS){
+      return {ok:false,code:"BATCH_ITEM_IDS_TOO_LARGE",limit:MAX_BATCH_ITEM_IDS};
+    }
+  }
+
+  const writeCount=syncWriteCount(payload);
+  if(writeCount>MAX_SYNC_WRITE_OPS){
+    return {ok:false,code:"SYNC_BATCH_TOO_LARGE",limit:MAX_SYNC_WRITE_OPS,estimatedWrites:writeCount};
+  }
   return {ok:true};
 }
 
