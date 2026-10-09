@@ -68,6 +68,9 @@ jobs:
       - name: Cloud resume product contract
         run: node scripts/cloud-resume-product-contract-audit.mjs
 
+      - name: Closed beta autosync
+        run: node scripts/closed-beta-autosync-audit.mjs
+
       - name: Grader quality report
         run: node scripts/grader-quality-report.mjs
 
