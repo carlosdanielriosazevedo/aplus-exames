@@ -2,8 +2,31 @@ import {canonicalSubjectId} from "./subjectWorkspace.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
 import {recordCompetitiveActivity} from "./competition.js";
 
-const MODEL_VERSION=3;
+const MODEL_VERSION=4;
 const MAX_SESSIONS=100;
+
+function normalizeErrorPatterns(patterns={}){
+  if(!patterns||typeof patterns!=="object"||Array.isArray(patterns))return {};
+  return Object.fromEntries(Object.entries(patterns).map(([key,row])=>[key,{
+    ...row,
+    key,
+    code:row?.code||key.split("|").at(-1),
+    scope:row?.scope||key.split("|")[0]||"general",
+    label:row?.label||"Aspeto a melhorar",
+    message:row?.message||"Este aspeto tem aparecido mais do que uma vez.",
+    count:Number(row?.count)||0,
+    firstAt:row?.firstAt||null,
+    lastAt:row?.lastAt||null,
+    itemIds:[...new Set(Array.isArray(row?.itemIds)?row.itemIds.filter(Boolean):[])].slice(-12),
+    recoveryEvidence:Number(row?.recoveryEvidence)||0,
+    status:row?.status||"observed"
+  }]));
+}
+
+function recordErrorPatternEvidence(patterns,item,result,at){
+  const recorder=globalThis.__aplusRecordErrorPatternEvidence;
+  return typeof recorder==="function"?recorder(patterns,item,result,at):normalizeErrorPatterns(patterns);
+}
 
 function normalizeCompetenceRow(row){
   const source=row&&typeof row==="object"?row:{};
@@ -31,7 +54,7 @@ function normalizeCompetenceRow(row){
 }
 
 export function emptySubjectProgress(subjectId){
-  return {subjectId,version:MODEL_VERSION,diagnosticDone:false,diagnosticCompletedAt:null,sessions:[],missionHistory:[],competence:{},lastPosition:null,lastActivityAt:null};
+  return {subjectId,version:MODEL_VERSION,diagnosticDone:false,diagnosticCompletedAt:null,sessions:[],missionHistory:[],competence:{},errorPatterns:{},errorMemoryVersion:1,lastPosition:null,lastActivityAt:null};
 }
 
 function rowKey(row){
@@ -75,6 +98,24 @@ function mergeCompetenceRows(left={},right={}){
   return merged;
 }
 
+function mergeErrorPatterns(left={},right={}){
+  const a=normalizeErrorPatterns(left),b=normalizeErrorPatterns(right),merged={...a};
+  for(const [key,row] of Object.entries(b)){
+    const previous=merged[key];
+    if(!previous){merged[key]=row;continue}
+    const newest=(row.lastAt||0)>=(previous.lastAt||0)?row:previous;
+    merged[key]={
+      ...previous,...newest,
+      count:Math.max(previous.count||0,row.count||0),
+      firstAt:Math.min(previous.firstAt||Infinity,row.firstAt||Infinity)===Infinity?null:Math.min(previous.firstAt||Infinity,row.firstAt||Infinity),
+      lastAt:Math.max(previous.lastAt||0,row.lastAt||0)||null,
+      itemIds:[...new Set([...(previous.itemIds||[]),...(row.itemIds||[])])].slice(-12),
+      recoveryEvidence:Math.max(previous.recoveryEvidence||0,row.recoveryEvidence||0)
+    };
+  }
+  return merged;
+}
+
 function mergeProgress(left,right,subjectId){
   if(!left)return normalizeProgress(right,subjectId);
   const a=normalizeProgress(left,subjectId),b=normalizeProgress(right,subjectId);
@@ -86,6 +127,8 @@ function mergeProgress(left,right,subjectId){
     sessions:mergeUniqueRows(a.sessions,b.sessions),
     missionHistory:mergeUniqueRows(a.missionHistory,b.missionHistory),
     competence:mergeCompetenceRows(a.competence,b.competence),
+    errorPatterns:mergeErrorPatterns(a.errorPatterns,b.errorPatterns),
+    errorMemoryVersion:1,
     lastPosition:newest.lastPosition||a.lastPosition||b.lastPosition||null,
     lastActivityAt:Math.max(a.lastActivityAt||0,b.lastActivityAt||0)||null
   },subjectId);
@@ -94,7 +137,7 @@ function mergeProgress(left,right,subjectId){
 function normalizeProgress(progress,subjectId){
   const empty=emptySubjectProgress(subjectId);
   const competence=Object.fromEntries(Object.entries(progress?.competence&&typeof progress.competence==="object"?progress.competence:{}).map(([id,row])=>[id,normalizeCompetenceRow(row)]));
-  return {...empty,...(progress||{}),subjectId,version:MODEL_VERSION,sessions:Array.isArray(progress?.sessions)?progress.sessions.slice(-MAX_SESSIONS):[],missionHistory:Array.isArray(progress?.missionHistory)?progress.missionHistory.slice(-MAX_SESSIONS):[],competence,lastPosition:progress?.lastPosition||null};
+  return {...empty,...(progress||{}),subjectId,version:MODEL_VERSION,sessions:Array.isArray(progress?.sessions)?progress.sessions.slice(-MAX_SESSIONS):[],missionHistory:Array.isArray(progress?.missionHistory)?progress.missionHistory.slice(-MAX_SESSIONS):[],competence,errorPatterns:normalizeErrorPatterns(progress?.errorPatterns),errorMemoryVersion:1,lastPosition:progress?.lastPosition||null};
 }
 
 export function migrateSubjectProgress(state){
@@ -162,11 +205,13 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   const completionId=sessionId||progress.lastPosition?.sessionId||null;
   if(completionId&&progress.sessions.some(row=>row.sessionId===completionId))return state;
   const competence={...progress.competence};
+  let errorPatterns=normalizeErrorPatterns(progress.errorPatterns);
   const recordsAcademicEvidence=kind!=="training";
   items.forEach((item,index)=>{
-    if(!recordsAcademicEvidence)return;
     const result=results[index];
     if(!result||result.status==="unanswered")return;
+    errorPatterns=recordErrorPatternEvidence(errorPatterns,item,result,completedAt);
+    if(!recordsAcademicEvidence)return;
     const id=item.competencyId||`${item.domain}:general`;
     const previous=normalizeCompetenceRow(competence[id]);
     if(result.final){
@@ -205,7 +250,7 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
     };
   });
   const session={sessionId:completionId,kind,label,domain,itemIds:items.map(item=>item.id),results:results.map(compactResult),completedAt};
-  let completed=putProgress(state,subjectId,{...progress,diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,lastPosition:null,lastActivityAt:completedAt});
+  let completed=putProgress(state,subjectId,{...progress,diagnosticDone:progress.diagnosticDone||kind==="diagnostic",diagnosticCompletedAt:kind==="diagnostic"?completedAt:progress.diagnosticCompletedAt,sessions:[...progress.sessions,session].slice(-MAX_SESSIONS),missionHistory:kind==="mission"?[...progress.missionHistory,session].slice(-MAX_SESSIONS):progress.missionHistory,competence,errorPatterns,errorMemoryVersion:1,lastPosition:null,lastActivityAt:completedAt});
   const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
   const activityKind=alreadyCompletedMission?"training":kind;
   const xpEarned=subjectSessionXp(activityKind,results);
