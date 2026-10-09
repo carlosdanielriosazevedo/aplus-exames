@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
 import {engagementSummary} from "../lib/engagement";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
+import {recurringErrorPatterns} from "../lib/recurringErrorMemory";
 
 export const BrandName = ({className=""}) => (
   <span className={`brandName ${className}`.trim()} aria-label="APProva+">
@@ -91,7 +92,12 @@ export function StudentNav({active, go}){
 export function StudentTop({s,go,children}){
   const daily=engagementSummary(s);
   const subject=SECONDARY_EXAM_SUBJECTS.find(row=>row.id===s.activeSubjectId)||SECONDARY_EXAM_SUBJECTS[0];
-  return <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button>{!isFriendsBeta(s)&&<button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>}{children}</div></header>;
+  const recurring=recurringErrorPatterns(s.subjectProgress?.[subject.id]?.errorPatterns||{});
+  const latestPattern=recurring[0]||null;
+  return <>
+    <header className="studentTop"><div className="studentTopIdentity"><Logo/><button type="button" className="subjectSwitcher" onClick={()=>go("subjectManager")} aria-label={`Mudar de disciplina. Disciplina atual: ${subject.name}`}><span aria-hidden="true">{subject.icon}</span><b>{subject.shortName||subject.name}</b><i aria-hidden="true">⌄</i></button></div><div className="studentTopActions"><button type="button" onClick={()=>go("home")} aria-label={`Sequência: ${daily.streak} dias`}>🔥 <b>{daily.streak}</b></button>{!isFriendsBeta(s)&&<button type="button" onClick={()=>go("ranking")} aria-label={`${s.xp} XP`}>🏆 <b>{s.xp}</b></button>}{children}</div></header>
+    {latestPattern&&<aside className="apronsoPatternInsight" aria-label="Padrão de aprendizagem identificado pelo Apronso"><b>🦉 O Apronso reparou num padrão</b><span><strong>{latestPattern.label}</strong> apareceu em {latestPattern.count} respostas. {latestPattern.status==="improving"?"Já estás a mostrar recuperação; vou continuar a confirmar.":latestPattern.message}</span><small>Isto é uma hipótese baseada no teu histórico, não uma conclusão definitiva. Deixa de ser destacada quando houver recuperação consistente.</small></aside>}
+  </>;
 }
 
 export function FriendsBetaRibbon({s}){
