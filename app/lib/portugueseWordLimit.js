@@ -1,3 +1,5 @@
+import "./recurringErrorRuntime.js";
+
 export function portugueseWordCount(value){
   const normalized=String(value??"").trim();
   return normalized?normalized.split(/\s+/u).filter(Boolean).length:0;
