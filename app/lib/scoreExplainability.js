@@ -1,10 +1,13 @@
-export const SCORE_EXPLAINABILITY_SCHEMA="aplus-score-explainability-v1";
+export const SCORE_EXPLAINABILITY_SCHEMA="aplus-score-explainability-v2";
 
 const round1=value=>Math.round((Number(value)||0)*10)/10;
 const finite=value=>Number.isFinite(Number(value));
 
 function reasonForRow(row={}){
   if(row.lossReason)return String(row.lossReason);
+  if(row.feedback)return String(row.feedback);
+  if(row.message)return String(row.message);
+  if(row.guidance)return String(row.guidance);
   if(row.contradictionDetected)return "Foi detetada uma contradição relevante neste critério.";
   if(row.ambiguityDetected)return "A formulação ficou ambígua neste critério.";
   if(row.status==="partial")return "Este critério foi cumprido apenas em parte.";
@@ -13,6 +16,12 @@ function reasonForRow(row={}){
   if(row.note)return String(row.note);
   if(row.reason)return String(row.reason).replace(/_/g," ");
   return "A resposta não demonstrou integralmente o que este critério exigia.";
+}
+
+function requirementForRow(row={}){
+  if(row.improvementHint)return String(row.improvementHint);
+  if(row.expected)return `Era necessário demonstrar: ${row.expected}`;
+  return reasonForRow(row);
 }
 
 export function criterionPointRows(criteria=[]){
@@ -32,7 +41,8 @@ export function criterionPointRows(criteria=[]){
       awardedPoints:awarded===null?null:round1(awarded),
       maxPoints:maximum===null?null:round1(maximum),
       lostPoints:awarded===null||maximum===null?null:round1(Math.max(0,maximum-awarded)),
-      reason:reasonForRow(criterion)
+      reason:reasonForRow(criterion),
+      requirement:requirementForRow(criterion)
     };
   });
 }
@@ -48,9 +58,36 @@ export function stepPointRows(steps=[]){
       awardedPoints:round1(awarded),
       maxPoints:round1(maximum),
       lostPoints:round1(Math.max(0,maximum-awarded)),
-      reason:reasonForRow(step)
+      reason:reasonForRow(step),
+      requirement:requirementForRow(step)
     };
   });
+}
+
+function buildStudentSummary({awarded,maximum,lost,reasons,rows,requiresReview,consistencyError}){
+  const fullCreditRows=rows.filter(row=>finite(row.maxPoints)&&Number(row.maxPoints)>0&&finite(row.awardedPoints)&&Number(row.awardedPoints)>=Number(row.maxPoints)-0.05);
+  const partialRows=rows.filter(row=>finite(row.lostPoints)&&Number(row.lostPoints)>0&&finite(row.awardedPoints)&&Number(row.awardedPoints)>0);
+  const missingRows=reasons.filter(row=>row.id!=="global-penalty");
+  const scoreLine=awarded!==null&&maximum!==null
+    ?`${requiresReview?"Pontuação provisória":"Pontuação"}: ${String(awarded).replace(".",",")} / ${String(maximum).replace(".",",")} pontos.`
+    :null;
+  let fullCreditMessage=null;
+  if(consistencyError){
+    fullCreditMessage="A app não consegue justificar de forma segura toda a diferença de pontuação; esta resposta deve ser revista.";
+  }else if(lost>0&&missingRows.length===1){
+    fullCreditMessage=`Para teres a pontuação completa, faltava ${missingRows[0].label.toLocaleLowerCase("pt-PT")}: ${missingRows[0].requirement||missingRows[0].reason}`;
+  }else if(lost>0&&missingRows.length>1){
+    fullCreditMessage=`Para teres a pontuação completa, precisavas de cumprir integralmente ${missingRows.map(row=>row.label).join("; ")}.`;
+  }else if(lost>0&&reasons.some(row=>row.id==="global-penalty")){
+    fullCreditMessage="A resposta cumpriu os critérios principais, mas sofreu uma desvalorização global prevista nos critérios.";
+  }
+  return {
+    scoreLine,
+    fullCreditMessage,
+    strengths:fullCreditRows.map(row=>({id:row.id,label:row.label,points:row.awardedPoints})),
+    partialSuccesses:partialRows.map(row=>({id:row.id,label:row.label,awardedPoints:row.awardedPoints,maxPoints:row.maxPoints})),
+    missingForFullCredit:missingRows.map(row=>({id:row.id,label:row.label,lostPoints:row.lostPoints,reason:row.reason,requirement:row.requirement||row.reason}))
+  };
 }
 
 export function buildScoreExplainability({awardedPoints,maxPoints,criteria=[],steps=[],globalPenalty=0,globalPenaltyReason=null,requiresReview=false}={}){
@@ -64,12 +101,15 @@ export function buildScoreExplainability({awardedPoints,maxPoints,criteria=[],st
   const unexplained=lost!==null&&lost>0&&rowLoss+penalty+0.11<lost;
   const inconsistentFullCriteria=lost!==null&&lost>0&&allSolid&&penalty===0;
   const reasons=rows.filter(row=>finite(row.lostPoints)&&Number(row.lostPoints)>0);
-  if(penalty>0)reasons.push({id:"global-penalty",label:"Desvalorização global",awardedPoints:null,maxPoints:null,lostPoints:penalty,reason:globalPenaltyReason||"Foi aplicada uma desvalorização global prevista pelos critérios."});
+  if(penalty>0)reasons.push({id:"global-penalty",label:"Desvalorização global",awardedPoints:null,maxPoints:null,lostPoints:penalty,reason:globalPenaltyReason||"Foi aplicada uma desvalorização global prevista pelos critérios.",requirement:globalPenaltyReason||"Evitar a situação que origina esta desvalorização global."});
+  const review=!!requiresReview||unexplained||inconsistentFullCriteria;
+  const consistencyError=inconsistentFullCriteria?"ALL_CRITERIA_SOLID_BUT_SCORE_BELOW_MAX":unexplained?"UNEXPLAINED_POINT_LOSS":null;
   return {
     schema:SCORE_EXPLAINABILITY_SCHEMA,
     awardedPoints:awarded,maxPoints:maximum,lostPoints:lost,rows,reasons,
-    requiresReview:!!requiresReview||unexplained||inconsistentFullCriteria,
+    requiresReview:review,
     explainable:lost===null||lost===0||(!unexplained&&!inconsistentFullCriteria&&reasons.length>0),
-    consistencyError:inconsistentFullCriteria?"ALL_CRITERIA_SOLID_BUT_SCORE_BELOW_MAX":unexplained?"UNEXPLAINED_POINT_LOSS":null
+    consistencyError,
+    studentSummary:buildStudentSummary({awarded,maximum,lost,reasons,rows,requiresReview:review,consistencyError})
   };
 }
