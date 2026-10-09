@@ -1,4 +1,3 @@
-
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import {
@@ -149,4 +148,30 @@ assert.ok(cloudSource.includes('.eq("revision",Number(expectedRevision)||0)'),"S
 assert.ok(cloudSource.includes("knownRemote"),"Revision 0 deixou de distinguir primeira gravação de base remota conhecida.");
 assert.ok(cloudSource.includes("CLOUD_SCHEMA_OUTDATED"),"Cloud deixou de bloquear sync quando a migration de revisões não está aplicada.");
 
-console.log("✓ cloud reliability: revisions, conflict detection, snapshots and safe activity merge validated");
+// Security contract: the browser Data API is authenticated with the app session JWT.
+assert.ok(cloudSource.includes('fetch("/api/auth/token"'),"Data API deixou de obter o JWT pela sessão da app.");
+assert.ok(cloudSource.includes('credentials:"include"'),"Pedido do token deixou de enviar a sessão autenticada.");
+assert.ok(cloudSource.includes("getToken:currentDataApiJwt"),"Data API deixou de exigir o JWT atual.");
+
+// Every student row is derived from the authenticated session, never from caller state/input.
+assert.ok(cloudSource.includes("auth_user_id:session.user.id"),"Escrita cloud deixou de fixar auth_user_id ao utilizador autenticado.");
+assert.ok(cloudSource.includes('.eq("auth_user_id",session.user.id)'),"Leitura/escrita cloud perdeu o filtro pelo utilizador autenticado.");
+assert.ok(cloudSource.includes("currentRemoteRow(client,session.user.id)"),"Verificação de revisão remota deixou de usar o utilizador autenticado.");
+assert.ok(!/auth_user_id\s*:\s*s(?:\.|\[)/.test(cloudSource),"auth_user_id passou a poder vir do estado controlado pelo cliente.");
+
+// The cloud payload is an explicit allowlist. Identity/session/control metadata stays device-local.
+const payloadStart=cloudSource.indexOf("export function studentStateForCloud");
+const payloadEnd=cloudSource.indexOf("export function mergeStudentCloudState");
+assert.ok(payloadStart>=0 && payloadEnd>payloadStart,"Não foi possível localizar a allowlist do estado cloud.");
+const payloadSource=cloudSource.slice(payloadStart,payloadEnd);
+for(const forbidden of ["password","identity","cloudMeta","cloudSync","authUserId"]){
+  assert.ok(!payloadSource.includes(forbidden),`Payload cloud passou a incluir campo proibido: ${forbidden}.`);
+}
+assert.ok(payloadSource.includes('schema:"aplus-student-state-v8"'),"Payload cloud perdeu a versão explícita de schema.");
+
+// Direct Data API mutations must remain scoped; adding DELETE requires an explicit security review.
+const tableUses=(cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length;
+assert.ok(tableUses>=4,"Cobertura esperada das operações de student_cloud_state diminuiu inesperadamente.");
+assert.ok(!cloudSource.includes('.from("student_cloud_state").delete('),"DELETE direto de progresso exige revisão explícita de segurança.");
+
+console.log("✓ cloud reliability/security: revisions, conflicts, JWT auth, row scoping and payload allowlist validated");
