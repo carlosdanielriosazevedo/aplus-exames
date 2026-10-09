@@ -1,10 +1,32 @@
 import {canonicalSubjectId} from "./subjectWorkspace.js";
 import {missionCompletedToday,recordStudyActivity} from "./engagement.js";
 import {recordCompetitiveActivity} from "./competition.js";
-import {recordErrorPatternEvidence,normalizeErrorPatterns} from "./recurringErrorMemory.js";
 
 const MODEL_VERSION=4;
 const MAX_SESSIONS=100;
+
+function normalizeErrorPatterns(patterns={}){
+  if(!patterns||typeof patterns!=="object"||Array.isArray(patterns))return {};
+  return Object.fromEntries(Object.entries(patterns).map(([key,row])=>[key,{
+    ...row,
+    key,
+    code:row?.code||key.split("|").at(-1),
+    scope:row?.scope||key.split("|")[0]||"general",
+    label:row?.label||"Aspeto a melhorar",
+    message:row?.message||"Este aspeto tem aparecido mais do que uma vez.",
+    count:Number(row?.count)||0,
+    firstAt:row?.firstAt||null,
+    lastAt:row?.lastAt||null,
+    itemIds:[...new Set(Array.isArray(row?.itemIds)?row.itemIds.filter(Boolean):[])].slice(-12),
+    recoveryEvidence:Number(row?.recoveryEvidence)||0,
+    status:row?.status||"observed"
+  }]));
+}
+
+function recordErrorPatternEvidence(patterns,item,result,at){
+  const recorder=globalThis.__aplusRecordErrorPatternEvidence;
+  return typeof recorder==="function"?recorder(patterns,item,result,at):normalizeErrorPatterns(patterns);
+}
 
 function normalizeCompetenceRow(row){
   const source=row&&typeof row==="object"?row:{};
