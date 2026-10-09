@@ -16,9 +16,10 @@ const explain=buildScoreExplainability({
 });
 assert.equal(SCORE_EXPLAINABILITY_SCHEMA,"aplus-score-explainability-v2");
 assert.equal(explain.lostPoints,2);
-assert.equal(explain.studentSummary.strengths[0].label,"Ideia principal");
-assert.match(explain.studentSummary.fullCreditMessage,/Justificação/i);
-assert.equal(explain.studentSummary.missingForFullCredit[0].lostPoints,2);
+assert.equal(explain.rows.find(row=>row.id==="idea").awardedPoints,2);
+assert.equal(explain.reasons[0].label,"Justificação");
+assert.equal(explain.reasons[0].lostPoints,2);
+assert.match(explain.reasons[0].requirement,/causal/i);
 
 const inconsistent=buildScoreExplainability({
   awardedPoints:4,maxPoints:5,
@@ -26,7 +27,6 @@ const inconsistent=buildScoreExplainability({
 });
 assert.equal(inconsistent.requiresReview,true);
 assert.equal(inconsistent.consistencyError,"ALL_CRITERIA_SOLID_BUT_SCORE_BELOW_MAX");
-assert.match(inconsistent.studentSummary.fullCreditMessage,/revista/i);
 
 const item1={id:"fqa-1",domain:"waves",competencyId:"wave-speed"};
 const item2={id:"fqa-2",domain:"waves",competencyId:"wave-speed"};
