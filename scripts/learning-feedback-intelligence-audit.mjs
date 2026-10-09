@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import "../app/lib/recurringErrorRuntime.js";
 import {buildScoreExplainability,SCORE_EXPLAINABILITY_SCHEMA} from "../app/lib/scoreExplainability.js";
 import {recordErrorPatternEvidence,recurringErrorPatterns,extractErrorSignals} from "../app/lib/recurringErrorMemory.js";
 import {recordSubjectSession,subjectProgressFor} from "../app/lib/subjectProgress.js";
