@@ -44,8 +44,8 @@ jobs:
       - name: Score explainability
         run: node scripts/score-explainability-audit.mjs
 
-      - name: Learning feedback intelligence
-        run: node scripts/learning-feedback-intelligence-audit.mjs
+      - name: Learning feedback quality
+        run: node scripts/learning-feedback-quality-audit.mjs
 
       - name: Strict observed classification
         run: node scripts/fqa-observed-threshold-audit.mjs
