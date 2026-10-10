@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {randomBytes} from "node:crypto";
 import {performance} from "node:perf_hooks";
 import {neon} from "@neondatabase/serverless";
 import {createClient} from "@neondatabase/neon-js";
@@ -10,8 +11,13 @@ const required=name=>{
 };
 
 const baseUrl=required("SMOKE_BASE_URL").replace(/\/$/,"");
-const email=required("SMOKE_TEST_EMAIL");
-const password=required("SMOKE_TEST_PASSWORD");
+const ephemeral=process.env.SMOKE_EPHEMERAL_SIGNUP==="true";
+const email=ephemeral
+  ? `pilot-smoke-${Date.now()}-${randomBytes(4).toString("hex")}@example.com`
+  : required("SMOKE_TEST_EMAIL");
+const password=ephemeral
+  ? `S!${randomBytes(24).toString("base64url")}`
+  : required("SMOKE_TEST_PASSWORD");
 const databaseUrl=required("SMOKE_DATABASE_URL");
 const dataApiUrl=required("SMOKE_DATA_API_URL");
 const retentionUntil=required("SMOKE_RETENTION_UNTIL");
@@ -57,6 +63,22 @@ const health=await jsonOrText(healthResponse);
 assert.equal(healthResponse.status,200,"/api/health must return 200");
 assert.equal(health.backendReachable,true,"Smoke deployment must reach its Neon branch");
 assert.ok(Number(health.schemaVersion)>=8,`Expected schemaVersion >= 8, got ${health.schemaVersion}`);
+
+if(ephemeral){
+  const signupResponse=await appFetch("/api/auth/sign-up/email",{
+    method:"POST",
+    headers:{"content-type":"application/json"},
+    body:JSON.stringify({name:"Pilot Smoke",email,password})
+  });
+  const signupBody=await jsonOrText(signupResponse);
+  assert.ok(signupResponse.ok,`Ephemeral smoke signup failed (${signupResponse.status}): ${JSON.stringify(signupBody)}`);
+  // Force the next operation to prove password login rather than reusing the signup session.
+  cookies.clear();
+  if(shareToken){
+    const entrance=await appFetch(`/?_vercel_share=${encodeURIComponent(shareToken)}`);
+    assert.ok(entrance.status>=200&&entrance.status<400,`Preview protection re-handshake failed: ${entrance.status}`);
+  }
+}
 
 const loginStart=performance.now();
 const loginResponse=await appFetch("/api/auth/sign-in/email",{
@@ -199,5 +221,6 @@ console.log(JSON.stringify({
   timingsMs:{login:Number(loginMs.toFixed(1)),cloudSave:Number(cloudSaveMs.toFixed(1)),pilotSync:Number(syncMs.toFixed(1))},
   testAccountExcluded:true,
   erasureVerified:true,
-  consentGateVerified:true
+  consentGateVerified:true,
+  ephemeralAuthUserId:ephemeral?session.user.id:null
 }));
