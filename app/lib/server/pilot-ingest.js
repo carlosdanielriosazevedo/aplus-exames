@@ -53,9 +53,14 @@ export async function resolvePilotUser(authUserId){
   if(!databaseConfigured())return null;
   const sql=getSql();
   const rows=await sql`
-    select id,auth_user_id,is_test_account
-    from app_users
-    where auth_user_id=${authUserId}
+    select
+      u.id,
+      u.auth_user_id,
+      exists(
+        select 1 from pilot_test_accounts t where t.student_user_id=u.id
+      ) as is_test_account
+    from app_users u
+    where u.auth_user_id=${authUserId}
     limit 1
   `;
   return rows[0]||null;
