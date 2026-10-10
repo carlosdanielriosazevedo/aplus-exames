@@ -83,6 +83,48 @@ on conflict (singleton) do update set
   migration_name=excluded.migration_name,
   updated_at=excluded.updated_at;
 
+-- Elimina apenas dados do piloto e consentimentos do próprio utilizador.
+-- A conta, progresso escolar e restante estado cloud não são removidos.
+create or replace function delete_own_pilot_data(p_auth_user_id text)
+returns jsonb
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare
+  target_id uuid;
+  n_aggregates integer := 0;
+  n_items integer := 0;
+  n_feedback integer := 0;
+  n_consents integer := 0;
+begin
+  select id into target_id from app_users where auth_user_id=p_auth_user_id limit 1;
+  if target_id is null then
+    return jsonb_build_object('aggregates',0,'itemResults',0,'feedback',0,'consents',0);
+  end if;
+
+  delete from pilot_event_aggregates where student_user_id=target_id;
+  get diagnostics n_aggregates = row_count;
+  delete from pilot_item_results where student_user_id=target_id;
+  get diagnostics n_items = row_count;
+  delete from pilot_feedback where student_user_id=target_id;
+  get diagnostics n_feedback = row_count;
+  delete from consent_records where student_user_id=target_id;
+  get diagnostics n_consents = row_count;
+
+  return jsonb_build_object(
+    'aggregates',n_aggregates,
+    'itemResults',n_items,
+    'feedback',n_feedback,
+    'consents',n_consents
+  );
+end;
+$$;
+
+revoke all on function delete_own_pilot_data(text) from public;
+revoke all on function delete_own_pilot_data(text) from anonymous;
+revoke all on function delete_own_pilot_data(text) from authenticated;
+
 -- RLS: mesmo princípio da migration 007. O browser nunca escreve diretamente
 -- consentimento ou telemetria; mutações passam exclusivamente por endpoints server-side.
 alter table consent_records enable row level security;
