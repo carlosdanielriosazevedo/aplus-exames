@@ -107,7 +107,8 @@ assert.deepEqual([...new Set(missing)],[],`Tabelas server-side sem migration ati
 // Migration 008: prova estática das fronteiras RLS e dos invariantes do piloto.
 const pilotMigration=readFileSync(new URL("../db/migrations/008_pilot_telemetry_consent.sql",import.meta.url),"utf8");
 const pilotIngest=readFileSync(new URL("../app/lib/server/pilot-ingest.js",import.meta.url),"utf8");
-const pilotTables=["consent_records","pilot_event_aggregates","pilot_item_results","pilot_feedback","app_schema_meta"];
+const pilotData=readFileSync(new URL("../app/lib/server/pilot-data.js",import.meta.url),"utf8");
+const pilotTables=["consent_records","pilot_event_aggregates","pilot_item_results","pilot_feedback","pilot_test_accounts","app_schema_meta"];
 for(const table of pilotTables){
   assert.match(pilotMigration,new RegExp(`alter table ${table} enable row level security`,"u"),`${table}: RLS obrigatório.`);
   assert.match(pilotMigration,new RegExp(`revoke all on table ${table} from anonymous`,"u"),`${table}: anonymous tem de ficar revogado.`);
@@ -116,10 +117,18 @@ assert.match(pilotMigration,/subject text not null default 'all'/u,"subject dos 
 assert.match(pilotMigration,/unique index[\s\S]*consent_records\(student_user_id,consent_type\)[\s\S]*where revoked_at is null/u,"Consentimento ativo precisa de índice único parcial.");
 assert.match(pilotMigration,/consent_type in \('pilot_self','pilot_minor'\)/u,"Schema tem de suportar pilot_self e pilot_minor sem decidir qual se aplica.");
 assert.match(pilotMigration,/references app_users\(id\) on delete cascade/u,"Dados do piloto têm de acompanhar apagamento do utilizador.");
-assert.match(pilotMigration,/is_test_account boolean not null default false/u,"Contas de smoke têm de ser marcáveis.");
+assert.match(pilotMigration,/create table if not exists pilot_test_accounts/u,"Contas de smoke precisam de marcador server-only dedicado.");
+assert.match(pilotMigration,/revoke all on table pilot_test_accounts from authenticated/u,"O browser autenticado não pode auto-marcar uma conta de teste.");
+assert.doesNotMatch(pilotMigration,/alter table app_users[\s\S]*is_test_account/iu,"Marcador de teste não pode ficar numa linha self-service de app_users.");
+assert.match(pilotMigration,/create or replace function delete_own_pilot_data/u,"A migration tem de disponibilizar apagamento do piloto server-side.");
+for(const role of ["public","anonymous","authenticated"]){
+  assert.match(pilotMigration,new RegExp(`revoke all on function delete_own_pilot_data\\(text\\) from ${role}`,"u"),`delete_own_pilot_data não pode ser invocada diretamente por ${role}.`);
+}
+assert.match(pilotData,/select delete_own_pilot_data\(/u,"O endpoint de apagamento tem de passar pela função server-only.");
+assert.match(pilotIngest,/from pilot_test_accounts/u,"O ingest tem de resolver a marca de teste na tabela server-only.");
 assert.match(pilotIngest,/greatest\(pilot_event_aggregates\.total_count,excluded\.total_count\)/u,"Agregados têm de aceitar totais absolutos com GREATEST, nunca deltas.");
 assert.match(pilotIngest,/greatest\(pilot_event_aggregates\.total_seconds,excluded\.total_seconds\)/u,"Tempo agregado tem de usar GREATEST.");
 assert.match(pilotIngest,/if\(user\.is_test_account\)return/u,"Contas de teste têm de ser excluídas das métricas.");
 assert.doesNotMatch(pilotIngest,/answer|response_text|student_answer/iu,"Telemetria por item não pode persistir texto de resposta.");
 
-console.log("✓ cloud reliability/security: revisions, conflicts, JWT auth, final migration table coverage, pilot RLS and minimal telemetry validated");
+console.log("✓ cloud reliability/security: revisions, conflicts, JWT auth, final migration table coverage, pilot RLS, server-only test markers and minimal telemetry validated");
