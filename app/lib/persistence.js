@@ -4,10 +4,16 @@ export const APP_STATE_VERSION=31;
 
 const PILOT_SYNC_DEBOUNCE_MS=4_000;
 const PILOT_SYNC_RETRY_MS=60_000;
+const PILOT_SUBJECTS=new Set(["all","math-a","portuguese","physics-chemistry-a"]);
 let pilotSyncTimer=null;
 let pilotSyncInFlight=false;
 let pilotSyncLastSignature=null;
 let pilotSyncRetryAfter=0;
+
+function pilotSubject(value){
+  const subject=String(value||"all");
+  return PILOT_SUBJECTS.has(subject)?subject:"all";
+}
 
 function withoutLegacyBetaQueues(state){
   if(!state||typeof state!=="object")return state;
@@ -99,7 +105,7 @@ export function buildSyncEnvelope(state){
     aggregates:(state.pilotAggregates||[]).map(row=>({
       date:row.date,
       type:row.type,
-      subject:row.subject||"all",
+      subject:pilotSubject(row.subject),
       totalCount:Number(row.totalCount)||0,
       totalSeconds:Number(row.totalSeconds)||0
     })),
@@ -109,12 +115,12 @@ export function buildSyncEnvelope(state){
       outcome:row.outcome,
       seconds:Number(row.seconds)||0,
       date:row.date,
-      subject:row.subject||"all"
+      subject:pilotSubject(row.subject)
     })),
     feedback:(state.betaFeedback||[]).map(row=>({
       id:row.id,
-      type:row.kind||row.type||"general",
-      subject:row.subject||"all",
+      type:"general",
+      subject:pilotSubject(row.subject),
       rating:row.rating??row.usefulness??null,
       comment:row.comment||null,
       at:row.at
@@ -137,6 +143,7 @@ export async function syncStateToBackend(state){
   try{
     const r=await fetch("/api/pilot/sync",{
       method:"POST",
+      credentials:"include",
       headers:{"content-type":"application/json"},
       body:JSON.stringify(payload)
     });
