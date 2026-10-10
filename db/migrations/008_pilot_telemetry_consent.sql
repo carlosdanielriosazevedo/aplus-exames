@@ -1,6 +1,11 @@
 -- APProva+ v5.7 — consentimento e telemetria mínima do piloto
 -- A escolha entre pilot_self e pilot_minor é uma decisão de produto/jurídica,
 -- não uma inferência automática da base de dados.
+--
+-- Nota operacional: este ficheiro contém uma função PL/pgSQL delimitada por $$.
+-- O helper prepare_database_migration da Neon divide SQL de forma incompatível com
+-- esse corpo e pode acusar "unterminated dollar-quoted string". Para validação e
+-- promoção desta migration, aplicar ESTE ficheiro verbatim com psql -v ON_ERROR_STOP=1 -f.
 
 create table if not exists consent_records (
   id uuid primary key default gen_random_uuid(),
@@ -11,6 +16,7 @@ create table if not exists consent_records (
   granted_at timestamptz not null default now(),
   revoked_at timestamptz,
   retention_until timestamptz not null,
+  is_test boolean not null default false,
   created_at timestamptz not null default now(),
   check (revoked_at is null or revoked_at >= granted_at)
 );
@@ -29,49 +35,68 @@ create table if not exists pilot_event_aggregates (
     'mini_exam_completed','full_exam_completed','review_opened',
     'onboarding_started','onboarding_completed','onboarding_abandoned'
   )),
-  subject text not null default 'all',
+  subject text not null default 'all' check (subject in ('all','math-a','portuguese','physics-chemistry-a')),
   total_count integer not null default 0 check (total_count >= 0),
-  total_seconds integer not null default 0 check (total_seconds >= 0),
+  total_seconds integer not null default 0 check (total_seconds between 0 and 86400),
   retention_until timestamptz not null,
+  is_test boolean not null default false,
   updated_at timestamptz not null default now(),
   primary key (student_user_id,period_date,event_type,subject)
 );
+create index if not exists idx_pilot_event_metrics
+  on pilot_event_aggregates(period_date,event_type,subject)
+  where is_test=false;
 
 create table if not exists pilot_item_results (
   student_user_id uuid not null references app_users(id) on delete cascade,
   external_id text not null,
-  item_id text not null,
+  item_id text not null check (item_id ~ '^[A-Za-z0-9][A-Za-z0-9:_./-]{0,159}$'),
   outcome text not null check (outcome in ('correct','partial','incorrect','skipped')),
-  seconds integer not null default 0 check (seconds >= 0),
+  seconds integer not null default 0 check (seconds between 0 and 86400),
   occurred_on date not null,
-  subject text not null default 'all',
+  subject text not null default 'all' check (subject in ('all','math-a','portuguese','physics-chemistry-a')),
   retention_until timestamptz not null,
+  is_test boolean not null default false,
   created_at timestamptz not null default now(),
   primary key (student_user_id,external_id)
 );
 create index if not exists idx_pilot_item_results_date
   on pilot_item_results(student_user_id,occurred_on,subject,item_id);
+create index if not exists idx_pilot_item_metrics
+  on pilot_item_results(occurred_on,subject,item_id,outcome)
+  where is_test=false;
 
 create table if not exists pilot_feedback (
   id uuid primary key default gen_random_uuid(),
   student_user_id uuid not null references app_users(id) on delete cascade,
   external_id text not null,
-  feedback_type text not null,
-  subject text not null default 'all',
+  feedback_type text not null check (feedback_type in ('general','clarity','difficulty','usefulness','bug','other')),
+  subject text not null default 'all' check (subject in ('all','math-a','portuguese','physics-chemistry-a')),
   rating smallint check (rating between 1 and 5),
   comment text check (comment is null or char_length(comment) <= 2000),
   occurred_at timestamptz not null,
   retention_until timestamptz not null,
+  is_test boolean not null default false,
   received_at timestamptz not null default now(),
   unique(student_user_id,external_id)
 );
+create index if not exists idx_pilot_feedback_metrics
+  on pilot_feedback(received_at,subject,feedback_type)
+  where is_test=false;
 
--- Marcador server-only. Nunca colocar este estado em app_users/student_profiles,
--- porque essas linhas são atualizáveis pelo próprio utilizador através da Data API.
+-- Marcador server-only das contas usadas nos smoke tests.
 create table if not exists pilot_test_accounts (
   student_user_id uuid primary key references app_users(id) on delete cascade,
   label text,
   created_at timestamptz not null default now()
+);
+
+-- Rate limit persistente: funciona mesmo com várias Functions/serverless instances.
+create table if not exists pilot_sync_rate_limits (
+  student_user_id uuid primary key references app_users(id) on delete cascade,
+  window_started_at timestamptz not null default now(),
+  request_count integer not null default 0 check (request_count >= 0),
+  updated_at timestamptz not null default now()
 );
 
 create table if not exists app_schema_meta (
@@ -88,8 +113,8 @@ on conflict (singleton) do update set
   migration_name=excluded.migration_name,
   updated_at=excluded.updated_at;
 
--- Elimina apenas dados do piloto e consentimentos do próprio utilizador.
--- A conta, progresso escolar e marcador server-only de teste permanecem.
+-- Apaga os dados do piloto do próprio utilizador e revoga, mas não destrói,
+-- o registo de consentimento. Isto preserva prova de granted_at/policy_version/revogação.
 create or replace function delete_own_pilot_data(p_auth_user_id text)
 returns jsonb
 language plpgsql
@@ -105,7 +130,7 @@ declare
 begin
   select id into target_id from app_users where auth_user_id=p_auth_user_id limit 1;
   if target_id is null then
-    return jsonb_build_object('aggregates',0,'itemResults',0,'feedback',0,'consents',0);
+    return jsonb_build_object('aggregates',0,'itemResults',0,'feedback',0,'consentsRevoked',0);
   end if;
 
   delete from pilot_event_aggregates where student_user_id=target_id;
@@ -114,14 +139,17 @@ begin
   get diagnostics n_items = row_count;
   delete from pilot_feedback where student_user_id=target_id;
   get diagnostics n_feedback = row_count;
-  delete from consent_records where student_user_id=target_id;
+  update consent_records
+    set revoked_at=coalesce(revoked_at,now())
+    where student_user_id=target_id and revoked_at is null;
   get diagnostics n_consents = row_count;
+  delete from pilot_sync_rate_limits where student_user_id=target_id;
 
   return jsonb_build_object(
     'aggregates',n_aggregates,
     'itemResults',n_items,
     'feedback',n_feedback,
-    'consents',n_consents
+    'consentsRevoked',n_consents
   );
 end;
 $$;
@@ -130,13 +158,14 @@ revoke all on function delete_own_pilot_data(text) from public;
 revoke all on function delete_own_pilot_data(text) from anonymous;
 revoke all on function delete_own_pilot_data(text) from authenticated;
 
--- RLS: mesmo princípio da migration 007. O browser nunca escreve diretamente
--- consentimento, telemetria nem o marcador das contas de smoke.
+-- RLS: mesmo princípio da migration 007. O browser não escreve diretamente
+-- consentimento, telemetria, marcadores de teste ou estado de rate limit.
 alter table consent_records enable row level security;
 alter table pilot_event_aggregates enable row level security;
 alter table pilot_item_results enable row level security;
 alter table pilot_feedback enable row level security;
 alter table pilot_test_accounts enable row level security;
+alter table pilot_sync_rate_limits enable row level security;
 alter table app_schema_meta enable row level security;
 
 revoke all on table consent_records from anonymous;
@@ -144,6 +173,7 @@ revoke all on table pilot_event_aggregates from anonymous;
 revoke all on table pilot_item_results from anonymous;
 revoke all on table pilot_feedback from anonymous;
 revoke all on table pilot_test_accounts from anonymous;
+revoke all on table pilot_sync_rate_limits from anonymous;
 revoke all on table app_schema_meta from anonymous;
 
 revoke insert,update,delete on table consent_records from authenticated;
@@ -151,6 +181,7 @@ revoke insert,update,delete on table pilot_event_aggregates from authenticated;
 revoke insert,update,delete on table pilot_item_results from authenticated;
 revoke insert,update,delete on table pilot_feedback from authenticated;
 revoke all on table pilot_test_accounts from authenticated;
+revoke all on table pilot_sync_rate_limits from authenticated;
 revoke insert,update,delete on table app_schema_meta from authenticated;
 
 grant select on table consent_records to authenticated;
