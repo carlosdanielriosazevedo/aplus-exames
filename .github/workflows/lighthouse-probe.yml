@@ -1,0 +1,39 @@
+name: Lighthouse Probe
+
+on:
+  push:
+    branches: [perf/lighthouse-probe]
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install probe dependencies
+        run: npm install --no-save --ignore-scripts lighthouse@12.8.2 chrome-launcher@1.0.0 puppeteer-core@24.4.0
+      - name: Locate Chrome
+        run: |
+          which google-chrome || which google-chrome-stable || which chromium || which chromium-browser
+      - name: Cold first visit — 7 runs
+        env:
+          PROBE_URL: https://aplus-exames.vercel.app/
+          PROBE_RUNS: '7'
+          PROBE_SCENARIO: cold
+          PROBE_OUT: lighthouse-probe
+        run: node scripts/lighthouse-probe.mjs
+      - name: Return visit with saved session — 7 runs
+        env:
+          PROBE_URL: https://aplus-exames.vercel.app/
+          PROBE_RUNS: '7'
+          PROBE_SCENARIO: return
+          PROBE_OUT: lighthouse-probe
+        run: node scripts/lighthouse-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-production-probe
+          path: lighthouse-probe/
