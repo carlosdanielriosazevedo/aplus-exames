@@ -7,6 +7,11 @@ on:
         description: Deployment URL to smoke-test
         required: true
         type: string
+      ephemeral_signup:
+        description: Create an ephemeral account inside the smoke process (preview validation only)
+        required: false
+        default: false
+        type: boolean
   deployment_status:
 
 jobs:
@@ -34,6 +39,7 @@ jobs:
         run: node scripts/post-deploy-smoke.mjs
         env:
           SMOKE_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || github.event.deployment_status.environment_url }}
+          SMOKE_EPHEMERAL_SIGNUP: ${{ github.event_name == 'workflow_dispatch' && inputs.ephemeral_signup || 'false' }}
           SMOKE_TEST_EMAIL: ${{ secrets.PILOT_SMOKE_EMAIL }}
           SMOKE_TEST_PASSWORD: ${{ secrets.PILOT_SMOKE_PASSWORD }}
           SMOKE_DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
