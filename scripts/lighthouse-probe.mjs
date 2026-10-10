@@ -43,9 +43,11 @@ function summarize(lhr){
     || findNode(lhr.audits['lcp-breakdown-insight']);
   const reqs=lhr.audits['network-requests']?.details?.items || [];
   const navStart=Math.min(...reqs.map(r=>r.networkRequestTime??r.startTime??Infinity));
+  // Lighthouse networkRequestTime/networkEndTime are already milliseconds on the
+  // same navigation timeline used by the LCP numericValue. Keep the units intact.
   const normalized=reqs.map(r=>{
-    const start=((r.networkRequestTime??r.startTime??navStart)-navStart)*1000;
-    const end=((r.networkEndTime??r.endTime??r.networkRequestTime??navStart)-navStart)*1000;
+    const start=(r.networkRequestTime??r.startTime??navStart)-navStart;
+    const end=(r.networkEndTime??r.endTime??r.networkRequestTime??navStart)-navStart;
     return {
       url:r.url,
       resourceType:r.resourceType,
@@ -72,7 +74,16 @@ async function runOne(i){
     await page.setViewport({width:412,height:915,deviceScaleFactor:2,isMobile:true,hasTouch:true});
     await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
     if(scenario==='return'){
-      await page.evaluate(()=>localStorage.setItem('a25','{}'));
+      // A durable state that genuinely resumes a student on the Math home screen.
+      // loadLocalStateStatus merges this over the current initial state.
+      await page.evaluate(()=>localStorage.setItem('a25',JSON.stringify({
+        _stateVersion:30,
+        selectedSubjectIds:['math-a'],
+        activeSubjectId:'math-a',
+        diagnosticDone:true,
+        firstUseTourCompleted:true,
+        profile:{schoolYear:'12.º',recentGrade:'',syllabus:'most',examTiming:'thisYear',optionalTopics:[],taughtSubtopicIds:[]}
+      })));
       await page.reload({waitUntil:'domcontentloaded',timeout:60000});
     }else{
       await page.evaluate(()=>{localStorage.removeItem('a25');localStorage.removeItem('a25-friends-beta');});
