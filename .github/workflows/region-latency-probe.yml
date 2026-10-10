@@ -1,0 +1,76 @@
+name: Region latency probe
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  probe:
+    if: github.event_name == 'push' || github.head_ref == 'feature/student-first-experience-pilot-readiness'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for the Frankfurt production deployment after merge
+        if: github.event_name == 'push'
+        run: |
+          for i in $(seq 1 40); do
+            code="$(curl -L -sS -o /dev/null -w '%{http_code}' https://aplus-exames.vercel.app/favicon.ico || true)"
+            if [ "$code" = "200" ]; then exit 0; fi
+            sleep 10
+          done
+          echo 'Production did not expose the new favicon in time.' >&2
+          exit 1
+
+      - name: Measure real Neon Auth login and authenticated beta sync
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://aplus-exames.vercel.app'
+          email="aplus-region-probe-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}@example.com"
+          password="$(openssl rand -hex 24)"
+          jar="$(mktemp)"
+          signup="$(mktemp)"
+          payload='{"schema":"aplus-sync-v1","participant":{"code":"region-probe","cohort":"region-probe"},"beta":{"sessions":[],"events":[],"feedback":[]},"contentReports":[],"examHistory":[],"missionHistory":[],"editorial":{"batches":[],"overrides":{}}}'
+
+          signup_code="$(curl -sS -o "$signup" -c "$jar" -w '%{http_code}' -H 'content-type: application/json' --data "{\"name\":\"APProva Region Probe\",\"email\":\"$email\",\"password\":\"$password\"}" "$base/api/auth/sign-up/email")"
+          if [ "$signup_code" -lt 200 ] || [ "$signup_code" -ge 300 ]; then
+            echo "Sign-up failed with HTTP $signup_code" >&2
+            cat "$signup" >&2
+            exit 1
+          fi
+          user_id="$(node -e "const fs=require('fs'); const x=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); console.log(x.user?.id||x.data?.user?.id||'')" "$signup")"
+          echo "probe_user_id=$user_id" >> "$GITHUB_OUTPUT"
+          curl -sS -o /dev/null -b "$jar" -c "$jar" -X POST "$base/api/auth/sign-out" || true
+
+          : > login.txt
+          : > sync.txt
+          for i in $(seq 1 7); do
+            rm -f "$jar"; jar="$(mktemp)"
+            read -r login_code login_time < <(curl -sS -o /tmp/login-body.json -c "$jar" -w '%{http_code} %{time_total}\n' -H 'content-type: application/json' --data "{\"email\":\"$email\",\"password\":\"$password\"}" "$base/api/auth/sign-in/email")
+            test "$login_code" = "200" || { echo "Login run $i failed: HTTP $login_code" >&2; cat /tmp/login-body.json >&2; exit 1; }
+            echo "$login_time" >> login.txt
+
+            read -r sync_code sync_time < <(curl -sS -o /tmp/sync-body.json -b "$jar" -w '%{http_code} %{time_total}\n' -H 'content-type: application/json' --data "$payload" "$base/api/beta/sync")
+            test "$sync_code" = "200" || { echo "Sync run $i failed: HTTP $sync_code" >&2; cat /tmp/sync-body.json >&2; exit 1; }
+            echo "$sync_time" >> sync.txt
+            curl -sS -o /dev/null -b "$jar" -c "$jar" -X POST "$base/api/auth/sign-out" || true
+          done
+
+          node <<'NODE'
+          const fs=require('fs');
+          const values=f=>fs.readFileSync(f,'utf8').trim().split(/\s+/).map(Number).sort((a,b)=>a-b);
+          const median=a=>a[Math.floor(a.length/2)];
+          const login=values('login.txt'), sync=values('sync.txt');
+          const out={scenario:process.env.GITHUB_EVENT_NAME==='pull_request'?'before-iad1':'after-fra1',runs:7,loginMs:login.map(x=>Math.round(x*1000)),syncMs:sync.map(x=>Math.round(x*1000)),loginMedianMs:Math.round(median(login)*1000),syncMedianMs:Math.round(median(sync)*1000)};
+          fs.writeFileSync('region-latency.json',JSON.stringify(out,null,2));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`### Authenticated production latency\n\n- Scenario: **${out.scenario}**\n- Runs: **7**\n- Login median: **${out.loginMedianMs} ms**\n- /api/beta/sync median: **${out.syncMedianMs} ms**\n- Login runs: ${out.loginMs.join(', ')} ms\n- Sync runs: ${out.syncMs.join(', ')} ms\n`);
+          console.log(JSON.stringify(out));
+          NODE
+
+      - name: Upload latency result
+        uses: actions/upload-artifact@v4
+        with:
+          name: region-latency-${{ github.event_name }}-${{ github.run_id }}
+          path: region-latency.json
