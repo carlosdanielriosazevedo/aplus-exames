@@ -1,0 +1,42 @@
+name: Post-deploy smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Deployment URL to smoke-test
+        required: true
+        type: string
+  deployment_status:
+
+jobs:
+  smoke:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'deployment_status' && github.event.deployment.sha || github.sha }}
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Authenticated runtime smoke
+        run: node scripts/post-deploy-smoke.mjs
+        env:
+          SMOKE_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || github.event.deployment_status.environment_url }}
+          SMOKE_TEST_EMAIL: ${{ secrets.PILOT_SMOKE_EMAIL }}
+          SMOKE_TEST_PASSWORD: ${{ secrets.PILOT_SMOKE_PASSWORD }}
+          SMOKE_DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+          SMOKE_DATA_API_URL: ${{ secrets.PILOT_SMOKE_DATA_API_URL }}
+          SMOKE_RETENTION_UNTIL: ${{ secrets.PILOT_SMOKE_RETENTION_UNTIL }}
+          SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
