@@ -91,13 +91,13 @@ for(const url of migrationUrls){
 const CTE_ALLOWLIST=new Set(["target_user","deleted_aggregates","deleted_items","deleted_feedback","deleted_consents"]);
 const serverUrls=walk(new URL("../app/lib/server/",import.meta.url)).filter(url=>/\.(?:js|jsx|ts|tsx)$/u.test(url.pathname));
 const missing=[];
-const sqlRefRe=/\b(?:insert\s+into|update|delete\s+from|from|join)\s+(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
+const sqlRefRe=/\b(?:insert\s+into|delete\s+from|from|join)\s+(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?|\bupdate\s+(?!set\b)(?:public\.)?"?([a-zA-Z_][a-zA-Z0-9_]*)"?/giu;
 for(const url of serverUrls){
   const source=readFileSync(url,"utf8");
   const taggedBlocks=[...source.matchAll(/sql`([\s\S]*?)`/gu)].map(match=>match[1]);
   for(const block of taggedBlocks){
     for(const match of block.matchAll(sqlRefRe)){
-      const table=match[1].toLowerCase();
+      const table=(match[1]||match[2]).toLowerCase();
       if(!finalTables.has(table)&&!CTE_ALLOWLIST.has(table))missing.push(`${table} ← ${fileURLToPath(url)}`);
     }
   }
