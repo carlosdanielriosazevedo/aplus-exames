@@ -1,62 +1,74 @@
 import {describe,expect,it} from "vitest";
-import {validateSyncEnvelope} from "../../app/lib/server/beta-ingest.js";
+import {validatePilotEnvelope} from "../../app/lib/server/pilot-ingest.js";
 
 const basePayload=()=>({
-  schema:"aplus-sync-v1",
-  participant:{code:"local-test"},
-  beta:{sessions:[],events:[],feedback:[]},
-  contentReports:[],
-  examHistory:[],
-  missionHistory:[],
-  editorial:{overrides:{},batches:[]}
+  schema:"aplus-pilot-v1",
+  aggregates:[],
+  itemResults:[],
+  feedback:[]
 });
 
-describe("beta sync validation",()=>{
-  it("accepts a normal sync envelope",()=>{
+describe("pilot sync validation",()=>{
+  it("accepts absolute daily aggregates, item outcomes and feedback",()=>{
     const payload=basePayload();
-    payload.beta.events=[{id:"evt-1",at:"2026-10-09T10:00:00Z"}];
-    payload.examHistory=[{id:"exam-1",at:"2026-10-09T10:05:00Z"}];
-    expect(validateSyncEnvelope(payload)).toEqual({ok:true});
+    payload.aggregates=[{
+      date:"2026-10-10",type:"practice_completed",subject:"fqa",
+      totalCount:4,totalSeconds:1320
+    }];
+    payload.itemResults=[{
+      id:"item-result-1",itemId:"fqa-wav-001",outcome:"correct",
+      seconds:42,date:"2026-10-10",subject:"fqa"
+    }];
+    payload.feedback=[{
+      id:"feedback-1",type:"difficulty",subject:"fqa",rating:4,
+      comment:"A explicação foi clara.",at:"2026-10-10T10:00:00Z"
+    }];
+    expect(validatePilotEnvelope(payload)).toEqual({ok:true});
   });
 
   it("rejects malformed collections before ingest",()=>{
     const payload=basePayload();
-    payload.beta.events={not:"an array"};
-    expect(validateSyncEnvelope(payload)).toEqual({ok:false,code:"INVALID_BETA_EVENTS"});
+    payload.aggregates={not:"an array"};
+    expect(validatePilotEnvelope(payload)).toEqual({ok:false,code:"INVALID_COLLECTION"});
   });
 
-  it("caps the total number of database writes a single request can trigger",()=>{
+  it("requires absolute non-negative aggregate totals",()=>{
     const payload=basePayload();
-    payload.beta.events=Array.from({length:2499},(_,index)=>({id:`evt-${index}`,at:"2026-10-09T10:00:00Z"}));
-    expect(validateSyncEnvelope(payload)).toMatchObject({
-      ok:false,
-      code:"SYNC_BATCH_TOO_LARGE",
-      limit:2500
-    });
-  });
-
-  it("caps nested editorial history",()=>{
-    const payload=basePayload();
-    payload.editorial.overrides.itemA={
-      history:Array.from({length:101},()=>({at:"2026-10-09T10:00:00Z"}))
-    };
-    expect(validateSyncEnvelope(payload)).toEqual({
-      ok:false,
-      code:"EDITORIAL_HISTORY_TOO_LARGE",
-      limit:100
-    });
-  });
-
-  it("caps item ids stored in a single editorial batch",()=>{
-    const payload=basePayload();
-    payload.editorial.batches=[{
-      id:"batch-1",
-      itemIds:Array.from({length:1001},(_,index)=>`item-${index}`)
+    payload.aggregates=[{
+      date:"2026-10-10",type:"onboarding_started",subject:"all",
+      totalCount:-1,totalSeconds:0
     }];
-    expect(validateSyncEnvelope(payload)).toEqual({
-      ok:false,
-      code:"BATCH_ITEM_IDS_TOO_LARGE",
-      limit:1000
+    expect(validatePilotEnvelope(payload)).toEqual({ok:false,code:"INVALID_AGGREGATE_COUNT"});
+  });
+
+  it("caps aggregate rows per request",()=>{
+    const payload=basePayload();
+    payload.aggregates=Array.from({length:201},(_,index)=>({
+      date:"2026-10-10",type:"practice_completed",subject:`s${index}`,
+      totalCount:1,totalSeconds:1
+    }));
+    expect(validatePilotEnvelope(payload)).toEqual({
+      ok:false,code:"TOO_MANY_AGGREGATES",limit:200
+    });
+  });
+
+  it("rejects answer text by contract shape and validates item outcomes",()=>{
+    const payload=basePayload();
+    payload.itemResults=[{
+      id:"r1",itemId:"q1",outcome:"not-an-outcome",seconds:10,
+      date:"2026-10-10",subject:"math"
+    }];
+    expect(validatePilotEnvelope(payload)).toEqual({ok:false,code:"INVALID_ITEM_RESULT"});
+  });
+
+  it("caps feedback text",()=>{
+    const payload=basePayload();
+    payload.feedback=[{
+      id:"f1",type:"general",rating:5,comment:"x".repeat(2001),
+      at:"2026-10-10T10:00:00Z"
+    }];
+    expect(validatePilotEnvelope(payload)).toEqual({
+      ok:false,code:"FEEDBACK_TOO_LONG",limit:2000
     });
   });
 });
