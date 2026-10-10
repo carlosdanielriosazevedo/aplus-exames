@@ -2,9 +2,6 @@
 -- A escolha entre pilot_self e pilot_minor é uma decisão de produto/jurídica,
 -- não uma inferência automática da base de dados.
 
-alter table app_users
-  add column if not exists is_test_account boolean not null default false;
-
 create table if not exists consent_records (
   id uuid primary key default gen_random_uuid(),
   student_user_id uuid not null references app_users(id) on delete cascade,
@@ -69,6 +66,14 @@ create table if not exists pilot_feedback (
   unique(student_user_id,external_id)
 );
 
+-- Marcador server-only. Nunca colocar este estado em app_users/student_profiles,
+-- porque essas linhas são atualizáveis pelo próprio utilizador através da Data API.
+create table if not exists pilot_test_accounts (
+  student_user_id uuid primary key references app_users(id) on delete cascade,
+  label text,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists app_schema_meta (
   singleton boolean primary key default true check (singleton),
   schema_version integer not null,
@@ -84,7 +89,7 @@ on conflict (singleton) do update set
   updated_at=excluded.updated_at;
 
 -- Elimina apenas dados do piloto e consentimentos do próprio utilizador.
--- A conta, progresso escolar e restante estado cloud não são removidos.
+-- A conta, progresso escolar e marcador server-only de teste permanecem.
 create or replace function delete_own_pilot_data(p_auth_user_id text)
 returns jsonb
 language plpgsql
@@ -126,23 +131,26 @@ revoke all on function delete_own_pilot_data(text) from anonymous;
 revoke all on function delete_own_pilot_data(text) from authenticated;
 
 -- RLS: mesmo princípio da migration 007. O browser nunca escreve diretamente
--- consentimento ou telemetria; mutações passam exclusivamente por endpoints server-side.
+-- consentimento, telemetria nem o marcador das contas de smoke.
 alter table consent_records enable row level security;
 alter table pilot_event_aggregates enable row level security;
 alter table pilot_item_results enable row level security;
 alter table pilot_feedback enable row level security;
+alter table pilot_test_accounts enable row level security;
 alter table app_schema_meta enable row level security;
 
 revoke all on table consent_records from anonymous;
 revoke all on table pilot_event_aggregates from anonymous;
 revoke all on table pilot_item_results from anonymous;
 revoke all on table pilot_feedback from anonymous;
+revoke all on table pilot_test_accounts from anonymous;
 revoke all on table app_schema_meta from anonymous;
 
 revoke insert,update,delete on table consent_records from authenticated;
 revoke insert,update,delete on table pilot_event_aggregates from authenticated;
 revoke insert,update,delete on table pilot_item_results from authenticated;
 revoke insert,update,delete on table pilot_feedback from authenticated;
+revoke all on table pilot_test_accounts from authenticated;
 revoke insert,update,delete on table app_schema_meta from authenticated;
 
 grant select on table consent_records to authenticated;
