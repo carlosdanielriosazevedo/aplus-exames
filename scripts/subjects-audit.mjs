@@ -21,7 +21,8 @@ for(const subject of SECONDARY_EXAM_SUBJECTS){
   assert.ok(["11.º","12.º"].includes(subject.examYear),`${subject.id} must expose its exam year`);
 }
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
+const bootstrap=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.meta.url),"utf8");
@@ -30,6 +31,7 @@ const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubjec
 const portugueseLearn=readFileSync(new URL("../app/components/PortugueseLearnPanel.js",import.meta.url),"utf8");
 const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const globalCss=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
+assert.match(bootstrap,/preview","subjects"/,"first-visit bootstrap must hand new students directly to subject selection");
 assert.match(page,/if\(screen==="subjectOnboard"\)/);
 assert.match(page,/if\(screen==="subjectManager"\)/,"the persistent subject manager must have a guarded route");
 assert.match(page,/if\(preview==="subjects"\)/);
@@ -65,4 +67,4 @@ assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u,"the legacy Portuguese l
 assert.equal((page.match(/subjectById\("portuguese"\)/gu)||[]).length,0,"Português must not be injected manually into the subject manager");
 assert.match(analytics,/\{id:"subjects_selected",label:"Escolheu disciplinas"\}/);
 
-console.log("✓ subjects: official 2026 catalog, 3 available subjects, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded");
+console.log("✓ subjects: official 2026 catalog, 3 available subjects, lightweight first-entry handoff, shared semantic workspace, persistent switcher, legacy migration and unavailable subjects guarded");
