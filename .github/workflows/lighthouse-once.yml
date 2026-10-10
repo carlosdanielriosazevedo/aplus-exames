@@ -1,0 +1,53 @@
+name: Lighthouse production benchmark
+
+on:
+  push:
+    branches:
+      - perf/lighthouse-prod-once
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Run Lighthouse mobile 4G three times
+        env:
+          TARGET_URL: https://aplus-exames.vercel.app/
+        run: |
+          set -euo pipefail
+          for i in 1 2 3; do
+            npx --yes lighthouse@9.6.8 "$TARGET_URL" \
+              --only-categories=performance \
+              --form-factor=mobile \
+              --throttling-method=devtools \
+              --throttling.rttMs=150 \
+              --throttling.throughputKbps=1600 \
+              --throttling.cpuSlowdownMultiplier=4 \
+              --screenEmulation.mobile=true \
+              --output=json \
+              --output-path="lh-$i.json" \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage"
+          done
+
+      - name: Print metrics and medians
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const rows = [];
+          for (let i = 1; i <= 3; i++) {
+            const lhr = JSON.parse(fs.readFileSync(`lh-${i}.json`, 'utf8'));
+            const a = lhr.audits;
+            const row = {
+              run: i,
+              lcp: a['largest-contentful-paint'].numericValue,
+              tbt: a['total-blocking-time'].numericValue,
+              tti: a['interactive'].numericValue,
+              totalBytes: a['total-byte-weight'].numericValue,
+              fcp: a['first-contentful-paint'].numericValue,
+            };
+            rows.push(row);
+            console.log(`RUN ${i}: LCP=${(row.lcp/1000).toFixed(3)}s TBT=${row.tbt.toFixed(0)}ms TTI=${(row.tti/1000).toFixed(3)}s FCP=${(row.fcp/1000).toFixed(3)}s totalBytes=${Math.round(row.totalBytes/1024)}KiB`);
+          }
+          const median = key => rows.map(r => r[key]).sort((a,b)=>a-b)[1];
+          console.log(`MEDIAN: LCP=${(median('lcp')/1000).toFixed(3)}s TBT=${median('tbt').toFixed(0)}ms TTI=${(median('tti')/1000).toFixed(3)}s FCP=${(median('fcp')/1000).toFixed(3)}s totalBytes=${Math.round(median('totalBytes')/1024)}KiB`);
+          NODE
