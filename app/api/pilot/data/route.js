@@ -1,11 +1,15 @@
 import {NextResponse} from "next/server";
 import {authErrorResponse,requireSession} from "../../../lib/server/identity";
 import {deleteOwnPilotData} from "../../../lib/server/pilot-data";
+import {sameOriginRequest} from "../../../lib/server/csrf";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 
-export async function DELETE(){
+export async function DELETE(request){
+  const csrf=sameOriginRequest(request);
+  if(!csrf.ok)return NextResponse.json({ok:false,code:csrf.code},{status:403,headers:{"Cache-Control":"no-store"}});
+
   let authenticated;
   try{
     authenticated=await requireSession();
