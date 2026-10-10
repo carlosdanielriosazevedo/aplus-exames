@@ -46,9 +46,9 @@ const routeBundles=Object.fromEntries(Object.entries(routeKeys).map(([route,key]
 const routePageChunks={"/":rows.filter(row=>/^app\/page-[^/]+\.js$/.test(row.file)),"/portugues-mini-exame":rows.filter(row=>/^app\/portugues-mini-exame\/page-[^/]+\.js$/.test(row.file))};
 const routePageMetrics=Object.fromEntries(Object.entries(routePageChunks).map(([route,chunks])=>[route,{bytes:chunks.reduce((sum,row)=>sum+row.bytes,0),gzipBytes:chunks.reduce((sum,row)=>sum+row.gzipBytes,0),chunks}]));
 
-// Full-route budgets, including shared chunks. The home budget sits close to the
-// last known healthy measurement (~627 KiB) and intentionally blocks regressions.
-const budgets={"/":650*1024,"/portugues-mini-exame":500*1024};
+// Full-route budgets, including shared chunks. Keep Home below 600 KiB so the
+// initial shell has real headroom before any new visible feature is allowed in.
+const budgets={"/":600*1024,"/portugues-mini-exame":500*1024};
 
 const homeText=routeText(routeBundles["/"]);
 const homeSignatures={
