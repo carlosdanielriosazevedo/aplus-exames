@@ -1,12 +1,16 @@
 import {NextResponse} from "next/server";
 import {authErrorResponse,requireSession} from "../../../lib/server/identity";
 import {ingestPilotEnvelope,validatePilotEnvelope} from "../../../lib/server/pilot-ingest";
+import {sameOriginRequest} from "../../../lib/server/csrf";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 const MAX_BYTES=250_000;
 
 export async function POST(request){
+  const csrf=sameOriginRequest(request);
+  if(!csrf.ok)return NextResponse.json({ok:false,code:csrf.code},{status:403,headers:{"Cache-Control":"no-store"}});
+
   let authenticated;
   try{
     authenticated=await requireSession();
@@ -17,19 +21,23 @@ export async function POST(request){
 
   const raw=await request.text();
   if(Buffer.byteLength(raw,"utf8")>MAX_BYTES){
-    return NextResponse.json({ok:false,code:"PAYLOAD_TOO_LARGE"},{status:413});
+    return NextResponse.json({ok:false,code:"PAYLOAD_TOO_LARGE"},{status:413,headers:{"Cache-Control":"no-store"}});
   }
 
   let payload;
   try{payload=JSON.parse(raw)}catch{
-    return NextResponse.json({ok:false,code:"INVALID_JSON"},{status:400});
+    return NextResponse.json({ok:false,code:"INVALID_JSON"},{status:400,headers:{"Cache-Control":"no-store"}});
   }
   const valid=validatePilotEnvelope(payload);
-  if(!valid.ok)return NextResponse.json(valid,{status:400});
+  if(!valid.ok)return NextResponse.json(valid,{status:400,headers:{"Cache-Control":"no-store"}});
 
   try{
     const result=await ingestPilotEnvelope({authUserId:authenticated.authUserId,payload});
-    const status=result.ok?200:result.code==="CONSENT_REQUIRED"?403:result.code==="APP_USER_REQUIRED"?409:503;
+    const status=result.ok?200
+      :result.code==="CONSENT_REQUIRED"?403
+      :result.code==="RATE_LIMITED"?429
+      :result.code==="APP_USER_REQUIRED"?409
+      :503;
     return NextResponse.json(result,{status,headers:{"Cache-Control":"no-store"}});
   }catch(error){
     console.error("APProva+ pilot sync failed",error);
