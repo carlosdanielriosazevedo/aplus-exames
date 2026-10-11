@@ -12,6 +12,6 @@ export function pilotConsentText(){
 }
 
 export function guardianPilotText(){
-  const {email}=pilotPublicFields();
-  return `A APProva+ é uma app para ajudar alunos a preparar os exames nacionais (Matemática A, Português e Física e Química A). Estamos a testar com alguns alunos antes de a lançar. O seu educando decidiu participar. Recolhemos só dados de utilização (tempo e resultados por pergunta) e o feedback que ele escrever. Não guardamos o texto das respostas, não vendemos nem partilhamos dados e não há publicidade. Pode apagar tudo a qualquer momento. Dúvidas: ${email}.`;
+  const {responsible,email,endDate}=pilotPublicFields();
+  return `A APProva+ é uma app para ajudar alunos a preparar os exames nacionais de Matemática A, Português e Física e Química A. O piloto é voluntário e serve apenas para perceber onde a app pode ser melhorada antes do lançamento. Se o seu educando decidir participar, recolhemos os dados da conta que usar, o tempo de utilização, os resultados por pergunta (certo, parcial, errado ou não respondido), a disciplina, a data e o feedback que decidir escrever. Não guardamos o texto das respostas dadas às perguntas. Não vendemos os dados, não os usamos para publicidade e não os partilhamos para fins comerciais. O responsável pelo projeto é ${responsible}. Os dados do piloto são conservados até ${endDate}; depois são apagados ou tornados anónimos. O aluno pode retirar o consentimento sem apagar imediatamente os dados já recolhidos, ou pode pedir a eliminação dos dados do piloto. Também pode pedir uma cópia dos dados ou apresentar uma questão sobre privacidade através de ${email}.`;
 }
