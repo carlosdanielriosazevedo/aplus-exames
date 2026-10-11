@@ -1,0 +1,122 @@
+name: Post-deploy smoke
+
+on:
+  push:
+    branches:
+      - feature/pilot-readiness-ab
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Deployment URL to smoke-test
+        required: true
+        type: string
+      ephemeral_signup:
+        description: Create an ephemeral account inside the smoke process (preview validation only)
+        required: false
+        default: false
+        type: boolean
+  deployment_status:
+
+jobs:
+  smoke:
+    if: >-
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PREVIEW_BASE_URL: https://aplus-exames-git-feature-a7cbd6-carlos-rios-azevedo-s-projects.vercel.app
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'deployment_status' && github.event.deployment.sha || github.sha }}
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Wait for branch Preview to contain smoke API
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            body="$(curl -fsS --max-time 10 -H "x-vercel-protection-bypass: ${SMOKE_PROTECTION_BYPASS}" "${PREVIEW_BASE_URL}/api/health" 2>/dev/null || true)"
+            if printf '%s' "$body" | grep -q '"pilotSmokeApiVersion":1'; then
+              echo "Preview smoke API is ready."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Preview did not expose pilotSmokeApiVersion=1"
+          exit 1
+
+      - name: Authenticated runtime smoke
+        run: node scripts/post-deploy-smoke.mjs
+        env:
+          SMOKE_BASE_URL: ${{ github.event_name == 'push' && env.PREVIEW_BASE_URL || github.event_name == 'workflow_dispatch' && inputs.base_url || github.event.deployment_status.environment_url }}
+          SMOKE_EPHEMERAL_SIGNUP: ${{ github.event_name == 'push' && 'true' || github.event_name == 'workflow_dispatch' && inputs.ephemeral_signup || 'false' }}
+          SMOKE_TEST_EMAIL: ${{ secrets.PILOT_SMOKE_EMAIL }}
+          SMOKE_TEST_PASSWORD: ${{ secrets.PILOT_SMOKE_PASSWORD }}
+          SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
+
+  # Hard release gate. Runs together with the branch Preview smoke and can also be
+  # dispatched explicitly. It has privileged access only to the isolated Neon proof branch.
+  preview-schema-proof:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+      EXPECTED_DB_HOST: ep-twilight-lab-b2nohzca-pooler.c-6.eu-central-1.aws.neon.tech
+    steps:
+      - name: Checkout validated revision
+        uses: actions/checkout@v4
+
+      - name: Refuse any database except the isolated Preview branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::PILOT_SMOKE_DATABASE_URL is not configured"
+            exit 1
+          fi
+          actual_host="$(node -e 'process.stdout.write(new URL(process.env.DATABASE_URL).hostname)')"
+          if [ "$actual_host" != "$EXPECTED_DB_HOST" ]; then
+            echo "::error::Schema proof secret does not target the isolated Preview Neon branch"
+            exit 1
+          fi
+
+      - name: Pull PostgreSQL 18 client
+        run: docker pull postgres:18-alpine
+
+      - name: Apply committed 008 verbatim and compare schema dumps
+        shell: bash
+        run: |
+          set -euo pipefail
+          normalize_dump() {
+            sed -e '/^\\restrict /d' -e '/^\\unrestrict /d'
+          }
+          pg_dump_18() {
+            docker run --rm -e DATABASE_URL postgres:18-alpine sh -c 'pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges'
+          }
+          psql_18() {
+            docker run --rm -e DATABASE_URL -v "$PWD:/workspace:ro" postgres:18-alpine sh -c 'psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /workspace/db/migrations/008_pilot_telemetry_consent.sql'
+          }
+          pg_dump_18 | normalize_dump > /tmp/schema-before.sql
+          psql_18 >/tmp/migration-008.log
+          pg_dump_18 | normalize_dump > /tmp/schema-after.sql
+          if ! cmp -s /tmp/schema-before.sql /tmp/schema-after.sql; then
+            echo "::error::Migration 008 verbatim changed the validated Preview schema"
+            diff -u /tmp/schema-before.sql /tmp/schema-after.sql | head -200 || true
+            exit 1
+          fi
+          echo "Migration 008 verbatim is schema-idempotent on the validated Preview branch."

@@ -1,24 +1,66 @@
+import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
+
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
-export const APP_STATE_VERSION=30;
+export const APP_STATE_VERSION=31;
 
-const FRIENDS_SYNC_DEBOUNCE_MS=4_000;
-const FRIENDS_SYNC_RETRY_MS=60_000;
-let friendsSyncTimer=null;
-let friendsSyncInFlight=false;
-let friendsSyncLastSignature=null;
-let friendsSyncRetryAfter=0;
+const PILOT_SYNC_DEBOUNCE_MS=4_000;
+const PILOT_SYNC_RETRY_MS=60_000;
+const PILOT_SUBJECTS=new Set(["all","math-a","portuguese","physics-chemistry-a"]);
+let pilotSyncTimer=null;
+let pilotSyncInFlight=false;
+let pilotSyncLastSignature=null;
+let pilotSyncRetryAfter=0;
+
+function pilotSubject(value){
+  const subject=String(value||"all");
+  return PILOT_SUBJECTS.has(subject)?subject:"all";
+}
+
+function withoutLegacyBetaQueues(state){
+  if(!state||typeof state!=="object")return state;
+  const {betaSessions:_betaSessions,betaEvents:_betaEvents,...rest}=state;
+  return rest;
+}
+
+function withoutPilotTelemetry(state){
+  if(!state||typeof state!=="object")return state;
+  const {
+    pilotAggregates:_pilotAggregates,
+    pilotItemResults:_pilotItemResults,
+    betaFeedback:_betaFeedback,
+    betaSessions:_betaSessions,
+    betaEvents:_betaEvents,
+    ...rest
+  }=state;
+  return rest;
+}
+
+export function clearLocalPilotTelemetry(){
+  if(typeof window==="undefined")return;
+  for(const key of [STORAGE_KEY,FRIENDS_STORAGE_KEY]){
+    try{
+      const raw=localStorage.getItem(key);
+      if(!raw)continue;
+      const parsed=JSON.parse(raw);
+      localStorage.setItem(key,JSON.stringify({...withoutPilotTelemetry(parsed),_stateVersion:APP_STATE_VERSION}));
+    }catch{}
+  }
+  pilotSyncLastSignature=null;
+  pilotSyncRetryAfter=0;
+  if(pilotSyncTimer){window.clearTimeout(pilotSyncTimer);pilotSyncTimer=null}
+}
 
 export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY){
   try{
     const raw=localStorage.getItem(storageKey);
     if(!raw)return {state:null,found:false,error:false};
-    const x=JSON.parse(raw);
+    const x=withoutLegacyBetaQueues(JSON.parse(raw));
     const scores=emptyScores();
     Object.keys(scores).forEach(id=>{
       if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]};
     });
-    return {state:{...initial,...x,scores,_stateVersion:APP_STATE_VERSION},found:true,error:false};
+    return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
   }catch{
     return {state:null,found:false,error:true};
   }
@@ -28,60 +70,56 @@ export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){
   return loadLocalStateStatus(initial,emptyScores,storageKey).state;
 }
 
-function friendsBetaSyncSignature(state){
-  const sessions=state?.betaSessions||[];
-  const events=state?.betaEvents||[];
+function pilotSyncSignature(state){
+  const aggregates=state?.pilotAggregates||[];
+  const itemResults=state?.pilotItemResults||[];
   const feedback=state?.betaFeedback||[];
-  const reports=state?.contentReports||[];
-  const exams=state?.examHistory||[];
-  const missions=state?.missionHistory||[];
-  const lastSession=sessions.at(-1)||null;
-  const lastEvent=events.at(-1)||null;
+  const lastAggregate=aggregates.at(-1)||null;
+  const lastItem=itemResults.at(-1)||null;
   const lastFeedback=feedback.at(-1)||null;
   return [
-    state?.betaParticipant?.code||"",
-    sessions.length,lastSession?.id||"",lastSession?.finishedAt||"",
-    events.length,lastEvent?.id||"",
-    feedback.length,lastFeedback?.id||"",
-    reports.length,exams.length,missions.length
+    aggregates.length,lastAggregate?.date||"",lastAggregate?.type||"",lastAggregate?.totalCount??"",
+    itemResults.length,lastItem?.id||"",
+    feedback.length,lastFeedback?.id||""
   ].join("|");
 }
 
-function scheduleFriendsBetaSync(state){
-  if(typeof window==="undefined"||state?.betaMode!=="friends_beta")return;
-  if(!state?.betaParticipant?.code)return;
-  const hasTelemetry=(state.betaSessions?.length||0)+(state.betaEvents?.length||0)+(state.betaFeedback?.length||0)+(state.contentReports?.length||0)>0;
+function schedulePilotSync(state){
+  if(typeof window==="undefined"||state?.betaMode!=="friends_beta"||!pilotTelemetryAllowed())return;
+  const hasTelemetry=(state.pilotAggregates?.length||0)+(state.pilotItemResults?.length||0)+(state.betaFeedback?.length||0)>0;
   if(!hasTelemetry)return;
 
-  if(friendsSyncTimer)window.clearTimeout(friendsSyncTimer);
-  friendsSyncTimer=window.setTimeout(async()=>{
-    friendsSyncTimer=null;
-    if(friendsSyncInFlight||Date.now()<friendsSyncRetryAfter)return;
-    const signature=friendsBetaSyncSignature(state);
-    if(signature===friendsSyncLastSignature)return;
+  if(pilotSyncTimer)window.clearTimeout(pilotSyncTimer);
+  pilotSyncTimer=window.setTimeout(async()=>{
+    pilotSyncTimer=null;
+    if(pilotSyncInFlight||Date.now()<pilotSyncRetryAfter||!pilotTelemetryAllowed())return;
+    const signature=pilotSyncSignature(state);
+    if(signature===pilotSyncLastSignature)return;
 
-    friendsSyncInFlight=true;
+    pilotSyncInFlight=true;
     try{
       const result=await syncStateToBackend(state);
       if(result.ok){
-        friendsSyncLastSignature=signature;
-        friendsSyncRetryAfter=0;
+        pilotSyncLastSignature=signature;
+        pilotSyncRetryAfter=0;
       }else{
-        friendsSyncRetryAfter=Date.now()+FRIENDS_SYNC_RETRY_MS;
+        pilotSyncRetryAfter=Date.now()+PILOT_SYNC_RETRY_MS;
       }
     }catch{
-      friendsSyncRetryAfter=Date.now()+FRIENDS_SYNC_RETRY_MS;
+      pilotSyncRetryAfter=Date.now()+PILOT_SYNC_RETRY_MS;
     }finally{
-      friendsSyncInFlight=false;
+      pilotSyncInFlight=false;
     }
-  },FRIENDS_SYNC_DEBOUNCE_MS);
+  },PILOT_SYNC_DEBOUNCE_MS);
 }
 
 export function saveLocalState(state,storageKey=null){
   try{
     const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
-    localStorage.setItem(key,JSON.stringify({...state,_stateVersion:APP_STATE_VERSION}));
-    scheduleFriendsBetaSync(state);
+    const clean=withoutLegacyBetaQueues(state);
+    const persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
+    localStorage.setItem(key,JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION}));
+    schedulePilotSync(persisted);
     return true;
   }catch{
     return false;
@@ -93,54 +131,32 @@ export function clearLocalState(storageKey=STORAGE_KEY){
 }
 
 export function buildSyncEnvelope(state){
+  if(!pilotTelemetryAllowed())return {schema:"aplus-pilot-v1",aggregates:[],itemResults:[],feedback:[]};
   return {
-    schema:"aplus-sync-v1",
-    appVersion:"5.5.0",
-    exportedAt:new Date().toISOString(),
-    identity:{
-      mode:state.identity?.mode||"demo",
-      activeRole:state.identity?.activeRole||"student",
-      authUserId:state.identity?.authUserId||null
-    },
-    participant:{
-      code:state.betaParticipant?.code||null,
-      cohort:state.betaParticipant?.cohort||null,
-      schoolYear:state.profile?.schoolYear||null,
-      goal:state.goal??null,
-      selectedSubjectIds:state.selectedSubjectIds||[],
-      activeSubjectId:state.activeSubjectId||null
-    },
-    beta:{
-      mode:state.betaMode||"internal",
-      sessions:state.betaSessions||[],
-      events:state.betaEvents||[],
-      feedback:state.betaFeedback||[],
-      testerMeta:state.betaTesterMeta||null,
-      productAnalytics:state.productAnalytics||null,
-      productAnalyticsVersion:state.productAnalyticsVersion||1
-    },
-    contentReports:state.contentReports||[],
-    examHistory:state.examHistory||[],
-    missionHistory:state.missionHistory||[],
-    engagement:state.engagement||null,
-    engagementModelVersion:state.engagementModelVersion||1,
-    competition:state.competition||null,
-    competitionModelVersion:state.competitionModelVersion||1,
-    dailyMission:state.dailyMission||null,
-    dailyMissionModelVersion:state.dailyMissionModelVersion||1,
-    learningHypotheses:state.learningHypotheses||[],
-    pedagogicalMemoryVersion:state.pedagogicalMemoryVersion||2,
-    cloudSync:{
-      modelVersion:state.cloudSyncModelVersion||1,
-      baseRevision:state.cloudSync?.baseRevision??0,
-      lastRemoteRevision:state.cloudSync?.lastRemoteRevision??null,
-      pendingCount:state.cloudSync?.pendingCount??0
-    },
-    editorial:{
-      overrides:state.editorialOverrides||{},
-      batches:state.reviewBatches||[],
-      imports:state.reviewImports||[]
-    }
+    schema:"aplus-pilot-v1",
+    aggregates:(state.pilotAggregates||[]).map(row=>({
+      date:row.date,
+      type:row.type,
+      subject:pilotSubject(row.subject),
+      totalCount:Number(row.totalCount)||0,
+      totalSeconds:Number(row.totalSeconds)||0
+    })),
+    itemResults:(state.pilotItemResults||[]).map(row=>({
+      id:row.id,
+      itemId:row.itemId,
+      outcome:row.outcome,
+      seconds:Number(row.seconds)||0,
+      date:row.date,
+      subject:pilotSubject(row.subject)
+    })),
+    feedback:(state.betaFeedback||[]).map(row=>({
+      id:row.id,
+      type:"general",
+      subject:pilotSubject(row.subject),
+      rating:row.rating??row.usefulness??null,
+      comment:row.comment||null,
+      at:row.at
+    }))
   };
 }
 
@@ -155,10 +171,12 @@ export async function backendHealth(){
 }
 
 export async function syncStateToBackend(state){
+  if(!pilotTelemetryAllowed())return {ok:false,status:403,code:"PILOT_CONSENT_REQUIRED"};
   const payload=buildSyncEnvelope(state);
   try{
-    const r=await fetch("/api/beta/sync",{
+    const r=await fetch("/api/pilot/sync",{
       method:"POST",
+      credentials:"include",
       headers:{"content-type":"application/json"},
       body:JSON.stringify(payload)
     });

@@ -1,32 +1,60 @@
-import {productAnalyticsExport} from "./productAnalytics.js";
+import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 
-// A+ v2.1 — instrumentação local de beta
-// Em produção estes eventos devem ser enviados para backend com regras de privacidade.
+// APProva+ — telemetria mínima do piloto.
+// Mantém nomes exportados antigos apenas para compatibilidade de chamadas existentes,
+// mas deixa de acumular betaEvents/betaSessions localmente.
+
+const ALLOWED_EVENTS=new Set([
+  "app_session","diagnostic_completed","practice_completed","mission_completed",
+  "mini_exam_completed","full_exam_completed","review_opened",
+  "onboarding_started","onboarding_completed","onboarding_abandoned"
+]);
+
+const dateKey=at=>new Date(at||Date.now()).toISOString().slice(0,10);
+const subjectOf=payload=>String(payload?.subject||payload?.subjectId||"all");
+
+function upsertAggregate(state,type,{subject="all",seconds=0,at=Date.now()}={}){
+  if(!pilotTelemetryAllowed()||!ALLOWED_EVENTS.has(type))return state;
+  const date=dateKey(at);
+  const rows=[...(state.pilotAggregates||[])];
+  const index=rows.findIndex(row=>row.date===date&&row.type===type&&(row.subject||"all")===subject);
+  if(index>=0){
+    const current=rows[index];
+    rows[index]={
+      ...current,
+      totalCount:(Number(current.totalCount)||0)+1,
+      totalSeconds:(Number(current.totalSeconds)||0)+Math.max(0,Math.round(Number(seconds)||0))
+    };
+  }else{
+    rows.push({date,type,subject,totalCount:1,totalSeconds:Math.max(0,Math.round(Number(seconds)||0))});
+  }
+  return {...state,pilotAggregates:rows,betaEvents:[]};
+}
 
 export function betaEvent(type,payload={}){
-  return {
-    id:`evt-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-    type,
-    at:Date.now(),
-    payload
-  };
+  return pilotTelemetryAllowed()?{type,at:Date.now(),payload}:null;
 }
 
 export function addBetaEvent(state,type,payload={}){
+  const normalized=type==="onboarding_finished"?"onboarding_completed":type;
+  return upsertAggregate(state,normalized,{subject:subjectOf(payload),seconds:payload?.seconds||0,at:Date.now()});
+}
+
+export function recordPilotItemResult(state,{itemId,outcome,seconds=0,date=null,subject="all",id=null}={}){
+  if(!pilotTelemetryAllowed()||!itemId||!["correct","partial","incorrect","skipped"].includes(outcome))return state;
+  const occurredOn=date||dateKey();
+  const externalId=id||`item-${itemId}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   return {
     ...state,
-    betaEvents:[...(state.betaEvents||[]),betaEvent(type,payload)]
+    pilotItemResults:[...(state.pilotItemResults||[]),{
+      id:externalId,itemId:String(itemId),outcome,
+      seconds:Math.max(0,Math.round(Number(seconds)||0)),date:occurredOn,subject:String(subject||"all")
+    }]
   };
 }
 
 export function sessionStart(kind,meta={}){
-  return {
-    id:`ses-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-    kind,
-    startedAt:Date.now(),
-    finishedAt:null,
-    meta
-  };
+  return {kind,startedAt:Date.now(),meta};
 }
 
 export function sessionFinish(session,meta={}){
@@ -39,56 +67,30 @@ export function sessionFinish(session,meta={}){
 }
 
 export function betaSummary(state){
-  const sessions=state.betaSessions||[];
-  const finished=sessions.filter(s=>s.finishedAt);
-  const byKind={};
-  finished.forEach(s=>{
-    if(!byKind[s.kind])byKind[s.kind]={count:0,totalSeconds:0};
-    byKind[s.kind].count++;
-    byKind[s.kind].totalSeconds+=s.durationSeconds||0;
-  });
-
+  const aggregates=state.pilotAggregates||[];
   const feedback=state.betaFeedback||[];
-  const avg=(key)=>{
-    const vals=feedback.map(f=>Number(f[key])).filter(x=>Number.isFinite(x));
+  const total=type=>aggregates.filter(row=>row.type===type).reduce((sum,row)=>sum+(Number(row.totalCount)||0),0);
+  const avg=key=>{
+    const vals=feedback.map(f=>Number(f[key])).filter(Number.isFinite);
     return vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*10)/10:null;
   };
-
-  const starts=(state.betaEvents||[]).filter(e=>e.type.endsWith("_started")).length;
-  const finishes=(state.betaEvents||[]).filter(e=>e.type.endsWith("_finished")).length;
-
+  const started=total("onboarding_started");
+  const finished=total("onboarding_completed");
   return {
-    sessions:finished.length,
-    started:starts,
-    finished:finishes,
-    completionRate:starts?Math.round(finishes/starts*100):0,
-    byKind,
+    sessions:total("app_session"),started,finished,
+    completionRate:started?Math.round(finished/started*100):0,
     feedbackCount:feedback.length,
-    avgClarity:avg("clarity"),
-    avgDifficultyFit:avg("difficultyFit"),
-    avgUsefulness:avg("usefulness"),
-    reports:(state.contentReports||[]).length
+    avgClarity:avg("clarity"),avgDifficultyFit:avg("difficultyFit"),avgUsefulness:avg("usefulness"),
+    itemResults:(state.pilotItemResults||[]).length
   };
 }
 
 export function exportBetaPayload(state){
+  if(!pilotTelemetryAllowed())return {schema:"aplus-pilot-v1",aggregates:[],itemResults:[],feedback:[]};
   return {
-    schema:"aplus-beta-v1",
-    exportedAt:new Date().toISOString(),
-    participant:{
-      code:state.betaParticipant?.code||null,
-      cohort:state.betaParticipant?.cohort||null,
-      schoolYear:state.profile?.schoolYear||null,
-      goal:state.goal||null
-    },
-    sessions:state.betaSessions||[],
-    events:state.betaEvents||[],
-    feedback:state.betaFeedback||[],
-    productAnalytics:productAnalyticsExport(state),
-    engagement:state.engagement||null,
-    competition:state.competition||null,
-    contentReports:state.contentReports||[],
-    examHistory:state.examHistory||[],
-    missionHistory:state.missionHistory||[]
+    schema:"aplus-pilot-v1",
+    aggregates:state.pilotAggregates||[],
+    itemResults:state.pilotItemResults||[],
+    feedback:state.betaFeedback||[]
   };
 }

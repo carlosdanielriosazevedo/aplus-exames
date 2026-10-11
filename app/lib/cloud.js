@@ -127,8 +127,20 @@ export async function cloudSignOut(){
   return client.signOut();
 }
 
+const STUDENT_RESPONSE_TEXT_KEYS=new Set([
+  "answers","answer","currentAnswer","responseText","previousResponseText","studentEvidence"
+]);
+
+function stripStudentResponseText(value){
+  if(Array.isArray(value))return value.map(stripStudentResponseText);
+  if(!value||typeof value!=="object")return value;
+  return Object.fromEntries(Object.entries(value)
+    .filter(([key])=>!STUDENT_RESPONSE_TEXT_KEYS.has(key))
+    .map(([key,nested])=>[key,stripStudentResponseText(nested)]));
+}
+
 export function studentStateForCloud(s){
-  return {
+  return stripStudentResponseText({
     schema:"aplus-student-state-v8",
     goal:s.goal,
     profile:s.profile,
@@ -153,7 +165,7 @@ export function studentStateForCloud(s){
     evidenceModelVersion:2,
     pedagogicalIdVersion:s.pedagogicalIdVersion||1,
     pedagogicalMemoryVersion:s.pedagogicalMemoryVersion||2
-  };
+  });
 }
 
 export function mergeStudentCloudState(local,remote){
