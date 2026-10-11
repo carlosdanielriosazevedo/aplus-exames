@@ -18,20 +18,15 @@ on:
   deployment_status:
 
 jobs:
-  smoke:
-    if: >-
-      github.event_name == 'push' ||
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'main')
+  preview-smoke:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
       PREVIEW_BASE_URL: https://aplus-exames-git-feature-a7cbd6-carlos-rios-azevedo-s-projects.vercel.app
     steps:
-      - name: Checkout deployed revision
+      - name: Checkout validated revision
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'deployment_status' && github.event.deployment.sha || github.sha }}
 
       - name: Node
         uses: actions/setup-node@v4
@@ -59,17 +54,42 @@ jobs:
           echo "::error::Preview did not expose pilotSmokeApiVersion=1"
           exit 1
 
-      - name: Authenticated runtime smoke
+      - name: Authenticated preview runtime smoke
         run: node scripts/post-deploy-smoke.mjs
         env:
-          SMOKE_BASE_URL: ${{ github.event_name == 'push' && env.PREVIEW_BASE_URL || github.event_name == 'workflow_dispatch' && inputs.base_url || github.event.deployment_status.environment_url }}
-          SMOKE_EPHEMERAL_SIGNUP: ${{ github.event_name == 'push' && 'true' || github.event_name == 'workflow_dispatch' && inputs.ephemeral_signup || 'false' }}
+          SMOKE_BASE_URL: ${{ github.event_name == 'push' && env.PREVIEW_BASE_URL || inputs.base_url }}
+          SMOKE_EPHEMERAL_SIGNUP: ${{ github.event_name == 'push' && 'true' || inputs.ephemeral_signup }}
           SMOKE_TEST_EMAIL: ${{ secrets.PILOT_SMOKE_EMAIL }}
           SMOKE_TEST_PASSWORD: ${{ secrets.PILOT_SMOKE_PASSWORD }}
           SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
 
-  # Hard release gate. Runs together with the branch Preview smoke and can also be
-  # dispatched explicitly. It has privileged access only to the isolated Neon proof branch.
+  production-smoke:
+    if: >-
+      github.event_name == 'deployment_status' &&
+      github.event.deployment_status.state == 'success' &&
+      (
+        github.event.deployment.ref == 'main' ||
+        startsWith(github.event.deployment.environment, 'Production')
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Production contract smoke
+        run: node scripts/production-smoke.mjs
+        env:
+          SMOKE_BASE_URL: https://aplus-exames.vercel.app
+
+  # Hard release gate for the isolated Preview database proof.
   preview-schema-proof:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
