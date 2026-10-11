@@ -7,6 +7,7 @@ const baseUrl=String(process.env.SMOKE_BASE_URL||"").replace(/\/$/,"");
 const shareToken=process.env.SMOKE_SHARE_TOKEN||null;
 const stateFile=process.env.SMOKE_STATE_FILE||"/tmp/aprova-pilot-smoke-session.json";
 if(!baseUrl)throw new Error("SMOKE_BASE_URL is required");
+const baseOrigin=new URL(baseUrl).origin;
 
 const email=`pilot-smoke-${Date.now()}-${randomBytes(4).toString("hex")}@example.com`;
 const password=`S!${randomBytes(24).toString("base64url")}`;
@@ -28,6 +29,11 @@ async function request(path,options={}){
   const headers=new Headers(options.headers||{});
   const cookie=cookieHeader();
   if(cookie)headers.set("cookie",cookie);
+  const method=String(options.method||"GET").toUpperCase();
+  if(!["GET","HEAD","OPTIONS"].includes(method)){
+    headers.set("origin",baseOrigin);
+    headers.set("sec-fetch-site","same-origin");
+  }
   const response=await fetch(`${baseUrl}${path}`,{...options,headers,redirect:"manual"});
   rememberCookies(response);
   return response;
@@ -48,6 +54,7 @@ const health=await body(healthResponse);
 assert.equal(healthResponse.status,200,"health must return 200");
 assert.equal(health.backendReachable,true,"preview must reach Neon");
 assert.ok(Number(health.schemaVersion)>=8,`expected schema v8+, got ${health.schemaVersion}`);
+assert.equal(health.region,"fra1",`expected runtime region fra1, got ${health.region}`);
 
 const signupResponse=await request("/api/auth/sign-up/email",{
   method:"POST",headers:{"content-type":"application/json"},
@@ -85,6 +92,6 @@ writeFileSync(stateFile,JSON.stringify({
 console.log(JSON.stringify({
   ok:true,phase:"auth",loginMs:Number(loginMs.toFixed(1)),
   authUserId:session.user.id,appUserId:session.appUserId,
-  schemaVersion:health.schemaVersion,schemaMigration:health.schemaMigration,
+  schemaVersion:health.schemaVersion,schemaMigration:health.schemaMigration,region:health.region,
   stateFile
 }));
