@@ -23,6 +23,7 @@ global.localStorage={
   setItem:(k,v)=>memory.set(k,String(v)),
   removeItem:k=>memory.delete(k)
 };
+global.window=globalThis;
 
 const base={
   goal:17,
