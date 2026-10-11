@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
-import {authErrorResponse,ensureAppIdentity,requireSession} from "../../../../lib/server/identity";
-import {sameOriginRequest} from "../../../../lib/server/csrf";
-import {getSql} from "../../../../lib/server/db";
+import {authErrorResponse,ensureAppIdentity,requireSession} from "../../../lib/server/identity";
+import {sameOriginRequest} from "../../../lib/server/csrf";
+import {getSql} from "../../../lib/server/db";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
