@@ -1,4 +1,4 @@
-import {pilotTelemetryAllowed} from "./pilotConsentClient";
+import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 
 // APProva+ — telemetria mínima do piloto.
 // Mantém nomes exportados antigos apenas para compatibilidade de chamadas existentes,
