@@ -12,11 +12,13 @@ const baseOrigin=new URL(baseUrl).origin;
 const email=`pilot-smoke-${Date.now()}-${randomBytes(4).toString("hex")}@example.com`;
 const password=`S!${randomBytes(24).toString("base64url")}`;
 const cookies=new Map();
+const observedSetCookies=[];
 
 const rememberCookies=response=>{
   const values=response.headers.getSetCookie?.()||[];
   const fallback=values.length?[]:[response.headers.get("set-cookie")].filter(Boolean);
   for(const raw of [...values,...fallback]){
+    observedSetCookies.push(String(raw));
     for(const part of String(raw).split(/,(?=[^;,]+=)/u)){
       const pair=part.split(";",1)[0];
       const eq=pair.indexOf("=");
@@ -80,18 +82,24 @@ assert.equal(sessionResponse.status,200,`session failed: ${JSON.stringify(sessio
 assert.ok(session?.user?.id,"auth user id missing");
 assert.ok(session?.appUserId,"app user id missing");
 
+const sameSiteValues=observedSetCookies
+  .map(raw=>raw.match(/;\s*SameSite=([^;]+)/iu)?.[1]?.toLowerCase()||null)
+  .filter(Boolean);
+assert.ok(sameSiteValues.length>0,"authenticated smoke must observe SameSite on session cookies");
+
 writeFileSync(stateFile,JSON.stringify({
   baseUrl,
   cookies:Object.fromEntries(cookies),
   authUserId:session.user.id,
   appUserId:session.appUserId,
   schemaVersion:health.schemaVersion,
-  schemaMigration:health.schemaMigration
+  schemaMigration:health.schemaMigration,
+  sameSite:[...new Set(sameSiteValues)]
 }),{mode:0o600});
 
 console.log(JSON.stringify({
   ok:true,phase:"auth",loginMs:Number(loginMs.toFixed(1)),
   authUserId:session.user.id,appUserId:session.appUserId,
   schemaVersion:health.schemaVersion,schemaMigration:health.schemaMigration,region:health.region,
-  stateFile
+  cookieSameSite:[...new Set(sameSiteValues)],stateFile
 }));
