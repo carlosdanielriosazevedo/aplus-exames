@@ -8,9 +8,11 @@ const ingest=readFileSync(new URL("../app/lib/server/pilot-ingest.js",import.met
 assert.match(persistence,/PILOT_SYNC_DEBOUNCE_MS=4_000/u,"pilot autosync must stay debounced");
 assert.match(persistence,/PILOT_SYNC_RETRY_MS=60_000/u,"failed pilot autosync must have a retry cooldown");
 assert.match(persistence,/state\?\.betaMode!=="friends_beta"/u,"pilot autosync must remain limited to the closed-beta mode");
+assert.match(persistence,/pilotTelemetryAllowed\(\)/u,"pilot autosync must be blocked locally until consent is active");
+assert.match(persistence,/withoutPilotTelemetry\(clean\)/u,"local persistence must strip pilot telemetry while consent is inactive");
 assert.match(persistence,/pilotSyncInFlight/u,"pilot autosync must prevent concurrent requests");
 assert.match(persistence,/pilotSyncSignature/u,"pilot autosync must deduplicate unchanged telemetry");
-assert.match(persistence,/schedulePilotSync\(clean\)/u,"local persistence must schedule pilot sync");
+assert.match(persistence,/schedulePilotSync\(persisted\)/u,"local persistence must schedule only the consent-filtered pilot state");
 assert.match(persistence,/fetch\("\/api\/pilot\/sync"/u,"client must use the pilot sync endpoint");
 assert.match(persistence,/credentials:"include"/u,"pilot sync must send the authenticated cookie explicitly");
 assert.match(persistence,/betaSessions:_betaSessions,betaEvents:_betaEvents/u,"legacy raw beta queues must be stripped before local persistence");
@@ -29,4 +31,4 @@ assert.match(ingest,/MAX_ITEM_RESULTS=500/u,"pilot ingest must cap item-result r
 assert.match(ingest,/MAX_FEEDBACK=50/u,"pilot ingest must cap feedback rows per request");
 assert.match(ingest,/RATE_LIMIT_REQUESTS=30/u,"pilot ingest must rate limit each user");
 
-console.log("✓ pilot autosync: minimal, consent-gated, CSRF-protected, debounced, marked-test-safe and absolute-total based");
+console.log("✓ pilot autosync: minimal, consent-gated locally and server-side, CSRF-protected, debounced, marked-test-safe and absolute-total based");
