@@ -4,6 +4,7 @@ import {
   activateFriendsBeta,markFriendsBetaConsent,isFriendsBeta,friendsBetaReport,
   testerSegmentInfo,isTargetStudentTester,aggregateFriendsBetaReports,PUBLIC_ENTRY_SEGMENTS
 } from "../app/lib/friendsBeta.js";
+import {setPilotTelemetryAllowed} from "../app/lib/pilotConsentClient.js";
 import {
   emptyScores,buildMiniExam,trainingQuestions,eligibleCount
 } from "../app/lib/engine.js";
@@ -57,18 +58,15 @@ const adult=markFriendsBetaConsent(
 );
 assert.equal(isTargetStudentTester(adult),false);
 
-// Friend beta deliberately exposes curated prototype content while formal closed beta remains gated.
 for(const ctx of ["diagnostic","mission","training","exam"]){
   assert.ok(eligibleCount(consent,ctx)>0,`Sem conteúdo em ${ctx}`);
 }
 assert.equal(betaContentReadiness({},[]).canClosedBeta,false);
 
-// Mini-exam can exercise the UX before teacher review.
 const exam=buildMiniExam(consent,10);
 assert.equal(exam.length,10);
 assert.ok(exam.every(q=>!q.generated),"Beta de amigos não deve usar variantes geradas.");
 
-// Treino also stays on curated questions only.
 const trainingSeed=QUESTION_BANK.find(q=>q.contexts?.includes("training"));
 assert.ok(trainingSeed);
 const training=trainingQuestions(consent,{
@@ -79,20 +77,25 @@ const training=trainingQuestions(consent,{
 assert.ok(training.length>0);
 assert.ok(training.every(q=>!q.generated),"Treino da beta de amigos gerou conteúdo automaticamente.");
 
-// Reports are pseudonymous and carry tester segmentation.
-const targetReport=friendsBetaReport({
+const targetState={
   ...consent,
   identity:{displayName:"NOME QUE NÃO PODE SAIR",email:"teste@example.com"},
-  betaEvents:[
-    {type:"mission_started",at:1},
-    {type:"mission_finished",at:2}
-  ],
+  betaEvents:[{type:"mission_started",at:1},{type:"mission_finished",at:2}],
   betaSessions:[{id:"s1",kind:"mission",finishedAt:2,durationSeconds:20}],
-  betaFeedback:[{
-    id:"f1",clarity:4,difficultyFit:4,usefulness:5,
-    personalization:4,returnIntent:5,testerSegment:"student"
-  }]
-});
+  betaFeedback:[{id:"f1",clarity:4,difficultyFit:4,usefulness:5,personalization:4,returnIntent:5,testerSegment:"student"}]
+};
+
+// O consentimento legado da beta de amigos NÃO ativa telemetria do novo piloto.
+// Sem pilot_self ativo, o payload exportável fica vazio.
+setPilotTelemetryAllowed(false);
+const blockedReport=friendsBetaReport(targetState);
+assert.deepEqual(blockedReport.aggregates,[]);
+assert.deepEqual(blockedReport.itemResults,[]);
+assert.deepEqual(blockedReport.feedback,[]);
+
+// Simula apenas o estado local depois de o endpoint pilot_self ter confirmado consentimento.
+setPilotTelemetryAllowed(true);
+const targetReport=friendsBetaReport(targetState);
 const reportText=JSON.stringify(targetReport);
 assert.equal(targetReport.schema,"aplus-friends-beta-v3");
 assert.equal(targetReport.testerMeta.targetFit,"target");
@@ -103,15 +106,9 @@ assert.ok(!reportText.includes("NOME QUE NÃO PODE SAIR"));
 const observerReport=friendsBetaReport({
   ...adult,
   betaParticipant:{...adult.betaParticipant,code:"AMG-OBS001"},
-  betaEvents:[
-    {type:"diagnostic_started",at:1},
-    {type:"diagnostic_finished",at:2}
-  ],
+  betaEvents:[{type:"diagnostic_started",at:1},{type:"diagnostic_finished",at:2}],
   betaSessions:[{id:"s2",kind:"diagnostic",finishedAt:2,durationSeconds:30}],
-  betaFeedback:[{
-    id:"f2",clarity:5,difficultyFit:3,usefulness:4,
-    personalization:3,returnIntent:4,testerSegment:"observer"
-  }]
+  betaFeedback:[{id:"f2",clarity:5,difficultyFit:3,usefulness:4,personalization:3,returnIntent:4,testerSegment:"observer"}]
 });
 
 const aggregate=aggregateFriendsBetaReports([targetReport,observerReport,{schema:"invalid"}]);
@@ -122,7 +119,6 @@ assert.equal(aggregate.byFit.observer.testers,1);
 assert.equal(aggregate.byFit.target.returnIntent,5);
 assert.equal(aggregate.byFit.observer.returnIntent,4);
 
-// Local state is isolated from the developer/student state.
 saveLocalState({...base,betaMode:"internal"});
 saveLocalState(consent);
 assert.ok(memory.has(STORAGE_KEY));
@@ -133,7 +129,6 @@ const loadedFriend=loadLocalState(base,emptyScores,FRIENDS_STORAGE_KEY);
 assert.equal(loadedFriend.betaMode,"friends_beta");
 assert.equal(loadedFriend.betaParticipant.code,consent.betaParticipant.code);
 
-// Active-session drafts are isolated too.
 saveSessionDraft({kind:"mission",betaMode:"internal",marker:"normal"});
 saveSessionDraft({kind:"mission",betaMode:"friends_beta",marker:"friend"});
 assert.equal(loadSessionDraft("internal").marker,"normal");
@@ -145,5 +140,6 @@ assert.equal(loadSessionDraft("internal").marker,"normal");
 clearLocalState(FRIENDS_STORAGE_KEY);
 assert.equal(memory.has(FRIENDS_STORAGE_KEY),false);
 assert.equal(memory.has(STORAGE_KEY),true);
+setPilotTelemetryAllowed(false);
 
-console.log(`✓ friends beta: target/observer segmentation, ${exam.length}-question mini-exam, aggregate reporting and isolated storage validated`);
+console.log(`✓ friends beta: pilot_self gate, target/observer segmentation, ${exam.length}-question mini-exam, aggregate reporting and isolated storage validated`);
