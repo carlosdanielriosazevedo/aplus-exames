@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import {randomBytes} from "node:crypto";
 import {performance} from "node:perf_hooks";
-import {neon} from "@neondatabase/serverless";
 import {createClient} from "@neondatabase/neon-js";
+import {studentStateForCloud} from "../app/lib/cloud.js";
 
 const required=name=>{
   const value=process.env[name];
@@ -20,8 +20,7 @@ const baseOrigin=new URL(baseUrl).origin;
 const ephemeral=process.env.SMOKE_EPHEMERAL_SIGNUP==="true";
 const email=ephemeral?`pilot-smoke-${Date.now()}-${randomBytes(4).toString("hex")}@example.com`:required("SMOKE_TEST_EMAIL");
 const password=ephemeral?`S!${randomBytes(24).toString("base64url")}`:required("SMOKE_TEST_PASSWORD");
-const databaseUrl=required("SMOKE_DATABASE_URL");
-const dataApiUrl=required("SMOKE_DATA_API_URL");
+const configuredDataApiUrl=process.env.SMOKE_DATA_API_URL||null;
 const protectionBypass=process.env.SMOKE_PROTECTION_BYPASS||null;
 const shareToken=process.env.SMOKE_SHARE_TOKEN||null;
 
@@ -67,6 +66,13 @@ async function hostileMutation(path,{method="POST",body=null}={}){
   if(protectionBypass)headers.set("x-vercel-protection-bypass",protectionBypass);
   return fetch(`${baseUrl}${path}`,{method,headers,body:body===null?undefined:JSON.stringify(body),redirect:"manual"});
 }
+async function smokeProbe(){
+  const response=await appFetch("/api/pilot/smoke",{cache:"no-store"});
+  const body=await jsonOrText(response);
+  assert.equal(response.status,200,`Preview smoke probe failed: ${JSON.stringify(body)}`);
+  assert.equal(body.ok,true,"Preview smoke probe must return ok=true");
+  return body;
+}
 
 if(shareToken){
   const entrance=await appFetch(`/?_vercel_share=${encodeURIComponent(shareToken)}`);
@@ -79,6 +85,9 @@ assert.equal(healthResponse.status,200,"/api/health must return 200");
 assert.equal(health.backendReachable,true,"Smoke deployment must reach its Neon branch");
 assert.equal(Number(health.schemaVersion),8,`Expected schemaVersion 8, got ${health.schemaVersion}`);
 assert.equal(health.region,"fra1",`Expected runtime region fra1, got ${health.region}`);
+assert.equal(Number(health.pilotSmokeApiVersion),1,"Preview smoke API must be ready before authenticated smoke");
+const dataApiUrl=configuredDataApiUrl||health.dataApiUrl;
+assert.ok(typeof dataApiUrl==="string"&&dataApiUrl.startsWith("https://"),"Preview health must expose its public Neon Data API URL");
 
 if(ephemeral){
   const signupResponse=await appFetch("/api/auth/sign-up/email",{
@@ -111,12 +120,11 @@ assert.equal(sessionResponse.status,200,`Authenticated session failed: ${JSON.st
 assert.ok(session?.user?.id,"Authenticated smoke user id missing");
 assert.ok(session?.appUserId,"App user was not provisioned");
 
-const sql=neon(databaseUrl);
-await sql`
-  insert into pilot_test_accounts(student_user_id,label)
-  values (${session.appUserId},'post-deploy-smoke')
-  on conflict (student_user_id) do update set label=excluded.label
-`;
+const bootstrapResponse=await appFetch("/api/pilot/smoke",{method:"POST"});
+const bootstrap=await jsonOrText(bootstrapResponse);
+assert.equal(bootstrapResponse.status,200,`Preview smoke bootstrap failed: ${JSON.stringify(bootstrap)}`);
+assert.equal(bootstrap.ok,true,"Preview smoke bootstrap must return ok=true");
+assert.equal(bootstrap.appUserId,session.appUserId,"Preview smoke bootstrap must mark the authenticated app user");
 
 const consentResponse=await appFetch("/api/pilot/consent",{
   method:"POST",headers:{"content-type":"application/json"},
@@ -138,24 +146,35 @@ const dataClient=createClient({dataApi:{url:dataApiUrl,getToken:async()=>jwt}});
 const before=await dataClient.from("student_cloud_state").select("revision").eq("auth_user_id",session.user.id).maybeSingle();
 assert.ok(!before?.error,`Cloud pre-read failed: ${before?.error?.message||"unknown"}`);
 const marker=`smoke-${Date.now()}`;
+const privacyMarker=`DO-NOT-PERSIST-STUDENT-ANSWER-${Date.now()}-${randomBytes(4).toString("hex")}`;
+const cloudPayload=studentStateForCloud({
+  goal:17,
+  profile:{schoolYear:"12.º",smokeMarker:marker},
+  scores:{},xp:0,streak:0,
+  diagnosticDone:false,diagnosticAnswers:0,missionHistory:[],freeTrainingSignals:[],
+  examHistory:[{answers:[privacyMarker],itemResults:[{responseText:privacyMarker,previousResponseText:privacyMarker,studentEvidence:[privacyMarker]}]}],
+  lastExam:{answers:{a:privacyMarker}},lastMission:null,learningHypotheses:[]
+});
+assert.ok(!JSON.stringify(cloudPayload).includes(privacyMarker),"Cloud serializer must strip the deliberate student-answer marker before persistence");
 const currentRevision=Number(before?.data?.revision)||0;
 const cloudStart=performance.now();
 let write;
 if(before?.data){
   write=await dataClient.from("student_cloud_state")
-    .update({state_json:{schema:"aplus-student-state-v8",smokeMarker:marker},revision:currentRevision+1,last_device_id:"post-deploy-smoke",updated_at:new Date().toISOString()})
+    .update({state_json:cloudPayload,revision:currentRevision+1,last_device_id:"post-deploy-smoke",updated_at:new Date().toISOString()})
     .eq("auth_user_id",session.user.id).eq("revision",currentRevision).select("revision").maybeSingle();
 }else{
   write=await dataClient.from("student_cloud_state")
-    .insert({auth_user_id:session.user.id,state_json:{schema:"aplus-student-state-v8",smokeMarker:marker},revision:1,last_device_id:"post-deploy-smoke",updated_at:new Date().toISOString()})
+    .insert({auth_user_id:session.user.id,state_json:cloudPayload,revision:1,last_device_id:"post-deploy-smoke",updated_at:new Date().toISOString()})
     .select("revision").single();
 }
 const cloudSaveMs=performance.now()-cloudStart;
 assert.ok(!write?.error&&write?.data,`Cloud save failed: ${write?.error?.message||"unknown"}`);
 const readBack=await dataClient.from("student_cloud_state").select("state_json,revision,last_device_id").eq("auth_user_id",session.user.id).single();
 assert.ok(!readBack?.error,`Cloud read-back failed: ${readBack?.error?.message||"unknown"}`);
-assert.equal(readBack.data?.state_json?.smokeMarker,marker,"Cloud round-trip marker mismatch");
+assert.equal(readBack.data?.state_json?.profile?.smokeMarker,marker,"Cloud round-trip marker mismatch");
 assert.equal(readBack.data?.last_device_id,"post-deploy-smoke","Cloud device marker mismatch");
+assert.ok(!JSON.stringify(readBack.data?.state_json||{}).includes(privacyMarker),"Real student_cloud_state row must not contain the deliberate student-answer marker");
 
 const today=new Date().toISOString().slice(0,10);
 const itemExternalId=`smoke-item-${Date.now()}`;
@@ -178,34 +197,21 @@ for(let i=0;i<syncPayloads.length;i++){
   assert.equal(result.isTest,true,"Smoke account must write with is_test=true");
 }
 
-const stored=await sql`
-  select total_count,total_seconds,is_test
-  from pilot_event_aggregates
-  where student_user_id=${session.appUserId} and period_date=${today} and event_type='app_session' and subject='all'
-`;
-assert.equal(Number(stored[0]?.total_count),5,"GREATEST idempotence failed: total_count fell below 5");
-assert.equal(Number(stored[0]?.total_seconds),100,"GREATEST idempotence failed: total_seconds fell below 100");
-assert.equal(stored[0]?.is_test,true,"Smoke aggregate must be marked is_test=true");
-
-const written=await sql`
-  select
-    (select count(*)::int from pilot_event_aggregates where student_user_id=${session.appUserId} and is_test=true) as aggregates,
-    (select count(*)::int from pilot_item_results where student_user_id=${session.appUserId} and is_test=true) as item_results,
-    (select count(*)::int from pilot_feedback where student_user_id=${session.appUserId} and is_test=true) as feedback,
-    (select count(*)::int from pilot_event_aggregates where student_user_id=${session.appUserId} and is_test=false) as metric_aggregates,
-    (select count(*)::int from pilot_item_results where student_user_id=${session.appUserId} and is_test=false) as metric_item_results,
-    (select count(*)::int from pilot_feedback where student_user_id=${session.appUserId} and is_test=false) as metric_feedback,
-    exists(select 1 from pilot_test_accounts where student_user_id=${session.appUserId}) as marked_test_account
-`;
-assert.equal(written[0]?.marked_test_account,true,"Smoke user lost server-only test marker");
-assert.ok(Number(written[0]?.aggregates)>=1,"Smoke must INSERT/UPSERT an aggregate row");
-assert.ok(Number(written[0]?.item_results)>=1,"Smoke must INSERT an item-result row");
-assert.ok(Number(written[0]?.feedback)>=1,"Smoke must INSERT a feedback row");
+const probe=await smokeProbe();
+const stored=probe.aggregates.find(row=>row.event_type==="app_session"&&row.subject==="all");
+assert.equal(Number(stored?.total_count),5,"GREATEST idempotence failed: total_count fell below 5");
+assert.equal(Number(stored?.total_seconds),100,"GREATEST idempotence failed: total_seconds fell below 100");
+assert.equal(stored?.is_test,true,"Smoke aggregate must be marked is_test=true");
+assert.equal(probe.counts?.marked_test_account,true,"Smoke user lost server-only test marker");
+assert.ok(Number(probe.counts?.aggregates)>=1,"Smoke must INSERT/UPSERT an aggregate row");
+assert.ok(Number(probe.counts?.item_results)>=1,"Smoke must INSERT an item-result row");
+assert.ok(Number(probe.counts?.feedback)>=1,"Smoke must INSERT a feedback row");
 assert.deepEqual(
-  {aggregates:Number(written[0]?.metric_aggregates),itemResults:Number(written[0]?.metric_item_results),feedback:Number(written[0]?.metric_feedback)},
+  {aggregates:Number(probe.counts?.metric_aggregates),itemResults:Number(probe.counts?.metric_item_results),feedback:Number(probe.counts?.metric_feedback)},
   {aggregates:0,itemResults:0,feedback:0},
   "Metrics filtered with is_test=false must exclude the smoke account rows"
 );
+assert.ok(!JSON.stringify(probe.cloud?.state_json||{}).includes(privacyMarker),"Direct DB smoke probe must confirm the student-answer marker is absent");
 
 const hostileSync=await hostileMutation("/api/pilot/sync",{body:lowerSyncPayload});
 assert.equal(hostileSync.status,403,"Cross-origin pilot sync must be rejected by CSRF protection");
@@ -215,19 +221,13 @@ assert.equal(hostileDelete.status,403,"Cross-origin pilot delete must be rejecte
 const deleteResponse=await appFetch("/api/pilot/data",{method:"DELETE"});
 const deleted=await jsonOrText(deleteResponse);
 assert.equal(deleteResponse.status,200,`Pilot erasure failed: ${JSON.stringify(deleted)}`);
-const afterDelete=await sql`
-  select
-    (select count(*)::int from pilot_event_aggregates where student_user_id=${session.appUserId}) as aggregates,
-    (select count(*)::int from pilot_item_results where student_user_id=${session.appUserId}) as item_results,
-    (select count(*)::int from pilot_feedback where student_user_id=${session.appUserId}) as feedback,
-    (select count(*)::int from consent_records where student_user_id=${session.appUserId} and consent_type='pilot_self' and revoked_at is not null) as revoked_consents
-`;
+const afterDelete=await smokeProbe();
 assert.deepEqual(
-  {aggregates:Number(afterDelete[0]?.aggregates),itemResults:Number(afterDelete[0]?.item_results),feedback:Number(afterDelete[0]?.feedback)},
+  {aggregates:Number(afterDelete.counts?.aggregates),itemResults:Number(afterDelete.counts?.item_results),feedback:Number(afterDelete.counts?.feedback)},
   {aggregates:0,itemResults:0,feedback:0},
   "DELETE /api/pilot/data must remove all pilot telemetry/results/feedback"
 );
-assert.ok(Number(afterDelete[0]?.revoked_consents)>=1,"Pilot consent record must remain marked revoked");
+assert.ok(Number(afterDelete.counts?.revoked_consents)>=1,"Pilot consent record must remain marked revoked");
 
 const blockedResponse=await appFetch("/api/pilot/sync",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(lowerSyncPayload)});
 const blocked=await jsonOrText(blockedResponse);
@@ -244,8 +244,8 @@ console.log(JSON.stringify({
     cloudSave:Number(cloudSaveMs.toFixed(1)),
     pilotSync:syncTimings.map(value=>Number(value.toFixed(1))),pilotSyncMedian:Number(median(syncTimings).toFixed(1))
   },
-  idempotenceVerified:{sentFirst:{count:5,seconds:100},sentSecond:{count:3,seconds:80},stored:{count:Number(stored[0]?.total_count),seconds:Number(stored[0]?.total_seconds)}},
-  testWritesVerified:true,testRowsExcludedByFilter:true,csrfVerified:{sync:true,delete:true},
+  idempotenceVerified:{sentFirst:{count:5,seconds:100},sentSecond:{count:3,seconds:80},stored:{count:Number(stored?.total_count),seconds:Number(stored?.total_seconds)}},
+  cloudPrivacyVerified:true,testWritesVerified:true,testRowsExcludedByFilter:true,csrfVerified:{sync:true,delete:true},
   cookieSameSite:[...new Set(sameSiteValues)],erasureVerified:true,consentRevocationVerified:true,consentGateVerified:true,
   ephemeralAuthUserId:ephemeral?session.user.id:null
 }));
