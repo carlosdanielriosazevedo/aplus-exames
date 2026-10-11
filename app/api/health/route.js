@@ -22,6 +22,7 @@ export async function GET(){
       // Base pré-008: health continua disponível, mas expõe explicitamente schema desconhecido.
     }
   }
+  const preview=process.env.VERCEL_ENV==="preview";
   return NextResponse.json({
     ok:true,
     app:"APProva+ Exames",
@@ -33,6 +34,8 @@ export async function GET(){
     provider:db.provider,
     schemaVersion,
     schemaMigration,
+    pilotSmokeApiVersion:preview?1:null,
+    dataApiUrl:preview?(process.env.NEXT_PUBLIC_NEON_DATA_API_URL||null):null,
     database:db
   },{headers:{"Cache-Control":"no-store"}});
 }
