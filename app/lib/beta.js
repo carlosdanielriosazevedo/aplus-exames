@@ -1,3 +1,5 @@
+import {pilotTelemetryAllowed} from "./pilotConsentClient";
+
 // APProva+ — telemetria mínima do piloto.
 // Mantém nomes exportados antigos apenas para compatibilidade de chamadas existentes,
 // mas deixa de acumular betaEvents/betaSessions localmente.
@@ -12,7 +14,7 @@ const dateKey=at=>new Date(at||Date.now()).toISOString().slice(0,10);
 const subjectOf=payload=>String(payload?.subject||payload?.subjectId||"all");
 
 function upsertAggregate(state,type,{subject="all",seconds=0,at=Date.now()}={}){
-  if(!ALLOWED_EVENTS.has(type))return state;
+  if(!pilotTelemetryAllowed()||!ALLOWED_EVENTS.has(type))return state;
   const date=dateKey(at);
   const rows=[...(state.pilotAggregates||[])];
   const index=rows.findIndex(row=>row.date===date&&row.type===type&&(row.subject||"all")===subject);
@@ -30,7 +32,7 @@ function upsertAggregate(state,type,{subject="all",seconds=0,at=Date.now()}={}){
 }
 
 export function betaEvent(type,payload={}){
-  return {type,at:Date.now(),payload};
+  return pilotTelemetryAllowed()?{type,at:Date.now(),payload}:null;
 }
 
 export function addBetaEvent(state,type,payload={}){
@@ -39,7 +41,7 @@ export function addBetaEvent(state,type,payload={}){
 }
 
 export function recordPilotItemResult(state,{itemId,outcome,seconds=0,date=null,subject="all",id=null}={}){
-  if(!itemId||!["correct","partial","incorrect","skipped"].includes(outcome))return state;
+  if(!pilotTelemetryAllowed()||!itemId||!["correct","partial","incorrect","skipped"].includes(outcome))return state;
   const occurredOn=date||dateKey();
   const externalId=id||`item-${itemId}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   return {
@@ -84,6 +86,7 @@ export function betaSummary(state){
 }
 
 export function exportBetaPayload(state){
+  if(!pilotTelemetryAllowed())return {schema:"aplus-pilot-v1",aggregates:[],itemResults:[],feedback:[]};
   return {
     schema:"aplus-pilot-v1",
     aggregates:state.pilotAggregates||[],
