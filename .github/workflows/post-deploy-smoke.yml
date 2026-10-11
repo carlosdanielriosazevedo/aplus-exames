@@ -95,10 +95,8 @@ jobs:
             exit 1
           fi
 
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq postgresql-client
+      - name: Pull PostgreSQL 18 client
+        run: docker pull postgres:18-alpine
 
       - name: Apply committed 008 verbatim and compare schema dumps
         shell: bash
@@ -107,9 +105,15 @@ jobs:
           normalize_dump() {
             sed -e '/^\\restrict /d' -e '/^\\unrestrict /d'
           }
-          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-before.sql
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql >/tmp/migration-008.log
-          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-after.sql
+          pg_dump_18() {
+            docker run --rm -e DATABASE_URL postgres:18-alpine sh -c 'pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges'
+          }
+          psql_18() {
+            docker run --rm -e DATABASE_URL -v "$PWD:/workspace:ro" postgres:18-alpine sh -c 'psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /workspace/db/migrations/008_pilot_telemetry_consent.sql'
+          }
+          pg_dump_18 | normalize_dump > /tmp/schema-before.sql
+          psql_18 >/tmp/migration-008.log
+          pg_dump_18 | normalize_dump > /tmp/schema-after.sql
           if ! cmp -s /tmp/schema-before.sql /tmp/schema-after.sql; then
             echo "::error::Migration 008 verbatim changed the validated Preview schema"
             diff -u /tmp/schema-before.sql /tmp/schema-after.sql | head -200 || true
