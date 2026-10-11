@@ -87,60 +87,6 @@ jobs:
           NEXT_PUBLIC_NEON_AUTH_URL: ""
           NEXT_PUBLIC_NEON_DATA_API_URL: ""
 
-      - name: Install PostgreSQL client for pilot schema proof
+      - name: Pilot release gate location
         if: github.head_ref == 'feature/pilot-readiness-ab'
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq postgresql-client
-
-      - name: Pilot schema proof — secret configured
-        if: github.head_ref == 'feature/pilot-readiness-ab'
-        shell: bash
-        env:
-          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
-        run: |
-          set -euo pipefail
-          test -n "${DATABASE_URL:-}"
-
-      - name: Pilot schema proof — isolated branch target
-        if: github.head_ref == 'feature/pilot-readiness-ab'
-        shell: bash
-        env:
-          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
-          EXPECTED_DB_HOST: ep-twilight-lab-b2nohzca-pooler.c-6.eu-central-1.aws.neon.tech
-        run: |
-          set -euo pipefail
-          actual_host="$(node -e 'process.stdout.write(new URL(process.env.DATABASE_URL).hostname)')"
-          test "$actual_host" = "$EXPECTED_DB_HOST"
-
-      - name: Pilot schema proof — dump before
-        if: github.head_ref == 'feature/pilot-readiness-ab'
-        shell: bash
-        env:
-          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
-        run: |
-          set -euo pipefail
-          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges \
-            | sed -e '/^\\restrict /d' -e '/^\\unrestrict /d' \
-            > /tmp/schema-before.sql
-
-      - name: Pilot schema proof — apply committed 008 verbatim
-        if: github.head_ref == 'feature/pilot-readiness-ab'
-        shell: bash
-        env:
-          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
-        run: |
-          set -euo pipefail
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql
-
-      - name: Pilot schema proof — schema unchanged
-        if: github.head_ref == 'feature/pilot-readiness-ab'
-        shell: bash
-        env:
-          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
-        run: |
-          set -euo pipefail
-          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges \
-            | sed -e '/^\\restrict /d' -e '/^\\unrestrict /d' \
-            > /tmp/schema-after.sql
-          cmp -s /tmp/schema-before.sql /tmp/schema-after.sql
+        run: echo "Pilot SQL schema proof is a mandatory explicit release gate in Post-deploy smoke (workflow_dispatch)."
