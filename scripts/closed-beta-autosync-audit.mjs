@@ -22,6 +22,7 @@ assert.match(route,/requireSession\(\)/u,"pilot sync must remain authenticated s
 assert.match(route,/sameOriginRequest\(request\)/u,"pilot sync must enforce same-origin CSRF protection");
 assert.match(route,/MAX_BYTES=250_000/u,"pilot sync must keep a tight payload-size cap");
 assert.match(ingest,/activePilotConsent/u,"pilot ingest must require registered consent");
+assert.match(ingest,/consent_type='pilot_self'/u,"pilot runtime must activate only Carlos's chosen pilot_self consent mode");
 assert.match(ingest,/CONSENT_REQUIRED/u,"missing consent must block telemetry");
 assert.match(ingest,/const isTest=Boolean\(user\.is_test_account\)/u,"test accounts must exercise writes with an explicit marker");
 assert.match(ingest,/is_test=excluded\.is_test/u,"test marker must survive aggregate upserts");
@@ -31,4 +32,4 @@ assert.match(ingest,/MAX_ITEM_RESULTS=500/u,"pilot ingest must cap item-result r
 assert.match(ingest,/MAX_FEEDBACK=50/u,"pilot ingest must cap feedback rows per request");
 assert.match(ingest,/RATE_LIMIT_REQUESTS=30/u,"pilot ingest must rate limit each user");
 
-console.log("✓ pilot autosync: minimal, consent-gated locally and server-side, CSRF-protected, debounced, marked-test-safe and absolute-total based");
+console.log("✓ pilot autosync: minimal, pilot_self consent-gated, CSRF-protected, debounced, marked-test-safe and absolute-total based");
