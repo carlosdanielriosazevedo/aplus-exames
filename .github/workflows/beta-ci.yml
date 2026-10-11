@@ -93,7 +93,16 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq postgresql-client
 
-      - name: Apply committed 008 verbatim and compare schema dumps
+      - name: Pilot schema proof — secret configured
+        if: github.head_ref == 'feature/pilot-readiness-ab'
+        shell: bash
+        env:
+          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          test -n "${DATABASE_URL:-}"
+
+      - name: Pilot schema proof — isolated branch target
         if: github.head_ref == 'feature/pilot-readiness-ab'
         shell: bash
         env:
@@ -101,23 +110,37 @@ jobs:
           EXPECTED_DB_HOST: ep-twilight-lab-b2nohzca-pooler.c-6.eu-central-1.aws.neon.tech
         run: |
           set -euo pipefail
-          if [ -z "${DATABASE_URL:-}" ]; then
-            echo "::error::PILOT_SMOKE_DATABASE_URL is not configured"
-            exit 1
-          fi
           actual_host="$(node -e 'process.stdout.write(new URL(process.env.DATABASE_URL).hostname)')"
-          if [ "$actual_host" != "$EXPECTED_DB_HOST" ]; then
-            echo "::error::Schema proof secret does not target the isolated Preview Neon branch"
-            exit 1
-          fi
-          normalize_dump() {
-            sed -e '/^\\restrict /d' -e '/^\\unrestrict /d'
-          }
-          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-before.sql
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql >/tmp/migration-008.log
-          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-after.sql
-          if ! cmp -s /tmp/schema-before.sql /tmp/schema-after.sql; then
-            echo "::error::Migration 008 verbatim changed the schema relative to the validated Preview branch"
-            exit 1
-          fi
-          echo "Migration 008 verbatim matches the validated Preview schema."
+          test "$actual_host" = "$EXPECTED_DB_HOST"
+
+      - name: Pilot schema proof — dump before
+        if: github.head_ref == 'feature/pilot-readiness-ab'
+        shell: bash
+        env:
+          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges \
+            | sed -e '/^\\restrict /d' -e '/^\\unrestrict /d' \
+            > /tmp/schema-before.sql
+
+      - name: Pilot schema proof — apply committed 008 verbatim
+        if: github.head_ref == 'feature/pilot-readiness-ab'
+        shell: bash
+        env:
+          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql
+
+      - name: Pilot schema proof — schema unchanged
+        if: github.head_ref == 'feature/pilot-readiness-ab'
+        shell: bash
+        env:
+          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges \
+            | sed -e '/^\\restrict /d' -e '/^\\unrestrict /d' \
+            > /tmp/schema-after.sql
+          cmp -s /tmp/schema-before.sql /tmp/schema-after.sql
