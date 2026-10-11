@@ -1,3 +1,5 @@
+import {pilotTelemetryAllowed} from "./pilotConsentClient";
+
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
 export const APP_STATE_VERSION=31;
@@ -19,6 +21,34 @@ function withoutLegacyBetaQueues(state){
   if(!state||typeof state!=="object")return state;
   const {betaSessions:_betaSessions,betaEvents:_betaEvents,...rest}=state;
   return rest;
+}
+
+function withoutPilotTelemetry(state){
+  if(!state||typeof state!=="object")return state;
+  const {
+    pilotAggregates:_pilotAggregates,
+    pilotItemResults:_pilotItemResults,
+    betaFeedback:_betaFeedback,
+    betaSessions:_betaSessions,
+    betaEvents:_betaEvents,
+    ...rest
+  }=state;
+  return rest;
+}
+
+export function clearLocalPilotTelemetry(){
+  if(typeof window==="undefined")return;
+  for(const key of [STORAGE_KEY,FRIENDS_STORAGE_KEY]){
+    try{
+      const raw=localStorage.getItem(key);
+      if(!raw)continue;
+      const parsed=JSON.parse(raw);
+      localStorage.setItem(key,JSON.stringify({...withoutPilotTelemetry(parsed),_stateVersion:APP_STATE_VERSION}));
+    }catch{}
+  }
+  pilotSyncLastSignature=null;
+  pilotSyncRetryAfter=0;
+  if(pilotSyncTimer){window.clearTimeout(pilotSyncTimer);pilotSyncTimer=null}
 }
 
 export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY){
@@ -55,14 +85,14 @@ function pilotSyncSignature(state){
 }
 
 function schedulePilotSync(state){
-  if(typeof window==="undefined"||state?.betaMode!=="friends_beta")return;
+  if(typeof window==="undefined"||state?.betaMode!=="friends_beta"||!pilotTelemetryAllowed())return;
   const hasTelemetry=(state.pilotAggregates?.length||0)+(state.pilotItemResults?.length||0)+(state.betaFeedback?.length||0)>0;
   if(!hasTelemetry)return;
 
   if(pilotSyncTimer)window.clearTimeout(pilotSyncTimer);
   pilotSyncTimer=window.setTimeout(async()=>{
     pilotSyncTimer=null;
-    if(pilotSyncInFlight||Date.now()<pilotSyncRetryAfter)return;
+    if(pilotSyncInFlight||Date.now()<pilotSyncRetryAfter||!pilotTelemetryAllowed())return;
     const signature=pilotSyncSignature(state);
     if(signature===pilotSyncLastSignature)return;
 
@@ -87,8 +117,9 @@ export function saveLocalState(state,storageKey=null){
   try{
     const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
     const clean=withoutLegacyBetaQueues(state);
-    localStorage.setItem(key,JSON.stringify({...clean,_stateVersion:APP_STATE_VERSION}));
-    schedulePilotSync(clean);
+    const persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
+    localStorage.setItem(key,JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION}));
+    schedulePilotSync(persisted);
     return true;
   }catch{
     return false;
@@ -100,6 +131,7 @@ export function clearLocalState(storageKey=STORAGE_KEY){
 }
 
 export function buildSyncEnvelope(state){
+  if(!pilotTelemetryAllowed())return {schema:"aplus-pilot-v1",aggregates:[],itemResults:[],feedback:[]};
   return {
     schema:"aplus-pilot-v1",
     aggregates:(state.pilotAggregates||[]).map(row=>({
@@ -139,6 +171,7 @@ export async function backendHealth(){
 }
 
 export async function syncStateToBackend(state){
+  if(!pilotTelemetryAllowed())return {ok:false,status:403,code:"PILOT_CONSENT_REQUIRED"};
   const payload=buildSyncEnvelope(state);
   try{
     const r=await fetch("/api/pilot/sync",{
