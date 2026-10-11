@@ -1,4 +1,4 @@
-import {pilotTelemetryAllowed} from "./pilotConsentClient";
+import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 
 export const STORAGE_KEY="a25";
 export const FRIENDS_STORAGE_KEY="a25-friends-beta";
