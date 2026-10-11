@@ -9,7 +9,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 18
 
     steps:
       - name: Checkout
@@ -86,3 +86,38 @@ jobs:
           DATABASE_URL: ""
           NEXT_PUBLIC_NEON_AUTH_URL: ""
           NEXT_PUBLIC_NEON_DATA_API_URL: ""
+
+      - name: Install PostgreSQL client for pilot schema proof
+        if: github.head_ref == 'feature/pilot-readiness-ab'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+
+      - name: Apply committed 008 verbatim and compare schema dumps
+        if: github.head_ref == 'feature/pilot-readiness-ab'
+        shell: bash
+        env:
+          DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+          EXPECTED_DB_HOST: ep-twilight-lab-b2nohzca-pooler.c-6.eu-central-1.aws.neon.tech
+        run: |
+          set -euo pipefail
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::PILOT_SMOKE_DATABASE_URL is not configured"
+            exit 1
+          fi
+          actual_host="$(node -e 'process.stdout.write(new URL(process.env.DATABASE_URL).hostname)')"
+          if [ "$actual_host" != "$EXPECTED_DB_HOST" ]; then
+            echo "::error::Schema proof secret does not target the isolated Preview Neon branch"
+            exit 1
+          fi
+          normalize_dump() {
+            sed -e '/^\\restrict /d' -e '/^\\unrestrict /d'
+          }
+          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-before.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql >/tmp/migration-008.log
+          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-after.sql
+          if ! cmp -s /tmp/schema-before.sql /tmp/schema-after.sql; then
+            echo "::error::Migration 008 verbatim changed the schema relative to the validated Preview branch"
+            exit 1
+          fi
+          echo "Migration 008 verbatim matches the validated Preview schema."
