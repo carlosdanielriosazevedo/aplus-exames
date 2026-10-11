@@ -109,6 +109,7 @@ export async function activePilotConsent(studentUserId){
     select id,consent_type,guardian_user_id,policy_version,granted_at,retention_until,is_test
     from consent_records
     where student_user_id=${studentUserId}
+      and consent_type='pilot_self'
       and revoked_at is null
       and retention_until>now()
     order by granted_at desc
