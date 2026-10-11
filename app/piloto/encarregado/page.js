@@ -21,7 +21,7 @@ export default function GuardianPilotInfo(){
       <h2>Como deixar de participar?</h2>
       <p className={styles.copy}>Nas Definições, o aluno pode parar a recolha de novos dados sem apagar imediatamente o histórico já recolhido, ou apagar os dados do piloto. O registo técnico do consentimento é mantido apenas como prova da concessão e eventual revogação.</p>
     </div>
-    <p className={styles.small}>Esta página é informativa. Não cria uma conta de encarregado de educação nem dá acesso aos dados do aluno.</p>
+    <p className={styles.small}>Esta página é apenas informativa. Não cria uma conta de encarregado de educação nem dá acesso aos dados do aluno.</p>
     <div className={styles.links}><Link href="/piloto">Voltar ao consentimento</Link><Link href="/privacidade">Privacidade</Link><Link href="/definicoes">Definições de privacidade</Link></div>
   </section></main>;
 }
