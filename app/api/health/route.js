@@ -27,6 +27,7 @@ export async function GET(){
     app:"APProva+ Exames",
     version:"5.5.0",
     persistence:"local-first",
+    region:process.env.VERCEL_REGION||null,
     backendConfigured:db.configured,
     backendReachable:db.reachable,
     provider:db.provider,
