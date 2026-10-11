@@ -18,9 +18,16 @@ export async function pilotConsentStatus(authUserId){
     limit 1
   `;
   const row=rows[0]||null;
+  const currentPolicyVersion=pilotPolicyVersion();
   return {
     ok:true,
-    active:Boolean(row&&!row.revoked_at&&new Date(row.retention_until).getTime()>Date.now()),
+    active:Boolean(
+      row&&
+      !row.revoked_at&&
+      currentPolicyVersion&&
+      row.policy_version===currentPolicyVersion&&
+      new Date(row.retention_until).getTime()>Date.now()
+    ),
     consent:row?{
       type:row.consent_type,
       policyVersion:row.policy_version,
