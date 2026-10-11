@@ -1,6 +1,9 @@
 name: Post-deploy smoke
 
 on:
+  push:
+    branches:
+      - feature/pilot-readiness-ab
   workflow_dispatch:
     inputs:
       base_url:
@@ -17,10 +20,13 @@ on:
 jobs:
   smoke:
     if: >-
+      github.event_name == 'push' ||
       github.event_name == 'workflow_dispatch' ||
-      (github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'main')
+      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    env:
+      PREVIEW_BASE_URL: https://aplus-exames-git-feature-a7cbd6-carlos-rios-azevedo-s-projects.vercel.app
     steps:
       - name: Checkout deployed revision
         uses: actions/checkout@v4
@@ -35,33 +41,47 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Wait for branch Preview to contain smoke API
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            body="$(curl -fsS --max-time 10 -H "x-vercel-protection-bypass: ${SMOKE_PROTECTION_BYPASS}" "${PREVIEW_BASE_URL}/api/health" 2>/dev/null || true)"
+            if printf '%s' "$body" | grep -q '"pilotSmokeApiVersion":1'; then
+              echo "Preview smoke API is ready."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Preview did not expose pilotSmokeApiVersion=1"
+          exit 1
+
       - name: Authenticated runtime smoke
         run: node scripts/post-deploy-smoke.mjs
         env:
-          SMOKE_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || github.event.deployment_status.environment_url }}
-          SMOKE_EPHEMERAL_SIGNUP: ${{ github.event_name == 'workflow_dispatch' && inputs.ephemeral_signup || 'false' }}
+          SMOKE_BASE_URL: ${{ github.event_name == 'push' && env.PREVIEW_BASE_URL || github.event_name == 'workflow_dispatch' && inputs.base_url || github.event.deployment_status.environment_url }}
+          SMOKE_EPHEMERAL_SIGNUP: ${{ github.event_name == 'push' && 'true' || github.event_name == 'workflow_dispatch' && inputs.ephemeral_signup || 'false' }}
           SMOKE_TEST_EMAIL: ${{ secrets.PILOT_SMOKE_EMAIL }}
           SMOKE_TEST_PASSWORD: ${{ secrets.PILOT_SMOKE_PASSWORD }}
-          SMOKE_DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
-          SMOKE_DATA_API_URL: ${{ secrets.PILOT_SMOKE_DATA_API_URL }}
-          SMOKE_RETENTION_UNTIL: ${{ secrets.PILOT_SMOKE_RETENTION_UNTIL }}
           SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
 
   preview-schema-proof:
     if: >-
-      github.event_name == 'deployment_status' &&
-      github.event.deployment_status.state == 'success' &&
-      github.event.deployment.ref == 'feature/pilot-readiness-ab'
+      github.event_name == 'push' ||
+      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'feature/pilot-readiness-ab')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
       DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
       EXPECTED_DB_HOST: ep-twilight-lab-b2nohzca-pooler.c-6.eu-central-1.aws.neon.tech
     steps:
-      - name: Checkout deployed revision
+      - name: Checkout validated revision
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.deployment.sha }}
+          ref: ${{ github.event_name == 'deployment_status' && github.event.deployment.sha || github.sha }}
 
       - name: Refuse any database except the isolated Preview branch
         shell: bash
@@ -93,7 +113,8 @@ jobs:
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql >/tmp/migration-008.log
           pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-after.sql
           if ! cmp -s /tmp/schema-before.sql /tmp/schema-after.sql; then
-            echo "::error::Migration 008 verbatim changed the schema relative to the validated Preview branch"
+            echo "::error::Migration 008 verbatim changed the validated Preview schema"
+            diff -u /tmp/schema-before.sql /tmp/schema-after.sql | head -200 || true
             exit 1
           fi
-          echo "Migration 008 verbatim matches the validated Preview schema."
+          echo "Migration 008 verbatim is schema-idempotent on the validated Preview branch."
