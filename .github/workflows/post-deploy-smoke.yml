@@ -68,11 +68,10 @@ jobs:
           SMOKE_TEST_PASSWORD: ${{ secrets.PILOT_SMOKE_PASSWORD }}
           SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
 
-  # Hard release gate. This is intentionally explicit instead of running on every
-  # PR/push because it needs privileged access to the isolated Neon proof branch.
-  # A production migration/merge must not proceed until this job is dispatched and green.
+  # Hard release gate. Runs together with the branch Preview smoke and can also be
+  # dispatched explicitly. It has privileged access only to the isolated Neon proof branch.
   preview-schema-proof:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
