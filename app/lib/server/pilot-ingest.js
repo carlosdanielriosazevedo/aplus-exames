@@ -104,12 +104,15 @@ export async function resolvePilotUser(authUserId){
 }
 
 export async function activePilotConsent(studentUserId){
+  const policyVersion=process.env.PILOT_POLICY_VERSION||process.env.NEXT_PUBLIC_PILOT_POLICY_VERSION||null;
+  if(!policyVersion)return null;
   const sql=getSql();
   const rows=await sql`
     select id,consent_type,guardian_user_id,policy_version,granted_at,retention_until,is_test
     from consent_records
     where student_user_id=${studentUserId}
       and consent_type='pilot_self'
+      and policy_version=${policyVersion}
       and revoked_at is null
       and retention_until>now()
     order by granted_at desc
