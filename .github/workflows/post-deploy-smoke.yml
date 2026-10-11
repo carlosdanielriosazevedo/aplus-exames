@@ -46,3 +46,54 @@ jobs:
           SMOKE_DATA_API_URL: ${{ secrets.PILOT_SMOKE_DATA_API_URL }}
           SMOKE_RETENTION_UNTIL: ${{ secrets.PILOT_SMOKE_RETENTION_UNTIL }}
           SMOKE_PROTECTION_BYPASS: ${{ secrets.PILOT_SMOKE_PROTECTION_BYPASS }}
+
+  preview-schema-proof:
+    if: >-
+      github.event_name == 'deployment_status' &&
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.ref == 'feature/pilot-readiness-ab'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      DATABASE_URL: ${{ secrets.PILOT_SMOKE_DATABASE_URL }}
+      EXPECTED_DB_HOST: ep-twilight-lab-b2nohzca-pooler.c-6.eu-central-1.aws.neon.tech
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+
+      - name: Refuse any database except the isolated Preview branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::PILOT_SMOKE_DATABASE_URL is not configured"
+            exit 1
+          fi
+          actual_host="$(node -e 'process.stdout.write(new URL(process.env.DATABASE_URL).hostname)')"
+          if [ "$actual_host" != "$EXPECTED_DB_HOST" ]; then
+            echo "::error::Schema proof secret does not target the isolated Preview Neon branch"
+            exit 1
+          fi
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+
+      - name: Apply committed 008 verbatim and compare schema dumps
+        shell: bash
+        run: |
+          set -euo pipefail
+          normalize_dump() {
+            sed -e '/^\\restrict /d' -e '/^\\unrestrict /d'
+          }
+          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-before.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/migrations/008_pilot_telemetry_consent.sql >/tmp/migration-008.log
+          pg_dump "$DATABASE_URL" --schema-only --no-owner --no-privileges | normalize_dump > /tmp/schema-after.sql
+          if ! cmp -s /tmp/schema-before.sql /tmp/schema-after.sql; then
+            echo "::error::Migration 008 verbatim changed the schema relative to the validated Preview branch"
+            exit 1
+          fi
+          echo "Migration 008 verbatim matches the validated Preview schema."
