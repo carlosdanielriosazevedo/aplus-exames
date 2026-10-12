@@ -265,48 +265,23 @@ export function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
   return [...map.values()];
 }
 
-function mergeSubjectRows(local=[],remote=[]){
-  const map=new Map();
-  for(const row of [...(remote||[]),...(local||[])]){
-    const id=row?.sessionId||[row?.kind,row?.label,row?.completedAt,(row?.itemIds||[]).join(",")].join("|");
-    if(id)map.set(id,row);
-  }
-  return [...map.values()].sort((a,b)=>Number(a?.completedAt||0)-Number(b?.completedAt||0)).slice(-100);
-}
-
-function mergeSubjectRecords(local={},remote={}){
-  const out={...(remote&&typeof remote==="object"?remote:{})};
-  for(const [id,row] of Object.entries(local&&typeof local==="object"?local:{})){
-    const old=out[id]&&typeof out[id]==="object"?out[id]:{};
-    const next={...old,...row};
-    for(const field of new Set([...Object.keys(old),...Object.keys(row||{})]))if(typeof old[field]==="number"&&typeof row?.[field]==="number")next[field]=Math.max(old[field],row[field]);
-    if(old.rubricEvidenceByObservation||row?.rubricEvidenceByObservation)next.rubricEvidenceByObservation={...(old.rubricEvidenceByObservation||{}),...(row?.rubricEvidenceByObservation||{})};
-    if(old.itemIds||row?.itemIds)next.itemIds=[...new Set([...(old.itemIds||[]),...(row?.itemIds||[])])].slice(-12);
-    out[id]=next;
-  }
-  return out;
-}
-
-function mergeSubjectProgressMaps(local,remote){
-  const a=local&&typeof local==="object"?local:{},b=remote&&typeof remote==="object"?remote:{};
-  const ids=new Set([...Object.keys(a),...Object.keys(b)]),out={};
-  for(const id of ids){
-    const l=a[id],r=b[id];
-    if(!l){out[id]={...r,subjectId:id};continue}
+function mergeSubjectProgressMaps(local={},remote={}){
+  const out={...remote};
+  for(const [id,l] of Object.entries(local||{})){
+    const r=out[id];
     if(!r){out[id]={...l,subjectId:id};continue}
     const localAt=Number(l.lastActivityAt)||0,remoteAt=Number(r.lastActivityAt)||0,newest=localAt>=remoteAt?l:r;
-    const sessions=mergeSubjectRows(l.sessions,r.sessions),completedIds=new Set(sessions.map(row=>row?.sessionId).filter(Boolean));
-    let lastPosition=newest?.lastPosition||null;
-    if(lastPosition?.sessionId&&completedIds.has(lastPosition.sessionId))lastPosition=null;
-    out[id]={
-      ...r,...l,...newest,subjectId:id,
+    const sessions=mergeByStableId(l.sessions,r.sessions,row=>row?.sessionId);
+    let lastPosition=newest.lastPosition||null;
+    if(lastPosition?.sessionId&&sessions.some(row=>row?.sessionId===lastPosition.sessionId))lastPosition=null;
+    out[id]={...r,...l,...newest,subjectId:id,
       diagnosticDone:!!(l.diagnosticDone||r.diagnosticDone),
       diagnosticCompletedAt:Math.max(Number(l.diagnosticCompletedAt)||0,Number(r.diagnosticCompletedAt)||0)||null,
-      sessions,missionHistory:mergeSubjectRows(l.missionHistory,r.missionHistory),
-      competence:mergeSubjectRecords(l.competence,r.competence),errorPatterns:mergeSubjectRecords(l.errorPatterns,r.errorPatterns),
+      sessions,missionHistory:mergeByStableId(l.missionHistory,r.missionHistory,row=>row?.sessionId),
+      competence:{...(r.competence||{}),...(l.competence||{}),...(newest.competence||{})},
+      errorPatterns:{...(r.errorPatterns||{}),...(l.errorPatterns||{}),...(newest.errorPatterns||{})},
       lastPosition,lastActivityAt:Math.max(localAt,remoteAt)||null,
-      version:Math.max(Number(l.version)||0,Number(r.version)||0,4)
-    };
+      version:Math.max(Number(l.version)||0,Number(r.version)||0,4)};
   }
   return out;
 }
