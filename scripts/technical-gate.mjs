@@ -55,6 +55,7 @@ const checks=[
   ["Mini-exames vNext completos","npm",["run","vnext-exam:audit"]],
   ["Mobile e legibilidade","npm",["run","mobile:audit"]],
   ["Experiência do aluno","npm",["run","student-experience:audit"]],
+  ["Navegação e recovery sem becos sem saída","node",["scripts/navigation-recovery-hardening-audit.mjs"]],
   ["Identidade APProva+ e Apronso","npm",["run","apronso-brand:audit"]],
   ["Resposta construída v2","npm",["run","constructed-response:audit"]],
   ["Resposta construída adversarial","npm",["run","constructed-response:adversarial-audit"]],
