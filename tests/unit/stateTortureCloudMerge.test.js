@@ -60,6 +60,14 @@ describe("launch state torture · multi-device subject progress",()=>{
     expect(combined.subjectProgress["physics-chemistry-a"].sessions).toHaveLength(1);
   });
 
+  it("does not discard a valid pause just because an incomplete history row has the same id",()=>{
+    const local=state({"physics-chemistry-a":progress({lastActivityAt:700,lastPosition:{sessionId:"still-open",kind:"training",current:4,currentAnswer:"rascunho",updatedAt:700},sessions:[{sessionId:"still-open",kind:"training"}]})});
+    const remote=state({"physics-chemistry-a":progress({lastActivityAt:600})});
+    const combined=safeCloudMerge(local,remote);
+    expect(combined.subjectProgress["physics-chemistry-a"].lastPosition?.sessionId).toBe("still-open");
+    expect(combined.subjectProgress["physics-chemistry-a"].lastPosition?.currentAnswer).toBe("rascunho");
+  });
+
   it("keeps separate Portuguese and FQ A progress instead of letting the local map overwrite remote subjects",()=>{
     const local=state({portuguese:progress({subjectId:"portuguese",lastActivityAt:400,sessions:[{sessionId:"pt-1",completedAt:400}]})});
     const remote=state({"physics-chemistry-a":progress({lastActivityAt:450,sessions:[{sessionId:"fqa-1",completedAt:450}]})});
