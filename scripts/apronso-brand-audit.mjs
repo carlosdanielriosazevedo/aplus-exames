@@ -6,9 +6,12 @@ const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.ur
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const secondaryScreens=readFileSync(new URL("../app/components/SecondaryScreens.js",import.meta.url),"utf8");
-const page=[welcome,mainPage,chrome,studyModeHub].join("\n");
-const studentSurfaces=[mainPage,secondaryScreens].join("\n");
+const portuguese=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
+const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
+const page=[welcome,mainPage,chrome,studyModeHub,portuguese,fqa].join("\n");
+const studentSurfaces=[mainPage,secondaryScreens,portuguese,fqa].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
+const parityCss=readFileSync(new URL("../app/apronso-parity.css",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
 const poses=["welcome","thinking","celebrate","progress"];
 assert.match(layout,/APProva\+/);assert.match(chrome,/aria-label="APProva\+"/);assert.doesNotMatch(page,/APPp/);assert.doesNotMatch(layout,/APPp/);
@@ -20,7 +23,19 @@ assert.match(css,/\.brandAP,\.brandPlus,\.logo \.brandAP,\.logo \.brandPlus\{col
 assert.match(css,/\.testerSegmentPicker button\{background:var\(--app-card-light\);[^}]*color:var\(--app-navy\)/);assert.match(css,/\.testerSegmentPicker button\.selected\{background:var\(--app-card-dark\);[^}]*color:#fff/);assert.match(css,/\.testerSegmentPicker button\.selected small\{color:#dce7ef\}/);
 assert.ok(css.lastIndexOf(".dark,.light,.learnHome{background:#fff")>css.lastIndexOf(".learnHome{background:radial-gradient"),"O fundo branco global tem de prevalecer sobre os temas antigos.");
 assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);assert.doesNotMatch(css,/\.diagApronsoHero>\.apronso\{[^}]*margin:-/);
-assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=2,"Apronso must remain on the main student surfaces");
+
+// Apronso must remain part of the layout, not a detached decoration.
+assert.match(parityCss,/\.apronso\{[\s\S]*?object-fit:contain;[\s\S]*?object-position:center bottom;/u);
+assert.match(parityCss,/\.diagApronsoHero \.diagPurposeHero\{[\s\S]*?padding-right:116px;/u,"No diagnóstico mobile o texto deve reservar espaço para o Apronso dentro do cartão.");
+assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?position:absolute;[\s\S]*?bottom:8px;/u,"No diagnóstico mobile o Apronso deve ficar ancorado ao cartão explicativo.");
+assert.match(parityCss,/\.learnIntro::after\{[\s\S]*?background:url\('\/mascot\/apronso-welcome\.webp'\)/u,"Apronso deve continuar integrado no Aprender.");
+assert.match(parityCss,/\.progressPage \.progressHero>\.apronso\{[\s\S]*?position:absolute;/u,"Apronso deve continuar integrado no cartão de Progresso em mobile.");
+
+assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=4,"Apronso must remain on shared student surfaces across subjects");
 assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"Apronso must remain on the shared study hub");
+assert.match(portuguese,/Apronso acompanha o teu progresso/u,"Português deve manter Apronso no Progresso.");
+assert.match(fqa,/Apronso acompanha o teu progresso/u,"FQ A deve manter Apronso no Progresso.");
+assert.match(fqa,/diagApronsoHero/u,"FQ A deve reutilizar o mesmo padrão visual do diagnóstico.");
+
 for(const pose of poses){const asset=new URL(`../public/mascot/apronso-${pose}.webp`,import.meta.url);const size=statSync(asset).size;assert.ok(size>10_000,`${pose}: asset appears incomplete`);assert.ok(size<100_000,`${pose}: asset must remain lightweight for mobile`);assert.match(page,new RegExp(`(?:pose=|mascot:)['\"]${pose}['\"]`),`${pose}: pose must be used in the experience`);}
-console.log("✓ APProva+ identity: white surfaces, action-card palette, onboarding and four Apronso poses guarded");
+console.log("✓ APProva+ identity: Apronso is present and visually integrated across Matemática A, Português and FQ A");
