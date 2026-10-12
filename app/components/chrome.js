@@ -1,6 +1,6 @@
 // Componentes de apresentação extraídos de app/page.js (sem estado próprio,
 // sem lógica de negócio). Primeiro passo de divisão do monólito.
-import {Children,isValidElement,useState, useEffect} from "react";
+import {Children,isValidElement,useState,useEffect,useRef} from "react";
 import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
 import {engagementSummary} from "../lib/engagement";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
@@ -31,7 +31,58 @@ function safePrevious(go,to){
 }
 export const Back=({go,to})=><button className="back" type="button" onClick={()=>safePrevious(go,to)}>← Voltar</button>;
 
-export function StudySessionHeader({progress=0,label="",onExit,exitLabel="Guardar e sair"}){const width=Math.max(0,Math.min(100,Number(progress)||0));return <div className="focusTop sessionTop"><button type="button" onClick={onExit} aria-label={exitLabel}>×</button><div className="focusTrack"><i style={{width:`${width}%`}}/></div><span>{label}</span></div>}
+function runExitReplacingSessionEntry(onExit){
+  if(typeof window==="undefined"){onExit?.();return}
+  const originalPush=window.history.pushState.bind(window.history);
+  const originalReplace=window.history.replaceState.bind(window.history);
+  let intercepted=false;
+  window.history.pushState=(state,title,url)=>{
+    intercepted=true;
+    originalReplace({...state,approvaSessionGuard:false},title,url);
+  };
+  try{onExit?.()}finally{window.history.pushState=originalPush}
+  if(!intercepted&&window.history.state?.approvaSessionGuard){
+    originalReplace({...window.history.state,approvaSessionGuard:false},"");
+  }
+}
+
+export function StudySessionHeader({progress=0,label="",onExit,exitLabel="Sair da sessão"}){
+  const width=Math.max(0,Math.min(100,Number(progress)||0));
+  const onExitRef=useRef(onExit);
+  const leavingRef=useRef(false);
+  useEffect(()=>{onExitRef.current=onExit},[onExit]);
+  useEffect(()=>{
+    if(typeof window==="undefined")return;
+    const base={...window.history.state,approvaSessionGuard:false};
+    if(!window.history.state?.approvaSessionGuard){
+      window.history.pushState({...base,approvaSessionGuard:true},"");
+    }
+    const finish=()=>runExitReplacingSessionEntry(onExitRef.current);
+    const onPop=event=>{
+      if(event.state?.approvaSessionGuard)return;
+      if(leavingRef.current){leavingRef.current=false;finish();return}
+      const safeDraft=exitLabel==="Guardar e sair";
+      const message=safeDraft
+        ?"Guardar e sair desta sessão? O progresso já registado fica guardado."
+        :"Sair desta sessão? O progresso já submetido fica guardado. Se ainda não carregaste em Responder, a resposta atual pode não ficar guardada.";
+      if(window.confirm(message))finish();
+      else window.history.pushState({...event.state,approvaSessionGuard:true},"");
+    };
+    window.addEventListener("popstate",onPop);
+    return ()=>window.removeEventListener("popstate",onPop);
+  },[exitLabel]);
+  const safeExit=()=>{
+    if(typeof window==="undefined"){onExitRef.current?.();return}
+    const safeDraft=exitLabel==="Guardar e sair";
+    const message=safeDraft
+      ?"Guardar e sair desta sessão? O progresso já registado fica guardado."
+      :"Sair desta sessão? O progresso já submetido fica guardado. Se ainda não carregaste em Responder, a resposta atual pode não ficar guardada.";
+    if(!window.confirm(message))return;
+    if(window.history.state?.approvaSessionGuard){leavingRef.current=true;window.history.back();return}
+    runExitReplacingSessionEntry(onExitRef.current);
+  };
+  return <div className="focusTop sessionTop"><button type="button" onClick={safeExit} aria-label={exitLabel}>×</button><div className="focusTrack"><i style={{width:`${width}%`}}/></div><span>{label}</span></div>
+}
 export const STUDENT_NAV=[["home","Aprender"],["train","Treinar"],["ranking","Ranking"],["progress","Progresso"]];
 function NavIcon({name}){const common={viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"1.9",strokeLinecap:"round",strokeLinejoin:"round","aria-hidden":"true"};if(name==="home")return <svg {...common}><path d="M3.5 10.5 12 3.8l8.5 6.7"/><path d="M5.5 9.8v10h13v-10"/><path d="M9.5 19.8v-6h5v6"/></svg>;if(name==="train")return <svg {...common}><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="m15.2 8.8 4.3-4.3"/><path d="M16.5 4.5h3v3"/></svg>;if(name==="ranking")return <svg {...common}><path d="M8 20v-6H4.5v6"/><path d="M13.75 20V9H10.25v11"/><path d="M19.5 20V4h-3.5v16"/></svg>;return <svg {...common}><path d="M4 18.5V13"/><path d="M9.3 18.5V9.5"/><path d="M14.7 18.5V6"/><path d="M20 18.5V3.5"/><path d="M3.5 20.5h17"/></svg>}
 export function StudentNav({active,go}){return <nav className="studentNav" aria-label="Navegação principal">{STUDENT_NAV.map(([id,label])=><button type="button" key={id} className={active===id?"active":""} aria-current={active===id?"page":undefined} onClick={()=>go(id)}><span className="studentNavIcon"><NavIcon name={id}/></span><b>{label}</b></button>)}</nav>}
@@ -75,7 +126,7 @@ export const Shell=({children,className=""})=>{
         if(window.history.length>1)window.history.back();else goSafeStart();
       }}>← Voltar</button>}
       {children}
-      {fatalRecovery&&<div className="recoveryActions" role="group" aria-label="Opções de recuperação">
+      {fatalRecovery&&<div className="recoveryActions" role="group" aria-label="Opções de recuperação" style={{display:"grid",gap:10,marginTop:18}}>
         <button className="primary" type="button" onClick={retryApp}>Tentar novamente</button>
         <button className="secondary" type="button" onClick={goSafeStart}>Ir para o início</button>
       </div>}
