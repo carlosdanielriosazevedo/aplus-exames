@@ -1,6 +1,7 @@
 const KEY="a25-active-session-v1";
 const FRIENDS_KEY="a25-friends-active-session-v1";
 const MAX_AGE_MS=1000*60*60*24;
+const EMPTY_DIAGNOSTIC_MAX_AGE_MS=1000*60*5;
 
 function keyForMode(mode){
   return mode==="friends_beta"?FRIENDS_KEY:KEY;
@@ -24,9 +25,11 @@ export function loadSessionDraftStatus(mode="internal"){
   if(!raw)return {draft:null,error:false};
   try{
     const draft=JSON.parse(raw);
+    const age=Date.now()-(draft?.savedAt||0);
     const durableDiagnostic=draft?.kind==="diagnostic"&&[2,3,4].includes(draft?.version)
       &&((draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending");
-    if(!draft?.kind || !draft.savedAt || (!durableDiagnostic&&Date.now()-draft.savedAt>MAX_AGE_MS)){
+    const staleEmptyDiagnostic=draft?.kind==="diagnostic"&&!durableDiagnostic&&age>EMPTY_DIAGNOSTIC_MAX_AGE_MS;
+    if(!draft?.kind || !draft.savedAt || staleEmptyDiagnostic || (!durableDiagnostic&&age>MAX_AGE_MS)){
       localStorage.removeItem(key);
       return {draft:null,error:false};
     }
