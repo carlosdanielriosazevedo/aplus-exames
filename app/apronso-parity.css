@@ -1,4 +1,18 @@
 /* Apronso visibility/parity across the three student workspaces. */
+
+/* Shared mascot integration rules. Keep Apronso visually anchored to the
+   surface he is explaining instead of looking like a floating image. */
+.apronso{
+  object-fit:contain;
+  object-position:center bottom;
+}
+.apronsoNudge{
+  overflow:hidden;
+}
+.apronsoNudge .apronso{
+  align-self:end;
+}
+
 .learnIntro{
   position:relative;
   min-height:138px;
@@ -13,6 +27,34 @@
   height:142px;
   background:url('/mascot/apronso-welcome.webp') center bottom/contain no-repeat;
   pointer-events:none;
+}
+
+/* Diagnostic: Apronso belongs to the explanatory card. On compact screens
+   the character sits inside the same visual block, with reserved text space,
+   rather than occupying a detached column beside it. */
+@media(max-width:760px){
+  .diagApronsoHero{
+    display:block;
+    position:relative;
+  }
+  .diagApronsoHero>div{
+    min-width:0;
+  }
+  .diagApronsoHero .diagPurposeHero{
+    position:relative;
+    min-height:146px;
+    padding-right:116px;
+  }
+  .diagApronsoHero>.apronso{
+    position:absolute;
+    right:14px;
+    bottom:8px;
+    width:94px;
+    height:126px;
+    margin:0;
+    z-index:1;
+    pointer-events:none;
+  }
 }
 
 /* On tablet/mobile the previous design hid Apronso from Progresso. Keep him
@@ -37,6 +79,7 @@
     min-height:0!important;
     max-height:none;
     object-fit:contain;
+    object-position:center bottom;
     z-index:1;
     pointer-events:none;
   }
@@ -81,6 +124,16 @@
     height:118px;
     right:0;
   }
+  .diagApronsoHero .diagPurposeHero{
+    min-height:150px;
+    padding-right:108px;
+  }
+  .diagApronsoHero>.apronso{
+    right:10px;
+    bottom:8px;
+    width:90px;
+    height:120px;
+  }
   .progressPage .progressHero>div:first-child{
     min-height:132px;
     padding-right:102px;
@@ -101,6 +154,15 @@
   .learnIntro::after{
     width:82px;
     height:102px;
+  }
+  .diagApronsoHero .diagPurposeHero{
+    min-height:154px;
+    padding-right:94px;
+  }
+  .diagApronsoHero>.apronso{
+    right:8px;
+    width:82px;
+    height:112px;
   }
   .progressPage .progressHero>div:first-child{
     padding-right:88px;
