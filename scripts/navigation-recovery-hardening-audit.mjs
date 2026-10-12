@@ -29,6 +29,8 @@ assert.match(setup,/export function StudentProfile/u,"O onboarding de perfil dev
 assert.match(setup,/export function TaughtCurriculum/u,"A seleção de matéria deve continuar numa Shell elegível para retrocesso automático.");
 assert.match(setup,/export function GoalScreen/u,"O objetivo deve continuar numa Shell elegível para retrocesso automático.");
 assert.match(fqa,/StudySessionHeader/u,"Sessões normais de FQ A devem usar o cabeçalho de saída segura comum.");
+assert.match(fqa,/useEffect\(\(\)=>\{\s*if\(!session\|\|session\.finished\)return;[\s\S]*active\.sessionId!==session\.sessionId[\s\S]*currentAnswer:answer/u,"FQ A deve persistir a resposta corrente antes de o aluno carregar em Responder, sem contaminar outra sessão.");
+assert.match(fqa,/StudySessionHeader[\s\S]*exitLabel="Guardar e sair"/u,"Depois do autosave, a sessão normal de FQ A deve assumir explicitamente Guardar e sair.");
 assert.match(ptExam,/onDraftChange/u,"Mini-exames de Português devem continuar a persistir rascunho durante a sessão.");
 
-console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas e estados fatais com saída segura");
+console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura e rascunho FQ A preservado");

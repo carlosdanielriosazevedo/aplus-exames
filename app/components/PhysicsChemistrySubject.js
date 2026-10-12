@@ -92,6 +92,20 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     }).filter(Boolean));
   },[view]);
 
+  useEffect(()=>{
+    if(!session||session.finished)return;
+    setS(prev=>{
+      const active=subjectProgressFor(prev,SUBJECT_ID).lastPosition;
+      if(!active||active.sessionId!==session.sessionId)return prev;
+      return advanceSubjectSession(prev,SUBJECT_ID,{
+        current:session.current,
+        results,
+        currentResult:feedback,
+        currentAnswer:answer
+      });
+    });
+  },[answer,feedback,results,session?.current,session?.finished,session?.sessionId,setS]);
+
   const sharedTop=<StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div>
     <button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button>
     <button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button>
@@ -198,7 +212,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const domain=physicsChemistryDomainById(item.domain);
     const position=session.current+1;
     return <Shell className="wideStudentShell">
-      <StudySessionHeader progress={position/session.items.length*100} label={position+"/"+session.items.length} onExit={()=>{setSession(null);go("home")}}/>
+      <StudySessionHeader progress={position/session.items.length*100} label={position+"/"+session.items.length} onExit={()=>{setSession(null);go("home")}} exitLabel="Guardar e sair"/>
       <p className="eyebrow">{session.label.toUpperCase()}</p>
       <h1>{domain?.shortTitle||"Física e Química A"}</h1>
       <div className="trainingScopeNote"><b>{item.year+" · "+domain?.area}</b><span>{domain?.title}</span></div>
