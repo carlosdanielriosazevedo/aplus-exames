@@ -4,7 +4,7 @@ export default function NotFound(){
       <p className="eyebrow">APProva+</p>
       <h1>Esta página não existe.</h1>
       <p>Podes voltar à página inicial sem alterar o teu progresso.</p>
-      <a href="/" className="buttonLike">Voltar ao início</a>
+      <a href="/" style={{display:"inline-block",marginTop:12,padding:"12px 18px",borderRadius:12,fontWeight:800,textDecoration:"none",background:"white",color:"#081827"}}>Voltar ao início</a>
     </section>
   </main>;
 }
