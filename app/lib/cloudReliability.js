@@ -272,8 +272,9 @@ function mergeSubjectProgressMaps(local={},remote={}){
     if(!r){out[id]={...l,subjectId:id};continue}
     const localAt=Number(l.lastActivityAt)||0,remoteAt=Number(r.lastActivityAt)||0,newest=localAt>=remoteAt?l:r;
     const sessions=mergeByStableId(l.sessions,r.sessions,row=>row?.sessionId);
+    const completedIds=new Set(sessions.filter(row=>row?.completedAt).map(row=>row.sessionId).filter(Boolean));
     let lastPosition=newest?.lastPosition||null;
-    if(lastPosition?.sessionId&&sessions.some(row=>row?.sessionId===lastPosition.sessionId))lastPosition=null;
+    if(lastPosition?.sessionId&&completedIds.has(lastPosition.sessionId))lastPosition=null;
     out[id]={...r,...l,...newest,subjectId:id,
       diagnosticDone:!!(l.diagnosticDone||r.diagnosticDone),
       diagnosticCompletedAt:Math.max(Number(l.diagnosticCompletedAt)||0,Number(r.diagnosticCompletedAt)||0)||null,
