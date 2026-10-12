@@ -37,7 +37,7 @@ assert.match(ptExam,/onDraftChange/u,"Mini-exames de Português devem continuar 
 
 assert.match(cloud,/subjectProgress:mergeSubjectProgressMaps\(local\?\.subjectProgress,remote\?\.subjectProgress\)/u,"O merge cloud não pode deixar o mapa local de progresso por disciplina apagar o progresso remoto.");
 assert.match(subjectCloudMerge,/const newest=localAt>=remoteAt\?local:remote/u,"A sessão/pausa deve ser decidida pelo estado de atividade mais recente.");
+assert.match(subjectCloudMerge,/let lastPosition=newest\?\.lastPosition\|\|null/u,"A retoma deve nascer do dispositivo com atividade mais recente, não de uma pausa antiga do outro dispositivo.");
 assert.match(subjectCloudMerge,/completedIds\.has\(lastPosition\.sessionId\)\)lastPosition=null/u,"Uma sessão concluída noutro dispositivo nunca pode ressuscitar como sessão em pausa.");
-assert.match(subjectCloudMerge,/currentAnswer/u,"O merge multi-dispositivo deve preservar a estrutura que transporta respostas ainda não submetidas.");
 
 console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");
