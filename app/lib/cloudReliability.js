@@ -1,6 +1,8 @@
 
 "use client";
 
+import {mergeSubjectProgressMaps} from "./subjectProgressCloudMerge.js";
+
 const DEVICE_KEY="a25-device-id-v1";
 const SNAPSHOT_KEY="a25-cloud-snapshots-v1";
 const PENDING_KEY="a25-cloud-pending-v1";
@@ -293,6 +295,8 @@ export function safeCloudMerge(local,remote){
     ...remote,
     ...local,
     scores,
+    subjectProgress:mergeSubjectProgressMaps(local?.subjectProgress,remote?.subjectProgress),
+    subjectProgressModelVersion:Math.max(Number(local?.subjectProgressModelVersion)||0,Number(remote?.subjectProgressModelVersion)||0),
     xp:Math.max(Number(local?.xp)||0,Number(remote?.xp)||0),
     diagnosticDone:!!(local?.diagnosticDone||remote?.diagnosticDone),
     diagnosticAnswers:Math.max(Number(local?.diagnosticAnswers)||0,Number(remote?.diagnosticAnswers)||0),
