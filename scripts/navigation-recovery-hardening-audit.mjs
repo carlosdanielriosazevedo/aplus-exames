@@ -6,6 +6,8 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const setup=readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const ptExam=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
+const cloud=readFileSync(new URL("../app/lib/cloudReliability.js",import.meta.url),"utf8");
+const subjectCloudMerge=readFileSync(new URL("../app/lib/subjectProgressCloudMerge.js",import.meta.url),"utf8");
 
 assert.match(chrome,/function safePrevious[\s\S]*window\.history\.back\(\)/u,"Voltar sem destino explícito deve respeitar o histórico real da app.");
 assert.match(chrome,/export const Back=\(\{go,to\}\)/u,"Back deve distinguir destino explícito de retrocesso real.");
@@ -33,4 +35,9 @@ assert.match(fqa,/useEffect\(\(\)=>\{\s*if\(!session\|\|session\.finished\)retur
 assert.match(fqa,/StudySessionHeader[\s\S]*exitLabel="Guardar e sair"/u,"Depois do autosave, a sessão normal de FQ A deve assumir explicitamente Guardar e sair.");
 assert.match(ptExam,/onDraftChange/u,"Mini-exames de Português devem continuar a persistir rascunho durante a sessão.");
 
-console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura e rascunho FQ A preservado");
+assert.match(cloud,/subjectProgress:mergeSubjectProgressMaps\(local\?\.subjectProgress,remote\?\.subjectProgress\)/u,"O merge cloud não pode deixar o mapa local de progresso por disciplina apagar o progresso remoto.");
+assert.match(subjectCloudMerge,/const newest=localAt>=remoteAt\?local:remote/u,"A sessão/pausa deve ser decidida pelo estado de atividade mais recente.");
+assert.match(subjectCloudMerge,/completedIds\.has\(lastPosition\.sessionId\)\)lastPosition=null/u,"Uma sessão concluída noutro dispositivo nunca pode ressuscitar como sessão em pausa.");
+assert.match(subjectCloudMerge,/currentAnswer/u,"O merge multi-dispositivo deve preservar a estrutura que transporta respostas ainda não submetidas.");
+
+console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");
