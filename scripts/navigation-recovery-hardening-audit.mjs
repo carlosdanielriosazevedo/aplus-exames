@@ -35,7 +35,7 @@ assert.match(fqa,/useEffect\(\(\)=>\{\s*if\(!session\|\|session\.finished\)retur
 assert.match(fqa,/StudySessionHeader[\s\S]*exitLabel="Guardar e sair"/u,"Depois do autosave, a sessão normal de FQ A deve assumir explicitamente Guardar e sair.");
 assert.match(ptExam,/onDraftChange/u,"Mini-exames de Português devem continuar a persistir rascunho durante a sessão.");
 
-assert.match(cloud,/export \{safeCloudMerge\} from "\.\/cloudStateMerge"/u,"O merge pesado deve ficar isolado num módulo separado do bootstrap inicial.");
+assert.match(cloud,/export \{safeCloudMerge\} from "\.\/cloudStateMerge\.js"/u,"O merge pesado deve ficar isolado num módulo separado do bootstrap inicial.");
 assert.doesNotMatch(cloud,/function mergeSubjectProgressMaps\(/u,"O módulo carregado no arranque não deve conter o merge pesado por disciplina.");
 assert.match(cloudMerge,/function mergeSubjectProgressMaps\(/u,"O merge de progresso por disciplina deve permanecer implementado.");
 assert.match(cloudMerge,/subjectProgress:mergeSubjectProgressMaps\(local\?\.subjectProgress,remote\?\.subjectProgress\)/u,"O merge cloud não pode deixar o mapa local de progresso por disciplina apagar o progresso remoto.");
