@@ -48,6 +48,20 @@ export function clearSessionDraft(mode="internal"){
   try{localStorage.removeItem(keyForMode(mode));return true}catch{return false}
 }
 
+export function restartDiagnosticDraft(mode="internal"){
+  const key=keyForMode(mode);
+  let raw;
+  try{raw=localStorage.getItem(key)}catch{return {ok:false,reason:"storage_read_failed"}}
+  if(!raw)return {ok:true,cleared:false};
+  let draft;
+  try{draft=JSON.parse(raw)}catch{return {ok:false,reason:"draft_unreadable"}}
+  if(draft?.kind!=="diagnostic")return {ok:false,reason:"not_diagnostic"};
+  try{
+    localStorage.removeItem(key);
+    return {ok:true,cleared:true};
+  }catch{return {ok:false,reason:"storage_clear_failed"}}
+}
+
 export function draftScreen(draft){
   if(!draft)return null;
   if(draft.kind==="mission")return "mission";

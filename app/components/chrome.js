@@ -2,6 +2,7 @@
 // sem lógica de negócio). Primeiro passo de divisão do monólito.
 import {Children,isValidElement,useState,useEffect,useRef} from "react";
 import {isFriendsBeta, friendsBetaRequested} from "../lib/friendsBeta";
+import {restartDiagnosticDraft} from "../lib/sessionDraft";
 import {engagementSummary} from "../lib/engagement";
 import {SECONDARY_EXAM_SUBJECTS} from "../data/subjects";
 
@@ -115,10 +116,25 @@ function goSafeStart(){
   const query=window.location.search||"";
   window.location.assign(`/${query}`);
 }
+function restartDiagnostic(){
+  if(typeof window==="undefined")return;
+  const confirmed=window.confirm("Isto elimina apenas a sessão de diagnóstico que não foi possível recuperar. O teu progresso académico já guardado mantém-se. Queres começar um diagnóstico novo?");
+  if(!confirmed)return;
+  const betaMode=friendsBetaRequested(window.location.search)?"friends_beta":"internal";
+  const result=restartDiagnosticDraft(betaMode);
+  if(!result.ok){
+    window.alert("Não foi possível limpar esta sessão. Reabre a app e tenta novamente.");
+    return;
+  }
+  const state={...(window.history.state||{}),approvaScreen:"diag",approvaSessionGuard:false};
+  window.history.replaceState(state,"");
+  window.dispatchEvent(new PopStateEvent("popstate",{state}));
+}
 export const Shell=({children,className=""})=>{
   const screen=currentScreen();
   const text=childText(children);
   const fatalRecovery=/Não foi possível (?:recuperar esta sessão|ler o progresso guardado)/u.test(text);
+  const diagnosticRecovery=/Não foi possível recuperar esta sessão/u.test(text)||(/Estamos a confirmar o teu progresso/u.test(text)&&/Tentar novamente/u.test(text));
   const autoBack=!!screen&&!ROOT_SCREENS.has(screen)&&!FOCUS_SCREENS.has(screen)&&!hasBack(children);
   return <main className={`light ${className}`.trim()}><FriendsBetaRibbon/>
     <section className="panel">
@@ -126,6 +142,9 @@ export const Shell=({children,className=""})=>{
         if(window.history.length>1)window.history.back();else goSafeStart();
       }}>← Voltar</button>}
       {children}
+      {diagnosticRecovery&&<div className="recoveryActions" role="group" aria-label="Recomeçar diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
+        <button className="secondary" type="button" onClick={restartDiagnostic}>Começar diagnóstico de novo</button>
+      </div>}
       {fatalRecovery&&<div className="recoveryActions" role="group" aria-label="Opções de recuperação" style={{display:"grid",gap:10,marginTop:18}}>
         <button className="primary" type="button" onClick={retryApp}>Tentar novamente</button>
         <button className="secondary" type="button" onClick={goSafeStart}>Ir para o início</button>
