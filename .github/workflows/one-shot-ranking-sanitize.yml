@@ -1,0 +1,53 @@
+name: One-shot ranking profile hardening
+
+on:
+  push:
+    branches:
+      - launch/public-rc-hardening
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: launch/public-rc-hardening
+          fetch-depth: 0
+      - name: Harden public ranking profile input
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('app/lib/competition.js')
+          s=p.read_text()
+          old='''export function updateCompetitionProfile(state,patch={}){\n  const c=normalizeCompetition(state);\n  const nickname=patch.nickname!==undefined\n    ?String(patch.nickname||"").trim().replace(/\\s+/g," ").slice(0,24)\n    :c.profile.nickname;\n  return {\n    ...state,\n    competition:{\n      ...c,\n      profile:{\n        ...c.profile,\n        ...patch,\n        nickname:nickname||null\n      }\n    }\n  };\n}'''
+          new='''function cleanRankingText(value,max){\n  return String(value||"")\n    .replace(/[\\u0000-\\u001f\\u007f]/gu," ")\n    .replace(/\\s+/gu," ")\n    .trim()\n    .slice(0,max);\n}\n\nexport function updateCompetitionProfile(state,patch={}){\n  const c=normalizeCompetition(state);\n  const nickname=patch.nickname!==undefined\n    ?cleanRankingText(patch.nickname,24)\n    :c.profile.nickname;\n  const region=patch.region!==undefined\n    ?(PORTUGAL_REGIONS.includes(cleanRankingText(patch.region,40))?cleanRankingText(patch.region,40):null)\n    :c.profile.region;\n  const school=patch.school!==undefined\n    ?cleanRankingText(patch.school,80)||null\n    :c.profile.school;\n  const districtOptIn=patch.districtOptIn!==undefined?Boolean(patch.districtOptIn):Boolean(c.profile.districtOptIn);\n  const schoolOptIn=patch.schoolOptIn!==undefined?Boolean(patch.schoolOptIn):Boolean(c.profile.schoolOptIn);\n  return {\n    ...state,\n    competition:{\n      ...c,\n      profile:{\n        ...c.profile,\n        nickname:nickname||null,\n        region,\n        school,\n        districtOptIn,\n        schoolOptIn\n      }\n    }\n  };\n}'''
+          if old not in s and new not in s:raise SystemExit('Ranking profile function not found')
+          if old in s:s=s.replace(old,new)
+          p.write_text(s)
+
+          a=Path('scripts/competition-audit.mjs')
+          t=a.read_text()
+          marker='''assert.equal(publicFields.schoolYear,"12.º");\n'''
+          extra='''assert.equal(publicFields.schoolYear,"12.º");\n\n// Public profile input is allowlisted and normalized before it can enter ranking state.\nconst hardenedProfile=updateCompetitionProfile(s,{\n  nickname:"  Sigma17\\n ",\n  region:"Região inventada",\n  school:"\\u0000  Escola   Demo  ",\n  districtOptIn:"yes",\n  schoolOptIn:1,\n  secretField:"must-not-survive"\n});\nassert.equal(hardenedProfile.competition.profile.nickname,"Sigma17");\nassert.equal(hardenedProfile.competition.profile.region,null);\nassert.equal(hardenedProfile.competition.profile.school,"Escola Demo");\nassert.equal(hardenedProfile.competition.profile.districtOptIn,true);\nassert.equal(hardenedProfile.competition.profile.schoolOptIn,true);\nassert.equal("secretField" in hardenedProfile.competition.profile,false);\n'''
+          if extra not in t:
+            if marker not in t:raise SystemExit('Competition audit insertion point not found')
+            t=t.replace(marker,extra)
+          a.write_text(t)
+          PY
+          npm run competition:audit
+          git diff --check
+      - name: Commit hardening
+        run: |
+          if git diff --quiet; then
+            echo 'Ranking profile already hardened.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/lib/competition.js scripts/competition-audit.mjs
+          git commit -m 'Harden ranking profile input boundaries'
+          git push origin HEAD:launch/public-rc-hardening
