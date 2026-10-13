@@ -56,8 +56,9 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const currentYear=curriculumYear(s.profile?.schoolYear);
   const settings=s.subjectSettings?.[SUBJECT_ID]||{};
   const taughtUnitIds=initialTaught(settings,currentYear);
-  const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário"||s.profile?.schoolYear==="12.º";
-  const [scopeDraft,setScopeDraft]=useState(()=>finishedSecondary?allSubtopicIds():taughtUnitIds);
+  const finishedSecondary=s.profile?.schoolYear==="Já terminei o secundário";
+  const completedFqaCourse=finishedSecondary||s.profile?.schoolYear==="12.º";
+  const [scopeDraft,setScopeDraft]=useState(()=>completedFqaCourse?allSubtopicIds():taughtUnitIds);
   const initialPracticeDomain=allDomainIdsForYear(currentYear)[0]||null;
   const [practiceYear,setPracticeYear]=useState(currentYear);
   const [practiceDomain,setPracticeDomain]=useState(initialPracticeDomain);
@@ -70,7 +71,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
   const [rubricAssessment,setRubricAssessment]=useState({});
   const [examDrafts,setExamDrafts]=useState([]);
   const progress=subjectProgressFor(s,SUBJECT_ID);
-  const scopedItems=finishedSecondary?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);
+  const scopedItems=completedFqaCourse?PHYSICS_CHEMISTRY_A_ITEMS:physicsChemistryScope(PHYSICS_CHEMISTRY_A_ITEMS,currentYear,taughtUnitIds);
   const coverage=physicsChemistryCoverage(PHYSICS_CHEMISTRY_A_ITEMS);
   const scopedCoverage=physicsChemistryCoverage(scopedItems);
   const onboardingStep=subjectOnboardingStep(s,SUBJECT_ID);
@@ -246,10 +247,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
 
   if(view==="curriculumOnboard"||view==="curriculum"){
     const rows=PHYSICS_CHEMISTRY_A_DOMAINS.filter(row=>row.year===currentYear);
-    if(finishedSecondary){
+    if(completedFqaCourse){
       return <Shell className="wideStudentShell">
         <p className="eyebrow">{view==="curriculumOnboard"?"MATÉRIA DADA · "+onboardingStep.position+" DE "+onboardingStep.total+" · FÍSICA E QUÍMICA A":"MATÉRIA DADA NA ESCOLA"}</p>
-        <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Física e Química A fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente a matéria do 10.º e 11.º anos, incluindo Física, Química e trabalho prático.</p></div></div>
+        <div className="completedCurriculumHero"><span>✓</span><div><small>{finishedSecondary?"MATÉRIA ASSUMIDA COMO DADA":"FQ A JÁ CONCLUÍDA"}</small><h1>Todo o programa de Física e Química A fica disponível.</h1><p>{finishedSecondary?"Como já terminaste o secundário, a app assume automaticamente a matéria do 10.º e 11.º anos, incluindo Física, Química e trabalho prático.":"Como estás no 12.º ano, Física e Química A já ficou concluída no 11.º. A app disponibiliza automaticamente a matéria do 10.º e 11.º anos, incluindo Física, Química e trabalho prático."}</p></div></div>
         <button className="primary" onClick={()=>{
           setS(prev=>{
             const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),[SUBJECT_ID]:{...(prev.subjectSettings?.[SUBJECT_ID]||{}),taughtUnitIds:allSubtopicIds(),curriculumConfigured:true}}};
