@@ -1,7 +1,9 @@
 import './globals.css';
 import './mini-exam-review.css';
 import './apronso-parity.css';
+import './public-release.css';
 import ClientRuntimeReporter from './components/ClientRuntimeReporter';
+import StorageDurabilityNotice from './components/StorageDurabilityNotice';
 
 const SITE_URL='https://approvamais.pt';
 
@@ -22,5 +24,5 @@ export const metadata={
 export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 
 export default function RootLayout({children}){
-  return <html lang="pt-PT"><body>{children}<ClientRuntimeReporter/></body></html>;
+  return <html lang="pt-PT"><body>{children}<StorageDurabilityNotice/><ClientRuntimeReporter/></body></html>;
 }
