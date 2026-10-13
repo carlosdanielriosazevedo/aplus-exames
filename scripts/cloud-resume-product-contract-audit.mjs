@@ -21,12 +21,13 @@ assert.doesNotMatch(account,/async function signout\(\)[\s\S]{0,700}clearLocalSt
 
 // Carregar cloud é uma ação explícita e cria rede de segurança antes de aplicar estado remoto.
 assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve criar snapshot antes de aplicar estado remoto");
-assert.match(account,/Carregar cloud com snapshot/u,"a ação de carga deve comunicar a existência do snapshot");
+assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar linguagem clara para o aluno");
+assert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");
 
 // Uma revisão remota mais recente bloqueia a escrita e exige decisão consciente.
-assert.match(account,/A cloud tem uma versão mais recente\. Não substituímos nada automaticamente\./u,"conflitos devem bloquear sobrescritas automáticas");
-assert.match(account,/Conflito detetado — nada foi sobrescrito/u,"a UI deve explicar claramente o bloqueio por conflito");
-for(const label of ["Manter cloud","Combinar atividade","Manter este dispositivo"]){
+assert.match(account,/Existe progresso online mais recente\. Não substituímos nada automaticamente\./u,"conflitos devem bloquear sobrescritas automáticas");
+assert.match(account,/Encontrámos progresso mais recente noutro dispositivo/u,"a UI deve explicar o conflito em linguagem não técnica");
+for(const label of ["Usar progresso online","Combinar progresso","Manter este dispositivo"]){
   assert.ok(account.includes(label),`resolução de conflito em falta: ${label}`);
 }
 assert.match(account,/safeCloudMerge\(s,conflictRemote\.state_json\)/u,"a opção combinar deve usar o merge seguro");

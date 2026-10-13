@@ -85,7 +85,7 @@ export function AccountCloud({s,setS,go}){
     try{
       if(mode==="signup"){
         await cloudSignUp({name:name.trim()||"Aluno",email:email.trim(),password});
-        setMessage({ok:true,text:"Conta criada. Se a verificação de email estiver ativa no Neon, confirma o email antes de entrar."});
+        setMessage({ok:true,text:"Conta criada. Se receberes um email de confirmação, confirma-o antes de entrares."});
       }else{
         await cloudSignIn({email:email.trim(),password});
         setMessage({ok:true,text:"Sessão iniciada."});
@@ -127,7 +127,7 @@ export function AccountCloud({s,setS,go}){
       remoteUpdatedAt:remote?.updated_at,
       remoteState:remote?.state_json
     }));
-    setMessage({ok:false,text:"A cloud tem uma versão mais recente. Não substituímos nada automaticamente."});
+    setMessage({ok:false,text:"Existe progresso online mais recente. Não substituímos nada automaticamente."});
   }
 
   async function saveCloud(){
@@ -149,14 +149,14 @@ export function AccountCloud({s,setS,go}){
         let next=markCloudSaved(prev,{revision,deviceId,savedState:prev,at:now});
         return {...next,cloudMeta:{...(next.cloudMeta||{}),lastSavedAt:now,lastRemoteUpdatedAt:result?.data?.updated_at||new Date(now).toISOString()}};
       });
-      setMessage({ok:true,text:`Progresso guardado online com segurança · revisão ${revision}.`});
+      setMessage({ok:true,text:`Progresso guardado online com segurança.`});
     }catch(error){
       if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
-        setMessage({ok:false,text:"Falta aplicar a migration v4.9 da cloud. O progresso local não foi alterado."});
+        setMessage({ok:false,text:"O progresso online está temporariamente indisponível. O progresso deste dispositivo não foi alterado."});
       }else{
         queueCloudSave(s,{reason:"save_failed",expectedRevision:currentSync.baseRevision});
         refreshLocalSafety();
-        setMessage({ok:false,text:"Não foi possível chegar à cloud. Guardámos uma tentativa local para poderes repetir mais tarde; o estudo continua seguro neste dispositivo."});
+        setMessage({ok:false,text:"Não foi possível guardar online. Guardámos uma tentativa neste dispositivo para poderes repetir mais tarde; o teu estudo continua disponível aqui."});
       }
     }finally{setBusy(false)}
   }
@@ -166,7 +166,7 @@ export function AccountCloud({s,setS,go}){
     try{
       const row=await loadStudentCloudState();
       if(!row?.state_json){
-        setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado na cloud. O primeiro Guardar criará a revisão 1."});
+        setMessage({ok:true,text:"Esta conta ainda não tem progresso guardado online. Usa “Guardar online” quando quiseres criar a primeira cópia."});
       }else{
         saveLocalSnapshot(s,{label:"Antes de carregar da cloud"});
         const merged=mergeStudentCloudState(s,row.state_json);
@@ -178,11 +178,11 @@ export function AccountCloud({s,setS,go}){
         });
         setS({...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
         refreshLocalSafety();
-        setMessage({ok:true,text:`Progresso online carregado · revisão ${row.revision}. Criámos um snapshot local antes da substituição.`});
+        setMessage({ok:true,text:`Progresso online carregado. Criámos primeiro uma cópia de segurança neste dispositivo.`});
       }
     }catch(error){
       setMessage({ok:false,text:error?.code==="CLOUD_SCHEMA_OUTDATED"
-        ?"Falta aplicar a migration v4.9 da cloud. Não carregámos nem alterámos o progresso local."
+        ?"O progresso online está temporariamente indisponível. Não carregámos nem alterámos o progresso deste dispositivo."
         :String(error?.message||error)});
     }finally{setBusy(false)}
   }
@@ -202,7 +202,7 @@ export function AccountCloud({s,setS,go}){
       setS(next);
       setConflictRemote(null);
       refreshLocalSafety();
-      setMessage({ok:true,text:`Mantivemos a revisão ${conflictRemote.revision} da cloud. A versão local anterior ficou num snapshot.`});
+      setMessage({ok:true,text:`Usámos o progresso online mais recente. A versão anterior deste dispositivo ficou guardada numa cópia de segurança.`});
     }finally{setBusy(false)}
   }
 
@@ -217,14 +217,14 @@ export function AccountCloud({s,setS,go}){
       });
       if(result?.conflict){
         registerConflict(result.remote);
-        setMessage({ok:false,text:"A cloud mudou novamente enquanto resolvias o conflito. Voltámos a bloquear a escrita."});
+        setMessage({ok:false,text:"O progresso online mudou novamente enquanto escolhias. Bloqueámos a gravação para não perder nenhuma versão."});
         return;
       }
       const revision=Number(result?.data?.revision)||Number(conflictRemote.revision)+1;
       setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:prev}));
       setConflictRemote(null);
       refreshLocalSafety();
-      setMessage({ok:true,text:`Mantivemos este dispositivo e criámos a revisão ${revision}. O estado anterior foi preservado num snapshot.`});
+      setMessage({ok:true,text:`Mantivemos o progresso deste dispositivo. A versão anterior ficou preservada numa cópia de segurança.`});
     }catch(error){
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}
@@ -249,7 +249,7 @@ export function AccountCloud({s,setS,go}){
       });
       if(result?.conflict){
         registerConflict(result.remote);
-        setMessage({ok:false,text:"A cloud mudou novamente antes de concluirmos a combinação. Nada foi sobrescrito."});
+        setMessage({ok:false,text:"O progresso online mudou novamente antes de concluirmos a combinação. Nada foi substituído."});
         return;
       }
 
@@ -258,7 +258,7 @@ export function AccountCloud({s,setS,go}){
       setS(next);
       setConflictRemote(null);
       refreshLocalSafety();
-      setMessage({ok:true,text:`Combinámos atividade independente dos dois dispositivos e guardámos a revisão ${revision}.`});
+      setMessage({ok:true,text:`Combinámos o progresso dos dois dispositivos e guardámos a nova versão online.`});
     }catch(error){
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}
@@ -281,7 +281,7 @@ export function AccountCloud({s,setS,go}){
       const revision=Number(result?.data?.revision)||item.expectedRevision+1;
       setS(prev=>markCloudSaved(prev,{revision,deviceId,savedState:item.state}));
       refreshLocalSafety();
-      setMessage({ok:true,text:`Tentativa pendente sincronizada · revisão ${revision}.`});
+      setMessage({ok:true,text:`Tentativa pendente guardada online com sucesso.`});
     }catch(error){
       setMessage({ok:false,text:String(error?.message||error)});
     }finally{setBusy(false)}
@@ -292,12 +292,12 @@ export function AccountCloud({s,setS,go}){
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
   return <Shell><Back go={go}/><p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
-    <h1>O teu progresso, sem sobrescritas silenciosas.</h1>
-    <p className="muted">A app continua local-first. A v4.9 passa a tratar cada gravação cloud como uma revisão: se outro dispositivo avançou entretanto, a escrita é bloqueada e és tu que decides o que fazer.</p>
+    <h1>O teu progresso, seguro em todos os teus dispositivos.</h1>
+    <p className="muted">A APProva+ guarda primeiro o estudo neste dispositivo. Quando guardas online, verifica se existe progresso mais recente noutro dispositivo e nunca o substitui sem te perguntar.</p>
 
     {!cfg.configured&&<div className="cloudUnavailable">
-      <b>○ Neon Auth/Data API ainda não ativados</b>
-      <span>A arquitetura de conflitos já está pronta, mas nenhum serviço externo foi ativado por esta versão. O estudo continua integralmente local.</span>
+      <b>○ Progresso online temporariamente indisponível</b>
+      <span>Podes continuar a estudar normalmente. O progresso fica guardado neste dispositivo e poderás voltar a guardá-lo online quando o serviço estiver disponível.</span>
     </div>}
 
     {cfg.configured&&session.loading&&<div className="cloudLoading">A verificar sessão…</div>}
@@ -310,7 +310,7 @@ export function AccountCloud({s,setS,go}){
         <label>Palavra-passe<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
         <button disabled={busy||!email.trim()||password.length<8} onClick={submit}>{busy?"A processar…":mode==="signup"?"Criar conta":"Entrar"}</button>
       </div>
-      <small className="cloudPrivacy">A password é tratada pelo Neon Auth. A app não guarda passwords na base de dados de progresso.</small>
+      <small className="cloudPrivacy">A palavra-passe é tratada pelo serviço de autenticação. A APProva+ não a guarda nos dados de progresso.</small>
     </>}
 
     {cfg.configured&&!session.loading&&user&&<>
@@ -333,15 +333,18 @@ export function AccountCloud({s,setS,go}){
         <div><span>Áreas com evidência</span><b>{measuredThemes(s).length}/{academicScopeThemes(s.profile).length}</b></div>
       </div>
 
-      <div className="cloudRevisionCard">
-        <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Revisão conhecida: {sync.baseRevision}</span></div>
-        <div><small>ÚLTIMA CLOUD CONHECIDA</small><b>rev. {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>
-        <div><small>REDE DE SEGURANÇA</small><b>{snapshots.length} snapshots</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>
-      </div>
+      <details className="cloudTechnicalDetails">
+        <summary>Detalhes e cópias de segurança</summary>
+        <div className="cloudRevisionCard">
+          <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Versão conhecida: {sync.baseRevision}</span></div>
+          <div><small>ÚLTIMO PROGRESSO ONLINE</small><b>versão {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>
+          <div><small>CÓPIAS DE SEGURANÇA</small><b>{snapshots.length}</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>
+        </div>
+      </details>
 
       <div className="syncActions">
-        <button onClick={saveCloud} disabled={busy}>↑ Guardar com controlo de revisão</button>
-        <button onClick={loadCloud} disabled={busy}>↓ Carregar cloud com snapshot</button>
+        <button onClick={saveCloud} disabled={busy}>↑ Guardar online</button>
+        <button onClick={loadCloud} disabled={busy}>↓ Carregar progresso online</button>
       </div>
 
       {pending.length>0&&<div className="pendingCloudSave">
@@ -350,17 +353,17 @@ export function AccountCloud({s,setS,go}){
       </div>}
 
       {conflictRemote&&<div className="cloudConflictCard">
-        <div className="cloudConflictHead"><span>⚠</span><div><b>Conflito detetado — nada foi sobrescrito</b>
-          <small>Este dispositivo conhecia a revisão {sync.baseRevision}; a cloud está na revisão {conflictRemote.revision}.</small></div></div>
-        <p>Escolhe conscientemente. Antes de qualquer substituição ou combinação criamos um snapshot local.</p>
+        <div className="cloudConflictHead"><span>⚠</span><div><b>Encontrámos progresso mais recente noutro dispositivo</b>
+          <small>Nada foi substituído. Escolhe qual progresso queres manter ou combina os dois.</small></div></div>
+        <p>Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</p>
         <div className="conflictChoices">
-          <button onClick={resolveKeepRemote} disabled={busy}><b>Manter cloud</b><span>Usar a versão mais recente que já está online.</span></button>
-          <button onClick={resolveMerge} disabled={busy}><b>Combinar atividade</b><span>Unir evidências, Missões e exames independentes e recalibrar.</span></button>
-          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Substituir a cloud apenas se ela não tiver mudado outra vez.</span></button>
+          <button onClick={resolveKeepRemote} disabled={busy}><b>Usar progresso online</b><span>Usar a versão mais recente que já está guardada online.</span></button>
+          <button onClick={resolveMerge} disabled={busy}><b>Combinar progresso</b><span>Juntar atividade feita separadamente nos dois dispositivos.</span></button>
+          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Guardar online o progresso que estás a ver aqui.</span></button>
         </div>
       </div>}
 
-      <div className="notice"><b>Porque ainda não sincronizamos silenciosamente?</b><span>Agora já detetamos conflitos e temos mecanismos de recuperação. A sincronização automática só deve ser ligada depois de testarmos estes fluxos com duas contas/dispositivos reais e a migration v4.9 aplicada.</span></div>
+      <div className="notice"><b>O que acontece entre dispositivos?</b><span>Se encontrares progresso diferente noutro dispositivo, a APProva+ bloqueia a substituição automática e pede-te para escolher. Assim, nenhuma versão desaparece sem aviso.</span></div>
 
       <button className="secondary" onClick={signout} disabled={busy}>Terminar sessão</button>
     </>}
@@ -368,8 +371,8 @@ export function AccountCloud({s,setS,go}){
     {message&&<div className={"cloudMessage "+(message.ok?"ok":"bad")}><b>{message.ok?"✓":"!"}</b><span>{message.text}</span></div>}
 
     <div className="securityBox">
-      <b>🔐 Duas proteções diferentes</b>
-      <span><b>RLS</b> impede um utilizador de ler/escrever o progresso de outra conta. <b>Revisões otimistas</b> impedem dois dispositivos da mesma conta de se sobrescreverem sem aviso.</span>
+      <b>🔐 O teu progresso está protegido</b>
+      <span>Cada conta só pode aceder ao respetivo progresso e, se dois dispositivos tiverem versões diferentes, a APProva+ pede-te para decidir antes de substituir alguma coisa.</span>
     </div>
   </Shell>
 }
