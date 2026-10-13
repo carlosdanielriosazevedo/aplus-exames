@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const studyModeHub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const learnPanel=readFileSync(new URL("../app/components/PortugueseLearnPanel.js",import.meta.url),"utf8");

@@ -90,7 +90,7 @@ const hiddenFocusPlan={type:"priority",themeId:"10-fun",focus:"mc-10-fun-monoton
 const hiddenAssignment={...partial10,dailyMission:{version:1,assignment:{day:"2026-09-04",assignedAt:1,plan:hiddenFocusPlan},prompt:{}}};
 assert.equal(migrateDailyMission(hiddenAssignment).dailyMission.assignment,null);assert.equal(selectQuestionForPlan(partial10,hiddenFocusPlan),null);
 const legacyDraft={...draft,version:2};delete legacyDraft.blueprint;assert.equal(validateDiagnosticDraft(legacyDraft).ok,true);
-const pageSource=fs.readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const pageSource=fs.readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const setupSource=fs.readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 assert.match(pageSource,/const scopedThemes=academicScopeThemes\(s\.profile\)/);
 assert.match(pageSource,/const preferredYear=\["10\.º","11\.º","12\.º"\]\.includes\(s\.profile\?\.schoolYear\)/);

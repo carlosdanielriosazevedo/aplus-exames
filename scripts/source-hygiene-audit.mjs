@@ -4,7 +4,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 
 const root=path.resolve(".");
-const mainPage=fs.readFileSync("app/page.js","utf8");
+const mainPage=fs.readFileSync("app/clientApp.js","utf8");
 const welcome=fs.readFileSync("app/components/Welcome.js","utf8");
 const chrome=fs.readFileSync("app/components/chrome.js","utf8");
 const reviewerDashboard=fs.readFileSync("app/components/ReviewerDashboard.js","utf8");

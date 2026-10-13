@@ -9,7 +9,7 @@ const packs=packFiles.map(name=>JSON.parse(readFileSync(new URL(name,contentDir)
 const pilot=packs[0];
 const allItems=packs.flatMap(pack=>pack.items);
 const latestDeclared=[...packs].reverse().find(pack=>Number.isInteger(pack.bankSizeAfterWave))?.bankSizeAfterWave||allItems.length;
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const portugueseSubject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const runtimeContent=readFileSync(new URL("../app/data/portugueseContent.js",import.meta.url),"utf8");
 

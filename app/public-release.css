@@ -97,3 +97,5 @@
   .studentMenu div button{font-size:14px}
   .storageDurabilityBanner{top:8px;width:calc(100% - 16px)}
 }
+
+.publicLegalLinks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:13px}.publicLegalLinks a{color:#cbd5e1}

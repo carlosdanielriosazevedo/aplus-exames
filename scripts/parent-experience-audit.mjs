@@ -1,7 +1,7 @@
 import "./fqa-beta-diagnosis.mjs";
 import fs from "node:fs";
 
-const page=fs.readFileSync("app/page.js","utf8");
+const page=fs.readFileSync("app/clientApp.js","utf8");
 const parent=fs.readFileSync("app/components/SecondaryScreens.js","utf8");
 const css=fs.readFileSync("app/globals.css","utf8");
 const diagnostic=fs.readFileSync("app/data/vnextDiagnostic.js","utf8");

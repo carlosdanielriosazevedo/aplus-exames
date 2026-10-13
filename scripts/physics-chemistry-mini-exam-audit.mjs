@@ -17,7 +17,7 @@ for(const exam of PHYSICS_CHEMISTRY_A_MINI_EXAMS){
 
 const component=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
 const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 
 assert.match(page,/physicsChemistryMini1/u);
 assert.match(page,/physicsChemistryMini2/u);

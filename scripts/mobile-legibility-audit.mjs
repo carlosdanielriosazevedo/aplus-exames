@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
 const mobileMarker="/* v5.6 — Beta Candidate mobile-first e legibilidade do fluxo do aluno */";

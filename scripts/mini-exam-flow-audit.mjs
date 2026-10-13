@@ -107,7 +107,7 @@ assert.equal(recovered.draft.current,3,"A recuperação deve retomar na quarta q
 assert.deepEqual(recovered.draft.answers.slice(0,3),answers.slice(0,3),"As respostas anteriores devem sobreviver à recarga.");
 assert.equal(draftScreen(recovered.draft),"miniExamRun");
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 assert.match(page,/<p className="eyebrow">EXAMES<\/p><h1>Matemática A · 635<\/h1>/u,"a área de Matemática A deve usar o mesmo cabeçalho de Exames das restantes disciplinas.");
 assert.match(page,/📝 Exame Completo/u,"a prova longa deve usar a nomenclatura Exame Completo.");
 assert.match(page,/MINI-EXAME EM PAUSA/u,"um Mini-exame guardado deve ficar visível na própria área de Exames.");
