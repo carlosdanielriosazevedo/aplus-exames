@@ -42,6 +42,7 @@ import {
 import {
   saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen
 } from "./lib/sessionDraft";
+import {reconcileDiagnosticRuntimeSessions} from "./lib/diagnosticRuntime";
 import {
   academicScopeThemes,diagnosticBlueprintForProfile,currentYearThemes,normalizeTaughtSubtopics
 } from "./lib/curriculumScope";
@@ -734,6 +735,17 @@ function ApronsoIntro({setS,go}){
   />;
 }
 
+function reportDiagnosticFlowIssue(stage,reason){
+  if(typeof window==="undefined")return;
+  const safeStage=String(stage||"flow").replace(/[^a-z0-9_-]/giu,"_").slice(0,24);
+  const safeReason=String(reason||"unknown").replace(/[^a-z0-9_-]/giu,"_").slice(0,40);
+  import("./lib/clientRuntimeReport").then(({reportClientError})=>{
+    const error=new Error("Diagnostic flow issue");
+    error.name=`Diagnostic_${safeStage}_${safeReason}`;
+    reportClientError({kind:"runtime",error,source:"diagnostic"});
+  }).catch(()=>{});
+}
+
 function ensureDiagnosticStarted(state,draft){
   const matching=(state.betaSessions||[]).filter(x=>x.id===draft.sessionId&&x.kind==="diagnostic");
   const otherOpen=(state.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt&&x.id!==draft.sessionId);
@@ -785,15 +797,22 @@ function DiagIntro({s,setS,go}){
     {gated&&!profileBlueprint.length&&<button className="secondary" onClick={()=>go("curriculumSettings")}>{hasIndicatedScope?"Adicionar outra matéria dada":"Indicar matéria dada"}</button>}
     <button className="primary" disabled={gated} onClick={()=>{
       const existing=loadSessionDraft(s.betaMode||"internal");
-      const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);
       if(existing?.kind==="diagnostic"){go("diagRun");return}
-      if(open.length){setSaveError(true);return}
-      const ses=sessionStart("diagnostic",{goal:s?.goal||null});
-      const current=diagnosticAnchor(blueprint[0],difficulty,s);
-      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty,blueprint});
-      if(!saveSessionDraft(draft)){setSaveError(true);return}
-      const started=ensureDiagnosticStarted(s,draft);
-      if(!started.ok||!saveLocalState(started.state)){setSaveError(true);return}
+      const startState=reconcileDiagnosticRuntimeSessions(s);
+      if(startState!==s)setS(startState);
+      const ses=sessionStart("diagnostic",{goal:startState?.goal||null});
+      const current=diagnosticAnchor(blueprint[0],difficulty,startState);
+      if(!current){reportDiagnosticFlowIssue("start","anchor_unavailable");setSaveError(true);return}
+      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:startState.betaMode||"internal",difficulty,blueprint});
+      if(!saveSessionDraft(draft)){reportDiagnosticFlowIssue("start","draft_write_failed");setSaveError(true);return}
+      const started=ensureDiagnosticStarted(startState,draft);
+      if(!started.ok){
+        reportDiagnosticFlowIssue("start",started.reason||"ensure_failed");
+        clearSessionDraft(startState.betaMode||"internal");
+        setSaveError(true);
+        return;
+      }
+      if(!saveLocalState(started.state)){reportDiagnosticFlowIssue("start","state_write_failed");setSaveError(true);return}
       setSaveError(false);
       setS(started.state);
       go("diagRun");
@@ -807,9 +826,14 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
   const [saveError,setSaveError]=useState(false);
   const [ready,setReady]=useState(false);
   function retryRecovery(){
-    const result=recoverDiagnosticTransaction({state:s,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
+    const recoveryState=reconcileDiagnosticRuntimeSessions(s,draft?.sessionId||null);
+    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,
       clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});
-    if(!result.ok){setReady(false);setSaveError(true);setDraft(result.draft);return}
+    if(!result.ok){
+      reportDiagnosticFlowIssue("recovery",result.reason||"unknown");
+      if(recoveryState!==s)setS(recoveryState);
+      setReady(false);setSaveError(true);setDraft(result.draft);return;
+    }
     setReady(true);setSaveError(false);setS(result.state);setDraft(result.draft);
     if(result.completed)go("diagResult");
   }
