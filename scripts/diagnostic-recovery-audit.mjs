@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
 import {DIAGNOSTIC_BLUEPRINT,QUESTION_BANK} from "../app/data/content.js";
 import {emptyScores,diagnosticAnchor,diagnosticProbe,applyEvidence} from "../app/lib/engine.js";
 import {recordMilestone,normalizeProductAnalytics} from "../app/lib/productAnalytics.js";
 import {saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen} from "../app/lib/sessionDraft.js";
 import {contentRevisionFingerprint} from "../app/lib/validationFingerprint.js";
 import {loadLocalStateStatus} from "../app/lib/persistence.js";
+import {reconcileDiagnosticRuntimeSessions} from "../app/lib/diagnosticRuntime.js";
 import {
   createDiagnosticDraft,createPendingResponse,validateDiagnosticDraft,applyDiagnosticTransaction,
   advanceDiagnosticDraft,transactDiagnosticAnswer,recoverDiagnosticTransaction,snapshotDiagnosticItem,
@@ -252,4 +254,24 @@ assert.equal(finalAnswer.draft.anchorIndex,DIAGNOSTIC_BLUEPRINT.length);
 assert.equal(DIAGNOSTIC_BLUEPRINT[finalAnswer.draft.anchorIndex],undefined);
 assert.ok(finalAnswer.draft.current);assert.equal(finalAnswer.draft.current.role,"probe");
 
-console.log("✓ diagnostic recovery WAL audit: 33 recovery/fault-injection groups passed");
+// 34. Uma sessão runtime órfã não pode prender a recuperação do draft atual num ciclo ambíguo.
+const currentRuntimeState=stateFor("ses-current-runtime");
+const currentRuntimeDraft=draftFor(currentRuntimeState);
+const orphanRuntimeState={...currentRuntimeState,betaSessions:[{id:"ses-orphan-runtime",kind:"diagnostic",startedAt:NOW-2000,finishedAt:null,meta:{}}]};
+const reconciledRuntimeState=reconcileDiagnosticRuntimeSessions(orphanRuntimeState,currentRuntimeDraft.sessionId);
+const runtimeWrites=writes();
+const runtimeRecovered=recoverDiagnosticTransaction({state:reconciledRuntimeState,draft:currentRuntimeDraft,saveState:runtimeWrites.saveState,saveDraft:runtimeWrites.saveDraft,clearDraft:runtimeWrites.clearDraft,startState,completeState});
+assert.equal(runtimeRecovered.ok,true);
+assert.equal(runtimeRecovered.draft.sessionId,"ses-current-runtime");
+assert.equal(runtimeRecovered.state.betaSessions.filter(x=>x.kind==="diagnostic"&&!x.finishedAt).length,1);
+assert.equal(runtimeRecovered.state.betaSessions.find(x=>x.kind==="diagnostic"&&!x.finishedAt)?.id,"ses-current-runtime");
+
+const clientAppSource=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
+const diagnosticIntroSource=clientAppSource.slice(clientAppSource.indexOf("function DiagIntro("),clientAppSource.indexOf("\nfunction DiagRun("));
+const diagnosticRunSource=clientAppSource.slice(clientAppSource.indexOf("function DiagRun("),clientAppSource.indexOf("\nfunction DiagResult("));
+assert.match(diagnosticIntroSource,/reconcileDiagnosticRuntimeSessions\(s\)/u,"Um diagnóstico novo deve remover sessões runtime órfãs antes de arrancar.");
+assert.doesNotMatch(diagnosticIntroSource,/if\(open\.length\)\{setSaveError\(true\);return\}/u,"Uma sessão runtime órfã não pode bloquear para sempre o arranque do diagnóstico.");
+assert.match(diagnosticRunSource,/reconcileDiagnosticRuntimeSessions\(s,draft\?\.sessionId\|\|null\)/u,"A recuperação deve ignorar sessões runtime órfãs e preservar apenas a sessão do draft atual.");
+assert.match(diagnosticRunSource,/reportDiagnosticFlowIssue\("recovery",result\.reason/u,"Falhas lógicas de recuperação devem ficar observáveis sem respostas do aluno.");
+
+console.log("✓ diagnostic recovery WAL audit: 34 recovery/fault-injection groups passed");
