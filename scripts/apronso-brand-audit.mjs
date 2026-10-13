@@ -26,6 +26,12 @@ assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);assert.doesN
 
 // Apronso must remain part of the layout, not a detached decoration.
 assert.match(parityCss,/\.apronso\{[\s\S]*?object-fit:contain;[\s\S]*?object-position:center bottom;/u);
+assert.match(parityCss,/@keyframes apronsoIdle/u,"A animação idle do Apronso deve viver no CSS global, fora do bundle JS.");
+assert.match(parityCss,/@keyframes apronsoThink/u,"A animação thinking do Apronso deve viver no CSS global.");
+assert.match(parityCss,/@keyframes apronsoCelebrate/u,"A animação celebrate do Apronso deve viver no CSS global.");
+assert.match(parityCss,/@media\(prefers-reduced-motion:reduce\)/u,"As animações do Apronso devem respeitar reduced motion.");
+assert.match(chrome,/apronso-motion-celebrate/u,"O componente Apronso deve continuar a selecionar a animação pela pose.");
+assert.doesNotMatch(chrome,/<style>/u,"O componente Apronso não deve injetar CSS repetido no runtime.");
 assert.match(parityCss,/\.diagApronsoHero\{[\s\S]*?display:grid;[\s\S]*?align-items:end;/u,"Nos diagnósticos desktop o Apronso deve partilhar a linha de base do bloco explicativo.");
 assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?align-self:end;[\s\S]*?object-position:center bottom;/u,"O Apronso deve terminar na mesma base visual do cartão em todos os diagnósticos.");
 assert.match(parityCss,/\.diagApronsoHero \.diagPurposeHero\{[\s\S]*?padding-right:116px;/u,"No diagnóstico mobile o texto deve reservar espaço para o Apronso dentro do cartão.");

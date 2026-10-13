@@ -12,14 +12,8 @@ export const BrandName = ({className=""}) => (
   </span>
 );
 export const Logo = () => <div className="logo"><BrandName/></div>;
-const APRONSO_MOTION_CSS = `
-@keyframes apronsoIdle {0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-2px,0) rotate(-.35deg)}}
-@keyframes apronsoThink {0%,100%{transform:translate3d(0,0,0) rotate(0deg)}25%{transform:translate3d(0,-2px,0) rotate(-2deg)}55%{transform:translate3d(0,-1px,0) rotate(2deg)}75%{transform:translate3d(0,0,0) rotate(0deg)}}
-@keyframes apronsoCelebrate {0%,100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}20%{transform:translate3d(0,-7px,0) rotate(-2deg) scale(1.01)}40%{transform:translate3d(0,0,0) rotate(2deg) scale(1)}60%{transform:translate3d(0,-5px,0) rotate(-1deg) scale(1.01)}80%{transform:translate3d(0,0,0) rotate(1deg) scale(1)}}
-.apronso-motion-idle{animation:apronsoIdle 3.8s ease-in-out infinite;transform-origin:50% 90%}.apronso-motion-thinking{animation:apronsoThink 1.8s ease-in-out infinite;transform-origin:50% 90%}.apronso-motion-celebrate{animation:apronsoCelebrate 1.15s ease-out 1;transform-origin:50% 90%}@media(prefers-reduced-motion:reduce){.apronso-motion-idle,.apronso-motion-thinking,.apronso-motion-celebrate{animation:none!important}}
-`;
 function apronsoMotionClass(pose){return pose==="celebrate"?"apronso-motion-celebrate":pose==="thinking"?"apronso-motion-thinking":"apronso-motion-idle"}
-export function Apronso({pose="welcome",className="",alt=""}){return <><style>{APRONSO_MOTION_CSS}</style><img className={`apronso ${apronsoMotionClass(pose)} ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/></>}
+export function Apronso({pose="welcome",className="",alt=""}){return <img className={`apronso ${apronsoMotionClass(pose)} ${className}`.trim()} src={`/mascot/apronso-${pose}.webp`} alt={alt}/>}
 export function ApronsoNudge({pose="thinking",tone="light",children}){return <aside className={`apronsoNudge ${tone}`}><Apronso pose={pose} alt=""/><p>{children}</p></aside>}
 
 function safePrevious(go,to){
@@ -116,9 +110,8 @@ function goSafeStart(){
   const query=window.location.search||"";
   window.location.assign(`/${query}`);
 }
-function goSafeHome(){
-  if(typeof window==="undefined")return;
-  const state={...(window.history.state||{}),approvaScreen:"home",approvaSessionGuard:false};
+function goSafeScreen(screen){
+  const state={...(window.history.state||{}),approvaScreen:screen,approvaSessionGuard:false};
   window.history.replaceState(state,"");
   window.dispatchEvent(new PopStateEvent("popstate",{state}));
 }
@@ -132,9 +125,7 @@ function restartDiagnostic(){
     window.alert("Não foi possível limpar esta sessão. Reabre a app e tenta novamente.");
     return;
   }
-  const state={...(window.history.state||{}),approvaScreen:"diag",approvaSessionGuard:false};
-  window.history.replaceState(state,"");
-  window.dispatchEvent(new PopStateEvent("popstate",{state}));
+  goSafeScreen("diag");
 }
 export const Shell=({children,className=""})=>{
   const screen=currentScreen();
@@ -150,7 +141,7 @@ export const Shell=({children,className=""})=>{
       }}>← Voltar</button>}
       {children}
       {diagnosticStartFailure&&<div className="recoveryActions" role="group" aria-label="Sair do diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
-        <button className="secondary" type="button" onClick={goSafeHome}>Ir para o menu inicial</button>
+        <button className="secondary" type="button" onClick={()=>goSafeScreen("home")}>Ir para o menu inicial</button>
       </div>}
       {diagnosticRecovery&&<div className="recoveryActions" role="group" aria-label="Recomeçar diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
         <button className="secondary" type="button" onClick={restartDiagnostic}>Começar diagnóstico de novo</button>
