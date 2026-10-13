@@ -1,6 +1,8 @@
 
 "use client";
 
+export {safeCloudMerge} from "./cloudStateMerge.js";
+
 const DEVICE_KEY="a25-device-id-v1";
 const SNAPSHOT_KEY="a25-cloud-snapshots-v1";
 const PENDING_KEY="a25-cloud-pending-v1";
@@ -152,25 +154,7 @@ export function cloudConflict(state,{
   };
 }
 
-export function conflictReason(state,remote){
-  const current=cloudSyncMeta(state);
-  const remoteRevision=Number(remote?.revision)||0;
-  if(remoteRevision===current.baseRevision)return {conflict:false,reason:"same_revision"};
-  if(remoteRevision>current.baseRevision){
-    return {
-      conflict:true,
-      reason:"remote_advanced",
-      detail:"A cloud foi alterada depois da última versão conhecida por este dispositivo."
-    };
-  }
-  return {
-    conflict:true,
-    reason:"local_base_ahead",
-    detail:"A revisão local conhecida é superior à revisão devolvida pela cloud; é necessária verificação."
-  };
-}
-
-export function createLocalSnapshot(state,{label="snapshot",at=Date.now()}={}){
+function createLocalSnapshot(state,{label="snapshot",at=Date.now()}={}){
   return {
     id:randomId("snap"),
     label,
@@ -197,10 +181,6 @@ export function listLocalSnapshots(){
     const list=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
     return Array.isArray(list)?list:[];
   }catch{return []}
-}
-
-export function restoreLocalSnapshot(id){
-  return listLocalSnapshots().find(x=>x.id===id)?.state||null;
 }
 
 export function queueCloudSave(state,{
@@ -243,69 +223,4 @@ export function removePendingCloudSave(id){
     const next=listPendingCloudSaves().filter(x=>x.id!==id);
     localStorage.setItem(PENDING_KEY,JSON.stringify(next));
   }catch{}
-}
-
-export function clearPendingCloudSaves(){
-  if(typeof localStorage==="undefined")return;
-  try{localStorage.removeItem(PENDING_KEY)}catch{}
-}
-
-export function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
-  const map=new Map();
-  for(const item of [...(remote||[]),...(local||[])]){
-    const id=idFn(item);
-    if(id===null||id===undefined)continue;
-    const prev=map.get(id);
-    const itemTs=Number(item?.at||item?.updatedAt||item?.lastAt||item?.resolvedAt||0);
-    const prevTs=Number(prev?.at||prev?.updatedAt||prev?.lastAt||prev?.resolvedAt||0);
-    if(!prev || itemTs>=prevTs){
-      map.set(id,item);
-    }
-  }
-  return [...map.values()];
-}
-
-export function safeCloudMerge(local,remote){
-  if(!remote)return local;
-  const localEvidence=local?.scores||{};
-  const remoteEvidence=remote?.scores||{};
-  const scoreIds=new Set([...Object.keys(localEvidence),...Object.keys(remoteEvidence)]);
-  const scores={};
-
-  for(const id of scoreIds){
-    const l=localEvidence[id]||{};
-    const r=remoteEvidence[id]||{};
-    const evidence=mergeByStableId(
-      l.evidence||[],
-      r.evidence||[],
-      e=>e?.completionId||`${e?.itemId||""}|${e?.at||0}|${e?.source||""}`
-    );
-    scores[id]={
-      ...(r||{}),
-      ...(l||{}),
-      evidence,
-      domain:null,
-      conf:0
-    };
-  }
-
-  return {
-    ...remote,
-    ...local,
-    scores,
-    xp:Math.max(Number(local?.xp)||0,Number(remote?.xp)||0),
-    diagnosticDone:!!(local?.diagnosticDone||remote?.diagnosticDone),
-    diagnosticAnswers:Math.max(Number(local?.diagnosticAnswers)||0,Number(remote?.diagnosticAnswers)||0),
-    missionHistory:mergeByStableId(local?.missionHistory,remote?.missionHistory,x=>x?.completionId||`${x?.themeId}|${x?.at}`),
-    examHistory:mergeByStableId(local?.examHistory,remote?.examHistory,x=>x?.completionId||x?.id),
-    freeTrainingSignals:mergeByStableId(local?.freeTrainingSignals,remote?.freeTrainingSignals,x=>x?.originSessionId||`${x?.themeId}|${x?.focus}|${x?.at}`),
-    learningHypotheses:mergeByStableId(local?.learningHypotheses,remote?.learningHypotheses,x=>x?.key),
-    // Elementos de intenção/UX do dispositivo atual permanecem locais.
-    goal:local?.goal??remote?.goal,
-    profile:local?.profile??remote?.profile,
-    dailyMission:local?.dailyMission??remote?.dailyMission,
-    identity:local?.identity,
-    cloudMeta:local?.cloudMeta,
-    cloudSync:local?.cloudSync
-  };
 }

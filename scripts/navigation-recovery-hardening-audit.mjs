@@ -6,6 +6,8 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const setup=readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const ptExam=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
+const cloud=readFileSync(new URL("../app/lib/cloudReliability.js",import.meta.url),"utf8");
+const cloudMerge=readFileSync(new URL("../app/lib/cloudStateMerge.js",import.meta.url),"utf8");
 
 assert.match(chrome,/function safePrevious[\s\S]*window\.history\.back\(\)/u,"Voltar sem destino explícito deve respeitar o histórico real da app.");
 assert.match(chrome,/export const Back=\(\{go,to\}\)/u,"Back deve distinguir destino explícito de retrocesso real.");
@@ -33,4 +35,12 @@ assert.match(fqa,/useEffect\(\(\)=>\{\s*if\(!session\|\|session\.finished\)retur
 assert.match(fqa,/StudySessionHeader[\s\S]*exitLabel="Guardar e sair"/u,"Depois do autosave, a sessão normal de FQ A deve assumir explicitamente Guardar e sair.");
 assert.match(ptExam,/onDraftChange/u,"Mini-exames de Português devem continuar a persistir rascunho durante a sessão.");
 
-console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura e rascunho FQ A preservado");
+assert.match(cloud,/export \{safeCloudMerge\} from "\.\/cloudStateMerge\.js"/u,"O merge pesado deve ficar isolado num módulo separado do bootstrap inicial.");
+assert.doesNotMatch(cloud,/function mergeSubjectProgressMaps\(/u,"O módulo carregado no arranque não deve conter o merge pesado por disciplina.");
+assert.match(cloudMerge,/function mergeSubjectProgressMaps\(/u,"O merge de progresso por disciplina deve permanecer implementado.");
+assert.match(cloudMerge,/subjectProgress:mergeSubjectProgressMaps\(local\?\.subjectProgress,remote\?\.subjectProgress\)/u,"O merge cloud não pode deixar o mapa local de progresso por disciplina apagar o progresso remoto.");
+assert.match(cloudMerge,/newest=localAt>=remoteAt\?l:r/u,"A sessão/pausa deve ser decidida pelo estado de atividade mais recente.");
+assert.match(cloudMerge,/let lastPosition=newest\?\.lastPosition\|\|null/u,"A retoma deve nascer do dispositivo com atividade mais recente, não de uma pausa antiga do outro dispositivo.");
+assert.match(cloudMerge,/sessions\.some\(row=>row\?\.completedAt&&row\.sessionId===lastPosition\.sessionId\)\)lastPosition=null/u,"Uma sessão concluída noutro dispositivo nunca pode ressuscitar como sessão em pausa.");
+
+console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");

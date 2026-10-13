@@ -162,6 +162,8 @@ export function studentStateForCloud(s){
     lastExam:s.lastExam||null,
     betaParticipant:s.betaParticipant||null,
     learningHypotheses:s.learningHypotheses||[],
+    subjectProgress:s.subjectProgress||{},
+    subjectProgressModelVersion:s.subjectProgressModelVersion||4,
     evidenceModelVersion:2,
     pedagogicalIdVersion:s.pedagogicalIdVersion||1,
     pedagogicalMemoryVersion:s.pedagogicalMemoryVersion||2
@@ -192,6 +194,8 @@ export function mergeStudentCloudState(local,remote){
     lastExam:remote.lastExam??local.lastExam,
     betaParticipant:remote.betaParticipant??local.betaParticipant,
     learningHypotheses:remote.learningHypotheses??local.learningHypotheses,
+    subjectProgress:remote.subjectProgress??local.subjectProgress,
+    subjectProgressModelVersion:remote.subjectProgressModelVersion??local.subjectProgressModelVersion??4,
     pedagogicalIdVersion:remote.pedagogicalIdVersion??local.pedagogicalIdVersion??1,
     pedagogicalMemoryVersion:remote.pedagogicalMemoryVersion??local.pedagogicalMemoryVersion??2
   };

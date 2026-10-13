@@ -3,7 +3,7 @@ import {readFileSync,readdirSync} from "node:fs";
 import {fileURLToPath} from "node:url";
 import {
   stateFingerprint,migrateCloudSync,markCloudLoaded,markCloudSaved,
-  cloudConflict,conflictReason,createLocalSnapshot,mergeByStableId,safeCloudMerge
+  cloudConflict,saveLocalSnapshot,safeCloudMerge
 } from "../app/lib/cloudReliability.js";
 
 const evidence=(itemId,at,source="mission")=>({itemId,at,source,signature:`sig-${itemId}`,cognitive:"procedure"});
@@ -23,19 +23,13 @@ const remotePayload={schema:"aplus-student-state-v8",xp:180};
 const loaded=markCloudLoaded(base,{revision:5,remoteDeviceId:"device-B",remoteState:remotePayload,at:3000});
 assert.equal(loaded.cloudSync.baseRevision,5);
 assert.equal(loaded.cloudSync.lastRemoteDeviceId,"device-B");
-const reason=conflictReason(base,{revision:4});
-assert.equal(reason.conflict,true);
-assert.equal(reason.reason,"remote_advanced");
 const conflicted=cloudConflict(base,{remoteRevision:4,remoteDeviceId:"device-B",remoteUpdatedAt:"2026-08-23T20:00:00Z",remoteState:remotePayload,at:4000});
 assert.equal(conflicted.cloudSync.lastConflict.remoteRevision,4);
 assert.equal(conflicted.cloudSync.lastConflict.localBaseRevision,2);
-const snap=createLocalSnapshot(base,{label:"before conflict",at:5000});
+const snap=saveLocalSnapshot(base,{label:"before conflict",at:5000});
 assert.equal(snap.label,"before conflict");
 assert.ok(snap.fingerprint.startsWith("sf1-"));
 assert.deepEqual(snap.state,base);
-const rows=mergeByStableId([{id:"x",at:10,v:"local-new"},{id:"y",at:5}],[{id:"x",at:1,v:"remote-old"},{id:"z",at:6}],x=>x.id);
-assert.equal(rows.length,3);
-assert.equal(rows.find(x=>x.id==="x").v,"local-new");
 const local={...base,xp:200,scores:{t1:{domain:55,conf:40,evidence:[evidence("q1",1000),evidence("q2",2000)]}},missionHistory:[{completionId:"m1",at:1000,themeId:"t1"}],examHistory:[{completionId:"e-local",id:"e-local",at:2500}],dailyMission:{deviceLocal:true},identity:{mode:"authenticated",authUserId:"u1"},cloudMeta:{local:true}};
 const remote={schema:"aplus-student-state-v8",goal:15,profile:{schoolYear:"11.º"},xp:180,scores:{t1:{domain:70,conf:70,evidence:[evidence("q1",1000),evidence("q3",3000)]},t2:{domain:60,conf:50,evidence:[evidence("q4",3500)]}},missionHistory:[{completionId:"m2",at:3000,themeId:"t2"}],examHistory:[{completionId:"e-remote",id:"e-remote",at:3200}],freeTrainingSignals:[],learningHypotheses:[{key:"h1",lastAt:3100}]};
 const combined=safeCloudMerge(local,remote);
@@ -70,6 +64,10 @@ for(const forbidden of ["password","identity","cloudMeta","cloudSync","authUserI
   assert.ok(!payloadSource.includes(forbidden),`Payload cloud passou a incluir campo proibido: ${forbidden}.`);
 }
 assert.ok(payloadSource.includes('schema:"aplus-student-state-v8"'),"Payload cloud perdeu a versão explícita de schema.");
+assert.ok(payloadSource.includes("subjectProgress:s.subjectProgress||{}"),"Payload cloud deixou de transportar o progresso por disciplina necessário à retoma multi-dispositivo.");
+assert.ok(payloadSource.includes("subjectProgressModelVersion:s.subjectProgressModelVersion||4"),"Payload cloud perdeu a versão do progresso por disciplina.");
+assert.ok(cloudSource.includes('"currentAnswer"'),"A limpeza de texto livre do aluno deve abranger respostas ainda não submetidas.");
+assert.ok(cloudSource.includes("subjectProgress:remote.subjectProgress??local.subjectProgress"),"Carregar cloud deve restaurar o progresso por disciplina quando existe remotamente.");
 assert.ok((cloudSource.match(/\.from\("student_cloud_state"\)/g)||[]).length>=4,"Cobertura esperada das operações de student_cloud_state diminuiu inesperadamente.");
 assert.ok(!cloudSource.includes('.from("student_cloud_state").delete('),"DELETE direto de progresso exige revisão explícita de segurança.");
 
@@ -133,4 +131,4 @@ assert.match(ingest,/greatest\(pilot_event_aggregates\.total_count,excluded\.tot
 assert.match(syncRoute,/sameOriginRequest\(request\)/u,"Pilot sync precisa de proteção CSRF por origem.");
 assert.match(dataRoute,/sameOriginRequest\(request\)/u,"Apagamento precisa de proteção CSRF por origem.");
 
-console.log("✓ cloud reliability/security: revisions, JWT auth, final migration-state coverage, CTE allowlist, pilot RLS, consent retention, marked test writes, validation and CSRF validated");
+console.log("✓ cloud reliability/security: revisions, JWT auth, subject progress sync, final migration-state coverage, CTE allowlist, pilot RLS, consent retention, marked test writes, validation and CSRF validated");
