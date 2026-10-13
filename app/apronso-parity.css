@@ -6,6 +6,13 @@
   object-fit:contain;
   object-position:center bottom;
 }
+@keyframes apronsoIdle{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(0,-2px,0) rotate(-.35deg)}}
+@keyframes apronsoThink{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}25%{transform:translate3d(0,-2px,0) rotate(-2deg)}55%{transform:translate3d(0,-1px,0) rotate(2deg)}75%{transform:translate3d(0,0,0) rotate(0deg)}}
+@keyframes apronsoCelebrate{0%,100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}20%{transform:translate3d(0,-7px,0) rotate(-2deg) scale(1.01)}40%{transform:translate3d(0,0,0) rotate(2deg) scale(1)}60%{transform:translate3d(0,-5px,0) rotate(-1deg) scale(1.01)}80%{transform:translate3d(0,0,0) rotate(1deg) scale(1)}}
+.apronso-motion-idle{animation:apronsoIdle 3.8s ease-in-out infinite;transform-origin:50% 90%}
+.apronso-motion-thinking{animation:apronsoThink 1.8s ease-in-out infinite;transform-origin:50% 90%}
+.apronso-motion-celebrate{animation:apronsoCelebrate 1.15s ease-out 1;transform-origin:50% 90%}
+@media(prefers-reduced-motion:reduce){.apronso-motion-idle,.apronso-motion-thinking,.apronso-motion-celebrate{animation:none!important}}
 .apronsoNudge{
   overflow:hidden;
 }
@@ -29,9 +36,30 @@
   pointer-events:none;
 }
 
-/* Diagnostic: Apronso belongs to the explanatory card. On compact screens
-   the character sits inside the same visual block, with reserved text space,
-   rather than occupying a detached column beside it. */
+/* Diagnostic: all three subjects share the same visual baseline. Apronso may
+   sit outside the explanation card, but his feet end exactly on the card's
+   lower edge instead of floating above/below it. */
+.diagApronsoHero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 160px;
+  align-items:end;
+  gap:20px;
+}
+.diagApronsoHero>div{
+  min-width:0;
+}
+.diagApronsoHero>.apronso{
+  align-self:end;
+  justify-self:end;
+  width:132px;
+  height:162px;
+  margin:0;
+  object-fit:contain;
+  object-position:center bottom;
+}
+
+/* On compact screens the character sits inside the same visual block, with
+   reserved text space, while keeping that same bottom baseline. */
 @media(max-width:760px){
   .diagApronsoHero{
     display:block;
@@ -48,7 +76,7 @@
   .diagApronsoHero>.apronso{
     position:absolute;
     right:14px;
-    bottom:8px;
+    bottom:0;
     width:94px;
     height:126px;
     margin:0;
@@ -130,7 +158,7 @@
   }
   .diagApronsoHero>.apronso{
     right:10px;
-    bottom:8px;
+    bottom:0;
     width:90px;
     height:120px;
   }

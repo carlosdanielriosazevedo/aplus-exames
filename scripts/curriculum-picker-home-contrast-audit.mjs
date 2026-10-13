@@ -15,6 +15,10 @@ assert.match(fqa,/submatérias assinaladas/u,"FQ A deve contar submatérias, nã
 assert.match(fqaEngine,/selected\.has\(item\.domain\)\|\|selected\.has\(item\.subtopicId\)/u,"o motor FQ A deve respeitar seleção granular e perfis antigos.");
 
 assert.match(portuguese,/\{id:"educacao-literaria",label:"Educação Literária",rows:literature\},\n    \.\.\.general/u,"Português deve separar Educação Literária, Leitura, Escrita e Gramática em matérias próprias.");
+assert.match(portuguese,/availableCompetencies=new Set\(PORTUGUESE_ITEMS/u,"Português deve derivar submatérias apenas de competências com conteúdo real no ano atual.");
+assert.match(portuguese,/id:`competency:\$\{row\.id\}`/u,"Leitura, Escrita e Gramática devem expor competências reais como submatérias.");
+assert.match(portuguese,/id\.startsWith\("domain:"\)\)return byDomain/u,"seleções antigas por domínio devem migrar para as novas submatérias sem perder âmbito.");
+assert.match(portuguese,/scopeIds\.includes\(`competency:\$\{item\.competencyId\}`\)/u,"o diagnóstico e as missões devem respeitar a seleção granular por competência.");
 assert.match(portuguese,/Selecionar toda esta matéria/u,"Português deve usar a mesma linguagem de Matemática/FQ A.");
 assert.match(portuguese,/matérias\/submatérias assinaladas/u,"Português deve tornar clara a granularidade da seleção.");
 
@@ -24,4 +28,4 @@ assert.match(css,/\.learnHome \.pathNode>div>b,[\s\S]*color:var\(--app-navy\)!im
 assert.match(css,/\.learnHome \.pathNode.current article h2\{color:#fff!important\}/u,"o cartão navy da Missão deve manter texto branco.");
 assert.match(css,/\.curriculumPicker input\{[\s\S]*accent-color:var\(--app-orange\)/u,"checkboxes curriculares devem usar a identidade visual da app.");
 
-console.log("✓ teste real: matéria dada alinhada nas 3 disciplinas e Home clara com contraste explícito");
+console.log("✓ teste real: matéria dada granular e alinhada nas 3 disciplinas e Home clara com contraste explícito");

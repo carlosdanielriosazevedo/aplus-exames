@@ -23,6 +23,20 @@ import {capturePortugueseValidationCase} from "../lib/graderValidationCapture";
 const PORTUGUESE_DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
+const PORTUGUESE_SCOPE_DETAILS={
+  "pt-leitura-informacao":"Tema, ideias principais e secundárias, informação explícita e organização do texto.",
+  "pt-leitura-inferencia":"Inferências, pontos de vista, argumentos, exemplos e leitura crítica.",
+  "pt-leitura-coesao":"Conectores, coesão, referência e cadeias anafóricas.",
+  "pt-leitura-organizacao":"Estrutura, intenção comunicativa, eficácia persuasiva e organização textual.",
+  "pt-escrita-exposicao":"Exposição, resposta a questões de leitura e organização clara da informação.",
+  "pt-escrita-argumentacao":"Tese, argumentos, contra-argumentos, exemplos e fundamentação.",
+  "pt-escrita-opiniao":"Texto de opinião e apreciação crítica com posição sustentada.",
+  "pt-escrita-revisao":"Planificação, coerência, coesão, sintaxe, pontuação, léxico e revisão.",
+  "pt-gramatica-sintaxe":"Funções sintáticas e relações entre constituintes.",
+  "pt-gramatica-oracoes":"Coordenação, subordinação e articulação de orações.",
+  "pt-gramatica-coesao":"Referência, conectores, cadeias anafóricas e coesão textual.",
+  "pt-gramatica-morfologia-semantica":"Formação de palavras, valores aspetuais e modais e discurso."
+};
 
 function capitalizeScopeLabel(value=""){
   return value?value.charAt(0).toLocaleUpperCase("pt-PT")+value.slice(1):value;
@@ -35,17 +49,29 @@ function yearsThrough(year){
 
 function portugueseScopeRows(year){
   const units=portugueseTaxonomyForYear(year,{includePrevious:false})[0]?.units||[];
+  const availableCompetencies=new Set(PORTUGUESE_ITEMS
+    .filter(item=>item.year===year&&item.domain!=="educacao-literaria"&&item.competencyId)
+    .map(item=>item.competencyId));
   const general=units
     .filter(unit=>unit.domain!=="educacao-literaria")
-    .map(unit=>({
-      id:unit.domain,
-      label:PORTUGUESE_DOMAIN_LABELS[unit.domain],
-      rows:[{
-        id:`domain:${unit.domain}`,
-        label:capitalizeScopeLabel(unit.title.replace(/^.*? · /u,"")),
-        detail:unit.summary
-      }]
-    }));
+    .map(unit=>{
+      const competencyRows=PORTUGUESE_COMPETENCIES
+        .filter(row=>row.writtenExam&&row.domain===unit.domain&&availableCompetencies.has(row.id))
+        .map(row=>({
+          id:`competency:${row.id}`,
+          label:row.label,
+          detail:PORTUGUESE_SCOPE_DETAILS[row.id]||unit.summary
+        }));
+      return {
+        id:unit.domain,
+        label:PORTUGUESE_DOMAIN_LABELS[unit.domain],
+        rows:competencyRows.length?competencyRows:[{
+          id:`domain:${unit.domain}`,
+          label:capitalizeScopeLabel(unit.title.replace(/^.*? · /u,"")),
+          detail:unit.summary
+        }]
+      };
+    });
   const literature=portugueseLiteraryWorksForYear(year)
     .map(work=>({id:`work:${work.id}`,label:work.title,detail:`${work.author} · ${work.curriculumLabel}`}));
   return [
@@ -54,10 +80,29 @@ function portugueseScopeRows(year){
   ];
 }
 
+function portugueseScopeDomain(id){
+  if(id.startsWith("work:"))return "educacao-literaria";
+  if(id.startsWith("domain:"))return id.slice("domain:".length);
+  if(id.startsWith("competency:")){
+    const competencyId=id.slice("competency:".length);
+    return PORTUGUESE_COMPETENCIES.find(row=>row.id===competencyId)?.domain||null;
+  }
+  return null;
+}
+
 function initialPortugueseScope(settings,year){
-  const all=portugueseScopeRows(year).flatMap(group=>group.rows.map(row=>row.id));
-  if(Array.isArray(settings?.taughtUnitIds))return settings.taughtUnitIds.filter(id=>all.includes(id));
-  if(Array.isArray(settings?.taughtDomains))return all.filter(id=>id.startsWith("work:")?settings.taughtDomains.includes("educacao-literaria"):settings.taughtDomains.includes(id.slice(7)));
+  const groups=portugueseScopeRows(year);
+  const all=groups.flatMap(group=>group.rows.map(row=>row.id));
+  const byDomain=domain=>all.filter(id=>portugueseScopeDomain(id)===domain);
+  if(Array.isArray(settings?.taughtUnitIds)){
+    const expanded=settings.taughtUnitIds.flatMap(id=>{
+      if(all.includes(id))return [id];
+      if(id.startsWith("domain:"))return byDomain(id.slice("domain:".length));
+      return [];
+    });
+    return [...new Set(expanded)];
+  }
+  if(Array.isArray(settings?.taughtDomains))return all.filter(id=>settings.taughtDomains.includes(portugueseScopeDomain(id)));
   return [];
 }
 
@@ -65,6 +110,7 @@ function portugueseItemInScope(item,currentYear,scopeIds){
   if(item.year!==currentYear)return true;
   if(item.literaryWorkId)return scopeIds.includes(`work:${item.literaryWorkId}`);
   if(item.domain==="educacao-literaria")return scopeIds.some(id=>id.startsWith("work:"));
+  if(item.competencyId&&scopeIds.includes(`competency:${item.competencyId}`))return true;
   return scopeIds.includes(`domain:${item.domain}`);
 }
 
@@ -200,7 +246,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   if(!session&&["curriculum","curriculumOnboard"].includes(view)&&finishedSecondary)return <Shell>
     <p className="eyebrow">{view==="curriculumOnboard"?`MATÉRIA DADA · ${onboardingStep.position} DE ${onboardingStep.total} · PORTUGUÊS`:"MATÉRIA DADA NA ESCOLA"}</p>
     <div className="completedCurriculumHero"><span>✓</span><div><small>MATÉRIA ASSUMIDA COMO DADA</small><h1>Todo o programa de Português fica disponível.</h1><p>Como já terminaste o secundário, a app assume automaticamente as obras e os conteúdos do 10.º, 11.º e 12.º anos. Podes alterar esta informação mais tarde nas definições de matéria dada.</p></div></div>
-    <button className="primary" onClick={()=>{const domains=[...new Set(allCurrentScopeIds.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:allCurrentScopeIds,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
+    <button className="primary" onClick={()=>{const domains=[...new Set(allCurrentScopeIds.map(portugueseScopeDomain).filter(Boolean))];setS(prev=>{const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:allCurrentScopeIds,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar"}</button>
   </Shell>;
 
   if(!session&&["curriculum","curriculumOnboard"].includes(view))return <Shell>
@@ -215,7 +261,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
     </details>})}</div>
     {!scopeDraft.length&&<div className="notice warning"><b>Ainda não assinalaste matéria deste ano</b><span>A app usará apenas matéria dos anos anteriores. No 10.º ano, o diagnóstico e as missões ficam indisponíveis até assinalares pelo menos uma área.</span></div>}
     <div className="notice"><b>O teu histórico fica guardado</b><span>Se desmarcares uma área, os resultados anteriores não são apagados; apenas deixam de influenciar o plano enquanto ela estiver fora do âmbito.</span></div>
-    <button className="primary" onClick={()=>{setS(prev=>{const domains=[...new Set(scopeDraft.map(id=>id.startsWith("work:")?"educacao-literaria":id.slice(7)))];const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:scopeDraft,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
+    <button className="primary" onClick={()=>{setS(prev=>{const domains=[...new Set(scopeDraft.map(portugueseScopeDomain).filter(Boolean))];const configured={...prev,subjectSettings:{...(prev.subjectSettings||{}),portuguese:{...(prev.subjectSettings?.portuguese||{}),taughtUnitIds:scopeDraft,taughtDomains:domains,curriculumConfigured:true}}};return view==="curriculumOnboard"&&onboardingStep.nextId?activateSubjectState(configured,onboardingStep.nextId):view==="curriculumOnboard"?finishSubjectOnboardingState(configured,onboardingStep.firstId):configured});go(view==="curriculumOnboard"?(onboardingStep.nextId?"onboard":onboardingDoneScreen):"progress")}}>{view==="curriculumOnboard"?(onboardingStep.nextId?"Configurar próxima disciplina":"Continuar"):"Guardar matéria dada"}</button>
   </Shell>;
 
   if(!session&&view==="trainingSetup"){

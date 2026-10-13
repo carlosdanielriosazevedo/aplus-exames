@@ -4,9 +4,14 @@ import {readFileSync} from "node:fs";
 const account=readFileSync(new URL("../app/components/AccountCloud.js",import.meta.url),"utf8");
 const cloud=readFileSync(new URL("../app/lib/cloud.js",import.meta.url),"utf8");
 const drafts=readFileSync(new URL("../app/lib/sessionDraft.js",import.meta.url),"utf8");
+const browserStorage=readFileSync(new URL("../app/lib/browserStorage.js",import.meta.url),"utf8");
 
-// Sessões inacabadas continuam deliberadamente locais nesta fase.
-assert.match(drafts,/localStorage\.setItem\(key,JSON\.stringify/u,"rascunhos de sessão devem continuar persistidos localmente");
+// Sessões inacabadas continuam deliberadamente locais nesta fase. Se o
+// localStorage do browser estiver indisponível, sessionStorage é uma rede de
+// segurança local — nunca uma sincronização cloud implícita.
+assert.match(drafts,/writeStorageFallback\(key,JSON\.stringify/u,"rascunhos de sessão devem usar persistência local resiliente");
+assert.match(browserStorage,/\["localStorage","sessionStorage"\]/u,"a persistência deve tentar localStorage antes do fallback de sessão");
+assert.match(browserStorage,/export function writeStorageFallback/u,"o fallback local deve permanecer centralizado e testável");
 assert.match(drafts,/const MAX_AGE_MS=1000\*60\*60\*24/u,"rascunhos transitórios devem manter expiração local explícita");
 assert.doesNotMatch(cloud,/sessionDraft|active-session/u,"a cloud de progresso não deve começar a transportar rascunhos de sessão sem um protocolo próprio de conflitos");
 
@@ -15,7 +20,7 @@ assert.match(account,/Sessão terminada\. O progresso local continua neste dispo
 assert.doesNotMatch(account,/async function signout\(\)[\s\S]{0,700}clearLocalState/u,"logout não pode limpar silenciosamente o estado local");
 
 // Carregar cloud é uma ação explícita e cria rede de segurança antes de aplicar estado remoto.
-assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve criar snapshot antes de aplicar o estado remoto");
+assert.match(account,/saveLocalSnapshot\(s,\{label:"Antes de carregar da cloud"\}\);[\s\S]*mergeStudentCloudState\(s,row\.state_json\)/u,"carregar cloud deve criar snapshot antes de aplicar estado remoto");
 assert.match(account,/Carregar cloud com snapshot/u,"a ação de carga deve comunicar a existência do snapshot");
 
 // Uma revisão remota mais recente bloqueia a escrita e exige decisão consciente.
@@ -35,4 +40,4 @@ assert.match(account,/Tentar novamente/u,"deve existir retry explícito da grava
 assert.match(cloud,/\.eq\("revision",Number\(expectedRevision\)\|\|0\)/u,"gravações cloud devem manter compare-and-swap por revisão");
 assert.match(cloud,/return \{ok:false,conflict:true,remote/u,"avanço remoto deve regressar como conflito e não ser sobrescrito");
 
-console.log("✓ cloud resume product contract: progresso concluído sincronizável · sessão inacabada local · logout seguro · snapshots · conflitos explícitos · retry offline · CAS por revisão");
+console.log("✓ cloud resume product contract: progresso concluído sincronizável · sessão inacabada local com fallback seguro · logout seguro · snapshots · conflitos explícitos · retry offline · CAS por revisão");
