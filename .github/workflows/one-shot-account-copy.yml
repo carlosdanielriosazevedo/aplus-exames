@@ -1,0 +1,94 @@
+name: One-shot account copy simplification
+
+on:
+  push:
+    branches:
+      - launch/public-rc-hardening
+
+permissions:
+  contents: write
+
+jobs:
+  simplify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: launch/public-rc-hardening
+          fetch-depth: 0
+      - name: Simplify account and recovery language
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('app/components/AccountCloud.js')
+          s=p.read_text()
+          replacements={
+            'Conta criada. Se a verificação de email estiver ativa no Neon, confirma o email antes de entrar.':'Conta criada. Se receberes um email de confirmação, confirma-o antes de entrares.',
+            'A cloud tem uma versão mais recente. Não substituímos nada automaticamente.':'Existe progresso online mais recente. Não substituímos nada automaticamente.',
+            'Progresso guardado online com segurança · revisão ${revision}.':'Progresso guardado online com segurança.',
+            'Falta aplicar a migration v4.9 da cloud. O progresso local não foi alterado.':'O progresso online está temporariamente indisponível. O progresso deste dispositivo não foi alterado.',
+            'Não foi possível chegar à cloud. Guardámos uma tentativa local para poderes repetir mais tarde; o estudo continua seguro neste dispositivo.':'Não foi possível guardar online. Guardámos uma tentativa neste dispositivo para poderes repetir mais tarde; o teu estudo continua disponível aqui.',
+            'Esta conta ainda não tem progresso guardado na cloud. O primeiro Guardar criará a revisão 1.':'Esta conta ainda não tem progresso guardado online. Usa “Guardar online” quando quiseres criar a primeira cópia.',
+            'Progresso online carregado · revisão ${row.revision}. Criámos um snapshot local antes da substituição.':'Progresso online carregado. Criámos primeiro uma cópia de segurança neste dispositivo.',
+            'Falta aplicar a migration v4.9 da cloud. Não carregámos nem alterámos o progresso local.':'O progresso online está temporariamente indisponível. Não carregámos nem alterámos o progresso deste dispositivo.',
+            'Mantivemos a revisão ${conflictRemote.revision} da cloud. A versão local anterior ficou num snapshot.':'Usámos o progresso online mais recente. A versão anterior deste dispositivo ficou guardada numa cópia de segurança.',
+            'A cloud mudou novamente enquanto resolvias o conflito. Voltámos a bloquear a escrita.':'O progresso online mudou novamente enquanto escolhias. Bloqueámos a gravação para não perder nenhuma versão.',
+            'Mantivemos este dispositivo e criámos a revisão ${revision}. O estado anterior foi preservado num snapshot.':'Mantivemos o progresso deste dispositivo. A versão anterior ficou preservada numa cópia de segurança.',
+            'A cloud mudou novamente antes de concluirmos a combinação. Nada foi sobrescrito.':'O progresso online mudou novamente antes de concluirmos a combinação. Nada foi substituído.',
+            'Combinámos atividade independente dos dois dispositivos e guardámos a revisão ${revision}.':'Combinámos o progresso dos dois dispositivos e guardámos a nova versão online.',
+            'Tentativa pendente sincronizada · revisão ${revision}.':'Tentativa pendente guardada online com sucesso.',
+            '<h1>O teu progresso, sem sobrescritas silenciosas.</h1>':'<h1>O teu progresso, seguro em todos os teus dispositivos.</h1>',
+            'A app continua local-first. A v4.9 passa a tratar cada gravação cloud como uma revisão: se outro dispositivo avançou entretanto, a escrita é bloqueada e és tu que decides o que fazer.':'A APProva+ guarda primeiro o estudo neste dispositivo. Quando guardas online, verifica se existe progresso mais recente noutro dispositivo e nunca o substitui sem te perguntar.',
+            '<b>○ Neon Auth/Data API ainda não ativados</b>':'<b>○ Progresso online temporariamente indisponível</b>',
+            'A arquitetura de conflitos já está pronta, mas nenhum serviço externo foi ativado por esta versão. O estudo continua integralmente local.':'Podes continuar a estudar normalmente. O progresso fica guardado neste dispositivo e poderás voltar a guardá-lo online quando o serviço estiver disponível.',
+            'A password é tratada pelo Neon Auth. A app não guarda passwords na base de dados de progresso.':'A palavra-passe é tratada pelo serviço de autenticação. A APProva+ não a guarda nos dados de progresso.'
+          }
+          for old,new in replacements.items():
+            if old in s:
+              s=s.replace(old,new)
+            elif new not in s:
+              raise SystemExit(f'Expected account copy not found: {old}')
+
+          old='''      <div className="cloudRevisionCard">\n        <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Revisão conhecida: {sync.baseRevision}</span></div>\n        <div><small>ÚLTIMA CLOUD CONHECIDA</small><b>rev. {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>\n        <div><small>REDE DE SEGURANÇA</small><b>{snapshots.length} snapshots</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>\n      </div>\n\n      <div className="syncActions">\n        <button onClick={saveCloud} disabled={busy}>↑ Guardar com controlo de revisão</button>\n        <button onClick={loadCloud} disabled={busy}>↓ Carregar cloud com snapshot</button>\n      </div>'''
+          new='''      <details className="cloudTechnicalDetails">\n        <summary>Detalhes e cópias de segurança</summary>\n        <div className="cloudRevisionCard">\n          <div><small>ESTE DISPOSITIVO</small><b>{shortDeviceId(deviceId)}</b><span>Versão conhecida: {sync.baseRevision}</span></div>\n          <div><small>ÚLTIMO PROGRESSO ONLINE</small><b>versão {sync.lastRemoteRevision??sync.baseRevision}</b><span>Dispositivo: {lastRemoteDevice}</span></div>\n          <div><small>CÓPIAS DE SEGURANÇA</small><b>{snapshots.length}</b><span>{pending.length} tentativa{pending.length===1?"":"s"} pendente{pending.length===1?"":"s"}</span></div>\n        </div>\n      </details>\n\n      <div className="syncActions">\n        <button onClick={saveCloud} disabled={busy}>↑ Guardar online</button>\n        <button onClick={loadCloud} disabled={busy}>↓ Carregar progresso online</button>\n      </div>'''
+          if old in s:s=s.replace(old,new)
+          elif new not in s:raise SystemExit('Expected cloud details block not found')
+
+          old='''      {conflictRemote&&<div className="cloudConflictCard">\n        <div className="cloudConflictHead"><span>⚠</span><div><b>Conflito detetado — nada foi sobrescrito</b>\n          <small>Este dispositivo conhecia a revisão {sync.baseRevision}; a cloud está na revisão {conflictRemote.revision}.</small></div></div>\n        <p>Escolhe conscientemente. Antes de qualquer substituição ou combinação criamos um snapshot local.</p>\n        <div className="conflictChoices">\n          <button onClick={resolveKeepRemote} disabled={busy}><b>Manter cloud</b><span>Usar a versão mais recente que já está online.</span></button>\n          <button onClick={resolveMerge} disabled={busy}><b>Combinar atividade</b><span>Unir evidências, Missões e exames independentes e recalibrar.</span></button>\n          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Substituir a cloud apenas se ela não tiver mudado outra vez.</span></button>\n        </div>\n      </div>}\n\n      <div className="notice"><b>Porque ainda não sincronizamos silenciosamente?</b><span>Agora já detetamos conflitos e temos mecanismos de recuperação. A sincronização automática só deve ser ligada depois de testarmos estes fluxos com duas contas/dispositivos reais e a migration v4.9 aplicada.</span></div>'''
+          new='''      {conflictRemote&&<div className="cloudConflictCard">\n        <div className="cloudConflictHead"><span>⚠</span><div><b>Encontrámos progresso mais recente noutro dispositivo</b>\n          <small>Nada foi substituído. Escolhe qual progresso queres manter ou combina os dois.</small></div></div>\n        <p>Antes de qualquer alteração, a APProva+ cria uma cópia de segurança neste dispositivo.</p>\n        <div className="conflictChoices">\n          <button onClick={resolveKeepRemote} disabled={busy}><b>Usar progresso online</b><span>Usar a versão mais recente que já está guardada online.</span></button>\n          <button onClick={resolveMerge} disabled={busy}><b>Combinar progresso</b><span>Juntar atividade feita separadamente nos dois dispositivos.</span></button>\n          <button onClick={resolveKeepLocal} disabled={busy}><b>Manter este dispositivo</b><span>Guardar online o progresso que estás a ver aqui.</span></button>\n        </div>\n      </div>}\n\n      <div className="notice"><b>O que acontece entre dispositivos?</b><span>Se encontrares progresso diferente noutro dispositivo, a APProva+ bloqueia a substituição automática e pede-te para escolher. Assim, nenhuma versão desaparece sem aviso.</span></div>'''
+          if old in s:s=s.replace(old,new)
+          elif new not in s:raise SystemExit('Expected conflict block not found')
+
+          old='''    <div className="securityBox">\n      <b>🔐 Duas proteções diferentes</b>\n      <span><b>RLS</b> impede um utilizador de ler/escrever o progresso de outra conta. <b>Revisões otimistas</b> impedem dois dispositivos da mesma conta de se sobrescreverem sem aviso.</span>\n    </div>'''
+          new='''    <div className="securityBox">\n      <b>🔐 O teu progresso está protegido</b>\n      <span>Cada conta só pode aceder ao respetivo progresso e, se dois dispositivos tiverem versões diferentes, a APProva+ pede-te para decidir antes de substituir alguma coisa.</span>\n    </div>'''
+          if old in s:s=s.replace(old,new)
+          elif new not in s:raise SystemExit('Expected security block not found')
+          p.write_text(s)
+
+          a=Path('scripts/cloud-resume-product-contract-audit.mjs')
+          t=a.read_text()
+          changes={
+            'assert.match(account,/Carregar cloud com snapshot/u,"a ação de carga deve comunicar a existência do snapshot");':'assert.match(account,/Carregar progresso online/u,"a ação de carga deve usar linguagem clara para o aluno");\nassert.match(account,/Detalhes e cópias de segurança/u,"a UI deve manter acesso aos detalhes de segurança sem os impor como linguagem principal");',
+            'assert.match(account,/A cloud tem uma versão mais recente\\. Não substituímos nada automaticamente\\./u,"conflitos devem bloquear sobrescritas automáticas");':'assert.match(account,/Existe progresso online mais recente\\. Não substituímos nada automaticamente\\./u,"conflitos devem bloquear sobrescritas automáticas");',
+            'assert.match(account,/Conflito detetado — nada foi sobrescrito/u,"a UI deve explicar claramente o bloqueio por conflito");':'assert.match(account,/Encontrámos progresso mais recente noutro dispositivo/u,"a UI deve explicar o conflito em linguagem não técnica");',
+            'for(const label of ["Manter cloud","Combinar atividade","Manter este dispositivo"]){':'for(const label of ["Usar progresso online","Combinar progresso","Manter este dispositivo"]){'
+          }
+          for old,new in changes.items():
+            if old in t:t=t.replace(old,new)
+            elif new not in t:raise SystemExit(f'Expected cloud audit contract not found: {old}')
+          a.write_text(t)
+          PY
+          node scripts/cloud-resume-product-contract-audit.mjs
+          git diff --check
+      - name: Commit simplification
+        run: |
+          if git diff --quiet; then
+            echo 'Account copy already simplified.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/components/AccountCloud.js scripts/cloud-resume-product-contract-audit.mjs
+          git commit -m 'Simplify online progress and conflict language'
+          git push origin HEAD:launch/public-rc-hardening
