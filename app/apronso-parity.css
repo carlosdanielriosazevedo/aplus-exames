@@ -29,9 +29,30 @@
   pointer-events:none;
 }
 
-/* Diagnostic: Apronso belongs to the explanatory card. On compact screens
-   the character sits inside the same visual block, with reserved text space,
-   rather than occupying a detached column beside it. */
+/* Diagnostic: all three subjects share the same visual baseline. Apronso may
+   sit outside the explanation card, but his feet end exactly on the card's
+   lower edge instead of floating above/below it. */
+.diagApronsoHero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 160px;
+  align-items:end;
+  gap:20px;
+}
+.diagApronsoHero>div{
+  min-width:0;
+}
+.diagApronsoHero>.apronso{
+  align-self:end;
+  justify-self:end;
+  width:132px;
+  height:162px;
+  margin:0;
+  object-fit:contain;
+  object-position:center bottom;
+}
+
+/* On compact screens the character sits inside the same visual block, with
+   reserved text space, while keeping that same bottom baseline. */
 @media(max-width:760px){
   .diagApronsoHero{
     display:block;
@@ -48,7 +69,7 @@
   .diagApronsoHero>.apronso{
     position:absolute;
     right:14px;
-    bottom:8px;
+    bottom:0;
     width:94px;
     height:126px;
     margin:0;
@@ -130,7 +151,7 @@
   }
   .diagApronsoHero>.apronso{
     right:10px;
-    bottom:8px;
+    bottom:0;
     width:90px;
     height:120px;
   }
