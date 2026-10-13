@@ -13,6 +13,13 @@ const ALLOWED_EVENTS=new Set([
 const dateKey=at=>new Date(at||Date.now()).toISOString().slice(0,10);
 const subjectOf=payload=>String(payload?.subject||payload?.subjectId||"all");
 
+function sessionId(kind){
+  const prefix=String(kind||"session").replace(/[^a-z0-9_-]/giu,"-").slice(0,24)||"session";
+  const cryptoObj=typeof globalThis!=="undefined"?globalThis.crypto:null;
+  if(cryptoObj?.randomUUID)return `${prefix}-${cryptoObj.randomUUID()}`;
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,12)}`;
+}
+
 function upsertAggregate(state,type,{subject="all",seconds=0,at=Date.now()}={}){
   if(!pilotTelemetryAllowed()||!ALLOWED_EVENTS.has(type))return state;
   const date=dateKey(at);
@@ -54,7 +61,7 @@ export function recordPilotItemResult(state,{itemId,outcome,seconds=0,date=null,
 }
 
 export function sessionStart(kind,meta={}){
-  return {kind,startedAt:Date.now(),meta};
+  return {id:sessionId(kind),kind,startedAt:Date.now(),meta};
 }
 
 export function sessionFinish(session,meta={}){
