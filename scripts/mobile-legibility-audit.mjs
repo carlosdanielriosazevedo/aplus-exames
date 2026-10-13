@@ -10,7 +10,7 @@ const mobileCss=css.slice(css.indexOf(mobileMarker));
 const viewports=[[320,568],[360,800],[390,844],[430,932],[1280,800]];
 
 assert.ok(mobileCss.startsWith(mobileMarker),"mobile override block is missing");
-assert.match(layout,/export const viewport=\{width:'device-width',initialScale:1,viewportFit:'cover'\}/);
+assert.match(layout,/export const viewport=\{width:'device-width',initialScale:1,viewportFit:'cover'(?:,themeColor:'#[0-9a-fA-F]{6}')?\}/);
 assert.match(mobileCss,/min-height:100dvh/);
 assert.match(mobileCss,/env\(safe-area-inset-top\)/);
 assert.match(mobileCss,/env\(safe-area-inset-bottom\)/);
