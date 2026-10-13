@@ -1,0 +1,31 @@
+name: Public launch optimize
+
+on:
+  push:
+    branches: [launch/public-rc-hardening]
+    paths:
+      - .github/workflows/public-launch-optimize.yml
+      - scripts/public-launch-optimize.mjs
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[public-launch-optimize]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: launch/public-rc-hardening
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/public-launch-optimize.mjs
+      - name: Commit optimized source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/chrome.js app/page.js app/components/PortugueseSubject.js
+          git commit -m "[public-launch-optimize] Reduce shell overhead and normalize menus"
+          git push origin HEAD:launch/public-rc-hardening
