@@ -1,6 +1,7 @@
 import './globals.css';
 import './mini-exam-review.css';
 import './apronso-parity.css';
+import ClientRuntimeReporter from './components/ClientRuntimeReporter';
 
 const SITE_URL='https://approvamais.pt';
 
@@ -18,8 +19,8 @@ export const metadata={
     description:'Preparação inteligente e adaptativa para os exames nacionais.'
   }
 };
-export const viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
+export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 
 export default function RootLayout({children}){
-  return <html lang="pt"><body>{children}</body></html>;
+  return <html lang="pt-PT"><body>{children}<ClientRuntimeReporter/></body></html>;
 }
