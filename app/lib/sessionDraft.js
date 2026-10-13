@@ -43,7 +43,8 @@ function removeFromStores(key,predicate=()=>true){
 export function saveSessionDraft(draft){
   const key=keyForMode(draft?.betaMode);
   if(!draft)return clearSessionDraft(draft?.betaMode||"internal");
-  const payload=JSON.stringify({...draft,savedAt:Date.now()});
+  let payload;
+  try{payload=JSON.stringify({...draft,savedAt:Date.now()})}catch{return false}
   const local=browserStorage("localStorage");
   if(local){
     try{
@@ -97,14 +98,14 @@ export function loadSessionDraft(mode="internal"){
 
 export function clearSessionDraft(mode="internal"){
   const key=keyForMode(mode);
-  let available=false,cleared=false;
+  let available=false,ok=true;
   for(const name of ["localStorage","sessionStorage"]){
     const store=browserStorage(name);
     if(!store)continue;
     available=true;
-    try{store.removeItem(key);cleared=true}catch{}
+    try{store.removeItem(key)}catch{ok=false}
   }
-  return available&&cleared;
+  return available&&ok;
 }
 
 export function restartDiagnosticDraft(mode="internal"){
