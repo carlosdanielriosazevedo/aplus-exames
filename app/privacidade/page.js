@@ -22,13 +22,18 @@ export default function PrivacyPage(){
     <p className={styles.copy}>A APProva+ foi desenhada para permitir estudar com o mínimo de dados necessário. Algumas informações ficam apenas no teu dispositivo; outras só são guardadas online quando usas funcionalidades que o exigem, como uma conta; e a telemetria do piloto continua separada e depende de consentimento.</p>
 
     <div className={styles.section}>
+      <h2>Utilizadores menores e encarregados de educação</h2>
+      <p className={styles.copy}>A APProva+ destina-se a alunos do ensino secundário e foi desenhada para minimizar os dados pedidos. Funcionalidades opcionais que usem dados adicionais, como participação num piloto ou ranking escolar, identificam a escolha correspondente. Se fores menor, envolve o teu encarregado de educação sempre que uma funcionalidade peça uma decisão adicional sobre utilização de dados. Os encarregados de educação podem consultar a informação própria e contactar-nos através do endereço de privacidade indicado abaixo.</p>
+    </div>
+
+    <div className={styles.section}>
       <h2>Progresso guardado no dispositivo</h2>
       <p className={styles.copy}>A app usa armazenamento do browser para manter configurações, progresso académico e sessões em pausa. Este armazenamento permite fechar e voltar à app sem recomeçar do zero. Se o browser bloquear esse armazenamento, a APProva+ pode usar temporariamente a memória do separador para não impedir o estudo; nesse caso mostramos um aviso porque fechar ou atualizar o separador pode eliminar o que ainda não ficou guardado de forma durável.</p>
     </div>
 
     <div className={styles.section}>
       <h2>Conta e progresso online</h2>
-      <p className={styles.copy}>Se criares ou iniciares sessão numa conta, são tratados os dados necessários à autenticação, como o nome e o email que forneceres, e pode ser guardado online um estado académico limitado para permitir recuperação e continuidade entre dispositivos. O estado enviado para a cloud usa uma lista explícita de campos permitidos e remove recursivamente o texto das respostas do aluno antes da gravação.</p>
+      <p className={styles.copy}>Se criares ou iniciares sessão numa conta, são tratados os dados necessários à autenticação, como o nome e o email que forneceres, e pode ser guardado online um estado académico limitado para permitir recuperação e continuidade entre dispositivos. O estado enviado para o serviço online usa uma lista explícita de campos permitidos e remove recursivamente o texto das respostas do aluno antes da gravação.</p>
     </div>
 
     <div className={styles.section}>
