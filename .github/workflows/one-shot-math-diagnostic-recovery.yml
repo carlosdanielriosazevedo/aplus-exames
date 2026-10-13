@@ -1,0 +1,103 @@
+name: One-shot Mathematics diagnostic recovery
+
+on:
+  push:
+    branches: [fix/math-diagnostic-recovery]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/math-diagnostic-recovery
+          fetch-depth: 0
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Apply diagnostic recovery fix
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          client=Path('app/clientApp.js')
+          s=client.read_text()
+
+          import_needle='''import {\n  saveSessionDraft,loadSessionDraft,loadSessionDraftStatus,clearSessionDraft,draftScreen\n} from "./lib/sessionDraft";\n'''
+          import_replacement=import_needle+'import {reconcileDiagnosticRuntimeSessions} from "./lib/diagnosticRuntime";\n'
+          if import_needle not in s:
+              raise SystemExit('sessionDraft import anchor missing')
+          s=s.replace(import_needle,import_replacement,1)
+
+          ensure_needle='''function ensureDiagnosticStarted(state,draft){\n'''
+          ensure_replacement='''function reportDiagnosticFlowIssue(stage,reason){\n  if(typeof window==="undefined")return;\n  const safeStage=String(stage||"flow").replace(/[^a-z0-9_-]/giu,"_").slice(0,24);\n  const safeReason=String(reason||"unknown").replace(/[^a-z0-9_-]/giu,"_").slice(0,40);\n  import("./lib/clientRuntimeReport").then(({reportClientError})=>{\n    const error=new Error("Diagnostic flow issue");\n    error.name=`Diagnostic_${safeStage}_${safeReason}`;\n    reportClientError({kind:"runtime",error,source:"diagnostic"});\n  }).catch(()=>{});\n}\n\nfunction ensureDiagnosticStarted(state,draft){\n'''
+          if ensure_needle not in s:
+              raise SystemExit('ensureDiagnosticStarted anchor missing')
+          s=s.replace(ensure_needle,ensure_replacement,1)
+
+          old_intro='''    <button className="primary" disabled={gated} onClick={()=>{\n      const existing=loadSessionDraft(s.betaMode||"internal");\n      const open=(s.betaSessions||[]).filter(x=>x.kind==="diagnostic"&&!x.finishedAt);\n      if(existing?.kind==="diagnostic"){go("diagRun");return}\n      if(open.length){setSaveError(true);return}\n      const ses=sessionStart("diagnostic",{goal:s?.goal||null});\n      const current=diagnosticAnchor(blueprint[0],difficulty,s);\n      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:s.betaMode||"internal",difficulty,blueprint});\n      if(!saveSessionDraft(draft)){setSaveError(true);return}\n      const started=ensureDiagnosticStarted(s,draft);\n      if(!started.ok||!saveLocalState(started.state)){setSaveError(true);return}\n      setSaveError(false);\n      setS(started.state);\n      go("diagRun");\n    }}>Começar diagnóstico</button>\n'''
+          new_intro='''    <button className="primary" disabled={gated} onClick={()=>{\n      const existing=loadSessionDraft(s.betaMode||"internal");\n      if(existing?.kind==="diagnostic"){go("diagRun");return}\n      const startState=reconcileDiagnosticRuntimeSessions(s);\n      if(startState!==s)setS(startState);\n      const ses=sessionStart("diagnostic",{goal:startState?.goal||null});\n      const current=diagnosticAnchor(blueprint[0],difficulty,startState);\n      if(!current){reportDiagnosticFlowIssue("start","anchor_unavailable");setSaveError(true);return}\n      const draft=createDiagnosticDraft({session:ses,item:current,betaMode:startState.betaMode||"internal",difficulty,blueprint});\n      if(!saveSessionDraft(draft)){reportDiagnosticFlowIssue("start","draft_write_failed");setSaveError(true);return}\n      const started=ensureDiagnosticStarted(startState,draft);\n      if(!started.ok){\n        reportDiagnosticFlowIssue("start",started.reason||"ensure_failed");\n        clearSessionDraft(startState.betaMode||"internal");\n        setSaveError(true);\n        return;\n      }\n      if(!saveLocalState(started.state)){reportDiagnosticFlowIssue("start","state_write_failed");setSaveError(true);return}\n      setSaveError(false);\n      setS(started.state);\n      go("diagRun");\n    }}>Começar diagnóstico</button>\n'''
+          if old_intro not in s:
+              raise SystemExit('DiagIntro start block missing')
+          s=s.replace(old_intro,new_intro,1)
+
+          old_retry='''  function retryRecovery(){\n    const result=recoverDiagnosticTransaction({state:s,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,\n      clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});\n    if(!result.ok){setReady(false);setSaveError(true);setDraft(result.draft);return}\n    setReady(true);setSaveError(false);setS(result.state);setDraft(result.draft);\n    if(result.completed)go("diagResult");\n  }\n'''
+          new_retry='''  function retryRecovery(){\n    const recoveryState=reconcileDiagnosticRuntimeSessions(s,draft?.sessionId||null);\n    const result=recoverDiagnosticTransaction({state:recoveryState,draft,saveState:saveLocalState,saveDraft:saveSessionDraft,\n      clearDraft:()=>clearSessionDraft(s.betaMode||"internal"),startState:ensureDiagnosticStarted,completeState:finalizeDiagnosticState});\n    if(!result.ok){\n      reportDiagnosticFlowIssue("recovery",result.reason||"unknown");\n      if(recoveryState!==s)setS(recoveryState);\n      setReady(false);setSaveError(true);setDraft(result.draft);return;\n    }\n    setReady(true);setSaveError(false);setS(result.state);setDraft(result.draft);\n    if(result.completed)go("diagResult");\n  }\n'''
+          if old_retry not in s:
+              raise SystemExit('DiagRun retry block missing')
+          s=s.replace(old_retry,new_retry,1)
+          client.write_text(s)
+
+          Path('app/lib/diagnosticRuntime.js').write_text('''export function reconcileDiagnosticRuntimeSessions(state,activeSessionId=null){\n  let keptCurrent=false,changed=false;\n  const sessions=(state?.betaSessions||[]).filter(session=>{\n    if(session?.kind!=="diagnostic"||session.finishedAt)return true;\n    if(activeSessionId&&session.id===activeSessionId&&!keptCurrent){keptCurrent=true;return true}\n    changed=true;\n    return false;\n  });\n  return changed?{...state,betaSessions:sessions}:state;\n}\n''')
+
+          Path('tests/unit/diagnosticRuntime.test.js').write_text('''import {describe,expect,it} from "vitest";\nimport {reconcileDiagnosticRuntimeSessions} from "../../app/lib/diagnosticRuntime.js";\n\ndescribe("diagnostic runtime session reconciliation",()=>{\n  it("removes orphan open diagnostics before starting a new diagnostic",()=>{\n    const finished={id:"done",kind:"diagnostic",finishedAt:10};\n    const mission={id:"mission",kind:"mission"};\n    const state={betaSessions:[{id:"orphan",kind:"diagnostic"},finished,mission]};\n    const next=reconcileDiagnosticRuntimeSessions(state);\n    expect(next.betaSessions).toEqual([finished,mission]);\n  });\n\n  it("keeps exactly one open session for the draft being recovered",()=>{\n    const state={betaSessions:[\n      {id:"stale",kind:"diagnostic"},\n      {id:"current",kind:"diagnostic"},\n      {id:"current",kind:"diagnostic"},\n      {id:"finished",kind:"diagnostic",finishedAt:20}\n    ]};\n    const next=reconcileDiagnosticRuntimeSessions(state,"current");\n    expect(next.betaSessions).toEqual([\n      {id:"current",kind:"diagnostic"},\n      {id:"finished",kind:"diagnostic",finishedAt:20}\n    ]);\n  });\n\n  it("preserves object identity when there is nothing to reconcile",()=>{\n    const state={betaSessions:[{id:"current",kind:"diagnostic"},{id:"mission",kind:"mission"}]};\n    expect(reconcileDiagnosticRuntimeSessions(state,"current")).toBe(state);\n  });\n});\n''')
+
+          audit=Path('scripts/diagnostic-recovery-audit.mjs')
+          a=audit.read_text()
+          a=a.replace('import assert from "node:assert/strict";\n','import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\n',1)
+          persistence='import {loadLocalStateStatus} from "../app/lib/persistence.js";\n'
+          if persistence not in a:
+              raise SystemExit('diagnostic audit persistence import missing')
+          a=a.replace(persistence,persistence+'import {reconcileDiagnosticRuntimeSessions} from "../app/lib/diagnosticRuntime.js";\n',1)
+          marker='const clientAppSource=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");\n'
+          runtime_case='''// 34. Uma sessão runtime órfã não pode prender a recuperação do draft atual num ciclo ambíguo.\nconst currentRuntimeState=stateFor("ses-current-runtime");\nconst currentRuntimeDraft=draftFor(currentRuntimeState);\nconst orphanRuntimeState={...currentRuntimeState,betaSessions:[{id:"ses-orphan-runtime",kind:"diagnostic",startedAt:NOW-2000,finishedAt:null,meta:{}}]};\nconst reconciledRuntimeState=reconcileDiagnosticRuntimeSessions(orphanRuntimeState,currentRuntimeDraft.sessionId);\nconst runtimeWrites=writes();\nconst runtimeRecovered=recoverDiagnosticTransaction({state:reconciledRuntimeState,draft:currentRuntimeDraft,saveState:runtimeWrites.saveState,saveDraft:runtimeWrites.saveDraft,clearDraft:runtimeWrites.clearDraft,startState,completeState});\nassert.equal(runtimeRecovered.ok,true);\nassert.equal(runtimeRecovered.draft.sessionId,"ses-current-runtime");\nassert.equal(runtimeRecovered.state.betaSessions.filter(x=>x.kind==="diagnostic"&&!x.finishedAt).length,1);\nassert.equal(runtimeRecovered.state.betaSessions.find(x=>x.kind==="diagnostic"&&!x.finishedAt)?.id,"ses-current-runtime");\n\n'''
+          # Current main does not yet contain source-level guards, so insert both the runtime case and guards before the final log.
+          final_log='console.log("✓ diagnostic recovery WAL audit: 33 recovery/fault-injection groups passed");'
+          guards='''const clientAppSource=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");\nconst diagnosticIntroSource=clientAppSource.slice(clientAppSource.indexOf("function DiagIntro("),clientAppSource.indexOf("\\nfunction DiagRun("));\nconst diagnosticRunSource=clientAppSource.slice(clientAppSource.indexOf("function DiagRun("),clientAppSource.indexOf("\\nfunction DiagResult("));\nassert.match(diagnosticIntroSource,/reconcileDiagnosticRuntimeSessions\\(s\\)/u,"Um diagnóstico novo deve remover sessões runtime órfãs antes de arrancar.");\nassert.doesNotMatch(diagnosticIntroSource,/if\\(open\\.length\\)\\{setSaveError\\(true\\);return\\}/u,"Uma sessão runtime órfã não pode bloquear para sempre o arranque do diagnóstico.");\nassert.match(diagnosticRunSource,/reconcileDiagnosticRuntimeSessions\\(s,draft\\?\\.sessionId\\|\\|null\\)/u,"A recuperação deve ignorar sessões runtime órfãs e preservar apenas a sessão do draft atual.");\nassert.match(diagnosticRunSource,/reportDiagnosticFlowIssue\\("recovery",result\\.reason/u,"Falhas lógicas de recuperação devem ficar observáveis sem respostas do aluno.");\n\nconsole.log("✓ diagnostic recovery WAL audit: 34 recovery/fault-injection groups passed");'''
+          if final_log not in a:
+              raise SystemExit('diagnostic audit final log missing')
+          a=a.replace(final_log,runtime_case+guards,1)
+          audit.write_text(a)
+          PY
+
+          rm -f .github/workflows/one-shot-math-diagnostic-recovery.yml
+          git diff --check
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Targeted regression proof
+        run: |
+          npm run test:unit -- --run tests/unit/diagnosticRuntime.test.js tests/unit/launchHardening.test.js
+          npm run diagnostic-recovery:audit
+          npm run syntax:audit
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix Mathematics diagnostic recovery deadlock"
+          git push origin HEAD:fix/math-diagnostic-recovery
