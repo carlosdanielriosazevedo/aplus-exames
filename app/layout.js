@@ -18,8 +18,16 @@ export const metadata={
     url:SITE_URL,
     siteName:'APProva+',
     title:'APProva+ · Preparação para exames nacionais',
-    description:'Preparação inteligente e adaptativa para os exames nacionais.'
-  }
+    description:'Preparação inteligente e adaptativa para os exames nacionais.',
+    images:[{url:'/opengraph-image',width:1200,height:630,alt:'APProva+ · Preparação inteligente para exames nacionais'}]
+  },
+  twitter:{
+    card:'summary_large_image',
+    title:'APProva+ · Preparação para exames nacionais',
+    description:'Preparação inteligente e adaptativa para os exames nacionais.',
+    images:['/opengraph-image']
+  },
+  icons:{icon:'/favicon.ico',shortcut:'/favicon.ico'}
 };
 export const viewport={width:'device-width',initialScale:1,viewportFit:'cover',themeColor:'#08132e'};
 
