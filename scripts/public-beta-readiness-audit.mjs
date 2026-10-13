@@ -12,8 +12,8 @@ const pilotCopy=readFileSync(new URL("../app/lib/pilotCopy.js",import.meta.url),
 
 assert.match(welcome,/href="\/privacidade"/u,"A entrada pública deve expor Privacidade.");
 assert.match(welcome,/href="\/termos"/u,"A entrada pública deve expor Termos de utilização.");
-assert.match(privacy,/Sem consentimento ativo, a app não recolhe nem envia telemetria do piloto/u,"Privacidade deve explicar que sem pilot_self não há telemetria.");
-assert.match(privacy,/retirar o consentimento ou apagar os dados do piloto/u,"Privacidade deve explicar revogação e apagamento.");
+assert.match(privacy,/Sem consentimento ativo, a utilização principal da APProva\+ continua disponível/u,"Privacidade deve explicar que a utilização principal continua disponível sem consentimento da telemetria do piloto.");
+assert.match(privacy,/retirar o consentimento a qualquer momento.*eliminação desses dados/us,"Privacidade deve explicar revogação e apagamento.");
 assert.match(pilot,/Tenho 13 anos ou mais/u,"Consentimento deve exigir confirmação 13+ não pré-selecionada.");
 assert.match(pilot,/Li isto e aceito participar no piloto/u,"Consentimento deve exigir aceitação explícita não pré-selecionada.");
 assert.match(pilot,/Agora não/u,"Piloto deve permitir continuar sem telemetria.");
@@ -29,7 +29,8 @@ assert.match(pilotCopy,/\[data fim do piloto\]/u,"Fim do piloto deve continuar c
 assert.match(pilotCopy,/não guardamos o texto das tuas respostas/u,"Texto adolescente deve declarar a regra de minimização protegida pelo serializer cloud.");
 assert.match(terms,/Não é uma plataforma oficial do IAVE/u,"Termos devem deixar claro que a APProva+ não é oficial.");
 assert.match(terms,/Não substituem a classificação oficial/u,"Termos devem distinguir feedback da classificação oficial.");
-assert.match(terms,/não constituem a versão jurídica final/u,"A beta não deve fingir revisão jurídica final.");
+assert.match(terms,/versão beta pública/u,"Os Termos devem identificar claramente o enquadramento da versão pública atual.");
+assert.match(terms,/Alunos menores de idade/u,"Os Termos devem reconhecer explicitamente alunos menores.");
 
 const checks=[
   ["Primeira experiência e percurso do aluno","npm",["run","student-experience:audit"]],
