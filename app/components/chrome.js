@@ -116,6 +116,12 @@ function goSafeStart(){
   const query=window.location.search||"";
   window.location.assign(`/${query}`);
 }
+function goSafeHome(){
+  if(typeof window==="undefined")return;
+  const state={...(window.history.state||{}),approvaScreen:"home",approvaSessionGuard:false};
+  window.history.replaceState(state,"");
+  window.dispatchEvent(new PopStateEvent("popstate",{state}));
+}
 function restartDiagnostic(){
   if(typeof window==="undefined")return;
   const confirmed=window.confirm("Isto elimina apenas a sessão de diagnóstico que não foi possível recuperar. O teu progresso académico já guardado mantém-se. Queres começar um diagnóstico novo?");
@@ -135,6 +141,7 @@ export const Shell=({children,className=""})=>{
   const text=childText(children);
   const fatalRecovery=/Não foi possível (?:recuperar esta sessão|ler o progresso guardado)/u.test(text);
   const diagnosticRecovery=/Não foi possível recuperar esta sessão/u.test(text)||(/Estamos a confirmar o teu progresso/u.test(text)&&/Tentar novamente/u.test(text));
+  const diagnosticStartFailure=/Não foi possível guardar o progresso/u.test(text);
   const autoBack=!!screen&&!ROOT_SCREENS.has(screen)&&!FOCUS_SCREENS.has(screen)&&!hasBack(children);
   return <main className={`light ${className}`.trim()}><FriendsBetaRibbon/>
     <section className="panel">
@@ -142,6 +149,9 @@ export const Shell=({children,className=""})=>{
         if(window.history.length>1)window.history.back();else goSafeStart();
       }}>← Voltar</button>}
       {children}
+      {diagnosticStartFailure&&<div className="recoveryActions" role="group" aria-label="Sair do diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
+        <button className="secondary" type="button" onClick={goSafeHome}>Ir para o menu inicial</button>
+      </div>}
       {diagnosticRecovery&&<div className="recoveryActions" role="group" aria-label="Recomeçar diagnóstico" style={{display:"grid",gap:10,marginTop:18}}>
         <button className="secondary" type="button" onClick={restartDiagnostic}>Começar diagnóstico de novo</button>
       </div>}
