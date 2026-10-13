@@ -1,7 +1,7 @@
 
 "use client";
 
-export {safeCloudMerge} from "./cloudStateMerge";
+export {safeCloudMerge} from "./cloudStateMerge.js";
 
 const DEVICE_KEY="a25-device-id-v1";
 const SNAPSHOT_KEY="a25-cloud-snapshots-v1";
