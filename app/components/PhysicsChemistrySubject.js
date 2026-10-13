@@ -187,7 +187,7 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     const pending=results.filter(result=>result&&result.final!==true&&result.status!=="unanswered").length;
     const unanswered=results.filter(result=>result?.status==="unanswered").length;
     const title=session.kind==="mission"?"Missão concluída":session.kind==="diagnostic"?"Diagnóstico concluído":"Treino concluído";
-    const primaryLabel=session.kind==="diagnostic"?"Ir para o menu inicial":"Voltar à Home";
+    const primaryLabel=session.kind==="diagnostic"?"Ir para o menu inicial":"Voltar ao menu inicial";
     const primaryTarget="home";
     return <Shell>
       <div className="centered completionMoment">

@@ -149,7 +149,7 @@ export function AccountCloud({s,setS,go}){
         let next=markCloudSaved(prev,{revision,deviceId,savedState:prev,at:now});
         return {...next,cloudMeta:{...(next.cloudMeta||{}),lastSavedAt:now,lastRemoteUpdatedAt:result?.data?.updated_at||new Date(now).toISOString()}};
       });
-      setMessage({ok:true,text:`Progresso guardado com segurança na cloud · revisão ${revision}.`});
+      setMessage({ok:true,text:`Progresso guardado online com segurança · revisão ${revision}.`});
     }catch(error){
       if(error?.code==="CLOUD_SCHEMA_OUTDATED"){
         setMessage({ok:false,text:"Falta aplicar a migration v4.9 da cloud. O progresso local não foi alterado."});
@@ -178,7 +178,7 @@ export function AccountCloud({s,setS,go}){
         });
         setS({...recalibrated,cloudMeta:{...(recalibrated.cloudMeta||{}),lastLoadedAt:Date.now(),lastRemoteUpdatedAt:row.updated_at}});
         refreshLocalSafety();
-        setMessage({ok:true,text:`Cloud carregada · revisão ${row.revision}. Criámos um snapshot local antes da substituição.`});
+        setMessage({ok:true,text:`Progresso online carregado · revisão ${row.revision}. Criámos um snapshot local antes da substituição.`});
       }
     }catch(error){
       setMessage({ok:false,text:error?.code==="CLOUD_SCHEMA_OUTDATED"
@@ -291,7 +291,7 @@ export function AccountCloud({s,setS,go}){
   const localIndex=prepIndex(s);
   const lastRemoteDevice=sync.lastRemoteDeviceId?shortDeviceId(sync.lastRemoteDeviceId):"—";
 
-  return <Shell><Back go={go}/><p className="eyebrow">CONTA <BrandName/> · CLOUD SEGURA</p>
+  return <Shell><Back go={go}/><p className="eyebrow">CONTA <BrandName/> · PROGRESSO ONLINE</p>
     <h1>O teu progresso, sem sobrescritas silenciosas.</h1>
     <p className="muted">A app continua local-first. A v4.9 passa a tratar cada gravação cloud como uma revisão: se outro dispositivo avançou entretanto, a escrita é bloqueada e és tu que decides o que fazer.</p>
 
@@ -307,7 +307,7 @@ export function AccountCloud({s,setS,go}){
       <div className="realAuthForm">
         {mode==="signup"&&<label>Nome<input value={name} onChange={e=>setName(e.target.value)} placeholder="Nome"/></label>}
         <label>Email<input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="nome@email.pt"/></label>
-        <label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
+        <label>Palavra-passe<input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••••"/></label>
         <button disabled={busy||!email.trim()||password.length<8} onClick={submit}>{busy?"A processar…":mode==="signup"?"Criar conta":"Entrar"}</button>
       </div>
       <small className="cloudPrivacy">A password é tratada pelo Neon Auth. A app não guarda passwords na base de dados de progresso.</small>
