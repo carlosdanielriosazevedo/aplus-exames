@@ -5,7 +5,7 @@ const shared=readFileSync(new URL("../app/components/ExamSubmissionCheck.js",imp
 const fqaFull=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const fqaMini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
-const math=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const math=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 
 assert.match(shared,/REVER ANTES DE ENTREGAR/u,"o checkpoint deve usar linguagem clara antes da entrega.");

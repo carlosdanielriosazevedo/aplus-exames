@@ -4,7 +4,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 
 const root=path.resolve(".");
-const mainPage=fs.readFileSync("app/page.js","utf8");
+const mainPage=fs.readFileSync("app/clientApp.js","utf8");
 const welcome=fs.readFileSync("app/components/Welcome.js","utf8");
 const chrome=fs.readFileSync("app/components/chrome.js","utf8");
 const reviewerDashboard=fs.readFileSync("app/components/ReviewerDashboard.js","utf8");
@@ -43,9 +43,9 @@ assert.ok(page.includes("dailyMissionPromptDecision"),"Lógica automática da Mi
 assert.ok(page.includes("missionPlanForToday(s,dailyMissionPlan(s))"),"Missão diária deixou de usar a atribuição congelada.");
 assert.ok(page.includes("O QUE A APP ESTÁ A ACOMPANHAR")&&page.includes("Pontos a confirmar"),"UI da memória pedagógica desapareceu.");
 assert.ok(page.includes("refreshLearningHypotheses"),"Refresh da memória pedagógica após evidência desapareceu.");
-assert.ok(page.includes("Conflito detetado — nada foi sobrescrito"),"UI explícita de conflitos cloud desapareceu.");
-assert.ok(page.includes("Guardar com controlo de revisão"),"Save cloud deixou de indicar controlo de revisão.");
-assert.ok(page.includes("Combinar atividade"),"Resolução segura de conflito por combinação desapareceu.");
+assert.ok(page.includes("Encontrámos progresso mais recente noutro dispositivo"),"UI explícita de conflitos cloud desapareceu.");
+assert.ok(page.includes("Guardar online"),"Save cloud deixou de estar explícito para o aluno.");
+assert.ok(page.includes("Combinar progresso"),"Resolução segura de conflito por combinação desapareceu.");
 assert.ok(page.includes("FUNIL + RETENÇÃO"),"Painel de funil/retenção desapareceu.");
 assert.ok(page.includes("recordAppOpen"),"Registo de abertura diária da app desapareceu.");
 assert.ok(page.includes("first_mission_completed"),"Milestone de ativação pela primeira Missão desapareceu.");

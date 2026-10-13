@@ -18,7 +18,7 @@ const WRITE_FUNCTIONS=new Map([
 ]);
 const SOURCE_EXT=/\.(?:js|jsx|ts|tsx|css)$/iu;
 const SOURCE_ROOT=/(?:^|\/)(?:app|src|components|lib)\//u;
-const EXACT_PROTECTED=new Set(["app/page.js","app/globals.css"]);
+const EXACT_PROTECTED=new Set(["app/clientApp.js","app/globals.css"]);
 const TEXT_MATCH=/\.(?:replace|replaceAll|includes|indexOf|search|match)\s*\(/u;
 
 function normalizeRepoPath(value){
@@ -180,7 +180,7 @@ function auditScript(name,source){
 // includes/replace noutras operações; o alvo real da escrita decide se existe risco.
 const reportFixture=`
   const reportPath=path.resolve("reports","coverage.md");
-  const sourcePath="app/page.js";
+  const sourcePath="app/clientApp.js";
   const ok=sourcePath.includes("app/");
   const markdown=ok?"# relatório":"# vazio";
   writeFileSync(reportPath,markdown);
@@ -188,7 +188,7 @@ const reportFixture=`
 assert.deepEqual(auditScript("fixture-report.mjs",reportFixture),[]);
 
 const protectedFixture=`
-  const pagePath=new URL("../app/page.js",import.meta.url);
+  const pagePath=new URL("../app/clientApp.js",import.meta.url);
   let page=readFileSync(pagePath,"utf8");
   page=page.replace("antes","depois");
   writeFileSync(pagePath,page);

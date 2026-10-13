@@ -21,7 +21,7 @@ for(const subject of SECONDARY_EXAM_SUBJECTS){
   assert.ok(["11.º","12.º"].includes(subject.examYear),`${subject.id} must expose its exam year`);
 }
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../app/lib/productAnalytics.js",import.meta.url),"utf8");

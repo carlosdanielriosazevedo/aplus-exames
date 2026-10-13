@@ -190,7 +190,7 @@ assert.ok(subject?.available,"Física e Química A deve estar selecionável.");
 assert.equal(subject?.releaseStage,"foundation","Física e Química A deve continuar marcada como foundation.");
 assert.ok(AVAILABLE_SUBJECT_IDS.includes("physics-chemistry-a"));
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const component=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const learn=readFileSync(new URL("../app/components/PhysicsChemistryLearnPanel.js",import.meta.url),"utf8");
 const stepwise=readFileSync(new URL("../app/components/PhysicsChemistryStepwise.js",import.meta.url),"utf8");

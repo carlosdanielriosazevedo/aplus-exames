@@ -5,7 +5,7 @@ const persistence=readFileSync(new URL("../app/lib/persistence.js",import.meta.u
 const pilot=readFileSync(new URL("../app/lib/beta.js",import.meta.url),"utf8");
 const ingest=readFileSync(new URL("../app/lib/server/pilot-ingest.js",import.meta.url),"utf8");
 const route=readFileSync(new URL("../app/api/pilot/sync/route.js",import.meta.url),"utf8");
-const app=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const app=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 
 assert.match(app,/function BetaSessionFeedback/u,"A app deve manter feedback contextual após sessões.");
 assert.match(app,/betaFeedback:\[\.\.\.\(prev\.betaFeedback\|\|\[\]\),row\]/u,"O feedback submetido deve ficar persistido no estado local.");

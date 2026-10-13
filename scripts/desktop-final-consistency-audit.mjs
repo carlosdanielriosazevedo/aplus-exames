@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
-const math=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const math=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 

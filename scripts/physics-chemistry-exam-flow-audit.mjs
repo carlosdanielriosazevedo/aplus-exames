@@ -32,7 +32,7 @@ assert.equal(selective.optionalScore,34,"devem contar exatamente os quatro melho
 
 const component=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const subject=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 
 assert.match(page,/screen==="physicsChemistryExam"/u,"o router deve expor o Exame Completo apenas dentro de FQ A");
 assert.match(subject,/Exame Completo · 715/u,"o hub de exames deve disponibilizar o Exame Completo");

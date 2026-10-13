@@ -5,7 +5,7 @@ const read=path=>readFileSync(new URL(path,import.meta.url),"utf8");
 const policy=read("../app/lib/sessionPolicy.js");
 const engine=read("../app/lib/engine.js");
 const portugueseEngine=read("../app/lib/portugueseEngine.js");
-const page=read("../app/page.js");
+const page=read("../app/clientApp.js");
 const portugueseExams=read("../app/data/portuguesePassagePrototype.js");
 
 assert.match(policy,/STUDY_SESSION_MIN_QUESTIONS=7/u);

@@ -3,7 +3,7 @@ import {readFileSync} from "node:fs";
 
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const ptx=readFileSync(new URL("../app/portugues-mini-exame/passage-mini-exam.css",import.meta.url),"utf8");
-const math=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const math=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistryExam.js",import.meta.url),"utf8");
 const fqaMini=readFileSync(new URL("../app/components/PhysicsChemistryMiniExam.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");

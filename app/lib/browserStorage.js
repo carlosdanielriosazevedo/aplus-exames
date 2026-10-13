@@ -1,10 +1,21 @@
 const STORAGE_NAMES=["localStorage","sessionStorage"];
 const volatileMemory=new Map();
+let volatileActive=false;
 const volatileStorage={
   getItem:key=>volatileMemory.get(key)??null,
   setItem:(key,value)=>volatileMemory.set(key,String(value)),
   removeItem:key=>volatileMemory.delete(key)
 };
+
+export function volatileStorageActive(){return volatileActive}
+
+function announceStorageMode(temporary){
+  if(volatileActive===temporary)return;
+  volatileActive=temporary;
+  if(typeof window!=="undefined")try{
+    window.dispatchEvent(new CustomEvent(temporary?"approva:volatile-storage":"approva:durable-storage"));
+  }catch{}
+}
 
 export function browserStores(){
   const stores=[];
@@ -36,6 +47,7 @@ export function writeStorageFallback(key,payload){
   for(let i=0;i<stores.length;i++)try{
     stores[i].setItem(key,payload);
     for(let j=i+1;j<stores.length;j++)try{stores[j].removeItem(key)}catch{}
+    announceStorageMode(stores[i]===volatileStorage);
     return true;
   }catch{}
   return false;
@@ -45,5 +57,6 @@ export function removeStorageKey(key){
   const stores=browserStores();
   let ok=!!stores.length;
   for(const store of stores)try{store.removeItem(key)}catch{ok=false}
+  if(ok&&volatileMemory.size===0)announceStorageMode(false);
   return ok;
 }

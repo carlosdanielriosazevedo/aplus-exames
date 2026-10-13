@@ -45,7 +45,7 @@ assert.equal(progress.missionHistory.length,1);
 assert.equal(progress.competence.x.attempts,3,"a migração deve conservar a evidência mais completa sem a duplicar");
 assert.equal(progress.competence.y.attempts,1);
 
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const subject=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 assert.doesNotMatch(page,/PortugueseLab|portugueseLab/u);
 assert.doesNotMatch(subject,/PortugueseLab|portugueseLab|laboratório/iu);

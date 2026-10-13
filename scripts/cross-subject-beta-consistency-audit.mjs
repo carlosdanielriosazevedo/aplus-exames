@@ -3,7 +3,7 @@ import {readFileSync} from "node:fs";
 
 const hub=readFileSync(new URL("../app/components/StudyModeHub.js",import.meta.url),"utf8");
 const copy=readFileSync(new URL("../app/lib/studyModeCopy.js",import.meta.url),"utf8");
-const math=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const math=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 

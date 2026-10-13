@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
-const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const page=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const layout=readFileSync(new URL("../app/layout.js",import.meta.url),"utf8");
 const mobileMarker="/* v5.6 — Beta Candidate mobile-first e legibilidade do fluxo do aluno */";
@@ -10,7 +10,7 @@ const mobileCss=css.slice(css.indexOf(mobileMarker));
 const viewports=[[320,568],[360,800],[390,844],[430,932],[1280,800]];
 
 assert.ok(mobileCss.startsWith(mobileMarker),"mobile override block is missing");
-assert.match(layout,/export const viewport=\{width:'device-width',initialScale:1,viewportFit:'cover'\}/);
+assert.match(layout,/export const viewport=\{width:'device-width',initialScale:1,viewportFit:'cover'(?:,themeColor:'#[0-9a-fA-F]{6}')?\}/);
 assert.match(mobileCss,/min-height:100dvh/);
 assert.match(mobileCss,/env\(safe-area-inset-top\)/);
 assert.match(mobileCss,/env\(safe-area-inset-bottom\)/);

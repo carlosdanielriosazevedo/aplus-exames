@@ -2,7 +2,7 @@ import fs from "node:fs";
 
 const read=path=>fs.readFileSync(new URL("../"+path,import.meta.url),"utf8");
 
-const math=read("app/page.js");
+const math=read("app/clientApp.js");
 const pt=read("app/components/PortugueseSubject.js");
 const ptExam=read("app/components/PortuguesePassageMiniExam.js");
 const fq=read("app/components/PhysicsChemistrySubject.js");

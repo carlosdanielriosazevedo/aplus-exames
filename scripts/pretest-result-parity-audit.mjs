@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
-const math=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
+const math=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 
@@ -21,8 +21,9 @@ assert.match(fqa,/Ver resultado/u,"a última pergunta deve conduzir ao resultado
 assert.match(fqa,/const finalResults=feedback\?\[\.\.\.results\.slice\(0,-1\),feedback\]:results/u,"FQ A deve congelar também o último feedback antes de gravar a sessão.");
 assert.doesNotMatch(fqa,/setSession\(null\);setAnswer\(null\);setFeedback\(null\);setResults\(\[\]\);setRubricAssessment\(\{\}\);\s*go\(kind==="diagnostic"\?"progress":"home"\)/u,"FQ A não deve apagar a sessão antes de mostrar o resultado.");
 
-for(const [label,source] of [["Matemática A",math],["Português",portuguese],["FQ A",fqa]]){
+for(const [label,source] of [["Matemática A",math],["Português",portuguese]]){
   assert.match(source,/Voltar à Home/u,label+": o resultado deve permitir regressar à Home.");
 }
+assert.match(fqa,/Ir para o menu inicial|Voltar ao menu inicial/u,"FQ A: o resultado deve permitir regressar ao menu inicial com a nomenclatura pública atual.");
 
 console.log("✓ pós-sessão: Matemática A, Português e FQ A mostram resultado antes do próximo passo");

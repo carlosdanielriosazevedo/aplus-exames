@@ -114,6 +114,22 @@ assert.ok(!("scores" in publicFields));
 assert.equal(publicFields.nickname,"Sigma17");
 assert.equal(publicFields.schoolYear,"12.º");
 
+// Public profile input is allowlisted and normalized before it can enter ranking state.
+const hardenedProfile=updateCompetitionProfile(s,{
+  nickname:"  Sigma17\n ",
+  region:"Região inventada",
+  school:"\u0000  Escola   Demo  ",
+  districtOptIn:"yes",
+  schoolOptIn:1,
+  secretField:"must-not-survive"
+});
+assert.equal(hardenedProfile.competition.profile.nickname,"Sigma17");
+assert.equal(hardenedProfile.competition.profile.region,null);
+assert.equal(hardenedProfile.competition.profile.school,"Escola Demo");
+assert.equal(hardenedProfile.competition.profile.districtOptIn,true);
+assert.equal(hardenedProfile.competition.profile.schoolOptIn,true);
+assert.equal("secretField" in hardenedProfile.competition.profile,false);
+
 // League outcomes: top promotes, bottom demotes, same week idempotent.
 let silver={...s,competition:{...s.competition,division:"silver",highestDivision:"silver",history:[]}};
 silver=applyLeagueOutcome(silver,{week:"2026-08-17",position:3});
