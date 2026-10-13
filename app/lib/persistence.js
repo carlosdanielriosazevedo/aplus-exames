@@ -45,13 +45,13 @@ export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY)
   const {rows,readable}=readStorageRows(storageKey);
   if(!readable)return {state:null,found:false,error:true};
   const parsed=[];
-  for(const row of rows)try{
-    const value=withoutLegacyBetaQueues(JSON.parse(row.raw));
-    if(value&&typeof value==="object")parsed.push({...row,value});else row.store.removeItem(storageKey);
-  }catch{try{row.store.removeItem(storageKey)}catch{}}
+  for(const [store,raw] of rows)try{
+    const value=withoutLegacyBetaQueues(JSON.parse(raw));
+    if(value&&typeof value==="object")parsed.push([store,value]);else store.removeItem(storageKey);
+  }catch{try{store.removeItem(storageKey)}catch{}}
   if(!parsed.length)return {state:null,found:false,error:false};
-  parsed.sort((a,b)=>(b.value?._savedAt||0)-(a.value?._savedAt||0));
-  const x=parsed[0].value,scores=emptyScores();
+  parsed.sort((a,b)=>(b[1]?._savedAt||0)-(a[1]?._savedAt||0));
+  const x=parsed[0][1],scores=emptyScores();
   Object.keys(scores).forEach(id=>{if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]}});
   return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
 }
