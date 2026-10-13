@@ -17,12 +17,13 @@ export function loadSessionDraftStatus(mode="internal"){
   const key=keyForMode(mode),{rows,readable}=readStorageRows(key);
   if(!readable)return {draft:null,error:true};
   const parsed=[];
-  for(const row of rows){
-    try{const draft=JSON.parse(row.raw);if(draft&&typeof draft==="object")parsed.push({...row,draft});else row.store.removeItem(key)}catch{try{row.store.removeItem(key)}catch{}}
-  }
+  for(const [store,raw] of rows)try{
+    const draft=JSON.parse(raw);
+    if(draft&&typeof draft==="object")parsed.push([store,draft]);else store.removeItem(key);
+  }catch{try{store.removeItem(key)}catch{}}
   if(!parsed.length)return {draft:null,error:false};
-  parsed.sort((a,b)=>(b.draft?.savedAt||0)-(a.draft?.savedAt||0));
-  const draft=parsed[0].draft,age=Date.now()-(draft?.savedAt||0);
+  parsed.sort((a,b)=>(b[1]?.savedAt||0)-(a[1]?.savedAt||0));
+  const draft=parsed[0][1],age=Date.now()-(draft?.savedAt||0);
   const durableDiagnostic=draft?.kind==="diagnostic"&&[2,3,4].includes(draft?.version)&&((draft.responses?.length||0)>0||!!draft.pendingResponse||draft.phase==="completion_pending");
   const staleEmptyDiagnostic=draft?.kind==="diagnostic"&&!durableDiagnostic&&age>EMPTY_DIAGNOSTIC_MAX_AGE_MS;
   if(!draft?.kind||!draft.savedAt||staleEmptyDiagnostic||(!durableDiagnostic&&age>MAX_AGE_MS)){
@@ -40,13 +41,13 @@ export function restartDiagnosticDraft(mode="internal"){
   if(!readable)return {ok:false,reason:"storage_read_failed"};
   if(!rows.length)return {ok:true,cleared:false};
   const parsed=[];
-  for(const row of rows)try{parsed.push({...row,draft:JSON.parse(row.raw)})}catch{return {ok:false,reason:"draft_unreadable"}}
-  parsed.sort((a,b)=>(b.draft?.savedAt||0)-(a.draft?.savedAt||0));
-  if(parsed[0]?.draft?.kind!=="diagnostic")return {ok:false,reason:"not_diagnostic"};
+  for(const [store,raw] of rows)try{parsed.push([store,JSON.parse(raw)])}catch{return {ok:false,reason:"draft_unreadable"}}
+  parsed.sort((a,b)=>(b[1]?.savedAt||0)-(a[1]?.savedAt||0));
+  if(parsed[0]?.[1]?.kind!=="diagnostic")return {ok:false,reason:"not_diagnostic"};
   let cleared=false;
-  for(const row of parsed){
-    if(row.draft?.kind!=="diagnostic")continue;
-    try{row.store.removeItem(key);cleared=true}catch{return {ok:false,reason:"storage_clear_failed"}}
+  for(const [store,draft] of parsed){
+    if(draft?.kind!=="diagnostic")continue;
+    try{store.removeItem(key);cleared=true}catch{return {ok:false,reason:"storage_clear_failed"}}
   }
   return {ok:true,cleared};
 }
