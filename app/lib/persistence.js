@@ -12,6 +12,25 @@ let pilotSyncInFlight=false;
 let pilotSyncLastSignature=null;
 let pilotSyncRetryAfter=0;
 
+function browserStorage(name){
+  try{return globalThis?.[name]||null}catch{return null}
+}
+
+function readStorageRows(key){
+  const rows=[];
+  let readable=false;
+  for(const name of ["localStorage","sessionStorage"]){
+    const store=browserStorage(name);
+    if(!store)continue;
+    try{
+      const raw=store.getItem(key);
+      readable=true;
+      if(raw)rows.push({name,store,raw});
+    }catch{}
+  }
+  return {rows,readable};
+}
+
 function pilotSubject(value){
   const subject=String(value||"all");
   return PILOT_SUBJECTS.has(subject)?subject:"all";
@@ -39,12 +58,16 @@ function withoutPilotTelemetry(state){
 export function clearLocalPilotTelemetry(){
   if(typeof window==="undefined")return;
   for(const key of [STORAGE_KEY,FRIENDS_STORAGE_KEY]){
-    try{
-      const raw=localStorage.getItem(key);
-      if(!raw)continue;
-      const parsed=JSON.parse(raw);
-      localStorage.setItem(key,JSON.stringify({...withoutPilotTelemetry(parsed),_stateVersion:APP_STATE_VERSION}));
-    }catch{}
+    for(const name of ["localStorage","sessionStorage"]){
+      const store=browserStorage(name);
+      if(!store)continue;
+      try{
+        const raw=store.getItem(key);
+        if(!raw)continue;
+        const parsed=JSON.parse(raw);
+        store.setItem(key,JSON.stringify({...withoutPilotTelemetry(parsed),_stateVersion:APP_STATE_VERSION,_savedAt:Date.now()}));
+      }catch{}
+    }
   }
   pilotSyncLastSignature=null;
   pilotSyncRetryAfter=0;
@@ -52,18 +75,28 @@ export function clearLocalPilotTelemetry(){
 }
 
 export function loadLocalStateStatus(initial,emptyScores,storageKey=STORAGE_KEY){
-  try{
-    const raw=localStorage.getItem(storageKey);
-    if(!raw)return {state:null,found:false,error:false};
-    const x=withoutLegacyBetaQueues(JSON.parse(raw));
-    const scores=emptyScores();
-    Object.keys(scores).forEach(id=>{
-      if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]};
-    });
-    return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
-  }catch{
-    return {state:null,found:false,error:true};
+  const {rows,readable}=readStorageRows(storageKey);
+  if(!readable)return {state:null,found:false,error:true};
+  if(!rows.length)return {state:null,found:false,error:false};
+
+  const parsed=[];
+  for(const row of rows){
+    try{
+      const value=withoutLegacyBetaQueues(JSON.parse(row.raw));
+      if(value&&typeof value==="object")parsed.push({...row,value});
+      else row.store.removeItem(storageKey);
+    }catch{
+      try{row.store.removeItem(storageKey)}catch{}
+    }
   }
+  if(!parsed.length)return {state:null,found:false,error:false};
+  parsed.sort((a,b)=>(b.value?._savedAt||0)-(a.value?._savedAt||0));
+  const x=parsed[0].value;
+  const scores=emptyScores();
+  Object.keys(scores).forEach(id=>{
+    if(x.scores?.[id])scores[id]={...scores[id],...x.scores[id]};
+  });
+  return {state:{...initial,...x,scores,betaSessions:[],betaEvents:[],_stateVersion:APP_STATE_VERSION},found:true,error:false};
 }
 
 export function loadLocalState(initial,emptyScores,storageKey=STORAGE_KEY){
@@ -114,20 +147,38 @@ function schedulePilotSync(state){
 }
 
 export function saveLocalState(state,storageKey=null){
-  try{
-    const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
-    const clean=withoutLegacyBetaQueues(state);
-    const persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
-    localStorage.setItem(key,JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION}));
-    schedulePilotSync(persisted);
-    return true;
-  }catch{
-    return false;
+  const key=storageKey||(state?.betaMode==="friends_beta"?FRIENDS_STORAGE_KEY:STORAGE_KEY);
+  const clean=withoutLegacyBetaQueues(state);
+  const persisted=pilotTelemetryAllowed()?clean:withoutPilotTelemetry(clean);
+  const payload=JSON.stringify({...persisted,_stateVersion:APP_STATE_VERSION,_savedAt:Date.now()});
+
+  const local=browserStorage("localStorage");
+  if(local){
+    try{
+      local.setItem(key,payload);
+      const fallback=browserStorage("sessionStorage");
+      try{fallback?.removeItem(key)}catch{}
+      schedulePilotSync(persisted);
+      return true;
+    }catch{}
   }
+
+  const fallback=browserStorage("sessionStorage");
+  if(fallback){
+    try{
+      fallback.setItem(key,payload);
+      schedulePilotSync(persisted);
+      return true;
+    }catch{}
+  }
+  return false;
 }
 
 export function clearLocalState(storageKey=STORAGE_KEY){
-  try{localStorage.removeItem(storageKey)}catch{}
+  for(const name of ["localStorage","sessionStorage"]){
+    const store=browserStorage(name);
+    try{store?.removeItem(storageKey)}catch{}
+  }
 }
 
 export function buildSyncEnvelope(state){
