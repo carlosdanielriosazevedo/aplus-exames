@@ -102,7 +102,7 @@ describe('November launch hardening',()=>{
     expect(memory.has(FRIENDS_KEY)).toBe(false);
   });
 
-  it('fails closed if every available storage refuses to remove an existing diagnostic draft',()=>{
+  it('fails closed if every persistent storage refuses to remove an existing diagnostic draft',()=>{
     memory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'blocked'})));
     sessionMemory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'blocked',savedAt:2})));
     global.localStorage.removeItem=()=>{throw new Error('storage blocked')};
@@ -115,5 +115,21 @@ describe('November launch hardening',()=>{
     memory.set(KEY,JSON.stringify({kind:'mission',sessionId:'m1'}));
     expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'not_diagnostic'});
     expect(memory.has(KEY)).toBe(true);
+  });
+
+  it('keeps the diagnostic usable in the current tab when both persistent stores reject writes',()=>{
+    global.localStorage.setItem=()=>{throw new Error('local storage blocked')};
+    global.sessionStorage.setItem=()=>{throw new Error('session storage blocked')};
+    expect(saveSessionDraft(diagnosticDraft({sessionId:'volatile-diagnostic'}))).toBe(true);
+    expect(loadSessionDraft('internal')?.sessionId).toBe('volatile-diagnostic');
+  });
+
+  it('keeps app state usable in the current tab when both persistent stores reject writes',()=>{
+    global.localStorage.setItem=()=>{throw new Error('local storage blocked')};
+    global.sessionStorage.setItem=()=>{throw new Error('session storage blocked')};
+    expect(saveLocalState({betaMode:'internal',goal:20,scores:{}})).toBe(true);
+    const loaded=loadLocalStateStatus({goal:17},()=>({}));
+    expect(loaded.error).toBe(false);
+    expect(loaded.state?.goal).toBe(20);
   });
 });
