@@ -1,4 +1,10 @@
 const STORAGE_NAMES=["localStorage","sessionStorage"];
+const volatileMemory=new Map();
+const volatileStorage={
+  getItem:key=>volatileMemory.get(key)??null,
+  setItem:(key,value)=>volatileMemory.set(key,String(value)),
+  removeItem:key=>volatileMemory.delete(key)
+};
 
 export function browserStores(){
   const stores=[];
@@ -6,6 +12,11 @@ export function browserStores(){
     const store=globalThis[name];
     if(store)stores.push(store);
   }catch{}
+  // Last-resort same-tab storage. This prevents a blocked/quota-exhausted
+  // localStorage + sessionStorage combination from making the app unusable.
+  // Persistent stores always remain preferred and, when a later write to one
+  // succeeds, writeStorageFallback clears this volatile copy.
+  stores.push(volatileStorage);
   return stores;
 }
 
