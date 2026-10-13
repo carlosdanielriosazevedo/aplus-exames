@@ -57,7 +57,7 @@ describe('November launch hardening',()=>{
   it('restarts only the internal diagnostic draft without touching the friends draft',()=>{
     memory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'internal'})));
     memory.set(FRIENDS_KEY,JSON.stringify(diagnosticDraft({sessionId:'friends',betaMode:'friends_beta'})));
-    expect(restartDiagnosticDraft('internal')).toEqual({ok:true});
+    expect(restartDiagnosticDraft('internal')).toEqual({ok:true,cleared:true});
     expect(memory.has(KEY)).toBe(false);
     expect(memory.has(FRIENDS_KEY)).toBe(true);
   });
@@ -65,15 +65,21 @@ describe('November launch hardening',()=>{
   it('restarts only the friends diagnostic draft when beta friends is active',()=>{
     memory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'internal'})));
     memory.set(FRIENDS_KEY,JSON.stringify(diagnosticDraft({sessionId:'friends',betaMode:'friends_beta'})));
-    expect(restartDiagnosticDraft('friends_beta')).toEqual({ok:true});
+    expect(restartDiagnosticDraft('friends_beta')).toEqual({ok:true,cleared:true});
     expect(memory.has(KEY)).toBe(true);
     expect(memory.has(FRIENDS_KEY)).toBe(false);
   });
 
-  it('fails closed if storage refuses to remove the diagnostic draft',()=>{
+  it('fails closed if storage refuses to remove an existing diagnostic draft',()=>{
+    memory.set(KEY,JSON.stringify(diagnosticDraft({sessionId:'blocked'})));
     global.localStorage.removeItem=()=>{throw new Error('storage blocked')};
-    const result=restartDiagnosticDraft('internal');
-    expect(result.ok).toBe(false);
-    expect(result.error).toBeInstanceOf(Error);
+    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'storage_clear_failed'});
+    expect(memory.has(KEY)).toBe(true);
+  });
+
+  it('refuses to erase a non-diagnostic draft',()=>{
+    memory.set(KEY,JSON.stringify({kind:'mission',sessionId:'m1'}));
+    expect(restartDiagnosticDraft('internal')).toEqual({ok:false,reason:'not_diagnostic'});
+    expect(memory.has(KEY)).toBe(true);
   });
 });
