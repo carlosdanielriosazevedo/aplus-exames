@@ -26,8 +26,10 @@ assert.doesNotMatch(css,/\.dailyMissionApronso\{position:absolute/);assert.doesN
 
 // Apronso must remain part of the layout, not a detached decoration.
 assert.match(parityCss,/\.apronso\{[\s\S]*?object-fit:contain;[\s\S]*?object-position:center bottom;/u);
+assert.match(parityCss,/\.diagApronsoHero\{[\s\S]*?display:grid;[\s\S]*?align-items:end;/u,"Nos diagnósticos desktop o Apronso deve partilhar a linha de base do bloco explicativo.");
+assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?align-self:end;[\s\S]*?object-position:center bottom;/u,"O Apronso deve terminar na mesma base visual do cartão em todos os diagnósticos.");
 assert.match(parityCss,/\.diagApronsoHero \.diagPurposeHero\{[\s\S]*?padding-right:116px;/u,"No diagnóstico mobile o texto deve reservar espaço para o Apronso dentro do cartão.");
-assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?position:absolute;[\s\S]*?bottom:8px;/u,"No diagnóstico mobile o Apronso deve ficar ancorado ao cartão explicativo.");
+assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?position:absolute;[\s\S]*?bottom:0;/u,"No diagnóstico mobile o Apronso deve alinhar exatamente pela base do cartão explicativo.");
 assert.match(parityCss,/\.learnIntro::after\{[\s\S]*?background:url\('\/mascot\/apronso-welcome\.webp'\)/u,"Apronso deve continuar integrado no Aprender.");
 assert.match(parityCss,/\.progressPage \.progressHero>\.apronso\{[\s\S]*?position:absolute;/u,"Apronso deve continuar integrado no cartão de Progresso em mobile.");
 
