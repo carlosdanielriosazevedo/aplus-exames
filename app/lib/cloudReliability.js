@@ -152,25 +152,7 @@ export function cloudConflict(state,{
   };
 }
 
-export function conflictReason(state,remote){
-  const current=cloudSyncMeta(state);
-  const remoteRevision=Number(remote?.revision)||0;
-  if(remoteRevision===current.baseRevision)return {conflict:false,reason:"same_revision"};
-  if(remoteRevision>current.baseRevision){
-    return {
-      conflict:true,
-      reason:"remote_advanced",
-      detail:"A cloud foi alterada depois da última versão conhecida por este dispositivo."
-    };
-  }
-  return {
-    conflict:true,
-    reason:"local_base_ahead",
-    detail:"A revisão local conhecida é superior à revisão devolvida pela cloud; é necessária verificação."
-  };
-}
-
-export function createLocalSnapshot(state,{label="snapshot",at=Date.now()}={}){
+function createLocalSnapshot(state,{label="snapshot",at=Date.now()}={}){
   return {
     id:randomId("snap"),
     label,
@@ -197,10 +179,6 @@ export function listLocalSnapshots(){
     const list=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
     return Array.isArray(list)?list:[];
   }catch{return []}
-}
-
-export function restoreLocalSnapshot(id){
-  return listLocalSnapshots().find(x=>x.id===id)?.state||null;
 }
 
 export function queueCloudSave(state,{
@@ -245,12 +223,7 @@ export function removePendingCloudSave(id){
   }catch{}
 }
 
-export function clearPendingCloudSaves(){
-  if(typeof localStorage==="undefined")return;
-  try{localStorage.removeItem(PENDING_KEY)}catch{}
-}
-
-export function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
+function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
   const map=new Map();
   for(const item of [...(remote||[]),...(local||[])]){
     const id=idFn(item);
@@ -258,9 +231,7 @@ export function mergeByStableId(local=[],remote=[],idFn=x=>x?.id){
     const prev=map.get(id);
     const itemTs=Number(item?.at||item?.updatedAt||item?.lastAt||item?.resolvedAt||0);
     const prevTs=Number(prev?.at||prev?.updatedAt||prev?.lastAt||prev?.resolvedAt||0);
-    if(!prev || itemTs>=prevTs){
-      map.set(id,item);
-    }
+    if(!prev || itemTs>=prevTs)map.set(id,item);
   }
   return [...map.values()];
 }
@@ -270,19 +241,18 @@ function mergeSubjectProgressMaps(local={},remote={}){
   for(const [id,l] of Object.entries(local||{})){
     const r=out[id];
     if(!r){out[id]={...l,subjectId:id};continue}
-    const localAt=Number(l.lastActivityAt)||0,remoteAt=Number(r.lastActivityAt)||0,newest=localAt>=remoteAt?l:r;
+    const localAt=+l.lastActivityAt||0,remoteAt=+r.lastActivityAt||0,newest=localAt>=remoteAt?l:r,oldest=newest===l?r:l;
     const sessions=mergeByStableId(l.sessions,r.sessions,row=>row?.sessionId);
-    const completedIds=new Set(sessions.filter(row=>row?.completedAt).map(row=>row.sessionId).filter(Boolean));
     let lastPosition=newest?.lastPosition||null;
-    if(lastPosition?.sessionId&&completedIds.has(lastPosition.sessionId))lastPosition=null;
+    if(lastPosition?.sessionId&&sessions.some(row=>row?.completedAt&&row.sessionId===lastPosition.sessionId))lastPosition=null;
     out[id]={...r,...l,...newest,subjectId:id,
       diagnosticDone:!!(l.diagnosticDone||r.diagnosticDone),
-      diagnosticCompletedAt:Math.max(Number(l.diagnosticCompletedAt)||0,Number(r.diagnosticCompletedAt)||0)||null,
+      diagnosticCompletedAt:Math.max(+l.diagnosticCompletedAt||0,+r.diagnosticCompletedAt||0)||null,
       sessions,missionHistory:mergeByStableId(l.missionHistory,r.missionHistory,row=>row?.sessionId),
-      competence:{...(r.competence||{}),...(l.competence||{}),...(newest.competence||{})},
-      errorPatterns:{...(r.errorPatterns||{}),...(l.errorPatterns||{}),...(newest.errorPatterns||{})},
+      competence:{...(oldest.competence||{}),...(newest.competence||{})},
+      errorPatterns:{...(oldest.errorPatterns||{}),...(newest.errorPatterns||{})},
       lastPosition,lastActivityAt:Math.max(localAt,remoteAt)||null,
-      version:Math.max(Number(l.version)||0,Number(r.version)||0,4)};
+      version:Math.max(+l.version||0,+r.version||0,4)};
   }
   return out;
 }
