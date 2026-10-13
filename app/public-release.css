@@ -1,0 +1,99 @@
+:where(button,a,input,select,textarea,summary):focus-visible{
+  outline:3px solid #f59e0b;
+  outline-offset:3px;
+}
+
+:where(button,summary,[role="button"]){
+  -webkit-tap-highlight-color:transparent;
+}
+
+.studentNav b,
+.studentMenu div button,
+.subjectSwitcher b{
+  font-size:12px;
+  line-height:1.35;
+}
+
+.notice span,
+.diagIntroGrid small,
+.diagProgressText span,
+.activeArea span,
+.missionStep div small,
+.missionStep>span,
+.missionOutcome span,
+.missionOutcome small,
+.prog>span,
+.parent span,
+.parentFoot,
+.indexQualifier,
+.evidenceMeta,
+.themeGrid button small,
+.resultSkill small,
+.certainty span,
+.certaintyRow span,
+.certaintyRow small,
+.noEvidence span{
+  font-size:12px;
+  line-height:1.45;
+}
+
+.diagProgressText span,
+.resultSkill small,
+.certainty span,
+.certaintyRow span,
+.certaintyRow small,
+.noEvidence span,
+.indexQualifier,
+.evidenceMeta,
+.parentFoot{
+  color:#667085;
+}
+
+.storageDurabilityBanner{
+  position:fixed;
+  z-index:3000;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(720px,calc(100% - 24px));
+  padding:12px 16px;
+  border:1px solid #e6c66a;
+  border-radius:14px;
+  background:#fff8e8;
+  color:#5b4612;
+  box-shadow:0 12px 35px #11182726;
+}
+.storageDurabilityBanner b,
+.storageDurabilityBanner span{display:block}
+.storageDurabilityBanner b{font-size:14px}
+.storageDurabilityBanner span{margin-top:3px;font-size:13px;line-height:1.45}
+
+.srOnly{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+@media (pointer:coarse){
+  .studentNav button,
+  .studentTopActions>button,
+  .subjectSwitcher,
+  .studentMenu>summary,
+  .focusTop>button,
+  .back{
+    min-width:44px;
+    min-height:44px;
+  }
+}
+
+@media (max-width:760px){
+  .studentNav b{font-size:12px}
+  .studentMenu div button{font-size:14px}
+  .storageDurabilityBanner{top:8px;width:calc(100% - 16px)}
+}
