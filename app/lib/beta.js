@@ -4,6 +4,8 @@ import {pilotTelemetryAllowed} from "./pilotConsentClient.js";
 // Mantém nomes exportados antigos apenas para compatibilidade de chamadas existentes,
 // mas deixa de acumular betaEvents/betaSessions localmente.
 
+const TELEMETRY_DISABLED_EVENT=Object.freeze({type:"__telemetry_disabled__",at:0,payload:null});
+
 const ALLOWED_EVENTS=new Set([
   "app_session","diagnostic_completed","practice_completed","mission_completed",
   "mini_exam_completed","full_exam_completed","review_opened",
@@ -39,7 +41,9 @@ function upsertAggregate(state,type,{subject="all",seconds=0,at=Date.now()}={}){
 }
 
 export function betaEvent(type,payload={}){
-  return pilotTelemetryAllowed()?{type,at:Date.now(),payload}:null;
+  // Callers keep legacy in-memory queues, so return a harmless non-telemetry sentinel instead of null.
+  // The sentinel carries no student/session payload and betaEvents are stripped before persistence.
+  return pilotTelemetryAllowed()?{type,at:Date.now(),payload}:TELEMETRY_DISABLED_EVENT;
 }
 
 export function addBetaEvent(state,type,payload={}){
