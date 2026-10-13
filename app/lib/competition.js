@@ -359,19 +359,38 @@ export function applyLeagueOutcome(state,{week,position}={}){
   };
 }
 
+function cleanRankingText(value,max){
+  return String(value||"")
+    .replace(/[\u0000-\u001f\u007f]/gu," ")
+    .replace(/\s+/gu," ")
+    .trim()
+    .slice(0,max);
+}
+
 export function updateCompetitionProfile(state,patch={}){
   const c=normalizeCompetition(state);
   const nickname=patch.nickname!==undefined
-    ?String(patch.nickname||"").trim().replace(/\s+/g," ").slice(0,24)
+    ?cleanRankingText(patch.nickname,24)
     :c.profile.nickname;
+  const region=patch.region!==undefined
+    ?(PORTUGAL_REGIONS.includes(cleanRankingText(patch.region,40))?cleanRankingText(patch.region,40):null)
+    :c.profile.region;
+  const school=patch.school!==undefined
+    ?cleanRankingText(patch.school,80)||null
+    :c.profile.school;
+  const districtOptIn=patch.districtOptIn!==undefined?Boolean(patch.districtOptIn):Boolean(c.profile.districtOptIn);
+  const schoolOptIn=patch.schoolOptIn!==undefined?Boolean(patch.schoolOptIn):Boolean(c.profile.schoolOptIn);
   return {
     ...state,
     competition:{
       ...c,
       profile:{
         ...c.profile,
-        ...patch,
-        nickname:nickname||null
+        nickname:nickname||null,
+        region,
+        school,
+        districtOptIn,
+        schoolOptIn
       }
     }
   };
