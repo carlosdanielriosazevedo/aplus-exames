@@ -1,6 +1,10 @@
 "use client";
 
-export default function Error({reset}){
+import {useEffect} from "react";
+import {reportClientError} from "./lib/clientRuntimeReport";
+
+export default function Error({error,reset}){
+  useEffect(()=>{reportClientError({kind:"react_boundary",error})},[error]);
   return <main className="dark center">
     <section className="hero" style={{maxWidth:680}}>
       <p className="eyebrow">APProva+</p>
