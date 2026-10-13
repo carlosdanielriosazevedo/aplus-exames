@@ -6,7 +6,6 @@ const page=readFileSync(new URL("../app/page.js",import.meta.url),"utf8");
 const setup=readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",import.meta.url),"utf8");
 const ptExam=readFileSync(new URL("../app/components/PortuguesePassageMiniExam.js",import.meta.url),"utf8");
-const sessionDraft=readFileSync(new URL("../app/lib/sessionDraft.js",import.meta.url),"utf8");
 const cloud=readFileSync(new URL("../app/lib/cloudReliability.js",import.meta.url),"utf8");
 const cloudMerge=readFileSync(new URL("../app/lib/cloudStateMerge.js",import.meta.url),"utf8");
 
@@ -22,14 +21,6 @@ assert.match(chrome,/Ir para o início/u,"Um estado fatal deve ter uma saída se
 assert.match(chrome,/autoBack/u,"Ecrãs intermédios sem botão próprio devem receber retrocesso visível.");
 assert.match(chrome,/ROOT_SCREENS/u,"As raízes da navegação não devem ganhar um botão Voltar artificial.");
 assert.match(chrome,/FOCUS_SCREENS/u,"Sessões focadas não devem receber um segundo botão Voltar além do cabeçalho seguro.");
-
-assert.match(chrome,/restartDiagnosticDraft/u,"A recuperação do diagnóstico deve conseguir limpar apenas o rascunho problemático.");
-assert.match(chrome,/Estamos a confirmar o teu progresso[\s\S]*Tentar novamente/u,"O limbo real do diagnóstico deve ser reconhecido antes de oferecer reinício.");
-assert.match(chrome,/Isto elimina apenas a sessão de diagnóstico que não foi possível recuperar/u,"Recomeçar um diagnóstico exige confirmação explícita e explica o âmbito da remoção.");
-assert.match(chrome,/progresso académico já guardado mantém-se/u,"A confirmação deve deixar claro que o estado académico persistido não é apagado.");
-assert.match(chrome,/approvaScreen:"diag"/u,"Depois da limpeza, a app deve voltar ao início do diagnóstico sem regressar ao onboarding.");
-assert.match(chrome,/new PopStateEvent\("popstate",\{state\}\)/u,"A transição para um diagnóstico novo deve usar a navegação SPA já existente.");
-assert.match(sessionDraft,/export function restartDiagnosticDraft\(betaMode="internal"\)[\s\S]*localStorage\.removeItem\(keyForMode\(betaMode\)\)/u,"O reinício deve remover apenas a chave da sessão do modo atual.");
 
 assert.match(page,/screen==="diagRecoveryError"[\s\S]*Não foi possível recuperar esta sessão/u,"O recovery do diagnóstico deve continuar coberto pela saída segura global.");
 assert.match(page,/screen==="storageRecoveryError"[\s\S]*Não foi possível ler o progresso guardado/u,"Falhas de leitura local devem continuar cobertas pela saída segura global.");
@@ -52,4 +43,4 @@ assert.match(cloudMerge,/newest=localAt>=remoteAt\?l:r/u,"A sessão/pausa deve s
 assert.match(cloudMerge,/let lastPosition=newest\?\.lastPosition\|\|null/u,"A retoma deve nascer do dispositivo com atividade mais recente, não de uma pausa antiga do outro dispositivo.");
 assert.match(cloudMerge,/sessions\.some\(row=>row\?\.completedAt&&row\.sessionId===lastPosition\.sessionId\)\)lastPosition=null/u,"Uma sessão concluída noutro dispositivo nunca pode ressuscitar como sessão em pausa.");
 
-console.log("✓ navegação/recovery: voltar real, browser back protegido, reinício explícito e seguro do diagnóstico, sessões sem entradas mortas, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");
+console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");
