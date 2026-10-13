@@ -1,8 +1,13 @@
 import {describe,expect,it} from "vitest";
-import {sessionStart} from "../../app/lib/beta.js";
+import {betaEvent,sessionStart} from "../../app/lib/beta.js";
 import {createDiagnosticDraft,validateDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 
 describe("study session identity",()=>{
+  it("returns a safe no-telemetry event object when pilot consent is absent",()=>{
+    const event=betaEvent("diagnostic_finished",{sessionId:"must-not-leak"});
+    expect(event).toEqual({type:"__telemetry_disabled__",at:0,payload:null});
+  });
+
   it("creates a non-empty unique id for every runtime session",()=>{
     const first=sessionStart("diagnostic",{goal:17});
     const second=sessionStart("diagnostic",{goal:17});
