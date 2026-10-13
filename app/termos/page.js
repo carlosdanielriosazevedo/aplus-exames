@@ -28,6 +28,11 @@ export default function TermsPage(){
       </section>
 
       <section style={section}>
+        <h2>Alunos menores de idade</h2>
+        <p>A APProva+ destina-se à preparação de alunos do ensino secundário, incluindo utilizadores menores de idade. Se fores menor, envolve o teu encarregado de educação sempre que uma funcionalidade peça dados adicionais, participação opcional num piloto ou uma decisão sobre a utilização de dados. A informação de Privacidade e a página dirigida a encarregados de educação explicam estes controlos.</p>
+      </section>
+
+      <section style={section}>
         <h2>Utilização responsável</h2>
         <p>O utilizador deve usar a aplicação como apoio ao estudo e confirmar informação importante através de professores, materiais oficiais e outras fontes adequadas. Tentativas de explorar, danificar ou aceder indevidamente a dados ou sistemas da aplicação não fazem parte da utilização permitida.</p>
       </section>
