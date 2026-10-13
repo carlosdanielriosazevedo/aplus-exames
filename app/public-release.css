@@ -68,6 +68,26 @@
 .storageDurabilityBanner b{font-size:14px}
 .storageDurabilityBanner span{margin-top:3px;font-size:13px;line-height:1.45}
 
+.cloudTechnicalDetails{
+  margin:14px 0;
+  border:1px solid #e5e8ef;
+  border-radius:14px;
+  background:#f8fafc;
+  overflow:hidden;
+}
+.cloudTechnicalDetails>summary{
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  padding:11px 14px;
+  color:#4b5563;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+}
+.cloudTechnicalDetails[open]>summary{border-bottom:1px solid #e5e8ef}
+.cloudTechnicalDetails .cloudRevisionCard{margin:0;border:0;border-radius:0;box-shadow:none}
+
 .srOnly{
   position:absolute!important;
   width:1px!important;
