@@ -29,6 +29,9 @@ jobs:
       - name: Technical gate
         run: npm run technical:gate
 
+      - name: Public launch hardening
+        run: node scripts/public-launch-hardening-audit.mjs
+
       - name: Portuguese automatic grading contract
         run: node scripts/portuguese-automatic-grading-contract-audit.mjs
 
