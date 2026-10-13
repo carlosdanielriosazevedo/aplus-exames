@@ -10,7 +10,7 @@ function rewrite(path,changes){
 }
 
 rewrite("app/components/AccountCloud.js",[
-  [">Password<input",">Palavra-passe<input"],
+  ["<label>Password<input","<label>Palavra-passe<input"],
   ["CONTA <BrandName/> · CLOUD SEGURA","CONTA <BrandName/> · PROGRESSO ONLINE"],
   ["Progresso guardado com segurança na cloud","Progresso guardado online com segurança"],
   ["Cloud carregada · revisão","Progresso online carregado · revisão"]
