@@ -12,11 +12,11 @@ export function browserStores(){
     const store=globalThis[name];
     if(store)stores.push(store);
   }catch{}
-  // Last-resort same-tab storage. This prevents a blocked/quota-exhausted
-  // localStorage + sessionStorage combination from making the app unusable.
-  // Persistent stores always remain preferred and, when a later write to one
-  // succeeds, writeStorageFallback clears this volatile copy.
-  stores.push(volatileStorage);
+  // Last-resort same-tab storage is a browser resilience layer. Keep it out of
+  // single-store server/audit harnesses so genuine persistence fault injection
+  // can still fail closed there. In a real browser, window exists even when
+  // both Web Storage getters/writes are blocked.
+  if(typeof window!=="undefined"||stores.length>1)stores.push(volatileStorage);
   return stores;
 }
 
