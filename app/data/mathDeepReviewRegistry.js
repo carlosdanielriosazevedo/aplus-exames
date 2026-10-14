@@ -4,6 +4,7 @@ import {mathExpLogReviewContentFor} from "./mathDeepReviewExponentialLogarithmic
 import {mathCompositeDerivativesReviewContentFor} from "./mathDeepReviewCompositeDerivatives";
 import {mathContinuousDifferentiableReviewContentFor} from "./mathDeepReviewContinuousDifferentiable";
 import {mathApproximateEquationsReviewContentFor} from "./mathDeepReviewApproximateEquations";
+import {mathTrigonometryReviewContentFor} from "./mathDeepReviewTrigonometry";
 
 const REVIEW_PROVIDERS=[
   complexReviewFor,
@@ -11,7 +12,8 @@ const REVIEW_PROVIDERS=[
   mathExpLogReviewContentFor,
   mathCompositeDerivativesReviewContentFor,
   mathContinuousDifferentiableReviewContentFor,
-  mathApproximateEquationsReviewContentFor
+  mathApproximateEquationsReviewContentFor,
+  mathTrigonometryReviewContentFor
 ];
 
 export function mathDeepReviewContentFor(themeId){
@@ -22,4 +24,4 @@ export function mathDeepReviewContentFor(themeId){
   return null;
 }
 
-export const MATH_DEEP_REVIEW_THEME_IDS=["12-cplx","12-prob","12-expl","12-fcd","12-fcont","12-rae"];
+export const MATH_DEEP_REVIEW_THEME_IDS=["12-cplx","12-prob","12-expl","12-fcd","12-fcont","12-rae","11-trig"];

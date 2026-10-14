@@ -79,12 +79,14 @@ Cada item deve ter, no mínimo:
 ## 4. 11.º ano — 35 submatérias (~1 750 perguntas)
 
 ### 11A — Trigonometria
-- `11-trig-angulos-radianos` — Ângulos orientados, arcos e radianos
-- `11-trig-circulo` — Círculo trigonométrico e redução
-- `11-trig-relacoes` — Relações/identidades trigonométricas fundamentais
-- `11-trig-equacoes` — Equações trigonométricas
-- `11-trig-funcoes` — Funções seno e cosseno
-- `11-trig-modelacao` — Resolução de triângulos e modelação periódica
+- `11-trig-triangulos` — Resolução de problemas que envolvam triângulos
+- `11-trig-angulos-radianos` — Ângulos e arcos generalizados, amplitudes e radianos
+- `11-trig-circulo` — Círculo trigonométrico e razões trigonométricas de ângulos generalizados
+- `11-trig-relacoes` — Fórmula fundamental e redução ao primeiro quadrante
+- `11-trig-funcoes` — Funções seno, cosseno e tangente
+- `11-trig-modelacao` — Fenómenos periódicos, modelação e tecnologia gráfica
+
+> Nota de migração: `11-trig-equacoes` era um identificador preliminar do banco vNext. As AE de março de 2026 não apresentam “Equações trigonométricas” como tópico autónomo do núcleo de Trigonometria e explicitam, em contrapartida, resolução de triângulos e as funções seno, cosseno **e tangente**. Os itens existentes com o ID antigo devem ser revistos individualmente e reclassificados apenas quando o objetivo curricular o justificar; esta atualização do mapa não os altera silenciosamente.
 
 ### 11B — Produto escalar
 - `11-pe-declive-inclinacao` — Declive e inclinação
@@ -248,6 +250,6 @@ Exemplo já identificado: uma partilha puramente proporcional 1:2:3 não represe
 
 ## 10. Fontes curriculares de referência
 
-- DGE / EduQA — Aprendizagens Essenciais de Matemática A, 10.º, 11.º e 12.º, incluindo a versão de 12.º ano de março de 2026.
+- DGE / EduQA — Aprendizagens Essenciais de Matemática A, 10.º, 11.º e 12.º, incluindo as versões de 11.º e 12.º ano de março de 2026.
 - Coletâneas de tarefas das turmas piloto da DGE/EduQA, usadas como referência de cobertura e de natureza das aprendizagens.
 - Não copiar enunciados, figuras, tabelas ou soluções das fontes; produzir conteúdo A+ original.
