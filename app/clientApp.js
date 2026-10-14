@@ -27,7 +27,7 @@ const Parent=dynamic(()=>import("./components/SecondaryScreens").then(module=>mo
 const StudentProfile=dynamic(()=>import("./components/SetupScreens").then(module=>module.StudentProfile),{ssr:false});
 const TaughtCurriculum=dynamic(()=>import("./components/SetupScreens").then(module=>module.TaughtCurriculum),{ssr:false});
 const GoalScreen=dynamic(()=>import("./components/SetupScreens").then(module=>module.GoalScreen),{ssr:false});
-import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";
+import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,examCodesLabel,subjectStatusLabel} from "./data/subjects";
 import {migrateSubjectProgress,subjectProgressFor} from "./lib/subjectProgress";
 import {DEFAULT_TRAINING_QUESTIONS,MATH_MINI_EXAM_QUESTIONS,STUDY_SESSION_MIN_QUESTIONS} from "./lib/sessionPolicy";
 import {activateSubjectState,finishSubjectOnboardingState,normalizeSubjectWorkspaceState,subjectGoal,subjectOnboardingStep,uniqueSubjectIds} from "./lib/subjectWorkspace";
@@ -642,8 +642,6 @@ function SubjectSelection({s,setS,go}){
     <p className="eyebrow">O TEU PLANO DE ESTUDO</p>
     <h1>Que disciplinas queres preparar?</h1>
     <p className="muted">Escolhe os exames em que queres melhorar. Cada disciplina terá o seu diagnóstico, objetivo e plano de estudo.</p>
-    <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>
-
     <div className="subjectSelectionSummary">
       <div><span>{selected.length}</span><p><b>{selected.length===0?"Nenhuma disciplina selecionada":selected.length===1?"Disciplina selecionada":"Disciplinas selecionadas"}</b><small>{selected.length?"Podes adicionar outras mais tarde.":"Seleciona pelo menos uma disciplina para continuar."}</small></p></div>
     </div>
@@ -674,7 +672,6 @@ function SubjectSelection({s,setS,go}){
       </section>;
     })}</div>
 
-    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A, Português e Física e Química A usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>
     <button className="primary" disabled={!selected.length} onClick={save}>Continuar</button>
   </Shell>;
 }
@@ -925,12 +922,7 @@ function DiagResult({s,setS,go}){
       <div className="certainty"><span>Certeza da app</span><strong>{certaintyLabel(v.conf,v.evidence.length)}</strong></div></div>
   })}</div>
 
-  <div className="notice"><b>Domínio ≠ Certeza da app</b>
-    <span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza da app</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>
-
   <FriendsBetaDisclaimer s={s}/>
-  <DailyCompletionNote s={s}/>
-  <CompetitionXpNote s={s}/>
   {isFriendsBeta(s)&&<BetaSessionFeedback s={s} setS={setS} kind="diagnostic"/>}
   <button className="primary" onClick={()=>{
     setS(prev=>recordMilestone(dismissDailyMissionPrompt(prev),"first_plan_viewed",{

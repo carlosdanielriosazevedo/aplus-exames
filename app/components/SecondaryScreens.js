@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
-import {ApronsoNudge,Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";
+import {Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";
 import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS,examCodesLabel} from "../data/subjects";
 import {subjectProgressFor} from "../lib/subjectProgress";
 import {subjectGoal,uniqueSubjectIds} from "../lib/subjectWorkspace";
@@ -51,14 +51,13 @@ export function Ranking({s,setS,go}){
   }
 
   return <Shell><StudentTop s={s} go={go}/>
-    <ApronsoNudge pose="welcome">Eu trato das contas. Tu só precisas de estudar — o ranking mede esforço, nunca conhecimento.</ApronsoNudge>
     <div className="rankingHero">
       <div><p className="eyebrow">🏆 COMPETIÇÃO SEMANAL</p><h1>Treina. Ganha XP. Sobe.</h1>
         <p className="muted">O ranking compara <b>atividade de estudo</b>, nunca Domínio, Certeza, Índice de Preparação ou notas.</p></div>
       <div className="divisionBadge"><span>{summary.division.icon}</span><b>{summary.division.label}</b><small>{summary.weekXp} XP esta semana</small></div>
     </div>
 
-    <div className="demoRankingWarning"><b>PRÉ-VISUALIZAÇÃO DO RANKING</b><span>Esta área usa participantes simulados e não faz parte do teste privado atual. Nenhum resultado aqui representa outros alunos reais.</span></div>
+    <details className="demoRankingDisclosure"><summary>Modo de demonstração · participantes simulados ⓘ</summary><p>Os restantes participantes são simulados nesta fase e não representam outros alunos reais.</p></details>
 
     <div className="rankingTabs">
       {[["league","Divisão"],["general","Geral"],["year","Ano"],["district","Distrito"],["school","Escola"]].map(([id,label])=>
