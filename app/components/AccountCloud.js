@@ -12,7 +12,8 @@ import {
   safeCloudMerge
 } from "../lib/cloudReliability";
 import {migrateDailyMission} from "../lib/dailyMission";
-import {migrateCompetition,updateCompetitionProfile} from "../lib/competition";
+import {migrateCompetition,updateCompetitionProfile,PORTUGAL_REGIONS} from "../lib/competition";
+import {schoolsForRegion} from "../data/secondarySchools";
 import {migrateEngagement} from "../lib/engagement";
 import {migratePedagogicalIds,recalibrateAllScores,prepIndex,measuredThemes} from "../lib/engine";
 import {demoIdentity} from "../lib/identity";
@@ -25,7 +26,15 @@ export function AccountCloud({s,setS,go}){
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const [rankingYear,setRankingYear]=useState(["10.º","11.º","12.º","Já terminei o secundário"].includes(s.profile?.schoolYear)?s.profile.schoolYear:"");
-  const [rankingSchool,setRankingSchool]=useState(s.competition?.profile?.school||"");
+  const rankingProfile=s.competition?.profile||{};
+  const initialRankingSchool=schoolsForRegion(rankingProfile.region||"").find(row=>row.id===rankingProfile.schoolId||row.name===rankingProfile.school);
+  const [rankingRegion,setRankingRegion]=useState(rankingProfile.region||"");
+  const [rankingMunicipality,setRankingMunicipality]=useState(initialRankingSchool?.municipality||"");
+  const [rankingSchoolId,setRankingSchoolId]=useState(rankingProfile.schoolId||initialRankingSchool?.id||"");
+  const rankingRegionSchools=schoolsForRegion(rankingRegion);
+  const rankingMunicipalities=[...new Set(rankingRegionSchools.map(row=>row.municipality))].sort((a,b)=>a.localeCompare(b,"pt"));
+  const rankingSchools=rankingMunicipality?rankingRegionSchools.filter(row=>row.municipality===rankingMunicipality):[];
+  const rankingSelectedSchool=rankingSchools.find(row=>row.id===rankingSchoolId)||null;
   const [rankingSchoolOptIn,setRankingSchoolOptIn]=useState(!!s.competition?.profile?.schoolOptIn);
   const [session,setSession]=useState({loading:true,user:null,error:null});
   const [busy,setBusy]=useState(false);
@@ -101,8 +110,10 @@ export function AccountCloud({s,setS,go}){
       ...prev,
       profile:{...prev.profile,schoolYear:rankingYear||prev.profile?.schoolYear||null}
     },{
-      school:rankingSchool.trim()||null,
-      schoolOptIn:rankingSchoolOptIn
+      region:rankingRegion||null,
+      school:rankingSelectedSchool?.name||null,
+      schoolId:rankingSelectedSchool?.id||null,
+      schoolOptIn:Boolean(rankingSelectedSchool&&rankingSchoolOptIn)
     }));
     setMessage({ok:true,text:"Dados do ranking guardados neste dispositivo. A escola só será usada se a participação estiver ativa."});
   }
@@ -321,7 +332,9 @@ export function AccountCloud({s,setS,go}){
       <div className="rankingIdentityCard">
         <div><small>DADOS PARA O RANKING</small><b>Indica o teu ano e escola</b><span>O login continua disponível sem estes dados. Para aderires ao ranking da escola, precisamos do ano, da escola e da tua autorização explícita.</span></div>
         <label>Ano<select value={rankingYear} onChange={e=>setRankingYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
-        <label>Escola<input value={rankingSchool} onChange={e=>setRankingSchool(e.target.value)} placeholder="Nome da escola"/></label>
+        <label>Distrito/Região<select value={rankingRegion} onChange={e=>{setRankingRegion(e.target.value);setRankingMunicipality("");setRankingSchoolId("")}}><option value="">Selecionar distrito/região</option>{PORTUGAL_REGIONS.map(region=><option key={region} value={region}>{region}</option>)}</select></label>
+        <label>Município<select value={rankingMunicipality} disabled={!rankingRegion} onChange={e=>{setRankingMunicipality(e.target.value);setRankingSchoolId("")}}><option value="">{rankingRegion?"Selecionar município":"Escolhe primeiro o distrito/região"}</option>{rankingMunicipalities.map(name=><option key={name} value={name}>{name}</option>)}</select></label>
+        <label>Escola<select value={rankingSchoolId} disabled={!rankingMunicipality} onChange={e=>setRankingSchoolId(e.target.value)}><option value="">{rankingMunicipality?"Selecionar escola":"Escolhe primeiro o município"}</option>{rankingSchools.map(row=><option key={row.id} value={row.id}>{row.name}</option>)}</select></label>
         <label className="rankConsent"><input type="checkbox" checked={rankingSchoolOptIn} onChange={e=>setRankingSchoolOptIn(e.target.checked)}/><span>Quero participar no ranking da minha escola.</span></label>
         <button onClick={saveRankingIdentity}>Guardar dados do ranking</button>
         <small className="privacyRankNote">A escola é usada apenas para agrupar o ranking e não é mostrada no teu perfil público. Podes retirar a autorização a qualquer momento.</small>

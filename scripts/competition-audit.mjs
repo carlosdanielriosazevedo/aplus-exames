@@ -98,6 +98,7 @@ s=updateCompetitionProfile(s,{
   nickname:"Sigma17",
   region:"Aveiro",
   school:"Escola Demo",
+  schoolId:"dgeec-demo",
   districtOptIn:true,
   schoolOptIn:true
 });

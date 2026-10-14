@@ -77,6 +77,7 @@ export function emptyCompetition(){
       nickname:null,
       region:null,
       school:null,
+      schoolId:null,
       schoolOptIn:false,
       districtOptIn:false
     },
@@ -378,6 +379,9 @@ export function updateCompetitionProfile(state,patch={}){
   const school=patch.school!==undefined
     ?cleanRankingText(patch.school,80)||null
     :c.profile.school;
+  const schoolId=patch.schoolId!==undefined
+    ?cleanRankingText(patch.schoolId,96)||null
+    :c.profile.schoolId;
   const districtOptIn=patch.districtOptIn!==undefined?Boolean(patch.districtOptIn):Boolean(c.profile.districtOptIn);
   const schoolOptIn=patch.schoolOptIn!==undefined?Boolean(patch.schoolOptIn):Boolean(c.profile.schoolOptIn);
   return {
@@ -389,6 +393,7 @@ export function updateCompetitionProfile(state,patch={}){
         nickname:nickname||null,
         region,
         school,
+        schoolId,
         districtOptIn,
         schoolOptIn
       }
@@ -406,7 +411,7 @@ export function scopeAvailability(state,scope){
   }
   if(scope==="school"){
     const schoolYear=["10.º","11.º","12.º","Já terminei o secundário"].includes(state?.profile?.schoolYear);
-    return c.profile.school&&c.profile.schoolOptIn&&schoolYear
+    return c.profile.school&&c.profile.schoolId&&c.profile.schoolOptIn&&schoolYear
       ?{available:true}
       :{available:false,reason:"Indica o ano, adiciona a escola e ativa a participação opcional."};
   }
@@ -420,6 +425,7 @@ export function publicRankingFields(state){
     schoolYear:state?.profile?.schoolYear||null,
     region:c.profile.districtOptIn?c.profile.region:null,
     school:c.profile.schoolOptIn?c.profile.school:null,
+    schoolId:c.profile.schoolOptIn?c.profile.schoolId:null,
     division:c.division,
     weeklyXp:weeklyCompetitiveXp(state)
   };
