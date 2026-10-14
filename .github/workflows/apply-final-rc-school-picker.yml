@@ -6,6 +6,7 @@ on:
       - fix/national-school-picker-final-rc
     paths:
       - scripts/apply-national-school-picker.py
+      - scripts/apply-national-school-picker-v3.py
       - .github/workflows/apply-final-rc-school-picker.yml
 
 permissions:
@@ -29,7 +30,7 @@ jobs:
           cache: npm
 
       - name: Generate canonical national school catalogue and apply polish
-        run: python3 scripts/apply-national-school-picker.py
+        run: python3 scripts/apply-national-school-picker-v3.py
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
