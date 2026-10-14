@@ -33,13 +33,13 @@ assert.match(parityCss,/@media\(prefers-reduced-motion:reduce\)/u,"As animaçõe
 assert.match(chrome,/apronso-motion-celebrate/u,"O componente Apronso deve continuar a selecionar a animação pela pose.");
 assert.doesNotMatch(chrome,/<style>/u,"O componente Apronso não deve injetar CSS repetido no runtime.");
 assert.match(parityCss,/\.diagApronsoHero\{[\s\S]*?display:grid;[\s\S]*?align-items:end;/u,"Nos diagnósticos desktop o Apronso deve partilhar a linha de base do bloco explicativo.");
-assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?align-self:end;[\s\S]*?object-position:center bottom;/u,"O Apronso deve terminar na mesma base visual do cartão em todos os diagnósticos.");
+assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?align-self:end;[\s\S]*?object-position:center bottom;/u,"O Apronso deve usar uma base visual consistente em todos os diagnósticos.");
 assert.match(parityCss,/\.diagApronsoHero \.diagPurposeHero\{[\s\S]*?padding-right:116px;/u,"No diagnóstico mobile o texto deve reservar espaço para o Apronso dentro do cartão.");
-assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?position:absolute;[\s\S]*?bottom:0;/u,"No diagnóstico mobile o Apronso deve alinhar exatamente pela base do cartão explicativo.");
+assert.match(parityCss,/\.diagApronsoHero>\.apronso\{[\s\S]*?position:absolute;[\s\S]*?bottom:40px;/u,"No diagnóstico mobile os pés do Apronso devem alinhar com a base do texto dentro do cartão, não com a borda do cartão.");
 assert.match(parityCss,/\.learnIntro::after\{[\s\S]*?background:url\('\/mascot\/apronso-welcome\.webp'\)/u,"Apronso deve continuar integrado no Aprender.");
 assert.match(parityCss,/\.progressPage \.progressHero>\.apronso\{[\s\S]*?position:absolute;/u,"Apronso deve continuar integrado no cartão de Progresso em mobile.");
 
-assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=4,"Apronso must remain on shared student surfaces across subjects");
+assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=3,"Apronso must remain on useful shared student surfaces without duplicating nearby UI copy");
 assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"Apronso must remain on the shared study hub");
 assert.match(portuguese,/Apronso acompanha o teu progresso/u,"Português deve manter Apronso no Progresso.");
 assert.match(fqa,/Apronso acompanha o teu progresso/u,"FQ A deve manter Apronso no Progresso.");

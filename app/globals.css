@@ -574,7 +574,7 @@ body{color:var(--app-navy);background:#fff}
 .focusTrack i,.pathLine.active{background:var(--app-orange)}
 .pathNode.done>span,.pathNode.current.complete>span{background:var(--app-card-light);border-color:var(--app-orange);color:var(--app-orange-dark)}
 .pathNode.next>span{background:var(--app-card-dark);border-color:var(--app-card-dark);color:#fff}
-.apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:12px;min-height:100px;margin:0 0 22px;padding:8px 18px 8px 8px;border:1px solid var(--app-card-light-border);border-radius:20px;background:var(--app-card-light);color:var(--app-navy);overflow:hidden}
+.apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:end;gap:12px;min-height:100px;margin:0 0 22px;padding:8px 18px 8px 8px;border:1px solid var(--app-card-light-border);border-radius:20px;background:var(--app-card-light);color:var(--app-navy);overflow:hidden}
 .apronsoNudge .apronso{width:82px;height:88px;align-self:end}.apronsoNudge p{margin:0;font-size:14px;line-height:1.5;font-weight:750}.apronsoNudge.dark p{color:#eef5f8}
 .apronsoNudge.plain{min-height:88px;padding:0 8px 0 0;border:0;border-radius:0;background:transparent;color:var(--app-navy)}
 .constructedResponse{margin:20px 0;padding:20px;border:1px solid var(--app-card-light-border);border-radius:18px;background:var(--app-card-light);color:var(--app-navy)}
@@ -1650,3 +1650,10 @@ button,input,select,textarea{max-width:100%}
 .automaticCriteriaDetails>summary{cursor:pointer;font-size:11px;font-weight:800;color:#4b5870}
 .automaticImproveButton{margin-top:8px}
 @media(max-width:760px){.automaticFeedbackPanel section{padding:12px}.automaticFeedbackPanel blockquote{font-size:11px}}
+
+
+/* v5.9 — compact contextual disclosure for simulated ranking */
+.demoRankingDisclosure{margin:2px 0 14px;color:var(--app-muted);font-size:12px}
+.demoRankingDisclosure summary{display:inline-flex;align-items:center;min-height:32px;cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:var(--app-muted)}
+.demoRankingDisclosure summary::-webkit-details-marker{display:none}
+.demoRankingDisclosure p{margin:4px 0 0;max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}
