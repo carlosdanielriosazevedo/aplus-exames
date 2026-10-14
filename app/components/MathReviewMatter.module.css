@@ -1,0 +1,227 @@
+.deepReviewArticle{
+  display:block!important;
+  max-width:900px!important;
+}
+
+.deepReviewArticle>h2{
+  margin-bottom:18px;
+}
+
+.deepReviewIntro{
+  margin-bottom:14px!important;
+}
+
+.deepReviewGoals{
+  margin-top:12px!important;
+}
+
+.deepReviewMap{
+  margin:14px 0 18px;
+  padding:18px 20px;
+  border:1px solid var(--app-border);
+  border-radius:16px;
+  background:#f8fafb;
+}
+
+.deepReviewMap>b{
+  display:block;
+  margin-bottom:10px;
+  color:var(--app-navy);
+  font-size:14px;
+}
+
+.deepReviewMap>div{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.deepReviewMap a{
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:8px 11px;
+  border:1px solid var(--app-border);
+  border-radius:999px;
+  background:#fff;
+  color:var(--app-navy);
+  font-size:12px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.reviewLesson{
+  scroll-margin-top:28px;
+  margin:14px 0;
+  padding:26px;
+  border:1px solid var(--app-border);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:var(--app-shadow-sm);
+  color:var(--app-navy);
+}
+
+.reviewLesson>small{
+  display:block;
+  margin-bottom:6px;
+  color:var(--app-orange-dark);
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.reviewLesson>h3{
+  margin:0 0 14px;
+  font-size:24px;
+  line-height:1.2;
+}
+
+.reviewLesson>p,
+.reviewLesson li{
+  font-size:16px;
+  line-height:1.7;
+}
+
+.reviewLesson>p{
+  margin:10px 0;
+}
+
+.reviewFormulaList{
+  display:grid;
+  gap:8px;
+  margin:18px 0;
+  padding:16px;
+  border-radius:14px;
+  background:#fff8e9;
+}
+
+.reviewFormulaList>b{
+  font-size:13px;
+  color:var(--app-orange-dark);
+}
+
+.reviewFormulaList code{
+  display:block;
+  overflow-wrap:anywhere;
+  padding:9px 11px;
+  border:1px solid #f0ddba;
+  border-radius:10px;
+  background:#fff;
+  color:var(--app-navy);
+  font-family:inherit;
+  font-size:15px;
+  font-weight:750;
+  line-height:1.45;
+}
+
+.reviewExample{
+  margin:18px 0;
+  padding:18px;
+  border-left:4px solid var(--app-orange);
+  border-radius:0 14px 14px 0;
+  background:#f5f8fa;
+}
+
+.reviewExample>b{
+  display:block;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.reviewExample ol{
+  margin:0;
+  padding-left:22px;
+}
+
+.reviewExample li{
+  font-size:15px;
+  line-height:1.6;
+}
+
+.reviewExample li+li{
+  margin-top:7px;
+}
+
+.reviewExample strong{
+  display:block;
+  margin-top:13px;
+  color:var(--app-navy);
+  font-size:16px;
+}
+
+.reviewExample p{
+  margin:8px 0 0;
+  color:var(--app-muted);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.reviewRemember{
+  margin:16px 0!important;
+  padding:13px 15px;
+  border-radius:12px;
+  background:#eef7f2;
+}
+
+.reviewPitfalls{
+  margin-top:16px;
+  padding:15px 17px;
+  border:1px solid #efd1bf;
+  border-radius:14px;
+  background:#fff8f5;
+}
+
+.reviewPitfalls>b{
+  display:block;
+  margin-bottom:7px;
+  color:#7a3f25;
+  font-size:13px;
+}
+
+.reviewPitfalls ul{
+  margin:0;
+  padding-left:20px;
+}
+
+.reviewPitfalls li{
+  font-size:14px;
+  line-height:1.55;
+}
+
+.reviewFinish{
+  margin-top:18px!important;
+  background:#f3f8f5!important;
+}
+
+@media(max-width:760px){
+  .deepReviewMap{
+    padding:15px;
+  }
+
+  .deepReviewMap>div{
+    display:grid;
+  }
+
+  .deepReviewMap a{
+    border-radius:11px;
+  }
+
+  .reviewLesson{
+    padding:19px;
+  }
+
+  .reviewLesson>h3{
+    font-size:21px;
+  }
+
+  .reviewLesson>p,
+  .reviewLesson li{
+    font-size:15px;
+  }
+
+  .reviewFormulaList,
+  .reviewExample,
+  .reviewPitfalls{
+    padding:14px;
+  }
+}
