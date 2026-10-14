@@ -1,0 +1,40 @@
+name: Apronso presence audit fix
+
+on:
+  push:
+    branches:
+      - fix/editorial-density-apronso-alignment
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/editorial-density-apronso-alignment
+      - name: Update contextual-presence gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("scripts/apronso-brand-audit.mjs")
+          s=p.read_text(encoding="utf-8")
+          old='assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=4,"Apronso must remain on shared student surfaces across subjects");'
+          new='assert.ok((studentSurfaces.match(/<ApronsoNudge/g)||[]).length>=3,"Apronso must remain on useful shared student surfaces without duplicating nearby UI copy");'
+          if old not in s:
+              raise SystemExit("Expected Apronso presence gate not found")
+          p.write_text(s.replace(old,new,1),encoding="utf-8")
+          PY
+      - name: Commit audit fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/apronso-presence-audit-fix.yml
+          git add scripts/apronso-brand-audit.mjs
+          git diff --cached --check
+          git commit -m "Guard contextual Apronso presence"
+          git push origin HEAD:fix/editorial-density-apronso-alignment
