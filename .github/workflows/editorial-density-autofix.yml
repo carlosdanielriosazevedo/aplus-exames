@@ -33,136 +33,34 @@ jobs:
                   raise SystemExit(f"Missing expected pattern in {path}: {old[:120]!r}")
               write(path,text.replace(old,new,1))
 
-          # 1) Subject selection: remove explanatory copy that duplicates what the cards already show.
-          replace_once(
-              "app/clientApp.js",
-              'import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";',
-              'import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,examCodesLabel,subjectStatusLabel} from "./data/subjects";'
-          )
-          replace_once(
-              "app/clientApp.js",
-              '    <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>\n\n',
-              ''
-          )
-          replace_once(
-              "app/clientApp.js",
-              '    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A, Português e Física e Química A usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>\n',
-              ''
-          )
+          replace_once("app/clientApp.js",'import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,SUBJECT_CATALOG_YEAR,examCodesLabel,subjectStatusLabel} from "./data/subjects";','import {SUBJECT_GROUPS,SECONDARY_EXAM_SUBJECTS,AVAILABLE_SUBJECT_IDS,examCodesLabel,subjectStatusLabel} from "./data/subjects";')
+          replace_once("app/clientApp.js",'    <p className="subjectCatalogDate">Disciplinas dos Exames Finais Nacionais de {SUBJECT_CATALOG_YEAR}</p>\n\n','')
+          replace_once("app/clientApp.js",'    <div className="notice"><b>Uma aplicação, várias disciplinas</b><span>Matemática A, Português e Física e Química A usam a mesma navegação. O conteúdo e os motores de correção adaptam-se à disciplina escolhida.</span></div>\n','')
 
-          # 2) Diagnostic result: keep the result focused. These concepts already have permanent homes:
-          #    Domínio/Certeza in Progresso, daily rhythm on Home, competitive XP in Ranking.
-          replace_once(
-              "app/clientApp.js",
-              '  <div className="notice"><b>Domínio ≠ Certeza da app</b>\n    <span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza da app</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>\n\n',
-              ''
-          )
-          replace_once(
-              "app/clientApp.js",
-              '  <FriendsBetaDisclaimer s={s}/>\n  <DailyCompletionNote s={s}/>\n  <CompetitionXpNote s={s}/>\n',
-              '  <FriendsBetaDisclaimer s={s}/>\n'
-          )
+          replace_once("app/clientApp.js",'  <div className="notice"><b>Domínio ≠ Certeza da app</b>\n    <span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza da app</b> é quão segura está dessa estimativa — não mede a tua confiança em ti próprio.</span></div>\n\n','')
+          replace_once("app/clientApp.js",'  <FriendsBetaDisclaimer s={s}/>\n  <DailyCompletionNote s={s}/>\n  <CompetitionXpNote s={s}/>\n','  <FriendsBetaDisclaimer s={s}/>\n')
 
-          # 3) Ranking: remove duplicated Apronso copy, but keep simulation disclosure in a compact, optional form.
-          replace_once(
-              "app/components/SecondaryScreens.js",
-              'import {ApronsoNudge,Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";',
-              'import {Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";'
-          )
-          replace_once(
-              "app/components/SecondaryScreens.js",
-              '    <ApronsoNudge pose="welcome">Eu trato das contas. Tu só precisas de estudar — o ranking mede esforço, nunca conhecimento.</ApronsoNudge>\n',
-              ''
-          )
-          replace_once(
-              "app/components/SecondaryScreens.js",
-              '    <div className="demoRankingWarning"><b>PRÉ-VISUALIZAÇÃO DO RANKING</b><span>Esta área usa participantes simulados e não faz parte do teste privado atual. Nenhum resultado aqui representa outros alunos reais.</span></div>\n',
-              '    <details className="demoRankingDisclosure"><summary>Modo de demonstração · participantes simulados ⓘ</summary><p>Os restantes participantes são simulados nesta fase e não representam outros alunos reais.</p></details>\n'
-          )
+          replace_once("app/components/SecondaryScreens.js",'import {ApronsoNudge,Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";','import {Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";')
+          replace_once("app/components/SecondaryScreens.js",'    <ApronsoNudge pose="welcome">Eu trato das contas. Tu só precisas de estudar — o ranking mede esforço, nunca conhecimento.</ApronsoNudge>\n','')
+          replace_once("app/components/SecondaryScreens.js",'    <div className="demoRankingWarning"><b>PRÉ-VISUALIZAÇÃO DO RANKING</b><span>Esta área usa participantes simulados e não faz parte do teste privado atual. Nenhum resultado aqui representa outros alunos reais.</span></div>\n','    <details className="demoRankingDisclosure"><summary>Modo de demonstração · participantes simulados ⓘ</summary><p>Os restantes participantes são simulados nesta fase e não representam outros alunos reais.</p></details>\n')
 
-          # 4) Apronso: when mascot and copy share a component, align the feet with the copy baseline,
-          #    not the card edge. Diagnostic intro is shared by Math, Portuguese and FQ A.
-          replace_once(
-              "app/apronso-parity.css",
-              "/* Diagnostic: all three subjects share the same visual baseline. Apronso may\n   sit outside the explanation card, but his feet end exactly on the card's\n   lower edge instead of floating above/below it. */",
-              "/* Diagnostic: all three subjects share one visual rule: Apronso's feet align\n   with the bottom of the explanation text, not with the card edge. */"
-          )
-          replace_once(
-              "app/apronso-parity.css",
-              ".diagApronsoHero>.apronso{\n  align-self:end;\n  justify-self:end;\n  width:132px;\n  height:162px;\n  margin:0;\n  object-fit:contain;\n  object-position:center bottom;\n}",
-              ".diagApronsoHero>.apronso{\n  align-self:end;\n  justify-self:end;\n  width:132px;\n  height:162px;\n  margin:0 0 44px;\n  object-fit:contain;\n  object-position:center bottom;\n}"
-          )
-          replace_once(
-              "app/apronso-parity.css",
-              "    right:14px;\n    bottom:0;\n    width:94px;",
-              "    right:14px;\n    bottom:40px;\n    width:94px;"
-          )
-          replace_once(
-              "app/apronso-parity.css",
-              "    right:10px;\n    bottom:0;\n    width:90px;",
-              "    right:10px;\n    bottom:40px;\n    width:90px;"
-          )
-          replace_once(
-              "app/globals.css",
-              ".apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;",
-              ".apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:end;"
-          )
+          replace_once("app/apronso-parity.css","/* Diagnostic: all three subjects share the same visual baseline. Apronso may\n   sit outside the explanation card, but his feet end exactly on the card's\n   lower edge instead of floating above/below it. */","/* Diagnostic: all three subjects share one visual rule: Apronso's feet align\n   with the bottom of the explanation text, not with the card edge. */")
+          replace_once("app/apronso-parity.css",".diagApronsoHero>.apronso{\n  align-self:end;\n  justify-self:end;\n  width:132px;\n  height:162px;\n  margin:0;\n  object-fit:contain;\n  object-position:center bottom;\n}",".diagApronsoHero>.apronso{\n  align-self:end;\n  justify-self:end;\n  width:132px;\n  height:162px;\n  margin:0 0 44px;\n  object-fit:contain;\n  object-position:center bottom;\n}")
+          replace_once("app/apronso-parity.css","    right:14px;\n    bottom:0;\n    width:94px;","    right:14px;\n    bottom:40px;\n    width:94px;")
+          replace_once("app/apronso-parity.css","    right:10px;\n    bottom:0;\n    width:90px;","    right:10px;\n    bottom:40px;\n    width:90px;")
+          replace_once("app/globals.css",".apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;",".apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:end;")
 
-          # 5) Compact simulation disclosure and keep the existing legibility gate meaningful.
           css=read("app/globals.css")
           marker="/* v5.9 — compact contextual disclosure for simulated ranking */"
           if marker not in css:
-              css += "\n\n" + marker + "\n" + (
-                  ".demoRankingDisclosure{margin:2px 0 14px;color:var(--app-muted);font-size:12px}\n"
-                  ".demoRankingDisclosure summary{display:inline-flex;align-items:center;min-height:32px;cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:var(--app-muted)}\n"
-                  ".demoRankingDisclosure summary::-webkit-details-marker{display:none}\n"
-                  ".demoRankingDisclosure p{margin:4px 0 0;max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}\n"
-              )
+              css += "\n\n" + marker + "\n.demoRankingDisclosure{margin:2px 0 14px;color:var(--app-muted);font-size:12px}\n.demoRankingDisclosure summary{display:inline-flex;align-items:center;min-height:32px;cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:var(--app-muted)}\n.demoRankingDisclosure summary::-webkit-details-marker{display:none}\n.demoRankingDisclosure p{margin:4px 0 0;max-width:620px;font-size:12px;line-height:1.45;color:var(--app-muted)}\n"
               write("app/globals.css",css)
 
-          replace_once(
-              "scripts/student-experience-audit.mjs",
-              'assert.match(css,/\\.demoRankingWarning span\\{font-size:13px\\}/);',
-              'assert.match(css,/\\.demoRankingDisclosure p\\{[^}]*font-size:12px/,"Simulation disclosure must stay compact but legible");'
-          )
-
-          Path("tests/unit/editorialDensity.test.js").write_text(r'''import {readFileSync} from "node:fs";
-import {describe,expect,it} from "vitest";
-
-const client=readFileSync(new URL("../../app/clientApp.js",import.meta.url),"utf8");
-const ranking=readFileSync(new URL("../../app/components/SecondaryScreens.js",import.meta.url),"utf8");
-const apronsoCss=readFileSync(new URL("../../app/apronso-parity.css",import.meta.url),"utf8");
-const css=readFileSync(new URL("../../app/globals.css",import.meta.url),"utf8");
-
-describe("editorial density and Apronso alignment",()=>{
-  it("keeps subject selection focused on the decision",()=>{
-    expect(client).not.toContain("Uma aplicação, várias disciplinas");
-    expect(client).not.toContain("subjectCatalogDate");
-    expect(client).not.toContain("SUBJECT_CATALOG_YEAR");
-  });
-
-  it("moves secondary diagnostic-result information to its permanent homes",()=>{
-    expect((client.match(/Domínio ≠ Certeza da app/g)||[]).length).toBe(1);
-    expect((client.match(/<DailyCompletionNote s=\{s\}\/\>/g)||[]).length).toBe(3);
-    expect((client.match(/<CompetitionXpNote s=\{s\}\/\>/g)||[]).length).toBe(3);
-    expect(client).toContain('<details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary>');
-  });
-
-  it("removes duplicated ranking explanation while preserving honest simulation disclosure",()=>{
-    expect(ranking).not.toContain("Eu trato das contas");
-    expect(ranking).not.toContain("demoRankingWarning");
-    expect(ranking).toContain("demoRankingDisclosure");
-    expect(ranking).toContain("participantes simulados");
-    expect(css).toMatch(/\.demoRankingDisclosure p\{[^}]*font-size:12px/);
-  });
-
-  it("aligns Apronso feet with adjacent copy across shared side-by-side patterns",()=>{
-    expect(apronsoCss).toContain("margin:0 0 44px");
-    expect((apronsoCss.match(/bottom:40px/g)||[]).length).toBeGreaterThanOrEqual(2);
-    expect(css).toContain(".apronsoNudge{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:end;");
-  });
-});
-''',encoding="utf-8")
+          replace_once("scripts/student-experience-audit.mjs",'assert.match(css,/\\.demoRankingWarning span\\{font-size:13px\\}/);','assert.match(css,/\\.demoRankingDisclosure p\\{[^}]*font-size:12px/,"Simulation disclosure must stay compact but legible");')
+          audit=read("scripts/student-experience-audit.mjs")
+          guard='''\nconst apronsoParity=readFileSync(new URL("../app/apronso-parity.css",import.meta.url),"utf8");\nassert.doesNotMatch(mainPage,/Uma aplicação, várias disciplinas|subjectCatalogDate|SUBJECT_CATALOG_YEAR/,"Subject selection should not repeat explanatory catalogue copy");\nassert.equal((mainPage.match(/Domínio ≠ Certeza da app/g)||[]).length,1,"The Domínio/Certeza explanation should live only in Progresso");\nassert.equal((mainPage.match(/<DailyCompletionNote s=\\{s\\}\\/>/g)||[]).length,3,"Diagnostic result should not duplicate the daily-goal card");\nassert.equal((mainPage.match(/<CompetitionXpNote s=\\{s\\}\\/>/g)||[]).length,3,"Diagnostic result should not duplicate competitive XP");\nassert.doesNotMatch(secondaryScreens,/Eu trato das contas|demoRankingWarning/,"Ranking should avoid duplicated explanation and oversized demo copy");\nassert.match(secondaryScreens,/demoRankingDisclosure[\\s\\S]*?participantes simulados/,"Ranking must keep simulation disclosure");\nassert.match(apronsoParity,/margin:0 0 44px/);\nassert.ok((apronsoParity.match(/bottom:40px/g)||[]).length>=2,"Diagnostic Apronso must align feet with adjacent copy on compact layouts");\nassert.match(css,/\\.apronsoNudge\\{[^}]*align-items:end/,"Shared Apronso nudges align mascot feet with adjacent copy");\n'''
+          if "Subject selection should not repeat explanatory catalogue copy" not in audit:
+              write("scripts/student-experience-audit.mjs",audit+guard)
           PY
       - name: Commit focused cleanup
         shell: bash
@@ -170,7 +68,7 @@ describe("editorial density and Apronso alignment",()=>{
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm .github/workflows/editorial-density-autofix.yml
-          git add app scripts tests
+          git add app scripts
           git diff --cached --check
           git commit -m "Reduce editorial density and align Apronso"
           git push origin HEAD:fix/editorial-density-apronso-alignment
