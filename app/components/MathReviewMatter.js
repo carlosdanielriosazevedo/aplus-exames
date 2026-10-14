@@ -5,12 +5,13 @@ import {curriculumSubtopicsForTheme} from "../data/curriculumVnext";
 import {mathReviewContentFor} from "../data/mathReviewContent";
 import {mathDeepReviewContentFor} from "../data/mathDeepReviewContent";
 import {Shell,StudentNav,StudentTop} from "./chrome";
+import styles from "./MathReviewMatter.module.css";
 
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
 
 function WorkedExample({example}){
   if(!example)return null;
-  return <div className="reviewExample">
+  return <div className={styles.reviewExample}>
     <b>{example.title}</b>
     <ol>{example.steps.map(step=><li key={step}>{step}</li>)}</ol>
     <strong>{example.result}</strong>
@@ -20,29 +21,29 @@ function WorkedExample({example}){
 
 function DeepMathReview({study}){
   return <>
-    <div className="reviewChapter deepReviewIntro">
+    <div className={`reviewChapter ${styles.deepReviewIntro}`}>
       <small>VISÃO GLOBAL</small>
       <h3>O que vais aprender nesta revisão</h3>
       <p>{study.lead}</p>
-      <ul className="deepReviewGoals">{study.goals.map(goal=><li key={goal}>{goal}</li>)}</ul>
+      <ul className={styles.deepReviewGoals}>{study.goals.map(goal=><li key={goal}>{goal}</li>)}</ul>
     </div>
-    <nav className="deepReviewMap" aria-label="Conteúdos desta revisão">
+    <nav className={styles.deepReviewMap} aria-label="Conteúdos desta revisão">
       <b>Conteúdos</b>
       <div>{study.sections.map(section=><a key={section.id} href={`#${section.id}`}>{section.title}</a>)}</div>
     </nav>
-    {study.sections.map(section=><section className="reviewLesson" id={section.id} key={section.id}>
+    {study.sections.map(section=><section className={styles.reviewLesson} id={section.id} key={section.id}>
       <small>{section.kicker}</small>
       <h3>{section.title}</h3>
       {section.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}
-      {section.formulas?.length>0&&<div className="reviewFormulaList" aria-label={`Relações essenciais de ${section.title}`}>
+      {section.formulas?.length>0&&<div className={styles.reviewFormulaList} aria-label={`Relações essenciais de ${section.title}`}>
         <b>Relações essenciais</b>
         {section.formulas.map(formula=><code key={formula}>{formula}</code>)}
       </div>}
       <WorkedExample example={section.example}/>
-      {section.remember&&<p className="reviewRemember"><b>Fica com esta ideia:</b> {section.remember}</p>}
-      {section.pitfalls?.length>0&&<div className="reviewPitfalls"><b>Erros a evitar</b><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
+      {section.remember&&<p className={styles.reviewRemember}><b>Fica com esta ideia:</b> {section.remember}</p>}
+      {section.pitfalls?.length>0&&<div className={styles.reviewPitfalls}><b>Erros a evitar</b><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
     </section>)}
-    <div className="reviewChapter reviewFinish">
+    <div className={`reviewChapter ${styles.reviewFinish}`}>
       <small>FECHO DA REVISÃO</small>
       <h3>O que deves conseguir fazer agora</h3>
       <p>Depois desta leitura, deves conseguir reconhecer a representação mais adequada a cada problema, justificar as operações que usas e passar entre a leitura algébrica e a leitura geométrica dos números complexos.</p>
@@ -70,7 +71,7 @@ export default function MathReviewMatter({s,go}){
       <div className="notice"><b>Modo de estudo</b><span>Lê ao teu ritmo e acompanha os exemplos. Quando quiseres testar o que aprendeste, regressa ao menu e escolhe “Praticar”.</span></div>
       <div className="chips yearSelector" aria-label="Escolher ano de Matemática A">{SCHOOL_YEARS.map(row=><button type="button" key={row} className={year===row?"sel":""} aria-pressed={year===row} onClick={()=>{setYear(row);setThemeId(null)}}>{row}</button>)}</div>
       {!selected?<div className="themeGrid">{themes.map(row=><button type="button" key={row.id} onClick={()=>setThemeId(row.id)}><b>{row.short}</b><small>{row.name}</small></button>)}</div>
-      :deepStudy?<article className="portugueseProgressCard deepReviewArticle">
+      :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
         <p className="eyebrow">MATEMÁTICA A · {year}</p><h2>{selected.name}</h2>
         <DeepMathReview study={deepStudy}/>
