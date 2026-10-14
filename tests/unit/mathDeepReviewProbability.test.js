@@ -1,6 +1,7 @@
 import {readFileSync} from "node:fs";
 import {describe,expect,it} from "vitest";
 import {MATH_PROBABILITY_REVIEW_VERSION,PROBABILITY_REVIEW,mathProbabilityReviewContentFor} from "../../app/data/mathDeepReviewProbability";
+import {MATH_DEEP_REVIEW_THEME_IDS,mathDeepReviewContentFor} from "../../app/data/mathDeepReviewRegistry";
 
 const EXPECTED_PROBABILITY_SECTIONS=[
   "12-prob-fenomeno-acontecimentos",
@@ -55,9 +56,11 @@ describe("Rever Matéria profundo · Probabilidade",()=>{
     expect(sources).toMatch(/635/u);
   });
 
-  it("liga Probabilidade à experiência profunda sem alterar o fallback das restantes matérias",()=>{
-    expect(component).toContain("mathProbabilityReviewContentFor");
-    expect(component).toContain("mathDeepReviewContentFor(selected.id)||mathProbabilityReviewContentFor(selected.id)");
+  it("liga Probabilidade ao registo profundo sem alterar o fallback",()=>{
+    expect(MATH_DEEP_REVIEW_THEME_IDS).toContain("12-prob");
+    expect(mathDeepReviewContentFor("12-prob")).toBe(PROBABILITY_REVIEW);
+    expect(mathDeepReviewContentFor("tema-ainda-nao-convertido")).toBeNull();
+    expect(component).toContain('from "../data/mathDeepReviewRegistry"');
     expect(component).toContain(":deepStudy?");
     expect(component).toContain("study?.summary");
   });
