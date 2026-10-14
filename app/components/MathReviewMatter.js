@@ -3,8 +3,7 @@ import {useState} from "react";
 import {TAXONOMY} from "../data/content";
 import {curriculumSubtopicsForTheme} from "../data/curriculumVnext";
 import {mathReviewContentFor} from "../data/mathReviewContent";
-import {mathDeepReviewContentFor} from "../data/mathDeepReviewContent";
-import {mathProbabilityReviewContentFor} from "../data/mathDeepReviewProbability";
+import {mathDeepReviewContentFor} from "../data/mathDeepReviewRegistry";
 import {Shell,StudentNav,StudentTop} from "./chrome";
 import styles from "./MathReviewMatter.module.css";
 
@@ -61,7 +60,7 @@ export default function MathReviewMatter({s,go}){
   const selected=themes.find(row=>row.id===themeId)||null;
   const subtopics=selected?curriculumSubtopicsForTheme(selected.id):[];
   const study=selected?mathReviewContentFor(selected.id):null;
-  const deepStudy=selected?(mathDeepReviewContentFor(selected.id)||mathProbabilityReviewContentFor(selected.id)):null;
+  const deepStudy=selected?mathDeepReviewContentFor(selected.id):null;
 
   return <Shell className="wideStudentShell reviewStudyPage">
     <StudentTop s={s} go={go}/>
