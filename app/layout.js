@@ -3,6 +3,7 @@ import './mini-exam-review.css';
 import './apronso-parity.css';
 import './public-release.css';
 import './exam-hub-contrast.css';
+import './school-picker.css';
 import ClientRuntimeReporter from './components/ClientRuntimeReporter';
 import StorageDurabilityNotice from './components/StorageDurabilityNotice';
 

@@ -396,7 +396,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
       <div className="portugueseSubjectStats"><div><b>{session.items.length}</b><span>itens</span></div><div><b>{awaiting}</b><span>respostas abertas por rever</span></div><div><b>{results.filter(result=>result.status==="unanswered").length}</b><span>não respondidas</span></div></div>
       <div className={`dailyCompletionNote ${daily.dailyGoalComplete?"done":"partial"}`}><b>{daily.dailyGoalComplete?"Objetivo de hoje concluído":"Sessão registada"}</b><span>{daily.dailyGoalComplete?"A tua sequência está protegida por hoje.":`Faltam ${daily.xpRemaining} XP para completares o objetivo diário.`}</span></div>
       {awaiting>0&&<div className="notice warning"><b>Resultado académico incompleto</b><span>Algumas respostas abertas continuam com avaliação provisória ou baixa confiança. A app corrige automaticamente o máximo possível sem fingir certeza onde não a tem.</span></div>}
-      <button className="primary" onClick={()=>{setSession(null);go("home")}}>Voltar à Home</button><button className="secondary" onClick={()=>{setSession(null);go(session.kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>
+      <button className="primary" onClick={()=>{setSession(null);go("home")}}>Ir para o menu inicial</button><button className="secondary" onClick={()=>{setSession(null);go(session.kind==="mission"?"progress":"train")}}>{session.kind==="mission"?"Ver progresso detalhado":"Treinar outra coisa"}</button>
     </Shell>;
   }
 

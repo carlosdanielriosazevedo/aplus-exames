@@ -28,6 +28,11 @@ assert.equal(health.body?.region,"fra1",`Expected production runtime region fra1
 assert.equal(health.body?.pilotSmokeApiVersion,null,"Preview-only smoke API must stay disabled in production");
 assert.equal(health.body?.dataApiUrl,null,"Production health must not expose the Neon Data API URL");
 
+const schools=await getJson("/api/schools");
+assert.equal(schools.response.status,200,`Production /api/schools must return 200, got ${schools.response.status}`);
+assert.ok(Array.isArray(schools.body?.schools)&&schools.body.schools.length>=1100,"Production school directory must include the full official secondary/professional network");
+assert.equal(schools.body?.count,schools.body.schools.length,"Production school directory count must match canonical rows");
+
 const previewOnlySmoke=await getJson("/api/pilot/smoke");
 assert.equal(previewOnlySmoke.response.status,404,"Preview-only /api/pilot/smoke must be unavailable in production");
 assert.equal(previewOnlySmoke.body?.error,"NOT_FOUND","Production smoke endpoint must fail closed with NOT_FOUND");

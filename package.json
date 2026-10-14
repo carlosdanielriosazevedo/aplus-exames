@@ -139,20 +139,25 @@
     "performance:budget": "node scripts/performance-baseline.mjs --enforce",
     "performance:isolation-audit": "node scripts/performance-isolation-audit.mjs",
     "learning-feedback:audit": "node scripts/learning-feedback-quality-audit.mjs",
-    "diagnostic-minimal-pairs:audit": "node scripts/diagnostic-minimal-pairs-audit.mjs"
+    "diagnostic-minimal-pairs:audit": "node scripts/diagnostic-minimal-pairs-audit.mjs",
+    "school-directory:audit": "node scripts/school-directory-audit.mjs",
+    "school-directory:live-audit": "node scripts/school-directory-live-audit.mjs",
+    "final-go:audit": "node scripts/final-go-audit.mjs",
+    "security:production-audit": "npm audit --omit=dev --audit-level=moderate",
+    "final:go": "npm run school-directory:live-audit && npm run security:production-audit && npm run technical:gate && npm run final-go:audit && npm run build"
   },
   "dependencies": {
-    "next": "15.5.24",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "@neondatabase/neon-js": "0.7.0-beta",
     "@neondatabase/serverless": "^1.1.0",
-    "@neondatabase/neon-js": "0.7.0-beta"
+    "next": "15.5.27",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "eslint": "^8.57.1",
-    "eslint-config-next": "15.5.24",
+    "eslint-config-next": "15.5.27",
     "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
+    "vitest": "4.1.11"
   },
   "overrides": {
     "postcss": "8.5.23"

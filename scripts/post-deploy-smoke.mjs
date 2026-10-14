@@ -86,6 +86,12 @@ assert.equal(health.backendReachable,true,"Smoke deployment must reach its Neon 
 assert.equal(Number(health.schemaVersion),8,`Expected schemaVersion 8, got ${health.schemaVersion}`);
 assert.equal(health.region,"fra1",`Expected runtime region fra1, got ${health.region}`);
 assert.equal(Number(health.pilotSmokeApiVersion),1,"Preview smoke API must be ready before authenticated smoke");
+
+const schoolResponse=await appFetch("/api/schools",{cache:"no-store"});
+const schoolDirectory=await jsonOrText(schoolResponse);
+assert.equal(schoolResponse.status,200,"/api/schools must return 200");
+assert.ok(Array.isArray(schoolDirectory.schools)&&schoolDirectory.schools.length>=1100,"School directory must expose the full official secondary/professional network");
+assert.equal(schoolDirectory.count,schoolDirectory.schools.length,"School directory count must match its canonical rows");
 const dataApiUrl=configuredDataApiUrl||health.dataApiUrl;
 assert.ok(typeof dataApiUrl==="string"&&dataApiUrl.startsWith("https://"),"Preview health must expose its public Neon Data API URL");
 
