@@ -53,7 +53,7 @@ assert.match(page,/friendsBetaInfo/);
 assert.match(page,/Informação do teste/);
 assert.match(page,/className="progressDetails"/);
 assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza da app[\s\S]*?Variantes não contam/);
-assert.ok((page.match(/<ApronsoNudge/g)||[]).length>=2,"O Apronso deve acompanhar os principais ecrãs da experiência.");
+assert.ok((page.match(/<ApronsoNudge/g)||[]).length>=1,"O Apronso deve acompanhar ecrãs onde acrescenta orientação útil, sem repetir a interface.");
 assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"O Apronso deve acompanhar o hub de estudo partilhado.");
 assert.match(page,/Índice parcial[\s\S]*?O índice não prevê a tua nota de exame\./);
 assert.match(chrome,/function StudySessionHeader[\s\S]*?className="focusTop sessionTop"[\s\S]*?className="focusTrack"/);
