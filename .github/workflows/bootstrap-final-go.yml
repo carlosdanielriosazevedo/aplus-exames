@@ -1,0 +1,48 @@
+name: Bootstrap final GO
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bootstrap-final-go-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'fix/canonical-school-directory-final-go'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply source transformation
+        run: node scripts/apply-final-go-transform.mjs
+      - name: Upgrade security-sensitive tooling
+        run: |
+          npm install next@15.5.27 --save-exact
+          npm install --save-dev vitest@4.1.11 eslint-config-next@15.5.27 --save-exact
+      - name: Certify final candidate before writing it
+        run: npm run final:go
+      - name: Remove generated diagnostics and bootstrap files
+        run: |
+          rm -f calibration-report.json performance-baseline.json response-analysis-calibration-v2.json response-analysis-calibration-v3.json response-analysis-calibration-v4.json response-analysis-calibration-v5.json response-analysis-calibration-v6.json
+          rm -f scripts/apply-final-go-transform.mjs .github/workflows/bootstrap-final-go.yml
+      - name: Commit certified candidate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Add canonical national school directory and final GO gates'
+          git push origin HEAD:${{ github.head_ref }}
