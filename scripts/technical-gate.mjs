@@ -45,6 +45,8 @@ const checks=[
   ["Prontidão piloto alunos reais","npm",["run","student-pilot:audit"]],
   ["Engagement diário","npm",["run","engagement:audit"]],
   ["Rankings e divisões","npm",["run","competition:audit"]],
+  ["Diretório canónico de escolas","npm",["run","school-directory:audit"]],
+  ["Certificação final de experiência","npm",["run","final-go:audit"]],
   ["Missão de Hoje","npm",["run","daily-mission:audit"]],
   ["Scope curricular por ano","npm",["run","curriculum-scope:audit"]],
   ["Banco vNext estrutural","npm",["run","vnext-content:audit"]],

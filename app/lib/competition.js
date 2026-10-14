@@ -77,6 +77,9 @@ export function emptyCompetition(){
       nickname:null,
       region:null,
       school:null,
+      schoolId:null,
+      schoolMunicipality:null,
+      schoolDistrict:null,
       schoolOptIn:false,
       districtOptIn:false
     },
@@ -376,10 +379,20 @@ export function updateCompetitionProfile(state,patch={}){
     ?(PORTUGAL_REGIONS.includes(cleanRankingText(patch.region,40))?cleanRankingText(patch.region,40):null)
     :c.profile.region;
   const school=patch.school!==undefined
-    ?cleanRankingText(patch.school,80)||null
+    ?cleanRankingText(patch.school,160)||null
     :c.profile.school;
+  const schoolId=patch.schoolId!==undefined
+    ?cleanRankingText(patch.schoolId,80)||null
+    :(patch.school!==undefined?null:c.profile.schoolId);
+  const schoolMunicipality=patch.schoolMunicipality!==undefined
+    ?cleanRankingText(patch.schoolMunicipality,100)||null
+    :(patch.school!==undefined?null:c.profile.schoolMunicipality);
+  const schoolDistrict=patch.schoolDistrict!==undefined
+    ?cleanRankingText(patch.schoolDistrict,100)||null
+    :(patch.school!==undefined?null:c.profile.schoolDistrict);
   const districtOptIn=patch.districtOptIn!==undefined?Boolean(patch.districtOptIn):Boolean(c.profile.districtOptIn);
-  const schoolOptIn=patch.schoolOptIn!==undefined?Boolean(patch.schoolOptIn):Boolean(c.profile.schoolOptIn);
+  const requestedSchoolOptIn=patch.schoolOptIn!==undefined?Boolean(patch.schoolOptIn):Boolean(c.profile.schoolOptIn);
+  const schoolOptIn=Boolean(requestedSchoolOptIn&&school&&schoolId);
   return {
     ...state,
     competition:{
@@ -389,6 +402,9 @@ export function updateCompetitionProfile(state,patch={}){
         nickname:nickname||null,
         region,
         school,
+        schoolId,
+        schoolMunicipality,
+        schoolDistrict,
         districtOptIn,
         schoolOptIn
       }
@@ -406,7 +422,7 @@ export function scopeAvailability(state,scope){
   }
   if(scope==="school"){
     const schoolYear=["10.º","11.º","12.º","Já terminei o secundário"].includes(state?.profile?.schoolYear);
-    return c.profile.school&&c.profile.schoolOptIn&&schoolYear
+    return c.profile.school&&c.profile.schoolId&&c.profile.schoolOptIn&&schoolYear
       ?{available:true}
       :{available:false,reason:"Indica o ano, adiciona a escola e ativa a participação opcional."};
   }
@@ -419,6 +435,7 @@ export function publicRankingFields(state){
     nickname:c.profile.nickname||null,
     schoolYear:state?.profile?.schoolYear||null,
     region:c.profile.districtOptIn?c.profile.region:null,
+    schoolId:c.profile.schoolOptIn?c.profile.schoolId:null,
     school:c.profile.schoolOptIn?c.profile.school:null,
     division:c.division,
     weeklyXp:weeklyCompetitiveXp(state)

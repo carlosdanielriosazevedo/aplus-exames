@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useState} from "react";
 import {Back,BrandName,Shell,StudentNav,StudentTop} from "./chrome";
+import SchoolPicker from "./SchoolPicker";
 import {AVAILABLE_SUBJECT_IDS,SECONDARY_EXAM_SUBJECTS,examCodesLabel} from "../data/subjects";
 import {subjectProgressFor} from "../lib/subjectProgress";
 import {subjectGoal,uniqueSubjectIds} from "../lib/subjectWorkspace";
@@ -19,7 +20,7 @@ export function Ranking({s,setS,go}){
   const [scope,setScope]=useState("league");
   const [nickname,setNickname]=useState(profile.nickname||"");
   const [region,setRegion]=useState(profile.region||"");
-  const [school,setSchool]=useState(profile.school||"");
+  const [selectedSchool,setSelectedSchool]=useState(profile.schoolId&&profile.school?{id:profile.schoolId,name:profile.school,municipality:profile.schoolMunicipality||"",district:profile.schoolDistrict||""}:null);
   const [schoolYear,setSchoolYear]=useState(s.profile?.schoolYear||"");
   const [districtOptIn,setDistrictOptIn]=useState(!!profile.districtOptIn);
   const [schoolOptIn,setSchoolOptIn]=useState(!!profile.schoolOptIn);
@@ -44,9 +45,12 @@ export function Ranking({s,setS,go}){
     },{
       nickname,
       region:region||null,
-      school:school.trim()||null,
+      school:selectedSchool?.name||null,
+      schoolId:selectedSchool?.id||null,
+      schoolMunicipality:selectedSchool?.municipality||null,
+      schoolDistrict:selectedSchool?.district||null,
       districtOptIn,
-      schoolOptIn
+      schoolOptIn:Boolean(schoolOptIn&&selectedSchool?.id)
     }));
   }
 
@@ -72,11 +76,11 @@ export function Ranking({s,setS,go}){
     </section>}
 
     {!availability.available?<div className="rankingLocked">
-      <b>{scope==="district"?"Ranking de distrito/região ainda não ativo":"Ranking de escola ainda não ativo"}</b>
+      <b>{scope==="district"?"Ranking de distrito/região indisponível":"Ranking de escola indisponível"}</b>
       <span>{availability.reason}</span>
       <small>{scope==="school"
-        ?`No ranking real, só abriremos uma tabela de escola com pelo menos ${SCHOOL_MIN_PARTICIPANTS} participantes elegíveis, para reduzir risco de identificação.`
-        :`No ranking real, o distrito/região terá um limiar mínimo de ${DISTRICT_MIN_PARTICIPANTS} participantes.`}</small>
+        ?`O ranking da escola só fica disponível com pelo menos ${SCHOOL_MIN_PARTICIPANTS} participantes elegíveis, para reduzir risco de identificação.`
+        :`O ranking do distrito/região só fica disponível com pelo menos ${DISTRICT_MIN_PARTICIPANTS} participantes elegíveis.`}</small>
     </div>:<section className="leaderboard">
       <div className="leaderboardHead"><div><small>RANKING SEMANAL · {scopeLabel?.toUpperCase()}</small><h3>{scope==="league"?"A tua liga":scopeLabel}</h3></div><span>{self?`Tu: #${self.position}`:"—"}</span></div>
       <div className="leaderboardRows">{rows.map(row=>{
@@ -89,7 +93,7 @@ export function Ranking({s,setS,go}){
           <em>{row.xp} XP</em>
         </div>
       })}</div>
-      {scope!=="league"&&<small className="aroundYouNote">Em rankings muito grandes, a experiência deverá privilegiar a tua posição e quem está imediatamente acima/abaixo — não uma lista infinita.</small>}
+      {scope!=="league"&&<small className="aroundYouNote">Em rankings muito grandes, mostramos a tua posição e quem está imediatamente acima e abaixo.</small>}
     </section>}
 
     <section className="xpRules">
@@ -107,7 +111,7 @@ export function Ranking({s,setS,go}){
     <section className="divisionLadder">
       <small>DIVISÕES</small>
       <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===summary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
-      <p>Em produção, cada liga terá um pequeno grupo de alunos com atividade comparável. No final da semana, os primeiros sobem e os últimos podem descer.</p>
+      <p>Cada liga reúne um pequeno grupo de alunos com atividade comparável. No final da semana, os primeiros sobem e os últimos podem descer.</p>
     </section>
 
     <section className="rankingProfile">
@@ -116,9 +120,9 @@ export function Ranking({s,setS,go}){
       <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
       <label>Distrito/Região<select value={region} onChange={e=>setRegion(e.target.value)}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
       <label>Ano para o ranking<select value={schoolYear} onChange={e=>setSchoolYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
-      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Nome da escola (opcional)"/></label>
+      <label>Escola<SchoolPicker value={selectedSchool} initialText={profile.school||""} onChange={school=>{setSelectedSchool(school);if(!school)setSchoolOptIn(false)}}/></label>
       <label className="rankConsent"><input type="checkbox" checked={districtOptIn} onChange={e=>setDistrictOptIn(e.target.checked)}/><span>Participar no ranking do meu distrito/região.</span></label>
-      <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
+      <label className="rankConsent"><input type="checkbox" disabled={!selectedSchool?.id} checked={Boolean(schoolOptIn&&selectedSchool?.id)} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
       <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>
       <small className="privacyRankNote">Nunca entram no ranking: Domínio, Certeza, Índice de Preparação, nota objetivo, resultados de exame ou número de erros.</small>
     </section>

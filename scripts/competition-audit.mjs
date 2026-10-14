@@ -98,6 +98,9 @@ s=updateCompetitionProfile(s,{
   nickname:"Sigma17",
   region:"Aveiro",
   school:"Escola Demo",
+  schoolId:"pt-school-demo-001",
+  schoolMunicipality:"Aveiro",
+  schoolDistrict:"Aveiro",
   districtOptIn:true,
   schoolOptIn:true
 });
@@ -113,12 +116,16 @@ assert.ok(!("goal" in publicFields));
 assert.ok(!("scores" in publicFields));
 assert.equal(publicFields.nickname,"Sigma17");
 assert.equal(publicFields.schoolYear,"12.º");
+assert.equal(publicFields.schoolId,"pt-school-demo-001");
 
 // Public profile input is allowlisted and normalized before it can enter ranking state.
 const hardenedProfile=updateCompetitionProfile(s,{
   nickname:"  Sigma17\n ",
   region:"Região inventada",
   school:"\u0000  Escola   Demo  ",
+  schoolId:"pt-school-demo-001",
+  schoolMunicipality:"  Lisboa ",
+  schoolDistrict:" Lisboa ",
   districtOptIn:"yes",
   schoolOptIn:1,
   secretField:"must-not-survive"
@@ -126,9 +133,17 @@ const hardenedProfile=updateCompetitionProfile(s,{
 assert.equal(hardenedProfile.competition.profile.nickname,"Sigma17");
 assert.equal(hardenedProfile.competition.profile.region,null);
 assert.equal(hardenedProfile.competition.profile.school,"Escola Demo");
+assert.equal(hardenedProfile.competition.profile.schoolId,"pt-school-demo-001");
+assert.equal(hardenedProfile.competition.profile.schoolMunicipality,"Lisboa");
+assert.equal(hardenedProfile.competition.profile.schoolDistrict,"Lisboa");
 assert.equal(hardenedProfile.competition.profile.districtOptIn,true);
 assert.equal(hardenedProfile.competition.profile.schoolOptIn,true);
 assert.equal("secretField" in hardenedProfile.competition.profile,false);
+assert.equal(scopeAvailability(hardenedProfile,"school").available,true);
+
+const freeTextSchool=updateCompetitionProfile(s,{school:"Escola escrita à mão",schoolOptIn:true});
+assert.equal(freeTextSchool.competition.profile.schoolOptIn,false,"Uma escola sem identificador canónico nunca pode ativar o ranking escolar.");
+assert.equal(scopeAvailability(freeTextSchool,"school").available,false);
 
 // League outcomes: top promotes, bottom demotes, same week idempotent.
 let silver={...s,competition:{...s.competition,division:"silver",highestDivision:"silver",history:[]}};
