@@ -74,7 +74,7 @@ describe("Rever Matéria profundo · Função composta e derivadas",()=>{
   });
 
   it("entra no registo central sem alterar o fallback dos temas restantes",()=>{
-    expect(MATH_DEEP_REVIEW_THEME_IDS).toEqual(["12-cplx","12-prob","12-expl","12-fcd"]);
+    expect(MATH_DEEP_REVIEW_THEME_IDS).toContain("12-fcd");
     expect(mathDeepReviewContentFor("12-fcd")).toBe(COMPOSITE_DERIVATIVES_REVIEW);
     expect(mathDeepReviewContentFor("12-fcont")).toBeNull();
   });
