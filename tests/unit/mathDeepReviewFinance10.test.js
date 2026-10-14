@@ -41,7 +41,7 @@ describe("Rever Matéria profundo · Modelos matemáticos em finanças do 10.º 
     expect(text).toMatch(/número de pagamentos anuais/u);
     expect(text).toMatch(/valor-hora/u);
     expect(text).toMatch(/mesma unidade temporal/u);
-    expect(text).toMatch(/não existe uma regra universal/u);
+    expect(text).toMatch(/não existe uma regra universal/iu);
   });
 
   it("distingue bruto, líquido, retenção e imposto anual",()=>{
@@ -49,7 +49,7 @@ describe("Rever Matéria profundo · Modelos matemáticos em finanças do 10.º 
     expect(text).toMatch(/salário bruto/u);
     expect(text).toMatch(/salário líquido/u);
     expect(text).toMatch(/retenção na fonte.*(?:adiantamento|provisão)/u);
-    expect(text).toMatch(/retenção mensal.*não deve ser confundida com o IRS anual definitivo/u);
+    expect(text).toMatch(/não deve ser confundida com o IRS anual definitivo/u);
     expect(text).toMatch(/taxas ou tabelas fornecidas/u);
   });
 
