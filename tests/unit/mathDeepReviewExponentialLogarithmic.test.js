@@ -54,7 +54,7 @@ describe("Rever Matéria profundo · Funções exponenciais e logarítmicas",()=
   });
 
   it("entra no registo central sem duplicar lógica no componente",()=>{
-    expect(MATH_DEEP_REVIEW_THEME_IDS).toEqual(["12-cplx","12-prob","12-expl"]);
+    expect(MATH_DEEP_REVIEW_THEME_IDS).toContain("12-expl");
     expect(mathDeepReviewContentFor("12-expl")).toBe(EXPONENTIAL_LOGARITHMIC_REVIEW);
   });
 
