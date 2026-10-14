@@ -1,11 +1,13 @@
 import {mathDeepReviewContentFor as complexReviewFor} from "./mathDeepReviewContent";
 import {mathProbabilityReviewContentFor} from "./mathDeepReviewProbability";
 import {mathExpLogReviewContentFor} from "./mathDeepReviewExponentialLogarithmic";
+import {mathCompositeDerivativesReviewContentFor} from "./mathDeepReviewCompositeDerivatives";
 
 const REVIEW_PROVIDERS=[
   complexReviewFor,
   mathProbabilityReviewContentFor,
-  mathExpLogReviewContentFor
+  mathExpLogReviewContentFor,
+  mathCompositeDerivativesReviewContentFor
 ];
 
 export function mathDeepReviewContentFor(themeId){
@@ -16,4 +18,4 @@ export function mathDeepReviewContentFor(themeId){
   return null;
 }
 
-export const MATH_DEEP_REVIEW_THEME_IDS=["12-cplx","12-prob","12-expl"];
+export const MATH_DEEP_REVIEW_THEME_IDS=["12-cplx","12-prob","12-expl","12-fcd"];
