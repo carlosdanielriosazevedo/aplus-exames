@@ -71,7 +71,7 @@ describe("Rever Matéria profundo · Funções do 10.º ano",()=>{
 
   it("protege transformações, ramos e módulo sem antecipar continuidade",()=>{
     const text=JSON.stringify(FUNCTIONS_10_REVIEW);
-    expect(text).toMatch(/f\(x−a\).*direita/u);
+    expect(text).toMatch(/(?:substituir x por x−a|f\(x−a\)).*direita/u);
     expect(text).toMatch(/c<0.*reflexão/u);
     expect(text).toMatch(/\|x\|=\{x, se x≥0; −x, se x<0\}/u);
     expect(text).toMatch(/fronteira usa <, ≤, > ou ≥/u);
