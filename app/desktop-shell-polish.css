@@ -1,0 +1,33 @@
+/* Desktop-only polish for the shared student workspace.
+   Keep the floating navigation from covering the final content and preserve
+   the same visible lower breathing room across Aprender/Treinar/Ranking/Progresso. */
+@media (min-width:1100px){
+  /* Shell pages without the explicit wideStudentShell class (notably Ranking)
+     must reserve the same lower area already used by the good desktop views. */
+  .light:has(.studentNav){
+    padding-bottom:118px;
+  }
+
+  /* Aprender is not rendered through Shell. Reserve its dock clearance at the
+     page level so paused-session/path copy can always scroll fully above nav. */
+  .learnHome{
+    padding-bottom:118px;
+  }
+  .learnHome .studentSurface{
+    padding-bottom:0;
+  }
+
+  /* In the two desktop guidance banners requested by product, keep Apronso on
+     the left but centre the copy in the usable banner area. Mobile retains its
+     existing baseline-focused composition. */
+  .apronsoNudge:has(+ .trainChoices),
+  .examHub .apronsoNudge{
+    align-items:center;
+  }
+  .apronsoNudge:has(+ .trainChoices) p,
+  .examHub .apronsoNudge p{
+    align-self:center;
+    justify-self:stretch;
+    text-align:center;
+  }
+}
