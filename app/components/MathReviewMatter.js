@@ -4,6 +4,7 @@ import {TAXONOMY} from "../data/content";
 import {curriculumSubtopicsForTheme} from "../data/curriculumVnext";
 import {mathReviewContentFor} from "../data/mathReviewContent";
 import {mathDeepReviewContentFor} from "../data/mathDeepReviewContent";
+import {mathProbabilityReviewContentFor} from "../data/mathDeepReviewProbability";
 import {Shell,StudentNav,StudentTop} from "./chrome";
 import styles from "./MathReviewMatter.module.css";
 
@@ -46,7 +47,7 @@ function DeepMathReview({study}){
     <div className={`reviewChapter ${styles.reviewFinish}`}>
       <small>FECHO DA REVISÃO</small>
       <h3>O que deves conseguir fazer agora</h3>
-      <p>Depois desta leitura, deves conseguir reconhecer a representação mais adequada a cada problema, justificar as operações que usas e passar entre a leitura algébrica e a leitura geométrica dos números complexos.</p>
+      <p>Depois desta leitura, deves conseguir explicar os conceitos centrais desta matéria, escolher as relações adequadas e acompanhar uma resolução sem depender apenas de fórmulas memorizadas.</p>
       <p>Quando quiseres verificar se consegues aplicar estes conceitos sem apoio, regressa a “Treinar” e escolhe “Praticar”.</p>
     </div>
   </>;
@@ -60,7 +61,7 @@ export default function MathReviewMatter({s,go}){
   const selected=themes.find(row=>row.id===themeId)||null;
   const subtopics=selected?curriculumSubtopicsForTheme(selected.id):[];
   const study=selected?mathReviewContentFor(selected.id):null;
-  const deepStudy=selected?mathDeepReviewContentFor(selected.id):null;
+  const deepStudy=selected?(mathDeepReviewContentFor(selected.id)||mathProbabilityReviewContentFor(selected.id)):null;
 
   return <Shell className="wideStudentShell reviewStudyPage">
     <StudentTop s={s} go={go}/>
