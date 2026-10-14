@@ -72,7 +72,7 @@ describe("Rever Matéria profundo · Eleições e partilha do 10.º ano",()=>{
   it("não apresenta nenhum método como justiça universal",()=>{
     const text=JSON.stringify(ELECTIONS_SHARING_REVIEW);
     expect(text).toMatch(/vantagens e limitações/u);
-    expect(text).toMatch(/não declarar um método universalmente.*justo/u);
+    expect(text).toMatch(/sem declarar um método universalmente.*justo/u);
     expect(text).toMatch(/unidades indivisíveis/u);
   });
 
