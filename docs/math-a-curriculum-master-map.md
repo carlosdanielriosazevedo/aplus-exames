@@ -125,7 +125,7 @@ Cada item deve ter, no mínimo:
 - `11-cd-regras` — Regras de derivação
 - `11-cd-monotonia-otimizacao` — Monotonia, extremos e otimização
 
-## 5. 12.º ano — obrigatório — 32 submatérias (~1 600 perguntas)
+## 5. 12.º ano — obrigatório — 33 submatérias (~1 650 perguntas)
 
 ### 12A — Números complexos
 - `12-cplx-unidade-equacoes` — Unidade imaginária, conjunto C e equações de 2.º grau
@@ -161,10 +161,13 @@ Cada item deve ter, no mínimo:
 - `12-fcd-aplicacoes` — Estudo de funções, modelação e otimização
 
 ### 12E — Funções contínuas e deriváveis
-- `12-fcont-limites-continuidade` — Limite intuitivo e continuidade
-- `12-fcont-operacoes` — Operações com funções contínuas
-- `12-fcont-derivabilidade` — Derivabilidade e relação com continuidade
-- `12-fcont-estudo-global` — Monotonia, extremos e estudo global de funções
+- `12-fcont-limites-continuidade` — Limite intuitivo, continuidade num ponto e descontinuidade
+- `12-fcont-operacoes` — Continuidade em intervalos e operações com funções contínuas
+- `12-fcont-lhopital` — Regra de L’Hôpital, indeterminações e limites notáveis
+- `12-fcont-assintotas` — Assíntotas verticais, horizontais e oblíquas
+- `12-fcont-estudo-global` — Estudo de funções com articulação entre análise e tecnologia
+
+> Nota de migração: `12-fcont-derivabilidade` era um identificador preliminar deste mapa. As AE de março de 2026 e a coletânea oficial das turmas piloto organizam este bloco em Continuidade, Regra de L’Hôpital, Assíntotas e Estudo de funções. O conteúdo já gerado com o identificador antigo deve ser revisto e reclassificado numa migração própria, sem alterar silenciosamente itens existentes.
 
 ### 12F — Resolução aproximada de equações
 - `12-rae-bolzano-localizacao` — Teorema do Valor Intermédio/Bolzano-Cauchy e localização de raízes
@@ -198,10 +201,10 @@ Cada item deve ter, no mínimo:
 
 - 10.º: 31 submatérias x 50 ~= **1 550**
 - 11.º: 35 submatérias x 50 ~= **1 750**
-- 12.º obrigatório: 32 submatérias x 50 ~= **1 600**
+- 12.º obrigatório: 33 submatérias x 50 ~= **1 650**
 - 12.º opcionais: 15 submatérias x 50 ~= **750**
 
-**Total-alvo vNext: 113 submatérias -> ~5 650 perguntas editoriais originais.**
+**Total-alvo vNext: 114 submatérias -> ~5 700 perguntas editoriais originais.**
 
 Isto substitui a estimativa preliminar baseada nas 69 microcompetências antigas. A redução de fragmentação em alguns pontos é deliberada: não faz sentido obrigar uma microideia demasiado estreita a ter 50 perguntas artificiais.
 
@@ -209,7 +212,7 @@ Isto substitui a estimativa preliminar baseada nas 69 microcompetências antigas
 
 ### Diagnóstico
 - Deve amostrar apenas conteúdo dentro do âmbito curricular do aluno.
-- Não deve tentar medir todas as 113 submatérias numa sessão.
+- Não deve tentar medir todas as 114 submatérias numa sessão.
 - Usa âncoras informativas em submatérias estruturantes e continua calibração nas primeiras Missões.
 - Um aluno nunca recebe uma classificação negativa por ainda não ter estudado matéria futura.
 
@@ -245,6 +248,6 @@ Exemplo já identificado: uma partilha puramente proporcional 1:2:3 não represe
 
 ## 10. Fontes curriculares de referência
 
-- DGE / Aprendizagens Essenciais de Matemática — Matemática A, 10.º, 11.º e 12.º.
-- Coletâneas de tarefas das turmas piloto da DGE, usadas como referência de cobertura e de natureza das aprendizagens.
+- DGE / EduQA — Aprendizagens Essenciais de Matemática A, 10.º, 11.º e 12.º, incluindo a versão de 12.º ano de março de 2026.
+- Coletâneas de tarefas das turmas piloto da DGE/EduQA, usadas como referência de cobertura e de natureza das aprendizagens.
 - Não copiar enunciados, figuras, tabelas ou soluções das fontes; produzir conteúdo A+ original.
