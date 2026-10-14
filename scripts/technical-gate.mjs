@@ -86,6 +86,8 @@ const checks=[
   ["Pré-revisão QA","npm",["run","pre-review-qa:audit"]],
   ["Validação híbrida","npm",["run","hybrid-validation:audit"]],
   ["Política de source sem patches textuais","npm",["run","source-rewrite:audit"]],
+  ["Catálogo nacional de escolas","node",["scripts/school-catalog-audit.mjs"]],
+  ["Polish final do RC público","node",["scripts/final-public-rc-audit.mjs"]],
   ["Higiene do source","npm",["run","source:hygiene"]]
 ];
 

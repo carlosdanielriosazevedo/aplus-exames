@@ -52,7 +52,7 @@ assert.doesNotMatch(welcomeSource,/recent_student|observer/);
 assert.match(page,/friendsBetaInfo/);
 assert.match(page,/Informação do teste/);
 assert.match(page,/className="progressDetails"/);
-assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza da app[\s\S]*?Variantes não contam/);
+assert.match(page,/className="progressHelp"><summary>ⓘ Como interpretar o teu progresso<\/summary>[\s\S]*?Domínio ≠ Certeza do Apronso[\s\S]*?Variantes não contam/);
 assert.ok((page.match(/<ApronsoNudge/g)||[]).length>=1,"O Apronso deve acompanhar ecrãs onde acrescenta orientação útil, sem repetir a interface.");
 assert.ok((studyModeHub.match(/<ApronsoNudge/g)||[]).length>=1,"O Apronso deve acompanhar o hub de estudo partilhado.");
 assert.match(page,/Índice parcial[\s\S]*?O índice não prevê a tua nota de exame\./);
@@ -77,7 +77,7 @@ console.log("✓ student experience: four-area navigation, adaptive path, focus 
 
 const apronsoParity=readFileSync(new URL("../app/apronso-parity.css",import.meta.url),"utf8");
 assert.doesNotMatch(mainPage,/Uma aplicação, várias disciplinas|subjectCatalogDate|SUBJECT_CATALOG_YEAR/,"Subject selection should not repeat explanatory catalogue copy");
-assert.equal((mainPage.match(/Domínio ≠ Certeza da app/g)||[]).length,1,"The Domínio/Certeza explanation should live only in Progresso");
+assert.equal((mainPage.match(/Domínio ≠ Certeza do Apronso/g)||[]).length,1,"The Domínio/Certeza explanation should live only in Progresso");
 assert.equal((mainPage.match(/<DailyCompletionNote s=\{s\}\/>/g)||[]).length,3,"Diagnostic result should not duplicate the daily-goal card");
 assert.equal((mainPage.match(/<CompetitionXpNote s=\{s\}\/>/g)||[]).length,3,"Diagnostic result should not duplicate competitive XP");
 assert.doesNotMatch(secondaryScreens,/Eu trato das contas|demoRankingWarning/,"Ranking should avoid duplicated explanation and oversized demo copy");

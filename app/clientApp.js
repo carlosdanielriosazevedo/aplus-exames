@@ -919,7 +919,7 @@ function DiagResult({s,setS,go}){
   <div className="resultSkills">{ranked.map(t=>{
     const v=s.scores[t.id];
     return <div className="resultSkill" key={t.id}><div><b>{t.short}</b><small>Domínio estimado: {v.domain}/100</small></div>
-      <div className="certainty"><span>Certeza da app</span><strong>{certaintyLabel(v.conf,v.evidence.length)}</strong></div></div>
+      <div className="certainty"><span>Certeza do Apronso</span><strong>{certaintyLabel(v.conf,v.evidence.length)}</strong></div></div>
   })}</div>
 
   <FriendsBetaDisclaimer s={s}/>
@@ -1460,7 +1460,7 @@ function MissionResult({s,setS,go}){
 
     {m.focus&&<div className="competenceOutcome"><small>COMPETÊNCIA TRABALHADA</small><h2>{m.focus}</h2><div>
       <p><span>Domínio</span><b>{m.beforeFocusDomain??"—"} → {m.afterFocusDomain??"—"}/100</b></p>
-      <p><span>Certeza da app</span><b>{certaintyLabel(m.beforeFocusConf,m.beforeFocusEvidence)} → {certaintyLabel(m.afterFocusConf,m.afterFocusEvidence)}</b></p>
+      <p><span>Certeza do Apronso</span><b>{certaintyLabel(m.beforeFocusConf,m.beforeFocusEvidence)} → {certaintyLabel(m.afterFocusConf,m.afterFocusEvidence)}</b></p>
     </div></div>}
     <div className="missionOutcome">
       <div><span>{m.focus?"Tema — visão agregada":"Domínio estimado"}</span><b>{m.beforeDomain??"—"} → {m.afterDomain}/100</b><small>{m.beforeDomain===null?"primeira estimativa":delta>0?`+${delta}`:delta===0?"sem alteração":delta}</small></div>
@@ -1742,14 +1742,14 @@ function Progress({s,go}){
         <div className="progHead"><b>{t.short}</b><small>{t.name}</small></div>
         {has?<>
           <span>Domínio estimado: {v.domain}/100</span><div className="bar"><i style={{width:v.domain+"%"}}/></div>
-          <div className="certaintyRow"><span>Certeza da app</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
+          <div className="certaintyRow"><span>Certeza do Apronso</span><b>{certaintyLabel(v.conf,v.evidence.length)}</b><small>{certaintyHelp(v.conf,v.evidence.length)}</small></div>
           <div className="evidenceMeta">{new Set(v.evidence.map(e=>e.signature)).size} evidências independentes · {new Set(v.evidence.map(e=>e.cognitive)).size} tipos de raciocínio</div>
           <div className="focusMap"><b>Competências dentro deste tema</b>{focusRows(s,t.id).filter(f=>f.questionCount>0).map(f=><div key={f.focus} className={f.domain===null?"unknown":""}><span>{f.focus}</span><div className="focusMiniBar"><i style={{width:(f.domain??0)+"%"}}/></div><strong>{f.domain??"—"}</strong><small>{f.domain===null?"Sem evidência":certaintyLabel(f.conf,f.evidence.length)}</small></div>)}</div>
         </>:<div className="noEvidence"><b>Ainda sem estimativa</b><span>A app vai recolher evidência quando esta área se tornar relevante.</span></div>}
       </div>
     })}</details>
     <details className="progressHelp"><summary>ⓘ Como interpretar o teu progresso</summary>
-      <div className="notice"><b>Domínio ≠ Certeza da app</b><span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza da app</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
+      <div className="notice"><b>Domínio ≠ Certeza do Apronso</b><span><b>Domínio</b> é quanto a app estima que sabes. <b>Certeza do Apronso</b> é quão segura está dessa estimativa. Não mede a tua autoconfiança.</span></div>
       <div className="notice"><b>Variantes não contam como “provas novas” infinitas</b><span>Se responderes várias vezes ao mesmo molde com números diferentes, a app reconhece que são semanticamente semelhantes e reduz o peso dessas repetições na Certeza.</span></div>
     </details>
     <StudentNav active="progress" go={go}/>
@@ -1998,7 +1998,7 @@ function MiniExamResult({s,setS,go}){
       const t=theme(c.themeId);
       const beforeLabel=certaintyLabel(c.before.conf,c.before.evidenceCount);
       const afterLabel=certaintyLabel(c.after.conf,c.after.evidenceCount);
-      return <div className="examChange" key={c.themeId}><div><b>{t.short}</b><small>Domínio {c.before.domain??'—'} → {c.after.domain}/100</small></div><div><span>Certeza da app</span><strong>{beforeLabel} → {afterLabel}</strong></div></div>
+      return <div className="examChange" key={c.themeId}><div><b>{t.short}</b><small>Domínio {c.before.domain??'—'} → {c.after.domain}/100</small></div><div><span>Certeza do Apronso</span><strong>{beforeLabel} → {afterLabel}</strong></div></div>
     })}</div>
 
     <div className="notice"><b>Porque é que esta prova pesa mais?</b><span>Num Mini-exame respondes sem ajuda nem feedback imediato e em contexto misto. Por isso esta evidência tem mais peso do que uma resposta de Missão — mas continua a ser apenas uma parte do teu histórico.</span></div>

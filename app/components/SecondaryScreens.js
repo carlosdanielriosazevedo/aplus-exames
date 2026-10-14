@@ -8,6 +8,7 @@ import {ROLES,normalizeIdentity,can,defaultScreenForRole,createParentInvite,acti
 import {engagementSummary} from "../lib/engagement";
 import {examScoreLabel} from "../lib/constructedResponseView";
 import {competitionSummary,latestCompetitiveActivity,demoLeaderboard,leaderboardAroundUser,leagueProjection,updateCompetitionProfile,scopeAvailability,PORTUGAL_REGIONS,DIVISIONS,PROMOTION_COUNT,DEMOTION_COUNT,SCHOOL_MIN_PARTICIPANTS,DISTRICT_MIN_PARTICIPANTS} from "../lib/competition";
+import {schoolsForRegion} from "../data/secondarySchools";
 
 const DEFAULT_SUBJECT_ID="math-a";
 function subjectById(id){return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===DEFAULT_SUBJECT_ID);}
@@ -19,8 +20,14 @@ export function Ranking({s,setS,go}){
   const [scope,setScope]=useState("league");
   const [nickname,setNickname]=useState(profile.nickname||"");
   const [region,setRegion]=useState(profile.region||"");
-  const [school,setSchool]=useState(profile.school||"");
+  const initialSchool=schoolsForRegion(profile.region||"").find(row=>row.id===profile.schoolId||row.name===profile.school);
+  const [schoolId,setSchoolId]=useState(profile.schoolId||initialSchool?.id||"");
   const [schoolYear,setSchoolYear]=useState(s.profile?.schoolYear||"");
+  const [municipality,setMunicipality]=useState(initialSchool?.municipality||"");
+  const regionSchoolOptions=schoolsForRegion(region);
+  const municipalityOptions=[...new Set(regionSchoolOptions.map(row=>row.municipality))].sort((a,b)=>a.localeCompare(b,"pt"));
+  const schoolOptions=municipality?regionSchoolOptions.filter(row=>row.municipality===municipality):[];
+  const selectedSchool=schoolOptions.find(row=>row.id===schoolId)||null;
   const [districtOptIn,setDistrictOptIn]=useState(!!profile.districtOptIn);
   const [schoolOptIn,setSchoolOptIn]=useState(!!profile.schoolOptIn);
   const availability=scopeAvailability(s,scope);
@@ -44,9 +51,10 @@ export function Ranking({s,setS,go}){
     },{
       nickname,
       region:region||null,
-      school:school.trim()||null,
+      school:selectedSchool?.name||null,
+      schoolId:selectedSchool?.id||null,
       districtOptIn,
-      schoolOptIn
+      schoolOptIn:Boolean(selectedSchool&&schoolOptIn)
     }));
   }
 
@@ -72,7 +80,7 @@ export function Ranking({s,setS,go}){
     </section>}
 
     {!availability.available?<div className="rankingLocked">
-      <b>{scope==="district"?"Ranking de distrito/região ainda não ativo":"Ranking de escola ainda não ativo"}</b>
+      <b>{scope==="district"?"Ranking de distrito/região indisponível":"Ranking de escola indisponível"}</b>
       <span>{availability.reason}</span>
       <small>{scope==="school"
         ?`No ranking real, só abriremos uma tabela de escola com pelo menos ${SCHOOL_MIN_PARTICIPANTS} participantes elegíveis, para reduzir risco de identificação.`
@@ -85,15 +93,15 @@ export function Ranking({s,setS,go}){
         return <div key={row.id} className={(row.self?"self ":"")+(promote?"promote ":demote?"demote ":"")}>
           <b className="rankPos">{row.position}</b>
           <span className="rankAvatar">{row.self?"🙂":row.position===1?"🥇":row.position===2?"🥈":row.position===3?"🥉":"●"}</span>
-          <div><strong>{row.nickname}{row.self?" · TU":""}</strong><small>{row.demo?"tester simulado":"o teu perfil"}</small></div>
+          <div><strong>{row.nickname}{row.self?" · TU":""}</strong><small>{row.demo?"participante simulado":"o teu perfil"}</small></div>
           <em>{row.xp} XP</em>
         </div>
       })}</div>
-      {scope!=="league"&&<small className="aroundYouNote">Em rankings muito grandes, a experiência deverá privilegiar a tua posição e quem está imediatamente acima/abaixo — não uma lista infinita.</small>}
+      {scope!=="league"&&<small className="aroundYouNote">Em rankings grandes mostramos a tua posição e os participantes mais próximos.</small>}
     </section>}
 
     <section className="xpRules">
-      <div><small>COMO GANHAS XP COMPETITIVO</small><h3>Mais estudo útil, menos farming.</h3></div>
+      <div><small>COMO GANHAS XP COMPETITIVO</small><h3>Mais estudo útil, menos repetição.</h3></div>
       <div className="xpRuleGrid">
         <div><b>🎯 +50</b><span>Missão diária</span><small>Uma única Missão por dia.</small></div>
         <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
@@ -107,16 +115,17 @@ export function Ranking({s,setS,go}){
     <section className="divisionLadder">
       <small>DIVISÕES</small>
       <div>{DIVISIONS.map(d=><div key={d.id} className={d.id===summary.division.id?"current":""}><span>{d.icon}</span><b>{d.label}</b></div>)}</div>
-      <p>Em produção, cada liga terá um pequeno grupo de alunos com atividade comparável. No final da semana, os primeiros sobem e os últimos podem descer.</p>
+      <p>Cada liga junta um pequeno grupo de alunos. No fim da semana, os primeiros sobem e os últimos podem descer.</p>
     </section>
 
     <section className="rankingProfile">
       <div><small>PERFIL PÚBLICO DO RANKING</small><h3>Nickname, nunca nota.</h3>
         <p>O ano já faz parte do teu perfil académico. Para entrares no ranking da escola, indica o ano, a escola e ativa a participação. O nome da escola serve apenas para agrupar resultados e nunca aparece publicamente.</p></div>
       <label>Nickname<input maxLength="24" value={nickname} onChange={e=>setNickname(e.target.value)} placeholder="Ex.: Sigma17"/></label>
-      <label>Distrito/Região<select value={region} onChange={e=>setRegion(e.target.value)}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
+      <label>Distrito/Região<select value={region} onChange={e=>{const next=e.target.value;setRegion(next);setMunicipality("");setSchoolId("")}}><option value="">Não indicar</option>{PORTUGAL_REGIONS.map(x=><option key={x} value={x}>{x}</option>)}</select></label>
       <label>Ano para o ranking<select value={schoolYear} onChange={e=>setSchoolYear(e.target.value)}><option value="">Selecionar ano</option><option value="10.º">10.º ano</option><option value="11.º">11.º ano</option><option value="12.º">12.º ano</option><option value="Já terminei o secundário">Já terminei o secundário</option></select></label>
-      <label>Escola<input value={school} onChange={e=>setSchool(e.target.value)} placeholder="Nome da escola (opcional)"/></label>
+      <label>Município<select value={municipality} disabled={!region} onChange={e=>{setMunicipality(e.target.value);setSchoolId("")}}><option value="">{region?"Selecionar município":"Escolhe primeiro o distrito/região"}</option>{municipalityOptions.map(name=><option key={name} value={name}>{name}</option>)}</select></label>
+      <label>Escola<select value={schoolId} disabled={!municipality} onChange={e=>setSchoolId(e.target.value)}><option value="">{municipality?"Não indicar":"Escolhe primeiro o município"}</option>{schoolOptions.map(row=><option key={row.id} value={row.id}>{row.name}</option>)}</select></label>
       <label className="rankConsent"><input type="checkbox" checked={districtOptIn} onChange={e=>setDistrictOptIn(e.target.checked)}/><span>Participar no ranking do meu distrito/região.</span></label>
       <label className="rankConsent"><input type="checkbox" checked={schoolOptIn} onChange={e=>setSchoolOptIn(e.target.checked)}/><span>Participar no ranking da minha escola.</span></label>
       <button className="primary" onClick={saveProfile}>Guardar perfil de ranking</button>

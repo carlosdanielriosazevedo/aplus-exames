@@ -5,9 +5,10 @@ const fqa=readFileSync(new URL("../app/components/PhysicsChemistrySubject.js",im
 const fqaEngine=readFileSync(new URL("../app/lib/physicsChemistryEngine.js",import.meta.url),"utf8");
 const portuguese=readFileSync(new URL("../app/components/PortugueseSubject.js",import.meta.url),"utf8");
 const math=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
+const setup=readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 
-assert.match(math,/className="curriculumPicker"/u,"Matemática A mantém o seletor matéria → submatéria.");
+assert.match(setup,/className="curriculumPicker"/u,"Matemática A mantém o seletor matéria → submatéria no componente partilhado de configuração.");
 assert.match(fqa,/className="curriculumPicker fqaCurriculumPicker"/u,"FQ A deve usar o mesmo padrão visual de seletor curricular.");
 assert.match(fqa,/physicsChemistrySubtopicsForDomain/u,"FQ A deve apresentar submatérias reais por domínio.");
 assert.match(fqa,/Selecionar toda esta matéria/u,"FQ A deve permitir selecionar a matéria inteira.");
