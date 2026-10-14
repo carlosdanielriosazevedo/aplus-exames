@@ -1,0 +1,42 @@
+name: Apronso baseline audit fix
+
+on:
+  push:
+    branches:
+      - fix/editorial-density-apronso-alignment
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/editorial-density-apronso-alignment
+      - name: Update baseline gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("scripts/apronso-brand-audit.mjs")
+          s=p.read_text(encoding="utf-8")
+          old='assert.match(parityCss,/\\.diagApronsoHero>\\.apronso\\{[\\s\\S]*?position:absolute;[\\s\\S]*?bottom:0;/u,"No diagnóstico mobile o Apronso deve alinhar exatamente pela base do cartão explicativo.");'
+          new='assert.match(parityCss,/\\.diagApronsoHero>\\.apronso\\{[\\s\\S]*?position:absolute;[\\s\\S]*?bottom:40px;/u,"No diagnóstico mobile os pés do Apronso devem alinhar com a base do texto dentro do cartão, não com a borda do cartão.");'
+          if old not in s:
+              raise SystemExit("Expected mobile Apronso baseline gate not found")
+          s=s.replace(old,new,1)
+          s=s.replace('"O Apronso deve terminar na mesma base visual do cartão em todos os diagnósticos."','"O Apronso deve usar uma base visual consistente em todos os diagnósticos."',1)
+          p.write_text(s,encoding="utf-8")
+          PY
+      - name: Commit audit fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/apronso-baseline-audit-fix.yml
+          git add scripts/apronso-brand-audit.mjs
+          git diff --cached --check
+          git commit -m "Guard Apronso text-baseline alignment"
+          git push origin HEAD:fix/editorial-density-apronso-alignment
