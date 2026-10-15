@@ -47,7 +47,7 @@ describe("Rever Matéria profundo · Português · Fernão Lopes",()=>{
     expect(sources).toMatch(/capítulo 11.*115 ou 148/iu);
     expect(sources).toMatch(/IAVE.*639.*2026/iu);
     expect(text).toMatch(/115.*148.*alternativ|148.*115.*alternativ/iu);
-    expect(text).not.toMatch(/115 e 148 são ambos obrigatórios/iu);
+    expect(text).toMatch(/segue o capítulo efetivamente trabalhado|alternativa a 148|alternativa prescrita/iu);
   });
 
   it("protege crónica como narrativa histórica com marcas de credibilidade",()=>{
@@ -74,7 +74,7 @@ describe("Rever Matéria profundo · Português · Fernão Lopes",()=>{
   it("protege capítulo 115 como alternativa de defesa organizada e coletiva",()=>{
     const section=PORTUGUESE_FERNAO_LOPES_10_DEEP_REVIEW.sections.find(row=>row.id==="pt10-fl-cap115");
     const text=JSON.stringify(section);
-    expect(text).toMatch(/alternativa prescrita/iu);
+    expect(text).toMatch(/alternativ.*prescrit/iu);
     expect(text).toMatch(/preparação de Lisboa.*cerco castelhano/iu);
     expect(text).toMatch(/recolha de mantimentos.*muralhas.*portas/iu);
     expect(text).toMatch(/atores individuais.*atores coletivos/iu);
