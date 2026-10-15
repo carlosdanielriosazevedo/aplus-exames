@@ -1,6 +1,7 @@
 import {readFileSync} from "node:fs";
 import {describe,expect,it} from "vitest";
 import {TAXONOMY} from "../../app/data/content";
+import {mathDeepReviewContentFor} from "../../app/data/mathDeepReviewRegistry";
 
 const component=readFileSync(new URL("../../app/components/MathReviewMatter.js",import.meta.url),"utf8");
 
@@ -11,6 +12,12 @@ describe("Rever Matéria · identificação dos temas opcionais",()=>{
       .map(theme=>theme.id)
       .sort();
     expect(optionalIds).toEqual(["12-ie","12-int","12-mat"]);
+  });
+
+  it("todos os temas atuais resolvem para a experiência profunda",()=>{
+    for(const theme of TAXONOMY){
+      expect(mathDeepReviewContentFor(theme.id),theme.id).not.toBeNull();
+    }
   });
 
   it("mantém os opcionais acessíveis no grid e identifica-os como opcionais",()=>{
