@@ -39,24 +39,32 @@ describe("Rever Matéria profundo · Geometria Analítica do 10.º ano",()=>{
 
   it("protege coordenadas, transformações, distância e ponto médio",()=>{
     const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
-    expect(text).toContain("(x,y)→(x+a,y+b)");
     expect(text).toContain("simetria em Ox");
+    expect(text).toContain("simetria em Oy");
+    expect(text).toContain("meia-volta de centro O");
     expect(text).toContain("d(A,B)=√((x_B−x_A)²+(y_B−y_A)²)");
     expect(text).toContain("M_AB=((x_A+x_B)/2,(y_A+y_B)/2)");
+  });
+
+  it("inclui semiplanos e combinações lógicas de condições",()=>{
+    const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
+    expect(text).toContain("semiplanos ax+by≤c e ax+by≥c");
+    expect(text).toContain("condição A e B ⇒ interseção");
+    expect(text).toContain("condição A ou B ⇒ união");
+    expect(text).toMatch(/metade direita do círculo.*incluindo o diâmetro/iu);
   });
 
   it("distingue fronteira e interior nos lugares geométricos",()=>{
     const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
     expect(text).toContain("circunferência: (x−a)²+(y−b)²=r²");
     expect(text).toContain("círculo: (x−a)²+(y−b)²≤r²");
-    expect(text).toContain("superfície esférica");
-    expect(text).toContain("esfera: (x−a)²+(y−b)²+(z−c)²≤r²");
-    expect(text).toMatch(/Igualdade descreve a fronteira.*≤ inclui a região interior/iu);
+    expect(text).toMatch(/equações reduzidas de circunferências/iu);
   });
 
   it("protege vetores e a ordem ponto final menos ponto inicial",()=>{
     const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
     expect(text).toContain("AB⃗=(x_B−x_A,y_B−y_A)");
+    expect(text).toContain("u⃗−v⃗=(u₁−v₁,u₂−v₂)");
     expect(text).toContain("||u⃗||=√(u₁²+u₂²)");
     expect(text).toMatch(/ponto final menos.*ponto inicial/iu);
     expect(text).toContain("BA⃗=−AB⃗");
@@ -70,6 +78,16 @@ describe("Rever Matéria profundo · Geometria Analítica do 10.º ano",()=>{
     expect(text).toMatch(/não se força uma forma reduzida com declive infinito/iu);
   });
 
+  it("cobre os conjuntos de pontos exigidos no espaço",()=>{
+    const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
+    expect(text).toContain("planos coordenados: x=0, y=0, z=0");
+    expect(text).toContain("planos paralelos aos coordenados: x=k, y=k ou z=k");
+    expect(text).toContain("plano mediador de AB: PA=PB");
+    expect(text).toContain("superfície esférica: (x−a)²+(y−b)²+(z−c)²=r²");
+    expect(text).toContain("esfera: (x−a)²+(y−b)²+(z−c)²≤r²");
+    expect(text).toMatch(/duas coordenadas constantes.*retas paralelas a um eixo/iu);
+  });
+
   it("estende corretamente distância, vetores e retas ao espaço",()=>{
     const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
     expect(text).toContain("(z_B−z_A)²");
@@ -80,7 +98,7 @@ describe("Rever Matéria profundo · Geometria Analítica do 10.º ano",()=>{
   it("não antecipa o bloco de produto escalar do 11.º ano",()=>{
     const text=JSON.stringify(ANALYTIC_GEOMETRY_10_REVIEW);
     expect(text).toMatch(/produto escalar.*11.º ano/iu);
-    expect(text).toMatch(/ângulos entre retas\/planos ficam para o 11.º ano/iu);
+    expect(text).toMatch(/ângulos entre retas ou planos ficam para o 11.º ano/iu);
   });
 
   it("regista a base curricular oficial atual",()=>{
@@ -89,6 +107,7 @@ describe("Rever Matéria profundo · Geometria Analítica do 10.º ano",()=>{
     expect(sources).toMatch(/Aprendizagens Essenciais/u);
     expect(sources).toMatch(/10.º ano/u);
     expect(sources).toMatch(/março de 2026/u);
+    expect(sources).toMatch(/turmas piloto/u);
   });
 
   it("entra no registo central sem acoplar conteúdo futuro",()=>{
