@@ -68,7 +68,8 @@ describe("Rever Matéria profundo · FQ A · Propriedades e Transformações da 
     expect(text).toMatch(/saturada.*ligações simples C–C/iu);
     expect(text).toMatch(/Van der Waals/iu);
     expect(text).toMatch(/ligações de hidrogénio/iu);
-    expect(text).toMatch(/ebulição da água.*não.*ligações covalentes/iu);
+    expect(text).toMatch(/não se.*quebram ligações O–H.*água ferve/iu);
+    expect(text).toMatch(/ebulição da água quebra as ligações covalentes O–H/iu);
   });
 
   it("protege gases, soluções e procedimentos de preparação",()=>{
