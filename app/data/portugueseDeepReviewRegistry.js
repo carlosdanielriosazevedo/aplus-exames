@@ -10,6 +10,7 @@ import {portugueseVieira11DeepReviewFor} from "./portugueseDeepReviewVieira11";
 import {portugueseFreiLuis11DeepReviewFor} from "./portugueseDeepReviewFreiLuis11";
 import {portugueseRomantismoOpcao11DeepReviewFor} from "./portugueseDeepReviewRomantismoOpcao11";
 import {portugueseEca11DeepReviewFor} from "./portugueseDeepReviewEca11";
+import {portugueseAntero11DeepReviewFor} from "./portugueseDeepReviewAntero11";
 
 const REVIEW_PROVIDERS=[
   portugueseTrovadoresca10DeepReviewFor,
@@ -23,7 +24,8 @@ const REVIEW_PROVIDERS=[
   portugueseVieira11DeepReviewFor,
   portugueseFreiLuis11DeepReviewFor,
   portugueseRomantismoOpcao11DeepReviewFor,
-  portugueseEca11DeepReviewFor
+  portugueseEca11DeepReviewFor,
+  portugueseAntero11DeepReviewFor
 ];
 
 export function portugueseDeepReviewContentFor(unitId){
@@ -34,4 +36,4 @@ export function portugueseDeepReviewContentFor(unitId){
   return null;
 }
 
-export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes","pt10-gil-vicente","pt10-camoes-rimas","pt10-lusiadas","pt10-leitura","pt10-escrita","pt10-gramatica","pt11-vieira","pt11-frei-luis","pt11-romantismo-opcao","pt11-eca"];
+export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes","pt10-gil-vicente","pt10-camoes-rimas","pt10-lusiadas","pt10-leitura","pt10-escrita","pt10-gramatica","pt11-vieira","pt11-frei-luis","pt11-romantismo-opcao","pt11-eca","pt11-antero"];
