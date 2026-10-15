@@ -55,7 +55,7 @@ describe("Rever Matéria profundo · FQ A · Mecânica do 11.º",()=>{
 
   it("protege interação, resultante, Newton e gravitação",()=>{
     const text=JSON.stringify(FQA_MECHANICS_11_DEEP_REVIEW);
-    expect(text).toMatch(/quatro interações fundamentais/iu);
+    expect(text).toMatch(/interações fundamentais.*gravítica.*eletromagnética.*nuclear forte.*nuclear fraca/iu);
     expect(text).toContain("F⃗_resultante = ΣF⃗_i");
     expect(text).toContain("ΣF⃗ = m a⃗");
     expect(text).toContain("F_g = G m₁m₂/r²");
