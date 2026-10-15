@@ -4,6 +4,7 @@ import {portugueseGilVicente10DeepReviewFor} from "./portugueseDeepReviewGilVice
 import {portugueseCamoesRimas10DeepReviewFor} from "./portugueseDeepReviewCamoesRimas10";
 import {portugueseLusiadas10DeepReviewFor} from "./portugueseDeepReviewLusiadas10";
 import {portugueseLeitura10DeepReviewFor} from "./portugueseDeepReviewLeitura10";
+import {portugueseEscrita10DeepReviewFor} from "./portugueseDeepReviewEscrita10";
 
 const REVIEW_PROVIDERS=[
   portugueseTrovadoresca10DeepReviewFor,
@@ -11,7 +12,8 @@ const REVIEW_PROVIDERS=[
   portugueseGilVicente10DeepReviewFor,
   portugueseCamoesRimas10DeepReviewFor,
   portugueseLusiadas10DeepReviewFor,
-  portugueseLeitura10DeepReviewFor
+  portugueseLeitura10DeepReviewFor,
+  portugueseEscrita10DeepReviewFor
 ];
 
 export function portugueseDeepReviewContentFor(unitId){
@@ -22,4 +24,4 @@ export function portugueseDeepReviewContentFor(unitId){
   return null;
 }
 
-export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes","pt10-gil-vicente","pt10-camoes-rimas","pt10-lusiadas","pt10-leitura"];
+export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes","pt10-gil-vicente","pt10-camoes-rimas","pt10-lusiadas","pt10-leitura","pt10-escrita"];
