@@ -57,7 +57,7 @@ describe("Rever Matéria profundo · FQ A · Reações em sistemas aquosos do 11
     expect(text).toContain("K_b = [BH⁺][OH⁻]/[B]");
     expect(text).toMatch(/ácidos fortes.*ionização.*praticamente completa/iu);
     expect(text).toMatch(/ácidos e bases fracos.*parcialmente/iu);
-    expect(text).toMatch(/K_w.*depende da temperatura/iu);
+    expect(text).toMatch(/Kw.*depende da temperatura/iu);
   });
 
   it("protege titulação, equivalência, sais e chuva ácida",()=>{
