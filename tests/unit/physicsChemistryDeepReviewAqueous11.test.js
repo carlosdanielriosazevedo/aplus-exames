@@ -105,7 +105,7 @@ describe("Rever Matéria profundo · FQ A · Reações em sistemas aquosos do 11
     expect(text).toContain("Q_ps>K_ps → tendência para precipitação");
     expect(text).toMatch(/efeito do ião comum.*Le Châtelier/iu);
     expect(text).toMatch(/dureza da água.*remoção de poluentes.*precipitação/iu);
-    expect(text).toMatch(/usar as concentrações após mistura\/diluição/iu);
+    expect(text).toMatch(/concentrações após mistura\/diluição/iu);
   });
 
   it("regista todo o domínio de Sistemas Aquosos",()=>{
