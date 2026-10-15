@@ -17,6 +17,7 @@ import {mathSyntheticGeometry10ReviewContentFor} from "./mathDeepReviewSynthetic
 import {mathFunctions10ReviewContentFor} from "./mathDeepReviewFunctions10";
 import {mathAnalyticGeometry10ReviewContentFor} from "./mathDeepReviewAnalyticGeometry10";
 import {mathInferentialStatistics12ReviewContentFor} from "./mathDeepReviewInferentialStatistics12";
+import {mathPrimitivesIntegrals12ReviewContentFor} from "./mathDeepReviewPrimitivesIntegrals12";
 
 const REVIEW_PROVIDERS=[
   complexReviewFor,
@@ -37,7 +38,8 @@ const REVIEW_PROVIDERS=[
   mathSyntheticGeometry10ReviewContentFor,
   mathFunctions10ReviewContentFor,
   mathAnalyticGeometry10ReviewContentFor,
-  mathInferentialStatistics12ReviewContentFor
+  mathInferentialStatistics12ReviewContentFor,
+  mathPrimitivesIntegrals12ReviewContentFor
 ];
 
 export function mathDeepReviewContentFor(themeId){
@@ -48,4 +50,4 @@ export function mathDeepReviewContentFor(themeId){
   return null;
 }
 
-export const MATH_DEEP_REVIEW_THEME_IDS=["12-cplx","12-prob","12-expl","12-fcd","12-fcont","12-rae","11-trig","11-pe","11-cont","11-suc","11-fun","11-cd","10-ele","10-fin","10-est","10-gs","10-fun","10-ga","12-ie"];
+export const MATH_DEEP_REVIEW_THEME_IDS=["12-cplx","12-prob","12-expl","12-fcd","12-fcont","12-rae","11-trig","11-pe","11-cont","11-suc","11-fun","11-cd","10-ele","10-fin","10-est","10-gs","10-fun","10-ga","12-ie","12-int"];
