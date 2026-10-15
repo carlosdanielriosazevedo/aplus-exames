@@ -1,4 +1,5 @@
 import {describe,expect,it} from "vitest";
+import {TAXONOMY} from "../../app/data/content";
 import {MATH_DEEP_REVIEW_THEME_IDS,mathDeepReviewContentFor} from "../../app/data/mathDeepReviewRegistry";
 
 const REQUIRED_OPTIONAL={
@@ -25,9 +26,19 @@ const REQUIRED_OPTIONAL={
   ]
 };
 
+const OPTIONAL_THEME_IDS=Object.keys(REQUIRED_OPTIONAL);
+
 describe("Rever Matéria · cobertura transversal dos opcionais do 12.º ano",()=>{
+  it("corresponde exatamente aos temas opcionais declarados na taxonomia",()=>{
+    const taxonomyOptional=TAXONOMY
+      .filter(theme=>theme.year==="12.º"&&theme.optionalTrack)
+      .map(theme=>theme.id)
+      .sort();
+    expect(OPTIONAL_THEME_IDS.slice().sort()).toEqual(taxonomyOptional);
+  });
+
   it("mantém os três temas opcionais registados",()=>{
-    for(const themeId of Object.keys(REQUIRED_OPTIONAL)){
+    for(const themeId of OPTIONAL_THEME_IDS){
       expect(MATH_DEEP_REVIEW_THEME_IDS,themeId).toContain(themeId);
       expect(mathDeepReviewContentFor(themeId),themeId).not.toBeNull();
     }
@@ -47,7 +58,7 @@ describe("Rever Matéria · cobertura transversal dos opcionais do 12.º ano",()
   });
 
   it("mantém o contrato editorial profundo nos três opcionais",()=>{
-    for(const themeId of Object.keys(REQUIRED_OPTIONAL)){
+    for(const themeId of OPTIONAL_THEME_IDS){
       const study=mathDeepReviewContentFor(themeId);
       expect(study.id,themeId).toBe(themeId);
       expect(study.title,themeId).toBeTruthy();
