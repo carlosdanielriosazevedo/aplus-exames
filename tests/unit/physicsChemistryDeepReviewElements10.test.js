@@ -100,7 +100,9 @@ describe("Rever Matéria profundo · FQ A · Elementos Químicos",()=>{
     expect(physicsChemistryDeepReviewContentFor("q10-elements")).toBe(FQA_ELEMENTS_10_DEEP_REVIEW);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("q10-matter");
     expect(physicsChemistryDeepReviewContentFor("q10-matter")).not.toBeNull();
-    expect(physicsChemistryDeepReviewContentFor("f10-energy")).toBeNull();
+    expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f10-energy");
+    expect(physicsChemistryDeepReviewContentFor("f10-energy")).not.toBeNull();
+    expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).toBeNull();
   });
 
   it("liga a experiência profunda ao ecrã sem remover o fallback",()=>{
