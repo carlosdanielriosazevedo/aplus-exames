@@ -3,18 +3,18 @@ export const MATH_ANALYTIC_GEOMETRY_10_REVIEW_VERSION="2026.10-wave18";
 export const ANALYTIC_GEOMETRY_10_REVIEW={
   id:"10-ga",
   title:"Geometria analítica no plano e no espaço",
-  lead:"A geometria analítica traduz posições, distâncias, lugares geométricos, vetores e retas para coordenadas. Neste capítulo vais ligar figuras e equações sem perder o significado geométrico: primeiro no plano, depois no espaço. O objetivo não é decorar fórmulas isoladas, mas perceber o que cada coordenada, vetor ou equação está a descrever.",
+  lead:"A geometria analítica traduz posições, distâncias, conjuntos de pontos, vetores e retas para coordenadas. Neste capítulo vais ligar figuras, condições e equações sem perder o significado geométrico: primeiro no plano, depois no espaço. O objetivo não é decorar fórmulas isoladas, mas perceber o que cada coordenada, vetor, igualdade ou desigualdade está a descrever.",
   goals:[
     "Usar coordenadas e transformações simples para localizar e relacionar pontos no plano.",
     "Calcular distâncias e pontos médios e interpretar esses resultados geometricamente.",
-    "Reconhecer e representar mediatrizes, planos mediadores, circunferências, círculos, superfícies esféricas e esferas por condições de distância.",
-    "Trabalhar com vetores por coordenadas, norma, soma e multiplicação por escalar.",
+    "Descrever conjuntos de pontos por condições, incluindo semiplanos, mediatrizes, circunferências, círculos, planos mediadores, superfícies esféricas e esferas.",
+    "Trabalhar com vetores por coordenadas, norma, soma, diferença e multiplicação por escalar.",
     "Caracterizar colinearidade e escrever equações de retas no plano e no espaço, distinguindo a forma reduzida das retas verticais.",
-    "Estender coordenadas, distâncias, vetores e retas ao espaço sem antecipar produto escalar e ângulos, que pertencem ao 11.º ano."
+    "Reconhecer no espaço planos coordenados, planos paralelos a estes, retas paralelas aos eixos e planos mediadores, sem antecipar produto escalar e ângulos do 11.º ano."
   ],
   sourceBasis:[
     "DGE/EduQA · Aprendizagens Essenciais de Matemática A · 10.º ano · março de 2026 · Geometria analítica no plano e no espaço",
-    "DGE · recursos e tarefas de Matemática A · 10.º ano · Geometria analítica"
+    "DGE · Coletânea de tarefas das turmas piloto · Geometria Analítica · Matemática A 10.º ano"
   ],
   sections:[
     {
@@ -22,31 +22,31 @@ export const ANALYTIC_GEOMETRY_10_REVIEW={
       kicker:"1 · COORDENADAS E TRANSFORMAÇÕES NO PLANO",
       title:"As coordenadas tornam posições e transformações mensuráveis",
       paragraphs:[
-        "Num referencial cartesiano ortonormado, um ponto P=(x,y) fica determinado pela abcissa x e pela ordenada y. Os sinais das coordenadas ajudam a identificar quadrantes, mas a leitura deve começar sempre pela posição relativamente aos eixos e à origem.",
-        "Transformações simples podem ser descritas diretamente nas coordenadas. Uma translação por um vetor (a,b) soma a a cada abcissa e b a cada ordenada. Reflexões nos eixos ou na origem mudam apenas os sinais adequados, preservando distâncias.",
-        "A fórmula em coordenadas deve ser lida como uma regra geométrica. Se um ponto muda de (x,y) para (x+3,y−2), isso significa três unidades para a direita e duas para baixo; não é apenas uma manipulação algébrica."
+        "Num referencial cartesiano ortogonal e monométrico, um ponto P=(x,y) fica determinado pela abcissa x e pela ordenada y. Os sinais das coordenadas ajudam a identificar quadrantes, mas a leitura deve começar sempre pela posição relativamente aos eixos e à origem.",
+        "Reflexões de eixo horizontal ou vertical e a meia-volta de centro na origem podem ser descritas diretamente nas coordenadas. Estas transformações preservam distâncias e ajudam a ligar uma construção geométrica a uma regra algébrica simples.",
+        "Uma transformação em coordenadas deve ser lida geometricamente. Por exemplo, trocar (x,y) por (−x,y) não é uma mudança arbitrária de sinal: é a reflexão do ponto relativamente ao eixo Oy."
       ],
       formulas:[
-        "translação por (a,b): (x,y)→(x+a,y+b)",
         "simetria em Ox: (x,y)→(x,−y)",
         "simetria em Oy: (x,y)→(−x,y)",
-        "simetria central na origem: (x,y)→(−x,−y)"
+        "meia-volta de centro O: (x,y)→(−x,−y)",
+        "distâncias ao eixo Oy preservam-se na reflexão em Oy"
       ],
       example:{
-        title:"Exemplo resolvido · translação e reflexão",
+        title:"Exemplo resolvido · duas transformações sucessivas",
         steps:[
           "Parte de A=(−2,4).",
-          "Translada A pelo vetor (3,−1): A'=(−2+3,4−1)=(1,3).",
-          "Reflete A' em Oy: A''=(−1,3).",
-          "Confirma no desenho: a reflexão em Oy mantém a ordenada e troca o sinal da abcissa."
+          "Reflete A em Oy: A'=(2,4).",
+          "Aplica depois uma meia-volta de centro na origem: A''=(−2,−4).",
+          "Confirma no desenho que cada passo respeita a transformação indicada."
         ],
-        result:"Depois das duas transformações, o ponto é A''=(−1,3).",
-        note:"Aplicar duas transformações sucessivas exige respeitar a ordem em que são feitas."
+        result:"Depois das duas transformações, A''=(−2,−4).",
+        note:"Em composições de transformações, a ordem dos passos pode alterar o resultado final."
       },
-      remember:"Uma transformação em coordenadas deve conseguir ser lida como um movimento ou uma simetria no plano.",
+      remember:"Mudanças de sinal nas coordenadas correspondem a transformações geométricas concretas.",
       pitfalls:[
         "Trocar os efeitos das simetrias em Ox e Oy.",
-        "Somar uma translação ao ponto original quando já houve uma transformação intermédia."
+        "Aplicar a segunda transformação ao ponto original em vez de ao ponto já transformado."
       ]
     },
     {
@@ -56,7 +56,7 @@ export const ANALYTIC_GEOMETRY_10_REVIEW={
       paragraphs:[
         "A distância entre dois pontos no plano resulta do teorema de Pitágoras aplicado às diferenças das coordenadas. A ordem de A e B não altera a distância porque as diferenças ficam elevadas ao quadrado.",
         "O ponto médio de um segmento obtém-se fazendo a média das abcissas e a média das ordenadas. Esta regra exprime exatamente a ideia de ficar a meio do caminho em cada direção coordenada.",
-        "Distância e ponto médio aparecem juntos em problemas de localização, mediatrizes, circunferências e vetores. Antes de substituir números, identifica que grandeza geométrica está a ser pedida."
+        "Distância e ponto médio aparecem em problemas de localização, mediatrizes, circunferências e vetores. Antes de substituir números, identifica a grandeza geométrica pedida e o referencial em que estás a trabalhar."
       ],
       formulas:[
         "d(A,B)=√((x_B−x_A)²+(y_B−y_A)²)",
@@ -83,35 +83,35 @@ export const ANALYTIC_GEOMETRY_10_REVIEW={
     },
     {
       id:"10-ga-lugares-geometricos",
-      kicker:"3 · LUGARES GEOMÉTRICOS",
-      title:"Uma condição de distância pode descrever uma figura inteira",
+      kicker:"3 · CONJUNTOS DE PONTOS E CONDIÇÕES",
+      title:"Igualdades, desigualdades e lógica descrevem regiões geométricas",
       paragraphs:[
-        "Um lugar geométrico é o conjunto de pontos que satisfazem uma condição. No plano, a mediatriz de AB reúne os pontos P tais que PA=PB; no espaço, o plano mediador desempenha o papel análogo para um segmento.",
-        "Uma circunferência é o conjunto dos pontos a distância fixa r de um centro C=(a,b), enquanto o círculo inclui também os pontos interiores. Em coordenadas, a equação reduzida torna centro e raio imediatamente visíveis.",
-        "No espaço, a superfície esférica reúne os pontos a distância exatamente r de C=(a,b,c); a esfera inclui o interior. Nesta fase usa-se a forma reduzida destas equações, sem transformar o tema numa antecipação de geometria algébrica mais avançada."
+        "Um conjunto de pontos pode ser definido por uma condição. No plano, a mediatriz de AB reúne os pontos P tais que PA=PB; uma reta separa ainda o plano em dois semiplanos, que podem ser descritos por desigualdades quando a reta fronteira é dada por uma equação.",
+        "Uma circunferência é o conjunto dos pontos a distância fixa r de um centro C=(a,b), enquanto o círculo inclui também os pontos interiores. Nas Aprendizagens Essenciais deste nível usam-se equações reduzidas de circunferências.",
+        "Conjunções e disjunções permitem combinar condições simples: ‘e’ corresponde à interseção de regiões; ‘ou’ corresponde à união. Esta leitura lógica ajuda a interpretar semiplanos, círculos e outros conjuntos sem tratar cada caso como uma fórmula isolada."
       ],
       formulas:[
         "mediatriz de AB: PA=PB",
+        "reta ax+by=c ⇒ semiplanos ax+by≤c e ax+by≥c",
         "circunferência: (x−a)²+(y−b)²=r²",
         "círculo: (x−a)²+(y−b)²≤r²",
-        "superfície esférica: (x−a)²+(y−b)²+(z−c)²=r²",
-        "esfera: (x−a)²+(y−b)²+(z−c)²≤r²"
+        "condição A e B ⇒ interseção; condição A ou B ⇒ união"
       ],
       example:{
-        title:"Exemplo resolvido · ler uma circunferência pela equação",
+        title:"Exemplo resolvido · círculo cortado por um semiplano",
         steps:[
-          "Considera (x−2)²+(y+1)²=25.",
-          "Compara com (x−a)²+(y−b)²=r².",
-          "Da primeira parcela, a=2; de y+1=y−(−1), resulta b=−1.",
-          "Como r²=25 e r>0, r=5."
+          "Considera (x−2)²+y²≤9 e, simultaneamente, x≥2.",
+          "A primeira condição descreve o círculo de centro (2,0) e raio 3.",
+          "A segunda condição descreve o semiplano à direita da reta vertical x=2, incluindo a fronteira.",
+          "Como as condições estão ligadas por ‘e’, a solução é a metade direita do círculo, incluindo o diâmetro x=2."
         ],
-        result:"Centro C=(2,−1) e raio 5.",
-        note:"O sinal visível dentro do parêntese é o oposto da coordenada do centro."
+        result:"A região pedida é a interseção do círculo com o semiplano x≥2.",
+        note:"Trocar ‘e’ por ‘ou’ mudaria completamente o conjunto representado."
       },
-      remember:"Igualdade descreve a fronteira; desigualdade ≤ inclui a região interior.",
+      remember:"Equações tendem a descrever fronteiras; desigualdades selecionam lados ou interiores; ‘e/ou’ combina regiões.",
       pitfalls:[
-        "Confundir circunferência com círculo ou superfície esférica com esfera.",
-        "Ler y+1 como centro de ordenada +1 em vez de −1."
+        "Confundir circunferência com círculo.",
+        "Ler uma conjunção como união ou uma disjunção como interseção."
       ]
     },
     {
@@ -120,12 +120,13 @@ export const ANALYTIC_GEOMETRY_10_REVIEW={
       title:"Um vetor regista deslocamento, não uma posição absoluta",
       paragraphs:[
         "O vetor AB descreve o deslocamento de A para B. As suas coordenadas obtêm-se fazendo coordenadas do ponto final menos coordenadas do ponto inicial. Vetores com as mesmas coordenadas representam o mesmo deslocamento, mesmo que sejam desenhados em posições diferentes.",
-        "Somar vetores combina deslocamentos; multiplicar por um escalar altera comprimento e, se o escalar for negativo, também o sentido. A norma mede o comprimento do vetor e no plano resulta novamente de Pitágoras.",
-        "Vetores permitem traduzir movimentos, paralelismo e retas para linguagem algébrica. O produto escalar e o cálculo de ângulos entre vetores são deliberadamente deixados para o bloco próprio do 11.º ano."
+        "Somar e subtrair vetores combina deslocamentos; multiplicar por um escalar altera o comprimento e, se o escalar for negativo, também o sentido. As propriedades algébricas destas operações permitem simplificar construções e problemas.",
+        "A norma mede o comprimento do vetor e obtém-se por Pitágoras a partir das coordenadas. O produto escalar e o cálculo de ângulos entre vetores são deliberadamente deixados para o bloco próprio do 11.º ano."
       ],
       formulas:[
         "AB⃗=(x_B−x_A,y_B−y_A)",
         "u⃗+v⃗=(u₁+v₁,u₂+v₂)",
+        "u⃗−v⃗=(u₁−v₁,u₂−v₂)",
         "k·u⃗=(ku₁,ku₂)",
         "||u⃗||=√(u₁²+u₂²)"
       ],
@@ -151,7 +152,7 @@ export const ANALYTIC_GEOMETRY_10_REVIEW={
       kicker:"5 · COLINEARIDADE E RETAS",
       title:"Uma reta fica determinada por um ponto e uma direção",
       paragraphs:[
-        "Dois vetores não nulos são colineares quando um é múltiplo escalar do outro. Assim, três pontos A, B e C estão alinhados quando os vetores AB e AC têm a mesma direção, isto é, são linearmente dependentes.",
+        "Dois vetores não nulos são colineares quando um é múltiplo escalar do outro. Assim, em situações não degeneradas, três pontos A, B e C estão alinhados quando os vetores AB e AC são colineares.",
         "Uma reta pode ser descrita vetorialmente por X=A+t·v, onde A é um ponto da reta, v é um vetor diretor não nulo e t percorre os números reais. No plano, esta forma conduz facilmente a equações paramétricas.",
         "Quando a componente horizontal do vetor diretor é diferente de zero, o declive é m=v_y/v_x e pode escrever-se y=mx+b. Se v_x=0, a reta é vertical e tem equação x=x₀; não se força uma forma reduzida com declive infinito."
       ],
@@ -175,40 +176,45 @@ export const ANALYTIC_GEOMETRY_10_REVIEW={
       },
       remember:"Ponto + direção dá uma reta; a forma y=mx+b não cobre retas verticais.",
       pitfalls:[
-        "Afirmar que qualquer par de vetores é colinear escolhendo um quociente diferente para cada coordenada.",
+        "Afirmar colinearidade usando quocientes incompatíveis entre coordenadas.",
         "Tentar atribuir um declive real a uma reta vertical."
       ]
     },
     {
       id:"10-ga-espaco",
-      kicker:"6 · COORDENADAS E VETORES NO ESPAÇO",
-      title:"As mesmas ideias passam de duas para três coordenadas",
+      kicker:"6 · GEOMETRIA ANALÍTICA NO ESPAÇO",
+      title:"Três coordenadas descrevem pontos, planos especiais, esferas, vetores e retas",
       paragraphs:[
-        "No espaço, um ponto P=(x,y,z) precisa de três coordenadas. Distância, ponto médio e vetores generalizam-se acrescentando a terceira componente; a lógica permanece a mesma do plano.",
-        "Uma reta no espaço continua a ser determinada por um ponto e um vetor diretor não nulo: (x,y,z)=A+t·v. Aqui não existe uma única forma reduzida análoga a y=mx+b que descreva todas as retas espaciais.",
-        "A geometria analítica do 10.º ano deve consolidar localização, distância, vetores, colinearidade e equações vetoriais. Produto escalar, perpendicularidade por coordenadas e ângulos entre retas/planos ficam para o 11.º ano, evitando misturar níveis curriculares."
+        "No espaço, um ponto P=(x,y,z) precisa de três coordenadas. Distância e ponto médio generalizam-se acrescentando a terceira componente. Os planos coordenados têm equações z=0, y=0 e x=0; planos paralelos a eles mantêm uma coordenada constante.",
+        "Também se estudam retas paralelas a um dos eixos e planos mediadores. Um plano mediador de AB reúne os pontos P do espaço tais que PA=PB. A superfície esférica usa igualdade a r² e a esfera usa desigualdade ≤r²; nas AE consideram-se formas reduzidas.",
+        "Vetores e retas passam naturalmente para três coordenadas. Uma reta no espaço é determinada por um ponto e um vetor diretor não nulo. Produto escalar, perpendicularidade por coordenadas e ângulos entre retas ou planos ficam para o 11.º ano."
       ],
       formulas:[
         "d(A,B)=√((x_B−x_A)²+(y_B−y_A)²+(z_B−z_A)²)",
         "M_AB=((x_A+x_B)/2,(y_A+y_B)/2,(z_A+z_B)/2)",
+        "planos coordenados: x=0, y=0, z=0",
+        "planos paralelos aos coordenados: x=k, y=k ou z=k",
+        "plano mediador de AB: PA=PB",
+        "superfície esférica: (x−a)²+(y−b)²+(z−c)²=r²",
+        "esfera: (x−a)²+(y−b)²+(z−c)²≤r²",
         "AB⃗=(x_B−x_A,y_B−y_A,z_B−z_A)",
         "reta no espaço: (x,y,z)=(x₀,y₀,z₀)+t(a,b,c), (a,b,c)≠(0,0,0)"
       ],
       example:{
-        title:"Exemplo resolvido · reta no espaço",
+        title:"Exemplo resolvido · plano mediador no espaço",
         steps:[
-          "Considera A=(1,0,−2) e B=(3,4,1).",
-          "AB⃗=(2,4,3).",
-          "Uma equação vetorial da reta AB é (x,y,z)=(1,0,−2)+t(2,4,3).",
-          "Para t=1 obtém-se (3,4,1), confirmando que B pertence à reta."
+          "Considera A=(0,0,0) e B=(2,0,0). Procura os pontos P=(x,y,z) equidistantes de A e B.",
+          "PA²=x²+y²+z² e PB²=(x−2)²+y²+z².",
+          "Iguala as distâncias ao quadrado: x²+y²+z²=(x−2)²+y²+z².",
+          "Simplificando, obtém-se x=1, um plano paralelo ao plano yOz."
         ],
-        result:"r: (x,y,z)=(1,0,−2)+t(2,4,3), t∈ℝ.",
-        note:"Qualquer múltiplo não nulo de (2,4,3) também pode servir de vetor diretor da mesma reta."
+        result:"O plano mediador de AB é x=1.",
+        note:"A condição PA=PB transforma uma propriedade geométrica numa equação de um conjunto de pontos."
       },
-      remember:"No espaço, acrescenta-se uma coordenada; o raciocínio de ponto, deslocamento e direção mantém-se.",
+      remember:"No espaço, uma coordenada constante descreve planos paralelos aos planos coordenados; duas coordenadas constantes podem descrever retas paralelas a um eixo.",
       pitfalls:[
         "Esquecer a componente z ao calcular distância ou vetor no espaço.",
-        "Antecipar produto escalar ou ângulos entre retas/planos como se já pertencessem a este bloco do 10.º ano."
+        "Confundir uma superfície esférica (=) com uma esfera (≤), ou antecipar produto escalar e ângulos do 11.º ano."
       ]
     }
   ]
