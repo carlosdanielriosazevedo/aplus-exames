@@ -81,7 +81,7 @@ describe("Rever Matéria profundo · FQ A · Energia e sua conservação",()=>{
     expect(text).toMatch(/rendimento é inferior a 100%/iu);
   });
 
-  it("regista fontes oficiais e conclui o 10.º ano profundo sem antecipar o 11.º",()=>{
+  it("regista fontes oficiais, conclui o 10.º e acompanha a entrada do 11.º",()=>{
     const sources=FQA_ENERGY_10_DEEP_REVIEW.sourceBasis.join(" ");
     expect(sources).toMatch(/DGE/u);
     expect(sources).toMatch(/Aprendizagens Essenciais/u);
@@ -90,6 +90,8 @@ describe("Rever Matéria profundo · FQ A · Energia e sua conservação",()=>{
     expect(sources).toMatch(/IAVE/u);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f10-energy");
     expect(physicsChemistryDeepReviewContentFor("f10-energy")).toBe(FQA_ENERGY_10_DEEP_REVIEW);
-    expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).toBeNull();
+    expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f11-mechanics");
+    expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).not.toBeNull();
+    expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBeNull();
   });
 });
