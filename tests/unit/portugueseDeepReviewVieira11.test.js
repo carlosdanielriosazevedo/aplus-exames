@@ -89,7 +89,7 @@ describe("Rever Matéria profundo · Português · Padre António Vieira · 11.�
     expect(text).toMatch(/Capítulo II/iu);
     expect(text).toMatch(/Capítulo III/iu);
     expect(text).toMatch(/peixe de Tobias/iu);
-    expect(text).toMatch(/rémora/iu);
+    expect(text).toMatch(/r[êé]mora/iu);
     expect(text).toMatch(/torpedo/iu);
     expect(text).toMatch(/quatro-olhos/iu);
     expect(text).toMatch(/analogia/iu);
