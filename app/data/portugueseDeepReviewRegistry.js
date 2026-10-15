@@ -1,7 +1,9 @@
 import {portugueseTrovadoresca10DeepReviewFor} from "./portugueseDeepReviewTrovadoresca10";
+import {portugueseFernaoLopes10DeepReviewFor} from "./portugueseDeepReviewFernaoLopes10";
 
 const REVIEW_PROVIDERS=[
-  portugueseTrovadoresca10DeepReviewFor
+  portugueseTrovadoresca10DeepReviewFor,
+  portugueseFernaoLopes10DeepReviewFor
 ];
 
 export function portugueseDeepReviewContentFor(unitId){
@@ -12,4 +14,4 @@ export function portugueseDeepReviewContentFor(unitId){
   return null;
 }
 
-export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca"];
+export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes"];
