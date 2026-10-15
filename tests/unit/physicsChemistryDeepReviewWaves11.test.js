@@ -64,11 +64,13 @@ describe("Rever Matéria profundo · FQ A · Ondas e eletromagnetismo do 11.º",
     expect(text).toContain("para n₁>n₂: sinθ_c = n₂/n₁"); expect(text).toContain("rede de difração: d sinθ = mλ");
     expect(text).toMatch(/índice de refração.*comprimento de onda.*laser.*rede de difração/iu); expect(text).toMatch(/frequência mantém-se/iu);
   });
-  it("regista Ondas e mantém Equilíbrio Químico como próximo fallback",()=>{
+  it("regista Ondas e acompanha a progressão para Equilíbrio Químico",()=>{
     const sources=FQA_WAVES_11_DEEP_REVIEW.sourceBasis.join(" ");
     expect(sources).toMatch(/DGE/u); expect(sources).toMatch(/11.º ano/u); expect(sources).toMatch(/março de 2026/u); expect(sources).toMatch(/IAVE/u);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f11-waves");
     expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBe(FQA_WAVES_11_DEEP_REVIEW);
-    expect(physicsChemistryDeepReviewContentFor("q11-equilibrium")).toBeNull();
+    expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("q11-equilibrium");
+    expect(physicsChemistryDeepReviewContentFor("q11-equilibrium")).not.toBeNull();
+    expect(physicsChemistryDeepReviewContentFor("q11-aqueous")).toBeNull();
   });
 });
