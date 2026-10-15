@@ -2,9 +2,55 @@
 import {useMemo,useState} from "react";
 import {PORTUGUESE_TAXONOMY,PORTUGUESE_TAXONOMY_VERSION} from "../data/portugueseTaxonomy";
 import {portugueseReviewEntriesForYear} from "../data/portugueseReviewContent";
+import {portugueseDeepReviewContentFor} from "../data/portugueseDeepReviewRegistry";
+import styles from "./MathReviewMatter.module.css";
 
 const DOMAIN_LABELS={leitura:"Leitura","educacao-literaria":"Educação Literária",escrita:"Escrita",gramatica:"Gramática"};
 const SCHOOL_YEARS=["10.º","11.º","12.º"];
+
+function WorkedPortugueseExample({example}){
+  if(!example)return null;
+  return <div className={styles.reviewExample}>
+    <b>{example.title}</b>
+    {example.prompt&&<p><b>Enunciado:</b> {example.prompt}</p>}
+    <ol>{example.steps.map(step=><li key={step}>{step}</li>)}</ol>
+    <strong>Resposta-modelo: {example.modelAnswer}</strong>
+    {example.note&&<p>{example.note}</p>}
+  </div>;
+}
+
+function DeepPortugueseReview({study}){
+  return <>
+    <div className={`reviewChapter ${styles.deepReviewIntro}`}>
+      <small>VISÃO GLOBAL</small>
+      <h3>O que vais aprender nesta revisão</h3>
+      <p>{study.lead}</p>
+      <ul className={styles.deepReviewGoals}>{study.goals.map(goal=><li key={goal}>{goal}</li>)}</ul>
+    </div>
+    <nav className={styles.deepReviewMap} aria-label="Conteúdos desta revisão">
+      <b>Conteúdos</b>
+      <div>{study.sections.map(section=><a key={section.id} href={`#${section.id}`}>{section.title}</a>)}</div>
+    </nav>
+    {study.sections.map(section=><section className={styles.reviewLesson} id={section.id} key={section.id}>
+      <small>{section.kicker}</small>
+      <h3>{section.title}</h3>
+      {section.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}
+      {section.signals?.length>0&&<div className={styles.reviewFormulaList} aria-label={`Pistas de leitura de ${section.title}`}>
+        <b>Pistas de leitura</b>
+        <ul>{section.signals.map(signal=><li key={signal}>{signal}</li>)}</ul>
+      </div>}
+      <WorkedPortugueseExample example={section.example}/>
+      {section.remember&&<p className={styles.reviewRemember}><b>Fica com esta ideia:</b> {section.remember}</p>}
+      {section.pitfalls?.length>0&&<div className={styles.reviewPitfalls}><b>Erros a evitar</b><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
+    </section>)}
+    <div className={`reviewChapter ${styles.reviewFinish}`}>
+      <small>FECHO DA REVISÃO</small>
+      <h3>Do conhecimento para uma resposta de exame</h3>
+      <p>Depois desta leitura, deves conseguir interpretar um texto novo do mesmo género sem depender de uma resposta decorada: formula a ideia, escolhe a evidência textual relevante e explica a ligação entre ambas.</p>
+      <p>Quando quiseres testar se consegues aplicar esta leitura sem apoio, regressa ao menu e escolhe “Praticar”.</p>
+    </div>
+  </>;
+}
 
 export default function PortugueseLearnPanel({schoolYear="12.º"}){
   const years=useMemo(()=>PORTUGUESE_TAXONOMY.filter(row=>SCHOOL_YEARS.includes(row.year)),[]);
@@ -15,6 +61,7 @@ export default function PortugueseLearnPanel({schoolYear="12.º"}){
   const entries=useMemo(()=>portugueseReviewEntriesForYear(year),[year]);
   const unit=entries.find(row=>row.id===unitId)||null;
   const guide=unit?.guide||null;
+  const deepStudy=unit?portugueseDeepReviewContentFor(unit.id):null;
 
   return <section id="portugueseLearn" className="progressDetails" aria-label="Rever matéria de Português">
     <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Português para estudar com calma.</h1></div>
@@ -24,6 +71,12 @@ export default function PortugueseLearnPanel({schoolYear="12.º"}){
     {yearRow&&<>
       <div className="notice"><b>{yearRow.period}</b><span>O mapa inclui também leitura, escrita e gramática do {yearRow.year}.</span></div>
       {!unit?<div className="themeGrid">{entries.map(row=><button type="button" key={row.id} onClick={()=>setUnitId(row.id)}><b>{row.title}</b><small>{row.subtitle||`${DOMAIN_LABELS[row.domain]} · competência`}</small></button>)}</div>
+      :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
+        <button type="button" className="back" onClick={()=>setUnitId(null)}>← Todas as unidades do {yearRow.year}</button>
+        <p className="eyebrow">PORTUGUÊS · {yearRow.year} · {DOMAIN_LABELS[unit.domain]}</p><h2>{unit.title}</h2>
+        {unit.subtitle&&<p className="muted">{unit.subtitle}</p>}
+        <DeepPortugueseReview study={deepStudy}/>
+      </article>
       :<article className="portugueseProgressCard">
         <button type="button" className="back" onClick={()=>setUnitId(null)}>← Todas as unidades do {yearRow.year}</button>
         <p className="eyebrow">PORTUGUÊS · {yearRow.year} · {DOMAIN_LABELS[unit.domain]}</p><h2>{unit.title}</h2>
