@@ -24,7 +24,7 @@ export const PORTUGUESE_GRAMATICA_11_DEEP_REVIEW={
       kicker:"1 · CONSTITUINTES E FUNÇÕES",
       title:"Grupo sintático não é função sintática: identifica primeiro a unidade, depois o papel",
       paragraphs:[
-        "Uma frase organiza-se em constituintes. Entre os grupos mais relevantes estão o grupo nominal, verbal, adjetival, preposicional e adverbial. O grupo descreve a estrutura interna do constituinte; a função sintática descreve o papel que esse constituinte desempenha na frase. Um grupo preposicional, por exemplo, pode realizar funções diferentes consoante a construção.",
+        "Uma frase organiza-se em constituintes. Entre os grupos mais relevantes estão o grupo nominal, o grupo verbal, o grupo adjetival, o grupo preposicional e o grupo adverbial. O grupo descreve a estrutura interna do constituinte; a função sintática descreve o papel que esse constituinte desempenha na frase. Um grupo preposicional, por exemplo, pode realizar funções diferentes consoante a construção.",
         "A identificação deve apoiar-se na frase completa. Mobilidade, substituição, interrogativas de diagnóstico, concordância e seleção pelo verbo podem ajudar, mas nenhum teste deve ser aplicado como receita isolada. O mesmo segmento superficial pode comportar-se de modo diferente em contextos diferentes.",
         "Em construções mais densas, começa por localizar o predicado e o núcleo verbal, identifica os argumentos exigidos e só depois os modificadores. Esta ordem reduz confusões entre complemento e modificador e impede que uma preposição específica seja tratada como prova automática de uma função."
       ],
