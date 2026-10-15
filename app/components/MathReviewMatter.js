@@ -61,6 +61,7 @@ export default function MathReviewMatter({s,go}){
   const subtopics=selected?curriculumSubtopicsForTheme(selected.id):[];
   const study=selected?mathReviewContentFor(selected.id):null;
   const deepStudy=selected?mathDeepReviewContentFor(selected.id):null;
+  const selectedEyebrow=selected?`MATEMÁTICA A · ${year}${selected.optionalTrack?" · TEMA OPCIONAL":""}`:"";
 
   return <Shell className="wideStudentShell reviewStudyPage">
     <StudentTop s={s} go={go}/>
@@ -70,15 +71,15 @@ export default function MathReviewMatter({s,go}){
       <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe uma matéria para aprender ou rever a teoria, acompanhar exemplos resolvidos e consolidar os conceitos antes de praticares.</p>
       <div className="notice"><b>Modo de estudo</b><span>Lê ao teu ritmo e acompanha os exemplos. Quando quiseres testar o que aprendeste, regressa ao menu e escolhe “Praticar”.</span></div>
       <div className="chips yearSelector" aria-label="Escolher ano de Matemática A">{SCHOOL_YEARS.map(row=><button type="button" key={row} className={year===row?"sel":""} aria-pressed={year===row} onClick={()=>{setYear(row);setThemeId(null)}}>{row}</button>)}</div>
-      {!selected?<div className="themeGrid">{themes.map(row=><button type="button" key={row.id} onClick={()=>setThemeId(row.id)}><b>{row.short}</b><small>{row.name}</small></button>)}</div>
+      {!selected?<div className="themeGrid">{themes.map(row=><button type="button" key={row.id} onClick={()=>setThemeId(row.id)}><b>{row.short}</b><small>{row.optionalTrack?"TEMA OPCIONAL · ":""}{row.name}</small></button>)}</div>
       :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
-        <p className="eyebrow">MATEMÁTICA A · {year}</p><h2>{selected.name}</h2>
+        <p className="eyebrow">{selectedEyebrow}</p><h2>{selected.name}</h2>
         <DeepMathReview study={deepStudy}/>
       </article>
       :<article className="portugueseProgressCard">
         <button type="button" className="back" onClick={()=>setThemeId(null)}>← Todas as matérias do {year}</button>
-        <p className="eyebrow">MATEMÁTICA A · {year}</p><h2>{selected.name}</h2>
+        <p className="eyebrow">{selectedEyebrow}</p><h2>{selected.name}</h2>
         <div className="reviewChapter"><small>1 · VISÃO GLOBAL</small><h3>O que esta matéria explica</h3><p>{study?.summary||"Ao rever esta matéria, concentra-te primeiro nos conceitos e relações fundamentais."}</p></div>
         <div className="reviewChapter"><small>2 · IDEIAS FUNDAMENTAIS</small><h3>O que tens mesmo de compreender</h3><ol>{(study?.keyIdeas||selected.focus).map(point=><li key={point}>{point}</li>)}</ol></div>
         {study?.formulas?.length>0&&<div className="reviewChapter formulaChapter"><small>3 · FERRAMENTAS</small><h3>Relações e fórmulas a recordar</h3><ul>{study.formulas.map(point=><li key={point}>{point}</li>)}</ul><p className="reviewCallout">Não basta decorar: confirma sempre as condições em que cada relação pode ser usada.</p></div>}
