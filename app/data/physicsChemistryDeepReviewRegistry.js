@@ -4,6 +4,7 @@ import {physicsChemistryEnergy10DeepReviewFor} from "./physicsChemistryDeepRevie
 import {physicsChemistryMechanics11DeepReviewFor} from "./physicsChemistryDeepReviewMechanics11";
 import {physicsChemistryWaves11DeepReviewFor} from "./physicsChemistryDeepReviewWaves11";
 import {physicsChemistryEquilibrium11DeepReviewFor} from "./physicsChemistryDeepReviewEquilibrium11";
+import {physicsChemistryAqueous11DeepReviewFor} from "./physicsChemistryDeepReviewAqueous11";
 
 const REVIEW_PROVIDERS=[
   physicsChemistryElements10DeepReviewFor,
@@ -11,7 +12,8 @@ const REVIEW_PROVIDERS=[
   physicsChemistryEnergy10DeepReviewFor,
   physicsChemistryMechanics11DeepReviewFor,
   physicsChemistryWaves11DeepReviewFor,
-  physicsChemistryEquilibrium11DeepReviewFor
+  physicsChemistryEquilibrium11DeepReviewFor,
+  physicsChemistryAqueous11DeepReviewFor
 ];
 
 export function physicsChemistryDeepReviewContentFor(domainId){
@@ -22,4 +24,4 @@ export function physicsChemistryDeepReviewContentFor(domainId){
   return null;
 }
 
-export const PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS=["q10-elements","q10-matter","f10-energy","f11-mechanics","f11-waves","q11-equilibrium"];
+export const PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS=["q10-elements","q10-matter","f10-energy","f11-mechanics","f11-waves","q11-equilibrium","q11-aqueous"];
