@@ -93,7 +93,7 @@ describe("Rever Matéria profundo · FQ A · Propriedades e Transformações da 
     expect(text).toContain("O· + O₂ → O₃");
   });
 
-  it("regista fontes oficiais e preserva os próximos domínios no fallback",()=>{
+  it("regista fontes oficiais e acompanha a progressão para Energia",()=>{
     const sources=FQA_MATTER_10_DEEP_REVIEW.sourceBasis.join(" ");
     expect(sources).toMatch(/DGE/u);
     expect(sources).toMatch(/Aprendizagens Essenciais/u);
@@ -102,6 +102,8 @@ describe("Rever Matéria profundo · FQ A · Propriedades e Transformações da 
     expect(sources).toMatch(/IAVE/u);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("q10-matter");
     expect(physicsChemistryDeepReviewContentFor("q10-matter")).toBe(FQA_MATTER_10_DEEP_REVIEW);
-    expect(physicsChemistryDeepReviewContentFor("f10-energy")).toBeNull();
+    expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f10-energy");
+    expect(physicsChemistryDeepReviewContentFor("f10-energy")).not.toBeNull();
+    expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).toBeNull();
   });
 });
