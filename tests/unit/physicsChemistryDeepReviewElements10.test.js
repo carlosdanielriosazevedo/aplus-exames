@@ -89,7 +89,7 @@ describe("Rever Matéria profundo · FQ A · Elementos Químicos",()=>{
     expect(text).toMatch(/tendências globais.*não regras sem exceções/iu);
   });
 
-  it("regista fontes oficiais e acompanha a progressão das waves",()=>{
+  it("regista fontes oficiais e acompanha os domínios já convertidos",()=>{
     const sources=FQA_ELEMENTS_10_DEEP_REVIEW.sourceBasis.join(" ");
     expect(sources).toMatch(/DGE/u);
     expect(sources).toMatch(/Aprendizagens Essenciais/u);
@@ -104,7 +104,6 @@ describe("Rever Matéria profundo · FQ A · Elementos Químicos",()=>{
     expect(physicsChemistryDeepReviewContentFor("f10-energy")).not.toBeNull();
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f11-mechanics");
     expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).not.toBeNull();
-    expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBeNull();
   });
 
   it("liga a experiência profunda ao ecrã sem remover o fallback",()=>{

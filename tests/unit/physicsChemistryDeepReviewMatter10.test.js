@@ -106,6 +106,5 @@ describe("Rever Matéria profundo · FQ A · Propriedades e Transformações da 
     expect(physicsChemistryDeepReviewContentFor("f10-energy")).not.toBeNull();
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f11-mechanics");
     expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).not.toBeNull();
-    expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBeNull();
   });
 });

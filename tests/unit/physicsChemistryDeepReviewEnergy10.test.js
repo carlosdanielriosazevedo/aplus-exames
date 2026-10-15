@@ -92,6 +92,5 @@ describe("Rever Matéria profundo · FQ A · Energia e sua conservação",()=>{
     expect(physicsChemistryDeepReviewContentFor("f10-energy")).toBe(FQA_ENERGY_10_DEEP_REVIEW);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f11-mechanics");
     expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).not.toBeNull();
-    expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBeNull();
   });
 });

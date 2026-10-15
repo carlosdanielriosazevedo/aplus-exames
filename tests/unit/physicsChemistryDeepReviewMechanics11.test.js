@@ -91,7 +91,7 @@ describe("Rever Matéria profundo · FQ A · Mecânica do 11.º",()=>{
     expect(text).toMatch(/corpos de massas diferentes.*aceleração gravítica não depende da massa/iu);
   });
 
-  it("regista Mecânica e mantém Ondas como próximo fallback",()=>{
+  it("regista Mecânica sem impor o estado de futuras waves",()=>{
     const sources=FQA_MECHANICS_11_DEEP_REVIEW.sourceBasis.join(" ");
     expect(sources).toMatch(/DGE/u);
     expect(sources).toMatch(/11.º ano/u);
@@ -99,6 +99,5 @@ describe("Rever Matéria profundo · FQ A · Mecânica do 11.º",()=>{
     expect(sources).toMatch(/IAVE/u);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("f11-mechanics");
     expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).toBe(FQA_MECHANICS_11_DEEP_REVIEW);
-    expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBeNull();
   });
 });
