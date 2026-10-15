@@ -95,7 +95,7 @@ describe("Rever Matéria profundo · FQ A · Equilíbrio Químico do 11.º",()=>
     expect(text).toMatch(/recircular reagentes não convertidos/iu);
   });
 
-  it("regista Equilíbrio Químico e mantém Sistemas Aquosos como próximo fallback",()=>{
+  it("regista Equilíbrio Químico",()=>{
     const sources=FQA_EQUILIBRIUM_11_DEEP_REVIEW.sourceBasis.join(" ");
     expect(sources).toMatch(/DGE/u);
     expect(sources).toMatch(/11.º ano/u);
@@ -103,6 +103,5 @@ describe("Rever Matéria profundo · FQ A · Equilíbrio Químico do 11.º",()=>
     expect(sources).toMatch(/IAVE/u);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("q11-equilibrium");
     expect(physicsChemistryDeepReviewContentFor("q11-equilibrium")).toBe(FQA_EQUILIBRIUM_11_DEEP_REVIEW);
-    expect(physicsChemistryDeepReviewContentFor("q11-aqueous")).toBeNull();
   });
 });

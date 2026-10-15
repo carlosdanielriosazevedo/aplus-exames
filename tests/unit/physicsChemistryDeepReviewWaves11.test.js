@@ -71,6 +71,5 @@ describe("Rever Matéria profundo · FQ A · Ondas e eletromagnetismo do 11.º",
     expect(physicsChemistryDeepReviewContentFor("f11-waves")).toBe(FQA_WAVES_11_DEEP_REVIEW);
     expect(PHYSICS_CHEMISTRY_DEEP_REVIEW_DOMAIN_IDS).toContain("q11-equilibrium");
     expect(physicsChemistryDeepReviewContentFor("q11-equilibrium")).not.toBeNull();
-    expect(physicsChemistryDeepReviewContentFor("q11-aqueous")).toBeNull();
   });
 });
