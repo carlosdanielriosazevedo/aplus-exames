@@ -254,9 +254,10 @@ export function recordSubjectSession(state,{subjectId,kind,label,domain=null,ite
   const alreadyCompletedMission=kind==="mission"&&missionCompletedToday(state,completedAt);
   const activityKind=alreadyCompletedMission?"training":kind;
   const xpEarned=subjectSessionXp(activityKind,results);
+  const answered=results.filter(result=>result&&result.status!=="unanswered").length;
   completed={...completed,xp:(Number(completed.xp)||0)+xpEarned};
   completed=recordStudyActivity(completed,{kind:activityKind,xpEarned,sessionId:completionId,activityId:completionId||undefined,at:completedAt});
-  completed=recordCompetitiveActivity(completed,{kind:activityKind,total:items.length,focusKey:`${subjectId}:${domain||label||"general"}`,sessionId:completionId,activityId:completionId||undefined,at:completedAt});
+  completed=recordCompetitiveActivity(completed,{kind:activityKind,subjectId,total:items.length,answered,focusKey:`${subjectId}:${domain||label||"general"}`,sessionId:completionId,activityId:completionId||undefined,at:completedAt});
   return completed;
 }
 
