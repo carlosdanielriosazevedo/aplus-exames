@@ -130,6 +130,12 @@ function isFullExamKind(kind){
   return kind==="full_exam"||kind==="practice_exam";
 }
 
+function eventSubjectId(event={}){
+  if(event.subjectId)return event.subjectId;
+  if(["diagnostic","mission","training","mini_exam"].includes(event.kind))return "math-a";
+  return null;
+}
+
 export function competitiveAward(state,event={}){
   const kind=event.kind||"study";
   const competition=normalizeCompetition(state);
@@ -174,7 +180,7 @@ export function competitiveAward(state,event={}){
   if(isFullExamKind(kind)){
     const total=Math.max(0,Number(event.total)||0);
     const answered=Math.min(total,Math.max(0,Number(event.answered)||0));
-    const subjectId=event.subjectId||null;
+    const subjectId=eventSubjectId(event);
     const already=(week.activities||[]).some(a=>
       isFullExamKind(a.kind)&&a.day===day&&(a.subjectId||null)===subjectId&&a.rankedXp>0
     );
@@ -228,7 +234,7 @@ export function recordCompetitiveActivity(state,event={}){
   const activity={
     key,
     kind:event.kind||"study",
-    subjectId:event.subjectId||null,
+    subjectId:eventSubjectId(event),
     at,
     day,
     focusKey:event.focusKey||null,
