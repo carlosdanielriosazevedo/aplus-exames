@@ -26,9 +26,21 @@ describe("ranking por disciplina",()=>{
   });
 
   it("mantém o bónus do primeiro Diagnóstico apenas no ranking global",()=>{
-    expect(source).toMatch(/1.º Diagnóstico/u);
+    expect(source).toMatch(/!subjectId&&<div><b>🧭 \+30<\/b><span>1.º Diagnóstico<\/span>/u);
     expect(source).toMatch(/Bónus inicial global/u);
-    expect(source).toMatch(/conta uma vez em “Todas” e não entra nos filtros por disciplina/u);
+    expect(source).toMatch(/pertence apenas ao ranking “Todas”/u);
+  });
+
+  it("adapta as regras de XP ao filtro ativo",()=>{
+    expect(source).toMatch(/XP COMPETITIVO · \$\{subjectLabel\.toUpperCase\(\)\}/u);
+    expect(source).toMatch(/O que conta em \$\{subjectLabel\}/u);
+    expect(source).toMatch(/O XP fica associado à disciplina dessa Missão/u);
+  });
+
+  it("não apresenta uma atividade de zero XP como último ganho",()=>{
+    expect(source).toMatch(/const latestGain=latest\?\.rankedXp>0\?latest:null/u);
+    expect(source).toMatch(/latestGain&&<div className="lastRankXp"/u);
+    expect(source).not.toMatch(/latest&&<div className="lastRankXp"/u);
   });
 
   it("mantém ligas pequenas e promoção dependente do total",()=>{
