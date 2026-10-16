@@ -4,10 +4,11 @@ import {describe,expect,it} from "vitest";
 const source=readFileSync(new URL("../../app/components/RankingScreen.js",import.meta.url),"utf8");
 
 describe("ranking por disciplina",()=>{
-  it("expõe Todas e as disciplinas disponíveis como filtro superior",()=>{
+  it("expõe Todas e as disciplinas disponíveis pela ordem pedagógica definida",()=>{
     expect(source).toMatch(/Filtrar ranking por disciplina/u);
     expect(source).toMatch(/>Todas<\/button>/u);
-    expect(source).toMatch(/AVAILABLE_SUBJECT_IDS\.map/u);
+    expect(source).toMatch(/const RANKING_SUBJECT_IDS=\["math-a","portuguese","physics-chemistry-a"\]/u);
+    expect(source).toMatch(/RANKING_SUBJECT_IDS\.map/u);
   });
 
   it("passa a disciplina ao leaderboard sem alterar a projeção global",()=>{
