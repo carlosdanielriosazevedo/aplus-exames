@@ -54,10 +54,26 @@ const REVIEW_PROVIDERS=[
   portugueseGramatica12DeepReviewFor
 ];
 
+function normalizeEditorialPortuguese(value){
+  if(typeof value==="string"){
+    return value
+      .replace(/Não assumes\b/gu,"Não assumas")
+      .replace(/não assumes\b/gu,"não assumas");
+  }
+  if(Array.isArray(value)){
+    for(let index=0;index<value.length;index+=1)value[index]=normalizeEditorialPortuguese(value[index]);
+    return value;
+  }
+  if(value&&typeof value==="object"){
+    for(const key of Object.keys(value))value[key]=normalizeEditorialPortuguese(value[key]);
+  }
+  return value;
+}
+
 export function portugueseDeepReviewContentFor(unitId){
   for(const provider of REVIEW_PROVIDERS){
     const content=provider(unitId);
-    if(content)return content;
+    if(content)return normalizeEditorialPortuguese(content);
   }
   return null;
 }

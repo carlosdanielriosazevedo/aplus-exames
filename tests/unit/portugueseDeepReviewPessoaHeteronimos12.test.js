@@ -99,7 +99,7 @@ describe("Rever Matéria · Português · Pessoa heterónimos · 12.º ano",()=>
     const section=study.sections.find(item=>item.id==="pt12-heteronimos-reis-forma");
     const text=JSON.stringify(section);
     expect(text).toMatch(/serenidade/iu);
-    expect(text).toMatch(/não assumes automaticamente|não prova|ideal ético/iu);
+    expect(text).toMatch(/não assumas automaticamente|não prova|ideal ético/iu);
     expect(text).toMatch(/autodisciplina|domínio|control/iu);
   });
 
