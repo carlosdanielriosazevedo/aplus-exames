@@ -10,7 +10,10 @@ for(const [label,source] of [["Matemática A",math],["Português",portuguese],["
   assert.match(source,/Aqui não há perguntas, pontuação nem avaliação/u,label+": Rever matéria deve continuar passivo.");
   assert.match(source,/Modo de estudo/u,label+": deve explicar a diferença entre rever e praticar.");
   assert.match(source,/“Praticar”/u,label+": deve indicar como regressar ao treino ativo.");
-  assert.match(source,/yearSelector/u,label+": deve permitir mudar de ano dentro de Rever matéria.");
+  assert.match(source,/ReviewMatterNavigator/u,label+": deve usar o navegador partilhado de Rever matéria.");
+  assert.match(source,/years=\{SCHOOL_YEARS\}/u,label+": deve expor os anos curriculares ao navegador partilhado.");
+  assert.match(source,/selectedYear=\{year\}/u,label+": deve manter o ano selecionado explícito.");
+  assert.match(source,/onYearChange=/u,label+": deve permitir mudar de ano dentro de Rever matéria.");
 }
 assert.match(fqa,/const \[domainId,setDomainId\]=useState/u,"FQ A deve permitir abrir um domínio específico.");
 assert.match(fqa,/1 · VISÃO GLOBAL/u,"FQ A deve ter uma visão global por domínio.");
