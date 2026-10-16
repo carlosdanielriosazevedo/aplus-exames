@@ -5,7 +5,15 @@ const mainPage=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8
 const welcome=readFileSync(new URL("../app/components/Welcome.js",import.meta.url),"utf8");
 const chrome=readFileSync(new URL("../app/components/chrome.js",import.meta.url),"utf8");
 const setupScreens=readFileSync(new URL("../app/components/SetupScreens.js",import.meta.url),"utf8");
-const secondaryScreens=readFileSync(new URL("../app/components/SecondaryScreensLegacy.js",import.meta.url),"utf8")+"\n"+readFileSync(new URL("../app/components/RankingScreen.js",import.meta.url),"utf8");
+const secondaryFacade=readFileSync(new URL("../app/components/SecondaryScreens.js",import.meta.url),"utf8");
+const secondaryLegacyRaw=readFileSync(new URL("../app/components/SecondaryScreensLegacy.js",import.meta.url),"utf8");
+const legacyRankingStart=secondaryLegacyRaw.indexOf("export function Ranking(");
+const legacyRankingEnd=secondaryLegacyRaw.indexOf("\nexport function IdentityLab(",legacyRankingStart);
+assert.ok(legacyRankingStart>=0&&legacyRankingEnd>legacyRankingStart,"O Ranking legado deve continuar identificável enquanto a extração está em transição.");
+const secondaryLegacy=secondaryLegacyRaw.slice(0,legacyRankingStart)+secondaryLegacyRaw.slice(legacyRankingEnd+1);
+const rankingScreen=readFileSync(new URL("../app/components/RankingScreen.js",import.meta.url),"utf8");
+assert.match(secondaryFacade,/export \{default as Ranking\} from "\.\/RankingScreen"/u,"A fachada deve exportar explicitamente o novo RankingScreen.");
+const secondaryScreens=secondaryLegacy+"\n"+rankingScreen;
 const page=[welcome,mainPage,setupScreens,secondaryScreens,chrome].join("\n");
 const css=readFileSync(new URL("../app/globals.css",import.meta.url),"utf8");
 const agents=readFileSync(new URL("../AGENTS.md",import.meta.url),"utf8");
