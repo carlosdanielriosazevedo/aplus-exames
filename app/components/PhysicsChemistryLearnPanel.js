@@ -3,56 +3,30 @@ import {useState} from "react";
 import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation";
 import {physicsChemistryPracticalActivitiesForDomain} from "../data/physicsChemistryPracticalActivities";
 import {physicsChemistryDeepReviewContentFor} from "../data/physicsChemistryDeepReviewRegistry";
+import DeepReviewStudy from "./DeepReviewStudy";
 import styles from "./MathReviewMatter.module.css";
 
-function WorkedScienceExample({example}){
-  if(!example)return null;
-  return <div className={styles.reviewExample}>
-    <b>{example.title}</b>
-    <ol>{example.steps.map(step=><li key={step}>{step}</li>)}</ol>
-    <strong>{example.result}</strong>
-    {example.note&&<p>{example.note}</p>}
-  </div>;
-}
-
-function DeepScienceReview({study,practical}){
-  return <>
-    <div className={`reviewChapter ${styles.deepReviewIntro}`}>
-      <small>VISÃO GLOBAL</small>
-      <h3>O que vais aprender nesta revisão</h3>
-      <p>{study.lead}</p>
-      <ul className={styles.deepReviewGoals}>{study.goals.map(goal=><li key={goal}>{goal}</li>)}</ul>
+function PracticalReview({practical}){
+  return <section className={`${styles.reviewLesson} ${styles.practicalLesson}`}>
+    <header className={styles.lessonHeader}>
+      <span className={styles.lessonNumber}>TP</span>
+      <div><small>TRABALHO PRÁTICO</small><h3>Da experiência à conclusão científica</h3></div>
+    </header>
+    <div className={styles.lessonBody}>
+      <div className={styles.explanationBlock}>
+        <div className={styles.blockHeading}><span>01</span><div><small>ORGANIZAR</small><b>O que tens de controlar numa atividade experimental</b></div></div>
+        <p>Antes de olhar para cálculos ou gráficos, identifica o objetivo, as variáveis, o procedimento, os dados recolhidos e a forma como esses dados podem sustentar uma conclusão.</p>
+      </div>
+      {practical.length?<div className={styles.reviewToolbox}>
+        <div className={styles.blockHeading}><span>02</span><div><small>ATIVIDADES ASSOCIADAS</small><b>Aprendizagens Essenciais</b></div></div>
+        <ul>{practical.map(activity=><li key={activity.id}><b>{activity.label}</b> — {activity.focus.join(" · ")}</li>)}</ul>
+      </div>:<div className={styles.reviewToolbox}><p>Este domínio não tem uma atividade prática específica registada neste mapa.</p></div>}
+      <div className={styles.lessonSummaryGrid}>
+        <div className={styles.reviewRemember}><small>03 · IDEIA-CHAVE</small><b>Fica com isto</b><p>Uma conclusão experimental deve nascer dos dados e das incertezas observadas, não apenas do resultado que esperavas obter.</p></div>
+        <div className={styles.reviewPitfalls}><small>04 · ATENÇÃO</small><b>Não te esqueças</b><ul><li>Distingue variáveis independentes, dependentes e controladas.</li><li>Apresenta unidades e tratamento de dados de forma coerente.</li><li>Discute incerteza, limitações e evidência antes da conclusão.</li></ul></div>
+      </div>
     </div>
-    <nav className={styles.deepReviewMap} aria-label="Conteúdos desta revisão">
-      <b>Conteúdos</b>
-      <div>{study.sections.map(section=><a key={section.id} href={`#${section.id}`}>{section.title}</a>)}</div>
-    </nav>
-    {study.sections.map(section=><section className={styles.reviewLesson} id={section.id} key={section.id}>
-      <small>{section.kicker}</small>
-      <h3>{section.title}</h3>
-      {section.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}
-      {section.formulas?.length>0&&<div className={styles.reviewFormulaList} aria-label={`Relações essenciais de ${section.title}`}>
-        <b>Relações essenciais</b>
-        {section.formulas.map(formula=><code key={formula}>{formula}</code>)}
-      </div>}
-      <WorkedScienceExample example={section.example}/>
-      {section.remember&&<p className={styles.reviewRemember}><b>Fica com esta ideia:</b> {section.remember}</p>}
-      {section.pitfalls?.length>0&&<div className={styles.reviewPitfalls}><b>Erros a evitar</b><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
-    </section>)}
-    <div className="reviewChapter">
-      <small>TRABALHO PRÁTICO</small>
-      <h3>Atividades associadas nas Aprendizagens Essenciais</h3>
-      <p><b>Trabalho prático associado nas AE:</b> planeia, mede, trata dados e justifica conclusões com base na evidência experimental.</p>
-      {practical.length?<ul>{practical.map(activity=><li key={activity.id}><b>{activity.label}</b> — {activity.focus.join(" · ")}</li>)}</ul>:<p>Este domínio não tem uma atividade prática específica registada neste mapa.</p>}
-      <p className="reviewCallout">No trabalho experimental, distingue sempre objetivo, variáveis, procedimento, tratamento de dados, incerteza e conclusão.</p>
-    </div>
-    <div className={`reviewChapter ${styles.reviewFinish}`}>
-      <small>FECHO DA REVISÃO</small>
-      <h3>O que deves conseguir fazer agora</h3>
-      <p>Depois desta leitura, deves conseguir explicar os conceitos do domínio, escolher relações adequadas, justificar cada passo e interpretar o resultado com unidades e significado científico.</p>
-      <p>Quando quiseres testar se consegues aplicar estes conceitos sem apoio, regressa ao menu e escolhe “Praticar”.</p>
-    </div>
-  </>;
+  </section>;
 }
 
 export default function PhysicsChemistryLearnPanel({schoolYear="11.º"}){
@@ -65,16 +39,27 @@ export default function PhysicsChemistryLearnPanel({schoolYear="11.º"}){
   const deepStudy=selected?physicsChemistryDeepReviewContentFor(selected.id):null;
 
   return <section className="progressDetails" aria-label="Rever matéria de Física e Química A">
-    <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Física e Química A para estudar com calma.</h1></div>
-    <p className="muted">Aqui não há perguntas, pontuação nem avaliação. Escolhe um domínio para rever conceitos, relações, trabalho experimental e um método de estudo antes de voltares a praticar.</p>
-    <div className="notice"><b>Modo de estudo</b><span>Rever matéria serve apenas para ler e consolidar conteúdos. Quando quiseres testar-te, regressa ao menu e escolhe “Praticar”.</span></div>
+    <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Física e Química A, organizada para compreender antes de calcular.</h1></div>
+    <p className="muted">Escolhe um domínio e segue um percurso coerente: conceitos primeiro, relações e exemplos depois, trabalho experimental quando aplicável e, no fim, uma consolidação do que tens mesmo de saber fazer.</p>
+    <div className="notice"><b>Modo de estudo</b><span>Sem perguntas nem pontuação. Usa este espaço para organizar conceitos e métodos; quando quiseres testar a aplicação sem apoio, volta a “Treinar” e escolhe “Praticar”.</span></div>
     <div className="chips yearSelector" aria-label="Escolher ano de Física e Química A">{["10.º","11.º"].map(value=><button type="button" key={value} className={year===value?"sel":""} aria-pressed={year===value} onClick={()=>{setYear(value);setDomainId(null)}}>{value}</button>)}</div>
     {!selected?<div className="themeGrid">{rows.map(row=><button type="button" key={row.id} onClick={()=>setDomainId(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+row.title}</small></button>)}</div>
     :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
       <button type="button" className="back" onClick={()=>setDomainId(null)}>← Todos os domínios do {year}</button>
       <p className="eyebrow">FÍSICA E QUÍMICA A · {selected.year} · {selected.area.toUpperCase()}</p>
       <h2>{selected.title}</h2>
-      <DeepScienceReview study={deepStudy} practical={practical}/>
+      <DeepReviewStudy
+        study={deepStudy}
+        kind="science"
+        afterSections={<PracticalReview practical={practical}/>} 
+        finishText="No fim da revisão, deves conseguir ligar conceito, modelo, cálculo e interpretação. Um resultado só fica completo quando faz sentido científico, tem unidades corretas e é justificado pelo modelo usado."
+        finishItems={[
+          "Explicar os conceitos do domínio sem depender de palavras-chave soltas.",
+          "Escolher relações apenas depois de identificar grandezas e condições.",
+          "Interpretar gráficos, unidades, sinais e ordens de grandeza.",
+          "Justificar conclusões experimentais com base na evidência recolhida."
+        ]}
+      />
     </article>
     :<article className="portugueseProgressCard">
       <button type="button" className="back" onClick={()=>setDomainId(null)}>← Todos os domínios do {year}</button>
