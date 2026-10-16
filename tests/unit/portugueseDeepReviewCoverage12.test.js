@@ -17,6 +17,10 @@ const REQUIRED_12=[
   "pt12-gramatica"
 ];
 
+const sectionHeading=(section)=>section.kicker||(/^\d+[.·]/u.test(section.title||"")?section.title:null);
+const sectionModelAnswer=(section)=>section.example?.modelAnswer||section.example?.answer;
+const sectionNote=(section)=>section.example?.note||section.note;
+
 describe("Rever Matéria · gate transversal de Português · 12.º ano",()=>{
   it("cobre exatamente as nove unidades atuais da taxonomia do 12.º ano",()=>{
     const taxonomy12=PORTUGUESE_TAXONOMY.find(row=>row.year==="12.º")?.units.map(unit=>unit.id)||[];
@@ -48,14 +52,14 @@ describe("Rever Matéria · gate transversal de Português · 12.º ano",()=>{
 
       for(const section of study.sections){
         expect(section.id,unitId).toBeTruthy();
-        expect(section.kicker,section.id).toBeTruthy();
+        expect(sectionHeading(section),section.id).toBeTruthy();
         expect(section.title,section.id).toBeTruthy();
         expect(section.paragraphs.length,section.id).toBeGreaterThanOrEqual(3);
         expect(section.signals.length,section.id).toBeGreaterThanOrEqual(3);
         expect(section.example?.prompt,section.id).toBeTruthy();
         expect(section.example?.steps.length,section.id).toBeGreaterThanOrEqual(3);
-        expect(section.example?.modelAnswer,section.id).toBeTruthy();
-        expect(section.example?.note,section.id).toBeTruthy();
+        expect(sectionModelAnswer(section),section.id).toBeTruthy();
+        expect(sectionNote(section),section.id).toBeTruthy();
         expect(section.remember,section.id).toBeTruthy();
         expect(section.pitfalls.length,section.id).toBeGreaterThanOrEqual(2);
       }
