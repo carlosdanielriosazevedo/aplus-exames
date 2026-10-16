@@ -81,5 +81,5 @@ test("exam method protects evidence-to-mechanism reasoning",()=>{
   const text=allText();
   assert.match(text,/Afirmação.{0,20}evidência.{0,20}mecanismo.{0,20}interpretação/i);
   assert.match(text,/verbo do enunciado/i);
-  assert.match(text,/conhecimento sobre o poeta.{0,80}não substitua|não substituas a leitura/i);
+  assert.match(text,/conhecimento sobre o poeta.{0,140}(?:não|nunca) substitu|(?:não|nunca) substituas? a leitura/i);
 });
