@@ -131,8 +131,9 @@ function isFullExamKind(kind){
 }
 
 function eventSubjectId(event={}){
+  if(event.kind==="diagnostic")return null;
   if(event.subjectId)return event.subjectId;
-  if(["diagnostic","mission","training","mini_exam"].includes(event.kind))return "math-a";
+  if(["mission","training","mini_exam"].includes(event.kind))return "math-a";
   return null;
 }
 
@@ -206,7 +207,7 @@ export function competitiveAward(state,event={}){
       raw:30,
       multiplier:already?0:1,
       awarded:already?0:30,
-      reason:already?"O diagnóstico só dá XP competitivo uma vez.":"Primeiro diagnóstico concluído."
+      reason:already?"O diagnóstico só dá XP competitivo uma vez.":"Primeiro diagnóstico concluído · bónus global."
     };
   }
 
