@@ -106,11 +106,12 @@ describe("Rever Matéria profundo · FQ A · Elementos Químicos",()=>{
     expect(physicsChemistryDeepReviewContentFor("f11-mechanics")).not.toBeNull();
   });
 
-  it("liga a experiência profunda ao ecrã sem remover o fallback",()=>{
+  it("liga a experiência profunda partilhada ao ecrã sem remover o fallback",()=>{
     expect(component).toContain("physicsChemistryDeepReviewContentFor");
-    expect(component).toContain("DeepScienceReview");
+    expect(component).toContain("DeepReviewStudy");
+    expect(component).toContain('kind="science"');
+    expect(component).toContain("PracticalReview");
     expect(component).toContain(":deepStudy?");
-    expect(component).toContain('className="portugueseProgressCard"');
     expect(component).toContain("styles.deepReviewArticle");
   });
 });
