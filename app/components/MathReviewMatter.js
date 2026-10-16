@@ -26,7 +26,7 @@ export default function MathReviewMatter({s,go}){
     <section className="progressDetails" aria-label="Rever matéria de Matemática A">
       <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Matemática A, organizada para perceber antes de praticar.</h1></div>
       <p className="muted">Escolhe uma matéria e segue um percurso com princípio, desenvolvimento e consolidação: primeiro compreendes as ideias, depois acompanhas exemplos e, no fim, fixas o essencial e os erros a evitar.</p>
-      <div className="notice"><b>Modo de estudo</b><span>Sem perguntas nem pontuação. Lê ao teu ritmo; quando quiseres confirmar que consegues aplicar a matéria sem apoio, volta a “Treinar” e escolhe “Praticar”.</span></div>
+      <div className="notice"><b>Modo de estudo</b><span>Aqui não há perguntas, pontuação nem avaliação. Lê ao teu ritmo; quando quiseres confirmar que consegues aplicar a matéria sem apoio, volta a “Treinar” e escolhe “Praticar”.</span></div>
       <div className="chips yearSelector" aria-label="Escolher ano de Matemática A">{SCHOOL_YEARS.map(row=><button type="button" key={row} className={year===row?"sel":""} aria-pressed={year===row} onClick={()=>{setYear(row);setThemeId(null)}}>{row}</button>)}</div>
       {!selected?<div className="themeGrid">{themes.map(row=><button type="button" key={row.id} onClick={()=>setThemeId(row.id)}><b>{row.short}</b><small>{row.optionalTrack?"TEMA OPCIONAL · ":""}{row.name}</small></button>)}</div>
       :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
