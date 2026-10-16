@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
-const ranking=readFileSync(new URL("../app/components/SecondaryScreens.js",import.meta.url),"utf8");
+const ranking=readFileSync(new URL("../app/components/RankingScreen.js",import.meta.url),"utf8");
 const main=readFileSync(new URL("../app/clientApp.js",import.meta.url),"utf8");
 const account=readFileSync(new URL("../app/components/AccountCloud.js",import.meta.url),"utf8");
 const publicCopy=ranking+"\n"+main+"\n"+account;

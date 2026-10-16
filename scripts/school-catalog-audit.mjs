@@ -3,7 +3,7 @@ import {readFileSync} from "node:fs";
 import {SCHOOL_CATALOG,schoolsForRegion} from "../app/data/secondarySchools.js";
 import {PORTUGAL_REGIONS} from "../app/lib/competition.js";
 
-const ranking=readFileSync(new URL("../app/components/SecondaryScreens.js",import.meta.url),"utf8");
+const ranking=readFileSync(new URL("../app/components/RankingScreen.js",import.meta.url),"utf8");
 const account=readFileSync(new URL("../app/components/AccountCloud.js",import.meta.url),"utf8");
 const competition=readFileSync(new URL("../app/lib/competition.js",import.meta.url),"utf8");
 assert.equal(SCHOOL_CATALOG.length,917,"o snapshot nacional deve manter a contagem validada");
