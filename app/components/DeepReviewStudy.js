@@ -16,15 +16,16 @@ function SectionToolbox({section,kind}){
   </div>;
 }
 
-function GuidedExample({example,kind}){
+function GuidedExample({example,kind,noteFallback}){
   if(!example)return null;
   const answer=example.modelAnswer||example.result||example.answer;
+  const note=example.note||noteFallback;
   return <div className={styles.reviewExample}>
     <div className={styles.blockHeading}><span>03</span><div><small>EXEMPLO ORIENTADO</small><b>{example.title||"Aplicação passo a passo"}</b></div></div>
     {example.prompt&&<p className={styles.examplePrompt}><b>Enunciado</b>{example.prompt}</p>}
     <ol className={styles.exampleSteps}>{(example.steps||[]).map(step=><li key={step}>{step}</li>)}</ol>
     {answer&&<div className={styles.exampleAnswer}><small>{kind==="portuguese"?"RESPOSTA-MODELO":"RESULTADO E INTERPRETAÇÃO"}</small><strong>{answer}</strong></div>}
-    {example.note&&<p className={styles.exampleNote}>{example.note}</p>}
+    {note&&<p className={styles.exampleNote}>{note}</p>}
   </div>;
 }
 
@@ -41,7 +42,7 @@ function ReviewSection({section,index,kind}){
         {section.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}
       </div>
       <SectionToolbox section={section} kind={kind}/>
-      <GuidedExample example={section.example} kind={kind}/>
+      <GuidedExample example={section.example} kind={kind} noteFallback={section.note}/>
       <div className={styles.lessonSummaryGrid}>
         {section.remember&&<div className={styles.reviewRemember}><small>04 · IDEIA-CHAVE</small><b>Fica com isto</b><p>{section.remember}</p></div>}
         {section.pitfalls?.length>0&&<div className={styles.reviewPitfalls}><small>05 · ATENÇÃO</small><b>Erros a evitar</b><ul>{section.pitfalls.map(point=><li key={point}>{point}</li>)}</ul></div>}
