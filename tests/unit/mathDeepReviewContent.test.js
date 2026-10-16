@@ -46,16 +46,17 @@ describe("Rever Matéria profundo · Matemática A",()=>{
     expect(sources).toMatch(/635/u);
   });
 
-  it("renderiza a experiência profunda sem remover o fallback das restantes matérias",()=>{
+  it("renderiza a experiência profunda partilhada sem remover o fallback das restantes matérias",()=>{
     expect(component).toContain("mathDeepReviewContentFor");
-    expect(component).toContain("DeepMathReview");
+    expect(component).toContain("DeepReviewStudy");
+    expect(component).toContain('kind="math"');
     expect(component).toContain(":deepStudy?");
     expect(component).toContain("study?.summary");
   });
 
-  it("mantém o novo capítulo em fluxo de leitura de uma coluna e sem mexer no shell partilhado",()=>{
+  it("mantém uma largura de leitura controlada e sem mexer no shell partilhado",()=>{
     expect(css).toMatch(/\.deepReviewArticle\{[\s\S]*display:block!important/u);
-    expect(css).toMatch(/max-width:900px!important/u);
+    expect(css).toMatch(/max-width:980px!important/u);
     expect(component).toContain('className="wideStudentShell reviewStudyPage"');
   });
 });
