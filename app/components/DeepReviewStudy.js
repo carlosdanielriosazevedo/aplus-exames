@@ -10,7 +10,7 @@ function SectionToolbox({section,kind}){
     </div>;
   }
   if(!section.formulas?.length)return null;
-  return <div className={`${styles.reviewToolbox} ${styles.formulaToolbox}`} aria-label={`Relações essenciais de ${section.title}`}>
+  return <div className={styles.reviewToolbox} aria-label={`Relações essenciais de ${section.title}`}>
     <div className={styles.blockHeading}><span>02</span><div><small>FERRAMENTAS</small><b>Relações essenciais</b></div></div>
     <div className={styles.formulaStack}>{section.formulas.map(formula=><code key={formula}>{formula}</code>)}</div>
   </div>;
