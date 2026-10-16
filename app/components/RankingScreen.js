@@ -10,6 +10,7 @@ import {
 import {schoolsForRegion} from "../data/secondarySchools";
 
 const DEFAULT_SUBJECT_ID="math-a";
+const RANKING_SUBJECT_IDS=["math-a","portuguese","physics-chemistry-a"].filter(id=>AVAILABLE_SUBJECT_IDS.includes(id));
 function subjectById(id){return SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===id)||SECONDARY_EXAM_SUBJECTS.find(subject=>subject.id===DEFAULT_SUBJECT_ID);}
 
 export default function Ranking({s,setS,go}){
@@ -76,7 +77,7 @@ export default function Ranking({s,setS,go}){
       <small className="eyebrow">DISCIPLINA</small>
       <div className="rankingTabs">
         <button className={subjectFilter==="all"?"sel":""} onClick={()=>setSubjectFilter("all")}>Todas</button>
-        {AVAILABLE_SUBJECT_IDS.map(id=>{
+        {RANKING_SUBJECT_IDS.map(id=>{
           const subject=subjectById(id);
           return <button key={id} className={subjectFilter===id?"sel":""} onClick={()=>setSubjectFilter(id)}>{subject.shortName||subject.name}</button>;
         })}
