@@ -19,7 +19,7 @@ describe("Portuguese 12th-year writing deep review",()=>{
       expect(section.signals.length,section.id).toBeGreaterThanOrEqual(3);
       expect(section.example.steps.length,section.id).toBeGreaterThanOrEqual(4);
       expect(section.example.modelAnswer.length,section.id).toBeGreaterThan(40);
-      expect(section.note.length,section.id).toBeGreaterThan(15);
+      expect(section.example.note.length,section.id).toBeGreaterThan(15);
       expect(section.remember.length,section.id).toBeGreaterThan(20);
       expect(section.pitfalls.length,section.id).toBeGreaterThanOrEqual(3);
     }
