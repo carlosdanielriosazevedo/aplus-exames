@@ -99,11 +99,12 @@ describe("Rever Matéria profundo · Português · Poesia trovadoresca",()=>{
     expect(text).toMatch(/citação.*explicar/iu);
   });
 
-  it("regista apenas a unidade convertida e preserva o fallback do painel",()=>{
+  it("regista a unidade convertida e preserva o fallback do painel no fluxo partilhado",()=>{
     expect(PORTUGUESE_DEEP_REVIEW_UNIT_IDS).toContain("pt10-trovadoresca");
     expect(portugueseDeepReviewContentFor("pt10-trovadoresca")).toBe(PORTUGUESE_TROVADORESCA_10_DEEP_REVIEW);
     expect(component).toContain("portugueseDeepReviewContentFor");
-    expect(component).toContain("DeepPortugueseReview");
+    expect(component).toContain("DeepReviewStudy");
+    expect(component).toContain('kind="portuguese"');
     expect(component).toContain(":deepStudy?");
     expect(component).toContain("unit.summary");
     expect(component).toContain("guide?.studySteps");
