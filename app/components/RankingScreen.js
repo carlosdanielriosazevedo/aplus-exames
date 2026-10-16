@@ -40,6 +40,7 @@ export default function Ranking({s,setS,go}){
   const rows=scope==="league"?allRows:leaderboardAroundUser(allRows,3);
   const self=allRows.find(x=>x.self);
   const latest=latestCompetitiveActivity(s,Date.now(),subjectId);
+  const latestGain=latest?.rankedXp>0?latest:null;
   const divisionMode=scope==="league"&&!subjectId;
 
   const scopeLabel={
@@ -122,15 +123,16 @@ export default function Ranking({s,setS,go}){
     </section>}
 
     <section className="xpRules">
-      <div><small>COMO GANHAS XP COMPETITIVO</small><h3>Mais estudo útil, menos repetição.</h3></div>
+      <div><small>{subjectId?`XP COMPETITIVO · ${subjectLabel.toUpperCase()}`:"COMO GANHAS XP COMPETITIVO"}</small><h3>{subjectId?`O que conta em ${subjectLabel}.`:"Mais estudo útil, menos repetição."}</h3></div>
       <div className="xpRuleGrid">
-        <div><b>🎯 +50</b><span>Missão diária</span><small>Uma única Missão por dia.</small></div>
+        <div><b>🎯 +50</b><span>Missão diária</span><small>Uma única Missão por dia. O XP fica associado à disciplina dessa Missão.</small></div>
         <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
         <div><b>📝 até +80</b><span>Mini-exame</span><small>XP pela atividade concluída, não pela nota.</small></div>
         <div><b>⏱️ até +120</b><span>Exame Completo</span><small>Depende da parte da prova respondida, nunca da nota. Uma recompensa por disciplina/dia.</small></div>
-        <div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Bónus inicial global: conta uma vez em “Todas” e não entra nos filtros por disciplina.</small></div>
+        {!subjectId&&<div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Bónus inicial global: conta uma vez em “Todas” e não entra nos filtros por disciplina.</small></div>}
       </div>
-      {latest&&<div className="lastRankXp"><b>Último ganho{subjectId?` em ${subjectLabel}`:""}: +{latest.rankedXp} XP</b><span>{latest.reason}</span></div>}
+      {subjectId&&<p className="muted">O bónus único do 1.º Diagnóstico pertence apenas ao ranking “Todas”, por isso não aparece nesta lista.</p>}
+      {latestGain&&<div className="lastRankXp"><b>Último ganho{subjectId?` em ${subjectLabel}`:""}: +{latestGain.rankedXp} XP</b><span>{latestGain.reason}</span></div>}
       <p className="muted">O teu <b>XP total</b> continua acumulado para sempre. O <b>XP competitivo</b> reinicia semanalmente para que um aluno novo possa competir desde a primeira semana.</p>
     </section>
 
