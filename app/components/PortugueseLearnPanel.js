@@ -23,7 +23,7 @@ export default function PortugueseLearnPanel({schoolYear="12.º"}){
   return <section id="portugueseLearn" className="progressDetails" aria-label="Rever matéria de Português">
     <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Português, organizado para compreender, interpretar e responder melhor.</h1></div>
     <p className="muted">Escolhe uma unidade e segue um percurso contínuo: começa pela visão global, avança pela leitura orientada e pelos exemplos e termina com aquilo que tens mesmo de reter e evitar.</p>
-    <div className="notice"><b>Modo de estudo</b><span>Sem perguntas nem pontuação. Usa este espaço para organizar as ideias; quando quiseres testar se as consegues aplicar num texto novo, volta a “Treinar” e escolhe “Praticar”.</span></div>
+    <div className="notice"><b>Modo de estudo</b><span>Aqui não há perguntas, pontuação nem avaliação. Usa este espaço para organizar as ideias; quando quiseres testar se as consegues aplicar num texto novo, volta a “Treinar” e escolhe “Praticar”.</span></div>
     <div className="chips yearSelector" aria-label="Escolher ano de Português">{years.map(row=><button type="button" key={row.year} className={year===row.year?"sel":""} aria-pressed={year===row.year} onClick={()=>{setYear(row.year);setUnitId(null)}}>{row.label}</button>)}</div>
     {yearRow&&<>
       <div className="notice"><b>{yearRow.period}</b><span>O mapa inclui Educação Literária, Leitura, Escrita e Gramática do {yearRow.year}.</span></div>
