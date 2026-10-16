@@ -41,7 +41,7 @@ export default function PhysicsChemistryLearnPanel({schoolYear="11.º"}){
   return <section className="progressDetails" aria-label="Rever matéria de Física e Química A">
     <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Física e Química A, organizada para compreender antes de calcular.</h1></div>
     <p className="muted">Escolhe um domínio e segue um percurso coerente: conceitos primeiro, relações e exemplos depois, trabalho experimental quando aplicável e, no fim, uma consolidação do que tens mesmo de saber fazer.</p>
-    <div className="notice"><b>Modo de estudo</b><span>Sem perguntas nem pontuação. Usa este espaço para organizar conceitos e métodos; quando quiseres testar a aplicação sem apoio, volta a “Treinar” e escolhe “Praticar”.</span></div>
+    <div className="notice"><b>Modo de estudo</b><span>Aqui não há perguntas, pontuação nem avaliação. Usa este espaço para organizar conceitos e métodos; quando quiseres testar a aplicação sem apoio, volta a “Treinar” e escolhe “Praticar”.</span></div>
     <div className="chips yearSelector" aria-label="Escolher ano de Física e Química A">{["10.º","11.º"].map(value=><button type="button" key={value} className={year===value?"sel":""} aria-pressed={year===value} onClick={()=>{setYear(value);setDomainId(null)}}>{value}</button>)}</div>
     {!selected?<div className="themeGrid">{rows.map(row=><button type="button" key={row.id} onClick={()=>setDomainId(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+row.title}</small></button>)}</div>
     :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
