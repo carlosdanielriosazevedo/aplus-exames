@@ -128,7 +128,7 @@ export default function Ranking({s,setS,go}){
         <div><b>🧠 até +40</b><span>Treino Livre</span><small>Repetir sempre o mesmo foco reduz progressivamente o XP competitivo.</small></div>
         <div><b>📝 até +80</b><span>Mini-exame</span><small>XP pela atividade concluída, não pela nota.</small></div>
         <div><b>⏱️ até +120</b><span>Exame Completo</span><small>Depende da parte da prova respondida, nunca da nota. Uma recompensa por disciplina/dia.</small></div>
-        <div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Conta uma vez.</small></div>
+        <div><b>🧭 +30</b><span>1.º Diagnóstico</span><small>Bónus inicial global: conta uma vez em “Todas” e não entra nos filtros por disciplina.</small></div>
       </div>
       {latest&&<div className="lastRankXp"><b>Último ganho{subjectId?` em ${subjectLabel}`:""}: +{latest.rankedXp} XP</b><span>{latest.reason}</span></div>}
       <p className="muted">O teu <b>XP total</b> continua acumulado para sempre. O <b>XP competitivo</b> reinicia semanalmente para que um aluno novo possa competir desde a primeira semana.</p>
