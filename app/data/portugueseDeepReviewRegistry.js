@@ -19,6 +19,7 @@ import {portuguesePessoaOrtonimo12DeepReviewFor} from "./portugueseDeepReviewPes
 import {portuguesePessoaHeteronimos12DeepReviewFor} from "./portugueseDeepReviewPessoaHeteronimos12";
 import {portugueseMensagem12DeepReviewFor} from "./portugueseDeepReviewMensagem12";
 import {portugueseGeorge12DeepReviewFor} from "./portugueseDeepReviewGeorge12";
+import {portuguesePoesiaContemporanea12DeepReviewFor} from "./portugueseDeepReviewPoesiaContemporanea12";
 
 const REVIEW_PROVIDERS=[
   portugueseTrovadoresca10DeepReviewFor,
@@ -41,7 +42,8 @@ const REVIEW_PROVIDERS=[
   portuguesePessoaOrtonimo12DeepReviewFor,
   portuguesePessoaHeteronimos12DeepReviewFor,
   portugueseMensagem12DeepReviewFor,
-  portugueseGeorge12DeepReviewFor
+  portugueseGeorge12DeepReviewFor,
+  portuguesePoesiaContemporanea12DeepReviewFor
 ];
 
 export function portugueseDeepReviewContentFor(unitId){
@@ -52,4 +54,4 @@ export function portugueseDeepReviewContentFor(unitId){
   return null;
 }
 
-export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes","pt10-gil-vicente","pt10-camoes-rimas","pt10-lusiadas","pt10-leitura","pt10-escrita","pt10-gramatica","pt11-vieira","pt11-frei-luis","pt11-romantismo-opcao","pt11-eca","pt11-antero","pt11-cesario","pt11-leitura","pt11-escrita","pt11-gramatica","pt12-pessoa-ortonimo","pt12-pessoa-heteronimos","pt12-mensagem","pt12-conto"];
+export const PORTUGUESE_DEEP_REVIEW_UNIT_IDS=["pt10-trovadoresca","pt10-fernao-lopes","pt10-gil-vicente","pt10-camoes-rimas","pt10-lusiadas","pt10-leitura","pt10-escrita","pt10-gramatica","pt11-vieira","pt11-frei-luis","pt11-romantismo-opcao","pt11-eca","pt11-antero","pt11-cesario","pt11-leitura","pt11-escrita","pt11-gramatica","pt12-pessoa-ortonimo","pt12-pessoa-heteronimos","pt12-mensagem","pt12-conto","pt12-poesia-contemporanea"];
