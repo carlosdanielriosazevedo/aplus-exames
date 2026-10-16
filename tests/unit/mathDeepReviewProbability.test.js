@@ -61,12 +61,13 @@ describe("Rever Matéria profundo · Probabilidade",()=>{
     expect(mathDeepReviewContentFor("12-prob")).toBe(PROBABILITY_REVIEW);
     expect(mathDeepReviewContentFor("tema-ainda-nao-convertido")).toBeNull();
     expect(component).toContain('from "../data/mathDeepReviewRegistry"');
+    expect(component).toContain("DeepReviewStudy");
     expect(component).toContain(":deepStudy?");
     expect(component).toContain("study?.summary");
   });
 
   it("o fecho profundo é genérico e não fica preso a Números complexos",()=>{
     expect(component).not.toContain("passar entre a leitura algébrica e a leitura geométrica dos números complexos");
-    expect(component).toContain("conceitos centrais desta matéria");
+    expect(component).toContain("Explicar os conceitos centrais por palavras tuas.");
   });
 });
