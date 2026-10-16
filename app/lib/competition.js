@@ -126,6 +126,10 @@ function trainingMultiplier(previousSameFocus){
   return .10;
 }
 
+function isFullExamKind(kind){
+  return kind==="full_exam"||kind==="practice_exam";
+}
+
 export function competitiveAward(state,event={}){
   const kind=event.kind||"study";
   const competition=normalizeCompetition(state);
@@ -167,6 +171,27 @@ export function competitiveAward(state,event={}){
     return {raw,multiplier:1,awarded:raw,reason:"Mini-exame concluído."};
   }
 
+  if(isFullExamKind(kind)){
+    const total=Math.max(0,Number(event.total)||0);
+    const answered=Math.min(total,Math.max(0,Number(event.answered)||0));
+    const subjectId=event.subjectId||null;
+    const already=(week.activities||[]).some(a=>
+      isFullExamKind(a.kind)&&a.day===day&&(a.subjectId||null)===subjectId&&a.rankedXp>0
+    );
+    const raw=total>0?Math.round(120*(answered/total)):0;
+    if(already){
+      return {raw,multiplier:0,awarded:0,reason:"O primeiro Exame Completo desta disciplina do dia já contou para o ranking."};
+    }
+    return {
+      raw,
+      multiplier:1,
+      awarded:raw,
+      reason:raw>0
+        ?`Exame Completo: ${Math.round(answered/Math.max(1,total)*100)}% da prova respondida.`
+        :"Exame Completo sem respostas elegíveis para XP competitivo."
+    };
+  }
+
   if(kind==="diagnostic"){
     const already=Object.values(competition.weeks||{}).some(w=>
       (w.activities||[]).some(a=>a.kind==="diagnostic")
@@ -203,10 +228,12 @@ export function recordCompetitiveActivity(state,event={}){
   const activity={
     key,
     kind:event.kind||"study",
+    subjectId:event.subjectId||null,
     at,
     day,
     focusKey:event.focusKey||null,
     total:Number(event.total)||0,
+    answered:Number(event.answered)||0,
     rawXp:award.raw,
     multiplier:award.multiplier,
     rankedXp:award.awarded,
@@ -228,31 +255,38 @@ export function recordCompetitiveActivity(state,event={}){
   };
 }
 
-export function weeklyCompetitiveXp(state,at=Date.now()){
+export function weeklyCompetitiveXp(state,at=Date.now(),subjectId=null){
   const c=normalizeCompetition(state);
-  return c.weeks?.[weekKey(at)]?.xp||0;
+  const week=c.weeks?.[weekKey(at)];
+  if(!week)return 0;
+  if(!subjectId)return week.xp||0;
+  return (week.activities||[])
+    .filter(activity=>activity.subjectId===subjectId)
+    .reduce((sum,activity)=>sum+(Number(activity.rankedXp)||0),0);
 }
 
-
-export function latestCompetitiveActivity(state,at=Date.now()){
+export function latestCompetitiveActivity(state,at=Date.now(),subjectId=null){
   const c=normalizeCompetition(state);
   const rows=c.weeks?.[weekKey(at)]?.activities||[];
-  return [...rows].sort((a,b)=>(b.at||0)-(a.at||0))[0]||null;
+  const filtered=subjectId?rows.filter(row=>row.subjectId===subjectId):rows;
+  return [...filtered].sort((a,b)=>(b.at||0)-(a.at||0))[0]||null;
 }
 
-export function competitionSummary(state,at=Date.now()){
+export function competitionSummary(state,at=Date.now(),{subjectId=null}={}){
   const c=normalizeCompetition(state);
   const wk=weekKey(at);
   const week=c.weeks?.[wk]||{xp:0,activities:[]};
   const d=divisionInfo(c.division);
+  const activities=subjectId?(week.activities||[]).filter(activity=>activity.subjectId===subjectId):(week.activities||[]);
   return {
     weekKey:wk,
-    weekXp:week.xp||0,
+    weekXp:subjectId?weeklyCompetitiveXp(state,at,subjectId):(week.xp||0),
     division:d,
     daysRemaining:daysUntilWeekEnd(at),
-    activities:week.activities||[],
+    activities,
     nickname:c.profile?.nickname||null,
-    profile:c.profile
+    profile:c.profile,
+    subjectId
   };
 }
 
@@ -262,11 +296,11 @@ function demoScoreBand(userXp,divisionId){
   return Math.max(baseline,userXp+120);
 }
 
-export function demoLeaderboard(state,{scope="league",at=Date.now(),size=LEAGUE_SIZE}={}){
-  const summary=competitionSummary(state,at);
+export function demoLeaderboard(state,{scope="league",at=Date.now(),size=LEAGUE_SIZE,subjectId=null}={}){
+  const summary=competitionSummary(state,at,{subjectId});
   const c=normalizeCompetition(state);
   const userName=c.profile?.nickname||"Tu";
-  const seed=hashString(`${summary.weekKey}|${summary.division.id}|${scope}|leaderboard-v1`);
+  const seed=hashString(`${summary.weekKey}|${summary.division.id}|${scope}|${subjectId||"all"}|leaderboard-v2`);
   const rnd=seeded(seed);
   const high=demoScoreBand(summary.weekXp,summary.division.id);
 
@@ -276,7 +310,7 @@ export function demoLeaderboard(state,{scope="league",at=Date.now(),size=LEAGUE_
     const jitter=.78+rnd()*.38;
     const xp=Math.max(20,Math.round(high*curve*jitter/10)*10);
     rows.push({
-      id:`demo-${scope}-${i}`,
+      id:`demo-${scope}-${subjectId||"all"}-${i}`,
       nickname:DEMO_NAMES[(i+Math.floor(rnd()*DEMO_NAMES.length))%DEMO_NAMES.length]+(rnd()>.78?String(10+Math.floor(rnd()*89)):""),
       xp,
       self:false,
@@ -321,7 +355,6 @@ export function leagueProjection(state,at=Date.now()){
 
   return {position,zone,message,rows};
 }
-
 
 export function applyLeagueOutcome(state,{week,position}={}){
   const c=normalizeCompetition(state);
