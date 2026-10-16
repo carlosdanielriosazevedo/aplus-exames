@@ -306,18 +306,18 @@ export function demoLeaderboard(state,{scope="league",at=Date.now(),size=LEAGUE_
   const summary=competitionSummary(state,at,{subjectId});
   const c=normalizeCompetition(state);
   const userName=c.profile?.nickname||"Tu";
-  const seed=hashString(`${summary.weekKey}|${summary.division.id}|${scope}|${subjectId||"all"}|leaderboard-v2`);
-  const rnd=seeded(seed);
+  const identityRnd=seeded(hashString(`${summary.weekKey}|${summary.division.id}|${scope}|leaderboard-identities-v2`));
+  const scoreRnd=seeded(hashString(`${summary.weekKey}|${summary.division.id}|${scope}|${subjectId||"all"}|leaderboard-scores-v2`));
   const high=demoScoreBand(summary.weekXp,summary.division.id);
 
   const rows=[];
   for(let i=0;i<size-1;i++){
     const curve=1-(i/(size-1))*.82;
-    const jitter=.78+rnd()*.38;
+    const jitter=.78+scoreRnd()*.38;
     const xp=Math.max(20,Math.round(high*curve*jitter/10)*10);
     rows.push({
-      id:`demo-${scope}-${subjectId||"all"}-${i}`,
-      nickname:DEMO_NAMES[(i+Math.floor(rnd()*DEMO_NAMES.length))%DEMO_NAMES.length]+(rnd()>.78?String(10+Math.floor(rnd()*89)):""),
+      id:`demo-${scope}-${i}`,
+      nickname:DEMO_NAMES[(i+Math.floor(identityRnd()*DEMO_NAMES.length))%DEMO_NAMES.length]+(identityRnd()>.78?String(10+Math.floor(identityRnd()*89)):""),
       xp,
       self:false,
       demo:true
