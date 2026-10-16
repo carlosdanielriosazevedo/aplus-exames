@@ -25,6 +25,12 @@ describe("ranking por disciplina",()=>{
     expect(source).toMatch(/Uma recompensa por disciplina\/dia/u);
   });
 
+  it("mantém o bónus do primeiro Diagnóstico apenas no ranking global",()=>{
+    expect(source).toMatch(/1.º Diagnóstico/u);
+    expect(source).toMatch(/Bónus inicial global/u);
+    expect(source).toMatch(/conta uma vez em “Todas” e não entra nos filtros por disciplina/u);
+  });
+
   it("mantém ligas pequenas e promoção dependente do total",()=>{
     expect(source).toMatch(/até 20 alunos/u);
     expect(source).toMatch(/divisão usa sempre o XP total/u);
