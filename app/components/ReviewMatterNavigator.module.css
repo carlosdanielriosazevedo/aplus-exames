@@ -1,0 +1,238 @@
+.navigator{
+  display:grid;
+  gap:16px;
+  margin:22px 0 6px;
+}
+
+.stepCard{
+  padding:22px;
+  border:1px solid #dfe7ea;
+  border-radius:20px;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfcfd 100%);
+  box-shadow:0 8px 24px rgba(31,50,65,.05);
+}
+
+.stepHeading{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  margin-bottom:17px;
+}
+
+.stepNumber{
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:var(--app-navy);
+  color:#fff;
+  font-size:13px;
+  font-weight:950;
+}
+
+.stepHeading small{
+  display:block;
+  margin:1px 0 3px;
+  color:var(--app-orange-dark);
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.11em;
+}
+
+.stepHeading h2{
+  margin:0;
+  color:var(--app-navy);
+  font-size:20px;
+  line-height:1.2;
+}
+
+.stepHeading p{
+  margin:5px 0 0;
+  max-width:68ch;
+  color:var(--app-muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.yearGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.yearButton,
+.yearActive{
+  position:relative;
+  display:grid;
+  gap:4px;
+  min-height:76px;
+  padding:14px 15px;
+  border-radius:15px;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+
+.yearButton{
+  border:1px solid #dfe7ea;
+  background:#fff;
+}
+
+.yearButton:hover{
+  transform:translateY(-1px);
+  border-color:#cfd9de;
+  box-shadow:0 7px 18px rgba(31,50,65,.06);
+}
+
+.yearActive{
+  border:1px solid #e5b96b;
+  background:#fff9ed;
+  box-shadow:0 0 0 2px rgba(236,169,57,.08);
+}
+
+.yearButton>span,
+.yearActive>span{
+  color:var(--app-navy);
+  font-size:17px;
+  font-weight:900;
+}
+
+.yearButton>small,
+.yearActive>small{
+  color:var(--app-muted);
+  font-size:11px;
+  line-height:1.35;
+}
+
+.yearActive>b{
+  position:absolute;
+  top:11px;
+  right:11px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#fff0d2;
+  color:var(--app-orange-dark);
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.03em;
+}
+
+.itemGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.itemCard{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  min-height:104px;
+  padding:15px;
+  border:1px solid #dfe7ea;
+  border-radius:16px;
+  background:#fff;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+
+.itemCard:hover{
+  transform:translateY(-2px);
+  border-color:#d8b66f;
+  background:#fffdf8;
+  box-shadow:0 9px 22px rgba(31,50,65,.07);
+}
+
+.itemCard:focus-visible,
+.yearButton:focus-visible,
+.yearActive:focus-visible{
+  outline:3px solid rgba(236,169,57,.35);
+  outline-offset:2px;
+}
+
+.itemIndex{
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border-radius:11px;
+  background:#eef3f5;
+  color:var(--app-muted);
+  font-size:10px;
+  font-weight:950;
+}
+
+.itemCopy{
+  display:grid;
+  gap:4px;
+  min-width:0;
+}
+
+.itemCopy>b{
+  color:var(--app-navy);
+  font-size:15px;
+  line-height:1.32;
+}
+
+.itemBadge{
+  width:max-content;
+  max-width:100%;
+  padding:3px 6px;
+  border-radius:999px;
+  background:#f1f4f6;
+  color:var(--app-muted);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.06em;
+}
+
+.itemSubtitle{
+  color:var(--app-muted);
+  font-size:11px;
+  line-height:1.4;
+}
+
+.itemMeta{
+  margin-top:2px;
+  color:#667985;
+  font-size:10px;
+  font-weight:700;
+  line-height:1.35;
+}
+
+.itemArrow{
+  color:var(--app-orange-dark);
+  font-size:20px;
+  font-weight:800;
+  transition:transform .16s ease;
+}
+
+.itemCard:hover .itemArrow{
+  transform:translateX(2px);
+}
+
+.emptyState{
+  margin:0;
+  padding:17px;
+  border-radius:14px;
+  background:#f6f8f9;
+  color:var(--app-muted);
+  font-size:13px;
+}
+
+@media(max-width:760px){
+  .navigator{gap:12px;margin-top:17px;}
+  .stepCard{padding:16px;border-radius:17px;}
+  .stepHeading{gap:10px;margin-bottom:14px;}
+  .stepNumber{width:34px;height:34px;border-radius:10px;}
+  .stepHeading h2{font-size:18px;}
+  .yearGrid{grid-template-columns:1fr;}
+  .yearButton,.yearActive{min-height:66px;}
+  .itemGrid{grid-template-columns:1fr;}
+  .itemCard{min-height:88px;padding:13px;gap:10px;}
+  .itemIndex{width:32px;height:32px;}
+}

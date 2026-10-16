@@ -4,6 +4,7 @@ import {PHYSICS_CHEMISTRY_A_DOMAINS} from "../data/physicsChemistryFoundation";
 import {physicsChemistryPracticalActivitiesForDomain} from "../data/physicsChemistryPracticalActivities";
 import {physicsChemistryDeepReviewContentFor} from "../data/physicsChemistryDeepReviewRegistry";
 import DeepReviewStudy from "./DeepReviewStudy";
+import ReviewMatterNavigator from "./ReviewMatterNavigator";
 import styles from "./MathReviewMatter.module.css";
 
 function PracticalReview({practical}){
@@ -37,13 +38,33 @@ export default function PhysicsChemistryLearnPanel({schoolYear="11.º"}){
   const selected=rows.find(row=>row.id===domainId)||null;
   const practical=selected?physicsChemistryPracticalActivitiesForDomain(selected.id):[];
   const deepStudy=selected?physicsChemistryDeepReviewContentFor(selected.id):null;
+  const navigationYears=[
+    {value:"10.º",label:"10.º ano",meta:"Fundamentos de Física e Química"},
+    {value:"11.º",label:"11.º ano",meta:"Consolidação e preparação para o exame"}
+  ];
+  const navigationItems=rows.map(row=>({
+    id:row.id,
+    title:row.shortTitle||row.title,
+    subtitle:row.shortTitle&&row.shortTitle!==row.title?row.title:null,
+    badge:row.area,
+    meta:`${row.subtopics.length} submatérias`
+  }));
 
   return <section className="progressDetails" aria-label="Rever matéria de Física e Química A">
     <div className="sectionIntro"><p className="eyebrow">REVER MATÉRIA</p><h1>Física e Química A, organizada para compreender antes de calcular.</h1></div>
     <p className="muted">Escolhe um domínio e segue um percurso coerente: conceitos primeiro, relações e exemplos depois, trabalho experimental quando aplicável e, no fim, uma consolidação do que tens mesmo de saber fazer.</p>
     <div className="notice"><b>Modo de estudo</b><span>Aqui não há perguntas, pontuação nem avaliação. Usa este espaço para organizar conceitos e métodos; quando quiseres testar a aplicação sem apoio, volta a “Treinar” e escolhe “Praticar”.</span></div>
-    <div className="chips yearSelector" aria-label="Escolher ano de Física e Química A">{["10.º","11.º"].map(value=><button type="button" key={value} className={year===value?"sel":""} aria-pressed={year===value} onClick={()=>{setYear(value);setDomainId(null)}}>{value}</button>)}</div>
-    {!selected?<div className="themeGrid">{rows.map(row=><button type="button" key={row.id} onClick={()=>setDomainId(row.id)}><b>{row.shortTitle}</b><small>{row.area+" · "+row.title}</small></button>)}</div>
+    {!selected?<ReviewMatterNavigator
+      years={navigationYears}
+      selectedYear={year}
+      onYearChange={value=>{setYear(value);setDomainId(null)}}
+      items={navigationItems}
+      onSelect={setDomainId}
+      yearAriaLabel="Escolher ano de Física e Química A"
+      itemHeading={`Domínios do ${year}`}
+      itemDescription="Cada domínio abre um percurso com conceitos, relações, exemplos orientados e trabalho experimental quando aplicável."
+      itemNoun="domínio"
+    />
     :deepStudy?<article className={`portugueseProgressCard ${styles.deepReviewArticle}`}>
       <button type="button" className="back" onClick={()=>setDomainId(null)}>← Todos os domínios do {year}</button>
       <p className="eyebrow">FÍSICA E QUÍMICA A · {selected.year} · {selected.area.toUpperCase()}</p>

@@ -20,9 +20,10 @@ describe("Rever Matéria · identificação dos temas opcionais",()=>{
     }
   });
 
-  it("mantém os opcionais acessíveis no grid e identifica-os como opcionais",()=>{
+  it("mantém os opcionais acessíveis na navegação e identifica-os como opcionais",()=>{
     expect(component).toContain("const themes=TAXONOMY.filter(row=>row.year===year)");
-    expect(component).toContain('row.optionalTrack?"TEMA OPCIONAL · ":""');
+    expect(component).toContain('badge:row.optionalTrack?"TEMA OPCIONAL":null');
+    expect(component).toContain("items={navigationItems}");
   });
 
   it("repete o contexto opcional dentro do capítulo selecionado",()=>{

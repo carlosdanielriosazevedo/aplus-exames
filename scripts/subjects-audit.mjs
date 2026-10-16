@@ -46,7 +46,9 @@ assert.match(page,/if\(screen==="reviewMatter"\)return <MathReviewMatter/u,"Mate
 assert.match(studyModeHub,/onClick=\{\(\)=>go\("reviewMatter"\)\}[\s\S]{0,220}<b>Rever matéria<\/b>/u,"o cartão Rever matéria partilhado deve estar ativo");
 assert.match(mathReview,/Aqui não há perguntas, pontuação nem avaliação/u,"Rever matéria de Matemática A deve ser claramente um modo de estudo");
 assert.match(mathReview,/reviewChapter/u,"Rever matéria deve organizar o conteúdo em capítulos legíveis");
-assert.match(mathReview,/SCHOOL_YEARS\.map/u,"Rever matéria de Matemática A deve permitir escolher explicitamente os três anos");
+assert.match(mathReview,/ReviewMatterNavigator/u,"Rever matéria de Matemática A deve usar o navegador partilhado");
+assert.match(mathReview,/years=\{SCHOOL_YEARS\}/u,"Rever matéria de Matemática A deve expor explicitamente os três anos ao navegador");
+assert.match(mathReview,/yearAriaLabel="Escolher ano de Matemática A"/u,"a seleção de ano deve manter um rótulo acessível");
 assert.doesNotMatch(mathReview,/Responder|startPractice|trainingRun|QUESTION_BANK/u,"Rever matéria de Matemática A não deve iniciar perguntas nem treino");
 assert.match(portugueseLearn,/SCHOOL_YEARS\.includes/u,"Rever matéria de Português deve disponibilizar 10.º, 11.º e 12.º anos");
 assert.match(portugueseSubject,/SCHOOL_YEARS\.map\(year=>/u,"Praticar Português deve disponibilizar 10.º, 11.º e 12.º anos");
