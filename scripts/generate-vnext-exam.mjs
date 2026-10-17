@@ -3,6 +3,7 @@ import path from "node:path";
 import {CURRICULUM_SUBTOPICS} from "../app/data/curriculumVnext.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../app/data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../app/data/vnextMission.js";
+import {normalizeMathVisibleItem} from "../app/lib/mathVisibleCopy.js";
 
 const ROOT=path.resolve("content/vnext/math-a");
 const OUTPUT=path.resolve("app/data/vnextExam.js");
@@ -68,7 +69,7 @@ function chooseQuestions(questions){
 }
 
 function examItem(question,subtopic,sourceFile){
-  return {
+  return normalizeMathVisibleItem({
     id:`EX-${question.id}`,
     themeId:question.themeId,
     subtopicId:question.subtopicId,
@@ -89,7 +90,7 @@ function examItem(question,subtopic,sourceFile){
     sourceFile,
     optionOrderVersion:question.optionOrderVersion??1,
     productionEligible:false
-  };
+  });
 }
 
 const rows=[];
