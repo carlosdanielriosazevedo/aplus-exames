@@ -64,8 +64,11 @@ function completedState(subjectId){
 
 function mathStateAfterTwoAnswers(){
   const now=Date.now();
+  const base=configuredState("math-a");
   let state={
-    ...configuredState("math-a"),
+    ...base,
+    profile:{...base.profile,schoolYear:"Já terminei o secundário",taughtSubtopicIds:[]},
+    editorialOverrides:{},
     scores:emptyScores(),
     betaSessions:[{id:"resume-math-diagnostic",kind:"diagnostic",startedAt:now-60_000,finishedAt:null,meta:{}}],
     betaEvents:[],
