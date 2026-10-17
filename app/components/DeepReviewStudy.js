@@ -58,7 +58,8 @@ export default function DeepReviewStudy({study,kind="math",afterSections=null,fi
     "Acompanhar um exemplo justificando cada passo, e não apenas o resultado.",
     "Identificar os erros típicos antes de começares a praticar."
   ];
-  return <div className={styles.studyFlow}>
+  const verticalFlow={display:"flex",flexDirection:"column",alignItems:"stretch",width:"100%",maxWidth:"100%",minWidth:0};
+  return <div className={styles.studyFlow} style={verticalFlow}>
     <section className={`${styles.reviewOverview} reviewChapter`}>
       <div className={styles.overviewHeader}><small>INÍCIO · VISÃO GLOBAL</small><h3>Primeiro, percebe o mapa da matéria</h3><p>{study.lead}</p></div>
       <div className={styles.studyRoute} aria-label="Como usar esta revisão">
