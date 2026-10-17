@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-termo-recorrencia:alternada-decrescente-modulo",
+      "signature": "11-suc-termo-recorrencia:alternada-decrescente-módulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-termo-recorrencia:limitada-nao-monotona",
+      "signature": "11-suc-termo-recorrencia:limitada-não-monotona",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-termo-recorrencia:modelacao-padrao",
+      "signature": "11-suc-termo-recorrencia:modelacao-padrão",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
