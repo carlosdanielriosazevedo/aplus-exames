@@ -1,9 +1,9 @@
 import {test,expect} from "@playwright/test";
 
 const SUBJECTS=[
-  {name:"Matemática A",choice:/^Matemática A\\b/u},
-  {name:"Português",choice:/^Português 12\\.º ano · Prova 639\\b/u},
-  {name:"Física e Química A",choice:/^Física e Química A\\b/u}
+  {name:"Matemática A",choice:/^Matemática A\b/u},
+  {name:"Português",choice:/^Português 12\.º ano · Prova 639\b/u},
+  {name:"Física e Química A",choice:/^Física e Química A\b/u}
 ];
 
 for(const subject of SUBJECTS){
