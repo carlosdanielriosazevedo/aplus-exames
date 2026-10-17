@@ -19,6 +19,7 @@ function configuredState(subjectId){
     onboardingSubjectIds:[],
     onboardingReturnSubjectId:null,
     subjectOnboardingMode:"initial",
+    subjectSettings:{[subjectId]:{profileConfigured:true,recentGrade:"",examTiming:"thisYear",goal:17}},
     subjectProgress:subjectId==="math-a"?{}:{[subjectId]:{subjectId,version:4,diagnosticDone:false,diagnosticCompletedAt:null,sessions:[],missionHistory:[],competence:{},errorPatterns:{},errorMemoryVersion:1,lastPosition:null,lastActivityAt:null}},
     subjectProgressModelVersion:4,
     pedagogicalIdVersion:1,
