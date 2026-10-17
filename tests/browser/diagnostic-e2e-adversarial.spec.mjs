@@ -76,16 +76,19 @@ async function completeRubricIfNeeded(page){
 }
 
 async function runDiagnostic(page,context,subject){
-  let sawCorrect=false,sawWrong=false,sawBlankGuard=false,sawOffline=false,sawDoubleClick=false;
+  let sawCorrect=false,sawWrong=false,sawBlankGuard=false,sawDontKnow=false,sawOffline=false,sawDoubleClick=false;
   for(let step=0;step<30;step++){
     const body=await page.locator("body").innerText();
-    if(subject.done.test(body))return {sawCorrect,sawWrong,sawBlankGuard,sawOffline,sawDoubleClick};
+    if(subject.done.test(body))return {sawCorrect,sawWrong,sawBlankGuard,sawDontKnow,sawOffline,sawDoubleClick};
 
     const submit=await currentSubmit(page);
     await expect(submit).toBeVisible({timeout:30_000});
     if(step===0){
       await expect(submit).toBeDisabled();
       sawBlankGuard=true;
+      const dontKnow=page.getByRole("button",{name:"Não sei",exact:true});
+      await expect(dontKnow,`${subject.name}: o diagnóstico deve permitir registar uma não-resposta`).toBeVisible({timeout:5_000});
+      sawDontKnow=true;
     }
 
     const answerType=await fillCurrentAnswer(page,step);
@@ -127,6 +130,7 @@ for(const subject of SUBJECTS){
 
     await expect(page.locator("body")).toContainText(subject.done,{timeout:30_000});
     expect(proof.sawBlankGuard,"uma resposta em branco deve ser bloqueada sem corromper a sessão").toBe(true);
+    expect(proof.sawDontKnow,"o diagnóstico deve permitir ao aluno assumir que não sabe").toBe(true);
     expect(proof.sawDoubleClick,"o percurso deve incluir submissão por duplo clique").toBe(true);
     expect(proof.sawOffline,"o percurso deve incluir corte de rede durante uma submissão").toBe(true);
     expect(proof.sawCorrect,"o diagnóstico deve exercer pelo menos uma escolha correta").toBe(true);
