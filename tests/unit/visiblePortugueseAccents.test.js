@@ -5,7 +5,7 @@ import {VNEXT_EXAM_QUESTIONS} from "../../app/data/vnextExam.js";
 import {PORTUGUESE_ITEMS} from "../../app/data/portugueseContent.js";
 import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 
-const VISIBLE_KEYS=new Set(["q","o","sol","prompt","options","explanation","title","subtitle","label","feedback","hint","text","statement","instruction"]);
+const VISIBLE_KEYS=new Set(["q","o","sol","focus","subtopic","prompt","options","explanation","title","subtitle","label","feedback","hint","text","statement","instruction"]);
 const BAD_VISIBLE_PATTERNS=[
   ["expressao/expressoes",/\bexpressao(?:es)?\b/iu],
   ["obtem-se",/\bobtem-se\b/iu],
@@ -16,8 +16,10 @@ const BAD_VISIBLE_PATTERNS=[
   ["posicao/posicoes",/\bposicao(?:es)?\b/iu],
   ["grafico/graficos",/\bgrafico(?:s)?\b/iu],
   ["equacao/equacoes",/\bequacao(?:es)?\b/iu],
-  ["Qual e",/\bQual e\b/u],
-  ["area e",/\barea e\b/iu]
+  ["é",/\b(?:Qual|Quanto) e\b/u],
+  ["área é",/\barea e\b/iu],
+  ["têm",/\b(?:os valores|as funções|os pontos|as retas|os gráficos|as equações|os números|as soluções|os vetores|as matrizes|os acontecimentos|as probabilidades) tem\b/iu],
+  ["à",/\b(?:relativa|relacionada|associada|correspondente|tangente|perpendicular|paralela|aplicada) a (?:função|reta|curva|equação|área|situação|posição)\b/iu]
 ];
 
 function visibleStrings(value,key=null,out=[]){
