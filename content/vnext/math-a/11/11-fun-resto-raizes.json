@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-resto-raizes:resto-avaliacao",
+      "signature": "11-fun-resto-raizes:resto-avaliação",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-resto-raizes:grafico-mult-par",
+      "signature": "11-fun-resto-raizes:gráfico-mult-par",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-resto-raizes:grafico-mult-impar",
+      "signature": "11-fun-resto-raizes:gráfico-mult-impar",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
