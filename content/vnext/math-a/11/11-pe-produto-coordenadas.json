@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-produto-coordenadas:produto-maximo",
+      "signature": "11-pe-produto-coordenadas:produto-máximo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-produto-coordenadas:produto-minimo",
+      "signature": "11-pe-produto-coordenadas:produto-mínimo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-produto-coordenadas:angulo-por-produto",
+      "signature": "11-pe-produto-coordenadas:ângulo-por-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-produto-coordenadas:angulo-perpendicular",
+      "signature": "11-pe-produto-coordenadas:ângulo-perpendicular",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-produto-coordenadas:interpretacao-projecao",
+      "signature": "11-pe-produto-coordenadas:interpretação-projecao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-produto-coordenadas:produto-zero-nao-unico",
+      "signature": "11-pe-produto-coordenadas:produto-zero-não-unico",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
