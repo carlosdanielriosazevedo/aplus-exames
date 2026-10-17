@@ -52,7 +52,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ele-borda:10-ele-borda:pontuacao-posicao-3",
+    "signature": "mission:10-ele-borda:10-ele-borda:pontuacao-posição-3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10ELE-BOR-002",
@@ -168,7 +168,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ele-borda:10-ele-borda:pontuacao-posicao-4",
+    "signature": "mission:10-ele-borda:10-ele-borda:pontuacao-posição-4",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10ELE-BOR-003",
@@ -342,7 +342,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ele-dhondt:10-ele-dhondt:proximo-nao-selecionado",
+    "signature": "mission:10-ele-dhondt:10-ele-dhondt:proximo-não-selecionado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10ELE-DHO-043",
@@ -400,7 +400,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ele-dhondt:10-ele-dhondt:nao-invariancia-translacao",
+    "signature": "mission:10-ele-dhondt:10-ele-dhondt:não-invariancia-translacao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10ELE-DHO-013",
@@ -574,7 +574,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ele-majorias:10-ele-majorias:simples-identificar-maximo",
+    "signature": "mission:10-ele-majorias:10-ele-majorias:simples-identificar-máximo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10ELE-MAJ-003",
@@ -835,7 +835,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-amostragem:10-est-amostragem:tamanho-nao-basta",
+    "signature": "mission:10-est-amostragem:10-est-amostragem:tamanho-não-basta",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-AMO-006",
@@ -1020,7 +1020,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN10EST-BIV-006",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -1038,18 +1038,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:intervalo-r",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:intervalo-r",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-006",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-BIV-003",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Interpretação",
@@ -1067,18 +1067,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:correlacao-positiva",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:correlação-positiva",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-003",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-BIV-022",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -1096,18 +1096,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:residuo",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:residuo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-022",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-BIV-007",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -1125,18 +1125,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:interpretar-r-positivo",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:interpretar-r-positivo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-007",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-BIV-037",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -1154,18 +1154,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:residuo-interpretacao",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:residuo-interpretação",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-037",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-BIV-002",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -1183,18 +1183,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:scatterplot",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:scatterplot",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-002",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-BIV-021",
     "themeId": "10-est",
-    "subtopicId": "10-est-bivariados-regressao",
+    "subtopicId": "10-est-bivariados-regressão",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Compreensão",
@@ -1212,11 +1212,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-bivariados-regressao:10-est-bivariados-regressao:residuo-definicao",
+    "signature": "mission:10-est-bivariados-regressão:10-est-bivariados-regressão:residuo-definicao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-BIV-021",
-    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressao.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-bivariados-regressão.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -1241,7 +1241,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-dispersao:10-est-dispersao:variancia-conceito",
+    "signature": "mission:10-est-dispersao:10-est-dispersao:variância-conceito",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-DIS-006",
@@ -1328,7 +1328,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-dispersao:10-est-dispersao:unidades-desvio-padrao",
+    "signature": "mission:10-est-dispersao:10-est-dispersao:unidades-desvio-padrão",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-DIS-008",
@@ -1444,7 +1444,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-localizacao:10-est-localizacao:media-simples",
+    "signature": "mission:10-est-localizacao:10-est-localizacao:média-simples",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-LOC-008",
@@ -1502,7 +1502,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-localizacao:10-est-localizacao:outlier-media",
+    "signature": "mission:10-est-localizacao:10-est-localizacao:outlier-média",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-LOC-021",
@@ -1531,7 +1531,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-localizacao:10-est-localizacao:valor-em-falta-media",
+    "signature": "mission:10-est-localizacao:10-est-localizacao:valor-em-falta-média",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-LOC-016",
@@ -1676,7 +1676,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-problema-pop-amostra:10-est-problema-pop-amostra:identificar-populacao",
+    "signature": "mission:10-est-problema-pop-amostra:10-est-problema-pop-amostra:identificar-população",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-PPA-004",
@@ -1705,7 +1705,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-problema-pop-amostra:10-est-problema-pop-amostra:populacao-variavel",
+    "signature": "mission:10-est-problema-pop-amostra:10-est-problema-pop-amostra:população-variavel",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-PPA-021",
@@ -1832,7 +1832,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN10EST-UNI-007",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -1850,18 +1850,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:freq-relativa",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:freq-relativa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-007",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-UNI-005",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -1879,18 +1879,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:soma-relativas",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:soma-relativas",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-005",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-UNI-025",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -1908,18 +1908,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:recuperar-frequencia-de-acumulada",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:recuperar-frequência-de-acumulada",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-025",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-UNI-012",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -1937,18 +1937,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:barras-vs-histograma",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:barras-vs-histograma",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-012",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-UNI-049",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -1966,18 +1966,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:tabela-completa",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:tabela-completa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-049",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-UNI-004",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -1995,18 +1995,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:freq-absoluta-de-relativa",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:freq-absoluta-de-relativa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-004",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10EST-UNI-021",
     "themeId": "10-est",
-    "subtopicId": "10-est-univariados-representacoes",
+    "subtopicId": "10-est-univariados-representações",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -2024,11 +2024,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-est-univariados-representacoes:10-est-univariados-representacoes:acumulada-categorias-ordenadas",
+    "signature": "mission:10-est-univariados-representações:10-est-univariados-representações:acumulada-categorias-ordenadas",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10EST-UNI-021",
-    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-est-univariados-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -2604,7 +2604,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fin-juro-composto-credito:10-fin-juro-composto-credito:um-periodo",
+    "signature": "mission:10-fin-juro-composto-credito:10-fin-juro-composto-credito:um-período",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FIN-JC-003",
@@ -2836,7 +2836,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fin-juro-simples:10-fin-juro-simples:comparar-opcoes",
+    "signature": "mission:10-fin-juro-simples:10-fin-juro-simples:comparar-opções",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FIN-JS-030",
@@ -3126,7 +3126,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-afim:10-fun-afim:equacao-dois-pontos",
+    "signature": "mission:10-fun-afim:10-fun-afim:equação-dois-pontos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-AF-021",
@@ -3253,7 +3253,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN10FUN-CR-006",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -3271,18 +3271,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:multiplas-representacoes",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:multiplas-representações",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-006",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-CR-004",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -3300,18 +3300,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:avaliar-formula",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:avaliar-formula",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-004",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-CR-022",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -3329,18 +3329,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:funcao-nao-monotona",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:função-não-monotona",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-022",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-CR-007",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -3358,18 +3358,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:teste-tabela",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:teste-tabela",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-007",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-CR-040",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -3387,18 +3387,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:modelo-tarifa",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:modelo-tarifa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-040",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-CR-002",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -3416,18 +3416,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:notacao-fx",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:notacao-fx",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-002",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-CR-021",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-conceito-representacoes",
+    "subtopicId": "10-fun-conceito-representações",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -3445,18 +3445,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-conceito-representacoes:10-fun-conceito-representacoes:grafico-para-valor",
+    "signature": "mission:10-fun-conceito-representações:10-fun-conceito-representações:gráfico-para-valor",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-CR-021",
-    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representacoes.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-conceito-representações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-006",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -3474,18 +3474,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:zero-grafico",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:zero-gráfico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-006",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-004",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -3503,18 +3503,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:zero-linear",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:zero-linear",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-004",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-025",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -3532,18 +3532,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:zeros-quadratica",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:zeros-quadratica",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-025",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-007",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -3561,18 +3561,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:zeros-grafico",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:zeros-gráfico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-007",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-050",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -3590,18 +3590,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:modelo-dominio-zero",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:modelo-domínio-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-050",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-002",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -3619,18 +3619,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:imagem-definicao",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:imagem-definicao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-002",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-DIZ-021",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-dominio-imagem-zeros",
+    "subtopicId": "10-fun-domínio-imagem-zeros",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -3648,11 +3648,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-dominio-imagem-zeros:10-fun-dominio-imagem-zeros:imagem-quadrado",
+    "signature": "mission:10-fun-domínio-imagem-zeros:10-fun-domínio-imagem-zeros:imagem-quadrado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-DIZ-021",
-    "sourceFile": "content/vnext/math-a/10/10-fun-dominio-imagem-zeros.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-domínio-imagem-zeros.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -3706,7 +3706,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-quadratica:10-fun-quadratica:grafico-parabola",
+    "signature": "mission:10-fun-quadratica:10-fun-quadratica:gráfico-parábola",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-QUA-002",
@@ -3793,7 +3793,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-quadratica:10-fun-quadratica:modelo-altura-maximo",
+    "signature": "mission:10-fun-quadratica:10-fun-quadratica:modelo-altura-máximo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-QUA-041",
@@ -3862,7 +3862,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN10FUN-TRM-006",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -3880,18 +3880,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:reflexao-Oy",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:reflexao-Oy",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-006",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-TRM-002",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -3909,18 +3909,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:translacao-vertical",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:translacao-vertical",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-002",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-TRM-021",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -3938,18 +3938,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:modulo-translacao",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:módulo-translacao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-021",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-TRM-008",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -3967,18 +3967,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:aplicar-translacao-horizontal",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:aplicar-translacao-horizontal",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-008",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-TRM-037",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -3996,18 +3996,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:modulo-ramos",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:módulo-ramos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-037",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-TRM-003",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -4025,18 +4025,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:translacao-horizontal",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:translacao-horizontal",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-003",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN10FUN-TRM-025",
     "themeId": "10-fun",
-    "subtopicId": "10-fun-transformacoes-ramos-modulo",
+    "subtopicId": "10-fun-transformacoes-ramos-módulo",
     "year": "10.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -4054,11 +4054,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-fun-transformacoes-ramos-modulo:10-fun-transformacoes-ramos-modulo:inequacao-modulo",
+    "signature": "mission:10-fun-transformacoes-ramos-módulo:10-fun-transformacoes-ramos-módulo:inequacao-módulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10FUN-TRM-025",
-    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-modulo.json",
+    "sourceFile": "content/vnext/math-a/10/10-fun-transformacoes-ramos-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -4170,7 +4170,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ga-colinearidade-retas:10-ga-colinearidade-retas:equacao-reta",
+    "signature": "mission:10-ga-colinearidade-retas:10-ga-colinearidade-retas:equação-reta",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GA-RET-015",
@@ -4895,7 +4895,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ga-lugares-geometricos:10-ga-lugares-geometricos:equacao-circunferencia",
+    "signature": "mission:10-ga-lugares-geometricos:10-ga-lugares-geometricos:equação-circunferencia",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GA-LG-006",
@@ -5040,7 +5040,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ga-lugares-geometricos:10-ga-lugares-geometricos:circulo",
+    "signature": "mission:10-ga-lugares-geometricos:10-ga-lugares-geometricos:círculo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GA-LG-003",
@@ -5272,7 +5272,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-ga-vetores:10-ga-vetores:equacao-vetorial",
+    "signature": "mission:10-ga-vetores:10-ga-vetores:equação-vetorial",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GA-VET-023",
@@ -5359,7 +5359,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-baricentro-medianas:10-gs-baricentro-medianas:razao-completa",
+    "signature": "mission:10-gs-baricentro-medianas:10-gs-baricentro-medianas:razão-completa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-BAR-024",
@@ -5446,7 +5446,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-baricentro-medianas:10-gs-baricentro-medianas:razao-2-1",
+    "signature": "mission:10-gs-baricentro-medianas:10-gs-baricentro-medianas:razão-2-1",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-BAR-004",
@@ -5678,7 +5678,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-circuncentro-incentro:10-gs-circuncentro-incentro:diametro-circunscrita-retangulo",
+    "signature": "mission:10-gs-circuncentro-incentro:10-gs-circuncentro-incentro:diâmetro-circunscrita-retangulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-CI-022",
@@ -5736,7 +5736,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-euler-nove-pontos:10-gs-euler-nove-pontos:euler-razao",
+    "signature": "mission:10-gs-euler-nove-pontos:10-gs-euler-nove-pontos:euler-razão",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-E9-002",
@@ -5968,7 +5968,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-ortocentro:10-gs-ortocentro:area-retangulo",
+    "signature": "mission:10-gs-ortocentro:10-gs-ortocentro:área-retangulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-ORT-021",
@@ -6084,7 +6084,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-ortocentro:10-gs-ortocentro:altura-hipotenusa-area",
+    "signature": "mission:10-gs-ortocentro:10-gs-ortocentro:altura-hipotenusa-área",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-ORT-022",
@@ -6142,7 +6142,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-propriedades-construcoes:10-gs-propriedades-construcoes:soma-angulos-triangulo",
+    "signature": "mission:10-gs-propriedades-construcoes:10-gs-propriedades-construcoes:soma-ângulos-triangulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-PC-002",
@@ -6171,7 +6171,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-propriedades-construcoes:10-gs-propriedades-construcoes:semelhanca-inverter-area",
+    "signature": "mission:10-gs-propriedades-construcoes:10-gs-propriedades-construcoes:semelhanca-inverter-área",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-PC-026",
@@ -6258,7 +6258,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:10-gs-propriedades-construcoes:10-gs-propriedades-construcoes:isosceles-angulos",
+    "signature": "mission:10-gs-propriedades-construcoes:10-gs-propriedades-construcoes:isosceles-ângulos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN10GS-PC-003",
@@ -6301,8 +6301,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "aplicação",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(1)?",
     "o": [
       "3",
@@ -6311,8 +6311,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "2"
     ],
     "a": 3,
-    "sol": "Derivando a expressao e substituindo x=1, obtem-se 2.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "Derivando a expressão e substituindo x=1, obtém-se 2.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6330,18 +6330,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "compreensão",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Geometricamente, f'(a) representa",
     "o": [
       "o declive de qualquer secante",
-      "o declive da reta tangente ao grafico em x=a",
+      "o declive da reta tangente ao gráfico em x=a",
       "a ordenada do ponto",
       "a distancia a origem"
     ],
     "a": 1,
     "sol": "A derivada e o declive da tangente.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6359,8 +6359,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Raciocinio",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "raciocínio",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, o limite lim_{h->0} [f(0+h)-f(0)]/h vale",
     "o": [
       "2",
@@ -6370,7 +6370,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "Expandindo e simplificando, o quociente tende para 2a=0.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6388,8 +6388,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "aplicação",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "Para f(x)=x^2, quanto vale f'(3)?",
     "o": [
       "6",
@@ -6398,8 +6398,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "12"
     ],
     "a": 0,
-    "sol": "Derivando a expressao e substituindo x=3, obtem-se 6.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "Derivando a expressão e substituindo x=3, obtém-se 6.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6418,8 +6418,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelacao",
-    "focus": "Taxa instantanea e derivada num ponto",
-    "q": "A posicao e dada por s(t)=t^2. Qual e a velocidade instantanea em t=3?",
+    "focus": "Taxa instantânea e derivada num ponto",
+    "q": "A posição e dada por s(t)=t^2. Qual é a velocidade instantânea em t=3?",
     "o": [
       "6",
       "8",
@@ -6427,8 +6427,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "3"
     ],
     "a": 0,
-    "sol": "A velocidade e s'(t); avaliando em t=3, obtem-se 6.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "sol": "A velocidade e s'(t); avaliando em t=3, obtém-se 6.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6446,8 +6446,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa instantanea e derivada num ponto",
+    "cognitive": "compreensão",
+    "focus": "Taxa instantânea e derivada num ponto",
     "q": "A definicao por limite de f'(a) e",
     "o": [
       "lim_{h->0} [f(a+h)+f(a)]/h",
@@ -6457,7 +6457,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "E o limite do quociente incremental.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6475,9 +6475,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-derivada-ponto",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Taxa instantanea e derivada num ponto",
-    "q": "Num ponto x=2, sabe-se que f(2)=5 e f'(2)=3. Qual e o declive da tangente?",
+    "cognitive": "interpretação",
+    "focus": "Taxa instantânea e derivada num ponto",
+    "q": "Num ponto x=2, sabe-se que f(2)=5 e f'(2)=3. Qual é o declive da tangente?",
     "o": [
       "5",
       "2",
@@ -6486,7 +6486,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "Por definicao, o declive da tangente e f'(2)=3.",
-    "hyp": "Pode confundir taxa media com derivada, ou substituir incorretamente no quociente incremental.",
+    "hyp": "Pode confundir taxa média com derivada, ou substituir incorretamente no quociente incremental.",
     "contexts": [
       "mission"
     ],
@@ -6501,12 +6501,12 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11CD-FD-012",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Funcao derivada",
-    "q": "Se f(x)=5x^3, entao f'(x)=",
+    "cognitive": "aplicação",
+    "focus": "função derivada",
+    "q": "Se f(x)=5x^3, então f'(x)=",
     "o": [
       "5x^3",
       "15x^2+1",
@@ -6514,27 +6514,27 @@ export const VNEXT_MISSION_QUESTIONS=[
       "15x^2"
     ],
     "a": 3,
-    "sol": "Derivando termo a termo obtem-se 15x^2.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando termo a termo obtém-se 15x^2.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:derivar-polinomio:12",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:derivar-polinomio:12",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-012",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-FD-002",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Funcao derivada",
+    "cognitive": "compreensão",
+    "focus": "função derivada",
     "q": "Se f'(x)>0 num intervalo, f e",
     "o": [
       "decrescente",
@@ -6544,27 +6544,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "Sinal positivo da derivada indica crescimento.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:conceito:2",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:conceito:2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-002",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-FD-036",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Funcao derivada",
-    "q": "Se f'(x)=2x, em x>0, entao",
+    "cognitive": "interpretação",
+    "focus": "função derivada",
+    "q": "Se f'(x)=2x, em x>0, então",
     "o": [
       "f e decrescente",
       "f e constante",
@@ -6573,27 +6573,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "Para x>0, 2x>0.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:sinal:36",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:sinal:36",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-036",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-FD-013",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Funcao derivada",
-    "q": "Se f(x)=2x^5, entao f'(x)=",
+    "cognitive": "aplicação",
+    "focus": "função derivada",
+    "q": "Se f(x)=2x^5, então f'(x)=",
     "o": [
       "10x^4",
       "2x^5",
@@ -6601,27 +6601,27 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Derivando termo a termo obtem-se 10x^4.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "sol": "Derivando termo a termo obtém-se 10x^4.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:derivar-polinomio:13",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:derivar-polinomio:13",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-013",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-FD-046",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Funcao derivada",
+    "cognitive": "raciocínio",
+    "focus": "função derivada",
     "q": "f'(x)=4x^3; uma possibilidade para f(x) e",
     "o": [
       "4x^4+C",
@@ -6631,26 +6631,26 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "A derivada de x^4+C e 4x^3.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:reconstruir:46",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:reconstruir:46",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-046",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-FD-003",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Funcao derivada",
+    "cognitive": "compreensão",
+    "focus": "função derivada",
     "q": "Se f'(x)<0 num intervalo, f e",
     "o": [
       "crescente",
@@ -6660,27 +6660,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "Sinal negativo indica decrescimento.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:conceito:3",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:conceito:3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-003",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-FD-037",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-funcao-derivada",
+    "subtopicId": "11-cd-função-derivada",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Funcao derivada",
-    "q": "Se f'(x)=2x, em x<0, entao",
+    "cognitive": "interpretação",
+    "focus": "função derivada",
+    "q": "Se f'(x)=2x, em x<0, então",
     "o": [
       "f e decrescente",
       "f e crescente",
@@ -6689,32 +6689,32 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "Para x<0, 2x<0.",
-    "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+    "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-funcao-derivada:11-cd-funcao-derivada:sinal:37",
+    "signature": "mission:11-cd-função-derivada:11-cd-função-derivada:sinal:37",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-FD-037",
-    "sourceFile": "content/vnext/math-a/11/11-cd-funcao-derivada.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-função-derivada.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-012",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Interpretacao",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)=-2x, entao junto de x=0 a situacao correta e",
+    "cognitive": "interpretação",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Se f'(x)=-2x, então junto de x=0 a situação correta é",
     "o": [
       "crescente em ]-inf,0[ e decrescente em ]0,+inf[",
-      "maximo em x=0",
-      "nao se pode concluir nada",
-      "crescente em ]-inf,0[ e decrescente em ]0,+inf[; maximo em x=0."
+      "máximo em x=0",
+      "não se pode concluir nada",
+      "crescente em ]-inf,0[ e decrescente em ]0,+inf[; máximo em x=0."
     ],
     "a": 3,
     "sol": "Analisa-se o sinal de f' antes e depois de 0.",
@@ -6722,22 +6722,22 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:sinal:12",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:sinal:12",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-012",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-002",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "compreensão",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Sabe-se que f'(x)<0 para todo o x de ]1,5[. Como varia f nesse intervalo?",
     "o": [
       "crescente",
@@ -6751,27 +6751,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:conceito:2",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:conceito:2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-002",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-031",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Raciocinio",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "raciocínio",
+    "focus": "Monotonia, extremos e otimização",
     "q": "No intervalo [-2,3], para f(x)=x^2, os extremos absolutos sao",
     "o": [
-      "maximo 9 em x=3",
-      "minimo 0 em x=0",
-      "maximo 9 em x=3; minimo 0 em x=0.",
+      "máximo 9 em x=3",
+      "mínimo 0 em x=0",
+      "máximo 9 em x=3; mínimo 0 em x=0.",
       "apenas o ponto onde f'=0"
     ],
     "a": 2,
@@ -6780,56 +6780,56 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:extremos-absolutos:31",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:extremos-absolutos:31",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-031",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-021",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "aplicação",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Para f(x)=x^2-4x+5, o extremo relevante ocorre em",
     "o": [
-      "x=2, sendo minimo e f(2)=1.",
-      "x=2, sendo minimo mas com outro valor",
+      "x=2, sendo mínimo e f(2)=1.",
+      "x=2, sendo mínimo mas com outro valor",
       "x=0",
-      "nao existe extremo"
+      "não existe extremo"
     ],
     "a": 0,
-    "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parabola.",
+    "sol": "Deriva-se, resolve-se f'(x)=0 e usa-se o sinal da derivada ou a concavidade da parábola.",
     "hyp": "Pode confundir zeros da derivada com extremos garantidos, ou interpretar incorretamente a mudanca de sinal de f'.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:quadratica:21",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:quadratica:21",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-021",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-046",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, entao",
+    "cognitive": "raciocínio",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Se f'(x)>0 em ]-inf,1[, f'(1)=0 e f'(x)<0 em ]1,+inf[, então",
     "o": [
-      "f tem minimo local em x=1",
-      "f tem maximo local em x=1",
-      "f e crescente em todo o dominio",
+      "f tem mínimo local em x=1",
+      "f tem máximo local em x=1",
+      "f e crescente em todo o domínio",
       "f(1)=0"
     ],
     "a": 1,
@@ -6838,25 +6838,25 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:avancado:46",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:avancado:46",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-046",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-003",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Monotonia, extremos e otimizacao",
+    "cognitive": "compreensão",
+    "focus": "Monotonia, extremos e otimização",
     "q": "Um ponto onde f'(a)=0 chama-se frequentemente",
     "o": [
-      "assintota",
+      "assíntota",
       "zero obrigatorio de f",
       "ponto estacionario",
       "ponto de descontinuidade"
@@ -6867,23 +6867,23 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:conceito:3",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:conceito:3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-003",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-MO-036",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-monotonia-otimizacao",
+    "subtopicId": "11-cd-monotonia-otimização",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelacao",
-    "focus": "Monotonia, extremos e otimizacao",
-    "q": "Um retangulo tem perimetro 20. Se um lado mede x, a area e A(x)=x(10-x). A area maxima ocorre para",
+    "focus": "Monotonia, extremos e otimização",
+    "q": "Um retangulo tem perimetro 20. Se um lado mede x, a área e A(x)=x(10-x). A área maxima ocorre para",
     "o": [
       "x=10",
       "x=2",
@@ -6896,11 +6896,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-monotonia-otimizacao:11-cd-monotonia-otimizacao:otimizacao:36",
+    "signature": "mission:11-cd-monotonia-otimização:11-cd-monotonia-otimização:otimização:36",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-MO-036",
-    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimizacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-monotonia-otimização.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -6910,8 +6910,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "aplicação",
+    "focus": "Regras de derivação",
     "q": "Deriva f(x)=x^7.",
     "o": [
       "x^7",
@@ -6920,12 +6920,12 @@ export const VNEXT_MISSION_QUESTIONS=[
       "7x^6"
     ],
     "a": 3,
-    "sol": "Aplicando regra da potencia e linearidade obtem-se 7x^6.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando regra da potência e linearidade obtém-se 7x^6.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-regras:11-cd-regras:potencia:12",
+    "signature": "mission:11-cd-regras:11-cd-regras:potência:12",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-REG-012",
@@ -6939,8 +6939,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Regras de derivacao",
+    "cognitive": "compreensão",
+    "focus": "Regras de derivação",
     "q": "A derivada de cf, com c constante, e",
     "o": [
       "c'f",
@@ -6950,7 +6950,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 1,
     "sol": "A constante multiplica a derivada.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -6968,8 +6968,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "aplicação",
+    "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x(x+1).",
     "o": [
       "2x+1",
@@ -6978,8 +6978,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 2x+1.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 2x+1.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -6997,8 +6997,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "aplicação",
+    "focus": "Regras de derivação",
     "q": "Deriva f(x)=3x^4.",
     "o": [
       "12x^3",
@@ -7007,12 +7007,12 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 0,
-    "sol": "Aplicando regra da potencia e linearidade obtem-se 12x^3.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando regra da potência e linearidade obtém-se 12x^3.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-regras:11-cd-regras:potencia:13",
+    "signature": "mission:11-cd-regras:11-cd-regras:potência:13",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-REG-013",
@@ -7026,9 +7026,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Regras de derivacao",
-    "q": "Se f'(x)=2x e g'(x)=3, entao (f+g)'(x)=",
+    "cognitive": "raciocínio",
+    "focus": "Regras de derivação",
+    "q": "Se f'(x)=2x e g'(x)=3, então (f+g)'(x)=",
     "o": [
       "2x+3",
       "6x",
@@ -7037,7 +7037,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "Somam-se as derivadas.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7055,8 +7055,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Regras de derivacao",
+    "cognitive": "compreensão",
+    "focus": "Regras de derivação",
     "q": "A derivada de x^n, para n inteiro positivo, e",
     "o": [
       "x^(n-1)",
@@ -7065,8 +7065,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "(n-1)x^n"
     ],
     "a": 2,
-    "sol": "E a regra da potencia.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "E a regra da potência.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7084,8 +7084,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-regras",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Aplicacao",
-    "focus": "Regras de derivacao",
+    "cognitive": "aplicação",
+    "focus": "Regras de derivação",
     "q": "Usando a regra do produto, deriva f(x)=x^2(x+1).",
     "o": [
       "3x^2-2x",
@@ -7094,8 +7094,8 @@ export const VNEXT_MISSION_QUESTIONS=[
       "0"
     ],
     "a": 1,
-    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtem-se 3x^2+2x.",
-    "hyp": "Pode aplicar uma regra de derivacao ao objeto errado, esquecer fatores ou confundir produto/quociente com derivacao termo a termo.",
+    "sol": "Aplicando (uv)'=u'v+uv' e simplificando obtém-se 3x^2+2x.",
+    "hyp": "Pode aplicar uma regra de derivação ao objeto errado, esquecer fatores ou confundir produto/quociente com derivação termo a termo.",
     "contexts": [
       "mission"
     ],
@@ -7113,9 +7113,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Para f(x)=x^2, a tangente em x=2 tem equacao",
+    "cognitive": "aplicação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Para f(x)=x^2, a tangente em x=2 tem equação",
     "o": [
       "y=4x+4",
       "y=2x",
@@ -7128,7 +7128,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-tangente:11-cd-tangente:equacao-tangente:12",
+    "signature": "mission:11-cd-tangente:11-cd-tangente:equação-tangente:12",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TAN-012",
@@ -7142,8 +7142,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Reta tangente e interpretacao geometrica",
+    "cognitive": "compreensão",
+    "focus": "Reta tangente e interpretação geométrica",
     "q": "O declive da tangente em x=a e",
     "o": [
       "f(a)",
@@ -7171,9 +7171,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Raciocinio",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Sabendo que f(2)=5 e f'(2)=3, qual e a reta tangente?",
+    "cognitive": "raciocínio",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Sabendo que f(2)=5 e f'(2)=3, qual é a reta tangente?",
     "o": [
       "y=3x+5",
       "y=3x-1",
@@ -7200,9 +7200,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Para f(x)=x^2, a tangente em x=-1 tem equacao",
+    "cognitive": "aplicação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Para f(x)=x^2, a tangente em x=-1 tem equação",
     "o": [
       "y=-2x-1",
       "y=-2x+1",
@@ -7215,7 +7215,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-tangente:11-cd-tangente:equacao-tangente:13",
+    "signature": "mission:11-cd-tangente:11-cd-tangente:equação-tangente:13",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TAN-013",
@@ -7230,8 +7230,8 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximacao linear f(2,1) e",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximação linear f(2,1) e",
     "o": [
       "5,03",
       "aproximadamente 5,3",
@@ -7244,7 +7244,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-tangente:11-cd-tangente:aproximacao-linear:46",
+    "signature": "mission:11-cd-tangente:11-cd-tangente:aproximação-linear:46",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TAN-046",
@@ -7258,9 +7258,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "Uma equacao da tangente em x=a e",
+    "cognitive": "compreensão",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "Uma equação da tangente em x=a e",
     "o": [
       "y-a=f(a)(x-f'(a))",
       "y=f(a)x+a",
@@ -7287,9 +7287,9 @@ export const VNEXT_MISSION_QUESTIONS=[
     "subtopicId": "11-cd-tangente",
     "year": "11.º",
     "difficulty": 3,
-    "cognitive": "Interpretacao",
-    "focus": "Reta tangente e interpretacao geometrica",
-    "q": "A tangente ao grafico em x=2 e y=4x-3. Entao f'(2)=",
+    "cognitive": "interpretação",
+    "focus": "Reta tangente e interpretação geométrica",
+    "q": "A tangente ao gráfico em x=2 e y=4x-3. então f'(2)=",
     "o": [
       "5",
       "2",
@@ -7313,12 +7313,12 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11CD-TM-012",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa media de variacao",
-    "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=2 e x=5?",
+    "cognitive": "aplicação",
+    "focus": "taxa média de variação",
+    "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=2 e x=5?",
     "o": [
       "8",
       "6",
@@ -7327,56 +7327,56 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "(25-4)/(5-2)=7.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:quadratica:12",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:quadratica:12",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-012",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-TM-002",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa media de variacao",
-    "q": "Geometricamente, a taxa media de variacao entre dois pontos do grafico e",
+    "cognitive": "compreensão",
+    "focus": "taxa média de variação",
+    "q": "Geometricamente, a taxa média de variação entre dois pontos do gráfico e",
     "o": [
       "o declive da tangente no primeiro ponto",
       "o declive da reta secante",
-      "a area sob o grafico",
-      "a ordenada media"
+      "a área sob o gráfico",
+      "a ordenada média"
     ],
     "a": 1,
     "sol": "A secante passa pelos dois pontos considerados.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:conceito:2",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:conceito:2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-002",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-TM-031",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelacao",
-    "focus": "Taxa media de variacao",
-    "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual e a taxa media?",
+    "focus": "taxa média de variação",
+    "q": "Uma grandeza de temperatura passa de 12 para 20 em 4 unidades de tempo. Qual é a taxa média?",
     "o": [
       "8",
       "4",
@@ -7385,27 +7385,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "(20-12)/4=2 graus por hora.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:modelacao:31",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:modelacao:31",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-031",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 2,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-TM-013",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 2,
-    "cognitive": "Aplicacao",
-    "focus": "Taxa media de variacao",
-    "q": "Para f(x)=x^2, qual e a taxa media de variacao entre x=0 e x=4?",
+    "cognitive": "aplicação",
+    "focus": "taxa média de variação",
+    "q": "Para f(x)=x^2, qual é a taxa média de variação entre x=0 e x=4?",
     "o": [
       "4",
       "5",
@@ -7414,27 +7414,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "(16-0)/(4-0)=4.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:quadratica:13",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:quadratica:13",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-013",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-TM-041",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 4,
-    "cognitive": "Raciocinio",
-    "focus": "Taxa media de variacao",
-    "q": "Se f(1)=5 e a taxa media em [1,4] e 3, quanto vale f(4)?",
+    "cognitive": "raciocínio",
+    "focus": "taxa média de variação",
+    "q": "Se f(1)=5 e a taxa média em [1,4] e 3, quanto vale f(4)?",
     "o": [
       "14",
       "15",
@@ -7443,27 +7443,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 0,
     "sol": "[f(4)-5]/(4-1)=3, logo f(4)=14.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:inversa:41",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:inversa:41",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-041",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-TM-003",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 1,
-    "cognitive": "Compreensao",
-    "focus": "Taxa media de variacao",
-    "q": "Se f mede distancia em km e t mede tempo em horas, a taxa media tem unidades",
+    "cognitive": "compreensão",
+    "focus": "taxa média de variação",
+    "q": "Se f mede distancia em km e t mede tempo em horas, a taxa média tem unidades",
     "o": [
       "km.h",
       "h/km",
@@ -7472,27 +7472,27 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 2,
     "sol": "As unidades da taxa sao unidades de saida por unidades de entrada.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:conceito:3",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:conceito:3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-003",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CD-TM-032",
     "themeId": "11-cd",
-    "subtopicId": "11-cd-taxa-media",
+    "subtopicId": "11-cd-taxa-média",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Modelacao",
-    "focus": "Taxa media de variacao",
-    "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual e a taxa media?",
+    "focus": "taxa média de variação",
+    "q": "Uma grandeza de volume passa de 100 para 160 em 3 unidades de tempo. Qual é a taxa média?",
     "o": [
       "60",
       "3",
@@ -7501,15 +7501,15 @@ export const VNEXT_MISSION_QUESTIONS=[
     ],
     "a": 3,
     "sol": "(160-100)/3=20 litros por minuto.",
-    "hyp": "Pode confundir variacao total com taxa media ou inverter o quociente.",
+    "hyp": "Pode confundir variação total com taxa média ou inverter o quociente.",
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cd-taxa-media:11-cd-taxa-media:modelacao:32",
+    "signature": "mission:11-cd-taxa-média:11-cd-taxa-média:modelacao:32",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CD-TM-032",
-    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-media.json",
+    "sourceFile": "content/vnext/math-a/11/11-cd-taxa-média.json",
     "optionOrderVersion": 2,
     "productionEligible": false
   },
@@ -7592,7 +7592,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-adicao-multiplicacao:11-cont-adicao-multiplicacao:numeros-dois-algarismos",
+    "signature": "mission:11-cont-adicao-multiplicacao:11-cont-adicao-multiplicacao:números-dois-algarismos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-AM-021",
@@ -7621,7 +7621,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-adicao-multiplicacao:11-cont-adicao-multiplicacao:adicao-metodos",
+    "signature": "mission:11-cont-adicao-multiplicacao:11-cont-adicao-multiplicacao:adicao-métodos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-AM-011",
@@ -7708,7 +7708,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-adicao-multiplicacao:11-cont-adicao-multiplicacao:numeros-tres-algarismos",
+    "signature": "mission:11-cont-adicao-multiplicacao:11-cont-adicao-multiplicacao:números-tres-algarismos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-AM-022",
@@ -7824,7 +7824,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-arranjos:11-cont-arranjos:relacao-combinacoes",
+    "signature": "mission:11-cont-arranjos:11-cont-arranjos:relacao-combinações",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-ARR-018",
@@ -7922,7 +7922,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11CONT-COMB-007",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -7940,18 +7940,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:comissao",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:comissao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-007",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-COMB-002",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -7969,18 +7969,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:formula",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:formula",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-002",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-COMB-021",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -7998,18 +7998,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:equipa-12",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:equipa-12",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-021",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-COMB-016",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -8027,18 +8027,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:ordem-importa",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:ordem-importa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-016",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-COMB-049",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -8056,18 +8056,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:modelacao-topicos",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:modelacao-topicos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-049",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-COMB-005",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Interpretação",
@@ -8085,18 +8085,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:equipa",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:equipa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-005",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-COMB-022",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-combinacoes",
+    "subtopicId": "11-cont-combinações",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -8114,11 +8114,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-combinacoes:11-cont-combinacoes:livros",
+    "signature": "mission:11-cont-combinações:11-cont-combinações:livros",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-COMB-022",
-    "sourceFile": "content/vnext/math-a/11/11-cont-combinacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-combinações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -8404,7 +8404,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-fatorial:11-cont-fatorial:equacao-fatorial",
+    "signature": "mission:11-cont-fatorial:11-cont-fatorial:equação-fatorial",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-FAT-021",
@@ -8520,7 +8520,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-fatorial:11-cont-fatorial:equacao-quociente",
+    "signature": "mission:11-cont-fatorial:11-cont-fatorial:equação-quociente",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-FAT-023",
@@ -8531,7 +8531,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11CONT-PERM-006",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -8549,18 +8549,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:perm-6",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:perm-6",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-006",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-PERM-002",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -8578,18 +8578,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:formula",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:formula",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-002",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-PERM-021",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -8607,18 +8607,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:bloco-ordem-fixa",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:bloco-ordem-fixa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-021",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-PERM-018",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -8636,18 +8636,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:troca-posicoes",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:troca-posições",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-018",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-PERM-047",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -8665,18 +8665,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:modelacao-tarefas",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:modelacao-tarefas",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-047",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-PERM-003",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -8694,18 +8694,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:perm-3",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:perm-3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-003",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11CONT-PERM-022",
     "themeId": "11-cont",
-    "subtopicId": "11-cont-permutacoes",
+    "subtopicId": "11-cont-permutações",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -8723,18 +8723,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-cont-permutacoes:11-cont-permutacoes:tres-juntos",
+    "signature": "mission:11-cont-permutações:11-cont-permutações:tres-juntos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11CONT-PERM-022",
-    "sourceFile": "content/vnext/math-a/11/11-cont-permutacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-cont-permutações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-006",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -8752,18 +8752,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:forma-canonica",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:forma-canonica",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-006",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-002",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -8781,18 +8781,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:base-vertical",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:base-vertical",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-002",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-021",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -8810,18 +8810,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:confirmar-vertical",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:confirmar-vertical",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-021",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-018",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Raciocínio",
@@ -8839,18 +8839,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:divisao-obliqua",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:divisao-obliqua",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-018",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-044",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -8868,18 +8868,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:custo-medio",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:custo-medio",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-044",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-003",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -8897,18 +8897,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:base-horizontal",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:base-horizontal",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-003",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-AM-022",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-assintotas-modelacao",
+    "subtopicId": "11-fun-assíntotas-modelacao",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -8926,11 +8926,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-assintotas-modelacao:11-fun-assintotas-modelacao:duas-verticais",
+    "signature": "mission:11-fun-assíntotas-modelacao:11-fun-assíntotas-modelacao:duas-verticais",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-AM-022",
-    "sourceFile": "content/vnext/math-a/11/11-fun-assintotas-modelacao.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-assíntotas-modelacao.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -9140,7 +9140,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11FUN-DP-006",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -9158,18 +9158,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:divisao-fatorizada",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:divisao-fatorizada",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-006",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-DP-002",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -9187,18 +9187,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:grau-resto",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:grau-resto",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-002",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-DP-021",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -9216,18 +9216,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:ruffini",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:ruffini",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-021",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-DP-014",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -9245,18 +9245,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:coeficiente-zero",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:coeficiente-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-014",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-DP-047",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -9274,18 +9274,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:modelacao-zero",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:modelacao-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-047",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-DP-003",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -9303,18 +9303,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:resto-linear",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:resto-linear",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-003",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11FUN-DP-022",
     "themeId": "11-fun",
-    "subtopicId": "11-fun-divisao-polinomios",
+    "subtopicId": "11-fun-divisao-polinómios",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -9332,11 +9332,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-divisao-polinomios:11-fun-divisao-polinomios:ruffini-raiz2",
+    "signature": "mission:11-fun-divisao-polinómios:11-fun-divisao-polinómios:ruffini-raiz2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-DP-022",
-    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinomios.json",
+    "sourceFile": "content/vnext/math-a/11/11-fun-divisao-polinómios.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -9419,7 +9419,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-operacoes:11-fun-operacoes:dominio-composicao",
+    "signature": "mission:11-fun-operacoes:11-fun-operacoes:domínio-composição",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-OP-023",
@@ -9448,7 +9448,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-operacoes:11-fun-operacoes:dominio-original",
+    "signature": "mission:11-fun-operacoes:11-fun-operacoes:domínio-original",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-OP-009",
@@ -9506,7 +9506,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-operacoes:11-fun-operacoes:dominio-quociente",
+    "signature": "mission:11-fun-operacoes:11-fun-operacoes:domínio-quociente",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-OP-003",
@@ -9535,7 +9535,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-operacoes:11-fun-operacoes:composicao-linear-quadratica",
+    "signature": "mission:11-fun-operacoes:11-fun-operacoes:composição-linear-quadratica",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-OP-021",
@@ -9593,7 +9593,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-racionais:11-fun-racionais:dominio-linear",
+    "signature": "mission:11-fun-racionais:11-fun-racionais:domínio-linear",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-RAT-002",
@@ -9622,7 +9622,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-racionais:11-fun-racionais:dominio",
+    "signature": "mission:11-fun-racionais:11-fun-racionais:domínio",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-RAT-027",
@@ -9709,7 +9709,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-racionais:11-fun-racionais:dominio-quadratico",
+    "signature": "mission:11-fun-racionais:11-fun-racionais:domínio-quadratico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-RAT-003",
@@ -9912,7 +9912,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-fun-resto-raizes:11-fun-resto-raizes:resto-avaliacao",
+    "signature": "mission:11-fun-resto-raizes:11-fun-resto-raizes:resto-avaliação",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11FUN-RR-003",
@@ -9952,7 +9952,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11PE-AN-006",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -9970,18 +9970,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:produto-por-angulo",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:produto-por-ângulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-006",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11PE-AN-002",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -9999,18 +9999,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:intervalo-angulo",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:intervalo-ângulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-002",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11PE-AN-022",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -10028,18 +10028,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:normalizacao",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:normalizacao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-022",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11PE-AN-015",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -10057,18 +10057,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:sinal-e-angulo",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:sinal-e-ângulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-015",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11PE-AN-046",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -10086,18 +10086,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:trabalho-angulo",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:trabalho-ângulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-046",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11PE-AN-003",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -10115,18 +10115,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:cos-extremos",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:cos-extremos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-003",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11PE-AN-021",
     "themeId": "11-pe",
-    "subtopicId": "11-pe-angulo-norma",
+    "subtopicId": "11-pe-ângulo-norma",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -10144,11 +10144,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-angulo-norma:11-pe-angulo-norma:norma-escalar",
+    "signature": "mission:11-pe-ângulo-norma:11-pe-ângulo-norma:norma-escalar",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-AN-021",
-    "sourceFile": "content/vnext/math-a/11/11-pe-angulo-norma.json",
+    "sourceFile": "content/vnext/math-a/11/11-pe-ângulo-norma.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -10434,7 +10434,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-distancias:11-pe-distancias:normalizar-equacoes",
+    "signature": "mission:11-pe-distancias:11-pe-distancias:normalizar-equações",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-DIST-023",
@@ -10492,7 +10492,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-distancias:11-pe-distancias:interpretacao-projecao",
+    "signature": "mission:11-pe-distancias:11-pe-distancias:interpretação-projecao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-DIST-043",
@@ -11159,7 +11159,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-pe-retas-planos:11-pe-retas-planos:angulo-planos",
+    "signature": "mission:11-pe-retas-planos:11-pe-retas-planos:ângulo-planos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11PE-RP-022",
@@ -11420,7 +11420,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-suc-pa:11-suc-pa:razao-pa",
+    "signature": "mission:11-suc-pa:11-suc-pa:razão-pa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11SUC-PA-002",
@@ -11536,7 +11536,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-suc-pa:11-suc-pa:identificar-razao",
+    "signature": "mission:11-suc-pa:11-suc-pa:identificar-razão",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11SUC-PA-003",
@@ -11623,7 +11623,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-suc-pg:11-suc-pg:razao-pg",
+    "signature": "mission:11-suc-pg:11-suc-pg:razão-pg",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11SUC-PG-002",
@@ -11739,7 +11739,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-suc-pg:11-suc-pg:identificar-razao",
+    "signature": "mission:11-suc-pg:11-suc-pg:identificar-razão",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11SUC-PG-003",
@@ -11797,7 +11797,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-suc-somas:11-suc-somas:soma-pa-razao",
+    "signature": "mission:11-suc-somas:11-suc-somas:soma-pa-razão",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11SUC-SOM-006",
@@ -11913,7 +11913,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-suc-somas:11-suc-somas:media-pa",
+    "signature": "mission:11-suc-somas:11-suc-somas:média-pa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11SUC-SOM-043",
@@ -12185,7 +12185,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN11TRIG-AR-006",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -12203,18 +12203,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:converter-graus-rad",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:converter-graus-rad",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-006",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-AR-003",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12232,18 +12232,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:graus-quarto-volta",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:graus-quarto-volta",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-003",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-AR-021",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -12261,18 +12261,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:reduzir-graus",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:reduzir-graus",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-021",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-AR-018",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -12290,18 +12290,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:coterminais",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:coterminais",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-018",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-AR-037",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -12319,18 +12319,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:voltas-total",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:voltas-total",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-037",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-AR-004",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12348,18 +12348,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:radianos-volta",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:radianos-volta",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-004",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-AR-022",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-angulos-radianos",
+    "subtopicId": "11-trig-ângulos-radianos",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -12377,18 +12377,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-angulos-radianos:11-trig-angulos-radianos:reduzir-rad",
+    "signature": "mission:11-trig-ângulos-radianos:11-trig-ângulos-radianos:reduzir-rad",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-AR-022",
-    "sourceFile": "content/vnext/math-a/11/11-trig-angulos-radianos.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-ângulos-radianos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-006",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -12406,18 +12406,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:pontos-notaveis",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:pontos-notaveis",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-006",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-002",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12435,18 +12435,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:cos-abcissa",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:cos-abcissa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-002",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-028",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -12464,18 +12464,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:preimagens-cos",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:preimagens-cos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-028",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-008",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -12493,18 +12493,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:sinais-quadrantes",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:sinais-quadrantes",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-008",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-048",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -12522,18 +12522,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:modelacao-posicao",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:modelacao-posição",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-048",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-003",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12551,18 +12551,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:sin-ordenada",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:sin-ordenada",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-003",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-CIR-021",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-circulo",
+    "subtopicId": "11-trig-círculo",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -12580,18 +12580,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-circulo:11-trig-circulo:valores-notaveis",
+    "signature": "mission:11-trig-círculo:11-trig-círculo:valores-notaveis",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-CIR-021",
-    "sourceFile": "content/vnext/math-a/11/11-trig-circulo.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-círculo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-006",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -12609,18 +12609,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:sin-valor",
+    "signature": "mission:11-trig-equações:11-trig-equações:sin-valor",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-006",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-002",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12638,18 +12638,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:cos-zero",
+    "signature": "mission:11-trig-equações:11-trig-equações:cos-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-002",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-021",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -12667,18 +12667,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:sem-solucao",
+    "signature": "mission:11-trig-equações:11-trig-equações:sem-solução",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-021",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-018",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Raciocínio",
@@ -12696,18 +12696,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:equacao-linear-cos",
+    "signature": "mission:11-trig-equações:11-trig-equações:equação-linear-cos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-018",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-048",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -12725,18 +12725,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:modelacao-periodica",
+    "signature": "mission:11-trig-equações:11-trig-equações:modelacao-periodica",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-048",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-003",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12754,18 +12754,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:tan-zero",
+    "signature": "mission:11-trig-equações:11-trig-equações:tan-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-003",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-EQ-022",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-equacoes",
+    "subtopicId": "11-trig-equações",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -12783,18 +12783,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-equacoes:11-trig-equacoes:quadratica-sin",
+    "signature": "mission:11-trig-equações:11-trig-equações:quadratica-sin",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-EQ-022",
-    "sourceFile": "content/vnext/math-a/11/11-trig-equacoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-006",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -12812,18 +12812,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:minimo-cosseno",
+    "signature": "mission:11-trig-funções:11-trig-funções:mínimo-cosseno",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-006",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-002",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12841,18 +12841,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:periodo-cosseno",
+    "signature": "mission:11-trig-funções:11-trig-funções:período-cosseno",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-002",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-024",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Aplicação",
@@ -12870,18 +12870,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:imagem-deslocada",
+    "signature": "mission:11-trig-funções:11-trig-funções:imagem-deslocada",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-024",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-019",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -12899,18 +12899,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:translacao-vertical",
+    "signature": "mission:11-trig-funções:11-trig-funções:translacao-vertical",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-019",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-037",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -12928,18 +12928,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:extremo-modelo",
+    "signature": "mission:11-trig-funções:11-trig-funções:extremo-modelo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-037",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-003",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -12957,18 +12957,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:imagem-seno",
+    "signature": "mission:11-trig-funções:11-trig-funções:imagem-seno",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-003",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN11TRIG-FUN-021",
     "themeId": "11-trig",
-    "subtopicId": "11-trig-funcoes",
+    "subtopicId": "11-trig-funções",
     "year": "11.º",
     "difficulty": 3,
     "cognitive": "Compreensão",
@@ -12986,11 +12986,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-funcoes:11-trig-funcoes:parametro-D",
+    "signature": "mission:11-trig-funções:11-trig-funções:parametro-D",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-FUN-021",
-    "sourceFile": "content/vnext/math-a/11/11-trig-funcoes.json",
+    "sourceFile": "content/vnext/math-a/11/11-trig-funções.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -13044,7 +13044,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-modelacao:11-trig-modelacao:razoes-triangulo-retangulo",
+    "signature": "mission:11-trig-modelacao:11-trig-modelacao:razões-triangulo-retangulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-MOD-002",
@@ -13073,7 +13073,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-modelacao:11-trig-modelacao:completar-angulo",
+    "signature": "mission:11-trig-modelacao:11-trig-modelacao:completar-ângulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-MOD-021",
@@ -13160,7 +13160,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:11-trig-modelacao:11-trig-modelacao:razao-direta",
+    "signature": "mission:11-trig-modelacao:11-trig-modelacao:razão-direta",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN11TRIG-MOD-004",
@@ -13421,7 +13421,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-argand:12-cplx-argand:modulo-geometrico",
+    "signature": "mission:12-cplx-argand:12-cplx-argand:módulo-geometrico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-AG-006",
@@ -13606,7 +13606,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12CPLX-CM-008",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -13624,18 +13624,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:modulo-real",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:módulo-real",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-008",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-CM-004",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -13653,18 +13653,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:modulo",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:módulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-004",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-CM-021",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -13682,18 +13682,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:modulo-unitario",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:módulo-unitario",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-021",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-CM-017",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -13711,18 +13711,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:real-criterio",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:real-criterio",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-017",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-CM-048",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -13740,18 +13740,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:modelacao-distancia",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:modelacao-distancia",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-048",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-CM-002",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -13769,18 +13769,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:conjugado",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:conjugado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-002",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-CM-022",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-conjugado-modulo",
+    "subtopicId": "12-cplx-conjugado-módulo",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -13798,11 +13798,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-conjugado-modulo:12-cplx-conjugado-modulo:produto-conjugado",
+    "signature": "mission:12-cplx-conjugado-módulo:12-cplx-conjugado-módulo:produto-conjugado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-CM-022",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-modulo.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-conjugado-módulo.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -14059,7 +14059,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-forma-trig:12-cplx-forma-trig:modulo",
+    "signature": "mission:12-cplx-forma-trig:12-cplx-forma-trig:módulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-FT-002",
@@ -14422,7 +14422,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z=2(cosπ/6+i sinπ/6), então z² tem módulo...",
     "o": [
       "2.",
@@ -14436,7 +14436,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-operacoes-trig:12-cplx-operacoes-trig:potencia-modulo",
+    "signature": "mission:12-cplx-operacoes-trig:12-cplx-operacoes-trig:potência-módulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-OT-006",
@@ -14451,7 +14451,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então um argumento de z1z2 é...",
     "o": [
       "α−β.",
@@ -14480,7 +14480,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "As soluções de z²=1 são...",
     "o": [
       "±1.",
@@ -14509,7 +14509,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z=2(cos(π/6)+i sin(π/6)), um argumento de z² é...",
     "o": [
       "π/6.",
@@ -14523,7 +14523,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-operacoes-trig:12-cplx-operacoes-trig:potencia-arg",
+    "signature": "mission:12-cplx-operacoes-trig:12-cplx-operacoes-trig:potência-arg",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-OT-007",
@@ -14538,7 +14538,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Multiplicar por um complexo de módulo 2 e argumento π/3 corresponde geometricamente a...",
     "o": [
       "uma dilatação de fator 2 e rotação de π/3.",
@@ -14567,7 +14567,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "No quociente z1/z2, com z2≠0, o módulo é...",
     "o": [
       "r1r2.",
@@ -14581,7 +14581,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-operacoes-trig:12-cplx-operacoes-trig:quociente-modulos",
+    "signature": "mission:12-cplx-operacoes-trig:12-cplx-operacoes-trig:quociente-módulos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-OT-003",
@@ -14596,7 +14596,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "As soluções de z²=i têm módulo...",
     "o": [
       "√2.",
@@ -14621,7 +14621,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12CPLX-UE-013",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -14639,18 +14639,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:raiz-negativa",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:raiz-negativa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-013",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-UE-005",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -14668,18 +14668,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:periodo-potencias",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:período-potências",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-005",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-UE-026",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -14697,18 +14697,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:z-quadrado",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:z-quadrado",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-026",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-UE-019",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -14726,18 +14726,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:inclusao",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:inclusao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-019",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-UE-049",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -14755,18 +14755,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:modelacao-equacao",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:modelacao-equação",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-049",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-UE-002",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -14784,18 +14784,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:potencia-i",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:potência-i",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-002",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12CPLX-UE-032",
     "themeId": "12-cplx",
-    "subtopicId": "12-cplx-unidade-equacoes",
+    "subtopicId": "12-cplx-unidade-equações",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -14813,18 +14813,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-cplx-unidade-equacoes:12-cplx-unidade-equacoes:soma-potencias",
+    "signature": "mission:12-cplx-unidade-equações:12-cplx-unidade-equações:soma-potências",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12CPLX-UE-032",
-    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-cplx-unidade-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-014",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Raciocínio",
@@ -14842,18 +14842,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:logs-iguais-14",
+    "signature": "mission:12-expl-equações:12-expl-equações:logs-iguais-14",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-014",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-002",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -14871,18 +14871,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:exp-base-comum-2",
+    "signature": "mission:12-expl-equações:12-expl-equações:exp-base-comum-2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-002",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-021",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -14900,18 +14900,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:exp-logaritmos-21",
+    "signature": "mission:12-expl-equações:12-expl-equações:exp-logaritmos-21",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-021",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-015",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Raciocínio",
@@ -14929,18 +14929,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:soma-logs-15",
+    "signature": "mission:12-expl-equações:12-expl-equações:soma-logs-15",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-015",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-043",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -14958,18 +14958,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:modelacao-duplicacao-43",
+    "signature": "mission:12-expl-equações:12-expl-equações:modelacao-duplicacao-43",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-043",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-003",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -14987,18 +14987,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:log-def-3",
+    "signature": "mission:12-expl-equações:12-expl-equações:log-def-3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-003",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12EXPL-EQ-022",
     "themeId": "12-expl",
-    "subtopicId": "12-expl-equacoes",
+    "subtopicId": "12-expl-equações",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -15016,11 +15016,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-equacoes:12-expl-equacoes:exp-logaritmos-22",
+    "signature": "mission:12-expl-equações:12-expl-equações:exp-logaritmos-22",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EQ-022",
-    "sourceFile": "content/vnext/math-a/12/12-expl-equacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-expl-equações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -15103,7 +15103,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-exponencial:12-expl-exponencial:assintota-trans-21",
+    "signature": "mission:12-expl-exponencial:12-expl-exponencial:assíntota-trans-21",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EXP-021",
@@ -15190,7 +15190,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-exponencial:12-expl-exponencial:dominio-2",
+    "signature": "mission:12-expl-exponencial:12-expl-exponencial:domínio-2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-EXP-002",
@@ -15306,7 +15306,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-inversa-raizes:12-expl-inversa-raizes:equacao-raiz-23",
+    "signature": "mission:12-expl-inversa-raizes:12-expl-inversa-raizes:equação-raiz-23",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-IR-023",
@@ -15451,7 +15451,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-expl-logaritmica:12-expl-logaritmica:dominio-9",
+    "signature": "mission:12-expl-logaritmica:12-expl-logaritmica:domínio-9",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12EXPL-LOG-009",
@@ -15839,7 +15839,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12FCD-AP-006",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -15857,18 +15857,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:critico-linear",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:critico-linear",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-006",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-AP-002",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -15886,18 +15886,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:monotonia",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:monotonia",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-002",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-AP-021",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Modelação",
@@ -15915,18 +15915,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:otimizacao",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:otimização",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-021",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-AP-007",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -15944,18 +15944,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:sinal-derivada",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:sinal-derivada",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-007",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-AP-037",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -15973,18 +15973,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:sinal-produto",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:sinal-produto",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-037",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-AP-003",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -16002,18 +16002,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:critico",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:critico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-003",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-AP-024",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-aplicacoes",
+    "subtopicId": "12-fcd-aplicações",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Modelação",
@@ -16031,18 +16031,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-aplicacoes:12-fcd-aplicacoes:custo",
+    "signature": "mission:12-fcd-aplicações:12-fcd-aplicações:custo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-AP-024",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicacoes.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-aplicações.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-006",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -16060,18 +16060,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:ordem",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:ordem",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-006",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-004",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -16089,18 +16089,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:nao-comutativa",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:não-comutativa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-004",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-021",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -16118,18 +16118,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:dominio-quadratico",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:domínio-quadratico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-021",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-014",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -16147,18 +16147,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:modelacao",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:modelacao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-014",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-037",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -16176,18 +16176,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:log-exp",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:log-exp",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-037",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-002",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -16205,18 +16205,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:calculo",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:calculo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-002",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-COMP-022",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-composicao",
+    "subtopicId": "12-fcd-composição",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -16234,11 +16234,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-composicao:12-fcd-composicao:dominio-fatorizacao",
+    "signature": "mission:12-fcd-composição:12-fcd-composição:domínio-fatorizacao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-COMP-022",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-composicao.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-composição.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -16448,7 +16448,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12FCD-LTP-006",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -16466,18 +16466,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:potencia-negativa",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:potência-negativa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-006",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-LTP-002",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -16495,18 +16495,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:sin-basico",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:sin-basico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-002",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-LTP-021",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -16524,18 +16524,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:ln-sin",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:ln-sin",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-021",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-LTP-007",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -16553,18 +16553,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:raiz",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:raiz",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-007",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-LTP-047",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
@@ -16582,18 +16582,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:derivada-zero",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:derivada-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-047",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-LTP-003",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -16611,18 +16611,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:cos-basico",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:cos-basico",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-003",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12FCD-LTP-022",
     "themeId": "12-fcd",
-    "subtopicId": "12-fcd-log-trig-potencias",
+    "subtopicId": "12-fcd-log-trig-potências",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -16640,11 +16640,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-log-trig-potencias:12-fcd-log-trig-potencias:ln-cos",
+    "signature": "mission:12-fcd-log-trig-potências:12-fcd-log-trig-potências:ln-cos",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-LTP-022",
-    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potencias.json",
+    "sourceFile": "content/vnext/math-a/12/12-fcd-log-trig-potências.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -16727,7 +16727,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcd-regras-cadeia:12-fcd-regras-cadeia:cadeia-log-potencia",
+    "signature": "mission:12-fcd-regras-cadeia:12-fcd-regras-cadeia:cadeia-log-potência",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCD-RC-027",
@@ -16988,7 +16988,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-derivabilidade:12-fcont-derivabilidade:aproximacao",
+    "signature": "mission:12-fcont-derivabilidade:12-fcont-derivabilidade:aproximação",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-DER-042",
@@ -17017,7 +17017,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-derivabilidade:12-fcont-derivabilidade:modulo",
+    "signature": "mission:12-fcont-derivabilidade:12-fcont-derivabilidade:módulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-DER-003",
@@ -17075,7 +17075,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-estudo-global:12-fcont-estudo-global:minimo",
+    "signature": "mission:12-fcont-estudo-global:12-fcont-estudo-global:mínimo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-EG-007",
@@ -17220,7 +17220,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-estudo-global:12-fcont-estudo-global:maximo-absoluto",
+    "signature": "mission:12-fcont-estudo-global:12-fcont-estudo-global:máximo-absoluto",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-EG-003",
@@ -17336,7 +17336,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-limites-continuidade:12-fcont-limites-continuidade:modulo",
+    "signature": "mission:12-fcont-limites-continuidade:12-fcont-limites-continuidade:módulo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-LC-021",
@@ -17452,7 +17452,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-limites-continuidade:12-fcont-limites-continuidade:assintota",
+    "signature": "mission:12-fcont-limites-continuidade:12-fcont-limites-continuidade:assíntota",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-LC-022",
@@ -17539,7 +17539,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-fcont-operacoes:12-fcont-operacoes:log-composicao",
+    "signature": "mission:12-fcont-operacoes:12-fcont-operacoes:log-composição",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12FCONT-OP-025",
@@ -17713,7 +17713,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-distribuicoes-amostragem:12-ie-distribuicoes-amostragem:media-xbar",
+    "signature": "mission:12-ie-distribuicoes-amostragem:12-ie-distribuicoes-amostragem:média-xbar",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-DA-002",
@@ -17742,7 +17742,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-distribuicoes-amostragem:12-ie-distribuicoes-amostragem:xbar-media",
+    "signature": "mission:12-ie-distribuicoes-amostragem:12-ie-distribuicoes-amostragem:xbar-média",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-DA-021",
@@ -17829,7 +17829,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-distribuicoes-amostragem:12-ie-distribuicoes-amostragem:erro-padrao",
+    "signature": "mission:12-ie-distribuicoes-amostragem:12-ie-distribuicoes-amostragem:erro-padrão",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-DA-003",
@@ -17869,7 +17869,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12IE-EST-006",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -17887,18 +17887,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:proporcao",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:proporção",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-006",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12IE-EST-004",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -17916,18 +17916,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:media",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:média",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-004",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12IE-EST-022",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -17945,18 +17945,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:bias-variance",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:bias-variance",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-022",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12IE-EST-019",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 2,
     "cognitive": "Raciocínio",
@@ -17974,18 +17974,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:ep-proporcao",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:ep-proporção",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-019",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12IE-EST-046",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -18003,18 +18003,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:fabrica",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:fabrica",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-046",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12IE-EST-002",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -18032,18 +18032,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:estimador",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:estimador",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-002",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12IE-EST-021",
     "themeId": "12-ie",
-    "subtopicId": "12-ie-estimacao",
+    "subtopicId": "12-ie-estimação",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Compreensão",
@@ -18061,11 +18061,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-estimacao:12-ie-estimacao:mse",
+    "signature": "mission:12-ie-estimação:12-ie-estimação:mse",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-EST-021",
-    "sourceFile": "content/vnext/math-a/12/12-ie-estimacao.json",
+    "sourceFile": "content/vnext/math-a/12/12-ie-estimação.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -18090,7 +18090,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-inferencia-amostragem:12-ie-inferencia-amostragem:media-populacional",
+    "signature": "mission:12-ie-inferencia-amostragem:12-ie-inferencia-amostragem:média-populacional",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-IA-007",
@@ -18119,7 +18119,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-inferencia-amostragem:12-ie-inferencia-amostragem:populacao",
+    "signature": "mission:12-ie-inferencia-amostragem:12-ie-inferencia-amostragem:população",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-IA-002",
@@ -18293,7 +18293,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-ie-intervalos-confianca:12-ie-intervalos-confianca:interpretacao",
+    "signature": "mission:12-ie-intervalos-confianca:12-ie-intervalos-confianca:interpretação",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12IE-IC-006",
@@ -18681,7 +18681,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12INT-AR-006",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -18699,18 +18699,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:parabola",
+    "signature": "mission:12-int-áreas:12-int-áreas:parábola",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-006",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12INT-AR-002",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -18728,18 +18728,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:area-negativa",
+    "signature": "mission:12-int-áreas:12-int-áreas:área-negativa",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-002",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12INT-AR-021",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -18757,18 +18757,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:intersecoes",
+    "signature": "mission:12-int-áreas:12-int-áreas:intersecoes",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-021",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12INT-AR-009",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -18786,18 +18786,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:cancelamento",
+    "signature": "mission:12-int-áreas:12-int-áreas:cancelamento",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-009",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12INT-AR-043",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -18815,18 +18815,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:distancia",
+    "signature": "mission:12-int-áreas:12-int-áreas:distancia",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-043",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12INT-AR-003",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -18844,18 +18844,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:mudanca-sinal",
+    "signature": "mission:12-int-áreas:12-int-áreas:mudanca-sinal",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-003",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12INT-AR-022",
     "themeId": "12-int",
-    "subtopicId": "12-int-areas",
+    "subtopicId": "12-int-áreas",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -18873,11 +18873,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-areas:12-int-areas:superior",
+    "signature": "mission:12-int-áreas:12-int-áreas:superior",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-AR-022",
-    "sourceFile": "content/vnext/math-a/12/12-int-areas.json",
+    "sourceFile": "content/vnext/math-a/12/12-int-áreas.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -18931,7 +18931,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-integral-definido:12-int-integral-definido:numero",
+    "signature": "mission:12-int-integral-definido:12-int-integral-definido:número",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-ID-002",
@@ -18960,7 +18960,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-integral-definido:12-int-integral-definido:media",
+    "signature": "mission:12-int-integral-definido:12-int-integral-definido:média",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-ID-021",
@@ -19105,7 +19105,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-primitiva:12-int-primitiva:potencia",
+    "signature": "mission:12-int-primitiva:12-int-primitiva:potência",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-PR-006",
@@ -19279,7 +19279,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-int-primitiva:12-int-primitiva:dominio-negativo",
+    "signature": "mission:12-int-primitiva:12-int-primitiva:domínio-negativo",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12INT-PR-027",
@@ -20091,7 +20091,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-modelacao:12-mat-modelacao:rede-potencia",
+    "signature": "mission:12-mat-modelacao:12-mat-modelacao:rede-potência",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-MOD-022",
@@ -20207,7 +20207,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-produto:12-mat-produto:nao-comutatividade",
+    "signature": "mission:12-mat-produto:12-mat-produto:não-comutatividade",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-PRD-017",
@@ -20236,7 +20236,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-produto:12-mat-produto:composicao-transformacoes",
+    "signature": "mission:12-mat-produto:12-mat-produto:composição-transformacoes",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-PRD-045",
@@ -20305,7 +20305,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12MAT-RT-006",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -20323,18 +20323,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:quadrada",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:quadrada",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-006",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12MAT-RT-002",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 1,
     "cognitive": "Aplicação",
@@ -20352,18 +20352,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:dimensao",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:dimensao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-002",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12MAT-RT-027",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Interpretação",
@@ -20381,18 +20381,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:diag-antissimetrica",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:diag-antissimetrica",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-027",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12MAT-RT-008",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 2,
     "cognitive": "Compreensão",
@@ -20410,18 +20410,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:coluna",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:coluna",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-008",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12MAT-RT-039",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 4,
     "cognitive": "Raciocínio",
@@ -20439,18 +20439,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:simetria-graus",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:simetria-graus",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-039",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12MAT-RT-003",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -20468,18 +20468,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:elemento",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:elemento",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-003",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12MAT-RT-032",
     "themeId": "12-mat",
-    "subtopicId": "12-mat-representacao-tipos",
+    "subtopicId": "12-mat-representação-tipos",
     "year": "12.º opcional",
     "difficulty": 3,
     "cognitive": "Modelação",
@@ -20497,11 +20497,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-representacao-tipos:12-mat-representacao-tipos:dados-dim",
+    "signature": "mission:12-mat-representação-tipos:12-mat-representação-tipos:dados-dim",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-RT-032",
-    "sourceFile": "content/vnext/math-a/12/12-mat-representacao-tipos.json",
+    "sourceFile": "content/vnext/math-a/12/12-mat-representação-tipos.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -20642,7 +20642,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-mat-transformacoes:12-mat-transformacoes:potencia-rotacao",
+    "signature": "mission:12-mat-transformacoes:12-mat-transformacoes:potência-rotacao",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12MAT-TR-037",
@@ -20914,7 +20914,7 @@ export const VNEXT_MISSION_QUESTIONS=[
   {
     "id": "MS-VN12PROB-CI-006",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
@@ -20932,18 +20932,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:produto-6",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:produto-6",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-006",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12PROB-CI-002",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -20961,18 +20961,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:marginais-2",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:marginais-2",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-002",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12PROB-CI-021",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -20990,18 +20990,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:dois-comp-21",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:dois-comp-21",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-021",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12PROB-CI-009",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Interpretação",
@@ -21019,18 +21019,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:incomp-9",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:incomp-9",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-009",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12PROB-CI-045",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Modelação",
@@ -21048,18 +21048,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:modelacao-45",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:modelacao-45",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-045",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12PROB-CI-003",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
@@ -21077,18 +21077,18 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:conjunta-3",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:conjunta-3",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-003",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
   {
     "id": "MS-VN12PROB-CI-022",
     "themeId": "12-prob",
-    "subtopicId": "12-prob-contingencia-independencia",
+    "subtopicId": "12-prob-contingencia-independência",
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
@@ -21106,11 +21106,11 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-prob-contingencia-independencia:12-prob-contingencia-independencia:uniao-22",
+    "signature": "mission:12-prob-contingencia-independência:12-prob-contingencia-independência:uniao-22",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12PROB-CI-022",
-    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independencia.json",
+    "sourceFile": "content/vnext/math-a/12/12-prob-contingencia-independência.json",
     "optionOrderVersion": 1,
     "productionEligible": false
   },
@@ -22846,7 +22846,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-rae-newton:12-rae-newton:derivacao-formula",
+    "signature": "mission:12-rae-newton:12-rae-newton:derivação-formula",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12RAE-NEW-013",
@@ -22904,7 +22904,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "contexts": [
       "mission"
     ],
-    "signature": "mission:12-rae-newton:12-rae-newton:derivada-nao-zero",
+    "signature": "mission:12-rae-newton:12-rae-newton:derivada-não-zero",
     "reviewStatus": "prototype",
     "origin": "original_vnext_2026",
     "sourceQuestionId": "VN12RAE-NEW-003",
