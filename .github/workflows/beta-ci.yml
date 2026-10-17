@@ -23,12 +23,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps --no-audit --no-fund
 
-      - name: Generate vNext runtime copy
-        run: |
-          node scripts/generate-vnext-diagnostic.mjs
-          node scripts/generate-vnext-mission.mjs
-          node scripts/generate-vnext-exam.mjs
-
       - name: Install mobile browser test runtime
         run: |
           rm -rf /tmp/approva-playwright
