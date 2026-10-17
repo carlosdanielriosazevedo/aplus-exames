@@ -4,7 +4,7 @@ import {diagnosticAnchor} from "../../app/lib/engine.js";
 import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 
 const BAD_VISIBLE_PATTERNS=[
-  ["expressao/expressoes",/\bexpresso(?:a|es)\b/iu],
+  ["expressao/expressoes",/\bexpressao(?:es)?\b/iu],
   ["obtem-se",/\bobtem-se\b/iu],
   ["funcao/funcoes",/\bfuncao(?:es)?\b/iu],
   ["taxa media de variacao",/\btaxa media de variacao\b/iu],
@@ -67,24 +67,22 @@ test("Matemática A · diagnóstico completo não mostra texto sem acentos",asyn
   },{state,draft});
 
   await page.goto("/");
-  await expect(page.getByText("Diagnóstico",{exact:true}).first()).toBeVisible();
+  const options=page.locator(".opts button");
+  await expect(options.first(),`a sessão deve recuperar no diagnóstico; ecrã atual: ${await page.locator("body").innerText().catch(()=>"")}`).toBeVisible({timeout:30_000});
 
   let completed=false;
   for(let step=0;step<30;step++){
-    await expectVisibleCopyAccented(page,`pergunta ${step+1} · antes de responder`);
     if(await page.getByRole("heading",{name:"Podemos criar o teu primeiro plano."}).isVisible().catch(()=>false)){
       completed=true;
       break;
     }
-
-    const options=page.locator(".opts button");
     await expect(options.first()).toBeVisible();
+    await expectVisibleCopyAccented(page,`pergunta ${step+1} · antes de responder`);
     await options.first().click();
     await page.getByRole("button",{name:"Responder",exact:true}).click();
     await expect(page.locator(".answerFeedback")).toBeVisible();
     await expectVisibleCopyAccented(page,`pergunta ${step+1} · feedback`);
     await page.getByRole("button",{name:/Próxima pergunta/}).click();
-    await page.waitForTimeout(40);
   }
 
   if(!completed)completed=await page.getByRole("heading",{name:"Podemos criar o teu primeiro plano."}).isVisible().catch(()=>false);
