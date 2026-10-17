@@ -5,21 +5,46 @@ import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 const ITEM=VNEXT_DIAGNOSTIC_QUESTIONS.find(item=>item.id==="DG-VN11CD-DP-011");
 if(!ITEM)throw new Error("Pergunta estável de contraste não encontrada.");
 
-function luminance([r,g,b]){
-  const values=[r,g,b].map(value=>{const c=value/255;return c<=.03928?c/12.92:((c+.055)/1.055)**2.4});
-  return .2126*values[0]+.7152*values[1]+.0722*values[2];
-}
-function ratio(fg,bg){const a=luminance(fg),b=luminance(bg);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)}
-
 async function renderedContrast(locator){
   return locator.evaluate(node=>{
-    const parse=value=>{const match=value.match(/rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)/u);return match?[+match[1],+match[2],+match[3]]:null};
-    const lum=rgb=>{const values=rgb.map(value=>{const c=value/255;return c<=.03928?c/12.92:((c+.055)/1.055)**2.4});return .2126*values[0]+.7152*values[1]+.0722*values[2]};
+    const parse=value=>{
+      const match=value.match(/rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)(?:[, /]+([\d.]+))?/u);
+      return match?[+match[1],+match[2],+match[3],match[4]===undefined?1:+match[4]]:null;
+    };
+    const mix=(front,back,alpha)=>front.map((value,index)=>Math.round(value*alpha+back[index]*(1-alpha)));
+    const lum=rgb=>{
+      const values=rgb.map(value=>{const c=value/255;return c<=.03928?c/12.92:((c+.055)/1.055)**2.4});
+      return .2126*values[0]+.7152*values[1]+.0722*values[2];
+    };
+    const ratio=(fg,bg)=>(Math.max(lum(fg),lum(bg))+.05)/(Math.min(lum(fg),lum(bg))+.05);
+    const ancestorBackground=start=>{
+      let current=start.parentElement;
+      while(current){
+        const parsed=parse(getComputedStyle(current).backgroundColor);
+        if(parsed&&parsed[3]>0)return parsed.slice(0,3);
+        current=current.parentElement;
+      }
+      return [255,255,255];
+    };
+
     const style=getComputedStyle(node);
     const fg=parse(style.color),bg=parse(style.backgroundColor);
     if(!fg||!bg)throw new Error(`Cor não mensurável: ${style.color} / ${style.backgroundColor}`);
-    const value=(Math.max(lum(fg),lum(bg))+.05)/(Math.min(lum(fg),lum(bg))+.05);
-    return {ratio:value,color:style.color,background:style.backgroundColor,opacity:style.opacity,className:node.className};
+    const parentBg=ancestorBackground(node);
+    const opacity=Number(style.opacity||1);
+    const paintedBg=mix(bg.slice(0,3),parentBg,bg[3]);
+    const effectiveBg=mix(paintedBg,parentBg,opacity);
+    const paintedFg=mix(fg.slice(0,3),paintedBg,fg[3]);
+    const effectiveFg=mix(paintedFg,parentBg,opacity);
+    return {
+      ratio:ratio(effectiveFg,effectiveBg),
+      color:style.color,
+      background:style.backgroundColor,
+      opacity:style.opacity,
+      effectiveFg,
+      effectiveBg,
+      className:node.className
+    };
   });
 }
 
@@ -32,7 +57,7 @@ async function seedMathDiagnostic(page){
 }
 
 function expectAA(measurement,label){
-  expect(measurement.ratio,`${label}: ${measurement.ratio.toFixed(2)}:1 · ${measurement.color} sobre ${measurement.background} · opacity ${measurement.opacity}`).toBeGreaterThanOrEqual(4.5);
+  expect(measurement.ratio,`${label}: ${measurement.ratio.toFixed(2)}:1 · ${measurement.color} sobre ${measurement.background} · opacity ${measurement.opacity} · efetivo ${measurement.effectiveFg.join(",")} / ${measurement.effectiveBg.join(",")}`).toBeGreaterThanOrEqual(4.5);
 }
 
 test("Diagnóstico · alternativas mantêm contraste AA em todos os estados",async({page})=>{
