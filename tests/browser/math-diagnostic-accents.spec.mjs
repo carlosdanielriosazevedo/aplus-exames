@@ -16,13 +16,9 @@ const BAD_VISIBLE_PATTERNS=[
   ["area e",/\barea e\b/iu]
 ];
 
-function badVisibleItem(item){
-  const strings=[item.q,...(item.o||[]),item.sol].filter(Boolean);
-  return strings.some(text=>BAD_VISIBLE_PATTERNS.some(([,pattern])=>pattern.test(text)));
-}
-
-const PROOF_ITEM=VNEXT_DIAGNOSTIC_QUESTIONS.find(item=>item.role==="anchor"&&item.difficulty<=3&&badVisibleItem(item));
-if(!PROOF_ITEM)throw new Error("Não foi encontrada uma pergunta-âncora com a regressão de acentuação.");
+const PROOF_ITEM_ID="DG-VN11CD-DP-011";
+const PROOF_ITEM=VNEXT_DIAGNOSTIC_QUESTIONS.find(item=>item.id===PROOF_ITEM_ID);
+if(!PROOF_ITEM)throw new Error(`Pergunta de prova estável ${PROOF_ITEM_ID} não encontrada.`);
 
 async function expectVisibleCopyAccented(page,stage){
   const text=await page.locator("body").innerText();
