@@ -1,9 +1,9 @@
 import {test,expect} from "@playwright/test";
 
 const SUBJECTS=[
-  {id:"math-a",name:"Matemática A",done:/Podemos criar o teu primeiro plano\./u},
-  {id:"portuguese",name:"Português",done:/DIAGNÓSTICO CONCLUÍDO · PORTUGUÊS/u},
-  {id:"physics-chemistry-a",name:"Física e Química A",done:/Diagnóstico concluído/u}
+  {id:"math-a",name:"Matemática A",subjectButton:/^Matemática A\b/u,done:/Podemos criar o teu primeiro plano\./u},
+  {id:"portuguese",name:"Português",subjectButton:/^Português 12\.º ano · Prova 639\b/u,done:/DIAGNÓSTICO CONCLUÍDO · PORTUGUÊS/u},
+  {id:"physics-chemistry-a",name:"Física e Química A",subjectButton:/^Física e Química A\b/u,done:/Diagnóstico concluído/u}
 ];
 
 function captureRuntimeErrors(page){
@@ -15,14 +15,14 @@ function captureRuntimeErrors(page){
 
 async function reachDiagnostic(page,subject){
   await page.goto("/");
-  await page.getByRole("button",{name:/Descobrir o meu nível/}).click();
+  await page.getByRole("button",{name:/Descobrir o meu nível/u}).click();
   await expect(page.getByRole("heading",{name:"Que disciplinas queres preparar?"})).toBeVisible({timeout:30_000});
-  await page.getByRole("button",{name:new RegExp(subject.name,"u")}).click();
+  await page.getByRole("button",{name:subject.subjectButton}).click();
   await page.getByRole("button",{name:"Continuar",exact:true}).click();
 
   await expect(page.getByRole("button",{name:"Já terminei o secundário",exact:true})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
-  await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name.replace("Física e Química A","Física e Química A")}`,"u")}).click();
+  await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name}`,"u")}).click();
 
   await expect(page.getByText(new RegExp(`Todo o programa de ${subject.name} fica disponível\\.`,"u"))).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Continuar",exact:true}).click();
@@ -57,6 +57,15 @@ async function fillCurrentAnswer(page,step){
   throw new Error("Não foi encontrado um controlo de resposta visível.");
 }
 
+async function feedbackReady(page){
+  return expect.poll(async()=>{
+    if(await page.locator(".opts button.correct:visible").count())return true;
+    if(await page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).count())return true;
+    const text=await page.locator("body").innerText();
+    return /Muito bem|Resposta correta|Resposta incorreta|Correto|Incorreto|avaliação|critérios|grelha|revê/i.test(text);
+  },{timeout:30_000}).toBe(true);
+}
+
 async function completeRubricIfNeeded(page){
   const evidence=page.getByRole("button",{name:"Encontro claramente",exact:true});
   const count=await evidence.count();
@@ -66,7 +75,7 @@ async function completeRubricIfNeeded(page){
   }
 }
 
-async function runDiagnostic(page,context,subject,runtimeErrors){
+async function runDiagnostic(page,context,subject){
   let sawCorrect=false,sawWrong=false,sawBlankGuard=false,sawOffline=false,sawDoubleClick=false;
   for(let step=0;step<30;step++){
     const body=await page.locator("body").innerText();
@@ -79,7 +88,7 @@ async function runDiagnostic(page,context,subject,runtimeErrors){
       sawBlankGuard=true;
     }
 
-    await fillCurrentAnswer(page,step);
+    const answerType=await fillCurrentAnswer(page,step);
     await expect(submit).toBeEnabled();
 
     if(step===1){
@@ -94,19 +103,18 @@ async function runDiagnostic(page,context,subject,runtimeErrors){
       await submit.click();
     }
 
-    await expect.poll(async()=>await page.locator("body").innerText(),{timeout:30_000}).toMatch(/Próxima pergunta|Resposta correta|Resposta incorreta|Correto|Incorreto|avaliação|critérios|resposta/i);
-    const feedbackText=(await page.locator("body").innerText()).toLocaleLowerCase("pt-PT");
-    if(/resposta correta|correto|certa/u.test(feedbackText))sawCorrect=true;
-    if(/resposta incorreta|incorreto|errada/u.test(feedbackText))sawWrong=true;
+    await feedbackReady(page);
+    if(answerType==="choice"){
+      const wrong=await page.locator(".opts button.wrong:visible").count();
+      const correct=await page.locator(".opts button.correct:visible").count();
+      if(wrong)sawWrong=true;
+      else if(correct)sawCorrect=true;
+    }
 
     await completeRubricIfNeeded(page);
-    const next=page.getByRole("button",{name:/Próxima pergunta/u});
-    if(await next.isVisible().catch(()=>false))await next.click();
-    else{
-      const continueButton=page.getByRole("button",{name:/Continuar|Seguinte/u}).last();
-      await expect(continueButton).toBeVisible({timeout:30_000});
-      await continueButton.click();
-    }
+    const next=page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).last();
+    await expect(next).toBeVisible({timeout:30_000});
+    await next.click();
   }
   throw new Error(`${subject.name}: diagnóstico não terminou dentro do limite.`);
 }
@@ -115,14 +123,14 @@ for(const subject of SUBJECTS){
   test(`${subject.name} · diagnóstico e2e resiste a branco, duplo clique e corte de rede`,async({page,context})=>{
     const runtimeErrors=captureRuntimeErrors(page);
     await reachDiagnostic(page,subject);
-    const proof=await runDiagnostic(page,context,subject,runtimeErrors);
+    const proof=await runDiagnostic(page,context,subject);
 
     await expect(page.locator("body")).toContainText(subject.done,{timeout:30_000});
     expect(proof.sawBlankGuard,"uma resposta em branco deve ser bloqueada sem corromper a sessão").toBe(true);
     expect(proof.sawDoubleClick,"o percurso deve incluir submissão por duplo clique").toBe(true);
     expect(proof.sawOffline,"o percurso deve incluir corte de rede durante uma submissão").toBe(true);
-    expect(proof.sawCorrect,"o diagnóstico deve exercer pelo menos uma resposta correta").toBe(true);
-    expect(proof.sawWrong,"o diagnóstico deve exercer pelo menos uma resposta errada").toBe(true);
+    expect(proof.sawCorrect,"o diagnóstico deve exercer pelo menos uma escolha correta").toBe(true);
+    expect(proof.sawWrong,"o diagnóstico deve exercer pelo menos uma escolha errada").toBe(true);
     expect(runtimeErrors,`${subject.name}: não deve produzir pageerror nem console.error`).toEqual([]);
   });
 }
