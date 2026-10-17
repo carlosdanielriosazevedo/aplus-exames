@@ -143,7 +143,7 @@ function PortugueseSubject({s,setS,go,view="home"}){
   const progress=subjectProgressFor(s,"portuguese");
   const miniExamDraft=s.subjectSettings?.portuguese?.miniExamDraft||null;
   const onboardingStep=subjectOnboardingStep(s,"portuguese");
-  const onboardingDoneScreen=s.subjectOnboardingMode==="add"?"diag":"apronsoIntro";
+  const onboardingDoneScreen="diag";
   const competenceRows=Object.entries(progress.competence);
   const deterministicAttempts=competenceRows.reduce((sum,[,row])=>sum+(row.deterministicAttempts||0),0);
   const correctAnswers=competenceRows.reduce((sum,[,row])=>sum+(row.correct||0),0);

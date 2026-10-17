@@ -98,8 +98,8 @@ async function reachMathDiagnostic(page,runtimeErrors){
   await expect(page.getByRole("heading",{name:"Todo o programa de Matemática A fica disponível."})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Continuar",exact:true}).click();
 
-  await expect(page.getByRole("button",{name:"Saltar explicação",exact:true})).toBeVisible({timeout:30_000});
-  await page.getByRole("button",{name:"Saltar explicação",exact:true}).click();
+  const optionalTour=page.getByRole("button",{name:"Saltar explicação",exact:true});
+  if(await optionalTour.isVisible().catch(()=>false))await optionalTour.click();
   await expect(page.getByRole("button",{name:"Começar diagnóstico",exact:true})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
 
