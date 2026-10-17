@@ -1,4 +1,6 @@
 import {test,expect} from "@playwright/test";
+import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../../app/data/vnextDiagnostic.js";
+import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 
 const BAD_VISIBLE_PATTERNS=[
   ["expressao/expressoes",/\bexpressao(?:es)?\b/iu],
@@ -13,6 +15,14 @@ const BAD_VISIBLE_PATTERNS=[
   ["Qual e",/\bQual e\b/u],
   ["area e",/\barea e\b/iu]
 ];
+
+function badVisibleItem(item){
+  const strings=[item.q,...(item.o||[]),item.sol].filter(Boolean);
+  return strings.some(text=>BAD_VISIBLE_PATTERNS.some(([,pattern])=>pattern.test(text)));
+}
+
+const PROOF_ITEM=VNEXT_DIAGNOSTIC_QUESTIONS.find(item=>item.role==="anchor"&&item.difficulty<=3&&badVisibleItem(item));
+if(!PROOF_ITEM)throw new Error("Não foi encontrada uma pergunta-âncora com a regressão de acentuação.");
 
 async function expectVisibleCopyAccented(page,stage){
   const text=await page.locator("body").innerText();
@@ -34,6 +44,44 @@ async function waitForReactHandlers(page,selector){
     if(!node)return false;
     return Object.keys(node).some(key=>key.startsWith("__reactProps$")||key.startsWith("__reactFiber$"));
   },selector,{timeout:30_000});
+}
+
+function captureRuntimeErrors(page){
+  const errors=[];
+  page.on("pageerror",error=>errors.push(`pageerror: ${String(error)}`));
+  page.on("console",msg=>{if(msg.type()==="error")errors.push(`console.error: ${msg.text()}`)});
+  return errors;
+}
+
+async function seedKnownBadDiagnostic(page){
+  const now=Date.now();
+  const session={id:"browser-accent-proof",kind:"diagnostic",startedAt:now-1000,finishedAt:null,meta:{}};
+  const draft=createDiagnosticDraft({
+    session,
+    item:PROOF_ITEM,
+    difficulty:PROOF_ITEM.difficulty,
+    blueprint:[PROOF_ITEM.subtopicId||PROOF_ITEM.themeId],
+    now:now-1000
+  });
+  const state={
+    goal:17,
+    diagnosticDone:false,
+    diagnosticAnswers:0,
+    selectedSubjectIds:["math-a"],
+    activeSubjectId:"math-a",
+    subjectProgress:{},
+    subjectProgressModelVersion:1,
+    pedagogicalIdVersion:1,
+    betaMode:"internal",
+    firstUseTourCompleted:true,
+    profile:{schoolYear:"Já terminei o secundário",recentGrade:"",syllabus:"most",examTiming:"thisYear",optionalTopics:[],taughtSubtopicIds:[]},
+    _stateVersion:31,
+    _savedAt:now
+  };
+  await page.addInitScript(({state,draft,now})=>{
+    localStorage.setItem("a25",JSON.stringify(state));
+    localStorage.setItem("a25-active-session-v1",JSON.stringify({...draft,savedAt:now}));
+  },{state,draft,now});
 }
 
 async function reachMathDiagnostic(page,runtimeErrors){
@@ -64,10 +112,24 @@ async function reachMathDiagnostic(page,runtimeErrors){
   return options;
 }
 
+test("Matemática A · pergunta conhecida não mostra texto sem acentos",async({page})=>{
+  const runtimeErrors=captureRuntimeErrors(page);
+  await seedKnownBadDiagnostic(page);
+  await page.goto("/");
+  const options=page.locator(".opts button");
+  await expect(options.first()).toBeVisible({timeout:30_000});
+
+  await expectVisibleCopyAccented(page,"pergunta conhecida · antes de responder");
+  const wrong=(PROOF_ITEM.a+1)%PROOF_ITEM.o.length;
+  await options.nth(wrong).click();
+  await page.getByRole("button",{name:"Responder",exact:true}).click();
+  await expect(page.locator(".answerFeedback")).toBeVisible();
+  await expectVisibleCopyAccented(page,"pergunta conhecida · feedback");
+  expect(runtimeErrors,"não deve haver erros de cliente nem console.error").toEqual([]);
+});
+
 test("Matemática A · diagnóstico completo não mostra texto sem acentos",async({page})=>{
-  const runtimeErrors=[];
-  page.on("pageerror",error=>runtimeErrors.push(`pageerror: ${String(error)}`));
-  page.on("console",msg=>{if(msg.type()==="error")runtimeErrors.push(`console.error: ${msg.text()}`)});
+  const runtimeErrors=captureRuntimeErrors(page);
   const options=await reachMathDiagnostic(page,runtimeErrors);
 
   let completed=false;
