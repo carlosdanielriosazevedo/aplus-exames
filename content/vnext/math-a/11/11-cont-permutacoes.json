@@ -4,7 +4,7 @@
   "curriculum": "vNext 2026/27",
   "year": "11.º",
   "themeId": "11-cont",
-  "subtopicId": "11-cont-permutacoes",
+  "subtopicId": "11-cont-permutações",
   "subtopic": "Permutações",
   "editorialTarget": 50,
   "status": "prototype",
@@ -13,7 +13,7 @@
     {
       "id": "VN11CONT-PERM-001",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:definicao",
+      "signature": "11-cont-permutações:definicao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -40,7 +40,7 @@
     {
       "id": "VN11CONT-PERM-002",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:formula",
+      "signature": "11-cont-permutações:formula",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -67,7 +67,7 @@
     {
       "id": "VN11CONT-PERM-003",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:perm-3",
+      "signature": "11-cont-permutações:perm-3",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -94,7 +94,7 @@
     {
       "id": "VN11CONT-PERM-004",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:livros-4",
+      "signature": "11-cont-permutações:livros-4",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -121,7 +121,7 @@
     {
       "id": "VN11CONT-PERM-005",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:fila-5",
+      "signature": "11-cont-permutações:fila-5",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -148,7 +148,7 @@
     {
       "id": "VN11CONT-PERM-006",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:perm-6",
+      "signature": "11-cont-permutações:perm-6",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -175,7 +175,7 @@
     {
       "id": "VN11CONT-PERM-007",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -194,7 +194,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:duas-primeiras",
+      "signature": "11-cont-permutações:duas-primeiras",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -202,7 +202,7 @@
     {
       "id": "VN11CONT-PERM-008",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:primeiro-fixo",
+      "signature": "11-cont-permutações:primeiro-fixo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -229,7 +229,7 @@
     {
       "id": "VN11CONT-PERM-009",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:ultimo-fixo",
+      "signature": "11-cont-permutações:ultimo-fixo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -256,7 +256,7 @@
     {
       "id": "VN11CONT-PERM-010",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:juntos-5",
+      "signature": "11-cont-permutações:juntos-5",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -283,7 +283,7 @@
     {
       "id": "VN11CONT-PERM-011",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:nao-juntos",
+      "signature": "11-cont-permutações:não-juntos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -310,7 +310,7 @@
     {
       "id": "VN11CONT-PERM-012",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:antes-de",
+      "signature": "11-cont-permutações:antes-de",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -337,7 +337,7 @@
     {
       "id": "VN11CONT-PERM-013",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:antes-de",
+      "signature": "11-cont-permutações:antes-de",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -364,7 +364,7 @@
     {
       "id": "VN11CONT-PERM-014",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:prefixo-fixo",
+      "signature": "11-cont-permutações:prefixo-fixo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -391,7 +391,7 @@
     {
       "id": "VN11CONT-PERM-015",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:sufixo-fixo",
+      "signature": "11-cont-permutações:sufixo-fixo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -418,7 +418,7 @@
     {
       "id": "VN11CONT-PERM-016",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:dois-fixos",
+      "signature": "11-cont-permutações:dois-fixos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -445,7 +445,7 @@
     {
       "id": "VN11CONT-PERM-017",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:todos-usados",
+      "signature": "11-cont-permutações:todos-usados",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -472,7 +472,7 @@
     {
       "id": "VN11CONT-PERM-018",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:troca-posicoes",
+      "signature": "11-cont-permutações:troca-posições",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -499,7 +499,7 @@
     {
       "id": "VN11CONT-PERM-019",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:fila-8",
+      "signature": "11-cont-permutações:fila-8",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -526,7 +526,7 @@
     {
       "id": "VN11CONT-PERM-020",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:livros-7",
+      "signature": "11-cont-permutações:livros-7",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -553,7 +553,7 @@
     {
       "id": "VN11CONT-PERM-021",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:bloco-ordem-fixa",
+      "signature": "11-cont-permutações:bloco-ordem-fixa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -580,7 +580,7 @@
     {
       "id": "VN11CONT-PERM-022",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:tres-juntos",
+      "signature": "11-cont-permutações:tres-juntos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -607,7 +607,7 @@
     {
       "id": "VN11CONT-PERM-023",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:tres-juntos-ordem",
+      "signature": "11-cont-permutações:tres-juntos-ordem",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -634,7 +634,7 @@
     {
       "id": "VN11CONT-PERM-024",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:ordem-relativa",
+      "signature": "11-cont-permutações:ordem-relativa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -661,7 +661,7 @@
     {
       "id": "VN11CONT-PERM-025",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:ordem-relativa",
+      "signature": "11-cont-permutações:ordem-relativa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -688,7 +688,7 @@
     {
       "id": "VN11CONT-PERM-026",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:A-extremo",
+      "signature": "11-cont-permutações:A-extremo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -715,7 +715,7 @@
     {
       "id": "VN11CONT-PERM-027",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:duas-extremidades",
+      "signature": "11-cont-permutações:duas-extremidades",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -742,7 +742,7 @@
     {
       "id": "VN11CONT-PERM-028",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:primeira-ou-ultima",
+      "signature": "11-cont-permutações:primeira-ou-ultima",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -769,7 +769,7 @@
     {
       "id": "VN11CONT-PERM-029",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:separados-uma",
+      "signature": "11-cont-permutações:separados-uma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -796,7 +796,7 @@
     {
       "id": "VN11CONT-PERM-030",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:nao-adjacentes",
+      "signature": "11-cont-permutações:não-adjacentes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -823,7 +823,7 @@
     {
       "id": "VN11CONT-PERM-031",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:metodo-bloco",
+      "signature": "11-cont-permutações:método-bloco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -850,7 +850,7 @@
     {
       "id": "VN11CONT-PERM-032",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:quatro-juntos",
+      "signature": "11-cont-permutações:quatro-juntos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -877,7 +877,7 @@
     {
       "id": "VN11CONT-PERM-033",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:quatro-juntos-ordem",
+      "signature": "11-cont-permutações:quatro-juntos-ordem",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -904,7 +904,7 @@
     {
       "id": "VN11CONT-PERM-034",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -923,7 +923,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:imediatamente-antes",
+      "signature": "11-cont-permutações:imediatamente-antes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -931,7 +931,7 @@
     {
       "id": "VN11CONT-PERM-035",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:adjacentes",
+      "signature": "11-cont-permutações:adjacentes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -958,7 +958,7 @@
     {
       "id": "VN11CONT-PERM-036",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:complemento-posicao",
+      "signature": "11-cont-permutações:complemento-posição",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -985,7 +985,7 @@
     {
       "id": "VN11CONT-PERM-037",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:restricao-extremos",
+      "signature": "11-cont-permutações:restricao-extremos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1012,7 +1012,7 @@
     {
       "id": "VN11CONT-PERM-038",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:extremos-A-B",
+      "signature": "11-cont-permutações:extremos-A-B",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1039,7 +1039,7 @@
     {
       "id": "VN11CONT-PERM-039",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:duas-ordens-relativas",
+      "signature": "11-cont-permutações:duas-ordens-relativas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1066,7 +1066,7 @@
     {
       "id": "VN11CONT-PERM-040",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:tres-primeiras",
+      "signature": "11-cont-permutações:tres-primeiras",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1093,7 +1093,7 @@
     {
       "id": "VN11CONT-PERM-041",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:pares-extremos",
+      "signature": "11-cont-permutações:pares-extremos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1120,7 +1120,7 @@
     {
       "id": "VN11CONT-PERM-042",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:posicao-exata",
+      "signature": "11-cont-permutações:posição-exata",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1147,7 +1147,7 @@
     {
       "id": "VN11CONT-PERM-043",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:antes-nao-adjacente",
+      "signature": "11-cont-permutações:antes-não-adjacente",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1174,7 +1174,7 @@
     {
       "id": "VN11CONT-PERM-044",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:comeca-vogal",
+      "signature": "11-cont-permutações:comeca-vogal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1201,7 +1201,7 @@
     {
       "id": "VN11CONT-PERM-045",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:termina-consoante",
+      "signature": "11-cont-permutações:termina-consoante",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1228,7 +1228,7 @@
     {
       "id": "VN11CONT-PERM-046",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:k-posicoes-fixas",
+      "signature": "11-cont-permutações:k-posições-fixas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1255,7 +1255,7 @@
     {
       "id": "VN11CONT-PERM-047",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:modelacao-tarefas",
+      "signature": "11-cont-permutações:modelacao-tarefas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1282,7 +1282,7 @@
     {
       "id": "VN11CONT-PERM-048",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:modelacao-bloco",
+      "signature": "11-cont-permutações:modelacao-bloco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1309,7 +1309,7 @@
     {
       "id": "VN11CONT-PERM-049",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:modelacao-bloco-fixo",
+      "signature": "11-cont-permutações:modelacao-bloco-fixo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1336,7 +1336,7 @@
     {
       "id": "VN11CONT-PERM-050",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-permutacoes",
+      "subtopicId": "11-cont-permutações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-permutacoes:inclusao-exclusao-blocos",
+      "signature": "11-cont-permutações:inclusao-exclusao-blocos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
