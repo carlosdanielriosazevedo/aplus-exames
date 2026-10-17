@@ -21,12 +21,19 @@ async function expectVisibleCopyAccented(page,stage){
   }
 }
 
+async function expectScreenCopy(page,needle,stage){
+  await expect.poll(async()=>await page.locator("body").innerText(),{
+    timeout:30_000,
+    message:`${stage}: o ecrã esperado não apareceu. Texto visível atual: ${await page.locator("body").innerText()}`
+  }).toContain(needle);
+}
+
 async function reachMathDiagnostic(page){
   await page.goto("/");
   await expect(page.getByRole("button",{name:/Descobrir o meu nível/})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:/Descobrir o meu nível/}).click();
+  await expectScreenCopy(page,"Que disciplinas queres preparar?","depois do CTA inicial");
 
-  await expect(page.getByRole("heading",{name:"Que disciplinas queres preparar?"})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:/Matemática A/}).click();
   await page.getByRole("button",{name:"Continuar",exact:true}).click();
 
