@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:números",
+      "signature": "11-cont-arranjos:numeros",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:relacao-combinações",
+      "signature": "11-cont-arranjos:relacao-combinacoes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:via-combinação",
+      "signature": "11-cont-arranjos:via-combinacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:não-contem-A",
+      "signature": "11-cont-arranjos:nao-contem-A",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:A-qualquer-posição",
+      "signature": "11-cont-arranjos:A-qualquer-posicao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:equação-arranjo",
+      "signature": "11-cont-arranjos:equacao-arranjo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:equação-arranjo",
+      "signature": "11-cont-arranjos:equacao-arranjo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:razão-arranjos",
+      "signature": "11-cont-arranjos:razao-arranjos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:razão-numerica",
+      "signature": "11-cont-arranjos:razao-numerica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:números-pares-zero",
+      "signature": "11-cont-arranjos:numeros-pares-zero",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:números-impares",
+      "signature": "11-cont-arranjos:numeros-impares",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-arranjos:converter-combinação",
+      "signature": "11-cont-arranjos:converter-combinacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
