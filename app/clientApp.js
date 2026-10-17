@@ -364,15 +364,15 @@ export default function App(){
       setRecoveredSession(validDraft);
       setScreen(recovered);
     }else{
-      const portuguesePaused=recoveredState.activeSubjectId==="portuguese"&&(
-        !!subjectProgressFor(recoveredState,"portuguese").lastPosition||
-        !!recoveredState.subjectSettings?.portuguese?.miniExamDraft
-      );
       const activeSubjectId=recoveredState.activeSubjectId;
+      const subjectPaused=!!activeSubjectId&&(
+        !!subjectProgressFor(recoveredState,activeSubjectId).lastPosition||
+        (activeSubjectId==="portuguese"&&!!recoveredState.subjectSettings?.portuguese?.miniExamDraft)
+      );
       const activeSubjectConfigured=!!activeSubjectId
         &&(recoveredState.selectedSubjectIds||[]).includes(activeSubjectId)
         &&(recoveredState.subjectSettings?.[activeSubjectId]?.profileConfigured===true||recoveredState.onboardingSharedProfileDone===true);
-      if(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused)setScreen("home");
+      if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
       else setScreen(activeSubjectConfigured?"diag":"welcome");
     }
     setHydrated(true);
