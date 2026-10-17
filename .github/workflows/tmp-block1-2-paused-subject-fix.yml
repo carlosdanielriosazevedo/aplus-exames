@@ -1,0 +1,32 @@
+name: Temporary Block 1.2 paused subject fix
+
+on:
+  push:
+    branches: [fix/block1-2-diagnostic-resume-browser-proof]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/block1-2-diagnostic-resume-browser-proof
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/apply-block1-2-paused-subject-fix.mjs
+      - name: Commit source fix
+        run: |
+          if git diff --quiet -- app/clientApp.js; then
+            echo "No source change needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/clientApp.js
+          git commit -m "fix: generalizar retoma de diagnóstico por disciplina"
+          git push origin HEAD:fix/block1-2-diagnostic-resume-browser-proof
