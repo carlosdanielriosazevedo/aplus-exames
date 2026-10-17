@@ -174,3 +174,53 @@ for(const subject of SUBJECTS){
     await context.close();
   });
 }
+
+
+for(const subject of [
+  {id:"math-a",name:"Matemática A",button:/^Matemática A\\b/u},
+  {id:"portuguese",name:"Português",button:/^Português 12\\.º ano · Prova 639\\b/u},
+  {id:"physics-chemistry-a",name:"Física e Química A",button:/^Física e Química A\\b/u}
+]){
+  test(`${subject.id} · retoma real depois de duas respostas sem semear armazenamento`,async({browser})=>{
+    const context=await browser.newContext({viewport:{width:390,height:844}});
+    const page=await context.newPage();
+    await page.goto("/");
+    await page.getByRole("button",{name:/Descobrir o meu nível/u}).click();
+    await page.getByRole("button",{name:subject.button}).click();
+    await page.getByRole("button",{name:"Continuar",exact:true}).click();
+    await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+    await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name}`,"u")}).click();
+    await page.getByRole("button",{name:"Continuar",exact:true}).click();
+    const skip=page.getByRole("button",{name:"Saltar explicação",exact:true});
+    if(await skip.isVisible().catch(()=>false))await skip.click();
+    await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
+    for(let index=0;index<2;index++){
+      const options=page.locator(".opts button:visible, .portugueseOptions button:visible");
+      if(await options.count())await options.first().click();
+      else{
+        const textarea=page.locator("textarea:visible").first();
+        if(await textarea.count())await textarea.fill("Justificação de teste.");
+        else throw new Error("Resposta real sem controlo visível");
+      }
+      await page.getByRole("button",{name:"Responder",exact:true}).click();
+      const next=page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).first();
+      await expect(next).toBeVisible({timeout:30_000});
+      await next.click();
+    }
+    const snapshot=await page.evaluate(()=>({
+      state:JSON.parse(localStorage.getItem("a25")||"null"),
+      draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
+    }));
+    expect(snapshot.state?.selectedSubjectIds).toContain(subject.id);
+    expect(snapshot.draft||snapshot.state?.subjectProgress?.[subject.id]?.lastPosition).toBeTruthy();
+    await page.reload();
+    await expectNoSubjectSelector(page);
+    await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    await page.close();
+    const reopened=await context.newPage();
+    await reopened.goto("/");
+    await expectNoSubjectSelector(reopened);
+    await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    await context.close();
+  });
+}
