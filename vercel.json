@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node scripts/apply-vnext-runtime-polish.mjs && npx next build && npm run performance:budget",
+  "buildCommand": "node scripts/generate-vnext-diagnostic.mjs && node scripts/generate-vnext-mission.mjs && node scripts/generate-vnext-exam.mjs && npx next build && npm run performance:budget",
   "regions": ["fra1"],
   "git": {
     "deploymentEnabled": {
