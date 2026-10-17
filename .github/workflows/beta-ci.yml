@@ -25,11 +25,16 @@ jobs:
 
       - name: Install mobile browser test runtime
         run: |
-          npm install --no-save --legacy-peer-deps --no-audit --no-fund @playwright/test@1.55.0
-          npx playwright install --with-deps chromium
+          rm -rf /tmp/approva-playwright
+          mkdir -p /tmp/approva-playwright
+          npm install --prefix /tmp/approva-playwright --no-save --no-package-lock --legacy-peer-deps --no-audit --no-fund @playwright/test@1.55.0
+          ln -s /tmp/approva-playwright/node_modules/@playwright node_modules/@playwright
+          ln -s /tmp/approva-playwright/node_modules/playwright node_modules/playwright
+          ln -s /tmp/approva-playwright/node_modules/playwright-core node_modules/playwright-core
+          /tmp/approva-playwright/node_modules/.bin/playwright install --with-deps chromium
 
       - name: Mobile browser regression · 390x844
-        run: npx playwright test --config=playwright.config.mjs
+        run: /tmp/approva-playwright/node_modules/.bin/playwright test --config=playwright.config.mjs
 
       - name: Unit tests
         run: npm run test:unit
