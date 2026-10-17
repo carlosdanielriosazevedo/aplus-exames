@@ -365,7 +365,7 @@ export default function App(){
       setScreen(recovered);
     }else{
       const activeSubjectId=recoveredState.activeSubjectId;
-      const activeSubjectSelected=AVAILABLE_SUBJECT_IDS.includes(activeSubjectId)&&uniqueSubjectIds(recoveredState.selectedSubjectIds||[]).includes(activeSubjectId);
+      const activeSubjectSelected=AVAILABLE_SUBJECT_IDS.includes(activeSubjectId)&&uniqueSubjectIds(recoveredState.selectedSubjectIds||[],AVAILABLE_SUBJECT_IDS).includes(activeSubjectId);
       const activeProgress=activeSubjectId&&activeSubjectId!=="math-a"?subjectProgressFor(recoveredState,activeSubjectId):null;
       const subjectPaused=!!activeProgress?.lastPosition||(activeSubjectId==="portuguese"&&!!recoveredState.subjectSettings?.portuguese?.miniExamDraft);
       const configuredActive=activeSubjectSelected&&!!recoveredState.profile?.schoolYear;
