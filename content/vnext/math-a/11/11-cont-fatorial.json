@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:não-distributivo",
+      "signature": "11-cont-fatorial:nao-distributivo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-fatorial",
+      "signature": "11-cont-fatorial:equacao-fatorial",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-fatorial",
+      "signature": "11-cont-fatorial:equacao-fatorial",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-quociente",
+      "signature": "11-cont-fatorial:equacao-quociente",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-produto-consecutivos",
+      "signature": "11-cont-fatorial:equacao-produto-consecutivos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-dois-fatores",
+      "signature": "11-cont-fatorial:equacao-dois-fatores",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:número-fatores",
+      "signature": "11-cont-fatorial:numero-fatores",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-simbolica",
+      "signature": "11-cont-fatorial:equacao-simbolica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:equação-tres-fatores",
+      "signature": "11-cont-fatorial:equacao-tres-fatores",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-fatorial:razão-quocientes",
+      "signature": "11-cont-fatorial:razao-quocientes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
