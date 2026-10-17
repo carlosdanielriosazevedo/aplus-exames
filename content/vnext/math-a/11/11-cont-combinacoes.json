@@ -4,7 +4,7 @@
   "curriculum": "vNext 2026/27",
   "year": "11.º",
   "themeId": "11-cont",
-  "subtopicId": "11-cont-combinações",
+  "subtopicId": "11-cont-combinacoes",
   "subtopic": "Combinações e escolha sem ordem",
   "editorialTarget": 50,
   "status": "prototype",
@@ -13,7 +13,7 @@
     {
       "id": "VN11CONT-COMB-001",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:definicao",
+      "signature": "11-cont-combinacoes:definicao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -40,7 +40,7 @@
     {
       "id": "VN11CONT-COMB-002",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:formula",
+      "signature": "11-cont-combinacoes:formula",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -67,7 +67,7 @@
     {
       "id": "VN11CONT-COMB-003",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C5-2",
+      "signature": "11-cont-combinacoes:C5-2",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -94,7 +94,7 @@
     {
       "id": "VN11CONT-COMB-004",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C6-3",
+      "signature": "11-cont-combinacoes:C6-3",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -121,7 +121,7 @@
     {
       "id": "VN11CONT-COMB-005",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Interpretação",
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:equipa",
+      "signature": "11-cont-combinacoes:equipa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -148,7 +148,7 @@
     {
       "id": "VN11CONT-COMB-006",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:equipa-2",
+      "signature": "11-cont-combinacoes:equipa-2",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -175,7 +175,7 @@
     {
       "id": "VN11CONT-COMB-007",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -194,7 +194,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:comissao",
+      "signature": "11-cont-combinacoes:comissao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -202,7 +202,7 @@
     {
       "id": "VN11CONT-COMB-008",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C-n-1",
+      "signature": "11-cont-combinacoes:C-n-1",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -229,7 +229,7 @@
     {
       "id": "VN11CONT-COMB-009",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C-n-n",
+      "signature": "11-cont-combinacoes:C-n-n",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -256,7 +256,7 @@
     {
       "id": "VN11CONT-COMB-010",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C-n-0",
+      "signature": "11-cont-combinacoes:C-n-0",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -283,7 +283,7 @@
     {
       "id": "VN11CONT-COMB-011",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:simetria",
+      "signature": "11-cont-combinacoes:simetria",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -310,7 +310,7 @@
     {
       "id": "VN11CONT-COMB-012",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:simetria",
+      "signature": "11-cont-combinacoes:simetria",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -337,7 +337,7 @@
     {
       "id": "VN11CONT-COMB-013",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C10-8",
+      "signature": "11-cont-combinacoes:C10-8",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -364,7 +364,7 @@
     {
       "id": "VN11CONT-COMB-014",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C9-2",
+      "signature": "11-cont-combinacoes:C9-2",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -391,7 +391,7 @@
     {
       "id": "VN11CONT-COMB-015",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:simetria-num",
+      "signature": "11-cont-combinacoes:simetria-num",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -418,7 +418,7 @@
     {
       "id": "VN11CONT-COMB-016",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:ordem-importa",
+      "signature": "11-cont-combinacoes:ordem-importa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -445,7 +445,7 @@
     {
       "id": "VN11CONT-COMB-017",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:representantes",
+      "signature": "11-cont-combinacoes:representantes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -472,7 +472,7 @@
     {
       "id": "VN11CONT-COMB-018",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:relacao-arranjos",
+      "signature": "11-cont-combinacoes:relacao-arranjos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -499,7 +499,7 @@
     {
       "id": "VN11CONT-COMB-019",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:via-arranjo",
+      "signature": "11-cont-combinacoes:via-arranjo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -526,7 +526,7 @@
     {
       "id": "VN11CONT-COMB-020",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:C7-3",
+      "signature": "11-cont-combinacoes:C7-3",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -553,7 +553,7 @@
     {
       "id": "VN11CONT-COMB-021",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:equipa-12",
+      "signature": "11-cont-combinacoes:equipa-12",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -580,7 +580,7 @@
     {
       "id": "VN11CONT-COMB-022",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:livros",
+      "signature": "11-cont-combinacoes:livros",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -607,7 +607,7 @@
     {
       "id": "VN11CONT-COMB-023",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:pares",
+      "signature": "11-cont-combinacoes:pares",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -634,7 +634,7 @@
     {
       "id": "VN11CONT-COMB-024",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:apertos",
+      "signature": "11-cont-combinacoes:apertos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -661,7 +661,7 @@
     {
       "id": "VN11CONT-COMB-025",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:segmentos",
+      "signature": "11-cont-combinacoes:segmentos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -688,7 +688,7 @@
     {
       "id": "VN11CONT-COMB-026",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:triangulos",
+      "signature": "11-cont-combinacoes:triangulos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -715,7 +715,7 @@
     {
       "id": "VN11CONT-COMB-027",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:triangulos",
+      "signature": "11-cont-combinacoes:triangulos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -742,7 +742,7 @@
     {
       "id": "VN11CONT-COMB-028",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:inclui-A",
+      "signature": "11-cont-combinacoes:inclui-A",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -769,7 +769,7 @@
     {
       "id": "VN11CONT-COMB-029",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:exclui-A",
+      "signature": "11-cont-combinacoes:exclui-A",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -796,7 +796,7 @@
     {
       "id": "VN11CONT-COMB-030",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:inclui-AB",
+      "signature": "11-cont-combinacoes:inclui-AB",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -823,7 +823,7 @@
     {
       "id": "VN11CONT-COMB-031",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:exclui-AB",
+      "signature": "11-cont-combinacoes:exclui-AB",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -850,7 +850,7 @@
     {
       "id": "VN11CONT-COMB-032",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:exatamente-uma",
+      "signature": "11-cont-combinacoes:exatamente-uma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -877,7 +877,7 @@
     {
       "id": "VN11CONT-COMB-033",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:pelo-menos-uma",
+      "signature": "11-cont-combinacoes:pelo-menos-uma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -904,7 +904,7 @@
     {
       "id": "VN11CONT-COMB-034",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -923,7 +923,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:no-máximo-uma",
+      "signature": "11-cont-combinacoes:no-maximo-uma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -931,7 +931,7 @@
     {
       "id": "VN11CONT-COMB-035",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:pascal",
+      "signature": "11-cont-combinacoes:pascal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -958,7 +958,7 @@
     {
       "id": "VN11CONT-COMB-036",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:pascal-num",
+      "signature": "11-cont-combinacoes:pascal-num",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -985,7 +985,7 @@
     {
       "id": "VN11CONT-COMB-037",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:equação-combinação",
+      "signature": "11-cont-combinacoes:equacao-combinacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1012,7 +1012,7 @@
     {
       "id": "VN11CONT-COMB-038",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:equação-combinação",
+      "signature": "11-cont-combinacoes:equacao-combinacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1039,7 +1039,7 @@
     {
       "id": "VN11CONT-COMB-039",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:razão-combinações",
+      "signature": "11-cont-combinacoes:razao-combinacoes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1066,7 +1066,7 @@
     {
       "id": "VN11CONT-COMB-040",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:razão-num",
+      "signature": "11-cont-combinacoes:razao-num",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1093,7 +1093,7 @@
     {
       "id": "VN11CONT-COMB-041",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:inclui-exclui",
+      "signature": "11-cont-combinacoes:inclui-exclui",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1120,7 +1120,7 @@
     {
       "id": "VN11CONT-COMB-042",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:não-ambos",
+      "signature": "11-cont-combinacoes:nao-ambos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1147,7 +1147,7 @@
     {
       "id": "VN11CONT-COMB-043",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:juntos-logicos",
+      "signature": "11-cont-combinacoes:juntos-logicos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1174,7 +1174,7 @@
     {
       "id": "VN11CONT-COMB-044",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:grupos-categorias",
+      "signature": "11-cont-combinacoes:grupos-categorias",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1201,7 +1201,7 @@
     {
       "id": "VN11CONT-COMB-045",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:categorias",
+      "signature": "11-cont-combinacoes:categorias",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1228,7 +1228,7 @@
     {
       "id": "VN11CONT-COMB-046",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:pelo-menos-uma-mulher",
+      "signature": "11-cont-combinacoes:pelo-menos-uma-mulher",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1255,7 +1255,7 @@
     {
       "id": "VN11CONT-COMB-047",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:diagonais",
+      "signature": "11-cont-combinacoes:diagonais",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1282,7 +1282,7 @@
     {
       "id": "VN11CONT-COMB-048",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:diagonais-hexagono",
+      "signature": "11-cont-combinacoes:diagonais-hexagono",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1309,7 +1309,7 @@
     {
       "id": "VN11CONT-COMB-049",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:modelacao-topicos",
+      "signature": "11-cont-combinacoes:modelacao-topicos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1336,7 +1336,7 @@
     {
       "id": "VN11CONT-COMB-050",
       "themeId": "11-cont",
-      "subtopicId": "11-cont-combinações",
+      "subtopicId": "11-cont-combinacoes",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-combinações:modelacao-teste",
+      "signature": "11-cont-combinacoes:modelacao-teste",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
