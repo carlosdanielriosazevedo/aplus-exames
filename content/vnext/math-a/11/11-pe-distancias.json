@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-distancias:normalizar-equacoes",
+      "signature": "11-pe-distancias:normalizar-equações",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-distancias:minimo-distancia",
+      "signature": "11-pe-distancias:mínimo-distancia",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-distancias:interpretacao-projecao",
+      "signature": "11-pe-distancias:interpretação-projecao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
