@@ -1,6 +1,12 @@
 "use client";
 import styles from "./MathReviewMatter.module.css";
 
+function compactLead(text){
+  const value=String(text||"").trim();
+  const firstSentence=value.match(/^.*?[.!?](?:\s|$)/u)?.[0]?.trim();
+  return firstSentence||value;
+}
+
 function SectionToolbox({section,kind}){
   if(kind==="portuguese"){
     if(!section.signals?.length)return null;
@@ -61,13 +67,12 @@ export default function DeepReviewStudy({study,kind="math",afterSections=null,fi
   const verticalFlow={display:"flex",flexDirection:"column",alignItems:"stretch",width:"100%",maxWidth:"100%",minWidth:0};
   return <div className={styles.studyFlow} style={verticalFlow}>
     <section className={`${styles.reviewOverview} reviewChapter`}>
-      <div className={styles.overviewHeader}><small>INÍCIO · VISÃO GLOBAL</small><h3>Primeiro, percebe o mapa da matéria</h3><p>{study.lead}</p></div>
-      <div className={styles.studyRoute} aria-label="Como usar esta revisão">
-        <div><span>1</span><b>Compreende</b><p>Lê a explicação e liga as ideias antes de decorar detalhes.</p></div>
-        <div><span>2</span><b>Acompanha</b><p>Segue o exemplo orientado e percebe por que razão cada passo é feito.</p></div>
-        <div><span>3</span><b>Consolida</b><p>Fecha cada secção com a ideia-chave e os erros que deves evitar.</p></div>
+      <div className={styles.overviewHeader}>
+        <small>INÍCIO · ORIENTAÇÃO</small>
+        <h3>Antes de começares</h3>
+        <p>{compactLead(study.lead)}</p>
+        <p><b>Como estudar:</b> percebe o conceito → acompanha o exemplo → fixa a ideia-chave.</p>
       </div>
-      <div className={styles.goalPanel}><b>No fim desta revisão vais conseguir:</b><ul>{study.goals.map(goal=><li key={goal}>{goal}</li>)}</ul></div>
     </section>
 
     <nav className={styles.deepReviewMap} aria-label="Mapa desta revisão">
@@ -83,6 +88,7 @@ export default function DeepReviewStudy({study,kind="math",afterSections=null,fi
       <small>FIM · CONSOLIDAÇÃO</small>
       <h3>{finishTitle}</h3>
       {finishText&&<p>{finishText}</p>}
+      <div className={styles.goalPanel}><b>Confirma o que já consegues fazer:</b><ul>{study.goals.map(goal=><li key={goal}>{goal}</li>)}</ul></div>
       <div className={styles.finishChecklist}>{finalItems.map(item=><span key={item}>✓ {item}</span>)}</div>
       <p className={styles.finishNextStep}>Quando quiseres confirmar que consegues aplicar tudo sem apoio, regressa a <b>Treinar</b> e escolhe <b>Praticar</b>.</p>
     </section>
