@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:razoes-triangulo-retangulo",
+      "signature": "11-trig-modelacao:razões-triangulo-retangulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:razoes-triangulo-retangulo",
+      "signature": "11-trig-modelacao:razões-triangulo-retangulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:razoes-triangulo-retangulo",
+      "signature": "11-trig-modelacao:razões-triangulo-retangulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:razao-direta",
+      "signature": "11-trig-modelacao:razão-direta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:razao-direta",
+      "signature": "11-trig-modelacao:razão-direta",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:area-trig",
+      "signature": "11-trig-modelacao:área-trig",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:area-trig",
+      "signature": "11-trig-modelacao:área-trig",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:area-trig",
+      "signature": "11-trig-modelacao:área-trig",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:completar-angulo",
+      "signature": "11-trig-modelacao:completar-ângulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:achar-angulo-cossenos",
+      "signature": "11-trig-modelacao:achar-ângulo-cossenos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:classificar-angulo",
+      "signature": "11-trig-modelacao:classificar-ângulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:classificar-angulo",
+      "signature": "11-trig-modelacao:classificar-ângulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:angulo-lei-cossenos",
+      "signature": "11-trig-modelacao:ângulo-lei-cossenos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:area-trig",
+      "signature": "11-trig-modelacao:área-trig",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:angulo-elevacao",
+      "signature": "11-trig-modelacao:ângulo-elevacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:angulo-elevacao",
+      "signature": "11-trig-modelacao:ângulo-elevacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:frequencia-angular",
+      "signature": "11-trig-modelacao:frequência-angular",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:mare-media",
+      "signature": "11-trig-modelacao:mare-média",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:ciclos-periodo",
+      "signature": "11-trig-modelacao:ciclos-período",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:instante-minimo",
+      "signature": "11-trig-modelacao:instante-mínimo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-modelacao:area-modelo",
+      "signature": "11-trig-modelacao:área-modelo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
