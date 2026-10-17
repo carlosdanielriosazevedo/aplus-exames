@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:adicao-metodos",
+      "signature": "11-cont-adicao-multiplicacao:adicao-métodos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:multiplicacao-metodos",
+      "signature": "11-cont-adicao-multiplicacao:multiplicacao-métodos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:numeros-dois-algarismos",
+      "signature": "11-cont-adicao-multiplicacao:números-dois-algarismos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:numeros-tres-algarismos",
+      "signature": "11-cont-adicao-multiplicacao:números-tres-algarismos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:numeros-pares",
+      "signature": "11-cont-adicao-multiplicacao:números-pares",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:numeros-impares",
+      "signature": "11-cont-adicao-multiplicacao:números-impares",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:opcao-nenhuma",
+      "signature": "11-cont-adicao-multiplicacao:opção-nenhuma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cont-adicao-multiplicacao:arvore-nao-uniforme",
+      "signature": "11-cont-adicao-multiplicacao:arvore-não-uniforme",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
