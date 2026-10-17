@@ -1,7 +1,4 @@
 import {test,expect} from "@playwright/test";
-import {TAXONOMY,DIAGNOSTIC_BLUEPRINT} from "../../app/data/content.js";
-import {diagnosticAnchor} from "../../app/lib/engine.js";
-import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 
 const BAD_VISIBLE_PATTERNS=[
   ["expressao/expressoes",/\bexpressao(?:es)?\b/iu],
@@ -17,38 +14,6 @@ const BAD_VISIBLE_PATTERNS=[
   ["area e",/\barea e\b/iu]
 ];
 
-function emptyScores(){
-  return Object.fromEntries(TAXONOMY.map(theme=>[theme.id,{domain:null,conf:0,evidence:[]}]))
-}
-
-function diagnosticFixture(){
-  const startedAt=Date.now()-2_000;
-  const state={
-    goal:17,
-    betaMode:"internal",
-    selectedSubjectIds:["math-a"],
-    activeSubjectId:"math-a",
-    diagnosticDone:false,
-    diagnosticAnswers:0,
-    pedagogicalIdVersion:1,
-    subjectProgress:{},
-    scores:emptyScores(),
-    profile:{
-      schoolYear:"Já terminei o secundário",
-      recentGrade:"",
-      syllabus:"most",
-      examTiming:"thisYear",
-      optionalTopics:[],
-      taughtSubtopicIds:[]
-    }
-  };
-  const session={id:"pw-math-diagnostic-accents",kind:"diagnostic",startedAt,finishedAt:null,meta:{goal:17}};
-  const first=diagnosticAnchor(DIAGNOSTIC_BLUEPRINT[0],2,state);
-  if(!first)throw new Error("Não foi possível criar a primeira pergunta do diagnóstico de Matemática A.");
-  const draft=createDiagnosticDraft({session,item:first,betaMode:"internal",difficulty:2,blueprint:DIAGNOSTIC_BLUEPRINT,now:startedAt});
-  return {state,draft};
-}
-
 async function expectVisibleCopyAccented(page,stage){
   const text=await page.locator("body").innerText();
   for(const [label,pattern] of BAD_VISIBLE_PATTERNS){
@@ -56,19 +21,33 @@ async function expectVisibleCopyAccented(page,stage){
   }
 }
 
+async function reachMathDiagnostic(page){
+  await page.goto("/?preview=subjects");
+  await expect(page.getByRole("heading",{name:"Que disciplinas queres preparar?"})).toBeVisible({timeout:30_000});
+  await page.getByRole("button",{name:/Matemática A/}).click();
+  await page.getByRole("button",{name:"Continuar",exact:true}).click();
+
+  await expect(page.getByRole("heading",{name:/Ajuda a .* começar no sítio certo/})).toBeVisible({timeout:30_000});
+  await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+  await page.getByRole("button",{name:/Continuar para a matéria de Matemática A/}).click();
+
+  await expect(page.getByRole("heading",{name:"Todo o programa de Matemática A fica disponível."})).toBeVisible({timeout:30_000});
+  await page.getByRole("button",{name:"Continuar",exact:true}).click();
+
+  await expect(page.getByRole("button",{name:"Saltar explicação",exact:true})).toBeVisible({timeout:30_000});
+  await page.getByRole("button",{name:"Saltar explicação",exact:true}).click();
+  await expect(page.getByRole("button",{name:"Começar diagnóstico",exact:true})).toBeVisible({timeout:30_000});
+  await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
+
+  const options=page.locator(".opts button");
+  await expect(options.first()).toBeVisible({timeout:30_000});
+  return options;
+}
+
 test("Matemática A · diagnóstico completo não mostra texto sem acentos",async({page})=>{
-  const {state,draft}=diagnosticFixture();
   const pageErrors=[];
   page.on("pageerror",error=>pageErrors.push(String(error)));
-  await page.addInitScript(({state,draft})=>{
-    const now=Date.now();
-    localStorage.setItem("a25",JSON.stringify({...state,_stateVersion:31,_savedAt:now}));
-    localStorage.setItem("a25-active-session-v1",JSON.stringify({...draft,savedAt:now}));
-  },{state,draft});
-
-  await page.goto("/");
-  const options=page.locator(".opts button");
-  await expect(options.first(),`a sessão deve recuperar no diagnóstico; ecrã atual: ${await page.locator("body").innerText().catch(()=>"")}`).toBeVisible({timeout:30_000});
+  const options=await reachMathDiagnostic(page);
 
   let completed=false;
   for(let step=0;step<30;step++){
