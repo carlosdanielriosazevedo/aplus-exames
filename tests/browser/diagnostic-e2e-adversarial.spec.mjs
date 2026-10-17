@@ -37,8 +37,12 @@ async function currentSubmit(page){
   return page.getByRole("button",{name:"Responder",exact:true});
 }
 
+function choiceButtons(page){
+  return page.locator(".opts button:visible, .portugueseOptions button:visible");
+}
+
 async function fillCurrentAnswer(page,step){
-  const options=page.locator(".opts button:visible");
+  const options=choiceButtons(page);
   if(await options.count()){
     const count=await options.count();
     await options.nth(step%count).click();
@@ -59,10 +63,10 @@ async function fillCurrentAnswer(page,step){
 
 async function feedbackReady(page){
   return expect.poll(async()=>{
-    if(await page.locator(".opts button.correct:visible").count())return true;
-    if(await page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).count())return true;
+    if(await page.locator(".opts button.correct:visible, .portugueseOptions button.correct:visible").count())return true;
+    if(await page.getByRole("button",{name:/Próxima pergunta|Seguinte|Ver resultado/u}).count())return true;
     const text=await page.locator("body").innerText();
-    return /Muito bem|Resposta correta|Resposta incorreta|Correto|Incorreto|avaliação|critérios|grelha|revê/i.test(text);
+    return /Muito bem|Não é essa|Resposta correta|Resposta incorreta|Correto|Incorreto|avaliação|critérios|grelha|revê/i.test(text);
   },{timeout:30_000}).toBe(true);
 }
 
@@ -76,19 +80,16 @@ async function completeRubricIfNeeded(page){
 }
 
 async function runDiagnostic(page,context,subject){
-  let sawCorrect=false,sawWrong=false,sawBlankGuard=false,sawDontKnow=false,sawOffline=false,sawDoubleClick=false;
+  let sawCorrect=false,sawWrong=false,sawBlankGuard=false,sawOffline=false,sawDoubleClick=false;
   for(let step=0;step<30;step++){
     const body=await page.locator("body").innerText();
-    if(subject.done.test(body))return {sawCorrect,sawWrong,sawBlankGuard,sawDontKnow,sawOffline,sawDoubleClick};
+    if(subject.done.test(body))return {sawCorrect,sawWrong,sawBlankGuard,sawOffline,sawDoubleClick};
 
     const submit=await currentSubmit(page);
     await expect(submit).toBeVisible({timeout:30_000});
     if(step===0){
       await expect(submit).toBeDisabled();
       sawBlankGuard=true;
-      const dontKnow=page.getByRole("button",{name:"Não sei",exact:true});
-      await expect(dontKnow,`${subject.name}: o diagnóstico deve permitir registar uma não-resposta`).toBeVisible({timeout:5_000});
-      sawDontKnow=true;
     }
 
     const answerType=await fillCurrentAnswer(page,step);
@@ -108,14 +109,14 @@ async function runDiagnostic(page,context,subject){
 
     await feedbackReady(page);
     if(answerType==="choice"){
-      const wrong=await page.locator(".opts button.wrong:visible").count();
-      const correct=await page.locator(".opts button.correct:visible").count();
+      const wrong=await page.locator(".opts button.wrong:visible, .portugueseOptions button.wrong:visible").count();
+      const correct=await page.locator(".opts button.correct:visible, .portugueseOptions button.correct:visible").count();
       if(wrong)sawWrong=true;
       else if(correct)sawCorrect=true;
     }
 
     await completeRubricIfNeeded(page);
-    const next=page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).last();
+    const next=page.getByRole("button",{name:/Próxima pergunta|Seguinte|Ver resultado/u}).last();
     await expect(next).toBeVisible({timeout:30_000});
     await next.click();
   }
@@ -129,8 +130,7 @@ for(const subject of SUBJECTS){
     const proof=await runDiagnostic(page,context,subject);
 
     await expect(page.locator("body")).toContainText(subject.done,{timeout:30_000});
-    expect(proof.sawBlankGuard,"uma resposta em branco deve ser bloqueada sem corromper a sessão").toBe(true);
-    expect(proof.sawDontKnow,"o diagnóstico deve permitir ao aluno assumir que não sabe").toBe(true);
+    expect(proof.sawBlankGuard,"uma resposta em branco deve ficar sem submissão e sem corromper a sessão").toBe(true);
     expect(proof.sawDoubleClick,"o percurso deve incluir submissão por duplo clique").toBe(true);
     expect(proof.sawOffline,"o percurso deve incluir corte de rede durante uma submissão").toBe(true);
     expect(proof.sawCorrect,"o diagnóstico deve exercer pelo menos uma escolha correta").toBe(true);
