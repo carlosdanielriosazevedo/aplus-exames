@@ -1,11 +1,11 @@
-export const PORTUGUESE_GRAMATICA_12_DEEP_REVIEW_VERSION="2026.10-wave26";
+export const PORTUGUESE_GRAMATICA_12_DEEP_REVIEW_VERSION="2026.10-wave33";
 
 export const PORTUGUESE_GRAMATICA_12_DEEP_REVIEW={
   id:"pt12-gramatica",
   title:"Gramática · consolidação para exame",
   lead:"No 12.º ano, a gramática deve ser aplicada em contexto e justificada por propriedades observáveis. As Aprendizagens Essenciais de março de 2026 consolidam processos irregulares de formação de palavras, sintaxe e articulação frásica, valores aspetuais, cadeias referenciais e anáfora, coerência e coesão e reprodução do discurso. O objetivo não é decorar etiquetas: é identificar a estrutura, testar hipóteses e explicar por que razão uma classificação é adequada.",
   goals:[
-    "Reconhecer processos irregulares de formação de palavras a partir da forma e história estrutural da palavra.",
+    "Reconhecer os processos irregulares de formação de palavras previstos no Dicionário Terminológico e distingui-los de derivação e composição.",
     "Analisar funções sintáticas e relações entre orações sem decidir apenas pela posição das palavras.",
     "Distinguir valores aspetuais perfetivo, imperfetivo, habitual, iterativo e genérico em contexto.",
     "Reconstruir cadeias referenciais e distinguir anáfora de mera repetição lexical.",
@@ -15,7 +15,8 @@ export const PORTUGUESE_GRAMATICA_12_DEEP_REVIEW={
   ],
   sourceBasis:[
     "DGE · Aprendizagens Essenciais · Português · 12.º ano · março de 2026 · Gramática",
-    "DGE · processos irregulares de formação de palavras; sintaxe; valores aspetuais; cadeias referenciais; coerência e coesão; reprodução do discurso",
+    "DGE · Dicionário Terminológico · B.5.3 Processos irregulares de formação de palavras: extensão semântica, empréstimo, amálgama, sigla, acrónimo, onomatopeia e truncação",
+    "DGE · sintaxe; valores aspetuais; cadeias referenciais; coerência e coesão; discurso direto, indireto e indireto livre",
     "IAVE/EduQA · Informação-Prova 639 · Português · 2026"
   ],
   sections:[
@@ -24,14 +25,14 @@ export const PORTUGUESE_GRAMATICA_12_DEEP_REVIEW={
       kicker:"1 · FORMAÇÃO IRREGULAR DE PALAVRAS",
       title:"Nem todas as palavras novas resultam de prefixo + base + sufixo",
       paragraphs:[
-        "Os processos irregulares exigem observar a relação entre a palavra resultante e as formas que lhe deram origem. Truncação, siglação, acronímia, amálgama e empréstimo não devem ser confundidos com derivação ou composição só porque a palavra pode ser segmentada visualmente.",
-        "A classificação depende do mecanismo de formação. Numa sigla, usam-se normalmente iniciais; num acrónimo, a sequência resultante funciona como palavra pronunciável; numa amálgama, partes de palavras diferentes fundem-se numa unidade nova; na truncação, reduz-se uma forma preexistente.",
-        "Em exame, descreve primeiro o que aconteceu à forma original. Só depois atribui o nome ao processo. Este percurso reduz respostas por memória visual e ajuda a distinguir fenómenos próximos."
+        "As Aprendizagens Essenciais pedem que saibas explicitar processos irregulares de formação de palavras. No Dicionário Terminológico da DGE, este conjunto inclui extensão semântica, empréstimo, amálgama, sigla, acrónimo, onomatopeia e truncação. Nenhum destes processos deve ser confundido com derivação ou composição apenas porque a forma final parece segmentável.",
+        "Na extensão semântica, uma palavra já existente adquire um novo significado; no empréstimo, uma unidade lexical entra no português a partir de outra língua; na onomatopeia, a palavra nasce da imitação convencional de um som. Numa sigla, usam-se tipicamente iniciais; num acrónimo, a sequência formada funciona como palavra pronunciável; numa amálgama, fundem-se partes de palavras diferentes; na truncação, reduz-se uma forma preexistente.",
+        "Em exame, começa por descrever o mecanismo observado: houve mudança de significado, importação de outra língua, imitação sonora, uso de iniciais, fusão de segmentos ou redução? Só depois atribui o nome ao processo. Este percurso reduz respostas por memória visual e ajuda a distinguir fenómenos próximos."
       ],
-      signals:["Mecanismo primeiro, etiqueta depois.","Sigla e acrónimo não são sinónimos automáticos.","Segmentação visual não prova derivação."],
-      example:{title:"Exemplo · classificar sem adivinhar",prompt:"Como decides entre sigla, acrónimo e amálgama?",steps:["Identifica as formas de origem.","Observa que partes foram conservadas.","Verifica se a nova unidade resulta de iniciais ou fusão de segmentos.","Classifica e justifica pelo mecanismo."],modelAnswer:"A classificação deve resultar da transformação observada. Se a forma é construída a partir de iniciais, estamos perante siglação ou acronímia conforme o funcionamento da sequência; se funde segmentos de palavras diferentes numa unidade nova, trata-se de amálgama.",note:"Não classifiques apenas pela aparência final da palavra."},
-      remember:"Processo de formação = operação realizada sobre formas de origem.",
-      pitfalls:["Chamar derivação a qualquer palavra segmentável.","Tratar sigla e acrónimo como equivalentes.","Ignorar as formas de origem."]
+      signals:["Mecanismo primeiro, etiqueta depois.","Extensão semântica altera o significado sem criar a palavra por derivação.","Sigla e acrónimo não são sinónimos automáticos.","Onomatopeia e empréstimo têm origens distintas da derivação e da composição."],
+      example:{title:"Exemplo · classificar sem adivinhar",prompt:"Como distingues os principais processos irregulares sem depender da aparência final da palavra?",steps:["Identifica se já existia uma palavra de base e se apenas mudou de significado.","Verifica se a forma veio de outra língua ou imita convencionalmente um som.","Se há combinação formal, observa se resulta de iniciais, fusão de segmentos ou redução.","Classifica e justifica pelo mecanismo efetivamente observado."],modelAnswer:"A classificação depende da operação: extensão semântica quando uma palavra existente ganha novo significado; empréstimo quando a unidade vem de outra língua; onomatopeia quando imita um som; sigla ou acrónimo quando parte de iniciais; amálgama quando funde segmentos de palavras; truncação quando reduz uma forma preexistente.",note:"A aparência final da palavra é apenas uma pista; o processo explica como ela entrou ou se transformou no léxico."},
+      remember:"Processos irregulares: extensão semântica, empréstimo, amálgama, sigla, acrónimo, onomatopeia e truncação.",
+      pitfalls:["Chamar derivação a qualquer palavra segmentável.","Esquecer extensão semântica ou onomatopeia por não envolverem o mesmo tipo de alteração formal.","Tratar sigla e acrónimo como equivalentes.","Ignorar a origem ou o mecanismo da unidade lexical."]
     },
     {
       id:"pt12-gramatica-sintaxe",
@@ -58,7 +59,7 @@ export const PORTUGUESE_GRAMATICA_12_DEEP_REVIEW={
       ],
       signals:["Tempo verbal ≠ valor aspetual.","Habitual e iterativo são repetições de natureza diferente.","Contexto pode alterar a leitura do mesmo tempo verbal."],
       example:{title:"Exemplo · habitual ou iterativo?",prompt:"Como distingues uma ação habitual de uma ação simplesmente repetida?",steps:["Localiza marcas de frequência.","Verifica se a repetição define um padrão estável.","Distingue hábito de contagem/reiteração de eventos.","Justifica com o contexto."],modelAnswer:"Uma leitura habitual apresenta a repetição como padrão caracterizador, enquanto a leitura iterativa destaca a multiplicação de ocorrências. A distinção deve apoiar-se nas marcas de frequência e no modo como o enunciado enquadra a situação.",note:"Não associes automaticamente imperfeito a habitual ou perfeito a perfetivo."},
-      remember:"Aspeto = modo como a situação é perspectivada quanto ao seu desenvolvimento e repetição.",
+      remember:"Aspeto = modo como a situação é perspetivada quanto ao seu desenvolvimento e repetição.",
       pitfalls:["Confundir tempo e aspeto.","Confundir habitual com iterativo.","Ignorar advérbios e contexto."]
     },
     {
