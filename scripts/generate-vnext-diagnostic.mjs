@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {CURRICULUM_SUBTOPICS} from "../app/data/curriculumVnext.js";
+import {normalizeMathVisibleItem} from "../app/lib/mathVisibleCopy.js";
 
 const ROOT=path.resolve("content/vnext/math-a");
 const OUTPUT=path.resolve("app/data/vnextDiagnostic.js");
@@ -35,7 +36,7 @@ function selectQuestion(questions,{role,exclude=null}){
 }
 
 function diagnosticItem(question,subtopic,role,sourceFile){
-  return {
+  return normalizeMathVisibleItem({
     id:`DG-${question.id}`,
     themeId:question.themeId,
     subtopicId:question.subtopicId,
@@ -57,7 +58,7 @@ function diagnosticItem(question,subtopic,role,sourceFile){
     sourceFile,
     optionOrderVersion:question.optionOrderVersion??1,
     productionEligible:false
-  };
+  });
 }
 
 const rows=[];
