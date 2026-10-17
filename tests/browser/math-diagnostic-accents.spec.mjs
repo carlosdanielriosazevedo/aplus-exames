@@ -183,7 +183,7 @@ test("Matemática A · fontes versionadas não contêm cópia visível sem acent
   }
   for(const filename of targets){
     const source=fs.readFileSync(filename,"utf8");
-    const start=filename.endsWith(".json")?source:source.slice(source.indexOf("=[")+1).replace(/;\\s*$/u,"");
+    const start=filename.endsWith(".json")?source:source.slice(source.indexOf("=[")+1).trim().replace(/;$/u,"");
     const data=JSON.parse(start);
     checkVisible(data,filename);
   }
