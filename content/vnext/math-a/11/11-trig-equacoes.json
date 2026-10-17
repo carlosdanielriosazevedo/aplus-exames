@@ -4,7 +4,7 @@
   "curriculum": "vNext 2026/27",
   "year": "11.º",
   "themeId": "11-trig",
-  "subtopicId": "11-trig-equacoes",
+  "subtopicId": "11-trig-equações",
   "subtopic": "Equações trigonométricas",
   "editorialTarget": 50,
   "status": "prototype",
@@ -13,7 +13,7 @@
     {
       "id": "VN11TRIG-EQ-001",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-zero",
+      "signature": "11-trig-equações:sin-zero",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -40,7 +40,7 @@
     {
       "id": "VN11TRIG-EQ-002",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:cos-zero",
+      "signature": "11-trig-equações:cos-zero",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -67,7 +67,7 @@
     {
       "id": "VN11TRIG-EQ-003",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:tan-zero",
+      "signature": "11-trig-equações:tan-zero",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -94,7 +94,7 @@
     {
       "id": "VN11TRIG-EQ-004",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-zero-intervalo",
+      "signature": "11-trig-equações:sin-zero-intervalo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -121,7 +121,7 @@
     {
       "id": "VN11TRIG-EQ-005",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:cos-zero-intervalo",
+      "signature": "11-trig-equações:cos-zero-intervalo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -148,7 +148,7 @@
     {
       "id": "VN11TRIG-EQ-006",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-valor",
+      "signature": "11-trig-equações:sin-valor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -175,7 +175,7 @@
     {
       "id": "VN11TRIG-EQ-007",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -194,7 +194,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:cos-valor",
+      "signature": "11-trig-equações:cos-valor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -202,7 +202,7 @@
     {
       "id": "VN11TRIG-EQ-008",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-negativo",
+      "signature": "11-trig-equações:sin-negativo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -229,7 +229,7 @@
     {
       "id": "VN11TRIG-EQ-009",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:cos-negativo",
+      "signature": "11-trig-equações:cos-negativo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -256,7 +256,7 @@
     {
       "id": "VN11TRIG-EQ-010",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:tan-valor",
+      "signature": "11-trig-equações:tan-valor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -283,7 +283,7 @@
     {
       "id": "VN11TRIG-EQ-011",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:solucao-geral-sin",
+      "signature": "11-trig-equações:solução-geral-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -310,7 +310,7 @@
     {
       "id": "VN11TRIG-EQ-012",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:solucao-geral-cos",
+      "signature": "11-trig-equações:solução-geral-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -337,7 +337,7 @@
     {
       "id": "VN11TRIG-EQ-013",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:solucao-geral-tan",
+      "signature": "11-trig-equações:solução-geral-tan",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -364,7 +364,7 @@
     {
       "id": "VN11TRIG-EQ-014",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-notavel",
+      "signature": "11-trig-equações:sin-notavel",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -391,7 +391,7 @@
     {
       "id": "VN11TRIG-EQ-015",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:cos-notavel",
+      "signature": "11-trig-equações:cos-notavel",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -418,7 +418,7 @@
     {
       "id": "VN11TRIG-EQ-016",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:tan-negativa",
+      "signature": "11-trig-equações:tan-negativa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -445,7 +445,7 @@
     {
       "id": "VN11TRIG-EQ-017",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:equacao-linear-sin",
+      "signature": "11-trig-equações:equação-linear-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -472,7 +472,7 @@
     {
       "id": "VN11TRIG-EQ-018",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:equacao-linear-cos",
+      "signature": "11-trig-equações:equação-linear-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -499,7 +499,7 @@
     {
       "id": "VN11TRIG-EQ-019",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:equacao-linear-tan",
+      "signature": "11-trig-equações:equação-linear-tan",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -526,7 +526,7 @@
     {
       "id": "VN11TRIG-EQ-020",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sem-solucao",
+      "signature": "11-trig-equações:sem-solução",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -553,7 +553,7 @@
     {
       "id": "VN11TRIG-EQ-021",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sem-solucao",
+      "signature": "11-trig-equações:sem-solução",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -580,7 +580,7 @@
     {
       "id": "VN11TRIG-EQ-022",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:quadratica-sin",
+      "signature": "11-trig-equações:quadratica-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -607,7 +607,7 @@
     {
       "id": "VN11TRIG-EQ-023",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:quadratica-cos",
+      "signature": "11-trig-equações:quadratica-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -634,7 +634,7 @@
     {
       "id": "VN11TRIG-EQ-024",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:produto-zero",
+      "signature": "11-trig-equações:produto-zero",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -661,7 +661,7 @@
     {
       "id": "VN11TRIG-EQ-025",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:produto-zero",
+      "signature": "11-trig-equações:produto-zero",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -688,7 +688,7 @@
     {
       "id": "VN11TRIG-EQ-026",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:quadratica-cos",
+      "signature": "11-trig-equações:quadratica-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -715,7 +715,7 @@
     {
       "id": "VN11TRIG-EQ-027",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:fatorizacao-sin",
+      "signature": "11-trig-equações:fatorizacao-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -742,7 +742,7 @@
     {
       "id": "VN11TRIG-EQ-028",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:quadratica-tan",
+      "signature": "11-trig-equações:quadratica-tan",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -769,7 +769,7 @@
     {
       "id": "VN11TRIG-EQ-029",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-igual-cos",
+      "signature": "11-trig-equações:sin-igual-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -796,7 +796,7 @@
     {
       "id": "VN11TRIG-EQ-030",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-oposto-cos",
+      "signature": "11-trig-equações:sin-oposto-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -823,7 +823,7 @@
     {
       "id": "VN11TRIG-EQ-031",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:quadratica-sin",
+      "signature": "11-trig-equações:quadratica-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -850,7 +850,7 @@
     {
       "id": "VN11TRIG-EQ-032",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:periodicidade-solucoes",
+      "signature": "11-trig-equações:periodicidade-soluções",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -877,7 +877,7 @@
     {
       "id": "VN11TRIG-EQ-033",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:solucao-geral-sin",
+      "signature": "11-trig-equações:solução-geral-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -904,7 +904,7 @@
     {
       "id": "VN11TRIG-EQ-034",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -923,7 +923,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:solucao-geral-cos",
+      "signature": "11-trig-equações:solução-geral-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -931,7 +931,7 @@
     {
       "id": "VN11TRIG-EQ-035",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:solucao-geral-tan",
+      "signature": "11-trig-equações:solução-geral-tan",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -958,7 +958,7 @@
     {
       "id": "VN11TRIG-EQ-036",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:argumento-duplo",
+      "signature": "11-trig-equações:argumento-duplo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -985,7 +985,7 @@
     {
       "id": "VN11TRIG-EQ-037",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:argumento-duplo",
+      "signature": "11-trig-equações:argumento-duplo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1012,7 +1012,7 @@
     {
       "id": "VN11TRIG-EQ-038",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:argumento-duplo",
+      "signature": "11-trig-equações:argumento-duplo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1039,7 +1039,7 @@
     {
       "id": "VN11TRIG-EQ-039",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:argumento-duplo",
+      "signature": "11-trig-equações:argumento-duplo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1066,7 +1066,7 @@
     {
       "id": "VN11TRIG-EQ-040",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:argumento-duplo-tan",
+      "signature": "11-trig-equações:argumento-duplo-tan",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1093,7 +1093,7 @@
     {
       "id": "VN11TRIG-EQ-041",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:fase",
+      "signature": "11-trig-equações:fase",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1120,7 +1120,7 @@
     {
       "id": "VN11TRIG-EQ-042",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:fase",
+      "signature": "11-trig-equações:fase",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1147,7 +1147,7 @@
     {
       "id": "VN11TRIG-EQ-043",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:sin-igual-sin",
+      "signature": "11-trig-equações:sin-igual-sin",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1174,7 +1174,7 @@
     {
       "id": "VN11TRIG-EQ-044",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:cos-igual-cos",
+      "signature": "11-trig-equações:cos-igual-cos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1201,7 +1201,7 @@
     {
       "id": "VN11TRIG-EQ-045",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:tan-igual-tan",
+      "signature": "11-trig-equações:tan-igual-tan",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1228,7 +1228,7 @@
     {
       "id": "VN11TRIG-EQ-046",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:divisao-perigosa",
+      "signature": "11-trig-equações:divisao-perigosa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1255,7 +1255,7 @@
     {
       "id": "VN11TRIG-EQ-047",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:fatorizacao",
+      "signature": "11-trig-equações:fatorizacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1282,7 +1282,7 @@
     {
       "id": "VN11TRIG-EQ-048",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:modelacao-periodica",
+      "signature": "11-trig-equações:modelacao-periodica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1309,7 +1309,7 @@
     {
       "id": "VN11TRIG-EQ-049",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:modelacao-periodica",
+      "signature": "11-trig-equações:modelacao-periodica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1336,7 +1336,7 @@
     {
       "id": "VN11TRIG-EQ-050",
       "themeId": "11-trig",
-      "subtopicId": "11-trig-equacoes",
+      "subtopicId": "11-trig-equações",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-trig-equacoes:modelacao-frequencia",
+      "signature": "11-trig-equações:modelacao-frequência",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
