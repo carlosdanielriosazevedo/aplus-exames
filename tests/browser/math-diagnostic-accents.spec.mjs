@@ -165,10 +165,26 @@ test("Matemática A · fontes versionadas não contêm cópia visível sem acent
     });
   }
   targets.push(...collect(root));
-  for(const filename of targets){
-    const content=fs.readFileSync(filename,"utf8");
-    for(const [label,pattern] of BAD_VISIBLE_PATTERNS){
-      expect(content,`${filename} contém padrão sem acento: ${label}`).not.toMatch(pattern);
+  const visibleKeys=new Set(["q","sol","hyp","note","focus","subtopic","prompt","explanation","title","subtitle","label","feedback","hint","text","statement","instruction","o","options"]);
+  function checkVisible(value,filename,property="root"){
+    if(Array.isArray(value)){for(const item of value)checkVisible(item,filename,property);return}
+    if(value&&typeof value==="object"){
+      for(const [key,item] of Object.entries(value)){
+        if(visibleKeys.has(key))checkVisible(item,filename,key);
+        else if(item&&typeof item==="object")checkVisible(item,filename,key);
+      }
+      return;
     }
+    if(typeof value==="string"&&visibleKeys.has(property)){
+      for(const [label,pattern] of BAD_VISIBLE_PATTERNS){
+        expect(value,`${filename}:${property} contém padrão sem acento: ${label}`).not.toMatch(pattern);
+      }
+    }
+  }
+  for(const filename of targets){
+    const source=fs.readFileSync(filename,"utf8");
+    const start=filename.endsWith(".json")?source:source.slice(source.indexOf("=[")+1).replace(/;\\s*$/u,"");
+    const data=JSON.parse(start);
+    checkVisible(data,filename);
   }
 });
