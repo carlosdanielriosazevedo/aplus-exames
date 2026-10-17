@@ -177,9 +177,9 @@ for(const subject of SUBJECTS){
 
 
 for(const subject of [
-  {id:"math-a",name:"Matemática A",button:/^Matemática A\\b/u},
-  {id:"portuguese",name:"Português",button:/^Português 12\\.º ano · Prova 639\\b/u},
-  {id:"physics-chemistry-a",name:"Física e Química A",button:/^Física e Química A\\b/u}
+  {id:"math-a",name:"Matemática A",button:/^Matemática A\b/u},
+  {id:"portuguese",name:"Português",button:/^Português 12\.º ano · Prova 639\b/u},
+  {id:"physics-chemistry-a",name:"Física e Química A",button:/^Física e Química A\b/u}
 ]){
   test(`${subject.id} · retoma real depois de duas respostas sem semear armazenamento`,async({browser})=>{
     const context=await browser.newContext({viewport:{width:390,height:844}});
