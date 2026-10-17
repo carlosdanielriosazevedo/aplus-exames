@@ -8,7 +8,7 @@
   "subtopic": "Reta tangente e interpretação geométrica",
   "editorialTarget": 50,
   "status": "prototype",
-  "note": "Conteudo original A+. Trabalha equacao da reta tangente, leitura geometrica da derivada, reta normal e aproximacao linear local. Nao ligado ao motor atual.",
+  "note": "Conteudo original A+. Trabalha equação da reta tangente, leitura geométrica da derivada, reta normal e aproximação linear local. não ligado ao motor atual.",
   "questions": [
     {
       "id": "VN11CD-TAN-001",
