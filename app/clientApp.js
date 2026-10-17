@@ -368,7 +368,12 @@ export default function App(){
         !!subjectProgressFor(recoveredState,"portuguese").lastPosition||
         !!recoveredState.subjectSettings?.portuguese?.miniExamDraft
       );
-      setScreen(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused?"home":"welcome");
+      const activeSubjectId=recoveredState.activeSubjectId;
+      const activeSubjectConfigured=!!activeSubjectId
+        &&(recoveredState.selectedSubjectIds||[]).includes(activeSubjectId)
+        &&(recoveredState.subjectSettings?.[activeSubjectId]?.profileConfigured===true||recoveredState.onboardingSharedProfileDone===true);
+      if(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused)setScreen("home");
+      else setScreen(activeSubjectConfigured?"diag":"welcome");
     }
     setHydrated(true);
     })();
@@ -894,7 +899,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {!fb
       ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
       :<button className="primary" onClick={next}>Próxima pergunta →</button>}
-    <button className="pauseLink" onClick={()=>go("diag")}>Guardar e continuar depois</button>
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
