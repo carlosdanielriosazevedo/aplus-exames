@@ -22,7 +22,10 @@ async function expectVisibleCopyAccented(page,stage){
 }
 
 async function reachMathDiagnostic(page){
-  await page.goto("/?preview=subjects");
+  await page.goto("/");
+  await expect(page.getByRole("button",{name:/Descobrir o meu nível/})).toBeVisible({timeout:30_000});
+  await page.getByRole("button",{name:/Descobrir o meu nível/}).click();
+
   await expect(page.getByRole("heading",{name:"Que disciplinas queres preparar?"})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:/Matemática A/}).click();
   await page.getByRole("button",{name:"Continuar",exact:true}).click();
