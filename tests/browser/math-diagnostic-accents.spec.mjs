@@ -28,10 +28,20 @@ async function expectScreenCopy(page,needle,stage,runtimeErrors=[]){
   }).toContain(needle);
 }
 
+async function waitForReactHandlers(page,selector){
+  await page.waitForFunction(sel=>{
+    const node=document.querySelector(sel);
+    if(!node)return false;
+    return Object.keys(node).some(key=>key.startsWith("__reactProps$")||key.startsWith("__reactFiber$"));
+  },selector,{timeout:30_000});
+}
+
 async function reachMathDiagnostic(page,runtimeErrors){
   await page.goto("/");
-  await expect(page.getByRole("button",{name:/Descobrir o meu nível/})).toBeVisible({timeout:30_000});
-  await page.getByRole("button",{name:/Descobrir o meu nível/}).click();
+  const cta=page.getByRole("button",{name:/Descobrir o meu nível/});
+  await expect(cta).toBeVisible({timeout:30_000});
+  await waitForReactHandlers(page,"button");
+  await cta.click();
   await expectScreenCopy(page,"Que disciplinas queres preparar?","depois do CTA inicial",runtimeErrors);
 
   await page.getByRole("button",{name:/Matemática A/}).click();
