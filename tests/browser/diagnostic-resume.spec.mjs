@@ -200,7 +200,11 @@ for(const subject of [
       else{
         const textarea=page.locator("textarea:visible").first();
         if(await textarea.count())await textarea.fill("Justificação de teste.");
-        else throw new Error("Resposta real sem controlo visível");
+        else{
+          const inputs=page.locator('input:visible:not([type="range"]):not([type="checkbox"]):not([type="radio"])');
+          if(await inputs.count())await inputs.first().fill(index%2?"1":"0");
+          else throw new Error("Resposta real sem controlo visível");
+        }
       }
       await page.getByRole("button",{name:"Responder",exact:true}).click();
       const next=page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).first();
