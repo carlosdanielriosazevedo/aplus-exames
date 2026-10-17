@@ -2,8 +2,8 @@ import {describe,expect,it} from "vitest";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../../app/data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../../app/data/vnextMission.js";
 import {VNEXT_EXAM_QUESTIONS} from "../../app/data/vnextExam.js";
-import {PORTUGUESE_QUESTION_BANK} from "../../app/data/portugueseQuestionBank.js";
-import {PHYSICS_CHEMISTRY_QUESTION_BANK} from "../../app/data/physicsChemistryQuestionBank.js";
+import {PORTUGUESE_ITEMS} from "../../app/data/portugueseContent.js";
+import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 
 const VISIBLE_KEYS=new Set(["q","o","sol","prompt","options","explanation","title","subtitle","label","feedback","hint","text","statement","instruction"]);
 const BAD_VISIBLE_PATTERNS=[
@@ -52,6 +52,6 @@ describe("texto visível · acentuação pt-PT",()=>{
     expectAccented("math-exam",VNEXT_EXAM_QUESTIONS);
   });
 
-  it("protege Português",()=>expectAccented("portuguese",PORTUGUESE_QUESTION_BANK));
-  it("protege Física e Química A",()=>expectAccented("fqa",PHYSICS_CHEMISTRY_QUESTION_BANK));
+  it("protege Português",()=>expectAccented("portuguese",PORTUGUESE_ITEMS));
+  it("protege Física e Química A",()=>expectAccented("fqa",PHYSICS_CHEMISTRY_A_ITEMS));
 });
