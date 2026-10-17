@@ -4,7 +4,7 @@
   "curriculum": "vNext 2026/27",
   "year": "11.º",
   "themeId": "11-fun",
-  "subtopicId": "11-fun-assintotas-modelacao",
+  "subtopicId": "11-fun-assíntotas-modelacao",
   "subtopic": "Assíntotas, interpretação e modelação",
   "editorialTarget": 50,
   "status": "prototype",
@@ -13,7 +13,7 @@
     {
       "id": "VN11FUN-AM-001",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:assintota-vertical",
+      "signature": "11-fun-assíntotas-modelacao:assíntota-vertical",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -40,7 +40,7 @@
     {
       "id": "VN11FUN-AM-002",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:base-vertical",
+      "signature": "11-fun-assíntotas-modelacao:base-vertical",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -67,7 +67,7 @@
     {
       "id": "VN11FUN-AM-003",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:base-horizontal",
+      "signature": "11-fun-assíntotas-modelacao:base-horizontal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -94,7 +94,7 @@
     {
       "id": "VN11FUN-AM-004",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:vertical-translada",
+      "signature": "11-fun-assíntotas-modelacao:vertical-translada",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -121,7 +121,7 @@
     {
       "id": "VN11FUN-AM-005",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Aplicação",
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal-translada",
+      "signature": "11-fun-assíntotas-modelacao:horizontal-translada",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -148,7 +148,7 @@
     {
       "id": "VN11FUN-AM-006",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:forma-canonica",
+      "signature": "11-fun-assíntotas-modelacao:forma-canonica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -175,7 +175,7 @@
     {
       "id": "VN11FUN-AM-007",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -194,7 +194,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:centro",
+      "signature": "11-fun-assíntotas-modelacao:centro",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -202,7 +202,7 @@
     {
       "id": "VN11FUN-AM-008",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:centro",
+      "signature": "11-fun-assíntotas-modelacao:centro",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -229,7 +229,7 @@
     {
       "id": "VN11FUN-AM-009",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:mesmo-grau",
+      "signature": "11-fun-assíntotas-modelacao:mesmo-grau",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -256,7 +256,7 @@
     {
       "id": "VN11FUN-AM-010",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal-mesmo-grau",
+      "signature": "11-fun-assíntotas-modelacao:horizontal-mesmo-grau",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -283,7 +283,7 @@
     {
       "id": "VN11FUN-AM-011",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal-mesmo-grau",
+      "signature": "11-fun-assíntotas-modelacao:horizontal-mesmo-grau",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -310,7 +310,7 @@
     {
       "id": "VN11FUN-AM-012",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:grau-menor",
+      "signature": "11-fun-assíntotas-modelacao:grau-menor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -337,7 +337,7 @@
     {
       "id": "VN11FUN-AM-013",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal-grau-menor",
+      "signature": "11-fun-assíntotas-modelacao:horizontal-grau-menor",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -364,7 +364,7 @@
     {
       "id": "VN11FUN-AM-014",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:obliqua",
+      "signature": "11-fun-assíntotas-modelacao:obliqua",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -391,7 +391,7 @@
     {
       "id": "VN11FUN-AM-015",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:obliqua-forma",
+      "signature": "11-fun-assíntotas-modelacao:obliqua-forma",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -418,7 +418,7 @@
     {
       "id": "VN11FUN-AM-016",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:divisao-racional",
+      "signature": "11-fun-assíntotas-modelacao:divisao-racional",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -445,7 +445,7 @@
     {
       "id": "VN11FUN-AM-017",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:obliqua-yx",
+      "signature": "11-fun-assíntotas-modelacao:obliqua-yx",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -472,7 +472,7 @@
     {
       "id": "VN11FUN-AM-018",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:divisao-obliqua",
+      "signature": "11-fun-assíntotas-modelacao:divisao-obliqua",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -499,7 +499,7 @@
     {
       "id": "VN11FUN-AM-019",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:obliqua",
+      "signature": "11-fun-assíntotas-modelacao:obliqua",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -526,7 +526,7 @@
     {
       "id": "VN11FUN-AM-020",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:buraco-vs-vertical",
+      "signature": "11-fun-assíntotas-modelacao:buraco-vs-vertical",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -553,7 +553,7 @@
     {
       "id": "VN11FUN-AM-021",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:confirmar-vertical",
+      "signature": "11-fun-assíntotas-modelacao:confirmar-vertical",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -580,7 +580,7 @@
     {
       "id": "VN11FUN-AM-022",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:duas-verticais",
+      "signature": "11-fun-assíntotas-modelacao:duas-verticais",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -607,7 +607,7 @@
     {
       "id": "VN11FUN-AM-023",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal",
+      "signature": "11-fun-assíntotas-modelacao:horizontal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -634,7 +634,7 @@
     {
       "id": "VN11FUN-AM-024",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:verticais-quadraticas",
+      "signature": "11-fun-assíntotas-modelacao:verticais-quadraticas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -661,7 +661,7 @@
     {
       "id": "VN11FUN-AM-025",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal-grau2",
+      "signature": "11-fun-assíntotas-modelacao:horizontal-grau2",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -688,7 +688,7 @@
     {
       "id": "VN11FUN-AM-026",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:simplificacao-com-dominio",
+      "signature": "11-fun-assíntotas-modelacao:simplificacao-com-domínio",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -715,7 +715,7 @@
     {
       "id": "VN11FUN-AM-027",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:buraco",
+      "signature": "11-fun-assíntotas-modelacao:buraco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -742,7 +742,7 @@
     {
       "id": "VN11FUN-AM-028",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:vertical",
+      "signature": "11-fun-assíntotas-modelacao:vertical",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -769,7 +769,7 @@
     {
       "id": "VN11FUN-AM-029",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:horizontal",
+      "signature": "11-fun-assíntotas-modelacao:horizontal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -796,7 +796,7 @@
     {
       "id": "VN11FUN-AM-030",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:interpretacao-horizontal",
+      "signature": "11-fun-assíntotas-modelacao:interpretação-horizontal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -823,7 +823,7 @@
     {
       "id": "VN11FUN-AM-031",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:cruzar-horizontal",
+      "signature": "11-fun-assíntotas-modelacao:cruzar-horizontal",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -850,7 +850,7 @@
     {
       "id": "VN11FUN-AM-032",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:vertical-nao-cruza",
+      "signature": "11-fun-assíntotas-modelacao:vertical-não-cruza",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -877,7 +877,7 @@
     {
       "id": "VN11FUN-AM-033",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:comportamento-infinito",
+      "signature": "11-fun-assíntotas-modelacao:comportamento-infinito",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -904,7 +904,7 @@
     {
       "id": "VN11FUN-AM-034",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -923,7 +923,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:comportamento-infinito",
+      "signature": "11-fun-assíntotas-modelacao:comportamento-infinito",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -931,7 +931,7 @@
     {
       "id": "VN11FUN-AM-035",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:lado-direito",
+      "signature": "11-fun-assíntotas-modelacao:lado-direito",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -958,7 +958,7 @@
     {
       "id": "VN11FUN-AM-036",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:lado-esquerdo",
+      "signature": "11-fun-assíntotas-modelacao:lado-esquerdo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -985,7 +985,7 @@
     {
       "id": "VN11FUN-AM-037",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:reflexao",
+      "signature": "11-fun-assíntotas-modelacao:reflexao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1012,7 +1012,7 @@
     {
       "id": "VN11FUN-AM-038",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:divisao-obliqua",
+      "signature": "11-fun-assíntotas-modelacao:divisao-obliqua",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1039,7 +1039,7 @@
     {
       "id": "VN11FUN-AM-039",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:obliqua",
+      "signature": "11-fun-assíntotas-modelacao:obliqua",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1066,7 +1066,7 @@
     {
       "id": "VN11FUN-AM-040",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:diferenca-graus",
+      "signature": "11-fun-assíntotas-modelacao:diferenca-graus",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1093,7 +1093,7 @@
     {
       "id": "VN11FUN-AM-041",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:tipo-assintota",
+      "signature": "11-fun-assíntotas-modelacao:tipo-assíntota",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1120,7 +1120,7 @@
     {
       "id": "VN11FUN-AM-042",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:divisao-grau3",
+      "signature": "11-fun-assíntotas-modelacao:divisao-grau3",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1147,7 +1147,7 @@
     {
       "id": "VN11FUN-AM-043",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:obliqua-yx",
+      "signature": "11-fun-assíntotas-modelacao:obliqua-yx",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1174,7 +1174,7 @@
     {
       "id": "VN11FUN-AM-044",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:custo-medio",
+      "signature": "11-fun-assíntotas-modelacao:custo-medio",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1201,7 +1201,7 @@
     {
       "id": "VN11FUN-AM-045",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:interpretacao-modelo",
+      "signature": "11-fun-assíntotas-modelacao:interpretação-modelo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1228,7 +1228,7 @@
     {
       "id": "VN11FUN-AM-046",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:decaimento-inverso",
+      "signature": "11-fun-assíntotas-modelacao:decaimento-inverso",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1255,7 +1255,7 @@
     {
       "id": "VN11FUN-AM-047",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:dominio-modelo",
+      "signature": "11-fun-assíntotas-modelacao:domínio-modelo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1282,7 +1282,7 @@
     {
       "id": "VN11FUN-AM-048",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:construir-assintotas",
+      "signature": "11-fun-assíntotas-modelacao:construir-assíntotas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1309,7 +1309,7 @@
     {
       "id": "VN11FUN-AM-049",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:determinar-a",
+      "signature": "11-fun-assíntotas-modelacao:determinar-a",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1336,7 +1336,7 @@
     {
       "id": "VN11FUN-AM-050",
       "themeId": "11-fun",
-      "subtopicId": "11-fun-assintotas-modelacao",
+      "subtopicId": "11-fun-assíntotas-modelacao",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-assintotas-modelacao:papel-modelacao",
+      "signature": "11-fun-assíntotas-modelacao:papel-modelacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
