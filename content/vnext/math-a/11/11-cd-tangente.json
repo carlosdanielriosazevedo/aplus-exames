@@ -5,10 +5,10 @@
   "year": "11.º",
   "themeId": "11-cd",
   "subtopicId": "11-cd-tangente",
-  "subtopic": "Reta tangente e interpretacao geometrica",
+  "subtopic": "Reta tangente e interpretação geométrica",
   "editorialTarget": 50,
   "status": "prototype",
-  "note": "Conteudo original A+. Trabalha equacao da reta tangente, leitura geometrica da derivada, reta normal e aproximacao linear local. Nao ligado ao motor atual.",
+  "note": "Conteudo original A+. Trabalha equação da reta tangente, leitura geométrica da derivada, reta normal e aproximação linear local. não ligado ao motor atual.",
   "questions": [
     {
       "id": "VN11CD-TAN-001",
@@ -16,8 +16,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
-      "q": "A reta tangente ao grafico de f em x=a passa por",
+      "cognitive": "compreensão",
+      "q": "A reta tangente ao gráfico de f em x=a passa por",
       "o": [
         "(a,f(a))",
         "(a,f'(a))",
@@ -25,7 +25,7 @@
         "(0,f(a))"
       ],
       "a": 0,
-      "sol": "O ponto de tangencia pertence ao grafico.",
+      "sol": "O ponto de tangência pertence ao gráfico.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -43,7 +43,7 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
+      "cognitive": "compreensão",
       "q": "O declive da tangente em x=a e",
       "o": [
         "f(a)",
@@ -70,8 +70,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
-      "q": "Uma equacao da tangente em x=a e",
+      "cognitive": "compreensão",
+      "q": "Uma equação da tangente em x=a e",
       "o": [
         "y-a=f(a)(x-f'(a))",
         "y=f(a)x+a",
@@ -97,7 +97,7 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
+      "cognitive": "compreensão",
       "q": "Num ponto de abcissa a, tem-se f'(a)=0. Qual é a posição da tangente relativamente ao eixo Ox?",
       "o": [
         "vertical",
@@ -124,7 +124,7 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
+      "cognitive": "compreensão",
       "q": "Se f'(a)>0, a tangente tem declive",
       "o": [
         "positivo",
@@ -151,7 +151,7 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
+      "cognitive": "compreensão",
       "q": "Se f'(a)<0, a tangente e",
       "o": [
         "ascendente",
@@ -178,16 +178,16 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
-      "q": "A tangente aproxima localmente o grafico por",
+      "cognitive": "compreensão",
+      "q": "A tangente aproxima localmente o gráfico por",
       "o": [
         "uma circunferencia",
-        "uma parabola obrigatoriamente",
+        "uma parábola obrigatoriamente",
         "uma reta",
         "um ponto apenas"
       ],
       "a": 2,
-      "sol": "A aproximacao linear usa a reta tangente.",
+      "sol": "A aproximação linear usa a reta tangente.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -205,10 +205,10 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
+      "cognitive": "compreensão",
       "q": "A secante e a tangente diferem porque",
       "o": [
-        "a tangente nunca toca no grafico",
+        "a tangente nunca toca no gráfico",
         "a secante tem sempre declive zero",
         "sao sempre a mesma reta",
         "a secante usa dois pontos e a tangente resulta do limite local"
@@ -232,8 +232,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
-      "q": "Se a tangente em a tem equacao y=3x-2, entao f'(a)=",
+      "cognitive": "compreensão",
+      "q": "Se a tangente em a tem equação y=3x-2, então f'(a)=",
       "o": [
         "3",
         "-2",
@@ -259,8 +259,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 1,
-      "cognitive": "Compreensao",
-      "q": "Se a tangente em a e horizontal e passa por (2,5), a sua equacao e",
+      "cognitive": "compreensão",
+      "q": "Se a tangente em a e horizontal e passa por (2,5), a sua equação e",
       "o": [
         "x=2",
         "y=5",
@@ -286,8 +286,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2, a tangente em x=1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2, a tangente em x=1 tem equação",
       "o": [
         "y=2x+1",
         "y=1x+2",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:11",
+      "signature": "11-cd-tangente:equação-tangente:11",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -313,8 +313,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2, a tangente em x=2 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2, a tangente em x=2 tem equação",
       "o": [
         "y=4x+4",
         "y=2x",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:12",
+      "signature": "11-cd-tangente:equação-tangente:12",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 2
@@ -340,8 +340,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2, a tangente em x=-1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2, a tangente em x=-1 tem equação",
       "o": [
         "y=-2x-1",
         "y=-2x+1",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:13",
+      "signature": "11-cd-tangente:equação-tangente:13",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -367,8 +367,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2+1, a tangente em x=0 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2+1, a tangente em x=0 tem equação",
       "o": [
         "y=0x+1",
         "y=1",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:14",
+      "signature": "11-cd-tangente:equação-tangente:14",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -394,8 +394,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2-4x, a tangente em x=2 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2-4x, a tangente em x=2 tem equação",
       "o": [
         "y=0x+-4",
         "y=-4x+0",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:15",
+      "signature": "11-cd-tangente:equação-tangente:15",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -421,8 +421,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^3, a tangente em x=1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^3, a tangente em x=1 tem equação",
       "o": [
         "y=3x+1",
         "y=1x+3",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:16",
+      "signature": "11-cd-tangente:equação-tangente:16",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -448,8 +448,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^3, a tangente em x=2 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^3, a tangente em x=2 tem equação",
       "o": [
         "y=12x-16",
         "y=12x+8",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:17",
+      "signature": "11-cd-tangente:equação-tangente:17",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -475,8 +475,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=2x^2, a tangente em x=1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=2x^2, a tangente em x=1 tem equação",
       "o": [
         "y=4x+2",
         "y=4x-2",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:18",
+      "signature": "11-cd-tangente:equação-tangente:18",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -502,8 +502,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=3x+1, a tangente em x=2 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=3x+1, a tangente em x=2 tem equação",
       "o": [
         "y=3x+7",
         "y=7x+3",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:19",
+      "signature": "11-cd-tangente:equação-tangente:19",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -529,8 +529,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=-2x+5, a tangente em x=1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=-2x+5, a tangente em x=1 tem equação",
       "o": [
         "y=-2x+3",
         "y=3x+-2",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:20",
+      "signature": "11-cd-tangente:equação-tangente:20",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -556,8 +556,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2+2x, a tangente em x=1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2+2x, a tangente em x=1 tem equação",
       "o": [
         "y=4x-1",
         "y=4x+3",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:21",
+      "signature": "11-cd-tangente:equação-tangente:21",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -583,8 +583,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^3-x, a tangente em x=1 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^3-x, a tangente em x=1 tem equação",
       "o": [
         "y=2x+0",
         "y=2x-2",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:22",
+      "signature": "11-cd-tangente:equação-tangente:22",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -610,8 +610,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2-1, a tangente em x=0 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2-1, a tangente em x=0 tem equação",
       "o": [
         "y=0x+-1",
         "y=-1x+0",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:23",
+      "signature": "11-cd-tangente:equação-tangente:23",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -637,8 +637,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=4x^2, a tangente em x=0 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=4x^2, a tangente em x=0 tem equação",
       "o": [
         "y=4x",
         "y=4",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:24",
+      "signature": "11-cd-tangente:equação-tangente:24",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 2
@@ -664,8 +664,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 2,
-      "cognitive": "Aplicacao",
-      "q": "Para f(x)=x^2+3, a tangente em x=3 tem equacao",
+      "cognitive": "aplicação",
+      "q": "Para f(x)=x^2+3, a tangente em x=3 tem equação",
       "o": [
         "y=6x-6",
         "y=6x+12",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:equacao-tangente:25",
+      "signature": "11-cd-tangente:equação-tangente:25",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -691,8 +691,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(2)=5 e f'(2)=3, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(2)=5 e f'(2)=3, qual é a reta tangente?",
       "o": [
         "y=3x+5",
         "y=3x-1",
@@ -718,8 +718,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(1)=4 e f'(1)=-2, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(1)=4 e f'(1)=-2, qual é a reta tangente?",
       "o": [
         "y=-2x+4",
         "y=4x+-2",
@@ -745,8 +745,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(0)=-3 e f'(0)=4, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(0)=-3 e f'(0)=4, qual é a reta tangente?",
       "o": [
         "y=4x+-3",
         "y=-3x+4",
@@ -772,8 +772,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(-1)=2 e f'(-1)=5, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(-1)=2 e f'(-1)=5, qual é a reta tangente?",
       "o": [
         "y=5x+7",
         "y=5x+2",
@@ -799,8 +799,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(3)=1 e f'(3)=0, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(3)=1 e f'(3)=0, qual é a reta tangente?",
       "o": [
         "y=0x+1",
         "y=1",
@@ -826,8 +826,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(4)=10 e f'(4)=2, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(4)=10 e f'(4)=2, qual é a reta tangente?",
       "o": [
         "y=2x+10",
         "y=10x+2",
@@ -853,8 +853,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(-2)=6 e f'(-2)=-1, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(-2)=6 e f'(-2)=-1, qual é a reta tangente?",
       "o": [
         "y=-1x+6",
         "y=6x+-1",
@@ -880,8 +880,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(5)=-1 e f'(5)=3, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(5)=-1 e f'(5)=3, qual é a reta tangente?",
       "o": [
         "y=3x-16",
         "y=3x+-1",
@@ -907,8 +907,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(1)=0 e f'(1)=7, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(1)=0 e f'(1)=7, qual é a reta tangente?",
       "o": [
         "y=7x+0",
         "y=7x-7",
@@ -934,8 +934,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Raciocinio",
-      "q": "Sabendo que f(2)=8 e f'(2)=-4, qual e a reta tangente?",
+      "cognitive": "raciocínio",
+      "q": "Sabendo que f(2)=8 e f'(2)=-4, qual é a reta tangente?",
       "o": [
         "y=-4x+8",
         "y=8x+-4",
@@ -961,8 +961,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Interpretacao",
-      "q": "A tangente ao grafico em x=2 e y=4x-3. Entao f'(2)=",
+      "cognitive": "interpretação",
+      "q": "A tangente ao gráfico em x=2 e y=4x-3. então f'(2)=",
       "o": [
         "5",
         "2",
@@ -988,8 +988,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Interpretacao",
-      "q": "A tangente ao grafico em x=1 e y=-2x+7. Entao f'(1)=",
+      "cognitive": "interpretação",
+      "q": "A tangente ao gráfico em x=1 e y=-2x+7. então f'(1)=",
       "o": [
         "-2",
         "5",
@@ -1015,8 +1015,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Interpretacao",
-      "q": "A tangente ao grafico em x=3 e y=6. Entao f'(3)=",
+      "cognitive": "interpretação",
+      "q": "A tangente ao gráfico em x=3 e y=6. então f'(3)=",
       "o": [
         "6",
         "0",
@@ -1042,8 +1042,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Interpretacao",
-      "q": "A tangente ao grafico em x=-1 e y=x+4. Entao f'(-1)=",
+      "cognitive": "interpretação",
+      "q": "A tangente ao gráfico em x=-1 e y=x+4. então f'(-1)=",
       "o": [
         "3",
         "-1",
@@ -1069,8 +1069,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 3,
-      "cognitive": "Interpretacao",
-      "q": "A tangente ao grafico em x=0 e y=-5x+2. Entao f'(0)=",
+      "cognitive": "interpretação",
+      "q": "A tangente ao gráfico em x=0 e y=-5x+2. então f'(0)=",
       "o": [
         "2",
         "0",
@@ -1096,8 +1096,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 4,
-      "cognitive": "Raciocinio",
-      "q": "Se a tangente em (2,5) tem declive 3, uma reta normal ao grafico nesse ponto e",
+      "cognitive": "raciocínio",
+      "q": "Se a tangente em (2,5) tem declive 3, uma reta normal ao gráfico nesse ponto e",
       "o": [
         "y=(-1/3)x+17/3",
         "y=3x+5",
@@ -1105,7 +1105,7 @@
         "x=2"
       ],
       "a": 0,
-      "sol": "O declive normal e -1/3; usando o ponto obtem-se y=(-1/3)x+17/3.",
+      "sol": "O declive normal e -1/3; usando o ponto obtém-se y=(-1/3)x+17/3.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1123,8 +1123,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 4,
-      "cognitive": "Raciocinio",
-      "q": "Se a tangente em (1,4) tem declive -2, uma reta normal ao grafico nesse ponto e",
+      "cognitive": "raciocínio",
+      "q": "Se a tangente em (1,4) tem declive -2, uma reta normal ao gráfico nesse ponto e",
       "o": [
         "y=-2x+4",
         "y=(1/2)x+7/2",
@@ -1132,7 +1132,7 @@
         "x=1"
       ],
       "a": 1,
-      "sol": "O declive normal e -1/-2; usando o ponto obtem-se y=(1/2)x+7/2.",
+      "sol": "O declive normal e -1/-2; usando o ponto obtém-se y=(1/2)x+7/2.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1150,8 +1150,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 4,
-      "cognitive": "Raciocinio",
-      "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao grafico nesse ponto e",
+      "cognitive": "raciocínio",
+      "q": "Se a tangente em (0,-3) tem declive 4, uma reta normal ao gráfico nesse ponto e",
       "o": [
         "y=4x+-3",
         "y=-4x+-3",
@@ -1159,7 +1159,7 @@
         "x=0"
       ],
       "a": 2,
-      "sol": "O declive normal e -1/4; usando o ponto obtem-se y=(-1/4)x-3.",
+      "sol": "O declive normal e -1/4; usando o ponto obtém-se y=(-1/4)x-3.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1177,8 +1177,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 4,
-      "cognitive": "Raciocinio",
-      "q": "Se a tangente em (-1,2) tem declive 1, uma reta normal ao grafico nesse ponto e",
+      "cognitive": "raciocínio",
+      "q": "Se a tangente em (-1,2) tem declive 1, uma reta normal ao gráfico nesse ponto e",
       "o": [
         "y=1x+2",
         "y=-1x+2",
@@ -1186,7 +1186,7 @@
         "y=-x+1"
       ],
       "a": 3,
-      "sol": "O declive normal e -1/1; usando o ponto obtem-se y=-x+1.",
+      "sol": "O declive normal e -1/1; usando o ponto obtém-se y=-x+1.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1204,8 +1204,8 @@
       "subtopicId": "11-cd-tangente",
       "year": "11.º",
       "difficulty": 4,
-      "cognitive": "Raciocinio",
-      "q": "Se a tangente em (3,1) tem declive -1, uma reta normal ao grafico nesse ponto e",
+      "cognitive": "raciocínio",
+      "q": "Se a tangente em (3,1) tem declive -1, uma reta normal ao gráfico nesse ponto e",
       "o": [
         "y=x-2",
         "y=-1x+1",
@@ -1213,7 +1213,7 @@
         "x=3"
       ],
       "a": 0,
-      "sol": "O declive normal e -1/-1; usando o ponto obtem-se y=x-2.",
+      "sol": "O declive normal e -1/-1; usando o ponto obtém-se y=x-2.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
@@ -1232,7 +1232,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelacao",
-      "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximacao linear f(2,1) e",
+      "q": "Sabendo que f(2)=5 e f'(2)=3, pela aproximação linear f(2,1) e",
       "o": [
         "5,03",
         "aproximadamente 5,3",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:aproximacao-linear:46",
+      "signature": "11-cd-tangente:aproximação-linear:46",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1259,7 +1259,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelacao",
-      "q": "Sabendo que f(1)=4 e f'(1)=-2, pela aproximacao linear f(1,05) e",
+      "q": "Sabendo que f(1)=4 e f'(1)=-2, pela aproximação linear f(1,05) e",
       "o": [
         "4,1",
         "3,8",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:aproximacao-linear:47",
+      "signature": "11-cd-tangente:aproximação-linear:47",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1286,7 +1286,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelacao",
-      "q": "Sabendo que f(0)=2 e f'(0)=5, pela aproximacao linear f(0,2) e",
+      "q": "Sabendo que f(0)=2 e f'(0)=5, pela aproximação linear f(0,2) e",
       "o": [
         "2,5",
         "7",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:aproximacao-linear:48",
+      "signature": "11-cd-tangente:aproximação-linear:48",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1313,7 +1313,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelacao",
-      "q": "Sabendo que f(3)=10 e f'(3)=0, pela aproximacao linear f(3,1) e",
+      "q": "Sabendo que f(3)=10 e f'(3)=0, pela aproximação linear f(3,1) e",
       "o": [
         "aproximadamente 10",
         "10,1",
@@ -1321,14 +1321,14 @@
         "3,1"
       ],
       "a": 0,
-      "sol": "A aproximacao linear local nao varia quando o declive e 0.",
+      "sol": "A aproximação linear local não varia quando o declive e 0.",
       "hyp": "Pode confundir ponto da curva, declive da tangente e termo independente da reta.",
       "contexts": [
         "mission",
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:aproximacao-linear:49",
+      "signature": "11-cd-tangente:aproximação-linear:49",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1340,7 +1340,7 @@
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelacao",
-      "q": "Sabendo que f(-1)=1 e f'(-1)=4, pela aproximacao linear f(-0,9) e",
+      "q": "Sabendo que f(-1)=1 e f'(-1)=4, pela aproximação linear f(-0,9) e",
       "o": [
         "0,6",
         "aproximadamente 1,4",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-cd-tangente:aproximacao-linear:50",
+      "signature": "11-cd-tangente:aproximação-linear:50",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
