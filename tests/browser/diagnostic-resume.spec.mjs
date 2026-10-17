@@ -195,6 +195,7 @@ for(const subject of [
     if(await skip.isVisible().catch(()=>false))await skip.click();
     await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
     for(let index=0;index<2;index++){
+      await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
       const options=page.locator(".opts button:visible, .portugueseOptions button:visible");
       if(await options.count())await options.first().click();
       else{
@@ -216,10 +217,23 @@ for(const subject of [
       draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
     }));
     expect(snapshot.state?.selectedSubjectIds).toContain(subject.id);
-    expect(snapshot.draft||snapshot.state?.subjectProgress?.[subject.id]?.lastPosition).toBeTruthy();
+    const savedPosition=snapshot.draft
+      ?{itemId:snapshot.draft.current?.id,responses:snapshot.draft.responses?.length}
+      :{itemId:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.itemIds?.[snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.current],responses:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.results?.length};
+    expect(savedPosition.itemId).toBeTruthy();
+    expect(savedPosition.responses).toBeGreaterThanOrEqual(2);
     await page.reload();
     await expectNoSubjectSelector(page);
     await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    const reloadState=await page.evaluate(id=>{
+      const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
+      const state=JSON.parse(localStorage.getItem("a25")||"null");
+      const saved=state?.subjectProgress?.[id]?.lastPosition;
+      return draft?.kind==="diagnostic"&&id==="math-a"
+        ?{itemId:draft.current?.id,responses:draft.responses?.length}
+        :{itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length};
+    },subject.id);
+    expect(reloadState).toEqual(savedPosition);
     await page.close();
     const reopened=await context.newPage();
     await reopened.goto("/");
