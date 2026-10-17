@@ -8,7 +8,7 @@
   "subtopic": "Regras de derivação",
   "editorialTarget": 50,
   "status": "prototype",
-  "note": "Conteudo original A+. Trabalha linearidade, regra da potencia, produto, quociente, simplificacao e avaliacao de derivadas em contextos elementares. Nao ligado ao motor atual.",
+  "note": "Conteudo original A+. Trabalha linearidade, regra da potência, produto, quociente, simplificacao e avaliação de derivadas em contextos elementares. não ligado ao motor atual.",
   "questions": [
     {
       "id": "VN11CD-REG-001",
