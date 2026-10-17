@@ -9,7 +9,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -22,6 +22,25 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps --no-audit --no-fund
+
+      - name: Generate vNext runtime copy
+        run: |
+          node scripts/generate-vnext-diagnostic.mjs
+          node scripts/generate-vnext-mission.mjs
+          node scripts/generate-vnext-exam.mjs
+
+      - name: Install mobile browser test runtime
+        run: |
+          rm -rf /tmp/approva-playwright
+          mkdir -p /tmp/approva-playwright
+          npm install --prefix /tmp/approva-playwright --no-save --no-package-lock --legacy-peer-deps --no-audit --no-fund @playwright/test@1.55.0
+          ln -s /tmp/approva-playwright/node_modules/@playwright node_modules/@playwright
+          ln -s /tmp/approva-playwright/node_modules/playwright node_modules/playwright
+          ln -s /tmp/approva-playwright/node_modules/playwright-core node_modules/playwright-core
+          /tmp/approva-playwright/node_modules/.bin/playwright install --with-deps chromium
+
+      - name: Mobile browser regression · 390x844
+        run: /tmp/approva-playwright/node_modules/.bin/playwright test --config=playwright.config.mjs
 
       - name: Unit tests
         run: npm run test:unit

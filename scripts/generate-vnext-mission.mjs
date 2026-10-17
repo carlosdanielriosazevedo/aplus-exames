@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {CURRICULUM_SUBTOPICS} from "../app/data/curriculumVnext.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../app/data/vnextDiagnostic.js";
+import {normalizeMathVisibleItem} from "../app/lib/mathVisibleCopy.js";
 
 const ROOT=path.resolve("content/vnext/math-a");
 const OUTPUT=path.resolve("app/data/vnextMission.js");
@@ -36,7 +37,7 @@ function chooseQuestions(questions){
 }
 
 function missionItem(question,subtopic,sourceFile){
-  return {
+  return normalizeMathVisibleItem({
     id:`MS-${question.id}`,
     themeId:question.themeId,
     subtopicId:question.subtopicId,
@@ -57,7 +58,7 @@ function missionItem(question,subtopic,sourceFile){
     sourceFile,
     optionOrderVersion:question.optionOrderVersion??1,
     productionEligible:false
-  };
+  });
 }
 
 const rows=[];
