@@ -21,18 +21,18 @@ async function expectVisibleCopyAccented(page,stage){
   }
 }
 
-async function expectScreenCopy(page,needle,stage){
+async function expectScreenCopy(page,needle,stage,runtimeErrors=[]){
   await expect.poll(async()=>await page.locator("body").innerText(),{
     timeout:30_000,
-    message:`${stage}: o ecrã esperado não apareceu. Texto visível atual: ${await page.locator("body").innerText()}`
+    message:`${stage}: ecrã esperado ausente. Runtime errors: ${runtimeErrors.join(" | ")||"nenhum capturado"}. Texto visível: ${await page.locator("body").innerText()}`
   }).toContain(needle);
 }
 
-async function reachMathDiagnostic(page){
+async function reachMathDiagnostic(page,runtimeErrors){
   await page.goto("/");
   await expect(page.getByRole("button",{name:/Descobrir o meu nível/})).toBeVisible({timeout:30_000});
   await page.getByRole("button",{name:/Descobrir o meu nível/}).click();
-  await expectScreenCopy(page,"Que disciplinas queres preparar?","depois do CTA inicial");
+  await expectScreenCopy(page,"Que disciplinas queres preparar?","depois do CTA inicial",runtimeErrors);
 
   await page.getByRole("button",{name:/Matemática A/}).click();
   await page.getByRole("button",{name:"Continuar",exact:true}).click();
@@ -55,9 +55,10 @@ async function reachMathDiagnostic(page){
 }
 
 test("Matemática A · diagnóstico completo não mostra texto sem acentos",async({page})=>{
-  const pageErrors=[];
-  page.on("pageerror",error=>pageErrors.push(String(error)));
-  const options=await reachMathDiagnostic(page);
+  const runtimeErrors=[];
+  page.on("pageerror",error=>runtimeErrors.push(`pageerror: ${String(error)}`));
+  page.on("console",msg=>{if(msg.type()==="error")runtimeErrors.push(`console.error: ${msg.text()}`)});
+  const options=await reachMathDiagnostic(page,runtimeErrors);
 
   let completed=false;
   for(let step=0;step<30;step++){
@@ -77,5 +78,5 @@ test("Matemática A · diagnóstico completo não mostra texto sem acentos",asyn
   if(!completed)completed=await page.getByRole("heading",{name:"Podemos criar o teu primeiro plano."}).isVisible().catch(()=>false);
   expect(completed,"o diagnóstico deve chegar ao ecrã de resultado").toBe(true);
   await expectVisibleCopyAccented(page,"resultado final");
-  expect(pageErrors,"não deve haver erros não tratados na consola").toEqual([]);
+  expect(runtimeErrors,"não deve haver erros de cliente nem console.error").toEqual([]);
 });
