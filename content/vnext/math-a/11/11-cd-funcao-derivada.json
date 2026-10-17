@@ -26,7 +26,7 @@
       ],
       "a": 0,
       "sol": "A função derivada recolhe as taxas instantâneas de variação.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -53,7 +53,7 @@
       ],
       "a": 1,
       "sol": "Sinal positivo da derivada indica crescimento.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -80,7 +80,7 @@
       ],
       "a": 2,
       "sol": "Sinal negativo indica decrescimento.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -107,7 +107,7 @@
       ],
       "a": 3,
       "sol": "Derivada identicamente zero implica constancia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -134,7 +134,7 @@
       ],
       "a": 0,
       "sol": "Uma constante não varia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -161,7 +161,7 @@
       ],
       "a": 1,
       "sol": "A reta y=x tem declive 1.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -188,7 +188,7 @@
       ],
       "a": 2,
       "sol": "Pela regra da potência.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -215,7 +215,7 @@
       ],
       "a": 3,
       "sol": "Pela regra da potência.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -242,7 +242,7 @@
       ],
       "a": 0,
       "sol": "O declive e constante.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -269,7 +269,7 @@
       ],
       "a": 1,
       "sol": "O sinal de f' controla a monotonia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -296,7 +296,7 @@
       ],
       "a": 2,
       "sol": "Derivando termo a termo obtém-se 4x^3.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -323,7 +323,7 @@
       ],
       "a": 3,
       "sol": "Derivando termo a termo obtém-se 15x^2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -350,7 +350,7 @@
       ],
       "a": 0,
       "sol": "Derivando termo a termo obtém-se 10x^4.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -377,7 +377,7 @@
       ],
       "a": 1,
       "sol": "Derivando termo a termo obtém-se 2x+3.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -404,7 +404,7 @@
       ],
       "a": 2,
       "sol": "Derivando termo a termo obtém-se 6x-4.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -431,7 +431,7 @@
       ],
       "a": 3,
       "sol": "Derivando termo a termo obtém-se 3x^2+1.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -458,7 +458,7 @@
       ],
       "a": 0,
       "sol": "Derivando termo a termo obtém-se 8x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -485,7 +485,7 @@
       ],
       "a": 1,
       "sol": "Derivando termo a termo obtém-se -3x^2+2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -512,7 +512,7 @@
       ],
       "a": 2,
       "sol": "Derivando termo a termo obtém-se 7.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -539,7 +539,7 @@
       ],
       "a": 3,
       "sol": "Derivando termo a termo obtém-se 0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -566,7 +566,7 @@
       ],
       "a": 0,
       "sol": "Derivando termo a termo obtém-se 5x^4-2x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -593,7 +593,7 @@
       ],
       "a": 1,
       "sol": "Derivando termo a termo obtém-se 6x^2+12x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -620,7 +620,7 @@
       ],
       "a": 2,
       "sol": "Derivando termo a termo obtém-se 4x^3+4x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -647,7 +647,7 @@
       ],
       "a": 3,
       "sol": "Derivando termo a termo obtém-se -6x+1.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -674,7 +674,7 @@
       ],
       "a": 0,
       "sol": "Derivando termo a termo obtém-se 18x^2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -701,7 +701,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se x=1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -728,7 +728,7 @@
       ],
       "a": 2,
       "sol": "Substitui-se x=2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -755,7 +755,7 @@
       ],
       "a": 3,
       "sol": "Substitui-se x=2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -782,7 +782,7 @@
       ],
       "a": 0,
       "sol": "Substitui-se x=-1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -809,7 +809,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se x=1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -836,7 +836,7 @@
       ],
       "a": 2,
       "sol": "Substitui-se x=1 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -863,7 +863,7 @@
       ],
       "a": 3,
       "sol": "Substitui-se x=2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -890,7 +890,7 @@
       ],
       "a": 0,
       "sol": "Substitui-se x=3 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -917,7 +917,7 @@
       ],
       "a": 1,
       "sol": "Substitui-se x=-2 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -944,7 +944,7 @@
       ],
       "a": 2,
       "sol": "Substitui-se x=4 em f'(x).",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -971,7 +971,7 @@
       ],
       "a": 3,
       "sol": "Para x>0, 2x>0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -998,7 +998,7 @@
       ],
       "a": 0,
       "sol": "Para x<0, 2x<0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1025,7 +1025,7 @@
       ],
       "a": 1,
       "sol": "x^2>0 para x diferente de 0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1052,7 +1052,7 @@
       ],
       "a": 2,
       "sol": "-x^2<0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1079,7 +1079,7 @@
       ],
       "a": 3,
       "sol": "x-2>0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1106,7 +1106,7 @@
       ],
       "a": 0,
       "sol": "x-2<0.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1133,7 +1133,7 @@
       ],
       "a": 1,
       "sol": "Ambos os fatores sao positivos.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1160,7 +1160,7 @@
       ],
       "a": 2,
       "sol": "Os fatores tem sinais opostos.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1187,7 +1187,7 @@
       ],
       "a": 3,
       "sol": "Ambos os fatores sao negativos, produto positivo.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1214,7 +1214,7 @@
       ],
       "a": 0,
       "sol": "Derivada nula em todo o intervalo implica constancia.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1241,7 +1241,7 @@
       ],
       "a": 1,
       "sol": "A derivada de x^4+C e 4x^3.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1268,7 +1268,7 @@
       ],
       "a": 2,
       "sol": "A derivada de 3x^2+C e 6x.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1295,7 +1295,7 @@
       ],
       "a": 3,
       "sol": "A derivada de 5x+C e 5.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1322,7 +1322,7 @@
       ],
       "a": 0,
       "sol": "Derivando x^3+2x+C obtém-se 3x^2+2.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
@@ -1349,7 +1349,7 @@
       ],
       "a": 1,
       "sol": "A derivada e 2x-4.",
-      "hyp": "Pode confundir a funcao derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
+      "hyp": "Pode confundir a função derivada com a derivada num ponto ou aplicar incorretamente regras elementares.",
       "contexts": [
         "mission",
         "training",
