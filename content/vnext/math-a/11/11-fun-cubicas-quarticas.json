@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-cubicas-quarticas:padrão-impar",
+      "signature": "11-fun-cubicas-quarticas:padrao-impar",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-cubicas-quarticas:número-zeros-cubica",
+      "signature": "11-fun-cubicas-quarticas:numero-zeros-cubica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-fun-cubicas-quarticas:fatorizacao-equação",
+      "signature": "11-fun-cubicas-quarticas:fatorizacao-equacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
