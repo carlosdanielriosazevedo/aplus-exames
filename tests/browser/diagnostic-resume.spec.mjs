@@ -1,7 +1,5 @@
 import {test,expect} from "@playwright/test";
 import {DIAGNOSTIC_BLUEPRINT} from "../../app/data/content.js";
-import {PORTUGUESE_ITEMS} from "../../app/data/portugueseContent.js";
-import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 import {diagnosticAnchor,emptyScores} from "../../app/lib/engine.js";
 import {createDiagnosticDraft,transactDiagnosticAnswer} from "../../app/lib/diagnosticRecovery.js";
 
@@ -37,9 +35,8 @@ function configuredState(subjectId){
 
 function pausedSubjectState(subjectId,current=2){
   const state=configuredState(subjectId);
-  const source=subjectId==="portuguese"?PORTUGUESE_ITEMS:PHYSICS_CHEMISTRY_A_ITEMS;
-  const items=source.slice(0,Math.max(4,current+1));
   const now=Date.now();
+  const itemIds=Array.from({length:Math.max(4,current+1)},(_,index)=>`resume-${subjectId}-item-${index+1}`);
   state.subjectProgress[subjectId]={
     ...state.subjectProgress[subjectId],
     lastPosition:{
@@ -47,7 +44,7 @@ function pausedSubjectState(subjectId,current=2){
       kind:"diagnostic",
       label:"Diagnóstico",
       domain:null,
-      itemIds:items.map(item=>item.id),
+      itemIds,
       current,
       results:Array.from({length:current},()=>({status:"final",final:true,correct:true,points:1,maxPoints:1,gradingMode:"deterministic"})),
       startedAt:now-60_000,
