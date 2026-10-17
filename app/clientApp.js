@@ -364,11 +364,16 @@ export default function App(){
       setRecoveredSession(validDraft);
       setScreen(recovered);
     }else{
-      const portuguesePaused=recoveredState.activeSubjectId==="portuguese"&&(
-        !!subjectProgressFor(recoveredState,"portuguese").lastPosition||
-        !!recoveredState.subjectSettings?.portuguese?.miniExamDraft
+      const activeSubjectId=recoveredState.activeSubjectId;
+      const subjectPaused=!!activeSubjectId&&(
+        !!subjectProgressFor(recoveredState,activeSubjectId).lastPosition||
+        (activeSubjectId==="portuguese"&&!!recoveredState.subjectSettings?.portuguese?.miniExamDraft)
       );
-      setScreen(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused?"home":"welcome");
+      const activeSubjectConfigured=!!activeSubjectId
+        &&(recoveredState.selectedSubjectIds||[]).includes(activeSubjectId)
+        &&(recoveredState.subjectSettings?.[activeSubjectId]?.profileConfigured===true||recoveredState.onboardingSharedProfileDone===true);
+      if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
+      else setScreen(activeSubjectConfigured?"diag":"welcome");
     }
     setHydrated(true);
     })();
@@ -894,7 +899,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {!fb
       ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
       :<button className="primary" onClick={next}>Próxima pergunta →</button>}
-    <button className="pauseLink" onClick={()=>go("diag")}>Guardar e continuar depois</button>
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
