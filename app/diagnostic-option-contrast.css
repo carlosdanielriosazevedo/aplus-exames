@@ -1,0 +1,10 @@
+/* Bloco 2.1 · contraste WCAG AA nas alternativas após submissão.
+   O botão continua semanticamente disabled, mas sem a opacidade/nativo do browser
+   que lavava o texto sobre os estados correto/errado. */
+.opts button:disabled,
+.portugueseOptions button:disabled{
+  opacity:1;
+  color:#111a32;
+  -webkit-text-fill-color:#111a32;
+  cursor:default;
+}
