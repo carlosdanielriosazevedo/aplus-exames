@@ -1,4 +1,6 @@
 import {test,expect} from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../../app/data/vnextDiagnostic.js";
 import {createDiagnosticDraft} from "../../app/lib/diagnosticRecovery.js";
 
@@ -147,4 +149,26 @@ test("Matemática A · diagnóstico completo não mostra texto sem acentos",asyn
   expect(completed,"o diagnóstico deve chegar ao ecrã de resultado").toBe(true);
   await expectVisibleCopyAccented(page,"resultado final");
   expect(runtimeErrors,"não deve haver erros de cliente nem console.error").toEqual([]);
+});
+
+test("Matemática A · fontes versionadas não contêm cópia visível sem acentos",()=>{
+  const targets=[
+    "app/data/vnextDiagnostic.js",
+    "app/data/vnextMission.js",
+    "app/data/vnextExam.js"
+  ];
+  const root="content/vnext/math-a/11";
+  function collect(dir){
+    return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
+      const filename=path.join(dir,entry.name);
+      return entry.isDirectory()?collect(filename):entry.name.endsWith(".json")?[filename]:[];
+    });
+  }
+  targets.push(...collect(root));
+  for(const filename of targets){
+    const content=fs.readFileSync(filename,"utf8");
+    for(const [label,pattern] of BAD_VISIBLE_PATTERNS){
+      expect(content,`${filename} contém padrão sem acento: ${label}`).not.toMatch(pattern);
+    }
+  }
 });
