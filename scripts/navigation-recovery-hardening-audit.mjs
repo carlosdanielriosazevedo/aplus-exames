@@ -26,6 +26,12 @@ assert.match(page,/screen==="diagRecoveryError"[\s\S]*Não foi possível recuper
 assert.match(page,/screen==="storageRecoveryError"[\s\S]*Não foi possível ler o progresso guardado/u,"Falhas de leitura local devem continuar cobertas pela saída segura global.");
 assert.match(page,/window\.history\.pushState/u,"A navegação interna deve continuar a criar histórico do browser.");
 assert.match(page,/window\.addEventListener\("popstate"/u,"A app deve continuar a responder ao retroceder do browser/sistema.");
+assert.match(page,/const canRecover=recovered&&\(validDraft\?\.kind==="diagnostic"\?!activeSubjectDiagnosticDone\(recoveredState\):activeSubjectDiagnosticDone\(recoveredState\)\)/u,"A recuperação de drafts deve respeitar o diagnóstico da disciplina ativa, não apenas o booleano global de Matemática.");
+assert.match(page,/const configuredActive=activeSubjectSelected&&!!recoveredState\.profile\?\.schoolYear/u,"O arranque deve reconhecer uma disciplina ativa já configurada.");
+assert.match(page,/else if\(configuredActive\)setScreen\("diag"\)/u,"Sem draft e com diagnóstico pendente, uma disciplina configurada deve regressar ao diagnóstico em vez do Welcome.");
+assert.match(page,/pausedDraft\.kind==="diagnostic"\?"Diagnóstico":"Missão"/u,"A Home deve identificar corretamente um diagnóstico em pausa.");
+assert.match(page,/else if\(pausedDraft\.kind==="diagnostic"\)go\("diagRun"\)/u,"O cartão de diagnóstico em pausa deve retomar a sessão real.");
+assert.match(page,/className="pauseLink" onClick=\{\(\)=>go\("home"\)\}>Guardar e continuar depois<\/button>/u,"Guardar e continuar depois no diagnóstico de Matemática deve regressar à Home, como nas restantes disciplinas.");
 
 assert.match(setup,/export function StudentProfile/u,"O onboarding de perfil deve continuar numa Shell elegível para retrocesso automático.");
 assert.match(setup,/export function TaughtCurriculum/u,"A seleção de matéria deve continuar numa Shell elegível para retrocesso automático.");
@@ -43,4 +49,4 @@ assert.match(cloudMerge,/newest=localAt>=remoteAt\?l:r/u,"A sessão/pausa deve s
 assert.match(cloudMerge,/let lastPosition=newest\?\.lastPosition\|\|null/u,"A retoma deve nascer do dispositivo com atividade mais recente, não de uma pausa antiga do outro dispositivo.");
 assert.match(cloudMerge,/sessions\.some\(row=>row\?\.completedAt&&row\.sessionId===lastPosition\.sessionId\)\)lastPosition=null/u,"Uma sessão concluída noutro dispositivo nunca pode ressuscitar como sessão em pausa.");
 
-console.log("✓ navegação/recovery: voltar real, browser back protegido, sessões sem entradas mortas, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");
+console.log("✓ navegação/recovery: voltar real, browser back protegido, diagnóstico retoma por disciplina ativa, pausas regressam à Home, estados fatais com saída segura, rascunho FQ A preservado e merge multi-dispositivo sem regressão de progresso");

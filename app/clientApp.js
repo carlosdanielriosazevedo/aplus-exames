@@ -346,7 +346,7 @@ export default function App(){
     if(draft?.kind==="mini_exam" && draft.session)setExamSession(draft.session);
 
     const recovered=draftScreen(validDraft);
-    const canRecover=recovered&&(validDraft?.kind==="diagnostic"?!recoveredState.diagnosticDone:recoveredState.diagnosticDone);
+    const canRecover=recovered&&(validDraft?.kind==="diagnostic"?!activeSubjectDiagnosticDone(recoveredState):activeSubjectDiagnosticDone(recoveredState));
     const preview=typeof window!=="undefined"?new URLSearchParams(window.location.search).get("preview"):null;
     if(preview==="subjects"){
       setScreen("subjectOnboard");
@@ -364,11 +364,14 @@ export default function App(){
       setRecoveredSession(validDraft);
       setScreen(recovered);
     }else{
-      const portuguesePaused=recoveredState.activeSubjectId==="portuguese"&&(
-        !!subjectProgressFor(recoveredState,"portuguese").lastPosition||
-        !!recoveredState.subjectSettings?.portuguese?.miniExamDraft
-      );
-      setScreen(activeSubjectDiagnosticDone(recoveredState)||portuguesePaused?"home":"welcome");
+      const activeSubjectId=recoveredState.activeSubjectId;
+      const activeSubjectSelected=AVAILABLE_SUBJECT_IDS.includes(activeSubjectId)&&uniqueSubjectIds(recoveredState.selectedSubjectIds||[],AVAILABLE_SUBJECT_IDS).includes(activeSubjectId);
+      const activeProgress=activeSubjectId&&activeSubjectId!=="math-a"?subjectProgressFor(recoveredState,activeSubjectId):null;
+      const subjectPaused=!!activeProgress?.lastPosition||(activeSubjectId==="portuguese"&&!!recoveredState.subjectSettings?.portuguese?.miniExamDraft);
+      const configuredActive=activeSubjectSelected&&!!recoveredState.profile?.schoolYear;
+      if(activeSubjectDiagnosticDone(recoveredState)||subjectPaused)setScreen("home");
+      else if(configuredActive)setScreen("diag");
+      else setScreen("welcome");
     }
     setHydrated(true);
     })();
@@ -894,7 +897,7 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {!fb
       ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
       :<button className="primary" onClick={next}>Próxima pergunta →</button>}
-    <button className="pauseLink" onClick={()=>go("diag")}>Guardar e continuar depois</button>
+    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
@@ -1159,9 +1162,10 @@ function Home({s,setS,go,reset}){
     <StudentTop s={s} go={go}><details className="studentMenu"><summary aria-label="Abrir menu">•••</summary><div><button onClick={()=>go("curriculumSettings")}>Matéria dada na escola</button><button onClick={()=>go("profileSettings")}>Ano e percurso escolar</button><button onClick={()=>go("goalSettings")}>Objetivo: {s.goal} valores</button><button onClick={()=>setS(prev=>({...prev,firstUseTourCompleted:false}))}>Apronso e como funciona a app</button>{isFriendsBeta(s)?<button onClick={()=>go("friendsBetaInfo")}>Informação do teste</button>:<button onClick={()=>go("account")}>Conta e progresso</button>}<button onClick={()=>go("parent")}>Área dos pais</button>{devView&&<><button onClick={()=>go("identity")}>Identidade demo</button><button onClick={()=>go("qa")}>Qualidade</button><button onClick={()=>go("review")}>Revisão pedagógica</button><button onClick={()=>go("beta")}>Beta Dashboard</button><button onClick={reset}>Recomeçar protótipo</button></>}</div></details></StudentTop>
     <FriendsBetaRibbon s={s}/><div className="learnIntro"><p>Olá 👋</p><h1>O teu próximo passo.</h1><span>{missionDone?"Missão feita. Podes continuar por tua conta.":"Uma recomendação curta, escolhida a partir do teu percurso."}</span></div>
 
-    {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":"Missão"}</b><span>O teu progresso desta sessão ficou guardado neste dispositivo.</span></div><button onClick={()=>{
+    {pausedDraft&&<div className="pausedSession"><div><small>SESSÃO EM PAUSA</small><b>{pausedDraft.kind==="mini_exam"?"Mini-exame":pausedDraft.kind==="training"?"Treino Livre":pausedDraft.kind==="diagnostic"?"Diagnóstico":"Missão"}</b><span>{pausedDraft.kind==="diagnostic"?`Pergunta ${(pausedDraft.responses?.length||0)+1} · o teu progresso ficou guardado neste dispositivo.`:"O teu progresso desta sessão ficou guardado neste dispositivo."}</span></div><button onClick={()=>{
       if(pausedDraft.kind==="mini_exam")go(pausedDraft.screen||"miniExamRun");
       else if(pausedDraft.kind==="training")go("trainingRun");
+      else if(pausedDraft.kind==="diagnostic")go("diagRun");
       else go("mission");
     }}>Continuar →</button></div>}
 
