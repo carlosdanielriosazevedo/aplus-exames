@@ -48,11 +48,19 @@ describe("Rever Matéria · apresentação transversal",()=>{
     }
   });
 
-  it("força uma narrativa visual com início, meio e fim",()=>{
+  it("leva o aluno rapidamente da orientação para o mapa e só consolida objetivos no fim",()=>{
     const text=source("app/components/DeepReviewStudy.js");
-    expect(text).toMatch(/INÍCIO · VISÃO GLOBAL/u);
+    expect(text).toMatch(/INÍCIO · ORIENTAÇÃO/u);
     expect(text).toMatch(/MEIO · PERCURSO/u);
     expect(text).toMatch(/FIM · CONSOLIDAÇÃO/u);
+    expect(text).toMatch(/compactLead\(study\.lead\)/u);
+    expect(text).not.toMatch(/className=\{styles\.studyRoute\}/u);
+    const mapIndex=text.indexOf("Mapa do capítulo");
+    const lessonsIndex=text.indexOf("styles.lessonStack");
+    const goalsIndex=text.indexOf("Confirma o que já consegues fazer:");
+    expect(mapIndex).toBeGreaterThan(0);
+    expect(lessonsIndex).toBeGreaterThan(mapIndex);
+    expect(goalsIndex).toBeGreaterThan(lessonsIndex);
     expect(text).toMatch(/COMPREENDER/u);
     expect(text).toMatch(/EXEMPLO ORIENTADO/u);
     expect(text).toMatch(/IDEIA-CHAVE/u);
@@ -63,7 +71,6 @@ describe("Rever Matéria · apresentação transversal",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);
     expect(css).toMatch(/max-width:78ch/u);
-    expect(css).toMatch(/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/u);
     expect(css).toMatch(/@media\(max-width:760px\)/u);
     expect(css).toMatch(/\.goalPanel ul,\.mapGrid,\.reviewToolbox ul,\.formulaStack,\.lessonSummaryGrid,\.finishChecklist\{grid-template-columns:1fr;\}/u);
   });
