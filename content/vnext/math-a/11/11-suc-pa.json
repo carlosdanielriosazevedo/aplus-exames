@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:razao-pa",
+      "signature": "11-suc-pa:razão-pa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:identificar-razao",
+      "signature": "11-suc-pa:identificar-razão",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:razao-negativa",
+      "signature": "11-suc-pa:razão-negativa",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:achar-razao",
+      "signature": "11-suc-pa:achar-razão",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:achar-razao-dois-termos",
+      "signature": "11-suc-pa:achar-razão-dois-termos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:media-aritmetica",
+      "signature": "11-suc-pa:média-aritmetica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:razao-indices",
+      "signature": "11-suc-pa:razão-indices",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:media-indices",
+      "signature": "11-suc-pa:média-indices",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:numero-termos",
+      "signature": "11-suc-pa:número-termos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-suc-pa:media-extremos",
+      "signature": "11-suc-pa:média-extremos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
