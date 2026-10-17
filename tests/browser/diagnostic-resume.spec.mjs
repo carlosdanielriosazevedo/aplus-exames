@@ -127,12 +127,12 @@ test("Matemática A · depois de duas respostas o draft é retomado após reload
   const prepared=mathStateAfterTwoAnswers();
   await seed(page,prepared.state,prepared.draft);
   await page.goto("/");
-  await expect(page.getByText("Guardar e continuar depois",{exact:true})).toBeVisible({timeout:30_000});
+  await expect(page.getByRole("button",{name:"Sair da sessão",exact:true})).toBeVisible({timeout:30_000});
   let saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
   expect(saved.responses).toHaveLength(2);
 
   await page.reload();
-  await expect(page.getByText("Guardar e continuar depois",{exact:true})).toBeVisible({timeout:30_000});
+  await expect(page.getByRole("button",{name:"Sair da sessão",exact:true})).toBeVisible({timeout:30_000});
   saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("a25-active-session-v1")));
   expect(saved.responses).toHaveLength(2);
   await expectNoSubjectSelector(page);

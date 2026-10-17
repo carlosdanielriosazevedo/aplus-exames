@@ -899,7 +899,6 @@ function DiagRun({s,setS,go,recoveredDraft=null,onRecovered=()=>{}}){
     {!fb
       ?<button className="primary" disabled={sel===null} onClick={submitAnswer}>Responder</button>
       :<button className="primary" onClick={next}>Próxima pergunta →</button>}
-    <button className="pauseLink" onClick={()=>go("home")}>Guardar e continuar depois</button>
   </Shell>
 }
 
