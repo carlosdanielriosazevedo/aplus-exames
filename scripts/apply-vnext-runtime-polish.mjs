@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {polishVnextItem} from "../app/lib/vnextPedagogicalPolish.js";
+import {normalizeMathVisibleItem} from "../app/lib/mathVisibleCopy.js";
 import {VNEXT_PILOT_META,VNEXT_PILOT_QUESTIONS} from "../app/data/vnextPilot.js";
 import {VNEXT_DIAGNOSTIC_QUESTIONS} from "../app/data/vnextDiagnostic.js";
 import {VNEXT_MISSION_QUESTIONS} from "../app/data/vnextMission.js";
@@ -16,7 +17,7 @@ const targets=[
 let changedItems=0;
 for(const [relative,name,items,metaExport] of targets){
   const polished=items.map(item=>{
-    const next=polishVnextItem(item);
+    const next=normalizeMathVisibleItem(polishVnextItem(item));
     if(JSON.stringify(next)!==JSON.stringify(item))changedItems++;
     return next;
   });
