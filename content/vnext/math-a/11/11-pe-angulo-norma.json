@@ -4,7 +4,7 @@
   "curriculum": "vNext 2026/27",
   "year": "11.º",
   "themeId": "11-pe",
-  "subtopicId": "11-pe-ângulo-norma",
+  "subtopicId": "11-pe-angulo-norma",
   "subtopic": "Produto escalar, norma e ângulo",
   "editorialTarget": 50,
   "status": "prototype",
@@ -13,7 +13,7 @@
     {
       "id": "VN11PE-AN-001",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -32,7 +32,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:formula-geométrica",
+      "signature": "11-pe-angulo-norma:formula-geometrica",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -40,7 +40,7 @@
     {
       "id": "VN11PE-AN-002",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -59,7 +59,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:intervalo-ângulo",
+      "signature": "11-pe-angulo-norma:intervalo-angulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -67,7 +67,7 @@
     {
       "id": "VN11PE-AN-003",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -86,7 +86,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:cos-extremos",
+      "signature": "11-pe-angulo-norma:cos-extremos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -94,7 +94,7 @@
     {
       "id": "VN11PE-AN-004",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -113,7 +113,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:cos-extremos",
+      "signature": "11-pe-angulo-norma:cos-extremos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -121,7 +121,7 @@
     {
       "id": "VN11PE-AN-005",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 1,
       "cognitive": "Compreensão",
@@ -140,7 +140,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:cos-extremos",
+      "signature": "11-pe-angulo-norma:cos-extremos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -148,7 +148,7 @@
     {
       "id": "VN11PE-AN-006",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -167,7 +167,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:produto-por-ângulo",
+      "signature": "11-pe-angulo-norma:produto-por-angulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -175,7 +175,7 @@
     {
       "id": "VN11PE-AN-007",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -194,7 +194,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:produto-perpendicular",
+      "signature": "11-pe-angulo-norma:produto-perpendicular",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -202,7 +202,7 @@
     {
       "id": "VN11PE-AN-008",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -221,7 +221,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:produto-opostos",
+      "signature": "11-pe-angulo-norma:produto-opostos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -229,7 +229,7 @@
     {
       "id": "VN11PE-AN-009",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -248,7 +248,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:produto-45",
+      "signature": "11-pe-angulo-norma:produto-45",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -256,7 +256,7 @@
     {
       "id": "VN11PE-AN-010",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -275,7 +275,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-produto-máximo",
+      "signature": "11-pe-angulo-norma:angulo-produto-maximo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -283,7 +283,7 @@
     {
       "id": "VN11PE-AN-011",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -302,7 +302,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-perpendicular",
+      "signature": "11-pe-angulo-norma:angulo-perpendicular",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -310,7 +310,7 @@
     {
       "id": "VN11PE-AN-012",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -329,7 +329,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-opostos",
+      "signature": "11-pe-angulo-norma:angulo-opostos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -337,7 +337,7 @@
     {
       "id": "VN11PE-AN-013",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -356,7 +356,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:cos-por-produto",
+      "signature": "11-pe-angulo-norma:cos-por-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -364,7 +364,7 @@
     {
       "id": "VN11PE-AN-014",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Raciocínio",
@@ -383,7 +383,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-notavel",
+      "signature": "11-pe-angulo-norma:angulo-notavel",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -391,7 +391,7 @@
     {
       "id": "VN11PE-AN-015",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -410,7 +410,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:sinal-e-ângulo",
+      "signature": "11-pe-angulo-norma:sinal-e-angulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -418,7 +418,7 @@
     {
       "id": "VN11PE-AN-016",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Interpretação",
@@ -437,7 +437,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:sinal-e-ângulo",
+      "signature": "11-pe-angulo-norma:sinal-e-angulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -445,7 +445,7 @@
     {
       "id": "VN11PE-AN-017",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -464,7 +464,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:norma-plano",
+      "signature": "11-pe-angulo-norma:norma-plano",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -472,7 +472,7 @@
     {
       "id": "VN11PE-AN-018",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -491,7 +491,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:norma-pitagoras",
+      "signature": "11-pe-angulo-norma:norma-pitagoras",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -499,7 +499,7 @@
     {
       "id": "VN11PE-AN-019",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Aplicação",
@@ -518,7 +518,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:norma-espaco",
+      "signature": "11-pe-angulo-norma:norma-espaco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -526,7 +526,7 @@
     {
       "id": "VN11PE-AN-020",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 2,
       "cognitive": "Compreensão",
@@ -545,7 +545,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:norma-escalar",
+      "signature": "11-pe-angulo-norma:norma-escalar",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -553,7 +553,7 @@
     {
       "id": "VN11PE-AN-021",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Aplicação",
@@ -572,7 +572,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:norma-escalar",
+      "signature": "11-pe-angulo-norma:norma-escalar",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -580,7 +580,7 @@
     {
       "id": "VN11PE-AN-022",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -599,7 +599,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:normalizacao",
+      "signature": "11-pe-angulo-norma:normalizacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -607,7 +607,7 @@
     {
       "id": "VN11PE-AN-023",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
@@ -626,7 +626,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:normalizacao",
+      "signature": "11-pe-angulo-norma:normalizacao",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -634,7 +634,7 @@
     {
       "id": "VN11PE-AN-024",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -653,7 +653,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:normalizacao-notavel",
+      "signature": "11-pe-angulo-norma:normalizacao-notavel",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -661,7 +661,7 @@
     {
       "id": "VN11PE-AN-025",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -680,7 +680,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-coordenadas",
+      "signature": "11-pe-angulo-norma:angulo-coordenadas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -688,7 +688,7 @@
     {
       "id": "VN11PE-AN-026",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -707,7 +707,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-coordenadas",
+      "signature": "11-pe-angulo-norma:angulo-coordenadas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -715,7 +715,7 @@
     {
       "id": "VN11PE-AN-027",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -734,7 +734,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-coordenadas",
+      "signature": "11-pe-angulo-norma:angulo-coordenadas",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -742,7 +742,7 @@
     {
       "id": "VN11PE-AN-028",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -761,7 +761,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:vetores-proporcionais",
+      "signature": "11-pe-angulo-norma:vetores-proporcionais",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -769,7 +769,7 @@
     {
       "id": "VN11PE-AN-029",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -788,7 +788,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:vetores-opostos",
+      "signature": "11-pe-angulo-norma:vetores-opostos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -796,7 +796,7 @@
     {
       "id": "VN11PE-AN-030",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -815,7 +815,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:máximo-produto",
+      "signature": "11-pe-angulo-norma:maximo-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -823,7 +823,7 @@
     {
       "id": "VN11PE-AN-031",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -842,7 +842,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:mínimo-produto",
+      "signature": "11-pe-angulo-norma:minimo-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -850,7 +850,7 @@
     {
       "id": "VN11PE-AN-032",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -869,7 +869,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:limites-produto",
+      "signature": "11-pe-angulo-norma:limites-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -877,7 +877,7 @@
     {
       "id": "VN11PE-AN-033",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -896,7 +896,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:limites-produto",
+      "signature": "11-pe-angulo-norma:limites-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -904,7 +904,7 @@
     {
       "id": "VN11PE-AN-034",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Compreensão",
@@ -923,7 +923,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:cauchy-schwarz",
+      "signature": "11-pe-angulo-norma:cauchy-schwarz",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -931,7 +931,7 @@
     {
       "id": "VN11PE-AN-035",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Interpretação",
@@ -950,7 +950,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:caso-igualdade",
+      "signature": "11-pe-angulo-norma:caso-igualdade",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -958,7 +958,7 @@
     {
       "id": "VN11PE-AN-036",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 3,
       "cognitive": "Raciocínio",
@@ -977,7 +977,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:validar-produto",
+      "signature": "11-pe-angulo-norma:validar-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -985,7 +985,7 @@
     {
       "id": "VN11PE-AN-037",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1004,7 +1004,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:produto-ângulo-obtuso",
+      "signature": "11-pe-angulo-norma:produto-angulo-obtuso",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1012,7 +1012,7 @@
     {
       "id": "VN11PE-AN-038",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1031,7 +1031,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-notavel",
+      "signature": "11-pe-angulo-norma:angulo-notavel",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1039,7 +1039,7 @@
     {
       "id": "VN11PE-AN-039",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1058,7 +1058,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-espaco",
+      "signature": "11-pe-angulo-norma:angulo-espaco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1066,7 +1066,7 @@
     {
       "id": "VN11PE-AN-040",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1085,7 +1085,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-espaco",
+      "signature": "11-pe-angulo-norma:angulo-espaco",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1093,7 +1093,7 @@
     {
       "id": "VN11PE-AN-041",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1112,7 +1112,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:ângulo-arccos",
+      "signature": "11-pe-angulo-norma:angulo-arccos",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1120,7 +1120,7 @@
     {
       "id": "VN11PE-AN-042",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1139,7 +1139,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:pitagoras-vetorial",
+      "signature": "11-pe-angulo-norma:pitagoras-vetorial",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1147,7 +1147,7 @@
     {
       "id": "VN11PE-AN-043",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1166,7 +1166,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:pitagoras-vetorial",
+      "signature": "11-pe-angulo-norma:pitagoras-vetorial",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1174,7 +1174,7 @@
     {
       "id": "VN11PE-AN-044",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1193,7 +1193,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:norma-diferenca",
+      "signature": "11-pe-angulo-norma:norma-diferenca",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1201,7 +1201,7 @@
     {
       "id": "VN11PE-AN-045",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Interpretação",
@@ -1220,7 +1220,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:unitarios-produto",
+      "signature": "11-pe-angulo-norma:unitarios-produto",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1228,7 +1228,7 @@
     {
       "id": "VN11PE-AN-046",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1247,7 +1247,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:trabalho-ângulo",
+      "signature": "11-pe-angulo-norma:trabalho-angulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1255,7 +1255,7 @@
     {
       "id": "VN11PE-AN-047",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1274,7 +1274,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:trabalho-perpendicular",
+      "signature": "11-pe-angulo-norma:trabalho-perpendicular",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1282,7 +1282,7 @@
     {
       "id": "VN11PE-AN-048",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1301,7 +1301,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:projecao-escalar",
+      "signature": "11-pe-angulo-norma:projecao-escalar",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1309,7 +1309,7 @@
     {
       "id": "VN11PE-AN-049",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Raciocínio",
@@ -1328,7 +1328,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:unitarios-ângulo",
+      "signature": "11-pe-angulo-norma:unitarios-angulo",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
@@ -1336,7 +1336,7 @@
     {
       "id": "VN11PE-AN-050",
       "themeId": "11-pe",
-      "subtopicId": "11-pe-ângulo-norma",
+      "subtopicId": "11-pe-angulo-norma",
       "year": "11.º",
       "difficulty": 4,
       "cognitive": "Modelação",
@@ -1355,7 +1355,7 @@
         "training",
         "exam"
       ],
-      "signature": "11-pe-ângulo-norma:modelacao-direcoes",
+      "signature": "11-pe-angulo-norma:modelacao-direcoes",
       "reviewStatus": "prototype",
       "origin": "original_vnext_2026",
       "optionOrderVersion": 1
