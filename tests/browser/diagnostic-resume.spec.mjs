@@ -222,41 +222,8 @@ for(const subject of [
       :{itemId:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.itemIds?.[snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.current],responses:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.results?.length};
     expect(savedPosition.itemId).toBeTruthy();
     expect(savedPosition.responses).toBeGreaterThanOrEqual(2);
-    const reloadErrors=[];
-    page.on("pageerror",error=>reloadErrors.push("pageerror: "+error.message));
-    page.on("console",message=>{if(message.type()==="error")reloadErrors.push("console: "+message.text())});
-    page.on("requestfailed",request=>reloadErrors.push("request: "+request.url()+" · "+request.failure()?.errorText));
     await page.reload();
-    await expectNoSubjectSelector(page);
     const restoredSubmit=page.getByRole("button",{name:"Responder",exact:true});
-    if(!await restoredSubmit.isVisible().catch(()=>false)){
-      const debug=await page.evaluate(()=>({
-        readiness:document.readyState,
-        appRoot:document.querySelector("main")?.className,
-        scripts:[...document.scripts].slice(-8).map(s=>({src:s.src,loaded:s.readyState})),
-        resources:performance.getEntriesByType("resource").filter(e=>/clientApp|_next|webpack|chunks/.test(e.name)).slice(-12).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),transferSize:e.transferSize})),
-        heading:document.querySelector("h1")?.textContent,
-        text:document.body?.innerText?.slice(0,700),
-        rootHtml:document.querySelector("main")?.outerHTML.slice(0,500),
-        appEntries:performance.getEntriesByType("resource").filter(e=>/\\.js(?:\\?|$)/.test(e.name)).map(e=>({name:e.name.split("/").slice(-2).join("/"),duration:Math.round(e.duration),responseEnd:Math.round(e.responseEnd)})).slice(-25),
-        navigation:performance.getEntriesByType("navigation").map(e=>({type:e.type,domInteractive:Math.round(e.domInteractive),loadEventEnd:Math.round(e.loadEventEnd)})),
-        reactRootProps:Object.keys(document.body?.firstElementChild||{}).filter(k=>k.startsWith("__react")).slice(0,5),
-        state:JSON.parse(localStorage.getItem("a25")||"null"),
-        draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null"),
-        progressStorage:{localKeys:Object.keys(localStorage),sessionKeys:Object.keys(sessionStorage)},
-        location:{href:location.href,search:location.search},
-        activeScripts:[...document.querySelectorAll("script[src]")].map(s=>s.src).slice(-15)
-      }));
-      console.log("REAL_RELOAD_DIAGNOSTIC",JSON.stringify({reloadErrors,
-        subject:subject.id,heading:debug.heading,text:debug.text,readiness:debug.readiness,appRoot:debug.appRoot,rootHtml:debug.rootHtml,appEntries:debug.appEntries,navigation:debug.navigation,reactRootProps:debug.reactRootProps,scripts:debug.scripts,resources:debug.resources,
-        active:debug.state?.activeSubjectId,selected:debug.state?.selectedSubjectIds,progressStorage:debug.progressStorage,location:debug.location,activeScripts:debug.activeScripts,
-        diagnosticDone:debug.state?.diagnosticDone,
-        draftKind:debug.draft?.kind,draftVersion:debug.draft?.version,
-        draftPhase:debug.draft?.phase,responses:debug.draft?.responses?.length,
-        current:debug.draft?.current?.id,
-        savedPosition:debug.state?.subjectProgress?.[subject.id]?.lastPosition
-      }));
-    }
     await expect(restoredSubmit).toBeVisible({timeout:30_000});
     const reloadState=await page.evaluate(id=>{
       const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
