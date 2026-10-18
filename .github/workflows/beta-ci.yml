@@ -34,7 +34,16 @@ jobs:
           /tmp/approva-playwright/node_modules/.bin/playwright install --with-deps chromium
 
       - name: Mobile browser regression · 390x844
-        run: /tmp/approva-playwright/node_modules/.bin/playwright test --config=playwright.config.mjs
+        run: |
+          set -o pipefail
+          echo "::group::Playwright discovered tests"
+          /tmp/approva-playwright/node_modules/.bin/playwright test --config=playwright.config.mjs --list
+          echo "::endgroup::"
+          echo "PLAYWRIGHT_START $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          timeout --signal=TERM --kill-after=20s 12m /tmp/approva-playwright/node_modules/.bin/playwright test --config=playwright.config.mjs
+          result=$?
+          echo "PLAYWRIGHT_END $(date -u +%Y-%m-%dT%H:%M:%SZ) exit=$result"
+          exit "$result"
 
       - name: Unit tests
         run: npm run test:unit
