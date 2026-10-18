@@ -67,6 +67,16 @@ describe("Rever Matéria · apresentação transversal",()=>{
     expect(text).toMatch(/Erros a evitar/u);
   });
 
+  it("formata expoentes nas relações essenciais sem dependências e preserva leitura acessível",()=>{
+    const text=source("app/components/DeepReviewStudy.js");
+    expect(text).toMatch(/function FormulaNotation\(\{value\}\)/u);
+    expect(text).toMatch(/<sup key=\{index\}>/u);
+    expect(text).toMatch(/<FormulaNotation value=\{formula\}\/>/u);
+    expect(text).toMatch(/aria-label=\{formula\}/u);
+    expect(text).not.toMatch(/import .*katex|import .*mathjax/iu);
+    expect(text).toMatch(/kind==="portuguese"/u);
+  });
+
   it("mantém hierarquia responsiva e largura de leitura controlada",()=>{
     const css=source("app/components/MathReviewMatter.module.css");
     expect(css).toMatch(/max-width:980px/u);
