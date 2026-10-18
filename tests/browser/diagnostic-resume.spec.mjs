@@ -2,8 +2,6 @@ import {test,expect} from "@playwright/test";
 import {DIAGNOSTIC_BLUEPRINT} from "../../app/data/content.js";
 import {diagnosticAnchor,emptyScores} from "../../app/lib/engine.js";
 import {createDiagnosticDraft,transactDiagnosticAnswer} from "../../app/lib/diagnosticRecovery.js";
-import {PORTUGUESE_ITEMS} from "../../app/data/portugueseContent.js";
-import {PHYSICS_CHEMISTRY_A_ITEMS} from "../../app/data/physicsChemistryFoundation.js";
 
 const SUBJECTS=[
   {id:"math-a",marker:"AVALIAÇÃO INICIAL · MATEMÁTICA A · PROVA 635"},
@@ -38,8 +36,9 @@ function configuredState(subjectId){
 function pausedSubjectState(subjectId,current=2){
   const state=configuredState(subjectId);
   const now=Date.now();
-  const sourceItems=subjectId==="portuguese"?PORTUGUESE_ITEMS:PHYSICS_CHEMISTRY_A_ITEMS;
-  const itemIds=sourceItems.slice(0,Math.max(4,current+1)).map(item=>item.id);
+  const itemIds=subjectId==="portuguese"
+    ?["PT639-FND-001","PT639-FND-002","PT639-FND-004","PT639-FND-018"]
+    :["FQA-ELEM-01","FQA-MAT-01","FQA-ENE-01","FQA-ELEM-02"];
   state.subjectProgress[subjectId]={
     ...state.subjectProgress[subjectId],
     lastPosition:{
