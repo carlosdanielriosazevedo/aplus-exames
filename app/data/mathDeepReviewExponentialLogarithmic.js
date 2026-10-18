@@ -21,7 +21,7 @@ export const EXPONENTIAL_LOGARITHMIC_REVIEW={
       kicker:"1 · FUNÇÃO EXPONENCIAL",
       title:"Crescer ou decrescer multiplicando sempre pelo mesmo fator",
       paragraphs:[
-        "Uma função exponencial tem a variável no expoente. Na forma base f(x)=a^x, com a>0 e a≠1, o domínio é ℝ e os valores da função são sempre positivos. O gráfico passa por (0,1), não tem zeros e aproxima-se do eixo Ox sem o intersectar.",
+        "Uma função exponencial tem a variável no expoente. Na forma base f(x)=a^x, com a>0 e a≠1, o domínio é ℝ e os valores da função são sempre positivos. O gráfico passa por (0,1), não tem zeros e aproxima-se do eixo Ox sem o intersetar.",
         "Se a>1, a função é estritamente crescente: aumentar x faz aumentar a^x. Se 0<a<1, a função é estritamente decrescente. Em ambos os casos, a função é contínua e a reta y=0 funciona como assíntota horizontal do gráfico de a^x.",
         "Expressões como g(x)=b·a^(x−c)+d transformam o gráfico de a^x. O parâmetro c produz uma translação horizontal, d uma translação vertical e b altera a escala vertical; se b<0, há também reflexão relativamente ao eixo Ox. A assíntota horizontal passa de y=0 para y=d."
       ],
