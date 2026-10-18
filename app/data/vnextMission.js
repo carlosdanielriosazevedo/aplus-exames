@@ -6566,10 +6566,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "função derivada",
     "q": "Se f'(x)=2x, em x>0, então",
     "o": [
-      "f e decrescente",
-      "f e constante",
-      "f e negativa",
-      "f e crescente"
+      "f é decrescente",
+      "f é constante",
+      "f é negativa",
+      "f é crescente"
     ],
     "a": 3,
     "sol": "Para x>0, 2x>0.",
@@ -6682,10 +6682,10 @@ export const VNEXT_MISSION_QUESTIONS=[
     "focus": "função derivada",
     "q": "Se f'(x)=2x, em x<0, então",
     "o": [
-      "f e decrescente",
-      "f e crescente",
-      "f e constante",
-      "f e positiva"
+      "f é decrescente",
+      "f é crescente",
+      "f é constante",
+      "f é positiva"
     ],
     "a": 0,
     "sol": "Para x<0, 2x<0.",
@@ -6829,7 +6829,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "o": [
       "f tem mínimo local em x=1",
       "f tem máximo local em x=1",
-      "f e crescente em todo o domínio",
+      "f é crescente em todo o domínio",
       "f(1)=0"
     ],
     "a": 1,
@@ -14422,7 +14422,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z=2(cosπ/6+i sinπ/6), então z² tem módulo...",
     "o": [
       "2.",
@@ -14451,7 +14451,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z1=r1(cosα+i sinα) e z2=r2(cosβ+i sinβ), então um argumento de z1z2 é...",
     "o": [
       "α−β.",
@@ -14480,7 +14480,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "As soluções de z²=1 são...",
     "o": [
       "±1.",
@@ -14509,7 +14509,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Aplicação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z=2(cos(π/6)+i sin(π/6)), um argumento de z² é...",
     "o": [
       "π/6.",
@@ -14538,7 +14538,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Multiplicar por um complexo de módulo 2 e argumento π/3 corresponde geometricamente a...",
     "o": [
       "uma dilatação de fator 2 e rotação de π/3.",
@@ -14567,7 +14567,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 1,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "No quociente z1/z2, com z2≠0, o módulo é...",
     "o": [
       "r1r2.",
@@ -14596,7 +14596,7 @@ export const VNEXT_MISSION_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "As soluções de z²=i têm módulo...",
     "o": [
       "√2.",

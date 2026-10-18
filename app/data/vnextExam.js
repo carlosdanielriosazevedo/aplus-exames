@@ -2796,10 +2796,10 @@ export const VNEXT_EXAM_QUESTIONS=[
     "focus": "função derivada",
     "q": "Se f'(x)=(x-1)(x+2), em x<-2, então",
     "o": [
-      "f e decrescente",
-      "f e constante",
+      "f é decrescente",
+      "f é constante",
       "não se pode concluir",
-      "f e crescente"
+      "f é crescente"
     ],
     "a": 3,
     "sol": "Ambos os fatores sao negativos, produto positivo.",
@@ -6186,7 +6186,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "12.º",
     "difficulty": 3,
     "cognitive": "Raciocínio",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Uma solução de z²=i é...",
     "o": [
       "1+i.",
@@ -6215,7 +6215,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "12.º",
     "difficulty": 4,
     "cognitive": "Interpretação",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Dividir por um complexo de módulo 2 e argumento π/4 corresponde a...",
     "o": [
       "dilatar por 2 e rodar π/4.",
@@ -6244,7 +6244,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "year": "12.º",
     "difficulty": 2,
     "cognitive": "Compreensão",
-    "focus": "Multiplicação, divisão, potenciação, radiciação, equações e condições geométricas",
+    "focus": "Multiplicação, divisão, potênciação, radiciação, equações e condições geométricas",
     "q": "Se z^n=w, com w de módulo R>0, então cada raiz z tem módulo...",
     "o": [
       "R^n.",
@@ -6738,7 +6738,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Crescimento/decrescimento exponencial e modelação",
-    "q": "Uma quantidade cresce50% em 2 períodos, com fator constante por período. O fator b satisfaz...",
+    "q": "Uma quantidade cresce50% em2 períodos, com fator constante por período. O fator b satisfaz...",
     "o": [
       "b²=1,5.",
       "2b=1,5.",
@@ -7007,7 +7007,7 @@ export const VNEXT_EXAM_QUESTIONS=[
       "uma raiz."
     ],
     "a": 0,
-    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em 0.",
+    "sol": "A função cresce para x<0 e decresce para x>0, atingindo1 em0.",
     "hyp": "Pode confundir derivada nula com mínimo.",
     "contexts": [
       "exam"
@@ -9435,7 +9435,7 @@ export const VNEXT_EXAM_QUESTIONS=[
     "difficulty": 4,
     "cognitive": "Raciocínio",
     "focus": "Probabilidade total e problemas em cadeia",
-    "q": "Uma condição rara ocorre em 2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
+    "q": "Uma condição rara ocorre em2% dos casos. Um alarme dispara em95% dos casos com condição e em10% sem condição. P(alarme)=...",
     "o": [
       "0,117.",
       "0,105.",
