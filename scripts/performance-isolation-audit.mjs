@@ -8,7 +8,9 @@ const portugueseMini=fs.readFileSync("app/components/PortuguesePassageMiniExam.j
 assert.match(bootstrap,/dynamic\(\(\)=>import\("\.\/clientApp"\)/,"Home bootstrap must defer the full study client behind dynamic import()");
 assert.doesNotMatch(bootstrap,/from\s+["']\.\/data\/content["']/,"Home bootstrap must not pull Mathematics content into the first-visit bundle");
 assert.doesNotMatch(bootstrap,/from\s+["']\.\/lib\/engine["']/,"Home bootstrap must not pull the Mathematics engine into the first-visit bundle");
-assert.match(bootstrap,/preview","subjects"/,"New students must hand off directly to subject selection");
+assert.match(bootstrap,/sessionStorage\.setItem\(ENTRY_KEY,"1"\)/,"New student entry must persist the handoff without a preview URL");
+assert.doesNotMatch(bootstrap,/searchParams\.set\("preview","subjects"\)/,"First visit must not persist a preview selector that bypasses recovery");
+assert.match(page,/fromLanding\?"subjectOnboard":"welcome"/,"Study client must honor the landing handoff during hydration");
 
 assert.doesNotMatch(page,/^import\s+\{[\s\S]*?\}\s+from\s+["\']\.\/lib\/engine["\'];?/m,"Mathematics engine must not be statically imported by app/clientApp.js");
 assert.match(page,/import\("\.\/lib\/engine"\)/,"Mathematics engine must remain behind dynamic import()");

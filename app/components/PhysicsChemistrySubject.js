@@ -52,7 +52,7 @@ function initialTaught(settings,year){
   return [...new Set(expanded)];
 }
 
-export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
+export default function PhysicsChemistrySubject({s,setS,go,view="home",autoResumeDiagnostic=false}){
   const currentYear=curriculumYear(s.profile?.schoolYear);
   const settings=s.subjectSettings?.[SUBJECT_ID]||{};
   const taughtUnitIds=initialTaught(settings,currentYear);
@@ -175,6 +175,10 @@ export default function PhysicsChemistrySubject({s,setS,go,view="home"}){
     setSession({sessionId:saved.sessionId,kind:saved.kind,label:saved.label,domain:saved.domain,items,current:Math.min(saved.current,items.length-1)});
     setResults(saved.results||[]);setAnswer(saved.currentAnswer??null);setFeedback(saved.currentResult||null);
   }
+
+  useEffect(()=>{
+    if(autoResumeDiagnostic&&progress.lastPosition?.kind==="diagnostic")resume();
+  },[]);
 
   function resetPhysicsChemistry(){
     if(!window.confirm("Repor apenas o progresso de Física e Química A?"))return;

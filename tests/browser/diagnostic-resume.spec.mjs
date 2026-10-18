@@ -36,7 +36,9 @@ function configuredState(subjectId){
 function pausedSubjectState(subjectId,current=2){
   const state=configuredState(subjectId);
   const now=Date.now();
-  const itemIds=Array.from({length:Math.max(4,current+1)},(_,index)=>`resume-${subjectId}-item-${index+1}`);
+  const itemIds=subjectId==="portuguese"
+    ?["PT639-FND-001","PT639-FND-002","PT639-FND-004","PT639-FND-018"]
+    :["FQA-ELEM-01","FQA-MAT-01","FQA-ENE-01","FQA-ELEM-02"];
   state.subjectProgress[subjectId]={
     ...state.subjectProgress[subjectId],
     lastPosition:{
@@ -139,17 +141,26 @@ test("Matemática A · depois de duas respostas o draft é retomado após reload
 });
 
 for(const subjectId of ["portuguese","physics-chemistry-a"]){
-  test(`${subjectId} · depois de duas respostas a sessão pausada sobrevive ao reload`,async({page})=>{
+  test(`${subjectId} · duas respostas guardadas e regresso direto à pergunta após reload`,async({page})=>{
     await seed(page,pausedSubjectState(subjectId,2));
     await page.goto("/");
-    await expect(page.getByRole("button",{name:"Aprender"})).toBeVisible({timeout:30_000});
-    let current=await page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition.current,subjectId);
-    expect(current).toBe(2);
+    const submit=page.getByRole("button",{name:"Responder",exact:true});
+    await expect(submit).toBeVisible({timeout:30_000});
+    const snapshot=await page.evaluate(id=>{
+      const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      return {current:saved?.current,results:saved?.results?.length,itemId:saved?.itemIds?.[saved?.current]};
+    },subjectId);
+    expect(snapshot.current).toBe(2);
+    expect(snapshot.results).toBe(2);
+    expect(snapshot.itemId).toBeTruthy();
 
     await page.reload();
-    await expect(page.getByRole("button",{name:"Aprender"})).toBeVisible({timeout:30_000});
-    current=await page.evaluate(id=>JSON.parse(localStorage.getItem("a25")).subjectProgress[id].lastPosition.current,subjectId);
-    expect(current).toBe(2);
+    await expect(submit).toBeVisible({timeout:30_000});
+    const restored=await page.evaluate(id=>{
+      const saved=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+      return {current:saved?.current,results:saved?.results?.length,itemId:saved?.itemIds?.[saved?.current]};
+    },subjectId);
+    expect(restored).toEqual(snapshot);
     await expectNoSubjectSelector(page);
   });
 }
@@ -169,8 +180,93 @@ for(const subject of SUBJECTS){
     const reopened=await context.newPage();
     await reopened.goto("/");
     if(subject.id==="math-a")await expect(reopened.getByText(subject.marker,{exact:true})).toBeVisible({timeout:30_000});
-    else await expect(reopened.getByRole("button",{name:"Aprender"})).toBeVisible({timeout:30_000});
+    else{
+      await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+      const recovered=await reopened.evaluate(id=>{
+        const position=JSON.parse(localStorage.getItem("a25")||"null")?.subjectProgress?.[id]?.lastPosition;
+        return {current:position?.current,results:position?.results?.length};
+      },subject.id);
+      expect(recovered).toEqual({current:2,results:2});
+    }
     await expectNoSubjectSelector(reopened);
+    await context.close();
+  });
+}
+
+
+for(const subject of [
+  {id:"math-a",name:"Matemática A",button:/^Matemática A\b/u},
+  {id:"portuguese",name:"Português",button:/^Português 12\.º ano · Prova 639\b/u},
+  {id:"physics-chemistry-a",name:"Física e Química A",button:/^Física e Química A\b/u}
+]){
+  test(`${subject.id} · retoma real depois de duas respostas sem semear armazenamento`,async({browser})=>{
+    const context=await browser.newContext({viewport:{width:390,height:844}});
+    const page=await context.newPage();
+    await page.goto("/");
+    await page.getByRole("button",{name:/Descobrir o meu nível/u}).click();
+    await page.getByRole("button",{name:subject.button}).click();
+    await page.getByRole("button",{name:"Continuar",exact:true}).click();
+    await page.getByRole("button",{name:"Já terminei o secundário",exact:true}).click();
+    await page.getByRole("button",{name:new RegExp(`Continuar para a matéria de ${subject.name}`,"u")}).click();
+    await page.getByRole("button",{name:"Continuar",exact:true}).click();
+    const skip=page.getByRole("button",{name:"Saltar explicação",exact:true});
+    if(await skip.isVisible().catch(()=>false))await skip.click();
+    await page.getByRole("button",{name:"Começar diagnóstico",exact:true}).click();
+    for(let index=0;index<2;index++){
+      await expect(page.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+      const options=page.locator(".opts button:visible, .portugueseOptions button:visible");
+      if(await options.count())await options.first().click();
+      else{
+        const textarea=page.locator("textarea:visible").first();
+        if(await textarea.count())await textarea.fill("Justificação de teste.");
+        else{
+          const inputs=page.locator('input:visible:not([type="range"]):not([type="checkbox"]):not([type="radio"])');
+          if(await inputs.count())await inputs.first().fill(index%2?"1":"0");
+          else throw new Error("Resposta real sem controlo visível");
+        }
+      }
+      await page.getByRole("button",{name:"Responder",exact:true}).click();
+      const next=page.getByRole("button",{name:/Próxima pergunta|Seguinte/u}).first();
+      await expect(next).toBeVisible({timeout:30_000});
+      await next.click();
+    }
+    const snapshot=await page.evaluate(()=>({
+      state:JSON.parse(localStorage.getItem("a25")||"null"),
+      draft:JSON.parse(localStorage.getItem("a25-active-session-v1")||"null")
+    }));
+    expect(snapshot.state?.selectedSubjectIds).toContain(subject.id);
+    const savedPosition=snapshot.draft
+      ?{itemId:snapshot.draft.current?.id,responses:snapshot.draft.responses?.length}
+      :{itemId:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.itemIds?.[snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.current],responses:snapshot.state?.subjectProgress?.[subject.id]?.lastPosition?.results?.length};
+    expect(savedPosition.itemId).toBeTruthy();
+    expect(savedPosition.responses).toBeGreaterThanOrEqual(2);
+    await page.reload();
+    const restoredSubmit=page.getByRole("button",{name:"Responder",exact:true});
+    await expect(restoredSubmit).toBeVisible({timeout:30_000});
+    await expectNoSubjectSelector(page);
+    const reloadState=await page.evaluate(id=>{
+      const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
+      const state=JSON.parse(localStorage.getItem("a25")||"null");
+      const saved=state?.subjectProgress?.[id]?.lastPosition;
+      return draft?.kind==="diagnostic"&&id==="math-a"
+        ?{itemId:draft.current?.id,responses:draft.responses?.length}
+        :{itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length};
+    },subject.id);
+    expect(reloadState).toEqual(savedPosition);
+    await page.close();
+    const reopened=await context.newPage();
+    await reopened.goto("/");
+    await expect(reopened.getByRole("button",{name:"Responder",exact:true})).toBeVisible({timeout:30_000});
+    await expectNoSubjectSelector(reopened);
+    const reopenedPosition=await reopened.evaluate(id=>{
+      const draft=JSON.parse(localStorage.getItem("a25-active-session-v1")||"null");
+      const state=JSON.parse(localStorage.getItem("a25")||"null");
+      const saved=state?.subjectProgress?.[id]?.lastPosition;
+      return draft?.kind==="diagnostic"&&id==="math-a"
+        ?{itemId:draft.current?.id,responses:draft.responses?.length}
+        :{itemId:saved?.itemIds?.[saved.current],responses:saved?.results?.length};
+    },subject.id);
+    expect(reopenedPosition,"fechar e reabrir o separador deve preservar a pergunta e as duas respostas").toEqual(savedPosition);
     await context.close();
   });
 }

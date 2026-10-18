@@ -5,11 +5,12 @@ import {useEffect,useState} from "react";
 
 const ClientApp=dynamic(()=>import("./clientApp"),{ssr:false,loading:()=> <Loading/>});
 const STORAGE_KEYS=["a25","a25-friends-beta"];
+const ENTRY_KEY="a25-onboarding-entry";
 
 function storedProgress(){
   for(const name of ["localStorage","sessionStorage"])try{
     const store=window[name];
-    if(STORAGE_KEYS.some(key=>store?.getItem(key)))return true;
+    if(STORAGE_KEYS.some(key=>store?.getItem(key))||(name==="sessionStorage"&&store?.getItem(ENTRY_KEY)==="1"))return true;
   }catch{}
   return false;
 }
@@ -34,8 +35,8 @@ export default function Page(){
   const [ready,setReady]=useState(false),[boot,setBoot]=useState(false);
   useEffect(()=>{const q=new URLSearchParams(window.location.search);setBoot(storedProgress()||privateEntry()||q.has("preview"));setReady(true)},[]);
   function start(){
-    const url=new URL(window.location.href);url.searchParams.set("preview","subjects");
-    window.history.replaceState(window.history.state,"",url.pathname+url.search+url.hash);setBoot(true);
+    try{window.sessionStorage.setItem(ENTRY_KEY,"1")}catch{}
+    setBoot(true);
   }
   if(!ready)return <Landing onStart={()=>{}}/>;
   return boot?<ClientApp/>:<Landing onStart={start}/>;
